@@ -8,6 +8,43 @@
   },
   "items": [
     {
+      "id": "DIC-Q-33-selected-buncho-station-history",
+      "issue": 33,
+      "pr": 456,
+      "title": "Preserve selected Buncho washing station origin instead of founder's former station",
+      "state": "READY",
+      "merged_source_sha": "4f36301cc25ea61e593590b5a59ef13df4227da4",
+      "scope_paths": [
+        "src/server/coffee-identity-evidence.mjs"
+      ],
+      "tests": [
+        "Source-based adversarial Node regressions in tests/coffee-issue33-laterza-buncho-station-history.test.mjs: five current station/historical founder/other coffee/SEO/unrelated station tests PASS; initial PR head 84efd588 had genuine generator-corrupted syntax and visual Locked-copy failures, repaired, not recast as PASS.",
+        "Corrected exact final PR head d679c35a8abbc1205ce068e5604a91f5a59e0959: source bundle41727259833, SQL41727259912, security41727259900, approval41727259826, cloud/mobile41727259922 (1763 cloud PASS/0 FAIL), visual41727259889, Node/lint/build41727260409 (2292 PASS/0 FAIL/6 intentional SKIP) all SUCCESS. Original60341727259928 SKIPPED, NOT PASS.",
+        "Nonforce PR456 squash merged 4f36301cc25ea61e593590b5a59ef13df4227da4; tested PR head tree and merged tree identical 86f3b7b13c55db9a3ba9aa71da240d618c99a8c5.",
+        "Exact merged source: Node/lint/build41728038875 (2292 PASS/0 FAIL/6 intentional SKIP), cloud/mobile41728038937 (1763 cloud PASS/0 FAIL), approval41728039030 and READY coverage41728038942 SUCCESS. Original frozen60341728038973 SKIPPED, not PASS.",
+        "Actual guarded 20-case official run41728039047 job126237853014 SUCCESS, 20/20 fetched/parsed, current selected #191 La Terza Buncho H1 exact and origin Sidama, Ethiopia, process Honey, tasting notes retained, conflicts empty; source HTML SHA256 7893fd63e19a21b8f34825a2a097cc9ce95485e61d10dc6ab93854fd3107e4f0, private artifact13274574018 provider digest sha256:79f4a08f190f74a907b21e5d718ffb5deb52771a12c750855f221f99ec85203d."
+      ],
+      "ci_runs": [
+        41727259833,
+        41727259912,
+        41727259900,
+        41727259826,
+        41727259922,
+        41727259889,
+        41727260409,
+        41727259928,
+        41728038875,
+        41728038937,
+        41728039030,
+        41728038942,
+        41728039047,
+        41728038973
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "VERIFIED narrow READY, NOT DEPLOYED. Current product directly names Buncho washing station in Sidama, Ethiopia; a separate founder history says Girja village was his first station in 1997. A historical October29 parser register had selected Girja; do not equate its captured HTML with the newer independently fetched source bytes. Selected current H1 and all #191 canonical fields matched the current official source; no conflict. Original frozen603, 153 context-qualified and 29 missing-literal-qualified residuals remain OPEN; no universal 603/manual certification or genuine hosted-member GoTrue test. Broader #33 residual remains IN_PROGRESS. Before any release, independently isolate READY source per Issue417, holding on any unready overlapping merged code. No publication, production provider/SQL/Edge/Auth/member writes or purchases."
+    },
+    {
       "id": "DIC-Q-335-historical-grind-range-evidence",
       "issue": 335,
       "title": "Reject out-of-range historic grinder readings as invalid cross-calibration evidence",
