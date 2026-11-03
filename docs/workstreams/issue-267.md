@@ -1,3 +1,11 @@
+## November 3, 2026 — #267 strict S2-004 original/pinned/live workflow #4 [skip netlify]
+
+**Source verified:** `.github/workflows/coffee-audit-python.yml` **52/52 source numbered lines** original commit `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9`, pinned commit `9707553a64f88127826e8f5b2b36cd0651296e83`, and observed live, all exactly identical Git blob `e1b94d6faa1583ed9eeafe9599ce3a579e7fbe77`. Each line directly read and source-exact nine-dimension behavior/risk/quality/deadness/duplicates/counterparts/testability/fix/Locked fit in [S2-004](../audits/issue267-v2-strict-batches/S2-004.json). This is AI semantic review, not human. Strict historical total **312/579,961**, pinned current total **314/57,913**, with old V2 R2/C2 counters unchanged (no duplicate credit). No net new live delta in file #4.
+
+**Finding/limit:** Python coffee-audit workflow sends any `scripts/audit/**` PR to apt-get PIL/Tesseract even for JS-only helpers; may be inefficient but need measured evidence and dependency checks before narrowing. Frozen report and local OCR test scope not equivalent to complete #267 appraisal or real authenticated app acceptance. No proven active defect or safe unused-code removal, no app/test changes, browser/provider/production writes, READY or deployment. Next frozen/pinned file #5 `.github/workflows/coffee-completeness.yml` line 1. #267 OPEN.
+
+---
+
 ## November 3, 2026 — #267 strict S2-003 review of workflow #3 [skip netlify]
 
 **Source evidence:** frozen original `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9` blob `a8cabb7cd9f81149aa8d363c20c9ebeda6695260` **112/112** lines; pinned `9707553a64f88127826e8f5b2b36cd0651296e83` blob `7dd903e5006f8adc6bdf0bd63b75d7fd3c72b25e` **113/113**; live at `60b33d15acb7ed04ea7a3bcc773204c28408f627` blob `f6dee8efcfdeefdaa28beba8c97d77fe7bd093ef` **132/132**. Per-line source text, nine owner criteria, exact counterpart, classification and independently written AI semantic interpretation recorded [S2-003](../audits/issue267-v2-strict-batches/S2-003.json). Historic old V2 grouped summaries are not nine-criteria line proof; do not double count. Strict totals now **260/579,961** frozen, **262/57,913** pinned; old V2 provisional 5,451/6,462 unchanged. This is not independent human review.
