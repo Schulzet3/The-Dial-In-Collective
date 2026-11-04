@@ -631,7 +631,7 @@ function selectedHeadingAdjacentFarmLocation(html,blocks,{name='',fields={},clea
  const headings=nodes.filter(node=>node.tag==='h1'&&node.contentEnd-node.headEnd<=500&&
   key(clean(page.slice(node.headEnd,node.contentEnd),220))===key(name));
  if(headings.length!==1)return null;
- const title=headings[0],i=nodes.findIndex(node=>node.parent===title.parent&&node.start>title.end),next=nodes[i];
+ const title=headings[0],i=nodes.findIndex(node=>node.parent===title.parent&&node.start>=title.end),next=nodes[i];
  if(!next||next.tag!=='div'||next.start-title.end>240||page.slice(title.end,next.start).trim()||
     !/(?:^|[\s_-])location(?:$|[\s_-])/i.test(coffeeHtmlAttributes(next.attributes).class||''))return null;
  const parts=nodes.filter(node=>node.parent===i&&node.tag==='span');

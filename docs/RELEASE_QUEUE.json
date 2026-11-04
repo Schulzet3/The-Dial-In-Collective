@@ -18,7 +18,8 @@
       ],
       "tests": [
         "Prior exact current official #580 fetch/parser run41844449595 and source capture artifact13330481532 confirmed H1+adjacent two-span location and parser origin Colombia; independent raw SHA256 6fd11ac46a65078567ddef814dbe3cf01c8f9a56cad787f48ed5ef977cf6e364.",
-        "Six synthetic positive/negative regression cases added; exact PR-head and merged-source CI not yet run."
+        "Six synthetic positive/negative regression cases added; exact PR-head and merged-source CI not yet run.",
+        "Initial PR #586 head 9c620d34a9d09ba466468d6dcee481229a8ffb57 Node41848633709: 1 NEW positive FAILED (expected Santa Maria, Huila, Colombia; actual Colombia), 1677 other tests PASS. Exact diagnostic head 78651e21ff84f3ee36902657e3dca10121c097d5 Node41849787326 reproduced same result. Diagnostic source structure identified `next.start===title.end`: the strict `>` omitted zero-whitespace immediate H1 sibling; changed to `>=` while retaining all identity/scope guards and removing diagnostics. Corrected head checks pending."
       ],
       "ci_runs": [],
       "blockers": [
