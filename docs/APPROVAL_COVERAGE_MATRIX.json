@@ -39,6 +39,7 @@
     "current_owner_github_free_private_no_upgrade_20261020",
     "current_owner_grinder_range_info_20261019",
     "current_owner_hands_free_release_from_chat_20261021",
+    "current_owner_meaningful_yield_20261104",
     "current_owner_no_netlify_credit_checks_20261022",
     "current_owner_oct22_refinements_20261022",
     "current_owner_one_visible_recipe_internal_families_20261020",
@@ -97,6 +98,35 @@
     "pending_release_field_note": "Schema compatibility name; this record is a consumed HISTORICAL release, not a pending authorization."
   },
   "contracts": [
+    {
+      "id": "issue455_meaningful_yield_step",
+      "decision_key": "current_owner_meaningful_yield_20261104",
+      "scope": "Owner-approved 5 g/proportional next-shot yield changes and cautious same-coffee sweetness comparisons ONLY; preserve five ratings, one control, style/feed separation, history, privacy and no publication",
+      "implementation": "TESTING_PR584_NOT_DEPLOYED",
+      "device_acceptance": "OPTIONAL_POST_PUBLICATION; no real signed-in/device empirical tasting claimed",
+      "assertions": [
+        {
+          "path": "site/lib/engine.js",
+          "contains": "function meaningfulYieldStep(shot)"
+        },
+        {
+          "path": "site/lib/engine.js",
+          "contains": "function comparableSweetnessYields(s,shot)"
+        },
+        {
+          "path": "site/lib/engine.js",
+          "contains": "function sweetnessOnlyYieldAdvice(s,shot)"
+        },
+        {
+          "path": "site/lib/ui.js",
+          "contains": "advice?.evidenceNote"
+        },
+        {
+          "path": "tests/issue455-yield-step.test.mjs",
+          "contains": "#455 default sweetness-only:"
+        }
+      ]
+    },
     {
       "id": "fast_flow_sixth_style_hybrid",
       "decision_key": "current_owner_fast_flow_hybrid_20261022",
