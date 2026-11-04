@@ -126,7 +126,9 @@ test('candidate verification is between source queue readback and the one-use re
  const src=readFileSync(new URL('../scripts/release/controlled-release-runner.mjs',import.meta.url),'utf8');
  assert.match(src,/candidateBranch=matchingCandidates/);
  assert.match(src,/validateReadyOnlyCandidate\(queuedSource,/);
- assert.match(src,/queueContentMatches:originalQueue===liveQueue&&liveQueue===candidateQueue/);
+ assert.match(src,/queueContentMatches:originalQueue===candidateQueue/);
+ assert.match(src,/liveQueue:json\(liveQueue,'current development release queue'\)/);
+ assert.match(src,/developmentDriftPaths:listDiff\(sourceAnchor,developmentHead\)/);
  assert.match(src,/recheckCandidateRef\(\)/);
  const verify=src.indexOf('queueGate=validateReadyOnlyCandidate');
  const granted=src.indexOf('assertApprovedReadyBatch(grant,queueGate)');
