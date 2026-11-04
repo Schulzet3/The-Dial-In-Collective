@@ -2,7 +2,7 @@
   "schema_version": 1,
   "issue": 33,
   "date_utc": "2026-11-04",
-  "state": "TESTING_FRESH_OFFICIAL_RAW_SOURCE_PARSER_REQUIRED",
+  "state": "VERIFIED_NARROW_586_NOTES_CONFLICT_FIXED_READY_580_DETAILS_REVIEW",
   "authority": "Owner authorized development-only independently selected original603 current primary evidence",
   "parent_sha": "8c4d863368f76ba0ca9e1b13e99720b2bfb31ca7",
   "old_frozen603": {
@@ -46,5 +46,80 @@
   "production_changes": false,
   "queue_status": "UNCHANGED_14_READY_90_DEPLOYED_3_IN_PROGRESS",
   "full603_semantic_certification": false,
-  "next": "Verify exact merged source CI, official HTTPS raw HTML+SHA+H1+parser/preview artifact; if defect proven, test-first narrow generic fix and reverify; otherwise document qualified source boundaries."
+  "next": "Verify exact merged source CI, official HTTPS raw HTML+SHA+H1+parser/preview artifact; if defect proven, test-first narrow generic fix and reverify; otherwise document qualified source boundaries.",
+  "merged_current_source_sha": "27cdebed308bd9ab9f114399d901266079e611a8",
+  "actual_current_https": {
+    "before": {
+      "run": 41843560203,
+      "job": 126621126560,
+      "cases": {
+        "580": {
+          "html_sha256": "258a40d91feef8617049b8bb39330c40b7d1154fa45482f8c19b2b766bb72b72",
+          "origin": "Colombia",
+          "conflicts": [],
+          "tasting_notes": "bright red fruit, herbal tea, and honeyed sweetness"
+        },
+        "586": {
+          "html_sha256": "acc4e4a0eca61ea3e0946f9f029df8378f4abb1a5ccca3f4fa120e1f8036765b",
+          "tasting_notes": "peach, clementine, honey, lemon, strawberry and brown sugar.",
+          "conflicts": [
+            "origin",
+            "process",
+            "variety"
+          ]
+        }
+      }
+    },
+    "after": {
+      "run": 41844449595,
+      "job": 126624180209,
+      "artifact_id": 13330481532,
+      "fetched": 2,
+      "parsed": 2,
+      "manual_certified_whole_coffees": 0,
+      "case580": {
+        "html_sha256": "6fd11ac46a65078567ddef814dbe3cf01c8f9a56cad787f48ed5ef977cf6e364",
+        "origin": "Colombia",
+        "process": "Washed",
+        "tasting_notes": "bright red fruit, herbal tea, and honeyed sweetness",
+        "conflicts": []
+      },
+      "case586": {
+        "html_sha256": "fcfd9c30ed107baa4f4002e388782009d164c78951a41d428045384d787fb7c2",
+        "selected_h1": [
+          "Dedication- Costa Rica",
+          "DEDICATION"
+        ],
+        "tasting_notes": null,
+        "conflicts": [
+          "origin",
+          "process",
+          "tasting_notes",
+          "variety"
+        ],
+        "harvest_not_release": true
+      }
+    },
+    "source_hashes": "SHA256 from exact official GitHub source jobs; raw ZIP artifact independent hash not rechecked"
+  },
+  "proof": {
+    "node_run": 41844449369,
+    "node_tests_pass": 1672,
+    "node_fail": 0,
+    "lint_build": "SUCCESS",
+    "cloud_ux": 41844449316,
+    "approval": 41844449385,
+    "queue": 41844449454,
+    "official": 41844449595,
+    "original603_workflow": "SKIPPED_NOT_PASS"
+  },
+  "queue_after": {
+    "READY": 15,
+    "DEPLOYED": 90,
+    "IN_PROGRESS": 3
+  },
+  "netlify_publication": false,
+  "production_operations": false,
+  "certified_scope": "ONLY_SELECTED_586_TASTING_NOTES_CONTRADICTION",
+  "pending_case580": "Direct current selected subtitle Santa Maria, Huila and farm Santa Maria not captured by origin Colombia; requires separate generic proof and adversarial regression; do not infer release from harvest or dispatch."
 }
