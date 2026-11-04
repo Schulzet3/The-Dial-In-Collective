@@ -1,3 +1,15 @@
+## November 4 UTC — Issue33 #445 reproduced missing selected lemony brightness; generic repair TESTING (not READY)
+
+**Authority and exact source:** owner development-only #33; frozen original603 CSV untouched, base `be5c54be857d03f65fdf6275fcd844f768448279` and PR546 first head `a806f0e601a4a0d1dde5bc4ccbee8cadc5985977`. Earlier public official selected Blue Jazz [Guatemala](https://www.bluejazzcoffee.com/products/guatemala-antigua) H1 prints `stone fruit with a lemony brightness` and two distinct elevation ranges; no fabricated whole blend altitude.
+
+**Independent reproduction:** Exact PR546 Node [41815633988](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41815633988) job 126525546483 ran 2,369+ Node regressions: **2 new positive tests FAILED** with actual current handler `tasting_notes: stone fruit` both when source explicitly says `with a lemony brightness` and `with a floral brightness`. Negative third test (conditional milk/related coffee isolation) passed. Frozen603 workflow SKIPPED; other green jobs cannot mask Node failure. This confirms a real current synthetic parser defect but is **not** current raw-official-byte proof.
+
+**SAME-COMMIT correction:** generic guarded direct-selected `notes of [literal] with a [lemony|limey|citrusy|floral|fruity|tart] brightness` qualifier preservation in `src/server/coffee-flavor-evidence.mjs`, with existing unchanged positive/negative regressions `tests/coffee-issue33-bluejazz-445-brightness.test.mjs`, updated scoped receipt `docs/audits/issue33-bluejazz-445-brightness-20261104.json` and this journal. This is NOT a roaster/URL fix. Retain exact literal descriptors; no conversion lemony→lemon or confabulation. Source HTML current selected marker `[dic-issue33-nineteenth1]` already in PR. Rerun changed-surface Node/cloud/approval and current official actual parser before READY; do not merge a failing head.
+
+**Boundaries and next:** 11 READY/90 DEPLOYED/3 IN_PROGRESS, Issue33 OPEN; pending original603 153/29 source-review caveats; #267 V2 and #96 independent; no release/Netlify publication, provider/member/SQL/Edge/Auth writes, secrets or forced history. Recheck concurrent branch before nonforce merge; source-bound current H1/HTML SHA and Add Coffee check after merge, then update queue only on verified current evidence.
+
+---
+
 ## November 4 UTC — Issue33 #445 current selected Blue Jazz sensory qualifier REPRODUCTION TESTING (no READY)
 
 **Recovery and authority:** owner-approved development-only Issue33; live prewrite source SHA `be5c54be857d03f65fdf6275fcd844f768448279`; AGENTS.md, AI entrypoint/preflight, scoped journal, Current Status, Master Spec, decisions, approval, queue, Issue33 comments, concurrent Issue267 V2/96 and PR545/544. Preserve the original immutable 603/201/1197 original oracle, scorer and CSV blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6`.

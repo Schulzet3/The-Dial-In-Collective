@@ -2,7 +2,7 @@
   "schema_version": 1,
   "issue": 33,
   "date_utc": "2026-11-04",
-  "status": "TESTING_REPRODUCTION_NOT_READY",
+  "status": "CURRENT_SYNTHETIC_DEFECT_REPRODUCED_FIX_PR_HEAD_CI_PENDING",
   "source_parent_sha": "be5c54be857d03f65fdf6275fcd844f768448279",
   "original603": 445,
   "url": "https://www.bluejazzcoffee.com/products/guatemala-antigua",
@@ -20,5 +20,18 @@
   "queue": "UNCHANGED 11 READY 90 DEPLOYED 3 IN_PROGRESS",
   "release": false,
   "provider_writes": 0,
-  "next": "Read failing/passing PR-head regression, inspect actual parser, make generic correction only if defect reproduced, rerun and nonforce integrate, read exact current official source before READY."
+  "next": "Rerun full affected Node and cloud/approval on corrected head, then safely merge and trigger bounded official live #445, compare source-bound H1/html SHA and extracted fields before READY.",
+  "reproduction": {
+    "head_sha": "a806f0e601a4a0d1dde5bc4ccbee8cadc5985977",
+    "node_run": 41815633988,
+    "node_job": 126525546483,
+    "exact_node_fail": 2,
+    "reason": "Current parser returns stone fruit only for original603 #445 and only stone fruit for parallel floral brightness positive. Independent safety regression passed. Positive assertions failed on actual current source handler (synthetic selected HTML, not official raw bytes)."
+  },
+  "repair": {
+    "path": "src/server/coffee-flavor-evidence.mjs",
+    "scope": "Generic direct selected current sensory relation; preserve literal with a lemony/floral brightness as coordinated notes, only when unconditional and source supported. No new inferred flavor, country, roast, elevation or product identity.",
+    "test": "tests/coffee-issue33-bluejazz-445-brightness.test.mjs",
+    "status": "PENDING_EXACT_HEAD_CI"
+  }
 }
