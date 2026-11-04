@@ -1,3 +1,17 @@
+## November 4 UTC — Issue #33 fifteenth3 focused current three-product source probe (TESTING, NOT READY / NO DEPLOYMENT)
+
+**Source authority:** Recovered development parent `5ffc6fa1abe74e7755463cec74ffff9c99c87300`; current Issue33 work/decision/approval/queue, AGENTS, AI context preflight, #267 V2/#96, independent open PR367 all inspected. Original frozen603 CSV blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6`, captures and oracle remain unchanged. Issue #33 remains open, 153 historical contextual/29 missing-literal qualification labels not waived. Production branch `31c66832a28247e657a2bf89592ebc1e2f48dfc5` untouched, no publication or member/SQL/Auth/Edge writes.
+
+**Exact current selected source candidates:** #13 Beanstock FUDAM (current H1 Colombia FUDAM LA Union, growers live near La Unión/Nariño, generally washed does NOT prove this single lot's processing, explicitly Medium roast); #28 Bonjo Brazil Jose Alberto Careta (web read inaccessible, do not guess facts from category); #40 Brickhouse Black (current selected "darkest ... roast yet" and direct Honduras/Lempira Flor del Cafe/1650 MASL/Washed/harvest text). These are web-text observations only, not new exact current parser results.
+
+**SAME-COMMIT CI change:** Existing `.github/workflows/roaster-source-probe.yml` adds only unique `[dic-issue33-fifteenth3]` selector for original603 exact IDs 13,28,40, preserving every other marker, HTTPS/SSRF, HTML SHA256 and selected H1, parsed field/conflict/Add Coffee preview, private one-day artifact. Pending JSON receipt `docs/audits/issue33-fifteenth3-current-official-20261104.json` accompanies it, no runtime extractor or queue changes.
+
+**Corrected continuity:** First draft PR479 failed approval [41757905134](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41757905134) because `docs/workstreams/issue-33-fifteenth3.md` was not recognized by the explicit SAME-COMMIT journal allowlist. This clean replacement includes the REQUIRED existing `docs/workstreams/issue-33.md` directly in the same atomic workflow commit. Earlier failed SHA remains evidence, never treated as PASS or merged.
+
+**Next:** Exact PR-head approval, Node/cloud/browser and isolated SQL evidence, fail/fix if real; nonforce integrate passing source, merge subject must contain `[dic-issue33-fifteenth3] [skip netlify]`. Read actual 3-case public HTML/H1/hash, true parser maps/conflicts and source-facts; log unavailable explicitly. Correct only a reproduced generic omission with regressions and second official source replay. No READY before final scope/tests/integration. [skip netlify]
+
+---
+
 ## November 4 UTC — #33 Lowcountry Peru HB #206 current literal region FIXED / independently VERIFIED / narrow READY (NO DEPLOYMENT)
 
 Verified source parent `36d16a8bf726df3541625a69b49d8f634cbed4af`, [PR475](https://github.com/Schulzet3/The-Dial-In-Collective/pull/475) nonforce merged exactly (tree `cf51f3ad8b1e54cba45192fd7b4daaa88f97ebd4` matches corrected PR head). Actual PR-head seven applicable workflows SUCCESS: Node41752261445 **2314 PASS/0 FAIL/6 SKIP**, cloud/mobile41752261405, SQL41752261395, approval41752261481, security41752261389, source41752261476; frozen60341752261421 SKIPPED not PASS. Actual merged-source Node41752527483 **2314 PASS/0 FAIL/6 SKIP**, cloud/browser41752527406, approval41752527329 and queue intake41752527444 SUCCESS. Previous historical original603 register Git blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6` preserved, oracle/captures untouched.
