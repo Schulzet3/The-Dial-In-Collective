@@ -243,6 +243,25 @@ function narrativeGeography(blocks,{currentLocalityOnly=false,name=''}={}){
  for(const block of blocks){
   if(/^h[1-6]$/.test(block.tag))continue;
   for(let sentence of sentences(block.text)){
+   // An exact selected H1's named growing region is not the producer.
+   // This negation concerns the producer role, NOT current geography.
+   const selectedAdministrativeRegion=sentence.match(new RegExp(
+    '^('+PLACE+')\\s+is\\s+the\\s+region\\s+in\\s+('+PLACE+')\\s+state,?\\s+not\\s+the\\s+producer[.!?]?$','iu'));
+   const selectedAdministrativeCountries=countryNames(name);
+   if(selectedAdministrativeRegion&&selectedAdministrativeCountries.length===1&&
+      selectedAdministrativeRegion[1].length>=5&&selectedAdministrativeRegion[1].length<=85&&
+      selectedAdministrativeRegion[2].length>=4&&selectedAdministrativeRegion[2].length<=65&&
+      key(name).includes(key(selectedAdministrativeRegion[1]))&&
+      !COUNTRY_ONLY.test(selectedAdministrativeRegion[1])&&
+      !COUNTRY_ONLY.test(selectedAdministrativeRegion[2])&&
+      !completeVarietyPhrase(selectedAdministrativeRegion[1],{explicit:true})&&
+      !completeVarietyPhrase(selectedAdministrativeRegion[2],{explicit:true})&&
+      !/\b(?:related|recommended|you may also like|other coffees?|other roasts?|catalog)\b/iu.test(block.section||'')&&
+      current(sentence.replace(/,?\s+not\s+the\s+producer[.!?]?$/iu,''))){
+    add(selectedAdministrativeRegion[1]+', '+selectedAdministrativeRegion[2]+', '+
+        selectedAdministrativeCountries[0],sentence);
+    continue;
+   }
     const growingMunicipality=sentence.match(new RegExp(
      '^This\\s+group\\s+of\\s+(?:smallholders|growers|farmers)\\s+(?:lives|farms)\\s+in\\s+and\\s+around\\s+the\\s+(?:small\\s+)?municipality\\s+of\\s+('+PLACE+')\\s+in\\s+('+PLACE+')\\s*,\\s+where\\b[^.!?]{0,650}\\bfarms?\\b','iu'));
     const growerWhere=sentence.indexOf(', where');
