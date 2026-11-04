@@ -1146,17 +1146,17 @@
     ]
   },
   "coverage": {
-    "current_scope": "APP_SQL_FUNCTIONS_99_99_AND_APP_TABLE_CATALOG_DEFINITIONS_46_46; EDGE_DEPLOYED_SOURCES_PARTIAL",
+    "current_scope": "APP_SQL_FUNCTIONS_99_99; APP_TABLE_DEFINITION_COMPONENTS_46_46; ALL_9_ACCESSIBLE_DEPLOYED_EDGE_FILE_VARIANTS_DIRECTLY_REVIEWED",
     "semantic_reviewed_functions": 99,
     "total_application_functions": 99,
     "source_characters_semantically_read": 207402,
     "source_whitespace_tokens_semantically_read": 16880,
     "total_source_characters": 207402,
     "next_function_ordinal": null,
-    "next_object": "Deployed Edge file variant #7: dic-preview-coffee/preview.mjs; then old/new dic-verify-coffee/evidence.mjs",
-    "other_objects": "46/46 app table definition components and 99/99 app SQL function bodies reviewed; external source/dependency/migration drift, Edge 3/9 variants, Auth/Storage/Realtime/cron/platform/security/performance remain",
+    "next_object": "Provider extended scope: Auth/Storage/Realtime/cron/roles and platform SQL metadata/definitions; migration-source drift and access/advisor findings; source-specific Edge dependency modules beyond deployed files unverified",
+    "other_objects": "99/99 application SQL function definitions, 46/46 application table catalog definitions, 9/9 accessible deployed Edge file variants complete; platform/vendor SQL, Auth/Storage/cron/Realtime, migration drift, external dependency calls, performance and limits still incomplete",
     "platform_objects": "COUNTS_INVENTORIED_ONLY; VENDOR SQL DEFINITIONS NOT REVIEWED",
-    "edge_function_sources_reviewed": 6,
+    "edge_function_sources_reviewed": 9,
     "table_definition_components_reviewed": 46,
     "total_application_tables": 46
   },
@@ -2633,9 +2633,31 @@
       "tests": "Read-only catalog and exact Edge/release source text comparison; no code/test/CI changes",
       "remaining": "External callers/migration drift; three Edge file variants; other platform/Storage/Auth/cron/Realtime/roles/advisors/logs/performance",
       "next": "Finish Edge preview.mjs and two evidence.mjs variant semantic review; then provider platform surfaces and migration drift; no production writes"
+    },
+    {
+      "run": "2026-11-04 UTC #509 deployed Edge full accessible source variant baseline",
+      "source_sha": "bde52b387284475e9077fe66ff70338206c807eb",
+      "provider_ref": "azviqqejypsefzilgonr",
+      "live_edge_slugs": [
+        "dic-preview-coffee",
+        "dic-verify-coffee"
+      ],
+      "versions": [
+        4,
+        8
+      ],
+      "reviewed_unique_file_content_variants": 9,
+      "reviewed_characters": 52733,
+      "reviewed_lines": 901,
+      "source_compare": "Both main entrypoints and all app-local bundled modules identical to pinned release except preview-bundled stale evidence.mjs; normalized helper identical",
+      "drift_issue": "Preview v4 carries 10032-char evidence.mjs vs verify v8 11492-char; preview only uses unchanged normalizeWords; no evidenced runtime defect",
+      "tests": "Read-only provider source inspection and GitHub pinned text compare only; no runtime tests",
+      "provider_writes": 0,
+      "remaining": "Platform Auth/Storage/Realtime/cron/extensions/roles/migration detailed drift, advisor validation, logs/runtime and external deps",
+      "next": "Inspect platform object inventory then read full accessible definitions in ordered bounded batches"
     }
   ],
-  "state": "APP_SQL_FUNCTIONS_99_OF_99; APP_TABLES_46_OF_46_COMPONENTS_DIRECTLY_READ; EDGE_DEPLOYED_SOURCE_6_OF_9_VARIANTS; PROVIDER_WIDE_AUDIT_IN_PROGRESS; #527_FIX_READY_NOT_DEPLOYED",
+  "state": "APP_SQL_FUNCTIONS_99_OF_99; APP_TABLES_46_OF_46_COMPONENTS_DIRECTLY_READ; EDGE_DEPLOYED_SOURCE_9_OF_9_VARIANTS; FULL_PROVIDER_AUDIT_IN_PROGRESS; #527_READY_NOT_DEPLOYED",
   "application_table_review": {
     "total": 46,
     "current_index": 46,
@@ -3383,7 +3405,7 @@
     "next": "Continue direct Edge deployed bundle file versions #7 onward: dic-preview-coffee/preview.mjs then two deployed revisions of dic-verify-coffee/evidence.mjs; follow complete Storage/Auth/cron/platform/roles/migration drift/advisors and actual performance evidence. Retain all audit/backup/history."
   },
   "provider_edge_review": {
-    "status": "PARTIAL_DEPLOYED_SOURCE_DIRECT_REVIEW_6_OF_9_FILE_VARIANTS",
+    "status": "ALL_ACCESSIBLE_DEPLOYED_EDGE_FILE_VARIANTS_DIRECTLY_REVIEWED_9_OF_9; DEPENDENCIES_RUNTIME_NOT_CERTIFIED",
     "provider_ref": "azviqqejypsefzilgonr",
     "production_release_sha": "31c66832a28247e657a2bf89592ebc1e2f48dfc5",
     "deployed_functions": [
@@ -3406,15 +3428,14 @@
       "_shared/request-budget.mjs",
       "_shared/html-scan.mjs",
       "dic-preview-coffee/agtron-roast.mjs",
-      "_shared/coffee-release-label.mjs"
+      "_shared/coffee-release-label.mjs",
+      "dic-preview-coffee/preview.mjs",
+      "dic-verify-coffee/evidence.mjs as included in preview bundle (v4)",
+      "dic-verify-coffee/evidence.mjs as included in verify bundle (v8)"
     ],
     "deployed_file_variants_total": 9,
-    "release_source_equal_for_reviewed": true,
-    "remaining_variants": [
-      "dic-preview-coffee/preview.mjs",
-      "dic-verify-coffee/evidence.mjs as bundled with preview (10032 chars)",
-      "dic-verify-coffee/evidence.mjs as bundled with verify (11492 chars)"
-    ],
+    "release_source_equal_for_reviewed": "ALL_EXCEPT_PREVIEW_BUNDLE_OLDER_SHARED_EVIDENCE_VERSION; EACH_HANDLER_INDEX_AND_DEPLOYED_OWN_MODULE_EQUAL_RELEASE",
+    "remaining_variants": [],
     "confirmed_bundle_drift": {
       "path": "dic-verify-coffee/evidence.mjs",
       "preview_bundle_chars": 10032,
@@ -3426,6 +3447,11 @@
       "functional_regression_proven": false,
       "classification": "SOURCE_VARIANT_DRIFT_DOCUMENTED_NOT_SAFE_TO_TREAT_AS_BUG_OR_DELETE; coordinate #33 before deployment"
     },
-    "tests": "Read-only source/blob equality and structural inspection; no runtime test, no production changes"
+    "tests": "Complete direct deployed source text semantic review of 9 distinct file-content variants; exact release source checks for deployed own modules, shared normalization code identity; no runtime Deno or security penetration tests; immutable hosted dependency packages not reviewed",
+    "aggregate_unique_file_variant_characters": 52733,
+    "aggregate_unique_file_variant_lines": 901,
+    "preview_bundle_old_helper_only_normalizeWords": true,
+    "preview_helper_exact_identity_verified": true,
+    "next": "Enumerate platform schema, Storage/Auth/Reatime/cron, migrations/roles and advisor/security/runtime logs; no deployment"
   }
 }
