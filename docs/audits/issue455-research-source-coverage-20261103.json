@@ -37,9 +37,12 @@
       "type": "original_markdown",
       "path": "docs/research/originals/03_Causal_Foundations_of_Espresso_Extraction_and_the_Effects_of_Coffee_Characteristics.md",
       "sha256_recorded_in_verified_archive_index": "270689e9a31014592ab5b9007e0c29121d23d5f1c594025cdc8d69f2881cd106",
-      "review_status": "FOCUSED_PASSAGES_ONLY",
-      "direct_review_provenance": "Prior R455-001/R455-002 scoped journal; NOT complete document coverage",
-      "claims_verified_externally": "Not certified by this #455 batch"
+      "review_status": "FULL_BODY_DIRECTLY_READ_CITATIONS_PENDING",
+      "direct_review_provenance": "R455-007 all 441 original source lines directly read in sequential ranges 1-90, 91-145, 146-225, 226-298, 299-374 and 375-441. Research text review, not comprehensive certification of underlying citations.",
+      "claims_verified_externally": "Bounded first-party checks Nov 4 UTC: Schenker Journal of Food Science 2000 DOI 10.1111/j.1365-2621.2000.tb16026.x original publisher abstract supports roast trajectory -> different porosity structure, not report's precise 0.528/0.474 and 622/747 numbers (quantities unverified). Smrke et al. JAFC 2018 DOI 10.1021/acs.jafc.7b03310 publisher article supports degree/speed-dependent CO2 degassing but no universal age->espresso recipe law. Uman 2016 DOI 10.1038/srep24483 full PMC original confirms cold bean->31% smaller modal PSD in tested coffee/grinder. Honda J-STAGE 2022 DOI 10.5650/jos.ess22194 publisher abstract supports supercritical-CO2 decaf composition/roast color differences but no direct espresso permeability data. Remaining report citations unverified.",
+      "github_blob_sha": "9a66449c6adfe27bc7e64dae086d3dfcfc647de6",
+      "direct_review_lines": "1-441",
+      "source_characters": 53543
     },
     {
       "id": "ORG-04",
@@ -290,6 +293,51 @@
       "current_app": "Existing sweetness-only default +1g suggestion remains unchanged in site/lib/engine.js. Current owner product choice R455-DEC-001 awaits approval; five taste scales still required and all-green remains success.",
       "result": "NO_AUTOMATIC_PRODUCT_POLICY_OVERRIDE; MAINTAIN_PENDING_DAILY_OWNER_DECISION",
       "owner_approval": true
+    },
+    {
+      "id": "R455-EV-003-A",
+      "source": "ORG-03 1-8,35-58,122-175,302-330,375-393; Schenker 2000 publisher abstract DOI 10.1111/j.1365-2621.2000.tb16026.x",
+      "claim": "Equal measured roast degree does not guarantee equal intrabean porosity under different roast time-temperature histories. Precise 0.528/0.474 porosity and 622/747 density cited in original #03 could not be independently checked against accessible original full text. Intrabean porosity is not packed puck permeability.",
+      "grade": "DIRECT_REPORT_REVIEW+PUBLISHER_ABSTRACT_ONLY;QUANTITATIVE_VALUES_UNVERIFIED",
+      "current_app": "site/lib/constants.js seven-tier roast taxonomy; site/lib/engine.js baseline uses roast as cautious starting heuristic, never direct porosity measure.",
+      "result": "RETAIN_APPROVED_ROAST_PRIOR_NO_NEW_MATERIAL_COEFFICIENT",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-003-B",
+      "source": "ORG-03 9,173-199,302-315,385-402; Smrke JAFC 2018 DOI 10.1021/acs.jafc.7b03310",
+      "claim": "Whole bean gas loss changes with storage age, roast degree and roast speed; gas-mediated controlled espresso pressure/flow outcomes remain weakly identified. No universal age/rest-day grinder conversion follows.",
+      "grade": "DIRECT_PRIMARY_ACS_ARTICLE_SEARCH_EXCERPTS+PUBLISHER_METHODS;EXTERNAL_RECIPE_UNPROVEN",
+      "current_app": "site/lib/model.js stores coffee provenance but retired bag feature is not an active roast-age control; site/lib/engine.js does not assign generic rest days.",
+      "result": "NO_REST_DAYS_POLICY_OR_NEW_BAG_UI",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-003-C",
+      "source": "ORG-03 11,77-83,200-225,275-291; Uman et al 2016 full article https://pmc.ncbi.nlm.nih.gov/articles/PMC4834475/",
+      "claim": "Experimental bean temperature near -200 C reduced modal PSD about 31% for one tested coffee/grinder; not a universal grinder adjustment, origin/processing effect or taste improvement.",
+      "grade": "DIRECT_PUBLISHED_PEER_REVIEWED_PRIMARY_FULL_TEXT;CONDITIONAL_TESTED_SYSTEM",
+      "current_app": "site/lib/engine.js grinder settings bounded by real equipment/calibration/feed and personal history.",
+      "result": "NO_NEW_TEMPERATURE_SENSOR_OR_NUMERIC_GRIND_TRANSFER",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-003-D",
+      "source": "ORG-03 13-17,145-169,226-301,393-441; Honda J-STAGE DOI 10.5650/jos.ess22194",
+      "claim": "Origin/elevation/process/variety and decaf method are several causal steps upstream of packed puck physics. Supercritical CO2 decaf changed composition and roast L* behavior, not a proven universal espresso hydraulic correction.",
+      "grade": "FULL_ORIGINAL_SYNTHESIS+DIRECT_DECAF_PUBLISHER_ABSTRACT;OTHER_STUDIES_PENDING",
+      "current_app": "site/lib/engine.js personalSimilarCoffeeReference uses origin/process/variety only as small unvalidated similarity weights behind successful setup/style/coffee evidence.",
+      "result": "TRACK_UNVALIDATED_METADATA_WEIGHTS;DO_NOT_OVERRIDE_LOCKED_EVIDENCE_TIERS",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-003-E",
+      "source": "ORG-03 17,291-301,426-441",
+      "claim": "Coffee tasting-note descriptors are downstream labels, not physically causal features. Members' explicit sensory preferences for style selection are a different concept and remain allowed as a subjective preference.",
+      "grade": "CAUSAL_DEFINITION_PLUS_SOURCE_SYNTHESIS;SENSORY_A_B_UNVERIFIED",
+      "current_app": "site/lib/engine.js readPreference reads member preferences (not roaster tastingNotes), chooses optional style; source-derived coffee notes not used as intrinsic grind coefficient.",
+      "result": "PRESERVE_MEMBER_CHOICE;NO_TASTING_NOTES_TO_PHYSICS",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [
@@ -305,12 +353,12 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R455-006 all 586 lines of source 04 and bounded primary original article + manufacturer machine docs crosswalk. Documentation/evidence only; no changed behavior."
+    "reason": "R455-007 original03 direct full 441-line source reading and bounded four original publisher checks; docs-only."
   },
   "next_actions": [
-    "Continue complete original Markdown first-to-last review of 01-03 and 08-09 (04/09 full body; 04/05/06/07 complete); original ChatGPT citation tokens and unsupported sensory/numeric claims remain pending primary reference verification.",
-    "Review October29 15-member implementation pack and S019 PDF exact bytes when authorized runtime/tool access permits; original pack remains historical research-only and not approved engine policy.",
-    "Continue full GitHub/Project/Drive source enumeration beyond 13 curated research sources and coordinate frozen/current #267 audit without recrediting strict lines.",
-    "Prioritize actual reproducible safe UX/logic improvements with focused Node/browser/offline tests and exact-source CI; preserve unresolved R455-DEC-001 sweetness-only recommendation policy for owner digest. No publication."
+    "Finish direct full-body original source 01/02/08/09 (5/9 now full #03-07); primary citations remain only partially verified; no #267 strict audit credit.",
+    "Read all October29 15-member implementation pack and S019 PDF when bytes can be verified; slow-feed Library PDF versus archived ZIP byte equivalence remains unproven.",
+    "Expand GitHub/Project/Drive source register beyond initial 13 curated sources, and reproduce safe UX/logic defects with focused CI; avoid #33/#267/#96 overlapping work.",
+    "Owner decision R455-DEC-001 sweetness-only +1g vs nonnumeric diagnostic still not approved, reserved for daily digest; no deploy."
   ]
 }
