@@ -1,0 +1,2280 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "category": "POST_PIN_CURRENT_CODE_DELTA",
+  "date_utc": "2026-11-04",
+  "reviewed_base_commit": "f682ddde6cb786bbb4e842ff00bebbba720cca2f",
+  "original_pinned_source_blob": "0b434427d2917e9877e0754ad6a670b1193bb326",
+  "source_path": "scripts/audit/coffee-corpus-snapshot.py",
+  "new_source_blob": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+  "new_test_path": "tests/audit/test_coffee_corpus_snapshot.py",
+  "new_test_blob": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+  "source_lines": 42,
+  "added_test_lines": 75,
+  "change_type": "REPRODUCED_LOCAL_AUDIT_SCRIPT_DEFECT",
+  "before": {
+    "reproduced": "Yes, exact original Git blob ran on disposable fixture without final package.json",
+    "exit_code": 1,
+    "target_created": true,
+    "partial_src_copied": true
+  },
+  "after": {
+    "four_focused_isolated_tests": "PASS locally on source/test SHA-identical files",
+    "cases": [
+      "Complete copy and SHA receipt",
+      "Missing late source cleans and retry succeeds",
+      "Mid-copy symlink error cleans staging",
+      "Existing immutable destination untouched"
+    ],
+    "network_calls": 0,
+    "real_archive_member_data_touched": false
+  },
+  "per_line": [
+    {
+      "path": "scripts/audit/coffee-corpus-snapshot.py",
+      "blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+      "line_count": 42,
+      "per_line": [
+        {
+          "line": 1,
+          "source_text": "#!/usr/bin/env python3",
+          "classification": "comment",
+          "behavior": "Explains tool intent and Python filesystem/hash dependencies",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 1,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 2,
+          "source_text": "\"\"\"Copy a candidate into an immutable, fingerprinted replay source directory.\"\"\"",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing tool intent and Python filesystem/hash dependencies",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 2,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 3,
+          "source_text": "import hashlib",
+          "classification": "dependency",
+          "behavior": "Dependency for tool intent and Python filesystem/hash dependencies",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 3,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 4,
+          "source_text": "import json",
+          "classification": "dependency",
+          "behavior": "Dependency for tool intent and Python filesystem/hash dependencies",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 4,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 5,
+          "source_text": "import pathlib",
+          "classification": "dependency",
+          "behavior": "Dependency for tool intent and Python filesystem/hash dependencies",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 5,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 6,
+          "source_text": "import shutil",
+          "classification": "dependency",
+          "behavior": "Dependency for tool intent and Python filesystem/hash dependencies",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 6,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 7,
+          "source_text": "import sys",
+          "classification": "dependency",
+          "behavior": "Dependency for tool intent and Python filesystem/hash dependencies",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 7,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 8,
+          "source_text": "import tempfile",
+          "classification": "dependency",
+          "behavior": "Dependency for tool intent and Python filesystem/hash dependencies",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 8,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 9,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Physical source separator",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 9,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 10,
+          "source_text": "source = pathlib.Path(sys.argv[1]).resolve()",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing source/target resolution and no-overwrite contract",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 10,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 11,
+          "source_text": "target = pathlib.Path(sys.argv[2]).resolve()",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing source/target resolution and no-overwrite contract",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 11,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 12,
+          "source_text": "if target.exists():",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles source/target resolution and no-overwrite contract",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 12,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 13,
+          "source_text": "    raise SystemExit('Choose a new snapshot path; do not overwrite earlier source evidence.')",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles source/target resolution and no-overwrite contract",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 13,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 14,
+          "source_text": "target.parent.mkdir(parents=True, exist_ok=True)",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing same-parent isolated staging directory creation",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 14,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 15,
+          "source_text": "staged = pathlib.Path(tempfile.mkdtemp(prefix='.' + target.name + '.partial-', dir=target.parent))",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing same-parent isolated staging directory creation",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 15,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 16,
+          "source_text": "try:",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles same-parent isolated staging directory creation",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 16,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 17,
+          "source_text": "    for name in ['src', 'netlify/functions', 'supabase/functions/_shared', 'package.json']:",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles copy required candidate trees into private staging",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 17,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 18,
+          "source_text": "        original = source / name",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing copy required candidate trees into private staging",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 18,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 19,
+          "source_text": "        copied = staged / name",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing copy required candidate trees into private staging",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 19,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 20,
+          "source_text": "        copied.parent.mkdir(parents=True, exist_ok=True)",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing copy required candidate trees into private staging",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 20,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 21,
+          "source_text": "        if original.is_dir():",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles copy required candidate trees into private staging",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 21,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 22,
+          "source_text": "            shutil.copytree(original, copied)",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing copy required candidate trees into private staging",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 22,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 23,
+          "source_text": "        else:",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing copy required candidate trees into private staging",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 23,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 24,
+          "source_text": "            shutil.copy2(original, copied)",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing copy required candidate trees into private staging",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 24,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 25,
+          "source_text": "    rows = []",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing verify copied bytes and fingerprint source-linked receipt",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 25,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 26,
+          "source_text": "    for copied in sorted(staged.rglob('*')):",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles verify copied bytes and fingerprint source-linked receipt",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 26,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 27,
+          "source_text": "        if not copied.is_file():",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles verify copied bytes and fingerprint source-linked receipt",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 27,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 28,
+          "source_text": "            continue",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing verify copied bytes and fingerprint source-linked receipt",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 28,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 29,
+          "source_text": "        relative = copied.relative_to(staged).as_posix()",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing verify copied bytes and fingerprint source-linked receipt",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 29,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 30,
+          "source_text": "        before = (source / relative).read_bytes()",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing verify copied bytes and fingerprint source-linked receipt",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 30,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 31,
+          "source_text": "        after = copied.read_bytes()",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing verify copied bytes and fingerprint source-linked receipt",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 31,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 32,
+          "source_text": "        if before != after:",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles verify copied bytes and fingerprint source-linked receipt",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 32,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 33,
+          "source_text": "            raise SystemExit('Source changed while copying: ' + relative)",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles verify copied bytes and fingerprint source-linked receipt",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 33,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 34,
+          "source_text": "        rows.append({'path': relative, 'bytes': len(after), 'sha256': hashlib.sha256(after).hexdigest()})",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing verify copied bytes and fingerprint source-linked receipt",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 34,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 35,
+          "source_text": "    (staged / 'snapshot-receipt.json').write_text(json.dumps({'source': str(source), 'files': rows}, indent=2) + '\\n')",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing verify copied bytes and fingerprint source-linked receipt",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 35,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 36,
+          "source_text": "    if target.exists():",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles fail if final target appears then rename completed staging into place",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 36,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 37,
+          "source_text": "        raise SystemExit('Snapshot path appeared during copying; do not overwrite earlier evidence.')",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles fail if final target appears then rename completed staging into place",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 37,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 38,
+          "source_text": "    staged.rename(target)",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing fail if final target appears then rename completed staging into place",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 38,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 39,
+          "source_text": "except BaseException:",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles clean staging on any error and emit success summary only after publish",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 39,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 40,
+          "source_text": "    shutil.rmtree(staged, ignore_errors=True)",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing clean staging on any error and emit success summary only after publish",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 40,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 41,
+          "source_text": "    raise",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing clean staging on any error and emit success summary only after publish",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 41,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 42,
+          "source_text": "print(json.dumps({'source': str(source), 'snapshot': str(target), 'files': len(rows)}))",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing clean staging on any error and emit success summary only after publish",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Old code left incomplete published snapshot on late failure; new staging reduces partial outputs; single-target existence check is not a global concurrency lock.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "scripts/audit/coffee-corpus-snapshot.py",
+            "new_blob_sha": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+            "new_line": 42,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Atomic publication of fully validated source snapshot. Temporary directory is removed on exceptions; no member/603 mutation.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        }
+      ]
+    },
+    {
+      "path": "tests/audit/test_coffee_corpus_snapshot.py",
+      "blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+      "line_count": 75,
+      "per_line": [
+        {
+          "line": 1,
+          "source_text": "\"\"\"Offline atomic source-snapshot regressions; never touch original603 data.\"\"\"",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing offline test imports and source script location",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 1,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 2,
+          "source_text": "import hashlib",
+          "classification": "dependency",
+          "behavior": "Dependency for offline test imports and source script location",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 2,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 3,
+          "source_text": "import json",
+          "classification": "dependency",
+          "behavior": "Dependency for offline test imports and source script location",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 3,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 4,
+          "source_text": "from pathlib import Path",
+          "classification": "dependency",
+          "behavior": "Dependency for offline test imports and source script location",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 4,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 5,
+          "source_text": "import subprocess",
+          "classification": "dependency",
+          "behavior": "Dependency for offline test imports and source script location",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 5,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 6,
+          "source_text": "import sys",
+          "classification": "dependency",
+          "behavior": "Dependency for offline test imports and source script location",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 6,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 7,
+          "source_text": "import tempfile",
+          "classification": "dependency",
+          "behavior": "Dependency for offline test imports and source script location",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 7,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 8,
+          "source_text": "import unittest",
+          "classification": "dependency",
+          "behavior": "Dependency for offline test imports and source script location",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 8,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 9,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Physical source separator",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 9,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 10,
+          "source_text": "SCRIPT = Path(__file__).resolve().parents[2] / 'scripts/audit/coffee-corpus-snapshot.py'",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing offline test imports and source script location",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 10,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 11,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Physical source separator",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 11,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 12,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Physical source separator",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 12,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 13,
+          "source_text": "class SnapshotIntegrityTests(unittest.TestCase):",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles disposable synthetic candidate fixture with required subtrees and four known files",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 13,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 14,
+          "source_text": "    def setUp(self):",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles disposable synthetic candidate fixture with required subtrees and four known files",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 14,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 15,
+          "source_text": "        self.root_context = tempfile.TemporaryDirectory(prefix='dic-source-snapshot-test-')",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing disposable synthetic candidate fixture with required subtrees and four known files",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 15,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 16,
+          "source_text": "        self.addCleanup(self.root_context.cleanup)",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing disposable synthetic candidate fixture with required subtrees and four known files",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 16,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 17,
+          "source_text": "        self.root = Path(self.root_context.name)",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing disposable synthetic candidate fixture with required subtrees and four known files",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 17,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 18,
+          "source_text": "        self.source = self.root / 'original'",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing disposable synthetic candidate fixture with required subtrees and four known files",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 18,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 19,
+          "source_text": "        self.target = self.root / 'snapshots' / 'release-A'",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing disposable synthetic candidate fixture with required subtrees and four known files",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 19,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 20,
+          "source_text": "        for name in ('src', 'netlify/functions', 'supabase/functions/_shared'):",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles disposable synthetic candidate fixture with required subtrees and four known files",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 20,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 21,
+          "source_text": "            (self.source / name).mkdir(parents=True, exist_ok=True)",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing disposable synthetic candidate fixture with required subtrees and four known files",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 21,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 22,
+          "source_text": "        self.files = {'src/client.js': b'client', 'netlify/functions/api.js': b'api',",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing disposable synthetic candidate fixture with required subtrees and four known files",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 22,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 23,
+          "source_text": "                      'supabase/functions/_shared/core.ts': b'core', 'package.json': b'{\"name\":\"snapshot\"}'}",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing disposable synthetic candidate fixture with required subtrees and four known files",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 23,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 24,
+          "source_text": "        for name, data in self.files.items():",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles disposable synthetic candidate fixture with required subtrees and four known files",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 24,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 25,
+          "source_text": "            p = self.source / name",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing disposable synthetic candidate fixture with required subtrees and four known files",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 25,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 26,
+          "source_text": "            p.write_bytes(data)",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing disposable synthetic candidate fixture with required subtrees and four known files",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 26,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 27,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Physical source separator",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 27,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 28,
+          "source_text": "    def run_copy(self):",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles subprocess and temporary staging cleanup assertions",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 28,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 29,
+          "source_text": "        return subprocess.run([sys.executable, str(SCRIPT), str(self.source), str(self.target)],",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles subprocess and temporary staging cleanup assertions",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 29,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 30,
+          "source_text": "                              capture_output=True, text=True, check=False)",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing subprocess and temporary staging cleanup assertions",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 30,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 31,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Physical source separator",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 31,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 32,
+          "source_text": "    def assert_no_temporary_dirs(self):",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles subprocess and temporary staging cleanup assertions",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 32,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 33,
+          "source_text": "        self.assertEqual(list(self.target.parent.glob('.release-A.partial-*')), [])",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing subprocess and temporary staging cleanup assertions",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 33,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 34,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Physical source separator",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 34,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 35,
+          "source_text": "    def test_complete_copy_is_only_published_after_verified_receipt(self):",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles successful source receipt digest, source identity and copy equivalence",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 35,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 36,
+          "source_text": "        result = self.run_copy()",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing successful source receipt digest, source identity and copy equivalence",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 36,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 37,
+          "source_text": "        self.assertEqual(result.returncode, 0, result.stderr)",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing successful source receipt digest, source identity and copy equivalence",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 37,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 38,
+          "source_text": "        output = json.loads(result.stdout)",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing successful source receipt digest, source identity and copy equivalence",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 38,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 39,
+          "source_text": "        self.assertEqual(output['files'], len(self.files))",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing successful source receipt digest, source identity and copy equivalence",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 39,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 40,
+          "source_text": "        self.assertEqual(output['snapshot'], str(self.target))",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing successful source receipt digest, source identity and copy equivalence",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 40,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 41,
+          "source_text": "        rows = json.loads((self.target / 'snapshot-receipt.json').read_text())",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing successful source receipt digest, source identity and copy equivalence",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 41,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 42,
+          "source_text": "        self.assertEqual(rows['source'], str(self.source))",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing successful source receipt digest, source identity and copy equivalence",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 42,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 43,
+          "source_text": "        self.assertEqual({r['path'] for r in rows['files']}, set(self.files))",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing successful source receipt digest, source identity and copy equivalence",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 43,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 44,
+          "source_text": "        for row in rows['files']:",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles successful source receipt digest, source identity and copy equivalence",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 44,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 45,
+          "source_text": "            self.assertEqual(row['sha256'], hashlib.sha256(self.files[row['path']]).hexdigest())",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing successful source receipt digest, source identity and copy equivalence",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 45,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 46,
+          "source_text": "            self.assertEqual((self.target / row['path']).read_bytes(), self.files[row['path']])",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing successful source receipt digest, source identity and copy equivalence",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 46,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 47,
+          "source_text": "        self.assert_no_temporary_dirs()",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing successful source receipt digest, source identity and copy equivalence",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 47,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 48,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Physical source separator",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 48,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 49,
+          "source_text": "    def test_missing_late_source_does_not_publish_partial_target(self):",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles missing last package source returns failure without publishing any partial snapshot; retry succeeds",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 49,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 50,
+          "source_text": "        (self.source / 'package.json').unlink()",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing missing last package source returns failure without publishing any partial snapshot; retry succeeds",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 50,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 51,
+          "source_text": "        result = self.run_copy()",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing missing last package source returns failure without publishing any partial snapshot; retry succeeds",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 51,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 52,
+          "source_text": "        self.assertNotEqual(result.returncode, 0)",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing missing last package source returns failure without publishing any partial snapshot; retry succeeds",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 52,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 53,
+          "source_text": "        self.assertFalse(self.target.exists())",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing missing last package source returns failure without publishing any partial snapshot; retry succeeds",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 53,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 54,
+          "source_text": "        self.assert_no_temporary_dirs()",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing missing last package source returns failure without publishing any partial snapshot; retry succeeds",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 54,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 55,
+          "source_text": "        (self.source / 'package.json').write_bytes(self.files['package.json'])",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing missing last package source returns failure without publishing any partial snapshot; retry succeeds",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 55,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 56,
+          "source_text": "        self.assertEqual(self.run_copy().returncode, 0)",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing missing last package source returns failure without publishing any partial snapshot; retry succeeds",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 56,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 57,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Physical source separator",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 57,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 58,
+          "source_text": "    def test_copytree_exception_cleans_staging_directory(self):",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles mid-copy broken symlink error cleans partial stage",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 58,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 59,
+          "source_text": "        (self.source / 'src' / 'broken.js').symlink_to('nonexistent.js')",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing mid-copy broken symlink error cleans partial stage",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 59,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 60,
+          "source_text": "        result = self.run_copy()",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing mid-copy broken symlink error cleans partial stage",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 60,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 61,
+          "source_text": "        self.assertNotEqual(result.returncode, 0)",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing mid-copy broken symlink error cleans partial stage",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 61,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 62,
+          "source_text": "        self.assertFalse(self.target.exists())",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing mid-copy broken symlink error cleans partial stage",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 62,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 63,
+          "source_text": "        self.assert_no_temporary_dirs()",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing mid-copy broken symlink error cleans partial stage",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 63,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 64,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Physical source separator",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 64,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 65,
+          "source_text": "    def test_existing_immutable_snapshot_unchanged(self):",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles existing immutable destination is untouched on rejected replay",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 65,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 66,
+          "source_text": "        self.target.mkdir(parents=True)",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing existing immutable destination is untouched on rejected replay",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 66,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 67,
+          "source_text": "        (self.target / 'existing.txt').write_text('preserve')",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing existing immutable destination is untouched on rejected replay",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 67,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 68,
+          "source_text": "        result = self.run_copy()",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing existing immutable destination is untouched on rejected replay",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 68,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 69,
+          "source_text": "        self.assertNotEqual(result.returncode, 0)",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing existing immutable destination is untouched on rejected replay",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 69,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 70,
+          "source_text": "        self.assertEqual((self.target / 'existing.txt').read_text(), 'preserve')",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing existing immutable destination is untouched on rejected replay",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 70,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 71,
+          "source_text": "        self.assert_no_temporary_dirs()",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing existing immutable destination is untouched on rejected replay",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 71,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 72,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Physical source separator",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 72,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 73,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Physical source separator",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 73,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 74,
+          "source_text": "if __name__ == '__main__':",
+          "classification": "declaration_control",
+          "behavior": "Branch, helper or test method that handles direct unittest invocation without external accounts",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 74,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        },
+        {
+          "line": 75,
+          "source_text": "    unittest.main()",
+          "classification": "statement",
+          "behavior": "Specific statement/value implementing direct unittest invocation without external accounts",
+          "quality": "New delta source read against the exact created Git blob; targeted local four-test acceptance passed.",
+          "risk": "Only synthetic disposable source subtrees; no real 603 archive or member data touched.",
+          "obsolete_or_duplicate": "No proven redundant code; new tests cover distinct failure modes.",
+          "live_counterpart": {
+            "path": "tests/audit/test_coffee_corpus_snapshot.py",
+            "new_blob_sha": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+            "new_line": 75,
+            "source_text_exact": true
+          },
+          "testability": "Run isolated Python unittest and original-source failure reproduction; verify exact PR-head source-scoped python-audit CI.",
+          "improvement": "Isolated no-network regression for safe snapshot publication and failure cleanup.",
+          "locked_fit": "Preserve frozen603 source/capture/oracle, member shots, offline data, credentials, CI continuity and explicit nonpublishing scope.",
+          "review_method": "Direct source-bound AI line-by-line reading of new code/test; no independent human review."
+        }
+      ]
+    }
+  ],
+  "source_hash_verified_by_git_blob": true,
+  "risks": [
+    "No global cross-process lock; target-existence rechecked before same-parent rename",
+    "CI Python workflow still required after PR creation"
+  ],
+  "scope": "Local snapshot audit utility only; no production app change or original603 oracle rewrite",
+  "strict_original_frozen_and_pinned_denominators_additional_credit": 0,
+  "live_new_and_modified_source_reviewed": true,
+  "ready": "NOT_READY_PENDING_EXACT_PR_CI"
+}
