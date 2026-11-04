@@ -1,3 +1,9 @@
+## November 4 UTC — #33 selected farm biosphere adversarial fixture precision (TESTING)
+
+Pre-PR static inspection of six source tests found an invalid synthetic assumption: an arbitrary biosphere name has no gazetteer-derived country, so a Kenyan selected H1 alone must not be called a country contradiction. Corrected the third negative fixture to **explicitly print Ethiopia on the same source sentence**, rather than infer it from a forest name. The parser's country-in-sentence guard remains unchanged; positives and unrelated/old-story negatives remain. SAME-COMMIT test/journal, exact CI still UNSTARTED; no PASS or READY claim. [skip netlify]
+
+---
+
 ## November 4 UTC — #33 Dehab #188 present farm biosphere geographic precision (TESTING, not READY/deployed)
 
 **Authority/recovery:** Owner autonomous Issue33 development only, base `8a144d84a3e1d790cc0d78279d54c1de6c452586`. AGENTS/AI context, Issue33 current journal/status, Master Spec, Decision Ledger, approval, queue, original603 register, live official source, #267 V2 and #96, open #367 and required CI reviewed. Source-bound previous exact official run41752527382 (source `36d16a8b`) selected #188 H1 `42 Series- Ethiopia Dehab’s Diamond`, raw HTML SHA256 `7fafe7621a6db8d331ccb0ab1faa24e3fab4057eecac3bdb7af80a421b8eab2a`, parser origin **Ethiopia** with conflicts []; current official product page directly says Dehab’s **present** farms lie in the UNESCO **Kaffa Forest** biosphere buffer/core zones. Existing country-only output omits this selected explicitly named growing area. That earlier source capture is not a fresh parser result on THIS proposed code.
