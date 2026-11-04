@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "kind": "THREE_CASE_CURRENT_OFFICIAL_SELECTED_SOURCE_VERIFICATION",
+  "state": "TESTING_UNMERGED_NO_SOURCE_RUN",
+  "created_utc": "2026-11-04",
+  "parent_development_sha": "5a099bf192f11c64f27a40c9cffcd2ad8c2b72c2",
+  "source_workflow": ".github/workflows/roaster-source-probe.yml",
+  "marker": "[dic-issue33-fourteenth3]",
+  "frozen_original603_not_modified": true,
+  "cases": [
+    {
+      "original603_number": 188,
+      "original_coffee": "42 Series- Ethiopia Dehab's Diamond",
+      "official_url": "https://larryscoffee.com/products/coffee-111",
+      "question": "Selected current Ethiopia Dehab lot, tasting, release and growing-location fields; do not reuse stale original expected flavors."
+    },
+    {
+      "original603_number": 206,
+      "original_coffee": "Peru HB",
+      "official_url": "https://lowcountrycoffeeroasters.com/products/peru-hb-1",
+      "question": "Current Chanchamayo region text vs labeled Peru location; evaluate current actual parser before claiming omission."
+    },
+    {
+      "original603_number": 320,
+      "original_coffee": "Costa Rica Sonora Honey",
+      "official_url": null,
+      "question": "Compare exact original URL, current selected H1 and published processing, avoid title-only inference."
+    }
+  ],
+  "current_parser_fields_verified": false,
+  "exact_current_html_sha256": null,
+  "source_run": null,
+  "acceptance_pending": [
+    "Safe nonforce PR and passing applicable exact-source PR-head CI",
+    "Run current official guarded 3-case selection on merged source",
+    "Inspect all three selected H1, raw HTML SHA256, parsed fields and conflicts",
+    "Individually adjudicate omissions/conflicts and commit durable verified findings"
+  ],
+  "no_deployment_authorized": true
+}
