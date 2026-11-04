@@ -2,7 +2,7 @@
   "schema_version": 1,
   "issue": 33,
   "review_date_utc": "2026-11-04",
-  "status": "CURRENT_MERGED_SOURCE_3_FETCHED_3_PARSED_FIELD_LEVEL_ADJUDICATED_NO_VERIFIED_PRODUCER_FIX",
+  "status": "VERIFIED_CURRENT_SELECTED_SOURCE_3_OF_3_AND_ADVERSARIAL_PRODUCER_ROLE_CONTROLS_NO_READY",
   "base_development_sha": "bf3b9d810be10438503c29345a8b1bee6fac0746",
   "immutable_original603_csv_git_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
   "probe_marker": "[dic-issue33-eighteenth3]",
@@ -112,6 +112,38 @@
   "regression_tests": {
     "path": "tests/coffee-issue33-producer-cohort-safe-blanks-290-380-571.test.mjs",
     "description": "Five adversarial synthetic tests: guarded direct-credit positive versus ambiguous country growers, blended source partial ACODIHUE, unrelated farmer biography, uncertain Capricornio producer versus direct selected Producer label",
-    "status": "TESTING_UNTIL_EXACT_PR_HEAD_CI"
-  }
+    "status": "VERIFIED_MERGED_PASS",
+    "pr": 542,
+    "head": "32649dfb2b9897b7b98919ffd71852024c349e10",
+    "merged": "df45b7e49d32d895b144ddd3b461609db5522d91",
+    "tests_added": 5,
+    "merged_node_run": 41813490194,
+    "merged_node_pass": 2366,
+    "merged_node_fail": 0,
+    "merged_node_skip": 6,
+    "merged_cloud_run": 41813490143,
+    "merged_cloud": "SUCCESS",
+    "merged_approval_run": 41813490175,
+    "merged_approval": "SUCCESS",
+    "merged_queue_run": 41813490253,
+    "merged_queue": "SUCCESS",
+    "private_archive_pr_head_run": 41813075342,
+    "private_archive_pr_head": "SUCCESS",
+    "frozen603_run": 41813075333,
+    "frozen603": "SKIPPED_NOT_PASS"
+  },
+  "final_invariants": {
+    "scoped_pr_head_blobs_identical_on_merged_source": true,
+    "concurrent_issue267_s2_062_preserved": true,
+    "reviewed_current_selected_sources": 3,
+    "manually_certified_full_coffees": 0,
+    "no_verified_current_runtime_defect_in_these_cases": true,
+    "queue_ready": 11,
+    "queue_deployed": 90,
+    "queue_in_progress": 3,
+    "issue33_remains_open": true,
+    "never_deployed": true,
+    "original_csv_oracle_scorer_unchanged": true
+  },
+  "next": "Continue independently reviewing unresolved original603 selected product evidence; do not convert 3 technically parsed sources into full manual 603 certification or invent producer. A later directly credited selected lot can justify a narrow code correction with positive/negative tests."
 }
