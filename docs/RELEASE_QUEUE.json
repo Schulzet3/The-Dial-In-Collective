@@ -8,6 +8,42 @@
   },
   "items": [
     {
+      "id": "DIC-Q-33-selected-brewtus-majority-villages",
+      "issue": 33,
+      "pr": 529,
+      "title": "Recover selected Brewtus current-lot Shantawene/Bombe majority supply villages from single-paragraph official description",
+      "state": "READY",
+      "merged_source_sha": "0637211759e5cf09458ccfa7f7d477a44d4529ab",
+      "scope_paths": [
+        "src/server/coffee-identity-evidence.mjs"
+      ],
+      "tests": [
+        "PR528 original generic station-majority candidate merged ae25777e32a30a1f74c24ce3c836cc3cd85ad4d5 but exact merged current official HTML run41797662113 proved #38 remained coarse Sidama, Ethiopia; synthetic two-paragraph test was insufficient. Not READY.",
+        "PR529 corrected exact tested head 11424b68d626c37500a930292b47eed26df8724b: seven workflows triggered; six applicable CI SUCCESS (approval41798416671, cloud/build41798416771, UX41798416744, isolated SQL41798416769, security41798416800, private source41798416723); original frozen corpus41798416765 SKIPPED, not PASS. Six focused station/village positive and negative regressions documented.",
+        "Nonforce PR529 squash-merged at 0637211759e5cf09458ccfa7f7d477a44d4529ab. Exact merged source cloud/build41798865284, UX41798865153, approval41798865171, queue41798865196 all SUCCESS; original60341798865330 SKIPPED. Subsequent #267-only documentation commits through 0bdf23174e91e0d3a6fb7e7afd0d599556199266 did not touch parser, tests, or Issue33 journal.",
+        "Independently inspected official current https://brewtusroasting.com/products/ethiopia-natural H1 Ethiopia Natural and current lot text: Shantawane Washing Station in Sidama, majority of cherries from Shantawene and Bombe villages; Natural and Light with strawberry/peach/brown sugar. Genuine exact merged-source bounded public run41798865172/job126469431509 SUCCESS, #38/#65/#261 each FETCHED/PARSED/Add Coffee preview, conflicts empty, 3/3; current #38 raw HTML SHA256 d813a05223a319cb7d5d0932a66b7db095714a1fd2437f12ce2335e6bf83db9d. #38 origin Sidama, Ethiopia -> Shantawene and Bombe, Sidama, Ethiopia; roast Light, producer smallholder farmers, Natural, flavor notes and elevation unchanged. Both controls #65 and #261 canonical field maps/conflicts unchanged from pre-fix run41797662113.",
+        "Private guarded source artifact13306870903 SHA256 79b50c8c16f34e93199d785884cbce5872084dc2b7a5697ff78bac5da69004b1 (one-day retention). Source job explicitly manual_certified=0; field-scoped human-semantic source adjudication here is not universal 603 validation."
+      ],
+      "ci_runs": [
+        41798416671,
+        41798416771,
+        41798416744,
+        41798416769,
+        41798416800,
+        41798416723,
+        41798416765,
+        41798865284,
+        41798865153,
+        41798865171,
+        41798865196,
+        41798865330,
+        41798865172
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "NARROW SOURCE-VERIFIED READY ONLY, NOT DEPLOYED. Selected station and majority sourcing villages are explicitly bound in current exact product description; not unrelated Bombe Mountain, generic SEO, any other coffee or invented lot. PR528 first failed real source, PR529 repaired. Same runtime parser file overlaps other READY #33 changes; release dependency isolation required by #417 and only the owner can authorize publication. Frozen original603 603/201/1197, original oracle/scorer/captures/CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d preserved. 153 context-qualified, 29 missing-literal and 35 historical source-blank review cases and #33 OPEN remain; separate #267 V2/#96. No Netlify deployment, live SQL/Edge/Auth, member/provider writes, cost or new accounts."
+    },
+    {
       "id": "DIC-Q-509-invite-expiration-search",
       "issue": 509,
       "pr": 527,
