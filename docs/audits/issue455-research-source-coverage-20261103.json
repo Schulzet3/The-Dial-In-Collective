@@ -99,9 +99,12 @@
       "type": "original_markdown",
       "path": "docs/research/originals/08_Manual_Audit_of_Espresso_Extraction_Dosing_and_Puck-Preparation_Claims.md",
       "sha256_recorded_in_verified_archive_index": "9219bf81c7307bfb1967d763edca13d739884e22e77a8f1f22cb94ded9793f49",
-      "review_status": "FOCUSED_PASSAGES_ONLY",
-      "direct_review_provenance": "Prior R455-001/R455-002 scoped journal; NOT complete document coverage",
-      "claims_verified_externally": "Not certified by this #455 batch"
+      "review_status": "FULL_BODY_DIRECTLY_READ_CITATIONS_PENDING",
+      "direct_review_provenance": "R455-009 sequential direct GitHub full-body reads 1-55,56-98,99-139 at pinned source SHA. Claim table, evidence taxonomy, limitations and proposed research schema all inspected. Source original unmodified.",
+      "claims_verified_externally": "Bounded direct originals 2026-11-04 UTC: Moroney et al. 2019 full PLOS https://doi.org/10.1371/journal.pone.0219906 confirms 60g, ~1L and 250mL/min nonconventional experiment, filter-coffee origin of historical 18-22% EY and numerical model not controlled espresso taste; Waszkiewicz et al. author HTML v2 https://arxiv.org/html/2512.21528 shows nonlinear pressure-flow, minimal poroelastic hypothesis, and 75s/8bar pressurization/restart with 3-way backflow which cannot justify universal anti-bloom guidance; Mendez Harper/Hendon author full-text https://arxiv.org/abs/2312.03103 reports specified 18g/45g, 94C, 7bar dark-roast EK43 RDT 16% concentration change, light-roast no significant espresso brew change, no universal sensory preference; previously validated Lee/Smith/Arshad model https://arxiv.org/abs/2206.12373 supports hypothetical two-path channeling mechanism. The remaining #08 citations and all nine full citation audits are pending. No numeric consumer-app rules promoted.",
+      "github_blob_sha": "122e142c8c8a3c480f68ab63a05b8785ecc5eb02",
+      "direct_review_lines": 139,
+      "source_characters": 37453
     },
     {
       "id": "ORG-09",
@@ -377,6 +380,42 @@
       "current_app": "site/lib/engine.js qualitative evenness check on severe astringency/low clarity; personal actual shot feedback takes precedence.",
       "result": "NO_BRAND_BURR_PRIOR_OR_NUMERIC_WDT_CLAIM;KEEP_CAUTIONARY_DIAGNOSTIC",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-008-A",
+      "source": "ORG-08 lines 4-13,31-54,56-69; Moroney et al. 2019 original https://doi.org/10.1371/journal.pone.0219906 methods and introduction",
+      "claim": "Moroney's experiment used 60g coffee, ~1L water at 250mL/min in espresso-shaped apparatus; authors explicitly caution brew quantities/time resemble drip. Historical 18-22% sensory range originates with filter-coffee controls, not demonstrated universal espresso preference.",
+      "grade": "DIRECT_FULL_ORIGINAL_REPORT+ORIGINAL_PLOS_FULL_TEXT;CONDITIONS_VERIFIED;UNIVERSAL_ESPRESSO_TASTE_UNSUPPORTED",
+      "current_app": "site/lib/constants.js RATIOS/TIMES are labeled initial priors, not sensory gates; site/lib/engine.js checks all five member ratings before preference guidance.",
+      "result": "PRESERVE_TASTE_FIRST_AND_STYLE_BOUNDS;NO_FILTER_YIELD_OPTIMUM",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-008-B",
+      "source": "ORG-08 lines 4-13,31-54,61-94; Waszkiewicz et al. 2026 original author v2 https://arxiv.org/html/2512.21528 methods and X-ray experiments",
+      "claim": "Observed nonlinear pressure-flow in a specific 18.5g conventional espresso setup and 75-second 8bar followed by repeated pauses/backflow; minimal poroelastic and channeling explanations remain model/interpretation. Does not demonstrate a universal 5bar/9bar taste optimum or general prohibition on bloom/preinfusion.",
+      "grade": "AUTHOR_MANUSCRIPT_FULL_HTML+FULL_REPORT;PRIMARY_OBSERVATION_SEPARATE_FROM_MODEL;SENSORY_UNTESTED",
+      "current_app": "Five locked shot styles maintained, no universal pressure-target setting or prohibition on profile pauses in site/lib/engine.js.",
+      "result": "DO_NOT_HARD_CODE_PRESSURE_OR_PAUSE_POLICY",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-008-C",
+      "source": "ORG-08 lines 40-53,64-68,74-80,99-138; Mendez Harper/Hendon author preprint https://arxiv.org/abs/2312.03103 (full HTML available)",
+      "claim": "Pregrind water reduced charge/retention in tested grinders. Dark Temascaltepec EK43/Black Eagle 18g to 45g at 94C and 7bar gained about 16% TDS/concentration in a controlled comparison; light roast had no significant brewing difference. Concentration is not measured taste preference; no blanket water-dose correction.",
+      "grade": "ORIGINAL_AUTHOR_FULL_HTML+SPECIFIC_TEST_CONDITIONS_VERIFIED;SENSORY_CAUSATION_NOT_ESTABLISHED",
+      "current_app": "Engine does not infer higher sweetness or a universal grind/time change from moisture, wetting or RDT; member controls, actual shot and taste ratings remain authoritative.",
+      "result": "KEEP_RDT_AS_SCOPED_RESEARCH_NOT_AUTOMATIC_MEMBER_CONTROL",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-008-D",
+      "source": "ORG-08 lines 15-29,31-55,70-138; Lee/Smith/Arshad model https://arxiv.org/abs/2206.12373, Waszkiewicz original and Moroney full PLOS",
+      "claim": "Controlled variable used by a paper (20kg tamp, WDT/shaking or 1:2 recipe) cannot be cited as independently tested optimum. Model-based channeling should not be labeled observed, or EY/TDS/time labeled sensory improvement; report proposes evidence type, applicability, claim entailment and source strength fields for a RESEARCH ledger, not approved new member UX/data schema.",
+      "grade": "FULL_REPORT_SYNTHESIS+BOUNDED_PRIMARY_VERIFICATION;POLICY_NOT_APPROVED",
+      "current_app": "Current SCALES five taste ratings, complete/all-green gates, diagnostic/one-control advice in engine.js; existing lower-confidence heuristics must be disclosed and not elevated by repetition.",
+      "result": "RESEARCH_PROVENANCE_GUARDRAIL_ONLY;DO_NOT_ADD_USER_FIELDS_OR_CHANGE_LOCKED_MODEL",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [
@@ -392,12 +431,12 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R455-008 316-line report02 full direct source reading, bounded 4 primary checks, documentation-only; no local container available."
+    "reason": "R455-009 139-line report08 full direct review and four bounded primary checks; exact source read and two docs updated only. Node/SQL/UX test not executed by this pass; exact PR/merged-source CI pending."
   },
   "next_actions": [
-    "Finish full original documents #01/#08/#09 (6/9 now full #02-07); independent full primary-citation verification still incomplete; no #267 strict audit credit.",
-    "Directly retrieve/hash/review October29 15-member implementation pack and S019 PDF; archive/library slow-feed PDF byte equivalence remains unverified.",
-    "Expand curated source coverage beyond 13 records to all discoverable Project/GitHub/Drive evidence and crosswalk current UX logic; prioritize tested safe changes only if reproduced; #33/#267/#96 retain independent ownership.",
-    "R455-DEC-001 sweetness-only numeric +1g vs no-change diagnostic still UNAPPROVED; reserve for morning digest; no deploy."
+    "Finish full original documents #01/#09 (now 7/9 original full #02-08); full primary-citation verification for all nine remains incomplete, no #267 credit.",
+    "Retrieve and hash original October29 15-member research implementation ZIP and S019 PDF, neither actual bytes found in current Drive/Library search; slow-feed Library PDF archived-byte equivalence remains unverified.",
+    "Review all newer Project/Drive/GitHub research sources and evidence-first UX code paths; #33/#267/#96 ownership retained, no app logic change without demonstrated safe repro and exact-source regression.",
+    "R455-DEC-001 sweetness-only numeric +1g vs no-change diagnostic still owner-review UNAPPROVED; morning digest only; do not deploy."
   ]
 }
