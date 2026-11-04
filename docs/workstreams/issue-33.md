@@ -1,3 +1,11 @@
+## November 4 UTC — #33 PR494 first exact-head CI failed related-section negative; corrected (TESTING)
+
+Actual first exact PR-head Node/lint/build run [41770805094](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41770805094) executed 2,336 cases: **2,329 PASS / 1 FAIL / 6 intentional SKIP**. Five other new farm-biosphere positive and negative groups PASS; the newly added **Other Coffees** section negative FAILED. The matching producer/country appeared in a clearly unrelated section and was improperly donated to selected Origin. This is a genuine newly discovered safety defect in proposed code, not an existing application regression.
+
+**SAME-COMMIT source/journal safety repair:** add the adjacent already-approved related/recommended/other-coffee/catalog section exclusion to selected-farm biosphere. Maintain present-tense named H1/country evidence, never hardcode a roaster or place. First-head SQL41770804931, approval41770805047, cloud/browser41770805156, security41770805080, exact source archive41770805068 all SUCCESS; frozen60341770805056 SKIPPED. Corrected exact-head Node/CI and merged public parser still PENDING, do not claim earlier failure PASS. Queue 6 READY/90 DEPLOYED/3 IN_PROGRESS; no production/provider/member changes. [skip netlify]
+
+---
+
 ## November 4 UTC — #33 strict same-sentence country conflict fixture (TESTING)
 
 Before opening PR, corrected test-only punctuation so the deliberately mismatched Ethiopia country is in the **same geographical claim sentence**, not a separate sentence invisible to this bounded rule. Source parser unchanged, no new tests executed yet. SAME-COMMIT source-bound journal, previous invalid fixture is preserved as Git history and not claimed to have passed. [skip netlify]

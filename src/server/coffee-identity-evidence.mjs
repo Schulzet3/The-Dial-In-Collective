@@ -280,6 +280,7 @@ function narrativeGeography(blocks,{currentLocalityOnly=false,name=''}={}){
       !COUNTRY_ONLY.test(selectedFarmsBiosphere[2])&&
       !completeVarietyPhrase(selectedFarmsBiosphere[2],{explicit:true})&&
       countryNames(sentence).every(country=>key(country)===key(selectedFarmCountry[0]))&&
+      !/\b(?:related|recommended|you may also like|other coffees?|other roasts?|catalog)\b/iu.test(block.section||'')&&
       !/\b(?:previously|formerly|historical|abandoned|no longer|moved|other coffee|another coffee)\b/i.test(sentence)){
     add(selectedFarmsBiosphere[2]+', '+selectedFarmCountry[0],sentence);
     continue;
