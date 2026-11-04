@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "reviewed_at_utc": "2026-11-04",
+  "status": "TESTING_NOT_READY_NOT_DEPLOYED",
+  "base_source_sha": "0f63313960f3265481ae27ca020b535564d6e0f4",
+  "original_603_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "selected_case": {
+    "number": 23,
+    "url": "https://blackriverroasters.com/products/organic-specialty-decaf",
+    "current_h1": "Organic Specialty Decaf",
+    "published_current_prose": "Our decaf coffee rotates throughout the year. The current offering from Peru is no different—rich, chocolaty and nutty.",
+    "published_current_spec": "Current Decaf Coffee; Location: Mexico; Altitude: 1000–1500 masl; Process: Washed, Water-Process Decaffeinated",
+    "source_status": "Current official public webpage text observed November 4; raw HTML/source digest not yet pinned",
+    "historical_register_status": "QUALIFIED_MISSING_VALUE_NEEDS_REVIEW",
+    "previous_mapped_origin": "Mexico"
+  },
+  "finding": "Two contradictory selected current-lot country assertions; no one country can be established with confidence",
+  "implementation": "Generic selected exact-decaf H1 and direct current named-offer/current-location disagreement guard; withhold origin and surface both alternatives",
+  "tests": "Five focused positive/negative cases added; CI and genuine official parser still pending",
+  "scope": {
+    "immutable_original_603_201_1197": true,
+    "queue_unchanged": true,
+    "manual_certified": 0,
+    "no_deployment": true,
+    "no_provider_writes": true
+  },
+  "next": [
+    "Exact PR-head CI",
+    "repair any failures in same-commit journal",
+    "non-force merge",
+    "current raw official URL/parser/Add Coffee and controls on exact merged source",
+    "only then narrow READY decision"
+  ]
+}
