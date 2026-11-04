@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "review_date_utc": "2026-11-04",
+  "parent_development_sha": "dc74a7f428ac64749aaa59319c69108a4d2fa85a",
+  "main_sha": "79ea81b9c80eb8b11148c7eb787d500d313a9ad2",
+  "release_production_sha": "31c66832a28247e657a2bf89592ebc1e2f48dfc5",
+  "review_kind": "DIRECT_COMPLETE_PROVIDER_SQL_SOURCE_SEMANTIC_REVIEW; existing platform SQL inventory is NOT credited twice",
+  "objects": [
+    {
+      "identity": "storage.list_objects_with_delimiter(text,text,text,integer,text,text,text,text,text,timestamp with time zone,text)",
+      "source_md5": "7747efec8583d78cd01449d9b99cd2eb",
+      "characters": 32892,
+      "lines": 627,
+      "read_spans": [
+        [
+          1,
+          8500
+        ],
+        [
+          8501,
+          17000
+        ],
+        [
+          17001,
+          25500
+        ],
+        [
+          25501,
+          32892
+        ]
+      ],
+      "verdict": "FULL_BODY_REVIEWED_PROVIDER_OWNED_NO_REPRODUCED_DEFECT",
+      "semantic": [
+        "Handles case-sensitive C-collated name boundaries and common-prefix folder aggregation, including DESC folder seeking and ASC strict successor.",
+        "Uses independent exact-name/version and strict-name UNION ALL branches for indexable pagination; records millisecond archived_at/version continuation, current-row filtering, delete-marker filters and progress guard.",
+        "Potential invalid max_keys/null/overflow edge case relies on caller/API validation; no live execution or reproducible application failure; do not change provider function."
+      ],
+      "body_source": "live pg_get_functiondef, read-only Supabase SQL catalog",
+      "grant_metadata": "SQL INVOKER owned by supabase_storage_admin; anon/authenticated EXECUTE on first three (fourth not individually reverified), storage schema USAGE confirmed; hosted API route still UNVERIFIED",
+      "all_spans_contiguous": true
+    },
+    {
+      "identity": "storage.search(text,text,integer,integer,integer,text,text,text,text,text)",
+      "source_md5": "fed15c85bb96faaa21ec40176026a0fd",
+      "characters": 31522,
+      "lines": 553,
+      "read_spans": [
+        [
+          1,
+          8000
+        ],
+        [
+          8001,
+          16000
+        ],
+        [
+          16001,
+          24000
+        ],
+        [
+          24001,
+          31522
+        ]
+      ],
+      "verdict": "FULL_BODY_REVIEWED_LEGACY_TIMESTAMP_ORDERING_HYPOTHESIS_UNVERIFIED",
+      "semantic": [
+        "Filters by bucket, noncurrent version and delete marker; name order uses lower(name) with C collation, stable per-version seek and bounded batch/offset skip, with no-progress guard.",
+        "Case-insensitive lower(name) seek is supported by current idx_objects_bucket_id_name_lower.",
+        "Legacy non-name sort uses a folder/leaf UNION ALL with LIMIT/OFFSET but no final global ORDER BY; timestamp ordering across the combined list is not guaranteed by SQL semantics. This is a query-level risk, NOT demonstrated member-facing malfunction. Current search_v2 sends timestamp sorts to search_by_timestamp instead; determine whether legacy search is remotely called before proposing fix."
+      ],
+      "body_source": "live pg_get_functiondef, read-only Supabase SQL catalog",
+      "grant_metadata": "SQL INVOKER owned by supabase_storage_admin; anon/authenticated EXECUTE on first three (fourth not individually reverified), storage schema USAGE confirmed; hosted API route still UNVERIFIED",
+      "all_spans_contiguous": true
+    },
+    {
+      "identity": "storage.search_by_timestamp(text,text,integer,integer,text,text,text,text,text,text,text)",
+      "source_md5": "323c4e2739e9c9bcfc082f7f14289338",
+      "characters": 6929,
+      "lines": 169,
+      "read_spans": [
+        [
+          1,
+          6929
+        ]
+      ],
+      "verdict": "FULL_BODY_REVIEWED_NO_REPRODUCED_DEFECT",
+      "semantic": [
+        "Escapes LIKE metacharacters in prefix; validates sort order and updated_at/created_at allow-list before identifier interpolation.",
+        "Unions common-prefix aggregation with leaf objects and applies timestamp/name/version keyset cursor, final ORDER BY and LIMIT; caller still controls prefix and bound limit."
+      ],
+      "body_source": "live pg_get_functiondef, read-only Supabase SQL catalog",
+      "grant_metadata": "SQL INVOKER owned by supabase_storage_admin; anon/authenticated EXECUTE on first three (fourth not individually reverified), storage schema USAGE confirmed; hosted API route still UNVERIFIED",
+      "all_spans_contiguous": true
+    },
+    {
+      "identity": "storage.search_v2(text,text,integer,integer,text,text,text,text,text,text,timestamp with time zone,text,boolean)",
+      "source_md5": "7a010a87c94770b1c8f0b49a616082f4",
+      "characters": 2862,
+      "lines": 66,
+      "read_spans": [
+        [
+          1,
+          2862
+        ]
+      ],
+      "verdict": "FULL_BODY_REVIEWED_NO_REPRODUCED_DEFECT",
+      "semantic": [
+        "Normalizes sort-column/order and caps upper page size at 1,500 (not a lower bound).",
+        "Routes name sorting into list_objects_with_delimiter; routes timestamp sorting into search_by_timestamp, not legacy storage.search. No direct runtime invocation."
+      ],
+      "body_source": "live pg_get_functiondef, read-only Supabase SQL catalog",
+      "grant_metadata": "SQL INVOKER owned by supabase_storage_admin; anon/authenticated EXECUTE on first three (fourth not individually reverified), storage schema USAGE confirmed; hosted API route still UNVERIFIED",
+      "all_spans_contiguous": true
+    }
+  ],
+  "complete_source_characters": 74205,
+  "complete_source_lines": 1415,
+  "additional_live_read_only_metadata": {
+    "postgres": "17.11",
+    "project_status": "ACTIVE_HEALTHY",
+    "storage_bucket_count": 0,
+    "storage_sql_policy_count": 0,
+    "storage_index_count": 8,
+    "storage_relevant_indexes": [
+      "idx_objects_bucket_id_name",
+      "idx_objects_bucket_id_name_lower",
+      "idx_objects_current_version",
+      "idx_objects_delete_markers"
+    ],
+    "anon_storage_schema_usage": true,
+    "authenticated_storage_schema_usage": true,
+    "sql_session_pgrst_db_schemas": null,
+    "hosted_exposed_schemas": "UNVERIFIED"
+  },
+  "findings": [
+    {
+      "id": "I509-SQL-LEGACY-SEARCH-ORDER",
+      "classification": "QUERY_LEVEL_ORDERING_RISK_UNVERIFIED_IMPACT",
+      "source": "storage.search legacy non-name sorting path",
+      "evidence": "WITH folders, folder ORDER BY, leaf subselect ORDER BY, outer UNION ALL LIMIT/OFFSET with no final global ORDER BY; search_v2 delegates timestamp sorts elsewhere",
+      "remediation": "No production change or candidate fix until usage, consumer contract and isolated deterministic fixture are verified; coordinate provider-owned SQL changes separately."
+    },
+    {
+      "id": "I509-SQL-LIST-INPUT-BOUNDS",
+      "classification": "CALLER_VALIDATION_UNVERIFIED",
+      "source": "storage.list_objects_with_delimiter",
+      "evidence": "max_keys * 2 and EXIT >= max_keys do not normalize null/negative or extreme integer inputs; caller may bound these",
+      "remediation": "Read-only inventory of caller/API input validation before any action."
+    }
+  ],
+  "limitations": [
+    "Zero Storage buckets prohibit meaningful existing-data runtime attribution and no production fixture/test writes authorized.",
+    "No SQL functions executed; full definitions read only.",
+    "Cannot infer SQL EXECUTE grants imply PostgREST exposure; actual hosted exposed-schema configuration unavailable, #96 scope.",
+    "Provider C/native binaries and actual Storage service routing not reviewed.",
+    "GitHub code search on default main returned no matches for these provider functions, not authoritative proof of absence on development/history.",
+    "No exact-source Node/SQL tests executed; two previous docs governance jobs failed before visible steps."
+  ],
+  "source_bound_ci": {
+    "parent_sha": "dc74a7f428ac64749aaa59319c69108a4d2fa85a",
+    "prior_runs": [
+      41910306431,
+      41910306616
+    ],
+    "observed": "FAILED_PRE_STEPS; zero visible steps",
+    "new_commit": "PENDING_READBACK"
+  },
+  "fixes": [],
+  "production_mutations": 0,
+  "release_queue_change": "NONE",
+  "baseline": "IN_PROGRESS",
+  "exact_next_cursor": "provider full-source storage.protect_bucket_control_columns() [1/1858], then remaining unreviewed SQL function-source and hosted API/Auth/Storage reachability; do not recredit the four audited bodies"
+}

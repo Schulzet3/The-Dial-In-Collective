@@ -1,0 +1,5229 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "parent_sha": "3916c788c9155a7c1293b67ebfa8ec5bbc8a8c01",
+  "source": "Connected production PostgreSQL pg_depend + pg_identify_object + pg_describe_object, read-only catalog metadata only",
+  "scope": "Native catalog dependency edge identities, NOT full underlying SQL/compiled/Edge body source review",
+  "sort": "src_type, complete_source_description, ref_type, complete_referenced_description, deptype, classid/objid/subid OID tie breaks",
+  "rows_format": [
+    "schema_ordinal",
+    "source_type",
+    "complete_source_description",
+    "referenced_type",
+    "complete_referenced_description",
+    "deptype",
+    "md5_of_catalog_oid_edge_tuple",
+    "semantic_disposition_code"
+  ],
+  "disposition_legend": {
+    "EXTENSION_OWNERSHIP": "Extension-owned provider implementation; preserve, compiled implementation UNVERIFIED",
+    "INTERNAL_CATALOG_LINK": "System-generated internal dependency, no independent removable object established",
+    "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY": "Index/key or expression dependency; duplicate-looking edges are not duplicate indexes",
+    "SCHEMA_OWNERSHIP": "Provider table depends on its namespace",
+    "COLUMN_TYPE_OR_TABLE_DEPENDENCY": "Column references table/type; schema integrity relation",
+    "CONSTRAINT_COLUMN_OR_FK_TARGET": "Constraint's referenced column, key, PK or FK enforcement link; no missing target shown",
+    "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY": "Function registration/language/return type link; runtime authorization untested",
+    "TYPE_ROW_SCHEMA_OR_ARRAY_LINK": "Provider scalar/enum/row/array type dependency; no safe removal",
+    "SEQUENCE_OWNERSHIP": "Sequence owned by schema/table column; retain until caller traced",
+    "OTHER_RESOLVED_PLATFORM_DEPENDENCY": "Resolved catalog reference; provider-owned or caller/deletion impact unproven"
+  },
+  "review_status": "DIRECT_READ_AND_SEMANTICALLY_CLASSIFIED_RELATIONSHIP_IDENTITIES_ONLY",
+  "verdict": "NO_NEW_REPRODUCED_DEFECT_OR_SAFE_OBJECT_DELETION",
+  "sensitive_data_read": false,
+  "production_write": false,
+  "compiled_and_hosted_config": "UNVERIFIED",
+  "scope_schemas": [
+    "extensions",
+    "graphql_public",
+    "pgbouncer",
+    "realtime",
+    "storage",
+    "supabase_migrations",
+    "vault"
+  ],
+  "reviewed_edges": 516,
+  "edges": {
+    "extensions": [
+      [
+        1,
+        "function",
+        "function armor(bytea,text[],text[])",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "704a53d93fc710cb97e1e4efd9ad9748",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        2,
+        "function",
+        "function armor(bytea,text[],text[])",
+        "schema",
+        "schema extensions",
+        "n",
+        "418410c7bf7b7ddc2a1eb221da1943c9",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        3,
+        "function",
+        "function armor(bytea)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "e753b94a11128221a6f25541ec76cad1",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        4,
+        "function",
+        "function armor(bytea)",
+        "schema",
+        "schema extensions",
+        "n",
+        "df947d70a45ff5578c145131bf2ba725",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        5,
+        "function",
+        "function crypt(text,text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "d3bc7e7c1bd851777ac95e4c86de2d3d",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        6,
+        "function",
+        "function crypt(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "bffdc3fb4112e3e1ef6b1fba5e3708cf",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        7,
+        "function",
+        "function dearmor(text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "501f19797cf2fc9cfa0a35b3c7ca994f",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        8,
+        "function",
+        "function dearmor(text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "6237ba649479c123f0913d37d428c767",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        9,
+        "function",
+        "function decrypt_iv(bytea,bytea,bytea,text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "7f39186bf580c336801603177d8d78a3",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        10,
+        "function",
+        "function decrypt_iv(bytea,bytea,bytea,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "9602fd2ea770b3e338e285a8d4b8e08c",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        11,
+        "function",
+        "function decrypt(bytea,bytea,text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "a7ca5d83a17c99ef25a316df5c0433dd",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        12,
+        "function",
+        "function decrypt(bytea,bytea,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "6c31e1360e2c91f632447b5658039a17",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        13,
+        "function",
+        "function digest(bytea,text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "77f73ee3b2cb0c6e600bc93535d791ee",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        14,
+        "function",
+        "function digest(bytea,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "39cd6aace9f09dc7398ae162bd74f558",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        15,
+        "function",
+        "function digest(text,text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "51fa0b9e1e6da2933d3f582d214d3063",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        16,
+        "function",
+        "function digest(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "318d883ac73fba2054b57dfcc91f9c37",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        17,
+        "function",
+        "function encrypt_iv(bytea,bytea,bytea,text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "9685175a399a8fc581aabfdb88d12248",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        18,
+        "function",
+        "function encrypt_iv(bytea,bytea,bytea,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "43f118d712ba44deb7a8350b81648e13",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        19,
+        "function",
+        "function encrypt(bytea,bytea,text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "3cf8cb40d7fddbcdd74aeb40f2fb9361",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        20,
+        "function",
+        "function encrypt(bytea,bytea,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "3c0b38f263741d1195b7db5023dd2105",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        21,
+        "function",
+        "function extensions.gen_random_uuid()",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "8659f69cd959d9f60e90566e97194b60",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        22,
+        "function",
+        "function extensions.gen_random_uuid()",
+        "schema",
+        "schema extensions",
+        "n",
+        "4302f1b18c05c16ccca6497179b7d3af",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        23,
+        "function",
+        "function gen_random_bytes(integer)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "97bab5b796b76ffbafc5abb0f28df36d",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        24,
+        "function",
+        "function gen_random_bytes(integer)",
+        "schema",
+        "schema extensions",
+        "n",
+        "5a8068b0f23b5b359e83639caa58fe4d",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        25,
+        "function",
+        "function gen_salt(text,integer)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "1d44d15d627eb3569319217faf5b44b4",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        26,
+        "function",
+        "function gen_salt(text,integer)",
+        "schema",
+        "schema extensions",
+        "n",
+        "925634925ea90aca4cc6e6913beabd99",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        27,
+        "function",
+        "function gen_salt(text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "ed89ef540e12e633934e1b41b1aa4c47",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        28,
+        "function",
+        "function gen_salt(text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "c99d2592f71da87f5a0409b53e1de03b",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        29,
+        "function",
+        "function gin_extract_query_trgm(text,internal,smallint,internal,internal,internal,internal)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "307827954fb6afae8f8fe3b9f4c11807",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        30,
+        "function",
+        "function gin_extract_query_trgm(text,internal,smallint,internal,internal,internal,internal)",
+        "schema",
+        "schema extensions",
+        "n",
+        "ffc960b731768701f2c79857f85799f4",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        31,
+        "function",
+        "function gin_extract_value_trgm(text,internal)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "e6985837533b0c5dc26bae27896782ae",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        32,
+        "function",
+        "function gin_extract_value_trgm(text,internal)",
+        "schema",
+        "schema extensions",
+        "n",
+        "29948131c936947ba2e6cfba15ff0a97",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        33,
+        "function",
+        "function gin_trgm_consistent(internal,smallint,text,integer,internal,internal,internal,internal)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "ae166d88812aa011da72f858f1e8b6be",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        34,
+        "function",
+        "function gin_trgm_consistent(internal,smallint,text,integer,internal,internal,internal,internal)",
+        "schema",
+        "schema extensions",
+        "n",
+        "712224d59d32e4f7cd8cf96a992a9d82",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        35,
+        "function",
+        "function gin_trgm_triconsistent(internal,smallint,text,integer,internal,internal,internal)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "fe7ec045f1d7fef52a556cd73b61942b",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        36,
+        "function",
+        "function gin_trgm_triconsistent(internal,smallint,text,integer,internal,internal,internal)",
+        "schema",
+        "schema extensions",
+        "n",
+        "af9ffb0d882e3c9c9b9c9cf623af9e16",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        37,
+        "function",
+        "function grant_pg_cron_access()",
+        "language",
+        "language plpgsql",
+        "n",
+        "264ba8d478275fa20d618e6055cbc80c",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        38,
+        "function",
+        "function grant_pg_cron_access()",
+        "schema",
+        "schema extensions",
+        "n",
+        "68d753b99a3e8626ea3a28a63a13d083",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        39,
+        "function",
+        "function grant_pg_graphql_access()",
+        "language",
+        "language plpgsql",
+        "n",
+        "37d8416f4ea62b44c9e69e89f257df54",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        40,
+        "function",
+        "function grant_pg_graphql_access()",
+        "schema",
+        "schema extensions",
+        "n",
+        "e4dd3237fc56263d116ee8f092431566",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        41,
+        "function",
+        "function grant_pg_net_access()",
+        "language",
+        "language plpgsql",
+        "n",
+        "3f49dbb8c11dca963e5d948cb49fe103",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        42,
+        "function",
+        "function grant_pg_net_access()",
+        "schema",
+        "schema extensions",
+        "n",
+        "b0406527650b038311ab67739826a8c6",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        43,
+        "function",
+        "function gtrgm_compress(internal)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "27bc69d6a683dd9e1afd169a160c0f75",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        44,
+        "function",
+        "function gtrgm_compress(internal)",
+        "schema",
+        "schema extensions",
+        "n",
+        "5d6801bbc7181d11f48e56e607b45cda",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        45,
+        "function",
+        "function gtrgm_consistent(internal,text,smallint,oid,internal)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "b305cb30bf3028d9f1ac3422f8f28a5c",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        46,
+        "function",
+        "function gtrgm_consistent(internal,text,smallint,oid,internal)",
+        "schema",
+        "schema extensions",
+        "n",
+        "c8503b8a940e201b9a9dff9ed29d38ce",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        47,
+        "function",
+        "function gtrgm_decompress(internal)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "3e669a8afa366af53257fc04c94c022a",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        48,
+        "function",
+        "function gtrgm_decompress(internal)",
+        "schema",
+        "schema extensions",
+        "n",
+        "cc8c76053542d7c24f7aed7bb796700a",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        49,
+        "function",
+        "function gtrgm_distance(internal,text,smallint,oid,internal)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "a2bc17a94f5d68f9b8e17c0c1b5e9a4e",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        50,
+        "function",
+        "function gtrgm_distance(internal,text,smallint,oid,internal)",
+        "schema",
+        "schema extensions",
+        "n",
+        "a44e4c205a86ce4d21d42e09ea2cbfcb",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        51,
+        "function",
+        "function gtrgm_in(cstring)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "b1266ff77e38dfe53f97a1528a98a594",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        52,
+        "function",
+        "function gtrgm_in(cstring)",
+        "schema",
+        "schema extensions",
+        "n",
+        "cc41e10f1f8dcae7c7a5f6db67e6d825",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        53,
+        "function",
+        "function gtrgm_in(cstring)",
+        "type",
+        "type gtrgm",
+        "n",
+        "c448bc4ad28e2a14311e85ddfa47bbdf",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        54,
+        "function",
+        "function gtrgm_options(internal)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "e45fe5ef242e66c6e55b61d6ba32969c",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        55,
+        "function",
+        "function gtrgm_options(internal)",
+        "schema",
+        "schema extensions",
+        "n",
+        "0644ca6a131b60322d8f9d345987dc9d",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        56,
+        "function",
+        "function gtrgm_out(gtrgm)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "95210b1c0bcb836b39c1a690ca45b8fc",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        57,
+        "function",
+        "function gtrgm_out(gtrgm)",
+        "schema",
+        "schema extensions",
+        "n",
+        "59d83a76170f1040984d80c5fda13998",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        58,
+        "function",
+        "function gtrgm_out(gtrgm)",
+        "type",
+        "type gtrgm",
+        "n",
+        "836a63b63f723654ee0a4daff890e2df",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        59,
+        "function",
+        "function gtrgm_penalty(internal,internal,internal)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "ce72254bd8c8e833b6f70e61df49acd1",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        60,
+        "function",
+        "function gtrgm_penalty(internal,internal,internal)",
+        "schema",
+        "schema extensions",
+        "n",
+        "a4193d8c79601d6267d94ce55ac42194",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        61,
+        "function",
+        "function gtrgm_picksplit(internal,internal)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "91eb3783aac8b8a7b8d32a5a10f25133",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        62,
+        "function",
+        "function gtrgm_picksplit(internal,internal)",
+        "schema",
+        "schema extensions",
+        "n",
+        "14416840335764efe3fd04f654dd5bdb",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        63,
+        "function",
+        "function gtrgm_same(gtrgm,gtrgm,internal)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "43c4dc3fd0ec75045ec7e3196f661bf7",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        64,
+        "function",
+        "function gtrgm_same(gtrgm,gtrgm,internal)",
+        "schema",
+        "schema extensions",
+        "n",
+        "9572daae6758e58d58513fdbd95664c1",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        65,
+        "function",
+        "function gtrgm_same(gtrgm,gtrgm,internal)",
+        "type",
+        "type gtrgm",
+        "n",
+        "12d6e0717039a3b4f8baace234ebef4c",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        66,
+        "function",
+        "function gtrgm_union(internal,internal)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "0fed9f64e7458124dc534068b1ad5611",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        67,
+        "function",
+        "function gtrgm_union(internal,internal)",
+        "schema",
+        "schema extensions",
+        "n",
+        "bde46a089db518e07b1149c4908c254d",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        68,
+        "function",
+        "function gtrgm_union(internal,internal)",
+        "type",
+        "type gtrgm",
+        "n",
+        "c17379e23a656ca0a5ace9b0afe81f0c",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        69,
+        "function",
+        "function hmac(bytea,bytea,text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "f3bbd6866008455598818846174f5b6b",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        70,
+        "function",
+        "function hmac(bytea,bytea,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "18ee37276b08f4d22c9c3841925437d4",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        71,
+        "function",
+        "function hmac(text,text,text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "5f8bd1ff8392b9177c8aef7600707e7e",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        72,
+        "function",
+        "function hmac(text,text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "22c211f68535a261c33f5b5532956628",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        73,
+        "function",
+        "function pg_stat_statements_info()",
+        "extension",
+        "extension pg_stat_statements",
+        "e",
+        "388a179e27660cf07a901ea29f1d168f",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        74,
+        "function",
+        "function pg_stat_statements_info()",
+        "schema",
+        "schema extensions",
+        "n",
+        "f8fb566539dcb559abb150c7131250b8",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        75,
+        "function",
+        "function pg_stat_statements_reset(oid,oid,bigint,boolean)",
+        "extension",
+        "extension pg_stat_statements",
+        "e",
+        "18291135d6acd1a9804f91173ecbbbf1",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        76,
+        "function",
+        "function pg_stat_statements_reset(oid,oid,bigint,boolean)",
+        "schema",
+        "schema extensions",
+        "n",
+        "31f43a78411d1a484b0687d2a0c35de6",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        77,
+        "function",
+        "function pg_stat_statements(boolean)",
+        "extension",
+        "extension pg_stat_statements",
+        "e",
+        "887b3a3b9ba5758f8d8dd04d97544f70",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        78,
+        "function",
+        "function pg_stat_statements(boolean)",
+        "schema",
+        "schema extensions",
+        "n",
+        "5bb26c64891b205f22a0bfd759d4f6da",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        79,
+        "function",
+        "function pgp_armor_headers(text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "ef0e058d568a638709a39e04bba575c3",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        80,
+        "function",
+        "function pgp_armor_headers(text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "8ee3908d220d12a338b7b728517d5a2c",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        81,
+        "function",
+        "function pgp_key_id(bytea)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "e147b205906445ebbb90e7ce083830ca",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        82,
+        "function",
+        "function pgp_key_id(bytea)",
+        "schema",
+        "schema extensions",
+        "n",
+        "5cff6a46610d98dd66e29514ab61c767",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        83,
+        "function",
+        "function pgp_pub_decrypt_bytea(bytea,bytea,text,text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "bdb8a651d366c8ef3025031c43518c29",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        84,
+        "function",
+        "function pgp_pub_decrypt_bytea(bytea,bytea,text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "9e5f83c2769a4afeb57c8981f3f0fa67",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        85,
+        "function",
+        "function pgp_pub_decrypt_bytea(bytea,bytea,text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "0a65a9d0eeb684ec6cde19c3d6813ae4",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        86,
+        "function",
+        "function pgp_pub_decrypt_bytea(bytea,bytea,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "f9a947e211830314637d7d176f820668",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        87,
+        "function",
+        "function pgp_pub_decrypt_bytea(bytea,bytea)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "c2fe60a8baf17314ec0236aa572d4697",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        88,
+        "function",
+        "function pgp_pub_decrypt_bytea(bytea,bytea)",
+        "schema",
+        "schema extensions",
+        "n",
+        "a83aba367f24b3b801be60ceeb103f63",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        89,
+        "function",
+        "function pgp_pub_decrypt(bytea,bytea,text,text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "3c021f720819c0381af4cfd4f687e1d6",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        90,
+        "function",
+        "function pgp_pub_decrypt(bytea,bytea,text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "b2a3a3156b90850c5c3bd2ed3a83ab84",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        91,
+        "function",
+        "function pgp_pub_decrypt(bytea,bytea,text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "4d46797b67ccf5b6f986a484ec5eb4ed",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        92,
+        "function",
+        "function pgp_pub_decrypt(bytea,bytea,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "ccba541085228ac6376270aff90647e3",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        93,
+        "function",
+        "function pgp_pub_decrypt(bytea,bytea)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "cfc56b8aa6de5b8417a7e86c4626f036",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        94,
+        "function",
+        "function pgp_pub_decrypt(bytea,bytea)",
+        "schema",
+        "schema extensions",
+        "n",
+        "c9969c91ffa5ef777895860ece16aece",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        95,
+        "function",
+        "function pgp_pub_encrypt_bytea(bytea,bytea,text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "e8dcdd5c16472c32b086396199f1a2e5",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        96,
+        "function",
+        "function pgp_pub_encrypt_bytea(bytea,bytea,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "d882035065a61973ec7821ebb55e6a90",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        97,
+        "function",
+        "function pgp_pub_encrypt_bytea(bytea,bytea)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "5355e209400dee5666b4eeab1aad2577",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        98,
+        "function",
+        "function pgp_pub_encrypt_bytea(bytea,bytea)",
+        "schema",
+        "schema extensions",
+        "n",
+        "7df561c838461d2646a36c0d94223abe",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        99,
+        "function",
+        "function pgp_pub_encrypt(text,bytea,text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "3d2b326fd5087a2bf3357004ef467876",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        100,
+        "function",
+        "function pgp_pub_encrypt(text,bytea,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "f199db43a24e75778fefb17b6e87edfa",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        101,
+        "function",
+        "function pgp_pub_encrypt(text,bytea)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "63950cceb415e7dec976eac0e5f7cc90",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        102,
+        "function",
+        "function pgp_pub_encrypt(text,bytea)",
+        "schema",
+        "schema extensions",
+        "n",
+        "052d3ce15f8a3c452a8e94c40c854548",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        103,
+        "function",
+        "function pgp_sym_decrypt_bytea(bytea,text,text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "cf26f3de40598511240b10725faa5dc1",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        104,
+        "function",
+        "function pgp_sym_decrypt_bytea(bytea,text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "f7a1a534e11416d2404eade8f7f94771",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        105,
+        "function",
+        "function pgp_sym_decrypt_bytea(bytea,text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "a22157eb5f88bf59ff5e15314c1d20e5",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        106,
+        "function",
+        "function pgp_sym_decrypt_bytea(bytea,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "d8d43bba762f75ab4b42de0500f9f3b3",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        107,
+        "function",
+        "function pgp_sym_decrypt(bytea,text,text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "d6070f225405129edb8ebd378cd7cfee",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        108,
+        "function",
+        "function pgp_sym_decrypt(bytea,text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "3176f7b8261a7197a83cb304f17e8105",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        109,
+        "function",
+        "function pgp_sym_decrypt(bytea,text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "b99df77168e742f188c12026df7be499",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        110,
+        "function",
+        "function pgp_sym_decrypt(bytea,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "2ef07cff02d7962162d4c0d484552658",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        111,
+        "function",
+        "function pgp_sym_encrypt_bytea(bytea,text,text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "a01fc3f31ca12c02584729bb36b784bb",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        112,
+        "function",
+        "function pgp_sym_encrypt_bytea(bytea,text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "22539f275639f8e66b85c18bbffc5f79",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        113,
+        "function",
+        "function pgp_sym_encrypt_bytea(bytea,text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "408a961e1296326f31367548b8784e16",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        114,
+        "function",
+        "function pgp_sym_encrypt_bytea(bytea,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "cd801811ae851a943d9997f0d54aa5fe",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        115,
+        "function",
+        "function pgp_sym_encrypt(text,text,text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "7147d1b442352ea575ccf32786f0693d",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        116,
+        "function",
+        "function pgp_sym_encrypt(text,text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "4464d856a1246e283df0f22c0c4c9147",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        117,
+        "function",
+        "function pgp_sym_encrypt(text,text)",
+        "extension",
+        "extension pgcrypto",
+        "e",
+        "db2f21ab2532fe4fc9c7e66fef62f792",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        118,
+        "function",
+        "function pgp_sym_encrypt(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "5c6c5087fb671633b64bea3bd652c394",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        119,
+        "function",
+        "function pgrst_ddl_watch()",
+        "language",
+        "language plpgsql",
+        "n",
+        "eaebcfccc053083007582e0356e5a7a8",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        120,
+        "function",
+        "function pgrst_ddl_watch()",
+        "schema",
+        "schema extensions",
+        "n",
+        "ba4b8fcc4afdd16fc86f2c202eb8663d",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        121,
+        "function",
+        "function pgrst_drop_watch()",
+        "language",
+        "language plpgsql",
+        "n",
+        "608309e4b141358c5cb3fe1d2da68e27",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        122,
+        "function",
+        "function pgrst_drop_watch()",
+        "schema",
+        "schema extensions",
+        "n",
+        "f7d2d9c7745589518a3c1b0ce8c5f977",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        123,
+        "function",
+        "function set_graphql_placeholder()",
+        "language",
+        "language plpgsql",
+        "n",
+        "ca31ea7d9d86f70b9f8e22a9bc68141a",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        124,
+        "function",
+        "function set_graphql_placeholder()",
+        "schema",
+        "schema extensions",
+        "n",
+        "1e1d1da6dc0cfb8b5db365c696397a42",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        125,
+        "function",
+        "function set_limit(real)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "7764d7f625798308611fe48255a39d80",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        126,
+        "function",
+        "function set_limit(real)",
+        "schema",
+        "schema extensions",
+        "n",
+        "46785fb665cd68378b221b6ee508bd1d",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        127,
+        "function",
+        "function show_limit()",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "c1be96fd8016bb312ad5842389194d7b",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        128,
+        "function",
+        "function show_limit()",
+        "schema",
+        "schema extensions",
+        "n",
+        "2b64870a28210afe914b0c53fffaaf89",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        129,
+        "function",
+        "function show_trgm(text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "79f8cb946cce8f3a07e5cb1486a2d45e",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        130,
+        "function",
+        "function show_trgm(text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "f1c4d0ce00cadc961891d3538d307a13",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        131,
+        "function",
+        "function similarity_dist(text,text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "7cc5fbdc0acaeadc40834af315d62e27",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        132,
+        "function",
+        "function similarity_dist(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "0b18a1c3e769441e1fdaa2104a4d6a28",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        133,
+        "function",
+        "function similarity_op(text,text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "980bd49794f738f44e33732cbac5bb50",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        134,
+        "function",
+        "function similarity_op(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "05d6bcd9fbcc03a18a4e876595fdf401",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        135,
+        "function",
+        "function similarity(text,text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "3e768d3fb0661b18b3ec8ff7545d8c56",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        136,
+        "function",
+        "function similarity(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "94781d7aff8545af1263073f2fe86e4e",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        137,
+        "function",
+        "function strict_word_similarity_commutator_op(text,text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "97bf94d3824cdf3d352ef1f7ef56e9a3",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        138,
+        "function",
+        "function strict_word_similarity_commutator_op(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "91dbc076b3c197330003526fda33f231",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        139,
+        "function",
+        "function strict_word_similarity_dist_commutator_op(text,text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "1f11155b25de9783dbb2000977f87325",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        140,
+        "function",
+        "function strict_word_similarity_dist_commutator_op(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "a32bca7322944d199b4ed8868d4b6734",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        141,
+        "function",
+        "function strict_word_similarity_dist_op(text,text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "c48835b1147dea4bb2f4f456194e37f4",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        142,
+        "function",
+        "function strict_word_similarity_dist_op(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "1c4781317f0a26f308aa6b88349e5e62",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        143,
+        "function",
+        "function strict_word_similarity_op(text,text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "526cb4c242074e0ee0d924047526d6f3",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        144,
+        "function",
+        "function strict_word_similarity_op(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "de6f36d55ae06120e570f031bfed363e",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        145,
+        "function",
+        "function strict_word_similarity(text,text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "66aa604d15a913471b4aa3a330b2d8be",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        146,
+        "function",
+        "function strict_word_similarity(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "9d3b7ee49eb1b3d73a84f808cccc8403",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        147,
+        "function",
+        "function unaccent_init(internal)",
+        "extension",
+        "extension unaccent",
+        "e",
+        "4e6cd84fcf230554b279e1e4e21fa438",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        148,
+        "function",
+        "function unaccent_init(internal)",
+        "schema",
+        "schema extensions",
+        "n",
+        "62b4e5349068b1fe1a07d8456c90995a",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        149,
+        "function",
+        "function unaccent_lexize(internal,internal,internal,internal)",
+        "extension",
+        "extension unaccent",
+        "e",
+        "aa7d3a85bcc491383a3e4da04b8cdd6f",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        150,
+        "function",
+        "function unaccent_lexize(internal,internal,internal,internal)",
+        "schema",
+        "schema extensions",
+        "n",
+        "6570a95365666e353fd76537d3ffb3e3",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        151,
+        "function",
+        "function unaccent(regdictionary,text)",
+        "extension",
+        "extension unaccent",
+        "e",
+        "5ae05cca8f77808183e8002678365492",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        152,
+        "function",
+        "function unaccent(regdictionary,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "affff44e7dbb12f1c74ec840dea3ba50",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        153,
+        "function",
+        "function unaccent(text)",
+        "extension",
+        "extension unaccent",
+        "e",
+        "f30597b545d74ec30842c379b70b4c61",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        154,
+        "function",
+        "function unaccent(text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "e92247d3f783425980ec97b18ef977e4",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        155,
+        "function",
+        "function uuid_generate_v1()",
+        "extension",
+        "extension uuid-ossp",
+        "e",
+        "bdf18a9c0313cd04e2a5620568d85779",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        156,
+        "function",
+        "function uuid_generate_v1()",
+        "schema",
+        "schema extensions",
+        "n",
+        "26426beb15b1973643fddd675e749cc5",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        157,
+        "function",
+        "function uuid_generate_v1mc()",
+        "extension",
+        "extension uuid-ossp",
+        "e",
+        "98ab651250c9110c34dd5b4f0b538df7",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        158,
+        "function",
+        "function uuid_generate_v1mc()",
+        "schema",
+        "schema extensions",
+        "n",
+        "07d6fd5529a0b79468f8cdf2c7dce924",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        159,
+        "function",
+        "function uuid_generate_v3(uuid,text)",
+        "extension",
+        "extension uuid-ossp",
+        "e",
+        "6ca37043b6f54564d0ccbe5658841785",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        160,
+        "function",
+        "function uuid_generate_v3(uuid,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "d815e923f6e4bd4cb3d1f6ab37142b76",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        161,
+        "function",
+        "function uuid_generate_v4()",
+        "extension",
+        "extension uuid-ossp",
+        "e",
+        "50ba8c90b37d6b14841f4b2d23a1643b",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        162,
+        "function",
+        "function uuid_generate_v4()",
+        "schema",
+        "schema extensions",
+        "n",
+        "a73673ad16afbaaeec22338d28a2b92f",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        163,
+        "function",
+        "function uuid_generate_v5(uuid,text)",
+        "extension",
+        "extension uuid-ossp",
+        "e",
+        "f78e45135a98bfe61cc0b5fd551f7998",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        164,
+        "function",
+        "function uuid_generate_v5(uuid,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "5de412ba23ce029d01d0ecf59d828842",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        165,
+        "function",
+        "function uuid_nil()",
+        "extension",
+        "extension uuid-ossp",
+        "e",
+        "4b83aad37f4526aa10a7d0ddd311bc7e",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        166,
+        "function",
+        "function uuid_nil()",
+        "schema",
+        "schema extensions",
+        "n",
+        "2c1db716339df2defae45de13822525b",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        167,
+        "function",
+        "function uuid_ns_dns()",
+        "extension",
+        "extension uuid-ossp",
+        "e",
+        "9346b88a42873524024cefb472348135",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        168,
+        "function",
+        "function uuid_ns_dns()",
+        "schema",
+        "schema extensions",
+        "n",
+        "501e26f55d1cf6df32ee621653673c5f",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        169,
+        "function",
+        "function uuid_ns_oid()",
+        "extension",
+        "extension uuid-ossp",
+        "e",
+        "97a09b84a4807f2fadc0143cc5892159",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        170,
+        "function",
+        "function uuid_ns_oid()",
+        "schema",
+        "schema extensions",
+        "n",
+        "bf20ffa760f2034af0ab9e85ab722671",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        171,
+        "function",
+        "function uuid_ns_url()",
+        "extension",
+        "extension uuid-ossp",
+        "e",
+        "7388714e9e474db8666314ae895275c3",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        172,
+        "function",
+        "function uuid_ns_url()",
+        "schema",
+        "schema extensions",
+        "n",
+        "e1c80bb100e0f07c2dd89886df202c85",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        173,
+        "function",
+        "function uuid_ns_x500()",
+        "extension",
+        "extension uuid-ossp",
+        "e",
+        "6e861b389fafc4b1dda8c98c62ed5707",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        174,
+        "function",
+        "function uuid_ns_x500()",
+        "schema",
+        "schema extensions",
+        "n",
+        "7ab02d38d6fc8e845c58874f01b2260f",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        175,
+        "function",
+        "function word_similarity_commutator_op(text,text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "3c4b88e93da5feca0e54658c24fcf02d",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        176,
+        "function",
+        "function word_similarity_commutator_op(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "b90223c8fc69e00e724d40783753a7ab",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        177,
+        "function",
+        "function word_similarity_dist_commutator_op(text,text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "593e56446b2ede8d628eaae3a76f1161",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        178,
+        "function",
+        "function word_similarity_dist_commutator_op(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "d0da47a11ee09a9ac06165ba3d5456a1",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        179,
+        "function",
+        "function word_similarity_dist_op(text,text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "45c6836690447c66d7ec96ce84b9f427",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        180,
+        "function",
+        "function word_similarity_dist_op(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "f70d8c9b560c5ee2963be569b5a59789",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        181,
+        "function",
+        "function word_similarity_op(text,text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "a61736efa4828137f97b4bdf89052bc9",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        182,
+        "function",
+        "function word_similarity_op(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "86c4a53fa5afc76000755c9393b72702",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        183,
+        "function",
+        "function word_similarity(text,text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "25c05d1ac5c3c095bc5d6786578067ee",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        184,
+        "function",
+        "function word_similarity(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "42c6721051122898d8ab17f46298098b",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        185,
+        "operator",
+        "operator %(text,text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "5399d99e019d00472031d1bf47ac44b0",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        186,
+        "operator",
+        "operator %(text,text)",
+        "function",
+        "function similarity_op(text,text)",
+        "n",
+        "1369e6d867e96616dc078b2dcfb7992c",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        187,
+        "operator",
+        "operator %(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "d2cf50f637330a9d6e6d8184cf73c718",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        188,
+        "operator",
+        "operator %>(text,text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "263debf3ff8d3156285850b0f6403c71",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        189,
+        "operator",
+        "operator %>(text,text)",
+        "function",
+        "function word_similarity_commutator_op(text,text)",
+        "n",
+        "090fb8ac3477e9c0681f2fce288ade01",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        190,
+        "operator",
+        "operator %>(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "a40bb4b6308a14c8e3c354838a6bedd9",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        191,
+        "operator",
+        "operator %>>(text,text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "5c606be77d3bf270d4a59c0db0321e0a",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        192,
+        "operator",
+        "operator %>>(text,text)",
+        "function",
+        "function strict_word_similarity_commutator_op(text,text)",
+        "n",
+        "49fed32397283bc622b6678c93f16ea7",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        193,
+        "operator",
+        "operator %>>(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "edbd19d54805bc7cccee76fdbad3225c",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        194,
+        "operator",
+        "operator <->(text,text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "5d05d24a30289d64b77120aaadfd0e3d",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        195,
+        "operator",
+        "operator <->(text,text)",
+        "function",
+        "function similarity_dist(text,text)",
+        "n",
+        "65662af4523dd136f7e1df05007b6270",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        196,
+        "operator",
+        "operator <->(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "13789b07d6c9bd3d68f83c560fb0892c",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        197,
+        "operator",
+        "operator <->>(text,text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "9ff414c92ccd20fccf35a5e7236a8fc7",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        198,
+        "operator",
+        "operator <->>(text,text)",
+        "function",
+        "function word_similarity_dist_commutator_op(text,text)",
+        "n",
+        "4c73318603ffce85fcddcb08a5025744",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        199,
+        "operator",
+        "operator <->>(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "29a902097aabe3d0cdd1ee0597d4648d",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        200,
+        "operator",
+        "operator <->>>(text,text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "fb451500da05317d69c54179738b7197",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        201,
+        "operator",
+        "operator <->>>(text,text)",
+        "function",
+        "function strict_word_similarity_dist_commutator_op(text,text)",
+        "n",
+        "33dbfc4b1a6d5f1ef92590f89028764b",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        202,
+        "operator",
+        "operator <->>>(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "f7a7419d2b5e6af6992dd2cb37b9980e",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        203,
+        "operator",
+        "operator <%(text,text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "5a67d5e65304a54f64a38a6fa1d57230",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        204,
+        "operator",
+        "operator <%(text,text)",
+        "function",
+        "function word_similarity_op(text,text)",
+        "n",
+        "0442fda70306edc5609aebeea6af4069",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        205,
+        "operator",
+        "operator <%(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "b874b84aa19c23ccf9627153e83e93ad",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        206,
+        "operator",
+        "operator <<->(text,text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "1897998dcf9694ff6b1861a367919cc5",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        207,
+        "operator",
+        "operator <<->(text,text)",
+        "function",
+        "function word_similarity_dist_op(text,text)",
+        "n",
+        "bd1db550b1917a6e18e573053ad0203b",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        208,
+        "operator",
+        "operator <<->(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "f5cc07104b7b685297871fe1fd2b70cd",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        209,
+        "operator",
+        "operator <<%(text,text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "4bac42e35b0b9101ab264589d6ceba10",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        210,
+        "operator",
+        "operator <<%(text,text)",
+        "function",
+        "function strict_word_similarity_op(text,text)",
+        "n",
+        "1cf7b0b9f74e8aa84c3939ca96fec355",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        211,
+        "operator",
+        "operator <<%(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "244daaa7e9af6a3b70b169e272064a55",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        212,
+        "operator",
+        "operator <<<->(text,text)",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "3252ca5efa850b7c3afdb229a7f621c9",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        213,
+        "operator",
+        "operator <<<->(text,text)",
+        "function",
+        "function strict_word_similarity_dist_op(text,text)",
+        "n",
+        "23b0fe2a6407551bad83f88cdbad4f9f",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        214,
+        "operator",
+        "operator <<<->(text,text)",
+        "schema",
+        "schema extensions",
+        "n",
+        "21c0a3cab9c121cb1d05cca29a3a7905",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        215,
+        "operator class",
+        "operator class gin_trgm_ops for access method gin",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "4959a13c4bb0becf8e4ac29620e09f81",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        216,
+        "operator class",
+        "operator class gin_trgm_ops for access method gin",
+        "operator family",
+        "operator family gin_trgm_ops for access method gin",
+        "a",
+        "85c0f063e9f585c1c7120ee26b963c6f",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        217,
+        "operator class",
+        "operator class gin_trgm_ops for access method gin",
+        "schema",
+        "schema extensions",
+        "n",
+        "863fbeb4b657bcee40fa446cf762ecf7",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        218,
+        "operator class",
+        "operator class gist_trgm_ops for access method gist",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "422ad381e85fc5e9718dcf74b57854f9",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        219,
+        "operator class",
+        "operator class gist_trgm_ops for access method gist",
+        "operator family",
+        "operator family gist_trgm_ops for access method gist",
+        "a",
+        "a2ec5e7420b9a0e4627d8185280541e6",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        220,
+        "operator class",
+        "operator class gist_trgm_ops for access method gist",
+        "schema",
+        "schema extensions",
+        "n",
+        "c65fe6a3f32a020483514dc698acd3fe",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        221,
+        "operator class",
+        "operator class gist_trgm_ops for access method gist",
+        "type",
+        "type gtrgm",
+        "n",
+        "032ae9771b9437e7239c1f24408c2a5f",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        222,
+        "operator family",
+        "operator family gin_trgm_ops for access method gin",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "6d2c0ec431fc1145af031d500c81f497",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        223,
+        "operator family",
+        "operator family gin_trgm_ops for access method gin",
+        "schema",
+        "schema extensions",
+        "n",
+        "da60c8913c8dc8b8abf7d1c0d4cf9092",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        224,
+        "operator family",
+        "operator family gist_trgm_ops for access method gist",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "7d8191e6b75d7d11cacab63cfb8798d0",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        225,
+        "operator family",
+        "operator family gist_trgm_ops for access method gist",
+        "schema",
+        "schema extensions",
+        "n",
+        "19c384dd55f63bcf1c69bead1ad8413b",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        226,
+        "text search dictionary",
+        "text search dictionary unaccent",
+        "extension",
+        "extension unaccent",
+        "e",
+        "1b078015b141a396223aa2dd1d0248d5",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        227,
+        "text search dictionary",
+        "text search dictionary unaccent",
+        "schema",
+        "schema extensions",
+        "n",
+        "16fe34816f9adc533f0c08f253ab9299",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        228,
+        "text search dictionary",
+        "text search dictionary unaccent",
+        "text search template",
+        "text search template unaccent",
+        "n",
+        "212ef1007ff0c70a4e25c5e0c44860c2",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        229,
+        "text search template",
+        "text search template unaccent",
+        "extension",
+        "extension unaccent",
+        "e",
+        "f0b494e9b5b8f8948eb7b9c76aef7060",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        230,
+        "text search template",
+        "text search template unaccent",
+        "function",
+        "function unaccent_init(internal)",
+        "n",
+        "801877d5f345b7124fcc162779942146",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        231,
+        "text search template",
+        "text search template unaccent",
+        "function",
+        "function unaccent_lexize(internal,internal,internal,internal)",
+        "n",
+        "407b6ecb23571f611b4aa4d199c83b99",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        232,
+        "text search template",
+        "text search template unaccent",
+        "schema",
+        "schema extensions",
+        "n",
+        "fe0d2b93ba7c30c155635c5c1fe37b22",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        233,
+        "type",
+        "type gtrgm",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "1fb262d851cd8c382d8e2969b20c64c9",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        234,
+        "type",
+        "type gtrgm",
+        "function",
+        "function gtrgm_in(cstring)",
+        "n",
+        "d05e6440358ee04113a1d75d3e36f7c0",
+        "TYPE_ROW_SCHEMA_OR_ARRAY_LINK"
+      ],
+      [
+        235,
+        "type",
+        "type gtrgm",
+        "function",
+        "function gtrgm_out(gtrgm)",
+        "n",
+        "3afe2da74d18ab3c0d0cff250d8f547d",
+        "TYPE_ROW_SCHEMA_OR_ARRAY_LINK"
+      ],
+      [
+        236,
+        "type",
+        "type gtrgm",
+        "schema",
+        "schema extensions",
+        "n",
+        "357f0412e11a9edd2783a3c0ddfe4148",
+        "TYPE_ROW_SCHEMA_OR_ARRAY_LINK"
+      ],
+      [
+        237,
+        "type",
+        "type gtrgm[]",
+        "extension",
+        "extension pg_trgm",
+        "e",
+        "c9dc9695e231878b45340b6bfdaf7516",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        238,
+        "type",
+        "type gtrgm[]",
+        "type",
+        "type gtrgm",
+        "i",
+        "87df4b5628bf8fafb8b9038d7aab88b1",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        239,
+        "type",
+        "type pg_stat_statements",
+        "extension",
+        "extension pg_stat_statements",
+        "e",
+        "2f9774f4eb44c54656a029daefeef98a",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        240,
+        "type",
+        "type pg_stat_statements",
+        "view",
+        "view pg_stat_statements",
+        "i",
+        "0920cb1c50b64361887a4d1e865a4108",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        241,
+        "type",
+        "type pg_stat_statements_info",
+        "extension",
+        "extension pg_stat_statements",
+        "e",
+        "d9df49a10bec230cba696cedfe706a9a",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        242,
+        "type",
+        "type pg_stat_statements_info",
+        "view",
+        "view pg_stat_statements_info",
+        "i",
+        "962953b659b779f09e4fb522f5a501b0",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        243,
+        "type",
+        "type pg_stat_statements_info[]",
+        "extension",
+        "extension pg_stat_statements",
+        "e",
+        "ddc28c875846ce2ff8bc6c07dbe772d1",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        244,
+        "type",
+        "type pg_stat_statements_info[]",
+        "type",
+        "type pg_stat_statements_info",
+        "i",
+        "e9b4a63f918f24da7247b7acda602e50",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        245,
+        "type",
+        "type pg_stat_statements[]",
+        "extension",
+        "extension pg_stat_statements",
+        "e",
+        "fcc8959bceb2c25e89c96eb892bdb9a0",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        246,
+        "type",
+        "type pg_stat_statements[]",
+        "type",
+        "type pg_stat_statements",
+        "i",
+        "c8eab016234b0a96cef22f19f2563bac",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        247,
+        "view",
+        "view pg_stat_statements",
+        "extension",
+        "extension pg_stat_statements",
+        "e",
+        "09796b71ad287400dab76463bca4087b",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        248,
+        "view",
+        "view pg_stat_statements",
+        "schema",
+        "schema extensions",
+        "n",
+        "71d4f32a05f2c9d69a58b4ba103c03f7",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ],
+      [
+        249,
+        "view",
+        "view pg_stat_statements_info",
+        "extension",
+        "extension pg_stat_statements",
+        "e",
+        "1910e775a2f14f7b3f59c43424cc679b",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        250,
+        "view",
+        "view pg_stat_statements_info",
+        "schema",
+        "schema extensions",
+        "n",
+        "aecf3b0a86c08349040f372f3ed720a8",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ]
+    ],
+    "graphql_public": [
+      [
+        1,
+        "function",
+        "function graphql_public.graphql(text,text,jsonb,jsonb)",
+        "language",
+        "language plpgsql",
+        "n",
+        "17fd21d3b9b1e7c88783e11740fa0dc0",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        2,
+        "function",
+        "function graphql_public.graphql(text,text,jsonb,jsonb)",
+        "schema",
+        "schema graphql_public",
+        "n",
+        "6120563f2d060718a53019639eb183a6",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ]
+    ],
+    "pgbouncer": [
+      [
+        1,
+        "function",
+        "function pgbouncer.get_auth(text)",
+        "language",
+        "language plpgsql",
+        "n",
+        "c186783aa42ccf6d6542e4cd11c3cc5d",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        2,
+        "function",
+        "function pgbouncer.get_auth(text)",
+        "schema",
+        "schema pgbouncer",
+        "n",
+        "6802ee5be1aa6e4d3a9287cc47c59b42",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ]
+    ],
+    "realtime": [
+      [
+        1,
+        "composite type",
+        "composite type realtime.user_defined_filter",
+        "type",
+        "type realtime.user_defined_filter",
+        "i",
+        "7bc8f3a0e340de878d5a26932412975c",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        2,
+        "composite type",
+        "composite type realtime.wal_column",
+        "type",
+        "type realtime.wal_column",
+        "i",
+        "f77481f2df755f57925d8e2b34ac2729",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        3,
+        "composite type",
+        "composite type realtime.wal_rls",
+        "type",
+        "type realtime.wal_rls",
+        "i",
+        "64e9b00def2b11c72d128a3c7503a511",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        4,
+        "composite type column",
+        "column op of composite type realtime.user_defined_filter",
+        "type",
+        "type realtime.equality_op",
+        "n",
+        "4257f82eded1c7c882078f6adb6d7d6b",
+        "TYPE_ROW_SCHEMA_OR_ARRAY_LINK"
+      ],
+      [
+        5,
+        "function",
+        "function realtime.\"cast\"(text,regtype)",
+        "language",
+        "language plpgsql",
+        "n",
+        "bd174d1c9d8211c177c108b6ed77926d",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        6,
+        "function",
+        "function realtime.\"cast\"(text,regtype)",
+        "schema",
+        "schema realtime",
+        "n",
+        "e08f204bcb677ba23874f96861704bbc",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        7,
+        "function",
+        "function realtime.apply_rls(jsonb,integer)",
+        "language",
+        "language plpgsql",
+        "n",
+        "0242de4cb5c6342e76d06b845ac5decb",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        8,
+        "function",
+        "function realtime.apply_rls(jsonb,integer)",
+        "schema",
+        "schema realtime",
+        "n",
+        "94e381a9594f753d0e08992adecbeaf2",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        9,
+        "function",
+        "function realtime.apply_rls(jsonb,integer)",
+        "type",
+        "type realtime.wal_rls",
+        "n",
+        "b20fed830a3482fe19f01adc01f0e4fb",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        10,
+        "function",
+        "function realtime.authorize(text,text,text,text,text,text[],text[])",
+        "language",
+        "language plpgsql",
+        "n",
+        "9fc8a7388d50c767d086d3d615b7d9a0",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        11,
+        "function",
+        "function realtime.authorize(text,text,text,text,text,text[],text[])",
+        "schema",
+        "schema realtime",
+        "n",
+        "d142c84aa3a18ce8ffa67629b11fff6d",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        12,
+        "function",
+        "function realtime.broadcast_changes(text,text,text,text,text,record,record,text)",
+        "language",
+        "language plpgsql",
+        "n",
+        "e7e5d7ba8ddf6d1fd741b79e51f494d4",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        13,
+        "function",
+        "function realtime.broadcast_changes(text,text,text,text,text,record,record,text)",
+        "schema",
+        "schema realtime",
+        "n",
+        "4d725332d7764219d208f8753dd1ffbe",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        14,
+        "function",
+        "function realtime.build_prepared_statement_sql(text,regclass,realtime.wal_column[])",
+        "schema",
+        "schema realtime",
+        "n",
+        "f76b49cbc699ad7d1d1479e6eeee3b5b",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        15,
+        "function",
+        "function realtime.build_prepared_statement_sql(text,regclass,realtime.wal_column[])",
+        "type",
+        "type realtime.wal_column[]",
+        "n",
+        "ec36c411c057368c71ae741d4b304ce0",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        16,
+        "function",
+        "function realtime.check_equality_op(realtime.equality_op,regtype,text,text,boolean)",
+        "language",
+        "language plpgsql",
+        "n",
+        "678010b4a9eb6b503190a30bcb19b7d0",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        17,
+        "function",
+        "function realtime.check_equality_op(realtime.equality_op,regtype,text,text,boolean)",
+        "schema",
+        "schema realtime",
+        "n",
+        "d38622acaf34deb6600e2e0c7f97d147",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        18,
+        "function",
+        "function realtime.check_equality_op(realtime.equality_op,regtype,text,text,boolean)",
+        "type",
+        "type realtime.equality_op",
+        "n",
+        "395412d7bc4003a12c5ee5795d00e375",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        19,
+        "function",
+        "function realtime.check_equality_op(realtime.equality_op,regtype,text,text)",
+        "language",
+        "language plpgsql",
+        "n",
+        "e2590b46ee59484a583cd055e5f0fa2e",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        20,
+        "function",
+        "function realtime.check_equality_op(realtime.equality_op,regtype,text,text)",
+        "schema",
+        "schema realtime",
+        "n",
+        "63a0dd4e1e8c41915eb0c09c69c257e3",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        21,
+        "function",
+        "function realtime.check_equality_op(realtime.equality_op,regtype,text,text)",
+        "type",
+        "type realtime.equality_op",
+        "n",
+        "69fc0a7fe8a8cae49391a20c82de2340",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        22,
+        "function",
+        "function realtime.is_visible_through_filters(realtime.wal_column[],realtime.user_defined_filter[])",
+        "schema",
+        "schema realtime",
+        "n",
+        "944d2fe9f95bf6a1e3071dc19b204a13",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        23,
+        "function",
+        "function realtime.is_visible_through_filters(realtime.wal_column[],realtime.user_defined_filter[])",
+        "type",
+        "type realtime.user_defined_filter[]",
+        "n",
+        "08cd963cc33ecfd4b8162601704557c2",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        24,
+        "function",
+        "function realtime.is_visible_through_filters(realtime.wal_column[],realtime.user_defined_filter[])",
+        "type",
+        "type realtime.wal_column[]",
+        "n",
+        "91fbb6a5f62817656fbb052d61aee72b",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        25,
+        "function",
+        "function realtime.list_changes_sync(name,name,integer,integer)",
+        "schema",
+        "schema realtime",
+        "n",
+        "00991346bce2b76b3ffcf6ccad3e5c28",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        26,
+        "function",
+        "function realtime.list_changes(name,name,integer,integer)",
+        "schema",
+        "schema realtime",
+        "n",
+        "6c9f6594adbe88334ee449368a94d1de",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        27,
+        "function",
+        "function realtime.quote_wal2json(regclass)",
+        "schema",
+        "schema realtime",
+        "n",
+        "6901a1f91477a56785b777762456b9c8",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        28,
+        "function",
+        "function realtime.send_binary(bytea,text,text,boolean)",
+        "language",
+        "language plpgsql",
+        "n",
+        "74a66c9b32401b4405c1c0c639c27f14",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        29,
+        "function",
+        "function realtime.send_binary(bytea,text,text,boolean)",
+        "schema",
+        "schema realtime",
+        "n",
+        "f050ec9639294b80825798a32b06c3d1",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        30,
+        "function",
+        "function realtime.send(jsonb,text,text,boolean)",
+        "language",
+        "language plpgsql",
+        "n",
+        "41a94f7f163d7bf1232b79f526b69ea9",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        31,
+        "function",
+        "function realtime.send(jsonb,text,text,boolean)",
+        "schema",
+        "schema realtime",
+        "n",
+        "cce67e4098ad44ddadf2af9c7e6d03f9",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        32,
+        "function",
+        "function realtime.settled_changes(name,integer,text[])",
+        "language",
+        "language plpgsql",
+        "n",
+        "da70668a9f355b34cf11ccac36fe7505",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        33,
+        "function",
+        "function realtime.settled_changes(name,integer,text[])",
+        "schema",
+        "schema realtime",
+        "n",
+        "037c4081e2ce955cbfe8bfc14068efa4",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        34,
+        "function",
+        "function realtime.subscription_check_filters()",
+        "language",
+        "language plpgsql",
+        "n",
+        "2b1af5f75415daf9a25d0b12876e186e",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        35,
+        "function",
+        "function realtime.subscription_check_filters()",
+        "schema",
+        "schema realtime",
+        "n",
+        "3ae2fdd4f31e917675b375c2446722d9",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        36,
+        "function",
+        "function realtime.to_regrole(text)",
+        "schema",
+        "schema realtime",
+        "n",
+        "4883f405a80fca3befe97dd010f80dec",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        37,
+        "function",
+        "function realtime.topic()",
+        "schema",
+        "schema realtime",
+        "n",
+        "ef12afbf5c78ba04a43fdf495c0f2dbb",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        38,
+        "function",
+        "function realtime.wal2json_escape_identifier(text)",
+        "schema",
+        "schema realtime",
+        "n",
+        "46a3d9876b5bd1e7505959cd207f2304",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        39,
+        "index",
+        "index realtime.ix_realtime_subscription_entity",
+        "table column",
+        "column entity of table realtime.subscription",
+        "a",
+        "a8291757822b47d363f8a56aca1832b4",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        40,
+        "index",
+        "index realtime.messages_inserted_at_topic_index",
+        "table column",
+        "column extension of table realtime.messages",
+        "a",
+        "00e9f57654a58fac44136d0d9dfbf659",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        41,
+        "index",
+        "index realtime.messages_inserted_at_topic_index",
+        "table column",
+        "column inserted_at of table realtime.messages",
+        "a",
+        "1ec0b8e1f9d1a9eef5a336999f188843",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        42,
+        "index",
+        "index realtime.messages_inserted_at_topic_index",
+        "table column",
+        "column private of table realtime.messages",
+        "a",
+        "e34292278ea1402319b5845c5e11ac7e",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        43,
+        "index",
+        "index realtime.messages_inserted_at_topic_index",
+        "table column",
+        "column topic of table realtime.messages",
+        "a",
+        "653b1782a8270aa3f59e8ee5e9923507",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        44,
+        "index",
+        "index realtime.messages_pkey",
+        "table constraint",
+        "constraint messages_pkey on table realtime.messages",
+        "i",
+        "86db5c3c975d8516cab0f99c231ff9bd",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        45,
+        "index",
+        "index realtime.pk_subscription",
+        "table constraint",
+        "constraint pk_subscription on table realtime.subscription",
+        "i",
+        "731033518e41c2d73e9c7a040bdececd",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        46,
+        "index",
+        "index realtime.schema_migrations_pkey",
+        "table constraint",
+        "constraint schema_migrations_pkey on table realtime.schema_migrations",
+        "i",
+        "b3e3b8a9f652ccedad7be1f046acf9b3",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        47,
+        "index",
+        "index realtime.subscription_subscription_id_entity_filters_action_filter_selec",
+        "table column",
+        "column action_filter of table realtime.subscription",
+        "a",
+        "3b3e2e2169f084225c715b9447c0f931",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        48,
+        "index",
+        "index realtime.subscription_subscription_id_entity_filters_action_filter_selec",
+        "table column",
+        "column entity of table realtime.subscription",
+        "a",
+        "6305cec3803f3dbb647b2ba35c796a21",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        49,
+        "index",
+        "index realtime.subscription_subscription_id_entity_filters_action_filter_selec",
+        "table column",
+        "column filters of table realtime.subscription",
+        "a",
+        "8bf230cfad3704dc530e6d00a8426c85",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        50,
+        "index",
+        "index realtime.subscription_subscription_id_entity_filters_action_filter_selec",
+        "table column",
+        "column selected_columns of table realtime.subscription",
+        "a",
+        "d4a26957b2f0b56acf2699e71a465993",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        51,
+        "index",
+        "index realtime.subscription_subscription_id_entity_filters_action_filter_selec",
+        "table column",
+        "column subscription_id of table realtime.subscription",
+        "a",
+        "b5f2424d68a51a8c75dd6105bfa9288d",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        52,
+        "sequence",
+        "sequence realtime.subscription_id_seq",
+        "schema",
+        "schema realtime",
+        "n",
+        "aa90b77fd2a8079b2a58e03149abd0e0",
+        "SEQUENCE_OWNERSHIP"
+      ],
+      [
+        53,
+        "sequence",
+        "sequence realtime.subscription_id_seq",
+        "table column",
+        "column id of table realtime.subscription",
+        "i",
+        "550f0f5e9e08ad66f6446b256474d8a1",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        54,
+        "table",
+        "table realtime.messages",
+        "schema",
+        "schema realtime",
+        "n",
+        "2f66424356c767d80fe5d6de75ae88e3",
+        "SCHEMA_OWNERSHIP"
+      ],
+      [
+        55,
+        "table",
+        "table realtime.schema_migrations",
+        "schema",
+        "schema realtime",
+        "n",
+        "d10697e93e6b04fe8eac3eaccaf40313",
+        "SCHEMA_OWNERSHIP"
+      ],
+      [
+        56,
+        "table",
+        "table realtime.subscription",
+        "schema",
+        "schema realtime",
+        "n",
+        "2a3c99e37295237eafbaee08e3732c8a",
+        "SCHEMA_OWNERSHIP"
+      ],
+      [
+        57,
+        "table column",
+        "column filters of table realtime.subscription",
+        "type",
+        "type realtime.user_defined_filter[]",
+        "n",
+        "862a462f36b6392947361a29744ad995",
+        "COLUMN_TYPE_OR_TABLE_DEPENDENCY"
+      ],
+      [
+        58,
+        "table column",
+        "column inserted_at of table realtime.messages",
+        "table",
+        "table realtime.messages",
+        "i",
+        "78140c92c4918ae51e4258a8173169c1",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        59,
+        "table constraint",
+        "constraint messages_payload_exclusive on table realtime.messages",
+        "table column",
+        "column binary_payload of table realtime.messages",
+        "a",
+        "35fc15f848b9c47434cf5b65317eed9f",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        60,
+        "table constraint",
+        "constraint messages_payload_exclusive on table realtime.messages",
+        "table column",
+        "column binary_payload of table realtime.messages",
+        "n",
+        "ef3c3acbfed973e97a425d3ad4c71a63",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        61,
+        "table constraint",
+        "constraint messages_payload_exclusive on table realtime.messages",
+        "table column",
+        "column payload of table realtime.messages",
+        "a",
+        "c36a8c9b7ecad15fc91d80aac133dcfd",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        62,
+        "table constraint",
+        "constraint messages_payload_exclusive on table realtime.messages",
+        "table column",
+        "column payload of table realtime.messages",
+        "n",
+        "8efbb3f6468c5af4dfb631949ea45407",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        63,
+        "table constraint",
+        "constraint messages_pkey on table realtime.messages",
+        "table column",
+        "column id of table realtime.messages",
+        "a",
+        "1f8a89866486408fbdff8cc72be4df68",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        64,
+        "table constraint",
+        "constraint messages_pkey on table realtime.messages",
+        "table column",
+        "column inserted_at of table realtime.messages",
+        "a",
+        "9fd506bcab71c1a74da1ef8eb0812095",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        65,
+        "table constraint",
+        "constraint pk_subscription on table realtime.subscription",
+        "table column",
+        "column id of table realtime.subscription",
+        "a",
+        "d2bf9fa036964ddff55a202fc47c5e8e",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        66,
+        "table constraint",
+        "constraint schema_migrations_pkey on table realtime.schema_migrations",
+        "table column",
+        "column version of table realtime.schema_migrations",
+        "a",
+        "5557840cec2937af6432e296f4446528",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        67,
+        "table constraint",
+        "constraint subscription_action_filter_check on table realtime.subscription",
+        "table column",
+        "column action_filter of table realtime.subscription",
+        "a",
+        "0568184ac6d2589f494788131c1971a6",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        68,
+        "table constraint",
+        "constraint subscription_action_filter_check on table realtime.subscription",
+        "table column",
+        "column action_filter of table realtime.subscription",
+        "n",
+        "3b7540e7bf454934cb5ea8690c872bcb",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        69,
+        "type",
+        "type realtime.action",
+        "schema",
+        "schema realtime",
+        "n",
+        "ff5bc3d4f116906e802fab2e5082e493",
+        "TYPE_ROW_SCHEMA_OR_ARRAY_LINK"
+      ],
+      [
+        70,
+        "type",
+        "type realtime.action[]",
+        "type",
+        "type realtime.action",
+        "i",
+        "80d77a730af5b1653709ea3fbce501ad",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        71,
+        "type",
+        "type realtime.equality_op",
+        "schema",
+        "schema realtime",
+        "n",
+        "63572a7954865565f04ea5864280279b",
+        "TYPE_ROW_SCHEMA_OR_ARRAY_LINK"
+      ],
+      [
+        72,
+        "type",
+        "type realtime.equality_op[]",
+        "type",
+        "type realtime.equality_op",
+        "i",
+        "26020948c95d9999842ea0ea87d697e1",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        73,
+        "type",
+        "type realtime.messages",
+        "table",
+        "table realtime.messages",
+        "i",
+        "b1ef73dcfd4b446dd4aae1042ff17561",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        74,
+        "type",
+        "type realtime.messages[]",
+        "type",
+        "type realtime.messages",
+        "i",
+        "8a88adffba52bd707247d989d6f3a226",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        75,
+        "type",
+        "type realtime.schema_migrations",
+        "table",
+        "table realtime.schema_migrations",
+        "i",
+        "6caa4b07fc400312485c216cacb5da02",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        76,
+        "type",
+        "type realtime.schema_migrations[]",
+        "type",
+        "type realtime.schema_migrations",
+        "i",
+        "ad533df94ca8368c172406b229b19f80",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        77,
+        "type",
+        "type realtime.subscription",
+        "table",
+        "table realtime.subscription",
+        "i",
+        "9192c49d1aaf157056f83b0de83cd1b7",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        78,
+        "type",
+        "type realtime.subscription[]",
+        "type",
+        "type realtime.subscription",
+        "i",
+        "cd1dc25b3d42048964b521a01751a6e8",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        79,
+        "type",
+        "type realtime.user_defined_filter",
+        "schema",
+        "schema realtime",
+        "n",
+        "93d7d3dcd1214f399ae5bbf88a15f1cb",
+        "TYPE_ROW_SCHEMA_OR_ARRAY_LINK"
+      ],
+      [
+        80,
+        "type",
+        "type realtime.user_defined_filter[]",
+        "type",
+        "type realtime.user_defined_filter",
+        "i",
+        "7548ac624d5a61a430921c20945c2825",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        81,
+        "type",
+        "type realtime.wal_column",
+        "schema",
+        "schema realtime",
+        "n",
+        "70169fd8e400e69da96a9f89c1a543fa",
+        "TYPE_ROW_SCHEMA_OR_ARRAY_LINK"
+      ],
+      [
+        82,
+        "type",
+        "type realtime.wal_column[]",
+        "type",
+        "type realtime.wal_column",
+        "i",
+        "70ad27e4aabade20e9997fe4c6f3457e",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        83,
+        "type",
+        "type realtime.wal_rls",
+        "schema",
+        "schema realtime",
+        "n",
+        "48aac4663346149e6c74099d00559577",
+        "TYPE_ROW_SCHEMA_OR_ARRAY_LINK"
+      ],
+      [
+        84,
+        "type",
+        "type realtime.wal_rls[]",
+        "type",
+        "type realtime.wal_rls",
+        "i",
+        "aaef526cca602991d2be99195fcf7b73",
+        "INTERNAL_CATALOG_LINK"
+      ]
+    ],
+    "storage": [
+      [
+        1,
+        "function",
+        "function storage.allow_any_operation(text[])",
+        "schema",
+        "schema storage",
+        "n",
+        "221bcfacd2c3b944d0b19322f1ff2d5b",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        2,
+        "function",
+        "function storage.allow_only_operation(text)",
+        "schema",
+        "schema storage",
+        "n",
+        "7bafb406577a410cb5cc0c1ccd8a62b1",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        3,
+        "function",
+        "function storage.can_insert_object(text,text,uuid,jsonb)",
+        "language",
+        "language plpgsql",
+        "n",
+        "384fb763c82a178c1057b547ea042541",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        4,
+        "function",
+        "function storage.can_insert_object(text,text,uuid,jsonb)",
+        "schema",
+        "schema storage",
+        "n",
+        "5c5623e35ccc596d6941f2b32daab192",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        5,
+        "function",
+        "function storage.enforce_bucket_lifecycle_service_role()",
+        "language",
+        "language plpgsql",
+        "n",
+        "9e0b913d411aa0b94c117b1e0bf05847",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        6,
+        "function",
+        "function storage.enforce_bucket_lifecycle_service_role()",
+        "schema",
+        "schema storage",
+        "n",
+        "b775abe0fcebac2e205c584f97c9ef60",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        7,
+        "function",
+        "function storage.enforce_bucket_name_length()",
+        "language",
+        "language plpgsql",
+        "n",
+        "1afd603559ad683b4e85ee4e0cfd8126",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        8,
+        "function",
+        "function storage.enforce_bucket_name_length()",
+        "schema",
+        "schema storage",
+        "n",
+        "c700642e00dbd60188edc18e58010d53",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        9,
+        "function",
+        "function storage.extension(text)",
+        "language",
+        "language plpgsql",
+        "n",
+        "d58f2d7c7fb473c1ce5a2f50f4e7849a",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        10,
+        "function",
+        "function storage.extension(text)",
+        "schema",
+        "schema storage",
+        "n",
+        "8e03affe7f6702a1b59c08ee826f2248",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        11,
+        "function",
+        "function storage.filename(text)",
+        "language",
+        "language plpgsql",
+        "n",
+        "7408dbef8bb89c402402bc3c14010089",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        12,
+        "function",
+        "function storage.filename(text)",
+        "schema",
+        "schema storage",
+        "n",
+        "85c61229a19ee22d2ae0ba070b11f207",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        13,
+        "function",
+        "function storage.foldername(text)",
+        "language",
+        "language plpgsql",
+        "n",
+        "363808341fee568a6ac1621516e5c9e0",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        14,
+        "function",
+        "function storage.foldername(text)",
+        "schema",
+        "schema storage",
+        "n",
+        "9b42ae43f405437b72265a00401a8b7f",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        15,
+        "function",
+        "function storage.get_common_prefix(text,text,text)",
+        "schema",
+        "schema storage",
+        "n",
+        "dfbe8a055491f95edaf51b3c651c7daf",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        16,
+        "function",
+        "function storage.get_size_by_bucket(text,text)",
+        "language",
+        "language plpgsql",
+        "n",
+        "98999a18af39a58168c91721e2399948",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        17,
+        "function",
+        "function storage.get_size_by_bucket(text,text)",
+        "schema",
+        "schema storage",
+        "n",
+        "dd65a93e93ecf65192511a399d8c5aa3",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        18,
+        "function",
+        "function storage.list_multipart_uploads_with_delimiter(text,text,text,integer,text,text,text)",
+        "schema",
+        "schema storage",
+        "n",
+        "42be366ad3091a98bd464057c2cf595b",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        19,
+        "function",
+        "function storage.list_objects_with_delimiter(text,text,text,integer,text,text,text,text,text,timestamp with time zone,text)",
+        "language",
+        "language plpgsql",
+        "n",
+        "dec6a214b0dc93c35c754da559e7d382",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        20,
+        "function",
+        "function storage.list_objects_with_delimiter(text,text,text,integer,text,text,text,text,text,timestamp with time zone,text)",
+        "schema",
+        "schema storage",
+        "n",
+        "67949c9f95c7286df87e5149c6f80354",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        21,
+        "function",
+        "function storage.operation()",
+        "language",
+        "language plpgsql",
+        "n",
+        "1083ede219782939e758d27f3c76f43a",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        22,
+        "function",
+        "function storage.operation()",
+        "schema",
+        "schema storage",
+        "n",
+        "527a6bab87d7abc820d98ae19a60b600",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        23,
+        "function",
+        "function storage.protect_bucket_control_columns()",
+        "language",
+        "language plpgsql",
+        "n",
+        "7b1c2becfbda71269e5e97164fa30559",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        24,
+        "function",
+        "function storage.protect_bucket_control_columns()",
+        "schema",
+        "schema storage",
+        "n",
+        "47c26d9a64c55d697a3e998231b39bbb",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        25,
+        "function",
+        "function storage.protect_delete()",
+        "language",
+        "language plpgsql",
+        "n",
+        "27cda8280249debd4add232974cc4941",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        26,
+        "function",
+        "function storage.protect_delete()",
+        "schema",
+        "schema storage",
+        "n",
+        "5264694fa3b2888f2c9a7a7fabacbecf",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        27,
+        "function",
+        "function storage.search_by_timestamp(text,text,integer,integer,text,text,text,text,text,text,text)",
+        "language",
+        "language plpgsql",
+        "n",
+        "3a0e83dabcb266b285530582f348bd53",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        28,
+        "function",
+        "function storage.search_by_timestamp(text,text,integer,integer,text,text,text,text,text,text,text)",
+        "schema",
+        "schema storage",
+        "n",
+        "2202674b4d310799b2c573e5109dd83b",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        29,
+        "function",
+        "function storage.search_v2(text,text,integer,integer,text,text,text,text,text,text,timestamp with time zone,text,boolean)",
+        "language",
+        "language plpgsql",
+        "n",
+        "05aa8e96a6033c46f640f6740263ade8",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        30,
+        "function",
+        "function storage.search_v2(text,text,integer,integer,text,text,text,text,text,text,timestamp with time zone,text,boolean)",
+        "schema",
+        "schema storage",
+        "n",
+        "6deffc654b4c2bb02f20d0362aa45a1e",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        31,
+        "function",
+        "function storage.search(text,text,integer,integer,integer,text,text,text,text,text)",
+        "language",
+        "language plpgsql",
+        "n",
+        "b195ad83d1b10267780d17073aba9a15",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        32,
+        "function",
+        "function storage.search(text,text,integer,integer,integer,text,text,text,text,text)",
+        "schema",
+        "schema storage",
+        "n",
+        "e37e0fe32073e2f81b086e3313489e09",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        33,
+        "function",
+        "function storage.update_updated_at_column()",
+        "language",
+        "language plpgsql",
+        "n",
+        "c789ac41e37a5bfbfa4353972b87d9ea",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        34,
+        "function",
+        "function storage.update_updated_at_column()",
+        "schema",
+        "schema storage",
+        "n",
+        "b4a4ec2cdac726aee8ba1394be6ff9ab",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        35,
+        "index",
+        "index storage.bname",
+        "table column",
+        "column name of table storage.buckets",
+        "a",
+        "d8426868632dda676e520a334e5af214",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        36,
+        "index",
+        "index storage.buckets_analytics_pkey",
+        "table constraint",
+        "constraint buckets_analytics_pkey on table storage.buckets_analytics",
+        "i",
+        "5a193919b7b5299cb871b032d6c4b3f9",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        37,
+        "index",
+        "index storage.buckets_analytics_unique_name_idx",
+        "table column",
+        "column deleted_at of table storage.buckets_analytics",
+        "a",
+        "6f57a457e1c76c6df002e858bad4e94f",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        38,
+        "index",
+        "index storage.buckets_analytics_unique_name_idx",
+        "table column",
+        "column name of table storage.buckets_analytics",
+        "a",
+        "4fe1c0843886997634f838e3eb5b968f",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        39,
+        "index",
+        "index storage.buckets_pkey",
+        "table constraint",
+        "constraint buckets_pkey on table storage.buckets",
+        "i",
+        "7f70d27ad7f289d7b0d4e3af2c9177e4",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        40,
+        "index",
+        "index storage.buckets_vectors_pkey",
+        "table constraint",
+        "constraint buckets_vectors_pkey on table storage.buckets_vectors",
+        "i",
+        "59dfc6263def663d25857cec31546972",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        41,
+        "index",
+        "index storage.idx_multipart_uploads_list",
+        "table column",
+        "column bucket_id of table storage.s3_multipart_uploads",
+        "a",
+        "fa51e85074f5af65394e97ad6461d507",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        42,
+        "index",
+        "index storage.idx_multipart_uploads_list",
+        "table column",
+        "column created_at of table storage.s3_multipart_uploads",
+        "a",
+        "14428f18ab8623cd5b87c0ceb4068cd1",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        43,
+        "index",
+        "index storage.idx_multipart_uploads_list",
+        "table column",
+        "column key of table storage.s3_multipart_uploads",
+        "a",
+        "9b079220598cc41bff624e2a122e2f64",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        44,
+        "index",
+        "index storage.idx_objects_bucket_id_name",
+        "table column",
+        "column bucket_id of table storage.objects",
+        "a",
+        "a8e0504ef48cd3ab5b8cfe0bb7f2dc46",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        45,
+        "index",
+        "index storage.idx_objects_bucket_id_name",
+        "table column",
+        "column name of table storage.objects",
+        "a",
+        "e49d58f69f051c79891c1176324a7699",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        46,
+        "index",
+        "index storage.idx_objects_bucket_id_name_lower",
+        "table column",
+        "column bucket_id of table storage.objects",
+        "a",
+        "9bfd2098b7b4ef14cfbc6aeacb8ae5eb",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        47,
+        "index",
+        "index storage.idx_objects_bucket_id_name_lower",
+        "table column",
+        "column name of table storage.objects",
+        "a",
+        "120cc7a6dfff6bf9e870909f585f32d6",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        48,
+        "index",
+        "index storage.idx_objects_current_version",
+        "table column",
+        "column archived_at of table storage.objects",
+        "a",
+        "c45086ba08fcf7767369fa11b6291945",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        49,
+        "index",
+        "index storage.idx_objects_current_version",
+        "table column",
+        "column bucket_id of table storage.objects",
+        "a",
+        "243ce0e5d86840ec292d142fe9cec0ed",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        50,
+        "index",
+        "index storage.idx_objects_current_version",
+        "table column",
+        "column name of table storage.objects",
+        "a",
+        "a83ba6354e8160c72e7d35a2deb3eae7",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        51,
+        "index",
+        "index storage.idx_objects_delete_markers",
+        "table column",
+        "column bucket_id of table storage.objects",
+        "a",
+        "7ff7312038239081690dd663a305030c",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        52,
+        "index",
+        "index storage.idx_objects_delete_markers",
+        "table column",
+        "column is_delete_marker of table storage.objects",
+        "a",
+        "cf196fd2039c6d7169ec0ddd37935d91",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        53,
+        "index",
+        "index storage.idx_objects_delete_markers",
+        "table column",
+        "column name of table storage.objects",
+        "a",
+        "55a423e0f4a95f3313584a6866c9c2b0",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        54,
+        "index",
+        "index storage.idx_objects_null_version",
+        "table column",
+        "column bucket_id of table storage.objects",
+        "a",
+        "830eca8c83d31a1d6d20ac3750f17d87",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        55,
+        "index",
+        "index storage.idx_objects_null_version",
+        "table column",
+        "column is_versioned of table storage.objects",
+        "a",
+        "7db0725baa607fd89bd58ff5eebc603e",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        56,
+        "index",
+        "index storage.idx_objects_null_version",
+        "table column",
+        "column name of table storage.objects",
+        "a",
+        "9e8bd3967af75b78f583438318fae894",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        57,
+        "index",
+        "index storage.migrations_name_key",
+        "table constraint",
+        "constraint migrations_name_key on table storage.migrations",
+        "i",
+        "0ce9cf69743e6aeb944c69ba22f92db4",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        58,
+        "index",
+        "index storage.migrations_pkey",
+        "table constraint",
+        "constraint migrations_pkey on table storage.migrations",
+        "i",
+        "85f54d3d8a9e2f9a8c2cfe898c288d12",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        59,
+        "index",
+        "index storage.name_prefix_search",
+        "table column",
+        "column name of table storage.objects",
+        "a",
+        "8cdd65d667ca86ebd9840e9918b8914e",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        60,
+        "index",
+        "index storage.objects_bucket_id_name_version_key",
+        "table column",
+        "column bucket_id of table storage.objects",
+        "a",
+        "b9d5ca6a6d128150a93e8997e0da7619",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        61,
+        "index",
+        "index storage.objects_bucket_id_name_version_key",
+        "table column",
+        "column name of table storage.objects",
+        "a",
+        "a28935fdfc5ab5447a4e27f5db2fbefa",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        62,
+        "index",
+        "index storage.objects_bucket_id_name_version_key",
+        "table column",
+        "column version of table storage.objects",
+        "a",
+        "2de30e28a60674155c406e6ff1da59e4",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        63,
+        "index",
+        "index storage.objects_pkey",
+        "table constraint",
+        "constraint objects_pkey on table storage.objects",
+        "i",
+        "7c18276d7e705f666af70b92e75ac739",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        64,
+        "index",
+        "index storage.s3_multipart_uploads_parts_pkey",
+        "table constraint",
+        "constraint s3_multipart_uploads_parts_pkey on table storage.s3_multipart_uploads_parts",
+        "i",
+        "c25ca9ccceef9b6fe401dd494fa939fd",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        65,
+        "index",
+        "index storage.s3_multipart_uploads_pkey",
+        "table constraint",
+        "constraint s3_multipart_uploads_pkey on table storage.s3_multipart_uploads",
+        "i",
+        "cc9c4bbd99b0cd3e7d6f3b63cd4cac4f",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        66,
+        "index",
+        "index storage.vector_indexes_name_bucket_id_idx",
+        "table column",
+        "column bucket_id of table storage.vector_indexes",
+        "a",
+        "bb8fb085a6258478aeb0fcdcf179ad5f",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        67,
+        "index",
+        "index storage.vector_indexes_name_bucket_id_idx",
+        "table column",
+        "column name of table storage.vector_indexes",
+        "a",
+        "5e110c6f69156286cb70e42a2fa9fc89",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        68,
+        "index",
+        "index storage.vector_indexes_pkey",
+        "table constraint",
+        "constraint vector_indexes_pkey on table storage.vector_indexes",
+        "i",
+        "65cce12e8b45384656769033cbfaadc0",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        69,
+        "table",
+        "table storage.buckets",
+        "schema",
+        "schema storage",
+        "n",
+        "54ab5f29e47e0d227ed014c9d56376b4",
+        "SCHEMA_OWNERSHIP"
+      ],
+      [
+        70,
+        "table",
+        "table storage.buckets_analytics",
+        "schema",
+        "schema storage",
+        "n",
+        "e4cb3dcdfb04cd2ef41eabe3424ac183",
+        "SCHEMA_OWNERSHIP"
+      ],
+      [
+        71,
+        "table",
+        "table storage.buckets_vectors",
+        "schema",
+        "schema storage",
+        "n",
+        "0313d5a562195bacd80e7ab870167ad5",
+        "SCHEMA_OWNERSHIP"
+      ],
+      [
+        72,
+        "table",
+        "table storage.migrations",
+        "schema",
+        "schema storage",
+        "n",
+        "d442d5e40ade842123726d4ca4cf3657",
+        "SCHEMA_OWNERSHIP"
+      ],
+      [
+        73,
+        "table",
+        "table storage.objects",
+        "schema",
+        "schema storage",
+        "n",
+        "9994db4847f1fb133ecc642d86222066",
+        "SCHEMA_OWNERSHIP"
+      ],
+      [
+        74,
+        "table",
+        "table storage.s3_multipart_uploads",
+        "schema",
+        "schema storage",
+        "n",
+        "bba656a510a92596e9910def48ac74e9",
+        "SCHEMA_OWNERSHIP"
+      ],
+      [
+        75,
+        "table",
+        "table storage.s3_multipart_uploads_parts",
+        "schema",
+        "schema storage",
+        "n",
+        "8ad554d44573054a949c64d913fe6346",
+        "SCHEMA_OWNERSHIP"
+      ],
+      [
+        76,
+        "table",
+        "table storage.vector_indexes",
+        "schema",
+        "schema storage",
+        "n",
+        "a680dd4b8e65c728bfd319615bd5e5a8",
+        "SCHEMA_OWNERSHIP"
+      ],
+      [
+        77,
+        "table column",
+        "column type of table storage.buckets",
+        "type",
+        "type storage.buckettype",
+        "n",
+        "50958e74b183e7addca511406dfe591e",
+        "COLUMN_TYPE_OR_TABLE_DEPENDENCY"
+      ],
+      [
+        78,
+        "table column",
+        "column type of table storage.buckets_analytics",
+        "type",
+        "type storage.buckettype",
+        "n",
+        "acf2be0be24c71f30ca102bf0eac5e76",
+        "COLUMN_TYPE_OR_TABLE_DEPENDENCY"
+      ],
+      [
+        79,
+        "table column",
+        "column type of table storage.buckets_vectors",
+        "type",
+        "type storage.buckettype",
+        "n",
+        "0d02f03a9b5929721045d9bcc79a5319",
+        "COLUMN_TYPE_OR_TABLE_DEPENDENCY"
+      ],
+      [
+        80,
+        "table constraint",
+        "constraint buckets_analytics_pkey on table storage.buckets_analytics",
+        "table column",
+        "column id of table storage.buckets_analytics",
+        "a",
+        "d27e53e857cb85f7beb238d88b4a8202",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        81,
+        "table constraint",
+        "constraint buckets_lifecycle_configuration_pair_check on table storage.buckets",
+        "table column",
+        "column lifecycle_configuration of table storage.buckets",
+        "a",
+        "1444c957bcf0d662dbbfea0856f459fd",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        82,
+        "table constraint",
+        "constraint buckets_lifecycle_configuration_pair_check on table storage.buckets",
+        "table column",
+        "column lifecycle_configuration of table storage.buckets",
+        "n",
+        "72ebc559c885d5dbbaf6d4872182f6e4",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        83,
+        "table constraint",
+        "constraint buckets_lifecycle_configuration_pair_check on table storage.buckets",
+        "table column",
+        "column lifecycle_configuration_generation of table storage.buckets",
+        "a",
+        "1b1a8152e0382cf8bccee09da7ce2fb9",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        84,
+        "table constraint",
+        "constraint buckets_lifecycle_configuration_pair_check on table storage.buckets",
+        "table column",
+        "column lifecycle_configuration_generation of table storage.buckets",
+        "n",
+        "f48ab93a59129b7602ec18223bf4bc28",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        85,
+        "table constraint",
+        "constraint buckets_lifecycle_configuration_shape_check on table storage.buckets",
+        "table column",
+        "column lifecycle_configuration of table storage.buckets",
+        "a",
+        "69fe637e8412f5c2bf89a6bfabccd1dd",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        86,
+        "table constraint",
+        "constraint buckets_lifecycle_configuration_shape_check on table storage.buckets",
+        "table column",
+        "column lifecycle_configuration of table storage.buckets",
+        "n",
+        "f4fe8aa44a2b47200db75f409ba50617",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        87,
+        "table constraint",
+        "constraint buckets_lifecycle_configuration_standard_only_check on table storage.buckets",
+        "table column",
+        "column lifecycle_configuration of table storage.buckets",
+        "a",
+        "571328240317fab783fda267c7af28da",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        88,
+        "table constraint",
+        "constraint buckets_lifecycle_configuration_standard_only_check on table storage.buckets",
+        "table column",
+        "column lifecycle_configuration of table storage.buckets",
+        "n",
+        "997f2729024db63aa27076d39e45143f",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        89,
+        "table constraint",
+        "constraint buckets_lifecycle_configuration_standard_only_check on table storage.buckets",
+        "table column",
+        "column lifecycle_configuration_generation of table storage.buckets",
+        "a",
+        "0bc94040aa8b94e4b24c718817fb1e4b",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        90,
+        "table constraint",
+        "constraint buckets_lifecycle_configuration_standard_only_check on table storage.buckets",
+        "table column",
+        "column lifecycle_configuration_generation of table storage.buckets",
+        "n",
+        "422bb7baed6d5bd2ad55a96e678a6ecf",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        91,
+        "table constraint",
+        "constraint buckets_lifecycle_configuration_standard_only_check on table storage.buckets",
+        "table column",
+        "column type of table storage.buckets",
+        "a",
+        "6d33ec45280ef7fb9fe6b4a7545c1eb3",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        92,
+        "table constraint",
+        "constraint buckets_lifecycle_configuration_standard_only_check on table storage.buckets",
+        "table column",
+        "column type of table storage.buckets",
+        "n",
+        "47cb9faefd79e91842bef4b5b7571e44",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        93,
+        "table constraint",
+        "constraint buckets_lifecycle_configuration_standard_only_check on table storage.buckets",
+        "type",
+        "type storage.buckettype",
+        "n",
+        "3b4711473f4276da521435b23430994c",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        94,
+        "table constraint",
+        "constraint buckets_pkey on table storage.buckets",
+        "table column",
+        "column id of table storage.buckets",
+        "a",
+        "2386268d208d9edf9d9fced146825ab5",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        95,
+        "table constraint",
+        "constraint buckets_vectors_pkey on table storage.buckets_vectors",
+        "table column",
+        "column id of table storage.buckets_vectors",
+        "a",
+        "0557294c4e878108d096a3bdd200ced6",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        96,
+        "table constraint",
+        "constraint buckets_versioning_dark_check on table storage.buckets",
+        "table column",
+        "column versioning_status of table storage.buckets",
+        "a",
+        "0d80cae71994281952a9606a4fafa091",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        97,
+        "table constraint",
+        "constraint buckets_versioning_dark_check on table storage.buckets",
+        "table column",
+        "column versioning_status of table storage.buckets",
+        "n",
+        "cf2539dffba9ce60193f73874788a018",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        98,
+        "table constraint",
+        "constraint buckets_versioning_standard_only_check on table storage.buckets",
+        "table column",
+        "column type of table storage.buckets",
+        "a",
+        "07a2dcb16bfe47ca52a11338b057c040",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        99,
+        "table constraint",
+        "constraint buckets_versioning_standard_only_check on table storage.buckets",
+        "table column",
+        "column type of table storage.buckets",
+        "n",
+        "a6afee07d61827c22ad222a4e7a43df7",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        100,
+        "table constraint",
+        "constraint buckets_versioning_standard_only_check on table storage.buckets",
+        "table column",
+        "column versioning_status of table storage.buckets",
+        "a",
+        "3c93b28655fd1020e3a5d73f88fc27b4",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        101,
+        "table constraint",
+        "constraint buckets_versioning_standard_only_check on table storage.buckets",
+        "table column",
+        "column versioning_status of table storage.buckets",
+        "n",
+        "3eff6dd79307306a539cb60515144313",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        102,
+        "table constraint",
+        "constraint buckets_versioning_standard_only_check on table storage.buckets",
+        "type",
+        "type storage.buckettype",
+        "n",
+        "c99ef72b789697e905ac941d2097da30",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        103,
+        "table constraint",
+        "constraint buckets_versioning_status_check on table storage.buckets",
+        "table column",
+        "column versioning_status of table storage.buckets",
+        "a",
+        "947c341f7f9e799eb25a1071fc695ab2",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        104,
+        "table constraint",
+        "constraint buckets_versioning_status_check on table storage.buckets",
+        "table column",
+        "column versioning_status of table storage.buckets",
+        "n",
+        "291ed2a4e73250773722eec4f3cb8d5b",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        105,
+        "table constraint",
+        "constraint migrations_name_key on table storage.migrations",
+        "table column",
+        "column name of table storage.migrations",
+        "a",
+        "e6280b23fc3dbbfa2fffbe184255a8ec",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        106,
+        "table constraint",
+        "constraint migrations_pkey on table storage.migrations",
+        "table column",
+        "column id of table storage.migrations",
+        "a",
+        "486817740ddc5cf8533904d47ba33c1f",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        107,
+        "table constraint",
+        "constraint objects_bucketId_fkey on table storage.objects",
+        "index",
+        "index storage.buckets_pkey",
+        "n",
+        "8a777f7c47e438b88dad176aeff60b17",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        108,
+        "table constraint",
+        "constraint objects_bucketId_fkey on table storage.objects",
+        "table column",
+        "column bucket_id of table storage.objects",
+        "a",
+        "ac7e8838a7c11b1151fe0c508a1c0ca1",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        109,
+        "table constraint",
+        "constraint objects_bucketId_fkey on table storage.objects",
+        "table column",
+        "column id of table storage.buckets",
+        "n",
+        "8b6297c98a1653fe47ab2bfd40e657b8",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        110,
+        "table constraint",
+        "constraint objects_pkey on table storage.objects",
+        "table column",
+        "column id of table storage.objects",
+        "a",
+        "8594468e0e013b5842c9e5278ea10511",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        111,
+        "table constraint",
+        "constraint s3_multipart_uploads_bucket_id_fkey on table storage.s3_multipart_uploads",
+        "index",
+        "index storage.buckets_pkey",
+        "n",
+        "d9c22501221844306b89b0190a3fa1d6",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        112,
+        "table constraint",
+        "constraint s3_multipart_uploads_bucket_id_fkey on table storage.s3_multipart_uploads",
+        "table column",
+        "column bucket_id of table storage.s3_multipart_uploads",
+        "a",
+        "34f83ca65dc1baa5e3884d5ab8a114da",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        113,
+        "table constraint",
+        "constraint s3_multipart_uploads_bucket_id_fkey on table storage.s3_multipart_uploads",
+        "table column",
+        "column id of table storage.buckets",
+        "n",
+        "920fde74f37a649be997e5b146365b25",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        114,
+        "table constraint",
+        "constraint s3_multipart_uploads_parts_bucket_id_fkey on table storage.s3_multipart_uploads_parts",
+        "index",
+        "index storage.buckets_pkey",
+        "n",
+        "7d3c9f8fb9e1e02728d6ee81bc54e599",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        115,
+        "table constraint",
+        "constraint s3_multipart_uploads_parts_bucket_id_fkey on table storage.s3_multipart_uploads_parts",
+        "table column",
+        "column bucket_id of table storage.s3_multipart_uploads_parts",
+        "a",
+        "a40c3e8401b2baf670a19f9abdf960eb",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        116,
+        "table constraint",
+        "constraint s3_multipart_uploads_parts_bucket_id_fkey on table storage.s3_multipart_uploads_parts",
+        "table column",
+        "column id of table storage.buckets",
+        "n",
+        "15c86f3077ac8b78629a3dadef7b4574",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        117,
+        "table constraint",
+        "constraint s3_multipart_uploads_parts_pkey on table storage.s3_multipart_uploads_parts",
+        "table column",
+        "column id of table storage.s3_multipart_uploads_parts",
+        "a",
+        "05a0769c5d4929353608989d56adecb7",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        118,
+        "table constraint",
+        "constraint s3_multipart_uploads_parts_upload_id_fkey on table storage.s3_multipart_uploads_parts",
+        "index",
+        "index storage.s3_multipart_uploads_pkey",
+        "n",
+        "7ed2e2e42f32aa57c4e65a1e9676a884",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        119,
+        "table constraint",
+        "constraint s3_multipart_uploads_parts_upload_id_fkey on table storage.s3_multipart_uploads_parts",
+        "table column",
+        "column id of table storage.s3_multipart_uploads",
+        "n",
+        "baf373f270a57e17ca9a8e6f6e83d639",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        120,
+        "table constraint",
+        "constraint s3_multipart_uploads_parts_upload_id_fkey on table storage.s3_multipart_uploads_parts",
+        "table column",
+        "column upload_id of table storage.s3_multipart_uploads_parts",
+        "a",
+        "2d927095d04424f1843bbf18efdf7aa8",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        121,
+        "table constraint",
+        "constraint s3_multipart_uploads_pkey on table storage.s3_multipart_uploads",
+        "table column",
+        "column id of table storage.s3_multipart_uploads",
+        "a",
+        "3984008676886c5c7f57fdb3d8f42fc9",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        122,
+        "table constraint",
+        "constraint vector_indexes_bucket_id_fkey on table storage.vector_indexes",
+        "index",
+        "index storage.buckets_vectors_pkey",
+        "n",
+        "385330d3653eb4096efc1e97bfa19f49",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        123,
+        "table constraint",
+        "constraint vector_indexes_bucket_id_fkey on table storage.vector_indexes",
+        "table column",
+        "column bucket_id of table storage.vector_indexes",
+        "a",
+        "8db0e46229def363a1aa33d6410e636a",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        124,
+        "table constraint",
+        "constraint vector_indexes_bucket_id_fkey on table storage.vector_indexes",
+        "table column",
+        "column id of table storage.buckets_vectors",
+        "n",
+        "2098add2ce0f0323f9bf9edf2c15d65d",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        125,
+        "table constraint",
+        "constraint vector_indexes_pkey on table storage.vector_indexes",
+        "table column",
+        "column id of table storage.vector_indexes",
+        "a",
+        "1958bbcce511421186cddb4f9e9c565f",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        126,
+        "type",
+        "type storage.buckets",
+        "table",
+        "table storage.buckets",
+        "i",
+        "8e335b63f2c3b72a119170665391466f",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        127,
+        "type",
+        "type storage.buckets_analytics",
+        "table",
+        "table storage.buckets_analytics",
+        "i",
+        "bad7c76f2c80e55c7875ba458d564246",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        128,
+        "type",
+        "type storage.buckets_analytics[]",
+        "type",
+        "type storage.buckets_analytics",
+        "i",
+        "35e8c29fcd1d6dd6745b34d2daab8bdf",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        129,
+        "type",
+        "type storage.buckets_vectors",
+        "table",
+        "table storage.buckets_vectors",
+        "i",
+        "6649c4355a74392a35f059d475abf679",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        130,
+        "type",
+        "type storage.buckets_vectors[]",
+        "type",
+        "type storage.buckets_vectors",
+        "i",
+        "177b8db1c3083358bb89caa243f290c0",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        131,
+        "type",
+        "type storage.buckets[]",
+        "type",
+        "type storage.buckets",
+        "i",
+        "a9a44bfd8a2a095788d16973d467f452",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        132,
+        "type",
+        "type storage.buckettype",
+        "schema",
+        "schema storage",
+        "n",
+        "90ca6271f9f7ca5e0481ad8d3b2ad42c",
+        "TYPE_ROW_SCHEMA_OR_ARRAY_LINK"
+      ],
+      [
+        133,
+        "type",
+        "type storage.buckettype[]",
+        "type",
+        "type storage.buckettype",
+        "i",
+        "9152bcb6d43fc6212f472122d9e7293d",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        134,
+        "type",
+        "type storage.migrations",
+        "table",
+        "table storage.migrations",
+        "i",
+        "2e5586b6d93091c4b8ac01feaabbe067",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        135,
+        "type",
+        "type storage.migrations[]",
+        "type",
+        "type storage.migrations",
+        "i",
+        "2a2f14a8ee5c3dcd77daa0af4c4c0be8",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        136,
+        "type",
+        "type storage.objects",
+        "table",
+        "table storage.objects",
+        "i",
+        "c5406ac58199357ce8fc66e42747cd51",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        137,
+        "type",
+        "type storage.objects[]",
+        "type",
+        "type storage.objects",
+        "i",
+        "177e95b14aae1b2aa4585b00ad67861b",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        138,
+        "type",
+        "type storage.s3_multipart_uploads",
+        "table",
+        "table storage.s3_multipart_uploads",
+        "i",
+        "c6b0766a16279c1078b1427aee6c9fb2",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        139,
+        "type",
+        "type storage.s3_multipart_uploads_parts",
+        "table",
+        "table storage.s3_multipart_uploads_parts",
+        "i",
+        "098e864e29fdacb7ce04750258f6bbbb",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        140,
+        "type",
+        "type storage.s3_multipart_uploads_parts[]",
+        "type",
+        "type storage.s3_multipart_uploads_parts",
+        "i",
+        "fe201a88e6daa12a4766bb3775e4acc9",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        141,
+        "type",
+        "type storage.s3_multipart_uploads[]",
+        "type",
+        "type storage.s3_multipart_uploads",
+        "i",
+        "33bbd842f20289a791bd52b3e447b17f",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        142,
+        "type",
+        "type storage.vector_indexes",
+        "table",
+        "table storage.vector_indexes",
+        "i",
+        "362a86284e9cd0f76214546edc8138e1",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        143,
+        "type",
+        "type storage.vector_indexes[]",
+        "type",
+        "type storage.vector_indexes",
+        "i",
+        "45254810a8209d5ee3df78817ad2b077",
+        "INTERNAL_CATALOG_LINK"
+      ]
+    ],
+    "supabase_migrations": [
+      [
+        1,
+        "index",
+        "index supabase_migrations.schema_migrations_idempotency_key_key",
+        "table constraint",
+        "constraint schema_migrations_idempotency_key_key on table supabase_migrations.schema_migrations",
+        "i",
+        "4e41f81c1408d32802c59f913b21c731",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        2,
+        "index",
+        "index supabase_migrations.schema_migrations_pkey",
+        "table constraint",
+        "constraint schema_migrations_pkey on table supabase_migrations.schema_migrations",
+        "i",
+        "bd147de8ed4d45900b574b1d72ca9807",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        3,
+        "table",
+        "table supabase_migrations.schema_migrations",
+        "schema",
+        "schema supabase_migrations",
+        "n",
+        "a52101374a6f6315cefc3b991dd71c9e",
+        "SCHEMA_OWNERSHIP"
+      ],
+      [
+        4,
+        "table constraint",
+        "constraint schema_migrations_idempotency_key_key on table supabase_migrations.schema_migrations",
+        "table column",
+        "column idempotency_key of table supabase_migrations.schema_migrations",
+        "a",
+        "e776c59ddcfa24206359af53f868fadc",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        5,
+        "table constraint",
+        "constraint schema_migrations_pkey on table supabase_migrations.schema_migrations",
+        "table column",
+        "column version of table supabase_migrations.schema_migrations",
+        "a",
+        "ed0809130f6dbb1eab3d6ec9cc4dc076",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        6,
+        "type",
+        "type supabase_migrations.schema_migrations",
+        "table",
+        "table supabase_migrations.schema_migrations",
+        "i",
+        "34e17b299a4adaef3c33de83906f0f6d",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        7,
+        "type",
+        "type supabase_migrations.schema_migrations[]",
+        "type",
+        "type supabase_migrations.schema_migrations",
+        "i",
+        "1639032e1cb7b7314b1ede6f8f46a50a",
+        "INTERNAL_CATALOG_LINK"
+      ]
+    ],
+    "vault": [
+      [
+        1,
+        "function",
+        "function vault._crypto_aead_det_decrypt(bytea,bytea,bigint,bytea,bytea)",
+        "extension",
+        "extension supabase_vault",
+        "e",
+        "7af5b255bd48e3ee8c2b2e5b28c82e91",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        2,
+        "function",
+        "function vault._crypto_aead_det_decrypt(bytea,bytea,bigint,bytea,bytea)",
+        "schema",
+        "schema vault",
+        "n",
+        "c7691e66f9a6f6697b66c72b20b28e34",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        3,
+        "function",
+        "function vault._crypto_aead_det_encrypt(bytea,bytea,bigint,bytea,bytea)",
+        "extension",
+        "extension supabase_vault",
+        "e",
+        "380685f1b9094e4ad56c36411d2558cc",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        4,
+        "function",
+        "function vault._crypto_aead_det_encrypt(bytea,bytea,bigint,bytea,bytea)",
+        "schema",
+        "schema vault",
+        "n",
+        "644002ef14c7a99b9f0a110137a16da3",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        5,
+        "function",
+        "function vault._crypto_aead_det_noncegen()",
+        "extension",
+        "extension supabase_vault",
+        "e",
+        "17f99e08ee74044860d28f150363fcf5",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        6,
+        "function",
+        "function vault._crypto_aead_det_noncegen()",
+        "schema",
+        "schema vault",
+        "n",
+        "24162ea6e76f0f43dd4f89848c724d06",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        7,
+        "function",
+        "function vault.create_secret(text,text,text,uuid)",
+        "extension",
+        "extension supabase_vault",
+        "e",
+        "196dc291e268708f08b238091de9b4eb",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        8,
+        "function",
+        "function vault.create_secret(text,text,text,uuid)",
+        "language",
+        "language plpgsql",
+        "n",
+        "85eb51d08a237a7e56a6d8b2f5929881",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        9,
+        "function",
+        "function vault.create_secret(text,text,text,uuid)",
+        "schema",
+        "schema vault",
+        "n",
+        "4948b8bd7f1a34596b91a2b362c2b2d8",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        10,
+        "function",
+        "function vault.update_secret(uuid,text,text,text,uuid)",
+        "extension",
+        "extension supabase_vault",
+        "e",
+        "2efc77762f407e392b4c98c58360a727",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        11,
+        "function",
+        "function vault.update_secret(uuid,text,text,text,uuid)",
+        "language",
+        "language plpgsql",
+        "n",
+        "ba79a944a5d8abd6624d0ca7216c692f",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        12,
+        "function",
+        "function vault.update_secret(uuid,text,text,text,uuid)",
+        "schema",
+        "schema vault",
+        "n",
+        "02d4f70c0a292b8cd335be824ee7f743",
+        "FUNCTION_LANGUAGE_SCHEMA_OR_TYPE_DEPENDENCY"
+      ],
+      [
+        13,
+        "index",
+        "index vault.secrets_name_idx",
+        "table column",
+        "column name of table vault.secrets",
+        "a",
+        "5772be995578e9799d6bde4571516340",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        14,
+        "index",
+        "index vault.secrets_name_idx",
+        "table column",
+        "column name of table vault.secrets",
+        "a",
+        "5772be995578e9799d6bde4571516340",
+        "INDEX_COLUMN_OR_CONSTRAINT_DEPENDENCY"
+      ],
+      [
+        15,
+        "index",
+        "index vault.secrets_pkey",
+        "table constraint",
+        "constraint secrets_pkey on table vault.secrets",
+        "i",
+        "26645a707da2bc6cb7b8668a51192689",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        16,
+        "table",
+        "table vault.secrets",
+        "extension",
+        "extension supabase_vault",
+        "e",
+        "e70321c8f120c9b56a1a15a5faba7cf3",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        17,
+        "table",
+        "table vault.secrets",
+        "schema",
+        "schema vault",
+        "n",
+        "2bed1ffeb60bfe017434c48fe5e371d0",
+        "SCHEMA_OWNERSHIP"
+      ],
+      [
+        18,
+        "table constraint",
+        "constraint secrets_pkey on table vault.secrets",
+        "table column",
+        "column id of table vault.secrets",
+        "a",
+        "a38d91bea92ab0b19bbf2169723f2140",
+        "CONSTRAINT_COLUMN_OR_FK_TARGET"
+      ],
+      [
+        19,
+        "type",
+        "type vault.decrypted_secrets",
+        "extension",
+        "extension supabase_vault",
+        "e",
+        "625624f3535c244e6e9ebe2a94194e01",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        20,
+        "type",
+        "type vault.decrypted_secrets",
+        "view",
+        "view vault.decrypted_secrets",
+        "i",
+        "cba2d2207d049d4468bbb2f0054063a1",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        21,
+        "type",
+        "type vault.decrypted_secrets[]",
+        "extension",
+        "extension supabase_vault",
+        "e",
+        "d48c8c93f70d132a30cb80fc584456a3",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        22,
+        "type",
+        "type vault.decrypted_secrets[]",
+        "type",
+        "type vault.decrypted_secrets",
+        "i",
+        "0c1e74c5249b72878bea5e01c87af0fb",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        23,
+        "type",
+        "type vault.secrets",
+        "extension",
+        "extension supabase_vault",
+        "e",
+        "b2c0a6a6c21a5577ac3c425589efb54f",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        24,
+        "type",
+        "type vault.secrets",
+        "table",
+        "table vault.secrets",
+        "i",
+        "c278736870261be4cd543623d19b42c6",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        25,
+        "type",
+        "type vault.secrets[]",
+        "extension",
+        "extension supabase_vault",
+        "e",
+        "f0d45ba7c20594b613e7509b657ad19e",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        26,
+        "type",
+        "type vault.secrets[]",
+        "type",
+        "type vault.secrets",
+        "i",
+        "bc3f8f5ab26a6d6b0b79e38ad20fda7e",
+        "INTERNAL_CATALOG_LINK"
+      ],
+      [
+        27,
+        "view",
+        "view vault.decrypted_secrets",
+        "extension",
+        "extension supabase_vault",
+        "e",
+        "77e4f23538bf3c49ee2f37d22d53d6d3",
+        "EXTENSION_OWNERSHIP"
+      ],
+      [
+        28,
+        "view",
+        "view vault.decrypted_secrets",
+        "schema",
+        "schema vault",
+        "n",
+        "a72125d379661ffbba987ef1dd5668ad",
+        "OTHER_RESOLVED_PLATFORM_DEPENDENCY"
+      ]
+    ]
+  },
+  "analysis": [
+    "extensions: 250 dependencies include pgcrypto, pg_trgm, pg_stat_statements, unaccent, uuid-ossp; extension-membership entries 'e' and provider C/native function semantics not source-reviewed.",
+    "Realtime: 84 function/type/table/index links include apply_rls, publication and subscription metadata; grants/API exposure require independent host-path test with #96. No Realtime row data queried.",
+    "Storage: 143 bucket, objects, multipart, lifecycle, vector and function links; no proof of unused hosted functionality from empty buckets; preserve provider data structures.",
+    "Vault: 28 extension-owned crypto functions and secret/view dependencies; secret rows not read. GraphQL/pgbouncer wrappers and migration bookkeeping remain provider-owned.",
+    "All 516 references resolve to existing catalog identities; catalog edges are not JavaScript, dynamic SQL or runtime callers."
+  ]
+}
