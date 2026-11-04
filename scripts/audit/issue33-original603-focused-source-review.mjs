@@ -100,10 +100,10 @@ for(const target of targets){
     // complete labeled component group and an intact direct-prose clause.
     if(r.number===475){
       const decode=value=>String(value||'').replace(/<[^<>]{0,2000}>/g,' ')
-        .replace(/&(?:amp|nbsp);/gi,' ').replace(/\\s+/g,' ').trim().slice(0,6001);
+        .replace(/&(?:amp|nbsp);/gi,' ').replace(/\s+/g,' ').trim().slice(0,6001);
       const blend=extractCoffeeBlendEvidence(selected,{name:p.fields?.name||'',scoped:true});
       const clauses=productCoffeeProse(selected,decode)
-        .filter(block=>/\\b(?:Pacas Family|Santa Ana|several farms|we paired)\\b/i.test(block.text))
+        .filter(block=>/\b(?:Pacas Family|Santa Ana|several farms|we paired)\b/i.test(block.text))
         .slice(0,10).map(block=>({tag:block.tag,section:clip(block.section,90),
           educational:block.educational,text:clip(block.text,650)}));
       console.log('[DIC33 SELECTED #475 COMPONENT TRACE] '+JSON.stringify({
