@@ -4,7 +4,7 @@
   "purpose": "Source-by-source substantive review/evidence progress, not a claim of all-source completeness or peer-reviewed certification",
   "authority": "docs/MASTER_SPECIFICATION.md and docs/DECISION_LEDGER.json; latest explicit Locked supersessions",
   "source_branch": "development/backend-foundation",
-  "baseline_commit_sha": "84619f53d0e1d7ee9beb91846423e2279f0fb5da",
+  "baseline_commit_sha": "d6c38414197ba642d4016a650a68c5b2912f3f9f",
   "created_utc_date": "2026-11-03",
   "github_inventory": {
     "prior_metadata_snapshot": "docs/audits/project-doc-index-20261101.json",
@@ -75,9 +75,12 @@
       "type": "original_markdown",
       "path": "docs/research/originals/07_Foundational_Causal_Report_on_Espresso_Extraction_and_Sensory_Outcome.md",
       "sha256_recorded_in_verified_archive_index": "a7a1889a884aa25573a24c5b731449b61333ff14a67294bbe1559fe8462c92dc",
-      "review_status": "FOCUSED_PASSAGES_ONLY",
-      "direct_review_provenance": "Prior R455-001/R455-002 scoped journal; NOT complete document coverage",
-      "claims_verified_externally": "Not certified by this #455 batch"
+      "review_status": "FULL_BODY_DIRECTLY_READ_CITATIONS_PENDING",
+      "direct_review_provenance": "R455-004 full 408-line source inspection (intro/definitions, full evidence table, interactions, disputes, provisional vs forbidden rules, bibliography), original Git blob pinned; cited external publications NOT globally certified",
+      "claims_verified_externally": "AIP/Waszkiewicz 2026 abstract bibliographic match via arXiv author manuscript and AIP press release; Wadsworth 2026 XCT permeability abstract via university peer-reviewed publication record; original report's remaining references and quantitative details not independently checked",
+      "github_blob_sha": "43912d0dec0969c090d525c853f3a456136a2311",
+      "direct_review_lines": "1-408",
+      "source_characters": 86143
     },
     {
       "id": "ORG-08",
@@ -191,6 +194,33 @@
       "claim": "2026 espresso poroelastic pressure response study appears as published Physics of Fluids paper per June2026 article and DOI; full publisher paper not read.",
       "grade": "SECONDARY_PUBLICATION_EVIDENCE_ONLY",
       "result": "PRIMARY_FULL_TEXT_VERIFICATION_PENDING"
+    },
+    {
+      "id": "R455-EV-007-A",
+      "source": "ORG-07 1-408, especially 19-31, 47-70, 140-171, 246-280",
+      "claim": "Dose and beverage yield are independent measured controls; brew ratio, time, EY and TDS are derived observations. EY≈yield×TDS/dose is a mass balance, not a taste rating.",
+      "grade": "PHYSICAL_DEFINITION_CORRECT; RESEARCH DERIVED; NO INDEPENDENT FULL-CITATION AUDIT",
+      "current_app": "site/lib/model.js validateShot stores doseG/yieldG/timeS separately and requires five complete taste scales; site/lib/engine.js does not claim measured EY/TDS absent refractometer",
+      "result": "EXISTING_LOCKED_COMPATIBLE_NO_NEW_SENSOR_FIELD_NO_ALGORITHM_CHANGE",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-007-B",
+      "source": "ORG-07 9-15, 146-170, 171-201, 203-245, 274-311",
+      "claim": "Grind affects particle area and hydraulic resistance; over-fine may worsen evenness. Pressure/flow are machine-regime-dependent. No universal 9bar, 1:2, 25-30seconds, ideal EY, WDT or prep ranking supports sensory prescriptions.",
+      "grade": "MECHANISTIC_AND_CONDITIONAL_INTERPRETATION; SOME_PRIMARY_ABSTRACTS_VERIFIED; SENSORY_GENERALIZATION_NOT_VERIFIED",
+      "current_app": "site/lib/engine.js nextAdvice uses taste and style-/setup-dependent time as a conditional cue, not a standalone success veto; five active styles; existing dose, grinder calibration and feed-mode gates",
+      "result": "RETAIN_CURRENT_APPROVED_BOUNDARIES; NO_NEW_NUMERIC_THRESHOLDS",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-007-C",
+      "source": "ORG-07 203-245, 246-408; external https://research-information.bris.ac.uk/en/publications/a-model-for-the-permeability-of-coffee-pucks-validated-using-x-ra/ ; https://arxiv.org/abs/2512.21528 ; https://phys.org/news/2026-06-espresso-pucks-pressures.html",
+      "claim": "Wadsworth 2026 peer-reviewed university abstract supports connected pore volume/specific-surface model validated on two roasted coffees and 11 grinds. Waszkiewicz 2026 abstract supports nonlinear pressure-flow and dissolution, but no uniform sensory optima. External abstracts alone do not establish every numeric figure or causal sentence in original #07.",
+      "grade": "UNIVERSITY_PUBLICATION_ABSTRACT_PLUS_AUTHOR_MANUSCRIPT_ABSTRACT_PLUS_AIP_PRESS_RELEASE; NOT_PRIMARY_FULL_TEXT_OR_BLIND_SENSORY",
+      "current_app": "App lacks pressure/flow/PSD/refractometer readings and owner-retired advanced hardware versioning. Resist adding unsupported new onboarding fields and profile heuristics.",
+      "result": "CONTEXTUAL_EVIDENCE_ONLY_NO_NEW_OWNER_DECISION; ORIGINAL_CHATGPT_CITATION_MARKERS_UNRESOLVED",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [
@@ -206,12 +236,12 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "This batch is a research/authority source crosswalk, not a behavioral implementation; current runtime was inspected but not executed."
+    "reason": "R455-004 source-only 408-line research review and independent abstract corroboration. No new app test, no code/queue/provider mutations."
   },
   "next_actions": [
-    "Recover current source and review the October29 15-member implementation pack and S019 PDF bytes/claims when accessible.",
-    "Complete remaining original report full-body reviews in disjoint bounded batches and primary citation checks.",
-    "Run reproduction and focused tests on any new concrete safe Log Shot/Rate/Recommendations defect, and integrate only with exact-source CI.",
-    "Keep Issue455 open; coordinate Issue #267 exhaustive code audit and Issue #33 extractor; no deployment."
+    "Complete full first-to-last body reviews for originals 01-05 and 08-09 (02 of 09 full: 06 and 07) with individual citation verification still pending for all nine.",
+    "Try authenticated Project/Library retrieval of October29 implementation pack and S019 PDF; current container ZIP retrieval failed and file search did not surface raw pack; do not claim direct pack content review.",
+    "Reconcile actionable findings to current UI/Cloud with focused safe regression tests and source-bound CI only when real reproducible defect exists; maintain R455-DEC-001 pending owner decision.",
+    "Retain #455 OPEN and preserve #267 exhaustive original/current audit, #33 extractor, #96 Auth and no-deploy limits."
   ]
 }
