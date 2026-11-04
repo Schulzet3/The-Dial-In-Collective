@@ -662,6 +662,19 @@ function flavorProse(page,clean,{origin='',originConflict=false}={}){
        raw=first+', '+last;
      }
     }
+    // A directly selected, unconditional note can say "stone fruit with a
+    // lemony brightness". That qualifier is part of the same printed sensory
+    // relationship, not incidental marketing. Preserve both literal phrases,
+    // never infer "lemon" from "lemony", and reject conditional preparation.
+    if(patternIndex===2&&!CONDITIONAL_FLAVOR.test(sentence)&&
+       !PREPARATION_QUALIFIED_FLAVOR.test(sentence)){
+     const brightness=raw.match(/^(.{2,180}?)\s+with\s+(?:a|an)\s+((?:lemony|limey|citrusy|floral|fruity|tart)\s+brightness)$/iu);
+     if(brightness){
+      const first=shortFlavorList(brightness[1],clean,{allowSingle:true});
+      const last=shortFlavorList(brightness[2],clean,{allowSingle:true});
+      if(first&&last&&SENSORY_ROLE.test(first))raw=first+', '+last;
+     }
+    }
     // Stop prose continuations at their grammatical boundary. This retains
     // literal descriptors and conjunctions, but not a brewing instruction,
     // buying suggestion or a sentence describing the whole experience.
