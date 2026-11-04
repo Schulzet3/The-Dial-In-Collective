@@ -5,26 +5,26 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 5216,
+    "strict_validated_lines": 5256,
     "first_unvalidated_manifest_file_index": 59,
     "first_unvalidated_path": "docs/DECISION_LEDGER.json",
-    "first_unvalidated_line": 326,
+    "first_unvalidated_line": 366,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 6842,
+    "strict_validated_lines": 6882,
     "first_unvalidated_file_index": 48,
     "first_unvalidated_path": "scripts/audit/coffee-frozen-ci.py",
-    "first_unvalidated_line": 2431,
+    "first_unvalidated_line": 2471,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true,
-    "strict_live_counterpart_checked_through_line": 2430
+    "strict_live_counterpart_checked_through_line": 2470
   },
   "post_pin_drift": {
-    "observed_development_commit": "e72027d8ee96081ba1a1566d78e1c589d5b6517f",
+    "observed_development_commit": "f60456e98270cf2dd550728e8f77834d6ed03706",
     "strict_validated_added_lines": 1,
     "scope": "Single verified addition in first current source path; total post-pin live-code delta denominator not yet reconciled",
     "rest_of_live_changes": "NOT COMPLETE. Original project instructions rewritten 35-line live policy independently read/classified in S2-045; no original frozen/source counters credited. Pinned retention script identical live at observed head.",
@@ -1947,6 +1947,25 @@
       "strict_frozen_delta": 30,
       "strict_pinned_delta": 30,
       "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-087",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-087.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        326,
+        365
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        2431,
+        2470
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "live_exact_text_line_offset": 2,
+      "live_blob": "926bfd49aed1e4426c2aa818b85ef7546d853a4f",
+      "old_v2_additional_credit": 0
     }
   ],
   "completion": "IN_PROGRESS",
