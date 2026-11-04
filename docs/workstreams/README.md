@@ -42,4 +42,6 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 
 - [Cross-provider readiness and obsolete-item audit — November 1](ops-provider-readiness-20261101.md)
 
+- [Netlify rolling exhaustive audit and source-pinning remediation: Issue #508](issue-508.md)
+
 - [Automatic READY-batch source-bound CI journal](release-ready-batch.md) — explicitly recognized same-commit CI work journal.

@@ -10,12 +10,16 @@ concurrency:
   cancel-in-progress: false
 jobs:
   public-smoke:
+    # Manual dispatch on other branches must not exercise or credit a release.
+    if: github.ref == 'refs/heads/release/production'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: development/backend-foundation
+          # Audit the exact release event commit, not mutable development HEAD.
+          ref: ${{ github.sha }}
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
