@@ -527,6 +527,42 @@
       "review_status": "BOUNDED_ORIGINAL_ABSTRACT_AND_METHOD_EXCERPTS; full original HTML/PDF byte review pending",
       "source_bytes_sha256": null,
       "source_byte_caveat": "Publisher first-party indexed methods available; direct open returned HTTP429. PubMed abstract directly read; original PDF bytes not downloaded/hashed."
+    },
+    {
+      "id": "MFR-MAHLKOENIG-E80S-US-20261104",
+      "type": "manufacturer_first_party_model_specific",
+      "title": "Mahlkönig E80S standard timed-dose espresso grinder, USA specification",
+      "published": "Current US manufacturer product page read 2026-11-04; document revision not specified",
+      "url": "https://www.mahlkoenig.us/products/e80s-grinder",
+      "access": "ORIGINAL_MANUFACTURER_US_PRODUCT_HTML_DIRECT; technical detail and caveats inspected",
+      "evidence_grade": "MANUFACTURER_SPECIFICATION_NOT_PEER_REVIEWED_CAUSAL_OR_SENSORY_VALIDATION",
+      "review_status": "FEATURES_TECH_TABLE_DIRECTLY_READ; loaded RPM, tolerances and life distribution not independently measured",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Live HTML accessed 2026-11-04, no original raw HTML archival/byte hash; manufacturer reserves specification changes."
+    },
+    {
+      "id": "MFR-MAHLKOENIG-E80S-GBW-LEGACY-20261104",
+      "type": "manufacturer_first_party_model_specific",
+      "title": "Mahlkönig E80S Grind-by-Weight (GbW) legacy grinder",
+      "published": "Current US manufacturer legacy model page read 2026-11-04; document revision not specified",
+      "url": "https://www.mahlkoenig.us/products/e80s-gbw-grinder",
+      "access": "ORIGINAL_MANUFACTURER_US_LEGACY_PRODUCT_HTML_DIRECT",
+      "evidence_grade": "MANUFACTURER_FEATURES_HARDWARE_DESCRIPTIONS_NOT_MEASURED_TASTE_BENEFITS",
+      "review_status": "LEGACY_STATUS_LOAD_CELL_DDD_RECIPE_PRESETS_AND_CAVEATS_DIRECTLY_READ",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Current legacy manufacturer web page accessed 2026-11-04; no independent dose-accuracy trials or archived raw page bytes."
+    },
+    {
+      "id": "MFR-KAFATEK-MONOLITH-MODEL-RANGES-20261104",
+      "type": "manufacturer_first_party_model_specific",
+      "title": "KafaTek Monolith family official model and RPM/burr differences",
+      "published": "Current 2026 manufacturer model landing page read 2026-11-04; revision not provided",
+      "url": "https://kafatek.com/",
+      "access": "ORIGINAL_MANUFACTURER_PRODUCT_SPEC_TABLE_DIRECT; models and current specification read",
+      "evidence_grade": "MANUFACTURER_HARDWARE_SPEC_NOT_CONTROLLED_PSD_OR_SENSORY_TEST",
+      "review_status": "FLAT_MAX_CONICAL_SDRM_M98V_MODEL_BOUNDARIES_READ; marketed flavor categories not experimentally verified",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "No raw HTML archival or independent loaded-speed validation; model claims may vary by future revisions."
     }
   ],
   "evidence_checks": [
@@ -1423,6 +1459,55 @@
       "current_app": "Verified site/lib/ui.js Git blob 75c187740c5d36310b88fed0bcbf540b4ee70a2c five rating controls; site/cloud/main.js Git blob 79a6ed369c6c38946159b213fe38567e005f8e27 feedback selection; existing Locked scales and one-change recommendation.",
       "result": "RESEARCH_ONLY_NO_UI_CHANGE_OR_OWNER_DECISION",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-024-A",
+      "source": "ORG-09 Git blob 1e1b8bbef0ecb05ed0b20195191bcad26663cf0d first-party grinder example and MFR-MAHLKOENIG-E80S-US-20261104",
+      "claim": "Mahlkönig USA's standard E80S is a timed-dose 80-mm steel-burr espresso grinder; manufacturer lists idle 1400 rpm at 50Hz and 1700 rpm at 60Hz and measured factory grinding-capacity values dependent on grind setting/material. These are model/frequency/unloaded specs, not observed loaded speed, PSD, member dose accuracy or sensory effect.",
+      "grade": "FIRST_PARTY_MODEL_SPEC_DIRECTLY_READ_WITH_UNLOADED_SPEED_AND_LAB_CONDITIONS_BOUNDARY",
+      "primary_sources": [
+        "https://www.mahlkoenig.us/products/e80s-grinder"
+      ],
+      "current_app": "Verified 2026-11-04 development site/lib/model.js blob 19aaca401cab7bbd2059b9a34c6b8df263f4181c: user-owned setup equipment/grinder espresso range and calibration/version history; site/lib/engine.js blob 063dac7593e6d8fa1cb889a0b74746b223dd4390: prefill uses current calibration/style/feed and explicit historical measurements. No native model-RPM input in cited code.",
+      "result": "NO_UNIVERSAL_RPM_OR_DOSING_CORRECTION_FROM_E80S_MARKETING",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-024-B",
+      "source": "MFR-MAHLKOENIG-E80S-US-20261104 and MFR-MAHLKOENIG-E80S-GBW-LEGACY-20261104",
+      "claim": "Mahlkönig identifies E80S (standard) as precise timed dosing but identifies separate discontinued E80S GbW legacy model with integrated real-time load-cell Grind-by-Weight, portafilter detection and Disc Distance Detection; GbW capability is model-specific, not justified by the generic E80S name or by its 80-mm burrs. Both pages' cup-quality statements are marketing, not randomized taste trials.",
+      "grade": "FIRST_PARTY_TWO_MODEL_FEATURE_DIFFERENTIATION_DIRECT; FUNCTIONAL_ACCURACY_NOT_INDEPENDENTLY_VALIDATED",
+      "primary_sources": [
+        "https://www.mahlkoenig.us/products/e80s-grinder",
+        "https://www.mahlkoenig.us/products/e80s-gbw-grinder"
+      ],
+      "current_app": "Verified 2026-11-04 development site/lib/model.js blob 19aaca401cab7bbd2059b9a34c6b8df263f4181c: user-owned setup equipment/grinder espresso range and calibration/version history; site/lib/engine.js blob 063dac7593e6d8fa1cb889a0b74746b223dd4390: prefill uses current calibration/style/feed and explicit historical measurements. No native model-RPM input in cited code.",
+      "result": "PRESERVE_USER_ENTERED_MEASURED_DOSE_AND_EQUIPMENT_VERSIONS_NO_AUTO_HARDWARE_FEATURE_INFERENCE",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-024-C",
+      "source": "ORG-09 example 80 mm variable-speed KafaTek and MFR-KAFATEK-MONOLITH-MODEL-RANGES-20261104",
+      "claim": "KafaTek's 2026 manufacturer page differentiates Monolith Flat SDRM (80mm, 22-800 RPM, conical-flat hybrid), Flat MAX (98mm, 22-400 RPM), Monolith Conical (71mm, 10-200 RPM), and M98V (98mm, primary pour-over). Do not transfer SDRM's 80mm/22-800 RPM range to Flat MAX or imply all same-brand grinder/burr models have the same espresso performance.",
+      "grade": "FIRST_PARTY_MODEL_SPEC_TABLE_DIRECT; NO_INDEPENDENT_RPM_OR_FLAVOR_VALIDATION",
+      "primary_sources": [
+        "https://kafatek.com/"
+      ],
+      "current_app": "Verified 2026-11-04 development site/lib/model.js blob 19aaca401cab7bbd2059b9a34c6b8df263f4181c: user-owned setup equipment/grinder espresso range and calibration/version history; site/lib/engine.js blob 063dac7593e6d8fa1cb889a0b74746b223dd4390: prefill uses current calibration/style/feed and explicit historical measurements. No native model-RPM input in cited code.",
+      "result": "NO_MODEL_UNSPECIFIED_BURR_DIAMETER_RPM_OR_FLAVOR_AUTO_PRIOR",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-024-D",
+      "source": "MFR-MAHLKOENIG-E80S-US-20261104 and ORG-09 burr-wear cautions; current #455 R455-EV-CIT-021-A/B reviewed peer paper",
+      "claim": "Mahlkönig's USA E80S page lists approximate burr grind life 1500 kg at a median setting with laboratory/coffee/grind-setting qualifications. This is a product-specific manufacturer estimate, not an experimentally established universal burr-replacement threshold or evidence that elapsed kilograms alone determine espresso flavor. Do not transfer it to other models.",
+      "grade": "FIRST_PARTY_ESTIMATE_LIMITED_TO_PRODUCT_AND_TEST_CONDITIONS_NOT_BLINDED_WEAR_THRESHOLD",
+      "primary_sources": [
+        "https://www.mahlkoenig.us/products/e80s-grinder"
+      ],
+      "current_app": "Verified 2026-11-04 development site/lib/model.js blob 19aaca401cab7bbd2059b9a34c6b8df263f4181c: user-owned setup equipment/grinder espresso range and calibration/version history; site/lib/engine.js blob 063dac7593e6d8fa1cb889a0b74746b223dd4390: prefill uses current calibration/style/feed and explicit historical measurements. No native model-RPM input in cited code.",
+      "result": "HOLD_ANY_AUTOMATED_BURR_REPLACEMENT_ALERT_OR_SCALE_OFFSET_OWNER_APPROVAL_AND_FIELD_EVIDENCE_REQUIRED",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [],
@@ -1430,8 +1515,8 @@
     "application_code_changed": false,
     "tests_executed": false,
     "production_deployed": false,
-    "queue_changed": true,
-    "reason": "R455-023 documentation-only receipt of independently verified prior PR605 UX fix, plus two additional bounded 2025 expert sensory studies/four checks. Exact-head PR605 and merge tests sourced from GitHub; this commit does not rerun app tests."
+    "queue_changed": false,
+    "reason": "R455-024 manufacturer specification provenance and model-specific guardrails; exact development source read, no app/test/Locked policy change."
   },
   "next_actions": [
     "Verify original Griffiths journal full PDF only if needed and Wadsworth full methods when directly accessible; scientific claim verification does not authorize new app data capture or numeric sensory thresholds.",
@@ -1445,29 +1530,28 @@
     "R455-023: Continue full citation review of nine originals, raw inaccessible October29 ZIP/S019 PDFs and exact-byte provenance of Choi/Kim full manuscripts; assess translated label UX only after specific defect. No #267 V2 coverage credit."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-023",
-    "base_development_sha": "ce019a84850b61d7e861fb1220cf1b51f24c51bd",
-    "original_source_sha_bound_review": "two novel primary 2025 expert espresso sensory studies and exact current UI/cloud Git blobs",
-    "source_ids": [
-      "LIT-2025-KIM-TEP-DISCRIMINATION",
-      "LIT-2025-CHOI-TEP-REPEATABILITY"
+    "id": "R455-024",
+    "base_development_sha": "b9a9d677964262ced84d79b97488ad66179ec5a6",
+    "source_document": "ORG-09 original grinder report, previously substantive read, this pass relevant top and comparative table passages",
+    "original_report_git_blob": "1e1b8bbef0ecb05ed0b20195191bcad26663cf0d",
+    "verified_external_source_ids": [
+      "MFR-MAHLKOENIG-E80S-US-20261104",
+      "MFR-MAHLKOENIG-E80S-GBW-LEGACY-20261104",
+      "MFR-KAFATEK-MONOLITH-MODEL-RANGES-20261104"
     ],
     "claim_ids": [
-      "R455-EV-CIT-023-A",
-      "R455-EV-CIT-023-B",
-      "R455-EV-CIT-023-C",
-      "R455-EV-CIT-023-D"
+      "R455-EV-CIT-024-A",
+      "R455-EV-CIT-024-B",
+      "R455-EV-CIT-024-C",
+      "R455-EV-CIT-024-D"
     ],
-    "number_of_curated_sources": 39,
-    "total_evidence_checks": 82,
-    "feedback_fix_merge_sha": "c319eacc74b7eb73bb40f53deb4cdfd1836f3857",
-    "feedback_fix_ready_not_deployed": true,
-    "exact_head_node": "2409 pass 0 fail 6 skip 41873115270",
-    "exact_merged_node": "2409 pass 0 fail 6 skip 41873987880 attempt2 success",
+    "number_of_curated_sources": 42,
+    "total_evidence_checks": 86,
+    "authority": "OWNER_OPTION_B_RESEARCH_ONLY_NO_LOCKED_CHANGE",
+    "review_type": "PRIMARY_MANUFACTURER_SPEC_ENTAILMENT_AND_NEGATIVE_TRANSFER_GUARDS",
     "original_pack_S019_byte_access": "unavailable",
-    "primary_full_papers": "not fully accessed or byte hashed",
-    "owner_decisions_changed": false,
-    "github267_line_credit": 0,
+    "source_pages_hashed": false,
+    "github267_literal_line_review_credit": 0,
     "production_deployed": false
   },
   "policy_decisions_resolved": [
