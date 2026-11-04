@@ -1,3 +1,15 @@
+## November 4 UTC — Issue33 #445 current selected Blue Jazz sensory qualifier REPRODUCTION TESTING (no READY)
+
+**Recovery and authority:** owner-approved development-only Issue33; live prewrite source SHA `be5c54be857d03f65fdf6275fcd844f768448279`; AGENTS.md, AI entrypoint/preflight, scoped journal, Current Status, Master Spec, decisions, approval, queue, Issue33 comments, concurrent Issue267 V2/96 and PR545/544. Preserve the original immutable 603/201/1197 original oracle, scorer and CSV blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6`.
+
+**Observed exact selected official source:** Blue Jazz [Guatemala](https://www.bluejazzcoffee.com/products/guatemala-antigua) H1 Guatemala, direct selected `stone fruit with a lemony brightness`, **two separate component** heights Lake Atitlan 1800–2000m and HueHuetenengo 1500–1700 MASL. Older Oct29 parser registered `stone fruit` only; this alone does not establish that today's parser still fails. Independent public page read Nov4; fresh guarded raw HTML/hash and exact-current parser still pending.
+
+**Same-commit test/workflow/receipt:** positive and adversarial regression `tests/coffee-issue33-bluejazz-445-brightness.test.mjs`, job `[dic-issue33-nineteenth1]` in `.github/workflows/roaster-source-probe.yml` for a single official #445 public capture, `docs/audits/issue33-bluejazz-445-brightness-20261104.json` and this journal. No runtime change yet. Current regression must be run; if it fails, diagnose and repair with same-commit updated journal and focused positive/negative tests. SKIPPED original603 is not PASS. No READY, no deployment, no provider/production SQL/Auth/Edge/member writes, no service spend; queue unchanged **11 READY/90 DEPLOYED/3 IN_PROGRESS**, Issue33 OPEN, residual 153 context/29 literal/35 historical source-blank caveats retained.
+
+**Next:** read exact PR-head Node job to prove real synthetic defect, then if reproducible patch narrow **generic** current-selected flavor relation, rerun checks, safely nonforce merge, run exact official HTML/parser/Add Coffee marker and compare source/hashes and controls before any READY status.
+
+---
+
 ## November 4 UTC — Issue33 producer-role #290/#380/#571 VERIFIED source-bound safety tests, no speculative READY
 
 **Live, independent source/readback:** Original603 selected cases #290/#380/#571 were fetched and parsed 3/3 by exact merged GitHub run [41812776713](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41812776713), full raw HTML SHA256 and artifact13313471150 recorded in `docs/audits/issue33-eighteenth3-producer-roles-20261104.json`. All 3 selected H1s match. **Zero whole-coffee manual certifications claimed.** Their current selected supplier claims are contextual: #290 generic smallholder country appreciation, #380 ACODIHUE only one of two country components, #571 Capricornio signature-program credit without direct selected growing producer. Retain source-qualified null producer, with no false disagreement. No safe generic runtime fix independently reproduced from these three.
