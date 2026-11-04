@@ -14,7 +14,8 @@ const sha=value=>createHash('sha256').update(value).digest('hex');
 const clip=(v,n=350)=>String(v??'').replace(/\s+/g,' ').trim().slice(0,n);
 // Current bounded live-review default rotates to #19 only; historical named token cohorts remain pinned in workflow.
 const defaultTargetNumbers=[19];
-const explicitTargetNumbers=process.env.DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS;
+// The default workflow passes empty string; only nonempty overrides must validate.
+const explicitTargetNumbers=process.env.DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS || null;
 if(explicitTargetNumbers!=null &&
  !/^[1-9][0-9]{0,2}(?:,[1-9][0-9]{0,2}){0,19}$/.test(explicitTargetNumbers))
  throw Error('invalid_bounded_original603_case_subset');
