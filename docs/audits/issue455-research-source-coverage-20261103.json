@@ -125,8 +125,9 @@
       "observed_file_id": "file_00000000f9a081fd8ac2169124d74fb7",
       "registered_related_archive_pdf_sha256": "a4db4f38c7c347de5c11332f762321e317a4abb24a323bed7a3b3d37ff156f33",
       "exact_library_bytes_hash_verified_in_this_run": false,
-      "review_status": "FULL_TEXT_10_OF_10_PAGES_READ_PAGE5_RENDER_VISUALLY_CHECKED",
-      "caveat": "Original archive title differs; file content equivalence SHA-256 not proven; document is a proposal, not an owner approval."
+      "review_status": "PRIOR_LIBRARY_10_PAGE_REVIEW_NOT_ARCHIVE_MEMBER_BYTE_EQUIVALENCE; see PDF-SLOW-FEED-LIBRARY-20261101",
+      "caveat": "Archived ZIP member SHA-256 a4db4f38... differs from independently materialized Library version SHA-256 a068e5e3...; do not infer byte identity, original archive member not rehashed.",
+      "version_scope": "ORIGINAL_ARCHIVE_ZIP_MEMBER_PRIOR_HASH_ONLY; original bytes not rechecked against distinct Library file"
     },
     {
       "id": "PACK-20261029",
@@ -413,6 +414,22 @@
       "review_status": "MACHINE_FLOW_PRESSURE_PROFILE_OPERATION_AND_MANUFACTURER_CLAIM_LIMIT_CHECK; NOT A HEAD_TO_HEAD_TRIAL",
       "source_bytes_sha256": null,
       "source_byte_caveat": "Dynamic live manual not archived or hashed; later revision possible. 2026-specific machine additions mentioned but unrelated to current app."
+    },
+    {
+      "id": "PDF-SLOW-FEED-LIBRARY-20261101",
+      "type": "pdf_library_variant",
+      "title": "Slow_Feeding_Research_and_Implementation.pdf",
+      "storage": "ChatGPT Library accessible original-byte variant",
+      "library_file_id": "file_00000000f9a081fd8ac2169124d74fb7",
+      "file_size_bytes": 134777,
+      "sha256_verified_in_prior_run": "a068e5e3ae4ab30dda58e7f0f9e24bca16bd570fb67061c3ca4b00cfd28ac28b",
+      "hash_provenance": "Previously materialized/independently SHA-256 checked 2026-11-04, Issue #455 comment 6632289346; NOT independently rehashed in R455-019",
+      "archive_member_prior_sha256": "a4db4f38c7c347de5c11332f762321e317a4abb24a323bed7a3b3d37ff156f33",
+      "differs_from_archive_member_registered_sha256": true,
+      "review_status": "PREVIOUS_RUN_REVIEWED_ALL_10_PAGES_AND_VISUALLY_RENDERED_10_OF_10; ORIGINAL_REFERENCES_NOT_FULLY_VERIFIED",
+      "claim_summary": "No universal slow-feed grinder offset established; proposed future fields/mode capture require owner approval, not current app policy.",
+      "privacy_status": "PRIVATE_EXAMPLES_NOT_EXCERPTED_OR_COMMITTED",
+      "source_receipt": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455#issuecomment-6632289346"
     }
   ],
   "evidence_checks": [
@@ -1086,16 +1103,70 @@
       "current_app": "site/lib/engine.js Git blob bc8bbcee9ec349145a51552ab5dd3337115feca6; style-specific recommendations and recorded measured shots; no pressure/microCT/flow sensor",
       "result": "CONTROL_CAPABILITY_DISTINGUISHED_FROM_VERIFIED_FLAVOR_NO_FIXED_PREINFUSION_OR_AUTOMATIC_POLICY",
       "owner_approval": false
-    }
-  ],
-  "policy_decisions_pending": [
+    },
     {
-      "id": "R455-DEC-001",
-      "topic": "Sweetness-only nonideal rating yields exploratory +1g increase versus nonnumeric repeat diagnostic",
-      "status": "OWNER_REVIEW_UNAPPROVED",
-      "reference": "Issue #455 journal and digest; NOT addressed by slow-feed PDF"
+      "id": "R455-EV-CIT-019-A",
+      "source": "ORG-08 lines 7,37-41; Git blob 122e142c8c8a3c480f68ab63a05b8785ecc5eb02; LIT-2026-ESPRESSO-POROELASTIC",
+      "claim": "Waszkiewicz et al. 2026 author arXiv v2 directly documents one Brazilian light/medium-light coffee, Fiorenzato F64 EVO, 18.50 +/- 0.05 g, 37 g at about 32 s/9 bar as the experimental setup. Long-time pressure-flow nonlinearity and saturation were observed; not evidence for a universal 9-bar/32-second or Turbo/sensory optimum.",
+      "grade": "PEER_REVIEWED_ORIGINAL_AUTHOR_FULL_HTML_METHODS_AND_RESULTS_DIRECT; single coffee/machine, long-time hydraulic observations; full PDF bytes not rehashed",
+      "primary_sources": [
+        "https://arxiv.org/html/2512.21528v2",
+        "https://doi.org/10.1063/5.0319611"
+      ],
+      "current_app": "site/lib/engine.js Git blob 063dac7593e6d8fa1cb889a0b74746b223dd4390 at development 163b73edd3210077ce76fdd2f86016276a7f015e; #455 owner-approved numeric yield/sweetness change merged via PR584 at 163b73edd3210077ce76fdd2f86016276a7f015e. No further heuristic, new user data or runtime changes in this research commit.",
+      "result": "MEASUREMENT_SCOPED_NO_UNIVERSAL_TIME_PRESSURE_TASTE_POLICY",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-019-B",
+      "source": "ORG-08 lines 42-44; same Git blob; LIT-2026-ESPRESSO-POROELASTIC",
+      "claim": "Waszkiewicz et al. Methods II.1 apply a 10-second blind shaker AND upper-puck WDT AND ~20 kg fixed automated tamp together as standard preparation. No randomized WDT-only, shake-only or variable-tamp comparison; cannot demonstrate any individual technique is superior or a universal optimum.",
+      "grade": "PRIMARY_AUTHOR_DIRECT_EXPERIMENTAL_DESIGN_NEGATIVE_ENTAILMENT",
+      "primary_sources": [
+        "https://arxiv.org/html/2512.21528v2"
+      ],
+      "current_app": "site/lib/engine.js Git blob 063dac7593e6d8fa1cb889a0b74746b223dd4390 at development 163b73edd3210077ce76fdd2f86016276a7f015e; #455 owner-approved numeric yield/sweetness change merged via PR584 at 163b73edd3210077ce76fdd2f86016276a7f015e. No further heuristic, new user data or runtime changes in this research commit.",
+      "result": "NO_NEW_WDT_SHAKER_TAMP_PREFERENCE",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-019-C",
+      "source": "ORG-08 lines 7,49-51; ORG-07 lines 4-12; originals Git blobs 122e142c8c8a3c480f68ab63a05b8785ecc5eb02, 43912d0dec0969c090d525c853f3a456136a2311; LIT-2019-COFFEE-CFD-UNIFORMITY",
+      "claim": "Moroney et al. 2019 PLOS ONE Methods use a 59-mm chamber, 250 mL/min, 60g coffee and approximately 1L water; authors explicitly say brew quantities and times resemble drip-filter rather than traditional espresso. Their CFD/1D models of spatial extraction are not empirical member-cup quality optimization.",
+      "grade": "PEER_REVIEWED_ORIGINAL_FULL_HTML_METHODS_READ; modeled spatial effects not direct espresso sensory",
+      "primary_sources": [
+        "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0219906"
+      ],
+      "current_app": "site/lib/engine.js Git blob 063dac7593e6d8fa1cb889a0b74746b223dd4390 at development 163b73edd3210077ce76fdd2f86016276a7f015e; #455 owner-approved numeric yield/sweetness change merged via PR584 at 163b73edd3210077ce76fdd2f86016276a7f015e. No further heuristic, new user data or runtime changes in this research commit.",
+      "result": "FILTER_LIKE_METHOD_BOUNDARY_NO_UNIVERSAL_ESPRESSO_EY_CHANGE",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-019-D",
+      "source": "ORG-08 lines 49-51; LIT-2019-COFFEE-CFD-UNIFORMITY",
+      "claim": "Moroney et al. Introduction traces historical 18-22% EY preference to Lockhart-era filter coffee control chart and notes conventional adoption for espresso. This is not direct experimental evidence that all espresso style/roast regimes or user palates prefer 18-22%. Original 1957 study not directly fetched.",
+      "grade": "PEER_REVIEWED_LITERATURE_HISTORY_DIRECT; cited historical source unverified separately",
+      "primary_sources": [
+        "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0219906"
+      ],
+      "current_app": "site/lib/engine.js Git blob 063dac7593e6d8fa1cb889a0b74746b223dd4390 at development 163b73edd3210077ce76fdd2f86016276a7f015e; #455 owner-approved numeric yield/sweetness change merged via PR584 at 163b73edd3210077ce76fdd2f86016276a7f015e. No further heuristic, new user data or runtime changes in this research commit.",
+      "result": "ORIGINAL_FILTER_EY_TARGET_NOT_APPLIED_AS_LOCKED_ESPRESSO_OPTIMUM",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-019-E",
+      "source": "ORG-08 original report 08 puck-preparation/RDT analysis; blob 122e142c8c8a3c480f68ab63a05b8785ecc5eb02; LIT-2024-RDT-ISCIENCE",
+      "claim": "Mendez Harper, Bumbaugh & Hendon 2024 tested water-based grinder antistatic treatment; <0.05mL/g water altered PSD/clumping and darker-roast espresso concentration improved >=15% under tested setup. Not a blinded sensory improvement, universal roast correction or slow-feed prescription; excessive moisture may cake/corrode grinders.",
+      "grade": "PEER_REVIEWED_PRIMARY_FULL_TEXT_SUMMARY_AND_METHODS_READ; concentration not taste",
+      "primary_sources": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC11402325/"
+      ],
+      "current_app": "site/lib/engine.js Git blob 063dac7593e6d8fa1cb889a0b74746b223dd4390 at development 163b73edd3210077ce76fdd2f86016276a7f015e; #455 owner-approved numeric yield/sweetness change merged via PR584 at 163b73edd3210077ce76fdd2f86016276a7f015e. No further heuristic, new user data or runtime changes in this research commit.",
+      "result": "NO_NEW_RDT_FEED_OFFSETS_OR_USER_CAPTURE",
+      "owner_approval": false
     }
   ],
+  "policy_decisions_pending": [],
   "change_scope": {
     "application_code_changed": false,
     "tests_executed": false,
@@ -1108,32 +1179,49 @@
     "Retrieve actual bytes of the two Project Library DIC_Espresso_Research_Implementation_Pack ZIP entries via an authorized owner-provided mount/working attachment if access becomes available; metadata exists but raw_file materialization explicitly denied. Only then hash against recorded 7d562a45... and inspect 15 entries/48 research-only cases.",
     "Retrieve/hash the separate original S019 roast/style PDF and reverify prior slow-feed 10-page content against its archived original bytes; neither claim complete.",
     "Reconcile #267's independent V2 line review (zero strict credit from #455), #33 extractor and #96 security, avoiding overlap.",
-    "Reproduce another narrow Locked-compatible Log Shot > Rate > Recommendation UX/logic defect in actual current code; add risk-proportionate tests, same-commit journal, nonforce CI/merge only if proven. R455-DEC-001 remains awaiting explicit owner choice."
+    "Reproduce another narrow Locked-compatible Log Shot > Rate > Recommendation UX/logic defect in actual current code; add risk-proportionate tests, same-commit journal, nonforce CI/merge only if proven. R455-DEC-001 was explicitly approved and merged in development PR #584; verify queued readiness/CI separately, not new approval.",
+    "Reconcile distinct accessible Library slow-feed PDF SHA-256 against original archive member only when authorized archive bytes available; Library page review does not verify member identity or unverified citations."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-017",
-    "base_development_sha": "6fa001ee97ae5601b973924d2614809834308b6e",
+    "id": "R455-019",
+    "base_development_sha": "163b73edd3210077ce76fdd2f86016276a7f015e",
+    "engine_blob": "063dac7593e6d8fa1cb889a0b74746b223dd4390",
     "source_ids": [
-      "LIT-2023-MO-MICROCT-SPH",
-      "LIT-2023-LEE-UNEVEN-2PATH",
-      "MFR-DECENT-2026-DE1-MANUAL"
+      "LIT-2026-ESPRESSO-POROELASTIC",
+      "LIT-2019-COFFEE-CFD-UNIFORMITY",
+      "LIT-2024-RDT-ISCIENCE",
+      "PDF-SLOW-FEED-LIBRARY-20261101"
     ],
     "source_claim_checks": [
-      "R455-EV-CIT-017-A",
-      "R455-EV-CIT-017-B",
-      "R455-EV-CIT-017-C",
-      "R455-EV-CIT-017-D",
-      "R455-EV-CIT-017-E"
+      "R455-EV-CIT-019-A",
+      "R455-EV-CIT-019-B",
+      "R455-EV-CIT-019-C",
+      "R455-EV-CIT-019-D",
+      "R455-EV-CIT-019-E"
     ],
-    "number_of_curated_sources": 31,
-    "total_evidence_checks": 64,
-    "original_report_full_bodies_reviewed": "9/9 previously; original #04 relevant portions directly rechecked; source bibliography is PARTIAL",
-    "research_pack": "TWO_PROJECT_ZIPS_METADATA_ONLY_RAW_BYTES_NOT_VERIFIED; current Library title-only search returned no ZIP",
+    "number_of_curated_sources": 32,
+    "total_evidence_checks": 69,
+    "original_report_full_bodies_reviewed": "9/9 previously; original report #07 and #08 relevant sections rechecked; many original citations still pending",
+    "research_pack": "TWO_PROJECT_ZIPS_METADATA_ONLY_RAW_BYTES_NOT_REVIEWED",
     "s019": "ORIGINAL_PDF_NOT_RETRIEVED",
-    "google_drive_search": "espresso research, S019, slow feeding and DIC_Espresso yielded no results; Roast Color is previously indexed only",
+    "google_drive_search": "espresso research, S019, slow feeding and DIC Espresso Research Implementation Pack: no new research docs found",
     "github267_line_credit": 0,
-    "app_changes": false,
+    "app_changes_in_this_commit": false,
+    "pr584": "MERGED_DEV_163b73edd3210077ce76fdd2f86016276a7f015e; exact-source Node/cloud/approval CI verified via GitHub commit record, queue still TESTING when sampled",
     "production_deployed": false,
-    "status": "FIVE_CITATION_AND_MACHINE_CAPABILITY_CLAIMS_REVIEWED_DOCS_ONLY_PENDING_CI"
-  }
+    "status": "FIVE_SOURCE_METHOD_CHECKS_AND_DISTINCT_LIBRARY_VARIANT_REGISTERED_DOCS_ONLY"
+  },
+  "policy_decisions_resolved": [
+    {
+      "id": "R455-DEC-001",
+      "topic": "Sweetness-only nonideal rating yields exploratory +1g increase versus nonnumeric repeat diagnostic",
+      "status": "OWNER_APPROVED_2026-11-04_DEVELOPMENT_IMPLEMENTED_NOT_DEPLOYED",
+      "reference": "Issue #455 journal and digest; NOT addressed by slow-feed PDF",
+      "owner_decision": "Conventional double next-shot yield change starting at 5g with proportional smaller short recipe steps; compare truly comparable same-coffee evidence for sweetness-only recommendations without promising taste improvement.",
+      "authority": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455#issuecomment-6633464998",
+      "implementation_pr": 584,
+      "verified_merge_commit": "163b73edd3210077ce76fdd2f86016276a7f015e",
+      "release_authorized": false
+    }
+  ]
 }
