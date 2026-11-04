@@ -12,7 +12,8 @@ import {extractCoffeeBlendEvidence} from '../../src/server/coffee-blend-evidence
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../../site/cloud/coffee-url-autofill.js';
 const sha=value=>createHash('sha256').update(value).digest('hex');
 const clip=(v,n=350)=>String(v??'').replace(/\s+/g,' ').trim().slice(0,n);
-const defaultTargetNumbers=[1,13,22,28,37,91,205];
+// Current bounded live-review default rotates to #19 only; historical named token cohorts remain pinned in workflow.
+const defaultTargetNumbers=[19];
 const explicitTargetNumbers=process.env.DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS;
 if(explicitTargetNumbers!=null &&
  !/^[1-9][0-9]{0,2}(?:,[1-9][0-9]{0,2}){0,19}$/.test(explicitTargetNumbers))

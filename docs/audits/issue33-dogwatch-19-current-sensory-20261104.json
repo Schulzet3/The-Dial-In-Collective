@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "date_utc": "2026-11-04",
+  "state": "TESTING_GENERIC_PATCH_UNVERIFIED",
+  "authority": "Owner authorized development-only Issue33 current selected-source field adjudication; not a release",
+  "parent_source_sha": "3416ceda5bcce4c885025ffe6af162ded89b5d74",
+  "original603": {
+    "case_number": 19,
+    "name": "DogWatch Dark Blend",
+    "immutable_csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197
+  },
+  "official_source": {
+    "url": "https://blackdogcoffee.net/product/dogwatch-dark-blend-2/",
+    "checked_date_utc": "2026-11-04",
+    "source_type": "CURRENT_SELECTED_PUBLIC_PRODUCT_RENDERED_TEXT",
+    "selected_h1": "DogWatch Dark Blend",
+    "literal_excerpt": "dark, smoky chocolate flavor with earth notes balanced by high sweet undertones and a smooth full body",
+    "raw_html_sha256": "PENDING_BOUNDED_OFFICIAL_CI",
+    "original_csv_record_process": "NOT_A_PROCESS_CHECK"
+  },
+  "historical_contrast": {
+    "source_bound_current_extraction_20261029": "smoky chocolate flavor with earth",
+    "missing_direct_source_clause": "high sweet undertones",
+    "interpretation": "Historical capture indicates potential truncation; not yet independently reproduced on exact new parser"
+  },
+  "change": {
+    "kind": "GENERIC_SELECTED_SENSORY_GRAMMAR",
+    "path": "src/server/coffee-flavor-evidence.mjs",
+    "test_path": "tests/coffee-issue33-dogwatch-selected-sweet-undertones.test.mjs",
+    "bounded_live_probe_path": "scripts/audit/issue33-original603-focused-source-review.mjs",
+    "runtime_change": true
+  },
+  "acceptance": "Required: initial test-only CI evidence and repaired PR-head Node/lint/build, nonforce merged source, fresh official #19 raw HTML hash/current parser/Add Coffee before READY; source conflicts or fail imply IN_PROGRESS.",
+  "status": "TESTING",
+  "no_release_or_production_changes": true
+}
