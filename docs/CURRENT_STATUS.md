@@ -1,3 +1,9 @@
+## November 4 UTC — Issue33 #107/#325 exact selected public source field review complete, no new READY
+
+PR576 merged `f94cbc044b729c578cc839adc4705fd62409cdd3` with 4/4 applicable PR-head CI SUCCESS. Genuine exact merged official current source [41839630905](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41839630905) 2/2 parsed/Add Coffee previews; independently rehashed #107/#325 raw HTML. #107 origin Ethiopia/Washed/Medium/sensory retained, finer Yirgacheffe and co-op producer qualified; #325 selected tags Oaxaca/water processed do not warrant whole-blend origin/decaf, both blank. No proven generic defect and no false READY. #319 already corrected PR318 and excluded; 14 READY/90 DEPLOYED/3 IN_PROGRESS, Issue33 OPEN, global frozen603 semantic UNVERIFIED. No deployment or production writes. [Receipt](audits/issue33-original603-107-319-source-review-20261104.json). [skip netlify]
+
+---
+
 ## November 4, 2026 — Issue #33 DogWatch #19 narrow verified READY, not deployed
 Two nonforce source PRs #572/#573 merged and exact merged Node/lint/build41836087081 2,386 PASS/0 FAIL/6 intentional SKIP; first test-only genuine positive regression failed as expected, then corrected. Fresh exact official selected #19 raw HTTPS run41836087208 (1/1 fetched/parsed) and independent ZIP readback SHA256 ab44b863854cb3b89d8484f05af9cdbcddee6387a5f495e7d68634b1665d7608 verified canonical direct source notes 'smoky chocolate, earth, high sweet undertones', no conflict, actual Add Coffee/source-review markup true. One new narrow DIC-Q-33-19-selected-direct-sweet-undertones READY, totals 14 READY/90 DEPLOYED/3 IN_PROGRESS. Global 603 independent semantic acceptance remains UNVERIFIED, Issue33 OPEN. Restricted frozen603 workflow SKIPPED not PASS; no publication or production writes. [Receipt](audits/issue33-dogwatch-19-current-sensory-20261104.json). [skip netlify]
 
