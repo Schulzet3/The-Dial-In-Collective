@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "issue": 504,
+  "audit_batch": "G1-012",
+  "date_utc": "2026-11-04",
+  "status": "DIRECT_REVIEWED_PR_CI_PENDING",
+  "method": "Direct semantic reading of all original words in eight adjacent whole queue objects, source-bound to pinned SHA and ranges; record extraction and arithmetic used only for verification, never as semantic review.",
+  "source": {
+    "development_sha": "bd48e191af5966251392cd0747d51c530e90437f",
+    "main_sha": "d326bad3300fe56489029b17144273d359396ee5",
+    "publication_branch_sha": "31c66832a28247e657a2bf89592ebc1e2f48dfc5",
+    "original_queue_blob_sha": "43a07ba9fd29f19248b4965a40c35e3d47c0a6c4",
+    "patched_queue_blob_sha": "4ad074c9f94324c343365b733e4157dc1bbf9402",
+    "release07_receipt_blob": "062bd4d07a496cdb3868a6b68dc2ca58204ccb28",
+    "release08_receipt_blob": "469c8698f5abbfcbe62486160d3858b506469e05"
+  },
+  "reviewed": [
+    {
+      "id": "DIC-Q-15-retired-bag-management",
+      "source_range_inclusive": [
+        1671,
+        1715
+      ],
+      "physical_lines": 45,
+      "original_whitespace_words": 422,
+      "notes_source_line": 1708,
+      "release_receipt": "DIC-20261027-READY-QUEUE-07",
+      "semantic_review": "Legacy Bag UI retired; hosted bag/shots relationships, RLS and offline history deliberately retained; earlier browser test failed a stale assertion and was corrected. No SQL deletion.",
+      "disposition": "HISTORICAL_SOURCE_TIME_PREFIX_ONLY"
+    },
+    {
+      "id": "DIC-Q-161-cloud-reconciliation",
+      "source_range_inclusive": [
+        1716,
+        1753
+      ],
+      "physical_lines": 38,
+      "original_whitespace_words": 279,
+      "notes_source_line": 1746,
+      "release_receipt": "DIC-20261027-READY-QUEUE-07",
+      "semantic_review": "Safe indexed cloud hydration, account-owner isolation and bounded Community refresh; original frozen603 workflow was SKIPPED. Earlier READY note predates delivery.",
+      "disposition": "HISTORICAL_SOURCE_TIME_PREFIX_ONLY"
+    },
+    {
+      "id": "DIC-Q-33-independent-candidate21",
+      "source_range_inclusive": [
+        1754,
+        1798
+      ],
+      "physical_lines": 45,
+      "original_whitespace_words": 474,
+      "notes_source_line": 1791,
+      "release_receipt": "DIC-20261027-READY-QUEUE-07",
+      "semantic_review": "21 original source recoveries, manual conflict previews, fully preserved original603 oracle, 49 unresolved conflicts. Frozen private CI job SKIPPED; no automatic disputed value.",
+      "disposition": "HISTORICAL_SOURCE_TIME_PREFIX_ONLY"
+    },
+    {
+      "id": "DIC-Q-161-synthetic-session-safety",
+      "source_range_inclusive": [
+        1799,
+        1837
+      ],
+      "physical_lines": 39,
+      "original_whitespace_words": 248,
+      "notes_source_line": 1830,
+      "release_receipt": "DIC-20261027-READY-QUEUE-07",
+      "semantic_review": "Member-session-safe cloud outbox and synthetic fuzz/load; passing node/cloud/mobile CI scoped to source; skipped original603 and no hosted member or real provider write.",
+      "disposition": "HISTORICAL_SOURCE_TIME_PREFIX_ONLY"
+    },
+    {
+      "id": "DIC-Q-33-source-conflict-provenance-links",
+      "source_range_inclusive": [
+        1838,
+        1876
+      ],
+      "physical_lines": 39,
+      "original_whitespace_words": 322,
+      "notes_source_line": 1869,
+      "release_receipt": "DIC-20261027-READY-QUEUE-07",
+      "semantic_review": "Provenance links sanitized for credentials and limited to HTTPS; manual source conflict resolution, original oracle unchanged. Initial queue CI failure repaired; hosted603 SKIPPED.",
+      "disposition": "HISTORICAL_SOURCE_TIME_PREFIX_ONLY"
+    },
+    {
+      "id": "DIC-Q-161-epoch-bound-sync-notifications",
+      "source_range_inclusive": [
+        1877,
+        1911
+      ],
+      "physical_lines": 35,
+      "original_whitespace_words": 312,
+      "notes_source_line": 1904,
+      "release_receipt": "DIC-20261027-READY-QUEUE-07",
+      "semantic_review": "Epoch-bound sync status prevents prior owner session from overwriting subsequent state; 390px browser/offline PWA checks recorded; source READY note predates Release07.",
+      "disposition": "HISTORICAL_SOURCE_TIME_PREFIX_ONLY"
+    },
+    {
+      "id": "DIC-Q-33-current-source-and-four-roasters",
+      "source_range_inclusive": [
+        1912,
+        1962
+      ],
+      "physical_lines": 51,
+      "original_whitespace_words": 556,
+      "notes_source_line": 1955,
+      "release_receipt": "DIC-20261028-READY-QUEUE-08",
+      "semantic_review": "Four exact current roaster targets accepted after earlier failed regression rounds; Counter Culture sanitized source_facts 66 versus 47 remains an OPEN optional parity discrepancy; original603 not re-run.",
+      "disposition": "NO_CHANGE"
+    },
+    {
+      "id": "DIC-Q-33-original603-six-missing-facts",
+      "source_range_inclusive": [
+        1963,
+        1998
+      ],
+      "physical_lines": 36,
+      "original_whitespace_words": 284,
+      "notes_source_line": 1991,
+      "release_receipt": "DIC-20261028-READY-QUEUE-08",
+      "semantic_review": "Six missing original603 assertions corrected with no previously exact loss; hosted private603 workflow SKIPPED, archival independent replay preserved; no live-member test claim.",
+      "disposition": "NO_CHANGE"
+    }
+  ],
+  "accounting": {
+    "source_range_inclusive": [
+      1671,
+      1998
+    ],
+    "new_source_lines": 328,
+    "original_whitespace_words": 2897,
+    "new_historical_label_words": 30,
+    "new_credited_words": 2927,
+    "source_bound_overlap_with_issue267": 0,
+    "cumulative": {
+      "source_file_lines": 3776,
+      "source_file_words": 28535,
+      "github_objects": 2,
+      "github_words": 721
+    }
+  },
+  "findings": [
+    {
+      "id": "G1-012-F1",
+      "kind": "HISTORICAL_PRE_DELIVERY_STATUS_UNDATED",
+      "severity": "LOW",
+      "queue_id": "DIC-Q-15-retired-bag-management",
+      "notes_line": 1708,
+      "evidence": "DIC-20261027-READY-QUEUE-07 immutable receipt lists exact item and queue state DEPLOYED",
+      "disposition": "FIXED_PREFIX_ONLY; ORIGINAL_WORDS_PRESERVED"
+    },
+    {
+      "id": "G1-012-F2",
+      "kind": "HISTORICAL_PRE_DELIVERY_STATUS_UNDATED",
+      "severity": "LOW",
+      "queue_id": "DIC-Q-161-cloud-reconciliation",
+      "notes_line": 1746,
+      "evidence": "DIC-20261027-READY-QUEUE-07 immutable receipt lists exact item and queue state DEPLOYED",
+      "disposition": "FIXED_PREFIX_ONLY; ORIGINAL_WORDS_PRESERVED"
+    },
+    {
+      "id": "G1-012-F3",
+      "kind": "HISTORICAL_PRE_DELIVERY_STATUS_UNDATED",
+      "severity": "LOW",
+      "queue_id": "DIC-Q-33-independent-candidate21",
+      "notes_line": 1791,
+      "evidence": "DIC-20261027-READY-QUEUE-07 immutable receipt lists exact item and queue state DEPLOYED",
+      "disposition": "FIXED_PREFIX_ONLY; ORIGINAL_WORDS_PRESERVED"
+    },
+    {
+      "id": "G1-012-F4",
+      "kind": "HISTORICAL_PRE_DELIVERY_STATUS_UNDATED",
+      "severity": "LOW",
+      "queue_id": "DIC-Q-161-synthetic-session-safety",
+      "notes_line": 1830,
+      "evidence": "DIC-20261027-READY-QUEUE-07 immutable receipt lists exact item and queue state DEPLOYED",
+      "disposition": "FIXED_PREFIX_ONLY; ORIGINAL_WORDS_PRESERVED"
+    },
+    {
+      "id": "G1-012-F5",
+      "kind": "HISTORICAL_PRE_DELIVERY_STATUS_UNDATED",
+      "severity": "LOW",
+      "queue_id": "DIC-Q-33-source-conflict-provenance-links",
+      "notes_line": 1869,
+      "evidence": "DIC-20261027-READY-QUEUE-07 immutable receipt lists exact item and queue state DEPLOYED",
+      "disposition": "FIXED_PREFIX_ONLY; ORIGINAL_WORDS_PRESERVED"
+    },
+    {
+      "id": "G1-012-F6",
+      "kind": "HISTORICAL_PRE_DELIVERY_STATUS_UNDATED",
+      "severity": "LOW",
+      "queue_id": "DIC-Q-161-epoch-bound-sync-notifications",
+      "notes_line": 1904,
+      "evidence": "DIC-20261027-READY-QUEUE-07 immutable receipt lists exact item and queue state DEPLOYED",
+      "disposition": "FIXED_PREFIX_ONLY; ORIGINAL_WORDS_PRESERVED"
+    }
+  ],
+  "checks": {
+    "queue_json_parse": "PASS",
+    "original_112_ordered_ids_states_shas_and_all_non_note_fields": "PASS",
+    "exact_six_note_prefixes_only": "PASS",
+    "unchanged_5369_physical_lines": "PASS",
+    "release_receipt_membership": "8_OF_8_PASS",
+    "release07_six": "6_OF_6_PASS",
+    "release08_two": "2_OF_2_PASS",
+    "pr_head_ci": "NOT_YET_RUN",
+    "merged_source_ci": "NOT_YET_RUN",
+    "node_browser_sql": "NOT_RERUN_DOC_ONLY",
+    "live_member_provider": "NOT_CHECKED",
+    "publication": "NOT_AUTHORIZED"
+  },
+  "overlap_and_limits": "#267 sole owner original frozen/current executable line audit; #455 UX, #33 extractor, #96 Auth/privacy. No code-source credit, no semantic claim from scanned inventory, no release/publishing authority. Issue, review, workflow history and binary coverage remains incomplete.",
+  "next": {
+    "path": "docs/RELEASE_QUEUE.json",
+    "first_unreviewed_line": 1999,
+    "expected_item": "DIC-Q-33-owner-source-precedence-rotating-origin",
+    "expected_blob_sha": "4ad074c9f94324c343365b733e4157dc1bbf9402",
+    "require_new_drift_validation": true
+  }
+}
