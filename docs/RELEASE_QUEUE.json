@@ -12,7 +12,7 @@
       "issue": 509,
       "pr": 527,
       "title": "Align historical expired invitation search to displayed expiration status",
-      "state": "IN_PROGRESS",
+      "state": "READY",
       "scope_paths": [
         "supabase/migrations/20261104075400_dic_admin_invite_expiry_search.sql"
       ],
@@ -20,20 +20,27 @@
         "2026-11-04 07:50 UTC production read-only pure-expression reproduction confirmed expired invitation was labeled active by search filter while listing status displayed expired; no member data read.",
         "PR527 exact head cdc37e34cd84dac023eac4fb1e2a669b847dadf8 cloud-tests PASS; approval job 126458183180 FAILED intake solely due missing queue entry; queue fixed in this follow-up docs commit. Other jobs were in progress at initial snapshot; do not mark PASS without results.",
         "Disconnected SQL regression in supabase/tests/admin_server_search.sql now seeds synthetic historical expired token and verifies expired search match and active search exclusion. Actual isolated SQL result not yet verified.",
-        "PR527 second approval check run41795600475 job126458836818 FAILED invalid merged source SHA: missing required nullable field on IN_PROGRESS item. Repaired by explicit merged_source_sha=null; previous failure remains documented."
+        "PR527 second approval check run41795600475 job126458836818 FAILED invalid merged source SHA: missing required nullable field on IN_PROGRESS item. Repaired by explicit merged_source_sha=null; previous failure remains documented.",
+        "PR527 corrected exact PR head e4ef26b6b0aff6b3dc68a0b1eb55e16d99ccd74b: validate41795744305, sql41795744420, approval41795744289, cloud/mobile41795744316 SUCCESS; initial failed approval intake41795397175 and 41795600475 diagnosed and corrected. Nonforce squash merged exact app fix at 14204859b2e7a288d5dd31dc2b81a881ab0c701a (parent 3c2cf27e4e6ef6966867bd301149dbf412bac60f); merged-source certify41796262777, approval41796262736, SQL41796262831, cloud/mobile41796262778 all SUCCESS. New migration and synthetic isolated PostgreSQL test verified; Supabase production remains UNCHANGED. READY but NOT DEPLOYED."
       ],
       "ci_runs": [
         41795397138,
         41795397135,
         41795397167,
-        41795397175
+        41795397175,
+        41795744305,
+        41795744420,
+        41795744289,
+        41795744316,
+        41796262777,
+        41796262736,
+        41796262831,
+        41796262778
       ],
-      "blockers": [
-        "Applicable exact-source CI must pass, nonforce merge and readback not yet performed. No production SQL, provider writes or publication authorized."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
-      "notes": "Source-only candidate. Existing immutable migrations, public RPC/grants and single-use never-expiring issued tokens preserved. IN_PROGRESS, not READY/DEPLOYED.",
-      "merged_source_sha": null
+      "notes": "VERIFIED READY, NOT DEPLOYED. Source-only migration and rolled-back isolated SQL regression with exact PR-head and merged-source CI PASS. No live Supabase SQL/Auth/Edge/storage/member writes; owner publish command still required.",
+      "merged_source_sha": "14204859b2e7a288d5dd31dc2b81a881ab0c701a"
     },
     {
       "id": "DIC-Q-33-selected-angel-albino-corzo-region",
