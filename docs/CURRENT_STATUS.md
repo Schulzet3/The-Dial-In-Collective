@@ -1,3 +1,9 @@
+## November 4 UTC — Issue #33 #287 Roadmap selected-growing-region correction READY (NOT DEPLOYED)
+
+[PR519](https://github.com/Schulzet3/The-Dial-In-Collective/pull/519) nonforce merged `93446482fe9654f4e7f1e9bb022961c2f4da4f78`, exact tested source tree identical; corrected exact-head and exact merged Node/lint/build 1,637 PASS/0 FAIL, cloud/browser/security/approval/SQL as applicable SUCCESS. Actual [official public-source run41789718256](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41789718256) 3/3 selected H1/HTML/parser/Add Coffee previews: #287 Roadmap origin now **Angel Albino Corzo, Chiapas, MEXICO** from directly selected statement distinguishing region from producer; #22/#286 controls unchanged. FFESICH Cooperative producer preserved, no conflicts. One narrow item READY, queue **8 READY /90 DEPLOYED /3 IN_PROGRESS**. Original603 frozen workflow SKIPPED, broader 603 manual semantic acceptance unverified, #33 OPEN. No deploy, production/provider/member writes or release authorization. [skip netlify]
+
+---
+
 ## November 3, 2026 (Denver) — Issue #37 guide/video DEPLOYED, owner accepted, closure reconciliation
 
 Release 13 published on 2026-10-30 (production `42eb45aab12d1a47fe96a3ebe8a1f36b3913b5f7`, Netlify `6ae421f5de038d292bd66407`). On 2026-11-03 (Denver), the owner confirmed in the live app that the guide and video are visible and the video plays. Current Netlify was independently READY/current on a later source `31c66832a28247e657a2bf89592ebc1e2f48dfc5` that retains the same guide/video assets. This is owner-observed live functional acceptance, not a claim of a signed-in first-shot completion, physical-device test, named screen-reader test, or instrumented HTTP byte-range test.
