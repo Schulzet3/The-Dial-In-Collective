@@ -55,3 +55,25 @@ test('a nearby mill in a named region does not establish that the beans grew the
  const p=parse('We paired the Catuai with coffee from the Pacas Family in El Salvador, a blend of Bourbon and Pacas beans that are processed at the Cafe Tuxpal mill in the Santa Ana region.');
  assert.ok(!String(p.fields.origin||'').includes('Santa Ana'));
 });
+
+test('duplicate selected product div and span wrappers are one regional claim',()=>{
+ const nested=markup(current).replace('<p>'+current+'</p>',
+  '<div class="selected-description"><span>'+current+'</span></div>');
+ const blend=extractCoffeeBlendEvidence(nested,{name});
+ assert.equal(blend?.component_format,'labeled');
+ assert.equal(blend?.origin,'Nueva Segovia, Nicaragua; Santa Ana, El Salvador');
+ const p=extractPublicCoffeeFacts(nested,{source_url:url});
+ assert.equal(p.ok,true);
+ assert.equal(p.fields.origin,'Nueva Segovia, Nicaragua; Santa Ana, El Salvador');
+ assert.ok(coffeeUrlPreviewMarkup(p).includes('Santa Ana'));
+});
+
+test('two distinct contradictory current regional claims remain reviewable, not guessed',()=>{
+ const alternate=current.replace('Santa Ana region','Ahuachapán region');
+ const html=markup('<span>'+current+'</span><span>'+alternate+'</span>');
+ const blend=extractCoffeeBlendEvidence(html,{name});
+ assert.equal(blend?.origin,'Nueva Segovia, Nicaragua; El Salvador');
+ const p=extractPublicCoffeeFacts(html,{source_url:url});
+ assert.ok(!String(p.fields.origin||'').includes('Santa Ana'));
+ assert.ok(!String(p.fields.origin||'').includes('Ahuachapán'));
+});

@@ -138,7 +138,11 @@ function selectedComponentFarmRegion(blend,page){
    if(sentence.length>1200||NONCURRENT_COFFEE_PROSE.test(sentence)||
       /\b(?:previously|formerly|historically|hypothetically|hypothetical|last year|prior lot|used to|other coffee|another coffee|related coffee)\b/i.test(sentence))continue;
    const found=component.exec(sentence);
-   if(found)matches.push({country:found[1],region:found[2]});
+   // The same selected sentence can be emitted by nested inline wrappers.
+   // De-duplicate byte-equivalent normalized claims, but keep genuinely
+   // different claims separate so contradictory regions still fail closed.
+   if(found&&!matches.some(value=>key(value.quote)===key(found[0])))
+    matches.push({country:found[1],region:found[2],quote:found[0]});
   }
  }
  if(matches.length!==1)return blend;
