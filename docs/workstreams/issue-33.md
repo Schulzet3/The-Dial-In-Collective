@@ -1,3 +1,9 @@
+## November 4, 2026 UTC — Issue33 #309 positive regression corrected to actual optional conflicts contract
+
+Initial exact runtime head `096c20bde8d62f0d8e0e472308a1a2435ca480af` Node41931437335 ran 1,693 tests: **1,692 PASS/1 FAIL**. The ONLY failure was our new test's assertion `result.conflicts?.length === 0`: the parser intentionally OMITTED `conflicts` when no conflict exists, so `undefined !== 0`. The same test first asserted actual `roast_level=Light` from exact selected inline product **PASS**, and all eight other new negative cases PASS. This commit corrects only the test to accept absent or empty conflicts while still rejecting any actual conflict; runtime extraction unchanged. Previous approval41931437237 failed malformed new queue IN_PROGRESS schema (fixed in preceding parent `5677324b6c559b506c8760f45934ca4f1c6f85ae`); PR-head security41931437263, exact source41931437332, cloud/mobile41931437351, isolated SQL41931437260 SUCCESS. Rerun exact corrected head, check actual official current selected 309/565/601 after safe merge, keep parent #33 OPEN. [skip netlify]
+
+---
+
 ## November 4, 2026 UTC — Issue33 #309 candidate CI schema repair (TESTING, not READY)
 
 PR639 original exact head `096c20bde8d62f0d8e0e472308a1a2435ca480af`: approval41931437237 failed at `scripts/release/release-queue.mjs --validate` because new IN_PROGRESS row lacked required `merged_source_sha:null` and `ci_runs:[]`; no runtime assertion failure in that check. Head security41931437263, private source41931437332, isolated SQL41931437260 and cloud/mobile41931437351 SUCCESS; Node41931437335 result pending on original source. Corrected queue schema with source paths/CI/remaining blockers preserved; all original READY/DEPLOYED rows unchanged. Re-run applicable exact corrected head, then nonforce merge and current official source verification; #33 OPEN. No deployment, data or frozen corpus write. [skip netlify]

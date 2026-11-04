@@ -24,7 +24,7 @@ test('#309 exact selected current product roast tag, not marketing light body, r
  assert.equal(result.ok,true,JSON.stringify(result));assert.equal(result.fields.roast_level,'Light',JSON.stringify(result));
  assert.notEqual(result.fields.origin,'Africa',JSON.stringify(result));
  assert.equal(result.fields.name,'Horizon Blend');
- assert.equal(result.conflicts?.length,0);
+ assert.ok(!result.conflicts||result.conflicts.length===0);
 });
 test('selected product title mismatch blocks another roast',()=>assert.equal(tag(root,{title:'Another Blend'}),null));
 test('different product handle cannot supply roast to selected URL',()=>assert.equal(tag({...root,handle:'another-blend'}),null));
