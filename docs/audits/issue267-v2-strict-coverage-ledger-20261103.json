@@ -5,29 +5,29 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 5571,
+    "strict_validated_lines": 5594,
     "first_unvalidated_manifest_file_index": 59,
     "first_unvalidated_path": "docs/DECISION_LEDGER.json",
-    "first_unvalidated_line": 681,
+    "first_unvalidated_line": 704,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 7198,
-    "first_unvalidated_file_index": 49,
-    "first_unvalidated_path": "scripts/audit/coffee-import-browser.mjs",
-    "first_unvalidated_line": 131,
+    "strict_validated_lines": 7221,
+    "first_unvalidated_file_index": 50,
+    "first_unvalidated_path": "scripts/audit/coffee-reviewed-change-forensics.py",
+    "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true,
     "strict_live_counterpart_checked_through_line": 2656,
     "last_live_counterpart_checked": {
       "path": "scripts/audit/coffee-import-browser.mjs",
-      "commit": "03db0feac765f06b4fb7c4c4b390dd06227d6ee0",
+      "commit": "4436f2f29723a7d30d3ad46611bd92f170210ec4",
       "blob": "0ff48f3e23624964e2894fd3b97aab9365df1234",
       "first_line": 1,
-      "last_line": 130,
+      "last_line": 153,
       "offset": 0
     }
   },
@@ -180,14 +180,14 @@
       "semantic_line_credit": 0
     },
     "latest_bounded_live_observation": {
-      "commit": "03db0feac765f06b4fb7c4c4b390dd06227d6ee0",
+      "commit": "4436f2f29723a7d30d3ad46611bd92f170210ec4",
       "path": "scripts/audit/coffee-import-browser.mjs",
       "blob": "0ff48f3e23624964e2894fd3b97aab9365df1234",
       "reviewed_lines": [
         1,
-        130
+        153
       ],
-      "note": "Entire pinned code blob equals actual live blob; directly reviewed first 130 lines ONLY, no full live drift coverage"
+      "note": "Pinned code file #49 direct AI line audit is complete; entire file Git blob text-identical in live development, but other live tree drift still not complete"
     }
   },
   "batches": [
@@ -2157,11 +2157,33 @@
       "strict_pinned_delta": 40,
       "old_v2_additional_credit": 0,
       "verification": "79 direct original-line AI semantic records SHA/text checked with each mandatory dimension; 40 pinned lines match live exact blob; runtime not executed"
+    },
+    {
+      "batch": "S2-096",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-096.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        681,
+        703
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-import-browser.mjs",
+      "pinned_lines": [
+        131,
+        153
+      ],
+      "pinned_blob": "0ff48f3e23624964e2894fd3b97aab9365df1234",
+      "live_exact_text_line_offset": 0,
+      "live_blob": "0ff48f3e23624964e2894fd3b97aab9365df1234",
+      "strict_frozen_delta": 23,
+      "strict_pinned_delta": 23,
+      "old_v2_additional_credit": 0,
+      "verification": "46 source-specific direct AI semantics checked against original Git blobs; 23 live text match; no hosted browser run; pinned file #49 complete"
     }
   ],
   "completion": "IN_PROGRESS",
-  "test_limit": "S2-095 direct source+record integrity checked; no fresh hosted browser, genuine Auth, full original603 or post-pin drift completion",
-  "last_batch": "S2-095",
-  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-095.json",
+  "test_limit": "AI source-bound semantic records only; exact PR CI pending; live post-pin code drift, Auth and full browser tests unverified",
+  "last_batch": "S2-096",
+  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-096.json",
   "complete": false
 }
