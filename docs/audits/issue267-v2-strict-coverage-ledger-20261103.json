@@ -5,9 +5,9 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 1536,
-    "first_unvalidated_manifest_file_index": 27,
-    "first_unvalidated_path": "docs/ADMIN_PORTAL_FINAL_RELEASE_REVIEW_2026-10-21.md",
+    "strict_validated_lines": 1591,
+    "first_unvalidated_manifest_file_index": 28,
+    "first_unvalidated_path": "docs/ADMIN_PORTAL_RELEASE_CANDIDATE_2026-10-21.md",
     "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
@@ -15,15 +15,15 @@
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 1494,
+    "strict_validated_lines": 1594,
     "first_unvalidated_file_index": 26,
     "first_unvalidated_path": "netlify/functions/coffee-url-preview.mjs",
-    "first_unvalidated_line": 1,
+    "first_unvalidated_line": 101,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "post_pin_drift": {
-    "observed_development_commit": "36d16a8bf726df3541625a69b49d8f634cbed4af",
+    "observed_development_commit": "7fa8a80c3bac95bb90f3cfebf7bd572da3b882e5",
     "strict_validated_added_lines": 1,
     "scope": "Single verified addition in first current source path; total post-pin live-code delta denominator not yet reconciled",
     "rest_of_live_changes": "NOT_COMPLETELY_REVIEWED",
@@ -35,8 +35,21 @@
     "machine_only_changed_paths": 222,
     "machine_only_diff_commits": 243,
     "other_live_paths_direct_semantic_status": "Pinned current identical ESLint and netlify.toml fully reviewed; most post-pin live source delta not reviewed",
-    "partially_read_live_paths": [],
-    "latest_partially_validated_live_path": ".github/workflows/roaster-source-probe.yml",
+    "partially_read_live_paths": [
+      {
+        "path": "netlify/functions/coffee-url-preview.mjs",
+        "blob": "b982650d78920f77342f5ac78dce91ca394094cc",
+        "reviewed_lines": [
+          1,
+          100
+        ],
+        "remaining_lines": [
+          101,
+          192
+        ]
+      }
+    ],
+    "latest_partially_validated_live_path": "netlify/functions/coffee-url-preview.mjs",
     "strict_validated_changed_live_lines": 2,
     "roaster_source_probe": {
       "source_blob": "766e94e803b6d3957e80ffd38a04ce32e287b7ba",
@@ -674,6 +687,28 @@
       "pinned_blob": "a8bb6cd41d2e2c939da8d369ee510eb9f2b4cc56",
       "reused_pinned_semantic_receipt": null,
       "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-027",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-027.json",
+      "frozen_file": "docs/ADMIN_PORTAL_FINAL_RELEASE_REVIEW_2026-10-21.md",
+      "frozen_lines": [
+        1,
+        55
+      ],
+      "frozen_blob": "538ca6adec844dd02fa50d9964e5cc628564bec9",
+      "pinned_file": "netlify/functions/coffee-url-preview.mjs",
+      "pinned_lines": [
+        1,
+        100
+      ],
+      "pinned_blob": "b982650d78920f77342f5ac78dce91ca394094cc",
+      "observed_live_lines": [
+        1,
+        100
+      ],
+      "live_blob": "b982650d78920f77342f5ac78dce91ca394094cc",
+      "old_v2_additional_credit": 0
     }
   ],
   "completion": "IN_PROGRESS",
