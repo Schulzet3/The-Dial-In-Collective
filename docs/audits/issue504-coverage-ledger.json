@@ -155,11 +155,30 @@
         2500
       ],
       "prior_pr_617_unmerged": true
+    },
+    {
+      "id": "G1-015",
+      "receipt": "docs/audits/issue504-review-G1-015.json",
+      "text_files_entire": 0,
+      "text_files_partial": 1,
+      "reviewed_file_lines": 308,
+      "reviewed_file_words": 2861,
+      "reviewed_github_objects": 0,
+      "reviewed_github_words": 0,
+      "reviewed_sequential_queue_records": 8,
+      "confirmed_note_only_fixes": 0,
+      "source_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
+      "source_range_inclusive": [
+        2501,
+        2808
+      ],
+      "prior_pr_617_unmerged": true,
+      "prior_pr_619_unmerged": true
     }
   ],
   "totals": {
-    "source_file_lines": 4278,
-    "source_file_words": 32949,
+    "source_file_lines": 4586,
+    "source_file_words": 35810,
     "github_objects": 2,
     "github_words": 721
   },
@@ -178,15 +197,15 @@
   "next": {
     "kind": "git_blob",
     "path": "docs/RELEASE_QUEUE.json",
-    "first_line": 2501,
+    "first_line": 2809,
     "expected_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
     "require_fresh_blob": true,
-    "expected_next_item": "DIC-Q-33-profile-boundary-no-variety-loss",
+    "expected_next_item": "DIC-Q-17-numeric-range-slow-feed-aware-grind",
     "unreviewed_drift": [
       "DIC-Q-455-recipe-context-feedback"
     ]
   },
-  "uncovered": "Queue line 2501+ and changed #455 drift; other GitHub issue/PR/reviews/Actions/logs/artifacts/commit/tag/history and binaries; delegated #267 frozen/current direct semantic work separate and uncredited. Pending #617 and stacked PR CI/merge.",
+  "uncovered": "Queue line 2809+ and separately changed #455 drift; all other issue/PR/comments/reviews/actions/metadata/historical bytes; delegated #267 strict work uncredited. Open #617/#619 CI/merge blocked.",
   "latest_review_source_anchor": "712dc6c2a9fed041baab48ec52b91d641a44971c",
   "inventory_metadata_only": {
     "github_issue_rest": 523,
@@ -217,9 +236,9 @@
     "source_sha_before_notes": "0f5d8a9d6be56b7ecb4b7e4675340e0f9ed374e5",
     "total_lines": 5377,
     "reviewed_first_line": 1,
-    "reviewed_last_line": 2500,
+    "reviewed_last_line": 2808,
     "whitespace_words_credited": "per_receipt_ranges_only; includes noncontiguous earlier insertions",
-    "credit": "G1-005 through G1-014; only directly reviewed exact receipt ranges, no blanket drift credit"
+    "credit": "G1-005 through G1-015; exact source-bound ranges only"
   },
   "ci_open_negative": {
     "source_merge_sha": "54ab55987be8b05db090c530a47e496093c8c76a",
@@ -236,6 +255,7 @@
     "job_log_limit": "404 BlobNotFound, reason unverified; do not reclassify as PASS",
     "pr_617_head_sha": "712dc6c2a9fed041baab48ec52b91d641a44971c",
     "pr_617_check_conclusions": "5 failure before test steps",
-    "stacked_pr": "G1-014 CI/merge pending; never merge before parent #617"
+    "stacked_pr": "G1-015 on #619 on #617; no merge before actual exact-source CI and source readback",
+    "pr_619_status": "OPEN/NO_PASS_CI"
   }
 }
