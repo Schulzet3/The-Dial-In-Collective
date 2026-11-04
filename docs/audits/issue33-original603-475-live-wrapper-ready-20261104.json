@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "review_date_utc": "2026-11-04",
+  "kind": "ORIGINAL603_475_NESTED_SELECTED_COMPONENT_REGION_CORRECTION",
+  "state": "VERIFIED_NARROW_READY_NOT_DEPLOYED",
+  "owner_authority": "Issue #33 development-only hourly owner; no release authority",
+  "original603_unchanged": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "oracle_and_scorer": "unchanged"
+  },
+  "prior_fault": {
+    "source_run": 41830017392,
+    "html_sha256": "55aeb812caf8e0e32cbe71cb84482528267f865ce3a571925f0f6c4aee3548a8",
+    "origin": "Nueva Segovia, Nicaragua; El Salvador",
+    "reason": "ProductCoffeeProse returned same selected product paragraph twice as div and nested span; selectedComponentFarmRegion required exactly one match and discarded both."
+  },
+  "generic_fix": {
+    "pr": 565,
+    "merged_sha": "dc500285460ca2a7d6a6bdf2853520a2685ee844",
+    "identical_tested_and_merged_git_tree": "d88b5a3a8990743f0eb445c3d7ada45fb47c185d",
+    "source_path": "src/server/coffee-blend-evidence.mjs",
+    "test_path": "tests/coffee-issue33-475-selected-component-region.test.mjs",
+    "safety": "Deduplicate only normalized exact matched country/region source quotes; contradictory distinct source clauses still withhold refinement; no other-coffee, mill, historical or metadata promotion."
+  },
+  "exact_ci": {
+    "pr_head_node": 41830442870,
+    "merged_node": 41830754583,
+    "pass": 1667,
+    "fail": 0,
+    "skipped": 0,
+    "approval_head": 41830443032,
+    "approval_merged": 41830754647,
+    "sql_head": 41830443034,
+    "security_head": 41830442816,
+    "cloud_ux_head": 41830442815,
+    "cloud_ux_merged": 41830754690,
+    "archive_head": 41830442956,
+    "queue_merged": 41830754565,
+    "full_original603": "SKIPPED_NOT_PASS"
+  },
+  "official_public_source": {
+    "run_id": 41830754548,
+    "job_id": 126577012737,
+    "artifact_id": 13322592623,
+    "cases": [
+      {
+        "number": 475,
+        "url": "https://www.darkmattercoffee.com/products/anthrax-cursum-perficio",
+        "h1": "Anthrax - Cursum Perficio",
+        "html_sha256": "3530c349a74875c7e59465db2d750dcc3006b6778db202d79d45da78189d536e",
+        "parser_ok": true,
+        "origin": "Nueva Segovia, Nicaragua; Santa Ana, El Salvador",
+        "variety": "Catuai, Bourbon & Pacas",
+        "process": "Washed",
+        "tasting_notes": "Nutella, graham cracker, and lemon tea",
+        "conflicts": [],
+        "field_certified": "origin",
+        "source_role": "Two-country current selected labeled blend, Santa Ana explicitly describes second component's several coffee farms, not mill or album release."
+      },
+      {
+        "number": 508,
+        "url": "https://www.kindercoffeelab.com/products/avalon-light-roast",
+        "h1": "Munsinger Light Roast",
+        "html_sha256": "6625a9fb95eb4bb0ee7426f0f3dddf68fd4d2f975279b27f5c948ec43092e2f3",
+        "parser_ok": true,
+        "roast_level": "Light",
+        "origin": "Peru Cajamarca",
+        "process": "Washed",
+        "tasting_notes": null,
+        "conflicts": [
+          "tasting_notes"
+        ],
+        "source_role": "Current H1 supersedes reused Avalon slug; two directly incompatible current Notes lists withheld for user review."
+      }
+    ],
+    "fetched": 2,
+    "parsed": 2,
+    "preview_renderer_executed_for_each": true,
+    "preview_boolean_from_artifact_not_independently_inspected": true,
+    "manual_entire_coffees_certified": 0
+  },
+  "queue_after": {
+    "READY": 13,
+    "DEPLOYED": 90,
+    "IN_PROGRESS": 3
+  },
+  "parent_issue_open": true,
+  "separate_workstreams": [
+    267,
+    96
+  ],
+  "no_netlify_deployment": true,
+  "no_production_sql_auth_edge_provider_member_writes": true,
+  "limits": "Narrow one field correction only. Original 153 context-qualified, 29 missing-literal, 35 historical source-present blank indications and all remaining semantic source cases not universally accepted. No genuine signed-in hosted GoTrue/device evidence. Diagnostic ZIP has private 1-day retention.",
+  "next": "Review next nonoverlapping unresolved current official selected product case; isolate source role, reproduce true defect before narrow generic correction. Keep Issue #33 open until all original acceptance independently adjudicated."
+}
