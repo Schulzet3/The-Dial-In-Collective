@@ -305,6 +305,32 @@
       "review_status": "PRIMARY_ABSTRACT_LIMITED_FACT_CHECK_FULL_METHODS_NOT_REVIEWED",
       "source_bytes_sha256": null,
       "source_byte_caveat": "NIH indexed summary and Portland State author repository abstract accessed 2026-11-04; original full body not accessible; do not conflate this 2024 iScience paper with separate 2024 Matter 7 paper DOI 10.1016/j.matt.2023.11.005."
+    },
+    {
+      "id": "LIT-2023-ESPRESSO-FLOW-FRACTIONS",
+      "type": "external_primary_study",
+      "title": "Influence of Flow Rate, Particle Size, and Temperature on Espresso Extraction Kinetics",
+      "authors": "Schmieder, Pannusch, Vannieuwenhuyse, Briesen, Minceva",
+      "published": "2023-07-28",
+      "doi": "10.3390/foods12152871",
+      "url": "https://www.mdpi.com/2304-8158/12/15/2871",
+      "access": "ORIGINAL_OPEN_ACCESS_PUBLISHER_METHODS_RESULTS_CONCLUSIONS_WEB_TEXT_CHECKED; PMC_DIRECT_RETRIEVAL_RECAPTCHA_BLOCKED",
+      "evidence_grade": "PEER_REVIEWED_CONTROLLED_SINGLE_ESPRESSO_MACHINE_FLOW_GRIND_TEMP_NONVOLATILE_FRACTION_STUDY_NOT_SENSORY_PREFERENCE",
+      "review_status": "PUBLISHER_PRIMARY_METHODS_AND_CONCLUSIONS_CLAIM_CHECK_ONLY_NOT_EXTERNAL_BYTE_HASH_ARCHIVED",
+      "source_bytes_sha256": null
+    },
+    {
+      "id": "LIT-2024-ESPRESSO-FINES-SENSORY",
+      "type": "external_primary_study",
+      "title": "The role of fines in espresso extraction dynamics",
+      "authors": "Smrke, Eiermann, Yeretzian",
+      "published": "2024-03-07",
+      "doi": "10.1038/s41598-024-55831-x",
+      "url": "https://www.nature.com/articles/s41598-024-55831-x",
+      "access": "PRIMARY_PUBLISHER_ORIGINAL_AUTHOR_METHODS_AND_RESULTS_VIA_SEARCH_TEXT; DIRECT_OPEN_REDIRECT_AUTH_BLOCKED; PUBMED_ABSTRACT_CROSS_CHECKED",
+      "evidence_grade": "PEER_REVIEWED_SINGLE_COSTA_RICA_COFFEE_SINGLE_GRINDER_20G_40G_9BAR_ONE_EXPERIENCED_SENSORY_TASTER",
+      "review_status": "PUBLISHER_EXCERPT_FACT_CHECK_NOT_COMPLETE_DIRECT_FULL_BODY_OR_BYTE_ARCHIVE",
+      "source_bytes_sha256": null
     }
   ],
   "evidence_checks": [
@@ -810,6 +836,45 @@
       "current_app": "site/lib/engine.js bc8bbcee9ec349145a51552ab5dd3337115feca6 retains separate slow/standard feed and same-coffee grinder evidence; no RDT data capture or universal TDS claim",
       "result": "RDT_TDS_CONTEXT_INDEXED_NO_DERIVED_TASTE_RECOMMENDATION",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-015-A",
+      "source": "ORG-02 original lines 11,119,127,177,183; Git blob 17ab370d8d479190d867fbe7e4b0f80becb93b9a; LIT-2023-ESPRESSO-FLOW-FRACTIONS",
+      "claim": "Schmieder et al. directly measured ten consecutive espresso fractions, analytically quantified six selected fractions for trigonelline, caffeine, 5-CQA and TDS, and calculated 20g/40g/60g cup component masses for a 20g puck by fitting/integration. The brew ratios and calculated component masses are NOT direct sensory ratings or a validation of any universal taste optimum.",
+      "grade": "ORIGINAL_OPEN_PUBLISHER_METHODS_SECTION_2_8_AND_DOE_CHECKED_EXPERIMENTAL_NONVOLATILES_NOT_SENSORY",
+      "primary_sources": [
+        "https://www.mdpi.com/2304-8158/12/15/2871",
+        "https://www.lse.ls.tum.de/en/btd/news/article/new-publication-on-influence-of-flow-rate-particle-size-and-temperature-on-espresso-extraction-kinetics/"
+      ],
+      "current_app": "site/lib/engine.js bc8bbcee9ec349145a51552ab5dd3337115feca6 derives style/coffee starting bands, retains five subjective ratings and personal recipes, no TDS/EY based taste target",
+      "result": "SOURCE_METHOD_VERIFIED_NO_NUMERIC_ESPRESSO_TASTE_TARGET_PROPOSED",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-015-B",
+      "source": "ORG-02 original lines 11,119,127; LIT-2023-ESPRESSO-FLOW-FRACTIONS; Git blob 17ab370d8d479190d867fbe7e4b0f80becb93b9a",
+      "claim": "Within the tested 1-3mL/s flow, 80-98C temperature, and Mahlkonig E65S setting 1.4-2.0, flow showed the strongest among tested process effects on measured cup masses, but total collected beverage mass had larger effects. Authors explicitly limit quantitative generalization because their response-surface model did not fully capture extraction complexity.",
+      "grade": "ORIGINAL_PUBLISHER_DOE_AND_CONCLUSION_CHECK_EXPERIMENT_LIMITED_NO_BLIND_ESPRESSO_SENSORY",
+      "primary_sources": [
+        "https://www.mdpi.com/2304-8158/12/15/2871",
+        "https://portal.fis.tum.de/en/publications/influence-of-flow-rate-particle-size-and-temperature-on-espresso-/"
+      ],
+      "current_app": "site/lib/engine.js bc8bbcee9ec349145a51552ab5dd3337115feca6 retains measured yield/time, separate shot styles and actionable single-control advice; no universal numeric flow correction",
+      "result": "FLOW_AND_YIELD_EFFECTS_CONTEXT_NOT_NEW_POLICY_OR_EMPIRICAL_APP_EFFECT",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-015-C",
+      "source": "ORG-02 original lines 19,143,177,184,216; LIT-2024-ESPRESSO-FINES-SENSORY; Git blob 17ab370d8d479190d867fbe7e4b0f80becb93b9a",
+      "claim": "Smrke et al. used one Costa Rican pulped-natural Arabica, one Bentwood Vertical 63 grinder, 20g dose/40g cup at 9bar and added screened fines; fines lowered permeability and lengthened extraction. Very short extractions gave 17-18% EY (over 80% of study's maximum), yet the single experienced taster preferred this coffee around 30s and 19-20% EY. This cannot prove that Turbo tastes better or worse generally, nor set an app-wide time or EY target.",
+      "grade": "PRIMARY_NATURE_PUBLISHER_METHODS_AND_RESULTS_SEARCH_TEXT_PLUS_PUBMED_ABSTRACT; DIRECT_OPEN_AUTH_REDIRECT_BLOCKED_SINGLE_TASTER_NOT_POPULATION_SENSORY",
+      "primary_sources": [
+        "https://www.nature.com/articles/s41598-024-55831-x",
+        "https://pubmed.ncbi.nlm.nih.gov/38453983/"
+      ],
+      "current_app": "site/lib/constants.js 72221331ce4dffabe416eebec1ae2fceced3a095 keeps Turbo and Traditional distinct and style-specific; engine.js bc8bbcee9ec349145a51552ab5dd3337115feca6 uses five tasted qualities and logged personal success rather than universal time/EY",
+      "result": "ONE_TASTER_CONDITION_LIMITE_CONFIRMED_NO_TURBO_OR_EY_TARGET_CHANGE",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [
@@ -825,7 +890,7 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R455-014 3 additional curated original/author literature identities and 5 source-exact conditional experimental/method limitations. Docs and same-commit journal only; no runtime, tests, original-research bytes, CI workflow, Master Spec, Locked decisions, approval/queue or provider changes."
+    "reason": "R455-015 two further publisher/author original citations and 3 bounded claim/method checks; documentation and same-commit journal only. No app/test/CI/workflow, Locked decisions, queue, approval, CURRENT_STATUS or provider mutation."
   },
   "next_actions": [
     "Continue unresolved original research bibliography primary citation checks with exact original section, DOI, access and generalization limits; all nine full bodies were read but NOT all citations independently verified.",
@@ -835,28 +900,25 @@
     "Reproduce another narrow Locked-compatible Log Shot > Rate > Recommendation UX/logic defect in actual current code; add risk-proportionate tests, same-commit journal, nonforce CI/merge only if proven. R455-DEC-001 remains awaiting explicit owner choice."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-014",
-    "base_development_sha": "13c7a7b535628c2033e655906618964d9cfd07bb",
+    "id": "R455-015",
+    "base_development_sha": "08d6f747244226fd9e2d254c2c080b0300ff1e87",
     "source_ids": [
-      "LIT-2026-ESPRESSO-POROELASTIC",
-      "LIT-2019-COFFEE-CFD-UNIFORMITY",
-      "LIT-2024-RDT-ISCIENCE"
+      "LIT-2023-ESPRESSO-FLOW-FRACTIONS",
+      "LIT-2024-ESPRESSO-FINES-SENSORY"
     ],
     "source_claim_checks": [
-      "R455-EV-CIT-014-A",
-      "R455-EV-CIT-014-B",
-      "R455-EV-CIT-014-C",
-      "R455-EV-CIT-014-D",
-      "R455-EV-CIT-014-E"
+      "R455-EV-CIT-015-A",
+      "R455-EV-CIT-015-B",
+      "R455-EV-CIT-015-C"
     ],
-    "number_of_curated_sources": 23,
-    "total_evidence_checks": 51,
+    "number_of_curated_sources": 25,
+    "total_evidence_checks": 54,
     "original_report_full_bodies_reviewed": "9/9 previously; no new full-body credit",
     "research_pack": "TWO_PROJECT_ZIPS_METADATA_ONLY_RAW_BYTES_ACCESS_DENIED",
     "s019": "ORIGINAL_PDF_NOT_RETRIEVED",
     "github267_line_credit": 0,
     "app_changes": false,
     "production_deployed": false,
-    "status": "FIVE_SCOPED_PUBLISHER_AUTHOR_CITATION_CHECKS_NO_PRODUCT_POLICY_AUTHORITY"
+    "status": "THREE_PRIMARY_METHOD_CITATION_CHECKS_NO_PRODUCT_POLICY_AUTHORITY"
   }
 }
