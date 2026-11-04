@@ -5,9 +5,9 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 2786,
-    "first_unvalidated_manifest_file_index": 32,
-    "first_unvalidated_path": "docs/APP_WIDE_ERROR_SWEEP_2026-10-17.md",
+    "strict_validated_lines": 2879,
+    "first_unvalidated_manifest_file_index": 33,
+    "first_unvalidated_path": "docs/AUDIT_AND_RELEASE_PREFLIGHT_2026-10-20.md",
     "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
@@ -15,9 +15,9 @@
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 3210,
-    "first_unvalidated_file_index": 41,
-    "first_unvalidated_path": "scripts/audit/coffee-corpus-replay.mjs",
+    "strict_validated_lines": 3357,
+    "first_unvalidated_file_index": 42,
+    "first_unvalidated_path": "scripts/audit/coffee-corpus-report-browser.mjs",
     "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true
@@ -113,6 +113,13 @@
       "head_base_commit": "89a65bc0ac09d27b2df59c4824c363b078caaa83",
       "original_pinned_blob": "4f10bd3c97b1e96c448e242912d6c6c5758af136",
       "scope": "URL guard trailing-dot loopback bypass; separate live delta semantic review required after merge"
+    },
+    "pending_local_corpus_selection_fix": {
+      "path": "scripts/audit/coffee-corpus-render.mjs",
+      "source_head": "fbe824da7cf7c7623996ceb7b71d1285f757cefb",
+      "source_line": 26,
+      "issue": "Missing selected URL case silently omitted, falsifies aggregate complete status",
+      "status": "PATCH_PENDING_EXACT_PR_HEAD_TESTS"
     }
   },
   "batches": [
@@ -1034,6 +1041,25 @@
       "pinned_blob": "4f10bd3c97b1e96c448e242912d6c6c5758af136",
       "prepatch_live_same": true,
       "code_patch_line": 28,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-038",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-038.json",
+      "frozen_file": "docs/APP_WIDE_ERROR_SWEEP_2026-10-17.md",
+      "frozen_lines": [
+        1,
+        93
+      ],
+      "frozen_blob": "abac1fb2ad0b6b851cbd9c2765c75821b455da2b",
+      "pinned_file": "scripts/audit/coffee-corpus-replay.mjs",
+      "pinned_lines": [
+        1,
+        147
+      ],
+      "pinned_blob": "adf7115358cf9069c6e146e9ec983705575e1863",
+      "prepatch_live_same": true,
+      "code_patch": "scripts/audit/coffee-corpus-render.mjs line 26",
       "old_v2_extra_credit": 0
     }
   ],
