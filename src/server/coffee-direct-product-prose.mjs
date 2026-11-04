@@ -12,6 +12,9 @@ const fold=v=>String(v||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toL
 // description; never scan site-wide education, menus, other products or SEO.
 const CURRENT_DECAF_METHOD=/^(?:(?:this|our)\s+(?:decaf(?:feinated)?\s+)?coffee\s+(?:is|was|has been)\s+decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?(?:swiss[\s-]?water|mountain[\s-]?water|sugar(?:[\s-]?cane|[\s-]?process)|ethyl\s+acetate|natural[\s-]?ea|(?:supercritical\s+)?carbon[\s-]?dioxide|co\s*[- ]?[2\u2082])\b|the\s+(?:swiss[\s-]?water|mountain[\s-]?water|sugar[\s-]?cane|carbon[\s-]?dioxide)\s*[\u00ae\u2122]?\s+(?:process|method)\s+is\s+(?:an?\s+)?[^.!?]{0,150}\bdecaffeination\s+process\b[^.!?]{0,160}\bcaffeine[\s-]?free\b)/iu;
 const NONCURRENT_DECAF_METHOD=/\b(?:previous(?:ly)?|formerly|historically|typically|generally|other coffees?|another coffee|last year|prior (?:lot|harvest))\b/iu;
+// Accept short current treatment only with the directly selected self-decaf
+// paragraph and exact H1; never infer from roaster identity or site SEO.
+const CURRENT_SELECTED_DECAF_WAY=/^(?:[\p{L}\p{M}]{3,24}['’]d|(?:this|our)\s+coffee\s+(?:is|was)\s+decaffeinated)\s+by\s+way\s+of\s+(?:the\s+)?(?:swiss[\s-]?water|mountain[\s-]?water|sugar[\s-]?cane|ethyl[\s-]?acetate|(?:supercritical\s+)?carbon[\s-]?dioxide|co\s*[- ]?[2\u2082])\b/iu;
 // Current selected coffee names can be longer than the grammatical subject
 // printed in their own description: e.g. "TRANQUILO, Decaffeinated, 12 oz"
 // prints "Tranquilo is decaffeinated using the natural Sugar Cane Process".
@@ -45,6 +48,12 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
  const body=blocks.filter(x=>!x.educational&&x.text.length<=1200&&
   ['p','div','h4','h5','li'].includes(x.tag)&&
   !/\b(?:related products?|you may also like|recommended|more coffees?|other coffees?)\b/i.test(x.section));
+ // The product H1 need not contain "Decaf" if its own selected description
+ // unambiguously says "this ... decaf coffee"; exclude half-caf products.
+ const selectedUnnamedDecafIdentity=!/\b(?:half[ -]?caf|quarter[ -]?caf|semi[ -]?decaf|partially[ -]?decaf)\b/i.test(name)&&
+  body.some(b=>b.tag==='p'&&b.text.length<=550&&
+   /\bthis\s+(?:[\p{L}\p{M}-]+\s+){0,8}decaf(?:feinated)?\s+coffee\b/iu.test(b.text)&&
+   !NONCURRENT_DECAF_METHOD.test(b.text));
  const organizations=new Set(),farms=new Set(),sensory=new Set(),literals=new Set(),roasts=new Set();
  const releases=new Set(),decafEvidence=new Set();
  let decafEvidenceOverflow=false;
@@ -93,6 +102,14 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
  let anotherExplicitList=false;
  for(const b of body){
   const line=b.text.replace(/\s+/g,' ').trim();
+  // Direct selected decaf evidence, never general educational background.
+  if(selectedUnnamedDecafIdentity&&line.length<=240&&
+     CURRENT_SELECTED_DECAF_WAY.test(line)&&!NONCURRENT_DECAF_METHOD.test(line)&&
+     inferDecaffeinationMethod({name,selectedMethod:line,selectedCurrentDecafIdentity:true})&&
+     !decafEvidence.has(line)){
+   if(decafEvidence.size<4)decafEvidence.add(line);
+   else decafEvidenceOverflow=true;
+  }
   // A decaf identity plus a current selected-product sentence is required.
   // Reuse the conservative method classifier; if multiple incompatible
   // methods are printed, the caller withholds autofill and keeps both sources.
@@ -157,7 +174,10 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
  if(releases.size===1)out.release_label=[...releases][0];
  if(sensory.size===1)out.tasting_notes=[...sensory][0];
  if(literals.size===1&&!anotherExplicitList)out.explicit_tastes_like=[...literals][0];
- if(decafEvidence.size&&!decafEvidenceOverflow)out.decaffeination_method_evidence=[...decafEvidence];
+ if(decafEvidence.size&&!decafEvidenceOverflow){
+   out.decaffeination_method_evidence=[...decafEvidence];
+   if(selectedUnnamedDecafIdentity)out.selected_current_decaf_identity=true;
+  }
  return out;
 }
 
