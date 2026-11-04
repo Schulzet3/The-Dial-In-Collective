@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "status": "TESTING_RENDERED_SELECTED_SOURCES_REVIEWED_RUNNER_BLOCKED",
+  "base_sha": "57241cb8b87149336254c5bd82e0632246023943",
+  "base_tree": "176c175906942ff34fec111a77cf48da06badaea",
+  "date_utc": "2026-11-04",
+  "workflow_selector": "[dic-issue33-twentysixth3]",
+  "original_source_csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "numbers": [
+    309,
+    565,
+    601
+  ],
+  "queries": [
+    {
+      "number": 309,
+      "url": "https://shop.compasscoffee.com/products/horizon-blend",
+      "risk": "Do not mix selected 12oz vs other 5lb roast/origin; body vs roast; possible changed domain."
+    },
+    {
+      "number": 565,
+      "url": "https://www.sidecarcoffee.com/products/espresso",
+      "risk": "Washed + Natural components are mixed, not one process. Do not add unpublished countries."
+    },
+    {
+      "number": 601,
+      "url": "https://zekescoffee.com/collections/all-items/products/colombian-sierra-nevada",
+      "risk": "Selected Colombia Huila; historical URL different slug; association founding not release."
+    }
+  ],
+  "evidence_class": "PUBLIC_DISCOVERY_ONLY_PENDING_RAW_CURRENT_SELECTED_IDENTITY_SHA_AND_PARSER",
+  "manual_certified": 0,
+  "production_operations": 0,
+  "full_frozen603": "NOT_EXECUTED",
+  "next": "Apply exact-source CI; nonforce integrate; independently inspect actual official JSON fields and selected HTML, then correct real defect only.",
+  "external_official_page_render_review": {
+    "inspected_utc": "2026-11-04T19:00:00Z",
+    "evidence_grade": "OFFICIAL_WEB_RENDERED_TEXT_ONLY_NOT_RAW_SHA_NOT_CURRENT_PARSER",
+    "caveat": "Rendered-text views may be indexed/cached. Exact live original CSV URL HTTP status, selected H1, raw HTML digest, actual parser field/conflict behavior and Add Coffee preview remain unverified while Actions runner jobs fail before setup.",
+    "cases": [
+      {
+        "number": 309,
+        "frozen_url": "https://shop.compasscoffee.com/products/horizon-blend",
+        "web_open_status": "NOT_ACCESSIBLE_VIA_WEB_VIEW_NOT_PROOF_OF_HTTP_FAILURE",
+        "current_official_product_url": "https://www.compasscoffee.com/products/horizon-blend",
+        "current_selected_heading": "Horizon Blend",
+        "selected_description": "Bright, berry-like and sweet; light body is body, not a roast classification.",
+        "selected_size_variant_warning": "Different current official pages exist for 12oz tin and 5lb bag. 12oz description explicitly says light roast, medium body; 5lb body medium. Do not borrow 12oz roast from another selected URL until identity and variant are confirmed.",
+        "other_official_urls": [
+          "https://www.compasscoffee.com/products/horizon-blend-12oz-tin",
+          "https://www.compasscoffee.com/products/horizon-blend-5lb-bag"
+        ],
+        "roast_selected_root": "NOT_DIRECTLY_LABELED_IN_SELECTED_ROOT_DESCRIPTION",
+        "do_not_assume_origin_from_global_educational_text": true
+      },
+      {
+        "number": 565,
+        "selected_official_url": "https://www.sidecarcoffee.com/products/espresso",
+        "selected_h1": "Espresso",
+        "direct_roast": "medium-light",
+        "direct_process": "blend of washed and natural process coffees",
+        "direct_tasting": [
+          "dark chocolate",
+          "blueberries",
+          "pop rocks"
+        ],
+        "blank_countries_required": "Selected direct text does not print member countries; do not borrow generic region or navigation."
+      },
+      {
+        "number": 601,
+        "selected_official_url": "https://zekescoffee.com/collections/all-items/products/colombian-sierra-nevada",
+        "selected_h1": "Colombia Huila, 1 lb (16 oz)",
+        "direct_producer": "Asociacion Regional la Cascada de Bordones",
+        "direct_region": "Huila, Colombia",
+        "direct_process": "fully washed",
+        "direct_altitude_m": [
+          1700,
+          1850
+        ],
+        "direct_tasting": [
+          "molasses",
+          "milk chocolate",
+          "lime"
+        ],
+        "historical_url_slug_warning": "colombian-sierra-nevada is only a locator; current H1/body support Huila, not historical Sierra Nevada coffee",
+        "release_label_warning": "Association founded March 16 2003 is not coffee lot release/edition date."
+      }
+    ]
+  },
+  "action_blocker": {
+    "status": "GITHUB_ACTIONS_RUNNER_PRE_STEP_FAILURE",
+    "first_observed_utc": "2026-11-04T18:00:50Z",
+    "observed_runs": [
+      41882742310,
+      41883855319,
+      41883855264,
+      41890151335
+    ],
+    "rerun_reference": "PR615 approval run41883855319 attempt3 (19:01:56 UTC) failed in ~6s; no step entries or log body; not a code assertion failure",
+    "cross_repo_workflow_impact": "Independent development approval and queue workflows also fail with no steps, including unrelated #509 docs commit",
+    "contemporaneous_external_status": "GitHub Status reported two Nov4 Actions incidents; later status says resolved 18:16 UTC but repo remained affected 19:02 UTC, so causality not independently proven.",
+    "official_status": "https://www.githubstatus.com/",
+    "exact_next": "Recheck available runner/check annotations, rerun one scoped job only after recovery, complete exact source CI, nonforce merge and 3/3 independent captured HTML/actual-parser checks, adjudicate any defects before READY."
+  }
+}
