@@ -7,6 +7,8 @@ import {fetchPublicCoffeeHtml,safeCoffeeUrl,MAX_PRODUCT_RETRY_BYTES} from '../..
 import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
 import {selectedCurrentCoffeeReleaseBadge} from '../../src/server/coffee-selected-source-evidence.mjs';
 import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
+import {productCoffeeProse} from '../../src/server/coffee-product-prose.mjs';
+import {extractCoffeeBlendEvidence} from '../../src/server/coffee-blend-evidence.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../../site/cloud/coffee-url-autofill.js';
 const sha=value=>createHash('sha256').update(value).digest('hex');
 const clip=(v,n=350)=>String(v??'').replace(/\s+/g,' ').trim().slice(0,n);
@@ -91,6 +93,28 @@ for(const target of targets){
      }));
     }
 
+
+    // Original603 #475 post-merge mismatch: synthetic labeled blend now
+    // refines Santa Ana but actual selected official parser still omits it.
+    // Bounded public-only evidence to isolate whether current source has a
+    // complete labeled component group and an intact direct-prose clause.
+    if(r.number===475){
+      const decode=value=>String(value||'').replace(/<[^<>]{0,2000}>/g,' ')
+        .replace(/&(?:amp|nbsp);/gi,' ').replace(/\s+/g,' ').trim().slice(0,6001);
+      const blend=extractCoffeeBlendEvidence(selected,{name:p.fields?.name||'',scoped:true});
+      const clauses=productCoffeeProse(selected,decode)
+        .filter(block=>/\b(?:Pacas Family|Santa Ana|several farms|we paired)\b/i.test(block.text))
+        .slice(0,10).map(block=>({tag:block.tag,section:clip(block.section,90),
+          educational:block.educational,text:clip(block.text,650)}));
+      console.log('[DIC33 SELECTED #475 COMPONENT TRACE] '+JSON.stringify({
+        number:r.number,html_sha256:r.html_sha256,selected_h1:r.selected_h1,
+        blend_component_format:blend?.component_format||null,
+        blend_component_count:blend?.components||null,
+        blend_region_claim:blend?.origin||null,
+        current_parser_origin:r.current_fields?.origin||null,
+        selected_clause_blocks:clauses
+      }));
+    }
 
     // Diagnostic only: a DIFFERENT Lowcountry coffee's flavor appears in
     // review-only source_facts for Breakfast Blend. Find the precise public
