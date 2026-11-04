@@ -19,9 +19,10 @@
       "type": "original_markdown",
       "path": "docs/research/originals/01_Causal_Foundation_of_Espresso_Extraction_for_Sensory_Diagnosis.md",
       "sha256_recorded_in_verified_archive_index": "fe6afc01a5922cf73c3a66a18115aa1adf8222c5ea2d0e4a68dee1c74adef7fe",
-      "review_status": "FOCUSED_PASSAGES_ONLY",
-      "direct_review_provenance": "Prior R455-001/R455-002 scoped journal; NOT complete document coverage",
-      "claims_verified_externally": "Not certified by this #455 batch"
+      "review_status": "FULL_BODY_DIRECTLY_READ_CITATIONS_PENDING",
+      "direct_review_provenance": "R455-010 GitHub source at development 8c0aeea2ba8acfe55b70e60871733a55eafdcc03; all 323 lines (58,807 characters) directly read in exact nonoverlapping ranges 1-81, 82-131, 132-221, 222-323. Original ZIP index SHA-256 preserved; fresh ZIP-byte recheck NOT performed.",
+      "claims_verified_externally": "BOUNDED: Barista Hustle official Espresso Compass professional framework; World Coffee Research official Lexicon 2.0 (110 attributes); Hendon et al. 2014 ACS full paper DOI 10.1021/jf501687c. Other individual citations/ChatGPT-generated markers and numeric prescriptions NOT verified. Evidence grades in source are author's assertions.",
+      "git_blob_sha": "4a52b0f938d533ff8c0d69fc09951bf51abc8d69"
     },
     {
       "id": "ORG-02",
@@ -416,6 +417,51 @@
       "current_app": "Current SCALES five taste ratings, complete/all-green gates, diagnostic/one-control advice in engine.js; existing lower-confidence heuristics must be disclosed and not elevated by repetition.",
       "result": "RESEARCH_PROVENANCE_GUARDRAIL_ONLY;DO_NOT_ADD_USER_FIELDS_OR_CHANGE_LOCKED_MODEL",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-001-A",
+      "source": "ORG-01 lines 3-31,39-80,81-130,301-322; Barista Hustle original https://www.baristahustle.com/the-espresso-compass/ and https://www.baristahustle.com/lesson/b1-2-01-dose/ (original professional guidance)",
+      "claim": "At fixed dose a higher beverage yield ordinarily trades strength for greater extraction; evenness and grind can matter independently. The source's 5-10% yield increments and fixed adjustment hierarchy are professional suggested heuristics, not independently randomized universal espresso sensory targets.",
+      "grade": "DIRECT_PRIMARY_PROFESSIONAL_GUIDANCE;PHYSICAL_DIRECTIONAL_PLAUSIBILITY;NOT_CONTROLLED_TASTE_TRIAL",
+      "current_app": "constants.js STYLES/STYLE_COPY/RATIOS/TIMES are starting priors; engine.js preserves measured dose/yield and only one controllable adjustment. Do not substitute report CSV percentages for owner-Locked rules.",
+      "result": "NO_NUMERIC_POLICY_CHANGE;KEEP_DIRECTIONAL_CONTEXT",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-001-B",
+      "source": "ORG-01 lines 13-30,40-80,91-130,131-275; BH Espresso Compass https://www.baristahustle.com/the-espresso-compass/; Lee/Smith/Arshad two-path MODEL earlier audited under R455-EV-008-D",
+      "claim": "A simultaneously sour/bitter/weak shot can be consistent with uneven extraction. Neither professional experience nor a simplified porous-bed model demonstrates actual channeling in a particular member shot; score combinations are not a diagnostic test with measured sensitivity/specificity.",
+      "grade": "PROFESSIONAL_PHYSICAL_HYPOTHESIS;NOT_INDIVIDUAL_SHOT_DIAGNOSIS_OR_TASTE_OUTCOME",
+      "current_app": "engine.js gives a nonnumeric evenness diagnostic for high dryness or low clarity; does not claim that ratings prove visible channels. Incomplete five ratings correctly abstain.",
+      "result": "PRESERVE_MULTICAUSE_NONDETERMINISTIC_DIAGNOSTIC;NO_NEW_CAPTURE",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-001-C",
+      "source": "ORG-01 lines 21-27,82-131,275-319; World Coffee Research original https://worldcoffeeresearch.org/resources/sensory-lexicon",
+      "claim": "WCR official Sensory Lexicon identifies 110 flavor/aroma/texture attributes; v2 published Oct 2017 explicitly added Sour, Bitter, Salty reference terms. Their standardization does not certify that the report's Hollow/Muted/Finish labels have unique hydraulic causes, or that app five ideal scales are measured clinical/scientific optima.",
+      "grade": "ORIGINAL_INSTITUTIONAL_REFERENCE_VERIFIED;AUTOMATED_DESCRIPTOR_TO_CAUSE_UNVERIFIED",
+      "current_app": "Locked SCALES exactly five extraction/body/clarity/sweetness/astringency; do not rename or expand fields, infer chemical extraction percentage, or change all-green target from research.",
+      "result": "KEEP_EXISTING_LOCKED_SENSORY_INPUTS;UNSUPPORTED_DESCRIPTOR_CAUSALITY_FLAGGED",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-001-D",
+      "source": "ORG-01 lines 275-319; Hendon/Colonna-Dashwood/Colonna-Dashwood ACS primary https://pubs.acs.org/doi/full/10.1021/jf501687c",
+      "claim": "Hendon et al. (2014) quantified binding energies for seven model coffee constituents to Na/Ca/Mg ions using density functional theory; it is principally molecular/computational work, not a controlled universal espresso-water sensory study. Paper notes there is no water composition that invariably creates the best coffee. No ppm/Mg/Ca or pH rule follows for arbitrary machines.",
+      "grade": "DIRECT_PEER_REVIEWED_MODEL_VERIFIED;ESPRESSO_TASTE_TRANSFER_UNVERIFIED",
+      "current_app": "No new water chemistry control/mandatory field, global mineral ppm target or roast-to-water correction. Treat water as a context confounder only.",
+      "result": "NO_MINERAL_RULE_OR_EQUIPMENT_SAFETY_CHANGE",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-001-E",
+      "source": "ORG-01 lines 31-37,57-80,91-115,132-220,221-322; original file Git blob 4a52b0f938d533ff8c0d69fc09951bf51abc8d69",
+      "claim": "Report's 3/H, 2/M numeric confidence shorthand and ordered fault-to-action CSV are author judgments, not calibrated probabilities or validated taste-improvement benchmarks. Even author admits confidence low for descriptors such as hollow/muted/finish. Recipe percentage, pressure/temperature prescriptions and one-variable decision tree are research hypotheses/teaching guidance until externally validated and explicitly approved.",
+      "grade": "FULL_ORIGINAL_SOURCE_SYNTHESIS;INTERNAL_EVIDENCE_SCORE_NOT_SCIENTIFIC_PROBABILITY",
+      "current_app": "Existing engine heuristic remains governed by owner taste/one-control rules. Sweetness-only default +1g (R455-DEC-001) is a real branch but policy change awaits owner choice; no new numeric priors or hard time gate.",
+      "result": "RESEARCH_ONLY;OWNER_DECISION_R455-DEC-001_REMAINS_UNAPPROVED",
+      "owner_approval": true
     }
   ],
   "policy_decisions_pending": [
@@ -431,12 +477,25 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R455-009 139-line report08 full direct review and four bounded primary checks; exact source read and two docs updated only. Node/SQL/UX test not executed by this pass; exact PR/merged-source CI pending."
+    "reason": "R455-010 source-exact all 323 lines of #01 and bounded institutional/primary checks; research documentation only, no app, tests or Locked change. Exact PR/merged-source continuity CI pending."
   },
   "next_actions": [
-    "Finish full original documents #01/#09 (now 7/9 original full #02-08); full primary-citation verification for all nine remains incomplete, no #267 credit.",
-    "Retrieve and hash original October29 15-member research implementation ZIP and S019 PDF, neither actual bytes found in current Drive/Library search; slow-feed Library PDF archived-byte equivalence remains unverified.",
-    "Review all newer Project/Drive/GitHub research sources and evidence-first UX code paths; #33/#267/#96 ownership retained, no app logic change without demonstrated safe repro and exact-source regression.",
-    "R455-DEC-001 sweetness-only numeric +1g vs no-change diagnostic still owner-review UNAPPROVED; morning digest only; do not deploy."
-  ]
+    "Complete last full original report #09 with actual source body and bounded external verification (8/9 now read), then systematically resolve remaining citations across all 9.",
+    "Obtain October29 ZIP (15 members) and S019 PDF actual bytes with hashes; currently NOT located in Drive/Library. Keep slow-feeding owner PDF to archive byte correspondence unverified.",
+    "Expand claim-by-claim research/source inventory, then prioritize code fixes only on reproducible source-exact defects and risk-proportionate tests. Reuse #267/#33/#96 owner receipts, no overlapping writes.",
+    "R455-DEC-001 sweetness-only +1g yield versus unchanged-control diagnostic remains UNAPPROVED; hold user-visible behavior for morning digest."
+  ],
+  "latest_review_checkpoint": {
+    "id": "R455-010",
+    "source_id": "ORG-01",
+    "source_git_blob_sha": "4a52b0f938d533ff8c0d69fc09951bf51abc8d69",
+    "base_development_sha": "8c0aeea2ba8acfe55b70e60871733a55eafdcc03",
+    "report_lines_read": 323,
+    "report_chars_read": 58807,
+    "full_original_reports_reviewed": 8,
+    "total_original_reports": 9,
+    "external_checks": "BH Compass, WCR Lexicon, Hendon 2014 ACS primary; neither all citations nor scientific grade certified",
+    "status": "RESEARCH_REVIEW_COMPLETE_CITATION_AUDIT_PENDING",
+    "github267_line_credit": 0
+  }
 }
