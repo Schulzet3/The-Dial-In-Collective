@@ -117,3 +117,32 @@ test('#455 legacy whitespace timestamps cannot establish grind-time sensitivity'
  assert.deepEqual(learnSensitivity([datedA,datedB,datedC]),{secondsPerUnit:-6,samples:2},
   'three chronological comparable dated shots still calibrate two negative slopes');
 });
+
+test('#455 Log Shot prefill excludes undated legacy rows without changing saved shots',async()=>{
+ const [{hydrate},{rawFixture},{prefill}]=await Promise.all([
+  import('../site/cloud/mapping.js'),
+  import('./cloud-fixtures/raw.js'),
+  import('../site/lib/engine.js')
+ ]);
+ const s=hydrate(rawFixture());
+ const common={coffeeId:'coffee',setupVersionId:'version',calibrationId:'cal',
+  basketId:'basketv',style:'Turbo',feedMode:'standard',hidden:false,
+  yieldG:36,timeS:18,notes:'Preserve private original shot note',
+  tasteScales:{extraction:3,body:3,clarity:5,sweetness:4,astringency:1}};
+ s.shots=[
+  {...common,id:'missing-time',timestamp:null,doseG:20,grindSetting:4.5},
+  {...common,id:'blank-time',timestamp:'   ',doseG:19,grindSetting:4.0},
+  {...common,id:'dated',timestamp:'2026-11-04T12:00:00Z',doseG:18,grindSetting:2.2}
+ ];
+ const original=structuredClone(s.shots);
+ const entered=prefill(s,'coffee',{style:'Turbo',basketId:'basketv',feedMode:'standard'});
+ assert.equal(entered.doseG,18,'use the latest dated dose, not an unorderable legacy measurement');
+ assert.equal(entered.grindSetting,2.2,'use the latest dated same-calibration grind');
+ assert.equal(entered.yieldG,'','do not silently turn history into a measured new shot');
+ assert.equal(entered.timeS,'');
+ assert.deepEqual(s.shots,original,'preserve every stored shot, all five tastes and private notes');
+ s.shots=s.shots.filter(sh=>sh.id!=='dated');
+ const empty=prefill(s,'coffee',{style:'Turbo',basketId:'basketv',feedMode:'standard'});
+ assert.equal(empty.doseG,18,'without dated records retain configured basket starting dose');
+ assert.equal(empty.grindSetting,'','do not assert a calibrated grind from undated history');
+});
