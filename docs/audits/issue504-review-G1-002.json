@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "issue": 504,
+  "audit_batch": "G1-002",
+  "review_pass": "W1_WORD_BY_WORD",
+  "date_utc": "2026-11-04",
+  "method": "assistant_direct_full_text_read_of_exact_numbered_lines",
+  "source_dev_sha": "6f9177920dacdec6ca31d0206f3e92e6c08af33f",
+  "source_main_sha": "d17e900fa78e2f89931480d4f85c217c2d31724c",
+  "source_release_sha": "31c66832a28247e657a2bf89592ebc1e2f48dfc5",
+  "count_basis": "Whitespace-delimited \\S+ tokens in fetched exact UTF-8 Git contents; JSON punctuation/key identifiers count as tokens, not natural-language lexical word inference.",
+  "reviewed_github_objects": 0,
+  "files": [
+    {
+      "path": "docs/ai/AUTHORITY_RULES.md",
+      "blob_sha": "e475ce5276509c8df72d504af8ca1321e028e42e",
+      "first_line": 1,
+      "last_line": 14,
+      "source_total_lines": 14,
+      "source_line_count": 14,
+      "reviewed_words": 340,
+      "status": "DIRECT_SEMANTIC_REVIEWED",
+      "findings": "Latest scoped owner approval and supersession precedence clearly preserve Locked and historical evidence. No source-verified defect in reviewed lines."
+    },
+    {
+      "path": "docs/ai/MAINTENANCE.md",
+      "blob_sha": "f187d62f125eb7300c90113bda60d8d587f79612",
+      "first_line": 1,
+      "last_line": 26,
+      "source_total_lines": 26,
+      "source_line_count": 26,
+      "reviewed_words": 491,
+      "status": "DIRECT_SEMANTIC_REVIEWED",
+      "findings": "Intake, privacy, hashing, duplicate preservation, immutable review, status/CI distinctions and release boundaries align with current governance. Five canonical ai navigation files confirmed by names; no safe deletion/fix identified."
+    },
+    {
+      "path": "docs/ai/SOURCE_REGISTER.json",
+      "blob_sha": "a9544a72b0ab2fbb9245159bfbf62458e9c140a6",
+      "first_line": 1,
+      "last_line": 155,
+      "source_total_lines": 1460,
+      "source_line_count": 155,
+      "reviewed_words": 337,
+      "status": "DIRECT_SEMANTIC_REVIEWED_PARTIAL_BLOB",
+      "findings": "Pinned Nov1 943-file inventory is correctly METADATA_ONLY; canonical source refs remain scoped and old external archive hashes/availability are historical intake receipts, NOT newly reverified bytes or content review. Four parent attachment records distinguish restricted origins; archive-members begin at line118. Remaining 156-1460 NOT reviewed."
+    }
+  ],
+  "totals": {
+    "source_file_lines": 195,
+    "source_file_whitespace_words": 1168,
+    "entire_files": 2,
+    "partial_files": 1,
+    "github_objects": 0,
+    "github_words": 0
+  },
+  "metadata_inventory_only": [
+    {
+      "path": "docs/audits/issue504-github-records-inventory-20261104.json",
+      "observed": {
+        "issue_collection": 523,
+        "pr_collection": 454,
+        "unique_non_pr_issues": 69,
+        "paginated_issue_pages": 6,
+        "paginated_pr_pages": 5
+      },
+      "duplicates": "All 454 PRs appear in /issues collection; this is not 977 unique issues/PRs and adds NO semantic words."
+    },
+    {
+      "path": "docs/audits/issue504-ops-production-trees-20261104.json",
+      "branches": [
+        {
+          "branch": "main",
+          "commit": "d17e900fa78e2f89931480d4f85c217c2d31724c",
+          "git_tree_sha": "1c02975688de1075947901cc02644a3111630692",
+          "blobs": 96,
+          "directories": 13,
+          "total_blob_bytes": 546757,
+          "truncated": false
+        },
+        {
+          "branch": "release/production",
+          "commit": "31c66832a28247e657a2bf89592ebc1e2f48dfc5",
+          "git_tree_sha": "245eb403b4e994081fd9752c7762a1f886a0efa4",
+          "blobs": 1139,
+          "directories": 51,
+          "total_blob_bytes": 43397141,
+          "truncated": false
+        }
+      ]
+    },
+    {
+      "records": "GET /releases page1",
+      "result": "Empty listing, no release objects surfaced; does not prove deployment absence."
+    }
+  ],
+  "delegated_267_source_bound_validation": {
+    "issue": 267,
+    "receipt": "docs/audits/issue267-v2-strict-batches/S2-053.json",
+    "blob_sha": "147d9063475fd9f8ae1ba04b07ad49875170f805",
+    "validated_metadata_only": "113 contiguous unique records with required semantic keys (53 frozen + 60 pinned); did not independently substantively reread those source lines, no #504 credit.",
+    "strict_progress_at_journal": "3774 / 579961 historical; 4732 / 57913 pinned; current live drift incomplete, counts could advance concurrently"
+  },
+  "api_limits": [
+    "GET /tags and /actions/workflows rejected by GitHub fetch allowlist; alternate supported connector discovery pending.",
+    "CI: GET /actions/runs returned total_count=8040, first 20 observed only; no exhaustive run/job/log inventory.",
+    "Binaries, all issue bodies/comments/reviews except prior G1-001, PR diffs and branch histories remain unreviewed."
+  ],
+  "fixes": {
+    "current_code": 0,
+    "current_documentation": 0,
+    "history_removals": 0,
+    "new_inventory_manifests": 2
+  },
+  "next": {
+    "kind": "git_blob",
+    "path": "docs/ai/SOURCE_REGISTER.json",
+    "expected_blob_sha": "a9544a72b0ab2fbb9245159bfbf62458e9c140a6",
+    "first_line": 156,
+    "final_line": 1460,
+    "then": "continue complete source register then other not-covered canonical docs and GitHub issue/PR histories, replies, reviews and CI pagination"
+  },
+  "status": "IN_PROGRESS_NOT_COMPLETE",
+  "publication": "NOT_AUTHORIZED_NOT_DEPLOYED"
+}
