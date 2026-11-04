@@ -263,6 +263,48 @@
       "review_status": "BOUNDED_FULL_ARTICLE_FACT_CHECK_NOT_VALIDATION_OF_APP_TASTE_COEFFICIENTS",
       "source_bytes_sha256": null,
       "source_byte_caveat": "Original Cambridge HTML reviewed on 2026-11-04; no publisher byte snapshot/hash. Model's full/reduced numerical comparison is not physical cup-sensory validation."
+    },
+    {
+      "id": "LIT-2026-ESPRESSO-POROELASTIC",
+      "type": "external_primary_study",
+      "title": "Under pressure: poroelastic regulation of flow in espresso brewing",
+      "authors": "Waszkiewicz et al.",
+      "published": "2026-06-23 journal; 2026-05-09 author arXiv v2",
+      "doi": "10.1063/5.0319611",
+      "url": "https://arxiv.org/html/2512.21528v2",
+      "access": "AUTHOR_OPEN_FULL_PAPER_ARXIV_V2_METHODS_RESULTS_DISCUSSION_LIMITATIONS_DIRECTLY_READ; JOURNAL_METADATA_ACCEPTED_PHYSICS_OF_FLUIDS_38_063113",
+      "evidence_grade": "PEER_REVIEWED_CONVENTIONAL_ESPRESSO_SINGLE_BRAZILIAN_COFFEE_18_5G_FIXED_PUCK_METHOD_NO_TASTE_OPTIMIZATION_OR_TURBO_VALIDATION",
+      "review_status": "FOCUSED_ORIGINAL_FULL_ARTICLE_FACT_CHECK_NO_GLOBAL_PRESSURE_OR_SHOT_TIME_POLICY",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Author HTML accessed 2026-11-04; external original bytes not archived/hash-verified; not independent sensory validation."
+    },
+    {
+      "id": "LIT-2019-COFFEE-CFD-UNIFORMITY",
+      "type": "external_primary_study",
+      "title": "Analysing extraction uniformity from porous coffee beds using mathematical modelling and computational fluid dynamics approaches",
+      "authors": "Moroney et al.",
+      "published": "2019-07-31",
+      "doi": "10.1371/journal.pone.0219906",
+      "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0219906",
+      "access": "ORIGINAL_OPEN_PLOS_PUBLISHER_FULL_HTML_ABSTRACT_INTRODUCTION_METHODS_AND_RESULTS_INSPECTED",
+      "evidence_grade": "PEER_REVIEWED_CFD_AND_FLOW_EXPERIMENT_NONSTANDARD_60G_1L_250ML_PER_MIN_RIG_NOT_SENSORY_ESPRESSO_TRIAL",
+      "review_status": "FOCUSED_PRIMARY_METHOD_AND_CLAIM_FACT_CHECK_PUCK_UNIFORMITY_MODEL_NOT_CUP_RATING_PROOF",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Original PLOS full HTML consulted 2026-11-04; no archived publisher bytes; experiments use drip-scale quantities."
+    },
+    {
+      "id": "LIT-2024-RDT-ISCIENCE",
+      "type": "external_primary_study",
+      "title": "Strategies to mitigate electrostatic charging during coffee grinding",
+      "authors": "Méndez Harper, Bumbaugh, Hendon et al.",
+      "published": "2024-09",
+      "doi": "10.1016/j.isci.2024.110639",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11402325/",
+      "access": "NIH_INDEXED_ORIGINAL_ARTICLE_SUMMARY_AND_AUTHOR_UNIVERSITY_REPOSITORY_ABSTRACT_CHECKED; FULL_HTML_CURRENTLY_RECAPTCHA_BLOCKED",
+      "evidence_grade": "PEER_REVIEWED_ESPRESSO_DARK_ROAST_CONDITIONAL_TDS_STATIC_MITIGATION_NOT_TASTE_PREFERENCE_TRIAL",
+      "review_status": "PRIMARY_ABSTRACT_LIMITED_FACT_CHECK_FULL_METHODS_NOT_REVIEWED",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "NIH indexed summary and Portland State author repository abstract accessed 2026-11-04; original full body not accessible; do not conflate this 2024 iScience paper with separate 2024 Matter 7 paper DOI 10.1016/j.matt.2023.11.005."
     }
   ],
   "evidence_checks": [
@@ -706,6 +748,68 @@
       "current_app": "site/lib/engine.js uses bounded controlled shot history rather than model-inferred individual-solute measurement; site/lib/constants.js five taste dimensions intact",
       "result": "NEW_MODEL_FACT_CHECK_INDEXED_NO_APP_POLICY_OR_CONFIDENCE_SCORE_CHANGE",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-014-A",
+      "source": "ORG-08 original lines 7,37,39 and LIT-2026-ESPRESSO-POROELASTIC; original blob 122e142c8c8a3c480f68ab63a05b8785ecc5eb02",
+      "claim": "Original author full manuscript v2 (journal Physics of Fluids 38, 063113) tests one Brazilian light/medium-light roast, fixed 18.50±0.05g, F64 EVO, 58-mm basket, 9-bar calibration goal ~37g/32s. Pressure series 1-12 bar shows low-pressure near-linear behavior, then saturation/nonmonotonic flow and fastest cup-mass growth near 5 bar in that setup. Neither 32 seconds nor 5 bar was identified by blinded espresso sensory optimization.",
+      "grade": "PRIMARY_FULL_AUTHOR_STUDY_ONE_ESPRESSO_COFFEE_FIXED_PREPARATION_MECHANISTIC_NOT_SENSORY_OR_TURBO",
+      "primary_sources": [
+        "https://arxiv.org/html/2512.21528v2",
+        "https://doi.org/10.1063/5.0319611"
+      ],
+      "current_app": "site/lib/engine.js bc8bbcee9ec349145a51552ab5dd3337115feca6 baseline style-specific ratio/time and nextAdvice time feedback; do not impose single mandatory pressure or shot time",
+      "result": "PRESSURE_FLOW_CONTEXT_VERIFIED_NO_NUMERIC_TASTE_OPTIMUM_OR_APP_RULE_CHANGE",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-014-B",
+      "source": "ORG-08 original lines 39,42,44 and LIT-2026-ESPRESSO-POROELASTIC; original blob 122e142c8c8a3c480f68ab63a05b8785ecc5eb02",
+      "claim": "Waszkiewicz et al. used blind shaking, WDT and a 20-kg tamper as fixed preparation controls, NOT randomised WDT or tamp-force comparisons. Authors explicitly limit coarse-grained model to long-time saturated flow and exclude explicit early multiphase infiltration, channel formation/fines migration, full solute chemistry and validated taste outcomes.",
+      "grade": "PEER_REVIEWED_FULL_AUTHOR_METHODS_AND_LIMITATIONS_NOT_FACTORIAL_PUCK_PREP_OR_SENSORY_CAUSAL_PROOF",
+      "primary_sources": [
+        "https://arxiv.org/html/2512.21528v2"
+      ],
+      "current_app": "site/lib/engine.js bc8bbcee9ec349145a51552ab5dd3337115feca6 'Check evenness first' diagnostic is nonnumeric, and five measured taste ratings kept",
+      "result": "NO_WDT_FORCE_PREINFUSION_PERCENTAGE_OR_CONFIDENCE_SCORE_INSERTION",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-014-C",
+      "source": "ORG-08 original lines 7,48-51 and LIT-2019-COFFEE-CFD-UNIFORMITY; original blob 122e142c8c8a3c480f68ab63a05b8785ecc5eb02",
+      "claim": "Moroney et al. original PLOS publisher methods (Experimental rigging) explicitly used 59-mm cylinder, 90°C, fixed 250mL/min, 60g coffee and approximately 1L water. Authors acknowledge espresso-like rig geometry but drip-filter-scale dose/water/time, so modelled spatial-extraction variation cannot be presented as directly measured 18g espresso sensory defect or universally calibrated puck diagnosis.",
+      "grade": "ORIGINAL_PEER_REVIEWED_FULL_METHODS_DIRECT_EQUIPMENT_AND_QUANTITY_VERIFICATION_NONSTANDARD_ESPRESSO",
+      "primary_sources": [
+        "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0219906"
+      ],
+      "current_app": "site/lib/engine.js bc8bbcee9ec349145a51552ab5dd3337115feca6 keeps uneven extraction language diagnostic rather than proof of a measured channel or exact sensory cause",
+      "result": "BOUNDARY_CONFIRMED_NO_CAUSAL_TASTE_ASSERTION_OR_RULE_CHANGE",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-014-D",
+      "source": "ORG-08 original lines 49-51 and LIT-2019-COFFEE-CFD-UNIFORMITY; original blob 122e142c8c8a3c480f68ab63a05b8785ecc5eb02",
+      "claim": "Moroney et al. historical introduction identifies the 18-22% brew-chart preference box as originating in filter-coffee consumer research and notes its subsequent adoption for espresso. Their own spatial extraction findings are CFD/model comparisons, not measured blinded consumer flavor preferences for different espresso extraction yields. This supports NOT treating EY as a universal espresso liking score or proof of puck uniformity.",
+      "grade": "PEER_REVIEWED_ORIGINAL_OPEN_PUBLISHER_HISTORY_AND_MODELS_NOT_CONTROLLED_ESPRESSO_SENSORY_OUTCOME",
+      "primary_sources": [
+        "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0219906"
+      ],
+      "current_app": "site/lib/engine.js bc8bbcee9ec349145a51552ab5dd3337115feca6 rated five taste dimensions and subjective successful shots; model.js 19aaca401cab7bbd2059b9a34c6b8df263f4181c five-rating validation; no EY derived taste optimum",
+      "result": "REFERENCE_18_22_PERCENT_NOT_ESPRESSO_POLICY_AUTHORITY_NO_APP_CHANGE",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-014-E",
+      "source": "ORG-08 original lines 46-47; LIT-2024-RDT-ISCIENCE and separate 2024 Matter original remain distinct; original blob 122e142c8c8a3c480f68ab63a05b8785ecc5eb02",
+      "claim": "Méndez Harper et al. 2024 iScience original abstract reports added water less than 0.05mL/g and >=15% higher espresso concentration in tested darker-roast preparations, associated with reduced charging/aggregates and changed particle distributions. This is dark-roast/experimental-conditions dependent; the accessible abstract does not prove taste preference, a guaranteed 15% extraction yield increase, an app-wide water-dose target or transfer to slow feeding.",
+      "grade": "NIH_AND_AUTHOR_INSTITUTION_ORIGINAL_ABSTRACT_ONLY_NOT_FULL_METHODS_NOR_ESPRESSO_TASTE_TRIAL",
+      "primary_sources": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC11402325/",
+        "https://pdxscholar.library.pdx.edu/ece_fac/822/"
+      ],
+      "current_app": "site/lib/engine.js bc8bbcee9ec349145a51552ab5dd3337115feca6 retains separate slow/standard feed and same-coffee grinder evidence; no RDT data capture or universal TDS claim",
+      "result": "RDT_TDS_CONTEXT_INDEXED_NO_DERIVED_TASTE_RECOMMENDATION",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [
@@ -721,7 +825,7 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R455-013 four source-exact primary bibliography checks and scope-limited model/experiment evaluation. No runtime, tests, CI workflow, original research, Master Spec, Locked ledger, approval matrix or queue changes; targeted docs CI required."
+    "reason": "R455-014 3 additional curated original/author literature identities and 5 source-exact conditional experimental/method limitations. Docs and same-commit journal only; no runtime, tests, original-research bytes, CI workflow, Master Spec, Locked decisions, approval/queue or provider changes."
   },
   "next_actions": [
     "Continue unresolved original research bibliography primary citation checks with exact original section, DOI, access and generalization limits; all nine full bodies were read but NOT all citations independently verified.",
@@ -731,28 +835,28 @@
     "Reproduce another narrow Locked-compatible Log Shot > Rate > Recommendation UX/logic defect in actual current code; add risk-proportionate tests, same-commit journal, nonforce CI/merge only if proven. R455-DEC-001 remains awaiting explicit owner choice."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-013",
-    "base_development_sha": "429c980fabed80656f9aef5c813de359f607fa3a",
+    "id": "R455-014",
+    "base_development_sha": "13c7a7b535628c2033e655906618964d9cfd07bb",
     "source_ids": [
-      "LIT-2002-ESPRESSO-PRESSURE",
-      "LIT-2003-ESPRESSO-TEMP",
-      "LIT-2025-ESPRESSO-INFILTRATION",
-      "LIT-2025-26-ESPRESSO-MULTISCALE"
+      "LIT-2026-ESPRESSO-POROELASTIC",
+      "LIT-2019-COFFEE-CFD-UNIFORMITY",
+      "LIT-2024-RDT-ISCIENCE"
     ],
     "source_claim_checks": [
-      "R455-EV-CIT-013-A",
-      "R455-EV-CIT-013-B",
-      "R455-EV-CIT-013-C",
-      "R455-EV-CIT-013-D"
+      "R455-EV-CIT-014-A",
+      "R455-EV-CIT-014-B",
+      "R455-EV-CIT-014-C",
+      "R455-EV-CIT-014-D",
+      "R455-EV-CIT-014-E"
     ],
-    "number_of_curated_sources": 20,
-    "total_evidence_checks": 46,
-    "original_report_full_bodies_reviewed": "9/9 prior direct readings; no new full-body credit",
-    "research_pack": "TWO_PROJECT_ZIPS_METADATA_FOUND_CONTENT_ACCESS_DENIED",
-    "s019": "NOT_RETRIEVED",
+    "number_of_curated_sources": 23,
+    "total_evidence_checks": 51,
+    "original_report_full_bodies_reviewed": "9/9 previously; no new full-body credit",
+    "research_pack": "TWO_PROJECT_ZIPS_METADATA_ONLY_RAW_BYTES_ACCESS_DENIED",
+    "s019": "ORIGINAL_PDF_NOT_RETRIEVED",
     "github267_line_credit": 0,
     "app_changes": false,
     "production_deployed": false,
-    "status": "BOUNDED_PRIMARY_CITATIONS_VERIFIED_MODELS_NOT_APP_POLICY"
+    "status": "FIVE_SCOPED_PUBLISHER_AUTHOR_CITATION_CHECKS_NO_PRODUCT_POLICY_AUTHORITY"
   }
 }
