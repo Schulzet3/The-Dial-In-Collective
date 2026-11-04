@@ -1,0 +1,1341 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "track": "POST_PIN_LIVE_CURRENT_DEFECT",
+  "date_utc": "2026-11-04",
+  "source_parent": "421c485ed23a84bafbeaa289968e49f16869c3ea",
+  "source": {
+    "path": "scripts/audit/coffee-frozen-ci.py",
+    "old_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+    "new_blob": "926bfd49aed1e4426c2aa818b85ef7546d853a4f",
+    "added_lines": [
+      1404,
+      1405
+    ],
+    "per_line": [
+      {
+        "line": 1404,
+        "source_text": "        require(not path.is_symlink(), \"Artifact manifest refuses symlinked path: \"",
+        "classification": "added_current_executable_code",
+        "behavior": "Check every traversed output path for symlink and fail closed before is_file or hashing",
+        "quality": "Narrow guard preserves non-symlink manifest file/hash algorithm",
+        "risk": "Prevents symlink path from being treated as retained artifact and external contents hashed",
+        "dead_or_obsolete": "New active guard, no historical source/oracle removal",
+        "duplicate_logic": "Not duplicate of input archive symlink guard; checks output manifest boundary",
+        "current_counterpart": {
+          "path": "scripts/audit/coffee-frozen-ci.py",
+          "old_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+          "new_blob": "926bfd49aed1e4426c2aa818b85ef7546d853a4f",
+          "pinned_source_unchanged": true
+        },
+        "testability": "Four new isolated Python regressions covering normal, external file, manifest-name, directory links",
+        "fix_opportunity": "Confirmed synthetic flaw remedied without change to original603 comparison/scorers",
+        "locked_fit": "No original603/captures/scorer modification, no deploy or provider/member data access",
+        "method": "Numbered direct current source edit inspection, AI not independent human"
+      },
+      {
+        "line": 1405,
+        "source_text": "                + path.relative_to(output).as_posix())",
+        "classification": "added_current_executable_code",
+        "behavior": "Build relative path for deterministic error without dereferencing external target",
+        "quality": "Narrow guard preserves non-symlink manifest file/hash algorithm",
+        "risk": "Prevents symlink path from being treated as retained artifact and external contents hashed",
+        "dead_or_obsolete": "New active guard, no historical source/oracle removal",
+        "duplicate_logic": "Not duplicate of input archive symlink guard; checks output manifest boundary",
+        "current_counterpart": {
+          "path": "scripts/audit/coffee-frozen-ci.py",
+          "old_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+          "new_blob": "926bfd49aed1e4426c2aa818b85ef7546d853a4f",
+          "pinned_source_unchanged": true
+        },
+        "testability": "Four new isolated Python regressions covering normal, external file, manifest-name, directory links",
+        "fix_opportunity": "Confirmed synthetic flaw remedied without change to original603 comparison/scorers",
+        "locked_fit": "No original603/captures/scorer modification, no deploy or provider/member data access",
+        "method": "Numbered direct current source edit inspection, AI not independent human"
+      }
+    ]
+  },
+  "test": {
+    "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+    "new_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+    "first_line": 1,
+    "last_line": 66,
+    "per_line": [
+      {
+        "line": 1,
+        "source_text": "\"\"\"Synthetic local regressions for frozen-audit artifact inventory; no provider access.\"\"\"",
+        "classification": "test_code",
+        "behavior": "Marks tests as synthetic-only and limits scope to local artifact inventory",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 2,
+        "source_text": "import hashlib",
+        "classification": "import",
+        "behavior": "Imports SHA256 for deterministic positive-file assertion",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 3,
+        "source_text": "import importlib.util",
+        "classification": "import",
+        "behavior": "Imports source module loading utility without running CLI main",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 4,
+        "source_text": "import json",
+        "classification": "import",
+        "behavior": "Imports JSON to inspect emitted manifest",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 5,
+        "source_text": "from pathlib import Path",
+        "classification": "import",
+        "behavior": "Imports pathlib for repository-relative paths",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 6,
+        "source_text": "import tempfile",
+        "classification": "import",
+        "behavior": "Imports isolated temporary-directory fixture",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 7,
+        "source_text": "import unittest",
+        "classification": "import",
+        "behavior": "Imports standard-library regression framework",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 8,
+        "source_text": "from unittest import mock",
+        "classification": "import",
+        "behavior": "Imports mocking for deny-before-hash check",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 9,
+        "source_text": "",
+        "classification": "blank",
+        "behavior": "Inspected blank line separating fixture or test cases",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 10,
+        "source_text": "SCRIPT = Path(__file__).resolve().parents[2] / \"scripts/audit/coffee-frozen-ci.py\"",
+        "classification": "test_code",
+        "behavior": "Locates current audited Python benchmark source by stable relative repository path",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 11,
+        "source_text": "SPEC = importlib.util.spec_from_file_location(\"frozen_ci_artifact_under_test\", SCRIPT)",
+        "classification": "test_code",
+        "behavior": "Creates import specification for real source module, not copied implementation",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 12,
+        "source_text": "RUNNER = importlib.util.module_from_spec(SPEC)",
+        "classification": "test_code",
+        "behavior": "Constructs module object from checked-out script spec",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 13,
+        "source_text": "SPEC.loader.exec_module(RUNNER)",
+        "classification": "test_code",
+        "behavior": "Executes module definitions through spec loader; CLI guarded separately",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 14,
+        "source_text": "",
+        "classification": "blank",
+        "behavior": "Inspected blank line separating fixture or test cases",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 15,
+        "source_text": "",
+        "classification": "blank",
+        "behavior": "Inspected blank line separating fixture or test cases",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 16,
+        "source_text": "class ArtifactInventoryTests(unittest.TestCase):",
+        "classification": "class",
+        "behavior": "Groups four artifact inventory acceptance tests",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 17,
+        "source_text": "    def setUp(self):",
+        "classification": "test_code",
+        "behavior": "Defines per-test independent fixture initializer",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 18,
+        "source_text": "        self.temp = tempfile.TemporaryDirectory(prefix=\"dic-artifact-inventory-\")",
+        "classification": "test_code",
+        "behavior": "Allocates private synthetic local scratch directory",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 19,
+        "source_text": "        self.addCleanup(self.temp.cleanup)",
+        "classification": "test_code",
+        "behavior": "Registers fixture cleanup regardless of test result",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 20,
+        "source_text": "        self.root = Path(self.temp.name)",
+        "classification": "test_code",
+        "behavior": "Records scratch parent path",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 21,
+        "source_text": "        self.output = self.root / \"output\"",
+        "classification": "test_code",
+        "behavior": "Defines isolated manifest output directory",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 22,
+        "source_text": "        self.output.mkdir()",
+        "classification": "test_code",
+        "behavior": "Creates output directory only inside disposable scratch",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 23,
+        "source_text": "",
+        "classification": "blank",
+        "behavior": "Inspected blank line separating fixture or test cases",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 24,
+        "source_text": "    def test_normal_nested_file_and_self_exclusion(self):",
+        "classification": "test_case",
+        "behavior": "Defines positive control for ordinary nested artifacts and manifest self-exclusion",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 25,
+        "source_text": "        nested = self.output / \"nested\"",
+        "classification": "test_code",
+        "behavior": "Sets nested normal output subdirectory",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 26,
+        "source_text": "        nested.mkdir()",
+        "classification": "test_code",
+        "behavior": "Creates nested directory for recursive traversal",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 27,
+        "source_text": "        contents = b'{\"safe\": true}\\n'",
+        "classification": "test_code",
+        "behavior": "Defines constant UTF8-like JSON byte payload with newline",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 28,
+        "source_text": "        (nested / \"normal.json\").write_bytes(contents)",
+        "classification": "test_code",
+        "behavior": "Writes local fixture file, not external/user data",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 29,
+        "source_text": "        actual = RUNNER.artifact_inventory(self.output)",
+        "classification": "test_code",
+        "behavior": "Calls real updated artifact_inventory against normal tree",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 30,
+        "source_text": "        manifest = json.loads((self.output / \"artifact-manifest.json\").read_text())",
+        "classification": "test_code",
+        "behavior": "Reads emitted artifact manifest JSON for independent assertions",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 31,
+        "source_text": "        self.assertEqual(manifest[\"files\"], [{",
+        "classification": "test_code",
+        "behavior": "Requires exact array of one retained file",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 32,
+        "source_text": "            \"file\": \"nested/normal.json\",",
+        "classification": "test_code",
+        "behavior": "Verifies portable relative path of nested artifact",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 33,
+        "source_text": "            \"bytes\": len(contents),",
+        "classification": "test_code",
+        "behavior": "Verifies recorded byte count equals fixture bytes",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 34,
+        "source_text": "            \"sha256\": hashlib.sha256(contents).hexdigest(),",
+        "classification": "test_code",
+        "behavior": "Verifies manifest SHA256 binds to actual fixture bytes",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 35,
+        "source_text": "        }])",
+        "classification": "test_code",
+        "behavior": "Closes expected manifest row and assert",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 36,
+        "source_text": "        self.assertEqual(actual[\"retained_files\"], 1)",
+        "classification": "test_code",
+        "behavior": "Verifies manifest excludes its own file in retained count",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 37,
+        "source_text": "        self.assertEqual(actual[\"retained_bytes\"], len(contents))",
+        "classification": "test_code",
+        "behavior": "Verifies retained bytes equal actual file bytes",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 38,
+        "source_text": "",
+        "classification": "blank",
+        "behavior": "Inspected blank line separating fixture or test cases",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 39,
+        "source_text": "    def test_external_file_symlink_rejected_before_hash_read(self):",
+        "classification": "test_case",
+        "behavior": "Defines adversarial case: outside-target link must abort before hashing",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 40,
+        "source_text": "        external = self.root / \"outside.txt\"",
+        "classification": "test_code",
+        "behavior": "Creates exterior scratch target path outside manifest output",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 41,
+        "source_text": "        external.write_text(\"outside benchmark output\")",
+        "classification": "test_code",
+        "behavior": "Writes deterministic fake outside-file bytes in temporary parent",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 42,
+        "source_text": "        (self.output / \"linked.json\").symlink_to(external)",
+        "classification": "test_code",
+        "behavior": "Creates output symlink pointing outside output directory",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 43,
+        "source_text": "        with mock.patch.object(RUNNER, \"file_hash\", side_effect=AssertionError(\"unexpected hash read\")):",
+        "classification": "test_code",
+        "behavior": "Mocks file_hash to raise if any hashing is attempted",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 44,
+        "source_text": "            with self.assertRaisesRegex(ValueError, \"refuses symlinked path: linked.json\"):",
+        "classification": "test_code",
+        "behavior": "Requires a precise fail-closed ValueError naming the symlink",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 45,
+        "source_text": "                RUNNER.artifact_inventory(self.output)",
+        "classification": "test_code",
+        "behavior": "Invokes real artifact inventory under negative guard",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 46,
+        "source_text": "        self.assertFalse((self.output / \"artifact-manifest.json\").exists())",
+        "classification": "test_code",
+        "behavior": "Requires no manifest written after failed link gate",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 47,
+        "source_text": "",
+        "classification": "blank",
+        "behavior": "Inspected blank line separating fixture or test cases",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 48,
+        "source_text": "    def test_manifest_name_symlink_not_silently_skipped(self):",
+        "classification": "test_case",
+        "behavior": "Defines negative case for excluded manifest's own name as symlink",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 49,
+        "source_text": "        external = self.root / \"outside.txt\"",
+        "classification": "test_code",
+        "behavior": "Creates exterior scratch target path",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 50,
+        "source_text": "        external.write_text(\"external file\")",
+        "classification": "test_code",
+        "behavior": "Writes canary contents to outside target",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 51,
+        "source_text": "        (self.output / \"artifact-manifest.json\").symlink_to(external)",
+        "classification": "test_code",
+        "behavior": "Creates link named artifact-manifest.json to outside target",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 52,
+        "source_text": "        with self.assertRaisesRegex(ValueError, \"refuses symlinked path: artifact-manifest.json\"):",
+        "classification": "test_code",
+        "behavior": "Requires fail-closed detection despite normally skipped manifest filename",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 53,
+        "source_text": "            RUNNER.artifact_inventory(self.output)",
+        "classification": "test_code",
+        "behavior": "Invokes real manifest generation and expects rejection",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 54,
+        "source_text": "        self.assertEqual(external.read_text(), \"external file\")",
+        "classification": "test_code",
+        "behavior": "Verifies external target content was not altered by rejected write",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 55,
+        "source_text": "",
+        "classification": "blank",
+        "behavior": "Inspected blank line separating fixture or test cases",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 56,
+        "source_text": "    def test_directory_symlink_rejected(self):",
+        "classification": "test_case",
+        "behavior": "Defines linked-directory negative case",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 57,
+        "source_text": "        outside = self.root / \"outside\"",
+        "classification": "test_code",
+        "behavior": "Names an external directory within temporary parent",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 58,
+        "source_text": "        outside.mkdir()",
+        "classification": "test_code",
+        "behavior": "Creates external directory",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 59,
+        "source_text": "        (outside / \"secret.txt\").write_text(\"private test content\")",
+        "classification": "test_code",
+        "behavior": "Writes canary file within directory target",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 60,
+        "source_text": "        (self.output / \"linked-dir\").symlink_to(outside, target_is_directory=True)",
+        "classification": "test_code",
+        "behavior": "Adds output-directory symlink to foreign directory",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 61,
+        "source_text": "        with self.assertRaisesRegex(ValueError, \"refuses symlinked path: linked-dir\"):",
+        "classification": "test_code",
+        "behavior": "Requires fail-closed linked-directory rejection",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 62,
+        "source_text": "            RUNNER.artifact_inventory(self.output)",
+        "classification": "test_code",
+        "behavior": "Invokes real source function under link fixture",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 63,
+        "source_text": "",
+        "classification": "blank",
+        "behavior": "Inspected blank line separating fixture or test cases",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 64,
+        "source_text": "",
+        "classification": "blank",
+        "behavior": "Inspected blank line separating fixture or test cases",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 65,
+        "source_text": "if __name__ == \"__main__\":",
+        "classification": "test_code",
+        "behavior": "Runs unittest only when script invoked directly",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      },
+      {
+        "line": 66,
+        "source_text": "    unittest.main()",
+        "classification": "test_code",
+        "behavior": "Starts standard unittest runner",
+        "quality": "Scoped reproducible stdlib-only synthetic regression; does not alter original data",
+        "risk": "Guards against output symlink byte disclosure or false retained-file hash in local manifest",
+        "dead_or_obsolete": "New test for confirmed defect; no proven duplicate/dead section",
+        "duplicate_logic": "Covers distinct positive, external-file, manifest-name and directory-link boundary",
+        "current_counterpart": {
+          "path": "tests/audit/test_coffee_frozen_artifact_inventory.py",
+          "source_blob": "a3075715648ac1658c0149d2347f7e8907bf4017",
+          "prior": "NEW_POST_PIN"
+        },
+        "testability": "Existing python-audit CI invokes unittest discover tests/audit test_*.py; result pending",
+        "fix_opportunity": "Preserve regular manifest semantics; reject new symlink hazards without altering corpus/scorer",
+        "locked_fit": "Frozen603 scorer/captures/expected unchanged; no Auth, SQL, provider, shots, Community, member or deploy",
+        "method": "Direct line-specific authored/test review by AI, not independent human"
+      }
+    ]
+  },
+  "reproduction": {
+    "kind": "synthetic_local_scratch_only",
+    "observed": "Before fix, Path.is_file follows output symlink; artifact manifest included relative link while SHA256 matched target outside output tree",
+    "assertions": [
+      "symlink_included=true",
+      "points_outside_output=true",
+      "external_hash_in_manifest=true"
+    ],
+    "real_member_or_provider_impact": "NOT_ESTABLISHED",
+    "no_real_data_read": true
+  },
+  "fix_scope": "Fail closed on any output symlink before file predicate/hash, including excluded manifest name",
+  "acceptance": {
+    "isolated_unittest": "PENDING_CI",
+    "source_ci": "PENDING",
+    "merged_ci": "PENDING",
+    "original603": "NOT_RUN",
+    "provider": "NOT_USED"
+  },
+  "frozen_and_pinned_counters_unmodified": true,
+  "all_other_post_pin_drift": "INCOMPLETE"
+}
