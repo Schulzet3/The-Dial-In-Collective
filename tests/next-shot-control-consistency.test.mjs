@@ -23,7 +23,7 @@ test('latest-shot grind adjustment retains actual dose, yield and temperature in
 });
 test('yield and temperature adjustments preserve the other actual controls',()=>{
  const yieldCase=fixture({timeS:22}),r1=recommendation(yieldCase.state,'coffee');
- assert.equal(r1.yield.center,52);assert.equal(r1.doseG,20);assert.equal(r1.grind.value,1.2);assert.equal(r1.tempC,91);assert.equal(r1.ratio.center,2.6);
+ assert.equal(r1.yield.center,55);assert.equal(r1.doseG,20);assert.equal(r1.grind.value,1.2);assert.equal(r1.tempC,91);assert.equal(r1.ratio.center,2.75);
  const tempCase=fixture({timeS:22,tasteScales:{extraction:3,body:3,clarity:5,sweetness:5,astringency:2}}),r2=recommendation(tempCase.state,'coffee');
  assert.equal(r2.tempC,90);assert.equal(r2.doseG,20);assert.equal(r2.yield.center,50);assert.equal(r2.grind.value,1.2);
 });

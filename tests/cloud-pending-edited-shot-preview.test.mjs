@@ -27,7 +27,7 @@ test('pending offline shot correction previews measured values and recomputed ne
  assert.equal(shot.notes,'Corrected private note');
  assert.deepEqual(shot.tasteScales,changed);
  assert.equal(shot.dialedIn,false);
- assert.equal(shot.suggestion.next?.yieldCenter,54,'corrected extraction, not stale success, must drive advice');
+ assert.equal(shot.suggestion.next?.yieldCenter,57,'owner-approved +5 g extraction yield, not stale success, must drive advice');
  assert.equal(preview.activeSetupId,state.activeSetupId);
  assert.deepEqual(state,stateBefore);
  assert.deepEqual(raw,rawBefore);
