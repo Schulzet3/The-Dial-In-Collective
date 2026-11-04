@@ -4367,8 +4367,8 @@
       "issue": 455,
       "pr": 605,
       "title": "Display latest-shot feedback only within current coffee, grinder calibration, style, basket and slow-feed recipe context",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "c319eacc74b7eb73bb40f53deb4cdfd1836f3857",
       "scope_paths": [
         "site/cloud/main.js",
         "site/lib/ui.js"
@@ -4376,16 +4376,25 @@
       "tests": [
         "Source-deterministic pre-fix negative fixture: old site/cloud/main.js selector matched setup version + style only, allowing a newer incompatible feed/basket/calibration shot to drive the card; exact pre-fix blob 280622ce914051da66f96904ca9ab7c3f101b837.",
         "New tests/issue455-feedback-context.test.mjs positive and negative scope/immutability/source-wiring assertions in PR605; actual Node22 CI unverified until successful exact-head run.",
-        "First PR605 head 1517f21e205e98c890bc5a69b93cdf12b62a6dfc approval run41872846609 FAILED queue-intake requirement: untracked application site/cloud/main.js. Add this TESTING item, then rerun exact-head CI; initial run NOT PASS."
+        "First PR605 head 1517f21e205e98c890bc5a69b93cdf12b62a6dfc approval run41872846609 FAILED queue-intake requirement: untracked application site/cloud/main.js. Add this TESTING item, then rerun exact-head CI; initial run NOT PASS.",
+        "Exact PR605 corrected head b4438a858179b8090bb89597d9f89a9e4bae5866: Node22/lint run41873115270 2409 PASS / 0 FAIL / 6 SKIP, eslint PASS; SQL41873115278, security41873115445, approval41873115577, packaged mobile/browser/offline/accessibility41873115398 SUCCESS. Original603 SKIPPED, cloud-targeted suite NOT_APPLICABLE.",
+        "Exact merged source c319eacc74b7eb73bb40f53deb4cdfd1836f3857: UI helper/site cloud/tests identical blobs to passing PR head; node run41873987880 first attempt CANCELLED by concurrent push, attempt2 SUCCESS 2409 PASS /0 FAIL /6 SKIP lint PASS; mobile/browser/offline41873987817, approval41873988080, ready intake41873987892 SUCCESS. No physical-device, member-session or cup-quality claim."
       ],
       "ci_runs": [
-        41872846609
+        41872846609,
+        41873115270,
+        41873115278,
+        41873115445,
+        41873115577,
+        41873115398,
+        41873987880,
+        41873987817,
+        41873988080,
+        41873987892
       ],
-      "blockers": [
-        "Exact corrected PR head source-bound Node22/UX/mobile/offline/approval/security and applicable scoped CI PENDING; nonforce merge/readback/READY certification pending."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "IN DEVELOPMENT / TESTING, NOT READY AND NOT DEPLOYED. UI-only feedback selection scope, no recipe numeric/taste rule changes, no member data changes, deployment authority absent. READY only after exact-head and merged-source applicable checks pass, full scope source identity readback and any queue intake reconciliation. Existing history and other recipe contexts preserved."
+      "notes": "READY IN DEVELOPMENT, NOT DEPLOYED. Comparable latest shot feedback matches coffee/setup/calibration/style/basket/feed, excludes hidden/untimestamped, preserves all original shot/taste/private notes/history and Locked recipe rules. Production publication permission absent. Earlier intake failure and cancelled merged Node attempt retained in same-commit journal."
     },
     {
       "id": "DIC-Q-33-original603-125-current-origin-seo",
