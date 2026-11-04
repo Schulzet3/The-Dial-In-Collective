@@ -67,13 +67,15 @@ test('The source-verified support address is the last troubleshooting contact',(
  assert.ok(section.trim().endsWith('Never include a password or invitation code.'));
 });
 
-test('Combined video/storyboard is source-bound and cannot claim a published screen recording',()=>{
- assert.match(guide,/Draft for review/);
+test('Owner-accepted deployed guide retains exact release evidence and distinguishes historical storyboard',()=>{
+ assert.match(guide,/DEPLOYED — owner confirmed live/);
+ assert.match(register,/COMPLETED \/ DEPLOYED \/ OWNER-ACCEPTED/);
+ assert.match(register,/6ae421f5de038d292bd66407/);
  assert.match(register,/Format: APPROVED — written guide \+ accompanying short video/);
  assert.match(register,/816949840f22b2a181670de20410786d0a8de79b/);
  assert.match(register,/6ae38ba0a56bed8fa17d20ac/);
  assert.match(storyboard,/STORYBOARD \/ TRANSCRIPT ONLY/);
  assert.match(storyboard,/support@dialincollective\.com/);
- for(const phrase of ['NOT CAPTURED','NOT PERFORMED','NOT AUTHORIZED','NOT CHOSEN'])
+ for(const phrase of ['NOT CAPTURED','NOT PERFORMED'])
   assert.ok(register.includes(phrase),phrase);
 });
