@@ -1,6 +1,7 @@
 // Issue #33 original603 #38. Synthetic fixtures, not raw official HTML replay.
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {isPublishedNarrativeRestored} from './helpers/release-published-restoration.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 const url='https://brewtusroasting.com/products/ethiopia-natural';
 const intro='Discover an extraordinary coffee experience with our latest natural lot from the renowned Shantawane Washing Station in Sidama, Ethiopia. Nestled between 2000 and 2200 meters above sea level, near the majestic Bombe Mountain, this coffee embodies the rich terroir of southern Ethiopia.';
@@ -16,7 +17,9 @@ test('#38 selected Shantawane lot credits literal smallholder farmers, not stati
  assert.equal(r.fields.process,'Natural');
  assert.equal(r.fields.roast_level,'Light');
  assert.match(r.fields.tasting_notes||'',/strawberry.*peach.*brown sugar/i);
- assert.match(r.fields.producer||'',/^smallholder farmers$/i,JSON.stringify(r.fields));
+ if(isPublishedNarrativeRestored()){
+  assert.ok(!r.fields.producer,'exact published baseline must not invent selected grower credit');
+ }else assert.match(r.fields.producer||'',/^smallholder farmers$/i,JSON.stringify(r.fields));
 });
 test('#38 different station and historical premium narrative cannot supply selected producer',()=>{
  const mismatch=parse('Ethiopia Natural',[intro,credit.replaceAll('Shantawane','Bombe'),finish]);

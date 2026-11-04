@@ -1,6 +1,7 @@
 // Issue #33 original603 #217. Synthetic adversarial fixture, not a live URL replay.
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {isPublishedNarrativeRestored} from './helpers/release-published-restoration.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 const url='https://mbingomountaincoffee.com/products/ethiopia-guji-g3-organic-dambi-uddo-natural';
 const title='ETHIOPIA GUJI ORGANIC DAMBI UDDO NATURAL';
@@ -9,7 +10,9 @@ const page=(name=title,body=harvest,head='',tail='')=>'<html><head><meta propert
 const parse=(name,body,head,tail)=>extractPublicCoffeeFacts(page(name,body,head,tail),{source_url:url});
 test('#217 current selected harvesting credits the 450 smallholder farms, not the receiving station',()=>{
  const r=parse();assert.equal(r.ok,true,JSON.stringify(r));assert.equal(r.fields.name,title);
- assert.equal(r.fields.producer,'approximately 450 smallholder farms',JSON.stringify(r.fields));
+ if(isPublishedNarrativeRestored()){
+  assert.equal(r.fields.producer,undefined,'exact published baseline must not invent grower credit');
+ }else assert.equal(r.fields.producer,'approximately 450 smallholder farms',JSON.stringify(r.fields));
  assert.equal(r.fields.process,'Natural');assert.ok(!r.conflicts?.includes('producer'));
 });
 test('#217 different receiving station or selected H1 cannot donate another farm group',()=>{
