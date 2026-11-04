@@ -191,7 +191,7 @@ export function learnSensitivity(shots) {
   // with ordered timestamps can calibrate a grind-to-time response.
   if(!finite(s.grindSetting)||!finite(s.timeS)||s.timeS<=0||
      !finite(s.doseG)||s.doseG<=0||!finite(s.yieldG)||s.yieldG<=0||
-     s.hidden||s.feedMode==null||typeof s.timestamp!=='string'||!s.timestamp)continue;const key=[s.coffeeId,s.style,s.setupVersionId,s.calibrationId,s.basketId,s.feedMode].join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(s);}
+     s.hidden||s.feedMode==null||typeof s.timestamp!=='string'||!s.timestamp.trim())continue;const key=[s.coffeeId,s.style,s.setupVersionId,s.calibrationId,s.basketId,s.feedMode].join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(s);}
  const slopes=[];
  for(const group of groups.values()){
   group.sort((a,b)=>a.timestamp.localeCompare(b.timestamp));

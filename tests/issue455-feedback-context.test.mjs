@@ -98,3 +98,22 @@ test('#455 recipe engine abstains from advice on an undated legacy shot but uses
  assert.equal(sh.notes,'Keep private original legacy note');
  assert.equal(sh.tasteScales.sweetness,4);
 });
+
+test('#455 legacy whitespace timestamps cannot establish grind-time sensitivity',async()=>{
+ const {learnSensitivity}=await import('../site/lib/engine.js');
+ const common={coffeeId:'coffee-a',setupVersionId:'setup-v2',calibrationId:'grind-cal-2',
+  basketId:'basket-18',style:'Turbo',feedMode:'slow',doseG:18,yieldG:36,hidden:false};
+ const measured=(id,timestamp,grindSetting,timeS)=>({
+  ...common,id,timestamp,grindSetting,timeS,
+  notes:'Original private measurement',tasteScales:{extraction:3,body:3,clarity:5,sweetness:4,astringency:1}
+ });
+ const untrusted=measured('undated','   ',4,12);
+ const datedA=measured('dated-a','2026-11-04T10:00:00Z',3,18);
+ const datedB=measured('dated-b','2026-11-04T11:00:00Z',2,24);
+ const mixed=[untrusted,datedA,datedB],before=structuredClone(mixed);
+ assert.equal(learnSensitivity(mixed),null,'one valid dated pair does not establish a calibrated slope');
+ assert.deepEqual(mixed,before,'do not rewrite private notes, sensory ratings or old shots');
+ const datedC=measured('dated-c','2026-11-04T12:00:00Z',1,30);
+ assert.deepEqual(learnSensitivity([datedA,datedB,datedC]),{secondsPerUnit:-6,samples:2},
+  'three chronological comparable dated shots still calibrate two negative slopes');
+});
