@@ -2,7 +2,7 @@
   "schema_version": 1,
   "issue": 33,
   "review_date_utc": "2026-11-04",
-  "status": "TESTING_UNTIL_ACTUAL_SELECTED_SOURCE_PARSER_AND_CI",
+  "status": "CURRENT_MERGED_SOURCE_3_FETCHED_3_PARSED_FIELD_LEVEL_ADJUDICATED_NO_VERIFIED_PRODUCER_FIX",
   "base_development_sha": "bf3b9d810be10438503c29345a8b1bee6fac0746",
   "immutable_original603_csv_git_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
   "probe_marker": "[dic-issue33-eighteenth3]",
@@ -46,5 +46,72 @@
     "Current exact official guarded public HTTPS 3-case fetch/H1/HTML SHA256/actual parser/Add Coffee fields and conflicts",
     "Independently adjudicate selected producer roles versus current parser, add positive and adversarial regressions only for independently reproduced defect",
     "Keep Issue33 open; #267 V2 and #96 independent; no change in 11 READY/90 DEPLOYED/3 IN_PROGRESS"
-  ]
+  ],
+  "actual_source": {
+    "exact_development_source_sha": "c8c46dc9182a501a6d4b6ca6b6c3ac6ee44c5cdc",
+    "pr": 541,
+    "pr_head": "eab7ba551766af22cd84f05b2491fc9bff9feb2d",
+    "tree_sha": "2753c91b6a587c947a5aa05687a687a7ac072365",
+    "pr_checks": "5/5 SUCCESS",
+    "merged_approval_run": 41812776342,
+    "merged_approval": "SUCCESS",
+    "merged_queue_run": 41812776665,
+    "merged_queue": "SUCCESS",
+    "official_run": 41812776713,
+    "official_job": 126515887781,
+    "official_result": "SUCCESS",
+    "attempted": 3,
+    "fetched": 3,
+    "parsed": 3,
+    "manual_whole_coffee_certified": 0,
+    "artifact_id": 13313471150,
+    "artifact_sha256": "5c4397c6d9a1309d1bf0abbb1b1018796ab11f0dac27874d5e75f1358d31cf8b",
+    "artifact_retention_days": 1
+  },
+  "field_decisions": [
+    {
+      "original603": 290,
+      "selected_h1": "Natural Organic Ethiopia Guiji",
+      "html_sha256": "4198527c15f8a9117e530becfd6b06c448f0117f25874cdb3a28cbd3a75ff93c",
+      "actual": {
+        "origin": "Guji, Ethiopia",
+        "process": "Natural",
+        "tasting_notes": "Strawberry, wine, and floral notes",
+        "producer": null,
+        "conflicts": []
+      },
+      "assessment": "Unverified selected grower cohort: 'this coffee reflects care/tradition of Ethiopia's smallholder farmers' is not explicit supplier attribution. Preserve blank; historical expected Smallholder farmers is not adequate authority without lot-specific cultivation credit"
+    },
+    {
+      "original603": 380,
+      "selected_h1": "Horizon Organic",
+      "html_sha256": "7ee37a1ac6837ff431c02aa0aa31f961be6b821aa5426ae48ce388c672defff4",
+      "actual": {
+        "origin": "Huehuetenango(GT) / Matagalpa(NI), Guatemala / Nicaragua",
+        "process": "Washed",
+        "roast_level": "Medium",
+        "producer": null,
+        "conflicts": []
+      },
+      "assessment": "Selected two-origin blend; ACODIHUE only Guatemala component; unrelated Marta Solares biography not complete selected source. Safe blank; do not invent global ACODIHUE"
+    },
+    {
+      "original603": 571,
+      "selected_h1": "Brazil Capricornio Dulce Signature",
+      "html_sha256": "74b904f598bdd7f9b57a8574cc749db838fb7e19dee7c13c8d2897c40f56cb6b",
+      "actual": {
+        "origin": "Brazil",
+        "variety": "yellow catuai, mondo novo",
+        "process": "Other/Unknown",
+        "producer": null,
+        "conflicts": []
+      },
+      "assessment": "Mixed natural/honey processes correctly Other/Unknown. Capricornio signature program/technique role is not explicit chosen-lot farming producer credit; safe blank"
+    }
+  ],
+  "regression_tests": {
+    "path": "tests/coffee-issue33-producer-cohort-safe-blanks-290-380-571.test.mjs",
+    "description": "Five adversarial synthetic tests: guarded direct-credit positive versus ambiguous country growers, blended source partial ACODIHUE, unrelated farmer biography, uncertain Capricornio producer versus direct selected Producer label",
+    "status": "TESTING_UNTIL_EXACT_PR_HEAD_CI"
+  }
 }
