@@ -78,7 +78,22 @@ test('mixed READY/unready source can ship only exact pinned approved READY blob'
  assert.throws(()=>validateReadyOnlyCandidate(queue,{...input,
   stagedCommitChangedPaths:validate.stagedCommitChangedPaths}),/candidate HOLD/);
  assert.equal(planReadyOnlyCandidate(queue,opts).ready,false);
+ const excluded='tests/issue102-unfinished-scope.test.mjs';
+ const testObjectAt=(sha,path)=>path===excluded?(sha===B?'new-unready-test':null):sourceObjectAt(sha,path);
+ const withTest={...input,manifest:{...overlapManifest,excluded_unready_test_paths:[excluded]},
+  sourceObjectAt:testObjectAt,
+  stagedCommitChangedPaths:[...input.stagedCommitChangedPaths,excluded]};
+ assert.deepEqual(validateReadyOnlyCandidate(queue,withTest).excluded_unready_test_paths,[excluded]);
+ assert.throws(()=>validateReadyOnlyCandidate(queue,{...withTest,
+  sourceObjectAt:(sha,path)=>path===excluded&&sha===C?'test accidentally included':testObjectAt(sha,path)}),
+  /Excluded test must be newly introduced and absent/);
+ assert.throws(()=>validateReadyOnlyCandidate(queue,{...withTest,
+  manifest:{...withTest.manifest,excluded_unready_test_paths:['tests/issue999-untracked.test.mjs']}}),
+  /does not belong to a current unfinished/);
+ assert.throws(()=>validateReadyOnlyCandidate(queue,{...withTest,
+  stagedCommitChangedPaths:input.stagedCommitChangedPaths}),/staging commit changes unrelated paths/);
 });
+
 
 test('unready same-file overlap blocks even if another READY item covers the path',()=>{
  const overlapping={...unfinished,scope_paths:['site/card.js']};

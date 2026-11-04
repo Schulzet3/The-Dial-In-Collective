@@ -152,7 +152,24 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  if(!Array.isArray(manifest.pinned_to_ready_paths||[])||
     !equal(manifest.pinned_to_ready_paths||[],plan.pinned_ready_paths))
   reject('Pinned READY manifest differs from actual mixed-source paths');
- const allowed=[...plan.restored_paths,...plan.pinned_ready_paths,CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH];
+ const excludedTests=manifest.excluded_unready_test_paths||[];
+ if(!Array.isArray(excludedTests)||new Set(excludedTests).size!==excludedTests.length)
+  reject('Invalid or duplicate excluded unfinished test paths');
+ for(const path of excludedTests){
+  const m=typeof path==='string'?/^tests\/issue([1-9][0-9]*)-[a-z0-9-]+\.test\.mjs$/.exec(path):null;
+  if(!m)reject('Only issue-scoped unfinished test files can be excluded');
+  const issue=Number(m[1]);
+  if(!queue.items.some(i=>i.issue===issue&&['IN_PROGRESS','TESTING','BLOCKED'].includes(i.state)&&
+      i.scope_paths?.some(p=>plan.pinned_ready_paths.includes(p))))
+   reject('Excluded test does not belong to a current unfinished mixed-source item');
+  if(sourceObjectAt(publishedSourceSha,path)!==null||
+     sourceObjectAt(manifest.development_source_sha,path)===null||
+     sourceObjectAt(candidateSha,path)!==null)
+   reject('Excluded test must be newly introduced and absent from isolated candidate');
+  for(const item of plan.ready_items)if(sourceObjectAt(item.merged_source_sha,path)!==null)
+   reject('Cannot exclude an approved READY test from candidate');
+ }
+ const allowed=[...plan.restored_paths,...plan.pinned_ready_paths,...excludedTests,CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH];
  if(!equal(stagedCommitChangedPaths||[],allowed))
   reject('Candidate staging commit changes unrelated paths or lacks same-commit journal');
  for(const path of plan.restored_paths)
@@ -176,7 +193,7 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  }
  return {ready:true,errors:[],deployable_paths:plan.included_paths,
   ready_items:plan.ready_items,other_items:plan.other_items,
-  excluded_paths:plan.restored_paths,pinned_ready_paths:plan.pinned_ready_paths,
+  excluded_paths:plan.restored_paths,pinned_ready_paths:plan.pinned_ready_paths,excluded_unready_test_paths:excludedTests,
   development_source_sha:manifest.development_source_sha,
   candidate_source_sha:candidateSha};
 }
