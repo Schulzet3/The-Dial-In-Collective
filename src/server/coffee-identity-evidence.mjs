@@ -306,6 +306,22 @@ function narrativeGeography(blocks,{currentLocalityOnly=false,name=''}={}){
    const selectedCountries=countryNames(name);
    const directlySelected=!/\b(?:related|recommended|you may also like|other coffees?|other roasts?|catalog)\b/iu.test(block.section||'');
    if(directlySelected&&selectedCountries.length===1){
+
+    // Only a selected country-first product with the SAME printed country
+    // twice can refine "Location: Country" using its current growing region.
+    // No SEO, roaster-specific dictionary, gazetteer or historical inference.
+    const exactGrowingRegion=sentence.match(new RegExp(
+     '^('+COUNTRIES+')\\s+comes\\s+to\\s+us\\s+from\\s+(?:(?:central|northern|southern|eastern|western)\\s+)?\\1\\s*,\\s*the\\s+('+PLACE+')\\s+region\\s+and\\s+is\\s+(?:produced|grown|cultivated)\\s+(?:in|by)\\b','iu'));
+    if(exactGrowingRegion&&key(exactGrowingRegion[1])===key(selectedCountries[0])&&
+       key(name).startsWith(key(exactGrowingRegion[1]))&&
+       exactGrowingRegion[2].length>=4&&exactGrowingRegion[2].length<=65&&
+       !COUNTRY_ONLY.test(exactGrowingRegion[2])&&
+       !completeVarietyPhrase(exactGrowingRegion[2],{explicit:true})&&
+       !/\b(?:coffee|roast|blend|tasting|chocolate|caramel|cocoa|flavou?r|spice|pumpkin|vanilla|product)\b/iu.test(exactGrowingRegion[2])){
+     add(exactGrowingRegion[2]+', '+exactGrowingRegion[1],sentence);
+     continue;
+    }
+
     // The selected coffee's OWN current sentence can name its growing
     // region before its exact H1: "Grown in the famed Cerrado region,
     // Brazil Oberon is ...". The country must be literally printed at
