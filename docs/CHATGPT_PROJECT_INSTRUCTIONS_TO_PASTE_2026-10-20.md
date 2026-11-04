@@ -22,12 +22,14 @@
 
 **Recovery key — #423, Nov 2.** Owner may paste EXISTING unencrypted SSH Ed25519/age private key ONLY into GitHub Actions secret DIC_ARCHIVE_AGE_IDENTITY; never chat, issues, Git files or Drive. Keep offline copy. Verify key matches old public recipient; avoid duplicate stanza. Daily backups encrypt with public key; weekly fresh-snapshot restore needs none. Nov3 saved Drive-matched archive decryption and 46-table/Auth offline restore PASS; future runs need proof. No plaintext offsite, committed keys or encryption removal. Preserve archives.
 
-**Autonomous #33.** Hourly official-source extractor task with focused tests, exact CI and immutable original603 oracle; preserve 153 context- and 29 missing-literal-qualified cases, conflicts and identity. No invented facts/universal claim. Coordinate #267/#96; merge/queue READY only. No deployment, production writes or paid services. Close and disable task only after completion; pending CI not PASS.
+**Autonomous #33.** Hourly official-source extractor fixes; preserve original603 oracle, 153 context- and 29 missing-literal-qualified cases. No invented facts. Coordinate #267/#96, focused tests, exact CI, safe READY only. No production/deploy/paid action; close and disable only when complete. Pending CI ≠ PASS.
 
-**Autonomous #267.** Preserve V1; fresh V2 starts frozen original file #1 line 1 (757 files/579,961 lines), separate pinned CURRENT source from line 1. Track independent line ledgers/SHAs/drift; never credit V1 to V2. Fix only verified defects with same-commit journal, tests, nonforce integration and exact CI. Preserve 603 corpus, history, data, migrations, #33/#96. No deploy without approval. Verify successor automation before disabling one at limit. Close only when BOTH V2 tracks finish.
+**Autonomous #267.** Preserve V1; V2 begins frozen file #1 line 1 (757 files/579,961 lines) and independent pinned CURRENT code line 1. Track separate ledgers/SHAs/drift; never count V1 as V2. Repair only verified defects with same-commit journal, tests, nonforce integration, exact-source CI. Preserve 603 corpus, migrations, data, history, #33/#96. No deploy. Verify successor task before disabling old at limit; close only when BOTH V2 tracks finish.
 
-**Autonomous #455.** Hourly review original research, implementation pack, S019/slow-feed PDFs and newer sources; log evidence/gaps and safe tested shot/recommendation fixes. Coordinate #335/#267/#33/#96; no Locked changes/deploy. Daily 14:00 UTC owner digest.
+**Autonomous #455.** Hourly original/new espresso research, implementation pack and PDFs; source-linked tested shot/recommendation improvements. Coordinate #335/#267/#33/#96; no Locked changes/deploy. Daily 14:00 UTC digest.
 
-**Autonomous #504.** Hourly exhaustive GitHub-wide word audit of files, issues, PRs, Actions, releases and history; source-bound review receipts, verified safe fixes. #267 owns code lines; reuse proof without duplication. Preserve Locked decisions, data, archives. No deploy.
+**Autonomous #504.** Hourly exhaustive GitHub text/history audit (files, issues, PRs, Actions and releases). #267 solely owns code-line review; reuse evidence, preserve data/archives. Verified safe fixes, no deploy.
+
+**Autonomous #509.** Hourly complete live Supabase SQL/RLS/Auth/Edge/Storage/log, drift and performance audit; full object/word ledger, safe GitHub-only fixes/tests/READY. Coordinate #96/#267/#504; no private-data export, production writes or deploy.
 
 **Project Settings.** Sync lasting changes to GitHub Project Instructions and provide full paste-ready text under 8,000 characters; only owner edits ChatGPT settings.
