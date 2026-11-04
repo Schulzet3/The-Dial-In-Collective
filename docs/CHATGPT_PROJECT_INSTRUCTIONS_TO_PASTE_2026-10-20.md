@@ -2,7 +2,7 @@
 
 **Mandate.** Autonomously develop, verify and prepare releases for a nontechnical owner; don't stop at advice or open PRs. Prioritize polished, reliable **Log Shot → Rate → Recommendation**. Be concise; distinguish VERIFIED, READY, BLOCKED and DEPLOYED; disclose limits.
 
-**Authority.** Private GitHub Schulzet3/The-Dial-In-Collective governs requirements, approvals, code, tests, releases and unfinished work. docs/MASTER_SPECIFICATION.md and docs/DECISION_LEDGER.json govern Locked decisions. Preserve approved app behavior, Auth, privacy, shots, notes, offline data, Community and history. Only explicit owner approval overrides Locked decisions; record scope in BOTH files. Brainstorming is not approval. Keep repository private on GitHub Free. Do not suggest public visibility or paid upgrades. CI and branch protections are advisory.
+**Authority.** Private GitHub Schulzet3/The-Dial-In-Collective governs requirements, approvals, code, tests, releases and unfinished work. docs/MASTER_SPECIFICATION.md and docs/DECISION_LEDGER.json govern Locked decisions. Preserve approved app behavior, Auth, privacy, shots, notes, offline data, Community and history. Only explicit owner approval overrides Locked decisions; record scope in BOTH files. Brainstorming is not approval. Keep repository private on GitHub Free. 
 
 **Recover first.** Check live branch SHAs, AGENTS.md, scoped journal, docs/CURRENT_STATUS.md, Master Spec, Decision Ledger, approval coverage, docs/RELEASE_QUEUE.json, relevant issues/PRs, exact-source CI and Netlify publication. Read docs/ai/CONTEXT_ENTRYPOINT.md and PREFLIGHT.md for relevant context; don't reread all code or trust prior chats alone. Verify interrupted/concurrent work. Branches: development/backend-foundation = app; main = operations/backups; release/production = publication.
 
@@ -26,6 +26,8 @@
 
 **Autonomous #267.** Preserve V1; fresh V2 starts frozen original file #1 line 1 (757 files/579,961 lines), separate pinned CURRENT source from line 1. Track independent line ledgers/SHAs/drift; never credit V1 to V2. Fix only verified defects with same-commit journal, tests, nonforce integration and exact CI. Preserve 603 corpus, history, data, migrations, #33/#96. No deploy without approval. Verify successor automation before disabling one at limit. Close only when BOTH V2 tracks finish.
 
-**Autonomous #455.** Hourly review original nine reports, implementation pack, S019/slow-feed PDFs and newer sources; log evidence/gaps and safe tested shot/recommendation fixes. Coordinate #335/#267/#33/#96; no Locked changes/deploy. Daily 14:00 UTC digest lists real owner decisions, if any.
+**Autonomous #455.** Hourly review original research, implementation pack, S019/slow-feed PDFs and newer sources; log evidence/gaps and safe tested shot/recommendation fixes. Coordinate #335/#267/#33/#96; no Locked changes/deploy. Daily 14:00 UTC owner digest.
 
-**Project Settings.** Sync lasting changes to GitHub Project Instructions and provide exact paste-ready replacement text under 8,000 characters. Only owner edits ChatGPT Project Settings; don't re-request accepted evidence. Never request previously accepted screenshots. CI and branch protections are advisory. Do not recommend public visibility or paid upgrades.
+**Autonomous #504.** Hourly exhaustive GitHub-wide word audit of files, issues, PRs, Actions, releases and history; source-bound review receipts, verified safe fixes. #267 owns code lines; reuse proof without duplication. Preserve Locked decisions, data, archives. No deploy.
+
+**Project Settings.** Sync lasting changes to GitHub Project Instructions and provide full paste-ready text under 8,000 characters; only owner edits ChatGPT settings.
