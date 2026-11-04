@@ -124,6 +124,12 @@
       "id": "G1-008-F2",
       "status": "NO_PROVEN_RUNTIME_DEFECT",
       "disposition": "No code, SQL, app data or provider action."
+    },
+    {
+      "id": "G1-008-F3",
+      "status": "CONFIRMED_FIXED_GOVERNANCE_REGRESSION",
+      "evidence": "Exact PR-head cloud build run 41840798885 failed 1 of 2392 Node assertions (2385 PASS, 1 FAIL, 6 SKIP) at tests/approval-coverage.test.mjs:58:1; preexisting project-instructions copy omitted test-required literal 'Only owner monitors credits' and 'Never request ... screenshots' while shortening copy for under-8,000-char setting. Change restores the unchanged owner policy, not a new gate.",
+      "disposition": "Restore precise owner-only credit monitoring and never-request-screenshots phrases within 7,978-character full paste-ready GitHub project instructions. No source-app/Locked/provider change, CI must re-run on the corrected PR head."
     }
   ],
   "validation": {
@@ -135,7 +141,12 @@
     "immutable_release_membership": "PASS",
     "live_provider": "NOT_CHECKED",
     "ci": "PENDING",
-    "app_build": "NOT_RUN_DOC_ONLY"
+    "app_build": "NOT_RUN_DOC_ONLY",
+    "initial_pr_head_build_run": 41840798885,
+    "initial_pr_head_build_outcome": "FAIL_2385_PASS_1_FAIL_6_SKIPPED",
+    "initial_failure_detail": "Owner-only credits/screenshot no-request guard exact-wording assertion; repaired in source before new CI",
+    "governance_copy_chars": 7978,
+    "updated_ci": "PENDING_NEW_EXACT_SOURCE"
   },
   "cumulative": {
     "source_file_lines": 2785,
