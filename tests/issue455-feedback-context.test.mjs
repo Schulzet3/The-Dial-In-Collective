@@ -146,3 +146,33 @@ test('#455 Log Shot prefill excludes undated legacy rows without changing saved 
  assert.equal(empty.doseG,18,'without dated records retain configured basket starting dose');
  assert.equal(empty.grindSetting,'','do not assert a calibrated grind from undated history');
 });
+
+test('#455 cloud hydration retains legacy shots but only dated observations derive latest feedback',async()=>{
+ const [{hydrate},{rawFixture,rawShot}]=await Promise.all([
+  import('../site/cloud/mapping.js'),
+  import('./cloud-fixtures/raw.js')
+ ]);
+ const raw=rawFixture();
+ raw.shots=[
+  rawShot({id:'dated-old',pulled_at:'2026-11-03T10:00:00Z'}),
+  rawShot({id:'legacy-null',pulled_at:null}),
+  rawShot({id:'legacy-whitespace',pulled_at:'   '}),
+  rawShot({id:'dated-new',pulled_at:'2026-11-04T10:00:00Z'})
+ ];
+ raw.notes=[{shot_id:'legacy-null',notes:'Private archival note'}];
+ const original=structuredClone(raw);
+ const state=hydrate(raw);
+ const byId=id=>state.shots.find(s=>s.id===id);
+ assert.equal(state.shots.length,4,'preserve every original measurement');
+ assert.equal(byId('legacy-null').timestamp,null);
+ assert.equal(byId('legacy-null').notes,'Private archival note');
+ assert.equal(byId('legacy-whitespace').timestamp,'   ');
+ assert.equal(byId('legacy-null').suggestion,undefined,'do not derive live advice from undated rows');
+ assert.equal(byId('legacy-whitespace').suggestion,undefined);
+ assert.equal(byId('dated-old').suggestion,undefined,'only the genuinely latest row gets restored feedback');
+ assert.ok(byId('dated-new').suggestion,'retain valid latest dated advice');
+ assert.deepEqual(raw,original,'hydration must not mutate raw cloud data');
+ const withoutDated=hydrate({...raw,shots:raw.shots.filter(sh=>sh.id.startsWith('legacy-'))});
+ assert.equal(withoutDated.shots.length,2);
+ assert.ok(withoutDated.shots.every(sh=>sh.suggestion===undefined));
+});
