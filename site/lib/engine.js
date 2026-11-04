@@ -191,7 +191,7 @@ export function learnSensitivity(shots) {
   // with ordered timestamps can calibrate a grind-to-time response.
   if(!finite(s.grindSetting)||!finite(s.timeS)||s.timeS<=0||
      !finite(s.doseG)||s.doseG<=0||!finite(s.yieldG)||s.yieldG<=0||
-     s.hidden||s.feedMode==null||typeof s.timestamp!=='string'||!s.timestamp)continue;const key=[s.coffeeId,s.style,s.setupVersionId,s.calibrationId,s.basketId,s.feedMode].join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(s);}
+     s.hidden||s.feedMode==null||typeof s.timestamp!=='string'||!s.timestamp.trim())continue;const key=[s.coffeeId,s.style,s.setupVersionId,s.calibrationId,s.basketId,s.feedMode].join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(s);}
  const slopes=[];
  for(const group of groups.values()){
   group.sort((a,b)=>a.timestamp.localeCompare(b.timestamp));
@@ -353,7 +353,7 @@ export function recommendation(s,coffeeId,options={}) {
  rec.style=style;rec.basketId=basket.id;rec.feedMode=feed;
  rec.yield={low:round(rec.ratio.low*rec.doseG),high:round(rec.ratio.high*rec.doseG),center:round(rec.ratio.center*rec.doseG)};
  // Successful shot families are chosen independently of any retired Experiment workflow.
- const last=s.shots.filter(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.basketId===basket.id&&sh.feedMode===feed&&sh.calibrationId===v.calibrationId).sort((a,b)=>b.timestamp.localeCompare(a.timestamp))[0];
+ const last=s.shots.filter(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.basketId===basket.id&&sh.feedMode===feed&&sh.calibrationId===v.calibrationId&&typeof sh.timestamp==='string'&&sh.timestamp.trim()).sort((a,b)=>b.timestamp.localeCompare(a.timestamp))[0];
  if(!options.ignoreAdvice&&last&&!hasLocalSuccess(s,coffeeId,style)){
   // Keep the recipe card consistent with fresh taste feedback, even before a
   // derived suggestion is cached (e.g. immediately after an offline shot).
@@ -405,7 +405,7 @@ export function recommendation(s,coffeeId,options={}) {
 }
 export function prefill(s,coffeeId,options={}) {
  const v=activeVersion(s),p=coffeeState(s,coffeeId),basket=v.baskets.find(x=>x.id===options.basketId)||selectedBasket(s,coffeeId),style=options.style||p.style,feed=options.feedMode||feedMode(v);
- const shots=s.shots.filter(x=>!x.hidden&&x.coffeeId===coffeeId&&x.setupVersionId===v.id).sort((a,b)=>b.timestamp.localeCompare(a.timestamp));
+ const shots=s.shots.filter(x=>!x.hidden&&x.coffeeId===coffeeId&&x.setupVersionId===v.id&&typeof x.timestamp==='string'&&x.timestamp.trim()).sort((a,b)=>b.timestamp.localeCompare(a.timestamp));
  const doses=shots.filter(x=>x.basketId===basket.id),grinds=shots.filter(x=>x.basketId===basket.id&&x.style===style&&x.feedMode===feed&&x.calibrationId===v.calibrationId&&finite(x.grindSetting));
  const temps=shots.filter(x=>finite(x.tempC)),same=temps.find(x=>x.style===style),temp=same||temps[0];
  return {doseG:doses[0]?.doseG??basket.doseG,yieldG:'',timeS:'',grindSetting:grinds[0]?.grindSetting??'',tempC:v.advanced.temperature?(temp?.tempC??null):null,tempSource:temp&&temp.style!==style?`Last used on ${temp.style}`:'',style,basketId:basket.id,feedMode:feed,tasteScales:{extraction:null,body:null,clarity:null,sweetness:null,astringency:null},notes:''};

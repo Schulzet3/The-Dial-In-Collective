@@ -4443,6 +4443,28 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "NARROW VERIFIED READY, NOT DEPLOYED. Current selected official #125 H1 and country caption Ethiopia override metadata-only Guji; retained selected true visual Light roast and tasting. Actual postmerged official fetch+parser+Add Coffee and 2 other controls source-verified; no unrelated regression. Original immutable603/201/1197, oracle/scorer/CSV preserved. Global Issue33 and signed-in member acceptance remain unverified; no production/member/provider writes, deploy authority absent."
+    },
+    {
+      "id": "DIC-Q-455-legacy-undated-feedback",
+      "issue": 455,
+      "pr": null,
+      "title": "Prevent blank-timestamp legacy shots from driving current recommendation and recipe-card feedback",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js",
+        "site/lib/ui.js"
+      ],
+      "tests": [
+        "Source negative: prior engine selected a single otherwise-compatible blank-timestamp shot; recipe card accepted empty-string timestamps. Positive: current dated comparable shot remains eligible; historical ratings, measurements and private notes remain unmodified.",
+        "Two new focused Node regression tests authored against actual imported engine/UI modules; NOT_EXECUTED before GitHub CI. Current GitHub Actions jobs fail before steps; exact PR-head test and governance outcomes PENDING."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-head CI not yet executed or verified; existing GitHub Actions job startup failure affects unrelated workstreams."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "TESTING only; Locked-compatible exclusion of undated legacy feedback from current recipe. No change to old shot storage, five ratings, original notes, numeric taste targets or one-change policy. No publication authorized."
     }
   ],
   "history": [
