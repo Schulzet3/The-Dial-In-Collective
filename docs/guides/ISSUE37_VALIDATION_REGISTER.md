@@ -1,8 +1,8 @@
 # Issue #37 — beginner guide and video acceptance register
 
-**Status:** Written guide revised; captioned video companion authorized as a format. Neither is published. Issue #37 remains OPEN until genuine production walkthrough and publication acceptance are completed.
+**Current status (November 3, 2026 Denver): COMPLETED / DEPLOYED / OWNER-ACCEPTED.** The six-step in-app guide and captioned companion video were published in Release 13 (October 30). The owner subsequently saw both and played the video in the live app. This acceptance closes Issue #37 without misrepresenting unperformed optional device, screen-reader, end-to-end first-shot or instrumented HTTP-range tests.
 
-## Current published source — verified October 29, 2026
+## Historical pre-release source — verified October 29, 2026
 
 | Evidence | Verified value |
 | --- | --- |
@@ -12,14 +12,14 @@
 | Earlier October 28 baseline (historical) | `05cf9eb156f63110cd434034ec3914a1e92b76d3`; Netlify `6ae27f32bfae09ad8745e19b` |
 | Published-source label verification | `site/cloud/main.js`, `site/lib/constants.js`, `site/lib/ui.js`, `site/cloud/shot_card.js` |
 | Support address source | `docs/MASTER_SPECIFICATION.md` confirms owner-observed successful Cloudflare Email Routing delivery test for `support@dialincollective.com` |
-| Written candidate | `docs/guides/BEGINNER_QUICKSTART_DRAFT.md` (not published) |
-| Companion video storyboard/transcript | `docs/guides/ISSUE37_VIDEO_STORYBOARD.md` (draft) |
+| Written reference file | `docs/guides/BEGINNER_QUICKSTART_DRAFT.md` (legacy filename); live six-step guide implemented by `site/cloud/help.js` |
+| Companion storyboard (historical) | `docs/guides/ISSUE37_VIDEO_STORYBOARD.md`; live video is `site/media/first-shot-walkthrough.mp4` with WebVTT captions and transcript |
 
 ## Owner choices
 
 - **Format: APPROVED — written guide + accompanying short video**, requested October 29, 2026. Previous "format undecided" state is superseded only for output format.
-- **Publication/launch window: NOT CHOSEN**. No Netlify/app-domain publish approval, new hosting service, purchases or external beta launch approval.
-- Video should present the actual then-published interface after safe authenticated test capture. A first **illustrative/animated draft** may be prepared locally as a concept, clearly labeled as not real live app footage.
+- **In-app tutorial release: COMPLETED.** Owner separately approved Release 13 and it published on October 30. Any broader marketing/public beta launch date is a distinct product choice and is not established by this guide acceptance.
+- The published 135.56-second video uses synthetic demo account/coffee/shot data. It does not show genuine private member records. Owner confirmed live playback on November 3.
 
 ## Content improvements
 
@@ -33,18 +33,18 @@
 
 | Requirement | Status |
 | --- | --- |
-| Six-step guide labels and semantic order checked against GitHub source | **CODE CONTRACT TEST — CI PENDING** |
+| Six-step guide labels and semantic order checked against GitHub source | **PASS** — Issue #37 contract and Release 13 source-scoped CI |
 | Verified support email address in official Master Specification | **PASS — historical owner-observed delivery test**, not a newly sent live support email |
-| Accurate published Netlify deploy and Git SHA | **PASS — provider readback October 29** |
+| Accurate published Netlify deploy and Git SHA | **PASS** — Release 13 verified on Oct 30; later Netlify READY/current source readback retained media |
 | Format choice | **SETTLED: BOTH** |
 | Genuine authenticated production screenshots / screen recording | **NOT CAPTURED** |
 | End-to-end admitted-account first-shot acceptance | **NOT PERFORMED** |
 | Physical phone and named screen-reader accessibility | **NOT PERFORMED** |
-| Video accessibility (captions/transcript), pacing and final QA | **IN PROGRESS / draft only** |
-| Video publication and guide link in the application | **NOT AUTHORIZED** |
-| Final launch date | **OPEN OWNER PRODUCT CHOICE** |
+| Video captions/transcript, pacing and source-media QA | **PASS** — source QA and synthetic browser checks; named screen-reader test remains unperformed |
+| Video publication and guide link in the application | **DEPLOYED** in owner-authorized Release 13; owner saw both and played video November 3 |
+| Broader marketing/public launch date | **SEPARATE** — not required to complete this already published tutorial |
 
-The guide and planned video are not source READY for public publication until the exact released UI is captured and assessed with a safe admitted test account, screenshots have no private information, the user journey is exercised, and any captions/transcript are checked. Maintain a versioned guide and update after releases. No Netlify/backend/SQL/Edge/Auth/member data change under this workstream.
+The guide and video are **already DEPLOYED**, not merely source-READY. The owner confirmed the live app presents both and plays the video. Maintain versioned documentation and reassess it after relevant product changes; the absent physical-phone, named screen-reader, admitted-account end-to-end first-shot and instrumented HTTP-range checks are not represented as passing. This closure documentation makes no Netlify/backend/SQL/Edge/Auth/member-data change.
 
 ## October 29: owner-approved green sensory rating representation
 
@@ -55,3 +55,10 @@ The owner observed that the app's taste ratings are not presented as numbers. Th
 
 ## Updated source-READY evidence — October 29 MDT / October 30 UTC
 Previous historical draft-only statuses above describe the earlier concept and should **not** be read as the latest implementation status. Owner subsequently authorized in-app first-use and Settings integration of the already reviewed corrected video, not its Netlify publication. PR268 merged at `00fbb23a4dabea4d2e85309e1dd3405ff981f9d7`, final tested PR head `f6385df194569c2fcd1aeaf7a30ff86ff41d170e`. The exact 2,320,714-byte 135.56-second MP4, Git blob `81e8c145336f1837bbc8580bf91e2980e019e8b6` and SHA-256 `e8235c3c03f17541f07e0a3f0f9907f61c90c748586f069dfb93b7d49591b2aa`, is now in the GitHub source; build hash gate prevents missing/replaced bytes. Self-hosted video has controls, caption track and transcript; it is **not** service-worker-pre-cached, preserving expected streamed-byte-range semantics. All six applicable final PR-head and four merged-source GitHub workflows SUCCESS; immutable603 intentionally SKIPPED. Independent FFmpeg full decode and local Chromium actual media (via data URL, NOT host CDN) at 390/1280 widths verified 16:9, seek/play, 20 cues, no JS errors. Synthetic browser QA checked the actual Settings UI video/guide interactions at 390px. Scope-specific source is READY; Netlify publication and live user/member, physical device, named assistive-technology, provider-delivered HTTP Range and actual authenticated production screenshot acceptance remain **UNVERIFIED**. Keep Issue #37 OPEN through those broader acceptance items. No live deployment was instructed or performed.
+
+
+## November 3, 2026 (Denver) — owner live acceptance, issue closure
+
+Release 13 published on 2026-10-30 (production `42eb45aab12d1a47fe96a3ebe8a1f36b3913b5f7`, Netlify `6ae421f5de038d292bd66407`). On 2026-11-03 (Denver), the owner confirmed in the live app that the guide and video are visible and the video plays. Current Netlify was independently READY/current on a later source `31c66832a28247e657a2bf89592ebc1e2f48dfc5` that retains the same guide/video assets. This is owner-observed live functional acceptance, not a claim of a signed-in first-shot completion, physical-device test, named screen-reader test, or instrumented HTTP byte-range test.
+
+**Closure disposition:** Issue #37 is complete for the owner-approved beginner guide plus video deliverable. Source is already deployed; no new publication, account, test-user, hosting, payment, SQL or member-data action is implied by this documentation correction. Historical October 29 draft-only and READY-only sections above remain provenance, not current status.

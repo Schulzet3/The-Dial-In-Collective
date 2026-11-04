@@ -28,7 +28,7 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 - [October28 queue audit and release](release-20261028.md)
 
 - [Issue #30 recovered private historical-source inventory](issue-30.md)
-- [Issue #37 source-checked beginner walkthrough draft](issue-37.md)
+- [Issue #37 deployed beginner guide/video — owner accepted](issue-37.md)
 
 - [Issue #50 real-release controller-stage timing evidence](issue-50.md)
 - [Issue #133 completed conductor setup and residual ownership](issue-133.md)
