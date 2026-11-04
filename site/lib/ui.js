@@ -87,24 +87,6 @@ export function nextShotGuidance(advice,shot,showTemp=false,unit='F'){
  return `<div class="next-shot-change" role="group" aria-label="${spoken}"><span class="next-shot-variable">${e(label)}</span><span class="next-shot-number">${e(before)}</span><span class="next-shot-arrow" aria-hidden="true">→</span><span class="next-shot-number">${e(after)}</span>${measure?`<span class="next-shot-unit">${e(measure)}</span>`:''}</div><p class="next-shot-keep">Keep ${e(keep)} unchanged.</p>${source}${note}`;
 }
 
-
-// Bind latest-shot feedback to the exact recipe context being shown.
-// A newer shot from another basket, feed mode or grinder calibration remains
-// in History, but must not drive this card's Next Shot adjustment.
-export function lastRecipeContextShot(shots,coffeeId,recipe,version){
- if(!Array.isArray(shots)||!recipe?.style||!recipe?.basketId||!recipe?.feedMode||
-  !version?.id||!version?.calibrationId)return null;
- let latest=null;
- for(const sh of shots){
-  if(!sh||sh.hidden||sh.coffeeId!==coffeeId||sh.setupVersionId!==version.id||
-   sh.calibrationId!==version.calibrationId||sh.style!==recipe.style||
-   sh.basketId!==recipe.basketId||sh.feedMode!==recipe.feedMode||
-   typeof sh.timestamp!=='string')continue;
-  if(!latest||sh.timestamp>latest.timestamp)latest=sh;
- }
- return latest;
-}
-
 export function chips(t){return `<div class="taste-chips">${SCALES.map(sc=>`<span class="taste-chip severity-${tasteSeverity(sc,t?.[sc.key])??4}">${e(sc.label==='Astringency / Dryness'?'Dryness':sc.label)}${sc.ideal===3&&t?.[sc.key]!==3?`: ${e(tasteLabel(sc,t?.[sc.key]))}`:''}</span>`).join('')}</div>`;}
 export function radar(t) {
  const cx=140,cy=125,r=80,pt=(i,n)=>{const a=(i*72-90)*Math.PI/180;return [cx+Math.cos(a)*n,cy+Math.sin(a)*n];};
