@@ -307,6 +307,23 @@ function narrativeGeography(blocks,{currentLocalityOnly=false,name=''}={}){
    const directlySelected=!/\b(?:related|recommended|you may also like|other coffees?|other roasts?|catalog)\b/iu.test(block.section||'');
    if(directlySelected&&selectedCountries.length===1){
 
+    // Grower-association locality is allowed only when the selected H1
+    // names the same municipality and a single current sentence says farms
+    // are there. No headquarters, past lots, SEO, or country lookup.
+    const growingMunicipality=sentence.match(new RegExp(
+     '^This\\s+group\\s+of\\s+(?:smallholders|growers|farmers)\\s+(?:lives|farms)\\s+in\\s+and\\s+around\\s+the\\s+(?:small\\s+)?municipality\\s+of\\s+('+PLACE+')\\s+in\\s+('+PLACE+')\\s*,\\s+where\\b[^.!?]{0,650}\\bfarms?\\b','iu'));
+    if(growingMunicipality&&key(name).includes(key(growingMunicipality[1]))&&
+       growingMunicipality[1].length>=4&&growingMunicipality[1].length<=70&&
+       growingMunicipality[2].length>=4&&growingMunicipality[2].length<=70&&
+       !COUNTRY_ONLY.test(growingMunicipality[1])&&!COUNTRY_ONLY.test(growingMunicipality[2])&&
+       !completeVarietyPhrase(growingMunicipality[1],{explicit:true})&&
+       !completeVarietyPhrase(growingMunicipality[2],{explicit:true})&&
+       !/\b(?:coffee|roast|blend|tasting|chocolate|caramel|cocoa|flavou?r|spice|pumpkin|vanilla|product)\b/iu.test(growingMunicipality[1]+' '+growingMunicipality[2])&&
+       countryNames(sentence).every(value=>key(value)===key(selectedCountries[0]))){
+     add(growingMunicipality[1]+', '+growingMunicipality[2]+', '+selectedCountries[0],sentence);
+     continue;
+    }
+
     // Only a selected country-first product with the SAME printed country
     // twice can refine "Location: Country" using its current growing region.
     // No SEO, roaster-specific dictionary, gazetteer or historical inference.
