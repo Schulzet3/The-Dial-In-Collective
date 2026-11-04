@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "review_date_utc": "2026-11-04",
+  "status": "TESTING_UNTIL_ACTUAL_SELECTED_SOURCE_PARSER_AND_CI",
+  "base_development_sha": "bf3b9d810be10438503c29345a8b1bee6fac0746",
+  "immutable_original603_csv_git_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "probe_marker": "[dic-issue33-eighteenth3]",
+  "official_selected_urls": [
+    {
+      "original603": 290,
+      "product": "Natural Organic Ethiopia Guiji",
+      "url": "https://roasterympls.com/products/organic-ethiopia-guiji",
+      "source_direct": "Selected page explicitly says this coffee reflects the care/tradition of Ethiopia's smallholder farmers; generic country group attribution still requires exact current parser + selected-lot semantic review",
+      "historic_missing_field": "producer:Smallholder farmers",
+      "source_status": "indexed public official selected product web-readable Nov 4; no raw SHA here"
+    },
+    {
+      "original603": 380,
+      "product": "Horizon Organic",
+      "url": "https://thrivefarmers.com/products/horizon-organic",
+      "source_direct": "Current selected two-origin Guatemala/Nicaragua Washed blend; description names ACODIHUE as a Guatemala community, not proven producer of all blend components; separate Meet the Farmer Marta Solares bio may be different coffee",
+      "historic_missing_field": "producer:ACODIHUE",
+      "source_status": "indexed public official selected product web-readable Nov 4; no raw SHA here"
+    },
+    {
+      "original603": 571,
+      "product": "Brazil Capricornio Dulce Signature",
+      "url": "https://www.stageline.coffee/product-page/brazil-capricornio-dulce-signature",
+      "source_direct": "Present Wix selected Dulce blend 50% natural Yellow Catuai + 50% Honey Mondo Novo, Capricornio company praised for techniques and signature crafted blends; precise selected growing producer remains role-qualified",
+      "historic_missing_field": "producer:Capricornio",
+      "source_status": "indexed public official selected product web-readable Nov 4; no raw SHA here"
+    }
+  ],
+  "boundaries": {
+    "no_source_runtime_change": true,
+    "no_frozen_or_oracle_change": true,
+    "no_queue_change": true,
+    "no_provider_or_member_writes": true,
+    "no_production_deployment": true,
+    "no_auto_ready": true,
+    "manual_whole_coffee_certified": 0
+  },
+  "required_next": [
+    "PR-head exact source applicable CI then nonforce merge",
+    "Current exact official guarded public HTTPS 3-case fetch/H1/HTML SHA256/actual parser/Add Coffee fields and conflicts",
+    "Independently adjudicate selected producer roles versus current parser, add positive and adversarial regressions only for independently reproduced defect",
+    "Keep Issue33 open; #267 V2 and #96 independent; no change in 11 READY/90 DEPLOYED/3 IN_PROGRESS"
+  ]
+}
