@@ -1,3 +1,9 @@
+## November 4, 2026 — Issue33 Foster Sookoo #125 current-origin correction SOURCE VERIFIED READY, NOT DEPLOYED
+
+PR601 safely merged `f60456e98270cf2dd550728e8f77834d6ed03706`; postmerged official read-only probe `41876132813` on identical runtime cce5f75a SUCCESS, 3/3 fetched/parsed/Add Coffee previews. Selected exact H1 Sookoo (Ethiopia), only origin `Guji, Ethiopia` SEO-only → visible current `Ethiopia`, #517/#527 unchanged, zero conflicts; independent raw/ZIP hashes and direct roast-profile active-1 check in `docs/audits/issue33-125-foster-origin-verified-20261104.json`. Exact-head Node/lint/build 2,415 PASS/0 FAIL/6 SKIP (41875586935), cloud/mobile/SQL/approval and merged governance SUCCESS. Narrow queue item READY, not deployed. Full frozen603 and remaining individual semantic review unverified; #33 OPEN. No production/member/provider writes.
+
+---
+
 ## November 4, 2026 — Issue33 Tandem #580 exact current locality VERIFIED READY, NOT DEPLOYED
 
 PR #586 nonforce merged `35460be0be9ebf4671ca6d614e37d59c62f518f1`, full 1,678 Node PASS/0 FAIL/0 SKIP on exact merged source run41851611530; merged approval41851611463/READY intake41851611283/UX41851611246 SUCCESS. Actual independent 2-case official HTML/parser/Add Coffee run41851611180 SUCCESS: only Tandem Faver Ninco #580 origin `Colombia` → `Santa Maria, Huila, Colombia`; #586 original conflicts unchanged. No original603-wide, auth/member/device acceptance; full frozen603 workflow SKIPPED. Narrow `DIC-Q-33-580-selected-h1-adjacent-farm-locality` READY, not deployed; source release isolation under #417 still required. #33 OPEN. Evidence `docs/audits/issue33-tandem-580-selected-adjacent-locality-20261104.json`; no Supabase/Netlify/production/member write.
