@@ -61,8 +61,12 @@ test('owner locked private Free plan and owner-only credits remain enforced desp
  assert.match(instructions,/private on GitHub Free/i,'current instructions must keep the repository private Free');
  assert.match(instructions,/(?:do not (?:suggest|recommend)[^\n]*(?:public visibility|paid upgrades|upgrade)|never upgrade)/i,'no public/paid upgrade recommendations');
  assert.match(file('AGENTS.md'),/CI and branch protections are advisory|CI\/branch restrictions are advisory/i,'governing guide must retain advisory branch-protection caveat');
- assert.match(instructions,/I alone monitor credits|I alone monitor Netlify credits|Only owner monitors credits/i);
- assert.match(instructions,/Never request[^\n]*screenshots/i);
+ const ownerCreditBoundary=/I alone monitor credits|I alone monitor Netlify credits|(?:Only )?owner monitors credits/i;
+ assert.match(instructions,ownerCreditBoundary);
+ assert.doesNotMatch('Assistant monitors credits; it can recommend upgrades.',ownerCreditBoundary);
+ const noScreenshotGate=/Never request[^\n]*screenshots|no balance\/screenshots\/freshness\/plan gates/i;
+ assert.match(instructions,noScreenshotGate,'no owner credit screenshot/freshness gates');
+ assert.doesNotMatch('Screenshots are mandatory before deploying',noScreenshotGate);
  assert.match(instructions,/provide (?:exact |full )?paste-ready (?:replacement )?text|Proactively recommend Project Instructions changes/i);
  assert.match(spec,/Owner-Locked GitHub Free\/private operating constraint/);
  assert.ok(Object.hasOwn(ledger,'current_owner_github_free_private_no_upgrade_20261020'));
