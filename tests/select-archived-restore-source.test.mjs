@@ -51,3 +51,22 @@ test('never looks up artifacts from out-of-horizon source runs',async()=>{
     async()=>{queried++;return art(12345679);},NOW),/BLOCKED/);
   assert.equal(queried,0);
 });
+
+test('incomplete archived backup artifact inventories fail closed rather than certify unique recovery',async()=>{
+  const source=art(12345678);
+  const incomplete=[
+    {artifacts:source.artifacts},
+    {...source,total_count:2},
+    {...source,total_count:0},
+    {...source,total_count:'1'},
+    {...source,total_count:-1},
+    {...source,total_count:101},
+    {...source,artifacts:[]}
+  ];
+  for(const listing of incomplete){
+    await assert.rejects(
+      chooseScheduledArchive([run(12345678)],async()=>listing,NOW),
+      /BLOCKED/,'Incomplete or malformed API pagination must not select a recovery source'
+    );
+  }
+});

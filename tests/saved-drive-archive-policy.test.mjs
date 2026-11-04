@@ -55,3 +55,11 @@ test('archived-restore script passes bash static syntax',()=>{
   const r=spawnSync('bash',['-n',script],{encoding:'utf8'});
   assert.equal(r.status,0,r.stderr);
 });
+
+test('archived recovery selection requires a complete bounded GitHub artifact inventory',()=>{
+  const selector=readFileSync(join(root,'scripts/backups/select-archived-restore-source.mjs'),'utf8');
+  assert.match(selector,/Number\.isSafeInteger\(listing\.total_count\)/);
+  assert.match(selector,/listing\.total_count!==listing\.artifacts\.length/);
+  assert.match(yml,/type\(count\) is not int/);
+  assert.match(yml,/count!=len\(artifacts\)/);
+});
