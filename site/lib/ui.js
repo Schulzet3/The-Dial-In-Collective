@@ -99,7 +99,7 @@ export function lastRecipeContextShot(shots,coffeeId,recipe,version){
   if(!sh||sh.hidden||sh.coffeeId!==coffeeId||sh.setupVersionId!==version.id||
    sh.calibrationId!==version.calibrationId||sh.style!==recipe.style||
    sh.basketId!==recipe.basketId||sh.feedMode!==recipe.feedMode||
-   typeof sh.timestamp!=='string')continue;
+   typeof sh.timestamp!=='string'||!sh.timestamp.trim())continue;
   if(!latest||sh.timestamp>latest.timestamp)latest=sh;
  }
  return latest;
