@@ -1401,6 +1401,8 @@ def verify_offline_exports(repo, output, exports):
 def artifact_inventory(output):
     files = []
     for path in sorted(output.rglob("*")):
+        require(not path.is_symlink(), "Artifact manifest refuses symlinked path: "
+                + path.relative_to(output).as_posix())
         if path.is_file() and path.name != "artifact-manifest.json":
             files.append({"file": path.relative_to(output).as_posix(),
                           "bytes": path.stat().st_size, "sha256": file_hash(path)})
