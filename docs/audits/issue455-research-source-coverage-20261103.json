@@ -207,6 +207,62 @@
       "review_status": "BOUNDED_NEW_LITERATURE_FACT_CHECK_NOT_NUMERIC_POLICY_AUTHORITY",
       "source_bytes_sha256": null,
       "source_byte_caveat": "Original HTML inspected Nov 4, 2026; no publisher snapshot/hash."
+    },
+    {
+      "id": "LIT-2002-ESPRESSO-PRESSURE",
+      "type": "external_primary_study",
+      "title": "Influence of water pressure on the final quality of arabica espresso coffee. Application of multivariate analysis",
+      "authors": "Andueza et al.",
+      "published": "2002-12-04",
+      "doi": "10.1021/jf0206623",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/12452670/",
+      "access": "ORIGINAL_PUBMED_INDEXED_PEER_REVIEWED_ABSTRACT_DIRECTLY_READ; FULL_TEXT_NOT_READ",
+      "evidence_grade": "SINGLE_ARABICA_ESPRESSO_7_9_11_ATM_CHEMICAL_AND_SENSORY_COMPARISON_LIMITED_RECIPE_GENERALIZATION",
+      "review_status": "BOUNDED_PRIMARY_ABSTRACT_FACT_CHECK_NO_NUMERIC_POLICY_AUTHORITY",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Web PubMed abstract checked 2026-11-04; original full PDF/methods and exact bytes not retrieved."
+    },
+    {
+      "id": "LIT-2003-ESPRESSO-TEMP",
+      "type": "external_primary_study",
+      "title": "Influence of extraction temperature on the final quality of espresso coffee",
+      "authors": "Andueza et al.",
+      "published": "2003-01-08",
+      "doi": "10.1002/jsfa.1304",
+      "url": "https://scijournals.onlinelibrary.wiley.com/doi/abs/10.1002/jsfa.1304",
+      "access": "ORIGINAL_WILEY_PUBLISHER_ABSTRACT_DIRECTLY_READ; FULL_TEXT_NOT_READ",
+      "evidence_grade": "THREE_COFFEE_TYPES_FOUR_TEMPERATURES_ESPRESSO_SENSORY_AND_VOLATILE_LIMITED_TRANSFER",
+      "review_status": "BOUNDED_ORIGINAL_CITATION_ABSTRACT_VERIFIED_FULL_METHODS_AUDIT_OPEN",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Original Wiley publisher abstract read 2026-11-04; full text and bytes not obtained."
+    },
+    {
+      "id": "LIT-2025-ESPRESSO-INFILTRATION",
+      "type": "external_primary_study",
+      "title": "Dynamics of liquid infiltration into an espresso bed using time-resolved micro-computed tomography: Insights from experiment and modeling",
+      "authors": "Foster, Lee, Moroney et al.",
+      "published": "2025-01",
+      "doi": "10.1063/5.0245167",
+      "url": "https://experts.mcmaster.ca/scholarly-works/3541040",
+      "access": "UNIVERSITY_AUTHOR_PUBLICATION_ABSTRACT_AND_AIP_OFFICIAL_SUMMARY_DIRECTLY_READ; FULL_EXPERIMENTAL_ARTICLE_NOT_READ",
+      "evidence_grade": "PEER_REVIEWED_TIME_RESOLVED_INFILTRATION_OBSERVATION_AND_ONE_DIMENSIONAL_MODEL_NOT_SENSORY_TRIAL",
+      "review_status": "BOUNDED_PUBLISHER_FIRST_PARTY_AND_UNIVERSITY_AUTHOR_INDEX_CHECK",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "McMaster author index and AIP first-party 2025 Scilights summary read 2026-11-04; full paper and raw bytes not archived."
+    },
+    {
+      "id": "LIT-2025-26-ESPRESSO-MULTISCALE",
+      "type": "external_primary_study",
+      "title": "A multiscale model for espresso brewing: Asymptotic analysis and numerical simulation",
+      "authors": "Grudeva, Moroney, Foster",
+      "published": "2025-05-27 online; 2026-04 issue",
+      "doi": "10.1017/S095679252500018X",
+      "url": "https://www.cambridge.org/core/journals/european-journal-of-applied-mathematics/article/multiscale-model-for-espresso-brewing-asymptotic-analysis-and-numerical-simulation/4D2A6BDF66F8306EFD260A111A4F3BD7",
+      "access": "ORIGINAL_CAMBRIDGE_OPEN_ACCESS_PUBLISHER_FULL_HTML_ABSTRACT_METHODS_RESULTS_CONCLUSION_DIRECTLY_READ",
+      "evidence_grade": "PEER_REVIEWED_MATHEMATICAL_MODEL_VALIDATED_AGAINST_FULL_MODEL_NUMERICS_NOT_ESPRESSO_SENSORY_OR_CUP_TRIAL",
+      "review_status": "BOUNDED_FULL_ARTICLE_FACT_CHECK_NOT_VALIDATION_OF_APP_TASTE_COEFFICIENTS",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Original Cambridge HTML reviewed on 2026-11-04; no publisher byte snapshot/hash. Model's full/reduced numerical comparison is not physical cup-sensory validation."
     }
   ],
   "evidence_checks": [
@@ -601,6 +657,55 @@
       "current_app": "site/lib/engine.js has no member water chemistry observations; preserve physical-equipment adjustability and avoid invented mineral/temperature/yield corrections",
       "result": "NEW_EXTERNAL_RESEARCH_INDEXED_FOR_FUTURE_VALIDATION_NO_APP_RULE_CHANGE",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-013-A",
+      "source": "ORG-07 lines 223 and 396; LIT-2002-ESPRESSO-PRESSURE",
+      "claim": "Andueza et al. 2002 originally compared Arabica espresso at 7, 9 and 11 atmospheres with chemical, foam and sensory descriptors; 9 atm samples showed certain freshness/fruity/malty/buttery odorant profiles. Discriminant-analysis 100% separation among those three experimental groups is NOT demonstrated out-of-sample quality prediction, universal 9 bar optimum, or a calibrated user-machine control.",
+      "grade": "PEER_REVIEWED_ESPRESSO_PRESSURE_THREE_SETPOINTS_ABSTRACT_ONLY",
+      "primary_sources": [
+        "https://pubmed.ncbi.nlm.nih.gov/12452670/"
+      ],
+      "current_app": "site/lib/engine.js baseline does not expose pressure optimization; site/lib/model.js equipment capabilities are controlled by user; avoid coercing nominal machine pressure or taste ratings into pressure commands",
+      "result": "NARROW_PRESSURE_CITATION_VERIFIED_UNIVERSAL_OPTIMUM_NOT_SUPPORTED_NO_APP_CHANGE",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-013-B",
+      "source": "ORG-07 lines 30 and 397; LIT-2003-ESPRESSO-TEMP",
+      "claim": "Andueza et al. 2003 publisher original investigated 88/92/96/98 C and three coffee types; volatile aroma and sensory flavor profiles differed, with 92 C preferred in their specific test. This does NOT establish all coffee/roasts/machines must target 92 C, nor a universal temperature-to-taste gradient.",
+      "grade": "PEER_REVIEWED_ESPRESSO_THREE_COFFEES_FOUR_TEMPERATURES_ABSTRACT_ONLY",
+      "primary_sources": [
+        "https://scijournals.onlinelibrary.wiley.com/doi/abs/10.1002/jsfa.1304"
+      ],
+      "current_app": "site/lib/engine.js temperature guidance and site/lib/model.js v.advanced.temperature optional; preserve explicit adjustable equipment range and owner Locked recommendations",
+      "result": "CONTEXT_DEPENDENT_TEMPERATURE_EFFECT_SUPPORTED_NO_GLOBAL_92C_POLICY",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-013-C",
+      "source": "ORG-06 lines 325-349; LIT-2025-ESPRESSO-INFILTRATION",
+      "claim": "Foster et al. 2025 Physics of Fluids study observed initial coffee-bed water infiltration by time-resolved micro-CT and compared to a one-dimensional wetting model; AIP says researchers had not yet incorporated time-resolved outlet soluble concentration into this study. It is not empirical proof that a fixed preinfusion profile improves cup taste or that machine times transfer.",
+      "grade": "PEER_REVIEWED_ESPRESSO_XRAY_EXPERIMENT_PLUS_MODEL_FULL_TEXT_PENDING",
+      "primary_sources": [
+        "https://experts.mcmaster.ca/scholarly-works/3541040",
+        "https://www.aip.org/scilights/x-ray-tomography-offers-detailed-look-at-early-stage-of-espresso-brewing"
+      ],
+      "current_app": "site/lib/engine.js style-specific time starting guides and machine-aware settings remain observations/heuristics; do not infer a preinfusion optimization input from reported first-drip times",
+      "result": "WETTING_IS_TRANSIENT_SUPPORTED_SENSORY_AND_NUMERIC_PREINFUSION_NOT_VALIDATED",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-013-D",
+      "source": "ORG-06 coupled-process / dissolved-solids model synthesis; NEW_LITERATURE_2025/2026 LIT-2025-26-ESPRESSO-MULTISCALE",
+      "claim": "Grudeva, Moroney and Foster's open Cambridge paper models moving wet/dry and saturation/dissolution regions. Its main validation compares asymptotically reduced model numerical solutions against its own full mathematical model, not real member espresso taste ratings; authors identify empirical time-resolved concentration and taste prediction as future work. No numeric taste probability or automatic corrective step follows.",
+      "grade": "PEER_REVIEWED_MATHEMATICAL_MODEL_FULL_ORIGINAL_HTML_NOT_CUP_VALIDATION",
+      "primary_sources": [
+        "https://www.cambridge.org/core/journals/european-journal-of-applied-mathematics/article/multiscale-model-for-espresso-brewing-asymptotic-analysis-and-numerical-simulation/4D2A6BDF66F8306EFD260A111A4F3BD7"
+      ],
+      "current_app": "site/lib/engine.js uses bounded controlled shot history rather than model-inferred individual-solute measurement; site/lib/constants.js five taste dimensions intact",
+      "result": "NEW_MODEL_FACT_CHECK_INDEXED_NO_APP_POLICY_OR_CONFIDENCE_SCORE_CHANGE",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [
@@ -616,7 +721,7 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R455-011 completed direct 481-line review of original #09 plus bounded independent research checks. Research docs only; no app/Locked/queue/deployment change. Docs source/approval continuity CI pending. Concurrent-base nonforce recovery from prior PR #524 without overlapping files."
+    "reason": "R455-013 four source-exact primary bibliography checks and scope-limited model/experiment evaluation. No runtime, tests, CI workflow, original research, Master Spec, Locked ledger, approval matrix or queue changes; targeted docs CI required."
   },
   "next_actions": [
     "Continue unresolved original research bibliography primary citation checks with exact original section, DOI, access and generalization limits; all nine full bodies were read but NOT all citations independently verified.",
@@ -626,26 +731,28 @@
     "Reproduce another narrow Locked-compatible Log Shot > Rate > Recommendation UX/logic defect in actual current code; add risk-proportionate tests, same-commit journal, nonforce CI/merge only if proven. R455-DEC-001 remains awaiting explicit owner choice."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-012",
-    "base_development_sha": "1c122ae06ec24441694a4af393ab38f341e3c528",
+    "id": "R455-013",
+    "base_development_sha": "429c980fabed80656f9aef5c813de359f607fa3a",
     "source_ids": [
-      "LIT-2024-WATER-ACIDS",
-      "LIT-2023-SENSORY-BCC",
-      "LIT-2026-WATER-SENSORY"
+      "LIT-2002-ESPRESSO-PRESSURE",
+      "LIT-2003-ESPRESSO-TEMP",
+      "LIT-2025-ESPRESSO-INFILTRATION",
+      "LIT-2025-26-ESPRESSO-MULTISCALE"
     ],
     "source_claim_checks": [
-      "R455-EV-CIT-012-A",
-      "R455-EV-CIT-012-B",
-      "R455-EV-CIT-012-C"
+      "R455-EV-CIT-013-A",
+      "R455-EV-CIT-013-B",
+      "R455-EV-CIT-013-C",
+      "R455-EV-CIT-013-D"
     ],
-    "number_of_curated_sources": 16,
-    "total_evidence_checks": 42,
-    "original_report_full_bodies_reviewed": "9/9 historical prior, no new full-body credit",
+    "number_of_curated_sources": 20,
+    "total_evidence_checks": 46,
+    "original_report_full_bodies_reviewed": "9/9 prior direct readings; no new full-body credit",
     "research_pack": "TWO_PROJECT_ZIPS_METADATA_FOUND_CONTENT_ACCESS_DENIED",
     "s019": "NOT_RETRIEVED",
     "github267_line_credit": 0,
     "app_changes": false,
     "production_deployed": false,
-    "status": "BOUNDED_PRIMARY_CITATION_AND_NEW_LITERATURE_VERIFIED_PACK_CONTENT_NOT_VERIFIED"
+    "status": "BOUNDED_PRIMARY_CITATIONS_VERIFIED_MODELS_NOT_APP_POLICY"
   }
 }
