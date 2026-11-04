@@ -134,8 +134,22 @@
       "title": "DIC_Espresso_Research_Implementation_Pack.zip",
       "archive_sha256_from_prior_receipt": "7d562a4536cf4f79bfa17898672ff6a2ec30aa6c1147e7a33f3d06017776bf1d",
       "members": 15,
-      "review_status": "PREVIOUS_METADATA_ONLY_FULL_CONTENT_NOT_READ_THIS_RUN",
-      "caveat": "48 research-only illustrative scenarios are not app CI or Locked policy."
+      "review_status": "PROJECT_LIBRARY_METADATA_LOCATED_RAW_BYTES_UNAVAILABLE_UNREVIEWED",
+      "caveat": "48 research-only illustrative scenarios are not app CI or Locked policy.",
+      "project_library_matches": [
+        {
+          "path": "/The Dial In Collective/DIC_Espresso_Research_Implementation_Pack.zip",
+          "file_id": "file_0000000065f881f8bcfbfe9e3b9f6061",
+          "size_bytes": 66421
+        },
+        {
+          "path": "/The Dial In Collective/DIC_Espresso_Research_Implementation_Pack(1).zip",
+          "file_id": "file_00000000368c81f5ac75f63dda6f248a",
+          "size_bytes": 66421
+        }
+      ],
+      "direct_access_attempt_20261104": "files.list identified two matching 66,421-byte Project-library ZIP entries; files.materialize raw_file on both returned 'This Project file does not have an authorized raw-byte materialization path'; files.read returned 'No readable content was found in this file for the requested mode.' Neither ZIP bytes nor 15 contained members directly read/hash-verified this run.",
+      "archive_sha256_scope": "Previously recorded SHA-256, NOT independently matched to either discovered Project ZIP because raw bytes cannot be accessed."
     },
     {
       "id": "PDF-S019",
@@ -151,6 +165,48 @@
       "drive_id": "12salIGB1ADhclC19HBDDFV1hlZP5rg9EI5AC757r3Do",
       "review_status": "13_SAMPLE_DATA_ROWS_INSPECTED_PREVIOUS_RUN",
       "caveat": "Methodology, units, accuracy and unused columns remain unverified; no import/algorithm conversion."
+    },
+    {
+      "id": "LIT-2024-WATER-ACIDS",
+      "type": "external_primary_study",
+      "title": "Influence of divalent cations on the extraction of organic acids in coffee determined by GC-MS and NMR",
+      "authors": "Bratthall, Figueira, Nording",
+      "published": "2024-02-17",
+      "doi": "10.1016/j.heliyon.2024.e26625",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38434259/",
+      "access": "PUBLISHER_INDEXED_PUBMED_ABSTRACT_AND_EXPERIMENT_DESIGN_DIRECTLY_READ",
+      "evidence_grade": "PEER_REVIEWED_ORGANIC_ACID_ANALYTICS_NOT_CONTROLLED_ESPRESSO_SENSORY",
+      "review_status": "BOUNDED_PRIMARY_SOURCE_ABSTRACT_AND_DESIGN_VERIFIED_FULL_CITATION_AUDIT_OPEN",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Remote publisher/PubMed content not downloaded or hashed; study record/DOI and abstract independently inspected Nov 4, 2026."
+    },
+    {
+      "id": "LIT-2023-SENSORY-BCC",
+      "type": "external_primary_study",
+      "title": "A new Coffee Brewing Control Chart relating sensory properties and consumer liking to brew strength, extraction yield, and brew ratio",
+      "authors": "Guinard et al.",
+      "published": "2023-03-29",
+      "doi": "10.1111/1750-3841.16531",
+      "url": "https://ift.onlinelibrary.wiley.com/doi/10.1111/1750-3841.16531",
+      "access": "OPEN_ACCESS_PRIMARY_PUBLISHER_ARTICLE_AND_ABSTRACT_DIRECTLY_READ",
+      "evidence_grade": "PEER_REVIEWED_DRIP_BREW_SENSORY_CONSUMER_CLUSTERS_NOT_ESPRESSO_QUALITY_TARGETS",
+      "review_status": "BOUNDED_ORIGINAL_CITATION_VERIFIED_FULL_CROSS_CITATION_AUDIT_OPEN",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Publisher web article directly read; bytes not downloaded/hash-pinned."
+    },
+    {
+      "id": "LIT-2026-WATER-SENSORY",
+      "type": "external_primary_study",
+      "title": "Impact of Water Composition on Coffee Sensory Properties: A Comprehensive Analysis",
+      "authors": "Rune et al.",
+      "published": "2026-09-16",
+      "doi": "10.1111/1750-3841.71434",
+      "url": "https://ift.onlinelibrary.wiley.com/doi/10.1111/1750-3841.71434",
+      "access": "OPEN_ACCESS_ORIGINAL_PUBLISHER_HTML_ABSTRACT_METHODS_RESULTS_LIMITATIONS_DIRECTLY_READ",
+      "evidence_grade": "PEER_REVIEWED_ONE_PRIMARY_COFFEE_FRENCH_PRESS_SENSORY_STUDY_NON_ESPRESSO_NOT_REAL_WORLD_RECOMMENDATION_TRIAL",
+      "review_status": "BOUNDED_NEW_LITERATURE_FACT_CHECK_NOT_NUMERIC_POLICY_AUTHORITY",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Original HTML inspected Nov 4, 2026; no publisher snapshot/hash."
     }
   ],
   "evidence_checks": [
@@ -508,6 +564,43 @@
       "current_app": "site/lib/engine.js and model.js retain separate slow/standard feed, measured dose and per-grinder calibration; user notes/history preserved; no GBW/single-dose recommendation formula",
       "result": "KEEP_EXISTING_GUARDS; AVOID_NEW_MODE_OR_NUMERIC_ADJUSTMENTS_UNTIL_OWNER_DECISION_AND_VALIDATION",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-012-A",
+      "source": "ORG-07 line 39; LIT-2024-WATER-ACIDS",
+      "claim": "Original Bratthall et al 2024 GC-MS/NMR experiment found limited differences in four measured coffee acids from Ca/Mg salts at typical drinking-water concentrations; pre- vs post-brew addition gave similar acid results; at much higher concentrations differences were larger. This is an analytical-acid finding, not a blinded espresso taste trial or universal brew-mineral prescription.",
+      "grade": "PEER_REVIEWED_FILTER_COFFEE_FOUR_ORGANIC_ACIDS_NOT_ESPRESSO_GENERALIZATION",
+      "primary_sources": [
+        "https://pubmed.ncbi.nlm.nih.gov/38434259/",
+        "https://doi.org/10.1016/j.heliyon.2024.e26625"
+      ],
+      "current_app": "site/lib/engine.js has no independently measured mineral composition or equipment-safe intervention control; five-taste personal feedback unchanged",
+      "result": "CLAIM_NARROWLY_VERIFIED_NO_WATER_RECIPE_AUTOMATION_NO_LOCKED_POLICY_CHANGE",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-012-B",
+      "source": "ORG-05 line 25; LIT-2023-SENSORY-BCC",
+      "claim": "Original Guinard et al 2023 paper demonstrates multidimensional sensory and at least two differing preference clusters in studied DRIP coffee. A historic 17-23 percent extraction range is not established as an espresso-wide taste-optimum; this paper neither sets an espresso threshold nor validates the app's prior coefficients.",
+      "grade": "PEER_REVIEWED_DRIP_CONSUMER_RESEARCH_NON_ESPRESSO_TRANSFER",
+      "primary_sources": [
+        "https://ift.onlinelibrary.wiley.com/doi/10.1111/1750-3841.16531"
+      ],
+      "current_app": "site/lib/constants.js ratio/time starting guides and site/lib/engine.js personal five-sense dialed-in success; no fixed extraction-yield acceptance test",
+      "result": "SUPPORT_DISTINCTION_BETWEEN_PROCESS_MEASURE_AND_SENSORY_PREFERENCE_NO_NEW_NUMERIC_TARGET",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-012-C",
+      "source": "NEW_LITERATURE_2026; LIT-2026-WATER-SENSORY",
+      "claim": "Rune et al 2026 single-coffee French-press replicated sensory study found bicarbonate variation altered perceived acidity, fruit/complexity and roasted/bitter attributes more strongly than calcium/magnesium hardness under tested conditions. Authors acknowledge only one sensory test coffee, non-espresso method, no EY/TDS measurements, and unknown roast-color characterization; no universal espresso mineral recipe follows.",
+      "grade": "PEER_REVIEWED_SINGLE_COFFEE_FRENCH_PRESS_SENSORY_METHOD_LIMITED_TRANSFER",
+      "primary_sources": [
+        "https://ift.onlinelibrary.wiley.com/doi/10.1111/1750-3841.71434"
+      ],
+      "current_app": "site/lib/engine.js has no member water chemistry observations; preserve physical-equipment adjustability and avoid invented mineral/temperature/yield corrections",
+      "result": "NEW_EXTERNAL_RESEARCH_INDEXED_FOR_FUTURE_VALIDATION_NO_APP_RULE_CHANGE",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [
@@ -526,23 +619,33 @@
     "reason": "R455-011 completed direct 481-line review of original #09 plus bounded independent research checks. Research docs only; no app/Locked/queue/deployment change. Docs source/approval continuity CI pending. Concurrent-base nonforce recovery from prior PR #524 without overlapping files."
   },
   "next_actions": [
-    "Systematically verify outstanding original citations/claims across all nine, preserving a per-claim source and evidence-type ledger; 9/9 full report texts reviewed does not certify the citations.",
-    "Recover exact original October29 implementation pack (15 members) and S019 PDF bytes and source SHA; they were NOT discoverable from this run's named Library/connected Drive searches and have NOT been directly audited.",
-    "Verify owner slow-feeding PDF's exact archive byte equivalence (10/10 pages previously reviewed); revisit Drive Roast Color measurement units/methodology and other owner source inventory without private imports.",
-    "Next independently demonstrate a narrow Locked-compatible Log Shot/Rate/Recommend defect or usability improvement with current-source online/offline evidence and focused regressions; preserve existing R455-DEC-001 sweetness-only owner decision (unapproved).",
-    "Reconcile current GitHub #267 strict historical audit only by its own separate receipt; no #267 line credit from research."
+    "Continue unresolved original research bibliography primary citation checks with exact original section, DOI, access and generalization limits; all nine full bodies were read but NOT all citations independently verified.",
+    "Retrieve actual bytes of the two Project Library DIC_Espresso_Research_Implementation_Pack ZIP entries via an authorized owner-provided mount/working attachment if access becomes available; metadata exists but raw_file materialization explicitly denied. Only then hash against recorded 7d562a45... and inspect 15 entries/48 research-only cases.",
+    "Retrieve/hash the separate original S019 roast/style PDF and reverify prior slow-feed 10-page content against its archived original bytes; neither claim complete.",
+    "Reconcile #267's independent V2 line review (zero strict credit from #455), #33 extractor and #96 security, avoiding overlap.",
+    "Reproduce another narrow Locked-compatible Log Shot > Rate > Recommendation UX/logic defect in actual current code; add risk-proportionate tests, same-commit journal, nonforce CI/merge only if proven. R455-DEC-001 remains awaiting explicit owner choice."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-011",
-    "source_id": "ORG-09",
-    "source_git_blob_sha": "1e1b8bbef0ecb05ed0b20195191bcad26663cf0d",
-    "base_development_sha": "133befcff09bc11df1e114ca1534896c4b50cae1",
-    "report_lines_read": 481,
-    "report_chars_read": 60066,
-    "full_original_reports_reviewed": 9,
-    "total_original_reports": 9,
-    "external_checks": "Gagne 2023 author analysis, Vaca Guerra 2023 institutional original, Wadsworth 2026 original institutional paper abstract, Uman 2016 original, Griffiths 2018 original journal/university; not complete cross-citation certification",
-    "status": "ALL_NINE_ORIGINAL_BODIES_READ_PRIMARY_CITATION_AND_BROADER_INTAKE_PENDING",
-    "github267_line_credit": 0
+    "id": "R455-012",
+    "base_development_sha": "1c122ae06ec24441694a4af393ab38f341e3c528",
+    "source_ids": [
+      "LIT-2024-WATER-ACIDS",
+      "LIT-2023-SENSORY-BCC",
+      "LIT-2026-WATER-SENSORY"
+    ],
+    "source_claim_checks": [
+      "R455-EV-CIT-012-A",
+      "R455-EV-CIT-012-B",
+      "R455-EV-CIT-012-C"
+    ],
+    "number_of_curated_sources": 16,
+    "total_evidence_checks": 42,
+    "original_report_full_bodies_reviewed": "9/9 historical prior, no new full-body credit",
+    "research_pack": "TWO_PROJECT_ZIPS_METADATA_FOUND_CONTENT_ACCESS_DENIED",
+    "s019": "NOT_RETRIEVED",
+    "github267_line_credit": 0,
+    "app_changes": false,
+    "production_deployed": false,
+    "status": "BOUNDED_PRIMARY_CITATION_AND_NEW_LITERATURE_VERIFIED_PACK_CONTENT_NOT_VERIFIED"
   }
 }
