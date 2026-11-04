@@ -267,6 +267,23 @@ function narrativeGeography(blocks,{currentLocalityOnly=false,name=''}={}){
    // A founder's first station is biography, not the selected lot's origin.
    if(/\b(?:first(?: ever)?|former|previous|original|initial)\s+(?:(?:coffee|wet)\s+)?washing\s+station\b/iu.test(sentence)&&
       !/\b(?:this|our|the current)\s+(?:coffee|lot|offering)\s+(?:comes?\s+from|(?:is|are)\s+(?:grown|sourced|processed)\s+(?:in|at|from))\b/iu.test(sentence))continue;
+   // A selected producer's PRESENT farms may name a UNESCO biosphere.
+   // Only bind it to Origin when that producer appears in the exact H1
+   // and the H1 prints one country. Never infer a country from the forest,
+   // roaster address, a former farmer or an unrelated product.
+   const selectedFarmsBiosphere=sentence.match(new RegExp(
+    String.raw`^(${PLACE_WORD}[’']s)\s+farms?\s+are\s+in\s+the\s+buffer\s+and\s+core\s+zones\s+of\s+the\s+UNESCO\s+(${PLACE})\s+biosphere\b`,'iu'));
+   const selectedFarmCountry=countryNames(name);
+   if(selectedFarmsBiosphere&&selectedFarmCountry.length===1&&
+      key(name).includes(key(selectedFarmsBiosphere[1]))&&
+      selectedFarmsBiosphere[2].length>=5&&selectedFarmsBiosphere[2].length<=85&&
+      !COUNTRY_ONLY.test(selectedFarmsBiosphere[2])&&
+      !completeVarietyPhrase(selectedFarmsBiosphere[2],{explicit:true})&&
+      countryNames(sentence).every(country=>key(country)===key(selectedFarmCountry[0]))&&
+      !/\b(?:previously|formerly|historical|abandoned|no longer|moved|other coffee|another coffee)\b/i.test(sentence)){
+    add(selectedFarmsBiosphere[2]+', '+selectedFarmCountry[0],sentence);
+    continue;
+   }
    // Directly printed selected station: require station in H1 and same-sentence country.
    const selectedStation=sentence.match(new RegExp(
     '^('+PLACE+')\\s+(?:washing\\s+station|wet\\s+mill)\\s+is\\s+(?:located|situated)\\s+in\\s+(?:the\\s+)?('+PLACE+')\\s+(?:of|in)\\s+('+COUNTRIES+')[.!?]?$','iu'));
