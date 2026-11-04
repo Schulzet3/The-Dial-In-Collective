@@ -1,3 +1,13 @@
+## November 4, 2026 — #267 strict S2-028 complete coffee preview 192 lines, package manifest and historical admin/Agtron [skip netlify]
+
+**Recovered exact development** `973a147dbd4c38454a13e2a1c29bf7d48e958a8d`; frozen `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9`, pinned executable `9707553a64f88127826e8f5b2b36cd0651296e83`, existing S2-027 verified 55 frozen + pinned preview 1–100. Direct source-exact, individually numbered nine-dimension AI reading in [S2-028](../audits/issue267-v2-strict-batches/S2-028.json): original manifest **#28 Admin Portal Release Candidate 26/26** and **#29 Agtron/PERC Narrative 71/71**; pinned current **#26 coffee-url-preview.mjs remaining lines 101–192 (92)** plus **#27 package.json 1–15 (15)**. Verified source text/blobs and live code identity. The complete preview handler **192/192** now carries per-line static semantic evidence S2-027+028; no safe refactor/active bug confirmed and no hosted Auth/SQL/SSRF provider test claimed. Historical PERC manufacturer-ground-Gourmet assumption and no silent member backfill preserved.
+
+**Strict totals: original 1688/579,961, pinned current 1701/57,913.** Old V2 reported 5,451 and 6,462 remain provisional distinct counters. Historical admin reports dated October21 do not override latest Locked #457, current live production or member consent; #33/#96 boundaries retained. No application/source changes, member/provider writes, publication or queue READY change. Live preview and package identical pinned blobs; remaining post-pin changed/new files NOT COMPLETELY REVIEWED.
+
+**NEXT:** frozen #30 `docs/APPROVAL_COVERAGE_MATRIX.json` line 1; pinned #28 `scripts/audit/approval-coverage.mjs` line 1. Issue #267 OPEN.
+
+---
+
 ## November 4, 2026 — #267 strict S2-027 historical admin review + first 100 source-preview lines [skip netlify]
 
 Recovered exact development `7fa8a80c3bac95bb90f3cfebf7bd572da3b882e5`, immutable original `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9`, pinned executable `9707553a64f88127826e8f5b2b36cd0651296e83`. Source-exact direct AI semantic review: historical #27 `docs/ADMIN_PORTAL_FINAL_RELEASE_REVIEW_2026-10-21.md` all **55/55** lines, blob `538ca6adec844dd02fa50d9964e5cc628564bec9`, fully identical to live historical document; current #26 `netlify/functions/coffee-url-preview.mjs` **1–100/192**, blob `b982650d78920f77342f5ac78dce91ca394094cc`, identical to current live development source. Every credited line includes literal source, behavior, risk, quality, duplicate/dead classification, exact counterpart, tests, safe improvement and latest Locked fit. [S2-027](../audits/issue267-v2-strict-batches/S2-027.json) is append-only; old V2 reported counts remain provisional unchanged.
