@@ -19,9 +19,22 @@ on:
       - 'docs/RELEASE_CANDIDATE.json'
   pull_request:
     branches: [development/backend-foundation]
+    paths-ignore:
+      - 'README.md'
+      - 'AGENTS.md'
+      - 'docs/**/*.md'
+      - 'docs/RELEASE_QUEUE.json'
+      - 'docs/DECISION_LEDGER.json'
+      - 'docs/APPROVAL_COVERAGE_MATRIX.json'
+      - 'docs/audits/issue267-review-restart-v2-20261101.json'
+      - 'docs/audits/issue267-v2-strict-coverage-ledger-20261103.json'
+      - 'docs/audits/issue267-v2-strict-batches/S2-*.json'
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: dic-isolated-sql-regression-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   sql:
