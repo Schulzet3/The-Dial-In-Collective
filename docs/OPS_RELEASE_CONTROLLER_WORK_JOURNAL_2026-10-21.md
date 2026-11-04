@@ -438,3 +438,9 @@ Original PR #623 source `870f549c0e69109a274eba7208dbb0e2e3573bb3` main controll
 - Mode: publish. Previous production 31c66832a28247e657a2bf89592ebc1e2f48dfc5. Current main parent 274f4094c46eacbe9ed374c8ccb09fca9241eab4. Source-isolated READY-only candidate release-candidates/ready20-20261104-verified restores two unready files to published bytes, excluding post-staging development.
 - Existing verified encrypted Drive backup artifact 13340311614 (file 1LUtMWvto64NDK3UlXmOx5EnXRDxJN6f5, direct owner-private folder), no extra backup. Supabase 20261104171057 dic_admin_invite_expiry_search already applied and verified read-only, do not reapply.
 - This request commit is not a Netlify publication receipt. The single guarded release claim and independent Netlify READY/current/actual function and DB readback remain required.
+
+
+## November 4, 2026 — pin nightly backup application code to deployed Release17 [skip netlify]
+- Independently verified release/production is 69742e9e8633c29c209249a87303c6e931a41b89 and Netlify 6aebc3e1bdd70bf4f7044bea READY/current at the exact commit. Owner-approved 20 READY items deployed with source d9a9724773a59091cb44ba9cc148a2c459f64252; release controller run 41936333695 SUCCESS, single build.
+- Update only existing `.github/workflows/nightly-backup.yml` source checkout `ref` from 31c66832a28247e657a2bf89592ebc1e2f48dfc5 to 69742e9e8633c29c209249a87303c6e931a41b89 and this SAME-COMMIT journal. Scheduled encrypted backups continue from actual published app source; preserve all existing historical archives, courier/Drive parent, schedules, recovery policy and no member writes.
+- This main commit does NOT touch docs/RELEASE_REQUEST.json, run release control, claim release/production or trigger a second Netlify production build. Verification of next scheduled backup execution remains a separate future runtime check.
