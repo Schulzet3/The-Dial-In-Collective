@@ -5,9 +5,9 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 2710,
-    "first_unvalidated_manifest_file_index": 31,
-    "first_unvalidated_path": "docs/APPROVAL_GAP_FORENSIC_AND_CONTINUITY_REVIEW_2026-10-20.md",
+    "strict_validated_lines": 2786,
+    "first_unvalidated_manifest_file_index": 32,
+    "first_unvalidated_path": "docs/APP_WIDE_ERROR_SWEEP_2026-10-17.md",
     "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
@@ -15,9 +15,9 @@
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 3145,
-    "first_unvalidated_file_index": 40,
-    "first_unvalidated_path": "scripts/audit/coffee-corpus-render.mjs",
+    "strict_validated_lines": 3210,
+    "first_unvalidated_file_index": 41,
+    "first_unvalidated_path": "scripts/audit/coffee-corpus-replay.mjs",
     "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true
@@ -106,6 +106,13 @@
       "unique_new_or_changed_live_lines_covered": 57,
       "live_source_line_records": 206,
       "all_other_postpin_drift_complete": false
+    },
+    "pending_source_fix": {
+      "path": "scripts/audit/coffee-corpus-render.mjs",
+      "line": 28,
+      "head_base_commit": "89a65bc0ac09d27b2df59c4824c363b078caaa83",
+      "original_pinned_blob": "4f10bd3c97b1e96c448e242912d6c6c5758af136",
+      "scope": "URL guard trailing-dot loopback bypass; separate live delta semantic review required after merge"
     }
   },
   "batches": [
@@ -1009,6 +1016,25 @@
       ],
       "new_or_modified_live_line_count": 57,
       "exact_merge": "4057b7ed9cc49a365e109281b533cf42d6ff582a"
+    },
+    {
+      "batch": "S2-037",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-037.json",
+      "frozen_file": "docs/APPROVAL_GAP_FORENSIC_AND_CONTINUITY_REVIEW_2026-10-20.md",
+      "frozen_lines": [
+        1,
+        76
+      ],
+      "frozen_blob": "40f89c393b96f679c51b09caafb177d95a41d3f0",
+      "pinned_file": "scripts/audit/coffee-corpus-render.mjs",
+      "pinned_lines": [
+        1,
+        65
+      ],
+      "pinned_blob": "4f10bd3c97b1e96c448e242912d6c6c5758af136",
+      "prepatch_live_same": true,
+      "code_patch_line": 28,
+      "old_v2_extra_credit": 0
     }
   ],
   "completion": "IN_PROGRESS",
