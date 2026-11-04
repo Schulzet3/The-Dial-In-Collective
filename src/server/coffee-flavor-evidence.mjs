@@ -406,6 +406,13 @@ function coordinatedFlavorSentence(sentence,blockText,clean){
  // sentence. Keep literal modifiers; never combine independent profiles.
  let match=sentence.match(/\b(?:this|our|the)\s+[^.!?]{0,80}\bcoffee\s+is\s+[^.!?]{0,60}\bwith\s+(.{2,100}?)\s+up\s+front\s+with\s+(.{2,100}?)\s+in\s+the\s+finish[.!?]?$/i);
  if(match&&SENSORY_ROLE.test(match[1]))return combine([match[1],match[2]]);
+ // When one current selected-product sentence explicitly joins a named
+ // chocolate flavor with earth notes, balanced by sweet undertones, retain
+ // the THREE literal descriptors. Body is mouthfeel, never a fourth flavor.
+ // Do not infer ingredients, accept qualifiers from other coffees or milk.
+ match=sentence.match(/\b(?:produce|deliver|yield|features?|offers?)\s+(?:a|an)\s+(?:pleasantly\s+surprising\s+)?(?:dark,\s*)?([^.!?;]{2,90}?)\s+flavou?r\s+with\s+([^.!?;]{2,70}?)\s+notes?\s+balanced\s+by\s+([^.!?;]{2,90}?\bundertones)\s+and\s+(?:a|an)\s+[^.!?;]{2,60}\bbody[.!?]?$/i);
+ if(match&&SENSORY_ROLE.test(match[1])&&SENSORY_ROLE.test(match[3]))
+  return combine([match[1],match[2],match[3]]);
  match=sentence.match(/^(.{2,80}?)\s+undertones\s+(?:dance|blend|combine)\s+with\s+(.{2,80}?)\s+notes?\s+and\s+(?:a|an)\s+(.{2,80}?)\s+essence(?:\s*,\s*culminating\s+in\s+[^.!?]{2,100})?[.!?]?$/i);
  if(match&&SENSORY_ROLE.test(match[1]))return combine([match[1],match[2],match[3]]);
  match=sentence.match(/\b(?:this|our|the)\s+[^.!?]{0,80}\bcoffee\s+(?:boasts|offers|features)\s+(.{2,80}?)\s+notes?,\s*(.{2,80}?\bsweetness),\s*and\s+(?:a|an)\s+hint\s+of\s+(.{2,80}?)[.!?]?$/i);

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "issue": 33,
   "date_utc": "2026-11-04",
-  "state": "TESTING_REPRODUCTION_PENDING",
+  "state": "TESTING_GENERIC_PATCH_UNVERIFIED",
   "authority": "Owner authorized development-only Issue33 current selected-source field adjudication; not a release",
   "parent_source_sha": "3416ceda5bcce4c885025ffe6af162ded89b5d74",
   "original603": {
@@ -28,11 +28,13 @@
     "interpretation": "Historical capture indicates potential truncation; not yet independently reproduced on exact new parser"
   },
   "change": {
-    "kind": "TEST_FIRST",
+    "kind": "GENERIC_SELECTED_SENSORY_GRAMMAR",
+    "path": "src/server/coffee-flavor-evidence.mjs",
     "test_path": "tests/coffee-issue33-dogwatch-selected-sweet-undertones.test.mjs",
-    "runtime_change": false
+    "bounded_live_probe_path": "scripts/audit/issue33-original603-focused-source-review.mjs",
+    "runtime_change": true
   },
-  "acceptance": "Obtain actual positive synthetic reproduction and negative isolation tests; if fail, minimally fix generic selected sensory grammar, rerun CI, independently capture official current HTML and parser/Add Coffee, then only narrow READY. No full603 semantic certification.",
-  "status": "IN_PROGRESS",
+  "acceptance": "Required: initial test-only CI evidence and repaired PR-head Node/lint/build, nonforce merged source, fresh official #19 raw HTML hash/current parser/Add Coffee before READY; source conflicts or fail imply IN_PROGRESS.",
+  "status": "TESTING",
   "no_release_or_production_changes": true
 }
