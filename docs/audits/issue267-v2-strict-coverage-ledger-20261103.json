@@ -5,20 +5,20 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 5482,
+    "strict_validated_lines": 5532,
     "first_unvalidated_manifest_file_index": 59,
     "first_unvalidated_path": "docs/DECISION_LEDGER.json",
-    "first_unvalidated_line": 592,
+    "first_unvalidated_line": 642,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 7108,
+    "strict_validated_lines": 7158,
     "first_unvalidated_file_index": 49,
     "first_unvalidated_path": "scripts/audit/coffee-import-browser.mjs",
-    "first_unvalidated_line": 41,
+    "first_unvalidated_line": 91,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true,
     "strict_live_counterpart_checked_through_line": 2656,
@@ -27,7 +27,7 @@
       "commit": "9c140078495abb5658c406f54d5e6c8925349032",
       "blob": "0ff48f3e23624964e2894fd3b97aab9365df1234",
       "first_line": 1,
-      "last_line": 40,
+      "last_line": 90,
       "offset": 0
     }
   },
@@ -185,9 +185,9 @@
       "blob": "0ff48f3e23624964e2894fd3b97aab9365df1234",
       "reviewed_lines": [
         1,
-        40
+        90
       ],
-      "note": "Exact pinned/live file blob match, not whole-tree review; earlier full-tree machine snapshot is stale"
+      "note": "Exact pinned/live blob equality for current #49, not full current-tree drift semantic coverage"
     }
   },
   "batches": [
@@ -2112,11 +2112,34 @@
       "old_v2_additional_credit": 0,
       "stacked_pr_base": "audit/issue267-s2-092-20261104",
       "verification": "40+40 numbered direct AI semantics recorded and original SHA/text read; exact 40 live; hosted CI unavailable"
+    },
+    {
+      "batch": "S2-094",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-094.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        592,
+        641
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-import-browser.mjs",
+      "pinned_lines": [
+        41,
+        90
+      ],
+      "pinned_blob": "0ff48f3e23624964e2894fd3b97aab9365df1234",
+      "live_exact_text_line_offset": 0,
+      "live_blob": "0ff48f3e23624964e2894fd3b97aab9365df1234",
+      "strict_frozen_delta": 50,
+      "strict_pinned_delta": 50,
+      "old_v2_additional_credit": 0,
+      "stacked_pr_base": "audit/issue267-s2-093-20261104",
+      "verification": "100 direct original-line semantic records and exact 50 live matches; source/ledger readback required; hosted CI unavailable"
     }
   ],
   "completion": "IN_PROGRESS",
   "test_limit": "Source and receipt SHA/semantic record checks only; no new browser/app/hosted CI claim",
-  "last_batch": "S2-093",
-  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-093.json",
+  "last_batch": "S2-094",
+  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-094.json",
   "complete": false
 }

@@ -1,3 +1,13 @@
+## November 4, 2026 — #267 strict S2-094 (+100 original direct source lines) [skip netlify]
+
+Same-commit [S2-094](../audits/issue267-v2-strict-batches/S2-094.json) directly reviews immutable original `docs/DECISION_LEDGER.json` #59 lines **592–641** (50, blob `195c3e4de415afef4515a6291c399a1c9001b610`), and pinned current `scripts/audit/coffee-import-browser.mjs` #49 lines **41–90** (50, blob `0ff48f3e23624964e2894fd3b97aab9365df1234`), with each original numbered line, exact source text and nine review dimensions. Exact current development `9c140078495abb5658c406f54d5e6c8925349032` uses the same code blob; all 50 pinned lines have literal exact live counterparts, no offset, cumulative #49 1–90. Strict stack now **5,532/579,961 frozen**, **7,158/57,913 pinned**. Strict actually merged still **5,336 / 6,962**, pending #616/#621/#628/#633. V1 or provisional V2 counts NOT credited.
+
+Original Community moderation, offline cross-device policy and Add Coffee sheet questions are Open historical questions, not default new Locked instructions. Local Add Coffee browser fixture contains synthetic private-field leak canaries and scoped JSON export assertions, **not** genuine member security or a runtime PASS. No defect newly reproduced; no speculative executable edit. Github Actions startup failures on #616/#618 remain unresolved, no steps executed, no checks on draft #633. No merged CI, READY, deployment, provider SQL/Auth/Edge/member writes, purchases or forced history.
+
+**Next:** frozen original file #59 line642, pinned #49 line91; continue strict nonoverlap, first confirm current PR SHA, repair CI execution before integration; live drift inventory+review incomplete. #267 OPEN.
+
+---
+
 ## November 4, 2026 — #267 strict S2-093 (source-bound, DEVELOPMENT ONLY) [skip netlify]
 
 Latest recovered development `9c140078495abb5658c406f54d5e6c8925349032`, main `79ea81b9c80eb8b11148c7eb787d500d313a9ad2`, production `31c66832a28247e657a2bf89592ebc1e2f48dfc5`; source parent pending draft #628 `2f15bf135a17387232643d40e7ad6017663aa303`. This exact commit adds [S2-093](../audits/issue267-v2-strict-batches/S2-093.json), 40 independently numbered and interpreted frozen original `docs/DECISION_LEDGER.json` lines **552–591** (blob `195c3e4de415afef4515a6291c399a1c9001b610`), plus 40 pinned current browser-harness `scripts/audit/coffee-import-browser.mjs` lines **1–40** (blob `0ff48f3e23624964e2894fd3b97aab9365df1234`). Nine line-specific dimensions and exact source texts recorded. Every pinned source line matches byte-identical development code at `9c140078495abb5658c406f54d5e6c8925349032` with no offset. Original workflow #1 lines1–12 sampled/revalidated against S2-001; **no duplicate credit**. Prior S2-092 source/bounds and parent stack verified.
