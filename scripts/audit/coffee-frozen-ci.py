@@ -2614,6 +2614,25 @@ def self_test():
                                   {"source_file": "source.mjs", "line": 20}])
                 self.assertLess(len(rendered), 500)
 
+
+        def test_failure_summary_redacts_untrusted_exception_content(self):
+            marker = "SYNTHETIC_PRIVATE_MARKER"
+            custom_error = type(marker + "Error", (Exception,), {})
+            examples = (ValueError(marker + " signed query"),
+                        FileNotFoundError(marker + ".json"),
+                        PermissionError(marker + ".key"),
+                        RuntimeError(marker), custom_error(marker))
+            for failure in examples:
+                with self.subTest(exception_type=type(failure).__name__):
+                    fields = safe_failure_metadata(failure)
+                    self.assertNotIn(marker, json.dumps(fields))
+                    self.assertLess(len(json.dumps(fields)), 160)
+            self.assertEqual(safe_failure_metadata(ValueError("opaque")),
+                             {"reason": "Audit input or evidence rejected",
+                              "exception_type": "ValueError"})
+            self.assertEqual(safe_failure_metadata(custom_error("opaque"))["exception_type"],
+                             "OtherError")
+
         def test_python_external_operations_are_denied_and_recorded(self):
             attempts = []
             with deny_python_external_operations(attempts):
@@ -2628,6 +2647,23 @@ def self_test():
     require(result.wasSuccessful(), "Frozen runner adversarial controls failed")
     print(json.dumps({"runner_controls_passed": result.testsRun}), flush=True)
 
+
+
+def safe_failure_metadata(error):
+    """Emit only fixed audit-failure labels; exception messages and names are untrusted."""
+    categories = (
+        (FileNotFoundError, "FileNotFoundError", "Required audit file missing"),
+        (PermissionError, "PermissionError", "Audit file permission denied"),
+        (TimeoutError, "TimeoutError", "Audit operation timed out"),
+        (ValueError, "ValueError", "Audit input or evidence rejected"),
+        (TypeError, "TypeError", "Audit input type rejected"),
+        (OSError, "OSError", "Audit filesystem or transport operation failed"),
+        (RuntimeError, "RuntimeError", "Audit operation failed"),
+    )
+    for exception_class, name, reason in categories:
+        if isinstance(error, exception_class):
+            return {"reason": reason, "exception_type": name}
+    return {"reason": "Audit operation failed", "exception_type": "OtherError"}
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -2673,9 +2709,8 @@ def main():
     except Exception as error:
         # Do not include tracebacks, response bodies or raw helper stderr here:
         # materialization exceptions can contain signed-transfer information.
-        reason = str(error) if isinstance(error, ValueError) else type(error).__name__
-        failure = {"status": "FAIL", "stage": args.command, "reason": reason,
-                   "exception_type": type(error).__name__,
+        safe_fields = safe_failure_metadata(error)
+        failure = {"status": "FAIL", "stage": args.command, **safe_fields,
                    "created_at": datetime.now(timezone.utc).isoformat(),
                    "original_expectations_modified": False,
                    "new_api_keys_or_paid_services": False,
