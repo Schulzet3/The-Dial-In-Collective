@@ -4,7 +4,7 @@
   "purpose": "Source-by-source substantive review/evidence progress, not a claim of all-source completeness or peer-reviewed certification",
   "authority": "docs/MASTER_SPECIFICATION.md and docs/DECISION_LEDGER.json; latest explicit Locked supersessions",
   "source_branch": "development/backend-foundation",
-  "baseline_commit_sha": "d6c38414197ba642d4016a650a68c5b2912f3f9f",
+  "baseline_commit_sha": "1e59ddbdb452d65db95a5f4ec764556de1cd3856",
   "created_utc_date": "2026-11-03",
   "github_inventory": {
     "prior_metadata_snapshot": "docs/audits/project-doc-index-20261101.json",
@@ -55,9 +55,12 @@
       "type": "original_markdown",
       "path": "docs/research/originals/05_Establishing_the_Causal_Foundation_of_Espresso_Extraction_A_Taxonomy_of_Nine_Shot-Profile_Families.md",
       "sha256_recorded_in_verified_archive_index": "30f3367fab7fb1c09fbca4f976ed1885243e2a1ab5d9fda156e094457697c5f9",
-      "review_status": "FOCUSED_PASSAGES_ONLY",
-      "direct_review_provenance": "Prior R455-001/R455-002 scoped journal; NOT complete document coverage",
-      "claims_verified_externally": "Not certified by this #455 batch"
+      "review_status": "FULL_BODY_DIRECTLY_READ_CITATIONS_PENDING",
+      "direct_review_provenance": "R455-005 all 298 source lines: executive summary (1-28); porous-bed/flow physics (29-66); archetype profiles (67-220); decision tree, generic workflow, limitations and references (221-298). Source-only semantic reading, not original linked citations certified.",
+      "claims_verified_externally": "Original Cameron et al. Matter 2020 publisher (DOI 10.1016/j.matt.2019.12.019) checked for nonmonotonic EY/grind under tested conditions; Decent Espresso manufacturer's profile guide and Blooming guide checked for differing Blooming/Allonge techniques; La Marzocco Strada EP manufacturer page for actual programmable pressure capability. Remaining report-specific citations and numerical profile claims NOT comprehensively verified.",
+      "github_blob_sha": "be455fe3c2dc8469c67c49bed7e9f539943ea463",
+      "direct_review_lines": "1-298",
+      "source_characters": 57909
     },
     {
       "id": "ORG-06",
@@ -221,6 +224,33 @@
       "current_app": "App lacks pressure/flow/PSD/refractometer readings and owner-retired advanced hardware versioning. Resist adding unsupported new onboarding fields and profile heuristics.",
       "result": "CONTEXTUAL_EVIDENCE_ONLY_NO_NEW_OWNER_DECISION; ORIGINAL_CHATGPT_CITATION_MARKERS_UNRESOLVED",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-005-A",
+      "source": "ORG-05 full 1-298, especially 3-29, 82-101, 220-298; manufacturer https://decentespresso.com/profile_guide",
+      "claim": "Nine profile archetypes are overlapping mechanisms (ratio, saturation, pressure and flow), not nine independent app styles. Some require programmable pressure/flow and extra sensors.",
+      "grade": "FULL_REPORT_TEXT_READ_PLUS_MANUFACTURER_PROFILE_GUIDE; TAXONOMY_SYNTHESIS_NOT_STANDARD",
+      "current_app": "site/lib/constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095: STYLES exactly Traditional/Turbo/Fast-Flow/Ristretto/Lungo; Custom retired. Master Specification Oct26 retirement and section S additional families explicitly defer extensions.",
+      "result": "PRESERVE_LOCKED_FIVE_STYLES; DO_NOT_PROMOTE_BLOOMING_OR_LEVER_TO_NEW_SELECTABLE_STYLE_OR_REQUIRE_HARDWARE_FIELDS",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-005-B",
+      "source": "ORG-05 82-101,102-141,222-298; https://decentespresso.com/profile_guide and https://decentespresso.com/docs/all_about_blooming_espresso",
+      "claim": "Research Allonge refers to high-flow, very long ratio ~1:5 with pressure/flow-managed setup; this is not interchangeable with every longer-ratio Lungo. Turbo, blooming and declining/lever pressure are orthogonal hydraulic strategies.",
+      "grade": "REPORT_SYNTHESIS_WITH_MANUFACTURER_CORROBORATION; PRACTICE_VARYING",
+      "current_app": "site/lib/constants.js Lungo 1:2.5-3.2 and Turbo/Fast-Flow separate 1:2.2-3.0 / 1:2.35; site/lib/engine.js chooseRecipeFamily restricts same style/coffee and evidence tiers, supports distinct ratio family successes.",
+      "result": "DO_NOT_RENAME_LUNGO_AS_ALLONGE_OR_TRANSFER_ALLONGE_1:5_AND_PRESSURE_TO_LUNGO; AVOID_CROSS_STYLE_GRIND_OR_TIME_INFERENCE",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-005-C",
+      "source": "ORG-05 29-66,142-181,220-298; publisher https://doi.org/10.1016/j.matt.2019.12.019 ; manufacturer https://lamarzoccousa.com/commercial-products/espresso-machines/strada-ep/",
+      "claim": "Cameron et al. experimental peak in extraction yield across grind settings challenges monotonic finer-is-better; specialized 6bar/15g/40g fast shot and programmable pressure examples are bounded implementations. None proves a universal recipe nor a sweetness actuator.",
+      "grade": "PEER_REVIEWED_PUBLISHER_EXPERIMENT_FOR_TESTED_SYSTEM; MANUFACTURER_HARDWARE_FEATURE; NOT_FLAVOR_OUTCOME_TRIAL",
+      "current_app": "site/lib/engine.js baseline uses style/roast priors as starting point only, avoids unconditional time success gate, changes one variable with taste; measured pressure/flow/EY/TDS absent. Existing R455-DEC-001 remains unapproved.",
+      "result": "NO_NUMERIC_PRIOR_OR_STYLE_CHANGE; NO_UNAVAILABLE_SENSOR_CAPTURE; KEEP_SWEETNESS_OWNER_DECISION_PENDING",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [
@@ -236,12 +266,12 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R455-004 source-only 408-line research review and independent abstract corroboration. No new app test, no code/queue/provider mutations."
+    "reason": "R455-005 full 298-line profile report #05 and current five-style/engine crosswalk. Research/docs only; no new source-code tests yet."
   },
   "next_actions": [
-    "Complete full first-to-last body reviews for originals 01-05 and 08-09 (02 of 09 full: 06 and 07) with individual citation verification still pending for all nine.",
-    "Try authenticated Project/Library retrieval of October29 implementation pack and S019 PDF; current container ZIP retrieval failed and file search did not surface raw pack; do not claim direct pack content review.",
-    "Reconcile actionable findings to current UI/Cloud with focused safe regression tests and source-bound CI only when real reproducible defect exists; maintain R455-DEC-001 pending owner decision.",
-    "Retain #455 OPEN and preserve #267 exhaustive original/current audit, #33 extractor, #96 Auth and no-deploy limits."
+    "Complete full first-to-last review of original reports 01-04 and 08-09 (03/09 full source bodies so far: 05/06/07); independent full reference audits for all nine remain pending.",
+    "Obtain original 15-file October29 implementation pack and S019 PDF through authenticated Library/Project bytes if possible; raw files not verified in this run due unavailable execution container.",
+    "Continue source-to-current-code fixes only when a reproducible Locked-safe defect is found and actual tests/CI verified. Preserve pending R455-DEC-001 sweetness-only +1g product choice without auto change.",
+    "Continue source register beyond 13 curated research entries and reconcile #267 live/frozen source audit without appropriating line coverage. #455 remains OPEN; no deployment."
   ]
 }
