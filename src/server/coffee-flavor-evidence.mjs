@@ -779,8 +779,7 @@ function extendSelectedFlavorWithCorroboratedNamedNote(page,clean,profiles){
  }
  // Competing direct descriptions are not a mandate to merge profiles.
  if(candidates.size!==1)return;
- const extra=[...candidates.values()][0],before=normalized.indexOf(fold([...candidates.values()][0]));
- if(before>=0)return;
+ const extra=[...candidates.values()][0];
  // Insert after the first corroborating literal, retaining the seller's
  // existing notes instead of replacing Red Wine with guessed synonyms.
  const source=blocks.find(block=>block.tag==='p'&&
@@ -793,6 +792,17 @@ function extendSelectedFlavorWithCorroboratedNamedNote(page,clean,profiles){
  const completed=parts.join(', ');
  if(!shortFlavorList(completed,clean))return;
  for(const row of profiles)row.value=completed;
+}
+
+// Refinement is also available after non-chip layout evidence has filled the
+// canonical selected notes (e.g., a roast-level panel holding labeled icons).
+// The same exact-H1, same-section, two-anchor and one-literal guard applies.
+export function refineSelectedNamedTastingNotes(html,{clean,notes}={}){
+ if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function'||
+  typeof notes!=='string'||notes.length<4||notes.length>350)return '';
+ const rows=[{value:notes}];
+ extendSelectedFlavorWithCorroboratedNamedNote(flavorPage(html),flavorCleaner(clean),rows);
+ return rows[0].value===notes?'':rows[0].value;
 }
 
 export function extractProductFlavorProfileEvidence(html,{clean}={}){

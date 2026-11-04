@@ -20,7 +20,7 @@ import {equivalentCoffeeVarieties,compatibleGenericCoffeeVarieties,explicitCoffe
 import {equivalentCoffeeProductNames,preferredCoffeeRoasterName} from './coffee-product-identity.mjs';
 import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
-import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
+import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,refineSelectedNamedTastingNotes,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
 import {withoutNaturalDecaffeinationModifier,recordCoffeeProcessingClaim,reconcileCoffeeProcessingClaims} from './coffee-processing-evidence.mjs';
@@ -1683,6 +1683,14 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   const repeated=fields.origin.match(/^(.*?)\bRegion\s+of\s+([^,]{3,45})\s*,\s*(.+)$/iu);
   if(repeated&&repeated[1].trim()&&keyOf(repeated[2])===keyOf(repeated[3]))
    fields.origin=`${repeated[1].trim()} Region, ${repeated[2].trim()}`;
+ }
+ // A compact current layout list can omit one literal that the exact same
+ // selected H1 names in its own adjacent Tasting Notes story. Preserve the
+ // selected list and its source facts; no prior/related/conditional inference.
+ if(fields.tasting_notes&&!conflicts.has('tasting_notes')&&
+  !seoFallbackByFields.get(fields)?.has('tasting_notes')){
+  const direct=refineSelectedNamedTastingNotes(currentProduct,{clean,notes:fields.tasting_notes});
+  if(direct)fields.tasting_notes=direct;
  }
  const supplementary=collectSupplementaryCoffeePageFacts(html,{selected_html:selectedProduct,source_url});
  if(supplementary.roast_hint)roast_evidence.hint=[roast_evidence.hint,supplementary.roast_hint].filter(Boolean).join(' ');
