@@ -780,17 +780,28 @@ def offline_python_script(script, arguments, attempts_file):
 
 
 def failure_diagnostics(log):
-    """Expose only bounded exception names and source locations, never messages."""
+    """Emit bounded diagnostics from fixed safe names, never untrusted log tokens."""
     with Path(log).open("rb") as stream:
         stream.seek(max(0, Path(log).stat().st_size - 65536))
         lines = stream.read().decode("utf-8", errors="replace").splitlines()[-100:]
     errors, frames = [], []
+    safe_types = frozenset(("AssertionError", "CalledProcessError", "ConnectionError",
+                            "Error", "FileNotFoundError", "ImportError", "IndexError",
+                            "JSONDecodeError", "KeyError", "ModuleNotFoundError", "OSError",
+                            "RuntimeError", "SyntaxError", "TimeoutError", "TypeError",
+                            "ValueError", "ZeroDivisionError"))
+    safe_codes = frozenset(("EACCES", "ECONNREFUSED", "ECONNRESET", "EEXIST", "EIO",
+                            "ENOENT", "ENOTFOUND", "EPERM", "ETIMEDOUT", "EAI_AGAIN",
+                            "ERR_ASSERTION", "ERR_INVALID_ARG_TYPE", "ERR_MODULE_NOT_FOUND",
+                            "ERR_PACKAGE_PATH_NOT_EXPORTED", "ERR_REQUIRE_ESM",
+                            "MODULE_NOT_FOUND"))
+    safe_files = frozenset(("actual-client-exports.mjs", "code.py", "coffee-frozen-ci.py"))
     for line in lines:
         error = re.match(r"^\s*([A-Za-z_][A-Za-z0-9_.]*(?:Error|Exception)|Error|AssertionError)"
                          r"(?: \[([A-Z0-9_]{1,80})\])?:", line)
         if error:
-            record = {"type": error[1]}
-            if error[2]:
+            record = {"type": error[1] if error[1] in safe_types else "OtherError"}
+            if error[2] in safe_codes:
                 record["code"] = error[2]
             if record not in errors:
                 errors.append(record)
@@ -805,6 +816,9 @@ def failure_diagnostics(log):
         else:
             continue
         if re.fullmatch(r"[A-Za-z0-9_.-]{1,100}", name):
+            if name not in safe_files:
+                suffix = Path(name).suffix.lower()
+                name = "source" + suffix if suffix in (".py", ".mjs", ".cjs", ".js", ".json") else "source"
             record = {"source_file": name, "line": int(number)}
             if record not in frames:
                 frames.append(record)
@@ -2577,6 +2591,28 @@ def self_test():
                 self.assertEqual(result["exception_types"],
                                  [{"type": "ValueError"},
                                   {"type": "Error", "code": "ERR_MODULE_NOT_FOUND"}])
+
+        def test_failure_diagnostics_redact_untrusted_type_code_and_basename(self):
+            with tempfile.TemporaryDirectory() as temporary:
+                log = Path(temporary) / "failed.log"
+                log.write_text(
+                    "PRIVATE_CAPTURE_VALUEError: synthetic\n"
+                    "Error [PRIVATE_CAPTURE_VALUE]: synthetic\n"
+                    '  File "/temporary/PRIVATE_CAPTURE_VALUE.py", line 17, in run\n'
+                    "    at run (file:///temporary/PRIVATE_CAPTURE_VALUE.mjs:20:3)\n"
+                    + "X" * 200 + "Error: unusually long type\n"
+                    + "ValueError: private content only in message\n", encoding="utf-8")
+                result = failure_diagnostics(log)
+                rendered = json.dumps(result)
+                self.assertNotIn("PRIVATE_CAPTURE_VALUE", rendered)
+                self.assertNotIn("X" * 20, rendered)
+                self.assertEqual(result["exception_types"],
+                                 [{"type": "OtherError"}, {"type": "Error"},
+                                  {"type": "ValueError"}])
+                self.assertEqual(result["source_locations"],
+                                 [{"source_file": "source.py", "line": 17},
+                                  {"source_file": "source.mjs", "line": 20}])
+                self.assertLess(len(rendered), 500)
 
         def test_python_external_operations_are_denied_and_recorded(self):
             attempts = []
