@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "review_date_utc": "2026-11-04",
+  "kind": "TWO_QUALIFIED_CURRENT_SELECTED_ROAST_SOURCE_BOUNDARIES",
+  "state": "TESTING_NOT_READY",
+  "parent_development_sha": "bedc5bd1fef9ce835ada3d0d55d3fa935673af54",
+  "unchanged_original603_csv_git_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "cases": [
+    {
+      "number": 554,
+      "url": "https://www.roc2.com/products/organic-mexican",
+      "selected_h1": "Organic Mexican",
+      "current_direct": "A well-balanced lighter roast with molasses, caramel, and lemongrass tasting notes",
+      "historical_roast_parser": null,
+      "frozen_roast_expected": "Light",
+      "semantic": "A relative lighter roast does not establish a selected absolute Light tier."
+    },
+    {
+      "number": 590,
+      "url": "https://www.vailcoffee.com/products/reserve-coffee-3",
+      "selected_h1": "Honduras Finca Quebrada Onda - HONEY",
+      "current_direct": "Grower: Isaac Mejia; Process: Honey; Body: medium smooth",
+      "current_generic_footer": "Lighter roasts are great for pour-overs",
+      "historical_roast_parser": null,
+      "frozen_roast_expected": "Light",
+      "semantic": "Medium body and generic lighter-roasts guidance do not establish a selected roast tier."
+    }
+  ],
+  "source_read_date": "2026-11-04",
+  "official_raw_sha256": "PENDING_EXACT_RUN",
+  "actual_current_parser": "PENDING_EXACT_RUN",
+  "workflow_marker": "[dic-issue33-twentieth2]",
+  "synthetic_tests": "tests/coffee-issue33-qualified-roast-554-590.test.mjs",
+  "CI": "PENDING",
+  "manual_full_coffees_certified": 0,
+  "queue_unchanged": {
+    "READY": 12,
+    "DEPLOYED": 90,
+    "IN_PROGRESS": 3
+  },
+  "issue33_open": true,
+  "no_deployment": true,
+  "no_production_or_member_writes": true,
+  "next": "Exact PR-head CI, safely merge, current selected public HTTPS H1/raw SHA256/parser/Add Coffee for both; if real defect then generic fix and adversarial verification; preserve original frozen corpus."
+}
