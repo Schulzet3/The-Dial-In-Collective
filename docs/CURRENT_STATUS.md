@@ -1,3 +1,11 @@
+## November 3, 2026 (Denver) — Issue #37 guide/video DEPLOYED, owner accepted, closure reconciliation
+
+Release 13 published on 2026-10-30 (production `42eb45aab12d1a47fe96a3ebe8a1f36b3913b5f7`, Netlify `6ae421f5de038d292bd66407`). On 2026-11-03 (Denver), the owner confirmed in the live app that the guide and video are visible and the video plays. Current Netlify was independently READY/current on a later source `31c66832a28247e657a2bf89592ebc1e2f48dfc5` that retains the same guide/video assets. This is owner-observed live functional acceptance, not a claim of a signed-in first-shot completion, physical-device test, named screen-reader test, or instrumented HTTP byte-range test.
+
+**Disposition:** Owner requested closure of #37 and correction of the obsolete unpublished/draft annotations. Source in-app assets and existing queue ID `DIC-Q-37-in-app-walkthrough` remain DEPLOYED; this is documentation-only, `[skip netlify]`, no new app publication, database, Auth, member or backup operation. Previous October 29 entries below accurately describe their historical pre-release checkpoints but no longer describe current Issue37 status.
+
+---
+
 ## November 4 UTC — Issue33 #188 current UNESCO Kaffa Forest farm locality narrowly READY (NOT DEPLOYED)
 
 [PR494](https://github.com/Schulzet3/The-Dial-In-Collective/pull/494) nonforce merged exact tree `065274232ce0b192a3d1d123450950f773c193bf`. Corrected PR-head and merged-source Node 2,330 pass/0 fail/6 intentional skip; browser/cloud, SQL/security/approval and guarded official [41771394763](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41771394763) 3/3 public product H1/HTML/parser/Add Coffee checks SUCCESS. #188 Dehab official selected present UNESCO Kaffa Forest farms now refines `origin=Kaffa Forest, Ethiopia`; #206/#320 unaffected. Initial one new-test failure was repaired, not misreported PASS; full frozen603 SKIPPED. Queue **7 READY /90 DEPLOYED /3 IN_PROGRESS**, release not authorized. Original603/153+29 review, hosted member GoTrue unverified, #267/#96 and all member/provider data preserved; Issue33 OPEN. [skip netlify]
