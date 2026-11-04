@@ -331,6 +331,47 @@
       "evidence_grade": "PEER_REVIEWED_SINGLE_COSTA_RICA_COFFEE_SINGLE_GRINDER_20G_40G_9BAR_ONE_EXPERIENCED_SENSORY_TASTER",
       "review_status": "PUBLISHER_EXCERPT_FACT_CHECK_NOT_COMPLETE_DIRECT_FULL_BODY_OR_BYTE_ARCHIVE",
       "source_bytes_sha256": null
+    },
+    {
+      "id": "LIT-2020-ESPRESSO-GRIND-PEAK",
+      "type": "external_primary_study",
+      "title": "Systematically Improving Espresso: Insights from Mathematical Modeling and Experiment",
+      "authors": "Cameron et al.",
+      "published": "2020-03-04",
+      "doi": "10.1016/j.matt.2019.12.019",
+      "url": "https://www.cell.com/matter/fulltext/S2590-2385(19)30410-2",
+      "access": "ORIGINAL_PUBLISHER_SEARCH_INDEXED_METHODS_RESULTS_TEXT_AND_AUTHOR_INSTITUTION_ABSTRACT; DIRECT_OPEN_403; NOT_FULL_PDF_READ_OR_HASHED",
+      "evidence_grade": "PEER_REVIEWED_MODEL_PLUS_BOUNDED_CAFE_GRIND_PRESSURE_DOSE_EXPERIMENT_NOT_POPULATION_SENSORY_PREFERENCE",
+      "review_status": "FOCUSED_PRIMARY_CLAIM_CHECK_MODEL_VERSUS_EXPERIMENT_LIMITS; COMPLETE_MANUSCRIPT_NOT_REVIEWED",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "2026-11-04 primary DOI landing text retrievable via web search; direct open returned 403; university author abstract independently crosschecked."
+    },
+    {
+      "id": "LIT-2023-GAGNE-GRINDER-PSD-24",
+      "type": "original_expert_observational_analysis",
+      "title": "What I learned from analyzing 300 particle size distributions for 24 espresso grinders",
+      "authors": "Jonathan Gagné; Kaffeemacher/ZHAW samples",
+      "published": "2023-09-21",
+      "url": "https://coffeeadastra.com/2023/09/21/what-i-learned-from-analyzing-300-particle-size-distributions-for-24-espresso-grinders/",
+      "access": "ORIGINAL_AUTHOR_BLOG_FULL_HTML_METHODS_FIGURE_CAPTIONS_AND_SUMMARY_READ",
+      "evidence_grade": "NON_PEER_REVIEWED_POST_HOC_24_GRINDER_ONE_BRAZIL_COFFEE_ONE_CAMSIZE_X2_CROSS_SECTIONAL_ASSOCIATION_NOT_CONTROLLED_BURR_CAUSAL_TRIAL",
+      "review_status": "AUTHOR_PRIMARY_METHODS_LIMITS_AND_CONCLUSION_CHECK; IMAGE_BASED_PSD_GRAPHS_NOT_INDEPENDENTLY_REMEASURED",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Author full HTML read 2026-11-04; not archived or hashed; observational sample and grinder-specific alignment confounders."
+    },
+    {
+      "id": "LIT-2023-ESPRESSO-PSD-COMPRESSION",
+      "type": "external_primary_study",
+      "title": "Influence of particle size distribution on espresso extraction via packed bed compression",
+      "authors": "Vaca Guerra, Harshe, Fries, Rothberg, Palzer, Heinrich",
+      "published": "2023-03",
+      "doi": "10.1016/j.jfoodeng.2022.111301",
+      "url": "https://tore.tuhh.de/entities/publication/b536e437-44bf-4be5-880f-8bf28c44d1f4",
+      "access": "AUTHOR_INSTITUTION_PUBLICATION_METADATA_AND_ORIGINAL_ABSTRACT; ORIGINAL_FULL_METHODS_NOT_RETRIEVED",
+      "evidence_grade": "PEER_REVIEWED_PACKED_BED_COMPRESSION_PERMEABILITY_EXPERIMENT_ABSTRACT_LEVEL_NOT_CUP_TASTE_PREFERENCE",
+      "review_status": "ABSTRACT_ONLY_METHOD_AND_CONCLUSION_CHECK; NO_FULL_TEXT_CLAIM",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "TU Hamburg institutional repository abstract accessed 2026-11-04; model coefficients/full controls unreviewed."
     }
   ],
   "evidence_checks": [
@@ -875,6 +916,69 @@
       "current_app": "site/lib/constants.js 72221331ce4dffabe416eebec1ae2fceced3a095 keeps Turbo and Traditional distinct and style-specific; engine.js bc8bbcee9ec349145a51552ab5dd3337115feca6 uses five tasted qualities and logged personal success rather than universal time/EY",
       "result": "ONE_TASTER_CONDITION_LIMITE_CONFIRMED_NO_TURBO_OR_EY_TARGET_CHANGE",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-016-A",
+      "source": "ORG-05 lines 5,9,31-35; ORG-06 lines 5,23-29; ORG-09 line 17; Git original blobs be455fe3c2dc8469c67c49bed7e9f539943ea463, 9128527d3208379c723d561eee6ffbe09d174f55, 1e1b8bbef0ecb05ed0b20195191bcad26663cf0d; LIT-2020-ESPRESSO-GRIND-PEAK",
+      "claim": "Cameron et al. modeled monotonic increasing extraction with finer grinding under homogeneous-flow assumptions, but measured a peak and lower EY at both overly coarse and very fine settings. The very-fine 9-bar regime could clog, leading to 6-bar measurements. This is evidence for a condition-dependent grind/hydraulic tradeoff, not a universal recommendation to grind finer or a quantified flavor improvement.",
+      "grade": "PEER_REVIEWED_ORIGINAL_PUBLISHER_INDEXED_MODEL_METHOD_AND_CAFE_RESULTS_PLUS_AUTHOR_REPOSITORY_ABSTRACT; FULL_ARTICLE_DIRECT_OPEN_BLOCKED",
+      "primary_sources": [
+        "https://doi.org/10.1016/j.matt.2019.12.019",
+        "https://researchportal.port.ac.uk/en/publications/systematically-improving-espresso-insights-from-mathematical-mode/"
+      ],
+      "current_app": "site/lib/engine.js Git blob bc8bbcee9ec349145a51552ab5dd3337115feca6 uses logged ratings and diagnostic unevenness gates, maintains style/one-change restrictions; no verified evidence for new numeric grind prior",
+      "result": "GRIND_EXTRACTION_NONMONOTONICITY_VERIFIED_METHOD_BOUND_NO_AUTOMATIC_RULE_CHANGE",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-016-B",
+      "source": "ORG-05 lines 7,9,35,37,51,90; ORG-06 lines 213-214; LIT-2020-ESPRESSO-GRIND-PEAK",
+      "claim": "Cameron team's narrower cafe/model study illustrates reducing coffee dose (e.g. 20g toward 15g) while maintaining 40g beverage and dialing coarser/shorter at lowered pressure; model/experiments address reproducibility and extraction efficiency, not validation that a 15g/40g/6bar/under15s recipe tastes best for all coffees or machines. The original paper explicitly notes qualitative flavor differences were not quantified in the cafe experiment.",
+      "grade": "PUBLISHER_SEARCH_INDEXED_ORIGINAL_METHODS_PLUS_AUTHOR_UNIVERSITY_ABSTRACT_NO_UNIVERSAL_SENSORY_TRIAL",
+      "primary_sources": [
+        "https://www.cell.com/matter/fulltext/S2590-2385(19)30410-2",
+        "https://researchportal.port.ac.uk/en/publications/systematically-improving-espresso-insights-from-mathematical-mode/"
+      ],
+      "current_app": "site/lib/constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095 keeps Traditional and Turbo distinct with illustrative per-style boundaries; current time/ratios remain owner Locked",
+      "result": "TURBO_METHOD_EXAMPLE_CONTEXT_ONLY_NO_UNIVERSAL_PRESSURE_DOSE_RATIO_TIME_CHANGE",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-016-C",
+      "source": "ORG-09 lines 9,19,21,23; Git blob 1e1b8bbef0ecb05ed0b20195191bcad26663cf0d; LIT-2023-GAGNE-GRINDER-PSD-24",
+      "claim": "Gagné's original analysis used Kaffeemacher/ZHAW samples from 24 grinders with same 82-point Brazil natural and a Camsizer X2 at multiple grind settings; within those observational PSDs flats on average had lower fines/greater uniformity but there was large flat-conical overlap, no clear overall RPM effect and no within-sample large-burr-uniformity law. Unknown grinder alignment/feed confounders prevent causal assignment from burr topology or diameter.",
+      "grade": "AUTHOR_FULL_TEXT_ORIGINAL_UNREVIEWED_GRAPHS_NON_PEER_REVIEWED_OBSERVATIONAL_SAMPLE",
+      "primary_sources": [
+        "https://coffeeadastra.com/2023/09/21/what-i-learned-from-analyzing-300-particle-size-distributions-for-24-espresso-grinders/"
+      ],
+      "current_app": "site/lib/model.js blob 19aaca401cab7bbd2059b9a34c6b8df263f4181c records individual grinder/version/burr and historical setups; engine does not automatically prescribe universal flat/conical/RPM conversion",
+      "result": "GRINDER_CROSS_MODEL_OVERLAP_VERIFIED_NO_BURR_DIAMETER_OR_RPM_PREFERENCE_ADDED",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-016-D",
+      "source": "ORG-09 lines 13,35 and related PSD/compression analysis; Git blob 1e1b8bbef0ecb05ed0b20195191bcad26663cf0d; LIT-2023-ESPRESSO-PSD-COMPRESSION",
+      "claim": "Vaca Guerra et al. TU Hamburg author repository abstract reports lower dry-bed porosity under equal axial compression with decreasing coarse-fraction uniformity, even if mean particle size is larger; measured espresso permeability could remain low from combined size, PSD width and compression. Abstract does NOT provide a general tamp force, fines percentage or calibrated taste outcome.",
+      "grade": "PEER_REVIEWED_INSTITUTION_ORIGINAL_ABSTRACT_ONLY_FULL_METHODOLOGY_UNVERIFIED",
+      "primary_sources": [
+        "https://tore.tuhh.de/entities/publication/b536e437-44bf-4be5-880f-8bf28c44d1f4",
+        "https://doi.org/10.1016/j.jfoodeng.2022.111301"
+      ],
+      "current_app": "site/lib/engine.js blob bc8bbcee9ec349145a51552ab5dd3337115feca6 uses shot-specific measures not computed permeability; no invented PSD/tamp correction",
+      "result": "COMPRESSION_PSD_INTERACTION_BOUNDED_NO_GLOBAL_TAMP_OR_GRIND_RULE",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-016-E",
+      "source": "ORG-09 lines 9,19,21; original Git blob 1e1b8bbef0ecb05ed0b20195191bcad26663cf0d; LIT-2023-GAGNE-GRINDER-PSD-24",
+      "claim": "Gagné says Kaffeemacher blind sensory evaluations covered only a subset of the 24 grinders, and high scores were not confined to the highest-uniformity tail; he explicitly warns PSD behavior cannot yet predict blind cup preference and figures are confounded by alignment and potentially clumping/heat. This supports withholding a universal high-uniformity burr taste score.",
+      "grade": "ORIGINAL_AUTHOR_FULL_HTML_AND_BLIND_SUBSET_DESCRIPTION_NOT_PEER_REVIEWED_OR_REPLICATED_PREFERENCE_TRIAL",
+      "primary_sources": [
+        "https://coffeeadastra.com/2023/09/21/what-i-learned-from-analyzing-300-particle-size-distributions-for-24-espresso-grinders/"
+      ],
+      "current_app": "site/lib/engine.js blob bc8bbcee9ec349145a51552ab5dd3337115feca6 retains all five personal taste inputs and individual same-coffee evidence rather than inferring flavor score from burr geometry",
+      "result": "OBSERVATIONAL_GRINDER_TASTE_LIMIT_INDEXED_NO_SENSOR_INPUT_OR_SCORE_CHANGE",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [
@@ -900,25 +1004,29 @@
     "Reproduce another narrow Locked-compatible Log Shot > Rate > Recommendation UX/logic defect in actual current code; add risk-proportionate tests, same-commit journal, nonforce CI/merge only if proven. R455-DEC-001 remains awaiting explicit owner choice."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-015",
-    "base_development_sha": "08d6f747244226fd9e2d254c2c080b0300ff1e87",
+    "id": "R455-016",
+    "base_development_sha": "dc500285460ca2a7d6a6bdf2853520a2685ee844",
     "source_ids": [
-      "LIT-2023-ESPRESSO-FLOW-FRACTIONS",
-      "LIT-2024-ESPRESSO-FINES-SENSORY"
+      "LIT-2020-ESPRESSO-GRIND-PEAK",
+      "LIT-2023-GAGNE-GRINDER-PSD-24",
+      "LIT-2023-ESPRESSO-PSD-COMPRESSION"
     ],
     "source_claim_checks": [
-      "R455-EV-CIT-015-A",
-      "R455-EV-CIT-015-B",
-      "R455-EV-CIT-015-C"
+      "R455-EV-CIT-016-A",
+      "R455-EV-CIT-016-B",
+      "R455-EV-CIT-016-C",
+      "R455-EV-CIT-016-D",
+      "R455-EV-CIT-016-E"
     ],
-    "number_of_curated_sources": 25,
-    "total_evidence_checks": 54,
-    "original_report_full_bodies_reviewed": "9/9 previously; no new full-body credit",
+    "number_of_curated_sources": 28,
+    "total_evidence_checks": 59,
+    "original_report_full_bodies_reviewed": "9/9 previously; 3 original reports relevant passages rechecked; all original citations NOT verified",
     "research_pack": "TWO_PROJECT_ZIPS_METADATA_ONLY_RAW_BYTES_ACCESS_DENIED",
     "s019": "ORIGINAL_PDF_NOT_RETRIEVED",
+    "google_drive_search": "espresso found Roast Color sheet only; S019/slow feeding no search result; DIC backup/media folders unrelated",
     "github267_line_credit": 0,
     "app_changes": false,
     "production_deployed": false,
-    "status": "THREE_PRIMARY_METHOD_CITATION_CHECKS_NO_PRODUCT_POLICY_AUTHORITY"
+    "status": "FIVE_PRIMARY_METHOD_CLAIM_CHECKS_DOCS_ONLY_PR_AND_CI_PENDING"
   }
 }
