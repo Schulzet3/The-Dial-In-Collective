@@ -275,3 +275,10 @@ The newly tracked DIC-Q-33-original603-direct-region-country-prose is TESTING, n
 
 ## November 2 — #417 preserve Locked GitHub Free and credits phrasing (PR acceptance correction)
 Exact-source PR426 visual review failed its existing instruction-continuity regression because a concurrent 7,909-character Project Instructions rewrite had changed the literal private-Free, advisory CI, no paid/public suggestion, screenshot prohibition and paste-ready strings. This commit restores those unchanged owner Locked requirements in clearer words under 8,000 characters, preserves the newly approved #423 recovery-key controls, and does not change executable code, permissions, publisher, privacy, production or test policy. Earlier CI failure remains recorded; rerun all applicable exact-source checks before integration.
+
+## November 4, 2026 — Owner-requested READY17 isolated candidate (not published)
+- Authority: Current owner instruction: "Publish all items in the queue"; exactly 17 READY item IDs as in docs/RELEASE_CANDIDATE.json; 3 IN_PROGRESS excluded.
+- Development parent f25758d7cc6c3dbc8883953135fdb4ea8e4c8d5d; last published tested source f1e150a2e7c95764c4a2d8760886aab23c2bfc5e; release ref 31c66832a28247e657a2bf89592ebc1e2f48dfc5.
+- Source inventory: nine READY deployable paths and two unfinished deployable paths; latter restored exactly to published blobs: scripts/netlify/should-ignore-build.mjs, src/server/coffee-narrative-evidence.mjs.
+- READY paths' development blobs match original exact READY merged-source file blobs; exact candidate CI, fresh recovery and independent provider preflight pending. No Netlify release, DB migration, Auth, Edge or member changes from this candidate commit.
+- Next: read candidate SHA/tree, verify scoped CI, grant exact one-use source/item authorization, verify production recovery and apply only named non-destructive SQL when ready; use one guarded Git publisher and verify Netlify READY/current. HOLD on any drift, failure or unready overlap.
