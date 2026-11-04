@@ -4386,6 +4386,37 @@
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
       "notes": "IN DEVELOPMENT / TESTING, NOT READY AND NOT DEPLOYED. UI-only feedback selection scope, no recipe numeric/taste rule changes, no member data changes, deployment authority absent. READY only after exact-head and merged-source applicable checks pass, full scope source identity readback and any queue intake reconciliation. Existing history and other recipe contexts preserved."
+    },
+    {
+      "id": "DIC-Q-33-original603-125-current-origin-seo",
+      "issue": 33,
+      "pr": 601,
+      "title": "Selected current product country caption takes precedence over stale metadata-only region",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-selected-product-hero.mjs"
+      ],
+      "tests": [
+        "Exact PR-head ea4a2ecfc513aff0b534cf349acb95ac203ae8cc Node/lint/build41863810967, cloud/mobile41863811555, SQL41863810794, security41863810743 and source41863810840 SUCCESS; frozen60341863810884 SKIPPED.",
+        "First approval41863810768 FAILED untracked coffee-selected-product-hero.mjs; corrected intake approval41873022327 SUCCESS.",
+        "Official pre-correction selected #125 raw SHA256 9e4bdd2d8aacda2c803a5891dcccd86f972c1ace2219c938f7b3d04fa9d5e9b7 had current H1 Sookoo (Ethiopia), visible Current origin Ethiopia, old incorrect parser Guji Ethiopia from SEO.",
+        "Six synthetic positive/negative regression tests; corrected merged-source CI and current actual public source readback PENDING."
+      ],
+      "ci_runs": [
+        41863810967,
+        41863811555,
+        41863810794,
+        41863810743,
+        41863810840,
+        41863810884,
+        41863810768,
+        41873022327
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "NARROW IN_PROGRESS, not READY nor deployed. Original603 remains open; full immutable source audit and real member auth not claimed. No provider/member/production changes."
     }
   ],
   "history": [

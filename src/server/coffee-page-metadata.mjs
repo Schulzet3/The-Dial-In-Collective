@@ -14,7 +14,7 @@ import {productMarkup,coffeeHtmlAttributes,withoutDetachedFarmerProfiles} from '
 import {productCoffeeProse} from './coffee-product-prose.mjs';
 import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
 import {extractSelectedNextCoffeeProduct} from './coffee-next-selected-product.mjs';
-import {selectedCoffeeHeroFacts,hasIncompatibleCurrentTastingList} from './coffee-selected-product-hero.mjs';
+import {selectedCoffeeHeroFacts,selectedCurrentOriginCaption,hasIncompatibleCurrentTastingList} from './coffee-selected-product-hero.mjs';
 import {COFFEE_FIELD_ALIASES,extractSemanticCoffeeSpecs,withoutEducationalCoffeeGeography} from './coffee-semantic-specs.mjs';
 import {equivalentCoffeeVarieties,compatibleGenericCoffeeVarieties,explicitCoffeeVarietyRefinement,coffeeOriginParts,compatibleCoffeeOrigins,isCoffeeBroadOrigin,orderExplicitCoffeeOriginTuple} from './coffee-fact-compatibility.mjs';
 import {equivalentCoffeeProductNames,preferredCoffeeRoasterName} from './coffee-product-identity.mjs';
@@ -1880,6 +1880,28 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  if(matchedDescriptionTitle&&descriptionIdentity&&samePage(descriptionIdentity,source_url)){
   for(const [k,v] of Object.entries(meta))if(/^(?:coffee[:._-]|product[:._-])(?:origin|process(?:ing)?|variety|producer|roast[_-]?level|harvest|elevation|tasting[_-]?notes)$/.test(k))
    addSeoFallbackField(fields,k.replace(/^(?:coffee|product)[:._-]/,''),v);
+ }
+ // Selected current-product country takes priority when a finer region
+ // appears only outside directly visible selected-product text (often SEO).
+ // Preserve independently printed current finer regions and real conflicts.
+ const selectedCurrentOrigin=selectedCurrentOriginCaption(canonicalProduct,{name:fields.name});
+ if(selectedCurrentOrigin&&!conflicts.has('origin')){
+  const direct=selectedCurrentOrigin.origin,previous=fields.origin||'';
+  const parts=previous.split(/\s*,\s*/u).filter(Boolean);
+  const compatible=parts.length>1&&keyOf(parts.at(-1))===keyOf(direct);
+  const visible=clean(canonicalProduct,100000).toLowerCase();
+  const regionalDetailVisible=parts.slice(0,-1).some(part=>
+   part.length>=3&&visible.includes(part.toLowerCase()));
+  if(!previous||(compatible&&!regionalDetailVisible)){
+   if(previous&&keyOf(previous)!==keyOf(direct))
+    rememberCoffeeReviewCandidate(fields,'origin',previous,'Finer detail absent from selected product');
+   fields.origin=direct;
+   seoFallbackByFields.get(fields)?.delete('origin');
+   if(source_facts.length<384)source_facts.push({
+    field:'origin',label:'Current origin',value:direct,source_url,
+    source_type:'html',section:'Selected product current origin caption'
+   });
+  }
  }
  const seo_fallback_fields=[...(seoFallbackByFields.get(fields)||[])].filter(key=>
   typeof fields[key]==='string'&&fields[key]&&!conflicts.has(key)).sort();
