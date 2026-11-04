@@ -202,6 +202,9 @@ function explicitProseRoasts(html){
    // "darkest ... roast yet" supports Dark. Do not read general menus,
    // historical/other-coffee statements or generic scales as current claims.
    if(/\b(?:our|this)\s+darkest(?:\s*,?\s*(?:yet|and)\s+[\p{L}-]{2,24}){0,2}\s*,?\s+roast\s+yet\b/iu.test(sentence)&&
+     // A direct selected Roast Level is stronger than a promotional
+     // superlative; do not silently pick Dark when that label disagrees.
+     !/\broast(?:ing)?\s+(?:level|profile|degree|type)\s*[:=]\s*(?:ultra\s+light|very\s+light|light|medium|dark)\b/i.test(block.text)&&
      !/\b(?:another|other|previous|former)\s+(?:coffee|product|blend|roast)\b/i.test(sentence))
     found.push('Dark');
    const patterns=[
