@@ -1,3 +1,9 @@
+## November 4 UTC — #267 strict S2-049 source review [skip netlify]
+
+At recovered exact development 7c34ebf7a79bb22cdc01b7b5c7d31d16a4924f59 re-read historical #43 lines 1-47 and pinned #46 lines 91-169; all 126 numbered lines have individual behavior/quality/risk/obsolete/duplicate/live counterpart/testability/fix/Locked evaluations in [S2-049](../audits/issue267-v2-strict-batches/S2-049.json). Both Git blobs match observed live; no duplicate old V2 credit. New strict totals 3559/579961 frozen and 4408/57913 pinned. Historical October14 coffee source whitelist/attempt quota and Netlify gate superseded by newer owner decisions. 2MB public roaster experiment is nonproduction; leave 900KB live cap unchanged. No proven current defect, no runtime/SQL/Auth/603 browser tests, no provider writes, no deploy, no READY queue. Next frozen #44 line1 and pinned #47 line1. Other live source drift incomplete.
+
+---
+
 ## November 4 UTC — #267 S2-047/048 frozen Wuri/multiroaster chronology and pinned source studies [skip netlify]
 
 **Recovered source:** development `f97d87a7d4c12413c3651a55f5b4f6d1f227e16c`, frozen `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9`, pinned `9707553a64f88127826e8f5b2b36cd0651296e83`. [S2-047](../audits/issue267-v2-strict-batches/S2-047.json) directly covers frozen file #41 `docs/COFFEE_EXTRACTION_ROAST_GRAPHICS_AND_SHOT_CLEANUP_2026-10-16.md` **1–69/69** and pinned #45 `scripts/audit/coffee-corpus-snapshot.py` **1–33/33**. [S2-048](../audits/issue267-v2-strict-batches/S2-048.json) covers frozen #42 `docs/COFFEE_URL_MULTIROASTER_VALIDATION_2026_10_17.md` **1–51/51** and pinned #46 `scripts/audit/coffee-extractor-2mb-study.mjs` **1–90/169**. All **120 frozen +123 pinned source lines** individually read, source SHA/number/semantics/nine dimensions and live identity exact; original old V2 not credited.
