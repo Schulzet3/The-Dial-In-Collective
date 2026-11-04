@@ -1,0 +1,2273 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch_id": "S2-068",
+  "date_utc": "2026-11-04",
+  "source_commits": {
+    "frozen": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+    "pinned": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+  },
+  "frozen": [
+    {
+      "file_index": 54,
+      "path": "docs/CURRENT_STATUS.md",
+      "blob_sha": "2d7f55bcad8fd92663c4790c4164b9bacfed0667",
+      "range": [
+        249,
+        290
+      ],
+      "per_line": [
+        {
+          "line": 249,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "No run",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 250,
+          "source_text": "Explicit owner approval for a release to close #5/#10/#12. Supabase production applied three previously unshipped **source-verified** functions/migrations via connected provider: actual migration history `20261024052303 dic_pending_retry_http_conflict` (original source filename 20261024034800), `20261024052411 dic_community_recommendation_evidence` (source 20261024041100), `20261024052419 dic_recommendation_use_provenance` (source 20261024041800). Applied only once each, with independent provider history and SQL function/trigger/privilege path readback. No historical rows rewritten. Count invariant 23 shots, 23 notes, 2 Community, 4 personal families, 10 library entries, 4 preferences. #5 closed with actual production readback. #10/#12 previously development-closed. The **web frontend is NOT deployed**; published Netlify still prior release. Existing #12 READY queue now documents SQL applied but the frontend still awaiting isolated exact-source CI and serialized one-use Netlify release. Candidate `work/release-scoped-issues-5-10-12-20261024`, PR117, omits unrelated TESTING extractor #33; this candidate is unverified, and its PR test workflows did not start on clean-base retarget. NO bypass of release controls or unready deployment. Do not reapply any of the three SQL migrations. The owner approval remains for a single scoped publication, not unrelated READY batch.",
+          "classification": "historical_record",
+          "behavior": "Oct24 scoped owner #5/#10/#12 release: three applied Supabase migrations independently verified, 23 shots/notes preserved; no repeat production SQL or unrelated #33 deploy",
+          "quality": "Dated historical test/owner/queue fact, temporal scope checked",
+          "risk": "Historic SQL already applied; duplicate migrations and stale READY/published state are dangerous if reused",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "Verify dated PR, Actions, provider readback and current explicit Locked authority before applying",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 251,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "No run",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 252,
+          "source_text": "---",
+          "classification": "divider",
+          "behavior": "Section divider",
+          "quality": "Dated historical test/owner/queue fact, temporal scope checked",
+          "risk": "Historic SQL already applied; duplicate migrations and stale READY/published state are dangerous if reused",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "Verify dated PR, Actions, provider readback and current explicit Locked authority before applying",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 253,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "No run",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 254,
+          "source_text": "## October 24 2026 UTC — Owner-approved #5 SQL-only production delivery",
+          "classification": "heading",
+          "behavior": "Owner-authorized #5 SQL-only delivery heading; limited to dated release",
+          "quality": "Dated historical test/owner/queue fact, temporal scope checked",
+          "risk": "Historic SQL already applied; duplicate migrations and stale READY/published state are dangerous if reused",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "Verify dated PR, Actions, provider readback and current explicit Locked authority before applying",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 255,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "No run",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 256,
+          "source_text": "Explicit scoped owner authorization: “If you need to publish to proceed you are approved to do so. Get them closed please.” Applied original READY source `20261024034800_dic_pending_retry_http_conflict.sql` through connected Supabase. Provider migration generated version `20261024052303` name `dic_pending_retry_http_conflict`; avoid replaying repository timestamp/version. Independent database readback found explicit structured nonmutating `conflict` text and no `40001` error branch. Before/after unchanged: shots 23, notes 23, Community 2, personal families 4, library 10. Original Issue #5 signed JWT 50/50 fixture evidence remains the owner-approved alternate modality, not live member browser acceptance. GitHub #5 closed with exact receipt. This item is SQL-only DEPLOYED, no Netlify release. Existing Netlify still `65ee386` at deploy `6adc20c03a07673c4dd08035`. #12 application source remains READY but not published. Extractor #33 remains TESTING and cannot accidentally ship. Scope issue #5 plus prerequisite #10/#12; do not use another publication approval for later unrelated work. No purchases.",
+          "classification": "historical_record",
+          "behavior": "Original #5 conflict SQL applied under provider-assigned migration version, 50/50 isolated JWT tests not true live-member browser, frontend still unpublished",
+          "quality": "Dated historical test/owner/queue fact, temporal scope checked",
+          "risk": "Historic SQL already applied; duplicate migrations and stale READY/published state are dangerous if reused",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "Verify dated PR, Actions, provider readback and current explicit Locked authority before applying",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 257,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "No run",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 258,
+          "source_text": "---",
+          "classification": "divider",
+          "behavior": "Section divider",
+          "quality": "Dated historical test/owner/queue fact, temporal scope checked",
+          "risk": "Historic SQL already applied; duplicate migrations and stale READY/published state are dangerous if reused",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "Verify dated PR, Actions, provider readback and current explicit Locked authority before applying",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 259,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "No run",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 260,
+          "source_text": "## October 24, 2026 UTC — Issues #12 and #10 development acceptance complete; source READY, NOT DEPLOYED",
+          "classification": "heading",
+          "behavior": "Issues #12/#10 source ready development heading, not deployed",
+          "quality": "Dated historical test/owner/queue fact, temporal scope checked",
+          "risk": "Historic SQL already applied; duplicate migrations and stale READY/published state are dangerous if reused",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "Verify dated PR, Actions, provider readback and current explicit Locked authority before applying",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 261,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "No run",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 262,
+          "source_text": "PR113 merged into development at `3529a9b628bedf3f294f6509f4628c9660914131`, all seven head-source checks and all five merged-source GitHub workflows SUCCESS. Community evidence now uses true server-owned personally confirmed successful family references, balanced contributors, excludes the requesting owner's own shared shots, and preserves distinct observed cross-member regions while **never** claiming global identity. Exact/related/similar tiers, Use Recommendation private provenance/offline/reload, single visible recipe, source attribution and no unapproved confidence remain intact. Original #12 verified-distinct-successful-families limitation is resolved at the personal-family evidence level without asserting global equivalence or adding a new threshold. The original signed-JWT modality supersession meets #10's two-family test criterion; #13 independent experiments remain separate. Queue `DIC-Q-12-community-prior-hierarchy` READY source pending next explicitly authorized release; #5 separate migration `20261024034800` READY but not applied. No production Netlify/Supabase/member data or paid-service changes. PR113 SQL fixture initial failure was diagnosed and repaired without relaxing acceptance; final checks PASS. Source receipt: [PR113](https://github.com/Schulzet3/The-Dial-In-Collective/pull/113) and [scoped journal](workstreams/issue-10.md).",
+          "classification": "historical_record",
+          "behavior": "PR113 personally verified Community family evidence, no global identities; seven PR checks and five merged success then, signed JWT accepted, migration not yet applied at that time",
+          "quality": "Dated historical test/owner/queue fact, temporal scope checked",
+          "risk": "Historic SQL already applied; duplicate migrations and stale READY/published state are dangerous if reused",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "Verify dated PR, Actions, provider readback and current explicit Locked authority before applying",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 263,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "No run",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 264,
+          "source_text": "---",
+          "classification": "divider",
+          "behavior": "Section divider",
+          "quality": "Dated historical test/owner/queue fact, temporal scope checked",
+          "risk": "Historic SQL already applied; duplicate migrations and stale READY/published state are dangerous if reused",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "Verify dated PR, Actions, provider readback and current explicit Locked authority before applying",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 265,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "No run",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 266,
+          "source_text": "## October 24, 2026 UTC — Issue #12 family identity audit",
+          "classification": "heading",
+          "behavior": "Earlier #12 family-identity audit heading",
+          "quality": "Dated historical test/owner/queue fact, temporal scope checked",
+          "risk": "Historic SQL already applied; duplicate migrations and stale READY/published state are dangerous if reused",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "Verify dated PR, Actions, provider readback and current explicit Locked authority before applying",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 267,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "No run",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 268,
+          "source_text": "Recovered exact development SHA 8b8cffd and verified five merged-source PR110 CI runs SUCCESS. PR108 9135e06, extractor PR109 34a1755 and PR110 8b8cffd are merged. Read Section 25.2 and original #12 acceptance. Source SQL returns distinct_family_basis=ratio_bucket_observed from 0.25-ratio groups and does not populate community_shots.family_id. These are independently contributor-balanced observed groups, not confirmed shared family identities. Existing client correctly marks ratioFamiliesAreEstimated; cannot claim original distinct successful Community-family criterion fully verified. #12 remains TESTING, #10 remains OPEN pending #12. #5 remains READY/unpublished. New regression checks below are NOT PASSED until tested and merged. No production provider, database or member writes.",
+          "classification": "historical_record",
+          "behavior": "Earlier 0.25-ratio observed grouping not confirmed family identity; #12 TESTING then; prevents overstating distinct successful family evidence",
+          "quality": "Dated historical test/owner/queue fact, temporal scope checked",
+          "risk": "Historic SQL already applied; duplicate migrations and stale READY/published state are dangerous if reused",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "Verify dated PR, Actions, provider readback and current explicit Locked authority before applying",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 269,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "No run",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 270,
+          "source_text": "---",
+          "classification": "divider",
+          "behavior": "Section divider",
+          "quality": "Dated historical test/owner/queue fact, temporal scope checked",
+          "risk": "Historic SQL already applied; duplicate migrations and stale READY/published state are dangerous if reused",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "Verify dated PR, Actions, provider readback and current explicit Locked authority before applying",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 271,
+          "source_text": "## October23,2026 MDT: extractor PR109 reconciled with Community source9135e06",
+          "classification": "heading",
+          "behavior": "PR109 concurrent Community reconciliation heading",
+          "quality": "Dated historical test/owner/queue fact, temporal scope checked",
+          "risk": "Historic SQL already applied; duplicate migrations and stale READY/published state are dangerous if reused",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "Verify dated PR, Actions, provider readback and current explicit Locked authority before applying",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 272,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "No run",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 273,
+          "source_text": "Concurrent Community recommendation source9135e06 is preserved, including its separately TESTING queue item. Shared client mutation behavior retains both audit owner/receipt safeguards and Community evidence. Combined local1372 Node tests,53Python tests,lint/build,mobile import and9actual packaged/offline checks PASS after fixing a missing module in the local browser harness. The32 extractor runtime files and frozen603 benchmark remain candidate8-identical. Updated-source GitHub Actions and non-force integration remain pending; queue TESTING, no publication.",
+          "classification": "historical_record",
+          "behavior": "Combined 1372 Node/53 Python/local offline tests PASS after browser harness fix; candidate8 source unchanged at then-head, GitHub CI/integration still pending",
+          "quality": "Dated historical test/owner/queue fact, temporal scope checked",
+          "risk": "Historic SQL already applied; duplicate migrations and stale READY/published state are dangerous if reused",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "Verify dated PR, Actions, provider readback and current explicit Locked authority before applying",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 274,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "No run",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 275,
+          "source_text": "---",
+          "classification": "divider",
+          "behavior": "Section divider",
+          "quality": "Dated historical test/owner/queue fact, temporal scope checked",
+          "risk": "Historic SQL already applied; duplicate migrations and stale READY/published state are dangerous if reused",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "Verify dated PR, Actions, provider readback and current explicit Locked authority before applying",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 276,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "No run",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 277,
+          "source_text": "## October 23, 2026 MDT: candidate8 GitHub integration resumed — TESTING, not published",
+          "classification": "heading",
+          "behavior": "Candidate8 integration TESTING heading",
+          "quality": "Dated historical test/owner/queue fact, temporal scope checked",
+          "risk": "Historic SQL already applied; duplicate migrations and stale READY/published state are dangerous if reused",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "Verify dated PR, Actions, provider readback and current explicit Locked authority before applying",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 278,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "No run",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 279,
+          "source_text": "The owner explicitly re-authorized GitHub writes and clarified that GitHub use does not count against the added-cost restriction. Candidate8 is being integrated with normal exact-source Actions checks; no alternate readiness policy or production control is changed. Preserve concurrent upstream `e6d874510448f6cd3d0f21f5edabc3d2863a14ed`, the separate Issue5 READY migration and Issues5/10 scoped acceptance.",
+          "classification": "historical_record",
+          "behavior": "GitHub use authorized free; candidate8 integration ongoing with no production authority",
+          "quality": "Dated historical test/owner/queue fact, temporal scope checked",
+          "risk": "Historic SQL already applied; duplicate migrations and stale READY/published state are dangerous if reused",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "Verify dated PR, Actions, provider readback and current explicit Locked authority before applying",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 280,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "No run",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 281,
+          "source_text": "The frozen full603 benchmark remains603/603 successful,3024 exact/167 missing/811 review-required; all four prior omissions repaired, three malformed-source flags retained. Application bytes are identical to the fully audited candidate8. The release queue remains TESTING until actual PR/merge/CI readback. [Scoped journal](workstreams/issue-33.md) and [benchmark receipt](audits/extractor-600-benchmark-receipt.json) contain the evidence and limits. Production remains unchanged at `65ee38609db6bd5977dd0f2b393e7791a5e1b766` / current READY Netlify `6adc20c03a07673c4dd08035`.",
+          "classification": "historical_record",
+          "behavior": "Historic frozen603 score 3024 exact/167 missing/811 review, malformed flags remain; modern candidate score must not inherit status",
+          "quality": "Dated historical test/owner/queue fact, temporal scope checked",
+          "risk": "Historic SQL already applied; duplicate migrations and stale READY/published state are dangerous if reused",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "Verify dated PR, Actions, provider readback and current explicit Locked authority before applying",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 282,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "No run",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 283,
+          "source_text": "---",
+          "classification": "divider",
+          "behavior": "Section divider",
+          "quality": "Dated historical test/owner/queue fact, temporal scope checked",
+          "risk": "Historic SQL already applied; duplicate migrations and stale READY/published state are dangerous if reused",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "Verify dated PR, Actions, provider readback and current explicit Locked authority before applying",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 284,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "No run",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 285,
+          "source_text": "## October 23 MDT / October 24 UTC, 2026: candidate 8 extractor audit complete locally; GitHub integration BLOCKED",
+          "classification": "heading",
+          "behavior": "Candidate8 local audit done but GitHub blocked headline",
+          "quality": "Dated historical test/owner/queue fact, temporal scope checked",
+          "risk": "Historic SQL already applied; duplicate migrations and stale READY/published state are dangerous if reused",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "Verify dated PR, Actions, provider readback and current explicit Locked authority before applying",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 286,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "No run",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 287,
+          "source_text": "The owner explicitly authorized larger size limits where beneficial without added direct cost. Candidate 8 now completes the frozen 603-coffee / 201-U.S.-roaster audit: all 603 previews succeed; **3,024 exact / 167 missing / 811 review-required** across **4,002 canonical assertions**. Candidate 7 was 3,023/171/808. Exactly four formerly blank fields were recovered: one strict match and three fuller source-wording differences. No prior exact match was lost and no expected answer, normalizer, source capture or oracle lock changed.",
+          "classification": "historical_record",
+          "behavior": "Candidate8 603/201 original corpus 3024/167/811 benchmark, four fields recovered and oracle unchanged; no global extraction correctness",
+          "quality": "Dated historical test/owner/queue fact, temporal scope checked",
+          "risk": "Historic SQL already applied; duplicate migrations and stale READY/published state are dangerous if reused",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "Verify dated PR, Actions, provider readback and current explicit Locked authority before applying",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 288,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "No run",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 289,
+          "source_text": "Evidence capacity is now 384 facts / 192,000 UTF-16 content units, with 1,600-unit values, 128 parts and 128 variants retained. All four previously documented omissions are restored. Supplementary retention is 5,458 full / 337 partial / 679 unconfirmed; truncation falls 96→3, solely original malformed Congregation pages. These are diagnostic counts, not a completeness percentage. Every captured request/fixture-call sequence matches candidate 7, with no expanded network allowance, new key, paid service, hosted CI or direct-cost operation.",
+          "classification": "historical_record",
+          "behavior": "Candidate8 larger bounded evidence cap, supplementary 5458/337/679; truncation three malformed sources, no broader network or paid service",
+          "quality": "Dated historical test/owner/queue fact, temporal scope checked",
+          "risk": "Historic SQL already applied; duplicate migrations and stale READY/published state are dangerous if reused",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "Verify dated PR, Actions, provider readback and current explicit Locked authority before applying",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 290,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Frozen immutable source evidence; no alteration or removal",
+          "duplicate_logic": "Dated versioned test/CI and release states differ, not duplicate app logic",
+          "current_counterpart": {
+            "path": "docs/CURRENT_STATUS.md",
+            "live_semantic_review": "PENDING",
+            "current_doc_source": "09752c011ab01586f9c4211a9cf3bad274fb55e9"
+          },
+          "testability": "No run",
+          "fix_opportunity": "Never modify frozen source or replay SQL; correct only current discrepancies with proof",
+          "locked_fit": "Protect owner no publish, no repeat SQL, original603 and member/offline/Community/older releases",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        }
+      ]
+    }
+  ],
+  "pinned_current": [
+    {
+      "file_index": 48,
+      "path": "scripts/audit/coffee-frozen-ci.py",
+      "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "range": [
+        1326,
+        1395
+      ],
+      "live_blob_identical": true,
+      "per_line": [
+        {
+          "line": 1326,
+          "source_text": "                    \"Each source improvement needs bounded original source-quote evidence\")",
+          "classification": "code_or_continuation",
+          "behavior": "Diagnostic that source-improvement cases require bounded source evidence",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1327,
+          "source_text": "            require(len({stable_json_sha256(row) for row in evidence}) == len(evidence),",
+          "classification": "guard",
+          "behavior": "Requires source evidence rows unique by stable JSON digest; prevents duplicate quote padding",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1328,
+          "source_text": "                    \"Duplicate reviewed source evidence\")",
+          "classification": "code_or_continuation",
+          "behavior": "Duplicate source evidence diagnostic",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1329,
+          "source_text": "            for row in evidence:",
+          "classification": "loop",
+          "behavior": "Iterates each distinct original source quote evidence record",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1330,
+          "source_text": "                verify_reviewed_source_quote(corpus, expected, evidence_index, case_id, row)",
+          "classification": "code_or_continuation",
+          "behavior": "Verifies quote against original capture/oracle index and specific case ID",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1331,
+          "source_text": "    return {\"status\": \"ACCEPTED\", \"reviewed_cases\": len(approved),",
+          "classification": "code_or_continuation",
+          "behavior": "Returns ACCEPTED only after reviewed cases pass; status is scoped verified-change gate",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1332,
+          "source_text": "            \"reviewed_source_supported_cases\": len(approved) - len(order_cases),",
+          "classification": "code_or_continuation",
+          "behavior": "Reports count of source-supported improvements distinct from order-only",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1333,
+          "source_text": "            \"reviewed_nonsemantic_order_cases\": len(order_cases),",
+          "classification": "code_or_continuation",
+          "behavior": "Reports number of narrow nonsemantic order-only changes",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1334,
+          "source_text": "            \"case_decisions\": [{\"case_id\": case_id, \"decision\": row[\"decision\"]}",
+          "classification": "code_or_continuation",
+          "behavior": "Includes exact case ID and decision per reviewed case in acceptance report",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1335,
+          "source_text": "                               for case_id, row in approved.items()],",
+          "classification": "loop",
+          "behavior": "List comprehension binds case and decision for every approved row",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1336,
+          "source_text": "            \"reviewed_export_changes\": len(material[\"actual_export_changed_cases\"]),",
+          "classification": "code_or_continuation",
+          "behavior": "Counts actual export differences, prevents silently omitted client snapshots",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1337,
+          "source_text": "            \"first_observed_run_id\": observed[\"run_id\"],",
+          "classification": "code_or_continuation",
+          "behavior": "Carries previously failed workflow run ID provenance",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1338,
+          "source_text": "            \"first_run_authentication\": \"Exact offline pins supplied by the independent review; no live artifact re-fetch.\",",
+          "classification": "code_or_continuation",
+          "behavior": "Describes offline pinned first-run authentication, explicitly no fresh live artifact fetch",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1339,
+          "source_text": "            \"reviewer\": review[\"reviewer\"], \"reviewed_at\": review[\"reviewed_at\"],",
+          "classification": "code_or_continuation",
+          "behavior": "Includes reviewer name/time from explicit independent-review manifest",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1340,
+          "source_text": "            \"unlisted_case_changes_permitted\": False, \"zero_loss_requirements_waived\": False}",
+          "classification": "code_or_continuation",
+          "behavior": "Declares no unlisted changes or zero-loss waiver, restrictive acceptance output",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1341,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "No run",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1342,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "No run",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1343,
+          "source_text": "def benchmark_change_blockers(material, review_gate, exact_losses, full_losses, exports, helper):",
+          "classification": "function",
+          "behavior": "Defines benchmark blockers from material, review gate, original exact/full losses, exports, helper",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1344,
+          "source_text": "    \"\"\"Approval can replace only the unchanged-output/count expectation, never safety checks.\"\"\"",
+          "classification": "code_or_continuation",
+          "behavior": "Docstring: review may relax only unchanged-output/count expectation, never safety",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1345,
+          "source_text": "    blockers = []",
+          "classification": "code_or_continuation",
+          "behavior": "Initialize blocker list",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1346,
+          "source_text": "    reviewed = review_gate.get(\"status\") == \"ACCEPTED\"",
+          "classification": "code_or_continuation",
+          "behavior": "Treat only reviewed gate ACCEPTED as valid source-review override",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1347,
+          "source_text": "    if material[\"changes\"] and not reviewed:",
+          "classification": "conditional",
+          "behavior": "If complete change records exist without review, block",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1348,
+          "source_text": "        blockers.append(\"Complete frozen case output/call changes require independent source review\")",
+          "classification": "code_or_continuation",
+          "behavior": "Adds unreviewed complete output/call change blocker",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1349,
+          "source_text": "    if exact_losses:",
+          "classification": "conditional",
+          "behavior": "If prior canonical exact match lost, block regardless of approved source review",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1350,
+          "source_text": "        blockers.append(\"A prior canonical exact match was lost\")",
+          "classification": "code_or_continuation",
+          "behavior": "Add exact-match loss diagnostic",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1351,
+          "source_text": "    if full_losses:",
+          "classification": "conditional",
+          "behavior": "If prior fully retained supplementary fact lost, block even if reviewed",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1352,
+          "source_text": "        blockers.append(\"A prior fully retained supplementary assertion was lost\")",
+          "classification": "code_or_continuation",
+          "behavior": "Add supplementary retention loss diagnostic",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1353,
+          "source_text": "    if not reviewed and not typed_equal(material[\"candidate_counts\"][\"canonical\"],",
+          "classification": "conditional",
+          "behavior": "If not reviewed and candidate canonical count differs from baseline, block",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1354,
+          "source_text": "                                        material[\"baseline_counts\"][\"canonical\"]):",
+          "classification": "code_or_continuation",
+          "behavior": "Continuation of typed count comparison for baseline canonical facts",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1355,
+          "source_text": "        blockers.append(\"Canonical counts differ from the unchanged-output expectation\")",
+          "classification": "code_or_continuation",
+          "behavior": "Add canonical mismatch blocker",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1356,
+          "source_text": "    if not reviewed and not typed_equal(material[\"candidate_counts\"][\"supplementary_retention\"],",
+          "classification": "conditional",
+          "behavior": "If not reviewed and candidate retention count differs from baseline, block",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1357,
+          "source_text": "                                        material[\"baseline_counts\"][\"supplementary_retention\"]):",
+          "classification": "code_or_continuation",
+          "behavior": "Continuation of typed supplementary-retention count comparison",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1358,
+          "source_text": "        blockers.append(\"Retention counts differ from the unchanged-output expectation\")",
+          "classification": "code_or_continuation",
+          "behavior": "Add retention mismatch blocker",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1359,
+          "source_text": "    if exports.get(\"cases\") != 603 or exports.get(\"exports\") != 603 or exports.get(\"download_clicks\") != 603:",
+          "classification": "conditional",
+          "behavior": "Require 603 recorded cases,exports,download clicks even after reviewer approval",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1360,
+          "source_text": "        blockers.append(\"Actual client snapshot/Blob download did not pass every frozen case\")",
+          "classification": "code_or_continuation",
+          "behavior": "Record incomplete actual client export/download blocker",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1361,
+          "source_text": "    if any(row.get(\"kind\") != \"export_changed\" for row in exports.get(\"errors\", [])):",
+          "classification": "conditional",
+          "behavior": "Reject any recorded export error kind beyond export_changed; assumes list of dict rows, malformed row may throw WATCH",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1362,
+          "source_text": "        blockers.append(\"An actual client export failed; review cannot waive export fidelity\")",
+          "classification": "code_or_continuation",
+          "behavior": "Record client export fidelity failure, cannot waive",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1363,
+          "source_text": "    if not reviewed and (exports[\"exports\"] != 603 or exports[\"equal\"] != 603 or exports[\"errors\"]):",
+          "classification": "conditional",
+          "behavior": "If unreviewed require every export equality, zero errors and 603 exports",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1364,
+          "source_text": "        blockers.append(\"Actual client snapshot/download equality did not pass all603 cases\")",
+          "classification": "code_or_continuation",
+          "behavior": "Add unmatched snapshot/download equality blocker",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1365,
+          "source_text": "    if review_gate.get(\"status\") == \"REJECTED\":",
+          "classification": "conditional",
+          "behavior": "Explicit review REJECTED means block rather than continue",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1366,
+          "source_text": "        blockers.append(\"Pinned reviewed-change manifest did not validate\")",
+          "classification": "code_or_continuation",
+          "behavior": "Add review-manifest validation failure blocker",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1367,
+          "source_text": "    if helper[\"passed\"] != 603 or helper[\"failures\"] or helper[\"attempted_external_operations\"]:",
+          "classification": "conditional",
+          "behavior": "Require offline helper 603 passes, no failures or external operations",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1368,
+          "source_text": "        blockers.append(\"Offline helper validation did not pass all603 actual exports without external operations\")",
+          "classification": "code_or_continuation",
+          "behavior": "Offline helper/side-effect violation diagnostic",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1369,
+          "source_text": "    return blockers",
+          "classification": "code_or_continuation",
+          "behavior": "Return accumulated blockers, no implicit approval",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1370,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "No run",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1371,
+          "source_text": "",
+          "classification": "blank",
+          "behavior": "Literal blank line inspected; no source assertion",
+          "quality": "Spacing/section split",
+          "risk": "None",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "No run",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1372,
+          "source_text": "def verify_offline_exports(repo, output, exports):",
+          "classification": "function",
+          "behavior": "Defines read-only export replay through local review helper",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1373,
+          "source_text": "    spec = importlib.util.spec_from_file_location(",
+          "classification": "code_or_continuation",
+          "behavior": "Load local reviewer script by exact repository file location",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1374,
+          "source_text": "        \"frozen_ci_local_review\", repo / \"scripts/audit/coffee-source-review-local.py\")",
+          "classification": "code_or_continuation",
+          "behavior": "Identifies coffee-source-review-local.py as intended module, not a public URL",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1375,
+          "source_text": "    helper = importlib.util.module_from_spec(spec)",
+          "classification": "code_or_continuation",
+          "behavior": "Create module object from trusted source spec",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1376,
+          "source_text": "    attempts, failures, verified = [], [], []",
+          "classification": "code_or_continuation",
+          "behavior": "Initialize arrays of external attempts, failures and verified exports",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1377,
+          "source_text": "    with deny_python_external_operations(attempts):",
+          "classification": "code_or_continuation",
+          "behavior": "Enter deny_python_external_operations context before loading helper and iterating exports",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1378,
+          "source_text": "        spec.loader.exec_module(helper)",
+          "classification": "code_or_continuation",
+          "behavior": "Executes local review module with external-operation guard in effect",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1379,
+          "source_text": "        for row in exports[\"records\"]:",
+          "classification": "loop",
+          "behavior": "Traverse all actual export records, expected fixed 603 by upstream check",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1380,
+          "source_text": "            location = output / row[\"file\"]",
+          "classification": "code_or_continuation",
+          "behavior": "Construct export path from recorded file, upstream index/path guards must prevent traversal",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1381,
+          "source_text": "            require(location.is_file() and file_hash(location) == row[\"sha256\"],",
+          "classification": "guard",
+          "behavior": "Require actual export file exists and digest equals recorded SHA256",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1382,
+          "source_text": "                    \"Actual client export bytes changed\")",
+          "classification": "code_or_continuation",
+          "behavior": "Export-byte mismatch diagnostic",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1383,
+          "source_text": "            try:",
+          "classification": "code_or_continuation",
+          "behavior": "Catch exceptions from local source_review helper per case",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1384,
+          "source_text": "                value, receipt = helper.source_review(location)",
+          "classification": "code_or_continuation",
+          "behavior": "Read original export with offline source-review function, no roaster network needed",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1385,
+          "source_text": "                require(typed_equal(value, load_json(location)), \"Offline helper changed exported data\")",
+          "classification": "guard",
+          "behavior": "Require helper decoded data structurally equals exported JSON, prevents mutation",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1386,
+          "source_text": "                require(receipt.get(\"source_url_fetched\") is False,",
+          "classification": "guard",
+          "behavior": "Require receipt source_url_fetched literal False, no implied network request",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1387,
+          "source_text": "                        \"Offline helper did not record its no-fetch boundary\")",
+          "classification": "code_or_continuation",
+          "behavior": "Diagnostic on offline helper no-fetch boundary",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1388,
+          "source_text": "                verified.append({\"case_id\": row[\"case_id\"], \"sha256\": receipt[\"sha256\"]})",
+          "classification": "code_or_continuation",
+          "behavior": "Record original case ID and SHA256 for each passing local helper",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1389,
+          "source_text": "            except Exception as error:",
+          "classification": "code_or_continuation",
+          "behavior": "On exception, do not count as verified; append failure",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1390,
+          "source_text": "                failures.append({\"case_id\": row[\"case_id\"],",
+          "classification": "code_or_continuation",
+          "behavior": "Failure receipt records offending case ID",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1391,
+          "source_text": "                                 \"error\": type(error).__name__ + \": \" + str(error)})",
+          "classification": "code_or_continuation",
+          "behavior": "Records exception class and message for debugging; review risk of unsafe exception text in logs",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1392,
+          "source_text": "    result = {\"cases\": exports[\"cases\"], \"passed\": len(verified), \"failures\": failures,",
+          "classification": "code_or_continuation",
+          "behavior": "Prepare summary: cases, successful count, failures list",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1393,
+          "source_text": "              \"attempted_external_operations\": attempts, \"images_selected\": 0,",
+          "classification": "code_or_continuation",
+          "behavior": "Carry actual external-attempt log and images_selected zero",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1394,
+          "source_text": "              \"ocr_run\": False, \"application_writes\": False,",
+          "classification": "code_or_continuation",
+          "behavior": "Explicit no OCR and no application writes flags in helper receipt",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        },
+        {
+          "line": 1395,
+          "source_text": "              \"helper_sha256\": file_hash(repo / \"scripts/audit/coffee-source-review-local.py\"),",
+          "classification": "code_or_continuation",
+          "behavior": "Pin helper script SHA256 to local source for later provenance",
+          "quality": "Direct code semantic/dataflow considered; external caller/runtime verification remains separate",
+          "risk": "Original603 source and offline export integrity; untrusted/malformed paths and log outputs warrant negative tests; no confirmed exploit",
+          "dead_or_obsolete": "Pinned code identical current live; no proof redundant/dead, preserve original603",
+          "duplicate_logic": "Distinct source, scorer, export, offline and review blockers protect different invariants; no deletion justified",
+          "current_counterpart": {
+            "path": "scripts/audit/coffee-frozen-ci.py",
+            "live_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+            "exact_blob_match": true,
+            "observed_development": "b3829cb1a456f33e66c5a04d367b0fcd8855eeed"
+          },
+          "testability": "Isolated corrupt case/source/export/helpers, denied-network, path traversal, and exact source PIN tests needed, not executed this batch",
+          "fix_opportunity": "No production fix or speculative deletion, reproduce bug and trace caller first",
+          "locked_fit": "Preserve immutable 603/201 original capture/oracle/scorer and member/shot/offline/Auth privacy, no #33/#96 ownership overwrite",
+          "method": "Numbered source SHA-bound AI semantic inspection (not independent human review)"
+        }
+      ]
+    }
+  ],
+  "finding": {
+    "status": "WATCH_UNREPRODUCED",
+    "path": "scripts/audit/coffee-frozen-ci.py",
+    "lines": [
+      1361,
+      1380,
+      1391
+    ],
+    "description": "Export-error receipt expects dict rows; file location constructed from recorded row['file']; exceptions get logged. Caller controls and path/JSON validation upstream must be traced before saying defect or exploit."
+  },
+  "checks": {
+    "new_frozen": 42,
+    "new_pinned": 70,
+    "counts_before": [
+      4330,
+      5737
+    ],
+    "counts_after": [
+      4372,
+      5807
+    ],
+    "source_exact": true,
+    "nonoverlap": true,
+    "nine_dimensions": true,
+    "legacy_count_added": 0,
+    "original603": "NOT_RUN",
+    "app_tests": "NOT_RUN_DOCS_ONLY",
+    "post_pin_live_drift": "INCOMPLETE",
+    "merge_ci": "AWAITING",
+    "production_deploy": "NONE"
+  },
+  "next": {
+    "historical": "#54 line291",
+    "pinned": "#48 line1396",
+    "live_drift": "INCOMPLETE"
+  },
+  "complete": false
+}
