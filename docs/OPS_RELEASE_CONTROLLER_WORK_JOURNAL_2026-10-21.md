@@ -1,3 +1,9 @@
+## 2026-11-04 — Issue #624 prevent docs-only main CI runner consumption (HOSTED-CI BLOCKED)
+
+Owner explicitly approved optimizing GitHub Actions usage without relaxing checks, backup/release safety, publication authority or private source. Base main source `79ea81b9c80eb8b11148c7eb787d500d313a9ad2` tree `97130b6efa5c0669474978706e2915afe6998e88`. Changed **only** `.github/workflows/release-controller-ci.yml` and this same-commit main operations journal. The costly nonpublishing release-controller suite no longer starts for *pure Markdown-only* push/PR changes under root `README.md`, `AGENTS.md` or `docs/**/*.md`. Mixed changes, unknown file types, CI/test/scripts, **JSON release and backup requests**, workflow edits, production claim/guard inputs and manual dispatch still execute the identical original syntax, one-use, protected-source, backup-snapshot, and serialized release controller tests. Neither `main` backup/weekly/restoration workflow, `release/production`, nor any provider/site/member data was changed.
+
+Connector read-only before/after source structural assertions PASS: all original required steps, jobs, manual dispatch and concurrency retained; only exact new event path filters and this journal are changed. No hosted runner validation or actual billing-saving measurement: latest November 4 jobs returned FAIL with zero runner steps while owner reported exhausted Actions allowance, so **CI BLOCKED / UNVERIFIED** and the November 4 encrypted snapshot requires separate verification. Never label PASS/READY/DEPLOYED based on these edits. Next: verify exact branch/PR files and nonforce integration only under applicable safety evidence; resume CI when runners are available, confirm no missing required checks and verify actual backup delivery. Source issue [#624](https://github.com/Schulzet3/The-Dial-In-Collective/issues/624). [skip netlify]
+
 # Main operations journal
 
 ## October 23 UTC / October 22 MDT: verified Issue70 integration
