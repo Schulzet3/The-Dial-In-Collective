@@ -1684,14 +1684,6 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   if(repeated&&repeated[1].trim()&&keyOf(repeated[2])===keyOf(repeated[3]))
    fields.origin=`${repeated[1].trim()} Region, ${repeated[2].trim()}`;
  }
- // A compact current layout list can omit one literal that the exact same
- // selected H1 names in its own adjacent Tasting Notes story. Preserve the
- // selected list and its source facts; no prior/related/conditional inference.
- if(fields.tasting_notes&&!conflicts.has('tasting_notes')&&
-  !seoFallbackByFields.get(fields)?.has('tasting_notes')){
-  const direct=refineSelectedNamedTastingNotes(currentProduct,{clean,notes:fields.tasting_notes});
-  if(direct)fields.tasting_notes=direct;
- }
  const supplementary=collectSupplementaryCoffeePageFacts(html,{selected_html:selectedProduct,source_url});
  if(supplementary.roast_hint)roast_evidence.hint=[roast_evidence.hint,supplementary.roast_hint].filter(Boolean).join(' ');
  const roaster_recipe=extractProductEspressoReference(currentProduct);
@@ -1826,6 +1818,15 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     source_facts.push({field:'tasting_notes',label:'Tastes like',
       value:directSelected.explicit_tastes_like,source_url,source_type:'html',
       section:'Exact selected product literal tasting description'});
+  }
+  // This MUST follow current printedNotes and exact-selected description
+  // ranking: earlier passes may not yet have an existing tasting_notes field.
+  // Add one seller-printed current note only with strict selected-section,
+  // exact H1, two corroborating descriptors, and no competing source claim.
+  if(fields.tasting_notes&&!conflicts.has('tasting_notes')&&
+   !seoFallbackByFields.get(fields)?.has('tasting_notes')){
+   const named=refineSelectedNamedTastingNotes(currentProduct,{clean,notes:fields.tasting_notes});
+   if(named)fields.tasting_notes=named;
   }
   // Flag only direct selected-source disagreements, not unsupported SEO.
   // A higher-priority current description may remain the canonical suggestion
