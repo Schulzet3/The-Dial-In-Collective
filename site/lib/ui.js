@@ -81,9 +81,10 @@ export function nextShotGuidance(advice,shot,showTemp=false,unit='F'){
  if(!adjustment)return `<p class="helper next-shot-original-advice">${e(advice?.text||'')}</p>`;
  const {label,before,after,unit:measure,keep}=adjustment;
  const spoken=e(`${label} from ${before} to ${after}${measure?' '+measure:''}`);
+ const note=advice?.evidenceNote?'<p class="next-shot-evidence">'+e(advice.evidenceNote)+'</p>':'';
  const source=advice?.text?.includes('Sized from your own comparable adjustments.')?
   '<p class="next-shot-evidence">Adjustment sized from your comparable shots.</p>':'';
- return `<div class="next-shot-change" role="group" aria-label="${spoken}"><span class="next-shot-variable">${e(label)}</span><span class="next-shot-number">${e(before)}</span><span class="next-shot-arrow" aria-hidden="true">→</span><span class="next-shot-number">${e(after)}</span>${measure?`<span class="next-shot-unit">${e(measure)}</span>`:''}</div><p class="next-shot-keep">Keep ${e(keep)} unchanged.</p>${source}`;
+ return `<div class="next-shot-change" role="group" aria-label="${spoken}"><span class="next-shot-variable">${e(label)}</span><span class="next-shot-number">${e(before)}</span><span class="next-shot-arrow" aria-hidden="true">→</span><span class="next-shot-number">${e(after)}</span>${measure?`<span class="next-shot-unit">${e(measure)}</span>`:''}</div><p class="next-shot-keep">Keep ${e(keep)} unchanged.</p>${source}${note}`;
 }
 
 export function chips(t){return `<div class="taste-chips">${SCALES.map(sc=>`<span class="taste-chip severity-${tasteSeverity(sc,t?.[sc.key])??4}">${e(sc.label==='Astringency / Dryness'?'Dryness':sc.label)}${sc.ideal===3&&t?.[sc.key]!==3?`: ${e(tasteLabel(sc,t?.[sc.key]))}`:''}</span>`).join('')}</div>`;}
