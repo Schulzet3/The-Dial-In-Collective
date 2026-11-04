@@ -24,6 +24,10 @@ jobs:
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: '22'
+      - name: Reject tracked credential files and verify redacted detection boundaries
+        run: |
+          node --test tests/security-inventory.test.mjs
+          node scripts/audit/security-inventory.mjs
       - name: Syntax validation (no external calls)
         run: |
           node --check scripts/backups/scheduled-backup-guard.mjs
