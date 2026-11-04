@@ -9,6 +9,11 @@ on:
       - '.github/workflows/dic-live-postrelease-smoke.yml'
       - 'scripts/audit/live-postrelease-smoke.py'
   workflow_dispatch:
+    inputs:
+      netlify_deploy_id:
+        description: 'Independently verified current published Netlify deploy ID'
+        required: true
+        type: string
 permissions:
   contents: read
 concurrency:
@@ -31,5 +36,7 @@ jobs:
         run: |
           python -m pip install playwright==1.55.0
           python -m playwright install --with-deps chromium
-      - name: Verify actual live primary and pinned deploy on mobile and desktop
+      - name: Verify live primary and explicitly supplied immutable deploy on mobile and desktop
+        env:
+          DIC_POSTRELEASE_DEPLOY_ID: ${{ inputs.netlify_deploy_id }}
         run: python scripts/audit/live-postrelease-smoke.py

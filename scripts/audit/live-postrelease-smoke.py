@@ -5,11 +5,19 @@ create community records, or use user data. It verifies publicly served
 production assets and signed-out page initialization at two viewport sizes.
 """
 import os
+import re
 from urllib.parse import urlsplit
 from playwright.sync_api import sync_playwright
 
 LIVE = "https://app.dialincollective.com"
-DEPLOY = "https://6adabcecd4a2a68e94cdc09a--the-dial-in-collective.netlify.app"
+def audit_origins():
+    """Never report an old hard-coded deploy as current production evidence."""
+    deploy_id = os.environ.get("DIC_POSTRELEASE_DEPLOY_ID", "").strip()
+    if not deploy_id:
+        return (LIVE,)
+    if not re.fullmatch(r"[a-f0-9]{24}", deploy_id):
+        raise ValueError("Expected a separately verified, 24-character Netlify deploy ID")
+    return (LIVE, f"https://{deploy_id}--the-dial-in-collective.netlify.app")
 
 def exercise(browser, origin, width, height):
     context = browser.new_context(viewport={"width": width, "height": height},
@@ -54,15 +62,18 @@ def exercise(browser, origin, width, height):
         context.close()
 
 def main():
+    origins = audit_origins()
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(headless=True, args=["--no-sandbox"])
         try:
-            for origin in (LIVE, DEPLOY):
+            for origin in origins:
                 for width, height in ((390, 844), (1440, 900)):
                     exercise(browser, origin, width, height)
         finally:
             browser.close()
-    print("PASS: live production Chromium smoke, four contexts; no credentials or writes")
+    print(f"PASS: live production Chromium smoke, {len(origins) * 2} contexts; no credentials or writes")
+    if len(origins) == 1:
+        print("UNVERIFIED: immutable deploy not tested; no current deploy ID supplied")
 
 if __name__ == "__main__":
     main()
