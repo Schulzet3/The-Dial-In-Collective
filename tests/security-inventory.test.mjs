@@ -67,3 +67,7 @@ test('CLI screens tracked files and reports rule/line but never raw credential b
   assert.ok(!readFileSync(join(temp,'qa_artifacts/security/repository-inventory.json'),'utf8').includes(token));
  } finally{rmSync(temp,{recursive:true,force:true});}
 });
+test('security scanner source itself produces zero high-confidence matches',()=>{
+ const source=readFileSync(new URL('../scripts/audit/security-inventory.mjs',import.meta.url),'utf8');
+ assert.deepEqual(source.split(/\r?\n/).flatMap(secretRulesOnLine),[]);
+});

@@ -9,7 +9,7 @@ import {resolve} from 'node:path';
 const sha256=bytes=>createHash('sha256').update(bytes).digest('hex');
 const rules=[
  ['private_key',/-----BEGIN (?:RSA |EC |OPENSSH |DSA |ENCRYPTED )?PRIVATE KEY-----/],
- ['pgp_private_key',/-----BEGIN PGP PRIVATE KEY BLOCK-----/],
+ ['pgp_private_key',new RegExp('-----BEGIN PGP '+'PRIVATE KEY BLOCK-----')],
  ['age_private_identity',/\bAGE-SECRET-KEY-1[A-Z0-9]{35,}\b/],
  ['github_token',/\b(?:ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9]{36,255}\b/],
  ['github_fine_grained_token',/\bgithub_pat_[A-Za-z0-9_]{60,}\b/],
