@@ -372,6 +372,47 @@
       "review_status": "ABSTRACT_ONLY_METHOD_AND_CONCLUSION_CHECK; NO_FULL_TEXT_CLAIM",
       "source_bytes_sha256": null,
       "source_byte_caveat": "TU Hamburg institutional repository abstract accessed 2026-11-04; model coefficients/full controls unreviewed."
+    },
+    {
+      "id": "LIT-2023-MO-MICROCT-SPH",
+      "type": "external_primary_study",
+      "title": "Exploring the link between coffee matrix microstructure and flow properties using combined X-ray microtomography and smoothed particle hydrodynamics simulations",
+      "authors": "Chaojie Mo, Richard Johnston, Luciano Navarini, Furio Suggi Liverani, Marco Ellero",
+      "published": "2023-09-29",
+      "doi": "10.1038/s41598-023-42380-y",
+      "url": "https://www.nature.com/articles/s41598-023-42380-y",
+      "access": "PUBLISHER_INDEXED_METHODS_ABSTRACT_AND_PUBMED_ORIGINAL; DIRECT_FULL_TEXT_OPEN_REDIRECTED_TO_LOGIN; ARXIV_AUTHOR_ABSTRACT_AVAILABLE",
+      "evidence_grade": "PEER_REVIEWED_EXPERIMENTAL_MICROCT_PLUS_COMPUTATIONAL_SIMULATION; FLOW_MICROSTRUCTURE_NOT_TASTE_CUP_TRIAL",
+      "review_status": "ABSTRACT_AND_METHOD_DESCRIPTION_CHECKED_TWO_CLAIMS; FULL_METHODS_AND_GRAPHS_NOT_REPRODUCED",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Original publisher full HTML redirected to idp on 2026-11-04; no original article/PDF bytes locally preserved or independently hashed."
+    },
+    {
+      "id": "LIT-2023-LEE-UNEVEN-2PATH",
+      "type": "external_primary_study",
+      "title": "Uneven extraction in coffee brewing",
+      "authors": "William T. Lee, Ann Smith, Arsalaan Arshad",
+      "published": "2023-05-09",
+      "doi": "10.1063/5.0138998",
+      "url": "https://pure.hud.ac.uk/en/publications/uneven-extraction-in-coffee-brewing/",
+      "access": "AUTHOR_UNIVERSITY_PEER_REVIEWED_PUBLICATION_AND_ABSTRACT_PLUS_AUTHOR_ARXIV_2022_PREPRINT_DISCUSSION; PUBLISHER_FINAL_FULL_PDF_NOT_READ",
+      "evidence_grade": "PEER_REVIEWED_TWO_PATH_SIMPLIFIED_MATHEMATICAL_MODEL_NOT_ESPRESSO_CUP_TASTE_VALIDATION",
+      "review_status": "MODEL_STRUCTURE_AND_UNCERTAINTY_LIMITS_CHECKED_TWO_ATOMIC_CLAIMS; FINAL_VERSION_FULL_TEXT_NOT_VERIFIED",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "University's final DOI and preprint read; final-publisher text and exact comparison against preprint not obtained."
+    },
+    {
+      "id": "MFR-DECENT-2026-DE1-MANUAL",
+      "type": "manufacturer_primary_document",
+      "title": "Decent Espresso DE1 user manual and flow/pressure-profile mode descriptions",
+      "authors": "Decent Espresso",
+      "published": "2026 live page, exact revision date unspecified",
+      "url": "https://decentespresso.com/docs/de1_manual",
+      "access": "MANUFACTURER_LIVE_FULL_HTML_MANUAL_AND_OWN_OFFICIAL_PRODUCT_OVERVIEW_READ",
+      "evidence_grade": "FIRST_PARTY_MACHINE_CONTROL_CAPABILITY_CLAIMS_ONLY_NO_INDEPENDENT_SENSORY_OR_SATURATION_DETECTOR_VALIDATION",
+      "review_status": "MACHINE_FLOW_PRESSURE_PROFILE_OPERATION_AND_MANUFACTURER_CLAIM_LIMIT_CHECK; NOT A HEAD_TO_HEAD_TRIAL",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Dynamic live manual not archived or hashed; later revision possible. 2026-specific machine additions mentioned but unrelated to current app."
     }
   ],
   "evidence_checks": [
@@ -979,6 +1020,72 @@
       "current_app": "site/lib/engine.js blob bc8bbcee9ec349145a51552ab5dd3337115feca6 retains all five personal taste inputs and individual same-coffee evidence rather than inferring flavor score from burr geometry",
       "result": "OBSERVATIONAL_GRINDER_TASTE_LIMIT_INDEXED_NO_SENSOR_INPUT_OR_SCORE_CHANGE",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-017-A",
+      "source": "ORG-04 lines 4,9,19,25,27,36-45, 290, 316, 363, 482; original Git blob f65992902285e693b96e993dae3e7c3bf2535793; LIT-2023-MO-MICROCT-SPH",
+      "claim": "Mo et al. combined X-ray microCT coffee-matrix reconstructions with smoothed-particle-hydrodynamics simulations and reported significant inertial effects under espresso-typical pressure gradients. This does NOT demonstrate fully turbulent flow throughout an actual user's puck or a preferred flavor/flow target.",
+      "grade": "PUBLISHER_AUTHOR_PUBMED_ABSTRACT_VERIFIED_EXPERIMENT_PLUS_NUMERICAL_MODEL_FULL_METHODS_NOT_READ",
+      "primary_sources": [
+        "https://www.nature.com/articles/s41598-023-42380-y",
+        "https://pubmed.ncbi.nlm.nih.gov/37773195/",
+        "https://arxiv.org/abs/2305.03911"
+      ],
+      "current_app": "site/lib/engine.js Git blob bc8bbcee9ec349145a51552ab5dd3337115feca6; style-specific recommendations and recorded measured shots; no pressure/microCT/flow sensor",
+      "result": "HYDRAULICS_CLAIM_QUALIFIED_NO_RECOMMENDATION_TURBULENCE_OR_NUMERIC_CHANGE",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-017-B",
+      "source": "ORG-04 lines 4,9,19,25,27,36-45, 290, 316, 363, 482; original Git blob f65992902285e693b96e993dae3e7c3bf2535793; LIT-2023-MO-MICROCT-SPH",
+      "claim": "Mo et al. report a post-extraction decrease in porosity from bottom outlet toward top inlet for tested powder matrices, with a pressure-dependent erosion model providing a possible explanation. It is a measured cross-section/simulation result in their experiments, not proof that all basket/machine architectures share an identical pattern or that a dosing change improves taste.",
+      "grade": "PUBLISHER_PUBMED_AUTHOR_ABSTRACT_LEVEL_MICROCT_RESULT_FULL_IMAGES_UNVERIFIED",
+      "primary_sources": [
+        "https://www.nature.com/articles/s41598-023-42380-y",
+        "https://pubmed.ncbi.nlm.nih.gov/37773195/"
+      ],
+      "current_app": "site/lib/engine.js Git blob bc8bbcee9ec349145a51552ab5dd3337115feca6; style-specific recommendations and recorded measured shots; no pressure/microCT/flow sensor",
+      "result": "PAPER_SCOPE_INDEXED_NO_UNIVERSAL_BASKET_OR_TASTE_CHANGE",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-017-C",
+      "source": "ORG-04 lines 4,9,19,25,27,36-45, 290, 316, 363, 482; original Git blob f65992902285e693b96e993dae3e7c3bf2535793; LIT-2023-LEE-UNEVEN-2PATH",
+      "claim": "Lee, Smith and Arshad derive a two-parallel-path reactive-flow/dissolution model with small initial porosity/permeability asymmetry; their numerical results can produce finer-grind extraction collapse through increased imbalance, but do not independently image actual puck channels in a member's shot.",
+      "grade": "PEER_REVIEWED_INSTITUTION_FINAL_ABSTRACT_AND_AUTHOR_PREPRINT_FORMULATION; FINAL_FULL_PDF_UNVERIFIED",
+      "primary_sources": [
+        "https://pure.hud.ac.uk/en/publications/uneven-extraction-in-coffee-brewing/",
+        "https://arxiv.org/abs/2206.12373"
+      ],
+      "current_app": "site/lib/engine.js Git blob bc8bbcee9ec349145a51552ab5dd3337115feca6; style-specific recommendations and recorded measured shots; no pressure/microCT/flow sensor",
+      "result": "CAUSAL_MODEL_SUPPORTS_UNCERTAINTY_NOT_PUCK_CHANNEL_DIAGNOSIS_OR_GRIND_CALIBRATION",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-017-D",
+      "source": "ORG-04 lines 4,9,19,25,27,36-45, 290, 316, 363, 482; original Git blob f65992902285e693b96e993dae3e7c3bf2535793; LIT-2023-LEE-UNEVEN-2PATH",
+      "claim": "The published Lee model is low dimensional, and the available author text assumes constant total flow per grind setting and one simplified transfer term despite real coffee's bimodal particles. These modeled conditions are not universal pressure/temperature/taste trajectories or evidence that a particular member shot needs two changes.",
+      "grade": "AUTHOR_PREPRINT_MODEL_ASSUMPTIONS_CHECKED_FINAL_PEER_REVIEW_VERSION_NOT_TEXT_COMPARED",
+      "primary_sources": [
+        "https://arxiv.org/abs/2206.12373",
+        "https://pure.hud.ac.uk/en/publications/uneven-extraction-in-coffee-brewing/"
+      ],
+      "current_app": "site/lib/engine.js Git blob bc8bbcee9ec349145a51552ab5dd3337115feca6; style-specific recommendations and recorded measured shots; no pressure/microCT/flow sensor",
+      "result": "NO_NEW_SENSOR_CONFIDENCE_SCORE_OR_MULTI_VARIABLE_CORRECTION",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-017-E",
+      "source": "ORG-04 lines 4,9,19,25,27,36-45, 290, 316, 363, 482; original Git blob f65992902285e693b96e993dae3e7c3bf2535793; MFR-DECENT-2026-DE1-MANUAL",
+      "claim": "Decent's official machine guide distinguishes pressure-target from flow-target control and says a programmed flow limit can prevent reaching pressure target; its product overview claims automatic saturation detection. These are manufacturer control-feature descriptions, not independent proof of universal preinfusion duration, pressure-optimal flavor or sensor accuracy.",
+      "grade": "MANUFACTURER_OFFICIAL_FULL_TEXT_FOR_CONTROL_OPERATION_NO_INDEPENDENT_SENSOR_TRIAL",
+      "primary_sources": [
+        "https://decentespresso.com/docs/de1_manual",
+        "https://en.decentespresso.com/overview"
+      ],
+      "current_app": "site/lib/engine.js Git blob bc8bbcee9ec349145a51552ab5dd3337115feca6; style-specific recommendations and recorded measured shots; no pressure/microCT/flow sensor",
+      "result": "CONTROL_CAPABILITY_DISTINGUISHED_FROM_VERIFIED_FLAVOR_NO_FIXED_PREINFUSION_OR_AUTOMATIC_POLICY",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [
@@ -1004,29 +1111,29 @@
     "Reproduce another narrow Locked-compatible Log Shot > Rate > Recommendation UX/logic defect in actual current code; add risk-proportionate tests, same-commit journal, nonforce CI/merge only if proven. R455-DEC-001 remains awaiting explicit owner choice."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-016",
-    "base_development_sha": "dc500285460ca2a7d6a6bdf2853520a2685ee844",
+    "id": "R455-017",
+    "base_development_sha": "6fa001ee97ae5601b973924d2614809834308b6e",
     "source_ids": [
-      "LIT-2020-ESPRESSO-GRIND-PEAK",
-      "LIT-2023-GAGNE-GRINDER-PSD-24",
-      "LIT-2023-ESPRESSO-PSD-COMPRESSION"
+      "LIT-2023-MO-MICROCT-SPH",
+      "LIT-2023-LEE-UNEVEN-2PATH",
+      "MFR-DECENT-2026-DE1-MANUAL"
     ],
     "source_claim_checks": [
-      "R455-EV-CIT-016-A",
-      "R455-EV-CIT-016-B",
-      "R455-EV-CIT-016-C",
-      "R455-EV-CIT-016-D",
-      "R455-EV-CIT-016-E"
+      "R455-EV-CIT-017-A",
+      "R455-EV-CIT-017-B",
+      "R455-EV-CIT-017-C",
+      "R455-EV-CIT-017-D",
+      "R455-EV-CIT-017-E"
     ],
-    "number_of_curated_sources": 28,
-    "total_evidence_checks": 59,
-    "original_report_full_bodies_reviewed": "9/9 previously; 3 original reports relevant passages rechecked; all original citations NOT verified",
-    "research_pack": "TWO_PROJECT_ZIPS_METADATA_ONLY_RAW_BYTES_ACCESS_DENIED",
+    "number_of_curated_sources": 31,
+    "total_evidence_checks": 64,
+    "original_report_full_bodies_reviewed": "9/9 previously; original #04 relevant portions directly rechecked; source bibliography is PARTIAL",
+    "research_pack": "TWO_PROJECT_ZIPS_METADATA_ONLY_RAW_BYTES_NOT_VERIFIED; current Library title-only search returned no ZIP",
     "s019": "ORIGINAL_PDF_NOT_RETRIEVED",
-    "google_drive_search": "espresso found Roast Color sheet only; S019/slow feeding no search result; DIC backup/media folders unrelated",
+    "google_drive_search": "espresso research, S019, slow feeding and DIC_Espresso yielded no results; Roast Color is previously indexed only",
     "github267_line_credit": 0,
     "app_changes": false,
     "production_deployed": false,
-    "status": "FIVE_PRIMARY_METHOD_CLAIM_CHECKS_DOCS_ONLY_PR_AND_CI_PENDING"
+    "status": "FIVE_CITATION_AND_MACHINE_CAPABILITY_CLAIMS_REVIEWED_DOCS_ONLY_PENDING_CI"
   }
 }
