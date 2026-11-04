@@ -1,3 +1,21 @@
+## November 4 UTC — #33 pre-CI fixture review found an escaped regex in new tests (TESTING)
+
+Static branch readback detected that three source-window regular expressions were accidentally double-escaped (matching literal `\\s` instead of actual whitespace). Replaced only those test regex tokens before claiming any passing tests. Parser/source logic unchanged. Prior first PR head remains an unverified CI outcome; corrected head must pass genuine Node and exact-head checks. SAME-COMMIT journal update. [skip netlify]
+
+---
+
+## November 4 UTC — #33 three yearless harvest-window source adjudications (#22/#286/#287), TESTING
+
+**Recovery/authority:** Autonomous Issue #33 development only, start development `f9db48985cb7610895ae0792ea6d2fcdabe0f3a2`, AGENTS, AI entrypoint/preflight, current journal/status, Master Spec, Decision Ledger, approval coverage and queue read; #267 V2 and #96 remain separately owned; open PR367 not modified. Existing READY 7 / DEPLOYED 90 / IN_PROGRESS 3 remain unchanged; Release14 production unchanged. Original603 Oct29 CSV blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6` preserved.
+
+**Current official selected public text review:** #22 Black River Honduras COMSA prints `Harvest: December - April` and Natural process; #286 Roadmap Worka Sakaro prints `Harvest: Nov - Jan` and separately has a Coffee Review dated November 2025; #287 Roadmap Mexico Angel Albino Corzo prints `Harvest: December - March` and Washed. All are recurring source harvest windows, NOT selected dated release labels. The Oct29 original603 register showed release labels carrying these windows; it is historic evidence, not proof of an unchanged present parser defect. Source evidence, exact product URLs, role boundaries and limitation captured in `docs/audits/issue33-original603-seasonal-harvest-current3-20261104.json` (public web text, not hashed raw HTML or live app). No inventing a crop year.
+
+**SAME-COMMIT scoped test + journal + receipt:** `tests/coffee-issue33-original603-seasonal-harvest-controls.test.mjs` adds three exact-product positive-source yearless harvest negatives and two adversarial controls for genuine dated release and unrelated prior Coffee Review/catalog year; preserve supplementary harvest evidence. No runtime logic, frozen603/oracle/captures/scorer, #267 V2, #96, queue, Auth/member/provider or production change.
+
+**PENDING:** actual exact PR-head Node22/approval/changed-surface CI, repair any genuine test failures, safe nonforce merge and exact merged-source checks. Fresh DNS-pinned raw current official parser/HTML remains UNVERIFIED; no READY promotion/603 certification based on this synthetic suite. Next prioritize scoped real HTML probe and reconcile the three Oct29 release-label mismatches against current source. [skip netlify]
+
+---
+
 ## November 4 UTC — #33 Dehab #188 exact selected present Kaffa Forest locality VERIFIED / READY, NOT DEPLOYED
 
 **Integrated:** [PR494](https://github.com/Schulzet3/The-Dial-In-Collective/pull/494) nonforce squash merged `3fb6a2dedca7bd11cb663c051a68b8ddaf758140`; source Git tree `065274232ce0b192a3d1d123450950f773c193bf` identical to corrected tested head `0d3eafac3cde13d377aec4d295ffb43783e1229d`. First head Node [41770805094](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41770805094) genuinely FAILED one new unrelated-section negative (2329 PASS/1 FAIL/6 SKIP). Same-commit correction excludes `Other Coffees` from selected present-farm biosphere evidence; final exact PR-head Node [41771117559](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41771117559) **2330 PASS/0 FAIL/6 SKIP**, cloud/mobile/browser, SQL, security, source, approval all SUCCESS. Exact merged Node [41771394973](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41771394973) **2330 PASS/0 FAIL/6 SKIP**, browser/cloud [41771395020](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41771395020), approval41771394933 and queue41771394836 SUCCESS. Frozen original603 [41771394753](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41771394753) SKIPPED, not PASS.
