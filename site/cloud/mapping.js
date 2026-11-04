@@ -50,7 +50,9 @@ export function hydrate(raw){
  // Restore it after hydration so the recipe card and latest-shot advice agree.
  const latestByVersion=new Map();
  for(const sh of s.shots){
-  if(sh.hidden)continue;
+  // Legacy rows without a usable date remain saved, but cannot be the latest
+  // recipe-feedback observation or an ordering anchor.
+  if(sh.hidden||typeof sh.timestamp!=='string'||!sh.timestamp.trim())continue;
   if(!latestByVersion.has(sh.setupVersionId))latestByVersion.set(sh.setupVersionId,new Map());
   const byCoffee=latestByVersion.get(sh.setupVersionId);
   if(!byCoffee.has(sh.coffeeId))byCoffee.set(sh.coffeeId,new Map());
@@ -68,9 +70,41 @@ export function hydrate(raw){
  return s;
 }
 export function applyPending(state,events){
- const s=C.clone(state);
- for(const event of events){if(event.status!=='pending')continue;const p=event.payload;
-  if(event.action==='save_shot'&&!s.shots.some(sh=>sh.id===p.id)&&(!p.expected_revision||p.expected_revision===0)){
+ let s=C.clone(state);
+ for(const event of events){
+  if(event.status!=='pending'||event.action!=='save_shot'||!event.payload)continue;
+  const p=event.payload;
+  // A queued revisioned edit is an owner-local preview, never a server write.
+  // Stage separately so invalid or stale edits cannot partially alter the cache.
+  if(Number.isInteger(p.expected_revision)&&p.expected_revision>0){
+   const old=s.shots.find(sh=>sh.id===p.id);
+   const setup=old&&s.setups.find(x=>x.id===old.setupId);
+   if(!old||!setup||old.revision!==p.expected_revision||
+      !setup.versions.some(v=>v.id===old.setupVersionId)||
+      typeof p.notes!=='string'||!p.taste||
+      !['dose_g','yield_g','time_s','grind_setting'].every(k=>Number.isFinite(p[k])))continue;
+   const preview=C.clone(s),edited=preview.shots.find(sh=>sh.id===p.id);
+   const previousSetup=preview.activeSetupId;
+   const editingSetup=preview.setups.find(x=>x.id===edited.setupId);
+   const previousVersion=editingSetup.activeVersionId;
+   try{
+    preview.activeSetupId=editingSetup.id;
+    editingSetup.activeVersionId=edited.setupVersionId;
+    E.editShot(preview,edited.id,{doseG:p.dose_g,yieldG:p.yield_g,timeS:p.time_s,
+     grindSetting:p.grind_setting,tempC:p.temperature_c,tasteScales:p.taste,notes:p.notes});
+    const rec=E.recommendation(preview,edited.coffeeId,{style:edited.style,
+     basketId:edited.basketId,feedMode:edited.feedMode||undefined,ignoreAdvice:true});
+    if(rec)edited.suggestion=E.nextAdvice(preview,edited,rec);
+    edited.cloudPending=true;
+    s=preview;
+   }catch{/* Keep the pending event; never render a partially applied edit. */}
+   finally{
+    editingSetup.activeVersionId=previousVersion;
+    preview.activeSetupId=previousSetup;
+   }
+   continue;
+  }
+  if(!s.shots.some(sh=>sh.id===p.id)&&(!p.expected_revision||p.expected_revision===0)){
    const previous=s.activeSetupId;s.activeSetupId=p.setup_id;
    if(M.activeVersion(s)?.id===p.setup_version_id){try{const sh=E.saveShot(s,p.library_entry_id,{id:p.id,timestamp:p.pulled_at,doseG:p.dose_g,yieldG:p.yield_g,timeS:p.time_s,grindSetting:p.grind_setting,tempC:p.temperature_c,style:p.style,basketId:p.basket_version_id,feedMode:p.feed_mode,tasteScales:p.taste,notes:p.notes},{allowLegacyCustom:p.style==='Custom'});if(p.bag_id!=null)sh.bagId=p.bag_id;sh.cloudPending=true;}catch{/* Kept in the durable outbox even if it cannot be rendered. */}}
    s.activeSetupId=previous;

@@ -34,8 +34,11 @@ def target(raw):
  if isinstance(raw,dict):raw=raw.get('src') or raw.get('url') or raw.get('contentUrl')
  if not isinstance(raw,str):return None
  if raw.startswith('//'):raw='https:'+raw
- u=urllib.parse.urlsplit(raw)
- if u.scheme!='https' or not u.hostname or u.username or u.password or u.port or len(raw)>3000:return None
+ try:
+  u=urllib.parse.urlsplit(raw)
+  if u.scheme!='https' or not u.hostname or u.username or u.password or u.port is not None or len(raw)>3000:return None
+ except ValueError:
+  return None
  if '.' not in u.hostname or re.search(r'\.(?:local|localhost|internal|invalid|test)$',u.hostname,re.I):return None
  try:ipaddress.ip_address(u.hostname);return None
  except ValueError:pass

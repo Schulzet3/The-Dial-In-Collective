@@ -23,9 +23,9 @@ if(process.env.SSL_CERT_FILE){
 const browser=await chromium.launch({executablePath,headless:true,proxy,args:['--disable-dev-shm-usage','--disable-background-networking',...extraArgs]});
 const entries=[];
 for(const folder of await fs.readdir(path.join(root,'cases'))){try{const p=JSON.parse(await fs.readFile(path.join(root,'cases',folder,'source-packet.json'),'utf8'));entries.push(p);}catch{}}
-const selected=manifest.roasters.map(r=>({id:r.id,cases:r.selected_urls.map(u=>entries.find(p=>p.source_url===u)).filter(Boolean)}));
+const selected=manifest.roasters.map(r=>({id:r.id,cases:r.selected_urls.map(u=>{const packet=entries.find(p=>p.source_url===u);if(!packet)throw new Error('Missing selected public source packet: '+u);return packet;})}));
 const results=[];let cursor=0,completed=0;
-const publicUrl=raw=>{try{const u=new URL(raw);return u.protocol==='https:'&&!u.username&&!u.password&&!u.port&&!isIP(u.hostname)&&u.hostname.includes('.')&&!/\.(?:localhost|local|internal|invalid|test|lan|home|corp)$/.test(u.hostname);}catch{return false;}};
+const publicUrl=raw=>{try{const u=new URL(raw);const host=u.hostname.replace(/\.+$/,'');return u.protocol==='https:'&&!u.username&&!u.password&&!u.port&&!isIP(host)&&host.includes('.')&&!/\.(?:localhost|local|internal|invalid|test|lan|home|corp)$/.test(host);}catch{return false;}};
 const sha=data=>crypto.createHash('sha256').update(data).digest('hex');
 async function capture(packet){
  const dir=path.join(out,packet.id);await fs.mkdir(dir,{recursive:true});const receipt=path.join(dir,'receipt.json');

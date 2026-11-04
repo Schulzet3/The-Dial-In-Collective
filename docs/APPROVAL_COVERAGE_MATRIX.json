@@ -39,6 +39,7 @@
     "current_owner_github_free_private_no_upgrade_20261020",
     "current_owner_grinder_range_info_20261019",
     "current_owner_hands_free_release_from_chat_20261021",
+    "current_owner_meaningful_yield_20261104",
     "current_owner_no_netlify_credit_checks_20261022",
     "current_owner_oct22_refinements_20261022",
     "current_owner_one_visible_recipe_internal_families_20261020",
@@ -97,6 +98,35 @@
     "pending_release_field_note": "Schema compatibility name; this record is a consumed HISTORICAL release, not a pending authorization."
   },
   "contracts": [
+    {
+      "id": "issue455_meaningful_yield_step",
+      "decision_key": "current_owner_meaningful_yield_20261104",
+      "scope": "Owner-approved 5 g/proportional next-shot yield changes and cautious same-coffee sweetness comparisons ONLY; preserve five ratings, one control, style/feed separation, history, privacy and no publication",
+      "implementation": "SOURCE_READY_NOT_DEPLOYED_PR584_MERGED_163b73edd3210077ce76fdd2f86016276a7f015e",
+      "device_acceptance": "RETIRED_NOT_REQUIRED; no mandatory physical-device signoff. Real signed-in/device empirical tasting not claimed",
+      "assertions": [
+        {
+          "path": "site/lib/engine.js",
+          "contains": "function meaningfulYieldStep(shot)"
+        },
+        {
+          "path": "site/lib/engine.js",
+          "contains": "function comparableSweetnessYields(s,shot)"
+        },
+        {
+          "path": "site/lib/engine.js",
+          "contains": "function sweetnessOnlyYieldAdvice(s,shot)"
+        },
+        {
+          "path": "site/lib/ui.js",
+          "contains": "advice?.evidenceNote"
+        },
+        {
+          "path": "tests/issue455-yield-step.test.mjs",
+          "contains": "#455 default sweetness-only:"
+        }
+      ]
+    },
     {
       "id": "fast_flow_sixth_style_hybrid",
       "decision_key": "current_owner_fast_flow_hybrid_20261022",
@@ -2059,7 +2089,39 @@
       "original603": "SKIPPED_NOT_PASS",
       "release": "NOT_AUTHORIZED_NO_CANDIDATE",
       "netlify_current": "6ae8006cd64b30ae9046e44d",
-      "pending": "FIRST_REAL_OWNER_APPROVED_BATCH_STAGING_AND_PROVIDER_POSTFLIGHT_UNEXERCISED_ISSUE_417"
+      "pending": "FIRST_REAL_OWNER_APPROVED_BATCH_STAGING_AND_PROVIDER_POSTFLIGHT_UNEXERCISED_ISSUE_417",
+      "first_live_release": {
+        "status": "VERIFIED_PROVIDER_DEPLOYED",
+        "release_id": "DIC-20261103-READY335-15",
+        "candidate_sha": "f1e150a2e7c95764c4a2d8760886aab23c2bfc5e",
+        "release_sha": "31c66832a28247e657a2bf89592ebc1e2f48dfc5",
+        "netlify_deploy_id": "6aea62463d08ddf08e0bec7b",
+        "netlify_state": "READY_CURRENT",
+        "scope": [
+          "site/lib/engine.js"
+        ],
+        "owner_ready_item_ids": [
+          "DIC-Q-335-historical-grind-range-evidence"
+        ],
+        "ci_runs": [
+          41732097245,
+          41732097348,
+          41732097303,
+          41732097396
+        ],
+        "controller_run": 41732438358,
+        "next_release_continuity": {
+          "source_merge_sha": "a7b9e0826353cfb26acf612e628f64857bb3617f",
+          "main_fix_pr": 465,
+          "main_merge_sha": "a5b5c75933501d778ea01cd02e82589f51ef7cd6",
+          "tests": "144 PASS, 0 FAIL, exact main PR and merged source",
+          "backup_pin": "31c66832a28247e657a2bf89592ebc1e2f48dfc5"
+        },
+        "preserved_other_ready": "DIC-Q-33-selected-buncho-station-history",
+        "live_http": "UNVERIFIED_DNS_BLOCKED",
+        "realtime_member_device": "NOT_EXERCISED",
+        "data": "Supabase read-only table/row aggregates; no pre/post content-hash comparison"
+      }
     }
   }
 }

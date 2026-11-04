@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "kind": "THREE_CASE_CURRENT_OFFICIAL_SELECTED_SOURCE_VERIFICATION",
+  "state": "VERIFIED_NARROW_READY_NOT_DEPLOYED",
+  "created_utc": "2026-11-04",
+  "parent_development_sha": "5a099bf192f11c64f27a40c9cffcd2ad8c2b72c2",
+  "source_workflow": ".github/workflows/roaster-source-probe.yml",
+  "marker": "[dic-issue33-fourteenth3]",
+  "frozen_original603_not_modified": true,
+  "cases": [
+    {
+      "original603_number": 188,
+      "original_coffee": "42 Series- Ethiopia Dehab's Diamond",
+      "official_url": "https://larryscoffee.com/products/coffee-111",
+      "question": "Selected current Ethiopia Dehab lot, tasting, release and growing-location fields; do not reuse stale original expected flavors."
+    },
+    {
+      "original603_number": 206,
+      "original_coffee": "Peru HB",
+      "official_url": "https://lowcountrycoffeeroasters.com/products/peru-hb-1",
+      "question": "Current Chanchamayo region text vs labeled Peru location; evaluate current actual parser before claiming omission."
+    },
+    {
+      "original603_number": 320,
+      "original_coffee": "Costa Rica Sonora Honey",
+      "official_url": null,
+      "question": "Compare exact original URL, current selected H1 and published processing, avoid title-only inference."
+    }
+  ],
+  "current_parser_fields_verified": false,
+  "exact_current_html_sha256": null,
+  "source_run": null,
+  "acceptance_pending": [
+    "Safe nonforce PR and passing applicable exact-source PR-head CI",
+    "Run current official guarded 3-case selection on merged source",
+    "Inspect all three selected H1, raw HTML SHA256, parsed fields and conflicts",
+    "Individually adjudicate omissions/conflicts and commit durable verified findings"
+  ],
+  "no_deployment_authorized": true,
+  "actual_source_run": {
+    "run": 41751890017,
+    "job": 126318687619,
+    "source_sha": "03ebaf9c7b56de8f8dba00198e40814c6c72a4ee",
+    "summary": {
+      "fetched": 3,
+      "parsed": 3,
+      "manual_certified": 0
+    },
+    "cases": [
+      {
+        "number": 188,
+        "selected_h1": "42 Series- Ethiopia Dehab’s Diamond",
+        "html_sha256": "33a0f68f72271af8021d84413bf5d7219087ead2977c4d8c132547bf2ff3eafb",
+        "origin": "Ethiopia",
+        "release_label": "42 Series",
+        "conflicts": [],
+        "assessment": "Release, roast and producer currently supported; narrower Kaffa Forest geographic proof remains qualified."
+      },
+      {
+        "number": 206,
+        "selected_h1": "Peru HB",
+        "html_sha256": "cffb49115e9a3b698a5710555a66600d64ce2693750d8c2b9aae16e417b45f19",
+        "origin_before": "Peru",
+        "exact_current_quote": "Peru comes to us from central Peru, the Chanchamayo region and is produced in small farms.",
+        "expected_after": "Chanchamayo, Peru",
+        "conflicts": [],
+        "assessment": "Current selected named growing-region omission reproduced; after-code current official rerun required."
+      },
+      {
+        "number": 320,
+        "selected_h1": "Costa Rica Sonora Honey",
+        "html_sha256": "b57eb30625b7fd0643c531e58d7571dd8f7815bc72025cedcc4018746e4e2668",
+        "process": "Other/Unknown",
+        "conflicts": [],
+        "assessment": "Correct Honey/Natural mixed process, do not fabricate single Honey; no current fixed roast printed."
+      }
+    ]
+  },
+  "code_fix": {
+    "source": "src/server/coffee-identity-evidence.mjs",
+    "test": "tests/coffee-issue33-lowcountry-selected-region.test.mjs",
+    "state": "UNVERIFIED_UNTIL_EXACT_CI"
+  },
+  "next": "Correct exact PR-head CI if necessary, nonforce merge, fresh current official 3-case parser/H1/hash, certify narrow READY only after verified field/conflict changes and isolation.",
+  "source_implementation": {
+    "pr": 475,
+    "reviewed_head": "6873c06505d1762fc05262a5cb7110f82ec0cf45",
+    "merged_sha": "36d16a8bf726df3541625a69b49d8f634cbed4af",
+    "tree": "cf51f3ad8b1e54cba45192fd7b4daaa88f97ebd4",
+    "node_ci": 41752527483,
+    "node_pass": 2314,
+    "node_fail": 0,
+    "node_skip": 6,
+    "cloud_mobile_browser": 41752527406,
+    "approval": 41752527329,
+    "queue_coverage": 41752527444,
+    "frozen603": "SKIPPED_NOT_PASS",
+    "source_run": 41752527382,
+    "source_job": 126320816967,
+    "source_artifact_id": 13287126269,
+    "source_artifact_digest": "sha256:24cfcc1825eb2f06eebb10f27525dc6ac62ec03cc463a5953402162177a38e05",
+    "exact_product_comparisons": 3,
+    "only_changed_number": 206,
+    "only_changed_field": "origin",
+    "all_three_conflicts_unchanged": true,
+    "other_two_field_maps_unchanged": true,
+    "raw_html_same": false,
+    "after": [
+      {
+        "number": 188,
+        "h1": "42 Series- Ethiopia Dehab’s Diamond",
+        "html_sha256": "7fafe7621a6db8d331ccb0ab1faa24e3fab4057eecac3bdb7af80a421b8eab2a",
+        "origin": "Ethiopia",
+        "release_label": "42 Series",
+        "conflicts": [],
+        "disposition": "Same canonical map; finer Kaffa Forest origin qualification not resolved."
+      },
+      {
+        "number": 206,
+        "h1": "Peru HB",
+        "html_sha256": "a93efb6b4938495c8dc184b58c2291cbfcc51fd38d6728aff251f8a11e37fd88",
+        "origin": "Chanchamayo, Peru",
+        "conflicts": [],
+        "disposition": "Exact direct selected growing region recovered, no other parsed field changed."
+      },
+      {
+        "number": 320,
+        "h1": "Costa Rica Sonora Honey",
+        "html_sha256": "f8842c9d0455549b7318eefe1cd6cdc5b3bd95dbab96f6449df6b66c05c475d2",
+        "origin": "Central Valley, Costa Rica",
+        "process": "Other/Unknown",
+        "conflicts": [],
+        "disposition": "Honey/Natural mixed process safe and unchanged."
+      }
+    ]
+  },
+  "queue_item": "DIC-Q-33-selected-lowcountry-chanchamayo-origin",
+  "remaining": [
+    "Full original603 individual semantic review remains open, original 153 contextual /29 missing-literal historical labels unchanged",
+    "No current real hosted GoTrue/member acceptance in this source-only correction",
+    "Source file shared with prior READY Buncho item; isolate both and HOLD if a selected release would carry unready changes"
+  ],
+  "original603_frozen_register_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "production_mutations": 0
+}

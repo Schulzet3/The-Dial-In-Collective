@@ -1,3 +1,5 @@
+import {coffeeHtmlElements} from './coffee-html-structure.mjs';
+import {coffeeHtmlAttributes} from './coffee-product-scope.mjs';
 // Literal selected-product hero facts, never navbar/related coffee data.
 // A location above the exact coffee heading and its adjacent three-note
 // profile are stronger than title-derived municipality names or marketing SEO.
@@ -41,4 +43,37 @@ export function hasIncompatibleCurrentTastingList(html,candidate){
   const value=decode(m[1]);
   return value.length>4&&!/\b(?:descriptors of|for more info|learn more|never add flavoring)\b/i.test(value)&&normNotes(value)!==desired;
  });
+}
+
+// Exact selected current-origin captions outrank an uncorroborated regional
+// SEO detail. This helper only identifies the directly printed country.
+export function selectedCurrentOriginCaption(html,{name=''}={}){
+ if(typeof html!=='string'||html.length>1900000||!name)return null;
+ const {nodes,truncated}=coffeeHtmlElements(html);
+ if(truncated)return null;
+ const titles=nodes.filter(node=>node.tag==='h1'&&norm(html.slice(node.headEnd,node.contentEnd))===norm(name));
+ if(titles.length!==1)return null;
+ const ancestors=index=>{
+  const out=[];
+  for(let n=index,depth=0;n!==null&&depth<128;n=nodes[n]?.parent??null,depth++)out.push(n);
+  return out;
+ };
+ const titleChain=ancestors(nodes.indexOf(titles[0]));
+ const root=titleChain.find(i=>['product-sticky','article'].includes(nodes[i].tag));
+ if(root===undefined)return null;
+ const matches=[];
+ for(let i=0;i<nodes.length;i++){
+  const node=nodes[i],cls=(coffeeHtmlAttributes(node.attributes).class||'').split(/\s+/u);
+  if(node.tag!=='div'||!cls.includes('coffee-fact')||!ancestors(i).includes(root))continue;
+  const children=nodes.filter(child=>child.parent===i&&child.tag==='div');
+  if(children.length!==2)continue;
+  const roles=child=>(coffeeHtmlAttributes(child.attributes).class||'').split(/\s+/u);
+  const label=children.find(child=>roles(child).includes('coffee-fact__label'));
+  const value=children.find(child=>roles(child).includes('coffee-fact__value'));
+  if(!label||!value||norm(html.slice(label.headEnd,label.contentEnd))!=='current origin')continue;
+  const country=decode(html.slice(value.headEnd,value.contentEnd));
+  if(country.length>80||!countries.split('|').some(candidate=>norm(candidate)===norm(country)))return null;
+  matches.push(country);
+ }
+ return matches.length===1?{origin:matches[0]}:null;
 }

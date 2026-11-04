@@ -5,36 +5,172 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 540,
-    "first_unvalidated_manifest_file_index": 9,
-    "first_unvalidated_path": ".github/workflows/dic-single-use-release.yml",
-    "first_unvalidated_line": 1,
+    "strict_validated_lines": 5336,
+    "first_unvalidated_manifest_file_index": 59,
+    "first_unvalidated_path": "docs/DECISION_LEDGER.json",
+    "first_unvalidated_line": 446,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 542,
-    "first_unvalidated_file_index": 9,
-    "first_unvalidated_path": ".github/workflows/dic-single-use-release.yml",
-    "first_unvalidated_line": 1,
+    "strict_validated_lines": 6962,
+    "first_unvalidated_file_index": 48,
+    "first_unvalidated_path": "scripts/audit/coffee-frozen-ci.py",
+    "first_unvalidated_line": 2551,
     "legacy_v2_reported_count": 6462,
-    "legacy_v2_reported_count_is_not_strict_validated": true
+    "legacy_v2_reported_count_is_not_strict_validated": true,
+    "strict_live_counterpart_checked_through_line": 2550
   },
   "post_pin_drift": {
-    "observed_development_commit": "5c46d009f3d4366bc71fcb4590b2d0a619ae6ace",
+    "observed_development_commit": "bd48e191af5966251392cd0747d51c530e90437f",
     "strict_validated_added_lines": 1,
     "scope": "Single verified addition in first current source path; total post-pin live-code delta denominator not yet reconciled",
-    "rest_of_live_changes": "NOT_COMPLETELY_REVIEWED",
-    "live_fully_reviewed_files": 7,
-    "live_fully_reviewed_file_lines": 518,
-    "latest_reviewed_live_path": ".github/workflows/dic-chat-approved-release.yml",
-    "remaining_live_changes": "OTHER SOURCE DRIFT UNREVIEWED; do not claim current 100%",
+    "rest_of_live_changes": "NOT COMPLETE. Original project instructions rewritten 35-line live policy independently read/classified in S2-045; no original frozen/source counters credited. Pinned retention script identical live at observed head.",
+    "live_fully_reviewed_files": 36,
+    "live_fully_reviewed_file_lines": 2947,
+    "latest_reviewed_live_path": "scripts/audit/coffee-corpus-enrich.py",
+    "remaining_live_changes": "Direct semantic per-line review of the 37 modified original eligible files and 88 added code/workflow/test candidate paths is INCOMPLETE; exact full-tree machine inventory does not count as source review. Re-diff on later development HEAD.",
     "machine_only_diff_inventory_in_receipt": "docs/audits/issue267-v2-strict-batches/S2-003.json",
     "machine_only_changed_paths": 222,
     "machine_only_diff_commits": 243,
-    "other_live_paths_direct_semantic_status": "UNREVIEWED — unchanged first 4 workflows newly audited plus prior S2-001..004 only"
+    "other_live_paths_direct_semantic_status": "Pinned #32 current corpus-build.py 237 lines exact; ci-scope.mjs changed 116-line live code directly fully reviewed in S2-032. Remaining changed live paths pending.",
+    "partially_read_live_paths": [],
+    "latest_partially_validated_live_path": null,
+    "strict_validated_changed_live_lines": 2,
+    "roaster_source_probe": {
+      "source_blob": "766e94e803b6d3957e80ffd38a04ce32e287b7ba",
+      "pinned_blob": "663b8c01f7d164cd732ea5fb047a6c70230dedfe",
+      "full_line_count": 146,
+      "direct_receipts": [
+        "S2-019",
+        "S2-020"
+      ],
+      "changed_live_lines": [
+        122,
+        137
+      ],
+      "status": "FULL_SOURCE_LINE_REVIEW"
+    },
+    "visual_full_live": {
+      "blob_sha": "61173f8a9dffdd5fba82823b2b2cf3d5ba4841bf",
+      "total_lines": 86,
+      "receipt": "S2-022",
+      "exact_retained_pinned_lines": 83,
+      "live_new_lines": [
+        5,
+        6,
+        7
+      ]
+    },
+    "build_full_live": {
+      "blob_sha": "e7b64951452601c25cdc2a5e1069d4816e1421c2",
+      "total_lines": 40,
+      "receipt": "S2-022",
+      "new_or_changed_live_lines": [
+        15,
+        16,
+        17,
+        18,
+        27
+      ]
+    },
+    "reviewed_full_changed_module": {
+      "path": "scripts/audit/ci-scope.mjs",
+      "live_blob": "e51f249377a7f2df556d103012b145aabc1559b7",
+      "lines": 116,
+      "receipt": "S2-032",
+      "previous_pinned_blob": "591a988e13b2bc2fd06760e13cb98a98da2c69c5"
+    },
+    "strict_review_of_new_20261104_issue267_ocr_guard": {
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-036.json",
+      "merged_commit": "4057b7ed9cc49a365e109281b533cf42d6ff582a",
+      "original_pinned_image_blob": "2cc81eae9c06a5f337a908ca016d3885137cf084",
+      "merged_live_image_blob": "71a9eb96fb272fbcae792c3398bd911d7bfd1b38",
+      "merged_image_lines": 154,
+      "previous_identical_semantics_reused": 149,
+      "modified_or_inserted_live_source_lines": [
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "old_pinned_lines_replaced": [
+        37,
+        38
+      ],
+      "new_test_path": "tests/audit/test_coffee_image_url_target.py",
+      "new_test_blob": "50fd0917ab4307ea0aa2e44e03f350d649f4a6b7",
+      "new_test_lines": 52,
+      "unique_new_or_changed_live_lines_covered": 57,
+      "live_source_line_records": 206,
+      "all_other_postpin_drift_complete": false
+    },
+    "strict_reviewed_local_corpus_url_packet_fixes": {
+      "source_commit": "7c5d6b9e77dd19dffe2ec8444ff4dcfde8a57a33",
+      "source_blob": "cb849c7feb0f40852a15bcf1448aaee66d181b55",
+      "changed_line_numbers": [
+        26,
+        28
+      ],
+      "unchanged_pinned_lines": 63,
+      "tests": [
+        {
+          "path": "tests/audit/coffee-corpus-render-url-gate.test.mjs",
+          "blob": "43322091ef8df78d58d3235f2ba43fde338739f4",
+          "lines": 32
+        },
+        {
+          "path": "tests/audit/coffee-corpus-render-selection.test.mjs",
+          "blob": "7962155c237535189bfe8f3499e7f88abdf67090",
+          "lines": 38
+        }
+      ],
+      "source_changed_lines": 2,
+      "unique_new_test_lines": 70,
+      "total_unique_live_deltas_reviewed": 72,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-039.json",
+      "remaining_drift": "INCOMPLETE"
+    },
+    "local_snapshot_atomic_patch": {
+      "source_blob": "d9a9aa28461b10c5a4b9804b9f9fb2df2d1815e2",
+      "test_blob": "0a8ba8f509dc65fe1bcfe1ce4b7eeb75b998d6d8",
+      "source_lines_reviewed": 42,
+      "test_lines_reviewed": 75,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-LIVE-SNAPSHOT-20261104.json",
+      "merged_source_commit": "6f9177920dacdec6ca31d0206f3e92e6c08af33f",
+      "applicable_pr_head_checks": "6 SUCCESS, frozen603 SKIPPED",
+      "merged_exact_source_checks": "IN_PROGRESS_AT_S2_054_PREP",
+      "rest_of_live_code": "INCOMPLETE"
+    },
+    "artifact_inventory_symlink_guard": {
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-LIVE-ARTIFACT-SYMLINK-20261104.json",
+      "source_before": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "source_after": "926bfd49aed1e4426c2aa818b85ef7546d853a4f",
+      "source_new_lines": 2,
+      "tests_new_lines": 66,
+      "classification": "POST_PIN_CURRENT_FIX",
+      "status": "FIX_PROPOSED_CI_PENDING",
+      "other_drift": "INCOMPLETE"
+    },
+    "exact_tree_machine_inventory": "docs/audits/issue267-post-pin-tree-drift-20261104.json",
+    "exact_tree_machine_snapshot": {
+      "pinned_tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "current_tree": "cb9652be2c4cbd90b8a110e053c3d46a61eb1416",
+      "current_commit": "e72027d8ee96081ba1a1566d78e1c589d5b6517f",
+      "pinned_blob_files": 951,
+      "current_blob_files": 1287,
+      "changed": 394,
+      "unchanged": 893,
+      "modified": 58,
+      "added": 336,
+      "removed": 0,
+      "pinned_eligible_modified": 37,
+      "new_code_workflow_test_candidates": 88,
+      "semantic_line_credit": 0
+    }
   },
   "batches": [
     {
@@ -215,8 +351,1664 @@
       ],
       "live_blob": "6e9d973731975c9de65a3628153aba635bbd1d25",
       "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-009",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-009.json",
+      "frozen_file": ".github/workflows/dic-single-use-release.yml",
+      "frozen_lines": [
+        1,
+        53
+      ],
+      "pinned_file": ".github/workflows/dic-single-use-release.yml",
+      "pinned_lines": [
+        1,
+        53
+      ],
+      "live_lines": [
+        1,
+        53
+      ],
+      "shared_source_blob": "e5079152b5d912d0fbeee8a63c7d22d2794402ef",
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-010",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-010.json",
+      "frozen_file": ".github/workflows/isolated-sql-regression.yml",
+      "frozen_lines": [
+        1,
+        53
+      ],
+      "pinned_file": ".github/workflows/isolated-sql-regression.yml",
+      "pinned_lines": [
+        1,
+        54
+      ],
+      "live_lines": [
+        1,
+        58
+      ],
+      "blobs": [
+        "c80828ebe47c18f236f4edebb1edbc27a1deafc4",
+        "a3d8225a912a1fc90071247c182516e727dde89e",
+        "55479888255bb4a5b97d742b458708c6afa14eef"
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-011",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-011.json",
+      "frozen_file": ".github/workflows/issue-5-10-hosted-smoke.yml",
+      "frozen_lines": [
+        1,
+        28
+      ],
+      "pinned_file": ".github/workflows/issue-5-10-hosted-smoke.yml",
+      "pinned_lines": [
+        1,
+        28
+      ],
+      "live_lines": [
+        1,
+        28
+      ],
+      "shared_source_blob": "ed5888042a3886a6c5d73c4129a593d944adb019",
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-012",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-012.json",
+      "frozen_file": ".github/workflows/issue161-full-repository-scan.yml",
+      "frozen_lines": [
+        1,
+        81
+      ],
+      "pinned_file": ".github/workflows/issue161-full-repository-scan.yml",
+      "pinned_lines": [
+        1,
+        81
+      ],
+      "live_lines": [
+        1,
+        81
+      ],
+      "shared_source_blob": "e33979519ebe99a4fdd31aeb1bf6d062dddad909",
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-013",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-013.json",
+      "frozen_file": ".github/workflows/issue96-source-audit.yml",
+      "frozen_lines": [
+        1,
+        23
+      ],
+      "frozen_blob": "135226b7970f29b20cbd62da83345f6abae7d80f",
+      "pinned_file": ".github/workflows/issue267-frozen-inventory.yml",
+      "pinned_lines": [
+        1,
+        68
+      ],
+      "pinned_blob": "0e5846a00d5fd3c5e774099a4bf0875980789c84",
+      "observed_live_files": [
+        {
+          "path": ".github/workflows/issue96-source-audit.yml",
+          "lines": [
+            1,
+            23
+          ],
+          "blob_sha": "135226b7970f29b20cbd62da83345f6abae7d80f"
+        },
+        {
+          "path": ".github/workflows/issue267-frozen-inventory.yml",
+          "lines": [
+            1,
+            68
+          ],
+          "blob_sha": "0e5846a00d5fd3c5e774099a4bf0875980789c84"
+        }
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-014",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-014.json",
+      "frozen_file": ".github/workflows/nightly-backup.yml",
+      "frozen_lines": [
+        1,
+        56
+      ],
+      "frozen_blob": "3632be8d583ebfdf17974ed19029d18302d035a7",
+      "pinned_file": ".github/workflows/issue33-603-public-source.yml",
+      "pinned_lines": [
+        1,
+        40
+      ],
+      "pinned_blob": "f365384d67a3603e5e454d865610e89783f0aa89",
+      "live_files": [
+        {
+          "path": ".github/workflows/nightly-backup.yml",
+          "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+          "lines": 56
+        },
+        {
+          "path": ".github/workflows/issue33-603-public-source.yml",
+          "blob_sha": "f365384d67a3603e5e454d865610e89783f0aa89",
+          "lines": 40
+        }
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-015",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-015.json",
+      "frozen_file": ".github/workflows/roaster-source-probe.yml",
+      "frozen_lines": [
+        1,
+        49
+      ],
+      "frozen_blob": "30561a9361c4e6c47e6ddca2adb0ff6eb6750cfa",
+      "pinned_file": ".github/workflows/issue33-hosted-auth-e2e.yml",
+      "pinned_lines": [
+        1,
+        29
+      ],
+      "pinned_blob": "9bf42b40a7bea17234dee6e8bf4d847053d79cd7",
+      "live_frozen_path_blob": "766e94e803b6d3957e80ffd38a04ce32e287b7ba",
+      "live_frozen_path_total_lines": 146,
+      "live_individual_credited": 0,
+      "live_pinned_path_blob": "9bf42b40a7bea17234dee6e8bf4d847053d79cd7",
+      "live_pinned_full_lines": [
+        1,
+        29
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-016",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-016.json",
+      "frozen_file": ".github/workflows/security-inspection.yml",
+      "frozen_lines": [
+        1,
+        37
+      ],
+      "frozen_blob": "0eb072639634963edb4374b4578630ff7f3d96d3",
+      "pinned_file": ".github/workflows/issue33-source-bundle.yml",
+      "pinned_lines": [
+        1,
+        60
+      ],
+      "pinned_blob": "a24f076ef3f47289a0dd14708e0481b8039ec2ef",
+      "live_files": [
+        {
+          "path": ".github/workflows/security-inspection.yml",
+          "blob_sha": "0eb072639634963edb4374b4578630ff7f3d96d3",
+          "lines": 37
+        },
+        {
+          "path": ".github/workflows/issue33-source-bundle.yml",
+          "blob_sha": "a24f076ef3f47289a0dd14708e0481b8039ec2ef",
+          "lines": 60
+        }
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-017",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-017.json",
+      "frozen_file": ".github/workflows/visual-review.yml",
+      "frozen_lines": [
+        1,
+        91
+      ],
+      "frozen_blob": "11f7d6ad56bfe5228a4e5357aa9061d9b1f00b23",
+      "pinned_file": ".github/workflows/issue96-source-audit.yml",
+      "pinned_lines": [
+        1,
+        23
+      ],
+      "pinned_blob": "135226b7970f29b20cbd62da83345f6abae7d80f",
+      "reused_pinned_semantic_receipt": "S2-013",
+      "live_frozen_path_blob": "61173f8a9dffdd5fba82823b2b2cf3d5ba4841bf",
+      "live_uncredited_lines": 86,
+      "live_pinned_full_lines": [
+        1,
+        23
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-018",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-018.json",
+      "frozen_file": ".github/workflows/weekly-full-regression.yml",
+      "frozen_lines": [
+        1,
+        86
+      ],
+      "frozen_blob": "1fae89f9b7f514986a65b622506a11f78d623b36",
+      "pinned_file": ".github/workflows/nightly-backup.yml",
+      "pinned_lines": [
+        1,
+        56
+      ],
+      "pinned_blob": "3632be8d583ebfdf17974ed19029d18302d035a7",
+      "reused_pinned_semantic_receipt": "S2-014",
+      "live_files": [
+        {
+          "path": ".github/workflows/weekly-full-regression.yml",
+          "blob_sha": "1fae89f9b7f514986a65b622506a11f78d623b36",
+          "lines": 86
+        },
+        {
+          "path": ".github/workflows/nightly-backup.yml",
+          "blob_sha": "3632be8d583ebfdf17974ed19029d18302d035a7",
+          "lines": 56
+        }
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-019",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-019.json",
+      "frozen_file": ".gitignore",
+      "frozen_lines": [
+        1,
+        29
+      ],
+      "frozen_blob": "cc33dc08440db607da17b3af8f82295036561bec",
+      "pinned_file": ".github/workflows/roaster-source-probe.yml",
+      "pinned_lines": [
+        1,
+        52
+      ],
+      "pinned_blob": "663b8c01f7d164cd732ea5fb047a6c70230dedfe",
+      "pinned_total_lines": 146,
+      "live_partial_lines": [
+        1,
+        52
+      ],
+      "live_blob": "766e94e803b6d3957e80ffd38a04ce32e287b7ba",
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-020",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-020.json",
+      "frozen_file": "AGENTS.md",
+      "frozen_lines": [
+        1,
+        47
+      ],
+      "frozen_blob": "a0f7a7aeee70f5ff8810e63b4a2940497223510f",
+      "pinned_file": ".github/workflows/roaster-source-probe.yml",
+      "pinned_lines": [
+        53,
+        146
+      ],
+      "pinned_blob": "663b8c01f7d164cd732ea5fb047a6c70230dedfe",
+      "live_full_lines": [
+        1,
+        146
+      ],
+      "live_modified_lines": [
+        122,
+        137
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-021",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-021.json",
+      "frozen_file": "README.md",
+      "frozen_lines": [
+        1,
+        38
+      ],
+      "frozen_blob": "98f3264dfd13168838b921164396ba9e30e5f224",
+      "pinned_file": ".github/workflows/security-inspection.yml",
+      "pinned_lines": [
+        1,
+        37
+      ],
+      "pinned_blob": "0eb072639634963edb4374b4578630ff7f3d96d3",
+      "reused_pinned_semantic_receipt": "S2-016",
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-022",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-022.json",
+      "frozen_file": "build_cloud.mjs",
+      "frozen_lines": [
+        1,
+        37
+      ],
+      "frozen_blob": "4352b50ae7bbe5b41904fb3c317978220c82dfe1",
+      "pinned_file": ".github/workflows/visual-review.yml",
+      "pinned_lines": [
+        1,
+        98
+      ],
+      "pinned_blob": "2b266cfe079d7d93815446cf49c099e26d7e7cef",
+      "live_visual_full": [
+        1,
+        86
+      ],
+      "live_build_full": [
+        1,
+        40
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-023",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-023.json",
+      "frozen_file": "docs/ACTIVE_DECISION_AND_REQUIREMENT_RECONCILIATION_2026-10-19.md",
+      "frozen_lines": [
+        1,
+        53
+      ],
+      "frozen_blob": "1c78797e184c6cb8122bc45b59398c7530333496",
+      "pinned_file": ".github/workflows/weekly-full-regression.yml",
+      "pinned_lines": [
+        1,
+        86
+      ],
+      "pinned_blob": "1fae89f9b7f514986a65b622506a11f78d623b36",
+      "reused_semantic_receipt": "S2-018",
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-024",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-024.json",
+      "frozen_file": "docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md",
+      "frozen_lines": [
+        1,
+        135
+      ],
+      "frozen_blob": "7a2be3d0ee3102e62ca5679bfe91b41697089302",
+      "pinned_file": "build_cloud.mjs",
+      "pinned_lines": [
+        1,
+        40
+      ],
+      "pinned_blob": "e7b64951452601c25cdc2a5e1069d4816e1421c2",
+      "reused_pinned_semantic_receipt": "S2-022",
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-025",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-025.json",
+      "frozen_file": "docs/ADMIN_BETA_INVITATION_CONTROLS_DEV_2026-10-18.md",
+      "frozen_lines": [
+        1,
+        69
+      ],
+      "frozen_blob": "98f07574b096d450604be2c5d0a86f2083711af8",
+      "pinned_file": "eslint.config.mjs",
+      "pinned_lines": [
+        1,
+        34
+      ],
+      "pinned_blob": "5687bf820206a9a682e11544afd372a4a6c11b1f",
+      "reused_pinned_semantic_receipt": null,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-026",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-026.json",
+      "frozen_file": "docs/ADMIN_FOUNDATION_CHECKPOINT_2026-10-14.md",
+      "frozen_lines": [
+        1,
+        31
+      ],
+      "frozen_blob": "2c9c4f8d1392e9a6a6145a3c2b69f4b5475cad89",
+      "pinned_file": "netlify.toml",
+      "pinned_lines": [
+        1,
+        19
+      ],
+      "pinned_blob": "a8bb6cd41d2e2c939da8d369ee510eb9f2b4cc56",
+      "reused_pinned_semantic_receipt": null,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-027",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-027.json",
+      "frozen_file": "docs/ADMIN_PORTAL_FINAL_RELEASE_REVIEW_2026-10-21.md",
+      "frozen_lines": [
+        1,
+        55
+      ],
+      "frozen_blob": "538ca6adec844dd02fa50d9964e5cc628564bec9",
+      "pinned_file": "netlify/functions/coffee-url-preview.mjs",
+      "pinned_lines": [
+        1,
+        100
+      ],
+      "pinned_blob": "b982650d78920f77342f5ac78dce91ca394094cc",
+      "observed_live_lines": [
+        1,
+        100
+      ],
+      "live_blob": "b982650d78920f77342f5ac78dce91ca394094cc",
+      "old_v2_additional_credit": 0
+    },
+    {
+      "batch": "S2-028",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-028.json",
+      "frozen_files": [
+        {
+          "path": "docs/ADMIN_PORTAL_RELEASE_CANDIDATE_2026-10-21.md",
+          "blob": "0f30ad26b277b2ed675d5b91e487a3483684c9f1",
+          "lines": [
+            1,
+            26
+          ]
+        },
+        {
+          "path": "docs/AGTRON_AND_PERC_NARRATIVE_EXTRACTION_2026-10-17.md",
+          "blob": "4a38c7f7c78bf3ceabc539bf922db054c6eeadab",
+          "lines": [
+            1,
+            71
+          ]
+        }
+      ],
+      "pinned_files": [
+        {
+          "path": "netlify/functions/coffee-url-preview.mjs",
+          "blob": "b982650d78920f77342f5ac78dce91ca394094cc",
+          "lines": [
+            101,
+            192
+          ]
+        },
+        {
+          "path": "package.json",
+          "blob": "63518161d81489993cceffad18f55ce3a47f1958",
+          "lines": [
+            1,
+            15
+          ]
+        }
+      ],
+      "old_v2_additional_credit": 0
+    },
+    {
+      "batch": "S2-029",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-029.json",
+      "frozen_file": "docs/APPROVAL_COVERAGE_MATRIX.json",
+      "frozen_lines": [
+        1,
+        90
+      ],
+      "frozen_blob": "8ddf1cb21c2a8bc015a37a69b460ca94c75c7ced",
+      "pinned_files": [
+        {
+          "path": "scripts/audit/approval-coverage.mjs",
+          "blob": "788e174d264a040b5fdb9bbe9ca81cccb952022c",
+          "lines": [
+            1,
+            98
+          ]
+        },
+        {
+          "path": "scripts/audit/ci-scope.mjs",
+          "blob": "591a988e13b2bc2fd06760e13cb98a98da2c69c5",
+          "lines": [
+            1,
+            27
+          ]
+        }
+      ],
+      "live_source_drift_unreviewed": [
+        {
+          "path": "scripts/audit/ci-scope.mjs",
+          "live_blob": "e51f249377a7f2df556d103012b145aabc1559b7",
+          "live_lines": 116
+        }
+      ],
+      "old_v2_additional_credit": 0
+    },
+    {
+      "batch": "S2-030",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-030.json",
+      "frozen_file": "docs/APPROVAL_COVERAGE_MATRIX.json",
+      "frozen_lines": [
+        91,
+        127
+      ],
+      "pinned_file": "scripts/audit/coffee-adaptive-public-acceptance.mjs",
+      "pinned_lines": [
+        1,
+        145
+      ],
+      "pinned_live_identical": true,
+      "old_v2_additional_credit": 0
+    },
+    {
+      "batch": "S2-031",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-031.json",
+      "frozen_file": "docs/APPROVAL_COVERAGE_MATRIX.json",
+      "frozen_blob": "8ddf1cb21c2a8bc015a37a69b460ca94c75c7ced",
+      "frozen_lines": [
+        128,
+        273
+      ],
+      "pinned_file": "scripts/audit/coffee-completeness-live-probe.mjs",
+      "pinned_blob": "8f5d708497050f70ad92b6df4c9de07fe83f0794",
+      "pinned_lines": [
+        1,
+        329
+      ],
+      "pinned_live_identical": true,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-032",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-032.json",
+      "frozen_file": "docs/APPROVAL_COVERAGE_MATRIX.json",
+      "frozen_lines": [
+        274,
+        400
+      ],
+      "frozen_blob": "8ddf1cb21c2a8bc015a37a69b460ca94c75c7ced",
+      "pinned_file": "scripts/audit/coffee-corpus-build.py",
+      "pinned_blob": "84b7e9b137db74d70f7e471304ef86638fc1882c",
+      "pinned_lines": [
+        1,
+        237
+      ],
+      "pinned_live_identical": true,
+      "live_drift_file": "scripts/audit/ci-scope.mjs",
+      "live_drift_blob": "e51f249377a7f2df556d103012b145aabc1559b7",
+      "live_lines": [
+        1,
+        116
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-033",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-033.json",
+      "frozen_file": "docs/APPROVAL_COVERAGE_MATRIX.json",
+      "frozen_lines": [
+        401,
+        600
+      ],
+      "frozen_blob": "8ddf1cb21c2a8bc015a37a69b460ca94c75c7ced",
+      "pinned_files": [
+        {
+          "index": 33,
+          "path": "scripts/audit/coffee-corpus-capture.py",
+          "lines": [
+            1,
+            120
+          ],
+          "blob": "77710632ac842004fbd979208165cacdab295f5c",
+          "live_same": true
+        },
+        {
+          "index": 34,
+          "path": "scripts/audit/coffee-corpus-compare.mjs",
+          "lines": [
+            1,
+            68
+          ],
+          "blob": "133d6dbab5edde53180d86d04849bda8b2afb9ea",
+          "live_same": true
+        },
+        {
+          "index": 35,
+          "path": "scripts/audit/coffee-corpus-enrich.py",
+          "lines": [
+            1,
+            86
+          ],
+          "blob": "3b01264afa39a679e873571657eed9d9de2f59c9",
+          "live_same": true
+        }
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-034",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-034.json",
+      "frozen_file": "docs/APPROVAL_COVERAGE_MATRIX.json",
+      "frozen_lines": [
+        601,
+        800
+      ],
+      "frozen_blob": "8ddf1cb21c2a8bc015a37a69b460ca94c75c7ced",
+      "pinned_files": [
+        {
+          "index": 36,
+          "path": "scripts/audit/coffee-corpus-freeze.py",
+          "blob": "989928dc2b2881b01c780e0940f68ae677782e0d",
+          "lines": [
+            1,
+            65
+          ],
+          "live_same_at_base": true
+        },
+        {
+          "index": 37,
+          "path": "scripts/audit/coffee-corpus-image-audit.py",
+          "blob": "2cc81eae9c06a5f337a908ca016d3885137cf084",
+          "lines": [
+            1,
+            75
+          ],
+          "live_same_at_base": true
+        }
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-035",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-035.json",
+      "frozen_file": "docs/APPROVAL_COVERAGE_MATRIX.json",
+      "frozen_lines": [
+        801,
+        1022
+      ],
+      "frozen_blob": "8ddf1cb21c2a8bc015a37a69b460ca94c75c7ced",
+      "pinned_files": [
+        {
+          "index": 37,
+          "path": "scripts/audit/coffee-corpus-image-audit.py",
+          "blob": "2cc81eae9c06a5f337a908ca016d3885137cf084",
+          "lines": [
+            76,
+            151
+          ],
+          "live_same_pre_fix": true
+        },
+        {
+          "index": 38,
+          "path": "scripts/audit/coffee-corpus-normalize.mjs",
+          "blob": "a4d66794088924290001b19e8453174e22b5b50d",
+          "lines": [
+            1,
+            11
+          ],
+          "live_same_pre_fix": true
+        },
+        {
+          "index": 39,
+          "path": "scripts/audit/coffee-corpus-presentation-review.mjs",
+          "blob": "ea55e5f36867bea57bc1cf1f24fadb07edc4b89d",
+          "lines": [
+            1,
+            107
+          ],
+          "live_same_pre_fix": true
+        }
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-036",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-036.json",
+      "track": "POST_PIN_LIVE_CHANGED_SOURCE",
+      "frozen_lines_credited": 0,
+      "pinned_lines_credited": 0,
+      "live_paths": [
+        {
+          "path": "scripts/audit/coffee-corpus-image-audit.py",
+          "blob": "71a9eb96fb272fbcae792c3398bd911d7bfd1b38",
+          "lines": [
+            1,
+            154
+          ]
+        },
+        {
+          "path": "tests/audit/test_coffee_image_url_target.py",
+          "blob": "50fd0917ab4307ea0aa2e44e03f350d649f4a6b7",
+          "lines": [
+            1,
+            52
+          ]
+        }
+      ],
+      "new_or_modified_live_line_count": 57,
+      "exact_merge": "4057b7ed9cc49a365e109281b533cf42d6ff582a"
+    },
+    {
+      "batch": "S2-037",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-037.json",
+      "frozen_file": "docs/APPROVAL_GAP_FORENSIC_AND_CONTINUITY_REVIEW_2026-10-20.md",
+      "frozen_lines": [
+        1,
+        76
+      ],
+      "frozen_blob": "40f89c393b96f679c51b09caafb177d95a41d3f0",
+      "pinned_file": "scripts/audit/coffee-corpus-render.mjs",
+      "pinned_lines": [
+        1,
+        65
+      ],
+      "pinned_blob": "4f10bd3c97b1e96c448e242912d6c6c5758af136",
+      "prepatch_live_same": true,
+      "code_patch_line": 28,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-038",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-038.json",
+      "frozen_file": "docs/APP_WIDE_ERROR_SWEEP_2026-10-17.md",
+      "frozen_lines": [
+        1,
+        93
+      ],
+      "frozen_blob": "abac1fb2ad0b6b851cbd9c2765c75821b455da2b",
+      "pinned_file": "scripts/audit/coffee-corpus-replay.mjs",
+      "pinned_lines": [
+        1,
+        147
+      ],
+      "pinned_blob": "adf7115358cf9069c6e146e9ec983705575e1863",
+      "prepatch_live_same": true,
+      "code_patch": "scripts/audit/coffee-corpus-render.mjs line 26",
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-039",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-039.json",
+      "frozen_file": "docs/AUDIT_AND_RELEASE_PREFLIGHT_2026-10-20.md",
+      "frozen_lines": [
+        1,
+        38
+      ],
+      "frozen_blob": "bfde7bd4926b32dfdc502104eb0a30fa98486ef1",
+      "pinned_file": "scripts/audit/coffee-corpus-report-browser.mjs",
+      "pinned_lines": [
+        1,
+        52
+      ],
+      "pinned_blob": "03869094aca9b88baf1c235af49dfd5bf996098f",
+      "live_changed_lines": [
+        {
+          "path": "scripts/audit/coffee-corpus-render.mjs",
+          "lines": [
+            26,
+            28
+          ]
+        },
+        {
+          "path": "tests/audit/coffee-corpus-render-url-gate.test.mjs",
+          "lines": [
+            1,
+            32
+          ]
+        },
+        {
+          "path": "tests/audit/coffee-corpus-render-selection.test.mjs",
+          "lines": [
+            1,
+            38
+          ]
+        }
+      ],
+      "extra_live_unique_reviewed": 72,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-040",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-040.json",
+      "frozen_file": "docs/AUDIT_RECONCILIATION_BACKLOG_2026-10-17.md",
+      "frozen_lines": [
+        1,
+        120
+      ],
+      "frozen_blob": "e48cc099d8693f374017985a9b2aac949aa7a881",
+      "pinned_file": "scripts/audit/coffee-corpus-report.py",
+      "pinned_lines": [
+        1,
+        110
+      ],
+      "pinned_blob": "a7ef960de4f8abdcd673a0d2439ef6d12ef06c67",
+      "live_exact_pinned_prefix": true,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-041",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-041.json",
+      "frozen_file": "docs/AUTHENTICATED_READ_ONLY_ACCEPTANCE_2026-10-20.md",
+      "frozen_lines": [
+        1,
+        119
+      ],
+      "frozen_blob": "47b3527f916948f35da8544163a69a7ce1b60df1",
+      "pinned_file": "scripts/audit/coffee-corpus-report.py",
+      "pinned_lines": [
+        111,
+        220
+      ],
+      "pinned_blob": "a7ef960de4f8abdcd673a0d2439ef6d12ef06c67",
+      "live_exact_original_and_pinned": true,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-042",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-042.json",
+      "frozen_file": "docs/AUTOMATED_BACKUP_DELIVERY_ALERT_AUDIT_2026-10-16.md",
+      "frozen_lines": [
+        1,
+        61
+      ],
+      "frozen_blob": "3c3d348270a470638cf33288ac8083094ff6290f",
+      "live_doc_prefix_lines": [
+        1,
+        6
+      ],
+      "live_doc_blob": "cbdab65693218d7579efe88b2a2e85f55e4df710",
+      "pinned_file": "scripts/audit/coffee-corpus-report.py",
+      "pinned_lines": [
+        221,
+        370
+      ],
+      "pinned_blob": "a7ef960de4f8abdcd673a0d2439ef6d12ef06c67",
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-043",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-043.json",
+      "frozen_file": "docs/BACKEND_CHECKPOINT.md",
+      "frozen_lines": [
+        1,
+        62
+      ],
+      "frozen_blob": "e24eb718097ced4bf6d30d6006dac3b074ce43b8",
+      "pinned_file": "scripts/audit/coffee-corpus-retention.py",
+      "pinned_lines": [
+        1,
+        100
+      ],
+      "pinned_blob": "9b5250457e1e5b6d91e738b54bafcba78df10043",
+      "live_original_and_pinned_exact": true,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-044",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-044.json",
+      "frozen_file": "docs/BADGE_PALETTE_SOURCE.json",
+      "frozen_lines": [
+        1,
+        28
+      ],
+      "frozen_blob": "9fe9160ee93b0d56cb318cc5e23b33eaf1a335b5",
+      "pinned_file": "scripts/audit/coffee-corpus-retention.py",
+      "pinned_lines": [
+        101,
+        200
+      ],
+      "pinned_blob": "9b5250457e1e5b6d91e738b54bafcba78df10043",
+      "live_historical_counterpart_exact": true,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-045",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-045.json",
+      "frozen_file": "docs/CHATGPT_PROJECT_INSTRUCTIONS_TO_PASTE_2026-10-20.md",
+      "frozen_lines": [
+        1,
+        29
+      ],
+      "frozen_blob": "d228b1958794ca1d31af3840468e3f765ebe6d4a",
+      "pinned_file": "scripts/audit/coffee-corpus-retention.py",
+      "pinned_lines": [
+        201,
+        300
+      ],
+      "pinned_blob": "9b5250457e1e5b6d91e738b54bafcba78df10043",
+      "live_historical_counterpart_exact": false,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-046",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-046.json",
+      "frozen_file": "docs/CLOUD_OWNER_TEST_CHECKPOINT.md",
+      "frozen_lines": [
+        1,
+        56
+      ],
+      "frozen_blob": "e184ed7ab9a3310d5667a10828ba882a8f6182e8",
+      "pinned_file": "scripts/audit/coffee-corpus-retention.py",
+      "pinned_lines": [
+        301,
+        427
+      ],
+      "pinned_blob": "9b5250457e1e5b6d91e738b54bafcba78df10043",
+      "live_historical_counterpart_exact": true,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-047",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-047.json",
+      "frozen_file": "docs/COFFEE_EXTRACTION_ROAST_GRAPHICS_AND_SHOT_CLEANUP_2026-10-16.md",
+      "frozen_lines": [
+        1,
+        69
+      ],
+      "frozen_blob": "8ded351392b66559337283bd5961113e98032417",
+      "pinned_file": "scripts/audit/coffee-corpus-snapshot.py",
+      "pinned_lines": [
+        1,
+        33
+      ],
+      "pinned_blob": "0b434427d2917e9877e0754ad6a670b1193bb326",
+      "live_source_exact": true,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-048",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-048.json",
+      "frozen_file": "docs/COFFEE_URL_MULTIROASTER_VALIDATION_2026_10_17.md",
+      "frozen_lines": [
+        1,
+        51
+      ],
+      "frozen_blob": "131d67cf76ad5b7abc9fabed28ef40e5c28e3003",
+      "pinned_file": "scripts/audit/coffee-extractor-2mb-study.mjs",
+      "pinned_lines": [
+        1,
+        90
+      ],
+      "pinned_blob": "44097e5cab10f7f9d3c8cc417145e717269de10e",
+      "live_source_exact": true,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-049",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-049.json",
+      "frozen_lines": [
+        1,
+        47
+      ],
+      "frozen_path": "docs/COFFEE_VERIFICATION_CHECKPOINT_2026-10-14.md",
+      "pinned_lines": [
+        91,
+        169
+      ],
+      "pinned_path": "scripts/audit/coffee-extractor-2mb-study.mjs",
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-050",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-050.json",
+      "frozen_path": "docs/COMMUNITY_ELIGIBILITY_DEVELOPMENT_2026-10-18.md",
+      "frozen_lines": [
+        1,
+        45
+      ],
+      "pinned_ranges": [
+        {
+          "path": "scripts/audit/coffee-fixture-sanitize.mjs",
+          "range": [
+            1,
+            4
+          ]
+        },
+        {
+          "path": "scripts/audit/coffee-frozen-ci.py",
+          "range": [
+            1,
+            80
+          ]
+        }
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-051",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-051.json",
+      "frozen_path": "docs/COMMUNITY_ELIGIBILITY_PRODUCTION_RELEASE_2026-10-18.md",
+      "frozen_lines": [
+        1,
+        53
+      ],
+      "pinned_path": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        81,
+        170
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-052",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-052.json",
+      "frozen_path": "docs/COMMUNITY_OUTLIER_RESEARCH_2026-10-18.md",
+      "frozen_lines": [
+        1,
+        64
+      ],
+      "pinned_path": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        171,
+        260
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-053",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-053.json",
+      "frozen_path": "docs/COMMUNITY_RELEASE_GROUPING_PRODUCTION_READINESS_2026-10-18.md",
+      "frozen_lines": [
+        1,
+        53
+      ],
+      "pinned_path": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        261,
+        320
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-054",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-054.json",
+      "frozen_path": "docs/COMPREHENSIVE_SOURCE_AUDIT_2026-10-16.md",
+      "frozen_lines": [
+        1,
+        55
+      ],
+      "pinned_path": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        321,
+        440
+      ],
+      "strict_frozen_delta": 55,
+      "strict_pinned_delta": 120,
+      "legacy_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-055",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-055.json",
+      "frozen_path": "docs/CONSOLIDATED_OWNER_RELEASE_CHECKLIST_2026-10-14.md",
+      "frozen_lines": [
+        1,
+        42
+      ],
+      "pinned_path": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        441,
+        560
+      ],
+      "strict_frozen_delta": 42,
+      "strict_pinned_delta": 120,
+      "legacy_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-056",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-056.json",
+      "frozen_path": "docs/CORVUS_AND_UNIVERSAL_NARRATIVE_EXTRACTOR_2026-10-19.md",
+      "frozen_lines": [
+        1,
+        30
+      ],
+      "pinned_path": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        561,
+        660
+      ],
+      "strict_frozen_delta": 30,
+      "strict_pinned_delta": 100,
+      "legacy_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-057",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-057.json",
+      "frozen_path": "docs/CROSS_CHAT_HANDOFF_2026-10-13.md",
+      "frozen_lines": [
+        1,
+        42
+      ],
+      "pinned_path": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        661,
+        700
+      ],
+      "strict_frozen_delta": 42,
+      "strict_pinned_delta": 40,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-058",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-058.json",
+      "frozen_path": "docs/CROSS_CHAT_HANDOFF_2026-10-13.md",
+      "frozen_lines": [
+        43,
+        117
+      ],
+      "pinned_path": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        701,
+        790
+      ],
+      "strict_frozen_delta": 75,
+      "strict_pinned_delta": 90,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-059",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-059.json",
+      "frozen_path": "docs/CROSS_PLATFORM_IMPLEMENTATION_AUDIT_2026-10-18.md",
+      "frozen_lines": [
+        1,
+        20
+      ],
+      "pinned_path": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        791,
+        830
+      ],
+      "strict_frozen_delta": 20,
+      "strict_pinned_delta": 40,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-060",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-060.json",
+      "frozen_file": "docs/CURRENT_REQUIREMENTS_VIEW.md",
+      "frozen_lines": [
+        1,
+        44
+      ],
+      "frozen_blob": "7f59a6a3aee05d0de9a0c1dafc03712164c1ca5c",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        831,
+        897
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "observed_live_commit": "03dfe68574fda69729fc4a02b57a67abe23042d2",
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-061",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-061.json",
+      "frozen_file": "docs/CURRENT_STATUS.md",
+      "frozen_lines": [
+        1,
+        32
+      ],
+      "frozen_blob": "2d7f55bcad8fd92663c4790c4164b9bacfed0667",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        898,
+        950
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-062",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-062.json",
+      "frozen_file": "docs/CURRENT_STATUS.md",
+      "frozen_lines": [
+        33,
+        60
+      ],
+      "frozen_blob": "2d7f55bcad8fd92663c4790c4164b9bacfed0667",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        951,
+        1014
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "strict_frozen_delta": 28,
+      "strict_pinned_delta": 64,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-063",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-063.json",
+      "frozen_file": "docs/CURRENT_STATUS.md",
+      "frozen_lines": [
+        61,
+        100
+      ],
+      "frozen_blob": "2d7f55bcad8fd92663c4790c4164b9bacfed0667",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        1015,
+        1090
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "strict_frozen_delta": 40,
+      "strict_pinned_delta": 76,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-064",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-064.json",
+      "frozen_file": "docs/CURRENT_STATUS.md",
+      "frozen_lines": [
+        101,
+        140
+      ],
+      "frozen_blob": "2d7f55bcad8fd92663c4790c4164b9bacfed0667",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        1091,
+        1160
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "strict_frozen_delta": 40,
+      "strict_pinned_delta": 70,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-065",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-065.json",
+      "frozen_file": "docs/CURRENT_STATUS.md",
+      "frozen_lines": [
+        141,
+        185
+      ],
+      "frozen_blob": "2d7f55bcad8fd92663c4790c4164b9bacfed0667",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        1161,
+        1235
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "strict_frozen_delta": 45,
+      "strict_pinned_delta": 75,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-066",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-066.json",
+      "frozen_file": "docs/CURRENT_STATUS.md",
+      "frozen_lines": [
+        186,
+        210
+      ],
+      "frozen_blob": "2d7f55bcad8fd92663c4790c4164b9bacfed0667",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        1236,
+        1280
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "strict_frozen_delta": 25,
+      "strict_pinned_delta": 45,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-067",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-067.json",
+      "frozen_file": "docs/CURRENT_STATUS.md",
+      "frozen_lines": [
+        211,
+        248
+      ],
+      "frozen_blob": "2d7f55bcad8fd92663c4790c4164b9bacfed0667",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        1281,
+        1325
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "strict_frozen_delta": 38,
+      "strict_pinned_delta": 45,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-068",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-068.json",
+      "frozen_file": "docs/CURRENT_STATUS.md",
+      "frozen_lines": [
+        249,
+        290
+      ],
+      "frozen_blob": "2d7f55bcad8fd92663c4790c4164b9bacfed0667",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        1326,
+        1395
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "strict_frozen_delta": 42,
+      "strict_pinned_delta": 70,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-069",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-069.json",
+      "frozen_file": "docs/CURRENT_STATUS.md",
+      "frozen_lines": [
+        291,
+        310
+      ],
+      "frozen_blob": "2d7f55bcad8fd92663c4790c4164b9bacfed0667",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        1396,
+        1430
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "strict_frozen_delta": 20,
+      "strict_pinned_delta": 35,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-070",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-070.json",
+      "frozen_file": "docs/CURRENT_STATUS.md",
+      "frozen_lines": [
+        311,
+        340
+      ],
+      "frozen_blob": "2d7f55bcad8fd92663c4790c4164b9bacfed0667",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        1431,
+        1480
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "strict_frozen_delta": 30,
+      "strict_pinned_delta": 50,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-071",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-071.json",
+      "frozen_file": "docs/CURRENT_STATUS.md",
+      "frozen_lines": [
+        341,
+        380
+      ],
+      "frozen_blob": "2d7f55bcad8fd92663c4790c4164b9bacfed0667",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        1481,
+        1540
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "strict_frozen_delta": 40,
+      "strict_pinned_delta": 60,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-072",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-072.json",
+      "frozen_file": "docs/CURRENT_STATUS.md",
+      "frozen_lines": [
+        381,
+        400
+      ],
+      "frozen_blob": "2d7f55bcad8fd92663c4790c4164b9bacfed0667",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        1541,
+        1580
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "live_pinned_blob": "926bfd49aed1e4426c2aa818b85ef7546d853a4f",
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-073",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-073.json",
+      "frozen_file": "docs/CURRENT_STATUS.md",
+      "frozen_lines": [
+        401,
+        434
+      ],
+      "frozen_blob": "2d7f55bcad8fd92663c4790c4164b9bacfed0667",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        1581,
+        1643
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "live_pinned_blob": "926bfd49aed1e4426c2aa818b85ef7546d853a4f",
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-074",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-074.json",
+      "frozen_file": "docs/CURRENT_STATUS_PRE_CONTINUITY_2026-10-16.md",
+      "frozen_lines": [
+        1,
+        55
+      ],
+      "frozen_blob": "0b65c58819c41ce8ccb83754901a0e1381abd60c",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        1644,
+        1710
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "live_pinned_blob": "926bfd49aed1e4426c2aa818b85ef7546d853a4f",
+      "strict_frozen_delta": 55,
+      "strict_pinned_delta": 67,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-075",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-075.json",
+      "frozen_file": "docs/CURRENT_STATUS_PRE_CONTINUITY_2026-10-16.md",
+      "frozen_lines": [
+        56,
+        109
+      ],
+      "frozen_blob": "0b65c58819c41ce8ccb83754901a0e1381abd60c",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        1711,
+        1780
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "live_pinned_blob": "926bfd49aed1e4426c2aa818b85ef7546d853a4f",
+      "strict_frozen_delta": 54,
+      "strict_pinned_delta": 70,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-076",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-076.json",
+      "frozen_file": "docs/CURRENT_STATUS_PRE_QUEEN_CITY_2026-10-17.md",
+      "frozen_lines": [
+        1,
+        55
+      ],
+      "frozen_blob": "b1698030de2539bbd2f342251cece4c546477227",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        1781,
+        1860
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "live_pinned_blob": "926bfd49aed1e4426c2aa818b85ef7546d853a4f",
+      "strict_frozen_delta": 55,
+      "strict_pinned_delta": 80,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-081",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-081.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        101,
+        135
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        2201,
+        2230
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "live_pinned_blob": "926bfd49aed1e4426c2aa818b85ef7546d853a4f",
+      "strict_frozen_delta": 35,
+      "strict_pinned_delta": 30,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-082",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-082.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        136,
+        175
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        2231,
+        2270
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "live_pinned_blob": "926bfd49aed1e4426c2aa818b85ef7546d853a4f",
+      "strict_frozen_delta": 40,
+      "strict_pinned_delta": 40,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-083",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-083.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        176,
+        220
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        2271,
+        2320
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "live_pinned_blob": "926bfd49aed1e4426c2aa818b85ef7546d853a4f",
+      "strict_frozen_delta": 45,
+      "strict_pinned_delta": 50,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-084",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-084.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        221,
+        265
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        2321,
+        2370
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "live_pinned_blob": "926bfd49aed1e4426c2aa818b85ef7546d853a4f",
+      "strict_frozen_delta": 45,
+      "strict_pinned_delta": 50,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-085",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-085.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        266,
+        295
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        2371,
+        2400
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "live_pinned_blob": "926bfd49aed1e4426c2aa818b85ef7546d853a4f",
+      "strict_frozen_delta": 30,
+      "strict_pinned_delta": 30,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-086",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-086.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        296,
+        325
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        2401,
+        2430
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "live_pinned_blob": "926bfd49aed1e4426c2aa818b85ef7546d853a4f",
+      "strict_frozen_delta": 30,
+      "strict_pinned_delta": 30,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-087",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-087.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        326,
+        365
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        2431,
+        2470
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "live_exact_text_line_offset": 2,
+      "live_blob": "926bfd49aed1e4426c2aa818b85ef7546d853a4f",
+      "old_v2_additional_credit": 0
+    },
+    {
+      "batch": "S2-088",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-088.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        366,
+        405
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        2471,
+        2510
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "live_exact_text_line_offset": 2,
+      "live_blob": "926bfd49aed1e4426c2aa818b85ef7546d853a4f",
+      "old_v2_additional_credit": 0
+    },
+    {
+      "batch": "S2-089",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-089.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        406,
+        445
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        2511,
+        2550
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "live_exact_text_line_offset": 2,
+      "live_blob": "926bfd49aed1e4426c2aa818b85ef7546d853a4f",
+      "old_v2_additional_credit": 0
     }
   ],
   "completion": "IN_PROGRESS",
-  "test_limit": "Source-equivalence and per-line integrity only; no new app/runtime CI claims"
+  "test_limit": "Source-equivalence and per-line integrity only; no new app/runtime CI claims",
+  "last_batch": "S2-086",
+  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-086.json",
+  "complete": false
 }

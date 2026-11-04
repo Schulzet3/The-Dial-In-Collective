@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "issue": 504,
+  "review_pass": "W1_WORD_BY_WORD",
+  "source_dev_sha": "e275a93e466a7d894bc944e360f9558f04bd6a90",
+  "source_main_sha": "a5b5c75933501d778ea01cd02e82589f51ef7cd6",
+  "source_release_sha": "31c66832a28247e657a2bf89592ebc1e2f48dfc5",
+  "reviewed_at_utc_date": "2026-11-04",
+  "audit_batch": "G1-001",
+  "review_scope": "three complete recent governance Markdown files plus Issue504 title/body and creation comment; no executable code or frozen history",
+  "files": [
+    {
+      "kind": "git_blob",
+      "path": "docs/ai/CONTEXT_ENTRYPOINT.md",
+      "ref": "e275a93e466a7d894bc944e360f9558f04bd6a90",
+      "sha": "9d52ce213b1fb7d7a908ab81f90f6e5f4e700b5e",
+      "first_line": 1,
+      "last_line": 27,
+      "line_count": 27,
+      "word_count": 421,
+      "status": "DIRECT_SEMANTIC_REVIEWED",
+      "method": "assistant full source read",
+      "notes": "Governance routing valid but misses newly opened #504 cross-GitHub records audit; needs explicit split from #267; verify #508/#509 issue scopes before linking."
+    },
+    {
+      "kind": "git_blob",
+      "path": "docs/ai/PREFLIGHT.md",
+      "ref": "e275a93e466a7d894bc944e360f9558f04bd6a90",
+      "sha": "9b491bcc16228a12c4c51e7fa62f5a69bf0346aa",
+      "first_line": 1,
+      "last_line": 21,
+      "line_count": 21,
+      "word_count": 327,
+      "status": "DIRECT_SEMANTIC_REVIEWED",
+      "method": "assistant full source read",
+      "notes": "Scope/risk and inventory-vs-semantic distinctions remain consistent; no demonstrated defect."
+    },
+    {
+      "kind": "git_blob",
+      "path": "docs/workstreams/README.md",
+      "ref": "e275a93e466a7d894bc944e360f9558f04bd6a90",
+      "sha": "81a4315478cae044f6bef0905531b207979d9cc1",
+      "first_line": 1,
+      "last_line": 44,
+      "line_count": 44,
+      "word_count": 312,
+      "status": "DIRECT_SEMANTIC_REVIEWED",
+      "method": "assistant full source read",
+      "notes": "Workstreams index lacks newly authorized #504 scoped audit journal; add link after creating journal."
+    }
+  ],
+  "objects": [
+    {
+      "kind": "github_issue",
+      "id": 504,
+      "version": "2026-11-04T05:35:12Z",
+      "body_words": 629,
+      "title_words": 8,
+      "status": "DIRECT_SEMANTIC_REVIEWED",
+      "notes": "Current owner authorization and non-overlap charter; development authority only."
+    },
+    {
+      "kind": "github_issue_comment",
+      "id": 6623477092,
+      "issue": 504,
+      "version": "id-immutable-unconfirmed",
+      "word_count": 84,
+      "status": "DIRECT_SEMANTIC_REVIEWED",
+      "notes": "Automation creation/readback is setup evidence, not execution evidence."
+    }
+  ],
+  "totals": {
+    "files": 3,
+    "git_lines": 92,
+    "git_words": 1060,
+    "github_objects": 2,
+    "github_words": 721
+  },
+  "findings": [
+    {
+      "id": "G1-001-F1",
+      "scope": "docs/ai/CONTEXT_ENTRYPOINT.md",
+      "type": "active navigation omission",
+      "severity": "low",
+      "evidence": "Nov1 entrypoint routes QA audits only to #267 while owner created distinct #504 GitHub-records audit, and recently distinct #508 Netlify and #509 Supabase audits; no issue references exist in entrypoint",
+      "action": "ADD topic route for #504, optionally separately route #508/#509 with ownership boundaries",
+      "disposition": "FIX_AUTHORIZED_DOCUMENTATION_ONLY"
+    },
+    {
+      "id": "G1-001-F2",
+      "scope": "docs/workstreams/README.md",
+      "type": "active journal index omission",
+      "severity": "low",
+      "evidence": "Index lists #267 and #455 but not newly opened #504; no dedicated #504 journal existed at baseline",
+      "action": "create docs/workstreams/issue-504.md and register linked entry",
+      "disposition": "FIX_AUTHORIZED_DOCUMENTATION_ONLY"
+    }
+  ],
+  "inventory_evidence": {
+    "branch_manifest": "docs/audits/issue504-branch-manifest-20261104.json",
+    "tree_manifest": "docs/audits/issue504-dev-tree-manifest-20261104.json",
+    "branch_count": 454,
+    "complete_branch_list_pagination": true,
+    "development_tree_objects": 1247,
+    "development_blobs": 1196,
+    "development_directories": 51,
+    "development_bytes": 56011078,
+    "development_tree_truncated": false,
+    "other_branch_trees": "PENDING",
+    "all_issues_pagination": "PENDING",
+    "all_prs_pagination": "PENDING",
+    "actions_inventory": "PARTIAL",
+    "binary_semantic": "PENDING"
+  },
+  "delegated_issue267": {
+    "frozen_strict_validated": 3512,
+    "frozen_denominator": 579961,
+    "pinned_strict_validated": 4329,
+    "pinned_denominator": 57913,
+    "ledger_blob_sha": "c7ce0a46705f9655e6eb1fa187b8fb1d10eedf43",
+    "new_credit_by_issue504": 0
+  },
+  "limitations": [
+    "Current development moving concurrently; inventories pin a specific source and require post-pin drift review.",
+    "GitHub fetch /tags and /actions/workflows URLs rejected with 400; workflow path list and Actions runs metadata accessible, but list metadata endpoint unverified.",
+    "No claim of complete repository words, binary contents or historical records."
+  ],
+  "next_unreviewed": "docs/ai/AUTHORITY_RULES.md complete text from latest verified live blob, and full main/release tree snapshots; then sequential additional unreviewed governance records; prevent #267 code overlap."
+}

@@ -1,3 +1,144 @@
+## November 4, 2026 — Issue #455 legacy timestamp integrity READY in development, NOT DEPLOYED
+
+[PR #620](https://github.com/Schulzet3/The-Dial-In-Collective/pull/620) nonforce merged at `06210ece31b0535738c3653d5e3e5e14f795746c` after all five applicable exact-head checks succeeded at `6f45bbf6e42b98ad35da36663cc50c931536281f`. All seven changed paths have identical Git blob SHAs at the tested head and actual merge. Exact merged-source Node 22 [41927031130](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41927031130) **2,426 PASS / 0 FAIL / 6 intentional SKIP** plus lint; [browser/mobile/offline/accessibility 41927030524](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41927030524) and [approval/continuity 41927030537](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41927030537) SUCCESS. PR-head isolated SQL, security and approval also SUCCESS. Cloud-targeted tests NOT_APPLICABLE on merged source and original603 SKIPPED, not PASS. `DIC-Q-455-legacy-undated-feedback` is READY NOT DEPLOYED: four narrowly scoped null/blank legacy timestamp guards cover current feedback, same-coffee grinder sensitivity, Log Shot prefill and cloud hydration without changing stored history, five taste inputs or Locked rules. No real member incident/outcome measured; no publish, live account/provider/SQL/Edge writes, release ref move or new science. Further source/claim audit remains OPEN; issue #455 not closed.
+
+---
+
+## November 4, 2026 — Issue #455 recipe-scoped feedback READY, not deployed
+
+[PR #605](https://github.com/Schulzet3/The-Dial-In-Collective/pull/605) merged `c319eacc74b7eb73bb40f53deb4cdfd1836f3857`: current coffee-card feedback now matches coffee/setup/calibration/style/basket/feed and never substitutes a newer incompatible shot. Exact-head and merged Node 22 **2409 PASS /0 FAIL /6 SKIP**, lint PASS, packaged browser/390px Log Shot → Rate → Recommendations/offline/a11y and applicable approval/SQL head checks SUCCESS. Exact merged Node initially CANCELLED by concurrency; retry [41873987880](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41873987880) SUCCESS. Cloud-targeted suite NOT_APPLICABLE, frozen603 SKIPPED. Queue `DIC-Q-455-recipe-context-feedback` **READY NOT DEPLOYED**. Research R455-023 independently checked two 2025 expert Espresso Protocol papers (ledger now **39 sources/82 bounded checks**) without asserting the app's five-rating model validated or changing Locked product rules. No publication or live account/provider/member data writes.
+
+---
+
+## November 4, 2026 — Issue33 Foster Sookoo #125 current-origin correction SOURCE VERIFIED READY, NOT DEPLOYED
+
+PR601 safely merged `f60456e98270cf2dd550728e8f77834d6ed03706`; postmerged official read-only probe `41876132813` on identical runtime cce5f75a SUCCESS, 3/3 fetched/parsed/Add Coffee previews. Selected exact H1 Sookoo (Ethiopia), only origin `Guji, Ethiopia` SEO-only → visible current `Ethiopia`, #517/#527 unchanged, zero conflicts; independent raw/ZIP hashes and direct roast-profile active-1 check in `docs/audits/issue33-125-foster-origin-verified-20261104.json`. Exact-head Node/lint/build 2,415 PASS/0 FAIL/6 SKIP (41875586935), cloud/mobile/SQL/approval and merged governance SUCCESS. Narrow queue item READY, not deployed. Full frozen603 and remaining individual semantic review unverified; #33 OPEN. No production/member/provider writes.
+
+---
+
+## November 4, 2026 — Issue33 Tandem #580 exact current locality VERIFIED READY, NOT DEPLOYED
+
+PR #586 nonforce merged `35460be0be9ebf4671ca6d614e37d59c62f518f1`, full 1,678 Node PASS/0 FAIL/0 SKIP on exact merged source run41851611530; merged approval41851611463/READY intake41851611283/UX41851611246 SUCCESS. Actual independent 2-case official HTML/parser/Add Coffee run41851611180 SUCCESS: only Tandem Faver Ninco #580 origin `Colombia` → `Santa Maria, Huila, Colombia`; #586 original conflicts unchanged. No original603-wide, auth/member/device acceptance; full frozen603 workflow SKIPPED. Narrow `DIC-Q-33-580-selected-h1-adjacent-farm-locality` READY, not deployed; source release isolation under #417 still required. #33 OPEN. Evidence `docs/audits/issue33-tandem-580-selected-adjacent-locality-20261104.json`; no Supabase/Netlify/production/member write.
+
+---
+
+## November 4, 2026 — #455 meaningful-yield and evidence-aware sweetness guidance READY, NOT DEPLOYED
+
+Owner-approved #455 5 g starting next-yield experiment for typical doubles, proportionate short/small shots and same-coffee controlled sweetness direction are implemented with observational/exploratory evidence disclaimer. [PR #584](https://github.com/Schulzet3/The-Dial-In-Collective/pull/584) safely squash merged to development `163b73edd3210077ce76fdd2f86016276a7f015e`; final tested PR-head engine/UI/tests and governance docs blobs match merged source. Exact merged Node22/lint [run 41850457797](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41850457797): **2,400 PASS / 0 FAIL / 6 SKIP**; applicable [browser/mobile/offline run 41850457870](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41850457870), [approval 41850457920](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41850457920) and [READY certification 41850457601](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41850457601) SUCCESS; frozen603 and redundant cloud-specific jobs NOT_APPLICABLE/SKIPPED, not test PASS. `DIC-Q-455-meaningful-yield-step` **READY NOT DEPLOYED**. Historical #455 edited-shot preview separately READY NOT DEPLOYED. No production release authorization or provider/member writes. Research does not prove a universal minimum perceptible change or guaranteed sweetness gain.
+
+---
+
+## November 4, 2026 — Issue33 Unlocked #586 selected taste-conflict safely READY, NOT DEPLOYED
+
+Direct current selected official [41844449595](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41844449595) 2/2 fetched/parsed, #586 H1 exact; generic [source fix 27cdebed](https://github.com/Schulzet3/The-Dial-In-Collective/commit/27cdebed308bd9ab9f114399d901266079e611a8) recognizes the upper What You'll Taste list, now correctly leaves tasting_notes BLANK against incompatible lower The Cup notes and adds tasting_notes to origin/process/variety conflicts. Exact code Node/lint/build [41844449369](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41844449369) 1,672 PASS/0 FAIL/0 SKIP; approval/cloud/queue SUCCESS; original603 restricted workflow SKIPPED. One new narrow selected source READY (15 READY/90 DEPLOYED/3 IN_PROGRESS). #580 finer origin locality unresolved, parent #33 OPEN and full603 human semantic certification unverified. No production publication or writes. [Receipt](audits/issue33-original603-580-586-current-selected-20261104.json).
+
+---
+
+## November 4 UTC — Issue33 #107/#325 exact selected public source field review complete, no new READY
+
+PR576 merged `f94cbc044b729c578cc839adc4705fd62409cdd3` with 4/4 applicable PR-head CI SUCCESS. Genuine exact merged official current source [41839630905](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41839630905) 2/2 parsed/Add Coffee previews; independently rehashed #107/#325 raw HTML. #107 origin Ethiopia/Washed/Medium/sensory retained, finer Yirgacheffe and co-op producer qualified; #325 selected tags Oaxaca/water processed do not warrant whole-blend origin/decaf, both blank. No proven generic defect and no false READY. #319 already corrected PR318 and excluded; 14 READY/90 DEPLOYED/3 IN_PROGRESS, Issue33 OPEN, global frozen603 semantic UNVERIFIED. No deployment or production writes. [Receipt](audits/issue33-original603-107-319-source-review-20261104.json). [skip netlify]
+
+---
+
+## November 4, 2026 — Issue #33 DogWatch #19 narrow verified READY, not deployed
+Two nonforce source PRs #572/#573 merged and exact merged Node/lint/build41836087081 2,386 PASS/0 FAIL/6 intentional SKIP; first test-only genuine positive regression failed as expected, then corrected. Fresh exact official selected #19 raw HTTPS run41836087208 (1/1 fetched/parsed) and independent ZIP readback SHA256 ab44b863854cb3b89d8484f05af9cdbcddee6387a5f495e7d68634b1665d7608 verified canonical direct source notes 'smoky chocolate, earth, high sweet undertones', no conflict, actual Add Coffee/source-review markup true. One new narrow DIC-Q-33-19-selected-direct-sweet-undertones READY, totals 14 READY/90 DEPLOYED/3 IN_PROGRESS. Global 603 independent semantic acceptance remains UNVERIFIED, Issue33 OPEN. Restricted frozen603 workflow SKIPPED not PASS; no publication or production writes. [Receipt](audits/issue33-dogwatch-19-current-sensory-20261104.json). [skip netlify]
+
+---
+
+## November 4 UTC — Issue33 #475 real selected component region READY, NOT DEPLOYED
+
+PR565 source correction safely merged `dc500285460ca2a7d6a6bdf2853520a2685ee844`, exact tested-identical tree `d88b5a3a8990743f0eb445c3d7ada45fb47c185d`. Exact PR-head and merged changed-surface Node **1667 PASS /0 FAIL**, approval/cloud/SQL/security as applicable SUCCESS; full603 SKIPPED. Actual [official #475/#508 probe41830754548](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41830754548) fetched+parsed 2/2, current #475 H1 Anthrax - Cursum Perficio, source SHA256 `3530c349a74875c7e59465db2d750dcc3006b6778db202d79d45da78189d536e`, origin corrected to **Nueva Segovia, Nicaragua; Santa Ana, El Salvador** by de-duplicating nested current selected paragraph wrappers, no conflicts. #508 Munsinger current selected slug reuse and conflicting Notes remain reviewable. One narrow queue item READY, totals **13 READY/90 DEPLOYED/3 IN_PROGRESS**. Parent Issue33 OPEN for remaining 603 semantic review; 0 whole rows certified, true auth/member flow not tested; no publication/SQL/Auth/Edge/member/provider writes. [Receipt](audits/issue33-original603-475-live-wrapper-ready-20261104.json). [skip netlify]
+
+---
+
+## November 4 UTC — Issue33 #554/#590 selected roast source roles VERIFIED (no new READY)
+
+[PR550](https://github.com/Schulzet3/The-Dial-In-Collective/pull/550) safely merged `f2d1fd25fdc9e27d30c2986c34362da1cc6cd127` with identical tested tree, four new positive/negative assertions and 2,377 Node PASS /0 FAIL /6 intentional SKIP on exact PR-head and merged [41819092819](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41819092819); applicable cloud, approval, queue successful. Current [official source run41819092961](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41819092961): 2/2 exact selected HTML/H1/parser/Add Coffee previews, #554 ROC² Organic Mexican `roast=null` (direct comparative lighter; lower-priority SEO metadata Light not promoted) and #590 Vail Honduras HONEY `roast=null` (medium body / generic FAQ not selected roast), no conflicts. Source SHA256 and field receipts `docs/audits/issue33-roast-source-554-590-20261104.json`. Queue unchanged **12 READY/90 DEPLOYED/3 IN_PROGRESS**; no runtime defect reproduced, original frozen603 skipped, full semantic acceptance UNVERIFIED, Issue33 OPEN; no deployment, provider/member writes or Locked change. [skip netlify]
+
+---
+
+## November 4 UTC — Issue33 Blue Jazz #445 selected lemony brightness VERIFIED READY / NOT DEPLOYED
+
+[PR546](https://github.com/Schulzet3/The-Dial-In-Collective/pull/546) safely merged `13c7a7b535628c2033e655906618964d9cfd07bb`; corrected exact PR-head and merged Node/lint/build 2369 PASS/0 FAIL/6 SKIP, other applicable CI SUCCESS. Initial 2 real positive regressions failed and were repaired. Official current H1/raw HTML/parser/Add Coffee [41816308653](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41816308653) 1/1 PASS; original603 #445 exact notes now `stone fruit, lemony brightness`, source SHA256 `c301709c4cfb6fac91c0be2fb4de47bd535b6754e725f0528338ea886d161717`, no added altitude/conflict. Queue **12 READY/90 DEPLOYED/3 IN_PROGRESS**, full original603 semantic acceptance still UNVERIFIED (SKIPPED not PASS), Issue33 OPEN. Locked decisions/approval unchanged, no production release/SQL/Auth/Edge/member/provider operations. [skip netlify]
+
+---
+
+## November 4 UTC — Issue33 #23 current decaf source origin discrepancy READY / NOT DEPLOYED
+
+[PR535](https://github.com/Schulzet3/The-Dial-In-Collective/pull/535) merged `03dfe68574fda69729fc4a02b57a67abe23042d2` with identical tested tree and passing applicable CI: **2361 Node PASS, 0 FAIL, 6 SKIP** on exact PR head and merged source. [Real selected official #23 run41806397565](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41806397565) 1/1 fresh exact H1/raw HTML/parser/Add Coffee: conflicting **current Peru offering** vs **Current Decaf Location Mexico**, so **origin BLANK and flagged ['origin']**, Washed/Water Process/notes unaffected; source SHA256 261446d2fb2b198e01fbe9cb2bdb7d9f072b296b9301bc19bf224cbf82421983. Queue **11 READY/90 DEPLOYED/3 IN_PROGRESS**, Issue33 OPEN, full frozen603 workflow SKIPPED (no full semantic certification). No deployment, production SQL/Auth/Edge/provider/member writes. [skip netlify]
+
+---
+
+## November 4 UTC — Issue33 Brewtus original603 #38 current majority villages narrow READY, NOT DEPLOYED
+
+[PR529](https://github.com/Schulzet3/The-Dial-In-Collective/pull/529) fixes earlier PR528's real official single-paragraph parsing failure. Exact PR-head six applicable CI and merged cloud/build, UX, approval and queue checks all SUCCESS; original frozen603 SKIPPED. Current exact selected [Brewtus Ethiopia Natural](https://brewtusroasting.com/products/ethiopia-natural) [guarded run41798865172](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41798865172) **3/3 official raw HTML/parser/Add Coffee previews**, #38 origin **Shantawene and Bombe, Sidama, Ethiopia** from direct majority sourcing claim; unchanged Light/Natural, producer and tasting notes, zero conflicts; #65/#261 controls unchanged. Source SHA256 d813a05223a319cb7d5d0932a66b7db095714a1fd2437f12ce2335e6bf83db9d; source artifact13306870903. **Queue 10 READY /90 DEPLOYED /3 IN_PROGRESS** incl #509 unrelated READY; issue33 still OPEN for 153 context/29 literal/35 historical cases. No 603 semantic certification, Netlify publication, SQL/Auth/Edge/member/provider write, paid services. [skip netlify]
+
+---
+
+## November 4 UTC — Issue #33 #287 Roadmap selected-growing-region correction READY (NOT DEPLOYED)
+
+[PR519](https://github.com/Schulzet3/The-Dial-In-Collective/pull/519) nonforce merged `93446482fe9654f4e7f1e9bb022961c2f4da4f78`, exact tested source tree identical; corrected exact-head and exact merged Node/lint/build 1,637 PASS/0 FAIL, cloud/browser/security/approval/SQL as applicable SUCCESS. Actual [official public-source run41789718256](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41789718256) 3/3 selected H1/HTML/parser/Add Coffee previews: #287 Roadmap origin now **Angel Albino Corzo, Chiapas, MEXICO** from directly selected statement distinguishing region from producer; #22/#286 controls unchanged. FFESICH Cooperative producer preserved, no conflicts. One narrow item READY, queue **8 READY /90 DEPLOYED /3 IN_PROGRESS**. Original603 frozen workflow SKIPPED, broader 603 manual semantic acceptance unverified, #33 OPEN. No deploy, production/provider/member writes or release authorization. [skip netlify]
+
+---
+
+## November 3, 2026 (Denver) — Issue #37 guide/video DEPLOYED, owner accepted, closure reconciliation
+
+Release 13 published on 2026-10-30 (production `42eb45aab12d1a47fe96a3ebe8a1f36b3913b5f7`, Netlify `6ae421f5de038d292bd66407`). On 2026-11-03 (Denver), the owner confirmed in the live app that the guide and video are visible and the video plays. Current Netlify was independently READY/current on a later source `31c66832a28247e657a2bf89592ebc1e2f48dfc5` that retains the same guide/video assets. This is owner-observed live functional acceptance, not a claim of a signed-in first-shot completion, physical-device test, named screen-reader test, or instrumented HTTP byte-range test.
+
+**Disposition:** Owner requested closure of #37 and correction of the obsolete unpublished/draft annotations. Source in-app assets and existing queue ID `DIC-Q-37-in-app-walkthrough` remain DEPLOYED; this is documentation-only, `[skip netlify]`, no new app publication, database, Auth, member or backup operation. Previous October 29 entries below accurately describe their historical pre-release checkpoints but no longer describe current Issue37 status.
+
+---
+
+## November 4 UTC — Issue33 #188 current UNESCO Kaffa Forest farm locality narrowly READY (NOT DEPLOYED)
+
+[PR494](https://github.com/Schulzet3/The-Dial-In-Collective/pull/494) nonforce merged exact tree `065274232ce0b192a3d1d123450950f773c193bf`. Corrected PR-head and merged-source Node 2,330 pass/0 fail/6 intentional skip; browser/cloud, SQL/security/approval and guarded official [41771394763](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41771394763) 3/3 public product H1/HTML/parser/Add Coffee checks SUCCESS. #188 Dehab official selected present UNESCO Kaffa Forest farms now refines `origin=Kaffa Forest, Ethiopia`; #206/#320 unaffected. Initial one new-test failure was repaired, not misreported PASS; full frozen603 SKIPPED. Queue **7 READY /90 DEPLOYED /3 IN_PROGRESS**, release not authorized. Original603/153+29 review, hosted member GoTrue unverified, #267/#96 and all member/provider data preserved; Issue33 OPEN. [skip netlify]
+
+---
+
+## November 4 UTC — Issue33 #13 FUDAM current growing municipality narrow READY (NOT DEPLOYED)
+
+PR488 safely nonforce merged `be0ac469eb8a7a46f6d52e3b464cb2a6d402318c` with tested exact Git tree, corrected 2,324 Node PASS/0 FAIL/6 deliberate SKIP, source-bound cloud/browser/security/SQL/approval SUCCESS. Current guarded public official selected product run41765576927 3/3 fetched/parsed: #13 FUDAM `origin=La Unión, Nariño, Colombia` from direct selected H1 and growers' farm municipality; current process remains blank, #28/#40 unchanged. New isolated queue item READY, combined queue **6 READY /90 DEPLOYED /3 IN_PROGRESS**. Source path overlaps two READY items; hold any future publication absent source-isolated approved dependency set. Full frozen603 SKIPPED, historical153 context/29 missing qualification remains; no hosted member/write/production SQL/Auth/Edge, Netlify deployment, paid services. Issue33 remains OPEN. [skip netlify]
+
+---
+
+## November 4 UTC — Issue #33 Brickhouse Black exact current Dark roast narrow READY (NOT DEPLOYED)
+
+[PR481](https://github.com/Schulzet3/The-Dial-In-Collective/pull/481) merged nonforce `973a147dbd4c38454a13e2a1c29bf7d48e958a8d`; exactly-source-backed selected original603 #40 Black now extracts `Dark` from the current roaster's direct "darkest ... roast yet" copy, while a selected explicit conflicting Roast Level remains stronger. Corrected PR/head + exact merged Node/lint/build 2320 pass/0 fail/6 intentional skips, cloud/browser/approval/SQL/security and guarded 3/3 official current source replay SUCCESS. Raw #40 H1 and other original fields/conflicts unchanged; #28 related Medium card withheld, #13 FUDAM current locality still qualified. **Queue 5 READY /90 DEPLOYED /3 IN_PROGRESS**; original 603/153 contextual/29 missing-literal not universally verified, signed-in hosted GoTrue not tested. Issue #33 remains OPEN. No publication, SQL/Auth/Edge/member/provider writes. Evidence `docs/audits/issue33-fifteenth3-current-official-20261104.json`. [skip netlify]
+
+---
+
+## November 4, 2026 — #33 current selected Lowcountry growing region narrowly READY, not deployed
+
+PR475 nonforce merged `36d16a8bf726df3541625a69b49d8f634cbed4af` with identical tested source tree, exact merged Node **2,314 pass/0 fail/6 skip**, cloud/mobile/approval and independently guarded 3/3 live official product source replay. Original603 #206 Lowcountry Peru HB now `Chanchamayo, Peru` from exact current selected source vs earlier country-only; #188/#320 fields and all conflicts unchanged. Narrow queue item `DIC-Q-33-selected-lowcountry-chanchamayo-origin` READY, shared-file release isolation requires also selecting existing READY Buncho item or holding; total **4 READY/90 DEPLOYED/3 IN_PROGRESS**. Frozen603 and original 153 contextual/29 missing-literal source-review caveats still open; no publication/SQL/Auth/Edge/member/provider changes. Evidence: `docs/audits/issue33-fourteenth3-current-official-20261104.json`, [merged source run41752527382](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41752527382). [skip netlify]
+
+---
+
+## November 4 UTC — Issue33 #502 selected panela sweetness independently VERIFIED, READY NOT DEPLOYED
+
+[PR #469](https://github.com/Schulzet3/The-Dial-In-Collective/pull/469) safely merged exact source `41000d12a1d878efd25409dfac1cd14d42378e33` after PR-head 2,307 Node passes/0 failures/6 skips and applicable browser/SQL/security/approval/source success. Same tree as tested head. Current official [20-case merged-source run 41744986369](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41744986369) fetched/parsed 20/20 with exact H1/source hashes. Only Kamiak original603 #502 restored directly printed **unrefined panela sweetness** to its two earlier canonical tasting notes; other 19 products' field maps and all conflicts unchanged. New `DIC-Q-33-selected-kamiak-panela-sweetness` READY, not deployed; release queue 3 READY/90 DEPLOYED/3 IN_PROGRESS. No original603 corpus/oracle changes, hosted member testing, Netlify/SQL/Auth/Edge/member writes or publication. Full 153 context-qualified/29 missing-literal-qualified source review and Issue #33 remain OPEN. See scoped journal and source audit receipt. [skip netlify]
+
+---
+
+## November 3, 2026 — Issue #455 offline corrected-shot preview READY, NOT DEPLOYED
+
+[PR #466](https://github.com/Schulzet3/The-Dial-In-Collective/pull/466) safely nonforce merged to development `0a7f82b5fe6724358a86e88f90c83fff0f518fe6` after correcting two genuine initial PR-head failures (queue deployable path and raw-note fixture). Revisioned pending Cloud shot corrections now preview corrected values, notes and recalculated next-step advice on device without modifying the original cache/server or weakening owner/revision/offline guards. Final PR-head approval, Node lint/build, cloud/mobile, SQL and security SUCCESS; exact merged approval41733793531, READY coverage41733793443, lint41733793526 and cloud/browser41733794048 SUCCESS, with **177 cloud tests PASS / 0 FAIL** and localhost Chromium offline PWA acceptance. Source-bounded `DIC-Q-455-pending-edited-shot-preview` is **READY, NOT DEPLOYED**. Other original research and supplemental PDFs remain under substantive review; nine original reports have focused passages checked, not full citation certification. One sweetness-only recommendation policy question remains owner-unapproved for daily 7 a.m. MST digest. No new provider/member/database writes or publication. [#455 journal](workstreams/issue-455.md).
+
+---
+
+## November 3, 2026 — Release15 first live scoped release plus future READY continuity VERIFIED
+
+First real owner-authorized risk-based #417 publication **DEPLOYED**: tested isolated source `f1e150a2e7c95764c4a2d8760886aab23c2bfc5e`, guarded nonforce release `31c66832a28247e657a2bf89592ebc1e2f48dfc5`, GitHub controller run [41732438358](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41732438358) SUCCESS and Netlify [6aea62463d08ddf08e0bec7b](https://app.netlify.com/sites/153277f2-e19e-4862-b9a6-f2e18ccde271/deploys/6aea62463d08ddf08e0bec7b) READY/current at exact release SHA. **Only** #335 engine source shipped; #33 READY remains unpublished. Real scoped tests all required checks succeeded; unnecessary browser/cloud/SQL suites correctly NOT_APPLICABLE, not test PASS. Existing coffee-url-preview function digest unchanged and secret scan zero matches. Supabase read-only: 46 tables, 8 coffees, 25 shots + notes, 11 Community, 11 beta members, 59 receipts; no migration or member writes. Direct live HTTP/signed-in behavior unverified because DNS unavailable from test environment.
+
+**First-live follow-up FIXED and VERIFIED:** The isolated candidate's SHA was incorporated as SECOND parent of no-runtime-change development settlement `a7b9e0826353cfb26acf612e628f64857bb3617f` so later source ancestry remains valid. Main PR [#465](https://github.com/Schulzet3/The-Dial-In-Collective/pull/465) merged `a5b5c75933501d778ea01cd02e82589f51ef7cd6` with exact PR and merged-source release-controller CI **144/144 PASS**, proving two sequential isolated releases preserve pre-merged but unshipped READY features, and pinned the daily encrypted backup app checkout to actual published Release15. No extra backup triggered, existing encrypted archives/Drive schedule preserved. Queue now **90 DEPLOYED / 1 READY (#33) / 3 IN_PROGRESS**. Owner's NEXT publication instruction alone may prepare another release; next #33 overlaps unfinished source and must HOLD until isolated safely. Historical #356 incident preserved, not backdated.
+
+---
+
+## November 3, 2026 — Release15 #335 DEPLOYED / VERIFIED, risk-scoped first READY-only Netlify publication
+
+Owner-selected #335 alone, one READY-only candidate source f1e150a2e7c95764c4a2d8760886aab23c2bfc5e and GitHub nonforce claim 31c66832a28247e657a2bf89592ebc1e2f48dfc5 (run 41732438358 SUCCESS), Netlify 6aea62463d08ddf08e0bec7b **READY/current** at published timestamp 2026-11-03 22:38:16 UTC with exact commit and original function unchanged. Candidate's four workflows / five named checks SUCCESS: focused shot/range/recommendation/offline, lint/build; SQL/cloud/browser NOT_APPLICABLE, not false test PASS. Source diff has only site/lib/engine.js. Supabase read-only aggregate confirms 46 application tables, 8 coffees, 25 shots/notes, 11 community, 11 members and 59 receipts; no new migration or writes. Archive recovery evidence reused. Real signed-in UI/direct HTTP unverified due DNS. Queue #335 now DEPLOYED; #33 remains READY. **First isolation exercise uncovered next-release ancestry limitation**: this settlement links published candidate as second Git parent preserving every development blob; main READY planner requires repair for older pre-published-but-unshipped #33. Source pin to follow on main without extra backup. See Issue #417 and docs/PRODUCTION_RELEASE_2026-11-03_READY335_15_VERIFIED.json.
+
+---
+
 ## November 3 UTC — Issue #33 selected Buncho origin fix VERIFIED / narrow READY, NOT DEPLOYED
 
 [PR #456](https://github.com/Schulzet3/The-Dial-In-Collective/pull/456) nonforce merged `4f36301cc25ea61e593590b5a59ef13df4227da4`, identical to its exact passing tested Git tree; current [La Terza Ethiopia Sidama Buncho](https://laterzacoffee.com/products/ethiopia-sidama-buncho-honey-processed) directly places selected Buncho station in **Sidama, Ethiopia**, not the founder's former **Girja** station. Five adversarial tests; final PR-head 7/7 applicable CI SUCCESS. Exact merged Node/lint/build [41728038875](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41728038875) **2292 PASS / 0 FAIL / 6 configuration SKIP**, cloud/mobile [41728038937](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41728038937) **1763 cloud PASS / 0 FAIL**, approval41728039030 and READY intake41728038942 SUCCESS. Real guarded public source [41728039047](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41728039047): **20/20 official current selected pages fetched/parsed**, #191 H1 exact, origin Sidama, Ethiopia, process Honey, notes retained, conflicts empty; original603 frozen workflow SKIPPED, not PASS. Durable receipt `docs/audits/issue33-buncho-selected-station-current20-20261103.json`. Narrow `DIC-Q-33-selected-buncho-station-history` READY, NOT DEPLOYED; #33 remains OPEN for 153 contextual/29 literal-qualified cases and other unresolved source certification. No production, SQL/Auth/Edge/member operations; Netlify Release14 remains current. [skip netlify]

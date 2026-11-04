@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "reviewed_at_utc": "2026-11-04",
+  "status": "VERIFIED_NARROW_READY_IN_DEVELOPMENT_NOT_DEPLOYED",
+  "base_source_sha": "0f63313960f3265481ae27ca020b535564d6e0f4",
+  "original_603_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "selected_case": {
+    "number": 23,
+    "url": "https://blackriverroasters.com/products/organic-specialty-decaf",
+    "current_h1": "Organic Specialty Decaf",
+    "published_current_prose": "Our decaf coffee rotates throughout the year. The current offering from Peru is no different—rich, chocolaty and nutty.",
+    "published_current_spec": "Current Decaf Coffee; Location: Mexico; Altitude: 1000–1500 masl; Process: Washed, Water-Process Decaffeinated",
+    "source_status": "Actual current official raw HTML SHA256 261446d2fb2b198e01fbe9cb2bdb7d9f072b296b9301bc19bf224cbf82421983, source run41806397565, artifact13309981141",
+    "historical_register_status": "QUALIFIED_MISSING_VALUE_NEEDS_REVIEW",
+    "previous_mapped_origin": "Mexico"
+  },
+  "finding": "Two contradictory selected current-lot country assertions; no one country can be established with confidence",
+  "implementation": "Generic selected exact-decaf H1 and direct current named-offer/current-location disagreement guard; withhold origin and surface both alternatives",
+  "tests": "Five focused positives/negatives PASS; exact PR-head and merge 2361 Node PASS/0 FAIL/6 SKIP; current official exact parser/Add Coffee 1/1 with blank Origin and reviewable ['origin'] conflict.",
+  "scope": {
+    "immutable_original_603_201_1197": true,
+    "queue_unchanged": false,
+    "manual_certified": 0,
+    "no_deployment": true,
+    "no_provider_writes": true,
+    "queue_disposition": "ONE_NEW_READY_ITEM_ALL_103_OLD_ITEMS_PRESERVED"
+  },
+  "next": [
+    "Continue original603 field-by-field official selected source adjudication (153 context, 29 missing-literal, 35 historical indications remain not universally certified)",
+    "Issue33 stays OPEN; #267 V2 and #96 separate",
+    "No Netlify or production/provider/member writes"
+  ],
+  "verified": {
+    "pr": 535,
+    "pr_head": "fd67dae277c9c4845772b7f27336fbb4d1237bfb",
+    "merge_sha": "03dfe68574fda69729fc4a02b57a67abe23042d2",
+    "exact_identical_tree": "d715ab00f2627c62e186c213256eab904b9a3110",
+    "official_run": 41806397565,
+    "official_job": 126494375156,
+    "raw_html_sha256": "261446d2fb2b198e01fbe9cb2bdb7d9f072b296b9301bc19bf224cbf82421983",
+    "artifact_id": 13309981141,
+    "artifact_sha256": "3a3c748638079d05f3ab4fb129f862820b1f893d5e066b67a6d778465ecaf4a6",
+    "selected_h1": "Organic Specialty Decaf",
+    "fetched": 1,
+    "parsed": 1,
+    "add_coffee_ui_rendered": 1,
+    "origin": null,
+    "conflicts": [
+      "origin"
+    ],
+    "roast_level": null,
+    "process": "Washed",
+    "decaffeination_method": "Water Process",
+    "manual_certified": 0,
+    "pr_head_node_run": 41805727316,
+    "merged_node_run": 41806397510,
+    "head_node_pass": 2361,
+    "head_node_fail": 0,
+    "head_skipped": 6,
+    "merged_node_pass": 2361,
+    "merged_node_fail": 0,
+    "merged_skipped": 6,
+    "immutable_original603_csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "full_original603_workflow": "SKIPPED"
+  }
+}

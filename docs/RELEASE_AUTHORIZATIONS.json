@@ -248,6 +248,80 @@
         "DIC-Q-335-historical-grind-range-evidence"
       ],
       "owner_private_free_compensating_controls": true
+    },
+    {
+      "id": "DIC-20261104-READY17-16",
+      "tested_source_sha": "1c8955f5a2dafa47262af5155d0718462d7d74de",
+      "owner_approved": true,
+      "status": "APPROVED",
+      "production_branch": "release/production",
+      "max_publications": 1,
+      "approved_at_utc": "2026-11-04T17:10:23.442Z",
+      "expires_at_utc": "2026-11-04T20:10:23.442Z",
+      "approval_source": "Owner Nov 4, 2026 current conversation: 'Publish all items in the queue' (17 READY IDs, excluding 3 IN_PROGRESS).",
+      "scope": "ONE guarded Git-connected Netlify production publication of exactly 17 READY queue items at source 1c8955f5a2dafa47262af5155d0718462d7d74de, excluding 3 IN_PROGRESS and any other unready code. Apply only non-destructive SQL supabase/migrations/20261104075400_dic_admin_invite_expiry_search.sql after existing verified encrypted offsite backup and all five exact-source CI checks. No Edge/Auth/member writes, unrelated deletions, purchases, credit changes, plan upgrades or future release.",
+      "approved_ready_item_ids": [
+        "DIC-Q-33-19-selected-direct-sweet-undertones",
+        "DIC-Q-33-475-second-component-selected-farm-region",
+        "DIC-Q-33-580-selected-h1-adjacent-farm-locality",
+        "DIC-Q-33-586-direct-selected-sensory-contradiction",
+        "DIC-Q-33-bluejazz-selected-sensory-brightness",
+        "DIC-Q-33-original603-23-current-decaf-origin-conflict",
+        "DIC-Q-33-selected-angel-albino-corzo-region",
+        "DIC-Q-33-selected-brewtus-majority-villages",
+        "DIC-Q-33-selected-brickhouse-darkest-roast",
+        "DIC-Q-33-selected-buncho-station-history",
+        "DIC-Q-33-selected-dehab-kaffa-forest-farms",
+        "DIC-Q-33-selected-fudam-grower-municipality",
+        "DIC-Q-33-selected-kamiak-panela-sweetness",
+        "DIC-Q-33-selected-lowcountry-chanchamayo-origin",
+        "DIC-Q-455-meaningful-yield-step",
+        "DIC-Q-455-pending-edited-shot-preview",
+        "DIC-Q-509-invite-expiration-search"
+      ],
+      "sql_evidence": [
+        "20261104075400 dic_admin_invite_expiry_search non-destructive CREATE OR REPLACE private admin search RPC, pending migration"
+      ],
+      "owner_private_free_compensating_controls": true
+    },
+    {
+      "id": "DIC-20261104-READY20-17",
+      "tested_source_sha": "d9a9724773a59091cb44ba9cc148a2c459f64252",
+      "owner_approved": true,
+      "status": "APPROVED",
+      "production_branch": "release/production",
+      "max_publications": 1,
+      "approved_at_utc": "2026-11-04T23:41:56.547Z",
+      "expires_at_utc": "2026-11-05T03:41:56.547Z",
+      "approval_source": "Owner Nov 4, 2026 current conversation: 'Publish all ready items.' One release for the original 20 READY candidate items.",
+      "scope": "Exactly ONE source-isolated, Git-connected Netlify production publication of the 20 originally READY IDs at immutable candidate d9a9724773a59091cb44ba9cc148a2c459f64252; exclude all unfinished development including #368 build-ignore and #33 narrative/inline-roast work and post-staging READY #62. Non-destructive invite-expiry SQL was independently verified already applied in production via migration 20261104171057; do not reapply. Require all five exact candidate CI SUCCESS, encrypted private Drive backup evidence, strict one-use claim and nonforce publisher, Netlify READY/current exact-source verification. No unrelated member data/Auth/Edge writes, destructive SQL, purchases/upgrades, backup deletion, or additional release.",
+      "approved_ready_item_ids": [
+        "DIC-Q-33-19-selected-direct-sweet-undertones",
+        "DIC-Q-33-475-second-component-selected-farm-region",
+        "DIC-Q-33-580-selected-h1-adjacent-farm-locality",
+        "DIC-Q-33-586-direct-selected-sensory-contradiction",
+        "DIC-Q-33-bluejazz-selected-sensory-brightness",
+        "DIC-Q-33-original603-125-current-origin-seo",
+        "DIC-Q-33-original603-23-current-decaf-origin-conflict",
+        "DIC-Q-33-selected-angel-albino-corzo-region",
+        "DIC-Q-33-selected-brewtus-majority-villages",
+        "DIC-Q-33-selected-brickhouse-darkest-roast",
+        "DIC-Q-33-selected-buncho-station-history",
+        "DIC-Q-33-selected-dehab-kaffa-forest-farms",
+        "DIC-Q-33-selected-fudam-grower-municipality",
+        "DIC-Q-33-selected-kamiak-panela-sweetness",
+        "DIC-Q-33-selected-lowcountry-chanchamayo-origin",
+        "DIC-Q-455-legacy-undated-feedback",
+        "DIC-Q-455-meaningful-yield-step",
+        "DIC-Q-455-pending-edited-shot-preview",
+        "DIC-Q-455-recipe-context-feedback",
+        "DIC-Q-509-invite-expiration-search"
+      ],
+      "sql_evidence": [
+        "Selected migration exact Git blob 6e557805aac8c8005e8a18fd2e593b66aabb363b; exact candidate SQL check required SUCCESS.",
+        "Supabase production already lists migration 20261104171057 dic_admin_invite_expiry_search and retains admin authorization and expired search; do not duplicate apply."
+      ],
+      "owner_private_free_compensating_controls": true
     }
   ],
   "policy": "New owner publish/deploy instruction grants one selected READY release at the exact combined tested source SHA; source-bound unique grant, max 1 publication, finite expiry, matched CI, backup/security and Netlify readback. Owner exclusively monitors credits; no credit cap/balance/plan proof required. Never buy or upgrade. Prior grants and their old cost fields are preserved historical evidence."

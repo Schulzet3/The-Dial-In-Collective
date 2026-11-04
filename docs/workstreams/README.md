@@ -6,7 +6,9 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 - [Owner-approved refinements: Issue #80](issue-80.md)
 - [Current-workflow reconciliation: Issue #70](issue-70.md)
 - [Repository-wide source and security inspection: Issue #96](issue-96.md)
+- [Temporary public visibility credential-exposure guard: Issue #630](issue-630.md)
 - [Frozen 579,961-line historical expert semantic review: Issue #267](issue-267.md)
+- [GitHub-wide exhaustive word-level records/doc audit: Issue #504](issue-504.md) — nonoverlapping with #267 source-code review
 - [Issue #96 source-transfer and receipt evidence](ops-issue96-receipt.md)
 - [Selected-product extraction completeness: Issue #33](issue-33.md)
 - [Issue #33 November 2 targeted official-source probe and adversarial tests](issue-33-tenth3.md)
@@ -28,7 +30,7 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 - [October28 queue audit and release](release-20261028.md)
 
 - [Issue #30 recovered private historical-source inventory](issue-30.md)
-- [Issue #37 source-checked beginner walkthrough draft](issue-37.md)
+- [Issue #37 deployed beginner guide/video — owner accepted](issue-37.md)
 
 - [Issue #50 real-release controller-stage timing evidence](issue-50.md)
 - [Issue #133 completed conductor setup and residual ownership](issue-133.md)
@@ -40,5 +42,7 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 - [Issue #335 research intake and diagnostic feedback](issue-335.md)
 
 - [Cross-provider readiness and obsolete-item audit — November 1](ops-provider-readiness-20261101.md)
+
+- [Netlify rolling exhaustive audit and source-pinning remediation: Issue #508](issue-508.md)
 
 - [Automatic READY-batch source-bound CI journal](release-ready-batch.md) — explicitly recognized same-commit CI work journal.
