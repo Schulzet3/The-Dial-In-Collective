@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "original603_number": 502,
+  "state": "TESTING_PENDING_PR_HEAD_CI_AND_FRESH_CURRENT_OFFICIAL_REPLAY",
+  "official_url": "https://www.kamiakcoffeeco.com/products/brazil-single-estate",
+  "selected_h1": "Brazil - Fazenda Samambaia",
+  "current_product_literally_prints": "This delightful Brazil Single estate coffee has notes of mellow cocoa and roasted peanut with an unrefined panela sweetness.",
+  "prior_source": {
+    "run": 41356573624,
+    "job": 124997807771,
+    "source_sha": "b40ab05559d6be3a858be4cd16ca1df7263aa29b",
+    "html_sha256": "a596d732250f42419f77109d4207bede4e2d04924afb9ef9400ccdafbbc7ffc5",
+    "parser_tasting_notes": "mellow cocoa and roasted peanut",
+    "conflicts": []
+  },
+  "unchanged_actual_parser_blob_at_parent": "b8d13f4f9c1f500a61db29da2ed40f8ef5ed6a29",
+  "accepted_source_evidence": "Current exact selected official page public text independently viewed on November 3; public bytes not asserted identical to prior source-bound run.",
+  "expected": "Retain literal unrefined panela sweetness without other coffee's notes or speculative additions; all other fields/conflicts preserved.",
+  "tests": [
+    "tests/coffee-issue33-kamiak-unrefined-sweetness.test.mjs"
+  ],
+  "remaining": [
+    "Run exact PR-head CI and fix any failures",
+    "Nonforce integrate and run exact current official 20-product probe via fifth20 selector",
+    "Read back field/conflict before-and-after, only then mark scoped READY",
+    "Full frozen603 and hosted GoTrue remain unverified"
+  ],
+  "no_frozen_oracle_capture_changes": true,
+  "no_production_or_member_writes": true
+}
