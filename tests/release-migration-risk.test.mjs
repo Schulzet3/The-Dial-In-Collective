@@ -37,3 +37,17 @@ test('readiness report never misstates publication or owner-device acceptance',(
  assert.match(s,/NOT YET VERIFIED AS PUBLISHED/);assert.match(s,/NOT REQUIRED/);assert.match(s,/Extra encrypted backup required:\*\* NO/);
  assert.match(s,/Owner-managed/);assert.doesNotMatch(s,/observed credit count|minimum credit|snapshot credit/i);
 });
+
+test('insert, merge and COPY data-write paths require potentially-destructive recovery evidence',()=>{
+ for(const sql of [
+  "INSERT INTO public.shots (id) VALUES ('example')",
+  'WITH candidate AS (SELECT 1) INSERT INTO public.shots(id) SELECT * FROM candidate',
+  'MERGE INTO public.shots AS s USING public.source AS t ON s.id=t.id WHEN MATCHED THEN DELETE;',
+  'COPY public.shots FROM STDIN WITH (FORMAT csv)',
+  'COPY public.shots (id, name) FROM \'/tmp/source.csv\' CSV'
+ ]) {
+  const risk=classifyMigrationDiff('A\t'+add+'\n',()=>sql);
+  assert.equal(risk.risk,'potentially_destructive',sql);
+  assert.equal(risk.reason,'SQL_CAN_MODIFY_OR_REMOVE_EXISTING_DATA');
+ }
+});
