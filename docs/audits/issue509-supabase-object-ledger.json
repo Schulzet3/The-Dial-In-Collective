@@ -1,0 +1,1328 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "repository": "Schulzet3/The-Dial-In-Collective",
+  "authority": "GitHub Issue #509; development only; no production writes/deploy",
+  "schema_inventory_scope": "pg_namespace excluding transient/temp/toast; counts are METADATA ONLY",
+  "initial_recovery": {
+    "development_sha": "30cb495db37d9c791356fe580e1b87558e13527c",
+    "main_sha": "a5b5c75933501d778ea01cd02e82589f51ef7cd6",
+    "production_sha": "31c66832a28247e657a2bf89592ebc1e2f48dfc5",
+    "provider_status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003"
+  },
+  "schema_counts": [
+    {
+      "schema": "auth",
+      "tables": 27,
+      "views": 0,
+      "indexes": 111,
+      "functions": 4,
+      "policies": 0,
+      "custom_triggers": 1,
+      "constraints": 110,
+      "scope": "PLATFORM_OR_EXTENSION_METADATA_ONLY"
+    },
+    {
+      "schema": "extensions",
+      "tables": 0,
+      "views": 2,
+      "indexes": 0,
+      "functions": 90,
+      "policies": 0,
+      "custom_triggers": 0,
+      "constraints": 0,
+      "scope": "PLATFORM_OR_EXTENSION_METADATA_ONLY"
+    },
+    {
+      "schema": "graphql",
+      "tables": 0,
+      "views": 0,
+      "indexes": 0,
+      "functions": 0,
+      "policies": 0,
+      "custom_triggers": 0,
+      "constraints": 0,
+      "scope": "PLATFORM_OR_EXTENSION_METADATA_ONLY"
+    },
+    {
+      "schema": "graphql_public",
+      "tables": 0,
+      "views": 0,
+      "indexes": 0,
+      "functions": 1,
+      "policies": 0,
+      "custom_triggers": 0,
+      "constraints": 0,
+      "scope": "PLATFORM_OR_EXTENSION_METADATA_ONLY"
+    },
+    {
+      "schema": "pg_catalog",
+      "tables": 64,
+      "views": 78,
+      "indexes": 124,
+      "functions": 3319,
+      "policies": 0,
+      "custom_triggers": 0,
+      "constraints": 110,
+      "scope": "PLATFORM_OR_EXTENSION_METADATA_ONLY"
+    },
+    {
+      "schema": "pgbouncer",
+      "tables": 0,
+      "views": 0,
+      "indexes": 0,
+      "functions": 1,
+      "policies": 0,
+      "custom_triggers": 0,
+      "constraints": 0,
+      "scope": "PLATFORM_OR_EXTENSION_METADATA_ONLY"
+    },
+    {
+      "schema": "private",
+      "tables": 24,
+      "views": 0,
+      "indexes": 31,
+      "functions": 57,
+      "policies": 18,
+      "custom_triggers": 1,
+      "constraints": 89,
+      "scope": "APPLICATION"
+    },
+    {
+      "schema": "public",
+      "tables": 22,
+      "views": 0,
+      "indexes": 67,
+      "functions": 42,
+      "policies": 24,
+      "custom_triggers": 23,
+      "constraints": 177,
+      "scope": "APPLICATION"
+    },
+    {
+      "schema": "realtime",
+      "tables": 3,
+      "views": 0,
+      "indexes": 4,
+      "functions": 18,
+      "policies": 0,
+      "custom_triggers": 1,
+      "constraints": 5,
+      "scope": "PLATFORM_OR_EXTENSION_METADATA_ONLY"
+    },
+    {
+      "schema": "storage",
+      "tables": 8,
+      "views": 0,
+      "indexes": 20,
+      "functions": 19,
+      "policies": 0,
+      "custom_triggers": 7,
+      "constraints": 20,
+      "scope": "PLATFORM_OR_EXTENSION_METADATA_ONLY"
+    },
+    {
+      "schema": "supabase_migrations",
+      "tables": 1,
+      "views": 0,
+      "indexes": 2,
+      "functions": 0,
+      "policies": 0,
+      "custom_triggers": 0,
+      "constraints": 2,
+      "scope": "PLATFORM_OR_EXTENSION_METADATA_ONLY"
+    },
+    {
+      "schema": "vault",
+      "tables": 1,
+      "views": 1,
+      "indexes": 2,
+      "functions": 5,
+      "policies": 0,
+      "custom_triggers": 0,
+      "constraints": 1,
+      "scope": "PLATFORM_OR_EXTENSION_METADATA_ONLY"
+    }
+  ],
+  "function_manifest": {
+    "sort": "schema,proname,identity_args,oid; ordinal 1..99",
+    "manifest_source": "read-only live pg_proc/pg_namespace/pg_get_functiondef",
+    "app_definitions_total": 99,
+    "app_definition_characters_total": 207402,
+    "app_whitespace_tokens_total": 16880,
+    "manifest": [
+      {
+        "ordinal": 1,
+        "schema": "private",
+        "name": "apply_prototype_import",
+        "args": "u uuid, doc jsonb",
+        "definition_md5": "479cc03d9ea9862176b0c663d99369b0",
+        "source_chars": 16423,
+        "source_newline_count": 192,
+        "whitespace_token_count": 1300
+      },
+      {
+        "ordinal": 2,
+        "schema": "private",
+        "name": "bump_revision",
+        "args": "",
+        "definition_md5": "651239ce95a684d072c16fdb895ead7d",
+        "source_chars": 261,
+        "source_newline_count": 11,
+        "whitespace_token_count": 24
+      },
+      {
+        "ordinal": 3,
+        "schema": "private",
+        "name": "capture_equipment_snapshot",
+        "args": "",
+        "definition_md5": "90c66b59638b48d360e9fd949db63707",
+        "source_chars": 1166,
+        "source_newline_count": 18,
+        "whitespace_token_count": 98
+      },
+      {
+        "ordinal": 4,
+        "schema": "private",
+        "name": "classify_personal_shot",
+        "args": "shotid uuid",
+        "definition_md5": "5183deb46474c10468638cef08d2bd05",
+        "source_chars": 3219,
+        "source_newline_count": 62,
+        "whitespace_token_count": 281
+      },
+      {
+        "ordinal": 5,
+        "schema": "private",
+        "name": "dic_admin_access_overview",
+        "args": "",
+        "definition_md5": "640a5fd16a194578228963d73d079810",
+        "source_chars": 1743,
+        "source_newline_count": 41,
+        "whitespace_token_count": 158
+      },
+      {
+        "ordinal": 6,
+        "schema": "private",
+        "name": "dic_admin_coffee_candidates",
+        "args": "p_submission_id uuid",
+        "definition_md5": "cb3cc3677b37f577643d248db1060a43",
+        "source_chars": 2032,
+        "source_newline_count": 36,
+        "whitespace_token_count": 142
+      },
+      {
+        "ordinal": 7,
+        "schema": "private",
+        "name": "dic_admin_dashboard_read",
+        "args": "",
+        "definition_md5": "e9f2b19f77b1365c57fe74e35c71d023",
+        "source_chars": 2413,
+        "source_newline_count": 53,
+        "whitespace_token_count": 181
+      },
+      {
+        "ordinal": 8,
+        "schema": "private",
+        "name": "dic_admin_delete_preview",
+        "args": "p_kind text, p_record_id uuid",
+        "definition_md5": "733e337473ef8f190e3a78ebf5ebfad1",
+        "source_chars": 4060,
+        "source_newline_count": 60,
+        "whitespace_token_count": 362
+      },
+      {
+        "ordinal": 9,
+        "schema": "private",
+        "name": "dic_admin_delete_record",
+        "args": "p_kind text, p_record_id uuid, p_expected_revision bigint, p_expected_impact jsonb",
+        "definition_md5": "71d4703233388fb04e263767caa5b57b",
+        "source_chars": 4091,
+        "source_newline_count": 70,
+        "whitespace_token_count": 348
+      },
+      {
+        "ordinal": 10,
+        "schema": "private",
+        "name": "dic_admin_edit_record",
+        "args": "p_record_id uuid, p_expected_revision bigint, p_details jsonb, p_reason text, p_kind text",
+        "definition_md5": "290b98b6bb6f99a1afb73b13ff315b12",
+        "source_chars": 13186,
+        "source_newline_count": 182,
+        "whitespace_token_count": 1060
+      },
+      {
+        "ordinal": 11,
+        "schema": "private",
+        "name": "dic_admin_issue_invite",
+        "args": "p_label text",
+        "definition_md5": "98f1ee7c95ab2ff1f49269cb9db65180",
+        "source_chars": 1946,
+        "source_newline_count": 41,
+        "whitespace_token_count": 164
+      },
+      {
+        "ordinal": 12,
+        "schema": "private",
+        "name": "dic_admin_records",
+        "args": "p_kind text, p_offset integer, p_limit integer",
+        "definition_md5": "3c4086808ee07058a867a1af9e8270bd",
+        "source_chars": 6190,
+        "source_newline_count": 103,
+        "whitespace_token_count": 462
+      },
+      {
+        "ordinal": 13,
+        "schema": "private",
+        "name": "dic_admin_review_candidates",
+        "args": "p_submission_id uuid",
+        "definition_md5": "952b9cd2a21463f1073494a4d05b468f",
+        "source_chars": 2362,
+        "source_newline_count": 44,
+        "whitespace_token_count": 162
+      },
+      {
+        "ordinal": 14,
+        "schema": "private",
+        "name": "dic_admin_review_coffee",
+        "args": "p_submission_id uuid, p_expected_revision bigint, p_action text, p_reason text, p_canonical_id uuid",
+        "definition_md5": "cb5c264aceb9699a498177f3f6861783",
+        "source_chars": 4526,
+        "source_newline_count": 71,
+        "whitespace_token_count": 382
+      },
+      {
+        "ordinal": 15,
+        "schema": "private",
+        "name": "dic_admin_revoke_invite",
+        "args": "p_invite_id uuid",
+        "definition_md5": "db081b0e313f47a78c50789879e590cb",
+        "source_chars": 1027,
+        "source_newline_count": 26,
+        "whitespace_token_count": 101
+      },
+      {
+        "ordinal": 16,
+        "schema": "private",
+        "name": "dic_admin_search_records",
+        "args": "p_kind text, p_query text, p_offset integer, p_limit integer",
+        "definition_md5": "fa84ffd4d121ba5b9aa4dc6ec3b98642",
+        "source_chars": 8729,
+        "source_newline_count": 122,
+        "whitespace_token_count": 642
+      },
+      {
+        "ordinal": 17,
+        "schema": "private",
+        "name": "dic_admin_set_member_access",
+        "args": "p_member_id uuid, p_enabled boolean",
+        "definition_md5": "19e71a0286d222f03f59604aae1c2ab8",
+        "source_chars": 2027,
+        "source_newline_count": 38,
+        "whitespace_token_count": 219
+      },
+      {
+        "ordinal": 18,
+        "schema": "private",
+        "name": "dic_backfill_library_contributions",
+        "args": "p_owner uuid, p_entry uuid, p_canonical uuid",
+        "definition_md5": "424a5c87c53165a918f7094bf67d25bb",
+        "source_chars": 2360,
+        "source_newline_count": 50,
+        "whitespace_token_count": 172
+      },
+      {
+        "ordinal": 19,
+        "schema": "private",
+        "name": "dic_canonical_roaster_key",
+        "args": "value text",
+        "definition_md5": "55aeb461080be1221e82d8a86a9d270d",
+        "source_chars": 573,
+        "source_newline_count": 15,
+        "whitespace_token_count": 64
+      },
+      {
+        "ordinal": 20,
+        "schema": "private",
+        "name": "dic_capture_first_decaf_method",
+        "args": "",
+        "definition_md5": "9a47ec8959cf43d08f1d326e4b0bce4f",
+        "source_chars": 1211,
+        "source_newline_count": 25,
+        "whitespace_token_count": 118
+      },
+      {
+        "ordinal": 21,
+        "schema": "private",
+        "name": "dic_capture_recommendation_context",
+        "args": "",
+        "definition_md5": "962e12faeac2a7b5a671bd837c6c5c41",
+        "source_chars": 1760,
+        "source_newline_count": 35,
+        "whitespace_token_count": 153
+      },
+      {
+        "ordinal": 22,
+        "schema": "private",
+        "name": "dic_claim_first_style_prompt_impl",
+        "args": "p_library_entry_id uuid",
+        "definition_md5": "31f06eec62a745bf998b749af71816db",
+        "source_chars": 940,
+        "source_newline_count": 19,
+        "whitespace_token_count": 89
+      },
+      {
+        "ordinal": 23,
+        "schema": "private",
+        "name": "dic_coffee_key",
+        "args": "value text",
+        "definition_md5": "8f6840ddd7e530e311c096591c01ce15",
+        "source_chars": 251,
+        "source_newline_count": 8,
+        "whitespace_token_count": 24
+      },
+      {
+        "ordinal": 24,
+        "schema": "private",
+        "name": "dic_community_fingerprint",
+        "args": "c community_shots",
+        "definition_md5": "06eaeadaef87a445b99d431ae67dd409",
+        "source_chars": 478,
+        "source_newline_count": 13,
+        "whitespace_token_count": 26
+      },
+      {
+        "ordinal": 25,
+        "schema": "private",
+        "name": "dic_confirm_coffee_existing",
+        "args": "mid uuid, p jsonb",
+        "definition_md5": "0fcc44bb8a05f46e87694d3474eb7c23",
+        "source_chars": 3239,
+        "source_newline_count": 52,
+        "whitespace_token_count": 251
+      },
+      {
+        "ordinal": 26,
+        "schema": "private",
+        "name": "dic_edit_my_coffee",
+        "args": "p_library_entry uuid, p_expected_revision bigint, p_details jsonb, p_source_url text",
+        "definition_md5": "5a52eee42d3427ccbad8b7272ff8df90",
+        "source_chars": 7162,
+        "source_newline_count": 136,
+        "whitespace_token_count": 612
+      },
+      {
+        "ordinal": 27,
+        "schema": "private",
+        "name": "dic_find_coffee_matches",
+        "args": "p jsonb",
+        "definition_md5": "0ba424a2a66e99dc98629a89d485680b",
+        "source_chars": 6024,
+        "source_newline_count": 115,
+        "whitespace_token_count": 473
+      },
+      {
+        "ordinal": 28,
+        "schema": "private",
+        "name": "dic_link_pending_coffee",
+        "args": "sid uuid, canonical uuid, event_name text, evidence jsonb",
+        "definition_md5": "140c211a4bfef175b041c037561a1e37",
+        "source_chars": 3954,
+        "source_newline_count": 57,
+        "whitespace_token_count": 319
+      },
+      {
+        "ordinal": 29,
+        "schema": "private",
+        "name": "dic_member_retry_pending_approval",
+        "args": "p_submission_id uuid, p_expected_revision bigint",
+        "definition_md5": "5ebb55ad50529a080b3c2332a29d3309",
+        "source_chars": 2166,
+        "source_newline_count": 39,
+        "whitespace_token_count": 164
+      },
+      {
+        "ordinal": 30,
+        "schema": "private",
+        "name": "dic_on_community_coffee_verification",
+        "args": "",
+        "definition_md5": "cefee7b991e40185eadbacde89def3aa",
+        "source_chars": 1065,
+        "source_newline_count": 26,
+        "whitespace_token_count": 90
+      },
+      {
+        "ordinal": 31,
+        "schema": "private",
+        "name": "dic_on_library_coffee_change",
+        "args": "",
+        "definition_md5": "b6cbc45072b0e9f8ebb511b2eca3895f",
+        "source_chars": 347,
+        "source_newline_count": 13,
+        "whitespace_token_count": 35
+      },
+      {
+        "ordinal": 32,
+        "schema": "private",
+        "name": "dic_promote_pending_coffee",
+        "args": "sid uuid, method text, evidence jsonb, distinct_confirmed boolean",
+        "definition_md5": "f9c37ac804b3b2c425cd86284020b581",
+        "source_chars": 11956,
+        "source_newline_count": 194,
+        "whitespace_token_count": 908
+      },
+      {
+        "ordinal": 33,
+        "schema": "private",
+        "name": "dic_recheck_after_link",
+        "args": "",
+        "definition_md5": "9fc3b44ef631cb87bc0b40e689c123b8",
+        "source_chars": 251,
+        "source_newline_count": 10,
+        "whitespace_token_count": 25
+      },
+      {
+        "ordinal": 34,
+        "schema": "private",
+        "name": "dic_review_community_shot",
+        "args": "p_id uuid",
+        "definition_md5": "c5aea4d32aa8027a39d80341feade406",
+        "source_chars": 7734,
+        "source_newline_count": 164,
+        "whitespace_token_count": 714
+      },
+      {
+        "ordinal": 35,
+        "schema": "private",
+        "name": "dic_review_pending_community",
+        "args": "p_limit integer",
+        "definition_md5": "ff876442da558f60f7eccb36bd6dbe62",
+        "source_chars": 944,
+        "source_newline_count": 23,
+        "whitespace_token_count": 89
+      },
+      {
+        "ordinal": 36,
+        "schema": "private",
+        "name": "dic_roaster_key",
+        "args": "value text",
+        "definition_md5": "e553ae6c1cf99c3784f5d14a4f05d355",
+        "source_chars": 388,
+        "source_newline_count": 12,
+        "whitespace_token_count": 29
+      },
+      {
+        "ordinal": 37,
+        "schema": "private",
+        "name": "dic_shared_preview_claim",
+        "args": "account_id uuid",
+        "definition_md5": "b99b6cbd392562af334c68e056ce33d8",
+        "source_chars": 1380,
+        "source_newline_count": 31,
+        "whitespace_token_count": 102
+      },
+      {
+        "ordinal": 38,
+        "schema": "private",
+        "name": "dic_source_key",
+        "args": "value text",
+        "definition_md5": "07e0ef286246fdae29b9151018296f79",
+        "source_chars": 981,
+        "source_newline_count": 26,
+        "whitespace_token_count": 97
+      },
+      {
+        "ordinal": 39,
+        "schema": "private",
+        "name": "dic_submit_coffee_auto",
+        "args": "mid uuid, p jsonb",
+        "definition_md5": "e2b11c83a686a5a9949699cd23b52e13",
+        "source_chars": 3771,
+        "source_newline_count": 65,
+        "whitespace_token_count": 253
+      },
+      {
+        "ordinal": 40,
+        "schema": "private",
+        "name": "handle_new_auth_user",
+        "args": "",
+        "definition_md5": "ba4f31790060a75e074148034f26dfbe",
+        "source_chars": 372,
+        "source_newline_count": 12,
+        "whitespace_token_count": 35
+      },
+      {
+        "ordinal": 41,
+        "schema": "private",
+        "name": "import_id",
+        "args": "u uuid, kind text, source_id text",
+        "definition_md5": "d8dacedebb77db30037b10ee1bac97aa",
+        "source_chars": 436,
+        "source_newline_count": 12,
+        "whitespace_token_count": 60
+      },
+      {
+        "ordinal": 42,
+        "schema": "private",
+        "name": "import_operation",
+        "args": "expected_owner uuid, doc jsonb, save boolean, review_hash text, recovery_saved boolean",
+        "definition_md5": "b684a6af862302d9d4bb7c212208f5e0",
+        "source_chars": 3124,
+        "source_newline_count": 46,
+        "whitespace_token_count": 284
+      },
+      {
+        "ordinal": 43,
+        "schema": "private",
+        "name": "is_admin",
+        "args": "",
+        "definition_md5": "396d3e8e29dbd4550ec7ac26b7589a63",
+        "source_chars": 264,
+        "source_newline_count": 8,
+        "whitespace_token_count": 31
+      },
+      {
+        "ordinal": 44,
+        "schema": "private",
+        "name": "is_member",
+        "args": "",
+        "definition_md5": "dbc163d07f45e8b5831f6a6394a70ab8",
+        "source_chars": 257,
+        "source_newline_count": 8,
+        "whitespace_token_count": 31
+      },
+      {
+        "ordinal": 45,
+        "schema": "private",
+        "name": "mutate",
+        "args": "mid uuid, action text, p jsonb",
+        "definition_md5": "d1050c2ee3b2896c6fbd8b90bdba9052",
+        "source_chars": 10881,
+        "source_newline_count": 123,
+        "whitespace_token_count": 755
+      },
+      {
+        "ordinal": 46,
+        "schema": "private",
+        "name": "mutate_workspace",
+        "args": "mid uuid, action text, p jsonb",
+        "definition_md5": "f3eb1b5086e4396625f3efa38f4c9165",
+        "source_chars": 6384,
+        "source_newline_count": 64,
+        "whitespace_token_count": 525
+      },
+      {
+        "ordinal": 47,
+        "schema": "private",
+        "name": "project_shot",
+        "args": "",
+        "definition_md5": "79e6fd0668fa4502c8785b3e92a14a61",
+        "source_chars": 3045,
+        "source_newline_count": 40,
+        "whitespace_token_count": 159
+      },
+      {
+        "ordinal": 48,
+        "schema": "private",
+        "name": "protect_shot_provenance",
+        "args": "",
+        "definition_md5": "9700d82ba097c7eba83b76135acbdac1",
+        "source_chars": 683,
+        "source_newline_count": 12,
+        "whitespace_token_count": 43
+      },
+      {
+        "ordinal": 49,
+        "schema": "private",
+        "name": "read_personal_state",
+        "args": "",
+        "definition_md5": "037d248b67cc3e8490c1689d3200990f",
+        "source_chars": 2339,
+        "source_newline_count": 29,
+        "whitespace_token_count": 175
+      },
+      {
+        "ordinal": 50,
+        "schema": "private",
+        "name": "redeem_beta_invite",
+        "args": "token text",
+        "definition_md5": "e942168297d4fe96b4639d5a9f9eeaa9",
+        "source_chars": 2102,
+        "source_newline_count": 27,
+        "whitespace_token_count": 200
+      },
+      {
+        "ordinal": 51,
+        "schema": "private",
+        "name": "refresh_personal_family",
+        "args": "fid uuid",
+        "definition_md5": "e6a15e6de21f56345479574cc575cf95",
+        "source_chars": 2134,
+        "source_newline_count": 45,
+        "whitespace_token_count": 216
+      },
+      {
+        "ordinal": 52,
+        "schema": "private",
+        "name": "reject_version_update",
+        "args": "",
+        "definition_md5": "1679d0091bcc8e9608d9af0914955864",
+        "source_chars": 270,
+        "source_newline_count": 8,
+        "whitespace_token_count": 31
+      },
+      {
+        "ordinal": 53,
+        "schema": "private",
+        "name": "remember_feed_condition",
+        "args": "",
+        "definition_md5": "417b99a5145e27b5941b504d1d7509c1",
+        "source_chars": 702,
+        "source_newline_count": 16,
+        "whitespace_token_count": 65
+      },
+      {
+        "ordinal": 54,
+        "schema": "private",
+        "name": "rename_setup",
+        "args": "mid uuid, p jsonb",
+        "definition_md5": "d5efbc70d20f75d6e3aeea4b64ab078b",
+        "source_chars": 1792,
+        "source_newline_count": 37,
+        "whitespace_token_count": 172
+      },
+      {
+        "ordinal": 55,
+        "schema": "private",
+        "name": "require_member",
+        "args": "",
+        "definition_md5": "27ff3a2a7fcf231171778a2d584b1851",
+        "source_chars": 347,
+        "source_newline_count": 11,
+        "whitespace_token_count": 46
+      },
+      {
+        "ordinal": 56,
+        "schema": "private",
+        "name": "required_revision",
+        "args": "p jsonb",
+        "definition_md5": "d14d1f80af2c73f953a37818f8488ca0",
+        "source_chars": 382,
+        "source_newline_count": 10,
+        "whitespace_token_count": 40
+      },
+      {
+        "ordinal": 57,
+        "schema": "private",
+        "name": "session_status",
+        "args": "",
+        "definition_md5": "f69fcc8be4b6f4dd2bdfe12679137519",
+        "source_chars": 455,
+        "source_newline_count": 10,
+        "whitespace_token_count": 37
+      },
+      {
+        "ordinal": 58,
+        "schema": "public",
+        "name": "dic_admin_access_overview",
+        "args": "",
+        "definition_md5": "15ea6e60d84362b6fa32f9f40f567df8",
+        "source_chars": 192,
+        "source_newline_count": 8,
+        "whitespace_token_count": 20
+      },
+      {
+        "ordinal": 59,
+        "schema": "public",
+        "name": "dic_admin_approve_own_coffee",
+        "args": "submission_id uuid",
+        "definition_md5": "dad5489e9916e30aef63110f7b666954",
+        "source_chars": 380,
+        "source_newline_count": 9,
+        "whitespace_token_count": 32
+      },
+      {
+        "ordinal": 60,
+        "schema": "public",
+        "name": "dic_admin_coffee_candidates",
+        "args": "p_submission_id uuid",
+        "definition_md5": "cb857122b118c9c3b3e7190bae52168a",
+        "source_chars": 231,
+        "source_newline_count": 8,
+        "whitespace_token_count": 21
+      },
+      {
+        "ordinal": 61,
+        "schema": "public",
+        "name": "dic_admin_dashboard",
+        "args": "",
+        "definition_md5": "10cb975d77d22778ebd72d59dba6e934",
+        "source_chars": 186,
+        "source_newline_count": 8,
+        "whitespace_token_count": 20
+      },
+      {
+        "ordinal": 62,
+        "schema": "public",
+        "name": "dic_admin_delete_preview",
+        "args": "p_kind text, p_record_id uuid",
+        "definition_md5": "102b8d2797413ed02a943d093cc60427",
+        "source_chars": 237,
+        "source_newline_count": 8,
+        "whitespace_token_count": 23
+      },
+      {
+        "ordinal": 63,
+        "schema": "public",
+        "name": "dic_admin_delete_record",
+        "args": "p_kind text, p_record_id uuid, p_expected_revision bigint, p_expected_impact jsonb",
+        "definition_md5": "54ad38cc86048b526c158f4f34867398",
+        "source_chars": 318,
+        "source_newline_count": 7,
+        "whitespace_token_count": 26
+      },
+      {
+        "ordinal": 64,
+        "schema": "public",
+        "name": "dic_admin_edit_coffee",
+        "args": "p_record_id uuid, p_expected_revision bigint, p_details jsonb, p_reason text, p_kind text",
+        "definition_md5": "24e3081d08de58a97f7eeaa65cb568bc",
+        "source_chars": 550,
+        "source_newline_count": 14,
+        "whitespace_token_count": 57
+      },
+      {
+        "ordinal": 65,
+        "schema": "public",
+        "name": "dic_admin_edit_shot",
+        "args": "p_record_id uuid, p_expected_revision bigint, p_details jsonb, p_reason text, p_kind text",
+        "definition_md5": "b4e2f07488e5ebc93d1569ca46ad0fbd",
+        "source_chars": 548,
+        "source_newline_count": 14,
+        "whitespace_token_count": 57
+      },
+      {
+        "ordinal": 66,
+        "schema": "public",
+        "name": "dic_admin_issue_invite",
+        "args": "p_label text",
+        "definition_md5": "bcbb34a87e9354a83f8114d7e61ea07d",
+        "source_chars": 214,
+        "source_newline_count": 7,
+        "whitespace_token_count": 22
+      },
+      {
+        "ordinal": 67,
+        "schema": "public",
+        "name": "dic_admin_records",
+        "args": "p_kind text, p_offset integer, p_limit integer",
+        "definition_md5": "bfdf280c85fdf95c72bd2f7f545659b1",
+        "source_chars": 266,
+        "source_newline_count": 8,
+        "whitespace_token_count": 29
+      },
+      {
+        "ordinal": 68,
+        "schema": "public",
+        "name": "dic_admin_review_candidates",
+        "args": "p_submission_id uuid",
+        "definition_md5": "a03f0e34a59684c9b0810ce8b1f79b96",
+        "source_chars": 231,
+        "source_newline_count": 8,
+        "whitespace_token_count": 21
+      },
+      {
+        "ordinal": 69,
+        "schema": "public",
+        "name": "dic_admin_review_coffee",
+        "args": "p_submission_id uuid, p_expected_revision bigint, p_action text, p_reason text, p_canonical_id uuid",
+        "definition_md5": "249b84c409201e14f1b75235f9ae3ffa",
+        "source_chars": 366,
+        "source_newline_count": 7,
+        "whitespace_token_count": 30
+      },
+      {
+        "ordinal": 70,
+        "schema": "public",
+        "name": "dic_admin_revoke_invite",
+        "args": "p_invite_id uuid",
+        "definition_md5": "4b1c53645b52aacfa4fbbbbbdf035e5e",
+        "source_chars": 207,
+        "source_newline_count": 7,
+        "whitespace_token_count": 20
+      },
+      {
+        "ordinal": 71,
+        "schema": "public",
+        "name": "dic_admin_search_records",
+        "args": "p_kind text, p_query text, p_offset integer, p_limit integer",
+        "definition_md5": "de9c08308b98e3de0d7d1db084dae375",
+        "source_chars": 302,
+        "source_newline_count": 8,
+        "whitespace_token_count": 31
+      },
+      {
+        "ordinal": 72,
+        "schema": "public",
+        "name": "dic_admin_set_member_access",
+        "args": "p_member_id uuid, p_enabled boolean",
+        "definition_md5": "67ea2ae8b4603b266e910bc8f6ff7240",
+        "source_chars": 244,
+        "source_newline_count": 7,
+        "whitespace_token_count": 22
+      },
+      {
+        "ordinal": 73,
+        "schema": "public",
+        "name": "dic_apply_client_change",
+        "args": "expected_owner uuid, mutation_id uuid, action text, payload jsonb",
+        "definition_md5": "da434f17a21539d72ebb8fc04c13f214",
+        "source_chars": 1286,
+        "source_newline_count": 31,
+        "whitespace_token_count": 119
+      },
+      {
+        "ordinal": 74,
+        "schema": "public",
+        "name": "dic_browse_community_shots",
+        "args": "p_limit integer, p_offset integer",
+        "definition_md5": "edcc2c6a9fb24b3455a446d964a2ed2d",
+        "source_chars": 3222,
+        "source_newline_count": 65,
+        "whitespace_token_count": 209
+      },
+      {
+        "ordinal": 75,
+        "schema": "public",
+        "name": "dic_claim_first_style_prompt",
+        "args": "p_library_entry_id uuid",
+        "definition_md5": "5f652895cd7e0775e9fecd39f36fc34e",
+        "source_chars": 236,
+        "source_newline_count": 7,
+        "whitespace_token_count": 20
+      },
+      {
+        "ordinal": 76,
+        "schema": "public",
+        "name": "dic_claim_universal_preview",
+        "args": "",
+        "definition_md5": "8f4bc6ecd8687594ff7200cda26104b5",
+        "source_chars": 618,
+        "source_newline_count": 19,
+        "whitespace_token_count": 63
+      },
+      {
+        "ordinal": 77,
+        "schema": "public",
+        "name": "dic_commit_import",
+        "args": "expected_owner uuid, backup jsonb, review_hash text, recovery_saved boolean",
+        "definition_md5": "13e59d7da1efb928dc307f90a2e08dca",
+        "source_chars": 295,
+        "source_newline_count": 7,
+        "whitespace_token_count": 26
+      },
+      {
+        "ordinal": 78,
+        "schema": "public",
+        "name": "dic_community_evidence_counts",
+        "args": "p_coffee_id uuid, p_style text",
+        "definition_md5": "1bddea7e3160c0282bea1d6e74d1fbaf",
+        "source_chars": 694,
+        "source_newline_count": 17,
+        "whitespace_token_count": 60
+      },
+      {
+        "ordinal": 79,
+        "schema": "public",
+        "name": "dic_community_recommendation_evidence",
+        "args": "p_library_entry_id uuid, p_style text",
+        "definition_md5": "085f92a3814dce624e5b9a3759e893ef",
+        "source_chars": 6171,
+        "source_newline_count": 111,
+        "whitespace_token_count": 512
+      },
+      {
+        "ordinal": 80,
+        "schema": "public",
+        "name": "dic_confirm_community_outlier",
+        "args": "p_shot_id uuid, p_expected_revision bigint",
+        "definition_md5": "0657114255a0375b7f3fc502f780aa54",
+        "source_chars": 1432,
+        "source_newline_count": 32,
+        "whitespace_token_count": 117
+      },
+      {
+        "ordinal": 81,
+        "schema": "public",
+        "name": "dic_edit_my_coffee",
+        "args": "p_library_entry uuid, p_expected_revision bigint, p_details jsonb, p_source_url text",
+        "definition_md5": "fa2193422c742ae9f42e2239c166f245",
+        "source_chars": 331,
+        "source_newline_count": 7,
+        "whitespace_token_count": 28
+      },
+      {
+        "ordinal": 82,
+        "schema": "public",
+        "name": "dic_find_coffee_matches",
+        "args": "payload jsonb",
+        "definition_md5": "b3e36084c168cabe7a11a6d176e8951f",
+        "source_chars": 208,
+        "source_newline_count": 8,
+        "whitespace_token_count": 21
+      },
+      {
+        "ordinal": 83,
+        "schema": "public",
+        "name": "dic_member_retry_pending_approval",
+        "args": "p_submission_id uuid, p_expected_revision bigint",
+        "definition_md5": "3d8aa15468f134fc78f79357ec783a60",
+        "source_chars": 283,
+        "source_newline_count": 7,
+        "whitespace_token_count": 22
+      },
+      {
+        "ordinal": 84,
+        "schema": "public",
+        "name": "dic_mutate",
+        "args": "mutation_id uuid, action text, payload jsonb",
+        "definition_md5": "86cd376e257d80b09b1e228236a87dff",
+        "source_chars": 256,
+        "source_newline_count": 7,
+        "whitespace_token_count": 25
+      },
+      {
+        "ordinal": 85,
+        "schema": "public",
+        "name": "dic_my_community_outliers",
+        "args": "",
+        "definition_md5": "312b59594de640adacb12ab0aa0d18e4",
+        "source_chars": 1318,
+        "source_newline_count": 34,
+        "whitespace_token_count": 98
+      },
+      {
+        "ordinal": 86,
+        "schema": "public",
+        "name": "dic_preview_cached_verified",
+        "args": "p_source_url text",
+        "definition_md5": "86a08b5ae97f89c13b8c727ebdd0c50f",
+        "source_chars": 1658,
+        "source_newline_count": 31,
+        "whitespace_token_count": 139
+      },
+      {
+        "ordinal": 87,
+        "schema": "public",
+        "name": "dic_preview_complete",
+        "args": "p_ticket uuid",
+        "definition_md5": "abc5f79b029d51593f29fe4774488d0b",
+        "source_chars": 1145,
+        "source_newline_count": 22,
+        "whitespace_token_count": 101
+      },
+      {
+        "ordinal": 88,
+        "schema": "public",
+        "name": "dic_preview_import",
+        "args": "expected_owner uuid, backup jsonb",
+        "definition_md5": "001e3dd5b495ca6d1fd096bf35a473dd",
+        "source_chars": 239,
+        "source_newline_count": 7,
+        "whitespace_token_count": 22
+      },
+      {
+        "ordinal": 89,
+        "schema": "public",
+        "name": "dic_preview_preflight",
+        "args": "p_cached boolean",
+        "definition_md5": "a437026d8c1b75f0db24c0ef840cae24",
+        "source_chars": 1967,
+        "source_newline_count": 40,
+        "whitespace_token_count": 159
+      },
+      {
+        "ordinal": 90,
+        "schema": "public",
+        "name": "dic_read_personal_state",
+        "args": "",
+        "definition_md5": "811aee397f3505117fcc38715e09af94",
+        "source_chars": 175,
+        "source_newline_count": 5,
+        "whitespace_token_count": 19
+      },
+      {
+        "ordinal": 91,
+        "schema": "public",
+        "name": "dic_redeem_invite",
+        "args": "token text",
+        "definition_md5": "bd904728300c973e60486deb2634b736",
+        "source_chars": 183,
+        "source_newline_count": 5,
+        "whitespace_token_count": 20
+      },
+      {
+        "ordinal": 92,
+        "schema": "public",
+        "name": "dic_roaster_preview_target",
+        "args": "host text",
+        "definition_md5": "d264ace83ea27e01b12f789b2e2b4542",
+        "source_chars": 852,
+        "source_newline_count": 19,
+        "whitespace_token_count": 81
+      },
+      {
+        "ordinal": 93,
+        "schema": "public",
+        "name": "dic_search_community_shots",
+        "args": "p_query text, p_style text, p_limit integer, p_offset integer",
+        "definition_md5": "1124d2bbfec7f47d38d06ceb2e049fe4",
+        "source_chars": 3949,
+        "source_newline_count": 73,
+        "whitespace_token_count": 261
+      },
+      {
+        "ordinal": 94,
+        "schema": "public",
+        "name": "dic_session_status",
+        "args": "",
+        "definition_md5": "742e5bd0fc8544807886b514d95d6688",
+        "source_chars": 165,
+        "source_newline_count": 5,
+        "whitespace_token_count": 19
+      },
+      {
+        "ordinal": 95,
+        "schema": "public",
+        "name": "dic_source_check_target",
+        "args": "submission_id uuid",
+        "definition_md5": "6af6fa312bed8eb0ed26b31dc94da3b6",
+        "source_chars": 1401,
+        "source_newline_count": 27,
+        "whitespace_token_count": 108
+      },
+      {
+        "ordinal": 96,
+        "schema": "public",
+        "name": "dic_source_claim",
+        "args": "submission_id uuid",
+        "definition_md5": "68bc86486e485565d4273daf3655e0d3",
+        "source_chars": 2348,
+        "source_newline_count": 39,
+        "whitespace_token_count": 180
+      },
+      {
+        "ordinal": 97,
+        "schema": "public",
+        "name": "dic_trusted_source_verify",
+        "args": "submission_id uuid, evidence jsonb",
+        "definition_md5": "59dfb6ecc6a2b8324fa9ba8512fdaaa3",
+        "source_chars": 557,
+        "source_newline_count": 12,
+        "whitespace_token_count": 40
+      },
+      {
+        "ordinal": 98,
+        "schema": "public",
+        "name": "dic_url_preview_claim",
+        "args": "account_id uuid",
+        "definition_md5": "25b95f9449aeb73cc1937f880358c22f",
+        "source_chars": 413,
+        "source_newline_count": 12,
+        "whitespace_token_count": 40
+      },
+      {
+        "ordinal": 99,
+        "schema": "public",
+        "name": "rls_auto_enable",
+        "args": "",
+        "definition_md5": "846ec2fbff751d24b890656d63c3a9bf",
+        "source_chars": 1223,
+        "source_newline_count": 31,
+        "whitespace_token_count": 142
+      }
+    ]
+  },
+  "coverage": {
+    "current_scope": "PUBLIC_AND_PRIVATE_SQL_FUNCTION_DEFINITIONS_ONLY",
+    "semantic_reviewed_functions": 6,
+    "total_application_functions": 99,
+    "source_characters_semantically_read": 24844,
+    "source_whitespace_tokens_semantically_read": 2003,
+    "total_source_characters": 207402,
+    "next_function_ordinal": 7,
+    "next_object": "private.dic_admin_dashboard_read()",
+    "other_objects": "COUNTS_INVENTORIED_ONLY; DIRECT SEMANTIC REVIEW NOT STARTED",
+    "platform_objects": "COUNTS_INVENTORIED_ONLY; VENDOR SQL DEFINITIONS NOT REVIEWED",
+    "edge_function_sources_reviewed": 0
+  },
+  "reviews": [
+    {
+      "ordinal": 1,
+      "object": "private.apply_prototype_import(u uuid, doc jsonb)",
+      "definition_md5": "479cc03d9ea9862176b0c663d99369b0",
+      "source_chars": 16423,
+      "source_newline_count": 192,
+      "whitespace_token_count": 1300,
+      "review_method": "DIRECT_COMPLETE_PROVIDER_PG_GET_FUNCTIONDEF_AI_SEMANTIC",
+      "semantic_review": "REVIEWED_NO_CONFIRMED_DEFECT",
+      "disposition": "Full importer body directly read including credential rejection, size/record bounds, retired Experiment preservation guard, workspace emptiness, historical shot/recipe checks and private SECURITY DEFINER/search_path. No proven defect or removal authorization.",
+      "fix": "NONE",
+      "tests": "SOURCE_READ_ONLY"
+    },
+    {
+      "ordinal": 2,
+      "object": "private.bump_revision()",
+      "definition_md5": "651239ce95a684d072c16fdb895ead7d",
+      "source_chars": 261,
+      "source_newline_count": 11,
+      "whitespace_token_count": 24,
+      "review_method": "DIRECT_COMPLETE_PROVIDER_PG_GET_FUNCTIONDEF_AI_SEMANTIC",
+      "semantic_review": "REVIEWED_NO_CONFIRMED_DEFECT",
+      "disposition": "Full revision trigger directly read; preserves created_at, bumps revision and updated_at. No proven defect.",
+      "fix": "NONE",
+      "tests": "SOURCE_READ_ONLY"
+    },
+    {
+      "ordinal": 3,
+      "object": "private.capture_equipment_snapshot()",
+      "definition_md5": "90c66b59638b48d360e9fd949db63707",
+      "source_chars": 1166,
+      "source_newline_count": 18,
+      "whitespace_token_count": 98,
+      "review_method": "DIRECT_COMPLETE_PROVIDER_PG_GET_FUNCTIONDEF_AI_SEMANTIC",
+      "semantic_review": "REVIEWED_NO_CONFIRMED_DEFECT",
+      "disposition": "Full insert trigger directly read; performs strict owner/setup equipment lookup and grinder/burr compatibility before immutable shot snapshot. No proven defect.",
+      "fix": "NONE",
+      "tests": "SOURCE_READ_ONLY"
+    },
+    {
+      "ordinal": 4,
+      "object": "private.classify_personal_shot(shotid uuid)",
+      "definition_md5": "5183deb46474c10468638cef08d2bd05",
+      "source_chars": 3219,
+      "source_newline_count": 62,
+      "whitespace_token_count": 281,
+      "review_method": "DIRECT_COMPLETE_PROVIDER_PG_GET_FUNCTIONDEF_AI_SEMANTIC",
+      "semantic_review": "REVIEWED_NO_CONFIRMED_DEFECT",
+      "disposition": "Full shot-family classification directly read; evaluates green/hidden status, family refresh, saved favorite and supported current family cleanup. No proven defect; sensitive logic retained.",
+      "fix": "NONE",
+      "tests": "SOURCE_READ_ONLY"
+    },
+    {
+      "ordinal": 5,
+      "object": "private.dic_admin_access_overview()",
+      "definition_md5": "640a5fd16a194578228963d73d079810",
+      "source_chars": 1743,
+      "source_newline_count": 41,
+      "whitespace_token_count": 158,
+      "review_method": "DIRECT_COMPLETE_PROVIDER_PG_GET_FUNCTIONDEF_AI_SEMANTIC",
+      "semantic_review": "REVIEWED_NO_CONFIRMED_DEFECT",
+      "disposition": "Full private Admin overview directly read; denies non-admin before private invite/member/auth email aggregation; no proven defect, not real-session certification.",
+      "fix": "NONE",
+      "tests": "SOURCE_READ_ONLY"
+    },
+    {
+      "ordinal": 6,
+      "object": "private.dic_admin_coffee_candidates(p_submission_id uuid)",
+      "definition_md5": "cb3cc3677b37f577643d248db1060a43",
+      "source_chars": 2032,
+      "source_newline_count": 36,
+      "whitespace_token_count": 142,
+      "review_method": "DIRECT_COMPLETE_PROVIDER_PG_GET_FUNCTIONDEF_AI_SEMANTIC",
+      "semantic_review": "REVIEWED_NO_CONFIRMED_DEFECT",
+      "disposition": "Full private pending-coffee candidate routine directly read; requires admitted member plus Admin, matches verified nonmerged canonical candidates. No proven defect.",
+      "fix": "NONE",
+      "tests": "SOURCE_READ_ONLY"
+    }
+  ],
+  "advisory_snapshot": {
+    "security": [
+      {
+        "check": "rls_enabled_no_policy",
+        "count": 6,
+        "classification": "INFO; private intentional deny-all candidate, not proven defect; inspect grants & dependencies"
+      },
+      {
+        "check": "authenticated_security_definer_function_executable",
+        "count": 10,
+        "classification": "WARN; exposed authenticated API RPCs may be intentional; inspect full bodies and authorization before any fix"
+      },
+      {
+        "check": "auth_leaked_password_protection",
+        "count": 1,
+        "classification": "WARN; existing owner-approved beta exception; not permission to change hosted settings"
+      }
+    ],
+    "performance": [
+      {
+        "check": "unindexed_foreign_keys",
+        "count": 12,
+        "classification": "INFO; inspect cardinality and actual access paths before adding indexes"
+      },
+      {
+        "check": "unused_index",
+        "count": 9,
+        "classification": "INFO; 0 observed idx scans does not prove safe deletion"
+      }
+    ],
+    "links": [
+      "https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy",
+      "https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable",
+      "https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection",
+      "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys",
+      "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    ]
+  },
+  "additional_provider_evidence": {
+    "app_tables_public": 22,
+    "app_tables_private": 24,
+    "application_rls_tables_enabled": 46,
+    "app_policies": 42,
+    "application_indexes": 98,
+    "app_custom_triggers": 24,
+    "application_views": 0,
+    "live_migrations": 53,
+    "edge_functions_active_jwt_required": [
+      "dic-preview-coffee",
+      "dic-verify-coffee"
+    ],
+    "estimated_rows": "pg_class.reltuples=-1 in sampled private audit tables, so not a measured row count",
+    "unused_indexes_checked": 9,
+    "unused_indexes_idx_scans": 0,
+    "postgres_statistics_reset": "2026-10-02T18:01:15.201525+00:00",
+    "aggregate_log_sources_last_24h": {
+      "pgbouncer_logs": 72,
+      "edge_logs": 28,
+      "postgres_logs": 21,
+      "auth_logs": 8,
+      "supavisor_logs": 7,
+      "auth_audit_logs": 6
+    }
+  },
+  "limitations": [
+    "Function-level direct semantic review credited only ordinal 1-6; the 93 remaining application SQL functions and other app/provider definitions remain unreviewed.",
+    "Private schema usage/privilege and sampled policy inspection SELECT probes were blocked by connector safety controls; access is UNVERIFIED rather than assumed.",
+    "No raw logs, personal rows or credential material read; provider-console-only settings not enumerated.",
+    "Platform-owned pg_catalog and extension objects only counted, no direct definition reading; no claimed universal or complete word audit.",
+    "Function source hash is MD5 over live pg_get_functiondef text, not an independent migration-to-deployment provenance proof.",
+    "No functional tests or isolated PostgreSQL executed; this was production read-only semantic inspection plus documentation."
+  ],
+  "history": [
+    {
+      "run": "2026-11-04T06:50Z first scheduled audit",
+      "source_sha": "30cb495db37d9c791356fe580e1b87558e13527c",
+      "reviewed_ordinals": "1-6",
+      "read_chars": 24844,
+      "read_tokens": 2003,
+      "remaining_functions": 93,
+      "findings_verified": 0,
+      "code_fixes": 0,
+      "provider_writes": 0,
+      "next": "Review live complete pg_get_functiondef for private.dic_admin_dashboard_read() ordinal 7, then ordered ordinals 8 onward. Audit public authenticated SECURITY DEFINER paths with #96 coordination; inventory RLS/policies/indexes/constraints/types/Edge source and code drift separately."
+    }
+  ],
+  "state": "IN_PROGRESS_NOT_READY_NOT_DEPLOYED"
+}
