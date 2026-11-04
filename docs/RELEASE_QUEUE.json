@@ -8,6 +8,42 @@
   },
   "items": [
     {
+      "id": "DIC-Q-33-selected-kamiak-panela-sweetness",
+      "issue": 33,
+      "pr": 469,
+      "title": "Retain directly published unrefined panela sweetness in the exact selected coffee's tasting notes",
+      "state": "READY",
+      "merged_source_sha": "41000d12a1d878efd25409dfac1cd14d42378e33",
+      "scope_paths": [
+        "src/server/coffee-flavor-evidence.mjs"
+      ],
+      "tests": [
+        "Prior current official selected original603 #502 Kamiak Fazenda Samambaia run41356573624 job124997807771 fetched/parsed H1; exact HTML SHA256 a596d732250f42419f77109d4207bede4e2d04924afb9ef9400ccdafbbc7ffc5; parser yielded only 'mellow cocoa and roasted peanut', zero conflicts. Original flavor parser blob b8d13f4f9c1f500a61db29da2ed40f8ef5ed6a29 persisted unchanged to fix base.",
+        "Four positive/adversarial source-backed Node tests cover one exact named additive unrefined panela sweetness, conditional milk rejection, related-product isolation and processing sugar nonflavor. Exact PR469 head c69f0173aa828835fd983312f0dd4f741c76e7b8: validate 41744614398 SUCCESS 2307 Node PASS/0 FAIL/6 intentional SKIP; visual/browser 41744614451 SUCCESS; SQL 41744614414 SUCCESS; security 41744614467 SUCCESS; approval 41744614519 SUCCESS; Issue33 private source 41744614365 SUCCESS. Frozen603 41744614359 SKIPPED, not PASS; cloud-targeted tests NOT_APPLICABLE under high-tier.",
+        "PR469 safely nonforce squash merged 41000d12a1d878efd25409dfac1cd14d42378e33; tested PR head and merged Git tree identical fdb49604214d74e361a5cda0a4b4d96e0d446386. Only five source/test/journal/receipt/IN_PROGRESS intake queue paths; no unrelated or concurrent changes.",
+        "Exact merged source Node/lint/build 41744986309 SUCCESS 2307 PASS/0 FAIL/6 SKIP, browser/visual/cloud applicability 41744986342 SUCCESS, approval 41744986300 SUCCESS, queue coverage 41744986164 SUCCESS. Original603 source acceptance 41744986196 SKIPPED, not PASS.",
+        "Actual independent merged-source original603 official focused 20-case run41744986369 job126295608187 SUCCESS 20/20 fetched/parsed with raw HTML/H1; artifact13283875096 sha256:94493d163e3426c80d962ba223f1871523188a2dc9c41a7b18383d2c97a247c6. Exact selected #502 H1 Brazil - Fazenda Samambaia, HTML SHA256 e0ac393cb3a60159bc6b8b701c9152d39d9d8db437166bbf8ce19503c2cd0be2, notes now 'mellow cocoa and roasted peanut, unrefined panela sweetness', zero conflicts. Direct 20-case parser field+conflict comparison to previous successful 41356573624 shows ONLY #502 tasting_notes changed; other 19 exact canonical maps/conflicts unchanged despite independently changed HTML hashes."
+      ],
+      "ci_runs": [
+        41744614398,
+        41744614451,
+        41744614414,
+        41744614467,
+        41744614519,
+        41744614365,
+        41744614359,
+        41744986309,
+        41744986342,
+        41744986300,
+        41744986164,
+        41744986369,
+        41744986196
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "VERIFIED NARROW READY, NOT DEPLOYED. Only literal current selected sugar-sweetness clause recovered; no guessed taste, source identity or processing method. Original immutable603 capture/oracle and 153 context-qualified/29 missing-literal-qualified labels remain. Residual Issue33 IN_PROGRESS remains separate, and this exact flavor source path was transferred out of its generic intake scope to prevent unready overlap ambiguity. No real signed-in hosted GoTrue, production SQL/Auth/Edge/member writes or publication. Release isolation and separate owner Publish READY command still required."
+    },
+    {
       "id": "DIC-Q-455-pending-edited-shot-preview",
       "issue": 455,
       "title": "Show queued offline edits to existing shot values and recomputed taste guidance without changing the stored server record",
@@ -784,8 +820,7 @@
       "merged_source_sha": null,
       "scope_paths": [
         "src/server/coffee-narrative-evidence.mjs",
-        "src/server/coffee-identity-evidence.mjs",
-        "src/server/coffee-flavor-evidence.mjs"
+        "src/server/coffee-identity-evidence.mjs"
       ],
       "tests": [
         "PR450 source-backed Prelude #261 comparative process bug corrected and nonforce merged 57eff003d8f5c79b5bf205e0b75416bf2eaddbec; exact same tree as tested a9a09b3271421a23c3662767c26228078becc1ac. Merged Node 41551882147: 2287 PASS/0 FAIL/6 SKIP; cloud 41551882024: 1758 PASS; approval41551882122, READY coverage41551882055, official focused 41551882111 SUCCESS (3/3 fetched/parsed). Current Prelude #261 process blank; #38 Natural and #65 Washed preserved. Frozen603 acceptance41551882176 SKIPPED, no hosted GoTrue or deployment; see docs/workstreams/issue-33.md.",
