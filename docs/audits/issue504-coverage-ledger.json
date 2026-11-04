@@ -137,11 +137,93 @@
       "reviewed_github_words": 0,
       "reviewed_sequential_queue_records": 5,
       "confirmed_note_only_fixes": 5
+    },
+    {
+      "id": "G1-014",
+      "receipt": "docs/audits/issue504-review-G1-014.json",
+      "text_files_entire": 0,
+      "text_files_partial": 1,
+      "reviewed_file_lines": 251,
+      "reviewed_file_words": 2324,
+      "reviewed_github_objects": 0,
+      "reviewed_github_words": 0,
+      "reviewed_sequential_queue_records": 6,
+      "confirmed_note_only_fixes": 0,
+      "source_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
+      "source_range_inclusive": [
+        2250,
+        2500
+      ],
+      "prior_pr_617_unmerged": true
+    },
+    {
+      "id": "G1-015",
+      "receipt": "docs/audits/issue504-review-G1-015.json",
+      "text_files_entire": 0,
+      "text_files_partial": 1,
+      "reviewed_file_lines": 308,
+      "reviewed_file_words": 2861,
+      "reviewed_github_objects": 0,
+      "reviewed_github_words": 0,
+      "reviewed_sequential_queue_records": 8,
+      "confirmed_note_only_fixes": 0,
+      "source_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
+      "source_range_inclusive": [
+        2501,
+        2808
+      ],
+      "prior_pr_617_unmerged": true,
+      "prior_pr_619_unmerged": true
+    },
+    {
+      "id": "G1-016",
+      "receipt": "docs/audits/issue504-review-G1-016.json",
+      "text_files_entire": 0,
+      "text_files_partial": 1,
+      "reviewed_file_lines": 368,
+      "reviewed_file_words": 3330,
+      "reviewed_github_objects": 0,
+      "reviewed_github_words": 0,
+      "reviewed_sequential_queue_records": 9,
+      "confirmed_note_only_fixes": 0,
+      "source_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
+      "source_range_inclusive": [
+        2809,
+        3176
+      ],
+      "prior_prs_unmerged": [
+        617,
+        619,
+        622
+      ]
+    },
+    {
+      "id": "G1-017",
+      "receipt": "docs/audits/issue504-review-G1-017.json",
+      "text_files_entire": 0,
+      "text_files_partial": 1,
+      "reviewed_file_lines": 216,
+      "reviewed_file_words": 1582,
+      "reviewed_github_objects": 0,
+      "reviewed_github_words": 0,
+      "reviewed_sequential_queue_records": 6,
+      "confirmed_note_only_fixes": 0,
+      "source_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
+      "source_range_inclusive": [
+        3177,
+        3392
+      ],
+      "prior_prs_unmerged": [
+        617,
+        619,
+        622,
+        629
+      ]
     }
   ],
   "totals": {
-    "source_file_lines": 4027,
-    "source_file_words": 30625,
+    "source_file_lines": 5170,
+    "source_file_words": 40722,
     "github_objects": 2,
     "github_words": 721
   },
@@ -160,16 +242,16 @@
   "next": {
     "kind": "git_blob",
     "path": "docs/RELEASE_QUEUE.json",
-    "first_line": 2250,
+    "first_line": 3393,
     "expected_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
     "require_fresh_blob": true,
-    "expected_next_item": "DIC-Q-33-bald-guy-roast-choice",
+    "expected_next_item": "DIC-Q-47-admin-feedback-persistence",
     "unreviewed_drift": [
       "DIC-Q-455-recipe-context-feedback"
     ]
   },
-  "uncovered": "Queue future lines 2250+ and changed unreviewed #455 recipe-context record; most GitHub historical/issue/PR/Actions/log/artifact/commit/tag/binary materials. Delegated #267 strict frozen/current code uncredited until independently validated.",
-  "latest_review_source_anchor": "a00070e729d552682ed88c4e5fd28b4a8e93ecd2",
+  "uncovered": "Queue line 3393+ and separately changed #455 drift; issues/PR discussion, actions, releases, history and binary semantic coverage incomplete; #267 V2 strict code not credited; repository currently PUBLIC against owner policy; original PR stack remains OPEN.",
+  "latest_review_source_anchor": "1e503e46cae907713ec411bccde4b7ae2c836f69",
   "inventory_metadata_only": {
     "github_issue_rest": 523,
     "github_pr_rest": 454,
@@ -199,9 +281,9 @@
     "source_sha_before_notes": "0f5d8a9d6be56b7ecb4b7e4675340e0f9ed374e5",
     "total_lines": 5377,
     "reviewed_first_line": 1,
-    "reviewed_last_line": 2249,
+    "reviewed_last_line": 3392,
     "whitespace_words_credited": "per_receipt_ranges_only; includes noncontiguous earlier insertions",
-    "credit": "G1-005 through G1-013; only exact ledger ranges, not all intervening changed words"
+    "credit": "G1-005 through G1-017; exact source receipt boundaries only; no overlapping historical/current #267 credit"
   },
   "ci_open_negative": {
     "source_merge_sha": "54ab55987be8b05db090c530a47e496093c8c76a",
@@ -215,6 +297,61 @@
         "conclusion": "failure"
       }
     ],
-    "job_log_limit": "404 BlobNotFound, reason unverified; do not reclassify as PASS"
+    "job_log_limit": "404 BlobNotFound, reason unverified; do not reclassify as PASS",
+    "pr_617_head_sha": "712dc6c2a9fed041baab48ec52b91d641a44971c",
+    "pr_617_check_conclusions": "5 failure before test steps",
+    "stacked_pr": "G1-016 on #622 on #619 on #617; no merge before actual exact-source CI and readback",
+    "pr_619_status": "OPEN/NO_PASS_CI",
+    "pr_622_status": "OPEN / CI FAILED BEFORE STEPS (no PASS)",
+    "latest_repo_actions_observed": 9138
+  },
+  "privacy_discrepancy_20261104": {
+    "confirmed_api_private": false,
+    "confirmed_visibility": "public",
+    "owner_expected": "private",
+    "severity": "HIGH",
+    "status": "OPEN_OWNER_ACTION",
+    "plan_not_verified": true
+  },
+  "ci_recent_observation_20261104": {
+    "pr617_head_four_runs_success": [
+      41889710399,
+      41889710202,
+      41889710213,
+      41889710274
+    ],
+    "other_stacked_prs_ci_not_proven": true,
+    "no_merged_source_pass_claim": true
+  },
+  "privacy_owner_context_reconciliation_20261104": {
+    "owner_instruction": "Owner explicitly authorized temporary PUBLIC repository access in the current billing cycle, intending to restore PRIVATE at the end of November 2026",
+    "observed_visibility": "public",
+    "historical_alert_in_G1_017": "Preserved as source-time observation, not an unapproved exposure incident",
+    "owner_approval": "CONFIRMED_BY_OWNER_CHAT_20261104",
+    "repo_restored_private": "NOT_VERIFIED",
+    "required_future_action": "Owner restores private visibility by end of billing month; check live setting rather than assume"
+  },
+  "ci_stack_reconciliation_20261104": {
+    "root_pr": 617,
+    "root_merge_sha": "4436f2f29723a7d30d3ad46611bd92f170210ec4",
+    "root_head_ci": "4 exact PR-head workflows SUCCESS",
+    "root_merge_approval_run": 41933410315,
+    "root_merged_approval": "SUCCESS",
+    "consolidating_pr": 634,
+    "batches": [
+      "G1-014",
+      "G1-015",
+      "G1-016",
+      "G1-017"
+    ],
+    "intermediate_prs": [
+      619,
+      622,
+      629
+    ],
+    "source_development_parent": "571325a20fc253cd5274545c91c62e7e356030fc",
+    "source_stack_head": "7fe51050430b6cd360d873643e17079825184f0f",
+    "workflow": "nonforce two-parent reconciliation, no deployment",
+    "exact_final_pr_head_ci": "PENDING"
   }
 }
