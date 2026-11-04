@@ -28,9 +28,12 @@
       "type": "original_markdown",
       "path": "docs/research/originals/02_Causal_Foundation_of_Espresso_Extraction_Physics_Chemistry_Equipment_and_Community_Validation.md",
       "sha256_recorded_in_verified_archive_index": "be1f19e2683e8d83c9a78851a63cc6d47eb68677146df622dea1502f051f030b",
-      "review_status": "FOCUSED_PASSAGES_ONLY",
-      "direct_review_provenance": "Prior R455-001/R455-002 scoped journal; NOT complete document coverage",
-      "claims_verified_externally": "Not certified by this #455 batch"
+      "review_status": "FULL_BODY_DIRECTLY_READ_CITATIONS_PENDING",
+      "direct_review_provenance": "R455-008 direct full document sequential reads 1-108, 109-215, 216-316 (316 lines); exact current Git blob. All sections, tables, formulas, community examples and source table inspected. This is not underlying citation certification.",
+      "claims_verified_externally": "Original primary/first-party source checks 2026-11-04 UTC: Schmieder et al. 2023 Foods original publisher DOI 10.3390/foods12152871 (publisher full-text search and institution abstract) confirms fractionated kinetics, flow strongest among tested factors and beverage mass/ratio stronger; Smrke et al. 2024 Scientific Reports full NIH PMC PMC10920694 confirms added-fines permeability, 20g/40g/9bar protocol, under-10/15s EY ~17-18% only in tested system and SINGLE non-blinded Q-grader panelist preferred approx 30s/19-20% EY; Mo et al. 2023 Sci Rep publisher full article DOI 10.1038/s41598-023-42380-y confirms reconstructed microCT/SPH inertial effects/porosity gradient in model/tested powders; Lee, Smith, Arshad arXiv 2206.12373 author abstract confirms two-path simplified dissolution/flow instability model, not experimentally proven unique cause of channeling. Remaining study citations (e.g. RDT/Ross, Andueza, Ferrari, equipment, specific community threads), numeric assumptions and generalizations not systematically independently verified.",
+      "github_blob_sha": "17ab370d8d479190d867fbe7e4b0f80becb93b9a",
+      "direct_review_lines": "1-316",
+      "source_characters": 51675
     },
     {
       "id": "ORG-03",
@@ -338,6 +341,42 @@
       "current_app": "site/lib/engine.js readPreference reads member preferences (not roaster tastingNotes), chooses optional style; source-derived coffee notes not used as intrinsic grind coefficient.",
       "result": "PRESERVE_MEMBER_CHOICE;NO_TASTING_NOTES_TO_PHYSICS",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-002-A",
+      "source": "ORG-02 lines 5-13,85-108,292-299; Mo et al. 2023 https://doi.org/10.1038/s41598-023-42380-y and Lee/Smith/Arshad https://arxiv.org/abs/2206.12373",
+      "claim": "Puck permeability, compression and spatial extraction heterogeneity couple flow to dose, grind and pressure. Mo measured microstructure and simulated SPH; Lee models two idealized flow paths. Neither yields a universal app-specific numeric bar pressure, grind-size transfer, or deterministic WDT percentage.",
+      "grade": "FULL_ORIGINAL_SYNTHESIS+PUBLISHED_MICROCT_SPH_PRIMARY+AUTHOR_MODEL_ABSTRACT;CAUSAL_MECHANISM_CONDITIONAL",
+      "current_app": "site/lib/engine.js recommendation chooses controls from member settings, style and same-coffee evidence; site/lib/constants.js starting style priors; no measured in-puck permeability or pressure profile sensor.",
+      "result": "KEEP_PROFILE_BOUNDARIES_AND_ABSTAIN_FROM_HARDWARE_PREDICTIONS",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-002-B",
+      "source": "ORG-02 lines 14-20,109-129,171-210; Schmieder et al. Foods 2023 https://doi.org/10.3390/foods12152871",
+      "claim": "Controlled 10-fraction espresso measurements found flow rate the largest tested process-variable effect on caffeine, trigonelline, 5-CQA and TDS, while beverage mass/brew ratio changes dominated effects. Experimental composition is not direct evidence that one numeric ratio tastes best.",
+      "grade": "FULL_ORIGINAL_SYNTHESIS+ORIGINAL_PUBLISHER_PRIMARY;SENSORY_TRANSFER_UNVERIFIED",
+      "current_app": "site/lib/constants.js RATIOS are starting priors; site/lib/engine.js uses measured yield and five taste scores; no fixed quality pass/fail clock.",
+      "result": "PRESERVE_USER_RECORDED_DOSE_YIELD_AND_TASTE;NO_UNIVERSAL_RATIO_SETPOINT",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-002-C",
+      "source": "ORG-02 lines 12-19,139-155,171-187,215-229,242-255; Smrke et al. 2024 full published original https://pmc.ncbi.nlm.nih.gov/articles/PMC10920694/",
+      "claim": "Adding <100 micrometre fines to 20g Costa Rica coffee, 40g beverage at 9bar reduced permeability and increased time; the fastest <10–15s shots reached ~17–18% EY in that experiment. One Q-grader's nonblind 3-attribute subjective evaluation preferred around 30s and 19–20% EY. Efficient turbo extraction does not establish superior taste or universal time thresholds.",
+      "grade": "FULL_PRIMARY_PMC_TEXT+SINGLE_COFFEE_SINGLE_UNBLINDED_SENSORY_RATER;NOT_GENERALIZABLE",
+      "current_app": "site/lib/constants.js keeps Traditional, Turbo and Fast-Flow separate; site/lib/engine.js all-green success overrides time prior; taste rating remains user-specific.",
+      "result": "PRESERVE_STYLE_SEPARATION_AND_TASTE_FIRST;NO_TURBO_SUCCESS_TIME_GATE",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-002-D",
+      "source": "ORG-02 lines 236-290 Reddit WDT/flat-vs-conical/beginner temperature and bottomless-basket anecdotes, 282-316 source map; original sources linked within report; no new original direct Reddit audit this run",
+      "claim": "Qualitative Reddit observations are nonrandom, uncontrolled, often confounded by simultaneous grinder and technique changes; recurrence does not establish comparative prevalence or causal equipment-brand/98-mm effect. Community advice can generate hypotheses and troubleshooting but not numeric taste-effect guarantees.",
+      "grade": "ORIGINAL_RESEARCH_REPORT_FULL_REVIEW;COMMUNITY_SOURCE_CLAIMS_NOT_INDEPENDENTLY_RECHECKED",
+      "current_app": "site/lib/engine.js qualitative evenness check on severe astringency/low clarity; personal actual shot feedback takes precedence.",
+      "result": "NO_BRAND_BURR_PRIOR_OR_NUMERIC_WDT_CLAIM;KEEP_CAUTIONARY_DIAGNOSTIC",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [
@@ -353,12 +392,12 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R455-007 original03 direct full 441-line source reading and bounded four original publisher checks; docs-only."
+    "reason": "R455-008 316-line report02 full direct source reading, bounded 4 primary checks, documentation-only; no local container available."
   },
   "next_actions": [
-    "Finish direct full-body original source 01/02/08/09 (5/9 now full #03-07); primary citations remain only partially verified; no #267 strict audit credit.",
-    "Read all October29 15-member implementation pack and S019 PDF when bytes can be verified; slow-feed Library PDF versus archived ZIP byte equivalence remains unproven.",
-    "Expand GitHub/Project/Drive source register beyond initial 13 curated sources, and reproduce safe UX/logic defects with focused CI; avoid #33/#267/#96 overlapping work.",
-    "Owner decision R455-DEC-001 sweetness-only +1g vs nonnumeric diagnostic still not approved, reserved for daily digest; no deploy."
+    "Finish full original documents #01/#08/#09 (6/9 now full #02-07); independent full primary-citation verification still incomplete; no #267 strict audit credit.",
+    "Directly retrieve/hash/review October29 15-member implementation pack and S019 PDF; archive/library slow-feed PDF byte equivalence remains unverified.",
+    "Expand curated source coverage beyond 13 records to all discoverable Project/GitHub/Drive evidence and crosswalk current UX logic; prioritize tested safe changes only if reproduced; #33/#267/#96 retain independent ownership.",
+    "R455-DEC-001 sweetness-only numeric +1g vs no-change diagnostic still UNAPPROVED; reserve for morning digest; no deploy."
   ]
 }
