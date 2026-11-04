@@ -2,7 +2,7 @@
   "schema_version": 1,
   "issue": 33,
   "date_utc": "2026-11-04",
-  "state": "TESTING_PUBLIC_PROBE_NOT_CURRENT_PARSER_VERIFIED",
+  "state": "SOURCE_BOUND_FIELD_REVIEW_DONE_NO_RUNTIME_DEFECT_PROVEN_NO_READY",
   "authority": "Owner-approved development-only original603 current selected source review",
   "source_development_parent_sha": "f86761c33625ad296e6e83b2eaa087c74a82e5b7",
   "original603": {
@@ -20,7 +20,19 @@
       "current_h1": "Ethiopian Yirgacheffe",
       "direct_selected": "Medium Roast. Washed bean, very uniform. Small farmers working hard within the co-op improve quality and it shows. Tasting Notes: Well balanced, bright and floral, with tangerine and lemongrass notes.",
       "historical_parser_origin": "Ethiopia",
-      "question": "Source named Yirgacheffe region and unnamed co-op growers; do not fabricate named cooperative."
+      "question": "Source named Yirgacheffe region and unnamed co-op growers; do not fabricate named cooperative.",
+      "current_raw_html_sha256": "28844d7a868bbbb73502117406998142c07655bedbc65944a1d051a79fded5d0",
+      "current_parser": {
+        "name": "Ethiopian Yirgacheffe",
+        "roaster": "Earthback Coffee",
+        "origin": "Ethiopia",
+        "process": "Washed",
+        "roast_level": "Medium",
+        "tasting_notes": "Well balanced, bright and floral, with tangerine and lemongrass notes.",
+        "producer": null,
+        "conflicts": []
+      },
+      "field_decision": "MEDIUM/WASHED AND SENSORY CURRENT DIRECT SUPPORTED. Exact title says Yirgacheffe but selected paragraph does not explicitly assign a growing region. Parser Ethiopia remains source-qualified; do not force region from name alone. 'Small farmers within co-op' is contextual, not unequivocal named entire-lot producer. No defect independently proven."
     },
     {
       "number": 325,
@@ -29,7 +41,18 @@
       "current_h1": "Simpatico Organic Low Acid Half-Caff Coffee",
       "historical_parser_origin": null,
       "direct_selected": "A full-bodied low-acid half-caff offering with clean, nutty/cocoa descriptors; Oaxaca and water-processed are published as taxonomy tags rather than independently proven all-component origin/decaf method.",
-      "question": "Are lower-level taxonomy tags selected coffee-specific specifications or general marketing? Never assign whole-blend Oaxaca or Water Process from tags alone."
+      "question": "Are lower-level taxonomy tags selected coffee-specific specifications or general marketing? Never assign whole-blend Oaxaca or Water Process from tags alone.",
+      "current_raw_html_sha256": "7227bdeb8ebf1e22c5cc17819451de5565caafd9f1533a322f78f9f41aed9d7a",
+      "current_parser": {
+        "name": "Simpatico Organic Low Acid Half-Caff Coffee",
+        "roaster": "Simpatico Coffee",
+        "tasting_notes": "clean, nutty/cocoa",
+        "origin": null,
+        "decaffeination_method": null,
+        "conflicts": []
+      },
+      "selected_h1_in_raw_html": [],
+      "field_decision": "NAME PRESENT IN DIRECT PRODUCT BODY AND META; HTML H1 MISSING (explicitly NOT H1-verified). Selected description confirms half-caff and sensory. Lower-priority taxonomy Oaxaca/water processed does not prove both components share one growing origin or whole-coffee water decaf. Do not promote tags. No defect proven."
     }
   ],
   "workflow_marker": "[dic-issue33-twentysecond2]",
@@ -46,7 +69,7 @@
   "netlify_publication": false,
   "production_writes": false,
   "full603_manual_certification": false,
-  "next": "Check exact PR/merged source CI; inspect current raw selected evidence and parser; fix only reproducible generic defect.",
+  "next": "Review new source cases, find reproduced generic extractor defect with current selected evidence. Original context/missing/blank exceptions still open; issue33 OPEN.",
   "workflow_case_numbers": [
     107,
     325
@@ -56,5 +79,39 @@
     "previously_completed": "Oct30 PR318 exact official 20-product parser readback corrected Cerrado, Brazil; do not repeat completed source work",
     "excluded_from_current_probe": true
   },
-  "notes": "This file name refers to original proposed 107/319 cohort; authoritative current workflow now probes 107/325 and records the supersession. No #319 new credit."
+  "notes": "This file name refers to original proposed 107/319 cohort; authoritative current workflow now probes 107/325 and records the supersession. No #319 new credit.",
+  "current_merged_source_sha": "f94cbc044b729c578cc839adc4705fd62409cdd3",
+  "official_run": {
+    "id": 41839630905,
+    "job": 126607452109,
+    "conclusion": "SUCCESS",
+    "source_sha": "f94cbc044b729c578cc839adc4705fd62409cdd3",
+    "attempted": 2,
+    "fetched": 2,
+    "parsed": 2,
+    "add_coffee_preview_rendered": 2,
+    "source_review_rendered": 2,
+    "manual_complete_coffee_certification": 0,
+    "artifact_id": 13327423593,
+    "artifact_zip_sha256": "d3c9e96073ed47dd30ad255188a50a35f258f5bcb244131e84a4946a1de68674",
+    "artifacts_independently_read": true
+  },
+  "exact_pr_head_ci": {
+    "head": "029a0ba2ba69c5ab9f3426abb7a4182633eb280a",
+    "node_build": 41839003074,
+    "cloud_ux": 41839003285,
+    "isolated_sql": 41839002935,
+    "approval": 41839003470,
+    "all_four_success": true
+  },
+  "merged_run_verification": "Source-run succeeded on actual merged SHA; concurrent subsequent source-only status checks were cancelled, not PASS. Do not claim complete original603 or live member auth.",
+  "queue_after": {
+    "READY": 14,
+    "DEPLOYED": 90,
+    "IN_PROGRESS": 3,
+    "unchanged": true
+  },
+  "original603_full_replay": "NOT_RUN_THIS_SCOPE",
+  "full603_semantic_certified": false,
+  "frozen_source_modified": false
 }
