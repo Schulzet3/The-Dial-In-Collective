@@ -112,9 +112,10 @@
       "type": "original_markdown",
       "path": "docs/research/originals/09_The_Causal_Foundation_of_Espresso_Extraction_Grinder_and_Burr_Interactions.md",
       "sha256_recorded_in_verified_archive_index": "a3f9ed5f29e8ade7f5a2d051d8b491401f96c20c446aff1ef0ec7ab301774f1d",
-      "review_status": "FOCUSED_PASSAGES_ONLY",
-      "direct_review_provenance": "Prior R455-001/R455-002 scoped journal; NOT complete document coverage",
-      "claims_verified_externally": "Not certified by this #455 batch"
+      "review_status": "FULL_BODY_DIRECTLY_READ_CITATIONS_PENDING",
+      "direct_review_provenance": "R455-011 direct full-body GitHub review at development 6f9177920dacdec6ca31d0206f3e92e6c08af33f; all 481 numbered lines / 60,066 characters inspected in nonoverlapping 1-75, 76-165, 166-250, 251-330, 331-410, 411-481 sections (some adjacent reads overlap their boundary headings only). Original ZIP-index SHA-256 preserved; no fresh archive byte recheck.",
+      "claims_verified_externally": "BOUNDED original checks 2026-11-04: Gagne 2023 primary author 24-grinder observational PSD analysis (coffeeadastra.com/2023/09/21/what-i-learned-from-analyzing-300-particle-size-distributions-for-24-espresso-grinders/); Vaca Guerra et al. J Food Eng 2023 DOI 10.1016/j.jfoodeng.2022.111301 university original abstract for compression/porosity; Wadsworth et al. Royal Society Open Science 2026 DOI 10.1098/rsos.252031 author university repository original abstract for CT/permeability modeling; Uman et al. Scientific Reports 2016 DOI 10.1038/srep24483 original full text/NIH PMC; Griffiths et al. 2018 original journal/university burr wear. Measurement envelopes and author-level phenomenology are not transferable numeric recommendation rules; rest of individual citations and taste outcome claims unverified.",
+      "git_blob_sha": "1e1b8bbef0ecb05ed0b20195191bcad26663cf0d"
     },
     {
       "id": "PDF-SLOW-FEED",
@@ -462,6 +463,51 @@
       "current_app": "Existing engine heuristic remains governed by owner taste/one-control rules. Sweetness-only default +1g (R455-DEC-001) is a real branch but policy change awaits owner choice; no new numeric priors or hard time gate.",
       "result": "RESEARCH_ONLY;OWNER_DECISION_R455-DEC-001_REMAINS_UNAPPROVED",
       "owner_approval": true
+    },
+    {
+      "id": "R455-EV-009-A",
+      "source": "ORG-09 lines 1-165; Gagne 2023 primary author technical analysis",
+      "claim": "Across 300 PSD measurements/24 sampled grinders on one reference coffee, flat versus conical categories overlap, RPM and burr diameter do not display a universal monotonic association with fines/uniformity; fines at a chosen median and dial-in state differ.",
+      "grade": "OBSERVATIONAL_MULTI_GRINDER_DATA_NON_PEER_REVIEWED; NOT RANDOMIZED CAUSAL_GEOMETRY_PROOF",
+      "primary_source": "https://coffeeadastra.com/2023/09/21/what-i-learned-from-analyzing-300-particle-size-distributions-for-24-espresso-grinders/",
+      "current_app": "site/lib/model.js version/calibration and site/lib/engine.js grindGuidance rely on actual owner setup, grinder range, feed and same-coffee evidence; no burr-type automatic fixed correction",
+      "result": "PRESERVE_LOCKED_GRINDER_SPECIFIC_CALIBRATION; NO_NEW_NUMERIC_RULE_OR_UI_FIELD",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-009-B",
+      "source": "ORG-09 lines 99-165, 306-410; Vaca Guerra et al. J Food Eng 2023; Wadsworth et al. Royal Society Open Science 2026",
+      "claim": "Particle-size distribution width, compression, connected pore fraction and specific area jointly shape packed-bed porosity/permeability; larger nominal median need not imply more flow. Two-coffee, 11-setting XCT model does not establish a universal flavor optimum or fixed grinder translation.",
+      "grade": "PEER_REVIEWED_PACKED_BED_EXPERIMENT_AND_VALIDATED_PHYSICS_MODEL; SMALL_FINITE_EXPERIMENT_SCOPE; NO_GENERAL_SENSORY_TRIAL",
+      "primary_sources": [
+        "https://doi.org/10.1016/j.jfoodeng.2022.111301",
+        "https://doi.org/10.1098/rsos.252031"
+      ],
+      "current_app": "site/lib/engine.js treats shot time as observed feedback with calibrated grind guidance; site/lib/constants.js style starting priors not success criteria",
+      "result": "NO_DIRECT_APP_CHANGE; AVOID_UNIVERSAL_BURR_FINES_OR_TIME_TARGET",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-009-C",
+      "source": "ORG-09 lines 166-306; Uman et al. Sci Rep 2016; Gagne 2019 seasoning evidence; Griffiths et al. 2018",
+      "claim": "Bean temperature can shift PSD in the tested EK43/coffee conditions; mechanical alignment and seasoning/wear may change grinder output. Literature does not specify a universal seasoning mass, RPM-to-fines sign, motor architecture benefit, or ongoing compensation percentage.",
+      "grade": "PEER_REVIEWED_GRIND_TEMPERATURE_AND_BURR_WEAR; NON_PEER_REVIEWED_BURR_SEASONING; CONDITIONS_UNCONTROLLED_ACROSS_STUDIES",
+      "primary_sources": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC4834475/",
+        "https://cronfa.swan.ac.uk/Record/cronfa45569/Description"
+      ],
+      "current_app": "site/lib/model.js setup version and calibration history retained; no automatic seasoning correction; site/lib/engine.js guards old calibration",
+      "result": "PRESERVE_CALIBRATION_HISTORY_AND_AVOID_UNSUPPORTED_LIFECYCLE_COEFFICIENT",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-009-D",
+      "source": "ORG-09 lines 233-306, 407-481; prior #455 RDT/slow-feed source checks",
+      "claim": "GBW measures delivered mass while single dosing controls input identity; neither uniquely determines grind PSD, dose carryover or sensory preference. Electrostatic retention and feed effects vary by system and recipe.",
+      "grade": "MECHANISTIC_PLUS_MANUFACTURER_SPECIFICATIONS_AND_TECHNICAL_EXPERIMENTS; NO_GENERAL_BLIND_TASTE_COMPARISON",
+      "current_app": "site/lib/engine.js and model.js retain separate slow/standard feed, measured dose and per-grinder calibration; user notes/history preserved; no GBW/single-dose recommendation formula",
+      "result": "KEEP_EXISTING_GUARDS; AVOID_NEW_MODE_OR_NUMERIC_ADJUSTMENTS_UNTIL_OWNER_DECISION_AND_VALIDATION",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [
@@ -477,25 +523,26 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R455-010 source-exact all 323 lines of #01 and bounded institutional/primary checks; research documentation only, no app, tests or Locked change. Exact PR/merged-source continuity CI pending."
+    "reason": "R455-011 completed direct 481-line review of original #09 plus bounded independent research checks. Research docs only; no app/Locked/queue/deployment change. Docs source/approval continuity CI pending."
   },
   "next_actions": [
-    "Complete last full original report #09 with actual source body and bounded external verification (8/9 now read), then systematically resolve remaining citations across all 9.",
-    "Obtain October29 ZIP (15 members) and S019 PDF actual bytes with hashes; currently NOT located in Drive/Library. Keep slow-feeding owner PDF to archive byte correspondence unverified.",
-    "Expand claim-by-claim research/source inventory, then prioritize code fixes only on reproducible source-exact defects and risk-proportionate tests. Reuse #267/#33/#96 owner receipts, no overlapping writes.",
-    "R455-DEC-001 sweetness-only +1g yield versus unchanged-control diagnostic remains UNAPPROVED; hold user-visible behavior for morning digest."
+    "Systematically verify outstanding original citations/claims across all nine, preserving a per-claim source and evidence-type ledger; 9/9 full report texts reviewed does not certify the citations.",
+    "Recover exact original October29 implementation pack (15 members) and S019 PDF bytes and source SHA; they were NOT discoverable from this run's named Library/connected Drive searches and have NOT been directly audited.",
+    "Verify owner slow-feeding PDF's exact archive byte equivalence (10/10 pages previously reviewed); revisit Drive Roast Color measurement units/methodology and other owner source inventory without private imports.",
+    "Next independently demonstrate a narrow Locked-compatible Log Shot/Rate/Recommend defect or usability improvement with current-source online/offline evidence and focused regressions; preserve existing R455-DEC-001 sweetness-only owner decision (unapproved).",
+    "Reconcile current GitHub #267 strict historical audit only by its own separate receipt; no #267 line credit from research."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-010",
-    "source_id": "ORG-01",
-    "source_git_blob_sha": "4a52b0f938d533ff8c0d69fc09951bf51abc8d69",
-    "base_development_sha": "8c0aeea2ba8acfe55b70e60871733a55eafdcc03",
-    "report_lines_read": 323,
-    "report_chars_read": 58807,
-    "full_original_reports_reviewed": 8,
+    "id": "R455-011",
+    "source_id": "ORG-09",
+    "source_git_blob_sha": "1e1b8bbef0ecb05ed0b20195191bcad26663cf0d",
+    "base_development_sha": "8a233758ae3fa18ed2ed809a8f0b12c4be37c9e4",
+    "report_lines_read": 481,
+    "report_chars_read": 60066,
+    "full_original_reports_reviewed": 9,
     "total_original_reports": 9,
-    "external_checks": "BH Compass, WCR Lexicon, Hendon 2014 ACS primary; neither all citations nor scientific grade certified",
-    "status": "RESEARCH_REVIEW_COMPLETE_CITATION_AUDIT_PENDING",
+    "external_checks": "Gagne 2023 author analysis, Vaca Guerra 2023 institutional original, Wadsworth 2026 original institutional paper abstract, Uman 2016 original, Griffiths 2018 original journal/university; not complete cross-citation certification",
+    "status": "ALL_NINE_ORIGINAL_BODIES_READ_PRIMARY_CITATION_AND_BROADER_INTAKE_PENDING",
     "github267_line_credit": 0
   }
 }
