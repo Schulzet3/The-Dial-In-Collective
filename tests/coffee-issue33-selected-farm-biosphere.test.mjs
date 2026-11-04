@@ -27,8 +27,8 @@ test('same generic selected-farm rule works without source roaster or place exce
 
 test('other producer, missing selected country, and wrong country cannot donate forest',()=>{
  for(const title of ['Ethiopia Another Coffee','Lena’s Diamond','Kenya Lena’s Diamond']){
-  const sentence='Lena’s farms are in the buffer and core zones of the UNESCO Oromo Highlands biosphere.'+
-   (title.startsWith('Kenya')?' The named biosphere is explicitly described as Ethiopian in the same product.':'');
+  const sentence='Lena’s farms are in the buffer and core zones of the UNESCO Oromo Highlands biosphere'+
+   (title.startsWith('Kenya')?' in Ethiopia.':'.');
   assert.deepEqual(extractCoffeeGeographyTuples(html(title,'<p>'+sentence+'</p>'),{clean,name:title,includeCurrentLocality:true}),[],title);
  }
 });

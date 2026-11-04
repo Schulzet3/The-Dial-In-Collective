@@ -1,3 +1,9 @@
+## November 4 UTC — #33 strict same-sentence country conflict fixture (TESTING)
+
+Before opening PR, corrected test-only punctuation so the deliberately mismatched Ethiopia country is in the **same geographical claim sentence**, not a separate sentence invisible to this bounded rule. Source parser unchanged, no new tests executed yet. SAME-COMMIT source-bound journal, previous invalid fixture is preserved as Git history and not claimed to have passed. [skip netlify]
+
+---
+
 ## November 4 UTC — #33 selected farm biosphere adversarial fixture precision (TESTING)
 
 Pre-PR static inspection of six source tests found an invalid synthetic assumption: an arbitrary biosphere name has no gazetteer-derived country, so a Kenyan selected H1 alone must not be called a country contradiction. Corrected the third negative fixture to **explicitly print Ethiopia on the same source sentence**, rather than infer it from a forest name. The parser's country-in-sentence guard remains unchanged; positives and unrelated/old-story negatives remain. SAME-COMMIT test/journal, exact CI still UNSTARTED; no PASS or READY claim. [skip netlify]
