@@ -11,8 +11,8 @@
       "id": "DIC-Q-33-580-selected-h1-adjacent-farm-locality",
       "issue": 33,
       "title": "Recover selected H1-adjacent regional origin with corroborated current producer farm",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "35460be0be9ebf4671ca6d614e37d59c62f518f1",
       "scope_paths": [
         "src/server/coffee-identity-evidence.mjs"
       ],
@@ -20,14 +20,39 @@
         "Prior exact current official #580 fetch/parser run41844449595 and source capture artifact13330481532 confirmed H1+adjacent two-span location and parser origin Colombia; independent raw SHA256 6fd11ac46a65078567ddef814dbe3cf01c8f9a56cad787f48ed5ef977cf6e364.",
         "Six synthetic positive/negative regression cases added; exact PR-head and merged-source CI not yet run.",
         "Initial PR #586 head 9c620d34a9d09ba466468d6dcee481229a8ffb57 Node41848633709: 1 NEW positive FAILED (expected Santa Maria, Huila, Colombia; actual Colombia), 1677 other tests PASS. Exact diagnostic head 78651e21ff84f3ee36902657e3dca10121c097d5 Node41849787326 reproduced same result. Diagnostic source structure identified `next.start===title.end`: the strict `>` omitted zero-whitespace immediate H1 sibling; changed to `>=` while retaining all identity/scope guards and removing diagnostics. Corrected head checks pending.",
-        "Corrected exact PR head be69968c35d008d42211b848229bd219ba6d5f27 Node/lint/build41850423443 SUCCESS, 1678 PASS/0 FAIL/0 SKIP (including six new #580 adversarial tests); approval41850423532, cloud UX41850423442, isolated SQL41850423559, security41850423461 and private source41850423527 SUCCESS; frozen60341850423589 SKIPPED."
+        "Corrected exact PR head be69968c35d008d42211b848229bd219ba6d5f27 Node/lint/build41850423443 SUCCESS, 1678 PASS/0 FAIL/0 SKIP (including six new #580 adversarial tests); approval41850423532, cloud UX41850423442, isolated SQL41850423559, security41850423461 and private source41850423527 SUCCESS; frozen60341850423589 SKIPPED.",
+        "PR586 safely nonforce squash merged as 35460be0be9ebf4671ca6d614e37d59c62f518f1 onto parent a3eb5928b0fc2a3500e2ef9ee39f533f24c345c2, preserving #267 V2 and #455. Merged exact deployable blob fbf320719084a361371d98c4f11cbe5bdf5ee5f5 and new test blob 41b29ea21c612bbcefcf55c724cf332b4b11ada3 match corrected PR head; source CI run41851048762 SUCCESS with 1678 PASS/0 FAIL/0 SKIP, approval41851048684, cloud UX41851049023, isolated SQL41851048781, security41851049123 and source bundle41851049157 SUCCESS; frozen60341851048786 SKIPPED.",
+        "Actual exact merged-source Node/lint/build41851611530 SUCCESS (1678 PASS/0 FAIL/0 SKIP), approval41851611463, cloud UX41851611246 and READY intake41851611283 SUCCESS. Original full frozen603 acceptance41851611490 SKIPPED, not PASS. No actual authenticated member/GoTrue validation, no deployment.",
+        "Independent genuine official public HTTPS HTML and parser/Add Coffee run41851611180/job126649098760 SUCCESS: 2/2 fetched, parsed, preview and source review rendered. Before run41844449595 artifact13330481532 vs after artifact13335466729; independent ZIP SHA256 6bbd6c530eb5e15b96a26f238da813e4038e560442966661f0d42cddc60e4aed vs d087af2ab58479d8c657b669fae7dc281a999b150ceb873275315a69aaafbaa1. Current #580 H1 unchanged Faver Ninco - Colombia; raw before/after HTML SHA256 6fd11ac46a65078567ddef814dbe3cf01c8f9a56cad787f48ed5ef977cf6e364 vs d592d86b568bec817b393b9a87e71253fcc02d12fc50c8870e33c672b1134cbe (different bytes, both 259480). Exact current canonical field comparison: ONLY origin Colombia -> Santa Maria, Huila, Colombia. All #580 other fields, conflicts [], #586 canonical fields and four conflicts unchanged; no historic expected cherry/vanilla notes forced. Both Add Coffee preview and review flags rendered, manual_certified=0 by job."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Requires passing exact PR-head CI, nonforce merge, exact merged-source CI and fresh official HTTPS parser/Add Coffee verification."
+      "ci_runs": [
+        41848633709,
+        41849787326,
+        41850423443,
+        41850423532,
+        41850423442,
+        41850423559,
+        41850423461,
+        41850423527,
+        41850423589,
+        41851048762,
+        41851048684,
+        41851049023,
+        41851048781,
+        41851049123,
+        41851049157,
+        41851048786,
+        41851611530,
+        41851611463,
+        41851611246,
+        41851611283,
+        41851611180,
+        41851611490
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "IN_PROGRESS not READY/deployed; only selected H1 immediate semantic location plus separately confirmed current producer-farm; preserve original603, all other rows, and no release from harvest/shipping."
+      "notes": "NARROW VERIFIED READY, NOT DEPLOYED. Direct current official selected H1-adjacent geography plus matching named current producer farm, source-bound negative tests, exact merged-source CI and fresh HTML/Add Coffee verified. Other coffee #586 remains identical. The product's harvest and fulfillment dates are NOT release labels. Full frozen603 and 153 context-qualified/29 missing-literal review cases/35 historic source blanks remain unverified; Issue33 stays OPEN. Same runtime source file overlaps other READY entries: source-isolated authorized release and all dependencies still required by Issue417. No production Netlify/SQL/Edge/Auth/member/provider changes or cost.",
+      "pr": 586
     },
     {
       "id": "DIC-Q-455-meaningful-yield-step",
