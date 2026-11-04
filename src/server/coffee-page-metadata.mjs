@@ -29,6 +29,7 @@ import {collectCoffeeSourceFacts,collectStructuredCoffeeSourceFacts,collectCoffe
 import {collectSupplementaryCoffeePageFacts} from './coffee-supplementary-source-evidence.mjs';
 import {selectedCurrentCoffeeReleaseBadge,selectedStructuredCoffeeEvidence,selectedPageCoffeeEvidence,explicitlyRotatingCoffeeOrigin} from './coffee-selected-source-evidence.mjs';
 import {selectedCurrentInlineShopifyRoastTag} from './coffee-current-inline-shopify-product.mjs';
+import {countrywideEducationalOriginCorrection} from './coffee-countrywide-context-guard.mjs';
 
 // A chosen current selected coffee description can be more authoritative than
 // another labeled tasting list printed in the same selected product detail
@@ -2002,6 +2003,24 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   }
   delete fields.origin;
   conflicts.add('origin');
+ }
+ // Generic *countrywide* educational mountain context is not proof of
+ // this selected lot's narrower origin. Retain all raw source facts and the
+ // original broad claim as review evidence; guard against true lot claims.
+ if(fields.origin&&!conflicts.has('origin')){
+  const nationalOrigin=countrywideEducationalOriginCorrection({
+   name:fields.name,origin:fields.origin,
+   blocks:productCoffeeProse(canonicalProduct,clean)
+  });
+  if(nationalOrigin){
+   rememberCoffeeReviewCandidate(fields,'origin',fields.origin,
+    'General national growing geography, not selected lot');
+   fields.origin=nationalOrigin.origin;
+   if(source_facts.length<384)source_facts.push({field:'origin_context',
+    label:'Country-wide growing context, not a selected farm region',
+    value:nationalOrigin.source_excerpt,source_url,source_type:'html',
+    section:'General product background, noncanonical'});
+  }
  }
  // An extracted value is a suggestion, never proof of an official source.
  // Keep unexpected/absent facts blank instead of guessing.

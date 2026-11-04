@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "issue": 33,
-  "status": "TESTING_CURRENT_SELECTED_REAL_HTTP_AND_PARSER_PENDING",
+  "status": "ACTUAL_3_CURRENT_SELECTED_SOURCES_VERIFIED_PENDING_62_CORRECTION_106_ADJUDICATION",
   "base_sha": "571325a20fc253cd5274545c91c62e7e356030fc",
   "base_tree_sha": "91aee23926e85910c40e4e5cd27256ac6bdb031b",
   "selected_numbers": [
@@ -45,8 +45,57 @@
     "independent raw HTML & JSON artifact audit"
   ],
   "manual_certified": 0,
-  "release_status": "NOT_READY",
+  "release_status": "IN_PROGRESS",
   "deployment_authorized": false,
   "production_operations": 0,
-  "next": "Run CI; nonforce integrate exact source without overriding concurrent work; independently compare source-bound actual parser outputs before any correction"
+  "next": "Run #62 generic national education guard PR exact CI, nonforce merge; real postmerge #62/#106/#531 source comparison; then separately adjudicate #106 without title-only guess.",
+  "merged_probe_sha": "701ee3c486fc9cb108d852b8bef6e077468a3722",
+  "official_probe_run": 41933987366,
+  "official_artifact_id": 13373740081,
+  "artifact_zip_sha256": "b06bccd564c177688ef78ad202a77f8b50878d90e861f2adad36a5cf6f59c983",
+  "official_artifact_summary": {
+    "fetched": 3,
+    "parsed": 3,
+    "selected_h1_matched": 3,
+    "add_coffee_preview_rendered": 3,
+    "source_review_rendered": 3,
+    "manual_certified": 0,
+    "real_signed_in_auth": false,
+    "production_operations": 0
+  },
+  "actual_current_selected": [
+    {
+      "number": 62,
+      "status": "SOURCE_VERIFIED_DEFECT",
+      "html_sha256": "846e4d427688e59813e9282cf7548f721e9674f4e6448a388438fb686114d251",
+      "html_bytes": 290979,
+      "selected_h1": "Organic Peru",
+      "parser_origin": "Andes, Peru",
+      "country": "Peru",
+      "decision": "The Andes is published only as common growing terrain for MOST Peru coffee, not the selected lot. Selected product's Peru origin remains source-supported.",
+      "conflicts": []
+    },
+    {
+      "number": 106,
+      "status": "SOURCE_VERIFIED_FIELD_GAP_UNCORRECTED",
+      "html_sha256": "772f5ea782ca26227162a594de0de814f03ed6a489f35cbbe39a48bdf94975a6",
+      "html_bytes": 145955,
+      "selected_h1": "Colombia Valley de Cauca",
+      "parser_origin": "Colombia",
+      "decision": "Named title locality Valley de Cauca may support finer provenance, but verify explicit selected origin semantics and add guarded regression before changing.",
+      "conflicts": []
+    },
+    {
+      "number": 531,
+      "status": "SOURCE_VERIFIED_METHOD_PRESENT_OTHER_FIELDS_CONSERVATIVE",
+      "html_sha256": "8f9c37bbfa2ce2fbc5b675012616ad28907635331464f79966561f1a74473814",
+      "html_bytes": 261061,
+      "selected_h1": "TRANQUILO, Decaffeinated, 12 oz",
+      "parser_decaffeination_method": "Sugar Process",
+      "parser_origin": null,
+      "parser_process": null,
+      "decision": "EA sugarcane decaffeination is correctly independent of green Natural processing; in-Colombia decaffeination prose is not a selected-growing-origin assertion.",
+      "conflicts": []
+    }
+  ]
 }

@@ -4499,6 +4499,28 @@
       "notes": "TESTING development only, NOT READY and NOT DEPLOYED. Country/region tags not eligible for this recovery. Other coffee #565/#601 expected unchanged. Preserve #267/#96 concurrent PRs and immutable corpus.",
       "merged_source_sha": null,
       "ci_runs": []
+    },
+    {
+      "id": "DIC-Q-33-original603-62-educational-mountain-origin",
+      "issue": 33,
+      "title": "Do not infer selected coffee's mountain origin from generic countrywide growing education",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-countrywide-context-guard.mjs"
+      ],
+      "tests": [
+        "Official original603 #62 exact HTTPS/H1/parser/Add Coffee source sha701ee3c; raw SHA256 846e4d427688e59813e9282cf7548f721e9674f4e6448a388438fb686114d251. Historical and current parser origin Andes, Peru but selected prose says MOST Peru coffee grown in Andes, not this selected lot."
+      ],
+      "ci_runs": [
+        41933987366
+      ],
+      "blockers": [
+        "PR-head CI, nonforce merge, exact postmerge live raw selected #62 and negative control verification pending"
+      ],
+      "notes": "Narrow generic countrywide background guard TESTING. #106 independent current-source title-locality omission remains uncorrected. No production publication, original oracle/corpus change or provider/member write.",
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33"
     }
   ],
   "history": [
