@@ -198,7 +198,13 @@ function explicitProseRoasts(html){
     NONCURRENT_COFFEE_PROSE.test(context)||
     /\b(?:light|medium|dark)\s+to\s+(?:light|medium|dark)\b|\bmedium\s*\/\s*medium[ -]dark\b/i.test(sentence)||
     /\b(?:roast (?:levels|scale|spectrum|options|range)|range (?:of|from)|from light to|between light and|than|for (?:fans|lovers) of|if you (?:like|prefer)|each coffee|every coffee|every bean|our specialty|specialty has been|roast specialists|roast coffees|other decaf|average beans|also available as|guided brew|brewing preset|(?:ideal|suited|suitable) for|touch of|roast component)\b/i.test(sentence))continue;
-   // An explicitly selected product calling itself the roaster's "darkest\n   // ... roast yet" supplies a current Dark tier. This is not a generic\n   // catalog scale or comparative tasting note; the caller has already\n   // excluded educational/unrelated prose and historical claims.\n   if(/\\b(?:our|this)\\s+darkest(?:\\s*,?\\s*(?:yet|and)\\s+[\\p{L}-]{2,24}){0,2}\\s*,?\\s+roast\\s+yet\\b/iu.test(sentence)&&\n     !/\\b(?:another|other|previous|former)\\s+(?:coffee|product|blend|roast)\\b/i.test(sentence))\n    found.push('Dark');\n   const patterns=[
+   // Current selected prose that explicitly calls this the roaster's
+   // "darkest ... roast yet" supports Dark. Do not read general menus,
+   // historical/other-coffee statements or generic scales as current claims.
+   if(/\b(?:our|this)\s+darkest(?:\s*,?\s*(?:yet|and)\s+[\p{L}-]{2,24}){0,2}\s*,?\s+roast\s+yet\b/iu.test(sentence)&&
+     !/\b(?:another|other|previous|former)\s+(?:coffee|product|blend|roast)\b/i.test(sentence))
+    found.push('Dark');
+   const patterns=[
     new RegExp('\\b('+ROAST_WORDS+')\\s*[- ]?\\s*(?:smooth\\s+)?roast(?:ed)?\\b','gi'),
     new RegExp('\\broast(?:ed)?\\s+(?:(?:to|at)\\s+(?:(?:a|an|the|developed)\\s+)?)?(?:special\\s+)?('+ROAST_WORDS+')\\b(?!\\+)','gi'),
     new RegExp('\\broasted\\s+in\\s+(?:a|the)\\s+('+ROAST_WORDS+')\\s+profile\\b','gi'),
