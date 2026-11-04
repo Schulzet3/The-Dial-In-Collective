@@ -1,6 +1,6 @@
 import {productCoffeeProse,NONCURRENT_COFFEE_PROSE} from './coffee-product-prose.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
-import {coffeeHtmlAttributes} from './coffee-product-scope.mjs';
+import {coffeeHtmlAttributes,productMarkup} from './coffee-product-scope.mjs';
 import {compatibleCoffeeOrigins,isGenericCoffeeVariety} from './coffee-fact-compatibility.mjs';
 import {withoutNaturalDecaffeinationModifier} from './coffee-processing-evidence.mjs';
 
@@ -620,6 +620,44 @@ function selectedCoffeeBagAltOrigin(html,name){
 // Combine only two independently printed places about this exact selected
 // coffee: its named product story "X, our ... from Region" and its current
 // "This lot hails from Locality" statement. No gazetteer/country guess.
+// Require the exact selected H1, its immediately adjacent visible location,
+// and a separate current-producer farm claim; no URL, SEO or catalog fallback.
+function selectedHeadingAdjacentFarmLocation(html,blocks,{name='',fields={},clean}={}){
+ if(!name||typeof clean!=='function'||!fields.producer||!key(name).includes(key(fields.producer)))return null;
+ const countries=countryNames(name);
+ if(countries.length!==1)return null;
+ const page=productMarkup(html),{nodes,truncated}=coffeeHtmlElements(page);
+ if(truncated)return null;
+ const headings=nodes.filter(node=>node.tag==='h1'&&node.contentEnd-node.headEnd<=500&&
+  key(clean(page.slice(node.headEnd,node.contentEnd),220))===key(name));
+ if(headings.length!==1)return null;
+ const title=headings[0],i=nodes.findIndex(node=>node.parent===title.parent&&node.start>title.end),next=nodes[i];
+ if(!next||next.tag!=='div'||next.start-title.end>240||page.slice(title.end,next.start).trim()||
+    !/(?:^|[\s_-])location(?:$|[\s_-])/i.test(coffeeHtmlAttributes(next.attributes).class||''))return null;
+ const parts=nodes.filter(node=>node.parent===i&&node.tag==='span');
+ if(parts.length!==2)return null;
+ const values={};
+ for(const part of parts){
+  const classes=(coffeeHtmlAttributes(part.attributes).class||'').split(/\s+/u);
+  const role=classes.includes('cityname')?'locality':classes.includes('coname')?'country':'';
+  if(!role||values[role])return null;
+  values[role]=clean(page.slice(part.headEnd,part.contentEnd),160);
+ }
+ if(!values.locality||!values.country||!COUNTRY_ONLY.test(values.country)||
+    key(values.country)!==key(countries[0]))return null;
+ const local=values.locality.split(/\s*,\s*/u);
+ if(local.length!==2||local.some(place=>place.length<3||place.length>65||
+    !/^\p{Lu}[\p{L}\p{M}'’-]*(?:\s+\p{Lu}[\p{L}\p{M}'’-]*){0,5}$/u.test(place)||
+    completeVarietyPhrase(place,{explicit:true})||COUNTRY_ONLY.test(place)||
+    /\b(?:coffee|roast|process|washed|natural|honey|anaerobic|decaf|shipping|delivery|street|avenue|farm|estate|tasting|flavou?r)\b/i.test(place)))return null;
+ const farmInCity=new RegExp('\\bfarm\\s+in\\s+'+local[0]+'(?=\\s|[,.;!?]|$)','iu');
+ const proof=blocks.find(b=>!b.educational&&!/^h[1-6]$/.test(b.tag)&&b.text.length<=1600&&
+   current(b.text)&&key(b.text).includes(key(fields.producer))&&farmInCity.test(b.text)&&
+   !/\b(?:former|previous|historical|no longer|another farm|other coffee)\b/i.test(b.text));
+ return proof?{value:local.join(', ')+', '+values.country,
+  quote:name+' | '+values.locality+' '+values.country+' | '+proof.text.slice(0,800)}:null;
+}
+
 function pairedSelectedLotRegion(blocks,name,previousOrigin=''){
  const titles=blocks.filter(block=>block.tag==='h1').map(block=>key(block.text));
  if(!titles.length||titles.some(value=>value!==key(name)))return null;
@@ -677,6 +715,8 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
   if(compatible)add('Origin',compatible,place.quote);
   else if(!existing||incompatibleCountry||COUNTRY_ONLY.test(existing))add(place.label,place.value,place.quote);
  }
+ const adjacentFarm=selectedHeadingAdjacentFarmLocation(html,blocks,{name,fields,clean});
+ if(adjacentFarm)add('Origin',adjacentFarm.value,adjacentFarm.quote);
  // Join explicitly named current lot and region only for the selected coffee.
  const pairedLot=pairedSelectedLotRegion(blocks,name,fields.origin);
  if(pairedLot)add('Origin',pairedLot.value,pairedLot.quote);
