@@ -4443,6 +4443,62 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "NARROW VERIFIED READY, NOT DEPLOYED. Current selected official #125 H1 and country caption Ethiopia override metadata-only Guji; retained selected true visual Light roast and tasting. Actual postmerged official fetch+parser+Add Coffee and 2 other controls source-verified; no unrelated regression. Original immutable603/201/1197, oracle/scorer/CSV preserved. Global Issue33 and signed-in member acceptance remain unverified; no production/member/provider writes, deploy authority absent."
+    },
+    {
+      "id": "DIC-Q-455-legacy-undated-feedback",
+      "issue": 455,
+      "pr": 620,
+      "title": "Prevent blank-timestamp legacy shots from driving current recommendation and recipe-card feedback",
+      "state": "READY",
+      "merged_source_sha": "06210ece31b0535738c3653d5e3e5e14f795746c",
+      "scope_paths": [
+        "site/cloud/mapping.js",
+        "site/lib/engine.js",
+        "site/lib/ui.js"
+      ],
+      "tests": [
+        "Source negative: prior engine selected a single otherwise-compatible blank-timestamp shot; recipe card accepted empty-string timestamps. Positive: current dated comparable shot remains eligible; historical ratings, measurements and private notes remain unmodified.",
+        "Two new focused Node regression tests authored against actual imported engine/UI modules; NOT_EXECUTED before GitHub CI. Current GitHub Actions jobs fail before steps; exact PR-head test and governance outcomes PENDING.",
+        "PR620 exact corrected head 6f45bbf6e42b98ad35da36663cc50c931536281f: Node22 2426 PASS / 0 FAIL / 6 intentional SKIP, lint/build, UX/browser/offline/a11y, isolated SQL, approval and security SUCCESS; runs 41926580209/41926580309/41926580240/41926580140/41926580096. Frozen603 run41926580195 SKIPPED, not a PASS.",
+        "Independent nonforce merge 06210ece31b0535738c3653d5e3e5e14f795746c 2026-11-04 22:38:21 UTC; all seven PR620 changed-file blob SHAs equal between passed head and merged tree, including engine/UI/cloud mapping, targeted tests, positive grinder fixture, queue and same-commit journal.",
+        "Exact merged source 06210ece: Node22 run41927031130 2432 cases /2426 PASS /0 FAIL /6 SKIP, lint PASS; actual 390px/1280px Chromium mobile/offline/accessibility run41927030524 SUCCESS including cloud-tests NOT_APPLICABLE; approval/source/queue/same-commit continuity run41927030537 SUCCESS. No actual live-member or cup-quality outcome, no Netlify deployment or production write."
+      ],
+      "ci_runs": [
+        41926580209,
+        41926580309,
+        41926580240,
+        41926580140,
+        41926580096,
+        41926580195,
+        41927031130,
+        41927030524,
+        41927030537
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "READY in development, NOT DEPLOYED. Excludes missing/blank timestamps only from derived current feedback, sensitivity, Log Shot prefill and cloud-hydration latest selection; all original legacy shots, five ratings, measurements and private notes remain stored. Independent full source-bound CI and merged-source regression verified; frozen603 SKIPPED, real member/auth and empirical sensory outcomes unverified. No owner publication command."
+    },
+    {
+      "id": "DIC-Q-33-original603-309-inline-product-roast",
+      "issue": 33,
+      "title": "Recover exact selected current Shopify inline roast tag without category/other SKU leakage",
+      "state": "IN_PROGRESS",
+      "scope_paths": [
+        "src/server/coffee-current-inline-shopify-product.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "Prior official current selected #309 HTML captured at source SHA 95724f1, run41930234673 artifact13371681583, H1 Horizon Blend, raw SHA256 364967342d12102b4f4f24d7b68b863ea76270cbf26fb420339f6000ef7bb8aa; current parser roast blank despite exact current Shopify inline theme.product roast:light roast tag, product id 6615007330400/title Horizon Blend/handle horizon-blend/vendor Compass Coffee.",
+        "Proposed generic exact product identity bound parser and adversarial positive/negative tests; new exact PR-head CI, after-merge official raw HTML/parser Add Coffee and direct source-field comparison NOT YET VERIFIED.",
+        "Initial candidate PR-head approval run41931437237 FAILED queue schema validation (required null merged_source_sha and empty ci_runs list for IN_PROGRESS); not a source assertion; adjusted in this commit."
+      ],
+      "blockers": [
+        "PENDING exact CI, nonforce merge, genuine selected official parser source recheck and comparison; historic frozen603 manual review not done."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "TESTING development only, NOT READY and NOT DEPLOYED. Country/region tags not eligible for this recovery. Other coffee #565/#601 expected unchanged. Preserve #267/#96 concurrent PRs and immutable corpus.",
+      "merged_source_sha": null,
+      "ci_runs": []
     }
   ],
   "history": [
