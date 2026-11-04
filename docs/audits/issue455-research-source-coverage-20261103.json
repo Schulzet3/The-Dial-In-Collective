@@ -472,6 +472,33 @@
       "review_status": "FULL_PRIMARY_HTML_METHODS_FOR_EK43_TEMPERATURE_AND_FOUR_COFFEE_COMPARISON_READ; 31_PERCENT_MODAL_CHANGE_VERIFIED; NONCAUSE_ORIGIN_CAVEAT",
       "source_bytes_sha256": null,
       "source_byte_caveat": "NIH PMC original full HTML read 2026-11-04, raw PDF bytes not downloaded, hash not verified; image/graph data not independently remeasured."
+    },
+    {
+      "id": "LIT-2018-GRIFFITHS-BURR-WEAR",
+      "type": "external_primary_study",
+      "title": "Wear Monitoring of Coffee Grind-On-Demand Burrs Using Precision Sieving and Laser Diffraction",
+      "authors": "Griffiths CA, Adams GC, Rees A",
+      "published": "2018-10-29",
+      "url": "https://www.innovationinfo.org/index.php/international-journal-of-food-and-bioscience/article/Wear-Monitoring-of-Coffee-Grind-On-Demand-Burrs-Using-Precision-Sieving-and-Laser-Diffraction",
+      "access": "ORIGINAL_JOURNAL_FULL_HTML_METHODS_AND_TABLES_DIRECTLY_READ_2026-11-04; downloadable PDF not fetched or hashed",
+      "evidence_grade": "PUBLISHED_ORIGINAL_SMALL_PAIRED_BURR_COMPARISON_WITH_WET_SIEVING_AND_LASER_DIFFRACTION_NOT_CONTROLLED_BLIND_SENSORY",
+      "review_status": "FULL_PRIMARY_HTML_RELEVANT_METHODS_RESULTS_TABLE_3_TABLE_4_DIRECTLY_READ; old pair 500-600kg only; no universal replacement age or taste optimum",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "HTML read through original journal site; full raw HTML/PDF not byte archived. Single burr pair and unspecified independent grinder populations; source introduction's generic extraction and temperature targets were not empirically tested by its grinder wear experiment."
+    },
+    {
+      "id": "LIT-2026-WADSWORTH-XCT-PERMEABILITY",
+      "type": "external_primary_study",
+      "title": "A model for the permeability of coffee pucks validated using X-ray computed micro-tomography",
+      "authors": "Wadsworth FB, Vasseur J, Zhang J, Dobson KJ et al.",
+      "published": "2026-04-01",
+      "doi": "10.1098/rsos.252031",
+      "url": "https://research.lancaster-university.uk/en/publications/a-model-for-the-permeability-of-coffee-pucks-validated-using-x-ra/",
+      "access": "ORIGINAL_AUTHOR_INSTITUTIONAL_PEER_REVIEWED_ARTICLE_ABSTRACT_AND_BIBLIOGRAPHY_READ_2026-11-04; publisher full article and PDF not directly read",
+      "evidence_grade": "PEER_REVIEWED_ORIGINAL_AUTHOR_INSTITUTIONAL_ABSTRACT_HYDRAULIC_MODEL_AND_XCT_BASED_NUMERICAL_FLOW_NOT_HUMAN_SENSORY",
+      "review_status": "PRIMARY_AUTHOR_ABSTRACT_2_COFFEES_11_GRINDS_XCT_PERMEABILITY_SIMULATION_READ; FULL_PAPER_METHODS_TABLES_NOT_VERIFIED",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Institutional article abstract directly inspected and DOI corroborated. No publisher full-text methodological audit or PDF byte verification, no measured sensory effects."
     }
   ],
   "evidence_checks": [
@@ -1269,6 +1296,55 @@
       "current_app": "site/lib/engine.js blob 063dac7593e6d8fa1cb889a0b74746b223dd4390, baseline() lines 23-31 uses roast-level/style priors and explicit unknown-roast Medium fallback; recommendation() lines 256-373 uses eligible recipe/hardware evidence; no measured bean porosity, gas/retained CO2, freeze-state or validated universal correction.",
       "result": "HOLD_UNAPPROVED_PREDICTIVE_ROAST_AGE_TEMPERATURE_CAPTURE_OR_TASTE_TARGETS",
       "owner_approval": true
+    },
+    {
+      "id": "R455-EV-CIT-021-A",
+      "source": "ORG-09 docs/research/originals/09_The_Causal_Foundation_of_Espresso_Extraction_Grinder_and_Burr_Interactions.md; Git blob 1e1b8bbef0ecb05ed0b20195191bcad26663cf0d lines 26, 36, 76-95, 210-213, 242-279, 417-419; LIT-2018-GRIFFITHS-BURR-WEAR",
+      "claim": "Griffiths et al. original methods compare one old commercial same-spec burr pair after 500-600kg reported throughput to its replacement pair: 5 wet-sieve samples each and composite 5-grind-cycle laser-diffraction analysis. The experiment can detect PSD differences for THAT worn/new comparison, but does not isolate universal burr wear mileage, temperature, consistent calibrated grind changes across machine designs or blind cup-quality gains.",
+      "grade": "PUBLISHED_ORIGINAL_FULL_JOURNAL_HTML_METHODS_DIRECT; SINGLE_PAIRED_COMPARISON_AND_NO_BLIND_SENSORY",
+      "primary_sources": [
+        "https://www.innovationinfo.org/index.php/international-journal-of-food-and-bioscience/article/Wear-Monitoring-of-Coffee-Grind-On-Demand-Burrs-Using-Precision-Sieving-and-Laser-Diffraction"
+      ],
+      "current_app": "site/lib/model.js Git blob 19aaca401cab7bbd2059b9a34c6b8df263f4181c lines 38-46, 62-67 versions/recalibrations; site/lib/engine.js blob 063dac7593e6d8fa1cb889a0b74746b223dd4390 lines 429-445 limits comparisons to same calibration/setup/coffee and all other green ratings.",
+      "result": "PRESERVE_HARDWARE_VERSIONING_AND_MANUAL_ESPRESSO_RANGE; NO_AUTOMATED_REPLACEMENT_KG_OR_SENSORY_POLICY",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-021-B",
+      "source": "ORG-09 docs/research/originals/09_The_Causal_Foundation_of_Espresso_Extraction_Grinder_and_Burr_Interactions.md; Git blob 1e1b8bbef0ecb05ed0b20195191bcad26663cf0d lines 210-213, 242-279, 417-419; LIT-2018-GRIFFITHS-BURR-WEAR; original journal HTML Table 4",
+      "claim": "Griffiths et al. original journal Table 4 directly lists laser-diffraction Dv10 28.7 versus 15.6 micrometers, Dv50 234 versus 141 micrometers and Dv90 511 versus 446 micrometers for new versus old burr samples. This is observed PSD under ONE grinder comparison, NOT a universal percentage correction for a member's calibration or guaranteed espresso taste difference.",
+      "grade": "PRIMARY_PUBLISHED_TABLE_4_DIRECTLY_READ; METHOD_AND_SAMPLE_SCOPED_NOT_GENERALIZABLE",
+      "primary_sources": [
+        "https://www.innovationinfo.org/index.php/international-journal-of-food-and-bioscience/article/Wear-Monitoring-of-Coffee-Grind-On-Demand-Burrs-Using-Precision-Sieving-and-Laser-Diffraction"
+      ],
+      "current_app": "site/lib/model.js Git blob 19aaca401cab7bbd2059b9a34c6b8df263f4181c lines 38-46, 62-67 versions/recalibrations; site/lib/engine.js blob 063dac7593e6d8fa1cb889a0b74746b223dd4390 lines 429-445 limits comparisons to same calibration/setup/coffee and all other green ratings.",
+      "result": "NO_WEAR_COEFFICIENT_CROSS_GRINDER_GRIND_OFFSET_OR_NEW_TASTE_PRIOR",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-021-C",
+      "source": "ORG-09 docs/research/originals/09_The_Causal_Foundation_of_Espresso_Extraction_Grinder_and_Burr_Interactions.md; Git blob 1e1b8bbef0ecb05ed0b20195191bcad26663cf0d lines 1-25, 80-95, 362-405; LIT-2026-WADSWORTH-XCT-PERMEABILITY",
+      "claim": "Wadsworth et al. 2026 author institutional peer-reviewed publication abstract directly describes XCT of two roasted coffees (Tumba Rwanda and Guayacan Colombia), 11 grind settings on a Mahlkonig grinder, theoretical permeability linked to connected pore volume and grain-liquid interface area, compared against lattice-Boltzmann simulated flow in reconstructed domains; this is NOT a tested member-cup taste optimum or machine-independent fixed yield correction.",
+      "grade": "PRIMARY_AUTHOR_INSTITUTIONAL_PEER_REVIEWED_ABSTRACT; FULL_ARTICLE_AND_SENSORY_NOT_DIRECTLY_VERIFIED",
+      "primary_sources": [
+        "https://research.lancaster-university.uk/en/publications/a-model-for-the-permeability-of-coffee-pucks-validated-using-x-ra/",
+        "https://doi.org/10.1098/rsos.252031"
+      ],
+      "current_app": "site/lib/model.js Git blob 19aaca401cab7bbd2059b9a34c6b8df263f4181c lines 38-46, 62-67 versions/recalibrations; site/lib/engine.js blob 063dac7593e6d8fa1cb889a0b74746b223dd4390 lines 429-445 limits comparisons to same calibration/setup/coffee and all other green ratings.",
+      "result": "NO_PORE_SENSOR_MEMBERSHIP_FIELD_OR_UNIVERSAL_GRIND_EFFECT_TRANSFERS",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-021-D",
+      "source": "ORG-09 docs/research/originals/09_The_Causal_Foundation_of_Espresso_Extraction_Grinder_and_Burr_Interactions.md; Git blob 1e1b8bbef0ecb05ed0b20195191bcad26663cf0d lines 36, 417-419; LIT-2018-GRIFFITHS-BURR-WEAR",
+      "claim": "Although Griffiths et al. introductory prose repeats ideal 18-22% extraction yield and 85-95 C brewing temperature, its actually measured burr-wear methods compare particle sizes, not randomized cup preference across beans/styles/temperatures. Those background statements cannot be treated as direct universal espresso sensory thresholds or used to revise owner-Locked numeric app targets.",
+      "grade": "PRIMARY_ORIGINAL_INTRODUCTION_VERSUS_MEASURED_METHODS_SCOPE_DIRECTLY_COMPARED; NEGATIVE_FACTUAL_ENTAILMENT",
+      "primary_sources": [
+        "https://www.innovationinfo.org/index.php/international-journal-of-food-and-bioscience/article/Wear-Monitoring-of-Coffee-Grind-On-Demand-Burrs-Using-Precision-Sieving-and-Laser-Diffraction"
+      ],
+      "current_app": "site/lib/constants.js Git blob 72221331ce4dffabe416eebec1ae2fceced3a095 style-specific starting priors and five taste scales; site/lib/model.js Git blob 19aaca401cab7bbd2059b9a34c6b8df263f4181c lines 38-46, 62-67 versions/recalibrations; site/lib/engine.js blob 063dac7593e6d8fa1cb889a0b74746b223dd4390 lines 429-445 limits comparisons to same calibration/setup/coffee and all other green ratings.",
+      "result": "REJECT_UNTESTED_UNIVERSAL_EY_TEMP_TASTE_TARGET_FROM_BURR_WEAR_PAPER",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [],
@@ -1277,9 +1353,10 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R455-020 primary-method source/UX traceability: three external source identities, five checks, two research-only held proposals, dedicated ledger and same-commit journal; no app/test/CI/approval/spec/queue/source-register change."
+    "reason": "R455-021 two direct primary study identities, four constrained claim checks and scoped journal in exactly two files; no executable/test/Locked/approval/queue/production changes."
   },
   "next_actions": [
+    "Verify original Griffiths journal full PDF only if needed and Wadsworth full methods when directly accessible; scientific claim verification does not authorize new app data capture or numeric sensory thresholds.",
     "Continue unresolved original research bibliography primary citation checks with exact original section, DOI, access and generalization limits; all nine full bodies were read but NOT all citations independently verified.",
     "Retrieve actual bytes of the two Project Library DIC_Espresso_Research_Implementation_Pack ZIP entries via an authorized owner-provided mount/working attachment if access becomes available; metadata exists but raw_file materialization explicitly denied. Only then hash against recorded 7d562a45... and inspect 15 entries/48 research-only cases.",
     "Retrieve/hash the separate original S019 roast/style PDF and reverify prior slow-feed 10-page content against its archived original bytes; neither claim complete.",
@@ -1289,34 +1366,32 @@
     "Continue actual UX code/test workflow review for one demonstrable narrow safe bug rather than speculative roast-age or cold-grind controls."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-020",
-    "base_development_sha": "71e6cde0f615bd3d33d031869264e223da70a658",
-    "original_report": "ORG-03",
-    "original_blob": "9a66449c6adfe27bc7e64dae086d3dfcfc647de6",
+    "id": "R455-021",
+    "base_development_sha": "f25758d7cc6c3dbc8883953135fdb4ea8e4c8d5d",
+    "original_report": "ORG-09",
+    "original_blob": "1e1b8bbef0ecb05ed0b20195191bcad26663cf0d",
     "engine_blob": "063dac7593e6d8fa1cb889a0b74746b223dd4390",
+    "model_blob": "19aaca401cab7bbd2059b9a34c6b8df263f4181c",
     "source_ids": [
-      "LIT-2000-SCHENKER-ROAST-PORES",
-      "LIT-2018-SMRKE-DEGASSING-GRAVIMETRY",
-      "LIT-2016-UMAN-BEAN-TEMP-PSD"
+      "LIT-2018-GRIFFITHS-BURR-WEAR",
+      "LIT-2026-WADSWORTH-XCT-PERMEABILITY"
     ],
     "source_claim_checks": [
-      "R455-EV-CIT-020-A",
-      "R455-EV-CIT-020-B",
-      "R455-EV-CIT-020-C",
-      "R455-EV-CIT-020-D",
-      "R455-EV-CIT-020-E"
+      "R455-EV-CIT-021-A",
+      "R455-EV-CIT-021-B",
+      "R455-EV-CIT-021-C",
+      "R455-EV-CIT-021-D"
     ],
-    "number_of_curated_sources": 35,
-    "total_evidence_checks": 74,
-    "original_report_full_bodies_reviewed": "9/9 from earlier bounded receipts; ORG-03 claims/primary methods revisited here, no global bibliography certification",
+    "number_of_curated_sources": 37,
+    "total_evidence_checks": 78,
+    "original_report_full_bodies_reviewed": "Prior 9/9 archived and read in earlier reviews; scoped ORG-09 sections directly reread; all original bibliography items not certified",
     "github267_line_credit": 0,
-    "google_drive_search": "2026-11-04 espresso, slow feeding, DIC: only existing Roast Color Sheet and unrelated DIC folders; no new accessible research",
-    "owner_project_library": "pack zip and S019 exact original raw bytes still unavailable; accessible distinct slow-feed PDF not rehashed this increment",
+    "google_drive_search": "2026-11-04 scoped espresso and DIC searches: existing Roast Color sheet and DIC folder only, no newly opened research source",
+    "owner_project_library": "distinct slow-feed PDF searchable; October 29 ZIP pack and original S019 exact bytes not accessible",
+    "source_byte_limits": "Griffiths journal full HTML directly read, not raw-byte archived; Wadsworth author institutional original abstract only, publisher full methods/PDF not accessed",
     "app_changes_in_this_commit": false,
-    "source_byte_limits": "Schenker full text table/publisher and Smrke full PDF unavailable; Uman NIH full HTML read, no PDF hash",
-    "status": "FIVE_ROAST_DEGASSING_GRINDER_CLAIM_CHECKS_DOCS_ONLY",
-    "production_deployed": false,
-    "readme_and_queued_ready": "PR584 already verified READY not deployed"
+    "status": "FOUR_BURR_WEAR_XCT_CLAIM_CHECKS_DOCS_ONLY",
+    "production_deployed": false
   },
   "policy_decisions_resolved": [
     {
@@ -1366,6 +1441,23 @@
       "approval_required_for_behavior_change": true,
       "implementation": "RESEARCH_ONLY_HOLD",
       "test_plan": "Owner-approved future model would require controlled same-coffee/equipment evidence, schema/privacy/offline/backend and five-taste regressions.",
+      "release_queue": "NO_NEW_ITEM"
+    },
+    {
+      "id": "R455-PROP-021-BURR-WEAR",
+      "finding": "Paper's single grinder worn/new comparison does not validate a universal burr age, kilograms-to-replace or auto-scale adjustment.",
+      "evidence": [
+        "R455-EV-CIT-021-A",
+        "R455-EV-CIT-021-B"
+      ],
+      "severity": "P2_INFORMATIONAL_RESEARCH_GENERALIZATION_RISK_NOT_REPRODUCED_APP_BUG",
+      "user_benefit": "Maintain trustworthy setup versions, historical shot measurements and controlled same-coffee comparisons without inventing calibration corrections",
+      "current_locked": "Owner-Locked equipment/burr versioning and user-entered espresso grind ranges, preservation of histories, single-controllable-change recommendation.",
+      "current_app": "site/lib/model.js Git blob 19aaca401cab7bbd2059b9a34c6b8df263f4181c lines 38-46, 62-67 versions/recalibrations; site/lib/engine.js blob 063dac7593e6d8fa1cb889a0b74746b223dd4390 lines 429-445 limits comparisons to same calibration/setup/coffee and all other green ratings.",
+      "proposed_change": "SAFE: no behavior change. Optional future burr wear/throughput UI, wear-specific modeling or coefficient needs new explicit owner product approval and actual controlled validation; published 500-600kg is one study's sample, not a user maintenance schedule.",
+      "approval_required_for_behavior_change": true,
+      "implementation": "RESEARCH_ONLY_HOLD",
+      "test_plan": "If ever approved: version/recalibration integrity, offline persistence, grinder edge ranges, no historical mutation, no cross-bean extrapolation, and field outcome testing",
       "release_queue": "NO_NEW_ITEM"
     }
   ]
