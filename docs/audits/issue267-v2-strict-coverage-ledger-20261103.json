@@ -5,36 +5,36 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 1688,
+    "strict_validated_lines": 1778,
     "first_unvalidated_manifest_file_index": 30,
     "first_unvalidated_path": "docs/APPROVAL_COVERAGE_MATRIX.json",
-    "first_unvalidated_line": 1,
+    "first_unvalidated_line": 91,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 1701,
-    "first_unvalidated_file_index": 28,
-    "first_unvalidated_path": "scripts/audit/approval-coverage.mjs",
+    "strict_validated_lines": 1826,
+    "first_unvalidated_file_index": 30,
+    "first_unvalidated_path": "scripts/audit/coffee-adaptive-public-acceptance.mjs",
     "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "post_pin_drift": {
-    "observed_development_commit": "973a147dbd4c38454a13e2a1c29bf7d48e958a8d",
+    "observed_development_commit": "319a77c5b54cf7d5a309a65f667ce395f4e77d60",
     "strict_validated_added_lines": 1,
     "scope": "Single verified addition in first current source path; total post-pin live-code delta denominator not yet reconciled",
     "rest_of_live_changes": "NOT_COMPLETELY_REVIEWED",
-    "live_fully_reviewed_files": 28,
-    "live_fully_reviewed_file_lines": 1748,
-    "latest_reviewed_live_path": "package.json",
+    "live_fully_reviewed_files": 29,
+    "live_fully_reviewed_file_lines": 1846,
+    "latest_reviewed_live_path": "scripts/audit/approval-coverage.mjs",
     "remaining_live_changes": "Other post-pin paths pending; #267 remains open",
     "machine_only_diff_inventory_in_receipt": "docs/audits/issue267-v2-strict-batches/S2-003.json",
     "machine_only_changed_paths": 222,
     "machine_only_diff_commits": 243,
-    "other_live_paths_direct_semantic_status": "Pinned current identical ESLint and netlify.toml fully reviewed; most post-pin live source delta not reviewed",
+    "other_live_paths_direct_semantic_status": "Pinned #29 ci-scope.mjs 27 lines complete, live changed 116-line code NOT strictly reviewed; many other post-pin drift paths pending",
     "partially_read_live_paths": [],
     "latest_partially_validated_live_path": null,
     "strict_validated_changed_live_lines": 2,
@@ -734,6 +734,42 @@
             1,
             15
           ]
+        }
+      ],
+      "old_v2_additional_credit": 0
+    },
+    {
+      "batch": "S2-029",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-029.json",
+      "frozen_file": "docs/APPROVAL_COVERAGE_MATRIX.json",
+      "frozen_lines": [
+        1,
+        90
+      ],
+      "frozen_blob": "8ddf1cb21c2a8bc015a37a69b460ca94c75c7ced",
+      "pinned_files": [
+        {
+          "path": "scripts/audit/approval-coverage.mjs",
+          "blob": "788e174d264a040b5fdb9bbe9ca81cccb952022c",
+          "lines": [
+            1,
+            98
+          ]
+        },
+        {
+          "path": "scripts/audit/ci-scope.mjs",
+          "blob": "591a988e13b2bc2fd06760e13cb98a98da2c69c5",
+          "lines": [
+            1,
+            27
+          ]
+        }
+      ],
+      "live_source_drift_unreviewed": [
+        {
+          "path": "scripts/audit/ci-scope.mjs",
+          "live_blob": "e51f249377a7f2df556d103012b145aabc1559b7",
+          "live_lines": 116
         }
       ],
       "old_v2_additional_credit": 0
