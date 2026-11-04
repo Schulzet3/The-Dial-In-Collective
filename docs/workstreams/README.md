@@ -7,6 +7,7 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 - [Current-workflow reconciliation: Issue #70](issue-70.md)
 - [Repository-wide source and security inspection: Issue #96](issue-96.md)
 - [Frozen 579,961-line historical expert semantic review: Issue #267](issue-267.md)
+- [GitHub-wide exhaustive word-level records/doc audit: Issue #504](issue-504.md) — nonoverlapping with #267 source-code review
 - [Issue #96 source-transfer and receipt evidence](ops-issue96-receipt.md)
 - [Selected-product extraction completeness: Issue #33](issue-33.md)
 - [Issue #33 November 2 targeted official-source probe and adversarial tests](issue-33-tenth3.md)
