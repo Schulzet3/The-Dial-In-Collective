@@ -1,3 +1,15 @@
+## November 4 UTC — Issue #267 S2-038 direct 240 lines and fail-closed missing public audit packet selection [skip netlify]
+
+**Recovered source:** dev `fbe824da7cf7c7623996ceb7b71d1285f757cefb`, original frozen `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9`, pinned executable `9707553a64f88127826e8f5b2b36cd0651296e83`; same current #267/#33/#96 and latest Locked #457. Previous S2-037 merged with exact tree identical and six head checks SUCCESS; the separately merged-source CI was pending when this batch began. New S2-038 did not exist at checked development head; previous strict ledger counts were 2,786 frozen/3,210 pinned; old V2 totals separate provisional.
+
+**Every line read:** frozen historical manifest #32 `docs/APP_WIDE_ERROR_SWEEP_2026-10-17.md` **93/93**, blob `abac1fb2ad0b6b851cbd9c2765c75821b455da2b`; pinned executable #41 `scripts/audit/coffee-corpus-replay.mjs` **147/147**, blob `adf7115358cf9069c6e146e9ec983705575e1863`, exact same live blob at development. Nine explicit semantic/risk/obsolescence/duplicate/counterpart/testability/safe-improvement/Locked dimensions per numbered line. Strict totals **2,879/579,961 frozen; 3,357/57,913 pinned**. Next original #33 and pinned #42 at line 1. This is not universal review or independent human certification.
+
+**Reproduced completeness defect:** Local public corpus render helper line26 used selected_urls.map(find).filter(Boolean), so one missing chosen source packet was silently omitted and results could report `complete:true` with zero cases despite one required selection. Isolated Node direct expression reproduction PASS; narrow fail-closed throw for unmatched selected URLs preserves matching, order and duplicate behavior. Added four source-extracted no-network Node regression tests. No proxy/Chromium/website/Auth/SQL/production execution, no member/capture/oracle mutation. Source line25 best-effort handling for unselected malformed directories and line32 dated old receipt reuse remain WATCH.
+
+**Safety:** Original 603 replay attestation/freeze source hashes and nonproduction Auth fixtures read statically, not run again. No deployment, production writes or queue READY promotion. Wait for full applicable exact PR-head and merged-source check conclusions before claiming integration.
+
+---
+
 ## November 4 UTC — #267 S2-037 exact frozen/pinned 141-line review + local Chromium audit hostname bypass repair [skip netlify]
 
 **Source/owner preflight:** development `89a65bc0ac09d27b2df59c4824c363b078caaa83`, immutable original `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9`, pinned executable `9707553a64f88127826e8f5b2b36cd0651296e83`; main `a5b5c75933501d778ea01cd02e82589f51ef7cd6`, production `31c66832a28247e657a2bf89592ebc1e2f48dfc5`. Inspected AGENTS, CONTEXT_ENTRYPOINT, PREFLIGHT, current status, latest Locked #457, Decision Ledger, approval matrix, queue, #33/#96 ownership, open PRs, prior S2-036 and strict/non-strict ledgers; original V1 PR B031–033 remain untouched. No concurrent strict S2-037 receipt existed at this source head.
