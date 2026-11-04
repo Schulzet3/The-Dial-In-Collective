@@ -3,7 +3,7 @@
   "issue": 33,
   "review_date_utc": "2026-11-04",
   "kind": "TWO_QUALIFIED_CURRENT_SELECTED_ROAST_SOURCE_BOUNDARIES",
-  "state": "TESTING_NOT_READY",
+  "state": "VERIFIED_NARROW_TWO_SOURCE_ROLE_BOUNDARIES_NO_RUNTIME_PATCH_NO_READY",
   "parent_development_sha": "bedc5bd1fef9ce835ada3d0d55d3fa935673af54",
   "unchanged_original603_csv_git_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
   "cases": [
@@ -14,7 +14,8 @@
       "current_direct": "A well-balanced lighter roast with molasses, caramel, and lemongrass tasting notes",
       "historical_roast_parser": null,
       "frozen_roast_expected": "Light",
-      "semantic": "A relative lighter roast does not establish a selected absolute Light tier."
+      "semantic": "A relative lighter roast does not establish a selected absolute Light tier.",
+      "current_selected_meta_caveat": "The exact product's published SEO/metadata description calls it a 'single-origin light roast', while the direct selected visible product paragraph states only 'lighter roast'. Per source priority, do not promote categorical Light from lower-priority SEO alone; leave selected Light qualification open for independent direct spec or roaster support."
     },
     {
       "number": 590,
@@ -32,7 +33,30 @@
   "actual_current_parser": "PENDING_EXACT_RUN",
   "workflow_marker": "[dic-issue33-twentieth2]",
   "synthetic_tests": "tests/coffee-issue33-qualified-roast-554-590.test.mjs",
-  "CI": "PENDING",
+  "CI": {
+    "pr_head": {
+      "node_run": 41818631834,
+      "pass": 2377,
+      "fail": 0,
+      "skipped": 6,
+      "approval_run": 41818631901,
+      "cloud_run": 41818631834,
+      "sql_run": 41818631910,
+      "private_archive_run": 41818631839,
+      "original_frozen603": "SKIPPED_NOT_PASS"
+    },
+    "merged": {
+      "node_run": 41819092819,
+      "pass": 2377,
+      "fail": 0,
+      "skipped": 6,
+      "approval_run": 41819092874,
+      "queue_run": 41819092789,
+      "cloud_mobile_run": 41819092958,
+      "official_source_run": 41819092961
+    },
+    "exact_pr_and_merge_tree_same": true
+  },
   "manual_full_coffees_certified": 0,
   "queue_unchanged": {
     "READY": 12,
@@ -42,5 +66,52 @@
   "issue33_open": true,
   "no_deployment": true,
   "no_production_or_member_writes": true,
-  "next": "Exact PR-head CI, safely merge, current selected public HTTPS H1/raw SHA256/parser/Add Coffee for both; if real defect then generic fix and adversarial verification; preserve original frozen corpus."
+  "next": "Continue independently testing nonoverlapping unresolved original603 current selected official products; only source-confirmed parser defects merit generic code changes and narrow READY. Source #554 SEO metadata Light remains a lower-priority qualification; full original603 certification unverified.",
+  "verified_development_source_sha": "f2d1fd25fdc9e27d30c2986c34362da1cc6cd127",
+  "test_pr": 550,
+  "test_pr_head": "599dde4dd22fd0751d88b0756644ca7e190b5a10",
+  "exact_merged_tested_tree": "d9bba4072e14e40a799ceec7f6586cc54f80eca9",
+  "current_merged_source_run": 41819092961,
+  "current_merged_source_job": 126537393651,
+  "current_raw_artifact_id": 13314869719,
+  "live_source": {
+    "observed_public_web_date": "2026-11-04",
+    "raw_html_sha256_by_number": {
+      "554": "fc7be71c4c8aca33224819db3289b9898dd1aeb60c3e53baa645f3a3f36e12f9",
+      "590": "c7e8a709cf40570d640163d2dca6dce826cef8efff6d68cb52ede9840ecd7185"
+    },
+    "parser_current_554": {
+      "name": "Organic Mexican",
+      "roaster": "ROC²",
+      "origin": "Mexico",
+      "tasting_notes": "molasses, caramel, and lemongrass",
+      "roast_level": null,
+      "conflicts": []
+    },
+    "parser_current_590": {
+      "name": "Honduras Finca Quebrada Onda - HONEY",
+      "roaster": "Vail Mountain Coffee & Tea",
+      "tasting_notes": "Coca , praline, mellow fresh citrus acidity",
+      "producer": "Isaac Mejia",
+      "origin": "Montecillos, La Paz, Honduras",
+      "elevation_m": "1776 masl",
+      "variety": "Bourbon, Catuai, Caturra, and Lempira",
+      "process": "Honey",
+      "roast_level": null,
+      "conflicts": []
+    },
+    "attempted": 2,
+    "fetched": 2,
+    "parsed": 2,
+    "add_coffee_preview_rendered": 2,
+    "manual_certified_full_coffees": 0,
+    "source_job": "SUCCESS"
+  },
+  "synthetic_test_cases": {
+    "count": 4,
+    "pass": 4,
+    "fail": 0,
+    "negative": 3,
+    "positive": 1
+  }
 }
