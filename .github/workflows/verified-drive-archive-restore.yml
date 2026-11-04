@@ -77,7 +77,10 @@ jobs:
               run.get('head_branch')!='main' or run.get('conclusion')!='success' or
               run.get('path')!='.github/workflows/nightly-backup.yml'):
               raise SystemExit('Not a completed scheduled main-branch encrypted backup')
-          if listing.get('total_count',101)>100: raise SystemExit('Incomplete artifact inventory')
+          count=listing.get('total_count'); artifacts=listing.get('artifacts')
+          if (type(count) is not int or count<0 or count>100 or
+              not isinstance(artifacts,list) or count!=len(artifacts)):
+              raise SystemExit('Incomplete artifact inventory')
           files=[x for x in listing.get('artifacts',[]) if x.get('name')=='dic-encrypted-nightly-'+requested]
           if len(files)!=1 or files[0].get('expired') or files[0].get('size_in_bytes',0)<128:
               raise SystemExit('Unique live ciphertext artifact unavailable')

@@ -16,7 +16,9 @@ export async function chooseScheduledArchive(runs,getArtifacts,now=Date.now()){
   ).sort((a,b)=>Date.parse(b.created_at)-Date.parse(a.created_at));
   for(const run of eligible.slice(0,20)){
     const listing=await getArtifacts(run.id);
-    if(!listing || !Array.isArray(listing.artifacts) || listing.total_count>100)continue;
+    if(!listing || !Array.isArray(listing.artifacts) ||
+      !Number.isSafeInteger(listing.total_count) || listing.total_count<0 ||
+      listing.total_count>100 || listing.total_count!==listing.artifacts.length)continue;
     const matches=listing.artifacts.filter(a=>
       a.name==='dic-encrypted-nightly-'+run.id && !a.expired &&
       Number.isSafeInteger(a.id) && a.size_in_bytes>128 &&
