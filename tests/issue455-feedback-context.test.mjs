@@ -55,3 +55,46 @@ test('#455 no assumed comparable shot when context or history is absent, and rea
  assert.match(cloud,/U\.lastRecipeContextShot\(shots,c\.id,rec,v\)/);
  assert.doesNotMatch(cloud,/const local=shots\.filter\(sh=>sh\.setupVersionId===v\.id&&sh\.style===p\.style\),last=local\[0\]/);
 });
+
+// A restored legacy shot may preserve its original rating and private notes
+// without a trustworthy timestamp. It must not become the current recipe's
+// latest feedback just because it is the only otherwise matching record.
+test('#455 legacy blank timestamps never supply current recipe feedback',()=>{
+ const missing=[
+  shot('empty',''),
+  shot('whitespace','   '),
+  shot('null-time',null)
+ ];
+ const before=structuredClone(missing);
+ assert.equal(lastRecipeContextShot(missing,'coffee-a',context,version),null);
+ const dated=shot('dated','2026-11-04T10:00:00Z');
+ assert.equal(lastRecipeContextShot([...missing,dated],'coffee-a',context,version)?.id,'dated');
+ assert.deepEqual(missing,before,'keep original ratings, measurements and private notes intact');
+});
+
+test('#455 recipe engine abstains from advice on an undated legacy shot but uses dated feedback',async()=>{
+ const [{hydrate},{rawFixture},{recommendation},{activeVersion}]=await Promise.all([
+  import('../site/cloud/mapping.js'),
+  import('./cloud-fixtures/raw.js'),
+  import('../site/lib/engine.js'),
+  import('../site/lib/model.js')
+ ]);
+ const s=hydrate(rawFixture()),v=activeVersion(s);
+ const sh={id:'legacy-blank',coffeeId:'coffee',setupVersionId:v.id,
+  calibrationId:v.calibrationId,basketId:'basketv',style:'Turbo',feedMode:'standard',
+  doseG:18,yieldG:36,timeS:10,grindSetting:1.2,tempC:93,
+  timestamp:'',hidden:false,dialedIn:false,
+  tasteScales:{extraction:2,body:3,clarity:4,sweetness:4,astringency:1},
+  notes:'Keep private original legacy note'};
+ s.shots.push(sh);
+ const before=structuredClone(s.shots);
+ const baseline=recommendation(s,'coffee',{style:'Turbo',basketId:'basketv',feedMode:'standard'});
+ assert.ok(baseline);
+ assert.notEqual(baseline.source,'Adjustment from your latest taste rating');
+ assert.deepEqual(s.shots,before,'no rewrite or deletion of legacy shots');
+ sh.timestamp='2026-11-04T10:00:00Z';
+ const rated=recommendation(s,'coffee',{style:'Turbo',basketId:'basketv',feedMode:'standard'});
+ assert.equal(rated.source,'Adjustment from your latest taste rating');
+ assert.equal(sh.notes,'Keep private original legacy note');
+ assert.equal(sh.tasteScales.sweetness,4);
+});
