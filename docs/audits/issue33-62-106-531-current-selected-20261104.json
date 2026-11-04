@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "issue": 33,
-  "status": "ACTUAL_3_CURRENT_SELECTED_SOURCES_VERIFIED_PENDING_62_CORRECTION_106_ADJUDICATION",
+  "status": "NARROW_62_SOURCE_VERIFIED_READY_PARENT_ISSUE_OPEN",
   "base_sha": "571325a20fc253cd5274545c91c62e7e356030fc",
   "base_tree_sha": "91aee23926e85910c40e4e5cd27256ac6bdb031b",
   "selected_numbers": [
@@ -45,10 +45,10 @@
     "independent raw HTML & JSON artifact audit"
   ],
   "manual_certified": 0,
-  "release_status": "IN_PROGRESS",
+  "release_status": "READY_NOT_DEPLOYED",
   "deployment_authorized": false,
   "production_operations": 0,
-  "next": "Run #62 generic national education guard PR exact CI, nonforce merge; real postmerge #62/#106/#531 source comparison; then separately adjudicate #106 without title-only guess.",
+  "next": "Continue current exact selected-source independent adjudication, including #106; original603 universal acceptance incomplete, #33 OPEN, no deploy.",
   "merged_probe_sha": "701ee3c486fc9cb108d852b8bef6e077468a3722",
   "official_probe_run": 41933987366,
   "official_artifact_id": 13373740081,
@@ -97,5 +97,52 @@
       "decision": "EA sugarcane decaffeination is correctly independent of green Natural processing; in-Colombia decaffeination prose is not a selected-growing-origin assertion.",
       "conflicts": []
     }
-  ]
+  ],
+  "review_status": "SOURCE_VERIFIED_READY_NOT_DEPLOYED",
+  "after": {
+    "source_sha": "f103312caab3e6e74cef0415edb536ad1e1cd5b7",
+    "run_id": 41934658056,
+    "artifact_id": 13372998291,
+    "artifact_zip_sha256": "6a60b64faf248b69f242ed18fb20e30c12cbb334542db0927928fa7fadc1c8ec",
+    "fetched": 3,
+    "parsed": 3,
+    "add_coffee_previews": 3,
+    "source_review_rendered": 3,
+    "manual_certified": 0,
+    "real_auth": false,
+    "production_operations": 0
+  },
+  "comparison": {
+    "case62_changed_canonical_fields": [
+      "origin"
+    ],
+    "case62_before": "Andes, Peru",
+    "case62_after": "Peru",
+    "case62_other_fields_unchanged": true,
+    "case62_conflicts_unchanged": true,
+    "case106_fields_and_conflicts_unchanged": true,
+    "case531_fields_and_conflicts_unchanged": true,
+    "raw_html_digests_before_after_differ": true
+  },
+  "after_raw_html_sha256": {
+    "case62": "7c0a2b7b7e2c7ab9c28cd2aa274c8fd1932f0440e07f503c68655d1486a4795d",
+    "case106": "ca613d837b4ba2a6db89d15f78d4cff5a65a3dcc21326d25d91faf755f86220a",
+    "case531": "27456f6f7e33a3f83dac346a0ef6eb34614d5bf6295718c5ff7fee3fcd27dd03"
+  },
+  "tests": {
+    "exact_head_node": 41934406277,
+    "exact_head_approval": 41934406180,
+    "exact_head_cloud_ux": 41934406203,
+    "exact_head_sql": 41934406234,
+    "exact_head_security": 41934406202,
+    "exact_head_private_bundle": 41934406142,
+    "exact_merged_node": 41934658098,
+    "pass": 2443,
+    "fail": 0,
+    "skip": 6,
+    "merged_approval": 41934658114,
+    "merged_cloud_ux": 41934658143,
+    "official_source": 41934658056,
+    "frozen603": "SKIPPED_NOT_PASS"
+  }
 }
