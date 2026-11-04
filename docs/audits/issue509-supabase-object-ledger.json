@@ -1153,9 +1153,9 @@
     "source_whitespace_tokens_semantically_read": 16880,
     "total_source_characters": 207402,
     "next_function_ordinal": null,
-    "next_object": "Platform schema first direct table #1 auth.audit_log_entries (then auth #2 custom_oauth_providers), no private rows; migrations require content/historical mapping, not mere names",
-    "other_objects": "99/99 application SQL function definitions, 46/46 application table catalog definitions, 9/9 accessible deployed Edge file variants complete; platform/vendor SQL, Auth/Storage/cron/Realtime, migration drift, external dependency calls, performance and limits still incomplete",
-    "platform_objects": "COUNTS_INVENTORIED_ONLY; VENDOR SQL DEFINITIONS NOT REVIEWED",
+    "next_object": "supabase_migrations.schema_migrations platform table #39; then vault.secrets and vault.decrypted_secrets view; platform SQL function/type/role/grant review, 53 migration SQL body drift, logs and performance",
+    "other_objects": "99/99 application SQL function definitions, 46/46 application table catalog definitions, 9/9 accessible deployed Edge file variants complete; platform/vendor SQL, Auth/Storage/cron/Realtime, migration drift, external dependency calls, performance and limits still incomplete; platform table definitions auth27/storage8/realtime3 direct review complete; platform functions, other tables, database migration SQL bodies still unverified",
+    "platform_objects": "DIRECT_PLATFORM_TABLE_DEFINITION_COMPONENTS_AUTH_27_OF_27_STORAGE_8_OF_8_REALTIME_3_OF_3; other platform source review incomplete",
     "edge_function_sources_reviewed": 9,
     "table_definition_components_reviewed": 46,
     "total_application_tables": 46
@@ -2677,9 +2677,25 @@
       "provider_writes": 0,
       "findings": "No confirmed vulnerability or performance fix from metadata; 10 SECURITY DEFINER warnings, 6 private no-policy INFO, 12 FK missing-index INFO, 9 unused-index INFO, retained for evidence/ownership",
       "next": "auth.audit_log_entries full catalog definition #1; other provider surfaces incomplete"
+    },
+    {
+      "run": "2026-11-04 UTC #509 platform Auth/Storage/Realtime full table catalog component semantic increment",
+      "source_sha_at_start": "13c7a7b535628c2033e655906618964d9cfd07bb",
+      "main_sha": "d17e900fa78e2f89931480d4f85c217c2d31724c",
+      "production_sha": "31c66832a28247e657a2bf89592ebc1e2f48dfc5",
+      "provider_ref": "azviqqejypsefzilgonr",
+      "reviewed": "auth27/27 + storage8/8 + realtime3/3; 38 table catalog definitions",
+      "confirmed_vendor_check_invariant_gaps": 2,
+      "potential_realtime_access_surface": 1,
+      "proven_application_vulnerabilities": 0,
+      "code_fixes": 0,
+      "new_ci_runs": 0,
+      "provider_writes": 0,
+      "private_user_rows_read": 0,
+      "next": "supabase_migrations.schema_migrations; verify platform vendor other catalog definitions and vendor checks, actual API schema exposure via #96; then migration SQL body/release drift"
     }
   ],
-  "state": "APP_SQL_FUNCTIONS_99_OF_99; APP_TABLES_46_OF_46_COMPONENTS_DIRECTLY_READ; EDGE_DEPLOYED_SOURCE_9_OF_9_VARIANTS; FULL_PROVIDER_AUDIT_IN_PROGRESS; #527_READY_NOT_DEPLOYED",
+  "state": "APP_SQL_FUNCTIONS_99_OF_99; APP_TABLES_46_OF_46_COMPONENTS_DIRECTLY_READ; EDGE_DEPLOYED_SOURCE_9_OF_9_VARIANTS; FULL_PROVIDER_AUDIT_IN_PROGRESS; #527_READY_NOT_DEPLOYED; PLATFORM_AUTH_27_STORAGE_8_REALTIME_3_TABLE_DEFINITIONS_DIRECT_REVIEWED; FULL_PROVIDER_AUDIT_IN_PROGRESS",
   "application_table_review": {
     "total": 46,
     "current_index": 46,
@@ -3657,5 +3673,828 @@
     },
     "privacy": "NO auth/member/shot/notes row values, storage objects, secrets or raw SQL query text fetched",
     "next": "Platform lexical definition review auth.audit_log_entries table #1; then remaining 26 Auth, eight Storage and three Realtime tables, provider platform functions, grants and external source/CI migration diff; no privileged schema changes"
-  }
+  },
+  "platform_table_review": {
+    "status": "DIRECT_COMPONENT_SEMANTIC_REVIEW_BASELINE_COMPLETE_FOR_AUTH_STORAGE_REALTIME_TABLES_NOT_ALL_PROVIDER_OBJECTS",
+    "provider_ref": "azviqqejypsefzilgonr",
+    "ordered_names": "auth.* alphabetic #1-27, storage.* alphabetic #28-35, realtime.* alphabetic #36-38",
+    "total_in_scope": 38,
+    "reviewed": 38,
+    "per_schema": {
+      "auth": {
+        "reviewed": 27,
+        "total": 27,
+        "rls_disabled": 11,
+        "unprotected_client_select": 0
+      },
+      "storage": {
+        "reviewed": 8,
+        "total": 8,
+        "rls_disabled": 0,
+        "policies": 0,
+        "buckets_existing": 0
+      },
+      "realtime": {
+        "reviewed": 3,
+        "total": 3,
+        "rls_disabled": 2,
+        "client_select_on_non_rls_subscription": true
+      }
+    },
+    "objects": [
+      {
+        "ordinal": 1,
+        "qualified_name": "auth.audit_log_entries",
+        "schema_ordinal": 1,
+        "definition_fingerprint": "7dbf0cc3b13fd11f212c16877cc35892",
+        "fingerprint_coverage": "PARTIAL_MD5_ACL_RLS_AND_INDEX_SQL_ONLY",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS ON, no policy; restricted ACL; payload/IP columns; instance_id index",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 2,
+        "qualified_name": "auth.custom_oauth_providers",
+        "schema_ordinal": 2,
+        "definition_fingerprint": "55cf64d5ea870b0e2571b40620fe1340",
+        "fingerprint_coverage": "PARTIAL_MD5_ACL_RLS_AND_INDEX_SQL_ONLY",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS OFF; no client SELECT; server-managed OAuth secret/PKCE settings; identifier has UNIQUE and separate plain index, no safe removal demonstrated",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 3,
+        "qualified_name": "auth.flow_state",
+        "schema_ordinal": 3,
+        "definition_fingerprint": "00c7385cb4844d3885ff91fff6bc4663",
+        "fingerprint_coverage": "PARTIAL_MD5_ACL_RLS_AND_INDEX_SQL_ONLY",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS ON, no policy; auth codes and provider tokens retained; dependent SAML relay state FK",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 4,
+        "qualified_name": "auth.identities",
+        "schema_ordinal": 4,
+        "definition_fingerprint": "34ef62a09a85b34e1b6bafa87a7bcf07",
+        "fingerprint_coverage": "PARTIAL_MD5_ACL_RLS_AND_INDEX_SQL_ONLY",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS ON; identity provider uniqueness and auth.users cascade FK; no client table read",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 5,
+        "qualified_name": "auth.instances",
+        "schema_ordinal": 5,
+        "definition_fingerprint": "f0e9dc16648cf137a668f7894f2d8586",
+        "fingerprint_coverage": "PARTIAL_MD5_ACL_RLS_AND_INDEX_SQL_ONLY",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS ON; auth configuration raw_base_config sensitive; no client table read",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 6,
+        "qualified_name": "auth.mfa_amr_claims",
+        "schema_ordinal": 6,
+        "definition_fingerprint": "ec40d45eaeca8fe61fc7712519955aa1",
+        "fingerprint_coverage": "PARTIAL_MD5_ACL_RLS_AND_INDEX_SQL_ONLY",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS ON; session+authentication_method uniqueness, cascade FK",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 7,
+        "qualified_name": "auth.mfa_challenges",
+        "schema_ordinal": 7,
+        "definition_fingerprint": "3463c9761a9c34872c138bd102ec42ff",
+        "fingerprint_coverage": "PARTIAL_MD5_ACL_RLS_AND_INDEX_SQL_ONLY",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS ON; challenge factor FK, expiry-timestamp-based index; OTP fields never queried",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 8,
+        "qualified_name": "auth.mfa_factors",
+        "schema_ordinal": 8,
+        "definition_fingerprint": "4c0e41e1470220d0929c2e67694c7072",
+        "fingerprint_coverage": "PARTIAL_MD5_ACL_RLS_AND_INDEX_SQL_ONLY",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS ON; factor state and secret columns restricted; multi-factor uniqueness/FKs preserved",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 9,
+        "qualified_name": "auth.mfa_recovery_code_sets",
+        "schema_ordinal": 9,
+        "definition_fingerprint": "4c6c84f0b3d1318e8b9f1bba49d86d85",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS OFF with no anon/authenticated SELECT; unique user/factor, count >=0; vendor owned",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 10,
+        "qualified_name": "auth.mfa_recovery_codes",
+        "schema_ordinal": 10,
+        "definition_fingerprint": "9bd398389a011350674784b4172ade19",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS OFF with no direct client SELECT; hashed code + set cascade FK",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 11,
+        "qualified_name": "auth.oauth_authorizations",
+        "schema_ordinal": 11,
+        "definition_fingerprint": "d21dc7989fc6b37bcaf806da89161ce4",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS OFF no client SELECT; unique auth code, 3-minute default expiry, bounded token fields",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 12,
+        "qualified_name": "auth.oauth_client_states",
+        "schema_ordinal": 12,
+        "definition_fingerprint": "dc3a69ce63349ec3ad8b054a0d37941b",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS OFF no client SELECT; PKCE verifier and creation index",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 13,
+        "qualified_name": "auth.oauth_clients",
+        "schema_ordinal": 13,
+        "definition_fingerprint": "99ebedfd8f7d25352235ddc87773216d",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS OFF no client SELECT; client secret hash, valid auth methods, FK consumers",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 14,
+        "qualified_name": "auth.oauth_consents",
+        "schema_ordinal": 14,
+        "definition_fingerprint": "48815c579329aa40edcf1f1028d77c2c",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS OFF no client SELECT; one user/client consent, temporal constraints, revoked filters",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 15,
+        "qualified_name": "auth.one_time_tokens",
+        "schema_ordinal": 15,
+        "definition_fingerprint": "9b0f61513caf08275cc14e0250f15c20",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS ON, token-hash nonempty guard, user/type uniqueness",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 16,
+        "qualified_name": "auth.refresh_tokens",
+        "schema_ordinal": 16,
+        "definition_fingerprint": "5696c9a610c21ec06c7878a514150696",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS ON; token uniqueness, session cascade and revocation index",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 17,
+        "qualified_name": "auth.saml_providers",
+        "schema_ordinal": 17,
+        "definition_fingerprint": "20e3a05f9fb820db8d4273beb27c1377",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "CONFIRMED_INEFFECTIVE_VENDOR_CHECK_NOT_EXPLOIT",
+        "notes": "RLS ON; metadata_url not-empty CHECK uses =NULL and accepts empty string; platform-owned definition, no exploit proven",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 18,
+        "qualified_name": "auth.saml_relay_states",
+        "schema_ordinal": 18,
+        "definition_fingerprint": "5c0528dfae90f1532fe04ece120b6408",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS ON; state to flow_state and SSO provider cascade; nonempty request_id check",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 19,
+        "qualified_name": "auth.schema_migrations",
+        "schema_ordinal": 19,
+        "definition_fingerprint": "6e5b5c8a4fc18e71e4d20fe7967ac1fe",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS ON; immutable GoTrue schema migration version PK",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 20,
+        "qualified_name": "auth.scim_tokens",
+        "schema_ordinal": 20,
+        "definition_fingerprint": "59e9913871bdda15c83cf8392eb689e4",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS OFF no client SELECT; SHA256 hex format guard, revoked/expiry; protected",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 21,
+        "qualified_name": "auth.scim_users",
+        "schema_ordinal": 21,
+        "definition_fingerprint": "7609bf58b5c2b0c5a4273e67716e14a8",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS OFF no client SELECT; provider-scoped conditional unique usernames/external IDs",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 22,
+        "qualified_name": "auth.sessions",
+        "schema_ordinal": 22,
+        "definition_fingerprint": "8c5a8e2098e69f1e0f6fe6daf1d1fd43",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS ON; session revocation not_after and OAuth client FK, no client SELECT; runtime auth acceptance #96 separate",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 23,
+        "qualified_name": "auth.sso_domains",
+        "schema_ordinal": 23,
+        "definition_fingerprint": "01c39ebc7dc5ea2d1d8727adf50c35e5",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS ON; casefolded domain uniqueness, SSO provider cascade",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 24,
+        "qualified_name": "auth.sso_providers",
+        "schema_ordinal": 24,
+        "definition_fingerprint": "f9c6cceb2fc1830f5cdf614d238d6b0a",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "CONFIRMED_INEFFECTIVE_VENDOR_CHECK_NOT_EXPLOIT",
+        "notes": "RLS ON; resource_id not-empty CHECK uses =NULL and accepts empty string; provider-owned, runtime issue unproved",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 25,
+        "qualified_name": "auth.users",
+        "schema_ordinal": 25,
+        "definition_fingerprint": "85f3f89708bf7dc74fd60dd53f4248fe",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS ON; auth credentials/metadata only column definitions reviewed; private.handle_new_auth_user() app trigger and inbound 42 FKs preserved",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 26,
+        "qualified_name": "auth.webauthn_challenges",
+        "schema_ordinal": 26,
+        "definition_fingerprint": "405f2468a2d127fc8fb37f9cd78e0465",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS OFF no client SELECT; challenge purpose constrained, expiry index",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 27,
+        "qualified_name": "auth.webauthn_credentials",
+        "schema_ordinal": 27,
+        "definition_fingerprint": "056799ea7509f241d04dc3836fe20a78",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS OFF no client SELECT; credential_id unique, sign count, FK to users",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 28,
+        "qualified_name": "storage.buckets",
+        "schema_ordinal": 1,
+        "definition_fingerprint": "f499bd4f07c62cf9e4f187840a4a735a",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS ON with no policy; client ACL grants but zero buckets; lifecycle constraints and 5 protective triggers",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 29,
+        "qualified_name": "storage.buckets_analytics",
+        "schema_ordinal": 2,
+        "definition_fingerprint": "a1af1db34193a59b28638fca1bd15b8d",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS ON no policy; deleted_at partial name uniqueness",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 30,
+        "qualified_name": "storage.buckets_vectors",
+        "schema_ordinal": 3,
+        "definition_fingerprint": "3befd04525c0310f99f11d9c98a24a61",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS ON no policy; vector index parent FK",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 31,
+        "qualified_name": "storage.migrations",
+        "schema_ordinal": 4,
+        "definition_fingerprint": "3cea375cf7b3fe926c2b14a371c19685",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS ON no policy; storage-owned migration PK/hash",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 32,
+        "qualified_name": "storage.objects",
+        "schema_ordinal": 5,
+        "definition_fingerprint": "739ebacf65e406c808878c80417600ee",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS ON no policy; bucket FK, version/current partial indexes, protected delete and timestamp triggers; no object rows read",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 33,
+        "qualified_name": "storage.s3_multipart_uploads",
+        "schema_ordinal": 6,
+        "definition_fingerprint": "3366e71ef99c6802aa07bcf8ef85442e",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS ON no policy; upload signature, bucket FK, multipart relationship",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 34,
+        "qualified_name": "storage.s3_multipart_uploads_parts",
+        "schema_ordinal": 7,
+        "definition_fingerprint": "839f8c9af72cce8943b6d90f8385f778",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS ON no policy; cascade parent FK and bucket FK",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 35,
+        "qualified_name": "storage.vector_indexes",
+        "schema_ordinal": 8,
+        "definition_fingerprint": "44b9e2f61699dede2c9c7ba0aa97899d",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS ON no policy; bucket FK and unique bucket+name",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 36,
+        "qualified_name": "realtime.messages",
+        "schema_ordinal": 1,
+        "definition_fingerprint": "3c995fcab3764b9532517573783eaba0",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS ON with no policy; range partition by inserted_at, payload exclusivity check NOT VALID, broadcast index",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 37,
+        "qualified_name": "realtime.schema_migrations",
+        "schema_ordinal": 2,
+        "definition_fingerprint": "f921c40d8e67ba8281958fcc60960deb",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "NO_CONFIRMED_REMOVABLE_APP_DEFECT",
+        "notes": "RLS OFF but no client SELECT; version PK",
+        "production_writes": 0
+      },
+      {
+        "ordinal": 38,
+        "qualified_name": "realtime.subscription",
+        "schema_ordinal": 3,
+        "definition_fingerprint": "cb0c7497c9b28d515d4686cf4cc3cb3f",
+        "fingerprint_coverage": "FULL_PROVIDER_TABLE_COMPONENT_JSON_MD5",
+        "direct_components_read": [
+          "column_names_types_nullability_defaults",
+          "constraint_sql",
+          "index_sql",
+          "owner_table_acl",
+          "row_level_security_policy_sql",
+          "noninternal_trigger_definitions",
+          "incoming_foreign_key_dependencies"
+        ],
+        "review_method": "DIRECT_LIVE_CATALOG_SOURCE_AI_SEMANTIC_READ_ONLY",
+        "verdict": "PLATFORM_ACCESS_OBSERVATION_NO_PROVEN_EXPOSURE",
+        "notes": "RLS OFF; anon/authenticated SELECT grants on table containing claims jsonb, schema USAGE true; actual Data API exposure NOT VERIFIED; investigate #96 before labeling vulnerability",
+        "production_writes": 0
+      }
+    ],
+    "query_readback": "SELECT-only pg_catalog.pg_class,pg_attribute,pg_attrdef,pg_constraint,pg_index,pg_policy,pg_trigger,pg_namespace, role privileges, pg_get_constraintdef/pg_get_indexdef/pg_get_triggerdef; no table contents",
+    "limitations": [
+      "Auth first eight per-object fingerprints cover ACL/RLS/index SQL only; full column/constraints/trigger catalog text nevertheless directly read, must compute complete-source fingerprint before claiming hash-equivalent coverage for those eight.",
+      "Platform-managed Auth CHECK expressions are not editable under this development-only authority.",
+      "Realtime subscription direct role grant does not prove access through published PostgREST API; actual exposed-schema config not verified.",
+      "Vendor SQL function bodies, types, sequences, platform views, extension objects, publication/Realtime runtime, grants and database-to-source migration bodies still unreviewed."
+    ]
+  },
+  "provider_findings_20261104": [
+    {
+      "object": "auth.saml_providers",
+      "constraint": "metadata_url not empty",
+      "definition": "metadata_url = NULL::text OR char_length(metadata_url) > 0",
+      "observed": "Pure SELECT constant evaluation: empty string => NULL, PostgreSQL CHECK accepts NULL",
+      "classification": "CONFIRMED_CHECK_INVARIANT_GAP_VENDOR_OWNED",
+      "impact": "No observed empty values or reachable app vulnerability; app does not own Supabase GoTrue schema",
+      "action": "Refer to #96 for provider/vendor followup. Do not patch production vendor-managed table."
+    },
+    {
+      "object": "auth.sso_providers",
+      "constraint": "resource_id not empty",
+      "definition": "resource_id = NULL::text OR char_length(resource_id) > 0",
+      "observed": "Same SQL NULL semantics as above",
+      "classification": "CONFIRMED_CHECK_INVARIANT_GAP_VENDOR_OWNED",
+      "impact": "Actual SSO usage and runtime validation unverified",
+      "action": "No destructive schema change; coordinate #96."
+    },
+    {
+      "object": "realtime.subscription",
+      "observed": "No table RLS; anon/authenticated have table-level SELECT and schema USAGE; claims JSONB column",
+      "classification": "ACCESS_SURFACE_NEEDS_EXPOSURE_VALIDATION_NOT_CONFIRMED_VULNERABILITY",
+      "action": "Verify PostgREST exposed schemas, Realtime engine intentional privileges and #96 genuine access boundaries; no private rows accessed or role changes."
+    }
+  ]
 }
