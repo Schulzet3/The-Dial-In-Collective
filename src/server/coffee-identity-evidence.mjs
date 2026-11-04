@@ -271,8 +271,10 @@ function narrativeGeography(blocks,{currentLocalityOnly=false,name=''}={}){
        !/\b(?:related|recommended|you may also like|other coffees?|other roasts?|catalog)\b/iu.test(block.section||'')){
      const villages=sentence.match(new RegExp(
       '\\bmajority\\s+of\\s+(?:the|this)\\s+coffee\\s+(?:arrives|comes|is\\s+delivered)\\s+(?:[\\p{L}-]+\\s+){0,4}from\\s+(?:the\\s+)?nearby\\s+villages?\\s+of\\s+('+PLACE_WORD+')\\s+and\\s+('+PLACE_WORD+')(?=\\s*[,.;!?]|$)','iu'));
-     const station=block.text.match(new RegExp(
-      '\\b(?:The|Our)\\s+('+PLACE+')\\s+(?:washing\\s+station|wet\\s+mill)\\s+is\\s+(?:committed|dedicated|responsible)\\b','iu'));
+     // Scan complete sentences, not the whole p: preceding geography must
+     // not be swallowed into a multiword station name across punctuation.
+     const station=sentences(block.text).map(part=>part.match(new RegExp(
+      '^(?:The|Our)\\s+('+PLACE+')\\s+(?:washing\\s+station|wet\\s+mill)\\s+is\\s+(?:committed|dedicated|responsible)\\b','iu'))).find(Boolean);
      const selected=currentLotStations[0];
      if(villages&&station&&current(sentence)&&key(station[1])===key(selected.station)&&
         countryNames(sentence).every(country=>key(country)===key(selected.country))&&
