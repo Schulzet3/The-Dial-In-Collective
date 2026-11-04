@@ -1,3 +1,13 @@
+## November 4 UTC — Issue #267 S2-043 historical backend and pinned corpus retention 162 lines [skip netlify]
+
+**Fresh source at resume:** dev `f3671d519eb72a64c14f870db6e64cad6bade375`, frozen `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9`, pinned `9707553a64f88127826e8f5b2b36cd0651296e83`. Frozen file #37 `docs/BACKEND_CHECKPOINT.md` **1–62/62** source blob `e24eb718097ced4bf6d30d6006dac3b074ce43b8`; pinned file #44 `scripts/audit/coffee-corpus-retention.py` **1–100/427** blob `9b5250457e1e5b6d91e738b54bafcba78df10043`, both identical to live development at pre-work head. All 162 literal numbered lines have direct AI semantic/quality/risk/obsolescence/duplication/live-counterpart/testability/improvement/Locked annotations in [S2-043](../audits/issue267-v2-strict-batches/S2-043.json). No V1/old-V2 credit.
+
+**Findings:** early 5-migration/31-table, empty-data and incomplete browser/backup assertions are dated 2026-10 foundations, not current production state. Pinned source retention normalizes punctuation/whitespace but keeps numbers/accents, rejects invalid pointers, and prevents boolean vs numeric conflation. No reproduced defect or safe removal; later structured chunk reconstruction pending. No hosted/Auth/SQL provider writes or synthetic signups, no code change, no new Node/Python/browser suites, no publication/READY queue mutation.
+
+**Ledger totals:** **3,279 / 579,961 frozen**, **3,879 / 57,913 pinned current**, old provisional **5,451 / 6,462** separate. Post-pin live drift and wider code review incomplete. NEXT frozen #38 `docs/BADGE_PALETTE_SOURCE.json` line1; current pinned #44 `scripts/audit/coffee-corpus-retention.py` line101. #267 OPEN.
+
+---
+
 ## November 4 UTC — #267 S2-042 frozen backup audit and complete original603 reporter (211 lines) [skip netlify]
 
 **Source:** development `37e00e03af7f165dcccd8a8323cb9d18d480ebb8`; frozen manifest #36 `docs/AUTOMATED_BACKUP_DELIVERY_ALERT_AUDIT_2026-10-16.md` blob `3c3d348270a470638cf33288ac8083094ff6290f` 61/61 lines; pinned current #43 `scripts/audit/coffee-corpus-report.py` blob `a7ef960de4f8abdcd673a0d2439ef6d12ef06c67` lines **221–370/370**. Together S2-040/041/042 complete strict **370/370** individual Python reporter lines. [S2-042](../audits/issue267-v2-strict-batches/S2-042.json) records literal source per line, unique logic, nine dimensions, exact SHA and source mapping. Frozen file has six later live prefix lines (Oct29 corrected no-repeat backup verification); original 61 map to current 7–67, all six live prefix lines separately inspected with zero original/pinned credit. Latest backup owner folder supersession and no-repeat historical alert acceptance respected.
