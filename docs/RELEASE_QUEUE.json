@@ -8,6 +8,34 @@
   },
   "items": [
     {
+      "id": "DIC-Q-509-invite-expiration-search",
+      "issue": 509,
+      "pr": 527,
+      "title": "Align historical expired invitation search to displayed expiration status",
+      "state": "IN_PROGRESS",
+      "scope_paths": [
+        "supabase/migrations/20261104075400_dic_admin_invite_expiry_search.sql"
+      ],
+      "tests": [
+        "2026-11-04 07:50 UTC production read-only pure-expression reproduction confirmed expired invitation was labeled active by search filter while listing status displayed expired; no member data read.",
+        "PR527 exact head cdc37e34cd84dac023eac4fb1e2a669b847dadf8 cloud-tests PASS; approval job 126458183180 FAILED intake solely due missing queue entry; queue fixed in this follow-up docs commit. Other jobs were in progress at initial snapshot; do not mark PASS without results.",
+        "Disconnected SQL regression in supabase/tests/admin_server_search.sql now seeds synthetic historical expired token and verifies expired search match and active search exclusion. Actual isolated SQL result not yet verified.",
+        "PR527 second approval check run41795600475 job126458836818 FAILED invalid merged source SHA: missing required nullable field on IN_PROGRESS item. Repaired by explicit merged_source_sha=null; previous failure remains documented."
+      ],
+      "ci_runs": [
+        41795397138,
+        41795397135,
+        41795397167,
+        41795397175
+      ],
+      "blockers": [
+        "Applicable exact-source CI must pass, nonforce merge and readback not yet performed. No production SQL, provider writes or publication authorized."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
+      "notes": "Source-only candidate. Existing immutable migrations, public RPC/grants and single-use never-expiring issued tokens preserved. IN_PROGRESS, not READY/DEPLOYED.",
+      "merged_source_sha": null
+    },
+    {
       "id": "DIC-Q-33-selected-angel-albino-corzo-region",
       "issue": 33,
       "pr": 519,
