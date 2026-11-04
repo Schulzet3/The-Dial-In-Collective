@@ -30,6 +30,63 @@ function currentNamedDecafMethod(name,line){
   return Boolean(claim&&fold(claim[1])===fold(subject));
  });
 }
+// Some Shopify product-only accordions put their current treatment title
+// inside <summary><span class="accordion__title"> rather than a <p>.
+// Require the SAME selected product info container to hold an exact current
+// H1, a self-described decaf paragraph and the method title. No catalog,
+// sidebar, unrelated product, educational or historical inheritance.
+function selectedProductAccordionDecafMethods(html,name,clean){
+ const tree=coffeeHtmlElements(html);
+ if(tree.truncated)return [];
+ const nodes=tree.nodes,selected=fold(name),containers=new Set(),methods=[];
+ const attrs=i=>coffeeHtmlAttributes(nodes[i].attributes);
+ const ancestorWalk=(i,fn)=>{
+  let at=nodes[i].parent;
+  for(let depth=0;at!==null&&depth<128;depth++){
+   if(fn(at,nodes[at],attrs(at))===false)break;
+   at=nodes[at].parent;
+  }
+ };
+ for(let i=0;i<nodes.length;i++){
+  const node=nodes[i];if(node.tag!=='h1')continue;
+  if(fold(clean(html.slice(node.headEnd,node.contentEnd),220))!==selected)continue;
+  ancestorWalk(i,(idx,parent,attributes)=>{
+   if(/\bproduct__info-container\b/iu.test(attributes.class||''))containers.add(idx);
+  });
+ }
+ if(!containers.size)return [];
+ for(const container of containers){
+  let hasSelectedDecaf=false;
+  const captions=[];
+  for(let i=0;i<nodes.length;i++){
+   const node=nodes[i];if(!['p','span'].includes(node.tag)||node.contentEnd-node.headEnd>1200)continue;
+   const attributes=attrs(i),chain=new Set(),state={summary:false,unsafe:false};
+   ancestorWalk(i,(idx,parent,a)=>{
+    chain.add(idx);
+    const context=[a.class,a.id,a.role,a['aria-label']].join(' ');
+    if(parent.tag==='summary')state.summary=true;
+    if(['nav','aside','footer','header'].includes(parent.tag)||
+       /\b(?:related|recommended|you-may-also-like|other-products|upsell|crosssell|carousel|menu)\b/iu.test(context))
+     state.unsafe=true;
+    if(idx===container)return false;
+   });
+   if(!chain.has(container)||state.unsafe)continue;
+   const value=clean(html.slice(node.headEnd,node.contentEnd),600).trim();
+   if(node.tag==='p'&&value.length<=550&&
+      /\bthis\s+(?:[\p{L}\p{M}-]+\s+){0,8}decaf(?:feinated)?\s+coffee\b/iu.test(value)&&
+      !NONCURRENT_DECAF_METHOD.test(value))
+    hasSelectedDecaf=true;
+   if(node.tag==='span'&&state.summary&&
+      (attributes.class||'').split(/\s+/u).includes('accordion__title')&&
+      value.length<=240&&CURRENT_SELECTED_DECAF_WAY.test(value)&&
+      !NONCURRENT_DECAF_METHOD.test(value))
+    captions.push(value);
+  }
+  if(hasSelectedDecaf)methods.push(...captions);
+ }
+ return [...new Set(methods)];
+}
+
 export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html}={}){
  if(typeof html!=='string'||html.length>2_000_000||!name||typeof clean!=='function')return {};
  const blocks=productCoffeeProse(html,clean);
@@ -109,6 +166,15 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
      !decafEvidence.has(line)){
    if(decafEvidence.size<4)decafEvidence.add(line);
    else decafEvidenceOverflow=true;
+  }
+  // Current product-only accordion headings are not ordinary p/div prose.
+  // The same info container must contain selected identity + treatment.
+  if(selectedUnnamedDecafIdentity)for(const line of selectedProductAccordionDecafMethods(html,name,clean)){
+   if(inferDecaffeinationMethod({name,selectedMethod:line,selectedCurrentDecafIdentity:true})&&
+      !decafEvidence.has(line)){
+    if(decafEvidence.size<4)decafEvidence.add(line);
+    else decafEvidenceOverflow=true;
+   }
   }
   // A decaf identity plus a current selected-product sentence is required.
   // Reuse the conservative method classifier; if multiple incompatible

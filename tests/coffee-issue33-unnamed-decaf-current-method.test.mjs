@@ -40,3 +40,30 @@ test('mixed caffeine title and contradictory current methods fail closed',()=>{
 test('rule is generic to a different directly selected name, not URL-specific',()=>{
  assert.equal(parse('Another Selected Coffee','<p>'+claim+'</p><p>'+method+'</p>').fields.decaffeination_method,'Water Process');
 });
+
+test('real selected Shopify product info accordion current method is in summary title span, not p',()=>{
+ const body='<div class="product__info-container"><h1>Brazil Arabela</h1>'+
+  '<div class="product__description rte"><p>'+claim+'</p></div>'+
+  '<accordion-tab><details><summary><span class="summary__title">'+
+  '<span class="accordion__title">Dekáf&#39;d by way of Swiss Water® Process</span>'+
+  '</span></summary><div class="accordion__content"><p>Swiss Water uses water and time.</p></div></details></accordion-tab></div>';
+ const r=extractPublicCoffeeFacts('<html><head><meta property="og:type" content="product"></head>'+
+  '<body><main>'+body+'</main></body></html>',{source_url:src});
+ assert.equal(r.ok,true);assert.equal(r.fields.decaffeination_method,'Water Process');
+ assert.equal(r.fields.process,undefined);
+ assert.match(coffeeUrlPreviewMarkup(r),/Water Process/);
+});
+test('accordion method from unrelated recommendation outside selected product container is rejected',()=>{
+ const body='<div class="product__info-container"><h1>Brazil Arabela</h1><p>'+claim+'</p></div>'+
+  '<section class="product-recommendations"><h2>Other coffees</h2><div class="product__info-container">'+
+  '<details><summary><span class="accordion__title">'+method+'</span></summary></details></div></section>';
+ const r=extractPublicCoffeeFacts('<main>'+body+'</main>',{source_url:src});
+ assert.equal(r.fields.decaffeination_method,undefined);
+});
+test('standalone accordion treatment without same-container selected self-decaf is rejected',()=>{
+ const body='<div class="product__info-container"><h1>Brazil Arabela</h1>'+
+  '<p>This coffee is a regular caffeinated medium roast.</p>'+
+  '<details><summary><span class="accordion__title">'+method+'</span></summary></details></div>';
+ const r=extractPublicCoffeeFacts('<main>'+body+'</main>',{source_url:src});
+ assert.equal(r.fields.decaffeination_method,undefined);
+});
