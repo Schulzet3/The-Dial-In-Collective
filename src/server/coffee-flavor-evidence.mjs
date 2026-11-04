@@ -207,14 +207,30 @@ function headingSensoryProfile(page,nodes,children,index,clean){
  const node=nodes[index];
  if(!/^h[1-6]$/.test(node.tag)||node.contentEnd-node.headEnd>300)return '';
  const label=clean(page.slice(node.headEnd,node.contentEnd),100);
- if(!/^what you['’]ll find in the cup\s*[:：]?$/i.test(label))return '';
- const siblings=children.get(node.parent)||[],next=nodes[siblings[siblings.indexOf(index)+1]];
+ const single=/^what you['’]ll find in the cup\s*[:：]?$/i.test(label);
+ const selectedList=/^what you['’]ll taste\s*[:：]?$/i.test(label);
+ if(!single&&!selectedList)return '';
+ const siblings=children.get(node.parent)||[];
+ let at=siblings.indexOf(index)+1,next=nodes[siblings[at]];
  if(!next||!['p','blockquote'].includes(next.tag)||next.contentEnd-next.headEnd>3000||
   !/^\s*$/.test(page.slice(node.end,next.start)))return '';
- // This explicit heading gives one complete sensory paragraph a role.
- // Keep its literal flavor/aroma/finish wording rather than guessing a
- // union of nouns from several sentences or omitting their qualifiers.
- return normalizeExplicitCoffeeTastingNotes(clean(page.slice(next.headEnd,next.contentEnd),401),{allowProse:true});
+ // Some selected descriptions introduce an independently printed sensory
+ // list with a short "Expect ... combination of:" paragraph. That intro
+ // is NOT a flavor; read exactly the immediately following sibling, never
+ // headings from a related card or general page navigation.
+ if(selectedList){
+  const intro=clean(page.slice(next.headEnd,next.contentEnd),200);
+  if(/^expect\s+(?:an?\s+)?[^.!?]{0,80}\bcombination\s+of\s*[:：]?$/i.test(intro)){
+   const prior=next;next=nodes[siblings[++at]];
+   if(!next||!['p','blockquote'].includes(next.tag)||next.contentEnd-next.headEnd>1500||
+    !/^\s*$/.test(page.slice(prior.end,next.start)))return '';
+  }
+ }
+ const text=clean(page.slice(next.headEnd,next.contentEnd),401);
+ if(selectedList&&(!SENSORY_ROLE.test(text)||noteParts(text).length<2))return '';
+ // Separate current selected lists remain separate source claims; the
+ // caller will flag incompatible profiles rather than picking a stale one.
+ return normalizeExplicitCoffeeTastingNotes(text,{allowProse:true});
 }
 function iconLabeledFlavorRows(page,nodes,children,clean,covered){
  const singles=[],cohorts=new Map();let coverAt=0;
