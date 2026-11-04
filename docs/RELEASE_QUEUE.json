@@ -4119,29 +4119,33 @@
       "issue": 33,
       "pr": 535,
       "title": "Withhold selected current decaf country when current prose and current lot Location contradict",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "03dfe68574fda69729fc4a02b57a67abe23042d2",
       "scope_paths": [
         "src/server/coffee-page-metadata.mjs"
       ],
       "tests": [
-        "Source-specific first PR-head test/CI in progress; five synthetic positive/negative source-bound cases added for original603 #23, no current live exact HTML claim yet.",
-        "Official selected source prints current offering from Peru and current Location Mexico, not necessarily the same current lot; neither source may silently override the other."
+        "Original603 #23 current selected Organic Specialty Decaf official product directly contradicts itself: prose 'current offering from Peru' vs current decaf specification 'Location: Mexico'. Both are direct current source, so canonical origin must be blank/reviewable.",
+        "Five positive/negative focused Node tests PASS; exact PR535 head fd67dae277c9c4845772b7f27336fbb4d1237bfb Node/lint/build41805727316 2361 PASS/0 FAIL/6 SKIP, cloud UX41805727506, approval41805727273, SQL41805727373, security41805727280, private source41805727449 SUCCESS. Frozen60341805727452 SKIPPED.",
+        "PR535 squash merged 03dfe68574fda69729fc4a02b57a67abe23042d2 exact Git tree d715ab00f2627c62e186c213256eab904b9a3110 identical to tested head; merged Node/lint/build41806397510 2361 PASS/0 FAIL/6 SKIP, UX41806397498, approval41806397495, queue41806397575 SUCCESS; frozen60341806397809 SKIPPED.",
+        "Actual merged-source official exact #23 raw HTTPS run41806397565 job126494375156 fetched 1/1, parsed 1/1, Add Coffee UI rendered 1/1. H1 Organic Specialty Decaf, raw HTML SHA256 261446d2fb2b198e01fbe9cb2bdb7d9f072b296b9301bc19bf224cbf82421983: origin BLANK, conflicts ['origin'], Washed/Water Process and tasting notes retained, roast blank. Raw artifact13309981141 digest 3a3c748638079d05f3ab4fb129f862820b1f893d5e066b67a6d778465ecaf4a6."
       ],
       "ci_runs": [
-        41805079384,
-        41805079516,
-        41805079302,
-        41805079362,
-        41805079607,
-        41805079386
+        41805727316,
+        41805727506,
+        41805727273,
+        41805727373,
+        41805727280,
+        41805727449,
+        41806397510,
+        41806397498,
+        41806397495,
+        41806397575,
+        41806397565
       ],
-      "blockers": [
-        "PR535 first head approval intake failed because new code lacked a queue item; this entry resolves the tracking defect, still requires fresh exact-head checks.",
-        "Genuine current official selected raw HTML/parser/Add Coffee and adjacent controls must be inspected on merged source before READY."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "DEVELOPMENT ONLY. Full original603 manual semantic certification is not implied; immutable corpus/oracle/CSV untouched. #267 V2 and #96 separately owned. No deployment, production SQL/Auth/Edge/member/provider writes, spending or accounts."
+      "notes": "Narrow Issue33 #23 selected origin discrepancy READY in DEVELOPMENT, NOT DEPLOYED. Full 603 source audit remains OPEN; original 603/201/1197, original CSV, oracle and scorer unchanged. No whole coffee manual_certified claim, no guessed historic roast, no publication/provider/member writes. #267 V2 and #96 independent; all previous queue items preserved."
     }
   ],
   "history": [
