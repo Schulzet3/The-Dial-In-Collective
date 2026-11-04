@@ -219,11 +219,32 @@
         622,
         629
       ]
+    },
+    {
+      "id": "G1-018",
+      "receipt": "docs/audits/issue504-review-G1-018.json",
+      "text_files_entire": 0,
+      "text_files_partial": 1,
+      "reviewed_file_lines": 193,
+      "reviewed_file_words": 1628,
+      "reviewed_github_objects": 0,
+      "reviewed_github_words": 0,
+      "reviewed_sequential_queue_records": 5,
+      "confirmed_note_only_fixes": 0,
+      "source_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
+      "source_range_inclusive": [
+        3393,
+        3585
+      ],
+      "original_release_receipts_verified": [
+        "DIC-20261029-READY-QUEUE-11",
+        "DIC-20261029-READY-QUEUE-12"
+      ]
     }
   ],
   "totals": {
-    "source_file_lines": 5170,
-    "source_file_words": 40722,
+    "source_file_lines": 5363,
+    "source_file_words": 42350,
     "github_objects": 2,
     "github_words": 721
   },
@@ -242,16 +263,16 @@
   "next": {
     "kind": "git_blob",
     "path": "docs/RELEASE_QUEUE.json",
-    "first_line": 3393,
+    "first_line": 3586,
     "expected_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
     "require_fresh_blob": true,
-    "expected_next_item": "DIC-Q-47-admin-feedback-persistence",
+    "expected_next_item": "DIC-Q-33-selected-decaf-method-prose",
     "unreviewed_drift": [
       "DIC-Q-455-recipe-context-feedback"
     ]
   },
-  "uncovered": "Queue line 3393+ and separately changed #455 drift; issues/PR discussion, actions, releases, history and binary semantic coverage incomplete; #267 V2 strict code not credited; repository currently PUBLIC against owner policy; original PR stack remains OPEN.",
-  "latest_review_source_anchor": "1e503e46cae907713ec411bccde4b7ae2c836f69",
+  "uncovered": "Queue original source line 3586+ plus changed #455 record; remaining GitHub text/records/actions/releases/history/binary coverage incomplete; #267 V2 strict code/frozen solely delegated without #504 credit. Visibility PUBLIC per temporary owner exception, private restoration unverified. Prior #504 audit PR stack integrated via #617/#634.",
+  "latest_review_source_anchor": "f8029ff06abc7a72a32cc28fb503566846da3032",
   "inventory_metadata_only": {
     "github_issue_rest": 523,
     "github_pr_rest": 454,
@@ -281,9 +302,9 @@
     "source_sha_before_notes": "0f5d8a9d6be56b7ecb4b7e4675340e0f9ed374e5",
     "total_lines": 5377,
     "reviewed_first_line": 1,
-    "reviewed_last_line": 3392,
+    "reviewed_last_line": 3585,
     "whitespace_words_credited": "per_receipt_ranges_only; includes noncontiguous earlier insertions",
-    "credit": "G1-005 through G1-017; exact source receipt boundaries only; no overlapping historical/current #267 credit"
+    "credit": "G1-005 through G1-018; source-bound receipts only; no code/#267 double-credit"
   },
   "ci_open_negative": {
     "source_merge_sha": "54ab55987be8b05db090c530a47e496093c8c76a",
@@ -353,5 +374,17 @@
     "source_stack_head": "7fe51050430b6cd360d873643e17079825184f0f",
     "workflow": "nonforce two-parent reconciliation, no deployment",
     "exact_final_pr_head_ci": "PENDING"
+  },
+  "g1018_live_reconciliation_20261104": {
+    "development_sha": "f8029ff06abc7a72a32cc28fb503566846da3032",
+    "main_sha": "274f4094c46eacbe9ed374c8ccb09fca9241eab4",
+    "release_production_sha": "31c66832a28247e657a2bf89592ebc1e2f48dfc5",
+    "pr617": "MERGED",
+    "pr634": "MERGED",
+    "pr619_622_629": "CLOSED_SUPERSEDED",
+    "owner_temporary_public_exception": true,
+    "private_restoration": "UNVERIFIED",
+    "release_12_signed_in_admin": "NOT_VERIFIED_IN_THIS_RUN",
+    "semantics": "193 new queue lines, 1,628 words; five exact release receipts/merged PRs"
   }
 }
