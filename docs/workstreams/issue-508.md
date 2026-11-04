@@ -9,3 +9,18 @@
 **Same-commit paths:** `.github/workflows/dic-post-release-readonly-smoke.yml`, `tests/postrelease-smoke-source-pin.test.mjs`, `docs/workstreams/README.md`, `docs/workstreams/issue-508.md`. One source-bound regression protects job ref, checkout ref, read-only scripts, credential persistence, and sole-publisher boundary. No migration, Supabase, published app, provider or main edits.
 
 **Verification state at authoring:** IN_PROGRESS / pending exact PR-head CI and nonforce merge/readback. **Do not label READY or merged merely from this commit.** Normal commit uses `[skip netlify]`; release/production remains untouched. Next: run applicable exact-source CI, inspect actual test output and any failure, safely integrate, read back merged SHA and queue classification, and record an Issue #508 checkpoint. User's separately approved publication command remains required before this release workflow change can ship.
+
+## 2026-11-04 UTC — N508-017 fail-closed preflight parity (pending CI)
+
+**Authority:** Owner Issue #508 hourly exhaustive Netlify audit, scoped safe remediation; development-only, NO deployment/Netlify provider writes/Auth/member/SQL writes. Pinned pre-change development `13c7a7b535628c2033e655906618964d9cfd07bb`; operations main `d17e900fa78e2f89931480d4f85c217c2d31724c`; publication `31c66832a28247e657a2bf89592ebc1e2f48dfc5`; Netlify deploy `6aea62463d08ddf08e0bec7b` READY/current at audit recovery. Branch heads must be rechecked at integration.
+
+**Confirmed latent source defect N508-017:** The historical *development copy* of `scripts/release/prepare-release-evidence.mjs` (old blob `62ad67cac76a7f365de9c3c5adc3cabbc0abe25d`) returned `{ready:true}` for caller-supplied archive/hash or insufficiently verified recovery. Its test `tests/prepare-release-evidence.test.mjs` explicitly accepted this older behavior. The development backup helper (old blob `ca8521f383fb1c8b31773bf5b6e286391645a0d9`) allowed arbitrary caller-supplied Drive folder, noninteger bytes and millisecond-rounded snapshot times. Independently inspected **main** contains stricter fail-closed sources and regression tests; #417 forbids an API publisher and any implicit readiness. No evidence either development copy is in an active published workflow: this is preventive source hardening, NOT evidence of a live production exploit.
+
+**Narrow same-commit change:** Copy the exact previously reviewed main Git blobs, unmodified, to the same application paths:
+- `scripts/release/prepare-release-evidence.mjs` -> `2ebe86fde5b17dea639a2a4580121078227dafc5`.
+- `scripts/release/release-backup-decision.mjs` -> `511f16692d3d6d62abbec43931cadfa077e1f7a6`.
+- `tests/prepare-release-evidence.test.mjs` -> `39fc1018e221640e2e11fbea312b7e0783524022`.
+- `tests/release-backup-decision.test.mjs` -> `458f201593806bf227a4508292e96737af28376e`.
+- This `docs/workstreams/issue-508.md` in the SAME commit; `docs/workstreams/README.md` already indexes the journal.
+
+**Acceptance:** Verify exact PR-head source tree and focused fail-closed tests, applicable Node22 lint/build/security/CI, safe nonforce merge, exact merged-source readback and no Netlify publication; only then say VERIFIED. Do not repeat unchanged suites without reason. No new deployable site or function source files touched; no automatic release candidate, new READY queue item, owner grant or production writes. If CI finds compatibility defects, diagnose, repair in same-commit journal, rerun and merge safely. Other app workstreams #33/#267/#504/#509 remain independent; do not overwrite concurrent work.
