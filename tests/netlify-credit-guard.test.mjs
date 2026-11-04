@@ -1,13 +1,14 @@
 import test from 'node:test';
 import {createHash} from 'node:crypto';
-const requirePublishedGitBlobSha=source=>createHash('sha1')
- .update('blob '+Buffer.byteLength(source)+'\\0').update(source).digest('hex');
 import assert from 'node:assert/strict';
 import {chmodSync,mkdirSync,mkdtempSync,readFileSync,rmSync,writeFileSync} from 'node:fs';
 import {spawnSync} from 'node:child_process';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {decide} from '../scripts/netlify/should-ignore-build.mjs';
+
+const requirePublishedGitBlobSha=source=>createHash('sha1')
+ .update('blob '+Buffer.byteLength(source)+'\0').update(source).digest('hex');
 
 const release={context:'production',branch:'release/production',
  subject:'Release DIC: DIC-20261020-ONE123 [dic-publish]'};
@@ -19,7 +20,7 @@ test('strict release marker on dedicated branch authorizes build without any cre
  }])assert.equal(decide({...release,ledger,today:'2099-01-01'}).ignore,false);
 });
 test('isolated READY candidates use the exact previously published guard, while upgraded guards enforce skip',()=>{
- const claim={...release,commitMessage:release.subject+'\\n\\n[skip netlify]\\n'};
+ const claim={...release,commitMessage:release.subject+'\n\n[skip netlify]\n'};
  const source=readFileSync(new URL('../scripts/netlify/should-ignore-build.mjs',import.meta.url),'utf8');
  let manifest=null;
  try{manifest=JSON.parse(readFileSync(new URL('../docs/RELEASE_CANDIDATE.json',import.meta.url),'utf8'));}catch{}
@@ -37,8 +38,8 @@ test('isolated READY candidates use the exact previously published guard, while 
  }
  assert.equal(decide(claim).ignore,true);
  assert.match(decide(claim).reason,/suppress Git-connected rebuild/);
- assert.equal(decide({...claim,commitMessage:release.subject+'\\n\\n[SKIP NETLIFY]\\n'}).ignore,true);
- assert.equal(decide({...claim,commitMessage:release.subject+'\\n\\n[skip netlify-extra]'}).ignore,false);
+ assert.equal(decide({...claim,commitMessage:release.subject+'\n\n[SKIP NETLIFY]\n'}).ignore,true);
+ assert.equal(decide({...claim,commitMessage:release.subject+'\n\n[skip netlify-extra]'}).ignore,false);
  assert.match(source,/--format=%B/,'must inspect entire Git commit message, not just subject');
  assert.match(source,/subject,commitMessage/,'full commit message must reach the decision gate');
 });
