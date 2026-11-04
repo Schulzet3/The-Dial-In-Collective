@@ -235,6 +235,26 @@ function directOriginClaims(sentence){
 }
 function narrativeGeography(blocks,{currentLocalityOnly=false,name=''}={}){
  const candidates=[];
+
+ // Only connect a named village delivery to an explicitly CURRENT lot's
+ // named station on this same selected product. This is not a country lookup.
+ const currentLotStations=[];
+ const selectedCountries=countryNames(name);
+ if(selectedCountries.length===1)for(const block of blocks){
+  if(/^h[1-6]$/.test(block.tag)||block.educational||
+   /\b(?:related|recommended|you may also like|other coffees?|other roasts?|catalog)\b/iu.test(block.section||''))continue;
+  for(const line of sentences(block.text)){
+   const match=line.match(new RegExp(
+    '\\b(?:our|this|the)\\s+(?:latest|current|selected)\\s+(?:[\\p{L}]+\\s+){0,4}(?:lot|coffee|beans?)\\s+from\\s+(?:the\\s+)?(?:renowned\\s+)?('+PLACE+')\\s+(?:washing\\s+station|wet\\s+mill)\\s+in\\s+('+PLACE+')\\s*,\\s*('+COUNTRIES+')\\b','iu'));
+   if(match&&current(line)&&key(match[3])===key(selectedCountries[0])&&
+    !/\b(?:previously|historically|formerly|no longer|other coffee|another coffee)\b/iu.test(line)){
+    const identity=key(match[1])+'|'+key(match[2])+'|'+key(match[3]);
+    if(!currentLotStations.some(item=>item.identity===identity))
+     currentLotStations.push({identity,station:match[1],region:match[2],country:match[3]});
+   }
+  }
+ }
+
  const add=(value,quote)=>{
   value=value.replace(/\s+/g,' ').replace(/[,; ]+$/,'').trim();
   if(value.length<3||value.length>220||/^(?:The|This|Our|A|An|It)\b|\b(?:Finca|Hacienda|Farm|Estate|Cooperative|Coop|Producer|Coffee|Process|Washed|Natural|Honey|Gesha|Geisha|Bourbon|Roast|Blend|Agriculture|Commerce|Certification)\b/u.test(value))return;
@@ -243,6 +263,24 @@ function narrativeGeography(blocks,{currentLocalityOnly=false,name=''}={}){
  for(const block of blocks){
   if(/^h[1-6]$/.test(block.tag))continue;
   for(let sentence of sentences(block.text)){
+
+    // Bind named majority-village origins to the SAME current lot's station,
+    // cited again in the delivery paragraph. Never borrow a landmark, menu,
+    // other product, historic lot or unqualified farm generalization.
+    if(currentLotStations.length===1&&
+       !/\b(?:related|recommended|you may also like|other coffees?|other roasts?|catalog)\b/iu.test(block.section||'')){
+     const villages=sentence.match(new RegExp(
+      '\\bmajority\\s+of\\s+(?:the|this)\\s+coffee\\s+(?:arrives|comes|is\\s+delivered)\\s+(?:[\\p{L}-]+\\s+){0,4}from\\s+(?:the\\s+)?nearby\\s+villages?\\s+of\\s+('+PLACE_WORD+')\\s+and\\s+('+PLACE_WORD+')(?=\\s*[,.;!?]|$)','iu'));
+     const station=block.text.match(new RegExp(
+      '\\b(?:The|Our)\\s+('+PLACE+')\\s+(?:washing\\s+station|wet\\s+mill)\\s+is\\s+(?:committed|dedicated|responsible)\\b','iu'));
+     const selected=currentLotStations[0];
+     if(villages&&station&&current(sentence)&&key(station[1])===key(selected.station)&&
+        countryNames(sentence).every(country=>key(country)===key(selected.country))&&
+        !/\b(?:historical|previous|former|other|another|no longer|formerly|used to)\b/iu.test(sentence)){
+      add(villages[1]+' and '+villages[2]+', '+selected.region+', '+selected.country,sentence);
+      continue;
+     }
+    }
    // An exact selected H1's named growing region is not the producer.
    // This negation concerns the producer role, NOT current geography.
    const selectedAdministrativeRegion=sentence.match(new RegExp(
