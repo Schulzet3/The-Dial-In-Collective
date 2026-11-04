@@ -5,32 +5,32 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 2288,
-    "first_unvalidated_manifest_file_index": 30,
-    "first_unvalidated_path": "docs/APPROVAL_COVERAGE_MATRIX.json",
-    "first_unvalidated_line": 601,
+    "strict_validated_lines": 2710,
+    "first_unvalidated_manifest_file_index": 31,
+    "first_unvalidated_path": "docs/APPROVAL_GAP_FORENSIC_AND_CONTINUITY_REVIEW_2026-10-20.md",
+    "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 2811,
-    "first_unvalidated_file_index": 36,
-    "first_unvalidated_path": "scripts/audit/coffee-corpus-freeze.py",
+    "strict_validated_lines": 3145,
+    "first_unvalidated_file_index": 40,
+    "first_unvalidated_path": "scripts/audit/coffee-corpus-render.mjs",
     "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "post_pin_drift": {
-    "observed_development_commit": "ebbf5158f5001f032eded369799d2cea96f0f8b4",
+    "observed_development_commit": "4057b7ed9cc49a365e109281b533cf42d6ff582a",
     "strict_validated_added_lines": 1,
     "scope": "Single verified addition in first current source path; total post-pin live-code delta denominator not yet reconciled",
     "rest_of_live_changes": "NOT_COMPLETELY_REVIEWED",
     "live_fully_reviewed_files": 36,
     "live_fully_reviewed_file_lines": 2947,
     "latest_reviewed_live_path": "scripts/audit/coffee-corpus-enrich.py",
-    "remaining_live_changes": "Three additional pinned current and live exact scripts reviewed; numerous other post-pin changed and new/renamed paths still pending",
+    "remaining_live_changes": "More than two hundred other changed paths from frozen pin still not fully audited; latest #267 narrow local OCR patch and new AST test now source-bound fully reviewed",
     "machine_only_diff_inventory_in_receipt": "docs/audits/issue267-v2-strict-batches/S2-003.json",
     "machine_only_changed_paths": 222,
     "machine_only_diff_commits": 243,
@@ -81,6 +81,31 @@
       "lines": 116,
       "receipt": "S2-032",
       "previous_pinned_blob": "591a988e13b2bc2fd06760e13cb98a98da2c69c5"
+    },
+    "strict_review_of_new_20261104_issue267_ocr_guard": {
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-036.json",
+      "merged_commit": "4057b7ed9cc49a365e109281b533cf42d6ff582a",
+      "original_pinned_image_blob": "2cc81eae9c06a5f337a908ca016d3885137cf084",
+      "merged_live_image_blob": "71a9eb96fb272fbcae792c3398bd911d7bfd1b38",
+      "merged_image_lines": 154,
+      "previous_identical_semantics_reused": 149,
+      "modified_or_inserted_live_source_lines": [
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "old_pinned_lines_replaced": [
+        37,
+        38
+      ],
+      "new_test_path": "tests/audit/test_coffee_image_url_target.py",
+      "new_test_blob": "50fd0917ab4307ea0aa2e44e03f350d649f4a6b7",
+      "new_test_lines": 52,
+      "unique_new_or_changed_live_lines_covered": 57,
+      "live_source_line_records": 206,
+      "all_other_postpin_drift_complete": false
     }
   },
   "batches": [
@@ -881,6 +906,109 @@
         }
       ],
       "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-034",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-034.json",
+      "frozen_file": "docs/APPROVAL_COVERAGE_MATRIX.json",
+      "frozen_lines": [
+        601,
+        800
+      ],
+      "frozen_blob": "8ddf1cb21c2a8bc015a37a69b460ca94c75c7ced",
+      "pinned_files": [
+        {
+          "index": 36,
+          "path": "scripts/audit/coffee-corpus-freeze.py",
+          "blob": "989928dc2b2881b01c780e0940f68ae677782e0d",
+          "lines": [
+            1,
+            65
+          ],
+          "live_same_at_base": true
+        },
+        {
+          "index": 37,
+          "path": "scripts/audit/coffee-corpus-image-audit.py",
+          "blob": "2cc81eae9c06a5f337a908ca016d3885137cf084",
+          "lines": [
+            1,
+            75
+          ],
+          "live_same_at_base": true
+        }
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-035",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-035.json",
+      "frozen_file": "docs/APPROVAL_COVERAGE_MATRIX.json",
+      "frozen_lines": [
+        801,
+        1022
+      ],
+      "frozen_blob": "8ddf1cb21c2a8bc015a37a69b460ca94c75c7ced",
+      "pinned_files": [
+        {
+          "index": 37,
+          "path": "scripts/audit/coffee-corpus-image-audit.py",
+          "blob": "2cc81eae9c06a5f337a908ca016d3885137cf084",
+          "lines": [
+            76,
+            151
+          ],
+          "live_same_pre_fix": true
+        },
+        {
+          "index": 38,
+          "path": "scripts/audit/coffee-corpus-normalize.mjs",
+          "blob": "a4d66794088924290001b19e8453174e22b5b50d",
+          "lines": [
+            1,
+            11
+          ],
+          "live_same_pre_fix": true
+        },
+        {
+          "index": 39,
+          "path": "scripts/audit/coffee-corpus-presentation-review.mjs",
+          "blob": "ea55e5f36867bea57bc1cf1f24fadb07edc4b89d",
+          "lines": [
+            1,
+            107
+          ],
+          "live_same_pre_fix": true
+        }
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-036",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-036.json",
+      "track": "POST_PIN_LIVE_CHANGED_SOURCE",
+      "frozen_lines_credited": 0,
+      "pinned_lines_credited": 0,
+      "live_paths": [
+        {
+          "path": "scripts/audit/coffee-corpus-image-audit.py",
+          "blob": "71a9eb96fb272fbcae792c3398bd911d7bfd1b38",
+          "lines": [
+            1,
+            154
+          ]
+        },
+        {
+          "path": "tests/audit/test_coffee_image_url_target.py",
+          "blob": "50fd0917ab4307ea0aa2e44e03f350d649f4a6b7",
+          "lines": [
+            1,
+            52
+          ]
+        }
+      ],
+      "new_or_modified_live_line_count": 57,
+      "exact_merge": "4057b7ed9cc49a365e109281b533cf42d6ff582a"
     }
   ],
   "completion": "IN_PROGRESS",
