@@ -5,20 +5,20 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 5066,
+    "strict_validated_lines": 5111,
     "first_unvalidated_manifest_file_index": 59,
     "first_unvalidated_path": "docs/DECISION_LEDGER.json",
-    "first_unvalidated_line": 176,
+    "first_unvalidated_line": 221,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 6682,
+    "strict_validated_lines": 6732,
     "first_unvalidated_file_index": 48,
     "first_unvalidated_path": "scripts/audit/coffee-frozen-ci.py",
-    "first_unvalidated_line": 2271,
+    "first_unvalidated_line": 2321,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
@@ -1850,11 +1850,31 @@
       "strict_frozen_delta": 40,
       "strict_pinned_delta": 40,
       "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-083",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-083.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        176,
+        220
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        2271,
+        2320
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "live_pinned_blob": "926bfd49aed1e4426c2aa818b85ef7546d853a4f",
+      "strict_frozen_delta": 45,
+      "strict_pinned_delta": 50,
+      "old_v2_extra_credit": 0
     }
   ],
   "completion": "IN_PROGRESS",
   "test_limit": "Source-equivalence and per-line integrity only; no new app/runtime CI claims",
-  "last_batch": "S2-082",
-  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-082.json",
+  "last_batch": "S2-083",
+  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-083.json",
   "complete": false
 }
