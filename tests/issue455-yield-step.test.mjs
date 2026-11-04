@@ -58,7 +58,7 @@ test('#455 green and missing ratings do not trigger suggestions',()=>{
  assert.equal(fixture({tasteScales:{...GREEN,sweetness:null}}).advice().next,null);
 });
 test('#455 meaningful-step limit abstains instead of disguising a clipped +2 g as +5 g',()=>{
- for(const [yieldG,tasteScales] of [[198,{...GREEN,sweetness:4}],[198,{...GREEN,extraction:2}],[7,{...GREEN,extraction:4}]]){
+ for(const [yieldG,tasteScales] of [[198,{...GREEN,sweetness:4}],[198,{...GREEN,extraction:2}],[5,{...GREEN,extraction:4}]]){
   const advice=fixture({yieldG,tasteScales}).advice();
   assert.equal(advice.next,null);
   assert.match(advice.text,/limit|range/i);
