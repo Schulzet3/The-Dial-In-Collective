@@ -46,7 +46,7 @@ test('insert, merge and COPY data-write paths require potentially-destructive re
   'COPY public.shots FROM STDIN WITH (FORMAT csv)',
   'COPY public.shots (id, name) FROM \'/tmp/source.csv\' CSV'
  ]) {
-  const risk=classifyMigrationDiff('A\\t'+add+'\\n',()=>sql);
+  const risk=classifyMigrationDiff('A\t'+add+'\n',()=>sql);
   assert.equal(risk.risk,'potentially_destructive',sql);
   assert.equal(risk.reason,'SQL_CAN_MODIFY_OR_REMOVE_EXISTING_DATA');
  }
