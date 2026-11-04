@@ -51,3 +51,13 @@ test('another selected country and other-coffee text cannot claim village origin
  assert.equal(other.ok,true);
  assert.ok(!/Shantawene and Bombe/i.test(other.fields.origin||''),JSON.stringify(other.fields));
 });
+
+test('single actual-style Shopify paragraph does not absorb preceding sentence into station identity',()=>{
+ const preceding='Nestled between 2000 and 2200 meters above sea level, near the majestic Bombe Mountain, this coffee embodies the rich terroir of southern Ethiopia.';
+ const story='<p>'+escape(lead)+' '+escape(preceding)+' <br><br> '+escape(credit)+' <br><br> This natural lot is lightly roasted.</p>';
+ const html='<html><head><meta property="og:type" content="product"></head><body><main><article class="product"><h1>Ethiopia Natural</h1><div class="product__description">'+story+'</div></article></main></body></html>';
+ const r=extractPublicCoffeeFacts(html,{source_url:url});
+ assert.equal(r.ok,true);
+ assert.equal(r.fields.origin,'Shantawene and Bombe, Sidama, Ethiopia',JSON.stringify(r.fields));
+ assert.ok(!r.conflicts?.includes('origin'));
+});
