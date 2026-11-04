@@ -34,6 +34,29 @@ test('stage only selected READY source and restore unfinished paths to published
  assert.equal(good.ready,true);
  assert.deepEqual(good.ready_items.map(x=>x.id),[one.id]);
 });
+test('post-staging unready development drift is excluded without weakening exact READY proof',()=>{
+ const E='e'.repeat(40);
+ const newer={...unfinished,id:'DIC-Q-102',issue:102,
+  scope_paths:['site/card.js','src/server/new-research.mjs']};
+ const live={...q,items:[one,unfinished,newer]};
+ const newerAncestry=(a,b)=>ancestor(a,b)||(b===E&&[A,B,C,D].includes(a));
+ const input={...validate,developmentHead:E,developmentDriftPaths:[
+  'site/card.js','src/server/new-research.mjs'],liveQueue:live,isAncestor:newerAncestry};
+ const result=validateReadyOnlyCandidate(q,input);
+ assert.equal(result.ready,true);
+ assert.deepEqual(result.deployable_paths,['site/card.js']);
+ // The candidate frozen at C still has only the selected READY path; both
+ // newer unfinished paths remain on development and never enter publication.
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...input,liveQueue:undefined}),/without verifiable current queue/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...input,liveQueue:q}),/lack an unready owner/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...input,developmentDriftPaths:['scripts/netlify/should-ignore-build.mjs']}),/lack an unready owner/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...input,liveQueue:{...live,items:[{...one,title:'Changed READY approval'},unfinished,newer]}}),/Selected READY record changed/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...input,liveQueue:{...live,items:[one,unfinished,{...newer,state:'READY',tests:['x'],ci_runs:[1],merged_source_sha:D,blockers:[]}]}}),/READY inventory changed/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...input,queueContentMatches:false}),/immutable staging-source queue/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...input,sourceObjectAt:(sha,path)=>
+   path==='site/card.js'&&sha===C?'unready late edit':validate.sourceObjectAt(sha,path)}),/changed during isolation/);
+});
+
 test('unready same-file overlap blocks even if another READY item covers the path',()=>{
  const overlapping={...unfinished,scope_paths:['site/card.js']};
  const p=planReadyOnlyCandidate({...q,items:[one,overlapping]},opts);

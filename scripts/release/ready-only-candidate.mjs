@@ -79,7 +79,7 @@ export function planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSour
 }
 export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,developmentHead,
  candidateSha,actualParents,developmentChangedPaths,candidateChangedPaths,
- stagedCommitChangedPaths,developmentDriftPaths,queueContentMatches,sourceObjectAt,
+ stagedCommitChangedPaths,developmentDriftPaths,queueContentMatches,liveQueue,sourceObjectAt,
  candidateBranch,isAncestor}={}){
  const reject=reason=>{throw Error('Isolated READY candidate HOLD: '+reason);};
  if(!manifest||manifest.schema_version!==1||manifest.kind!==CANDIDATE_KIND||
@@ -97,9 +97,38 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  try{if(isAncestor(manifest.development_source_sha,developmentHead)!==true)
   reject('Candidate staging source no longer in development ancestry');}
  catch(e){reject('Cannot verify development ancestry: '+e.message);}
- if(deployableChangedPaths(developmentDriftPaths||[]).length)
-  reject('Development app code changed since candidate staging; restage and retest');
- if(queueContentMatches!==true)reject('Release queue changed since candidate staging');
+ // The staged candidate is an immutable, CI-tested source tree. Newer
+ // development work may advance independently, but NEVER enter this tree.
+ // Validate current READY inventory and each selected item, while allowing
+ // solely tracked UNREADY runtime edits after the frozen staging anchor.
+ if(queueContentMatches!==true)
+  reject('Candidate queue differs from its immutable staging-source queue');
+ if(liveQueue!==undefined){
+  const liveErrors=queueSchemaErrors(liveQueue);
+  if(liveErrors.length)reject('Latest development queue invalid: '+liveErrors.join('; ').slice(0,400));
+  if(JSON.stringify(liveQueue.published_base)!==JSON.stringify(queue.published_base))
+   reject('Published baseline changed since candidate staging');
+  const liveReady=liveQueue.items.filter(i=>i.state==='READY').map(i=>i.id);
+  if(!equal(liveReady,manifest.selected_ready_item_ids))
+   reject('READY inventory changed since candidate staging');
+  for(const id of manifest.selected_ready_item_ids){
+   const original=queue.items.find(i=>i.id===id);
+   const current=liveQueue.items.find(i=>i.id===id);
+   if(!original||!current||JSON.stringify(original)!==JSON.stringify(current))
+    reject('Selected READY record changed since candidate staging: '+id);
+  }
+ }
+ const runtimeDrift=deployableChangedPaths(developmentDriftPaths||[]);
+ if(runtimeDrift.length){
+  if(!liveQueue)reject('Development app code changed without verifiable current queue');
+  for(const path of runtimeDrift){
+   if(!liveQueue.items.some(i=>i.scope_paths?.includes(path)&&
+      ['IN_PROGRESS','TESTING','BLOCKED'].includes(i.state)))
+    reject('Newer development app changes lack an unready owner: '+path);
+  }
+  // Every staged READY path is still checked below against its exact READY
+  // merged blob; no late overlapping or other unready edit can be published.
+ }
  const plan=planReadyOnlyCandidate(queue,{
   publishedSourceSha,developmentSourceSha:manifest.development_source_sha,
   selectedIds:manifest.selected_ready_item_ids,

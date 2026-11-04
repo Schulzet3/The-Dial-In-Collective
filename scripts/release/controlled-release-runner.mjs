@@ -304,7 +304,8 @@ export async function executeSingleUseRelease(settings=process.env){
    candidateChangedPaths:changedSourcePaths,
    stagedCommitChangedPaths:listDiff(sourceAnchor,sha),
    developmentDriftPaths:listDiff(sourceAnchor,developmentHead),
-   queueContentMatches:originalQueue===liveQueue&&liveQueue===candidateQueue,
+   queueContentMatches:originalQueue===candidateQueue,
+   liveQueue:json(liveQueue,'current development release queue'),
    sourceObjectAt:objectAt,isAncestor:(a,b)=>verifiedGitAncestry(a,b)
   });
  }else{
