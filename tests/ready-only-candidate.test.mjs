@@ -48,10 +48,22 @@ test('post-staging unready development drift is excluded without weakening exact
  // The candidate frozen at C still has only the selected READY path; both
  // newer unfinished paths remain on development and never enter publication.
  assert.throws(()=>validateReadyOnlyCandidate(q,{...input,liveQueue:undefined}),/without verifiable current queue/);
- assert.throws(()=>validateReadyOnlyCandidate(q,{...input,liveQueue:q}),/lack an unready owner/);
- assert.throws(()=>validateReadyOnlyCandidate(q,{...input,developmentDriftPaths:['scripts/netlify/should-ignore-build.mjs']}),/lack an unready owner/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...input,liveQueue:q}),/lack an excluded post-staging owner/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...input,developmentDriftPaths:['scripts/netlify/should-ignore-build.mjs']}),/lack an excluded post-staging owner/);
  assert.throws(()=>validateReadyOnlyCandidate(q,{...input,liveQueue:{...live,items:[{...one,title:'Changed READY approval'},unfinished,newer]}}),/Selected READY record changed/);
- assert.throws(()=>validateReadyOnlyCandidate(q,{...input,liveQueue:{...live,items:[one,unfinished,{...newer,state:'READY',tests:['x'],ci_runs:[1],merged_source_sha:D,blockers:[]}]}}),/READY inventory changed/);
+ const newReady={...one,id:'DIC-Q-103',issue:103,
+  scope_paths:['src/server/post-stage-ready.mjs'],merged_source_sha:E};
+ const expanded={...input,liveQueue:{...live,items:[one,unfinished,newer,newReady]},
+  developmentDriftPaths:['site/card.js','src/server/post-stage-ready.mjs']};
+ assert.equal(validateReadyOnlyCandidate(q,expanded).ready,true,
+  'later READY source is NOT part of frozen tested release and stays queued');
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...expanded,
+  liveQueue:{...live,items:[one,unfinished,newer,{...newReady,merged_source_sha:D}]}}),
+  /Additional READY source not proven post-staging|Cannot certify additional READY source chronology/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...expanded,
+  liveQueue:{...live,items:[one,unfinished,newer]}}),/lack an excluded post-staging owner/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...input,liveQueue:{...live,items:[one,unfinished,{...newer,state:'READY',tests:['x'],ci_runs:[1],merged_source_sha:D,blockers:[]}]}}),
+  /Additional READY source not proven post-staging|Cannot certify additional READY source chronology/);
  assert.throws(()=>validateReadyOnlyCandidate(q,{...input,queueContentMatches:false}),/immutable staging-source queue/);
  assert.throws(()=>validateReadyOnlyCandidate(q,{...input,sourceObjectAt:(sha,path)=>
    path==='site/card.js'&&sha===C?'unready late edit':validate.sourceObjectAt(sha,path)}),/changed during isolation/);

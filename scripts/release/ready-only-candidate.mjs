@@ -118,9 +118,22 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
   if(liveErrors.length)reject('Latest development queue invalid: '+liveErrors.join('; ').slice(0,400));
   if(JSON.stringify(liveQueue.published_base)!==JSON.stringify(queue.published_base))
    reject('Published baseline changed since candidate staging');
-  const liveReady=liveQueue.items.filter(i=>i.state==='READY').map(i=>i.id);
-  if(!equal(liveReady,manifest.selected_ready_item_ids))
-   reject('READY inventory changed since candidate staging');
+  const liveReady=liveQueue.items.filter(i=>i.state==='READY');
+  const selectedSet=new Set(manifest.selected_ready_item_ids);
+  if(manifest.selected_ready_item_ids.some(id=>!liveReady.some(i=>i.id===id)))
+   reject('Selected READY item is no longer READY on development');
+  // New READY records after this owner-approved immutable candidate must NOT
+  // be silently added to this one-use grant or source. They can coexist only
+  // when their exact merge happened after this candidate staging anchor.
+  for(const item of liveReady.filter(i=>!selectedSet.has(i.id))){
+   try{
+    if(!SHA.test(item.merged_source_sha||'')||
+       item.merged_source_sha===manifest.development_source_sha||
+       isAncestor(manifest.development_source_sha,item.merged_source_sha)!==true||
+       isAncestor(item.merged_source_sha,developmentHead)!==true)
+     reject('Additional READY source not proven post-staging: '+item.id);
+   }catch(e){reject('Cannot certify additional READY source chronology: '+e.message);}
+  }
   for(const id of manifest.selected_ready_item_ids){
    const original=queue.items.find(i=>i.id===id);
    const current=liveQueue.items.find(i=>i.id===id);
@@ -132,9 +145,12 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  if(runtimeDrift.length){
   if(!liveQueue)reject('Development app code changed without verifiable current queue');
   for(const path of runtimeDrift){
-   if(!liveQueue.items.some(i=>i.scope_paths?.includes(path)&&
-      ['IN_PROGRESS','TESTING','BLOCKED'].includes(i.state)))
-    reject('Newer development app changes lack an unready owner: '+path);
+   if(!liveQueue.items.some(i=>i.scope_paths?.includes(path)&&(
+       ['IN_PROGRESS','TESTING','BLOCKED'].includes(i.state)||
+       (i.state==='READY'&&!manifest.selected_ready_item_ids.includes(i.id)&&
+        SHA.test(i.merged_source_sha||'')&&
+        isAncestor(manifest.development_source_sha,i.merged_source_sha)===true))))
+    reject('Newer development app changes lack an excluded post-staging owner: '+path);
   }
   // Every staged READY path is still checked below against its exact READY
   // merged blob; no late overlapping or other unready edit can be published.
