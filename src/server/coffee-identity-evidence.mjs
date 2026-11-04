@@ -243,12 +243,24 @@ function narrativeGeography(blocks,{currentLocalityOnly=false,name=''}={}){
  for(const block of blocks){
   if(/^h[1-6]$/.test(block.tag))continue;
   for(let sentence of sentences(block.text)){
+    const growingMunicipality=sentence.match(new RegExp(
+     '^This\\s+group\\s+of\\s+(?:smallholders|growers|farmers)\\s+(?:lives|farms)\\s+in\\s+and\\s+around\\s+the\\s+(?:small\\s+)?municipality\\s+of\\s+('+PLACE+')\\s+in\\s+('+PLACE+')\\s*,\\s+where\\b[^.!?]{0,650}\\bfarms?\\b','iu'));
+    const growerWhere=sentence.indexOf(', where');
+    // Evaluate a direct current grower-locality statement independently
+    // from its later educational comparison/typical farm-elevation clause.
+    // Keep every other noncurrent-lot safeguard intact.
+    const currentGrowerClause=Boolean(growingMunicipality&&growerWhere>0&&
+     countryNames(name).length===1&&key(name).includes(key(growingMunicipality[1]))&&
+     current(sentence.slice(0,growerWhere))&&
+     !/\b(?:used to|previous|former|original|historical|no longer|now moved|abandoned)\b/i.test(sentence.slice(growerWhere))&&
+     !/\b(?:related|recommended|you may also like|other coffees?|other roasts?|catalog)\b/iu.test(block.section||''));
+
    // Some selected product descriptions use the exact coffee name + whole
    // regional blend claim without the literal word "coffee". Admit only
    // that bounded direct source pattern to the normal geographic review.
    const namedWholeBlend=Boolean(name&&key(sentence.slice(0,name.length))===key(name)&&
     /^\s+is\s+a\s+100\s*(?:percent|%)\s+[\p{Lu}][\p{L}\p{M}'’ .-]{2,100}\s+blend\b[^.!?]{0,200}\bthis\s+region\b/iu.test(sentence.slice(name.length)));
-   if(sentence.length>1800||!current(sentence)||(! /\b(?:coffee|coffees|beans?|cherries|grow(?:n|ing|s)?|cultivat|sourc|farm|finca|hacienda|estate|cooperative|station|mill|producer)\w*\b/i.test(sentence)&&!namedWholeBlend)||
+   if(sentence.length>1800||(!current(sentence)&&!currentGrowerClause)||(! /\b(?:coffee|coffees|beans?|cherries|grow(?:n|ing|s)?|cultivat|sourc|farm|finca|hacienda|estate|cooperative|station|mill|producer)\w*\b/i.test(sentence)&&!namedWholeBlend)||
       /\b(?:born|birth|visited|travel(?:ed|led|ing)?|moved from|border with|border of|roasted in|roasting in|ships? from|certified|certification|decaffeination plant|sent a container|in those days|previously|originally collected)\b/i.test(sentence)||
       /\bwater\b.{0,65}\b(?:sourced|comes?|drawn)\s+from\b/i.test(sentence)||
       /\b(?:variety|cultivar)\b.{0,65}\b(?:grown|collected|introduced|originated|discovered)\b/i.test(sentence))continue;
@@ -310,9 +322,7 @@ function narrativeGeography(blocks,{currentLocalityOnly=false,name=''}={}){
     // Grower-association locality is allowed only when the selected H1
     // names the same municipality and a single current sentence says farms
     // are there. No headquarters, past lots, SEO, or country lookup.
-    const growingMunicipality=sentence.match(new RegExp(
-     '^This\\s+group\\s+of\\s+(?:smallholders|growers|farmers)\\s+(?:lives|farms)\\s+in\\s+and\\s+around\\s+the\\s+(?:small\\s+)?municipality\\s+of\\s+('+PLACE+')\\s+in\\s+('+PLACE+')\\s*,\\s+where\\b[^.!?]{0,650}\\bfarms?\\b','iu'));
-    if(growingMunicipality&&key(name).includes(key(growingMunicipality[1]))&&
+    if(currentGrowerClause&&growingMunicipality&&key(name).includes(key(growingMunicipality[1]))&&
        growingMunicipality[1].length>=4&&growingMunicipality[1].length<=70&&
        growingMunicipality[2].length>=4&&growingMunicipality[2].length<=70&&
        !COUNTRY_ONLY.test(growingMunicipality[1])&&!COUNTRY_ONLY.test(growingMunicipality[2])&&

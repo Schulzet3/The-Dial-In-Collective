@@ -1,3 +1,11 @@
+## November 4 UTC — Issue33 PR488 first-head source/CI failure diagnosed and corrected (TESTING)
+
+Exact first PR-head [Node run41764731071](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41764731071) executed 2,330 tests: **2,323 PASS / 1 genuine new #13 positive FAIL / 6 intentional SKIP**. The selected FUDAM locality test #832 failed because the later `other coffee-growing areas` and `typically` comparison in the SAME sentence triggered broad NONCURRENT before an earlier direct affirmative grower municipality could be evaluated. Generic Ecuador, all synthetic negative/related/source-conflict guards passed. First-head cloud/browser/SQL/security/approval/source checks PASS; frozen603 SKIPPED. No existing accepted test regression established.
+
+**SAME-COMMIT correction:** evaluate ONLY direct grower municipality affirmative prefix (selected H1 locality and printed country) independently of its explanatory where-clause; keep all unrelated noncurrent guards and require source farmer relation, deny historical-abandoned suffixes. No fabricated current primary processing method, no whitelist/roaster-specific URL, no original603/oracle/capture edit. Corrected exact-head Node and relevant live tests PENDING; no READY or deployment. [skip netlify]
+
+---
+
 ## November 4 UTC — Issue #33 #13 FUDAM selected grower municipality (TESTING, no deployment)
 
 Recovered development `ea80b40a9c5a6f34930e63ab11a39253c504df12`, AGENTS.md, topic AI preflight, scoped journal, Current Status, Master Spec/Decision Ledger, approval, queue, Issue33 comments, original603 receipt, #267 V2/#96 and open PR367. Prior [guarded source run 41759640885](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41759640885) selected exact H1 Colombia Fair Trade Organic FUDAM LA Union, raw HTML SHA256 `67df20a68c74acbfae395af39fa78cd47fb8ee95c71dde98fedc3afd82f0f2c0`, parser Origin Colombia, Producer FUDAM, Medium roast and process BLANK. Independent [current official source](https://beanstockcoffee.com/collections/medium-roasts/products/colombian-supremo-organic) names La Unión municipality in Nariño in current FUDAM growers' farm narrative. General washing practice is NOT this selected lot's direct method.
