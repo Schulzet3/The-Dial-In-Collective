@@ -1153,9 +1153,9 @@
     "source_whitespace_tokens_semantically_read": 16880,
     "total_source_characters": 207402,
     "next_function_ordinal": null,
-    "next_object": "supabase_migrations.schema_migrations platform table #39; then vault.secrets and vault.decrypted_secrets view; platform SQL function/type/role/grant review, 53 migration SQL body drift, logs and performance",
-    "other_objects": "99/99 application SQL function definitions, 46/46 application table catalog definitions, 9/9 accessible deployed Edge file variants complete; platform/vendor SQL, Auth/Storage/cron/Realtime, migration drift, external dependency calls, performance and limits still incomplete; platform table definitions auth27/storage8/realtime3 direct review complete; platform functions, other tables, database migration SQL bodies still unverified",
-    "platform_objects": "DIRECT_PLATFORM_TABLE_DEFINITION_COMPONENTS_AUTH_27_OF_27_STORAGE_8_OF_8_REALTIME_3_OF_3; other platform source review incomplete",
+    "next_object": "graphql_public.graphql (1 function) then auth SQL function definitions (4), realtime (18), storage (19), extensions (90) etc; per-object lexical source/hash review",
+    "other_objects": "99/99 application SQL function definitions, 46/46 application table catalog definitions, 9/9 accessible deployed Edge file variants complete; platform/vendor SQL, Auth/Storage/cron/Realtime, migration drift, external dependency calls, performance and limits still incomplete; platform table definitions auth27/storage8/realtime3 direct review complete; platform functions, other tables, database migration SQL bodies still unverified; additional provider catalog review supabase_migrations(1 table), vault(1 table+1 view), extensions(2 views), without secret records",
+    "platform_objects": "DIRECT_PROVIDER_CATALOG_TABLES_AUTH27_STORAGE8_REALTIME3_SUPABASE_MIGRATIONS1_VAULT1=40_TABLES; DIRECT_VIEWS_VAULT1_EXTENSIONS2=3; PLATFORM_SQL_FUNCTION_BODIES_UNREVIEWED",
     "edge_function_sources_reviewed": 9,
     "table_definition_components_reviewed": 46,
     "total_application_tables": 46
@@ -2693,9 +2693,27 @@
       "provider_writes": 0,
       "private_user_rows_read": 0,
       "next": "supabase_migrations.schema_migrations; verify platform vendor other catalog definitions and vendor checks, actual API schema exposure via #96; then migration SQL body/release drift"
+    },
+    {
+      "run": "2026-11-04 UTC #509 five additional platform table/view catalog definitions",
+      "provider_ref": "azviqqejypsefzilgonr",
+      "source_sha_before": "f7b3d93b0a29eee76011b65a4cf7245175e0f055",
+      "objects": [
+        "supabase_migrations.schema_migrations",
+        "vault.decrypted_secrets",
+        "vault.secrets",
+        "extensions.pg_stat_statements",
+        "extensions.pg_stat_statements_info"
+      ],
+      "safe_checks": "auth 27/27 tables role read matrix: 11 RLS-disabled with zero anon/authenticated SELECT; pure select CHECK expr NULL accepts empty; realtime.subscription anon/authenticated SELECT but no verified Data API exposure; anon/authenticated/service_role NOLOGIN catalog",
+      "private_rows_read": 0,
+      "production_writes": 0,
+      "code_fixes": 0,
+      "ci_not_run": "metadata/documentation only; no code/test changes",
+      "next": "graphql_public function, auth/storage/realtime function bodies, source migration drift"
     }
   ],
-  "state": "APP_SQL_FUNCTIONS_99_OF_99; APP_TABLES_46_OF_46_COMPONENTS_DIRECTLY_READ; EDGE_DEPLOYED_SOURCE_9_OF_9_VARIANTS; FULL_PROVIDER_AUDIT_IN_PROGRESS; #527_READY_NOT_DEPLOYED; PLATFORM_AUTH_27_STORAGE_8_REALTIME_3_TABLE_DEFINITIONS_DIRECT_REVIEWED; FULL_PROVIDER_AUDIT_IN_PROGRESS",
+  "state": "APP_SQL_FUNCTIONS_99_OF_99; APP_TABLES_46_OF_46_COMPONENTS_DIRECTLY_READ; EDGE_DEPLOYED_SOURCE_9_OF_9_VARIANTS; FULL_PROVIDER_AUDIT_IN_PROGRESS; #527_READY_NOT_DEPLOYED; PLATFORM_AUTH_27_STORAGE_8_REALTIME_3_TABLE_DEFINITIONS_DIRECT_REVIEWED; FULL_PROVIDER_AUDIT_IN_PROGRESS; VENDOR_OTHER_TABLE_VIEWS_5_DIRECT_COMPONENTS_READ",
   "application_table_review": {
     "total": 46,
     "current_index": 46,
@@ -4496,5 +4514,50 @@
       "classification": "ACCESS_SURFACE_NEEDS_EXPOSURE_VALIDATION_NOT_CONFIRMED_VULNERABILITY",
       "action": "Verify PostgREST exposed schemas, Realtime engine intentional privileges and #96 genuine access boundaries; no private rows accessed or role changes."
     }
-  ]
+  ],
+  "platform_other_catalog_review": {
+    "status": "DIRECT_PLATFORM_OTHER_TABLE_AND_VIEW_CATALOG_REVIEW_ONLY_NOT_SQL_FUNCTION_BODIES",
+    "provider_ref": "azviqqejypsefzilgonr",
+    "reviewed": 5,
+    "objects": [
+      {
+        "ordinal": 39,
+        "object": "supabase_migrations.schema_migrations",
+        "type": "table",
+        "definition_md5": "38c137a6b950f12c7531dc7f3a6d4062",
+        "notes": "Definition includes version PK, idempotency_key UNIQUE, name, statements text[] and rollback text[]; no anon/authenticated SELECT, no migration statement row values queried."
+      },
+      {
+        "ordinal": 40,
+        "object": "vault.decrypted_secrets",
+        "type": "view",
+        "definition_md5": "c2e83cda185c9aecd9c8116279f62c5e",
+        "notes": "Full source view SQL inspected: vault._crypto_aead_det_decrypt calls on encrypted vault.secrets, without fetching any records or plaintext; grants supabase_admin/postgres/service_role only, no anon/authenticated SELECT."
+      },
+      {
+        "ordinal": 41,
+        "object": "vault.secrets",
+        "type": "table",
+        "definition_md5": "bc7e1919c2429e0ee1fc4d75990fde4a",
+        "notes": "Full column/default/index/ACL definition read; vault nonce helper, unique nonnull name, no anon/authenticated SELECT. No secret record, value or ciphertext accessed."
+      },
+      {
+        "ordinal": 42,
+        "object": "extensions.pg_stat_statements",
+        "type": "view",
+        "definition_md5": "NOT_COMPUTED_VIEW_SQL_DIRECTLY_READ",
+        "source_length_characters": 1847,
+        "notes": "Directly read full extension view text selecting query/metrics from pg_stat_statements(true); public SELECT ACL present, but actual API schema exposure and server-enforced query visibility not verified. Did not query SQL text or literals."
+      },
+      {
+        "ordinal": 43,
+        "object": "extensions.pg_stat_statements_info",
+        "type": "view",
+        "definition_md5": "NOT_COMPUTED_VIEW_SQL_DIRECTLY_READ",
+        "source_length_characters": 113,
+        "notes": "Directly read full view statement SELECT dealloc, stats_reset FROM pg_stat_statements_info(); extension-managed; no code changes."
+      }
+    ],
+    "next": "Inspect graphql_public function and platform auth/realtime/storage functions, then types, sequences, publications, privilege/configuration, live 53 migration statement bodies mapped to pinned release source and bounded logs. Also compute full component hashes for first eight Auth catalog entries."
+  }
 }
