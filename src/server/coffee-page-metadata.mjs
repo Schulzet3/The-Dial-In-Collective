@@ -8,7 +8,7 @@ import {extractRoastVisualEvidence,normalizeRoastLabel} from './roast-level-evid
 import {extractLayoutEvidence,coffeeLayoutDetailConflicts} from './coffee-product-layouts.mjs';
 import {extractNarrativeCoffeeEvidence} from './coffee-narrative-evidence.mjs';
 import {extractCoffeeBlendEvidence,extractSelectedBlendCommunityCredit,extractSelectedRegionalBlendElevation,withoutCoffeeBlendComponentSpecs} from './coffee-blend-evidence.mjs';
-import {extractCoffeeIdentityEvidence,extractCoffeeCurrentReleasePrefixes,extractCoffeeTitleOrigin,extractCoffeeGeographyTuples,coffeeDescriptionCountryMismatch,coffeeDescriptionNamedCoffeeMismatch,explicitCoffeeVarietyList} from './coffee-identity-evidence.mjs';
+import {extractCoffeeIdentityEvidence,extractCoffeeCurrentReleasePrefixes,extractCoffeeTitleOrigin,extractCoffeeGeographyTuples,coffeeDescriptionCountryMismatch,coffeeDescriptionNamedCoffeeMismatch,explicitCoffeeVarietyList,literalCoffeeSourcePlaces} from './coffee-identity-evidence.mjs';
 import {extractProductEspressoReference} from './coffee-espresso-evidence.mjs';
 import {productMarkup,coffeeHtmlAttributes,withoutDetachedFarmerProfiles} from './coffee-product-scope.mjs';
 import {productCoffeeProse} from './coffee-product-prose.mjs';

@@ -1,3 +1,9 @@
+## November 4 UTC — Issue33 PR535 static source readback caught missing imported country recognizer (TESTING)
+
+A new selected-decaf guard referenced the existing `literalCoffeeSourcePlaces()` but the initial source import did **not** include it. Independently confirmed from exact PR-head source before mislabeling an in-flight app test PASS. This same-commit source/journal correction adds the existing exported utility to `src/server/coffee-page-metadata.mjs` (no new country dictionary, no semantic shortcut). Corrected source after `ffbfa19d9ede0a8a4563ff404dc9d6cca6aac7b1` requires new exact-head Node/lint/build and all applicable CI. Preserve initial failure and cancelled-in-flight checks as historical, never PASS; no queue READY, no provider writes, no deployment. [skip netlify]
+
+---
+
 ## November 4 UTC — PR535 queue schema failure repaired (still TESTING)
 
 Corrected head `6bd98848c778bfc71dea0c3647b2b51d1b7e18ec` [approval41805359723](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41805359723) genuinely **FAILED**: release queue requires `merged_source_sha:null` on unmerged IN_PROGRESS and only **deployable** `scope_paths`, not the separate test file. The first queue patch addressed intake tracking but violated those two schema constraints. This same-commit correction explicitly sets `merged_source_sha:null`, narrows its queue scope to `src/server/coffee-page-metadata.mjs`; the tests remain tracked in this journal/PR and will run independently. No code, app behavior, existing queue items, frozen603, provider or production changed. Earlier failure is retained in history; rerun exact revised-head approval, Node and live official product before any merge/READY.
