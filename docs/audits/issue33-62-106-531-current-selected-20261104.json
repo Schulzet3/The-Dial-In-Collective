@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "status": "TESTING_CURRENT_SELECTED_REAL_HTTP_AND_PARSER_PENDING",
+  "base_sha": "571325a20fc253cd5274545c91c62e7e356030fc",
+  "base_tree_sha": "91aee23926e85910c40e4e5cd27256ac6bdb031b",
+  "selected_numbers": [
+    62,
+    106,
+    531
+  ],
+  "selector": "[dic-issue33-twentyseventh3]",
+  "immutable_original603_adjudication_csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "source_type": "FROZEN_EXACT_SELECTED_URLS_VS_CURRENT_OFFICIAL_LIVE",
+  "preserve_immutable_original603": true,
+  "targets": [
+    {
+      "number": 62,
+      "coffee": "Montana Coffee Traders Organic Peru",
+      "url": "https://coffeetraders.com/products/organic-peru",
+      "historical_parser_origin": "Andes, Peru",
+      "review_question": "Andes in generic Peru education paragraph is not necessarily selected-lot-specific producing origin; verify real H1 and field provenance",
+      "discovery_url": "https://coffeetraders.com/collections/single-origins/products/organic-peru"
+    },
+    {
+      "number": 106,
+      "coffee": "Earthback Colombia Valley de Cauca",
+      "url": "https://earthbackcoffee.com/products/colombia-valley-de-cauca-medium-dark-roast",
+      "historical_parser_origin": "Colombia",
+      "review_question": "Check current selected identity and direct Valle del Cauca provenance; do not infer from stale URL"
+    },
+    {
+      "number": 531,
+      "coffee": "Nativo TRANQUILO decaf",
+      "url": "https://www.nativocoffeeroasters.com/products/tranquilo-decaf",
+      "historical_parser_origin": null,
+      "review_question": "Selected EA Sugarcane decaf is not necessarily Natural green processing; decaf-in-Colombia is not necessarily farming origin",
+      "discovery_url": "https://www.nativocoffeeroasters.com/products/tranquilo-decaf"
+    }
+  ],
+  "tests_pending": [
+    "PR-head approval/continuity",
+    "exact merged official source job",
+    "all 3 actual FETCHED + H1 identity + parsed + Add Coffee source review",
+    "independent raw HTML & JSON artifact audit"
+  ],
+  "manual_certified": 0,
+  "release_status": "NOT_READY",
+  "deployment_authorized": false,
+  "production_operations": 0,
+  "next": "Run CI; nonforce integrate exact source without overriding concurrent work; independently compare source-bound actual parser outputs before any correction"
+}
