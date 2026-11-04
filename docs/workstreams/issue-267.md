@@ -1,3 +1,15 @@
+## November 4, 2026 — #267 confirmed local OCR malformed image URL bug, focused fix [skip netlify]
+
+**Authority/source:** Owner #267 development only. Recovered exact development `3fb6a2dedca7bd11cb663c051a68b8ddaf758140`; source `scripts/audit/coffee-corpus-image-audit.py` blob `2cc81eae9c06a5f337a908ca016d3885137cf084` unchanged from pinned current. Current #33 PR367 changes disjoint extractor paths, #96 maintains separate Auth/privacy scope; no overlap with this helper/test. Latest #457 risk-based CI and no-publication rules remain.
+
+**Reproduction:** Python `urllib.parse.urlsplit(raw).port` raises `ValueError` for `:notaport`, `:99999`, and malformed `[IPv6` metadata; the existing URL gate did not catch the exception, so a single bad public gallery image URL could abort the local OCR audit. Also, `:0` slipped through `if u.port` despite the explicit no-port policy. These are input-validation bugs in local source-review tooling, **not a demonstrated production app vulnerability**.
+
+**Fix:** Narrow guard in `scripts/audit/coffee-corpus-image-audit.py`: catch URL parsing `ValueError`, return `None`, reject any explicit port via `u.port is not None`. New `tests/audit/test_coffee_image_url_target.py` AST-extracts only the unchanged `target()` function into a sterile standard-library context; valid HTTPS/metadata and forbidden hosts/ports are asserted, no network/fixtures/production. Existing free Python audit workflow already discovers `tests/audit/test_*.py`, no CI workflow or source-oracle change. Require exact PR-head Python and all applicable security/SQL/build/approval checks and final merged-source checks before declaring merge verified.
+
+**Limits:** DNS resolution to private address for otherwise public hostnames is not independently verified safe; separately triage without risky network changes. Original 603 oracle, source packets, scorer, historical files, member shots/history, Auth and production remain untouched. No deployment or READY queue change.
+
+---
+
 ## November 4, 2026 — #267 strict S2-033 historical Admin/shot/extractor + complete three immutable-corpus helpers [skip netlify]
 
 Recovered live dev `ebbf5158f5001f032eded369799d2cea96f0f8b4`, frozen `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9`, pinned `9707553a64f88127826e8f5b2b36cd0651296e83`, #267 #33 #96, original/current inventory and prior strict S2-032 receipt; nonoverlap ensured. [S2-033](../audits/issue267-v2-strict-batches/S2-033.json) independently AI-direct reviewed source-exact **200 original frozen lines** of approval matrix #30 (401–600), including Admin explorer, Hide Shot UI/backend/legacy-private exception, one-time first coffee style, prior selected URL completeness and Admin safe-deletion permissions. Every line has nine focused dimensions, including dated status caveats. **No historic published/hosted_sql label is treated as a current production readback.**
