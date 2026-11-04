@@ -125,11 +125,23 @@
       "reviewed_github_words": 0,
       "reviewed_sequential_queue_records": 8,
       "confirmed_note_only_fixes": 6
+    },
+    {
+      "id": "G1-013",
+      "receipt": "docs/audits/issue504-review-G1-013.json",
+      "text_files_entire": 0,
+      "text_files_partial": 1,
+      "reviewed_file_lines": 251,
+      "reviewed_file_words": 2090,
+      "reviewed_github_objects": 0,
+      "reviewed_github_words": 0,
+      "reviewed_sequential_queue_records": 5,
+      "confirmed_note_only_fixes": 5
     }
   ],
   "totals": {
-    "source_file_lines": 3776,
-    "source_file_words": 28535,
+    "source_file_lines": 4027,
+    "source_file_words": 30625,
     "github_objects": 2,
     "github_words": 721
   },
@@ -148,14 +160,16 @@
   "next": {
     "kind": "git_blob",
     "path": "docs/RELEASE_QUEUE.json",
-    "first_line": 1999,
-    "expected_blob_sha": "4ad074c9f94324c343365b733e4157dc1bbf9402",
+    "first_line": 2250,
+    "expected_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
     "require_fresh_blob": true,
-    "expected_next_item": "DIC-Q-33-owner-source-precedence-rotating-origin",
-    "predecessor_inserted_items_unreviewed": []
+    "expected_next_item": "DIC-Q-33-bald-guy-roast-choice",
+    "unreviewed_drift": [
+      "DIC-Q-455-recipe-context-feedback"
+    ]
   },
-  "uncovered": "Sequential queue resumes at line1999; other downstream/new queue records and GitHub historical issues/PR reviews/Actions logs/artifacts, branches/tags/releases/commit text and binaries remain unreviewed. Frozen/current executable code exclusively owned by #267.",
-  "latest_review_source_anchor": "bd48e191af5966251392cd0747d51c530e90437f",
+  "uncovered": "Queue future lines 2250+ and changed unreviewed #455 recipe-context record; most GitHub historical/issue/PR/Actions/log/artifact/commit/tag/binary materials. Delegated #267 strict frozen/current code uncredited until independently validated.",
+  "latest_review_source_anchor": "a00070e729d552682ed88c4e5fd28b4a8e93ecd2",
   "inventory_metadata_only": {
     "github_issue_rest": 523,
     "github_pr_rest": 454,
@@ -181,12 +195,26 @@
   },
   "last_partially_reviewed_document": {
     "path": "docs/RELEASE_QUEUE.json",
-    "sha": "4ad074c9f94324c343365b733e4157dc1bbf9402",
-    "source_sha_before_notes": "43a07ba9fd29f19248b4965a40c35e3d47c0a6c4",
-    "total_lines": 5369,
+    "sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
+    "source_sha_before_notes": "0f5d8a9d6be56b7ecb4b7e4675340e0f9ed374e5",
+    "total_lines": 5377,
     "reviewed_first_line": 1,
-    "reviewed_last_line": 1998,
-    "whitespace_words_credited": 18873,
-    "credit": "G1-005 through G1-012, including previously separately reviewed early-inserted drift records"
+    "reviewed_last_line": 2249,
+    "whitespace_words_credited": "per_receipt_ranges_only; includes noncontiguous earlier insertions",
+    "credit": "G1-005 through G1-013; only exact ledger ranges, not all intervening changed words"
+  },
+  "ci_open_negative": {
+    "source_merge_sha": "54ab55987be8b05db090c530a47e496093c8c76a",
+    "checks": [
+      {
+        "run_id": 41889091389,
+        "conclusion": "failure"
+      },
+      {
+        "run_id": 41889091463,
+        "conclusion": "failure"
+      }
+    ],
+    "job_log_limit": "404 BlobNotFound, reason unverified; do not reclassify as PASS"
   }
 }
