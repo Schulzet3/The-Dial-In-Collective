@@ -2,7 +2,7 @@
   "schema_version": 1,
   "issue": 33,
   "date_utc": "2026-11-04",
-  "state": "TESTING_GENERIC_PATCH_UNVERIFIED",
+  "state": "TESTING_MERGED_PARSER_LIVE_PROBE_EMPTY_OVERRIDE_REPAIR",
   "authority": "Owner authorized development-only Issue33 current selected-source field adjudication; not a release",
   "parent_source_sha": "3416ceda5bcce4c885025ffe6af162ded89b5d74",
   "original603": {
@@ -36,5 +36,28 @@
   },
   "acceptance": "Required: initial test-only CI evidence and repaired PR-head Node/lint/build, nonforce merged source, fresh official #19 raw HTML hash/current parser/Add Coffee before READY; source conflicts or fail imply IN_PROGRESS.",
   "status": "TESTING",
-  "no_release_or_production_changes": true
+  "no_release_or_production_changes": true,
+  "initial_test_run": {
+    "run_id": 41834283671,
+    "pass": 2385,
+    "fail": 1,
+    "expected_regression": "#19 full sweet undertones",
+    "actual_prior": "smoky chocolate flavor with earth"
+  },
+  "corrected_pr_head": {
+    "sha": "cbfd08deea0cd22fce5535086b7487469410431c",
+    "node_run_id": 41834718053,
+    "pass": 2386,
+    "fail": 0,
+    "skip": 6,
+    "other_applicable_checks": "SUCCESS"
+  },
+  "merged_runtime_sha": "8a347cd771ceddeb1d145f9f0d4e657fe4fdc989",
+  "merged_official_run_1": {
+    "run_id": 41835268505,
+    "conclusion": "FAIL",
+    "reason": "Empty GitHub env DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS rejected before official source fetched; no HTML or preview",
+    "source_capture": false
+  },
+  "next": "Verify exact PR-head and merged fresh public #19 HTML hash/parser/preview before queue READY. Keep Issue33 OPEN."
 }
