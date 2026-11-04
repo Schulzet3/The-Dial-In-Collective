@@ -135,7 +135,8 @@ function selectedComponentFarmRegion(blend,page){
  for(const block of productCoffeeProse(page,clean)){
   if(block.educational||/^h[1-6]$/.test(block.tag))continue;
   for(const sentence of block.text.split(/(?<=[.!?])\s+/).slice(0,45)){
-   if(sentence.length>1200||NONCURRENT_COFFEE_PROSE.test(sentence))continue;
+   if(sentence.length>1200||NONCURRENT_COFFEE_PROSE.test(sentence)||
+      /\b(?:previously|formerly|historically|hypothetically|hypothetical|last year|prior lot|used to|other coffee|another coffee|related coffee)\b/i.test(sentence))continue;
    const found=component.exec(sentence);
    if(found)matches.push({country:found[1],region:found[2]});
   }
