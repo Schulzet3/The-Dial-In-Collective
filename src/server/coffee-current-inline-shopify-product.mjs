@@ -31,8 +31,7 @@ export function selectedCurrentInlineShopifyRoastTag(html,{name='',roaster='',so
  for(const script of rawElements(html)){
   if(!script.closed||script.body.length>500000||/\bsrc\s*=/i.test(script.attributes))continue;
   const marker=/(?:^|[;\n])\s*theme\.product\s*=\s*(\{)/g;
-  let m;
-  while((m=marker.exec(script.body))){
+  while(marker.exec(script.body)){
    if(++assignments>6)return null;
    const start=marker.lastIndex-1,end=balancedJsonEnd(script.body,start);
    if(end<=start||!/^\s*;/.test(script.body.slice(end,end+15)))return null;
