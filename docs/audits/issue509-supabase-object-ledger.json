@@ -1147,13 +1147,13 @@
   },
   "coverage": {
     "current_scope": "PUBLIC_AND_PRIVATE_SQL_FUNCTION_DEFINITIONS_ONLY",
-    "semantic_reviewed_functions": 25,
+    "semantic_reviewed_functions": 28,
     "total_application_functions": 99,
-    "source_characters_semantically_read": 86213,
-    "source_whitespace_tokens_semantically_read": 6983,
+    "source_characters_semantically_read": 103353,
+    "source_whitespace_tokens_semantically_read": 8387,
     "total_source_characters": 207402,
-    "next_function_ordinal": 26,
-    "next_object": "private.dic_edit_my_coffee(p_library_entry uuid, p_expected_revision bigint, p_details jsonb, p_source_url text)",
+    "next_function_ordinal": 29,
+    "next_object": "private.dic_member_retry_pending_approval(p_submission_id uuid, p_expected_revision bigint)",
     "other_objects": "COUNTS_INVENTORIED_ONLY; DIRECT SEMANTIC REVIEW NOT STARTED",
     "platform_objects": "COUNTS_INVENTORIED_ONLY; VENDOR SQL DEFINITIONS NOT REVIEWED",
     "edge_function_sources_reviewed": 0
@@ -1483,6 +1483,45 @@
       "disposition": "Complete member confirm-existing reviewed: admitted ownership, idempotency receipt, name/roaster/region/release guards, conservative self-merge. No proven defect; no live RPC invoked.",
       "fix": "NONE",
       "tests": "SOURCE_READ_ONLY"
+    },
+    {
+      "ordinal": 26,
+      "object": "private.dic_edit_my_coffee(p_library_entry uuid, p_expected_revision bigint, p_details jsonb, p_source_url text)",
+      "definition_md5": "5a52eee42d3427ccbad8b7272ff8df90",
+      "source_chars": 7162,
+      "source_newline_count": 136,
+      "whitespace_token_count": 612,
+      "review_method": "DIRECT_COMPLETE_PROVIDER_PG_GET_FUNCTIONDEF_AI_SEMANTIC",
+      "semantic_review": "REVIEWED_NO_CONFIRMED_DEFECT",
+      "disposition": "Complete member coffee edit reviewed: owner library lock, strict typed bounded fields, roast taxonomy, decaf/half-caf guard, revision check, pending correction and unchanged canonical shot history. No confirmed defect; potential omitted source URL behavior requires contract evidence, not automatic alteration.",
+      "fix": "NONE",
+      "tests": "SOURCE_READ_ONLY"
+    },
+    {
+      "ordinal": 27,
+      "object": "private.dic_find_coffee_matches(p jsonb)",
+      "definition_md5": "0ba424a2a66e99dc98629a89d485680b",
+      "source_chars": 6024,
+      "source_newline_count": 115,
+      "whitespace_token_count": 473,
+      "review_method": "DIRECT_COMPLETE_PROVIDER_PG_GET_FUNCTIONDEF_AI_SEMANTIC",
+      "semantic_review": "REVIEWED_NO_CONFIRMED_DEFECT",
+      "disposition": "Complete member-aware coffee match reviewed: authenticated admitted gate, bounded inputs, canonical roaster/key, exact-release/official URL priority with compatibility checks and top-six candidates. No confirmed defect.",
+      "fix": "NONE",
+      "tests": "SOURCE_READ_ONLY"
+    },
+    {
+      "ordinal": 28,
+      "object": "private.dic_link_pending_coffee(sid uuid, canonical uuid, event_name text, evidence jsonb)",
+      "definition_md5": "140c211a4bfef175b041c037561a1e37",
+      "source_chars": 3954,
+      "source_newline_count": 57,
+      "whitespace_token_count": 319,
+      "review_method": "DIRECT_COMPLETE_PROVIDER_PG_GET_FUNCTIONDEF_AI_SEMANTIC",
+      "semantic_review": "REVIEWED_NO_CONFIRMED_DEFECT",
+      "disposition": "Complete verified coffee link reviewed: submission row lock, first-entry label provenance, duplicate same-owner library protection, history-preserving library update, audit and aliases. Caller/privilege review still pending; no confirmed defect.",
+      "fix": "NONE",
+      "tests": "SOURCE_READ_ONLY"
     }
   ],
   "advisory_snapshot": {
@@ -1597,6 +1636,19 @@
       "ci_approval_initial": "FAILED: new SQL migration absent from release queue; corrected by this same scoped docs follow-up",
       "no_provider_writes": true,
       "next": "Await exact-source CI, diagnose SQL/Node failures, then safe nonforce merge after PASS; direct review SQL function #26."
+    },
+    {
+      "run": "2026-11-04T07:55Z CI queue null-sha fix + complete SQL review #26-28",
+      "source_sha": "fefde7100066e7766c7fb6b2c90620adcf473477",
+      "reviewed_ordinals": "26-28",
+      "read_chars": 17140,
+      "read_tokens": 1404,
+      "remaining_functions": 71,
+      "findings_verified_cumulative": 1,
+      "ci_approval_retry_fail": "Missing required merged_source_sha nullable key on IN_PROGRESS queue item",
+      "fix": "Explicit merged_source_sha=null",
+      "no_provider_writes": true,
+      "next": "Await exact-source branch CI incl SQL and approval; after PASS integrate nonforce, or diagnose. Continue #29 onward."
     }
   ],
   "state": "IN_PROGRESS_FIX_STAGED_CI_UNVERIFIED_NOT_DEPLOYED"
