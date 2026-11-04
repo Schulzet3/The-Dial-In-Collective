@@ -1,3 +1,9 @@
+## November 4 UTC — S2-063 receipt schema normalization [skip netlify]
+
+Normalized S2-063 `frozen`, `source_commits`, `checks` keys to prior strict batch layout. Exact source line text/ranges, nine dimensions, strict counts and checkpoint unchanged; no additional review credit or code/functional test claim. [skip netlify]
+
+---
+
 ## November 4 UTC — #267 strict S2-063 source-bound +116 lines [skip netlify]
 
 Recovered exact development `df45b7e49d32d895b144ddd3b461609db5522d91`, immutable original `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9`, pinned executable `9707553a64f88127826e8f5b2b36cd0651296e83`. [S2-063 individually annotated receipt](../audits/issue267-v2-strict-batches/S2-063.json) covers historical #54 `docs/CURRENT_STATUS.md` 61–100 (40 lines, blob 2d7f55bcad8fd92663c4790c4164b9bacfed0667) and pinned #48 `scripts/audit/coffee-frozen-ci.py` 1015–1090 (76 lines, blob 266631b5a9abf05f574e2a1058a9cd7372172d08); every numbered blank/continuation/code line fetched and assessed across behavior, quality, risk, dead/duplicate, current counterpart, testability, fix opportunity and Locked fit. Original source history and current executable SHA remain separate. Strict **4,182/579,961 historical; 5,502/57,913 pinned**; legacy V2 uncredited. No confirmed bug; deep recursive quote parsing is a hypothetical stress candidate only. No code deletion, code changes, app/Auth/603/browser tests, production provider writes, READY promotion or deployment. Docs-only exact-source CI pending. Continue historical #54 line101 and pinned #48 line1091; live post-pin drift INCOMPLETE and Issue267 OPEN.
