@@ -1,10 +1,8 @@
 name: DIC automatic READY source and queue coverage
-# Owner Nov 2 #417: lightweight nonpublishing queue check only. Existing mandatory
+# Issue #624: manual-only legacy diagnostic; mandatory approval already checks the queue on each push. Existing mandatory
 # exact-source Node/cloud/mobile/SQL/approval checks remain independent. Never
 # re-run those suites or package duplicate immutable API publisher artifacts here.
 on:
-  push:
-    branches: [development/backend-foundation]
   workflow_dispatch:
 permissions:
   contents: read
