@@ -649,6 +649,19 @@ function flavorProse(page,clean,{origin='',originConflict=false}={}){
       if(first&&second)raw=first+', '+second;
      }
     }
+    // One directly printed cup profile can add a literal sugar-sweetness
+    // descriptor after two named notes, without another "notes of" label.
+    // Reject milk/conditional profiles and preserve unrelated source facts.
+    if(patternIndex===2&&!CONDITIONAL_FLAVOR.test(sentence)&&
+       !PREPARATION_QUALIFIED_FLAVOR.test(sentence)){
+     const sugar=raw.match(/^(.{2,180}?)\s+with\s+(?:a|an)\s+(unrefined\s+[\p{L}\p{M}'’ -]{2,45}\s+sweetness)$/iu);
+     if(sugar){
+      const first=shortFlavorList(sugar[1],clean,{allowSingle:true});
+      const last=shortFlavorList(sugar[2],clean,{allowSingle:true});
+      if(first&&last&&noteParts(first).length>=2&&SENSORY_ROLE.test(first))
+       raw=first+', '+last;
+     }
+    }
     // Stop prose continuations at their grammatical boundary. This retains
     // literal descriptors and conjunctions, but not a brewing instruction,
     // buying suggestion or a sentence describing the whole experience.
