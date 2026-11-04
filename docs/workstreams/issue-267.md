@@ -1,3 +1,13 @@
+## November 4 UTC — #267 strict S2-040 historical backlog + pinned frozen603 report, no code edit [skip netlify]
+
+**Verified original pin:** `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9`, frozen manifest #34 `docs/AUDIT_RECONCILIATION_BACKLOG_2026-10-17.md` blob `e48cc099d8693f374017985a9b2aac949aa7a881` **lines 1–120/120** individually read and interpreted in S2-040. Preserved older owner issue ordering and dated snapshots, explicitly not elevating retired Bags/BYOK/Custom or old release marker into current approval. Historic Hambela purge remains one-off closed; no member data operation.
+
+**Verified pinned current source:** `9707553a64f88127826e8f5b2b36cd0651296e83`, executable #43 `scripts/audit/coffee-corpus-report.py` blob `a7ef960de4f8abdcd673a0d2439ef6d12ef06c67`, **lines 1–110 of 370** individually read under expanded dimensions; live dev `31c1cbf3d8d57aa6102145c30cbb18c41ea46158` source blob identical (bounded prefix). Source status/CI integration reporter uses explicit ready predicates and conservative UNVERIFIED fallback; original603 comparison case_id duplicate overwrite is a WATCH awaiting remaining-code caller validation, not an independently reproduced defect. No new code/test/CI or production changes, and no claimed 603 full-suite/pass.
+
+**Strict totals:** Frozen **3037/579,961**; pinned **3519/57,913**; old V2 5,451/6,462 separately provisional. This batch adds **120 frozen +110 pinned** per-line evidence without double-credit. Prior S2-037–039 were nonforce merged with exact source checks, two confirmed local-source-audit fixes remain intact; other post-pin/live drift incomplete. Continue frozen #35 `docs/AUTHENTICATED_READ_ONLY_ACCEPTANCE_2026-10-20.md` line1 and pinned #43 `coffee-corpus-report.py` line111. #267 OPEN/NOT READY; no Netlify release or provider/member writes.
+
+---
+
 ## November 4 UTC — #267 S2-039 direct 90 historical/pinned lines + 72 exact merged live-change lines [skip netlify]
 
 **Owner/direct source:** dev `7c5d6b9e77dd19dffe2ec8444ff4dcfde8a57a33`, frozen `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9`, pinned executable `9707553a64f88127826e8f5b2b36cd0651296e83`. #267 predecessor PR501 and PR502 merged nonforce with source trees matching exact tested PR heads and six applicable PR-head SUCCESS each. Original603 intentionally SKIPPED, not a PASSED full corpus. Both fixes only changed local audit helper. Prior receipts S2-037/038 source text and all mandatory per-line dimensions independently revalidated 381 numbered lines with no holes. No concurrent S2-039 existed.
