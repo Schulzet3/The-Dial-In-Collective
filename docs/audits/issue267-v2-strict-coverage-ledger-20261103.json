@@ -5,23 +5,23 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 5360,
+    "strict_validated_lines": 5384,
     "first_unvalidated_manifest_file_index": 59,
     "first_unvalidated_path": "docs/DECISION_LEDGER.json",
-    "first_unvalidated_line": 470,
+    "first_unvalidated_line": 494,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 6986,
+    "strict_validated_lines": 7010,
     "first_unvalidated_file_index": 48,
     "first_unvalidated_path": "scripts/audit/coffee-frozen-ci.py",
-    "first_unvalidated_line": 2575,
+    "first_unvalidated_line": 2599,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true,
-    "strict_live_counterpart_checked_through_line": 2574
+    "strict_live_counterpart_checked_through_line": 2598
   },
   "post_pin_drift": {
     "observed_development_commit": "9f376d2ef7bf8569974215e06f4a5a36b2c0976d",
@@ -2025,11 +2025,34 @@
       "strict_frozen_delta": 24,
       "strict_pinned_delta": 24,
       "old_v2_additional_credit": 0
+    },
+    {
+      "batch": "S2-091",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-091.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        470,
+        493
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        2575,
+        2598
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "live_exact_text_line_offset": 2,
+      "live_blob": "926bfd49aed1e4426c2aa818b85ef7546d853a4f",
+      "strict_frozen_delta": 24,
+      "strict_pinned_delta": 24,
+      "old_v2_additional_credit": 0,
+      "stacked_pr_base": "audit/issue267-s2-090-20261104",
+      "verification": "All 48 source texts and nine dimensions read back; no runtime CI claimed"
     }
   ],
   "completion": "IN_PROGRESS",
   "test_limit": "Source-equivalence and per-line integrity only; no new app/runtime CI claims",
-  "last_batch": "S2-090",
-  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-090.json",
+  "last_batch": "S2-091",
+  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-091.json",
   "complete": false
 }
