@@ -57,6 +57,29 @@ test('post-staging unready development drift is excluded without weakening exact
    path==='site/card.js'&&sha===C?'unready late edit':validate.sourceObjectAt(sha,path)}),/changed during isolation/);
 });
 
+test('mixed READY/unready source can ship only exact pinned approved READY blob',()=>{
+ const overlap={...unfinished,id:'DIC-Q-102',issue:102,state:'TESTING',scope_paths:['site/card.js']};
+ const queue={...q,items:[one,unfinished,overlap]};
+ const overlapManifest={...manifest,pinned_to_ready_paths:['site/card.js']};
+ const sourceObjectAt=(sha,path)=>path==='site/card.js'?
+  (sha===A?'published-old':sha===B?'unready-mixed':'approved-ready'):
+  (sha===B?'unfinished':'published');
+ const input={...validate,manifest:overlapManifest,
+  stagedCommitChangedPaths:[...validate.stagedCommitChangedPaths,'site/card.js'],sourceObjectAt};
+ const planned=planReadyOnlyCandidate(queue,{...opts,pinnedReadyPaths:['site/card.js']});
+ assert.equal(planned.ready,true,planned.errors.join('; '));
+ const valid=validateReadyOnlyCandidate(queue,input);
+ assert.equal(valid.ready,true);
+ assert.deepEqual(valid.pinned_ready_paths,['site/card.js']);
+ assert.throws(()=>validateReadyOnlyCandidate(queue,{...input,
+  manifest:{...overlapManifest,pinned_to_ready_paths:[]}}),/candidate HOLD/);
+ assert.throws(()=>validateReadyOnlyCandidate(queue,{...input,
+  sourceObjectAt:(sha,path)=>path==='site/card.js'&&sha===C?'unready-mixed':sourceObjectAt(sha,path)}),/not actually isolated|edits after its verified READY merge/);
+ assert.throws(()=>validateReadyOnlyCandidate(queue,{...input,
+  stagedCommitChangedPaths:validate.stagedCommitChangedPaths}),/candidate HOLD/);
+ assert.equal(planReadyOnlyCandidate(queue,opts).ready,false);
+});
+
 test('unready same-file overlap blocks even if another READY item covers the path',()=>{
  const overlapping={...unfinished,scope_paths:['site/card.js']};
  const p=planReadyOnlyCandidate({...q,items:[one,overlapping]},opts);

@@ -10,7 +10,7 @@ export const CANDIDATE_RECEIPT_PATH='docs/RELEASE_CANDIDATE.json';
 export const CANDIDATE_JOURNAL_PATH='docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md';
 export const CANDIDATE_KIND='DIC-READY-ONLY-SOURCE-1';
 export function planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSourceSha,
- selectedIds,developmentChangedPaths,isAncestor}={}){
+ selectedIds,developmentChangedPaths,pinnedReadyPaths=[],isAncestor}={}){
  const errors=queueSchemaErrors(queue);
  if(!SHA.test(publishedSourceSha||'')||!SHA.test(developmentSourceSha||'')||
     typeof isAncestor!=='function')errors.push('Missing source anchors/ancestry');
@@ -41,7 +41,11 @@ export function planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSour
   }catch{errors.push(item.id+' READY ancestry unavailable');}
  }
  const changed=deployableChangedPaths(developmentChangedPaths||[]);
- const included=[],restored=[];
+ if(!Array.isArray(pinnedReadyPaths)||pinnedReadyPaths.some(x=>typeof x!=='string')||
+    new Set(pinnedReadyPaths).size!==pinnedReadyPaths.length)
+   errors.push('Invalid or duplicate pinned READY overlap paths');
+ const wantedPins=new Set(Array.isArray(pinnedReadyPaths)?pinnedReadyPaths:[]);
+ const included=[],restored=[],pinned=[];
  for(const path of changed){
   const owners=(queue?.items||[]).filter(i=>i.scope_paths?.includes(path));
   const chosen=owners.filter(i=>wanted.has(i.id)&&i.state==='READY');
@@ -49,8 +53,12 @@ export function planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSour
   const deployed=owners.filter(i=>i.state==='DEPLOYED');
   if(!owners.length||(!chosen.length&&!competing.length))
    errors.push('Untracked or DEPLOYED-only unpublished deployable source: '+path);
-  else if(chosen.length&&competing.length)
-   errors.push('READY/unready or unselected overlap cannot be isolated: '+path);
+  else if(chosen.length&&competing.length){
+   // Mixed READY/unready source is publishable ONLY when explicitly pinned to
+   // exact selected READY merged blob, independently verified below.
+   if(!wantedPins.has(path))errors.push('READY/unready or unselected overlap cannot be isolated: '+path);
+   else{included.push(path);pinned.push(path);}
+  }
   else if(chosen.length){
    if(deployed.some(i=>SHA.test(i.merged_source_sha||'')&&i.merged_source_sha!==publishedSourceSha)){
     // A historic DEPLOYED label can be inaccurate: fail closed if its merged
@@ -65,13 +73,15 @@ export function planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSour
    included.push(path);
   }else restored.push(path);
  }
+ for(const path of wantedPins)if(!pinned.includes(path))
+  errors.push('Pinned READY path is not an actual READY/unready overlap: '+path);
  if(!included.length)errors.push('No selected READY deployable change to release');
  for(const item of selected)if(!item.scope_paths?.some(p=>included.includes(p)))
   errors.push(item.id+' does not deliver an isolated deployable change');
  return {ready:errors.length===0,errors,published_source_sha:publishedSourceSha,
   development_source_sha:developmentSourceSha,selected_ids:sorted(selectedIds||[]),
   included_paths:sorted(included),restored_paths:sorted(restored),
-  original_changed_paths:changed,
+  original_changed_paths:changed,pinned_ready_paths:sorted(pinned),
   ready_items:selected.map(i=>({id:i.id,issue:i.issue,title:i.title,
    merged_source_sha:i.merged_source_sha,scope_paths:i.scope_paths})),
   other_items:(queue?.items||[]).filter(i=>i.state!=='READY'&&i.state!=='DEPLOYED')
@@ -132,14 +142,17 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  const plan=planReadyOnlyCandidate(queue,{
   publishedSourceSha,developmentSourceSha:manifest.development_source_sha,
   selectedIds:manifest.selected_ready_item_ids,
-  developmentChangedPaths,isAncestor});
+  pinnedReadyPaths:manifest.pinned_to_ready_paths||[],developmentChangedPaths,isAncestor});
  if(!plan.ready)reject(plan.errors.join('; '));
  if(!Array.isArray(manifest.restored_to_published_paths)||
     !equal(manifest.restored_to_published_paths,plan.restored_paths))
   reject('Restoration manifest differs from actual unready source inventory');
  if(!equal(deployableChangedPaths(candidateChangedPaths||[]),plan.included_paths))
   reject('Candidate app diff includes more or fewer than exact selected READY paths');
- const allowed=[...plan.restored_paths,CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH];
+ if(!Array.isArray(manifest.pinned_to_ready_paths||[])||
+    !equal(manifest.pinned_to_ready_paths||[],plan.pinned_ready_paths))
+  reject('Pinned READY manifest differs from actual mixed-source paths');
+ const allowed=[...plan.restored_paths,...plan.pinned_ready_paths,CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH];
  if(!equal(stagedCommitChangedPaths||[],allowed))
   reject('Candidate staging commit changes unrelated paths or lacks same-commit journal');
  for(const path of plan.restored_paths)
@@ -147,7 +160,11 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
    reject('Unready file was not exactly restored to published bytes: '+path);
  for(const path of plan.included_paths){
   const candidateBlob=sourceObjectAt(candidateSha,path);
-  if(candidateBlob!==sourceObjectAt(manifest.development_source_sha,path))
+  const isPinned=plan.pinned_ready_paths.includes(path);
+  if(isPinned){
+   if(candidateBlob===sourceObjectAt(manifest.development_source_sha,path))
+    reject('Pinned mixed-source READY file was not actually isolated: '+path);
+  }else if(candidateBlob!==sourceObjectAt(manifest.development_source_sha,path))
    reject('Selected READY file was changed during isolation: '+path);
   // A later, UNTRACKED commit touching an already READY path must not be
   // laundered into the release merely because the same path has a READY owner.
@@ -159,7 +176,7 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  }
  return {ready:true,errors:[],deployable_paths:plan.included_paths,
   ready_items:plan.ready_items,other_items:plan.other_items,
-  excluded_paths:plan.restored_paths,
+  excluded_paths:plan.restored_paths,pinned_ready_paths:plan.pinned_ready_paths,
   development_source_sha:manifest.development_source_sha,
   candidate_source_sha:candidateSha};
 }
