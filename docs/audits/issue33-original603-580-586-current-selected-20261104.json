@@ -121,5 +121,15 @@
   "netlify_publication": false,
   "production_operations": false,
   "certified_scope": "ONLY_SELECTED_586_TASTING_NOTES_CONTRADICTION",
-  "pending_case580": "Direct current selected subtitle Santa Maria, Huila and farm Santa Maria not captured by origin Colombia; requires separate generic proof and adversarial regression; do not infer release from harvest or dispatch."
+  "pending_case580": "Direct current selected subtitle Santa Maria, Huila and farm Santa Maria not captured by origin Colombia; requires separate generic proof and adversarial regression; do not infer release from harvest or dispatch.",
+  "queue_intake_failure_and_repair": {
+    "failed_commit": "2d4a764ea832fc6cfcd933c94adec7321ed3ba1b",
+    "failed_runs": [
+      41845312711,
+      41845312627
+    ],
+    "error": "scope paths must be exact deployable files",
+    "repair": "Remove only non-deployable tests/coffee-issue33-unlocked-selected-notes-conflict.test.mjs from queue scope_paths; keep recorded test and source SHA; all other READY rows preserved.",
+    "retry": "PENDING_EXACT_SOURCE_CI"
+  }
 }
