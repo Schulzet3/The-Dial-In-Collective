@@ -5,32 +5,32 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 2088,
+    "strict_validated_lines": 2288,
     "first_unvalidated_manifest_file_index": 30,
     "first_unvalidated_path": "docs/APPROVAL_COVERAGE_MATRIX.json",
-    "first_unvalidated_line": 401,
+    "first_unvalidated_line": 601,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 2537,
-    "first_unvalidated_file_index": 33,
-    "first_unvalidated_path": "scripts/audit/coffee-corpus-capture.py",
+    "strict_validated_lines": 2811,
+    "first_unvalidated_file_index": 36,
+    "first_unvalidated_path": "scripts/audit/coffee-corpus-freeze.py",
     "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "post_pin_drift": {
-    "observed_development_commit": "cb7a70fa171859ac9dbf5f64b5a8c8fa53182f20",
+    "observed_development_commit": "ebbf5158f5001f032eded369799d2cea96f0f8b4",
     "strict_validated_added_lines": 1,
     "scope": "Single verified addition in first current source path; total post-pin live-code delta denominator not yet reconciled",
     "rest_of_live_changes": "NOT_COMPLETELY_REVIEWED",
-    "live_fully_reviewed_files": 33,
-    "live_fully_reviewed_file_lines": 2673,
-    "latest_reviewed_live_path": "scripts/audit/ci-scope.mjs",
-    "remaining_live_changes": "All other unreviewed changed/new/renamed live paths still PENDING; not 100%",
+    "live_fully_reviewed_files": 36,
+    "live_fully_reviewed_file_lines": 2947,
+    "latest_reviewed_live_path": "scripts/audit/coffee-corpus-enrich.py",
+    "remaining_live_changes": "Three additional pinned current and live exact scripts reviewed; numerous other post-pin changed and new/renamed paths still pending",
     "machine_only_diff_inventory_in_receipt": "docs/audits/issue267-v2-strict-batches/S2-003.json",
     "machine_only_changed_paths": 222,
     "machine_only_diff_commits": 243,
@@ -836,6 +836,49 @@
       "live_lines": [
         1,
         116
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-033",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-033.json",
+      "frozen_file": "docs/APPROVAL_COVERAGE_MATRIX.json",
+      "frozen_lines": [
+        401,
+        600
+      ],
+      "frozen_blob": "8ddf1cb21c2a8bc015a37a69b460ca94c75c7ced",
+      "pinned_files": [
+        {
+          "index": 33,
+          "path": "scripts/audit/coffee-corpus-capture.py",
+          "lines": [
+            1,
+            120
+          ],
+          "blob": "77710632ac842004fbd979208165cacdab295f5c",
+          "live_same": true
+        },
+        {
+          "index": 34,
+          "path": "scripts/audit/coffee-corpus-compare.mjs",
+          "lines": [
+            1,
+            68
+          ],
+          "blob": "133d6dbab5edde53180d86d04849bda8b2afb9ea",
+          "live_same": true
+        },
+        {
+          "index": 35,
+          "path": "scripts/audit/coffee-corpus-enrich.py",
+          "lines": [
+            1,
+            86
+          ],
+          "blob": "3b01264afa39a679e873571657eed9d9de2f59c9",
+          "live_same": true
+        }
       ],
       "old_v2_extra_credit": 0
     }
