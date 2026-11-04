@@ -499,6 +499,34 @@
       "review_status": "PRIMARY_AUTHOR_ABSTRACT_2_COFFEES_11_GRINDS_XCT_PERMEABILITY_SIMULATION_READ; FULL_PAPER_METHODS_TABLES_NOT_VERIFIED",
       "source_bytes_sha256": null,
       "source_byte_caveat": "Institutional article abstract directly inspected and DOI corroborated. No publisher full-text methodological audit or PDF byte verification, no measured sensory effects."
+    },
+    {
+      "id": "LIT-2025-KIM-TEP-DISCRIMINATION",
+      "type": "external_primary_study",
+      "title": "The espresso protocol as a tool for sensory quality evaluation",
+      "authors": "Yejin Kim, Jihye An, Jeehyun Lee",
+      "published": "Epub 2025-01-03; Food Research International 2025 Feb 202:115670",
+      "doi": "10.1016/j.foodres.2025.115670",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/39967142/",
+      "access": "PRIMARY_PUBMED_ORIGINAL_AUTHOR_ABSTRACT_READ; full published methods/PDF not independently accessed",
+      "evidence_grade": "PEER_REVIEWED_ESPRESSO_EXPERT_JAR_CATA_DISCRIMINATION_NOT_VALIDATION_OF_FIVE_SCORE_APP",
+      "review_status": "BOUNDED_ORIGINAL_ABSTRACT_METHOD_RESULT_CHECK; full text/tables/byte hash open",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Original abstract directly read, full journal article not downloaded or hashed."
+    },
+    {
+      "id": "LIT-2025-CHOI-TEP-REPEATABILITY",
+      "type": "external_primary_study",
+      "title": "Cross-Cultural Comparison of the Espresso Protocol Repeatability",
+      "authors": "Jisoo Choi, Jeehyun Lee, Edgar Chambers IV",
+      "published": "2025-02-11",
+      "doi": "10.3390/foods14040593",
+      "url": "https://www.mdpi.com/2304-8158/14/4/593",
+      "access": "PRIMARY_PUBMED_ORIGINAL_ABSTRACT_AND_PUBLISHER_INDEXED_METHODS; direct MDPI open 429",
+      "evidence_grade": "PEER_REVIEWED_EXPERT_REPEATABILITY_CATA_CROSS_CULTURAL_LANGUAGE_LIMITATIONS_NOT_DIC_FIVE_SCORE_VALIDITY",
+      "review_status": "BOUNDED_ORIGINAL_ABSTRACT_AND_METHOD_EXCERPTS; full original HTML/PDF byte review pending",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Publisher first-party indexed methods available; direct open returned HTTP429. PubMed abstract directly read; original PDF bytes not downloaded/hashed."
     }
   ],
   "evidence_checks": [
@@ -1345,6 +1373,56 @@
       "current_app": "site/lib/constants.js Git blob 72221331ce4dffabe416eebec1ae2fceced3a095 style-specific starting priors and five taste scales; site/lib/model.js Git blob 19aaca401cab7bbd2059b9a34c6b8df263f4181c lines 38-46, 62-67 versions/recalibrations; site/lib/engine.js blob 063dac7593e6d8fa1cb889a0b74746b223dd4390 lines 429-445 limits comparisons to same calibration/setup/coffee and all other green ratings.",
       "result": "REJECT_UNTESTED_UNIVERSAL_EY_TEMP_TASTE_TARGET_FROM_BURR_WEAR_PAPER",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-023-A",
+      "source": "LIT-2025-KIM-TEP-DISCRIMINATION original 2025 PubMed abstract PMID 39967142",
+      "claim": "Expert TEP 2025 study evaluated 63 coffee professionals (32 US/Canada, 31 Australia/NZ) and 12 home-espresso-prepared coffees with JAR/CATA; reported CATA sample discrimination and no significant blind-duplicate difference under its experimental conditions. Not a study of DIC's five 1-to-5 user taste inputs.",
+      "grade": "PEER_REVIEWED_ORIGINAL_AUTHOR_ABSTRACT_DIRECT; full paper not inspected",
+      "primary_sources": [
+        "https://pubmed.ncbi.nlm.nih.gov/39967142/"
+      ],
+      "current_app": "Verified site/lib/ui.js Git blob 75c187740c5d36310b88fed0bcbf540b4ee70a2c five rating controls; site/cloud/main.js Git blob 79a6ed369c6c38946159b213fe38567e005f8e27 feedback selection; existing Locked scales and one-change recommendation.",
+      "result": "KEEP_FIVE_LOCKED_RATINGS_AND_NO_CLAIM_OF_FORMAL_FIVE_SCORE_VALIDITY",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-023-B",
+      "source": "LIT-2025-KIM-TEP-DISCRIMINATION PubMed abstract PMID 39967142",
+      "claim": "Original expert study reports correlation of willingness to brew espresso with overall quality scores and bounded repeatability, not randomized evidence that the DIC algorithm's yield/grind/temperature next-shot adjustment increases actual member sweetness or improves espresso.",
+      "grade": "PRIMARY_EXPERT_DESCRIPTIVE_CORRELATION_VERSUS_APP_CAUSAL_BOUNDARY",
+      "primary_sources": [
+        "https://pubmed.ncbi.nlm.nih.gov/39967142/"
+      ],
+      "current_app": "Verified site/lib/ui.js Git blob 75c187740c5d36310b88fed0bcbf540b4ee70a2c five rating controls; site/cloud/main.js Git blob 79a6ed369c6c38946159b213fe38567e005f8e27 feedback selection; existing Locked scales and one-change recommendation.",
+      "result": "NO_AUTOMATIC_NEW_TASTE_TARGET_OR_CUP_QUALITY_CLAIM",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-023-C",
+      "source": "LIT-2025-CHOI-TEP-REPEATABILITY publisher-indexed methods and original PubMed abstract PMID 40002036",
+      "claim": "Expert 2025 repeatability protocol tested 46 experienced coffee tasters, France 7, India 12, Italy 7, South Korea 10, USA 10, evaluating eight coffees in three replications using CATA. This demonstrates bounded expert instrument repeatability, not the app's exact five score scale repeatability.",
+      "grade": "PRIMARY_PUBMED_AUTHOR_ABSTRACT_AND_PUBLISHER_METHOD_EXCERPTS; full publisher HTML direct 429",
+      "primary_sources": [
+        "https://www.mdpi.com/2304-8158/14/4/593",
+        "https://pubmed.ncbi.nlm.nih.gov/40002036/"
+      ],
+      "current_app": "Verified site/lib/ui.js Git blob 75c187740c5d36310b88fed0bcbf540b4ee70a2c five rating controls; site/cloud/main.js Git blob 79a6ed369c6c38946159b213fe38567e005f8e27 feedback selection; existing Locked scales and one-change recommendation.",
+      "result": "DO_NOT_GENERALIZE_EXPERT_TEP_RELIABILITY_TO_UNTESTED_MEMBER_FIVE_SCORE_MODEL",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-023-D",
+      "source": "LIT-2025-CHOI-TEP-REPEATABILITY original abstracts and indexed methods",
+      "claim": "Repeatability study explicitly reports cross-country terminology differences and recommends lexicon training. This is a grounded caution about descriptors/translations, not an observed DIC UI language bug or permission to alter owner-Locked taste labels/data capture.",
+      "grade": "PRIMARY_AUTHOR_ABSTRACT_METHOD_BOUNDARIES; UX_HYPOTHESIS_ONLY",
+      "primary_sources": [
+        "https://www.mdpi.com/2304-8158/14/4/593",
+        "https://pubmed.ncbi.nlm.nih.gov/40002036/"
+      ],
+      "current_app": "Verified site/lib/ui.js Git blob 75c187740c5d36310b88fed0bcbf540b4ee70a2c five rating controls; site/cloud/main.js Git blob 79a6ed369c6c38946159b213fe38567e005f8e27 feedback selection; existing Locked scales and one-change recommendation.",
+      "result": "RESEARCH_ONLY_NO_UI_CHANGE_OR_OWNER_DECISION",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [],
@@ -1352,8 +1430,8 @@
     "application_code_changed": false,
     "tests_executed": false,
     "production_deployed": false,
-    "queue_changed": false,
-    "reason": "R455-021 two direct primary study identities, four constrained claim checks and scoped journal in exactly two files; no executable/test/Locked/approval/queue/production changes."
+    "queue_changed": true,
+    "reason": "R455-023 documentation-only receipt of independently verified prior PR605 UX fix, plus two additional bounded 2025 expert sensory studies/four checks. Exact-head PR605 and merge tests sourced from GitHub; this commit does not rerun app tests."
   },
   "next_actions": [
     "Verify original Griffiths journal full PDF only if needed and Wadsworth full methods when directly accessible; scientific claim verification does not authorize new app data capture or numeric sensory thresholds.",
@@ -1363,34 +1441,33 @@
     "Reconcile #267's independent V2 line review (zero strict credit from #455), #33 extractor and #96 security, avoiding overlap.",
     "Reconcile distinct accessible Library slow-feed PDF SHA-256 against original archive member only when authorized archive bytes available; Library page review does not verify member identity or unverified citations.",
     "Verify Schenker 2000 original table values for two roast processes (0.528/0.474, 622/747) from complete primary manuscript before marking numeric claims verified; ACS Smrke 2018 full manuscript remains not byte archived.",
-    "Continue actual UX code/test workflow review for one demonstrable narrow safe bug rather than speculative roast-age or cold-grind controls."
+    "Continue actual UX code/test workflow review for one demonstrable narrow safe bug rather than speculative roast-age or cold-grind controls.",
+    "R455-023: Continue full citation review of nine originals, raw inaccessible October29 ZIP/S019 PDFs and exact-byte provenance of Choi/Kim full manuscripts; assess translated label UX only after specific defect. No #267 V2 coverage credit."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-021",
-    "base_development_sha": "f25758d7cc6c3dbc8883953135fdb4ea8e4c8d5d",
-    "original_report": "ORG-09",
-    "original_blob": "1e1b8bbef0ecb05ed0b20195191bcad26663cf0d",
-    "engine_blob": "063dac7593e6d8fa1cb889a0b74746b223dd4390",
-    "model_blob": "19aaca401cab7bbd2059b9a34c6b8df263f4181c",
+    "id": "R455-023",
+    "base_development_sha": "ce019a84850b61d7e861fb1220cf1b51f24c51bd",
+    "original_source_sha_bound_review": "two novel primary 2025 expert espresso sensory studies and exact current UI/cloud Git blobs",
     "source_ids": [
-      "LIT-2018-GRIFFITHS-BURR-WEAR",
-      "LIT-2026-WADSWORTH-XCT-PERMEABILITY"
+      "LIT-2025-KIM-TEP-DISCRIMINATION",
+      "LIT-2025-CHOI-TEP-REPEATABILITY"
     ],
-    "source_claim_checks": [
-      "R455-EV-CIT-021-A",
-      "R455-EV-CIT-021-B",
-      "R455-EV-CIT-021-C",
-      "R455-EV-CIT-021-D"
+    "claim_ids": [
+      "R455-EV-CIT-023-A",
+      "R455-EV-CIT-023-B",
+      "R455-EV-CIT-023-C",
+      "R455-EV-CIT-023-D"
     ],
-    "number_of_curated_sources": 37,
-    "total_evidence_checks": 78,
-    "original_report_full_bodies_reviewed": "Prior 9/9 archived and read in earlier reviews; scoped ORG-09 sections directly reread; all original bibliography items not certified",
+    "number_of_curated_sources": 39,
+    "total_evidence_checks": 82,
+    "feedback_fix_merge_sha": "c319eacc74b7eb73bb40f53deb4cdfd1836f3857",
+    "feedback_fix_ready_not_deployed": true,
+    "exact_head_node": "2409 pass 0 fail 6 skip 41873115270",
+    "exact_merged_node": "2409 pass 0 fail 6 skip 41873987880 attempt2 success",
+    "original_pack_S019_byte_access": "unavailable",
+    "primary_full_papers": "not fully accessed or byte hashed",
+    "owner_decisions_changed": false,
     "github267_line_credit": 0,
-    "google_drive_search": "2026-11-04 scoped espresso and DIC searches: existing Roast Color sheet and DIC folder only, no newly opened research source",
-    "owner_project_library": "distinct slow-feed PDF searchable; October 29 ZIP pack and original S019 exact bytes not accessible",
-    "source_byte_limits": "Griffiths journal full HTML directly read, not raw-byte archived; Wadsworth author institutional original abstract only, publisher full methods/PDF not accessed",
-    "app_changes_in_this_commit": false,
-    "status": "FOUR_BURR_WEAR_XCT_CLAIM_CHECKS_DOCS_ONLY",
     "production_deployed": false
   },
   "policy_decisions_resolved": [
