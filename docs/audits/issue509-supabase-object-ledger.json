@@ -1153,7 +1153,7 @@
     "source_whitespace_tokens_semantically_read": 16880,
     "total_source_characters": 207402,
     "next_function_ordinal": null,
-    "next_object": "Provider extended scope: Auth/Storage/Realtime/cron/roles and platform SQL metadata/definitions; migration-source drift and access/advisor findings; source-specific Edge dependency modules beyond deployed files unverified",
+    "next_object": "Platform schema first direct table #1 auth.audit_log_entries (then auth #2 custom_oauth_providers), no private rows; migrations require content/historical mapping, not mere names",
     "other_objects": "99/99 application SQL function definitions, 46/46 application table catalog definitions, 9/9 accessible deployed Edge file variants complete; platform/vendor SQL, Auth/Storage/cron/Realtime, migration drift, external dependency calls, performance and limits still incomplete",
     "platform_objects": "COUNTS_INVENTORIED_ONLY; VENDOR SQL DEFINITIONS NOT REVIEWED",
     "edge_function_sources_reviewed": 9,
@@ -2655,6 +2655,28 @@
       "provider_writes": 0,
       "remaining": "Platform Auth/Storage/Realtime/cron/extensions/roles/migration detailed drift, advisor validation, logs/runtime and external deps",
       "next": "Inspect platform object inventory then read full accessible definitions in ordered bounded batches"
+    },
+    {
+      "run": "2026-11-04 UTC #509 platform metadata/Storage/cron/migration name and performance stats intake",
+      "provider_ref": "azviqqejypsefzilgonr",
+      "github_snapshot": "029aece78484f72c2054a8d3643b95abed5d26e8",
+      "platform_schemas_inventoried": 10,
+      "auth_table_count": 27,
+      "storage_table_count": 8,
+      "realtime_table_count": 3,
+      "storage_buckets": 0,
+      "cron_present": false,
+      "migration_names_match_production": true,
+      "live_migrations": 53,
+      "distinct_live_names": 52,
+      "release_sql_files": 52,
+      "development_sql_files": 53,
+      "one_undeployed_ready_migration": "dic_admin_invite_expiry_search",
+      "platform_semantically_reviewed": 0,
+      "performance_stats": "12 queryid-only cumulative timing/call metrics; no query text/raw SQL",
+      "provider_writes": 0,
+      "findings": "No confirmed vulnerability or performance fix from metadata; 10 SECURITY DEFINER warnings, 6 private no-policy INFO, 12 FK missing-index INFO, 9 unused-index INFO, retained for evidence/ownership",
+      "next": "auth.audit_log_entries full catalog definition #1; other provider surfaces incomplete"
     }
   ],
   "state": "APP_SQL_FUNCTIONS_99_OF_99; APP_TABLES_46_OF_46_COMPONENTS_DIRECTLY_READ; EDGE_DEPLOYED_SOURCE_9_OF_9_VARIANTS; FULL_PROVIDER_AUDIT_IN_PROGRESS; #527_READY_NOT_DEPLOYED",
@@ -3453,5 +3475,187 @@
     "preview_bundle_old_helper_only_normalizeWords": true,
     "preview_helper_exact_identity_verified": true,
     "next": "Enumerate platform schema, Storage/Auth/Reatime/cron, migrations/roles and advisor/security/runtime logs; no deployment"
+  },
+  "provider_platform_metadata_intake": {
+    "status": "METADATA_ONLY_NO_PLATFORM_SEMANTIC_REVIEW_CREDIT",
+    "provider_ref": "azviqqejypsefzilgonr",
+    "schemas": {
+      "auth": {
+        "tables": 27,
+        "views": 0,
+        "functions": 4,
+        "sequences": 1,
+        "indexes": 111,
+        "rls_enabled": 16,
+        "rls_disabled": 11
+      },
+      "extensions": {
+        "tables": 0,
+        "views": 2,
+        "functions": 90
+      },
+      "graphql_public": {
+        "functions": 1
+      },
+      "private": {
+        "tables": 24,
+        "functions": 57,
+        "sequences": 5,
+        "indexes": 31,
+        "policies": 18,
+        "rls_enabled": 24
+      },
+      "public": {
+        "tables": 22,
+        "functions": 42,
+        "indexes": 67,
+        "policies": 24,
+        "rls_enabled": 22
+      },
+      "realtime": {
+        "tables": 3,
+        "functions": 18,
+        "sequences": 1,
+        "indexes": 6,
+        "rls_enabled": 1,
+        "rls_disabled": 2
+      },
+      "storage": {
+        "tables": 8,
+        "functions": 19,
+        "indexes": 20,
+        "rls_enabled": 8
+      },
+      "supabase_migrations": {
+        "tables": 1,
+        "indexes": 2
+      },
+      "vault": {
+        "tables": 1,
+        "views": 1,
+        "functions": 5,
+        "indexes": 2
+      }
+    },
+    "installed_extensions": [
+      [
+        "pg_stat_statements",
+        "1.11"
+      ],
+      [
+        "pg_trgm",
+        "1.6"
+      ],
+      [
+        "pgcrypto",
+        "1.3"
+      ],
+      [
+        "plpgsql",
+        "1.0"
+      ],
+      [
+        "supabase_vault",
+        "0.3.1"
+      ],
+      [
+        "unaccent",
+        "1.1"
+      ],
+      [
+        "uuid-ossp",
+        "1.1"
+      ]
+    ],
+    "storage_buckets_count": 0,
+    "storage_public_buckets_count": 0,
+    "cron_schema_present": false,
+    "cron_jobs": "NOT_INSTALLED_NO_PG_CRON_SCHEMA; other external schedules not inferred",
+    "migration_history": {
+      "live_applied_versions": 53,
+      "live_distinct_names": 52,
+      "published_source_files": 52,
+      "development_source_files": 53,
+      "normalized_logical_names_production_live_match": true,
+      "development_only_unapplied": [
+        "dic_admin_invite_expiry_search"
+      ],
+      "duplicate_live_migration_name_versions": [
+        [
+          "20261022162910",
+          "dic_admin_shot_coffee_group_identity"
+        ],
+        [
+          "20261022165047",
+          "dic_admin_shot_coffee_group_identity"
+        ]
+      ],
+      "statement": "Timestamp versions differ between current source file names and live applied migration versions for many historic same-named migrations; name comparison alone is not SQL body/DDL drift verification, do not rewrite history."
+    },
+    "advisors": {
+      "security": [
+        {
+          "code": "rls_enabled_no_policy",
+          "count": 6,
+          "classification": "INFO private tables with no direct authenticated grant; not proven exposure"
+        },
+        {
+          "code": "authenticated_security_definer_function_executable",
+          "count": 10,
+          "classification": "WARN needs per-guard checks; #96 owns signed-in auth"
+        },
+        {
+          "code": "auth_leaked_password_protection",
+          "count": 1,
+          "classification": "WARN previously owner accepted beta exception"
+        }
+      ],
+      "performance": [
+        {
+          "code": "unindexed_foreign_keys",
+          "count": 12,
+          "classification": "INFO not justified until query/constraint and write-pattern evidence"
+        },
+        {
+          "code": "unused_index",
+          "count": 9,
+          "classification": "INFO zero scan counters alone not deletion proof"
+        }
+      ],
+      "official_docs": "https://supabase.com/docs/guides/observability/advisors"
+    },
+    "pg_stat_statements_read_only_fingerprints": {
+      "queries_ranked": 12,
+      "text_or_private_literals_retrieved": false,
+      "top_query_ids": [
+        {
+          "queryid": "1725044562985116050",
+          "calls": 4671,
+          "total_ms": 67670.79,
+          "mean_ms": 14.49
+        },
+        {
+          "queryid": "1554751528326282872",
+          "calls": 27,
+          "total_ms": 15055.79,
+          "mean_ms": 557.62
+        },
+        {
+          "queryid": "-7726440967385220442",
+          "calls": 89,
+          "total_ms": 14384.19,
+          "mean_ms": 161.62
+        },
+        {
+          "queryid": "-2647655532108368607",
+          "calls": 29,
+          "total_ms": 13588.91,
+          "mean_ms": 468.58
+        }
+      ],
+      "classification": "CANDIDATE_ONLY; query text/plan/attribution not reviewed, no proven app bottleneck"
+    },
+    "privacy": "NO auth/member/shot/notes row values, storage objects, secrets or raw SQL query text fetched",
+    "next": "Platform lexical definition review auth.audit_log_entries table #1; then remaining 26 Auth, eight Storage and three Realtime tables, provider platform functions, grants and external source/CI migration diff; no privileged schema changes"
   }
 }
