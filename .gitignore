@@ -1,0 +1,49 @@
+# Credentials and local service configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+token.json
+service-account*.json
+supabase/.temp/
+
+# User data, backups and local exports must never be committed
+backups/
+exports/
+*.dump
+*.backup
+*.sql.gz
+*Prototype_Import*.json
+Pasted text*.txt
+
+# Build/local development artifacts
+node_modules/
+dist/
+qa_artifacts/
+__pycache__/
+*.py[cod]
+.DS_Store
+*.log
+coverage/
+
+# Additional local-only credential and recovery formats (public visibility preflight #630)
+*.p8
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.kdbx
+id_rsa
+id_ecdsa
+id_ed25519
+.ssh/
+.aws/
+.netrc
+.npmrc
+.pypirc
+*.age
+*.sqlite
+*.sqlite3
+*.sql.gz
