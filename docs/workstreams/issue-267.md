@@ -1,3 +1,15 @@
+## November 4 UTC — #267 S2-039 direct 90 historical/pinned lines + 72 exact merged live-change lines [skip netlify]
+
+**Owner/direct source:** dev `7c5d6b9e77dd19dffe2ec8444ff4dcfde8a57a33`, frozen `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9`, pinned executable `9707553a64f88127826e8f5b2b36cd0651296e83`. #267 predecessor PR501 and PR502 merged nonforce with source trees matching exact tested PR heads and six applicable PR-head SUCCESS each. Original603 intentionally SKIPPED, not a PASSED full corpus. Both fixes only changed local audit helper. Prior receipts S2-037/038 source text and all mandatory per-line dimensions independently revalidated 381 numbered lines with no holes. No concurrent S2-039 existed.
+
+**New strict inspection:** Original file #33 `docs/AUDIT_AND_RELEASE_PREFLIGHT_2026-10-20.md` **38/38**, pinned current executable #42 `scripts/audit/coffee-corpus-report-browser.mjs` **52/52**, source SHA exact and current source identical. Separately directly read the two changed merged local browser source lines **26 and 28** (blob `cb849c7feb0f40852a15bcf1448aaee66d181b55`) and all **32** source-extracted public URL tests + **38** selected-packet tests at their live blobs, all 72 unique live new/modified lines separately source-bound without adding them to frozen/pinned denominators. Old 63 unchanged browser-audit lines reuse actual prior direct source review; source no duplication. Complete 162 unique line records in S2-039, no reviewer-human claim. Strict totals after this batch **2,917/579,961 historical** and **3,409/57,913 pinned**; old R2/C2 5,451 and 6,462 stay provisional. Remaining live drift (hundreds of files) NOT finished.
+
+**Source findings:** Local generated original603 report browser harness checks actual local file DOM at 390/1280 and aborts outbound HTTP/S, but is not a live signed-in app test. Current URL trailing-dot bypass and omitted selected source packets are fixed/merged with explicit no-network tests. DNS-private resolution, receipt revalidation and many other live source changes are still untriaged. This evidence-only batch does not exercise real Chromium/report/UI/Auth, public source network, SQL, provider, original603 full replay, release or READY queue changes.
+
+**NEXT:** historical inventory #34 `docs/AUDIT_RECONCILIATION_BACKLOG_2026-10-17.md` line1; pinned executable #43 `scripts/audit/coffee-corpus-report.py` line1. Need independent source-CI readback after docs-only merge; issue OPEN.
+
+---
+
 ## November 4 UTC — Issue #267 S2-038 direct 240 lines and fail-closed missing public audit packet selection [skip netlify]
 
 **Recovered source:** dev `fbe824da7cf7c7623996ceb7b71d1285f757cefb`, original frozen `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9`, pinned executable `9707553a64f88127826e8f5b2b36cd0651296e83`; same current #267/#33/#96 and latest Locked #457. Previous S2-037 merged with exact tree identical and six head checks SUCCESS; the separately merged-source CI was pending when this batch began. New S2-038 did not exist at checked development head; previous strict ledger counts were 2,786 frozen/3,210 pinned; old V2 totals separate provisional.
