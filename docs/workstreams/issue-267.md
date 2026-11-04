@@ -1,3 +1,11 @@
+## November 4, 2026 — #267 S2-034 strict historical matrix and original603 local corpus helper audit [skip netlify]
+
+Recovered `development/backend-foundation` at `da891ab18581cec871d16cf4e202a8117d51d94a` and in-flight #267 PR496 (no overlap with archived records), exact original `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9` and pinned `9707553a64f88127826e8f5b2b36cd0651296e83`; checked AGENTS, current status, context/preflight, latest #457 owner Locked, #33, #96, old V2 vs strict ledgers, and source-bound prior S2-033. [S2-034](../audits/issue267-v2-strict-batches/S2-034.json) individually inspects frozen approval matrix #30 **601-800 (200)** and pinned #36 `coffee-corpus-freeze.py` **1-65**, pinned #37 `coffee-corpus-image-audit.py` **1-75 (75)**. All **340** numbered source-text records individually accounted for, with behavior, quality, security/bug/performance risk, obsolescence, duplication, exact-match live counterpart, testability, improvement and Locked fit.
+
+Frozen historic candidate12, retired Custom/Experiments/Bags/Basket histories are not current publication/test evidence. Reproduced malformed input validation bug in local gallery helper (PR496 pending separate exact-source checks); independent DNS and Python assert/-O risks remain WATCH, not fixed. No oracle/capture/scorer/member data modifications or deployments. Strict totals **2,488 historical / 2,951 pinned**, no duplicate old V2 credit. Next frozen #30 line801 and pinned #37 line76.
+
+---
+
 ## November 4, 2026 — #267 confirmed local OCR malformed image URL bug, focused fix [skip netlify]
 
 **Authority/source:** Owner #267 development only. Recovered exact development `3fb6a2dedca7bd11cb663c051a68b8ddaf758140`; source `scripts/audit/coffee-corpus-image-audit.py` blob `2cc81eae9c06a5f337a908ca016d3885137cf084` unchanged from pinned current. Current #33 PR367 changes disjoint extractor paths, #96 maintains separate Auth/privacy scope; no overlap with this helper/test. Latest #457 risk-based CI and no-publication rules remain.
