@@ -136,7 +136,9 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
  const sameOld=qual.filter(sh=>sh.coffeeId===c.id&&sh.calibrationId!==v.calibrationId&&sh.setupVersionId===v.id&&(!familyId||sh.familyId===familyId));
  // Old calibration rows may legitimately seed an estimated translation, but
  // legacy rows without an equipment snapshot must not yield null guidance.
- const translated=sameOld.filter(sh=>sh.snapshot&&sh.timestamp)
+ // Legacy success records without a usable chronological timestamp remain
+ // preserved, but cannot establish the latest previous-calibration reference.
+ const translated=sameOld.filter(sh=>sh.snapshot&&typeof sh.timestamp==='string'&&sh.timestamp.trim())
   .sort((a,b)=>b.timestamp.localeCompare(a.timestamp))
   .map(sh=>translateGrind(sh,v)).find(finite);
  if(finite(translated))return {value:translated,source:'Estimated from previous calibration',proven:false};

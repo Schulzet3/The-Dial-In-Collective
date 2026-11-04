@@ -4654,6 +4654,27 @@
       "blockers": [],
       "notes": "NARROW SOURCE VERIFIED READY, NOT DEPLOYED. #62 Organic Peru current national MOST coffee in Andes is not the selected lot's proven growing region; Peru remains grounded. Exact original603 semantic certification and #106 current finer origin require future adjudication; parent #33 OPEN, #267 V2/#96 separate. No production release or writes.",
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33"
+    },
+    {
+      "id": "DIC-Q-455-previous-calibration-date",
+      "issue": 455,
+      "title": "Ignore undated legacy history when selecting the newest prior-calibration grind estimate",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Source-level reproducible candidate: grindGuidance previous-calibration selector admitted whitespace timestamps (and truthy nonstring timestamps) when ordering historical success rows; exact base c7574439e90a9bc6332960fba97bf7a8b97f3e89.",
+        "Added Node22 negative/positive real-module regression for whitespace/numeric/null undated rows versus a dated same-coffee successful old-calibration shot; source-level hypotheses only, test not yet executed.",
+        "Required exact-source Node22/UX/offline/governance tests and merge-bound verification PENDING; original603 SKIPPED/NOT_APPLICABLE, not PASS."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Applicable exact-commit automated tests not yet executed and branch not integrated."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "SAFE Locked-compatible chronological evidence integrity; preserve all private shot history, five sensory ratings, grinder translation rules and existing fallback. Development PR only, NOT READY or deployed."
     }
   ],
   "history": [
