@@ -5,9 +5,9 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 1211,
-    "first_unvalidated_manifest_file_index": 22,
-    "first_unvalidated_path": "build_cloud.mjs",
+    "strict_validated_lines": 1301,
+    "first_unvalidated_manifest_file_index": 24,
+    "first_unvalidated_path": "docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md",
     "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
@@ -15,35 +15,27 @@
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 1217,
-    "first_unvalidated_file_index": 21,
-    "first_unvalidated_path": ".github/workflows/visual-review.yml",
+    "strict_validated_lines": 1401,
+    "first_unvalidated_file_index": 23,
+    "first_unvalidated_path": "build_cloud.mjs",
     "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "post_pin_drift": {
-    "observed_development_commit": "41000d12a1d878efd25409dfac1cd14d42378e33",
+    "observed_development_commit": "9f261acffc2ffc6f5d5468f19dba03ed225aa56a",
     "strict_validated_added_lines": 1,
     "scope": "Single verified addition in first current source path; total post-pin live-code delta denominator not yet reconciled",
     "rest_of_live_changes": "NOT_COMPLETELY_REVIEWED",
-    "live_fully_reviewed_files": 22,
-    "live_fully_reviewed_file_lines": 1362,
+    "live_fully_reviewed_files": 24,
+    "live_fully_reviewed_file_lines": 1488,
     "latest_reviewed_live_path": ".github/workflows/nightly-backup.yml",
-    "remaining_live_changes": "Visual workflow and numerous other live source changes NOT YET reviewed",
+    "remaining_live_changes": "Other post-pin paths pending; #267 remains open",
     "machine_only_diff_inventory_in_receipt": "docs/audits/issue267-v2-strict-batches/S2-003.json",
     "machine_only_changed_paths": 222,
     "machine_only_diff_commits": 243,
     "other_live_paths_direct_semantic_status": "UNREVIEWED — unchanged first 4 workflows newly audited plus prior S2-001..004 only",
-    "partially_read_live_paths": [
-      {
-        "path": ".github/workflows/visual-review.yml",
-        "blob_sha": "61173f8a9dffdd5fba82823b2b2cf3d5ba4841bf",
-        "total_lines": 86,
-        "strict_individual_line_coverage": 0,
-        "reason": "Historical source reviewed, live refactored manual-only workflow still needs separate per-line evidence"
-      }
-    ],
+    "partially_read_live_paths": [],
     "latest_partially_validated_live_path": ".github/workflows/roaster-source-probe.yml",
     "strict_validated_changed_live_lines": 2,
     "roaster_source_probe": {
@@ -59,6 +51,29 @@
         137
       ],
       "status": "FULL_SOURCE_LINE_REVIEW"
+    },
+    "visual_full_live": {
+      "blob_sha": "61173f8a9dffdd5fba82823b2b2cf3d5ba4841bf",
+      "total_lines": 86,
+      "receipt": "S2-022",
+      "exact_retained_pinned_lines": 83,
+      "live_new_lines": [
+        5,
+        6,
+        7
+      ]
+    },
+    "build_full_live": {
+      "blob_sha": "e7b64951452601c25cdc2a5e1069d4816e1421c2",
+      "total_lines": 40,
+      "receipt": "S2-022",
+      "new_or_changed_live_lines": [
+        15,
+        16,
+        17,
+        18,
+        27
+      ]
     }
   },
   "batches": [
@@ -561,6 +576,49 @@
       ],
       "pinned_blob": "0eb072639634963edb4374b4578630ff7f3d96d3",
       "reused_pinned_semantic_receipt": "S2-016",
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-022",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-022.json",
+      "frozen_file": "build_cloud.mjs",
+      "frozen_lines": [
+        1,
+        37
+      ],
+      "frozen_blob": "4352b50ae7bbe5b41904fb3c317978220c82dfe1",
+      "pinned_file": ".github/workflows/visual-review.yml",
+      "pinned_lines": [
+        1,
+        98
+      ],
+      "pinned_blob": "2b266cfe079d7d93815446cf49c099e26d7e7cef",
+      "live_visual_full": [
+        1,
+        86
+      ],
+      "live_build_full": [
+        1,
+        40
+      ],
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-023",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-023.json",
+      "frozen_file": "docs/ACTIVE_DECISION_AND_REQUIREMENT_RECONCILIATION_2026-10-19.md",
+      "frozen_lines": [
+        1,
+        53
+      ],
+      "frozen_blob": "1c78797e184c6cb8122bc45b59398c7530333496",
+      "pinned_file": ".github/workflows/weekly-full-regression.yml",
+      "pinned_lines": [
+        1,
+        86
+      ],
+      "pinned_blob": "1fae89f9b7f514986a65b622506a11f78d623b36",
+      "reused_semantic_receipt": "S2-018",
       "old_v2_extra_credit": 0
     }
   ],
