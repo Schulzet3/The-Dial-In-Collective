@@ -5,32 +5,33 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 5156,
+    "strict_validated_lines": 5186,
     "first_unvalidated_manifest_file_index": 59,
     "first_unvalidated_path": "docs/DECISION_LEDGER.json",
-    "first_unvalidated_line": 266,
+    "first_unvalidated_line": 296,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 6782,
+    "strict_validated_lines": 6812,
     "first_unvalidated_file_index": 48,
     "first_unvalidated_path": "scripts/audit/coffee-frozen-ci.py",
-    "first_unvalidated_line": 2371,
+    "first_unvalidated_line": 2401,
     "legacy_v2_reported_count": 6462,
-    "legacy_v2_reported_count_is_not_strict_validated": true
+    "legacy_v2_reported_count_is_not_strict_validated": true,
+    "strict_live_counterpart_checked_through_line": 2400
   },
   "post_pin_drift": {
-    "observed_development_commit": "84e1720ab0eed83dabdce65709ce46e6efde49e4",
+    "observed_development_commit": "e72027d8ee96081ba1a1566d78e1c589d5b6517f",
     "strict_validated_added_lines": 1,
     "scope": "Single verified addition in first current source path; total post-pin live-code delta denominator not yet reconciled",
     "rest_of_live_changes": "NOT COMPLETE. Original project instructions rewritten 35-line live policy independently read/classified in S2-045; no original frozen/source counters credited. Pinned retention script identical live at observed head.",
     "live_fully_reviewed_files": 36,
     "live_fully_reviewed_file_lines": 2947,
     "latest_reviewed_live_path": "scripts/audit/coffee-corpus-enrich.py",
-    "remaining_live_changes": "INCOMPLETE—S2-080 confirms 90 exact current counterparts but never certifies unreviewed post-pin paths",
+    "remaining_live_changes": "INCOMPLETE; live changed paths beyond individually reviewed pinned counterparts are not certified.",
     "machine_only_diff_inventory_in_receipt": "docs/audits/issue267-v2-strict-batches/S2-003.json",
     "machine_only_changed_paths": 222,
     "machine_only_diff_commits": 243,
@@ -1890,11 +1891,31 @@
       "strict_frozen_delta": 45,
       "strict_pinned_delta": 50,
       "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-085",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-085.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        266,
+        295
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        2371,
+        2400
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "live_pinned_blob": "926bfd49aed1e4426c2aa818b85ef7546d853a4f",
+      "strict_frozen_delta": 30,
+      "strict_pinned_delta": 30,
+      "old_v2_extra_credit": 0
     }
   ],
   "completion": "IN_PROGRESS",
   "test_limit": "Source-equivalence and per-line integrity only; no new app/runtime CI claims",
-  "last_batch": "S2-084",
-  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-084.json",
+  "last_batch": "S2-085",
+  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-085.json",
   "complete": false
 }
