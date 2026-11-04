@@ -5,9 +5,9 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 2879,
-    "first_unvalidated_manifest_file_index": 33,
-    "first_unvalidated_path": "docs/AUDIT_AND_RELEASE_PREFLIGHT_2026-10-20.md",
+    "strict_validated_lines": 2917,
+    "first_unvalidated_manifest_file_index": 34,
+    "first_unvalidated_path": "docs/AUDIT_RECONCILIATION_BACKLOG_2026-10-17.md",
     "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
@@ -15,9 +15,9 @@
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 3357,
-    "first_unvalidated_file_index": 42,
-    "first_unvalidated_path": "scripts/audit/coffee-corpus-report-browser.mjs",
+    "strict_validated_lines": 3409,
+    "first_unvalidated_file_index": 43,
+    "first_unvalidated_path": "scripts/audit/coffee-corpus-report.py",
     "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true
@@ -107,19 +107,31 @@
       "live_source_line_records": 206,
       "all_other_postpin_drift_complete": false
     },
-    "pending_source_fix": {
-      "path": "scripts/audit/coffee-corpus-render.mjs",
-      "line": 28,
-      "head_base_commit": "89a65bc0ac09d27b2df59c4824c363b078caaa83",
-      "original_pinned_blob": "4f10bd3c97b1e96c448e242912d6c6c5758af136",
-      "scope": "URL guard trailing-dot loopback bypass; separate live delta semantic review required after merge"
-    },
-    "pending_local_corpus_selection_fix": {
-      "path": "scripts/audit/coffee-corpus-render.mjs",
-      "source_head": "fbe824da7cf7c7623996ceb7b71d1285f757cefb",
-      "source_line": 26,
-      "issue": "Missing selected URL case silently omitted, falsifies aggregate complete status",
-      "status": "PATCH_PENDING_EXACT_PR_HEAD_TESTS"
+    "strict_reviewed_local_corpus_url_packet_fixes": {
+      "source_commit": "7c5d6b9e77dd19dffe2ec8444ff4dcfde8a57a33",
+      "source_blob": "cb849c7feb0f40852a15bcf1448aaee66d181b55",
+      "changed_line_numbers": [
+        26,
+        28
+      ],
+      "unchanged_pinned_lines": 63,
+      "tests": [
+        {
+          "path": "tests/audit/coffee-corpus-render-url-gate.test.mjs",
+          "blob": "43322091ef8df78d58d3235f2ba43fde338739f4",
+          "lines": 32
+        },
+        {
+          "path": "tests/audit/coffee-corpus-render-selection.test.mjs",
+          "blob": "7962155c237535189bfe8f3499e7f88abdf67090",
+          "lines": 38
+        }
+      ],
+      "source_changed_lines": 2,
+      "unique_new_test_lines": 70,
+      "total_unique_live_deltas_reviewed": 72,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-039.json",
+      "remaining_drift": "INCOMPLETE"
     }
   },
   "batches": [
@@ -1060,6 +1072,47 @@
       "pinned_blob": "adf7115358cf9069c6e146e9ec983705575e1863",
       "prepatch_live_same": true,
       "code_patch": "scripts/audit/coffee-corpus-render.mjs line 26",
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-039",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-039.json",
+      "frozen_file": "docs/AUDIT_AND_RELEASE_PREFLIGHT_2026-10-20.md",
+      "frozen_lines": [
+        1,
+        38
+      ],
+      "frozen_blob": "bfde7bd4926b32dfdc502104eb0a30fa98486ef1",
+      "pinned_file": "scripts/audit/coffee-corpus-report-browser.mjs",
+      "pinned_lines": [
+        1,
+        52
+      ],
+      "pinned_blob": "03869094aca9b88baf1c235af49dfd5bf996098f",
+      "live_changed_lines": [
+        {
+          "path": "scripts/audit/coffee-corpus-render.mjs",
+          "lines": [
+            26,
+            28
+          ]
+        },
+        {
+          "path": "tests/audit/coffee-corpus-render-url-gate.test.mjs",
+          "lines": [
+            1,
+            32
+          ]
+        },
+        {
+          "path": "tests/audit/coffee-corpus-render-selection.test.mjs",
+          "lines": [
+            1,
+            38
+          ]
+        }
+      ],
+      "extra_live_unique_reviewed": 72,
       "old_v2_extra_credit": 0
     }
   ],
