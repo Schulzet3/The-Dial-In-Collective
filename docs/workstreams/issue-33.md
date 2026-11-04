@@ -1,3 +1,9 @@
+## November 4 UTC — PR535 queue schema failure repaired (still TESTING)
+
+Corrected head `6bd98848c778bfc71dea0c3647b2b51d1b7e18ec` [approval41805359723](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41805359723) genuinely **FAILED**: release queue requires `merged_source_sha:null` on unmerged IN_PROGRESS and only **deployable** `scope_paths`, not the separate test file. The first queue patch addressed intake tracking but violated those two schema constraints. This same-commit correction explicitly sets `merged_source_sha:null`, narrows its queue scope to `src/server/coffee-page-metadata.mjs`; the tests remain tracked in this journal/PR and will run independently. No code, app behavior, existing queue items, frozen603, provider or production changed. Earlier failure is retained in history; rerun exact revised-head approval, Node and live official product before any merge/READY.
+
+---
+
 ## November 4 UTC — Issue33 #23 first PR535 CI failure diagnosed; queue intake tracking repaired (TESTING)
 
 **First PR head** `4a4778797346f4bc7dc9967218fbf6802af0cdde`, [approval run41805079384](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41805079384) genuinely **FAILED**: queue intake reported untracked changed application file `src/server/coffee-page-metadata.mjs`. This is a tracking/continuity error, not a parser outcome. Existing security run41805079607, isolated SQL41805079362 and private source review41805079386 **SUCCESS**; app Node/cloud UX not finished at the moment of this checkpoint; original frozen603 run41805079288 **SKIPPED**, not passed. Do not relabel the initial failed check success.
