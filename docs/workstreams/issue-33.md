@@ -1,3 +1,9 @@
+## November 4 UTC — #33 pre-CI fixture review found an escaped regex in new tests (TESTING)
+
+Static branch readback detected that three source-window regular expressions were accidentally double-escaped (matching literal `\\s` instead of actual whitespace). Replaced only those test regex tokens before claiming any passing tests. Parser/source logic unchanged. Prior first PR head remains an unverified CI outcome; corrected head must pass genuine Node and exact-head checks. SAME-COMMIT journal update. [skip netlify]
+
+---
+
 ## November 4 UTC — #33 three yearless harvest-window source adjudications (#22/#286/#287), TESTING
 
 **Recovery/authority:** Autonomous Issue #33 development only, start development `f9db48985cb7610895ae0792ea6d2fcdabe0f3a2`, AGENTS, AI entrypoint/preflight, current journal/status, Master Spec, Decision Ledger, approval coverage and queue read; #267 V2 and #96 remain separately owned; open PR367 not modified. Existing READY 7 / DEPLOYED 90 / IN_PROGRESS 3 remain unchanged; Release14 production unchanged. Original603 Oct29 CSV blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6` preserved.

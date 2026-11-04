@@ -24,19 +24,19 @@ const cases=[
   specs:[['Altitude','1220 MASL'],['Varietal','Bourbon, Catuai, Caturra, Typica'],['Process','Natural'],
    ['Harvest','December - April']],
   story:['A rich and incredibly sweet cup with raspberry, jam, cranberry and cherry.'],
-  harvest:/December\\s*-\\s*April/i},
+  harvest:/December\s*-\s*April/i},
  {id:286,name:'Ethiopia Worka Sakaro',roaster:'Roadmap CoffeeWorks',
   url:'https://roadmapcoffeeworks.com/products/ethiopia-worka-sakaro-anaerobic',
   specs:[['Farm','400 smallholder farms'],['Region','Worka Chelbesa, Gedio, Gedeb'],
    ['Production Method','Anaerobic Natural'],['Harvest','Nov - Jan']],
   story:['Coffee Review quotation published in November 2025 describes this coffee, not its selected harvest year.'],
-  harvest:/Nov\\s*-\\s*Jan/i},
+  harvest:/Nov\s*-\s*Jan/i},
  {id:287,name:'Mexico Angel Albino Corzo',roaster:'Roadmap CoffeeWorks',
   url:'https://roadmapcoffeeworks.com/products/mexico-cesmach',
   specs:[['Farm','FFESICH Cooperative'],['Region','Chiapas'],['Production Method','Washed'],
    ['Harvest','December - March']],
   story:['Angel Albino Corzo is the region; the selected coffee comes from FFESICH Cooperative.'],
-  harvest:/December\\s*-\\s*March/i}
+  harvest:/December\s*-\s*March/i}
 ];
 for(const item of cases){
  test('original603 #'+item.id+' current yearless harvest window is NOT a release edition',()=>{
