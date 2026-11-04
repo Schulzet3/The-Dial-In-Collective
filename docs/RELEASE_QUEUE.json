@@ -4146,6 +4146,43 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "Narrow Issue33 #23 selected origin discrepancy READY in DEVELOPMENT, NOT DEPLOYED. Full 603 source audit remains OPEN; original 603/201/1197, original CSV, oracle and scorer unchanged. No whole coffee manual_certified claim, no guessed historic roast, no publication/provider/member writes. #267 V2 and #96 independent; all previous queue items preserved."
+    },
+    {
+      "id": "DIC-Q-33-bluejazz-selected-sensory-brightness",
+      "issue": 33,
+      "pr": 546,
+      "title": "Preserve current selected Blue Jazz Guatemala stone fruit and literal lemony brightness tasting profile",
+      "state": "READY",
+      "merged_source_sha": "13c7a7b535628c2033e655906618964d9cfd07bb",
+      "scope_paths": [
+        "src/server/coffee-flavor-evidence.mjs"
+      ],
+      "tests": [
+        "Original603 #445 source identity: official https://www.bluejazzcoffee.com/products/guatemala-antigua currently H1 Guatemala; explicitly prints selected notes of stone fruit with a lemony brightness and two distinct origin-component elevations. Frozen Oct29 register captured only stone fruit; no whole-blend elevation asserted.",
+        "First actual PR546 head a806f0e601a4a0d1dde5bc4ccbee8cadc5985977 Node run41815633988 job126525546483 FAILED exactly two new positive tests, current parser yielded 'stone fruit' and dropped lemony/floral brightness. Negative milk-qualified/other-coffee test passed. Genuine reproduction retained, not converted to PASS.",
+        "Repaired exact PR head 3b8249326476dd4ed92be88963fbbfc4edeac96d Node/lint/build run41815993975 SUCCESS 2369 PASS/0 FAIL/6 intentional SKIP including all three positive/negative new tests; cloud/mobile41815993939, approval41815993957, SQL41815993654, security41815993701 and private source41815993877 SUCCESS; frozen60341815993856 SKIPPED, not PASS.",
+        "PR546 safely nonforce squash-merged 13c7a7b535628c2033e655906618964d9cfd07bb; exact merged Git tree 17ba4bbef240ddd506fa273b58c260125c11eb88 equals corrected tested PR head tree, with no competing source or test change. Merged Node/lint/build41816308668 SUCCESS 2369 PASS/0 FAIL/6 SKIP; cloud UX41816308752, approval41816308675, READY intake41816308657 all SUCCESS; full original603 acceptance41816308679 SKIPPED.",
+        "Independent current selected official guarded read-only public run41816308653/job126527817685 SUCCESS 1/1 FETCHED/1/1 PARSED, H1 Guatemala, current raw HTML sha256 c301709c4cfb6fac91c0be2fb4de47bd535b6754e725f0528338ea886d161717, canonical notes 'stone fruit, lemony brightness'; origin Guatemala, Washed, no selected whole-blend elevation, conflicts []. Actual Add Coffee preview gate PASS; private artifact13314164710, one-day retention. This does not certify all603."
+      ],
+      "ci_runs": [
+        41815633988,
+        41815993975,
+        41815993939,
+        41815993957,
+        41815993654,
+        41815993701,
+        41815993877,
+        41815993856,
+        41816308668,
+        41816308752,
+        41816308675,
+        41816308657,
+        41816308679,
+        41816308653
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "NARROW SELECTED FIELD READY in development; NOT DEPLOYED. Source directly prints 'lemony brightness', not inferred 'lemon'; a separate printed floral brightness control supports generic extraction. Conditional milk, unrelated products and two different component altitude ranges remain guarded. Same deployable src/server/coffee-flavor-evidence.mjs overlaps prior READY Kamiak panela sweetness, so any eventual owner-commanded release must isolate/include approved dependencies under #417 or HOLD. Original frozen603 immutable 603/201/1197 oracle/scorer/CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6, 153 contextual/29 literal/35 historical unresolved qualifications and #33 OPEN unchanged. Source probe reports manual_certified:0; no global source semantic certification, hosted signed-in GoTrue/device claim, publication or production SQL/Auth/Edge/provider/member writes."
     }
   ],
   "history": [

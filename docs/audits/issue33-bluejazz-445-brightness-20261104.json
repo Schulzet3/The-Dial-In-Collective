@@ -2,7 +2,7 @@
   "schema_version": 1,
   "issue": 33,
   "date_utc": "2026-11-04",
-  "status": "CURRENT_SYNTHETIC_DEFECT_REPRODUCED_FIX_PR_HEAD_CI_PENDING",
+  "status": "VERIFIED_NARROW_READY_NOT_DEPLOYED",
   "source_parent_sha": "be5c54be857d03f65fdf6275fcd844f768448279",
   "original603": 445,
   "url": "https://www.bluejazzcoffee.com/products/guatemala-antigua",
@@ -15,12 +15,53 @@
   "focus": "Prove actual current omission before correcting. Preserve two component elevations separate and do not infer a whole-blend single altitude.",
   "test": "tests/coffee-issue33-bluejazz-445-brightness.test.mjs",
   "public_runner_marker": "[dic-issue33-nineteenth1]",
-  "tests": "PENDING_EXACT_PR_CI",
-  "official_HTML": "PENDING_EXACT_MERGED_FOCUSED_PUBLIC_JOB",
-  "queue": "UNCHANGED 11 READY 90 DEPLOYED 3 IN_PROGRESS",
+  "tests": {
+    "first_defect_run": 41815633988,
+    "first_failures": 2,
+    "corrected_head": "3b8249326476dd4ed92be88963fbbfc4edeac96d",
+    "corrected_head_node_run": 41815993975,
+    "node_pass": 2369,
+    "node_fail": 0,
+    "node_skip": 6,
+    "merged_node_run": 41816308668,
+    "merged_node_pass": 2369,
+    "merged_node_fail": 0,
+    "merged_node_skip": 6,
+    "cloud_head_run": 41815993939,
+    "approval_head_run": 41815993957,
+    "cloud_merged_run": 41816308752,
+    "approval_merged_run": 41816308675,
+    "queue_coverage_merged": 41816308657,
+    "frozen603_original_workflow": "SKIPPED_NOT_PASS"
+  },
+  "official_HTML": {
+    "source_commit": "13c7a7b535628c2033e655906618964d9cfd07bb",
+    "public_run": 41816308653,
+    "job": 126527817685,
+    "artifact": 13314164710,
+    "url": "https://www.bluejazzcoffee.com/products/guatemala-antigua",
+    "h1": [
+      "Guatemala"
+    ],
+    "current_raw_html_sha256": "c301709c4cfb6fac91c0be2fb4de47bd535b6754e725f0528338ea886d161717",
+    "fetched": 1,
+    "parsed": 1,
+    "add_coffee_preview": "PASS",
+    "conflicts": [],
+    "fields": {
+      "name": "Guatemala",
+      "roaster": "Blue Jazz Coffee",
+      "tasting_notes": "stone fruit, lemony brightness",
+      "origin": "Guatemala",
+      "process": "Washed"
+    },
+    "elevation_m": "BLANK: two separately printed blend components, no single whole-blend altitude",
+    "manual_certified_entire_coffees": 0
+  },
+  "queue": "READY 12 DEPLOYED 90 IN_PROGRESS 3; broader Issue33 OPEN",
   "release": false,
   "provider_writes": 0,
-  "next": "Rerun full affected Node and cloud/approval on corrected head, then safely merge and trigger bounded official live #445, compare source-bound H1/html SHA and extracted fields before READY.",
+  "next": "Continue next independently selected original603 source case; respect #267 V2/#96 separate, do not publish without owner command.",
   "reproduction": {
     "head_sha": "a806f0e601a4a0d1dde5bc4ccbee8cadc5985977",
     "node_run": 41815633988,
@@ -32,6 +73,9 @@
     "path": "src/server/coffee-flavor-evidence.mjs",
     "scope": "Generic direct selected current sensory relation; preserve literal with a lemony/floral brightness as coordinated notes, only when unconditional and source supported. No new inferred flavor, country, roast, elevation or product identity.",
     "test": "tests/coffee-issue33-bluejazz-445-brightness.test.mjs",
-    "status": "PENDING_EXACT_HEAD_CI"
-  }
+    "status": "VERIFIED_NARROW_READY"
+  },
+  "pr": 546,
+  "merged_sha": "13c7a7b535628c2033e655906618964d9cfd07bb",
+  "merged_tested_tree": "17ba4bbef240ddd506fa273b58c260125c11eb88"
 }
