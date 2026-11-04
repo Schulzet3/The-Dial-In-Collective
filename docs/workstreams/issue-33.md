@@ -1,3 +1,9 @@
+## November 4 UTC — Issue33 PR519 pre-CI source repair (TESTING)
+
+First PR519 head `419172023326a57413ff69ac180513fb6f53ed2a` was syntactically invalid: the initial JS `String.replace` interpreted `$'` within the intended regex end anchor as a substitution directive, splicing original source into the regex. Readback caught this before any PASS/merge. This corrective **same-commit source/journal** restores the original base `8f8552ecfb8e4364eb2cc10643407e1a93008912` and inserts the intended source guard via a literal function replacement, leaving neighboring original extraction logic intact. All exact-head CI and live parser checks remain mandatory; prior head is never counted PASS. [skip netlify]
+
+---
+
 ## November 4 UTC — Issue #33 original603 #287 named-region/producer-role correction (TESTING, NOT READY/deployed)
 
 Recovered exact live development `8f8552ecfb8e4364eb2cc10643407e1a93008912`, AGENTS, AI entrypoint/preflight, Issue33 journal/comments, Current Status, Master Spec, Decision Ledger, approval matrix, queue, Oct29 original603 register and #267 V2/#96. Current selected [Roadmap Mexico Angel Albino Corzo](https://roadmapcoffeeworks.com/products/mexico-cesmach) publishes “Angel Albino Corzo is the region in Chiapas state, not the producer”, exact selected H1 prints Mexico, Region spec Chiapas, Farm FFESICH cooperative. Previous true guarded current HTML/actual parser [run 41783328775](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41783328775) captured #287 SHA256 `1001dc149bc0437830d2690288c8126a2d0f977fdbec5530876c11f0b57ef0e0` and parsed `origin: Chiapas, Mexico` with zero conflicts, lacking published finer region. Today’s independent official public-page text recheck corroborates the missing locality, but is NOT a new pinned raw HTML capture.
