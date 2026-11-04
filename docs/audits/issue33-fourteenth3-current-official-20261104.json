@@ -2,7 +2,7 @@
   "schema_version": 1,
   "issue": 33,
   "kind": "THREE_CASE_CURRENT_OFFICIAL_SELECTED_SOURCE_VERIFICATION",
-  "state": "TESTING_UNMERGED_NO_SOURCE_RUN",
+  "state": "TESTING_SELECTED_REGION_CORRECTION_PR_CI_PENDING",
   "created_utc": "2026-11-04",
   "parent_development_sha": "5a099bf192f11c64f27a40c9cffcd2ad8c2b72c2",
   "source_workflow": ".github/workflows/roaster-source-probe.yml",
@@ -37,5 +37,50 @@
     "Inspect all three selected H1, raw HTML SHA256, parsed fields and conflicts",
     "Individually adjudicate omissions/conflicts and commit durable verified findings"
   ],
-  "no_deployment_authorized": true
+  "no_deployment_authorized": true,
+  "actual_source_run": {
+    "run": 41751890017,
+    "job": 126318687619,
+    "source_sha": "03ebaf9c7b56de8f8dba00198e40814c6c72a4ee",
+    "summary": {
+      "fetched": 3,
+      "parsed": 3,
+      "manual_certified": 0
+    },
+    "cases": [
+      {
+        "number": 188,
+        "selected_h1": "42 Series- Ethiopia Dehab’s Diamond",
+        "html_sha256": "33a0f68f72271af8021d84413bf5d7219087ead2977c4d8c132547bf2ff3eafb",
+        "origin": "Ethiopia",
+        "release_label": "42 Series",
+        "conflicts": [],
+        "assessment": "Release, roast and producer currently supported; narrower Kaffa Forest geographic proof remains qualified."
+      },
+      {
+        "number": 206,
+        "selected_h1": "Peru HB",
+        "html_sha256": "cffb49115e9a3b698a5710555a66600d64ce2693750d8c2b9aae16e417b45f19",
+        "origin_before": "Peru",
+        "exact_current_quote": "Peru comes to us from central Peru, the Chanchamayo region and is produced in small farms.",
+        "expected_after": "Chanchamayo, Peru",
+        "conflicts": [],
+        "assessment": "Current selected named growing-region omission reproduced; after-code current official rerun required."
+      },
+      {
+        "number": 320,
+        "selected_h1": "Costa Rica Sonora Honey",
+        "html_sha256": "b57eb30625b7fd0643c531e58d7571dd8f7815bc72025cedcc4018746e4e2668",
+        "process": "Other/Unknown",
+        "conflicts": [],
+        "assessment": "Correct Honey/Natural mixed process, do not fabricate single Honey; no current fixed roast printed."
+      }
+    ]
+  },
+  "code_fix": {
+    "source": "src/server/coffee-identity-evidence.mjs",
+    "test": "tests/coffee-issue33-lowcountry-selected-region.test.mjs",
+    "state": "UNVERIFIED_UNTIL_EXACT_CI"
+  },
+  "next": "Correct exact PR-head CI if necessary, nonforce merge, fresh current official 3-case parser/H1/hash, certify narrow READY only after verified field/conflict changes and isolation."
 }
