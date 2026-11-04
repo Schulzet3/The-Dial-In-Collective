@@ -5,9 +5,9 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 3037,
-    "first_unvalidated_manifest_file_index": 35,
-    "first_unvalidated_path": "docs/AUTHENTICATED_READ_ONLY_ACCEPTANCE_2026-10-20.md",
+    "strict_validated_lines": 3156,
+    "first_unvalidated_manifest_file_index": 36,
+    "first_unvalidated_path": "docs/AUTOMATED_BACKUP_DELIVERY_ALERT_AUDIT_2026-10-16.md",
     "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
@@ -15,18 +15,18 @@
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 3519,
+    "strict_validated_lines": 3629,
     "first_unvalidated_file_index": 43,
     "first_unvalidated_path": "scripts/audit/coffee-corpus-report.py",
-    "first_unvalidated_line": 111,
+    "first_unvalidated_line": 221,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "post_pin_drift": {
-    "observed_development_commit": "4057b7ed9cc49a365e109281b533cf42d6ff582a",
+    "observed_development_commit": "0f26a7b90ec7d7d5f9b04f990c192f9558545fdc",
     "strict_validated_added_lines": 1,
     "scope": "Single verified addition in first current source path; total post-pin live-code delta denominator not yet reconciled",
-    "rest_of_live_changes": "NOT_COMPLETELY_REVIEWED",
+    "rest_of_live_changes": "NOT_COMPLETELY_REVIEWED; S2-041 originals and pinned Python reporter exactly match live blobs at inspected development HEAD",
     "live_fully_reviewed_files": 36,
     "live_fully_reviewed_file_lines": 2947,
     "latest_reviewed_live_path": "scripts/audit/coffee-corpus-enrich.py",
@@ -1131,6 +1131,24 @@
       ],
       "pinned_blob": "a7ef960de4f8abdcd673a0d2439ef6d12ef06c67",
       "live_exact_pinned_prefix": true,
+      "old_v2_extra_credit": 0
+    },
+    {
+      "batch": "S2-041",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-041.json",
+      "frozen_file": "docs/AUTHENTICATED_READ_ONLY_ACCEPTANCE_2026-10-20.md",
+      "frozen_lines": [
+        1,
+        119
+      ],
+      "frozen_blob": "47b3527f916948f35da8544163a69a7ce1b60df1",
+      "pinned_file": "scripts/audit/coffee-corpus-report.py",
+      "pinned_lines": [
+        111,
+        220
+      ],
+      "pinned_blob": "a7ef960de4f8abdcd673a0d2439ef6d12ef06c67",
+      "live_exact_original_and_pinned": true,
       "old_v2_extra_credit": 0
     }
   ],
