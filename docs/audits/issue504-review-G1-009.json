@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "issue": 504,
+  "audit_batch": "G1-009",
+  "date_utc": "2026-11-04",
+  "review_pass": "W1_WORD_BY_WORD",
+  "method": "Directly read and semantically considered all 144 lines and 2193 whitespace words, four full queue records, source-bound. Rechecked line interval byte-identical to G1-008 postmerge source. No #267 code or frozen semantic credit.",
+  "source": {
+    "development_sha": "84e1720ab0eed83dabdce65709ce46e6efde49e4",
+    "main_sha": "d17e900fa78e2f89931480d4f85c217c2d31724c",
+    "publication_sha": "31c66832a28247e657a2bf89592ebc1e2f48dfc5",
+    "queue_blob_sha": "e7ea0660cbe297bfcdc195e0d9cd13d890c3788e",
+    "previous_queue_blob_sha": "f2244a68a0e22f51b9e8f07afa51127500b3d776",
+    "previous_range_identical": true,
+    "release07_receipt_blob": "062bd4d07a496cdb3868a6b68dc2ca58204ccb28",
+    "issue5_url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/5"
+  },
+  "reviewed": {
+    "path": "docs/RELEASE_QUEUE.json",
+    "start_line": 1007,
+    "end_line": 1150,
+    "lines": 144,
+    "original_words": 2193,
+    "added_note_words": 11,
+    "credited_words": 2204,
+    "spans": [
+      {
+        "item_id": "DIC-Q-33-selected-spec-geography",
+        "lines": [
+          1007,
+          1043
+        ],
+        "state": "DEPLOYED",
+        "line_level_semantics": "Replayed original 603 source and explicit skip caveats; source tested and included by exact Release07 ID; old first note is historical."
+      },
+      {
+        "item_id": "DIC-Q-33-manuscript-selected-product-roast",
+        "lines": [
+          1044,
+          1072
+        ],
+        "state": "DEPLOYED",
+        "line_level_semantics": "Bounded original 603 selected H1/Medium fix and retention tests; Release07 includes exact ID; old first note historical."
+      },
+      {
+        "item_id": "DIC-Q-33-residual-source-accuracy",
+        "lines": [
+          1073,
+          1115
+        ],
+        "state": "IN_PROGRESS",
+        "line_level_semantics": "Chronological source replay and CI metadata only; 111/822 older case count cannot certify current universal accuracy; preserve parent open and previous negative evidence."
+      },
+      {
+        "item_id": "DIC-Q-5-pending-retry-http-conflict",
+        "lines": [
+          1116,
+          1150
+        ],
+        "state": "DEPLOYED",
+        "line_level_semantics": "Historic SQLSTATE 40001 retry conflict; Supabase-only migration version 20261024052303 delivered, no Netlify delivery; old READY source note historical."
+      }
+    ]
+  },
+  "findings": [
+    {
+      "id": "G1-009-F1",
+      "status": "VERIFIED_DOC_FIX",
+      "evidence": "Immutable Oct27 Release07 includes both #33 IDs; closed #5 and source row delivery receipt confirm Oct24 Supabase-only migration, not Netlify.",
+      "disposition": "Label only three dated pre-delivery notes historical, preserve original text and independent delivery statuses."
+    },
+    {
+      "id": "G1-009-F2",
+      "status": "NO_PROVEN_CURRENT_CODE_DEFECT",
+      "disposition": "Do not delete/modify code, migrations, original coffee oracle, production data or Locked policy."
+    }
+  ],
+  "validation": {
+    "json_parse": "PASS",
+    "changed_only_these_exact_lines": [
+      1037,
+      1066,
+      1144
+    ],
+    "all_108_ids_and_states_preserved": true,
+    "queue_counts": {
+      "READY": 15,
+      "DEPLOYED": 90,
+      "IN_PROGRESS": 3
+    },
+    "live_provider": "NOT_CHECKED",
+    "app_build": "NOT_RUN_DOC_ONLY",
+    "ci": "PENDING_PR_HEAD"
+  },
+  "cumulative": {
+    "source_file_lines": 2929,
+    "source_file_words": 20292,
+    "github_objects": 2,
+    "github_words": 721
+  },
+  "status": "IN_PROGRESS_NOT_COMPLETE",
+  "next": {
+    "path": "docs/RELEASE_QUEUE.json",
+    "line": 1151,
+    "post_baseline_drift_unreviewed": true
+  },
+  "integration_reconciliation": {
+    "initial_approval_failure": "RUN41850592732 Git merge-base rejected concurrent dev ancestor 163b73e of old PR-head 42117d2",
+    "corrective_method": "Non-force first-parent merge of current dev with old audit PR head, preserve all development code/other queue records",
+    "old_dev_sha": "84e1720ab0eed83dabdce65709ce46e6efde49e4",
+    "new_dev_sha": "163b73edd3210077ce76fdd2f86016276a7f015e",
+    "new_dev_queue_blob": "735316b9f6b5b4126289e2c78e974fc349b376e0",
+    "source_items_identical": true,
+    "source_lines_shifted_by": 21,
+    "new_line_ranges": [
+      {
+        "id": "DIC-Q-33-selected-spec-geography",
+        "new_id_line": 1029
+      },
+      {
+        "id": "DIC-Q-33-manuscript-selected-product-roast",
+        "new_id_line": 1066
+      },
+      {
+        "id": "DIC-Q-33-residual-source-accuracy",
+        "new_id_line": 1095
+      },
+      {
+        "id": "DIC-Q-5-pending-retry-http-conflict",
+        "new_id_line": 1138
+      }
+    ],
+    "source_interval_new_lines": [
+      1028,
+      1171
+    ],
+    "new_queue_item_count": 109,
+    "new_queue_states": {
+      "TESTING": 1,
+      "READY": 15,
+      "DEPLOYED": 90,
+      "IN_PROGRESS": 3
+    },
+    "new_item_outside_review": "DIC-Q-455-meaningful-yield-step (TESTING): new 21-line insertion before prior reviewed interval; UNREVIEWED, review as drift separately",
+    "new_queue_changed_lines": [
+      1058,
+      1087,
+      1165
+    ],
+    "ci": "PENDING_CORRECTED_PR_HEAD"
+  }
+}
