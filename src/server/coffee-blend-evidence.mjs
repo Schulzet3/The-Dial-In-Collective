@@ -116,6 +116,41 @@ function summarizeComponents(components,ranges,format){
   components:components.length,component_ranges:ranges,component_format:format
  };
 }
+
+// Refine ONLY an explicitly named current component's farm region. A blend's
+// independently labelled Country rows prove the component identity; a mill or
+// producer's nearby address, other coffees, old lots or album releases do not.
+// The source must state both "coffee from [growers] in COUNTRY" and "beans
+// that come from several farms in the REGION region" in ONE current sentence.
+function selectedComponentFarmRegion(blend,page){
+ if(!blend||blend.component_format!=='labeled'||blend.components<2||
+    !blend.multi_country||!blend.origin)return blend;
+ const place=String.raw`([\p{Lu}][\p{L}\p{M}'’.-]{2,40}(?:\s+[\p{Lu}][\p{L}\p{M}'’.-]{2,40}){0,3})`;
+ const component=new RegExp(
+  String.raw`\bcoffee\s+from\s+(?:the\s+)?[\p{Lu}][\p{L}\p{M}'’.-]{1,40}(?:\s+[\p{Lu}][\p{L}\p{M}'’.-]{1,40}){0,3}\s+(?:family|farmers?|growers?|cooperative)\s+in\s+`+
+  COUNTRIES.source+
+  String.raw`\s*,\s*a\s+blend\s+of\s+[^.!?]{0,150}?\bbeans?\s+that\s+come\s+from\s+several\s+farms\s+in\s+the\s+`+
+  place+String.raw`\s+region\b`,'iu');
+ const matches=[];
+ for(const block of productCoffeeProse(page,clean)){
+  if(block.educational||/^h[1-6]$/.test(block.tag))continue;
+  for(const sentence of block.text.split(/(?<=[.!?])\s+/).slice(0,45)){
+   if(sentence.length>1200||NONCURRENT_COFFEE_PROSE.test(sentence)||
+      /\b(?:previously|formerly|historically|hypothetically|hypothetical|last year|prior lot|used to|other coffee|another coffee|related coffee)\b/i.test(sentence))continue;
+   const found=component.exec(sentence);
+   if(found)matches.push({country:found[1],region:found[2]});
+  }
+ }
+ if(matches.length!==1)return blend;
+ const {country,region}=matches[0];
+ if(!country||!region||region.length>90||/\b(?:coffee|blend|roast|product|catalog)\b/i.test(region))return blend;
+ const originals=blend.origin.split(/\s*;\s*/);
+ const slots=originals.map((value,index)=>key(value)===key(country)?index:-1).filter(index=>index>=0);
+ if(slots.length!==1||!blend.origins.some(value=>key(value)===key(country)))return blend;
+ originals[slots[0]]=region+', '+country;
+ return {...blend,origin:originals.join('; ')};
+}
+
 function labeledComponents(page,name){
  const rows=componentRows(page);
  for(let start=0;start<rows.length;start++){
@@ -273,7 +308,7 @@ export function withoutCoffeeBlendComponentSpecs(html,blend){
 export function extractCoffeeBlendEvidence(html,{name='',scoped=false}={}){
  if(typeof html!=='string'||html.length>2_000_000)return null;
  const page=scoped?html:productMarkup(html);
- const labeled=labeledComponents(page,name)||enumeratedComponents(page)||percentageProseComponents(page);
+ const labeled=selectedComponentFarmRegion(labeledComponents(page,name),page)||enumeratedComponents(page)||percentageProseComponents(page);
  if(labeled)return labeled;
  const marker=/<(?:p|h[2-6]|strong|b)\b[^<>]{0,350}>\s*(?:<strong\b[^<>]{0,2000}>)?\s*Components?\s*:\s*(?:<\/strong>\s*)?<\/(?:p|h[2-6]|strong|b)>/i.exec(page)||
   /<(?:p|strong|b)\b[^<>]{0,2000}>\s*Components?\s*:\s*(?:<br\s*\/?>)/i.exec(page)||
