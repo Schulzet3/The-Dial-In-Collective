@@ -1153,9 +1153,9 @@
     "source_whitespace_tokens_semantically_read": 16880,
     "total_source_characters": 207402,
     "next_function_ordinal": null,
-    "next_object": "graphql_public.graphql (1 function) then auth SQL function definitions (4), realtime (18), storage (19), extensions (90) etc; per-object lexical source/hash review",
+    "next_object": "storage.list_multipart_uploads_with_delimiter(...) full body (2378 chars) then long storage.list_objects_with_delimiter (32892 chars); realtime.apply_rls (16476 chars) before remaining realtime 11; platform extensions/vault and migration body drift",
     "other_objects": "99/99 application SQL function definitions, 46/46 application table catalog definitions, 9/9 accessible deployed Edge file variants complete; platform/vendor SQL, Auth/Storage/cron/Realtime, migration drift, external dependency calls, performance and limits still incomplete; platform table definitions auth27/storage8/realtime3 direct review complete; platform functions, other tables, database migration SQL bodies still unverified; additional provider catalog review supabase_migrations(1 table), vault(1 table+1 view), extensions(2 views), without secret records",
-    "platform_objects": "DIRECT_PROVIDER_CATALOG_TABLES_AUTH27_STORAGE8_REALTIME3_SUPABASE_MIGRATIONS1_VAULT1=40_TABLES; DIRECT_VIEWS_VAULT1_EXTENSIONS2=3; PLATFORM_SQL_FUNCTION_BODIES_UNREVIEWED",
+    "platform_objects": "DIRECT_PROVIDER_CATALOG_TABLES_AUTH27_STORAGE8_REALTIME3_SUPABASE_MIGRATIONS1_VAULT1=40_TABLES; DIRECT_VIEWS_VAULT1_EXTENSIONS2=3; PLATFORM_SQL_FUNCTION_BODIES_UNREVIEWED; DIRECT_PLATFORM_SQL_FUNCTION_BODIES_22_OF_42_AUTH4_GRAPHQL1_STORAGE10_REALTIME7",
     "edge_function_sources_reviewed": 9,
     "table_definition_components_reviewed": 46,
     "total_application_tables": 46
@@ -2711,9 +2711,22 @@
       "code_fixes": 0,
       "ci_not_run": "metadata/documentation only; no code/test changes",
       "next": "graphql_public function, auth/storage/realtime function bodies, source migration drift"
+    },
+    {
+      "run": "2026-11-04 UTC #509 platform source functions direct reading",
+      "github_source_sha_prior": "d85c311a6dda031172fc2463dd32ba194ce51fe8",
+      "source_bodies_reviewed": 22,
+      "source_characters_read": 16969,
+      "source_hashes": "MD5 over complete provider pg_get_functiondef per reviewed function",
+      "runtime_tests": "NOT_RUN; source semantic review only",
+      "new_app_defects": 0,
+      "provider_writes": 0,
+      "private_rows": 0,
+      "code_fixes": 0,
+      "next": "storage.list_multipart_uploads_with_delimiter(...) full body (2378 chars) then long storage.list_objects_with_delimiter (32892 chars); realtime.apply_rls (16476 chars) before remaining realtime 11; platform extensions/vault and migration body drift"
     }
   ],
-  "state": "APP_SQL_FUNCTIONS_99_OF_99; APP_TABLES_46_OF_46_COMPONENTS_DIRECTLY_READ; EDGE_DEPLOYED_SOURCE_9_OF_9_VARIANTS; FULL_PROVIDER_AUDIT_IN_PROGRESS; #527_READY_NOT_DEPLOYED; PLATFORM_AUTH_27_STORAGE_8_REALTIME_3_TABLE_DEFINITIONS_DIRECT_REVIEWED; FULL_PROVIDER_AUDIT_IN_PROGRESS; VENDOR_OTHER_TABLE_VIEWS_5_DIRECT_COMPONENTS_READ",
+  "state": "APP_SQL_FUNCTIONS_99_OF_99; APP_TABLES_46_OF_46_COMPONENTS_DIRECTLY_READ; EDGE_DEPLOYED_SOURCE_9_OF_9_VARIANTS; FULL_PROVIDER_AUDIT_IN_PROGRESS; #527_READY_NOT_DEPLOYED; PLATFORM_AUTH_27_STORAGE_8_REALTIME_3_TABLE_DEFINITIONS_DIRECT_REVIEWED; FULL_PROVIDER_AUDIT_IN_PROGRESS; VENDOR_OTHER_TABLE_VIEWS_5_DIRECT_COMPONENTS_READ; PLATFORM_SOURCE_FUNCS_AUTH4_GRAPHQL1_STORAGE10_REALTIME7_DIRECT_REVIEW",
   "application_table_review": {
     "total": 46,
     "current_index": 46,
@@ -4559,5 +4572,279 @@
       }
     ],
     "next": "Inspect graphql_public function and platform auth/realtime/storage functions, then types, sequences, publications, privilege/configuration, live 53 migration statement bodies mapped to pinned release source and bounded logs. Also compute full component hashes for first eight Auth catalog entries."
+  },
+  "platform_function_review": {
+    "status": "PARTIAL_DIRECT_FULL_SQL_FUNCTION_SOURCE_REVIEW",
+    "scope": "non-extension provider functions, no aggregate/internal C routines counted as direct text",
+    "source": "live pg_get_functiondef and source MD5; provider catalog only",
+    "by_schema": {
+      "auth": {
+        "reviewed": 4,
+        "total": 4,
+        "chars": 1096
+      },
+      "graphql_public": {
+        "reviewed": 1,
+        "total": 1,
+        "chars": 1189
+      },
+      "storage": {
+        "reviewed": 10,
+        "total": 19,
+        "chars": 6087
+      },
+      "realtime": {
+        "reviewed": 7,
+        "total": 18,
+        "chars": 8597
+      }
+    },
+    "total_reviewed": 22,
+    "objects": [
+      {
+        "schema": "auth",
+        "ordinal_in_schema": 1,
+        "object": "auth.email",
+        "source_md5": "bf3569f4ae1c7e250e74daf51d0311c7",
+        "source_characters": 280,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "JWT email from request claim GUC; not an independent authentication boundary",
+        "verdict": "NO_CONFIRMED_APP_REMOVAL_OR_EXPLOIT; PROVIDER_OWNED_OR_DEPENDENCY_UNVERIFIED"
+      },
+      {
+        "schema": "auth",
+        "ordinal_in_schema": 2,
+        "object": "auth.jwt",
+        "source_md5": "20054548ba2003f61a6bcb472175700b",
+        "source_characters": 265,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Parses request.jwt.claim or claims JSONB; caller JWT verification is external",
+        "verdict": "NO_CONFIRMED_APP_REMOVAL_OR_EXPLOIT; PROVIDER_OWNED_OR_DEPENDENCY_UNVERIFIED"
+      },
+      {
+        "schema": "auth",
+        "ordinal_in_schema": 3,
+        "object": "auth.role",
+        "source_md5": "8a3e05459e07e0633d43c6fba2a2cdf4",
+        "source_characters": 277,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Deprecated auth.role GUC helper; no arbitrary authorization without caller policy",
+        "verdict": "NO_CONFIRMED_APP_REMOVAL_OR_EXPLOIT; PROVIDER_OWNED_OR_DEPENDENCY_UNVERIFIED"
+      },
+      {
+        "schema": "auth",
+        "ordinal_in_schema": 4,
+        "object": "auth.uid",
+        "source_md5": "ea3b41bf29e2ad573067939329aa088e",
+        "source_characters": 274,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Subject claim to uuid; authorization relies on signed request context",
+        "verdict": "NO_CONFIRMED_APP_REMOVAL_OR_EXPLOIT; PROVIDER_OWNED_OR_DEPENDENCY_UNVERIFIED"
+      },
+      {
+        "schema": "graphql_public",
+        "ordinal_in_schema": 1,
+        "object": "graphql_public.graphql",
+        "source_md5": "dfa83944e7a73368d44e3ee4d2a1167c",
+        "source_characters": 1189,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "graphql_public disabled stub returning JSON error; no enabled pg_graphql access demonstrated",
+        "verdict": "NO_CONFIRMED_APP_REMOVAL_OR_EXPLOIT; PROVIDER_OWNED_OR_DEPENDENCY_UNVERIFIED"
+      },
+      {
+        "schema": "storage",
+        "ordinal_in_schema": 1,
+        "object": "storage.allow_any_operation",
+        "source_md5": "ccefb34283c346cc88e224d075bd5312",
+        "source_characters": 791,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Storage request operation normalized and checked against expected list",
+        "verdict": "NO_CONFIRMED_APP_REMOVAL_OR_EXPLOIT; PROVIDER_OWNED_OR_DEPENDENCY_UNVERIFIED"
+      },
+      {
+        "schema": "storage",
+        "ordinal_in_schema": 2,
+        "object": "storage.allow_only_operation",
+        "source_md5": "e2f7d55adc027df69ec4b42c6c08f50f",
+        "source_characters": 773,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Single operation normalized and compared, null/empty deny",
+        "verdict": "NO_CONFIRMED_APP_REMOVAL_OR_EXPLOIT; PROVIDER_OWNED_OR_DEPENDENCY_UNVERIFIED"
+      },
+      {
+        "schema": "storage",
+        "ordinal_in_schema": 3,
+        "object": "storage.can_insert_object",
+        "source_md5": "73733c9319875273d5937b05d68a7930",
+        "source_characters": 433,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Provider-managed permission probe executes insert then intentionally raises PT200 for rollback; NOT executed here",
+        "verdict": "NO_CONFIRMED_APP_REMOVAL_OR_EXPLOIT; PROVIDER_OWNED_OR_DEPENDENCY_UNVERIFIED"
+      },
+      {
+        "schema": "storage",
+        "ordinal_in_schema": 4,
+        "object": "storage.enforce_bucket_lifecycle_service_role",
+        "source_md5": "b839722d462ea1003fbcf028bd6f6c01",
+        "source_characters": 940,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "AFTER trigger uses configured role and raises PST01 for non-service updates",
+        "verdict": "NO_CONFIRMED_APP_REMOVAL_OR_EXPLOIT; PROVIDER_OWNED_OR_DEPENDENCY_UNVERIFIED"
+      },
+      {
+        "schema": "storage",
+        "ordinal_in_schema": 5,
+        "object": "storage.enforce_bucket_name_length",
+        "source_md5": "11b3bd509f6b254ec1cd859e712e8c78",
+        "source_characters": 309,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "BEFORE trigger rejects bucket names exceeding 100 chars",
+        "verdict": "NO_CONFIRMED_APP_REMOVAL_OR_EXPLOIT; PROVIDER_OWNED_OR_DEPENDENCY_UNVERIFIED"
+      },
+      {
+        "schema": "storage",
+        "ordinal_in_schema": 6,
+        "object": "storage.extension",
+        "source_md5": "75d83971130753081a84c3270878d8e7",
+        "source_characters": 515,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Immutable last path segment suffix extraction; empty/no-dot semantics not app defect",
+        "verdict": "NO_CONFIRMED_APP_REMOVAL_OR_EXPLOIT; PROVIDER_OWNED_OR_DEPENDENCY_UNVERIFIED"
+      },
+      {
+        "schema": "storage",
+        "ordinal_in_schema": 7,
+        "object": "storage.filename",
+        "source_md5": "0e8171709dc2934861de959d743ff809",
+        "source_characters": 255,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Immutable last slash segment",
+        "verdict": "NO_CONFIRMED_APP_REMOVAL_OR_EXPLOIT; PROVIDER_OWNED_OR_DEPENDENCY_UNVERIFIED"
+      },
+      {
+        "schema": "storage",
+        "ordinal_in_schema": 8,
+        "object": "storage.foldername",
+        "source_md5": "93671af66e1fe108a56068ad4137d001",
+        "source_characters": 356,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Immutable all but last path segment",
+        "verdict": "NO_CONFIRMED_APP_REMOVAL_OR_EXPLOIT; PROVIDER_OWNED_OR_DEPENDENCY_UNVERIFIED"
+      },
+      {
+        "schema": "storage",
+        "ordinal_in_schema": 9,
+        "object": "storage.get_common_prefix",
+        "source_md5": "0dc62b74fb855d4f504f50f900f93927",
+        "source_characters": 486,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Prefix/delimiter length calculation, no demonstrated off-by-one",
+        "verdict": "NO_CONFIRMED_APP_REMOVAL_OR_EXPLOIT; PROVIDER_OWNED_OR_DEPENDENCY_UNVERIFIED"
+      },
+      {
+        "schema": "storage",
+        "ordinal_in_schema": 10,
+        "object": "storage.get_size_by_bucket",
+        "source_md5": "75dc6041ab2b273a08279126efecbcd0",
+        "source_characters": 1229,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Validates include/exclude/only with null coalesce, aggregates object metadata size, no bucket rows read",
+        "verdict": "NO_CONFIRMED_APP_REMOVAL_OR_EXPLOIT; PROVIDER_OWNED_OR_DEPENDENCY_UNVERIFIED"
+      },
+      {
+        "schema": "realtime",
+        "ordinal_in_schema": 1,
+        "object": "realtime.authorize",
+        "source_md5": "3f406642afec1126e2ddb86b33ff8177",
+        "source_characters": 2364,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Realtime RLS probe uses nested block rollback and scoped role+JWT settings; no execution or proof of member visibility",
+        "verdict": "NO_CONFIRMED_APP_REMOVAL_OR_EXPLOIT; PROVIDER_OWNED_OR_DEPENDENCY_UNVERIFIED"
+      },
+      {
+        "schema": "realtime",
+        "ordinal_in_schema": 2,
+        "object": "realtime.broadcast_changes",
+        "source_md5": "ed087c81e8e1cf26699bc89b9352dd97",
+        "source_characters": 1046,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Row-only broadcast and exception mapping to sender",
+        "verdict": "NO_CONFIRMED_APP_REMOVAL_OR_EXPLOIT; PROVIDER_OWNED_OR_DEPENDENCY_UNVERIFIED"
+      },
+      {
+        "schema": "realtime",
+        "ordinal_in_schema": 3,
+        "object": "realtime.build_prepared_statement_sql",
+        "source_md5": "063be385f49a345d2f3c89dc5dcf7fa3",
+        "source_characters": 1002,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Returns dynamic PREPARE statement text, string concatenation; caller trust boundary not yet confirmed, no exploit inferred",
+        "verdict": "NO_CONFIRMED_APP_REMOVAL_OR_EXPLOIT; PROVIDER_OWNED_OR_DEPENDENCY_UNVERIFIED"
+      },
+      {
+        "schema": "realtime",
+        "ordinal_in_schema": 4,
+        "object": "realtime.cast",
+        "source_md5": "2d38c9a2b85fe787afe48a12c02839e8",
+        "source_characters": 327,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Quotes literal before regtype cast and to_jsonb; dynamic type based on regtype",
+        "verdict": "NO_CONFIRMED_APP_REMOVAL_OR_EXPLOIT; PROVIDER_OWNED_OR_DEPENDENCY_UNVERIFIED"
+      },
+      {
+        "schema": "realtime",
+        "ordinal_in_schema": 5,
+        "object": "realtime.check_equality_op",
+        "source_md5": "dc96014b6232b30f11a6465db31bd20a",
+        "source_characters": 950,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Original equality comparator with typed dynamic SQL; legacy overload still present, no caller proof for removal",
+        "verdict": "NO_CONFIRMED_APP_REMOVAL_OR_EXPLOIT; PROVIDER_OWNED_OR_DEPENDENCY_UNVERIFIED"
+      },
+      {
+        "schema": "realtime",
+        "ordinal_in_schema": 6,
+        "object": "realtime.check_equality_op(5args)",
+        "source_md5": "3db26de03f6feab4f7fc8f9a8a48c07e",
+        "source_characters": 2021,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Boolean negate overload handles DISTINCT/IS, null-safe op list and typed dynamic SQL",
+        "verdict": "NO_CONFIRMED_APP_REMOVAL_OR_EXPLOIT; PROVIDER_OWNED_OR_DEPENDENCY_UNVERIFIED"
+      },
+      {
+        "schema": "realtime",
+        "ordinal_in_schema": 7,
+        "object": "realtime.is_visible_through_filters",
+        "source_md5": "5dff3ea0345e185330be6127d0dce0df",
+        "source_characters": 887,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Filter visibility counts matching columns and equality predicates; runtime authorization requires #96 check",
+        "verdict": "NO_CONFIRMED_APP_REMOVAL_OR_EXPLOIT; PROVIDER_OWNED_OR_DEPENDENCY_UNVERIFIED"
+      }
+    ],
+    "next": "storage.list_multipart_uploads_with_delimiter (first unreviewed alphabetical storage function after get_size_by_bucket); realtime.apply_rls full 16,476-char body before other realtime functions; extensions 90 source/extension code with C-language binary-limit classification",
+    "limitations": "Source reading alone is not an isolated authorization test; no provider function invoked or production data accessed."
   }
 }
