@@ -46,9 +46,12 @@
       "type": "original_markdown",
       "path": "docs/research/originals/04_Causal_Foundations_of_Espresso_Extraction_MachineBasket_Interactions.md",
       "sha256_recorded_in_verified_archive_index": "9b538cec2e2633774a75197af79882e520723c904611f948e54c101ae117e319",
-      "review_status": "FOCUSED_PASSAGES_ONLY",
-      "direct_review_provenance": "Prior R455-001/R455-002 scoped journal; NOT complete document coverage",
-      "claims_verified_externally": "Not certified by this #455 batch"
+      "review_status": "FULL_BODY_DIRECTLY_READ_CITATIONS_PENDING",
+      "direct_review_provenance": "R455-006: every original GitHub Markdown source line 1-586 directly read in sequential chunks 1-160, 161-320, 321-475, 476-586. Source-exact original content, not an independent scholarly certification.",
+      "claims_verified_externally": "Bounded independent first-party checks: Waszkiewicz et al. arXiv original HTML full text v2 2026-05-09 (arxiv.org/html/2512.21528; sample-specific ~5 bar peak, 1-12 bar pressure sweep, 18.5g/58mm and 5-10s wetting); AIP publisher press notice 2026-06-23 DOI 10.1063/5.0319611 (publisher journal full text unavailable); Decent official measurement/control docs (decentespresso.com/docs/how_the_de1_measures); Lelit official Bianca product (lelit.com/product/bianca-pl162t); La Marzocco official GS history (lamarzoccousa.com/about-us/history). These support bounded mechanisms and machine controls, not every citation, basket sensitivity experiment, pressure optimum or cup outcome.",
+      "github_blob_sha": "f65992902285e693b96e993dae3e7c3bf2535793",
+      "direct_review_lines": "1-586",
+      "source_characters": 75806
     },
     {
       "id": "ORG-05",
@@ -251,6 +254,42 @@
       "current_app": "site/lib/engine.js baseline uses style/roast priors as starting point only, avoids unconditional time success gate, changes one variable with taste; measured pressure/flow/EY/TDS absent. Existing R455-DEC-001 remains unapproved.",
       "result": "NO_NUMERIC_PRIOR_OR_STYLE_CHANGE; NO_UNAVAILABLE_SENSOR_CAPTURE; KEEP_SWEETNESS_OWNER_DECISION_PENDING",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-004-A",
+      "source": "ORG-04 lines 1-113,321-352,456-486; Waszkiewicz et al. original HTML https://arxiv.org/html/2512.21528 (v2 May 9 2026, esp methods/results Fig 5); AIP June 23 2026 https://e3.eurekalert.org/news-releases/1132631 and DOI 10.1063/5.0319611",
+      "claim": "Puck compression/porosity can make pressure-flow nonmonotonic; one 18.50+-0.05g, 58mm, 1-12bar experimental system had highest measured flow around 5bar, 5-10s wetting. This is a descriptive sample-specific mechanism, not an ideal brewing pressure, no claim pressure universally reduces flow.",
+      "grade": "AUTHOR_ORIGINAL_MANUSCRIPT_FULL_HTML_AND_PUBLISHER_NOTICE; DIRECT_SPECIFIC_EXPERIMENT; NO_GENERAL_SENSORY_OUTCOME_OR_FULL_JOURNAL_TEXT",
+      "current_app": "site/lib/engine.js taste-triggered one-variable guidance and 5-style roast priors do not set or measure puck pressure/flow. site/lib/model.js active setup captures machine name, basket nominal dose, optional temperature and slow-feed, not true puck pressure/flow.",
+      "result": "NO_AUTOMATIC_PRESSURE_TARGET_OR_UNSUPPORTED_PROFILE_CONTROL; EXISTING_APP_LOCKED_BEHAVIOR_PRESERVED",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-004-B",
+      "source": "ORG-04 lines 2-76,133-320,390-407,476-540; Lelit official https://www.lelit.com/product/bianca-pl162t/ ; Decent official https://decentespresso.com/docs/how_the_de1_measures ; La Marzocco official https://www.lamarzoccousa.com/about-us/history/",
+      "claim": "Machine label conflates different causal axes: E61 group hydraulics, saturated thermal group, spring/direct actuator, manual passive upstream restriction and electronically controlled pressure/flow. Vendor product and historical engineering pages verify capabilities but manufacturer sensory benefits are not independent trials.",
+      "grade": "COMPLETE_ORIGINAL_REPORT_TEXT_AND_FIRST_PARTY_HARDWARE_SPECIFICATIONS; SENSORY_CAUSAL_GENERALIZATION_UNVERIFIED",
+      "current_app": "site/lib/model.js stores descriptive machine name and per-setup nominal basket dose with optional temperature/feed mode; no pressure-sensor protocol or user-adjustable hydraulic profiles. Existing app has exactly 5 selectable shot styles (site/lib/constants.js).",
+      "result": "NO NEW ADVANCED PRESSURE/FLOW FIELD, SENSOR DEPENDENCY, MACHINE-TYPE INFERRED CONTROL, OR STYLE EXPANSION; NOT OWNER APPROVED",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-004-C",
+      "source": "ORG-04 lines 22-51,265-350,476-586; geometric first-order Darcy analysis; author original manuscript methods https://arxiv.org/html/2512.21528",
+      "claim": "Basket diameter/bed depth and perforation resistance change hydraulic operating point; table ratio L/A is idealized geometry assuming constant packed density/dose/permeability. Claims that shallow baskets channel less, high-flow baskets always increase EY, or lever pressure yields sweetness are hypotheses, not directly established across machines or coffees.",
+      "grade": "CORRECT_FIRST_ORDER_GEOMETRY_AND_MODEL_EXTRAPOLATION; FULL_MULTI_DIAMETER_HIGH_FLOW_SENSORY_TRIALS_NOT_VERIFIED",
+      "current_app": "App logs nominal basket dose/ID and does not assume precise bore geometry or pressure drop. Recommendation engine uses same style/setup/basket/feed and personal history rather than a universal cross-basket conversion.",
+      "result": "DO_NOT INTRODUCE DIAMETER-TO-GRIND_OR_HIGH_FLOW_BASKET_TARGET_FORMULAS; KEEP BASKET-BOUND_PROVENANCE",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-004-D",
+      "source": "ORG-04 lines 353-475, especially 408-457; existing R455-DEC-001",
+      "claim": "Measured TDS is concentration; inferred EY requires measurement. Sweetness, bitterness and crema cannot be reduced to fixed acid/sugar/bitter extraction time stages. No direct source evidence verifies +1g beverage-yield as universal remedy for sweetness-only 4/5 rating.",
+      "grade": "MASS_BALANCE_AND_MECHANISTIC_CONDITIONALITY; NO_DIRECT_BLIND_SENSORY_TRIAL_OF_PROPOSED_SWEETNESS_CONTROL",
+      "current_app": "Existing sweetness-only default +1g suggestion remains unchanged in site/lib/engine.js. Current owner product choice R455-DEC-001 awaits approval; five taste scales still required and all-green remains success.",
+      "result": "NO_AUTOMATIC_PRODUCT_POLICY_OVERRIDE; MAINTAIN_PENDING_DAILY_OWNER_DECISION",
+      "owner_approval": true
     }
   ],
   "policy_decisions_pending": [
@@ -266,12 +305,12 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R455-005 full 298-line profile report #05 and current five-style/engine crosswalk. Research/docs only; no new source-code tests yet."
+    "reason": "R455-006 all 586 lines of source 04 and bounded primary original article + manufacturer machine docs crosswalk. Documentation/evidence only; no changed behavior."
   },
   "next_actions": [
-    "Complete full first-to-last review of original reports 01-04 and 08-09 (03/09 full source bodies so far: 05/06/07); independent full reference audits for all nine remain pending.",
-    "Obtain original 15-file October29 implementation pack and S019 PDF through authenticated Library/Project bytes if possible; raw files not verified in this run due unavailable execution container.",
-    "Continue source-to-current-code fixes only when a reproducible Locked-safe defect is found and actual tests/CI verified. Preserve pending R455-DEC-001 sweetness-only +1g product choice without auto change.",
-    "Continue source register beyond 13 curated research entries and reconcile #267 live/frozen source audit without appropriating line coverage. #455 remains OPEN; no deployment."
+    "Continue complete original Markdown first-to-last review of 01-03 and 08-09 (04/09 full body; 04/05/06/07 complete); original ChatGPT citation tokens and unsupported sensory/numeric claims remain pending primary reference verification.",
+    "Review October29 15-member implementation pack and S019 PDF exact bytes when authorized runtime/tool access permits; original pack remains historical research-only and not approved engine policy.",
+    "Continue full GitHub/Project/Drive source enumeration beyond 13 curated research sources and coordinate frozen/current #267 audit without recrediting strict lines.",
+    "Prioritize actual reproducible safe UX/logic improvements with focused Node/browser/offline tests and exact-source CI; preserve unresolved R455-DEC-001 sweetness-only recommendation policy for owner digest. No publication."
   ]
 }
