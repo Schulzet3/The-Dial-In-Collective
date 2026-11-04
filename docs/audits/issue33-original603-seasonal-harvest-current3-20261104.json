@@ -9,7 +9,7 @@
   "scope_limits": {
     "source_kind": "public indexed official selected product HTML-to-text; NOT a byte-verified DNS-pinned raw HTML capture",
     "current_live_parser_executed": false,
-    "synthetic_fixture_test_executed": false,
+    "synthetic_fixture_test_executed": true,
     "manual_certified": 0,
     "change_to_original603_captures_or_oracle": false,
     "release_queue_changed": false,
@@ -58,5 +58,30 @@
     "Optional targeted guarded current official source probe for actual parser/HTML",
     "Maintain original603 untouched"
   ],
-  "status": "TESTING_NOT_READY"
+  "status": "VERIFIED_SELECTED_SOURCE_ROLE_REGRESSION_TESTS_ONLY_LIVE_PUBLIC_PARSER_PENDING",
+  "tests": {
+    "source_under_review_sha": "94e116ebcd02281f971274c88612774a432ba397",
+    "pr": 499,
+    "original_tested_sha": "22753250329613f26f85f3f3d5e72c8d64992b6f",
+    "identical_git_tree_sha": "01a247145ba41c3329546ea442f8afaedc649443",
+    "original603_freeze": "UNMODIFIED",
+    "pr_head_ci": {
+      "node_run": 41776949872,
+      "node": "SUCCESS 2335 PASS 0 FAIL 6 intentional SKIP; five new case/control assertions PASS",
+      "approval_run": 41776949777,
+      "sql_run": 41776949796,
+      "cloud_browser_run": 41776949809,
+      "private_source_run": 41776949773,
+      "all_applicable": "SUCCESS",
+      "frozen603": "SKIPPED_NOT_PASS"
+    },
+    "merged_source": {
+      "approval_run": 41777363968,
+      "result": "SUCCESS",
+      "queue_coverage_run": 41777363975,
+      "result_queue": "SUCCESS",
+      "live_parser": "NOT_EXECUTED"
+    }
+  },
+  "next": "Use a fresh focused DNS-pinned official HTML/Add Coffee parser probe for original603 #22/#286/#287; only close corresponding qualified current-source records after identity and each field are individually checked, without inferring harvest year or changing frozen oracle."
 }
