@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "date_utc": "2026-11-04",
+  "state": "TESTING_PUBLIC_PROBE_NOT_CURRENT_PARSER_VERIFIED",
+  "authority": "Owner-approved development-only original603 current selected source review",
+  "source_development_parent_sha": "f86761c33625ad296e6e83b2eaa087c74a82e5b7",
+  "original603": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "immutable_csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "oracle_scorer_unchanged": true
+  },
+  "cases": [
+    {
+      "number": 107,
+      "roaster": "Earthback Coffee",
+      "url": "https://earthbackcoffee.com/products/ethiopian-yirgacheffe-medium-roast",
+      "current_h1": "Ethiopian Yirgacheffe",
+      "direct_selected": "Medium Roast. Washed bean, very uniform. Small farmers working hard within the co-op improve quality and it shows. Tasting Notes: Well balanced, bright and floral, with tangerine and lemongrass notes.",
+      "historical_parser_origin": "Ethiopia",
+      "question": "Source named Yirgacheffe region and unnamed co-op growers; do not fabricate named cooperative."
+    },
+    {
+      "number": 319,
+      "roaster": "O.Henrys Coffee",
+      "url": "https://shop.ohenryscoffee.com/products/brazil-oberon",
+      "current_h1": "Brazil Oberon",
+      "direct_selected": "Grown in the famed Cerrado region, Brazil Oberon is a classic, dependable cup of coffee. With a creamy body, sweet chocolate and citrus notes, and mild acidity.",
+      "historical_parser_origin": "Brazil",
+      "question": "Recover explicit selected Cerrado growing region only if current actual parser still misses it; no unsupported roast tier."
+    }
+  ],
+  "workflow_marker": "[dic-issue33-twentysecond2]",
+  "changed_paths": [
+    ".github/workflows/roaster-source-probe.yml",
+    "docs/workstreams/issue-33.md",
+    "docs/audits/issue33-original603-107-319-source-review-20261104.json"
+  ],
+  "actual_current_parser": "PENDING_EXACT_SOURCE_RUN",
+  "official_raw_html_sha256": "PENDING_EXACT_SOURCE_RUN",
+  "source_hierarchy": "DIRECT_SELECTED_DESCRIPTION_FIRST",
+  "queue_unmodified": true,
+  "issue33_open": true,
+  "netlify_publication": false,
+  "production_writes": false,
+  "full603_manual_certification": false,
+  "next": "Check exact PR/merged source CI; inspect current raw selected evidence and parser; fix only reproducible generic defect."
+}
