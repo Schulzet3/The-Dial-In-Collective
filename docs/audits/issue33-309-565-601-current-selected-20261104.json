@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "issue": 33,
-  "status": "TESTING_RENDERED_SELECTED_SOURCES_REVIEWED_RUNNER_BLOCKED",
+  "status": "MERGED_RESEARCH_PROBE_TRIGGER_PENDING_ACTUAL_CURRENT_PARSER",
   "base_sha": "57241cb8b87149336254c5bd82e0632246023943",
   "base_tree": "176c175906942ff34fec111a77cf48da06badaea",
   "date_utc": "2026-11-04",
@@ -102,5 +102,27 @@
     "contemporaneous_external_status": "GitHub Status reported two Nov4 Actions incidents; later status says resolved 18:16 UTC but repo remained affected 19:02 UTC, so causality not independently proven.",
     "official_status": "https://www.githubstatus.com/",
     "exact_next": "Recheck available runner/check annotations, rerun one scoped job only after recovery, complete exact source CI, nonforce merge and 3/3 independent captured HTML/actual-parser checks, adjudicate any defects before READY."
+  },
+  "followup": {
+    "development_parent_sha": "2143ac345cc96519db769377ed72e287017c28a4",
+    "prior_pr": 615,
+    "prior_merge_sha": "fc4b0f3d60db634871b4d02d9e14621a4f1c6087",
+    "prior_pr_exact_head_ci": {
+      "approval": 41928670920,
+      "node": 41928670892,
+      "ux": 41928670865,
+      "sql": 41928670861
+    },
+    "issue33_selector": "[dic-issue33-twentysixth3]",
+    "target_case_numbers": [
+      309,
+      565,
+      601
+    ],
+    "workflow_path": ".github/workflows/roaster-source-probe.yml",
+    "current_status": "NOT_YET_EXECUTED_ON_EXACT_POSTMERGE_SOURCE",
+    "certification": "NONE",
+    "guard": "Do not promote evidence based on web-rendered text, skipped workflow or runtime code assumptions",
+    "next": "Check exact PR head and merge; trigger exact integrated selector; independently inspect private HTML/JSON artifact, actual parser fields/conflicts and Add Coffee; resolve source-identity limits"
   }
 }
