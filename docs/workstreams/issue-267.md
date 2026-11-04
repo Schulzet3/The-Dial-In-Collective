@@ -1,3 +1,13 @@
+## November 4, 2026 — #267 strict S2-027 historical admin review + first 100 source-preview lines [skip netlify]
+
+Recovered exact development `7fa8a80c3bac95bb90f3cfebf7bd572da3b882e5`, immutable original `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9`, pinned executable `9707553a64f88127826e8f5b2b36cd0651296e83`. Source-exact direct AI semantic review: historical #27 `docs/ADMIN_PORTAL_FINAL_RELEASE_REVIEW_2026-10-21.md` all **55/55** lines, blob `538ca6adec844dd02fa50d9964e5cc628564bec9`, fully identical to live historical document; current #26 `netlify/functions/coffee-url-preview.mjs` **1–100/192**, blob `b982650d78920f77342f5ac78dce91ca394094cc`, identical to current live development source. Every credited line includes literal source, behavior, risk, quality, duplicate/dead classification, exact counterpart, tests, safe improvement and latest Locked fit. [S2-027](../audits/issue267-v2-strict-batches/S2-027.json) is append-only; old V2 reported counts remain provisional unchanged.
+
+Source-only integrity and numbering PASS; historical admin report's 2026-10-21 Netlify/Supabase deployment/migration/consent claims are dated evidence, not current permissions or source; latest #457 controls. Netlify preview first 100 lines show enforced bearer/admission, bounded JSON and SSRF guard, public-only cache, preflight and unverified catalog labeling; no reproduced bug/dead code or safe removal established; full module, delegated callees and runtime tests **not yet validated**. No app/source changes, test-suite replay, provider/member writes, publication or READY queue alteration.
+
+Strict progress **1591/579,961 historical** and **1594/57,913 pinned current**. Next original #28 `docs/ADMIN_PORTAL_RELEASE_CANDIDATE_2026-10-21.md` line 1; pinned preview #26 line 101–192. Complete post-pin live drift remains open. Issue #267 remains OPEN.
+
+---
+
 ## November 4, 2026 — #267 strict S2-024/026 original and pinned-source reading [skip netlify]
 
 Recovered development `36d16a8bf726df3541625a69b49d8f634cbed4af`, main `a5b5c75933501d778ea01cd02e82589f51ef7cd6`, production `31c66832a28247e657a2bf89592ebc1e2f48dfc5`; original `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9` and pinned `9707553a64f88127826e8f5b2b36cd0651296e83`. Checked AGENTS, topic preflight, #267/#33/#96, current status, latest Locked #457, approval matrix, release queue, original inventories and V2/strict ledgers. No current overlapping strict S2 PR; old B03x PRs untouched.
