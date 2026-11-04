@@ -1,3 +1,33 @@
+## November 4 UTC — #33 PR494 first exact-head CI failed related-section negative; corrected (TESTING)
+
+Actual first exact PR-head Node/lint/build run [41770805094](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41770805094) executed 2,336 cases: **2,329 PASS / 1 FAIL / 6 intentional SKIP**. Five other new farm-biosphere positive and negative groups PASS; the newly added **Other Coffees** section negative FAILED. The matching producer/country appeared in a clearly unrelated section and was improperly donated to selected Origin. This is a genuine newly discovered safety defect in proposed code, not an existing application regression.
+
+**SAME-COMMIT source/journal safety repair:** add the adjacent already-approved related/recommended/other-coffee/catalog section exclusion to selected-farm biosphere. Maintain present-tense named H1/country evidence, never hardcode a roaster or place. First-head SQL41770804931, approval41770805047, cloud/browser41770805156, security41770805080, exact source archive41770805068 all SUCCESS; frozen60341770805056 SKIPPED. Corrected exact-head Node/CI and merged public parser still PENDING, do not claim earlier failure PASS. Queue 6 READY/90 DEPLOYED/3 IN_PROGRESS; no production/provider/member changes. [skip netlify]
+
+---
+
+## November 4 UTC — #33 strict same-sentence country conflict fixture (TESTING)
+
+Before opening PR, corrected test-only punctuation so the deliberately mismatched Ethiopia country is in the **same geographical claim sentence**, not a separate sentence invisible to this bounded rule. Source parser unchanged, no new tests executed yet. SAME-COMMIT source-bound journal, previous invalid fixture is preserved as Git history and not claimed to have passed. [skip netlify]
+
+---
+
+## November 4 UTC — #33 selected farm biosphere adversarial fixture precision (TESTING)
+
+Pre-PR static inspection of six source tests found an invalid synthetic assumption: an arbitrary biosphere name has no gazetteer-derived country, so a Kenyan selected H1 alone must not be called a country contradiction. Corrected the third negative fixture to **explicitly print Ethiopia on the same source sentence**, rather than infer it from a forest name. The parser's country-in-sentence guard remains unchanged; positives and unrelated/old-story negatives remain. SAME-COMMIT test/journal, exact CI still UNSTARTED; no PASS or READY claim. [skip netlify]
+
+---
+
+## November 4 UTC — #33 Dehab #188 present farm biosphere geographic precision (TESTING, not READY/deployed)
+
+**Authority/recovery:** Owner autonomous Issue33 development only, base `8a144d84a3e1d790cc0d78279d54c1de6c452586`. AGENTS/AI context, Issue33 current journal/status, Master Spec, Decision Ledger, approval, queue, original603 register, live official source, #267 V2 and #96, open #367 and required CI reviewed. Source-bound previous exact official run41752527382 (source `36d16a8b`) selected #188 H1 `42 Series- Ethiopia Dehab’s Diamond`, raw HTML SHA256 `7fafe7621a6db8d331ccb0ab1faa24e3fab4057eecac3bdb7af80a421b8eab2a`, parser origin **Ethiopia** with conflicts []; current official product page directly says Dehab’s **present** farms lie in the UNESCO **Kaffa Forest** biosphere buffer/core zones. Existing country-only output omits this selected explicitly named growing area. That earlier source capture is not a fresh parser result on THIS proposed code.
+
+**SAME-COMMIT source + tests + queue + journal + evidence:** Generic `src/server/coffee-identity-evidence.mjs` admits only direct present-tense named-producer farms in a printed UNESCO biosphere when exact selected H1 includes producer and one explicit country; never a place dictionary/roaster whitelist or another product's historic/neighbor farm. Six focused positive/adversarial regression groups in `tests/coffee-issue33-selected-farm-biosphere.test.mjs`, receipt `docs/audits/issue33-selected-farm-biosphere-20261104.json`. Residual #33 **IN_PROGRESS** queue scope includes changed runtime path, all 6 READY /90 DEPLOYED/3 IN_PROGRESS unchanged. Original603 CSV blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6`, oracle/captures/scorer unchanged, #267 V2 and #96 untouched.
+
+**PENDING/ACCEPTANCE:** actual exact PR-head CI (Node22/lint/build/SQL/approval/browser/privacy as relevant), repair any failures, safe nonforce merge, exact merged-source applicable CI, one bounded guarded current official #188/#206/#320 Add Coffee HTML/H1/sha/parser and no changed controls; READY only when verified. No tests claimed PASS merely from adding source. No Netlify/production SQL/Auth/Edge/member/provider changes, account creation, cost or publication. [skip netlify]
+
+---
+
 ## November 4 UTC — Issue33 #13 FUDAM selected current locality independently VERIFIED and narrowly READY, NOT DEPLOYED
 
 [PR488](https://github.com/Schulzet3/The-Dial-In-Collective/pull/488) safely nonforce squash merged `be0ac469eb8a7a46f6d52e3b464cb2a6d402318c`, tree `2027c25e64bc6cbc5240437c3ae23714b0e2e841` **identical** to corrected exact reviewed head `f775951f6635861bb357e3126d6cdd6f085d0e8c`. All five source/test/CI paths had SAME-COMMIT scoped journal. First Node [41764731071](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41764731071) 2323 PASS/**1 genuine newly added test FAIL**/6 SKIP; root cause later other-coffee comparison/general `typically` wrongly vetoed earlier affirmative directly named grower municipality. Repaired narrowly preserving noncurrent/historical safeguards. Corrected exact-head Node [41765208843](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41765208843) **2324 PASS/0 FAIL/6 deliberate SKIP**, cloud/browser, isolated SQL, security, source archive and approval SUCCESS. Full frozen603 restricted SKIPPED, not PASS.
