@@ -1,3 +1,15 @@
+## November 5, 2026 UTC — #267 S2-104 direct original badge/New Coffee and 603 comparison audit [skip netlify]
+
+Recovered exact merged development `dd8e2918d1ff4128f11a6c1896b4fc9214396c7d` Git tree `dfb50a0da5df23d746ea56ee1adac1b0d8f41f58`, strict S2-103 receipt and ledger, AGENTS/context/preflight, Nov3 Locked release/visual supersessions, issue #267 and latest #33/#96 boundaries, main/release refs/queue and prior original workflow first lines rechecked without duplicate credit. Other-account legacy task state remains unverified. No overlapping new original receipt source range or active concurrent #267 write observed.
+
+Directly inspected 40 frozen original #59 `docs/DECISION_LEDGER.json:984–1023` at `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9` Git blob `195c3e4de415afef4515a6291c399a1c9001b610`, and independent 40 pinned current original #50 `scripts/audit/coffee-reviewed-change-forensics.py:281–320` at `9707553a64f88127826e8f5b2b36cd0651296e83` Git blob `401e02bf1283f204471c3dbecb12e520054f0cc3`. All 80 literal physical lines, including blank/syntax delimiters, individually annotated for nine semantic dimensions; all 40 pinned lines text-identical to live `bd8265a3540662d09f45adb97e8562e64a6ea3f0:287–326`, offset +6. [S2-104 receipt](../audits/issue267-v2-strict-batches/S2-104.json). AI semantics only, no claim independent human certification or running code.
+
+Scoped findings: historic exact black badge text includes acknowledged low-contrast deep blue risk, later Ristretto/Traditional specific ink override follows; do not assume current rendered accessibility without measurement or violate Locked aesthetic. Original603 report index/diff helper strictly counts 603 case ids but malformed nested records need isolated negative testing under #33 before any repair. No confirmed active vulnerability; no app source edits.
+
+**Proposed** strict 5,914/579,961 historical and 7,541/57,913 pinned, prior integrated S2-103 5,874/7,501. Next frozen #59 line1024 and pinned #50 line321. Full post-pin changed code review remains incomplete, no current browser/SQL/Auth/mobile/ZIP or original603 runtime test newly passed. Scoped same-commit journal/receipt/ledger only; no deployment, Netlify, provider, production data/account write or original corpus modifications. PUBLIC-vs-Locked-PRIVATE repo setting still requires owner disposition. Issue OPEN.
+
+---
+
 ## November 5, 2026 UTC — Issue #267 S2-103 strict badge amendment and forensic ZIP audit [skip netlify]
 
 Recovered direct merged development `0ad16097dd08a85f0bd1c58328d97da8eaf63cb4`, exact source tree `a068ead22a0f18639a6d55736b8dc785943c5423`, prior S2-102 strict ledger/receipt and live #267/#33/#96 priorities, AGENTS, Context Entry, Preflight, Decision Ledger, Master Spec, approval matrix, release queue. First original workflow file1 lines1–4 checked once more without new credit. Other account's legacy task still UNVERIFIED; no overlapping new V2 source spans found.
