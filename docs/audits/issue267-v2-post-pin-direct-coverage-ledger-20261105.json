@@ -3,7 +3,7 @@
   "issue": 267,
   "review_standard": "Independent post-pin new source line semantic review; separate from original frozen/pinned V2 denominator",
   "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
-  "observed_development_commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+  "observed_development_commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
   "receipt_references": [
     {
       "batch_id": "D2-001",
@@ -254,10 +254,36 @@
       "line_count": 26,
       "verified_absent_at_pin": true,
       "reviewed_live_commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c"
+    },
+    {
+      "batch_id": "D2-021",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-021.json",
+      "path": "scripts/release/netlify-immutable-publish.mjs",
+      "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+      "range": [
+        1,
+        38
+      ],
+      "line_count": 38,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "e132949fb1d29e2ab869da7db986207fe93bedd2"
+    },
+    {
+      "batch_id": "D2-022",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-022.json",
+      "path": "tests/netlify-immutable-publish.test.mjs",
+      "blob_sha": "42902273ea08de6885ade26dfcbd465c5491b0fe",
+      "range": [
+        1,
+        23
+      ],
+      "line_count": 23,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "e132949fb1d29e2ab869da7db986207fe93bedd2"
     }
   ],
-  "unique_source_lines_direct_reviewed": 549,
-  "fully_reviewed_new_source_files": 20,
+  "unique_source_lines_direct_reviewed": 610,
+  "fully_reviewed_new_source_files": 22,
   "nonoverlap": true,
   "changed_existing_pinned_paths": "PENDING",
   "new_sql_migrations": "PENDING",
@@ -280,7 +306,7 @@
       "subtract_phantom_records": 4
     }
   ],
-  "last_review_batch": "D2-020",
-  "last_review_source_commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
-  "last_review_note": "D2-019-020 62 individually examined post-pin receipt verifier/test lines. Upstream exact-run CI check trust boundary traced, no active bug reproduced. S2 untouched; full live drift unfinished; runtime tests not run."
+  "last_review_batch": "D2-022",
+  "last_review_source_commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+  "last_review_note": "D2-021/022: 61 complete original post-pin direct-ZIP publisher/test physical lines. Potential legacy direct API source not proven callable in active release path; no removal, no real Netlify action. Full app acceptance/live drift incomplete."
 }
