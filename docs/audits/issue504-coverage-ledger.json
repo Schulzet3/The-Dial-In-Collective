@@ -285,11 +285,35 @@
       ],
       "actual_original_pr_merges_verified": 8,
       "live_record_json_equal": true
+    },
+    {
+      "id": "G1-021",
+      "receipt": "docs/audits/issue504-review-G1-021.json",
+      "text_files_entire": 0,
+      "text_files_partial": 1,
+      "reviewed_file_lines": 269,
+      "reviewed_file_words": 2239,
+      "reviewed_github_objects": 0,
+      "reviewed_github_words": 0,
+      "reviewed_sequential_queue_records": 8,
+      "confirmed_note_only_fixes": 0,
+      "source_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
+      "source_range_inclusive": [
+        4130,
+        4398
+      ],
+      "original_pr_merges_verified": 8,
+      "current_item_json_equal": 2,
+      "changed_release17_objects": 6,
+      "release_receipts_verified": [
+        "DIC-20261102-READY17-14",
+        "DIC-20261104-READY20-17"
+      ]
     }
   ],
   "totals": {
-    "source_file_lines": 5907,
-    "source_file_words": 47471,
+    "source_file_lines": 6176,
+    "source_file_words": 49710,
     "github_objects": 2,
     "github_words": 721
   },
@@ -308,21 +332,22 @@
   "next": {
     "kind": "git_blob",
     "path": "docs/RELEASE_QUEUE.json",
-    "first_line": 4130,
+    "first_line": 4399,
     "expected_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
     "require_fresh_blob": true,
-    "expected_next_item": "DIC-Q-33-selected-origin-method-suffix",
+    "expected_next_item": "DIC-Q-33-original603-125-current-origin-seo",
     "unreviewed_drift": [
       "DIC-Q-455-legacy-undated-feedback",
       "DIC-Q-33-original603-309-inline-product-roast",
       "DIC-Q-33-original603-62-educational-mountain-origin",
       "DIC-Q-455-previous-calibration-date",
       "DIC-Q-33-original603-106-country-first-growing-region",
-      "DIC-Q-455-legacy-coffee-date-sort"
+      "DIC-Q-455-legacy-coffee-date-sort",
+      "DIC-Q-33-original603-18-current-present-farm-locality"
     ]
   },
-  "uncovered": "Pinned queue line 4130+; six new live queue IDs and 19 changed preexisting queue item values; GitHub issues/PR reviews/comments/Actions/jobs/logs/tags/releases/history/binary assets, and delegated #267 strict source coverage not complete. Repository PUBLIC with reported temporary owner exception; eventual PRIVATE restoration unverified.",
-  "latest_review_source_anchor": "55d45a95185dcf8d9692f35bfb63cccae30f015d",
+  "uncovered": "Pinned original queue line 4399+; 7 new live queue IDs and 19 changed original items have zero delta semantic credit; GitHub issues/PRs/comments/reviews/Actions/logs/history/tags/releases/binaries and #267 strict source content are incomplete. PUBLIC with temporary owner exception, future private restoration unverified.",
+  "latest_review_source_anchor": "a53c41fa4f1a1c996aa6e34f656560d24deb95d3",
   "inventory_metadata_only": {
     "github_issue_rest": 523,
     "github_pr_rest": 454,
@@ -337,7 +362,7 @@
       "GET actions/workflows"
     ],
     "actions_runs_total_observed_at_latest_page1": 9052,
-    "queue_unique_items_observed": 118
+    "queue_unique_items_observed": 119
   },
   "last_completely_reviewed_document": {
     "path": "docs/RELEASE_REQUEST_SCHEMA_V4.md",
@@ -349,12 +374,11 @@
   "last_partially_reviewed_document": {
     "path": "docs/RELEASE_QUEUE.json",
     "sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
-    "source_sha_before_notes": "0f5d8a9d6be56b7ecb4b7e4675340e0f9ed374e5",
     "total_lines": 5377,
     "reviewed_first_line": 1,
-    "reviewed_last_line": 4129,
-    "whitespace_words_credited": "per_receipt_ranges_only; includes noncontiguous earlier insertions",
-    "credit": "G1-005 through G1-020; source-bound only; zero #267 overlap"
+    "reviewed_last_line": 4398,
+    "whitespace_words_credited": "per-receipt source bound original; current drift excluded",
+    "credit": "G1-005 through G1-021, no #267 credit"
   },
   "ci_open_negative": {
     "source_merge_sha": "54ab55987be8b05db090c530a47e496093c8c76a",
@@ -469,5 +493,22 @@
     "unreviewed_new": 6,
     "unreviewed_changed": 19,
     "next_line": 4130
+  },
+  "g1021_reconciliation_20261105": {
+    "development_sha": "a53c41fa4f1a1c996aa6e34f656560d24deb95d3",
+    "main_sha": "590c2c33610a5a7703a2509e1045d236b78a7981",
+    "release_production_sha": "69742e9e8633c29c209249a87303c6e931a41b89",
+    "pinned_queue_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
+    "current_queue_sha": "5a2421ab28ec6fc0d34482d8aaa70b3867a8cd40",
+    "lines": 269,
+    "words": 2239,
+    "records": 8,
+    "unchanged_records": 2,
+    "release17_changed_records": 6,
+    "pr_merges_verified": 8,
+    "new_items_unreviewed": 7,
+    "changed_items_unreviewed": 19,
+    "next_line": 4399,
+    "prior_pr666_merged": "a53c41fa4f1a1c996aa6e34f656560d24deb95d3"
   }
 }
