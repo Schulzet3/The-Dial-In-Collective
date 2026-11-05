@@ -1,0 +1,630 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "D2-017",
+  "date_utc": "2026-11-05",
+  "kind": "POST_PIN_NEW_CODE_DIRECT_SEMANTIC_REVIEW",
+  "source": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "observed_live_commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+    "path": "scripts/release/netlify-provider-readback.mjs",
+    "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+    "physical_line_count": 22,
+    "verified_absent_at_pin": true,
+    "terminal_newline_not_physical_line": true
+  },
+  "method": "Direct reading and semantic consideration of each original numbered source line; SHA-bound original text and nine relevant dimensions per line. AI rather than human provenance. Existing focused test source inspected, no new test here.",
+  "per_line": [
+    {
+      "line": 1,
+      "source_text": "// Pure fail-closed provider readback. Does not call Netlify or publish anything.",
+      "classification": "comment",
+      "behavior": "Scope comment declares pure readback predicate with no fetch",
+      "quality": "Clear no-provider-call contract",
+      "risk": "Cannot prove caller does not mutate provider; separate integration",
+      "dead_or_obsolete": "Active verification guard",
+      "duplication": "Not a copy of provider API caller",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub exact pinned commit contents 404"
+      },
+      "live_source": {
+        "path": "scripts/release/netlify-provider-readback.mjs",
+        "commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+        "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+        "line": 1,
+        "exact_original": true
+      },
+      "testability": "Static and runtime test of pure function; REUSED_PASSING_PREVIOUS_SOURCE_TEST_EVIDENCE_NOT_EXECUTED_IN_THIS_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Verified exact-release source binding via read-only provider identity; this predicate never grants publication, does not modify provider/SQL/Auth/Edge/member/backup and does not independently certify release permissions.",
+      "review_method": "Direct AI original source line 1 semantic inspection at blob cfb5cec936843012f957ad0437791e06cb906899; no independent human review."
+    },
+    {
+      "line": 2,
+      "source_text": "const SHA=/^[a-f0-9]{40}$/;",
+      "classification": "executable",
+      "behavior": "Constrains release SHA to 40 lowercase hex characters",
+      "quality": "Well-defined SHA-1 Git commit shape",
+      "risk": "Not proof commit exists or passed tests",
+      "dead_or_obsolete": "Active source format guard",
+      "duplication": "Used again separately in API wrapper",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub exact pinned commit contents 404"
+      },
+      "live_source": {
+        "path": "scripts/release/netlify-provider-readback.mjs",
+        "commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+        "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+        "line": 2,
+        "exact_original": true
+      },
+      "testability": "Malformed and uppercase SHA negative tests; REUSED_PASSING_PREVIOUS_SOURCE_TEST_EVIDENCE_NOT_EXECUTED_IN_THIS_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Verified exact-release source binding via read-only provider identity; this predicate never grants publication, does not modify provider/SQL/Auth/Edge/member/backup and does not independently certify release permissions.",
+      "review_method": "Direct AI original source line 2 semantic inspection at blob cfb5cec936843012f957ad0437791e06cb906899; no independent human review."
+    },
+    {
+      "line": 3,
+      "source_text": "const SITE='153277f2-e19e-4862-b9a6-f2e18ccde271';",
+      "classification": "executable",
+      "behavior": "Defines one approved Netlify site UUID",
+      "quality": "Scopes assertions to project identity",
+      "risk": "Hard-coded site must track approved current provider",
+      "dead_or_obsolete": "Active bound constant",
+      "duplication": "Matches wrapper site ID intentionally",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub exact pinned commit contents 404"
+      },
+      "live_source": {
+        "path": "scripts/release/netlify-provider-readback.mjs",
+        "commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+        "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+        "line": 3,
+        "exact_original": true
+      },
+      "testability": "Wrong site rejection; REUSED_PASSING_PREVIOUS_SOURCE_TEST_EVIDENCE_NOT_EXECUTED_IN_THIS_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Verified exact-release source binding via read-only provider identity; this predicate never grants publication, does not modify provider/SQL/Auth/Edge/member/backup and does not independently certify release permissions.",
+      "review_method": "Direct AI original source line 3 semantic inspection at blob cfb5cec936843012f957ad0437791e06cb906899; no independent human review."
+    },
+    {
+      "line": 4,
+      "source_text": "const ORIGIN='https://app.dialincollective.com';",
+      "classification": "executable",
+      "behavior": "Defines exact approved public hostname",
+      "quality": "Prevents alternate hostname passing",
+      "risk": "Potential host migration would require explicit owner decision",
+      "dead_or_obsolete": "Active routing constraint",
+      "duplication": "Shared value elsewhere by design",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub exact pinned commit contents 404"
+      },
+      "live_source": {
+        "path": "scripts/release/netlify-provider-readback.mjs",
+        "commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+        "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+        "line": 4,
+        "exact_original": true
+      },
+      "testability": "Wrong SSL URL test; REUSED_PASSING_PREVIOUS_SOURCE_TEST_EVIDENCE_NOT_EXECUTED_IN_THIS_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Verified exact-release source binding via read-only provider identity; this predicate never grants publication, does not modify provider/SQL/Auth/Edge/member/backup and does not independently certify release permissions.",
+      "review_method": "Direct AI original source line 4 semantic inspection at blob cfb5cec936843012f957ad0437791e06cb906899; no independent human review."
+    },
+    {
+      "line": 5,
+      "source_text": "export function assertNetlifyPublishedSource({deploy,project,expectedReleaseSha,expectedDeployId}={}){",
+      "classification": "executable",
+      "behavior": "Exports injectable pure predicate with deploy/project/expected SHA/ID",
+      "quality": "Supports offline deterministic verification",
+      "risk": "Caller must supply trustworthy provider readback, not arbitrary assertions",
+      "dead_or_obsolete": "Current provider proof checker",
+      "duplication": "Distinct from network wrapper",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub exact pinned commit contents 404"
+      },
+      "live_source": {
+        "path": "scripts/release/netlify-provider-readback.mjs",
+        "commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+        "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+        "line": 5,
+        "exact_original": true
+      },
+      "testability": "Pass genuine and spoofed-shaped fixture; REUSED_PASSING_PREVIOUS_SOURCE_TEST_EVIDENCE_NOT_EXECUTED_IN_THIS_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Verified exact-release source binding via read-only provider identity; this predicate never grants publication, does not modify provider/SQL/Auth/Edge/member/backup and does not independently certify release permissions.",
+      "review_method": "Direct AI original source line 5 semantic inspection at blob cfb5cec936843012f957ad0437791e06cb906899; no independent human review."
+    },
+    {
+      "line": 6,
+      "source_text": " if(!SHA.test(expectedReleaseSha||'')||!deploy||!project)",
+      "classification": "executable",
+      "behavior": "Checks SHA syntax and presence of deploy/project",
+      "quality": "Fails before property access on missing objects",
+      "risk": "Does not enforce nonblank expectedDeployId until later equality",
+      "dead_or_obsolete": "Active initial fail closed",
+      "duplication": "Separate from site matching",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub exact pinned commit contents 404"
+      },
+      "live_source": {
+        "path": "scripts/release/netlify-provider-readback.mjs",
+        "commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+        "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+        "line": 6,
+        "exact_original": true
+      },
+      "testability": "Malformed expected source test; REUSED_PASSING_PREVIOUS_SOURCE_TEST_EVIDENCE_NOT_EXECUTED_IN_THIS_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Verified exact-release source binding via read-only provider identity; this predicate never grants publication, does not modify provider/SQL/Auth/Edge/member/backup and does not independently certify release permissions.",
+      "review_method": "Direct AI original source line 6 semantic inspection at blob cfb5cec936843012f957ad0437791e06cb906899; no independent human review."
+    },
+    {
+      "line": 7,
+      "source_text": "  throw Error('Missing exact release SHA or provider readback');",
+      "classification": "executable",
+      "behavior": "Throws on absent or malformed identity evidence",
+      "quality": "Prevents vacuous success",
+      "risk": "Error contains no secret token",
+      "dead_or_obsolete": "Active guard error",
+      "duplication": "Not redundant with other guards",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub exact pinned commit contents 404"
+      },
+      "live_source": {
+        "path": "scripts/release/netlify-provider-readback.mjs",
+        "commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+        "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+        "line": 7,
+        "exact_original": true
+      },
+      "testability": "Check throw regex; REUSED_PASSING_PREVIOUS_SOURCE_TEST_EVIDENCE_NOT_EXECUTED_IN_THIS_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Verified exact-release source binding via read-only provider identity; this predicate never grants publication, does not modify provider/SQL/Auth/Edge/member/backup and does not independently certify release permissions.",
+      "review_method": "Direct AI original source line 7 semantic inspection at blob cfb5cec936843012f957ad0437791e06cb906899; no independent human review."
+    },
+    {
+      "line": 8,
+      "source_text": " if(deploy.site_id!==SITE||project.id!==SITE)",
+      "classification": "executable",
+      "behavior": "Matches both deploy.site_id and project.id to configured site",
+      "quality": "Mitigates cross-site provider mixups",
+      "risk": "Same input could be spoofed in pure unit test; real API wrapper important",
+      "dead_or_obsolete": "Active identity check",
+      "duplication": "Two fields protect independent shapes",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub exact pinned commit contents 404"
+      },
+      "live_source": {
+        "path": "scripts/release/netlify-provider-readback.mjs",
+        "commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+        "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+        "line": 8,
+        "exact_original": true
+      },
+      "testability": "Wrong site tests; REUSED_PASSING_PREVIOUS_SOURCE_TEST_EVIDENCE_NOT_EXECUTED_IN_THIS_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Verified exact-release source binding via read-only provider identity; this predicate never grants publication, does not modify provider/SQL/Auth/Edge/member/backup and does not independently certify release permissions.",
+      "review_method": "Direct AI original source line 8 semantic inspection at blob cfb5cec936843012f957ad0437791e06cb906899; no independent human review."
+    },
+    {
+      "line": 9,
+      "source_text": "  throw Error('Wrong Netlify site');",
+      "classification": "executable",
+      "behavior": "Rejects site mismatch",
+      "quality": "Explicit security failure branch",
+      "risk": "No provider calls",
+      "dead_or_obsolete": "Active guard",
+      "duplication": "Single throw",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub exact pinned commit contents 404"
+      },
+      "live_source": {
+        "path": "scripts/release/netlify-provider-readback.mjs",
+        "commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+        "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+        "line": 9,
+        "exact_original": true
+      },
+      "testability": "Negative test; REUSED_PASSING_PREVIOUS_SOURCE_TEST_EVIDENCE_NOT_EXECUTED_IN_THIS_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Verified exact-release source binding via read-only provider identity; this predicate never grants publication, does not modify provider/SQL/Auth/Edge/member/backup and does not independently certify release permissions.",
+      "review_method": "Direct AI original source line 9 semantic inspection at blob cfb5cec936843012f957ad0437791e06cb906899; no independent human review."
+    },
+    {
+      "line": 10,
+      "source_text": " if(deploy.state!=='ready'||deploy.branch!=='release/production'||",
+      "classification": "executable",
+      "behavior": "Begins production readiness/branch check",
+      "quality": "Requires deploy state ready and release/production branch",
+      "risk": "Branch label alone is not publication authority",
+      "dead_or_obsolete": "Current publication-source guard",
+      "duplication": "Not duplicated elsewhere in function",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub exact pinned commit contents 404"
+      },
+      "live_source": {
+        "path": "scripts/release/netlify-provider-readback.mjs",
+        "commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+        "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+        "line": 10,
+        "exact_original": true
+      },
+      "testability": "Building/development negative; REUSED_PASSING_PREVIOUS_SOURCE_TEST_EVIDENCE_NOT_EXECUTED_IN_THIS_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Verified exact-release source binding via read-only provider identity; this predicate never grants publication, does not modify provider/SQL/Auth/Edge/member/backup and does not independently certify release permissions.",
+      "review_method": "Direct AI original source line 10 semantic inspection at blob cfb5cec936843012f957ad0437791e06cb906899; no independent human review."
+    },
+    {
+      "line": 11,
+      "source_text": "  deploy.context!=='production'||deploy.commit_ref!==expectedReleaseSha)",
+      "classification": "executable",
+      "behavior": "Requires production context and exact SHA reference",
+      "quality": "Binds deployment to expected Git SHA",
+      "risk": "Cannot independently prove release authority from this record alone",
+      "dead_or_obsolete": "Active source contract",
+      "duplication": "Complements branch context",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub exact pinned commit contents 404"
+      },
+      "live_source": {
+        "path": "scripts/release/netlify-provider-readback.mjs",
+        "commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+        "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+        "line": 11,
+        "exact_original": true
+      },
+      "testability": "Wrong SHA and deploy-preview negative; REUSED_PASSING_PREVIOUS_SOURCE_TEST_EVIDENCE_NOT_EXECUTED_IN_THIS_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Verified exact-release source binding via read-only provider identity; this predicate never grants publication, does not modify provider/SQL/Auth/Edge/member/backup and does not independently certify release permissions.",
+      "review_method": "Direct AI original source line 11 semantic inspection at blob cfb5cec936843012f957ad0437791e06cb906899; no independent human review."
+    },
+    {
+      "line": 12,
+      "source_text": "  throw Error('Netlify deployment is not READY for exact approved release SHA');",
+      "classification": "executable",
+      "behavior": "Rejects non-ready or wrong Git release state",
+      "quality": "Fail-closed before current-deploy ID checks",
+      "risk": "No verification of runtime function yet, separate wrapper",
+      "dead_or_obsolete": "Current strict guard",
+      "duplication": "Distinct from site guard",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub exact pinned commit contents 404"
+      },
+      "live_source": {
+        "path": "scripts/release/netlify-provider-readback.mjs",
+        "commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+        "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+        "line": 12,
+        "exact_original": true
+      },
+      "testability": "Wrong state/context tests; REUSED_PASSING_PREVIOUS_SOURCE_TEST_EVIDENCE_NOT_EXECUTED_IN_THIS_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Verified exact-release source binding via read-only provider identity; this predicate never grants publication, does not modify provider/SQL/Auth/Edge/member/backup and does not independently certify release permissions.",
+      "review_method": "Direct AI original source line 12 semantic inspection at blob cfb5cec936843012f957ad0437791e06cb906899; no independent human review."
+    },
+    {
+      "line": 13,
+      "source_text": " if(!deploy.id||deploy.id!==expectedDeployId||",
+      "classification": "executable",
+      "behavior": "Requires nonempty deploy.id equalling externally expected ID",
+      "quality": "Protects against missing/mismatched deploy reference",
+      "risk": "External expected ID must derive from actual published site state",
+      "dead_or_obsolete": "Current identity gate",
+      "duplication": "Additional currentDeploy mirror follows",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub exact pinned commit contents 404"
+      },
+      "live_source": {
+        "path": "scripts/release/netlify-provider-readback.mjs",
+        "commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+        "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+        "line": 13,
+        "exact_original": true
+      },
+      "testability": "ID mismatch test; REUSED_PASSING_PREVIOUS_SOURCE_TEST_EVIDENCE_NOT_EXECUTED_IN_THIS_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Verified exact-release source binding via read-only provider identity; this predicate never grants publication, does not modify provider/SQL/Auth/Edge/member/backup and does not independently certify release permissions.",
+      "review_method": "Direct AI original source line 13 semantic inspection at blob cfb5cec936843012f957ad0437791e06cb906899; no independent human review."
+    },
+    {
+      "line": 14,
+      "source_text": "  project._enrichedFields?.currentDeploy?.currentDeploy?.id!==deploy.id||",
+      "classification": "executable",
+      "behavior": "Matches nested enriched currentDeploy ID with deploy ID",
+      "quality": "Prevents stale mirror references",
+      "risk": "Optional chaining avoids crash when missing data",
+      "dead_or_obsolete": "Current published-ID continuity check",
+      "duplication": "Second readback shape intentionally corroborates",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub exact pinned commit contents 404"
+      },
+      "live_source": {
+        "path": "scripts/release/netlify-provider-readback.mjs",
+        "commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+        "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+        "line": 14,
+        "exact_original": true
+      },
+      "testability": "Stale ID negative; REUSED_PASSING_PREVIOUS_SOURCE_TEST_EVIDENCE_NOT_EXECUTED_IN_THIS_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Verified exact-release source binding via read-only provider identity; this predicate never grants publication, does not modify provider/SQL/Auth/Edge/member/backup and does not independently certify release permissions.",
+      "review_method": "Direct AI original source line 14 semantic inspection at blob cfb5cec936843012f957ad0437791e06cb906899; no independent human review."
+    },
+    {
+      "line": 15,
+      "source_text": "  project._enrichedFields?.currentDeploy?.currentDeploy?.state!=='ready'||",
+      "classification": "executable",
+      "behavior": "Requires nested deploy state ready",
+      "quality": "Confirms nested published deploy not building",
+      "risk": "Trust in enriched object depends on wrapper",
+      "dead_or_obsolete": "Current state corroboration",
+      "duplication": "Intentional dual-state check",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub exact pinned commit contents 404"
+      },
+      "live_source": {
+        "path": "scripts/release/netlify-provider-readback.mjs",
+        "commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+        "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+        "line": 15,
+        "exact_original": true
+      },
+      "testability": "Nested state negative; REUSED_PASSING_PREVIOUS_SOURCE_TEST_EVIDENCE_NOT_EXECUTED_IN_THIS_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Verified exact-release source binding via read-only provider identity; this predicate never grants publication, does not modify provider/SQL/Auth/Edge/member/backup and does not independently certify release permissions.",
+      "review_method": "Direct AI original source line 15 semantic inspection at blob cfb5cec936843012f957ad0437791e06cb906899; no independent human review."
+    },
+    {
+      "line": 16,
+      "source_text": "  project._enrichedFields?.currentDeploy?.state!=='current')",
+      "classification": "executable",
+      "behavior": "Requires site wrapper currentDeploy state current",
+      "quality": "Rejects noncurrent deploy",
+      "risk": "Wrapper computes current via published_deploy; provider source needed",
+      "dead_or_obsolete": "Current-state check",
+      "duplication": "Distinct from readiness",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub exact pinned commit contents 404"
+      },
+      "live_source": {
+        "path": "scripts/release/netlify-provider-readback.mjs",
+        "commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+        "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+        "line": 16,
+        "exact_original": true
+      },
+      "testability": "Stale state negative; REUSED_PASSING_PREVIOUS_SOURCE_TEST_EVIDENCE_NOT_EXECUTED_IN_THIS_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Verified exact-release source binding via read-only provider identity; this predicate never grants publication, does not modify provider/SQL/Auth/Edge/member/backup and does not independently certify release permissions.",
+      "review_method": "Direct AI original source line 16 semantic inspection at blob cfb5cec936843012f957ad0437791e06cb906899; no independent human review."
+    },
+    {
+      "line": 17,
+      "source_text": "  throw Error('Netlify deployment is not current or receipt mismatch');",
+      "classification": "executable",
+      "behavior": "Throws on ID/readiness/current failures",
+      "quality": "Fail-closed on mismatch",
+      "risk": "No provider network side effect",
+      "dead_or_obsolete": "Current proof gate",
+      "duplication": "One error branch",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub exact pinned commit contents 404"
+      },
+      "live_source": {
+        "path": "scripts/release/netlify-provider-readback.mjs",
+        "commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+        "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+        "line": 17,
+        "exact_original": true
+      },
+      "testability": "Wrong nested states test; REUSED_PASSING_PREVIOUS_SOURCE_TEST_EVIDENCE_NOT_EXECUTED_IN_THIS_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Verified exact-release source binding via read-only provider identity; this predicate never grants publication, does not modify provider/SQL/Auth/Edge/member/backup and does not independently certify release permissions.",
+      "review_method": "Direct AI original source line 17 semantic inspection at blob cfb5cec936843012f957ad0437791e06cb906899; no independent human review."
+    },
+    {
+      "line": 18,
+      "source_text": " if(deploy.ssl_url!==ORIGIN||project._enrichedFields?.urls?.primarySiteUrl!==ORIGIN)",
+      "classification": "executable",
+      "behavior": "Compares deploy SSL URL and primary site URL with approved origin",
+      "quality": "Fails unexpected custom domains or preview site",
+      "risk": "Strict origin equality may block legitimate planned host migration",
+      "dead_or_obsolete": "Current hostname guard",
+      "duplication": "Complements site UUID",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub exact pinned commit contents 404"
+      },
+      "live_source": {
+        "path": "scripts/release/netlify-provider-readback.mjs",
+        "commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+        "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+        "line": 18,
+        "exact_original": true
+      },
+      "testability": "Wrong ssl_url negative; REUSED_PASSING_PREVIOUS_SOURCE_TEST_EVIDENCE_NOT_EXECUTED_IN_THIS_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Verified exact-release source binding via read-only provider identity; this predicate never grants publication, does not modify provider/SQL/Auth/Edge/member/backup and does not independently certify release permissions.",
+      "review_method": "Direct AI original source line 18 semantic inspection at blob cfb5cec936843012f957ad0437791e06cb906899; no independent human review."
+    },
+    {
+      "line": 19,
+      "source_text": "  throw Error('Unexpected production hostname');",
+      "classification": "executable",
+      "behavior": "Throws on hostname mismatch",
+      "quality": "Ensures expected public origin in proof",
+      "risk": "No runtime page health guarantee; separate smoke",
+      "dead_or_obsolete": "Current route proof",
+      "duplication": "Not duplicated",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub exact pinned commit contents 404"
+      },
+      "live_source": {
+        "path": "scripts/release/netlify-provider-readback.mjs",
+        "commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+        "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+        "line": 19,
+        "exact_original": true
+      },
+      "testability": "Wrong URL assertion; REUSED_PASSING_PREVIOUS_SOURCE_TEST_EVIDENCE_NOT_EXECUTED_IN_THIS_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Verified exact-release source binding via read-only provider identity; this predicate never grants publication, does not modify provider/SQL/Auth/Edge/member/backup and does not independently certify release permissions.",
+      "review_method": "Direct AI original source line 19 semantic inspection at blob cfb5cec936843012f957ad0437791e06cb906899; no independent human review."
+    },
+    {
+      "line": 20,
+      "source_text": " return {status:'PROVIDER_READY_CURRENT_EXACT_SHA',release_sha:expectedReleaseSha,",
+      "classification": "executable",
+      "behavior": "Returns status and expected SHA from verified inputs",
+      "quality": "Status is evidence-labeled, not a deployment action",
+      "risk": "Callers must not interpret as release grant",
+      "dead_or_obsolete": "Current pure result",
+      "duplication": "Distinct from no-publish rehearsal",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub exact pinned commit contents 404"
+      },
+      "live_source": {
+        "path": "scripts/release/netlify-provider-readback.mjs",
+        "commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+        "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+        "line": 20,
+        "exact_original": true
+      },
+      "testability": "Positive status test; REUSED_PASSING_PREVIOUS_SOURCE_TEST_EVIDENCE_NOT_EXECUTED_IN_THIS_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Verified exact-release source binding via read-only provider identity; this predicate never grants publication, does not modify provider/SQL/Auth/Edge/member/backup and does not independently certify release permissions.",
+      "review_method": "Direct AI original source line 20 semantic inspection at blob cfb5cec936843012f957ad0437791e06cb906899; no independent human review."
+    },
+    {
+      "line": 21,
+      "source_text": "  deploy_id:deploy.id,site_id:SITE,production_origin:ORIGIN};",
+      "classification": "executable",
+      "behavior": "Returns deploy ID/site UUID/origin provenance fields",
+      "quality": "Retains bounded source attestation identifiers",
+      "risk": "Does not contain credential or member data",
+      "dead_or_obsolete": "Current structured return",
+      "duplication": "Separate from provider HTTP fetch",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub exact pinned commit contents 404"
+      },
+      "live_source": {
+        "path": "scripts/release/netlify-provider-readback.mjs",
+        "commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+        "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+        "line": 21,
+        "exact_original": true
+      },
+      "testability": "Assert origin and ID match; REUSED_PASSING_PREVIOUS_SOURCE_TEST_EVIDENCE_NOT_EXECUTED_IN_THIS_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Verified exact-release source binding via read-only provider identity; this predicate never grants publication, does not modify provider/SQL/Auth/Edge/member/backup and does not independently certify release permissions.",
+      "review_method": "Direct AI original source line 21 semantic inspection at blob cfb5cec936843012f957ad0437791e06cb906899; no independent human review."
+    },
+    {
+      "line": 22,
+      "source_text": "}",
+      "classification": "executable",
+      "behavior": "Closes pure function",
+      "quality": "No mutation or I/O performed",
+      "risk": "Requires network caller to deliver genuine data",
+      "dead_or_obsolete": "Required syntax",
+      "duplication": "Not redundant",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub exact pinned commit contents 404"
+      },
+      "live_source": {
+        "path": "scripts/release/netlify-provider-readback.mjs",
+        "commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+        "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+        "line": 22,
+        "exact_original": true
+      },
+      "testability": "Node import; REUSED_PASSING_PREVIOUS_SOURCE_TEST_EVIDENCE_NOT_EXECUTED_IN_THIS_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Verified exact-release source binding via read-only provider identity; this predicate never grants publication, does not modify provider/SQL/Auth/Edge/member/backup and does not independently certify release permissions.",
+      "review_method": "Direct AI original source line 22 semantic inspection at blob cfb5cec936843012f957ad0437791e06cb906899; no independent human review."
+    }
+  ],
+  "findings": [
+    {
+      "classification": "BOUNDARY_TRIAGE_NO_CONFIRMED_BUG",
+      "source_lines": [
+        5,
+        13,
+        14,
+        16,
+        18
+      ],
+      "description": "Pure matcher relies on genuinely sourced provider project/deploy inputs; separately traced GET-only wrapper in netlify-live-readback.mjs. No evidence of bypass of actual live guard; test suite covers synthetic mismatches only."
+    }
+  ],
+  "test_status": "SOURCE_ONLY_NO_NEW_EXECUTION",
+  "runtime_app_acceptance": "NOT_RUN",
+  "production_changes": false,
+  "complete_global": false
+}
