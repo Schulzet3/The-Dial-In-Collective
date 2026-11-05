@@ -4734,22 +4734,32 @@
       "id": "DIC-Q-455-legacy-coffee-date-sort",
       "issue": 455,
       "title": "Guard Log Shot coffee recency and archived-current fallback against null/nonstring legacy timestamps",
-      "state": "TESTING",
+      "state": "READY",
       "scope_paths": [
         "site/lib/model.js"
       ],
       "tests": [
         "Source-level negative: backup validation does not require coffee.createdAt or guarantee workspace.recent value types; current visibleCoffees fallback calls .localeCompare on missing createdAt or numeric recents; hideCoffee fallback sorts numeric recents with .localeCompare.",
         "New imported actual model-module positive/negative regression authored for blank/null/nonstring historical createdAt and recent timestamps, preserved chronology and A-Z/pinned browsing, hidden-current fallback and private shot immutability; NOT EXECUTED before exact source-bound CI.",
-        "Initial PR #658 head dc4cae40 approval run41942828101 FAILED release queue schema on missing merged_source_sha; root cause source-read from scripts/release/release-queue.mjs line 39; repaired to explicit null for TESTING. Not a behavioral code failure; do not call this run PASS."
+        "Initial PR #658 head dc4cae40 approval run41942828101 FAILED release queue schema on missing merged_source_sha; root cause source-read from scripts/release/release-queue.mjs line 39; repaired to explicit null for TESTING. Not a behavioral code failure; do not call this run PASS.",
+        "Final non-force reconciled PR head 78c8a83b3229208f099133b8fa7fa3dfcca37957: Node 22 validate/lint/build 2455 PASS/0 FAIL/6 intentional SKIP, source run41943013657; browser/390px/1280px/mobile/offline/accessibility41943013668 SUCCESS; isolated SQL41943013638, security41943013644, approval/queue intake41943013780 SUCCESS. Frozen603 SKIPPED, not a PASS.",
+        "Non-force squash merge PR658 c9ec596a3b0e06a1472da7fbd46c3bc7b1b2425c: same model, regression, queue and journal blob SHAs as passing head; actual merged-source Node22 run41943288173 2455 PASS/0 FAIL/6 SKIP and lint/build SUCCESS, browser/offline41943288190 SUCCESS, approval/source continuity41943288259 SUCCESS; targeted cloud NOT_APPLICABLE, no real signed-in user or cup-quality validation."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact PR-head and merged-source applicable CI not yet run; not merged or READY."
+      "ci_runs": [
+        41943013780,
+        41943013644,
+        41943013638,
+        41943013657,
+        41943013668,
+        41943288173,
+        41943288190,
+        41943288259
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Safe source-level crash prevention only; no new sort policy, numeric espresso heuristic, coffee identity, stored legacy record, offline-outbox or Locked behavior change. No publication authorization.",
-      "merged_source_sha": null
+      "notes": "READY in development, NOT DEPLOYED. Narrow source-reproduced null/nonstring legacy coffee-date crash guard for visible coffee recency and hide-current fallback; original coffee/shot metadata, five sensory ratings, private notes, backup bytes, search, A-Z, pinning, espresso heuristics and Locked rules preserved. Source merge c9ec596... and CI verified; no source/production authorization for publication.",
+      "merged_source_sha": "c9ec596a3b0e06a1472da7fbd46c3bc7b1b2425c",
+      "pr": 658
     }
   ],
   "history": [
