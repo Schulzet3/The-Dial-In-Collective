@@ -24,3 +24,17 @@
 - This `docs/workstreams/issue-508.md` in the SAME commit; `docs/workstreams/README.md` already indexes the journal.
 
 **Acceptance:** Verify exact PR-head source tree and focused fail-closed tests, applicable Node22 lint/build/security/CI, safe nonforce merge, exact merged-source readback and no Netlify publication; only then say VERIFIED. Do not repeat unchanged suites without reason. No new deployable site or function source files touched; no automatic release candidate, new READY queue item, owner grant or production writes. If CI finds compatibility defects, diagnose, repair in same-commit journal, rerun and merge safely. Other app workstreams #33/#267/#504/#509 remain independent; do not overwrite concurrent work.
+
+
+## 2026-11-05T23:47:13.827Z — N508-058 bounded audit-only gallery URL SSRF guard (PR testing)
+
+Owner authority: Issue #508 safe source remediation only; no Netlify, app deployment, production, SQL/Auth, member, plan or secret mutations. Audited immutable application base `9c5033cf4a23f4b4b5b824891a161800c0e13356` (main `b62bc028fe1cda1fd2756bfb1162501ca629002a`, published release `6c729b928fad5fd59ae012c63d7c005f180b2b64`, Netlify READY deploy `6aeceac987f179a62547f490`).
+
+Confirmed **N508-058 MEDIUM (audit-only source; not demonstrated production exposure)**: `scripts/audit/coffee-corpus-image-audit.py` target() required a dotted hostname but failed to normalize trailing DNS dots before rejecting localhost/internal/private IP literals. Exact source `target()` 33–45 and isolated `tests/audit/test_coffee_image_url_target.py` 1–53 previously missed this. For instance, `https://localhost./coffee.png`, `https://service.internal./coffee.png` and `https://127.0.0.1./coffee.png` passed old string guard. Inert Python reproduction confirmed old vs normalized predicates, no HTTP requests. The affected tool only audits roaster-gallery OCR source packets, not the deployed Netlify function.
+
+Same-commit narrow patch: normalize `u.hostname.rstrip('.')` for suffix and IP validation while preserving ordinary absolute-form public HTTPS DNS, plus local no-network regression for forbidden trailing-dot names. No image fetch, source corpus mutation or production test. **Not claiming full SSRF resistance:** DNS-based private address aliases/rebinding and all indirect provider redirects are separate unverified risks. Requires full exact-PR-head Python regression, applicable workflow CI, non-force integration and readback before marking merged/verified. No #508 release queue READY claim from audit-only utility. Original baseline remains incomplete. [skip netlify]
+
+
+## 2026-11-05T23:48:02.142Z — N508-058 PR-head source serialization repair (still TESTING)
+
+PR #881 initial source blob `8256f1dbf7f4117b8de3aac5841d54a9a90e82de` was **invalid**, despite correct intended predicate: scripted JS `replace` expanded the literal Python regex `$'` marker as a replacement interpolation, injecting original suffix. This was independently caught by PR-head immutable blob/compare inspection **before merge**. No published code was affected. Correct original `71a9eb96fb272fbcae792c3398bd911d7bfd1b38` with callback-based literal-safe replacement; restore complete original 155-line file plus 2 net new line slots. Unchanged strict regression blob `3864774fd655ba240ee3d5d7dd63244b45777e3b`. Require exact new commit SHA checkout and Python AST/unit validation before merge. This repair and this journal are in SAME commit; no release/Netlify effect. [skip netlify]

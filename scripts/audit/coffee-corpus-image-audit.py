@@ -39,8 +39,10 @@ def target(raw):
   if u.scheme!='https' or not u.hostname or u.username or u.password or u.port is not None or len(raw)>3000:return None
  except ValueError:
   return None
- if '.' not in u.hostname or re.search(r'\.(?:local|localhost|internal|invalid|test)$',u.hostname,re.I):return None
- try:ipaddress.ip_address(u.hostname);return None
+ # Normalize DNS absolute-form trailing dots before validating private names/IP literals.
+ host=u.hostname.rstrip('.')
+ if '.' not in host or re.search(r'\.(?:local|localhost|internal|invalid|test)$',host,re.I):return None
+ try:ipaddress.ip_address(host);return None
  except ValueError:pass
  return urllib.parse.urlunsplit((u.scheme,u.netloc,urllib.parse.quote(u.path,safe='/%:@-._~!$&\'()*+,;='),urllib.parse.quote(u.query,safe='=&%/:?@-._~!$\'()*+,;'),''))
 
