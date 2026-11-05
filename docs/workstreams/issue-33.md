@@ -1,3 +1,9 @@
+## November 5 UTC — PR725 second approval correction, exact queue CI-array schema [skip netlify]
+
+Second head `394791d4fdd43e644b114995630363a394e018fd`: approval [41987513220](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41987513220) **FAILED**, `DIC-Q-33-original603-292-selected-guji-producer-region tests/CI/blockers must be arrays`; `tests` and `blockers` were arrays but newly inserted queue row omitted required `ci_runs`. Repair with exact `ci_runs: []`, preserve TESTING and no merge SHA. Separate previous source/test head [41987379564](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41987379564) focused Node 1750 PASS/0 FAIL/0 SKIP with lint/build, UX/security/SQL/private bundle SUCCESS, but governance failed. Corrected exact-head CI still REQUIRED; no false acceptance or deployment. #33 open.
+
+---
+
 ## November 5 UTC — PR725 first approval intake failure diagnosed and TESTING queue item repaired [skip netlify]
 
 Exact initial source head `ccdbad80af25b9a4f203efea8377a96081a04782` approval [41987379569](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41987379569) **FAILED** at `release-queue.mjs --enforce-intake` because newly changed `src/server/coffee-title-region-evidence.mjs` was not represented by any non-DEPLOYED queue item. The remaining governance preflight and private source checks passed; original603 SKIPPED. No false PASS claimed. Add **only** scoped `DIC-Q-33-original603-292-selected-guji-producer-region` in TESTING, merged_source_sha null, with explicit unfinished exact-source and current official parser/controls. Do not modify unrelated READY/DEPLOYED. No runtime change in this corrective commit. Await exact corrected PR-head Node/approval/UX/security and nonforce integration before READY or release; #33 OPEN, original corpus untouched. No publication/provider/member write.
