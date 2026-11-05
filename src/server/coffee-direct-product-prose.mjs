@@ -12,6 +12,23 @@ const fold=v=>String(v||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toL
 // description; never scan site-wide education, menus, other products or SEO.
 const CURRENT_DECAF_METHOD=/^(?:(?:this|our)\s+(?:decaf(?:feinated)?\s+)?coffee\s+(?:is|was|has been)\s+decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?(?:swiss[\s-]?water|mountain[\s-]?water|sugar(?:[\s-]?cane|[\s-]?process)|ethyl\s+acetate|natural[\s-]?ea|(?:supercritical\s+)?carbon[\s-]?dioxide|co\s*[- ]?[2\u2082])\b|the\s+(?:swiss[\s-]?water|mountain[\s-]?water|sugar[\s-]?cane|carbon[\s-]?dioxide)\s*[\u00ae\u2122]?\s+(?:process|method)\s+is\s+(?:an?\s+)?[^.!?]{0,150}\bdecaffeination\s+process\b[^.!?]{0,160}\bcaffeine[\s-]?free\b)/iu;
 const NONCURRENT_DECAF_METHOD=/\b(?:previous(?:ly)?|formerly|historically|typically|generally|other coffees?|another coffee|last year|prior (?:lot|harvest))\b/iu;
+
+// Some exact selected decafs describe a named source coffee as "Colombia made
+// with the sugarcane decaffeination process", without "is decaffeinated".
+// The capitalized grammatical subject must be a non-generic token of the
+// selected H1; a different coffee, education or a tasting-only sugar note
+// never supplies a method. This recognizes the METHOD, not cherry processing.
+const DIRECT_NAMED_SOURCE_DECAF_PROCESS=/\b([A-Z][\p{L}\p{M}'’-]{3,40})\s+made\s+with\s+(?:the\s+)?(?:swiss[ -]?water|mountain[ -]?water|sugar[ -]?cane|ethyl[ -]?acetate|carbon[ -]?dioxide|co[- ]?2)\s+decaffeination\s+process\b/gu;
+const GENERIC_DECAF_SOURCE_SUBJECT=/^(?:coffee|beans?|roast|medium|dark|light|espresso|decaf|decaffeinated|blend|process|natural|sugarcane|water|method|organic|product)$/iu;
+function selectedNamedSourceDecafProcess(name,line){
+ if(!decafOnlyCoffee(name)||NONCURRENT_DECAF_METHOD.test(line))return false;
+ const words=new Set(fold(name).split(' '));
+ return [...String(line).matchAll(DIRECT_NAMED_SOURCE_DECAF_PROCESS)]
+  .some(match=>!GENERIC_DECAF_SOURCE_SUBJECT.test(match[1])&&
+   words.has(fold(match[1]))&&
+   inferDecaffeinationMethod({name,selectedMethod:match[0]})!=='');
+}
+
 // Current selected coffee names can be longer than the grammatical subject
 // printed in their own description: e.g. "TRANQUILO, Decaffeinated, 12 oz"
 // prints "Tranquilo is decaffeinated using the natural Sugar Cane Process".
@@ -97,7 +114,7 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   // Reuse the conservative method classifier; if multiple incompatible
   // methods are printed, the caller withholds autofill and keeps both sources.
   if(decafOnlyCoffee(name)&&line.length<=360&&
-     (CURRENT_DECAF_METHOD.test(line)||currentNamedDecafMethod(name,line))&&
+     (CURRENT_DECAF_METHOD.test(line)||currentNamedDecafMethod(name,line)||selectedNamedSourceDecafProcess(name,line))&&
      !NONCURRENT_DECAF_METHOD.test(line)&&
      inferDecaffeinationMethod({name,selectedMethod:line})&&!decafEvidence.has(line)){
    if(decafEvidence.size<4)decafEvidence.add(line);
