@@ -5,29 +5,29 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 7475,
+    "strict_validated_lines": 7525,
     "first_unvalidated_manifest_file_index": 59,
     "first_unvalidated_path": "docs/DECISION_LEDGER.json",
-    "first_unvalidated_line": 2585,
+    "first_unvalidated_line": 2635,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 9143,
-    "first_unvalidated_file_index": 56,
-    "first_unvalidated_path": "scripts/audit/isolated-sql-regression.sh",
+    "strict_validated_lines": 9183,
+    "first_unvalidated_file_index": 57,
+    "first_unvalidated_path": "scripts/audit/issue161-full-source-review.mjs",
     "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true,
-    "strict_live_counterpart_checked_through_line": 57,
+    "strict_live_counterpart_checked_through_line": 40,
     "last_live_counterpart_checked": {
-      "path": "scripts/audit/isolated-signed-http-regression.sh",
-      "commit": "ae046c7dd4d102ce915325fe93b0e115a628acac",
-      "blob": "c1c493b6f432eed02807264f1f601908d7591081",
+      "path": "scripts/audit/isolated-sql-regression.sh",
+      "commit": "973c59b768c4f8a6dd8b6efb5e4b57f5688817c7",
+      "blob": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
       "first_line": 1,
-      "last_line": 57,
+      "last_line": 40,
       "offset": 0
     }
   },
@@ -214,7 +214,7 @@
       "status": "TARGETED_FIX_PROPOSED_PENDING_CI",
       "other_live_code_drift": "INCOMPLETE"
     },
-    "latest_observed_development_commit": "f43d20780ebd6b42427bc93b659e0ef4f20016c4",
+    "latest_observed_development_commit": "973c59b768c4f8a6dd8b6efb5e4b57f5688817c7",
     "direct_semantic_new_code_batches": [
       {
         "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-001.json",
@@ -229,11 +229,28 @@
     ],
     "direct_semantic_new_code_files_fully_read": 1,
     "direct_semantic_new_code_lines_accounted": 39,
-    "full_machine_inventory": "docs/audits/issue267-v2-post-pin-tree-drift-20261105.json",
-    "full_machine_inventory_source_commit": "e261db24a4257c0c6ec8d2ab355f18f8bc920ef0",
-    "machine_added_code_candidates_at_snapshot": 107,
-    "machine_changed_pinned_executable_at_snapshot": 45,
-    "machine_new_sql_migrations_at_snapshot": 1
+    "full_machine_inventory": "docs/audits/issue267-v2-post-pin-tree-drift-20261105-973c59.json",
+    "full_machine_inventory_source_commit": "973c59b768c4f8a6dd8b6efb5e4b57f5688817c7",
+    "machine_added_code_candidates_at_snapshot": 114,
+    "machine_changed_pinned_executable_at_snapshot": 46,
+    "machine_new_sql_migrations_at_snapshot": 1,
+    "latest_fresh_full_tree_snapshot": {
+      "source_commit": "973c59b768c4f8a6dd8b6efb5e4b57f5688817c7",
+      "pinned_tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "current_tree": "4103b0f9602004206c079b2018620254ee175687",
+      "pinned_blobs": 951,
+      "live_blobs": 1456,
+      "new_blob_paths": 505,
+      "changed_blob_paths": 68,
+      "removed_blob_paths": 0,
+      "eligible_pinned_changed": 46,
+      "new_code_candidates": 114,
+      "new_sql_migration": 1,
+      "previous_D2_valid_new_lines": 175,
+      "previous_D2_verified_complete_files": 5,
+      "semantic_review_status": "MACHINE_INVENTORY_NO_NEW_CREDIT",
+      "receipt": "docs/audits/issue267-v2-post-pin-tree-drift-20261105-973c59.json"
+    }
   },
   "batches": [
     {
@@ -3291,12 +3308,32 @@
       "strict_pinned_delta": 57,
       "old_v2_additional_credit": 0,
       "verification": "107 original direct numbered AI semantic records, nine dimensions, exact current counterparts; no fresh runtime or independent human certification."
+    },
+    {
+      "batch": "S2-141",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-141.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        2585,
+        2634
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/isolated-sql-regression.sh",
+      "pinned_lines": [
+        1,
+        40
+      ],
+      "pinned_blob": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "strict_frozen_delta": 50,
+      "strict_pinned_delta": 40,
+      "old_v2_additional_credit": 0,
+      "verification": "90 numbered distinct original direct AI semantically inspected source lines; nine per-line dimensions, current counterparts, no runtime test"
     }
   ],
   "completion": "IN_PROGRESS",
-  "test_limit": "S2-140 docs-only, exact source PR and merged approval CI pending; no new SQL/Node/browser/Auth/Docker/603 tests, full live drift incomplete.",
-  "last_batch": "S2-140",
-  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-140.json",
+  "test_limit": "S2-141 documents plus full-tree machine-only drift; PR-head/merged approval pending; no fresh SQL/docker/Node/browser/Auth/original603 tests; postpin semantic review incomplete.",
+  "last_batch": "S2-141",
+  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-141.json",
   "complete": false,
   "accounting_reconciliation_20261105": {
     "scope": "NONCREDIT historical source-ledger reference repair",
@@ -3390,6 +3427,15 @@
       "nonoverlap": true,
       "all_older_receipts_independently_semantic_revalidated": false,
       "live_drift_complete": false
+    },
+    "latest_S2_141": {
+      "source_dev": "973c59b768c4f8a6dd8b6efb5e4b57f5688817c7",
+      "strict_frozen": 7525,
+      "strict_pinned": 9183,
+      "independent_direct_line_records": 90,
+      "prior_first_workflow_reread_without_credit": true,
+      "postpin_semantic_incomplete": true,
+      "all_older_receipts_independently_verified": false
     }
   }
 }
