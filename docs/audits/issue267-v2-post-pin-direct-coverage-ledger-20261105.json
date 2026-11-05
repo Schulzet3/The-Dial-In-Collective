@@ -3,7 +3,7 @@
   "issue": 267,
   "review_standard": "Independent post-pin new source line semantic review; separate from original frozen/pinned V2 denominator",
   "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
-  "observed_development_commit": "5d1fbb76b6ad4cf1594db853ea77271fbf053fc3",
+  "observed_development_commit": "259e29148933742733f255c7923bed81e64c9f34",
   "receipt_references": [
     {
       "batch_id": "D2-001",
@@ -438,10 +438,23 @@
       "verified_absent_at_pin": true,
       "reviewed_live_commit": "5d1fbb76b6ad4cf1594db853ea77271fbf053fc3",
       "includes_nine_new_focused_regression_lines": true
+    },
+    {
+      "batch_id": "D2-035",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-035.json",
+      "path": "tests/release-backup-decision.test.mjs",
+      "blob_sha": "458f201593806bf227a4508292e96737af28376e",
+      "range": [
+        1,
+        64
+      ],
+      "line_count": 64,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "259e29148933742733f255c7923bed81e64c9f34"
     }
   ],
-  "unique_source_lines_direct_reviewed": 1093,
-  "fully_reviewed_new_source_files": 34,
+  "unique_source_lines_direct_reviewed": 1157,
+  "fully_reviewed_new_source_files": 35,
   "nonoverlap": true,
   "changed_existing_pinned_paths": "PENDING",
   "new_sql_migrations": "PENDING",
@@ -464,7 +477,7 @@
       "subtract_phantom_records": 4
     }
   ],
-  "last_review_batch": "D2-034",
-  "last_review_source_commit": "5d1fbb76b6ad4cf1594db853ea77271fbf053fc3",
-  "last_review_note": "Direct entire current 78-line synthetic backup fallback/claim test after D2-033 fix; no new code changes; 1015→1093 and 33→34 post-pin complete files"
+  "last_review_batch": "D2-035",
+  "last_review_source_commit": "259e29148933742733f255c7923bed81e64c9f34",
+  "last_review_note": "D2-035: direct numbered semantic review 64/64 physical tests/release-backup-decision.test.mjs source lines, 1093 to 1157 distinct post-pin lines, 34 to 35 files."
 }
