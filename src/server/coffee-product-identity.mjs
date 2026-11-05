@@ -22,9 +22,18 @@ export function coffeeIdentityText(value){
 export const coffeeIdentityKey=value=>coffeeIdentityText(String(value??'')).normalize('NFKD')
  .replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^\p{L}\p{N}]/gu,'');
 const escape=value=>value.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+const TRAILING_COMMERCE_PRICE=/\s*(?:[-–—|]\s*)?\$\s*\d{1,5}(?:[.,]\d{2})?(?:\s*USD)?\s*$/i;
+// Only sanitize AFTER resolving the exact selected product; never discover a
+// coffee or infer its name, origin or lot from commerce price or other pages.
+export function selectedCoffeeNameWithoutPrice(value){
+ const name=coffeeIdentityText(value);
+ const stripped=name.replace(TRAILING_COMMERCE_PRICE,'').trim();
+ return stripped.length>=3?stripped:name;
+}
+
 function plain(value){
  return coffeeIdentityText(value)
-  .replace(/\s*(?:[-–—|]\s*)?\$\s*\d{1,5}(?:[.,]\d{2})?(?:\s*USD)?\s*$/i,'')
+  .replace(TRAILING_COMMERCE_PRICE,'')
   .replace(/\s+coffee\s+beans\s*$/i,'').trim();
 }
 function variants(value,brands){

@@ -17,7 +17,7 @@ import {extractSelectedNextCoffeeProduct} from './coffee-next-selected-product.m
 import {selectedCoffeeHeroFacts,selectedCurrentOriginCaption,hasIncompatibleCurrentTastingList} from './coffee-selected-product-hero.mjs';
 import {COFFEE_FIELD_ALIASES,extractSemanticCoffeeSpecs,withoutEducationalCoffeeGeography} from './coffee-semantic-specs.mjs';
 import {equivalentCoffeeVarieties,compatibleGenericCoffeeVarieties,explicitCoffeeVarietyRefinement,coffeeOriginParts,compatibleCoffeeOrigins,isCoffeeBroadOrigin,orderExplicitCoffeeOriginTuple} from './coffee-fact-compatibility.mjs';
-import {equivalentCoffeeProductNames,preferredCoffeeRoasterName} from './coffee-product-identity.mjs';
+import {equivalentCoffeeProductNames,preferredCoffeeRoasterName,selectedCoffeeNameWithoutPrice} from './coffee-product-identity.mjs';
 import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
 import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
@@ -1305,7 +1305,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  if(!p||!textOf(p.name))return {ok:false,reason:'ambiguous_or_missing_product'};
  const visibleProductName=explicitHeading&&productIdentityUrl(p)&&samePage(productIdentityUrl(p),source_url)&&
   meta['og:url']&&samePage(meta['og:url'],source_url)&&keyOf(textOf(p.name))===keyOf(meta['og:title'])?explicitHeading:'';
- const fields={name:visibleProductName||textOf(p.name,200)},conflicts=new Set();
+ const fields={name:selectedCoffeeNameWithoutPrice(visibleProductName||textOf(p.name,200))},conflicts=new Set();
  const descriptionIdentity=meta['og:url']||meta[META_CANONICAL]||'';
  const matchedDescriptions=descriptionIdentity&&samePage(descriptionIdentity,source_url)?
   [...new Set([meta['og:description'],meta.description].filter(value=>typeof value==='string'&&value.length<=16000))]:[];
