@@ -12,6 +12,13 @@ const fold=v=>String(v||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toL
 // description; never scan site-wide education, menus, other products or SEO.
 const CURRENT_DECAF_METHOD=/^(?:(?:this|our)\s+(?:decaf(?:feinated)?\s+)?coffee\s+(?:is|was|has been)\s+decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?(?:swiss[\s-]?water|mountain[\s-]?water|sugar(?:[\s-]?cane|[\s-]?process)|ethyl\s+acetate|natural[\s-]?ea|(?:supercritical\s+)?carbon[\s-]?dioxide|co\s*[- ]?[2\u2082])\b|the\s+(?:swiss[\s-]?water|mountain[\s-]?water|sugar[\s-]?cane|carbon[\s-]?dioxide)\s*[\u00ae\u2122]?\s+(?:process|method)\s+is\s+(?:an?\s+)?[^.!?]{0,150}\bdecaffeination\s+process\b[^.!?]{0,160}\bcaffeine[\s-]?free\b)/iu;
 const NONCURRENT_DECAF_METHOD=/\b(?:previous(?:ly)?|formerly|historically|typically|generally|other coffees?|another coffee|last year|prior (?:lot|harvest))\b/iu;
+// A selected current decaf may identify its treatment as a roaster-translated
+// method, after an explicit at-origin decaffeination clause. This is not a
+// growing origin, green-bean process, or a general country method inference.
+// Admit only the complete current "this/our coffee ... is decaffeinated ...
+// translate as '<method>'" sentence, never a historical/negated/other product.
+const CURRENT_TRANSLATED_DECAF_METHOD=/^(?:this|our)\s+(?:decaf(?:feinated)?\s+)?coffee\b[^.!?]{0,100}?\bis\s+decaffeinated\s+at\s+origin\b[^.!?]{0,180}?\b(?:translate(?:d)?|referred\s+to|described|known|called)\s+as\s*[\u201c\u2018"'\u2018]?\s*(?:sugar[ -]?process|sugar[ -]?cane|swiss[ -]?water|mountain[ -]?water|ethyl\s+acetate|(?:supercritical\s+)?carbon[ -]?dioxide|co\s*[- ]?2)\s*[\u201d\u2019"']?\s*[.!?]?$/iu;
+const TRANSLATED_DECAF_NEGATION=/\b(?:not|never|without|rather\s+than|instead\s+of|unlike|incorrectly|misleadingly|erroneously)\b/iu;
 
 // Some exact selected decafs describe a named source coffee as "Colombia made
 // with the sugarcane decaffeination process", without "is decaffeinated".
@@ -118,6 +125,19 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
      !NONCURRENT_DECAF_METHOD.test(line)&&
      inferDecaffeinationMethod({name,selectedMethod:line})&&!decafEvidence.has(line)){
    if(decafEvidence.size<4)decafEvidence.add(line);
+   else decafEvidenceOverflow=true;
+  }
+  // Split only the same exact selected-product paragraph, never site-wide
+  // description. Whole paragraphs can exceed the 360-character direct-method
+  // limit while carrying one short, literal translated-method sentence.
+  if(decafOnlyCoffee(name)&&line.length<=1200)for(const sentence of line.split(/(?<=[.!?])\s+/u).slice(0,8)){
+   const statement=sentence.trim();
+   if(statement.length<40||statement.length>360||
+      !CURRENT_TRANSLATED_DECAF_METHOD.test(statement)||
+      NONCURRENT_DECAF_METHOD.test(statement)||TRANSLATED_DECAF_NEGATION.test(statement)||
+      !inferDecaffeinationMethod({name,selectedMethod:statement})||
+      decafEvidence.has(statement))continue;
+   if(decafEvidence.size<4)decafEvidence.add(statement);
    else decafEvidenceOverflow=true;
   }
   // Literal current selected-product release declaration, not a site-wide
