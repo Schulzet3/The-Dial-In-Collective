@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "date": "2026-11-05",
+  "status": "NARROW_575_SELECTED_GROWER_LOCALITY_VERIFIED_READY_DEV_NOT_DEPLOYED",
+  "previous_development_sha": "5a384c4dcaeee7e9f606dc21b867f8560655d5f6",
+  "exact_pr_head": "4be25472d146e3f7c2e0205d420b6423d51260c8",
+  "exact_nonforce_merged_sha": "b68b826a2181b7f92650479c0381d5ac5d80d1fe",
+  "pr": 805,
+  "original_frozen603_csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "immutable": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "original_oracle_changed": false,
+    "original_scorer_changed": false,
+    "original_csv_changed": false
+  },
+  "selected_current_cases": [
+    {
+      "number": 575,
+      "roaster": "Stumptown Coffee",
+      "url": "https://www.stumptowncoffee.com/products/indonesia-bies-penantan",
+      "selected_h1": "Indonesia Bies Penantan",
+      "direct_selected_source": "Bies Penantan refers to a specific group of highland villages where the smallholder farmers who contribute to this lot grow their coffee. The farmers cultivate their coffee organically on small farms around Takengon, Aceh, Indonesia",
+      "source_relationship": "current selected lot supply + same growing farmers + cultivation in same product story",
+      "before": {
+        "run": 42048670173,
+        "html_sha256": "1576c946bfed823d7a8a50d45d8314f97202c23a91347df3b77a4cdb516958be",
+        "parser_origin": "Indonesia"
+      },
+      "after": {
+        "run": 42051979776,
+        "html_sha256": "92c78406f73c60e196395143af628e127eda94df490e0527e6a1fe2b9b6aa8f5",
+        "parser_origin": "Takengon, Aceh, Indonesia",
+        "selected_producer": "The Ketiara Cooperative",
+        "tasting_notes": "Dark Chocolate, Baking Spice, Tropical Fruit",
+        "conflicts": [],
+        "roast_level": null
+      },
+      "decision": "ADMIT_ONLY_PRINTED_SELECTED_CURRENT_GROWING_LOCALITY; do not add historic oracle Sumatra from external geographical inference",
+      "status": "NARROW_READY"
+    },
+    {
+      "number": 596,
+      "roaster": "Wrecking Ball Coffee Roasters",
+      "url": "https://www.wreckingballcoffee.com/products/guatemala-huehuetenango-los-dos-socios-12oz",
+      "after_html_sha256": "5bfd415211c160f111c1249e0bb58ed25cc9d6e4d2f4bdf6c62d7e02d0e93b5b",
+      "parser_origin": "Huehuetenago, Guatemala",
+      "roast_level": null,
+      "status": "UNRESOLVED_DIRECT_REGION_TYPO_AND_MULTI_ROAST; NO_CHANGE"
+    },
+    {
+      "number": 593,
+      "roaster": "Woodshed Roast Coffee",
+      "url": "https://www.woodshedroast.com/products/ethiopian",
+      "after_html_sha256": "e473a050eb6a23b237bf6921d6abf567f2747ec0a25421dda7fc3364393da68a",
+      "parser_origin": "Ethiopia",
+      "parser_process": null,
+      "notes": "fruity, stone fruits, orange blossom",
+      "status": "PRESERVED_PREVIOUS_VERIFIED_PROCESS_BLANK"
+    }
+  ],
+  "live": {
+    "run": 42051979776,
+    "job_id": 127330162618,
+    "fetched": 3,
+    "parsed": 3,
+    "ui_source_review_and_preview": true,
+    "conflicts_for_575": [],
+    "manual_certified": 0,
+    "artifact_id": 13426952202,
+    "upload_zip_sha256_runner_reported": "8ad57c4ad7047e6f6dcc819d62a2bf7b9d20bd32702b3bf77fe55d16a0475ea7",
+    "independent_html_zip_rehash": false
+  },
+  "ci": {
+    "pr_head_node_run": 42051448389,
+    "node_pass": 1789,
+    "node_fail": 0,
+    "approval": 42051448282,
+    "sql": 42051448534,
+    "security": 42051448816,
+    "cloud_mobile": 42051447735,
+    "private_bundle": 42051447775,
+    "merged_node_run": 42051979867,
+    "merged_approval": 42051979855,
+    "merged_cloud_mobile": 42051979891,
+    "original_frozen603": "SKIPPED_NOT_PASS"
+  },
+  "release": {
+    "queue_item": "DIC-Q-33-original603-575-selected-smallholder-growing-locality",
+    "state": "READY",
+    "production_published": false
+  },
+  "remaining": {
+    "issue33": "OPEN",
+    "individual_original603_semantic_certification": "IN_PROGRESS",
+    "issue267_v2": "SEPARATE",
+    "issue96_security": "SEPARATE",
+    "case596": "UNRESOLVED_SELECTED_REGION_TYPO_AND_AMBIGUOUS_ROAST",
+    "signed_in_GoTrue_new_test": false
+  },
+  "next": "Adjudicate #596 printed Huehuetenago label against exact selected Huehuetenango title/La Libertad text without guessing categorical roast, or select another independently unresolved original603 source-present blank; keep source-specific risk-based regression and no publication."
+}
