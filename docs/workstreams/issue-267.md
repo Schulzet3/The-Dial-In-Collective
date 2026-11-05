@@ -1,3 +1,9 @@
+## November 5, 2026 UTC — #267 S2-106 exact nonforce concurrency reconciliation [skip netlify]
+
+[CI-impact #673](https://github.com/Schulzet3/The-Dial-In-Collective/pull/673) safely integrated first at verified development `7654e274bd48beccd11ed3ca7ddf70322ec95899` after six applicable PR-head check statuses SUCCESS (the frozen603 job was SKIPPED, not a pass). S2-106 was prepared on prior `e3d9da94ebfcbc96426987f7ee838bebfdb05946`, but original historical/pinned sources remain immutable. Reconstructed this review commit from complete current merged Git tree with only S2-106 original receipt/strict ledger and journal prefixed atop the exact current full journal, preserving #673 patch, new tests, findings and work history. Both parents (`19b623439704e7442a9c35c0672a90cf74e39e70`, `7654e274bd48beccd11ed3ca7ddf70322ec95899`) are retained in a nonforce merge commit, with no source deletion or duplicate line credit. Previous S2-106 text stating #673 pending was accurate as recorded on the earlier historical draft; this newer note clarifies integration chronology. Exact approval/continuity CI on reconciled PR head and final merged-source CI required before integration.
+
+---
+
 ## November 5, 2026 UTC — #267 S2-106 independent strict owner Locked/603 forensic semantic review [skip netlify]
 
 Recovered exact merged source `e3d9da94ebfcbc96426987f7ee838bebfdb05946` after S2-105, previous strict ledger and SHA-bound receipt, latest #267/#33/#96 scope, governing AGENTS/context/preflight/Master Spec/Decision Ledger/approval matrix/release queue and original frozen file1 first lines with NO duplicate credit. The separate #267 CI-impact PR #673 is pending exact-head full tests; this S2-106 branch touches only three isolated audit evidence/journal files, no shared executable or extra CI change, preserve merge order and reconcile branch nonforce if #673 integrates first. Other-account legacy automation state remains UNKNOWN, no evidence it has been disabled.
@@ -7,6 +13,20 @@ Direct per-original-line AI semantic inspection of frozen #59 `docs/DECISION_LED
 Historical Locked requirements for unproven grind bands (one/two step calibration), real post-rating nextAdvice, URL-first official source WITHOUT reused harvest/lot Coffee-ID collisions, New Coffee preview never overwrite, account-epoch offline queue isolation, original badges and mobile controls are not yet live UX/SQL/Auth certified here. Candidate12 603 forensic projection compares exact source-bound case/export hashes and omits structured fact values from public review; possible malformed input/deep recursion issues remain unproven triage, #33 domain owner. Do not alter archived original603/oracle or existing member data. Public-vs-Locked-private GitHub divergence persists; no repo privacy setting mutation.
 
 **Proposed strict 6,014/579,961 frozen and 7,641/57,913 pinned** (merged previous 5,954 / 7,581). Next frozen #59 line1124 and pinned #50 line421. Full post-pin changed paths, original603 runtime, mobile/visual, SQL and Auth acceptance incomplete. Docs-only same-commit scoped ledger/journal/receipt; exact PR-head approval and subsequent merged-source CI still pending, #267 OPEN, no deployment or provider writes.
+
+---
+
+## November 5, 2026 UTC — #267 #504 CI-risk negative test corrected after actual PR-head failure [skip netlify]
+
+Exact PR #673 head `fc2f3e4845c57b50f704f8f0de2ed567818dbc81` Node [run41954850365](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41954850365) executed tests: new #504 docs-only positive test PASS, but newly added negative test asserted ALL mixed audit JSON and source paths HIGH. This was **incorrect** for `site/lib/engine.js`, which is deliberately MEDIUM under latest explicit Locked risk-based CI, and source properly returned MEDIUM. This is a regression-test assumption defect, not a demonstrated app/CI classifier logic defect. Keep the approved tier; compare mixed audit JSON+code against code-only tier/SQL/Node mode instead, so docs exemption can never downgrade known source, while unknown/CI/SQL remain HIGH. Original initial Node run FAILED and remains recorded; pending corrected-head tests must execute before integration. Scoped source blob `9901815aa705e92001fa4dc91bf3d4b9d135ef43`, parent `fc2f3e4845c57b50f704f8f0de2ed567818dbc81`. No deployment or production writes.
+
+---
+
+## November 5, 2026 UTC — #267 reproduces and narrows unnecessary #504 CI suites (development only) [skip netlify]
+
+Current exact development base `e3d9da94ebfcbc96426987f7ee838bebfdb05946` and original classifier Git blob `e51f249377a7f2df556d103012b145aabc1559b7`: bounded #504 source-only PR #666 changes audit JSON receipt, coverage JSON ledger and Markdown journal, yet [original real scope run 41949979810](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41949979810) classified it HIGH/Node full/browser high/SQL. `scripts/audit/ci-scope.mjs` explicitly treats #267's JSON receipts as inert governance but lacked #504's equivalent *named* receipts. This is avoidable CI resource consumption, not evidence that unknown JSON is safe.
+
+Proposed minimal source fix adds only `docs/audits/issue504-coverage-ledger.json` and tightly anchored `docs/audits/issue504-review-G1-[0-9]{3,6}.json` to the docs-only classifier, with focused positive and adversarial/mixed-code negative tests in `tests/ci-impact.test.mjs`. Unknown JSON, source paths, suspicious traversal and executable mixtures must still fail-closed HIGH. Original frozen files/oracle, existing #267 strict lines and Locked release flow unchanged. [Reproduction/acceptance record](../audits/issue267-ci-scope-issue504-20261105.json). All changes SAME COMMIT; source parent `e3d9da94ebfcbc96426987f7ee838bebfdb05946`, original code blob `e51f249377a7f2df556d103012b145aabc1559b7`. This is code-risk HIGH and needs actual exact-head Node, browser, SQL/approval and relevant merged-source results; no test called PASS in advance. #504 owns only its documentation receipts, #267 owns this CI classifier. No deployment or provider writes.
 
 ---
 
