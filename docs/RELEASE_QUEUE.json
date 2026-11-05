@@ -45,8 +45,8 @@
       "id": "DIC-Q-33-seasonal-program-release-provenance",
       "issue": 33,
       "title": "Suppress archived selected-product seasonal-program edition leakage without erasing direct dated release",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "b85ded3e40e8c59633e8261ad326e58e8ef682aa",
       "scope_paths": [
         "src/server/coffee-identity-evidence.mjs"
       ],
@@ -54,20 +54,34 @@
         "Selected current official Onyx #248 page 2026-11-05 marks product archived; 2026 summer coffee program is marketing, not selected edition; exact identity: Ethiopia Agaro Yukro G1, Washed, Ultra Light, yearless December harvest.",
         "Prior PR367 exact head 76d134738e08a56ad3e604f1663abcd73ad3e261 2232 PASS/0 FAIL/6 SKIP; validate job 41406579788 FAIL at unrelated then-unused readFileSync import in release/netlify-immutable-publish.mjs (now replaced by concurrent unrelated work). Cloud, approval, security, isolated SQL, private source passed. No false PASS for lint.",
         "2026-11-05 recovery merges fresh development source into existing PR367 with original adversarial archived/active/explicit-date regressions and bounded official #248/#22 trigger. Exact new head tests and after-merge real source pending.",
-        "Recovered prior PR367 e80f2eb: exact Node/lint/build 41991432953 SUCCESS, cloud/mobile 41991432910 SUCCESS, security 41991432919, isolated SQL 41991432915 and original-source guard 41991432875 SUCCESS; approval 41991432954 FAILED due bounded continuity 400-commit range when PR branch had stale Nov2 and 600+ intervening upstream commits. New clean PR contains exactly reviewed five-file diff, no forced rewrite."
+        "Recovered prior PR367 e80f2eb: exact Node/lint/build 41991432953 SUCCESS, cloud/mobile 41991432910 SUCCESS, security 41991432919, isolated SQL 41991432915 and original-source guard 41991432875 SUCCESS; approval 41991432954 FAILED due bounded continuity 400-commit range when PR branch had stale Nov2 and 600+ intervening upstream commits. New clean PR contains exactly reviewed five-file diff, no forced rewrite.",
+        "Clean replacement PR731 reviewed source head 9ef8773330d3edd4aa41aa7d689e5c72ce5fa847: exact Node/lint 41991763349, approval 41991763366, cloud/mobile 41991763270, privacy/security 41991763251, isolated SQL 41991763239, private-source 41991763330 all SUCCESS; original frozen603 41991763376 SKIPPED, NOT PASS.",
+        "Nonforce merged PR731 source b85ded3e40e8c59633e8261ad326e58e8ef682aa; exact merged-source Node/lint 41992023163 2508 PASS/0 FAIL/6 configuration SKIP, approval 41992023149, cloud UX 41992023297 all SUCCESS.",
+        "Actual postmerge official selected HTTPS 41992023448 SUCCESS on exact b85ded3; original603 #248 and control #22 2/2 fetched and actual parser/Add Coffee preview/source review rendered. Selected #248 archived, release_label intentionally absent rather than inherited Summer 2026; #22 December-April harvest not release; no conflicts for either. h1 list absent for Onyx spaced visible title, separately checked original official page/title and name; not mislabeled H1 MATCH.",
+        "Downloaded original GitHub run artifact 13399065912 and independently SHA256-rehashed ZIP 2f0c4743a9c85ca66232e0085d199cc516a97c95875d69887e03da47836b8f9f, current raw #248 590515 bytes SHA256 ad3d70fbe592a6a5b3b3e955a07297fd3b0f75d68baaeda1456d04e1cba283c0 and control #22 300559 bytes SHA256 b348eba6eff546100d92ae723e2ff9d0f2538e5cb5ee145c3a6726fbfefd1332. Evidence JSON SHA256 6f4bacc03fad9d0161233d35e015cba0e7da864f71abe1e4b60d06ca559f5c99."
       ],
       "ci_runs": [
         41406579788,
         41406579817,
         41406579863,
-        41406579740
+        41406579740,
+        41991763349,
+        41991763366,
+        41991763270,
+        41991763251,
+        41991763239,
+        41991763330,
+        41991763376,
+        41992023163,
+        41992023149,
+        41992023297,
+        41992023448,
+        41992023130
       ],
-      "blockers": [
-        "Fresh one-parent exact PR-head Node/lint/build, governance, cloud/mobile, security, SQL and source checks pending.",
-        "Postmerge public exact #248/#22 HTML H1/parser/Add Coffee official source evidence remains unverified."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "TESTING only, no publication. Selected archived banner must be bound to chosen H1; seasonal program is not an SKU edition. Preserve active chosen product seasonal-program accepted positive (historical test) and explicit dated selected offer. #22 control checks harvest vs release without inferring roast from collection; 603 corpus/oracle/captures unchanged. #267 V2 and #96 separate, no provider/SQL/Edge/Auth/member write. Clean replacement of conflict-resolved but continuity-failed old PR367; prior failed historical head preserved. No duplicate source changes."
+      "notes": "NARROW READY development only, NOT DEPLOYED: actual selected official #248 archived program not a SKU release, direct dated offering positive preserved, actual #22 control unchanged. Independently rehashed official captures, synthetic positive/hostile tests and exact merged checks. Original603 frozen replay SKIPPED, 603 individual semantic reviews NOT certified. Legacy PR367 failures preserved, unrelated READY/DEPLOYED unchanged. #267 V2/#96 separate, no Netlify publication, provider/SQL/Edge/Auth/member writes.",
+      "pr": 731
     },
     {
       "id": "DIC-Q-33-original603-292-selected-guji-producer-region",
