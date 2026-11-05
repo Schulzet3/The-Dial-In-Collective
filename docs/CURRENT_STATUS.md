@@ -1,4 +1,10 @@
-## November 5, 2026 UTC — Issue #455 R455-050 undated Shot History date display SAFE READY (development only, NOT DEPLOYED)
+## November 5, 2026 UTC — Extractor Issue #33 selected #570 farm-growing locality VERIFIED development READY, NOT DEPLOYED
+
+[PR #827](https://github.com/Schulzet3/The-Dial-In-Collective/pull/827) safely merged exact source `4f8a66a6a71b59146019924f7bbd8977d98c25fb`; source-bound original603 #570 Slow Burn Expreso Paraiseño now extracts direct present named farm growing place **La Lodoza, El Paraíso, Honduras** rather than broader El Paraíso. Exact reviewed/merged 1804 Node tests PASS/0 FAIL, lint/build/approval/cloud/mobile SUCCESS, and [real official-source replay42083524561](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42083524561) 3/3 selected URLs fetched+parsed; #585 American roast remains blank; #600 Vietnam Lam Dong fields retained. Receipt `docs/audits/issue33-original603-570-selected-growing-locality-ready-20261105.json`. Narrow queue item READY on DEVELOPMENT, never production. The full 603 individual semantic certification is still IN_PROGRESS; frozen603 job SKIPPED, not PASS; Issue #33 stays OPEN. No Netlify, production SQL/Auth/Edge/member writes or publication approval.
+
+---
+
+### November 5, 2026 UTC — Issue #455 R455-050 undated Shot History date display SAFE READY (development only, NOT DEPLOYED)
 
 [PR #839](https://github.com/Schulzet3/The-Dial-In-Collective/pull/839) nonforce squash merged at `cfdcbcaafe0d02d1bfb5b2c4df0176ddbf1dec35`. Reproduced `new Date(null)` and numeric zero/false rendering misleading January 1, 1970 on legacy undated member shots, including screen-reader disclosure names. `site/lib/ui.js` now accepts nonblank timestamp strings only and `site/cloud/shot_card.js` visibly and accessibly says **Date not recorded** for absent or invalid values, preserving source timestamps, five ratings, original notes, other measurements, shot order, status and account data. Three focused regression tests cover eight missing/invalid values, valid ISO/offset timestamps and pending-sync behavior.
 
