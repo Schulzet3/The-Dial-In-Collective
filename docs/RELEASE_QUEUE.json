@@ -4729,6 +4729,27 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "NARROW VERIFIED READY, NOT DEPLOYED. Exact current official selected H1 and farmers-in-this-region prose establish literal Valley de Cauca locality; generic H1/source provenance guard plus 8 adversarial tests, exact corrected PR-head and merged-source CI + 3 live official source parser/Add Coffee cases verified. Independently compared actual logged canonical JSON before/after. Official raw HTML SHA256 values are job-reported, source ZIP byte hashes not independently rehashed due analysis-container unavailability; do not claim byte-for-byte invariance. Parent #33 OPEN: original 603 case-by-case certification, 153 contextual/29 missing-literal/35 historic source blanks unresolved; #267 V2/#96 separate. No production/provider/member release or writes by this Issue33 work."
+    },
+    {
+      "id": "DIC-Q-455-legacy-coffee-date-sort",
+      "issue": 455,
+      "title": "Guard Log Shot coffee recency and archived-current fallback against null/nonstring legacy timestamps",
+      "state": "TESTING",
+      "scope_paths": [
+        "site/lib/model.js"
+      ],
+      "tests": [
+        "Source-level negative: backup validation does not require coffee.createdAt or guarantee workspace.recent value types; current visibleCoffees fallback calls .localeCompare on missing createdAt or numeric recents; hideCoffee fallback sorts numeric recents with .localeCompare.",
+        "New imported actual model-module positive/negative regression authored for blank/null/nonstring historical createdAt and recent timestamps, preserved chronology and A-Z/pinned browsing, hidden-current fallback and private shot immutability; NOT EXECUTED before exact source-bound CI.",
+        "Initial PR #658 head dc4cae40 approval run41942828101 FAILED release queue schema on missing merged_source_sha; root cause source-read from scripts/release/release-queue.mjs line 39; repaired to explicit null for TESTING. Not a behavioral code failure; do not call this run PASS."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact PR-head and merged-source applicable CI not yet run; not merged or READY."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Safe source-level crash prevention only; no new sort policy, numeric espresso heuristic, coffee identity, stored legacy record, offline-outbox or Locked behavior change. No publication authorization.",
+      "merged_source_sha": null
     }
   ],
   "history": [
