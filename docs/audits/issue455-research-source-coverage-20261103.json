@@ -528,11 +528,14 @@
       "published": "2026-04-01",
       "doi": "10.1098/rsos.252031",
       "url": "https://research.lancaster-university.uk/en/publications/a-model-for-the-permeability-of-coffee-pucks-validated-using-x-ra/",
-      "access": "ORIGINAL_AUTHOR_INSTITUTIONAL_PEER_REVIEWED_ARTICLE_ABSTRACT_AND_BIBLIOGRAPHY_READ_2026-11-04; publisher full article and PDF not directly read",
-      "evidence_grade": "PEER_REVIEWED_ORIGINAL_AUTHOR_INSTITUTIONAL_ABSTRACT_HYDRAULIC_MODEL_AND_XCT_BASED_NUMERICAL_FLOW_NOT_HUMAN_SENSORY",
-      "review_status": "PRIMARY_AUTHOR_ABSTRACT_2_COFFEES_11_GRINDS_XCT_PERMEABILITY_SIMULATION_READ; FULL_PAPER_METHODS_TABLES_NOT_VERIFIED",
+      "access": "ORIGINAL_PEER_REVIEWED_FULL_PUBLISHED_ARTICLE_DIRECT_TEXT_AND_PDF_VISUAL_READ_2026-11-05_VIA_FIRST_PARTY_STRATHCLYDE_INSTITUTIONAL_FINAL_VERSION",
+      "evidence_grade": "PEER_REVIEWED_ORIGINAL_METHODS_XCT_22_GRIND_PACKS_AIR_ANALOG_LATTICE_BOLTZMANN_DARCIAN_FLOW_MODEL; NOT_ACTUAL_BREWED_ESPRESSO_OR_SENSORY_VALIDATION",
+      "review_status": "PUBLISHED_FULL_ARTICLE_SECTIONS_3_1_3_4_4_5_3_6_DIRECTLY_REVIEWED; MODELED_DARCIAN_FLOW_AND_EXTRAPOLATED_INERTIAL_REGIME; PRIMARY_PDF_BINARY_SHA_UNAVAILABLE",
       "source_bytes_sha256": null,
-      "source_byte_caveat": "Institutional article abstract directly inspected and DOI corroborated. No publisher full-text methodological audit or PDF byte verification, no measured sensory effects."
+      "source_byte_caveat": "Final published PDF directly read by indexed text and visually inspected pages 8, 11, 15, 16 (PDF indices 7, 10, 14, 15) at author's university repository. Binary download not successful; original file SHA-256 NOT verified. No controlled brewed-shot or member taste outcomes independently observed.",
+      "primary_full_text_url": "https://strathprints.strath.ac.uk/95930/1/Wadsworth-etal-RSOS-2026-A-model-for-the-permeability-of-coffee-pucks-validated.pdf",
+      "primary_landing_url": "https://strathprints.strath.ac.uk/95930/",
+      "reviewed_sections_pages": "§3.1 printed pp5–6: two coffees, 11 settings each; §3.4 printed p7: air fluid analogue and lattice-Boltzmann low-Re flow; §4 printed pp8–11: XCT geometry and numerical permeability; §5.3 printed pp15–16: extrapolation/illustrative recipe; §6 printed pp16–17: limitations"
     },
     {
       "id": "LIT-2025-KIM-TEP-DISCRIMINATION",
@@ -1564,6 +1567,36 @@
       "current_app": "Actual development site/lib/engine.js Git blob ae1fc197754a59127adcddc53df4cf19688604dd uses approved roast/style starting heuristics, user measured shot data and same-coffee/gear calibration, and does not derive pore-structure features from named roast color. site/lib/constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095 preserves seven Locked roast categories.",
       "result": "VERIFIED_ORIGINAL_REPORT_FOUR_NUMBERS_WITH_SCOPE; NO_ESPRESSO_ROAST_PROFILE_COEFFICIENT_OR_NEW_TASTE_POLICY",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-035-A",
+      "source": "LIT-2026-WADSWORTH-XCT-PERMEABILITY original final published article §3.1, §3.4, §4, printed pp5–11",
+      "claim": "The original article compares two coffees (Square Mile Tumba Rwanda and Guayacán Colombia), each at 11 grind settings: 22 physical XCT-based ground-coffee packs. Its pore-geometry-based lattice-Boltzmann simulations use air analog properties (dynamic viscosity 1.8205×10^-5 Pa·s; density 1.2047 kg/m3), an extremely small imposed pressure gradient and Reynolds numbers ~1.36×10^-7 to 2.51×10^-6. Therefore validation addresses modelled intrinsic permeability in a Darcian regime, not observed brewed espresso, human taste, five DIC ratings or a universal grinder correction.",
+      "grade": "PEER_REVIEWED_FULL_FIRST_PARTY_INSTITUTIONAL_FINAL_ARTICLE_METHODS_DIRECT; GEOMETRY_NUMERICS_REPRODUCED_AS_PUBLISHED_NOT_INDEPENDENTLY_EXPERIMENTALLY_REPLICATED",
+      "primary_sources": [
+        "https://strathprints.strath.ac.uk/95930/1/Wadsworth-etal-RSOS-2026-A-model-for-the-permeability-of-coffee-pucks-validated.pdf",
+        "https://doi.org/10.1098/rsos.252031"
+      ],
+      "source_pages": "original printed pp5–11, §§3.1, 3.4 and 4; visually verified PDF pages 8 and 11",
+      "current_app": "development SHA 8513f8b70301c20db235f5288322c444f97b4c9f; site/lib/engine.js Git blob ac0608252f282611607235d7fc184a5acc431199, no measured connected porosity or modelled hydraulic permeability used; existing Locked one-control/same-coffee conditions remain",
+      "result": "SOURCE_CLAIM_BOUNDARY_VERIFIED_RESEARCH_ONLY_NO_NEW_HYDRAULIC_MODEL_OR_TASTE_OPTIMUM",
+      "owner_approval": false,
+      "source_bytes_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-035-B",
+      "source": "LIT-2026-WADSWORTH-XCT-PERMEABILITY full final paper §5.3 and §6, printed pp15–17",
+      "claim": "Authors explicitly do not simulate the espresso inertial regime directly. Their extension draws on external porous-material relationships; the 38–42 g beverage in 27–32 s and 92°C extraction example is an illustrative recipe/physical estimate, not a controlled comparison establishing flavor preference or DIC shot-style timing boundaries. They identify changing pressure, saturation, fines and carbon dioxide among open model/generalization gaps.",
+      "grade": "PEER_REVIEWED_AUTHOR_CAVEAT_DIRECT_PRIMARY_FULL_PAPER; RECIPE_IS_MODEL_EXAMPLE_NOT_RANDOMIZED_SENSORY_OPTIMUM",
+      "primary_sources": [
+        "https://strathprints.strath.ac.uk/95930/1/Wadsworth-etal-RSOS-2026-A-model-for-the-permeability-of-coffee-pucks-validated.pdf",
+        "https://strathprints.strath.ac.uk/95930/"
+      ],
+      "source_pages": "printed pp15–17 §§5.3,6; PDF pages 15–16 visibly inspected",
+      "current_app": "development SHA 8513f8b70301c20db235f5288322c444f97b4c9f; site/lib/engine.js blob ac0608252f282611607235d7fc184a5acc431199: recipe/style-dependent baseline, five taste feedback inputs and one controllable change",
+      "result": "NO_NEW_TEMPERATURE_TIME_RATIO_OR_PRESSURE_TARGET_NO_AUTO_GRIND_CORRECTION; OWNER_DECISION_REQUIRED_IF_PROPOSED",
+      "owner_approval": false,
+      "source_bytes_sha256": null
     }
   ],
   "policy_decisions_pending": [],
@@ -1572,9 +1605,10 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R455-024 manufacturer specification provenance and model-specific guardrails; exact development source read, no app/test/Locked policy change."
+    "reason": "R455-035 source-verification update only, no runtime changes; risk-based Nov 3 governance-only source/continuity check required."
   },
   "next_actions": [
+    "R455-035: final Wadsworth article methods directly read; do not treat 22 XCT packs/air-analog fluid simulations or illustrative 38–42g/27–32s recipe as real-world taste optimum. Resume unrelated primary bibliography checks and safe Log Shot review; Oct29 ZIP/S019 PDF raw bytes still unavailable.",
     "Verify original Griffiths journal full PDF only if needed and Wadsworth full methods when directly accessible; scientific claim verification does not authorize new app data capture or numeric sensory thresholds.",
     "Continue unresolved original research bibliography primary citation checks with exact original section, DOI, access and generalization limits; all nine full bodies were read but NOT all citations independently verified.",
     "Retrieve actual bytes of the two Project Library DIC_Espresso_Research_Implementation_Pack ZIP entries via an authorized owner-provided mount/working attachment if access becomes available; metadata exists but raw_file materialization explicitly denied. Only then hash against recorded 7d562a45... and inspect 15 entries/48 research-only cases.",
@@ -1586,19 +1620,18 @@
     "R455-023: Continue full citation review of nine originals, raw inaccessible October29 ZIP/S019 PDFs and exact-byte provenance of Choi/Kim full manuscripts; assess translated label UX only after specific defect. No #267 V2 coverage credit."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-033",
-    "base_development_sha": "55d45a95185dcf8d9692f35bfb63cccae30f015d",
-    "source_document": "ORG-03 Schenker et al. 2000 primary Table 1 matched-roast-loss two-protocol bean porosity/density, and source-to-Locked engine crosswalk",
-    "original_report_git_blob": "9a66449c6adfe27bc7e64dae086d3dfcfc647de6",
-    "primary_source_id": "LIT-2000-SCHENKER-ROAST-PORES",
+    "id": "R455-035",
+    "base_development_sha": "8513f8b70301c20db235f5288322c444f97b4c9f",
+    "source_document": "Wadsworth et al. RSOS 2026 final published institutional original, hydraulic models versus measured shot/sensory bounds",
+    "primary_source_id": "LIT-2026-WADSWORTH-XCT-PERMEABILITY",
     "claim_ids": [
-      "R455-EV-CIT-033-A"
+      "R455-EV-CIT-035-A",
+      "R455-EV-CIT-035-B"
     ],
     "number_of_curated_sources": 42,
-    "total_evidence_checks": 87,
-    "authority": "OWNER_OPTION_B_RESEARCH_ONLY_NO_LOCKED_CHANGE",
-    "review_type": "PUBLISHED_ORIGINAL_TABLE_DIRECT_VISUAL_REVIEW_WITH_QUALITATIVE_SCOPE_BOUNDARY",
-    "original_pack_S019_byte_access": "unavailable",
+    "total_evidence_checks": 89,
+    "authority": "OWNER_OPTION_B_PRIMARY_SOURCE_VERIFICATION_RESEARCH_ONLY_NO_LOCKED_CHANGE",
+    "review_type": "FULL_PRIMARY_PUBLISHED_METHODS_CAVEATS_DIRECT_TEXT_PLUS_SELECTED_PDF_PAGE_VISUAL_VERIFICATION",
     "source_pages_hashed": false,
     "github267_literal_line_review_credit": 0,
     "production_deployed": false
@@ -1668,6 +1701,24 @@
       "approval_required_for_behavior_change": true,
       "implementation": "RESEARCH_ONLY_HOLD",
       "test_plan": "If ever approved: version/recalibration integrity, offline persistence, grinder edge ranges, no historical mutation, no cross-bean extrapolation, and field outcome testing",
+      "release_queue": "NO_NEW_ITEM"
+    },
+    {
+      "id": "R455-PROP-035-XCT-HYDRAULICS",
+      "finding": "Original 2026 XCT study's intrinsic permeability simulations and illustrative espresso recipe cannot establish universal dose, timing, grind, pressure or flavor optimum; inferred inertial behavior remains model extrapolation.",
+      "evidence": [
+        "R455-EV-CIT-021-C",
+        "R455-EV-CIT-035-A",
+        "R455-EV-CIT-035-B"
+      ],
+      "severity": "P2_RESEARCH_GENERALIZATION_RISK_NO_REPRODUCED_APP_BUG",
+      "user_benefit": "Prevent simulated porous-media coefficients from being presented as proven sensory corrections while preserving useful recipe-family decisions",
+      "current_locked": "Master Spec and Decision Ledger: one controllable next-shot recommendation, five taste ratings, independent Turbo/Fast-Flow, recipe-specific timing, same-coffee/setup/calibration evidence; new numerical targets require owner approval.",
+      "current_app": "At development 8513f8b70301c20db235f5288322c444f97b4c9f, site/lib/engine.js blob ac0608252f282611607235d7fc184a5acc431199 does not import CT permeability fields, estimates or air-based model coefficients.",
+      "proposed_change": "SAFE: keep current behavior and research uncertainty, no code changes. OPTIONAL: new measured puck/porosity inputs or hydro-model coefficients would need owner approval, separate controlled cup/timing validation, privacy and offline testing.",
+      "approval_required_for_behavior_change": true,
+      "implementation": "RESEARCH_ONLY_HOLD",
+      "test_plan": "Docs-only governance/continuity check now. Future approved model: same-coffee and equipment stratification, real-brew measured negative/positive performance with five taste, historical immutability, privacy/offline/SQL and calibrated uncertainty.",
       "release_queue": "NO_NEW_ITEM"
     }
   ]
