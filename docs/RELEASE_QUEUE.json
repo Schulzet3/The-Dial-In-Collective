@@ -11,23 +11,33 @@
       "id": "DIC-Q-455-shot-history-instant-order",
       "issue": 455,
       "title": "Show per-coffee Shot History newest by real instant, not lexical timezone offset",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "667fbaa92fefa9cac0a584a6e74ba242757282ac",
       "scope_paths": [
         "site/cloud/main.js",
         "site/lib/model.js"
       ],
       "tests": [
-        "Exact current CloudApp.coffees() lexical ISO timestamp sorting misranks 2026-11-05T03:00:00+02:00 (01:00Z) above later 2026-11-04T23:30:00-07:00 (06:30Z). Historic invalid dates can outrank valid timestamps.",
-        "PR824 proposed pure orderedShotHistory helper uses previously approved and tested parsed-instant comparison and nonmutating copy; maintains same-coffee and hidden-shot filter, five ratings and original notes/measurements, no changed recommendation logic.",
-        "Four focused regressions at tests/issue455-shot-history-render-order.test.mjs. First head cloud-tests SUCCESS 42076932298; approval 42076932348 initially FAILED solely due required release-queue intake absent, repaired by this docs-only PR-head follow-up; fresh source-bound CI PENDING."
+        "Reproduced exact current per-coffee Shot History UI bug: lexical offset strings 2026-11-05T03:00:00+02:00 (01:00Z) sorted ahead of actually later 2026-11-04T23:30:00-07:00 (06:30Z); invalid nonblank historic dates could outrank dated shots.",
+        "SAFE exact scope in PR824: site/lib/model.js exports orderedShotHistory() using existing actual-instant comparator and nonmutating array copy; site/cloud/main.js keeps same-coffee/not-hidden filtering, preserves stable ties and legacy invalid records after valid dates. Original shots, timestamps, all five taste ratings, private notes/measurements, history and offline/member data unchanged. Four positive/negative tests in tests/issue455-shot-history-render-order.test.mjs.",
+        "First PR824 head f67a65b52953ad24db9df005be0d189f6d16cf89 approval42076932348 FAILED only missing queue intake; corrected with same-commit journal/TESTING queue update e0560198487e377eabb81c8e5b23b01875c466b2. No unresolved failure carried to final head.",
+        "Final PR824 head e0560198487e377eabb81c8e5b23b01875c466b2: exact Node22/lint42077150046 SUCCESS, 2,581 total / 2,575 PASS / 0 FAIL / 6 SKIP; browser/mobile/real SW offline/a11y and cloud42077150215 SUCCESS; approval/governance42077150175, source security42077150103 and isolated SQL42077150181 SUCCESS. Original frozen60342077150260 SKIPPED (not PASS).",
+        "PR824 nonforce squash merged at 667fbaa92fefa9cac0a584a6e74ba242757282ac. All five merged Git file blobs for two live modules, four-case regression, queue and SAME-COMMIT scoped journal were read back byte-identical to final tested PR head. Exact merged Node22/lint42077560005 SUCCESS (2,575 PASS/0 FAIL/6 SKIP); merged browser/mobile/offline/a11y/cloud42077560048 and approval42077559587 SUCCESS. No real production/member/cup test, no deployment."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Fresh exact final PR-head Node22, browser/mobile/offline/a11y and approval/governance CI must complete and be independently verified; unmerged, not READY."
+      "ci_runs": [
+        42077150046,
+        42077150215,
+        42077150175,
+        42077150103,
+        42077150181,
+        42077560005,
+        42077560048,
+        42077559587
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "IN DEVELOPMENT TESTING; no publication or live provider/member writes. Frozen603 unrelated SKIPPED, #267 strict audit separate. Merge only after exact-head checks; then move narrowly to READY after source readback and CI verification."
+      "notes": "VERIFIED NARROW READY in development only, NOT DEPLOYED. Per-coffee shot history display order only, no source or member data rewrites. This item and preexisting DIC-Q-455-coffee-recency-instant-order overlap site/lib/model.js: any future owner-authorized release must isolate/bind required READY dependencies and prevent unready changes from shipping. Frozen603 SKIPPED, #267 separate strict audit, signed-in production member/cup quality untested. No production SQL/Auth/Edge/provider/member writes or main/release/Netlify movement.",
+      "pr": 824
     },
     {
       "id": "DIC-Q-33-original603-603-coop-drymill-town-origin",
