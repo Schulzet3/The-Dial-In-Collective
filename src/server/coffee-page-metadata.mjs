@@ -31,6 +31,7 @@ import {selectedCurrentCoffeeReleaseBadge,selectedStructuredCoffeeEvidence,selec
 import {selectedCurrentInlineShopifyRoastTag} from './coffee-current-inline-shopify-product.mjs';
 import {countrywideEducationalOriginCorrection} from './coffee-countrywide-context-guard.mjs';
 import {selectedFarmStoryRegionMismatch} from './coffee-title-region-evidence.mjs';
+import {selectedCurrentFarmGrowingLocality} from './coffee-selected-farm-growing-locality.mjs';
 import {selectedProcessingSiteNotFarmOrigin} from './coffee-processing-site-origin-guard.mjs';
 
 // A chosen current selected coffee description can be more authoritative than
@@ -2080,6 +2081,22 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     section:'Exact selected farm narrative; mismatched Region label',
     conflicting:true
    });
+  }
+ }
+
+ // Require an exact named current farm with direct grown-at-farm proof before
+ // refining a region; never override a conflicting current origin.
+ if(fields.origin&&!conflicts.has('origin')){
+  const growing=selectedCurrentFarmGrowingLocality({
+   name:fields.name,origin:fields.origin,blocks:productCoffeeProse(canonicalProduct,clean)
+  });
+  if(growing){
+   rememberCoffeeReviewCandidate(fields,'origin',fields.origin,'Broader selected Region label');
+   fields.origin=growing.value;
+   if(source_facts.length<384)source_facts.push({
+    field:'origin',label:'Exact selected farm growing locality',
+    value:growing.quote.slice(0,400),source_url,source_type:'html',
+    section:'Exact selected current growing prose'});
   }
  }
 
