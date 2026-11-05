@@ -5,29 +5,29 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 6685,
+    "strict_validated_lines": 6736,
     "first_unvalidated_manifest_file_index": 59,
     "first_unvalidated_path": "docs/DECISION_LEDGER.json",
-    "first_unvalidated_line": 1795,
+    "first_unvalidated_line": 1846,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 8332,
-    "first_unvalidated_file_index": 51,
-    "first_unvalidated_path": "scripts/audit/coffee-roaster-live-probe.mjs",
-    "first_unvalidated_line": 161,
+    "strict_validated_lines": 8383,
+    "first_unvalidated_file_index": 52,
+    "first_unvalidated_path": "VERIFY_PINNED_INVENTORY_FILE_52_BEFORE_NEXT_BATCH",
+    "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true,
-    "strict_live_counterpart_checked_through_line": 160,
+    "strict_live_counterpart_checked_through_line": 211,
     "last_live_counterpart_checked": {
       "path": "scripts/audit/coffee-roaster-live-probe.mjs",
-      "commit": "f43d20780ebd6b42427bc93b659e0ef4f20016c4",
+      "commit": "1eba5ce27b21601102fd0e99bd2b5472032bef18",
       "blob": "1541f5b18283deb453269f0b313e359b01f0e8c5",
-      "first_line": 101,
-      "last_line": 160,
+      "first_line": 161,
+      "last_line": 211,
       "offset": 0
     }
   },
@@ -2844,12 +2844,34 @@
       "strict_pinned_delta": 60,
       "old_v2_additional_credit": 0,
       "verification": "120 separate original lines, nine fields and exact 60 current counterparts; source-only."
+    },
+    {
+      "batch": "S2-121",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-121.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        1795,
+        1845
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-roaster-live-probe.mjs",
+      "pinned_lines": [
+        161,
+        211
+      ],
+      "pinned_blob": "1541f5b18283deb453269f0b313e359b01f0e8c5",
+      "live_exact_text_line_offset": 0,
+      "live_blob": "1541f5b18283deb453269f0b313e359b01f0e8c5",
+      "strict_frozen_delta": 51,
+      "strict_pinned_delta": 51,
+      "old_v2_additional_credit": 0,
+      "verification": "102 distinct source-bound line interpretations; pinned #51 complete through EOF 211, no human or runtime claim."
     }
   ],
   "completion": "IN_PROGRESS",
-  "test_limit": "S2-120 source direct inspection only; exact PR and merge CI pending; full live drift/real app/SQL/Auth acceptance incomplete.",
-  "last_batch": "S2-120",
-  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-120.json",
+  "test_limit": "S2-121 source-only direct review; exact PR-head/merged CI pending; full post-pin live code and app/Auth/backup/603 acceptance incomplete.",
+  "last_batch": "S2-121",
+  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-121.json",
   "complete": false,
   "accounting_reconciliation_20261105": {
     "scope": "NONCREDIT historical source-ledger reference repair",
