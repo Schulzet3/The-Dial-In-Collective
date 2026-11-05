@@ -2022,6 +2022,33 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     section:'General product background, noncanonical'});
   }
  }
+ // Exact current selected farm H1 country can refine a directly labeled
+ // Region only. Neither the farm name nor SEO nor an adjacent product
+ // supplies country; use the same canonical country vocabulary and provenance.
+ if(fields.origin&&!conflicts.has('origin')&&typeof fields.origin==='string'&&
+  fields.origin.length>=3&&fields.origin.length<=80&&!fields.origin.includes(',')&&
+  !geographyParts(fields.origin).some(part=>ORIGIN_COUNTRIES.has(part))){
+  const titled=String(fields.name||'').match(/^(?:Finca|Farm|Hacienda|Estate)\s+[\p{L}\p{M}][\p{L}\p{M}\s'’.-]{2,90}\s+[–—-]\s+(?:Washed|Natural|Honey|Anaerobic)(?:\s+Processed)?\s+([\p{Lu}][\p{L}\p{M}-]{3,59})$/u);
+  const titleCountry=titled?extractCoffeeTitleOrigin(titled[1]):null;
+  if(titleCountry?.label==='Country'){
+   const headings=productCoffeeProse(canonicalProduct,clean).filter(b=>b.tag==='h1');
+   const labeled=source_facts.filter(f=>f.field==='origin'&&f.source_type==='html'&&
+    !f.conflicting&&keyOf(f.value)===keyOf(fields.origin)&&
+    (/^(?:growing\s+)?region$/iu.test(String(f.label||'').trim())||
+     /(?:^|\/\s*)(?:growing\s+)?region\s*:/iu.test(String(f.section||'')))&&
+    !/different coffee|related product|previous (?:coffee|lot)/iu.test(String(f.section||'')));
+   if(headings.length===1&&keyOf(headings[0].text)===keyOf(fields.name)&&
+    labeled.length===1&&!source_facts.some(f=>f.field==='origin'&&f.conflicting)){
+    const previous=fields.origin;
+    fields.origin=previous+', '+titleCountry.value;
+    rememberCoffeeReviewCandidate(fields,'origin',previous,'Selected Region, literal country in exact H1');
+    if(source_facts.length<384)source_facts.push({field:'origin',
+     label:'Exact selected H1 country and current labeled Region',value:fields.origin,
+     source_type:'html',source_url,section:'Selected product H1 and Region caption'});
+   }
+  }
+ }
+
  // An extracted value is a suggestion, never proof of an official source.
  // Keep unexpected/absent facts blank instead of guessing.
  return {ok:true,source:'unverified_public_page',fields,available:Object.keys(fields),
