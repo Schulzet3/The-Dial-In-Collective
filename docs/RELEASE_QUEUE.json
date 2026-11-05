@@ -8,6 +8,36 @@
   },
   "items": [
     {
+      "id": "DIC-Q-33-original603-603-coop-drymill-town-origin",
+      "merged_source_sha": null,
+      "issue": 33,
+      "title": "Preserve selected Nicaragua Segovia growing locality by distinguishing processing-mill town",
+      "state": "TESTING",
+      "scope_paths": [
+        "src/server/coffee-processing-site-origin-guard.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "Current exact selected official Zeke's product H1, PRODECOOP contributing farmers, and sun drying/final processing at Las Segovias dry mill in Palacaguina; historical original603 #603 source-register parser claimed Palacaguina, Nicaragua as Origin but growing locality unsupported.",
+        "PR817 first head ef50825d8b18070ddaafede5be4a4e5ffd36064f: Node/lint/build 42071939504 SUCCESS, cloud/mobile 42071939357 SUCCESS, isolated SQL 42071939328 SUCCESS, source security 42071939453 SUCCESS, Issue33 bundle 42071939296 SUCCESS; approval 42071939271 FAILED missing intake queue item. Frozen 603 42071939449 SKIPPED, not PASS."
+      ],
+      "ci_runs": [
+        42071939504,
+        42071939357,
+        42071939328,
+        42071939453,
+        42071939296,
+        42071939271
+      ],
+      "blockers": [
+        "Corrected exact-head approval and relevant Node CI pending",
+        "No fresh guarded exact selected official #603 HTML/parser/Add Coffee source hash/readback yet",
+        "Safe nonforce merge and independent merged-source tests pending"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Development TESTING only, NOT READY/DEPLOYED. Source says final coffee processing mill's town, NOT explicitly farms' cultivation area. No speculative Segovia region or changed producer/notes/user-entered fields. Full original 603 certification incomplete. No oracle/CSV/capture edits, Netlify publish or production/SQL/Edge/Auth/provider/member changes."
+    },
+    {
       "id": "DIC-Q-455-coffee-recency-instant-order",
       "issue": 455,
       "title": "Current coffee recency and hidden-current reselection use real timezone instants",
