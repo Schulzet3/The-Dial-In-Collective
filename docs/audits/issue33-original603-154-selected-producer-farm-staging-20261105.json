@@ -3,7 +3,7 @@
   "issue": 33,
   "selected_case": 154,
   "control_case": 196,
-  "status": "TESTING_NARROW_NOT_READY",
+  "status": "VERIFIED_READY_DEVELOPMENT_NOT_DEPLOYED",
   "authority": "owner development-only exact selected current primary source and parser verification",
   "current_source_parent_sha": "42d1f888a0bd78662b13e48396cbd40119a58e63",
   "exact_selected_run": 42101162866,
@@ -19,19 +19,87 @@
   ],
   "prior_canonical_producer": "Las Marias",
   "desired_narrow_producer": "José Giraldo",
-  "actual_after": null,
+  "actual_after": {
+    "source_sha": "a74e4590e21450132ed3b48712d201abbdb22d93",
+    "parser_fix_sha": "cf24bc22b79fabb8038e540cb04731172c2da8f0",
+    "actual_selected_run": 42110401151,
+    "job_id": 127536116413,
+    "source_url": "https://hscoffeeroasters.com/products/colombia-jamir-munoz-copy",
+    "selected_h1": "Colombia José Giraldo Entre Montañas",
+    "html_sha256": "ea12f8ef78d0d6c4d801e948038e1468cc7ef99389e3597562b2f9d6c934f019",
+    "parsed_fields": {
+      "producer": "José Giraldo",
+      "origin": "Pijao, Quindío, Colombia",
+      "variety": "Green-tip Gesha",
+      "process": "Washed",
+      "tasting_notes": "Cotton candy grape, rose, Cardamaro."
+    },
+    "separately_published_farm": "Las Marias",
+    "conflicts": [],
+    "current_source_parser_pass": true,
+    "add_coffee_preview_and_review": true,
+    "strict_role_contract_pass": true
+  },
   "control": {
     "number": 196,
     "url": "https://lionrushcoffee.com/products/el-silencio-chiroso-washed",
     "sha256": "86e1fcdd4d0642b8c7006517c825742769fbaefd449961cd973c608fecd13545",
     "prior_producer": "El Silencio (Alex Metrio)",
     "process": "Anaerobic",
-    "expected_unchanged": true
+    "expected_unchanged": true,
+    "actual_after": {
+      "source_sha": "a74e4590e21450132ed3b48712d201abbdb22d93",
+      "html_sha256": "b53e86f97a2a7a1a82d406fcc4d9ea62f0c20f2742ce28b77e7b72dbcb5ee8d3",
+      "selected_h1": "El Silencio — Chiroso Washed",
+      "producer": "El Silencio (Alex Metrio)",
+      "process": "Anaerobic",
+      "origin": "Urrao, Antioquia, Colombia",
+      "source_parser_pass": true,
+      "strict_role_contract_pass": true,
+      "conflicts": []
+    }
   },
   "full603_unchanged": true,
   "manual_certified_whole_coffees": 0,
   "no_netlify_or_production_operations": true,
   "raw_artifact_independently_rehashed": false,
   "live_signed_in_goTrue_unverified": true,
-  "next": "Run focused adversarial Node regression, applicable PR-head CI, nonforce merge, and fresh exact merged official selected source/preview; only then reconcile READY."
+  "next": "Continue remaining unresolved original603 selected-product source review and 153 contextual/29 missing literal/35 source-present blank cases. No whole-coffee or corpus certification claimed. Keep #33 OPEN; no production/deployment.",
+  "verification": {
+    "original_current_http_attempted": 2,
+    "fetched": 2,
+    "parsed": 2,
+    "source_review_and_add_coffee_pass": 2,
+    "head_checks_success": 6,
+    "exact_postmerge_approval_success": true,
+    "original_frozen603": "SKIPPED_NOT_PASS",
+    "original603_individual_semantic_certified": 0,
+    "raw_html_hashes_from_runner": true,
+    "raw_private_artifact_independently_rehashed": false,
+    "no_production_write": true,
+    "source_fact_farm_broad_taxonomy_original_label_preserved": true,
+    "ci": {
+      "parser_pr_head": [
+        42102209299,
+        42102209327
+      ],
+      "parser_postmerge": [
+        42102558304,
+        42102558306
+      ],
+      "after_harness_pr_head": [
+        42109578396,
+        42109578456,
+        42109578173,
+        42109578696,
+        42109578239
+      ],
+      "after_harness_postmerge": [
+        42110401151,
+        42110401157,
+        42110401257,
+        42110401332
+      ]
+    }
+  }
 }

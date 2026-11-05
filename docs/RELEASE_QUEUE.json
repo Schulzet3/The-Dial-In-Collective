@@ -11,8 +11,8 @@
       "id": "DIC-Q-33-154-current-selected-named-grower-estate",
       "issue": 33,
       "title": "Do not confuse the named selected grower with their separately labeled estate",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "cf24bc22b79fabb8038e540cb04731172c2da8f0",
       "scope_paths": [
         "src/server/coffee-direct-product-prose.mjs",
         "src/server/coffee-page-metadata.mjs"
@@ -20,19 +20,36 @@
       "tests": [
         "Exact merged current official product before run42101162866/job127504013848 selected original603 #154 raw HTML SHA256 715b2ee5bd8b9de420d631e3fbea08d9a5c4eb827a14fca0c14bb7076ba8113b; H1 and direct product says producer José Giraldo's Las Marias estate; Farm labeled Las Marias; parser falsely producer Las Marias without conflict.",
         "Control original603 #196 exact selected Lionrush official source run42101162866 same H1/farmer and farm roles, source SHA256 86e1fcdd4d0642b8c7006517c825742769fbaefd449961cd973c608fecd13545; existing producer El Silencio (Alex Metrio), process Anaerobic, direct Washed plus anaerobic fermentation; do not change outside proven named grower case.",
-        "Positive and hostile synthetic source/actual parser/Add Coffee tests in tests/coffee-issue33-154-selected-producer-estate.test.mjs. New code exact CI, postmerge actual public-source acceptance and before/after field/negative comparison PENDING.",
+        "Positive and hostile synthetic source/actual parser/Add Coffee tests in tests/coffee-issue33-154-selected-producer-estate.test.mjs. New code exact source, negative and positive Add Coffee review regression verified at PR849 head b7101b52d334801538b3b9176268f51bdb2c7b0d, actual CI 42102209299 SUCCESS; earlier failed hostile case fully repaired and not hidden.",
         "Initial PR849 exact head 8993f7c1a53c40902c03515d8061fff3783bb5da Node/lint run42101798000 FAILED: 2,588 PASS, 1 FAIL, 6 SKIP; hostile negative selected product paragraph 'another offering comes from producer ...' incorrectly upgraded a different offering. Genuine source-bound safety regression reproduced, not bypassed.",
-        "Second head hardens noncurrent other-offering/lot/product/different-coffee guard and adds two adversarial variants; final exact-head CI and official source re-run still PENDING."
+        "Second head hardened noncurrent other-offering/lot/product/different-coffee guard and adds two adversarial variants; exact PR849 head Node/lint, cloud, approval, isolated SQL, security and private source bundle SUCCESS, squash merged source cf24bc22b79fabb8038e540cb04731172c2da8f0. Actual merged developer CI 42102558304 Node and 42102558306 approval SUCCESS.",
+        "PR859 exact source e18cc1e1a980b25f646a414d6b304d475d0da6f4 all 6 applicable PR-head checks SUCCESS (42109578396 approval, 42109578456 Node, 42109578173 cloud/mobile, 42109578696 isolated SQL, 42109578239 Python); frozen603 SKIPPED, not PASS. Nonforce merged a74e4590e21450132ed3b48712d201abbdb22d93; merged approval 42110401157, cloud build 42110401257, Python 42110401332 SUCCESS.",
+        "Fresh current selected original603 public HTTPS run42110401151/job127536116413 SUCCESS exactly 2/2 fetched, parsed, Add Coffee preview and source review, exact selected H1 and producer/farm/process role assertions both PASS. #154 H&S raw HTML SHA256 ea12f8ef78d0d6c4d801e948038e1468cc7ef99389e3597562b2f9d6c934f019, actual producer José Giraldo, Farm Las Marias, Pijao/Quindío/Colombia, Washed, Green-tip Gesha, selected notes preserved, zero conflicts. #196 Lionrush raw HTML SHA256 b53e86f97a2a7a1a82d406fcc4d9ea62f0c20f2742ce28b77e7b72dbcb5ee8d3, actual producer El Silencio (Alex Metrio), process Anaerobic and unrelated notes preserved, zero conflicts. Hashes runner-reported; raw ZIP not independently rehashed.",
+        "Review-only Farm: Las Marias literal remains preserved in source_facts under the preexisting broad Farm→producer alias, with its original Farm label; this is not a second autofilled producer claim and does not alter canonical producer. Original 603 individual semantic certifications remain incomplete."
       ],
       "ci_runs": [
         42101162866,
-        42101798000
+        42101798000,
+        42102209299,
+        42102209327,
+        42102209169,
+        42102209174,
+        42102558304,
+        42102558306,
+        42109578396,
+        42109578456,
+        42109578173,
+        42109578696,
+        42109578239,
+        42110401151,
+        42110401157,
+        42110401257,
+        42110401332
       ],
-      "blockers": [
-        "Exact-source GitHub CI and final bounded official same-product parser readback pending; full603 individual semantic audit and authenticated hosted member test not certified."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "TESTING, NOT READY or published. No generic farm fallback changed unless explicit same-H1 grower estate evidence and exactly matching selected Farm role; never overwrite a separately named producer. Frozen 603/201/1197 oracle/captures/CSV intact; #267 V2/#96 separate."
+      "notes": "Verified narrowly READY in development, NOT DEPLOYED: current selected H&S named human producer José Giraldo wins over explicitly distinct Farm Las Marias only when exact selected H1, current direct prose and matching Farm evidence agree. Unrelated other offering, lot, identity/harvest, incompatible farm, contradicting explicit producer, and #196 control remain fail-closed. Actual postmerge guarded public 2/2 roles and Add Coffee pass; source-fact original Farm label preserved. No whole original603 semantic certification, signed-in GoTrue or ZIP rehash claim. Separate #267 V2/#96, frozen original CSV/201 roasters/1197 captures/oracle unchanged. Publication requires separate authorization.",
+      "pr": 849
     },
     {
       "id": "DIC-Q-455-shot-history-missing-date-display",
