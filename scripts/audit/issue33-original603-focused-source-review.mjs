@@ -9,6 +9,7 @@ import {selectedCurrentCoffeeReleaseBadge} from '../../src/server/coffee-selecte
 import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 import {productCoffeeProse} from '../../src/server/coffee-product-prose.mjs';
 import {extractCoffeeBlendEvidence} from '../../src/server/coffee-blend-evidence.mjs';
+import {sameHandleCollectionAlternate,identicalCurrentSelectedTitle} from './issue33-selected-public-alternate.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../../site/cloud/coffee-url-autofill.js';
 const sha=value=>createHash('sha256').update(value).digest('hex');
 const clip=(v,n=350)=>String(v??'').replace(/\s+/g,' ').trim().slice(0,n);
@@ -39,6 +40,8 @@ function csv(text){
 const bytes=readFileSync(new URL('../../docs/audits/issue33-original603-source-level-adjudication-20261029.csv',import.meta.url));
 const all=csv(bytes.toString('utf8'));
 if(all.length!==603||new Set(all.map(r=>r['Case ID'])).size!==603)throw Error('original603_identity_invariant');
+const auditAlternateUrl=process.env.DIC_ISSUE33_FOCUSED_CURRENT_ALTERNATE_URL||'';
+if(auditAlternateUrl&&targetNumbers.length!==1)throw Error('audit_alternate_requires_one_case');
 const targets=targetNumbers.map(n=>{
  const x=all.filter(r=>Number(r.Number)===n);
  if(x.length!==1||!safeCoffeeUrl(x[0]['Exact Original Official URL']))throw Error('invalid_original603_case_'+n);
@@ -47,6 +50,8 @@ const targets=targetNumbers.map(n=>{
 const dest=process.env.DIC_ISSUE33_FOCUSED_PUBLIC_DIR;
 if(!dest)throw Error('private_artifact_directory_required');
 mkdirSync(dest,{recursive:true});
+const verifiedAlternate=auditAlternateUrl?sameHandleCollectionAlternate(targets[0]['Exact Original Official URL'],auditAlternateUrl):null;
+if(auditAlternateUrl&&!verifiedAlternate)throw Error('invalid_same_handle_official_alternate');
 const records=[];
 for(const target of targets){
  const r={number:Number(target.Number),case_id:target['Case ID'],archived_coffee:target.Coffee,
@@ -55,7 +60,11 @@ for(const target of targets){
   immutable_expected:JSON.parse(target['Original expected by field']||'{}'),
   status:'NOT_FETCHED',manual_certification:false};
  try{
-  const res=await fetchPublicCoffeeHtml(r.official_url,{maxBytes:MAX_PRODUCT_RETRY_BYTES});
+  const original=await fetchPublicCoffeeHtml(r.official_url,{maxBytes:MAX_PRODUCT_RETRY_BYTES});
+  if(!original?.ok)r.original_url_unavailable_reason=clip(original?.reason,160);
+  const res=!original?.ok&&verifiedAlternate
+   ?await fetchPublicCoffeeHtml(verifiedAlternate,{maxBytes:MAX_PRODUCT_RETRY_BYTES}):original;
+  if(!original?.ok&&verifiedAlternate)r.alternate_url_attempted=verifiedAlternate;
   if(!res?.ok){r.status='UNAVAILABLE';r.reason=clip(res?.reason,160);}
   else{
    r.status='FETCHED';r.final_url=res.source_url||r.official_url;
@@ -72,6 +81,10 @@ for(const target of targets){
    writeFileSync(join(dest,r.html_artifact),res.html,'utf8');
    const p=extractPublicCoffeeFacts(res.html,{source_url:r.final_url});
    r.parser_ok=p?.ok===true;r.parser_reason=clip(p?.reason,140);
+   if(r.alternate_url_attempted){
+    r.alternate_identity_match=r.parser_ok&&r.selected_h1.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p.fields?.name));
+    if(!r.alternate_identity_match){r.status='IDENTITY_MISMATCH';r.parser_ok=false;r.reason='alternate_selected_identity_unconfirmed';}
+   }
    if(p?.ok){
     r.current_fields=Object.fromEntries(Object.entries(p.fields||{})
       .filter(([,v])=>v!=null&&typeof v!=='object').map(([k,v])=>[k,clip(v,400)]));
@@ -145,7 +158,8 @@ for(const target of targets){
  }catch(e){r.status='ERROR';r.error=clip(e?.name||'Error',100);}
  records.push(r);
  console.log('[DIC33 FOCUSED SOURCE] '+JSON.stringify({number:r.number,status:r.status,h1:r.selected_h1||[],
-  name:r.current_fields?.name||null,parser_ok:r.parser_ok===true,sha256:r.html_sha256||null}));
+  name:r.current_fields?.name||null,parser_ok:r.parser_ok===true,sha256:r.html_sha256||null,
+  original_unavailable_reason:r.original_url_unavailable_reason||null,alternate:r.alternate_url_attempted||null,identity_match:r.alternate_identity_match??null}));
 
  // Manual semantic review needs the actual publicly published field claims,
  // not just seven green parse outcomes. These are bounded *public* product

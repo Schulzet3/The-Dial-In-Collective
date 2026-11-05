@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "date": "2026-11-05",
+  "status": "SOURCE_VERIFIED_TWO_ORIGINAL_URLS_THIRD_ALTERNATE_TEST_PENDING",
+  "parent_source_sha": "e428d294e3aec5c6c842294fe1532c2af3b09e2b",
+  "previous_pr": 795,
+  "previous_run": 42042502764,
+  "source_job": 127296679542,
+  "original_frozen603_csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "original_coffees": 603,
+  "original_roasters": 201,
+  "original_captures": 1197,
+  "records": [
+    {
+      "number": 526,
+      "roaster": "Mystic Monk Coffee",
+      "selected_h1": "Cloister Reserve Blend",
+      "official_url": "https://www.mysticmonkcoffee.com/products/cloister-reserve-blend",
+      "status": "FETCHED_PARSED_ADD_COFFEE_REVIEW",
+      "runner_html_sha256": "ec373524b3349522532ae452a146ffc49c167c2aaf750a21fe072dfba1a23f9a",
+      "parser_fields": {
+        "name": "Cloister Reserve Blend",
+        "origin": "Brazil, Guatemala, Colombia, Ethiopia",
+        "process": "Other/Unknown",
+        "roaster": "Mystic Monk Coffee",
+        "tasting_notes": "Candied Citrus, Berry, Chocolate Hazelnut"
+      },
+      "conflicts": [],
+      "semantic_review": "Selected roast graphic only shows endpoints Light Roast and Dark Roast; no direct Medium-Light selected label. Annual award 2026 is not a product release date. Extractor safe blank roast."
+    },
+    {
+      "number": 195,
+      "roaster": "Leap Coffee Roasters",
+      "selected_h1": "Ethiopian Natural Processed Coffee",
+      "official_url": "https://leapcoffeeroasters.com/products/ethiopian-organic-coffee",
+      "status": "FETCHED_PARSED_ADD_COFFEE_REVIEW",
+      "runner_html_sha256": "4d6544256cc0b807745b111056f590755f1dc77522e7eadb6499ba1575b5b963",
+      "parser_fields": {
+        "name": "Ethiopian Natural Processed Coffee",
+        "roaster": "Leap Coffee Roasters",
+        "tasting_notes": "Blueberry, plum and chocolate.",
+        "origin": "Mendebo, Ethiopia",
+        "producer": "Gelgelu Edema Farm",
+        "process": "Natural",
+        "variety": "heirloom"
+      },
+      "conflicts": [],
+      "semantic_review": "Selected farm and process/notes correct. Historical Light roast not printed, generic Yirgacheffe altitude not assigned to selected farm. Leave canonical roast/elevation blank."
+    },
+    {
+      "number": 589,
+      "roaster": "Vail Mountain Coffee & Tea",
+      "original_url": "https://www.vailcoffee.com/products/ethiopian-yirgacheff",
+      "original_status": "UNAVAILABLE",
+      "official_alternate": "https://www.vailcoffee.com/collections/all-coffee/products/ethiopian-yirgacheff",
+      "current_rendered_h1": "Ethiopian Guji Buku Sayasa Grade 1 - SUPERNATURAL",
+      "new_current_parser_status": "PENDING_GUARDED_ALTERNATE",
+      "semantic_review": "Old handle refers to selected Guji Buku Sayasa. Current official collection path visually publishes direct Natural, Guji/Hambela/1900-2300 masl and notes; archived Medium roast unsupported, broad roasting altitude educational."
+    }
+  ],
+  "evidence_limit": {
+    "actual_current_official_H1_parser_preview_for_two": true,
+    "third_actual_guarded_current_official_missing": true,
+    "independent_zip_byte_rehash": false,
+    "full_603_manual_certification": false,
+    "real_signed_in_auth": false,
+    "runtime_parser_change": false,
+    "release_queue_change": false,
+    "production_writes": false
+  },
+  "next": "Verify exact alternative matched selected H1/current parser on read-only safeguarded CI, preserve original 404; reconcile #33 bounded review afterward."
+}
