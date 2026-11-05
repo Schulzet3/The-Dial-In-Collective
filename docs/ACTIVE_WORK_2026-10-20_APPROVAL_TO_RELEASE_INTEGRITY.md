@@ -314,3 +314,9 @@ Exact-source PR426 visual review failed its existing instruction-continuity regr
 
 ## Release18 evidence-citation correction — November 5, 2026 UTC [skip netlify]
 - The independently successful `approval` GitHub workflow for immutable candidate `0f8ea686743ebae8476d1a72cde0dfa1833ee157` is run `41973651191` (job 127067394975), distinct from `cloud-tests`/`mobile-browser-qa` run `41973651193`. Corrected the historical grant note's pending ID and production receipt's misattributed ID; all five checks actually passed. This is documentation-only, no queue changes, source retesting, new publisher claim or production change.
+
+
+## 2026-11-05 — Release19 READY-only source candidate r1, PREPARE/TESTING [skip netlify]
+- Owner approved one batch of precisely 19 READY IDs. Frozen source anchor 60d7eabdfad10622ea02c04fabb131f2e0a2de33 contains the 19 verified READY changes before later unready Issue33 #154 edits. Parent published tested source 0f8ea686743ebae8476d1a72cde0dfa1833ee157 included via frozen bridge's second parent; not a live publisher or release claim.
+- Exactly two unfinished source blobs restored from published source: scripts/netlify/should-ignore-build.mjs `22b4cd101006130513b45c6c5e932b5543ca8141`, src/server/coffee-narrative-evidence.mjs `221f2140645c5d1353e5eeebd4581f31e9962d6b`. The selected 12 READY deployable paths are byte-for-byte frozen source; no unready #154 source/test, private record, SQL/Auth/Edge/provider changes in this candidate.
+- A single source-bound candidate on release-candidates/ready19-20261105-isolated-r1 needs all five exact SHA CI checks, controller isolation validation, one-use grant and Netlify READY/current verification. Keep status BATCH_PREPARING, NOT DEPLOYED or tested yet.
