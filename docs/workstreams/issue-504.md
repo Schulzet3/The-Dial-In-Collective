@@ -476,3 +476,14 @@ Live source at review: development `fbb7cd072bf73cd65f088d9ed9e6687b2b612ea5`, m
 **Tests:** SHA-1 known vectors, comment-source arithmetic and ID nonoverlap PASS; Node22/SQL/browser/offline/original603 not rerun for a docs-only receipt. PR-head and merged-source CI must be read back; a pending or skipped job is **not PASS**. Only receipt, ledger and this #504 scoped journal changed. No Netlify, release/production, provider/SQL/Auth/Edge/member/backup, secret, purchase or force write.
 
 **Exact NEXT unreviewed:** Issue #267 comment [`6568435318`](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267#issuecomment-6568435318), body word 1. Audit **OPEN / IN_PROGRESS**.
+
+
+## Issue #504 G1-042 — 2026-11-05 UTC: next nine historical #267 comments direct semantic review [skip netlify]
+
+**Source refs:** development `7415274b7793e555f3dd840fd99a5d3a6a22a17a`, main `c25e31343b1974b89445b48b43993bc446aa96ca`, release/production `b386a977a7c43bf190f6315105894334d96f0f18`, visibility `public` (unchanged). Comment inventory snapshots #267=93, #504=69.
+**Direct review:** Entire #267 comment bodies `6568435318`, `6569134999`, `6569993297`, `6570966548`, `6571459845`, `6572230156`, `6572829517`, `6573994778`, `6575100443`. 2049 distinct whitespace words / nine GitHub objects, SHA-1 UTF-8 versioned, word/line inclusive bounds and per-comment semantic findings in [G1-042 receipt](../audits/issue504-review-G1-042.json).
+
+**Findings:** Old #358 merge blocker resolved in later checkpoint; historical READY certification/CI cancellation and prior unused-parameter/import fixes are not fresh live bugs. Local gallery URL-port exception lead belongs to #33 and remains unconfirmed. No deletion justified. #267 strict source ledger blob `e0384620e056a6b8c525673a201d39d652dc2cb9` reports frozen 7585/579961, pinned 9258/57913 (last S2-142); no individual #267 source-line credit imported or revalidated as complete.
+**Cumulative #504:** 7,919 source file lines / 60,754 source file words; **91 GitHub text records / 25,213 words**. Only #504 receipt, append-only ledger and this journal changed. No code, tests, SQL/Auth/member/provider, publication, queue or production change. GitHub-wide inventory and word-level coverage incomplete.
+**Checks:** SHA-1 known vectors, prior comment body SHA1, nine full source bodies, ordered unique IDs, word totals, exact next cursor PASS. Node22/SQL/browser/offline/original603 NOT RUN (docs-only). GitHub PR-head and merged-source CI PENDING, not claimed passed.
+**Exact next:** [Issue #267 comment 6578809290](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267#issuecomment-6578809290) word 1. 65 #267 comments remain at snapshot. Status **OPEN / IN_PROGRESS**; no #267/#455/#33/#96 scope overlap.
