@@ -1153,7 +1153,7 @@
     "source_whitespace_tokens_semantically_read": 16880,
     "total_source_characters": 207402,
     "next_function_ordinal": null,
-    "next_object": "pg_shdepend #1/942 then pg_init_privs #1/233; migration full SQL, hosted Auth/API, external console/native compiled not certified",
+    "next_object": "Full live migration SQL #1/54 direct semantic and exact-source identity review; hosted Auth/API with #96; compiled native and console-only UNVERIFIED",
     "other_objects": "99/99 application SQL function definitions, 46/46 application table catalog definitions, 9/9 accessible deployed Edge file variants complete; platform/vendor SQL, Auth/Storage/cron/Realtime, migration drift, external dependency calls, performance and limits still incomplete; platform table definitions auth27/storage8/realtime3 direct review complete; platform functions, other tables, database migration SQL bodies still unverified; additional provider catalog review supabase_migrations(1 table), vault(1 table+1 view), extensions(2 views), without secret records",
     "platform_objects": "DIRECT_PROVIDER_CATALOG_TABLES_AUTH27_STORAGE8_REALTIME3_SUPABASE_MIGRATIONS1_VAULT1=40_TABLES; DIRECT_VIEWS_VAULT1_EXTENSIONS2=3; DIRECT_PROVIDER_SQL_FUNCTION_BODIES_42_OF_42_AUTH4_GRAPHQL1_STORAGE19_REALTIME18",
     "edge_function_sources_reviewed": 9,
@@ -2800,6 +2800,15 @@
       "provider_mutations": 0,
       "code_fixes": 0,
       "next": "pg_shdepend #1/942"
+    },
+    {
+      "event": "2026-11-05_run22_shared_dependencies_and_initial_acl",
+      "development_sha": "ce4535c6ae3913cb623fffa37e555048eaa57794",
+      "shared_catalog_edges_reviewed": 942,
+      "initial_acl_records_reviewed": 233,
+      "read_only": true,
+      "app_code_fixes": 0,
+      "next": "migration SQL #1/54"
     }
   ],
   "state": "APP_SQL_FUNCTIONS_99_OF_99; APP_TABLES_46_OF_46_COMPONENTS_DIRECTLY_READ; EDGE_DEPLOYED_SOURCE_9_OF_9_VARIANTS; FULL_PROVIDER_AUDIT_IN_PROGRESS; #527_READY_NOT_DEPLOYED; PLATFORM_AUTH_27_STORAGE_8_REALTIME_3_TABLE_DEFINITIONS_DIRECT_REVIEWED; FULL_PROVIDER_AUDIT_IN_PROGRESS; VENDOR_OTHER_TABLE_VIEWS_5_DIRECT_COMPONENTS_READ; PLATFORM_SOURCE_FUNCS_AUTH4_GRAPHQL1_STORAGE10_REALTIME7_DIRECT_REVIEW; PLATFORM_SQL_FUNCTION_BODIES_42_OF_42_FOR_AUTH_GRAPHQL_STORAGE_REALTIME; ALL_PROVIDER_NATIVE_AND_HOSTED_BASELINE_IN_PROGRESS; ADJACENT_PROVIDER_DECLARATIONS_96_96_NATIVE_CODE_UNVERIFIED",
@@ -6010,5 +6019,37 @@
     "remaining_sql_bodies_direct_semantic_review_unverified": true,
     "evidence_path": "docs/audits/issue509-migration-metadata-drift-20261105-run19.json",
     "source_development_sha": "47fde5de0ba2b1765c9a68da4a2230e8d8f9e06c"
+  },
+  "provider_shared_dependency_review": {
+    "status": "COMPLETE_VISIBLE_SHARED_DEPENDENCY_CATALOG_RELATIONSHIPS",
+    "reviewed": 942,
+    "total": 942,
+    "evidence_path": "docs/audits/issue509-pg-shdepend-001-942-20261105-run22.json",
+    "dependency_kinds": {
+      "o": 316,
+      "a": 555,
+      "i": 11,
+      "r": 60
+    },
+    "client_or_service_role_refs": 374,
+    "unknown_types": 0,
+    "unresolved_identity": 0,
+    "source_development_sha": "ce4535c6ae3913cb623fffa37e555048eaa57794",
+    "underlying_function_and_hosted_api_unverified": true
+  },
+  "provider_initial_privileges_review": {
+    "status": "COMPLETE_VISIBLE_ORIGINAL_AND_CURRENT_EXPLICIT_ACL_TEXT_NOT_EFFECTIVE_API_ASSURANCE",
+    "reviewed": 233,
+    "total": 233,
+    "evidence_path": "docs/audits/issue509-pg-init-privs-001-233-20261105-run22.json",
+    "privtypes": {
+      "i": 223,
+      "e": 10
+    },
+    "initial_public_select_execute_rows": 147,
+    "initial_client_rows": 2,
+    "current_explicit_acl_diff_rows": 25,
+    "source_development_sha": "ce4535c6ae3913cb623fffa37e555048eaa57794",
+    "hosted_authorization_unverified": true
   }
 }
