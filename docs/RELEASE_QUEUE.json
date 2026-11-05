@@ -8,6 +8,32 @@
   },
   "items": [
     {
+      "id": "DIC-Q-33-410-selected-heading-price-separation",
+      "issue": 33,
+      "title": "Selected current product display name excludes adjacent numeric commerce price",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-product-identity.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "Current exact official selected https://whiterhinocoffee.com/products/ethiopia-kayon-mountain observed 2026-11-05: visible H1 Ethiopia Kayon Mountain$22.00; direct selected Light roast, Oromia/Guji/Shakiso Ethiopia, Washed, Nectarine/Jasmine/Toffee/Honeysuckle.",
+        "Immutable original603 #410 October29 parser snapshot included numeric commerce price in name; CURRENT official raw HTML+runtime before/after UNVERIFIED.",
+        "Five synthetic positive/negative exact-selected price-name and Add Coffee regressions; exact PR-head CI pending.",
+        "Original source parent SHA 6376b3ed40deefac00d8e07af9de4e53ab088a5e; frozen603, original CSV/oracle/scorer preserved."
+      ],
+      "ci_runs": [
+        "PR747 first-head cloud run42008689435, job127181870840: 1757 PASS /1 FAIL. Failing newly added preview assertion wrongly matched raw published source supplement; canonical Coffee Name already clean, independent source text correctly retained. Focused test corrected; recheck pending.",
+        "Second PR source head 6cdfff3136b6e79bff2c5ab947a9a4fa3526e76a exact CI run42009035834 pending, not treated as PASS. Follow-up guarded named original603 #410 official current HTML/parser is scheduled by merge tag [dic-issue33-thirtysixth1]; SKIPPED is not accepted."
+      ],
+      "blockers": [
+        "Exact-head tests, nonforce merge, and real current selected official parser/raw HTML SHA validation pending."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Scoped TESTING development only, NOT READY/DEPLOYED. Distinct from #598 sensory/#592 decaf; no release or production writes."
+    },
+    {
       "id": "DIC-Q-455-latest-shot-instant-order",
       "issue": 455,
       "title": "Select newest actual shot instant consistently in logging prefill and taste recommendation",
