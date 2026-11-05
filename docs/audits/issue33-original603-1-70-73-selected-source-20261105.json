@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "date_utc": "2026-11-05",
+  "status": "THREE_INDEPENDENT_CURRENT_SELECTED_SOURCE_CASES_REVIEWED_NO_PARSER_FIX_NEEDED_NOT_FULL_603_CERTIFICATION",
+  "source_branch": "development/backend-foundation",
+  "tested_sha": "38fe3f1ad248fbc7c22ad84e699fe2453f08a3fc",
+  "original_register_path": "docs/audits/issue33-original603-source-level-adjudication-20261029.csv",
+  "original_register_git_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "original_register_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+  "original": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "oracle_or_scorer_changed": false,
+    "csv_changed": false
+  },
+  "github": {
+    "pr": 874,
+    "merge_sha": "38fe3f1ad248fbc7c22ad84e699fe2453f08a3fc",
+    "source_run": 42126120600,
+    "source_job": 127590667405,
+    "source_job_conclusion": "success",
+    "merged_approval_run": 42126120519,
+    "merged_approval_conclusion": "success"
+  },
+  "artifact": {
+    "id": 13461820397,
+    "name": "dic33-original603-focused-42126120600",
+    "downloaded_zip_sha256": "f41794be38aab25c7918e4826c4c437e359bd896bb2f35f105341041959e7e47",
+    "raw_html_bytes_independently_rehashed": true
+  },
+  "coverage": {
+    "attempted": 3,
+    "fetched": 3,
+    "parsed": 3,
+    "add_coffee_preview_rendered": 3,
+    "source_review_rendered": 3,
+    "manual_semantic_adjudications": 3,
+    "workflow_automatic_semantic_certifications": 0,
+    "full_603_certified": false
+  },
+  "cases": [
+    {
+      "number": 1,
+      "roaster": "1951 Coffee Company",
+      "name": "Cloud King Espresso",
+      "official_url": "https://1951coffee.com/products/cloud-king-espresso",
+      "selected_h1": "Cloud King Espresso",
+      "html_sha256": "73ec1dbf759b7b0cd2663b665c26f429856295891268d2059ad98a3f99a140fa",
+      "fields": {
+        "name": "Cloud King Espresso",
+        "origin": "Brazil, Ethiopia",
+        "process": "Other/Unknown",
+        "roast_level": "Medium",
+        "tasting_notes": "Bittersweet Chocolate, Candied Orange, Praline."
+      },
+      "conflicts": [],
+      "decision": "CURRENT_SELECTED_FIELDS_SUPPORTED_NO_PARSER_DEFECT",
+      "semantic_review": "Current named blend explicitly rotates natural Brazilian and washed Ethiopian components. Medium roast and tasting notes are direct. Do not guess a single blend-wide processing method or promote an educational/name source."
+    },
+    {
+      "number": 70,
+      "roaster": "Copper Canyon Coffee Roasters",
+      "name": "Guatemala",
+      "official_url": "https://coppercanyoncoffee.com/products/guatemala",
+      "selected_h1": "Guatemala",
+      "html_sha256": "834bb851e46164fcb4e94628f4d465c859bdfbbab8573ffeef56908ecbf3ef7b",
+      "fields": {
+        "name": "Guatemala",
+        "roaster": "Copper Canyon Coffee Roasters",
+        "origin": "Finca Santa Isabel, Guatemala",
+        "tasting_notes": "Chocolate, Citrus, Sweet Vanilla Aroma, Floral Finish"
+      },
+      "conflicts": [
+        "roast_level"
+      ],
+      "raw_selected_visible_spec": "Roast Level: Medium",
+      "raw_same_selected_productgroup_jsonld": {
+        "type": "ProductGroup",
+        "id": "/products/guatemala#product",
+        "name": "Guatemala",
+        "description": "Roast Level: Medium Dark\nIn the Cup: Chocolate, Citrus, Sweet Vanilla Aroma, Floral Finish"
+      },
+      "decision": "GENUINE_CURRENT_SELECTED_DIRECT_VS_CURRENT_PRODUCTGROUP_ROAST_DISAGREEMENT_WITHHELD",
+      "semantic_review": "Oct29 parser appeared to miss Medium; fresh current same selected HTML proves a genuine contradictory Medium Dark in ProductGroup structured description. Parser correctly WITHHOLDS canonical roast_level and shows conflict. No override, silent fixed label or parser change. Both primary source sentences preserved for member review."
+    },
+    {
+      "number": 73,
+      "roaster": "Cortez Coffee Roasters",
+      "name": "Costa Rica Red Honey",
+      "official_url": "https://cortezcoffee.com/products/costa-rica-red-honey",
+      "selected_h1": "Costa Rica Red Honey",
+      "html_sha256": "c0a484d35612d4ffc9297856aceec49673519904141a26ba47e89b5695a64d9d",
+      "fields": {
+        "name": "Costa Rica Red Honey",
+        "origin": "Poas Volcano, Costa Rica",
+        "elevation_m": "1700m",
+        "variety": "Marsellesa",
+        "process": "Honey",
+        "roast_level": "Medium",
+        "tasting_notes": "Rich notes of raspberry, honey, tart cherry, and aged rum. Very well balanced.",
+        "producer": "Fincá Volcán Azul"
+      },
+      "conflicts": [],
+      "raw_selected_process_source_fact": "Process: Red Honey",
+      "decision": "CURRENT_SELECTED_FIELDS_SUPPORTED_NO_PARSER_DEFECT",
+      "semantic_review": "Direct selected process subtype Red Honey is preserved in source fact and canonical Honey category is supported; do not claim the normalized enum is a literal Red Honey string. No duplicate producer/flavor from other coffee."
+    }
+  ],
+  "boundaries": {
+    "no_parser_change": true,
+    "no_queue_status_change": true,
+    "other_ready_deployed_preserved": true,
+    "not_deployed_by_this_review": true,
+    "production_sql_edge_auth_provider_member_writes": false,
+    "signed_in_gotrue_or_device_acceptance": false,
+    "issue33_should_stay_open": true
+  },
+  "next": "Continue a distinct unresolved original603 high-confidence current selected official case; reproduce actual defect before generic code and positive/negative regression, then applicable CI/nonforce merge and queue only when narrowly complete."
+}
