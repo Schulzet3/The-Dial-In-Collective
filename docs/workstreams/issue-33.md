@@ -1,3 +1,9 @@
+## November 5, 2026 UTC — PR719 real queue intake failure corrected (TESTING) [skip netlify]
+
+Initial exact candidate `450208485402faa4c7578dc09cd59c2f62eb4615` approval [run41985117029](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41985117029) **FAILED**: DIC queue item DIC-Q-33-original603-358-current-labeled-farm-region invalid merged source SHA. Set explicit nullable merged_source_sha=null for TESTING (it has NOT merged). No parser/test changes in this repair; same-commit queue + scoped journal. Preserve all other READY/DEPLOYED. Require exact new-head approval/Node/UX/security/SQL and source checks before nonforce integration; no release/production changes.
+
+---
+
 ## November 5 2026 UTC — Issue33 #358 exact selected farm H1 country omission TESTING (no deploy) [skip netlify]
 
 Authority: owner-approved #33 development, AGENTS/AI preflight, Master Spec/Locked decisions, actual source a0f42e19e9e0e53bf2d2f5f04953a944df7702dd. Verified current merged guarded official run41984299831/job127101320742 exact selected #358 H1 Finca La Unica - Washed Honduras, raw HTML SHA256 9dbb38eec13aa5fcba35c29066007ad0121557041f8e1f552a01360d14549bd6, direct Coffee Info Region Copan, actual parser origin Copan (missing literal Honduras). #292 currently similarly loses Guji, left separately unresolved; #370 Sweet Bloom Arbey Cordoba unchanged control. Official 3/3 fetched/parsed; no 603 certification.
