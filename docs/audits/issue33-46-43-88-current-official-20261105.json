@@ -74,12 +74,20 @@
     "manual_certified": 0
   },
   "fix": {
-    "status": "TESTING_QUEUE_INTAKE_REPAIRED",
+    "status": "TESTING_FIRST_NODE_POSITIVE_FAILURE_REPAIRED",
     "source_path": "src/server/coffee-identity-evidence.mjs",
     "test_path": "tests/coffee-issue33-46-selected-barrel-bean-origin.test.mjs",
     "expected_case46_origin": "Sidamo, Ethiopia",
     "required": "actual official-source after-parser plus no unintended changes",
     "queue_id": "DIC-Q-33-original603-46-current-barrel-green-bean-origin",
-    "failed_initial_approval_run": 41977935661
+    "failed_initial_approval_run": 41977935661,
+    "first_failing_ci": 41978091831,
+    "failures": {
+      "tests_total": 2497,
+      "pass": 2489,
+      "fail": 2,
+      "skip": 6,
+      "reason": "Case-insensitive /iu required for natural-case This infuses; as authored /u mistakenly failed current selected sentence, pure helper return null."
+    }
   }
 }

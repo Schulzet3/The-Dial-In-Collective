@@ -761,7 +761,7 @@ export function selectedBarrelGreenBeanRegion(blocks,{name='',origin=''}={}){
  const titles=blocks.filter(block=>block.tag==='h1');
  if(titles.length!==1||key(titles[0].text)!==key(name))return null;
  const prior=/\bwe(?:[’']ve|\s+have)\s+taken\b.{0,125}\bbarrel\b.{0,100}\bused\s+it\s+to\s+age\s+our\s+green\s+coffee\b/iu;
- const after=/\bthis\s+infuses\b.{0,180}\bto\s+transform\s+an?\s+(\p{Lu}[\p{L}\p{M}'’-]{2,45})\s+(\p{Lu}[\p{L}\p{M}'’-]{2,60}(?:\s+(?:de|del|la|the|of)\s+\p{Lu}[\p{L}\p{M}'’-]{2,60}|\s+\p{Lu}[\p{L}\p{M}'’-]{2,60}){0,2})\s+into\b/u;
+ const after=/\bthis\s+infuses\b.{0,180}\bto\s+transform\s+an?\s+(\p{Lu}[\p{L}\p{M}'’-]{2,45})\s+(\p{Lu}[\p{L}\p{M}'’-]{2,60}(?:\s+(?:de|del|la|the|of)\s+\p{Lu}[\p{L}\p{M}'’-]{2,60}|\s+\p{Lu}[\p{L}\p{M}'’-]{2,60}){0,2})\s+into\b/iu;
  const candidates=new Map();let conflictingCountry=false;
  for(const block of blocks){
   if(!['p','li','div'].includes(block.tag)||block.educational||block.text.length>1800||
