@@ -2058,6 +2058,30 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   }
  }
 
+ // Conditional descriptions like "Whether washed or natural process" are
+ // not evidence for either method in the currently selected bag. Guard the
+ // generic fallback without suppressing a direct selected process caption,
+ // source fact, named present-lot claim or title suffix. Keep the actual
+ // alternative for user review rather than guessing a processing category.
+ const alternateProcess=productCoffeeProse(canonicalProduct,clean).find(block=>
+  !block.educational&&
+  /\bwhether\s+(?:a\s+)?(?:washed|natural|honey|anaerobic)(?:\s+process(?:ed)?)?\s+or\s+(?:a\s+)?(?:washed|natural|honey|anaerobic)(?:\s+process(?:ed)?)?\b/i.test(block.text));
+ if(fields.process&&alternateProcess){
+  const directSource=source_facts.some(f=>f.field==='process'&&!f.conflicting&&
+   /^(?:process(?:ing)?(?: method)?|green coffee process|coffee process)$/i.test(String(f.label||'').trim()));
+  const content=clean(canonicalProduct,32000);
+  const labeled=/\b(?:process(?:ing)?(?: method)?|green coffee process)\s*[:：]\s*(?:fully\s+)?(?:washed|natural|honey|anaerobic)\b/i.test(content);
+  const presentLot=/\b(?:this|our|the)\s+(?:current\s+)?(?:coffee|lot|beans)\s+(?:(?:is|are)\s+)?(?:processed\s+(?:as|using|by)\s+|is\s+)(?:fully\s+)?(?:washed|natural|honey|anaerobic)\b/i.test(content);
+  const titled=/(?:\s[-|]\s|\s\/\/\s)(?:Washed|Natural|Honey|Anaerobic)\s*$/i.test(String(fields.name||''));
+  if(!directSource&&!labeled&&!presentLot&&!titled){
+   rememberCoffeeReviewCandidate(fields,'process',fields.process,'Conditional alternatives are not selected processing evidence');
+   delete fields.process;
+   if(source_facts.length<384)source_facts.push({field:'processing_context',
+    label:'Unselected processing alternatives',value:alternateProcess.text.slice(0,300),
+    source_url,source_type:'html',section:'Current selected coffee description (review only)'});
+  }
+ }
+
  // An extracted value is a suggestion, never proof of an official source.
  // Keep unexpected/absent facts blank instead of guessing.
  return {ok:true,source:'unverified_public_page',fields,available:Object.keys(fields),
