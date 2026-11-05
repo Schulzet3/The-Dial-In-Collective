@@ -4987,23 +4987,34 @@
     {
       "id": "DIC-Q-455-sweetness-instant-chronology",
       "issue": 455,
-      "pr": null,
+      "pr": 703,
       "title": "Use actual shot instants, not ISO offset text order, for comparable same-coffee sweetness evidence",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "6721cd38f7adf0e950c37d1eb0a6f615bc7e85dd",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
-        "Pre-fix source-level comparison error independently reproduced with differing ISO 8601 timezone offsets, and invalid older-looking legacy time; NOT a verified live incident.",
-        "New 3 actual-module hydrated-fixture positive/negative tests in tests/issue455-sweetness-offset.test.mjs; CI NOT YET EXECUTED."
+        "Verified source-level defect: ISO timezone offsets can invert prior/current lexical order; malformed legacy timestamp could appear earlier and reverse sweetness direction; no live-member occurrence or measured cup gain claimed.",
+        "PR #703 exact tested head 04b3051222654f38ffb15f38524f95857a04e143: 3 new real-module hydrated-fixture cases PASS inside Node22 validate run41975299977, full suite 2,486 PASS / 0 FAIL / 6 SKIP; positive/negative timezone-offset ordering, malformed date, immutable original shots/five taste scales/private notes.",
+        "PR-head cloud UX browser/mobile/offline/a11y run41975299985 SUCCESS, source approval/continuity run41975300009 SUCCESS, security inventory41975300020 SUCCESS, isolated SQL/JWT run41975300764 SUCCESS; frozen60341975299978 SKIPPED, targeted cloud-test job NOT_APPLICABLE.",
+        "Nonforce squash PR703 merge 6721cd38f7adf0e950c37d1eb0a6f615bc7e85dd; all four intended changed path Git blob SHAs identical between tested PR head and merged source (engine, regression, queue, scoped same-commit journal).",
+        "Exact merged-source Node22/lint run41975585698 SUCCESS: 2,486 PASS / 0 FAIL / 6 SKIP, 2492 total; actual browser/mobile/offline/a11y run41975585713 SUCCESS. Merged-source governance run41975585536 CANCELLED by concurrent unrelated docs push, NOT PASS; latest descendant 1546ee7c50de71b4cfe8c242f18a90dd0426f1b3 approval/continuity run 41975596975 SUCCESS. The intervening three commits affected ONLY Issue #504 audit/journal docs, zero #455 code/test/queue overlap; source ancestry intact."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Node22, UX/offline, approval and other applicable exact-source CI pending before merge/READY."
+      "ci_runs": [
+        41975299977,
+        41975299985,
+        41975300009,
+        41975300020,
+        41975300764,
+        41975299978,
+        41975585698,
+        41975585713,
+        41975596975
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "TESTING only. No new Locked numeric targets or data capture; all original measurements, five taste scores, notes and private history remain untouched. No publication authorized."
+      "notes": "READY on development source, NOT DEPLOYED. Narrow actual-instant chronology fix for observational same-coffee sweetness yield advice; all five ratings, source measurements, private notes, numeric heuristics, Turbo/Fast-Flow, slow feed and Locked rules preserved. No independent real member or cup-quality trial. Deployment remains separately owner authorized; no production writes or release/production changes."
     }
   ],
   "history": [
