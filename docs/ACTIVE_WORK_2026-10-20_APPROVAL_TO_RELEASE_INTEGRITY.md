@@ -314,3 +314,7 @@ Exact-source PR426 visual review failed its existing instruction-continuity regr
 
 ## Release18 evidence-citation correction — November 5, 2026 UTC [skip netlify]
 - The independently successful `approval` GitHub workflow for immutable candidate `0f8ea686743ebae8476d1a72cde0dfa1833ee157` is run `41973651191` (job 127067394975), distinct from `cloud-tests`/`mobile-browser-qa` run `41973651193`. Corrected the historical grant note's pending ID and production receipt's misattributed ID; all five checks actually passed. This is documentation-only, no queue changes, source retesting, new publisher claim or production change.
+
+
+## 2026-11-05 — Release19 exact-source candidate r2, test-only preflight fix [skip netlify]
+- Previous candidate r1 validate CI four failures preserved. Current r2 frozen source anchor bb6e2aed49fe89676fe29fc8d66551ffd54bb28f differs from r1 only by the previously source-tested two nondeployable test helpers, which gate assertions on exact queue.published_base.tested_source_sha and exact published Git blobs. All 19 READY app blobs remain untouched; two unfinished Netlify/narrative app paths restored from published source. Manifest names all nineteen IDs; no unready #154 code or test in the staging tree. Five exact source CI runs PENDING; not published.
