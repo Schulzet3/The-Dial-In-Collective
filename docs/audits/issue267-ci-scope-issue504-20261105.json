@@ -30,8 +30,13 @@
   ],
   "new_production_exposure": "NONE",
   "scope": "development-only audit infrastructure; no release-queue item before merged code tests",
-  "ci": "PENDING_PR_HEAD",
+  "ci": "INITIAL_PR_HEAD_HIGH_NODE_FAILED_NEW_TEST_ASSERTION_2026-11-05",
   "app_tests": "NOT_YET_EXECUTED",
   "coverage_change": "ZERO; this is active code remediation evidence, not pinned original line credit",
-  "remaining": "Full strict original corpus and live drift still incomplete"
+  "remaining": "Full strict original corpus and live drift still incomplete",
+  "initial_fail_run": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41954850365",
+  "initial_failure": "New negative test incorrectly assumed medium-risk site/lib/engine.js mixed with an audit JSON must become HIGH, contrary to approved tier classification: single shots source is MEDIUM. The source code classifier correctly returned MEDIUM; original positive test passed. Corrected test now requires mixed doc+code same tier, SQL and Node mode as code-only for each test case.",
+  "test_correction": "Risk-compatible mixed-code invariance replaces blanket HIGH in tests/ci-impact.test.mjs. Unknown and infrastructure code remain HIGH.",
+  "new_test_blob_sha": "PENDING_CREATE_BLOB",
+  "no_false_ci_pass": true
 }

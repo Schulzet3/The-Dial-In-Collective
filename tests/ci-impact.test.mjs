@@ -114,7 +114,11 @@ test('Strict #504 exemption fails closed on mixed source, malformed and unknown 
    for(const code of ['scripts/audit/ci-scope.mjs','site/lib/engine.js',
     'supabase/migrations/new.sql','.github/workflows/cloud-regression.yml']){
     const v=classifyImpactPaths([path,code]);
-    assert.equal(v.tier,'high',code);assert.equal(v.sql,true,code);
+    // Audit JSON must not lower the normal risk of the actual changed source.
+    const pure=classifyImpactPaths([code]);
+    assert.equal(v.tier,pure.tier,code);
+    assert.equal(v.sql,pure.sql,code);
+    assert.equal(v.node_mode,pure.node_mode,code);
    }
   }else{
    const v=classifyImpactPaths([path]);

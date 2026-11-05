@@ -1,3 +1,9 @@
+## November 5, 2026 UTC — #267 #504 CI-risk negative test corrected after actual PR-head failure [skip netlify]
+
+Exact PR #673 head `fc2f3e4845c57b50f704f8f0de2ed567818dbc81` Node [run41954850365](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41954850365) executed tests: new #504 docs-only positive test PASS, but newly added negative test asserted ALL mixed audit JSON and source paths HIGH. This was **incorrect** for `site/lib/engine.js`, which is deliberately MEDIUM under latest explicit Locked risk-based CI, and source properly returned MEDIUM. This is a regression-test assumption defect, not a demonstrated app/CI classifier logic defect. Keep the approved tier; compare mixed audit JSON+code against code-only tier/SQL/Node mode instead, so docs exemption can never downgrade known source, while unknown/CI/SQL remain HIGH. Original initial Node run FAILED and remains recorded; pending corrected-head tests must execute before integration. Scoped source blob `9901815aa705e92001fa4dc91bf3d4b9d135ef43`, parent `fc2f3e4845c57b50f704f8f0de2ed567818dbc81`. No deployment or production writes.
+
+---
+
 ## November 5, 2026 UTC — #267 reproduces and narrows unnecessary #504 CI suites (development only) [skip netlify]
 
 Current exact development base `e3d9da94ebfcbc96426987f7ee838bebfdb05946` and original classifier Git blob `e51f249377a7f2df556d103012b145aabc1559b7`: bounded #504 source-only PR #666 changes audit JSON receipt, coverage JSON ledger and Markdown journal, yet [original real scope run 41949979810](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41949979810) classified it HIGH/Node full/browser high/SQL. `scripts/audit/ci-scope.mjs` explicitly treats #267's JSON receipts as inert governance but lacked #504's equivalent *named* receipts. This is avoidable CI resource consumption, not evidence that unknown JSON is safe.
