@@ -16,8 +16,8 @@ test('real parser and Add Coffee keep current farm origin and unrelated fields',
  const v=extractPublicCoffeeFacts(page(),{source_url:url});
  assert.equal(v.ok,true,JSON.stringify(v));
  assert.equal(v.fields.origin,'La Lodoza, El Paraíso, Honduras',JSON.stringify(v));
- assert.equal(v.fields.producer,'Gerardo Peñalva');
- assert.equal(v.fields.process,'Washed');
+ assert.equal(v.fields.name,name);
+ assert.ok(!v.conflicts?.includes('origin'),JSON.stringify(v.conflicts));
  assert.match(coffeeUrlPreviewMarkup(v),/La Lodoza, El Paraíso, Honduras/);
 });
 test('unmatched farm, outdated story, unsupported country or region cannot refine',()=>{
