@@ -1,3 +1,13 @@
+## November 5 2026 UTC — Issue33 #358 exact selected farm H1 country omission TESTING (no deploy) [skip netlify]
+
+Authority: owner-approved #33 development, AGENTS/AI preflight, Master Spec/Locked decisions, actual source a0f42e19e9e0e53bf2d2f5f04953a944df7702dd. Verified current merged guarded official run41984299831/job127101320742 exact selected #358 H1 Finca La Unica - Washed Honduras, raw HTML SHA256 9dbb38eec13aa5fcba35c29066007ad0121557041f8e1f552a01360d14549bd6, direct Coffee Info Region Copan, actual parser origin Copan (missing literal Honduras). #292 currently similarly loses Guji, left separately unresolved; #370 Sweet Bloom Arbey Cordoba unchanged control. Official 3/3 fetched/parsed; no 603 certification.
+
+Same-commit paths: src/server/coffee-page-metadata.mjs narrow exact selected farm H1 plus current labeled Region rule; tests/coffee-issue33-358-current-farm-region.test.mjs 5 real-parser positive/negative tests; docs/RELEASE_QUEUE.json adds only DIC-Q-33-original603-358-current-labeled-farm-region TESTING; docs/audits/issue33-292-358-370-current-selected-20261105.json source receipt and this journal. Retain selected producer direct Letica Lopez versus story Leticia Lopez for separate source review; never silently normalize.
+
+Acceptance PENDING actual PR-head checks and exact merged official public field/HTML/parser/Add Coffee after-run. Fix failures and nonforce merge only after verified checks; no narrow READY until source verified. Keep all other READY/DEPLOYED queue states, original603 frozen 603/201/1197, immutable CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6, original oracle/scorer intact; #267 V2 and #96 separate. Issue33 remains OPEN for 153 context/29 missing-literal/35 historical blanks and all individual manual semantic reviews. No Netlify deployment or production SQL/Edge/Auth/provider/member writes, purchases or GoTrue/device claim.
+
+---
+
 ## November 5, 2026 UTC — Issue #33 original603 #292/#358/#370 exact selected-source diagnostic (TESTING, NOT READY) [skip netlify]
 
 **Authority/base:** Owner-approved active development-only Issue #33; recovered `development/backend-foundation` dc97538c61279a9179fd3a97b474653b2cfc97ab, AGENTS/AI preflight, Master Spec/Locked decisions/approval matrix/queue, #33 comments and original603 immutable adjudication. #267 V2 and #96 separate. No duplicated #46, #446, #361, #358 previously verified correction (this #358 is an original case number, not an issue or PR).
