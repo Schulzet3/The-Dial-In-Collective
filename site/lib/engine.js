@@ -430,10 +430,14 @@ function yieldTarget(shot,direction,anchor=shot.yieldG){
 // and all four other green sensory ratings. This is not causal proof.
 function comparableSweetnessYields(s,shot){
  const keys=['coffeeId','setupVersionId','calibrationId','style','basketId','feedMode'];
- if(keys.some(key=>shot[key]==null)||typeof shot.timestamp!=='string'||!shot.timestamp.trim())return [];
+ // ISO timestamps with explicit offsets must be ordered by actual instants,
+ // not by lexical text; an invalid legacy date cannot establish chronology.
+ const shotAt=typeof shot.timestamp==='string'?Date.parse(shot.timestamp):NaN;
+ if(keys.some(key=>shot[key]==null)||!Number.isFinite(shotAt))return [];
  return s.shots.filter(prior=>{
   if(prior.id===shot.id||prior.hidden||keys.some(key=>prior[key]!==shot[key]))return false;
-  if(typeof prior.timestamp!=='string'||!prior.timestamp.trim()||prior.timestamp>=shot.timestamp)return false;
+  const priorAt=typeof prior.timestamp==='string'?Date.parse(prior.timestamp):NaN;
+  if(!Number.isFinite(priorAt)||priorAt>=shotAt)return false;
   if(!finite(prior.doseG)||!finite(prior.grindSetting)||!finite(prior.yieldG)||
    Math.abs(prior.doseG-shot.doseG)>.1||
    Math.abs(prior.grindSetting-shot.grindSetting)>.05||

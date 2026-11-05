@@ -4983,6 +4983,27 @@
       "delivered_tested_source_sha": "0f8ea686743ebae8476d1a72cde0dfa1833ee157",
       "delivered_release_sha": "b386a977a7c43bf190f6315105894334d96f0f18",
       "delivered_netlify_deploy_id": "6aec13c971b66c896b273389"
+    },
+    {
+      "id": "DIC-Q-455-sweetness-instant-chronology",
+      "issue": 455,
+      "pr": null,
+      "title": "Use actual shot instants, not ISO offset text order, for comparable same-coffee sweetness evidence",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Pre-fix source-level comparison error independently reproduced with differing ISO 8601 timezone offsets, and invalid older-looking legacy time; NOT a verified live incident.",
+        "New 3 actual-module hydrated-fixture positive/negative tests in tests/issue455-sweetness-offset.test.mjs; CI NOT YET EXECUTED."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Node22, UX/offline, approval and other applicable exact-source CI pending before merge/READY."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "TESTING only. No new Locked numeric targets or data capture; all original measurements, five taste scores, notes and private history remain untouched. No publication authorized."
     }
   ],
   "history": [
