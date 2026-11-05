@@ -614,6 +614,20 @@
       "claims_verified_externally": "Variable Soft Infusion is configurable via F.08 to OFF or a programmed time up to six seconds; official manufacturer contrasts its line-pressure soft infusion with other initial pressure arrangements. Site describes perceived balance/reduced channeling as its own experience rather than controlled comparative experiment.",
       "applicability": "Rancilio Silvia Pro X; does not establish that unrelated machines can implement same profile, or a user-facing universal profile setting.",
       "git_blob_sha": null
+    },
+    {
+      "id": "MFR-DECENT-BASKET-20261105",
+      "type": "manufacturer_first_party_current_product_and_exploratory_engineering_blog",
+      "title": "Decent Espresso calibrated basket dose/hole geometry and narrower waisted-basket exploratory notes",
+      "url": "https://en.decentespresso.com/basket",
+      "companion_url": "https://decentespresso.com/blog/espresso_with_smaller_baskets_learning_from_lever_machines",
+      "published": "Basket product page revision unknown; engineer blog originally 2021-10-26, updated 2025-01-04; both directly read 2026-11-05 UTC",
+      "access": "DIRECT_FIRST_PARTY_HTML_PRODUCT_SECTIONS_AND_FULL_BASKET_EXPERIMENT_BLOG_READ",
+      "evidence_grade": "MANUFACTURER_DESIGN_AND_NONBLIND_UNCONTROLLED_PRELIMINARY_OBSERVATIONS_NOT_INDEPENDENT_TASTE_OR_CHANNELING_TRIAL",
+      "review_status": "CALIBRATED_HOLES_AND_DOSE_SECTION_DIRECT; BLOG_52MM_VS_58MM_PRELIMINARY_AND_RE-DIAL_LIMIT_READ",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Dynamic HTML not byte-archived or hashed; page may change. Manufacturer assertion that holes balance resistance and preliminary smoother-shot reports have no independent hole-size measurements or blinded randomized sensory data.",
+      "claims_verified_externally": "Decent describes smaller holes on smaller-dosed baskets, designed to balance resistance. Its original 2021 blog reports informal 52-vs-58mm, same-grind 15g comparison and explicitly says separately dialing each basket finer remains to be done; do NOT infer a universal basket/channeling/sweetness percentage."
     }
   ],
   "evidence_checks": [
@@ -1637,6 +1651,32 @@
       "current_app": "At pinned development d4d38887a2a548aa511c6080d1ed535300cabf02: source-bound site/lib/engine.js baseline/recommendation and site/lib/model.js advanced.slowFeed/active setup; no new preinfusion capture/automatic feature selected.",
       "result": "HOLD_UNPROVEN_GENERAL_SIX_SECOND_PI_SENSORY_BENEFIT_AND_DATA_CAPTURE",
       "owner_approval": true
+    },
+    {
+      "id": "R455-EV-CIT-038-A",
+      "source": "ORG-04 original lines 245-276, unchanged Git blob f65992902285e693b96e993dae3e7c3bf2535793 (archive SHA-256 9b538cec2e2633774a75197af79882e520723c904611f948e54c101ae117e319); MFR-DECENT-BASKET-20261105",
+      "claim": "Decent's own current calibrated-basket page directly says its smaller-dose portafilter baskets use slightly smaller holes than larger basket sizes, compensating for lower puck resistance. The page confirms a manufacturer design intention and product feature, NOT independent measurements of each model's actual hole area, pressure loss, extraction yield, or taste.",
+      "grade": "DIRECT_MANUFACTURER_PRIMARY_PRODUCT_DESIGN_CLAIM_NOT_BLINDED_EXPERIMENT_NOT_ESPRESSO_RECIPE_COEFFICIENT",
+      "primary_sources": [
+        "https://en.decentespresso.com/basket"
+      ],
+      "current_app": "development af614b7eb30303196a52d8af01d70c90ded8a4e1: model.js blob f48dc8967e2c2f7038c9324fdabca4348f5cb12d stores basket ID, name and doseG (not perforation dimensions); engine.js blob d66cf88b1910c1857a066892d3bbbff05a7fb5b1 uses basket identity to prefer personally successful same-coffee/reference evidence, not manufacturer-specific hole corrections.",
+      "result": "MANUFACTURER_SPECIFIC_DESIGN_SUPPORTED_NO_AUTOMATIC_BASKET_HYDRAULIC_OR_SENSORY_PRIOR",
+      "owner_approval": false,
+      "raw_html_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-038-B",
+      "source": "ORG-04 original lines 247-274 (same unchanged source Git blob); first-party Decent 2021 narrower-basket experiment blog updated 2025-01-04",
+      "claim": "The Decent author reports a 15g same-grind initial 52mm-versus-58mm exploratory comparison as smoother/thicker, explicitly noting separate optimal-grind comparisons were still planned and inviting more reports. It is anecdotal non-blinded non-randomized and does not establish that narrower baskets necessarily channel less, change sweetness, or outperform 58mm after independently re-dialing. Nominal basket diameter also differs from waisted output cross-section.",
+      "grade": "FIRST_PARTY_EXPLORATORY_OPERATOR_OBSERVATION_NOT_INDEPENDENT_CONTROLLED_OR_SENSORY_VALIDATION",
+      "primary_sources": [
+        "https://decentespresso.com/blog/espresso_with_smaller_baskets_learning_from_lever_machines"
+      ],
+      "current_app": "The current engine segments by basketId, setup/calibration/style/feed and uses exact member history; there is no automatic cross-basket diameter-derived adjustment and no basis to add one from an uncontrolled maker demo.",
+      "result": "HOLD_UNIVERSAL_BASKET_DIAMETER_OR_IMPROVED_CHANNELING_FLAVOR_CLAIM; OWNER_DECISION_AND_ACTUAL_VALIDATION_NEEDED_FOR_NEW_POLICY",
+      "owner_approval": false,
+      "raw_html_sha256": null
     }
   ],
   "policy_decisions_pending": [],
@@ -1645,9 +1685,10 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R455-036 document/evidence-only manufacturer-specific verification; Nov 3 risk-based governance/continuity on final SHA, no runtime CI asserted."
+    "reason": "R455-038 documentation/evidence-only direct first-party basket claim verification; exact-source governance required, no app behavior affected."
   },
   "next_actions": [
+    "R455-038: Decent official calibrated basket holes (smaller for smaller dose) verified as manufacturer design; its 2021/2025 waisted-basket comparison was preliminary and not blinded/re-dialed. Never derive automatic diameter-to-grind/taste priors without owner choice and controlled evidence.",
     "R455-036: Rancilio manufacturer supports F.08 OFF/up to six seconds for its own machine; marketing experience is not independent channeling/taste proof. No product capture or fixed PI target authorized.",
     "R455-035: final Wadsworth article methods directly read; do not treat 22 XCT packs/air-analog fluid simulations or illustrative 38–42g/27–32s recipe as real-world taste optimum. Resume unrelated primary bibliography checks and safe Log Shot review; Oct29 ZIP/S019 PDF raw bytes still unavailable.",
     "Verify original Griffiths journal full PDF only if needed and Wadsworth full methods when directly accessible; scientific claim verification does not authorize new app data capture or numeric sensory thresholds.",
@@ -1661,18 +1702,18 @@
     "R455-023: Continue full citation review of nine originals, raw inaccessible October29 ZIP/S019 PDFs and exact-byte provenance of Choi/Kim full manuscripts; assess translated label UX only after specific defect. No #267 V2 coverage credit."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-036",
-    "base_development_sha": "d4d38887a2a548aa511c6080d1ed535300cabf02",
-    "source_document": "ORG-04 Rancilio Silvia Pro X Soft Infusion primary manufacturer source and evidence boundary",
-    "primary_source_id": "MFR-RANCILIO-SILVIA-PRO-X-SOFT-INFUSION",
+    "id": "R455-038",
+    "base_development_sha": "af614b7eb30303196a52d8af01d70c90ded8a4e1",
+    "source_document": "ORG-04 manufacturer basket design and exploratory waisted-basket comparison, primary first-party web verification",
+    "primary_source_id": "MFR-DECENT-BASKET-20261105",
     "claim_ids": [
-      "R455-EV-CIT-036-A",
-      "R455-EV-CIT-036-B"
+      "R455-EV-CIT-038-A",
+      "R455-EV-CIT-038-B"
     ],
-    "number_of_curated_sources": 43,
-    "total_evidence_checks": 91,
-    "authority": "OWNER_OPTION_B_PRIMARY_SOURCE_VERIFICATION_ONLY_NOT_NEW_PRODUCT_AUTHORITY",
-    "review_type": "DIRECT_MANUFACTURER_FEATURE_AND_F08_MENU_HTML_CONTENT_PLUS_ORIGINAL_RESEARCH_CROSSWALK",
+    "number_of_curated_sources": 44,
+    "total_evidence_checks": 93,
+    "authority": "OWNER_OPTION_B_SOURCE_VERIFICATION_ONLY_NOT_PRODUCT_BEHAVIOR_APPROVAL",
+    "review_type": "DIRECT_FIRST_PARTY_CALIBRATED_BASKET_PRODUCT_SECTIONS_AND_EXPLORATORY_EXPERIMENT_BLOG",
     "source_pages_hashed": false,
     "github267_literal_line_review_credit": 0,
     "production_deployed": false
@@ -1777,6 +1818,23 @@
       "approval_required_for_behavior_change": true,
       "implementation": "RESEARCH_ONLY_HOLD",
       "test_plan": "Docs-only: exact source governance/continuity CI. If ever owner approved: capability gating, five-rating retention, one-change, time boundaries, independent slow-feed, offline persistence/privacy/SQL, real device and sensory outcome tests.",
+      "release_queue": "NO_NEW_ITEM"
+    },
+    {
+      "id": "R455-PROP-038-BASKET-DESIGN-TRANSFER",
+      "finding": "Verified Decent manufacturer basket hole/dose engineering and preliminary narrower-waisted basket blog do not justify deterministic diameter-to-grind, channeling, flow or taste correction for user equipment.",
+      "evidence": [
+        "R455-EV-CIT-038-A",
+        "R455-EV-CIT-038-B"
+      ],
+      "severity": "P3_EVIDENCE_GENERALIZATION_RISK_NO_REPRODUCED_APP_BUG",
+      "user_benefit": "Avoid speculative automatic basket corrections and preserve user-specific multiple basket/recipe success histories.",
+      "current_locked": "Five taste ratings, same-coffee/setup historical evidence, grind calibration/version, alternative successful recipe families and at most one truly controllable next change; hardware-specific new numeric thresholds need owner approval.",
+      "current_app": "Source parent af614b7eb30303196a52d8af01d70c90ded8a4e1, model.js blob f48dc8967e2c2f7038c9324fdabca4348f5cb12d stores doseG/id; engine.js blob d66cf88b1910c1857a066892d3bbbff05a7fb5b1 preferentially uses same-basket evidence, no measured basket hole size or hydraulic prior.",
+      "proposed_change": "SAFE: maintain current history-based segmentation, no new behavior. OPTIONAL basket diameter/perforation capture or cross-basket priors require separate owner approval, independent repeated per-coffee/basket controlled trials and privacy/mobile/offline validation.",
+      "approval_required_for_behavior_change": true,
+      "implementation": "RESEARCH_ONLY_HOLD",
+      "test_plan": "Docs-only approval/continuity exact-source CI for this evidence update. If a model is explicitly approved later: paired same-coffee/shots for equal and retuned grind with controls; all five tastes; style/feed/grinder calibration; no history mutation; offline/mobile/privacy and negative extrapolation tests.",
       "release_queue": "NO_NEW_ITEM"
     }
   ]
