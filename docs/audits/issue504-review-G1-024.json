@@ -1,0 +1,339 @@
+{
+  "schema_version": 1,
+  "issue": 504,
+  "audit_batch": "G1-024",
+  "date_utc": "2026-11-05",
+  "status": "IN_PROGRESS",
+  "method": "Read every word of final original queue lines 5094-5377 as pinned at exact blob SHA; 12 fully read records and 3 closing structural lines. This does not import Issue #267 source code semantic credit.",
+  "source": {
+    "repository": "Schulzet3/The-Dial-In-Collective",
+    "path": "docs/RELEASE_QUEUE.json",
+    "original_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
+    "current_blob_sha": "d395a90c2a79ed4d0e410a07e8cc10fc48613b10",
+    "development_sha": "d1def072098a182dec8426ec924606078ef43599",
+    "main_sha": "590c2c33610a5a7703a2509e1045d236b78a7981",
+    "release_production_sha": "69742e9e8633c29c209249a87303c6e931a41b89",
+    "total_original_lines": 5377,
+    "range_inclusive": [
+      5094,
+      5377
+    ],
+    "read_lines": 284,
+    "read_whitespace_words": 1281,
+    "closing_structure_lines": [
+      5375,
+      5377
+    ],
+    "closing_structure_words": 4
+  },
+  "records": [
+    {
+      "id": "DIC-Q-5-source-fact-integrity",
+      "range_inclusive": [
+        5094,
+        5130
+      ],
+      "lines": 37,
+      "direct_whitespace_words": 219,
+      "source_state": "DEPLOYED",
+      "current_state": "DEPLOYED",
+      "current_record_json_equal": true,
+      "original_merged_sha": "a034fb727f7fa7a0fbbfd74bbbca40d2fce9a651",
+      "original_release_sha": null,
+      "semantic_review": "Source-integrity guards disallow conflicting claimed origin/producer/process metadata. Pre-release staged SQL/Edge description superseded by authorized Release06; actual authenticated edge cases separately limited.",
+      "disposition": "PRESERVE_NO_VERIFIED_CURRENT_FIX"
+    },
+    {
+      "id": "DIC-Q-14-custom-target-backend",
+      "range_inclusive": [
+        5131,
+        5162
+      ],
+      "lines": 32,
+      "direct_whitespace_words": 259,
+      "source_state": "RETIRED_UNPUBLISHED",
+      "current_state": "RETIRED_UNPUBLISHED",
+      "current_record_json_equal": true,
+      "original_merged_sha": "aea8d62133575a56952619ca902500e96605d6f1",
+      "original_release_sha": null,
+      "semantic_review": "Historically merged protected Custom target SQL test scope was explicitly retired by owner before publication; do not deploy unneeded migration, delete legacy/offline records or treat historical signed HTTP acceptance as active feature.",
+      "disposition": "PRESERVE_NO_VERIFIED_CURRENT_FIX"
+    },
+    {
+      "id": "DIC-Q-14-custom-target-frontend",
+      "range_inclusive": [
+        5163,
+        5192
+      ],
+      "lines": 30,
+      "direct_whitespace_words": 247,
+      "source_state": "RETIRED_UNPUBLISHED",
+      "current_state": "RETIRED_UNPUBLISHED",
+      "current_record_json_equal": true,
+      "original_merged_sha": null,
+      "original_release_sha": null,
+      "semantic_review": "Custom picker/editor PR #142 was closed unmerged; historical partial SQL/security successes and stale failing visual assertion are preserved, not proof of a selectable Custom implementation.",
+      "disposition": "PRESERVE_NO_VERIFIED_CURRENT_FIX"
+    },
+    {
+      "id": "DIC-Q-14-custom-retirement-ui",
+      "range_inclusive": [
+        5193,
+        5215
+      ],
+      "lines": 23,
+      "direct_whitespace_words": 252,
+      "source_state": "RETIRED_UNPUBLISHED",
+      "current_state": "RETIRED_UNPUBLISHED",
+      "current_record_json_equal": true,
+      "original_merged_sha": null,
+      "original_release_sha": null,
+      "semantic_review": "Owner retired selectable Custom; candidate PR #145 closed unmerged; retain five active selectable styles and legacy Custom history/offline compatibility under Locked supersession.",
+      "disposition": "PRESERVE_NO_VERIFIED_CURRENT_FIX"
+    },
+    {
+      "id": "DIC-Q-16-retired-version-management",
+      "range_inclusive": [
+        5216,
+        5231
+      ],
+      "lines": 16,
+      "direct_whitespace_words": 101,
+      "source_state": "RETIRED_UNPUBLISHED",
+      "current_state": "RETIRED_UNPUBLISHED",
+      "current_record_json_equal": true,
+      "original_merged_sha": null,
+      "original_release_sha": null,
+      "semantic_review": "Owner retired unimplemented basket/equipment version-management UI; preserve internal snapshots, history, references and offline records.",
+      "disposition": "PRESERVE_NO_VERIFIED_CURRENT_FIX"
+    },
+    {
+      "id": "DIC-20261028-READY-QUEUE-08",
+      "range_inclusive": [
+        5232,
+        5266
+      ],
+      "lines": 35,
+      "direct_whitespace_words": 43,
+      "source_state": "DEPLOYED",
+      "current_state": "DEPLOYED",
+      "current_record_json_equal": true,
+      "original_merged_sha": null,
+      "original_release_sha": "05cf9eb156f63110cd434034ec3914a1e92b76d3",
+      "semantic_review": "Release08 published 24 original queue items with explicit tested source, release SHA, Netlify deploy and historical scope evidence.",
+      "disposition": "PRESERVE_NO_VERIFIED_CURRENT_FIX"
+    },
+    {
+      "id": "DIC-20261029-READY-QUEUE-10",
+      "range_inclusive": [
+        5267,
+        5287
+      ],
+      "lines": 21,
+      "direct_whitespace_words": 29,
+      "source_state": "DEPLOYED",
+      "current_state": "DEPLOYED",
+      "current_record_json_equal": true,
+      "original_merged_sha": null,
+      "original_release_sha": "816949840f22b2a181670de20410786d0a8de79b",
+      "semantic_review": "Release10 published ten historical coffee/UX/feedback items; receipt confirms source/release/deploy identity.",
+      "disposition": "PRESERVE_NO_VERIFIED_CURRENT_FIX"
+    },
+    {
+      "id": "DIC-20261029-READY-QUEUE-11",
+      "range_inclusive": [
+        5288,
+        5300
+      ],
+      "lines": 13,
+      "direct_whitespace_words": 21,
+      "source_state": "DEPLOYED",
+      "current_state": "DEPLOYED",
+      "current_record_json_equal": true,
+      "original_merged_sha": null,
+      "original_release_sha": "064918ca946b12250fe36e6fadf009a9c77b98ca",
+      "semantic_review": "Release11 published two items on source identity and Admin feedback; original receipt exactly matches queue.",
+      "disposition": "PRESERVE_NO_VERIFIED_CURRENT_FIX"
+    },
+    {
+      "id": "DIC-20261029-READY-QUEUE-12",
+      "range_inclusive": [
+        5301,
+        5315
+      ],
+      "lines": 15,
+      "direct_whitespace_words": 23,
+      "source_state": "DEPLOYED",
+      "current_state": "DEPLOYED",
+      "current_record_json_equal": true,
+      "original_merged_sha": null,
+      "original_release_sha": "2f7ef0eb0eb22ece986ba3e6bcaa3735a312578f",
+      "semantic_review": "Release12 published four origin/Admin items; distinct tested-source and release SHA preserved.",
+      "disposition": "PRESERVE_NO_VERIFIED_CURRENT_FIX"
+    },
+    {
+      "id": "DIC-20261030-READY-QUEUE-13",
+      "range_inclusive": [
+        5316,
+        5334
+      ],
+      "lines": 19,
+      "direct_whitespace_words": 27,
+      "source_state": "DEPLOYED",
+      "current_state": "DEPLOYED",
+      "current_record_json_equal": true,
+      "original_merged_sha": null,
+      "original_release_sha": "42eb45aab12d1a47fe96a3ebe8a1f36b3913b5f7",
+      "semantic_review": "Release13 published eight selected coffee/Admin items; no new automatic publishing authorization.",
+      "disposition": "PRESERVE_NO_VERIFIED_CURRENT_FIX"
+    },
+    {
+      "id": "DIC-20261102-READY17-14",
+      "range_inclusive": [
+        5335,
+        5362
+      ],
+      "lines": 28,
+      "direct_whitespace_words": 36,
+      "source_state": "DEPLOYED",
+      "current_state": "DEPLOYED",
+      "current_record_json_equal": true,
+      "original_merged_sha": null,
+      "original_release_sha": "8e3808f0d7532f47ea348ef9a58e5aa87d714ffe",
+      "semantic_review": "Release14 published 17 grinder/origin/source items; separate 603-coffee manual certification is not implied by publication.",
+      "disposition": "PRESERVE_NO_VERIFIED_CURRENT_FIX"
+    },
+    {
+      "id": "DIC-20261103-READY335-15",
+      "range_inclusive": [
+        5363,
+        5374
+      ],
+      "lines": 12,
+      "direct_whitespace_words": 20,
+      "source_state": "DEPLOYED",
+      "current_state": "DEPLOYED",
+      "current_record_json_equal": true,
+      "original_merged_sha": null,
+      "original_release_sha": "31c66832a28247e657a2bf89592ebc1e2f48dfc5",
+      "semantic_review": "Release15 published historical grind evidence; later Release17 production head change is normal sequence and not a conflict.",
+      "disposition": "PRESERVE_NO_VERIFIED_CURRENT_FIX"
+    }
+  ],
+  "release_receipt_checks": [
+    {
+      "id": "DIC-20261028-READY-QUEUE-08",
+      "receipt_path": "docs/PRODUCTION_RELEASE_2026-10-28_READY_QUEUE_VERIFIED.json",
+      "receipt_blob_sha": "469c8698f5abbfcbe62486160d3858b506469e05",
+      "tested_sha": "506b267204cd19d7b1f13c511e437186b8d92bb9",
+      "release_sha": "05cf9eb156f63110cd434034ec3914a1e92b76d3",
+      "deploy_id": "6ae27f32bfae09ad8745e19b"
+    },
+    {
+      "id": "DIC-20261029-READY-QUEUE-10",
+      "receipt_path": "docs/PRODUCTION_RELEASE_2026-10-29_READY_QUEUE_VERIFIED.json",
+      "receipt_blob_sha": "ce2af8be44c7656cc2890c580c0f8a271ae98439",
+      "tested_sha": "fa30abd6b5c96308f0957063efcc7ffb4402c8c6",
+      "release_sha": "816949840f22b2a181670de20410786d0a8de79b",
+      "deploy_id": "6ae38ba0a56bed8fa17d20ac"
+    },
+    {
+      "id": "DIC-20261029-READY-QUEUE-11",
+      "receipt_path": "docs/PRODUCTION_RELEASE_2026-10-29_READY_QUEUE_11_VERIFIED.json",
+      "receipt_blob_sha": "55a43eef780105e6250167e2ac9c11f9aa7c0192",
+      "tested_sha": "d04be7189b5e9983a83624d5d8c0e76d2f24e8da",
+      "release_sha": "064918ca946b12250fe36e6fadf009a9c77b98ca",
+      "deploy_id": "6ae394725b3465c277210618"
+    },
+    {
+      "id": "DIC-20261029-READY-QUEUE-12",
+      "receipt_path": "docs/PRODUCTION_RELEASE_2026-10-29_READY_QUEUE_12_VERIFIED.json",
+      "receipt_blob_sha": "f49fada097edc0d84f51eb7fb829e7fee28f97be",
+      "tested_sha": "eb1249d68c0ff424346752a5e4876c10ae11823f",
+      "release_sha": "2f7ef0eb0eb22ece986ba3e6bcaa3735a312578f",
+      "deploy_id": "6ae3addff345331a70ad8d9d"
+    },
+    {
+      "id": "DIC-20261030-READY-QUEUE-13",
+      "receipt_path": "docs/PRODUCTION_RELEASE_2026-10-30_READY_QUEUE_13_VERIFIED.json",
+      "receipt_blob_sha": "b3999efa19c08a9ddd6a713af4b65b8b7ba6e112",
+      "tested_sha": "ac0672a45efdc52a96932027161547b31b2a0ab9",
+      "release_sha": "42eb45aab12d1a47fe96a3ebe8a1f36b3913b5f7",
+      "deploy_id": "6ae421f5de038d292bd66407"
+    },
+    {
+      "id": "DIC-20261102-READY17-14",
+      "receipt_path": "docs/PRODUCTION_RELEASE_2026-11-02_READY17_14_VERIFIED.json",
+      "receipt_blob_sha": "9fea8d3ceda65c1bb4de0d3f1e3f8ae308d00634",
+      "tested_sha": "2c8e1ffe3b83a7524968f50efca3ead4da282cf8",
+      "release_sha": "8e3808f0d7532f47ea348ef9a58e5aa87d714ffe",
+      "deploy_id": "6ae8006cd64b30ae9046e44d"
+    },
+    {
+      "id": "DIC-20261103-READY335-15",
+      "receipt_path": "docs/PRODUCTION_RELEASE_2026-11-03_READY335_15_VERIFIED.json",
+      "receipt_blob_sha": "4d25b51748cb961c9d9ef56d8fd6054bf324dce3",
+      "tested_sha": "f1e150a2e7c95764c4a2d8760886aab23c2bfc5e",
+      "release_sha": "31c66832a28247e657a2bf89592ebc1e2f48dfc5",
+      "deploy_id": "6aea62463d08ddf08e0bec7b"
+    }
+  ],
+  "independently_resolved_original_commit_shas": 9,
+  "pr_138_status": "MERGED",
+  "pr_142_145_146_status": "CLOSED_UNMERGED",
+  "issues_5_14_16_current_status": "CLOSED; #14/#16 explicitly retired",
+  "findings": [
+    "Dated #5 READY/unapplied notes predate Release06 published SQL/Edge; record is properly DEPLOYED but current real-member source acceptance not assumed.",
+    "#14 old Custom backend was source-merged, then active Custom was intentionally retired. Preserve historical records and unmerged PRs; no resurrection or unsafe migration.",
+    "#16 retired as not planned; historic equipment and offline relationships remain protected.",
+    "Seven immutable Release08–15 receipts match all original queue tested/release/deploy identifiers.",
+    "Pinned original queue terminus reached; earlier G1-005–013 had evolving source blobs and source-to-live mapping, so do not claim independent gap-free 100% baseline without receipt-level range arithmetic and drift reconciliation."
+  ],
+  "confirmed_safe_current_fixes": [],
+  "tests_not_reexecuted": [
+    "Node22",
+    "isolated SQL",
+    "browser/mobile/offline",
+    "real authenticated member",
+    "full original603",
+    "production provider"
+  ],
+  "prior_ci_and_release_evidence_type": "HISTORICAL_SOURCE_RECEIPTS_NOT_FRESH_TESTS",
+  "accounting": {
+    "batch_lines": 284,
+    "batch_words": 1281,
+    "cumulative_direct_file_lines": 7155,
+    "cumulative_direct_file_words": 54606,
+    "prior_github_objects": 2,
+    "prior_github_words": 721,
+    "last_pinned_original_queue_line_reviewed": 5377,
+    "full_pinned_gap_free_coverage_not_yet_proven": true
+  },
+  "unreviewed_current_queue_drift": {
+    "new_active": [
+      "DIC-Q-455-legacy-undated-feedback",
+      "DIC-Q-33-original603-309-inline-product-roast",
+      "DIC-Q-33-original603-62-educational-mountain-origin",
+      "DIC-Q-455-previous-calibration-date",
+      "DIC-Q-33-original603-106-country-first-growing-region",
+      "DIC-Q-455-legacy-coffee-date-sort",
+      "DIC-Q-33-original603-18-current-present-farm-locality",
+      "DIC-Q-455-sweetness-legacy-date",
+      "DIC-Q-33-original603-361-selected-named-decaf-process"
+    ],
+    "new_history": [
+      "DIC-20261104-READY20-17"
+    ],
+    "modified_existing_count": 19
+  },
+  "next": {
+    "path": "docs/RELEASE_QUEUE.json",
+    "current_blob_sha": "d395a90c2a79ed4d0e410a07e8cc10fc48613b10",
+    "first_line": 4561,
+    "first_object_id": "DIC-Q-455-legacy-undated-feedback",
+    "id_line": 4562,
+    "scope": "first genuinely new live queue item; read complete current object and review changed/new entries without retroactive credit"
+  },
+  "scope_boundaries": "#267 frozen/current code review owner; #455 research/UX; #33 extraction; #96 Auth/privacy. Strict code double-credit=0.",
+  "safety": "No publication/deployment, production SQL/Auth/Edge/member/provider changes, backups, secrets, force Git, historical deletion or expense."
+}
