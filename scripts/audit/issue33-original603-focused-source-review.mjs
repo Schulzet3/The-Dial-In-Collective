@@ -122,6 +122,34 @@ for(const target of targets){
       }));
     }
 
+    // Original603 #97: a selected product can declare decaf even when the
+    // exact H1 lacks the word Decaf. The selected same-product accordion,
+    // not DEKAF brand/navigation or decaffeination education, proves METHOD.
+    // A changed lot/identity, missing method, spurious green process or
+    // failure to render explicit Add Coffee/Source Review fails closed.
+    if(r.number===97){
+      r.selected_97_contract={
+        exact_selected_h1:r.selected_h1,
+        source_sha256:r.html_sha256,
+        parsed_name:r.current_fields?.name||null,
+        water_decaffeination_method:r.current_fields?.decaffeination_method||null,
+        green_processing:r.current_fields?.process||null,
+        method_source_fact:(p.source_facts||[]).filter(x=>
+          x.field==='decaffeination_method'&&/swiss[\\s-]*water/i.test(x.value||'')).slice(0,4)
+          .map(x=>clip(x.value,240)),
+        conflicts:r.conflicts||[]
+      };
+      r.selected_97_contract_passed=r.selected_h1.length===1&&
+        r.selected_h1[0]==='Brazil Arabela'&&r.current_fields?.name==='Brazil Arabela'&&
+        r.current_fields?.decaffeination_method==='Water Process'&&
+        !r.current_fields?.process&&r.selected_97_contract.method_source_fact.length>0&&
+        !(r.conflicts||[]).includes('decaffeination_method')&&
+        r.add_coffee_ui_rendered&&r.source_review_rendered;
+      console.log('[DIC33 #97 EXACT SELECTED DECAF AFTER CONTRACT] '+JSON.stringify({
+        number:r.number,...r.selected_97_contract,passed:r.selected_97_contract_passed
+      }));
+    }
+
     // Independent exact selected current #490 H1/price badge acceptance:
     // never treat general navigation or customer-review prose as a release.
     if(r.number===490){
@@ -229,3 +257,15 @@ if(selectedRole154Control196 &&
  process.exitCode=1;
 }
 
+
+// Original603 #97 after-merge public-only source acceptance (not 603 certification).
+if(targetNumbers.length===1 && targetNumbers[0]===97 &&
+ (summary.fetched!==1 || summary.parsed!==1 || records[0].selected_97_contract_passed!==true)){
+ console.error('[DIC33 #97 OFFICIAL AFTER CONTRACT UNVERIFIED] '+JSON.stringify({
+  source_sha:summary.source_sha,fetched:summary.fetched,parsed:summary.parsed,
+  status:records[0]?.status,h1:records[0]?.selected_h1,
+  observed_method:records[0]?.current_fields?.decaffeination_method||null,
+  contract_passed:records[0]?.selected_97_contract_passed===true
+ }));
+ process.exitCode=1;
+}
