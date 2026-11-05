@@ -1146,16 +1146,16 @@
     ]
   },
   "coverage": {
-    "current_scope": "APP_SQL_FUNCTIONS_99_99; APP_TABLE_DEFINITION_COMPONENTS_46_46; ALL_9_ACCESSIBLE_DEPLOYED_EDGE_FILE_VARIANTS_DIRECTLY_REVIEWED",
+    "current_scope": "APP_SQL_FUNCTIONS_99_99; APP_TABLE_DEFINITION_COMPONENTS_46_46; ALL_9_ACCESSIBLE_DEPLOYED_EDGE_FILE_VARIANTS_DIRECTLY_REVIEWED; STORAGE_PROVIDER_19_19_SQL_DIRECT; REALTIME_PROVIDER_18_18_SQL_DIRECT",
     "semantic_reviewed_functions": 99,
     "total_application_functions": 99,
     "source_characters_semantically_read": 207402,
     "source_whitespace_tokens_semantically_read": 16880,
     "total_source_characters": 207402,
     "next_function_ordinal": null,
-    "next_object": "storage.list_multipart_uploads_with_delimiter(...) full body (2378 chars) then long storage.list_objects_with_delimiter (32892 chars); realtime.apply_rls (16476 chars) before remaining realtime 11; platform extensions/vault and migration body drift",
+    "next_object": "pgbouncer.get_auth(text) complete SQL, then vault 5 funcs, extensions 90 declarations and owner-dependent provider dependencies; hosted Auth/Realtime API unverified",
     "other_objects": "99/99 application SQL function definitions, 46/46 application table catalog definitions, 9/9 accessible deployed Edge file variants complete; platform/vendor SQL, Auth/Storage/cron/Realtime, migration drift, external dependency calls, performance and limits still incomplete; platform table definitions auth27/storage8/realtime3 direct review complete; platform functions, other tables, database migration SQL bodies still unverified; additional provider catalog review supabase_migrations(1 table), vault(1 table+1 view), extensions(2 views), without secret records",
-    "platform_objects": "DIRECT_PROVIDER_CATALOG_TABLES_AUTH27_STORAGE8_REALTIME3_SUPABASE_MIGRATIONS1_VAULT1=40_TABLES; DIRECT_VIEWS_VAULT1_EXTENSIONS2=3; PLATFORM_SQL_FUNCTION_BODIES_UNREVIEWED; DIRECT_PLATFORM_SQL_FUNCTION_BODIES_22_OF_42_AUTH4_GRAPHQL1_STORAGE10_REALTIME7",
+    "platform_objects": "DIRECT_PROVIDER_CATALOG_TABLES_AUTH27_STORAGE8_REALTIME3_SUPABASE_MIGRATIONS1_VAULT1=40_TABLES; DIRECT_VIEWS_VAULT1_EXTENSIONS2=3; DIRECT_PROVIDER_SQL_FUNCTION_BODIES_42_OF_42_AUTH4_GRAPHQL1_STORAGE19_REALTIME18",
     "edge_function_sources_reviewed": 9,
     "table_definition_components_reviewed": 46,
     "total_application_tables": 46
@@ -2724,9 +2724,25 @@
       "private_rows": 0,
       "code_fixes": 0,
       "next": "storage.list_multipart_uploads_with_delimiter(...) full body (2378 chars) then long storage.list_objects_with_delimiter (32892 chars); realtime.apply_rls (16476 chars) before remaining realtime 11; platform extensions/vault and migration body drift"
+    },
+    {
+      "run": "2026-11-05 run17 provider Storage and Realtime SQL functions",
+      "source_sha_before": "002ab27cf350f4319ed9c87e90abeafd4359c1ff",
+      "new_storage_definitions": 9,
+      "storage_total": "19/19",
+      "new_realtime_definitions": 11,
+      "realtime_total": "18/18",
+      "new_sql_chars": 111902,
+      "code_fixes": 0,
+      "provider_writes": 0,
+      "evidence_files": [
+        "docs/audits/issue509-provider-storage-functions-011-019-20261105-run17.json",
+        "docs/audits/issue509-provider-realtime-functions-remaining-20261105-run17.json"
+      ],
+      "next": "pgbouncer.get_auth(text), vault and extensions complete provider SQL/declarations; provider dependency, hosted runtime/Auth and migration drift."
     }
   ],
-  "state": "APP_SQL_FUNCTIONS_99_OF_99; APP_TABLES_46_OF_46_COMPONENTS_DIRECTLY_READ; EDGE_DEPLOYED_SOURCE_9_OF_9_VARIANTS; FULL_PROVIDER_AUDIT_IN_PROGRESS; #527_READY_NOT_DEPLOYED; PLATFORM_AUTH_27_STORAGE_8_REALTIME_3_TABLE_DEFINITIONS_DIRECT_REVIEWED; FULL_PROVIDER_AUDIT_IN_PROGRESS; VENDOR_OTHER_TABLE_VIEWS_5_DIRECT_COMPONENTS_READ; PLATFORM_SOURCE_FUNCS_AUTH4_GRAPHQL1_STORAGE10_REALTIME7_DIRECT_REVIEW",
+  "state": "APP_SQL_FUNCTIONS_99_OF_99; APP_TABLES_46_OF_46_COMPONENTS_DIRECTLY_READ; EDGE_DEPLOYED_SOURCE_9_OF_9_VARIANTS; FULL_PROVIDER_AUDIT_IN_PROGRESS; #527_READY_NOT_DEPLOYED; PLATFORM_AUTH_27_STORAGE_8_REALTIME_3_TABLE_DEFINITIONS_DIRECT_REVIEWED; FULL_PROVIDER_AUDIT_IN_PROGRESS; VENDOR_OTHER_TABLE_VIEWS_5_DIRECT_COMPONENTS_READ; PLATFORM_SOURCE_FUNCS_AUTH4_GRAPHQL1_STORAGE10_REALTIME7_DIRECT_REVIEW; PLATFORM_SQL_FUNCTION_BODIES_42_OF_42_FOR_AUTH_GRAPHQL_STORAGE_REALTIME; ALL_PROVIDER_NATIVE_AND_HOSTED_BASELINE_IN_PROGRESS",
   "application_table_review": {
     "total": 46,
     "current_index": 46,
@@ -4574,7 +4590,7 @@
     "next": "Inspect graphql_public function and platform auth/realtime/storage functions, then types, sequences, publications, privilege/configuration, live 53 migration statement bodies mapped to pinned release source and bounded logs. Also compute full component hashes for first eight Auth catalog entries."
   },
   "platform_function_review": {
-    "status": "PARTIAL_DIRECT_FULL_SQL_FUNCTION_SOURCE_REVIEW",
+    "status": "DIRECT_42_OF_42_PROVIDER_SQL_SOURCES_AUTH4_GRAPHQL1_STORAGE19_REALTIME18; EXTENSIONS90_VAULT5_PGBOUNCER1_AND_NATIVE_INACCESSIBLE_STILL_PENDING",
     "scope": "non-extension provider functions, no aggregate/internal C routines counted as direct text",
     "source": "live pg_get_functiondef and source MD5; provider catalog only",
     "by_schema": {
@@ -4589,17 +4605,17 @@
         "chars": 1189
       },
       "storage": {
-        "reviewed": 10,
+        "reviewed": 19,
         "total": 19,
-        "chars": 6087
+        "chars": 85419
       },
       "realtime": {
-        "reviewed": 7,
+        "reviewed": 18,
         "total": 18,
-        "chars": 8597
+        "chars": 41167
       }
     },
-    "total_reviewed": 22,
+    "total_reviewed": 42,
     "objects": [
       {
         "schema": "auth",
@@ -4842,6 +4858,127 @@
         "security_definer": false,
         "semantics": "Filter visibility counts matching columns and equality predicates; runtime authorization requires #96 check",
         "verdict": "NO_CONFIRMED_APP_REMOVAL_OR_EXPLOIT; PROVIDER_OWNED_OR_DEPENDENCY_UNVERIFIED"
+      },
+      {
+        "schema": "realtime",
+        "ordinal_in_schema": 1,
+        "object": "realtime.apply_rls(jsonb,integer)",
+        "source_md5": "d7b17bcce71440ab486770b53d15bd3d",
+        "source_characters": 16476,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Provider WAL fanout: groups subscriptions by claim role and selected columns, checks PK and per-column SELECT; executes prepared RLS probes under role+claims, trims oversize values, with DELETE reduced to key fields when RLS enabled. Handling of WAL and issuer JWT claims requires privileged Realtime service/runtime verification.",
+        "verdict": "NO_INDEPENDENTLY_CONFIRMED_FIRST_PARTY_DEFECT; PRIVILEGED_REALTIME_RUNTIME_AND_HOSTED_EXPOSURE_UNVERIFIED"
+      },
+      {
+        "schema": "realtime",
+        "ordinal_in_schema": 9,
+        "object": "realtime.list_changes(name,name,integer,integer)",
+        "source_md5": "d2cd4e1195236fa92705bdba784719ae",
+        "source_characters": 2220,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Publication-specific logical WAL slot consumption via pg_logical_slot_get_changes and apply_rls. This is NOT read-only if invoked; code source inspected only. Requires server slot privileges, not ordinary client exercise.",
+        "verdict": "NO_INDEPENDENTLY_CONFIRMED_FIRST_PARTY_DEFECT; PRIVILEGED_REALTIME_RUNTIME_AND_HOSTED_EXPOSURE_UNVERIFIED"
+      },
+      {
+        "schema": "realtime",
+        "ordinal_in_schema": 10,
+        "object": "realtime.list_changes_sync(name,name,integer,integer)",
+        "source_md5": "fcbc1eeaa0bd65e2d79fa397fb6f5834",
+        "source_characters": 2226,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Sync variant invokes settled_changes before apply_rls; materialized consumption and WAL visibility bounded by publication and subscriber IDs. NOT executed.",
+        "verdict": "NO_INDEPENDENTLY_CONFIRMED_FIRST_PARTY_DEFECT; PRIVILEGED_REALTIME_RUNTIME_AND_HOSTED_EXPOSURE_UNVERIFIED"
+      },
+      {
+        "schema": "realtime",
+        "ordinal_in_schema": 11,
+        "object": "realtime.quote_wal2json(regclass)",
+        "source_md5": "441bd4aad4024c86ab1fafe7855b9cd4",
+        "source_characters": 375,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Builds wal2json escaped schema.table spec from regclass with catalog quoted names.",
+        "verdict": "NO_INDEPENDENTLY_CONFIRMED_FIRST_PARTY_DEFECT; PRIVILEGED_REALTIME_RUNTIME_AND_HOSTED_EXPOSURE_UNVERIFIED"
+      },
+      {
+        "schema": "realtime",
+        "ordinal_in_schema": 12,
+        "object": "realtime.send(jsonb,text,text,boolean)",
+        "source_md5": "77afe4a67a0330f080cb562cec0898bd",
+        "source_characters": 866,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Generates UUID and inserts broadcast message, with SET LOCAL topic; catches all exceptions and emits warnings instead of failing caller. This may mask provider delivery failures, but not independently a DIC bug.",
+        "verdict": "NO_INDEPENDENTLY_CONFIRMED_FIRST_PARTY_DEFECT; PRIVILEGED_REALTIME_RUNTIME_AND_HOSTED_EXPOSURE_UNVERIFIED"
+      },
+      {
+        "schema": "realtime",
+        "ordinal_in_schema": 13,
+        "object": "realtime.send_binary(bytea,text,text,boolean)",
+        "source_md5": "ccdcf82b70a4df521737be16ff40daee",
+        "source_characters": 588,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Binary broadcast analogue with SET LOCAL topic and error swallowed after warning; no emitted-message test.",
+        "verdict": "NO_INDEPENDENTLY_CONFIRMED_FIRST_PARTY_DEFECT; PRIVILEGED_REALTIME_RUNTIME_AND_HOSTED_EXPOSURE_UNVERIFIED"
+      },
+      {
+        "schema": "realtime",
+        "ordinal_in_schema": 14,
+        "object": "realtime.settled_changes(name,integer,text[])",
+        "source_md5": "0460b15f876014713ccc4a997ebb3dbd",
+        "source_characters": 3763,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Transactional WAL peek/consume logic enforces READ COMMITTED, observes running transactions via pg_snapshot_xip, cuts before unsettled writer and advances slot on empty peek. Destructive to replication slot if invoked; only definition read.",
+        "verdict": "NO_INDEPENDENTLY_CONFIRMED_FIRST_PARTY_DEFECT; PRIVILEGED_REALTIME_RUNTIME_AND_HOSTED_EXPOSURE_UNVERIFIED"
+      },
+      {
+        "schema": "realtime",
+        "ordinal_in_schema": 15,
+        "object": "realtime.subscription_check_filters()",
+        "source_md5": "ff71dc5fe6923e2a5b8b9f79f5ccbf0d",
+        "source_characters": 5465,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Trigger validates each filter column against claimed role SELECT permission; enforces IN max100, IS keyword/boolean typing, LIKE/regex-compatible type and regex syntax, normalizes filter ordering and selected-column ordering. New.claims role trust depends on Realtime service write boundary; not independently verified.",
+        "verdict": "NO_INDEPENDENTLY_CONFIRMED_FIRST_PARTY_DEFECT; PRIVILEGED_REALTIME_RUNTIME_AND_HOSTED_EXPOSURE_UNVERIFIED"
+      },
+      {
+        "schema": "realtime",
+        "ordinal_in_schema": 16,
+        "object": "realtime.to_regrole(text)",
+        "source_md5": "06910e957a8215a4bd3cd66c8182052c",
+        "source_characters": 156,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Role text converted to regrole; may reject unknown values, not a standalone permission grant.",
+        "verdict": "NO_INDEPENDENTLY_CONFIRMED_FIRST_PARTY_DEFECT; PRIVILEGED_REALTIME_RUNTIME_AND_HOSTED_EXPOSURE_UNVERIFIED"
+      },
+      {
+        "schema": "realtime",
+        "ordinal_in_schema": 17,
+        "object": "realtime.topic()",
+        "source_md5": "cd1d746eed2ae8a6e309899adfe95988",
+        "source_characters": 171,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Reads realtime.topic transaction-local GUC and returns NULL for empty setting; not independent auth.",
+        "verdict": "NO_INDEPENDENTLY_CONFIRMED_FIRST_PARTY_DEFECT; PRIVILEGED_REALTIME_RUNTIME_AND_HOSTED_EXPOSURE_UNVERIFIED"
+      },
+      {
+        "schema": "realtime",
+        "ordinal_in_schema": 18,
+        "object": "realtime.wal2json_escape_identifier(text)",
+        "source_md5": "0efca81765a5fd58739e8eb42339d68d",
+        "source_characters": 264,
+        "source_directly_read": true,
+        "security_definer": false,
+        "semantics": "Escapes separator, backslash and whitespace for wal2json table list.",
+        "verdict": "NO_INDEPENDENTLY_CONFIRMED_FIRST_PARTY_DEFECT; PRIVILEGED_REALTIME_RUNTIME_AND_HOSTED_EXPOSURE_UNVERIFIED"
       }
     ],
     "next": "storage.list_multipart_uploads_with_delimiter (first unreviewed alphabetical storage function after get_size_by_bucket); realtime.apply_rls full 16,476-char body before other realtime functions; extensions 90 source/extension code with C-language binary-limit classification",
