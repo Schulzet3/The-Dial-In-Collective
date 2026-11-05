@@ -1,8 +1,8 @@
 // Current exact selected farm growing locality. Broad geography cannot be
 // refined from SEO, a processing facility, a related coffee or an old lot.
 const norm=x=>String(x||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^\p{L}\p{N}]+/gu,'');
-const founding=/\bin the\s+([\p{Lu}][\p{L}\p{M}’'-]{2,45}),\s*([\p{Lu}][\p{L}\p{M}’'-]{2,45}(?:\s+[\p{Lu}][\p{L}\p{M}’'-]{2,45}){0,2})\s+region of\s+([\p{Lu}][\p{L}\p{M}’'-]{2,45})\b[^.!?]{0,190}?\btoday is\s+(?:the\s+)?(?:Finca|Farm|Hacienda|Estate)\s+([\p{Lu}][\p{L}\p{M}’'-]{2,45}(?:\s+[\p{Lu}][\p{L}\p{M}’'-]{2,45}){0,2})/iu;
-const growing=/\bthe coffee grown at the farm\b[^.!?]{0,150}?\bgrown from\s+the\s+(?:[\p{L}\p{M}]+\s+){0,4}lands of\s+([\p{Lu}][\p{L}\p{M}’'.-]{2,45}(?:\s+[\p{Lu}][\p{L}\p{M}’'.-]{2,45}){0,2}),\s*([\p{Lu}][\p{L}\p{M}’'.-]{2,45}(?:\s+[\p{Lu}][\p{L}\p{M}’'.-]{2,45}){0,2})(?=[.,;]|\s|$)/iu;
+const founding=/\bin the\s+([\p{Lu}][\p{L}\p{M}’'-]{1,45}),\s*([\p{Lu}][\p{L}\p{M}’'-]{1,45}(?:\s+[\p{Lu}][\p{L}\p{M}’'-]{1,45}){0,2})\s+region of\s+([\p{Lu}][\p{L}\p{M}’'-]{1,45})\b[^.!?]{0,190}?\btoday is\s+(?:the\s+)?(?:Finca|Farm|Hacienda|Estate)\s+([\p{Lu}][\p{L}\p{M}’'-]{1,45}(?:\s+[\p{Lu}][\p{L}\p{M}’'-]{1,45}){0,2})/iu;
+const growing=/\bthe coffee grown at the farm\b[^.!?]{0,150}?\bgrown from\s+the\s+(?:[\p{L}\p{M}]+\s+){0,4}lands of\s+([\p{Lu}][\p{L}\p{M}’'.-]{1,45}(?:\s+[\p{Lu}][\p{L}\p{M}’'.-]{1,45}){0,2}),\s*([\p{Lu}][\p{L}\p{M}’'.-]{1,45}(?:\s+[\p{Lu}][\p{L}\p{M}’'.-]{1,45}){0,2})(?=[.,;]|\s|$)/iu;
 export function selectedCurrentFarmGrowingLocality({name='',origin='',blocks=[]}={}){
  if(typeof name!=='string'||name.length>165||typeof origin!=='string'||origin.length>115||!Array.isArray(blocks)||blocks.length>2500)return null;
  const tuple=origin.match(/^([^,]{3,65}),\s*([^,]{3,45})$/u);
