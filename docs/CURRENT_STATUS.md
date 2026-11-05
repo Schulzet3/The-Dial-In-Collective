@@ -1,3 +1,9 @@
+## November 5, 2026 UTC — Issue33 #151 Hill Tree EA Sugarcane current selected extraction VERIFIED CORRECT (no fix), parent OPEN [skip netlify]
+
+[PR660](https://github.com/Schulzet3/The-Dial-In-Collective/pull/660) guarded exact-current public source probe merged `03239725541608479a48055b21533476303916be`; current [run41946698745](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41946698745) independently ZIP/HTML SHA256 checked, 1/1 selected H1/parser/Add Coffee preview/source review PASS, no conflicts. Original historical method blank no longer reproduces: selected **green processing Washed** and **decaffeination Sugar Process (EA Sugarcane)** correct. No new parser change or release queue item. Frozen603 universal manual source certification NOT DONE, Issue33 OPEN; no deployment or provider/member writes. [Audit](audits/issue33-151-current-selected-ea-method-20261105.json).
+
+---
+
 ## November 4, 2026 UTC — Issue33 original603 #309 verified READY, NOT deployed; parent OPEN
 
 PR639 safely merged `6e78f802be4dbe1bc6e3dd3746b12603ab5c0e4d`; exact head and merged Node/lint/build 1693 PASS/0 FAIL/0 SKIP; merged public official selected run41932300696 independently verified 3/3 fetched/parsed/H1/Add Coffee and HTML SHA256, only Compass #309 roast from blank to **Light** via direct selected `theme.product` tag; #309 origin not guessed, #565/#601 fields/conflicts unchanged. Original corpus, oracle, CSV unchanged, all other READY/DEPLOYED entries preserved. Queue `DIC-Q-33-original603-309-inline-product-roast` READY NOT DEPLOYED; no Netlify/SQL/Edge/Auth/member/provider writes; original full frozen603 SKIPPED. Issue33 OPEN, rest of original603 manual semantic verification remains. Audit `docs/audits/issue33-309-selected-inline-roast-20261104.json`. [skip netlify]
