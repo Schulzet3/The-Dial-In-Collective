@@ -392,3 +392,14 @@ Verified PR #647 merged `8418aedd`, #657 merged `07a7ad37`, and #666 merged `a53
 No confirmed current defect in these six historical narratives. No deletion, policy or release change justified. Documentation receipt arithmetic/body identity checks PASS; app, Node, SQL, browser, cloud, original603, real member and provider tests NOT RUN for this evidence-only update.
 
 **NEXT exact item:** #504 comment `6648164857`. At observation, 31/53 comments directly reviewed and 22 remaining before this checkpoint comment; more comments may be appended. Broader GitHub-wide inventory, queue drift and independently verified #267 evidence are unfinished. **OPEN / IN_PROGRESS**, never all-complete. No publication, release branch movement, provider/production/member/backup write, force or purchase.
+
+
+## G1-035 — November 5, 2026 UTC: six full historical Issue #504 comments semantically audited [skip netlify]
+
+Live GitHub source SHAs at review: development `68362ea7141da8b5683b74ea1c2351dcd6a9614b`, main `c25e31343b1974b89445b48b43993bc446aa96ca`, release/production `b386a977a7c43bf190f6315105894334d96f0f18`; repository metadata remains PUBLIC under prior temporary owner exception (private restoration owner-controlled, not verified). #504/#267/#455/#33/#96 all remain OPEN. No competing source-code, research, extractor, privacy or release-queue files modified.
+
+Directly read EVERY word of entire Issue #504 historical comment bodies `6648164857`, `6648176949`, `6648179456`, `6649048348`, `6649056831`, `6649793931` with complete source hashes, inclusive line/word ranges and per-object semantic interpretations in [G1-035 receipt](../audits/issue504-review-G1-035.json). **Six new GitHub objects / 1,283 whitespace words**, no new file lines or duplicate original queue/#267 code semantic credit. These comments chronicle G1-021..023 Release17/04/05 and queue work with original source lines separately reviewed, PR675/683/692 initial OPEN then final merged and CI. The old CI IN_PROGRESS/PR OPEN states are historical, not today's defects; GitHub currently confirms #675/#683/#692 merged. No current safe fix/deletion justified.
+
+Cumulative **7,919 source lines / 60,754 source words** plus **38 distinct GitHub objects / 10,759 GitHub words**. At this snapshot 55 #504 comments, 37 received complete direct-review receipts (including setup comment) and 18 still unreviewed before this checkpoint. Source hashes/word-count arithmetic checked, no production/provider/migration/member/release/backup/forced Git writes. Node/SQL/browser/original603/current member tests NOT rerun; PR CI and merged-source CI cannot be called PASS before observed.
+
+**NEXT exact item:** Issue #504 comment `6649856792`, then successive nonoverlap GitHub records and source drift, delegated #267 receipt verification. Audit **OPEN / IN_PROGRESS**; no deployment or publication.
