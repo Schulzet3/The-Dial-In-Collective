@@ -31,6 +31,7 @@ import {selectedCurrentCoffeeReleaseBadge,selectedStructuredCoffeeEvidence,selec
 import {selectedCurrentInlineShopifyRoastTag} from './coffee-current-inline-shopify-product.mjs';
 import {countrywideEducationalOriginCorrection} from './coffee-countrywide-context-guard.mjs';
 import {selectedFarmStoryRegionMismatch} from './coffee-title-region-evidence.mjs';
+import {selectedProcessingSiteNotFarmOrigin} from './coffee-processing-site-origin-guard.mjs';
 
 // A chosen current selected coffee description can be more authoritative than
 // another labeled tasting list printed in the same selected product detail
@@ -2078,6 +2079,26 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     value:mismatch.value,source_url,source_type:'html',
     section:'Exact selected farm narrative; mismatched Region label',
     conflicting:true
+   });
+  }
+ }
+
+ // Processing-mill towns are not evidence of the farms growing this chosen
+ // coffee. Preserve the facility wording, and retain only the explicit
+ // country printed in the exact selected product heading.
+ if(fields.origin&&!conflicts.has('origin')){
+  const site=selectedProcessingSiteNotFarmOrigin({
+   name:fields.name,origin:fields.origin,
+   blocks:productCoffeeProse(canonicalProduct,clean)
+  });
+  if(site){
+   rememberCoffeeReviewCandidate(fields,'origin',fields.origin,
+    'Current processing-mill town, not a verified growing locality');
+   fields.origin=site.country;
+   if(source_facts.length<384)source_facts.push({
+    field:'origin_context',label:'Selected processing facility address (review only)',
+    value:site.quote.slice(0,400),source_url,source_type:'html',
+    section:'Exact selected product processing description; noncanonical'
    });
   }
  }
