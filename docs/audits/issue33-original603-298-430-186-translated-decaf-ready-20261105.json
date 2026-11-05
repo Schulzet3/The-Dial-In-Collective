@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "scope": "Current selected single-method parser correction, not whole-603 manual certification",
+  "state": "READY_DEV_NOT_DEPLOYED",
+  "source_code_merge_sha": "0946b15862f4e6dbcc91db22ab03367a3d9110eb",
+  "exact_source_probe_merge_sha": "b29b6a99881b2e9af30d901c80a5183b067c68ea",
+  "source_pr": 787,
+  "probe_pr": 790,
+  "immutable_original603_csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "corpus": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "manual_certified": 0
+  },
+  "before": {
+    "run": 42033646842,
+    "coffee": 298,
+    "selected_html_sha256": "925e6a5668f2889e4b2bf4434ef000e4b9b361224125f66ae4f5b575ee9fe1bf",
+    "method": null,
+    "conflicts": [
+      "origin"
+    ]
+  },
+  "after": {
+    "run": 42036800521,
+    "job": 127276948230,
+    "conclusion": "success",
+    "attempted": 3,
+    "fetched": 3,
+    "parsed": 3,
+    "runner_artifact_id": 13419330365,
+    "runner_artifact_sha256": "b09d01b1dd859469e67aaa8fc46cc249eb5852e03bea6f92241868f51bcaa6e6",
+    "raw_zip_independent_rehash": "NOT_VERIFIED",
+    "selected": [
+      {
+        "number": 298,
+        "url": "https://sextantcoffee.com/products/plandanas-reserve-sextant-coffee",
+        "runner_reported_html_sha256": "c419cfcc8eec577445db76e9ffee2ebe65feedbe6959ddf49d202ffee2cc800c",
+        "fields": {
+          "name": "Walia Ibex - Organic Decaf Coffee",
+          "decaffeination_method": "Sugar Process"
+        },
+        "conflicts": [
+          "origin"
+        ]
+      },
+      {
+        "number": 430,
+        "url": "https://www.aveleyfarmscoffee.com/products/costa-rica-el-indio",
+        "runner_reported_html_sha256": "bd38456069428cc8c0bc4b67ef10ab831da478ad1affd2ac7d80910b64bf72dd",
+        "fields": {
+          "name": "Costa Rica El Indio",
+          "origin": "Tarrazu, Costa Rica",
+          "process": "Washed",
+          "roast_level": null
+        },
+        "conflicts": [
+          "roast_level"
+        ]
+      },
+      {
+        "number": 186,
+        "url": "https://lamulitacoffee.com/products/san-vicente-huila",
+        "runner_reported_html_sha256": "d93b7ef2146a40ffaa26160412068075ba9f5c2c289473d1815df09f2a86ba87",
+        "fields": {
+          "name": "San Vicente",
+          "origin": "San Vicente, Huila",
+          "process": "Washed",
+          "roast_level": null
+        },
+        "conflicts": [
+          "roast_level"
+        ]
+      }
+    ]
+  },
+  "exact_source_checks": {
+    "pr787_node_run": 42035142820,
+    "pr787_node_pass": 1774,
+    "pr787_node_fail": 0,
+    "pr790_node_run": 42036496869,
+    "pr790_node_pass": 2542,
+    "pr790_node_fail": 0,
+    "pr790_configuration_skips": 6,
+    "source_run": 42036800521,
+    "frozen603": "SKIPPED_NOT_PASS"
+  },
+  "limits": [
+    "Direct selected #298 source says sugar process method; does NOT establish processing or farm location",
+    "Current selected #298 contradictory Central American versus Colombia prose requires origin review",
+    "Current #430 Full City (Med) and #186 Medium/Medium-dark roast conflicts remain blank",
+    "Full original603 individual semantic certification incomplete, 0 manual certified on this probe",
+    "No Netlify publishing, production SQL/Auth/Edge/member/provider writes, new accounts or paid services"
+  ],
+  "next": "Pick distinct unresolved original603 current selected source and reproduce generic parser defect; keep Issue33 OPEN."
+}
