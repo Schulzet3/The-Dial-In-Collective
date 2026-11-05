@@ -8,6 +8,27 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-latest-shot-instant-order",
+      "issue": 455,
+      "title": "Select newest actual shot instant consistently in logging prefill and taste recommendation",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Source-only reproduction: engine.js sorted ISO timestamp strings for recent shot prefill and last-rated recommendation; timezone offsets and malformed archived strings can displace newer measured evidence.",
+        "Four hydrated real-module negative/positive regression tests committed alongside code at tests/issue455-shot-instant-order.test.mjs; NOT RUN at commit time, no PASS claim.",
+        "Pending exact PR-head Node22, mobile/offline/accessibility and governance; after verified nonforce integration require exact merged-source CI and READY reconciliation."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Full applicable source-bound checks and verified merge pending."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Development only. Preserve five sensory fields, original shots, private notes, dose, grinder/basket/feed/style and recipe families; actual-instant chronology only. No Locked or numerical policy change; no deploy, SQL/Auth/Edge/member/provider writes."
+    },
+    {
       "id": "DIC-Q-33-seasonal-program-release-provenance",
       "issue": 33,
       "title": "Suppress archived selected-product seasonal-program edition leakage without erasing direct dated release",
