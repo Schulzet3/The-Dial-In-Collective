@@ -146,7 +146,7 @@ export function selectedFarmStoryRegionMismatch({name='',origin='',blocks=[]}={}
  if(!new RegExp('^'+quoteRegex(country)+'\\s+','iu').test(name))return null;
  const headings=blocks.filter(b=>b.tag==='h1');
  if(headings.length!==1||norm(headings[0].text)!==norm(name))return null;
- const place='[\\p{Lu}][\\p{L}\\p{M}\\x27\\u2019.-]{2,40}(?:\\s+[\\p{Lu}][\\p{L}\\p{M}\\x27\\u2019.-]{2,40}){0,3}';
+ const place='[\\p{Lu}][\\p{L}\\p{M}\\x27\\u2019.-]{1,40}(?:\\s+[\\p{Lu}][\\p{L}\\p{M}\\x27\\u2019.-]{1,40}){0,3}';
  const farm=new RegExp('\\b(?:Finca|Farm|Hacienda|Estate)\\s+('+place+')\\s+is\\s+located\\s+in\\s+(?:the\\s+)?(?:highlands\\s+of\\s+)?('+place+'),\\s*('+place+')(?=[.!?;]|\\s|$)','gu');
  const statements=[];
  for(const block of blocks){
