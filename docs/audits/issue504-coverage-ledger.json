@@ -330,11 +330,34 @@
       "original_release_git_shas_verified": 3,
       "live_identical_records": 7,
       "release17_state_progressed_records": 1
+    },
+    {
+      "id": "G1-023",
+      "receipt": "docs/audits/issue504-review-G1-023.json",
+      "text_files_entire": 0,
+      "text_files_partial": 1,
+      "reviewed_file_lines": 357,
+      "reviewed_file_words": 1973,
+      "reviewed_github_objects": 0,
+      "reviewed_github_words": 0,
+      "reviewed_sequential_queue_records": 9,
+      "confirmed_note_only_fixes": 0,
+      "source_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
+      "source_range_inclusive": [
+        4737,
+        5093
+      ],
+      "live_identical_records": 9,
+      "source_merges_resolved": 8,
+      "release_receipts_verified": [
+        "DIC-20261022-READY-QUEUE-04",
+        "DIC-20261024-READY-QUEUE-06"
+      ]
     }
   ],
   "totals": {
-    "source_file_lines": 6514,
-    "source_file_words": 51352,
+    "source_file_lines": 6871,
+    "source_file_words": 53325,
     "github_objects": 2,
     "github_words": 721
   },
@@ -353,14 +376,14 @@
   "next": {
     "kind": "git_blob",
     "path": "docs/RELEASE_QUEUE.json",
-    "first_line": 4737,
+    "first_line": 5094,
     "expected_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
     "require_fresh_blob": true,
-    "expected_next_item": "DIC-Q-80-outbox",
+    "expected_next_item": "DIC-Q-5-source-fact-integrity",
     "unreviewed_drift": [
-      "8 newer live queue items (full delta not reviewed)",
-      "1 new release history object (full delta not reviewed)",
-      "19 modified original live records (delta not fully reviewed)"
+      "9 newer live queue items",
+      "1 new release history object",
+      "19 modified original records"
     ]
   },
   "uncovered": "Original pinned queue line 4737+; 8 new live queue items, 1 new release-history object and 19 modified original items have zero delta semantic credit; GitHub issues/PRs/comments/reviews/Actions/logs/history/tags/releases/binary materials and #267 delegated code/frozen semantic review remain incomplete. Temporary owner-approved PUBLIC setting remains, future PRIVATE restoration not verified.",
@@ -546,6 +569,29 @@
     "unreviewed_modified_original_items": 19,
     "next_line": 4737,
     "ci": "PENDING",
+    "status": "IN_PROGRESS"
+  },
+  "g1023_reconciliation_20261105": {
+    "development_sha": "c0ece1e4d3e465328ab10057895b4a7d2cb1f91f",
+    "main_sha": "590c2c33610a5a7703a2509e1045d236b78a7981",
+    "release_production_sha": "69742e9e8633c29c209249a87303c6e931a41b89",
+    "pinned_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
+    "current_queue_blob_sha": "d395a90c2a79ed4d0e410a07e8cc10fc48613b10",
+    "reviewed_lines": 357,
+    "reviewed_words": 1973,
+    "records": 9,
+    "live_identical_records": 9,
+    "verified_original_merge_shas": 8,
+    "release_receipts_verified": [
+      "aa33c4b61c95695d6004804afba121fe6b85e0aa",
+      "e1f78933fa49c9eb333c65779b82beab019a2c31"
+    ],
+    "new_items_unreviewed": 9,
+    "new_history_unreviewed": 1,
+    "modified_original_records_unreviewed": 19,
+    "next_line": 5094,
+    "source_read_direct": true,
+    "ci": "NOT_RERUN",
     "status": "IN_PROGRESS"
   }
 }
