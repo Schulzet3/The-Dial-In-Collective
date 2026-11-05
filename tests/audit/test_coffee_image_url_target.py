@@ -41,6 +41,17 @@ class SourceImageUrlGateTest(unittest.TestCase):
             with self.subTest(url=url):
                 self.assertIsNone(target(url))
 
+    def test_trailing_dot_private_hosts_rejected_without_network(self):
+        for url in ('https://localhost./coffee.png',
+                    'https://localhost.../coffee.png',
+                    'https://service.internal./coffee.png',
+                    'https://host.local./coffee.png',
+                    'https://127.0.0.1./coffee.png'):
+            with self.subTest(url=url):
+                self.assertIsNone(target(url))
+        # Absolute-form public DNS names remain acceptable.
+        self.assertEqual(target('https://public.example./coffee.png'), 'https://public.example./coffee.png')
+
     def test_target_isolation_has_no_download_calls(self):
         self.assertFalse(any(isinstance(node, ast.Call)
                              and isinstance(node.func, ast.Attribute)
