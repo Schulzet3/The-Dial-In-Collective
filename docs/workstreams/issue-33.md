@@ -1,3 +1,9 @@
+## November 5, 2026 UTC — PR696 regex delimiter safety repair prior to acceptance (TESTING)
+
+Third exact GitHub source readback identified an **unescaped forward slash inside a JavaScript regular-expression literal character class** in the newly added adjacent-growing-region recognizer. This prematurely terminates the regex literal and would fail parse. Removed that unsupported descriptor character from the narrow grammar; no user-facing or existing extractor change elsewhere. This is a real source-generation defect on an unmerged candidate, caught before integration and corrected with this SAME-COMMIT journal note. Earlier red/queued candidate CI evidence remains historical; only newly corrected exact head may qualify. No READY/deploy/production writes, oracle edits, or changed locked decisions.
+
+---
+
 ## November 5, 2026 UTC — PR696 regex-literal escape corrected in same-commit review (TESTING)
 
 Second independent readback of repair head `3352779505171ee3ffdd0cc63bc25ca1de754f84` found that the inserted JavaScript **regex literals** still contained double escaped `\\\\s` and `\\\\b` (would match literal backslash characters, not selected page whitespace/word boundaries). Repaired only newly inserted regex literal segment by reducing each double slash once; retained necessary doubled escapes inside the `RegExp(string)` constructor unchanged. This is a genuine corrected-source test fix, not a passing check or an infrastructure failure. Full exact PR-head Node/lint/build and merged official #446/#512 validation remain pending; no publication, frozen corpus or user data edits.
