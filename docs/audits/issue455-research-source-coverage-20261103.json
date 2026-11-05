@@ -2505,6 +2505,28 @@
       "implementation": "RESEARCH_ONLY_SOURCE_NOTE_NO_APP_OR_LOCKED_CHANGE",
       "test_plan": "Docs JSON uniqueness/continuity and PR-head governance. Future app behavior change would require exact original measured shot, 5 ratings/all-green/missing, same-coffee control, unit-mass assertions, phone/offline/accessible UX and real sensory trials.",
       "release_queue": "NO_NEW_ITEM"
+    },
+    {
+      "id": "R455-PROP-055-LATEST-FEEDBACK-CHRONOLOGY",
+      "finding": "Actual recipe-context latest-shot feedback selection and cloud-hydration latest advice used lexical timestamp comparisons across timezone offsets (and hydration permitted nonblank malformed dates), diverging from true UTC chronology despite existing Shot History sorted by instants.",
+      "evidence": [
+        "LIVE Git source parent 9c5033cf4a23f4b4b5b824891a161800c0e13356",
+        "site/lib/ui.js original Git blob 2aeb15815e44f48937433c65f93368645436e102 latest lexical >",
+        "site/cloud/mapping.js original Git blob 5053aea7646d7db1876af3170b012672fde28c81 old timestamp.localeCompare",
+        "tests/issue455-feedback-chronology.test.mjs PR-head blob 31b6a3b5d6954807ec6046fadd30008a818fbcbc, 5 executable negative/positive regressions SUCCESS",
+        "PR #880 https://github.com/Schulzet3/The-Dial-In-Collective/pull/880 and exact source CI runs 42131771333 / 42132057364"
+      ],
+      "severity": "P2_REPRODUCED_LATEST_FEEDBACK_WRONG_TIMEZONE_AND_LEGACY_DATE",
+      "user_benefit": "Next Shot feedback in visible same-coffee/style/basket/feed/calibration recipe context and rehydrated suggestion stays attached to genuinely latest rated shot; undatable legacy rows remain visible without being treated as new rating.",
+      "current_locked": "All five required taste inputs, distinguish all-green vs unrated, one controllable change, same-coffee evidence and independent style/feed/basket/calibration, original shot measurements and private notes, offline/private history.",
+      "current_app": "Pre-fix site/lib/ui.js::lastRecipeContextShot compared ISO-offset strings with >, site/cloud/mapping.js::hydrate chose style-level last suggestion using localeCompare. Verified code merge abb010b8ce6c449279913750b1b8147b987384b1 uses finite Date.parse actual instants and stable equal-time selection, retains original data without mutations.",
+      "proposed_change": "SAFE Locked-compatible fix implemented, five positive/negative imported-module regressions. No scientific or numeric recommendation changed.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "VERIFIED_NONFORCE_MERGED_CODE_READY_NOT_DEPLOYED",
+      "implementation_pr": 880,
+      "source_commit": "abb010b8ce6c449279913750b1b8147b987384b1",
+      "test_plan": "Actual PR-head Node22 full 2602 PASS/0 FAIL/6 SKIP, mobile/browser/offline/a11y and governance SUCCESS; exact merged-source same Node22+browser/offline/governance SUCCESS. Original603, targeted cloud and real signed-in/member taste outcomes NOT executed and NOT called PASS.",
+      "release_queue": "DIC-Q-455-feedback-hydration-instant"
     }
   ]
 }

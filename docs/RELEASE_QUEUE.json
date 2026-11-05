@@ -11,23 +11,35 @@
       "id": "DIC-Q-455-feedback-hydration-instant",
       "issue": 455,
       "title": "Choose recipe-context and rehydrated rating feedback by actual shot instant across offsets",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "abb010b8ce6c449279913750b1b8147b987384b1",
       "scope_paths": [
         "site/lib/ui.js",
         "site/cloud/mapping.js"
       ],
       "tests": [
-        "Source-bound deterministic negative: both selected current helpers compare timestamp string shapes rather than epoch instants; offset newer 2026-11-04T23:30-07:00 sorts before older 2026-11-05T03:00+02:00; malformed nonblank legacy dates may become latest.",
-        "Five positive/negative imported-module regressions in tests/issue455-feedback-chronology.test.mjs written for offset order, equal/UTC, invalid/blank dates, context mismatch, exact latest hydration suggestion, original notes and all taste values. Initially NOT_EXECUTED until exact CI.",
-        "Node 22 test/lint/build, mobile/browser/offline/accessibility, applicable governance/continuity and merged source CI PENDING; no live member/SQL/Auth/provider tests or empirical taste quality claim."
+        "Exact negative source reproduction: lexical timezone ISO sorting chose 2026-11-05T03:00+02:00 over chronologically later 2026-11-04T23:30-07:00; hydrate could select malformed nonblank timestamps. Safe code uses finite parsed instants.",
+        "Five imported actual JS module negative+positive regressions in tests/issue455-feedback-chronology.test.mjs ALL PASS on exact PR head 9094525c6894d4d23b94c54e1ff5f4031b521ccb and merged source abb010b8ce6c449279913750b1b8147b987384b1. Covered different timezone offsets, invalid/blank legacy times, context mismatch, stable equal/UTC date, hydrated latest suggestion and original notes/five taste scores unchanged.",
+        "PR-head Node22 full tests 42131771333 SUCCESS: 2608 total, 2602 PASS/0 FAIL/6 intentional SKIP; Node22 build/lint succeeded; merged-source Node22 42132057364 SUCCESS: 2608 total, 2602 PASS/0 FAIL/6 SKIP.",
+        "PR-head browser/mobile/visual/real service-worker offline/accessibility acceptance 42131771023 SUCCESS and same verified merged-source suite 42132057213 SUCCESS. Shared cloud-tests wrapper SUCCESS but targeted cloud test job individually SKIPPED/NOT_APPLICABLE, not passed.",
+        "PR-head governance/continuity 42131771012 SUCCESS, isolated SQL release 42131771021 SUCCESS, security/source inventory 42131770826 SUCCESS; original frozen603 42131771080 SKIPPED not PASS. Merged-source approval/continuity 42132057229 SUCCESS.",
+        "PR #880 nonforce squash merged exact abb010b8ce6c449279913750b1b8147b987384b1; 5 changed live/test/docs Git blobs reread IDENTICAL to fully verified PR head; concurrent prior #509 documentation paths disjoint. No original source, member, SQL/Auth/Edge, provider or publication writes."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Verify exact PR-head checks and nonforce merge before READY."
+      "ci_runs": [
+        42131771012,
+        42131770826,
+        42131771333,
+        42131771023,
+        42131771021,
+        42131771080,
+        42132057229,
+        42132057213,
+        42132057364
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Development only. Original raw and hydrated shot rows remain untouched; no Locked taste/science/style/recipe changes, no production action."
+      "notes": "VERIFIED READY IN DEVELOPMENT ONLY (no publication by #455). Scoped modules site/lib/ui.js and site/cloud/mapping.js preserve five scores, notes and original shot timestamps; latest recipe/hydration feedback now uses actual instants. One genuinely reproducible ordering bug, not claimed customer incident or measured cup-quality increase. No owner Locked changes; later owner production release separately authorized if selected. Issue #455 broader research and UX remain OPEN; original S019 PDF unverified.",
+      "pr": 880
     },
     {
       "id": "DIC-Q-33-97-selected-unnamed-decaf-treatment",
