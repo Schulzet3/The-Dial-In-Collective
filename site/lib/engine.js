@@ -136,10 +136,11 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
  const sameOld=qual.filter(sh=>sh.coffeeId===c.id&&sh.calibrationId!==v.calibrationId&&sh.setupVersionId===v.id&&(!familyId||sh.familyId===familyId));
  // Old calibration rows may legitimately seed an estimated translation, but
  // legacy rows without an equipment snapshot must not yield null guidance.
- // Legacy success records without a usable chronological timestamp remain
+ // Legacy success records without a parseable chronological timestamp remain
  // preserved, but cannot establish the latest previous-calibration reference.
- const translated=sameOld.filter(sh=>sh.snapshot&&typeof sh.timestamp==='string'&&sh.timestamp.trim())
-  .sort((a,b)=>b.timestamp.localeCompare(a.timestamp))
+ const translated=sameOld.filter(sh=>sh.snapshot&&typeof sh.timestamp==='string'&&sh.timestamp.trim()&&
+   Number.isFinite(Date.parse(sh.timestamp)))
+  .sort((a,b)=>Date.parse(b.timestamp)-Date.parse(a.timestamp))
   .map(sh=>translateGrind(sh,v)).find(finite);
  if(finite(translated))return {value:translated,source:'Estimated from previous calibration',proven:false};
  const rank=roastIndex(c.roastLevel);
@@ -190,13 +191,14 @@ export function learnSensitivity(shots) {
  const groups=new Map();
  for(const s of shots){
   // Legacy and offline entries can be partial. Only complete measured inputs
-  // with ordered timestamps can calibrate a grind-to-time response.
+  // with parseable instants can calibrate a grind-to-time response.
   if(!finite(s.grindSetting)||!finite(s.timeS)||s.timeS<=0||
      !finite(s.doseG)||s.doseG<=0||!finite(s.yieldG)||s.yieldG<=0||
-     s.hidden||s.feedMode==null||typeof s.timestamp!=='string'||!s.timestamp.trim())continue;const key=[s.coffeeId,s.style,s.setupVersionId,s.calibrationId,s.basketId,s.feedMode].join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(s);}
+     s.hidden||s.feedMode==null||typeof s.timestamp!=='string'||!s.timestamp.trim()||
+     !Number.isFinite(Date.parse(s.timestamp)))continue;const key=[s.coffeeId,s.style,s.setupVersionId,s.calibrationId,s.basketId,s.feedMode].join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(s);}
  const slopes=[];
  for(const group of groups.values()){
-  group.sort((a,b)=>a.timestamp.localeCompare(b.timestamp));
+  group.sort((a,b)=>Date.parse(a.timestamp)-Date.parse(b.timestamp));
   for(let i=1;i<group.length;i++){
    const a=group[i-1],b=group[i],dg=b.grindSetting-a.grindSetting;
    if(Math.abs(dg)<.09||Math.abs(a.doseG-b.doseG)>.6||Math.abs(a.yieldG-b.yieldG)>3)continue;
