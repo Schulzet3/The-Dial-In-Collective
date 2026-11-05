@@ -2034,7 +2034,8 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    const headings=productCoffeeProse(canonicalProduct,clean).filter(b=>b.tag==='h1');
    const labeled=source_facts.filter(f=>f.field==='origin'&&f.source_type==='html'&&
     !f.conflicting&&keyOf(f.value)===keyOf(fields.origin)&&
-    /(?:^|\/\s*)(?:growing\s+)?region\s*:/iu.test(String(f.section||''))&&
+    (/^(?:growing\s+)?region$/iu.test(String(f.label||'').trim())||
+     /(?:^|\/\s*)(?:growing\s+)?region\s*:/iu.test(String(f.section||'')))&&
     !/different coffee|related product|previous (?:coffee|lot)/iu.test(String(f.section||'')));
    if(headings.length===1&&keyOf(headings[0].text)===keyOf(fields.name)&&
     labeled.length===1&&!source_facts.some(f=>f.field==='origin'&&f.conflicting)){

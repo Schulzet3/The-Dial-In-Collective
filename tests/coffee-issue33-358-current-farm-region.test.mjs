@@ -32,9 +32,13 @@ test('unselected region, country, or unrelated facts are not region witnesses',(
  for(const field of ['Producer','Farm','Origin','Marketing']){
   const r=parse({field});assert.notEqual(r.fields.origin,'Copan, Honduras',field);
  }
- for(const region of ['Guatemala','Copan, Honduras','Copan, Guatemala']){
+ for(const region of ['Guatemala','Copan, Guatemala']){
   const r=parse({region});assert.notEqual(r.fields.origin,'Copan, Honduras',region);
  }
+});
+test('already complete direct labeled origin is preserved without duplicate enrichment',()=>{
+ const r=parse({region:'Copan, Honduras'});
+ assert.equal(r.fields.origin,'Copan, Honduras');
 });
 test('an opposing directly labeled Country prevents unconditional country promotion',()=>{
  const r=parse({opposite:'Guatemala'});

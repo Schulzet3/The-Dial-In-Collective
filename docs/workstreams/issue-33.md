@@ -1,3 +1,9 @@
+## November 5 2026 UTC — PR719 exact Node positive fixture and false-negative correction TESTING [skip netlify]
+
+Exact PR head 21e92c08cee8989ea35fbd694c0bd7bb20a4cb42 Node [run41985244523](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41985244523) FAILED two new tests, not pass: #787 actual parser returned Copan because direct Region label appears as source_fact label Region, section Coffee Info (not necessarily section "Region: Copan"). Source guard now accepts exact selected current labeled Region either as its field label or section, still demands exact H1, field origin compatibility and no conflict. #789 hostile fixture asserted already-correct direct Region Copan, Honduras should not remain Copan, Honduras; corrected test to assert preservation of the complete published origin. Other prior positive/hostile cases and TESTING queue preserved. Only paths changed in this commit are parser, focused test, scoped journal, queue test receipt. Exact new-head CI and postmerge official current source still required; no READY/deploy or production changes.
+
+---
+
 ## November 5, 2026 UTC — PR719 real queue intake failure corrected (TESTING) [skip netlify]
 
 Initial exact candidate `450208485402faa4c7578dc09cd59c2f62eb4615` approval [run41985117029](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41985117029) **FAILED**: DIC queue item DIC-Q-33-original603-358-current-labeled-farm-region invalid merged source SHA. Set explicit nullable merged_source_sha=null for TESTING (it has NOT merged). No parser/test changes in this repair; same-commit queue + scoped journal. Preserve all other READY/DEPLOYED. Require exact new-head approval/Node/UX/security/SQL and source checks before nonforce integration; no release/production changes.
