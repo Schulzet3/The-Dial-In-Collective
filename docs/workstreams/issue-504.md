@@ -510,3 +510,15 @@ Live source at review: development `fbb7cd072bf73cd65f088d9ed9e6687b2b612ea5`, m
 **Cumulative #504:** 7919 file lines / 60754 words; 107 GitHub metadata records / 30511 words. Source-body SHA1 prior-receipt crosscheck, word arithmetic, exact continuity, distinct IDs all PASS. No functional Node22, SQL, browser/mobile, offline, original603 or hosted Auth rerun on docs-only changes. New PR/exact-source CI pending at commit creation; SKIPPED/unstarted != PASS. No queue READY/DEPLOYED promotion or release/publication action.
 
 **NEXT exact unreviewed:** [Issue #267 comment `6626447321`](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267#issuecomment-6626447321), word 1. Remaining 52 #267 comments at this snapshot, other GitHub metadata and source drift still incomplete. **OPEN / IN_PROGRESS**.
+
+## Issue #504 G1-045 — November 5 UTC: eight consecutive #267 historical comments [skip netlify]
+
+**Live source at review:** development `5f18f76950e796e3fb70b98bfc3ab7ef56c315e7`, main `b62bc028fe1cda1fd2756bfb1162501ca629002a`, release/production `6c729b928fad5fd59ae012c63d7c005f180b2b64`. PUBLIC visibility under documented temporary owner exception; restore-to-private unverified. Issue #504 and #267/#455/#33/#96 remain OPEN; #267 audit's source-line responsibility not duplicated.
+
+**Direct word-level review:** Full immutable bodies `6626447321`, `6627429108`, `6628381970`, `6629334561`, `6629544241`, `6630648574`, `6630894763`, `6631122462`, `2174` newly counted GitHub words / 8 metadata records. Every comment's SHA-1, UTF-8 bytes, exact inclusive body line and word ranges and source-semantic disposition in [G1-045 receipt](../audits/issue504-review-G1-045.json). Historic S2-057..072 source line claims are #267-only, not automatically credited into #504. Earlier #530 merged-source approval FAIL and #552 cancelled-then-rerun status retained faithfully; not fake broad runtime PASS.
+
+**Findings:** Local artifact symlink problem documented and repaired by separately owned [#267 PR #566](../../pull/566), independently confirmed MERGED; no duplicate code patch. Other hash/race and malformed-manifest possibilities remain WATCH, no proven new active defect or safe code/deletion decision. Exact #267 strict ledger blob `e0384620e056a6b8c525673a201d39d652dc2cb9` independently read: 7585 frozen and 9258 pinned *at its ledger snapshot*, not certified current total and not imported as #504 semantic work.
+
+**Cumulative #504:** 7919 file lines / 60754 file words, 115 GitHub records / 32685 GitHub words. Word arithmetic, old SHA1 crosscheck, unique sequential IDs PASS; this docs-only commit does not run Node22/SQL/real Auth/browser/offline/original603, and no CI is called PASS before exact-source results.
+
+**NEXT exact:** [Issue #267 comment 6631224640](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267#issuecomment-6631224640), word 1. 45 #267 comments remain at snapshot; other repository/Actions/PR/commit/release metadata and delegated source review remain. State OPEN / IN_PROGRESS, no production or release/production movement.

@@ -827,13 +827,35 @@
         6625430928
       ],
       "confirmed_safe_fixes": 0
+    },
+    {
+      "id": "G1-045",
+      "receipt": "docs/audits/issue504-review-G1-045.json",
+      "text_files_entire": 0,
+      "text_files_partial": 0,
+      "reviewed_file_lines": 0,
+      "reviewed_file_words": 0,
+      "reviewed_github_objects": 8,
+      "reviewed_github_words": 2174,
+      "source_issue": 267,
+      "reviewed_comment_ids": [
+        6626447321,
+        6627429108,
+        6628381970,
+        6629334561,
+        6629544241,
+        6630648574,
+        6630894763,
+        6631122462
+      ],
+      "confirmed_safe_fixes": 0
     }
   ],
   "totals": {
     "source_file_lines": 7919,
     "source_file_words": 60754,
-    "github_objects": 107,
-    "github_words": 30511
+    "github_objects": 115,
+    "github_words": 32685
   },
   "delegated_267_no_double_count": true,
   "source_manifests": [
@@ -850,13 +872,13 @@
   "next": {
     "kind": "github_issue_comment",
     "issue": 267,
-    "comment_id": 6626447321,
+    "comment_id": 6631224640,
     "first_unreviewed_word": 1,
-    "url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/267#issuecomment-6626447321",
-    "then": "Continue #267 historical comment metadata in source order without replaying #267 line audit."
+    "url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/267#issuecomment-6631224640",
+    "then": "Continue remaining #267 comments in source order, then uncovered GitHub-wide records. No #267 line double-credit."
   },
-  "uncovered": "G1-043 8 historical comments added; 59/95 #267 comments remain, plus incomplete repository-wide inventory, PRs, Actions and strict delegated code.",
-  "latest_review_source_anchor": "b1cc84c956a9dee4a22a0c814f9358cd5eebd038",
+  "uncovered": "G1-045 8 historical issue comments added; 45 #267 comments remain in latest snapshot, other issue/PR/Actions/tag/release/commit provenance and source drift incomplete",
+  "latest_review_source_anchor": "5f18f76950e796e3fb70b98bfc3ab7ef56c315e7",
   "inventory_metadata_only": {
     "github_issue_rest": 523,
     "github_pr_rest": 454,
@@ -1805,5 +1827,46 @@
     "confirmed_fixes": 0,
     "status": "IN_PROGRESS",
     "ci": "PENDING"
+  },
+  "g1045_reconciliation_20261105": {
+    "development": "5f18f76950e796e3fb70b98bfc3ab7ef56c315e7",
+    "main": "b62bc028fe1cda1fd2756bfb1162501ca629002a",
+    "release_production": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+    "repo_visibility": "public",
+    "issue267_comments_count": 97,
+    "issue504_comments_count": 75,
+    "read_comment_ids": [
+      6626447321,
+      6627429108,
+      6628381970,
+      6629334561,
+      6629544241,
+      6630648574,
+      6630894763,
+      6631122462
+    ],
+    "body_sha1_utf8": [
+      "514e1615c038ef870d1b7fd98a6b5d2035ab3eac",
+      "88d1bde4c69b35a09ca63c8464529d1c9ad2622e",
+      "2f68ed84a1152d567db4b23d179dde9260e029bc",
+      "0083bc07be0bca5d64f4c11b75d20c41b0b3e73b",
+      "538e4c9cb81372c89ab070bd212e6c3c975dc892",
+      "a56fb4727275b2587cf07a0df0979f183be61fad",
+      "ccff0265296967bfa822fc335d9f7c33ca7ce0ef",
+      "cbbf47841ca09307f19e84d86a36cb2c6bd9f2c6"
+    ],
+    "reviewed_github_words": 2174,
+    "total_github_objects": 115,
+    "total_github_words": 32685,
+    "total_file_lines": 7919,
+    "total_file_words": 60754,
+    "strict_267_ledger_blob": "e0384620e056a6b8c525673a201d39d652dc2cb9",
+    "strict_267_snapshot_frozen": 7585,
+    "strict_267_snapshot_pinned": 9258,
+    "verified_merged_prior_fix_pr": 566,
+    "next_comment_id": 6631224640,
+    "confirmed_new_fixes": 0,
+    "status": "IN_PROGRESS",
+    "ci": "PENDING_NEW_DOCS_ONLY_COMMIT"
   }
 }
