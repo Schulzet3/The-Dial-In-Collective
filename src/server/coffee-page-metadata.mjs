@@ -414,7 +414,16 @@ function normalized(field,value,{allowFlavorProse=false,allowAnonymousProducer=f
   // Preserve meaningful internal hyphens such as SL-28.
   const stray=s.match(/^\s*(?:--+|[–—]{1,2}|[:：])\s*(\S[\s\S]*)$/u);
   if(stray)s=stray[1].replace(/\s*,\s*(?=\S)/g,', ').trim();
-  s=s.replace(/\s*,\s*(?=\S)/g,', ').replace(/\s*\|\s*(?:limited (?:edition|release)|micro[ -]?lot)\s*$/i,'').replace(/\.$/,'').trim();
+  // A roaster's literal cultivar-composition decimal comma is numeric,
+  // not a list delimiter: "(46,3%)" must never become "(46, 3%)".
+  // Only protect an adjacent digit/comma/digit inside a closed percentage
+  // parenthesis. Ordinary cultivar-list commas still receive one space;
+  // already-spaced or malformed values are not silently reinterpreted.
+  s=s.replace(/\s*,\s*(?=\S)/g,(match,offset,source)=>
+   match===',' && /\(\s*\d{1,3}$/.test(source.slice(0,offset))&&
+   /^\d{1,2}\s*%\s*\)/.test(source.slice(offset+1))?',':', ')
+   .replace(/\s*\|\s*(?:limited (?:edition|release)|micro[ -]?lot)\s*$/i,'')
+   .replace(/\.$/,'').trim();
  }
  // Some seller specs mislabel post-harvest equipment as a coffee 'Varietal'.
  // Withhold botanical autofill; preserve the literal label in source_facts.
