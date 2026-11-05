@@ -132,6 +132,11 @@ const compareHistoryDates=(a,b)=>{
  const left=sortableHistoryInstant(a),right=sortableHistoryInstant(b);
  return left===right?0:left>right?-1:1;
 };
+// Sort a copied shot list by real instants; keep undated legacy shots visible
+// but below dated history. Equal/unparseable timestamps retain input order.
+export function orderedShotHistory(shots) {
+ return [...shots].sort((a,b)=>compareHistoryDates(a?.timestamp,b?.timestamp));
+}
 export function hideCoffee(s,id,hidden=true) {
  const c=s.coffees.find(x=>x.id===id);if(!c)return;c.hidden=hidden;
  if(hidden)for(const set of s.setups)for(const w of Object.values(set.workspaces))if(w.currentCoffeeId===id){w.currentCoffeeId=Object.entries(w.recent).filter(([cid])=>cid!==id&&s.coffees.some(c=>c.id===cid&&!c.hidden)).sort((a,b)=>compareHistoryDates(a[1],b[1]))[0]?.[0]||null;}

@@ -8,6 +8,28 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-shot-history-instant-order",
+      "issue": 455,
+      "title": "Show per-coffee Shot History newest by real instant, not lexical timezone offset",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/lib/model.js"
+      ],
+      "tests": [
+        "Exact current CloudApp.coffees() lexical ISO timestamp sorting misranks 2026-11-05T03:00:00+02:00 (01:00Z) above later 2026-11-04T23:30:00-07:00 (06:30Z). Historic invalid dates can outrank valid timestamps.",
+        "PR824 proposed pure orderedShotHistory helper uses previously approved and tested parsed-instant comparison and nonmutating copy; maintains same-coffee and hidden-shot filter, five ratings and original notes/measurements, no changed recommendation logic.",
+        "Four focused regressions at tests/issue455-shot-history-render-order.test.mjs. First head cloud-tests SUCCESS 42076932298; approval 42076932348 initially FAILED solely due required release-queue intake absent, repaired by this docs-only PR-head follow-up; fresh source-bound CI PENDING."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Fresh exact final PR-head Node22, browser/mobile/offline/a11y and approval/governance CI must complete and be independently verified; unmerged, not READY."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "IN DEVELOPMENT TESTING; no publication or live provider/member writes. Frozen603 unrelated SKIPPED, #267 strict audit separate. Merge only after exact-head checks; then move narrowly to READY after source readback and CI verification."
+    },
+    {
       "id": "DIC-Q-33-original603-603-coop-drymill-town-origin",
       "merged_source_sha": "caa2122944b340e7f4f486b120dea78873d90f0f",
       "issue": 33,
