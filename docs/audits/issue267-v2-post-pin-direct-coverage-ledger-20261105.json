@@ -3,7 +3,7 @@
   "issue": 267,
   "review_standard": "Independent post-pin new source line semantic review; separate from original frozen/pinned V2 denominator",
   "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
-  "observed_development_commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+  "observed_development_commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
   "receipt_references": [
     {
       "batch_id": "D2-001",
@@ -174,15 +174,43 @@
       "line_count": 18,
       "verified_absent_at_pin": true,
       "reviewed_live_commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2"
+    },
+    {
+      "batch_id": "D2-015",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-015.json",
+      "path": "scripts/release/production-readonly-smoke.mjs",
+      "blob_sha": "a82501a36186494d6b19ec78381400be5ade80de",
+      "pre_fix_blob_sha": "715682828e6d5f3767a19c3901130b4cd4597f9c",
+      "range": [
+        1,
+        26
+      ],
+      "line_count": 26,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "a374fcf68115be70643453657386539fde688789"
+    },
+    {
+      "batch_id": "D2-016",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-016.json",
+      "path": "tests/production-readonly-smoke.test.mjs",
+      "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+      "pre_fix_blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+      "range": [
+        1,
+        27
+      ],
+      "line_count": 27,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "a374fcf68115be70643453657386539fde688789"
     }
   ],
-  "unique_source_lines_direct_reviewed": 393,
-  "fully_reviewed_new_source_files": 14,
+  "unique_source_lines_direct_reviewed": 446,
+  "fully_reviewed_new_source_files": 16,
   "nonoverlap": true,
   "changed_existing_pinned_paths": "PENDING",
   "new_sql_migrations": "PENDING",
   "remaining_added_code": "PENDING_FRESH_LIVE_TREE_DRIFT_AND_FULL_SEMANTIC_REVIEW",
-  "runtime_app_acceptance": "NOT_RUN_BY_D2",
+  "runtime_app_acceptance": "FOCUSED_LOCAL_NODE22_3_PASS_FULL_APP_AND_PRODUCTION_NOT_RUN",
   "complete": false,
   "physical_line_accounting_rule": "Count actual 1-based non-virtual lines; terminal newline alone is line delimiter, never an extra blank physical line. Preserve source-authenticated original receipt even when superseded by an append-only correction.",
   "correction_references": [
@@ -200,7 +228,7 @@
       "subtract_phantom_records": 4
     }
   ],
-  "last_review_batch": "D2-014",
-  "last_review_source_commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
-  "last_review_note": "D2-013/014 source-only; 24+18 physical lines, no synthetic terminal EOF credit. Concurrent S2-143 PR remains disjoint and unmodified; original strict S2 totals unchanged."
+  "last_review_batch": "D2-016",
+  "last_review_source_commit": "a374fcf68115be70643453657386539fde688789",
+  "last_review_note": "Reproduced genuine false-green manifest MIME acceptance from exact old blob; current code/test changed and all 53 new physical lines independently semantically inspected; local exact Node22 test 3/3 PASS; CI pending. Original head approval failed stale-base ancestry; nonforce two-parent reconciliation preserves exact source blobs and concurrent #33."
 }
