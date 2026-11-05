@@ -5,29 +5,29 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 7002,
+    "strict_validated_lines": 7062,
     "first_unvalidated_manifest_file_index": 59,
     "first_unvalidated_path": "docs/DECISION_LEDGER.json",
-    "first_unvalidated_line": 2112,
+    "first_unvalidated_line": 2172,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 8649,
+    "strict_validated_lines": 8709,
     "first_unvalidated_file_index": 53,
     "first_unvalidated_path": "scripts/audit/coffee-source-review-local.py",
-    "first_unvalidated_line": 81,
+    "first_unvalidated_line": 141,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true,
-    "strict_live_counterpart_checked_through_line": 80,
+    "strict_live_counterpart_checked_through_line": 140,
     "last_live_counterpart_checked": {
       "path": "scripts/audit/coffee-source-review-local.py",
-      "commit": "b85ded3e40e8c59633e8261ad326e58e8ef682aa",
+      "commit": "ab6d368f55a9f1ec24d6af31bf5b4ec8b5902e3f",
       "blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
-      "first_line": 41,
-      "last_line": 80,
+      "first_line": 81,
+      "last_line": 140,
       "offset": 0
     }
   },
@@ -2976,12 +2976,34 @@
       "strict_pinned_delta": 40,
       "old_v2_additional_credit": 0,
       "verification": "80 original numbered lines, direct nine dimensions, 40 exact current counterparts; no runtime/human certification."
+    },
+    {
+      "batch": "S2-127",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-127.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        2112,
+        2171
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-source-review-local.py",
+      "pinned_lines": [
+        81,
+        140
+      ],
+      "pinned_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_exact_text_line_offset": 0,
+      "strict_frozen_delta": 60,
+      "strict_pinned_delta": 60,
+      "old_v2_additional_credit": 0,
+      "verification": "120 distinct original source lines, nine direct semantic dimensions each, 60 exact live counterpart lines; no runtime/human certification."
     }
   ],
   "completion": "IN_PROGRESS",
-  "test_limit": "S2-126 source-only AI direct review; exact CI pending, no fresh application/Node/Python/browser/SQL/Auth/603/provider tests, global drift incomplete.",
-  "last_batch": "S2-126",
-  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-126.json",
+  "test_limit": "S2-127 source-only original review; CI pending, no new Python/OCR/Node/SQL/Auth/browser/603 tests or global post-pin live-code certification.",
+  "last_batch": "S2-127",
+  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-127.json",
   "complete": false,
   "accounting_reconciliation_20261105": {
     "scope": "NONCREDIT historical source-ledger reference repair",
