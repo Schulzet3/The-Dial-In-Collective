@@ -5,30 +5,30 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 5714,
+    "strict_validated_lines": 5754,
     "first_unvalidated_manifest_file_index": 59,
     "first_unvalidated_path": "docs/DECISION_LEDGER.json",
-    "first_unvalidated_line": 824,
+    "first_unvalidated_line": 864,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 7341,
+    "strict_validated_lines": 7381,
     "first_unvalidated_file_index": 50,
     "first_unvalidated_path": "scripts/audit/coffee-reviewed-change-forensics.py",
-    "first_unvalidated_line": 121,
+    "first_unvalidated_line": 161,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true,
-    "strict_live_counterpart_checked_through_line": 120,
+    "strict_live_counterpart_checked_through_line": 160,
     "last_live_counterpart_checked": {
       "path": "scripts/audit/coffee-reviewed-change-forensics.py",
-      "commit": "e27dcd5ea4bf154fc52e074a93bdb9524791056c",
-      "blob": "401e02bf1283f204471c3dbecb12e520054f0cc3",
-      "first_line": 81,
-      "last_line": 120,
-      "offset": 0
+      "commit": "68b7895a5e0c0cfb44f2eb38b5c0916acf85015f",
+      "blob": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+      "first_line": 127,
+      "last_line": 166,
+      "offset": 6
     }
   },
   "post_pin_drift": {
@@ -180,14 +180,18 @@
       "semantic_line_credit": 0
     },
     "latest_bounded_live_observation": {
-      "commit": "e27dcd5ea4bf154fc52e074a93bdb9524791056c",
+      "commit": "68b7895a5e0c0cfb44f2eb38b5c0916acf85015f",
       "path": "scripts/audit/coffee-reviewed-change-forensics.py",
-      "blob": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "blob": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
       "reviewed_lines": [
-        1,
-        120
+        127,
+        166
       ],
-      "note": "S2-097–099 direct source review; rest of live code tree remains unreviewed"
+      "pinned_reviewed_lines": [
+        121,
+        160
+      ],
+      "note": "S2-100 exact shifted live counterpart; previous finite change separately audited; other live tree drift incomplete"
     },
     "forensic_nonfinite_json_guard": {
       "receipt": "docs/audits/issue267-v2-strict-batches/S2-LIVE-FINITE-20261105.json",
@@ -2266,11 +2270,33 @@
       "strict_pinned_delta": 40,
       "old_v2_additional_credit": 0,
       "verification": "80 new AI direct numbered nine-criterion source lines; 40 exact current live counterparts, previous/frozen first-line revalidation, synthetic Python decoder reproduction"
+    },
+    {
+      "batch": "S2-100",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-100.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        824,
+        863
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "pinned_lines": [
+        121,
+        160
+      ],
+      "pinned_blob": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "live_exact_text_line_offset": 6,
+      "live_blob": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+      "strict_frozen_delta": 40,
+      "strict_pinned_delta": 40,
+      "old_v2_additional_credit": 0,
+      "verification": "80 source-specific AI direct semantic records, 40 exact live shifted counterparts, nine dimensions, no original/legacy double credit"
     }
   ],
   "completion": "IN_PROGRESS",
-  "test_limit": "S2-099 merged source audit; separate narrow forensic parser guard/test proposed and pending exact CI. All remaining live drift and full 100% coverage incomplete.",
-  "last_batch": "S2-099",
-  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-099.json",
+  "test_limit": "S2-100 source/receipt exact, hosted CI pending; entire live tree drift and app/provider acceptance incomplete",
+  "last_batch": "S2-100",
+  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-100.json",
   "complete": false
 }
