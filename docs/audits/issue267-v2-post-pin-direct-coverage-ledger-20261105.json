@@ -1,0 +1,539 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "review_standard": "Independent post-pin new source line semantic review; separate from original frozen/pinned V2 denominator",
+  "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+  "observed_development_commit": "da0680300a3e0b662f9670953c46bf407eaded46",
+  "receipt_references": [
+    {
+      "batch_id": "D2-001",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-001.json",
+      "path": ".github/workflows/dic-ready-batch-certification.yml",
+      "blob_sha": "32d16c1ae364329829503e0829d4a358f6963a49",
+      "range": [
+        1,
+        38
+      ],
+      "line_count": 38,
+      "original_receipt_reported_line_count": 39,
+      "corrected_by": "docs/audits/issue267-v2-post-pin-direct-corrections/D2-001-006-virtual-eof-20261105.json",
+      "original_receipt_preserved_unmodified": true
+    },
+    {
+      "batch_id": "D2-002",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-002.json",
+      "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+      "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+      "range": [
+        1,
+        46
+      ],
+      "line_count": 46
+    },
+    {
+      "batch_id": "D2-003",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-003.json",
+      "path": ".github/workflows/dic-release-safety-rehearsal.yml",
+      "blob_sha": "62375b28966325685ac99d9898a15faa60511bf1",
+      "range": [
+        1,
+        49
+      ],
+      "line_count": 49
+    },
+    {
+      "batch_id": "D2-004",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-004.json",
+      "path": "scripts/release/ci-batch-classification.mjs",
+      "blob_sha": "397e2439efe76046bdb5bf9daa5d65fcdb907316",
+      "range": [
+        1,
+        6
+      ],
+      "line_count": 6,
+      "original_receipt_reported_line_count": 7,
+      "corrected_by": "docs/audits/issue267-v2-post-pin-direct-corrections/D2-001-006-virtual-eof-20261105.json",
+      "original_receipt_preserved_unmodified": true
+    },
+    {
+      "batch_id": "D2-005",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-005.json",
+      "path": "scripts/release/discover-certified-artifacts.mjs",
+      "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+      "range": [
+        1,
+        33
+      ],
+      "line_count": 33,
+      "original_receipt_reported_line_count": 34,
+      "corrected_by": "docs/audits/issue267-v2-post-pin-direct-corrections/D2-001-006-virtual-eof-20261105.json",
+      "original_receipt_preserved_unmodified": true
+    },
+    {
+      "batch_id": "D2-006",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-006.json",
+      "path": "scripts/release/download-certified-artifacts.mjs",
+      "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+      "range": [
+        1,
+        31
+      ],
+      "line_count": 31,
+      "original_receipt_reported_line_count": 32,
+      "corrected_by": "docs/audits/issue267-v2-post-pin-direct-corrections/D2-001-006-virtual-eof-20261105.json",
+      "original_receipt_preserved_unmodified": true
+    },
+    {
+      "batch_id": "D2-007",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-007.json",
+      "path": "scripts/release/immutable-dist-to-manifest.py",
+      "blob_sha": "08ad9b80e30efe87f77700e81fef878f99d71fe3",
+      "range": [
+        1,
+        28
+      ],
+      "line_count": 28
+    },
+    {
+      "batch_id": "D2-008",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-008.json",
+      "path": "scripts/release/netlify-digest-deploy.mjs",
+      "blob_sha": "3d00ba39bd9c9db8e671367274b57bf57916be90",
+      "range": [
+        1,
+        58
+      ],
+      "line_count": 58
+    },
+    {
+      "batch_id": "D2-009",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-009.json",
+      "path": "scripts/release/verified-dist-files.mjs",
+      "blob_sha": "55f2f7a6c2c3fa4bf390f0706e41d0d1d5f8065d",
+      "range": [
+        1,
+        16
+      ],
+      "line_count": 16
+    },
+    {
+      "batch_id": "D2-010",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-010.json",
+      "path": "tests/verified-dist-files.test.mjs",
+      "blob_sha": "02a5c5be45680e66de2e30e36524b910de192dde",
+      "range": [
+        1,
+        13
+      ],
+      "line_count": 13
+    },
+    {
+      "batch_id": "D2-011",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-011.json",
+      "path": "scripts/release/rehearse-no-publish.mjs",
+      "blob_sha": "c5904a66ef451f08e5bc80eb7d64e327d7edc773",
+      "range": [
+        1,
+        22
+      ],
+      "line_count": 22
+    },
+    {
+      "batch_id": "D2-012",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-012.json",
+      "path": "tests/rehearse-no-publish.test.mjs",
+      "blob_sha": "9061d282f4908ba500be63438d6912d9b632da52",
+      "range": [
+        1,
+        11
+      ],
+      "line_count": 11
+    },
+    {
+      "batch_id": "D2-013",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-013.json",
+      "path": "scripts/release/package-immutable-dist.py",
+      "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+      "range": [
+        1,
+        24
+      ],
+      "line_count": 24,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2"
+    },
+    {
+      "batch_id": "D2-014",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-014.json",
+      "path": "scripts/release/package-immutable-function.py",
+      "blob_sha": "33c82c72907d732c11e08017efc01dd562315799",
+      "range": [
+        1,
+        18
+      ],
+      "line_count": 18,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2"
+    },
+    {
+      "batch_id": "D2-015",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-015.json",
+      "path": "scripts/release/production-readonly-smoke.mjs",
+      "blob_sha": "a82501a36186494d6b19ec78381400be5ade80de",
+      "pre_fix_blob_sha": "715682828e6d5f3767a19c3901130b4cd4597f9c",
+      "range": [
+        1,
+        26
+      ],
+      "line_count": 26,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "a374fcf68115be70643453657386539fde688789"
+    },
+    {
+      "batch_id": "D2-016",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-016.json",
+      "path": "tests/production-readonly-smoke.test.mjs",
+      "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+      "pre_fix_blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+      "range": [
+        1,
+        27
+      ],
+      "line_count": 27,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "a374fcf68115be70643453657386539fde688789"
+    },
+    {
+      "batch_id": "D2-017",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-017.json",
+      "path": "scripts/release/netlify-provider-readback.mjs",
+      "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+      "range": [
+        1,
+        22
+      ],
+      "line_count": 22,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5"
+    },
+    {
+      "batch_id": "D2-018",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-018.json",
+      "path": "tests/netlify-provider-readback.test.mjs",
+      "blob_sha": "45ec36011cc6acaea65ef9229328b909e2f0f5fd",
+      "range": [
+        1,
+        19
+      ],
+      "line_count": 19,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5"
+    },
+    {
+      "batch_id": "D2-019",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-019.json",
+      "path": "scripts/release/verify-release-artifact-receipt.mjs",
+      "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+      "range": [
+        1,
+        36
+      ],
+      "line_count": 36,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c"
+    },
+    {
+      "batch_id": "D2-020",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-020.json",
+      "path": "tests/verify-release-artifact-receipt.test.mjs",
+      "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+      "range": [
+        1,
+        26
+      ],
+      "line_count": 26,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c"
+    },
+    {
+      "batch_id": "D2-021",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-021.json",
+      "path": "scripts/release/netlify-immutable-publish.mjs",
+      "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+      "range": [
+        1,
+        38
+      ],
+      "line_count": 38,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "e132949fb1d29e2ab869da7db986207fe93bedd2"
+    },
+    {
+      "batch_id": "D2-022",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-022.json",
+      "path": "tests/netlify-immutable-publish.test.mjs",
+      "blob_sha": "42902273ea08de6885ade26dfcbd465c5491b0fe",
+      "range": [
+        1,
+        23
+      ],
+      "line_count": 23,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "e132949fb1d29e2ab869da7db986207fe93bedd2"
+    },
+    {
+      "batch_id": "D2-023",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-023.json",
+      "path": "scripts/release/unpack-certified-artifact.py",
+      "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+      "range": [
+        1,
+        25
+      ],
+      "line_count": 25,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "6715ba832b886e3e0271655dbdd37853d9339e85"
+    },
+    {
+      "batch_id": "D2-024",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-024.json",
+      "path": "tests/unpack-certified-artifact.test.py",
+      "blob_sha": "b860219726682dd65c02d9d189293ea222bc8062",
+      "range": [
+        1,
+        24
+      ],
+      "line_count": 24,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "6715ba832b886e3e0271655dbdd37853d9339e85"
+    },
+    {
+      "batch_id": "D2-025",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-025.json",
+      "path": "tests/discover-certified-artifacts.test.mjs",
+      "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+      "range": [
+        1,
+        26
+      ],
+      "line_count": 26,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "e05a621af6b6c904623292bfe65d65f9718fd020"
+    },
+    {
+      "batch_id": "D2-026",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-026.json",
+      "path": "tests/download-certified-artifacts.test.mjs",
+      "blob_sha": "4212346e74ef6dfbc3d561971e6ab4c36aafdddd",
+      "range": [
+        1,
+        20
+      ],
+      "line_count": 20,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "e05a621af6b6c904623292bfe65d65f9718fd020"
+    },
+    {
+      "batch_id": "D2-027",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-027.json",
+      "path": "scripts/release/write-ci-certificate.mjs",
+      "blob_sha": "6602276814c3384e22f3c30a1aa9a54d676a1694",
+      "range": [
+        1,
+        36
+      ],
+      "line_count": 36,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c"
+    },
+    {
+      "batch_id": "D2-028",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-028.json",
+      "path": "tests/ci-certificate.test.mjs",
+      "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+      "range": [
+        1,
+        25
+      ],
+      "line_count": 25,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c"
+    },
+    {
+      "batch_id": "D2-029",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-029.json",
+      "path": "scripts/release/netlify-live-readback.mjs",
+      "blob_sha": "689515076dbddf83d618cf1a79b1151b403ad3cb",
+      "range": [
+        1,
+        43
+      ],
+      "line_count": 43,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "23092a2223191ad3849977049a2c0a0c52dc2699"
+    },
+    {
+      "batch_id": "D2-030",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-030.json",
+      "path": "tests/netlify-live-readback.test.mjs",
+      "blob_sha": "a8c78eb58410e80766963f2c56472078878225fa",
+      "range": [
+        1,
+        28
+      ],
+      "line_count": 28,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "23092a2223191ad3849977049a2c0a0c52dc2699"
+    },
+    {
+      "batch_id": "D2-031",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-031.json",
+      "path": "scripts/release/prepare-release-evidence.mjs",
+      "blob_sha": "2ebe86fde5b17dea639a2a4580121078227dafc5",
+      "range": [
+        1,
+        61
+      ],
+      "line_count": 61,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "86f244f43306bad7cff1dd2a24893e1fc5a29cd9"
+    },
+    {
+      "batch_id": "D2-032",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-032.json",
+      "path": "scripts/release/release-backup-decision.mjs",
+      "blob_sha": "511f16692d3d6d62abbec43931cadfa077e1f7a6",
+      "range": [
+        1,
+        50
+      ],
+      "line_count": 50,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "75882406bdf0979803b04b3ac8ea774fc301671d"
+    },
+    {
+      "batch_id": "D2-033",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-033.json",
+      "path": "scripts/release/request-encrypted-backup.mjs",
+      "blob_sha": "48c51a8ed3c89fcdcbc6626292e8fd9cedb540ba",
+      "range": [
+        1,
+        67
+      ],
+      "line_count": 67,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "540d367b146a82a2a425dd411b1c19614d560b92",
+      "source_remediation_in_same_commit": true
+    },
+    {
+      "batch_id": "D2-034",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-034.json",
+      "path": "tests/request-encrypted-backup.test.mjs",
+      "blob_sha": "ad1657e6d663a2cd914dc33b2f48f5d2cc3c6a3c",
+      "range": [
+        1,
+        78
+      ],
+      "line_count": 78,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "5d1fbb76b6ad4cf1594db853ea77271fbf053fc3",
+      "includes_nine_new_focused_regression_lines": true
+    },
+    {
+      "batch_id": "D2-035",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-035.json",
+      "path": "tests/release-backup-decision.test.mjs",
+      "blob_sha": "458f201593806bf227a4508292e96737af28376e",
+      "range": [
+        1,
+        64
+      ],
+      "line_count": 64,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "259e29148933742733f255c7923bed81e64c9f34"
+    },
+    {
+      "batch_id": "D2-036",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-036.json",
+      "path": "scripts/release/retrieve-certified-release-bundle.mjs",
+      "blob_sha": "b4d3393133cfe0b7727e74ad7bbd606e84fc21a6",
+      "range": [
+        1,
+        83
+      ],
+      "line_count": 83,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "b2a2c08d081a904f9fc77d36f0edae4ac65210d7",
+      "reviewed_source_dev_commit": "4f8a66a6a71b59146019924f7bbd8977d98c25fb"
+    },
+    {
+      "batch_id": "D2-037",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-037.json",
+      "path": "tests/retrieve-certified-release-bundle.test.mjs",
+      "blob_sha": "520cab9e8c7a3cd26bd8aac4d7d9e4bf0a03d42a",
+      "range": [
+        1,
+        73
+      ],
+      "line_count": 73,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "e70c22accf9fe703a0dad1d2839cee7732b92868",
+      "source_under_test_sha": "b4d3393133cfe0b7727e74ad7bbd606e84fc21a6"
+    },
+    {
+      "batch_id": "D2-038",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-038.json",
+      "path": "scripts/release/netlify-draft-transaction.mjs",
+      "blob_sha": "1c4f79250ac441d801b98f5fbdb1cb5e357cfac8",
+      "range": [
+        1,
+        133
+      ],
+      "line_count": 133,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "da0680300a3e0b662f9670953c46bf407eaded46",
+      "locked_policy_supersession": "2026-11-02 #417 Git-connected-only publisher"
+    }
+  ],
+  "unique_source_lines_direct_reviewed": 1446,
+  "fully_reviewed_new_source_files": 38,
+  "nonoverlap": true,
+  "changed_existing_pinned_paths": "46 modified pinned eligible files, structural-only inventory docs/audits/issue267-v2-post-pin-tree-drift-20261105-post-D2-035.json",
+  "new_sql_migrations": "1 new migration structural-only; coordinate #96",
+  "remaining_added_code": "86 of 124 source candidates in original exact post-pin tree inventory lack full D2 receipts (newer live commit drift still requires reconciliation)",
+  "runtime_app_acceptance": "FOCUSED_LOCAL_NODE22_3_PASS_FULL_APP_AND_PRODUCTION_NOT_RUN",
+  "complete": false,
+  "physical_line_accounting_rule": "Count actual 1-based non-virtual lines; terminal newline alone is line delimiter, never an extra blank physical line. Preserve source-authenticated original receipt even when superseded by an append-only correction.",
+  "correction_references": [
+    {
+      "path": "docs/audits/issue267-v2-post-pin-direct-corrections/D2-001-006-virtual-eof-20261105.json",
+      "issue": 267,
+      "batches": [
+        "D2-001",
+        "D2-004",
+        "D2-005",
+        "D2-006"
+      ],
+      "incorrect_total": 207,
+      "corrected_valid_total": 203,
+      "subtract_phantom_records": 4
+    }
+  ],
+  "last_review_batch": "D2-038",
+  "last_review_source_commit": "da0680300a3e0b662f9670953c46bf407eaded46",
+  "last_review_note": "D2-038 complete 133 physical source lines of dormant/superseded direct Netlify API publisher; policy #417 Git-connected-only scope conflict risk not active caller proven. Cumulative 1446 original new post-pin lines/38 full files, no runtime edit or new tests.",
+  "live_source_blob_revalidations": [
+    {
+      "path": "scripts/release/request-encrypted-backup.mjs",
+      "original_batch": "D2-033",
+      "original_blob": "48c51a8ed3c89fcdcbc6626292e8fd9cedb540ba",
+      "corrected_live_blob": "fcaf3da25e8451455e177891d86b49317e3761e6",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-corrections/D2-033-live-postfix-20261105.json",
+      "exact_current_lines_read": 69,
+      "original_D2_line_credit": 0,
+      "dev_commit": "e995a2ecd677915290e183ab7c44cfb9675db32d"
+    }
+  ],
+  "latest_live_tree_drift_inventory": "docs/audits/issue267-v2-post-pin-tree-drift-20261105-post-D2-035.json",
+  "latest_live_tree_drift_commit": "e995a2ecd677915290e183ab7c44cfb9675db32d"
+}

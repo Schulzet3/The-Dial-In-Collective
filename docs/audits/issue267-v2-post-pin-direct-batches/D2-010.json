@@ -1,0 +1,373 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "D2-010",
+  "date_utc": "2026-11-05",
+  "kind": "POST_PIN_NEW_CODE_DIRECT_SEMANTIC_REVIEW",
+  "source": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "observed_live_commit": "99d5f5a3df6d42922c614189fca7b21ba86745cd",
+    "path": "tests/verified-dist-files.test.mjs",
+    "blob_sha": "02a5c5be45680e66de2e30e36524b910de192dde",
+    "physical_line_count": 13,
+    "verified_absent_at_pin": true,
+    "terminal_newline_not_physical_line": true
+  },
+  "method": "Direct AI interpretation after complete exact numbered file and caller/test read. Per-line separate nine dimensions and pinned absent confirmed by explicit 404. No independent human review or executed Node/Python tests. Original frozen line-one workflow refetched without duplicate credit.",
+  "per_line": [
+    {
+      "line": 1,
+      "source_text": "import test from 'node:test';",
+      "classification": "executable",
+      "behavior": "Imports Node built-in test runner",
+      "quality": "Uses standard Node22 harness",
+      "risk": "No runtime risk in test import",
+      "dead_or_obsolete": "Live regression still relevant to helper",
+      "duplication": "Shared test framework, not duplicate business logic",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/verified-dist-files.test.mjs",
+        "commit": "99d5f5a3df6d42922c614189fca7b21ba86745cd",
+        "blob_sha": "02a5c5be45680e66de2e30e36524b910de192dde",
+        "line": 1,
+        "exact_original": true
+      },
+      "testability": "Node --test can run scoped file; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "Keep",
+      "locked_fit": "#417/#457 latest explicit Locked: one authorized Git-connected release route; only development read-only audit here, no deployment or direct provider writes.",
+      "review_method": "Direct AI source interpretation tests/verified-dist-files.test.mjs:1, original blob 02a5c5be45680e66de2e30e36524b910de192dde; no independent human certification."
+    },
+    {
+      "line": 2,
+      "source_text": "import assert from 'node:assert/strict';",
+      "classification": "executable",
+      "behavior": "Imports strict assertions",
+      "quality": "Typed expectations",
+      "risk": "No risk",
+      "dead_or_obsolete": "Required test dependency",
+      "duplication": "Shared package import standard",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/verified-dist-files.test.mjs",
+        "commit": "99d5f5a3df6d42922c614189fca7b21ba86745cd",
+        "blob_sha": "02a5c5be45680e66de2e30e36524b910de192dde",
+        "line": 2,
+        "exact_original": true
+      },
+      "testability": "Node22 assertion behavior; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "Keep",
+      "locked_fit": "#417/#457 latest explicit Locked: one authorized Git-connected release route; only development read-only audit here, no deployment or direct provider writes.",
+      "review_method": "Direct AI source interpretation tests/verified-dist-files.test.mjs:2, original blob 02a5c5be45680e66de2e30e36524b910de192dde; no independent human certification."
+    },
+    {
+      "line": 3,
+      "source_text": "import {verifiedDistFiles} from '../scripts/release/verified-dist-files.mjs';",
+      "classification": "executable",
+      "behavior": "Imports production helper relative to test",
+      "quality": "Tests real module rather than mocked implementation",
+      "risk": "No risk by itself",
+      "dead_or_obsolete": "Helper remains imported by retrieval path",
+      "duplication": "No identical independent harness found",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/verified-dist-files.test.mjs",
+        "commit": "99d5f5a3df6d42922c614189fca7b21ba86745cd",
+        "blob_sha": "02a5c5be45680e66de2e30e36524b910de192dde",
+        "line": 3,
+        "exact_original": true
+      },
+      "testability": "Import smoke + fixtures; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "Keep",
+      "locked_fit": "#417/#457 latest explicit Locked: one authorized Git-connected release route; only development read-only audit here, no deployment or direct provider writes.",
+      "review_method": "Direct AI source interpretation tests/verified-dist-files.test.mjs:3, original blob 02a5c5be45680e66de2e30e36524b910de192dde; no independent human certification."
+    },
+    {
+      "line": 4,
+      "source_text": "const fn=Buffer.concat([Buffer.from('PK'),Buffer.alloc(130)]);",
+      "classification": "executable",
+      "behavior": "Builds synthetic PK-prefixed function byte buffer",
+      "quality": "Cheap signature/size fixture, not real valid zip",
+      "risk": "May miss malformed but PK-prefixed function archive; no false actual ZIP validation claim",
+      "dead_or_obsolete": "Only accepted mock for pure digest builder",
+      "duplication": "Reusable across two tests",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/verified-dist-files.test.mjs",
+        "commit": "99d5f5a3df6d42922c614189fca7b21ba86745cd",
+        "blob_sha": "02a5c5be45680e66de2e30e36524b910de192dde",
+        "line": 4,
+        "exact_original": true
+      },
+      "testability": "Add real signed ZIP fixture only if scoped functionality requires; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "Do not claim actual deploy archive test",
+      "locked_fit": "#417/#457 latest explicit Locked: one authorized Git-connected release route; only development read-only audit here, no deployment or direct provider writes.",
+      "review_method": "Direct AI source interpretation tests/verified-dist-files.test.mjs:4, original blob 02a5c5be45680e66de2e30e36524b910de192dde; no independent human certification."
+    },
+    {
+      "line": 5,
+      "source_text": "test('verified ZIP manifest is passed to static and function digest checks',()=>{",
+      "classification": "executable",
+      "behavior": "Declares positive manifest/hash test",
+      "quality": "Names assertion scope accurately",
+      "risk": "Title can sound broader than mocked runner",
+      "dead_or_obsolete": "Current pure mapping behavior",
+      "duplication": "Does not duplicate security auth test",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/verified-dist-files.test.mjs",
+        "commit": "99d5f5a3df6d42922c614189fca7b21ba86745cd",
+        "blob_sha": "02a5c5be45680e66de2e30e36524b910de192dde",
+        "line": 5,
+        "exact_original": true
+      },
+      "testability": "Run focused Node unit test; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "Keep as bounded synthetic test",
+      "locked_fit": "#417/#457 latest explicit Locked: one authorized Git-connected release route; only development read-only audit here, no deployment or direct provider writes.",
+      "review_method": "Direct AI source interpretation tests/verified-dist-files.test.mjs:5, original blob 02a5c5be45680e66de2e30e36524b910de192dde; no independent human certification."
+    },
+    {
+      "line": 6,
+      "source_text": " const r=verifiedDistFiles({zipPath:'fake.zip',functionZip:fn,",
+      "classification": "executable",
+      "behavior": "Calls helper with fake path and synthetic functionZIP",
+      "quality": "Deliberate runner injection avoids disk",
+      "risk": "Does not exercise actual Python subprocess or upstream SHA receipt",
+      "dead_or_obsolete": "Synthetic expected boundary",
+      "duplication": "Distinct from full certified artifact retrieval test",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/verified-dist-files.test.mjs",
+        "commit": "99d5f5a3df6d42922c614189fca7b21ba86745cd",
+        "blob_sha": "02a5c5be45680e66de2e30e36524b910de192dde",
+        "line": 6,
+        "exact_original": true
+      },
+      "testability": "Use real immutable ZIP in separate integration if required; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "Keep test bounded",
+      "locked_fit": "#417/#457 latest explicit Locked: one authorized Git-connected release route; only development read-only audit here, no deployment or direct provider writes.",
+      "review_method": "Direct AI source interpretation tests/verified-dist-files.test.mjs:6, original blob 02a5c5be45680e66de2e30e36524b910de192dde; no independent human certification."
+    },
+    {
+      "line": 7,
+      "source_text": " runner:()=>JSON.stringify({'/index.html':Buffer.from('ok').toString('base64')})});",
+      "classification": "executable",
+      "behavior": "Runner returns JSON with base64-encoded /index.html",
+      "quality": "Controls known bytes for deterministic hash",
+      "risk": "No path boundary tested in this positive case",
+      "dead_or_obsolete": "Valid fixture",
+      "duplication": "Base64 test payload is local, no private data",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/verified-dist-files.test.mjs",
+        "commit": "99d5f5a3df6d42922c614189fca7b21ba86745cd",
+        "blob_sha": "02a5c5be45680e66de2e30e36524b910de192dde",
+        "line": 7,
+        "exact_original": true
+      },
+      "testability": "Check decode exactly matches 'ok'; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "Keep",
+      "locked_fit": "#417/#457 latest explicit Locked: one authorized Git-connected release route; only development read-only audit here, no deployment or direct provider writes.",
+      "review_method": "Direct AI source interpretation tests/verified-dist-files.test.mjs:7, original blob 02a5c5be45680e66de2e30e36524b910de192dde; no independent human certification."
+    },
+    {
+      "line": 8,
+      "source_text": " assert.equal(r.files['/index.html'].toString(),'ok');",
+      "classification": "executable",
+      "behavior": "Asserts decoded /index.html is 'ok'",
+      "quality": "Verifies base64->Buffer roundtrip",
+      "risk": "Only one file and short content",
+      "dead_or_obsolete": "Required precision test",
+      "duplication": "No redundant identical assertion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/verified-dist-files.test.mjs",
+        "commit": "99d5f5a3df6d42922c614189fca7b21ba86745cd",
+        "blob_sha": "02a5c5be45680e66de2e30e36524b910de192dde",
+        "line": 8,
+        "exact_original": true
+      },
+      "testability": "Run Node22 scoped test; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "Keep",
+      "locked_fit": "#417/#457 latest explicit Locked: one authorized Git-connected release route; only development read-only audit here, no deployment or direct provider writes.",
+      "review_method": "Direct AI source interpretation tests/verified-dist-files.test.mjs:8, original blob 02a5c5be45680e66de2e30e36524b910de192dde; no independent human certification."
+    },
+    {
+      "line": 9,
+      "source_text": " assert.equal(r.manifest.functions['coffee-url-preview'],r.functionHash);",
+      "classification": "executable",
+      "behavior": "Asserts manifest function digest agrees with returned hash",
+      "quality": "Checks digest consistency within same helper",
+      "risk": "Does not independently compare SHA to expected known constant; correlated implementation error possible",
+      "dead_or_obsolete": "Useful consistency guard",
+      "duplication": "Separate absolute fixture would strengthen regression",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/verified-dist-files.test.mjs",
+        "commit": "99d5f5a3df6d42922c614189fca7b21ba86745cd",
+        "blob_sha": "02a5c5be45680e66de2e30e36524b910de192dde",
+        "line": 9,
+        "exact_original": true
+      },
+      "testability": "Compare externally computed expected hash fixture if needed; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "No production patch without actual failure",
+      "locked_fit": "#417/#457 latest explicit Locked: one authorized Git-connected release route; only development read-only audit here, no deployment or direct provider writes.",
+      "review_method": "Direct AI source interpretation tests/verified-dist-files.test.mjs:9, original blob 02a5c5be45680e66de2e30e36524b910de192dde; no independent human certification."
+    },
+    {
+      "line": 10,
+      "source_text": "});",
+      "classification": "executable",
+      "behavior": "Closes positive test",
+      "quality": "Structural no-op",
+      "risk": "No direct risk",
+      "dead_or_obsolete": "Test syntax",
+      "duplication": "No duplicate",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/verified-dist-files.test.mjs",
+        "commit": "99d5f5a3df6d42922c614189fca7b21ba86745cd",
+        "blob_sha": "02a5c5be45680e66de2e30e36524b910de192dde",
+        "line": 10,
+        "exact_original": true
+      },
+      "testability": "Node parse; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "Keep",
+      "locked_fit": "#417/#457 latest explicit Locked: one authorized Git-connected release route; only development read-only audit here, no deployment or direct provider writes.",
+      "review_method": "Direct AI source interpretation tests/verified-dist-files.test.mjs:10, original blob 02a5c5be45680e66de2e30e36524b910de192dde; no independent human certification."
+    },
+    {
+      "line": 11,
+      "source_text": "test('invalid ZIP extraction fails closed',()=>{",
+      "classification": "executable",
+      "behavior": "Declares invalid ZIP extraction negative case",
+      "quality": "Labels mocked output, not actual archive failure",
+      "risk": "Name could overstate Python archive coverage",
+      "dead_or_obsolete": "Current validator path check tested",
+      "duplication": "Not a real ZIP extraction test",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/verified-dist-files.test.mjs",
+        "commit": "99d5f5a3df6d42922c614189fca7b21ba86745cd",
+        "blob_sha": "02a5c5be45680e66de2e30e36524b910de192dde",
+        "line": 11,
+        "exact_original": true
+      },
+      "testability": "Test injected path traversal independently; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "Clarify wording in future test cleanup if useful",
+      "locked_fit": "#417/#457 latest explicit Locked: one authorized Git-connected release route; only development read-only audit here, no deployment or direct provider writes.",
+      "review_method": "Direct AI source interpretation tests/verified-dist-files.test.mjs:11, original blob 02a5c5be45680e66de2e30e36524b910de192dde; no independent human certification."
+    },
+    {
+      "line": 12,
+      "source_text": " assert.throws(()=>verifiedDistFiles({zipPath:'fake.zip',functionZip:fn,runner:()=>JSON.stringify({'/../bad':'YQ=='})}));",
+      "classification": "executable",
+      "behavior": "Asserts /../bad key rejection from injected JSON runner",
+      "quality": "Exercises downstream digest manifest path safety; no disk I/O",
+      "risk": "Does not test ZIP central-directory traversal prevention in Python",
+      "dead_or_obsolete": "Necessary adversarial path test",
+      "duplication": "Complements Python ZIP-member validation",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/verified-dist-files.test.mjs",
+        "commit": "99d5f5a3df6d42922c614189fca7b21ba86745cd",
+        "blob_sha": "02a5c5be45680e66de2e30e36524b910de192dde",
+        "line": 12,
+        "exact_original": true
+      },
+      "testability": "Separate test actual malicious ZIP using Python fixture; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "Preserve; not a complete ZIP security certification",
+      "locked_fit": "#417/#457 latest explicit Locked: one authorized Git-connected release route; only development read-only audit here, no deployment or direct provider writes.",
+      "review_method": "Direct AI source interpretation tests/verified-dist-files.test.mjs:12, original blob 02a5c5be45680e66de2e30e36524b910de192dde; no independent human certification."
+    },
+    {
+      "line": 13,
+      "source_text": "});",
+      "classification": "executable",
+      "behavior": "Closes negative test",
+      "quality": "Structural no-op",
+      "risk": "No direct risk",
+      "dead_or_obsolete": "Needed syntax",
+      "duplication": "No duplicate",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/verified-dist-files.test.mjs",
+        "commit": "99d5f5a3df6d42922c614189fca7b21ba86745cd",
+        "blob_sha": "02a5c5be45680e66de2e30e36524b910de192dde",
+        "line": 13,
+        "exact_original": true
+      },
+      "testability": "Node parse; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "Keep",
+      "locked_fit": "#417/#457 latest explicit Locked: one authorized Git-connected release route; only development read-only audit here, no deployment or direct provider writes.",
+      "review_method": "Direct AI source interpretation tests/verified-dist-files.test.mjs:13, original blob 02a5c5be45680e66de2e30e36524b910de192dde; no independent human certification."
+    }
+  ],
+  "source_bound_coverage": {
+    "range": [
+      1,
+      13
+    ],
+    "distinct_physical_lines": 13,
+    "nonoverlap_with_existing_D2": true
+  },
+  "findings": [
+    {
+      "disposition": "TRIAGED_NO_CHANGE",
+      "summary": "Runner mock tests do not exercise genuine ZIP/receipt integration; current caller separately checks sidecars, exact-source CI, certificate and function digest. Keep verification boundary explicit."
+    }
+  ],
+  "runtime_tests": "NOT_RUN_DOC_ONLY",
+  "complete": false
+}

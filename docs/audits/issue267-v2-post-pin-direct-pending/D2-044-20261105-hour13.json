@@ -1,0 +1,16 @@
+{
+  "issue": 267,
+  "status": "PENDING_SEPARATE_NONOVERLAP_RECEIPT",
+  "date_utc": "2026-11-05",
+  "source_commit": "42d1f888a0bd78662b13e48396cbd40119a58e63",
+  "batch_id": "D2-044",
+  "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-044.json",
+  "original_test_blob_sha": "d6c36dae8c8dfefceeb72a339b0510b8de5ee374",
+  "original_test_lines": 21,
+  "new_test_blob_sha": "3c7e7c14db41df7aac68a63407f8df29390ead98",
+  "original_packager_blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+  "new_packager_blob_sha": "45614de2ab5581c587557cc6b7b7d7dfafee1a83",
+  "canonical_credit": 0,
+  "reason": "Concurrent #835 owns central ledger; #769 owns strict S2; do not overwrite.",
+  "next_step": "Run exact-source CI; merge safely after conflict check; reconcile receipt and live script/test drift as separate, independently inspected evidence."
+}

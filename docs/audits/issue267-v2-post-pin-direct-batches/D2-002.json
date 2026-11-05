@@ -1,0 +1,1212 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "D2-002",
+  "date_utc": "2026-11-05",
+  "kind": "NEW_CODE_POST_PIN_DIRECT_SEMANTIC_REVIEW",
+  "source_snapshot": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "observed_live_commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+    "source_path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+    "live_blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+    "original_pinned_path_absent": true,
+    "source_lines": 46
+  },
+  "method": "Independent exact numbered live workflow lines 1-46 directly inspected against SHA-bound content, scripts/release/netlify-live-readback.mjs and scripts/release/production-readonly-smoke.mjs. Nine individual semantic criteria each. Distinct D2-002 file; D2-001 and S2 historical/pinned prefixes untouched. GitHub pinned path 404, inventory listed path added. Source SHA unchanged from drift snapshot. No deployment, secrets, provider writes, runtime invocation or owner release permission.",
+  "per_line": [
+    {
+      "line": 1,
+      "source_text": "name: DIC post-release read-only production smoke",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Workflow title declares a post-release, nonmutating smoke check",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Title alone cannot prove nonmutation",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "Read-only release verification overlaps no source-level S2 audit",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 1
+      },
+      "testability": "Check workflow name vs triggers; no run claimed",
+      "fix_opportunity": "No title change indicated",
+      "locked_fit": "Owner-only release; verification distinct from publication",
+      "review_method": "Direct semantic consideration of exact original source line 1 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 2,
+      "source_text": "on:",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Starts GitHub event trigger mapping",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Incomplete by itself; child events control scope",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No duplication identified in mapping key",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 2
+      },
+      "testability": "Validate YAML trigger structure",
+      "fix_opportunity": "None",
+      "locked_fit": "Post-release only",
+      "review_method": "Direct semantic consideration of exact original source line 2 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 3,
+      "source_text": "  workflow_dispatch:",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Allows manual dispatch from eligible refs",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Manual trigger can be selected on nonrelease ref but job guard prevents execution",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "Manual support supplements release push",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 3
+      },
+      "testability": "Check manual ref guard and default-branch discoverability",
+      "fix_opportunity": "Verify UI availability once published; no change now",
+      "locked_fit": "Must not let manual dispatch publish",
+      "review_method": "Direct semantic consideration of exact original source line 3 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 4,
+      "source_text": "  push:",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Declares push trigger",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Release-branch pushes invoke jobs after a commit, not before deployment",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "Release approval not represented by push alone",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 4
+      },
+      "testability": "Inspect branch whitelist",
+      "fix_opportunity": "None",
+      "locked_fit": "No automated publishing permitted",
+      "review_method": "Direct semantic consideration of exact original source line 4 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 5,
+      "source_text": "    branches: [release/production]",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Restricts push to release/production",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Any pushed release commit triggers smoke; GitHub event is not proof Netlify published",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No other branch push trigger",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 5
+      },
+      "testability": "Check branch exact name and release authority",
+      "fix_opportunity": "No change without release owner",
+      "locked_fit": "Release-only postflight",
+      "review_method": "Direct semantic consideration of exact original source line 5 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 6,
+      "source_text": "permissions:",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Sets workflow permission scope",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Subordinate contents permission is read-only",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "Standard hardening reused in workflows",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 6
+      },
+      "testability": "Inspect permission descendants",
+      "fix_opportunity": "None",
+      "locked_fit": "Least privilege",
+      "review_method": "Direct semantic consideration of exact original source line 6 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 7,
+      "source_text": "  contents: read",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Scopes GITHUB_TOKEN to contents read",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Netlify token is separate secret; checkout has read-only token scope",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "Comparable to other CI checkout jobs",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 7
+      },
+      "testability": "Confirm no write permission keys",
+      "fix_opportunity": "None",
+      "locked_fit": "No Git write / history mutation",
+      "review_method": "Direct semantic consideration of exact original source line 7 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 8,
+      "source_text": "concurrency:",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Declares concurrency policy",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Shared concurrency group serializes this workflow regardless of event SHA",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No known duplicated concurrency lock",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 8
+      },
+      "testability": "Compare group scope to number of simultaneous releases",
+      "fix_opportunity": "Could include SHA if queue starvation proven, not now",
+      "locked_fit": "Postflight must not cancel release checks",
+      "review_method": "Direct semantic consideration of exact original source line 8 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 9,
+      "source_text": "  group: dic-post-release-readonly-smoke",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Fixed group key across runs",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Concurrent release commits may queue and delay readback rather than validate stale deploy",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "Not a duplicate consumer",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 9
+      },
+      "testability": "Check pending run ordering on real release",
+      "fix_opportunity": "Monitor queue latency, no proven defect",
+      "locked_fit": "Exact SHA is independently checked below",
+      "review_method": "Direct semantic consideration of exact original source line 9 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 10,
+      "source_text": "  cancel-in-progress: false",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Disables cancellation of existing run",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Old checks can finish after new publication; SHA mismatch should fail old run",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No redundant cancellation configured",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 10
+      },
+      "testability": "Inspect per-run expected SHA",
+      "fix_opportunity": "Consider gated cancellation after owner review",
+      "locked_fit": "No false release PASS",
+      "review_method": "Direct semantic consideration of exact original source line 10 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 11,
+      "source_text": "jobs:",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Defines jobs mapping",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Structural YAML container; no operational effect alone",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No redundant job declared here",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 11
+      },
+      "testability": "YAML schema inspection",
+      "fix_opportunity": "None",
+      "locked_fit": "Read-only postflight",
+      "review_method": "Direct semantic consideration of exact original source line 11 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 12,
+      "source_text": "  public-smoke:",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Creates public-smoke job",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Single job executes two sequential read-only checks",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No split/repeated job",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 12
+      },
+      "testability": "Check ordered steps",
+      "fix_opportunity": "None",
+      "locked_fit": "No publication operation",
+      "review_method": "Direct semantic consideration of exact original source line 12 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 13,
+      "source_text": "    # Manual dispatch on other branches must not exercise or credit a release.",
+      "classification": "post_pin_comment_direct_inspected",
+      "behavior": "Comment explains manual-ref restriction",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's comment is nonenforcing.",
+      "risk": "Comment is nonenforcing, must compare to if guard",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "Not executable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 13
+      },
+      "testability": "Read guard following line",
+      "fix_opportunity": "None",
+      "locked_fit": "Prevent nonrelease release credit",
+      "review_method": "Direct semantic consideration of exact original source line 13 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 14,
+      "source_text": "    if: github.ref == 'refs/heads/release/production'",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Job if checks exact release ref",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Prevents manual dispatch on development/main from accessing Netlify token in this job",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "Other workflows may be independently triggered",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 14
+      },
+      "testability": "Check exact GitHub ref condition",
+      "fix_opportunity": "No change; risk depends on protection of release ref",
+      "locked_fit": "Only release/production checked",
+      "review_method": "Direct semantic consideration of exact original source line 14 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 15,
+      "source_text": "    runs-on: ubuntu-latest",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Chooses ubuntu-latest runner",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Moving runner image can change build tools, though no build here",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "Standard CI runner choice",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 15
+      },
+      "testability": "Check workflow run environment",
+      "fix_opportunity": "Consider pinned OS only if reproducibility failure",
+      "locked_fit": "No release artifact created",
+      "review_method": "Direct semantic consideration of exact original source line 15 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 16,
+      "source_text": "    timeout-minutes: 10",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Sets ten-minute job deadline",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Two loops at up to ~180s sleep each + scripts/runner overhead can fit 600s",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "Unique timeout for this job",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 16
+      },
+      "testability": "Budget worst-case retry plus network timeouts",
+      "fix_opportunity": "Monitor timeout with real run",
+      "locked_fit": "Read-only health attempts bounded",
+      "review_method": "Direct semantic consideration of exact original source line 16 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 17,
+      "source_text": "    steps:",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Begins ordered steps list",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "YAML structural line; each step inspected below",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No extra steps",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 17
+      },
+      "testability": "YAML parse",
+      "fix_opportunity": "None",
+      "locked_fit": "No write operation",
+      "review_method": "Direct semantic consideration of exact original source line 17 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 18,
+      "source_text": "      - uses: actions/checkout@v4",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Checks out source at event SHA",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Action code runs in job receiving Netlify token later; trust release source",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "Standard checkout",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 18
+      },
+      "testability": "Check checkout version and credentials",
+      "fix_opportunity": "No change unless untrusted commit risk established",
+      "locked_fit": "Exact release source required",
+      "review_method": "Direct semantic consideration of exact original source line 18 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 19,
+      "source_text": "        with:",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Configures checkout options",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Subkey for pinned commit and credential persistence",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No repeated checkout config",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 19
+      },
+      "testability": "Inspect ref and persist flags",
+      "fix_opportunity": "None",
+      "locked_fit": "Read-only release code",
+      "review_method": "Direct semantic consideration of exact original source line 19 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 20,
+      "source_text": "          # Audit the exact release event commit, not mutable development HEAD.",
+      "classification": "post_pin_comment_direct_inspected",
+      "behavior": "Comment records immutable-event intent",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's comment is nonenforcing.",
+      "risk": "Comment not itself an enforcement mechanism",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No duplication",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 20
+      },
+      "testability": "Compare checkout ref field",
+      "fix_opportunity": "None",
+      "locked_fit": "Source-bound verification",
+      "review_method": "Direct semantic consideration of exact original source line 20 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 21,
+      "source_text": "          ref: ${{ github.sha }}",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Pins checkout to github.sha event commit",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "If workflow runs on pushed release, github.sha is release commit; manual ref guard likewise",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "Not mutable development HEAD",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 21
+      },
+      "testability": "Check run sha against branch",
+      "fix_opportunity": "None",
+      "locked_fit": "Prevent testing wrong source",
+      "review_method": "Direct semantic consideration of exact original source line 21 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 22,
+      "source_text": "          persist-credentials: false",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Disables Git credential persistence",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Limits availability of GITHUB_TOKEN in checked-out scripts; Netlify secret remains in later step",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "Security pattern reused",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 22
+      },
+      "testability": "Inspect action parameter",
+      "fix_opportunity": "None",
+      "locked_fit": "Least privilege",
+      "review_method": "Direct semantic consideration of exact original source line 22 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 23,
+      "source_text": "      - uses: actions/setup-node@v4",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Installs Node runtime",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Action supply-chain trust must be maintained; @v4 is not SHA pinned",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "Standard setup-node step",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 23
+      },
+      "testability": "Check action version health",
+      "fix_opportunity": "Future pin to digest if approved",
+      "locked_fit": "Tooling only",
+      "review_method": "Direct semantic consideration of exact original source line 23 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 24,
+      "source_text": "        with:",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Starts setup-node options",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "YAML structural configuration",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No duplicate runtime",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 24
+      },
+      "testability": "Inspect child node-version",
+      "fix_opportunity": "None",
+      "locked_fit": "No app code mutation",
+      "review_method": "Direct semantic consideration of exact original source line 24 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 25,
+      "source_text": "          node-version: '22'",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Selects Node 22",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Matches project-required runtime for provider check and public route smoke",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No duplicate Node install",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 25
+      },
+      "testability": "Check script compatibility",
+      "fix_opportunity": "None",
+      "locked_fit": "Node 22 acceptance",
+      "review_method": "Direct semantic consideration of exact original source line 25 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 26,
+      "source_text": "      - name: Verify exact current Netlify provider deployment (read-only)",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Names provider readback step",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Name accurately distinguishes provider from public routes",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No second provider query in same workflow",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 26
+      },
+      "testability": "Observe step results separately",
+      "fix_opportunity": "None",
+      "locked_fit": "Provider SHA required",
+      "review_method": "Direct semantic consideration of exact original source line 26 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 27,
+      "source_text": "        env:",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Defines environment for readback",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Only first step receives token, not public smoke step",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No sharing to entire job",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 27
+      },
+      "testability": "Verify ENV scope",
+      "fix_opportunity": "None",
+      "locked_fit": "Minimize secret exposure",
+      "review_method": "Direct semantic consideration of exact original source line 27 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 28,
+      "source_text": "          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Injects Netlify secret from GitHub Secrets",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Secret exposed to trusted release branch script; compromised branch source could misuse token; no breach proven",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "Single token readback step",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 28
+      },
+      "testability": "Check provider script uses GET only; branch policies",
+      "fix_opportunity": "Prefer least-privileged token and release SHA integrity review",
+      "locked_fit": "Read-only provider operations",
+      "review_method": "Direct semantic consideration of exact original source line 28 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 29,
+      "source_text": "          DIC_EXPECTED_RELEASE_SHA: ${{ github.sha }}",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Supplies expected release commit SHA",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Backend validates SHA format and matches provider published source; not a publish approval",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No other SHA source",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 29
+      },
+      "testability": "Inspect assertNetlifyPublishedSource call",
+      "fix_opportunity": "None",
+      "locked_fit": "No READY/publish bypass",
+      "review_method": "Direct semantic consideration of exact original source line 29 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 30,
+      "source_text": "        run: |",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Starts multiline shell provider probe",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Shell block loops until positive verification or deadline",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No other shell write here",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 30
+      },
+      "testability": "Inspect exact loop body",
+      "fix_opportunity": "None",
+      "locked_fit": "Nonmutating checks",
+      "review_method": "Direct semantic consideration of exact original source line 30 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 31,
+      "source_text": "          for attempt in 1 2 3 4 5 6 7 8 9 10; do",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Runs at most 10 provider-readback attempts",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Repeated GETs can consume API quota but bounded; a failure exits only at end",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "Sequential retries of same endpoint deliberately handle eventual consistency",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 31
+      },
+      "testability": "Check exit statuses and retries",
+      "fix_opportunity": "No change without observed failure",
+      "locked_fit": "Read-only GET verification",
+      "review_method": "Direct semantic consideration of exact original source line 31 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 32,
+      "source_text": "            if node scripts/release/netlify-live-readback.mjs; then exit 0; fi",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Invokes node provider readback, exits success only on zero exit",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Readback script GETs Netlify site/deploy and asserts published SHA/function route",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No duplicate claim of public route availability",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 32
+      },
+      "testability": "Inspect netlify-live-readback.mjs and provider assertion",
+      "fix_opportunity": "Monitor provider schema drift",
+      "locked_fit": "Provider/source verified separately",
+      "review_method": "Direct semantic consideration of exact original source line 32 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 33,
+      "source_text": "            if [ \"$attempt\" -lt 10 ]; then sleep 20; fi",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Sleeps 20s between failed attempts except last",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Worst-case 180s wait for provider, reducing false failure during deploy propagation",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No repeated uncontrolled retries",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 33
+      },
+      "testability": "Validate total bound",
+      "fix_opportunity": "Tune delay only with observed timings",
+      "locked_fit": "Does not trigger deployment",
+      "review_method": "Direct semantic consideration of exact original source line 33 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 34,
+      "source_text": "          done",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Closes provider for loop",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Shell syntactic closure",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No duplication",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 34
+      },
+      "testability": "Shell syntax",
+      "fix_opportunity": "None",
+      "locked_fit": "No mutation",
+      "review_method": "Direct semantic consideration of exact original source line 34 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 35,
+      "source_text": "          exit 1",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Fails job if no provider success",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Fail-closed release SHA/health signal; no green if provider doesn't match",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "Complementary public smoke fail below",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 35
+      },
+      "testability": "Negative probe expected nonzero",
+      "fix_opportunity": "None",
+      "locked_fit": "Never claim published without receipt",
+      "review_method": "Direct semantic consideration of exact original source line 35 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 36,
+      "source_text": "      - name: Wait for public deployment and verify read-only routes",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Names separate public-route smoke step",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Public paths alone cannot prove source identity; previous step gates it",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "Distinct from provider verification",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 36
+      },
+      "testability": "Inspect routes and nonauth behavior",
+      "fix_opportunity": "None",
+      "locked_fit": "No member credentials",
+      "review_method": "Direct semantic consideration of exact original source line 36 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 37,
+      "source_text": "        shell: bash",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Selects bash shell explicitly",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Consistent semantics for loops and conditionals",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No other shell override",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 37
+      },
+      "testability": "Shell syntax",
+      "fix_opportunity": "None",
+      "locked_fit": "No write",
+      "review_method": "Direct semantic consideration of exact original source line 37 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 38,
+      "source_text": "        run: |",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Begins multiline public smoke shell",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Shell control block only",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No duplicated command",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 38
+      },
+      "testability": "Inspect contained loop",
+      "fix_opportunity": "None",
+      "locked_fit": "No deployment action",
+      "review_method": "Direct semantic consideration of exact original source line 38 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 39,
+      "source_text": "          for attempt in 1 2 3 4 5 6 7 8 9 10; do",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Runs at most 10 public-route attempts",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Read-only GET retries bounded, may cause traffic but modest",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "Second check verifies different layer",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 39
+      },
+      "testability": "Check paths/HTTP GET in script",
+      "fix_opportunity": "No change",
+      "locked_fit": "Nonmutating smoke",
+      "review_method": "Direct semantic consideration of exact original source line 39 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 40,
+      "source_text": "            if node scripts/release/production-readonly-smoke.mjs; then",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Runs production-readonly-smoke.mjs, branch-independent script but guard on job",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Script restricts https://app.dialincollective.com and 3 read-only paths",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No user/private endpoint",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 40
+      },
+      "testability": "Inspect script allowlist and origin guard",
+      "fix_opportunity": "None",
+      "locked_fit": "No account/shot writes",
+      "review_method": "Direct semantic consideration of exact original source line 40 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 41,
+      "source_text": "              echo 'Public read-only routes respond; provider SHA/readiness remains a separate required receipt.'",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Echoes public route response message after success",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Message explicitly reminds provider verification is a separate required receipt",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "Not proof of real Auth/offline/mobile",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 41
+      },
+      "testability": "Inspect action log placement",
+      "fix_opportunity": "None",
+      "locked_fit": "Avoid overstating release acceptance",
+      "review_method": "Direct semantic consideration of exact original source line 41 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 42,
+      "source_text": "              exit 0",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Exits zero when public smoke succeeds",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "First provider step already must succeed for subsequent step under default success conditions",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No unconditional PASS",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 42
+      },
+      "testability": "Test synthetic success/error paths",
+      "fix_opportunity": "None",
+      "locked_fit": "Green only for both smoke layers",
+      "review_method": "Direct semantic consideration of exact original source line 42 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 43,
+      "source_text": "            fi",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Closes success-if block",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Shell syntactic line",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No duplicate",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 43
+      },
+      "testability": "Shell syntax",
+      "fix_opportunity": "None",
+      "locked_fit": "No operation",
+      "review_method": "Direct semantic consideration of exact original source line 43 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 44,
+      "source_text": "            if [ \"$attempt\" -lt 10 ]; then sleep 20; fi",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Sleeps 20s except last after failed route read",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Wait bounded, no new traffic on sleep",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "Analogous but separate layer to provider retry",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 44
+      },
+      "testability": "Check timer budget",
+      "fix_opportunity": "Tune on empirical data only",
+      "locked_fit": "No writes",
+      "review_method": "Direct semantic consideration of exact original source line 44 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 45,
+      "source_text": "          done",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Closes public smoke loop",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Shell syntactic line",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "No duplicate",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 45
+      },
+      "testability": "Shell syntax",
+      "fix_opportunity": "None",
+      "locked_fit": "No mutation",
+      "review_method": "Direct semantic consideration of exact original source line 45 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    },
+    {
+      "line": 46,
+      "source_text": "          exit 1",
+      "classification": "post_pin_yaml_executable_or_structural_direct_inspected",
+      "behavior": "Exits nonzero if all route probes fail",
+      "quality": "Compared numbered Git source against same-blob current source and enclosing workflow semantics; this line's YAML/shell meaning is contextual.",
+      "risk": "Rejects false positive on empty/bad responses, complements helper content type/body checks",
+      "dead_or_obsolete": "New post-pin release workflow, no demonstrated unused line; retain pending release owner tests.",
+      "duplication": "Two-layer fail-close mechanism",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "9f0602b5400aeb1fa06ca95890251a1fe5b82c9d",
+        "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+        "blob_sha": "7c13246cec3cf171577391c289df995f9462c3c1",
+        "line": 46
+      },
+      "testability": "Read helper 200 status and body checks",
+      "fix_opportunity": "None",
+      "locked_fit": "No publish approval conferred",
+      "review_method": "Direct semantic consideration of exact original source line 46 in complete 46-line workflow; nine distinct fields, source and surrounding callers explicitly read; not human or runtime certification."
+    }
+  ],
+  "checks": {
+    "lines_fetched": 46,
+    "per_line_records": 46,
+    "nine_dimensions": true,
+    "original_live_blob_exact": true,
+    "pinned_absence_checked_against_436_file_inventory": true,
+    "post_pin_full_tree_added_source_bound": true,
+    "public_route_script_read": true,
+    "netlify_provider_get_only_script_read": true,
+    "actual_workflow_execution": "NOT_RUN",
+    "provider_execution": "NOT_RUN",
+    "full_live_semantic_drift": "INCOMPLETE",
+    "exact_CI": "PENDING"
+  },
+  "findings": [
+    {
+      "severity": "OBSERVATION",
+      "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+      "line": 9,
+      "description": "Single concurrency group and cancel-in-progress:false may queue successive release verification runs; false publication certification guarded by expected source SHA; no active failure reproduced.",
+      "disposition": "MONITOR_RELEASE_QUEUE_NO_FIX"
+    },
+    {
+      "severity": "SECURITY_HARDENING",
+      "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+      "line": 28,
+      "description": "Release-source script receives NETLIFY_AUTH_TOKEN, so branch/source trust and minimal provider token scope matter. Readback script examined and makes GET calls; no secret exposure or exploit demonstrated.",
+      "disposition": "TRIAGE_RELEASE_AUTH_OWNER_NO_SECRET_OR_PROVIDER_CHANGE"
+    },
+    {
+      "severity": "ACCEPTANCE_SCOPE",
+      "path": ".github/workflows/dic-post-release-readonly-smoke.yml",
+      "line": 39,
+      "description": "Public GET checks cannot substitute for signed-in Auth, mobile/offline, provider deployment integrity or full acceptance; sequential provider verification is separate.",
+      "disposition": "RETAIN_SEPARATE_ACCEPTANCE_GATES"
+    }
+  ],
+  "next": {
+    "new_code_files_from_machine_inventory_remaining": 105,
+    "post_pin_modified_pinned_files_pending": 45,
+    "sql_migration_path_pending": 1,
+    "source_pinned_drift_inventory_recheck_on_live_change": true
+  },
+  "complete": false
+}

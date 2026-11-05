@@ -1,0 +1,678 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "D2-028",
+  "date_utc": "2026-11-05",
+  "kind": "POST_PIN_NEW_CODE_DIRECT_SEMANTIC_REVIEW",
+  "source": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "observed_live_commit": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+    "path": "tests/ci-certificate.test.mjs",
+    "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+    "physical_line_count": 25,
+    "verified_absent_at_pin": true,
+    "terminal_newline_not_physical_line": true
+  },
+  "method": "Each literal numbered original source line directly read and independently described by AI (not human), nine per-line dimensions. No inventory, regex or AST scan counted for semantic coverage.",
+  "per_line": [
+    {
+      "line": 1,
+      "source_text": "import test from 'node:test';",
+      "classification": "test_executable",
+      "behavior": "Imports node:test",
+      "quality": "Built-in runner",
+      "risk": "No production effect",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 1,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 2,
+      "source_text": "import assert from 'node:assert/strict';",
+      "classification": "test_executable",
+      "behavior": "Imports strict assertions",
+      "quality": "Strict equality",
+      "risk": "No production effect",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 2,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 3,
+      "source_text": "import {readFileSync} from 'node:fs';",
+      "classification": "test_executable",
+      "behavior": "Imports source reader",
+      "quality": "Direct file read",
+      "risk": "No production effect",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 3,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 4,
+      "source_text": "test('CI certificate binds exact source and does not claim publication',()=>{",
+      "classification": "test_executable",
+      "behavior": "Starts textual generator contract test",
+      "quality": "Textual not behavioral",
+      "risk": "Claims not validated dynamically",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 4,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 5,
+      "source_text": " const s=readFileSync(new URL('../scripts/release/write-ci-certificate.mjs',import.meta.url),'utf8');",
+      "classification": "test_executable",
+      "behavior": "Reads generator source by file URL",
+      "quality": "Robust relative URL",
+      "risk": "Source may differ from running module",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 5,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 6,
+      "source_text": " assert.match(s,/sha!==head/);",
+      "classification": "test_executable",
+      "behavior": "Matches source identity comparison text",
+      "quality": "Only regex not runtime",
+      "risk": "Regex survives unreachable code",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 6,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 7,
+      "source_text": " assert.match(s,/NOT_RELEASE_APPROVAL/);",
+      "classification": "test_executable",
+      "behavior": "Matches nonapproval marker text",
+      "quality": "Only marker existence",
+      "risk": "Marker text may be stale",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 7,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 8,
+      "source_text": " assert.match(s,/github_run_id/);",
+      "classification": "test_executable",
+      "behavior": "Matches run-ID property name",
+      "quality": "Only field existence",
+      "risk": "Presence not provenance",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 8,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 9,
+      "source_text": "});",
+      "classification": "test_executable",
+      "behavior": "Closes first test",
+      "quality": "Test structure correct",
+      "risk": "N/A",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 9,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 10,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank separator",
+      "quality": "Whitespace",
+      "risk": "N/A",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 10,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 11,
+      "source_text": "test('certificate explicitly distinguishes safe READY from no batch and blocked source',async()=>{",
+      "classification": "test_executable",
+      "behavior": "Starts classifier mapping test",
+      "quality": "Distinct classification scope",
+      "risk": "Only mapper in memory",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 11,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 12,
+      "source_text": " const {classifyBatch}=await import('../scripts/release/ci-batch-classification.mjs');",
+      "classification": "test_executable",
+      "behavior": "Dynamically imports real classifier",
+      "quality": "Actual mapper exercised",
+      "risk": "No CI certificate invocation",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 12,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 13,
+      "source_text": " assert.equal(classifyBatch({ready:true,ready_items:[{id:'A'}],deployable_paths:['site/a'],errors:[]}), 'CERTIFIED_READY_SOURCE');",
+      "classification": "test_executable",
+      "behavior": "Asserts positive READY classification",
+      "quality": "Tests READY branch",
+      "risk": "No approval proof",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 13,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 14,
+      "source_text": " assert.equal(classifyBatch({ready:false,ready_items:[],deployable_paths:[],errors:['No new deployable application changes since published source']}),'NO_BATCH');",
+      "classification": "test_executable",
+      "behavior": "Asserts empty-diff NO_BATCH classification",
+      "quality": "Tests NO_BATCH branch",
+      "risk": "Sentinel string sensitive",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 14,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 15,
+      "source_text": " assert.equal(classifyBatch({ready:false,ready_items:[],deployable_paths:['site/a'],errors:['Unqueued or not-ready deployable file: site/a']}),'BLOCKED_NOT_RELEASABLE');",
+      "classification": "test_executable",
+      "behavior": "Asserts uncovered deployment BLOCKED classification",
+      "quality": "Tests blocked deployable",
+      "risk": "No checkout/CI simulation",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 15,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 16,
+      "source_text": " assert.equal(classifyBatch({ready:false,ready_items:[{id:'A'}],deployable_paths:['site/a'],errors:['unready']}),'BLOCKED_NOT_RELEASABLE');",
+      "classification": "test_executable",
+      "behavior": "Asserts an unready item stays BLOCKED",
+      "quality": "Tests blocked unready item",
+      "risk": "Only classifier mapping",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 16,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 17,
+      "source_text": "});",
+      "classification": "test_executable",
+      "behavior": "Closes second test",
+      "quality": "Test structure correct",
+      "risk": "N/A",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 17,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 18,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Blank separator",
+      "quality": "Whitespace",
+      "risk": "N/A",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 18,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 19,
+      "source_text": "test('READY certificate cannot be issued without the exact hashed immutable artifact',()=>{",
+      "classification": "test_executable",
+      "behavior": "Names artifact-missing test though only regex checks follow",
+      "quality": "Title broader than behavior",
+      "risk": "Misleading test name",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 19,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 20,
+      "source_text": " const s=readFileSync(new URL('../scripts/release/write-ci-certificate.mjs',import.meta.url),'utf8');",
+      "classification": "test_executable",
+      "behavior": "Reads certificate generator source as text",
+      "quality": "No generator execution",
+      "risk": "No generator invocation",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 20,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 21,
+      "source_text": " assert.match(s,/CERTIFIED_READY_SOURCE'&&!artifactHash/);",
+      "classification": "test_executable",
+      "behavior": "Matches missing artifact guard syntax",
+      "quality": "Cannot show actual throw",
+      "risk": "Guard could be unreachable",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 21,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 22,
+      "source_text": " assert.match(s,/createHash\\('sha256'\\)/);",
+      "classification": "test_executable",
+      "behavior": "Matches createHash SHA256 syntax",
+      "quality": "Cannot prove exact archive digest",
+      "risk": "No actual SHA computation",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 22,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 23,
+      "source_text": " assert.match(s,/immutable_artifact_sha256:artifactHash/);",
+      "classification": "test_executable",
+      "behavior": "Matches artifact hash property text",
+      "quality": "Cannot show actual integrity",
+      "risk": "No archive bytes hashed",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 23,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 24,
+      "source_text": " assert.match(s,/immutable_artifact_name:artifactHash\\?/);",
+      "classification": "test_executable",
+      "behavior": "Matches artifact naming ternary text",
+      "quality": "Cannot show correct SHA name",
+      "risk": "No source binding assertion",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 24,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    },
+    {
+      "line": 25,
+      "source_text": "});",
+      "classification": "test_executable",
+      "behavior": "Closes static source test",
+      "quality": "Test structure correct",
+      "risk": "N/A",
+      "dead_or_obsolete": "Test file currently exists. Actual invocation/obsolete status not proven; its static assertions do not prove active legacy release path.",
+      "duplication": "Some checks redundantly assert source strings, not a separately demonstrated CI execution; no safe redundant deletion established.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "sha": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_fetch_404": true
+      },
+      "live_current_counterpart": {
+        "path": "tests/ci-certificate.test.mjs",
+        "sha": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+        "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+        "physical_line": 25,
+        "source_text_matches": true
+      },
+      "testability": "Node22 `node --test tests/ci-certificate.test.mjs`; NOT executed in docs-only review.",
+      "fix_opportunity": "If active, test generator execution, missing artifacts, exact CI run evidence and status vs NOT_APPLICABLE; retain accepted results without repeated suites.",
+      "locked_fit": "#417 sole Git-connected publisher; #457 risk-adapted exact-source tests and explicit NOT_APPLICABLE. Nothing here grants production publication.",
+      "review_method": "Direct AI line-specific semantic review, no independent human certification."
+    }
+  ],
+  "context": {
+    "independent_first_file_revalidation": "Fetched original frozen and pinned workflow file 1 lines 1–41, verified same blob and inspected prior segment semantics without new coverage credit.",
+    "caller": "Current .github/workflows/dic-ready-batch-certification.yml is a manual, no-artifact source-only workflow and does not call this generator. All other callers not proven absent.",
+    "finding": "Static generator field verified_checks unconditionally lists node/cloud/lint/build; possible misleading certificate under #457, active runtime use not reproduced.",
+    "disposition": "Do not remove or modify legacy source until comprehensive caller/provenance verification and risk-appropriate reproduction.",
+    "tests_run": "NO_RUNTIME_TESTS_DOC_ONLY",
+    "original603": "NOT_RUN",
+    "production": "NO_ACTION"
+  }
+}

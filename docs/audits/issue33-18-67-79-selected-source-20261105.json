@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "date_utc": "2026-11-05",
+  "status": "NARROW_18_ORIGIN_VERIFIED_READY_PARENT_OPEN",
+  "scope": "three distinct original603 cases #18/#67/#79; current selected H1/HTTPS/body/real parser/Add Coffee diagnosis",
+  "authority_issue_url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+  "source_branch": "development/backend-foundation",
+  "base_sha": "311ebae016d3d008620eb74de9f01033d6ddb2e7",
+  "base_tree_sha": "ccc1f7fa2cf177a469c9f8daec3b780fcbd3ed48",
+  "selected_case_numbers": [
+    18,
+    67,
+    79
+  ],
+  "workflow_selector": "[dic-issue33-twentyninth3]",
+  "immutable_original603_csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "source_review_grade": "FRESH_OFFICIAL_RENDERED_TEXT_ONLY; raw guarded HTTPS/HTML SHA and current parser not yet executed",
+  "sources": [
+    {
+      "number": 18,
+      "coffee": "Be Bright Honduras Sebastian Mejia Parainema Natural",
+      "url": "https://bebrightcoffee.com/products/honduras-sebastian-mejia-parainema-natural",
+      "selected_h1": "Honduras Sebastian Mejia Parainema Natural",
+      "selected_direct_evidence": "La Peña, Santa Barbara is the new beginning and Finca Gonzalo location; producer Sebastian Mejia; Natural Parainema, 1530m, pomelo/poached pear/vanilla/maraschino cherry",
+      "review_question": "Did current parser preserve selected farm locality or only Honduras? 20% light/80% dark meter is not directly a roast tier."
+    },
+    {
+      "number": 67,
+      "coffee": "ContempoRoast 1201 Blend",
+      "url": "https://contemporoast.com/products/1201-blend",
+      "selected_h1": "1201 Blend",
+      "selected_direct_evidence": "Regions Minas Gerais Brazil and Pitalito Huila Colombia; Natural & anaerobic washed constituent processes; 1100-1800m; whole-blend tasting notes",
+      "review_question": "Avoid interpreting one component lightly roasted as whole-blend Light; preserve both origins and mixed process without guessing."
+    },
+    {
+      "number": 79,
+      "coffee": "Columbia Street Roastery Burundi",
+      "url": "https://csrcoffee.com/products/burundi",
+      "selected_h1": "Burundi",
+      "review_question": "Historical parser Medium roast; inspect current exact selected H1, product-owned roast declaration versus sitewide roast/menu text; leave blank when unsupported."
+    }
+  ],
+  "protected": [
+    "frozen603 original coffees/201 roasters/1197 captures",
+    "original oracle",
+    "original scorer",
+    "603-row adjudication CSV",
+    "Locked decisions",
+    "member/auth/offline/Community state",
+    "#267 V2 separate scope",
+    "#96 authenticated security"
+  ],
+  "manual_certified": 0,
+  "full_original603_complete": false,
+  "public_probe_run": null,
+  "parser_verified": false,
+  "add_coffee_verified": false,
+  "all_fields_adjudicated": false,
+  "next": "Continue unresolved #33 selected coffees one by one with genuine current official source + current parser/explicit source roles and adversarial guards; preserve parent OPEN and remaining queue items. No release authorization.",
+  "no_deploy_or_production_writes": true,
+  "followup_basis_sha": "65ad35737e696418ea02c78f587e01c30e01ed73",
+  "exact_official_run": {
+    "run_id": 41952596816,
+    "job_id": 126999807512,
+    "merged_source_sha": "65ad35737e696418ea02c78f587e01c30e01ed73",
+    "conclusion": "SUCCESS",
+    "attempted": 3,
+    "fetched": 3,
+    "parsed": 3,
+    "add_coffee_previews": 3,
+    "source_review_rendered": 3,
+    "conflicts": 0,
+    "manual_certified": 0,
+    "artifact_id": 13381352798,
+    "artifact_zip_bytes": 217230,
+    "artifact_zip_sha256": "14282295f7a6a9031caa7cb567be3cc5d693a6f99739a4dd6cc0572c599a09f4",
+    "zip_independently_rehashed": true,
+    "source_html": [
+      {
+        "number": 18,
+        "bytes": 428666,
+        "sha256": "8e99028283caedf99e28cde3a6554720ecb78799e8bde2c181fa4311317f95f6",
+        "actual_fields": {
+          "origin": "Honduras",
+          "producer": "Sebastian Mejia",
+          "process": "Natural",
+          "variety": "Parainema",
+          "elevation_m": "1530 masl"
+        },
+        "finding": "Current exact selected About This Coffee paragraph names La Peña, Santa Barbara as the place of the family’s new beginning and immediately says There, Sebastian and his family invested in what is now Finca Gonzalo, a currently cultivated farm. Country-only origin is under-specific; no source-authorized fix yet."
+      },
+      {
+        "number": 67,
+        "bytes": 252283,
+        "sha256": "8e09b5b82065c8358f9351a3b98f9e12d077cce163bafcedb2e897e6adc0711e",
+        "actual_fields": {
+          "origin": "Minas Gerais, Brazil & Pitalito, Huila, Colombia",
+          "process": "Other/Unknown"
+        },
+        "finding": "Selected constituent origins and mixed processing preserved, only a Brazil component says lightly roasted; do not fill whole-blend roast."
+      },
+      {
+        "number": 79,
+        "bytes": 805575,
+        "sha256": "aa3310295bd11fd5a2a0a1de3ffdf628bde56225d9dd7b9d08c601e74b7b10cb",
+        "actual_fields": {
+          "origin": "Burundi",
+          "roast_level": "Medium"
+        },
+        "finding": "Current selected Shopify JSON product tags contain medium roast; despite prose not stating tier, current parser Medium has selected-product primary evidence."
+      }
+    ]
+  },
+  "fix": {
+    "pr_number": 670,
+    "merged_source_sha": "c3efe0a8709492622f500bfeccef9b5b9d65fa74",
+    "rule": "identity-matched present farm adjacent source sentence; exact selected producer and single country, no historical/other product locality",
+    "ready_state": "READY_NOT_DEPLOYED",
+    "source_approval_runs": [
+      41953495648,
+      41953495614,
+      41953495660,
+      41953495683
+    ],
+    "prior_selected_source_sha": "65ad35737e696418ea02c78f587e01c30e01ed73",
+    "after_selected_source_sha": "c3efe0a8709492622f500bfeccef9b5b9d65fa74",
+    "original_frozen603_csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "before": {
+      "run": 41952596816,
+      "artifact_id": 13381352798,
+      "artifact_zip_sha256": "14282295f7a6a9031caa7cb567be3cc5d693a6f99739a4dd6cc0572c599a09f4",
+      "origin_18": "Honduras",
+      "html_sha256_18": "8e99028283caedf99e28cde3a6554720ecb78799e8bde2c181fa4311317f95f6"
+    },
+    "after": {
+      "run": 41953495683,
+      "job": 127002732477,
+      "artifact_id": 13381866837,
+      "artifact_zip_sha256": "08bba50fae84ee2a4f3238956ab3c9393d115806e54cdce0848062988bd6ee16",
+      "artifact_bytes": 217240,
+      "origin_18": "La Peña, Santa Barbara, Honduras",
+      "html_sha256_18": "6f47d5abcb1aa9417a91dbc41ad7c55707735837b7199248887ef95268902a09",
+      "html_sha256_67": "40deb80e6e4e4b1c347d646f69bcd76c212551363ebfb7eca79e2ea80858351c",
+      "html_sha256_79": "3541f7fec3083f39b1386c40c7b91fecfc1a21c32563bc85d396559df2d21ab4"
+    },
+    "independent_zip_and_raw_hash_check": true,
+    "canonical_field_delta_18": {
+      "origin": {
+        "before": "Honduras",
+        "after": "La Peña, Santa Barbara, Honduras"
+      }
+    },
+    "unchanged": [
+      "#18 all other canonical fields",
+      "#67 all canonical fields",
+      "#79 all canonical fields",
+      "all three empty conflict arrays"
+    ],
+    "all_selected_h1": true,
+    "fetched": 3,
+    "parsed": 3,
+    "preview_and_source_review": 3,
+    "manual_certified": 0,
+    "full_603_semantic_acceptance": false
+  }
+}

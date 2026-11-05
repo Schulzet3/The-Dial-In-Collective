@@ -1,10 +1,14 @@
 import test from 'node:test';
+import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 import {chmodSync,mkdirSync,mkdtempSync,readFileSync,rmSync,writeFileSync} from 'node:fs';
 import {spawnSync} from 'node:child_process';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {decide} from '../scripts/netlify/should-ignore-build.mjs';
+
+const requirePublishedGitBlobSha=source=>createHash('sha1')
+ .update('blob '+Buffer.byteLength(source)+'\0').update(source).digest('hex');
 
 const release={context:'production',branch:'release/production',
  subject:'Release DIC: DIC-20261020-ONE123 [dic-publish]'};
@@ -15,16 +19,31 @@ test('strict release marker on dedicated branch authorizes build without any cre
   release_policy:{maximum_snapshot_age_days:0,post_release_billing_refresh_needed:true}
  }])assert.equal(decide({...release,ledger,today:'2099-01-01'}).ignore,false);
 });
-test('immutable release-claim skip marker suppresses Git-connected rebuild despite release subject',()=>{
+test('isolated READY candidates use the exact previously published guard, while upgraded guards enforce skip',()=>{
  const claim={...release,commitMessage:release.subject+'\n\n[skip netlify]\n'};
+ const source=readFileSync(new URL('../scripts/netlify/should-ignore-build.mjs',import.meta.url),'utf8');
+ let manifest=null;
+ try{manifest=JSON.parse(readFileSync(new URL('../docs/RELEASE_CANDIDATE.json',import.meta.url),'utf8'));}catch{}
+ const approvedRestoration=manifest?.kind==='DIC-READY-ONLY-SOURCE-1'&&
+  ['f1e150a2e7c95764c4a2d8760886aab23c2bfc5e','d9a9724773a59091cb44ba9cc148a2c459f64252'].includes(manifest.published_source_sha)&&
+  manifest.restored_to_published_paths?.includes('scripts/netlify/should-ignore-build.mjs');
+ if(approvedRestoration){
+  const blob=requirePublishedGitBlobSha(source);
+  assert.equal(blob,'22b4cd101006130513b45c6c5e932b5543ca8141',
+   'release isolation may use ONLY exact previously published Netlify guard bytes');
+  assert.equal(decide(claim).ignore,false,
+   'published guard allowed only exact release subjects; unfinished skip feature remains excluded');
+  assert.doesNotMatch(source,/--format=%B/);
+  return;
+ }
  assert.equal(decide(claim).ignore,true);
  assert.match(decide(claim).reason,/suppress Git-connected rebuild/);
  assert.equal(decide({...claim,commitMessage:release.subject+'\n\n[SKIP NETLIFY]\n'}).ignore,true);
  assert.equal(decide({...claim,commitMessage:release.subject+'\n\n[skip netlify-extra]'}).ignore,false);
- const source=readFileSync(new URL('../scripts/netlify/should-ignore-build.mjs',import.meta.url),'utf8');
  assert.match(source,/--format=%B/,'must inspect entire Git commit message, not just subject');
  assert.match(source,/subject,commitMessage/,'full commit message must reach the decision gate');
 });
+
 test('unmarked commits and non-release branches cannot build, independent of credits',()=>{
  for(const branch of ['main','development/backend-foundation','work/preview']){
   assert.equal(decide({...release,branch}).ignore,true);

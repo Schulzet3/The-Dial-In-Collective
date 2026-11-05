@@ -1,0 +1,747 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "D2-023",
+  "date_utc": "2026-11-05",
+  "kind": "POST_PIN_NEW_CODE_DIRECT_SEMANTIC_REVIEW",
+  "source": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "observed_live_commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+    "path": "scripts/release/unpack-certified-artifact.py",
+    "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+    "physical_line_count": 25,
+    "verified_absent_at_pin": true,
+    "terminal_newline_not_physical_line": true
+  },
+  "method": "Direct every numbered original physical line AI semantic consideration with nine distinct dimensions, not static/AST/inventory blanket certification.",
+  "per_line": [
+    {
+      "line": 1,
+      "source_text": "#!/usr/bin/env python3",
+      "classification": "metadata",
+      "behavior": "Executable Python3 shebang; script is callable as tool",
+      "quality": "Explicit interpreter designation",
+      "risk": "No proof of runtime version or signed provenance in shebang",
+      "dead_or_obsolete": "Current source documentation; no standalone execution",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 1,
+        "exact_text_match": true
+      },
+      "testability": "Run python3 -m py_compile",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 1 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 2,
+      "source_text": "\"\"\"Strictly unpack only expected GitHub Actions artifact members, never arbitrary paths.\"\"\"",
+      "classification": "comment",
+      "behavior": "Module docstring states exact-member extraction policy",
+      "quality": "Useful boundary claim for maintainers",
+      "risk": "Intent is not proof; implementation checks required",
+      "dead_or_obsolete": "Current source documentation; no standalone execution",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 2,
+        "exact_text_match": true
+      },
+      "testability": "Compare allowed sets and extraction",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 2 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 3,
+      "source_text": "import pathlib,sys,zipfile",
+      "classification": "import",
+      "behavior": "Imports path manipulation, CLI args and ZIP support",
+      "quality": "Stdlib-only imports reduce dependency drift",
+      "risk": "ZIP files are still untrusted until validated",
+      "dead_or_obsolete": "Reachable from release-bundle retrieval or tests; no proven dead executable line.",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 3,
+        "exact_text_match": true
+      },
+      "testability": "Syntax/import test",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 3 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 4,
+      "source_text": "DIST={'dist-immutable.zip','dist-immutable.zip.sha256',",
+      "classification": "constant",
+      "behavior": "Begins exact 4-member dist archive allowlist",
+      "quality": "Whitelist bounds accepted filenames",
+      "risk": "List spans next line; no wildcard allowed",
+      "dead_or_obsolete": "Reachable from release-bundle retrieval or tests; no proven dead executable line.",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 4,
+        "exact_text_match": true
+      },
+      "testability": "Dist positive/negative fixture",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 4 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 5,
+      "source_text": "      'coffee-url-preview-function.zip','coffee-url-preview-function.zip.sha256'}",
+      "classification": "constant",
+      "behavior": "Completes dist allowlist including function zip and both SHA sidecars",
+      "quality": "Dist content and sidecars both required",
+      "risk": "All four names must be distinct; defined as set",
+      "dead_or_obsolete": "Reachable from release-bundle retrieval or tests; no proven dead executable line.",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 5,
+        "exact_text_match": true
+      },
+      "testability": "Missing-sidecar test",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 5 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 6,
+      "source_text": "CERT={'CI_CERTIFICATE.json'}",
+      "classification": "constant",
+      "behavior": "Defines certificate archive as exactly one CI_CERTIFICATE.json",
+      "quality": "Separates proof from deployable ZIP",
+      "risk": "Filename match is not certificate authenticity",
+      "dead_or_obsolete": "Reachable from release-bundle retrieval or tests; no proven dead executable line.",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 6,
+        "exact_text_match": true
+      },
+      "testability": "Certificate negative fixture",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 6 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 7,
+      "source_text": "def unpack(archive,destination,kind):",
+      "classification": "function",
+      "behavior": "Defines strict extraction entrypoint with archive, destination and kind",
+      "quality": "Single helper used by exact-source release bundle reader",
+      "risk": "Calling outside bounded temp root would require separate authority",
+      "dead_or_obsolete": "Reachable from release-bundle retrieval or tests; no proven dead executable line.",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 7,
+        "exact_text_match": true
+      },
+      "testability": "Call fixture with temp directory",
+      "fix_opportunity": "No removal",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 7 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 8,
+      "source_text": "    expected=DIST if kind=='dist' else CERT if kind=='certificate' else None",
+      "classification": "branch",
+      "behavior": "Selects DIST or CERT whitelist by explicit kind",
+      "quality": "Fail-safe conditional selects nothing on unknown kind",
+      "risk": "Other strings map None rather than permissive default",
+      "dead_or_obsolete": "Reachable from release-bundle retrieval or tests; no proven dead executable line.",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 8,
+        "exact_text_match": true
+      },
+      "testability": "Test invalid kind",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 8 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 9,
+      "source_text": "    if expected is None:raise ValueError('Unknown artifact kind')",
+      "classification": "guard",
+      "behavior": "Raises on unknown artifact kind",
+      "quality": "Fail closed before any filesystem creation",
+      "risk": "No silent fallback",
+      "dead_or_obsolete": "Reachable from release-bundle retrieval or tests; no proven dead executable line.",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 9,
+        "exact_text_match": true
+      },
+      "testability": "Unknown kind fixture",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 9 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 10,
+      "source_text": "    destination=pathlib.Path(destination);destination.mkdir(parents=True,exist_ok=True)",
+      "classification": "call",
+      "behavior": "Creates destination directory recursively",
+      "quality": "Ensures valid output location exists",
+      "risk": "Creation occurs before archive validation; caller uses isolated temporary path",
+      "dead_or_obsolete": "Reachable from release-bundle retrieval or tests; no proven dead executable line.",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 10,
+        "exact_text_match": true
+      },
+      "testability": "Check temp cleanup in caller",
+      "fix_opportunity": "No active defect in isolated caller",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 10 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 11,
+      "source_text": "    with zipfile.ZipFile(archive) as z:",
+      "classification": "call",
+      "behavior": "Opens ZIP with context manager",
+      "quality": "Closes handle on exit or exception",
+      "risk": "ZIP may be corrupt or compressed-bomb-like; subsequent limits apply",
+      "dead_or_obsolete": "Reachable from release-bundle retrieval or tests; no proven dead executable line.",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 11,
+        "exact_text_match": true
+      },
+      "testability": "Corrupt ZIP fixture",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 11 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 12,
+      "source_text": "        infos=z.infolist()",
+      "classification": "call",
+      "behavior": "Reads ZIP central-directory metadata list",
+      "quality": "Enables count/name and safety validation",
+      "risk": "Metadata itself may be malicious; trust still withheld",
+      "dead_or_obsolete": "Reachable from release-bundle retrieval or tests; no proven dead executable line.",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 12,
+        "exact_text_match": true
+      },
+      "testability": "Malformed archive fixture",
+      "fix_opportunity": "No verified exploit",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 12 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 13,
+      "source_text": "        if len(infos)!=len(expected) or {x.filename for x in infos}!=expected:",
+      "classification": "guard",
+      "behavior": "Rejects wrong member count or nonexact set of names",
+      "quality": "Prevents duplicate member names, traversal and extras by equality",
+      "risk": "Exact set does not alone validate decompressed contents",
+      "dead_or_obsolete": "Reachable from release-bundle retrieval or tests; no proven dead executable line.",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 13,
+        "exact_text_match": true
+      },
+      "testability": "Extra/missing/duplicate fixture",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 13 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 14,
+      "source_text": "            raise ValueError('Artifact members do not match exact manifest')",
+      "classification": "error",
+      "behavior": "Raises if member identity fails",
+      "quality": "No extraction should begin for malformed name inventory",
+      "risk": "Destination root may already exist; temp caller cleans",
+      "dead_or_obsolete": "Reachable from release-bundle retrieval or tests; no proven dead executable line.",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 14,
+        "exact_text_match": true
+      },
+      "testability": "Test no extracted members on rejection",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 14 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 15,
+      "source_text": "        for item in infos:",
+      "classification": "loop",
+      "behavior": "Iterates each validated directory entry for size/type checks and extraction",
+      "quality": "Allows distinct expected files to be processed",
+      "risk": "Sequential validation/extraction means later invalid entry can leave earlier files until caller cleanup",
+      "dead_or_obsolete": "Reachable from release-bundle retrieval or tests; no proven dead executable line.",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 15,
+        "exact_text_match": true
+      },
+      "testability": "Invalid later ZIP entry fixture",
+      "fix_opportunity": "Consider atomic validation only if caller cleanup insufficiency demonstrated",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 15 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 16,
+      "source_text": "            mode=item.external_attr>>16",
+      "classification": "assignment",
+      "behavior": "Reads Unix file mode from ZIP external_attr",
+      "quality": "Input type check uses archive metadata",
+      "risk": "ZIP mode may be zero for archives from non-Unix tools",
+      "dead_or_obsolete": "Reachable from release-bundle retrieval or tests; no proven dead executable line.",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 16,
+        "exact_text_match": true
+      },
+      "testability": "Symlink/regular type fixture",
+      "fix_opportunity": "Keep conservative type allowlist",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 16 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 17,
+      "source_text": "            if item.is_dir() or item.file_size<=0 or item.file_size>100_000_000 or (",
+      "classification": "guard",
+      "behavior": "Rejects directories, zero-byte files and members exceeding 100 MB uncompressed",
+      "quality": "Per-entry decompressed size cap limits allocation",
+      "risk": "Aggregate four-file memory/disk still larger; all limits not comprehensively benchmarked",
+      "dead_or_obsolete": "Reachable from release-bundle retrieval or tests; no proven dead executable line.",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 17,
+        "exact_text_match": true
+      },
+      "testability": "Empty/large/dir ZIP fixtures",
+      "fix_opportunity": "Benchmark before resource modification",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 17 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 18,
+      "source_text": "                (mode & 0o170000) not in (0,0o100000)):",
+      "classification": "guard",
+      "behavior": "Rejects Unix types other than unspecified or regular file",
+      "quality": "Blocks symlink/device/archive types by POSIX bits",
+      "risk": "Some ZIP makers omit mode, accepted by policy",
+      "dead_or_obsolete": "Reachable from release-bundle retrieval or tests; no proven dead executable line.",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 18,
+        "exact_text_match": true
+      },
+      "testability": "Symlink file-mode fixture",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 18 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 19,
+      "source_text": "                raise ValueError('Unsafe artifact member')",
+      "classification": "error",
+      "behavior": "Raises for unsafe individual member",
+      "quality": "Fail closed for each validated ZIP member",
+      "risk": "If failure occurs late, caller's finally removes temp directory",
+      "dead_or_obsolete": "Reachable from release-bundle retrieval or tests; no proven dead executable line.",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 19,
+        "exact_text_match": true
+      },
+      "testability": "Late failure/cleanup integration fixture",
+      "fix_opportunity": "No speculative patch",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 19 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 20,
+      "source_text": "            dest=destination/item.filename",
+      "classification": "assignment",
+      "behavior": "Constructs output path from validated exact member name",
+      "quality": "No arbitrary ZIP filename accepted",
+      "risk": "No traversal if expected whitelist preserved",
+      "dead_or_obsolete": "Reachable from release-bundle retrieval or tests; no proven dead executable line.",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 20,
+        "exact_text_match": true
+      },
+      "testability": "Traversal fixture",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 20 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 21,
+      "source_text": "            with dest.open('xb') as out:out.write(z.read(item))",
+      "classification": "call",
+      "behavior": "Opens destination exclusively and writes decompressed member bytes",
+      "quality": "Refuses overwriting existing outputs with xb",
+      "risk": "z.read allocates complete 100 MB member in memory; total over four members could be substantial",
+      "dead_or_obsolete": "Reachable from release-bundle retrieval or tests; no proven dead executable line.",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 21,
+        "exact_text_match": true
+      },
+      "testability": "Focused large ZIP benchmark in isolated temp env only",
+      "fix_opportunity": "Do not alter until measured need",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 21 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 22,
+      "source_text": "    return {name:str(destination/name) for name in expected}",
+      "classification": "return",
+      "behavior": "Returns expected filenames mapped to destination paths",
+      "quality": "Downstream code can resolve required four files",
+      "risk": "Returns file paths, not cryptographic verification",
+      "dead_or_obsolete": "Reachable from release-bundle retrieval or tests; no proven dead executable line.",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 22,
+        "exact_text_match": true
+      },
+      "testability": "Run caller sidecar/hash check",
+      "fix_opportunity": "Keep stage separation",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 22 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 23,
+      "source_text": "if __name__=='__main__':",
+      "classification": "guard",
+      "behavior": "Limits CLI behavior to explicit invocation",
+      "quality": "Avoids execution on import in unit tests",
+      "risk": "No issue",
+      "dead_or_obsolete": "Reachable from release-bundle retrieval or tests; no proven dead executable line.",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 23,
+        "exact_text_match": true
+      },
+      "testability": "Import fixture",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 23 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 24,
+      "source_text": "    if len(sys.argv)!=4:raise SystemExit('Usage: unpack-certified-artifact.py ZIP DEST dist|certificate')",
+      "classification": "guard",
+      "behavior": "Requires exact three CLI arguments plus program name",
+      "quality": "Rejects incomplete/cross-kind CLI requests",
+      "risk": "Does not validate directory's trust; caller controls it",
+      "dead_or_obsolete": "Reachable from release-bundle retrieval or tests; no proven dead executable line.",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 24,
+        "exact_text_match": true
+      },
+      "testability": "Bad argv subprocess fixture",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 24 and test/caller context; not independent human certification."
+    },
+    {
+      "line": 25,
+      "source_text": "    unpack(sys.argv[1],sys.argv[2],sys.argv[3])",
+      "classification": "call",
+      "behavior": "Invokes extraction using positional archive,destination,kind arguments",
+      "quality": "Direct helper invocation used by parent Node execFileSync",
+      "risk": "No independent publication or network side effect",
+      "dead_or_obsolete": "Reachable from release-bundle retrieval or tests; no proven dead executable line.",
+      "duplication": "No redundant production execution proven; file coordinates separate archive structural checks and downstream source/sha/certificate verification.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Direct exact-GitHub-file 404 at pinned commit"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/unpack-certified-artifact.py",
+        "commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+        "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+        "line": 25,
+        "exact_text_match": true
+      },
+      "testability": "Parent `retrieveVerifiedReleaseBundle` path",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Owner Locked #417/#457: Git-connected single-use publisher only, no independent artifact-API publishing; guardrail code/tests preserve release safety.",
+      "review_method": "AI direct, literal, numbered original source line 25 and test/caller context; not independent human certification."
+    }
+  ],
+  "traced_callers_and_tests": {
+    "caller": "scripts/release/retrieve-certified-release-bundle.mjs:53-82",
+    "test": "tests/unpack-certified-artifact.test.py",
+    "production_cleanup": "Caller finally rmSync(downloaded.temporary_dir) on failure and success."
+  },
+  "independent_first_line_prior_v2_revalidation": {
+    "original_path": ".github/workflows/approval-continuity.yml",
+    "frozen_blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+    "physical_source_lines": 41,
+    "previous_receipt": "docs/audits/issue267-v2-strict-batches/S2-001.json",
+    "sampled_records": [
+      {
+        "line": 1,
+        "text_matches": true,
+        "dimensions_present": true
+      },
+      {
+        "line": 2,
+        "text_matches": true,
+        "dimensions_present": true
+      },
+      {
+        "line": 17,
+        "text_matches": true,
+        "dimensions_present": true
+      },
+      {
+        "line": 31,
+        "text_matches": true,
+        "dimensions_present": true
+      },
+      {
+        "line": 41,
+        "text_matches": true,
+        "dimensions_present": true
+      }
+    ],
+    "additional_credited_lines": 0,
+    "scope_limit": "Not an exhaustive revalidation of all earlier V2 receipts."
+  },
+  "finding_and_disposition": {
+    "confirmed_active_bug": "NONE_REPRODUCED",
+    "potential_risks": [
+      "Whole-member `z.read` peak memory up to 100 MB each; aggregate four archive members may be costly if compressed.",
+      "Sequential extraction may leave partial files on helper failure, but exact caller cleans temporary directory via finally.",
+      "Existing unittest tests exact names but not size/mode/oversize/duplicates/partial cleanup."
+    ],
+    "triage": "Risk hypotheses and test gaps, not confirmed exploit. No deletion or code change justified before reproducing on exact active path.",
+    "tests_executed": "NONE_DOCS_ONLY",
+    "current_code_changes": "NONE",
+    "original603": "NOT_RUN",
+    "production_provider_member_writes": "NONE"
+  }
+}

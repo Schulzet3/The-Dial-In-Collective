@@ -50,7 +50,9 @@ export function hydrate(raw){
  // Restore it after hydration so the recipe card and latest-shot advice agree.
  const latestByVersion=new Map();
  for(const sh of s.shots){
-  if(sh.hidden)continue;
+  // Legacy rows without a usable date remain saved, but cannot be the latest
+  // recipe-feedback observation or an ordering anchor.
+  if(sh.hidden||typeof sh.timestamp!=='string'||!sh.timestamp.trim())continue;
   if(!latestByVersion.has(sh.setupVersionId))latestByVersion.set(sh.setupVersionId,new Map());
   const byCoffee=latestByVersion.get(sh.setupVersionId);
   if(!byCoffee.has(sh.coffeeId))byCoffee.set(sh.coffeeId,new Map());

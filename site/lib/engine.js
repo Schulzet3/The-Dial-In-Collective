@@ -136,8 +136,11 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
  const sameOld=qual.filter(sh=>sh.coffeeId===c.id&&sh.calibrationId!==v.calibrationId&&sh.setupVersionId===v.id&&(!familyId||sh.familyId===familyId));
  // Old calibration rows may legitimately seed an estimated translation, but
  // legacy rows without an equipment snapshot must not yield null guidance.
- const translated=sameOld.filter(sh=>sh.snapshot&&sh.timestamp)
-  .sort((a,b)=>b.timestamp.localeCompare(a.timestamp))
+ // Legacy success records without a parseable chronological timestamp remain
+ // preserved, but cannot establish the latest previous-calibration reference.
+ const translated=sameOld.filter(sh=>sh.snapshot&&typeof sh.timestamp==='string'&&sh.timestamp.trim()&&
+   Number.isFinite(Date.parse(sh.timestamp)))
+  .sort((a,b)=>Date.parse(b.timestamp)-Date.parse(a.timestamp))
   .map(sh=>translateGrind(sh,v)).find(finite);
  if(finite(translated))return {value:translated,source:'Estimated from previous calibration',proven:false};
  const rank=roastIndex(c.roastLevel);
@@ -188,13 +191,14 @@ export function learnSensitivity(shots) {
  const groups=new Map();
  for(const s of shots){
   // Legacy and offline entries can be partial. Only complete measured inputs
-  // with ordered timestamps can calibrate a grind-to-time response.
+  // with parseable instants can calibrate a grind-to-time response.
   if(!finite(s.grindSetting)||!finite(s.timeS)||s.timeS<=0||
      !finite(s.doseG)||s.doseG<=0||!finite(s.yieldG)||s.yieldG<=0||
-     s.hidden||s.feedMode==null||typeof s.timestamp!=='string'||!s.timestamp)continue;const key=[s.coffeeId,s.style,s.setupVersionId,s.calibrationId,s.basketId,s.feedMode].join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(s);}
+     s.hidden||s.feedMode==null||typeof s.timestamp!=='string'||!s.timestamp.trim()||
+     !Number.isFinite(Date.parse(s.timestamp)))continue;const key=[s.coffeeId,s.style,s.setupVersionId,s.calibrationId,s.basketId,s.feedMode].join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(s);}
  const slopes=[];
  for(const group of groups.values()){
-  group.sort((a,b)=>a.timestamp.localeCompare(b.timestamp));
+  group.sort((a,b)=>Date.parse(a.timestamp)-Date.parse(b.timestamp));
   for(let i=1;i<group.length;i++){
    const a=group[i-1],b=group[i],dg=b.grindSetting-a.grindSetting;
    if(Math.abs(dg)<.09||Math.abs(a.doseG-b.doseG)>.6||Math.abs(a.yieldG-b.yieldG)>3)continue;
@@ -353,7 +357,7 @@ export function recommendation(s,coffeeId,options={}) {
  rec.style=style;rec.basketId=basket.id;rec.feedMode=feed;
  rec.yield={low:round(rec.ratio.low*rec.doseG),high:round(rec.ratio.high*rec.doseG),center:round(rec.ratio.center*rec.doseG)};
  // Successful shot families are chosen independently of any retired Experiment workflow.
- const last=s.shots.filter(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.basketId===basket.id&&sh.feedMode===feed&&sh.calibrationId===v.calibrationId).sort((a,b)=>b.timestamp.localeCompare(a.timestamp))[0];
+ const last=s.shots.filter(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.basketId===basket.id&&sh.feedMode===feed&&sh.calibrationId===v.calibrationId&&typeof sh.timestamp==='string'&&sh.timestamp.trim()&&Number.isFinite(Date.parse(sh.timestamp))).sort((a,b)=>Date.parse(b.timestamp)-Date.parse(a.timestamp))[0];
  if(!options.ignoreAdvice&&last&&!hasLocalSuccess(s,coffeeId,style)){
   // Keep the recipe card consistent with fresh taste feedback, even before a
   // derived suggestion is cached (e.g. immediately after an offline shot).
@@ -405,7 +409,7 @@ export function recommendation(s,coffeeId,options={}) {
 }
 export function prefill(s,coffeeId,options={}) {
  const v=activeVersion(s),p=coffeeState(s,coffeeId),basket=v.baskets.find(x=>x.id===options.basketId)||selectedBasket(s,coffeeId),style=options.style||p.style,feed=options.feedMode||feedMode(v);
- const shots=s.shots.filter(x=>!x.hidden&&x.coffeeId===coffeeId&&x.setupVersionId===v.id).sort((a,b)=>b.timestamp.localeCompare(a.timestamp));
+ const shots=s.shots.filter(x=>!x.hidden&&x.coffeeId===coffeeId&&x.setupVersionId===v.id&&typeof x.timestamp==='string'&&x.timestamp.trim()&&Number.isFinite(Date.parse(x.timestamp))).sort((a,b)=>Date.parse(b.timestamp)-Date.parse(a.timestamp));
  const doses=shots.filter(x=>x.basketId===basket.id),grinds=shots.filter(x=>x.basketId===basket.id&&x.style===style&&x.feedMode===feed&&x.calibrationId===v.calibrationId&&finite(x.grindSetting));
  const temps=shots.filter(x=>finite(x.tempC)),same=temps.find(x=>x.style===style),temp=same||temps[0];
  return {doseG:doses[0]?.doseG??basket.doseG,yieldG:'',timeS:'',grindSetting:grinds[0]?.grindSetting??'',tempC:v.advanced.temperature?(temp?.tempC??null):null,tempSource:temp&&temp.style!==style?`Last used on ${temp.style}`:'',style,basketId:basket.id,feedMode:feed,tasteScales:{extraction:null,body:null,clarity:null,sweetness:null,astringency:null},notes:''};
@@ -428,10 +432,14 @@ function yieldTarget(shot,direction,anchor=shot.yieldG){
 // and all four other green sensory ratings. This is not causal proof.
 function comparableSweetnessYields(s,shot){
  const keys=['coffeeId','setupVersionId','calibrationId','style','basketId','feedMode'];
- if(keys.some(key=>shot[key]==null)||typeof shot.timestamp!=='string')return [];
+ // ISO timestamps with explicit offsets must be ordered by actual instants,
+ // not by lexical text; an invalid legacy date cannot establish chronology.
+ const shotAt=typeof shot.timestamp==='string'?Date.parse(shot.timestamp):NaN;
+ if(keys.some(key=>shot[key]==null)||!Number.isFinite(shotAt))return [];
  return s.shots.filter(prior=>{
   if(prior.id===shot.id||prior.hidden||keys.some(key=>prior[key]!==shot[key]))return false;
-  if(typeof prior.timestamp!=='string'||prior.timestamp>=shot.timestamp)return false;
+  const priorAt=typeof prior.timestamp==='string'?Date.parse(prior.timestamp):NaN;
+  if(!Number.isFinite(priorAt)||priorAt>=shotAt)return false;
   if(!finite(prior.doseG)||!finite(prior.grindSetting)||!finite(prior.yieldG)||
    Math.abs(prior.doseG-shot.doseG)>.1||
    Math.abs(prior.grindSetting-shot.grindSetting)>.05||

@@ -1,0 +1,4831 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "date_utc": "2026-11-05",
+  "review_branch": "development/backend-foundation",
+  "parent_sha": "a4fd19a4353d69ee0770c38c895670e4030332d7",
+  "category": "pg_catalog.pg_amproc",
+  "total": 710,
+  "scope_note": "Complete exposed pg_amproc support-member record plus linked pg_proc identity, signature and execution properties, not unreadable C/internal compiled function bodies or member runtime behavior.",
+  "source_query_template": "select row_to_json(s) as raw, md5(row_to_json(s)::text) as raw_md5, n.nspname as namespace,a.amname as method,f.opfname as family,pn.nspname as function_namespace,p.proname as function_name,pg_get_function_identity_arguments(p.oid) as arguments,p.prorettype::regtype::text as result_type,l.lanname as language,p.prosecdef as security_definer,p.prokind as function_kind from pg_amproc s join pg_opfamily f on f.oid=s.amprocfamily join pg_namespace n on n.oid=f.opfnamespace join pg_am a on a.oid=f.opfmethod join pg_proc p on p.oid=s.amproc join pg_namespace pn on pn.oid=p.pronamespace join pg_language l on l.oid=p.prolang order by n.nspname,a.amname,f.opfname,s.amprocnum,s.amproclefttype,s.amprocrighttype,s.oid",
+  "source_md5": "PostgreSQL md5(row_to_json(pg_amproc)::text)",
+  "invariants": {
+    "missing_callable": 0,
+    "security_definer": 0,
+    "nonplain_functions": 0
+  },
+  "range": {
+    "start": 357,
+    "end": 534
+  },
+  "count": 178,
+  "objects": [
+    {
+      "ordinal": 357,
+      "oid": "10531",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "time_minmax_ops",
+      "raw_catalog": {
+        "oid": "10531",
+        "amprocfamily": "4077",
+        "amproclefttype": "1083",
+        "amprocrighttype": "1083",
+        "amprocnum": 1,
+        "amproc": "brin_minmax_opcinfo"
+      },
+      "raw_md5": "7e8ecb8f7505079afdfa415e804fb5cc",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_opcinfo",
+        "arguments": "internal",
+        "result": "internal",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "BRIN page-range summary maintenance or qualification; support slot 1 of pg_catalog.brin.time_minmax_ops for left type OID 1083, right type OID 1083",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 358,
+      "oid": "10532",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "time_minmax_ops",
+      "raw_catalog": {
+        "oid": "10532",
+        "amprocfamily": "4077",
+        "amproclefttype": "1083",
+        "amprocrighttype": "1083",
+        "amprocnum": 2,
+        "amproc": "brin_minmax_add_value"
+      },
+      "raw_md5": "e1c6f1451c7e3396b6a604a8dc2c4cb7",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_add_value",
+        "arguments": "internal, internal, internal, internal",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "BRIN page-range summary maintenance or qualification; support slot 2 of pg_catalog.brin.time_minmax_ops for left type OID 1083, right type OID 1083",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 359,
+      "oid": "10533",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "time_minmax_ops",
+      "raw_catalog": {
+        "oid": "10533",
+        "amprocfamily": "4077",
+        "amproclefttype": "1083",
+        "amprocrighttype": "1083",
+        "amprocnum": 3,
+        "amproc": "brin_minmax_consistent"
+      },
+      "raw_md5": "e0de3f29ca27b2f80e587be7b60c5c2d",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_consistent",
+        "arguments": "internal, internal, internal",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "check index predicate match, possibly tri-valued; support slot 3 of pg_catalog.brin.time_minmax_ops for left type OID 1083, right type OID 1083",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 360,
+      "oid": "10534",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "time_minmax_ops",
+      "raw_catalog": {
+        "oid": "10534",
+        "amprocfamily": "4077",
+        "amproclefttype": "1083",
+        "amprocrighttype": "1083",
+        "amprocnum": 4,
+        "amproc": "brin_minmax_union"
+      },
+      "raw_md5": "e73d618d745170b40dab241c704303b4",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_union",
+        "arguments": "internal, internal, internal",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.brin.time_minmax_ops for left type OID 1083, right type OID 1083",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 361,
+      "oid": "10621",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "timetz_bloom_ops",
+      "raw_catalog": {
+        "oid": "10621",
+        "amprocfamily": "4575",
+        "amproclefttype": "1266",
+        "amprocrighttype": "1266",
+        "amprocnum": 1,
+        "amproc": "brin_bloom_opcinfo"
+      },
+      "raw_md5": "23af4863524b6d9da41bfc26c9223535",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_bloom_opcinfo",
+        "arguments": "internal",
+        "result": "internal",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "BRIN page-range summary maintenance or qualification; support slot 1 of pg_catalog.brin.timetz_bloom_ops for left type OID 1266, right type OID 1266",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 362,
+      "oid": "10622",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "timetz_bloom_ops",
+      "raw_catalog": {
+        "oid": "10622",
+        "amprocfamily": "4575",
+        "amproclefttype": "1266",
+        "amprocrighttype": "1266",
+        "amprocnum": 2,
+        "amproc": "brin_bloom_add_value"
+      },
+      "raw_md5": "a3701d7af9e843671c5cd1daa436a2ae",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_bloom_add_value",
+        "arguments": "internal, internal, internal, internal",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "BRIN page-range summary maintenance or qualification; support slot 2 of pg_catalog.brin.timetz_bloom_ops for left type OID 1266, right type OID 1266",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 363,
+      "oid": "10623",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "timetz_bloom_ops",
+      "raw_catalog": {
+        "oid": "10623",
+        "amprocfamily": "4575",
+        "amproclefttype": "1266",
+        "amprocrighttype": "1266",
+        "amprocnum": 3,
+        "amproc": "brin_bloom_consistent"
+      },
+      "raw_md5": "a3169f888513d7a8d02db995b72e6d3c",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_bloom_consistent",
+        "arguments": "internal, internal, internal, integer",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "check index predicate match, possibly tri-valued; support slot 3 of pg_catalog.brin.timetz_bloom_ops for left type OID 1266, right type OID 1266",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 364,
+      "oid": "10624",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "timetz_bloom_ops",
+      "raw_catalog": {
+        "oid": "10624",
+        "amprocfamily": "4575",
+        "amproclefttype": "1266",
+        "amprocrighttype": "1266",
+        "amprocnum": 4,
+        "amproc": "brin_bloom_union"
+      },
+      "raw_md5": "17d62100f3f60ec1b64d24f5623f966a",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_bloom_union",
+        "arguments": "internal, internal, internal",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.brin.timetz_bloom_ops for left type OID 1266, right type OID 1266",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 365,
+      "oid": "10625",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "timetz_bloom_ops",
+      "raw_catalog": {
+        "oid": "10625",
+        "amprocfamily": "4575",
+        "amproclefttype": "1266",
+        "amprocrighttype": "1266",
+        "amprocnum": 5,
+        "amproc": "brin_bloom_options"
+      },
+      "raw_md5": "5e17c06120370edf4ff796123c2f6719",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_bloom_options",
+        "arguments": "internal",
+        "result": "void",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "BRIN page-range summary maintenance or qualification; support slot 5 of pg_catalog.brin.timetz_bloom_ops for left type OID 1266, right type OID 1266",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 366,
+      "oid": "10626",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "timetz_bloom_ops",
+      "raw_catalog": {
+        "oid": "10626",
+        "amprocfamily": "4575",
+        "amproclefttype": "1266",
+        "amprocrighttype": "1266",
+        "amprocnum": 11,
+        "amproc": "timetz_hash"
+      },
+      "raw_md5": "44520448ed25d8469fec210dbc09168f",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "timetz_hash",
+        "arguments": "time with time zone",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "hash computation or hash support; support slot 11 of pg_catalog.brin.timetz_bloom_ops for left type OID 1266, right type OID 1266",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 367,
+      "oid": "10615",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "timetz_minmax_multi_ops",
+      "raw_catalog": {
+        "oid": "10615",
+        "amprocfamily": "4604",
+        "amproclefttype": "1266",
+        "amprocrighttype": "1266",
+        "amprocnum": 1,
+        "amproc": "brin_minmax_multi_opcinfo"
+      },
+      "raw_md5": "5a40005d87bffbfcf4081de20e54446f",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_multi_opcinfo",
+        "arguments": "internal",
+        "result": "internal",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "BRIN page-range summary maintenance or qualification; support slot 1 of pg_catalog.brin.timetz_minmax_multi_ops for left type OID 1266, right type OID 1266",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 368,
+      "oid": "10616",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "timetz_minmax_multi_ops",
+      "raw_catalog": {
+        "oid": "10616",
+        "amprocfamily": "4604",
+        "amproclefttype": "1266",
+        "amprocrighttype": "1266",
+        "amprocnum": 2,
+        "amproc": "brin_minmax_multi_add_value"
+      },
+      "raw_md5": "b2ec0b73e992990b9991495f15b9e48f",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_multi_add_value",
+        "arguments": "internal, internal, internal, internal",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "BRIN page-range summary maintenance or qualification; support slot 2 of pg_catalog.brin.timetz_minmax_multi_ops for left type OID 1266, right type OID 1266",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 369,
+      "oid": "10617",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "timetz_minmax_multi_ops",
+      "raw_catalog": {
+        "oid": "10617",
+        "amprocfamily": "4604",
+        "amproclefttype": "1266",
+        "amprocrighttype": "1266",
+        "amprocnum": 3,
+        "amproc": "brin_minmax_multi_consistent"
+      },
+      "raw_md5": "a4db9c629c0230a7baa46bd2ef4895e6",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_multi_consistent",
+        "arguments": "internal, internal, internal, integer",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "check index predicate match, possibly tri-valued; support slot 3 of pg_catalog.brin.timetz_minmax_multi_ops for left type OID 1266, right type OID 1266",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 370,
+      "oid": "10618",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "timetz_minmax_multi_ops",
+      "raw_catalog": {
+        "oid": "10618",
+        "amprocfamily": "4604",
+        "amproclefttype": "1266",
+        "amprocrighttype": "1266",
+        "amprocnum": 4,
+        "amproc": "brin_minmax_multi_union"
+      },
+      "raw_md5": "0ece4f808f76dc51a84e57453ee82897",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_multi_union",
+        "arguments": "internal, internal, internal",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.brin.timetz_minmax_multi_ops for left type OID 1266, right type OID 1266",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 371,
+      "oid": "10619",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "timetz_minmax_multi_ops",
+      "raw_catalog": {
+        "oid": "10619",
+        "amprocfamily": "4604",
+        "amproclefttype": "1266",
+        "amprocrighttype": "1266",
+        "amprocnum": 5,
+        "amproc": "brin_minmax_multi_options"
+      },
+      "raw_md5": "7fbe0f17299dc67e339131773ef9868b",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_multi_options",
+        "arguments": "internal",
+        "result": "void",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "BRIN page-range summary maintenance or qualification; support slot 5 of pg_catalog.brin.timetz_minmax_multi_ops for left type OID 1266, right type OID 1266",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 372,
+      "oid": "10620",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "timetz_minmax_multi_ops",
+      "raw_catalog": {
+        "oid": "10620",
+        "amprocfamily": "4604",
+        "amproclefttype": "1266",
+        "amprocrighttype": "1266",
+        "amprocnum": 11,
+        "amproc": "brin_minmax_multi_distance_timetz"
+      },
+      "raw_md5": "d44acfe2c1d8e18ce5c1f317a55fe018",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_multi_distance_timetz",
+        "arguments": "internal, internal",
+        "result": "double precision",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "nearest-neighbor distance or tree penalty; support slot 11 of pg_catalog.brin.timetz_minmax_multi_ops for left type OID 1266, right type OID 1266",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 373,
+      "oid": "10611",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "timetz_minmax_ops",
+      "raw_catalog": {
+        "oid": "10611",
+        "amprocfamily": "4058",
+        "amproclefttype": "1266",
+        "amprocrighttype": "1266",
+        "amprocnum": 1,
+        "amproc": "brin_minmax_opcinfo"
+      },
+      "raw_md5": "d0de345d285836a697ce135e96915c75",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_opcinfo",
+        "arguments": "internal",
+        "result": "internal",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "BRIN page-range summary maintenance or qualification; support slot 1 of pg_catalog.brin.timetz_minmax_ops for left type OID 1266, right type OID 1266",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 374,
+      "oid": "10612",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "timetz_minmax_ops",
+      "raw_catalog": {
+        "oid": "10612",
+        "amprocfamily": "4058",
+        "amproclefttype": "1266",
+        "amprocrighttype": "1266",
+        "amprocnum": 2,
+        "amproc": "brin_minmax_add_value"
+      },
+      "raw_md5": "3a2f4d2f63b96f5aea2ad71c1af1a67c",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_add_value",
+        "arguments": "internal, internal, internal, internal",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "BRIN page-range summary maintenance or qualification; support slot 2 of pg_catalog.brin.timetz_minmax_ops for left type OID 1266, right type OID 1266",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 375,
+      "oid": "10613",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "timetz_minmax_ops",
+      "raw_catalog": {
+        "oid": "10613",
+        "amprocfamily": "4058",
+        "amproclefttype": "1266",
+        "amprocrighttype": "1266",
+        "amprocnum": 3,
+        "amproc": "brin_minmax_consistent"
+      },
+      "raw_md5": "2c7a3020e86d6d497293db16e7fb339d",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_consistent",
+        "arguments": "internal, internal, internal",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "check index predicate match, possibly tri-valued; support slot 3 of pg_catalog.brin.timetz_minmax_ops for left type OID 1266, right type OID 1266",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 376,
+      "oid": "10614",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "timetz_minmax_ops",
+      "raw_catalog": {
+        "oid": "10614",
+        "amprocfamily": "4058",
+        "amproclefttype": "1266",
+        "amprocrighttype": "1266",
+        "amprocnum": 4,
+        "amproc": "brin_minmax_union"
+      },
+      "raw_md5": "e375ece27a423b136500bc366c3f8e86",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_union",
+        "arguments": "internal, internal, internal",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.brin.timetz_minmax_ops for left type OID 1266, right type OID 1266",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 377,
+      "oid": "10661",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "uuid_bloom_ops",
+      "raw_catalog": {
+        "oid": "10661",
+        "amprocfamily": "4589",
+        "amproclefttype": "2950",
+        "amprocrighttype": "2950",
+        "amprocnum": 1,
+        "amproc": "brin_bloom_opcinfo"
+      },
+      "raw_md5": "5ef2ea9934f7ed4d0d1d8c27e8ebd67c",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_bloom_opcinfo",
+        "arguments": "internal",
+        "result": "internal",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "BRIN page-range summary maintenance or qualification; support slot 1 of pg_catalog.brin.uuid_bloom_ops for left type OID 2950, right type OID 2950",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 378,
+      "oid": "10662",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "uuid_bloom_ops",
+      "raw_catalog": {
+        "oid": "10662",
+        "amprocfamily": "4589",
+        "amproclefttype": "2950",
+        "amprocrighttype": "2950",
+        "amprocnum": 2,
+        "amproc": "brin_bloom_add_value"
+      },
+      "raw_md5": "d7e82cf0e861317220029a5f3fe6f0c6",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_bloom_add_value",
+        "arguments": "internal, internal, internal, internal",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "BRIN page-range summary maintenance or qualification; support slot 2 of pg_catalog.brin.uuid_bloom_ops for left type OID 2950, right type OID 2950",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 379,
+      "oid": "10663",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "uuid_bloom_ops",
+      "raw_catalog": {
+        "oid": "10663",
+        "amprocfamily": "4589",
+        "amproclefttype": "2950",
+        "amprocrighttype": "2950",
+        "amprocnum": 3,
+        "amproc": "brin_bloom_consistent"
+      },
+      "raw_md5": "fb87307f611062c81f243a1ccb94bbc1",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_bloom_consistent",
+        "arguments": "internal, internal, internal, integer",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "check index predicate match, possibly tri-valued; support slot 3 of pg_catalog.brin.uuid_bloom_ops for left type OID 2950, right type OID 2950",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 380,
+      "oid": "10664",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "uuid_bloom_ops",
+      "raw_catalog": {
+        "oid": "10664",
+        "amprocfamily": "4589",
+        "amproclefttype": "2950",
+        "amprocrighttype": "2950",
+        "amprocnum": 4,
+        "amproc": "brin_bloom_union"
+      },
+      "raw_md5": "2e747e6d7e9f40f216de986cfa1c4430",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_bloom_union",
+        "arguments": "internal, internal, internal",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.brin.uuid_bloom_ops for left type OID 2950, right type OID 2950",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 381,
+      "oid": "10665",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "uuid_bloom_ops",
+      "raw_catalog": {
+        "oid": "10665",
+        "amprocfamily": "4589",
+        "amproclefttype": "2950",
+        "amprocrighttype": "2950",
+        "amprocnum": 5,
+        "amproc": "brin_bloom_options"
+      },
+      "raw_md5": "698c167dc1c878506cde7d84e5b89904",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_bloom_options",
+        "arguments": "internal",
+        "result": "void",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "BRIN page-range summary maintenance or qualification; support slot 5 of pg_catalog.brin.uuid_bloom_ops for left type OID 2950, right type OID 2950",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 382,
+      "oid": "10666",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "uuid_bloom_ops",
+      "raw_catalog": {
+        "oid": "10666",
+        "amprocfamily": "4589",
+        "amproclefttype": "2950",
+        "amprocrighttype": "2950",
+        "amprocnum": 11,
+        "amproc": "uuid_hash"
+      },
+      "raw_md5": "a680f7580cab77dc58f59c1ba0d61dab",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "uuid_hash",
+        "arguments": "uuid",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "hash computation or hash support; support slot 11 of pg_catalog.brin.uuid_bloom_ops for left type OID 2950, right type OID 2950",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 383,
+      "oid": "10655",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "uuid_minmax_multi_ops",
+      "raw_catalog": {
+        "oid": "10655",
+        "amprocfamily": "4614",
+        "amproclefttype": "2950",
+        "amprocrighttype": "2950",
+        "amprocnum": 1,
+        "amproc": "brin_minmax_multi_opcinfo"
+      },
+      "raw_md5": "32f0901bf1a257ec96184be696f28453",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_multi_opcinfo",
+        "arguments": "internal",
+        "result": "internal",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "BRIN page-range summary maintenance or qualification; support slot 1 of pg_catalog.brin.uuid_minmax_multi_ops for left type OID 2950, right type OID 2950",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 384,
+      "oid": "10656",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "uuid_minmax_multi_ops",
+      "raw_catalog": {
+        "oid": "10656",
+        "amprocfamily": "4614",
+        "amproclefttype": "2950",
+        "amprocrighttype": "2950",
+        "amprocnum": 2,
+        "amproc": "brin_minmax_multi_add_value"
+      },
+      "raw_md5": "e3139948ed0783c2553e14ce4c5274f7",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_multi_add_value",
+        "arguments": "internal, internal, internal, internal",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "BRIN page-range summary maintenance or qualification; support slot 2 of pg_catalog.brin.uuid_minmax_multi_ops for left type OID 2950, right type OID 2950",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 385,
+      "oid": "10657",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "uuid_minmax_multi_ops",
+      "raw_catalog": {
+        "oid": "10657",
+        "amprocfamily": "4614",
+        "amproclefttype": "2950",
+        "amprocrighttype": "2950",
+        "amprocnum": 3,
+        "amproc": "brin_minmax_multi_consistent"
+      },
+      "raw_md5": "846a461e50bd7d1cbb7a48d2a0e05a62",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_multi_consistent",
+        "arguments": "internal, internal, internal, integer",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "check index predicate match, possibly tri-valued; support slot 3 of pg_catalog.brin.uuid_minmax_multi_ops for left type OID 2950, right type OID 2950",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 386,
+      "oid": "10658",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "uuid_minmax_multi_ops",
+      "raw_catalog": {
+        "oid": "10658",
+        "amprocfamily": "4614",
+        "amproclefttype": "2950",
+        "amprocrighttype": "2950",
+        "amprocnum": 4,
+        "amproc": "brin_minmax_multi_union"
+      },
+      "raw_md5": "46a590d6e47ac38869d38662e7ab8019",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_multi_union",
+        "arguments": "internal, internal, internal",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.brin.uuid_minmax_multi_ops for left type OID 2950, right type OID 2950",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 387,
+      "oid": "10659",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "uuid_minmax_multi_ops",
+      "raw_catalog": {
+        "oid": "10659",
+        "amprocfamily": "4614",
+        "amproclefttype": "2950",
+        "amprocrighttype": "2950",
+        "amprocnum": 5,
+        "amproc": "brin_minmax_multi_options"
+      },
+      "raw_md5": "aa7b9cbf3ad79a59a17e190c6fe414e1",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_multi_options",
+        "arguments": "internal",
+        "result": "void",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "BRIN page-range summary maintenance or qualification; support slot 5 of pg_catalog.brin.uuid_minmax_multi_ops for left type OID 2950, right type OID 2950",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 388,
+      "oid": "10660",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "uuid_minmax_multi_ops",
+      "raw_catalog": {
+        "oid": "10660",
+        "amprocfamily": "4614",
+        "amproclefttype": "2950",
+        "amprocrighttype": "2950",
+        "amprocnum": 11,
+        "amproc": "brin_minmax_multi_distance_uuid"
+      },
+      "raw_md5": "9e8ec510763fc291fd63397056e178af",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_multi_distance_uuid",
+        "arguments": "internal, internal",
+        "result": "double precision",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "nearest-neighbor distance or tree penalty; support slot 11 of pg_catalog.brin.uuid_minmax_multi_ops for left type OID 2950, right type OID 2950",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 389,
+      "oid": "10651",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "uuid_minmax_ops",
+      "raw_catalog": {
+        "oid": "10651",
+        "amprocfamily": "4081",
+        "amproclefttype": "2950",
+        "amprocrighttype": "2950",
+        "amprocnum": 1,
+        "amproc": "brin_minmax_opcinfo"
+      },
+      "raw_md5": "aa3e0f9cd4c45fe8c802da14d8e82392",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_opcinfo",
+        "arguments": "internal",
+        "result": "internal",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "BRIN page-range summary maintenance or qualification; support slot 1 of pg_catalog.brin.uuid_minmax_ops for left type OID 2950, right type OID 2950",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 390,
+      "oid": "10652",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "uuid_minmax_ops",
+      "raw_catalog": {
+        "oid": "10652",
+        "amprocfamily": "4081",
+        "amproclefttype": "2950",
+        "amprocrighttype": "2950",
+        "amprocnum": 2,
+        "amproc": "brin_minmax_add_value"
+      },
+      "raw_md5": "f041313e154e1c3c376a35031e527482",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_add_value",
+        "arguments": "internal, internal, internal, internal",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "BRIN page-range summary maintenance or qualification; support slot 2 of pg_catalog.brin.uuid_minmax_ops for left type OID 2950, right type OID 2950",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 391,
+      "oid": "10653",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "uuid_minmax_ops",
+      "raw_catalog": {
+        "oid": "10653",
+        "amprocfamily": "4081",
+        "amproclefttype": "2950",
+        "amprocrighttype": "2950",
+        "amprocnum": 3,
+        "amproc": "brin_minmax_consistent"
+      },
+      "raw_md5": "45130cbd945821ed4f19468f82f2206f",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_consistent",
+        "arguments": "internal, internal, internal",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "check index predicate match, possibly tri-valued; support slot 3 of pg_catalog.brin.uuid_minmax_ops for left type OID 2950, right type OID 2950",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 392,
+      "oid": "10654",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "uuid_minmax_ops",
+      "raw_catalog": {
+        "oid": "10654",
+        "amprocfamily": "4081",
+        "amproclefttype": "2950",
+        "amprocrighttype": "2950",
+        "amprocnum": 4,
+        "amproc": "brin_minmax_union"
+      },
+      "raw_md5": "7a8e67620974ce39c1424fc8d57ee8fa",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_union",
+        "arguments": "internal, internal, internal",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.brin.uuid_minmax_ops for left type OID 2950, right type OID 2950",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 393,
+      "oid": "10631",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "varbit_minmax_ops",
+      "raw_catalog": {
+        "oid": "10631",
+        "amprocfamily": "4080",
+        "amproclefttype": "1562",
+        "amprocrighttype": "1562",
+        "amprocnum": 1,
+        "amproc": "brin_minmax_opcinfo"
+      },
+      "raw_md5": "eb62c2fb78b2180beac7f3dde29481d7",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_opcinfo",
+        "arguments": "internal",
+        "result": "internal",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "BRIN page-range summary maintenance or qualification; support slot 1 of pg_catalog.brin.varbit_minmax_ops for left type OID 1562, right type OID 1562",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 394,
+      "oid": "10632",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "varbit_minmax_ops",
+      "raw_catalog": {
+        "oid": "10632",
+        "amprocfamily": "4080",
+        "amproclefttype": "1562",
+        "amprocrighttype": "1562",
+        "amprocnum": 2,
+        "amproc": "brin_minmax_add_value"
+      },
+      "raw_md5": "9483e4f9da6814d96550cf83bab3d042",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_add_value",
+        "arguments": "internal, internal, internal, internal",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "BRIN page-range summary maintenance or qualification; support slot 2 of pg_catalog.brin.varbit_minmax_ops for left type OID 1562, right type OID 1562",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 395,
+      "oid": "10633",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "varbit_minmax_ops",
+      "raw_catalog": {
+        "oid": "10633",
+        "amprocfamily": "4080",
+        "amproclefttype": "1562",
+        "amprocrighttype": "1562",
+        "amprocnum": 3,
+        "amproc": "brin_minmax_consistent"
+      },
+      "raw_md5": "73a18c12c1e78219dd809402a9eb57ed",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_consistent",
+        "arguments": "internal, internal, internal",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "check index predicate match, possibly tri-valued; support slot 3 of pg_catalog.brin.varbit_minmax_ops for left type OID 1562, right type OID 1562",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 396,
+      "oid": "10634",
+      "namespace": "pg_catalog",
+      "method": "brin",
+      "family": "varbit_minmax_ops",
+      "raw_catalog": {
+        "oid": "10634",
+        "amprocfamily": "4080",
+        "amproclefttype": "1562",
+        "amprocrighttype": "1562",
+        "amprocnum": 4,
+        "amproc": "brin_minmax_union"
+      },
+      "raw_md5": "155663dea818bf95578947cec2506188",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "brin_minmax_union",
+        "arguments": "internal, internal, internal",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.brin.varbit_minmax_ops for left type OID 1562, right type OID 1562",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 397,
+      "oid": "10000",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "array_ops",
+      "raw_catalog": {
+        "oid": "10000",
+        "amprocfamily": "397",
+        "amproclefttype": "2277",
+        "amprocrighttype": "2277",
+        "amprocnum": 1,
+        "amproc": "btarraycmp"
+      },
+      "raw_md5": "cd70118d7ce030c28e38281acdc80c8c",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btarraycmp",
+        "arguments": "anyarray, anyarray",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.array_ops for left type OID 2277, right type OID 2277",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 398,
+      "oid": "10001",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "bit_ops",
+      "raw_catalog": {
+        "oid": "10001",
+        "amprocfamily": "423",
+        "amproclefttype": "1560",
+        "amprocrighttype": "1560",
+        "amprocnum": 1,
+        "amproc": "bitcmp"
+      },
+      "raw_md5": "c4d01909d27ce1db183ad452e4f24705",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "bitcmp",
+        "arguments": "bit, bit",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.bit_ops for left type OID 1560, right type OID 1560",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 399,
+      "oid": "10002",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "bit_ops",
+      "raw_catalog": {
+        "oid": "10002",
+        "amprocfamily": "423",
+        "amproclefttype": "1560",
+        "amprocrighttype": "1560",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "bc040a219df8caad6b10eb6384bb4740",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.bit_ops for left type OID 1560, right type OID 1560",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 400,
+      "oid": "10003",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "bool_ops",
+      "raw_catalog": {
+        "oid": "10003",
+        "amprocfamily": "424",
+        "amproclefttype": "16",
+        "amprocrighttype": "16",
+        "amprocnum": 1,
+        "amproc": "btboolcmp"
+      },
+      "raw_md5": "f667169877c6a83fa0f4a8b0f997dee0",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btboolcmp",
+        "arguments": "boolean, boolean",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.bool_ops for left type OID 16, right type OID 16",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 401,
+      "oid": "10004",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "bool_ops",
+      "raw_catalog": {
+        "oid": "10004",
+        "amprocfamily": "424",
+        "amproclefttype": "16",
+        "amprocrighttype": "16",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "12e69f1b617c6e2ec41e59b52244bbb0",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.bool_ops for left type OID 16, right type OID 16",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 402,
+      "oid": "10005",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "bpchar_ops",
+      "raw_catalog": {
+        "oid": "10005",
+        "amprocfamily": "426",
+        "amproclefttype": "1042",
+        "amprocrighttype": "1042",
+        "amprocnum": 1,
+        "amproc": "bpcharcmp"
+      },
+      "raw_md5": "a762ad8a5c3c9e33772dc4cd86bafbfd",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "bpcharcmp",
+        "arguments": "character, character",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.bpchar_ops for left type OID 1042, right type OID 1042",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 403,
+      "oid": "10006",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "bpchar_ops",
+      "raw_catalog": {
+        "oid": "10006",
+        "amprocfamily": "426",
+        "amproclefttype": "1042",
+        "amprocrighttype": "1042",
+        "amprocnum": 2,
+        "amproc": "bpchar_sortsupport"
+      },
+      "raw_md5": "7625084f8184c7c446dc201c20ea3b0e",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "bpchar_sortsupport",
+        "arguments": "internal",
+        "result": "void",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "sort support; support slot 2 of pg_catalog.btree.bpchar_ops for left type OID 1042, right type OID 1042",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 404,
+      "oid": "10007",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "bpchar_ops",
+      "raw_catalog": {
+        "oid": "10007",
+        "amprocfamily": "426",
+        "amproclefttype": "1042",
+        "amprocrighttype": "1042",
+        "amprocnum": 4,
+        "amproc": "btvarstrequalimage"
+      },
+      "raw_md5": "cd5585d9b25ddfb6572be3c3fd070b67",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btvarstrequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.bpchar_ops for left type OID 1042, right type OID 1042",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 405,
+      "oid": "10096",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "bpchar_pattern_ops",
+      "raw_catalog": {
+        "oid": "10096",
+        "amprocfamily": "2097",
+        "amproclefttype": "1042",
+        "amprocrighttype": "1042",
+        "amprocnum": 1,
+        "amproc": "btbpchar_pattern_cmp"
+      },
+      "raw_md5": "9dd75596463133c54ccbd55a29cefb62",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btbpchar_pattern_cmp",
+        "arguments": "character, character",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.bpchar_pattern_ops for left type OID 1042, right type OID 1042",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 406,
+      "oid": "10097",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "bpchar_pattern_ops",
+      "raw_catalog": {
+        "oid": "10097",
+        "amprocfamily": "2097",
+        "amproclefttype": "1042",
+        "amprocrighttype": "1042",
+        "amprocnum": 2,
+        "amproc": "btbpchar_pattern_sortsupport"
+      },
+      "raw_md5": "9cc1d1a55b5eaefa9dc2c795e88bb2a9",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btbpchar_pattern_sortsupport",
+        "arguments": "internal",
+        "result": "void",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "sort support; support slot 2 of pg_catalog.btree.bpchar_pattern_ops for left type OID 1042, right type OID 1042",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 407,
+      "oid": "10098",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "bpchar_pattern_ops",
+      "raw_catalog": {
+        "oid": "10098",
+        "amprocfamily": "2097",
+        "amproclefttype": "1042",
+        "amprocrighttype": "1042",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "178581e29b3e7fc78a06fa3c5974de27",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.bpchar_pattern_ops for left type OID 1042, right type OID 1042",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 408,
+      "oid": "10008",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "bytea_ops",
+      "raw_catalog": {
+        "oid": "10008",
+        "amprocfamily": "428",
+        "amproclefttype": "17",
+        "amprocrighttype": "17",
+        "amprocnum": 1,
+        "amproc": "byteacmp"
+      },
+      "raw_md5": "925b18a16ea29d564198d1a3c202f346",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "byteacmp",
+        "arguments": "bytea, bytea",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.bytea_ops for left type OID 17, right type OID 17",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 409,
+      "oid": "10009",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "bytea_ops",
+      "raw_catalog": {
+        "oid": "10009",
+        "amprocfamily": "428",
+        "amproclefttype": "17",
+        "amprocrighttype": "17",
+        "amprocnum": 2,
+        "amproc": "bytea_sortsupport"
+      },
+      "raw_md5": "e223b12ea605cf72f3c35c9dc85f100d",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "bytea_sortsupport",
+        "arguments": "internal",
+        "result": "void",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "sort support; support slot 2 of pg_catalog.btree.bytea_ops for left type OID 17, right type OID 17",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 410,
+      "oid": "10010",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "bytea_ops",
+      "raw_catalog": {
+        "oid": "10010",
+        "amprocfamily": "428",
+        "amproclefttype": "17",
+        "amprocrighttype": "17",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "7a83d89ae446159449b0f936efb970b4",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.bytea_ops for left type OID 17, right type OID 17",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 411,
+      "oid": "10011",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "char_ops",
+      "raw_catalog": {
+        "oid": "10011",
+        "amprocfamily": "429",
+        "amproclefttype": "18",
+        "amprocrighttype": "18",
+        "amprocnum": 1,
+        "amproc": "btcharcmp"
+      },
+      "raw_md5": "a9195301734ab1e71df6c72b28cafabe",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btcharcmp",
+        "arguments": "\"char\", \"char\"",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.char_ops for left type OID 18, right type OID 18",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 412,
+      "oid": "10012",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "char_ops",
+      "raw_catalog": {
+        "oid": "10012",
+        "amprocfamily": "429",
+        "amproclefttype": "18",
+        "amprocrighttype": "18",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "8d951d8199b28697ae8ef17392d81eb9",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.char_ops for left type OID 18, right type OID 18",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 413,
+      "oid": "10013",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "datetime_ops",
+      "raw_catalog": {
+        "oid": "10013",
+        "amprocfamily": "434",
+        "amproclefttype": "1082",
+        "amprocrighttype": "1082",
+        "amprocnum": 1,
+        "amproc": "date_cmp"
+      },
+      "raw_md5": "6c1e69a1881da920bb247b53f6e9c056",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "date_cmp",
+        "arguments": "date, date",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.datetime_ops for left type OID 1082, right type OID 1082",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 414,
+      "oid": "10016",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "datetime_ops",
+      "raw_catalog": {
+        "oid": "10016",
+        "amprocfamily": "434",
+        "amproclefttype": "1082",
+        "amprocrighttype": "1114",
+        "amprocnum": 1,
+        "amproc": "date_cmp_timestamp"
+      },
+      "raw_md5": "e267a93b2d0c69cfd2e53653d2082ade",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "date_cmp_timestamp",
+        "arguments": "date, timestamp without time zone",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.datetime_ops for left type OID 1082, right type OID 1114",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 415,
+      "oid": "10017",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "datetime_ops",
+      "raw_catalog": {
+        "oid": "10017",
+        "amprocfamily": "434",
+        "amproclefttype": "1082",
+        "amprocrighttype": "1184",
+        "amprocnum": 1,
+        "amproc": "date_cmp_timestamptz"
+      },
+      "raw_md5": "95cef60a887f9397c690742d9da9922b",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "date_cmp_timestamptz",
+        "arguments": "date, timestamp with time zone",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.datetime_ops for left type OID 1082, right type OID 1184",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 416,
+      "oid": "10021",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "datetime_ops",
+      "raw_catalog": {
+        "oid": "10021",
+        "amprocfamily": "434",
+        "amproclefttype": "1114",
+        "amprocrighttype": "1082",
+        "amprocnum": 1,
+        "amproc": "timestamp_cmp_date"
+      },
+      "raw_md5": "242bc3ab758faccb5de6500baaf3d243",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "timestamp_cmp_date",
+        "arguments": "timestamp without time zone, date",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.datetime_ops for left type OID 1114, right type OID 1082",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 417,
+      "oid": "10018",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "datetime_ops",
+      "raw_catalog": {
+        "oid": "10018",
+        "amprocfamily": "434",
+        "amproclefttype": "1114",
+        "amprocrighttype": "1114",
+        "amprocnum": 1,
+        "amproc": "timestamp_cmp"
+      },
+      "raw_md5": "28d07fd6901ee71e97c94d5904cad90c",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "timestamp_cmp",
+        "arguments": "timestamp without time zone, timestamp without time zone",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.datetime_ops for left type OID 1114, right type OID 1114",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 418,
+      "oid": "10022",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "datetime_ops",
+      "raw_catalog": {
+        "oid": "10022",
+        "amprocfamily": "434",
+        "amproclefttype": "1114",
+        "amprocrighttype": "1184",
+        "amprocnum": 1,
+        "amproc": "timestamp_cmp_timestamptz"
+      },
+      "raw_md5": "57e7f0f6857281b54efe69d3ab2e0fe0",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "timestamp_cmp_timestamptz",
+        "arguments": "timestamp without time zone, timestamp with time zone",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.datetime_ops for left type OID 1114, right type OID 1184",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 419,
+      "oid": "10026",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "datetime_ops",
+      "raw_catalog": {
+        "oid": "10026",
+        "amprocfamily": "434",
+        "amproclefttype": "1184",
+        "amprocrighttype": "1082",
+        "amprocnum": 1,
+        "amproc": "timestamptz_cmp_date"
+      },
+      "raw_md5": "dbfb590394106a0c7fa8fb620bb76e9b",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "timestamptz_cmp_date",
+        "arguments": "timestamp with time zone, date",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.datetime_ops for left type OID 1184, right type OID 1082",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 420,
+      "oid": "10027",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "datetime_ops",
+      "raw_catalog": {
+        "oid": "10027",
+        "amprocfamily": "434",
+        "amproclefttype": "1184",
+        "amprocrighttype": "1114",
+        "amprocnum": 1,
+        "amproc": "timestamptz_cmp_timestamp"
+      },
+      "raw_md5": "73cdd88cfd8246977d31a626dd59a01e",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "timestamptz_cmp_timestamp",
+        "arguments": "timestamp with time zone, timestamp without time zone",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.datetime_ops for left type OID 1184, right type OID 1114",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 421,
+      "oid": "10023",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "datetime_ops",
+      "raw_catalog": {
+        "oid": "10023",
+        "amprocfamily": "434",
+        "amproclefttype": "1184",
+        "amprocrighttype": "1184",
+        "amprocnum": 1,
+        "amproc": "timestamptz_cmp"
+      },
+      "raw_md5": "9bb869089b151cff24586af1cb11400e",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "timestamptz_cmp",
+        "arguments": "timestamp with time zone, timestamp with time zone",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.datetime_ops for left type OID 1184, right type OID 1184",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 422,
+      "oid": "10014",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "datetime_ops",
+      "raw_catalog": {
+        "oid": "10014",
+        "amprocfamily": "434",
+        "amproclefttype": "1082",
+        "amprocrighttype": "1082",
+        "amprocnum": 2,
+        "amproc": "date_sortsupport"
+      },
+      "raw_md5": "abd2fe87b7c088b945328aa3e2741fea",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "date_sortsupport",
+        "arguments": "internal",
+        "result": "void",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "sort support; support slot 2 of pg_catalog.btree.datetime_ops for left type OID 1082, right type OID 1082",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 423,
+      "oid": "10019",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "datetime_ops",
+      "raw_catalog": {
+        "oid": "10019",
+        "amprocfamily": "434",
+        "amproclefttype": "1114",
+        "amprocrighttype": "1114",
+        "amprocnum": 2,
+        "amproc": "timestamp_sortsupport"
+      },
+      "raw_md5": "693c6647003eb7617f87c7cc1bb4ef88",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "timestamp_sortsupport",
+        "arguments": "internal",
+        "result": "void",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "sort support; support slot 2 of pg_catalog.btree.datetime_ops for left type OID 1114, right type OID 1114",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 424,
+      "oid": "10024",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "datetime_ops",
+      "raw_catalog": {
+        "oid": "10024",
+        "amprocfamily": "434",
+        "amproclefttype": "1184",
+        "amprocrighttype": "1184",
+        "amprocnum": 2,
+        "amproc": "timestamp_sortsupport"
+      },
+      "raw_md5": "2288a9e3b61b6d92d953306557cac4f9",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "timestamp_sortsupport",
+        "arguments": "internal",
+        "result": "void",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "sort support; support slot 2 of pg_catalog.btree.datetime_ops for left type OID 1184, right type OID 1184",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 425,
+      "oid": "10028",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "datetime_ops",
+      "raw_catalog": {
+        "oid": "10028",
+        "amprocfamily": "434",
+        "amproclefttype": "1082",
+        "amprocrighttype": "1186",
+        "amprocnum": 3,
+        "amproc": "pg_catalog.in_range"
+      },
+      "raw_md5": "7b894886eb83f60974d71e3187a4e4d1",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "in_range",
+        "arguments": "date, date, interval, boolean, boolean",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "provider index access-method callback (see signature/strategy cross-reference); support slot 3 of pg_catalog.btree.datetime_ops for left type OID 1082, right type OID 1186",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 426,
+      "oid": "10029",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "datetime_ops",
+      "raw_catalog": {
+        "oid": "10029",
+        "amprocfamily": "434",
+        "amproclefttype": "1114",
+        "amprocrighttype": "1186",
+        "amprocnum": 3,
+        "amproc": "pg_catalog.in_range"
+      },
+      "raw_md5": "0a627fd22f168791e0c40e8237a02a2d",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "in_range",
+        "arguments": "timestamp without time zone, timestamp without time zone, interval, boolean, boolean",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "provider index access-method callback (see signature/strategy cross-reference); support slot 3 of pg_catalog.btree.datetime_ops for left type OID 1114, right type OID 1186",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 427,
+      "oid": "10030",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "datetime_ops",
+      "raw_catalog": {
+        "oid": "10030",
+        "amprocfamily": "434",
+        "amproclefttype": "1184",
+        "amprocrighttype": "1186",
+        "amprocnum": 3,
+        "amproc": "pg_catalog.in_range"
+      },
+      "raw_md5": "53881f839decafa9c15914e651bef901",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "in_range",
+        "arguments": "timestamp with time zone, timestamp with time zone, interval, boolean, boolean",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "provider index access-method callback (see signature/strategy cross-reference); support slot 3 of pg_catalog.btree.datetime_ops for left type OID 1184, right type OID 1186",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 428,
+      "oid": "10015",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "datetime_ops",
+      "raw_catalog": {
+        "oid": "10015",
+        "amprocfamily": "434",
+        "amproclefttype": "1082",
+        "amprocrighttype": "1082",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "3e48805854df1c5e8ec176d366e78b9c",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.datetime_ops for left type OID 1082, right type OID 1082",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 429,
+      "oid": "10020",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "datetime_ops",
+      "raw_catalog": {
+        "oid": "10020",
+        "amprocfamily": "434",
+        "amproclefttype": "1114",
+        "amprocrighttype": "1114",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "1b9fd9a8b6a5a978885bdf9782124946",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.datetime_ops for left type OID 1114, right type OID 1114",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 430,
+      "oid": "10025",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "datetime_ops",
+      "raw_catalog": {
+        "oid": "10025",
+        "amprocfamily": "434",
+        "amproclefttype": "1184",
+        "amprocrighttype": "1184",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "73d8da7e7d212b0c4b491d7e3813ca8f",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.datetime_ops for left type OID 1184, right type OID 1184",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 431,
+      "oid": "10112",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "enum_ops",
+      "raw_catalog": {
+        "oid": "10112",
+        "amprocfamily": "3522",
+        "amproclefttype": "3500",
+        "amprocrighttype": "3500",
+        "amprocnum": 1,
+        "amproc": "enum_cmp"
+      },
+      "raw_md5": "df53792dab1a5016120dc23ce17d6564",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "enum_cmp",
+        "arguments": "anyenum, anyenum",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.enum_ops for left type OID 3500, right type OID 3500",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 432,
+      "oid": "10113",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "enum_ops",
+      "raw_catalog": {
+        "oid": "10113",
+        "amprocfamily": "3522",
+        "amproclefttype": "3500",
+        "amprocrighttype": "3500",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "3b2b781a82f0aae14cbc0386349647ad",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.enum_ops for left type OID 3500, right type OID 3500",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 433,
+      "oid": "10031",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "float_ops",
+      "raw_catalog": {
+        "oid": "10031",
+        "amprocfamily": "1970",
+        "amproclefttype": "700",
+        "amprocrighttype": "700",
+        "amprocnum": 1,
+        "amproc": "btfloat4cmp"
+      },
+      "raw_md5": "ba1ab6ffc7e7457be2b57aebd09e116f",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btfloat4cmp",
+        "arguments": "real, real",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.float_ops for left type OID 700, right type OID 700",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 434,
+      "oid": "10033",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "float_ops",
+      "raw_catalog": {
+        "oid": "10033",
+        "amprocfamily": "1970",
+        "amproclefttype": "700",
+        "amprocrighttype": "701",
+        "amprocnum": 1,
+        "amproc": "btfloat48cmp"
+      },
+      "raw_md5": "cb115412503956642215c6f7ef96610e",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btfloat48cmp",
+        "arguments": "real, double precision",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.float_ops for left type OID 700, right type OID 701",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 435,
+      "oid": "10036",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "float_ops",
+      "raw_catalog": {
+        "oid": "10036",
+        "amprocfamily": "1970",
+        "amproclefttype": "701",
+        "amprocrighttype": "700",
+        "amprocnum": 1,
+        "amproc": "btfloat84cmp"
+      },
+      "raw_md5": "7733128e4e626efcc8460ebb4cf93ff7",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btfloat84cmp",
+        "arguments": "double precision, real",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.float_ops for left type OID 701, right type OID 700",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 436,
+      "oid": "10034",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "float_ops",
+      "raw_catalog": {
+        "oid": "10034",
+        "amprocfamily": "1970",
+        "amproclefttype": "701",
+        "amprocrighttype": "701",
+        "amprocnum": 1,
+        "amproc": "btfloat8cmp"
+      },
+      "raw_md5": "e6c979a3627160fc61c94b48026de576",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btfloat8cmp",
+        "arguments": "double precision, double precision",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.float_ops for left type OID 701, right type OID 701",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 437,
+      "oid": "10032",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "float_ops",
+      "raw_catalog": {
+        "oid": "10032",
+        "amprocfamily": "1970",
+        "amproclefttype": "700",
+        "amprocrighttype": "700",
+        "amprocnum": 2,
+        "amproc": "btfloat4sortsupport"
+      },
+      "raw_md5": "602e70fcc1a9692615407c4a7a64794d",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btfloat4sortsupport",
+        "arguments": "internal",
+        "result": "void",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "sort support; support slot 2 of pg_catalog.btree.float_ops for left type OID 700, right type OID 700",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 438,
+      "oid": "10035",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "float_ops",
+      "raw_catalog": {
+        "oid": "10035",
+        "amprocfamily": "1970",
+        "amproclefttype": "701",
+        "amprocrighttype": "701",
+        "amprocnum": 2,
+        "amproc": "btfloat8sortsupport"
+      },
+      "raw_md5": "b9760fef4ea600d66291c61c16327371",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btfloat8sortsupport",
+        "arguments": "internal",
+        "result": "void",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "sort support; support slot 2 of pg_catalog.btree.float_ops for left type OID 701, right type OID 701",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 439,
+      "oid": "10038",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "float_ops",
+      "raw_catalog": {
+        "oid": "10038",
+        "amprocfamily": "1970",
+        "amproclefttype": "700",
+        "amprocrighttype": "701",
+        "amprocnum": 3,
+        "amproc": "pg_catalog.in_range"
+      },
+      "raw_md5": "862091dbecccb745e3f3ca3a098f8c9c",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "in_range",
+        "arguments": "real, real, double precision, boolean, boolean",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "provider index access-method callback (see signature/strategy cross-reference); support slot 3 of pg_catalog.btree.float_ops for left type OID 700, right type OID 701",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 440,
+      "oid": "10037",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "float_ops",
+      "raw_catalog": {
+        "oid": "10037",
+        "amprocfamily": "1970",
+        "amproclefttype": "701",
+        "amprocrighttype": "701",
+        "amprocnum": 3,
+        "amproc": "pg_catalog.in_range"
+      },
+      "raw_md5": "12d078bc2b45faaea13bfa57953cb396",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "in_range",
+        "arguments": "double precision, double precision, double precision, boolean, boolean",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "provider index access-method callback (see signature/strategy cross-reference); support slot 3 of pg_catalog.btree.float_ops for left type OID 701, right type OID 701",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 441,
+      "oid": "10058",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "integer_ops",
+      "raw_catalog": {
+        "oid": "10058",
+        "amprocfamily": "1976",
+        "amproclefttype": "20",
+        "amprocrighttype": "20",
+        "amprocnum": 1,
+        "amproc": "btint8cmp"
+      },
+      "raw_md5": "f4742b0dfdeccf87641dddca57cc1e7f",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btint8cmp",
+        "arguments": "bigint, bigint",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.integer_ops for left type OID 20, right type OID 20",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 442,
+      "oid": "10062",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "integer_ops",
+      "raw_catalog": {
+        "oid": "10062",
+        "amprocfamily": "1976",
+        "amproclefttype": "20",
+        "amprocrighttype": "21",
+        "amprocnum": 1,
+        "amproc": "btint82cmp"
+      },
+      "raw_md5": "39126d7223f608d2762e5e6ba522ad16",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btint82cmp",
+        "arguments": "bigint, smallint",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.integer_ops for left type OID 20, right type OID 21",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 443,
+      "oid": "10061",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "integer_ops",
+      "raw_catalog": {
+        "oid": "10061",
+        "amprocfamily": "1976",
+        "amproclefttype": "20",
+        "amprocrighttype": "23",
+        "amprocnum": 1,
+        "amproc": "btint84cmp"
+      },
+      "raw_md5": "d5ad1dacfdb2470cde885a8c4305b235",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btint84cmp",
+        "arguments": "bigint, integer",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.integer_ops for left type OID 20, right type OID 23",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 444,
+      "oid": "10046",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "integer_ops",
+      "raw_catalog": {
+        "oid": "10046",
+        "amprocfamily": "1976",
+        "amproclefttype": "21",
+        "amprocrighttype": "20",
+        "amprocnum": 1,
+        "amproc": "btint28cmp"
+      },
+      "raw_md5": "7ac4ac32cd7983327957b77a3758e324",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btint28cmp",
+        "arguments": "smallint, bigint",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.integer_ops for left type OID 21, right type OID 20",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 445,
+      "oid": "10042",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "integer_ops",
+      "raw_catalog": {
+        "oid": "10042",
+        "amprocfamily": "1976",
+        "amproclefttype": "21",
+        "amprocrighttype": "21",
+        "amprocnum": 1,
+        "amproc": "btint2cmp"
+      },
+      "raw_md5": "5ca16879e9e40461ffb4afa63413acdf",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btint2cmp",
+        "arguments": "smallint, smallint",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.integer_ops for left type OID 21, right type OID 21",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 446,
+      "oid": "10045",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "integer_ops",
+      "raw_catalog": {
+        "oid": "10045",
+        "amprocfamily": "1976",
+        "amproclefttype": "21",
+        "amprocrighttype": "23",
+        "amprocnum": 1,
+        "amproc": "btint24cmp"
+      },
+      "raw_md5": "8e355ff3d89f619b2d0ee418eb821be7",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btint24cmp",
+        "arguments": "smallint, integer",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.integer_ops for left type OID 21, right type OID 23",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 447,
+      "oid": "10053",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "integer_ops",
+      "raw_catalog": {
+        "oid": "10053",
+        "amprocfamily": "1976",
+        "amproclefttype": "23",
+        "amprocrighttype": "20",
+        "amprocnum": 1,
+        "amproc": "btint48cmp"
+      },
+      "raw_md5": "507c448cddf5dd2bca8b55d52c93a9c0",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btint48cmp",
+        "arguments": "integer, bigint",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.integer_ops for left type OID 23, right type OID 20",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 448,
+      "oid": "10054",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "integer_ops",
+      "raw_catalog": {
+        "oid": "10054",
+        "amprocfamily": "1976",
+        "amproclefttype": "23",
+        "amprocrighttype": "21",
+        "amprocnum": 1,
+        "amproc": "btint42cmp"
+      },
+      "raw_md5": "7a1bea8fb900af28baa6598fb89b90e2",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btint42cmp",
+        "arguments": "integer, smallint",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.integer_ops for left type OID 23, right type OID 21",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 449,
+      "oid": "10050",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "integer_ops",
+      "raw_catalog": {
+        "oid": "10050",
+        "amprocfamily": "1976",
+        "amproclefttype": "23",
+        "amprocrighttype": "23",
+        "amprocnum": 1,
+        "amproc": "btint4cmp"
+      },
+      "raw_md5": "f6c9a936a27149c23a5ab87604c56b87",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btint4cmp",
+        "arguments": "integer, integer",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.integer_ops for left type OID 23, right type OID 23",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 450,
+      "oid": "10059",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "integer_ops",
+      "raw_catalog": {
+        "oid": "10059",
+        "amprocfamily": "1976",
+        "amproclefttype": "20",
+        "amprocrighttype": "20",
+        "amprocnum": 2,
+        "amproc": "btint8sortsupport"
+      },
+      "raw_md5": "ddec915faeecafa1e0ff3093a18ce950",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btint8sortsupport",
+        "arguments": "internal",
+        "result": "void",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "sort support; support slot 2 of pg_catalog.btree.integer_ops for left type OID 20, right type OID 20",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 451,
+      "oid": "10043",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "integer_ops",
+      "raw_catalog": {
+        "oid": "10043",
+        "amprocfamily": "1976",
+        "amproclefttype": "21",
+        "amprocrighttype": "21",
+        "amprocnum": 2,
+        "amproc": "btint2sortsupport"
+      },
+      "raw_md5": "995ce16ba1c020f657f4df67777c0fbd",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btint2sortsupport",
+        "arguments": "internal",
+        "result": "void",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "sort support; support slot 2 of pg_catalog.btree.integer_ops for left type OID 21, right type OID 21",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 452,
+      "oid": "10051",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "integer_ops",
+      "raw_catalog": {
+        "oid": "10051",
+        "amprocfamily": "1976",
+        "amproclefttype": "23",
+        "amprocrighttype": "23",
+        "amprocnum": 2,
+        "amproc": "btint4sortsupport"
+      },
+      "raw_md5": "6dfc753f82ed69bb9adb9e6b30330e1f",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btint4sortsupport",
+        "arguments": "internal",
+        "result": "void",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "sort support; support slot 2 of pg_catalog.btree.integer_ops for left type OID 23, right type OID 23",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 453,
+      "oid": "10063",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "integer_ops",
+      "raw_catalog": {
+        "oid": "10063",
+        "amprocfamily": "1976",
+        "amproclefttype": "20",
+        "amprocrighttype": "20",
+        "amprocnum": 3,
+        "amproc": "pg_catalog.in_range"
+      },
+      "raw_md5": "302e7f10a088b8b5571c90565d1c2cce",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "in_range",
+        "arguments": "bigint, bigint, bigint, boolean, boolean",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "provider index access-method callback (see signature/strategy cross-reference); support slot 3 of pg_catalog.btree.integer_ops for left type OID 20, right type OID 20",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 454,
+      "oid": "10047",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "integer_ops",
+      "raw_catalog": {
+        "oid": "10047",
+        "amprocfamily": "1976",
+        "amproclefttype": "21",
+        "amprocrighttype": "20",
+        "amprocnum": 3,
+        "amproc": "pg_catalog.in_range"
+      },
+      "raw_md5": "9f97e7c3f0474d4e15416f9e6cb4dccf",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "in_range",
+        "arguments": "smallint, smallint, bigint, boolean, boolean",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "provider index access-method callback (see signature/strategy cross-reference); support slot 3 of pg_catalog.btree.integer_ops for left type OID 21, right type OID 20",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 455,
+      "oid": "10049",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "integer_ops",
+      "raw_catalog": {
+        "oid": "10049",
+        "amprocfamily": "1976",
+        "amproclefttype": "21",
+        "amprocrighttype": "21",
+        "amprocnum": 3,
+        "amproc": "pg_catalog.in_range"
+      },
+      "raw_md5": "bca9bd5cf1c3283a245864c6fc461d7d",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "in_range",
+        "arguments": "smallint, smallint, smallint, boolean, boolean",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "provider index access-method callback (see signature/strategy cross-reference); support slot 3 of pg_catalog.btree.integer_ops for left type OID 21, right type OID 21",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 456,
+      "oid": "10048",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "integer_ops",
+      "raw_catalog": {
+        "oid": "10048",
+        "amprocfamily": "1976",
+        "amproclefttype": "21",
+        "amprocrighttype": "23",
+        "amprocnum": 3,
+        "amproc": "pg_catalog.in_range"
+      },
+      "raw_md5": "2f53a905184d2344f6896e7b08574e1d",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "in_range",
+        "arguments": "smallint, smallint, integer, boolean, boolean",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "provider index access-method callback (see signature/strategy cross-reference); support slot 3 of pg_catalog.btree.integer_ops for left type OID 21, right type OID 23",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 457,
+      "oid": "10055",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "integer_ops",
+      "raw_catalog": {
+        "oid": "10055",
+        "amprocfamily": "1976",
+        "amproclefttype": "23",
+        "amprocrighttype": "20",
+        "amprocnum": 3,
+        "amproc": "pg_catalog.in_range"
+      },
+      "raw_md5": "ac4e90303354b94c2e2788f725e82d49",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "in_range",
+        "arguments": "integer, integer, bigint, boolean, boolean",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "provider index access-method callback (see signature/strategy cross-reference); support slot 3 of pg_catalog.btree.integer_ops for left type OID 23, right type OID 20",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 458,
+      "oid": "10057",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "integer_ops",
+      "raw_catalog": {
+        "oid": "10057",
+        "amprocfamily": "1976",
+        "amproclefttype": "23",
+        "amprocrighttype": "21",
+        "amprocnum": 3,
+        "amproc": "pg_catalog.in_range"
+      },
+      "raw_md5": "9f66964b0dab9972e840e94ba2598db5",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "in_range",
+        "arguments": "integer, integer, smallint, boolean, boolean",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "provider index access-method callback (see signature/strategy cross-reference); support slot 3 of pg_catalog.btree.integer_ops for left type OID 23, right type OID 21",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 459,
+      "oid": "10056",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "integer_ops",
+      "raw_catalog": {
+        "oid": "10056",
+        "amprocfamily": "1976",
+        "amproclefttype": "23",
+        "amprocrighttype": "23",
+        "amprocnum": 3,
+        "amproc": "pg_catalog.in_range"
+      },
+      "raw_md5": "01316f21d8eef60bdafb0ad47fbb98d5",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "in_range",
+        "arguments": "integer, integer, integer, boolean, boolean",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "provider index access-method callback (see signature/strategy cross-reference); support slot 3 of pg_catalog.btree.integer_ops for left type OID 23, right type OID 23",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 460,
+      "oid": "10060",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "integer_ops",
+      "raw_catalog": {
+        "oid": "10060",
+        "amprocfamily": "1976",
+        "amproclefttype": "20",
+        "amprocrighttype": "20",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "f151be2b9dd9a963dad9a31c9c59a884",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.integer_ops for left type OID 20, right type OID 20",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 461,
+      "oid": "10044",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "integer_ops",
+      "raw_catalog": {
+        "oid": "10044",
+        "amprocfamily": "1976",
+        "amproclefttype": "21",
+        "amprocrighttype": "21",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "41bfca8fbb585aeb1a984e5203b9da3e",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.integer_ops for left type OID 21, right type OID 21",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 462,
+      "oid": "10052",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "integer_ops",
+      "raw_catalog": {
+        "oid": "10052",
+        "amprocfamily": "1976",
+        "amproclefttype": "23",
+        "amprocrighttype": "23",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "e5ada496f51bd4fe0ee9dc241924eced",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.integer_ops for left type OID 23, right type OID 23",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 463,
+      "oid": "10064",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "interval_ops",
+      "raw_catalog": {
+        "oid": "10064",
+        "amprocfamily": "1982",
+        "amproclefttype": "1186",
+        "amprocrighttype": "1186",
+        "amprocnum": 1,
+        "amproc": "interval_cmp"
+      },
+      "raw_md5": "7bc0a548ce824f9aaba2a386bf3fbb7a",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "interval_cmp",
+        "arguments": "interval, interval",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.interval_ops for left type OID 1186, right type OID 1186",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 464,
+      "oid": "10065",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "interval_ops",
+      "raw_catalog": {
+        "oid": "10065",
+        "amprocfamily": "1982",
+        "amproclefttype": "1186",
+        "amprocrighttype": "1186",
+        "amprocnum": 3,
+        "amproc": "pg_catalog.in_range"
+      },
+      "raw_md5": "7634a6d3a9e530ab2bd46766462d8eba",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "in_range",
+        "arguments": "interval, interval, interval, boolean, boolean",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "provider index access-method callback (see signature/strategy cross-reference); support slot 3 of pg_catalog.btree.interval_ops for left type OID 1186, right type OID 1186",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 465,
+      "oid": "10118",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "jsonb_ops",
+      "raw_catalog": {
+        "oid": "10118",
+        "amprocfamily": "4033",
+        "amproclefttype": "3802",
+        "amprocrighttype": "3802",
+        "amprocnum": 1,
+        "amproc": "jsonb_cmp"
+      },
+      "raw_md5": "4fa0099dbbe01170a38e1e0d6720de65",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "jsonb_cmp",
+        "arguments": "jsonb, jsonb",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.jsonb_ops for left type OID 3802, right type OID 3802",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 466,
+      "oid": "10110",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "macaddr8_ops",
+      "raw_catalog": {
+        "oid": "10110",
+        "amprocfamily": "3371",
+        "amproclefttype": "774",
+        "amprocrighttype": "774",
+        "amprocnum": 1,
+        "amproc": "macaddr8_cmp"
+      },
+      "raw_md5": "a40d3eab52146126173cc3b895eef6b5",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "macaddr8_cmp",
+        "arguments": "macaddr8, macaddr8",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.macaddr8_ops for left type OID 774, right type OID 774",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 467,
+      "oid": "10111",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "macaddr8_ops",
+      "raw_catalog": {
+        "oid": "10111",
+        "amprocfamily": "3371",
+        "amproclefttype": "774",
+        "amprocrighttype": "774",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "cdbc6f37a5c404b1bfbefb7ca959c96e",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.macaddr8_ops for left type OID 774, right type OID 774",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 468,
+      "oid": "10066",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "macaddr_ops",
+      "raw_catalog": {
+        "oid": "10066",
+        "amprocfamily": "1984",
+        "amproclefttype": "829",
+        "amprocrighttype": "829",
+        "amprocnum": 1,
+        "amproc": "macaddr_cmp"
+      },
+      "raw_md5": "e561a701223de7baf5c1deff78af97bc",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "macaddr_cmp",
+        "arguments": "macaddr, macaddr",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.macaddr_ops for left type OID 829, right type OID 829",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 469,
+      "oid": "10067",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "macaddr_ops",
+      "raw_catalog": {
+        "oid": "10067",
+        "amprocfamily": "1984",
+        "amproclefttype": "829",
+        "amprocrighttype": "829",
+        "amprocnum": 2,
+        "amproc": "macaddr_sortsupport"
+      },
+      "raw_md5": "ad4d4cfb23ff4938bc729ada2a45d0bf",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "macaddr_sortsupport",
+        "arguments": "internal",
+        "result": "void",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "sort support; support slot 2 of pg_catalog.btree.macaddr_ops for left type OID 829, right type OID 829",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 470,
+      "oid": "10068",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "macaddr_ops",
+      "raw_catalog": {
+        "oid": "10068",
+        "amprocfamily": "1984",
+        "amproclefttype": "829",
+        "amprocrighttype": "829",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "f1f103a093e9b3c3ec4631774621edaf",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.macaddr_ops for left type OID 829, right type OID 829",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 471,
+      "oid": "10099",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "money_ops",
+      "raw_catalog": {
+        "oid": "10099",
+        "amprocfamily": "2099",
+        "amproclefttype": "790",
+        "amprocrighttype": "790",
+        "amprocnum": 1,
+        "amproc": "cash_cmp"
+      },
+      "raw_md5": "a3e3d18a86f194648e090e0421b50105",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "cash_cmp",
+        "arguments": "money, money",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.money_ops for left type OID 790, right type OID 790",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 472,
+      "oid": "10100",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "money_ops",
+      "raw_catalog": {
+        "oid": "10100",
+        "amprocfamily": "2099",
+        "amproclefttype": "790",
+        "amprocrighttype": "790",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "c306e86c102377249072489d468e8cea",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.money_ops for left type OID 790, right type OID 790",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 473,
+      "oid": "10117",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "multirange_ops",
+      "raw_catalog": {
+        "oid": "10117",
+        "amprocfamily": "4199",
+        "amproclefttype": "4537",
+        "amprocrighttype": "4537",
+        "amprocnum": 1,
+        "amproc": "multirange_cmp"
+      },
+      "raw_md5": "e484ba5213deae9c1de7af05fc96619b",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "multirange_cmp",
+        "arguments": "anymultirange, anymultirange",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.multirange_ops for left type OID 4537, right type OID 4537",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 474,
+      "oid": "10039",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "network_ops",
+      "raw_catalog": {
+        "oid": "10039",
+        "amprocfamily": "1974",
+        "amproclefttype": "869",
+        "amprocrighttype": "869",
+        "amprocnum": 1,
+        "amproc": "network_cmp"
+      },
+      "raw_md5": "9bf5f77fca6e4d8fef2c15cd148cae1c",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "network_cmp",
+        "arguments": "inet, inet",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.network_ops for left type OID 869, right type OID 869",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 475,
+      "oid": "10040",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "network_ops",
+      "raw_catalog": {
+        "oid": "10040",
+        "amprocfamily": "1974",
+        "amproclefttype": "869",
+        "amprocrighttype": "869",
+        "amprocnum": 2,
+        "amproc": "network_sortsupport"
+      },
+      "raw_md5": "617fedaff8136d086864646fed127695",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "network_sortsupport",
+        "arguments": "internal",
+        "result": "void",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "sort support; support slot 2 of pg_catalog.btree.network_ops for left type OID 869, right type OID 869",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 476,
+      "oid": "10041",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "network_ops",
+      "raw_catalog": {
+        "oid": "10041",
+        "amprocfamily": "1974",
+        "amproclefttype": "869",
+        "amprocrighttype": "869",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "94022f8e5d9b4bda5149ffdd0b7e520c",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.network_ops for left type OID 869, right type OID 869",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 477,
+      "oid": "10069",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "numeric_ops",
+      "raw_catalog": {
+        "oid": "10069",
+        "amprocfamily": "1988",
+        "amproclefttype": "1700",
+        "amprocrighttype": "1700",
+        "amprocnum": 1,
+        "amproc": "numeric_cmp"
+      },
+      "raw_md5": "0097dc5e8a36135d88353521613ad5d3",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "numeric_cmp",
+        "arguments": "numeric, numeric",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.numeric_ops for left type OID 1700, right type OID 1700",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 478,
+      "oid": "10070",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "numeric_ops",
+      "raw_catalog": {
+        "oid": "10070",
+        "amprocfamily": "1988",
+        "amproclefttype": "1700",
+        "amprocrighttype": "1700",
+        "amprocnum": 2,
+        "amproc": "numeric_sortsupport"
+      },
+      "raw_md5": "e21464afcc862a1e9ee20259551d7ae7",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "numeric_sortsupport",
+        "arguments": "internal",
+        "result": "void",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "sort support; support slot 2 of pg_catalog.btree.numeric_ops for left type OID 1700, right type OID 1700",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 479,
+      "oid": "10071",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "numeric_ops",
+      "raw_catalog": {
+        "oid": "10071",
+        "amprocfamily": "1988",
+        "amproclefttype": "1700",
+        "amprocrighttype": "1700",
+        "amprocnum": 3,
+        "amproc": "pg_catalog.in_range"
+      },
+      "raw_md5": "549eef83d136b55bb52ee0dc07c7fd17",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "in_range",
+        "arguments": "numeric, numeric, numeric, boolean, boolean",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "provider index access-method callback (see signature/strategy cross-reference); support slot 3 of pg_catalog.btree.numeric_ops for left type OID 1700, right type OID 1700",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 480,
+      "oid": "10072",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "oid_ops",
+      "raw_catalog": {
+        "oid": "10072",
+        "amprocfamily": "1989",
+        "amproclefttype": "26",
+        "amprocrighttype": "26",
+        "amprocnum": 1,
+        "amproc": "btoidcmp"
+      },
+      "raw_md5": "db1ed1760adc4fe98e8bb9b288ecc44d",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btoidcmp",
+        "arguments": "oid, oid",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.oid_ops for left type OID 26, right type OID 26",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 481,
+      "oid": "10073",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "oid_ops",
+      "raw_catalog": {
+        "oid": "10073",
+        "amprocfamily": "1989",
+        "amproclefttype": "26",
+        "amprocrighttype": "26",
+        "amprocnum": 2,
+        "amproc": "btoidsortsupport"
+      },
+      "raw_md5": "062bca87001168b648a6dd916813ad39",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btoidsortsupport",
+        "arguments": "internal",
+        "result": "void",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "sort support; support slot 2 of pg_catalog.btree.oid_ops for left type OID 26, right type OID 26",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 482,
+      "oid": "10074",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "oid_ops",
+      "raw_catalog": {
+        "oid": "10074",
+        "amprocfamily": "1989",
+        "amproclefttype": "26",
+        "amprocrighttype": "26",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "2d23ed7610f1f300745ee2ca5f1c2b0d",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.oid_ops for left type OID 26, right type OID 26",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 483,
+      "oid": "10075",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "oidvector_ops",
+      "raw_catalog": {
+        "oid": "10075",
+        "amprocfamily": "1991",
+        "amproclefttype": "30",
+        "amprocrighttype": "30",
+        "amprocnum": 1,
+        "amproc": "btoidvectorcmp"
+      },
+      "raw_md5": "908587f979e78b75c454365ef3c96857",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btoidvectorcmp",
+        "arguments": "oidvector, oidvector",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.oidvector_ops for left type OID 30, right type OID 30",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 484,
+      "oid": "10076",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "oidvector_ops",
+      "raw_catalog": {
+        "oid": "10076",
+        "amprocfamily": "1991",
+        "amproclefttype": "30",
+        "amprocrighttype": "30",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "189befd8a35374ac57188accfee883f6",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.oidvector_ops for left type OID 30, right type OID 30",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 485,
+      "oid": "10108",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "pg_lsn_ops",
+      "raw_catalog": {
+        "oid": "10108",
+        "amprocfamily": "3253",
+        "amproclefttype": "3220",
+        "amprocrighttype": "3220",
+        "amprocnum": 1,
+        "amproc": "pg_lsn_cmp"
+      },
+      "raw_md5": "bb741db6943c9c33f4f0e8a278999272",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "pg_lsn_cmp",
+        "arguments": "pg_lsn, pg_lsn",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.pg_lsn_ops for left type OID 3220, right type OID 3220",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 486,
+      "oid": "10109",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "pg_lsn_ops",
+      "raw_catalog": {
+        "oid": "10109",
+        "amprocfamily": "3253",
+        "amproclefttype": "3220",
+        "amprocrighttype": "3220",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "eed3772172c172f1a60a9a6e75f61e76",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.pg_lsn_ops for left type OID 3220, right type OID 3220",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 487,
+      "oid": "10116",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "range_ops",
+      "raw_catalog": {
+        "oid": "10116",
+        "amprocfamily": "3901",
+        "amproclefttype": "3831",
+        "amprocrighttype": "3831",
+        "amprocnum": 1,
+        "amproc": "range_cmp"
+      },
+      "raw_md5": "3d4d5a2fe7ed967c086483e7fe81a76e",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "range_cmp",
+        "arguments": "anyrange, anyrange",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.range_ops for left type OID 3831, right type OID 3831",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 488,
+      "oid": "10107",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "record_image_ops",
+      "raw_catalog": {
+        "oid": "10107",
+        "amprocfamily": "3194",
+        "amproclefttype": "2249",
+        "amprocrighttype": "2249",
+        "amprocnum": 1,
+        "amproc": "btrecordimagecmp"
+      },
+      "raw_md5": "bed5c81b810320e5c22e00e80fbce55f",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btrecordimagecmp",
+        "arguments": "record, record",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.record_image_ops for left type OID 2249, right type OID 2249",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 489,
+      "oid": "10106",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "record_ops",
+      "raw_catalog": {
+        "oid": "10106",
+        "amprocfamily": "2994",
+        "amproclefttype": "2249",
+        "amprocrighttype": "2249",
+        "amprocnum": 1,
+        "amproc": "btrecordcmp"
+      },
+      "raw_md5": "967a2a86f19b4e44f4c6cd69e1106fe8",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btrecordcmp",
+        "arguments": "record, record",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.record_ops for left type OID 2249, right type OID 2249",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 490,
+      "oid": "10080",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "text_ops",
+      "raw_catalog": {
+        "oid": "10080",
+        "amprocfamily": "1994",
+        "amproclefttype": "19",
+        "amprocrighttype": "19",
+        "amprocnum": 1,
+        "amproc": "btnamecmp"
+      },
+      "raw_md5": "bf149f7719a4d32f924a77319b662554",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btnamecmp",
+        "arguments": "name, name",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.text_ops for left type OID 19, right type OID 19",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 491,
+      "oid": "10083",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "text_ops",
+      "raw_catalog": {
+        "oid": "10083",
+        "amprocfamily": "1994",
+        "amproclefttype": "19",
+        "amprocrighttype": "25",
+        "amprocnum": 1,
+        "amproc": "btnametextcmp"
+      },
+      "raw_md5": "a0aaf17aa2ee24877d5bb23bda5e5dba",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btnametextcmp",
+        "arguments": "name, text",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.text_ops for left type OID 19, right type OID 25",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 492,
+      "oid": "10084",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "text_ops",
+      "raw_catalog": {
+        "oid": "10084",
+        "amprocfamily": "1994",
+        "amproclefttype": "25",
+        "amprocrighttype": "19",
+        "amprocnum": 1,
+        "amproc": "bttextnamecmp"
+      },
+      "raw_md5": "d42acf7511fbbbc21771a5004f5290ef",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "bttextnamecmp",
+        "arguments": "text, name",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.text_ops for left type OID 25, right type OID 19",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 493,
+      "oid": "10077",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "text_ops",
+      "raw_catalog": {
+        "oid": "10077",
+        "amprocfamily": "1994",
+        "amproclefttype": "25",
+        "amprocrighttype": "25",
+        "amprocnum": 1,
+        "amproc": "bttextcmp"
+      },
+      "raw_md5": "c3f5fb1c0bf82d58ae26089b1a15176c",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "bttextcmp",
+        "arguments": "text, text",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.text_ops for left type OID 25, right type OID 25",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 494,
+      "oid": "10081",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "text_ops",
+      "raw_catalog": {
+        "oid": "10081",
+        "amprocfamily": "1994",
+        "amproclefttype": "19",
+        "amprocrighttype": "19",
+        "amprocnum": 2,
+        "amproc": "btnamesortsupport"
+      },
+      "raw_md5": "0cff50b65002640dfd1df1c6c0f32505",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btnamesortsupport",
+        "arguments": "internal",
+        "result": "void",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "sort support; support slot 2 of pg_catalog.btree.text_ops for left type OID 19, right type OID 19",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 495,
+      "oid": "10078",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "text_ops",
+      "raw_catalog": {
+        "oid": "10078",
+        "amprocfamily": "1994",
+        "amproclefttype": "25",
+        "amprocrighttype": "25",
+        "amprocnum": 2,
+        "amproc": "bttextsortsupport"
+      },
+      "raw_md5": "0e21ebeb148057340fe815905e1b05fd",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "bttextsortsupport",
+        "arguments": "internal",
+        "result": "void",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "sort support; support slot 2 of pg_catalog.btree.text_ops for left type OID 25, right type OID 25",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 496,
+      "oid": "10082",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "text_ops",
+      "raw_catalog": {
+        "oid": "10082",
+        "amprocfamily": "1994",
+        "amproclefttype": "19",
+        "amprocrighttype": "19",
+        "amprocnum": 4,
+        "amproc": "btvarstrequalimage"
+      },
+      "raw_md5": "44f2db445278184e94476bb89bcfe003",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btvarstrequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.text_ops for left type OID 19, right type OID 19",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 497,
+      "oid": "10079",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "text_ops",
+      "raw_catalog": {
+        "oid": "10079",
+        "amprocfamily": "1994",
+        "amproclefttype": "25",
+        "amprocrighttype": "25",
+        "amprocnum": 4,
+        "amproc": "btvarstrequalimage"
+      },
+      "raw_md5": "17fc0d6573203119c2d95277155362d3",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btvarstrequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.text_ops for left type OID 25, right type OID 25",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 498,
+      "oid": "10093",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "text_pattern_ops",
+      "raw_catalog": {
+        "oid": "10093",
+        "amprocfamily": "2095",
+        "amproclefttype": "25",
+        "amprocrighttype": "25",
+        "amprocnum": 1,
+        "amproc": "bttext_pattern_cmp"
+      },
+      "raw_md5": "09764c2570ead258c4ff2fa34ac1b511",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "bttext_pattern_cmp",
+        "arguments": "text, text",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.text_pattern_ops for left type OID 25, right type OID 25",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 499,
+      "oid": "10094",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "text_pattern_ops",
+      "raw_catalog": {
+        "oid": "10094",
+        "amprocfamily": "2095",
+        "amproclefttype": "25",
+        "amprocrighttype": "25",
+        "amprocnum": 2,
+        "amproc": "bttext_pattern_sortsupport"
+      },
+      "raw_md5": "febd846789ea5c4a1668333421dc2230",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "bttext_pattern_sortsupport",
+        "arguments": "internal",
+        "result": "void",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "sort support; support slot 2 of pg_catalog.btree.text_pattern_ops for left type OID 25, right type OID 25",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 500,
+      "oid": "10095",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "text_pattern_ops",
+      "raw_catalog": {
+        "oid": "10095",
+        "amprocfamily": "2095",
+        "amproclefttype": "25",
+        "amprocrighttype": "25",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "eafb9df263532631bd629c5135e6c141",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.text_pattern_ops for left type OID 25, right type OID 25",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 501,
+      "oid": "10101",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "tid_ops",
+      "raw_catalog": {
+        "oid": "10101",
+        "amprocfamily": "2789",
+        "amproclefttype": "27",
+        "amprocrighttype": "27",
+        "amprocnum": 1,
+        "amproc": "bttidcmp"
+      },
+      "raw_md5": "eac298dff4d07cabfdba2c79a213302d",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "bttidcmp",
+        "arguments": "tid, tid",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.tid_ops for left type OID 27, right type OID 27",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 502,
+      "oid": "10102",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "tid_ops",
+      "raw_catalog": {
+        "oid": "10102",
+        "amprocfamily": "2789",
+        "amproclefttype": "27",
+        "amprocrighttype": "27",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "0a48430283f836b9e54b99a013fb8436",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.tid_ops for left type OID 27, right type OID 27",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 503,
+      "oid": "10085",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "time_ops",
+      "raw_catalog": {
+        "oid": "10085",
+        "amprocfamily": "1996",
+        "amproclefttype": "1083",
+        "amprocrighttype": "1083",
+        "amprocnum": 1,
+        "amproc": "time_cmp"
+      },
+      "raw_md5": "97697a0ff0923d19a03f758b0e6a1b35",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "time_cmp",
+        "arguments": "time without time zone, time without time zone",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.time_ops for left type OID 1083, right type OID 1083",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 504,
+      "oid": "10087",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "time_ops",
+      "raw_catalog": {
+        "oid": "10087",
+        "amprocfamily": "1996",
+        "amproclefttype": "1083",
+        "amprocrighttype": "1186",
+        "amprocnum": 3,
+        "amproc": "pg_catalog.in_range"
+      },
+      "raw_md5": "0da266eb5ab8f62b07278cd84220cb77",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "in_range",
+        "arguments": "time without time zone, time without time zone, interval, boolean, boolean",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "provider index access-method callback (see signature/strategy cross-reference); support slot 3 of pg_catalog.btree.time_ops for left type OID 1083, right type OID 1186",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 505,
+      "oid": "10086",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "time_ops",
+      "raw_catalog": {
+        "oid": "10086",
+        "amprocfamily": "1996",
+        "amproclefttype": "1083",
+        "amprocrighttype": "1083",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "f25fb5ac08b732090643b270b97e1172",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.time_ops for left type OID 1083, right type OID 1083",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 506,
+      "oid": "10088",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "timetz_ops",
+      "raw_catalog": {
+        "oid": "10088",
+        "amprocfamily": "2000",
+        "amproclefttype": "1266",
+        "amprocrighttype": "1266",
+        "amprocnum": 1,
+        "amproc": "timetz_cmp"
+      },
+      "raw_md5": "6d96affe344d2c8f24326e2024a89660",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "timetz_cmp",
+        "arguments": "time with time zone, time with time zone",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.timetz_ops for left type OID 1266, right type OID 1266",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 507,
+      "oid": "10090",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "timetz_ops",
+      "raw_catalog": {
+        "oid": "10090",
+        "amprocfamily": "2000",
+        "amproclefttype": "1266",
+        "amprocrighttype": "1186",
+        "amprocnum": 3,
+        "amproc": "pg_catalog.in_range"
+      },
+      "raw_md5": "0b6e5bb7fcca75cb9f94a016207ba416",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "in_range",
+        "arguments": "time with time zone, time with time zone, interval, boolean, boolean",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "provider index access-method callback (see signature/strategy cross-reference); support slot 3 of pg_catalog.btree.timetz_ops for left type OID 1266, right type OID 1186",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 508,
+      "oid": "10089",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "timetz_ops",
+      "raw_catalog": {
+        "oid": "10089",
+        "amprocfamily": "2000",
+        "amproclefttype": "1266",
+        "amprocrighttype": "1266",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "f809dfd443759474837c89988348eb02",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.timetz_ops for left type OID 1266, right type OID 1266",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 509,
+      "oid": "10115",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "tsquery_ops",
+      "raw_catalog": {
+        "oid": "10115",
+        "amprocfamily": "3683",
+        "amproclefttype": "3615",
+        "amprocrighttype": "3615",
+        "amprocnum": 1,
+        "amproc": "tsquery_cmp"
+      },
+      "raw_md5": "719f17bcf227d6fa6b49b0a18a4d99a3",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "tsquery_cmp",
+        "arguments": "tsquery, tsquery",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.tsquery_ops for left type OID 3615, right type OID 3615",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 510,
+      "oid": "10114",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "tsvector_ops",
+      "raw_catalog": {
+        "oid": "10114",
+        "amprocfamily": "3626",
+        "amproclefttype": "3614",
+        "amprocrighttype": "3614",
+        "amprocnum": 1,
+        "amproc": "tsvector_cmp"
+      },
+      "raw_md5": "d095bc86845427e15bd888931615e06a",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "tsvector_cmp",
+        "arguments": "tsvector, tsvector",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.tsvector_ops for left type OID 3614, right type OID 3614",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 511,
+      "oid": "10103",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "uuid_ops",
+      "raw_catalog": {
+        "oid": "10103",
+        "amprocfamily": "2968",
+        "amproclefttype": "2950",
+        "amprocrighttype": "2950",
+        "amprocnum": 1,
+        "amproc": "uuid_cmp"
+      },
+      "raw_md5": "3231ca5a026a57c97f8dcf213ec9893e",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "uuid_cmp",
+        "arguments": "uuid, uuid",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.uuid_ops for left type OID 2950, right type OID 2950",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 512,
+      "oid": "10104",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "uuid_ops",
+      "raw_catalog": {
+        "oid": "10104",
+        "amprocfamily": "2968",
+        "amproclefttype": "2950",
+        "amprocrighttype": "2950",
+        "amprocnum": 2,
+        "amproc": "uuid_sortsupport"
+      },
+      "raw_md5": "96d530e9826aa1324a87d1fc6dd25795",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "uuid_sortsupport",
+        "arguments": "internal",
+        "result": "void",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "sort support; support slot 2 of pg_catalog.btree.uuid_ops for left type OID 2950, right type OID 2950",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 513,
+      "oid": "10105",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "uuid_ops",
+      "raw_catalog": {
+        "oid": "10105",
+        "amprocfamily": "2968",
+        "amproclefttype": "2950",
+        "amprocrighttype": "2950",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "505049777840adec479df58cc7a09370",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.uuid_ops for left type OID 2950, right type OID 2950",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 514,
+      "oid": "10091",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "varbit_ops",
+      "raw_catalog": {
+        "oid": "10091",
+        "amprocfamily": "2002",
+        "amproclefttype": "1562",
+        "amprocrighttype": "1562",
+        "amprocnum": 1,
+        "amproc": "varbitcmp"
+      },
+      "raw_md5": "aaa1486932294a202d6e6740f37bfaf1",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "varbitcmp",
+        "arguments": "bit varying, bit varying",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.varbit_ops for left type OID 1562, right type OID 1562",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 515,
+      "oid": "10092",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "varbit_ops",
+      "raw_catalog": {
+        "oid": "10092",
+        "amprocfamily": "2002",
+        "amproclefttype": "1562",
+        "amprocrighttype": "1562",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "5fedf22c0ef97ee2309559617d1cf7d6",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.varbit_ops for left type OID 1562, right type OID 1562",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 516,
+      "oid": "10119",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "xid8_ops",
+      "raw_catalog": {
+        "oid": "10119",
+        "amprocfamily": "5067",
+        "amproclefttype": "5069",
+        "amprocrighttype": "5069",
+        "amprocnum": 1,
+        "amproc": "xid8cmp"
+      },
+      "raw_md5": "e8694b814b348bc6cff3ac619a5f47df",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "xid8cmp",
+        "arguments": "xid8, xid8",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.btree.xid8_ops for left type OID 5069, right type OID 5069",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 517,
+      "oid": "10120",
+      "namespace": "pg_catalog",
+      "method": "btree",
+      "family": "xid8_ops",
+      "raw_catalog": {
+        "oid": "10120",
+        "amprocfamily": "5067",
+        "amproclefttype": "5069",
+        "amprocrighttype": "5069",
+        "amprocnum": 4,
+        "amproc": "btequalimage"
+      },
+      "raw_md5": "017d06db1c85f1ee84cf2c6751abc275",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btequalimage",
+        "arguments": "oid",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "index tree maintenance / key compression or equality; support slot 4 of pg_catalog.btree.xid8_ops for left type OID 5069, right type OID 5069",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 518,
+      "oid": "10258",
+      "namespace": "pg_catalog",
+      "method": "gin",
+      "family": "array_ops",
+      "raw_catalog": {
+        "oid": "10258",
+        "amprocfamily": "2745",
+        "amproclefttype": "2277",
+        "amprocrighttype": "2277",
+        "amprocnum": 2,
+        "amproc": "pg_catalog.ginarrayextract"
+      },
+      "raw_md5": "a5410fdb9910d38eeda17f3634815e6e",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "ginarrayextract",
+        "arguments": "anyarray, internal, internal",
+        "result": "internal",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "extract token/key for index entries or query; support slot 2 of pg_catalog.gin.array_ops for left type OID 2277, right type OID 2277",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 519,
+      "oid": "10259",
+      "namespace": "pg_catalog",
+      "method": "gin",
+      "family": "array_ops",
+      "raw_catalog": {
+        "oid": "10259",
+        "amprocfamily": "2745",
+        "amproclefttype": "2277",
+        "amprocrighttype": "2277",
+        "amprocnum": 3,
+        "amproc": "ginqueryarrayextract"
+      },
+      "raw_md5": "b55d7cb11b171aa235934beb0c20b7ad",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "ginqueryarrayextract",
+        "arguments": "anyarray, internal, smallint, internal, internal, internal, internal",
+        "result": "internal",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "extract token/key for index entries or query; support slot 3 of pg_catalog.gin.array_ops for left type OID 2277, right type OID 2277",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 520,
+      "oid": "10260",
+      "namespace": "pg_catalog",
+      "method": "gin",
+      "family": "array_ops",
+      "raw_catalog": {
+        "oid": "10260",
+        "amprocfamily": "2745",
+        "amproclefttype": "2277",
+        "amprocrighttype": "2277",
+        "amprocnum": 4,
+        "amproc": "ginarrayconsistent"
+      },
+      "raw_md5": "6dbd226f04634d82529301b99bf48f1d",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "ginarrayconsistent",
+        "arguments": "internal, smallint, anyarray, integer, internal, internal, internal, internal",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "check index predicate match, possibly tri-valued; support slot 4 of pg_catalog.gin.array_ops for left type OID 2277, right type OID 2277",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 521,
+      "oid": "10261",
+      "namespace": "pg_catalog",
+      "method": "gin",
+      "family": "array_ops",
+      "raw_catalog": {
+        "oid": "10261",
+        "amprocfamily": "2745",
+        "amproclefttype": "2277",
+        "amprocrighttype": "2277",
+        "amprocnum": 6,
+        "amproc": "ginarraytriconsistent"
+      },
+      "raw_md5": "7598c51f1d3cca3023d547731ebb8800",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "ginarraytriconsistent",
+        "arguments": "internal, smallint, anyarray, integer, internal, internal, internal",
+        "result": "\"char\"",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "check index predicate match, possibly tri-valued; support slot 6 of pg_catalog.gin.array_ops for left type OID 2277, right type OID 2277",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 522,
+      "oid": "10268",
+      "namespace": "pg_catalog",
+      "method": "gin",
+      "family": "jsonb_ops",
+      "raw_catalog": {
+        "oid": "10268",
+        "amprocfamily": "4036",
+        "amproclefttype": "3802",
+        "amprocrighttype": "3802",
+        "amprocnum": 1,
+        "amproc": "gin_compare_jsonb"
+      },
+      "raw_md5": "028afda74e74eaedbf4de2fc861e8bc2",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "gin_compare_jsonb",
+        "arguments": "text, text",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.gin.jsonb_ops for left type OID 3802, right type OID 3802",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 523,
+      "oid": "10269",
+      "namespace": "pg_catalog",
+      "method": "gin",
+      "family": "jsonb_ops",
+      "raw_catalog": {
+        "oid": "10269",
+        "amprocfamily": "4036",
+        "amproclefttype": "3802",
+        "amprocrighttype": "3802",
+        "amprocnum": 2,
+        "amproc": "gin_extract_jsonb"
+      },
+      "raw_md5": "acd670dd1fe40000afadbb9145c8e79f",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "gin_extract_jsonb",
+        "arguments": "jsonb, internal, internal",
+        "result": "internal",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "extract token/key for index entries or query; support slot 2 of pg_catalog.gin.jsonb_ops for left type OID 3802, right type OID 3802",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 524,
+      "oid": "10270",
+      "namespace": "pg_catalog",
+      "method": "gin",
+      "family": "jsonb_ops",
+      "raw_catalog": {
+        "oid": "10270",
+        "amprocfamily": "4036",
+        "amproclefttype": "3802",
+        "amprocrighttype": "3802",
+        "amprocnum": 3,
+        "amproc": "gin_extract_jsonb_query"
+      },
+      "raw_md5": "a5ca68d8e788f7fa95e95feb63ecb07c",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "gin_extract_jsonb_query",
+        "arguments": "jsonb, internal, smallint, internal, internal, internal, internal",
+        "result": "internal",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "extract token/key for index entries or query; support slot 3 of pg_catalog.gin.jsonb_ops for left type OID 3802, right type OID 3802",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 525,
+      "oid": "10271",
+      "namespace": "pg_catalog",
+      "method": "gin",
+      "family": "jsonb_ops",
+      "raw_catalog": {
+        "oid": "10271",
+        "amprocfamily": "4036",
+        "amproclefttype": "3802",
+        "amprocrighttype": "3802",
+        "amprocnum": 4,
+        "amproc": "gin_consistent_jsonb"
+      },
+      "raw_md5": "672431a73c61d4f0de96e3aa2027d489",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "gin_consistent_jsonb",
+        "arguments": "internal, smallint, jsonb, integer, internal, internal, internal, internal",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "check index predicate match, possibly tri-valued; support slot 4 of pg_catalog.gin.jsonb_ops for left type OID 3802, right type OID 3802",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 526,
+      "oid": "10272",
+      "namespace": "pg_catalog",
+      "method": "gin",
+      "family": "jsonb_ops",
+      "raw_catalog": {
+        "oid": "10272",
+        "amprocfamily": "4036",
+        "amproclefttype": "3802",
+        "amprocrighttype": "3802",
+        "amprocnum": 6,
+        "amproc": "gin_triconsistent_jsonb"
+      },
+      "raw_md5": "d1f0399ef76bc378b295fe48a56134aa",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "gin_triconsistent_jsonb",
+        "arguments": "internal, smallint, jsonb, integer, internal, internal, internal",
+        "result": "\"char\"",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "check index predicate match, possibly tri-valued; support slot 6 of pg_catalog.gin.jsonb_ops for left type OID 3802, right type OID 3802",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 527,
+      "oid": "10273",
+      "namespace": "pg_catalog",
+      "method": "gin",
+      "family": "jsonb_path_ops",
+      "raw_catalog": {
+        "oid": "10273",
+        "amprocfamily": "4037",
+        "amproclefttype": "3802",
+        "amprocrighttype": "3802",
+        "amprocnum": 1,
+        "amproc": "btint4cmp"
+      },
+      "raw_md5": "55a625844aa7ef3c41c75f77ddf73ae6",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "btint4cmp",
+        "arguments": "integer, integer",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.gin.jsonb_path_ops for left type OID 3802, right type OID 3802",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 528,
+      "oid": "10274",
+      "namespace": "pg_catalog",
+      "method": "gin",
+      "family": "jsonb_path_ops",
+      "raw_catalog": {
+        "oid": "10274",
+        "amprocfamily": "4037",
+        "amproclefttype": "3802",
+        "amprocrighttype": "3802",
+        "amprocnum": 2,
+        "amproc": "gin_extract_jsonb_path"
+      },
+      "raw_md5": "6a00fea4602da1a08d3205c5d3055a17",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "gin_extract_jsonb_path",
+        "arguments": "jsonb, internal, internal",
+        "result": "internal",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "extract token/key for index entries or query; support slot 2 of pg_catalog.gin.jsonb_path_ops for left type OID 3802, right type OID 3802",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 529,
+      "oid": "10275",
+      "namespace": "pg_catalog",
+      "method": "gin",
+      "family": "jsonb_path_ops",
+      "raw_catalog": {
+        "oid": "10275",
+        "amprocfamily": "4037",
+        "amproclefttype": "3802",
+        "amprocrighttype": "3802",
+        "amprocnum": 3,
+        "amproc": "gin_extract_jsonb_query_path"
+      },
+      "raw_md5": "7dfe4ca51ab6a613d4b7b510d5b677af",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "gin_extract_jsonb_query_path",
+        "arguments": "jsonb, internal, smallint, internal, internal, internal, internal",
+        "result": "internal",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "extract token/key for index entries or query; support slot 3 of pg_catalog.gin.jsonb_path_ops for left type OID 3802, right type OID 3802",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 530,
+      "oid": "10276",
+      "namespace": "pg_catalog",
+      "method": "gin",
+      "family": "jsonb_path_ops",
+      "raw_catalog": {
+        "oid": "10276",
+        "amprocfamily": "4037",
+        "amproclefttype": "3802",
+        "amprocrighttype": "3802",
+        "amprocnum": 4,
+        "amproc": "gin_consistent_jsonb_path"
+      },
+      "raw_md5": "399b73075c2ee6e1012cf6cae3ac16b3",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "gin_consistent_jsonb_path",
+        "arguments": "internal, smallint, jsonb, integer, internal, internal, internal, internal",
+        "result": "boolean",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "check index predicate match, possibly tri-valued; support slot 4 of pg_catalog.gin.jsonb_path_ops for left type OID 3802, right type OID 3802",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 531,
+      "oid": "10277",
+      "namespace": "pg_catalog",
+      "method": "gin",
+      "family": "jsonb_path_ops",
+      "raw_catalog": {
+        "oid": "10277",
+        "amprocfamily": "4037",
+        "amproclefttype": "3802",
+        "amprocrighttype": "3802",
+        "amprocnum": 6,
+        "amproc": "gin_triconsistent_jsonb_path"
+      },
+      "raw_md5": "e1349a5b60363eb254968a026cac2caf",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "gin_triconsistent_jsonb_path",
+        "arguments": "internal, smallint, jsonb, integer, internal, internal, internal",
+        "result": "\"char\"",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "check index predicate match, possibly tri-valued; support slot 6 of pg_catalog.gin.jsonb_path_ops for left type OID 3802, right type OID 3802",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 532,
+      "oid": "10262",
+      "namespace": "pg_catalog",
+      "method": "gin",
+      "family": "tsvector_ops",
+      "raw_catalog": {
+        "oid": "10262",
+        "amprocfamily": "3659",
+        "amproclefttype": "3614",
+        "amprocrighttype": "3614",
+        "amprocnum": 1,
+        "amproc": "gin_cmp_tslexeme"
+      },
+      "raw_md5": "34846f44ec78be1743666316738d8407",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "gin_cmp_tslexeme",
+        "arguments": "text, text",
+        "result": "integer",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "cross-type/equality/order comparator; support slot 1 of pg_catalog.gin.tsvector_ops for left type OID 3614, right type OID 3614",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 533,
+      "oid": "10263",
+      "namespace": "pg_catalog",
+      "method": "gin",
+      "family": "tsvector_ops",
+      "raw_catalog": {
+        "oid": "10263",
+        "amprocfamily": "3659",
+        "amproclefttype": "3614",
+        "amprocrighttype": "3614",
+        "amprocnum": 2,
+        "amproc": "pg_catalog.gin_extract_tsvector"
+      },
+      "raw_md5": "2d528c5fdaeb4e545ef8ea9f01d499f2",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "gin_extract_tsvector",
+        "arguments": "tsvector, internal, internal",
+        "result": "internal",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "extract token/key for index entries or query; support slot 2 of pg_catalog.gin.tsvector_ops for left type OID 3614, right type OID 3614",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    },
+    {
+      "ordinal": 534,
+      "oid": "10264",
+      "namespace": "pg_catalog",
+      "method": "gin",
+      "family": "tsvector_ops",
+      "raw_catalog": {
+        "oid": "10264",
+        "amprocfamily": "3659",
+        "amproclefttype": "3614",
+        "amprocrighttype": "3614",
+        "amprocnum": 3,
+        "amproc": "pg_catalog.gin_extract_tsquery"
+      },
+      "raw_md5": "0652b73b832eccd60f6ef3b12d729c5a",
+      "function": {
+        "namespace": "pg_catalog",
+        "name": "gin_extract_tsquery",
+        "arguments": "tsvector, internal, smallint, internal, internal, internal, internal",
+        "result": "internal",
+        "language": "internal",
+        "security_definer": false,
+        "kind": "f"
+      },
+      "semantics": "extract token/key for index entries or query; support slot 3 of pg_catalog.gin.tsvector_ops for left type OID 3614, right type OID 3614",
+      "verdict": "COMPLETE_VISIBLE_SUPPORT_MEMBERSHIP_DEFINITION_REVIEWED; NATIVE_IMPLEMENTATION_UNAVAILABLE; NO_CONFIRMED_PROVIDER_CLEANUP"
+    }
+  ]
+}

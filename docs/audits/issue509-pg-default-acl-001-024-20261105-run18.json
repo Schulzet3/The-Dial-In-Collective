@@ -1,0 +1,2226 @@
+{
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "review_date_utc": "2026-11-05",
+  "source": "live pg_default_acl; fully decoded ACL grants, no member records",
+  "coverage": {
+    "reviewed": 24,
+    "total_at_read": 24,
+    "next_ordinal": null,
+    "clientDefaultRows": 14,
+    "publicRoleDefaultRows": 0,
+    "schemata": {
+      "auth": 3,
+      "extensions": 3,
+      "graphql": 3,
+      "graphql_public": 3,
+      "public": 6,
+      "realtime": 3,
+      "storage": 3
+    }
+  },
+  "interpretation": [
+    "Supabase-managed defaults for GraphQL and public/storage schemas can include broad anon/authenticated table/sequence/function grants; future objects still need RLS and explicit publication review.",
+    "Public schema defaults depend on creating role. postgres-created public functions default to postgres/service_role only, while supabase_admin-created functions default to client EXECUTE.",
+    "No PUBLIC role grants in current rows, but per-object inherited effective privileges and HTTP schema exposure remain unverified.",
+    "No safe modification to live provider defaults or automatically created future objects is authorized."
+  ],
+  "records": [
+    {
+      "ordinal": 1,
+      "oid": "16557",
+      "owner_role_oid": "16545",
+      "owner": "supabase_auth_admin",
+      "schema": "auth",
+      "object_type": "S",
+      "full_acl": "{postgres=rwU/supabase_auth_admin,dashboard_user=rwU/supabase_auth_admin}",
+      "source_md5": "c0ebdc25bb50ac0b8b4fe1c5ec17a292",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "USAGE"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "USAGE"
+        }
+      ],
+      "client_grants": 0,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "NO_DIRECT_ANON_AUTHENTICATED_DEFAULT_GRANT",
+      "safe_deletion": "NOT_ESTABLISHED"
+    },
+    {
+      "ordinal": 2,
+      "oid": "16558",
+      "owner_role_oid": "16545",
+      "owner": "supabase_auth_admin",
+      "schema": "auth",
+      "object_type": "f",
+      "full_acl": "{postgres=X/supabase_auth_admin,dashboard_user=X/supabase_auth_admin}",
+      "source_md5": "6c86847f53ec609a62e85a96763b13ec",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "EXECUTE"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "EXECUTE"
+        }
+      ],
+      "client_grants": 0,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "NO_DIRECT_ANON_AUTHENTICATED_DEFAULT_GRANT",
+      "safe_deletion": "NOT_ESTABLISHED"
+    },
+    {
+      "ordinal": 3,
+      "oid": "16556",
+      "owner_role_oid": "16545",
+      "owner": "supabase_auth_admin",
+      "schema": "auth",
+      "object_type": "r",
+      "full_acl": "{postgres=arwdDxtm/supabase_auth_admin,dashboard_user=arwdDxtm/supabase_auth_admin}",
+      "source_md5": "165443bf5bf5748ce9c64361a73f45dd",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_auth_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        }
+      ],
+      "client_grants": 0,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "NO_DIRECT_ANON_AUTHENTICATED_DEFAULT_GRANT",
+      "safe_deletion": "NOT_ESTABLISHED"
+    },
+    {
+      "ordinal": 4,
+      "oid": "16636",
+      "owner_role_oid": "10",
+      "owner": "supabase_admin",
+      "schema": "extensions",
+      "object_type": "S",
+      "full_acl": "{postgres=r*w*U*/supabase_admin}",
+      "source_md5": "8c49b2642296a1d2882f3154d5b357dd",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": true,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": true,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": true,
+          "privilege": "USAGE"
+        }
+      ],
+      "client_grants": 0,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "NO_DIRECT_ANON_AUTHENTICATED_DEFAULT_GRANT",
+      "safe_deletion": "NOT_ESTABLISHED"
+    },
+    {
+      "ordinal": 5,
+      "oid": "16635",
+      "owner_role_oid": "10",
+      "owner": "supabase_admin",
+      "schema": "extensions",
+      "object_type": "f",
+      "full_acl": "{postgres=X*/supabase_admin}",
+      "source_md5": "45e152ccabf30b6f1cecf46e47bd3320",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": true,
+          "privilege": "EXECUTE"
+        }
+      ],
+      "client_grants": 0,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "NO_DIRECT_ANON_AUTHENTICATED_DEFAULT_GRANT",
+      "safe_deletion": "NOT_ESTABLISHED"
+    },
+    {
+      "ordinal": 6,
+      "oid": "16634",
+      "owner_role_oid": "10",
+      "owner": "supabase_admin",
+      "schema": "extensions",
+      "object_type": "r",
+      "full_acl": "{postgres=a*r*w*d*D*x*t*m*/supabase_admin}",
+      "source_md5": "41052f7ea4242dc7623aaa4760549ffa",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": true,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": true,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": true,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": true,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": true,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": true,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": true,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": true,
+          "privilege": "UPDATE"
+        }
+      ],
+      "client_grants": 0,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "NO_DIRECT_ANON_AUTHENTICATED_DEFAULT_GRANT",
+      "safe_deletion": "NOT_ESTABLISHED"
+    },
+    {
+      "ordinal": 7,
+      "oid": "16591",
+      "owner_role_oid": "10",
+      "owner": "supabase_admin",
+      "schema": "graphql",
+      "object_type": "S",
+      "full_acl": "{postgres=rwU/supabase_admin,anon=rwU/supabase_admin,authenticated=rwU/supabase_admin,service_role=rwU/supabase_admin}",
+      "source_md5": "3581d20096acf497c567cc53f52456ab",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "USAGE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "USAGE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "USAGE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "USAGE"
+        }
+      ],
+      "client_grants": 6,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "CLIENT_DEFAULT_GRANTS_PRESENT_EXPOSURE_DEPENDS_ON_CREATED_OBJECT_RLS_AND_API",
+      "safe_deletion": "NOT_ESTABLISHED"
+    },
+    {
+      "ordinal": 8,
+      "oid": "16590",
+      "owner_role_oid": "10",
+      "owner": "supabase_admin",
+      "schema": "graphql",
+      "object_type": "f",
+      "full_acl": "{postgres=X/supabase_admin,anon=X/supabase_admin,authenticated=X/supabase_admin,service_role=X/supabase_admin}",
+      "source_md5": "d379031ec8eff46dd23c98655e663bd5",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "EXECUTE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "EXECUTE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "EXECUTE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "EXECUTE"
+        }
+      ],
+      "client_grants": 2,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "CLIENT_DEFAULT_GRANTS_PRESENT_EXPOSURE_DEPENDS_ON_CREATED_OBJECT_RLS_AND_API",
+      "safe_deletion": "NOT_ESTABLISHED"
+    },
+    {
+      "ordinal": 9,
+      "oid": "16589",
+      "owner_role_oid": "10",
+      "owner": "supabase_admin",
+      "schema": "graphql",
+      "object_type": "r",
+      "full_acl": "{postgres=arwdDxtm/supabase_admin,anon=arwdDxtm/supabase_admin,authenticated=arwdDxtm/supabase_admin,service_role=arwdDxtm/supabase_admin}",
+      "source_md5": "5c20ab9fc30bbf4e5a60002e893c71a5",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        }
+      ],
+      "client_grants": 16,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "CLIENT_DEFAULT_GRANTS_PRESENT_EXPOSURE_DEPENDS_ON_CREATED_OBJECT_RLS_AND_API",
+      "safe_deletion": "NOT_ESTABLISHED"
+    },
+    {
+      "ordinal": 10,
+      "oid": "16571",
+      "owner_role_oid": "10",
+      "owner": "supabase_admin",
+      "schema": "graphql_public",
+      "object_type": "S",
+      "full_acl": "{postgres=rwU/supabase_admin,anon=rwU/supabase_admin,authenticated=rwU/supabase_admin,service_role=rwU/supabase_admin}",
+      "source_md5": "751989f89b283a46de2725808db4cd94",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "USAGE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "USAGE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "USAGE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "USAGE"
+        }
+      ],
+      "client_grants": 6,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "CLIENT_DEFAULT_GRANTS_PRESENT_EXPOSURE_DEPENDS_ON_CREATED_OBJECT_RLS_AND_API",
+      "safe_deletion": "NOT_ESTABLISHED"
+    },
+    {
+      "ordinal": 11,
+      "oid": "16570",
+      "owner_role_oid": "10",
+      "owner": "supabase_admin",
+      "schema": "graphql_public",
+      "object_type": "f",
+      "full_acl": "{postgres=X/supabase_admin,anon=X/supabase_admin,authenticated=X/supabase_admin,service_role=X/supabase_admin}",
+      "source_md5": "e66701e0532ac12aabe69f021a719e5d",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "EXECUTE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "EXECUTE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "EXECUTE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "EXECUTE"
+        }
+      ],
+      "client_grants": 2,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "CLIENT_DEFAULT_GRANTS_PRESENT_EXPOSURE_DEPENDS_ON_CREATED_OBJECT_RLS_AND_API",
+      "safe_deletion": "NOT_ESTABLISHED"
+    },
+    {
+      "ordinal": 12,
+      "oid": "16569",
+      "owner_role_oid": "10",
+      "owner": "supabase_admin",
+      "schema": "graphql_public",
+      "object_type": "r",
+      "full_acl": "{postgres=arwdDxtm/supabase_admin,anon=arwdDxtm/supabase_admin,authenticated=arwdDxtm/supabase_admin,service_role=arwdDxtm/supabase_admin}",
+      "source_md5": "2302f11debc1f5c997ceb509a412a8c4",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        }
+      ],
+      "client_grants": 16,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "CLIENT_DEFAULT_GRANTS_PRESENT_EXPOSURE_DEPENDS_ON_CREATED_OBJECT_RLS_AND_API",
+      "safe_deletion": "NOT_ESTABLISHED"
+    },
+    {
+      "ordinal": 13,
+      "oid": "16494",
+      "owner_role_oid": "16388",
+      "owner": "postgres",
+      "schema": "public",
+      "object_type": "S",
+      "full_acl": "{postgres=rwU/postgres,anon=rwU/postgres,authenticated=rwU/postgres,service_role=rwU/postgres}",
+      "source_md5": "e81bd5c0cd40edff79d7fc8e7659a563",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "USAGE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "USAGE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "USAGE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "USAGE"
+        }
+      ],
+      "client_grants": 6,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "CLIENT_DEFAULT_GRANTS_PRESENT_EXPOSURE_DEPENDS_ON_CREATED_OBJECT_RLS_AND_API",
+      "safe_deletion": "NOT_ESTABLISHED"
+    },
+    {
+      "ordinal": 14,
+      "oid": "16493",
+      "owner_role_oid": "16388",
+      "owner": "postgres",
+      "schema": "public",
+      "object_type": "f",
+      "full_acl": "{postgres=X/postgres,service_role=X/postgres}",
+      "source_md5": "0dcea6a5c435a4be3a648d56d75a979b",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "EXECUTE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "EXECUTE"
+        }
+      ],
+      "client_grants": 0,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "NO_DIRECT_ANON_AUTHENTICATED_DEFAULT_GRANT",
+      "safe_deletion": "NOT_ESTABLISHED"
+    },
+    {
+      "ordinal": 15,
+      "oid": "16492",
+      "owner_role_oid": "16388",
+      "owner": "postgres",
+      "schema": "public",
+      "object_type": "r",
+      "full_acl": "{postgres=arwdDxtm/postgres,anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+      "source_md5": "19c80e5d337cc929eba77944683875c4",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "UPDATE"
+        }
+      ],
+      "client_grants": 16,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "CLIENT_DEFAULT_GRANTS_PRESENT_EXPOSURE_DEPENDS_ON_CREATED_OBJECT_RLS_AND_API",
+      "safe_deletion": "NOT_ESTABLISHED"
+    },
+    {
+      "ordinal": 16,
+      "oid": "16495",
+      "owner_role_oid": "10",
+      "owner": "supabase_admin",
+      "schema": "public",
+      "object_type": "S",
+      "full_acl": "{postgres=rwU/supabase_admin,anon=rwU/supabase_admin,authenticated=rwU/supabase_admin,service_role=rwU/supabase_admin}",
+      "source_md5": "91dee703e9e60b0ba5401eedd9cbcaeb",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "USAGE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "USAGE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "USAGE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "USAGE"
+        }
+      ],
+      "client_grants": 6,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "CLIENT_DEFAULT_GRANTS_PRESENT_EXPOSURE_DEPENDS_ON_CREATED_OBJECT_RLS_AND_API",
+      "safe_deletion": "NOT_ESTABLISHED"
+    },
+    {
+      "ordinal": 17,
+      "oid": "16497",
+      "owner_role_oid": "10",
+      "owner": "supabase_admin",
+      "schema": "public",
+      "object_type": "f",
+      "full_acl": "{postgres=X/supabase_admin,anon=X/supabase_admin,authenticated=X/supabase_admin,service_role=X/supabase_admin}",
+      "source_md5": "28e897552ff3bb7d05e9115e62220ca1",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "EXECUTE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "EXECUTE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "EXECUTE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "EXECUTE"
+        }
+      ],
+      "client_grants": 2,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "CLIENT_DEFAULT_GRANTS_PRESENT_EXPOSURE_DEPENDS_ON_CREATED_OBJECT_RLS_AND_API",
+      "safe_deletion": "NOT_ESTABLISHED"
+    },
+    {
+      "ordinal": 18,
+      "oid": "16496",
+      "owner_role_oid": "10",
+      "owner": "supabase_admin",
+      "schema": "public",
+      "object_type": "r",
+      "full_acl": "{postgres=arwdDxtm/supabase_admin,anon=arwdDxtm/supabase_admin,authenticated=arwdDxtm/supabase_admin,service_role=arwdDxtm/supabase_admin}",
+      "source_md5": "d219b5eb33afc3080d38ed2e5a1d9dff",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        }
+      ],
+      "client_grants": 16,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "CLIENT_DEFAULT_GRANTS_PRESENT_EXPOSURE_DEPENDS_ON_CREATED_OBJECT_RLS_AND_API",
+      "safe_deletion": "NOT_ESTABLISHED"
+    },
+    {
+      "ordinal": 19,
+      "oid": "16561",
+      "owner_role_oid": "10",
+      "owner": "supabase_admin",
+      "schema": "realtime",
+      "object_type": "S",
+      "full_acl": "{postgres=rwU/supabase_admin,dashboard_user=rwU/supabase_admin}",
+      "source_md5": "c2e1e9ef844fbb6c65b443f04b63a109",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "USAGE"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "USAGE"
+        }
+      ],
+      "client_grants": 0,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "NO_DIRECT_ANON_AUTHENTICATED_DEFAULT_GRANT",
+      "safe_deletion": "NOT_ESTABLISHED"
+    },
+    {
+      "ordinal": 20,
+      "oid": "16562",
+      "owner_role_oid": "10",
+      "owner": "supabase_admin",
+      "schema": "realtime",
+      "object_type": "f",
+      "full_acl": "{postgres=X/supabase_admin,dashboard_user=X/supabase_admin}",
+      "source_md5": "03dba7aeab0ffd349d6ab093a3d4c4d1",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "EXECUTE"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "EXECUTE"
+        }
+      ],
+      "client_grants": 0,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "NO_DIRECT_ANON_AUTHENTICATED_DEFAULT_GRANT",
+      "safe_deletion": "NOT_ESTABLISHED"
+    },
+    {
+      "ordinal": 21,
+      "oid": "16560",
+      "owner_role_oid": "10",
+      "owner": "supabase_admin",
+      "schema": "realtime",
+      "object_type": "r",
+      "full_acl": "{postgres=a*r*wdDxtm/supabase_admin,dashboard_user=arwdDxtm/supabase_admin}",
+      "source_md5": "d0a9fd9ba8aba6f79b0dcdb85d20c80e",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": true,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": true,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "dashboard_user",
+          "grantor": "supabase_admin",
+          "grantable": false,
+          "privilege": "UPDATE"
+        }
+      ],
+      "client_grants": 0,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "NO_DIRECT_ANON_AUTHENTICATED_DEFAULT_GRANT",
+      "safe_deletion": "NOT_ESTABLISHED"
+    },
+    {
+      "ordinal": 22,
+      "oid": "16550",
+      "owner_role_oid": "16388",
+      "owner": "postgres",
+      "schema": "storage",
+      "object_type": "S",
+      "full_acl": "{postgres=rwU/postgres,anon=rwU/postgres,authenticated=rwU/postgres,service_role=rwU/postgres}",
+      "source_md5": "fee68dc580f66effb07a12048e504f64",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "USAGE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "USAGE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "USAGE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "USAGE"
+        }
+      ],
+      "client_grants": 6,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "CLIENT_DEFAULT_GRANTS_PRESENT_EXPOSURE_DEPENDS_ON_CREATED_OBJECT_RLS_AND_API",
+      "safe_deletion": "NOT_ESTABLISHED"
+    },
+    {
+      "ordinal": 23,
+      "oid": "16549",
+      "owner_role_oid": "16388",
+      "owner": "postgres",
+      "schema": "storage",
+      "object_type": "f",
+      "full_acl": "{postgres=X/postgres,anon=X/postgres,authenticated=X/postgres,service_role=X/postgres}",
+      "source_md5": "0a558b5ca208b19e5afa60f27e86a16f",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "EXECUTE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "EXECUTE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "EXECUTE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "EXECUTE"
+        }
+      ],
+      "client_grants": 2,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "CLIENT_DEFAULT_GRANTS_PRESENT_EXPOSURE_DEPENDS_ON_CREATED_OBJECT_RLS_AND_API",
+      "safe_deletion": "NOT_ESTABLISHED"
+    },
+    {
+      "ordinal": 24,
+      "oid": "16548",
+      "owner_role_oid": "16388",
+      "owner": "postgres",
+      "schema": "storage",
+      "object_type": "r",
+      "full_acl": "{postgres=arwdDxtm/postgres,anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres,service_role=arwdDxtm/postgres}",
+      "source_md5": "ba999d1e8ea486d5ab5205ea4325f97a",
+      "grant_details": [
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "postgres",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "anon",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "authenticated",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "UPDATE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "DELETE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "INSERT"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "MAINTAIN"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "REFERENCES"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "SELECT"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "TRIGGER"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "TRUNCATE"
+        },
+        {
+          "grantee": "service_role",
+          "grantor": "postgres",
+          "grantable": false,
+          "privilege": "UPDATE"
+        }
+      ],
+      "client_grants": 16,
+      "public_role_grants": 0,
+      "semantics": "Future objects created by this owner in this schema inherit this object's default grants; does not override effective RLS, permissions for existing objects, API schema exposure or JWT validation.",
+      "verdict": "CLIENT_DEFAULT_GRANTS_PRESENT_EXPOSURE_DEPENDS_ON_CREATED_OBJECT_RLS_AND_API",
+      "safe_deletion": "NOT_ESTABLISHED"
+    }
+  ]
+}

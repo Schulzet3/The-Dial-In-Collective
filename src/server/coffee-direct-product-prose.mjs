@@ -15,6 +15,30 @@ const NONCURRENT_DECAF_METHOD=/\b(?:previous(?:ly)?|formerly|historically|typica
 // Accept short current treatment only with the directly selected self-decaf
 // paragraph and exact H1; never infer from roaster identity or site SEO.
 const CURRENT_SELECTED_DECAF_WAY=/^(?:[\p{L}\p{M}]{3,24}['’]d|(?:this|our)\s+coffee\s+(?:is|was)\s+decaffeinated)\s+by\s+way\s+of\s+(?:the\s+)?(?:swiss[\s-]?water|mountain[\s-]?water|sugar[\s-]?cane|ethyl[\s-]?acetate|(?:supercritical\s+)?carbon[\s-]?dioxide|co\s*[- ]?[2\u2082])\b/iu;
+// A selected current decaf may identify its treatment as a roaster-translated
+// method, after an explicit at-origin decaffeination clause. This is not a
+// growing origin, green-bean process, or a general country method inference.
+// Admit only the complete current "this/our coffee ... is decaffeinated ...
+// translate as '<method>'" sentence, never a historical/negated/other product.
+const CURRENT_TRANSLATED_DECAF_METHOD=/^(?:this|our)\s+(?:decaf(?:feinated)?\s+)?coffee\b[^.!?]{0,100}?\bis\s+decaffeinated\s+at\s+origin\b[^.!?]{0,180}?\b(?:translate(?:d)?\s+as|refer(?:s|red)?\s+to\s+as|described\s+as|known\s+as|called(?:\s+as)?)\s*[\u201c\u2018"'\u2018]?\s*(?:sugar[ -]?process|sugar[ -]?cane|swiss[ -]?water|mountain[ -]?water|ethyl\s+acetate|(?:supercritical\s+)?carbon[ -]?dioxide|co\s*[- ]?2)\s*[\u201d\u2019"']?\s*[.!?]?$/iu;
+const TRANSLATED_DECAF_NEGATION=/\b(?:not|never|without|rather\s+than|instead\s+of|unlike|incorrectly|misleadingly|erroneously)\b/iu;
+
+// Some exact selected decafs describe a named source coffee as "Colombia made
+// with the sugarcane decaffeination process", without "is decaffeinated".
+// The capitalized grammatical subject must be a non-generic token of the
+// selected H1; a different coffee, education or a tasting-only sugar note
+// never supplies a method. This recognizes the METHOD, not cherry processing.
+const DIRECT_NAMED_SOURCE_DECAF_PROCESS=/\b([A-Z][\p{L}\p{M}'’-]{3,40})\s+made\s+with\s+(?:the\s+)?(?:swiss[ -]?water|mountain[ -]?water|sugar[ -]?cane|ethyl[ -]?acetate|carbon[ -]?dioxide|co[- ]?2)\s+decaffeination\s+process\b/gu;
+const GENERIC_DECAF_SOURCE_SUBJECT=/^(?:coffee|beans?|roast|medium|dark|light|espresso|decaf|decaffeinated|blend|process|natural|sugarcane|water|method|organic|product)$/iu;
+function selectedNamedSourceDecafProcess(name,line){
+ if(!decafOnlyCoffee(name)||NONCURRENT_DECAF_METHOD.test(line))return false;
+ const words=new Set(fold(name).split(' '));
+ return [...String(line).matchAll(DIRECT_NAMED_SOURCE_DECAF_PROCESS)]
+  .some(match=>!GENERIC_DECAF_SOURCE_SUBJECT.test(match[1])&&
+   words.has(fold(match[1]))&&
+   inferDecaffeinationMethod({name,selectedMethod:match[0]})!=='');
+}
+
 // Current selected coffee names can be longer than the grammatical subject
 // printed in their own description: e.g. "TRANQUILO, Decaffeinated, 12 oz"
 // prints "Tranquilo is decaffeinated using the natural Sugar Cane Process".
@@ -112,6 +136,7 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
    /\bthis\s+(?:[\p{L}\p{M}-]+\s+){0,8}decaf(?:feinated)?\s+coffee\b/iu.test(b.text)&&
    !NONCURRENT_DECAF_METHOD.test(b.text));
  const organizations=new Set(),farms=new Set(),sensory=new Set(),literals=new Set(),roasts=new Set();
+ const namedEstateGrowers=new Map();
  const releases=new Set(),decafEvidence=new Set();
  let decafEvidenceOverflow=false;
  const selectedTitleTier=String(name).match(/\s+[—–-]\s+(Ultra Light|Very Light|Light|Medium[- ]Light|Medium|Medium[- ]Dark|Dark)$/iu);
@@ -156,6 +181,16 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   }
   if(eligibleRoastControls===1&&candidates.length===1)roasts.add(candidates[0]);
  }
+ // Product-only accordions are parsed ONCE, not once per prose block.
+ // The same current selected product-info ancestor must hold the exact H1,
+ // explicit decaf identity and process title; never related offerings.
+ if(selectedUnnamedDecafIdentity)for(const statement of selectedProductAccordionDecafMethods(html,name,clean)){
+  if(inferDecaffeinationMethod({name,selectedMethod:statement,selectedCurrentDecafIdentity:true})&&
+     !decafEvidence.has(statement)){
+   if(decafEvidence.size<4)decafEvidence.add(statement);
+   else decafEvidenceOverflow=true;
+  }
+ }
  let anotherExplicitList=false;
  for(const b of body){
   const line=b.text.replace(/\s+/g,' ').trim();
@@ -167,23 +202,27 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
    if(decafEvidence.size<4)decafEvidence.add(line);
    else decafEvidenceOverflow=true;
   }
-  // Current product-only accordion headings are not ordinary p/div prose.
-  // The same info container must contain selected identity + treatment.
-  if(selectedUnnamedDecafIdentity)for(const line of selectedProductAccordionDecafMethods(html,name,clean)){
-   if(inferDecaffeinationMethod({name,selectedMethod:line,selectedCurrentDecafIdentity:true})&&
-      !decafEvidence.has(line)){
-    if(decafEvidence.size<4)decafEvidence.add(line);
-    else decafEvidenceOverflow=true;
-   }
-  }
   // A decaf identity plus a current selected-product sentence is required.
   // Reuse the conservative method classifier; if multiple incompatible
   // methods are printed, the caller withholds autofill and keeps both sources.
   if(decafOnlyCoffee(name)&&line.length<=360&&
-     (CURRENT_DECAF_METHOD.test(line)||currentNamedDecafMethod(name,line))&&
+     (CURRENT_DECAF_METHOD.test(line)||currentNamedDecafMethod(name,line)||selectedNamedSourceDecafProcess(name,line))&&
      !NONCURRENT_DECAF_METHOD.test(line)&&
      inferDecaffeinationMethod({name,selectedMethod:line})&&!decafEvidence.has(line)){
    if(decafEvidence.size<4)decafEvidence.add(line);
+   else decafEvidenceOverflow=true;
+  }
+  // Split only the same exact selected-product paragraph, never site-wide
+  // description. Whole paragraphs can exceed the 360-character direct-method
+  // limit while carrying one short, literal translated-method sentence.
+  if(decafOnlyCoffee(name)&&line.length<=1200)for(const sentence of line.split(/(?<=[.!?])\s+/u).slice(0,8)){
+   const statement=sentence.trim();
+   if(statement.length<40||statement.length>360||
+      !CURRENT_TRANSLATED_DECAF_METHOD.test(statement)||
+      NONCURRENT_DECAF_METHOD.test(statement)||TRANSLATED_DECAF_NEGATION.test(statement)||
+      !inferDecaffeinationMethod({name,selectedMethod:statement})||
+      decafEvidence.has(statement))continue;
+   if(decafEvidence.size<4)decafEvidence.add(statement);
    else decafEvidenceOverflow=true;
   }
   // Literal current selected-product release declaration, not a site-wide
@@ -205,6 +244,18 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   if(namedRoast&&fold(namedRoast[1]).includes(fold(name))&&
      !/\b(?:formerly|previously|previous|prior|former|last (?:season|harvest|year)|historically|typically|generally|another coffee|other coffee)\b/i.test(line))
    roasts.add(namedRoast[2].slice(0,1).toUpperCase()+namedRoast[2].slice(1).toLowerCase());
+  // A direct selected product can name both its GROWER and separately named
+  // estate. The explicit human producer wins over a Farm-label fallback only
+  // when the same exact current H1 names that person; never copy other lots.
+  if(b.tag==='p'&&line.length<=600&&
+     !/\b(?:formerly|previously|historically|prior (?:harvest|lot|owner)|other coffees?|another (?:producer|offering|lot|product|coffee)|other (?:producers?|offerings?|lots?|products?)|different (?:coffee|lot|offering|product)|unrelated (?:coffee|offering|lot)|no longer|not the producer|former producer|hypothetical|might have)\b/iu.test(line)){
+   const claims=line.matchAll(/\bfrom\s+producer\s+([\p{Lu}][\p{L}\p{M}'’-]{1,35}(?:\s+[\p{Lu}][\p{L}\p{M}'’-]{1,35}){1,3})['’]s\s+([\p{Lu}][\p{L}\p{M}'’-]{1,35}(?:\s+[\p{Lu}][\p{L}\p{M}'’-]{1,35}){0,3})\s+estate\b/gu);
+   for(const claim of claims){
+    const producer=claim[1],estate=claim[2];
+    if(!(' '+selected+' ').includes(' '+fold(producer)+' '))continue;
+    namedEstateGrowers.set(fold(producer)+'|'+fold(estate),{producer,estate});
+   }
+  }
   const organization=line.match(/^(?:Single[- ]Origin\s+)?(?:Organic\s+)?([\p{L}\p{M}' -]{3,70}?)\s+coffee\s+from\s+([A-Z][A-Z\d-]{2,18})\s+in\s+([\p{L}\p{M}'’,. -]{3,90})(?:[.!]|$)/iu);
   if(organization&&fold(name).includes(fold(organization[1]))&&
      !/\b(?:blends?|rotating|mixed)\b/i.test(name))organizations.add(organization[2]);
@@ -232,6 +283,12 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
  }
  const out={};
  if(organizations.size===1)out.producer=[...organizations][0];
+ if(!out.producer&&namedEstateGrowers.size===1){
+  const pair=[...namedEstateGrowers.values()][0];
+  out.producer=pair.producer;
+  out.named_estate_producer=true;
+  out.named_estate_farm=pair.estate;
+ }
  if(!out.producer&&farms.size===1){
   const farm='Finca '+[...farms][0];
   if(body.some(b=>b.text.includes(farm))){out.producer=farm;out.farm=farm;}

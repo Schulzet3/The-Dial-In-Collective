@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "date": "2026-11-05",
+  "status": "TESTING_PROVEN_593_PROCESS_FALSE_POSITIVE_PATCH_SOURCE_RECHECK_PENDING",
+  "parent_source_sha": "432a3a076d3809b2c6cf2b83fb35723b5db69c47",
+  "original_frozen603_csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "immutable_original": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197
+  },
+  "cohort": [
+    575,
+    596,
+    593
+  ],
+  "review": [
+    {
+      "number": 575,
+      "roaster": "Stumptown Coffee",
+      "url": "https://www.stumptowncoffee.com/products/indonesia-bies-penantan",
+      "current_public_text": "Exact selected H1 Indonesia Bies Penantan. Selected story credits women-led Ketiara Cooperative and smallholder farms around Takengon, Aceh, Indonesia; roast graphic endpoints not a labeled roast.",
+      "archived_current_parser": "origin Indonesia; producer Ketiara Cooperative; notes Dark Chocolate, Baking Spice, Tropical Fruit",
+      "potential_defect": "Selected story's same-lot locality may be omitted; actual current raw HTML/parser MUST be checked before a fix.",
+      "ambiguous": "Do not assign village Bies Penantan as precise individual farm, single micro-lot, or a roast from relative meter."
+    },
+    {
+      "number": 596,
+      "roaster": "Wrecking Ball Coffee Roasters",
+      "url": "https://www.wreckingballcoffee.com/products/guatemala-huehuetenango-los-dos-socios-12oz",
+      "current_public_text": "Selected H1 Los Dos Socios, labeled country Guatemala, region Huehuetenago (sic), same selected Finca Los Dos Socios story located highlands of La Libertad, Huehuetenango, grower Concepción Villatoro; current year is expressly 2026 lot.",
+      "archived_current_parser": "origin Huehuetenago, Guatemala; roast blank; release 2026; process Washed",
+      "potential_defect": "Current same-selected farm story may safely refine location but not overwrite direct labeled region or fabricate spelling correction; requires raw HTML/conflict review.",
+      "ambiguous": "Roast Medium/Medium-Light has two conflicting values; leave blank absent exact choice. 2026 lot is not automatically harvest or roast date."
+    },
+    {
+      "number": 593,
+      "roaster": "Woodshed Roast Coffee",
+      "url": "https://www.woodshedroast.com/products/ethiopian",
+      "current_public_text": "Selected Ethiopian Single Origin title and fruity/stone-fruit/orange blossom copy; copy says whether washed or natural, and product offers Light/Medium/Medium-Dark/Dark as customer choices.",
+      "archived_current_parser": "process Natural; roast blank; notes fruity, stone fruits, orange blossom",
+      "potential_defect": "Historical extraction may incorrectly promote conditional 'whether washed or natural' to actual selected Process Natural; test actual current parser and variant choice safety.",
+      "ambiguous": "No automatic roast variant selected. Do not fill process from conditional alternatives."
+    }
+  ],
+  "current_external_rendered_source_only": true,
+  "actual_fresh_source_sha256": null,
+  "actual_parser_verified": false,
+  "manual_certified": 0,
+  "runtime_changes": false,
+  "queue_state": "IN_PROGRESS_PARENT_NO_NEW_READY",
+  "workflow_selector_marker": "[dic-issue33-fortythird3]",
+  "required_acceptance": "Exact guarded HTTPS on development after safe nonforce merge; selected H1/current identity, raw HTML SHA256, real parser/Add Coffee, conflicts, positive/hostile focused regression if reproducible. Keep all unsupported fields blank.",
+  "next": "Review exact PR tests and merged live official #593 before/after fields, no READY/deploy until accepted.",
+  "source_run": 42046579061,
+  "source_job": 127311038241,
+  "run_result": {
+    "attempted": 3,
+    "fetched": 3,
+    "parsed": 3,
+    "manual_certified": 0
+  },
+  "source_html_sha256": {
+    "575": "a968b05affbfe216c85ae52b24e58fdd93de80ce619afa3e59963e1086823a65",
+    "593": "0721c63f454baaae97ad59c6a0fe9d8263c628089415aef0c894e9a61bf0de71",
+    "596": "081e88ffbe44657d39b5e228f2db972e1b6d956175b024d1eed12b0a224f4982"
+  },
+  "confirmed_pre_patch": {
+    "575": {
+      "origin": "Indonesia",
+      "issue": "selected Takengon/Aceh locality missing"
+    },
+    "593": {
+      "process": "Natural",
+      "actual_selected_source": "Whether washed or natural process",
+      "issue": "unsupported chosen process"
+    },
+    "596": {
+      "origin": "Huehuetenago, Guatemala",
+      "roast_level": null,
+      "issue": "source misspells region, current story La Libertad; review"
+    }
+  }
+}

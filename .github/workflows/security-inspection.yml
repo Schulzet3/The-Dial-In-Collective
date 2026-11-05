@@ -13,6 +13,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: dic-security-inspection-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   security-inventory:
     runs-on: ubuntu-24.04

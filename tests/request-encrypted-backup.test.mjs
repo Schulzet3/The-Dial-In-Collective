@@ -67,3 +67,12 @@ test('simultaneous claim contenders dispatch at most once',async()=>{
  assert.deepEqual([a.status,b.status].sort(),
   ['BACKUP_ALREADY_CLAIMED_NOT_VERIFIED','BACKUP_REQUESTED_NOT_VERIFIED'].sort());
 });
+
+test('backup claim rejects impossible calendar dates, retains valid leap day and fractions',()=>{
+ for(const invalid of ['2026-02-31T12:00:00Z','2026-11-31T12:00:00Z',
+  '2026-04-31T12:00:00Z','2026-13-01T12:00:00Z','2026-00-01T12:00:00Z',
+  '2026-11-02T24:00:00Z','2026-11-02T01:60:00Z','2026-11-02T01:00:60Z'])
+  assert.throws(()=>backupClaimRef(invalid),/database-write UTC timestamp required/);
+ assert.match(backupClaimRef('2024-02-29T12:00:00.000000001Z'),
+  /^refs\/heads\/dic-backup-claims\/[a-f0-9]{40}$/);
+});

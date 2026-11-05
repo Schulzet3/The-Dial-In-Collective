@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "date_utc": "2026-11-05",
+  "source_development": "42ece675d443f3d08271b79c5187f8513c497542",
+  "cause": "S2-077 through S2-080 were absent from aggregate batch index despite four existing immutable source-bound receipts and running totals including their exact line credits; no evidence source removed.",
+  "prior_index_entries": 108,
+  "corrected_index_entries": 112,
+  "missing_entries": [
+    {
+      "batch": "S2-077",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-077.json",
+      "receipt_blob": "0d64738aba5145a05970c3db703d4d7e109e52a3",
+      "frozen": {
+        "path": "docs/CURRENT_STATUS_PRE_QUEEN_CITY_2026-10-17.md",
+        "blob": "b1698030de2539bbd2f342251cece4c546477227",
+        "range": [
+          56,
+          163
+        ]
+      },
+      "pinned": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "range": [
+          1861,
+          1940
+        ]
+      },
+      "reported_credit": [
+        108,
+        80
+      ]
+    },
+    {
+      "batch": "S2-078",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-078.json",
+      "receipt_blob": "4362a1446ece6bc914c53095d27af45e2443c09c",
+      "frozen": {
+        "path": "docs/CURRENT_STATUS_PRE_SWEEP_2026-10-17.md",
+        "blob": "9a3b0aad18211b914af1520de385785c855d4e09",
+        "range": [
+          1,
+          54
+        ]
+      },
+      "pinned": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "range": [
+          1941,
+          2030
+        ]
+      },
+      "reported_credit": [
+        54,
+        90
+      ]
+    },
+    {
+      "batch": "S2-079",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-079.json",
+      "receipt_blob": "4ee9ebeb4d2e4a1bcf05daedf82a3063d8a8246d",
+      "frozen": {
+        "path": "docs/DECISION_IMPLEMENTATION_CROSSWALK_2026-10-17.md",
+        "blob": "eb55a5bd54865229bebb999272409947f0f53a23",
+        "range": [
+          1,
+          49
+        ]
+      },
+      "pinned": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "range": [
+          2031,
+          2110
+        ]
+      },
+      "reported_credit": [
+        49,
+        80
+      ]
+    },
+    {
+      "batch": "S2-080",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-080.json",
+      "receipt_blob": "82bd1692c2c6a6f9b7e0fab4adf990b5049e43bf",
+      "frozen": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+        "range": [
+          1,
+          100
+        ]
+      },
+      "pinned": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+        "range": [
+          2111,
+          2200
+        ]
+      },
+      "reported_credit": [
+        100,
+        90
+      ]
+    }
+  ],
+  "recovered_totals": [
+    311,
+    340
+  ],
+  "source_exact_record_recheck": {
+    "line_records": 651,
+    "nonredacted_literal_original_text_matches": 650,
+    "redacted_exception_count": 1,
+    "redacted_original_line_read": true,
+    "per_line_nine_dimensions_present": true,
+    "per_line_source_sha_consistent": true,
+    "receipt_individual_lines_against_original_Git": true,
+    "source_text_not_exposed": true,
+    "old_v2_credit": 0,
+    "new_semantic_credit": 0
+  },
+  "independent_index_sum": {
+    "frozen": 6314,
+    "pinned_current": 7941
+  },
+  "aggregate_strict_unchanged": [
+    6314,
+    7941
+  ],
+  "all_manifest_path_line_spans_nonoverlap": true,
+  "coverage_endpoints_unchanged": {
+    "frozen_file": 59,
+    "frozen_line": 1424,
+    "pinned_file": 50,
+    "pinned_line": 721
+  },
+  "tests_scope": "Docs/evidence only; run exact PR-head and merged-source approval checks before integration; app/SQL/Auth/mobile/original603 not rerun.",
+  "owner_restrictions": "No deployment, provider SQL/Auth/Edge, member/backup or frozen corpus changes",
+  "conclusion": "REPAIRED_LEDGER_POINTER_INDEX_ONLY; Issue #267 remains OPEN and semantic/post-pin audits incomplete."
+}

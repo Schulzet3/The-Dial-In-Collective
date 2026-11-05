@@ -14,14 +14,15 @@ export function shotCard(shot,{expanded=false,activeVersionId=null,unit='F'}={})
  const provenance=shot.recommendationContext;
  const used=Array.isArray(provenance?.used_controls)?provenance.used_controls.filter(x=>['grind','temperature'].includes(x)):[];
  const source=provenance?.kind==='member_selected_starting_reference'&&used.length?String(provenance.source_label||'Starting recommendation'):null;
+ const displayDate=humanDate(shot.timestamp)||'Date not recorded';
  const canEdit=!shot.cloudPending;
  const canChoose=canEdit&&shot.dialedIn&&shot.setupVersionId===activeVersionId;
  return `<section class="shot">
-  <button class="shot-toggle" data-action="shot-expand" data-id="${e(shot.id)}" aria-expanded="${expanded}" aria-label="Toggle details for shot on ${e(humanDate(shot.timestamp))}">
+  <button class="shot-toggle" data-action="shot-expand" data-id="${e(shot.id)}" aria-expanded="${expanded}" aria-label="Toggle details for shot on ${e(displayDate)}">
    <div class="shot-overview">
     <div class="shot-topline">
      ${shotSummary(shot,recordUnit)}
-     <span class="shot-date">${e(humanDate(shot.timestamp))}</span>
+     <span class="shot-date">${e(displayDate)}</span>
     </div>
     <div class="shot-meta">${styleBadge(shot.style)}
      ${shot.cloudPending?'<span class="preview-pill">Pending Sync</span>':shot.dialedIn?'<span class="status-badge">Dialed In</span>':''}

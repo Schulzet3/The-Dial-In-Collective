@@ -10,7 +10,10 @@ export async function smoke({origin=allowedOrigin,fetchImpl=fetch,paths=smokePat
   const response=await fetchImpl(origin+path,{method:'GET',redirect:'error',
    headers:{'accept':'text/html,application/manifest+json'},signal:AbortSignal.timeout(12000)});
   const contentType=response.headers.get('content-type')||'';
-  if(!response.ok||!(/text\/html|application\/(manifest\+json|json)/i).test(contentType))
+  const expectedContentType=path==='/manifest.webmanifest'
+   ? /^application\/(?:manifest\+json|json)(?:\s*;|$)/i
+   : /^text\/html(?:\s*;|$)/i;
+  if(!response.ok||!expectedContentType.test(contentType))
    throw Error('Production smoke failed '+path+' status='+response.status+' type='+contentType);
   const body=await response.text();
   if(!body.trim()||body.length>2_000_000)throw Error('Production smoke invalid body '+path);
