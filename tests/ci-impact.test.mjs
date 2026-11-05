@@ -150,3 +150,39 @@ test('Strict #504 exemption fails closed on mixed source, malformed and unknown 
   }
  }
 });
+
+test('Issue #267 dated immutable Git-tree inventories stay governance-only, unknown inputs still fail closed',()=>{
+  const good=[
+    'docs/audits/issue267-v2-post-pin-tree-drift-20261105.json',
+    'docs/audits/issue267-v2-post-pin-tree-drift-20261105-973c59.json',
+    'docs/audits/issue267-v2-post-pin-tree-drift-20261106-abcdef1234.json',
+    'docs/audits/issue267-v2-strict-coverage-ledger-20261103.json',
+    'docs/workstreams/issue-267.md'
+  ];
+  const safe=classifyImpactPaths(good);
+  assert.equal(safe.tier,'docs');assert.equal(safe.docs_only,true);
+  assert.equal(safe.node_mode,'none');assert.equal(safe.cloud_mode,'none');
+  assert.equal(safe.browser_mode,'none');assert.equal(safe.sql,false);
+  assert.equal(safe.build_validate,false);assert.equal(safe.build_browser,false);
+  const classified=classifyChanges({base:A,head:B,event:'pull_request',
+    git:()=>good.join('\n')+'\n'});
+  assert.equal(classified.tier,'docs');
+  for(const wrong of [
+    'docs/audits/issue267-v2-post-pin-tree-drift-20261106.json',
+    'docs/audits/issue267-v2-post-pin-tree-drift-20261105-abcde.json',
+    'docs/audits/issue267-v2-post-pin-tree-drift-20261105-gggggg.json',
+    'docs/audits/issue267-v2-post-pin-tree-drift-20261105-973c59.json.bak',
+    'docs/audits/issue267-v2-post-pin-tree-drift-20261105-973c59/../secret.json',
+    'docs/audits/issue267-v2-post-pin-tree-drift-executable.json',
+    'docs/audits/unsafe-new-policy.json'
+  ]){
+    const result=classifyImpactPaths([wrong]);
+    assert.equal(result.tier,'high',wrong);assert.equal(result.sql,true,wrong);
+  }
+  for(const runtime of ['scripts/audit/ci-scope.mjs','.github/workflows/cloud-beta-ci.yml',
+    'supabase/migrations/new.sql','site/lib/engine.js']){
+    const result=classifyImpactPaths([...good,runtime]);
+    assert.equal(result.tier,classifyImpactPaths([runtime]).tier,runtime);
+    assert.equal(result.sql,classifyImpactPaths([runtime]).sql,runtime);
+  }
+});
