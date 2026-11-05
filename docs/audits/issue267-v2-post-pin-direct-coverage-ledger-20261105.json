@@ -3,7 +3,7 @@
   "issue": 267,
   "review_standard": "Independent post-pin new source line semantic review; separate from original frozen/pinned V2 denominator",
   "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
-  "observed_development_commit": "15e08af5078e4a13c4c3f23ad0652f7ffd6ab8da",
+  "observed_development_commit": "99d5f5a3df6d42922c614189fca7b21ba86745cd",
   "receipt_references": [
     {
       "batch_id": "D2-001",
@@ -104,14 +104,36 @@
         58
       ],
       "line_count": 58
+    },
+    {
+      "batch_id": "D2-009",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-009.json",
+      "path": "scripts/release/verified-dist-files.mjs",
+      "blob_sha": "55f2f7a6c2c3fa4bf390f0706e41d0d1d5f8065d",
+      "range": [
+        1,
+        16
+      ],
+      "line_count": 16
+    },
+    {
+      "batch_id": "D2-010",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-010.json",
+      "path": "tests/verified-dist-files.test.mjs",
+      "blob_sha": "02a5c5be45680e66de2e30e36524b910de192dde",
+      "range": [
+        1,
+        13
+      ],
+      "line_count": 13
     }
   ],
-  "unique_source_lines_direct_reviewed": 289,
-  "fully_reviewed_new_source_files": 8,
+  "unique_source_lines_direct_reviewed": 318,
+  "fully_reviewed_new_source_files": 10,
   "nonoverlap": true,
   "changed_existing_pinned_paths": "PENDING",
   "new_sql_migrations": "PENDING",
-  "remaining_added_code": "PENDING_FRESH_SOURCE_TREE_AND_FULL_SEMANTIC_REVIEW",
+  "remaining_added_code": "PENDING_FRESH_EXACT_LIVE_SOURCE_DRIFT_AND_FULL_SEMANTIC_REVIEW",
   "runtime_app_acceptance": "NOT_RUN_BY_D2",
   "complete": false,
   "physical_line_accounting_rule": "Count actual 1-based non-virtual lines; terminal newline alone is line delimiter, never an extra blank physical line. Preserve source-authenticated original receipt even when superseded by an append-only correction.",
