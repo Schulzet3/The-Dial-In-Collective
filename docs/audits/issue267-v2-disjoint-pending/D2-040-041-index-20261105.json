@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "created_utc": "2026-11-05",
+  "why_staged": "Concurrent #267 PR #835 updates canonical D2 ledger and workstream, while PR #769 updates S2 ledger and workstream. Use only disjoint new-path append-only evidence. Do not overwrite or merge over active agent work.",
+  "source_parent_sha": "cce9f35ab4beb4974e4655b2e97b74b82961eb31",
+  "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+  "batches": [
+    {
+      "batch_id": "D2-040",
+      "path": "tests/postrelease-smoke-source-pin.test.mjs",
+      "blob_sha": "3e7cd1b6742a1fae89e22e91b073ce6f89e8e373",
+      "range": [
+        1,
+        19
+      ],
+      "physical_lines": 19,
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-040.json"
+    },
+    {
+      "batch_id": "D2-041",
+      "path": "tests/immutable-function.test.py",
+      "blob_sha": "349aa931012604117037bec091957034e130cf43",
+      "range": [
+        1,
+        15
+      ],
+      "physical_lines": 15,
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-041.json"
+    }
+  ],
+  "provisional_new_physical_lines": 34,
+  "duplicate_prior_d2_paths": 0,
+  "prior_merged_direct_ledger_latest_observed": {
+    "sha": "056f10a4f474d7ad0195be9a1c69201182bfd1f2",
+    "lines": 1446,
+    "complete_files": 38
+  },
+  "do_not_add_to_canonical_until": "Confirm all distinct source SHA/path/line and merged baseline after concurrent PR #835; preserve original prior receipts.",
+  "tests": {
+    "local_node22": "2/2_PASS",
+    "local_python": "2/2_PASS",
+    "browser": "NOT_RUN",
+    "sql": "NOT_RUN",
+    "production": "NOT_RUN"
+  },
+  "publication_authorized": false,
+  "issue_complete": false
+}
