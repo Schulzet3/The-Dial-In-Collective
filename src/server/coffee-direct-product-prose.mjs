@@ -70,6 +70,7 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   ['p','div','h4','h5','li'].includes(x.tag)&&
   !/\b(?:related products?|you may also like|recommended|more coffees?|other coffees?)\b/i.test(x.section));
  const organizations=new Set(),farms=new Set(),sensory=new Set(),literals=new Set(),roasts=new Set();
+ const namedEstateGrowers=new Map();
  const releases=new Set(),decafEvidence=new Set();
  let decafEvidenceOverflow=false;
  const selectedTitleTier=String(name).match(/\s+[—–-]\s+(Ultra Light|Very Light|Light|Medium[- ]Light|Medium|Medium[- ]Dark|Dark)$/iu);
@@ -159,6 +160,18 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   if(namedRoast&&fold(namedRoast[1]).includes(fold(name))&&
      !/\b(?:formerly|previously|previous|prior|former|last (?:season|harvest|year)|historically|typically|generally|another coffee|other coffee)\b/i.test(line))
    roasts.add(namedRoast[2].slice(0,1).toUpperCase()+namedRoast[2].slice(1).toLowerCase());
+  // A direct selected product can name both its GROWER and separately named
+  // estate. The explicit human producer wins over a Farm-label fallback only
+  // when the same exact current H1 names that person; never copy other lots.
+  if(b.tag==='p'&&line.length<=600&&
+     !/\b(?:formerly|previously|historically|prior (?:harvest|lot|owner)|other coffees?|another (?:producer|offering|lot|product|coffee)|other (?:producers?|offerings?|lots?|products?)|different (?:coffee|lot|offering|product)|unrelated (?:coffee|offering|lot)|no longer|not the producer|former producer|hypothetical|might have)\b/iu.test(line)){
+   const claims=line.matchAll(/\bfrom\s+producer\s+([\p{Lu}][\p{L}\p{M}'’-]{1,35}(?:\s+[\p{Lu}][\p{L}\p{M}'’-]{1,35}){1,3})['’]s\s+([\p{Lu}][\p{L}\p{M}'’-]{1,35}(?:\s+[\p{Lu}][\p{L}\p{M}'’-]{1,35}){0,3})\s+estate\b/gu);
+   for(const claim of claims){
+    const producer=claim[1],estate=claim[2];
+    if(!(' '+selected+' ').includes(' '+fold(producer)+' '))continue;
+    namedEstateGrowers.set(fold(producer)+'|'+fold(estate),{producer,estate});
+   }
+  }
   const organization=line.match(/^(?:Single[- ]Origin\s+)?(?:Organic\s+)?([\p{L}\p{M}' -]{3,70}?)\s+coffee\s+from\s+([A-Z][A-Z\d-]{2,18})\s+in\s+([\p{L}\p{M}'’,. -]{3,90})(?:[.!]|$)/iu);
   if(organization&&fold(name).includes(fold(organization[1]))&&
      !/\b(?:blends?|rotating|mixed)\b/i.test(name))organizations.add(organization[2]);
@@ -186,6 +199,12 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
  }
  const out={};
  if(organizations.size===1)out.producer=[...organizations][0];
+ if(!out.producer&&namedEstateGrowers.size===1){
+  const pair=[...namedEstateGrowers.values()][0];
+  out.producer=pair.producer;
+  out.named_estate_producer=true;
+  out.named_estate_farm=pair.estate;
+ }
  if(!out.producer&&farms.size===1){
   const farm='Finca '+[...farms][0];
   if(body.some(b=>b.text.includes(farm))){out.producer=farm;out.farm=farm;}
