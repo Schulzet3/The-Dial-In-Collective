@@ -20,7 +20,9 @@ test('actual current selected H1 shape strips terminal joined $22.00 from coffee
  assert.equal(r.ok,true,JSON.stringify(r));
  assert.equal(r.fields.name,title);
  assert.match(coffeeUrlPreviewMarkup(r),/Ethiopia Kayon Mountain/);
- assert.doesNotMatch(coffeeUrlPreviewMarkup(r),/Kayon Mountain\s*\$22/);
+ assert.match(coffeeUrlPreviewMarkup(r),/<dt>Coffee Name<\/dt><dd>Ethiopia Kayon Mountain<\/dd>/);
+ assert.match(coffeeUrlPreviewMarkup(r),/Published product text[\s\S]*Ethiopia Kayon Mountain\$22\.00/,
+  'raw historical/current page evidence retains the source price for independent review');
 });
 test('nested money and selected same-page JSON-LD never overwrite exact coffee title',()=>{
  for(const h1 of [title+'<small>$22.00</small>',title+'<span class="price">$22.00</span>',title+' — $22.00']){
