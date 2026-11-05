@@ -289,3 +289,8 @@ Owner message “Publish” after explicit count of eight; newer #446 excluded. 
 ## 2026-11-05T05:31:57.976Z — cancel superseded, unconsumed READY8 owner grant after Release18 [skip netlify]
 
 Owner's later explicit approval for ALL NINE items superseded limited DIC-20261105-READY8-18; that request failed before any release claim. Release DIC-20261105-READY9-18 was successfully claimed once, published and verified Netlify current at b386a977a7c43bf190f6315105894334d96f0f18, nine queue entries DEPLOYED. Old grant `status` now SUPERSEDED (not reusable) while retaining original consent provenance and source. No live code/provider/Supabase/Netlify writes, new grant, new queue items or deployment. Preserve independent audit, backup, recovery and member privacy.
+
+
+## 2026-11-05 — Release19 publication isolation: nonforce live development ancestry [skip netlify]
+- Owner current 'Publish' exactly 19 already-READY items. Preserve this commit's FIRST-parent development tree, including unfinished Issue33 #154 and #368 work, unchanged; add source-history bridge 60d7eabdfad10622ea02c04fabb131f2e0a2de33 as SECOND parent to make the last actually published source an ancestor without rewriting or shipping any unfinished work.
+- Separate candidate `release-candidates/ready19-20261105-isolated-r1` at 32ab246b3234075c3a56523ddc51377d697d1a68 inherits the frozen pre-#154 source, restores two unfinished paths to published bytes, and is nonproducing until all five exact-SHA checks succeed and a unique one-use owner grant is validated. No provider/Netlify/publication or member/SQL mutations from this ancestry change.
