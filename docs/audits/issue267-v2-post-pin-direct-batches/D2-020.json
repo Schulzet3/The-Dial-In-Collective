@@ -1,0 +1,739 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "D2-020",
+  "date_utc": "2026-11-05",
+  "kind": "POST_PIN_NEW_CODE_DIRECT_SEMANTIC_REVIEW",
+  "source": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "observed_live_commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+    "path": "tests/verify-release-artifact-receipt.test.mjs",
+    "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+    "physical_line_count": 26,
+    "verified_absent_at_pin": true,
+    "terminal_newline_not_physical_line": true
+  },
+  "method": "Every original numbered line read and interpreted; behavior/quality/risk/dead/duplicate/pinned counterpart/testability/fix/Locked fit. AI semantic review; not external human certification or machine-only scan.",
+  "per_line": [
+    {
+      "line": 1,
+      "source_text": "import test from 'node:test';",
+      "classification": "test_executable",
+      "behavior": "Imports native Node tests",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "Unit only",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 1,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:1, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 2,
+      "source_text": "import assert from 'node:assert/strict';",
+      "classification": "test_executable",
+      "behavior": "Imports strict assertions",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "Assertions not provider proof",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 2,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:2, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 3,
+      "source_text": "import {createHash} from 'node:crypto';",
+      "classification": "test_executable",
+      "behavior": "Imports hashing for fixture digests",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "Synthetic hashes only",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 3,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:3, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 4,
+      "source_text": "import {verifyReleaseArtifactReceipt} from '../scripts/release/verify-release-artifact-receipt.mjs';",
+      "classification": "test_executable",
+      "behavior": "Imports real verifier",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "No stub of implementation",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 4,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:4, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 5,
+      "source_text": "const sourceSha='a'.repeat(40),archive=Buffer.concat([Buffer.from('PK'),Buffer.alloc(128,5)]);",
+      "classification": "test_executable",
+      "behavior": "Creates static fake PK ZIP and source ID",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "PK prefix not full ZIP; intentional narrow test",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 5,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:5, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 6,
+      "source_text": "const functionArchive=Buffer.concat([Buffer.from('PK'),Buffer.alloc(130,6)]);",
+      "classification": "test_executable",
+      "behavior": "Creates distinct fake function ZIP",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "Not deployable ZIP",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 6,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:6, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 7,
+      "source_text": "const artifactName='dic-production-dist-'+sourceSha;",
+      "classification": "test_executable",
+      "behavior": "Forms immutable source artifact name",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "Fake SHA is not real Git object",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 7,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:7, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 8,
+      "source_text": "const certificate={schema_version:4,kind:'DIC_CI_SOURCE_CERTIFICATE_NOT_RELEASE_APPROVAL',",
+      "classification": "test_executable",
+      "behavior": "Constructs certificate schema and kind",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "Self-signed fixture not real Actions certificate",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 8,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:8, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 9,
+      "source_text": " source_sha:sourceSha,batch_status:'CERTIFIED_READY_SOURCE',strict_source_isolation_passed:true,",
+      "classification": "test_executable",
+      "behavior": "Sets READY and isolation success",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "Positive booleans not remote check evidence",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 9,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:9, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 10,
+      "source_text": " isolation_errors:[],assessed_ready_item_ids:['item'],queue_ready_item_ids:['item'],",
+      "classification": "test_executable",
+      "behavior": "Supplies equal READY item sets and zero errors",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "Only simple one-item set",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 10,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:10, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 11,
+      "source_text": " github_run_id:42,immutable_artifact_name:artifactName,",
+      "classification": "test_executable",
+      "behavior": "Binds fake run ID and archive name",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "No live GitHub run queried",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 11,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:11, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 12,
+      "source_text": " immutable_function_name:'coffee-url-preview-function.zip',",
+      "classification": "test_executable",
+      "behavior": "Supplies expected function name",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "Canonical name fixed",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 12,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:12, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 13,
+      "source_text": " immutable_function_sha256:createHash('sha256').update(functionArchive).digest('hex'),",
+      "classification": "test_executable",
+      "behavior": "Computes function fixture SHA256",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "Fixture function bytes matched",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 13,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:13, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 14,
+      "source_text": " immutable_artifact_sha256:createHash('sha256').update(archive).digest('hex')};",
+      "classification": "test_executable",
+      "behavior": "Computes static fixture SHA256",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "Fixture static bytes matched",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 14,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:14, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 15,
+      "source_text": "const args={certificate,sourceSha,archive,functionArchive,artifactName,runId:42,verifiedRequiredChecks:true};",
+      "classification": "test_executable",
+      "behavior": "Creates all-good arguments including asserted CI checks",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "Caller flag injected and independently tested elsewhere",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 15,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:15, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 16,
+      "source_text": "test('accepts only exact READY source, CI and immutable artifact receipt',()=>{",
+      "classification": "test_executable",
+      "behavior": "Begins acceptance/rejection test",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "No fresh Node run here",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 16,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:16, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 17,
+      "source_text": " assert.match(verifyReleaseArtifactReceipt(args).status,/NOT_RELEASE_AUTHORIZATION/);",
+      "classification": "test_executable",
+      "behavior": "Asserts return says not release authorization",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "Status not deployed",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 17,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:17, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 18,
+      "source_text": " for(const patch of [{sourceSha:'b'.repeat(40)},{runId:43},{verifiedRequiredChecks:false},",
+      "classification": "test_executable",
+      "behavior": "Lists wrong source/run/check proof negatives",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "Negative triplet only",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 18,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:18, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 19,
+      "source_text": "  {artifactName:'other'},{functionArchive:Buffer.from('bad')},{archive:Buffer.concat([archive,Buffer.from('x')])},",
+      "classification": "test_executable",
+      "behavior": "Lists wrong name, function bytes and tampered ZIP negatives",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "Tamper and invalid payload cases",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 19,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:19, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 20,
+      "source_text": "  {certificate:{...certificate,batch_status:'NO_BATCH'}},",
+      "classification": "test_executable",
+      "behavior": "Lists non-READY negative",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "Rejects unready state",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 20,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:20, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 21,
+      "source_text": "  {certificate:{...certificate,strict_source_isolation_passed:false}},",
+      "classification": "test_executable",
+      "behavior": "Lists source isolation failed negative",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "Rejects false isolation",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 21,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:21, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 22,
+      "source_text": "  {certificate:{...certificate,queue_ready_item_ids:['other']}},",
+      "classification": "test_executable",
+      "behavior": "Lists divergent READY IDs negative",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "Rejects queue mismatch",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 22,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:22, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 23,
+      "source_text": "  {certificate:{...certificate,assessed_ready_item_ids:['item','item']}}]){",
+      "classification": "test_executable",
+      "behavior": "Lists duplicate assessed IDs negative",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "Rejects duplicate identity",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 23,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:23, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 24,
+      "source_text": "  assert.throws(()=>verifyReleaseArtifactReceipt({...args,...patch}));",
+      "classification": "test_executable",
+      "behavior": "Asserts every mutation throws",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "Throws not exact error messages",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 24,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:24, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 25,
+      "source_text": " }",
+      "classification": "test_executable",
+      "behavior": "Closes test loop",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "Loop deterministic",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 25,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:25, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    },
+    {
+      "line": 26,
+      "source_text": "});",
+      "classification": "test_executable",
+      "behavior": "Ends test",
+      "quality": "Uses real helper with deterministic synthetic test data; bounded assertion behavior",
+      "risk": "No production side effect",
+      "dead_or_obsolete": "Active unit test; no dead code identified",
+      "duplication": "Distinct positive/negative fixture checks; no proven redundant suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/verify-release-artifact-receipt.test.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+        "line": 26,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/verify-release-artifact-receipt.test.mjs (NOT RUN in audit)",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination tests/verify-release-artifact-receipt.test.mjs:26, blob d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf; no independent human certification."
+    }
+  ],
+  "findings": [
+    {
+      "type": "UNIT_FIXTURE_PROVENANCE_BOUNDARY",
+      "range": [
+        5,
+        16
+      ],
+      "disposition": "PK-prefixed synthetic buffers and caller-supplied passing CI flag do not constitute independently verified GitHub run or valid runtime ZIP; no claim of external acceptance."
+    }
+  ],
+  "caller_trace": [
+    "scripts/release/retrieve-certified-release-bundle.mjs:7,14-35,42-47,73-81",
+    "scripts/release/netlify-immutable-publish.mjs:8-15"
+  ],
+  "test_status": "NOT_RUN_SOURCE_ONLY",
+  "runtime_app_acceptance": "NOT_RUN",
+  "production_changes": false,
+  "complete_global": false
+}

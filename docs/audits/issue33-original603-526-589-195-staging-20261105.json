@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "kind": "SOURCE_BOUND_PUBLIC_SELECTED_PRODUCT_PROBE_STAGING_NOT_SEMANTIC_CERTIFICATION",
+  "date_utc": "2026-11-05",
+  "development_base_sha": "948ca430090a6c039f93b97552493d83aa81219c",
+  "unchanged_frozen_register": {
+    "path": "docs/audits/issue33-original603-source-level-adjudication-20261029.csv",
+    "git_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197
+  },
+  "selected_cases": [
+    {
+      "n": 526,
+      "coffee": "Cloister Reserve Blend",
+      "official_url": "https://www.mysticmonkcoffee.com/products/cloister-reserve-blend",
+      "historical_decision": "QUALIFIED_CONTEXT_OR_SEMANTIC_REVIEW_REQUIRED",
+      "current_rendered_evidence": "Exact selected H1 and description disclose Brazil Cerrado Mineiro, Ethiopia Yirgacheffe and Guatemalan/Colombian blend components. Roast Level widget shows Light Roast/Dark Roast endpoints without a numeric/textual selection tier. August 2026 external Coffee Review is not release_date.",
+      "open_review": "Actual current parser must preserve blend origin/process and not invent Medium-Light roast from historical oracle or unlabeled scale."
+    },
+    {
+      "n": 589,
+      "coffee": "Ethiopian Guji Buku Sayasa Grade 1 - SUPERNATURAL",
+      "official_url": "https://www.vailcoffee.com/products/ethiopian-yirgacheff",
+      "historical_decision": "QUALIFIED_MISSING_VALUE_NEEDS_REVIEW",
+      "current_rendered_evidence": "Current selected title is Guji Buku Sayasa despite historical URL slug yirgacheff. Direct current description lists Buku Sayasa/Hambela/Guji/Oromia/Ethiopia, Full Natural, 1900-2300 masl, sensory notes. General site roast-temperature/altitude/brew guidance is not this coffee roast tier.",
+      "open_review": "Actual current parser selected name/identity/lot and no false Medium roast; distinguish washing-station altitude from roastery 8000ft."
+    },
+    {
+      "n": 195,
+      "coffee": "Ethiopian Natural Processed Coffee",
+      "official_url": "https://leapcoffeeroasters.com/products/ethiopian-organic-coffee",
+      "historical_decision": "QUALIFIED_CONTEXT_OR_SEMANTIC_REVIEW_REQUIRED",
+      "current_rendered_evidence": "Selected current product text credits Gelgelu Edema Farm and Mendebo Mountains of Ethiopia, Yirgacheffe general heirloom and 5700-7500 feet, Blueberry/plum/chocolate; does not declare Light roast.",
+      "open_review": "Verify real current parser safely leaves selected Light roast blank, preserves producer, selected natural process and avoids using educational Yirgacheffe range as direct farm altitude."
+    }
+  ],
+  "observational_boundary": {
+    "direct_rendered_public_sources_read": true,
+    "exact_raw_html_hashes_not_yet_obtained": true,
+    "actual_current_parser_not_yet_executed": true,
+    "node_tests_not_yet_executed": true,
+    "real_gotrue_auth": false,
+    "not_603_manual_certified": true,
+    "no_release": true,
+    "no_production_writes": true
+  },
+  "workflow": {
+    "path": ".github/workflows/roaster-source-probe.yml",
+    "existing_runner": "scripts/audit/issue33-original603-focused-source-review.mjs",
+    "selector": "[dic-issue33-fortyfirst3]",
+    "bounded_numbers": "526,589,195",
+    "credential_free": true,
+    "original_frozen_register_untouched": true
+  },
+  "state": "TESTING_PENDING_EXACT_MERGED_SELECTED_OFFICIAL_HTTPS_H1_HTML_SHA256_PARSER_AND_ADD_COFFEE",
+  "next": "Run applicable PR exact-head approval and nonforce merge; verify merged workflow source SHA and live original three current selected HTML/parser Add Coffee evidence; if real mismatch reproduce and generic fix/test; only then issue33 source receipt, preserve queue and original scope."
+}

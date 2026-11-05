@@ -5,41 +5,41 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 6344,
+    "strict_validated_lines": 7585,
     "first_unvalidated_manifest_file_index": 59,
     "first_unvalidated_path": "docs/DECISION_LEDGER.json",
-    "first_unvalidated_line": 1454,
+    "first_unvalidated_line": 2695,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 7971,
-    "first_unvalidated_file_index": 50,
-    "first_unvalidated_path": "scripts/audit/coffee-reviewed-change-forensics.py",
-    "first_unvalidated_line": 751,
+    "strict_validated_lines": 9258,
+    "first_unvalidated_file_index": 58,
+    "first_unvalidated_path": "scripts/audit/issue267-coverage-contract.mjs",
+    "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true,
-    "strict_live_counterpart_checked_through_line": 750,
+    "strict_live_counterpart_checked_through_line": 75,
     "last_live_counterpart_checked": {
-      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
-      "commit": "41178c54e0ac32b92e7a5aa0ba70d385cc64653a",
-      "blob": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
-      "first_line": 727,
-      "last_line": 756,
-      "offset": 6
+      "path": "scripts/audit/issue161-full-source-review.mjs",
+      "commit": "ea4ae43db8ad5e41e3795dc9dc3cdbf8ed5a19a2",
+      "blob": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "first_line": 1,
+      "last_line": 75,
+      "offset": 0
     }
   },
   "post_pin_drift": {
-    "observed_development_commit": "41178c54e0ac32b92e7a5aa0ba70d385cc64653a",
+    "observed_development_commit": "0f93b572eb31c466139731604e43f8f557b3e9ab",
     "strict_validated_added_lines": 1,
     "scope": "Single verified addition in first current source path; total post-pin live-code delta denominator not yet reconciled",
     "rest_of_live_changes": "Remaining post-pin current code drift not semantically fully inspected; 50 new pinned live counterparts exact at +6.",
     "live_fully_reviewed_files": 36,
     "live_fully_reviewed_file_lines": 2947,
     "latest_reviewed_live_path": "scripts/audit/coffee-corpus-enrich.py",
-    "remaining_live_changes": "Unreconciled globally; 30 exact +6 counterparts checked for S2-113; remaining code drift not certified.",
+    "remaining_live_changes": "Incomplete globally; 30 new exact current counterpart lines from S2-115 checked.",
     "machine_only_diff_inventory_in_receipt": "docs/audits/issue267-v2-strict-batches/S2-003.json",
     "machine_only_changed_paths": 222,
     "machine_only_diff_commits": 243,
@@ -180,18 +180,18 @@
       "semantic_line_credit": 0
     },
     "latest_bounded_live_observation": {
-      "commit": "68b7895a5e0c0cfb44f2eb38b5c0916acf85015f",
-      "path": "scripts/audit/coffee-reviewed-change-forensics.py",
-      "blob": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
-      "reviewed_lines": [
-        127,
-        166
+      "batch": "S2-125",
+      "commit": "7ecfee5299bdfac5e57392c23aa762041aa90c0b",
+      "path": "scripts/audit/coffee-source-review-local.py",
+      "pinned_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "source_lines": [
+        1,
+        40
       ],
-      "pinned_reviewed_lines": [
-        121,
-        160
-      ],
-      "note": "S2-100 exact shifted live counterpart; previous finite change separately audited; other live tree drift incomplete"
+      "exact_matches": 40,
+      "additional_modified_lines_credited": 0,
+      "status": "BOUNDED_SOURCE_ONLY"
     },
     "forensic_nonfinite_json_guard": {
       "receipt": "docs/audits/issue267-v2-strict-batches/S2-LIVE-FINITE-20261105.json",
@@ -214,7 +214,43 @@
       "status": "TARGETED_FIX_PROPOSED_PENDING_CI",
       "other_live_code_drift": "INCOMPLETE"
     },
-    "latest_observed_development_commit": "14c26a01333bddb009236407c2e208500b8afefb"
+    "latest_observed_development_commit": "973c59b768c4f8a6dd8b6efb5e4b57f5688817c7",
+    "direct_semantic_new_code_batches": [
+      {
+        "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-001.json",
+        "batch": "D2-001",
+        "path": ".github/workflows/dic-ready-batch-certification.yml",
+        "blob_sha": "32d16c1ae364329829503e0829d4a358f6963a49",
+        "first_line": 1,
+        "last_line": 39,
+        "line_count": 39,
+        "method": "DIRECT_AI_LINE_SEMANTIC"
+      }
+    ],
+    "direct_semantic_new_code_files_fully_read": 1,
+    "direct_semantic_new_code_lines_accounted": 39,
+    "full_machine_inventory": "docs/audits/issue267-v2-post-pin-tree-drift-20261105-973c59.json",
+    "full_machine_inventory_source_commit": "973c59b768c4f8a6dd8b6efb5e4b57f5688817c7",
+    "machine_added_code_candidates_at_snapshot": 114,
+    "machine_changed_pinned_executable_at_snapshot": 46,
+    "machine_new_sql_migrations_at_snapshot": 1,
+    "latest_fresh_full_tree_snapshot": {
+      "source_commit": "973c59b768c4f8a6dd8b6efb5e4b57f5688817c7",
+      "pinned_tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "current_tree": "4103b0f9602004206c079b2018620254ee175687",
+      "pinned_blobs": 951,
+      "live_blobs": 1456,
+      "new_blob_paths": 505,
+      "changed_blob_paths": 68,
+      "removed_blob_paths": 0,
+      "eligible_pinned_changed": 46,
+      "new_code_candidates": 114,
+      "new_sql_migration": 1,
+      "previous_D2_valid_new_lines": 175,
+      "previous_D2_verified_complete_files": 5,
+      "semantic_review_status": "MACHINE_INVENTORY_NO_NEW_CREDIT",
+      "receipt": "docs/audits/issue267-v2-post-pin-tree-drift-20261105-973c59.json"
+    }
   },
   "batches": [
     {
@@ -2671,12 +2707,653 @@
       "strict_pinned_delta": 30,
       "old_v2_additional_credit": 0,
       "verification": "60 individual original lines with full text and nine semantics fields; 30 exact +6 observed live counterparts; no actual application CI."
+    },
+    {
+      "batch": "S2-114",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-114.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        1454,
+        1483
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "pinned_lines": [
+        751,
+        780
+      ],
+      "pinned_blob": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "live_exact_text_line_offset": 6,
+      "live_blob": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+      "strict_frozen_delta": 30,
+      "strict_pinned_delta": 30,
+      "old_v2_additional_credit": 0,
+      "verification": "60 exact source records and nine review dimensions; 30 observed live exact +6; no broader app tests."
+    },
+    {
+      "batch": "S2-115",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-115.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        1484,
+        1513
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "pinned_lines": [
+        781,
+        810
+      ],
+      "pinned_blob": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "live_exact_text_line_offset": 6,
+      "live_blob": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+      "strict_frozen_delta": 30,
+      "strict_pinned_delta": 30,
+      "old_v2_additional_credit": 0,
+      "verification": "60 individual original numbered source lines and nine fields; 30 live +6 exact; no tests."
+    },
+    {
+      "batch": "S2-116",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-116.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        1514,
+        1563
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "pinned_lines": [
+        811,
+        860
+      ],
+      "pinned_blob": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "live_exact_text_line_offset": 6,
+      "live_blob": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+      "strict_frozen_delta": 50,
+      "strict_pinned_delta": 50,
+      "old_v2_additional_credit": 0,
+      "verification": "100 directly read individual source records with 9 fields; 50 original pinned live counterparts exact +6; no runtime tests claimed."
+    },
+    {
+      "batch": "S2-117",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-117.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        1564,
+        1654
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "pinned_lines": [
+        861,
+        951
+      ],
+      "pinned_blob": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "live_exact_text_line_offset": 6,
+      "live_blob": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+      "strict_frozen_delta": 91,
+      "strict_pinned_delta": 91,
+      "old_v2_additional_credit": 0,
+      "verification": "182 independent original numbered source lines, nine fields, 91 exact live counterparts, no runtime-test claim."
+    },
+    {
+      "batch": "S2-118",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-118.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        1655,
+        1694
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-roaster-live-probe.mjs",
+      "pinned_lines": [
+        1,
+        60
+      ],
+      "pinned_blob": "1541f5b18283deb453269f0b313e359b01f0e8c5",
+      "live_exact_text_line_offset": 0,
+      "live_blob": "1541f5b18283deb453269f0b313e359b01f0e8c5",
+      "strict_frozen_delta": 40,
+      "strict_pinned_delta": 60,
+      "old_v2_additional_credit": 0,
+      "verification": "40 plus 60 source lines individually accounted, each nine criteria, exact live target source unchanged; no tests claimed."
+    },
+    {
+      "batch": "S2-119",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-119.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        1695,
+        1734
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-roaster-live-probe.mjs",
+      "pinned_lines": [
+        61,
+        100
+      ],
+      "pinned_blob": "1541f5b18283deb453269f0b313e359b01f0e8c5",
+      "live_exact_text_line_offset": 0,
+      "live_blob": "1541f5b18283deb453269f0b313e359b01f0e8c5",
+      "strict_frozen_delta": 40,
+      "strict_pinned_delta": 40,
+      "old_v2_additional_credit": 0,
+      "verification": "80 direct original line records with nine fields and exact 40 current counterparts; no app/runtime test claim."
+    },
+    {
+      "batch": "S2-120",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-120.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        1735,
+        1794
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-roaster-live-probe.mjs",
+      "pinned_lines": [
+        101,
+        160
+      ],
+      "pinned_blob": "1541f5b18283deb453269f0b313e359b01f0e8c5",
+      "live_exact_text_line_offset": 0,
+      "live_blob": "1541f5b18283deb453269f0b313e359b01f0e8c5",
+      "strict_frozen_delta": 60,
+      "strict_pinned_delta": 60,
+      "old_v2_additional_credit": 0,
+      "verification": "120 separate original lines, nine fields and exact 60 current counterparts; source-only."
+    },
+    {
+      "batch": "S2-121",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-121.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        1795,
+        1845
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-roaster-live-probe.mjs",
+      "pinned_lines": [
+        161,
+        211
+      ],
+      "pinned_blob": "1541f5b18283deb453269f0b313e359b01f0e8c5",
+      "live_exact_text_line_offset": 0,
+      "live_blob": "1541f5b18283deb453269f0b313e359b01f0e8c5",
+      "strict_frozen_delta": 51,
+      "strict_pinned_delta": 51,
+      "old_v2_additional_credit": 0,
+      "verification": "102 distinct source-bound line interpretations; pinned #51 complete through EOF 211, no human or runtime claim."
+    },
+    {
+      "batch": "S2-122",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-122.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        1846,
+        1895
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-source-fixture-sanitization.mjs",
+      "pinned_lines": [
+        1,
+        50
+      ],
+      "pinned_blob": "698c6dc948abf8af48bfa41b40585f75d3b5ff59",
+      "live_exact_text_line_offset": 0,
+      "live_blob": "698c6dc948abf8af48bfa41b40585f75d3b5ff59",
+      "strict_frozen_delta": 50,
+      "strict_pinned_delta": 50,
+      "old_v2_additional_credit": 0,
+      "verification": "100 direct line-specific source interpretations; no human, app test or provider verification."
+    },
+    {
+      "batch": "S2-123",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-123.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        1896,
+        1965
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-source-fixture-sanitization.mjs",
+      "pinned_lines": [
+        51,
+        120
+      ],
+      "pinned_blob": "698c6dc948abf8af48bfa41b40585f75d3b5ff59",
+      "live_exact_text_line_offset": 0,
+      "live_blob": "698c6dc948abf8af48bfa41b40585f75d3b5ff59",
+      "strict_frozen_delta": 70,
+      "strict_pinned_delta": 70,
+      "old_v2_additional_credit": 0,
+      "verification": "140 distinct original source-bound line-specific semantic records; no human/runtime certification."
+    },
+    {
+      "batch": "S2-124",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-124.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        1966,
+        2031
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-source-fixture-sanitization.mjs",
+      "pinned_lines": [
+        121,
+        186
+      ],
+      "pinned_blob": "698c6dc948abf8af48bfa41b40585f75d3b5ff59",
+      "live_exact_text_line_offset": 0,
+      "live_blob": "698c6dc948abf8af48bfa41b40585f75d3b5ff59",
+      "strict_frozen_delta": 66,
+      "strict_pinned_delta": 66,
+      "old_v2_additional_credit": 0,
+      "verification": "132 original lines direct semantics, pinned #52 fully reviewed 1-186, no runtime/human claim."
+    },
+    {
+      "batch": "S2-125",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-125.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        2032,
+        2071
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-source-review-local.py",
+      "pinned_lines": [
+        1,
+        40
+      ],
+      "pinned_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_exact_text_line_offset": 0,
+      "live_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "strict_frozen_delta": 40,
+      "strict_pinned_delta": 40,
+      "old_v2_additional_credit": 0,
+      "verification": "80 individual original source line text and nine-dimension interpretations with exact 40 live; no human/runtime claim."
+    },
+    {
+      "batch": "S2-126",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-126.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        2072,
+        2111
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-source-review-local.py",
+      "pinned_lines": [
+        41,
+        80
+      ],
+      "pinned_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_exact_text_line_offset": 0,
+      "strict_frozen_delta": 40,
+      "strict_pinned_delta": 40,
+      "old_v2_additional_credit": 0,
+      "verification": "80 original numbered lines, direct nine dimensions, 40 exact current counterparts; no runtime/human certification."
+    },
+    {
+      "batch": "S2-127",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-127.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        2112,
+        2171
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-source-review-local.py",
+      "pinned_lines": [
+        81,
+        140
+      ],
+      "pinned_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_exact_text_line_offset": 0,
+      "strict_frozen_delta": 60,
+      "strict_pinned_delta": 60,
+      "old_v2_additional_credit": 0,
+      "verification": "120 distinct original source lines, nine direct semantic dimensions each, 60 exact live counterpart lines; no runtime/human certification."
+    },
+    {
+      "batch": "S2-128",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-128.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        2172,
+        2221
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-source-review-local.py",
+      "pinned_lines": [
+        141,
+        190
+      ],
+      "pinned_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_exact_text_line_offset": 0,
+      "strict_frozen_delta": 50,
+      "strict_pinned_delta": 50,
+      "old_v2_additional_credit": 0,
+      "verification": "100 directly read numbered original source lines and nine dimensions each, exact 50 live matches."
+    },
+    {
+      "batch": "S2-129",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-129.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        2222,
+        2261
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "frozen_live_blob": "90233639bef05b1671f5325ebbf89fde1031eac6",
+      "frozen_live_exact_text_line_offset": 0,
+      "pinned_file": "scripts/audit/coffee-source-review-local.py",
+      "pinned_lines": [
+        191,
+        230
+      ],
+      "pinned_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_exact_text_line_offset": 0,
+      "strict_frozen_delta": 40,
+      "strict_pinned_delta": 40,
+      "old_v2_additional_credit": 0,
+      "verification": "80 direct original lines nine dimensions with 40 historical doc and 40 pinned executable exact current same-line counterparts."
+    },
+    {
+      "batch": "S2-130",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-130.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        2262,
+        2279
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "frozen_live_blob": "90233639bef05b1671f5325ebbf89fde1031eac6",
+      "frozen_live_exact_text_line_offset": 0,
+      "pinned_file": "scripts/audit/coffee-source-review-local.py",
+      "pinned_lines": [
+        231,
+        250
+      ],
+      "pinned_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_exact_text_line_offset": 0,
+      "strict_frozen_delta": 18,
+      "strict_pinned_delta": 20,
+      "old_v2_additional_credit": 0,
+      "verification": "38 direct line-specific original reviews, each original text and nine dimensions; 38 exact live counterparts. No human/runtime claim."
+    },
+    {
+      "batch": "S2-131",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-131.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        2280,
+        2299
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "frozen_live_blob": "90233639bef05b1671f5325ebbf89fde1031eac6",
+      "frozen_live_moved_counterparts": "2281->2360;2282-2299->2390-2407;2280 changed comma",
+      "pinned_file": "scripts/audit/coffee-source-review-local.py",
+      "pinned_lines": [
+        251,
+        270
+      ],
+      "pinned_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_exact_text_line_offset": 0,
+      "strict_frozen_delta": 20,
+      "strict_pinned_delta": 20,
+      "old_v2_additional_credit": 0,
+      "verification": "40 original SHA-bound direct semantic line reviews; 39 exact current counterparts including moved frozen lines; one appended-array punctuation delta explicitly classified."
+    },
+    {
+      "batch": "S2-132",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-132.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        2300,
+        2329
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "frozen_live_blob": "90233639bef05b1671f5325ebbf89fde1031eac6",
+      "frozen_live_exact_text_line_offset": 108,
+      "pinned_file": "scripts/audit/coffee-source-review-local.py",
+      "pinned_lines": [
+        271,
+        300
+      ],
+      "pinned_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_exact_text_line_offset": 0,
+      "strict_frozen_delta": 30,
+      "strict_pinned_delta": 30,
+      "old_v2_additional_credit": 0,
+      "verification": "60 numbered original direct semantic line reviews with 9 dimensions each, 30 moved exact historical current counterparts +108 and 30 exact pinned current counterparts. No runtime/human certification."
+    },
+    {
+      "batch": "S2-133",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-133.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        2330,
+        2359
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "frozen_live_blob": "90233639bef05b1671f5325ebbf89fde1031eac6",
+      "frozen_live_exact_text_line_offset": 108,
+      "pinned_file": "scripts/audit/coffee-source-review-local.py",
+      "pinned_lines": [
+        301,
+        330
+      ],
+      "pinned_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_exact_text_line_offset": 0,
+      "strict_frozen_delta": 30,
+      "strict_pinned_delta": 30,
+      "old_v2_additional_credit": 0,
+      "verification": "60 original numbered AI direct semantic line reviews with nine per-line fields and 60 exact current counterparts, no runtime/human certification."
+    },
+    {
+      "batch": "S2-134",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-134.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        2360,
+        2399
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "frozen_live_blob": "90233639bef05b1671f5325ebbf89fde1031eac6",
+      "frozen_live_exact_text_line_offset": 108,
+      "pinned_file": "scripts/audit/coffee-source-review-local.py",
+      "pinned_lines": [
+        331,
+        370
+      ],
+      "pinned_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_exact_text_line_offset": 0,
+      "strict_frozen_delta": 40,
+      "strict_pinned_delta": 40,
+      "old_v2_additional_credit": 0,
+      "verification": "80 original numbered AI direct semantic source lines with nine individual dimensions and 80 exact live counterparts; no runtime/human certification."
+    },
+    {
+      "batch": "S2-135",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-135.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        2400,
+        2439
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "frozen_live_blob": "90233639bef05b1671f5325ebbf89fde1031eac6",
+      "frozen_live_exact_text_line_offset": 108,
+      "pinned_file": "scripts/audit/coffee-source-review-local.py",
+      "pinned_lines": [
+        371,
+        410
+      ],
+      "pinned_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_exact_text_line_offset": 0,
+      "strict_frozen_delta": 40,
+      "strict_pinned_delta": 40,
+      "old_v2_additional_credit": 0,
+      "verification": "80 individually semantic original lines with 9 dimensions and 80 exact current counterparts; no human or runtime certification."
+    },
+    {
+      "batch": "S2-136",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-136.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        2440,
+        2464
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "frozen_live_blob": "90233639bef05b1671f5325ebbf89fde1031eac6",
+      "frozen_live_exact_text_line_offset": 108,
+      "pinned_file": "scripts/audit/coffee-source-review-local.py",
+      "pinned_lines": [
+        411,
+        435
+      ],
+      "pinned_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_exact_text_line_offset": 0,
+      "strict_frozen_delta": 25,
+      "strict_pinned_delta": 25,
+      "old_v2_additional_credit": 0,
+      "verification": "50 original numbered directly inspected AI semantic lines; 9 dimensions each and 50 exact live counterparts; no runtime or human certification."
+    },
+    {
+      "batch": "S2-137",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-137.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        2465,
+        2494
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "frozen_live_blob": "90233639bef05b1671f5325ebbf89fde1031eac6",
+      "frozen_live_exact_text_line_offset": 108,
+      "pinned_file": "scripts/audit/coffee-source-review-local.py",
+      "pinned_lines": [
+        436,
+        465
+      ],
+      "pinned_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_exact_text_line_offset": 0,
+      "strict_frozen_delta": 30,
+      "strict_pinned_delta": 30,
+      "old_v2_additional_credit": 0,
+      "verification": "60 individually direct-read original lines and nine dimensions, exact live counterpart; no human/runtime claim."
+    },
+    {
+      "batch": "S2-138",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-138.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        2495,
+        2534
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-source-review-local.py",
+      "pinned_lines": [
+        466,
+        490
+      ],
+      "pinned_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "strict_frozen_delta": 40,
+      "strict_pinned_delta": 25,
+      "old_v2_additional_credit": 0,
+      "verification": "Original numbered lines directly AI semantically inspected, nine dimensions, exact live counterparts; nonoverlap, no human/runtime claim."
+    },
+    {
+      "batch": "S2-139",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-139.json",
+      "frozen_lines_delta": 0,
+      "pinned_file": "scripts/audit/isolated-backup-snapshot-regression.sh",
+      "pinned_lines": [
+        1,
+        27
+      ],
+      "pinned_blob": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+      "strict_frozen_delta": 0,
+      "strict_pinned_delta": 27,
+      "old_v2_additional_credit": 0,
+      "verification": "Original numbered lines directly AI semantically inspected, nine dimensions, exact live counterparts; nonoverlap, no human/runtime claim."
+    },
+    {
+      "batch": "S2-140",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-140.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        2535,
+        2584
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/isolated-signed-http-regression.sh",
+      "pinned_lines": [
+        1,
+        57
+      ],
+      "pinned_blob": "c1c493b6f432eed02807264f1f601908d7591081",
+      "strict_frozen_delta": 50,
+      "strict_pinned_delta": 57,
+      "old_v2_additional_credit": 0,
+      "verification": "107 original direct numbered AI semantic records, nine dimensions, exact current counterparts; no fresh runtime or independent human certification."
+    },
+    {
+      "batch": "S2-141",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-141.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        2585,
+        2634
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/isolated-sql-regression.sh",
+      "pinned_lines": [
+        1,
+        40
+      ],
+      "pinned_blob": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "strict_frozen_delta": 50,
+      "strict_pinned_delta": 40,
+      "old_v2_additional_credit": 0,
+      "verification": "90 numbered distinct original direct AI semantically inspected source lines; nine per-line dimensions, current counterparts, no runtime test"
+    },
+    {
+      "batch": "S2-142",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-142.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        2635,
+        2694
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/issue161-full-source-review.mjs",
+      "pinned_lines": [
+        1,
+        75
+      ],
+      "pinned_blob": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "strict_frozen_delta": 60,
+      "strict_pinned_delta": 75,
+      "old_v2_additional_credit": 0,
+      "verification": "135 individually AI-semantic numbered original lines, nine dimensions/live counterpart, no machine-only credit or human claim."
     }
   ],
   "completion": "IN_PROGRESS",
-  "test_limit": "Direct original source text and live counterpart verified; PR-head CI, post-pin total drift and actual application acceptance incomplete.",
-  "last_batch": "S2-113",
-  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-113.json",
+  "test_limit": "S2-142 combines source-only original line review with targeted CI-scope code/test edit. Exact PR-head full tests and postmerge source-bound CI REQUIRED; no tests claimed yet, postpin semantic incomplete.",
+  "last_batch": "S2-142",
+  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-142.json",
   "complete": false,
   "accounting_reconciliation_20261105": {
     "scope": "NONCREDIT historical source-ledger reference repair",
@@ -2734,6 +3411,60 @@
     "nonoverlapping": true,
     "total_ordered_batches": 112,
     "post_pin_semantic_coverage": "STILL INCOMPLETE",
-    "independent_human_review_claim": false
+    "independent_human_review_claim": false,
+    "latest_S2_136": {
+      "source_development_commit": "c0ea44bf82db4f981af3be8d7d342f742cbbef76",
+      "strict_frozen": 7355,
+      "strict_pinned": 9004,
+      "nonoverlap_new_ranges": true,
+      "all_136_receipts_individually_revalidated": false,
+      "first_workflow_revalidated_without_credit": true,
+      "post_pin_live_drift_complete": false
+    },
+    "latest_S2_137": {
+      "source_development_commit": "0594e11ede570547ea4240d74e71ff6039df71dd",
+      "strict_frozen": 7385,
+      "strict_pinned": 9034,
+      "no_overlap_with_prior": true,
+      "postpin_semantic_complete": false,
+      "all_old_receipts_independently_revalidated": false
+    },
+    "latest_S2_139": {
+      "source_development_commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+      "strict_frozen": 7425,
+      "strict_pinned": 9086,
+      "source_lines_directly_inspected": 92,
+      "original_first_workflow_revalidated_no_credit": true,
+      "pinned_files53_and54_reached_eof": true,
+      "full_live_drift_complete": false,
+      "all_older_receipts_independently_revalidated": false
+    },
+    "latest_S2_140": {
+      "source_dev": "ae046c7dd4d102ce915325fe93b0e115a628acac",
+      "strict_frozen": 7475,
+      "strict_pinned": 9143,
+      "new_original_records": 107,
+      "nonoverlap": true,
+      "all_older_receipts_independently_semantic_revalidated": false,
+      "live_drift_complete": false
+    },
+    "latest_S2_141": {
+      "source_dev": "973c59b768c4f8a6dd8b6efb5e4b57f5688817c7",
+      "strict_frozen": 7525,
+      "strict_pinned": 9183,
+      "independent_direct_line_records": 90,
+      "prior_first_workflow_reread_without_credit": true,
+      "postpin_semantic_incomplete": true,
+      "all_older_receipts_independently_verified": false
+    },
+    "latest_S2_142": {
+      "source_development_commit": "ea4ae43db8ad5e41e3795dc9dc3cdbf8ed5a19a2",
+      "strict_frozen": 7585,
+      "strict_pinned": 9258,
+      "new_direct_original_lines": 135,
+      "source_file57_eof_verified": true,
+      "first_frozen_workflow_reread_without_duplicate_credit": true,
+      "live_code_drift_complete": false
+    }
   }
 }

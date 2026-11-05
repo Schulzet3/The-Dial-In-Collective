@@ -1,0 +1,730 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "D2-025",
+  "date_utc": "2026-11-05",
+  "kind": "POST_PIN_NEW_CODE_DIRECT_SEMANTIC_REVIEW",
+  "source": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "observed_live_commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+    "path": "tests/discover-certified-artifacts.test.mjs",
+    "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+    "physical_line_count": 26,
+    "verified_absent_at_pin": true,
+    "terminal_newline_not_physical_line": true
+  },
+  "method": "All literal numbered physical lines read and classified independently with nine individual dimensions. AI semantic, not independent human certification or machine-only review.",
+  "per_line": [
+    {
+      "line": 1,
+      "source_text": "import test from 'node:test';",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Imports the Node built-in test runner",
+      "quality": "Standard isolated test tool",
+      "risk": "Not a hosted release check",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 1,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 1; not human sign-off."
+    },
+    {
+      "line": 2,
+      "source_text": "import assert from 'node:assert/strict';",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Imports strict assertions",
+      "quality": "Supports explicit negative rejection checks",
+      "risk": "Test passes cover only declared assertions",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 2,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 2; not human sign-off."
+    },
+    {
+      "line": 3,
+      "source_text": "import {discoverCertifiedArtifacts} from '../scripts/release/discover-certified-artifacts.mjs';",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Imports real release artifact selector",
+      "quality": "Exercises actual module via fake fetch, not a mocked selector",
+      "risk": "No network/provider request in fixture",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 3,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 3; not human sign-off."
+    },
+    {
+      "line": 4,
+      "source_text": "const sha='a'.repeat(40);",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Constructs fixed full-length source SHA",
+      "quality": "Exact 40-hex test input",
+      "risk": "Synthetic SHA not real commit",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 4,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 4; not human sign-off."
+    },
+    {
+      "line": 5,
+      "source_text": "const run={id:42,head_sha:sha,head_branch:'development/backend-foundation',",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Defines fake CI run ID/head/branch",
+      "quality": "Models known development source context",
+      "risk": "No check-run or GitHub signature in fixture",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 5,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 5; not human sign-off."
+    },
+    {
+      "line": 6,
+      "source_text": " status:'completed',conclusion:'success',event:'push'};",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Completes fake run with successful completed push",
+      "quality": "Tests eligible-run predicates",
+      "risk": "Does not test failed or wrong branch individually",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 6,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 6; not human sign-off."
+    },
+    {
+      "line": 7,
+      "source_text": "const artifacts=[{id:1,name:'dic-production-dist-'+sha,expired:false,size_in_bytes:100,",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Defines synthetic nonempty dist artifact ID and name",
+      "quality": "Models artifact metadata check",
+      "risk": "Size 100 proves only >0 branch",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 7,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 7; not human sign-off."
+    },
+    {
+      "line": 8,
+      "source_text": " workflow_run:{id:42,head_sha:sha}},{id:2,name:'dic-ci-certificate-'+sha,",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Defines matching workflow_run context and certificate artifact identity",
+      "quality": "Ties fixture artifact to same fake CI run",
+      "risk": "Certificate bytes not authenticated",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 8,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 8; not human sign-off."
+    },
+    {
+      "line": 9,
+      "source_text": " expired:false,size_in_bytes:100,workflow_run:{id:42,head_sha:sha}}];",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Completes certificate fixture with source binding",
+      "quality": "Required paired CI artifact",
+      "risk": "Not real API response provenance",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 9,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 9; not human sign-off."
+    },
+    {
+      "line": 10,
+      "source_text": "const fetcher=async url=>({ok:true,json:async()=>url.includes('/artifacts?')?",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Defines HTTP test double discriminating URL substrings",
+      "quality": "Keeps test deterministic, no outbound HTTP",
+      "risk": "Fake responds to arbitrary URL with success",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 10,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 10; not human sign-off."
+    },
+    {
+      "line": 11,
+      "source_text": " {artifacts}:{workflow_runs:[run]}});",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Returns either fake artifact list or fake workflow run list",
+      "quality": "Models two API endpoints",
+      "risk": "Does not assert requested host/path or HTTP GET",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 11,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 11; not human sign-off."
+    },
+    {
+      "line": 12,
+      "source_text": "test('discovers only exact-source completed CI and both artifacts',async()=>{",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Begins positive exact CI-artifact discovery test",
+      "quality": "Names narrow acceptance boundary",
+      "risk": "Not release Ready acceptance",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 12,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 12; not human sign-off."
+    },
+    {
+      "line": 13,
+      "source_text": " const r=await discoverCertifiedArtifacts({token:'fake',sourceSha:sha,fetcher});",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Invokes real selector with fake token and source SHA",
+      "quality": "Exercises positive branch of production helper",
+      "risk": "Synthetic token not credential",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 13,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 13; not human sign-off."
+    },
+    {
+      "line": 14,
+      "source_text": " assert.equal(r.run_id,42);assert.equal(r.dist_artifact_id,1);",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Checks selected run ID and dist ID",
+      "quality": "Some output provenance assertions",
+      "risk": "Does not directly assert certificate ID",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 14,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 14; not human sign-off."
+    },
+    {
+      "line": 15,
+      "source_text": "});",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Closes positive test",
+      "quality": "No further assertions",
+      "risk": "No hidden success semantics",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 15,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 15; not human sign-off."
+    },
+    {
+      "line": 16,
+      "source_text": "test('rejects wrong SHA, missing and expired artifacts, and bad API',async()=>{",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Begins negative tests for bad inputs/API/expired/mismatched provenance",
+      "quality": "Risk-significant denial coverage",
+      "risk": "Not an exhaustive negative matrix",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 16,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 16; not human sign-off."
+    },
+    {
+      "line": 17,
+      "source_text": " await assert.rejects(discoverCertifiedArtifacts({token:'fake',sourceSha:'bad',fetcher}));",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Expects wrong-length SHA rejection",
+      "quality": "Fails before fetch",
+      "risk": "Does not check missing token case",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 17,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 17; not human sign-off."
+    },
+    {
+      "line": 18,
+      "source_text": " await assert.rejects(discoverCertifiedArtifacts({token:'fake',sourceSha:sha,",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Begins HTTP-error rejection expectation",
+      "quality": "Exercises transport failure branch",
+      "risk": "No timed-out fetch simulation",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 18,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 18; not human sign-off."
+    },
+    {
+      "line": 19,
+      "source_text": "  fetcher:async()=>({ok:false})}));",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Fake HTTP returns !ok",
+      "quality": "Fails closed on inaccessible API",
+      "risk": "No retry/redirect test",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 19,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 19; not human sign-off."
+    },
+    {
+      "line": 20,
+      "source_text": " await assert.rejects(discoverCertifiedArtifacts({token:'fake',sourceSha:sha,",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Begins expired-artifact failure expectation",
+      "quality": "Simulates unavailable pair",
+      "risk": "Not an actual expired GitHub object",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 20,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 20; not human sign-off."
+    },
+    {
+      "line": 21,
+      "source_text": "  fetcher:async url=>({ok:true,json:async()=>url.includes('/artifacts?')?",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Supplies fake artifact API response with altered expiry",
+      "quality": "Exercises artifact-filter logic",
+      "risk": "One response built from synthetic fixtures",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 21,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 21; not human sign-off."
+    },
+    {
+      "line": 22,
+      "source_text": "   {artifacts:artifacts.map(a=>({...a,expired:true}))}:{workflow_runs:[run]}})}));",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Completes expired test and successful run list",
+      "quality": "Both archives marked expired, not one-only scenario",
+      "risk": "No duplicate-artifact case",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 22,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 22; not human sign-off."
+    },
+    {
+      "line": 23,
+      "source_text": " await assert.rejects(discoverCertifiedArtifacts({token:'fake',sourceSha:sha,",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Begins wrong-head SHA denial expectation",
+      "quality": "Simulates source provenance mismatch",
+      "risk": "Could add wrong event/branch tests",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 23,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 23; not human sign-off."
+    },
+    {
+      "line": 24,
+      "source_text": "  fetcher:async url=>({ok:true,json:async()=>url.includes('/artifacts?')?",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Fake response selects artificial run list",
+      "quality": "Still a stubbed API",
+      "risk": "No signed remote check",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 24,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 24; not human sign-off."
+    },
+    {
+      "line": 25,
+      "source_text": "   {artifacts}:{workflow_runs:[{...run,head_sha:'b'.repeat(40)}]}})}));",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Completes wrong-source SHA fixture",
+      "quality": "Run does not match requested source",
+      "risk": "No cross-repository confusion asserted",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 25,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 25; not human sign-off."
+    },
+    {
+      "line": 26,
+      "source_text": "});",
+      "classification": "test_executable_or_fixture",
+      "behavior": "Closes negative test case",
+      "quality": "Denials narrowly tested",
+      "risk": "No full release workflow proven",
+      "dead_or_obsolete": "Current active regression/test fixture source; no evidence this specific line is unused or superseded.",
+      "duplication": "No duplicate test logic proven; positive/negative structural cases distinct from original603, Auth, provider and app tests.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "verified_absent": true,
+        "method": "Exact pinned GitHub file fetch 404"
+      },
+      "live_current_counterpart": {
+        "path": "tests/discover-certified-artifacts.test.mjs",
+        "commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+        "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+        "line": 26,
+        "exact_text_match": true
+      },
+      "testability": "node --test tests/discover-certified-artifacts.test.mjs",
+      "fix_opportunity": "Only add focused missing negative/size/identity/cleanup regression after verifying a real gap or requirement; do not weaken source-bound gates.",
+      "locked_fit": "#417/#457: test and preserve one-time owner Git-connected publisher only; fake HTTP/archive must never be treated as live publication evidence.",
+      "review_method": "Direct AI semantic reading of actual Git blob 8054061760229fad4db9bca1bc9ebd41906b2735 physical line 26; not human sign-off."
+    }
+  ],
+  "context": {
+    "caller": "scripts/release/discover-certified-artifacts.mjs",
+    "source_already_direct_reviewed_in_other_D2": "D2-005",
+    "findings": "Unit fixtures are synthetic, not a current GitHub Actions bundle; negative gaps identified but no active failure reproduced.",
+    "disposition": "No speculative runtime patch. Preserve original passing evidence and D2 corrections.",
+    "tests_run": "NO_NEW_NODE_SUITE_DOCS_ONLY",
+    "original603": "NOT_RUN",
+    "deployment": "NOT_AUTHORIZED"
+  }
+}

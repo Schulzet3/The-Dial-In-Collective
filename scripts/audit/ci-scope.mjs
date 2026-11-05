@@ -17,10 +17,16 @@ const SAFE_META=new Set(['docs/RELEASE_QUEUE.json','docs/DECISION_LEDGER.json',
 const AUDIT_EVIDENCE_META=new Set([
  'docs/audits/issue267-review-restart-v2-20261101.json',
  'docs/audits/issue267-v2-strict-coverage-ledger-20261103.json',
+ // Immutable #267 post-pin direct-review receipt index; no runtime consumer.
+ 'docs/audits/issue267-v2-post-pin-direct-coverage-ledger-20261105.json',
  // Only #504's immutable word-audit coverage record; never generalize JSON under docs/.
  'docs/audits/issue504-coverage-ledger.json'
 ]);
 const AUDIT_EVIDENCE_RECEIPT=/^docs\/audits\/issue267-v2-strict-batches\/S2-[0-9]{3,6}\.json$/;
+// #267 exact post-pin machine inventory and bounded D2 direct source receipts: evidence, not runtime inputs.
+const POST_PIN_AUDIT_EVIDENCE_RECEIPT=/^docs\/audits\/issue267-v2-post-pin-direct-batches\/D2-[0-9]{3,6}\.json$/;
+// Narrow owner-audit snapshots: original exact path or dated SHA-prefix-bound machine inventory.
+const POST_PIN_AUDIT_TREE_INVENTORY=/^docs\/audits\/issue267-v2-post-pin-tree-drift-(?:20261105|20[0-9]{6}-[a-f0-9]{6,40})\.json$/;
 // #504's source-bound G1 receipts contain governance evidence, not app/test inputs.
 const GITHUB_RECORDS_EVIDENCE_RECEIPT=/^docs\/audits\/issue504-review-G1-[0-9]{3,6}\.json$/;
 
@@ -37,6 +43,7 @@ function impactKind(path){
  if(!/^[A-Za-z0-9_.\/-]+$/.test(path)||path.includes('..')||path.startsWith('/'))return 'unknown';
  if(path==='README.md'||path==='AGENTS.md'||/^docs\/[A-Za-z0-9_.\/-]+\.md$/.test(path)||SAFE_META.has(path)||
   AUDIT_EVIDENCE_META.has(path)||AUDIT_EVIDENCE_RECEIPT.test(path)||
+  POST_PIN_AUDIT_EVIDENCE_RECEIPT.test(path)||POST_PIN_AUDIT_TREE_INVENTORY.test(path)||
   GITHUB_RECORDS_EVIDENCE_RECEIPT.test(path))
   return 'docs';
  if(/^site\/.*\.css$/.test(path))return 'style';

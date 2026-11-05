@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "date": "2026-11-05",
+  "scope": "ORIGINAL603_SELECTED_CURRENT_596_NAMED_FARM_REGION_SPELLING_CONFLICT",
+  "status": "NARROW_VERIFIED_READY_DEVELOPMENT_NOT_DEPLOYED",
+  "branch": "development/backend-foundation",
+  "pr": 811,
+  "original_frozen": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "oracle_changed": false,
+    "scorer_changed": false,
+    "csv_changed": false,
+    "manual_semantic_all_603_complete": false
+  },
+  "pre_patch": {
+    "run": 42051979776,
+    "sha256_original_selected_html": "5bfd415211c160f111c1249e0bb58ed25cc9d6e4d2f4bdf6c62d7e02d0e93b5b",
+    "coffee_number": 596,
+    "official_url": "https://www.wreckingballcoffee.com/products/guatemala-huehuetenango-los-dos-socios-12oz",
+    "selected_h1": "Guatemala Huehuetenango Los Dos Socios",
+    "selected_region_label": "Huehuetenago",
+    "selected_current_farm_story": "Finca Los Dos Socios is located in the highlands of La Libertad, Huehuetenango.",
+    "parser_origin": "Huehuetenago, Guatemala",
+    "roast": "AMBIGUOUS_MEDIUM_OR_MEDIUM_LIGHT"
+  },
+  "code_review": {
+    "exact_tested_pr_head": "66610e75ef7d6aa3e6904d63317ac287b434407e",
+    "safe_nonforce_squash_merged_sha": "5e530b4a7ee373ad8413009a759c7ec342fba280",
+    "identical_tested_merged_tree": "80a9f5d1966cd4e34a6fce82e0195c1b0b9f0507",
+    "changes": [
+      "src/server/coffee-title-region-evidence.mjs",
+      "src/server/coffee-page-metadata.mjs",
+      "tests/coffee-issue33-596-selected-farm-region-conflict.test.mjs"
+    ],
+    "behavior": "Exact selected named farm + literal current location/H1 disproves confidently choosing a misspelled Region label. Withhold the whole origin and surface printed alternatives; never silently correct the roaster.",
+    "prior_failed_head_node_runs": [
+      42061098231,
+      42061665416
+    ],
+    "failures_and_repairs": [
+      "First regex excluded two-character La in La Libertad; expanded minimum word length from 3 to 2.",
+      "Second regex captured terminal punctuation in Huehuetenango., preventing exact-H1 corroboration; strip terminal sentence punctuation.",
+      "First approval failure was missing required merged_source_sha:null in TESTING intake; corrected without touching other queue rows."
+    ],
+    "corrected_pr_head": {
+      "node_lint_build": 42061990175,
+      "tests_pass": 1795,
+      "tests_fail": 0,
+      "tests_skip": 0,
+      "approval": 42061990367,
+      "cloud_mobile": 42061990529,
+      "sql": 42061990080,
+      "security": 42061990214,
+      "private_source": 42061990247,
+      "all_applicable_checks": "SUCCESS",
+      "original_frozen603": "SKIPPED_NOT_PASS"
+    },
+    "exact_merged_head": {
+      "node_lint_build": 42062225302,
+      "tests_pass": 1795,
+      "tests_fail": 0,
+      "tests_skip": 0,
+      "approval": 42062225263,
+      "cloud_mobile": 42062225348,
+      "official_public": 42062225349,
+      "all_applicable_checks": "SUCCESS",
+      "original_frozen603": "NOT_RUN_AS_PART_OF_NARROW_MERGED_CI"
+    }
+  },
+  "source_verification": {
+    "run": 42062225349,
+    "job_id": 127366972474,
+    "artifact_id": 13432387733,
+    "upload_zip_sha256_runner_reported": "24ed20642c9fe5fc6c399e601cb5a228b06638363ad2583b9418f769e50eed32",
+    "independent_zip_rehash": false,
+    "attempted": 3,
+    "fetched": 3,
+    "parsed": 3,
+    "add_coffee_source_review_and_preview": true,
+    "current_selected": [
+      {
+        "number": 596,
+        "raw_html_sha256": "93cbd4558b0dc5d07cbf7fae6c68c3ff06bcc0ba818f829a6527352cb3291e2d",
+        "fields": {
+          "name": "Guatemala Huehuetenango Los Dos Socios",
+          "producer": "Concepción Villatoro",
+          "variety": "Bourbon and Caturra",
+          "process": "Washed",
+          "release_label": "2026",
+          "tasting_notes": "Balanced with chocolate, caramel, and orange citrusy acidity.",
+          "origin": null,
+          "roast_level": null
+        },
+        "conflicts": [
+          "origin"
+        ],
+        "result": "ORIGIN_WITHHELD_REVIEWABLE_DIRECT_SELECTED_SOURCE_SPELLING_DISAGREEMENT"
+      },
+      {
+        "number": 575,
+        "raw_html_sha256": "9e95bfe0009e9d1de8b3d3996a73a27303e33a2e2185d67465932a68ba8fa331",
+        "fields": {
+          "name": "Indonesia Bies Penantan",
+          "origin": "Takengon, Aceh, Indonesia",
+          "producer": "The Ketiara Cooperative",
+          "tasting_notes": "Dark Chocolate, Baking Spice, Tropical Fruit"
+        },
+        "conflicts": [],
+        "result": "PREVIOUS_VERIFIED_ORIGIN_PRESERVED"
+      },
+      {
+        "number": 593,
+        "raw_html_sha256": "d5e0918005782f7578d983f33dc1e5b72194e1eb61f91c78731ee0e2b5ac8f38",
+        "fields": {
+          "name": "Ethiopian | Single Origin Coffee",
+          "origin": "Ethiopia",
+          "tasting_notes": "fruity, stone fruits, orange blossom",
+          "process": null
+        },
+        "conflicts": [],
+        "result": "PREVIOUS_VERIFIED_UNCHOSEN_PROCESS_REMAINS_BLANK"
+      }
+    ],
+    "manual_certified": 0,
+    "note": "Hashes and ZIP artifact reported by runner; downloaded ZIP/raw bytes were not independently rehashed. Dynamic official pages vary. These are three exact selected public probes, not 603-case semantic certification."
+  },
+  "release": {
+    "queue_item": "DIC-Q-33-original603-596-selected-farm-region-disagreement",
+    "state": "READY",
+    "not_deployed": true,
+    "release_authority": false
+  },
+  "boundaries": {
+    "issue33": "OPEN_IN_PROGRESS_UNIVERSAL_ORIGINAL603_SEMANTIC_CERTIFICATION_UNVERIFIED",
+    "issue267": "SEPARATE",
+    "issue96": "SEPARATE",
+    "production_write": false,
+    "netlify_publication": false,
+    "signed_in_gotrue_test": false
+  },
+  "next": "Independently review next original603 unresolved source case, preserve all conflicting/unpublished fields blank, no universal completion claim."
+}

@@ -1,4 +1,4 @@
-import {selectedCountryFirstTitleRegion} from './coffee-title-region-evidence.mjs';
+import {selectedCountryFirstTitleRegion,selectedCountryProducerRegion,selectedCountryAreaOfRegion,selectedCountrySmallholderGrowingLocality} from './coffee-title-region-evidence.mjs';
 import {productCoffeeProse,NONCURRENT_COFFEE_PROSE} from './coffee-product-prose.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {coffeeHtmlAttributes,productMarkup} from './coffee-product-scope.mjs';
@@ -752,9 +752,42 @@ export function selectedCurrentFarmBridge(blocks,{name='',producer='',origin=''}
  return candidates.size===1?[...candidates.values()][0]:null;
 }
 
+// A currently selected BARREL-AGED coffee can explicitly identify its green
+// beans in a pair of adjacent, current-product preparation sentences. The
+// named subregion is a literal claim, never inferred from whiskey geography,
+// generic country education, URL SEO or a different product's ingredient.
+export function selectedBarrelGreenBeanRegion(blocks,{name='',origin=''}={}){
+ if(!Array.isArray(blocks)||!/\bbarrel[ -]aged\b/iu.test(name)||!COUNTRY_ONLY.test(origin))return null;
+ const titles=blocks.filter(block=>block.tag==='h1');
+ if(titles.length!==1||key(titles[0].text)!==key(name))return null;
+ const prior=/\bwe(?:[’']ve|\s+have)\s+taken\b.{0,125}\bbarrel\b.{0,100}\bused\s+it\s+to\s+age\s+our\s+green\s+coffee\b/iu;
+ const after=/\bthis\s+infuses\b.{0,180}\bto\s+transform\s+an?\s+(\p{Lu}[\p{L}\p{M}'’-]{2,45})\s+(\p{Lu}[\p{L}\p{M}'’-]{2,60}(?:\s+(?:de|del|la|the|of)\s+\p{Lu}[\p{L}\p{M}'’-]{2,60}|\s+\p{Lu}[\p{L}\p{M}'’-]{2,60}){0,2})\s+into\b/iu;
+ const candidates=new Map();let conflictingCountry=false;
+ for(const block of blocks){
+  if(!['p','li','div'].includes(block.tag)||block.educational||block.text.length>1800||
+     /\b(?:related|recommended|other coffees?|other roasts?|catalog|reviews?)\b/iu.test(block.section||''))continue;
+  const lines=sentences(block.text);
+  for(let i=1;i<lines.length;i++){
+   const before=lines[i-1],sentence=lines[i];
+   if(!prior.test(before)||!current(before)||!current(sentence)||
+      /\b(?:other|another|previous|historical|former|formerly|no longer|hypothetical|last year|used to)\b/iu.test(before+' '+sentence))continue;
+   const m=after.exec(sentence);if(!m)continue;
+   const country=DEMONYMS[m[1]],place=m[2];
+   if(!country||place.length>65||COUNTRY_ONLY.test(place)||completeVarietyPhrase(place,{explicit:true})||
+      /\b(?:coffee|roast|blend|process|washed|natural|honey|flavou?r|tasting|vanilla|caramel|chocolate|whisk(?:e)?y|barrel|warehouse|street|shipping)\b/iu.test(place))continue;
+   if(key(country)!==key(origin)){conflictingCountry=true;continue;}
+   const value=place+', '+country;
+   candidates.set(key(value),{value,quote:before+' '+sentence});
+  }
+ }
+ return !conflictingCountry&&candidates.size===1?[...candidates.values()][0]:null;
+}
+
 export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={}){
  const facts=[],blocks=productCoffeeProse(html,clean).filter(block=>!block.educational);
  if(!name||!blocks.length)return {facts};
+ // Selected archive status revokes an inferred season-program edition only; dated releases remain direct evidence.
+ const archivedSelected=blocks.some(block=>/^(?:this product|this coffee) is archived\.?$/i.test(block.text.trim()));
  const add=(label,value,quote)=>{if(value&&value.length<=220&&!facts.some(f=>f.label===label&&key(f.value)===key(value)))facts.push({label,value,quote});};
  if(!fields.release_label){
   // A numbered name is a release only when this selected page independently
@@ -779,6 +812,8 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
   if(compatible)add('Origin',compatible,place.quote);
   else if(!existing||incompatibleCountry||COUNTRY_ONLY.test(existing))add(place.label,place.value,place.quote);
  }
+ const namedBarrelBeans=selectedBarrelGreenBeanRegion(blocks,{name,origin:fields.origin});
+ if(namedBarrelBeans)add('Origin',namedBarrelBeans.value,namedBarrelBeans.quote);
  const adjacentSelectedOrigin=selectedAdjacentGrowingRegion(blocks,{name,origin:fields.origin});
  if(adjacentSelectedOrigin)add('Origin',adjacentSelectedOrigin.value,adjacentSelectedOrigin.quote);
  const adjacentFarm=selectedHeadingAdjacentFarmLocation(html,blocks,{name,fields,clean});
@@ -795,6 +830,12 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
  const titleCountries=titleMatches.length>1&&!/\bblend\b/i.test(name)?[]:titleMatches;
  const selectedTitleRegion=selectedCountryFirstTitleRegion({name,country:titleCountries.length===1?titleCountries[0]:'',origin:fields.origin,blocks});
  if(selectedTitleRegion)add('Origin',selectedTitleRegion.value,selectedTitleRegion.quote);
+ const producerTitleRegion=selectedCountryProducerRegion({name,country:titleCountries.length===1?titleCountries[0]:'',origin:fields.origin,blocks});
+ if(producerTitleRegion)add('Origin',producerTitleRegion.value,producerTitleRegion.quote);
+ const selectedAreaOrigin=selectedCountryAreaOfRegion({name,country:titleCountries.length===1?titleCountries[0]:'',origin:fields.origin,blocks});
+ if(selectedAreaOrigin)add('Origin',selectedAreaOrigin.value,selectedAreaOrigin.quote);
+ const selectedGrowersLocality=selectedCountrySmallholderGrowingLocality({name,country:titleCountries.length===1?titleCountries[0]:'',origin:fields.origin,blocks});
+ if(selectedGrowersLocality)add('Origin',selectedGrowersLocality.value,selectedGrowersLocality.quote);
  // Country words in the exact selected name are explicit geography; do not
  // derive a region, producer, harvest, or product identity from URL slugs.
  if(titleCountries.length&&titleCountries.length<=4&&!countryNames(fields.origin||'').length)add('Country',titleCountries.join(', '),name);
@@ -1023,7 +1064,7 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
       sentence.match(/\bexpect\s+from\s+this\s+coffee\s+in\s+(20\d{2}(?:\s*[-–—/]\s*(?:20)?\d{2})?)\b/i));
     if(datedOffering)add('Release',datedOffering[1],sentence);
     const seasonalProgram=sentence.match(/\b(?:cornerstone|part)\s+of\s+our\s+(20\d{2})\s+(spring|summer|autumn|fall|winter)\s+coffee\s+program\b/i);
-    if(seasonalProgram)add('Release',seasonalProgram[2][0].toUpperCase()+seasonalProgram[2].slice(1).toLowerCase()+' '+seasonalProgram[1],sentence);
+    if(seasonalProgram&&!archivedSelected)add('Release',seasonalProgram[2][0].toUpperCase()+seasonalProgram[2].slice(1).toLowerCase()+' '+seasonalProgram[1],sentence);
     const lot=sentence.match(/\bLot\s*#\s*([A-Z0-9][A-Z0-9/-]{0,25})\b/i);
     if(lot)add('Lot','Lot #'+lot[1],sentence);
    }

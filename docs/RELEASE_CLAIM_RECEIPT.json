@@ -1,94 +1,190 @@
 {
   "schema_version": 1,
-  "release_id": "DIC-20261105-READY9-18",
-  "tested_source_sha": "0f8ea686743ebae8476d1a72cde0dfa1833ee157",
-  "previous_release_head_sha": "69742e9e8633c29c209249a87303c6e931a41b89",
-  "claimed_at_utc": "2026-11-05T05:27:32.341Z",
+  "release_id": "DIC-20261105-READY19-19",
+  "tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
+  "previous_release_head_sha": "b386a977a7c43bf190f6315105894334d96f0f18",
+  "claimed_at_utc": "2026-11-05T20:44:51.701Z",
   "status": "GIT_CONNECTED_BUILD_PENDING_NETLIFY_PROVIDER_READBACK",
   "granted_single_publication": true,
   "approved_ready_queue_items": [
     {
-      "id": "DIC-Q-33-original603-309-inline-product-roast",
-      "issue": 33,
-      "title": "Recover exact selected current Shopify inline roast tag without category/other SKU leakage",
-      "merged_source_sha": "6e78f802be4dbe1bc6e3dd3746b12603ab5c0e4d",
+      "id": "DIC-Q-455-shot-history-missing-date-display",
+      "issue": 455,
+      "title": "Avoid fabricated January 1970 dates for undated legacy Shot History and provide accessible unknown-date label",
+      "merged_source_sha": "cfdcbcaafe0d02d1bfb5b2c4df0176ddbf1dec35",
       "scope_paths": [
-        "src/server/coffee-current-inline-shopify-product.mjs",
+        "site/lib/ui.js",
+        "site/cloud/shot_card.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-shot-history-instant-order",
+      "issue": 455,
+      "title": "Show per-coffee Shot History newest by real instant, not lexical timezone offset",
+      "merged_source_sha": "667fbaa92fefa9cac0a584a6e74ba242757282ac",
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/lib/model.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-603-coop-drymill-town-origin",
+      "issue": 33,
+      "title": "Preserve selected Nicaragua Segovia growing locality by distinguishing processing-mill town",
+      "merged_source_sha": "caa2122944b340e7f4f486b120dea78873d90f0f",
+      "scope_paths": [
+        "src/server/coffee-processing-site-origin-guard.mjs",
         "src/server/coffee-page-metadata.mjs"
       ]
     },
     {
-      "id": "DIC-Q-33-original603-62-educational-mountain-origin",
-      "issue": 33,
-      "title": "Do not infer selected coffee's mountain origin from generic countrywide growing education",
-      "merged_source_sha": "f103312caab3e6e74cef0415edb536ad1e1cd5b7",
-      "scope_paths": [
-        "src/server/coffee-page-metadata.mjs",
-        "src/server/coffee-countrywide-context-guard.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-previous-calibration-date",
+      "id": "DIC-Q-455-coffee-recency-instant-order",
       "issue": 455,
-      "title": "Ignore undated legacy history when selecting the newest prior-calibration grind estimate",
-      "merged_source_sha": "32bbf1e29120702479b60ed9185f602c0368c65e",
-      "scope_paths": [
-        "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-33-original603-106-country-first-growing-region",
-      "issue": 33,
-      "title": "Use selected country-first region H1 only with current-lot farmers-in-this-region corroboration",
-      "merged_source_sha": "8f3fe0292fd2d0a45af8d7ffd43e42545e37d66f",
-      "scope_paths": [
-        "src/server/coffee-identity-evidence.mjs",
-        "src/server/coffee-title-region-evidence.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-legacy-coffee-date-sort",
-      "issue": 455,
-      "title": "Guard Log Shot coffee recency and archived-current fallback against null/nonstring legacy timestamps",
-      "merged_source_sha": "c9ec596a3b0e06a1472da7fbd46c3bc7b1b2425c",
+      "title": "Current coffee recency and hidden-current reselection use real timezone instants",
+      "merged_source_sha": "a050f325effe5aba25838b95950650d9404aff71",
       "scope_paths": [
         "site/lib/model.js"
       ]
     },
     {
-      "id": "DIC-Q-33-original603-18-current-present-farm-locality",
+      "id": "DIC-Q-33-original603-363-selected-area-direct-origin",
       "issue": 33,
-      "title": "Recover present selected named producer's literal Finca farm locality from adjacent direct current-lot sentences",
-      "merged_source_sha": "c3efe0a8709492622f500bfeccef9b5b9d65fa74",
+      "title": "Current selected Bellavista/Chiapas origin from exact H1 and direct same-coffee locality statement",
+      "merged_source_sha": "99d5f5a3df6d42922c614189fca7b21ba86745cd",
       "scope_paths": [
+        "src/server/coffee-title-region-evidence.mjs",
         "src/server/coffee-identity-evidence.mjs"
       ]
     },
     {
-      "id": "DIC-Q-455-sweetness-legacy-date",
+      "id": "DIC-Q-33-410-selected-heading-price-separation",
+      "issue": 33,
+      "title": "Selected current product display name excludes adjacent numeric commerce price",
+      "merged_source_sha": "0cc99e6601d13ffb038edc6dedf2dff95191284a",
+      "scope_paths": [
+        "src/server/coffee-product-identity.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-latest-shot-instant-order",
       "issue": 455,
-      "title": "Ignore undated historical shots in same-coffee sweetness yield-direction comparisons",
-      "merged_source_sha": "3643c56b87134dc2383794d11f483e3558a8da5f",
+      "title": "Select newest actual shot instant consistently in logging prefill and taste recommendation",
+      "merged_source_sha": "e61a357176e4dbc90bb3b7ee38c2fcea2d1837cf",
       "scope_paths": [
         "site/lib/engine.js"
       ]
     },
     {
-      "id": "DIC-Q-33-original603-361-selected-named-decaf-process",
+      "id": "DIC-Q-33-seasonal-program-release-provenance",
       "issue": 33,
-      "title": "Recover exact selected named-source sugarcane decaffeination process without coffee-cherry processing contamination",
-      "merged_source_sha": "9e200f404f466a450cdb14f2af7fdfc3d70557f3",
+      "title": "Suppress archived selected-product seasonal-program edition leakage without erasing direct dated release",
+      "merged_source_sha": "b85ded3e40e8c59633e8261ad326e58e8ef682aa",
+      "scope_paths": [
+        "src/server/coffee-identity-evidence.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-292-selected-guji-producer-region",
+      "issue": 33,
+      "title": "Exact selected country-first Guji locality corroborated by same-product named producer",
+      "merged_source_sha": "7ecfee5299bdfac5e57392c23aa762041aa90c0b",
+      "scope_paths": [
+        "src/server/coffee-title-region-evidence.mjs",
+        "src/server/coffee-identity-evidence.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-sweetness-instant-chronology",
+      "issue": 455,
+      "title": "Use actual shot instants, not ISO offset text order, for comparable same-coffee sweetness evidence",
+      "merged_source_sha": "6721cd38f7adf0e950c37d1eb0a6f615bc7e85dd",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-46-current-barrel-green-bean-origin",
+      "issue": 33,
+      "title": "Recover selected barrel-aged coffee green-bean named origin from adjacent current product prose",
+      "merged_source_sha": "5598c8811e9ab9c9fce19062b06ced39f59b1d5b",
+      "scope_paths": [
+        "src/server/coffee-identity-evidence.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-358-current-labeled-farm-region",
+      "issue": 33,
+      "title": "Use exact selected farm H1 literal country with independently labeled Region",
+      "merged_source_sha": "4c3de83549efc9da50c960346dc6b193f02543fb",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-grind-observation-instant-order",
+      "issue": 455,
+      "title": "Use actual shot instants for prior-calibration reference and learned grind-time response",
+      "merged_source_sha": "c0ea44bf82db4f981af3be8d7d342f742cbbef76",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-64-cultivar-percentage-decimal-comma",
+      "issue": 33,
+      "title": "Preserve exact selected cultivar-composition decimal commas and percent shares",
+      "merged_source_sha": "0594e11ede570547ea4240d74e71ff6039df71dd",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-298-translated-at-origin-decaf",
+      "issue": 33,
+      "title": "Recover exact selected currently stated at-origin translated decaffeination method",
+      "merged_source_sha": "0946b15862f4e6dbcc91db22ab03367a3d9110eb",
       "scope_paths": [
         "src/server/coffee-direct-product-prose.mjs"
       ]
     },
     {
-      "id": "DIC-Q-33-original603-446-adjacent-measured-growing-region",
+      "id": "DIC-Q-33-original603-593-conditional-selected-process",
       "issue": 33,
-      "title": "Recover exact selected Blue Jazz Guatemala El Scorpion measured Lake Atitlan growing region",
-      "merged_source_sha": "41178c54e0ac32b92e7a5aa0ba70d385cc64653a",
+      "title": "Withhold falsely chosen Natural process when exact selected coffee only says whether washed or natural",
+      "merged_source_sha": "20a87e3008b4ef53268d028351ec45934b6afab2",
       "scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-575-selected-smallholder-growing-locality",
+      "issue": 33,
+      "title": "Exact selected Stumptown current-lot contributing smallholders' growing locality from direct selected prose",
+      "merged_source_sha": "b68b826a2181b7f92650479c0381d5ac5d80d1fe",
+      "scope_paths": [
+        "src/server/coffee-title-region-evidence.mjs",
         "src/server/coffee-identity-evidence.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-596-selected-farm-region-disagreement",
+      "issue": 33,
+      "title": "Guard selected current named-farm region spelling disagreement and preserve both literals for Add Coffee review",
+      "merged_source_sha": "5e530b4a7ee373ad8413009a759c7ec342fba280",
+      "scope_paths": [
+        "src/server/coffee-title-region-evidence.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-570-selected-farm-growing-locality",
+      "issue": 33,
+      "title": "Corroborate exact current selected named farm growing locality without extrapolation",
+      "merged_source_sha": "4f8a66a6a71b59146019924f7bbd8977d98c25fb",
+      "scope_paths": [
+        "src/server/coffee-selected-farm-growing-locality.mjs",
+        "src/server/coffee-page-metadata.mjs"
       ]
     }
   ]

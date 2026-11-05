@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "kind": "ISSUE33_ORIGINAL603_SELECTED_FIELD_ADJUDICATION",
+  "reviewed_utc": "2026-11-05T10:20:46.305Z",
+  "issue": 33,
+  "original603_number": 410,
+  "case_id": "whiterhinocoffee-com__ethiopia-kayon-mountain-6ec5e458",
+  "original603_immutable_rows": 603,
+  "original603_roasters": 201,
+  "original603_captures": 1197,
+  "original603_csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "original603_register_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+  "official_source": {
+    "url": "https://whiterhinocoffee.com/products/ethiopia-kayon-mountain",
+    "fetch_method": "guarded public HTTPS, no credentials",
+    "html_sha256": "0c58adc2615672a1358d89c6830939592636312af2415ab2d3bc176f690af38a",
+    "html_bytes": 165184,
+    "selected_h1": "Ethiopia Kayon Mountain $22.00",
+    "source_artifact_id": 13406407769,
+    "source_artifact_run_id": 42009918563,
+    "raw_artifact_retention": "1 day; same source rehashed independently after download",
+    "selected_product_direct_fields": {
+      "name": "Ethiopia Kayon Mountain",
+      "price_display": "$22.00",
+      "roast_level": "Light",
+      "origin": "Oromia, Guji, Shakiso, Ethiopia",
+      "process": "Washed",
+      "tasting_notes": "Nectarine, Jasmine, Toffee, Honeysuckle",
+      "growing_altitude_text": "1900-2200 MASL",
+      "owner_operator_sentence": "The Kayon Mountain Coffee Farm has been owned and operated by Ismael Hassen Aredo and his family since 2012."
+    }
+  },
+  "implementation": {
+    "pr_url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/747",
+    "merged_source_sha": "0cc99e6601d13ffb038edc6dedf2dff95191284a",
+    "tested_pr_head_sha": "1b2e1ebef0d4cf4e64c19fde4aff74b576c5b3b7",
+    "changed_runtime_paths": [
+      "src/server/coffee-product-identity.mjs",
+      "src/server/coffee-page-metadata.mjs"
+    ],
+    "nonprice_identity_unchanged_guard": true,
+    "frozen603_oracle_scorer_csv_modified": false
+  },
+  "verification": {
+    "name_field": "Ethiopia Kayon Mountain",
+    "exact_name_only_verified": true,
+    "actual_selected_parser_ok": true,
+    "add_coffee_ui_rendered": true,
+    "source_review_rendered": true,
+    "raw_source_text_price_retained": true,
+    "actual_source_fields": {
+      "name": "Ethiopia Kayon Mountain",
+      "roaster": "White Rhino Coffee",
+      "roast_level": "Light",
+      "origin": "Oromia, Guji, Shakiso, Ethiopia",
+      "process": "Washed",
+      "tasting_notes": "Nectarine, Jasmine, Toffee, Honeysuckle",
+      "producer": "Ismael Hassen Aredo"
+    },
+    "actual_parser_conflicts": [
+      "elevation_m"
+    ],
+    "pr_head_node": {
+      "run_id": 42009494382,
+      "pass": 2517,
+      "fail": 0,
+      "skipped": 6,
+      "lint": "PASS"
+    },
+    "pr_head_other_runs": {
+      "approval": 42009494173,
+      "cloud_ux_mobile": 42009494096,
+      "security": 42009494114,
+      "isolated_sql": 42009494277,
+      "private_source": 42009494318
+    },
+    "merged_runs": {
+      "approval": 42009918917,
+      "cloud_build": 42009918530,
+      "cloud_mobile": 42009918722,
+      "official_selected": 42009918563
+    },
+    "original_frozen603_workflow": "SKIPPED_NOT_PASS"
+  },
+  "remaining_exceptions": [
+    "Actual current selected official page prints two incompatible growing altitude ranges: 1900-2200 MASL in direct product table and 1200-2100 meters in lower tasting-notes graphic; parser leaves elevation_m blank and conflicting. Do not invent or silently reconcile.",
+    "Actual parser producer 'Ismael Hassen Aredo' omits published 'and his family'; field completeness not certified.",
+    "Current selected product identity and lot/other fields may change in future; source hash is point-in-time."
+  ],
+  "status": {
+    "narrow_name_field": "READY_ON_DEVELOPMENT_NOT_DEPLOYED",
+    "whole_original603_case_manually_certified": false,
+    "whole_original603_corpus_manually_certified": 0,
+    "issue33_still_open": true,
+    "release_not_authorized": true,
+    "production_operations": 0,
+    "real_signed_in_auth_test": false,
+    "created_accounts": 0,
+    "paid_services": 0
+  }
+}

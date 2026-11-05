@@ -5,9 +5,11 @@ import {createHash} from 'node:crypto';
 const REPO='Schulzet3/The-Dial-In-Collective';
 const API='https://api.github.com/repos/'+REPO;
 const SHA=/^[a-f0-9]{40}$/;
+const VALID_UTC=/^20\d{2}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\d|3[01])T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d{1,9})?Z$/;
 export function backupClaimRef(freshnessKey){
- if(typeof freshnessKey!=='string'||!/^20\d\d-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,9})?Z$/.test(freshnessKey)||
-  !Number.isFinite(Date.parse(freshnessKey)))
+ const epoch=typeof freshnessKey==='string'?Date.parse(freshnessKey):NaN;
+ if(!VALID_UTC.test(freshnessKey||'')||!Number.isFinite(epoch)||
+  new Date(epoch).toISOString().slice(0,19)!==freshnessKey.slice(0,19))
   throw Error('Current observed database-write UTC timestamp required for durable backup claim');
  const key=createHash('sha256').update('dic-release-backup-v1:'+freshnessKey).digest('hex');
  return 'refs/heads/dic-backup-claims/'+key.slice(0,40);

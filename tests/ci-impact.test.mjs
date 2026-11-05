@@ -88,6 +88,30 @@ test('Strict #267 JSON path exemption never weakens unknown/mixed-source fail-cl
  }
 });
 
+test('Issue #267 precise post-pin direct-review ledger is governance-only, without relaxing unknown source',()=>{
+ const ledger='docs/audits/issue267-v2-post-pin-direct-coverage-ledger-20261105.json';
+ const receipt='docs/audits/issue267-v2-post-pin-direct-batches/D2-005.json';
+ const good=classifyImpactPaths([ledger,receipt,'docs/workstreams/issue-267.md']);
+ assert.equal(good.tier,'docs');assert.equal(good.docs_only,true);
+ assert.equal(good.node_mode,'none');assert.equal(good.cloud_mode,'none');
+ assert.equal(good.browser_mode,'none');assert.equal(good.sql,false);
+ assert.equal(good.provider_guard,false);assert.equal(good.lint,false);
+ assert.equal(good.build_validate,false);assert.equal(good.build_browser,false);
+ for(const invalid of [ledger+'.bak',
+  'docs/audits/issue267-v2-post-pin-direct-coverage-ledger-20261106.json',
+  'docs/audits/issue267-v2-post-pin-direct-coverage-ledger-20261105.json/../unsafe.json']){
+  const risk=classifyImpactPaths([invalid]);
+  assert.equal(risk.tier,'high',invalid);assert.equal(risk.node_mode,'full');
+  assert.equal(risk.sql,true);
+ }
+ for(const runtime of ['scripts/audit/ci-scope.mjs','supabase/migrations/new.sql',
+  '.github/workflows/cloud-regression.yml','site/lib/engine.js']){
+  const risk=classifyImpactPaths([ledger,receipt,runtime]);
+  assert.equal(risk.tier,classifyImpactPaths([runtime]).tier,runtime);
+  assert.equal(risk.sql,classifyImpactPaths([runtime]).sql,runtime);
+ }
+});
+
 test('Strict #504 word-audit receipts and ledger are docs-only without expensive app suites',()=>{
  const paths=['docs/audits/issue504-review-G1-020.json',
   'docs/audits/issue504-review-G1-1000.json',
@@ -125,4 +149,40 @@ test('Strict #504 exemption fails closed on mixed source, malformed and unknown 
    assert.equal(v.tier,'high',path);assert.equal(v.node_mode,'full');
   }
  }
+});
+
+test('Issue #267 dated immutable Git-tree inventories stay governance-only, unknown inputs still fail closed',()=>{
+  const good=[
+    'docs/audits/issue267-v2-post-pin-tree-drift-20261105.json',
+    'docs/audits/issue267-v2-post-pin-tree-drift-20261105-973c59.json',
+    'docs/audits/issue267-v2-post-pin-tree-drift-20261106-abcdef1234.json',
+    'docs/audits/issue267-v2-strict-coverage-ledger-20261103.json',
+    'docs/workstreams/issue-267.md'
+  ];
+  const safe=classifyImpactPaths(good);
+  assert.equal(safe.tier,'docs');assert.equal(safe.docs_only,true);
+  assert.equal(safe.node_mode,'none');assert.equal(safe.cloud_mode,'none');
+  assert.equal(safe.browser_mode,'none');assert.equal(safe.sql,false);
+  assert.equal(safe.build_validate,false);assert.equal(safe.build_browser,false);
+  const classified=classifyChanges({base:A,head:B,event:'pull_request',
+    git:()=>good.join('\n')+'\n'});
+  assert.equal(classified.tier,'docs');
+  for(const wrong of [
+    'docs/audits/issue267-v2-post-pin-tree-drift-20261106.json',
+    'docs/audits/issue267-v2-post-pin-tree-drift-20261105-abcde.json',
+    'docs/audits/issue267-v2-post-pin-tree-drift-20261105-gggggg.json',
+    'docs/audits/issue267-v2-post-pin-tree-drift-20261105-973c59.json.bak',
+    'docs/audits/issue267-v2-post-pin-tree-drift-20261105-973c59/../secret.json',
+    'docs/audits/issue267-v2-post-pin-tree-drift-executable.json',
+    'docs/audits/unsafe-new-policy.json'
+  ]){
+    const result=classifyImpactPaths([wrong]);
+    assert.equal(result.tier,'high',wrong);assert.equal(result.sql,true,wrong);
+  }
+  for(const runtime of ['scripts/audit/ci-scope.mjs','.github/workflows/cloud-beta-ci.yml',
+    'supabase/migrations/new.sql','site/lib/engine.js']){
+    const result=classifyImpactPaths([...good,runtime]);
+    assert.equal(result.tier,classifyImpactPaths([runtime]).tier,runtime);
+    assert.equal(result.sql,classifyImpactPaths([runtime]).sql,runtime);
+  }
 });

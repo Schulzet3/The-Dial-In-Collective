@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "kind": "ISSUE33_ORIGINAL603_SELECTED_FIELD_ADJUDICATION",
+  "issue": 33,
+  "date_utc": "2026-11-05",
+  "original603_number": 64,
+  "case_id": "combatcoffeetea-com__narino-dark-roast-single-origin-fair-trade-0ba79ce1",
+  "immutable_original603": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "modified": false
+  },
+  "official_source": {
+    "url": "https://combatcoffeetea.com/products/narino-dark-roast-single-origin-fair-trade",
+    "selection": "Riveter - Medium Roast - Colombian",
+    "pre_merge_html_sha256": "fb509e836a5011f3ef981ba1cc9f329d771bd22d42ed1a2d46fba82c7a677df7",
+    "post_merge_html_sha256": "29269a64f524fc84ba365d67604fd782650a3e3e94ee83cbb108553ab7225d2f",
+    "hash_verification": "Reported by successful source-bound official GitHub workflow logs; private raw ZIP not independently rehashed. Dynamic HTML changed across fetches.",
+    "selected_literal_varieties": "Castillo/Colombia (46,3%) Caturra (53.7%)",
+    "selected_current_h1": [
+      "Riveter - Medium Roast - Colombian",
+      "Riveter - Medium Roast - Colombia"
+    ],
+    "selected_location": "Huila",
+    "grade": "Colombia Excelso Nariño, European Preparation",
+    "before_field": "Castillo/Colombia (46, 3%) Caturra (53.7%)",
+    "after_field": "Castillo/Colombia (46,3%) Caturra (53.7%)",
+    "after_actual_parser_other_fields": {
+      "name": "Riveter - Medium Roast - Colombian",
+      "roaster": "Combat Coffee + Tea",
+      "origin": "Huila, Colombia",
+      "process": "Washed",
+      "roast_level": "Medium",
+      "tasting_notes": "Chocolate, Dried Fruit, Citrus, Almond",
+      "elevation_m": "1676–2195 m"
+    },
+    "after_conflicts": [],
+    "fetched_and_parsed": true,
+    "add_coffee_preview_rendered": true,
+    "source_review_rendered": true
+  },
+  "comparator": {
+    "original603_number": 10,
+    "url": "https://baldguybrew.com/products/organic-colombian-coffee",
+    "before_html_sha256": "93a77280acf456310b68f815c8bf6a2ffaff1e5bc146affff83df68b5627dbb2",
+    "after_html_sha256": "b5b0aa2b49fbe8a1d4433ee6a7a3dd98f6df8c8e2fe13d7da456f25978304de8",
+    "canonical_fields_and_conflicts_unchanged": true,
+    "incomplete_origin_refinement": "Current COSURCA cooperative's Cauca/Southern Macizo coverage is not independently sufficient to assert this selected exact lot's finer locality; retained Colombia."
+  },
+  "code": {
+    "pr": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/758",
+    "pr_head_sha": "eae4c60399f59702908e2b89ba235535f400eb3d",
+    "merged_sha": "0594e11ede570547ea4240d74e71ff6039df71dd",
+    "code_path": "src/server/coffee-page-metadata.mjs",
+    "code_blob_sha": "f5d4fd771a181accffe673b06963586f85a31d15",
+    "test_path": "tests/coffee-issue33-64-variety-decimal-comma.test.mjs",
+    "test_blob_sha": "3eba17d6c96b2b4c43bad7219c0dc5b3914ccdfc",
+    "source_and_test_blobs_identical_on_tested_pr_and_merged_commit": true
+  },
+  "verification": {
+    "initial_pr_head_failure": {
+      "run_id": 42013153224,
+      "kind": "invalid_regexp_syntax_repaired"
+    },
+    "second_pr_head_failure": {
+      "run_id": 42013381950,
+      "kind": "new_test_expected_Huila_instead_of_actual_correct_Huila_Colombia_repaired",
+      "pass": 1760,
+      "fail": 1
+    },
+    "final_pr_head": {
+      "node_run_id": 42013628398,
+      "node_focused_pass": 1761,
+      "node_focused_fail": 0,
+      "node_focused_skip": 0,
+      "approval_run_id": 42013628531,
+      "security_run_id": 42013628383,
+      "cloud_mobile_run_id": 42013628328,
+      "isolated_sql_run_id": 42013628379,
+      "source_archive_run_id": 42013628527
+    },
+    "exact_merged": {
+      "approval_run_id": 42013864085,
+      "cloud_node_build_run_id": 42013864097,
+      "cloud_mobile_run_id": 42013864089,
+      "official_source_run_id": 42013864138,
+      "official_source_job_id": 127199346755,
+      "public_artifact_id": 13408491713
+    },
+    "original_frozen603_workflow": "SKIPPED_NOT_PASS",
+    "real_signed_in_auth": "NOT_TESTED"
+  },
+  "status": {
+    "decimal_comma_cultivar_field": "READY_ON_DEVELOPMENT_NOT_DEPLOYED",
+    "full_product_manually_certified": false,
+    "all_603_manually_certified": false,
+    "issue33_still_open": true,
+    "release_not_authorized": true
+  },
+  "remaining": [
+    "#10 finer Southern Macizo/Cauca origin has insufficient lot-specific provenance; no guess.",
+    "#64 full source and lot identity may change; point-in-time HTML hash, not perpetual validation.",
+    "All remaining original603 individual source conflicts/context/absent fields and full manual certification remain unresolved."
+  ]
+}
