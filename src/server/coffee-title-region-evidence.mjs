@@ -82,3 +82,41 @@ export function selectedCountryAreaOfRegion({name='',country='',origin='',blocks
  }
  return candidates.length&&new Set(candidates.map(c=>norm(c.value))).size===1?candidates[0]:null;
 }
+
+
+// Current selected lot: a named growing locality is accepted only when
+// its own contributing farmers explicitly cultivate there in the same paragraph.
+// A country name, SEO, previous lot or generic geographic context is insufficient.
+export function selectedCountrySmallholderGrowingLocality({name='',country='',origin='',blocks=[]}={}){
+ if(typeof name!=='string'||name.length>165||typeof country!=='string'||
+   country.length<3||country.length>40||norm(origin)!==norm(country)||
+   !Array.isArray(blocks)||blocks.length>2500||
+   !norm(name).includes(norm(country))||
+   /\b(?:blend|sampler|assortment)\b/iu.test(name))return null;
+ const h1=blocks.filter(block=>block.tag==='h1');
+ if(h1.length!==1||norm(h1[0].text)!==norm(name))return null;
+ const place='[\\p{Lu}][\\p{L}\\p{M}\\x27\\u2019.-]{2,44}(?:\\s+[\\p{Lu}][\\p{L}\\p{M}\\x27\\u2019.-]{2,44}){0,2}';
+ const grammar=new RegExp(
+  '\\b(?:the|these|those)\\s+(?:farmers?|growers?)\\s+(?:cultivate|grow)\\s+(?:their|this|the)\\s+coffee\\b[^.!?]{0,120}?\\b(?:on\\s+(?:small\\s+)?farms?\\s+)?(?:around|in)\\s+('+place+'),\\s*('+place+'),\\s*('+quoteRegex(country)+')\\b','giu');
+ const currentLot=/\b(?:smallholder\s+)?(?:farmers?|growers?)\s+who\s+(?:contribute|supply)\s+to\s+(?:this|our|the current)\s+(?:lot|coffee)\s+(?:grow|cultivate)\s+(?:their|this|the)\s+coffee\b/iu;
+ const results=new Map();
+ for(const block of blocks){
+  if(block.educational||!['p','li'].includes(block.tag)||
+    typeof block.text!=='string'||block.text.length>1500||
+    /\b(?:related|recommended|you may also like|other coffees?|other roasts?|catalog|customer reviews)\b/iu.test(block.section||''))continue;
+  const link=currentLot.exec(block.text);
+  if(!link)continue;
+  for(const growing of block.text.matchAll(grammar)){
+   if(growing.index<=link.index||growing.index-link.index>400)continue;
+   const source=block.text.slice(link.index,growing.index+growing[0].length);
+   if(/\b(?:previous(?:ly)?|former(?:ly)?|historical(?:ly)?|old lot|another lot|other lot|no longer|not from|hypothetical|if|would|could|might|may)\b/iu.test(source))continue;
+   const town=growing[1],region=growing[2];
+   if([town,region].some(value=>value.length>75||
+     norm(value)===norm(country)||/\b(?:coffee|roast|blend|tasting|flavou?r|chocolate|cocoa|natural|washed|farm|finca|estate|shipping|street|county)\b/iu.test(value))||
+     norm(town)===norm(region))continue;
+   const value=town+', '+region+', '+country[0].toUpperCase()+country.slice(1);
+   results.set(norm(value),{value,quote:source.slice(0,420)});
+  }
+ }
+ return results.size===1?[...results.values()][0]:null;
+}
