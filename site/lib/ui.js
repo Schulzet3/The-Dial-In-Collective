@@ -174,5 +174,5 @@ export function shotSummary(sh,unit='F') {
  const dose=Number(sh.doseG),yieldG=Number(sh.yieldG);
  const ratio=Number.isFinite(dose)&&dose>0&&Number.isFinite(yieldG)&&yieldG>0?` \u00b7 1:${fmt(yieldG/dose,2)}`:'';
  return `<span class="shot-numbers">${fmt(sh.doseG)}g \u2192 ${fmt(sh.yieldG)}g${ratio} \u00b7 ${fmt(sh.timeS)}s${sh.tempC!=null?` \u00b7 ${tempDisplay(sh.tempC,unit)}\u00b0${unit}`:''}${sh.grindSetting!=null?` \u00b7 Grind ${fmt(sh.grindSetting)}`:''}</span>`;}
-export const humanDate=d=>{try{const date=new Date(d);return Number.isNaN(date.getTime())?'':date.toLocaleDateString('en-US',{month:'numeric',day:'numeric',year:'numeric'});}catch{return '';}};
+export const humanDate=d=>{if(typeof d!=='string'||!d.trim())return '';try{const date=new Date(d);return Number.isNaN(date.getTime())?'':date.toLocaleDateString('en-US',{month:'numeric',day:'numeric',year:'numeric'});}catch{return '';}};
 export const previewNotice=()=>`<div class="preview-note">${icon('eye',16)}<div><strong>Design preview</strong><span>Fictional sample data. Nothing is shared, synced or sent to an account.</span></div></div>`;
