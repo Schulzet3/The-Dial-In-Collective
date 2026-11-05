@@ -749,6 +749,22 @@
       "source_bytes_sha256": null,
       "source_byte_caveat": "Direct text from original five-page published PDF reproduced by scholarly mirror, crosschecked against first-party MDPI publisher search index and PubMed/PMC. Screenshot endpoint cache miss; no visual PDF certification or original PDF byte SHA-256.",
       "claims_verified_externally": "ECM Synchronika machine, one medium-dark Arabica/canephora Orphea blend, 7 +/- 0.5g coffee, target 25 +/- 2.5g drink in 25 +/- 5s, approximately 55C samples for blind triangle tasting. At 24 panelists, 80-v-93C: 11/24 correct, below 13/24 cutoff (not significant); 80-v-128C: 15/24 correct, significant. Experimental variables were machine temperature SETPOINTS, not independently measured actual puck-water temperatures. A negative significance test does not establish sensory equivalence. No blinded hedonic preference, long-term health outcome or multi-coffee machine-generalizable 93C ceiling."
+    },
+    {
+      "id": "LIT-2016-CHAMBERS-WCR-LEXICON",
+      "type": "peer_reviewed_primary_trained_panel_coffee_sensory_lexicon_methodology",
+      "title": "Development of a 'living' lexicon for descriptive sensory analysis of brewed coffee",
+      "authors": "Edgar Chambers IV, Karolina Sanchez, Uyen X. T. Phan, Rhonda Miller, Gail V. Civille and Brizio Di Donfrancesco",
+      "published": "2016-12-01 Journal of Sensory Studies 31(6):465-480",
+      "doi": "10.1111/joss.12237",
+      "url": "https://onlinelibrary.wiley.com/doi/full/10.1111%2Fjoss.12237",
+      "companion_first_party": "https://worldcoffeeresearch.org/resources/sensory-lexicon",
+      "access": "ORIGINAL_WILEY_OPEN_ACCESS_FULL_HTML_DIRECT_METHODS_RESULTS_AND_CONCLUSION_READ_20261105; WCR_OWNER_FIRST_PARTY_V2_PAGE_DIRECT_READ",
+      "review_status": "2016_PRIMARY_FULL_ARTICLE_FOCUSED_105_SAMPLE_SAMPLING_FOUR_PHASES_5_TRAINED_DEVELOPMENT_6_TRAINED_VALIDATION_20_SAMPLES_50_SELECTED_TERMS_SCORING_AND_LIMITATIONS_VERIFIED; ARTICLE_PDF_RAW_BYTES_FIGURES_AND_RAW_PANEL_REPLICATES_UNHASHED",
+      "evidence_grade": "PEER_REVIEWED_DIRECT_METHODS_FOR_DESCRIPTIVE_VOCABULARY_AND_TRAINED_PANEL_REFERENCE_INTENSITIES; MOSTLY_NON_ESPRESSO_BREWS; NO_UNTRAINED_5_POINT_RATING_VALIDATION_OR_ESPRESSO_RECOMMENDER_TRIAL",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Publisher full HTML and original WCR owner resource directly read; HTML/PDF original raw bytes, figures and per-panel source data not independently SHA-256 archived; not evidence of five-slider accuracy or user outcome.",
+      "claims_verified_externally": "105 coffees from 14 countries in four sets; development panel five highly trained assessors, with 0-15 intensity reference scales. Methods brewed sets 1/4 with 7g/100mL filtered immersion, sets 2/3 with 3.9 and 5.5g/100mL drip; SOME set 3/4 coffee also on a GS-3 automated espresso machine. Validation used six trained assessors, 20 set-4 samples, three repetitions and 50 selected terms among 110 attribute lexicon; original authors expressly call for espresso-specific sublexicons. WCR official Lexicon 2.0 October 2017 added globally accessible references for 24 attributes including Sour, Bitter and Salty. Neither a five-point all-green consumer taste test nor a causal grind/yield/temperature rule is evaluated."
     }
   ],
   "evidence_checks": [
@@ -2053,6 +2069,38 @@
       "result": "EXPERIMENT_CONDITIONAL_NO_PRODUCT_NUMERIC_POLICY_TRANSFER",
       "owner_approval": false,
       "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-053-A",
+      "source": "ORG-01 original docs/research/originals/01_Causal_Foundation_of_Espresso_Extraction_for_Sensory_Diagnosis.md Git blob 4a52b0f938d533ff8c0d69fc09951bf51abc8d69, archived SHA-256 fe6afc01a5922cf73c3a66a18115aa1adf8222c5ea2d0e4a68dee1c74adef7fe, lines 21-23 and 83-89; LIT-2016-CHAMBERS-WCR-LEXICON",
+      "claim": "Original Chambers et al 2016 study developed a living 110-attribute descriptive lexicon across 105 coffees/14 countries, with trained panelists and calibrated 0-15 intensities. Most test brewing used immersion or drip; SOME espresso on La Marzocco GS-3. WCR's own Oct 2017 Lexicon 2.0 resource separately identifies its 24 global-reference additions including Sour/Bitter/Salty. These validate vocabulary and reference availability, NOT a five-point consumer rating scale or universal sensory optimum.",
+      "grade": "DIRECT_PEER_REVIEWED_OPEN_ACCESS_ORIGINAL_METHODS_AND_RESULTS_PLUS_FIRST_PARTY_WCR_OWNER_VERSION_STATEMENT",
+      "primary_sources": [
+        "https://onlinelibrary.wiley.com/doi/full/10.1111%2Fjoss.12237",
+        "https://worldcoffeeresearch.org/resources/sensory-lexicon"
+      ],
+      "page_number": "Journal of Sensory Studies 2016 §2.1 (105 samples/brew methods), §§2.2-2.4 (panel/scale/validation), §4 (espresso-specific future research); WCR Sensory Lexicon online 2017 v2 notice",
+      "app_source_sha": "c6bdde7f255b17248ed9df680320f139e509248e",
+      "current_app": "site/lib/constants.js Git blob 72221331ce4dffabe416eebec1ae2fceced3a095 lines 17-21 and 65-68: five locked 1-5 fields extraction/body/clarity/sweetness/astringency, exact all-green rule; WCR methodology does not validate numeric cutoffs or changing them.",
+      "result": "VOCABULARY_AND_CALIBRATION_FOUNDATION_NOT_CONSUMER_FIVE_SCALE_VALIDATION",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-053-B",
+      "source": "LIT-2016-CHAMBERS-WCR-LEXICON published Methods §2.3.2, §2.4, Discussion §3.4 and Conclusions §4; current site/lib/ui.js Git blob 2aeb15815e44f48937433c65f93368645436e102",
+      "claim": "2016 validation used six highly trained assessors, 20 coffee samples and three replications; a 50-attribute subset was scored from the full lexicon, while the authors explicitly say an espresso-specific lexicon requires future work. 'Sweet' descriptors include taste vs aromatic constructs; evenness, flavor clarity and user satisfaction cannot be inferred directly from a single WCR intensity score. The current app's five ratings and success rule are owner-Locked product decisions, not measured improvements certified by WCR.",
+      "grade": "DIRECT_PRIMARY_2016_SAMPLE_PROTOCOL_AND_AUTHOR_LIMITATION; APP_SOURCE_BOUND_INTERPRETATION_NO_USER_OUTCOME",
+      "primary_sources": [
+        "https://onlinelibrary.wiley.com/doi/full/10.1111%2Fjoss.12237",
+        "https://worldcoffeeresearch.org/resources/sensory-lexicon"
+      ],
+      "page_number": "2016 §2.3.2 trained-panel validation, §2.4 variable shortlist, §3.4 selected 11 terms for different objective, §4 espresso-specific lexicon gap",
+      "app_source_sha": "c6bdde7f255b17248ed9df680320f139e509248e",
+      "current_app": "site/lib/ui.js SCALES-driven ratings and accessible taste labels; site/lib/engine.js blob 93969d561e18205d8f87e19059ea0c66b519e934 lines 498-500 differentiates missing ratings from all-green success. No deterministic UX bug from this primary lexicon evidence alone.",
+      "result": "PRESERVE_FIVE_OWNER_LOCKED_TASTES_AVOID_CLAIM_OF_SCIENTIFICALLY_VALIDATED_SLIDER_SCORE_OR_CUP_GAIN",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
     }
   ],
   "policy_decisions_pending": [],
@@ -2064,6 +2112,7 @@
     "reason": "R455-051 primary-source context and model vs actual taste boundary only."
   },
   "next_actions": [
+    "R455-053: Direct Wiley original Chambers et al. (2016) 105 coffees/14 countries, development panel 5 trained, validation 6 trained/20 coffees/3 reps, 0-15 intensity; mostly immersion/drip and some automated espresso. WCR Oct 2017 v2 Sour/Bitter/Salty standards. Does NOT certify consumer five 1-5 ratings, espresso-specific optimal taste thresholds, or app UX success. No app changes. Original S019 PDF not retrieved.",
     "R455-052: Original peer-reviewed Klotz 2020 espresso single-blend ECM Synchronika 24-person triangle found 11/24 80-versus-93C non-significant, 15/24 80-versus-128C significant; NOT an equivalence, preference, multi-espresso, health or puck-sensor proof. All sampled to ~55C. No new universal 93C cap/80C recipe or temp step policy. Original S019 inaccessible.",
     "R455-048: Corrochano 2015 publisher-version original PDF reviewed methods §§3.1/3.5/4.4 and Table2: 600s wet pre-extraction + 60s per pressure step at 80C, 10Hz, K range 2.59e-14..4.38e-13m2; physical wet consolidated bed, NOT ordinary shot nor user taste/performance validation. Continue fresh bibliography, do not import constants.",
     "R455-046: Primary Fu et al 2026 Catimor split-lot paper (DOI 10.48130/bpr-0026-0010) uses four 10kg treatment lots, three analysis replicates without separate repeated fermentations, Q-grader 12g/250mL cupping not espresso, 1682 vs1706 count discrepancy. No process-to-espresso automation or numeric priors; original 03 citation coverage still incomplete.",
@@ -2085,26 +2134,25 @@
     "R455-045: Original Gagné 2019 0.08 mm² surface-area result contradicts Kaffeemacher 2025 background 0.08 mm linear shorthand; Table1 lower fines ONLY same grind, rising after finer re-dial. Preserve condition qualifiers; no engine 40%-heuristic edit. Continue unrelated research citations or reproduced UX correctness. Recovered Library 10-page slow-feed variant SHA a068e5e3... differs from owner-archive registered member SHA a4db4f38...; archive bytes still unavailable."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-052",
-    "base_development_sha": "e39e5eade83473b7f8bfde6fd7bf339c52cdbffe",
-    "source_document": "Klotz/Winkler/Lachenmeier (2020) Foods original published pilot espresso sensory triangle study",
+    "id": "R455-053",
+    "base_development_sha": "c6bdde7f255b17248ed9df680320f139e509248e",
+    "source_document": "Chambers et al. 2016 original WCR-funded coffee sensory lexicon trained panel methodology plus WCR October 2017 official v2 references",
     "source_ids": [
-      "ORG-04",
-      "ORG-07",
-      "LIT-2020-KLOTZ-ESPRESSO-TEMP-TRIANGLE"
+      "ORG-01",
+      "LIT-2016-CHAMBERS-WCR-LEXICON"
     ],
     "claim_ids": [
-      "R455-EV-CIT-052-A",
-      "R455-EV-CIT-052-B"
+      "R455-EV-CIT-053-A",
+      "R455-EV-CIT-053-B"
     ],
-    "number_of_curated_sources": 51,
-    "total_evidence_checks": 109,
-    "review_type": "PRIMARY_PUBLISHED_METHODS_24_PERSON_TRIANGLE_SENSORY_DISCRIMINATION_VS_EQUIVALENCE",
+    "number_of_curated_sources": 52,
+    "total_evidence_checks": 111,
+    "review_type": "DIRECT_FIRST_PARTY_PEER_REVIEWED_LEXICON_METHODS_TRAINED_VS_UNTRAINED_AND_MIXED_BREW_PROTOCOL",
     "source_hash_verified_20261105": false,
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
     "code_or_policy_changed": false,
-    "next_action": "Docs-only exact-head governance and nonforce merge; then review next unverified original citation or demonstrable narrow safe UX bug. Original S019 PDF inaccessible."
+    "next_action": "Run exact PR-head docs governance, merge nonforce if successful, verify merged bytes and issue checkpoint. Resume current reproducible UX gaps and distinct primary literature; original S019 remains unavailable."
   },
   "policy_decisions_resolved": [
     {
@@ -2369,6 +2417,25 @@
       "approval_required_for_behavior_change": true,
       "implementation": "RESEARCH_LEDGER_ONLY_HOLD_NO_BEHAVIOR_CHANGE",
       "test_plan": "Docs-only governance/continuity; app Node/browser/SQL/Auth unaffected. Any future temperature-policy alteration requires equipment-capability, original shot preservation, five-ratings, single-control, same-coffee, mobile/offline, and actual sensory evidence.",
+      "release_queue": "NO_NEW_ITEM"
+    },
+    {
+      "id": "R455-PROP-053-WCR-LEXICON-TO-FIVE-TASTE-UX",
+      "finding": "Original WCR-funded trained-panel lexicon supports defined coffee descriptors and reference intensity but uses 0-15 calibrated trained assessor scales, majority drip/infusion brews and no consumer/home-espresso five-slider validation. Authors call for a specific espresso sublexicon. This is not a reproducible current app bug.",
+      "evidence": [
+        "ORG-01 archived SHA-256 fe6afc01a5922cf73c3a66a18115aa1adf8222c5ea2d0e4a68dee1c74adef7fe lines 21-23/83-89",
+        "LIT-2016-CHAMBERS-WCR-LEXICON",
+        "R455-EV-CIT-053-A",
+        "R455-EV-CIT-053-B"
+      ],
+      "severity": "P2_EVIDENCE_TO_UX_INFERENCE_GUARD_NO_RUNTIME_DEFECT_PROVEN",
+      "user_benefit": "Explain what taste words mean without misleading app users that fixed 1-5 points or all-green categories are experimentally optimized; avoid confusing sweetness perception with a scientific sugar assay.",
+      "current_locked": "All five mandatory 1-5 taste inputs, all-green owner-defined success, missing-rating distinction, no new invented universal numeric priors, one-controllable recommendation intent, privacy/history preservation.",
+      "current_app": "At development c6bdde7f255b17248ed9df680320f139e509248e site/lib/constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095 uses owner-approved five scales; site/lib/ui.js blob 2aeb15815e44f48937433c65f93368645436e102 renders sensory choices; engine.js blob 93969d561e18205d8f87e19059ea0c66b519e934 distinguishes missing and all-green ratings.",
+      "proposed_change": "SAFE research-only citation precision; no user-facing change. Future OPTIONAL user education/tooltips could describe taste vs aroma vs dryness with WCR references, but new capture controls, scale labels, thresholds or scientific confidence badges require owner approval, accessibility testing and actual member validation.",
+      "approval_required_for_behavior_change": true,
+      "implementation": "RESEARCH_ONLY_NO_APP_CHANGE_NO_OWNER_DECISION_REQUESTED",
+      "test_plan": "Docs-only JSON uniqueness/schema and governance. Any proposed UX change must have owner authority and focused five-field/success/missing-rating/accessibility/phone/offline regression plus actual user interpretation testing.",
       "release_queue": "NO_NEW_ITEM"
     }
   ]
