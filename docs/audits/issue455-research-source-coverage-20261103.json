@@ -301,11 +301,12 @@
       "published": "2024-09",
       "doi": "10.1016/j.isci.2024.110639",
       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11402325/",
-      "access": "NIH_INDEXED_ORIGINAL_ARTICLE_SUMMARY_AND_AUTHOR_UNIVERSITY_REPOSITORY_ABSTRACT_CHECKED; FULL_HTML_CURRENTLY_RECAPTCHA_BLOCKED",
-      "evidence_grade": "PEER_REVIEWED_ESPRESSO_DARK_ROAST_CONDITIONAL_TDS_STATIC_MITIGATION_NOT_TASTE_PREFERENCE_TRIAL",
-      "review_status": "PRIMARY_ABSTRACT_LIMITED_FACT_CHECK_FULL_METHODS_NOT_REVIEWED",
+      "access": "PUBLISHER_ORIGINAL_FULL_TEXT_INDEXED_FOCUSED_METHODS_RESULTS_FIGURE_CAPTIONS_AND_LIMITATIONS_RETRIEVED_2026-11-05; NIH DIRECT_ARTICLE_OPEN_RECAPTCHA; AUTHOR_REPOSITORY_ORIGINAL_ABSTRACT_READ",
+      "evidence_grade": "PEER_REVIEWED_CONDITIONAL_EK43_DARK_ROAST_STATIC_PSD_TDS_FLOW_TEST;LIGHT_ROAST_NEGATIVE_CONTROL;NO_BLINDED_ESPRESSO_TASTE_OR_UNIVERSAL_WATER_DOSE",
+      "review_status": "FOCUSED_PRIMARY_PUBLISHER_METHOD_RESULTS_FIGURE_CAPTIONS_AND_LIMITATIONS_CROSS_CHECKED_NOT_COMPLETE_RAW_MANUSCRIPT_AUDIT",
       "source_bytes_sha256": null,
-      "source_byte_caveat": "NIH indexed summary and Portland State author repository abstract accessed 2026-11-04; original full body not accessible; do not conflate this 2024 iScience paper with separate 2024 Matter 7 paper DOI 10.1016/j.matt.2023.11.005."
+      "source_byte_caveat": "Publisher search-indexed original methods/results/Figs 2,4,5 and Limitations visible with specific passages, plus Portland State author abstract; direct NIH HTML open returned reCAPTCHA, publisher HTML/PDF bytes not archived or SHA-256 checked; FULL complete manuscript and figures not independently remeasured. Earlier access blocker for direct browsing remains; original abstract-only verification scope is now strengthened with bounded publisher full-text passages, not full-file certification.",
+      "claims_verified_externally": "iScience 27(9) 110639 original published August 5 2024 (DOI 10.1016/j.isci.2024.110639): EK43 stock 98mm burr test, three source coffees and two roast profiles, in-house roast descriptions; water 20-30 microlitres per gram in tested samples reduced Q/m at least 50-60%, 10 microlitres per gram reduced tested dark Yogondoy grinder retention from ~12% untreated to ~2.5%. Controlled espresso observations on dark Temascaltepec: pregrind water increased shot time and %TDS while decreasing flow; a tested lightly roasted preparation had no significant analogous brew effect. A chute ionizer reduced charge but not equivalent in-grinder retention or measured shot-flow response. Original paper cites prior Matter work; no randomized blinded sensory-preference study."
     },
     {
       "id": "LIT-2023-ESPRESSO-FLOW-FRACTIONS",
@@ -1677,6 +1678,35 @@
       "result": "HOLD_UNIVERSAL_BASKET_DIAMETER_OR_IMPROVED_CHANNELING_FLAVOR_CLAIM; OWNER_DECISION_AND_ACTUAL_VALIDATION_NEEDED_FOR_NEW_POLICY",
       "owner_approval": false,
       "raw_html_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-039-A",
+      "source": "ORG-08 original Markdown Git blob 122e142c8c8a3c480f68ab63a05b8785ecc5eb02, SHA256 9219bf81c7307bfb1967d763edca13d739884e22e77a8f1f22cb94ded9793f49; LIT-2024-RDT-ISCIENCE original iScience 27(9) 110639 DOI 10.1016/j.isci.2024.110639",
+      "claim": "Original paper directly describes an EK43 stock 98mm-burr setup, three coffees (Yirgacheffe, Temascaltepec, Yogondoy) across in-house light/dark roasts, and specific static/retention experiments. Pregrind water 20-30 microlitres/gram reduced measured charge by at least 50-60% in sampled roasts, and 10 microlitres/gram shifted measured dark-Yogondoy retention from roughly 12% untreated to 2.5% with water. Static charge, particle-size distribution and retention are measured outcomes for THIS grinder/sample, not a general water-dose prescription or measured taste improvement.",
+      "grade": "ORIGINAL_PEER_REVIEWED_PUBLISHER_METHODS_TABLE1_FIG2_FIG4_TEXT_DIRECT_INDEXED;EXPERIMENT_CONDITIONAL_NO_COMPLETE_RAW_BYTES_OR_SENSORY",
+      "primary_sources": [
+        "https://doi.org/10.1016/j.isci.2024.110639",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC11402325/",
+        "https://pdxscholar.library.pdx.edu/ece_fac/822/"
+      ],
+      "current_app": "development 16ef285c581a34ead36d15cb65958807ec5b2965: site/lib/model.js blob f48dc8967e2c2f7038c9324fdabca4348f5cb12d tracks slowFeed grinder feeding separately from RDT/wetting; site/lib/engine.js blob d66cf88b1910c1857a066892d3bbbff05a7fb5b1 contains no RDT water/dose prior.",
+      "result": "UPGRADE_TO_FOCUSED_PRIMARY_METHOD_VERIFIED_NOT_APP_PARAMETER",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-039-B",
+      "source": "ORG-08 original Markdown Git blob 122e142c8c8a3c480f68ab63a05b8785ecc5eb02, SHA256 9219bf81c7307bfb1967d763edca13d739884e22e77a8f1f22cb94ded9793f49; LIT-2024-RDT-ISCIENCE original iScience 27(9) 110639 DOI 10.1016/j.isci.2024.110639",
+      "claim": "In published Fig 5, dark-roast Temascaltepec water-wetted pregrind shots had slower flow, longer shot times and higher measured TDS; lightly roasted same-coffee samples showed no significant analogous brew change. Chute ionization suppressed charge but not pre-grind fine-retention/flow effects; small post-chute ionizer TDS comparison 7.76% vs 8.02% averages five replicates and was not significant against native control at p=.05. No panel or blinded preference test establishes that this intervention tastes better or should be prescribed across roast/grinder/style or conflated with slow feeding. TDS concentration is not independently EY or a universal sweet-flavor score.",
+      "grade": "PUBLISHED_ORIGINAL_FIGURE5_RESULT_TEXT_CONDITIONAL_DARK_ROAST_VS_LIGHT_NEGATIVE; NO_BLINDED_SENSORY_OR_CROSS_GRINDER_VALIDATION",
+      "primary_sources": [
+        "https://doi.org/10.1016/j.isci.2024.110639",
+        "https://pdxscholar.library.pdx.edu/ece_fac/822/"
+      ],
+      "current_app": "at source 16ef285c581a34ead36d15cb65958807ec5b2965 engine.js d66cf88b1910c1857a066892d3bbbff05a7fb5b1 and model.js f48dc8967e2c2f7038c9324fdabca4348f5cb12d: existing 5-taste and within-setup/history recipe advice; no automatic water addition data field or RDT rule.",
+      "result": "CONDITIONAL_PHYSICAL_EXTRACTION_RESULT_NOT_TASTE_OPTIMUM_NO_RULE_CHANGE",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
     }
   ],
   "policy_decisions_pending": [],
@@ -1685,9 +1715,10 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R455-038 documentation/evidence-only direct first-party basket claim verification; exact-source governance required, no app behavior affected."
+    "reason": "R455-039 docs-only upgrade of previously indexed iScience RDT paper to focused original-method/result verification; retains existing source count and no new app behavior."
   },
   "next_actions": [
+    "R455-039: Harper/Bumbaugh/Hendon 2024 iScience original published methods/Figs 2,4,5 confirm roast-conditional pregrind wetting, static/retention, flow and TDS observations; no blind taste preference, no universal numeric recipe/water/slow-feed rule. Publisher original PDF bytes/full raw HTML still not hashed; remaining citations separately pending.",
     "R455-038: Decent official calibrated basket holes (smaller for smaller dose) verified as manufacturer design; its 2021/2025 waisted-basket comparison was preliminary and not blinded/re-dialed. Never derive automatic diameter-to-grind/taste priors without owner choice and controlled evidence.",
     "R455-036: Rancilio manufacturer supports F.08 OFF/up to six seconds for its own machine; marketing experience is not independent channeling/taste proof. No product capture or fixed PI target authorized.",
     "R455-035: final Wadsworth article methods directly read; do not treat 22 XCT packs/air-analog fluid simulations or illustrative 38–42g/27–32s recipe as real-world taste optimum. Resume unrelated primary bibliography checks and safe Log Shot review; Oct29 ZIP/S019 PDF raw bytes still unavailable.",
@@ -1702,18 +1733,18 @@
     "R455-023: Continue full citation review of nine originals, raw inaccessible October29 ZIP/S019 PDFs and exact-byte provenance of Choi/Kim full manuscripts; assess translated label UX only after specific defect. No #267 V2 coverage credit."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-038",
-    "base_development_sha": "af614b7eb30303196a52d8af01d70c90ded8a4e1",
-    "source_document": "ORG-04 manufacturer basket design and exploratory waisted-basket comparison, primary first-party web verification",
-    "primary_source_id": "MFR-DECENT-BASKET-20261105",
+    "id": "R455-039",
+    "base_development_sha": "16ef285c581a34ead36d15cb65958807ec5b2965",
+    "source_document": "ORG-08 original audit RDT claim vs published Harper/Bumbaugh/Hendon 2024 iScience original methods/figures/limitations",
+    "primary_source_id": "LIT-2024-RDT-ISCIENCE",
     "claim_ids": [
-      "R455-EV-CIT-038-A",
-      "R455-EV-CIT-038-B"
+      "R455-EV-CIT-039-A",
+      "R455-EV-CIT-039-B"
     ],
     "number_of_curated_sources": 44,
-    "total_evidence_checks": 93,
-    "authority": "OWNER_OPTION_B_SOURCE_VERIFICATION_ONLY_NOT_PRODUCT_BEHAVIOR_APPROVAL",
-    "review_type": "DIRECT_FIRST_PARTY_CALIBRATED_BASKET_PRODUCT_SECTIONS_AND_EXPLORATORY_EXPERIMENT_BLOG",
+    "total_evidence_checks": 95,
+    "authority": "OWNER_OPTION_B_RESEARCH_VERIFICATION_ONLY_NO_NUMERIC_OR_CAPTURE_POLICY_CHANGE",
+    "review_type": "FOCUSED_PRIMARY_PUBLISHER_SEARCH_INDEXED_FULL_TEXT_METHOD_RESULTS_CAPTIONS_AND_AUTHOR_ABSTRACT",
     "source_pages_hashed": false,
     "github267_literal_line_review_credit": 0,
     "production_deployed": false
