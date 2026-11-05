@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "issue": 504,
+  "audit_batch": "G1-018",
+  "date_utc": "2026-11-04",
+  "status": "IN_PROGRESS",
+  "method": "DIRECT_ALL_WORDS_CONTIGUOUS_SOURCE_BOUND",
+  "source": {
+    "repository": "Schulzet3/The-Dial-In-Collective",
+    "branch": "development/backend-foundation",
+    "branch_sha_at_review": "f8029ff06abc7a72a32cc28fb503566846da3032",
+    "original_source_commit": "712dc6c2a9fed041baab48ec52b91d641a44971c",
+    "path": "docs/RELEASE_QUEUE.json",
+    "original_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
+    "live_blob_sha": "3f50bfa1cf97e7eb36adf132ecef8529a416cfc9",
+    "range_inclusive": [
+      3393,
+      3585
+    ],
+    "live_segment_byte_equal": true,
+    "original_source_lines": 193
+  },
+  "review": {
+    "records": [
+      {
+        "queue_id": "DIC-Q-47-admin-feedback-persistence",
+        "range_inclusive": [
+          3393,
+          3430
+        ],
+        "lines": 38,
+        "original_whitespace_words": 298,
+        "pr": 249,
+        "original_merged_pr_sha": "ffcb768b363fcc772eda38b122ef4c7aedb78ef2",
+        "published_receipt": "DIC-20261029-READY-QUEUE-11",
+        "actual_queue_state": "DEPLOYED",
+        "semantic_review": "Admin feedback status persists after edit/action; earlier READY is historical; genuine cross-account acceptance incomplete",
+        "disposition": "NO_CHANGE_RETAIN_CURRENT_AND_HISTORIC_PROVENANCE"
+      },
+      {
+        "queue_id": "DIC-Q-33-original603-direct-region-country-prose",
+        "range_inclusive": [
+          3431,
+          3470
+        ],
+        "lines": 40,
+        "original_whitespace_words": 356,
+        "pr": 251,
+        "original_merged_pr_sha": "a8c12fdb0f3182d2173554c7bd3b988149feec64",
+        "published_receipt": "DIC-20261029-READY-QUEUE-12",
+        "actual_queue_state": "DEPLOYED",
+        "semantic_review": "Huila Colombia/Tarrazu Costa Rica direct selected-product origin; negative country/product conflict safeguards; frozen603 live replay SKIPPED",
+        "disposition": "NO_CHANGE_RETAIN_CURRENT_AND_HISTORIC_PROVENANCE"
+      },
+      {
+        "queue_id": "DIC-Q-33-44north-literal-origin-and-flavor-display",
+        "range_inclusive": [
+          3471,
+          3510
+        ],
+        "lines": 40,
+        "original_whitespace_words": 369,
+        "pr": 253,
+        "original_merged_pr_sha": "3b79c6ed1570e3c1b4a6524d9f4e29b39d25fcc3",
+        "published_receipt": "DIC-20261029-READY-QUEUE-12",
+        "actual_queue_state": "DEPLOYED",
+        "semantic_review": "Selected 44 North origin and notes display normalization retains raw source facts; explicit country contradiction guards; original603 restricted CI SKIPPED",
+        "disposition": "NO_CHANGE_RETAIN_CURRENT_AND_HISTORIC_PROVENANCE"
+      },
+      {
+        "queue_id": "DIC-Q-47-admin-candidate-nested-grant",
+        "range_inclusive": [
+          3511,
+          3550
+        ],
+        "lines": 40,
+        "original_whitespace_words": 323,
+        "pr": 254,
+        "original_merged_pr_sha": "8f4bbf530c12f31ab5478217c4459368bbcc4aec",
+        "published_receipt": "DIC-20261029-READY-QUEUE-12",
+        "actual_queue_state": "DEPLOYED",
+        "semantic_review": "Authenticated EXECUTE grant narrowly approved; provider receipt says applied once, anonymous denied; true post-fix signed-in iPhone UX incomplete",
+        "disposition": "NO_CHANGE_RETAIN_CURRENT_AND_HISTORIC_PROVENANCE"
+      },
+      {
+        "queue_id": "DIC-Q-33-repeated-selected-product-heading-identity",
+        "range_inclusive": [
+          3551,
+          3585
+        ],
+        "lines": 35,
+        "original_whitespace_words": 282,
+        "pr": 255,
+        "original_merged_pr_sha": "a0cc9fa9b357db681230eb3d394dce3b86b1f031",
+        "published_receipt": "DIC-20261029-READY-QUEUE-12",
+        "actual_queue_state": "DEPLOYED",
+        "semantic_review": "Duplicate identical current H1 accepted, missing/competing H1 rejected; synthetic tests not full live 603 or member acceptance",
+        "disposition": "NO_CHANGE_RETAIN_CURRENT_AND_HISTORIC_PROVENANCE"
+      }
+    ],
+    "context": {
+      "source_queue_state": "DEPLOYED",
+      "release11_receipt_path": "docs/PRODUCTION_RELEASE_2026-10-29_READY_QUEUE_11_VERIFIED.json",
+      "release11_blob": "55a43eef780105e6250167e2ac9c11f9aa7c0192",
+      "release11_exact_member_ids": [
+        "DIC-Q-47-admin-feedback-persistence"
+      ],
+      "release12_receipt_path": "docs/PRODUCTION_RELEASE_2026-10-29_READY_QUEUE_12_VERIFIED.json",
+      "release12_blob": "f49fada097edc0d84f51eb7fb829e7fee28f97be",
+      "release12_exact_member_ids": [
+        "DIC-Q-33-original603-direct-region-country-prose",
+        "DIC-Q-33-44north-literal-origin-and-flavor-display",
+        "DIC-Q-47-admin-candidate-nested-grant",
+        "DIC-Q-33-repeated-selected-product-heading-identity"
+      ],
+      "original_prs_all_merged_verified": true
+    }
+  },
+  "accounting": {
+    "new_source_lines": 193,
+    "new_source_words": 1628,
+    "credit_to_267_frozen_or_executable": 0,
+    "additional_github_object_credit": 0,
+    "cumulative": {
+      "source_file_lines": 5363,
+      "source_file_words": 42350,
+      "github_objects": 2,
+      "github_words": 721
+    },
+    "no_overlap_prior_through_line": 3392
+  },
+  "findings": {
+    "confirmed_current_defects": 0,
+    "safe_source_edits": 0,
+    "reason": "All five currently DEPLOYED queue records match the immutable Release11/Release12 published ready_ids, release SHAs and original merged PR SHAs. Prepublication READY/NOT DEPLOYED prose and CI failures/SKIPs are explicit historical/negative evidence; do not remove or reinterpret.",
+    "limits": [
+      "Release receipts are immutable 2026-10-29 provider observations; not a new independent live Netlify/Supabase query",
+      "Current signed-in Admin and all original603 live source acceptance remain incomplete",
+      "Owner later authorized temporary PUBLIC GitHub visibility until end of November 2026; private restoration unverified",
+      "Repository-wide issues/PRs/actions/history/text/binary enumeration and direct word audit incomplete",
+      "Unreviewed separate #455 queue drift item remains"
+    ]
+  },
+  "tests": {
+    "source_range_exact_live_comparison": "PASS",
+    "record_line_and_word_arithmetic": "PASS",
+    "release11_release12_exact_id_membership": "PASS",
+    "original_5_merged_pr_sha_readback": "PASS",
+    "json_ledger_preflight": "PASS",
+    "app_node_sql_browser_auth_runtime": "NOT_RUN_NO_RUNTIME_CHANGE",
+    "new_exact_pr_ci": "PENDING",
+    "publication": "NOT_AUTHORIZED"
+  },
+  "concurrency": {
+    "issue267": "sole frozen/current code line reviewer; no overlapping credit",
+    "issue455": "research and UX",
+    "issue33": "coffee extraction; no modifications",
+    "issue96": "live Auth and privacy; no modifications",
+    "prior_issue504_pr617": "MERGED",
+    "prior_issue504_pr634": "MERGED",
+    "intermediate_prs619_622_629": "CLOSED_SUPERSEDED"
+  },
+  "next": {
+    "path": "docs/RELEASE_QUEUE.json",
+    "first_line": 3586,
+    "expected_next_item": "DIC-Q-33-selected-decaf-method-prose",
+    "expected_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
+    "unreviewed_drift": [
+      "DIC-Q-455-recipe-context-feedback"
+    ]
+  },
+  "uncovered": "Issue504 remains OPEN IN_PROGRESS; direct review is cumulative, not entire-repository certification."
+}

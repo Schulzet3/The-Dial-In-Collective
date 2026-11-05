@@ -136,7 +136,9 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
  const sameOld=qual.filter(sh=>sh.coffeeId===c.id&&sh.calibrationId!==v.calibrationId&&sh.setupVersionId===v.id&&(!familyId||sh.familyId===familyId));
  // Old calibration rows may legitimately seed an estimated translation, but
  // legacy rows without an equipment snapshot must not yield null guidance.
- const translated=sameOld.filter(sh=>sh.snapshot&&sh.timestamp)
+ // Legacy success records without a usable chronological timestamp remain
+ // preserved, but cannot establish the latest previous-calibration reference.
+ const translated=sameOld.filter(sh=>sh.snapshot&&typeof sh.timestamp==='string'&&sh.timestamp.trim())
   .sort((a,b)=>b.timestamp.localeCompare(a.timestamp))
   .map(sh=>translateGrind(sh,v)).find(finite);
  if(finite(translated))return {value:translated,source:'Estimated from previous calibration',proven:false};
@@ -428,10 +430,10 @@ function yieldTarget(shot,direction,anchor=shot.yieldG){
 // and all four other green sensory ratings. This is not causal proof.
 function comparableSweetnessYields(s,shot){
  const keys=['coffeeId','setupVersionId','calibrationId','style','basketId','feedMode'];
- if(keys.some(key=>shot[key]==null)||typeof shot.timestamp!=='string')return [];
+ if(keys.some(key=>shot[key]==null)||typeof shot.timestamp!=='string'||!shot.timestamp.trim())return [];
  return s.shots.filter(prior=>{
   if(prior.id===shot.id||prior.hidden||keys.some(key=>prior[key]!==shot[key]))return false;
-  if(typeof prior.timestamp!=='string'||prior.timestamp>=shot.timestamp)return false;
+  if(typeof prior.timestamp!=='string'||!prior.timestamp.trim()||prior.timestamp>=shot.timestamp)return false;
   if(!finite(prior.doseG)||!finite(prior.grindSetting)||!finite(prior.yieldG)||
    Math.abs(prior.doseG-shot.doseG)>.1||
    Math.abs(prior.grindSetting-shot.grindSetting)>.05||

@@ -24,8 +24,9 @@ test('isolated READY candidates use the exact previously published guard, while 
  const source=readFileSync(new URL('../scripts/netlify/should-ignore-build.mjs',import.meta.url),'utf8');
  let manifest=null;
  try{manifest=JSON.parse(readFileSync(new URL('../docs/RELEASE_CANDIDATE.json',import.meta.url),'utf8'));}catch{}
+ const publishedSource=JSON.parse(readFileSync(new URL('../docs/RELEASE_QUEUE.json',import.meta.url),'utf8')).published_base?.tested_source_sha;
  const approvedRestoration=manifest?.kind==='DIC-READY-ONLY-SOURCE-1'&&
-  manifest.published_source_sha==='f1e150a2e7c95764c4a2d8760886aab23c2bfc5e'&&
+  manifest.published_source_sha===publishedSource&&
   manifest.restored_to_published_paths?.includes('scripts/netlify/should-ignore-build.mjs');
  if(approvedRestoration){
   const blob=requirePublishedGitBlobSha(source);

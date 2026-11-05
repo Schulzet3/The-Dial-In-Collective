@@ -14,6 +14,7 @@ import difflib
 import hashlib
 import io
 import json
+import math
 import os
 from pathlib import Path, PurePosixPath
 import re
@@ -85,7 +86,12 @@ def decode_json(data):
         return result
     def constant(_value):
         raise ValueError("nonfinite JSON number")
-    return json.loads(data.decode("utf-8"), object_pairs_hook=pairs, parse_constant=constant)
+    def finite_float(number):
+        value = float(number)
+        require(math.isfinite(value), "nonfinite JSON number")
+        return value
+    return json.loads(data.decode("utf-8"), object_pairs_hook=pairs,
+                      parse_constant=constant, parse_float=finite_float)
 
 
 def stable_hash(value):

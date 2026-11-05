@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "issue": 504,
+  "audit_batch": "G1-016",
+  "date_utc": "2026-11-04",
+  "status": "DIRECT_REVIEWED_PR_CI_BLOCKED",
+  "method": "Fetched pinned source and read all words of nine complete contiguous current release-queue records. Parsing and arithmetic used only to establish boundaries, counts and cross-checks, not as substitutes for direct semantic review.",
+  "source": {
+    "reviewed_parent_commit": "1e503e46cae907713ec411bccde4b7ae2c836f69",
+    "dev_sha_observed": "dc74a7f428ac64749aaa59319c69108a4d2fa85a",
+    "main_sha_observed": "79ea81b9c80eb8b11148c7eb787d500d313a9ad2",
+    "production_sha_observed": "31c66832a28247e657a2bf89592ebc1e2f48dfc5",
+    "source_queue_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
+    "development_queue_blob_sha": "0f5d8a9d6be56b7ecb4b7e4675340e0f9ed374e5",
+    "source_identical_current_dev_2809_3176": true,
+    "immutable_release08_receipt_sha": "469c8698f5abbfcbe62486160d3858b506469e05",
+    "immutable_release10_receipt_sha": "ce2af8be44c7656cc2890c580c0f8a271ae98439",
+    "prior_stack_prs": [
+      617,
+      619,
+      622
+    ]
+  },
+  "reviewed": [
+    {
+      "queue_id": "DIC-Q-17-numeric-range-slow-feed-aware-grind",
+      "source_range_inclusive": [
+        2809,
+        2848
+      ],
+      "physical_lines": 40,
+      "original_whitespace_words": 372,
+      "merged_pr": 212,
+      "merged_source_sha": "d135702a3f27fb4bbb98aa92524cc5627783b921",
+      "current_state": "DEPLOYED",
+      "immutable_release_receipt": "DIC-20261028-READY-QUEUE-08",
+      "release_exact_member": true,
+      "live_original_pr_merge_sha_verified": true,
+      "semantic_review": "The owner-approved high-number/coarser, low-number/finer semantics, 0.1 grinder precision and bounded range are limited to known grinder calibration; the 40%-of-range Slow Feed estimate is explicitly provisional, calibrated personal paired evidence takes precedence, and unknown feed/history are preserved. PR212 early null-fallback failure and restricted SKIP correctly remain historical. Under 'Earlier source history', pre-publication READY assertions do not supersede current release08 DEPLOYED.",
+      "disposition": "NO_CHANGE_PRESERVE_ACTIVE_STATE_AND_HISTORICAL_EVIDENCE"
+    },
+    {
+      "queue_id": "DIC-Q-33-current-selected-quality-grade-collection",
+      "source_range_inclusive": [
+        2849,
+        2884
+      ],
+      "physical_lines": 36,
+      "original_whitespace_words": 230,
+      "merged_pr": 218,
+      "merged_source_sha": "b4ed955a7ddcf05a06bd83e3d99b46e57777a823",
+      "current_state": "DEPLOYED",
+      "immutable_release_receipt": "DIC-20261028-READY-QUEUE-08",
+      "release_exact_member": true,
+      "live_original_pr_merge_sha_verified": true,
+      "semantic_review": "Current selected #13 Gold Collection quality descriptor is source-linked; 77 current previews are separately verified, not independent field-level certification of all original603 coffees. Former 'No production deployment' is explicitly enclosed in Earlier source history, and current deployed receipt is authoritative.",
+      "disposition": "NO_CHANGE_PRESERVE_ACTIVE_STATE_AND_HISTORICAL_EVIDENCE"
+    },
+    {
+      "queue_id": "DIC-Q-22-offline-denial-reload-protection",
+      "source_range_inclusive": [
+        2885,
+        2924
+      ],
+      "physical_lines": 40,
+      "original_whitespace_words": 288,
+      "merged_pr": 217,
+      "merged_source_sha": "45ae4561205c0527e8dcf67d0ec65b06f1724616",
+      "current_state": "DEPLOYED",
+      "immutable_release_receipt": "DIC-20261028-READY-QUEUE-08",
+      "release_exact_member": true,
+      "live_original_pr_merge_sha_verified": true,
+      "semantic_review": "Offline cold-reload owner-denial and stale revision protections were verified in synthetic Chromium and source-scoped jobs, with iPhone prior evidence distinguished from physical-device reenactment. Browser storage eviction is an explicit irrecoverable limit; no universal offline data guarantee. Historical READY/no-deploy statement is superseded by immutable Release08.",
+      "disposition": "NO_CHANGE_PRESERVE_ACTIVE_STATE_AND_HISTORICAL_EVIDENCE"
+    },
+    {
+      "queue_id": "DIC-Q-33-current-pacamara-sensory-pair",
+      "source_range_inclusive": [
+        2925,
+        2963
+      ],
+      "physical_lines": 39,
+      "original_whitespace_words": 270,
+      "merged_pr": 220,
+      "merged_source_sha": "4498aa2acb0ae50cdf78fad1ea394e451b24f5db",
+      "current_state": "DEPLOYED",
+      "immutable_release_receipt": "DIC-20261029-READY-QUEUE-10",
+      "release_exact_member": true,
+      "live_original_pr_merge_sha_verified": true,
+      "semantic_review": "Only selected #17 current Pacamara product receives Pumpkin pie/warm cinnamon tasting notes; 77 other selected source previews and archive remain separately scoped. Earlier Release08 publication is correctly identified as not covering this later merge, followed by Release10 now DEPLOYED.",
+      "disposition": "NO_CHANGE_PRESERVE_ACTIVE_STATE_AND_HISTORICAL_EVIDENCE"
+    },
+    {
+      "queue_id": "DIC-Q-33-current-producing-enterprise",
+      "source_range_inclusive": [
+        2964,
+        3014
+      ],
+      "physical_lines": 51,
+      "original_whitespace_words": 348,
+      "merged_pr": 223,
+      "merged_source_sha": "a95dd6d763cc11a0f5ecb410e540d1d371922b3e",
+      "current_state": "DEPLOYED",
+      "immutable_release_receipt": "DIC-20261029-READY-QUEUE-10",
+      "release_exact_member": true,
+      "live_original_pr_merge_sha_verified": true,
+      "semantic_review": "The unsafe preceding Lime Candy/Habtamu producer contamination is transparently recorded and repaired in PR223. Current selected product/enterprise alias corroboration and 77-current preview changed exactly one field; former READY and release08 exclusions are historical. Release10 proves later deployment; no current extractor changes by #504.",
+      "disposition": "NO_CHANGE_PRESERVE_ACTIVE_STATE_AND_HISTORICAL_EVIDENCE"
+    },
+    {
+      "queue_id": "DIC-Q-26-keyboard-dialog-responsive-regression",
+      "source_range_inclusive": [
+        3015,
+        3058
+      ],
+      "physical_lines": 44,
+      "original_whitespace_words": 450,
+      "merged_pr": 221,
+      "merged_source_sha": "c30636fec07d5dcbbb353c0310306a44dc1cc763",
+      "current_state": "DEPLOYED",
+      "immutable_release_receipt": "DIC-20261029-READY-QUEUE-10",
+      "release_exact_member": true,
+      "live_original_pr_merge_sha_verified": true,
+      "semantic_review": "Keyboard focus and legacy service-worker shell cache regressions have failed-then-repaired receipts; 78 synthetic Chromium checks and source-bound merge are not real native VoiceOver, physical iPhone, or comprehensive badge contrast WCAG certification. Current DEPLOYED and former READY-only statements are chronologically separated; Locked palette left untouched.",
+      "disposition": "NO_CHANGE_PRESERVE_ACTIVE_STATE_AND_HISTORICAL_EVIDENCE"
+    },
+    {
+      "queue_id": "DIC-Q-33-50-source-corrections",
+      "source_range_inclusive": [
+        3059,
+        3093
+      ],
+      "physical_lines": 35,
+      "original_whitespace_words": 259,
+      "merged_pr": 227,
+      "merged_source_sha": "1d3a8a39f4970c052f23bc7ff5cfb22f9414db54",
+      "current_state": "DEPLOYED",
+      "immutable_release_receipt": "DIC-20261029-READY-QUEUE-10",
+      "release_exact_member": true,
+      "live_original_pr_merge_sha_verified": true,
+      "semantic_review": "Exactly four selected-source corrections are evidenced across official 77 previews, with other 73 unchanged; #58 Square content remains limited and is not fabricated. Scoped corrections have Release10 DEPLOYED membership, while parent Issue33 and all 603 decision-level acceptance remain separate outstanding work.",
+      "disposition": "NO_CHANGE_PRESERVE_ACTIVE_STATE_AND_HISTORICAL_EVIDENCE"
+    },
+    {
+      "queue_id": "DIC-Q-33-original603-independent-source-review",
+      "source_range_inclusive": [
+        3094,
+        3135
+      ],
+      "physical_lines": 42,
+      "original_whitespace_words": 674,
+      "merged_pr": 231,
+      "merged_source_sha": null,
+      "current_state": "IN_PROGRESS",
+      "immutable_release_receipt": null,
+      "release_exact_member": null,
+      "live_original_pr_merge_sha_verified": false,
+      "semantic_review": "Correctly remains IN_PROGRESS with merged_source_sha null for research/decision-level certification despite separate PR231 deployable source being merged. Distinguishes immutable 603 historical replay from only 597 current available previews, metadata-only/identity gates, 153 contextual reviews, 29 missing-field review, and 35 outstanding indications. Do not assert 603 individually certified or equate publication of code with completion of this research acceptance.",
+      "disposition": "NO_CHANGE_PRESERVE_ACTIVE_STATE_AND_HISTORICAL_EVIDENCE"
+    },
+    {
+      "queue_id": "DIC-Q-33-source-backed-five-current-products",
+      "source_range_inclusive": [
+        3136,
+        3176
+      ],
+      "physical_lines": 41,
+      "original_whitespace_words": 439,
+      "merged_pr": 236,
+      "merged_source_sha": "f98d8ff469e23671627c2eda21849569f10f911a",
+      "current_state": "DEPLOYED",
+      "immutable_release_receipt": "DIC-20261029-READY-QUEUE-10",
+      "release_exact_member": true,
+      "live_original_pr_merge_sha_verified": true,
+      "semantic_review": "Five specifically selected products have positive and negative regression, a captured false-positive Limited Release test repaired before PR236 nonforce merge, immutable 603 canonical preservation, and later Release10 membership. Earlier READY/no-deploy test strings are historical; 597 current-source previews are not 603 full independent certification.",
+      "disposition": "NO_CHANGE_PRESERVE_ACTIVE_STATE_AND_HISTORICAL_EVIDENCE"
+    }
+  ],
+  "accounting": {
+    "inclusive_lines": [
+      2809,
+      3176
+    ],
+    "new_original_source_lines": 368,
+    "original_whitespace_words": 3330,
+    "new_modified_queue_words": 0,
+    "credited_words": 3330,
+    "cumulative": {
+      "source_file_lines": 4954,
+      "source_file_words": 39140,
+      "github_objects": 2,
+      "github_words": 721
+    },
+    "issue267_direct_credit": 0
+  },
+  "findings": [
+    {
+      "id": "G1-016-F1",
+      "finding": "Eight exact DEPLOYED queue IDs match two immutable provider-published release receipts: three Release08 and five Release10; eight original PR merged SHAs independently read from live GitHub and matched; ninth research record is properly IN_PROGRESS and not in deployed release lists.",
+      "disposition": "NO_CHANGE_REQUIRED"
+    },
+    {
+      "id": "G1-016-F2",
+      "finding": "Source notes and tests retain historical early READY/no-deploy, actual repaired failures, restricted frozen603 SKIPs, synthetic Chromium limits, physical-device and auth exclusions; present current states are not contradicted because historical source prose is explicitly demarcated.",
+      "disposition": "PRESERVE_HISTORICAL_PROVENANCE_AND_NEGATIVE_RESULTS"
+    },
+    {
+      "id": "G1-016-F3",
+      "finding": "Research queue for original603 retains 597 fetched preview versus 603 archival replay, inaccessible product/metadata-only gates, and unresolved individual decisions; no conflation with separate published extractor code. Slow Feed heuristic and offline cache/privacy caveats remain explicit.",
+      "disposition": "KEEP_IN_PROGRESS; NO_SPECULATIVE_CODE_OR_DOCUMENTATION_CLEANUP"
+    }
+  ],
+  "checks": {
+    "nine_complete_source_records": "PASS",
+    "eight_deployed_release_memberships": "PASS",
+    "eight_original_pr_merge_shas": "PASS",
+    "current_dev_review_segment_byte_equal": "PASS",
+    "original_source_queue_unmodified": true,
+    "source_json": "No source edits; exact reviewed objects independently parsed",
+    "runtime_node_sql_browser_auth_or_frozen603": "NOT_RUN_DOC_ONLY",
+    "github_actions": "REPOSITORY_WIDE_FAILED_BEFORE_TEST_STEPS; NEVER_PASS",
+    "prior_prs": "617/619/622 OPEN_STACKED_UNMERGED",
+    "publication": "NOT_AUTHORIZED"
+  },
+  "delegated267": {
+    "strict_original_current_credit": 0,
+    "latest_available_prior_merged_receipt": "16e30d429e30e502d9f2c1fe575ae6506d298bbb",
+    "newer_unmerged_267_receipts": "NOT_CREDITED_OR_COPIED"
+  },
+  "drift": {
+    "unreviewed_changed_id": "DIC-Q-455-recipe-context-feedback",
+    "uncovered": "Most branch/commit/tag inventories, issue/PR text and comments, reviews, workflow logs/artifacts and binaries; #267 separate strict semantic work remains incomplete."
+  },
+  "next": {
+    "path": "docs/RELEASE_QUEUE.json",
+    "first_unreviewed_line": 3177,
+    "expected_next_item": "DIC-Q-33-603-selected-narrative-roast-guard",
+    "expected_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
+    "refresh_before_credit": true
+  },
+  "limitations": "Five/source PR-head GitHub Actions on overlapping workstreams fail prior to runner steps; initial root cause unverified, current CI no PASS. This branch is stacked on #622 on #619 on #617 for safe nonforce continuation; do not merge or READY/promote without corrected source-bound required checks. No production/provider writes."
+}

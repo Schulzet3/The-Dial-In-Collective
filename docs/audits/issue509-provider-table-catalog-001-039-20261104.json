@@ -1,0 +1,6119 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "project_id": "azviqqejypsefzilgonr",
+  "repository": "Schulzet3/The-Dial-In-Collective",
+  "branch": "development/backend-foundation",
+  "source_head_sha_before_write": "c7574439e90a9bc6332960fba97bf7a8b97f3e89",
+  "read_at_date_utc": "2026-11-04",
+  "scope": "provider-managed non-pg_catalog physical tables: 27 auth, 3 realtime, 8 storage, 1 supabase_migrations; vault.secrets full table catalog NOT inspected due provider-sensitive read safety restriction",
+  "result": "39/39 selected provider table full accessible catalog column/default/constraint/index/trigger/policy components directly inspected; not original migration CREATE TABLE source and not any data rows",
+  "counts": {
+    "tables": 39,
+    "auth": 27,
+    "realtime": 3,
+    "storage": 8,
+    "supabase_migrations": 1,
+    "columns": 371,
+    "constraints": 137,
+    "indexes": 139,
+    "custom_triggers": 9,
+    "policies": 0,
+    "auth_anon_select_tables": 0,
+    "auth_authenticated_select_tables": 0,
+    "auth_rls_off": 11
+  },
+  "confirmed_logic_findings": [
+    {
+      "object": "auth.saml_providers",
+      "check": "metadata_url not empty",
+      "ddl": "CHECK (metadata_url = NULL::text OR char_length(metadata_url) > 0)"
+    },
+    {
+      "object": "auth.sso_providers",
+      "check": "resource_id not empty",
+      "ddl": "CHECK (resource_id = NULL::text OR char_length(resource_id) > 0)"
+    }
+  ],
+  "three_valued_logic_evidence": {
+    "probe": "SELECT (''::text = NULL::text OR char_length(''::text)>0) AS expression, ((...) IS NOT FALSE) AS passes_check",
+    "empty_text_expression": null,
+    "empty_text_would_pass_check": true
+  },
+  "security_constraints": [
+    "Zero anon/auth SELECT/INSERT grants on all 27 auth tables even though 11 have RLS off; do not claim an Auth leak",
+    "realtime.subscription has anon/auth SQL SELECT and no RLS; hosted PostgREST exposed schema and WebSocket runtime unverified",
+    "storage tables have RLS and user role SQL grants but no data/policy bypass established",
+    "realtime.messages payload exclusivity CHECK NOT VALID; this does not mean it is unenforced for new rows; preexisting validation remains UNKNOWN"
+  ],
+  "blockers": [
+    "vault.secrets table source not directly read to avoid provider-sensitive scope; catalog ACL says anon/auth no SELECT",
+    "Auth managed by Supabase GoTrue, do not issue production DDL or tamper with provider-owned migrations. Service-layer validation and exploitability of ineffective CHECK constraints unverified",
+    "pg_catalog native code, production HTTP exposed-schema access and full owned DB object source/callers still incomplete"
+  ],
+  "next_cursor": "Vault secret-table catalog only if safe provider metadata access authorized; otherwise pg_catalog system table definitions starting ordinal 1/64, with provider/hosted API exposure and #96 coordination",
+  "per_object": [
+    {
+      "rn": 1,
+      "nspname": "auth",
+      "relname": "audit_log_entries",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "instance_id",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "json",
+          "column": "payload",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "character varying(64)",
+          "column": "ip_address",
+          "default": "''::character varying",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "audit_log_entries_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX audit_log_entries_pkey ON auth.audit_log_entries USING btree (id)",
+          "name": "audit_log_entries_pkey",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX audit_logs_instance_id_idx ON auth.audit_log_entries USING btree (instance_id)",
+          "name": "audit_logs_instance_id_idx",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "c33007dff734064f761193443d0bdabe",
+      "ordinal": 1,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 2,
+      "nspname": "auth",
+      "relname": "custom_oauth_providers",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": "gen_random_uuid()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "provider_type",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "identifier",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "name",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "client_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "client_secret",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text[]",
+          "column": "acceptable_client_ids",
+          "default": "'{}'::text[]",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text[]",
+          "column": "scopes",
+          "default": "'{}'::text[]",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "boolean",
+          "column": "pkce_enabled",
+          "default": "true",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "jsonb",
+          "column": "attribute_mapping",
+          "default": "'{}'::jsonb",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "jsonb",
+          "column": "authorization_params",
+          "default": "'{}'::jsonb",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "boolean",
+          "column": "enabled",
+          "default": "true",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "boolean",
+          "column": "email_optional",
+          "default": "false",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "issuer",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "discovery_url",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "boolean",
+          "column": "skip_nonce_check",
+          "default": "false",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "jsonb",
+          "column": "cached_discovery",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "discovery_cached_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "authorization_url",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "token_url",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "userinfo_url",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "jwks_uri",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "updated_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text[]",
+          "column": "custom_claims_allowlist",
+          "default": "'{}'::text[]",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "CHECK (authorization_url IS NULL OR authorization_url ~~ 'https://%'::text)",
+          "name": "custom_oauth_providers_authorization_url_https",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (authorization_url IS NULL OR char_length(authorization_url) <= 2048)",
+          "name": "custom_oauth_providers_authorization_url_length",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (char_length(client_id) >= 1 AND char_length(client_id) <= 512)",
+          "name": "custom_oauth_providers_client_id_length",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (discovery_url IS NULL OR char_length(discovery_url) <= 2048)",
+          "name": "custom_oauth_providers_discovery_url_length",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (identifier ~ '^[a-z0-9][a-z0-9:-]{0,48}[a-z0-9]$'::text)",
+          "name": "custom_oauth_providers_identifier_format",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "UNIQUE (identifier)",
+          "name": "custom_oauth_providers_identifier_key",
+          "type": "u",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (issuer IS NULL OR char_length(issuer) >= 1 AND char_length(issuer) <= 2048)",
+          "name": "custom_oauth_providers_issuer_length",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (jwks_uri IS NULL OR jwks_uri ~~ 'https://%'::text)",
+          "name": "custom_oauth_providers_jwks_uri_https",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (jwks_uri IS NULL OR char_length(jwks_uri) <= 2048)",
+          "name": "custom_oauth_providers_jwks_uri_length",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (char_length(name) >= 1 AND char_length(name) <= 100)",
+          "name": "custom_oauth_providers_name_length",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (provider_type <> 'oauth2'::text OR authorization_url IS NOT NULL AND token_url IS NOT NULL AND userinfo_url IS NOT NULL)",
+          "name": "custom_oauth_providers_oauth2_requires_endpoints",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (provider_type <> 'oidc'::text OR discovery_url IS NULL OR discovery_url ~~ 'https://%'::text)",
+          "name": "custom_oauth_providers_oidc_discovery_url_https",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (provider_type <> 'oidc'::text OR issuer IS NULL OR issuer ~~ 'https://%'::text)",
+          "name": "custom_oauth_providers_oidc_issuer_https",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (provider_type <> 'oidc'::text OR issuer IS NOT NULL)",
+          "name": "custom_oauth_providers_oidc_requires_issuer",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "custom_oauth_providers_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (provider_type = ANY (ARRAY['oauth2'::text, 'oidc'::text]))",
+          "name": "custom_oauth_providers_provider_type_check",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (token_url IS NULL OR token_url ~~ 'https://%'::text)",
+          "name": "custom_oauth_providers_token_url_https",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (token_url IS NULL OR char_length(token_url) <= 2048)",
+          "name": "custom_oauth_providers_token_url_length",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (userinfo_url IS NULL OR userinfo_url ~~ 'https://%'::text)",
+          "name": "custom_oauth_providers_userinfo_url_https",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (userinfo_url IS NULL OR char_length(userinfo_url) <= 2048)",
+          "name": "custom_oauth_providers_userinfo_url_length",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX custom_oauth_providers_created_at_idx ON auth.custom_oauth_providers USING btree (created_at)",
+          "name": "custom_oauth_providers_created_at_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX custom_oauth_providers_enabled_idx ON auth.custom_oauth_providers USING btree (enabled)",
+          "name": "custom_oauth_providers_enabled_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX custom_oauth_providers_identifier_idx ON auth.custom_oauth_providers USING btree (identifier)",
+          "name": "custom_oauth_providers_identifier_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX custom_oauth_providers_identifier_key ON auth.custom_oauth_providers USING btree (identifier)",
+          "name": "custom_oauth_providers_identifier_key",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX custom_oauth_providers_pkey ON auth.custom_oauth_providers USING btree (id)",
+          "name": "custom_oauth_providers_pkey",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX custom_oauth_providers_provider_type_idx ON auth.custom_oauth_providers USING btree (provider_type)",
+          "name": "custom_oauth_providers_provider_type_idx",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "2a69b5f66beedf6570b82489d37e9007",
+      "ordinal": 2,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 3,
+      "nspname": "auth",
+      "relname": "flow_state",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "user_id",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "auth_code",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "auth.code_challenge_method",
+          "column": "code_challenge_method",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "code_challenge",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "provider_type",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "provider_access_token",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "provider_refresh_token",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "updated_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "authentication_method",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "auth_code_issued_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "invite_token",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "referrer",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "oauth_client_state_id",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "linking_target_id",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "boolean",
+          "column": "email_optional",
+          "default": "false",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "flow_state_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX flow_state_created_at_idx ON auth.flow_state USING btree (created_at DESC)",
+          "name": "flow_state_created_at_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX flow_state_pkey ON auth.flow_state USING btree (id)",
+          "name": "flow_state_pkey",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX idx_auth_code ON auth.flow_state USING btree (auth_code)",
+          "name": "idx_auth_code",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX idx_user_id_auth_method ON auth.flow_state USING btree (user_id, authentication_method)",
+          "name": "idx_user_id_auth_method",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "ec42ad8267852726b2007dab3b228234",
+      "ordinal": 3,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 4,
+      "nspname": "auth",
+      "relname": "identities",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "text",
+          "column": "provider_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "user_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "jsonb",
+          "column": "identity_data",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "provider",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "last_sign_in_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "updated_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "email",
+          "default": "lower((identity_data ->> 'email'::text))",
+          "identity": "",
+          "not_null": false,
+          "generated": "s"
+        },
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": "gen_random_uuid()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "identities_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "UNIQUE (provider_id, provider)",
+          "name": "identities_provider_id_provider_unique",
+          "type": "u",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+          "name": "identities_user_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX identities_email_idx ON auth.identities USING btree (email text_pattern_ops)",
+          "name": "identities_email_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX identities_pkey ON auth.identities USING btree (id)",
+          "name": "identities_pkey",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX identities_provider_id_provider_unique ON auth.identities USING btree (provider_id, provider)",
+          "name": "identities_provider_id_provider_unique",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX identities_user_id_idx ON auth.identities USING btree (user_id)",
+          "name": "identities_user_id_idx",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "60832acbd7b27188632cc8d90faa4e75",
+      "ordinal": 4,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 5,
+      "nspname": "auth",
+      "relname": "instances",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "uuid",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "raw_base_config",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "updated_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "instances_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX instances_pkey ON auth.instances USING btree (id)",
+          "name": "instances_pkey",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "b1b91a7f00f8b8c96e6d0fd557ba3d8e",
+      "ordinal": 5,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 6,
+      "nspname": "auth",
+      "relname": "mfa_amr_claims",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "session_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "updated_at",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "authentication_method",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "amr_id_pk",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "UNIQUE (session_id, authentication_method)",
+          "name": "mfa_amr_claims_session_id_authentication_method_pkey",
+          "type": "u",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "FOREIGN KEY (session_id) REFERENCES auth.sessions(id) ON DELETE CASCADE",
+          "name": "mfa_amr_claims_session_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX amr_id_pk ON auth.mfa_amr_claims USING btree (id)",
+          "name": "amr_id_pk",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX mfa_amr_claims_session_id_authentication_method_pkey ON auth.mfa_amr_claims USING btree (session_id, authentication_method)",
+          "name": "mfa_amr_claims_session_id_authentication_method_pkey",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "d3d896f3abf85c8c8c6d93163c1830d7",
+      "ordinal": 6,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 7,
+      "nspname": "auth",
+      "relname": "mfa_challenges",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "factor_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "verified_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "inet",
+          "column": "ip_address",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "otp_code",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "jsonb",
+          "column": "web_authn_session_data",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "FOREIGN KEY (factor_id) REFERENCES auth.mfa_factors(id) ON DELETE CASCADE",
+          "name": "mfa_challenges_auth_factor_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "mfa_challenges_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX mfa_challenge_created_at_idx ON auth.mfa_challenges USING btree (created_at DESC)",
+          "name": "mfa_challenge_created_at_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX mfa_challenges_pkey ON auth.mfa_challenges USING btree (id)",
+          "name": "mfa_challenges_pkey",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "352bfad6a045a04ad1f3e2af45bee52e",
+      "ordinal": 7,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 8,
+      "nspname": "auth",
+      "relname": "mfa_factors",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "user_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "friendly_name",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "auth.factor_type",
+          "column": "factor_type",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "auth.factor_status",
+          "column": "status",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "updated_at",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "secret",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "phone",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "last_challenged_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "jsonb",
+          "column": "web_authn_credential",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "web_authn_aaguid",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "jsonb",
+          "column": "last_webauthn_challenge_data",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "UNIQUE (last_challenged_at)",
+          "name": "mfa_factors_last_challenged_at_key",
+          "type": "u",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "mfa_factors_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+          "name": "mfa_factors_user_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX factor_id_created_at_idx ON auth.mfa_factors USING btree (user_id, created_at)",
+          "name": "factor_id_created_at_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX mfa_factors_last_challenged_at_key ON auth.mfa_factors USING btree (last_challenged_at)",
+          "name": "mfa_factors_last_challenged_at_key",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX mfa_factors_pkey ON auth.mfa_factors USING btree (id)",
+          "name": "mfa_factors_pkey",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX mfa_factors_user_friendly_name_unique ON auth.mfa_factors USING btree (friendly_name, user_id) WHERE (TRIM(BOTH FROM friendly_name) <> ''::text)",
+          "name": "mfa_factors_user_friendly_name_unique",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX mfa_factors_user_id_idx ON auth.mfa_factors USING btree (user_id)",
+          "name": "mfa_factors_user_id_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX unique_phone_factor_per_user ON auth.mfa_factors USING btree (user_id, phone)",
+          "name": "unique_phone_factor_per_user",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "30d71fa377549e55291ee14b92a5d6f4",
+      "ordinal": 8,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 9,
+      "nspname": "auth",
+      "relname": "mfa_recovery_code_sets",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "user_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "mfa_factor_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "integer",
+          "column": "failed_verification_count",
+          "default": "0",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "verification_locked_until",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "updated_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "CHECK (failed_verification_count >= 0)",
+          "name": "mfa_recovery_code_sets_failed_verification_count_check",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "FOREIGN KEY (mfa_factor_id) REFERENCES auth.mfa_factors(id) ON DELETE CASCADE",
+          "name": "mfa_recovery_code_sets_mfa_factor_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "UNIQUE (mfa_factor_id)",
+          "name": "mfa_recovery_code_sets_mfa_factor_id_key",
+          "type": "u",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "mfa_recovery_code_sets_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+          "name": "mfa_recovery_code_sets_user_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "UNIQUE (user_id)",
+          "name": "mfa_recovery_code_sets_user_id_key",
+          "type": "u",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX mfa_recovery_code_sets_mfa_factor_id_key ON auth.mfa_recovery_code_sets USING btree (mfa_factor_id)",
+          "name": "mfa_recovery_code_sets_mfa_factor_id_key",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX mfa_recovery_code_sets_pkey ON auth.mfa_recovery_code_sets USING btree (id)",
+          "name": "mfa_recovery_code_sets_pkey",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX mfa_recovery_code_sets_user_id_key ON auth.mfa_recovery_code_sets USING btree (user_id)",
+          "name": "mfa_recovery_code_sets_user_id_key",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "6b469c1838adf35f24b974d4ce6655fa",
+      "ordinal": 9,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 10,
+      "nspname": "auth",
+      "relname": "mfa_recovery_codes",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "mfa_recovery_code_set_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "code_hash",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "consumed_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "FOREIGN KEY (mfa_recovery_code_set_id) REFERENCES auth.mfa_recovery_code_sets(id) ON DELETE CASCADE",
+          "name": "mfa_recovery_codes_mfa_recovery_code_set_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "mfa_recovery_codes_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX mfa_recovery_codes_pkey ON auth.mfa_recovery_codes USING btree (id)",
+          "name": "mfa_recovery_codes_pkey",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX mfa_recovery_codes_set_id_idx ON auth.mfa_recovery_codes USING btree (mfa_recovery_code_set_id)",
+          "name": "mfa_recovery_codes_set_id_idx",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "1dc5d1faa769b6f07f230ea5fca5e7c6",
+      "ordinal": 10,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 11,
+      "nspname": "auth",
+      "relname": "oauth_authorizations",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "authorization_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "client_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "user_id",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "redirect_uri",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "scope",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "state",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "resource",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "code_challenge",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "auth.code_challenge_method",
+          "column": "code_challenge_method",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "auth.oauth_response_type",
+          "column": "response_type",
+          "default": "'code'::auth.oauth_response_type",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "auth.oauth_authorization_status",
+          "column": "status",
+          "default": "'pending'::auth.oauth_authorization_status",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "authorization_code",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "expires_at",
+          "default": "(now() + '00:03:00'::interval)",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "approved_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "nonce",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "UNIQUE (authorization_code)",
+          "name": "oauth_authorizations_authorization_code_key",
+          "type": "u",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (char_length(authorization_code) <= 255)",
+          "name": "oauth_authorizations_authorization_code_length",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "UNIQUE (authorization_id)",
+          "name": "oauth_authorizations_authorization_id_key",
+          "type": "u",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "FOREIGN KEY (client_id) REFERENCES auth.oauth_clients(id) ON DELETE CASCADE",
+          "name": "oauth_authorizations_client_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (char_length(code_challenge) <= 128)",
+          "name": "oauth_authorizations_code_challenge_length",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (expires_at > created_at)",
+          "name": "oauth_authorizations_expires_at_future",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (char_length(nonce) <= 255)",
+          "name": "oauth_authorizations_nonce_length",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "oauth_authorizations_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (char_length(redirect_uri) <= 2048)",
+          "name": "oauth_authorizations_redirect_uri_length",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (char_length(resource) <= 2048)",
+          "name": "oauth_authorizations_resource_length",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (char_length(scope) <= 4096)",
+          "name": "oauth_authorizations_scope_length",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (char_length(state) <= 4096)",
+          "name": "oauth_authorizations_state_length",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+          "name": "oauth_authorizations_user_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX oauth_auth_pending_exp_idx ON auth.oauth_authorizations USING btree (expires_at) WHERE (status = 'pending'::auth.oauth_authorization_status)",
+          "name": "oauth_auth_pending_exp_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX oauth_authorizations_authorization_code_key ON auth.oauth_authorizations USING btree (authorization_code)",
+          "name": "oauth_authorizations_authorization_code_key",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX oauth_authorizations_authorization_id_key ON auth.oauth_authorizations USING btree (authorization_id)",
+          "name": "oauth_authorizations_authorization_id_key",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX oauth_authorizations_pkey ON auth.oauth_authorizations USING btree (id)",
+          "name": "oauth_authorizations_pkey",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "03c97c0dc88088492695a746c8b3b375",
+      "ordinal": 11,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 12,
+      "nspname": "auth",
+      "relname": "oauth_client_states",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "provider_type",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "code_verifier",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "oauth_client_states_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX idx_oauth_client_states_created_at ON auth.oauth_client_states USING btree (created_at)",
+          "name": "idx_oauth_client_states_created_at",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX oauth_client_states_pkey ON auth.oauth_client_states USING btree (id)",
+          "name": "oauth_client_states_pkey",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "31842cb16404c4f5e8c9214b500e81d0",
+      "ordinal": 12,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 13,
+      "nspname": "auth",
+      "relname": "oauth_clients",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "client_secret_hash",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "auth.oauth_registration_type",
+          "column": "registration_type",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "redirect_uris",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "grant_types",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "client_name",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "client_uri",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "logo_uri",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "updated_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "deleted_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "auth.oauth_client_type",
+          "column": "client_type",
+          "default": "'confidential'::auth.oauth_client_type",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "token_endpoint_auth_method",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "CHECK (char_length(client_name) <= 1024)",
+          "name": "oauth_clients_client_name_length",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (char_length(client_uri) <= 2048)",
+          "name": "oauth_clients_client_uri_length",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (char_length(logo_uri) <= 2048)",
+          "name": "oauth_clients_logo_uri_length",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "oauth_clients_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (token_endpoint_auth_method = ANY (ARRAY['client_secret_basic'::text, 'client_secret_post'::text, 'none'::text]))",
+          "name": "oauth_clients_token_endpoint_auth_method_check",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX oauth_clients_deleted_at_idx ON auth.oauth_clients USING btree (deleted_at)",
+          "name": "oauth_clients_deleted_at_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX oauth_clients_pkey ON auth.oauth_clients USING btree (id)",
+          "name": "oauth_clients_pkey",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "3439cc9229f449da740d6e232f45c4ac",
+      "ordinal": 13,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 14,
+      "nspname": "auth",
+      "relname": "oauth_consents",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "user_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "client_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "scopes",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "granted_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "revoked_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "FOREIGN KEY (client_id) REFERENCES auth.oauth_clients(id) ON DELETE CASCADE",
+          "name": "oauth_consents_client_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "oauth_consents_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (revoked_at IS NULL OR revoked_at >= granted_at)",
+          "name": "oauth_consents_revoked_after_granted",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (char_length(scopes) <= 2048)",
+          "name": "oauth_consents_scopes_length",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (char_length(TRIM(BOTH FROM scopes)) > 0)",
+          "name": "oauth_consents_scopes_not_empty",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "UNIQUE (user_id, client_id)",
+          "name": "oauth_consents_user_client_unique",
+          "type": "u",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+          "name": "oauth_consents_user_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX oauth_consents_active_client_idx ON auth.oauth_consents USING btree (client_id) WHERE (revoked_at IS NULL)",
+          "name": "oauth_consents_active_client_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX oauth_consents_active_user_client_idx ON auth.oauth_consents USING btree (user_id, client_id) WHERE (revoked_at IS NULL)",
+          "name": "oauth_consents_active_user_client_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX oauth_consents_pkey ON auth.oauth_consents USING btree (id)",
+          "name": "oauth_consents_pkey",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX oauth_consents_user_client_unique ON auth.oauth_consents USING btree (user_id, client_id)",
+          "name": "oauth_consents_user_client_unique",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX oauth_consents_user_order_idx ON auth.oauth_consents USING btree (user_id, granted_at DESC)",
+          "name": "oauth_consents_user_order_idx",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "0810b0856a71b9426f1e728118a0ef1e",
+      "ordinal": 14,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 15,
+      "nspname": "auth",
+      "relname": "one_time_tokens",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "user_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "auth.one_time_token_type",
+          "column": "token_type",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "token_hash",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "relates_to",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp without time zone",
+          "column": "created_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp without time zone",
+          "column": "updated_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "expires_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "one_time_tokens_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (char_length(token_hash) > 0)",
+          "name": "one_time_tokens_token_hash_check",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+          "name": "one_time_tokens_user_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX one_time_tokens_pkey ON auth.one_time_tokens USING btree (id)",
+          "name": "one_time_tokens_pkey",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX one_time_tokens_relates_to_hash_idx ON auth.one_time_tokens USING hash (relates_to)",
+          "name": "one_time_tokens_relates_to_hash_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX one_time_tokens_token_hash_hash_idx ON auth.one_time_tokens USING hash (token_hash)",
+          "name": "one_time_tokens_token_hash_hash_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX one_time_tokens_user_id_token_type_key ON auth.one_time_tokens USING btree (user_id, token_type)",
+          "name": "one_time_tokens_user_id_token_type_key",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "3865b28ec461094037d68bb5de09be7e",
+      "ordinal": 15,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 16,
+      "nspname": "auth",
+      "relname": "refresh_tokens",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "instance_id",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "bigint",
+          "column": "id",
+          "default": "nextval('auth.refresh_tokens_id_seq'::regclass)",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "character varying(255)",
+          "column": "token",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "character varying(255)",
+          "column": "user_id",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "boolean",
+          "column": "revoked",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "updated_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "character varying(255)",
+          "column": "parent",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "session_id",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "refresh_tokens_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "FOREIGN KEY (session_id) REFERENCES auth.sessions(id) ON DELETE CASCADE",
+          "name": "refresh_tokens_session_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "UNIQUE (token)",
+          "name": "refresh_tokens_token_unique",
+          "type": "u",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX refresh_tokens_instance_id_idx ON auth.refresh_tokens USING btree (instance_id)",
+          "name": "refresh_tokens_instance_id_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX refresh_tokens_instance_id_user_id_idx ON auth.refresh_tokens USING btree (instance_id, user_id)",
+          "name": "refresh_tokens_instance_id_user_id_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX refresh_tokens_parent_idx ON auth.refresh_tokens USING btree (parent)",
+          "name": "refresh_tokens_parent_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX refresh_tokens_pkey ON auth.refresh_tokens USING btree (id)",
+          "name": "refresh_tokens_pkey",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX refresh_tokens_session_id_revoked_idx ON auth.refresh_tokens USING btree (session_id, revoked)",
+          "name": "refresh_tokens_session_id_revoked_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX refresh_tokens_token_unique ON auth.refresh_tokens USING btree (token)",
+          "name": "refresh_tokens_token_unique",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX refresh_tokens_updated_at_idx ON auth.refresh_tokens USING btree (updated_at DESC)",
+          "name": "refresh_tokens_updated_at_idx",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "5f5b46ec848ec0c4500de8705b683a84",
+      "ordinal": 16,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 17,
+      "nspname": "auth",
+      "relname": "saml_providers",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "sso_provider_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "entity_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "metadata_xml",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "metadata_url",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "jsonb",
+          "column": "attribute_mapping",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "updated_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "name_id_format",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "CHECK (char_length(entity_id) > 0)",
+          "name": "entity_id not empty",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (metadata_url = NULL::text OR char_length(metadata_url) > 0)",
+          "name": "metadata_url not empty",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (char_length(metadata_xml) > 0)",
+          "name": "metadata_xml not empty",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "UNIQUE (entity_id)",
+          "name": "saml_providers_entity_id_key",
+          "type": "u",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "saml_providers_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "FOREIGN KEY (sso_provider_id) REFERENCES auth.sso_providers(id) ON DELETE CASCADE",
+          "name": "saml_providers_sso_provider_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX saml_providers_entity_id_key ON auth.saml_providers USING btree (entity_id)",
+          "name": "saml_providers_entity_id_key",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX saml_providers_pkey ON auth.saml_providers USING btree (id)",
+          "name": "saml_providers_pkey",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX saml_providers_sso_provider_id_idx ON auth.saml_providers USING btree (sso_provider_id)",
+          "name": "saml_providers_sso_provider_id_idx",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "650aaecbcd625bb10116db59f2bdee9e",
+      "ordinal": 17,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [
+        "CONFIRMED SQL three-valued logic allows empty text through metadata_url not empty"
+      ],
+      "disposition": "CONFIRMED_INEFFECTIVE_VENDOR_MANAGED_CHECK_BLOCKED_FOR_PROVIDER_REPAIR"
+    },
+    {
+      "rn": 18,
+      "nspname": "auth",
+      "relname": "saml_relay_states",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "sso_provider_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "request_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "for_email",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "redirect_to",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "updated_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "flow_state_id",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "CHECK (char_length(request_id) > 0)",
+          "name": "request_id not empty",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "FOREIGN KEY (flow_state_id) REFERENCES auth.flow_state(id) ON DELETE CASCADE",
+          "name": "saml_relay_states_flow_state_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "saml_relay_states_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "FOREIGN KEY (sso_provider_id) REFERENCES auth.sso_providers(id) ON DELETE CASCADE",
+          "name": "saml_relay_states_sso_provider_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX saml_relay_states_created_at_idx ON auth.saml_relay_states USING btree (created_at DESC)",
+          "name": "saml_relay_states_created_at_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX saml_relay_states_for_email_idx ON auth.saml_relay_states USING btree (for_email)",
+          "name": "saml_relay_states_for_email_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX saml_relay_states_pkey ON auth.saml_relay_states USING btree (id)",
+          "name": "saml_relay_states_pkey",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX saml_relay_states_sso_provider_id_idx ON auth.saml_relay_states USING btree (sso_provider_id)",
+          "name": "saml_relay_states_sso_provider_id_idx",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "7dbe19a10e1408e7acab5283e977752f",
+      "ordinal": 18,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 19,
+      "nspname": "auth",
+      "relname": "schema_migrations",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "character varying(255)",
+          "column": "version",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "PRIMARY KEY (version)",
+          "name": "schema_migrations_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX schema_migrations_pkey ON auth.schema_migrations USING btree (version)",
+          "name": "schema_migrations_pkey",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "1ba55308cf822cd9669908dd0bdfb80d",
+      "ordinal": 19,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 20,
+      "nspname": "auth",
+      "relname": "scim_tokens",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "sso_provider_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "token_hash",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "prefix",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "expires_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "revoked_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "last_used_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "CHECK (expires_at IS NULL OR expires_at > created_at)",
+          "name": "scim_tokens_expires_at_future",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "scim_tokens_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (revoked_at IS NULL OR revoked_at >= created_at)",
+          "name": "scim_tokens_revoked_after_created",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "FOREIGN KEY (sso_provider_id) REFERENCES auth.sso_providers(id) ON DELETE CASCADE",
+          "name": "scim_tokens_sso_provider_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (token_hash ~ '^[0-9a-f]{64}$'::text)",
+          "name": "scim_tokens_token_hash_check",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX scim_tokens_expires_at_idx ON auth.scim_tokens USING btree (expires_at)",
+          "name": "scim_tokens_expires_at_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX scim_tokens_pkey ON auth.scim_tokens USING btree (id)",
+          "name": "scim_tokens_pkey",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX scim_tokens_revoked_at_idx ON auth.scim_tokens USING btree (revoked_at)",
+          "name": "scim_tokens_revoked_at_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX scim_tokens_sso_provider_id_idx ON auth.scim_tokens USING btree (sso_provider_id)",
+          "name": "scim_tokens_sso_provider_id_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX scim_tokens_token_hash_key ON auth.scim_tokens USING btree (token_hash)",
+          "name": "scim_tokens_token_hash_key",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "c7406e04cf87fa2cbf485df5888e1826",
+      "ordinal": 20,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 21,
+      "nspname": "auth",
+      "relname": "scim_users",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "sso_provider_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "user_id",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "jsonb",
+          "column": "resource",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "user_name",
+          "default": "lower((resource ->> 'userName'::text))",
+          "identity": "",
+          "not_null": true,
+          "generated": "s"
+        },
+        {
+          "type": "text",
+          "column": "external_id",
+          "default": "(resource ->> 'externalId'::text)",
+          "identity": "",
+          "not_null": false,
+          "generated": "s"
+        },
+        {
+          "type": "boolean",
+          "column": "active",
+          "default": "COALESCE(((resource ->> 'active'::text))::boolean, true)",
+          "identity": "",
+          "not_null": true,
+          "generated": "s"
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "updated_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "deleted_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "scim_users_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "FOREIGN KEY (sso_provider_id) REFERENCES auth.sso_providers(id) ON DELETE CASCADE",
+          "name": "scim_users_sso_provider_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE SET NULL",
+          "name": "scim_users_user_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX scim_users_created_at_idx ON auth.scim_users USING btree (sso_provider_id, created_at, id) WHERE (deleted_at IS NULL)",
+          "name": "scim_users_created_at_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX scim_users_deleted_at_idx ON auth.scim_users USING btree (deleted_at)",
+          "name": "scim_users_deleted_at_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX scim_users_external_id_key ON auth.scim_users USING btree (sso_provider_id, external_id) WHERE ((external_id IS NOT NULL) AND (deleted_at IS NULL))",
+          "name": "scim_users_external_id_key",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX scim_users_id_idx ON auth.scim_users USING btree (sso_provider_id, id) WHERE (deleted_at IS NULL)",
+          "name": "scim_users_id_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX scim_users_pkey ON auth.scim_users USING btree (id)",
+          "name": "scim_users_pkey",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX scim_users_sso_provider_id_idx ON auth.scim_users USING btree (sso_provider_id)",
+          "name": "scim_users_sso_provider_id_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX scim_users_updated_at_idx ON auth.scim_users USING btree (sso_provider_id, updated_at, id) WHERE (deleted_at IS NULL)",
+          "name": "scim_users_updated_at_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX scim_users_user_id_idx ON auth.scim_users USING btree (user_id)",
+          "name": "scim_users_user_id_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX scim_users_user_name_idx ON auth.scim_users USING btree (sso_provider_id, user_name COLLATE \"C\", id) WHERE (deleted_at IS NULL)",
+          "name": "scim_users_user_name_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX scim_users_user_name_key ON auth.scim_users USING btree (sso_provider_id, user_name) WHERE (deleted_at IS NULL)",
+          "name": "scim_users_user_name_key",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "ee907f4bf0636fbdb4f79d705dfa414c",
+      "ordinal": 21,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 22,
+      "nspname": "auth",
+      "relname": "sessions",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "user_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "updated_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "factor_id",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "auth.aal_level",
+          "column": "aal",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "not_after",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp without time zone",
+          "column": "refreshed_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "user_agent",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "inet",
+          "column": "ip",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "tag",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "oauth_client_id",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "refresh_token_hmac_key",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "bigint",
+          "column": "refresh_token_counter",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "scopes",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "FOREIGN KEY (oauth_client_id) REFERENCES auth.oauth_clients(id) ON DELETE CASCADE",
+          "name": "sessions_oauth_client_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "sessions_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (char_length(scopes) <= 4096)",
+          "name": "sessions_scopes_length",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+          "name": "sessions_user_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX sessions_not_after_idx ON auth.sessions USING btree (not_after DESC)",
+          "name": "sessions_not_after_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX sessions_oauth_client_id_idx ON auth.sessions USING btree (oauth_client_id)",
+          "name": "sessions_oauth_client_id_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX sessions_pkey ON auth.sessions USING btree (id)",
+          "name": "sessions_pkey",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX sessions_user_id_idx ON auth.sessions USING btree (user_id)",
+          "name": "sessions_user_id_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX user_id_created_at_idx ON auth.sessions USING btree (user_id, created_at)",
+          "name": "user_id_created_at_idx",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "8d13d7cffb76c37ac12b8bc3b9331b3b",
+      "ordinal": 22,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 23,
+      "nspname": "auth",
+      "relname": "sso_domains",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "sso_provider_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "domain",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "updated_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "CHECK (char_length(domain) > 0)",
+          "name": "domain not empty",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "sso_domains_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "FOREIGN KEY (sso_provider_id) REFERENCES auth.sso_providers(id) ON DELETE CASCADE",
+          "name": "sso_domains_sso_provider_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX sso_domains_domain_idx ON auth.sso_domains USING btree (lower(domain))",
+          "name": "sso_domains_domain_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX sso_domains_pkey ON auth.sso_domains USING btree (id)",
+          "name": "sso_domains_pkey",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX sso_domains_sso_provider_id_idx ON auth.sso_domains USING btree (sso_provider_id)",
+          "name": "sso_domains_sso_provider_id_idx",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "9a37fe2c965e8257e4920fc3ca0f2e2f",
+      "ordinal": 23,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 24,
+      "nspname": "auth",
+      "relname": "sso_providers",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "resource_id",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "updated_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "boolean",
+          "column": "disabled",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "CHECK (resource_id = NULL::text OR char_length(resource_id) > 0)",
+          "name": "resource_id not empty",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "sso_providers_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX sso_providers_pkey ON auth.sso_providers USING btree (id)",
+          "name": "sso_providers_pkey",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX sso_providers_resource_id_idx ON auth.sso_providers USING btree (lower(resource_id))",
+          "name": "sso_providers_resource_id_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX sso_providers_resource_id_pattern_idx ON auth.sso_providers USING btree (resource_id text_pattern_ops)",
+          "name": "sso_providers_resource_id_pattern_idx",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "52ad96938c27acf1b8a0531e108fda93",
+      "ordinal": 24,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [
+        "CONFIRMED SQL three-valued logic allows empty text through resource_id not empty"
+      ],
+      "disposition": "CONFIRMED_INEFFECTIVE_VENDOR_MANAGED_CHECK_BLOCKED_FOR_PROVIDER_REPAIR"
+    },
+    {
+      "rn": 25,
+      "nspname": "auth",
+      "relname": "users",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "instance_id",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "character varying(255)",
+          "column": "aud",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "character varying(255)",
+          "column": "role",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "character varying(255)",
+          "column": "email",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "character varying(255)",
+          "column": "encrypted_password",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "email_confirmed_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "invited_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "character varying(255)",
+          "column": "confirmation_token",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "confirmation_sent_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "character varying(255)",
+          "column": "recovery_token",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "recovery_sent_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "character varying(255)",
+          "column": "email_change_token_new",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "character varying(255)",
+          "column": "email_change",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "email_change_sent_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "last_sign_in_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "jsonb",
+          "column": "raw_app_meta_data",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "jsonb",
+          "column": "raw_user_meta_data",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "boolean",
+          "column": "is_super_admin",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "updated_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "phone",
+          "default": "NULL::character varying",
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "phone_confirmed_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "phone_change",
+          "default": "''::character varying",
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "character varying(255)",
+          "column": "phone_change_token",
+          "default": "''::character varying",
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "phone_change_sent_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "confirmed_at",
+          "default": "LEAST(email_confirmed_at, phone_confirmed_at)",
+          "identity": "",
+          "not_null": false,
+          "generated": "s"
+        },
+        {
+          "type": "character varying(255)",
+          "column": "email_change_token_current",
+          "default": "''::character varying",
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "smallint",
+          "column": "email_change_confirm_status",
+          "default": "0",
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "banned_until",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "character varying(255)",
+          "column": "reauthentication_token",
+          "default": "''::character varying",
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "reauthentication_sent_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "boolean",
+          "column": "is_sso_user",
+          "default": "false",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "deleted_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "boolean",
+          "column": "is_anonymous",
+          "default": "false",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "CHECK (email_change_confirm_status >= 0 AND email_change_confirm_status <= 2)",
+          "name": "users_email_change_confirm_status_check",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "UNIQUE (phone)",
+          "name": "users_phone_key",
+          "type": "u",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "users_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX confirmation_token_idx ON auth.users USING btree (confirmation_token) WHERE ((confirmation_token)::text !~ '^[0-9 ]*$'::text)",
+          "name": "confirmation_token_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX email_change_token_current_idx ON auth.users USING btree (email_change_token_current) WHERE ((email_change_token_current)::text !~ '^[0-9 ]*$'::text)",
+          "name": "email_change_token_current_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX email_change_token_new_idx ON auth.users USING btree (email_change_token_new) WHERE ((email_change_token_new)::text !~ '^[0-9 ]*$'::text)",
+          "name": "email_change_token_new_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX idx_users_created_at_desc ON auth.users USING btree (created_at DESC)",
+          "name": "idx_users_created_at_desc",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX idx_users_email ON auth.users USING btree (email)",
+          "name": "idx_users_email",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX idx_users_last_sign_in_at_desc ON auth.users USING btree (last_sign_in_at DESC)",
+          "name": "idx_users_last_sign_in_at_desc",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX idx_users_name ON auth.users USING btree (((raw_user_meta_data ->> 'name'::text))) WHERE ((raw_user_meta_data ->> 'name'::text) IS NOT NULL)",
+          "name": "idx_users_name",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX reauthentication_token_idx ON auth.users USING btree (reauthentication_token) WHERE ((reauthentication_token)::text !~ '^[0-9 ]*$'::text)",
+          "name": "reauthentication_token_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX recovery_token_idx ON auth.users USING btree (recovery_token) WHERE ((recovery_token)::text !~ '^[0-9 ]*$'::text)",
+          "name": "recovery_token_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX users_email_partial_key ON auth.users USING btree (email) WHERE (is_sso_user = false)",
+          "name": "users_email_partial_key",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX users_instance_id_email_idx ON auth.users USING btree (instance_id, lower((email)::text))",
+          "name": "users_instance_id_email_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX users_instance_id_idx ON auth.users USING btree (instance_id)",
+          "name": "users_instance_id_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX users_is_anonymous_idx ON auth.users USING btree (is_anonymous)",
+          "name": "users_is_anonymous_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX users_phone_key ON auth.users USING btree (phone)",
+          "name": "users_phone_key",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX users_pkey ON auth.users USING btree (id)",
+          "name": "users_pkey",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": [
+        {
+          "ddl": "CREATE TRIGGER dic_auth_user_created AFTER INSERT ON auth.users FOR EACH ROW EXECUTE FUNCTION private.handle_new_auth_user()",
+          "name": "dic_auth_user_created",
+          "enabled": "O"
+        }
+      ],
+      "policies": null,
+      "catalog_md5": "52f92fedb5723ccedc65c448847f2e65",
+      "ordinal": 25,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 26,
+      "nspname": "auth",
+      "relname": "webauthn_challenges",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": "gen_random_uuid()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "user_id",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "challenge_type",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "jsonb",
+          "column": "session_data",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "expires_at",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "CHECK (challenge_type = ANY (ARRAY['signup'::text, 'registration'::text, 'authentication'::text]))",
+          "name": "webauthn_challenges_challenge_type_check",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "webauthn_challenges_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+          "name": "webauthn_challenges_user_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX webauthn_challenges_expires_at_idx ON auth.webauthn_challenges USING btree (expires_at)",
+          "name": "webauthn_challenges_expires_at_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX webauthn_challenges_pkey ON auth.webauthn_challenges USING btree (id)",
+          "name": "webauthn_challenges_pkey",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX webauthn_challenges_user_id_idx ON auth.webauthn_challenges USING btree (user_id)",
+          "name": "webauthn_challenges_user_id_idx",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "2b3fac6c0cff9f1b01a4837334d1aa28",
+      "ordinal": 26,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 27,
+      "nspname": "auth",
+      "relname": "webauthn_credentials",
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": "gen_random_uuid()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "user_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "bytea",
+          "column": "credential_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "bytea",
+          "column": "public_key",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "attestation_type",
+          "default": "''::text",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "aaguid",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "bigint",
+          "column": "sign_count",
+          "default": "0",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "jsonb",
+          "column": "transports",
+          "default": "'[]'::jsonb",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "boolean",
+          "column": "backup_eligible",
+          "default": "false",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "boolean",
+          "column": "backed_up",
+          "default": "false",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "friendly_name",
+          "default": "''::text",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "updated_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "last_used_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "webauthn_credentials_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE CASCADE",
+          "name": "webauthn_credentials_user_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX webauthn_credentials_credential_id_key ON auth.webauthn_credentials USING btree (credential_id)",
+          "name": "webauthn_credentials_credential_id_key",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX webauthn_credentials_pkey ON auth.webauthn_credentials USING btree (id)",
+          "name": "webauthn_credentials_pkey",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX webauthn_credentials_user_id_idx ON auth.webauthn_credentials USING btree (user_id)",
+          "name": "webauthn_credentials_user_id_idx",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "c631ace49614ced70d9c8fb066d3e4ee",
+      "ordinal": 27,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Supabase GoTrue-managed authentication table; no anon/auth SQL table privileges verified. RLS-off alone is not unauthorized access. Preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 1,
+      "nspname": "realtime",
+      "relname": "messages",
+      "owner": "supabase_realtime_admin",
+      "relkind": "p",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": true,
+      "anon_insert": true,
+      "anon_update": true,
+      "anon_delete": false,
+      "auth_select": true,
+      "auth_insert": true,
+      "auth_update": true,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "text",
+          "column": "topic",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "extension",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "jsonb",
+          "column": "payload",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "event",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "boolean",
+          "column": "private",
+          "default": "false",
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp without time zone",
+          "column": "updated_at",
+          "default": "timezone('utc'::text, clock_timestamp())",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp without time zone",
+          "column": "inserted_at",
+          "default": "timezone('utc'::text, clock_timestamp())",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": "gen_random_uuid()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "bytea",
+          "column": "binary_payload",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "boolean",
+          "column": "skip_broadcast",
+          "default": "false",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "CHECK (payload IS NULL OR binary_payload IS NULL) NOT VALID",
+          "name": "messages_payload_exclusive",
+          "type": "c",
+          "validated": false,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (id, inserted_at)",
+          "name": "messages_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX messages_inserted_at_topic_index ON ONLY realtime.messages USING btree (inserted_at DESC, topic) WHERE ((extension = 'broadcast'::text) AND (private IS TRUE))",
+          "name": "messages_inserted_at_topic_index",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX messages_pkey ON ONLY realtime.messages USING btree (id, inserted_at)",
+          "name": "messages_pkey",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "a340cc872ff65b46db05cd0996041f57",
+      "ordinal": 28,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Migration metadata/control; no anon/auth table SQL access; preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 2,
+      "nspname": "realtime",
+      "relname": "schema_migrations",
+      "owner": "supabase_admin",
+      "relkind": "r",
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "bigint",
+          "column": "version",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp(0) without time zone",
+          "column": "inserted_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "PRIMARY KEY (version)",
+          "name": "schema_migrations_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX schema_migrations_pkey ON realtime.schema_migrations USING btree (version)",
+          "name": "schema_migrations_pkey",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "1914a5495d63036ae6e6896ebeaebd45",
+      "ordinal": 29,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Migration metadata/control; no anon/auth table SQL access; preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 3,
+      "nspname": "realtime",
+      "relname": "subscription",
+      "owner": "supabase_realtime_admin",
+      "relkind": "r",
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "anon_select": true,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "bigint",
+          "column": "id",
+          "default": null,
+          "identity": "a",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "subscription_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "regclass",
+          "column": "entity",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "realtime.user_defined_filter[]",
+          "column": "filters",
+          "default": "'{}'::realtime.user_defined_filter[]",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "jsonb",
+          "column": "claims",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "regrole",
+          "column": "claims_role",
+          "default": "realtime.to_regrole((claims ->> 'role'::text))",
+          "identity": "",
+          "not_null": true,
+          "generated": "s"
+        },
+        {
+          "type": "timestamp without time zone",
+          "column": "created_at",
+          "default": "timezone('utc'::text, now())",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "action_filter",
+          "default": "'*'::text",
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text[]",
+          "column": "selected_columns",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "pk_subscription",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (action_filter = ANY (ARRAY['*'::text, 'INSERT'::text, 'UPDATE'::text, 'DELETE'::text]))",
+          "name": "subscription_action_filter_check",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX ix_realtime_subscription_entity ON realtime.subscription USING btree (entity)",
+          "name": "ix_realtime_subscription_entity",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX pk_subscription ON realtime.subscription USING btree (id)",
+          "name": "pk_subscription",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX subscription_subscription_id_entity_filters_action_filter_selec ON realtime.subscription USING btree (subscription_id, entity, filters, action_filter, COALESCE(selected_columns, '{}'::text[]))",
+          "name": "subscription_subscription_id_entity_filters_action_filter_selec",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": [
+        {
+          "ddl": "CREATE TRIGGER tr_check_filters BEFORE INSERT OR UPDATE ON realtime.subscription FOR EACH ROW EXECUTE FUNCTION realtime.subscription_check_filters()",
+          "name": "tr_check_filters",
+          "enabled": "O"
+        }
+      ],
+      "policies": null,
+      "catalog_md5": "eb6f2fa76dc73e6882bcd1f6f0299d95",
+      "ordinal": 30,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Anon/auth SQL SELECT and no RLS; hosted API exposed-schema reachability UNVERIFIED, zero rows in prior bounded aggregate; preserve and investigate with #96",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 4,
+      "nspname": "storage",
+      "relname": "buckets",
+      "owner": "supabase_storage_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": true,
+      "anon_insert": true,
+      "anon_update": true,
+      "anon_delete": true,
+      "auth_select": true,
+      "auth_insert": true,
+      "auth_update": true,
+      "auth_delete": true,
+      "columns": [
+        {
+          "type": "text",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "name",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "owner",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "updated_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "boolean",
+          "column": "public",
+          "default": "false",
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "boolean",
+          "column": "avif_autodetection",
+          "default": "false",
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "bigint",
+          "column": "file_size_limit",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text[]",
+          "column": "allowed_mime_types",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "owner_id",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "storage.buckettype",
+          "column": "type",
+          "default": "'STANDARD'::storage.buckettype",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "versioning_status",
+          "default": "'DISABLED'::text",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "jsonb",
+          "column": "lifecycle_configuration",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "lifecycle_configuration_generation",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "CHECK ((lifecycle_configuration IS NULL) = (lifecycle_configuration_generation IS NULL))",
+          "name": "buckets_lifecycle_configuration_pair_check",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (lifecycle_configuration IS NULL OR jsonb_typeof(lifecycle_configuration) = 'object'::text AND lifecycle_configuration ? 'rules'::text AND\nCASE\n    WHEN jsonb_typeof(lifecycle_configuration -> 'rules'::text) = 'array'::text THEN jsonb_array_length(lifecycle_configuration -> 'rules'::text) >= 1 AND jsonb_array_length(lifecycle_configuration -> 'rules'::text) <= 1000\n    ELSE false\nEND)",
+          "name": "buckets_lifecycle_configuration_shape_check",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (type = 'STANDARD'::storage.buckettype OR lifecycle_configuration IS NULL AND lifecycle_configuration_generation IS NULL)",
+          "name": "buckets_lifecycle_configuration_standard_only_check",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "buckets_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (versioning_status = 'DISABLED'::text)",
+          "name": "buckets_versioning_dark_check",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (type = 'STANDARD'::storage.buckettype OR versioning_status = 'DISABLED'::text)",
+          "name": "buckets_versioning_standard_only_check",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "CHECK (versioning_status = ANY (ARRAY['DISABLED'::text, 'ENABLED'::text, 'SUSPENDED'::text]))",
+          "name": "buckets_versioning_status_check",
+          "type": "c",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX bname ON storage.buckets USING btree (name)",
+          "name": "bname",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX buckets_pkey ON storage.buckets USING btree (id)",
+          "name": "buckets_pkey",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": [
+        {
+          "ddl": "CREATE TRIGGER enforce_bucket_name_length_trigger BEFORE INSERT OR UPDATE OF name ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.enforce_bucket_name_length()",
+          "name": "enforce_bucket_name_length_trigger",
+          "enabled": "O"
+        },
+        {
+          "ddl": "CREATE TRIGGER protect_bucket_control_insert BEFORE INSERT ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.protect_bucket_control_columns('service_role')",
+          "name": "protect_bucket_control_insert",
+          "enabled": "O"
+        },
+        {
+          "ddl": "CREATE TRIGGER protect_bucket_control_update BEFORE UPDATE OF lifecycle_configuration, lifecycle_configuration_generation ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.protect_bucket_control_columns()",
+          "name": "protect_bucket_control_update",
+          "enabled": "O"
+        },
+        {
+          "ddl": "CREATE TRIGGER protect_bucket_control_update_role AFTER UPDATE OF lifecycle_configuration, lifecycle_configuration_generation ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.enforce_bucket_lifecycle_service_role('service_role')",
+          "name": "protect_bucket_control_update_role",
+          "enabled": "O"
+        },
+        {
+          "ddl": "CREATE TRIGGER protect_buckets_delete BEFORE DELETE ON storage.buckets FOR EACH STATEMENT EXECUTE FUNCTION storage.protect_delete()",
+          "name": "protect_buckets_delete",
+          "enabled": "O"
+        }
+      ],
+      "policies": null,
+      "catalog_md5": "df29d0c2d8f7d42acfaec482538dffcb",
+      "ordinal": 31,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Storage owner-managed table with RLS; client SQL grants where present do not bypass RLS; preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 5,
+      "nspname": "storage",
+      "relname": "buckets_analytics",
+      "owner": "supabase_storage_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": true,
+      "anon_insert": true,
+      "anon_update": true,
+      "anon_delete": true,
+      "auth_select": true,
+      "auth_insert": true,
+      "auth_update": true,
+      "auth_delete": true,
+      "columns": [
+        {
+          "type": "text",
+          "column": "name",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "storage.buckettype",
+          "column": "type",
+          "default": "'ANALYTICS'::storage.buckettype",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "format",
+          "default": "'ICEBERG'::text",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "updated_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": "gen_random_uuid()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "deleted_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "buckets_analytics_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX buckets_analytics_pkey ON storage.buckets_analytics USING btree (id)",
+          "name": "buckets_analytics_pkey",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX buckets_analytics_unique_name_idx ON storage.buckets_analytics USING btree (name) WHERE (deleted_at IS NULL)",
+          "name": "buckets_analytics_unique_name_idx",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "ce7139846d6dc501522d43a3d0086819",
+      "ordinal": 32,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Storage owner-managed table with RLS; client SQL grants where present do not bypass RLS; preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 6,
+      "nspname": "storage",
+      "relname": "buckets_vectors",
+      "owner": "supabase_storage_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": true,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "text",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "storage.buckettype",
+          "column": "type",
+          "default": "'VECTOR'::storage.buckettype",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "updated_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "buckets_vectors_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX buckets_vectors_pkey ON storage.buckets_vectors USING btree (id)",
+          "name": "buckets_vectors_pkey",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "0beddc4a88bfdb282ec7674789d0637f",
+      "ordinal": 33,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Storage owner-managed table with RLS; client SQL grants where present do not bypass RLS; preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 7,
+      "nspname": "storage",
+      "relname": "migrations",
+      "owner": "supabase_storage_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "integer",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "character varying(100)",
+          "column": "name",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "character varying(40)",
+          "column": "hash",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp without time zone",
+          "column": "executed_at",
+          "default": "CURRENT_TIMESTAMP",
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "UNIQUE (name)",
+          "name": "migrations_name_key",
+          "type": "u",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "migrations_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX migrations_name_key ON storage.migrations USING btree (name)",
+          "name": "migrations_name_key",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX migrations_pkey ON storage.migrations USING btree (id)",
+          "name": "migrations_pkey",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "cd64c0fc1c2ece79976d80b706d8982b",
+      "ordinal": 34,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Storage owner-managed table with RLS; client SQL grants where present do not bypass RLS; preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 8,
+      "nspname": "storage",
+      "relname": "objects",
+      "owner": "supabase_storage_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": true,
+      "anon_insert": true,
+      "anon_update": true,
+      "anon_delete": true,
+      "auth_select": true,
+      "auth_insert": true,
+      "auth_update": true,
+      "auth_delete": true,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": "gen_random_uuid()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "bucket_id",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "name",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "uuid",
+          "column": "owner",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "updated_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "last_accessed_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "jsonb",
+          "column": "metadata",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text[]",
+          "column": "path_tokens",
+          "default": "string_to_array(name, '/'::text)",
+          "identity": "",
+          "not_null": false,
+          "generated": "s"
+        },
+        {
+          "type": "text",
+          "column": "version",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "owner_id",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "jsonb",
+          "column": "user_metadata",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "archived_at",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "boolean",
+          "column": "is_delete_marker",
+          "default": "false",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "boolean",
+          "column": "is_versioned",
+          "default": "false",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "FOREIGN KEY (bucket_id) REFERENCES storage.buckets(id)",
+          "name": "objects_bucketId_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "objects_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX idx_objects_bucket_id_name ON storage.objects USING btree (bucket_id, name COLLATE \"C\")",
+          "name": "idx_objects_bucket_id_name",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX idx_objects_bucket_id_name_lower ON storage.objects USING btree (bucket_id, lower(name) COLLATE \"C\")",
+          "name": "idx_objects_bucket_id_name_lower",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX idx_objects_current_version ON storage.objects USING btree (bucket_id, name COLLATE \"C\") WHERE (archived_at IS NULL)",
+          "name": "idx_objects_current_version",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX idx_objects_delete_markers ON storage.objects USING btree (bucket_id, name COLLATE \"C\") WHERE is_delete_marker",
+          "name": "idx_objects_delete_markers",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX idx_objects_null_version ON storage.objects USING btree (bucket_id, name COLLATE \"C\") WHERE (NOT is_versioned)",
+          "name": "idx_objects_null_version",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE INDEX name_prefix_search ON storage.objects USING btree (name text_pattern_ops)",
+          "name": "name_prefix_search",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX objects_bucket_id_name_version_key ON storage.objects USING btree (bucket_id, name COLLATE \"C\", version) NULLS NOT DISTINCT",
+          "name": "objects_bucket_id_name_version_key",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX objects_pkey ON storage.objects USING btree (id)",
+          "name": "objects_pkey",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": [
+        {
+          "ddl": "CREATE TRIGGER protect_objects_delete BEFORE DELETE ON storage.objects FOR EACH STATEMENT EXECUTE FUNCTION storage.protect_delete()",
+          "name": "protect_objects_delete",
+          "enabled": "O"
+        },
+        {
+          "ddl": "CREATE TRIGGER update_objects_updated_at BEFORE UPDATE ON storage.objects FOR EACH ROW EXECUTE FUNCTION storage.update_updated_at_column()",
+          "name": "update_objects_updated_at",
+          "enabled": "O"
+        }
+      ],
+      "policies": null,
+      "catalog_md5": "c0119611fc2d345f7ce294c56b6f9a3a",
+      "ordinal": 35,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Storage owner-managed table with RLS; client SQL grants where present do not bypass RLS; preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 9,
+      "nspname": "storage",
+      "relname": "s3_multipart_uploads",
+      "owner": "supabase_storage_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": true,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "text",
+          "column": "id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "bigint",
+          "column": "in_progress_size",
+          "default": "0",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "upload_signature",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "bucket_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "key",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "version",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "owner_id",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "jsonb",
+          "column": "user_metadata",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "jsonb",
+          "column": "metadata",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "FOREIGN KEY (bucket_id) REFERENCES storage.buckets(id)",
+          "name": "s3_multipart_uploads_bucket_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "s3_multipart_uploads_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE INDEX idx_multipart_uploads_list ON storage.s3_multipart_uploads USING btree (bucket_id, key, created_at)",
+          "name": "idx_multipart_uploads_list",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX s3_multipart_uploads_pkey ON storage.s3_multipart_uploads USING btree (id)",
+          "name": "s3_multipart_uploads_pkey",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "bc4282e9962fdfc2b9e0205be01c3492",
+      "ordinal": 36,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Storage owner-managed table with RLS; client SQL grants where present do not bypass RLS; preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 10,
+      "nspname": "storage",
+      "relname": "s3_multipart_uploads_parts",
+      "owner": "supabase_storage_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": true,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "uuid",
+          "column": "id",
+          "default": "gen_random_uuid()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "upload_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "bigint",
+          "column": "size",
+          "default": "0",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "integer",
+          "column": "part_number",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "bucket_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "key",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "etag",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "owner_id",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "version",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "FOREIGN KEY (bucket_id) REFERENCES storage.buckets(id)",
+          "name": "s3_multipart_uploads_parts_bucket_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "s3_multipart_uploads_parts_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "FOREIGN KEY (upload_id) REFERENCES storage.s3_multipart_uploads(id) ON DELETE CASCADE",
+          "name": "s3_multipart_uploads_parts_upload_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX s3_multipart_uploads_parts_pkey ON storage.s3_multipart_uploads_parts USING btree (id)",
+          "name": "s3_multipart_uploads_parts_pkey",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "0e1580853701b0dfb353376999c57bd2",
+      "ordinal": 37,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Storage owner-managed table with RLS; client SQL grants where present do not bypass RLS; preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 11,
+      "nspname": "storage",
+      "relname": "vector_indexes",
+      "owner": "supabase_storage_admin",
+      "relkind": "r",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "anon_select": true,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "text",
+          "column": "id",
+          "default": "gen_random_uuid()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "name",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "bucket_id",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "data_type",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "integer",
+          "column": "dimension",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "distance_metric",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "jsonb",
+          "column": "metadata_configuration",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "created_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "timestamp with time zone",
+          "column": "updated_at",
+          "default": "now()",
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "FOREIGN KEY (bucket_id) REFERENCES storage.buckets_vectors(id)",
+          "name": "vector_indexes_bucket_id_fkey",
+          "type": "f",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (id)",
+          "name": "vector_indexes_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX vector_indexes_name_bucket_id_idx ON storage.vector_indexes USING btree (name, bucket_id)",
+          "name": "vector_indexes_name_bucket_id_idx",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX vector_indexes_pkey ON storage.vector_indexes USING btree (id)",
+          "name": "vector_indexes_pkey",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "b49ff400da81eb2da469b8d5c6c56ead",
+      "ordinal": 38,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Storage owner-managed table with RLS; client SQL grants where present do not bypass RLS; preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    },
+    {
+      "rn": 12,
+      "nspname": "supabase_migrations",
+      "relname": "schema_migrations",
+      "owner": "postgres",
+      "relkind": "r",
+      "relrowsecurity": false,
+      "relforcerowsecurity": false,
+      "anon_select": false,
+      "anon_insert": false,
+      "anon_update": false,
+      "anon_delete": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false,
+      "columns": [
+        {
+          "type": "text",
+          "column": "version",
+          "default": null,
+          "identity": "",
+          "not_null": true,
+          "generated": ""
+        },
+        {
+          "type": "text[]",
+          "column": "statements",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "name",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "created_by",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text",
+          "column": "idempotency_key",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        },
+        {
+          "type": "text[]",
+          "column": "rollback",
+          "default": null,
+          "identity": "",
+          "not_null": false,
+          "generated": ""
+        }
+      ],
+      "constraints": [
+        {
+          "ddl": "UNIQUE (idempotency_key)",
+          "name": "schema_migrations_idempotency_key_key",
+          "type": "u",
+          "validated": true,
+          "deferrable": false
+        },
+        {
+          "ddl": "PRIMARY KEY (version)",
+          "name": "schema_migrations_pkey",
+          "type": "p",
+          "validated": true,
+          "deferrable": false
+        }
+      ],
+      "indexes": [
+        {
+          "ddl": "CREATE UNIQUE INDEX schema_migrations_idempotency_key_key ON supabase_migrations.schema_migrations USING btree (idempotency_key)",
+          "name": "schema_migrations_idempotency_key_key",
+          "ready": true,
+          "valid": true
+        },
+        {
+          "ddl": "CREATE UNIQUE INDEX schema_migrations_pkey ON supabase_migrations.schema_migrations USING btree (version)",
+          "name": "schema_migrations_pkey",
+          "ready": true,
+          "valid": true
+        }
+      ],
+      "custom_triggers": null,
+      "policies": null,
+      "catalog_md5": "fc2553848d4fd29735dd55d18c54981a",
+      "ordinal": 39,
+      "source_kind": "RECONSTRUCTED_LIVE_PG_CATALOG_COLUMNS_CONSTRAINTS_INDEXES_TRIGGERS_POLICIES_NOT_ORIGINAL_HISTORIC_CREATE_TABLE_MIGRATION",
+      "reviewed_content": "ALL_CURRENT_ACCESSIBLE_COLUMN_DEFAULT_CONSTRAINT_INDEX_CUSTOM_TRIGGER_POLICY_DEFINITIONS; catalog-md5",
+      "assessment": "Migration metadata/control; no anon/auth table SQL access; preserve",
+      "findings": [],
+      "disposition": "PRESERVE_NO_SAFE_REMOVAL_ESTABLISHED"
+    }
+  ]
+}
