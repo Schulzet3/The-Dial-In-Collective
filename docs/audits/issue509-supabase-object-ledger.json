@@ -1146,14 +1146,14 @@
     ]
   },
   "coverage": {
-    "current_scope": "APP_SQL_FUNCTIONS_99_99; APP_TABLE_DEFINITION_COMPONENTS_46_46; ALL_9_ACCESSIBLE_DEPLOYED_EDGE_FILE_VARIANTS_DIRECTLY_REVIEWED; STORAGE_PROVIDER_19_19_SQL_DIRECT; REALTIME_PROVIDER_18_18_SQL_DIRECT",
+    "current_scope": "APP_SQL_FUNCTIONS_99_99; APP_TABLE_DEFINITION_COMPONENTS_46_46; ALL_9_ACCESSIBLE_DEPLOYED_EDGE_FILE_VARIANTS_DIRECTLY_REVIEWED; STORAGE_PROVIDER_19_19_SQL_DIRECT; REALTIME_PROVIDER_18_18_SQL_DIRECT; PGBOUNCER1_VAULT5_EXTENSIONS90_FULL_VISIBLE_DECLARATIONS",
     "semantic_reviewed_functions": 99,
     "total_application_functions": 99,
     "source_characters_semantically_read": 207402,
     "source_whitespace_tokens_semantically_read": 16880,
     "total_source_characters": 207402,
     "next_function_ordinal": null,
-    "next_object": "pgbouncer.get_auth(text) complete SQL, then vault 5 funcs, extensions 90 declarations and owner-dependent provider dependencies; hosted Auth/Realtime API unverified",
+    "next_object": "Remaining provider dependency catalog edges, hosted Auth/HTTP/runtime/API security, migration full SQL drift and advisory candidate validation; compiled C bodies unavailable",
     "other_objects": "99/99 application SQL function definitions, 46/46 application table catalog definitions, 9/9 accessible deployed Edge file variants complete; platform/vendor SQL, Auth/Storage/cron/Realtime, migration drift, external dependency calls, performance and limits still incomplete; platform table definitions auth27/storage8/realtime3 direct review complete; platform functions, other tables, database migration SQL bodies still unverified; additional provider catalog review supabase_migrations(1 table), vault(1 table+1 view), extensions(2 views), without secret records",
     "platform_objects": "DIRECT_PROVIDER_CATALOG_TABLES_AUTH27_STORAGE8_REALTIME3_SUPABASE_MIGRATIONS1_VAULT1=40_TABLES; DIRECT_VIEWS_VAULT1_EXTENSIONS2=3; DIRECT_PROVIDER_SQL_FUNCTION_BODIES_42_OF_42_AUTH4_GRAPHQL1_STORAGE19_REALTIME18",
     "edge_function_sources_reviewed": 9,
@@ -2740,9 +2740,20 @@
         "docs/audits/issue509-provider-realtime-functions-remaining-20261105-run17.json"
       ],
       "next": "pgbouncer.get_auth(text), vault and extensions complete provider SQL/declarations; provider dependency, hosted runtime/Auth and migration drift."
+    },
+    {
+      "run": "2026-11-05 run17 adjacent provider pgbouncer/vault/extensions",
+      "source_sha_before": "6b24d580d87afa219cdc0515971af1f0ede7e766",
+      "nonoverlap_declarations": 96,
+      "plpgsql_source": 9,
+      "c_declarations": 87,
+      "visible_chars": 28738,
+      "provider_writes": 0,
+      "code_fixes": 0,
+      "next": "Remaining provider dependency catalog edges, hosted Auth/HTTP/runtime/API security, migration full SQL drift and advisory candidate validation; compiled C bodies unavailable"
     }
   ],
-  "state": "APP_SQL_FUNCTIONS_99_OF_99; APP_TABLES_46_OF_46_COMPONENTS_DIRECTLY_READ; EDGE_DEPLOYED_SOURCE_9_OF_9_VARIANTS; FULL_PROVIDER_AUDIT_IN_PROGRESS; #527_READY_NOT_DEPLOYED; PLATFORM_AUTH_27_STORAGE_8_REALTIME_3_TABLE_DEFINITIONS_DIRECT_REVIEWED; FULL_PROVIDER_AUDIT_IN_PROGRESS; VENDOR_OTHER_TABLE_VIEWS_5_DIRECT_COMPONENTS_READ; PLATFORM_SOURCE_FUNCS_AUTH4_GRAPHQL1_STORAGE10_REALTIME7_DIRECT_REVIEW; PLATFORM_SQL_FUNCTION_BODIES_42_OF_42_FOR_AUTH_GRAPHQL_STORAGE_REALTIME; ALL_PROVIDER_NATIVE_AND_HOSTED_BASELINE_IN_PROGRESS",
+  "state": "APP_SQL_FUNCTIONS_99_OF_99; APP_TABLES_46_OF_46_COMPONENTS_DIRECTLY_READ; EDGE_DEPLOYED_SOURCE_9_OF_9_VARIANTS; FULL_PROVIDER_AUDIT_IN_PROGRESS; #527_READY_NOT_DEPLOYED; PLATFORM_AUTH_27_STORAGE_8_REALTIME_3_TABLE_DEFINITIONS_DIRECT_REVIEWED; FULL_PROVIDER_AUDIT_IN_PROGRESS; VENDOR_OTHER_TABLE_VIEWS_5_DIRECT_COMPONENTS_READ; PLATFORM_SOURCE_FUNCS_AUTH4_GRAPHQL1_STORAGE10_REALTIME7_DIRECT_REVIEW; PLATFORM_SQL_FUNCTION_BODIES_42_OF_42_FOR_AUTH_GRAPHQL_STORAGE_REALTIME; ALL_PROVIDER_NATIVE_AND_HOSTED_BASELINE_IN_PROGRESS; ADJACENT_PROVIDER_DECLARATIONS_96_96_NATIVE_CODE_UNVERIFIED",
   "application_table_review": {
     "total": 46,
     "current_index": 46,
@@ -4983,5 +4994,791 @@
     ],
     "next": "storage.list_multipart_uploads_with_delimiter (first unreviewed alphabetical storage function after get_size_by_bucket); realtime.apply_rls full 16,476-char body before other realtime functions; extensions 90 source/extension code with C-language binary-limit classification",
     "limitations": "Source reading alone is not an isolated authorization test; no provider function invoked or production data accessed."
+  },
+  "provider_adjacent_function_review": {
+    "project_ref": "azviqqejypsefzilgonr",
+    "scope": "pgbouncer/vault/extensions",
+    "status": "COMPLETE_VISIBLE_SQL_AND_C_DECLARATIONS_NOT_NATIVE_C_BINARY",
+    "counts": {
+      "extensions": 90,
+      "pgbouncer": 1,
+      "vault": 5
+    },
+    "reviewed": 96,
+    "decompiled_text_chars": 28738,
+    "plpgsql_direct": 9,
+    "c_declarations_direct": 87,
+    "evidence_path": "docs/audits/issue509-adjacent-provider-funcs-096-20261105-run17.json",
+    "per_object_identity_hashes": [
+      {
+        "identity": "armor(bytea,text[],text[])",
+        "language": "c",
+        "md5": "f8332991aecc898370b20b7d68b3f08c",
+        "chars": 177,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "armor(bytea)",
+        "language": "c",
+        "md5": "8b26fd3b767373f628d8296b22c58569",
+        "chars": 161,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "crypt(text,text)",
+        "language": "c",
+        "md5": "f92effa5862ce095a56289da31c7f2f2",
+        "chars": 166,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "dearmor(text)",
+        "language": "c",
+        "md5": "8e4be29a02a595ea10e204c070e18b75",
+        "chars": 165,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "decrypt_iv(bytea,bytea,bytea,text)",
+        "language": "c",
+        "md5": "6378f3a8f61df6ae8edd0837fd8cb4d7",
+        "chars": 192,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "decrypt(bytea,bytea,text)",
+        "language": "c",
+        "md5": "18e4fb227e3460385309c2c880ce6346",
+        "chars": 179,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "digest(bytea,text)",
+        "language": "c",
+        "md5": "85b88685f74a398b1ff164ad33eeaaca",
+        "chars": 170,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "digest(text,text)",
+        "language": "c",
+        "md5": "95de9cf8798b911a1fe38c27bdb570de",
+        "chars": 169,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "encrypt_iv(bytea,bytea,bytea,text)",
+        "language": "c",
+        "md5": "524e5bac5ae4a00c5a3ec1d72b98798f",
+        "chars": 192,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "encrypt(bytea,bytea,text)",
+        "language": "c",
+        "md5": "bd196881d3cc43555e5b197d6050cc68",
+        "chars": 179,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "gen_random_bytes(integer)",
+        "language": "c",
+        "md5": "a7569a34c9be929beb24ef5670d42636",
+        "chars": 172,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "extensions.gen_random_uuid()",
+        "language": "c",
+        "md5": "6504babb8130d35e393998bd2856ec61",
+        "chars": 155,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "gen_salt(text,integer)",
+        "language": "c",
+        "md5": "60f792dd2967e22964c0ffcec9d34342",
+        "chars": 172,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "gen_salt(text)",
+        "language": "c",
+        "md5": "0ab5bda2fff1fa217935db57c0fe0738",
+        "chars": 156,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "gin_extract_query_trgm(text,internal,smallint,internal,internal,internal,internal)",
+        "language": "c",
+        "md5": "4e57c26aecfe55d3fd623889cb4fbd83",
+        "chars": 254,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "gin_extract_value_trgm(text,internal)",
+        "language": "c",
+        "md5": "eb3648571a6cea919affc87c7ad052ef",
+        "chars": 204,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "gin_trgm_consistent(internal,smallint,text,integer,internal,internal,internal,internal)",
+        "language": "c",
+        "md5": "f8c3bd19206df13ca49d87b885a5dc45",
+        "chars": 256,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "gin_trgm_triconsistent(internal,smallint,text,integer,internal,internal,internal)",
+        "language": "c",
+        "md5": "d74f19c32f7663f1e3706c9b87076f9e",
+        "chars": 251,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "grant_pg_cron_access()",
+        "language": "plpgsql",
+        "md5": "53a44336da0ac1dd62d89dbd988e6d1d",
+        "chars": 1343,
+        "source_read": true,
+        "native_binary_unavailable": false
+      },
+      {
+        "identity": "grant_pg_graphql_access()",
+        "language": "plpgsql",
+        "md5": "4e6d7efe4aed1b3b92063b648aa7a0cf",
+        "chars": 1509,
+        "source_read": true,
+        "native_binary_unavailable": false
+      },
+      {
+        "identity": "grant_pg_net_access()",
+        "language": "plpgsql",
+        "md5": "1d06ef4fb47bb0ab6e6f8818a62013bb",
+        "chars": 2147,
+        "source_read": true,
+        "native_binary_unavailable": false
+      },
+      {
+        "identity": "gtrgm_compress(internal)",
+        "language": "c",
+        "md5": "097d1242ee8dd0644cc01d51cc15ff1e",
+        "chars": 182,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "gtrgm_consistent(internal,text,smallint,oid,internal)",
+        "language": "c",
+        "md5": "e6afa5a46f28d6c5f3ac3bc074f8a041",
+        "chars": 216,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "gtrgm_decompress(internal)",
+        "language": "c",
+        "md5": "1ce8b715cc46977e2954a66b067e5756",
+        "chars": 186,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "gtrgm_distance(internal,text,smallint,oid,internal)",
+        "language": "c",
+        "md5": "b89a4cb78ea3cf759383b83afa306bdd",
+        "chars": 221,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "gtrgm_in(cstring)",
+        "language": "c",
+        "md5": "0495e1484f798dabd57746d9ad20b073",
+        "chars": 166,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "gtrgm_options(internal)",
+        "language": "c",
+        "md5": "40e1a766cfaed200b116f7a9a1fa2ef1",
+        "chars": 169,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "gtrgm_out(gtrgm)",
+        "language": "c",
+        "md5": "edbeb0b107fc9c4972f8e44a67295b18",
+        "chars": 168,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "gtrgm_penalty(internal,internal,internal)",
+        "language": "c",
+        "md5": "817a4ad119cd02755937c0026dd7216b",
+        "chars": 200,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "gtrgm_picksplit(internal,internal)",
+        "language": "c",
+        "md5": "ea21ccb5a294e06487a67953f9d241d4",
+        "chars": 194,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "gtrgm_same(gtrgm,gtrgm,internal)",
+        "language": "c",
+        "md5": "e43ecd9044c97430336c22788f07326e",
+        "chars": 188,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "gtrgm_union(internal,internal)",
+        "language": "c",
+        "md5": "5a2ac74f7d8febc467cdd51d8608576e",
+        "chars": 183,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "hmac(bytea,bytea,text)",
+        "language": "c",
+        "md5": "791ceef3f202e631f7cc11017fbf00de",
+        "chars": 173,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "hmac(text,text,text)",
+        "language": "c",
+        "md5": "361d12259351f9df05ddf92c6bfd4224",
+        "chars": 171,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pg_stat_statements_info()",
+        "language": "c",
+        "md5": "1ab5e3c4a7d6213abb0022730b9931ce",
+        "chars": 251,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pg_stat_statements_reset(oid,oid,bigint,boolean)",
+        "language": "c",
+        "md5": "a3efe1fd4fbffb0c0f99da1ed283f7d8",
+        "chars": 317,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pg_stat_statements(boolean)",
+        "language": "c",
+        "md5": "507a52a27907a48b0018326a15b3c595",
+        "chars": 1785,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pgp_armor_headers(text)",
+        "language": "c",
+        "md5": "a018f2bd7bcaae86efe1a9e7bd9a383b",
+        "chars": 219,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pgp_key_id(bytea)",
+        "language": "c",
+        "md5": "622562b45d5a075400d293c5a48c18e9",
+        "chars": 170,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pgp_pub_decrypt_bytea(bytea,bytea,text,text)",
+        "language": "c",
+        "md5": "07ee5afa371340ba85ae1d93e9dc8ad1",
+        "chars": 210,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pgp_pub_decrypt_bytea(bytea,bytea,text)",
+        "language": "c",
+        "md5": "00666f7e5e717d5ef4c7035a7858b380",
+        "chars": 204,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pgp_pub_decrypt_bytea(bytea,bytea)",
+        "language": "c",
+        "md5": "9b91d112df744c646565d7e80ec151ea",
+        "chars": 198,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pgp_pub_decrypt(bytea,bytea,text,text)",
+        "language": "c",
+        "md5": "fc84f59fd544cf2c70a3e65dbfdff1e7",
+        "chars": 202,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pgp_pub_decrypt(bytea,bytea,text)",
+        "language": "c",
+        "md5": "85340917f0f739c0b8d6a6673e5012c3",
+        "chars": 196,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pgp_pub_decrypt(bytea,bytea)",
+        "language": "c",
+        "md5": "1d596379caf583a571a96539f01eb16b",
+        "chars": 190,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pgp_pub_encrypt_bytea(bytea,bytea,text)",
+        "language": "c",
+        "md5": "3062cd7c3d17815975f8720cbeabf0b6",
+        "chars": 194,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pgp_pub_encrypt_bytea(bytea,bytea)",
+        "language": "c",
+        "md5": "5ef5954cdbe5741e2c1906898a6057c7",
+        "chars": 188,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pgp_pub_encrypt(text,bytea,text)",
+        "language": "c",
+        "md5": "bb91bfabebc1894a30d0f4fae6dccffe",
+        "chars": 186,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pgp_pub_encrypt(text,bytea)",
+        "language": "c",
+        "md5": "ef3c54e0a325783028c30a31d604253d",
+        "chars": 180,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pgp_sym_decrypt_bytea(bytea,text,text)",
+        "language": "c",
+        "md5": "247ac244802a2c8c9db4747d2ae0f515",
+        "chars": 203,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pgp_sym_decrypt_bytea(bytea,text)",
+        "language": "c",
+        "md5": "365cce063e993d3823812d7ed2eed4bd",
+        "chars": 197,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pgp_sym_decrypt(bytea,text,text)",
+        "language": "c",
+        "md5": "46b4eb4a8190cf3f5a7285f992ba7d87",
+        "chars": 195,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pgp_sym_decrypt(bytea,text)",
+        "language": "c",
+        "md5": "bd9033545bf69e27880836cc8611fb46",
+        "chars": 189,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pgp_sym_encrypt_bytea(bytea,text,text)",
+        "language": "c",
+        "md5": "f7f923af916f7b9c973ff303af271329",
+        "chars": 193,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pgp_sym_encrypt_bytea(bytea,text)",
+        "language": "c",
+        "md5": "43fc83685de8a47784c8891e0c7eaf40",
+        "chars": 187,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pgp_sym_encrypt(text,text,text)",
+        "language": "c",
+        "md5": "51bcff8be418bd39d9a0e71cbaf6e42a",
+        "chars": 185,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pgp_sym_encrypt(text,text)",
+        "language": "c",
+        "md5": "89a109c79b6e5729b983220d745175c8",
+        "chars": 179,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pgrst_ddl_watch()",
+        "language": "plpgsql",
+        "md5": "afaad7193dcf8f81e728d2bedb85e43e",
+        "chars": 873,
+        "source_read": true,
+        "native_binary_unavailable": false
+      },
+      {
+        "identity": "pgrst_drop_watch()",
+        "language": "plpgsql",
+        "md5": "4357772baf5cfcd5c6d7049585b3a537",
+        "chars": 557,
+        "source_read": true,
+        "native_binary_unavailable": false
+      },
+      {
+        "identity": "set_graphql_placeholder()",
+        "language": "plpgsql",
+        "md5": "8da9dff6b2ae47498209d341acaeb60b",
+        "chars": 1725,
+        "source_read": true,
+        "native_binary_unavailable": false
+      },
+      {
+        "identity": "set_limit(real)",
+        "language": "c",
+        "md5": "0b2839890528b0a23b3c5dd3ece5ffef",
+        "chars": 140,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "show_limit()",
+        "language": "c",
+        "md5": "74b47a4de5b7f44ec3fabd6e8fa45f25",
+        "chars": 159,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "show_trgm(text)",
+        "language": "c",
+        "md5": "93143b7febc6d23eb46dc91cbc48614b",
+        "chars": 166,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "similarity_dist(text,text)",
+        "language": "c",
+        "md5": "eb0e0e9f5db7b35b6aa7f9c2b1ecaaf1",
+        "chars": 182,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "similarity_op(text,text)",
+        "language": "c",
+        "md5": "0a6437a199ccf553586457c597243b66",
+        "chars": 178,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "similarity(text,text)",
+        "language": "c",
+        "md5": "dd19fe5423b9c4617787238bd384c41d",
+        "chars": 172,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "strict_word_similarity_commutator_op(text,text)",
+        "language": "c",
+        "md5": "28e751c71af91281e65c43f4346dbd8d",
+        "chars": 224,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "strict_word_similarity_dist_commutator_op(text,text)",
+        "language": "c",
+        "md5": "669164def7b3aa8ca3cfd5b7eb560d45",
+        "chars": 234,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "strict_word_similarity_dist_op(text,text)",
+        "language": "c",
+        "md5": "dfe04b8b448b1d427bcad2190775df66",
+        "chars": 212,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "strict_word_similarity_op(text,text)",
+        "language": "c",
+        "md5": "8554bdd28cc1c70ac908f8e1c93eb1fd",
+        "chars": 202,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "strict_word_similarity(text,text)",
+        "language": "c",
+        "md5": "6505bf90ad0ba65e20d114026d886ca4",
+        "chars": 196,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "unaccent_init(internal)",
+        "language": "c",
+        "md5": "e8b3c54e1facd95acaee797c7f8181b5",
+        "chars": 164,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "unaccent_lexize(internal,internal,internal,internal)",
+        "language": "c",
+        "md5": "e2ee34c290bfcd792f2539b2ef2d7a6c",
+        "chars": 198,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "unaccent(regdictionary,text)",
+        "language": "c",
+        "md5": "d06cdb7bdbf96aa04ac37951e2b0cc26",
+        "chars": 180,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "unaccent(text)",
+        "language": "c",
+        "md5": "adc6d6eee6b71f5a7751b0d15543ab7c",
+        "chars": 165,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "uuid_generate_v1()",
+        "language": "c",
+        "md5": "f2a7d7708f4ce5e8429ee5e57fa19842",
+        "chars": 166,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "uuid_generate_v1mc()",
+        "language": "c",
+        "md5": "c404a846ca36b0d8f46d268dbc4be0c3",
+        "chars": 170,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "uuid_generate_v3(uuid,text)",
+        "language": "c",
+        "md5": "7992559096f41242be92bb50ac5fca6e",
+        "chars": 201,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "uuid_generate_v4()",
+        "language": "c",
+        "md5": "a3045e99488d2d755e53c33e5b0fb5d1",
+        "chars": 166,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "uuid_generate_v5(uuid,text)",
+        "language": "c",
+        "md5": "eac48925db03b4f5baa93a49e4e5c994",
+        "chars": 201,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "uuid_nil()",
+        "language": "c",
+        "md5": "d5bf098ffa5f31313539aed0d5b80b18",
+        "chars": 160,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "uuid_ns_dns()",
+        "language": "c",
+        "md5": "b1fb4043e40048f831decdb42d7c7e91",
+        "chars": 166,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "uuid_ns_oid()",
+        "language": "c",
+        "md5": "59d0fa7c59e1f7aa25dd2d1c7cb70090",
+        "chars": 166,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "uuid_ns_url()",
+        "language": "c",
+        "md5": "dffa53f4caafe3259e10923916be5802",
+        "chars": 166,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "uuid_ns_x500()",
+        "language": "c",
+        "md5": "c6106df49914220b7eba8704d9770c25",
+        "chars": 168,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "word_similarity_commutator_op(text,text)",
+        "language": "c",
+        "md5": "c1ab3286ad01e3294e4199567bece644",
+        "chars": 210,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "word_similarity_dist_commutator_op(text,text)",
+        "language": "c",
+        "md5": "c8c510097ee2546c857076f8b90b7237",
+        "chars": 220,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "word_similarity_dist_op(text,text)",
+        "language": "c",
+        "md5": "aadf40d7a69aa289ce785f881f564b12",
+        "chars": 198,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "word_similarity_op(text,text)",
+        "language": "c",
+        "md5": "129ab7a092ed79f1b20b848bbdf2ec85",
+        "chars": 188,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "word_similarity(text,text)",
+        "language": "c",
+        "md5": "6c9f9f30ecc2e059035f9290c3ccdeb9",
+        "chars": 182,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "pgbouncer.get_auth(text)",
+        "language": "plpgsql",
+        "md5": "ea716a894cc6ade82e6754c47336a307",
+        "chars": 502,
+        "source_read": true,
+        "native_binary_unavailable": false
+      },
+      {
+        "identity": "vault._crypto_aead_det_decrypt(bytea,bytea,bigint,bytea,bytea)",
+        "language": "c",
+        "md5": "4c011d33059455a2046b6baaadf95134",
+        "chars": 316,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "vault._crypto_aead_det_encrypt(bytea,bytea,bigint,bytea,bytea)",
+        "language": "c",
+        "md5": "c09967f7ad587d50825d20c0669a22b4",
+        "chars": 316,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "vault._crypto_aead_det_noncegen()",
+        "language": "c",
+        "md5": "847e31112efd29b794bca8ee8435cb12",
+        "chars": 182,
+        "source_read": true,
+        "native_binary_unavailable": true
+      },
+      {
+        "identity": "vault.create_secret(text,text,text,uuid)",
+        "language": "plpgsql",
+        "md5": "3cd3211da1236685869a58787071c534",
+        "chars": 751,
+        "source_read": true,
+        "native_binary_unavailable": false
+      },
+      {
+        "identity": "vault.update_secret(uuid,text,text,text,uuid)",
+        "language": "plpgsql",
+        "md5": "dab0a8cc49e4b57f27bfa5dca12a705c",
+        "chars": 1012,
+        "source_read": true,
+        "native_binary_unavailable": false
+      }
+    ],
+    "runtime_and_native_binary_unverified": true
   }
 }
