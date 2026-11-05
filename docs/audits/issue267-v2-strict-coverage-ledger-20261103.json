@@ -188,6 +188,27 @@
         120
       ],
       "note": "S2-097–099 direct source review; rest of live code tree remains unreviewed"
+    },
+    "forensic_nonfinite_json_guard": {
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-LIVE-FINITE-20261105.json",
+      "before_blob": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "proposed_source_blob": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+      "original_old_line": 88,
+      "live_new_or_changed_lines": [
+        17,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94
+      ],
+      "new_test_path": "tests/audit/test_coffee_forensics_finite_json.py",
+      "new_test_blob": "43674c1672bd32a4b4610eecb570d5d578ee730c",
+      "new_test_lines_reviewed": 34,
+      "strict_frozen_or_pinned_credit": 0,
+      "status": "TARGETED_FIX_PROPOSED_PENDING_CI",
+      "other_live_code_drift": "INCOMPLETE"
     }
   },
   "batches": [
@@ -2248,7 +2269,7 @@
     }
   ],
   "completion": "IN_PROGRESS",
-  "test_limit": "S2-099 original source and isolated Python semantics checked; exact PR/merged CI pending, full post-pin drift incomplete.",
+  "test_limit": "S2-099 merged source audit; separate narrow forensic parser guard/test proposed and pending exact CI. All remaining live drift and full 100% coverage incomplete.",
   "last_batch": "S2-099",
   "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-099.json",
   "complete": false
