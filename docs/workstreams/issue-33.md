@@ -1,3 +1,9 @@
+## November 5 UTC — PR725 third approval JSON syntax repair [skip netlify]
+
+Corrected second-head approval [41987626803](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41987626803) **FAIL** at JSON parse position593: new `ci_runs: []` member lacked separator comma before `scope_paths`. Actual Node source tests on previous head 1750 PASS/0 FAIL and other checks preserved, but approval did NOT pass. Fixed comma in queue, independently parsed full queue JSON in tool before commit, TESTING state retained, no other queue items touched. Require exact corrected-head approval, tests and merged current official source, not READY. Parent Issue #33 OPEN. No deployment/production writes.
+
+---
+
 ## November 5 UTC — PR725 second approval correction, exact queue CI-array schema [skip netlify]
 
 Second head `394791d4fdd43e644b114995630363a394e018fd`: approval [41987513220](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41987513220) **FAILED**, `DIC-Q-33-original603-292-selected-guji-producer-region tests/CI/blockers must be arrays`; `tests` and `blockers` were arrays but newly inserted queue row omitted required `ci_runs`. Repair with exact `ci_runs: []`, preserve TESTING and no merge SHA. Separate previous source/test head [41987379564](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41987379564) focused Node 1750 PASS/0 FAIL/0 SKIP with lint/build, UX/security/SQL/private bundle SUCCESS, but governance failed. Corrected exact-head CI still REQUIRED; no false acceptance or deployment. #33 open.
