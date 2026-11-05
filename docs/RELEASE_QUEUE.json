@@ -4698,8 +4698,8 @@
       "issue": 33,
       "pr": 650,
       "title": "Use selected country-first region H1 only with current-lot farmers-in-this-region corroboration",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "8f3fe0292fd2d0a45af8d7ffd43e42545e37d66f",
       "scope_paths": [
         "src/server/coffee-identity-evidence.mjs",
         "src/server/coffee-title-region-evidence.mjs"
@@ -4707,14 +4707,28 @@
       "tests": [
         "Previous selected official raw HTML #106 SHA256 772f5ea782ca26227162a594de0de814f03ed6a489f35cbbe39a48bdf94975a6, exact selected H1 Colombia Valley de Cauca; parser returned Colombia; current selected region prose refers to farmers in this region.",
         "New country-first H1/prose generic guard and 8 positive/negative Node cases committed in PR650 head 7f677503c4409c285e35008dad555e63470fcceb; exact CI still executing.",
-        "First PR650 approval run41938175354 FAILED only queue intake (untracked runtime paths), not a test assertion; item added in next documentation-only commit. Full frozen603 job41938175284 SKIPPED."
+        "First PR650 approval run41938175354 FAILED only queue intake (untracked runtime paths), not a test assertion; item added in next documentation-only commit. Full frozen603 job41938175284 SKIPPED.",
+        "First PR650 approval41938175354 failed queue intake (untracked scope paths); repaired in follow-on docs-only commit. Corrected exact PR head e9b6e0764af19e0cde3d6eb4b79970dfb4ffe054: Node/lint41938435668 SUCCESS (2452 PASS/0 FAIL/6 intentional SKIP), approval41938435592, cloud UX/mobile41938435705, isolated SQL41938435522, security41938435499 and private source41938435543 SUCCESS; frozen60341938435509 SKIPPED.",
+        "PR650 safe squash merge 8f3fe0292fd2d0a45af8d7ffd43e42545e37d66f; both deployed-source blobs (identity 3b785a06d92d01c1caef32984c3dbaf0afc0c2e2 and helper 667e97321c1a40048530c74928543ee246cc4ac6) and test d5fdccda55133ad8e46837df7f2ac9cb7534ef90 identical corrected tested PR-head.",
+        "Exact merged Node/lint41938676994 2452 PASS/0 FAIL/6 intentional SKIP; merged approval41938677217, cloud/mobile41938677075, official current selected run41938677300 SUCCESS. Original603 universal frozen workflow SKIPPED; no actual signed-in member acceptance.",
+        "Genuine official source current #62/#106/#531 run41938677300/job126953565865/private artifact13374799119: 3/3 requested, FETCHED/PARSED, matched selected H1, no origin conflicts. Independently compared JSON canonical field evidence in original post-#62 baseline run41934658056/job126939975770 against new exact merged-source job logs: ONLY #106 origin Colombia -> Valley de Cauca, Colombia. #62 Peru and #531 decaf Sugar Process, every other canonical field and all conflicts unchanged. Raw source HTML digests vary between live fetches; both are captured, not assumed byte-identical."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact updated PR-head Node/lint/build, approval, applicable cloud/SQL/security checks; safe nonforce merge; actual merged official #62/#106/#531 parser and Add Coffee evidence with independent artifact source diff pending; original603 universal manual review separate."
+      "ci_runs": [
+        41938175354,
+        41938435668,
+        41938435592,
+        41938435705,
+        41938435522,
+        41938435499,
+        41938435543,
+        41938676994,
+        41938677217,
+        41938677075,
+        41938677300
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "TESTING / IN_PROGRESS ONLY. No official postchange SHA/parser certification, release, Netlify/prod/member/provider write. Preserve previous READY, DEPLOYED, and independent #309/#97/#527 work."
+      "notes": "NARROW VERIFIED READY, NOT DEPLOYED. Exact current official selected H1 and farmers-in-this-region prose establish literal Valley de Cauca locality; generic H1/source provenance guard plus 8 adversarial tests, exact corrected PR-head and merged-source CI + 3 live official source parser/Add Coffee cases verified. Independently compared actual logged canonical JSON before/after. Official raw HTML SHA256 values are job-reported, source ZIP byte hashes not independently rehashed due analysis-container unavailability; do not claim byte-for-byte invariance. Parent #33 OPEN: original 603 case-by-case certification, 153 contextual/29 missing-literal/35 historic source blanks unresolved; #267 V2/#96 separate. No production/provider/member release or writes by this Issue33 work."
     }
   ],
   "history": [
