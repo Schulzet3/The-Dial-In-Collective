@@ -487,3 +487,16 @@ Live source at review: development `fbb7cd072bf73cd65f088d9ed9e6687b2b612ea5`, m
 **Cumulative #504:** 7,919 source file lines / 60,754 source file words; **91 GitHub text records / 25,213 words**. Only #504 receipt, append-only ledger and this journal changed. No code, tests, SQL/Auth/member/provider, publication, queue or production change. GitHub-wide inventory and word-level coverage incomplete.
 **Checks:** SHA-1 known vectors, prior comment body SHA1, nine full source bodies, ordered unique IDs, word totals, exact next cursor PASS. Node22/SQL/browser/offline/original603 NOT RUN (docs-only). GitHub PR-head and merged-source CI PENDING, not claimed passed.
 **Exact next:** [Issue #267 comment 6578809290](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267#issuecomment-6578809290) word 1. 65 #267 comments remain at snapshot. Status **OPEN / IN_PROGRESS**; no #267/#455/#33/#96 scope overlap.
+
+
+## Issue #504 G1-043 — November 5 UTC: eight more complete historical Issue #267 comments reviewed [skip netlify]
+
+**Live branch SHAs:** development `c21f72538e84ced3f29f0345cdb51b5ea1ef6d19`, main `b62bc028fe1cda1fd2756bfb1162501ca629002a`, release/production `6c729b928fad5fd59ae012c63d7c005f180b2b64`; GitHub reports PUBLIC under previously recorded temporary owner exception, no visibility change. #504, #267, #455, #33 and #96 remain OPEN.
+
+**Direct semantic review:** Complete consecutive #267 historical comment bodies `6578809290`, `6589046781`, `6590294529`, `6615575170`, `6615755928`, `6617175539`, `6618200520`, `6619054978`. **Eight new records / 2339 new words**, each with UTF-8 SHA1, exact inclusive body line/word ranges, byte counts and semantic dispositions in [G1-043 receipt](../audits/issue504-review-G1-043.json). Historical R2/C2 CI and line totals retained as dated facts; later stricter S2 per-line standard governs. #267's CI-cost regression had already been corrected by #462, so no duplicate code fix. No new current issue warranting deletion/rewrite found.
+
+**Independent overlap check:** Verified all 41 original numbered source lines against strict #267 S2-001 source-bound receipt and immutable blob `2cf28b22c69547c15c5f300dc4a68ed96a58791e` (41/41 exact). That establishes a bounded receipt's source fidelity, **zero new #504 source-line semantic credit**, not certification of the full 579,961-line frozen or 57,913-line pinned corpus or post-pin deltas.
+
+**Cumulative #504:** 7919 file lines / 60754 file words, plus 99 GitHub metadata records / 27552 words. Only receipt, ledger and scoped journal changed in one docs-only commit. Source hashing, body arithmetic, ID disjointness checked. Application/Node22/SQL/browser/mobile/offline/original603 not rerun for docs-only work; exact PR and merged-source CI must still be observed, SKIPPED != PASS. No publication, release/production movement, provider/Auth/member/SQL/Edge, backup or force action.
+
+**NEXT exact object:** [Issue #267 comment `6619924498`](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267#issuecomment-6619924498), word 1. 59 of 95 #267 comments remain. Audit OPEN / IN_PROGRESS; remaining GitHub-wide issue/PR/Actions/history and delegated source coverage unresolved.
