@@ -379,3 +379,16 @@ Recovered live source refs: development `25baf1153fba83e9e94597c79eb0726920d1bc6
 **Cumulative:** **7,919 repository file lines / 60,754 words** plus **26 unique GitHub objects / 8,064 words**. Exactly zero new #267 source/frozen semantic credit. GitHub comment inventory at read was 51, with 25 reviewed comment bodies (plus #504 issue body), leaving 26 unreviewed before this new checkpoint comment. Source-version queue drift, other issue/PR/review/Action/commit/tag/binary text, and delegated #267 independent coverage remain unfinished. No Node/SQL/browser/provider/member/603 tests rerun; historical CI statuses never promoted to PASS.
 
 **NEXT exact unreviewed object:** Issue #504 comment `6645366747`; then continue nonoverlapping comments and unreconciled source inventory/queue drift. Overall **OPEN / IN_PROGRESS**. This scoped three-file audit-only checkpoint authorizes no publication/production/ref/Auth/SQL/Edge/provider/member/backup changes, purchase or forced Git.
+
+
+## G1-034 — November 5, 2026 UTC: six full historical Issue #504 comments audited [skip netlify]
+
+Live GitHub development `3771081f7e9be067870cb8b82605095e1903a023`, main `c25e31343b1974b89445b48b43993bc446aa96ca`, release/production `b386a977a7c43bf190f6315105894334d96f0f18`; #504, #267, #455, #33 and #96 stay OPEN. Visibility remains `public` under earlier temporary owner exception (private return not independently verified). No competing code, research, extractor, privacy or release-queue changes.
+
+**Direct semantic review:** Six next consecutive whole comment bodies `6645366747`, `6646231732`, `6646247029`, `6646296843`, `6647250148`, `6647306967`. Source-bound UTF-8 SHA-1 digest, inclusive line/word ranges and individual semantic findings are in [G1-034 receipt](../audits/issue504-review-G1-034.json). **6 GitHub records / 1,412 new words**; **0 new file lines**. Historical source queue lines discussed in these comments were already credited and are not counted again. Cumulative **7,919 file lines / 60,754 words + 32 GitHub objects / 9,476 words**, with **zero delegated #267 credit**.
+
+Verified PR #647 merged `8418aedd`, #657 merged `07a7ad37`, and #666 merged `a53c41fa`; recorded earlier approval CI failed/cancelled states remain historic and were not falsely marked success. Historic #666 complaint about unnecessary high-tier #504 JSON audit tests was checked against latest `scripts/audit/ci-scope.mjs` blob `f231a9a3`, which now contains a narrowly scoped #504 ledger/receipt docs-only classification, belonging to #267; no current conflicting code fix or extra code credit.
+
+No confirmed current defect in these six historical narratives. No deletion, policy or release change justified. Documentation receipt arithmetic/body identity checks PASS; app, Node, SQL, browser, cloud, original603, real member and provider tests NOT RUN for this evidence-only update.
+
+**NEXT exact item:** #504 comment `6648164857`. At observation, 31/53 comments directly reviewed and 22 remaining before this checkpoint comment; more comments may be appended. Broader GitHub-wide inventory, queue drift and independently verified #267 evidence are unfinished. **OPEN / IN_PROGRESS**, never all-complete. No publication, release branch movement, provider/production/member/backup write, force or purchase.
