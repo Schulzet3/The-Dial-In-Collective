@@ -1,0 +1,322 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "D2-012",
+  "date_utc": "2026-11-05",
+  "kind": "POST_PIN_NEW_CODE_DIRECT_SEMANTIC_REVIEW",
+  "source": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "observed_live_commit": "f44476a0430cc2139292e74477c07fb42bccc9fe",
+    "path": "tests/rehearse-no-publish.test.mjs",
+    "blob_sha": "9061d282f4908ba500be63438d6912d9b632da52",
+    "physical_line_count": 11,
+    "verified_absent_at_pin": true,
+    "terminal_newline_not_physical_line": true
+  },
+  "method": "Independent complete original numbered source read; direct AI semantic analysis every literal physical line, callers/imports/tests traced. Nine per-line dimensions, no unperformed test or independent human certification; frozen first workflow previously revalidated without duplicate credit.",
+  "per_line": [
+    {
+      "line": 1,
+      "source_text": "import test from 'node:test';",
+      "classification": "executable",
+      "behavior": "Imports Node test runner",
+      "quality": "Uses Node22 built-in harness",
+      "risk": "No deployment side effect",
+      "dead_or_obsolete": "Test currently relevant to rehearsal",
+      "duplication": "Standard testing import",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/rehearse-no-publish.test.mjs",
+        "commit": "f44476a0430cc2139292e74477c07fb42bccc9fe",
+        "blob_sha": "9061d282f4908ba500be63438d6912d9b632da52",
+        "line": 1,
+        "exact_original": true
+      },
+      "testability": "Node --test targeted invocation; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Latest Locked #417/#457 one source-bound authorized Git publisher; preflight rehearsal does not grant publication, provider, SQL or member writes.",
+      "review_method": "Direct AI original physical line 1 review, tests/rehearse-no-publish.test.mjs blob 9061d282f4908ba500be63438d6912d9b632da52."
+    },
+    {
+      "line": 2,
+      "source_text": "import assert from 'node:assert/strict';",
+      "classification": "executable",
+      "behavior": "Imports strict assert utilities",
+      "quality": "Proper deterministic equality checks",
+      "risk": "No external provider access",
+      "dead_or_obsolete": "Test-only dependency",
+      "duplication": "No alternate assert implementation",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/rehearse-no-publish.test.mjs",
+        "commit": "f44476a0430cc2139292e74477c07fb42bccc9fe",
+        "blob_sha": "9061d282f4908ba500be63438d6912d9b632da52",
+        "line": 2,
+        "exact_original": true
+      },
+      "testability": "Run scoped test; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Latest Locked #417/#457 one source-bound authorized Git publisher; preflight rehearsal does not grant publication, provider, SQL or member writes.",
+      "review_method": "Direct AI original physical line 2 review, tests/rehearse-no-publish.test.mjs blob 9061d282f4908ba500be63438d6912d9b632da52."
+    },
+    {
+      "line": 3,
+      "source_text": "import {rehearseRelease} from '../scripts/release/rehearse-no-publish.mjs';",
+      "classification": "executable",
+      "behavior": "Imports pure no-publish helper",
+      "quality": "Tests actual source export",
+      "risk": "No mutation expected from import due CLI guard",
+      "dead_or_obsolete": "Current regression validates isolated decision",
+      "duplication": "Distinct from release runner test",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/rehearse-no-publish.test.mjs",
+        "commit": "f44476a0430cc2139292e74477c07fb42bccc9fe",
+        "blob_sha": "9061d282f4908ba500be63438d6912d9b632da52",
+        "line": 3,
+        "exact_original": true
+      },
+      "testability": "Import/side-effect assertions; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Latest Locked #417/#457 one source-bound authorized Git publisher; preflight rehearsal does not grant publication, provider, SQL or member writes.",
+      "review_method": "Direct AI original physical line 3 review, tests/rehearse-no-publish.test.mjs blob 9061d282f4908ba500be63438d6912d9b632da52."
+    },
+    {
+      "line": 4,
+      "source_text": "const batch={ready:true,errors:[],ready_items:[{id:'DIC-Q-100'}]};",
+      "classification": "executable",
+      "behavior": "Builds synthetic READY item DIC-Q-100 assessment",
+      "quality": "No Git, credentials or real release claim involved",
+      "risk": "Fixture cannot certify current queue READY",
+      "dead_or_obsolete": "Proper mock boundary",
+      "duplication": "Used across test cases",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/rehearse-no-publish.test.mjs",
+        "commit": "f44476a0430cc2139292e74477c07fb42bccc9fe",
+        "blob_sha": "9061d282f4908ba500be63438d6912d9b632da52",
+        "line": 4,
+        "exact_original": true
+      },
+      "testability": "Compare grant ID matching; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "Do not interpret as production approval",
+      "locked_fit": "Latest Locked #417/#457 one source-bound authorized Git publisher; preflight rehearsal does not grant publication, provider, SQL or member writes.",
+      "review_method": "Direct AI original physical line 4 review, tests/rehearse-no-publish.test.mjs blob 9061d282f4908ba500be63438d6912d9b632da52."
+    },
+    {
+      "line": 5,
+      "source_text": "test('no-publish rehearsal denies empty, unsafe and mismatched owner grants',()=>{",
+      "classification": "executable",
+      "behavior": "Declares denial/positive grant-scope test",
+      "quality": "Reports intended bounded behavior",
+      "risk": "No provider or SHA check in test title",
+      "dead_or_obsolete": "Important non-publication preflight",
+      "duplication": "Not full controller integration",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/rehearse-no-publish.test.mjs",
+        "commit": "f44476a0430cc2139292e74477c07fb42bccc9fe",
+        "blob_sha": "9061d282f4908ba500be63438d6912d9b632da52",
+        "line": 5,
+        "exact_original": true
+      },
+      "testability": "Run focused Node22 test; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Latest Locked #417/#457 one source-bound authorized Git publisher; preflight rehearsal does not grant publication, provider, SQL or member writes.",
+      "review_method": "Direct AI original physical line 5 review, tests/rehearse-no-publish.test.mjs blob 9061d282f4908ba500be63438d6912d9b632da52."
+    },
+    {
+      "line": 6,
+      "source_text": " assert.equal(rehearseRelease({assessment:{ready:false,errors:['unready merged code']}}).status,'DENIED_NO_PUBLICATION');",
+      "classification": "executable",
+      "behavior": "Checks unready assessment denied",
+      "quality": "Asserts STATUS rather than only flag",
+      "risk": "Doesn't inspect reasons or partial source details",
+      "dead_or_obsolete": "Negative preflight",
+      "duplication": "Separate from mismatch tests",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/rehearse-no-publish.test.mjs",
+        "commit": "f44476a0430cc2139292e74477c07fb42bccc9fe",
+        "blob_sha": "9061d282f4908ba500be63438d6912d9b632da52",
+        "line": 6,
+        "exact_original": true
+      },
+      "testability": "Observe expected DENIED_NO_PUBLICATION; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Latest Locked #417/#457 one source-bound authorized Git publisher; preflight rehearsal does not grant publication, provider, SQL or member writes.",
+      "review_method": "Direct AI original physical line 6 review, tests/rehearse-no-publish.test.mjs blob 9061d282f4908ba500be63438d6912d9b632da52."
+    },
+    {
+      "line": 7,
+      "source_text": " assert.equal(rehearseRelease({assessment:batch,grant:{approved_ready_item_ids:['DIC-Q-101']}}).ready,false);",
+      "classification": "executable",
+      "behavior": "Checks mismatched single READY ID denied",
+      "quality": "Rejects wrong scope item",
+      "risk": "Only tests simple string ID",
+      "dead_or_obsolete": "Canonical assertApprovedReadyBatch handles exact equality",
+      "duplication": "One negative variation",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/rehearse-no-publish.test.mjs",
+        "commit": "f44476a0430cc2139292e74477c07fb42bccc9fe",
+        "blob_sha": "9061d282f4908ba500be63438d6912d9b632da52",
+        "line": 7,
+        "exact_original": true
+      },
+      "testability": "Run against source; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Latest Locked #417/#457 one source-bound authorized Git publisher; preflight rehearsal does not grant publication, provider, SQL or member writes.",
+      "review_method": "Direct AI original physical line 7 review, tests/rehearse-no-publish.test.mjs blob 9061d282f4908ba500be63438d6912d9b632da52."
+    },
+    {
+      "line": 8,
+      "source_text": " assert.equal(rehearseRelease({assessment:batch,grant:{approved_ready_item_ids:['DIC-Q-100','DIC-Q-101']}}).ready,false);",
+      "classification": "executable",
+      "behavior": "Checks extra unapproved READY ID denied",
+      "quality": "Prevents broadened grant through supersets",
+      "risk": "Does not cover duplicate IDs explicitly",
+      "dead_or_obsolete": "Important least-authority negative",
+      "duplication": "Complements mismatch",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/rehearse-no-publish.test.mjs",
+        "commit": "f44476a0430cc2139292e74477c07fb42bccc9fe",
+        "blob_sha": "9061d282f4908ba500be63438d6912d9b632da52",
+        "line": 8,
+        "exact_original": true
+      },
+      "testability": "Test duplicates from queue unit suite; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Latest Locked #417/#457 one source-bound authorized Git publisher; preflight rehearsal does not grant publication, provider, SQL or member writes.",
+      "review_method": "Direct AI original physical line 8 review, tests/rehearse-no-publish.test.mjs blob 9061d282f4908ba500be63438d6912d9b632da52."
+    },
+    {
+      "line": 9,
+      "source_text": " assert.equal(rehearseRelease({assessment:batch,grant:{approved_ready_item_ids:['DIC-Q-100']}}).status,",
+      "classification": "executable",
+      "behavior": "Asserts matching grant receives source-only preflight status",
+      "quality": "Explicit status not publication result",
+      "risk": "No assertions about no fetch/IO side effects, but helper pure by construction",
+      "dead_or_obsolete": "Narrow positive scope",
+      "duplication": "Separate from provider/CD tests",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/rehearse-no-publish.test.mjs",
+        "commit": "f44476a0430cc2139292e74477c07fb42bccc9fe",
+        "blob_sha": "9061d282f4908ba500be63438d6912d9b632da52",
+        "line": 9,
+        "exact_original": true
+      },
+      "testability": "Run isolated Node test and inspect exact marker; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Latest Locked #417/#457 one source-bound authorized Git publisher; preflight rehearsal does not grant publication, provider, SQL or member writes.",
+      "review_method": "Direct AI original physical line 9 review, tests/rehearse-no-publish.test.mjs blob 9061d282f4908ba500be63438d6912d9b632da52."
+    },
+    {
+      "line": 10,
+      "source_text": " 'SOURCE_AND_OWNER_SCOPE_PREFLIGHT_PASS_NO_PUBLICATION');",
+      "classification": "executable",
+      "behavior": "Completes expected positive status argument",
+      "quality": "Literal marker disclaims deploy",
+      "risk": "Could be misconstrued as release-ready in UI if context dropped",
+      "dead_or_obsolete": "Test result literal",
+      "duplication": "No duplicate logic",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/rehearse-no-publish.test.mjs",
+        "commit": "f44476a0430cc2139292e74477c07fb42bccc9fe",
+        "blob_sha": "9061d282f4908ba500be63438d6912d9b632da52",
+        "line": 10,
+        "exact_original": true
+      },
+      "testability": "Node strict equality; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Latest Locked #417/#457 one source-bound authorized Git publisher; preflight rehearsal does not grant publication, provider, SQL or member writes.",
+      "review_method": "Direct AI original physical line 10 review, tests/rehearse-no-publish.test.mjs blob 9061d282f4908ba500be63438d6912d9b632da52."
+    },
+    {
+      "line": 11,
+      "source_text": "});",
+      "classification": "executable",
+      "behavior": "Closes test suite function",
+      "quality": "Structural closure",
+      "risk": "No independent risk",
+      "dead_or_obsolete": "Needed syntax",
+      "duplication": "No duplication",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true
+      },
+      "live_source": {
+        "path": "tests/rehearse-no-publish.test.mjs",
+        "commit": "f44476a0430cc2139292e74477c07fb42bccc9fe",
+        "blob_sha": "9061d282f4908ba500be63438d6912d9b632da52",
+        "line": 11,
+        "exact_original": true
+      },
+      "testability": "Parse/lint; NOT_RUN_THIS_SOURCE_ONLY_BATCH",
+      "fix_opportunity": "None",
+      "locked_fit": "Latest Locked #417/#457 one source-bound authorized Git publisher; preflight rehearsal does not grant publication, provider, SQL or member writes.",
+      "review_method": "Direct AI original physical line 11 review, tests/rehearse-no-publish.test.mjs blob 9061d282f4908ba500be63438d6912d9b632da52."
+    }
+  ],
+  "scope": {
+    "range": [
+      1,
+      11
+    ],
+    "unique_original_lines": 11,
+    "complete_file": true,
+    "nonoverlap_with_D2_001_010": true
+  },
+  "findings": [
+    {
+      "status": "TRIAGED_UNVERIFIED",
+      "summary": "CLI import.meta URL pathname versus argv[1] portability and direct error messages; not reproduced. Rehearsal is read-only and intentionally not a release grant."
+    }
+  ],
+  "runtime_tests": "NOT_RUN_DOC_ONLY",
+  "complete": false
+}
