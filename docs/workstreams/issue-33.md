@@ -1,3 +1,9 @@
+## November 5, 2026 UTC — Issue #33 #292 docs READY PR728 concurrent-base ancestry reconciliation [skip netlify]
+
+Exact first docs PR head `942246fc1f055eeaf5dad4058ba8f6e3fd73aeb9` approval [41988339483](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41988339483) **FAILED** solely at continuity `git merge-base --is-ancestor 0114e01... <PR_HEAD>` after concurrent independent #267 V2 audit committed to development. Queue schema/intake/approval checks PASS, but ancestor requirement not satisfied. Latest development `0114e01bb88b15ff07e49daaa83f25d3cf55dda7` changed only scoped #267 V2 ledger and journal docs since #292 source merge; NO conflicting paths. This nonforce two-parent merge integrates latest development unchanged with exact reviewed #292 READY docs; both histories preserved, no forced branch. Exact final-head approval and postmerge documentation readback still required. No new runtime/production tests claimed, no release.
+
+---
+
 ## November 5, 2026 UTC — original603 #292 Seeds Guji selected origin VERIFIED READY, NOT DEPLOYED [skip netlify]
 
 Exact selected current product [Seeds Ethiopia Guji Getachew](https://seedscoffee.com/products/ethiopia-getachew-zekele) H1 `Ethiopia Guji Getachew` and direct present named producer "one of Guji’s most precise producers, Getachew Zekele" support **only** origin `Ethiopia` → `Guji, Ethiopia`. Separate 2008 Shakisso land-purchase history is NOT this lot's current growing location. [PR725](https://github.com/Schulzet3/The-Dial-In-Collective/pull/725) nonforce squash merged `7ecfee5299bdfac5e57392c23aa762041aa90c0b`, exact runtime and regression blobs matched approved PR head; six? **seven** synthetic positive/negative tests added. Original source frozen603 unchanged.
