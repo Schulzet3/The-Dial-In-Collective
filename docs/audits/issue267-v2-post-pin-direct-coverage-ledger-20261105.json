@@ -456,9 +456,9 @@
   "unique_source_lines_direct_reviewed": 1157,
   "fully_reviewed_new_source_files": 35,
   "nonoverlap": true,
-  "changed_existing_pinned_paths": "PENDING",
-  "new_sql_migrations": "PENDING",
-  "remaining_added_code": "PENDING_FRESH_LIVE_TREE_DRIFT_AND_FULL_SEMANTIC_REVIEW",
+  "changed_existing_pinned_paths": "46 modified pinned eligible files, structural-only inventory docs/audits/issue267-v2-post-pin-tree-drift-20261105-post-D2-035.json",
+  "new_sql_migrations": "1 new migration structural-only; coordinate #96",
+  "remaining_added_code": "89 new source/test candidate files without full D2 per-line receipt of 124 current added candidates",
   "runtime_app_acceptance": "FOCUSED_LOCAL_NODE22_3_PASS_FULL_APP_AND_PRODUCTION_NOT_RUN",
   "complete": false,
   "physical_line_accounting_rule": "Count actual 1-based non-virtual lines; terminal newline alone is line delimiter, never an extra blank physical line. Preserve source-authenticated original receipt even when superseded by an append-only correction.",
@@ -479,5 +479,19 @@
   ],
   "last_review_batch": "D2-035",
   "last_review_source_commit": "259e29148933742733f255c7923bed81e64c9f34",
-  "last_review_note": "D2-035: direct numbered semantic review 64/64 physical tests/release-backup-decision.test.mjs source lines, 1093 to 1157 distinct post-pin lines, 34 to 35 files."
+  "last_review_note": "D2-035: direct numbered semantic review 64/64 physical tests/release-backup-decision.test.mjs source lines, 1093 to 1157 distinct post-pin lines, 34 to 35 files. Source-bound complete live 69-line D2-033 post-fix reconciliation (no additional original lines) and full post-pin tree drift machine inventory; semantic backlog remains.",
+  "live_source_blob_revalidations": [
+    {
+      "path": "scripts/release/request-encrypted-backup.mjs",
+      "original_batch": "D2-033",
+      "original_blob": "48c51a8ed3c89fcdcbc6626292e8fd9cedb540ba",
+      "corrected_live_blob": "fcaf3da25e8451455e177891d86b49317e3761e6",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-corrections/D2-033-live-postfix-20261105.json",
+      "exact_current_lines_read": 69,
+      "original_D2_line_credit": 0,
+      "dev_commit": "e995a2ecd677915290e183ab7c44cfb9675db32d"
+    }
+  ],
+  "latest_live_tree_drift_inventory": "docs/audits/issue267-v2-post-pin-tree-drift-20261105-post-D2-035.json",
+  "latest_live_tree_drift_commit": "e995a2ecd677915290e183ab7c44cfb9675db32d"
 }
