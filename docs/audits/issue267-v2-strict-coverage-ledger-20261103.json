@@ -5,29 +5,29 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 7525,
+    "strict_validated_lines": 7585,
     "first_unvalidated_manifest_file_index": 59,
     "first_unvalidated_path": "docs/DECISION_LEDGER.json",
-    "first_unvalidated_line": 2635,
+    "first_unvalidated_line": 2695,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 9183,
-    "first_unvalidated_file_index": 57,
-    "first_unvalidated_path": "scripts/audit/issue161-full-source-review.mjs",
+    "strict_validated_lines": 9258,
+    "first_unvalidated_file_index": 58,
+    "first_unvalidated_path": "scripts/audit/issue267-coverage-contract.mjs",
     "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true,
-    "strict_live_counterpart_checked_through_line": 40,
+    "strict_live_counterpart_checked_through_line": 75,
     "last_live_counterpart_checked": {
-      "path": "scripts/audit/isolated-sql-regression.sh",
-      "commit": "973c59b768c4f8a6dd8b6efb5e4b57f5688817c7",
-      "blob": "316fa52b1f4276bfaf5fafd649a98e10de8c8cf9",
+      "path": "scripts/audit/issue161-full-source-review.mjs",
+      "commit": "ea4ae43db8ad5e41e3795dc9dc3cdbf8ed5a19a2",
+      "blob": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
       "first_line": 1,
-      "last_line": 40,
+      "last_line": 75,
       "offset": 0
     }
   },
@@ -3328,12 +3328,32 @@
       "strict_pinned_delta": 40,
       "old_v2_additional_credit": 0,
       "verification": "90 numbered distinct original direct AI semantically inspected source lines; nine per-line dimensions, current counterparts, no runtime test"
+    },
+    {
+      "batch": "S2-142",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-142.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        2635,
+        2694
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/issue161-full-source-review.mjs",
+      "pinned_lines": [
+        1,
+        75
+      ],
+      "pinned_blob": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "strict_frozen_delta": 60,
+      "strict_pinned_delta": 75,
+      "old_v2_additional_credit": 0,
+      "verification": "135 individually AI-semantic numbered original lines, nine dimensions/live counterpart, no machine-only credit or human claim."
     }
   ],
   "completion": "IN_PROGRESS",
-  "test_limit": "S2-141 documents plus full-tree machine-only drift; PR-head/merged approval pending; no fresh SQL/docker/Node/browser/Auth/original603 tests; postpin semantic review incomplete.",
-  "last_batch": "S2-141",
-  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-141.json",
+  "test_limit": "S2-142 combines source-only original line review with targeted CI-scope code/test edit. Exact PR-head full tests and postmerge source-bound CI REQUIRED; no tests claimed yet, postpin semantic incomplete.",
+  "last_batch": "S2-142",
+  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-142.json",
   "complete": false,
   "accounting_reconciliation_20261105": {
     "scope": "NONCREDIT historical source-ledger reference repair",
@@ -3436,6 +3456,15 @@
       "prior_first_workflow_reread_without_credit": true,
       "postpin_semantic_incomplete": true,
       "all_older_receipts_independently_verified": false
+    },
+    "latest_S2_142": {
+      "source_development_commit": "ea4ae43db8ad5e41e3795dc9dc3cdbf8ed5a19a2",
+      "strict_frozen": 7585,
+      "strict_pinned": 9258,
+      "new_direct_original_lines": 135,
+      "source_file57_eof_verified": true,
+      "first_frozen_workflow_reread_without_duplicate_credit": true,
+      "live_code_drift_complete": false
     }
   }
 }
