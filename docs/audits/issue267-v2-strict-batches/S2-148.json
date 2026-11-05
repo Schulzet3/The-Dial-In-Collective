@@ -1,0 +1,1367 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch_id": "S2-148",
+  "date_utc": "2026-11-05",
+  "reviewer": "AI direct line-by-line semantic review; not independent human certification",
+  "source": {
+    "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+    "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+    "file_index": 59,
+    "path": "docs/DECISION_LEDGER.json",
+    "blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+    "range": [
+      2985,
+      3044
+    ],
+    "count": 60
+  },
+  "current": {
+    "observed_ref": "development/backend-foundation",
+    "path": "docs/DECISION_LEDGER.json",
+    "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+    "range": [
+      3093,
+      3152
+    ],
+    "byte_exact_count": 60
+  },
+  "previous": {
+    "batch_id": "S2-147",
+    "range": [
+      2925,
+      2984
+    ],
+    "merged_pr": 869
+  },
+  "method": "Retrieved 60 numbered literal original lines and 60 exact current counterpart lines; directly considered meaning, security/data protection, quality, obsolete/duplicate, testability, improvements, authoritative supersessions for each; no AST/regex/inventory-only semantic credit.",
+  "line_records": [
+    {
+      "line": 2985,
+      "source_text": "    \"status\": \"Owner Locked; permanent admission and admin invitation/member access controls deployed. Admin Generate/Revoke and scoped real Remove/Restore/role-denial acceptance completed; distinct unused/reuse/expiry/concurrency redemption checks remain in #24.\",",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Historical locked single-use beta invitations and permanence status",
+      "quality": "Dated status is source provenance, not an independent present-day run",
+      "risk": "Multiple claims need separate production verification",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3093,
+        "byte_exact": true
+      },
+      "testability": "Compare #24/#41/#96 current exact evidence",
+      "improvement": "Do not equate dated status with live PASS",
+      "locked_fit": "Invite/admin Locked",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2986,
+      "source_text": "[REDACTED; immutable frozen blob 195c3e4de415afef4515a6291c399a1c9001b610:2986]",
+      "source_text_redacted": true,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Owner asks for permanent Admin/member access and self-service codes",
+      "quality": "Dated owner_exact_words is source provenance, not an independent present-day run",
+      "risk": "Questions are original intent, later explicit interpretation controls",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3094,
+        "byte_exact": true
+      },
+      "testability": "Compare resolved one-use and revoke-only decisions",
+      "improvement": "Do not duplicate full owner wording in public receipt",
+      "locked_fit": "Owner authority",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2987,
+      "source_text": "    \"verified_current_server_model\": \"One active administrator role and admitted member row; no admin/member expiration columns; already admitted enabled member signs in without new invite; no immortal Supabase session guarantee.\",",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Model shows one admin, admitted member, no expiry columns",
+      "quality": "Dated verified_current_server_model is source provenance, not an independent present-day run",
+      "risk": "No expiry columns does not grant immortal Auth sessions",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3095,
+        "byte_exact": true
+      },
+      "testability": "Verify schema and JWT refresh behavior separately",
+      "improvement": "Maintain access vs session distinction",
+      "locked_fit": "#96",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2988,
+      "source_text": "    \"locked_requirements\": [",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Opens locked requirements list",
+      "quality": "Dated locked_requirements is source provenance, not an independent present-day run",
+      "risk": "Structural entry does not independently enforce Auth",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3096,
+        "byte_exact": true
+      },
+      "testability": "Parse array and compare each following requirement",
+      "improvement": "No source change",
+      "locked_fit": "Locked collection",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2989,
+      "source_text": "      \"Admin admission and role never time-expire or require recurring beta code after initial admission\",",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Admin admission has no recurring beta code or calendar expiry",
+      "quality": "Dated Admin admission and role never time-expire or require recurring beta code after initial admission is source provenance, not an independent present-day run",
+      "risk": "Cannot extrapolate to never-expiring authentication tokens",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3097,
+        "byte_exact": true
+      },
+      "testability": "Test admitted Admin re-login authorization",
+      "improvement": "Preserve permanent membership not session",
+      "locked_fit": "Admin access",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2990,
+      "source_text": "      \"All successfully admitted accounts have no automatic expiry and remain until deliberate admin access revocation\",",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Successfully admitted accounts persist until explicit revocation",
+      "quality": "Dated All successfully admitted accounts have no automatic expiry and remain until deliberate admin access revocation is source provenance, not an independent present-day run",
+      "risk": "Do not infer irreversible user lifetime or backend immortality",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3098,
+        "byte_exact": true
+      },
+      "testability": "Read current member access procedures",
+      "improvement": "Keep deliberate soft revoke",
+      "locked_fit": "Membership",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2991,
+      "source_text": "      \"Every administrator protected against any admin portal remove-access API action\",",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "All administrators protected from portal remove-access",
+      "quality": "Dated Every administrator protected against any admin portal remove-access API action is source provenance, not an independent present-day run",
+      "risk": "Server-side admin protection is required, not UI-only",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3099,
+        "byte_exact": true
+      },
+      "testability": "Exercise isolated negative role tests under #96",
+      "improvement": "Never remove Admin as cleanup",
+      "locked_fit": "Role safety",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2992,
+      "source_text": "      \"Admin portal supports issue/view metadata/revoke beta codes and remove/restore nonadmin membership\",",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Admin portal issue/revoke invitation and nonadmin remove/restore",
+      "quality": "Dated Admin portal supports issue/view metadata/revoke beta codes and remove/restore nonadmin membership is source provenance, not an independent present-day run",
+      "risk": "UI may be implemented separately from durable RPC",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3100,
+        "byte_exact": true
+      },
+      "testability": "Check exact current UI and server authorization",
+      "improvement": "Preserve soft-delete semantics",
+      "locked_fit": "Admin UX",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2993,
+      "source_text": "      \"Every NEW portal-issued invite is one use per one verified email/account, no calendar expiry before redemption, revocable unused; server enforces max_uses=1\",",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "New invitation is one account/email, no calendar expiry before use",
+      "quality": "Dated Every NEW portal-issued invite is one use per one verified email/account, no calendar expiry before redemption, revocable unused; server enforces max_uses=1 is source provenance, not an independent present-day run",
+      "risk": "One-use server max_uses must be proven; not five-use codes",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3101,
+        "byte_exact": true
+      },
+      "testability": "Verify controlled redemption/expiry/concurrency tests",
+      "improvement": "Retain single-use lock",
+      "locked_fit": "#24 invites",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2994,
+      "source_text": "      \"Invite revocation does not alter existing admitted users or anonymous historical contributions\",",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Revoking unused code must not revoke prior members",
+      "quality": "Dated Invite revocation does not alter existing admitted users or anonymous historical contributions is source provenance, not an independent present-day run",
+      "risk": "Existing membership and historical contribution preservation matters",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3102,
+        "byte_exact": true
+      },
+      "testability": "Test member record after invite revoke",
+      "improvement": "Do not cascade deletes",
+      "locked_fit": "Community data",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2995,
+      "source_text": "      \"Server checks server-owned admin role and membership, denies anon/ordinary member and stores only SHA-256 code hashes; secure one-time code display\"",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Server-owned admin role and SHA256 invitation hashes with one-time code display",
+      "quality": "Dated Server checks server-owned admin role and membership, denies anon/ordinary member and stores only SHA-256 code hashes; secure one-time code display is source provenance, not an independent present-day run",
+      "risk": "Plaintext code exposure would compromise invites; this is a requirement",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3103,
+        "byte_exact": true
+      },
+      "testability": "Verify RPC/SQL roles and response handling in #96",
+      "improvement": "Never store plaintext code",
+      "locked_fit": "Admin privacy",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2996,
+      "source_text": "    ],",
+      "source_text_redacted": false,
+      "classification": "json_structural",
+      "behavior": "Closes locked requirements array",
+      "quality": "Required JSON container boundary, not executable logic",
+      "risk": "Delimiter required for valid JSON",
+      "dead_or_obsolete": "Required JSON delimiter; not obsolete code",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3104,
+        "byte_exact": true
+      },
+      "testability": "Parse ledger",
+      "improvement": "No change",
+      "locked_fit": "Requirement integrity",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2997,
+      "source_text": "    \"owner_interpretation\": \"Permanent accounts persist until explicit admin disable; owner clarified each newly generated invitation is valid for exactly ONE email/account creation, then spent. Cannot generate reusable, 5-use or unlimited codes via admin RPC.\",",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Owner interpretation distinguishes persistent admitted accounts from one-use invitation",
+      "quality": "Dated owner_interpretation is source provenance, not an independent present-day run",
+      "risk": "Ambiguity resolved explicitly",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3105,
+        "byte_exact": true
+      },
+      "testability": "Compare implementation to one-use bound",
+      "improvement": "Do not reopen choice",
+      "locked_fit": "Locked supersession",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2998,
+      "source_text": "    \"code_usage_default\": \"RESOLVED AND LOCKED: ALL new invite codes max_uses=1 on server and UI; one account per code\",",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Marks new issued invite code max_uses one",
+      "quality": "Dated code_usage_default is source provenance, not an independent present-day run",
+      "risk": "Not a runtime proof of enforced database constraint",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3106,
+        "byte_exact": true
+      },
+      "testability": "Inspect current RPC and negative tests",
+      "improvement": "Never reintroduce multiuse option",
+      "locked_fit": "One-use default",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2999,
+      "source_text": "    \"account_removal\": \"Owner clarification ACCESS-REVERSIBLE-REMOVE-ONLY-20261018-01: initial beta supports ONLY administrator Remove Access / Restore Access for nonadmins, preserving live Auth account and personal shots/notes/Community history. Hard Auth account delete is NOT needed/authorized; FK cascade risk remains for any future external deletion.\",",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Remove Access/Restore retains Auth user, shot, notes and Community",
+      "quality": "Dated account_removal is source provenance, not an independent present-day run",
+      "risk": "Hard delete can cascade; no deletion authorized",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3107,
+        "byte_exact": true
+      },
+      "testability": "Verify current soft-disable DB semantics",
+      "improvement": "Do not delete member records",
+      "locked_fit": "Member data invariant",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3000,
+      "source_text": "    \"no_absolute_vendor_lifetime_claim\": \"Supabase session token refresh and user-initiated sign-out still apply; privileged provider operator or product shutdown can remove accounts.\",",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Session refresh/signout and provider lifecycle still apply",
+      "quality": "Dated no_absolute_vendor_lifetime_claim is source provenance, not an independent present-day run",
+      "risk": "Prevents absolute vendor lifetime guarantee",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3108,
+        "byte_exact": true
+      },
+      "testability": "Test legitimate reauthentication",
+      "improvement": "Use durable admission wording",
+      "locked_fit": "Auth session semantics",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3001,
+      "source_text": "    \"existing_baseline_preserved\": true,",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Claims existing baseline preserved",
+      "quality": "Dated existing_baseline_preserved is source provenance, not an independent present-day run",
+      "risk": "Flag needs value-level crosswalk",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3109,
+        "byte_exact": true
+      },
+      "testability": "Compare immutable baseline and explicit supersessions",
+      "improvement": "Do not claim verified from Boolean",
+      "locked_fit": "Locked history",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3002,
+      "source_text": "    \"production_migrations_applied\": 0,",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Reports zero production migrations for earlier development interval",
+      "quality": "Dated production_migrations_applied is source provenance, not an independent present-day run",
+      "risk": "Old zero is not current migration state",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3110,
+        "byte_exact": true
+      },
+      "testability": "Consult #96 dated provider readbacks",
+      "improvement": "No production migration by #267",
+      "locked_fit": "Release boundary",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3003,
+      "source_text": "    \"no_live_invites_created\": true,",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Records no live invitations created in earlier phase",
+      "quality": "Dated no_live_invites_created is source provenance, not an independent present-day run",
+      "risk": "Not proof present invitations absent",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3111,
+        "byte_exact": true
+      },
+      "testability": "Read source of original operation if needed",
+      "improvement": "Never create accounts for audit",
+      "locked_fit": "No synthetic users",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3004,
+      "source_text": "    \"code_source\": \"development/backend-foundation\",",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Links source to development branch",
+      "quality": "Dated code_source is source provenance, not an independent present-day run",
+      "risk": "Branch label does not identify full exact commit",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3112,
+        "byte_exact": true
+      },
+      "testability": "Use frozen blob SHA and latest actual SHA",
+      "improvement": "Do not infer production from branch",
+      "locked_fit": "Source provenance",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3005,
+      "source_text": "    \"detailed_report\": \"docs/ADMIN_BETA_INVITATION_CONTROLS_DEV_2026-10-18.md\",",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Points to detailed invitation-control development report",
+      "quality": "Dated detailed_report is source provenance, not an independent present-day run",
+      "risk": "Link is secondary evidence, not proof of runtime",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3113,
+        "byte_exact": true
+      },
+      "testability": "Read report when reconciling implementation",
+      "improvement": "Preserve report reference",
+      "locked_fit": "Audit provenance",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3006,
+      "source_text": "    \"previous_multiuse_choice\": \"SUPERSEDED for NEW portal-generated codes only, existing historical invite use/expiry rows unchanged\",",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Supersedes multiuse choice for NEW codes only",
+      "quality": "Dated previous_multiuse_choice is source provenance, not an independent present-day run",
+      "risk": "Old historical invitations must not be silently rewritten",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3114,
+        "byte_exact": true
+      },
+      "testability": "Test new vs existing invitation migration",
+      "improvement": "Preserve historical records",
+      "locked_fit": "Scoped supersession",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3007,
+      "source_text": "    \"account_removal_latest_owner_decision\": \"ACCESS-REVERSIBLE-REMOVE-ONLY-20261018-01\",",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Names latest reversible-remove owner decision key",
+      "quality": "Dated account_removal_latest_owner_decision is source provenance, not an independent present-day run",
+      "risk": "Strong explicit decision pointer",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3115,
+        "byte_exact": true
+      },
+      "testability": "Cross-reference later Locked changes",
+      "improvement": "Keep access removal reversible",
+      "locked_fit": "Member preservation",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3008,
+      "source_text": "    \"publication_state_reconciliation_20261020\": {",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Opens historical publication reconciliation",
+      "quality": "Dated publication_state_reconciliation_20261020 is source provenance, not an independent present-day run",
+      "risk": "Source state may have advanced",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3116,
+        "byte_exact": true
+      },
+      "testability": "Compare live release and current issue",
+      "improvement": "Dated not live",
+      "locked_fit": "Publication provenance",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3009,
+      "source_text": "      \"prior_status_exact\": \"Owner Locked: durable admin/members, no code calendar expiry, NEW CODES ALWAYS SINGLE-USE; admin issue/revoke, member access remove/restore; dev only, release unapproved.\",",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Quotes earlier dev-only pending-release status",
+      "quality": "Dated prior_status_exact is source provenance, not an independent present-day run",
+      "risk": "Old deploy disclaimer must not be treated as current",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3117,
+        "byte_exact": true
+      },
+      "testability": "Check latest release SHA",
+      "improvement": "No production change",
+      "locked_fit": "Release authorization",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3010,
+      "source_text": "[REDACTED; immutable frozen blob 195c3e4de415afef4515a6291c399a1c9001b610:3010]",
+      "source_text_redacted": true,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Cites hosted migration and real membership/invitation counts",
+      "quality": "Dated evidence is source provenance, not an independent present-day run",
+      "risk": "Original counts are sensitive and dated; not independent current proof",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3118,
+        "byte_exact": true
+      },
+      "testability": "Use #96 authorized read-only evidence only",
+      "improvement": "Redact counts in new public receipt",
+      "locked_fit": "User privacy",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3011,
+      "source_text": "      \"remaining\": \"Do not infer real signed cross-account HTTP/API privacy denials from owner member browse; #41 open\",",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Records outstanding signed cross-account HTTP denials then",
+      "quality": "Dated remaining is source provenance, not an independent present-day run",
+      "risk": "Later #41/#96 verified work may supersede",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3119,
+        "byte_exact": true
+      },
+      "testability": "Reuse later real JWT negative cases",
+      "improvement": "Avoid duplicate account testing",
+      "locked_fit": "#96 Auth",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3012,
+      "source_text": "      \"observed_from\": \"read-only Supabase migrations/provider API, current GitHub source and owner first-hand report\"",
+      "source_text_redacted": false,
+      "classification": "historical_locked_access_decision",
+      "behavior": "Lists read-only provider API, GitHub and owner report provenance",
+      "quality": "Dated observed_from is source provenance, not an independent present-day run",
+      "risk": "Different evidence strengths must stay separate",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3120,
+        "byte_exact": true
+      },
+      "testability": "Check each original source if claim material",
+      "improvement": "Do not equate owner report to signed JWT",
+      "locked_fit": "Evidence tiers",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3013,
+      "source_text": "    }",
+      "source_text_redacted": false,
+      "classification": "json_structural",
+      "behavior": "Closes publication-reconciliation object",
+      "quality": "Required JSON container boundary, not executable logic",
+      "risk": "Structural JSON end",
+      "dead_or_obsolete": "Required JSON delimiter; not obsolete code",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3121,
+        "byte_exact": true
+      },
+      "testability": "Parse nested map",
+      "improvement": "No edit",
+      "locked_fit": "Historical record",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3014,
+      "source_text": "  },",
+      "source_text_redacted": false,
+      "classification": "json_structural",
+      "behavior": "Closes permanent-admin record",
+      "quality": "Required JSON container boundary, not executable logic",
+      "risk": "Structural delimiter",
+      "dead_or_obsolete": "Required JSON delimiter; not obsolete code",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3122,
+        "byte_exact": true
+      },
+      "testability": "Parse JSON",
+      "improvement": "No edit",
+      "locked_fit": "Record boundary",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3015,
+      "source_text": "  \"admin_beta_invitation_controls_dev_20261018\": {",
+      "source_text_redacted": false,
+      "classification": "historical_dev_auth_schema",
+      "behavior": "Opens earlier development-only invitation-controls evidence",
+      "quality": "Dated admin_beta_invitation_controls_dev_20261018 is source provenance, not an independent present-day run",
+      "risk": "Dated status is not current release acceptance",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "Related to earlier Locked decision; implementation evidence repeats intent but is not redundant executable code",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3123,
+        "byte_exact": true
+      },
+      "testability": "Read linked migration/source if necessary",
+      "improvement": "Keep DEV vs LIVE distinct",
+      "locked_fit": "Deployment boundary",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3016,
+      "source_text": "    \"status\": \"Single-use-only owner Locked source implementation and final SQL/Node/mobile/visual checks PASS; NOT LIVE; separate SQL/Netlify release permission required.\",",
+      "source_text_redacted": false,
+      "classification": "historical_dev_auth_schema",
+      "behavior": "Reports SQL/Node/mobile/visual checks PASS but NOT LIVE at dated state",
+      "quality": "Dated status is source provenance, not an independent present-day run",
+      "risk": "Old check success is source-specific; new changes need CI",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "Related to earlier Locked decision; implementation evidence repeats intent but is not redundant executable code",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3124,
+        "byte_exact": true
+      },
+      "testability": "Look up original exact workflows only if needed",
+      "improvement": "Do not claim November active validation",
+      "locked_fit": "Risk-based CI",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3017,
+      "source_text": "    \"migration\": \"supabase/migrations/20261018235549_dic_admin_beta_invitation_controls.sql\",",
+      "source_text_redacted": false,
+      "classification": "historical_dev_auth_schema",
+      "behavior": "Records migration path for invitation controls",
+      "quality": "Dated migration is source provenance, not an independent present-day run",
+      "risk": "Immutable SQL history is provenance, not optional cleanup",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "Related to earlier Locked decision; implementation evidence repeats intent but is not redundant executable code",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3125,
+        "byte_exact": true
+      },
+      "testability": "Inspect migration and latest RLS in #96",
+      "improvement": "Never delete historical migration",
+      "locked_fit": "SQL preservation",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3018,
+      "source_text": "[REDACTED; immutable frozen blob 195c3e4de415afef4515a6291c399a1c9001b610:3018]",
+      "source_text_redacted": true,
+      "classification": "historical_dev_auth_schema",
+      "behavior": "Records historical official CLI run identity",
+      "quality": "Dated generated_official_cli_run is source provenance, not an independent present-day run",
+      "risk": "Run identifier alone does not certify correctness",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "Related to earlier Locked decision; implementation evidence repeats intent but is not redundant executable code",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3126,
+        "byte_exact": true
+      },
+      "testability": "Verify run logs if required",
+      "improvement": "Avoid copying run locator unnecessarily",
+      "locked_fit": "Source-bound CI",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3019,
+      "source_text": "    \"model\": \"private.beta_invites existing hashes/use limits, add issued_by/label; private.admin_access_events no secrets; member-access soft revocation\",",
+      "source_text_redacted": false,
+      "classification": "historical_dev_auth_schema",
+      "behavior": "Names private invite hashes/limits and admin access events",
+      "quality": "Dated model is source provenance, not an independent present-day run",
+      "risk": "Schema intention does not prove RLS or FK behavior",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "Related to earlier Locked decision; implementation evidence repeats intent but is not redundant executable code",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3127,
+        "byte_exact": true
+      },
+      "testability": "Trace current SQL roles and RPC in #96",
+      "improvement": "Preserve private schema controls",
+      "locked_fit": "Auth/privacy",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3020,
+      "source_text": "    \"functions\": [",
+      "source_text_redacted": false,
+      "classification": "historical_dev_auth_schema",
+      "behavior": "Opens list of four admin RPC names",
+      "quality": "Dated functions is source provenance, not an independent present-day run",
+      "risk": "List is not evidence of granted privileges",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "Related to earlier Locked decision; implementation evidence repeats intent but is not redundant executable code",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3128,
+        "byte_exact": true
+      },
+      "testability": "Crosscheck database definitions",
+      "improvement": "No speculative privilege edit",
+      "locked_fit": "Admin RPC inventory",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3021,
+      "source_text": "      \"dic_admin_access_overview\",",
+      "source_text_redacted": false,
+      "classification": "historical_dev_auth_schema",
+      "behavior": "Lists admin access-overview RPC",
+      "quality": "Dated dic_admin_access_overview is source provenance, not an independent present-day run",
+      "risk": "Read scope must remain Admin-only",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "Related to earlier Locked decision; implementation evidence repeats intent but is not redundant executable code",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3129,
+        "byte_exact": true
+      },
+      "testability": "Check current grant and identity guard",
+      "improvement": "Retain least-privilege Admin view",
+      "locked_fit": "#96",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3022,
+      "source_text": "      \"dic_admin_issue_invite\",",
+      "source_text_redacted": false,
+      "classification": "historical_dev_auth_schema",
+      "behavior": "Lists admin issue-invite RPC",
+      "quality": "Dated dic_admin_issue_invite is source provenance, not an independent present-day run",
+      "risk": "Generation must be single-use and server role-gated",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "Related to earlier Locked decision; implementation evidence repeats intent but is not redundant executable code",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3130,
+        "byte_exact": true
+      },
+      "testability": "Test server max_uses and code-response handling",
+      "improvement": "Never expose code or permit member issuance",
+      "locked_fit": "#24/#96",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3023,
+      "source_text": "      \"dic_admin_revoke_invite\",",
+      "source_text_redacted": false,
+      "classification": "historical_dev_auth_schema",
+      "behavior": "Lists admin revoke-invite RPC",
+      "quality": "Dated dic_admin_revoke_invite is source provenance, not an independent present-day run",
+      "risk": "Must affect unused code not admitted membership",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "Related to earlier Locked decision; implementation evidence repeats intent but is not redundant executable code",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3131,
+        "byte_exact": true
+      },
+      "testability": "Test negative/positive revoke boundaries",
+      "improvement": "Preserve admitted accounts",
+      "locked_fit": "#24",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3024,
+      "source_text": "      \"dic_admin_set_member_access\"",
+      "source_text_redacted": false,
+      "classification": "historical_dev_auth_schema",
+      "behavior": "Lists admin set-member-access RPC",
+      "quality": "Dated dic_admin_set_member_access is source provenance, not an independent present-day run",
+      "risk": "Soft disable/restore must not modify protected Admin",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "Related to earlier Locked decision; implementation evidence repeats intent but is not redundant executable code",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3132,
+        "byte_exact": true
+      },
+      "testability": "Test owner/nonowner negatives",
+      "improvement": "Never hard-delete member",
+      "locked_fit": "Admin access",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3025,
+      "source_text": "    ],",
+      "source_text_redacted": false,
+      "classification": "json_structural",
+      "behavior": "Closes RPC names array",
+      "quality": "Required JSON container boundary, not executable logic",
+      "risk": "Structural JSON only",
+      "dead_or_obsolete": "Required JSON delimiter; not obsolete code",
+      "duplication": "Related to earlier Locked decision; implementation evidence repeats intent but is not redundant executable code",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3133,
+        "byte_exact": true
+      },
+      "testability": "Parse list",
+      "improvement": "No edit",
+      "locked_fit": "Historical evidence",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3026,
+      "source_text": "    \"secure_code_entropy\": \"two server-generated v4 UUIDs about 244 random bits, one-time plaintext response, SHA256 stored\",",
+      "source_text_redacted": false,
+      "classification": "historical_dev_auth_schema",
+      "behavior": "Two UUIDv4 codes, one-time plaintext reply, SHA256 stored",
+      "quality": "Dated secure_code_entropy is source provenance, not an independent present-day run",
+      "risk": "Security entropy estimate assumes proper cryptographic RNG",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "Related to earlier Locked decision; implementation evidence repeats intent but is not redundant executable code",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3134,
+        "byte_exact": true
+      },
+      "testability": "Inspect current generator and tests without revealing codes",
+      "improvement": "Keep code plaintext ephemeral",
+      "locked_fit": "Invitation security",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3027,
+      "source_text": "    \"default_selected\": \"RESOLVED one use, not a selectable option\",",
+      "source_text_redacted": false,
+      "classification": "historical_dev_auth_schema",
+      "behavior": "Records resolved default one use",
+      "quality": "Dated default_selected is source provenance, not an independent present-day run",
+      "risk": "Default text is not enforcement proof",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "Related to earlier Locked decision; implementation evidence repeats intent but is not redundant executable code",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3135,
+        "byte_exact": true
+      },
+      "testability": "Inspect runtime max_uses guard",
+      "improvement": "Retain exact 1",
+      "locked_fit": "Single-use Locked",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3028,
+      "source_text": "    \"alternative\": \"5/unlimited new-code issuance REMOVED and unsupported by admin issuance RPC\",",
+      "source_text_redacted": false,
+      "classification": "historical_dev_auth_schema",
+      "behavior": "Rejects five/unlimited issuance option",
+      "quality": "Dated alternative is source provenance, not an independent present-day run",
+      "risk": "Historical UI or SQL alternative must stay retired",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "Related to earlier Locked decision; implementation evidence repeats intent but is not redundant executable code",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3136,
+        "byte_exact": true
+      },
+      "testability": "Verify current UI lacks multiselect",
+      "improvement": "Do not revive options",
+      "locked_fit": "One-use supersession",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3029,
+      "source_text": "    \"protect_admin_server\": \"private.app_admins check forbids changing ANY administrator in portal RPC\",",
+      "source_text_redacted": false,
+      "classification": "historical_dev_auth_schema",
+      "behavior": "Protects any administrator against portal RPC remove",
+      "quality": "Dated protect_admin_server is source provenance, not an independent present-day run",
+      "risk": "Server check should not rely on UI",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "Related to earlier Locked decision; implementation evidence repeats intent but is not redundant executable code",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3137,
+        "byte_exact": true
+      },
+      "testability": "Check role access negative regression",
+      "improvement": "Never weaken Admin protection",
+      "locked_fit": "Owner permanent Admin",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3030,
+      "source_text": "    \"provenance\": [",
+      "source_text_redacted": false,
+      "classification": "historical_commit_provenance",
+      "behavior": "Opens hash provenance list",
+      "quality": "Dated provenance is source provenance, not an independent present-day run",
+      "risk": "Git commit references are evidence pointers, not semantic approval",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3138,
+        "byte_exact": true
+      },
+      "testability": "Resolve commits only if needed",
+      "improvement": "Do not conflate lineage with acceptance",
+      "locked_fit": "Source provenance",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3031,
+      "source_text": "[REDACTED; immutable frozen blob 195c3e4de415afef4515a6291c399a1c9001b610:3031]",
+      "source_text_redacted": true,
+      "classification": "historical_commit_provenance",
+      "behavior": "Records first implementation commit SHA",
+      "quality": "Dated 655a5c7f5ee6a87c9b5d6c9acf1cb80b7ea1c5cb is source provenance, not an independent present-day run",
+      "risk": "Unmapped hash alone does not identify behavior",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "Distinct historical SHA entry; same list format does not prove duplicate implementation",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3139,
+        "byte_exact": true
+      },
+      "testability": "Fetch precise commit diff if material",
+      "improvement": "Keep provenance without assuming validity",
+      "locked_fit": "Historical evidence",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3032,
+      "source_text": "[REDACTED; immutable frozen blob 195c3e4de415afef4515a6291c399a1c9001b610:3032]",
+      "source_text_redacted": true,
+      "classification": "historical_commit_provenance",
+      "behavior": "Records second implementation commit SHA",
+      "quality": "Dated 10f2eb105803ed30dc3475b4b40ac1dd689a0aee is source provenance, not an independent present-day run",
+      "risk": "No independent claim of its tests",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "Distinct historical SHA entry; same list format does not prove duplicate implementation",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3140,
+        "byte_exact": true
+      },
+      "testability": "Check exact commit and CI before credit",
+      "improvement": "Avoid aggregate invented PASS",
+      "locked_fit": "Historical evidence",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3033,
+      "source_text": "[REDACTED; immutable frozen blob 195c3e4de415afef4515a6291c399a1c9001b610:3033]",
+      "source_text_redacted": true,
+      "classification": "historical_commit_provenance",
+      "behavior": "Records third implementation commit SHA",
+      "quality": "Dated 264e8fed0b1649a8105b421de1c59965115137f1 is source provenance, not an independent present-day run",
+      "risk": "May be superseded by later code",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "Distinct historical SHA entry; same list format does not prove duplicate implementation",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3141,
+        "byte_exact": true
+      },
+      "testability": "Compare actual source tree before decisions",
+      "improvement": "Use latest Locked source",
+      "locked_fit": "Historical evidence",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3034,
+      "source_text": "[REDACTED; immutable frozen blob 195c3e4de415afef4515a6291c399a1c9001b610:3034]",
+      "source_text_redacted": true,
+      "classification": "historical_commit_provenance",
+      "behavior": "Records fourth implementation commit SHA",
+      "quality": "Dated 412bbb39ca9bf26a09f407009b27f9e885609742 is source provenance, not an independent present-day run",
+      "risk": "Historical SHA is a durable pointer only",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "Distinct historical SHA entry; same list format does not prove duplicate implementation",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3142,
+        "byte_exact": true
+      },
+      "testability": "Inspect commit diff if needed",
+      "improvement": "No source mutation",
+      "locked_fit": "Source trace",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3035,
+      "source_text": "[REDACTED; immutable frozen blob 195c3e4de415afef4515a6291c399a1c9001b610:3035]",
+      "source_text_redacted": true,
+      "classification": "historical_commit_provenance",
+      "behavior": "Records fifth implementation commit SHA",
+      "quality": "Dated 7744acfa77e7b03b3bbc238e56a2867ebb2f3742 is source provenance, not an independent present-day run",
+      "risk": "Commit existence is not test completion",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "Distinct historical SHA entry; same list format does not prove duplicate implementation",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3143,
+        "byte_exact": true
+      },
+      "testability": "Review linked CI if relevant",
+      "improvement": "Do not overcount acceptance",
+      "locked_fit": "Source trace",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3036,
+      "source_text": "[REDACTED; immutable frozen blob 195c3e4de415afef4515a6291c399a1c9001b610:3036]",
+      "source_text_redacted": true,
+      "classification": "historical_commit_provenance",
+      "behavior": "Records sixth implementation commit SHA",
+      "quality": "Dated a56803388d7ff2e83f2953de798cd8d5e8c23206 is source provenance, not an independent present-day run",
+      "risk": "Does not establish live deployment",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "Distinct historical SHA entry; same list format does not prove duplicate implementation",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3144,
+        "byte_exact": true
+      },
+      "testability": "Check release ancestry separately",
+      "improvement": "Keep DEV vs LIVE clear",
+      "locked_fit": "Source provenance",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3037,
+      "source_text": "[REDACTED; immutable frozen blob 195c3e4de415afef4515a6291c399a1c9001b610:3037]",
+      "source_text_redacted": true,
+      "classification": "historical_commit_provenance",
+      "behavior": "Records seventh implementation commit SHA",
+      "quality": "Dated 98fd46cef5891883ca880de560f561b9d89fc6af is source provenance, not an independent present-day run",
+      "risk": "Cannot infer current functionality from hash",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "Distinct historical SHA entry; same list format does not prove duplicate implementation",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3145,
+        "byte_exact": true
+      },
+      "testability": "Read current caller/SQL to verify",
+      "improvement": "Preserve historical record",
+      "locked_fit": "Source provenance",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3038,
+      "source_text": "[REDACTED; immutable frozen blob 195c3e4de415afef4515a6291c399a1c9001b610:3038]",
+      "source_text_redacted": true,
+      "classification": "historical_commit_provenance",
+      "behavior": "Records eighth implementation commit SHA",
+      "quality": "Dated 3091d975f8de7652c57446df79f72f4da991fc95 is source provenance, not an independent present-day run",
+      "risk": "Independent verification not present in line",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "Distinct historical SHA entry; same list format does not prove duplicate implementation",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3146,
+        "byte_exact": true
+      },
+      "testability": "Compare exact commit metadata if needed",
+      "improvement": "No invented checks",
+      "locked_fit": "Source provenance",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3039,
+      "source_text": "[REDACTED; immutable frozen blob 195c3e4de415afef4515a6291c399a1c9001b610:3039]",
+      "source_text_redacted": true,
+      "classification": "historical_commit_provenance",
+      "behavior": "Records ninth implementation commit SHA",
+      "quality": "Dated b37e432b07c64a9b45ed1ed9a093e2e1a3af9eca is source provenance, not an independent present-day run",
+      "risk": "Lineage count does not equal quality assurance",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "Distinct historical SHA entry; same list format does not prove duplicate implementation",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3147,
+        "byte_exact": true
+      },
+      "testability": "Validate final relevant tree if needed",
+      "improvement": "Do not claim merge status from list",
+      "locked_fit": "Source provenance",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3040,
+      "source_text": "    ],",
+      "source_text_redacted": false,
+      "classification": "json_structural",
+      "behavior": "Closes recorded commit-hash array",
+      "quality": "Required JSON container boundary, not executable logic",
+      "risk": "Structural punctuation only",
+      "dead_or_obsolete": "Required JSON delimiter; not obsolete code",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3148,
+        "byte_exact": true
+      },
+      "testability": "Validate JSON",
+      "improvement": "No change",
+      "locked_fit": "Archive integrity",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3041,
+      "source_text": "    \"tests\": {",
+      "source_text_redacted": false,
+      "classification": "historical_exact_source_test",
+      "behavior": "Opens source-specific test run map",
+      "quality": "Dated tests is source provenance, not an independent present-day run",
+      "risk": "Dated references are not today's CI",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3149,
+        "byte_exact": true
+      },
+      "testability": "Retrieve exact workflow run states when relevant",
+      "improvement": "Keep statuses date-scoped",
+      "locked_fit": "CI provenance",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3042,
+      "source_text": "      \"isolated_SQL\": 39178869416,",
+      "source_text_redacted": false,
+      "classification": "historical_exact_source_test",
+      "behavior": "Records isolated SQL test-run identifier",
+      "quality": "Dated isolated_SQL is source provenance, not an independent present-day run",
+      "risk": "Run ID not proof of signed HTTP JWT",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3150,
+        "byte_exact": true
+      },
+      "testability": "Read run jobs/conclusion if needed",
+      "improvement": "Do not equate SQL isolation to live Auth",
+      "locked_fit": "#96",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3043,
+      "source_text": "      \"node_lint_build\": 39179606340,",
+      "source_text_redacted": false,
+      "classification": "historical_exact_source_test",
+      "behavior": "Records Node/lint/build test run identifier",
+      "quality": "Dated node_lint_build is source provenance, not an independent present-day run",
+      "risk": "Prior PASS is only source-specific",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3151,
+        "byte_exact": true
+      },
+      "testability": "Inspect recorded run and current source ancestry",
+      "improvement": "Reuse valid evidence narrowly",
+      "locked_fit": "CI reuse",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3044,
+      "source_text": "      \"cloud_browser\": 39179606335,",
+      "source_text_redacted": false,
+      "classification": "historical_exact_source_test",
+      "behavior": "Records cloud/browser test run identifier",
+      "quality": "Dated cloud_browser is source provenance, not an independent present-day run",
+      "risk": "Synthetic/dated browser checks may not cover live membership",
+      "dead_or_obsolete": "Immutable historical decision, evidence or source pointer; not a current code deletion candidate",
+      "duplication": "No proven duplicated current executable implementation; retain original provenance",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3152,
+        "byte_exact": true
+      },
+      "testability": "Inspect run scope, devices and source SHA",
+      "improvement": "No universal UX claim",
+      "locked_fit": "Auth/mobile quality",
+      "human_independently_certified": false
+    }
+  ],
+  "findings": [
+    {
+      "id": "S2-148-ACCESS-01",
+      "status": "LOCKED_INVARIANT_REAFFIRMED",
+      "lines": [
+        2987,
+        2989,
+        2990,
+        2991,
+        2993,
+        2994,
+        2995,
+        2999,
+        3000,
+        3026,
+        3027,
+        3028,
+        3029
+      ],
+      "detail": "Permanent admitted membership does not imply immortal Auth session; newly generated invites must be single-use, server-owned/Admin role-gated and SHA256 stored; only reversible nonadmin access removal authorized. #96/#24 retain runtime acceptance ownership."
+    },
+    {
+      "id": "S2-148-TEST-02",
+      "status": "HISTORICAL_EVIDENCE_LIMITATION",
+      "lines": [
+        3002,
+        3010,
+        3011,
+        3016,
+        3018,
+        3042,
+        3043,
+        3044
+      ],
+      "detail": "October dated test/source/provider run references and conflicting dev/not-live descriptions cannot certify November production signed cross-account behavior, provider state or deployment; later #41/#96 exact evidence supersedes when applicable."
+    },
+    {
+      "id": "S2-148-DATA-03",
+      "status": "PRIVACY_REDACTION",
+      "lines": [
+        2986,
+        3010,
+        3031,
+        3032,
+        3033,
+        3034,
+        3035,
+        3036,
+        3037,
+        3038,
+        3039
+      ],
+      "detail": "Do not duplicate owner quote, member/invite activity counts or operational SHA provenance in new PUBLIC repository review records; source blob/line pointer kept."
+    }
+  ],
+  "accounting": {
+    "new_direct_frozen_original_lines": 60,
+    "canonical_strict_increment": 0,
+    "reason": "Open #769 still owns canonical R2/C2/S2 reconciliation; receipt append-only nonoverlap."
+  },
+  "checks": {
+    "source_and_current_byte_match": "PASS_60_OF_60",
+    "line_specific_nine_dimensions": "RECORDED",
+    "live_auth_sql_provider": "NOT_RUN",
+    "pr_and_merged_ci": "PENDING"
+  },
+  "next": "Advance frozen file #59 to 3045+ only after nonoverlap; finish pinned/current and new live drift separately."
+}
