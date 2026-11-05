@@ -5,37 +5,37 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 6264,
+    "strict_validated_lines": 6314,
     "first_unvalidated_manifest_file_index": 59,
     "first_unvalidated_path": "docs/DECISION_LEDGER.json",
-    "first_unvalidated_line": 1374,
+    "first_unvalidated_line": 1424,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 7891,
+    "strict_validated_lines": 7941,
     "first_unvalidated_file_index": 50,
     "first_unvalidated_path": "scripts/audit/coffee-reviewed-change-forensics.py",
-    "first_unvalidated_line": 671,
+    "first_unvalidated_line": 721,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true,
-    "strict_live_counterpart_checked_through_line": 670,
+    "strict_live_counterpart_checked_through_line": 720,
     "last_live_counterpart_checked": {
       "path": "scripts/audit/coffee-reviewed-change-forensics.py",
-      "commit": "28fc5da4edbcdf4c35184d6ce952bb53fc368700",
+      "commit": "8e0b3e6bef1db8b8cd00939a0826646a7a9cd72b",
       "blob": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
-      "first_line": 617,
-      "last_line": 676,
+      "first_line": 677,
+      "last_line": 726,
       "offset": 6
     }
   },
   "post_pin_drift": {
-    "observed_development_commit": "28fc5da4edbcdf4c35184d6ce952bb53fc368700",
+    "observed_development_commit": "8e0b3e6bef1db8b8cd00939a0826646a7a9cd72b",
     "strict_validated_added_lines": 1,
     "scope": "Single verified addition in first current source path; total post-pin live-code delta denominator not yet reconciled",
-    "rest_of_live_changes": "Full post-pin source-drift audit INCOMPLETE; S2-111 verified 60 current literal counterparts at +6.",
+    "rest_of_live_changes": "Remaining post-pin current code drift not semantically fully inspected; 50 new pinned live counterparts exact at +6.",
     "live_fully_reviewed_files": 36,
     "live_fully_reviewed_file_lines": 2947,
     "latest_reviewed_live_path": "scripts/audit/coffee-corpus-enrich.py",
@@ -2535,11 +2535,33 @@
       "strict_pinned_delta": 60,
       "old_v2_additional_credit": 0,
       "verification": "120 individually interpreted original source lines/9 fields, 60 exact current +6; no app tests or full drift."
+    },
+    {
+      "batch": "S2-112",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-112.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        1374,
+        1423
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "pinned_lines": [
+        671,
+        720
+      ],
+      "pinned_blob": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "live_exact_text_line_offset": 6,
+      "live_blob": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+      "strict_frozen_delta": 50,
+      "strict_pinned_delta": 50,
+      "old_v2_additional_credit": 0,
+      "verification": "100 distinct individually reasoned lines with 9 semantic fields; 50 exact live +6, no global drift or app test."
     }
   ],
   "completion": "IN_PROGRESS",
   "test_limit": "Source-bound direct original text/criteria verification; PR-head CI pending, live drift and functional testing incomplete",
-  "last_batch": "S2-111",
-  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-111.json",
+  "last_batch": "S2-112",
+  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-112.json",
   "complete": false
 }
