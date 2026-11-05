@@ -1,3 +1,9 @@
+## November 5, 2026 UTC — PR696 regex-literal escape corrected in same-commit review (TESTING)
+
+Second independent readback of repair head `3352779505171ee3ffdd0cc63bc25ca1de754f84` found that the inserted JavaScript **regex literals** still contained double escaped `\\\\s` and `\\\\b` (would match literal backslash characters, not selected page whitespace/word boundaries). Repaired only newly inserted regex literal segment by reducing each double slash once; retained necessary doubled escapes inside the `RegExp(string)` constructor unchanged. This is a genuine corrected-source test fix, not a passing check or an infrastructure failure. Full exact PR-head Node/lint/build and merged official #446/#512 validation remain pending; no publication, frozen corpus or user data edits.
+
+---
+
 ## November 5, 2026 UTC — PR696 first candidate source-generation corruption caught by readback; repaired before acceptance (TESTING)
 
 Independent post-write readback of PR696 first head `604edaf427be04644a7bd4232415b9fbe5bc213e` detected an actual invalid JS file: the scripting `String.replace` replacement text contained JS regex `$'`, which the JavaScript replacement runtime treated as an interpolation of the entire original suffix. This inadvertently duplicated ~34KB of source in the new module before the regex and broke the parser. **Not a GitHub runner/startup problem; first candidate must NOT be considered PASS or merged.** Reconstructed the exact intended bounded generic helper from the first candidate, applied replacement with a callback (no `$'` expansion), preserved the original parent source and same test logic, and readback-checked corrected source length and single named function. This is a repair commit with same-commit journal under PR696. All applicable exact corrected-head tests and official merged-source proof still required. Scope, frozen oracle and privacy/deployment constraints unchanged.
