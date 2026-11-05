@@ -733,6 +733,22 @@
       "source_bytes_sha256": null,
       "source_byte_caveat": "Original publisher HTML directly inspected; publisher PDF/HTML original bytes and raw experiment data not independently SHA-256 hashed.",
       "claims_verified_externally": "Experimental 59mm cylindrical chamber: ~90C water, 60g ground coffee, ~1L brew, constant 250mL/min; authors explicitly note that quantities/time are closer to drip filter than ordinary espresso. Two different commercial grinds/coffees rather than controlled same-bean grinder comparison. Cylinder pressure drops ~2.3 bar (fine) and 0.65 bar (coarse) matched that fixture; conical spatial extraction gradients are CFD predictions assuming fixed packing, fully wetted bed and no initial dissolved water solubles, not direct live espresso puck images. Article's 18-22% extraction preference history traces to filter-coffee control chart; no new blinded espresso taste/5-rating outcomes."
+    },
+    {
+      "id": "LIT-2020-KLOTZ-ESPRESSO-TEMP-TRIANGLE",
+      "type": "peer_reviewed_primary_pilot_espresso_triangle_sensory_discrimination",
+      "title": "Influence of the Brewing Temperature on the Taste of Espresso",
+      "authors": "Johanna A. Klotz, Gertrud Winkler, Dirk W. Lachenmeier",
+      "published": "2020-01-02 Foods 9(1):36",
+      "doi": "10.3390/foods9010036",
+      "url": "https://www.mdpi.com/2304-8158/9/1/36",
+      "open_access_mirror": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7022572/",
+      "access": "DIRECT_PRIMARY_ARTICLE_PDF_EXTRACTED_TEXT_AND_FIRST_PARTY_PUBLISHER_INDEXED_METHODS_RESULTS_20261105",
+      "review_status": "FOCUSED_FIVE_PAGE_PUBLISHED_METHODS_TRIANGLE_TEST_TABLE1_DISCUSSION_READ; PDF_SCREENSHOT_CACHE_MISS_NOT_VISUALLY_VERIFIED; RAW_BINARY_SHA_AND_UNDERLYING_TRIAL_RECORDS_NOT_VERIFIED",
+      "evidence_grade": "PEER_REVIEWED_SINGLE_BLEND_SINGLE_MACHINE_24_ASSESSOR_TRIANGLE_PILOT; DETECTABILITY_ONLY_NOT_PREFERENCE_OR_EQUIVALENCE; NO_HEALTH_OUTCOME",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Direct text from original five-page published PDF reproduced by scholarly mirror, crosschecked against first-party MDPI publisher search index and PubMed/PMC. Screenshot endpoint cache miss; no visual PDF certification or original PDF byte SHA-256.",
+      "claims_verified_externally": "ECM Synchronika machine, one medium-dark Arabica/canephora Orphea blend, 7 +/- 0.5g coffee, target 25 +/- 2.5g drink in 25 +/- 5s, approximately 55C samples for blind triangle tasting. At 24 panelists, 80-v-93C: 11/24 correct, below 13/24 cutoff (not significant); 80-v-128C: 15/24 correct, significant. Experimental variables were machine temperature SETPOINTS, not independently measured actual puck-water temperatures. A negative significance test does not establish sensory equivalence. No blinded hedonic preference, long-term health outcome or multi-coffee machine-generalizable 93C ceiling."
     }
   ],
   "evidence_checks": [
@@ -2004,6 +2020,39 @@
       "result": "MODELED_UNIFORMITY_NOT_MEASURED_ESPRESSO_TASTE_NO_POLICY_TRANSFER",
       "owner_approval": false,
       "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-052-A",
+      "source": "ORG-07 original docs/research/originals/07_Foundational_Causal_Report_on_Espresso_Extraction_and_Sensory_Outcome.md Git blob 43912d0dec0969c090d525c853f3a456136a2311 SHA-256 a7a1889a884aa25573a24c5b731449b61333ff14a67294bbe1559fe8462c92dc, lines 33, 152, 225, 397; LIT-2020-KLOTZ-ESPRESSO-TEMP-TRIANGLE",
+      "claim": "2020 primary espresso pilot tested ONE medium-dark blend, ECM Synchronika, 7 +/-0.5g to 25 +/-2.5g over 25 +/-5s. Blind forced-choice triangle responses at served approximately 55C: 80 vs 93C 11/24 correct (below 13/24 for alpha 0.05); 80 vs 128C 15/24 (significant). Temperature differences are MACHINE SETTINGS, not measured puck temperature. No significant discrimination in one test is NOT proof of equivalent sensory outcomes.",
+      "grade": "DIRECT_ORIGINAL_PUBLISHED_PDF_TEXT_METHODS_AND_TABLE1_PLUS_FIRST_PARTY_PUBLISHER_SEARCH_CROSSCHECK; PILOT_LIMITED",
+      "primary_sources": [
+        "https://www.mdpi.com/2304-8158/9/1/36",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC7022572/",
+        "https://pdfs.semanticscholar.org/f0e1/9914bdb5d473ce4da1bf7a0c5c24dd4ba8f4.pdf"
+      ],
+      "page_number": "Foods 2020 9(1):36 PDF pp.2-4 of 5, Methods/Table1/Discussion; publisher DOI 10.3390/foods9010036",
+      "app_source_sha": "e39e5eade83473b7f8bfde6fd7bf339c52cdbffe",
+      "current_app": "site/lib/engine.js Git blob 93969d561e18205d8f87e19059ea0c66b519e934 temp guidance from same coffee/eligible history; advanced optional temperature control only. No new Klotz thresholds implemented.",
+      "result": "BOUNDED_ESPRESSO_TRIANGLE_DISCRIMINATION_NOT_EQUIVALENCE_OR_OPTIMUM",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-052-B",
+      "source": "LIT-2020-KLOTZ-ESPRESSO-TEMP-TRIANGLE published Discussion pp.3-4; ORG-04 original Markdown Git blob f65992902285e693b96e993dae3e7c3bf2535793 lines 298-310,413,482; ORG-07 lines 152,225",
+      "claim": "All samples equilibrated to about 55C before tasting and the same 24 people received two triangle tests, not a trained five-sensory-rating improvement trial. The authors acknowledge batch preparation/holding and equilibration confounds. No randomized controlled health outcomes, no multi-bean/machine trial, no verified true puck-water sensor; the authors' 93C upper-limit and health interpretations extend beyond what this narrow design establishes. Brewing temperature must not be confused with consuming-temperature hazard.",
+      "grade": "METHOD_DESIGN_AND_NEGATIVE_CONTROL_INTERPRETATION_PRIMARY_SOURCE; HEALTH_IMPACT_NOT_OBSERVED",
+      "primary_sources": [
+        "https://www.mdpi.com/2304-8158/9/1/36",
+        "https://pdfs.semanticscholar.org/f0e1/9914bdb5d473ce4da1bf7a0c5c24dd4ba8f4.pdf"
+      ],
+      "page_number": "Foods 2020 9(1):36 PDF pp.2-4 of 5, Methods/Discussion; original ORG-04 lines 298-310",
+      "app_source_sha": "e39e5eade83473b7f8bfde6fd7bf339c52cdbffe",
+      "current_app": "site/lib/engine.js optional advanced temperature -1C guidance for astringency exists at lines 497-545 and no global 93C hard cap; this new paper cannot certify a universal temperature correction, machine sensor equivalence, or an espresso sensory optimum.",
+      "result": "EXPERIMENT_CONDITIONAL_NO_PRODUCT_NUMERIC_POLICY_TRANSFER",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
     }
   ],
   "policy_decisions_pending": [],
@@ -2015,6 +2064,7 @@
     "reason": "R455-051 primary-source context and model vs actual taste boundary only."
   },
   "next_actions": [
+    "R455-052: Original peer-reviewed Klotz 2020 espresso single-blend ECM Synchronika 24-person triangle found 11/24 80-versus-93C non-significant, 15/24 80-versus-128C significant; NOT an equivalence, preference, multi-espresso, health or puck-sensor proof. All sampled to ~55C. No new universal 93C cap/80C recipe or temp step policy. Original S019 inaccessible.",
     "R455-048: Corrochano 2015 publisher-version original PDF reviewed methods §§3.1/3.5/4.4 and Table2: 600s wet pre-extraction + 60s per pressure step at 80C, 10Hz, K range 2.59e-14..4.38e-13m2; physical wet consolidated bed, NOT ordinary shot nor user taste/performance validation. Continue fresh bibliography, do not import constants.",
     "R455-046: Primary Fu et al 2026 Catimor split-lot paper (DOI 10.48130/bpr-0026-0010) uses four 10kg treatment lots, three analysis replicates without separate repeated fermentations, Q-grader 12g/250mL cupping not espresso, 1682 vs1706 count discrepancy. No process-to-espresso automation or numeric priors; original 03 citation coverage still incomplete.",
     "R455-041: Slayer original manual factory 40g/30s versus 2021 Slayer-brand author adaptable 40-60g/30s, first-party prebrew flavor hypotheses only. No new prebrew/TCT numeric recipe recommendation, no grinder slow-feed conflation, no owner approval sought without concrete behavior choice; other original citations and inaccessible Oct29 pack/S019 continue.",
@@ -2035,25 +2085,26 @@
     "R455-045: Original Gagné 2019 0.08 mm² surface-area result contradicts Kaffeemacher 2025 background 0.08 mm linear shorthand; Table1 lower fines ONLY same grind, rising after finer re-dial. Preserve condition qualifiers; no engine 40%-heuristic edit. Continue unrelated research citations or reproduced UX correctness. Recovered Library 10-page slow-feed variant SHA a068e5e3... differs from owner-archive registered member SHA a4db4f38...; archive bytes still unavailable."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-051",
-    "base_development_sha": "a31dc5bd8298251e27aaccb2161ee54bd0fb2c5a",
-    "source_document": "Moroney et al. 2019 original first-party PLOS ONE full HTML crosschecked against ORG-08",
+    "id": "R455-052",
+    "base_development_sha": "e39e5eade83473b7f8bfde6fd7bf339c52cdbffe",
+    "source_document": "Klotz/Winkler/Lachenmeier (2020) Foods original published pilot espresso sensory triangle study",
     "source_ids": [
-      "ORG-08",
-      "LIT-2019-MORONEY-CFD-BED-UNIFORMITY"
+      "ORG-04",
+      "ORG-07",
+      "LIT-2020-KLOTZ-ESPRESSO-TEMP-TRIANGLE"
     ],
     "claim_ids": [
-      "R455-EV-CIT-051-A",
-      "R455-EV-CIT-051-B"
+      "R455-EV-CIT-052-A",
+      "R455-EV-CIT-052-B"
     ],
-    "number_of_curated_sources": 50,
-    "total_evidence_checks": 107,
-    "review_type": "PRIMARY_DIRECT_METHODS_DRIP_VS_ESPRESSO_AND_CFD_MODEL_LIMIT_CHECK",
+    "number_of_curated_sources": 51,
+    "total_evidence_checks": 109,
+    "review_type": "PRIMARY_PUBLISHED_METHODS_24_PERSON_TRIANGLE_SENSORY_DISCRIMINATION_VS_EQUIVALENCE",
     "source_hash_verified_20261105": false,
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
     "code_or_policy_changed": false,
-    "next_action": "PR/merge source-bound docs governance; then continue disjoint source or verified safe UX defect; original S019 inaccessible."
+    "next_action": "Docs-only exact-head governance and nonforce merge; then review next unverified original citation or demonstrable narrow safe UX bug. Original S019 PDF inaccessible."
   },
   "policy_decisions_resolved": [
     {
@@ -2298,6 +2349,26 @@
       "approval_required_for_behavior_change": true,
       "implementation": "RESEARCH_ONLY_HOLD_NO_OWNER_DECISION_REQUESTED",
       "test_plan": "Docs-only governance and source continuity; future new behavior requires actual same-coffee five-taste/style/feed/capability/one-control/offline testing and physical taste outcomes.",
+      "release_queue": "NO_NEW_ITEM"
+    },
+    {
+      "id": "R455-PROP-052-KLOTZ-TRIANGLE-TO-TEMP-ADVICE",
+      "finding": "Controlled 2020 small espresso triangle experiment found no statistically significant ability to discriminate 80C from 93C in its single blend/machine at equal serving temperature, but non-significance does not establish equivalence or validated preference. 128C was a machine setting, not a measured puck temperature; health benefit was not tested.",
+      "evidence": [
+        "ORG-07 original source SHA-256 a7a1889a884aa25573a24c5b731449b61333ff14a67294bbe1559fe8462c92dc, lines 33/152/225",
+        "ORG-04 original Git blob f65992902285e693b96e993dae3e7c3bf2535793 lines 298-310",
+        "LIT-2020-KLOTZ-ESPRESSO-TEMP-TRIANGLE",
+        "R455-EV-CIT-052-A",
+        "R455-EV-CIT-052-B"
+      ],
+      "severity": "P2_SOURCE_SCOPE_AND_SENSORY_GENERALIZATION_ONLY_NO_NEW_REPRODUCED_RUNTIME_DEFECT",
+      "user_benefit": "Avoid misleading universal 93C optimum, guaranteed astringency temperature benefit, or mistaken proof of equivalence; retain actionable user history and hardware capability boundaries.",
+      "current_locked": "Master Specification and Decision Ledger: five required ratings, all-green success, at most one controllable adjustment, equipment-capability flags, coffee/style/feed/calibration history. New numeric sensory targets/temperature rules require explicit owner approval.",
+      "current_app": "Development e39e5eade83473b7f8bfde6fd7bf339c52cdbffe engine.js blob 93969d561e18205d8f87e19059ea0c66b519e934 retains optional machine-capable temperature control and a 1C downward temperature heuristic; no universal 93C cap. This review does not identify deterministic app incorrect behavior from paper alone.",
+      "proposed_change": "SAFE: evidence-bound note only; do not promote non-significant triangle data into sensor-independent temperature optimum, health guidance, or an automatic 80C/93C selector. HOLD changing the existing advanced 1C temperature heuristic unless owner explicitly approves a concrete alternative and controlled multi-coffee five-rating tests validate it.",
+      "approval_required_for_behavior_change": true,
+      "implementation": "RESEARCH_LEDGER_ONLY_HOLD_NO_BEHAVIOR_CHANGE",
+      "test_plan": "Docs-only governance/continuity; app Node/browser/SQL/Auth unaffected. Any future temperature-policy alteration requires equipment-capability, original shot preservation, five-ratings, single-control, same-coffee, mobile/offline, and actual sensory evidence.",
       "release_queue": "NO_NEW_ITEM"
     }
   ]
