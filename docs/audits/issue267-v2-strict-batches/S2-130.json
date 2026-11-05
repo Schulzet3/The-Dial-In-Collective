@@ -1,0 +1,921 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch_id": "S2-130",
+  "date_utc": "2026-11-05",
+  "source_commits": {
+    "frozen": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+    "pinned": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "observed_development": "5c438b4f14271719ae9809597df2db07d8b581da"
+  },
+  "method": "18 directly interpreted original frozen and 20 separately pinned executable numbered lines with original text and nine source-specific fields each; verified 38 live same-line counterparts; no V1/R2/C2 credit.",
+  "previous_nonoverlap": {
+    "receipt": "S2-129",
+    "strict_before": [
+      7152,
+      8799
+    ],
+    "expected_frozen_start": 2262,
+    "expected_pinned_start": 231,
+    "first_frozen_workflow_revalidated_no_extra_credit": true,
+    "first_workflow_blob": "2cf28b22c69547c15c5f300dc4a68ed96a58791e"
+  },
+  "frozen": {
+    "file_index": 59,
+    "path": "docs/DECISION_LEDGER.json",
+    "blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+    "range": [
+      2262,
+      2279
+    ],
+    "source_lines": 18,
+    "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+    "live_source_lines": 18,
+    "live_line_offset": 0,
+    "per_line": [
+      {
+        "line": 2262,
+        "source_text": "      \"status\": \"Locked\",",
+        "classification": "frozen_locked_clause_direct_read",
+        "behavior": "Locked status of Bag Management retirement",
+        "quality": "Original numbered JSON decision/source interpreted with surrounding supersession and historic record context, not treated as deployment proof.",
+        "risk": "Do not revive retired UI due to old spec",
+        "dead_or_obsolete": "Frozen historical source immutable; retirement does not justify data destruction.",
+        "duplication": "Decision chronology necessary and narrow; structural braces are not redundant.",
+        "current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2262,
+          "exact_match": true
+        },
+        "testability": "Check active bag controls absent; not executed this source review.",
+        "fix_opportunity": "Trace actual current implementation against Locked decision before editing; do not change frozen sources.",
+        "locked_fit": "Preserve member shots, original bags, history, RLS, offline queues and owner-only publication.",
+        "review_method": "AI direct reading of frozen #59 original docs/DECISION_LEDGER.json:2262 at blob 195c3e4de415afef4515a6291c399a1c9001b610, verified exact current same-line text at 90233639bef05b1671f5325ebbf89fde1031eac6; no human or runtime certification."
+      },
+      {
+        "line": 2263,
+        "source_text": "      \"date\": \"2026-10-26\",",
+        "classification": "frozen_locked_clause_direct_read",
+        "behavior": "Scope date October 26",
+        "quality": "Original numbered JSON decision/source interpreted with surrounding supersession and historic record context, not treated as deployment proof.",
+        "risk": "Historical date does not imply deployed state",
+        "dead_or_obsolete": "Frozen historical source immutable; retirement does not justify data destruction.",
+        "duplication": "Decision chronology necessary and narrow; structural braces are not redundant.",
+        "current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2263,
+          "exact_match": true
+        },
+        "testability": "Cross-check chronology; not executed this source review.",
+        "fix_opportunity": "Trace actual current implementation against Locked decision before editing; do not change frozen sources.",
+        "locked_fit": "Preserve member shots, original bags, history, RLS, offline queues and owner-only publication.",
+        "review_method": "AI direct reading of frozen #59 original docs/DECISION_LEDGER.json:2263 at blob 195c3e4de415afef4515a6291c399a1c9001b610, verified exact current same-line text at 90233639bef05b1671f5325ebbf89fde1031eac6; no human or runtime certification."
+      },
+      {
+        "line": 2264,
+        "source_text": "      \"title\": \"Retire active Bag Management and preserve linked historical shot data\",",
+        "classification": "frozen_locked_clause_direct_read",
+        "behavior": "Title retains linked shot history",
+        "quality": "Original numbered JSON decision/source interpreted with surrounding supersession and historic record context, not treated as deployment proof.",
+        "risk": "Title does not authorize bag_id deletion",
+        "dead_or_obsolete": "Frozen historical source immutable; retirement does not justify data destruction.",
+        "duplication": "Decision chronology necessary and narrow; structural braces are not redundant.",
+        "current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2264,
+          "exact_match": true
+        },
+        "testability": "Check old shot links; not executed this source review.",
+        "fix_opportunity": "Trace actual current implementation against Locked decision before editing; do not change frozen sources.",
+        "locked_fit": "Preserve member shots, original bags, history, RLS, offline queues and owner-only publication.",
+        "review_method": "AI direct reading of frozen #59 original docs/DECISION_LEDGER.json:2264 at blob 195c3e4de415afef4515a6291c399a1c9001b610, verified exact current same-line text at 90233639bef05b1671f5325ebbf89fde1031eac6; no human or runtime certification."
+      },
+      {
+        "line": 2265,
+        "source_text": "      \"decision\": \"No Bag Details, Roast Date, Frozen, New Bag, archives/reactivation, bag-age advice or automatic bag creation/association in the product. Log shots on coffee/library entries; one visible recommendation and distinct successful family evidence remain. Rename Coffee Name input. Keep 4 existing bag rows, 14 linked shots, private notes, shot history, linked account/coffee constraints, RLS, backup and offline queues unchanged. Retain the old bags table/shot bag_id and protected importer only for data integrity; reject malformed legacy links. Do not drop or rewrite production bag records/links or apply any SQL as part of this source-only change.\",",
+        "classification": "frozen_locked_clause_direct_read",
+        "behavior": "Retire Bag Details, New Bag, Frozen, automatic creation; preserve four rows, 14 linked shots, RLS and offline queues",
+        "quality": "Original numbered JSON decision/source interpreted with surrounding supersession and historic record context, not treated as deployment proof.",
+        "risk": "Deleting bag associations would destroy user history",
+        "dead_or_obsolete": "Frozen historical source immutable; retirement does not justify data destruction.",
+        "duplication": "Decision chronology necessary and narrow; structural braces are not redundant.",
+        "current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2265,
+          "exact_match": true
+        },
+        "testability": "Read-only bag link and no-new-bag UI tests; not executed this source review.",
+        "fix_opportunity": "Trace actual current implementation against Locked decision before editing; do not change frozen sources.",
+        "locked_fit": "Preserve member shots, original bags, history, RLS, offline queues and owner-only publication.",
+        "review_method": "AI direct reading of frozen #59 original docs/DECISION_LEDGER.json:2265 at blob 195c3e4de415afef4515a6291c399a1c9001b610, verified exact current same-line text at 90233639bef05b1671f5325ebbf89fde1031eac6; no human or runtime certification."
+      },
+      {
+        "line": 2266,
+        "source_text": "      \"supersedes\": \"Only §28 and Issue15's original active bag lifecycle/optional user-interface expectation, obsolete Bag Details priority in §§6–7 and bag-specific wording in §§9,38–39; no changes to canonical coffee identity, published bag-page source evidence, other Locked decisions, permissions or release gate.\",",
+        "classification": "frozen_locked_clause_direct_read",
+        "behavior": "Supersede only active bag UI portions of older sections",
+        "quality": "Original numbered JSON decision/source interpreted with surrounding supersession and historic record context, not treated as deployment proof.",
+        "risk": "Do not alter coffee identity or release permissions",
+        "dead_or_obsolete": "Frozen historical source immutable; retirement does not justify data destruction.",
+        "duplication": "Decision chronology necessary and narrow; structural braces are not redundant.",
+        "current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2266,
+          "exact_match": true
+        },
+        "testability": "Compare baseline §28; not executed this source review.",
+        "fix_opportunity": "Trace actual current implementation against Locked decision before editing; do not change frozen sources.",
+        "locked_fit": "Preserve member shots, original bags, history, RLS, offline queues and owner-only publication.",
+        "review_method": "AI direct reading of frozen #59 original docs/DECISION_LEDGER.json:2266 at blob 195c3e4de415afef4515a6291c399a1c9001b610, verified exact current same-line text at 90233639bef05b1671f5325ebbf89fde1031eac6; no human or runtime certification."
+      },
+      {
+        "line": 2267,
+        "source_text": "      \"approval\": \"Owner directly said 'Proceed. Remove as much as you can without affecting data' after read-only impact assessment of four live bags and fourteen linked shots, October 26, 2026.\",",
+        "classification": "frozen_locked_clause_direct_read",
+        "behavior": "Documents direct owner approval and historic row counts",
+        "quality": "Original numbered JSON decision/source interpreted with surrounding supersession and historic record context, not treated as deployment proof.",
+        "risk": "Historic counts cannot certify current live DB",
+        "dead_or_obsolete": "Frozen historical source immutable; retirement does not justify data destruction.",
+        "duplication": "Decision chronology necessary and narrow; structural braces are not redundant.",
+        "current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2267,
+          "exact_match": true
+        },
+        "testability": "Check Issue15 provenance; not executed this source review.",
+        "fix_opportunity": "Trace actual current implementation against Locked decision before editing; do not change frozen sources.",
+        "locked_fit": "Preserve member shots, original bags, history, RLS, offline queues and owner-only publication.",
+        "review_method": "AI direct reading of frozen #59 original docs/DECISION_LEDGER.json:2267 at blob 195c3e4de415afef4515a6291c399a1c9001b610, verified exact current same-line text at 90233639bef05b1671f5325ebbf89fde1031eac6; no human or runtime certification."
+      },
+      {
+        "line": 2268,
+        "source_text": "      \"delivery\": \"SOURCE_ONLY_TO_BE_TESTED, NOT PUBLISHED. No SQL migration or production data changes for this retirement.\"",
+        "classification": "frozen_locked_clause_direct_read",
+        "behavior": "Source-only and explicitly no SQL migration",
+        "quality": "Original numbered JSON decision/source interpreted with surrounding supersession and historic record context, not treated as deployment proof.",
+        "risk": "Never claim production was changed",
+        "dead_or_obsolete": "Frozen historical source immutable; retirement does not justify data destruction.",
+        "duplication": "Decision chronology necessary and narrow; structural braces are not redundant.",
+        "current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2268,
+          "exact_match": true
+        },
+        "testability": "Check actual release status; not executed this source review.",
+        "fix_opportunity": "Trace actual current implementation against Locked decision before editing; do not change frozen sources.",
+        "locked_fit": "Preserve member shots, original bags, history, RLS, offline queues and owner-only publication.",
+        "review_method": "AI direct reading of frozen #59 original docs/DECISION_LEDGER.json:2268 at blob 195c3e4de415afef4515a6291c399a1c9001b610, verified exact current same-line text at 90233639bef05b1671f5325ebbf89fde1031eac6; no human or runtime certification."
+      },
+      {
+        "line": 2269,
+        "source_text": "    },",
+        "classification": "frozen_json_syntax_direct_read",
+        "behavior": "JSON decision object close",
+        "quality": "Original numbered JSON decision/source interpreted with surrounding supersession and historic record context, not treated as deployment proof.",
+        "risk": "Syntax must remain valid",
+        "dead_or_obsolete": "Frozen historical source immutable; retirement does not justify data destruction.",
+        "duplication": "Decision chronology necessary and narrow; structural braces are not redundant.",
+        "current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2269,
+          "exact_match": true
+        },
+        "testability": "JSON parsing; not executed this source review.",
+        "fix_opportunity": "Trace actual current implementation against Locked decision before editing; do not change frozen sources.",
+        "locked_fit": "Preserve member shots, original bags, history, RLS, offline queues and owner-only publication.",
+        "review_method": "AI direct reading of frozen #59 original docs/DECISION_LEDGER.json:2269 at blob 195c3e4de415afef4515a6291c399a1c9001b610, verified exact current same-line text at 90233639bef05b1671f5325ebbf89fde1031eac6; no human or runtime certification."
+      },
+      {
+        "line": 2270,
+        "source_text": "    {",
+        "classification": "frozen_json_syntax_direct_read",
+        "behavior": "Open next decision object",
+        "quality": "Original numbered JSON decision/source interpreted with surrounding supersession and historic record context, not treated as deployment proof.",
+        "risk": "Do not conflate equipment with bag management",
+        "dead_or_obsolete": "Frozen historical source immutable; retirement does not justify data destruction.",
+        "duplication": "Decision chronology necessary and narrow; structural braces are not redundant.",
+        "current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2270,
+          "exact_match": true
+        },
+        "testability": "Validate object boundaries; not executed this source review.",
+        "fix_opportunity": "Trace actual current implementation against Locked decision before editing; do not change frozen sources.",
+        "locked_fit": "Preserve member shots, original bags, history, RLS, offline queues and owner-only publication.",
+        "review_method": "AI direct reading of frozen #59 original docs/DECISION_LEDGER.json:2270 at blob 195c3e4de415afef4515a6291c399a1c9001b610, verified exact current same-line text at 90233639bef05b1671f5325ebbf89fde1031eac6; no human or runtime certification."
+      },
+      {
+        "line": 2271,
+        "source_text": "      \"id\": \"UX-RETIRE-BASKET-EQUIPMENT-VERSION-MANAGEMENT-20261026\",",
+        "classification": "frozen_locked_clause_direct_read",
+        "behavior": "Basket/equipment retirement stable ID",
+        "quality": "Original numbered JSON decision/source interpreted with surrounding supersession and historic record context, not treated as deployment proof.",
+        "risk": "Coverage matrix needs stable key",
+        "dead_or_obsolete": "Frozen historical source immutable; retirement does not justify data destruction.",
+        "duplication": "Decision chronology necessary and narrow; structural braces are not redundant.",
+        "current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2271,
+          "exact_match": true
+        },
+        "testability": "Check decision IDs; not executed this source review.",
+        "fix_opportunity": "Trace actual current implementation against Locked decision before editing; do not change frozen sources.",
+        "locked_fit": "Preserve member shots, original bags, history, RLS, offline queues and owner-only publication.",
+        "review_method": "AI direct reading of frozen #59 original docs/DECISION_LEDGER.json:2271 at blob 195c3e4de415afef4515a6291c399a1c9001b610, verified exact current same-line text at 90233639bef05b1671f5325ebbf89fde1031eac6; no human or runtime certification."
+      },
+      {
+        "line": 2272,
+        "source_text": "      \"status\": \"Locked\",",
+        "classification": "frozen_locked_clause_direct_read",
+        "behavior": "Scoped Locked status for equipment-version UI retirement",
+        "quality": "Original numbered JSON decision/source interpreted with surrounding supersession and historic record context, not treated as deployment proof.",
+        "risk": "Must preserve snapshots",
+        "dead_or_obsolete": "Frozen historical source immutable; retirement does not justify data destruction.",
+        "duplication": "Decision chronology necessary and narrow; structural braces are not redundant.",
+        "current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2272,
+          "exact_match": true
+        },
+        "testability": "Review UI vs shot data; not executed this source review.",
+        "fix_opportunity": "Trace actual current implementation against Locked decision before editing; do not change frozen sources.",
+        "locked_fit": "Preserve member shots, original bags, history, RLS, offline queues and owner-only publication.",
+        "review_method": "AI direct reading of frozen #59 original docs/DECISION_LEDGER.json:2272 at blob 195c3e4de415afef4515a6291c399a1c9001b610, verified exact current same-line text at 90233639bef05b1671f5325ebbf89fde1031eac6; no human or runtime certification."
+      },
+      {
+        "line": 2273,
+        "source_text": "      \"date\": \"2026-10-26\",",
+        "classification": "frozen_locked_clause_direct_read",
+        "behavior": "Dated October 26 decision",
+        "quality": "Original numbered JSON decision/source interpreted with surrounding supersession and historic record context, not treated as deployment proof.",
+        "risk": "Later supersessions take precedence",
+        "dead_or_obsolete": "Frozen historical source immutable; retirement does not justify data destruction.",
+        "duplication": "Decision chronology necessary and narrow; structural braces are not redundant.",
+        "current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2273,
+          "exact_match": true
+        },
+        "testability": "Compare owner chronology; not executed this source review.",
+        "fix_opportunity": "Trace actual current implementation against Locked decision before editing; do not change frozen sources.",
+        "locked_fit": "Preserve member shots, original bags, history, RLS, offline queues and owner-only publication.",
+        "review_method": "AI direct reading of frozen #59 original docs/DECISION_LEDGER.json:2273 at blob 195c3e4de415afef4515a6291c399a1c9001b610, verified exact current same-line text at 90233639bef05b1671f5325ebbf89fde1031eac6; no human or runtime certification."
+      },
+      {
+        "line": 2274,
+        "source_text": "      \"title\": \"Retire member-facing basket and equipment version management; keep immutable history\",",
+        "classification": "frozen_locked_clause_direct_read",
+        "behavior": "Names removal of member-facing version management",
+        "quality": "Original numbered JSON decision/source interpreted with surrounding supersession and historic record context, not treated as deployment proof.",
+        "risk": "Do not erase internal versions",
+        "dead_or_obsolete": "Frozen historical source immutable; retirement does not justify data destruction.",
+        "duplication": "Decision chronology necessary and narrow; structural braces are not redundant.",
+        "current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2274,
+          "exact_match": true
+        },
+        "testability": "Check original setup/shot snapshots; not executed this source review.",
+        "fix_opportunity": "Trace actual current implementation against Locked decision before editing; do not change frozen sources.",
+        "locked_fit": "Preserve member shots, original bags, history, RLS, offline queues and owner-only publication.",
+        "review_method": "AI direct reading of frozen #59 original docs/DECISION_LEDGER.json:2274 at blob 195c3e4de415afef4515a6291c399a1c9001b610, verified exact current same-line text at 90233639bef05b1671f5325ebbf89fde1031eac6; no human or runtime certification."
+      },
+      {
+        "line": 2275,
+        "source_text": "      \"approval\": \"Owner explicitly: 'I don't want to include basket or equipment versions. Let's remove this and close issue #16'.\",",
+        "classification": "frozen_locked_clause_direct_read",
+        "behavior": "Records explicit owner refusal of version features",
+        "quality": "Original numbered JSON decision/source interpreted with surrounding supersession and historic record context, not treated as deployment proof.",
+        "risk": "Not consent to destructive schema edits",
+        "dead_or_obsolete": "Frozen historical source immutable; retirement does not justify data destruction.",
+        "duplication": "Decision chronology necessary and narrow; structural braces are not redundant.",
+        "current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2275,
+          "exact_match": true
+        },
+        "testability": "Verify Issue16 boundary; not executed this source review.",
+        "fix_opportunity": "Trace actual current implementation against Locked decision before editing; do not change frozen sources.",
+        "locked_fit": "Preserve member shots, original bags, history, RLS, offline queues and owner-only publication.",
+        "review_method": "AI direct reading of frozen #59 original docs/DECISION_LEDGER.json:2275 at blob 195c3e4de415afef4515a6291c399a1c9001b610, verified exact current same-line text at 90233639bef05b1671f5325ebbf89fde1031eac6; no human or runtime certification."
+      },
+      {
+        "line": 2276,
+        "source_text": "      \"decision\": \"No planned member-facing basket create/select/correct/archive/reactivate or equipment-version history/create/restore/calibration-management flows. Keep simple new setup, one Basket Dose, rename/switch, optional equipment details, real shot dose, and strictly >2 g dismissible new-shot-only warning.\",",
+        "classification": "frozen_locked_clause_direct_read",
+        "behavior": "Keep simple setup, basket dose, dismissible strictly >2 g new-shot warning",
+        "quality": "Original numbered JSON decision/source interpreted with surrounding supersession and historic record context, not treated as deployment proof.",
+        "risk": "Warning must not fire on existing shots or at exactly 2g",
+        "dead_or_obsolete": "Frozen historical source immutable; retirement does not justify data destruction.",
+        "duplication": "Decision chronology necessary and narrow; structural braces are not redundant.",
+        "current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2276,
+          "exact_match": true
+        },
+        "testability": "2g/2.01g boundary and existing-shot tests; not executed this source review.",
+        "fix_opportunity": "Trace actual current implementation against Locked decision before editing; do not change frozen sources.",
+        "locked_fit": "Preserve member shots, original bags, history, RLS, offline queues and owner-only publication.",
+        "review_method": "AI direct reading of frozen #59 original docs/DECISION_LEDGER.json:2276 at blob 195c3e4de415afef4515a6291c399a1c9001b610, verified exact current same-line text at 90233639bef05b1671f5325ebbf89fde1031eac6; no human or runtime certification."
+      },
+      {
+        "line": 2277,
+        "source_text": "      \"supersedes\": \"Issue #16 original active management acceptance and §13 planned expansion only. Preserve all internal immutable hardware/basket/calibration snapshots, real shot and Community context, note/offline/backups, existing validation and unrelated Issue #17 grinder semantics.\",",
+        "classification": "frozen_locked_clause_direct_read",
+        "behavior": "Supersedes Issue16 UI only, retains grinder semantics and internal snapshots",
+        "quality": "Original numbered JSON decision/source interpreted with surrounding supersession and historic record context, not treated as deployment proof.",
+        "risk": "Issue17 grinder must remain intact",
+        "dead_or_obsolete": "Frozen historical source immutable; retirement does not justify data destruction.",
+        "duplication": "Decision chronology necessary and narrow; structural braces are not redundant.",
+        "current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2277,
+          "exact_match": true
+        },
+        "testability": "Trace old shot equipment context; not executed this source review.",
+        "fix_opportunity": "Trace actual current implementation against Locked decision before editing; do not change frozen sources.",
+        "locked_fit": "Preserve member shots, original bags, history, RLS, offline queues and owner-only publication.",
+        "review_method": "AI direct reading of frozen #59 original docs/DECISION_LEDGER.json:2277 at blob 195c3e4de415afef4515a6291c399a1c9001b610, verified exact current same-line text at 90233639bef05b1671f5325ebbf89fde1031eac6; no human or runtime certification."
+      },
+      {
+        "line": 2278,
+        "source_text": "      \"historical_safety\": \"Do not drop or rewrite existing database version records, foreign keys, shot snapshots, member data, RLS or idempotency receipts. Do not publish.\",",
+        "classification": "frozen_locked_clause_direct_read",
+        "behavior": "Prohibits changes to version records, FKs, RLS and idempotency",
+        "quality": "Original numbered JSON decision/source interpreted with surrounding supersession and historic record context, not treated as deployment proof.",
+        "risk": "Never drop historic database data or publish",
+        "dead_or_obsolete": "Frozen historical source immutable; retirement does not justify data destruction.",
+        "duplication": "Decision chronology necessary and narrow; structural braces are not redundant.",
+        "current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2278,
+          "exact_match": true
+        },
+        "testability": "Read-only schema and history review; not executed this source review.",
+        "fix_opportunity": "Trace actual current implementation against Locked decision before editing; do not change frozen sources.",
+        "locked_fit": "Preserve member shots, original bags, history, RLS, offline queues and owner-only publication.",
+        "review_method": "AI direct reading of frozen #59 original docs/DECISION_LEDGER.json:2278 at blob 195c3e4de415afef4515a6291c399a1c9001b610, verified exact current same-line text at 90233639bef05b1671f5325ebbf89fde1031eac6; no human or runtime certification."
+      },
+      {
+        "line": 2279,
+        "source_text": "      \"delivery\": \"Source-only retirement, no deployable feature.\"",
+        "classification": "frozen_locked_clause_direct_read",
+        "behavior": "Marks source-only retirement, no deployed guarantee",
+        "quality": "Original numbered JSON decision/source interpreted with surrounding supersession and historic record context, not treated as deployment proof.",
+        "risk": "Source label is not production evidence",
+        "dead_or_obsolete": "Frozen historical source immutable; retirement does not justify data destruction.",
+        "duplication": "Decision chronology necessary and narrow; structural braces are not redundant.",
+        "current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2279,
+          "exact_match": true
+        },
+        "testability": "Compare published source SHA; not executed this source review.",
+        "fix_opportunity": "Trace actual current implementation against Locked decision before editing; do not change frozen sources.",
+        "locked_fit": "Preserve member shots, original bags, history, RLS, offline queues and owner-only publication.",
+        "review_method": "AI direct reading of frozen #59 original docs/DECISION_LEDGER.json:2279 at blob 195c3e4de415afef4515a6291c399a1c9001b610, verified exact current same-line text at 90233639bef05b1671f5325ebbf89fde1031eac6; no human or runtime certification."
+      }
+    ]
+  },
+  "pinned_current": {
+    "file_index": 53,
+    "path": "scripts/audit/coffee-source-review-local.py",
+    "blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+    "range": [
+      231,
+      250
+    ],
+    "source_lines": 20,
+    "full_pinned_file_total_lines": 490,
+    "live_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+    "live_source_lines": 20,
+    "live_line_offset": 0,
+    "per_line": [
+      {
+        "line": 231,
+        "source_text": "                            math.sqrt(LIMITS[\"ocr_pixels\"] / (flat.width * flat.height)))",
+        "classification": "pinned_executable_preprocessing_direct_read",
+        "behavior": "Area-derived sqrt OCR pixel-size bound",
+        "quality": "Original Python line read in full Pillow/image pipeline, including preconditions, downstream bounds, reliability and provenance.",
+        "risk": "Prior positive size/dimension guards are necessary",
+        "dead_or_obsolete": "Active pipeline guard/step not proven dead or unused; no safe deletion.",
+        "duplication": "Each substep serves sizing, image encode, preview or provenance; optimization requires benchmark.",
+        "current_counterpart": {
+          "path": "scripts/audit/coffee-source-review-local.py",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_line": 231,
+          "exact_match": true
+        },
+        "testability": "Dimension ratio boundaries; not executed this source review.",
+        "fix_opportunity": "No measured bug or optimization proven; coordinate #33 and use focused tests before any change.",
+        "locked_fit": "Local unverified OCR source may inform review, never certify current selected coffee or mutate member data.",
+        "review_method": "AI direct reading of pinned #53 original scripts/audit/coffee-source-review-local.py:231 at blob a21172c788da14bfcd341c43d1d00c4702d9ab1a, verified exact current same-line text at a21172c788da14bfcd341c43d1d00c4702d9ab1a; no human or runtime certification."
+      },
+      {
+        "line": 232,
+        "source_text": "                if ratio < 1:",
+        "classification": "pinned_executable_preprocessing_direct_read",
+        "behavior": "Conditional resize prevents upscaling",
+        "quality": "Original Python line read in full Pillow/image pipeline, including preconditions, downstream bounds, reliability and provenance.",
+        "risk": "Unintended upsampling wastes CPU/RAM",
+        "dead_or_obsolete": "Active pipeline guard/step not proven dead or unused; no safe deletion.",
+        "duplication": "Each substep serves sizing, image encode, preview or provenance; optimization requires benchmark.",
+        "current_counterpart": {
+          "path": "scripts/audit/coffee-source-review-local.py",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_line": 232,
+          "exact_match": true
+        },
+        "testability": "Small versus large images; not executed this source review.",
+        "fix_opportunity": "No measured bug or optimization proven; coordinate #33 and use focused tests before any change.",
+        "locked_fit": "Local unverified OCR source may inform review, never certify current selected coffee or mutate member data.",
+        "review_method": "AI direct reading of pinned #53 original scripts/audit/coffee-source-review-local.py:232 at blob a21172c788da14bfcd341c43d1d00c4702d9ab1a, verified exact current same-line text at a21172c788da14bfcd341c43d1d00c4702d9ab1a; no human or runtime certification."
+      },
+      {
+        "line": 233,
+        "source_text": "                    flat = flat.resize((max(1, int(flat.width * ratio)), max(1, int(flat.height * ratio))),",
+        "classification": "pinned_executable_preprocessing_direct_read",
+        "behavior": "Calculates positive integer bounded dimensions",
+        "quality": "Original Python line read in full Pillow/image pipeline, including preconditions, downstream bounds, reliability and provenance.",
+        "risk": "Rounding may affect aspect ratio by one pixel",
+        "dead_or_obsolete": "Active pipeline guard/step not proven dead or unused; no safe deletion.",
+        "duplication": "Each substep serves sizing, image encode, preview or provenance; optimization requires benchmark.",
+        "current_counterpart": {
+          "path": "scripts/audit/coffee-source-review-local.py",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_line": 233,
+          "exact_match": true
+        },
+        "testability": "Narrow/very wide cases; not executed this source review.",
+        "fix_opportunity": "No measured bug or optimization proven; coordinate #33 and use focused tests before any change.",
+        "locked_fit": "Local unverified OCR source may inform review, never certify current selected coffee or mutate member data.",
+        "review_method": "AI direct reading of pinned #53 original scripts/audit/coffee-source-review-local.py:233 at blob a21172c788da14bfcd341c43d1d00c4702d9ab1a, verified exact current same-line text at a21172c788da14bfcd341c43d1d00c4702d9ab1a; no human or runtime certification."
+      },
+      {
+        "line": 234,
+        "source_text": "                                       Image.Resampling.LANCZOS)",
+        "classification": "pinned_executable_preprocessing_direct_read",
+        "behavior": "Uses LANCZOS resize filter",
+        "quality": "Original Python line read in full Pillow/image pipeline, including preconditions, downstream bounds, reliability and provenance.",
+        "risk": "CPU versus detail tradeoff remains unbenchmarked",
+        "dead_or_obsolete": "Active pipeline guard/step not proven dead or unused; no safe deletion.",
+        "duplication": "Each substep serves sizing, image encode, preview or provenance; optimization requires benchmark.",
+        "current_counterpart": {
+          "path": "scripts/audit/coffee-source-review-local.py",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_line": 234,
+          "exact_match": true
+        },
+        "testability": "Max image resize performance; not executed this source review.",
+        "fix_opportunity": "No measured bug or optimization proven; coordinate #33 and use focused tests before any change.",
+        "locked_fit": "Local unverified OCR source may inform review, never certify current selected coffee or mutate member data.",
+        "review_method": "AI direct reading of pinned #53 original scripts/audit/coffee-source-review-local.py:234 at blob a21172c788da14bfcd341c43d1d00c4702d9ab1a, verified exact current same-line text at a21172c788da14bfcd341c43d1d00c4702d9ab1a; no human or runtime certification."
+      },
+      {
+        "line": 235,
+        "source_text": "                png = io.BytesIO()",
+        "classification": "pinned_executable_preprocessing_direct_read",
+        "behavior": "Allocates PNG input bytes buffer",
+        "quality": "Original Python line read in full Pillow/image pipeline, including preconditions, downstream bounds, reliability and provenance.",
+        "risk": "Temporary image bytes contribute peak RAM",
+        "dead_or_obsolete": "Active pipeline guard/step not proven dead or unused; no safe deletion.",
+        "duplication": "Each substep serves sizing, image encode, preview or provenance; optimization requires benchmark.",
+        "current_counterpart": {
+          "path": "scripts/audit/coffee-source-review-local.py",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_line": 235,
+          "exact_match": true
+        },
+        "testability": "Peak RSS benchmark; not executed this source review.",
+        "fix_opportunity": "No measured bug or optimization proven; coordinate #33 and use focused tests before any change.",
+        "locked_fit": "Local unverified OCR source may inform review, never certify current selected coffee or mutate member data.",
+        "review_method": "AI direct reading of pinned #53 original scripts/audit/coffee-source-review-local.py:235 at blob a21172c788da14bfcd341c43d1d00c4702d9ab1a, verified exact current same-line text at a21172c788da14bfcd341c43d1d00c4702d9ab1a; no human or runtime certification."
+      },
+      {
+        "line": 236,
+        "source_text": "                flat.save(png, format=\"PNG\", optimize=False)",
+        "classification": "pinned_executable_preprocessing_direct_read",
+        "behavior": "Saves normalized PNG without encoder optimization",
+        "quality": "Original Python line read in full Pillow/image pipeline, including preconditions, downstream bounds, reliability and provenance.",
+        "risk": "File may exceed post-encode 16MB cap",
+        "dead_or_obsolete": "Active pipeline guard/step not proven dead or unused; no safe deletion.",
+        "duplication": "Each substep serves sizing, image encode, preview or provenance; optimization requires benchmark.",
+        "current_counterpart": {
+          "path": "scripts/audit/coffee-source-review-local.py",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_line": 236,
+          "exact_match": true
+        },
+        "testability": "Negative output-size tests; not executed this source review.",
+        "fix_opportunity": "No measured bug or optimization proven; coordinate #33 and use focused tests before any change.",
+        "locked_fit": "Local unverified OCR source may inform review, never certify current selected coffee or mutate member data.",
+        "review_method": "AI direct reading of pinned #53 original scripts/audit/coffee-source-review-local.py:236 at blob a21172c788da14bfcd341c43d1d00c4702d9ab1a, verified exact current same-line text at a21172c788da14bfcd341c43d1d00c4702d9ab1a; no human or runtime certification."
+      },
+      {
+        "line": 237,
+        "source_text": "                thumbnail = flat.copy()",
+        "classification": "pinned_executable_preprocessing_direct_read",
+        "behavior": "Creates independent preview image copy",
+        "quality": "Original Python line read in full Pillow/image pipeline, including preconditions, downstream bounds, reliability and provenance.",
+        "risk": "Potential duplicate bitmap memory, not verified bottleneck",
+        "dead_or_obsolete": "Active pipeline guard/step not proven dead or unused; no safe deletion.",
+        "duplication": "Each substep serves sizing, image encode, preview or provenance; optimization requires benchmark.",
+        "current_counterpart": {
+          "path": "scripts/audit/coffee-source-review-local.py",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_line": 237,
+          "exact_match": true
+        },
+        "testability": "Profile peak RAM; not executed this source review.",
+        "fix_opportunity": "No measured bug or optimization proven; coordinate #33 and use focused tests before any change.",
+        "locked_fit": "Local unverified OCR source may inform review, never certify current selected coffee or mutate member data.",
+        "review_method": "AI direct reading of pinned #53 original scripts/audit/coffee-source-review-local.py:237 at blob a21172c788da14bfcd341c43d1d00c4702d9ab1a, verified exact current same-line text at a21172c788da14bfcd341c43d1d00c4702d9ab1a; no human or runtime certification."
+      },
+      {
+        "line": 238,
+        "source_text": "                thumbnail.thumbnail((1000, 1000))",
+        "classification": "pinned_executable_preprocessing_direct_read",
+        "behavior": "Thumbs preview into 1000px square",
+        "quality": "Original Python line read in full Pillow/image pipeline, including preconditions, downstream bounds, reliability and provenance.",
+        "risk": "Preview pixels differ from full OCR pixels",
+        "dead_or_obsolete": "Active pipeline guard/step not proven dead or unused; no safe deletion.",
+        "duplication": "Each substep serves sizing, image encode, preview or provenance; optimization requires benchmark.",
+        "current_counterpart": {
+          "path": "scripts/audit/coffee-source-review-local.py",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_line": 238,
+          "exact_match": true
+        },
+        "testability": "Portrait/landscape cases; not executed this source review.",
+        "fix_opportunity": "No measured bug or optimization proven; coordinate #33 and use focused tests before any change.",
+        "locked_fit": "Local unverified OCR source may inform review, never certify current selected coffee or mutate member data.",
+        "review_method": "AI direct reading of pinned #53 original scripts/audit/coffee-source-review-local.py:238 at blob a21172c788da14bfcd341c43d1d00c4702d9ab1a, verified exact current same-line text at a21172c788da14bfcd341c43d1d00c4702d9ab1a; no human or runtime certification."
+      },
+      {
+        "line": 239,
+        "source_text": "                jpeg = io.BytesIO()",
+        "classification": "pinned_executable_preprocessing_direct_read",
+        "behavior": "Creates separate JPEG preview stream",
+        "quality": "Original Python line read in full Pillow/image pipeline, including preconditions, downstream bounds, reliability and provenance.",
+        "risk": "Another temporary output buffer",
+        "dead_or_obsolete": "Active pipeline guard/step not proven dead or unused; no safe deletion.",
+        "duplication": "Each substep serves sizing, image encode, preview or provenance; optimization requires benchmark.",
+        "current_counterpart": {
+          "path": "scripts/audit/coffee-source-review-local.py",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_line": 239,
+          "exact_match": true
+        },
+        "testability": "Measure bounded memory; not executed this source review.",
+        "fix_opportunity": "No measured bug or optimization proven; coordinate #33 and use focused tests before any change.",
+        "locked_fit": "Local unverified OCR source may inform review, never certify current selected coffee or mutate member data.",
+        "review_method": "AI direct reading of pinned #53 original scripts/audit/coffee-source-review-local.py:239 at blob a21172c788da14bfcd341c43d1d00c4702d9ab1a, verified exact current same-line text at a21172c788da14bfcd341c43d1d00c4702d9ab1a; no human or runtime certification."
+      },
+      {
+        "line": 240,
+        "source_text": "                thumbnail.save(jpeg, format=\"JPEG\", quality=82)",
+        "classification": "pinned_executable_preprocessing_direct_read",
+        "behavior": "Encodes preview JPEG at quality 82",
+        "quality": "Original Python line read in full Pillow/image pipeline, including preconditions, downstream bounds, reliability and provenance.",
+        "risk": "Preview quality is not source truth",
+        "dead_or_obsolete": "Active pipeline guard/step not proven dead or unused; no safe deletion.",
+        "duplication": "Each substep serves sizing, image encode, preview or provenance; optimization requires benchmark.",
+        "current_counterpart": {
+          "path": "scripts/audit/coffee-source-review-local.py",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_line": 240,
+          "exact_match": true
+        },
+        "testability": "Compare blurry text previews; not executed this source review.",
+        "fix_opportunity": "No measured bug or optimization proven; coordinate #33 and use focused tests before any change.",
+        "locked_fit": "Local unverified OCR source may inform review, never certify current selected coffee or mutate member data.",
+        "review_method": "AI direct reading of pinned #53 original scripts/audit/coffee-source-review-local.py:240 at blob a21172c788da14bfcd341c43d1d00c4702d9ab1a, verified exact current same-line text at a21172c788da14bfcd341c43d1d00c4702d9ab1a; no human or runtime certification."
+      },
+      {
+        "line": 241,
+        "source_text": "                dimensions = list(flat.size)",
+        "classification": "pinned_executable_preprocessing_direct_read",
+        "behavior": "Captures OCR result dimensions",
+        "quality": "Original Python line read in full Pillow/image pipeline, including preconditions, downstream bounds, reliability and provenance.",
+        "risk": "Receipt does not prove coffee provenance",
+        "dead_or_obsolete": "Active pipeline guard/step not proven dead or unused; no safe deletion.",
+        "duplication": "Each substep serves sizing, image encode, preview or provenance; optimization requires benchmark.",
+        "current_counterpart": {
+          "path": "scripts/audit/coffee-source-review-local.py",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_line": 241,
+          "exact_match": true
+        },
+        "testability": "Dimensions/PNG receipt match; not executed this source review.",
+        "fix_opportunity": "No measured bug or optimization proven; coordinate #33 and use focused tests before any change.",
+        "locked_fit": "Local unverified OCR source may inform review, never certify current selected coffee or mutate member data.",
+        "review_method": "AI direct reading of pinned #53 original scripts/audit/coffee-source-review-local.py:241 at blob a21172c788da14bfcd341c43d1d00c4702d9ab1a, verified exact current same-line text at a21172c788da14bfcd341c43d1d00c4702d9ab1a; no human or runtime certification."
+      },
+      {
+        "line": 242,
+        "source_text": "    except ReviewError:",
+        "classification": "pinned_executable_preprocessing_direct_read",
+        "behavior": "Reraises policy-specific ReviewError unchanged",
+        "quality": "Original Python line read in full Pillow/image pipeline, including preconditions, downstream bounds, reliability and provenance.",
+        "risk": "Exception should retain safe message",
+        "dead_or_obsolete": "Active pipeline guard/step not proven dead or unused; no safe deletion.",
+        "duplication": "Each substep serves sizing, image encode, preview or provenance; optimization requires benchmark.",
+        "current_counterpart": {
+          "path": "scripts/audit/coffee-source-review-local.py",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_line": 242,
+          "exact_match": true
+        },
+        "testability": "Unsupported format case; not executed this source review.",
+        "fix_opportunity": "No measured bug or optimization proven; coordinate #33 and use focused tests before any change.",
+        "locked_fit": "Local unverified OCR source may inform review, never certify current selected coffee or mutate member data.",
+        "review_method": "AI direct reading of pinned #53 original scripts/audit/coffee-source-review-local.py:242 at blob a21172c788da14bfcd341c43d1d00c4702d9ab1a, verified exact current same-line text at a21172c788da14bfcd341c43d1d00c4702d9ab1a; no human or runtime certification."
+      },
+      {
+        "line": 243,
+        "source_text": "        raise",
+        "classification": "pinned_executable_preprocessing_direct_read",
+        "behavior": "Starts bounded Pillow exception handling",
+        "quality": "Original Python line read in full Pillow/image pipeline, including preconditions, downstream bounds, reliability and provenance.",
+        "risk": "Unhandled exception types remain possible",
+        "dead_or_obsolete": "Active pipeline guard/step not proven dead or unused; no safe deletion.",
+        "duplication": "Each substep serves sizing, image encode, preview or provenance; optimization requires benchmark.",
+        "current_counterpart": {
+          "path": "scripts/audit/coffee-source-review-local.py",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_line": 243,
+          "exact_match": true
+        },
+        "testability": "Malformed image cases; not executed this source review.",
+        "fix_opportunity": "No measured bug or optimization proven; coordinate #33 and use focused tests before any change.",
+        "locked_fit": "Local unverified OCR source may inform review, never certify current selected coffee or mutate member data.",
+        "review_method": "AI direct reading of pinned #53 original scripts/audit/coffee-source-review-local.py:243 at blob a21172c788da14bfcd341c43d1d00c4702d9ab1a, verified exact current same-line text at a21172c788da14bfcd341c43d1d00c4702d9ab1a; no human or runtime certification."
+      },
+      {
+        "line": 244,
+        "source_text": "    except (OSError, ValueError, SyntaxError, Image.DecompressionBombError,",
+        "classification": "pinned_executable_preprocessing_direct_read",
+        "behavior": "Catches decompression bomb warning when escalated",
+        "quality": "Original Python line read in full Pillow/image pipeline, including preconditions, downstream bounds, reliability and provenance.",
+        "risk": "Warning filter behavior should be verified",
+        "dead_or_obsolete": "Active pipeline guard/step not proven dead or unused; no safe deletion.",
+        "duplication": "Each substep serves sizing, image encode, preview or provenance; optimization requires benchmark.",
+        "current_counterpart": {
+          "path": "scripts/audit/coffee-source-review-local.py",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_line": 244,
+          "exact_match": true
+        },
+        "testability": "Bomb warning test; not executed this source review.",
+        "fix_opportunity": "No measured bug or optimization proven; coordinate #33 and use focused tests before any change.",
+        "locked_fit": "Local unverified OCR source may inform review, never certify current selected coffee or mutate member data.",
+        "review_method": "AI direct reading of pinned #53 original scripts/audit/coffee-source-review-local.py:244 at blob a21172c788da14bfcd341c43d1d00c4702d9ab1a, verified exact current same-line text at a21172c788da14bfcd341c43d1d00c4702d9ab1a; no human or runtime certification."
+      },
+      {
+        "line": 245,
+        "source_text": "            Image.DecompressionBombWarning) as exc:",
+        "classification": "pinned_executable_preprocessing_direct_read",
+        "behavior": "Maps unsafe image exception to ReviewError",
+        "quality": "Original Python line read in full Pillow/image pipeline, including preconditions, downstream bounds, reliability and provenance.",
+        "risk": "Filename alone may be exposed but not full path",
+        "dead_or_obsolete": "Active pipeline guard/step not proven dead or unused; no safe deletion.",
+        "duplication": "Each substep serves sizing, image encode, preview or provenance; optimization requires benchmark.",
+        "current_counterpart": {
+          "path": "scripts/audit/coffee-source-review-local.py",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_line": 245,
+          "exact_match": true
+        },
+        "testability": "Safe user-facing error; not executed this source review.",
+        "fix_opportunity": "No measured bug or optimization proven; coordinate #33 and use focused tests before any change.",
+        "locked_fit": "Local unverified OCR source may inform review, never certify current selected coffee or mutate member data.",
+        "review_method": "AI direct reading of pinned #53 original scripts/audit/coffee-source-review-local.py:245 at blob a21172c788da14bfcd341c43d1d00c4702d9ab1a, verified exact current same-line text at a21172c788da14bfcd341c43d1d00c4702d9ab1a; no human or runtime certification."
+      },
+      {
+        "line": 246,
+        "source_text": "        raise ReviewError(f\"Invalid or unsafe image: {path.name}\") from exc",
+        "classification": "pinned_executable_preprocessing_direct_read",
+        "behavior": "Collects two encoded byte strings",
+        "quality": "Original Python line read in full Pillow/image pipeline, including preconditions, downstream bounds, reliability and provenance.",
+        "risk": "Output caps are post-encode, not allocation prevention",
+        "dead_or_obsolete": "Active pipeline guard/step not proven dead or unused; no safe deletion.",
+        "duplication": "Each substep serves sizing, image encode, preview or provenance; optimization requires benchmark.",
+        "current_counterpart": {
+          "path": "scripts/audit/coffee-source-review-local.py",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_line": 246,
+          "exact_match": true
+        },
+        "testability": "Memory size boundary; not executed this source review.",
+        "fix_opportunity": "No measured bug or optimization proven; coordinate #33 and use focused tests before any change.",
+        "locked_fit": "Local unverified OCR source may inform review, never certify current selected coffee or mutate member data.",
+        "review_method": "AI direct reading of pinned #53 original scripts/audit/coffee-source-review-local.py:246 at blob a21172c788da14bfcd341c43d1d00c4702d9ab1a, verified exact current same-line text at a21172c788da14bfcd341c43d1d00c4702d9ab1a; no human or runtime certification."
+      },
+      {
+        "line": 247,
+        "source_text": "    png_bytes, preview_bytes = png.getvalue(), jpeg.getvalue()",
+        "classification": "pinned_executable_preprocessing_direct_read",
+        "behavior": "Compares two encoded output size ceilings",
+        "quality": "Original Python line read in full Pillow/image pipeline, including preconditions, downstream bounds, reliability and provenance.",
+        "risk": "Large output can consume memory before rejection",
+        "dead_or_obsolete": "Active pipeline guard/step not proven dead or unused; no safe deletion.",
+        "duplication": "Each substep serves sizing, image encode, preview or provenance; optimization requires benchmark.",
+        "current_counterpart": {
+          "path": "scripts/audit/coffee-source-review-local.py",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_line": 247,
+          "exact_match": true
+        },
+        "testability": "PNG16MB and JPEG1MB tests; not executed this source review.",
+        "fix_opportunity": "No measured bug or optimization proven; coordinate #33 and use focused tests before any change.",
+        "locked_fit": "Local unverified OCR source may inform review, never certify current selected coffee or mutate member data.",
+        "review_method": "AI direct reading of pinned #53 original scripts/audit/coffee-source-review-local.py:247 at blob a21172c788da14bfcd341c43d1d00c4702d9ab1a, verified exact current same-line text at a21172c788da14bfcd341c43d1d00c4702d9ab1a; no human or runtime certification."
+      },
+      {
+        "line": 248,
+        "source_text": "    if len(png_bytes) > 16_000_000 or len(preview_bytes) > 1_000_000:",
+        "classification": "pinned_executable_preprocessing_direct_read",
+        "behavior": "Rejects either oversized prepared image",
+        "quality": "Original Python line read in full Pillow/image pipeline, including preconditions, downstream bounds, reliability and provenance.",
+        "risk": "Must never launch OCR on rejected bytes",
+        "dead_or_obsolete": "Active pipeline guard/step not proven dead or unused; no safe deletion.",
+        "duplication": "Each substep serves sizing, image encode, preview or provenance; optimization requires benchmark.",
+        "current_counterpart": {
+          "path": "scripts/audit/coffee-source-review-local.py",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_line": 248,
+          "exact_match": true
+        },
+        "testability": "Check early rejection; not executed this source review.",
+        "fix_opportunity": "No measured bug or optimization proven; coordinate #33 and use focused tests before any change.",
+        "locked_fit": "Local unverified OCR source may inform review, never certify current selected coffee or mutate member data.",
+        "review_method": "AI direct reading of pinned #53 original scripts/audit/coffee-source-review-local.py:248 at blob a21172c788da14bfcd341c43d1d00c4702d9ab1a, verified exact current same-line text at a21172c788da14bfcd341c43d1d00c4702d9ab1a; no human or runtime certification."
+      },
+      {
+        "line": 249,
+        "source_text": "        raise ReviewError(\"Prepared image exceeds its output limit.\")",
+        "classification": "pinned_executable_preprocessing_direct_read",
+        "behavior": "Starts receipt with original filename/hash/size",
+        "quality": "Original Python line read in full Pillow/image pipeline, including preconditions, downstream bounds, reliability and provenance.",
+        "risk": "Hash does not certify official source identity",
+        "dead_or_obsolete": "Active pipeline guard/step not proven dead or unused; no safe deletion.",
+        "duplication": "Each substep serves sizing, image encode, preview or provenance; optimization requires benchmark.",
+        "current_counterpart": {
+          "path": "scripts/audit/coffee-source-review-local.py",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_line": 249,
+          "exact_match": true
+        },
+        "testability": "SHA256 equality; not executed this source review.",
+        "fix_opportunity": "No measured bug or optimization proven; coordinate #33 and use focused tests before any change.",
+        "locked_fit": "Local unverified OCR source may inform review, never certify current selected coffee or mutate member data.",
+        "review_method": "AI direct reading of pinned #53 original scripts/audit/coffee-source-review-local.py:249 at blob a21172c788da14bfcd341c43d1d00c4702d9ab1a, verified exact current same-line text at a21172c788da14bfcd341c43d1d00c4702d9ab1a; no human or runtime certification."
+      },
+      {
+        "line": 250,
+        "source_text": "    return {\"receipt\": {\"filename\": path.name, \"sha256\": sha256(data), \"bytes\": len(data),",
+        "classification": "pinned_executable_preprocessing_direct_read",
+        "behavior": "Includes format, dimensions and normalized PNG receipt fields",
+        "quality": "Original Python line read in full Pillow/image pipeline, including preconditions, downstream bounds, reliability and provenance.",
+        "risk": "Image remains unverified user-selected input",
+        "dead_or_obsolete": "Active pipeline guard/step not proven dead or unused; no safe deletion.",
+        "duplication": "Each substep serves sizing, image encode, preview or provenance; optimization requires benchmark.",
+        "current_counterpart": {
+          "path": "scripts/audit/coffee-source-review-local.py",
+          "source_commit": "5c438b4f14271719ae9809597df2db07d8b581da",
+          "source_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+          "live_line": 250,
+          "exact_match": true
+        },
+        "testability": "Metadata and claim checks; not executed this source review.",
+        "fix_opportunity": "No measured bug or optimization proven; coordinate #33 and use focused tests before any change.",
+        "locked_fit": "Local unverified OCR source may inform review, never certify current selected coffee or mutate member data.",
+        "review_method": "AI direct reading of pinned #53 original scripts/audit/coffee-source-review-local.py:250 at blob a21172c788da14bfcd341c43d1d00c4702d9ab1a, verified exact current same-line text at a21172c788da14bfcd341c43d1d00c4702d9ab1a; no human or runtime certification."
+      }
+    ]
+  },
+  "checks": {
+    "original_source_text_each": true,
+    "nine_dimensions_each": true,
+    "frozen_live_exact_counterpart_lines": 18,
+    "pinned_live_exact_counterpart_lines": 20,
+    "previous_receipt_nonoverlap": true,
+    "CI": "PENDING",
+    "runtime_tests": "NOT_RUN",
+    "postpin_live_drift": "INCOMPLETE"
+  },
+  "findings": {
+    "confirmed_active_defect": "NONE_REPRODUCED",
+    "deferred_historical_live_drift": "Original frozen lines 2280-2281 no longer same-number live doc due appended decisions; explicitly excluded from this credit, next frozen line 2280.",
+    "memory_risk": "Image memory/encoding performance is a candidate for measurement, not proven bottleneck."
+  },
+  "next": {
+    "frozen": {
+      "file_index": 59,
+      "path": "docs/DECISION_LEDGER.json",
+      "line": 2280
+    },
+    "pinned_current": {
+      "file_index": 53,
+      "path": "scripts/audit/coffee-source-review-local.py",
+      "line": 251,
+      "blob_sha": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "total_lines": 490
+    },
+    "postpin_drift": "INCOMPLETE"
+  },
+  "complete": false
+}
