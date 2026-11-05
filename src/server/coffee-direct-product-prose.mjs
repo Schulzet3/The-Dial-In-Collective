@@ -164,7 +164,7 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   // estate. The explicit human producer wins over a Farm-label fallback only
   // when the same exact current H1 names that person; never copy other lots.
   if(b.tag==='p'&&line.length<=600&&
-     !/\b(?:formerly|previously|historically|prior (?:harvest|lot|owner)|other coffees?|another producer|other producers?|no longer|not the producer|former producer|hypothetical|might have)\b/iu.test(line)){
+     !/\b(?:formerly|previously|historically|prior (?:harvest|lot|owner)|other coffees?|another (?:producer|offering|lot|product|coffee)|other (?:producers?|offerings?|lots?|products?)|different (?:coffee|lot|offering|product)|unrelated (?:coffee|offering|lot)|no longer|not the producer|former producer|hypothetical|might have)\b/iu.test(line)){
    const claims=line.matchAll(/\bfrom\s+producer\s+([\p{Lu}][\p{L}\p{M}'’-]{1,35}(?:\s+[\p{Lu}][\p{L}\p{M}'’-]{1,35}){1,3})['’]s\s+([\p{Lu}][\p{L}\p{M}'’-]{1,35}(?:\s+[\p{Lu}][\p{L}\p{M}'’-]{1,35}){0,3})\s+estate\b/gu);
    for(const claim of claims){
     const producer=claim[1],estate=claim[2];

@@ -46,7 +46,9 @@ test('wrong chosen H1, other coffee and historical grower are not rescued from F
   [name,"Previously, our lot was from producer José Giraldo's Las Marias estate."],
   [name,"The other coffee is from producer José Giraldo's Las Marias estate."],
   [name,"We are no longer sourcing from producer José Giraldo's Las Marias estate."],
-  [name,"This coffee is grown at Las Marias; another offering comes from producer José Giraldo's Las Marias estate."]
+  [name,"This coffee is grown at Las Marias; another offering comes from producer José Giraldo's Las Marias estate."],
+  [name,"Our other offering was from producer José Giraldo's Las Marias estate."],
+  [name,"This different product comes from producer José Giraldo's Las Marias estate."]
  ];
  for(const [h1,s] of cases){
   const r=parse(h1,'<p>'+esc(s)+'</p>'+farm);
