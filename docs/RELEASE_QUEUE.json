@@ -4740,14 +4740,16 @@
       ],
       "tests": [
         "Source-level negative: backup validation does not require coffee.createdAt or guarantee workspace.recent value types; current visibleCoffees fallback calls .localeCompare on missing createdAt or numeric recents; hideCoffee fallback sorts numeric recents with .localeCompare.",
-        "New imported actual model-module positive/negative regression authored for blank/null/nonstring historical createdAt and recent timestamps, preserved chronology and A-Z/pinned browsing, hidden-current fallback and private shot immutability; NOT EXECUTED before exact source-bound CI."
+        "New imported actual model-module positive/negative regression authored for blank/null/nonstring historical createdAt and recent timestamps, preserved chronology and A-Z/pinned browsing, hidden-current fallback and private shot immutability; NOT EXECUTED before exact source-bound CI.",
+        "Initial PR #658 head dc4cae40 approval run41942828101 FAILED release queue schema on missing merged_source_sha; root cause source-read from scripts/release/release-queue.mjs line 39; repaired to explicit null for TESTING. Not a behavioral code failure; do not call this run PASS."
       ],
       "ci_runs": [],
       "blockers": [
         "Exact PR-head and merged-source applicable CI not yet run; not merged or READY."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Safe source-level crash prevention only; no new sort policy, numeric espresso heuristic, coffee identity, stored legacy record, offline-outbox or Locked behavior change. No publication authorization."
+      "notes": "Safe source-level crash prevention only; no new sort policy, numeric espresso heuristic, coffee identity, stored legacy record, offline-outbox or Locked behavior change. No publication authorization.",
+      "merged_source_sha": null
     }
   ],
   "history": [
