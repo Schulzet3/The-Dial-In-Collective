@@ -1,3 +1,15 @@
+## November 5, 2026 UTC — Issue #267 S2-103 strict badge amendment and forensic ZIP audit [skip netlify]
+
+Recovered direct merged development `0ad16097dd08a85f0bd1c58328d97da8eaf63cb4`, exact source tree `a068ead22a0f18639a6d55736b8dc785943c5423`, prior S2-102 strict ledger/receipt and live #267/#33/#96 priorities, AGENTS, Context Entry, Preflight, Decision Ledger, Master Spec, approval matrix, release queue. First original workflow file1 lines1–4 checked once more without new credit. Other account's legacy task still UNVERIFIED; no overlapping new V2 source spans found.
+
+Direct AI line-by-line examination: immutable frozen #59 `docs/DECISION_LEDGER.json:944–983` (40, blob `195c3e4de415afef4515a6291c399a1c9001b610`, original `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9`) and independent pinned executable #50 `scripts/audit/coffee-reviewed-change-forensics.py:241–280` (40, blob `401e02bf1283f204471c3dbecb12e520054f0cc3`, pinned `9707553a64f88127826e8f5b2b36cd0651296e83`). All 80 physically fetched/read and annotated with exact literal text, line classification and every nine required dimensions; 40/40 byte-identical to live `bd8265a3540662d09f45adb97e8562e64a6ea3f0` lines247–286 (offset +6). See [S2-103](../audits/issue267-v2-strict-batches/S2-103.json). No prior V1/older V2 line credit or external human certification, no speculative execution/deletion.
+
+**Historical accessibility concern:** Locked badge palette/lettering amendments explicitly note some unmeasured current raw contrast may fail 4.5:1; owner also bans halos/text shadows, requiring any legibility change to honor current Locked direction. Historical note is not current UI WCAG test. ZIP validation reviewed for path traversal, modes, duplicates, size and SHA; no active exploit confirmed or actual malicious ZIP test newly run, #33 forensic owner retained.
+
+**Proposed** strict totals **5,874/579,961 frozen** and **7,501/57,913 pinned** (previous integrated S2-102 5,834/7,461), next #59 line984 and #50 line281. Full post-pin current executable drift and testing not done, issue OPEN, repo public-vs-private Locked discrepancy unresolved for owner. Same-commit indexed journal/receipt/ledger only, normal [skip netlify]; no deployment, accounts, provider/SQL/Auth or oracle source modifications.
+
+---
+
 ## November 5, 2026 UTC — #267 S2-102 source-bound SSO/badge governance and forensic verification [skip netlify]
 
 Recovered exact merged development `ed74d80e95da8dd7e29be48551a6f92847caa949`, source tree `959be7fa7a25ccbc696fd7ded9748dfb19119c5f`, S2-101 receipt and merged strict ledger; current main/release, AGENTS/context/preflight, Nov3 Locked publication policy, release queue, #33/#96 overlapping scope and #267 recent integration already consulted in this run. Original workflow #1 first four lines rechecked without duplicate credit. Concurrent #33 changes do not touch original frozen SHA or pinned source. Other account's automation status remains unverified.
