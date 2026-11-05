@@ -463,3 +463,16 @@ Read each word of #504 whole comments: `6651565529`, `6652523287`, `6652543647`,
 **Cumulative:** **7,919 file lines / 60,754 file words + 54 distinct GitHub objects / 14949 GitHub words**. At this snapshot 59 #504 comments, 53 comment bodies directly reviewed including setup, **6 pre-checkpoint comment bodies remain**. Other issues/PR comments/review threads/Actions/commits/tags/releases, old queue version reconciliation, current source drift and independently validated #267 coverage remain incomplete. Status **OPEN / IN_PROGRESS**.
 
 **Exact next unreviewed:** #504 comment `6658217058`. This docs-only three-file checkpoint has no newly executed Node/SQL/browser/603/provider/member tests; PR-head and merged-source CI require separate readback. No Netlify publication, release/production branch change, live provider/SQL/Auth/Edge/member/backup change, forced history, secret or purchase.
+
+
+## G1-041 — November 5, 2026 UTC: seven complete #267 historical comments [skip netlify]
+
+Live source at review: development `fbb7cd072bf73cd65f088d9ed9e6687b2b612ea5`, main `c25e31343b1974b89445b48b43993bc446aa96ca`, release/production `b386a977a7c43bf190f6315105894334d96f0f18`; GitHub visibility **PUBLIC** (earlier recorded exception; private restoration not proven). Issue #504 OPEN; #267/#455/#33/#96 preserve independent ownership.
+
+**Direct semantic work:** Read whole issue #267 comment bodies `6524762907`, `6525417075`, `6562502337`, `6563526467`, `6566336225`, `6567021489`, `6567895760` in source order, **7 uniquely new GitHub governance objects / 1667 literal whitespace-token words**. For each, preserve complete UTF-8 source SHA-1, inclusive 1-based body line and word ranges, individual semantic findings and historical disposition in [G1-041 receipt](../audits/issue504-review-G1-041.json). October 30 V1 source/automation failures and November 1 V2 fresh restart are different eras; the former do **not** prove present failure or add any V2 source coverage. The Nov 2 CI-scoping defect was recorded as already fixed, not a new remediation.
+
+**Cumulative #504:** 7919 source-file lines / 60754 words, plus **82 GitHub objects / 23164 words**. #267 source-line credit imported **ZERO**; its V2 strict review, current pinned code and post-pin drift remain separately open. At source snapshot #267 has 92 comments; **73 remain after this contiguous batch**; other issue/PR/review, Actions/job/artifact, branch/tag/commit and current drift inventories remain incomplete. No new confirmed current code/document bug or unused-safe deletion in reviewed text; immutable history preserved.
+
+**Tests:** SHA-1 known vectors, comment-source arithmetic and ID nonoverlap PASS; Node22/SQL/browser/offline/original603 not rerun for a docs-only receipt. PR-head and merged-source CI must be read back; a pending or skipped job is **not PASS**. Only receipt, ledger and this #504 scoped journal changed. No Netlify, release/production, provider/SQL/Auth/Edge/member/backup, secret, purchase or force write.
+
+**Exact NEXT unreviewed:** Issue #267 comment [`6568435318`](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267#issuecomment-6568435318), body word 1. Audit **OPEN / IN_PROGRESS**.
