@@ -2,9 +2,9 @@
   "schema_version": 1,
   "authority": "OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022",
   "published_base": {
-    "tested_source_sha": "0f8ea686743ebae8476d1a72cde0dfa1833ee157",
-    "release_sha": "b386a977a7c43bf190f6315105894334d96f0f18",
-    "netlify_deploy_id": "6aec13c971b66c896b273389"
+    "tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
+    "release_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+    "netlify_deploy_id": "6aeceac987f179a62547f490"
   },
   "items": [
     {
@@ -38,7 +38,7 @@
       "id": "DIC-Q-455-shot-history-missing-date-display",
       "issue": 455,
       "title": "Avoid fabricated January 1970 dates for undated legacy Shot History and provide accessible unknown-date label",
-      "state": "READY",
+      "state": "DEPLOYED",
       "scope_paths": [
         "site/lib/ui.js",
         "site/cloud/shot_card.js"
@@ -63,15 +63,21 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "VERIFIED narrowly READY in development ONLY; NOT DEPLOYED. No actual historical timestamp/shot alteration, only rendering. No app policy/science/metrics/SQL/Auth/Edge/provider writes. Distinct scope from other #455 READY items; release isolation/dependencies and explicit owner publish instruction remain mandatory.",
+      "notes": "VERIFIED narrowly READY in development ONLY; NOT DEPLOYED. No actual historical timestamp/shot alteration, only rendering. No app policy/science/metrics/SQL/Auth/Edge/provider writes. Distinct scope from other #455 READY items; release isolation/dependencies and explicit owner publish instruction remain mandatory.\n2026-11-05 Release19 current deployment: DEPLOYED by one-use DIC-20261105-READY19-19, exact CI-tested source 06418ca2c9d391892747da77851a9384ca6e31e5, Git-connected Netlify READY/current 6aeceac987f179a62547f490, release SHA 6c729b928fad5fd59ae012c63d7c005f180b2b64. Earlier development-only READY/not-deployed comments are historical. The broader parent issue and real-member/physical espresso tests remain separate.",
       "merged_source_sha": "cfdcbcaafe0d02d1bfb5b2c4df0176ddbf1dec35",
-      "pr": 839
+      "pr": 839,
+      "delivered_release_id": "DIC-20261105-READY19-19",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-05T20:45:13.269Z",
+      "delivered_tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
+      "delivered_release_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+      "delivered_netlify_deploy_id": "6aeceac987f179a62547f490"
     },
     {
       "id": "DIC-Q-455-shot-history-instant-order",
       "issue": 455,
       "title": "Show per-coffee Shot History newest by real instant, not lexical timezone offset",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "667fbaa92fefa9cac0a584a6e74ba242757282ac",
       "scope_paths": [
         "site/cloud/main.js",
@@ -96,15 +102,21 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "VERIFIED NARROW READY in development only, NOT DEPLOYED. Per-coffee shot history display order only, no source or member data rewrites. This item and preexisting DIC-Q-455-coffee-recency-instant-order overlap site/lib/model.js: any future owner-authorized release must isolate/bind required READY dependencies and prevent unready changes from shipping. Frozen603 SKIPPED, #267 separate strict audit, signed-in production member/cup quality untested. No production SQL/Auth/Edge/provider/member writes or main/release/Netlify movement.",
-      "pr": 824
+      "notes": "VERIFIED NARROW READY in development only, NOT DEPLOYED. Per-coffee shot history display order only, no source or member data rewrites. This item and preexisting DIC-Q-455-coffee-recency-instant-order overlap site/lib/model.js: any future owner-authorized release must isolate/bind required READY dependencies and prevent unready changes from shipping. Frozen603 SKIPPED, #267 separate strict audit, signed-in production member/cup quality untested. No production SQL/Auth/Edge/provider/member writes or main/release/Netlify movement.\n2026-11-05 Release19 current deployment: DEPLOYED by one-use DIC-20261105-READY19-19, exact CI-tested source 06418ca2c9d391892747da77851a9384ca6e31e5, Git-connected Netlify READY/current 6aeceac987f179a62547f490, release SHA 6c729b928fad5fd59ae012c63d7c005f180b2b64. Earlier development-only READY/not-deployed comments are historical. The broader parent issue and real-member/physical espresso tests remain separate.",
+      "pr": 824,
+      "delivered_release_id": "DIC-20261105-READY19-19",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-05T20:45:13.269Z",
+      "delivered_tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
+      "delivered_release_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+      "delivered_netlify_deploy_id": "6aeceac987f179a62547f490"
     },
     {
       "id": "DIC-Q-33-original603-603-coop-drymill-town-origin",
       "merged_source_sha": "caa2122944b340e7f4f486b120dea78873d90f0f",
       "issue": 33,
       "title": "Preserve selected Nicaragua Segovia growing locality by distinguishing processing-mill town",
-      "state": "READY",
+      "state": "DEPLOYED",
       "scope_paths": [
         "src/server/coffee-processing-site-origin-guard.mjs",
         "src/server/coffee-page-metadata.mjs"
@@ -139,13 +151,19 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "NARROW READY on development, NOT DEPLOYED. Current official selected coffee publishes its cooperative's downstream DRY MILL in Palacaguina, not evidence that 2,300 farmers grow in that town; current guarded parser correctly suggests country Nicaragua only. Historical Oct29 captured parser had Palacaguina, Nicaragua, but no controlled identical-current-HTML prepatch replay is claimed. Generic narrowly guarded mill/farm role separation, positive/hostile parser/Add Coffee tests, selected source run success. Original frozen603/201/1197 CSV/oracle/scorer intact and universal individual semantic certification unfinished. Release requires owner publication. No Netlify/SQL/Edge/Auth/provider/member writes. receipt docs/audits/issue33-original603-603-selected-processing-site-ready-20261105.json."
+      "notes": "NARROW READY on development, NOT DEPLOYED. Current official selected coffee publishes its cooperative's downstream DRY MILL in Palacaguina, not evidence that 2,300 farmers grow in that town; current guarded parser correctly suggests country Nicaragua only. Historical Oct29 captured parser had Palacaguina, Nicaragua, but no controlled identical-current-HTML prepatch replay is claimed. Generic narrowly guarded mill/farm role separation, positive/hostile parser/Add Coffee tests, selected source run success. Original frozen603/201/1197 CSV/oracle/scorer intact and universal individual semantic certification unfinished. Release requires owner publication. No Netlify/SQL/Edge/Auth/provider/member writes. receipt docs/audits/issue33-original603-603-selected-processing-site-ready-20261105.json.\n2026-11-05 Release19 current deployment: DEPLOYED by one-use DIC-20261105-READY19-19, exact CI-tested source 06418ca2c9d391892747da77851a9384ca6e31e5, Git-connected Netlify READY/current 6aeceac987f179a62547f490, release SHA 6c729b928fad5fd59ae012c63d7c005f180b2b64. Earlier development-only READY/not-deployed comments are historical. The broader parent issue and real-member/physical espresso tests remain separate.",
+      "delivered_release_id": "DIC-20261105-READY19-19",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-05T20:45:13.269Z",
+      "delivered_tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
+      "delivered_release_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+      "delivered_netlify_deploy_id": "6aeceac987f179a62547f490"
     },
     {
       "id": "DIC-Q-455-coffee-recency-instant-order",
       "issue": 455,
       "title": "Current coffee recency and hidden-current reselection use real timezone instants",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "a050f325effe5aba25838b95950650d9404aff71",
       "scope_paths": [
         "site/lib/model.js"
@@ -169,14 +187,20 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Exact development merge a050f325effe5aba25838b95950650d9404aff71 independently checked against four tested PR-head blobs; all tests risk-appropriate and verified. SAFE real-instant recent-coffee/createdAt/hide-current selection only. Original dates, stored shot measurements, five tastes and private notes unchanged; user feedback/outcome unmeasured. DEV READY / NOT DEPLOYED, no publication authority, no SQL/Auth/Edge/provider/member write. Original frozen603 SKIPPED and #267 line audit independent. Research inventory unchanged 45 sources/99 bounded claims, #455 OPEN.",
-      "pr": 783
+      "notes": "Exact development merge a050f325effe5aba25838b95950650d9404aff71 independently checked against four tested PR-head blobs; all tests risk-appropriate and verified. SAFE real-instant recent-coffee/createdAt/hide-current selection only. Original dates, stored shot measurements, five tastes and private notes unchanged; user feedback/outcome unmeasured. DEV READY / NOT DEPLOYED, no publication authority, no SQL/Auth/Edge/provider/member write. Original frozen603 SKIPPED and #267 line audit independent. Research inventory unchanged 45 sources/99 bounded claims, #455 OPEN.\n2026-11-05 Release19 current deployment: DEPLOYED by one-use DIC-20261105-READY19-19, exact CI-tested source 06418ca2c9d391892747da77851a9384ca6e31e5, Git-connected Netlify READY/current 6aeceac987f179a62547f490, release SHA 6c729b928fad5fd59ae012c63d7c005f180b2b64. Earlier development-only READY/not-deployed comments are historical. The broader parent issue and real-member/physical espresso tests remain separate.",
+      "pr": 783,
+      "delivered_release_id": "DIC-20261105-READY19-19",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-05T20:45:13.269Z",
+      "delivered_tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
+      "delivered_release_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+      "delivered_netlify_deploy_id": "6aeceac987f179a62547f490"
     },
     {
       "id": "DIC-Q-33-original603-363-selected-area-direct-origin",
       "issue": 33,
       "title": "Current selected Bellavista/Chiapas origin from exact H1 and direct same-coffee locality statement",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "99d5f5a3df6d42922c614189fca7b21ba86745cd",
       "scope_paths": [
         "src/server/coffee-title-region-evidence.mjs",
@@ -204,13 +228,19 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "NARROW one-field READY on DEVELOPMENT only; NOT DEPLOYED and not a 603-product manual certification. Exact source identity corroborated, #165 conservative negative control unchanged; do not promote stale harvest/SEO/other-coffee provenance. No real member/GoTrue/device acceptance claimed. Original CSV/oracle/scorer untouched. No release/provider/Auth/SQL/member writes. Parent #33 IN_PROGRESS, #267/#96 separate. Evidence docs/audits/issue33-original603-165-363-selected-origin-ready-20261105.json."
+      "notes": "NARROW one-field READY on DEVELOPMENT only; NOT DEPLOYED and not a 603-product manual certification. Exact source identity corroborated, #165 conservative negative control unchanged; do not promote stale harvest/SEO/other-coffee provenance. No real member/GoTrue/device acceptance claimed. Original CSV/oracle/scorer untouched. No release/provider/Auth/SQL/member writes. Parent #33 IN_PROGRESS, #267/#96 separate. Evidence docs/audits/issue33-original603-165-363-selected-origin-ready-20261105.json.\n2026-11-05 Release19 current deployment: DEPLOYED by one-use DIC-20261105-READY19-19, exact CI-tested source 06418ca2c9d391892747da77851a9384ca6e31e5, Git-connected Netlify READY/current 6aeceac987f179a62547f490, release SHA 6c729b928fad5fd59ae012c63d7c005f180b2b64. Earlier development-only READY/not-deployed comments are historical. The broader parent issue and real-member/physical espresso tests remain separate.",
+      "delivered_release_id": "DIC-20261105-READY19-19",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-05T20:45:13.269Z",
+      "delivered_tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
+      "delivered_release_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+      "delivered_netlify_deploy_id": "6aeceac987f179a62547f490"
     },
     {
       "id": "DIC-Q-33-410-selected-heading-price-separation",
       "issue": 33,
       "title": "Selected current product display name excludes adjacent numeric commerce price",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "0cc99e6601d13ffb038edc6dedf2dff95191284a",
       "scope_paths": [
         "src/server/coffee-product-identity.mjs",
@@ -237,13 +267,19 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "NARROW NAME-ONLY READY on development, NOT DEPLOYED. Source-bound official raw HTML SHA 0c58adc2615672a1358d89c6830939592636312af2415ab2d3bc176f690af38a; direct canonical Coffee Name verified, commerce price retained only in source supplement. Original603 #410 elevation_m conflict and family producer completeness remain independently UNVERIFIED. Whole603 manual certification remains zero; #33 OPEN. Durable receipt docs/audits/issue33-original603-410-selected-title-price-ready-20261105.json. No production/Netlify/provider/member/Auth writes."
+      "notes": "NARROW NAME-ONLY READY on development, NOT DEPLOYED. Source-bound official raw HTML SHA 0c58adc2615672a1358d89c6830939592636312af2415ab2d3bc176f690af38a; direct canonical Coffee Name verified, commerce price retained only in source supplement. Original603 #410 elevation_m conflict and family producer completeness remain independently UNVERIFIED. Whole603 manual certification remains zero; #33 OPEN. Durable receipt docs/audits/issue33-original603-410-selected-title-price-ready-20261105.json. No production/Netlify/provider/member/Auth writes.\n2026-11-05 Release19 current deployment: DEPLOYED by one-use DIC-20261105-READY19-19, exact CI-tested source 06418ca2c9d391892747da77851a9384ca6e31e5, Git-connected Netlify READY/current 6aeceac987f179a62547f490, release SHA 6c729b928fad5fd59ae012c63d7c005f180b2b64. Earlier development-only READY/not-deployed comments are historical. The broader parent issue and real-member/physical espresso tests remain separate.",
+      "delivered_release_id": "DIC-20261105-READY19-19",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-05T20:45:13.269Z",
+      "delivered_tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
+      "delivered_release_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+      "delivered_netlify_deploy_id": "6aeceac987f179a62547f490"
     },
     {
       "id": "DIC-Q-455-latest-shot-instant-order",
       "issue": 455,
       "title": "Select newest actual shot instant consistently in logging prefill and taste recommendation",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "e61a357176e4dbc90bb3b7ee38c2fcea2d1837cf",
       "scope_paths": [
         "site/lib/engine.js"
@@ -270,14 +306,20 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "READY development only, NOT DEPLOYED. Preserves original shots, five sensory fields, private notes, style/feed/basket, grinder/setup/calibration, Locked targets and one controllable change. Source regression proven but no current real-member/sensory trial. Original603 SKIPPED; no production or provider writes.",
-      "pr": 737
+      "notes": "READY development only, NOT DEPLOYED. Preserves original shots, five sensory fields, private notes, style/feed/basket, grinder/setup/calibration, Locked targets and one controllable change. Source regression proven but no current real-member/sensory trial. Original603 SKIPPED; no production or provider writes.\n2026-11-05 Release19 current deployment: DEPLOYED by one-use DIC-20261105-READY19-19, exact CI-tested source 06418ca2c9d391892747da77851a9384ca6e31e5, Git-connected Netlify READY/current 6aeceac987f179a62547f490, release SHA 6c729b928fad5fd59ae012c63d7c005f180b2b64. Earlier development-only READY/not-deployed comments are historical. The broader parent issue and real-member/physical espresso tests remain separate.",
+      "pr": 737,
+      "delivered_release_id": "DIC-20261105-READY19-19",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-05T20:45:13.269Z",
+      "delivered_tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
+      "delivered_release_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+      "delivered_netlify_deploy_id": "6aeceac987f179a62547f490"
     },
     {
       "id": "DIC-Q-33-seasonal-program-release-provenance",
       "issue": 33,
       "title": "Suppress archived selected-product seasonal-program edition leakage without erasing direct dated release",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "b85ded3e40e8c59633e8261ad326e58e8ef682aa",
       "scope_paths": [
         "src/server/coffee-identity-evidence.mjs"
@@ -312,14 +354,20 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "NARROW READY development only, NOT DEPLOYED: actual selected official #248 archived program not a SKU release, direct dated offering positive preserved, actual #22 control unchanged. Independently rehashed official captures, synthetic positive/hostile tests and exact merged checks. Original603 frozen replay SKIPPED, 603 individual semantic reviews NOT certified. Legacy PR367 failures preserved, unrelated READY/DEPLOYED unchanged. #267 V2/#96 separate, no Netlify publication, provider/SQL/Edge/Auth/member writes.",
-      "pr": 731
+      "notes": "NARROW READY development only, NOT DEPLOYED: actual selected official #248 archived program not a SKU release, direct dated offering positive preserved, actual #22 control unchanged. Independently rehashed official captures, synthetic positive/hostile tests and exact merged checks. Original603 frozen replay SKIPPED, 603 individual semantic reviews NOT certified. Legacy PR367 failures preserved, unrelated READY/DEPLOYED unchanged. #267 V2/#96 separate, no Netlify publication, provider/SQL/Edge/Auth/member writes.\n2026-11-05 Release19 current deployment: DEPLOYED by one-use DIC-20261105-READY19-19, exact CI-tested source 06418ca2c9d391892747da77851a9384ca6e31e5, Git-connected Netlify READY/current 6aeceac987f179a62547f490, release SHA 6c729b928fad5fd59ae012c63d7c005f180b2b64. Earlier development-only READY/not-deployed comments are historical. The broader parent issue and real-member/physical espresso tests remain separate.",
+      "pr": 731,
+      "delivered_release_id": "DIC-20261105-READY19-19",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-05T20:45:13.269Z",
+      "delivered_tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
+      "delivered_release_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+      "delivered_netlify_deploy_id": "6aeceac987f179a62547f490"
     },
     {
       "id": "DIC-Q-33-original603-292-selected-guji-producer-region",
       "issue": 33,
       "title": "Exact selected country-first Guji locality corroborated by same-product named producer",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "7ecfee5299bdfac5e57392c23aa762041aa90c0b",
       "ci_runs": [
         41987721950,
@@ -348,7 +396,13 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Candidate in development only, never publish. Only direct exact H1 + producer region role; do not use historical Shakisso farm land purchase, SEO, other product, lot inference. Original frozen 603/201/1197 captures/oracle/scorer and immutable CSV unchanged. Parent #33 remains open; #267 V2 and #96 separate. Narrow verified READY only: source-backed Guji, Ethiopia, selected original603 #292; not deployed. Source artifacts may contain dynamic HTML; raw SHA256 before/after differ, identity and unaffected fields are equal. This item does not complete 603-coffee independent manual review."
+      "notes": "Candidate in development only, never publish. Only direct exact H1 + producer region role; do not use historical Shakisso farm land purchase, SEO, other product, lot inference. Original frozen 603/201/1197 captures/oracle/scorer and immutable CSV unchanged. Parent #33 remains open; #267 V2 and #96 separate. Narrow verified READY only: source-backed Guji, Ethiopia, selected original603 #292; not deployed. Source artifacts may contain dynamic HTML; raw SHA256 before/after differ, identity and unaffected fields are equal. This item does not complete 603-coffee independent manual review.\n2026-11-05 Release19 current deployment: DEPLOYED by one-use DIC-20261105-READY19-19, exact CI-tested source 06418ca2c9d391892747da77851a9384ca6e31e5, Git-connected Netlify READY/current 6aeceac987f179a62547f490, release SHA 6c729b928fad5fd59ae012c63d7c005f180b2b64. Earlier development-only READY/not-deployed comments are historical. The broader parent issue and real-member/physical espresso tests remain separate.",
+      "delivered_release_id": "DIC-20261105-READY19-19",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-05T20:45:13.269Z",
+      "delivered_tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
+      "delivered_release_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+      "delivered_netlify_deploy_id": "6aeceac987f179a62547f490"
     },
     {
       "id": "DIC-Q-33-580-selected-h1-adjacent-farm-locality",
@@ -5332,7 +5386,7 @@
       "issue": 455,
       "pr": 703,
       "title": "Use actual shot instants, not ISO offset text order, for comparable same-coffee sweetness evidence",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "6721cd38f7adf0e950c37d1eb0a6f615bc7e85dd",
       "scope_paths": [
         "site/lib/engine.js"
@@ -5357,14 +5411,20 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "READY on development source, NOT DEPLOYED. Narrow actual-instant chronology fix for observational same-coffee sweetness yield advice; all five ratings, source measurements, private notes, numeric heuristics, Turbo/Fast-Flow, slow feed and Locked rules preserved. No independent real member or cup-quality trial. Deployment remains separately owner authorized; no production writes or release/production changes."
+      "notes": "READY on development source, NOT DEPLOYED. Narrow actual-instant chronology fix for observational same-coffee sweetness yield advice; all five ratings, source measurements, private notes, numeric heuristics, Turbo/Fast-Flow, slow feed and Locked rules preserved. No independent real member or cup-quality trial. Deployment remains separately owner authorized; no production writes or release/production changes.\n2026-11-05 Release19 current deployment: DEPLOYED by one-use DIC-20261105-READY19-19, exact CI-tested source 06418ca2c9d391892747da77851a9384ca6e31e5, Git-connected Netlify READY/current 6aeceac987f179a62547f490, release SHA 6c729b928fad5fd59ae012c63d7c005f180b2b64. Earlier development-only READY/not-deployed comments are historical. The broader parent issue and real-member/physical espresso tests remain separate.",
+      "delivered_release_id": "DIC-20261105-READY19-19",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-05T20:45:13.269Z",
+      "delivered_tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
+      "delivered_release_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+      "delivered_netlify_deploy_id": "6aeceac987f179a62547f490"
     },
     {
       "id": "DIC-Q-33-original603-46-current-barrel-green-bean-origin",
       "issue": 33,
       "pr": 707,
       "title": "Recover selected barrel-aged coffee green-bean named origin from adjacent current product prose",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "5598c8811e9ab9c9fce19062b06ced39f59b1d5b",
       "scope_paths": [
         "src/server/coffee-identity-evidence.mjs"
@@ -5394,13 +5454,19 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "NARROW VERIFIED READY ON DEVELOPMENT, NOT DEPLOYED: original603 #46 Cascadia selected green beans explicitly Ethiopian Sidamo, current approved generic extraction Sidamo, Ethiopia, bounded source same-product adjacent claim. Current #43/#88 unchanged; no data loss or invented processing. Original 603-coffee, 201 roasters, 1,197 source captures/oracle/scorer and canonical immutable CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6 untouched. 153 contextual/29 missing-literal historic qualifications and original whole manual semantic certification remain OPEN under Issue33; #267 V2/#96 independent. No Netlify release, provider/production SQL/Edge/Auth/member write, hosted GoTrue/device test, spend or forced history. PR-head initial failed approvals and first new positive failures were genuinely repaired before final successful CI. This ready queue scope requires separately authorized safe release packaging."
+      "notes": "NARROW VERIFIED READY ON DEVELOPMENT, NOT DEPLOYED: original603 #46 Cascadia selected green beans explicitly Ethiopian Sidamo, current approved generic extraction Sidamo, Ethiopia, bounded source same-product adjacent claim. Current #43/#88 unchanged; no data loss or invented processing. Original 603-coffee, 201 roasters, 1,197 source captures/oracle/scorer and canonical immutable CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6 untouched. 153 contextual/29 missing-literal historic qualifications and original whole manual semantic certification remain OPEN under Issue33; #267 V2/#96 independent. No Netlify release, provider/production SQL/Edge/Auth/member write, hosted GoTrue/device test, spend or forced history. PR-head initial failed approvals and first new positive failures were genuinely repaired before final successful CI. This ready queue scope requires separately authorized safe release packaging.\n2026-11-05 Release19 current deployment: DEPLOYED by one-use DIC-20261105-READY19-19, exact CI-tested source 06418ca2c9d391892747da77851a9384ca6e31e5, Git-connected Netlify READY/current 6aeceac987f179a62547f490, release SHA 6c729b928fad5fd59ae012c63d7c005f180b2b64. Earlier development-only READY/not-deployed comments are historical. The broader parent issue and real-member/physical espresso tests remain separate.",
+      "delivered_release_id": "DIC-20261105-READY19-19",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-05T20:45:13.269Z",
+      "delivered_tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
+      "delivered_release_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+      "delivered_netlify_deploy_id": "6aeceac987f179a62547f490"
     },
     {
       "id": "DIC-Q-33-original603-358-current-labeled-farm-region",
       "issue": 33,
       "title": "Use exact selected farm H1 literal country with independently labeled Region",
-      "state": "READY",
+      "state": "DEPLOYED",
       "scope_paths": [
         "src/server/coffee-page-metadata.mjs"
       ],
@@ -5437,15 +5503,21 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "NARROW VERIFIED READY on development, NOT DEPLOYED. Exact selected H1 and direct Region sources support #358 Copan, Honduras with no other fields changed; direct labeled producer Letica Lopez versus narrative Leticia Lopez ambiguity remains source-visible/unadjudicated, no invented correction. #292 Guji unresolved and #370 unchanged. Original 603/201/1197 captures, immutable original CSV/oracle/scorer untouched; universal individual semantic certification not claimed, 153 context/29 missing-literal/35 historical blanks and #267 V2/#96 owned separately. No Netlify publication or production/provider/member/SQL/Edge/Auth writes.",
+      "notes": "NARROW VERIFIED READY on development, NOT DEPLOYED. Exact selected H1 and direct Region sources support #358 Copan, Honduras with no other fields changed; direct labeled producer Letica Lopez versus narrative Leticia Lopez ambiguity remains source-visible/unadjudicated, no invented correction. #292 Guji unresolved and #370 unchanged. Original 603/201/1197 captures, immutable original CSV/oracle/scorer untouched; universal individual semantic certification not claimed, 153 context/29 missing-literal/35 historical blanks and #267 V2/#96 owned separately. No Netlify publication or production/provider/member/SQL/Edge/Auth writes.\n2026-11-05 Release19 current deployment: DEPLOYED by one-use DIC-20261105-READY19-19, exact CI-tested source 06418ca2c9d391892747da77851a9384ca6e31e5, Git-connected Netlify READY/current 6aeceac987f179a62547f490, release SHA 6c729b928fad5fd59ae012c63d7c005f180b2b64. Earlier development-only READY/not-deployed comments are historical. The broader parent issue and real-member/physical espresso tests remain separate.",
       "merged_source_sha": "4c3de83549efc9da50c960346dc6b193f02543fb",
-      "pr": 719
+      "pr": 719,
+      "delivered_release_id": "DIC-20261105-READY19-19",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-05T20:45:13.269Z",
+      "delivered_tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
+      "delivered_release_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+      "delivered_netlify_deploy_id": "6aeceac987f179a62547f490"
     },
     {
       "id": "DIC-Q-455-grind-observation-instant-order",
       "issue": 455,
       "title": "Use actual shot instants for prior-calibration reference and learned grind-time response",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "c0ea44bf82db4f981af3be8d7d342f742cbbef76",
       "scope_paths": [
         "site/lib/engine.js"
@@ -5471,14 +5543,20 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Narrow SAFE derived-chronology fix is READY on development at merged source c0ea44bf82db4f981af3be8d7d342f742cbbef76. NOT DEPLOYED. All five ratings, single-controllable-change advice, private original shots, notes, style/feed/calibration bounds, reference uncertainty and Locked policies preserved. No measured espresso taste gain. Production publication remains separate owner decision.",
-      "pr": 756
+      "notes": "Narrow SAFE derived-chronology fix is READY on development at merged source c0ea44bf82db4f981af3be8d7d342f742cbbef76. NOT DEPLOYED. All five ratings, single-controllable-change advice, private original shots, notes, style/feed/calibration bounds, reference uncertainty and Locked policies preserved. No measured espresso taste gain. Production publication remains separate owner decision.\n2026-11-05 Release19 current deployment: DEPLOYED by one-use DIC-20261105-READY19-19, exact CI-tested source 06418ca2c9d391892747da77851a9384ca6e31e5, Git-connected Netlify READY/current 6aeceac987f179a62547f490, release SHA 6c729b928fad5fd59ae012c63d7c005f180b2b64. Earlier development-only READY/not-deployed comments are historical. The broader parent issue and real-member/physical espresso tests remain separate.",
+      "pr": 756,
+      "delivered_release_id": "DIC-20261105-READY19-19",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-05T20:45:13.269Z",
+      "delivered_tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
+      "delivered_release_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+      "delivered_netlify_deploy_id": "6aeceac987f179a62547f490"
     },
     {
       "id": "DIC-Q-33-original603-64-cultivar-percentage-decimal-comma",
       "issue": 33,
       "title": "Preserve exact selected cultivar-composition decimal commas and percent shares",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "0594e11ede570547ea4240d74e71ff6039df71dd",
       "scope_paths": [
         "src/server/coffee-page-metadata.mjs"
@@ -5504,14 +5582,20 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Source-backed selected #64 variety decimal-comma precision ONLY; READY on development, NOT DEPLOYED or publication authorized. Raw field full literal percentages preserved, no loss of cultivar names. Private raw artifact13408491713 not independently rehashed; official logged content hashes bound run. #10 finer locality not inferred. Parent #33 OPEN, original603 603/201/1197/CSV/oracle/scorer immutable. Receipt docs/audits/issue33-original603-64-cultivar-decimal-comma-ready-20261105.json. No Netlify or production provider/member/SQL/Edge/Auth writes."
+      "notes": "Source-backed selected #64 variety decimal-comma precision ONLY; READY on development, NOT DEPLOYED or publication authorized. Raw field full literal percentages preserved, no loss of cultivar names. Private raw artifact13408491713 not independently rehashed; official logged content hashes bound run. #10 finer locality not inferred. Parent #33 OPEN, original603 603/201/1197/CSV/oracle/scorer immutable. Receipt docs/audits/issue33-original603-64-cultivar-decimal-comma-ready-20261105.json. No Netlify or production provider/member/SQL/Edge/Auth writes.\n2026-11-05 Release19 current deployment: DEPLOYED by one-use DIC-20261105-READY19-19, exact CI-tested source 06418ca2c9d391892747da77851a9384ca6e31e5, Git-connected Netlify READY/current 6aeceac987f179a62547f490, release SHA 6c729b928fad5fd59ae012c63d7c005f180b2b64. Earlier development-only READY/not-deployed comments are historical. The broader parent issue and real-member/physical espresso tests remain separate.",
+      "delivered_release_id": "DIC-20261105-READY19-19",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-05T20:45:13.269Z",
+      "delivered_tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
+      "delivered_release_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+      "delivered_netlify_deploy_id": "6aeceac987f179a62547f490"
     },
     {
       "id": "DIC-Q-33-original603-298-translated-at-origin-decaf",
       "issue": 33,
       "pr": 787,
       "title": "Recover exact selected currently stated at-origin translated decaffeination method",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "0946b15862f4e6dbcc91db22ab03367a3d9110eb",
       "scope_paths": [
         "src/server/coffee-direct-product-prose.mjs"
@@ -5541,14 +5625,20 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Narrow #298 selected sugar-process decaffeination_method only READY on development, NOT DEPLOYED. Full original 603 independent semantic review incomplete; Issue33 OPEN. #298 origin and #430/#186 roast conflicts remain reviewable. Receipt: docs/audits/issue33-original603-298-430-186-translated-decaf-ready-20261105.json. Immutable 603/201/1197 frozen evidence/oracle/scorer/CSV untouched, no production release/provider or member writes. Original raw HTML and ZIP hashes runner-reported, not independently rehashed."
+      "notes": "Narrow #298 selected sugar-process decaffeination_method only READY on development, NOT DEPLOYED. Full original 603 independent semantic review incomplete; Issue33 OPEN. #298 origin and #430/#186 roast conflicts remain reviewable. Receipt: docs/audits/issue33-original603-298-430-186-translated-decaf-ready-20261105.json. Immutable 603/201/1197 frozen evidence/oracle/scorer/CSV untouched, no production release/provider or member writes. Original raw HTML and ZIP hashes runner-reported, not independently rehashed.\n2026-11-05 Release19 current deployment: DEPLOYED by one-use DIC-20261105-READY19-19, exact CI-tested source 06418ca2c9d391892747da77851a9384ca6e31e5, Git-connected Netlify READY/current 6aeceac987f179a62547f490, release SHA 6c729b928fad5fd59ae012c63d7c005f180b2b64. Earlier development-only READY/not-deployed comments are historical. The broader parent issue and real-member/physical espresso tests remain separate.",
+      "delivered_release_id": "DIC-20261105-READY19-19",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-05T20:45:13.269Z",
+      "delivered_tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
+      "delivered_release_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+      "delivered_netlify_deploy_id": "6aeceac987f179a62547f490"
     },
     {
       "id": "DIC-Q-33-original603-593-conditional-selected-process",
       "issue": 33,
       "pr": 802,
       "title": "Withhold falsely chosen Natural process when exact selected coffee only says whether washed or natural",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "20a87e3008b4ef53268d028351ec45934b6afab2",
       "scope_paths": [
         "src/server/coffee-page-metadata.mjs"
@@ -5575,14 +5665,20 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Narrow original603 #593 conditional selected-process false positive safely suppressed and READY on development, NOT DEPLOYED. A published sentence describing whether washed or natural is not one chosen process; Process intentionally blank. Direct selected Process still preserved by guard and adversarial tests. #575 specific producer locality omission and #596 direct region typo/lot boundaries remain independent unresolved manual review; no blanket 603 certificate. Frozen original 603/201/1197 CSV/oracle/scorer untouched, full frozen workflow SKIPPED not PASS. No production/Auth/SQL/Edge/provider/member data changes, physical signed-in acceptance claim or publication authority. Receipt docs/audits/issue33-original603-575-596-593-conditional-ready-20261105.json."
+      "notes": "Narrow original603 #593 conditional selected-process false positive safely suppressed and READY on development, NOT DEPLOYED. A published sentence describing whether washed or natural is not one chosen process; Process intentionally blank. Direct selected Process still preserved by guard and adversarial tests. #575 specific producer locality omission and #596 direct region typo/lot boundaries remain independent unresolved manual review; no blanket 603 certificate. Frozen original 603/201/1197 CSV/oracle/scorer untouched, full frozen workflow SKIPPED not PASS. No production/Auth/SQL/Edge/provider/member data changes, physical signed-in acceptance claim or publication authority. Receipt docs/audits/issue33-original603-575-596-593-conditional-ready-20261105.json.\n2026-11-05 Release19 current deployment: DEPLOYED by one-use DIC-20261105-READY19-19, exact CI-tested source 06418ca2c9d391892747da77851a9384ca6e31e5, Git-connected Netlify READY/current 6aeceac987f179a62547f490, release SHA 6c729b928fad5fd59ae012c63d7c005f180b2b64. Earlier development-only READY/not-deployed comments are historical. The broader parent issue and real-member/physical espresso tests remain separate.",
+      "delivered_release_id": "DIC-20261105-READY19-19",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-05T20:45:13.269Z",
+      "delivered_tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
+      "delivered_release_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+      "delivered_netlify_deploy_id": "6aeceac987f179a62547f490"
     },
     {
       "id": "DIC-Q-33-original603-575-selected-smallholder-growing-locality",
       "issue": 33,
       "pr": 805,
       "title": "Exact selected Stumptown current-lot contributing smallholders' growing locality from direct selected prose",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "b68b826a2181b7f92650479c0381d5ac5d80d1fe",
       "scope_paths": [
         "src/server/coffee-title-region-evidence.mjs",
@@ -5610,14 +5706,20 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "NARROW READY only on development, NOT DEPLOYED. Before country-only #575 original603 chosen coffee; after direct same-selected current-lot country/town/region Takengon, Aceh, Indonesia; do not auto append Sumatra just because historical oracle includes it or cooperative context places it broadly there. #593 process blank and #596 direct region typo/roast ambiguity remain reviewable. Original immutable frozen603 coffees/201 roasters/1197 captures/CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6/oracle/scorer untouched. Full 603 manual semantic certification IN_PROGRESS, original frozen603 workflow SKIPPED. No signed-in GoTrue/device claim, Netlify publication, production SQL/Edge/Auth/provider/member writes, purchased services, forced history. Receipt docs/audits/issue33-original603-575-selected-smallholder-ready-20261105.json."
+      "notes": "NARROW READY only on development, NOT DEPLOYED. Before country-only #575 original603 chosen coffee; after direct same-selected current-lot country/town/region Takengon, Aceh, Indonesia; do not auto append Sumatra just because historical oracle includes it or cooperative context places it broadly there. #593 process blank and #596 direct region typo/roast ambiguity remain reviewable. Original immutable frozen603 coffees/201 roasters/1197 captures/CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6/oracle/scorer untouched. Full 603 manual semantic certification IN_PROGRESS, original frozen603 workflow SKIPPED. No signed-in GoTrue/device claim, Netlify publication, production SQL/Edge/Auth/provider/member writes, purchased services, forced history. Receipt docs/audits/issue33-original603-575-selected-smallholder-ready-20261105.json.\n2026-11-05 Release19 current deployment: DEPLOYED by one-use DIC-20261105-READY19-19, exact CI-tested source 06418ca2c9d391892747da77851a9384ca6e31e5, Git-connected Netlify READY/current 6aeceac987f179a62547f490, release SHA 6c729b928fad5fd59ae012c63d7c005f180b2b64. Earlier development-only READY/not-deployed comments are historical. The broader parent issue and real-member/physical espresso tests remain separate.",
+      "delivered_release_id": "DIC-20261105-READY19-19",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-05T20:45:13.269Z",
+      "delivered_tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
+      "delivered_release_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+      "delivered_netlify_deploy_id": "6aeceac987f179a62547f490"
     },
     {
       "id": "DIC-Q-33-original603-596-selected-farm-region-disagreement",
       "merged_source_sha": "5e530b4a7ee373ad8413009a759c7ec342fba280",
       "issue": 33,
       "title": "Guard selected current named-farm region spelling disagreement and preserve both literals for Add Coffee review",
-      "state": "READY",
+      "state": "DEPLOYED",
       "scope_paths": [
         "src/server/coffee-title-region-evidence.mjs",
         "src/server/coffee-page-metadata.mjs"
@@ -5644,15 +5746,21 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "NARROW VERIFIED READY in development ONLY, NOT DEPLOYED. Withhold origin on direct same-selected current named-farm region spelling disagreement, retaining both printed alternatives for explicit member source review; never silently overwrite user's values or infer roast. Original 603/201/1197, frozen CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6, oracle/scorer unchanged. Issue33 OPEN pending genuine full individual 603 manual semantic acceptance; frozen603 SKIPPED not PASS; #267 V2/#96 separate. No Netlify publication, production provider/SQL/Edge/Auth/member writes, paid services or force. Receipt docs/audits/issue33-original603-596-selected-farm-region-ready-20261105.json.",
-      "pr": 811
+      "notes": "NARROW VERIFIED READY in development ONLY, NOT DEPLOYED. Withhold origin on direct same-selected current named-farm region spelling disagreement, retaining both printed alternatives for explicit member source review; never silently overwrite user's values or infer roast. Original 603/201/1197, frozen CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6, oracle/scorer unchanged. Issue33 OPEN pending genuine full individual 603 manual semantic acceptance; frozen603 SKIPPED not PASS; #267 V2/#96 separate. No Netlify publication, production provider/SQL/Edge/Auth/member writes, paid services or force. Receipt docs/audits/issue33-original603-596-selected-farm-region-ready-20261105.json.\n2026-11-05 Release19 current deployment: DEPLOYED by one-use DIC-20261105-READY19-19, exact CI-tested source 06418ca2c9d391892747da77851a9384ca6e31e5, Git-connected Netlify READY/current 6aeceac987f179a62547f490, release SHA 6c729b928fad5fd59ae012c63d7c005f180b2b64. Earlier development-only READY/not-deployed comments are historical. The broader parent issue and real-member/physical espresso tests remain separate.",
+      "pr": 811,
+      "delivered_release_id": "DIC-20261105-READY19-19",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-05T20:45:13.269Z",
+      "delivered_tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
+      "delivered_release_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+      "delivered_netlify_deploy_id": "6aeceac987f179a62547f490"
     },
     {
       "id": "DIC-Q-33-original603-570-selected-farm-growing-locality",
       "issue": 33,
       "pr": 827,
       "title": "Corroborate exact current selected named farm growing locality without extrapolation",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "4f8a66a6a71b59146019924f7bbd8977d98c25fb",
       "scope_paths": [
         "src/server/coffee-selected-farm-growing-locality.mjs",
@@ -5680,7 +5788,13 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "NARROW code+source correction VERIFIED READY in DEVELOPMENT only, NOT DEPLOYED; only #570 selected present growing locality. Current exact product title and direct farm story corroborated, contradicting or missing current locality withheld. Raw source HTML SHA256 runner-reported, NOT separately rehashed; before/after HTML hashes differ due dynamic captures. #585 roast remains blank and #600 control stable. Full original603 individual case-by-case adjudication IN_PROGRESS, immutable 603 coffees/201 roasters/1197 captures, original CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6, oracle/scorer untouched. Frozen603 workflow SKIPPED, #267 V2/#96 separate, no production/Netlify/GoTrue/device claims. Receipt docs/audits/issue33-original603-570-selected-growing-locality-ready-20261105.json."
+      "notes": "NARROW code+source correction VERIFIED READY in DEVELOPMENT only, NOT DEPLOYED; only #570 selected present growing locality. Current exact product title and direct farm story corroborated, contradicting or missing current locality withheld. Raw source HTML SHA256 runner-reported, NOT separately rehashed; before/after HTML hashes differ due dynamic captures. #585 roast remains blank and #600 control stable. Full original603 individual case-by-case adjudication IN_PROGRESS, immutable 603 coffees/201 roasters/1197 captures, original CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6, oracle/scorer untouched. Frozen603 workflow SKIPPED, #267 V2/#96 separate, no production/Netlify/GoTrue/device claims. Receipt docs/audits/issue33-original603-570-selected-growing-locality-ready-20261105.json.\n2026-11-05 Release19 current deployment: DEPLOYED by one-use DIC-20261105-READY19-19, exact CI-tested source 06418ca2c9d391892747da77851a9384ca6e31e5, Git-connected Netlify READY/current 6aeceac987f179a62547f490, release SHA 6c729b928fad5fd59ae012c63d7c005f180b2b64. Earlier development-only READY/not-deployed comments are historical. The broader parent issue and real-member/physical espresso tests remain separate.",
+      "delivered_release_id": "DIC-20261105-READY19-19",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-05T20:45:13.269Z",
+      "delivered_tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
+      "delivered_release_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+      "delivered_netlify_deploy_id": "6aeceac987f179a62547f490"
     }
   ],
   "history": [
@@ -6660,6 +6774,36 @@
         "DIC-Q-33-original603-446-adjacent-measured-growing-region"
       ],
       "receipt": "docs/PRODUCTION_RELEASE_2026-11-05_READY9_18_VERIFIED.json"
+    },
+    {
+      "id": "DIC-20261105-READY19-19",
+      "state": "DEPLOYED",
+      "tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
+      "release_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+      "netlify_deploy_id": "6aeceac987f179a62547f490",
+      "deployed_at_utc": "2026-11-05T20:45:13.269Z",
+      "item_ids": [
+        "DIC-Q-455-shot-history-missing-date-display",
+        "DIC-Q-455-shot-history-instant-order",
+        "DIC-Q-33-original603-603-coop-drymill-town-origin",
+        "DIC-Q-455-coffee-recency-instant-order",
+        "DIC-Q-33-original603-363-selected-area-direct-origin",
+        "DIC-Q-33-410-selected-heading-price-separation",
+        "DIC-Q-455-latest-shot-instant-order",
+        "DIC-Q-33-seasonal-program-release-provenance",
+        "DIC-Q-33-original603-292-selected-guji-producer-region",
+        "DIC-Q-455-sweetness-instant-chronology",
+        "DIC-Q-33-original603-46-current-barrel-green-bean-origin",
+        "DIC-Q-33-original603-358-current-labeled-farm-region",
+        "DIC-Q-455-grind-observation-instant-order",
+        "DIC-Q-33-original603-64-cultivar-percentage-decimal-comma",
+        "DIC-Q-33-original603-298-translated-at-origin-decaf",
+        "DIC-Q-33-original603-593-conditional-selected-process",
+        "DIC-Q-33-original603-575-selected-smallholder-growing-locality",
+        "DIC-Q-33-original603-596-selected-farm-region-disagreement",
+        "DIC-Q-33-original603-570-selected-farm-growing-locality"
+      ],
+      "receipt": "docs/PRODUCTION_RELEASE_2026-11-05_READY19_19_VERIFIED.json"
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
