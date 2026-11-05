@@ -5,29 +5,29 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 5914,
+    "strict_validated_lines": 5954,
     "first_unvalidated_manifest_file_index": 59,
     "first_unvalidated_path": "docs/DECISION_LEDGER.json",
-    "first_unvalidated_line": 1024,
+    "first_unvalidated_line": 1064,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 7541,
+    "strict_validated_lines": 7581,
     "first_unvalidated_file_index": 50,
     "first_unvalidated_path": "scripts/audit/coffee-reviewed-change-forensics.py",
-    "first_unvalidated_line": 321,
+    "first_unvalidated_line": 361,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true,
-    "strict_live_counterpart_checked_through_line": 320,
+    "strict_live_counterpart_checked_through_line": 360,
     "last_live_counterpart_checked": {
       "path": "scripts/audit/coffee-reviewed-change-forensics.py",
-      "commit": "dd8e2918d1ff4128f11a6c1896b4fc9214396c7d",
+      "commit": "a43e19ecc771c7be1613c30cf9205e0124b18916",
       "blob": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
-      "first_line": 287,
-      "last_line": 326,
+      "first_line": 327,
+      "last_line": 366,
       "offset": 6
     }
   },
@@ -2380,11 +2380,33 @@
       "strict_pinned_delta": 40,
       "old_v2_additional_credit": 0,
       "verification": "80 exact original physical lines direct AI semantics, SHA/nine criteria and 40 current equivalence +6; no runtime assertions"
+    },
+    {
+      "batch": "S2-105",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-105.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        1024,
+        1063
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "pinned_lines": [
+        321,
+        360
+      ],
+      "pinned_blob": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "live_exact_text_line_offset": 6,
+      "live_blob": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+      "strict_frozen_delta": 40,
+      "strict_pinned_delta": 40,
+      "old_v2_additional_credit": 0,
+      "verification": "80 literal AI line-specific meanings with 9 dimensions and bound original source, 40 exact live +6; no original603/visual/browser/auth tests newly passed."
     }
   ],
   "completion": "IN_PROGRESS",
-  "test_limit": "Strict source/receipt verified, hosted CI pending, no full live drift or current style/contrast/mobile/report runtime test yet.",
-  "last_batch": "S2-104",
-  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-104.json",
+  "test_limit": "Strict original source and exact live text checked; exact PR-head CI pending, no full current delta or application/browser/SQL/Auth tests.",
+  "last_batch": "S2-105",
+  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-105.json",
   "complete": false
 }
