@@ -348,6 +348,30 @@
       "sql_evidence": [
         "No new SQL migration in exact published Release17-to-READY8 app diff; database_change_risk none."
       ]
+    },
+    {
+      "id": "DIC-20261105-READY9-18",
+      "tested_source_sha": "0f8ea686743ebae8476d1a72cde0dfa1833ee157",
+      "owner_approved": true,
+      "status": "APPROVED",
+      "production_branch": "release/production",
+      "max_publications": 1,
+      "approved_at_utc": "2026-11-05T05:25:39.166Z",
+      "expires_at_utc": "2026-11-05T09:25:39.166Z",
+      "approval_source": "Owner Nov 4, 2026 (America/Denver) current conversation: 'Publish', clarified 'Go ahead and do all 9.'",
+      "scope": "ONE source-isolated Git-connected Netlify release of exactly the nine listed READY items at immutable CI-green candidate 0f8ea686743ebae8476d1a72cde0dfa1833ee157; exclude three IN_PROGRESS records and two restored unfinished source files, newer code, unrelated changes, and any second/future release. No SQL migrations, Supabase/Auth/Edge/member writes, destructive action, paid purchase, or Netlify credit gate. Five exact-source checks PASS; owner controls credits.",
+      "approved_ready_item_ids": [
+        "DIC-Q-33-original603-106-country-first-growing-region",
+        "DIC-Q-33-original603-18-current-present-farm-locality",
+        "DIC-Q-33-original603-309-inline-product-roast",
+        "DIC-Q-33-original603-361-selected-named-decaf-process",
+        "DIC-Q-33-original603-446-adjacent-measured-growing-region",
+        "DIC-Q-33-original603-62-educational-mountain-origin",
+        "DIC-Q-455-legacy-coffee-date-sort",
+        "DIC-Q-455-previous-calibration-date",
+        "DIC-Q-455-sweetness-legacy-date"
+      ],
+      "owner_private_free_compensating_controls": true
     }
   ],
   "policy": "New owner publish/deploy instruction grants one selected READY release at the exact combined tested source SHA; source-bound unique grant, max 1 publication, finite expiry, matched CI, backup/security and Netlify readback. Owner exclusively monitors credits; no credit cap/balance/plan proof required. Never buy or upgrade. Prior grants and their old cost fields are preserved historical evidence."
