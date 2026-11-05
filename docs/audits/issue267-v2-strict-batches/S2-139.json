@@ -1,0 +1,683 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch_id": "S2-139",
+  "date_utc": "2026-11-05",
+  "source_commits": {
+    "frozen": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+    "pinned": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "observed_development": "6aa6b4872c0ada34da88f1ff801020b92c959232"
+  },
+  "method": "Direct original numbered-source AI semantic review, complete 27-line pinned shell script, nine individual dimensions and exact current counterparts.",
+  "prior_receipt": "S2-138",
+  "source_bound_nonoverlap": true,
+  "frozen": {
+    "line_count": 0,
+    "no_new_credit": true,
+    "previous_checkpoint": 2535
+  },
+  "pinned_current": {
+    "file_index": 54,
+    "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+    "blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+    "range": [
+      1,
+      27
+    ],
+    "verified_eof": 27,
+    "per_line": [
+      {
+        "line": 1,
+        "source_text": "#!/usr/bin/env bash",
+        "classification": "direct_inspected_comment_blank_or_delimiter",
+        "behavior": "Bash interpreter directive",
+        "quality": "Directly accounted for nonexecuting line",
+        "risk": "Portability assumes bash",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 1,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Run syntax check",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 1 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 2,
+        "source_text": "# No secrets, provider connections, published ports, backup uploads or grants.",
+        "classification": "direct_inspected_comment_blank_or_delimiter",
+        "behavior": "Comment declares no secrets/provider/port/grants",
+        "quality": "Directly accounted for nonexecuting line",
+        "risk": "Declaration alone not runtime proof",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 2,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Inspect each executable action",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 2 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 3,
+        "source_text": "set -Eeuo pipefail",
+        "classification": "direct_semantic_executable_source",
+        "behavior": "Enable error, unset variable and pipeline failure protection",
+        "quality": "Read in surrounding scripts/audit/isolated-backup-snapshot-regression.sh control flow; status/data/side-effect meaning checked",
+        "risk": "Any trapped early failure should clean container",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 3,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "ShellCheck or bash -n",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 3 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 4,
+        "source_text": "ROOT=$(cd \"$(dirname \"${BASH_SOURCE[0]}\")/../..\" && pwd)",
+        "classification": "direct_semantic_executable_source",
+        "behavior": "Resolve repository root using BASH_SOURCE path",
+        "quality": "Read in surrounding scripts/audit/isolated-backup-snapshot-regression.sh control flow; status/data/side-effect meaning checked",
+        "risk": "Assumes checked-out repo relative to scripts/audit",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 4,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Run from other cwd",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 4 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 5,
+        "source_text": "CONTAINER=\"dic-backup-snapshot-${GITHUB_RUN_ID:-local}-$$\"",
+        "classification": "direct_semantic_executable_source",
+        "behavior": "Create Docker container name using workflow run ID and PID",
+        "quality": "Read in surrounding scripts/audit/isolated-backup-snapshot-regression.sh control flow; status/data/side-effect meaning checked",
+        "risk": "Name can collide only under unusual reuse; cleanup may target named container if collision, unproven",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 5,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Test duplicate container collision safely",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 5 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 6,
+        "source_text": "cleanup() { docker rm -f \"$CONTAINER\" >/dev/null 2>&1 || true; }",
+        "classification": "direct_semantic_executable_source",
+        "behavior": "Define cleanup that force-removes this Docker test container and ignores errors",
+        "quality": "Read in surrounding scripts/audit/isolated-backup-snapshot-regression.sh control flow; status/data/side-effect meaning checked",
+        "risk": "Force removal scoped to generated name; never run on provider",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 6,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Simulate interrupted command",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 6 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 7,
+        "source_text": "trap cleanup EXIT",
+        "classification": "direct_semantic_executable_source",
+        "behavior": "Register cleanup trap on shell EXIT",
+        "quality": "Read in surrounding scripts/audit/isolated-backup-snapshot-regression.sh control flow; status/data/side-effect meaning checked",
+        "risk": "Signals that terminate shell normally trigger EXIT, SIGKILL cannot",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 7,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Check normal/failed teardown",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 7 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 8,
+        "source_text": "if [[ -n \"${SUPABASE_DB_URL:-}\" ]]; then",
+        "classification": "direct_semantic_executable_source",
+        "behavior": "Reject a non-empty SUPABASE_DB_URL environment variable",
+        "quality": "Read in surrounding scripts/audit/isolated-backup-snapshot-regression.sh control flow; status/data/side-effect meaning checked",
+        "risk": "Guard is specific to that variable, not every possible connection secret",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 8,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Test guard set without running Docker",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 8 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 9,
+        "source_text": "  echo '::error::Synthetic backup regression refuses a Supabase connection'; exit 1",
+        "classification": "direct_semantic_executable_source",
+        "behavior": "Print GitHub error and exit when DB URL is supplied",
+        "quality": "Read in surrounding scripts/audit/isolated-backup-snapshot-regression.sh control flow; status/data/side-effect meaning checked",
+        "risk": "Prevents explicit configured connection",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 9,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Assert nonzero status",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 9 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 10,
+        "source_text": "fi",
+        "classification": "direct_semantic_executable_source",
+        "behavior": "Close Supabase URL guard",
+        "quality": "Read in surrounding scripts/audit/isolated-backup-snapshot-regression.sh control flow; status/data/side-effect meaning checked",
+        "risk": "No separate action",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 10,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "No test needed",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 10 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 11,
+        "source_text": "docker run -d --rm --name \"$CONTAINER\" --network none \\",
+        "classification": "direct_semantic_executable_source",
+        "behavior": "Start isolated detached transient Docker postgres",
+        "quality": "Read in surrounding scripts/audit/isolated-backup-snapshot-regression.sh control flow; status/data/side-effect meaning checked",
+        "risk": "Docker daemon access needed; network none blocks container network",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 11,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Run only in isolated CI",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 11 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 12,
+        "source_text": "  --env POSTGRES_HOST_AUTH_METHOD=trust --env POSTGRES_DB=dic_snapshot_ci \\",
+        "classification": "direct_semantic_executable_source",
+        "behavior": "Set trust auth locally and synthetic database name",
+        "quality": "Read in surrounding scripts/audit/isolated-backup-snapshot-regression.sh control flow; status/data/side-effect meaning checked",
+        "risk": "Trust is acceptable inside network-none isolated test, unsafe to expose",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 12,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Confirm no published ports",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 12 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 13,
+        "source_text": "  postgres:17.11-alpine >/dev/null",
+        "classification": "direct_semantic_executable_source",
+        "behavior": "Use postgres:17.11-alpine image tag and redirect container ID",
+        "quality": "Read in surrounding scripts/audit/isolated-backup-snapshot-regression.sh control flow; status/data/side-effect meaning checked",
+        "risk": "Tag mutable, reproducibility/supply-chain watch; digest not pinned, no confirmed exploit",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 13,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Compare tested Docker digest when change is approved",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 13 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 14,
+        "source_text": "ready=0",
+        "classification": "direct_semantic_executable_source",
+        "behavior": "Initialize readiness flag 0",
+        "quality": "Read in surrounding scripts/audit/isolated-backup-snapshot-regression.sh control flow; status/data/side-effect meaning checked",
+        "risk": "Will fail closed after polling",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 14,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Test startup timeout",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 14 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 15,
+        "source_text": "for i in $(seq 1 50); do",
+        "classification": "direct_semantic_executable_source",
+        "behavior": "Poll at most 50 iterations",
+        "quality": "Read in surrounding scripts/audit/isolated-backup-snapshot-regression.sh control flow; status/data/side-effect meaning checked",
+        "risk": "Worst-case waits about 50s plus commands",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 15,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Test unavailable database",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 15 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 16,
+        "source_text": "  if docker exec -u postgres \"$CONTAINER\" pg_isready -h 127.0.0.1 -U postgres -q; then ready=1; break; fi",
+        "classification": "direct_semantic_executable_source",
+        "behavior": "Set readiness flag on successful in-container pg_isready and break",
+        "quality": "Read in surrounding scripts/audit/isolated-backup-snapshot-regression.sh control flow; status/data/side-effect meaning checked",
+        "risk": "Only the synthetic local service checked",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 16,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Check ready behavior",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 16 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 17,
+        "source_text": "  sleep 1",
+        "classification": "direct_semantic_executable_source",
+        "behavior": "Sleep one second between retries",
+        "quality": "Read in surrounding scripts/audit/isolated-backup-snapshot-regression.sh control flow; status/data/side-effect meaning checked",
+        "risk": "No busy spin",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 17,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Observe timeout",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 17 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 18,
+        "source_text": "done",
+        "classification": "direct_semantic_executable_source",
+        "behavior": "Close readiness loop",
+        "quality": "Read in surrounding scripts/audit/isolated-backup-snapshot-regression.sh control flow; status/data/side-effect meaning checked",
+        "risk": "No separate action",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 18,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "No test needed",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 18 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 19,
+        "source_text": "[[ \"$ready\" == 1 ]] || { echo '::error::Isolated snapshot test database did not become ready'; exit 1; }",
+        "classification": "direct_semantic_executable_source",
+        "behavior": "Fail when service never became ready",
+        "quality": "Read in surrounding scripts/audit/isolated-backup-snapshot-regression.sh control flow; status/data/side-effect meaning checked",
+        "risk": "Prevents continuing into copy/tests without DB",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 19,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Test timed-out startup",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 19 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 20,
+        "source_text": "docker exec -u root \"$CONTAINER\" mkdir -p /tmp/dic-snapshot-test/scripts /tmp/dic-snapshot-test/tests",
+        "classification": "direct_semantic_executable_source",
+        "behavior": "Prepare temporary /tmp script and test directories as root in container",
+        "quality": "Read in surrounding scripts/audit/isolated-backup-snapshot-regression.sh control flow; status/data/side-effect meaning checked",
+        "risk": "Scope synthetic container filesystem",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 20,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Check permissions",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 20 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 21,
+        "source_text": "docker cp \"$ROOT/scripts/backups\" \"$CONTAINER:/tmp/dic-snapshot-test/scripts/backups\" >/dev/null",
+        "classification": "direct_semantic_executable_source",
+        "behavior": "Copy checked-in scripts/backups directory into isolated container",
+        "quality": "Read in surrounding scripts/audit/isolated-backup-snapshot-regression.sh control flow; status/data/side-effect meaning checked",
+        "risk": "Source tree must be trusted; no production env passed",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 21,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Test fixture copy",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 21 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 22,
+        "source_text": "docker cp \"$ROOT/tests/backups\" \"$CONTAINER:/tmp/dic-snapshot-test/tests/backups\" >/dev/null",
+        "classification": "direct_semantic_executable_source",
+        "behavior": "Copy checked-in tests/backups directory into isolated container",
+        "quality": "Read in surrounding scripts/audit/isolated-backup-snapshot-regression.sh control flow; status/data/side-effect meaning checked",
+        "risk": "Source tree only; no personal member data",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 22,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Inspect fixture data",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 22 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 23,
+        "source_text": "# Only checked-in synthetic SQL and scripts enter this container. The complete",
+        "classification": "direct_inspected_comment_blank_or_delimiter",
+        "behavior": "Comment only synthetic SQL and checked-in code should enter container",
+        "quality": "Directly accounted for nonexecuting line",
+        "risk": "Statement constrained by actual docker cp commands",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 23,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Check copied directories",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 23 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 24,
+        "source_text": "# PostgreSQL instance and all transient dumps disappear under the EXIT trap.",
+        "classification": "direct_inspected_comment_blank_or_delimiter",
+        "behavior": "Comment declares EXIT trap deletes transient dumps",
+        "quality": "Directly accounted for nonexecuting line",
+        "risk": "Trap not sufficient for daemon death or SIGKILL; cleanup watch",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 24,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Check container residue after failure",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 24 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 25,
+        "source_text": "docker exec -u root \"$CONTAINER\" chmod -R a+rX /tmp/dic-snapshot-test",
+        "classification": "direct_semantic_executable_source",
+        "behavior": "Make staged checkout data world-readable in isolated container",
+        "quality": "Read in surrounding scripts/audit/isolated-backup-snapshot-regression.sh control flow; status/data/side-effect meaning checked",
+        "risk": "Permissive only inside test container; never put secrets there",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 25,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Inspect copied fixture contents",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 25 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 26,
+        "source_text": "docker exec -u postgres \"$CONTAINER\" \\",
+        "classification": "direct_semantic_executable_source",
+        "behavior": "Begin postgres-user invocation of snapshot regression shell script",
+        "quality": "Read in surrounding scripts/audit/isolated-backup-snapshot-regression.sh control flow; status/data/side-effect meaning checked",
+        "risk": "Use least privileged user within container",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 26,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Run Docker test if authorized CI runner available",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 26 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      },
+      {
+        "line": 27,
+        "source_text": "  sh /tmp/dic-snapshot-test/tests/backups/snapshot-regression.sh /tmp/dic-snapshot-test",
+        "classification": "direct_semantic_executable_source",
+        "behavior": "Execute synthetic snapshot regression against /tmp checkout",
+        "quality": "Read in surrounding scripts/audit/isolated-backup-snapshot-regression.sh control flow; status/data/side-effect meaning checked",
+        "risk": "No hosted backup/restore claim; separate #28 recovery assurance",
+        "dead_or_obsolete": "Current source still exists byte-identically; not proven dead or safe to remove.",
+        "duplication": "No provable duplicate/dead counterpart within this inspected span; callers and full repo not exhausted.",
+        "current_counterpart": {
+          "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+          "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+          "original_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_blob_sha": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+          "live_line": 27,
+          "offset": 0,
+          "exact_text_match": true
+        },
+        "testability": "Verify exact CI job result",
+        "fix_opportunity": "No active defect reproduced in this source-only review; fault inject/benchmark before changing current code.",
+        "locked_fit": "Isolated synthetic PostgreSQL tests, no live credentials/data/backups/provider writes; #28 owns hosted recovery.",
+        "review_method": "Original literal source line 27 directly read from Git blob b7841bf45f51dbdee7d696e34f88963a1fcfc288; current counterpart independently fetched; AI semantic assessment, not human certification."
+      }
+    ]
+  },
+  "verification": {
+    "live_matches": 27,
+    "actual_docker_or_shell_tests": "NOT_RUN_SOURCE_ONLY",
+    "no_production_effect": true
+  },
+  "findings": [
+    {
+      "severity": "WATCH_UNREPRODUCED",
+      "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+      "line": 13,
+      "disposition": "postgres:17.11-alpine is a mutable image tag; supply-chain/reproducibility concern, no active exploit demonstrated, coordinate #28 before digest pin."
+    },
+    {
+      "severity": "INFORMATIONAL",
+      "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+      "line": 24,
+      "disposition": "EXIT trap is not guaranteed on SIGKILL/daemon loss; known limited cleanup assurance, do not claim hosted recovery or permanent clean state."
+    }
+  ],
+  "next": {
+    "frozen": {
+      "file_index": 59,
+      "line": 2535
+    },
+    "pinned_current": {
+      "file_index": 55,
+      "path": "scripts/audit/isolated-signed-http-regression.sh",
+      "line": 1
+    }
+  },
+  "complete": false
+}

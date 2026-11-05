@@ -5,29 +5,29 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 7385,
+    "strict_validated_lines": 7425,
     "first_unvalidated_manifest_file_index": 59,
     "first_unvalidated_path": "docs/DECISION_LEDGER.json",
-    "first_unvalidated_line": 2495,
+    "first_unvalidated_line": 2535,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 9034,
-    "first_unvalidated_file_index": 53,
-    "first_unvalidated_path": "scripts/audit/coffee-source-review-local.py",
-    "first_unvalidated_line": 466,
+    "strict_validated_lines": 9086,
+    "first_unvalidated_file_index": 55,
+    "first_unvalidated_path": "scripts/audit/isolated-signed-http-regression.sh",
+    "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true,
-    "strict_live_counterpart_checked_through_line": 465,
+    "strict_live_counterpart_checked_through_line": 27,
     "last_live_counterpart_checked": {
-      "path": "scripts/audit/coffee-source-review-local.py",
-      "commit": "0594e11ede570547ea4240d74e71ff6039df71dd",
-      "blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
-      "first_line": 436,
-      "last_line": 465,
+      "path": "scripts/audit/isolated-backup-snapshot-regression.sh",
+      "commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+      "blob": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+      "first_line": 1,
+      "last_line": 27,
       "offset": 0
     }
   },
@@ -3236,12 +3236,47 @@
       "strict_pinned_delta": 30,
       "old_v2_additional_credit": 0,
       "verification": "60 individually direct-read original lines and nine dimensions, exact live counterpart; no human/runtime claim."
+    },
+    {
+      "batch": "S2-138",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-138.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        2495,
+        2534
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-source-review-local.py",
+      "pinned_lines": [
+        466,
+        490
+      ],
+      "pinned_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "strict_frozen_delta": 40,
+      "strict_pinned_delta": 25,
+      "old_v2_additional_credit": 0,
+      "verification": "Original numbered lines directly AI semantically inspected, nine dimensions, exact live counterparts; nonoverlap, no human/runtime claim."
+    },
+    {
+      "batch": "S2-139",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-139.json",
+      "frozen_lines_delta": 0,
+      "pinned_file": "scripts/audit/isolated-backup-snapshot-regression.sh",
+      "pinned_lines": [
+        1,
+        27
+      ],
+      "pinned_blob": "b7841bf45f51dbdee7d696e34f88963a1fcfc288",
+      "strict_frozen_delta": 0,
+      "strict_pinned_delta": 27,
+      "old_v2_additional_credit": 0,
+      "verification": "Original numbered lines directly AI semantically inspected, nine dimensions, exact live counterparts; nonoverlap, no human/runtime claim."
     }
   ],
   "completion": "IN_PROGRESS",
-  "test_limit": "S2-135 source-only; exact PR-head/merged CI pending; no Python/Node/browser/Auth/SQL/603 execution; post-pin drift incomplete",
-  "last_batch": "S2-137",
-  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-137.json",
+  "test_limit": "S2-139 source/doc-only; PR-head and merged approval CI pending. No fresh Python/Node/browser/Auth/SQL/603/Docker execution; full postpin drift incomplete.",
+  "last_batch": "S2-139",
+  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-139.json",
   "complete": false,
   "accounting_reconciliation_20261105": {
     "scope": "NONCREDIT historical source-ledger reference repair",
@@ -3316,6 +3351,16 @@
       "no_overlap_with_prior": true,
       "postpin_semantic_complete": false,
       "all_old_receipts_independently_revalidated": false
+    },
+    "latest_S2_139": {
+      "source_development_commit": "6aa6b4872c0ada34da88f1ff801020b92c959232",
+      "strict_frozen": 7425,
+      "strict_pinned": 9086,
+      "source_lines_directly_inspected": 92,
+      "original_first_workflow_revalidated_no_credit": true,
+      "pinned_files53_and54_reached_eof": true,
+      "full_live_drift_complete": false,
+      "all_older_receipts_independently_revalidated": false
     }
   }
 }
