@@ -1,0 +1,926 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "D2-006",
+  "date_utc": "2026-11-05",
+  "kind": "NEW_CODE_POST_PIN_DIRECT_SEMANTIC_REVIEW",
+  "source_snapshot": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "observed_live_commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+    "source_path": "scripts/release/download-certified-artifacts.mjs",
+    "live_blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+    "original_pinned_path_absent": true,
+    "source_lines": 32
+  },
+  "method": "Direct full line 1–32 including final blank; nine per-line dimensions; exact source SHA; first pinned absence checked; trace discovery D2-005, fetch mock tests and parent receipt check; source-only no executed tests or independent human certification",
+  "per_line": [
+    {
+      "line": 1,
+      "source_text": "// Download exact discovered GitHub Actions archives into a temporary directory.",
+      "classification": "comment",
+      "behavior": "Documents that this function downloads selected GitHub Actions artifacts without treating them as verified releases",
+      "quality": "Read this exact numbered comment line with full function and caller context; no execution claim",
+      "risk": "Comment is a claim; actual authority comes from guarded discovery and downstream checks",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 1,
+        "exact_text_read": true
+      },
+      "testability": "Verify downstream retrieval test, no network run here; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "No change while retrieval utility remains imported",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:1 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 2,
+      "source_text": "// GitHub artifact archives are containers; their members remain untrusted until",
+      "classification": "comment",
+      "behavior": "States that ZIP containers are untrusted prior to examining members",
+      "quality": "Read this exact numbered comment line with full function and caller context; no execution claim",
+      "risk": "ZIP naming/magic alone cannot exclude zip-slip or expansion bombs",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 2,
+        "exact_text_read": true
+      },
+      "testability": "Run malicious-archive unpack regression; NOT_RUN; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "Keep later extractor/unpacker validation",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:2 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 3,
+      "source_text": "// the independent source-bound CI certificate and SHA-256 validation succeed.",
+      "classification": "comment",
+      "behavior": "Calls for independent source-bound certificate and SHA-256 checks after download",
+      "quality": "Read this exact numbered comment line with full function and caller context; no execution claim",
+      "risk": "This function does not itself compare SHA-256 or certificate, so caller ordering matters",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 3,
+        "exact_text_read": true
+      },
+      "testability": "Trace retrieveVerifiedReleaseBundle certificate flow; source inspected; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "Do not skip downstream verification",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:3 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 4,
+      "source_text": "import {mkdtempSync,writeFileSync,rmSync} from 'node:fs';",
+      "classification": "substantive_executable",
+      "behavior": "Imports temp filesystem creation, exclusive writes and exception cleanup",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "rmSync can throw on cleanup, masking original exception",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 4,
+        "exact_text_read": true
+      },
+      "testability": "Test filesystem errors and tempfile cleanup; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "No patch without reproduced failure",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:4 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 5,
+      "source_text": "import {tmpdir} from 'node:os';",
+      "classification": "substantive_executable",
+      "behavior": "Imports OS temp root resolution for per-run private directory",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "Host TMPDIR trust and permissions depend on runner environment",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 5,
+        "exact_text_read": true
+      },
+      "testability": "Check mkdtemp behavior in isolated Node test; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "No confirmed source bug",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:5 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 6,
+      "source_text": "import {join} from 'node:path';",
+      "classification": "substantive_executable",
+      "behavior": "Imports path joining for cross-platform safe local artifact paths",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "Joining fixed file names avoids direct archive-controlled path pieces",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 6,
+        "exact_text_read": true
+      },
+      "testability": "Test temporary-dir path creation; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "No fix justified",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:6 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 7,
+      "source_text": "import {discoverCertifiedArtifacts} from './discover-certified-artifacts.mjs';",
+      "classification": "substantive_executable",
+      "behavior": "Imports the source-bound discovery implementation",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "Discovery must pin source/run/artifact identities to avoid name-only selection",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 7,
+        "exact_text_read": true
+      },
+      "testability": "Inspect discover-certified-artifacts.mjs and its tests, done as existing D2-005; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "Preserve independent discovery guards",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:7 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 8,
+      "source_text": "const REPO='Schulzet3/The-Dial-In-Collective';",
+      "classification": "substantive_executable",
+      "behavior": "Hardcodes the intended GitHub repository API namespace",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "Migration/fork would need an explicit separate repo decision",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 8,
+        "exact_text_read": true
+      },
+      "testability": "Check actual API request URL in download test; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "No change without repo ownership decision",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:8 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 9,
+      "source_text": "export async function downloadCertifiedArtifactContainers({token,sourceSha,fetcher=fetch,",
+      "classification": "substantive_executable",
+      "behavior": "Exports async injectable downloader with credential, source ref and fetcher",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "SourceSha input is not validated here directly; discovery enforces it",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 9,
+        "exact_text_read": true
+      },
+      "testability": "Test invalid SHA passed to actual discovery; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "Document caller validation dependence",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:9 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 10,
+      "source_text": " discover=discoverCertifiedArtifacts}={}){",
+      "classification": "substantive_executable",
+      "behavior": "Defaults discovery to the separately verified discovery function",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "Mock injection bypasses actual discovery; production only caller-supplied mocks should be trusted",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 10,
+        "exact_text_read": true
+      },
+      "testability": "Trace default vs injected behavior through caller unit tests; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "Do not elevate mock output to trusted release",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:10 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 11,
+      "source_text": " const found=await discover({token,sourceSha,fetcher});",
+      "classification": "substantive_executable",
+      "behavior": "Awaits discovered dist/certificate IDs before allocating temp directory",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "Discovery failure precedes temp allocation and avoids orphan directory",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 11,
+        "exact_text_read": true
+      },
+      "testability": "Test discover rejection and no temp side effects; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "Correct behavior, retain",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:11 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 12,
+      "source_text": " const dir=mkdtempSync(join(tmpdir(),'dic-certified-ci-'));",
+      "classification": "substantive_executable",
+      "behavior": "Creates uniquely named temp folder using OS-root and safe prefix",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "Filesystem permission and disk exhaustion are possible; mkdtemp throws before try cleanup",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 12,
+        "exact_text_read": true
+      },
+      "testability": "Test failing temp creation and propagation; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "Consider wrapping allocation only if leak reproduced",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:12 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 13,
+      "source_text": " try{",
+      "classification": "substantive_executable",
+      "behavior": "Opens try block covering downloads and output bookkeeping",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "Does not encompass mkdtempSync itself, but no directory exists when it fails",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 13,
+        "exact_text_read": true
+      },
+      "testability": "Test synchronous allocation failure; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "No action needed",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:13 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 14,
+      "source_text": "  const outputs={};",
+      "classification": "substantive_executable",
+      "behavior": "Allocates output paths object for two downloaded artifact members",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "Only path metadata, not verified binary data; no persistent storage until caller copies",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 14,
+        "exact_text_read": true
+      },
+      "testability": "Assert object contains exactly expected keys; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "No change justified",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:14 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 15,
+      "source_text": "  for(const [kind,id] of [['dist',found.dist_artifact_id],['certificate',found.certificate_artifact_id]]){",
+      "classification": "substantive_executable",
+      "behavior": "Processes dist and certificate artifacts in fixed order",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "Second download failure must remove first ZIP and temp directory",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 15,
+        "exact_text_read": true
+      },
+      "testability": "Test second-response failure cleanup; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "Preserve both artifact kinds",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:15 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 16,
+      "source_text": "   if(!Number.isSafeInteger(id)||id<=0)throw Error('Invalid exact-source artifact ID');",
+      "classification": "substantive_executable",
+      "behavior": "Rejects unsafe artifact IDs before interpolating into API URL",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "Integer requirement blocks negative, fractional, NaN and string IDs",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 16,
+        "exact_text_read": true
+      },
+      "testability": "Test malformed ID types; NOT_RUN; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "Retain validation",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:16 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 17,
+      "source_text": "   const response=await fetcher('https://api.github.com/repos/'+REPO+",
+      "classification": "substantive_executable",
+      "behavior": "Builds HTTPS GitHub API repository path for exact artifact ID",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "Endpoint path is fixed except numeric ID; ID provenance must be tied to source",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 17,
+        "exact_text_read": true
+      },
+      "testability": "Test exact URLs from mock fetcher; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "Retain source-bound ID sourcing",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:17 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 18,
+      "source_text": "    '/actions/artifacts/'+id+'/zip',{method:'GET',headers:{",
+      "classification": "substantive_executable",
+      "behavior": "Uses GitHub zip artifact endpoint with GET and credential headers",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "Outbound request is read-only, does not publish",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 18,
+        "exact_text_read": true
+      },
+      "testability": "Check request method and host through unit test; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "No publisher change",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:18 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 19,
+      "source_text": "     Authorization:'Bearer '+token,Accept:'application/vnd.github+json'},redirect:'follow'});",
+      "classification": "substantive_executable",
+      "behavior": "Sends Bearer token and GitHub Accept; follows redirects",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "Avoid accidental token forwarding to untrusted redirect targets; fetch usually strips cross-origin Authorization but runtime-dependent",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 19,
+        "exact_text_read": true
+      },
+      "testability": "Test cross-origin redirect token behavior before any adjustment; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "Consider redirect allowlist only if real mismatch proven",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:19 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 20,
+      "source_text": "   if(!response.ok)throw Error('Certified artifact container download failed');",
+      "classification": "substantive_executable",
+      "behavior": "Rejects non-success HTTP response prior to byte ingestion",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "Does not separately verify status/retry exhausted/redirect destination",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 20,
+        "exact_text_read": true
+      },
+      "testability": "Test 404/403 and exception cleanup; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "No confirmed bug",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:20 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 21,
+      "source_text": "   const bytes=Buffer.from(await response.arrayBuffer());",
+      "classification": "substantive_executable",
+      "behavior": "Reads response body entirely into a new Buffer",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "Potential peak memory exceeds 120MiB cap before size validation, especially unbounded fake/malicious responses",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 21,
+        "exact_text_read": true
+      },
+      "testability": "Benchmark oversized in isolated mocked fetch; NOT_RUN; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "Candidate streamed/body length cap after impact reproduction",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:21 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 22,
+      "source_text": "   if(bytes.length<4||bytes.length>120*1024*1024||",
+      "classification": "substantive_executable",
+      "behavior": "Checks minimum length and maximum nominal 120MiB ZIP envelope",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "Post-buffer bounds cannot prevent temporary over-allocation",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 22,
+        "exact_text_read": true
+      },
+      "testability": "Test 0,3,4,limit and limit-plus-one bytes in focused tests; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "Risk-triage: enforce preallocation limit if observed relevant",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:22 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 23,
+      "source_text": "    bytes.subarray(0,2).toString()!=='PK')throw Error('Unsafe artifact container');",
+      "classification": "substantive_executable",
+      "behavior": "Requires leading PK marker and rejects others",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "Only two-byte magic, not full ZIP structural validation; downstream extraction performs stronger checks",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 23,
+        "exact_text_read": true
+      },
+      "testability": "Use corrupt ZIP mock and downstream malicious archive tests; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "Do not claim PK is sufficient authenticity",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:23 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 24,
+      "source_text": "   const path=join(dir,kind+'-artifact.zip');",
+      "classification": "substantive_executable",
+      "behavior": "Constructs local path from fixed artifact kind and fixed suffix",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "No user-supplied traversal component in this expression",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 24,
+        "exact_text_read": true
+      },
+      "testability": "Assert target remains inside unique temp directory; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "Keep fixed names",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:24 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 25,
+      "source_text": "   writeFileSync(path,bytes,{flag:'wx',mode:0o600});",
+      "classification": "substantive_executable",
+      "behavior": "Uses exclusive private-mode file creation for downloaded container bytes",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "wx prevents overwrites; 0600 is POSIX-only guarantee",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 25,
+        "exact_text_read": true
+      },
+      "testability": "Test preexisting path collision and file mode on supported runner; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "Keep exclusive permissions",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:25 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 26,
+      "source_text": "   outputs[kind+'_container_path']=path;",
+      "classification": "substantive_executable",
+      "behavior": "Records actual local container path indexed by kind",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "Path strings are not hashes or verified artifact identity",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 26,
+        "exact_text_read": true
+      },
+      "testability": "Assert no path returned on error; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "Do not mark verified at this stage",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:26 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 27,
+      "source_text": "  }",
+      "classification": "substantive_executable",
+      "behavior": "Closes the two-artifact loop once both attempted",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "Second failure must unwind both files through catch",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 27,
+        "exact_text_read": true
+      },
+      "testability": "Test partial-download failure; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "No refactor needed",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:27 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 28,
+      "source_text": "  return {...found,...outputs,temporary_dir:dir,",
+      "classification": "substantive_executable",
+      "behavior": "Returns discovery metadata and output paths, retaining temporary dir",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "Caller must validate exact source SHA and remove temp folder",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 28,
+        "exact_text_read": true
+      },
+      "testability": "Trace parent try/finally; observed caller validates before try block, injection leak is hypothetical; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "Inspect caller cleanup on invalid injectable downloader separately",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:28 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 29,
+      "source_text": "   status:'CI_ARTIFACT_CONTAINERS_DOWNLOADED_CONTENT_NOT_YET_VERIFIED'};",
+      "classification": "substantive_executable",
+      "behavior": "Labels returned result as downloaded but explicitly NOT verified",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "This status string is a guard against mistaking download for release acceptance",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 29,
+        "exact_text_read": true
+      },
+      "testability": "Test status exact and prohibit use as deployment authorization; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "Preserve explicit unverified marker",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:29 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 30,
+      "source_text": " }catch(e){rmSync(dir,{recursive:true,force:true});throw e;}",
+      "classification": "substantive_executable",
+      "behavior": "On error removes entire private temp folder then rethrows",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "Cleanup may mask error, but prevents retained unverified archive bytes on successful deletion",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 30,
+        "exact_text_read": true
+      },
+      "testability": "Test first/second HTTP rejection and filesystem failure; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "No direct patch proven",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:30 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 31,
+      "source_text": "}",
+      "classification": "substantive_executable",
+      "behavior": "Closes exported function body after failure cleanup",
+      "quality": "Read this exact numbered substantive_executable line with full function and caller context; no execution claim",
+      "risk": "No background work, no publication side effect from this function itself",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 31,
+        "exact_text_read": true
+      },
+      "testability": "Parse/import in Node 22 test; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "No change justified",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:31 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    },
+    {
+      "line": 32,
+      "source_text": "",
+      "classification": "blank",
+      "behavior": "Literal trailing blank source line after closing brace",
+      "quality": "Read literal EOF blank; mechanically inert",
+      "risk": "Whitespace-only, no runtime behavior or duplicate execution",
+      "dead_or_obsolete": "Part of a legacy immutable artifact retrieval chain; imported by retrieve-certified-release-bundle.mjs and tested, so unused CURRENT status NOT proven. Latest Locked publisher remains Git-connected; do not revive API publication.",
+      "duplication": "Artifact download is separate from source/run discovery and receipt/hash validation; no identical active duplicate proven at this exact line.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true,
+        "pinned_ref_fetch": "NOT_FOUND_404"
+      },
+      "live_source": {
+        "commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+        "path": "scripts/release/download-certified-artifacts.mjs",
+        "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
+        "line": 32,
+        "exact_text_read": true
+      },
+      "testability": "Verify complete original EOF and 32-line accounting; SOURCE-ONLY, NOT_RUN_THIS_REVIEW",
+      "fix_opportunity": "No fix or credit extension",
+      "locked_fit": "Nov 2-3 Locked #417/#457: only Git-connected single publisher after explicit Publish READY, risk-appropriate CI; read-only retrieval must never claim READY/deploy and must protect credentials.",
+      "review_method": "Direct AI numbered source inspection scripts/release/download-certified-artifacts.mjs:32 original Git blob 5d118a64686244f8d6a9fe5fdc71795846480c70; not independent human review"
+    }
+  ],
+  "unique_source_lines": 32,
+  "pinned_current_credit": 0,
+  "frozen_historical_credit": 0,
+  "findings": [
+    {
+      "severity": "P3_HYPOTHESIS",
+      "source_lines": [
+        21,
+        22,
+        23
+      ],
+      "title": "120MiB cap runs after full response buffer allocation",
+      "evidence": "Bounded post-allocation validation visible in original code, actual production impact not reproduced; no runtime alteration",
+      "disposition": "TRIAGE_UNCONFIRMED; revisit only if release artifact download path retained and benchmark demonstrates resource risk"
+    },
+    {
+      "severity": "P3_HYPOTHESIS",
+      "source_lines": [
+        19
+      ],
+      "title": "followed HTTP redirects with Bearer credentials",
+      "evidence": "Node fetch cross-origin auth stripping expected but no real redirect/proxy test in scope",
+      "disposition": "TRIAGE_UNCONFIRMED; no exploit assertion"
+    },
+    {
+      "severity": "DESIGN_OWNERSHIP",
+      "source_lines": [
+        1,
+        7,
+        28,
+        29
+      ],
+      "title": "New immutable artifact retrieval is legacy auxiliary path",
+      "evidence": "Git-connected publisher currently Locked, yet downloader imported by retrieval script; use alone does not publish",
+      "disposition": "PRESERVE; prove reachability before any removal; no production/publisher changes"
+    }
+  ],
+  "focused_existing_test": "tests/download-certified-artifacts.test.mjs",
+  "tests_run_this_batch": [],
+  "runtime_acceptance": "NOT_RUN",
+  "production_changes": false,
+  "code_changes": false,
+  "complete": false,
+  "next_added_path": "scripts/release/immutable-dist-to-manifest.py"
+}
