@@ -2,7 +2,7 @@
   "schema_version": 1,
   "issue": 33,
   "kind": "EXACT_SELECTED_OFFICIAL_COHORT_DIAGNOSTIC",
-  "status": "CODE_FIX_TESTING_UNVERIFIED",
+  "status": "NARROW_READY_VERIFIED_NOT_DEPLOYED",
   "date_utc": "2026-11-05",
   "source_base_sha": "f0ecb1b06fcc46e52809705122d1c4115fea5205",
   "commit_marker": "[dic-issue33-thirtythird3]",
@@ -74,7 +74,7 @@
     "manual_certified": 0
   },
   "fix": {
-    "status": "TESTING_FIRST_NODE_POSITIVE_FAILURE_REPAIRED",
+    "status": "READY",
     "source_path": "src/server/coffee-identity-evidence.mjs",
     "test_path": "tests/coffee-issue33-46-selected-barrel-bean-origin.test.mjs",
     "expected_case46_origin": "Sidamo, Ethiopia",
@@ -88,6 +88,54 @@
       "fail": 2,
       "skip": 6,
       "reason": "Case-insensitive /iu required for natural-case This infuses; as authored /u mistakenly failed current selected sentence, pure helper return null."
-    }
+    },
+    "merge_sha": "5598c8811e9ab9c9fce19062b06ced39f59b1d5b",
+    "merged_tree": "27decdeade0851464e73fe33bcec1ba1fe084354",
+    "ready_queue_id": "DIC-Q-33-original603-46-current-barrel-green-bean-origin",
+    "test_runs": {
+      "head_node": 41978398503,
+      "head_approval": 41978398572,
+      "head_cloud": 41978398516,
+      "head_security": 41978398635,
+      "head_sql": 41978398632,
+      "merged_node": 41978640146,
+      "merged_approval": 41978640124,
+      "merged_cloud": 41978640132,
+      "merged_official": 41978640125
+    },
+    "original_frozen603_skipped_not_passed": true
+  },
+  "after": {
+    "source_sha": "5598c8811e9ab9c9fce19062b06ced39f59b1d5b",
+    "run": 41978640125,
+    "artifact": 13393110961,
+    "zip_sha256": "137c1929b1ffd544c509dc7b037df2b827bfc9873717c2568e1ae9054e38867f",
+    "fetched": 3,
+    "parsed": 3,
+    "manual_certified": 0,
+    "cases": [
+      {
+        "number": 46,
+        "html_sha256": "e3656115ff73a75e2fb05c477d56898a2858fe690ff2d5e688f76c2e3825925e",
+        "selected_h1": "BULL RUN BARREL AGED COFFEE - RYE-FINISHED OAK BARREL",
+        "origin": "Sidamo, Ethiopia",
+        "process": "Other/Unknown",
+        "roast_level": "Light",
+        "conflicts": [],
+        "only_changed_field": "origin"
+      },
+      {
+        "number": 43,
+        "html_sha256": "135bb935b6116de2591c64dbfa8e0031f42e364fcdf5e16b3c8ee0eead19df47",
+        "unchanged_canonical": true,
+        "unchanged_conflicts": true
+      },
+      {
+        "number": 88,
+        "html_sha256": "e97a1567946a7cf0419252cfc17ea2284e8b04e27438d2035c3c298a9beb7c65",
+        "unchanged_canonical": true,
+        "unchanged_conflicts": true
+      }
+    ]
   }
 }
