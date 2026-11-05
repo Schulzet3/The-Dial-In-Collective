@@ -1,0 +1,893 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "D2-005",
+  "date_utc": "2026-11-05",
+  "kind": "NEW_CODE_POST_PIN_DIRECT_SEMANTIC_REVIEW",
+  "source_snapshot": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "observed_live_commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+    "source_path": "scripts/release/discover-certified-artifacts.mjs",
+    "live_blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+    "original_pinned_path_absent": true,
+    "source_lines": 34
+  },
+  "method": "Direct original 1–34 Git blob line-by-line semantic interpretation incl trailing blank; nine dimensions each; independent pinned absence and source-bound current workflow, test, downloader trace.",
+  "per_line": [
+    {
+      "line": 1,
+      "source_text": "// Read-only GitHub Actions exact-source immutable artifact discovery.",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Declares read-only GitHub Actions artifact discovery",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Comment alone cannot verify source or artifact authenticity",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 1
+      },
+      "testability": "Check actual GitHub workflow and read-only request verbs; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:1 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 2,
+      "source_text": "// Never select an artifact by name alone: require a successful source-bound run.",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "States artifact names are insufficient without successful source-run binding",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Do not trust names alone: stale/malicious artifact risk",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 2
+      },
+      "testability": "Test mismatched run ID and source SHA; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:2 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 3,
+      "source_text": "const REPO='Schulzet3/The-Dial-In-Collective';",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Pins repository identifier in API URL",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Fork or transferred repo not automatically supported",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 3
+      },
+      "testability": "Check repository binding to current owner; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:3 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 4,
+      "source_text": "const SHA=/^[a-f0-9]{40}$/;",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Defines exactly lowercase 40-hex commit SHA validator",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Malformed/uppercase SHA not accepted, intentionally fail-closed",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 4
+      },
+      "testability": "Bad SHA input; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:4 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 5,
+      "source_text": "export async function discoverCertifiedArtifacts({token,sourceSha,fetcher=fetch}={}){",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Exports async helper with token/source SHA and mockable fetcher",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Default network fetch should not run during source-only review",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 5
+      },
+      "testability": "Inject deterministic fetcher; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:5 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 6,
+      "source_text": " if(!token||!SHA.test(sourceSha||''))throw Error('GitHub token or exact source SHA missing');",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Rejects missing credentials and malformed SHA",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Prevents unbound or unauthenticated artifact lookup",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 6
+      },
+      "testability": "Missing token and invalid SHA cases; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:6 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 7,
+      "source_text": " const headers={Authorization:'Bearer '+token,Accept:'application/vnd.github+json'};",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Builds bearer Authorization and GitHub JSON Accept headers",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Never print or redirect token to untrusted host",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 7
+      },
+      "testability": "Inspect fixed GitHub URL and mocked headers; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:7 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 8,
+      "source_text": " const get=async url=>{",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Begins scoped GET helper",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "HTTP helper must remain GET-only to preserve no-write guarantee",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 8
+      },
+      "testability": "Mock only GET invocation; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:8 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 9,
+      "source_text": "  const r=await fetcher(url,{method:'GET',headers});",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Invokes injected fetcher with method GET and headers",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Credentials must be restricted to api.github.com URLs",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 9
+      },
+      "testability": "Assert URL origin and method; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:9 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 10,
+      "source_text": "  if(!r.ok)throw Error('Cannot verify GitHub CI artifact provenance');",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Rejects non-2xx API result with generic error",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Fail closed but rate-limit distinctions not exposed",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 10
+      },
+      "testability": "Mock HTTP 401/403/429; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:10 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 11,
+      "source_text": "  return r.json();",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Parses JSON body on success",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Malformed JSON should throw, not certify a run",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 11
+      },
+      "testability": "Mock invalid or null JSON; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:11 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 12,
+      "source_text": " };",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Closes GET helper",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Structural boundary prevents accidental later mutation",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 12
+      },
+      "testability": "Node syntax check; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:12 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 13,
+      "source_text": " const runs=await get('https://api.github.com/repos/'+REPO+",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Starts fixed GitHub Actions workflow runs URL",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Current workflow trigger may no longer produce push runs",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 13
+      },
+      "testability": "Compare workflow name and current trigger; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:13 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 14,
+      "source_text": "  '/actions/workflows/dic-ready-batch-certification.yml/runs?head_sha='+sourceSha+'&per_page=100');",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Queries READY certification workflow for exact head SHA, max hundred runs",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Owner #624 made workflow_dispatch-only; original push runner likely retired",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 14
+      },
+      "testability": "Verify exact live workflow event configuration; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:14 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 15,
+      "source_text": " const eligible=(runs.workflow_runs||[]).filter(r=>r.head_sha===sourceSha&&",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Filters run array to requested source SHA",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "A successful run for another source must be rejected",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 15
+      },
+      "testability": "Mock wrong SHA; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:15 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 16,
+      "source_text": "  r.head_branch==='development/backend-foundation'&&r.status==='completed'&&",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Requires development branch and completed status",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Merge/base branch confusion may exclude valid runs intentionally",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 16
+      },
+      "testability": "Wrong branch and pending run tests; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:16 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 17,
+      "source_text": "  r.conclusion==='success'&&r.event==='push').sort((a,b)=>b.id-a.id);",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Requires success plus event push; sorts newest ID descending",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "**Static mismatch:** workflow now dispatch-only, not push; new-source runs cannot meet this filter",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 17
+      },
+      "testability": "Mock workflow_dispatch-only successful run; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:17 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 18,
+      "source_text": " if(!eligible.length)throw Error('No successful exact-source READY CI run');",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Throws if no eligible exact-source successful push run",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Failure is safe but may be inevitable after workflow retirement",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 18
+      },
+      "testability": "Assert dispatch-only run yields no selection; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:18 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 19,
+      "source_text": " for(const run of eligible){",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Iterates eligible runs newest first",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Should not accept a later failed or mismatched run",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 19
+      },
+      "testability": "Multiple candidate run fixture; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:19 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 20,
+      "source_text": "  const response=await get('https://api.github.com/repos/'+REPO+'/actions/runs/'+run.id+'/artifacts?per_page=100');",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Reads exact run's artifact listing up to first hundred items",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Truncated pagination can miss a valid artifact pair but fail closed",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 20
+      },
+      "testability": "Mock >100 artifacts; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:20 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 21,
+      "source_text": "  const items=response.artifacts||[];",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Uses empty list if API has no artifacts array",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Malformed API shape not mistaken for successful discovery",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 21
+      },
+      "testability": "Empty/missing artifacts list; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:21 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 22,
+      "source_text": "  const choose=name=>items.filter(a=>a.name===name&&!a.expired&&",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Filters artifacts by exact name and non-expired state",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Matching by only one dimension insufficient",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 22
+      },
+      "testability": "Duplicate, expired and wrong names; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:22 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 23,
+      "source_text": "   a.workflow_run?.id===run.id&&a.workflow_run?.head_sha===sourceSha&&",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Requires artifact workflow-run ID and head source SHA match",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Prevents cross-run artifact substitution",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 23
+      },
+      "testability": "Mock wrong run IDs/SHAs; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:23 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 24,
+      "source_text": "   a.size_in_bytes>0);",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Requires positive artifact size",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Reject empty/unmaterialized zip archives",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 24
+      },
+      "testability": "Zero and negative size; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:24 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 25,
+      "source_text": "  const dist=choose('dic-production-dist-'+sourceSha);",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Selects exact production dist artifact named with source SHA",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Immutable API publishing path superseded by owner #417; no active use proved",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 25
+      },
+      "testability": "Check owner-controlled Git publisher path; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:25 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 26,
+      "source_text": "  const cert=choose('dic-ci-certificate-'+sourceSha);",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Selects exact CI certificate artifact named with source SHA",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Certificate provenance separate from actual tests",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 26
+      },
+      "testability": "Mock absent/mismatched certificate; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:26 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 27,
+      "source_text": "  if(dist.length===1&&cert.length===1)return {",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Returns IDs only if one unique dist and certificate pair",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Duplicate artifacts must fail closed",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 27
+      },
+      "testability": "Ambiguous pair test; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:27 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 28,
+      "source_text": "   source_sha:sourceSha,run_id:run.id,",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Sets returned source_sha and run ID",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Provenance fields for downstream read-only verification",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 28
+      },
+      "testability": "Validate exact source binding; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:28 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 29,
+      "source_text": "   dist_artifact_id:dist[0].id,certificate_artifact_id:cert[0].id,",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Exposes selected artifact IDs for separate downloader",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "IDs alone do not validate archive content",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 29
+      },
+      "testability": "Trace downloader trust checks; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:29 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 30,
+      "source_text": "   status:'EXACT_SOURCE_ARTIFACT_IDS_DISCOVERED_NOT_DOWNLOADED'};",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Marks return stage discovered, not downloaded",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Accurate stage separation prevents false verified-ready status",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 30
+      },
+      "testability": "Verify downstream stage transition; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:30 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 31,
+      "source_text": " }",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Closes success result branch",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Structural line",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 31
+      },
+      "testability": "Node syntax test; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:31 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 32,
+      "source_text": " throw Error('Exact-source CI artifact pair absent, expired, or ambiguous');",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Raises clear error when all runs yield absent, expired or ambiguous artifacts",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Does not fall back to untrusted artifact or another SHA",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 32
+      },
+      "testability": "No eligible pair regression; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:32 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 33,
+      "source_text": "}",
+      "classification": "post_pin_release_readonly_direct_inspected",
+      "behavior": "Closes exported function",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "Structural delimiter",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 33
+      },
+      "testability": "Node syntax test; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:33 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    },
+    {
+      "line": 34,
+      "source_text": "",
+      "classification": "post_pin_blank_eof_direct_inspected",
+      "behavior": "Trailing Git source blank line accounted individually",
+      "quality": "Original numbered source line read in complete 34-line function and current workflow + downstream caller/test context; source-only interpretation, no external human/runtime certification.",
+      "risk": "No behavioral effect, count for full line coverage",
+      "dead_or_obsolete": "Potential legacy immutable API artifact retrieval, but source imported by existing downloader; no proven safe deletion or active released workflow usage.",
+      "duplication": "Exact per-run and per-artifact source binding are distinct defense-in-depth; current Git publisher may supersede whole chain, requiring reachability proof.",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "pinned_inventory_exclusion_verified": true
+      },
+      "live_source": {
+        "commit": "eb0f62cadd7109251e18d897c432de6a78db0a1f",
+        "path": "scripts/release/discover-certified-artifacts.mjs",
+        "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
+        "line": 34
+      },
+      "testability": "Exact EOF and blob byte check; NOT_RUN in this source-only batch.",
+      "fix_opportunity": "Do not change production/CI publisher based on source-only hypothesis; trace actual owner-approved release entrypoints and reproduce before safe retirement.",
+      "locked_fit": "Latest owner #417/#457: ONE Git-connected Netlify publisher, explicit Publish READY only, risk-appropriate checks, no automatic staging or API publisher; preserve backups and privacy.",
+      "review_method": "Direct AI original source read scripts/release/discover-certified-artifacts.mjs:34 blob 685d28ddf4ec849d11a20a9be169224e303b2358; nine specific criteria and verified pinned counterpart absent; complete 34-line original context, no independent human certification."
+    }
+  ],
+  "checks": {
+    "source_lines_directly_read": 34,
+    "per_line_records": 34,
+    "nine_dimensions_each": true,
+    "pinned_source_absent": true,
+    "current_live_blob_exact": true,
+    "workflow_triggers_read": true,
+    "downstream_import_read": true,
+    "test_mock_event_read": true,
+    "actual_run_reproduction": "NOT_RUN",
+    "runtime_tests": "NOT_RUN",
+    "CI": "PENDING",
+    "global_live_drift": "INCOMPLETE"
+  },
+  "findings": {
+    "confirmed_active_defect": "NOT_REPRODUCED",
+    "source_level_conflict": "Function filters exact source run event push while workflow dic-ready-batch-certification.yml is now workflow_dispatch only, after owner #624; likely obsolete/unreachable legacy artifact discovery path. Existing downloader imports function and tests mock push. No verified active production failure; owner #417/#457 moved to single Git-connected publisher.",
+    "disposition": "TRIAGE_REACHABILITY_AND_DEPRECATION_BEFORE_CODE_REMOVAL; no production or runtime mutation."
+  },
+  "next": {
+    "new_code_other_paths": "UNREVIEWED",
+    "modified_pinned_live_code": "UNREVIEWED",
+    "full_v2": "INCOMPLETE"
+  },
+  "complete": false
+}
