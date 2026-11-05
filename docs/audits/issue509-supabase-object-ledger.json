@@ -1153,7 +1153,7 @@
     "source_whitespace_tokens_semantically_read": 16880,
     "total_source_characters": 207402,
     "next_function_ordinal": null,
-    "next_object": "pg_depend #401/5186 on live snapshot sorted by classid,objid,objsubid,refclassid,refobjid,refobjsubid,deptype; then pg_shdepend #1/942 and pg_init_privs #1/233; hosted HTTP/Auth security still unverified",
+    "next_object": "pg_depend #801/5186 (ordered classid,objid,objsubid,refclassid,refobjid,refobjsubid,deptype), then pg_shdepend #1/942 and pg_init_privs #1/233; hosted API/Auth incomplete",
     "other_objects": "99/99 application SQL function definitions, 46/46 application table catalog definitions, 9/9 accessible deployed Edge file variants complete; platform/vendor SQL, Auth/Storage/cron/Realtime, migration drift, external dependency calls, performance and limits still incomplete; platform table definitions auth27/storage8/realtime3 direct review complete; platform functions, other tables, database migration SQL bodies still unverified; additional provider catalog review supabase_migrations(1 table), vault(1 table+1 view), extensions(2 views), without secret records",
     "platform_objects": "DIRECT_PROVIDER_CATALOG_TABLES_AUTH27_STORAGE8_REALTIME3_SUPABASE_MIGRATIONS1_VAULT1=40_TABLES; DIRECT_VIEWS_VAULT1_EXTENSIONS2=3; DIRECT_PROVIDER_SQL_FUNCTION_BODIES_42_OF_42_AUTH4_GRAPHQL1_STORAGE19_REALTIME18",
     "edge_function_sources_reviewed": 9,
@@ -2760,6 +2760,15 @@
       "permission_exposure_risk": "BROAD_DEFAULT_GRANTS_FOR_FUTURE_OBJECTS_REQUIRE_RLS/API_CONTEXT; NO_CONFIRMED_SECURITY_EXPLOIT",
       "new_code_fixes": 0,
       "production_changes": 0
+    },
+    {
+      "event": "2026-11-05_run18_dependency_second_nonoverlapping_increment",
+      "head_at_review": "58400ce89f90c1b89605d4b90d2096a6845ada4b",
+      "ordinals": "401-800",
+      "new_edges": 400,
+      "cumulative_dependency_edges": 800,
+      "fixes": 0,
+      "production_modifications": 0
     }
   ],
   "state": "APP_SQL_FUNCTIONS_99_OF_99; APP_TABLES_46_OF_46_COMPONENTS_DIRECTLY_READ; EDGE_DEPLOYED_SOURCE_9_OF_9_VARIANTS; FULL_PROVIDER_AUDIT_IN_PROGRESS; #527_READY_NOT_DEPLOYED; PLATFORM_AUTH_27_STORAGE_8_REALTIME_3_TABLE_DEFINITIONS_DIRECT_REVIEWED; FULL_PROVIDER_AUDIT_IN_PROGRESS; VENDOR_OTHER_TABLE_VIEWS_5_DIRECT_COMPONENTS_READ; PLATFORM_SOURCE_FUNCS_AUTH4_GRAPHQL1_STORAGE10_REALTIME7_DIRECT_REVIEW; PLATFORM_SQL_FUNCTION_BODIES_42_OF_42_FOR_AUTH_GRAPHQL_STORAGE_REALTIME; ALL_PROVIDER_NATIVE_AND_HOSTED_BASELINE_IN_PROGRESS; ADJACENT_PROVIDER_DECLARATIONS_96_96_NATIVE_CODE_UNVERIFIED",
@@ -5792,9 +5801,9 @@
   },
   "provider_pg_depend_review": {
     "status": "FIRST_BOUNDED_LIVE_DEPENDENCY_EDGE_DIRECT_REVIEW",
-    "reviewed": 400,
+    "reviewed": 800,
     "total": 5186,
-    "next_ordinal": 401,
+    "next_ordinal": 801,
     "evidence_path": "docs/audits/issue509-pg-depend-001-400-20261105-run18.json",
     "dependency_types": {
       "a": 24,
@@ -5803,7 +5812,16 @@
       "e": 8
     },
     "unresolved_descriptions": 0,
-    "reference_target_sources_not_recredited": true
+    "reference_target_sources_not_recredited": true,
+    "evidence_paths": [
+      "docs/audits/issue509-pg-depend-001-400-20261105-run18.json",
+      "docs/audits/issue509-pg-depend-401-800-20261105-run18.json"
+    ],
+    "additional_counts": {
+      "i": 139,
+      "n": 202,
+      "e": 59
+    }
   },
   "provider_default_acl_review": {
     "status": "COMPLETE_VISIBLE_DEFAULT_ACL_CATALOG_REVIEW",
