@@ -1,3 +1,4 @@
+import {selectedCountryFirstTitleRegion} from './coffee-title-region-evidence.mjs';
 import {productCoffeeProse,NONCURRENT_COFFEE_PROSE} from './coffee-product-prose.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {coffeeHtmlAttributes,productMarkup} from './coffee-product-scope.mjs';
@@ -723,6 +724,8 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
  const titleOrigin=extractCoffeeTitleOrigin(name);
  const titleMatches=titleOrigin?.label==='Country'?titleOrigin.value.split(', '):[];
  const titleCountries=titleMatches.length>1&&!/\bblend\b/i.test(name)?[]:titleMatches;
+ const selectedTitleRegion=selectedCountryFirstTitleRegion({name,country:titleCountries.length===1?titleCountries[0]:'',origin:fields.origin,blocks});
+ if(selectedTitleRegion)add('Origin',selectedTitleRegion.value,selectedTitleRegion.quote);
  // Country words in the exact selected name are explicit geography; do not
  // derive a region, producer, harvest, or product identity from URL slugs.
  if(titleCountries.length&&titleCountries.length<=4&&!countryNames(fields.origin||'').length)add('Country',titleCountries.join(', '),name);
