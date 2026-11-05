@@ -18,7 +18,7 @@ test('original603 #64 exact current product composition preserves 46,3% decimal 
  assert.equal(r.ok,true,JSON.stringify(r));
  assert.equal(r.fields.name,'Riveter - Medium Roast - Colombian');
  assert.equal(r.fields.variety,literal,'do not misread a decimal 46.3 percent as list elements 46 and 3');
- assert.equal(r.fields.origin,'Huila','direct selected location remains canonical');
+ assert.equal(r.fields.origin,'Huila, Colombia','selected Huila and named Colombia remain canonical');
  assert.ok(!r.conflicts?.includes('variety'),JSON.stringify(r.conflicts));
  assert.match(coffeeUrlPreviewMarkup(r),/46,3%/,'Add Coffee retains literal cultivar composition');
  assert.ok((r.source_facts||[]).some(f=>String(f.value).includes('46,3%')),
