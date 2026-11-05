@@ -1,0 +1,37 @@
+{
+  "issue": 267,
+  "type": "NARROW_CI_CLASSIFIER_REMEDIATION",
+  "date_utc": "2026-11-05",
+  "source_base": "e3d9da94ebfcbc96426987f7ee838bebfdb05946",
+  "code_file": "scripts/audit/ci-scope.mjs",
+  "old_code_blob": "e51f249377a7f2df556d103012b145aabc1559b7",
+  "test_file": "tests/ci-impact.test.mjs",
+  "old_test_blob": "bf5c745d73bfc19e9e4c875a3857e7a64e94059c",
+  "reproduced_before": {
+    "observed_issue504_pr": 666,
+    "scoped_paths": [
+      "docs/audits/issue504-review-G1-020.json",
+      "docs/audits/issue504-coverage-ledger.json",
+      "docs/workstreams/issue-504.md"
+    ],
+    "evidence_run": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41949979810",
+    "observed_tier": "high",
+    "reason": "SOURCE_SCOPED",
+    "node": "full",
+    "browser": "high",
+    "sql": true,
+    "explanation": "Exact `ci-scope.mjs` has a narrow #267 JSON allowlist but not the explicitly bounded #504 evidence objects; unknown JSON correctly falls back HIGH, inadvertently triggering app CI on inert audit receipts."
+  },
+  "proposed_patch": "Explicitly classify only stable issue504-coverage-ledger.json and `issue504-review-G1-[0-9]{3,6}.json` paths as docs, retain ALL unknown/malformed/unsafe paths high, preserve current #267 exceptions.",
+  "tests_added": [
+    "Exact #504 receipts/ledger with workstream MD => docs/no browser/SQL/build",
+    "Unknown #504 JSON, path traversal or suffix => HIGH",
+    "Mixed #504 JSON with code, SQL or CI workflows => HIGH"
+  ],
+  "new_production_exposure": "NONE",
+  "scope": "development-only audit infrastructure; no release-queue item before merged code tests",
+  "ci": "PENDING_PR_HEAD",
+  "app_tests": "NOT_YET_EXECUTED",
+  "coverage_change": "ZERO; this is active code remediation evidence, not pinned original line credit",
+  "remaining": "Full strict original corpus and live drift still incomplete"
+}

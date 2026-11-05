@@ -87,3 +87,38 @@ test('Strict #267 JSON path exemption never weakens unknown/mixed-source fail-cl
   assert.equal(v.node_mode,'full');assert.equal(v.sql,true);
  }
 });
+
+test('Strict #504 word-audit receipts and ledger are docs-only without expensive app suites',()=>{
+ const paths=['docs/audits/issue504-review-G1-020.json',
+  'docs/audits/issue504-review-G1-1000.json',
+  'docs/audits/issue504-coverage-ledger.json',
+  'docs/workstreams/issue-504.md'];
+ const v=classifyImpactPaths(paths);
+ assert.equal(v.tier,'docs');assert.equal(v.docs_only,true);
+ assert.equal(v.node_mode,'none');assert.equal(v.browser_mode,'none');
+ assert.equal(v.sql,false);assert.equal(v.provider_guard,false);
+ assert.equal(v.lint,false);assert.equal(v.build_validate,false);assert.equal(v.build_browser,false);
+ const tested=classifyChanges({base:A,head:B,event:'pull_request',
+  git:()=>paths.join('\n')+'\n'});
+ assert.equal(tested.tier,'docs');assert.equal(tested.reason,'NON_RUNTIME_ONLY');
+});
+test('Strict #504 exemption fails closed on mixed source, malformed and unknown evidence paths',()=>{
+ for(const path of ['docs/audits/issue504-review-G1-020.json.bak',
+  'docs/audits/issue504-review-G1-all.json',
+  'docs/audits/issue504-changes.json',
+  'docs/audits/issue504-review-G1-020/../unsafe.json',
+  'docs/audits/issue504-coverage-ledger.json/../unsafe.json',
+  'docs/audits/issue504-review-G1-020.json',
+ ]){
+  if(path==='docs/audits/issue504-review-G1-020.json'){
+   for(const code of ['scripts/audit/ci-scope.mjs','site/lib/engine.js',
+    'supabase/migrations/new.sql','.github/workflows/cloud-regression.yml']){
+    const v=classifyImpactPaths([path,code]);
+    assert.equal(v.tier,'high',code);assert.equal(v.sql,true,code);
+   }
+  }else{
+   const v=classifyImpactPaths([path]);
+   assert.equal(v.tier,'high',path);assert.equal(v.node_mode,'full');
+  }
+ }
+});
