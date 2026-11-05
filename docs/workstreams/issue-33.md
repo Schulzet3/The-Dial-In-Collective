@@ -1,3 +1,13 @@
+## November 5 2026 UTC — original603 #593 conditional-process false positive: scoped correction TESTING [skip netlify]
+
+Current exact development parent `432a3a076d3809b2c6cf2b83fb35723b5db69c47`, original603 source register and locked decisions recovered. Previous [PR800](https://github.com/Schulzet3/The-Dial-In-Collective/pull/800) nonforce merged source probe at `432a3a076d3809b2c6cf2b83fb35723b5db69c47`, exact approval and [official live run42046579061](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42046579061) SUCCESS **3/3 actually fetched+parsed**, actual original selected H1/Add Coffee. #593 Woodshed actual source SHA256 `0721c63f454baaae97ad59c6a0fe9d8263c628089415aef0c894e9a61bf0de71` (runner-reported, ZIP not independently rehashed) visibly states **"Whether washed or natural process"**, but actual parser returned **process Natural** with no direct process source fact: genuine unsupported autofill. #575 origin Indonesia remains only country against directly named Takengon/Aceh smallholders; #596 direct labeled Huehuetenago typo and Medium/Medium-Light contradiction remain separate, no speculative changes.
+
+SAME-COMMIT: `src/server/coffee-page-metadata.mjs` adds generic selected conditional two-process alternative suppression only without a separately explicit Process/current-lot/title method; preserve raw context in review. `tests/coffee-issue33-593-conditional-process.test.mjs` positive/hostile original parser and Add Coffee cases. Updated exact 3-case source receipt and this scoped journal. Original 603/201/1197 frozen CSV blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6`, oracle/scorer and member data unchanged.
+
+TESTING. Next exact-source applicable CI, fix failures, safe nonforce integration; place existing `[dic-issue33-fortythird3]` marker on merge commit to run a fresh guarded public original603 #593/#575/#596 parser/selected H1/preview and verify **#593 Natural→blank** with all else preserved. Full 603 manual semantic review remains IN_PROGRESS, frozen603 workflow SKIPPED not PASS. No READY/deployment, provider/SQL/Edge/Auth/member writes, paid service, secrets or force.
+
+---
+
 ## November 5, 2026 UTC — #33 original603 #575/#596/#593 new selected-current independent review TESTING (not READY) [skip netlify]
 
 Recovered live development `1432026687b2838f551c595fea384adf83bcf7f5`, owner issue #33 and distinct #267 V2/#96, AGENTS/AI preflight, scoped journal, Locked spec/decision/coverage/queue, official historical source register and concurrent PRs (#598/#592 remain separate). Original frozen603 CSV blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6`, 603 coffees/201 roasters/1197 captures, oracle/scorer remain unchanged.
