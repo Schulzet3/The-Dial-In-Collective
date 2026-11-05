@@ -5,29 +5,29 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 6856,
+    "strict_validated_lines": 6922,
     "first_unvalidated_manifest_file_index": 59,
     "first_unvalidated_path": "docs/DECISION_LEDGER.json",
-    "first_unvalidated_line": 1966,
+    "first_unvalidated_line": 2032,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 8503,
-    "first_unvalidated_file_index": 52,
-    "first_unvalidated_path": "scripts/audit/coffee-source-fixture-sanitization.mjs",
-    "first_unvalidated_line": 121,
+    "strict_validated_lines": 8569,
+    "first_unvalidated_file_index": 53,
+    "first_unvalidated_path": "scripts/audit/coffee-source-review-local.py",
+    "first_unvalidated_line": 1,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true,
-    "strict_live_counterpart_checked_through_line": 120,
+    "strict_live_counterpart_checked_through_line": 186,
     "last_live_counterpart_checked": {
       "path": "scripts/audit/coffee-source-fixture-sanitization.mjs",
-      "commit": "32866c344eaa5c2c4961ef557ee6594ce9fd0e40",
+      "commit": "9a23a2b2ae726fc8bacb87dc95cb34032baa862c",
       "blob": "698c6dc948abf8af48bfa41b40585f75d3b5ff59",
-      "first_line": 51,
-      "last_line": 120,
+      "first_line": 121,
+      "last_line": 186,
       "offset": 0
     }
   },
@@ -180,18 +180,18 @@
       "semantic_line_credit": 0
     },
     "latest_bounded_live_observation": {
-      "batch": "S2-123",
-      "commit": "32866c344eaa5c2c4961ef557ee6594ce9fd0e40",
+      "batch": "S2-124",
+      "commit": "9a23a2b2ae726fc8bacb87dc95cb34032baa862c",
       "path": "scripts/audit/coffee-source-fixture-sanitization.mjs",
       "pinned_blob": "698c6dc948abf8af48bfa41b40585f75d3b5ff59",
       "live_blob": "698c6dc948abf8af48bfa41b40585f75d3b5ff59",
       "source_lines": [
-        51,
-        120
+        121,
+        186
       ],
-      "exact_matches": 70,
+      "exact_matches": 66,
       "additional_modified_lines_credited": 0,
-      "status": "BOUNDED_ORIGINAL_SOURCE_REVIEW_NOT_GLOBAL"
+      "status": "PINNED_ELIGIBLE_52_COMPLETE_LIVE_BLOB_EQUAL"
     },
     "forensic_nonfinite_json_guard": {
       "receipt": "docs/audits/issue267-v2-strict-batches/S2-LIVE-FINITE-20261105.json",
@@ -2910,12 +2910,34 @@
       "strict_pinned_delta": 70,
       "old_v2_additional_credit": 0,
       "verification": "140 distinct original source-bound line-specific semantic records; no human/runtime certification."
+    },
+    {
+      "batch": "S2-124",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-124.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        1966,
+        2031
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-source-fixture-sanitization.mjs",
+      "pinned_lines": [
+        121,
+        186
+      ],
+      "pinned_blob": "698c6dc948abf8af48bfa41b40585f75d3b5ff59",
+      "live_exact_text_line_offset": 0,
+      "live_blob": "698c6dc948abf8af48bfa41b40585f75d3b5ff59",
+      "strict_frozen_delta": 66,
+      "strict_pinned_delta": 66,
+      "old_v2_additional_credit": 0,
+      "verification": "132 original lines direct semantics, pinned #52 fully reviewed 1-186, no runtime/human claim."
     }
   ],
   "completion": "IN_PROGRESS",
-  "test_limit": "S2-123 source-only direct semantic inspection; PR/merged governance CI pending, no Node/SQL/Auth/browser/603/provider test claim.",
-  "last_batch": "S2-123",
-  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-123.json",
+  "test_limit": "S2-124 original-source direct audit only; exact PR-head and merged governance CI pending. No fresh Node/browser/offline/SQL/Auth/provider/603 test; live code drift remains partial.",
+  "last_batch": "S2-124",
+  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-124.json",
   "complete": false,
   "accounting_reconciliation_20261105": {
     "scope": "NONCREDIT historical source-ledger reference repair",
