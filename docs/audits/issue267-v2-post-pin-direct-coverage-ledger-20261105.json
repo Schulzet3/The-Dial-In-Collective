@@ -3,7 +3,7 @@
   "issue": 267,
   "review_standard": "Independent post-pin new source line semantic review; separate from original frozen/pinned V2 denominator",
   "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
-  "observed_development_commit": "23092a2223191ad3849977049a2c0a0c52dc2699",
+  "observed_development_commit": "86f244f43306bad7cff1dd2a24893e1fc5a29cd9",
   "receipt_references": [
     {
       "batch_id": "D2-001",
@@ -384,10 +384,23 @@
       "line_count": 28,
       "verified_absent_at_pin": true,
       "reviewed_live_commit": "23092a2223191ad3849977049a2c0a0c52dc2699"
+    },
+    {
+      "batch_id": "D2-031",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-031.json",
+      "path": "scripts/release/prepare-release-evidence.mjs",
+      "blob_sha": "2ebe86fde5b17dea639a2a4580121078227dafc5",
+      "range": [
+        1,
+        61
+      ],
+      "line_count": 61,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "86f244f43306bad7cff1dd2a24893e1fc5a29cd9"
     }
   ],
-  "unique_source_lines_direct_reviewed": 837,
-  "fully_reviewed_new_source_files": 30,
+  "unique_source_lines_direct_reviewed": 898,
+  "fully_reviewed_new_source_files": 31,
   "nonoverlap": true,
   "changed_existing_pinned_paths": "PENDING",
   "new_sql_migrations": "PENDING",
@@ -410,7 +423,7 @@
       "subtract_phantom_records": 4
     }
   ],
-  "last_review_batch": "D2-030",
-  "last_review_source_commit": "23092a2223191ad3849977049a2c0a0c52dc2699",
-  "last_review_note": "D2-029/030 71 original new post-pin Netlify live provider readback and synthetic test lines directly reviewed, no active bug reproduced. No live provider access, runtime edits or app tests. Frozen/pinned S2 unchanged."
+  "last_review_batch": "D2-031",
+  "last_review_source_commit": "86f244f43306bad7cff1dd2a24893e1fc5a29cd9",
+  "last_review_note": "Direct 61-line post-pin immutable preflight review, original 97-line test read as context without credit, no active bug or code edit. All earlier receipts preserved."
 }
