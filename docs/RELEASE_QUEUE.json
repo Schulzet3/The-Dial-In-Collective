@@ -5480,23 +5480,38 @@
     },
     {
       "id": "DIC-Q-33-original603-596-selected-farm-region-disagreement",
-      "merged_source_sha": null,
+      "merged_source_sha": "5e530b4a7ee373ad8413009a759c7ec342fba280",
       "issue": 33,
       "title": "Guard selected current named-farm region spelling disagreement and preserve both literals for Add Coffee review",
-      "state": "TESTING",
+      "state": "READY",
       "scope_paths": [
         "src/server/coffee-title-region-evidence.mjs",
         "src/server/coffee-page-metadata.mjs"
       ],
       "tests": [
-        "Original #596 before: actual selected official run42051979776 parses misspelled Huehuetenago, Guatemala; selected title and same farm narrative print Huehuetenango. Exact CI and after selected live parser pending."
+        "Official selected original603 #596 Wrecking Ball H1 Guatemala Huehuetenango Los Dos Socios; Region label spells Huehuetenago, while current named farm story explicitly locates Finca Los Dos Socios at La Libertad, Huehuetenango. BEFORE actual source run42051979776 raw HTML SHA256 5bfd415211c160f111c1249e0bb58ed25cc9d6e4d2f4bdf6c62d7e02d0e93b5b incorrectly auto-filled Huehuetenago, Guatemala.",
+        "PR811 6 new focused selected parser/Add Coffee and adversarial related/previous/incorrect H1/two-locality/country/consistent-caption checks. Two failed PR-head Node runs 42061098231 and 42061665416 identified and corrected three precise bugs: short La, terminal sentence punctuation, TESTING merged_source_sha null.",
+        "Corrected exact PR head 66610e75ef7d6aa3e6904d63317ac287b434407e Node/lint/build42061990175 1795 PASS/0 FAIL/0 SKIP, approval42061990367 and cloud/mobile42061990529, SQL42061990080, security42061990214, private exact-source42061990247 SUCCESS; original frozen60342061990492 SKIPPED.",
+        "PR811 safely nonforce squash merged at 5e530b4a7ee373ad8413009a759c7ec342fba280, merged tree 80a9f5d1966cd4e34a6fce82e0195c1b0b9f0507 identical corrected tested tree. Exact merged Node/lint/build42062225302 1795 PASS/0 FAIL, approval42062225263, cloud/mobile42062225348 SUCCESS.",
+        "Actual EXACT MERGED guarded official public selected run42062225349/job127366972474: 3/3 FETCHED/PARSED and Add Coffee source review/preview. #596 raw HTML SHA256 93cbd4558b0dc5d07cbf7fae6c68c3ff06bcc0ba818f829a6527352cb3291e2d, origin now intentionally BLANK with conflict origin and direct source alternatives preserved; producer Concepción Villatoro, Bourbon/Caturra, Washed, 2026 label, tasting notes retained; ambiguous Medium/Medium-Light roast remains blank. #575 Takengon, Aceh, Indonesia unchanged; #593 Ethiopian process blank and notes/origin unchanged.",
+        "Private source artifact13432387733 ZIP SHA256 24ed20642c9fe5fc6c399e601cb5a228b06638363ad2583b9418f769e50eed32 runner-reported; raw zip independently rehashed NO. Full original 603 semantic case-by-case certification remains IN_PROGRESS, source run manual_certified=0."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact-head CI, safe merge and after current official source verification pending"
+      "ci_runs": [
+        42061990175,
+        42061990367,
+        42061990529,
+        42061990080,
+        42061990214,
+        42061990247,
+        42062225302,
+        42062225263,
+        42062225348,
+        42062225349
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Only TESTING, not READY. No automatic correction or categorical roast guess. Source literals disagree; preserve both for review. No frozen original603/oracle/CSV, production/Auth/member changes."
+      "notes": "NARROW VERIFIED READY in development ONLY, NOT DEPLOYED. Withhold origin on direct same-selected current named-farm region spelling disagreement, retaining both printed alternatives for explicit member source review; never silently overwrite user's values or infer roast. Original 603/201/1197, frozen CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6, oracle/scorer unchanged. Issue33 OPEN pending genuine full individual 603 manual semantic acceptance; frozen603 SKIPPED not PASS; #267 V2/#96 separate. No Netlify publication, production provider/SQL/Edge/Auth/member writes, paid services or force. Receipt docs/audits/issue33-original603-596-selected-farm-region-ready-20261105.json.",
+      "pr": 811
     }
   ],
   "history": [
