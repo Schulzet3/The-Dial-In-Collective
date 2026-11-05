@@ -647,6 +647,32 @@
       "source_bytes_sha256": null,
       "source_byte_caveat": "Original web PDF opened and relevant page screenshots visually checked; complete publisher PDF bytes were not downloaded and SHA-256 not calculated. Manufacturer page can change.",
       "claims_verified_externally": "2021 manual specifies factory 40 g/30 s unimpeded Pre-Brew water and 9-bar pump (p16), actuator Off/Pre-Brew/Full-Brew (p20), recommended 18-19 g and approximately 15-20 s saturating prebrew (p21), user-adjustable needle-valve starting 40 g/30 s (p22); 2021 on-brand article proposes wider 40-60 g/30 s across roast as a personal dial-in guide, 18-20 g and 45-55 s total contact time, not factory specification or validated optimum."
+    },
+    {
+      "id": "LIT-2019-GAGNE-POPCORNING",
+      "type": "original_author_non_peer_reviewed_controlled_grinder_observation",
+      "title": "Grind Quality and the Popcorning Effect — Jonathan Gagné, Coffee ad Astra (April 12, 2019)",
+      "url": "https://coffeeadastra.com/2019/04/12/grind-quality-and-the-popcorning-effect/",
+      "published": "2019-04-12; author site original text directly read 2026-11-05 UTC",
+      "access": "AUTHOR_ORIGINAL_WEB_ARTICLE_METHODS_DISTRIBUTIONS_AND_CONCLUSIONS_DIRECT_TEXT_READ; IMAGES_UNHASHED",
+      "evidence_grade": "AUTHOR_EXPLORATORY_ONE_COFFEE_10G_BARATZA_FORTE_BG_3_FEED_CONDITIONS_NOT_PEER_REVIEWED_NO_BLIND_ESPRESSO_TASTE",
+      "review_status": "METHODS_ONE_BEAN_vs_FULL_HOPPER_SURFACE_AREA_UNIT_AND_NEGLIGIBLE_WHOLE_DOSE_RESULT_DIRECT",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Publisher HTML and distribution images not downloaded/byte-hashed; 0.08 mm² is an average particle surface-area difference, NOT 0.08 mm diameter; no cross-grinder transfer.",
+      "claims_verified_externally": "Three 10g samples of same Ethiopian Guji with hopper full, empty 10g, or one bean at a time on Forté BG 6L; one-by-one mean surface area ~0.08 mm² greater versus full hopper, while full-vs-empty 10g entire-dose PSDs essentially indistinguishable. Five-click equivalence was an illustrative Forté-specific end-bean setting, not general adjustment."
+    },
+    {
+      "id": "LAB-KAFFEEMACHER-2025-SLOWFEED",
+      "type": "roaster_first_party_non_peer_reviewed_grinder_particle_and_espresso_trial",
+      "title": "Slow feeding when grinding coffee in espresso grinders — Kaffeemacher experimental report",
+      "url": "https://kaffeemacher.de/en/blogs/kaffeewissen/slow-feeding",
+      "published": "January/April 2025 test series; current original report web text directly rechecked 2026-11-05 UTC; webpage publication revision unknown",
+      "access": "ORIGINAL_LAB_REPORT_DIRECT_FULL_WEB_METHODS_TABLE1_TABLE2_DISCUSSION_READ; ARTICLE_HTML_NOT_BYTE_ARCHIVED",
+      "evidence_grade": "NON_PEER_REVIEWED_ROASTER_EXPERIMENT_2_COFFEES_DF64_GEN1_GEN2_PSD_ZHAW_WITH_5_SHOTS_PER_APAS_TEST2_CONDITION; SENSORY_DESCRIPTIVE_UNREPLICATED",
+      "review_status": "ORIGINAL_METHODS_APAS_LIMONTITLA_FOUR_PSD_CONDITIONS_AND_APAS_SECOND_TEST_READ; GAGNE_UNIT_MISTRANSLATION_FLAGGED",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Dynamic web article unarchived/not hashed, secondary description of Gagné uses 0.08 mm rather than original 0.08 mm²; distinct same-grind and re-dialed conditions must not be conflated.",
+      "claims_verified_externally": "Kaffeemacher Table1 Apas x50/fines baseline GS20 250µm/33.0%; manual SF same GS20 299µm/23.9%; device SF finer ~GS11.5 178µm/38.2%. Table2 Apas n=5/condition baseline GS21 26s/20.9% extraction, same-grind SF 10s/17.4%, adjusted finer ~GS10.5 24s/20.9%; no general outcome or fixed % grind correction."
     }
   ],
   "evidence_checks": [
@@ -1795,6 +1821,37 @@
       "result": "INTERNAL_TABLE_VALUES_VERIFIED_GENERALIZATION_WITHHELD_NO_APP_CHANGE",
       "owner_approval": false,
       "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-045-A",
+      "source": "LIT-2019-GAGNE-POPCORNING original author article paragraphs methods & Figures 1-2; LAB-KAFFEEMACHER-2025-SLOWFEED background section; PDF-SLOW-FEED-LIBRARY-20261101 reference [5] p10",
+      "claim": "Gagné's 2019 original reports one-bean-at-a-time grounds approximately 0.08 mm² coarser in measured mean PARTICLE SURFACE AREA on one Forté BG setup/10g Guji; the later Kaffeemacher background incorrectly writes 0.08 mm (linear diameter), an unsupported conversion of area to length. Original experiment explicitly found whole 10g full vs empty hopper distributions nearly indistinguishable; its five-click end-bean example is grinder-specific. Do not copy incorrect mm unit or infer dose-wide, cross-grinder or espresso flavor improvement.",
+      "grade": "ORIGINAL_AUTHOR_FIRST_PARTY_METHODS_AND_RESULT_DIRECT_READ; SECONDARY_FIRST_PARTY_QUOTE_UNIT_ERROR_DIRECT_CROSSCHECK; NOT_PEER_REVIEWED_SINGLE_GRINDER_EXPLORATORY",
+      "primary_sources": [
+        "https://coffeeadastra.com/2019/04/12/grind-quality-and-the-popcorning-effect/",
+        "https://kaffeemacher.de/en/blogs/kaffeewissen/slow-feeding"
+      ],
+      "page_number": "Gagné 2019 original full article figure discussion (around author article paragraphs after first PSD plot); Kaffeemacher 2025 Background 'Popcorning' paragraph; Library 10-page PDF reference list p10, NOT PDF's own unit claim.",
+      "app_source_sha": "db887cdaaa3baa4bbdf6b72596bedf43abb4ca80",
+      "current_app": "site/lib/engine.js blob 93969d561e18205d8f87e19059ea0c66b519e934 grindGuidance() stratifies same mode before transferring grind. No UI/model 0.08 mm coefficient exists.",
+      "result": "CITATION_UNIT_MISATTRIBUTION_DOCUMENTED_NO_PRODUCT_CHANGE",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-045-B",
+      "source": "LAB-KAFFEEMACHER-2025-SLOWFEED full original article Methods, Table 1, Table 2; PDF-SLOW-FEED-LIBRARY-20261101 pp1-10 separate Library PDF variant SHA256 a068e5e3ae4ab30dda58e7f0f9e24bca16bd570fb67061c3ca4b00cfd28ac28b",
+      "claim": "For Apas at identical DF64 GS20, normal feed had median x50 250µm and fines (<100µm) 33.0%; manually slow fed GS20 had x50 299µm and fines 23.9%. But after moving the slow-feed device grind significantly finer to ~GS11.5, x50 became 178µm and fines 38.2%, higher than normal baseline. Thus the lower-fines/coarser-ground finding is CONDITIONAL on constant burr setting, not universal after re-dial. Separate Apas second test n=5 per condition: normal GS21 ~26s/20.9% EY, same-grind slow ~10s/17.4%, re-dial slow GS10.5 ~24s/20.9%; different trials/GS values must not be merged. Sensory differences were descriptive and authors request additional verification; no transferable fixed 40% offset, blinded preference or universal time target.",
+      "grade": "DIRECT_ORIGINAL_NON_PEER_REVIEWED_LAB_REPORT_2_BOUNDED_TEST_SERIES_PSD_ZHAW_AND_N5_PER_APAS_EXTRACTION_CONDITION; NO_INDEPENDENT_SENSORY_VALIDATION",
+      "primary_sources": [
+        "https://kaffeemacher.de/en/blogs/kaffeewissen/slow-feeding"
+      ],
+      "page_number": "Kaffeemacher 'Experimental Overview', 'Second Test Design', 'Particle Size Distribution (ZHAW Analysis)' Table1 and 'Extraction Times and Yields' Table2; Library 10-page PDF pp1-10 text reviewed and SHA independently rechecked 2026-11-05.",
+      "app_source_sha": "db887cdaaa3baa4bbdf6b72596bedf43abb4ca80",
+      "current_app": "grindGuidance() checks feedMode and preference; fallback .4*espresso span is an approved but explicitly UNPROVEN prior, not physically calibrated universal improvement; engine blob 93969d561e18205d8f87e19059ea0c66b519e934.",
+      "result": "CONDITIONAL_COMPARISON_AND_DESCRIPTIVE_SENSORY_LIMITS_VERIFIED_NO_AUTO_RECIPE_TARGET_CHANGE",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
     }
   ],
   "policy_decisions_pending": [],
@@ -1820,25 +1877,31 @@
     "Schenker 2000 original Table 1 numeric values verified at R455-033 (mirror, no raw hash); retain publisher-PDF provenance and any other independent report bibliography citations as pending. Do not treat bean porosity as puck permeability.",
     "Continue actual UX code/test workflow review for one demonstrable narrow safe bug rather than speculative roast-age or cold-grind controls.",
     "R455-023: Continue full citation review of nine originals, raw inaccessible October29 ZIP/S019 PDFs and exact-byte provenance of Choi/Kim full manuscripts; assess translated label UX only after specific defect. No #267 V2 coverage credit.",
-    "R455-043: The 2002 Andueza pressure paper full third-party facsimile pages 7426-7431 was visually inspected and publisher abstract matched; no raw mirror/publisher hash certification. Do not re-credit these narrow methods/table facts; next verify unrelated original citations or actionable user-workflow defect."
+    "R455-043: The 2002 Andueza pressure paper full third-party facsimile pages 7426-7431 was visually inspected and publisher abstract matched; no raw mirror/publisher hash certification. Do not re-credit these narrow methods/table facts; next verify unrelated original citations or actionable user-workflow defect.",
+    "R455-045: Original Gagné 2019 0.08 mm² surface-area result contradicts Kaffeemacher 2025 background 0.08 mm linear shorthand; Table1 lower fines ONLY same grind, rising after finer re-dial. Preserve condition qualifiers; no engine 40%-heuristic edit. Continue unrelated research citations or reproduced UX correctness. Recovered Library 10-page slow-feed variant SHA a068e5e3... differs from owner-archive registered member SHA a4db4f38...; archive bytes still unavailable."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-043",
-    "base_development_sha": "03bbf13f656fd60b7cdbf86de510ea8c86048af7",
-    "source_document": "ORG-07 archived report lines 223,396 / 2002 Andueza et al. ACS pressure paper original six-page facsimile",
-    "primary_source_id": "LIT-2002-ESPRESSO-PRESSURE",
-    "claim_ids": [
-      "R455-EV-CIT-043-A",
-      "R455-EV-CIT-043-B"
+    "id": "R455-045",
+    "base_development_sha": "db887cdaaa3baa4bbdf6b72596bedf43abb4ca80",
+    "source_document": "Gagné original 2019 popcorning article and Kaffeemacher original 2025 slow-feeding study; distinct Library slow-feed PDF all 10 pages read",
+    "source_ids": [
+      "LIT-2019-GAGNE-POPCORNING",
+      "LAB-KAFFEEMACHER-2025-SLOWFEED"
     ],
-    "number_of_curated_sources": 45,
-    "total_evidence_checks": 99,
-    "review_type": "ORIGINAL_FULL_SIX_PAGE_THIRD_PARTY_FACSIMILE_VISUAL_VERIFICATION_WITH_ACS_PUBLISHER_ABSTRACT_CROSS_CHECK",
-    "source_pages_hashed": false,
+    "claim_ids": [
+      "R455-EV-CIT-045-A",
+      "R455-EV-CIT-045-B"
+    ],
+    "number_of_curated_sources": 47,
+    "total_evidence_checks": 101,
+    "review_type": "DIRECT_ORIGINAL_AUTHOR_AND_LAB_METHODS_TABLES_CONDITIONAL_RESULT_AND_MM2_UNIT_CROSSCHECK",
+    "web_source_bytes_hashed": false,
+    "library_pdf_sha256_verified": "a068e5e3ae4ab30dda58e7f0f9e24bca16bd570fb67061c3ca4b00cfd28ac28b",
+    "library_archive_member_equivalent": false,
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
     "code_or_policy_changed": false,
-    "next_action": "Continue new nonoverlapping original citation verification or a reproducible Log Shot/Rate correctness gap, preserving concurrent #33/#267/#96/#504 ownership. October29 pack/S019 original bytes still pending."
+    "next_action": "Verify docs-only PR-head and merged governance, crosscheck blob integrity then continue nonoverlapping primary citations or demonstrated Log Shot UX bug; no Oct29 pack or original S019 bytes."
   },
   "policy_decisions_resolved": [
     {
@@ -1992,6 +2055,23 @@
       "approval_required_for_behavior_change": true,
       "implementation": "RESEARCH_ONLY_HOLD_NO_OWNER_DECISION_REQUESTED",
       "test_plan": "Documentation-only source/governance CI; future behavior would require positive and negative capability/pressure/style/one-control/five-taste/offline/history and controlled sensory outcomes.",
+      "release_queue": "NO_NEW_ITEM"
+    },
+    {
+      "id": "R455-PROP-045-SLOW-FEED-CLAIM-SCOPE",
+      "finding": "Secondary Kaffeemacher popcorning summary converts author's mean particle surface area (~0.08 mm²) to linear size (~0.08 mm); its own Table1 shows lower fines at unchanged grind but higher fines after slow-feed finer re-dial. An apparent blanket slow-feed effect depends on the held-fixed grind setting.",
+      "evidence": [
+        "R455-EV-CIT-045-A",
+        "R455-EV-CIT-045-B"
+      ],
+      "severity": "P2_RESEARCH_ATTRIBUTION_UNIT_ERROR_AND_CONFOUNDING_RISK_NO_REPRODUCED_APP_DEFECT",
+      "user_benefit": "Prevent misleading physical units/causal confidence in evidence-backed recommendation explanations while keeping existing user-specific learning.",
+      "current_locked": "GRINDER-ISSUE17-DIRECTION-RANGE-SLOWFEED-20261028 and later Master Spec/Decision Ledger supersessions govern feed-mode tracking, grinder scale, one controllable action; speculative new numeric policy or data capture needs owner approval.",
+      "current_app": "development db887cdaaa3baa4bbdf6b72596bedf43abb4ca80; engine.js blob 93969d561e18205d8f87e19059ea0c66b519e934 uses mode-stratified history and an explicitly unproven slow-feed fallback, without a 0.08mm recommendation.",
+      "proposed_change": "SAFE: document actual dimension and held-constant conditions, preserve code and personal data. HOLD: adjusting generic 40% fallback, new feed intensity capture or causal sweetness claims requires owner-approved, independently verified product tradeoff and regressions.",
+      "approval_required_for_behavior_change": true,
+      "implementation": "RESEARCH_ONLY_CORRECTION_NO_RUNTIME_CHANGE",
+      "test_plan": "Only docs/schema/source-governance checks for this commit. Future behavior change must test both feed conditions, five tastes, one controllable action, style/basket/version bounds, same-coffee learning, offline/privacy, and actual sensory outcomes.",
       "release_queue": "NO_NEW_ITEM"
     }
   ]
