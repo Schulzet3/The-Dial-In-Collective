@@ -58,3 +58,46 @@ test('#455 hiding selected coffee safely reselects a truly dated eligible coffee
  assert.deepEqual(s.shots,shots,'do not change measured shots, ratings or private notes');
  assert.deepEqual(visibleCoffees(s,'recent').map(c=>c.id),[legacy.id,missing.id]);
 });
+
+test('#455 most recent coffee uses real timezone instants and rejects malformed recency without changing source values',()=>{
+ const {s,legacy,missing,dated,w}=fixture();
+ w.recent[legacy.id]='2026-11-05T03:00:00+02:00'; // 01:00Z, lexically later
+ w.recent[missing.id]='2026-11-04T23:30:00-07:00'; // 06:30Z, actually latest
+ w.recent[dated.id]='z-not-a-date'; // previously ranked before real dates
+ const before=structuredClone(s);
+ assert.ok(w.recent[legacy.id]>w.recent[missing.id],
+  'reproduces the lexical order that incorrectly selected an older coffee');
+ assert.ok(Date.parse(w.recent[legacy.id])<Date.parse(w.recent[missing.id]));
+ assert.deepEqual(visibleCoffees(s,'recent').map(c=>c.id),[missing.id,legacy.id,dated.id]);
+ assert.deepEqual(s,before,'recent browsing must not rewrite archival source timestamps or private data');
+});
+
+test('#455 recent coffee fallback compares actual creation instants when all recent dates are unusable',()=>{
+ const {s,legacy,missing,dated,w}=fixture();
+ legacy.createdAt='2026-11-05T03:00:00+02:00';
+ missing.createdAt='2026-11-04T23:30:00-07:00';
+ dated.createdAt='not-a-creation-date';
+ w.recent[legacy.id]='invalid';
+ w.recent[missing.id]=null;
+ w.recent[dated.id]=37;
+ const before=structuredClone(s);
+ assert.deepEqual(visibleCoffees(s,'recent').map(c=>c.id),[missing.id,legacy.id,dated.id]);
+ assert.deepEqual(s,before,'invalid backup dates must be preserved rather than silently normalized');
+});
+
+test('#455 hiding current coffee selects most recent real instant, preserving original rated history',()=>{
+ const {s,legacy,missing,dated,w}=fixture();
+ w.currentCoffeeId=dated.id;
+ w.recent[dated.id]='2026-11-05T08:00:00Z';
+ w.recent[legacy.id]='2026-11-05T03:00:00+02:00';
+ w.recent[missing.id]='2026-11-04T23:30:00-07:00';
+ s.shots.push({id:'private-shot',coffeeId:missing.id,notes:'Original private note',
+  timestamp:'2026-11-04T22:00:00Z',doseG:18,yieldG:36,timeS:25,grindSetting:2,
+  tasteScales:{extraction:3,body:3,clarity:5,sweetness:4,astringency:1}});
+ const shots=structuredClone(s.shots),recent=structuredClone(w.recent);
+ hideCoffee(s,dated.id,true);
+ assert.equal(w.currentCoffeeId,missing.id,'keep current coffee aligned to newest real remaining visit');
+ assert.deepEqual(visibleCoffees(s,'recent').map(c=>c.id),[missing.id,legacy.id]);
+ assert.deepEqual(w.recent,recent,'do not alter original recency metadata');
+ assert.deepEqual(s.shots,shots,'all five original tastes, measurements and private notes retained');
+});

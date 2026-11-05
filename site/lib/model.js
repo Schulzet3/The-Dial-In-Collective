@@ -121,16 +121,26 @@ export function duplicateMatches(s,d) {
 }
 // Restored backup/cloud dates may be absent or nonstring; keep their records,
 // but never use an untrustworthy value as a chronological sort key.
-const sortableHistoryDate=value=>typeof value==='string'&&value.trim()?value:'';
+const sortableHistoryInstant=value=>{
+ if(typeof value!=='string'||!value.trim())return -Infinity;
+ const at=Date.parse(value);
+ return Number.isFinite(at)?at:-Infinity;
+};
+// Compare real instants, not the lexical shape of different timezone offsets.
+// Unparseable archival dates remain intact but never outrank dated records.
+const compareHistoryDates=(a,b)=>{
+ const left=sortableHistoryInstant(a),right=sortableHistoryInstant(b);
+ return left===right?0:left>right?-1:1;
+};
 export function hideCoffee(s,id,hidden=true) {
  const c=s.coffees.find(x=>x.id===id);if(!c)return;c.hidden=hidden;
- if(hidden)for(const set of s.setups)for(const w of Object.values(set.workspaces))if(w.currentCoffeeId===id){w.currentCoffeeId=Object.entries(w.recent).filter(([cid])=>cid!==id&&s.coffees.some(c=>c.id===cid&&!c.hidden)).sort((a,b)=>sortableHistoryDate(b[1]).localeCompare(sortableHistoryDate(a[1])))[0]?.[0]||null;}
+ if(hidden)for(const set of s.setups)for(const w of Object.values(set.workspaces))if(w.currentCoffeeId===id){w.currentCoffeeId=Object.entries(w.recent).filter(([cid])=>cid!==id&&s.coffees.some(c=>c.id===cid&&!c.hidden)).sort((a,b)=>compareHistoryDates(a[1],b[1]))[0]?.[0]||null;}
  logAudit(s,hidden?'coffee.hidden':'coffee.restored',{coffeeId:id});
 }
 export function visibleCoffees(s,sort='recent',search='',temporaryId=null) {
  const w=workspace(s);const query=norm(search);const keys=['name','roaster','origin','elevationM','roastLevel','process','variety','producer','tastingNotes'];
  const rows=s.coffees.filter(c=>!c.hidden&&(!query||keys.some(k=>norm(c[k]).includes(query))));
- rows.sort((a,b)=>sort==='az'?a.name.localeCompare(b.name): sortableHistoryDate(w.recent[b.id]).localeCompare(sortableHistoryDate(w.recent[a.id])) || sortableHistoryDate(b.createdAt).localeCompare(sortableHistoryDate(a.createdAt)));
+ rows.sort((a,b)=>sort==='az'?a.name.localeCompare(b.name): compareHistoryDates(w.recent[a.id],w.recent[b.id]) || compareHistoryDates(a.createdAt,b.createdAt));
  const ordered=[];
  const pinned=rows.find(c=>c.id===w.currentCoffeeId);if(pinned)ordered.push(pinned);
  const temp=!query&&rows.find(c=>c.id===temporaryId&&c.id!==w.currentCoffeeId);if(temp)ordered.push(temp);
