@@ -4659,22 +4659,39 @@
       "id": "DIC-Q-455-previous-calibration-date",
       "issue": 455,
       "title": "Ignore undated legacy history when selecting the newest prior-calibration grind estimate",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "32bbf1e29120702479b60ed9185f602c0368c65e",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
-        "Source-level reproducible candidate: grindGuidance previous-calibration selector admitted whitespace timestamps (and truthy nonstring timestamps) when ordering historical success rows; exact base c7574439e90a9bc6332960fba97bf7a8b97f3e89.",
-        "Added Node22 negative/positive real-module regression for whitespace/numeric/null undated rows versus a dated same-coffee successful old-calibration shot; source-level hypotheses only, test not yet executed.",
-        "Required exact-source Node22/UX/offline/governance tests and merge-bound verification PENDING; original603 SKIPPED/NOT_APPLICABLE, not PASS."
+        "Original LIVE source-level gap: site/lib/engine.js::grindGuidance() previously accepted whitespace or nonstring legacy timestamps in previous-calibration estimated-reference selection; no live member harm claimed.",
+        "Negative/positive imported real-module regression in tests/issue455-previous-calibration-date.test.mjs preserves legacy null/whitespace/numeric timestamps, five tastes, private notes and original shot measurements; existing fallback and dated 2.8 old-calibration estimation remain, marked unproven.",
+        "Initial exact PR head d66c177... Node/lint41936552290 2444 PASS/0 FAIL/6 SKIP; UX41936552165, SQL41936552231, security41936552342 PASS, approval41936552240 FAILED only due concurrently advanced base ancestry; no false PASS.",
+        "Reconciled nonforce PR head 44d48af24a259c2899e9f6346004c125e76e068a exact Node22/lint run41936971266 SUCCESS 2444 PASS/0 FAIL/6 SKIP (2450 total), actual 390px/browser/offline/a11y run41936971146 SUCCESS, isolated SQL41936971132 SUCCESS, security41936971138 SUCCESS, approval41936971164 SUCCESS; original60341936971133 SKIPPED (not PASS).",
+        "PR648 nonforce merged at 32bbf1e29120702479b60ed9185f602c0368c65e; all FOUR changed path Git blobs (engine, regression, queue, scoped journal) identical to successful reconciled PR head; no data migration.",
+        "Exact merged-source Node/lint41937242168 SUCCESS 2444 PASS/0 FAIL/6 SKIP; browser/mobile/offline/accessibility41937242107 SUCCESS (actual Chromium tests executed); cloud41937242107 and approval41937242284 SUCCESS. No live authenticated member or empirical taste trials; original603 not executed."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Applicable exact-commit automated tests not yet executed and branch not integrated."
+      "ci_runs": [
+        41936552290,
+        41936552165,
+        41936552231,
+        41936552342,
+        41936552240,
+        41936971266,
+        41936971146,
+        41936971132,
+        41936971138,
+        41936971164,
+        41936971133,
+        41937242168,
+        41937242107,
+        41937242284
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "SAFE Locked-compatible chronological evidence integrity; preserve all private shot history, five sensory ratings, grinder translation rules and existing fallback. Development PR only, NOT READY or deployed."
+      "notes": "NARROW READY IN DEVELOPMENT ONLY, NOT DEPLOYED. Historical records, taste scales, grinder translations and existing bounded estimates preserved; exact merged source and applicable CI independently verified. Other #455 research/citation and UX work remains OPEN; no numerical policy or user data change.",
+      "pr": 648
     }
   ],
   "history": [
