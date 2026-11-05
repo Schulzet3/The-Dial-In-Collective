@@ -1873,6 +1873,98 @@
       "old_v2_extra_credit": 0
     },
     {
+      "batch": "S2-077",
+      "receipt_blob_sha": "0d64738aba5145a05970c3db703d4d7e109e52a3",
+      "frozen_file": "docs/CURRENT_STATUS_PRE_QUEEN_CITY_2026-10-17.md",
+      "frozen_lines": [
+        56,
+        163
+      ],
+      "frozen_blob": "b1698030de2539bbd2f342251cece4c546477227",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        1861,
+        1940
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "strict_frozen_delta": 108,
+      "strict_pinned_delta": 80,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-077.json",
+      "old_v2_additional_credit": 0,
+      "restoration_from_immutable_receipt": true,
+      "credit_change": 0,
+      "verification": "Preexisting original semantic source records independently re-read against original Git blobs 2026-11-05; no new source credit; one historical line intentionally redacted in receipt."
+    },
+    {
+      "batch": "S2-078",
+      "receipt_blob_sha": "4362a1446ece6bc914c53095d27af45e2443c09c",
+      "frozen_file": "docs/CURRENT_STATUS_PRE_SWEEP_2026-10-17.md",
+      "frozen_lines": [
+        1,
+        54
+      ],
+      "frozen_blob": "9a3b0aad18211b914af1520de385785c855d4e09",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        1941,
+        2030
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "strict_frozen_delta": 54,
+      "strict_pinned_delta": 90,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-078.json",
+      "old_v2_additional_credit": 0,
+      "restoration_from_immutable_receipt": true,
+      "credit_change": 0,
+      "verification": "Preexisting original semantic source records independently re-read against original Git blobs 2026-11-05; no new source credit; one historical line intentionally redacted in receipt."
+    },
+    {
+      "batch": "S2-079",
+      "receipt_blob_sha": "4ee9ebeb4d2e4a1bcf05daedf82a3063d8a8246d",
+      "frozen_file": "docs/DECISION_IMPLEMENTATION_CROSSWALK_2026-10-17.md",
+      "frozen_lines": [
+        1,
+        49
+      ],
+      "frozen_blob": "eb55a5bd54865229bebb999272409947f0f53a23",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        2031,
+        2110
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "strict_frozen_delta": 49,
+      "strict_pinned_delta": 80,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-079.json",
+      "old_v2_additional_credit": 0,
+      "restoration_from_immutable_receipt": true,
+      "credit_change": 0,
+      "verification": "Preexisting original semantic source records independently re-read against original Git blobs 2026-11-05; no new source credit; one historical line intentionally redacted in receipt."
+    },
+    {
+      "batch": "S2-080",
+      "receipt_blob_sha": "82bd1692c2c6a6f9b7e0fab4adf990b5049e43bf",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        1,
+        100
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-frozen-ci.py",
+      "pinned_lines": [
+        2111,
+        2200
+      ],
+      "pinned_blob": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+      "strict_frozen_delta": 100,
+      "strict_pinned_delta": 90,
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-080.json",
+      "old_v2_additional_credit": 0,
+      "restoration_from_immutable_receipt": true,
+      "credit_change": 0,
+      "verification": "Preexisting original semantic source records independently re-read against original Git blobs 2026-11-05; no new source credit; one historical line intentionally redacted in receipt."
+    },
+    {
       "batch": "S2-081",
       "receipt": "docs/audits/issue267-v2-strict-batches/S2-081.json",
       "frozen_file": "docs/DECISION_LEDGER.json",
@@ -2563,5 +2655,63 @@
   "test_limit": "Source-bound direct original text/criteria verification; PR-head CI pending, live drift and functional testing incomplete",
   "last_batch": "S2-112",
   "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-112.json",
-  "complete": false
+  "complete": false,
+  "accounting_reconciliation_20261105": {
+    "scope": "NONCREDIT historical source-ledger reference repair",
+    "reason": "Four existing source-bound S2-077..080 semantic receipts existed but were absent in flat 108-entry ledger while their +311 historical/+340 pinned line credits remained in running totals. Reintroduce only missing pointers, preserve original per-line receipts, keep counters unchanged.",
+    "missing_batches_before": [
+      "S2-077",
+      "S2-078",
+      "S2-079",
+      "S2-080"
+    ],
+    "restored_batches": [
+      {
+        "batch": "S2-077",
+        "receipt_blob": "0d64738aba5145a05970c3db703d4d7e109e52a3",
+        "frozen_lines": 108,
+        "pinned_lines": 80
+      },
+      {
+        "batch": "S2-078",
+        "receipt_blob": "4362a1446ece6bc914c53095d27af45e2443c09c",
+        "frozen_lines": 54,
+        "pinned_lines": 90
+      },
+      {
+        "batch": "S2-079",
+        "receipt_blob": "4ee9ebeb4d2e4a1bcf05daedf82a3063d8a8246d",
+        "frozen_lines": 49,
+        "pinned_lines": 80
+      },
+      {
+        "batch": "S2-080",
+        "receipt_blob": "82bd1692c2c6a6f9b7e0fab4adf990b5049e43bf",
+        "frozen_lines": 100,
+        "pinned_lines": 90
+      }
+    ],
+    "independently_rechecked_numbered_source_lines": 651,
+    "redacted_exception": {
+      "batch": "S2-077",
+      "path": "docs/CURRENT_STATUS_PRE_QUEEN_CITY_2026-10-17.md",
+      "original_line": 59,
+      "source_line_original_read": true,
+      "receipt_literal_intentionally_redacted": true,
+      "contents_not_disclosed": true
+    },
+    "strict_before": [
+      6314,
+      7941
+    ],
+    "strict_after": [
+      6314,
+      7941
+    ],
+    "range_union_verified": true,
+    "nonoverlapping": true,
+    "total_ordered_batches": 112,
+    "post_pin_semantic_coverage": "STILL INCOMPLETE",
+    "independent_human_review_claim": false
+  }
 }
