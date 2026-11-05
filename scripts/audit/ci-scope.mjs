@@ -16,9 +16,13 @@ const SAFE_META=new Set(['docs/RELEASE_QUEUE.json','docs/DECISION_LEDGER.json',
 // Keep explicit allowlist narrow: unknown JSON and all source/code paths remain HIGH.
 const AUDIT_EVIDENCE_META=new Set([
  'docs/audits/issue267-review-restart-v2-20261101.json',
- 'docs/audits/issue267-v2-strict-coverage-ledger-20261103.json'
+ 'docs/audits/issue267-v2-strict-coverage-ledger-20261103.json',
+ // Only #504's immutable word-audit coverage record; never generalize JSON under docs/.
+ 'docs/audits/issue504-coverage-ledger.json'
 ]);
 const AUDIT_EVIDENCE_RECEIPT=/^docs\/audits\/issue267-v2-strict-batches\/S2-[0-9]{3,6}\.json$/;
+// #504's source-bound G1 receipts contain governance evidence, not app/test inputs.
+const GITHUB_RECORDS_EVIDENCE_RECEIPT=/^docs\/audits\/issue504-review-G1-[0-9]{3,6}\.json$/;
 
 export function deployableRiskPaths(paths){
  return Array.isArray(paths)?paths.filter(p=>typeof p==='string'&&
@@ -32,7 +36,8 @@ export function docsOnlyPaths(paths){
 function impactKind(path){
  if(!/^[A-Za-z0-9_.\/-]+$/.test(path)||path.includes('..')||path.startsWith('/'))return 'unknown';
  if(path==='README.md'||path==='AGENTS.md'||/^docs\/[A-Za-z0-9_.\/-]+\.md$/.test(path)||SAFE_META.has(path)||
-  AUDIT_EVIDENCE_META.has(path)||AUDIT_EVIDENCE_RECEIPT.test(path))
+  AUDIT_EVIDENCE_META.has(path)||AUDIT_EVIDENCE_RECEIPT.test(path)||
+  GITHUB_RECORDS_EVIDENCE_RECEIPT.test(path))
   return 'docs';
  if(/^site\/.*\.css$/.test(path))return 'style';
  if(/^site\/lib\//.test(path))return 'shots';
