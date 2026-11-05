@@ -3,7 +3,7 @@
   "issue": 267,
   "review_standard": "Independent post-pin new source line semantic review; separate from original frozen/pinned V2 denominator",
   "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
-  "observed_development_commit": "259e29148933742733f255c7923bed81e64c9f34",
+  "observed_development_commit": "b2a2c08d081a904f9fc77d36f0edae4ac65210d7",
   "receipt_references": [
     {
       "batch_id": "D2-001",
@@ -451,14 +451,28 @@
       "line_count": 64,
       "verified_absent_at_pin": true,
       "reviewed_live_commit": "259e29148933742733f255c7923bed81e64c9f34"
+    },
+    {
+      "batch_id": "D2-036",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-036.json",
+      "path": "scripts/release/retrieve-certified-release-bundle.mjs",
+      "blob_sha": "b4d3393133cfe0b7727e74ad7bbd606e84fc21a6",
+      "range": [
+        1,
+        83
+      ],
+      "line_count": 83,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "b2a2c08d081a904f9fc77d36f0edae4ac65210d7",
+      "reviewed_source_dev_commit": "4f8a66a6a71b59146019924f7bbd8977d98c25fb"
     }
   ],
-  "unique_source_lines_direct_reviewed": 1157,
-  "fully_reviewed_new_source_files": 35,
+  "unique_source_lines_direct_reviewed": 1240,
+  "fully_reviewed_new_source_files": 36,
   "nonoverlap": true,
   "changed_existing_pinned_paths": "46 modified pinned eligible files, structural-only inventory docs/audits/issue267-v2-post-pin-tree-drift-20261105-post-D2-035.json",
   "new_sql_migrations": "1 new migration structural-only; coordinate #96",
-  "remaining_added_code": "89 new source/test candidate files without full D2 per-line receipt of 124 current added candidates",
+  "remaining_added_code": "88 of 124 source candidates in last pinned-to-live tree inventory lack a full D2 receipt as of b2a2c08d081a904f9fc77d36f0edae4ac65210d7; tree drift later changes require refresh",
   "runtime_app_acceptance": "FOCUSED_LOCAL_NODE22_3_PASS_FULL_APP_AND_PRODUCTION_NOT_RUN",
   "complete": false,
   "physical_line_accounting_rule": "Count actual 1-based non-virtual lines; terminal newline alone is line delimiter, never an extra blank physical line. Preserve source-authenticated original receipt even when superseded by an append-only correction.",
@@ -477,9 +491,9 @@
       "subtract_phantom_records": 4
     }
   ],
-  "last_review_batch": "D2-035",
-  "last_review_source_commit": "259e29148933742733f255c7923bed81e64c9f34",
-  "last_review_note": "D2-035: direct numbered semantic review 64/64 physical tests/release-backup-decision.test.mjs source lines, 1093 to 1157 distinct post-pin lines, 34 to 35 files. Source-bound complete live 69-line D2-033 post-fix reconciliation (no additional original lines) and full post-pin tree drift machine inventory; semantic backlog remains.",
+  "last_review_batch": "D2-036",
+  "last_review_source_commit": "b2a2c08d081a904f9fc77d36f0edae4ac65210d7",
+  "last_review_note": "Direct full physical 83-line source inspection of new-after-pin read-only exact-source CI release-bundle fetcher, end-to-end provenance, bounded ZIP extraction, checksum/CI receipt, cleanup and possible hypothetical malformed injected return. Original D2 1157->1240 lines, 35->36 files; no runtime change or provider interaction.",
   "live_source_blob_revalidations": [
     {
       "path": "scripts/release/request-encrypted-backup.mjs",
