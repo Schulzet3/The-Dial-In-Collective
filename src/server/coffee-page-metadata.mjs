@@ -30,6 +30,7 @@ import {collectSupplementaryCoffeePageFacts} from './coffee-supplementary-source
 import {selectedCurrentCoffeeReleaseBadge,selectedStructuredCoffeeEvidence,selectedPageCoffeeEvidence,explicitlyRotatingCoffeeOrigin} from './coffee-selected-source-evidence.mjs';
 import {selectedCurrentInlineShopifyRoastTag} from './coffee-current-inline-shopify-product.mjs';
 import {countrywideEducationalOriginCorrection} from './coffee-countrywide-context-guard.mjs';
+import {selectedFarmStoryRegionMismatch} from './coffee-title-region-evidence.mjs';
 
 // A chosen current selected coffee description can be more authoritative than
 // another labeled tasting list printed in the same selected product detail
@@ -2055,6 +2056,29 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
      label:'Exact selected H1 country and current labeled Region',value:fields.origin,
      source_type:'html',source_url,section:'Selected product H1 and Region caption'});
    }
+  }
+ }
+
+ // A near-identical current Region label and exact named current farm
+ // story can disagree by a letter. Do not silently repair source spelling.
+ // Withhold the suggestion and surface both source readings for review.
+ if(fields.origin&&!conflicts.has('origin')){
+  const mismatch=selectedFarmStoryRegionMismatch({
+   name:fields.name,origin:fields.origin,
+   blocks:productCoffeeProse(canonicalProduct,clean)
+  });
+  if(mismatch){
+   rememberCoffeeReviewCandidate(fields,'origin',fields.origin,
+    'Current selected Region label (needs confirmation)');
+   rememberCoffeeReviewCandidate(fields,'origin',mismatch.value,
+    'Exact selected named farm location (different printed spelling)');
+   delete fields.origin;conflicts.add('origin');
+   if(source_facts.length<384)source_facts.push({
+    field:'origin',label:'Current selected named farm location',
+    value:mismatch.value,source_url,source_type:'html',
+    section:'Exact selected farm narrative; mismatched Region label',
+    conflicting:true
+   });
   }
  }
 
