@@ -3,7 +3,7 @@
   "issue": 267,
   "review_standard": "Independent post-pin new source line semantic review; separate from original frozen/pinned V2 denominator",
   "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
-  "observed_development_commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+  "observed_development_commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
   "receipt_references": [
     {
       "batch_id": "D2-001",
@@ -306,10 +306,36 @@
       "line_count": 24,
       "verified_absent_at_pin": true,
       "reviewed_live_commit": "6715ba832b886e3e0271655dbdd37853d9339e85"
+    },
+    {
+      "batch_id": "D2-025",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-025.json",
+      "path": "tests/discover-certified-artifacts.test.mjs",
+      "blob_sha": "8054061760229fad4db9bca1bc9ebd41906b2735",
+      "range": [
+        1,
+        26
+      ],
+      "line_count": 26,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "e05a621af6b6c904623292bfe65d65f9718fd020"
+    },
+    {
+      "batch_id": "D2-026",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-026.json",
+      "path": "tests/download-certified-artifacts.test.mjs",
+      "blob_sha": "4212346e74ef6dfbc3d561971e6ab4c36aafdddd",
+      "range": [
+        1,
+        20
+      ],
+      "line_count": 20,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "e05a621af6b6c904623292bfe65d65f9718fd020"
     }
   ],
-  "unique_source_lines_direct_reviewed": 659,
-  "fully_reviewed_new_source_files": 24,
+  "unique_source_lines_direct_reviewed": 705,
+  "fully_reviewed_new_source_files": 26,
   "nonoverlap": true,
   "changed_existing_pinned_paths": "PENDING",
   "new_sql_migrations": "PENDING",
@@ -332,7 +358,7 @@
       "subtract_phantom_records": 4
     }
   ],
-  "last_review_batch": "D2-024",
-  "last_review_source_commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
-  "last_review_note": "D2-023/024 49 direct physically numbered code+test lines. Exact source SHA and pin absence, direct AI semantics, archival/caller cleanup risk triaged not reproduced, prior frozen first-file S2-001 spotchecked no duplicate; app/603/offline/Auth/SQL not run. Live drift unfinished."
+  "last_review_batch": "D2-026",
+  "last_review_source_commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+  "last_review_note": "D2-025/026 exact 46 newly inspected test lines: source-bound discovery and downloader synthetic fixtures. No real GitHub artifact/API network exercised in this audit-only PR. Full drift and all historical/current semantic coverage incomplete."
 }
