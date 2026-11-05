@@ -673,6 +673,21 @@
       "source_bytes_sha256": null,
       "source_byte_caveat": "Dynamic web article unarchived/not hashed, secondary description of Gagné uses 0.08 mm rather than original 0.08 mm²; distinct same-grind and re-dialed conditions must not be conflated.",
       "claims_verified_externally": "Kaffeemacher Table1 Apas x50/fines baseline GS20 250µm/33.0%; manual SF same GS20 299µm/23.9%; device SF finer ~GS11.5 178µm/38.2%. Table2 Apas n=5/condition baseline GS21 26s/20.9% extraction, same-grind SF 10s/17.4%, adjusted finer ~GS10.5 24s/20.9%; no general outcome or fixed % grind correction."
+    },
+    {
+      "id": "LIT-2026-FU-CATIMOR-PROCESSING",
+      "type": "external_primary_peer_reviewed_single_lot_four_processing_methods_green_metabolomics_and_cupping",
+      "title": "Metabolome analysis of processing methods regulating flavor precursors in Arabica coffee beans and correlation with sensory attributes",
+      "authors": "Fu X, Yu H, Dong W, Bi X, Li Z, Li Y, Li G, Qu B, Hu F",
+      "published": "2026-07-07 (online); Beverage Plant Research 6:e029",
+      "doi": "10.48130/bpr-0026-0010",
+      "url": "https://maxapress.com/article/doi/10.48130/bpr-0026-0010",
+      "access": "FIRST_PARTY_JOURNAL_FULL_HTML_METHODS_RESULTS_SENSORY_STATISTICS_READ_2026-11-05_UTC",
+      "evidence_grade": "PUBLISHED_ORIGINAL_SPLIT_HARVEST_4_PROCESSING_TREATMENT_LOTS_GREEN_METABOLOMICS_AND_FIVE_Q_GRADER_CUPPING; ONLY_ONE_10KG_TREATMENT_PORTION_EACH_DESCRIBED; THREE_BIOLOGICAL_ASSAY_REPLICATES_NOT_ESTABLISHED_AS_THREE_INDEPENDENT_PROCESS_RUNS",
+      "review_status": "DIRECT_METHODS_LOT_PARTITION_CUPPING_AND_MULTIVARIATE_RESULTS; ABSTRACT_1682_VS_RESULTS_1706_COMPOUND_COUNT_DISCREPANCY_IDENTIFIED; NOT_ESPRESSO_GRIND_PSD_PERMEABILITY_OR_EXTRACTION_TRIAL",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "First-party HTML directly read (not raw byte-hashed); no publisher full PDF or underlying metabolite datasets downloaded. Authors state datasets not publicly available due to management requests. Three biological replicates described but independent 10kg fermentation batches were not demonstrated; do not claim independent processing replication or causal generalization to other varietals.",
+      "claims_verified_externally": "One Catimor cherry harvest split into four 10kg lots, one each WP/DP/AFWP/AFDP; AF treatments sealed seven days, all dried to 11.0±1.0 g/DW; three biological replicates analyzed. Their Q-grader sensory test used 12g grounds in 250mL water with 4-minute immersion, five tasters and three cups, not espresso. The paper reports 843 differentially accumulated metabolites across four comparisons; its abstract says 1682 total whereas results describe 1706 compounds (unresolved internal discrepancy)."
     }
   ],
   "evidence_checks": [
@@ -1852,6 +1867,36 @@
       "result": "CONDITIONAL_COMPARISON_AND_DESCRIPTIVE_SENSORY_LIMITS_VERIFIED_NO_AUTO_RECIPE_TARGET_CHANGE",
       "owner_approval": false,
       "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-046-A",
+      "source": "ORG-03 original Git blob 9a66449c6adfe27bc7e64dae086d3dfcfc647de6 lines 238-246 and 429-431; Fu et al. 2026 first-party paper Methods 'Sample preparation and collection' and 'Cup test of brewed coffee for sensory evaluation'",
+      "claim": "Original #03 correctly identifies split-harvest processing-to-green-metabolome evidence, but the experiment describes four 10kg Catimor treatment portions (one per WP/DP/AFWP/AFDP) from a March 2023 harvest, not clearly three independent treatment batches per arm. Their stated 3 biological replicates are assay/sample replicates unless proven otherwise; comparisons cannot establish robust population-wide processing effect. The sensory brew was a five-Q-grader/three-cup hot-water cupping (12g/250mL, 4 min), NOT espresso.",
+      "grade": "FIRST_PARTY_JOURNAL_PRIMARY_FULL_METHODS_REVIEWED_SINGLE_HARVEST_BOUNDED_CUPPING_NOT_ESPRESSO",
+      "primary_sources": [
+        "https://maxapress.com/article/doi/10.48130/bpr-0026-0010"
+      ],
+      "page_number": "Full published HTML, Methods > Sample preparation and collection; Cup test of brewed coffee for sensory evaluation; DOI 10.48130/bpr-0026-0010",
+      "app_source_sha": "c2646af18a7a73a57eda4b9950c35dcba006239c",
+      "current_app": "site/lib/engine.js blob 93969d561e18205d8f87e19059ea0c66b519e934 personalSimilarCoffeeReference uses process as +2 similarity metadata ONLY among same-setup/style/feed/dialed shots; no validated wash/natural/AF causal espresso correction or new data capture.",
+      "result": "PROCESSING_TO_METABOLITE_ASSOCIATION_SUPPORTED_WITH_SINGLE_LOT_REPLICATION_LIMIT; NO_ESPRESSO_CAUSAL_TARGET_TRANSFER",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-046-B",
+      "source": "Fu et al. 2026 original Abstract versus Results > Metabolome profiles and Differential profiles",
+      "claim": "Journal's own abstract reports 843 differential metabolites among 1,682 nonvolatile compounds; the first Results subsection reports 1,706 identified compounds, with 843 differential metabolites across the comparisons. The 1,682/1,706 denominator discrepancy is not resolved by the accessible primary article and cannot safely be smoothed over into a precise model constant. Metabolite measurements and correlations do not quantify espresso puck resistance, fines, permeability, extraction yield or blinded espresso preference.",
+      "grade": "DIRECT_FIRST_PARTY_PRIMARY_ABSTRACT_TO_RESULTS_NUMERIC_CROSSCHECK_INTERNAL_COUNT_AMBIGUITY",
+      "primary_sources": [
+        "https://maxapress.com/article/doi/10.48130/bpr-0026-0010"
+      ],
+      "page_number": "Abstract; Results > Metabolome profiles (1,706) and Differential metabolome profiles (843); method details and Data availability",
+      "app_source_sha": "c2646af18a7a73a57eda4b9950c35dcba006239c",
+      "current_app": "Engine process metadata weighting remains exploratory and subordinate to same-setup/style/feed measured success. No new process/fermentation-only numerically prescribed grind/yield/temperature logic is justified.",
+      "result": "NUMERIC_DENOMINATOR_AMBIGUITY_DOCUMENTED_NO_RECIPE_POLICY_CHANGE",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
     }
   ],
   "policy_decisions_pending": [],
@@ -1860,9 +1905,10 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R455-039 docs-only upgrade of previously indexed iScience RDT paper to focused original-method/result verification; retains existing source count and no new app behavior."
+    "reason": "R455-046 research-only first-party processing source methods/count review; no product authority or software change."
   },
   "next_actions": [
+    "R455-046: Primary Fu et al 2026 Catimor split-lot paper (DOI 10.48130/bpr-0026-0010) uses four 10kg treatment lots, three analysis replicates without separate repeated fermentations, Q-grader 12g/250mL cupping not espresso, 1682 vs1706 count discrepancy. No process-to-espresso automation or numeric priors; original 03 citation coverage still incomplete.",
     "R455-041: Slayer original manual factory 40g/30s versus 2021 Slayer-brand author adaptable 40-60g/30s, first-party prebrew flavor hypotheses only. No new prebrew/TCT numeric recipe recommendation, no grinder slow-feed conflation, no owner approval sought without concrete behavior choice; other original citations and inaccessible Oct29 pack/S019 continue.",
     "R455-039: Harper/Bumbaugh/Hendon 2024 iScience original published methods/Figs 2,4,5 confirm roast-conditional pregrind wetting, static/retention, flow and TDS observations; no blind taste preference, no universal numeric recipe/water/slow-feed rule. Publisher original PDF bytes/full raw HTML still not hashed; remaining citations separately pending.",
     "R455-038: Decent official calibrated basket holes (smaller for smaller dose) verified as manufacturer design; its 2021/2025 waisted-basket comparison was preliminary and not blinded/re-dialed. Never derive automatic diameter-to-grind/taste priors without owner choice and controlled evidence.",
@@ -1881,27 +1927,24 @@
     "R455-045: Original Gagné 2019 0.08 mm² surface-area result contradicts Kaffeemacher 2025 background 0.08 mm linear shorthand; Table1 lower fines ONLY same grind, rising after finer re-dial. Preserve condition qualifiers; no engine 40%-heuristic edit. Continue unrelated research citations or reproduced UX correctness. Recovered Library 10-page slow-feed variant SHA a068e5e3... differs from owner-archive registered member SHA a4db4f38...; archive bytes still unavailable."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-045",
-    "base_development_sha": "db887cdaaa3baa4bbdf6b72596bedf43abb4ca80",
-    "source_document": "Gagné original 2019 popcorning article and Kaffeemacher original 2025 slow-feeding study; distinct Library slow-feed PDF all 10 pages read",
+    "id": "R455-046",
+    "base_development_sha": "c2646af18a7a73a57eda4b9950c35dcba006239c",
+    "source_document": "Original research report #03 processing section and first-party 2026 Fu et al. full published HTML (methods/results/cupping)",
     "source_ids": [
-      "LIT-2019-GAGNE-POPCORNING",
-      "LAB-KAFFEEMACHER-2025-SLOWFEED"
+      "LIT-2026-FU-CATIMOR-PROCESSING"
     ],
     "claim_ids": [
-      "R455-EV-CIT-045-A",
-      "R455-EV-CIT-045-B"
+      "R455-EV-CIT-046-A",
+      "R455-EV-CIT-046-B"
     ],
-    "number_of_curated_sources": 47,
-    "total_evidence_checks": 101,
-    "review_type": "DIRECT_ORIGINAL_AUTHOR_AND_LAB_METHODS_TABLES_CONDITIONAL_RESULT_AND_MM2_UNIT_CROSSCHECK",
-    "web_source_bytes_hashed": false,
-    "library_pdf_sha256_verified": "a068e5e3ae4ab30dda58e7f0f9e24bca16bd570fb67061c3ca4b00cfd28ac28b",
-    "library_archive_member_equivalent": false,
+    "number_of_curated_sources": 48,
+    "total_evidence_checks": 103,
+    "review_type": "DIRECT_ORIGINAL_SPLIT_LOT_METHODOLOGY_REPLICATION_AND_CUPPING_VS_ESPRESSO_CROSSWALK_PLUS_NUMERATOR_DENOMINATOR_DISCREPANCY",
+    "publisher_html_bytes_hashed": false,
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
     "code_or_policy_changed": false,
-    "next_action": "Verify docs-only PR-head and merged governance, crosscheck blob integrity then continue nonoverlapping primary citations or demonstrated Log Shot UX bug; no Oct29 pack or original S019 bytes."
+    "next_action": "Verify PR-head and merged exact-source docs governance, read back identical blobs; then investigate next distinct original research claim or reproduced safe Log Shot/Rate UX issue; preserve #33/#267/#96 ownership."
   },
   "policy_decisions_resolved": [
     {
@@ -2072,6 +2115,23 @@
       "approval_required_for_behavior_change": true,
       "implementation": "RESEARCH_ONLY_CORRECTION_NO_RUNTIME_CHANGE",
       "test_plan": "Only docs/schema/source-governance checks for this commit. Future behavior change must test both feed conditions, five tastes, one controllable action, style/basket/version bounds, same-coffee learning, offline/privacy, and actual sensory outcomes.",
+      "release_queue": "NO_NEW_ITEM"
+    },
+    {
+      "id": "R455-PROP-046-PROCESS-TO-ESPRESSO-TRANSFER",
+      "finding": "Single-harvest Catimor treatment lot shows processing-linked green metabolome and cupping differences but does not measure espresso hydraulics, does not establish independent fermentation batch replication, and internally reports 1,682 versus 1,706 compounds.",
+      "evidence": [
+        "R455-EV-CIT-046-A",
+        "R455-EV-CIT-046-B"
+      ],
+      "severity": "P2_EVIDENCE_GENERALIZATION_RISK_NO_REPRODUCED_APP_DEFECT",
+      "user_benefit": "Keep Log Shot recommendations based on actual same-coffee measured success, rather than an unsupported processing-label grind/yield correction or overconfident flavor prediction.",
+      "current_locked": "Master Specification and later owner Decision Ledger supersessions: five tastes, same-coffee evidence, style/feed calibration boundaries, one controllable variable, immutable history; speculative new process-based numerical rules need owner product approval.",
+      "current_app": "At development c2646af18a7a73a57eda4b9950c35dcba006239c engine.js blob 93969d561e18205d8f87e19059ea0c66b519e934 personalSimilarCoffeeReference gives matching process metadata a relative similarity bonus only inside same-setup/style/feed successful-shot fallback; no process-specific automatic universal espresso correction.",
+      "proposed_change": "SAFE: research-only evidence granularity, preserve existing user and recommendation behavior. HOLD for separately authorized proposal: process-specific numeric roast/grind/yield/taste priors, new processing-capture fields or causal confidence language; requires repeated independent coffee lots and controlled espresso PSD/permeability, extraction and five-taste outcome trials.",
+      "approval_required_for_behavior_change": true,
+      "implementation": "RESEARCH_ONLY_NO_RUNTIME_CHANGE_NO_NEW_OWNER_DECISION",
+      "test_plan": "Documentation-only governance/approval exact-source PR+merge CI. Any later authorized app behavior needs source-to-Locked crosswalk, same-coffee/mixed-process negative and positive cases, five tastes, one control, all styles, offline/mobile/privacy and independent cupping-vs-espresso checks.",
       "release_queue": "NO_NEW_ITEM"
     }
   ]
