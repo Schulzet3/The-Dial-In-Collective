@@ -1,0 +1,681 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "D2-013",
+  "date_utc": "2026-11-05",
+  "kind": "POST_PIN_NEW_CODE_DIRECT_SEMANTIC_REVIEW",
+  "source": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "observed_live_commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+    "path": "scripts/release/package-immutable-dist.py",
+    "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+    "physical_line_count": 24,
+    "verified_absent_at_pin": true,
+    "terminal_newline_not_physical_line": true
+  },
+  "method": "Every actual numbered original line read directly with seven distinct substantive dimensions, pinned absence and exact live counterpart; Locked fit and test boundary recorded. Direct AI, not independent human. No packaging tests executed here.",
+  "per_line": [
+    {
+      "line": 1,
+      "source_text": "#!/usr/bin/env python3",
+      "classification": "shebang",
+      "behavior": "Selects Python interpreter via env",
+      "quality": "Portable executable script header",
+      "risk": "Actual interpreter version must meet pathlib.is_relative_to support",
+      "dead_or_obsolete": "Script header remains relevant",
+      "duplication": "No duplicate source function",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 1,
+        "exact_original": true
+      },
+      "testability": "Invoke with Python 3.9+ in controlled runner; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "Keep interpreter contract",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 1, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    },
+    {
+      "line": 2,
+      "source_text": "\"\"\"Deterministic immutable ZIP of production dist, excluding symlinks and unsafe paths.\"\"\"",
+      "classification": "docstring",
+      "behavior": "States deterministic ZIP and symlink exclusion intent",
+      "quality": "Clear scope comment",
+      "risk": "Claim requires archive verification and hostile symlink tests",
+      "dead_or_obsolete": "Relevant artifact safety contract",
+      "duplication": "No duplicate commentary proved",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 2,
+        "exact_original": true
+      },
+      "testability": "Compare two produced ZIP digests; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "Keep documented intent",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 2, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    },
+    {
+      "line": 3,
+      "source_text": "import pathlib, sys, zipfile",
+      "classification": "executable",
+      "behavior": "Imports pathlib, argv and zipfile",
+      "quality": "Standard library, no network dependencies",
+      "risk": "Python version and ZIP implementation constrain determinism",
+      "dead_or_obsolete": "Required imports",
+      "duplication": "No custom ZIP dependency duplicated",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 3,
+        "exact_original": true
+      },
+      "testability": "Python import/compile check; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "Keep imports",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 3, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    },
+    {
+      "line": 4,
+      "source_text": "def package(root, destination):",
+      "classification": "executable",
+      "behavior": "Defines package(root,destination)",
+      "quality": "Small parameterized packaging interface",
+      "risk": "Caller must supply trusted destination; no destination path hardening here",
+      "dead_or_obsolete": "Required build helper",
+      "duplication": "Distinct from function ZIP packager",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 4,
+        "exact_original": true
+      },
+      "testability": "Unit test with temp roots/destinations; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "Retain; caller boundary review",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 4, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    },
+    {
+      "line": 5,
+      "source_text": "    root = pathlib.Path(root).resolve()",
+      "classification": "executable",
+      "behavior": "Resolves build root to canonical absolute path",
+      "quality": "Blocks ordinary ../ root confusion",
+      "risk": "Does not itself lock underlying filesystem against races",
+      "dead_or_obsolete": "Required for containment",
+      "duplication": "No duplicate canonicalizer within this file",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 5,
+        "exact_original": true
+      },
+      "testability": "Test relative and symlink roots; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "Keep explicit root normalization",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 5, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    },
+    {
+      "line": 6,
+      "source_text": "    if not root.is_dir():",
+      "classification": "executable",
+      "behavior": "Requires root directory",
+      "quality": "Rejects missing/file root",
+      "risk": "May follow root symlink by design after resolve",
+      "dead_or_obsolete": "Necessary validation",
+      "duplication": "Not repeated elsewhere in file",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 6,
+        "exact_original": true
+      },
+      "testability": "Negative file/missing root test; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 6, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    },
+    {
+      "line": 7,
+      "source_text": "        raise ValueError(\"Missing build output\")",
+      "classification": "executable",
+      "behavior": "Raises invalid root error",
+      "quality": "Stops packaging early",
+      "risk": "No secret exposure in generic error",
+      "dead_or_obsolete": "Live guard",
+      "duplication": "Not duplicated",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 7,
+        "exact_original": true
+      },
+      "testability": "Assert missing root fails; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 7, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    },
+    {
+      "line": 8,
+      "source_text": "    files = sorted(p for p in root.rglob(\"*\") if p.is_file() or p.is_symlink())",
+      "classification": "executable",
+      "behavior": "Collects sorted regular and symlink entries recursively",
+      "quality": "Gives stable order while detecting any symlink",
+      "risk": "rglob traversal and changing filesystem require hostile input tests",
+      "dead_or_obsolete": "Current core enumeration",
+      "duplication": "One enumeration only",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 8,
+        "exact_original": true
+      },
+      "testability": "Empty, nested and symlink fixture test; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "Keep; test symlink edge",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 8, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    },
+    {
+      "line": 9,
+      "source_text": "    if not files or not (root / \"index.html\").is_file():",
+      "classification": "executable",
+      "behavior": "Requires at least one file and index.html",
+      "quality": "Prevents empty or indexless build",
+      "risk": "is_file follows links, but loop subsequently rejects symlinks found",
+      "dead_or_obsolete": "Live build validity check",
+      "duplication": "Separate from root-directory guard",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 9,
+        "exact_original": true
+      },
+      "testability": "Index absent, index symlink tests; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 9, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    },
+    {
+      "line": 10,
+      "source_text": "        raise ValueError(\"Empty or invalid cloud build\")",
+      "classification": "executable",
+      "behavior": "Raises invalid/empty build",
+      "quality": "Fail-closed on no entry point",
+      "risk": "No provider side effects",
+      "dead_or_obsolete": "Current validation",
+      "duplication": "Distinct error path",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 10,
+        "exact_original": true
+      },
+      "testability": "Negative fixture test; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 10, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    },
+    {
+      "line": 11,
+      "source_text": "    with zipfile.ZipFile(destination, \"w\", compression=zipfile.ZIP_DEFLATED, compresslevel=9) as out:",
+      "classification": "executable",
+      "behavior": "Creates compressed ZIP output context",
+      "quality": "Closes handles even after exceptions",
+      "risk": "Destination may be overwritten if caller misroutes it; owner controller must protect path",
+      "dead_or_obsolete": "Core deterministic packaging",
+      "duplication": "No second ZIP opener",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 11,
+        "exact_original": true
+      },
+      "testability": "Temporary output and cleanup test; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "Keep; downstream validates digest",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 11, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    },
+    {
+      "line": 12,
+      "source_text": "        for p in files:",
+      "classification": "executable",
+      "behavior": "Iterates sorted entries",
+      "quality": "Ensures stable member order",
+      "risk": "TOCTOU possible if source mutates mid-build",
+      "dead_or_obsolete": "Current implementation",
+      "duplication": "Single file loop",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 12,
+        "exact_original": true
+      },
+      "testability": "Multiple file order test; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 12, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    },
+    {
+      "line": 13,
+      "source_text": "            if p.is_symlink() or not p.resolve().is_relative_to(root):",
+      "classification": "executable",
+      "behavior": "Rejects symlinks and resolved paths outside root",
+      "quality": "Prevents straightforward ZIP symlink traversal",
+      "risk": "Filesystem mutations between check and read not ruled out",
+      "dead_or_obsolete": "Active security guard",
+      "duplication": "No duplicate check of this kind",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 13,
+        "exact_original": true
+      },
+      "testability": "Nested external symlink and race-oriented tests; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "Keep; confirm controlled build",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 13, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    },
+    {
+      "line": 14,
+      "source_text": "                raise ValueError(\"Unsafe symlink in build\")",
+      "classification": "executable",
+      "behavior": "Raises unsafe symlink error",
+      "quality": "Halts unsafe archive",
+      "risk": "May leave partially produced destination; caller must discard failed artifact",
+      "dead_or_obsolete": "Current fail-closed behavior",
+      "duplication": "Paired with path guard only",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 14,
+        "exact_original": true
+      },
+      "testability": "Assert failure aborts artifact certification; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "Consider atomic temp-file packaging if reproduced",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 14, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    },
+    {
+      "line": 15,
+      "source_text": "            name=p.relative_to(root).as_posix()",
+      "classification": "executable",
+      "behavior": "Maps member name relative to canonical root",
+      "quality": "Prevents host absolute paths in entry names",
+      "risk": "Relies on earlier containment check",
+      "dead_or_obsolete": "Required ZIP naming",
+      "duplication": "No repeated mapping",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 15,
+        "exact_original": true
+      },
+      "testability": "Nested filenames and Unicode tests; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 15, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    },
+    {
+      "line": 16,
+      "source_text": "            if name.startswith(\"/\") or \"..\" in pathlib.PurePosixPath(name).parts:",
+      "classification": "executable",
+      "behavior": "Checks absolute/traversal ZIP member paths",
+      "quality": "Rejects ZIP-slip names",
+      "risk": "Pathlib-normalized relative path makes some checks defensive",
+      "dead_or_obsolete": "Defense-in-depth guard",
+      "duplication": "Overlaps containment by intent but not equivalent",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 16,
+        "exact_original": true
+      },
+      "testability": "Malicious member naming test; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "Keep defense",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 16, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    },
+    {
+      "line": 17,
+      "source_text": "                raise ValueError(\"Unsafe artifact path\")",
+      "classification": "executable",
+      "behavior": "Raises unsafe path error",
+      "quality": "Prevents emission of hostile name",
+      "risk": "Error does not leak secrets",
+      "dead_or_obsolete": "Current guard",
+      "duplication": "Distinct failure reason",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 17,
+        "exact_original": true
+      },
+      "testability": "Assert traversal negative; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 17, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    },
+    {
+      "line": 18,
+      "source_text": "            info=zipfile.ZipInfo(name,date_time=(2020,1,1,0,0,0))",
+      "classification": "executable",
+      "behavior": "Sets constant 2020 ZIP member timestamp",
+      "quality": "Removes build-time timestamp nondeterminism",
+      "risk": "Cross-Python zlib portability still needs digest verification",
+      "dead_or_obsolete": "Deterministic metadata",
+      "duplication": "Not repeated per member elsewhere",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 18,
+        "exact_original": true
+      },
+      "testability": "Two independent archive SHA256 comparison; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 18, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    },
+    {
+      "line": 19,
+      "source_text": "            info.external_attr=0o644<<16",
+      "classification": "executable",
+      "behavior": "Sets regular file 0644 ZIP permissions",
+      "quality": "Avoids leaking host executable mode",
+      "risk": "May intentionally discard executable bit in assets",
+      "dead_or_obsolete": "Current deterministic normalization",
+      "duplication": "No other permission assignment",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 19,
+        "exact_original": true
+      },
+      "testability": "Inspect extracted mode expectations; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "Keep if app bundles contain no exec assets",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 19, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    },
+    {
+      "line": 20,
+      "source_text": "            info.compress_type=zipfile.ZIP_DEFLATED",
+      "classification": "executable",
+      "behavior": "Selects DEFLATE member compression",
+      "quality": "Uses common ZIP compression",
+      "risk": "Compression defaults alone do not guarantee cross-version byte equality",
+      "dead_or_obsolete": "Current archive encoding",
+      "duplication": "Mirrors archive configuration by necessity",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 20,
+        "exact_original": true
+      },
+      "testability": "ZIP method inspection; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 20, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    },
+    {
+      "line": 21,
+      "source_text": "            out.writestr(info,p.read_bytes(),compress_type=zipfile.ZIP_DEFLATED,compresslevel=9)",
+      "classification": "executable",
+      "behavior": "Writes original file bytes with level-nine DEFLATE",
+      "quality": "Preserves content for immutable artifact",
+      "risk": "read_bytes loads whole file; peak memory scales with largest dist file",
+      "dead_or_obsolete": "Current compression write",
+      "duplication": "No dedup within file",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 21,
+        "exact_original": true
+      },
+      "testability": "Large artifact memory benchmark and content roundtrip; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "No optimization absent measured issue",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 21, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    },
+    {
+      "line": 22,
+      "source_text": "if __name__==\"__main__\":",
+      "classification": "executable",
+      "behavior": "Guards CLI entrypoint",
+      "quality": "Importing module does not package anything",
+      "risk": "CLI vs module behavior differs by invocation",
+      "dead_or_obsolete": "Current script interface",
+      "duplication": "Standard pattern",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 22,
+        "exact_original": true
+      },
+      "testability": "Import without side effects; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 22, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    },
+    {
+      "line": 23,
+      "source_text": "    if len(sys.argv)!=3:raise SystemExit(\"Usage: package-immutable-dist.py DIST ZIP\")",
+      "classification": "executable",
+      "behavior": "Enforces exactly two CLI arguments",
+      "quality": "Rejects ambiguous invocation",
+      "risk": "Single-line syntax less readable but correct",
+      "dead_or_obsolete": "Active input guard",
+      "duplication": "Not duplicated",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 23,
+        "exact_original": true
+      },
+      "testability": "Wrong-count exit test; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "Formatting improvement optional not justified",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 23, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    },
+    {
+      "line": 24,
+      "source_text": "    package(sys.argv[1],sys.argv[2])",
+      "classification": "executable",
+      "behavior": "Invokes packaging with DIST and ZIP argv",
+      "quality": "Connects CLI to checked function",
+      "risk": "No explicit exception-to-exit mapping beyond Python default; safe failure",
+      "dead_or_obsolete": "Current entry point",
+      "duplication": "No alternate CLI call",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "GitHub contents 404 for exact immutable commit"
+      },
+      "live_source": {
+        "path": "scripts/release/package-immutable-dist.py",
+        "commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+        "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+        "line": 24,
+        "exact_original": true
+      },
+      "testability": "Run temp-root positive/negative CLI; NOT_RUN_IN_THIS_SOURCE_REVIEW",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Development packaging is not a one-use production publication grant; preserve exact artifact provenance, credentials, source oracle and Locked release/backup boundaries.",
+      "review_method": "Direct AI reading of original numbered physical source line 24, immutable Git blob 39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e. Not human review."
+    }
+  ],
+  "findings": [
+    {
+      "classification": "TRIAGED_NOT_REPRODUCED",
+      "source_lines": [
+        8,
+        13,
+        21
+      ],
+      "description": "Potential source-filesystem race and peak read_bytes memory; no evidence of uncontrolled build input or measured app impact; retain guard, verify in controlled fixtures before altering."
+    }
+  ],
+  "review_status": "SOURCE_DIRECT_REVIEWED_NO_NEW_TESTS",
+  "runtime_app_acceptance": "NOT_RUN",
+  "production_changes": false
+}

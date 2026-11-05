@@ -3,7 +3,7 @@
   "issue": 267,
   "review_standard": "Independent post-pin new source line semantic review; separate from original frozen/pinned V2 denominator",
   "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
-  "observed_development_commit": "f44476a0430cc2139292e74477c07fb42bccc9fe",
+  "observed_development_commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
   "receipt_references": [
     {
       "batch_id": "D2-001",
@@ -148,10 +148,36 @@
         11
       ],
       "line_count": 11
+    },
+    {
+      "batch_id": "D2-013",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-013.json",
+      "path": "scripts/release/package-immutable-dist.py",
+      "blob_sha": "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+      "range": [
+        1,
+        24
+      ],
+      "line_count": 24,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2"
+    },
+    {
+      "batch_id": "D2-014",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-014.json",
+      "path": "scripts/release/package-immutable-function.py",
+      "blob_sha": "33c82c72907d732c11e08017efc01dd562315799",
+      "range": [
+        1,
+        18
+      ],
+      "line_count": 18,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2"
     }
   ],
-  "unique_source_lines_direct_reviewed": 351,
-  "fully_reviewed_new_source_files": 12,
+  "unique_source_lines_direct_reviewed": 393,
+  "fully_reviewed_new_source_files": 14,
   "nonoverlap": true,
   "changed_existing_pinned_paths": "PENDING",
   "new_sql_migrations": "PENDING",
@@ -173,5 +199,8 @@
       "corrected_valid_total": 203,
       "subtract_phantom_records": 4
     }
-  ]
+  ],
+  "last_review_batch": "D2-014",
+  "last_review_source_commit": "d36e3ca7f353a5f2a77cc8856ce6c40ab2ef9ca2",
+  "last_review_note": "D2-013/014 source-only; 24+18 physical lines, no synthetic terminal EOF credit. Concurrent S2-143 PR remains disjoint and unmodified; original strict S2 totals unchanged."
 }
