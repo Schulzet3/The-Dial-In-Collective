@@ -26,12 +26,13 @@ jobs:
           node-version: '22'
       - name: Rehearse backup fallback and owner scope rejection
         run: |
-          node --test tests/release-backup-decision.test.mjs tests/request-encrypted-backup.test.mjs tests/netlify-immutable-publish.test.mjs tests/netlify-digest-deploy.test.mjs tests/verified-dist-files.test.mjs tests/prepare-release-evidence.test.mjs tests/verify-release-artifact-receipt.test.mjs tests/rehearse-no-publish.test.mjs tests/netlify-provider-readback.test.mjs tests/ci-certificate.test.mjs
+          node --test tests/release-backup-decision.test.mjs tests/request-encrypted-backup.test.mjs tests/netlify-immutable-publish.test.mjs tests/netlify-digest-deploy.test.mjs tests/verified-dist-files.test.mjs tests/discover-certified-artifacts.test.mjs tests/download-certified-artifacts.test.mjs tests/prepare-release-evidence.test.mjs tests/verify-release-artifact-receipt.test.mjs tests/rehearse-no-publish.test.mjs tests/netlify-provider-readback.test.mjs tests/ci-certificate.test.mjs
       - name: Verify deterministic immutable artifact and reject unsafe files
         run: |
           python3 tests/immutable-dist.test.py
           python3 tests/immutable-function.test.py
           python3 tests/immutable-dist-manifest.test.py
+          python3 tests/unpack-certified-artifact.test.py
       - name: Assert current queue cannot accidentally publish
         run: |
           set +e

@@ -4,7 +4,7 @@
 
 New to the app? Follow these **six simple steps** to set up your equipment, save your first espresso shot, and see what to try next.
 
-> **Draft for review:** This guide is not published in the app yet. A companion video is planned.
+> **DEPLOYED — owner confirmed live:** The in-app Getting Started guide and captioned first-shot video were published in Release 13 (October 30, 2026). The owner confirmed both display and the video plays in the live app on November 3, 2026. This Markdown file retains its historical `_DRAFT` filename; the in-app guide is implemented in `site/cloud/help.js`.
 
 ## Start Here: Your First Shot
 
@@ -141,6 +141,6 @@ You can operate the taste rating controls without relying on color alone. Notes 
 
 ---
 
-*Guide status: DRAFT · Written guide + companion video selected; neither is published. Verified against actual published app source `816949840f22b2a181670de20410786d0a8de79b` / Netlify deploy `6ae38ba0a56bed8fa17d20ac`, October 29, 2026. Authenticated production walkthrough, genuine phone and named screen-reader acceptance remain unverified.*
+*Delivery: **DEPLOYED and owner live-app accepted**. Published Release 13 (October 30, 2026); the older October 29 source and draft markers were pre-release history. Physical-device, named screen-reader, complete first-shot and direct instrumented HTTP Range checks are not independently certified.*
 
-*Maintained in [Issue #37](https://github.com/Schulzet3/The-Dial-In-Collective/issues/37). [Validation register](ISSUE37_VALIDATION_REGISTER.md) · [Video plan](ISSUE37_VIDEO_STORYBOARD.md). Publication requires separate owner release authorization.*
+*Accepted and closed under [Issue #37](https://github.com/Schulzet3/The-Dial-In-Collective/issues/37). [Validation register](ISSUE37_VALIDATION_REGISTER.md) · [Historical video storyboard](ISSUE37_VIDEO_STORYBOARD.md). Any future app-content revision follows the separately authorized release process; this Markdown update does not itself publish app assets.*

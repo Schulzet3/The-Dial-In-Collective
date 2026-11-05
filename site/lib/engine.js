@@ -114,7 +114,10 @@ export function translateGrind(sh,v) {
  if(!old||!finite(sh.grindSetting)||!finite(old.grinderMin)||
     !finite(old.grinderMax)||old.grinderMax<=old.grinderMin||
     !finite(v.grinderMin)||!finite(v.grinderMax)||v.grinderMax<=v.grinderMin)return null;
- const pos=clamp((sh.grindSetting-old.grinderMin)/(old.grinderMax-old.grinderMin),0,1);
+ // Do not silently clip an out-of-range historical measurement to a valid
+ // endpoint. Its position on that older espresso scale is not evidence.
+ if(sh.grindSetting<old.grinderMin||sh.grindSetting>old.grinderMax)return null;
+ const pos=(sh.grindSetting-old.grinderMin)/(old.grinderMax-old.grinderMin);
  return round(v.grinderMin+pos*(v.grinderMax-v.grinderMin));
 }
 export function grindGuidance(s,c,style,basket,feed,familyId=null) {
@@ -133,7 +136,9 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
  const sameOld=qual.filter(sh=>sh.coffeeId===c.id&&sh.calibrationId!==v.calibrationId&&sh.setupVersionId===v.id&&(!familyId||sh.familyId===familyId));
  // Old calibration rows may legitimately seed an estimated translation, but
  // legacy rows without an equipment snapshot must not yield null guidance.
- const translated=sameOld.filter(sh=>sh.snapshot&&sh.timestamp)
+ // Legacy success records without a usable chronological timestamp remain
+ // preserved, but cannot establish the latest previous-calibration reference.
+ const translated=sameOld.filter(sh=>sh.snapshot&&typeof sh.timestamp==='string'&&sh.timestamp.trim())
   .sort((a,b)=>b.timestamp.localeCompare(a.timestamp))
   .map(sh=>translateGrind(sh,v)).find(finite);
  if(finite(translated))return {value:translated,source:'Estimated from previous calibration',proven:false};
@@ -188,7 +193,7 @@ export function learnSensitivity(shots) {
   // with ordered timestamps can calibrate a grind-to-time response.
   if(!finite(s.grindSetting)||!finite(s.timeS)||s.timeS<=0||
      !finite(s.doseG)||s.doseG<=0||!finite(s.yieldG)||s.yieldG<=0||
-     s.hidden||s.feedMode==null||typeof s.timestamp!=='string'||!s.timestamp)continue;const key=[s.coffeeId,s.style,s.setupVersionId,s.calibrationId,s.basketId,s.feedMode].join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(s);}
+     s.hidden||s.feedMode==null||typeof s.timestamp!=='string'||!s.timestamp.trim())continue;const key=[s.coffeeId,s.style,s.setupVersionId,s.calibrationId,s.basketId,s.feedMode].join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(s);}
  const slopes=[];
  for(const group of groups.values()){
   group.sort((a,b)=>a.timestamp.localeCompare(b.timestamp));
@@ -350,7 +355,7 @@ export function recommendation(s,coffeeId,options={}) {
  rec.style=style;rec.basketId=basket.id;rec.feedMode=feed;
  rec.yield={low:round(rec.ratio.low*rec.doseG),high:round(rec.ratio.high*rec.doseG),center:round(rec.ratio.center*rec.doseG)};
  // Successful shot families are chosen independently of any retired Experiment workflow.
- const last=s.shots.filter(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.basketId===basket.id&&sh.feedMode===feed&&sh.calibrationId===v.calibrationId).sort((a,b)=>b.timestamp.localeCompare(a.timestamp))[0];
+ const last=s.shots.filter(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.basketId===basket.id&&sh.feedMode===feed&&sh.calibrationId===v.calibrationId&&typeof sh.timestamp==='string'&&sh.timestamp.trim()).sort((a,b)=>b.timestamp.localeCompare(a.timestamp))[0];
  if(!options.ignoreAdvice&&last&&!hasLocalSuccess(s,coffeeId,style)){
   // Keep the recipe card consistent with fresh taste feedback, even before a
   // derived suggestion is cached (e.g. immediately after an offline shot).
@@ -360,7 +365,14 @@ export function recommendation(s,coffeeId,options={}) {
   const oldNoOp=cached?.next&&cached.next.grindSetting===last.grindSetting&&
    cached.next.yieldCenter===last.yieldG&&
    (cached.next.tempC==null||cached.next.tempC===last.tempC);
-  const a=oldNoOp?nextAdvice(s,last,rec):cached||nextAdvice(s,last,rec);
+  // Re-evaluate legacy cached +1/+2 g proposals for the displayed next recipe
+  // without rewriting the historical shot or its original suggestion.
+  const oldSmallYield=cached?.next&&finite(cached.next.yieldCenter)&&
+   finite(last.yieldG)&&cached.next.grindSetting===last.grindSetting&&
+   (cached.next.tempC==null||cached.next.tempC===last.tempC)&&
+   Math.abs(cached.next.yieldCenter-last.yieldG)>1e-8&&
+   Math.abs(cached.next.yieldCenter-last.yieldG)<meaningfulYieldStep(last);
+  const a=(oldNoOp||oldSmallYield)?nextAdvice(s,last,rec):cached||nextAdvice(s,last,rec);
   if(a.next||a.kind==='diagnostic'){
    // An applied next-shot adjustment keeps every other measured control
    // steady. Do not silently reset dose/temperature to starting defaults.
@@ -395,11 +407,91 @@ export function recommendation(s,coffeeId,options={}) {
 }
 export function prefill(s,coffeeId,options={}) {
  const v=activeVersion(s),p=coffeeState(s,coffeeId),basket=v.baskets.find(x=>x.id===options.basketId)||selectedBasket(s,coffeeId),style=options.style||p.style,feed=options.feedMode||feedMode(v);
- const shots=s.shots.filter(x=>!x.hidden&&x.coffeeId===coffeeId&&x.setupVersionId===v.id).sort((a,b)=>b.timestamp.localeCompare(a.timestamp));
+ const shots=s.shots.filter(x=>!x.hidden&&x.coffeeId===coffeeId&&x.setupVersionId===v.id&&typeof x.timestamp==='string'&&x.timestamp.trim()).sort((a,b)=>b.timestamp.localeCompare(a.timestamp));
  const doses=shots.filter(x=>x.basketId===basket.id),grinds=shots.filter(x=>x.basketId===basket.id&&x.style===style&&x.feedMode===feed&&x.calibrationId===v.calibrationId&&finite(x.grindSetting));
  const temps=shots.filter(x=>finite(x.tempC)),same=temps.find(x=>x.style===style),temp=same||temps[0];
  return {doseG:doses[0]?.doseG??basket.doseG,yieldG:'',timeS:'',grindSetting:grinds[0]?.grindSetting??'',tempC:v.advanced.temperature?(temp?.tempC??null):null,tempSource:temp&&temp.style!==style?`Last used on ${temp.style}`:'',style,basketId:basket.id,feedMode:feed,tasteScales:{extraction:null,body:null,clarity:null,sweetness:null,astringency:null},notes:''};
 }
+
+ // Owner-approved measured-yield exploration (2026-11-04, #455).
+ // Five grams is a product experiment step for a typical 36 g double, NOT a
+ // scientific perceptibility threshold. Proportionate short yields by ~5/36.
+function meaningfulYieldStep(shot){
+ const yieldG=shot.yieldG;
+ return yieldG>=36?5:Math.max(1,Math.min(5,Math.round(yieldG*5/36)));
+}
+function yieldTarget(shot,direction,anchor=shot.yieldG){
+ const target=round(anchor+direction*meaningfulYieldStep(shot));
+ return target>=5&&target<=200&&
+  Math.abs(target-shot.yieldG)+1e-8>=meaningfulYieldStep(shot)?target:null;
+}
+// Directional hints must come from earlier measured *same-coffee* shots with
+// unchanged setup, calibration, style, basket, feed, dose, grind, temperature
+// and all four other green sensory ratings. This is not causal proof.
+function comparableSweetnessYields(s,shot){
+ const keys=['coffeeId','setupVersionId','calibrationId','style','basketId','feedMode'];
+ // ISO timestamps with explicit offsets must be ordered by actual instants,
+ // not by lexical text; an invalid legacy date cannot establish chronology.
+ const shotAt=typeof shot.timestamp==='string'?Date.parse(shot.timestamp):NaN;
+ if(keys.some(key=>shot[key]==null)||!Number.isFinite(shotAt))return [];
+ return s.shots.filter(prior=>{
+  if(prior.id===shot.id||prior.hidden||keys.some(key=>prior[key]!==shot[key]))return false;
+  const priorAt=typeof prior.timestamp==='string'?Date.parse(prior.timestamp):NaN;
+  if(!Number.isFinite(priorAt)||priorAt>=shotAt)return false;
+  if(!finite(prior.doseG)||!finite(prior.grindSetting)||!finite(prior.yieldG)||
+   Math.abs(prior.doseG-shot.doseG)>.1||
+   Math.abs(prior.grindSetting-shot.grindSetting)>.05||
+   Math.abs(prior.yieldG-shot.yieldG)<meaningfulYieldStep(shot))return false;
+  const bothUnknown=prior.tempC==null&&shot.tempC==null;
+  if(!bothUnknown&&!(finite(prior.tempC)&&finite(shot.tempC)&&
+   Math.abs(prior.tempC-shot.tempC)<=.1))return false;
+  const t=prior.tasteScales;
+  return tastesComplete(t)&&t.extraction===3&&t.body===3&&
+   t.clarity===5&&t.astringency===1;
+ });
+}
+function sweetnessOnlyYieldAdvice(s,shot){
+ const comparisons=comparableSweetnessYields(s,shot);
+ const signals=comparisons.map(prior=>{
+  const change=prior.tasteScales.sweetness-shot.tasteScales.sweetness;
+  return change===0?0:Math.sign(change)*Math.sign(prior.yieldG-shot.yieldG);
+ }).filter(Boolean);
+ if(signals.some(x=>x!==signals[0]))return {
+  title:'Compare your sweetness results',
+  text:'Comparable shots point in conflicting yield directions. Review your taste notes before choosing another single adjustment.',
+  next:null
+ };
+ let direction=signals.length?signals[0]:1,anchor=shot.yieldG,basis=signals.length?'observed':'exploratory';
+ if(!signals.length){
+  const flat=comparisons.filter(x=>x.tasteScales.sweetness===shot.tasteScales.sweetness);
+  const sides=new Set(flat.map(x=>Math.sign(x.yieldG-shot.yieldG)));
+  if(sides.size>1)return {
+   title:'Review your yield experiments',
+   text:'Comparable longer and shorter yields both gave the same sweetness rating. No supported next yield direction; compare the other taste notes before changing a control.',
+   next:null
+  };
+  if(flat.length){
+   direction=[...sides][0];
+   anchor=direction<0?Math.min(...flat.map(x=>x.yieldG)):Math.max(...flat.map(x=>x.yieldG));
+   basis='plateau';
+  }
+ }
+ const center=yieldTarget(shot,direction,anchor);
+ if(center==null)return {title:'Review before adjusting',
+  text:'The next meaningful yield experiment would exceed the allowed 5–200 g range. Keep the original shot and compare its taste notes.',
+  next:null};
+ const longer=center>shot.yieldG;
+ const detail=basis==='observed'?
+  'Earlier comparable same-coffee ratings suggest this yield direction, but do not prove causation. Compare all five ratings.':
+  basis==='plateau'?
+  'A comparable earlier yield had the same sweetness rating. This exploratory trial checks beyond that earlier setting; compare all five ratings.':
+  'Exploratory starting step, not a proven sweetness fix. Compare all five ratings after this shot.';
+ return {title:longer?'Explore a longer yield':'Explore a shorter yield',
+  text:'Try '+center.toFixed(1)+' g out with dose, grind and temperature unchanged. Then compare all five taste ratings.',
+  evidenceNote:detail,
+  next:{grindSetting:shot.grindSetting,yieldCenter:center}};
+}
+
 function nextAdviceRaw(s,shot,rec) {
  const v=activeVersion(s),t=shot.tasteScales;
  if(!tastesComplete(t))return {title:'Finish your taste ratings',text:'Rate all five sensory qualities before using taste feedback to adjust the next shot.',next:null};
@@ -420,12 +512,30 @@ function nextAdviceRaw(s,shot,rec) {
   const val=clamp(round(shot.grindSetting+(direction==='finer'?-move:move)),v.grinderMin,v.grinderMax);
   if(val!==shot.grindSetting)return {title:`Try a little ${direction}`,text:`Try grind ${val.toFixed(1)}. Keep dose and yield similar, then taste again.${sens?' Sized from your own comparable adjustments.':''}`,next:{grindSetting:val,yieldCenter:shot.yieldG}};
  }
- if(t.extraction!==3){const delta=t.extraction<3?2:-2,center=clamp(shot.yieldG+delta,5,200);if(center===shot.yieldG)return {title:'Check your extraction',text:'Yield is already at its allowed limit. Keep your recorded recipe unchanged and review the result before adjusting another control.',next:null};return {title:t.extraction<3?'Try a slightly longer yield':'Try a slightly shorter yield',text:`Aim around ${(center-1).toFixed(1)}-${(center+1).toFixed(1)} g out, with the same dose and grind. Compare the balance.`,next:{grindSetting:shot.grindSetting,yieldCenter:center}};}
- if(t.body!==3){const center=clamp(shot.yieldG+(t.body<3?-2:2),5,200);if(center===shot.yieldG)return {title:'Check your texture',text:'Yield is already at its allowed limit. Keep the recipe unchanged and review the result before another adjustment.',next:null};return {title:t.body<3?'Try a little more concentration':'Try opening up the texture',text:`Keep dose and grind steady; try ${(center-1).toFixed(1)}-${(center+1).toFixed(1)} g out. Let taste decide.`,next:{grindSetting:shot.grindSetting,yieldCenter:center}};}
+ if(t.extraction!==3){
+  const center=yieldTarget(shot,t.extraction<3?1:-1);
+  if(center==null)return {title:'Check your extraction',text:'A meaningful yield change would exceed the allowed 5–200 g limit. Keep this shot as recorded.',next:null};
+  return {title:t.extraction<3?'Try a longer yield':'Try a shorter yield',
+   text:'Aim around '+center.toFixed(1)+' g out with dose and grind unchanged. Compare the balance.',
+   next:{grindSetting:shot.grindSetting,yieldCenter:center}};
+ }
+ if(t.body!==3){
+  const center=yieldTarget(shot,t.body<3?-1:1);
+  if(center==null)return {title:'Check your texture',text:'A meaningful yield change would exceed the allowed 5–200 g limit. Keep this shot as recorded.',next:null};
+  return {title:t.body<3?'Try more concentration':'Try opening up the texture',
+   text:'Keep dose and grind steady; aim around '+center.toFixed(1)+' g out. Let taste decide.',
+   next:{grindSetting:shot.grindSetting,yieldCenter:center}};
+ }
  if(t.astringency>1&&v.advanced.temperature&&finite(shot.tempC)&&shot.tempC>70){const temp=clamp(shot.tempC-1,70,100);return {title:'Try a small temperature change',text:'Try about 1 degree C (2 degrees F) cooler while keeping the other variables steady.',next:{grindSetting:shot.grindSetting,yieldCenter:shot.yieldG,tempC:temp}};}
- const center=clamp(shot.yieldG+1,5,200);
- if(center===shot.yieldG)return {title:'Review before adjusting',text:'Yield is at its allowed limit. Keep this shot as recorded; no additional numeric change is supported by these ratings.',next:null};
- return {title:'A small refinement',text:`Try ${(center-1).toFixed(1)}-${(center+1).toFixed(1)} g out with the same grind. Compare sweetness and clarity before making a larger change.`,next:{grindSetting:shot.grindSetting,yieldCenter:center}};
+ if(t.extraction===3&&t.body===3&&t.clarity===5&&t.astringency===1&&t.sweetness<5)
+  return sweetnessOnlyYieldAdvice(s,shot);
+ const center=yieldTarget(shot,1);
+ if(center==null)return {title:'Review before adjusting',
+  text:'A meaningful yield experiment would exceed the allowed 5–200 g limit. Keep the original recipe unchanged.',next:null};
+ return {title:'Explore a small refinement',
+  text:'Try '+center.toFixed(1)+' g out with the same grind; compare all five ratings.',
+  evidenceNote:'Exploratory yield step, not a proven fix for these ratings. Compare all five ratings.',
+  next:{grindSetting:shot.grindSetting,yieldCenter:center}};
 }
 // Applies to every next-shot advice path, including non-grind taste advice
 // which retains the last shot's setting even when history used an old range.

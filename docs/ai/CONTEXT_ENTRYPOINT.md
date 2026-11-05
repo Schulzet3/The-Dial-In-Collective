@@ -17,6 +17,8 @@
 | Auth / privacy / migrations | [#96](https://github.com/Schulzet3/The-Dial-In-Collective/issues/96), RLS/migrations, provider evidence, permission tests; no unauthorised production writes |
 | Backups / recovery | `main` operations `AGENTS.md`, `.github/workflows/nightly-backup.yml`, Issue #28, verified encrypted artifacts and correct private Drive parent |
 | QA / audit / source | [#267](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267), [V2 checkpoint](../audits/issue267-review-restart-v2-20261101.json), separate frozen/current ledgers; never conflate review with inventory |
+| GitHub-wide records / word audit | [#504](https://github.com/Schulzet3/The-Dial-In-Collective/issues/504), [journal](../workstreams/issue-504.md), [direct-review ledger](../audits/issue504-coverage-ledger.json); #267 exclusively owns source-code/frozen-history literal review, no duplicate credit |
+| Provider-wide audits | [#508 Netlify](https://github.com/Schulzet3/The-Dial-In-Collective/issues/508) and [#509 Supabase](https://github.com/Schulzet3/The-Dial-In-Collective/issues/509): independently source-bound provider reviews, no production changes without publication authority |
 | Releases / Netlify | [Release Queue](../RELEASE_QUEUE.json), [Current Status](../CURRENT_STATUS.md), actual provider readbacks, release runbooks, verified CI and one-use authorization |
 | Handoffs / historical / new attachments | [Source Register](SOURCE_REGISTER.json), historical handoffs and exact SHA-256; never elevate historical snapshots over scoped later decisions |
 

@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "R2-027",
+  "track": "V2_FROZEN_HISTORICAL_SEMANTIC_REREVIEW",
+  "review_date_utc": "2026-11-02",
+  "reviewer": "ChatGPT AI assistant (not human)",
+  "method": "Direct numbered semantic review of frozen #59 lines161–240; no V1/machine credit",
+  "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+  "source_tree_sha": "c54ade64eca30946df8858297578a172f5cf6fa8",
+  "source_inventory": "docs/audits/issue267-frozen-source-inventory.json",
+  "reviewed_files": [
+    {
+      "path": "docs/DECISION_LEDGER.json",
+      "git_blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "original_inventory_index_1_based": 59,
+      "first_line": 161,
+      "last_line": 240,
+      "line_count": 80,
+      "semantic_interpretation_segments": [
+        {
+          "first_line": 161,
+          "last_line": 163,
+          "interpretation": "Community accepts only Dialed-In/all-green shots; personal shots are not automatically public."
+        },
+        {
+          "first_line": 164,
+          "last_line": 169,
+          "interpretation": "History persists until user hides/deletes; never discard unsuccessful shots."
+        },
+        {
+          "first_line": 170,
+          "last_line": 175,
+          "interpretation": "Dialed-In achievement persists after later bad or experimental shots."
+        },
+        {
+          "first_line": 176,
+          "last_line": 181,
+          "interpretation": "Pure-green sensory markers govern Dialed-In, not style time/ratio ranges."
+        },
+        {
+          "first_line": 182,
+          "last_line": 187,
+          "interpretation": "All five sensory scales require explicit input; no preselection."
+        },
+        {
+          "first_line": 188,
+          "last_line": 193,
+          "interpretation": "Historical target ramp extraction/body=3, clarity/sweetness=5, astringency=1; later approved ramp controls current code."
+        },
+        {
+          "first_line": 194,
+          "last_line": 199,
+          "interpretation": "Anonymous individual Community shots and aggregates; no visible persistent contributor ID."
+        },
+        {
+          "first_line": 200,
+          "last_line": 205,
+          "interpretation": "Legitimate anonymized Community contributions persist after personal/account deletion, with privacy review owned by #96."
+        },
+        {
+          "first_line": 206,
+          "last_line": 211,
+          "interpretation": "Qualifying-shot and unique-contributor counts must be distinguishable."
+        },
+        {
+          "first_line": 212,
+          "last_line": 217,
+          "interpretation": "Diminishing contributor weighting caps repeat influence near two equivalents; configurable."
+        },
+        {
+          "first_line": 218,
+          "last_line": 223,
+          "interpretation": "Robust aggregation required rather than naive mean/sum-count."
+        },
+        {
+          "first_line": 224,
+          "last_line": 229,
+          "interpretation": "Early/Moderate/Strong confidence uses progressive disclosure and must not overstate sparse data."
+        },
+        {
+          "first_line": 230,
+          "last_line": 235,
+          "interpretation": "Outliers withheld for confirmation, but plausible confirmed unusual values remain admissible."
+        },
+        {
+          "first_line": 236,
+          "last_line": 240,
+          "interpretation": "Admin queue high-signal; automate routine validation. Closing delimiter at line241 not reviewed."
+        }
+      ],
+      "current_counterpart": {
+        "paths": [
+          "docs/DECISION_LEDGER.json",
+          "docs/MASTER_SPECIFICATION.md",
+          "site/lib/engine.js"
+        ],
+        "ref": "development/backend-foundation",
+        "observed_development_sha": "101df25f7c43bff6fb6394e906ce4a54c3e51bb6",
+        "disposition": "Current code not exercised; preserve Locked shot history, ratings and anonymous robust Community aggregation."
+      },
+      "quality_risk_locked_fit": "Preserve green-only eligibility, persistence, explicit ratings, anonymous contributions, robust statistics and confirmation of unusual shots.",
+      "verification_and_testability": "Source lines directly interpreted; no authenticated/browser/database/Community test run.",
+      "disposition": "HISTORICAL_LOCKED_BASELINE_NO_PROVEN_CURRENT_DEFECT",
+      "source_evidence": "https://github.com/Schulzet3/The-Dial-In-Collective/blob/abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9/docs/DECISION_LEDGER.json#L161-L240"
+    }
+  ],
+  "batch_lines": 80,
+  "previous_v2_lines": 5051,
+  "total_v2_lines": 5131,
+  "remaining_frozen_lines": 574830,
+  "next_file_index_1_based": 59,
+  "next_file": "docs/DECISION_LEDGER.json",
+  "next_line_1_based": 241,
+  "findings": [
+    "Locked Community aggregation and contributor privacy must survive cleanup; no verified current defect.",
+    "Account deletion Community durability requires separate #96 authenticated privacy verification."
+  ],
+  "code_changes": 0,
+  "production_changes": 0,
+  "tests_executed": []
+}

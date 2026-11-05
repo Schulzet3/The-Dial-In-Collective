@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - development/backend-foundation
+      - 'release-candidates/**'
   pull_request:
     branches:
       - development/backend-foundation
@@ -27,6 +28,8 @@ jobs:
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: '22'
+      - name: Reject accidentally tracked private keys, credential files and high-confidence tokens
+        run: node scripts/audit/security-inventory.mjs
       - name: Fail on missing owner decisions or approved UI/source tests
         run: node scripts/audit/approval-coverage.mjs
       - name: Validate durable queue schema and show next-batch status (never publishes)

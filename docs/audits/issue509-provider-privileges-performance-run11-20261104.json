@@ -1,0 +1,298 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "audit_date_utc": "2026-11-04",
+  "github_development_parent_sha": "59bd241c92a72f5ace21d8ca60ff62e3c9630c3c",
+  "github_main_sha": "d17e900fa78e2f89931480d4f85c217c2d31724c",
+  "github_release_sha": "31c66832a28247e657a2bf89592ebc1e2f48dfc5",
+  "provider": "ACTIVE_HEALTHY PostgreSQL 17.11.0.003 / us-east-2",
+  "prior_progress_reused_not_recredited": {
+    "applied_migration_sql_bodies": "53/53, 445657 SQL characters",
+    "application_sql_functions": "99/99",
+    "application_tables": "46/46",
+    "deployed_edge_variant_files": "9/9",
+    "selected_platform_sql_functions": "42/42"
+  },
+  "read_only_catalog_sources": [
+    "pg_roles: all thirty role attributes (rolname, rolsuper, inherit, create role/db, login, replication, bypassrls)",
+    "pg_auth_members: fourteen directed membership edges for anon, authenticated, authenticator, service_role, postgres, dashboard_user, supabase_read_only_user",
+    "pg_namespace with aclexplode: present grantor/grantee/privelege/USAGE/CREATE edges (full result inspected)",
+    "pg_class with has_table_privilege and relrowsecurity: eleven realtime/storage/vault relation definitions",
+    "pg_policies: zero auth/realtime/storage/graphql_public SQL policies",
+    "pg_constraint + pg_index + pg_stat_user_tables: twelve missing leading FK index definitions",
+    "pg_stat_user_indexes + pg_get_indexdef: nine zero-scan index DDLs",
+    "pg_extension: all seven installed extension names/schema/version",
+    "pg_publication_tables, pg_replication_slots, pg_subscription, realtime.subscription: publication / replication topology and bounded subscription count",
+    "storage.buckets metadata (zero buckets, no objects read)",
+    "extensions.pg_stat_statements: 25 top cumulative execution aggregates, plus twenty safely symbol-classified normalized statement hashes, no raw query text exported",
+    "pg_stat_database: stats_reset 2026-10-02 18:01:15+00",
+    "pg_stat_activity: grouped wait type/count, no session queries or identities",
+    "Supabase read-only security/performance advisors and 24h safe ClickHouse source/level aggregates"
+  ],
+  "roles_directly_examined": 30,
+  "membership_edges_examined": 14,
+  "platform_relation_privileges": [
+    {
+      "schema": "realtime",
+      "table": "messages",
+      "rls": true,
+      "anon_select": true,
+      "auth_select": true,
+      "anon_insert": true,
+      "auth_insert": true
+    },
+    {
+      "schema": "realtime",
+      "table": "schema_migrations",
+      "rls": false,
+      "anon_select": false,
+      "auth_select": false
+    },
+    {
+      "schema": "realtime",
+      "table": "subscription",
+      "rls": false,
+      "anon_select": true,
+      "auth_select": true
+    },
+    {
+      "schema": "storage",
+      "table": "buckets",
+      "rls": true,
+      "anon_select": true,
+      "auth_select": true
+    },
+    {
+      "schema": "storage",
+      "table": "buckets_analytics",
+      "rls": true,
+      "anon_select": true,
+      "auth_select": true
+    },
+    {
+      "schema": "storage",
+      "table": "buckets_vectors",
+      "rls": true,
+      "anon_select": true,
+      "auth_select": true
+    },
+    {
+      "schema": "storage",
+      "table": "migrations",
+      "rls": true,
+      "anon_select": false,
+      "auth_select": false
+    },
+    {
+      "schema": "storage",
+      "table": "objects",
+      "rls": true,
+      "anon_select": true,
+      "auth_select": true
+    },
+    {
+      "schema": "storage",
+      "table": "s3_multipart_uploads",
+      "rls": true,
+      "anon_select": true,
+      "auth_select": true
+    },
+    {
+      "schema": "storage",
+      "table": "s3_multipart_uploads_parts",
+      "rls": true,
+      "anon_select": true,
+      "auth_select": true
+    },
+    {
+      "schema": "storage",
+      "table": "vector_indexes",
+      "rls": true,
+      "anon_select": true,
+      "auth_select": true
+    },
+    {
+      "schema": "vault",
+      "table": "decrypted_secrets",
+      "kind": "view",
+      "anon_select": false,
+      "auth_select": false
+    },
+    {
+      "schema": "vault",
+      "table": "secrets",
+      "rls": false,
+      "anon_select": false,
+      "auth_select": false
+    }
+  ],
+  "privileges_semantic_verdict": "Anon and authenticated are NOLOGIN, BYPASSRLS=false. Authenticator can SET (not inherit) anon/authenticated/service_role per provider architecture; service_role BYPASSRLS=true. No detected unauthorized role grants to ordinary application clients. This is not live signed-in #96 proof.",
+  "storage_state": {
+    "buckets": 0,
+    "sql_policies": 0,
+    "disposition": "RLS enabled, no direct bucket or policy objects to delete; provider-only Storage settings remain inaccessible."
+  },
+  "realtime_state": {
+    "publication": "supabase_realtime",
+    "published_tables": 0,
+    "replication_slots": 0,
+    "subscriptions": 0,
+    "subscription_rows": 0,
+    "subscription_rls": false,
+    "subscription_anon_select": true,
+    "subscription_authenticated_select": true,
+    "verdict": "POTENTIAL EXPOSED-SCHEMA RISK, REMOTE API REACHABILITY UNVERIFIED; no proof of exploitation or direct user-record exposure."
+  },
+  "extensions_installed": [
+    "extensions.pg_stat_statements 1.11",
+    "extensions.pg_trgm 1.6",
+    "extensions.pgcrypto 1.3",
+    "extensions.unaccent 1.1",
+    "extensions.uuid-ossp 1.1",
+    "pg_catalog.plpgsql 1.0",
+    "vault.supabase_vault 0.3.1"
+  ],
+  "indexes_reviewed": [
+    "private.invite_redemptions_invite_idx",
+    "public.preferences_calibration_idx",
+    "public.coffees_group_idx",
+    "public.shot_basket_idx",
+    "public.library_coffee_idx",
+    "public.shot_calibration_idx",
+    "public.shot_bag_idx",
+    "public.workspace_coffee_basket_idx",
+    "public.personal_family_community_idx"
+  ],
+  "fk_gap_reviewed": [
+    "private.admin_access_events_actor_id_fkey",
+    "private.admin_access_events_invite_id_fkey",
+    "private.admin_access_events_member_id_fkey",
+    "private.admin_content_edits_actor_id_fkey",
+    "private.admin_content_edits_subject_owner_id_fkey",
+    "private.beta_invites_issued_by_fkey",
+    "private.dic_coffee_audit_coffee_id_fkey",
+    "private.dic_coffee_audit_submission_id_fkey",
+    "private.dic_coffee_first_entry_first_submission_id_fkey",
+    "private.dic_roaster_aliases_roaster_id_fkey",
+    "private.dic_source_attempts_owner_id_fkey",
+    "private.import_control_owner_only_exception_owner_id_fkey"
+  ],
+  "index_verdict": "All 12 FK warnings occur on private relations with about 0-14 estimated tuples, no measured delete bottleneck. All nine named zero-scan indices preserved; neither low stats nor apparent historical disuse proves deletion safe.",
+  "sql_aggregate_performance": {
+    "stats_since": "2026-10-02T18:01:15Z",
+    "findings": [
+      {
+        "symbol": "dic_read_personal_state",
+        "calls": 4675,
+        "mean_ms": 14.53,
+        "total_ms": 67912,
+        "max_ms": 1566.38,
+        "query_md5": "bf1fa4587fbd86dee33123358e3ea2fb"
+      },
+      {
+        "symbol": "dic_my_community_outliers",
+        "calls": 2507,
+        "mean_ms": 4.44,
+        "total_ms": 11139.8,
+        "query_md5": "d8f65b1e5ac315be13767fad1b682678"
+      },
+      {
+        "symbol": "dic_session_status",
+        "calls": 980,
+        "mean_ms": 9.33,
+        "total_ms": 9138.6,
+        "query_md5": "4e5fed7e5fa71afe0b135083ec21a066"
+      },
+      {
+        "symbol": "dic_apply_client_change",
+        "calls": 59,
+        "mean_ms": 57.74,
+        "total_ms": 3406.4,
+        "query_md5": "4876bc3a53823ca24187e09038d8cb45"
+      },
+      {
+        "symbol": "dic_find_coffee_matches",
+        "calls": 32,
+        "mean_ms": 61.82,
+        "total_ms": 1978.3,
+        "query_md5": "30ec199963961fc854b688dc64f38fc6"
+      },
+      {
+        "symbol": "pg_total_relation_size catalog query",
+        "calls": 27,
+        "mean_ms": 557.62,
+        "total_ms": 15055.8,
+        "query_md5": "66656b6ce7b276f668dc113efb54fb7a"
+      }
+    ],
+    "verdict": "Measured cumulative database time; not verified end-user latency or a reproduced functional defect. High-cost catalog admin/audit queries distinguishable from application RPCs."
+  },
+  "bounded_log_window": {
+    "start": "2026-11-03T17:00:00Z",
+    "end": "2026-11-04T17:00:00Z",
+    "source_counts": {
+      "pgbouncer_logs": 72,
+      "edge_logs": 61,
+      "postgres_logs": 31,
+      "auth_logs": 15,
+      "auth_audit_logs": 10,
+      "supavisor_logs": 8
+    },
+    "no_sensitive_log_message_read": true
+  },
+  "advisors": {
+    "security": {
+      "rls_no_policy_private_tables": 6,
+      "authenticated_security_definer_wrappers": 10,
+      "leaked_password_protection_off": 1
+    },
+    "performance": {
+      "missing_fk_leading_indexes": 12,
+      "zero_scan_indexes": 9
+    },
+    "urls": [
+      "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys",
+      "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index",
+      "https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable",
+      "https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection"
+    ]
+  },
+  "semantic_findings": [
+    {
+      "target": "Six private tables with RLS enabled and no policy",
+      "verdict": "DENY_BY_DEFAULT_NO_CONFIRMED_VULNERABILITY"
+    },
+    {
+      "target": "Ten authenticated public SECURITY DEFINER functions",
+      "verdict": "INTENDED_OR_UNVERIFIED, NEED #96 SIGNED_IN CALL PATH CHECKS"
+    },
+    {
+      "target": "Leaked-password protection off",
+      "verdict": "LOCKED_BETA_OWNER_OPT_OUT; NO PROD CONFIG MUTATION"
+    },
+    {
+      "target": "realtime.subscription non-RLS SELECT grants",
+      "verdict": "ZERO_ROWS; API EXPOSED SCHEMA UNVERIFIED, FOLLOW UP #96"
+    },
+    {
+      "target": "Missing FK leading indexes and zero-scan indexes",
+      "verdict": "NO REMOVAL OR ADDITION WITHOUT EXPLAIN/WORKLOAD EVIDENCE"
+    }
+  ],
+  "inaccessible": [
+    "pgrst.db_schemas GUC null; remote API schema exposure not proven",
+    "provider-only hosted Auth/Storage network/JWT/secret configurations",
+    "compiled extension C/native source",
+    "true signed-in privacy #96 test cases and production writer simulation not authorized"
+  ],
+  "safe_boundaries": {
+    "production_writes": 0,
+    "sensitive_record_reads": 0,
+    "live_function_invocations": 0,
+    "app_source_changes": 0,
+    "new_ready": 0,
+    "deployed": false
+  },
+  "next_exact_cursor": "Direct pg_default_acl per-owner/object privilege text, then enum/composite/range types, sequences, triggers/dependencies and platform settings; investigate remote Realtime exposure with #96 and source-bound query performance reproducibility. Continue hourly; baseline still IN_PROGRESS."
+}

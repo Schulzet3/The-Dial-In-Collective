@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "issue": 504,
+  "audit_batch": "G1-005",
+  "review_pass": "W1_WORD_BY_WORD",
+  "date_utc": "2026-11-04",
+  "method": "Directly fetched and read original exact blob RELEASE_QUEUE.json lines 1-158 including whitespace, JSON syntax, historical CI quotations and all four READY records; per-record semantic review, line-inclusive accounting. Programmatic JSON parse, duplicate-id and state-count checks used only as corroboration, NOT credit for unreviewed lines 159-5081.",
+  "anchors": {
+    "development_recovered": "81f53383e4171937e7a6865c9a5506638987ee69",
+    "main": "d17e900fa78e2f89931480d4f85c217c2d31724c",
+    "release_production": "31c66832a28247e657a2bf89592ebc1e2f48dfc5"
+  },
+  "files": [
+    {
+      "path": "docs/RELEASE_QUEUE.json",
+      "blob_sha": "c510a07dad8bf67cebe73b3da4d8c4d381b9349a",
+      "blob_total_lines": 5081,
+      "first_line": 1,
+      "last_line": 158,
+      "lines": 158,
+      "whitespace_words": 1242,
+      "status": "PARTIAL_DIRECT_REVIEW_158_OF_5081",
+      "direct_review_spans": [
+        {
+          "range": [
+            1,
+            9
+          ],
+          "classification": "Schema, Oct22 original queue authority, current published baseline reference; immutable historical source and publication IDs remain evidence, not new publication authority."
+        },
+        {
+          "range": [
+            10,
+            45
+          ],
+          "item_id": "DIC-Q-33-selected-brewtus-majority-villages",
+          "classification": "Current exact-lot station/majority-village parser remediation; previous failed source run documented, corrected source-specific tests, merged exact CI and original603 SKIPPED explicitly preserved; READY does not imply published."
+        },
+        {
+          "range": [
+            46,
+            80
+          ],
+          "item_id": "DIC-Q-509-invite-expiration-search",
+          "classification": "Historical and corrected SQL/approval test failures retained with later passing isolated/merged evidence; explicit live production unchanged; documented nullable merged source and no forged PASS."
+        },
+        {
+          "range": [
+            81,
+            116
+          ],
+          "item_id": "DIC-Q-33-selected-angel-albino-corzo-region",
+          "classification": "Region-versus-producer correction; initial syntax error preserved, corrected tests and exact-source selected official run described; field scope and data invariants narrow."
+        },
+        {
+          "range": [
+            117,
+            158
+          ],
+          "item_id": "DIC-Q-33-selected-dehab-kaffa-forest-farms",
+          "classification": "Selected producer farm-locality evidence, previous failed test/corrected CI and three-product guarded source run; other-coffee negative and original603 qualification retained; queue notes explicitly no deployment."
+        }
+      ],
+      "findings": [
+        {
+          "id": "G1-005-F1",
+          "status": "CROSSCHECK_PASS_NO_CURRENT_QUEUE_EDIT",
+          "evidence": "GitHub PR529, PR527, PR519 and PR494 each are CLOSED/MERGED with exact queue-listed merge_commit_sha; READY means narrowly verified and is not publication authority.",
+          "disposition": "PRESERVE_EXACT_QUEUE_AND_HISTORICAL_FAILURES"
+        },
+        {
+          "id": "G1-005-F2",
+          "status": "JSON_INVENTORY_CROSSCHECK_PASS_NOT_SEMANTIC_REVIEW_CREDIT",
+          "evidence": "Full file parses; 104 unique queue IDs, 11 READY, 90 DEPLOYED, 3 IN_PROGRESS; no duplicate IDs. This machine inventory does not review lines159-5081.",
+          "disposition": "NO_UNJUSTIFIED_DELETION_OR_DUPLICATE_PURGE"
+        },
+        {
+          "id": "G1-005-F3",
+          "status": "NO_VERIFIED_ACTIVE_DEFECT_IN_DIRECT_RANGE",
+          "evidence": "Older failed and SKIPPED tests are appropriately dated, not current PASS; four records and baseline do not authorize release.",
+          "disposition": "UNCHANGED"
+        }
+      ]
+    }
+  ],
+  "totals": {
+    "source_file_lines": 158,
+    "source_file_whitespace_words": 1242,
+    "entirely_completed_blobs": 0,
+    "github_objects": 0,
+    "github_words": 0
+  },
+  "cumulative_after": {
+    "source_file_lines": 1937,
+    "source_file_words": 10904,
+    "github_objects": 2,
+    "github_words": 721
+  },
+  "validation": {
+    "source_blob_matches_checkpoint": true,
+    "json_parse": true,
+    "duplicate_id_none": true,
+    "pr_merges_readback": true,
+    "all_runtime_ci_independently_rechecked": false,
+    "production_provider_checked": false,
+    "app_tests": "NOT_RUN_DOCS_AUDIT_ONLY",
+    "issue267": "S2-063 per-line receipt inspected selectively; no independent full coverage certification and ZERO delegated credit"
+  },
+  "ownership": {
+    "issue267": "Sole frozen and current executable code audit, zero semantic credit here",
+    "issue455": "Espresso research/UX",
+    "issue33": "Extractor",
+    "issue96": "Auth/privacy",
+    "issue508": "Netlify provider",
+    "issue509": "Supabase provider"
+  },
+  "code_changes": 0,
+  "queue_changes": 0,
+  "tests": "Read-only text/JSON and PR-merge metadata checks only; no Node/browser/SQL/production test",
+  "status": "IN_PROGRESS_NOT_COMPLETE",
+  "next": {
+    "kind": "git_blob",
+    "path": "docs/RELEASE_QUEUE.json",
+    "first_line": 159,
+    "expected_blob_sha": "c510a07dad8bf67cebe73b3da4d8c4d381b9349a",
+    "require_fresh_blob": true,
+    "then": "Continue source-bound bounded review through all 5,081 lines; comment/PR/Actions/commit/tree/blob/binary histories and source drift remain unreviewed"
+  }
+}

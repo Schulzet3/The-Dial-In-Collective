@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "issue": 504,
+  "audit_batch": "G1-011",
+  "date_utc": "2026-11-04",
+  "status": "REVIEWED_PR_CI_PENDING",
+  "method": "Direct word-level semantic review of all 205 physical lines of five complete adjacent source records; machine parsing/regex not used as semantic credit.",
+  "source": {
+    "development_sha": "e72027d8ee96081ba1a1566d78e1c589d5b6517f",
+    "main_sha": "d17e900fa78e2f89931480d4f85c217c2d31724c",
+    "publication_branch_sha": "31c66832a28247e657a2bf89592ebc1e2f48dfc5",
+    "queue_blob_sha": "4bc7f75c99d8ea834324a774a72b9fe8c7aca539",
+    "immutable_release07_blob_sha": "062bd4d07a496cdb3868a6b68dc2ca58204ccb28",
+    "release07_id": "DIC-20261027-READY-QUEUE-07",
+    "release07_source_sha": "ca7ab46e1e8c76ce117ffc88470d107aa5903729",
+    "release07_netlify_id": "6ae0fc16178b2f1241e441f8"
+  },
+  "reviewed": [
+    {
+      "path": "docs/RELEASE_QUEUE.json",
+      "id": "DIC-Q-33-single-selected-shopify-roast-tag",
+      "range": [
+        1466,
+        1500
+      ],
+      "lines": 35,
+      "meaning": "Two selected Shopify roast tag recoveries with original603 replay; hosted private-input workflow SKIPPED. Original source READY predated later Release07 delivery.",
+      "historic_note_line": 1494
+    },
+    {
+      "path": "docs/RELEASE_QUEUE.json",
+      "id": "DIC-Q-14-retired-custom-style",
+      "range": [
+        1501,
+        1541
+      ],
+      "lines": 41,
+      "meaning": "Owner-retired Custom selection with protected historic shots and offline queue; old nonpublished-source claim predates independently verified Release07.",
+      "historic_note_line": 1535
+    },
+    {
+      "path": "docs/RELEASE_QUEUE.json",
+      "id": "DIC-Q-33-selected-product-release-literals",
+      "range": [
+        1542,
+        1575
+      ],
+      "lines": 34,
+      "meaning": "Six selected-product release labels, preserved historical exact corpus, partial earlier tests, now delivered despite old READY/NOT DEPLOYED source-time note.",
+      "historic_note_line": 1569
+    },
+    {
+      "path": "docs/RELEASE_QUEUE.json",
+      "id": "DIC-Q-33-whole-shopify-roast-taxonomy",
+      "range": [
+        1576,
+        1627
+      ],
+      "lines": 52,
+      "meaning": "Medium-Light selected taxonomy; earlier unverified parser was corrected in PR158, original603 verified on later parser while hosted workflow SKIPPED. Previous READY/NOT DEPLOYED description is historical.",
+      "historic_note_line": 1616
+    },
+    {
+      "path": "docs/RELEASE_QUEUE.json",
+      "id": "DIC-Q-13-retire-experiments",
+      "range": [
+        1628,
+        1670
+      ],
+      "lines": 43,
+      "meaning": "Retired Experiment workflow with guarded SQL and no member/shot deletes; old SOURCE READY/UNAPPLIED statement predates actual Oct27 verified migration/publication.",
+      "historic_note_line": 1664
+    }
+  ],
+  "accounting": {
+    "new_source_lines": 205,
+    "source_whitespace_words": 1895,
+    "new_historical_prefix_words": 25,
+    "new_credited_words": 1920,
+    "range": [
+      1466,
+      1670
+    ],
+    "source_bound_overlap_with_267": 0,
+    "cumulative": {
+      "source_file_lines": 3448,
+      "source_file_words": 25608,
+      "github_objects": 2,
+      "github_words": 721
+    }
+  },
+  "findings": [
+    {
+      "id": "G1-011-F1",
+      "severity": "LOW",
+      "kind": "HISTORICAL_DEPLOYMENT_STATUS_AMBIGUITY",
+      "source_item": "DIC-Q-33-single-selected-shopify-roast-tag",
+      "notes_line": 1494,
+      "disposition": "FIXED_PREFIX_ONLY",
+      "evidence": "Original queue item state DEPLOYED and Release07 immutable ready_ids independently include exact item ID; old note retained unchanged after historical date label."
+    },
+    {
+      "id": "G1-011-F2",
+      "severity": "LOW",
+      "kind": "HISTORICAL_DEPLOYMENT_STATUS_AMBIGUITY",
+      "source_item": "DIC-Q-14-retired-custom-style",
+      "notes_line": 1535,
+      "disposition": "FIXED_PREFIX_ONLY",
+      "evidence": "Original queue item state DEPLOYED and Release07 immutable ready_ids independently include exact item ID; old note retained unchanged after historical date label."
+    },
+    {
+      "id": "G1-011-F3",
+      "severity": "LOW",
+      "kind": "HISTORICAL_DEPLOYMENT_STATUS_AMBIGUITY",
+      "source_item": "DIC-Q-33-selected-product-release-literals",
+      "notes_line": 1569,
+      "disposition": "FIXED_PREFIX_ONLY",
+      "evidence": "Original queue item state DEPLOYED and Release07 immutable ready_ids independently include exact item ID; old note retained unchanged after historical date label."
+    },
+    {
+      "id": "G1-011-F4",
+      "severity": "LOW",
+      "kind": "HISTORICAL_DEPLOYMENT_STATUS_AMBIGUITY",
+      "source_item": "DIC-Q-33-whole-shopify-roast-taxonomy",
+      "notes_line": 1616,
+      "disposition": "FIXED_PREFIX_ONLY",
+      "evidence": "Original queue item state DEPLOYED and Release07 immutable ready_ids independently include exact item ID; old note retained unchanged after historical date label."
+    },
+    {
+      "id": "G1-011-F5",
+      "severity": "LOW",
+      "kind": "HISTORICAL_DEPLOYMENT_STATUS_AMBIGUITY",
+      "source_item": "DIC-Q-13-retire-experiments",
+      "notes_line": 1664,
+      "disposition": "FIXED_PREFIX_ONLY",
+      "evidence": "Original queue item state DEPLOYED and Release07 immutable ready_ids independently include exact item ID; old note retained unchanged after historical date label."
+    }
+  ],
+  "checks": {
+    "queue_parse": "PASS",
+    "unchanged_110_ids_states_shas": "PASS",
+    "exact_five_notes_only": "PASS",
+    "unchanged_physical_line_count": "PASS",
+    "release07_membership": "5_OF_5_PASS",
+    "pr_head_ci": "PENDING",
+    "merged_source_ci": "PENDING",
+    "node_browser_sql": "NOT_RUN_DOC_ONLY",
+    "hosted_member": "NOT_CHECKED",
+    "publication": "NOT_AUTHORIZED"
+  },
+  "next": {
+    "path": "docs/RELEASE_QUEUE.json",
+    "first_unreviewed_line": 1671,
+    "expected_item": "DIC-Q-15-retired-bag-management",
+    "source_blob": "PENDING_POST_MERGE_READBACK",
+    "other_gaps": "Historic issues/PR comments/reviews, workflows/runs/logs/artifacts, releases/tags/commits/binaries, most branch trees and delegated #267 frozen/current code review still pending."
+  }
+}

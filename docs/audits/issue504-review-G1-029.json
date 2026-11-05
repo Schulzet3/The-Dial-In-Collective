@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "issue": 504,
+  "audit_batch": "G1-029",
+  "date_utc": "2026-11-05",
+  "status": "IN_PROGRESS_NOT_COMPLETE",
+  "method": "Independent Git blob/JSON/object equality reconciliation of previously DIRECTLY SEMANTICALLY reviewed G1-005..013 snapshots against pinned original source; only the new structural token and two new live queue metadata records are credited as NEW directly read source words. Comparisons and machine counts are evidence verification, NOT additional semantic-reading credit for unchanged historic words.",
+  "source_heads_at_checkpoint": {
+    "development": "0114e01bb88b15ff07e49daaa83f25d3cf55dda7",
+    "main": "c25e31343b1974b89445b48b43993bc446aa96ca",
+    "release_production": "b386a977a7c43bf190f6315105894334d96f0f18"
+  },
+  "current_repo_visibility": "PUBLIC_OWNER_APPROVED_TEMPORARY_EXCEPTION_UNTIL_NOV30_FROM_OPEN_SECURITY_ISSUE_RESTORE_PRIVATE_OWNER_ACTION_ONLY",
+  "original_queue_source_version": {
+    "blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
+    "total_lines": 5377,
+    "reconciled_pinned_interval": [
+      1,
+      2249
+    ],
+    "source_versions": [
+      "G1-005 c510a07dad8bf67cebe73b3da4d8c4d381b9349a",
+      "G1-006 438d4a02f827486d75860852a8cbace912308bf6",
+      "G1-007 30faa16f15b73c90373eac5e278edd0778f38e00",
+      "G1-008 ee48f3d337e3f8172aee3857e5db60d4a25c3d77",
+      "G1-009 e7ea0660cbe297bfcdc195e0d9cd13d890c3788e",
+      "G1-010 04722dad6950ae4aef883dbab3aeae24409a8ebf",
+      "G1-011 4bc7f75c99d8ea834324a774a72b9fe8c7aca539",
+      "G1-012 43a07ba9fd29f19248b4965a40c35e3d47c0a6c4",
+      "G1-013 0f5d8a9d6be56b7ecb4b7e4675340e0f9ed374e5"
+    ],
+    "mapped_prior_direct_intervals": [
+      {
+        "pinned": [
+          1,
+          9
+        ],
+        "receipt": "G1-005",
+        "kind": "unchanged_header"
+      },
+      {
+        "pinned": [
+          11,
+          83
+        ],
+        "receipt": "G1-010",
+        "kind": "two_new_active_queue_records_except_opening_brace"
+      },
+      {
+        "pinned": [
+          84,
+          1224
+        ],
+        "receipt_range": "G1-005..G1-009",
+        "kind": "first_31_existing_items_shifted_by_74_source_lines"
+      },
+      {
+        "pinned": [
+          1225,
+          1465
+        ],
+        "receipt": "G1-010"
+      },
+      {
+        "pinned": [
+          1466,
+          1670
+        ],
+        "receipt": "G1-011"
+      },
+      {
+        "pinned": [
+          1671,
+          1998
+        ],
+        "receipt": "G1-012"
+      },
+      {
+        "pinned": [
+          1999,
+          2249
+        ],
+        "receipt": "G1-013"
+      }
+    ],
+    "prior_record_checks": {
+      "unique_pinned_items": 55,
+      "prior_receipts_distinct_items": 55,
+      "missing_items": 0,
+      "duplicate_items": 0,
+      "exact_object_matches_across_individual_review_snapshots": 19,
+      "previously_audited_historical_notes_qualifications_only": 36,
+      "all_other_object_fields_identical": true,
+      "g1013_pre_patch_versus_final_pinned": {
+        "unchanged_objects": 50,
+        "changed_note_only_objects": 5,
+        "other_fields_changed": 0
+      },
+      "unmapped_before_this_batch": [
+        10
+      ],
+      "unmapped_after": [],
+      "note": "All 36 note-only source-version deltas are explicitly preserved in earlier review receipts and historical release labels, no changed words are double credited here. Pinned line 10 was the only unmapped physical line in G1-005..013 map and is directly reviewed now."
+    },
+    "new_direct_review": {
+      "path": "docs/RELEASE_QUEUE.json",
+      "pinned_source_line": 10,
+      "pinned_source_value": "    {",
+      "count_lines": 1,
+      "whitespace_words": 1,
+      "classification": "JSON array item opening delimiter for first new current queue record; syntax marker only. Existing equivalent elsewhere does not authorize duplicate line credit; unique pinned occurrence now mapped."
+    },
+    "remaining_original_queue_mapping": "G1-014..G1-024 pre-existing pinned source receipts continue line 2250–5377 and require separate complete source reconciliation; this batch certifies ONLY pinned lines 1–2249."
+  },
+  "live_queue": {
+    "blob_sha": "32175222367d6e21f71e26dba2e96a720b84ae97",
+    "previous_blob_sha": "b878c0e53f134737b5899bbf9c583a7fa6162aab",
+    "active_items": 126,
+    "history_items": 30,
+    "previous_active_items": 124,
+    "previous_history_items": 30,
+    "existing_changed_records": 0,
+    "deleted_records": 0,
+    "new_records": [
+      "DIC-Q-33-original603-292-selected-guji-producer-region",
+      "DIC-Q-33-original603-358-current-labeled-farm-region"
+    ],
+    "reviewed_new_objects": [
+      {
+        "id": "DIC-Q-33-original603-292-selected-guji-producer-region",
+        "line_range_inclusive": [
+          10,
+          32
+        ],
+        "lines": 23,
+        "whitespace_words": 180,
+        "status": "TESTING",
+        "semantic_review": "Country-only Ethiopia from selected official H1 Ethiopia Guji Getachew; direct same-product named producer Guji context may support narrower region, but candidate is not yet proven on actual corrected merged fresh #292 / #358 / #370 selected sources. Initial PR725 approval CI run 41987379569 FAILED due to untracked app file; corrected scope/CI and source review outstanding. No false READY or new farm inference.",
+        "disposition": "PRESERVE_TESTING_ISSUE33_OWNS_CODE_AND_AUTHENTICATION_NO_EDIT",
+        "negative_evidence": "GitHub Actions 41987379569 completed/failure, not PASS. PR725 merged status alone does NOT discharge queue's separate official source acceptance."
+      },
+      {
+        "id": "DIC-Q-33-original603-358-current-labeled-farm-region",
+        "line_range_inclusive": [
+          5079,
+          5123
+        ],
+        "lines": 45,
+        "whitespace_words": 451,
+        "status": "READY_NOT_DEPLOYED",
+        "semantic_review": "Exact selected #358 Subliminal H1 establishes Honduras country; directly labeled Region Copan establishes regional component. Changes ONLY origin Copan to Copan, Honduras, preserves 7 other fields and source-visible Letica/Leticia producer ambiguity; #292 remains separate and #370 unchanged. Original archive/oracle untouched and no GoTrue or physical-device claim.",
+        "disposition": "PRESERVE_READY_AND_HISTORICAL_FAILURES_NO_EDIT",
+        "verified_evidence": [
+          "PR719 merged exact 4c3de83549efc9da50c960346dc6b193f02543fb",
+          "official guarded HTTPS run 41985943322 completed/success at exact merge SHA",
+          "Node/lint/build run 41985942988 completed/success at exact merge SHA",
+          "original603 run 41985608111 completed/skipped and NOT PASS"
+        ]
+      }
+    ],
+    "reviewed_ranges": [
+      [
+        10,
+        32
+      ],
+      [
+        5079,
+        5123
+      ]
+    ],
+    "new_lines": 68,
+    "new_words": 631,
+    "status": "IN_PROGRESS_NEW_TEXT_REVIEWED"
+  },
+  "totals_new_credit": {
+    "source_file_lines": 69,
+    "source_file_whitespace_words": 632,
+    "github_objects": 0,
+    "github_words": 0,
+    "delegated_267_credit": 0
+  },
+  "cumulative_after": {
+    "source_file_lines": 7919,
+    "source_file_words": 60754,
+    "github_objects": 2,
+    "github_words": 721
+  },
+  "tests": {
+    "source_blob_readback": true,
+    "prior_source_version_id_diff": true,
+    "source_record_id_count": true,
+    "unique_id_and_no_deleted_diff": true,
+    "current_queue_parse": true,
+    "github_pr719_merge": true,
+    "github_pr725_merge_not_equivalent_to_ready": true,
+    "github_actions_verification": "41985943322 and 41985942988 SUCCESS; 41985608111 SKIPPED; 41987379569 FAILURE",
+    "node22": "NOT_RERUN_DOCS_ONLY",
+    "sql": "NOT_RERUN",
+    "browser": "NOT_RERUN",
+    "provider": "NOT_ACCESSED",
+    "original603": "NOT_RERUN",
+    "no_code_changes": true
+  },
+  "ownership": {
+    "issue267": "frozen and pinned executable per-line only, zero #504 code credit",
+    "issue33": "extractor code and official coffee #292/#358",
+    "issue455": "research/UX",
+    "issue96": "live Auth/privacy"
+  },
+  "remaining": {
+    "issue504_status": "OPEN_IN_PROGRESS",
+    "next_exact_object": "Issue #504 GitHub issue comment id 6624428118 (first uncredited comment after id 6623477092); direct word-level review against current immutable ID",
+    "future_new_queue_delta": "Recheck live queue SHA before next run; add new/changed words, do not double-count two records above",
+    "other_unreviewed": "Remaining issue comments, PR/reviews, Actions logs/artifacts, tree/commits/releases/tags, binary access, ongoing #267 receipts independent checking and remaining pinned source-version mapping."
+  }
+}

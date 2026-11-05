@@ -1,8 +1,8 @@
-name: DIC automatic READY batch certification
-# Non-publishing CI. A green batch check is evidence, never a release grant.
+name: DIC automatic READY source and queue coverage
+# Issue #624: manual-only legacy diagnostic; mandatory approval already checks the queue on each push. Existing mandatory
+# exact-source Node/cloud/mobile/SQL/approval checks remain independent. Never
+# re-run those suites or package duplicate immutable API publisher artifacts here.
 on:
-  push:
-    branches: [development/backend-foundation]
   workflow_dispatch:
 permissions:
   contents: read
@@ -12,7 +12,7 @@ concurrency:
 jobs:
   certify-ready-batch:
     runs-on: ubuntu-24.04
-    timeout-minutes: 35
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
         with:
@@ -20,95 +20,19 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: npm
-      - name: Classify READY queue before expensive certification
-        id: ready_scope
-        shell: bash
-        run: |
-          node --input-type=module -e "import {readFileSync} from 'node:fs';const q=JSON.parse(readFileSync('docs/RELEASE_QUEUE.json'));const ready=q.items.filter(x=>x.state==='READY');console.log('READY items: '+ready.length);process.stdout.write('');" 
-          if node --input-type=module -e "import {readFileSync} from 'node:fs';const q=JSON.parse(readFileSync('docs/RELEASE_QUEUE.json'));process.exit(q.items.some(x=>x.state==='READY')?0:1)"; then
-            echo 'has_ready=true' >> "$GITHUB_OUTPUT"
-          else
-            echo 'has_ready=false' >> "$GITHUB_OUTPUT"
-            echo 'No READY batch: skip duplicate combined suites; regular application checks still run.' >> "$GITHUB_STEP_SUMMARY"
-          fi
-      - name: Install locked dependencies
-        if: steps.ready_scope.outputs.has_ready == 'true'
-        run: npm ci
-      - name: Verify queue schema and complete unpublished source coverage
+      - name: Validate queue schema, intake and candidate source
         run: |
           node scripts/release/release-queue.mjs --validate
           node scripts/release/release-queue.mjs --enforce-intake
-          # Certification runs tests even when the queue is empty; only the release controller grants publication.
           node scripts/release/release-queue.mjs --status
-      - name: Combined Node regressions
-        if: steps.ready_scope.outputs.has_ready == 'true'
-        run: npm test
-      - name: Combined cloud, offline and UI regressions
-        if: steps.ready_scope.outputs.has_ready == 'true'
-        run: npm run test:cloud
-      - name: Lint
-        if: steps.ready_scope.outputs.has_ready == 'true'
-        run: npm run lint
-      - name: Production-style build using nonfunctional public CI coordinates
-        if: steps.ready_scope.outputs.has_ready == 'true'
-        env:
-          SUPABASE_URL: https://azviqqejypsefzilgonr.supabase.co
-          SUPABASE_PUBLISHABLE_KEY: sb_publishable_ci_placeholder_nonfunctional
-        run: npm run build:cloud
-      - name: Build immutable production-coordinate artifact only for READY source
-        if: steps.ready_scope.outputs.has_ready == 'true'
-        env:
-          SUPABASE_URL: ${{ vars.DIC_PRODUCTION_SUPABASE_URL }}
-          SUPABASE_PUBLISHABLE_KEY: ${{ vars.DIC_PRODUCTION_SUPABASE_PUBLISHABLE_KEY }}
-        run: |
-          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_PUBLISHABLE_KEY" ]; then
-            echo 'Production public build coordinates are not configured; cannot certify deployable artifact.' >&2
-            exit 1
-          fi
-          npm run build:cloud
-          python3 scripts/release/package-immutable-dist.py dist dist-immutable.zip
-          sha256sum dist-immutable.zip > dist-immutable.zip.sha256
-      - name: Bundle exact Netlify server function for immutable release
-        if: steps.ready_scope.outputs.has_ready == 'true'
-        run: |
-          npm exec --yes --package=esbuild@0.25.12 -- esbuild netlify/functions/coffee-url-preview.mjs --bundle --platform=node --format=esm --target=node22 --outfile=coffee-url-preview.mjs
-          python3 scripts/release/package-immutable-function.py coffee-url-preview.mjs coffee-url-preview-function.zip
-          sha256sum coffee-url-preview-function.zip > coffee-url-preview-function.zip.sha256
-      - name: Retain exact immutable production artifact
-        if: success() && steps.ready_scope.outputs.has_ready == 'true'
-        uses: actions/upload-artifact@v4
-        with:
-          name: dic-production-dist-${{ github.sha }}
-          path: |
-            dist-immutable.zip
-            dist-immutable.zip.sha256
-            coffee-url-preview-function.zip
-            coffee-url-preview-function.zip.sha256
-          retention-days: 90
-          if-no-files-found: error
-      - name: Write source-bound machine-readable CI certificate
-        if: success() && steps.ready_scope.outputs.has_ready == 'true'
-        env:
-          DIC_SOURCE_SHA: ${{ github.sha }}
-          DIC_RUN_ID: ${{ github.run_id }}
-        run: node scripts/release/write-ci-certificate.mjs
-      - name: Retain certificate as GitHub Actions artifact
-        if: success() && steps.ready_scope.outputs.has_ready == 'true'
-        uses: actions/upload-artifact@v4
-        with:
-          name: dic-ci-certificate-${{ github.sha }}
-          path: docs/generated/CI_CERTIFICATE.json
-          retention-days: 90
-          if-no-files-found: error
-      - name: Publish exact-source certification summary
+      - name: Report source-only READY classification
         if: always()
         env:
           DIC_SOURCE_SHA: ${{ github.sha }}
         run: |
           {
-            echo '## READY batch automatic source certification'
-            echo "Source: \`$DIC_SOURCE_SHA\`"
-            echo "Combined test and source gates: ${{ job.status }}"
-            echo 'This check does not verify offsite backup freshness, provider routing or issue a one-use production grant.'
+            echo '## Source-only READY queue classification'
+            echo "Source: \u0060$DIC_SOURCE_SHA\u0060"
+            echo 'This job validates queue schema/intake only; required exact-source test workflows are independent.'
+            echo 'Not a release grant, immutable artifact certificate, backup or provider readback.'
           } >> "$GITHUB_STEP_SUMMARY"

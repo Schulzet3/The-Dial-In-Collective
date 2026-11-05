@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "date_utc": "2026-11-04",
+  "state": "VERIFIED_NARROW_READY_NOT_DEPLOYED",
+  "authority": "Owner authorized development-only Issue33 current selected-source field adjudication; not a release",
+  "parent_source_sha": "3416ceda5bcce4c885025ffe6af162ded89b5d74",
+  "original603": {
+    "case_number": 19,
+    "name": "DogWatch Dark Blend",
+    "immutable_csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197
+  },
+  "official_source": {
+    "url": "https://blackdogcoffee.net/product/dogwatch-dark-blend-2/",
+    "checked_date_utc": "2026-11-04",
+    "source_type": "CURRENT_SELECTED_PUBLIC_PRODUCT_RENDERED_TEXT",
+    "selected_h1": "DogWatch Dark Blend",
+    "literal_excerpt": "dark, smoky chocolate flavor with earth notes balanced by high sweet undertones and a smooth full body",
+    "raw_html_sha256": "ab44b863854cb3b89d8484f05af9cdbcddee6387a5f495e7d68634b1665d7608",
+    "original_csv_record_process": "NOT_A_PROCESS_CHECK",
+    "live_run_id": 41836087208,
+    "job_id": 126595238094,
+    "artifact_id": 13327190119,
+    "raw_html_sha_independently_verified": true,
+    "h1": [
+      "DogWatch Dark Blend",
+      "DogWatch Dark Blend"
+    ],
+    "parsed_fields": {
+      "name": "DogWatch Dark Blend",
+      "roast_level": "Dark",
+      "roaster": "The Black Dog Coffee Company",
+      "tasting_notes": "smoky chocolate, earth, high sweet undertones"
+    },
+    "conflicts": [],
+    "add_coffee_ui_rendered": true,
+    "source_review_rendered": true,
+    "fetched": 1,
+    "parsed": 1,
+    "manual_certification": false
+  },
+  "historical_contrast": {
+    "source_bound_current_extraction_20261029": "smoky chocolate flavor with earth",
+    "missing_direct_source_clause": "high sweet undertones",
+    "interpretation": "Historical capture indicates potential truncation; not yet independently reproduced on exact new parser"
+  },
+  "change": {
+    "kind": "GENERIC_SELECTED_SENSORY_GRAMMAR",
+    "path": "src/server/coffee-flavor-evidence.mjs",
+    "test_path": "tests/coffee-issue33-dogwatch-selected-sweet-undertones.test.mjs",
+    "bounded_live_probe_path": "scripts/audit/issue33-original603-focused-source-review.mjs",
+    "runtime_change": true
+  },
+  "acceptance": "Required: initial test-only CI evidence and repaired PR-head Node/lint/build, nonforce merged source, fresh official #19 raw HTML hash/current parser/Add Coffee before READY; source conflicts or fail imply IN_PROGRESS.",
+  "status": "READY",
+  "no_release_or_production_changes": true,
+  "initial_test_run": {
+    "run_id": 41834283671,
+    "pass": 2385,
+    "fail": 1,
+    "expected_regression": "#19 full sweet undertones",
+    "actual_prior": "smoky chocolate flavor with earth"
+  },
+  "corrected_pr_head": {
+    "sha": "cbfd08deea0cd22fce5535086b7487469410431c",
+    "node_run_id": 41834718053,
+    "pass": 2386,
+    "fail": 0,
+    "skip": 6,
+    "other_applicable_checks": "SUCCESS"
+  },
+  "merged_runtime_sha": "8a347cd771ceddeb1d145f9f0d4e657fe4fdc989",
+  "merged_official_run_1": {
+    "run_id": 41835268505,
+    "conclusion": "FAIL",
+    "reason": "Empty GitHub env DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS rejected before official source fetched; no HTML or preview",
+    "source_capture": false
+  },
+  "next": "Continue source-selective original603 semantic cases without overlap with Issue267 V2 or Issue96; only close Issue33 when all original scope independently adjudicated.",
+  "manual_entire_coffee_certified": false,
+  "global_603_semantic_certified": false,
+  "final_merges": {
+    "runtime_pr_572": "8a347cd771ceddeb1d145f9f0d4e657fe4fdc989",
+    "verification_workflow_pr_573": "40974cd95cd10d246eed87c35febe69ac08abcd5",
+    "tested_source_tree": "566bbd2f3205b2efb7f457926d9de68f58b2d010"
+  },
+  "exact_ci": {
+    "initial_expected_failed_test": 41834283671,
+    "corrected_pr_head_node": 41834718053,
+    "verification_pr_head_node": 41835536897,
+    "merged_head_node": 41836087081,
+    "node_pass": 2386,
+    "node_fail": 0,
+    "node_skipped": 6,
+    "cloud_ux": 41835536710,
+    "approval": 41836087087,
+    "sql": 41835536714,
+    "source_probe": 41836087208,
+    "original_frozen603": "SKIPPED_NOT_PASS"
+  },
+  "queue_after": {
+    "READY": 14,
+    "DEPLOYED": 90,
+    "IN_PROGRESS": 3
+  }
+}

@@ -1,0 +1,357 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "source_head_at_review": "d444c256546dfbc614f561509d263913a87cea4e",
+  "main_head": "d17e900fa78e2f89931480d4f85c217c2d31724c",
+  "published_release": "31c66832a28247e657a2bf89592ebc1e2f48dfc5",
+  "scope": "SUPPLEMENT TO docs/audits/issue509-supabase-object-ledger.json; append-only delta; do not credit the same 20 functions twice",
+  "previous_platform_function_reviewed": 22,
+  "added_platform_function_reviewed": 20,
+  "completed_named_platform_SQL_function_reviewed": 42,
+  "total_named_platform_SQL_functions": 42,
+  "new_functions": [
+    {
+      "object": "storage.list_multipart_uploads_with_delimiter",
+      "chars": 2378,
+      "md5": "961eef74f03a12751abf768384b84371",
+      "semantics": "S3 multipart prefix/key grouping; key-ID-time tie-break and max_keys",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APPLICATION_DEFECT; PROVIDER_MANAGED; NO_RUNTIME_TEST"
+    },
+    {
+      "object": "storage.list_objects_with_delimiter",
+      "chars": 32892,
+      "md5": "7747efec8583d78cd01449d9b99cd2eb",
+      "semantics": "name-version keyset pagination, prefix/folder seek, split indexable scans, bounded progress",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APPLICATION_DEFECT; PROVIDER_MANAGED; NO_RUNTIME_TEST"
+    },
+    {
+      "object": "storage.operation",
+      "chars": 178,
+      "md5": "0720a7c3d1b49f9a8eee19e90d73bb97",
+      "semantics": "reads storage.operation local setting",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APPLICATION_DEFECT; PROVIDER_MANAGED; NO_RUNTIME_TEST"
+    },
+    {
+      "object": "storage.protect_bucket_control_columns",
+      "chars": 1858,
+      "md5": "7c31ae406e2f6281ead4009fff69fc68",
+      "semantics": "lifecycle config/generation trigger; service-role insert guard",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APPLICATION_DEFECT; PROVIDER_MANAGED; NO_RUNTIME_TEST"
+    },
+    {
+      "object": "storage.protect_delete",
+      "chars": 535,
+      "md5": "4371ae544fb1ef704f9c5d42265ac324",
+      "semantics": "rejects raw Storage table deletion without allow-delete setting",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APPLICATION_DEFECT; PROVIDER_MANAGED; NO_RUNTIME_TEST"
+    },
+    {
+      "object": "storage.search",
+      "chars": 31522,
+      "md5": "fed15c85bb96faaa21ec40176026a0fd",
+      "semantics": "name/timestamp sort, case-insensitive folders, version-aware batch cursor",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APPLICATION_DEFECT; PROVIDER_MANAGED; NO_RUNTIME_TEST"
+    },
+    {
+      "object": "storage.search_by_timestamp",
+      "chars": 6929,
+      "md5": "323c4e2739e9c9bcfc082f7f14289338",
+      "semantics": "LIKE-escaped timestamp pagination with allow-listed dynamic sort",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APPLICATION_DEFECT; PROVIDER_MANAGED; NO_RUNTIME_TEST"
+    },
+    {
+      "object": "storage.search_v2",
+      "chars": 2862,
+      "md5": "7a010a87c94770b1c8f0b49a616082f4",
+      "semantics": "caps list; allows sort enums; dispatches name/timestamp branches",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APPLICATION_DEFECT; PROVIDER_MANAGED; NO_RUNTIME_TEST"
+    },
+    {
+      "object": "storage.update_updated_at_column",
+      "chars": 178,
+      "md5": "bfecc08a6034296258f0c3e10193076c",
+      "semantics": "storage updated_at trigger",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APPLICATION_DEFECT; PROVIDER_MANAGED; NO_RUNTIME_TEST"
+    },
+    {
+      "object": "realtime.apply_rls",
+      "chars": 16476,
+      "md5": "d7b17bcce71440ab486770b53d15bd3d",
+      "semantics": "WAL parsing, per-column privileges, scoped role+JWT RLS checks, subscribed columns and PK-only delete",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APPLICATION_DEFECT; PROVIDER_MANAGED; NO_RUNTIME_TEST"
+    },
+    {
+      "object": "realtime.list_changes",
+      "chars": 2220,
+      "md5": "d2cd4e1195236fa92705bdba784719ae",
+      "semantics": "materialized logical-slot consumption; apply_rls filter",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APPLICATION_DEFECT; PROVIDER_MANAGED; NO_RUNTIME_TEST"
+    },
+    {
+      "object": "realtime.list_changes_sync",
+      "chars": 2226,
+      "md5": "fcbc1eeaa0bd65e2d79fa397fb6f5834",
+      "semantics": "settled snapshot changes and apply_rls",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APPLICATION_DEFECT; PROVIDER_MANAGED; NO_RUNTIME_TEST"
+    },
+    {
+      "object": "realtime.quote_wal2json",
+      "chars": 375,
+      "md5": "441bd4aad4024c86ab1fafe7855b9cd4",
+      "semantics": "escapes publication identifiers",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APPLICATION_DEFECT; PROVIDER_MANAGED; NO_RUNTIME_TEST"
+    },
+    {
+      "object": "realtime.send",
+      "chars": 866,
+      "md5": "77afe4a67a0330f080cb562cec0898bd",
+      "semantics": "JWT-topic-bound JSON broadcast insertion and errors swallowed as warnings",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APPLICATION_DEFECT; PROVIDER_MANAGED; NO_RUNTIME_TEST"
+    },
+    {
+      "object": "realtime.send_binary",
+      "chars": 588,
+      "md5": "ccdcf82b70a4df521737be16ff40daee",
+      "semantics": "bytea broadcast insertion",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APPLICATION_DEFECT; PROVIDER_MANAGED; NO_RUNTIME_TEST"
+    },
+    {
+      "object": "realtime.settled_changes",
+      "chars": 3763,
+      "md5": "0460b15f876014713ccc4a997ebb3dbd",
+      "semantics": "READ COMMITTED snapshot/transaction WAL-cut logic; not invoked",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APPLICATION_DEFECT; PROVIDER_MANAGED; NO_RUNTIME_TEST"
+    },
+    {
+      "object": "realtime.subscription_check_filters",
+      "chars": 5465,
+      "md5": "ff71dc5fe6923e2a5b8b9f79f5ccbf0d",
+      "semantics": "typed filter/regex, role column grants, normalized subscription identity",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APPLICATION_DEFECT; PROVIDER_MANAGED; NO_RUNTIME_TEST"
+    },
+    {
+      "object": "realtime.to_regrole",
+      "chars": 156,
+      "md5": "06910e957a8215a4bd3cd66c8182052c",
+      "semantics": "text to regrole",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APPLICATION_DEFECT; PROVIDER_MANAGED; NO_RUNTIME_TEST"
+    },
+    {
+      "object": "realtime.topic",
+      "chars": 171,
+      "md5": "cd1d746eed2ae8a6e309899adfe95988",
+      "semantics": "reads realtime.topic local setting",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APPLICATION_DEFECT; PROVIDER_MANAGED; NO_RUNTIME_TEST"
+    },
+    {
+      "object": "realtime.wal2json_escape_identifier",
+      "chars": 264,
+      "md5": "0efca81765a5fd58739e8eb42339d68d",
+      "semantics": "escapes WAL identifier punctuation",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APPLICATION_DEFECT; PROVIDER_MANAGED; NO_RUNTIME_TEST"
+    }
+  ],
+  "long_definition_chunks": {
+    "storage.list_objects_with_delimiter": [
+      [
+        1,
+        8000
+      ],
+      [
+        8001,
+        16000
+      ],
+      [
+        16001,
+        24500
+      ],
+      [
+        24501,
+        32892
+      ]
+    ],
+    "storage.search": [
+      [
+        1,
+        8000
+      ],
+      [
+        8001,
+        16000
+      ],
+      [
+        16001,
+        24000
+      ],
+      [
+        24001,
+        31522
+      ]
+    ],
+    "realtime.apply_rls": [
+      [
+        1,
+        8500
+      ],
+      [
+        8501,
+        16476
+      ]
+    ]
+  },
+  "additional_plpgsql_functions": [
+    {
+      "object": "extensions.grant_pg_cron_access",
+      "chars": 1343,
+      "md5": "53a44336da0ac1dd62d89dbd988e6d1d",
+      "semantics": "pg_cron extension DDL grant watcher",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APP_DEFECT; NO_LIVE_INVOCATION"
+    },
+    {
+      "object": "extensions.grant_pg_graphql_access",
+      "chars": 1509,
+      "md5": "4e6d7efe4aed1b3b92063b648aa7a0cf",
+      "semantics": "pg_graphql extension DDL wrapper/grant",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APP_DEFECT; NO_LIVE_INVOCATION"
+    },
+    {
+      "object": "extensions.grant_pg_net_access",
+      "chars": 2147,
+      "md5": "1d06ef4fb47bb0ab6e6f8818a62013bb",
+      "semantics": "pg_net extension permissions and legacy security",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APP_DEFECT; NO_LIVE_INVOCATION"
+    },
+    {
+      "object": "extensions.pgrst_ddl_watch",
+      "chars": 873,
+      "md5": "afaad7193dcf8f81e728d2bedb85e43e",
+      "semantics": "PostgREST reload on schema change",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APP_DEFECT; NO_LIVE_INVOCATION"
+    },
+    {
+      "object": "extensions.pgrst_drop_watch",
+      "chars": 557,
+      "md5": "4357772baf5cfcd5c6d7049585b3a537",
+      "semantics": "PostgREST reload on object drop",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APP_DEFECT; NO_LIVE_INVOCATION"
+    },
+    {
+      "object": "extensions.set_graphql_placeholder",
+      "chars": 1725,
+      "md5": "8da9dff6b2ae47498209d341acaeb60b",
+      "semantics": "pg_graphql-disabled stub fallback",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APP_DEFECT; NO_LIVE_INVOCATION"
+    },
+    {
+      "object": "pgbouncer.get_auth",
+      "chars": 502,
+      "md5": "ea716a894cc6ade82e6754c47336a307",
+      "semantics": "Security-definer pooler auth lookup; no actual credentials queried",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APP_DEFECT; NO_LIVE_INVOCATION"
+    },
+    {
+      "object": "vault.create_secret",
+      "chars": 751,
+      "md5": "3cd3211da1236685869a58787071c534",
+      "semantics": "encrypts new Vault secret; no live value read",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APP_DEFECT; NO_LIVE_INVOCATION"
+    },
+    {
+      "object": "vault.update_secret",
+      "chars": 1012,
+      "md5": "dab0a8cc49e4b57f27bfa5dca12a705c",
+      "semantics": "re-encrypts Vault secret; unused decrypted variable, impact unverified",
+      "review": "DIRECT_FULL_SOURCE_READ",
+      "verdict": "NO_PROVEN_DIC_APP_DEFECT; NO_LIVE_INVOCATION"
+    }
+  ],
+  "compiled_source_unreviewed": {
+    "extensions_c": 84,
+    "vault_c": 3,
+    "pg_catalog_functions": "Not covered; binary/native source unavailable through this connector"
+  },
+  "migration_body_inventory": {
+    "live_versions": 53,
+    "statement_records": 53,
+    "source_chars": 445657,
+    "reviewed_full_bodies": 3,
+    "reviewed_chars": 21814,
+    "remaining": 50,
+    "next_version": "20261012015600"
+  },
+  "migration_direct_review": [
+    {
+      "version": "20261009190246",
+      "name": "dic_identity_foundation",
+      "chars": 6019,
+      "md5": "10706fedb700ebcbb23e4f54ad07fb75",
+      "git_blob": "186f24755f50bde79998b546bf93735a8355fda4",
+      "full_body_directly_reviewed": true,
+      "live_to_release_git_exact_bytes": true,
+      "semantics": "Beta/Admin access, contributor ownership, backup_runs historical metadata, Auth trigger; RLS and grants"
+    },
+    {
+      "version": "20261009192735",
+      "name": "dic_coffee_catalog",
+      "chars": 6427,
+      "md5": "92fd246c3cb7f7cb70d5fbec74c8a558",
+      "git_blob": "f762098fad284856cbc5fc3e66618ff3a76a9db9",
+      "full_body_directly_reviewed": true,
+      "live_to_release_git_exact_bytes": true,
+      "semantics": "coffee catalog/evidence/submission/library tables; admitted-owner read and write policy"
+    },
+    {
+      "version": "20261012015417",
+      "name": "dic_equipment_workspaces",
+      "chars": 9368,
+      "md5": "2e0c976cc00d06e1fb4581fe3697f369",
+      "git_blob": "8eb5b6315abdc44b93227845276d3caa8a5875a5",
+      "full_body_directly_reviewed": true,
+      "live_to_release_git_exact_bytes": true,
+      "semantics": "immutable equipment versions/setup and private workspace; original bags are historical schema not safe deletion"
+    }
+  ],
+  "read_only_verifications": {
+    "supabase_realtime_published_tables": 0,
+    "supabase_realtime_puballtables": false,
+    "realtime_subscription_rls": false,
+    "realtime_subscription_anon_select": true,
+    "realtime_subscription_member_select": true,
+    "realtime_subscription_anon_or_member_insert": false,
+    "postgrest_exposed_schema_setting": "UNAVAILABLE_IN_DB_SESSION_NOT_PROOF_OF_NONEXPOSURE"
+  },
+  "new_confirmed_DIC_defects": 0,
+  "production_writes": 0,
+  "private_user_rows_read": 0,
+  "actions": "No code/test/provider/deploy edits; no runtime tests newly run; 42/42 only defined SQL function subset",
+  "next": "Read and compare live SQL of migration version 20261012015600 (20348 chars) with release Git; continue all 50 migrations. Then extension/view/config, Auth/Storage/Realtime exposure and advisor/log root cause. Keep Issue509 OPEN."
+}

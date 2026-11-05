@@ -207,14 +207,30 @@ function headingSensoryProfile(page,nodes,children,index,clean){
  const node=nodes[index];
  if(!/^h[1-6]$/.test(node.tag)||node.contentEnd-node.headEnd>300)return '';
  const label=clean(page.slice(node.headEnd,node.contentEnd),100);
- if(!/^what you['’]ll find in the cup\s*[:：]?$/i.test(label))return '';
- const siblings=children.get(node.parent)||[],next=nodes[siblings[siblings.indexOf(index)+1]];
+ const single=/^what you['’]ll find in the cup\s*[:：]?$/i.test(label);
+ const selectedList=/^what you['’]ll taste\s*[:：]?$/i.test(label);
+ if(!single&&!selectedList)return '';
+ const siblings=children.get(node.parent)||[];
+ let at=siblings.indexOf(index)+1,next=nodes[siblings[at]];
  if(!next||!['p','blockquote'].includes(next.tag)||next.contentEnd-next.headEnd>3000||
   !/^\s*$/.test(page.slice(node.end,next.start)))return '';
- // This explicit heading gives one complete sensory paragraph a role.
- // Keep its literal flavor/aroma/finish wording rather than guessing a
- // union of nouns from several sentences or omitting their qualifiers.
- return normalizeExplicitCoffeeTastingNotes(clean(page.slice(next.headEnd,next.contentEnd),401),{allowProse:true});
+ // Some selected descriptions introduce an independently printed sensory
+ // list with a short "Expect ... combination of:" paragraph. That intro
+ // is NOT a flavor; read exactly the immediately following sibling, never
+ // headings from a related card or general page navigation.
+ if(selectedList){
+  const intro=clean(page.slice(next.headEnd,next.contentEnd),200);
+  if(/^expect\s+(?:an?\s+)?[^.!?]{0,80}\bcombination\s+of\s*[:：]?$/i.test(intro)){
+   const prior=next;next=nodes[siblings[++at]];
+   if(!next||!['p','blockquote'].includes(next.tag)||next.contentEnd-next.headEnd>1500||
+    !/^\s*$/.test(page.slice(prior.end,next.start)))return '';
+  }
+ }
+ const text=clean(page.slice(next.headEnd,next.contentEnd),401);
+ if(selectedList&&(!SENSORY_ROLE.test(text)||noteParts(text).length<2))return '';
+ // Separate current selected lists remain separate source claims; the
+ // caller will flag incompatible profiles rather than picking a stale one.
+ return normalizeExplicitCoffeeTastingNotes(text,{allowProse:true});
 }
 function iconLabeledFlavorRows(page,nodes,children,clean,covered){
  const singles=[],cohorts=new Map();let coverAt=0;
@@ -406,6 +422,13 @@ function coordinatedFlavorSentence(sentence,blockText,clean){
  // sentence. Keep literal modifiers; never combine independent profiles.
  let match=sentence.match(/\b(?:this|our|the)\s+[^.!?]{0,80}\bcoffee\s+is\s+[^.!?]{0,60}\bwith\s+(.{2,100}?)\s+up\s+front\s+with\s+(.{2,100}?)\s+in\s+the\s+finish[.!?]?$/i);
  if(match&&SENSORY_ROLE.test(match[1]))return combine([match[1],match[2]]);
+ // When one current selected-product sentence explicitly joins a named
+ // chocolate flavor with earth notes, balanced by sweet undertones, retain
+ // the THREE literal descriptors. Body is mouthfeel, never a fourth flavor.
+ // Do not infer ingredients, accept qualifiers from other coffees or milk.
+ match=sentence.match(/\b(?:produce|deliver|yield|features?|offers?)\s+(?:a|an)\s+(?:pleasantly\s+surprising\s+)?(?:dark,\s*)?([^.!?;]{2,90}?)\s+flavou?r\s+with\s+([^.!?;]{2,70}?)\s+notes?\s+balanced\s+by\s+([^.!?;]{2,90}?\bundertones)\s+and\s+(?:a|an)\s+[^.!?;]{2,60}\bbody[.!?]?$/i);
+ if(match&&SENSORY_ROLE.test(match[1])&&SENSORY_ROLE.test(match[3]))
+  return combine([match[1],match[2],match[3]]);
  match=sentence.match(/^(.{2,80}?)\s+undertones\s+(?:dance|blend|combine)\s+with\s+(.{2,80}?)\s+notes?\s+and\s+(?:a|an)\s+(.{2,80}?)\s+essence(?:\s*,\s*culminating\s+in\s+[^.!?]{2,100})?[.!?]?$/i);
  if(match&&SENSORY_ROLE.test(match[1]))return combine([match[1],match[2],match[3]]);
  match=sentence.match(/\b(?:this|our|the)\s+[^.!?]{0,80}\bcoffee\s+(?:boasts|offers|features)\s+(.{2,80}?)\s+notes?,\s*(.{2,80}?\bsweetness),\s*and\s+(?:a|an)\s+hint\s+of\s+(.{2,80}?)[.!?]?$/i);
@@ -647,6 +670,32 @@ function flavorProse(page,clean,{origin='',originConflict=false}={}){
       !/\b(?:with|by|through|using|as)\b/i.test(additional[2])){
       const first=shortFlavorList(additional[1],clean,{allowSingle:true}),second=shortFlavorList(additional[2],clean,{allowSingle:true});
       if(first&&second)raw=first+', '+second;
+     }
+    }
+    // One directly printed cup profile can add a literal sugar-sweetness
+    // descriptor after two named notes, without another "notes of" label.
+    // Reject milk/conditional profiles and preserve unrelated source facts.
+    if(patternIndex===2&&!CONDITIONAL_FLAVOR.test(sentence)&&
+       !PREPARATION_QUALIFIED_FLAVOR.test(sentence)){
+     const sugar=raw.match(/^(.{2,180}?)\s+with\s+(?:a|an)\s+(unrefined\s+[\p{L}\p{M}'’ -]{2,45}\s+sweetness)$/iu);
+     if(sugar){
+      const first=shortFlavorList(sugar[1],clean,{allowSingle:true});
+      const last=shortFlavorList(sugar[2],clean,{allowSingle:true});
+      if(first&&last&&noteParts(first).length>=2&&SENSORY_ROLE.test(first))
+       raw=first+', '+last;
+     }
+    }
+    // A directly selected, unconditional note can say "stone fruit with a
+    // lemony brightness". That qualifier is part of the same printed sensory
+    // relationship, not incidental marketing. Preserve both literal phrases,
+    // never infer "lemon" from "lemony", and reject conditional preparation.
+    if(patternIndex===2&&!CONDITIONAL_FLAVOR.test(sentence)&&
+       !PREPARATION_QUALIFIED_FLAVOR.test(sentence)){
+     const brightness=raw.match(/^(.{2,180}?)\s+with\s+(?:a|an)\s+((?:lemony|limey|citrusy|floral|fruity|tart)\s+brightness)$/iu);
+     if(brightness){
+      const first=shortFlavorList(brightness[1],clean,{allowSingle:true});
+      const last=shortFlavorList(brightness[2],clean,{allowSingle:true});
+      if(first&&last&&SENSORY_ROLE.test(first))raw=first+', '+last;
      }
     }
     // Stop prose continuations at their grammatical boundary. This retains

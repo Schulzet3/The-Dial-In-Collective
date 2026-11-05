@@ -1,0 +1,934 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch_id": "S2-011",
+  "source_path": ".github/workflows/issue-5-10-hosted-smoke.yml",
+  "file_index_1_based": 11,
+  "source_revisions": {
+    "frozen": {
+      "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+      "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+      "lines": 28
+    },
+    "pinned": {
+      "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+      "lines": 28
+    },
+    "live": {
+      "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+      "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+      "lines": 28
+    }
+  },
+  "per_line": [
+    {
+      "line": 1,
+      "source_text": "name: DIC deployed Issues 5 and 10 public safety smoke",
+      "classification": "configuration",
+      "behavior": "Named public deployed Issues 5 and 10 smoke",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Title not full Auth test",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 1
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 1
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 1
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Title not full Auth test",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 2,
+      "source_text": "on:",
+      "classification": "configuration",
+      "behavior": "Actions event mapping",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Syntax",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 2
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 2
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 2
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Syntax",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 3,
+      "source_text": "  push:",
+      "classification": "configuration",
+      "behavior": "Push trigger",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Potential unintended public calls",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 3
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 3
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 3
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Potential unintended public calls",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 4,
+      "source_text": "    branches: [development/backend-foundation]",
+      "classification": "configuration",
+      "behavior": "Development branch only",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Release branch excluded",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 4
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 4
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 4
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Release branch excluded",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 5,
+      "source_text": "    paths:",
+      "classification": "configuration",
+      "behavior": "Changed-path filter",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Only two explicit files",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 5
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 5
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 5
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Only two explicit files",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 6,
+      "source_text": "      - '.github/workflows/issue-5-10-hosted-smoke.yml'",
+      "classification": "list_item",
+      "behavior": "Workflow path self-trigger",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "CI edit coverage",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 6
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 6
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 6
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; CI edit coverage",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 7,
+      "source_text": "      - 'tests/hosted-issue-5-10-smoke.test.mjs'",
+      "classification": "list_item",
+      "behavior": "Hosted smoke test source trigger",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Test changes covered",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 7
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 7
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 7
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Test changes covered",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 8,
+      "source_text": "  workflow_dispatch:",
+      "classification": "configuration",
+      "behavior": "Manual dispatch",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Public probe needs deliberate run",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 8
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 8
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 8
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Public probe needs deliberate run",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 9,
+      "source_text": "permissions:",
+      "classification": "configuration",
+      "behavior": "Permissions map",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Least privilege",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 9
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 9
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 9
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Least privilege",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 10,
+      "source_text": "  contents: read",
+      "classification": "configuration",
+      "behavior": "Contents read",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Correct read-only",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 10
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 10
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 10
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Correct read-only",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 11,
+      "source_text": "concurrency:",
+      "classification": "configuration",
+      "behavior": "Concurrency map",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Avoids duplicate probes",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 11
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 11
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 11
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Avoids duplicate probes",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 12,
+      "source_text": "  group: dic-hosted-5-10-public-smoke-${{ github.ref }}",
+      "classification": "configuration",
+      "behavior": "Ref-keyed smoke concurrency group",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Only same ref serialized",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 12
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 12
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 12
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Only same ref serialized",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 13,
+      "source_text": "  cancel-in-progress: true",
+      "classification": "configuration",
+      "behavior": "Cancel older run",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Canceled run not PASS",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 13
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 13
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 13
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Canceled run not PASS",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 14,
+      "source_text": "jobs:",
+      "classification": "configuration",
+      "behavior": "Jobs map",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Structural",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 14
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 14
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 14
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Structural",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 15,
+      "source_text": "  public-smoke:",
+      "classification": "configuration",
+      "behavior": "Public-smoke job",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Limited scope",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 15
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 15
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 15
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Limited scope",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 16,
+      "source_text": "    runs-on: ubuntu-24.04",
+      "classification": "configuration",
+      "behavior": "Ubuntu 24.04",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Runner drift",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 16
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 16
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 16
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Runner drift",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 17,
+      "source_text": "    timeout-minutes: 6",
+      "classification": "configuration",
+      "behavior": "Six-minute timeout",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Network startup risk",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 17
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 17
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 17
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Network startup risk",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 18,
+      "source_text": "    steps:",
+      "classification": "configuration",
+      "behavior": "Steps list",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "YAML",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 18
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 18
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 18
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; YAML",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 19,
+      "source_text": "      - uses: actions/checkout@v7",
+      "classification": "action",
+      "behavior": "Checkout action v7",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Mutable action tag",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 19
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 19
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 19
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Mutable action tag",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 20,
+      "source_text": "        with:",
+      "classification": "configuration",
+      "behavior": "Checkout config",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Nesting",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 20
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 20
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 20
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Nesting",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 21,
+      "source_text": "          persist-credentials: false",
+      "classification": "configuration",
+      "behavior": "No persisted credentials",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Reduces token leak",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 21
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 21
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 21
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Reduces token leak",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 22,
+      "source_text": "      - uses: actions/setup-node@v7.1.0",
+      "classification": "action",
+      "behavior": "Setup Node v7.1.0",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Action provenance",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 22
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 22
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 22
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Action provenance",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 23,
+      "source_text": "        with:",
+      "classification": "configuration",
+      "behavior": "Node setup config",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Nesting",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 23
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 23
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 23
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Nesting",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 24,
+      "source_text": "          node-version: '22'",
+      "classification": "configuration",
+      "behavior": "Node 22",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Matches runtime",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 24
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 24
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 24
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Matches runtime",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 25,
+      "source_text": "      - name: Check public HTTP and anonymous/forged-JWT denial only",
+      "classification": "list_item",
+      "behavior": "Describes public HTTP and forged JWT denial scope",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Not actual member authorization",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 25
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 25
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 25
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Not actual member authorization",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 26,
+      "source_text": "        env:",
+      "classification": "configuration",
+      "behavior": "Env map",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Controlled flag",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 26
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 26
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 26
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Controlled flag",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 27,
+      "source_text": "          DIC_PUBLIC_HOSTED_PROBE: '1'",
+      "classification": "configuration",
+      "behavior": "Sets DIC_PUBLIC_HOSTED_PROBE 1",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Must avoid private writes",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 27
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 27
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 27
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Must avoid private writes",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    },
+    {
+      "line": 28,
+      "source_text": "        run: node --test tests/hosted-issue-5-10-smoke.test.mjs",
+      "classification": "command",
+      "behavior": "Runs Node public smoke test",
+      "quality": "Meaningful within Actions structure; actual behavior requires exact-source run",
+      "risk": "Read-only claim needs separate code review",
+      "obsolete_status": "Not demonstrated safe to delete; historical branch/Issue161 can be superseded but preserving provenance required",
+      "duplicate_status": "No proven current duplicate code; scan and browser suites have distinct intended purposes",
+      "exact_counterparts": {
+        "frozen": {
+          "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 28
+        },
+        "pinned": {
+          "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 28
+        },
+        "live": {
+          "commit": "93f92a04ca0343214d1f1938b9e7819a6b972a2d",
+          "blob_sha": "ed5888042a3886a6c5d73c4129a593d944adb019",
+          "line": 28
+        },
+        "all_three_match": true
+      },
+      "testability": "Read actual Actions job steps and target test script in its source audit; do not call SKIPPED a PASS",
+      "safe_fix_improvement_opportunity": "Do not remove or narrow until historical usage, performance, and safe replacement verified; Read-only claim needs separate code review",
+      "locked_fit": "Read-only public smoke does not substitute live owner/member Auth; preserve security",
+      "reviewer": "Direct AI numbered semantic read of all three identical blobs; not independently human-reviewed"
+    }
+  ],
+  "strict_credited": {
+    "frozen": 28,
+    "pinned": 28
+  },
+  "old_v2_increment": 0,
+  "findings": [
+    {
+      "priority": "OBSERVATION",
+      "disposition": "TRIAGED_NO_CHANGE",
+      "finding": "Deployed Issues5/10 public HTTP/forged JWT smoke is deliberately read-only limited. It cannot certify current signed-in membership or account isolation; retain separate #96 acceptance and source-specific CI."
+    }
+  ]
+}

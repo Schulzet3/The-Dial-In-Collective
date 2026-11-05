@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "release_id": "DIC-20261105-READY9-18",
+  "status": "DEPLOYED",
+  "owner_authorization": "Owner Nov 4 2026 current conversation: 'Go ahead and do all 9.' Single one-use publication.",
+  "approved_ready_item_ids": [
+    "DIC-Q-33-original603-309-inline-product-roast",
+    "DIC-Q-33-original603-62-educational-mountain-origin",
+    "DIC-Q-455-previous-calibration-date",
+    "DIC-Q-33-original603-106-country-first-growing-region",
+    "DIC-Q-455-legacy-coffee-date-sort",
+    "DIC-Q-33-original603-18-current-present-farm-locality",
+    "DIC-Q-455-sweetness-legacy-date",
+    "DIC-Q-33-original603-361-selected-named-decaf-process",
+    "DIC-Q-33-original603-446-adjacent-measured-growing-region"
+  ],
+  "development_grant_commit_sha": "76a657f9ddf184e8c050cc44c94ed013f3da6b53",
+  "candidate_branch": "release-candidates/ready9-20261105-ci-fixed",
+  "candidate_source_sha": "0f8ea686743ebae8476d1a72cde0dfa1833ee157",
+  "source_isolation": {
+    "deployable_ready_paths": [
+      "site/lib/engine.js",
+      "site/lib/model.js",
+      "src/server/coffee-countrywide-context-guard.mjs",
+      "src/server/coffee-current-inline-shopify-product.mjs",
+      "src/server/coffee-direct-product-prose.mjs",
+      "src/server/coffee-identity-evidence.mjs",
+      "src/server/coffee-page-metadata.mjs",
+      "src/server/coffee-title-region-evidence.mjs"
+    ],
+    "restored_unready_paths": [
+      "scripts/netlify/should-ignore-build.mjs",
+      "src/server/coffee-narrative-evidence.mjs"
+    ],
+    "original_failed_candidate": "0d43bf201b4c19b38c1a1fa6254298cdfe5830a3",
+    "original_failed_validation_run": 41973150499,
+    "corrected_test_only_commit": "1a4a8e9e01c67a15114854659c2146611da21c70"
+  },
+  "release_sha": "b386a977a7c43bf190f6315105894334d96f0f18",
+  "previous_release_sha": "69742e9e8633c29c209249a87303c6e931a41b89",
+  "netlify_deploy_id": "6aec13c971b66c896b273389",
+  "netlify_state": "ready",
+  "netlify_current": true,
+  "context": "production",
+  "branch": "release/production",
+  "netlify_commit_ref": "b386a977a7c43bf190f6315105894334d96f0f18",
+  "published_at_utc": "2026-11-05T05:27:53.762Z",
+  "production_url": "https://app.dialincollective.com",
+  "github_main_request_commit_sha": "07279a369e2c9568bb8c9240dc460c7cacdc7c3e",
+  "github_main_controller_run": 41974114440,
+  "github_main_controller_conclusion": "success",
+  "exact_candidate_ci": {
+    "validate": 41973651131,
+    "approval": 41973651191,
+    "cloud_and_mobile": 41973651193,
+    "isolated_sql": 41973651164,
+    "all_five_check_conclusions": "success",
+    "node_passed": 2483,
+    "node_failed": 0,
+    "node_intentional_skipped": 6,
+    "lint": "success",
+    "build": "success"
+  },
+  "netlify_functions": [
+    {
+      "name": "coffee-url-preview",
+      "sha256": "fd11974c09157e6b75430b520c01798febac28f0bf0eaa289ec628df8f9001b5",
+      "route": [
+        {
+          "path": "/api/coffee-preview",
+          "methods": [
+            "POST"
+          ]
+        }
+      ]
+    }
+  ],
+  "netlify_edge_functions": 0,
+  "netlify_secret_scan": {
+    "scanned_files": 1380,
+    "match_count": 0
+  },
+  "production_sql": {
+    "new_migrations": 0,
+    "database_mutations": 0
+  },
+  "read_only_production_counts": {
+    "coffees": 8,
+    "shots": 26,
+    "shot_notes": 26,
+    "coffee_submissions": 8,
+    "consistent_with_previous_release": true
+  },
+  "reused_encrypted_backup": {
+    "artifact_id": 13340311614,
+    "encrypted_sha256": "1d266f2c2da25b4a53cecdd37b089759eef8da81c444aea79005a7edfa24c40c",
+    "private_drive_file_id": "1LUtMWvto64NDK3UlXmOx5EnXRDxJN6f5",
+    "private_folder_id": "1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf",
+    "restored_for_this_nondestructive_release": false
+  },
+  "queue_after_reconciliation": {
+    "DEPLOYED": 119,
+    "IN_PROGRESS": 3
+  },
+  "limits": [
+    "Direct production HTTP route smoke unverified: web retrieval unavailable and container DNS lookup failed. Netlify READY/current exact matching Git SHA and deployed function readback verified.",
+    "No live signed-in member/GoTrue, physical-device or full original 603 semantic review test. Original 603 remained skipped.",
+    "No fresh encrypted archive restore was run; reused previously verified private encrypted offsite evidence for this non-destructive source release."
+  ]
+}

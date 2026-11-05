@@ -13,10 +13,14 @@ const scopedWork=/^docs\/workstreams\/(?:issue-[1-9][0-9]*|ops-[a-z0-9-]+|releas
 // the [skip netlify] marker. Never authorize another unmarked merge by pattern.
 const REVIEWED_GITHUB_MERGE_SHA='644870aee66ad5c5f0bcdab0d4eeb66283cdd5fb';
 const REVIEWED_GITHUB_MERGE_SUBJECT='Merge pull request #122 from Schulzet3/work/issue33-presentation-triage-20261026';
-export function auditLatestCommit({paths,subject,sha}){
+export function auditLatestCommit({paths,subject,message=subject,sha}){
  const errors=[],items=[...new Set(paths.map(s=>s.trim()).filter(Boolean))];
  const marker=/^Release DIC: .+ \[dic-publish\]$/.test(subject||'');
- if(!marker&&!String(subject||'').includes('[skip netlify]')&&
+ // Netlify recognizes [skip netlify] anywhere in the complete Git message.
+ // GitHub's merge-commit subject can omit the marker while its body retains it;
+ // check the actual commit message, not PR metadata or a caller-supplied title.
+ const skip=/(?:^|\s)\[skip netlify\](?=\s|$)/i.test(message||'');
+ if(!marker&&!skip&&
     !(sha===REVIEWED_GITHUB_MERGE_SHA&&subject===REVIEWED_GITHUB_MERGE_SUBJECT))
   errors.push('Unmarked commit: use [skip netlify] for nonrelease work; [dic-publish] requires its own owner-approved release');
  const code=items.filter(p=>/^(site\/|src\/|netlify\/functions\/|supabase\/|scripts\/|tests\/|\.github\/(?:workflows|actions)\/|build_cloud\.mjs$|eslint\.config\.mjs$|netlify\.toml$|package(?:-lock)?\.json$)/.test(p));
@@ -56,6 +60,7 @@ export function verifyLatestCommit(){
    const diff=parent?['diff-tree','--no-commit-id','--name-only','-r',parent,hash]:
     ['diff-tree','--root','--no-commit-id','--name-only','-r',hash];
    entries.push({sha:hash,subject:run(['log','-1','--format=%s',hash]),
+    message:run(['log','-1','--format=%B',hash]),
     paths:run(diff).split(/\r?\n/).filter(Boolean)});
   }catch(error){throw Error('Cannot inspect commit '+hash+': '+String(error.message));}
  }

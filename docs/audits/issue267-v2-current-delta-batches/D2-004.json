@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "D2-004",
+  "track": "V2_CURRENT_POST_SNAPSHOT_DELTA_SEPARATE",
+  "review_date_utc": "2026-11-02",
+  "reviewer": "ChatGPT AI assistant (not human)",
+  "pinned_source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+  "live_source_commit_before_fix": "c24e009ba3208b22cc34e06825daaae439085203",
+  "path": "scripts/release/netlify-immutable-publish.mjs",
+  "old_post_pin_blob_sha": "cc87aa9f686cbde0e854e4dca66f39dd6a56e0c1",
+  "old_post_pin_reviewed_lines": [
+    1,
+    39
+  ],
+  "new_reviewed_lines": [
+    1,
+    38
+  ],
+  "changed_original_line": 4,
+  "semantic_segments": [
+    {
+      "first_line": 1,
+      "last_line": 8,
+      "interpretation": "Comments restrict POST to explicit one-use owner-authorized controller; only readFileSync import is unused and does not affect archive validation."
+    },
+    {
+      "first_line": 9,
+      "last_line": 18,
+      "interpretation": "Requires Buffer ZIP, 64-digit archive hash, exact certified 40-digit source SHA, computed SHA256 and PK prefix; import removal changes none."
+    },
+    {
+      "first_line": 19,
+      "last_line": 35,
+      "interpretation": "Production POST requires owner grant, consumed claim, explicit publication permission, functions preservation, token and response identity; no request executed."
+    },
+    {
+      "first_line": 36,
+      "last_line": 39,
+      "interpretation": "Direct CLI entrypoint refuses publication; no runtime behavior modified."
+    }
+  ],
+  "finding": "Exact PR-head Node/lint/build run 41410080558: 2,229 PASS, 0 FAIL, 6 SKIP, then ESLint no-unused-vars warning at original line4 import readFileSync. Only one identifier occurrence, import itself. Remove only unused import.",
+  "tests": "Existing Node test suite passed before lint failure; rerun exact new PR-head Node/lint/build, approval, cloud/visual/SQL CI after fix. No provider call or production write.",
+  "disposition": "ONE_LINE_UNUSED_IMPORT_REMOVED_PENDING_EXACT_HEAD_CI",
+  "counts_separate_from_frozen_and_pinned_current": true,
+  "production_changes": 0
+}

@@ -1,0 +1,70 @@
+{
+  "release_id": "DIC-20261103-READY335-15",
+  "status": "DEPLOYED",
+  "tested_source_sha": "f1e150a2e7c95764c4a2d8760886aab23c2bfc5e",
+  "release_sha": "31c66832a28247e657a2bf89592ebc1e2f48dfc5",
+  "netlify_deploy_id": "6aea62463d08ddf08e0bec7b",
+  "published_at_utc": "2026-11-03T22:38:16.195Z",
+  "production_url": "https://app.dialincollective.com",
+  "netlify_state": "ready",
+  "netlify_current": true,
+  "netlify_context": "production",
+  "netlify_commit_ref": "31c66832a28247e657a2bf89592ebc1e2f48dfc5",
+  "release_workflow_run": 41732438358,
+  "release_workflow_conclusion": "success",
+  "owner_authorization": "Nov3 explicit owner request to try publication of prior READY #335; scope only #335",
+  "staged_candidate_branch": "release-candidates/ready335-nov03-firstlive",
+  "exact_deployable_changed_paths": [
+    "site/lib/engine.js"
+  ],
+  "restored_unpublished_paths": [
+    "scripts/netlify/should-ignore-build.mjs",
+    "src/server/coffee-identity-evidence.mjs",
+    "src/server/coffee-narrative-evidence.mjs"
+  ],
+  "excluded_queued_ready": [
+    "DIC-Q-33-selected-buncho-station-history"
+  ],
+  "candidate_exact_ci_runs": {
+    "approval": 41732097245,
+    "validate": 41732097348,
+    "cloud_browser": 41732097303,
+    "sql": 41732097396
+  },
+  "risk_based_test_outcome": "targeted shot/grinder/recommendation/offline + lint/build SUCCESS; cloud/browser/SQL suites NOT_APPLICABLE, not test PASS",
+  "provider_function": {
+    "name": "coffee-url-preview",
+    "sha256": "73ab7d507e3a866f924d58ed3b4aea6ef0d864135e8680bd22fe8c61ecf83969",
+    "unchanged_since_release14": true
+  },
+  "netlify_secret_scan": {
+    "scanned_files": 1131,
+    "matched_secrets": 0
+  },
+  "production_sql": {
+    "new_migrations": 0,
+    "applied_production_migrations": 0,
+    "auth_edge_member_writes": 0
+  },
+  "read_only_production_aggregate": {
+    "application_tables": 46,
+    "coffees": 8,
+    "shots": 25,
+    "shot_notes": 25,
+    "community_shots": 11,
+    "beta_members": 11,
+    "mutation_receipts": 59
+  },
+  "reuses_verified_backup": {
+    "github_artifact_id": 13097561218,
+    "encrypted_sha256": "6baf7ce563e2157a83b7b5c589dc945144c0734e9f3ab17b452a654df55f60f5",
+    "google_drive_file_id": "1396aSuRA-5wApeiRRkgi6A44wtKZEBwB",
+    "prior_verified_at_utc": "2026-11-02T03:15:35.388Z",
+    "saved_archive_restore_run": 41709488687
+  },
+  "limits": [
+    "Production site HTTP and signed-in user-device interaction unverified: execution environment DNS resolution failed",
+    "Source-isolated candidate was not initially an ancestor of current development; this reconciliation makes it a second-parent ancestor without changing development runtime, and main READY planner still needs source-byte-based continuation for older unpublished READY #33",
+    "No direct before/after content-hash comparison for user data; aggregate read-only table counts, RLS-enabled table metadata and unchanged database-migration diff verified"
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "as_of_utc_date": "2026-11-03",
+  "kind": "INDIVIDUAL_QUALIFIED_CURRENT_OFFICIAL_SOURCE_ADJUDICATION_NOT_UNIVERSAL_CERTIFICATION",
+  "authority": "Owner-approved autonomous Issue33 development, current exact selected roaster product over frozen historical expected answer",
+  "source_development_parent_sha": "f2ea480ad5d5f1f450a3c8f25f01b3ab00de0eb2",
+  "original603_frozen_register": {
+    "path": "docs/audits/issue33-original603-source-level-adjudication-20261029.csv",
+    "git_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "unchanged": true,
+    "qualified_context_cases_baseline": 153,
+    "qualified_missing_literal_cases_baseline": 29,
+    "status_labels_unchanged": true
+  },
+  "review_method": "Independent semantic reading of current exact official selected product text on 2026-11-03, compared to per-case historical expected and actual bounded credential-free GitHub Actions parser logs/source SHA; not a universal 603-case source certification",
+  "records": [
+    {
+      "original603_number": 194,
+      "coffee": "Decaf Coffee",
+      "roaster": "Leap Coffee Roasters",
+      "prior_status": "QUALIFIED_MISSING_VALUE_NEEDS_REVIEW",
+      "url": "https://leapcoffeeroasters.com/products/decaf-coffee",
+      "current_public_h1": "Decaf Coffee",
+      "current_source_evidence": "Selected description directly names SWISS WATER decaffeination, smooth/mellow/sweet caramel notes; does not print a selected Medium roast. Sold out status does not prove roast.",
+      "exact_source": {
+        "source_sha": "4f36301cc25ea61e593590b5a59ef13df4227da4",
+        "workflow_run": 41728039047,
+        "job_id": 126237853014,
+        "conclusion": "success",
+        "raw_html_sha256": "6a2d54906a72b506ffa9c62f1ddac0a076e08cc2955ea683eae886653a463853"
+      },
+      "observed_actual_parser": {
+        "name": "Decaf Coffee",
+        "roaster": "Leap Coffee Roasters",
+        "tasting_notes": "characteristically smooth, mellow, and sweet, with a slight caramel note and pleasant acidity.",
+        "decaffeination_method": "Water Process",
+        "roast_level": null,
+        "conflicts": []
+      },
+      "historical_frozen_expected_roast": "Medium",
+      "assessment": "NO_DEFECT_ON_CURRENT_SELECTED_PAGE: correct Swiss Water standardized method and safe blank roast; frozen Medium lacks current exact-selected source support",
+      "remaining_limit": "Preserve historical qualified status; the product can change; no signed-in member test or independent raw capture byte rehash in this run"
+    },
+    {
+      "original603_number": 251,
+      "coffee": "Decaf Espresso Blend",
+      "roaster": "Orleans Coffee",
+      "prior_status": "QUALIFIED_MISSING_VALUE_NEEDS_REVIEW",
+      "url": "https://orleanscoffee.com/product/espresso-decaf-blend",
+      "current_public_h1": "Decaf Espresso Blend",
+      "current_source_evidence": "Selected copy names Central America, South America and Indonesia plus cocoa, toasted nuts, earthiness. It says a buyer may enjoy it as drip if they like dark-roasted coffee; it does not explicitly declare this selected blend's own Dark roast tier.",
+      "exact_source": {
+        "source_sha": "4f36301cc25ea61e593590b5a59ef13df4227da4",
+        "workflow_run": 41728039047,
+        "job_id": 126237853014,
+        "conclusion": "success",
+        "raw_html_sha256": "669378091502842e5c075732af00266e3de9b4e11985aca5357c6ff7f3738627"
+      },
+      "observed_actual_parser": {
+        "name": "Decaf Espresso Blend",
+        "roaster": "Orleans Coffee",
+        "origin": "Central America, South America, Indonesia",
+        "tasting_notes": "cocoa, toasted nuts, and a touch of earthiness",
+        "roast_level": null,
+        "conflicts": []
+      },
+      "historical_frozen_expected_roast": "Dark",
+      "assessment": "NO_PROVEN_DEFECT: current exact product does not unambiguously specify Dark roast; keep canonical roast blank rather than promote historic expectation or indirect preference copy",
+      "remaining_limit": "Live selected page text and original run source hash not asserted byte-identical; no new 603-wide replay"
+    },
+    {
+      "original603_number": 263,
+      "coffee": "Costa Rica",
+      "roaster": "Quartermaine Coffee Roasters",
+      "prior_status": "QUALIFIED_CONTEXT_OR_SEMANTIC_REVIEW_REQUIRED",
+      "url": "https://quartermaine.com/products/costa-rica-special-estate",
+      "current_public_h1": "Costa Rica",
+      "current_source_evidence": "Direct current selected product explicitly states coffee is from Tarrazu region of Costa Rica. Medium body is mouthfeel, not a selected Medium roast tier.",
+      "exact_source": {
+        "source_sha": "b40ab05559d6be3a858be4cd16ca1df7263aa29b",
+        "workflow_run": 41356573624,
+        "job_id": 124997807771,
+        "conclusion": "success",
+        "raw_html_sha256": "9cacb45d6e6b7b95416909c348fd312447d778f4779170eb0c8ad39021bc44c3"
+      },
+      "observed_actual_parser": {
+        "name": "Costa Rica",
+        "roaster": "Quartermaine Coffee Roasters",
+        "origin": "Tarrazu, Costa Rica",
+        "tasting_notes": "baking chocolate, and hints of citrus rind",
+        "roast_level": null,
+        "conflicts": []
+      },
+      "historical_frozen_parser_origin": "From the Tarrazu, Costa Rica, Tarrazu",
+      "assessment": "CURRENT_EXACT_SOURCE_LOCATION_SUPPORTED: prior malformed origin no longer reproduced in successful Nov1 source-bound parser; no new generic correction justified",
+      "remaining_limit": "Source run predates November3 latest development; source role logic inspected, no new exact-current-SHA run or raw-byte equivalence asserted"
+    }
+  ],
+  "evidence_limits": {
+    "direct_current_official_page_read_count": 3,
+    "source_bound_exact_parser_log_records": 3,
+    "newly_executed_node_tests": 0,
+    "newly_executed_git_ci_jobs": 0,
+    "real_gotrue_member_auth": false,
+    "original603_full_replay_this_run": false,
+    "frozen_corpus_edited": false,
+    "provider_or_member_writes": 0,
+    "production_publication": false,
+    "source_specific_outcomes_not_generalized_to_full603": true
+  },
+  "state": "SOURCE_REVIEW_COMPLETED_FOR_THESE_THREE_CURRENT_VERSIONS_ONLY; PARENT_ISSUE_OPEN",
+  "next_action": "Continue separate original603 qualified product not already repaired; prefer a reproducible current selected-product defect. If confirmed, add generic safety fix plus adversarial tests and same-commit journal, exact-source scoped CI, nonforce integration and narrow READY; never force historical oracle values."
+}

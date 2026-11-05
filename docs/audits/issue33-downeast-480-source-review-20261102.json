@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "date_utc": "2026-11-02",
+  "state": "VERIFIED_BOUNDED_REAL_OFFICIAL_CONFLICT_NOT_A_RUNTIME_DEFECT_NO_READY",
+  "development_base_sha": "70d34f03567e9e34165be843f72c62b6dd17a996",
+  "case_number": 480,
+  "coffee": "Strawberry Fields Forever (seasonal release)",
+  "original603_register": "docs/audits/issue33-original603-source-level-adjudication-20261029.csv",
+  "original603_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "original_review": "2026-10-29 row #480 recorded tasting_notes absent in archived extraction; this is not proof of a current runtime defect.",
+  "current_official_product_url": "https://www.downeastcoffee.com/products/seasonal-release",
+  "current_official_web_observation": "2026-11-02 current public official product, crawled within last week; exact current raw HTML SHA256/H1 and parser not yet verified",
+  "selected_product_title": "Strawberry Fields Forever (seasonal release)",
+  "selected_source_facts": {
+    "roast": "Medium Light",
+    "top_tasting": "Juicy Strawberries / Milk Chocolate / Peach",
+    "description_tasting": "Juicy Strawberry, Dark Chocolate",
+    "origin": "Colombia & Costa Rica",
+    "process": "Anaerobic Co-Ferment, Washed",
+    "producer": "Smallholder Farmers from Tolima, Huila & Caldas & Coopedota",
+    "component_roles": "El Vergel Estate co-ferment component; Coopedota Santa Maria washed base",
+    "brewing": "V60 1:17 / three minutes; espresso 1:2.25 / 26 seconds; no explicit espresso dose or yield"
+  },
+  "caution": "Two printed current selected tasting lists are not byte-identical. Preserve both direct source facts and review provenance, do not invent a combined canonical list. Blend component methods/producer roles cannot be silently promoted to single-lot facts; brewing guide is not a complete espresso dose/yield recipe.",
+  "tests": "tests/coffee-issue33-downeast-selected-notes.test.mjs",
+  "selector": "[dic-issue33-twelfth1]",
+  "acceptance": "Guarded GitHub public fetch must verify current raw selected H1, HTML SHA256, parser fields/conflicts and Add Coffee preview. Only then determine whether missing tasting is a real current omission and whether a runtime change is justified.",
+  "immutable": "Original603 CSV/captures/oracle/scorer, 153 context-qualified and 29 missing-literal-qualified caveats, prior review-required and missing classifications unchanged.",
+  "exclusions": "No #267 V2/#96/PR367, production SQL/Auth/Edge/provider/member, publication, account, purchase or READY promotion. Frozen603 and real hosted GoTrue not claimed.",
+  "actual_current_source": {
+    "merged_source_sha": "4e5d7909e77abcdc9739748f223bcff29db01a7f",
+    "pr": 422,
+    "exact_official_probe_run": 41498336839,
+    "job_id": 125459063900,
+    "attempted": 1,
+    "fetched": 1,
+    "parsed": 1,
+    "add_coffee_preview": true,
+    "manual_certified": 0,
+    "current_h1": [],
+    "identity": "Current selected product visible title + parser name, not a fabricated H1",
+    "raw_html_sha256": "e3a3c4eeced7419069b7abdbb2ef79b7cb358f253e10f412e5c9092d0e4c908c",
+    "artifact_id": 13166314782,
+    "artifact_digest": "sha256:16d9350c8853b5ec7f08986fae40889bbeefee5d61ede67b44f279c00da41f79",
+    "artifact_expiry_utc": "2026-11-03T18:12:33Z",
+    "canonical_fields": {
+      "name": "Strawberry Fields Forever (seasonal release)",
+      "roaster": "Downeast Coffee Roasters",
+      "producer": "Smallholder Farmers from Tolima, Huila & Caldas & Coopedota",
+      "origin": "Colombia & Costa Rica",
+      "elevation_m": "1,525 – 1,950 MASL",
+      "variety": "Caturra, Castillo, Colombia & Catuai, Caturra",
+      "process": "Other/Unknown",
+      "roast_level": "Medium-Light",
+      "tasting_notes": null
+    },
+    "conflicts": [
+      "tasting_notes"
+    ],
+    "source_facts": {
+      "tasting_1": "Juicy Strawberry, Dark Chocolate",
+      "tasting_2": "Juicy Strawberries Milk Chocolate Peach",
+      "method": "Anaerobic Co-Ferment, Washed"
+    },
+    "adjudication": "Two independently direct selected tasting captions differ in chocolate type and additional peach; correct conservative current parser withholds canonical tasting_notes, marks explicit conflict and retains both literal source_facts. Original Oct29 blank was not a current omission. Blend has two processing methods; Other/Unknown is a conservative canonical value, not a missed single process. Product page has no H1 in guarded product scope; selected title is independently matched. No runtime correction or READY."
+  },
+  "pr422_pr_head_ci": {
+    "head_sha": "715b8e1cddb2065b2043ee1b41724a555362ae6e",
+    "node_run": 41497221738,
+    "initial_node_attempt": "FAIL_ONE_UNRELATED_HTML_RESOURCE_SECURITY_SPAWNSYNC_ETIMEDOUT_4S",
+    "node_retry_attempt": 2,
+    "node_retry": "SUCCESS_2269_PASS_0_FAIL_6_SKIP",
+    "approval": 41497221719,
+    "visual": 41497221733,
+    "sql": 41497221576,
+    "private_review": 41497222214,
+    "cloud": 41497221916,
+    "all_other_applicable": "SUCCESS",
+    "frozen603": "SKIPPED"
+  },
+  "remaining": "Source-backed dual-caption conflict needs a bounded adversarial synthetic regression, then exact CI and nonforce integration; no current runtime bug established. Full603/hosted GoTrue acceptance unverified."
+}

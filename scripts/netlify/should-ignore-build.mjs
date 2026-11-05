@@ -9,7 +9,13 @@ import {execFileSync} from 'node:child_process';
 import {checkRepository,readTracked} from '../audit/approval-coverage.mjs';
 import {assertProductionClaim} from '../release/one-use-claim.mjs';
 
-export function decide({context,branch,subject}){
+export function decide({context,branch,subject,commitMessage=''}){
+  // A one-use Git claim may carry the release subject but MUST NOT start a
+  // second Git-connected build when immutable Netlify publication is selected.
+  // Check the entire commit message, not just the subject; the provider's
+  // [skip netlify] handling is an additional safeguard, not our only gate.
+  if(/(?:^|\s)\[skip netlify\](?=\s|$)/i.test(commitMessage))
+    return {ignore:true,reason:'Immutable release claim: suppress Git-connected rebuild'};
   // Do not publish previews or production without a deliberate, separately
   // owner-approved release. Ordinary commits and docs pushes must be ignored.
   if(branch==='work/visual-refresh-20261015')
@@ -30,14 +36,15 @@ export function decide({context,branch,subject}){
 }
 
 function run(){
-  let subject='';
+  let subject='',commitMessage='';
   try{
-    subject=execFileSync('git',['log','-1','--format=%s'],{encoding:'utf8',stdio:['ignore','pipe','ignore']}).trim();
+    commitMessage=execFileSync('git',['log','-1','--format=%B'],{encoding:'utf8',stdio:['ignore','pipe','ignore']}).trim();
+    subject=commitMessage.split(/\r?\n/,1)[0]||'';
   }catch{ /* Missing commit provenance: no production release. */ }
   let decision=decide({
     context:process.env.CONTEXT||'',
     branch:process.env.BRANCH||'',
-    subject
+    subject,commitMessage
   });
   if(!decision.ignore){
    try{
