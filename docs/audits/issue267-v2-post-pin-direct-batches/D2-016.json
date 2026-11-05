@@ -1,0 +1,948 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "D2-016",
+  "date_utc": "2026-11-05",
+  "kind": "POST_PIN_NEW_CODE_DIRECT_SEMANTIC_REVIEW_AND_REMEDIATION",
+  "source": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "observed_parent_commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+    "path": "tests/production-readonly-smoke.test.mjs",
+    "pre_fix_blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+    "new_reviewed_blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+    "physical_line_count": 27,
+    "verified_absent_at_pin": true,
+    "terminal_newline_not_physical_line": true
+  },
+  "provenance": "New current source code to be committed with receipt; prior live source blob separately read from line1. All new physical line numbers considered, no reuse of older D2/S2 credit.",
+  "per_line": [
+    {
+      "line": 1,
+      "source_text": "import test from 'node:test';",
+      "classification": "executable",
+      "behavior": "Imports Node test runner",
+      "quality": "Standard regression harness",
+      "risk": "No production side effects",
+      "dead_or_obsolete": "Active test",
+      "duplication": "Standard dependency",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 1,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Run Node22 tests; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 1 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 2,
+      "source_text": "import assert from 'node:assert/strict';",
+      "classification": "executable",
+      "behavior": "Imports strict assertions",
+      "quality": "Avoids coercive checks",
+      "risk": "No security risk",
+      "dead_or_obsolete": "Active test",
+      "duplication": "Distinct from test runner",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 2,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Node assertions; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 2 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 3,
+      "source_text": "import {smoke,smokePaths} from '../scripts/release/production-readonly-smoke.mjs';",
+      "classification": "executable",
+      "behavior": "Imports real smoke helper and routes",
+      "quality": "Tests actual changed code",
+      "risk": "Import CLI guard avoids live requests",
+      "dead_or_obsolete": "Regression coupling",
+      "duplication": "No fake alternate implementation",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 3,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Run exact source import; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 3 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 4,
+      "source_text": "const response=(status=200,type='text/html',body='<html>ok</html>')=>({",
+      "classification": "executable",
+      "behavior": "Creates configurable HTTP response fixture",
+      "quality": "Allows status/type/body variants",
+      "risk": "Fixture does not model all Fetch edge cases",
+      "dead_or_obsolete": "Active fixture",
+      "duplication": "One shared helper",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 4,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Mock status/type tests; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 4 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 5,
+      "source_text": " ok:status>=200&&status<300,status,headers:{get:()=>type},text:async()=>body",
+      "classification": "executable",
+      "behavior": "Provides ok/status/headers/text interface",
+      "quality": "Minimal deterministic response stand-in",
+      "risk": "Cannot prove production service behavior",
+      "dead_or_obsolete": "Active mocked input",
+      "duplication": "No duplicate fixture",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 5,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Run mock tests; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 5 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 6,
+      "source_text": "});",
+      "classification": "executable",
+      "behavior": "Closes response factory",
+      "quality": "Syntax completion",
+      "risk": "No operational risk",
+      "dead_or_obsolete": "Required delimiter",
+      "duplication": "Not dead",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 6,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Node parse; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 6 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 7,
+      "source_text": "test('production smoke is strictly read-only and checks public routes',async()=>{",
+      "classification": "executable",
+      "behavior": "Starts positive read-only smoke test",
+      "quality": "Tests contract without provider calls",
+      "risk": "Not a true hosted smoke",
+      "dead_or_obsolete": "Current positive case",
+      "duplication": "Separate from rejection suite",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 7,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Node test runner; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 7 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 8,
+      "source_text": " const calls=[];const r=await smoke({fetchImpl:async(url,opts)=>{",
+      "classification": "executable",
+      "behavior": "Injects fetch mock and captures request args",
+      "quality": "Verifies no actual network",
+      "risk": "Mock intentionally not a full HTTP implementation",
+      "dead_or_obsolete": "Test seam",
+      "duplication": "No duplicate capture logic",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 8,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Observe all calls; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 8 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 9,
+      "source_text": "  calls.push({url,opts});",
+      "classification": "executable",
+      "behavior": "Records URL and options for assertions",
+      "quality": "Supports GET/redirect validation",
+      "risk": "Mock does not assert headers here",
+      "dead_or_obsolete": "Current capture step",
+      "duplication": "No duplicate writes",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 9,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Check captured calls; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 9 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 10,
+      "source_text": "  return url.endsWith('/manifest.webmanifest')",
+      "classification": "executable",
+      "behavior": "Distinguishes manifest from HTML routes",
+      "quality": "Prevents accidental fixture false-green",
+      "risk": "Relies on exact route suffix from app",
+      "dead_or_obsolete": "Updated test fixture",
+      "duplication": "Previously returned HTML for every route",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 10,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Exercise manifest route; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 10 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 11,
+      "source_text": "   ? response(200,'application/manifest+json; charset=utf-8','{\"name\":\"DIC\"}')",
+      "classification": "executable",
+      "behavior": "Returns genuine manifest MIME with charset and JSON text",
+      "quality": "Tests valid manifest MIME acceptance",
+      "risk": "Does not require manifest schema verification",
+      "dead_or_obsolete": "Positive regression data",
+      "duplication": "New distinct path fixture",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 11,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Run acceptance test; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 11 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 12,
+      "source_text": "   : response(200,'text/html; charset=utf-8');",
+      "classification": "executable",
+      "behavior": "Returns HTML MIME for root/cloud",
+      "quality": "Tests proper HTML path media",
+      "risk": "Fixture does not inspect rendered UI",
+      "dead_or_obsolete": "Positive route data",
+      "duplication": "Paired branch not duplication",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 12,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Run acceptance test; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 12 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 13,
+      "source_text": " }});",
+      "classification": "executable",
+      "behavior": "Closes mock invocation",
+      "quality": "Completes injected HTTP simulation",
+      "risk": "No real network",
+      "dead_or_obsolete": "Active test syntax",
+      "duplication": "No duplicate closure",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 13,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Run Node import; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 13 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 14,
+      "source_text": " assert.equal(r.read_only,true);assert.equal(r.provider_deploy_sha_verified,false);",
+      "classification": "executable",
+      "behavior": "Asserts read-only flag and provider SHA false",
+      "quality": "Prevents false provider certification",
+      "risk": "No live deployment SHA verification implied",
+      "dead_or_obsolete": "Current assertion",
+      "duplication": "Distinct two flags",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 14,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Exact test pass; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 14 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 15,
+      "source_text": " assert.deepEqual(calls.map(x=>x.url),smokePaths.map(p=>'https://app.dialincollective.com'+p));",
+      "classification": "executable",
+      "behavior": "Asserts three calls target allowlisted origin paths",
+      "quality": "Covers source URL assembly",
+      "risk": "Does not validate DNS/hosting",
+      "dead_or_obsolete": "Current read-only route assertion",
+      "duplication": "Not redundant with MIME tests",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 15,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Compare URLs; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 15 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 16,
+      "source_text": " assert.ok(calls.every(x=>x.opts.method==='GET'&&x.opts.redirect==='error'));",
+      "classification": "executable",
+      "behavior": "Asserts GET-only and redirects denied",
+      "quality": "Covers no-write HTTP method contract",
+      "risk": "GET endpoints could still misbehave server-side; runtime owner separate",
+      "dead_or_obsolete": "Current side-effect guard",
+      "duplication": "Not repeated by MIME test",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 16,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Inspect options; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 16 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 17,
+      "source_text": "});",
+      "classification": "executable",
+      "behavior": "Closes positive test",
+      "quality": "Syntax completion",
+      "risk": "No risk",
+      "dead_or_obsolete": "Required delimiter",
+      "duplication": "Not dead",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 17,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Node --test; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 17 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 18,
+      "source_text": "test('smoke fails closed on unexpected origin, path, status or content',async()=>{",
+      "classification": "executable",
+      "behavior": "Starts negative smoke acceptance suite",
+      "quality": "Separates invalid inputs from positive route test",
+      "risk": "Mock coverage bounded",
+      "dead_or_obsolete": "Active negative case",
+      "duplication": "Distinct from MIME mismatch negative",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 18,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Node regression; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 18 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 19,
+      "source_text": " await assert.rejects(smoke({origin:'https://example.com',fetchImpl:async()=>response()}),/origin/);",
+      "classification": "executable",
+      "behavior": "Rejects alternate origin",
+      "quality": "Validates origin whitelist",
+      "risk": "No live HTTP involved",
+      "dead_or_obsolete": "Active regression",
+      "duplication": "Origin-specific case",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 19,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Expect rejects /origin/; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 19 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 20,
+      "source_text": " await assert.rejects(smoke({paths:['/admin'],fetchImpl:async()=>response()}),/path/);",
+      "classification": "executable",
+      "behavior": "Rejects /admin path",
+      "quality": "Validates route whitelist",
+      "risk": "No live backend mutation attempted",
+      "dead_or_obsolete": "Active regression",
+      "duplication": "Path-specific case",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 20,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Expect rejects /path/; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 20 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 21,
+      "source_text": " await assert.rejects(smoke({fetchImpl:async()=>response(503)}),/failed/);",
+      "classification": "executable",
+      "behavior": "Rejects 503 status",
+      "quality": "Fails on HTTP error",
+      "risk": "Original request mock gives 503 on first route",
+      "dead_or_obsolete": "Active status check",
+      "duplication": "Not a MIME case",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 21,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Expect rejects /failed/; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 21 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 22,
+      "source_text": " await assert.rejects(smoke({fetchImpl:async()=>response(200,'text/html','')}),/invalid body/);",
+      "classification": "executable",
+      "behavior": "Rejects empty HTML body",
+      "quality": "Protects against blank page false green",
+      "risk": "Not a full DOM assertion",
+      "dead_or_obsolete": "Active content check",
+      "duplication": "Separate from MIME",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 22,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Expect invalid body; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 22 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 23,
+      "source_text": "});",
+      "classification": "executable",
+      "behavior": "Closes negative test",
+      "quality": "Syntax completion",
+      "risk": "No operational risk",
+      "dead_or_obsolete": "Required delimiter",
+      "duplication": "Not dead",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 23,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Node --test; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 23 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 24,
+      "source_text": "test('smoke rejects HTML fallback at manifest and JSON at HTML routes',async()=>{",
+      "classification": "executable",
+      "behavior": "Introduces previously missing cross-route MIME negative test",
+      "quality": "Regression for reproduced false-green defect",
+      "risk": "Pure mock, not hosted production",
+      "dead_or_obsolete": "New test behavior",
+      "duplication": "Distinct from generic status/body negatives",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 24,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Run Node22 3 test cases; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 24 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 25,
+      "source_text": " await assert.rejects(smoke({fetchImpl:async()=>response(200,'text/html','<html>SPA fallback</html>')}),/manifest.webmanifest/);",
+      "classification": "executable",
+      "behavior": "Supplies HTML for every path and requires manifest failure",
+      "quality": "Reproduces prior false-positive manifest fallback",
+      "risk": "Now must reject path /manifest.webmanifest",
+      "dead_or_obsolete": "Confirmed fix regression",
+      "duplication": "No overlapping test with valid MIME",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 25,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Assert rejects at manifest; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 25 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 26,
+      "source_text": " await assert.rejects(smoke({fetchImpl:async()=>response(200,'application/json','{}')}),/failed \\/ status/);",
+      "classification": "executable",
+      "behavior": "Supplies JSON for HTML and requires root rejection",
+      "quality": "Validates complementary MIME direction",
+      "risk": "Only media-type mismatch; not actual deployed page",
+      "dead_or_obsolete": "Confirmed fix regression",
+      "duplication": "Complements manifest negative",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 26,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Assert rejects failed root path; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 26 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    },
+    {
+      "line": 27,
+      "source_text": "});",
+      "classification": "executable",
+      "behavior": "Closes MIME mismatch test",
+      "quality": "Syntax completion",
+      "risk": "No risk",
+      "dead_or_obsolete": "Required delimiter",
+      "duplication": "Not dead",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact GitHub contents 404"
+      },
+      "live_source": {
+        "path": "tests/production-readonly-smoke.test.mjs",
+        "commit": "NEW_PR_HEAD_PENDING",
+        "blob_sha": "97a2df9a930029f057d9147f229a830fbd3d4165",
+        "line": 27,
+        "exact_original": true,
+        "review_status": "NEW_CODE_SAME_COMMIT"
+      },
+      "pre_fix_source": {
+        "commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+        "blob_sha": "11ca2f043c19d02517ed1a146bd8ae637950de71",
+        "first_differing_line": 8,
+        "old_version_directly_read": true
+      },
+      "testability": "Node --test; local Node 22 exact blobs 3/3 PASS; full CI PR-head pending",
+      "fix_opportunity": "Keep",
+      "locked_fit": "Read-only route smoke; no production publication, accounts, SQL, Auth, Edge, provider or member writes. Exact provider SHA attestation remains separate and false.",
+      "review_method": "Direct AI semantic inspection of original physical source line 27 at Git blob 97a2df9a930029f057d9147f229a830fbd3d4165; not independent human certification."
+    }
+  ],
+  "finding": {
+    "classification": "CONFIRMED_AND_FIXED_IN_PR_SOURCE",
+    "description": "Previous production smoke allowed text/html for /manifest.webmanifest and application/json for HTML routes, generating false green when SPA fallback served for a manifest.",
+    "reproduction": "Exact original Git blob 715682... locally hash matched. Node 22 injected 200 text/html SPA fallback for all three routes; old smoke returned 3 PASS including manifest. No network/provider side effect.",
+    "fix": "Per-route anchored MIME contract with safe charset parameters; valid manifest fixture updated and wrong-type negative regression added.",
+    "tests": "Local Node 22 --test with exact new Git blobs a82501a36186494d6b19ec78381400be5ade80de / 97a2df9a930029f057d9147f229a830fbd3d4165: 3 test cases PASSED / 0 failed (no live route). Exact PR CI not yet checked."
+  },
+  "runtime_app_acceptance": "NOT_RUN",
+  "production_changes": false,
+  "full_coverage": false
+}
