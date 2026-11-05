@@ -5,34 +5,34 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 7290,
+    "strict_validated_lines": 7330,
     "first_unvalidated_manifest_file_index": 59,
     "first_unvalidated_path": "docs/DECISION_LEDGER.json",
-    "first_unvalidated_line": 2400,
+    "first_unvalidated_line": 2440,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 8939,
+    "strict_validated_lines": 8979,
     "first_unvalidated_file_index": 53,
     "first_unvalidated_path": "scripts/audit/coffee-source-review-local.py",
-    "first_unvalidated_line": 371,
+    "first_unvalidated_line": 411,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true,
-    "strict_live_counterpart_checked_through_line": 370,
+    "strict_live_counterpart_checked_through_line": 410,
     "last_live_counterpart_checked": {
       "path": "scripts/audit/coffee-source-review-local.py",
-      "commit": "0cc99e6601d13ffb038edc6dedf2dff95191284a",
+      "commit": "0f93b572eb31c466139731604e43f8f557b3e9ab",
       "blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
-      "first_line": 331,
-      "last_line": 370,
+      "first_line": 371,
+      "last_line": 410,
       "offset": 0
     }
   },
   "post_pin_drift": {
-    "observed_development_commit": "0cc99e6601d13ffb038edc6dedf2dff95191284a",
+    "observed_development_commit": "0f93b572eb31c466139731604e43f8f557b3e9ab",
     "strict_validated_added_lines": 1,
     "scope": "Single verified addition in first current source path; total post-pin live-code delta denominator not yet reconciled",
     "rest_of_live_changes": "Remaining post-pin current code drift not semantically fully inspected; 50 new pinned live counterparts exact at +6.",
@@ -3164,12 +3164,36 @@
       "strict_pinned_delta": 40,
       "old_v2_additional_credit": 0,
       "verification": "80 original numbered AI direct semantic source lines with nine individual dimensions and 80 exact live counterparts; no runtime/human certification."
+    },
+    {
+      "batch": "S2-135",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-135.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        2400,
+        2439
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "frozen_live_blob": "90233639bef05b1671f5325ebbf89fde1031eac6",
+      "frozen_live_exact_text_line_offset": 108,
+      "pinned_file": "scripts/audit/coffee-source-review-local.py",
+      "pinned_lines": [
+        371,
+        410
+      ],
+      "pinned_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_blob": "a21172c788da14bfcd341c43d1d00c4702d9ab1a",
+      "live_exact_text_line_offset": 0,
+      "strict_frozen_delta": 40,
+      "strict_pinned_delta": 40,
+      "old_v2_additional_credit": 0,
+      "verification": "80 individually semantic original lines with 9 dimensions and 80 exact current counterparts; no human or runtime certification."
     }
   ],
   "completion": "IN_PROGRESS",
-  "test_limit": "S2-134 source-only direct review; PR-head and merged approval CI pending; Node/OCR/browser/Auth/SQL/original603 NOT_RUN; live semantic drift incomplete",
-  "last_batch": "S2-134",
-  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-134.json",
+  "test_limit": "S2-135 source-only; exact PR-head/merged CI pending; no Python/Node/browser/Auth/SQL/603 execution; post-pin drift incomplete",
+  "last_batch": "S2-135",
+  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-135.json",
   "complete": false,
   "accounting_reconciliation_20261105": {
     "scope": "NONCREDIT historical source-ledger reference repair",
