@@ -1,3 +1,13 @@
+## Issue #504 G1-040 — November 5 UTC: six historical #267 comments direct semantic review [skip netlify]
+
+**Source refs:** development `8c86adea8ba0522b069fcc882bf76019c38111a7`, main `c25e31343b1974b89445b48b43993bc446aa96ca`, release/production `b386a977a7c43bf190f6315105894334d96f0f18`; repository currently reports **PUBLIC** under previously documented owner exception (not changed). All five scoped issues remain OPEN and ownership unchanged.
+
+**Direct work:** Read all six complete next comments in chronological order: `6514296577`, `6515105709`, `6515143992`, `6515171259`, `6515270978`, `6515325308`. Every word inspected; exact full-body SHA-1, bytes, 1-based inclusive line/word ranges and semantic findings are in [G1-040 receipt](../audits/issue504-review-G1-040.json). **6 new metadata objects / 1803 words**, zero duplicated file/code/#267 semantic line credit. October 30 B027–B031 V1 source and CI narratives are historical; the November 1 V2 reset is controlling. Current original PRs #282/#294 MERGED, historical stacked #295/#296 OPEN, so old in-progress statements are not current-state defects. Original R2-001 source workflow blob `2cf28b22c69547c15c5f300dc4a68ed96a58791e` / 41 physical lines independently reverified, *without* importing line credit.
+
+**Cumulative #504:** **7,919 file lines / 60,754 words**, plus **75 GitHub metadata objects / 21497 words**. #267 comments 91, 79 remain after this batch; newer #504 comments and large other GitHub metadata inventories still unreviewed. No independently reproduced current defect, safe deletion, code edit, customer data/provider/production change, release queue alteration or publication. Documentation/checkpoint-only: SHA-1 self-test, full-body arithmetic, continuity and source ID uniqueness passed; Node22/SQL/browser/603 and live checks NOT RUN. Applicable exact-source GitHub PR/push CI must be observed separately; SKIPPED does not mean PASS.
+
+**NEXT exact item:** [Issue #267 comment 6524762907](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267#issuecomment-6524762907), word 1. Global audit **OPEN / IN_PROGRESS**, #267 V2 separate and incomplete. No production/release branch movement or Git history change.
+
 ## Issue #504 G1-039 — November 5 UTC: #267 issue charter and first six historical comments fully reviewed [skip netlify]
 
 **Live refs:** development `b1ed28df4969b9af3ac7c9e70fa5f824deed0599`, main `c25e31343b1974b89445b48b43993bc446aa96ca`, release/production `b386a977a7c43bf190f6315105894334d96f0f18`. GitHub repository reports **PUBLIC** under earlier owner-confirmed temporary exception; no visibility change. #504/#267/#455/#33/#96 remain OPEN and separate. Historical prior G1-038 PR #815 is MERGED; only #504-owned docs touched.
