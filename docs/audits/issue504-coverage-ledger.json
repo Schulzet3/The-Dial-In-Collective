@@ -262,11 +262,34 @@
       ],
       "actual_original_pr_merges_verified": 6,
       "live_record_json_equal": true
+    },
+    {
+      "id": "G1-020",
+      "receipt": "docs/audits/issue504-review-G1-020.json",
+      "text_files_entire": 0,
+      "text_files_partial": 1,
+      "reviewed_file_lines": 296,
+      "reviewed_file_words": 2701,
+      "reviewed_github_objects": 0,
+      "reviewed_github_words": 0,
+      "reviewed_sequential_queue_records": 8,
+      "confirmed_note_only_fixes": 0,
+      "source_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
+      "source_range_inclusive": [
+        3834,
+        4129
+      ],
+      "original_release_receipts_verified": [
+        "DIC-20261030-READY-QUEUE-13",
+        "DIC-20261102-READY17-14"
+      ],
+      "actual_original_pr_merges_verified": 8,
+      "live_record_json_equal": true
     }
   ],
   "totals": {
-    "source_file_lines": 5611,
-    "source_file_words": 44770,
+    "source_file_lines": 5907,
+    "source_file_words": 47471,
     "github_objects": 2,
     "github_words": 721
   },
@@ -285,20 +308,21 @@
   "next": {
     "kind": "git_blob",
     "path": "docs/RELEASE_QUEUE.json",
-    "first_line": 3834,
+    "first_line": 4130,
     "expected_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
     "require_fresh_blob": true,
-    "expected_next_item": "DIC-Q-96-admin-stale-http-conflict",
+    "expected_next_item": "DIC-Q-33-selected-origin-method-suffix",
     "unreviewed_drift": [
       "DIC-Q-455-legacy-undated-feedback",
       "DIC-Q-33-original603-309-inline-product-roast",
       "DIC-Q-33-original603-62-educational-mountain-origin",
       "DIC-Q-455-previous-calibration-date",
-      "DIC-Q-33-original603-106-country-first-growing-region"
+      "DIC-Q-33-original603-106-country-first-growing-region",
+      "DIC-Q-455-legacy-coffee-date-sort"
     ]
   },
-  "uncovered": "Queue pinned original line 3834+ plus five newly added current live queue records and other changed queue fields; all issue/PR/review/Actions/git-history/binary surfaces not fully semantically covered. #267 V2 frozen/live executable review not credited. Temporary PUBLIC visibility owner exception, eventual PRIVATE restore unverified.",
-  "latest_review_source_anchor": "68b7895a5e0c0cfb44f2eb38b5c0916acf85015f",
+  "uncovered": "Pinned queue line 4130+; six new live queue IDs and 19 changed preexisting queue item values; GitHub issues/PR reviews/comments/Actions/jobs/logs/tags/releases/history/binary assets, and delegated #267 strict source coverage not complete. Repository PUBLIC with reported temporary owner exception; eventual PRIVATE restoration unverified.",
+  "latest_review_source_anchor": "55d45a95185dcf8d9692f35bfb63cccae30f015d",
   "inventory_metadata_only": {
     "github_issue_rest": 523,
     "github_pr_rest": 454,
@@ -313,7 +337,7 @@
       "GET actions/workflows"
     ],
     "actions_runs_total_observed_at_latest_page1": 9052,
-    "queue_unique_items_observed": 117
+    "queue_unique_items_observed": 118
   },
   "last_completely_reviewed_document": {
     "path": "docs/RELEASE_REQUEST_SCHEMA_V4.md",
@@ -328,9 +352,9 @@
     "source_sha_before_notes": "0f5d8a9d6be56b7ecb4b7e4675340e0f9ed374e5",
     "total_lines": 5377,
     "reviewed_first_line": 1,
-    "reviewed_last_line": 3833,
+    "reviewed_last_line": 4129,
     "whitespace_words_credited": "per_receipt_ranges_only; includes noncontiguous earlier insertions",
-    "credit": "G1-005 through G1-019; pinned source-bound receipts only; no #267 double credit"
+    "credit": "G1-005 through G1-020; source-bound only; zero #267 overlap"
   },
   "ci_open_negative": {
     "source_merge_sha": "54ab55987be8b05db090c530a47e496093c8c76a",
@@ -428,5 +452,22 @@
     "direct_words": 2420,
     "original_pr_merges": 6,
     "reporting_boundary": "No live provider recheck and no code/release changes"
+  },
+  "g1020_reconciliation_20261105": {
+    "development_sha": "55d45a95185dcf8d9692f35bfb63cccae30f015d",
+    "main_sha": "590c2c33610a5a7703a2509e1045d236b78a7981",
+    "release_production_sha": "69742e9e8633c29c209249a87303c6e931a41b89",
+    "pinned_queue_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
+    "current_queue_sha": "55192e4e4c6bee06b2af7e4caf2c058d115d3e47",
+    "lines": 296,
+    "words": 2701,
+    "records": 8,
+    "original_pr_merges": 8,
+    "release13": 2,
+    "release14": 6,
+    "confirmed_safe_fixes": 0,
+    "unreviewed_new": 6,
+    "unreviewed_changed": 19,
+    "next_line": 4130
   }
 }
