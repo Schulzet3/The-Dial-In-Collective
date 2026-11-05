@@ -94,13 +94,17 @@ export function nextShotGuidance(advice,shot,showTemp=false,unit='F'){
 export function lastRecipeContextShot(shots,coffeeId,recipe,version){
  if(!Array.isArray(shots)||!recipe?.style||!recipe?.basketId||!recipe?.feedMode||
   !version?.id||!version?.calibrationId)return null;
- let latest=null;
+ let latest=null,latestInstant=-Infinity;
  for(const sh of shots){
   if(!sh||sh.hidden||sh.coffeeId!==coffeeId||sh.setupVersionId!==version.id||
    sh.calibrationId!==version.calibrationId||sh.style!==recipe.style||
    sh.basketId!==recipe.basketId||sh.feedMode!==recipe.feedMode||
    typeof sh.timestamp!=='string'||!sh.timestamp.trim())continue;
-  if(!latest||sh.timestamp>latest.timestamp)latest=sh;
+  // Different ISO offsets must be compared as actual instants. Preserve
+  // legacy undated/malformed shots without making them current feedback.
+  const at=Date.parse(sh.timestamp);
+  if(!Number.isFinite(at))continue;
+  if(at>latestInstant){latest=sh;latestInstant=at;}
  }
  return latest;
 }
