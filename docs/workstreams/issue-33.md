@@ -1,3 +1,29 @@
+## November 5 UTC — PR725 third approval JSON syntax repair [skip netlify]
+
+Corrected second-head approval [41987626803](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41987626803) **FAIL** at JSON parse position593: new `ci_runs: []` member lacked separator comma before `scope_paths`. Actual Node source tests on previous head 1750 PASS/0 FAIL and other checks preserved, but approval did NOT pass. Fixed comma in queue, independently parsed full queue JSON in tool before commit, TESTING state retained, no other queue items touched. Require exact corrected-head approval, tests and merged current official source, not READY. Parent Issue #33 OPEN. No deployment/production writes.
+
+---
+
+## November 5 UTC — PR725 second approval correction, exact queue CI-array schema [skip netlify]
+
+Second head `394791d4fdd43e644b114995630363a394e018fd`: approval [41987513220](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41987513220) **FAILED**, `DIC-Q-33-original603-292-selected-guji-producer-region tests/CI/blockers must be arrays`; `tests` and `blockers` were arrays but newly inserted queue row omitted required `ci_runs`. Repair with exact `ci_runs: []`, preserve TESTING and no merge SHA. Separate previous source/test head [41987379564](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41987379564) focused Node 1750 PASS/0 FAIL/0 SKIP with lint/build, UX/security/SQL/private bundle SUCCESS, but governance failed. Corrected exact-head CI still REQUIRED; no false acceptance or deployment. #33 open.
+
+---
+
+## November 5 UTC — PR725 first approval intake failure diagnosed and TESTING queue item repaired [skip netlify]
+
+Exact initial source head `ccdbad80af25b9a4f203efea8377a96081a04782` approval [41987379569](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41987379569) **FAILED** at `release-queue.mjs --enforce-intake` because newly changed `src/server/coffee-title-region-evidence.mjs` was not represented by any non-DEPLOYED queue item. The remaining governance preflight and private source checks passed; original603 SKIPPED. No false PASS claimed. Add **only** scoped `DIC-Q-33-original603-292-selected-guji-producer-region` in TESTING, merged_source_sha null, with explicit unfinished exact-source and current official parser/controls. Do not modify unrelated READY/DEPLOYED. No runtime change in this corrective commit. Await exact corrected PR-head Node/approval/UX/security and nonforce integration before READY or release; #33 OPEN, original corpus untouched. No publication/provider/member write.
+
+---
+
+## November 5, 2026 UTC — Issue #33 original603 #292 selected producer locality candidate TESTING [skip netlify]
+
+Recovered actual `development/backend-foundation` SHA `32866c344eaa5c2c4961ef557ee6594ce9fd0e40` and required AGENTS/AI preflight/spec/decision/coverage/queue, #33/#267 V2/#96 and concurrent PRs #598/#592/#367. Original603 #292 exact current [Seeds Coffee Ethiopia Guji Getachew](https://seedscoffee.com/products/ethiopia-getachew-zekele), H1 `Ethiopia Guji Getachew`; direct current selected paragraph describes Getachew Zekele as “one of Guji’s most precise producers.” Separate 2008 Shakisso farm-purchase passage is **historical**; no current farm assignment. Prior guarded selected official run [41985943322](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41985943322) had country-only parsed `Ethiopia`, H1 matched, raw current HTML SHA256 `ce17d943e29465e7f0a507bf9c89dca460d8ff10aaaeb20ed20212156bfc737e`. Current official page checked November 5 and same literal producer wording retained. Source evidence register `docs/audits/issue33-292-358-370-current-selected-20261105.json` records the #292 origin discrepancy and comparison #358/#370.
+
+**Candidate source correction, not certification:** only `src/server/coffee-title-region-evidence.mjs` and `src/server/coffee-identity-evidence.mjs` implement exact selected H1 + country + locality + same named producer role. New `tests/coffee-issue33-292-selected-producer-region.test.mjs` has 7 positive/negative synthetic real-parser/Add Coffee tests, including historic Shakisso, unrelated card and incompatible source. This same commit includes the scoped journal; no queue item is advanced until head CI and actual merged current source prove only #292 origin changes `Ethiopia` → `Guji, Ethiopia`, controls #358/#370 unchanged. Status **TESTING**, not READY, not deployed. Next: run exact-head Node/lint/build/approval/UX/security as applicable and guarded current official #292/#358/#370 extraction, diagnose failures, nonforce integrate only if successful. Original603 frozen 603 coffees/201 roasters/1197 captures, oracle/scorer and immutable 603-row CSV blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6` untouched; parent Issue #33 stays OPEN, #267 and #96 separate. No Netlify release, production SQL/Edge/Auth/provider/member write, spend, account, secret or force.
+
+---
+
 ## November 5, 2026 UTC — Issue #33 #358 exact selected farm origin VERIFIED narrowly READY, NOT DEPLOYED [skip netlify]
 
 Actual current selected source #358 Subliminal Finca La Unica - Washed Honduras had H1 literal Honduras and directly labeled Region: Copan, but parser omitted country. [PR719](https://github.com/Schulzet3/The-Dial-In-Collective/pull/719) nonforce merged exact runtime 4c3de83549efc9da50c960346dc6b193f02543fb. Verified correction ONLY Origin Copan -> Copan, Honduras; all seven remaining fields and all conflicts unchanged. Direct Producer: Letica Lopez and longer story Leticia Lopez still disagree, preserved for review without guessing.
