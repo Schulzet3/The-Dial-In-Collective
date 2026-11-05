@@ -1451,7 +1451,14 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   if(selectedPriceBadge&&!fields.release_label&&!conflicts.has('release_label'))
    addField(fields,'release_label',selectedPriceBadge);
 
-  if(directSelected.producer&&!fields.producer&&!conflicts.has('producer')){
+  // Exact-H1 current prose "from producer NAME's ESTATE estate" distinguishes
+  // the named grower from the independently labeled Farm. Override only a
+  // Farm-fallback, never another explicit producer or a contrary Farm.
+  const namedEstateFarm=farmEvidenceByFields.get(fields)||roaster_details.farm||'';
+  const namedEstateFarmMatches=directSelected.named_estate_producer===true&&
+   namedEstateFarm&&keyOf(namedEstateFarm)===keyOf(directSelected.named_estate_farm||'');
+  if(directSelected.producer&&!conflicts.has('producer')&&
+     (!fields.producer||(producerEvidenceByFields.get(fields)==='farm'&&namedEstateFarmMatches))){
    addField(fields,'Producer',directSelected.producer);narrativeProducerByFields.add(fields);
   }
   if(directSelected.roast_level&&!fields.roast_level&&!conflicts.has('roast_level'))
