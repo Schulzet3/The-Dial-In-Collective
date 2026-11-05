@@ -36,6 +36,10 @@ test('numeric lot, edition number and internal currency remain in genuine select
   assert.equal(selectedCoffeeNameWithoutPrice(name),name);
  assert.equal(selectedCoffeeNameWithoutPrice(title+'$22.00'),title);
  assert.equal(selectedCoffeeNameWithoutPrice(title+' — $22.00 USD'),title);
+ assert.equal(selectedCoffeeNameWithoutPrice('La Josefina &amp; Natural'), 'La Josefina &amp; Natural',
+  'no price means byte-identical source name, not a broad decode');
+ assert.equal(selectedCoffeeNameWithoutPrice('  Extra  Spaces  '), '  Extra  Spaces  ',
+  'ordinary selected name formatting is outside the price-specific change');
 });
 test('a different same-route coffee identity is not created from price or other products',()=>{
  const r=parse('Another Coffee$18.00');
