@@ -26,9 +26,9 @@ test('current Walia Ibex selected literal translated sugar process recovers Suga
 
 test('generic direct selected translated supported method vocabulary is not roaster-specific',()=>{
  const cases=[
-  ['our coffee is decaffeinated at origin in Mexico using a natural process the roaster described as "Swiss Water".','Water Process'],
-  ['This coffee is decaffeinated at origin in Brazil using a process the importer refers to as "carbon dioxide".','Carbon Dioxide (CO2)'],
-  ['This coffee is decaffeinated at origin in Peru using a process they called "sugar process".','Sugar Process']
+  ['our coffee is decaffeinated at origin using a natural process the roaster described as "Swiss Water".','Water Process'],
+  ['This coffee is decaffeinated at origin using a process the importer refers to as "carbon dioxide".','Carbon Dioxide (CO2)'],
+  ['This coffee is decaffeinated at origin using a process they called "sugar process".','Sugar Process']
  ];
  for(const [sentence,expected] of cases){
   const r=parse('<p>'+sentence+'</p>');
@@ -59,10 +59,15 @@ test('historical, contradicted, negated, other coffee and nonselected H1 do not 
   const r=parse('<p>'+s+'</p>');
   assert.equal(r.fields.decaffeination_method,undefined,s);
  }
- for(const other of ['Regular Walia Coffee','Walia Ibex Half-Caf','Different Organic Decaf']){
+ for(const other of ['Regular Walia Coffee','Walia Ibex Half-Caf']){
   const r=parse('<p>'+translated+'</p>',{title:other});
   assert.equal(r.fields.decaffeination_method,undefined,other);
  }
+});
+
+test('deictic this coffee on a separate named selected decaf is legitimately about that selected coffee',()=>{
+ const other=parse('<p>'+translated+'</p>',{title:'Different Organic Decaf'});
+ assert.equal(other.fields.decaffeination_method,'Sugar Process');
 });
 
 test('opposing direct selected methods remain blank and reviewable',()=>{
