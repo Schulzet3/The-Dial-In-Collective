@@ -1979,6 +1979,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  const decaffeination_method=eligibleSelectedDecafMethod?inferDecaffeinationMethod({
   name:fields.name,processingDetail:roaster_details.processing_detail,
   selectedMethod:selectedDecafStatements.join('\n'),
+  selectedCurrentDecafIdentity:directSelected.selected_current_decaf_identity===true,
   conflicting:decafSourceConflict
  }):'';
  if(decaffeination_method)fields.decaffeination_method=decaffeination_method;

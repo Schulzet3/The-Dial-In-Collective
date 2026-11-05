@@ -12,6 +12,9 @@ const fold=v=>String(v||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toL
 // description; never scan site-wide education, menus, other products or SEO.
 const CURRENT_DECAF_METHOD=/^(?:(?:this|our)\s+(?:decaf(?:feinated)?\s+)?coffee\s+(?:is|was|has been)\s+decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?(?:swiss[\s-]?water|mountain[\s-]?water|sugar(?:[\s-]?cane|[\s-]?process)|ethyl\s+acetate|natural[\s-]?ea|(?:supercritical\s+)?carbon[\s-]?dioxide|co\s*[- ]?[2\u2082])\b|the\s+(?:swiss[\s-]?water|mountain[\s-]?water|sugar[\s-]?cane|carbon[\s-]?dioxide)\s*[\u00ae\u2122]?\s+(?:process|method)\s+is\s+(?:an?\s+)?[^.!?]{0,150}\bdecaffeination\s+process\b[^.!?]{0,160}\bcaffeine[\s-]?free\b)/iu;
 const NONCURRENT_DECAF_METHOD=/\b(?:previous(?:ly)?|formerly|historically|typically|generally|other coffees?|another coffee|last year|prior (?:lot|harvest))\b/iu;
+// Accept short current treatment only with the directly selected self-decaf
+// paragraph and exact H1; never infer from roaster identity or site SEO.
+const CURRENT_SELECTED_DECAF_WAY=/^(?:[\p{L}\p{M}]{3,24}['’]d|(?:this|our)\s+coffee\s+(?:is|was)\s+decaffeinated)\s+by\s+way\s+of\s+(?:the\s+)?(?:swiss[\s-]?water|mountain[\s-]?water|sugar[\s-]?cane|ethyl[\s-]?acetate|(?:supercritical\s+)?carbon[\s-]?dioxide|co\s*[- ]?[2\u2082])\b/iu;
 // A selected current decaf may identify its treatment as a roaster-translated
 // method, after an explicit at-origin decaffeination clause. This is not a
 // growing origin, green-bean process, or a general country method inference.
@@ -51,6 +54,63 @@ function currentNamedDecafMethod(name,line){
   return Boolean(claim&&fold(claim[1])===fold(subject));
  });
 }
+// Some Shopify product-only accordions put their current treatment title
+// inside <summary><span class="accordion__title"> rather than a <p>.
+// Require the SAME selected product info container to hold an exact current
+// H1, a self-described decaf paragraph and the method title. No catalog,
+// sidebar, unrelated product, educational or historical inheritance.
+function selectedProductAccordionDecafMethods(html,name,clean){
+ const tree=coffeeHtmlElements(html);
+ if(tree.truncated)return [];
+ const nodes=tree.nodes,selected=fold(name),containers=new Set(),methods=[];
+ const attrs=i=>coffeeHtmlAttributes(nodes[i].attributes);
+ const ancestorWalk=(i,fn)=>{
+  let at=nodes[i].parent;
+  for(let depth=0;at!==null&&depth<128;depth++){
+   if(fn(at,nodes[at],attrs(at))===false)break;
+   at=nodes[at].parent;
+  }
+ };
+ for(let i=0;i<nodes.length;i++){
+  const node=nodes[i];if(node.tag!=='h1')continue;
+  if(fold(clean(html.slice(node.headEnd,node.contentEnd),220))!==selected)continue;
+  ancestorWalk(i,(idx,parent,attributes)=>{
+   if(/\bproduct__info-container\b/iu.test(attributes.class||''))containers.add(idx);
+  });
+ }
+ if(!containers.size)return [];
+ for(const container of containers){
+  let hasSelectedDecaf=false;
+  const captions=[];
+  for(let i=0;i<nodes.length;i++){
+   const node=nodes[i];if(!['p','span'].includes(node.tag)||node.contentEnd-node.headEnd>1200)continue;
+   const attributes=attrs(i),chain=new Set(),state={summary:false,unsafe:false};
+   ancestorWalk(i,(idx,parent,a)=>{
+    chain.add(idx);
+    const context=[a.class,a.id,a.role,a['aria-label']].join(' ');
+    if(parent.tag==='summary')state.summary=true;
+    if(['nav','aside','footer','header'].includes(parent.tag)||
+       /\b(?:related|recommended|you-may-also-like|other-products|upsell|crosssell|carousel|menu)\b/iu.test(context))
+     state.unsafe=true;
+    if(idx===container)return false;
+   });
+   if(!chain.has(container)||state.unsafe)continue;
+   const value=clean(html.slice(node.headEnd,node.contentEnd),600).trim();
+   if(node.tag==='p'&&value.length<=550&&
+      /\bthis\s+(?:[\p{L}\p{M}-]+\s+){0,8}decaf(?:feinated)?\s+coffee\b/iu.test(value)&&
+      !NONCURRENT_DECAF_METHOD.test(value))
+    hasSelectedDecaf=true;
+   if(node.tag==='span'&&state.summary&&
+      (attributes.class||'').split(/\s+/u).includes('accordion__title')&&
+      value.length<=240&&CURRENT_SELECTED_DECAF_WAY.test(value)&&
+      !NONCURRENT_DECAF_METHOD.test(value))
+    captions.push(value);
+  }
+  if(hasSelectedDecaf)methods.push(...captions);
+ }
+ return [...new Set(methods)];
+}
+
 export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html}={}){
  if(typeof html!=='string'||html.length>2_000_000||!name||typeof clean!=='function')return {};
  const blocks=productCoffeeProse(html,clean);
@@ -69,6 +129,12 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
  const body=blocks.filter(x=>!x.educational&&x.text.length<=1200&&
   ['p','div','h4','h5','li'].includes(x.tag)&&
   !/\b(?:related products?|you may also like|recommended|more coffees?|other coffees?)\b/i.test(x.section));
+ // The product H1 need not contain "Decaf" if its own selected description
+ // unambiguously says "this ... decaf coffee"; exclude half-caf products.
+ const selectedUnnamedDecafIdentity=!/\b(?:half[ -]?caf|quarter[ -]?caf|semi[ -]?decaf|partially[ -]?decaf)\b/i.test(name)&&
+  body.some(b=>b.tag==='p'&&b.text.length<=550&&
+   /\bthis\s+(?:[\p{L}\p{M}-]+\s+){0,8}decaf(?:feinated)?\s+coffee\b/iu.test(b.text)&&
+   !NONCURRENT_DECAF_METHOD.test(b.text));
  const organizations=new Set(),farms=new Set(),sensory=new Set(),literals=new Set(),roasts=new Set();
  const namedEstateGrowers=new Map();
  const releases=new Set(),decafEvidence=new Set();
@@ -115,9 +181,27 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   }
   if(eligibleRoastControls===1&&candidates.length===1)roasts.add(candidates[0]);
  }
+ // Product-only accordions are parsed ONCE, not once per prose block.
+ // The same current selected product-info ancestor must hold the exact H1,
+ // explicit decaf identity and process title; never related offerings.
+ if(selectedUnnamedDecafIdentity)for(const statement of selectedProductAccordionDecafMethods(html,name,clean)){
+  if(inferDecaffeinationMethod({name,selectedMethod:statement,selectedCurrentDecafIdentity:true})&&
+     !decafEvidence.has(statement)){
+   if(decafEvidence.size<4)decafEvidence.add(statement);
+   else decafEvidenceOverflow=true;
+  }
+ }
  let anotherExplicitList=false;
  for(const b of body){
   const line=b.text.replace(/\s+/g,' ').trim();
+  // Direct selected decaf evidence, never general educational background.
+  if(selectedUnnamedDecafIdentity&&line.length<=240&&
+     CURRENT_SELECTED_DECAF_WAY.test(line)&&!NONCURRENT_DECAF_METHOD.test(line)&&
+     inferDecaffeinationMethod({name,selectedMethod:line,selectedCurrentDecafIdentity:true})&&
+     !decafEvidence.has(line)){
+   if(decafEvidence.size<4)decafEvidence.add(line);
+   else decafEvidenceOverflow=true;
+  }
   // A decaf identity plus a current selected-product sentence is required.
   // Reuse the conservative method classifier; if multiple incompatible
   // methods are printed, the caller withholds autofill and keeps both sources.
@@ -213,7 +297,10 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
  if(releases.size===1)out.release_label=[...releases][0];
  if(sensory.size===1)out.tasting_notes=[...sensory][0];
  if(literals.size===1&&!anotherExplicitList)out.explicit_tastes_like=[...literals][0];
- if(decafEvidence.size&&!decafEvidenceOverflow)out.decaffeination_method_evidence=[...decafEvidence];
+ if(decafEvidence.size&&!decafEvidenceOverflow){
+   out.decaffeination_method_evidence=[...decafEvidence];
+   if(selectedUnnamedDecafIdentity)out.selected_current_decaf_identity=true;
+  }
  return out;
 }
 

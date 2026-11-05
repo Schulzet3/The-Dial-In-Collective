@@ -15,12 +15,12 @@ function methodsIn(raw){
 }
 // The caller supplies only exact selected-product method evidence, never
 // generic roaster education, related products, unrelated catalog entries.
-export function inferDecaffeinationMethod({name='',processingDetail='',selectedMethod='',conflicting=false}={}){
+export function inferDecaffeinationMethod({name='',processingDetail='',selectedMethod='',conflicting=false,selectedCurrentDecafIdentity=false}={}){
  // A page may discuss a different decaf coffee. Its prose must never
  // turn an explicitly regular product into a decaffeinated coffee.
- if(name&&!fullyDecaf(name))return '';
+ if(name&&!fullyDecaf(name)&&!selectedCurrentDecafIdentity)return '';
  if(conflicting||mixedCaffeine(name)||mixedCaffeine(processingDetail)||mixedCaffeine(selectedMethod))return '';
- const explicitlyDecaf=fullyDecaf(name)||/\bdecaffeination\s*:/i.test(processingDetail)||
+ const explicitlyDecaf=selectedCurrentDecafIdentity||fullyDecaf(name)||/\bdecaffeination\s*:/i.test(processingDetail)||
   fullyDecaf(processingDetail)||fullyDecaf(selectedMethod);
  if(!explicitlyDecaf)return '';
  const found=new Set([...methodsIn(selectedMethod),...methodsIn(processingDetail),...methodsIn(name)]);
