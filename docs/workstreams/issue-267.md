@@ -1,3 +1,15 @@
+## November 5, 2026 UTC — #267 S2-097 strict original line review and repository-private mismatch [skip netlify]
+
+Recovered live development `602e99a070cf7c1a46b4c1ff595fead995722d90`, main/release, issue267/latest comments, #33/#96 ownership, AGENTS/context/preflight, Master Spec/Decision Ledger supersessions, approval/queue/status, original frozen/pinned source manifests and V2 ledgers. Re-fetched immutable first frozen workflow `.github/workflows/approval-continuity.yml` line1–41; 41/41 exact source texts plus prior S2-001 individual field evidence independently verified without duplicate credit.
+
+**New S2-097 direct source semantics:** frozen #59 `docs/DECISION_LEDGER.json:704–743` original Git blob `195c3e4de415afef4515a6291c399a1c9001b610`, pinned-current #50 `scripts/audit/coffee-reviewed-change-forensics.py:1–40` pinned Git blob `401e02bf1283f204471c3dbecb12e520054f0cc3`. Each of all 80 exact original lines was read/interpreted, including structural/comment/blank/import/hash lines, and logged with behavior, quality, risk, obsolete/dead, duplication, current counterpart, tests, fixes and Locked fit. All 40 pinned lines text-match live development blob `401e02bf1283f204471c3dbecb12e520054f0cc3`. Strict proposed after source-exact CI/nonforce merge **5,634/579,961 frozen** and **7,261/57,913 pinned**. Next frozen #59 line744; pinned #50 line41. V1 and old provisional V2 untouched. AI, not independent human certification.
+
+**HIGH priority actual configuration inconsistency, OPEN:** GitHub get_repo and independent REST GET both report `private=false`, `visibility=public`; original Locked B004 and a *later explicit* Master Specification require PRIVATE on GitHub Free. No secret leakage or external access exploit is claimed. No repository settings mutation under development-only authority; owner-authorized private setting restoration/confirmation required. Backup B003 remains historical proposed settings, not evidence of live restores; password B008 current enforcement belongs to #96.
+
+Scope and tests: exact original blob/text/line evidence and repository metadata checked, no Python/Node/Auth/SQL/browser/mobile/offline/hosted CI test newly run; no active executable deletion justified. CI PR-head then merged-source approval pending. Do not mark READY/COMPLETE or close #267. No original603, member, provider, Supabase, Netlify, production, purchase or forced Git writes. Full post-pin delta source review and final joint-owner package pending.
+
+---
+
 ## November 4, 2026 — Issue #267 strict S2-096; pinned executable file #49 COMPLETE [skip netlify]
 
 Recovered current development `4436f2f29723a7d30d3ad46611bd92f170210ec4` with integrated S2-095 [PR #642](https://github.com/Schulzet3/The-Dial-In-Collective/pull/642), merged source `42b00546aed81545c26e7927b82dd9e9345b3552`. Exact PR-head approval Actions `41933012479` SUCCESS; exact merged-source approval Actions `41933100080` SUCCESS. Existing strict ledger before this batch 5,571 frozen and 7,198 pinned lines, no V1/provisional count imported. Separate #33 current-coffee, #96 signed-in Auth, #28 backup and other ongoing owner work preserved.
