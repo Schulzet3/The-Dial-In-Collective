@@ -473,11 +473,42 @@
       "new_queued_active_records_direct": 2,
       "source_code_267_semantic_credit": 0,
       "confirmed_safe_fixes": 0
+    },
+    {
+      "id": "G1-029",
+      "receipt": "docs/audits/issue504-review-G1-029.json",
+      "text_files_entire": 0,
+      "text_files_partial": 2,
+      "reviewed_file_lines": 69,
+      "reviewed_file_words": 632,
+      "reviewed_github_objects": 0,
+      "reviewed_github_words": 0,
+      "source_blobs": [
+        "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
+        "32175222367d6e21f71e26dba2e96a720b84ae97"
+      ],
+      "source_ranges_inclusive": [
+        [
+          10,
+          10
+        ],
+        [
+          10,
+          32
+        ],
+        [
+          5079,
+          5123
+        ]
+      ],
+      "source_code_267_semantic_credit": 0,
+      "confirmed_safe_fixes": 0,
+      "earlier_gap_reconciled": "pinned original queue lines 1-2249 version map, 55 objects; only orphan source line 10 newly credited"
     }
   ],
   "totals": {
-    "source_file_lines": 7850,
-    "source_file_words": 60122,
+    "source_file_lines": 7919,
+    "source_file_words": 60754,
     "github_objects": 2,
     "github_words": 721
   },
@@ -494,24 +525,11 @@
     "no_release_permission": true
   },
   "next": {
-    "kind": "source_version_mapping_reconciliation",
-    "receipt_first": "docs/audits/issue504-review-G1-005.json",
-    "pinned_queue_blob": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
-    "unreviewed_original_source_version_gaps": true,
-    "current_queue_reviewed_latest_blob": "b878c0e53f134737b5899bbf9c583a7fa6162aab",
-    "current_455_ready_item_and_33_46_item_reviewed": true,
-    "reviewed_two_source_ranges": [
-      [
-        4987,
-        5018
-      ],
-      [
-        5019,
-        5087
-      ]
-    ],
-    "unreviewed_other_github_surfaces": true,
-    "track_any_new_live_queue_drift": true
+    "kind": "github_issue_comment",
+    "issue": 504,
+    "comment_id": 6624428118,
+    "first_unreviewed_source": "Issue #504 top-level comment after automation-creation comment id 6623477092",
+    "then": "Continue Issue504 comments ordered by immutable ID; separately reconcile pinned original queue G1-014–G1-024 and all other GitHub surfaces/deltas; #267 separately owns code."
   },
   "uncovered": "Original pinned queue line 4737+; 8 new live queue items, 1 new release-history object and 19 modified original items have zero delta semantic credit; GitHub issues/PRs/comments/reviews/Actions/logs/history/tags/releases/binary materials and #267 delegated code/frozen semantic review remain incomplete. Temporary owner-approved PUBLIC setting remains, future PRIVATE restoration not verified.",
   "latest_review_source_anchor": "c91845caf196d1dd29660809e512832140d27c86",
@@ -830,5 +848,36 @@
     "scoped_CI_success_proven": true,
     "full603_skipped_not_passed": true,
     "next_receipt": "docs/audits/issue504-review-G1-005.json"
+  },
+  "g1029_reconciliation_20261105": {
+    "development_sha": "0114e01bb88b15ff07e49daaa83f25d3cf55dda7",
+    "main_sha": "c25e31343b1974b89445b48b43993bc446aa96ca",
+    "release_production_sha": "b386a977a7c43bf190f6315105894334d96f0f18",
+    "pin_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
+    "pin_first_source_interval": "1-2249 gapless source-version mapped, newly reviewed line 10 syntax",
+    "prior_receipt_items": 55,
+    "matched": 55,
+    "notes_only_delta": 36,
+    "unchanged": 19,
+    "new_queue_source": "32175222367d6e21f71e26dba2e96a720b84ae97",
+    "new_ids": [
+      "DIC-Q-33-original603-292-selected-guji-producer-region",
+      "DIC-Q-33-original603-358-current-labeled-farm-region"
+    ],
+    "reviewed_live_ranges": [
+      [
+        10,
+        32
+      ],
+      [
+        5079,
+        5123
+      ]
+    ],
+    "new_lines": 69,
+    "new_words": 632,
+    "ci": "source-specific historical SUCCESS + SKIPPED + FAILED independently read back, no new test",
+    "next_comment_id": 6624428118,
+    "status": "IN_PROGRESS"
   }
 }
