@@ -49,3 +49,36 @@ export function selectedCountryProducerRegion({name='',country='',origin='',bloc
  }
  return new Set(candidates.map(c=>norm(c.value))).size===1?candidates[0]:null;
 }
+
+// Current selected country may be refined by exact H1 and independently
+// corroborating selected prose: "washed COUNTRY from LOCALITY area of REGION".
+// Never infer a geography from URL, SEO, gazetteer, related SKU or history.
+export function selectedCountryAreaOfRegion({name='',country='',origin='',blocks=[]}={}){
+ if(typeof name!=='string'||name.length>165||typeof country!=='string'||
+   country.length<3||country.length>40||norm(origin)!==norm(country)||
+   !Array.isArray(blocks)||blocks.length>2500||
+   /\b(?:blend|sampler|assortment)\b/iu.test(name))return null;
+ const headings=blocks.filter(block=>block.tag==='h1');
+ if(headings.length!==1||norm(headings[0].text)!==norm(name)||
+   !norm(name).includes(norm(country)))return null;
+ const grammar=new RegExp(
+  '\\b(?:washed|natural|honey|anaerobic|coffee|beans?)\\s+'+
+  quoteRegex(country)+
+  '\\s+from\\s+([\\p{L}\\p{M}\\x27\\u2019.-]{3,45}(?:\\s+[\\p{L}\\p{M}\\x27\\u2019.-]{2,45}){0,2})\\s+area\\s+of\\s+(?:the\\s+)?([\\p{L}\\p{M}\\x27\\u2019.-]{3,45})\\b',
+  'giu');
+ const candidates=[];
+ for(const block of blocks){
+  if(block.educational||!['p','li'].includes(block.tag)||
+    typeof block.text!=='string'||block.text.length>800||
+    /\b(?:previous(?:ly)?|former(?:ly)?|historical(?:ly)?|unrelated|another (?:coffee|lot)|other (?:coffee|lot)|hypothetical|not from)\b/iu.test(block.text))continue;
+  for(const match of block.text.matchAll(grammar)){
+   const locality=match[1].trim(),region=match[2].trim();
+   if(locality.length>80||norm(locality)===norm(region)||
+     norm(locality)===norm(country)||norm(region)===norm(country)||
+     !norm(name).includes(norm(locality))||!norm(name).includes(norm(region)))continue;
+   candidates.push({value:locality+', '+region+', '+country[0].toUpperCase()+country.slice(1),
+    quote:name+' | '+block.text.slice(0,420)});
+  }
+ }
+ return candidates.length&&new Set(candidates.map(c=>norm(c.value))).size===1?candidates[0]:null;
+}
