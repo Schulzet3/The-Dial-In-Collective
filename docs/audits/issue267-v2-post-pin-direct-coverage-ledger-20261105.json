@@ -3,7 +3,7 @@
   "issue": 267,
   "review_standard": "Independent post-pin new source line semantic review; separate from original frozen/pinned V2 denominator",
   "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
-  "observed_development_commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+  "observed_development_commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
   "receipt_references": [
     {
       "batch_id": "D2-001",
@@ -280,10 +280,36 @@
       "line_count": 23,
       "verified_absent_at_pin": true,
       "reviewed_live_commit": "e132949fb1d29e2ab869da7db986207fe93bedd2"
+    },
+    {
+      "batch_id": "D2-023",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-023.json",
+      "path": "scripts/release/unpack-certified-artifact.py",
+      "blob_sha": "667a12dd1ffe9e1b617fa0b65b6b8b287117e2d7",
+      "range": [
+        1,
+        25
+      ],
+      "line_count": 25,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "6715ba832b886e3e0271655dbdd37853d9339e85"
+    },
+    {
+      "batch_id": "D2-024",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-024.json",
+      "path": "tests/unpack-certified-artifact.test.py",
+      "blob_sha": "b860219726682dd65c02d9d189293ea222bc8062",
+      "range": [
+        1,
+        24
+      ],
+      "line_count": 24,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "6715ba832b886e3e0271655dbdd37853d9339e85"
     }
   ],
-  "unique_source_lines_direct_reviewed": 610,
-  "fully_reviewed_new_source_files": 22,
+  "unique_source_lines_direct_reviewed": 659,
+  "fully_reviewed_new_source_files": 24,
   "nonoverlap": true,
   "changed_existing_pinned_paths": "PENDING",
   "new_sql_migrations": "PENDING",
@@ -306,7 +332,7 @@
       "subtract_phantom_records": 4
     }
   ],
-  "last_review_batch": "D2-022",
-  "last_review_source_commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
-  "last_review_note": "D2-021/022: 61 complete original post-pin direct-ZIP publisher/test physical lines. Potential legacy direct API source not proven callable in active release path; no removal, no real Netlify action. Full app acceptance/live drift incomplete."
+  "last_review_batch": "D2-024",
+  "last_review_source_commit": "6715ba832b886e3e0271655dbdd37853d9339e85",
+  "last_review_note": "D2-023/024 49 direct physically numbered code+test lines. Exact source SHA and pin absence, direct AI semantics, archival/caller cleanup risk triaged not reproduced, prior frozen first-file S2-001 spotchecked no duplicate; app/603/offline/Auth/SQL not run. Live drift unfinished."
 }
