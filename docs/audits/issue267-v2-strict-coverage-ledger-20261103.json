@@ -5,41 +5,41 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 6314,
+    "strict_validated_lines": 6344,
     "first_unvalidated_manifest_file_index": 59,
     "first_unvalidated_path": "docs/DECISION_LEDGER.json",
-    "first_unvalidated_line": 1424,
+    "first_unvalidated_line": 1454,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 7941,
+    "strict_validated_lines": 7971,
     "first_unvalidated_file_index": 50,
     "first_unvalidated_path": "scripts/audit/coffee-reviewed-change-forensics.py",
-    "first_unvalidated_line": 721,
+    "first_unvalidated_line": 751,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true,
-    "strict_live_counterpart_checked_through_line": 720,
+    "strict_live_counterpart_checked_through_line": 750,
     "last_live_counterpart_checked": {
       "path": "scripts/audit/coffee-reviewed-change-forensics.py",
-      "commit": "8e0b3e6bef1db8b8cd00939a0826646a7a9cd72b",
+      "commit": "41178c54e0ac32b92e7a5aa0ba70d385cc64653a",
       "blob": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
-      "first_line": 677,
-      "last_line": 726,
+      "first_line": 727,
+      "last_line": 756,
       "offset": 6
     }
   },
   "post_pin_drift": {
-    "observed_development_commit": "8e0b3e6bef1db8b8cd00939a0826646a7a9cd72b",
+    "observed_development_commit": "41178c54e0ac32b92e7a5aa0ba70d385cc64653a",
     "strict_validated_added_lines": 1,
     "scope": "Single verified addition in first current source path; total post-pin live-code delta denominator not yet reconciled",
     "rest_of_live_changes": "Remaining post-pin current code drift not semantically fully inspected; 50 new pinned live counterparts exact at +6.",
     "live_fully_reviewed_files": 36,
     "live_fully_reviewed_file_lines": 2947,
     "latest_reviewed_live_path": "scripts/audit/coffee-corpus-enrich.py",
-    "remaining_live_changes": "Direct semantic per-line review of the 37 modified original eligible files and 88 added code/workflow/test candidate paths is INCOMPLETE; exact full-tree machine inventory does not count as source review. Re-diff on later development HEAD.",
+    "remaining_live_changes": "Unreconciled globally; 30 exact +6 counterparts checked for S2-113; remaining code drift not certified.",
     "machine_only_diff_inventory_in_receipt": "docs/audits/issue267-v2-strict-batches/S2-003.json",
     "machine_only_changed_paths": 222,
     "machine_only_diff_commits": 243,
@@ -2649,12 +2649,34 @@
       "strict_pinned_delta": 50,
       "old_v2_additional_credit": 0,
       "verification": "100 distinct individually reasoned lines with 9 semantic fields; 50 exact live +6, no global drift or app test."
+    },
+    {
+      "batch": "S2-113",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-113.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        1424,
+        1453
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/coffee-reviewed-change-forensics.py",
+      "pinned_lines": [
+        721,
+        750
+      ],
+      "pinned_blob": "401e02bf1283f204471c3dbecb12e520054f0cc3",
+      "live_exact_text_line_offset": 6,
+      "live_blob": "bd8265a3540662d09f45adb97e8562e64a6ea3f0",
+      "strict_frozen_delta": 30,
+      "strict_pinned_delta": 30,
+      "old_v2_additional_credit": 0,
+      "verification": "60 individual original lines with full text and nine semantics fields; 30 exact +6 observed live counterparts; no actual application CI."
     }
   ],
   "completion": "IN_PROGRESS",
-  "test_limit": "Source-bound direct original text/criteria verification; PR-head CI pending, live drift and functional testing incomplete",
-  "last_batch": "S2-112",
-  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-112.json",
+  "test_limit": "Direct original source text and live counterpart verified; PR-head CI, post-pin total drift and actual application acceptance incomplete.",
+  "last_batch": "S2-113",
+  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-113.json",
   "complete": false,
   "accounting_reconciliation_20261105": {
     "scope": "NONCREDIT historical source-ledger reference repair",
