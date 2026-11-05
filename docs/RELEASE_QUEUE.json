@@ -4602,7 +4602,7 @@
       "id": "DIC-Q-33-original603-309-inline-product-roast",
       "issue": 33,
       "title": "Recover exact selected current Shopify inline roast tag without category/other SKU leakage",
-      "state": "IN_PROGRESS",
+      "state": "READY",
       "scope_paths": [
         "src/server/coffee-current-inline-shopify-product.mjs",
         "src/server/coffee-page-metadata.mjs"
@@ -4610,15 +4610,38 @@
       "tests": [
         "Prior official current selected #309 HTML captured at source SHA 95724f1, run41930234673 artifact13371681583, H1 Horizon Blend, raw SHA256 364967342d12102b4f4f24d7b68b863ea76270cbf26fb420339f6000ef7bb8aa; current parser roast blank despite exact current Shopify inline theme.product roast:light roast tag, product id 6615007330400/title Horizon Blend/handle horizon-blend/vendor Compass Coffee.",
         "Proposed generic exact product identity bound parser and adversarial positive/negative tests; new exact PR-head CI, after-merge official raw HTML/parser Add Coffee and direct source-field comparison NOT YET VERIFIED.",
-        "Initial candidate PR-head approval run41931437237 FAILED queue schema validation (required null merged_source_sha and empty ci_runs list for IN_PROGRESS); not a source assertion; adjusted in this commit."
+        "Initial candidate PR-head approval run41931437237 FAILED queue schema validation (required null merged_source_sha and empty ci_runs list for IN_PROGRESS); not a source assertion; adjusted in this commit.",
+        "Initial Node41931437335: 1692 PASS/1 FAIL solely NEW test erroneous nonrequired conflicts?.length===0 vs parser's undefined no-conflict property; the new roast field assertion and eight negative cases passed. Corrected no-conflict test. Initial approval41931437237 failed missing IN_PROGRESS queue null merged_source_sha/ci_runs arrays, repaired. Node41931693743: 1693 PASS/0 FAIL/0 SKIP but single unused-variable ESLint warning; corrected without behavior change.",
+        "Final exact corrected PR639 head 0a01c9d21ff280e0f8d63ad305df648371585c25: Node/lint/build41932037353 SUCCESS with 1693 PASS/0 FAIL/0 SKIP; approval41932037219, UX41932037406, security41932037251, isolated SQL41932037305, private source41932037581 SUCCESS. Original full frozen60341932037384 SKIPPED, NOT PASS.",
+        "PR639 safely nonforce squash merged onto development as 6e78f802be4dbe1bc6e3dd3746b12603ab5c0e4d, preserving other work. Exact merged Node/lint/build41932300621 SUCCESS with 1693 PASS/0 FAIL/0 SKIP; merged approval41932300894, UX41932300765, official bounded selected source41932300696 SUCCESS. Coffee-extraction broad workflow41932300849 SKIPPED not PASS.",
+        "Independent current official before SHA 95724f1 artifact13371681583 ZIP SHA256 45d60dbd553da5f996d73f76dbf694866969c4e7976d9e6502b648aca2e74ac4 versus exact after source SHA 6e78f802 artifact13370904921 ZIP SHA256 471e640bb368886237c6e8d04d3c5ebea0b227556c8fd15a863abfa700fe2eda. All three official current H1/parsers/Add Coffee previews/source reviews fetched/rendered 3/3. Current #309 exact inline theme.product id6615007330400/title Horizon Blend/handle horizon-blend/vendor Compass Coffee/tag roast:light roast; canonical only roast_level absent -> Light; name/roaster/flavor/conflicts unchanged, region:africa NOT promoted to origin. #565 and #601 entire canonical fields and conflicts unchanged. Current raw before vs after SHA: #309 364967342d12102b4f4f24d7b68b863ea76270cbf26fb420339f6000ef7bb8aa -> bcb8891855aaf405a7fab77d76adb6030f03e56499a9453cb894d84bd7b98c4c; #565 d3934c050332d83f3553f6e808ab5329ed04e915d3161150f92da14ab1a984ee -> c525edb80c75e6f9d5408d9c9fd1bb44f8e9aa72c8daf59b4e4e969f5f683c8a; #601 830e0ba1b42ebe466981e90ee213658ca83c8d06501f7242f7a2ba5961ee63a3 -> 9a22cbd1a8d44669ffc5a94497efdac4a39658efbb73df30c6debbfec4f9b863; bytes +3 each, not same raw bytes. No manual universal603 certification or real signed-in auth."
       ],
-      "blockers": [
-        "PENDING exact CI, nonforce merge, genuine selected official parser source recheck and comparison; historic frozen603 manual review not done."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "TESTING development only, NOT READY and NOT DEPLOYED. Country/region tags not eligible for this recovery. Other coffee #565/#601 expected unchanged. Preserve #267/#96 concurrent PRs and immutable corpus.",
-      "merged_source_sha": null,
-      "ci_runs": []
+      "notes": "NARROW VERIFIED READY, NOT DEPLOYED. Exact selected current public H1/product id/handle/vendor and explicit roast:light roast tag; hard-fail other coffee, region, mismatched identity and conflicting tags. Actual 3 official current-source HTML/parser/Add Coffee independently compared; only #309 roast BLANK -> Light, other #309 fields and two other coffees unchanged. Full original603 manual semantic review and 153 context-qualified/29 missing-literal/35 historical blanks remain, parent #33 OPEN. Same runtime source file overlaps other READY items; Issue417 source-isolated explicitly authorized release still required. No production Netlify/SQL/Edge/Auth/member/provider write or paid services.",
+      "merged_source_sha": "6e78f802be4dbe1bc6e3dd3746b12603ab5c0e4d",
+      "ci_runs": [
+        41931437335,
+        41931437237,
+        41931594787,
+        41931693743,
+        41931693803,
+        41931693631,
+        41931693740,
+        41931693685,
+        41931693702,
+        41932037353,
+        41932037406,
+        41932037219,
+        41932037251,
+        41932037305,
+        41932037581,
+        41932300621,
+        41932300765,
+        41932300894,
+        41932300696
+      ],
+      "pr": 639
     },
     {
       "id": "DIC-Q-33-original603-62-educational-mountain-origin",
