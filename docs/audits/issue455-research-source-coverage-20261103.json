@@ -439,11 +439,45 @@
       "published": "2000-04 (journal issue; publisher version of record online 2008-06-28)",
       "doi": "10.1111/j.1365-2621.2000.tb16026.x",
       "url": "https://ift.onlinelibrary.wiley.com/doi/10.1111/j.1365-2621.2000.tb16026.x",
-      "access": "PUBLISHER_ORIGINAL_ABSTRACT_INDEXED; direct publisher page returned 403 when opened, full text/methods/tables not independently inspected",
-      "evidence_grade": "PEER_REVIEWED_CONTROLLED_TWO_ROAST_HISTORIES_SAME_REPORTED_ROAST_DEGREE; PRIMARY_ABSTRACT_QUALITATIVE_ONLY",
-      "review_status": "QUALITATIVE_ABSTRACT_FACT_CHECKED; EXACT_NUMERIC_DENSITY_POROSITY_IN_ORIGINAL_REPORT_NOT_VERIFIED_AGAINST_PRIMARY_TABLE",
+      "access": "ORIGINAL_PUBLISHED_ARTICLE_FULL_TEXT_SAMPLED_AND_TABLE_1_DIRECT_VISUAL_READ_FROM_UNOFFICIAL_UNIVERSITY_PATENT_SEARCH_MIRROR_2026-11-05; publisher original abstract independently indexed",
+      "evidence_grade": "ORIGINAL_JOURNAL_PRIMARY_TABLE_1_DIRECT_VISUAL_NUMERIC_VERIFICATION_FOR_TWO_MATCHED_ROAST_LOSS_PROCESSES; NOT_AN_ESPRESSO_FLOW_OR_SENSORY_INTERVENTION",
+      "review_status": "TABLE_1_PRINTED_PAGE_453_PDF_PAGE_INDEX_1_NUMBERS_VERIFIED; FULL_BIBLIOGRAPHY_AND_OTHER_PAPER_EXPERIMENTS_NOT_SYSTEMATICALLY_AUDITED",
       "source_bytes_sha256": null,
-      "source_byte_caveat": "No full original article/PDF bytes downloaded or hashed; original report numerical values 0.528/0.474 and 622/747 are pending direct primary table verification."
+      "source_byte_caveat": "Direct visual of the ORIGINAL 2000 Journal of Food Science article hosted on an unofficial patent-search sample mirror; journal title/authors/citation matched publisher DOI. PDF original binary not downloaded or hashed here; third-party mirror provenance weaker than publisher-hosted PDF. Numeric measurements are of whole roasted beans via volumetry/mercury porosimetry, not packed puck permeability, espresso extraction or measured taste. No universal espresso direction or numeric prior inferred.",
+      "original_article_url": "https://doi.org/10.1111/j.1365-2621.2000.tb16026.x",
+      "full_text_mirror_url": "https://www.expresssearch.com/sample-results/patentability/npl/Schenker%202000.pdf",
+      "table_location": "Table 1, printed page 453, PDF second page (zero-based index 1)",
+      "table1_verified": {
+        "columns": [
+          "HTST",
+          "LTLT"
+        ],
+        "roast_loss_percent": [
+          14.95,
+          15.01
+        ],
+        "bean_density_kg_m3": [
+          622,
+          747
+        ],
+        "bean_volume_mm3_per_g": [
+          1609,
+          1350
+        ],
+        "mercury_intruded_volume_mm3_per_g": [
+          850,
+          640
+        ],
+        "bean_porosity": [
+          0.528,
+          0.474
+        ]
+      },
+      "prior_access_at_R455_024": {
+        "access": "PUBLISHER_ORIGINAL_ABSTRACT_INDEXED; direct publisher page returned 403 when opened, full text/methods/tables not independently inspected",
+        "evidence_grade": "PEER_REVIEWED_CONTROLLED_TWO_ROAST_HISTORIES_SAME_REPORTED_ROAST_DEGREE; PRIMARY_ABSTRACT_QUALITATIVE_ONLY",
+        "review_status": "QUALITATIVE_ABSTRACT_FACT_CHECKED; EXACT_NUMERIC_DENSITY_POROSITY_IN_ORIGINAL_REPORT_NOT_VERIFIED_AGAINST_PRIMARY_TABLE"
+      }
     },
     {
       "id": "LIT-2018-SMRKE-DEGASSING-GRAVIMETRY",
@@ -721,7 +755,9 @@
       "grade": "DIRECT_REPORT_REVIEW+PUBLISHER_ABSTRACT_ONLY;QUANTITATIVE_VALUES_UNVERIFIED",
       "current_app": "site/lib/constants.js seven-tier roast taxonomy; site/lib/engine.js baseline uses roast as cautious starting heuristic, never direct porosity measure.",
       "result": "RETAIN_APPROVED_ROAST_PRIOR_NO_NEW_MATERIAL_COEFFICIENT",
-      "owner_approval": false
+      "owner_approval": false,
+      "numerical_claim_later_verified_by": "R455-EV-CIT-033-A",
+      "historical_status_note": "Earlier publisher-abstract-only numeric uncertainty was accurate at the original checkpoint; original printed Table 1 subsequently visually checked, without overriding its scope limitations."
     },
     {
       "id": "R455-EV-003-B",
@@ -1308,7 +1344,9 @@
       ],
       "current_app": "site/lib/engine.js blob 063dac7593e6d8fa1cb889a0b74746b223dd4390, baseline() lines 23-31 uses roast-level/style priors and explicit unknown-roast Medium fallback; recommendation() lines 256-373 uses eligible recipe/hardware evidence; no measured bean porosity, gas/retained CO2, freeze-state or validated universal correction.",
       "result": "NO_ROAST_COLOR_EQUIVALENCE_ASSUMPTION_OR_NEW_NUMERIC_CORRECTION; PRIMARY_NUMERIC_RECHECK_PENDING",
-      "owner_approval": false
+      "owner_approval": false,
+      "numerical_claim_later_verified_by": "R455-EV-CIT-033-A",
+      "historical_status_note": "Earlier publisher-abstract-only numeric uncertainty was accurate at the original checkpoint; original printed Table 1 subsequently visually checked, without overriding its scope limitations."
     },
     {
       "id": "R455-EV-CIT-020-B",
@@ -1508,6 +1546,24 @@
       "current_app": "Verified 2026-11-04 development site/lib/model.js blob 19aaca401cab7bbd2059b9a34c6b8df263f4181c: user-owned setup equipment/grinder espresso range and calibration/version history; site/lib/engine.js blob 063dac7593e6d8fa1cb889a0b74746b223dd4390: prefill uses current calibration/style/feed and explicit historical measurements. No native model-RPM input in cited code.",
       "result": "HOLD_ANY_AUTOMATED_BURR_REPLACEMENT_ALERT_OR_SCALE_OFFSET_OWNER_APPROVAL_AND_FIELD_EVIDENCE_REQUIRED",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-033-A",
+      "source": "ORG-03 original report Git blob 9a66449c6adfe27bc7e64dae086d3dfcfc647de6 (archive SHA-256 270689e9a31014592ab5b9007e0c29121d23d5f1c594025cdc8d69f2881cd106), Comparative Evidence Base and coffee-characteristics analysis; Schenker et al., J Food Sci 65(3) 2000, Table 1 printed p.453/PDF index1",
+      "claim": "Direct original peer-reviewed paper Table 1 gives high-temperature short-time (HTST) versus low-temperature long-time (LTLT) roast loss 14.95% vs 15.01%, whole-bean density 622 vs 747 kg/m3, mercury-intrusion bean porosity 0.528 vs 0.474, bean volumes 1609 vs 1350 mm3/g and Hg-intruded volumes 850 vs 640 mm3/g, with matched approximate roast loss. This independently resolves the four specific numerical values previously unverified in #03. These are whole-bean material outcomes for two roast protocols, not an espresso-puck permeability, beverage extraction or sensory preference measurement.",
+      "grade": "ORIGINAL_JOURNAL_FULL_PAPER_TABLE_1_DIRECT_PDF_VISUAL_QUALITATIVE_AND_QUANTITATIVE_VERIFICATION; THIRD_PARTY_MIRROR_COPY_NOT_PUBLISHER_AND_NO_RAW_PDF_SHA; NO_DIRECT_ESPRESSO_OR_TASTE_ENDPOINT",
+      "primary_sources": [
+        "https://doi.org/10.1111/j.1365-2621.2000.tb16026.x",
+        "https://www.expresssearch.com/sample-results/patentability/npl/Schenker%202000.pdf"
+      ],
+      "original_report_source_sha": "9a66449c6adfe27bc7e64dae086d3dfcfc647de6",
+      "original_report_source_sha256": "270689e9a31014592ab5b9007e0c29121d23d5f1c594025cdc8d69f2881cd106",
+      "table_location": "printed page 453, Table 1; PDF page index 1; screenshot visually reviewed",
+      "raw_pdf_sha256": null,
+      "uncertainty": "Unaffiliated mirror provenance and PDF bytes not cryptographically verified; sample/coffees/time-temp protocols not grounds for universal transfer. Roast mass-loss matching does not make two beans exchangeable across all properties.",
+      "current_app": "Actual development site/lib/engine.js Git blob ae1fc197754a59127adcddc53df4cf19688604dd uses approved roast/style starting heuristics, user measured shot data and same-coffee/gear calibration, and does not derive pore-structure features from named roast color. site/lib/constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095 preserves seven Locked roast categories.",
+      "result": "VERIFIED_ORIGINAL_REPORT_FOUR_NUMBERS_WITH_SCOPE; NO_ESPRESSO_ROAST_PROFILE_COEFFICIENT_OR_NEW_TASTE_POLICY",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [],
@@ -1525,30 +1581,23 @@
     "Retrieve/hash the separate original S019 roast/style PDF and reverify prior slow-feed 10-page content against its archived original bytes; neither claim complete.",
     "Reconcile #267's independent V2 line review (zero strict credit from #455), #33 extractor and #96 security, avoiding overlap.",
     "Reconcile distinct accessible Library slow-feed PDF SHA-256 against original archive member only when authorized archive bytes available; Library page review does not verify member identity or unverified citations.",
-    "Verify Schenker 2000 original table values for two roast processes (0.528/0.474, 622/747) from complete primary manuscript before marking numeric claims verified; ACS Smrke 2018 full manuscript remains not byte archived.",
+    "Schenker 2000 original Table 1 numeric values verified at R455-033 (mirror, no raw hash); retain publisher-PDF provenance and any other independent report bibliography citations as pending. Do not treat bean porosity as puck permeability.",
     "Continue actual UX code/test workflow review for one demonstrable narrow safe bug rather than speculative roast-age or cold-grind controls.",
     "R455-023: Continue full citation review of nine originals, raw inaccessible October29 ZIP/S019 PDFs and exact-byte provenance of Choi/Kim full manuscripts; assess translated label UX only after specific defect. No #267 V2 coverage credit."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-024",
-    "base_development_sha": "b9a9d677964262ced84d79b97488ad66179ec5a6",
-    "source_document": "ORG-09 original grinder report, previously substantive read, this pass relevant top and comparative table passages",
-    "original_report_git_blob": "1e1b8bbef0ecb05ed0b20195191bcad26663cf0d",
-    "verified_external_source_ids": [
-      "MFR-MAHLKOENIG-E80S-US-20261104",
-      "MFR-MAHLKOENIG-E80S-GBW-LEGACY-20261104",
-      "MFR-KAFATEK-MONOLITH-MODEL-RANGES-20261104"
-    ],
+    "id": "R455-033",
+    "base_development_sha": "55d45a95185dcf8d9692f35bfb63cccae30f015d",
+    "source_document": "ORG-03 Schenker et al. 2000 primary Table 1 matched-roast-loss two-protocol bean porosity/density, and source-to-Locked engine crosswalk",
+    "original_report_git_blob": "9a66449c6adfe27bc7e64dae086d3dfcfc647de6",
+    "primary_source_id": "LIT-2000-SCHENKER-ROAST-PORES",
     "claim_ids": [
-      "R455-EV-CIT-024-A",
-      "R455-EV-CIT-024-B",
-      "R455-EV-CIT-024-C",
-      "R455-EV-CIT-024-D"
+      "R455-EV-CIT-033-A"
     ],
     "number_of_curated_sources": 42,
-    "total_evidence_checks": 86,
+    "total_evidence_checks": 87,
     "authority": "OWNER_OPTION_B_RESEARCH_ONLY_NO_LOCKED_CHANGE",
-    "review_type": "PRIMARY_MANUFACTURER_SPEC_ENTAILMENT_AND_NEGATIVE_TRANSFER_GUARDS",
+    "review_type": "PUBLISHED_ORIGINAL_TABLE_DIRECT_VISUAL_REVIEW_WITH_QUALITATIVE_SCOPE_BOUNDARY",
     "original_pack_S019_byte_access": "unavailable",
     "source_pages_hashed": false,
     "github267_literal_line_review_credit": 0,
