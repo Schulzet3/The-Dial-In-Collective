@@ -1,0 +1,1009 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "D2-019",
+  "date_utc": "2026-11-05",
+  "kind": "POST_PIN_NEW_CODE_DIRECT_SEMANTIC_REVIEW",
+  "source": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "observed_live_commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+    "path": "scripts/release/verify-release-artifact-receipt.mjs",
+    "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+    "physical_line_count": 36,
+    "verified_absent_at_pin": true,
+    "terminal_newline_not_physical_line": true
+  },
+  "method": "Every original numbered line read and interpreted; behavior/quality/risk/dead/duplicate/pinned counterpart/testability/fix/Locked fit. AI semantic review; not external human certification or machine-only scan.",
+  "per_line": [
+    {
+      "line": 1,
+      "source_text": "// Fail-closed source-bound CI artifact receipt validation; read-only, no publication.",
+      "classification": "comment",
+      "behavior": "Documents no-publication receipt role",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Comment not authority",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 1,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:1, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 2,
+      "source_text": "import {createHash} from 'node:crypto';",
+      "classification": "executable",
+      "behavior": "Imports crypto hashing",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Built-in hash, no network",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 2,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:2, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 3,
+      "source_text": "import {verifyImmutableArchive} from './netlify-immutable-publish.mjs';",
+      "classification": "executable",
+      "behavior": "Imports shared immutable archive validator",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Check helper purity separately",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 3,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:3, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 4,
+      "source_text": "const SHA=/^[a-f0-9]{40}$/;",
+      "classification": "executable",
+      "behavior": "Constrains source Git SHA format",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Rejects uppercase SHA intentionally",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 4,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:4, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 5,
+      "source_text": "const HASH=/^[a-f0-9]{64}$/;",
+      "classification": "executable",
+      "behavior": "Constrains SHA256 format",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Regex alone not checksum",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 5,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:5, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 6,
+      "source_text": "export function verifyReleaseArtifactReceipt({certificate,sourceSha,archive,functionArchive,runId,artifactName,",
+      "classification": "executable",
+      "behavior": "Accepts certificate/archive/run arguments",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Must be called with trusted data",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 6,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:6, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 7,
+      "source_text": " verifiedRequiredChecks=false}={}){",
+      "classification": "executable",
+      "behavior": "Defaults independent checks flag to false",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Missing flag denies",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 7,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:7, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 8,
+      "source_text": " if(!SHA.test(sourceSha||'')||!certificate||certificate.schema_version!==4||",
+      "classification": "executable",
+      "behavior": "Requires SHA and v4 certificate",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Schema alone not trustworthy",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 8,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:8, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 9,
+      "source_text": "  certificate.kind!=='DIC_CI_SOURCE_CERTIFICATE_NOT_RELEASE_APPROVAL'||",
+      "classification": "executable",
+      "behavior": "Requires exact non-authorizing certificate kind",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Certificate kind self-assertion must be source authenticated",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 9,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:9, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 10,
+      "source_text": "  certificate.source_sha!==sourceSha||",
+      "classification": "executable",
+      "behavior": "Binds certificate to source SHA",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Prevents cross-source mix",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 10,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:10, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 11,
+      "source_text": "  certificate.batch_status!=='CERTIFIED_READY_SOURCE'||",
+      "classification": "executable",
+      "behavior": "Requires READY source certificate",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "READY not release authorization",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 11,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:11, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 12,
+      "source_text": "  certificate.strict_source_isolation_passed!==true||",
+      "classification": "executable",
+      "behavior": "Requires source isolation true",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Boolean relies on CI source integrity",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 12,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:12, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 13,
+      "source_text": "  !Array.isArray(certificate.isolation_errors)||certificate.isolation_errors.length!==0)",
+      "classification": "executable",
+      "behavior": "Requires zero isolation errors",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Empty array rejects known isolation defects",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 13,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:13, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 14,
+      "source_text": "  throw Error('CI certificate does not certify isolated READY source');",
+      "classification": "executable",
+      "behavior": "Throws if any certificate prerequisite fails",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Fail closed",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 14,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:14, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 15,
+      "source_text": " const ids=certificate.assessed_ready_item_ids,queued=certificate.queue_ready_item_ids;",
+      "classification": "executable",
+      "behavior": "Reads assessed and queue READY IDs",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Array types checked below",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 15,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:15, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 16,
+      "source_text": " if(!Array.isArray(ids)||ids.length===0||new Set(ids).size!==ids.length||",
+      "classification": "executable",
+      "behavior": "Requires nonempty distinct assessed IDs",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Duplicate IDs denied",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 16,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:16, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 17,
+      "source_text": "  !Array.isArray(queued)||JSON.stringify(ids)!==JSON.stringify(queued))",
+      "classification": "executable",
+      "behavior": "Requires equal ordered queue and assessed IDs",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Strict order may reject reordering by design",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 17,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:17, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 18,
+      "source_text": "  throw Error('Certified READY item IDs are missing or inconsistent');",
+      "classification": "executable",
+      "behavior": "Rejects incorrect READY set",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "No mutation on throw",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 18,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:18, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 19,
+      "source_text": " if(!Number.isSafeInteger(runId)||runId<=0||certificate.github_run_id!==runId||",
+      "classification": "executable",
+      "behavior": "Requires positive matched GitHub run ID",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Run ID alone not verified online",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 19,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:19, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 20,
+      "source_text": "  !verifiedRequiredChecks)throw Error('Exact-source successful CI run evidence missing');",
+      "classification": "executable",
+      "behavior": "Requires caller-verified required CI checks",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Upstream retrieve-certified-release-bundle.mjs:14-35,42-47 checks exact GitHub runs",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 20,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:20, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 21,
+      "source_text": " if(!HASH.test(certificate.immutable_artifact_sha256||'')||",
+      "classification": "executable",
+      "behavior": "Validates static artifact digest syntax",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Hash format paired with bytes below",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 21,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:21, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 22,
+      "source_text": "  artifactName!==certificate.immutable_artifact_name||",
+      "classification": "executable",
+      "behavior": "Requires certificate artifact name match",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Metadata source must be exact",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 22,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:22, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 23,
+      "source_text": "  artifactName!=='dic-production-dist-'+sourceSha)",
+      "classification": "executable",
+      "behavior": "Requires exact SHA-qualified artifact name",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Prevents swapped artifact name",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 23,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:23, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 24,
+      "source_text": "  throw Error('Immutable artifact name/hash not bound to certificate');",
+      "classification": "executable",
+      "behavior": "Rejects wrong artifact identity",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Fail closed",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 24,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:24, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 25,
+      "source_text": " if(!Buffer.isBuffer(functionArchive)||functionArchive.length<100||",
+      "classification": "executable",
+      "behavior": "Requires binary function ZIP length",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "PK prefix does not prove full ZIP validity",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 25,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:25, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 26,
+      "source_text": "  !HASH.test(certificate.immutable_function_sha256||'')||",
+      "classification": "executable",
+      "behavior": "Validates expected function digest syntax",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Checksum expected until verified below",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 26,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:26, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 27,
+      "source_text": "  certificate.immutable_function_name!=='coffee-url-preview-function.zip')",
+      "classification": "executable",
+      "behavior": "Requires fixed coffee-url-preview function name",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Prevents missing or renamed function",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 27,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:27, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 28,
+      "source_text": "  throw Error('Immutable Netlify Function artifact missing');",
+      "classification": "executable",
+      "behavior": "Rejects missing function inputs",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Fail closed",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 28,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:28, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 29,
+      "source_text": " if(createHash('sha256').update(functionArchive).digest('hex')!==certificate.immutable_function_sha256)",
+      "classification": "executable",
+      "behavior": "Hashes full function ZIP bytes",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Full byte hash check",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 29,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:29, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 30,
+      "source_text": "  throw Error('Immutable Netlify Function checksum mismatch');",
+      "classification": "executable",
+      "behavior": "Rejects function hash mismatch",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Rejects substituted bytes",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 30,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:30, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 31,
+      "source_text": " const receipt=verifyImmutableArchive({archive,",
+      "classification": "executable",
+      "behavior": "Calls shared immutable static archive verifier",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Only PK/hash, not ZIP parse",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 31,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:31, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 32,
+      "source_text": "  expectedSha256:certificate.immutable_artifact_sha256,",
+      "classification": "executable",
+      "behavior": "Passes expected static archive checksum",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Trusted CI certificate required",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 32,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:32, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 33,
+      "source_text": "  sourceSha,certifiedSourceSha:certificate.source_sha});",
+      "classification": "executable",
+      "behavior": "Binds source and certified source SHAs",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Cross-commit reuse blocked",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 33,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:33, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 34,
+      "source_text": " return {...receipt,immutable_function_sha256:certificate.immutable_function_sha256,ready_item_ids:ids,github_run_id:runId,",
+      "classification": "executable",
+      "behavior": "Returns verified receipt details",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Status not deployment receipt",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 34,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:34, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 35,
+      "source_text": "  status:'EXACT_ARTIFACT_CI_RECEIPT_VERIFIED_NOT_RELEASE_AUTHORIZATION'};",
+      "classification": "executable",
+      "behavior": "Labels receipt not publication approval",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "Must not be interpreted as READY publication",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 35,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:35, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    },
+    {
+      "line": 36,
+      "source_text": "}",
+      "classification": "executable",
+      "behavior": "Closes pure verifier",
+      "quality": "Explicit fail-closed immutable source/CI proof validation; inspected in context of caller",
+      "risk": "No side effect",
+      "dead_or_obsolete": "Imported at retrieve-certified-release-bundle.mjs:7,73; no proven dead code",
+      "duplication": "Independent required identity/integrity check; no proven redundant logic removable",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub contents lookup 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/verify-release-artifact-receipt.mjs",
+        "commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+        "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+        "line": 36,
+        "exact_text_match": true
+      },
+      "testability": "Same focused Node22 receipt verifier unit plus upstream check-run predicate testing; NOT RUN in audit",
+      "fix_opportunity": "No confirmed active defect; preserve strict release guards and add tests only when evidence warrants",
+      "locked_fit": "#457 exact READY source, one-use owner-only publication and immutable no-write preflight; no production operations",
+      "review_method": "Direct AI numbered original source examination scripts/release/verify-release-artifact-receipt.mjs:36, blob a524e54c4f47e52be0d6090417b44611db2f3f15; no independent human certification."
+    }
+  ],
+  "findings": [
+    {
+      "type": "REQUIRED_CI_BOOLEAN_TRUST_BOUNDARY",
+      "range": [
+        19,
+        20
+      ],
+      "disposition": "Verifier relies on upstream caller; independently inspected retrieve-certified-release-bundle.mjs:14-35,42-47 requiring all five exact-source GitHub Actions checks before calling with verifiedRequiredChecks true at line74. No real provider query executed; no demonstrated bypass."
+    }
+  ],
+  "caller_trace": [
+    "scripts/release/retrieve-certified-release-bundle.mjs:7,14-35,42-47,73-81",
+    "scripts/release/netlify-immutable-publish.mjs:8-15"
+  ],
+  "test_status": "NOT_RUN_SOURCE_ONLY",
+  "runtime_app_acceptance": "NOT_RUN",
+  "production_changes": false,
+  "complete_global": false
+}
