@@ -703,6 +703,21 @@
       "source_bytes_sha256": null,
       "source_byte_caveat": "First-party HTML directly read (not raw byte-hashed); no publisher full PDF or underlying metabolite datasets downloaded. Authors state datasets not publicly available due to management requests. Three biological replicates described but independent 10kg fermentation batches were not demonstrated; do not claim independent processing replication or causal generalization to other varietals.",
       "claims_verified_externally": "One Catimor cherry harvest split into four 10kg lots, one each WP/DP/AFWP/AFDP; AF treatments sealed seven days, all dried to 11.0±1.0 g/DW; three biological replicates analyzed. Their Q-grader sensory test used 12g grounds in 250mL water with 4-minute immersion, five tasters and three cups, not espresso. The paper reports 843 differentially accumulated metabolites across four comparisons; its abstract says 1682 total whereas results describe 1706 compounds (unresolved internal discrepancy)."
+    },
+    {
+      "id": "LIT-2015-CORROCHANO-STEADY-PERMEABILITY",
+      "type": "external_primary_peer_reviewed_published_extracted_bed_steady_state_physics",
+      "title": "A new methodology to estimate the steady-state permeability of roast and ground coffee in packed beds",
+      "authors": "B. R. Roman Corrochano, J. R. Melrose, A. C. Bentley, P. J. Fryer, S. Bakalis",
+      "published": "2015-04-01, Journal of Food Engineering 150:106-116 (online 2014-11-22)",
+      "doi": "10.1016/j.jfoodeng.2014.11.006",
+      "url": "https://pure-oai.bham.ac.uk/ws/files/18167003/Corrochano_et_al_New_methodology_estimate_Journal_Food_Engineering_2015.pdf",
+      "access": "AUTHOR_INSTITUTION_PUBLISHER_VERSION_OF_RECORD_PDF_TEXT_AND_SELECTED_VISUAL_PAGES_108_109_110_112_113_REVIEWED_20261105",
+      "evidence_grade": "PRIMARY_PUBLISHED_EXPERIMENT_CONDITIONAL_WET_EXTRACTED_STEADY_STATE_BED_PERMEABILITY; MODEL_DARCY_FIT_IN_MEASURED_REGIME; NOT_REAL_TIME_ESPRESSO_TASTE_CAUSAL_TRIAL",
+      "review_status": "FOCUSED_METHODS_FIGURE_1_AND_TABLE_2_STEADY_STATE_WASHOUT_BOUNDARIES_DIRECT_CHECK; FULL_PAPER_ALL_CITATIONS_NOT_AUDITED",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "University of Birmingham hosted publisher version of record inspected using web PDF text and screenshots; original binary has not been downloaded and SHA256 not independently computed; underlying lab raw flow datasets not inspected.",
+      "claims_verified_externally": "Four PSD grinds A-D from one medium-dark Central America/Brazil Arabica blend; three initial packed bed densities 360/400/480 kg/m3 with 7.2/8.0/9.5g, triplicate beds; wetted at 80 C and circulated 600s until extracted, then 60s measurement at each pressure step; 10Hz ultrasonic flow and system resistance correction; Table 2 K from 2.59e-14 to 4.38e-13 m2, approx 17-fold spread; bed density +~30% decreased permeability ~3-4x. Not a normal 20-40s espresso shot nor blind sensory preference evidence."
     }
   ],
   "evidence_checks": [
@@ -1912,6 +1927,37 @@
       "result": "NUMERIC_DENOMINATOR_AMBIGUITY_DOCUMENTED_NO_RECIPE_POLICY_CHANGE",
       "owner_approval": false,
       "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-048-A",
+      "source": "ORG-06 original docs/research/originals/06_Establishing_the_Causal_Foundations_of_Espresso_Extraction.md lines 321-322,462-463, Git blob 9128527d3208379c723d561eee6ffbe09d174f55, archive SHA-256 e36835579fadf24cd2fdb7738d597b93f8bd23908c52206e48ccfe9e69904a80; LIT-2015-CORROCHANO-STEADY-PERMEABILITY",
+      "claim": "Original paper methods Fig1 and sections 3.1-3.6: three replicated coffee packed beds per four PSDs across 3 initial densities. Bed pressure drop excludes premeasured shower/bottom-filter losses; 10Hz ultrasonic flow; 80 C water; 600s wet circulation until beds were fully extracted BEFORE steady state measurements, 60s at each pressure step with final 30s averaged. 600s is preconditioning, not shot time; no individual 30s espresso flavor/mass measurement is reported.",
+      "grade": "DIRECT_INSTITUTION_HOSTED_PUBLISHER_RECORD_METHODS_AND_VISUAL_FIGURE_POSITIVE_600S_VS_60S_NEGATIVE_SHOT_TIME_CHECK",
+      "primary_sources": [
+        "https://pure-oai.bham.ac.uk/ws/files/18167003/Corrochano_et_al_New_methodology_estimate_Journal_Food_Engineering_2015.pdf",
+        "https://research.birmingham.ac.uk/en/publications/a-new-methodology-to-estimate-the-steady-state-permeability-of-ro/"
+      ],
+      "page_number": "Journal pp.108-109,112 (PDF index 3,4,7); methods §§3.1,3.3,3.5, 4.4",
+      "app_source_sha": "ea7f03c674ad2c006e717abcd57e55c7259ce959",
+      "current_app": "Current engine.js does not calculate a numeric hydraulic permeability from taste inputs or pressure: historical coffee/style/feed/grinder measurements take precedence and time is observational context. No new app source change.",
+      "result": "PRIMARY_PROTOCOL_CONFIRMED_RECIPE_AND_TASTE_TRANSFER_NOT_SUPPORTED",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-048-B",
+      "source": "LIT-2015-CORROCHANO-STEADY-PERMEABILITY original Table2/Fig10, journal p113 (PDF index8), and Results §4.4",
+      "claim": "Across 12 PSD×initial-density combinations of the same tested coffee, steady-state permeability table spans 2.59e-14 to 4.38e-13 m2 (ratio ~16.9). Initial density shift 360 to 480 kg/m3 (approx +33%, 7.2 to 9.5g in a fixed chamber) lowered permeability ~3-4 fold within their trials; Fig10 reported R2 > .97 fit for corrected bed ΔP vs flow. These are *wet, consolidated, fully extracted* beds and fitting/equipment effects; NOT automatic tamp-force/dose recommendations or a universally optimal flow/time/pressure/espresso yield.",
+      "grade": "DIRECT_PRIMARY_PDF_TABLE_2_FIG_10_VISUAL_AND_TEXT_CROSSCHECK; MEASURED_BED_VALUES_NOT_PERSONAL_CUP_EFFECT",
+      "primary_sources": [
+        "https://pure-oai.bham.ac.uk/ws/files/18167003/Corrochano_et_al_New_methodology_estimate_Journal_Food_Engineering_2015.pdf"
+      ],
+      "page_number": "Journal p113 (PDF index 8), Table 2 + Fig 10 + bottom paragraph; p112 §4.4",
+      "app_source_sha": "ea7f03c674ad2c006e717abcd57e55c7259ce959",
+      "current_app": "Existing recommendation is taste/history driven with one controllable change, no generalized permeability constant or sensor inferred from coffee metadata.",
+      "result": "BOUNDED_MEASURED_PERMEABILITY_CONDITIONAL_NOT_NEW_TASTE_OR_RECIPE_POLICY",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
     }
   ],
   "policy_decisions_pending": [],
@@ -1923,6 +1969,7 @@
     "reason": "Source governance record refresh R455-047. October29 original ZIP directly verified, prior stale inaccessibility superseded; reference 48/48 not app CI; no new measured outcomes."
   },
   "next_actions": [
+    "R455-048: Corrochano 2015 publisher-version original PDF reviewed methods §§3.1/3.5/4.4 and Table2: 600s wet pre-extraction + 60s per pressure step at 80C, 10Hz, K range 2.59e-14..4.38e-13m2; physical wet consolidated bed, NOT ordinary shot nor user taste/performance validation. Continue fresh bibliography, do not import constants.",
     "R455-046: Primary Fu et al 2026 Catimor split-lot paper (DOI 10.48130/bpr-0026-0010) uses four 10kg treatment lots, three analysis replicates without separate repeated fermentations, Q-grader 12g/250mL cupping not espresso, 1682 vs1706 count discrepancy. No process-to-espresso automation or numeric priors; original 03 citation coverage still incomplete.",
     "R455-041: Slayer original manual factory 40g/30s versus 2021 Slayer-brand author adaptable 40-60g/30s, first-party prebrew flavor hypotheses only. No new prebrew/TCT numeric recipe recommendation, no grinder slow-feed conflation, no owner approval sought without concrete behavior choice; other original citations and inaccessible Oct29 pack/S019 continue.",
     "R455-039: Harper/Bumbaugh/Hendon 2024 iScience original published methods/Figs 2,4,5 confirm roast-conditional pregrind wetting, static/retention, flow and TDS observations; no blind taste preference, no universal numeric recipe/water/slow-feed rule. Publisher original PDF bytes/full raw HTML still not hashed; remaining citations separately pending.",
@@ -1942,21 +1989,25 @@
     "R455-045: Original Gagné 2019 0.08 mm² surface-area result contradicts Kaffeemacher 2025 background 0.08 mm linear shorthand; Table1 lower fines ONLY same grind, rising after finer re-dial. Preserve condition qualifiers; no engine 40%-heuristic edit. Continue unrelated research citations or reproduced UX correctness. Recovered Library 10-page slow-feed variant SHA a068e5e3... differs from owner-archive registered member SHA a4db4f38...; archive bytes still unavailable."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-047",
-    "base_development_sha": "0343c81aa7175353cc873300fccceed27b37d045",
-    "source_document": "Project-upload original October29 Implementation Pack, 15 preserved members and separate nine stored-original GitHub reports",
+    "id": "R455-048",
+    "base_development_sha": "ea7f03c674ad2c006e717abcd57e55c7259ce959",
+    "source_document": "Roman Corrochano et al. 2015 primary publisher version hosted by University of Birmingham; original report #06 fixed bytes in current GitHub",
     "source_ids": [
-      "PACK-20261029"
+      "ORG-06",
+      "LIT-2015-CORROCHANO-STEADY-PERMEABILITY"
     ],
-    "claim_ids": [],
-    "number_of_curated_sources": 48,
-    "total_evidence_checks": 103,
-    "review_type": "DIRECT_PACK_RAW_ACCESS_HISTORIC_LIBRARY_RECONCILIATION_AND_CURRENT_APPROVED_YIELD_GUARDRAIL",
-    "source_hash_verified_20261105": true,
+    "claim_ids": [
+      "R455-EV-CIT-048-A",
+      "R455-EV-CIT-048-B"
+    ],
+    "number_of_curated_sources": 49,
+    "total_evidence_checks": 105,
+    "review_type": "DIRECT_ORIGINAL_PRIMARY_PDF_VISUAL_METHODS_TABLE_AND_DARCY_BOUNDARY_CROSSCHECK",
+    "source_hash_verified_20261105": false,
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
     "code_or_policy_changed": false,
-    "next_action": "PR-head/merged docs governance and identical file blob readback; continue independent research claim reviews and safe UX defect reproduction, original S019 remains inaccessible."
+    "next_action": "Nonforce PR/head+merged governance and exact blob readback; then another uncrosschecked primary citation or reproduced safe UX defect. Original S019 PDF binary remains inaccessible."
   },
   "policy_decisions_resolved": [
     {
@@ -2163,6 +2214,25 @@
       "owner_approval_required_for_behavior_change": true,
       "implementation": "INVENTORY_CORRECTED_NO_APP_CHANGE",
       "tests": "Existing actual engine regression source crosswalk inspected; research-only ZIP 48/48 previously completed; docs-only exact PR/merged governance required; no additional Node/browser/mobile/auth/SQL tests launched by this increment.",
+      "release_queue": "NO_NEW_ITEM"
+    },
+    {
+      "id": "R455-PROP-048-CORROCHANO-STEADY-STATE-TRANSFER",
+      "finding": "A cited permeability study measures extracted consolidated beds after ten minutes of wet preconditioning rather than ordinary espresso shot transients. Its density/PSD effects are strong physical evidence in that fixture, but adopting a universal dose/tamp/grind, 80C temperature or shot time correction from its Table2 would create unsupported recipe advice.",
+      "evidence": [
+        "ORG-06 exact original lines 321-322 and 462-463; original archived SHA256 e36835579fadf24cd2fdb7738d597b93f8bd23908c52206e48ccfe9e69904a80",
+        "https://pure-oai.bham.ac.uk/ws/files/18167003/Corrochano_et_al_New_methodology_estimate_Journal_Food_Engineering_2015.pdf",
+        "R455-EV-CIT-048-A",
+        "R455-EV-CIT-048-B"
+      ],
+      "severity": "P2_RESEARCH_GENERALIZATION_RISK_NOT_REPRODUCED_APP_DEFECT",
+      "benefit": "Protects Log Shot → Rate → Recommendation against treating lab hydraulic coefficients as measured consumer taste/confidence or universal espresso pressure/dose/shot-timing optima.",
+      "current_locked": "Master Specification plus Decision Ledger: five sensory inputs; green success; advice is limited to one actually controllable user adjustment and matched coffee/equipment/style/feed history; no new numeric taste/temperature target without approval.",
+      "current_app": "development ea7f03c674ad2c006e717abcd57e55c7259ce959; site/lib/engine.js 93969d561e18205d8f87e19059ea0c66b519e934 and constants.js 72221331ce4dffabe416eebec1ae2fceced3a095; maintains style/feed and same-coffee constraints and does not use calculated hydraulic permeability.",
+      "proposed_change": "SAFE: record exact study protocol, numerical results and critical bounds. HOLD any universal permeability-derived grind/dose/tamp/temperature pressure or time recommendation, hardware capture, new confidence badge or sensory equation; such behavior needs explicit owner choice and controlled real espresso/UX validation.",
+      "owner_approval_required_for_behavior_change": true,
+      "implementation": "RESEARCH_LEDGER_ONLY_NO_APP_CHANGE",
+      "tests": "Docs-only CI governance/source continuity; no Node/browser/auth/privacy/SQL runtime behavior touched. No empirical taste study performed.",
       "release_queue": "NO_NEW_ITEM"
     }
   ]
