@@ -10,7 +10,7 @@ const url='https://subterracoffee.com/products/mexico-chiapas-bellavista-medium'
 function markup({title=name,story=text,related='',extraH1='',extra='',section='Product Details'}={}){
  return '<html><head><meta property="og:type" content="product"><meta name="description" content="Another coffee from Bellavista area of the Chiapas"></head><body>'+
   '<main><article class="product"><h1>'+title+'</h1><div class="product__description"><h2>'+section+'</h2>'+
-  '<p>'+story+'</p><p>-produced by small farmholders</p><p>-nutty and chocolatey, balanced, clean and sweet.</p>'+extra+
+  '<p>'+story+'</p><p><strong>Roast Level:</strong> Medium</p><p><strong>Tasting Notes:</strong> nutty, chocolatey</p><p>-produced by small farmholders</p>'+extra+
   '</div></article></main>'+related+(extraH1?'<h1>'+extraH1+'</h1>':'')+'</body></html>';
 }
 function parse(x={}){return extractPublicCoffeeFacts(markup(x),{source_url:url});}
@@ -40,13 +40,18 @@ test('mismatched, missing, or competing selected H1 and geography fail closed',(
   {title:'mexico chiapas other-coffee medium'},
   {title:'colombia chiapas bellavista medium'},
   {title:'mexico oaxaca bellavista medium'},
-  {extraH1:'Another Coffee'},
   {story:'-brilliant clean washed colombia from Bellavista area of the Chiapas'},
   {story:'-brilliant clean washed mexico from Otherplace area of the Chiapas'},
   {story:'-brilliant clean washed mexico from Bellavista area of the Oaxaca'}
  ]){
   const q=parse(props);assert.notEqual(q.fields.origin,'Bellavista, Chiapas, Mexico',JSON.stringify(props));
  }
+});
+test('unselected external H1 does not override exact selected product; competing selected headings fail closed',()=>{
+ const selected=parse({extraH1:'Another Coffee'});
+ assert.equal(selected.fields.origin,'Bellavista, Chiapas, Mexico');
+ const blocks=[{tag:'h1',text:name},{tag:'h1',text:'Another Coffee'},{tag:'p',text}];
+ assert.equal(selectedCountryAreaOfRegion({name,country:'Mexico',origin:'Mexico',blocks}),null);
 });
 test('related SKU, SEO and educational prose cannot fill origin',()=>{
  const q=parse({story:'A simple balanced coffee.',related:'<aside class="related-products"><h3>Other product</h3><p>'+text+'</p></aside>'});
