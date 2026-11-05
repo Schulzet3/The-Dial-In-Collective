@@ -419,11 +419,11 @@ function normalized(field,value,{allowFlavorProse=false,allowAnonymousProducer=f
   // Only protect an adjacent digit/comma/digit inside a closed percentage
   // parenthesis. Ordinary cultivar-list commas still receive one space;
   // already-spaced or malformed values are not silently reinterpreted.
-  s=s.replace(/\\s*,\\s*(?=\\S)/g,(match,offset,source)=>
-   match===',' && /\\(\\s*\\d{1,3}$/.test(source.slice(0,offset))&&
-   /^\\d{1,2}\\s*%\\s*\\)/.test(source.slice(offset+1))?',':', ')
-   .replace(/\\s*\\|\\s*(?:limited (?:edition|release)|micro[ -]?lot)\\s*$/i,'')
-   .replace(/\\.$/,'').trim();
+  s=s.replace(/\s*,\s*(?=\S)/g,(match,offset,source)=>
+   match===',' && /\(\s*\d{1,3}$/.test(source.slice(0,offset))&&
+   /^\d{1,2}\s*%\s*\)/.test(source.slice(offset+1))?',':', ')
+   .replace(/\s*\|\s*(?:limited (?:edition|release)|micro[ -]?lot)\s*$/i,'')
+   .replace(/\.$/,'').trim();
  }
  // Some seller specs mislabel post-harvest equipment as a coffee 'Varietal'.
  // Withhold botanical autofill; preserve the literal label in source_facts.
