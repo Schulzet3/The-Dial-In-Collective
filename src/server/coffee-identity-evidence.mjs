@@ -786,6 +786,8 @@ export function selectedBarrelGreenBeanRegion(blocks,{name='',origin=''}={}){
 export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={}){
  const facts=[],blocks=productCoffeeProse(html,clean).filter(block=>!block.educational);
  if(!name||!blocks.length)return {facts};
+ // Selected archive status revokes an inferred season-program edition only; dated releases remain direct evidence.
+ const archivedSelected=blocks.some(block=>/^(?:this product|this coffee) is archived\.?$/i.test(block.text.trim()));
  const add=(label,value,quote)=>{if(value&&value.length<=220&&!facts.some(f=>f.label===label&&key(f.value)===key(value)))facts.push({label,value,quote});};
  if(!fields.release_label){
   // A numbered name is a release only when this selected page independently
@@ -1058,7 +1060,7 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
       sentence.match(/\bexpect\s+from\s+this\s+coffee\s+in\s+(20\d{2}(?:\s*[-–—/]\s*(?:20)?\d{2})?)\b/i));
     if(datedOffering)add('Release',datedOffering[1],sentence);
     const seasonalProgram=sentence.match(/\b(?:cornerstone|part)\s+of\s+our\s+(20\d{2})\s+(spring|summer|autumn|fall|winter)\s+coffee\s+program\b/i);
-    if(seasonalProgram)add('Release',seasonalProgram[2][0].toUpperCase()+seasonalProgram[2].slice(1).toLowerCase()+' '+seasonalProgram[1],sentence);
+    if(seasonalProgram&&!archivedSelected)add('Release',seasonalProgram[2][0].toUpperCase()+seasonalProgram[2].slice(1).toLowerCase()+' '+seasonalProgram[1],sentence);
     const lot=sentence.match(/\bLot\s*#\s*([A-Z0-9][A-Z0-9/-]{0,25})\b/i);
     if(lot)add('Lot','Lot #'+lot[1],sentence);
    }

@@ -8,6 +8,34 @@
   },
   "items": [
     {
+      "id": "DIC-Q-33-seasonal-program-release-provenance",
+      "issue": 33,
+      "title": "Suppress archived selected-product seasonal-program edition leakage without erasing direct dated release",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-identity-evidence.mjs"
+      ],
+      "tests": [
+        "Selected current official Onyx #248 page 2026-11-05 marks product archived; 2026 summer coffee program is marketing, not selected edition; exact identity: Ethiopia Agaro Yukro G1, Washed, Ultra Light, yearless December harvest.",
+        "Prior PR367 exact head 76d134738e08a56ad3e604f1663abcd73ad3e261 2232 PASS/0 FAIL/6 SKIP; validate job 41406579788 FAIL at unrelated then-unused readFileSync import in release/netlify-immutable-publish.mjs (now replaced by concurrent unrelated work). Cloud, approval, security, isolated SQL, private source passed. No false PASS for lint.",
+        "2026-11-05 recovery merges fresh development source into existing PR367 with original adversarial archived/active/explicit-date regressions and bounded official #248/#22 trigger. Exact new head tests and after-merge real source pending.",
+        "Recovered prior PR367 e80f2eb: exact Node/lint/build 41991432953 SUCCESS, cloud/mobile 41991432910 SUCCESS, security 41991432919, isolated SQL 41991432915 and original-source guard 41991432875 SUCCESS; approval 41991432954 FAILED due bounded continuity 400-commit range when PR branch had stale Nov2 and 600+ intervening upstream commits. New clean PR contains exactly reviewed five-file diff, no forced rewrite."
+      ],
+      "ci_runs": [
+        41406579788,
+        41406579817,
+        41406579863,
+        41406579740
+      ],
+      "blockers": [
+        "Fresh one-parent exact PR-head Node/lint/build, governance, cloud/mobile, security, SQL and source checks pending.",
+        "Postmerge public exact #248/#22 HTML H1/parser/Add Coffee official source evidence remains unverified."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "TESTING only, no publication. Selected archived banner must be bound to chosen H1; seasonal program is not an SKU edition. Preserve active chosen product seasonal-program accepted positive (historical test) and explicit dated selected offer. #22 control checks harvest vs release without inferring roast from collection; 603 corpus/oracle/captures unchanged. #267 V2 and #96 separate, no provider/SQL/Edge/Auth/member write. Clean replacement of conflict-resolved but continuity-failed old PR367; prior failed historical head preserved. No duplicate source changes."
+    },
+    {
       "id": "DIC-Q-33-original603-292-selected-guji-producer-region",
       "issue": 33,
       "title": "Exact selected country-first Guji locality corroborated by same-product named producer",
