@@ -600,6 +600,20 @@
       "review_status": "FLAT_MAX_CONICAL_SDRM_M98V_MODEL_BOUNDARIES_READ; marketed flavor categories not experimentally verified",
       "source_bytes_sha256": null,
       "source_byte_caveat": "No raw HTML archival or independent loaded-speed validation; model claims may vary by future revisions."
+    },
+    {
+      "id": "MFR-RANCILIO-SILVIA-PRO-X-SOFT-INFUSION",
+      "type": "manufacturer_primary_product_documentation",
+      "title": "Rancilio Silvia Pro X Variable Soft Infusion and F.08 menu (North American official documents)",
+      "url": "https://www.ranciliogroupna.com/silvia-pro-x-variable-soft-infusion/",
+      "secondary_official_url": "https://www.ranciliogroupna.com/silvia-pro-x-functions-menu-overview/",
+      "access_status": "DIRECT_OFFICIAL_HTML_READ_2026-11-05_UTC",
+      "binary_sha256": null,
+      "review_status": "FOCUSED_FULL_OFFICIAL_FEATURE_EXPLANATION_AND_MENU_SECTION_READ",
+      "provenance": "First-party Rancilio Group North America; manufacturer provides product capability and its own experience claims, not randomized independent consumer outcomes",
+      "claims_verified_externally": "Variable Soft Infusion is configurable via F.08 to OFF or a programmed time up to six seconds; official manufacturer contrasts its line-pressure soft infusion with other initial pressure arrangements. Site describes perceived balance/reduced channeling as its own experience rather than controlled comparative experiment.",
+      "applicability": "Rancilio Silvia Pro X; does not establish that unrelated machines can implement same profile, or a user-facing universal profile setting.",
+      "git_blob_sha": null
     }
   ],
   "evidence_checks": [
@@ -1597,6 +1611,32 @@
       "result": "NO_NEW_TEMPERATURE_TIME_RATIO_OR_PRESSURE_TARGET_NO_AUTO_GRIND_CORRECTION; OWNER_DECISION_REQUIRED_IF_PROPOSED",
       "owner_approval": false,
       "source_bytes_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-036-A",
+      "source": "ORG-04 original Git blob f65992902285e693b96e993dae3e7c3bf2535793, § Flat-pressure machines lines 188-195; MFR-RANCILIO-SILVIA-PRO-X-SOFT-INFUSION",
+      "claim": "Rancilio Group NA first-party Silvia Pro X F.08 instructions directly verify this model can set Variable Soft Infusion OFF or up to 6 seconds. Manufacturer says the feature initially uses line-pressure hot water rather than full pump brewing pressure. This is device-specific capability, not measured saturation equivalence across pumps, profiles, baskets or coffee styles.",
+      "grade": "MANUFACTURER_FIRST_PARTY_PRODUCT_CAPABILITY_AND_MENU_DIRECT; NOT_INDEPENDENT_PHYSICS_OR_CUP_OUTCOME",
+      "primary_sources": [
+        "https://www.ranciliogroupna.com/silvia-pro-x-functions-menu-overview/",
+        "https://www.ranciliogroupna.com/silvia-pro-x-variable-soft-infusion/"
+      ],
+      "current_app": "At pinned development d4d38887a2a548aa511c6080d1ed535300cabf02 engine blob ac0608252f282611607235d7fc184a5acc431199 and model blob f48dc8967e2c2f7038c9324fdabca4348f5cb12d; setup tracks machine string, advanced slowFeed (grinder feed) and 5 independent taste ratings; no machine-model-specific programmable preinfusion profile or proposed automatic time.",
+      "result": "SOURCE_CLAIM_VERIFIED_MODEL_SCOPED_NO_NEW_APP_RULE",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-036-B",
+      "source": "ORG-04 original Git blob f65992902285e693b96e993dae3e7c3bf2535793 pressure/PI mechanisms; MFR-RANCILIO-SILVIA-PRO-X-SOFT-INFUSION",
+      "claim": "Rancilio manufacturer attributes improved balance and fewer channeling defects to its Soft Infusion in promotional explanation, but supplies no controlled randomized same-coffee WDT/basket/style or blind sensory comparison on that page. A verified product setting must not be converted into an independently established taste benefit, universal six-second recommendation or equivalence to unrelated slow-feeding mode.",
+      "grade": "FIRST_PARTY_MARKETING_EXPERIENCE_CONFOUNDED; ABSENCE_OF_CONTROLLED_SENSORY_STUDY_ON_READ_SOURCE; RESEARCH_ONLY_GENERALIZATION_BOUNDARY",
+      "primary_sources": [
+        "https://www.ranciliogroupna.com/silvia-pro-x-variable-soft-infusion/",
+        "https://www.ranciliogroupna.com/equipment/rancilio-silvia-pro-x/"
+      ],
+      "current_app": "At pinned development d4d38887a2a548aa511c6080d1ed535300cabf02: source-bound site/lib/engine.js baseline/recommendation and site/lib/model.js advanced.slowFeed/active setup; no new preinfusion capture/automatic feature selected.",
+      "result": "HOLD_UNPROVEN_GENERAL_SIX_SECOND_PI_SENSORY_BENEFIT_AND_DATA_CAPTURE",
+      "owner_approval": true
     }
   ],
   "policy_decisions_pending": [],
@@ -1605,9 +1645,10 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R455-035 source-verification update only, no runtime changes; risk-based Nov 3 governance-only source/continuity check required."
+    "reason": "R455-036 document/evidence-only manufacturer-specific verification; Nov 3 risk-based governance/continuity on final SHA, no runtime CI asserted."
   },
   "next_actions": [
+    "R455-036: Rancilio manufacturer supports F.08 OFF/up to six seconds for its own machine; marketing experience is not independent channeling/taste proof. No product capture or fixed PI target authorized.",
     "R455-035: final Wadsworth article methods directly read; do not treat 22 XCT packs/air-analog fluid simulations or illustrative 38–42g/27–32s recipe as real-world taste optimum. Resume unrelated primary bibliography checks and safe Log Shot review; Oct29 ZIP/S019 PDF raw bytes still unavailable.",
     "Verify original Griffiths journal full PDF only if needed and Wadsworth full methods when directly accessible; scientific claim verification does not authorize new app data capture or numeric sensory thresholds.",
     "Continue unresolved original research bibliography primary citation checks with exact original section, DOI, access and generalization limits; all nine full bodies were read but NOT all citations independently verified.",
@@ -1620,18 +1661,18 @@
     "R455-023: Continue full citation review of nine originals, raw inaccessible October29 ZIP/S019 PDFs and exact-byte provenance of Choi/Kim full manuscripts; assess translated label UX only after specific defect. No #267 V2 coverage credit."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-035",
-    "base_development_sha": "8513f8b70301c20db235f5288322c444f97b4c9f",
-    "source_document": "Wadsworth et al. RSOS 2026 final published institutional original, hydraulic models versus measured shot/sensory bounds",
-    "primary_source_id": "LIT-2026-WADSWORTH-XCT-PERMEABILITY",
+    "id": "R455-036",
+    "base_development_sha": "d4d38887a2a548aa511c6080d1ed535300cabf02",
+    "source_document": "ORG-04 Rancilio Silvia Pro X Soft Infusion primary manufacturer source and evidence boundary",
+    "primary_source_id": "MFR-RANCILIO-SILVIA-PRO-X-SOFT-INFUSION",
     "claim_ids": [
-      "R455-EV-CIT-035-A",
-      "R455-EV-CIT-035-B"
+      "R455-EV-CIT-036-A",
+      "R455-EV-CIT-036-B"
     ],
-    "number_of_curated_sources": 42,
-    "total_evidence_checks": 89,
-    "authority": "OWNER_OPTION_B_PRIMARY_SOURCE_VERIFICATION_RESEARCH_ONLY_NO_LOCKED_CHANGE",
-    "review_type": "FULL_PRIMARY_PUBLISHED_METHODS_CAVEATS_DIRECT_TEXT_PLUS_SELECTED_PDF_PAGE_VISUAL_VERIFICATION",
+    "number_of_curated_sources": 43,
+    "total_evidence_checks": 91,
+    "authority": "OWNER_OPTION_B_PRIMARY_SOURCE_VERIFICATION_ONLY_NOT_NEW_PRODUCT_AUTHORITY",
+    "review_type": "DIRECT_MANUFACTURER_FEATURE_AND_F08_MENU_HTML_CONTENT_PLUS_ORIGINAL_RESEARCH_CROSSWALK",
     "source_pages_hashed": false,
     "github267_literal_line_review_credit": 0,
     "production_deployed": false
@@ -1719,6 +1760,23 @@
       "approval_required_for_behavior_change": true,
       "implementation": "RESEARCH_ONLY_HOLD",
       "test_plan": "Docs-only governance/continuity check now. Future approved model: same-coffee and equipment stratification, real-brew measured negative/positive performance with five taste, historical immutability, privacy/offline/SQL and calibrated uncertainty.",
+      "release_queue": "NO_NEW_ITEM"
+    },
+    {
+      "id": "R455-PROP-036-SOFT-INFUSION-GENERALIZATION",
+      "finding": "Manufacturer-confident programmable soft-infusion timing is not proof of six-second optimum or of universal taste/channeling improvement.",
+      "evidence": [
+        "R455-EV-CIT-036-A",
+        "R455-EV-CIT-036-B"
+      ],
+      "severity": "P3_RESEARCH_GENERALIZATION_AND_POTENTIAL_UX_COPY_RISK_NO_REPRODUCED_APP_DEFECT",
+      "user_benefit": "Prevent machine-specific line-pressure controls from becoming fake universal recipe directions; preserve distinct grinder slow-feed and shot style semantics.",
+      "current_locked": "Master Specification/Decision Ledger machine adjustability, recipe-specific timing, user-owned setup and at most one truly controllable change; no authority to add preinfusion inputs or new numeric targets.",
+      "current_app": "Development d4d38887a2a548aa511c6080d1ed535300cabf02 engine blob ac0608252f282611607235d7fc184a5acc431199 and model f48dc8967e2c2f7038c9324fdabca4348f5cb12d; no explicit preinfusion input/automatic corrections.",
+      "proposed_change": "SAFE: leave app unchanged, retain evidence uncertainty. OPTIONAL new machine-specific preinfusion tracking, experiment prompts or numeric recommendations require owner approval and real multi-machine/style validation.",
+      "approval_required_for_behavior_change": true,
+      "implementation": "RESEARCH_ONLY_HOLD",
+      "test_plan": "Docs-only: exact source governance/continuity CI. If ever owner approved: capability gating, five-rating retention, one-change, time boundaries, independent slow-feed, offline persistence/privacy/SQL, real device and sensory outcome tests.",
       "release_queue": "NO_NEW_ITEM"
     }
   ]
