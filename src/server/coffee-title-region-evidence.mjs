@@ -120,3 +120,49 @@ export function selectedCountrySmallholderGrowingLocality({name='',country='',or
  }
  return results.size===1?[...results.values()][0]:null;
 }
+
+
+// A selected named farm's current story can expose an incompatible one-letter
+// Region spelling. Preserve both literals for user review; never auto-correct.
+function oneLetterDifference(a,b){
+ const x=norm(a),y=norm(b);
+ if(!x||!y||x===y||Math.abs(x.length-y.length)>1)return false;
+ let i=0,j=0,edits=0;
+ while(i<x.length&&j<y.length){
+  if(x[i]===y[j]){i++;j++;continue;}
+  if(++edits>1)return false;
+  if(x.length===y.length){i++;j++;}
+  else if(x.length>y.length)i++;
+  else j++;
+ }
+ return edits+(x.length-i)+(y.length-j)===1;
+}
+export function selectedFarmStoryRegionMismatch({name='',origin='',blocks=[]}={}){
+ if(typeof name!=='string'||name.length>165||typeof origin!=='string'||origin.length>115||
+   !Array.isArray(blocks)||blocks.length>2500)return null;
+ const label=origin.match(/^([^,]{3,65}),\s*([^,]{3,45})$/u);
+ if(!label)return null;
+ const [,printedRegion,country]=label;
+ if(!new RegExp('^'+quoteRegex(country)+'\\s+','iu').test(name))return null;
+ const headings=blocks.filter(b=>b.tag==='h1');
+ if(headings.length!==1||norm(headings[0].text)!==norm(name))return null;
+ const place='[\\p{Lu}][\\p{L}\\p{M}\\x27\\u2019.-]{1,40}(?:\\s+[\\p{Lu}][\\p{L}\\p{M}\\x27\\u2019.-]{1,40}){0,3}';
+ const farm=new RegExp('\\b(?:Finca|Farm|Hacienda|Estate)\\s+('+place+')\\s+is\\s+located\\s+in\\s+(?:the\\s+)?(?:highlands\\s+of\\s+)?('+place+'),\\s*('+place+')(?=[.!?;]|\\s|$)','gu');
+ const statements=[];
+ for(const block of blocks){
+  if(block.educational||!['p','li'].includes(block.tag)||
+    typeof block.text!=='string'||block.text.length>1200||
+    /\b(?:previous(?:ly)?|former(?:ly)?|historic(?:al(?:ly)?)?|old lot|another lot|other coffee|no longer|hypothetical|might|could|would)\b/iu.test(block.text)||
+    /\b(?:related|recommended|similar products|other coffees|you may also like|reviews)\b/iu.test(block.section||''))continue;
+  for(const match of block.text.matchAll(farm)){
+   const [quote,farmName,town,regionRaw]=match;
+   const region=regionRaw.replace(/[.!?;,]+$/u,'');
+   if(!norm(name).includes(norm(farmName))||
+      !new RegExp('\\b'+quoteRegex(region)+'\\b','iu').test(name)||
+      !oneLetterDifference(printedRegion,region)||
+      [town,region].some(s=>s.length>65||norm(s)===norm(country)))continue;
+   statements.push({value:town+', '+region+', '+country,quote});
+  }
+ }
+ return statements.length===1?statements[0]:null;
+}
