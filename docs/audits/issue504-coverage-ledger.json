@@ -432,11 +432,28 @@
         "DIC-20261104-READY20-17",
         "DIC-20261105-READY9-18"
       ]
+    },
+    {
+      "id": "G1-027",
+      "receipt": "docs/audits/issue504-review-G1-027.json",
+      "text_files_entire": 0,
+      "text_files_partial": 1,
+      "reviewed_file_lines": 114,
+      "reviewed_file_words": 840,
+      "reviewed_github_objects": 0,
+      "reviewed_github_words": 0,
+      "source_blob_sha": "0c95f4066819ff3ff46e1b59b287ad1e4936b46b",
+      "source_reviewed_existing_line_modifications_not_double_credited": 38,
+      "source_inserted_new_lines": 114,
+      "source_new_version_whitespace_words": 840,
+      "source_modified_prior_records": 19,
+      "release17_receipt_sha": "3df157b1c77eb8223df1eb29ef938ceba1304423",
+      "zero_current_defects": true
     }
   ],
   "totals": {
-    "source_file_lines": 7635,
-    "source_file_words": 58433,
+    "source_file_lines": 7749,
+    "source_file_words": 59273,
     "github_objects": 2,
     "github_words": 721
   },
@@ -453,21 +470,15 @@
     "no_release_permission": true
   },
   "next": {
-    "kind": "live_queue_changed_original_delta",
-    "path": "docs/RELEASE_QUEUE.json",
-    "first_record_line": 10,
-    "id_line": 11,
-    "expected_blob_sha": "0c95f4066819ff3ff46e1b59b287ad1e4936b46b",
-    "expected_next_item": "DIC-Q-33-580-selected-h1-adjacent-farm-locality",
-    "unreviewed_drift": [
-      "19 changed original active records",
-      "no remaining new active/history objects as of pinned current blob"
-    ],
-    "pinned_original_eof_reached": 5377,
-    "early_source_snapshot_gap_reconciliation_required": true
+    "kind": "source_version_mapping_reconciliation",
+    "receipt_first": "docs/audits/issue504-review-G1-005.json",
+    "pinned_queue_blob": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
+    "unreviewed_original_source_version_gaps": true,
+    "current_queue_new_and_modified_records_directly_reviewed_at_blob": "0c95f4066819ff3ff46e1b59b287ad1e4936b46b",
+    "unreviewed_other_github_surfaces": true
   },
   "uncovered": "Original pinned queue line 4737+; 8 new live queue items, 1 new release-history object and 19 modified original items have zero delta semantic credit; GitHub issues/PRs/comments/reviews/Actions/logs/history/tags/releases/binary materials and #267 delegated code/frozen semantic review remain incomplete. Temporary owner-approved PUBLIC setting remains, future PRIVATE restoration not verified.",
-  "latest_review_source_anchor": "2b33bc1f519feb0cd864f7643b8f2813258046f9",
+  "latest_review_source_anchor": "dc7d1803c47251cdf61d487775b38c3da2b5324c",
   "inventory_metadata_only": {
     "github_issue_rest": 523,
     "github_pr_rest": 454,
@@ -742,6 +753,20 @@
     "remaining_current_modified_pinned": 19,
     "next_id": "DIC-Q-33-580-selected-h1-adjacent-farm-locality",
     "confirmed_fixes": 0,
+    "status": "IN_PROGRESS"
+  },
+  "g1027_reconciliation_20261105": {
+    "development_sha": "dc7d1803c47251cdf61d487775b38c3da2b5324c",
+    "main_sha": "c25e31343b1974b89445b48b43993bc446aa96ca",
+    "release_production_sha": "b386a977a7c43bf190f6315105894334d96f0f18",
+    "current_queue_blob_sha": "0c95f4066819ff3ff46e1b59b287ad1e4936b46b",
+    "modified_records": 19,
+    "new_field_lines": 114,
+    "modified_existing_lines_no_double_credit": 38,
+    "extra_version_words": 840,
+    "release17_receipt_sha": "3df157b1c77eb8223df1eb29ef938ceba1304423",
+    "confirmed_fixes": 0,
+    "next": "docs/audits/issue504-review-G1-005.json source mapping",
     "status": "IN_PROGRESS"
   }
 }
