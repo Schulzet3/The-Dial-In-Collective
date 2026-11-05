@@ -2,7 +2,7 @@
   "schema_version": 1,
   "issue": 33,
   "kind": "EXACT_SELECTED_OFFICIAL_COHORT_DIAGNOSTIC",
-  "status": "TESTING_NOT_CERTIFIED",
+  "status": "CODE_FIX_TESTING_UNVERIFIED",
   "date_utc": "2026-11-05",
   "source_base_sha": "f0ecb1b06fcc46e52809705122d1c4115fea5205",
   "commit_marker": "[dic-issue33-thirtythird3]",
@@ -46,5 +46,38 @@
   "queue_change": false,
   "no_deployment": true,
   "no_provider_or_member_writes": true,
-  "next": "After exact-source proof inspect #46 Ethiopian Sidamo refined origin potential; leave ambiguous/contradictory fields blank. If current parser misses explicit selected facts, correct generically with focused hostile cases; do not claim this probe is full acceptance."
+  "next": "After exact-source proof inspect #46 Ethiopian Sidamo refined origin potential; leave ambiguous/contradictory fields blank. If current parser misses explicit selected facts, correct generically with focused hostile cases; do not claim this probe is full acceptance.",
+  "before": {
+    "merged_source_sha": "dc27ab2d5fe392d14f773c2f7305dca1c939d056",
+    "official_run": 41977648210,
+    "job": 127080141541,
+    "artifact_id": 13393005098,
+    "artifact_zip_sha256": "3ea9ca382cd083735d47b4a43c4155bb9fbe5909f57b2caa7ef674f95c2f924f",
+    "case46": {
+      "selected_h1": "BULL RUN BARREL AGED COFFEE - RYE-FINISHED OAK BARREL",
+      "current_origin": "Ethiopia",
+      "current_green_beans": "Ethiopian Sidamo",
+      "html_sha256": "af64fd8602caaa306a51637357bb266781bcb11c4d0b6eea0fd9449584ce1c70",
+      "process": "Other/Unknown",
+      "conflicts": []
+    },
+    "case43": {
+      "html_sha256": "51bab08079658c594c1891ca26beb73bcdb79937b2f4ff9bb599cadc29f1dd69",
+      "origin": "Papua New Guinea, Nebilyer Valley, México, Chiapas, and Oaxaca"
+    },
+    "case88": {
+      "html_sha256": "69b0f701fe51f58f7616dd2b8e51e6ff6418667d55eeb976dcee6db9f09ccf57",
+      "roast_level": "Medium"
+    },
+    "fetched": 3,
+    "parsed": 3,
+    "manual_certified": 0
+  },
+  "fix": {
+    "status": "TESTING",
+    "source_path": "src/server/coffee-identity-evidence.mjs",
+    "test_path": "tests/coffee-issue33-46-selected-barrel-bean-origin.test.mjs",
+    "expected_case46_origin": "Sidamo, Ethiopia",
+    "required": "actual official-source after-parser plus no unintended changes"
+  }
 }
