@@ -1,3 +1,9 @@
+## November 5, 2026 UTC — Issue #33 PR827 queue-intake CI repair on same branch [skip netlify]
+
+PR827 original reviewed head `336e347a5b80aad368219c2bdff7eb637c2e9ed7`; GitHub approval run42082075382 **FAILED** for precisely `Untracked app change: src/server/coffee-selected-farm-growing-locality.mjs`. Fix via same-commit `docs/RELEASE_QUEUE.json` adding new issue-33 TESTING queue item `DIC-Q-33-original603-570-selected-farm-growing-locality` and this scoped journal. **Not READY**; target no release. Existing 139 queue items untouched. Exact source/test CI still in progress; rerun approval on corrected exact PR head, then ensure actual Node tests and fresh merged official source before queue promotion. Original 603 frozen/oracle unchanged; no production writes. [skip netlify]
+
+---
+
 ## November 5, 2026 UTC — Issue #33 #570 corroborated selected current farm locality fix (testing; NO DEPLOY)
 
 Owner authority: DEVELOPMENT only, base source `259e29148933742733f255c7923bed81e64c9f34`. Official current #570 https://www.slowburncoffee.com/products/honduras-expreso-paraiseno in exact merged [run42081273264](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42081273264) job127434630593 SUCCESS, source raw SHA256 `6e4d2a79d1b75d0655dcec2773bf3b5f28c492c45777688eb9dc2e7ab40e22f3` (runner-reported). BEFORE parser origin `El Paraíso, Honduras`; exact selected H1 and farm narrative name Finca Expreso Paraiseño; direct present selected prose explicitly states coffee grown at the farm from **La Lodoza, El Paraíso**. Original region caption El Paraiso and country Honduras agree. Generic source-bound matching farm/H1/region/country + two present-tense direct product growing claims is a narrow possible refinement to `La Lodoza, El Paraíso, Honduras`; exclude SEO, historical/other farm, missing or contradictory current facts. Preserve producer Gerardo Peñalva, process, coffee identity and member edits.
