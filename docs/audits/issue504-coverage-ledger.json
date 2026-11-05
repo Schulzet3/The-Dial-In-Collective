@@ -652,13 +652,33 @@
       "reviewed_file_words": 0,
       "reviewed_github_objects": 10,
       "reviewed_github_words": 2425
+    },
+    {
+      "id": "G1-038",
+      "receipt": "docs/audits/issue504-review-G1-038.json",
+      "reviewed_file_lines": 0,
+      "reviewed_file_words": 0,
+      "reviewed_github_objects": 8,
+      "reviewed_github_words": 1744,
+      "source_comment_ids": [
+        6658217058,
+        6658240252,
+        6659453341,
+        6659470503,
+        6660823579,
+        6660848584,
+        6662274601,
+        6662300866
+      ],
+      "source_code_267_semantic_credit": 0,
+      "confirmed_safe_fixes": 1
     }
   ],
   "totals": {
     "source_file_lines": 7919,
     "source_file_words": 60754,
-    "github_objects": 44,
-    "github_words": 12524
+    "github_objects": 62,
+    "github_words": 16693
   },
   "delegated_267_no_double_count": true,
   "source_manifests": [
@@ -673,14 +693,15 @@
     "no_release_permission": true
   },
   "next": {
-    "kind": "github_issue_comment",
-    "issue": 504,
-    "comment_id": 6651565529,
-    "first_unreviewed_source": "Issue #504 historical comment 6651565529",
-    "then": "Continue remaining 14 pre-checkpoint unreviewed #504 comments; then other GitHub records/queue drift and independently corroborated #267."
+    "kind": "github_issue_body",
+    "issue": 267,
+    "first_unreviewed_word": 1,
+    "range": "entire live description body, pin SHA-1 before direct inspection",
+    "url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/267",
+    "then": "Audit #267 GitHub issue discussion oldest-to-newest (as governance metadata, not delegated source code); then other issue/PR review threads/Actions/commit metadata. Revisit appended #504 checkpoint comments separately."
   },
-  "uncovered": "At G1-036, 43 of 57 presently listed #504 comments directly reviewed (includes original setup), 14 pre-checkpoint unreviewed. New checkpoint comments may be appended. Most issues, PR/reviews, Actions logs, binaries, release/commit/tag history, live queue drift and #267 delegated proof remain unverified.",
-  "latest_review_source_anchor": "432a3a076d3809b2c6cf2b83fb35723b5db69c47",
+  "uncovered": "G1-038: all 61 pre-checkpoint #504 comment bodies including setup reviewed, but new checkpoint comments subsequently add work. Other issues/PR/reviews/Actions/job logs, history, binaries, tags/releases, active queue/version drift, new docs words, and independent #267 strict source overlap validation remain incomplete.",
+  "latest_review_source_anchor": "43ed9646130ca9daa68ab028b9850e70c2995d31",
   "inventory_metadata_only": {
     "github_issue_rest": 523,
     "github_pr_rest": 454,
@@ -1331,5 +1352,62 @@
     "confirmed_fixes": 0,
     "status": "IN_PROGRESS",
     "ci": "NOT_YET_RUN_ON_NEW_COMMIT"
+  },
+  "g1038_reconciliation_20261105": {
+    "development_sha": "43ed9646130ca9daa68ab028b9850e70c2995d31",
+    "main_sha": "c25e31343b1974b89445b48b43993bc446aa96ca",
+    "release_production_sha": "b386a977a7c43bf190f6315105894334d96f0f18",
+    "repo_visibility": "public",
+    "comment_inventory_count": 61,
+    "read_comment_ids": [
+      6658217058,
+      6658240252,
+      6659453341,
+      6659470503,
+      6660823579,
+      6660848584,
+      6662274601,
+      6662300866
+    ],
+    "body_sha1_utf8": [
+      "bccc9db47540cb28faf90841b0a31f1ae81880e4",
+      "19e6bb961915305e3b6f7f576879dfa5f2533f17",
+      "07b2c0c84ca08fcca501c2a1dc22c5540333ad26",
+      "d25117bd2cd29e6705be6ac67ea66a740ed82c8a",
+      "022a0c0d640064affa85931c27d71ac7bbda8491",
+      "2d22575cd883f46bccd20aae846ef73991743b6f",
+      "648749d41885a014d7dfedaafbe45dd7e4c4e7e1",
+      "08d739fc309b400271333508ead9122bb1cd4951"
+    ],
+    "reviewed_words": 1744,
+    "reviewed_objects": 8,
+    "total_github_objects": 62,
+    "total_github_words": 16693,
+    "total_file_lines": 7919,
+    "total_file_words": 60754,
+    "active_projection_correction": {
+      "previous_top_level_totals": {
+        "source_file_lines": 7919,
+        "source_file_words": 60754,
+        "github_objects": 44,
+        "github_words": 12524
+      },
+      "previous_stale_next_comment_id": 6651565529,
+      "prior_batch_computed_totals": {
+        "source_file_lines": 7919,
+        "source_file_words": 60754,
+        "github_objects": 54,
+        "github_words": 14949
+      }
+    },
+    "verified_merged_prs": [
+      782,
+      793,
+      801,
+      809
+    ],
+    "next_issue_description": 267,
+    "status": "IN_PROGRESS",
+    "ci": "PENDING_NEW_DOCS_COMMIT"
   }
 }
