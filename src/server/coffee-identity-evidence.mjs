@@ -689,6 +689,34 @@ function pairedSelectedLotRegion(blocks,name,previousOrigin=''){
  return {value:town.value+', '+region.value,quote:town.quote+' | '+region.quote};
 }
 
+// Link a named current producer's PRESENT farm to a preceding literal
+// locality only through an adjacent "There ... what is now [farm]" sentence.
+// Historical moves or farm names alone never establish current origin.
+export function selectedCurrentFarmBridge(blocks,{name='',producer='',origin=''}={}){
+ if(!Array.isArray(blocks)||!name||!producer||producer.length<5||
+    !key(name).includes(key(producer)))return null;
+ const countries=countryNames(name);
+ if(countries.length!==1||(origin&&key(origin)!==key(countries[0])))return null;
+ const first=producer.trim().split(/\s+/u)[0];
+ if(!/^\p{Lu}[\p{L}\p{M}'’-]{2,44}$/u.test(first))return null;
+ const pattern=/\bin\s+([\p{Lu}][\p{L}\p{M}’' -]{2,65}),\s*([\p{Lu}][\p{L}\p{M}’' -]{2,65})\.\s*There,\s*([\p{Lu}][\p{L}\p{M}’'-]{2,45})\s+and\s+(?:his|her|their)\s+family\s+invested\s+in\s+what\s+is\s+now\s+(?:Finca|Farm|Estate)\s+[\p{Lu}][\p{L}\p{M}’' -]{2,65},\s+(?:a|an)\s+(?:[\d.,]+[ -]hectare\s+)?farm\b/giu;
+ const candidates=new Map();
+ for(const block of blocks){
+  if(!['p','li','div'].includes(block.tag)||block.educational||
+    /\b(?:related|recommended|other coffees?|other roasts?|catalog|customer reviews)\b/i.test(block.section||'')||
+    !block.text||block.text.length>5500)continue;
+  for(const m of block.text.matchAll(pattern)){
+   if(key(m[3])!==key(first))continue;
+   const city=m[1].trim(),region=m[2].trim();
+   if([city,region].some(v=>v.length>65||
+      /\b(?:coffee|roast|process|natural|washed|honey|farm|finca|estate|shipping|street|avenue)\b/i.test(v)))continue;
+   const value=city+', '+region+', '+countries[0];
+   candidates.set(key(value),{value,quote:m[0]});
+  }
+ }
+ return candidates.size===1?[...candidates.values()][0]:null;
+}
+
 export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={}){
  const facts=[],blocks=productCoffeeProse(html,clean).filter(block=>!block.educational);
  if(!name||!blocks.length)return {facts};
@@ -721,6 +749,10 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
  // Join explicitly named current lot and region only for the selected coffee.
  const pairedLot=pairedSelectedLotRegion(blocks,name,fields.origin);
  if(pairedLot)add('Origin',pairedLot.value,pairedLot.quote);
+ // Direct current selected producer/farm linkage outranks country-only
+ // origin, but never overwrites incompatible or already specific origin.
+ const selectedPresentFarm=selectedCurrentFarmBridge(blocks,{name,producer:fields.producer,origin:fields.origin});
+ if(selectedPresentFarm)add('Origin',selectedPresentFarm.value,selectedPresentFarm.quote);
  const titleOrigin=extractCoffeeTitleOrigin(name);
  const titleMatches=titleOrigin?.label==='Country'?titleOrigin.value.split(', '):[];
  const titleCountries=titleMatches.length>1&&!/\bblend\b/i.test(name)?[]:titleMatches;

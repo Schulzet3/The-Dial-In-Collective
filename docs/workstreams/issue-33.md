@@ -1,3 +1,11 @@
+## November 5, 2026 UTC — #33 original603 #18 selected current producer-farm location repair TESTING [skip netlify]
+
+Recovered dev `65ad35737e696418ea02c78f587e01c30e01ed73`, current authority, #33/267/96, official evidence [41952596816](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41952596816) at merged `65ad35737e696418ea02c78f587e01c30e01ed73`; independent #18 official HTML SHA256 `8e99028283caedf99e28cde3a6554720ecb78799e8bde2c181fa4311317f95f6` directly links La Peña/Santa Barbara via adjacent *There Sebastian and family invested in what is now Finca Gonzalo* to present farm, while actual parser origin was only Honduras. #67 mixed process and #79 product-owned Medium tag correctly preserved; no duplicate work. Original603 immutable adjudication CSV blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6`.
+
+Same-commit paths: `src/server/coffee-identity-evidence.mjs` adds generic single selected producer/current farm-bound adjacent literal-place rule, refusing mismatched country/producer, unrelated sections, historic farm and conflicting specifics; `tests/coffee-issue33-18-current-farm-bridge.test.mjs` adds 6 positive/negative targeted checks; this journal. Source role no URL/roaster/coffee hardcoding, no history or frozen oracle change. **Pending:** actual PR-head tests/CI; integrate only after success; run exact merged official selected HTML parser/Add Coffee probe; independent compare and source-hash; queue TESTING until then. #33 OPEN, no release/prod writes, no #267 V2/#96 overlap.
+
+---
+
 ## November 5, 2026 UTC — Issue #33 #18/#67/#79 selected-current three-case probe prepared; TESTING [skip netlify]
 
 **Authority/recovery:** `311ebae016d3d008620eb74de9f01033d6ddb2e7` (`development/backend-foundation`) before this change; AGENTS.md, docs/ai/CONTEXT_ENTRYPOINT.md and PREFLIGHT.md, scoped #33 journal, status, Master Spec/Locked ledger, approval coverage, release queue, official source register, current #33/#267 V2/#96 comments and concurrent PRs read. Original frozen603 adjudication CSV blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6` retained unchanged (603 original selected cases; 153 context-qualified, 29 missing-qualified); no #267/#96 overlap or ownership change.
