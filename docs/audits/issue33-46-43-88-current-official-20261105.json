@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "kind": "EXACT_SELECTED_OFFICIAL_COHORT_DIAGNOSTIC",
+  "status": "TESTING_NOT_CERTIFIED",
+  "date_utc": "2026-11-05",
+  "source_base_sha": "f0ecb1b06fcc46e52809705122d1c4115fea5205",
+  "commit_marker": "[dic-issue33-thirtythird3]",
+  "original603_frozen_csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "immutable_corpus_untouched": true,
+  "targets": [
+    {
+      "number": 46,
+      "url": "https://cascadiaroasters.com/products/bourbon-barrel-aged",
+      "selected_h1_public_web": "BULL RUN BARREL AGED COFFEE - RYE-FINISHED OAK BARREL",
+      "direct_current_evidence": "Product-owned Region Ethiopia; Process Natural, Washed; Roast Light; current barrel aging paragraph calls beans Ethiopian Sidamo. Verify whether the current extractor drops named Sidamo locality, rather than assuming 2026 field parity from 2026-10-29 CSV."
+    },
+    {
+      "number": 43,
+      "url": "https://caffeinacoffee.com/products/busca-la-paz-blend",
+      "selected_h1_public_web": "Busca La Paz",
+      "direct_current_evidence": "Selected blend lists Papua New Guinea Nebilyer Valley and Mexico Chiapas/Oaxaca, Light/Medium, fruit notes; preserve multi-component origin and do not invent single farm."
+    },
+    {
+      "number": 88,
+      "url": "https://dakotaroasters.com/products/701-blend",
+      "selected_h1_public_web": "701 Blend",
+      "direct_current_evidence": "Selected original historical medium/nutty/cocoa/lemongrass controls; verify current accessible official identity before credit."
+    }
+  ],
+  "evidence": [
+    "2026-11-05 public official selected https://cascadiaroasters.com/products/bourbon-barrel-aged reviewed; direct selected fields/paragraph, no parser claim",
+    "2026-11-05 public https://caffeinacoffee.com/products/busca-la-paz-blend reviewed, page crawl noted three-month freshness caveat",
+    "2026-11-05 public https://dakotaroasters.com/products/701-blend reviewed, crawler last crawl ~1.7 years; independently rerun guarded live before fact claim",
+    "Original immutable 603-row October29 CSV: #46 parser origin Ethiopia and Other/Unknown process, #43 multi-origin and Medium-Light, #88 Medium"
+  ],
+  "required": [
+    "PR exact-head approval/governance after workflow change",
+    "nonforce integration and exact merged readback",
+    "guarded HTTPS fetch and current exact selected H1/JSON/HTML hashes for all successful targets",
+    "real current parser/Add Coffee field review and provenance adjudication",
+    "if defect reproduced, narrow generic fix and adversarial regressions, standalone exact-source checks",
+    "original 603 individual review remains incomplete"
+  ],
+  "manual_certified": 0,
+  "queue_change": false,
+  "no_deployment": true,
+  "no_provider_or_member_writes": true,
+  "next": "After exact-source proof inspect #46 Ethiopian Sidamo refined origin potential; leave ambiguous/contradictory fields blank. If current parser misses explicit selected facts, correct generically with focused hostile cases; do not claim this probe is full acceptance."
+}
