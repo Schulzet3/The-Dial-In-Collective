@@ -2809,6 +2809,24 @@
       "read_only": true,
       "app_code_fixes": 0,
       "next": "migration SQL #1/54"
+    },
+    {
+      "event": "2026-11-05_run24_full_migration_sql_17_36",
+      "development_sha_before": "9c5033cf4a23f4b4b5b824891a161800c0e13356",
+      "new_full_sql_bodies": 20,
+      "exact_ordinal_range": [
+        17,
+        36
+      ],
+      "cumulative_full_sql_bodies": 36,
+      "total": 54,
+      "new_chars": 221166,
+      "new_words": 18447,
+      "live_version_prefix_mismatches": 5,
+      "github_exact_sql_matches": 20,
+      "production_writes": 0,
+      "code_fixes": 0,
+      "next": "migration SQL #37/54"
     }
   ],
   "state": "APP_SQL_FUNCTIONS_99_OF_99; APP_TABLES_46_OF_46_COMPONENTS_DIRECTLY_READ; EDGE_DEPLOYED_SOURCE_9_OF_9_VARIANTS; FULL_PROVIDER_AUDIT_IN_PROGRESS; #527_READY_NOT_DEPLOYED; PLATFORM_AUTH_27_STORAGE_8_REALTIME_3_TABLE_DEFINITIONS_DIRECT_REVIEWED; FULL_PROVIDER_AUDIT_IN_PROGRESS; VENDOR_OTHER_TABLE_VIEWS_5_DIRECT_COMPONENTS_READ; PLATFORM_SOURCE_FUNCS_AUTH4_GRAPHQL1_STORAGE10_REALTIME7_DIRECT_REVIEW; PLATFORM_SQL_FUNCTION_BODIES_42_OF_42_FOR_AUTH_GRAPHQL_STORAGE_REALTIME; ALL_PROVIDER_NATIVE_AND_HOSTED_BASELINE_IN_PROGRESS; ADJACENT_PROVIDER_DECLARATIONS_96_96_NATIVE_CODE_UNVERIFIED",
@@ -6054,18 +6072,22 @@
   },
   "provider_migration_full_sql_review": {
     "status": "PARTIAL_COMPLETE_HISTORICAL_SQL_SEMANTICS",
-    "reviewed": 16,
+    "reviewed": 36,
     "total": 54,
-    "exact_stored_sql_github_byte_match": 16,
-    "source_characters": 111952,
-    "source_whitespace_words": 9714,
+    "exact_stored_sql_github_byte_match": 36,
+    "source_characters": 333118,
+    "source_whitespace_words": 28161,
     "ordinal_range": [
       1,
-      16
+      36
     ],
-    "next_cursor": 17,
-    "source_development_parent_sha": "fc224b7c02ce9dc56e652b0631f22396c9369ef8",
-    "evidence_path": "docs/audits/issue509-migration-full-sql-001-016-20261105-run23.json",
-    "current_runtime_behavior_unverified": true
+    "next_cursor": 37,
+    "source_development_parent_sha": "9c5033cf4a23f4b4b5b824891a161800c0e13356",
+    "evidence_path": "docs/audits/issue509-migration-full-sql-017-036-20261105-run24.json",
+    "current_runtime_behavior_unverified": true,
+    "prior_evidence_paths": [
+      "docs/audits/issue509-migration-full-sql-001-016-20261105-run23.json"
+    ],
+    "historical_version_drift_still_unresolved": true
   }
 }
