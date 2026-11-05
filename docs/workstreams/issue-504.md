@@ -1,3 +1,17 @@
+## Issue #504 G1-039 — November 5 UTC: #267 issue charter and first six historical comments fully reviewed [skip netlify]
+
+**Live refs:** development `b1ed28df4969b9af3ac7c9e70fa5f824deed0599`, main `c25e31343b1974b89445b48b43993bc446aa96ca`, release/production `b386a977a7c43bf190f6315105894334d96f0f18`. GitHub repository reports **PUBLIC** under earlier owner-confirmed temporary exception; no visibility change. #504/#267/#455/#33/#96 remain OPEN and separate. Historical prior G1-038 PR #815 is MERGED; only #504-owned docs touched.
+
+**Direct review:** Read every word of the complete current [#267 issue description](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267) (**1277 whitespace words / 54 lines; source UTF-8 SHA-1 `7fcc8190d935e1fd082941c18a6a7933c6a85871`**) and the first six chronological #267 comments `6509900556`, `6510239914`, `6510596320`, `6514048944`, `6514142340`, `6514231148` (**1724 words**). Each individual full-body SHA-1, 1-based word/line bounds and semantic status captured in [G1-039 receipt](../audits/issue504-review-G1-039.json). **7 new GitHub metadata objects / 3001 words**, 0 repository-file lines, zero duplicated #267 semantic code/frozen credit. Chronological V1 B001–B026 audit and original GitHub CI runner outages are preserved historical evidence; explicitly superseded by November 1 #267 V2 reset, not treated as current V2 coverage.
+
+**Cumulative #504 direct credit:** **7,919 source-file lines / 60,754 source words**, plus **69 GitHub metadata objects / 19,694 words**. #267 post-pin separate ledger currently reports 32 whole new files / 948 physical lines and frozen coverage older checkpoint 5,451 lines; neither is imported or claimed complete. Older #267 review text and prior statuses are not newly verified source-line audit evidence.
+
+**Review disposition:** The #267 issue charter retains latest V2 owner policy; older October comment status transitions are historical and not safe to delete. No reproduced current defect or justified current code/docs deletion. No Node22, SQL, browser, 603 or live provider tests run in this documentation-only batch. Pure JS SHA-1 known-vector, complete source-range/arithmetic/ledger uniqueness validations passed; PR-head and merged-source CI must be verified separately and SKIPPED is not PASS.
+
+**NEXT:** [#267 comment 6514296577](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267#issuecomment-6514296577), word 1 (84 remaining #267 comments at read). Two newer #504 comments still need separate delta review. More GitHub history, issues, reviews, Actions/logs, branches/tags/release metadata, source-version drift and binary classification remain. Overall **OPEN / IN_PROGRESS**. No deployment, release/production ref movement, live SQL/Auth/Edge/member/provider/backup changes, forced Git, history deletion, secret exposure or purchase.
+
+---
+
 ## Issue #504 G1-038 — November 5 UTC: eight historical comment bodies fully reviewed, active ledger projection corrected [skip netlify]
 
 **Source anchor:** development `43ed9646130ca9daa68ab028b9850e70c2995d31`, main `c25e31343b1974b89445b48b43993bc446aa96ca`, release/production `b386a977a7c43bf190f6315105894334d96f0f18`. Repository is currently PUBLIC under the previously documented temporary owner exception; no visibility mutation. Read AGENTS, context entrypoint/preflight, status, Master Specification, Decision Ledger, approval matrix, release queue, prior #504 receipt/ledger/journal and current issues #267/#455/#33/#96; no competing code work.
