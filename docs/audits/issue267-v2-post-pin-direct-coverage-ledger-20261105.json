@@ -3,7 +3,7 @@
   "issue": 267,
   "review_standard": "Independent post-pin new source line semantic review; separate from original frozen/pinned V2 denominator",
   "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
-  "observed_development_commit": "da0680300a3e0b662f9670953c46bf407eaded46",
+  "observed_development_commit": "d27d576614a8f7c2af4de3fda0f2b47cea87ef78",
   "receipt_references": [
     {
       "batch_id": "D2-001",
@@ -493,14 +493,28 @@
       "verified_absent_at_pin": true,
       "reviewed_live_commit": "da0680300a3e0b662f9670953c46bf407eaded46",
       "locked_policy_supersession": "2026-11-02 #417 Git-connected-only publisher"
+    },
+    {
+      "batch_id": "D2-039",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-039.json",
+      "path": "tests/netlify-draft-transaction.test.mjs",
+      "blob_sha": "cc9885b0f694a926a8402e46c00385f82cd29658",
+      "range": [
+        1,
+        96
+      ],
+      "line_count": 96,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "d27d576614a8f7c2af4de3fda0f2b47cea87ef78",
+      "reviewed_policy": "Nov2 #417 single Git-connected publisher; direct artifact API superseded"
     }
   ],
-  "unique_source_lines_direct_reviewed": 1446,
-  "fully_reviewed_new_source_files": 38,
+  "unique_source_lines_direct_reviewed": 1542,
+  "fully_reviewed_new_source_files": 39,
   "nonoverlap": true,
   "changed_existing_pinned_paths": "46 modified pinned eligible files, structural-only inventory docs/audits/issue267-v2-post-pin-tree-drift-20261105-post-D2-035.json",
   "new_sql_migrations": "1 new migration structural-only; coordinate #96",
-  "remaining_added_code": "86 of 124 source candidates in original exact post-pin tree inventory lack full D2 receipts (newer live commit drift still requires reconciliation)",
+  "remaining_added_code": "85 original added code/workflow/test candidate files of 124 still lack complete D2 per-line original receipts; exact current tree must be refreshed after more commits",
   "runtime_app_acceptance": "FOCUSED_LOCAL_NODE22_3_PASS_FULL_APP_AND_PRODUCTION_NOT_RUN",
   "complete": false,
   "physical_line_accounting_rule": "Count actual 1-based non-virtual lines; terminal newline alone is line delimiter, never an extra blank physical line. Preserve source-authenticated original receipt even when superseded by an append-only correction.",
@@ -519,9 +533,9 @@
       "subtract_phantom_records": 4
     }
   ],
-  "last_review_batch": "D2-038",
-  "last_review_source_commit": "da0680300a3e0b662f9670953c46bf407eaded46",
-  "last_review_note": "D2-038 complete 133 physical source lines of dormant/superseded direct Netlify API publisher; policy #417 Git-connected-only scope conflict risk not active caller proven. Cumulative 1446 original new post-pin lines/38 full files, no runtime edit or new tests.",
+  "last_review_batch": "D2-039",
+  "last_review_source_commit": "d27d576614a8f7c2af4de3fda0f2b47cea87ef78",
+  "last_review_note": "D2-039 direct all physical 1–96 lines of synthetic direct Netlify API publisher test; separated from D2-038 source 133; no double-count; 1446 ->1542 unique new source lines/38 ->39 files.",
   "live_source_blob_revalidations": [
     {
       "path": "scripts/release/request-encrypted-backup.mjs",
