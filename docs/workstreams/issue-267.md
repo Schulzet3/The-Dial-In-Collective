@@ -1,3 +1,15 @@
+## November 5, 2026 UTC — #267 strict S2-098: historical Auth/UX invariants + pinned forensics validators [skip netlify]
+
+Recovered exact development `34f5c34c8fdebf6cd08f9c6afe4f2b60779d74ef` with S2-097 [PR #652](https://github.com/Schulzet3/The-Dial-In-Collective/pull/652) merged `34f5c34c8fdebf6cd08f9c6afe4f2b60779d74ef`, tested PR-head approval SUCCESS and merged-source approval [41940111362](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41940111362) SUCCESS, tree exact. Latest Master Specification/Decision Ledger supersessions and #33/#96 boundaries unchanged. Original historical V1 and provisional V2 counters unchanged.
+
+**80 new exact numbered source-line interpretations** in [S2-098](../audits/issue267-v2-strict-batches/S2-098.json): frozen original #59 `docs/DECISION_LEDGER.json:744–783` Git blob `195c3e4de415afef4515a6291c399a1c9001b610` (40) and separate pinned executable #50 `scripts/audit/coffee-reviewed-change-forensics.py:41–80` Git blob `401e02bf1283f204471c3dbecb12e520054f0cc3` (40). Nine specific semantic criteria per line including structural/blank/regex/import/header/metadata; 40/40 pinned texts exact match live development Git blob `401e02bf1283f204471c3dbecb12e520054f0cc3`. No unreviewed lines or overlap in this interval, no independent human certification or fresh code execution. Proposed after CI/nonforce merge strict totals **5,674/579,961 frozen** and **7,301/57,913 pinned**; next #59 line784 / #50 line81.
+
+Source findings: frozen B008/B009 signup/password/email statuses and original 60 DB checks do **not** prove current hosted GoTrue/Auth/Community acceptance; #96 owner retains those tests. In the pinned forensic tool, the source's PRIVATE label regex (56–59) is a limited denylist checked by `safe_public` at line119: potential undisclosed token patterns require safe synthetic regression before any claim of completeness. This is a REVIEW RISK, **not demonstrated secret leak**, and no current code edit without #33 overlap coordination. Prior separate HIGH repo visibility discrepancy from S2-097 remains OPEN, setting not changed.
+
+No code/test/oracle/provider/production/Netlify/member modification, release or paid action. CI head/merged-source needed; full line inventory and post-pin drift remain incomplete. Issue #267 OPEN, not READY/COMPLETE.
+
+---
+
 ## November 5, 2026 UTC — #267 S2-097 strict original line review and repository-private mismatch [skip netlify]
 
 Recovered live development `602e99a070cf7c1a46b4c1ff595fead995722d90`, main/release, issue267/latest comments, #33/#96 ownership, AGENTS/context/preflight, Master Spec/Decision Ledger supersessions, approval/queue/status, original frozen/pinned source manifests and V2 ledgers. Re-fetched immutable first frozen workflow `.github/workflows/approval-continuity.yml` line1–41; 41/41 exact source texts plus prior S2-001 individual field evidence independently verified without duplicate credit.
