@@ -1,3 +1,15 @@
+## November 5, 2026 UTC — Issue #33 original603 #292/#358/#370 exact selected-source diagnostic (TESTING, NOT READY) [skip netlify]
+
+**Authority/base:** Owner-approved active development-only Issue #33; recovered `development/backend-foundation` dc97538c61279a9179fd3a97b474653b2cfc97ab, AGENTS/AI preflight, Master Spec/Locked decisions/approval matrix/queue, #33 comments and original603 immutable adjudication. #267 V2 and #96 separate. No duplicated #46, #446, #361, #358 previously verified correction (this #358 is an original case number, not an issue or PR).
+
+**Same-commit paths:** `.github/workflows/roaster-source-probe.yml` adds unique bounded `[dic-issue33-thirtyfourth3]` cohort `292,358,370` to unchanged guarded official public-source script; `docs/audits/issue33-292-358-370-current-selected-20261105.json` records precise historical and public-browser observations, questions and no parser verdict; this scoped journal records source and acceptance. Original603 historical #292 `origin: Ethiopia` despite selected Seeds **Ethiopia Guji Getachew**; #358 `origin: Copan` despite selected Subliminal **Honduras** H1, labeled **Region: Copan**; #370 Sweet Bloom Arbey Cordoba historical Huila/Colombia is a related-product/archived-content negative control. Source web page observations are NOT the required actual current exact-head HTML/parser capture.
+
+**Acceptance PENDING:** PR approval, nonforce merge, exact merged 3-case public H1 and source bytes/digests, actual parser/Add Coffee/field/conflict review and independent evidence. If mismatch reproduces, narrow generic correction plus hostile regressions and exact changed-surface CI, then source rereview. Full frozen603, 153 context/29 missing-literal/35 historical blanks NOT certified by this work. No premature READY or queue change. Preserve all 603/201/1197 original captures, CSV blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6`, oracle/scorer, member data, security, other READY/DEPLOYED. No Netlify release, SQL/Edge/Auth/provider/member writes, costs, forced Git.
+
+**Next:** Check exact merged `[dic-issue33-thirtyfourth3]` job/CI and independent current source-bound parser evidence; update this ledger and Issue #33 with verified results, or exact blocker.
+
+---
+
 ## November 5, 2026 UTC — #33 #46 READY evidence receipt exact job identifier verified [skip netlify]
 
 Docs-only PR708 original head `ac91483049b1a461dc5239f2941544e39f069f42` queue entry temporarily contained an explicitly unresolved job ID placeholder for the already independently read official source run41978640125. Exact GitHub jobs readback confirms `issue33-original603-focused-current-review` is job `127083311300` SUCCESS, artifact13393110961. Replaced placeholder with exact verified ID; no source/test/CI files or READY criteria changed. Queue-only final PR-head CI must still PASS before nonforce merge. No new deploy.

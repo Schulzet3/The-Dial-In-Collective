@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "kind": "BOUNDED_CURRENT_SELECTED_PRODUCT_SOURCE_DIAGNOSTIC",
+  "status": "TESTING_PENDING_EXACT_MERGED_PUBLIC_SOURCE",
+  "date_utc": "2026-11-05",
+  "authority": "Owner Issue #33 development-only; AGENTS.md, docs/ai/CONTEXT_ENTRYPOINT.md, PREFLIGHT.md, Master Specification, Locked Decision Ledger, scoped journal and immutable 603-source register",
+  "source_base_sha": "dc97538c61279a9179fd3a97b474653b2cfc97ab",
+  "commit_marker": "[dic-issue33-thirtyfourth3]",
+  "immutable_original603_csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "case_numbers": [
+    292,
+    358,
+    370
+  ],
+  "targets": [
+    {
+      "number": 292,
+      "coffee": "Seeds Coffee Ethiopia Guji Getachew",
+      "url": "https://seedscoffee.com/products/ethiopia-getachew-zekele",
+      "archived_parser_origin": "Ethiopia",
+      "current_official_web_selected": "Current selected H1 Ethiopia Guji Getachew, direct selected text connects producer Getachew Zekele with Guji and Tero Farm. Shakisso farm purchase in 2008 is historical, not automatic current selected farm proof.",
+      "question": "Does current parser preserve literal Guji in selected origin and avoid assigning a historical purchase site to the present lot?"
+    },
+    {
+      "number": 358,
+      "coffee": "Subliminal Coffee Finca La Unica - Washed Honduras",
+      "url": "https://subliminalcoffee.com/products/finca-la-unica-washed-honduras",
+      "archived_parser_origin": "Copan",
+      "current_official_web_selected": "Exact selected H1 Finca La Unica - Washed Honduras; exact Coffee Info Region: Copan; same selected source says farm is in Honduras. Producer label literally Letica Lopez; body says Leticia Lopez; preserve spelling discrepancy as source conflict, not an invented correction. Process Washed, Varietals Lempira, Altitude 1400m.",
+      "question": "Does current parser join only compatible product H1 Honduras with selected labeled Copan, and retain producer spelling conflict for review?"
+    },
+    {
+      "number": 370,
+      "coffee": "Sweet Bloom Arbey Cordoba 2026 archived offering",
+      "url": "https://sweetbloomcoffee.com/products/arbey-cordoba-26",
+      "archived_parser_origin": "Huila, Colombia",
+      "current_official_web_selected": "Selected archived Arbey Cordoba direct H1 and body, printed Huila, Colombia, Washed, Bourbon Aji, current 2026 archive; unrelated related-coffee cards Uraga, Wuri, Los Chelazos must never contaminate fields.",
+      "question": "Negative control: preserve selected source identity and Huila; ignore adjacent new-coffee cards and generic educational/transparency descriptions."
+    }
+  ],
+  "evidence_boundaries": "Browser-crawled public views retrieved November 5 UTC are preliminary observations only; not an exact current DNS-pinned guarded HTTPS parser test. Require merged source job, official selected HTML/hash, conflicts, Add Coffee, field-level review before claiming corrections or exact certification.",
+  "paths_modified": [
+    ".github/workflows/roaster-source-probe.yml",
+    "docs/workstreams/issue-33.md",
+    "docs/audits/issue33-292-358-370-current-selected-20261105.json"
+  ],
+  "required": [
+    "PR exact-head approval/continuity SUCCESS",
+    "non-force merge, actual merged SHA readback",
+    "one bounded guarded HTTPS exact merged source run with 3/3 or documented source blockers",
+    "independent retained raw HTML SHA256 and selected H1, parser field/conflict review and Add Coffee",
+    "only if current parser reproducibly wrong, generic fix and positive/negative regression on separate scoped PR"
+  ],
+  "parent_original603_semantic_certification": "IN_PROGRESS",
+  "manual_certified": 0,
+  "unmodified": [
+    "original 603-row CSV / oracle / scorer / all 1197 original frozen captures",
+    "Issue #267 V2 lines and Issue #96 authentication",
+    "all other READY/DEPLOYED release queue entries",
+    "all production SQL/Edge/Auth/provider/member data"
+  ],
+  "publication_authorized": false,
+  "next": "Read back merged marker run, inspect the three current H1/source/parsed field and conflict arrays. Fix only a true selected-source discrepancy, or document exact source-safe blanks/identity without speculation."
+}
