@@ -3,7 +3,7 @@
   "issue": 267,
   "review_standard": "Independent post-pin new source line semantic review; separate from original frozen/pinned V2 denominator",
   "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
-  "observed_development_commit": "86f244f43306bad7cff1dd2a24893e1fc5a29cd9",
+  "observed_development_commit": "75882406bdf0979803b04b3ac8ea774fc301671d",
   "receipt_references": [
     {
       "batch_id": "D2-001",
@@ -397,10 +397,23 @@
       "line_count": 61,
       "verified_absent_at_pin": true,
       "reviewed_live_commit": "86f244f43306bad7cff1dd2a24893e1fc5a29cd9"
+    },
+    {
+      "batch_id": "D2-032",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-032.json",
+      "path": "scripts/release/release-backup-decision.mjs",
+      "blob_sha": "511f16692d3d6d62abbec43931cadfa077e1f7a6",
+      "range": [
+        1,
+        50
+      ],
+      "line_count": 50,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "75882406bdf0979803b04b3ac8ea774fc301671d"
     }
   ],
-  "unique_source_lines_direct_reviewed": 898,
-  "fully_reviewed_new_source_files": 31,
+  "unique_source_lines_direct_reviewed": 948,
+  "fully_reviewed_new_source_files": 32,
   "nonoverlap": true,
   "changed_existing_pinned_paths": "PENDING",
   "new_sql_migrations": "PENDING",
@@ -423,7 +436,7 @@
       "subtract_phantom_records": 4
     }
   ],
-  "last_review_batch": "D2-031",
-  "last_review_source_commit": "86f244f43306bad7cff1dd2a24893e1fc5a29cd9",
-  "last_review_note": "Direct 61-line post-pin immutable preflight review, original 97-line test read as context without credit, no active bug or code edit. All earlier receipts preserved."
+  "last_review_batch": "D2-032",
+  "last_review_source_commit": "75882406bdf0979803b04b3ac8ea774fc301671d",
+  "last_review_note": "D2-032 50 line original backup decision helper direct read; negative tests read as context only, not credited; full drift and acceptance still open."
 }
