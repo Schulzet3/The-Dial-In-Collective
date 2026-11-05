@@ -2827,6 +2827,24 @@
       "production_writes": 0,
       "code_fixes": 0,
       "next": "migration SQL #37/54"
+    },
+    {
+      "event": "2026-11-05_run24b_migration_stored_sql_completed",
+      "development_sha_before": "abb010b8ce6c449279913750b1b8147b987384b1",
+      "new_full_sql_bodies": 18,
+      "new_ordinal_range": [
+        37,
+        54
+      ],
+      "cumulative_full_sql_bodies": 54,
+      "total": 54,
+      "new_chars": 121766,
+      "new_words": 10277,
+      "github_exact_matches": 18,
+      "version_prefix_mismatches_in_batch": 18,
+      "provider_mutations": 0,
+      "code_fixes": 0,
+      "next": "active runtime/schema/auth/Edge drift and hosted API security"
     }
   ],
   "state": "APP_SQL_FUNCTIONS_99_OF_99; APP_TABLES_46_OF_46_COMPONENTS_DIRECTLY_READ; EDGE_DEPLOYED_SOURCE_9_OF_9_VARIANTS; FULL_PROVIDER_AUDIT_IN_PROGRESS; #527_READY_NOT_DEPLOYED; PLATFORM_AUTH_27_STORAGE_8_REALTIME_3_TABLE_DEFINITIONS_DIRECT_REVIEWED; FULL_PROVIDER_AUDIT_IN_PROGRESS; VENDOR_OTHER_TABLE_VIEWS_5_DIRECT_COMPONENTS_READ; PLATFORM_SOURCE_FUNCS_AUTH4_GRAPHQL1_STORAGE10_REALTIME7_DIRECT_REVIEW; PLATFORM_SQL_FUNCTION_BODIES_42_OF_42_FOR_AUTH_GRAPHQL_STORAGE_REALTIME; ALL_PROVIDER_NATIVE_AND_HOSTED_BASELINE_IN_PROGRESS; ADJACENT_PROVIDER_DECLARATIONS_96_96_NATIVE_CODE_UNVERIFIED",
@@ -6071,23 +6089,31 @@
     "hosted_authorization_unverified": true
   },
   "provider_migration_full_sql_review": {
-    "status": "PARTIAL_COMPLETE_HISTORICAL_SQL_SEMANTICS",
-    "reviewed": 36,
+    "status": "COMPLETE_HISTORICAL_STORED_MIGRATION_SQL_ONLY",
+    "reviewed": 54,
     "total": 54,
-    "exact_stored_sql_github_byte_match": 36,
-    "source_characters": 333118,
-    "source_whitespace_words": 28161,
+    "exact_stored_sql_github_byte_match": 54,
+    "source_characters": 454884,
+    "source_whitespace_words": 38438,
     "ordinal_range": [
       1,
-      36
+      54
     ],
-    "next_cursor": 37,
-    "source_development_parent_sha": "9c5033cf4a23f4b4b5b824891a161800c0e13356",
-    "evidence_path": "docs/audits/issue509-migration-full-sql-017-036-20261105-run24.json",
+    "next_cursor": null,
+    "source_development_parent_sha": "abb010b8ce6c449279913750b1b8147b987384b1",
+    "evidence_path": "docs/audits/issue509-migration-full-sql-037-054-20261105-run24b.json",
     "current_runtime_behavior_unverified": true,
     "prior_evidence_paths": [
-      "docs/audits/issue509-migration-full-sql-001-016-20261105-run23.json"
+      "docs/audits/issue509-migration-full-sql-001-016-20261105-run23.json",
+      "docs/audits/issue509-migration-full-sql-017-036-20261105-run24.json"
     ],
-    "historical_version_drift_still_unresolved": true
+    "historical_version_drift_still_unresolved": true,
+    "provider_wide_baseline_complete": false,
+    "effective_admin_invite_search_verified": {
+      "md5": "4e094f4f47bc30cbf63a7bfaf0c1100b",
+      "chars": 8921,
+      "expired_branch_in_search_count_page_and_display": true,
+      "signed_in_test": "UNVERIFIED"
+    }
   }
 }
