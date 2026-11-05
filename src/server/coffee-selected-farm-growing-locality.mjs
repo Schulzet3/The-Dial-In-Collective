@@ -13,13 +13,14 @@ export function selectedCurrentFarmGrowingLocality({name='',origin='',blocks=[]}
  const selected=blocks.filter(x=>x.tag==='p'&&!x.educational&&typeof x.text==='string'&&x.text.length<=1200&&
   !/\b(?:related|recommended|other coffees|you may also like|reviews)\b/iu.test(x.section||'')&&
   !/\b(?:previous(?:ly)?|former(?:ly)?|historical(?:ly)?|other coffee|another lot|not grown|not from|hypothetical|might be|could be)\b/iu.test(x.text));
- const values=new Map();
+ const values=new Map();let contradictory=false;
  for(const a of selected){const first=a.text.match(founding);
   if(!first||norm(first[2])!==norm(tuple[1])||norm(first[3])!==norm(tuple[2])||norm(first[4])!==norm(farm))continue;
   for(const b of selected){if(a.section!==b.section)continue;const second=b.text.match(growing);
-   if(!second||norm(second[2])!==norm(tuple[1])||![norm(first[1]),'la'+norm(first[1]),'el'+norm(first[1])].includes(norm(second[1])))continue;
+   if(!second)continue;
+   if(norm(second[2])!==norm(tuple[1])||![norm(first[1]),'la'+norm(first[1]),'el'+norm(first[1])].includes(norm(second[1]))){contradictory=true;continue;}
    const value=second[1]+', '+second[2]+', '+tuple[2];values.set(norm(value),{value,quote:first[0]+' | '+second[0]});
   }
  }
- return values.size===1?[...values.values()][0]:null;
+ return !contradictory&&values.size===1?[...values.values()][0]:null;
 }
