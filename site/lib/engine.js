@@ -430,10 +430,10 @@ function yieldTarget(shot,direction,anchor=shot.yieldG){
 // and all four other green sensory ratings. This is not causal proof.
 function comparableSweetnessYields(s,shot){
  const keys=['coffeeId','setupVersionId','calibrationId','style','basketId','feedMode'];
- if(keys.some(key=>shot[key]==null)||typeof shot.timestamp!=='string')return [];
+ if(keys.some(key=>shot[key]==null)||typeof shot.timestamp!=='string'||!shot.timestamp.trim())return [];
  return s.shots.filter(prior=>{
   if(prior.id===shot.id||prior.hidden||keys.some(key=>prior[key]!==shot[key]))return false;
-  if(typeof prior.timestamp!=='string'||prior.timestamp>=shot.timestamp)return false;
+  if(typeof prior.timestamp!=='string'||!prior.timestamp.trim()||prior.timestamp>=shot.timestamp)return false;
   if(!finite(prior.doseG)||!finite(prior.grindSetting)||!finite(prior.yieldG)||
    Math.abs(prior.doseG-shot.doseG)>.1||
    Math.abs(prior.grindSetting-shot.grindSetting)>.05||

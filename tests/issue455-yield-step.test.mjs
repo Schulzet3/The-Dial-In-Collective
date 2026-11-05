@@ -120,3 +120,41 @@ test('#455 older cached +1 g next recipe is refreshed read-only; measured shot a
  assert.equal(rec.grind.value,1.2);
  assert.deepEqual(shot,before);
 });
+
+test('#455 empty or whitespace legacy sweetness evidence cannot invent a shorter next yield',()=>{
+ for(const invalidTime of ['', '   ']){
+  const {state,shot,advice}=fixture();
+  const legacy=comparable(shot,{id:'undated',timestamp:invalidTime,yieldG:31,
+   notes:'Private original historical shot note'});
+  state.shots.push(legacy);
+  const original=structuredClone(state.shots);
+  const a=advice();
+  assert.equal(a.next.yieldCenter,41,'undated history cannot reverse a 36g exploratory shot');
+  assert.match(a.evidenceNote,/Exploratory starting step/);
+  assert.deepEqual(state.shots,original,'preserve every original measurement, five tastes and notes');
+ }
+});
+
+test('#455 dated same-coffee sweetness evidence remains eligible beside undated rows',()=>{
+ const {state,shot,advice}=fixture();
+ const past=comparable(shot,{id:'dated',yieldG:31,
+  notes:'Measured successful shorter prior'});
+ state.shots.push(comparable(shot,{id:'legacy',timestamp:' ',yieldG:41,
+  notes:'Retain undated measurement'}),past);
+ const original=structuredClone(state.shots);
+ const a=advice();
+ assert.equal(a.next.yieldCenter,31);
+ assert.match(a.evidenceNote,/Earlier comparable same-coffee ratings/);
+ assert.deepEqual(state.shots,original);
+});
+
+test('#455 undated current legacy shot cannot infer a chronological sweetness trend',()=>{
+ const {state,shot,advice}=fixture({timestamp:'   '});
+ state.shots.push(comparable(shot,{id:'earlier-untrusted',timestamp:'',yieldG:31,
+  notes:'Preserved historical note'}));
+ const original=structuredClone(state.shots);
+ const a=advice();
+ assert.equal(a.next.yieldCenter,41);
+ assert.match(a.evidenceNote,/Exploratory starting step/);
+ assert.deepEqual(state.shots,original);
+});
