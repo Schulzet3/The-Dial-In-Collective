@@ -414,3 +414,14 @@ Live GitHub development `432a3a076d3809b2c6cf2b83fb35723b5db69c47`, main `c25e31
 **Cumulative:** **7919 file lines / 60754 words + 44 GitHub objects / 12524 words**; #267 imported semantic credit zero. Current #504 issue comments 57, direct-read 43 including setup, 14 not-yet-reviewed before this checkpoint, more may arrive. Audit remains **OPEN / IN_PROGRESS**, broad GitHub inventory/history/CI/action/tag/PR-review source drift and delegated #267 strict evidence unfinished. No app, Node, browser, SQL, original603, member/provider tests rerun for docs-only audit update. PR-head/merged-source CI for this new checkpoint must be observed separately, SKIPPED not PASS.
 
 **NEXT exact unreviewed GitHub object:** #504 comment `6651565529`. No production publish, production branch move, SQL/Auth/Edge/member/provider/backup/data write, forced Git, secrets, purchase, or history deletion.
+
+
+## G1-037 — November 5, 2026 UTC: 10 complete historical Issue #504 comments directly reviewed [skip netlify]
+
+Source at review: development `b9ad43e0d9f2e668ced3ba3772b8a3c88f542fdf`, main `c25e31343b1974b89445b48b43993bc446aa96ca`, release/production `b386a977a7c43bf190f6315105894334d96f0f18`; repo visibility **PUBLIC**, temporary owner exception noted, private restoration not verified. #267/#455/#33/#96 ownership unchanged.
+
+Read each word of #504 whole comments: `6651565529`, `6652523287`, `6652543647`, `6653653665`, `6654735455`, `6654755159`, `6655944647`, `6655950735`, `6657087012`, `6657102566`. Exactly **10 distinct GitHub objects / 2425 whitespace words** newly credited; full body UTF-8 SHA-1, line and word bounds, individual interpretations and preservation dispositions in [G1-037 receipt](../audits/issue504-review-G1-037.json). GitHub comment snapshots are historical; verified PRs #712/#729/#736/#746/#757/#770 all now MERGED, while original comment statuses remain preserved. Confirmed current code defects/fixes: **0**. Do not duplicate earlier original queue lines or any #267 semantic source review. No source drift words credited without direct source reading.
+
+**Cumulative:** **7,919 file lines / 60,754 file words + 54 distinct GitHub objects / 14949 GitHub words**. At this snapshot 59 #504 comments, 53 comment bodies directly reviewed including setup, **6 pre-checkpoint comment bodies remain**. Other issues/PR comments/review threads/Actions/commits/tags/releases, old queue version reconciliation, current source drift and independently validated #267 coverage remain incomplete. Status **OPEN / IN_PROGRESS**.
+
+**Exact next unreviewed:** #504 comment `6658217058`. This docs-only three-file checkpoint has no newly executed Node/SQL/browser/603/provider/member tests; PR-head and merged-source CI require separate readback. No Netlify publication, release/production branch change, live provider/SQL/Auth/Edge/member/backup change, forced history, secret or purchase.
