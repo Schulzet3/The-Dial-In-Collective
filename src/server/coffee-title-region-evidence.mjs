@@ -155,7 +155,8 @@ export function selectedFarmStoryRegionMismatch({name='',origin='',blocks=[]}={}
     /\b(?:previous(?:ly)?|former(?:ly)?|historic(?:al(?:ly)?)?|old lot|another lot|other coffee|no longer|hypothetical|might|could|would)\b/iu.test(block.text)||
     /\b(?:related|recommended|similar products|other coffees|you may also like|reviews)\b/iu.test(block.section||''))continue;
   for(const match of block.text.matchAll(farm)){
-   const [quote,farmName,town,region]=match;
+   const [quote,farmName,town,regionRaw]=match;
+   const region=regionRaw.replace(/[.!?;,]+$/u,'');
    if(!norm(name).includes(norm(farmName))||
       !new RegExp('\\b'+quoteRegex(region)+'\\b','iu').test(name)||
       !oneLetterDifference(printedRegion,region)||
