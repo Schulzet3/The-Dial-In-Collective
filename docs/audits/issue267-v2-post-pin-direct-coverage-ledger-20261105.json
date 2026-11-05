@@ -3,7 +3,7 @@
   "issue": 267,
   "review_standard": "Independent post-pin new source line semantic review; separate from original frozen/pinned V2 denominator",
   "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
-  "observed_development_commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
+  "observed_development_commit": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
   "receipt_references": [
     {
       "batch_id": "D2-001",
@@ -332,10 +332,36 @@
       "line_count": 20,
       "verified_absent_at_pin": true,
       "reviewed_live_commit": "e05a621af6b6c904623292bfe65d65f9718fd020"
+    },
+    {
+      "batch_id": "D2-027",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-027.json",
+      "path": "scripts/release/write-ci-certificate.mjs",
+      "blob_sha": "6602276814c3384e22f3c30a1aa9a54d676a1694",
+      "range": [
+        1,
+        36
+      ],
+      "line_count": 36,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c"
+    },
+    {
+      "batch_id": "D2-028",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-028.json",
+      "path": "tests/ci-certificate.test.mjs",
+      "blob_sha": "8c4cc3ac5f8c7f6faf76492a2819c1a21157e20c",
+      "range": [
+        1,
+        25
+      ],
+      "line_count": 25,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c"
     }
   ],
-  "unique_source_lines_direct_reviewed": 705,
-  "fully_reviewed_new_source_files": 26,
+  "unique_source_lines_direct_reviewed": 766,
+  "fully_reviewed_new_source_files": 28,
   "nonoverlap": true,
   "changed_existing_pinned_paths": "PENDING",
   "new_sql_migrations": "PENDING",
@@ -358,7 +384,7 @@
       "subtract_phantom_records": 4
     }
   ],
-  "last_review_batch": "D2-026",
-  "last_review_source_commit": "e05a621af6b6c904623292bfe65d65f9718fd020",
-  "last_review_note": "D2-025/026 exact 46 newly inspected test lines: source-bound discovery and downloader synthetic fixtures. No real GitHub artifact/API network exercised in this audit-only PR. Full drift and all historical/current semantic coverage incomplete."
+  "last_review_batch": "D2-028",
+  "last_review_source_commit": "aba41504fdc0489f1bfe88f33e0b14608fc43f0c",
+  "last_review_note": "D2-027/028 61 literal new certificate/test lines with nine direct individual dimensions. Hardcoded claimed tests are potential stale legacy evidence under Locked #457; actual use and active bug unproven. No runtime edit or new tests; source drift and V2 semantic totals incomplete."
 }
