@@ -5235,22 +5235,34 @@
       "id": "DIC-Q-455-grind-observation-instant-order",
       "issue": 455,
       "title": "Use actual shot instants for prior-calibration reference and learned grind-time response",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "c0ea44bf82db4f981af3be8d7d342f742cbbef76",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
-        "Reproduced source failure: ISO timezone offsets reverse lexical shot order for prior-calibration estimate and same-coffee grind sensitivity; malformed nonblank timestamps can falsely qualify.",
-        "Three imported actual engine-module positive/negative test cases written, NOT EXECUTED until Node22 CI; assert previous calibration, 4-shot sensitivity, invalid dates, valid controls and shot immutability.",
-        "Exact-source Node22, lint/build, relevant Chromium/mobile/offline/a11y and approval/security/isolated SQL checks pending; skipped means NOT PASS."
+        "Original source defect reproduced with explicit ISO offset strings: old prior calibration selection and same-coffee learnSensitivity ordered date TEXT, and malformed nonblank legacy dates could count as measured observations. No real member harm or cup improvement claimed.",
+        "Three new hydrated real-module tests in tests/issue455-grind-time-instant-order.test.mjs: cross-offset previous calibration plus bad date, 4-shot actual-instant median grind/time slopes -50 vs lexical -100, malformed-date abstention and valid control; preserved all five tastes, historical measurements and private notes.",
+        "Original PR-head governance 42012583285 FAILED due concurrent base ancestry, not app test; two source-preserving nonforce ancestry merges with disjoint #267/#33/#504 paths repaired preflight, 42012747003 and 42013111068 PASS; no force or dropped concurrent changes.",
+        "Corrected source-bound PR-head a14afd5d4ed988b2317e8e926d089e5dc793a03c Node/lint/build 42012747088 SUCCESS 2521 PASS/0 FAIL/6 SKIP; browser/mobile/offline/a11y 42012746970 SUCCESS; isolated SQL 42012746949 and security 42012747007 SUCCESS. Final PR head 2b444b1a27f2ffaa9b74ffb4fbfe41fdf58f5c21 preserves identical engine and regression blobs; source governance 42013111068 SUCCESS.",
+        "PR #756 nonforce squash merged c0ea44bf82db4f981af3be8d7d342f742cbbef76; engine/test/queue/journal Git blobs read back identical to PR final head. Exact merged-source Node22/lint/build 42013172776 SUCCESS (2521 PASS/0 FAIL/6 SKIP), browser/mobile/offline/a11y 42013172902 SUCCESS, approval/source continuity 42013172790 SUCCESS. Cloud targeted test job NOT_APPLICABLE. Original 603 corpus SKIPPED, not PASS; no live signed-in member, empirical cup or production verification for this scope."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact-source PR-head and merged-source verification pending"
+      "ci_runs": [
+        42012583285,
+        42012747088,
+        42012746970,
+        42012747003,
+        42012746949,
+        42012747007,
+        42013111068,
+        42013172776,
+        42013172902,
+        42013172790
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "SAFE narrow historical-observation ordering, no measured shot, taste, data model, numeric target or Locked product alteration; NOT READY or deployed."
+      "notes": "Narrow SAFE derived-chronology fix is READY on development at merged source c0ea44bf82db4f981af3be8d7d342f742cbbef76. NOT DEPLOYED. All five ratings, single-controllable-change advice, private original shots, notes, style/feed/calibration bounds, reference uncertainty and Locked policies preserved. No measured espresso taste gain. Production publication remains separate owner decision.",
+      "pr": 756
     }
   ],
   "history": [
