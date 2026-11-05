@@ -186,3 +186,29 @@ test('Issue #267 dated immutable Git-tree inventories stay governance-only, unkn
     assert.equal(result.sql,classifyImpactPaths([runtime]).sql,runtime);
   }
 });
+
+test('Issue #267 disjoint D2 pending indexes are docs-only, without exempting code or arbitrary JSON',()=>{
+  const ok='docs/audits/issue267-v2-post-pin-direct-pending/D2-042-043-20261105-hour12.json';
+  const evidence='docs/audits/issue267-v2-post-pin-direct-batches/D2-042.json';
+  const journal='docs/workstreams/issue267-d2-042-043-20261105.md';
+  const v=classifyImpactPaths([ok,evidence,journal]);
+  assert.equal(v.tier,'docs');assert.equal(v.docs_only,true);
+  assert.equal(v.node_mode,'none');assert.equal(v.browser_mode,'none');
+  assert.equal(v.sql,false);assert.equal(v.build_browser,false);
+  for(const bad of [
+    'docs/audits/issue267-v2-post-pin-direct-pending/D2-042-043-20261105-hour99.json',
+    'docs/audits/issue267-v2-post-pin-direct-pending/D2-042-043-20261105-hour12.json.bak',
+    'docs/audits/issue267-v2-post-pin-direct-pending/D2-042-043-20261105-hour12/../bad.json',
+    'docs/audits/issue267-v2-post-pin-direct-pending/D2-042-extra-20261105-hour12.json',
+    'docs/audits/issue267-v2-post-pin-direct-pending/D2-42-043-20261105-hour12.json',
+    'docs/audits/issue267-v2-post-pin-direct-pending/unreviewed.json'
+  ]){
+    const high=classifyImpactPaths([bad]);
+    assert.equal(high.tier,'high',bad);assert.equal(high.sql,true,bad);
+  }
+  for(const runtime of ['scripts/audit/ci-scope.mjs','supabase/migrations/new.sql',
+    '.github/workflows/cloud-beta-ci.yml','tests/ci-impact.test.mjs']){
+    const high=classifyImpactPaths([ok,evidence,runtime]);
+    assert.equal(high.tier,'high',runtime);assert.equal(high.node_mode,'full',runtime);
+  }
+});
