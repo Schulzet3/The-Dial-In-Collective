@@ -88,6 +88,30 @@ test('Strict #267 JSON path exemption never weakens unknown/mixed-source fail-cl
  }
 });
 
+test('Issue #267 precise post-pin direct-review ledger is governance-only, without relaxing unknown source',()=>{
+ const ledger='docs/audits/issue267-v2-post-pin-direct-coverage-ledger-20261105.json';
+ const receipt='docs/audits/issue267-v2-post-pin-direct-batches/D2-005.json';
+ const good=classifyImpactPaths([ledger,receipt,'docs/workstreams/issue-267.md']);
+ assert.equal(good.tier,'docs');assert.equal(good.docs_only,true);
+ assert.equal(good.node_mode,'none');assert.equal(good.cloud_mode,'none');
+ assert.equal(good.browser_mode,'none');assert.equal(good.sql,false);
+ assert.equal(good.provider_guard,false);assert.equal(good.lint,false);
+ assert.equal(good.build_validate,false);assert.equal(good.build_browser,false);
+ for(const invalid of [ledger+'.bak',
+  'docs/audits/issue267-v2-post-pin-direct-coverage-ledger-20261106.json',
+  'docs/audits/issue267-v2-post-pin-direct-coverage-ledger-20261105.json/../unsafe.json']){
+  const risk=classifyImpactPaths([invalid]);
+  assert.equal(risk.tier,'high',invalid);assert.equal(risk.node_mode,'full');
+  assert.equal(risk.sql,true);
+ }
+ for(const runtime of ['scripts/audit/ci-scope.mjs','supabase/migrations/new.sql',
+  '.github/workflows/cloud-regression.yml','site/lib/engine.js']){
+  const risk=classifyImpactPaths([ledger,receipt,runtime]);
+  assert.equal(risk.tier,classifyImpactPaths([runtime]).tier,runtime);
+  assert.equal(risk.sql,classifyImpactPaths([runtime]).sql,runtime);
+ }
+});
+
 test('Strict #504 word-audit receipts and ledger are docs-only without expensive app suites',()=>{
  const paths=['docs/audits/issue504-review-G1-020.json',
   'docs/audits/issue504-review-G1-1000.json',

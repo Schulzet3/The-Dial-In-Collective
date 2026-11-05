@@ -17,6 +17,8 @@ const SAFE_META=new Set(['docs/RELEASE_QUEUE.json','docs/DECISION_LEDGER.json',
 const AUDIT_EVIDENCE_META=new Set([
  'docs/audits/issue267-review-restart-v2-20261101.json',
  'docs/audits/issue267-v2-strict-coverage-ledger-20261103.json',
+ // Immutable #267 post-pin direct-review receipt index; no runtime consumer.
+ 'docs/audits/issue267-v2-post-pin-direct-coverage-ledger-20261105.json',
  // Only #504's immutable word-audit coverage record; never generalize JSON under docs/.
  'docs/audits/issue504-coverage-ledger.json'
 ]);
