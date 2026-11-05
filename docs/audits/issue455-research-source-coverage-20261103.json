@@ -718,6 +718,21 @@
       "source_bytes_sha256": null,
       "source_byte_caveat": "University of Birmingham hosted publisher version of record inspected using web PDF text and screenshots; original binary has not been downloaded and SHA256 not independently computed; underlying lab raw flow datasets not inspected.",
       "claims_verified_externally": "Four PSD grinds A-D from one medium-dark Central America/Brazil Arabica blend; three initial packed bed densities 360/400/480 kg/m3 with 7.2/8.0/9.5g, triplicate beds; wetted at 80 C and circulated 600s until extracted, then 60s measurement at each pressure step; 10Hz ultrasonic flow and system resistance correction; Table 2 K from 2.59e-14 to 4.38e-13 m2, approx 17-fold spread; bed density +~30% decreased permeability ~3-4x. Not a normal 20-40s espresso shot nor blind sensory preference evidence."
+    },
+    {
+      "id": "LIT-2019-MORONEY-CFD-BED-UNIFORMITY",
+      "type": "peer_reviewed_primary_coffee_bed_flow_experiment_plus_CFD_simulation",
+      "title": "Analysing extraction uniformity from porous coffee beds using mathematical modelling and computational fluid dynamics approaches",
+      "authors": "Kevin M. Moroney, Ken O'Connell, Paul Meikle-Janney, Stephen B. G. O'Brien, Gavin M. Walker and William T. Lee",
+      "published": "2019-07-31 PLOS ONE 14(7):e0219906",
+      "doi": "10.1371/journal.pone.0219906",
+      "url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0219906",
+      "access": "DIRECT_FIRST_PARTY_FULL_HTML_METHODS_RESULTS_CONCLUSIONS_20261105",
+      "review_status": "METHODS_EXPERIMENTAL_SETUP_MODEL_ASSUMPTIONS_CYLINDER_VS_CONE_RESULTS_DISCUSSION_CHECKED; SUPPLEMENTAL_FIGURES_AND_UNDERLYING_RAW_DATA_NOT_AUDITED",
+      "evidence_grade": "DIRECT_PEER_REVIEWED_PRIMARY_METHODS_PLUS_MODEL; EXPLICIT_DRIP_LIKE_DOSE_AND_BREW; NO_BLINDED_ESPRESSO_SENSORY_OR_GENERAL_RECIPE_VALIDATION",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Original publisher HTML directly inspected; publisher PDF/HTML original bytes and raw experiment data not independently SHA-256 hashed.",
+      "claims_verified_externally": "Experimental 59mm cylindrical chamber: ~90C water, 60g ground coffee, ~1L brew, constant 250mL/min; authors explicitly note that quantities/time are closer to drip filter than ordinary espresso. Two different commercial grinds/coffees rather than controlled same-bean grinder comparison. Cylinder pressure drops ~2.3 bar (fine) and 0.65 bar (coarse) matched that fixture; conical spatial extraction gradients are CFD predictions assuming fixed packing, fully wetted bed and no initial dissolved water solubles, not direct live espresso puck images. Article's 18-22% extraction preference history traces to filter-coffee control chart; no new blinded espresso taste/5-rating outcomes."
     }
   ],
   "evidence_checks": [
@@ -1958,6 +1973,37 @@
       "result": "BOUNDED_MEASURED_PERMEABILITY_CONDITIONAL_NOT_NEW_TASTE_OR_RECIPE_POLICY",
       "owner_approval": false,
       "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-051-A",
+      "source": "ORG-08 original markdown Git blob 122e142c8c8a3c480f68ab63a05b8785ecc5eb02, lines 48-53 and 64-68; LIT-2019-MORONEY-CFD-BED-UNIFORMITY first-party original Methods 'Experimental rigging'/'Coffee types'",
+      "claim": "Tested cylinder had a 59mm bore, ~90C water, 60g coffee, ~1 litre water and 250mL/min constant flow, explicitly characterized by the authors as drip-filter-like total brew. Fine Jacobs Krönung dripfilter grounds vs coarse Illy/Cimbali #20 are different coffee/ground samples; therefore this is not same-bean espresso 18g/36g grind/dose evidence. <100µm was an operational, author-described somewhat arbitrary fines cutoff.",
+      "grade": "DIRECT_ORIGINAL_PUBLISHER_METHODS_CONFIRMED_NOT_NORMAL_ESPRESSO_OR_BLINDED_TASTE",
+      "primary_sources": [
+        "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0219906",
+        "https://pubmed.ncbi.nlm.nih.gov/31365538/"
+      ],
+      "page_number": "PLOS Methods > Experimental rigging, Coffee types, Fig2/Table1 text",
+      "app_source_sha": "a31dc5bd8298251e27aaccb2161ee54bd0fb2c5a",
+      "current_app": "site/lib/engine.js blob 93969d561e18205d8f87e19059ea0c66b519e934 does not encode these lab dose/flow settings as user recipe or a five-taste prediction.",
+      "result": "SOURCE_PROTOCOL_BOUNDS_VERIFIED_NO_NEW_APP_BEHAVIOR",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-051-B",
+      "source": "LIT-2019-MORONEY-CFD-BED-UNIFORMITY original CFD coffee model / Numerical simulations > Cylindrical & Conical / Extraction uniformity chart / Conclusions; ORG-08 lines 48-53,64-68",
+      "claim": "Cylinder pressure-drop validation approximately 2.3 bar fine and 0.65 bar coarse is measured in the single fixture. Conical non-uniform extraction maps are modeled and not directly observed puck channeling. CFD holds solid bed fixed, ignores compression/moving fines, starts fully wetted and zero dissolved pore concentration. Original paper attributes 18-22% target to old filter-coffee control chart, not an independent blinded espresso taste test; local modeled extraction gradients do not provide a universal single-shot quality or pressure/grind threshold.",
+      "grade": "PEER_REVIEWED_ORIGINAL_METHODS_RESULTS_AND_MODEL_LIMITS_DIRECT; MODEL_VS_EXP_AND_TASTE_DISTINCTION",
+      "primary_sources": [
+        "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0219906"
+      ],
+      "page_number": "Original publisher > Numerical model development / Numerical simulations / Extraction uniformity / Conclusions",
+      "app_source_sha": "a31dc5bd8298251e27aaccb2161ee54bd0fb2c5a",
+      "current_app": "No CFD/permeability/pressure sensor, modeled extraction-yield target or confident physical cause of individual five-taste feedback implemented in current engine.js Git blob 93969d561e18205d8f87e19059ea0c66b519e934.",
+      "result": "MODELED_UNIFORMITY_NOT_MEASURED_ESPRESSO_TASTE_NO_POLICY_TRANSFER",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
     }
   ],
   "policy_decisions_pending": [],
@@ -1966,7 +2012,7 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "Source governance record refresh R455-047. October29 original ZIP directly verified, prior stale inaccessibility superseded; reference 48/48 not app CI; no new measured outcomes."
+    "reason": "R455-051 primary-source context and model vs actual taste boundary only."
   },
   "next_actions": [
     "R455-048: Corrochano 2015 publisher-version original PDF reviewed methods §§3.1/3.5/4.4 and Table2: 600s wet pre-extraction + 60s per pressure step at 80C, 10Hz, K range 2.59e-14..4.38e-13m2; physical wet consolidated bed, NOT ordinary shot nor user taste/performance validation. Continue fresh bibliography, do not import constants.",
@@ -1989,25 +2035,25 @@
     "R455-045: Original Gagné 2019 0.08 mm² surface-area result contradicts Kaffeemacher 2025 background 0.08 mm linear shorthand; Table1 lower fines ONLY same grind, rising after finer re-dial. Preserve condition qualifiers; no engine 40%-heuristic edit. Continue unrelated research citations or reproduced UX correctness. Recovered Library 10-page slow-feed variant SHA a068e5e3... differs from owner-archive registered member SHA a4db4f38...; archive bytes still unavailable."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-048",
-    "base_development_sha": "ea7f03c674ad2c006e717abcd57e55c7259ce959",
-    "source_document": "Roman Corrochano et al. 2015 primary publisher version hosted by University of Birmingham; original report #06 fixed bytes in current GitHub",
+    "id": "R455-051",
+    "base_development_sha": "a31dc5bd8298251e27aaccb2161ee54bd0fb2c5a",
+    "source_document": "Moroney et al. 2019 original first-party PLOS ONE full HTML crosschecked against ORG-08",
     "source_ids": [
-      "ORG-06",
-      "LIT-2015-CORROCHANO-STEADY-PERMEABILITY"
+      "ORG-08",
+      "LIT-2019-MORONEY-CFD-BED-UNIFORMITY"
     ],
     "claim_ids": [
-      "R455-EV-CIT-048-A",
-      "R455-EV-CIT-048-B"
+      "R455-EV-CIT-051-A",
+      "R455-EV-CIT-051-B"
     ],
-    "number_of_curated_sources": 49,
-    "total_evidence_checks": 105,
-    "review_type": "DIRECT_ORIGINAL_PRIMARY_PDF_VISUAL_METHODS_TABLE_AND_DARCY_BOUNDARY_CROSSCHECK",
+    "number_of_curated_sources": 50,
+    "total_evidence_checks": 107,
+    "review_type": "PRIMARY_DIRECT_METHODS_DRIP_VS_ESPRESSO_AND_CFD_MODEL_LIMIT_CHECK",
     "source_hash_verified_20261105": false,
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
     "code_or_policy_changed": false,
-    "next_action": "Nonforce PR/head+merged governance and exact blob readback; then another uncrosschecked primary citation or reproduced safe UX defect. Original S019 PDF binary remains inaccessible."
+    "next_action": "PR/merge source-bound docs governance; then continue disjoint source or verified safe UX defect; original S019 inaccessible."
   },
   "policy_decisions_resolved": [
     {
@@ -2233,6 +2279,25 @@
       "owner_approval_required_for_behavior_change": true,
       "implementation": "RESEARCH_LEDGER_ONLY_NO_APP_CHANGE",
       "tests": "Docs-only CI governance/source continuity; no Node/browser/auth/privacy/SQL runtime behavior touched. No empirical taste study performed.",
+      "release_queue": "NO_NEW_ITEM"
+    },
+    {
+      "id": "R455-PROP-051-MORONEY-ESPRESSO-TRANSFER",
+      "finding": "Peer-reviewed Moroney CFD paper's 60g/1L/250mL-min physical protocol is explicitly drip-like, and its conical extraction patterns are modeled under idealized saturated, immobile bed assumptions. The paper's 18-22% target originates in filter-coffee preference literature, not a fresh espresso taste experiment.",
+      "evidence": [
+        "ORG-08 original archived Markdown SHA-256 9219bf81c7307bfb1967d763edca13d739884e22e77a8f1f22cb94ded9793f49, Git blob 122e142c8c8a3c480f68ab63a05b8785ecc5eb02, lines 48-53/64-68",
+        "LIT-2019-MORONEY-CFD-BED-UNIFORMITY",
+        "R455-EV-CIT-051-A",
+        "R455-EV-CIT-051-B"
+      ],
+      "severity": "P2_CONTEXT_AND_MODEL_TO_SENSORY_GENERALIZATION_RISK_NO_RUNTIME_DEFECT_PROVEN",
+      "user_benefit": "Maintain honest, actionable taste/history-based guidance without speculative pressure/grind/uniformity confidence.",
+      "current_locked": "Five complete taste inputs, all-green success, at most one controllable change, separate styles/feed/calibration, same-coffee history; new numerical policies require owner approval.",
+      "current_app": "At development a31dc5bd8298251e27aaccb2161ee54bd0fb2c5a engine.js blob 93969d561e18205d8f87e19059ea0c66b519e934 contains no CFD-based recipe or local uniformity inference.",
+      "proposed_change": "SAFE: source-context correction, no app change. HOLD any CFD-derived extraction-uniformity badge, universal fines cutoff, numeric EY target or grind/pressure control pending explicit owner choice and controlled espresso sensory evidence.",
+      "approval_required_for_behavior_change": true,
+      "implementation": "RESEARCH_ONLY_HOLD_NO_OWNER_DECISION_REQUESTED",
+      "test_plan": "Docs-only governance and source continuity; future new behavior requires actual same-coffee five-taste/style/feed/capability/one-control/offline testing and physical taste outcomes.",
       "release_queue": "NO_NEW_ITEM"
     }
   ]
