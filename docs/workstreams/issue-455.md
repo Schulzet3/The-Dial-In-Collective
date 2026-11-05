@@ -577,3 +577,7 @@ At original exact PR head `d66c1775f6b37f34bd2d60bd3859681343ff7b2e`, actual [No
 ### R455-032 CI intake repair — November 5, 2026 [skip netlify]
 
 Initial exact-head PR #658 approval run [41942828101](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/41942828101) **FAILED in executed step 6**, not a runner-startup failure: `[DIC queue] HOLD: DIC-Q-455-legacy-coffee-date-sort invalid merged source SHA`. Source-verified `scripts/release/release-queue.mjs:39` requires explicit `null` or 40-hex SHA even in TESTING. Same-candidate documentation correction adds `merged_source_sha:null` and documents the failure; source/test files unchanged. The original failed run remains failed, not reclassified PASS. CI for the corrected exact PR head must run before integration. No release or provider writes.
+
+### R455-032 non-force concurrent-base reconciliation [skip netlify]
+
+Development advanced from pinned `d51b42f` to `07a7ad3720b48dd6aee5976a4b92afe4d867719e` through Issue #504-only paths `docs/audits/issue504-coverage-ledger.json`, `docs/audits/issue504-review-G1-019.json` and `docs/workstreams/issue-504.md` (GitHub compare, exactly three files). No overlap with the four #455 paths. This two-parent, non-force integration preserves entire current development tree and overlays precisely the #455 model, imported tests, TESTING queue and scoped journal. All previous PR-head CI results remain bound to prior SHAs and must not be substituted for this final merge head's tests. No publication.

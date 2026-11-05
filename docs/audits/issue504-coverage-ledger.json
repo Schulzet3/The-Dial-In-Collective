@@ -240,11 +240,33 @@
         "DIC-20261029-READY-QUEUE-11",
         "DIC-20261029-READY-QUEUE-12"
       ]
+    },
+    {
+      "id": "G1-019",
+      "receipt": "docs/audits/issue504-review-G1-019.json",
+      "text_files_entire": 0,
+      "text_files_partial": 1,
+      "reviewed_file_lines": 248,
+      "reviewed_file_words": 2420,
+      "reviewed_github_objects": 0,
+      "reviewed_github_words": 0,
+      "reviewed_sequential_queue_records": 6,
+      "confirmed_note_only_fixes": 0,
+      "source_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
+      "source_range_inclusive": [
+        3586,
+        3833
+      ],
+      "original_release_receipts_verified": [
+        "DIC-20261030-READY-QUEUE-13"
+      ],
+      "actual_original_pr_merges_verified": 6,
+      "live_record_json_equal": true
     }
   ],
   "totals": {
-    "source_file_lines": 5363,
-    "source_file_words": 42350,
+    "source_file_lines": 5611,
+    "source_file_words": 44770,
     "github_objects": 2,
     "github_words": 721
   },
@@ -263,16 +285,20 @@
   "next": {
     "kind": "git_blob",
     "path": "docs/RELEASE_QUEUE.json",
-    "first_line": 3586,
+    "first_line": 3834,
     "expected_blob_sha": "ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6",
     "require_fresh_blob": true,
-    "expected_next_item": "DIC-Q-33-selected-decaf-method-prose",
+    "expected_next_item": "DIC-Q-96-admin-stale-http-conflict",
     "unreviewed_drift": [
-      "DIC-Q-455-recipe-context-feedback"
+      "DIC-Q-455-legacy-undated-feedback",
+      "DIC-Q-33-original603-309-inline-product-roast",
+      "DIC-Q-33-original603-62-educational-mountain-origin",
+      "DIC-Q-455-previous-calibration-date",
+      "DIC-Q-33-original603-106-country-first-growing-region"
     ]
   },
-  "uncovered": "Queue original source line 3586+ plus changed #455 record; remaining GitHub text/records/actions/releases/history/binary coverage incomplete; #267 V2 strict code/frozen solely delegated without #504 credit. Visibility PUBLIC per temporary owner exception, private restoration unverified. Prior #504 audit PR stack integrated via #617/#634.",
-  "latest_review_source_anchor": "f8029ff06abc7a72a32cc28fb503566846da3032",
+  "uncovered": "Queue pinned original line 3834+ plus five newly added current live queue records and other changed queue fields; all issue/PR/review/Actions/git-history/binary surfaces not fully semantically covered. #267 V2 frozen/live executable review not credited. Temporary PUBLIC visibility owner exception, eventual PRIVATE restore unverified.",
+  "latest_review_source_anchor": "68b7895a5e0c0cfb44f2eb38b5c0916acf85015f",
   "inventory_metadata_only": {
     "github_issue_rest": 523,
     "github_pr_rest": 454,
@@ -287,7 +313,7 @@
       "GET actions/workflows"
     ],
     "actions_runs_total_observed_at_latest_page1": 9052,
-    "queue_unique_items_observed": 112
+    "queue_unique_items_observed": 117
   },
   "last_completely_reviewed_document": {
     "path": "docs/RELEASE_REQUEST_SCHEMA_V4.md",
@@ -302,9 +328,9 @@
     "source_sha_before_notes": "0f5d8a9d6be56b7ecb4b7e4675340e0f9ed374e5",
     "total_lines": 5377,
     "reviewed_first_line": 1,
-    "reviewed_last_line": 3585,
+    "reviewed_last_line": 3833,
     "whitespace_words_credited": "per_receipt_ranges_only; includes noncontiguous earlier insertions",
-    "credit": "G1-005 through G1-018; source-bound receipts only; no code/#267 double-credit"
+    "credit": "G1-005 through G1-019; pinned source-bound receipts only; no #267 double credit"
   },
   "ci_open_negative": {
     "source_merge_sha": "54ab55987be8b05db090c530a47e496093c8c76a",
@@ -386,5 +412,21 @@
     "private_restoration": "UNVERIFIED",
     "release_12_signed_in_admin": "NOT_VERIFIED_IN_THIS_RUN",
     "semantics": "193 new queue lines, 1,628 words; five exact release receipts/merged PRs"
+  },
+  "g1019_live_reconciliation_20261105": {
+    "development_sha": "68b7895a5e0c0cfb44f2eb38b5c0916acf85015f",
+    "main_sha": "590c2c33610a5a7703a2509e1045d236b78a7981",
+    "release_production_sha": "69742e9e8633c29c209249a87303c6e931a41b89",
+    "live_queue_blob_sha": "b7e2f1495d6c156d167f7f3699f1bfb741359bf9",
+    "live_unique_queue_items": 117,
+    "original_unique_items": 112,
+    "source_equality": "six current objects JSON-exact to original despite inserted records shifting physical line positions",
+    "original_range": [
+      3586,
+      3833
+    ],
+    "direct_words": 2420,
+    "original_pr_merges": 6,
+    "reporting_boundary": "No live provider recheck and no code/release changes"
   }
 }
