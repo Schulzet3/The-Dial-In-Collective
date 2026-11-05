@@ -53,11 +53,15 @@ export function hydrate(raw){
   // Legacy rows without a usable date remain saved, but cannot be the latest
   // recipe-feedback observation or an ordering anchor.
   if(sh.hidden||typeof sh.timestamp!=='string'||!sh.timestamp.trim())continue;
+  // A restored offset timestamp can sort lexically before a later instant;
+  // malformed legacy dates must not select a live advice observation.
+  const at=Date.parse(sh.timestamp);
+  if(!Number.isFinite(at))continue;
   if(!latestByVersion.has(sh.setupVersionId))latestByVersion.set(sh.setupVersionId,new Map());
   const byCoffee=latestByVersion.get(sh.setupVersionId);
   if(!byCoffee.has(sh.coffeeId))byCoffee.set(sh.coffeeId,new Map());
   const byStyle=byCoffee.get(sh.coffeeId),old=byStyle.get(sh.style);
-  if(!old||sh.timestamp.localeCompare(old.timestamp)>0)byStyle.set(sh.style,sh);
+  if(!old||at>Date.parse(old.timestamp))byStyle.set(sh.style,sh);
  }
  const active=s.activeSetupId;
  for(const setup of s.setups){s.activeSetupId=setup.id;const version=M.activeVersion(s);
