@@ -3,7 +3,7 @@
   "issue": 267,
   "review_standard": "Independent post-pin new source line semantic review; separate from original frozen/pinned V2 denominator",
   "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
-  "observed_development_commit": "25baf1153fba83e9e94597c79eb0726920d1bc64",
+  "observed_development_commit": "03bbf13f656fd60b7cdbf86de510ea8c86048af7",
   "receipt_references": [
     {
       "batch_id": "D2-001",
@@ -12,9 +12,12 @@
       "blob_sha": "32d16c1ae364329829503e0829d4a358f6963a49",
       "range": [
         1,
-        39
+        38
       ],
-      "line_count": 39
+      "line_count": 38,
+      "original_receipt_reported_line_count": 39,
+      "corrected_by": "docs/audits/issue267-v2-post-pin-direct-corrections/D2-001-006-virtual-eof-20261105.json",
+      "original_receipt_preserved_unmodified": true
     },
     {
       "batch_id": "D2-002",
@@ -45,9 +48,12 @@
       "blob_sha": "397e2439efe76046bdb5bf9daa5d65fcdb907316",
       "range": [
         1,
-        7
+        6
       ],
-      "line_count": 7
+      "line_count": 6,
+      "original_receipt_reported_line_count": 7,
+      "corrected_by": "docs/audits/issue267-v2-post-pin-direct-corrections/D2-001-006-virtual-eof-20261105.json",
+      "original_receipt_preserved_unmodified": true
     },
     {
       "batch_id": "D2-005",
@@ -56,9 +62,12 @@
       "blob_sha": "685d28ddf4ec849d11a20a9be169224e303b2358",
       "range": [
         1,
-        34
+        33
       ],
-      "line_count": 34
+      "line_count": 33,
+      "original_receipt_reported_line_count": 34,
+      "corrected_by": "docs/audits/issue267-v2-post-pin-direct-corrections/D2-001-006-virtual-eof-20261105.json",
+      "original_receipt_preserved_unmodified": true
     },
     {
       "batch_id": "D2-006",
@@ -67,17 +76,36 @@
       "blob_sha": "5d118a64686244f8d6a9fe5fdc71795846480c70",
       "range": [
         1,
-        32
+        31
       ],
-      "line_count": 32
+      "line_count": 31,
+      "original_receipt_reported_line_count": 32,
+      "corrected_by": "docs/audits/issue267-v2-post-pin-direct-corrections/D2-001-006-virtual-eof-20261105.json",
+      "original_receipt_preserved_unmodified": true
     }
   ],
-  "unique_source_lines_direct_reviewed": 207,
+  "unique_source_lines_direct_reviewed": 203,
   "fully_reviewed_new_source_files": 6,
   "nonoverlap": true,
   "changed_existing_pinned_paths": "PENDING",
   "new_sql_migrations": "PENDING",
   "remaining_added_code": "PENDING_FRESH_SOURCE_TREE_AND_FULL_SEMANTIC_REVIEW",
   "runtime_app_acceptance": "NOT_RUN_BY_D2",
-  "complete": false
+  "complete": false,
+  "physical_line_accounting_rule": "Count actual 1-based non-virtual lines; terminal newline alone is line delimiter, never an extra blank physical line. Preserve source-authenticated original receipt even when superseded by an append-only correction.",
+  "correction_references": [
+    {
+      "path": "docs/audits/issue267-v2-post-pin-direct-corrections/D2-001-006-virtual-eof-20261105.json",
+      "issue": 267,
+      "batches": [
+        "D2-001",
+        "D2-004",
+        "D2-005",
+        "D2-006"
+      ],
+      "incorrect_total": 207,
+      "corrected_valid_total": 203,
+      "subtract_phantom_records": 4
+    }
+  ]
 }
