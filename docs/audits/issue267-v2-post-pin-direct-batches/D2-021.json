@@ -1,0 +1,1064 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "D2-021",
+  "date_utc": "2026-11-05",
+  "kind": "POST_PIN_NEW_CODE_DIRECT_SEMANTIC_REVIEW",
+  "source": {
+    "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "observed_live_commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+    "path": "scripts/release/netlify-immutable-publish.mjs",
+    "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+    "physical_line_count": 38,
+    "verified_absent_at_pin": true,
+    "terminal_newline_not_physical_line": true
+  },
+  "method": "Direct individual original numbered source reading and nine semantic dimensions. AI not outside human certification, no regex/AST-only credit.",
+  "per_line": [
+    {
+      "line": 1,
+      "source_text": "// Exact immutable ZIP publication adapter. NEVER run during preflight.",
+      "classification": "comment",
+      "behavior": "States exact immutable ZIP adapter has publish side effects",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Comment is not enforcement",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 1,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:1 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 2,
+      "source_text": "// POST is production publication: only an explicitly authorized, consumed",
+      "classification": "comment",
+      "behavior": "Warns POST is production publication",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Side-effect must remain behind owner one-use controller",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 2,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:2 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 3,
+      "source_text": "// one-use release controller may invoke this function.",
+      "classification": "comment",
+      "behavior": "Requires consumed source-bound owner release controller",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Direct import remains callable, though no active unauthorized invocation demonstrated",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 3,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:3 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 4,
+      "source_text": "import {createHash} from 'node:crypto';",
+      "classification": "executable",
+      "behavior": "Imports SHA256 implementation",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Built-in crypto trusted, no network",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 4,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:4 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 5,
+      "source_text": "const SITE='153277f2-e19e-4862-b9a6-f2e18ccde271';",
+      "classification": "executable",
+      "behavior": "Binds publisher to one specific Netlify site",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Hard-coded site must match owner site after authorized update",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 5,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:5 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 6,
+      "source_text": "const SHA=/^[a-f0-9]{40}$/;",
+      "classification": "executable",
+      "behavior": "Defines lowercase 40 hex source SHA syntax",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Rejects uppercase/cross-shaped SHA",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 6,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:6 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 7,
+      "source_text": "const HASH=/^[a-f0-9]{64}$/;",
+      "classification": "executable",
+      "behavior": "Defines lowercase SHA256 digest syntax",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Hex format alone not verification",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 7,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:7 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 8,
+      "source_text": "export function verifyImmutableArchive({archive,expectedSha256,sourceSha,certifiedSourceSha}={}){",
+      "classification": "executable",
+      "behavior": "Exports immutable archive verification function",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Pure helper no publish",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 8,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:8 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 9,
+      "source_text": " if(!Buffer.isBuffer(archive)||archive.length<100)throw Error('Missing immutable build ZIP');",
+      "classification": "executable",
+      "behavior": "Requires Buffer ZIP and minimum byte length",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Structural ZIP size does not prove valid contents",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 9,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:9 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 10,
+      "source_text": " if(!HASH.test(expectedSha256||'')||!SHA.test(sourceSha||'')||",
+      "classification": "executable",
+      "behavior": "Requires canonical digest/source formats",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Checks both source and hash syntax",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 10,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:10 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 11,
+      "source_text": "   sourceSha!==certifiedSourceSha)throw Error('Missing exact source-bound certification');",
+      "classification": "executable",
+      "behavior": "Requires source SHA equals certificate source SHA",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Prevents using certified SHA for another source",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 11,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:11 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 12,
+      "source_text": " const actual=createHash('sha256').update(archive).digest('hex');",
+      "classification": "executable",
+      "behavior": "Hashes full archive bytes",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Full bytes hashed in memory",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 12,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:12 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 13,
+      "source_text": " if(actual!==expectedSha256)throw Error('Immutable build ZIP hash mismatch');",
+      "classification": "executable",
+      "behavior": "Rejects mismatch with expected SHA256",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Fail closed on wrong checksum",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 13,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:13 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 14,
+      "source_text": " if(archive.subarray(0,2).toString()!=='PK')throw Error('Not a ZIP archive');",
+      "classification": "executable",
+      "behavior": "Checks ZIP begins with PK",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Only ZIP magic, not full archive semantic validity",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 14,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:14 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 15,
+      "source_text": " return {source_sha:sourceSha,archive_sha256:actual};",
+      "classification": "executable",
+      "behavior": "Returns exact SHA and verified digest only",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Result is proof of bytes, not provider outcome",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 15,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:15 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 16,
+      "source_text": "}",
+      "classification": "executable",
+      "behavior": "Closes no-write verification function",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "No side effects",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 16,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:16 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 17,
+      "source_text": "export async function publishExactArtifact({token,archive,expectedSha256,sourceSha,",
+      "classification": "executable",
+      "behavior": "Exports potentially mutating publication adapter",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Function does contain POST and must not be exercised here",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 17,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:17 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 18,
+      "source_text": " certifiedSourceSha,ownerGrantVerified=false,oneUseClaimConsumed=false,",
+      "classification": "executable",
+      "behavior": "Takes certified source, owner and claim flags",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Inputs are booleans supplied by trusted caller, not internal grant lookup",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 18,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:18 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 19,
+      "source_text": " allowProductionPublication=false,functionsPreservedVerified=false,fetcher=fetch}={}){",
+      "classification": "executable",
+      "behavior": "Requires explicit production publication and function preservation",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "functionsPreservedVerified must be independently established",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 19,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:19 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 20,
+      "source_text": " const receipt=verifyImmutableArchive({archive,expectedSha256,sourceSha,certifiedSourceSha});",
+      "classification": "executable",
+      "behavior": "Runs archive verification before publication",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Validation before permission check is safe but may expend CPU",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 20,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:20 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 21,
+      "source_text": " if(!ownerGrantVerified||!oneUseClaimConsumed||!allowProductionPublication||!functionsPreservedVerified)",
+      "classification": "executable",
+      "behavior": "Denies missing any of four release gates",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Four flags block default call",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 21,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:21 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 22,
+      "source_text": "  throw Error('Production publication denied: owner grant, consumed claim, complete Netlify Functions coverage and explicit publication gate required');",
+      "classification": "executable",
+      "behavior": "Throws if publication permissions missing",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Error preserves safety boundary",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 22,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:22 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 23,
+      "source_text": " if(!token)throw Error('Missing Netlify publication token');",
+      "classification": "executable",
+      "behavior": "Requires provider token",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Token supplied only by authorized action",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 23,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:23 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 24,
+      "source_text": " const response=await fetcher('https://api.netlify.com/api/v1/sites/'+SITE+'/deploys',{",
+      "classification": "executable",
+      "behavior": "Issues Netlify POST to fixed site deploy endpoint",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "This is a real production side-effect; prohibit invoking without explicit authority",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 24,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:24 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 25,
+      "source_text": "  method:'POST',headers:{Authorization:'Bearer '+token,'Content-Type':'application/zip'},",
+      "classification": "executable",
+      "behavior": "Uses bearer token and ZIP content type",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Credential must not be logged",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 25,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:25 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 26,
+      "source_text": "  body:archive});",
+      "classification": "executable",
+      "behavior": "Passes exact previously hashed ZIP bytes",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "No archive mutation after hash check",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 26,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:26 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 27,
+      "source_text": " if(!response.ok)throw Error('Netlify ZIP publication returned HTTP '+response.status+",
+      "classification": "executable",
+      "behavior": "Rejects non-2xx provider response",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Non-2xx may have partial provider effect; no auto retry",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 27,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:27 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 28,
+      "source_text": "  '; inspect provider state before retry, never automatically publish twice');",
+      "classification": "executable",
+      "behavior": "Requires inspecting ambiguous provider state rather than retry",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Operator must check provider state before another attempt",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 28,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:28 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 29,
+      "source_text": " const deploy=await response.json();",
+      "classification": "executable",
+      "behavior": "Parses provider deployment receipt",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Provider JSON may fail parsing after POST; no automatic replay",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 29,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:29 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 30,
+      "source_text": " if(!deploy.id||deploy.site_id!==SITE)",
+      "classification": "executable",
+      "behavior": "Checks deploy ID and site association",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Site ID must equal hard-coded destination",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 30,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:30 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 31,
+      "source_text": "  throw Error('Netlify publication response unverified: inspect provider before further action');",
+      "classification": "executable",
+      "behavior": "Rejects unverified deployment response",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Fail-closed even after side effect; operator recovery needed",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 31,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:31 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 32,
+      "source_text": " return {...receipt,status:'PROVIDER_PUBLICATION_REQUESTED_VERIFY_CURRENT_BEFORE_DEPLOYED',",
+      "classification": "executable",
+      "behavior": "Returns pending-provider status rather than deployed",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Wording intentionally avoids claiming deployed",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 32,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:32 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 33,
+      "source_text": "  deploy_id:deploy.id,site_id:SITE};",
+      "classification": "executable",
+      "behavior": "Returns exact deploy and site IDs",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Return identifiers are not verification of published traffic",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 33,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:33 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 34,
+      "source_text": "}",
+      "classification": "executable",
+      "behavior": "Closes publishing function",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "No extra side effects",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 34,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:34 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 35,
+      "source_text": "if(process.argv[1]&&new URL(import.meta.url).pathname===process.argv[1]){",
+      "classification": "executable",
+      "behavior": "Detects direct CLI invocation",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "CLI detection dependent on argv path",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 35,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:35 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 36,
+      "source_text": " console.error('Direct CLI publishing disabled. Invoke only from a source-bound one-use release controller.');",
+      "classification": "executable",
+      "behavior": "Prints CLI publishing-disabled warning",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Does not print secrets",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 36,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:36 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 37,
+      "source_text": " process.exitCode=2;",
+      "classification": "executable",
+      "behavior": "Sets nonzero process exit code",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "Nonzero exit code refuses direct command",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 37,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:37 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    },
+    {
+      "line": 38,
+      "source_text": "}",
+      "classification": "executable",
+      "behavior": "Closes CLI gate",
+      "quality": "Exact artifact hash and four-gate Netlify publication logic assessed with immutable source and specific side-effect boundary",
+      "risk": "No hidden postscript",
+      "dead_or_obsolete": "Direct ZIP uploader remains importable; active invocation not proven, so not safe to remove",
+      "duplication": "Different from new digest publisher; overlapping publication adapter is a potential legacy redundancy, not proven safe deletion",
+      "pinned_current_counterpart": {
+        "status": "ABSENT_NEW_AFTER_PIN",
+        "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+        "absent_verified": true,
+        "method": "Exact pinned GitHub file request returned 404"
+      },
+      "live_current_counterpart": {
+        "path": "scripts/release/netlify-immutable-publish.mjs",
+        "commit": "e132949fb1d29e2ab869da7db986207fe93bedd2",
+        "blob_sha": "38f806bbb05ad62fa584dcf516459d864a0ac925",
+        "line": 38,
+        "exact_text_match": true
+      },
+      "testability": "tests/netlify-immutable-publish.test.mjs mocked fetch + source-bound release integration; no real deployment allowed",
+      "fix_opportunity": "No demonstrated unauthorized caller or performance defect; preserve until owner-approved source-level integration audit confirms dead path",
+      "locked_fit": "#417/#457 Git-connected owner-only one-use publish; direct ZIP API legacy code must not independently authorize production; no publication executed",
+      "review_method": "Direct AI numbered original line read scripts/release/netlify-immutable-publish.mjs:38 at Git blob 38f806bbb05ad62fa584dcf516459d864a0ac925; no independent human review."
+    }
+  ],
+  "findings": [
+    {
+      "type": "LEGACY_DIRECT_NETLIFY_POST_ADAPTER",
+      "range": [
+        17,
+        38
+      ],
+      "disposition": "Direct provider ZIP POST code exists and is callable, whereas latest Locked #417/#457 prefers Git-connected owner-authorized path. No active call or unauthorized deployment reproduced. Do not remove; investigate import graph and current release controller before any change."
+    }
+  ],
+  "caller_trace": [
+    "scripts/release/verify-release-artifact-receipt.mjs:3,31-33",
+    "scripts/release/retrieve-certified-release-bundle.mjs:14-47,73-81",
+    "scripts/release/netlify-digest-deploy.mjs:24-58"
+  ],
+  "test_status": "NOT_RUN_SOURCE_ONLY_REVIEW",
+  "production_changes": false,
+  "runtime_app_acceptance": "NOT_RUN",
+  "complete_global": false
+}
