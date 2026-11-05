@@ -4692,6 +4692,29 @@
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
       "notes": "NARROW READY IN DEVELOPMENT ONLY, NOT DEPLOYED. Historical records, taste scales, grinder translations and existing bounded estimates preserved; exact merged source and applicable CI independently verified. Other #455 research/citation and UX work remains OPEN; no numerical policy or user data change.",
       "pr": 648
+    },
+    {
+      "id": "DIC-Q-33-original603-106-country-first-growing-region",
+      "issue": 33,
+      "pr": 650,
+      "title": "Use selected country-first region H1 only with current-lot farmers-in-this-region corroboration",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-identity-evidence.mjs",
+        "src/server/coffee-title-region-evidence.mjs"
+      ],
+      "tests": [
+        "Previous selected official raw HTML #106 SHA256 772f5ea782ca26227162a594de0de814f03ed6a489f35cbbe39a48bdf94975a6, exact selected H1 Colombia Valley de Cauca; parser returned Colombia; current selected region prose refers to farmers in this region.",
+        "New country-first H1/prose generic guard and 8 positive/negative Node cases committed in PR650 head 7f677503c4409c285e35008dad555e63470fcceb; exact CI still executing.",
+        "First PR650 approval run41938175354 FAILED only queue intake (untracked runtime paths), not a test assertion; item added in next documentation-only commit. Full frozen603 job41938175284 SKIPPED."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact updated PR-head Node/lint/build, approval, applicable cloud/SQL/security checks; safe nonforce merge; actual merged official #62/#106/#531 parser and Add Coffee evidence with independent artifact source diff pending; original603 universal manual review separate."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "TESTING / IN_PROGRESS ONLY. No official postchange SHA/parser certification, release, Netlify/prod/member/provider write. Preserve previous READY, DEPLOYED, and independent #309/#97/#527 work."
     }
   ],
   "history": [
