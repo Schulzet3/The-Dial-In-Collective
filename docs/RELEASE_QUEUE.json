@@ -8,6 +8,27 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-shot-history-missing-date-display",
+      "issue": 455,
+      "title": "Avoid fabricated January 1970 dates for undated legacy Shot History and provide accessible unknown-date label",
+      "state": "TESTING",
+      "scope_paths": [
+        "site/lib/ui.js",
+        "site/cloud/shot_card.js"
+      ],
+      "tests": [
+        "Live source reproduction: humanDate(null), humanDate(0) and humanDate(false) produce 1/1/1970, misleading members about undated legacy/private shot history; shotCard aria-label inherits fabricated date.",
+        "Proposed SAFE repair: parse nonempty date strings only; preserve original timestamp and all record fields; render 'Date not recorded' for null/blank/invalid history in both visible display and toggle accessible name. Positive and negative coverage in tests/issue455-shot-history-date-display.test.mjs.",
+        "Not yet independently tested in this code commit; exact-source Node/browser/cloud/a11y/governance verification and nonforce merge required before READY."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Unmerged change and source-specific CI not yet verified"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Development-only narrow UI display/ARIA defect, no metadata rewrite, no espresso recommendation model change, no privacy/SQL/Auth/Edge or deployment action. Status TESTING, NOT READY, NOT DEPLOYED."
+    },
+    {
       "id": "DIC-Q-455-shot-history-instant-order",
       "issue": 455,
       "title": "Show per-coffee Shot History newest by real instant, not lexical timezone offset",
