@@ -574,6 +574,41 @@ function narrativeGeography(blocks,{currentLocalityOnly=false,name=''}={}){
  }
  return [{label:countryNames(value).length?'Origin':'Region',value,quote:candidates.map(item=>item.quote).join(' | ').slice(0,2200)}];
 }
+// Bind one measured, current selected lot's growing region to the country
+// explicitly printed in the adjacent selected-coffee sentence and its exact
+// H1. The next specification can omit the country; neither SEO, geography
+// lookup, unrelated coffee descriptions nor a historical lot may supply it.
+export function selectedAdjacentGrowingRegion(blocks,{name='',origin=''}={}){
+ if(!Array.isArray(blocks)||!name||name.length>220)return null;
+ const countries=countryNames(name);
+ if(countries.length!==1||(origin&&key(origin)!==key(countries[0])))return null;
+ const titles=blocks.filter(block=>block.tag==='h1');
+ if(titles.length!==1||key(titles[0].text)!==key(name))return null;
+ const from=new RegExp('^(?:This|Our)\\s+(?:is|are)\\s+(?:.{4,100}?\\s+)?(?:offering|coffee|lot)\\s+from\\s+('+COUNTRIES+')\\s*[.!?]?$','iu');
+ const specific=/^More\s+(?:specifically|precisely),\s+(?:an?\s+)?[\p{L}\p{M}\d\s,&'’()-]{5,155}?\b(?:varietals?|coffee|lot|beans?)\s+(?:grown|cultivated|sourced)\s+at\s+\d{3,4}(?:\s*[-–—]\s*\d{3,4})?\s*(?:meters?|masl|m)\s*(?:above\s+sea\s+level\s+)?from\s+the\s+((?:(?:lake|mount|valley)\s+)?[\p{Lu}][\p{L}\p{M}’'-]{2,55}(?:\s+[\p{Lu}][\p{L}\p{M}’'-]{2,55}){0,2})\s+region[.!?]?$/iu;
+ const claims=new Map();
+ for(const block of blocks){
+  if(!['p','div','li'].includes(block.tag)||block.educational||block.text.length>1600||
+     /\b(?:related|recommended|other coffees?|other roasts?|catalog|navigation|reviews?)\b/iu.test(block.section||''))continue;
+  const lines=sentences(block.text);
+  for(let i=1;i<lines.length;i++){
+   const before=lines[i-1],after=lines[i],currentCountry=from.exec(before)?.[1];
+   if(!currentCountry||key(currentCountry)!==key(countries[0])||
+      !current(before)||!current(after)||
+      /\b(?:previous|historical|formerly|no longer|other|another|hypothetical|used to)\b/iu.test(before+' '+after)||
+      countryNames(after).some(value=>key(value)!==key(currentCountry)))continue;
+   const region=specific.exec(after)?.[1]?.trim();
+   if(!region||region.length>65||COUNTRY_ONLY.test(region)||
+      completeVarietyPhrase(region,{explicit:true})||
+      /\b(?:coffee|roast|blend|product|offering|catalog|chocolate|caramel|tasting|flavou?r|shipping|street|warehouse|farm|station)\b/iu.test(region))continue;
+   const readable=region.replace(/^./u,c=>c.toUpperCase());
+   const value=readable+', '+currentCountry;
+   claims.set(key(value),{value,quote:before+' '+after});
+  }
+ }
+ return claims.size===1?[...claims.values()][0]:null;
+}
+
 function currentCoffeeReleasePrefix(sentence){
  if(sentence.length>1800)return null;
  const match=sentence.match(/^((?:Here's|Here’s|Here is)\s+what\s+you\s+can\s+expect\s+from\s+this\s+coffee\s+in\s+(20\d{2}\s*[/–—-]\s*(?:20)?\d{2})\s*:)(.*)$/i);
@@ -744,6 +779,8 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
   if(compatible)add('Origin',compatible,place.quote);
   else if(!existing||incompatibleCountry||COUNTRY_ONLY.test(existing))add(place.label,place.value,place.quote);
  }
+ const adjacentSelectedOrigin=selectedAdjacentGrowingRegion(blocks,{name,origin:fields.origin});
+ if(adjacentSelectedOrigin)add('Origin',adjacentSelectedOrigin.value,adjacentSelectedOrigin.quote);
  const adjacentFarm=selectedHeadingAdjacentFarmLocation(html,blocks,{name,fields,clean});
  if(adjacentFarm)add('Origin',adjacentFarm.value,adjacentFarm.quote);
  // Join explicitly named current lot and region only for the selected coffee.
