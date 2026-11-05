@@ -3,7 +3,7 @@
   "issue": 267,
   "review_standard": "Independent post-pin new source line semantic review; separate from original frozen/pinned V2 denominator",
   "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
-  "observed_development_commit": "540d367b146a82a2a425dd411b1c19614d560b92",
+  "observed_development_commit": "5d1fbb76b6ad4cf1594db853ea77271fbf053fc3",
   "receipt_references": [
     {
       "batch_id": "D2-001",
@@ -424,10 +424,24 @@
       "verified_absent_at_pin": true,
       "reviewed_live_commit": "540d367b146a82a2a425dd411b1c19614d560b92",
       "source_remediation_in_same_commit": true
+    },
+    {
+      "batch_id": "D2-034",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-034.json",
+      "path": "tests/request-encrypted-backup.test.mjs",
+      "blob_sha": "ad1657e6d663a2cd914dc33b2f48f5d2cc3c6a3c",
+      "range": [
+        1,
+        78
+      ],
+      "line_count": 78,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "5d1fbb76b6ad4cf1594db853ea77271fbf053fc3",
+      "includes_nine_new_focused_regression_lines": true
     }
   ],
-  "unique_source_lines_direct_reviewed": 1015,
-  "fully_reviewed_new_source_files": 33,
+  "unique_source_lines_direct_reviewed": 1093,
+  "fully_reviewed_new_source_files": 34,
   "nonoverlap": true,
   "changed_existing_pinned_paths": "PENDING",
   "new_sql_migrations": "PENDING",
@@ -450,7 +464,7 @@
       "subtract_phantom_records": 4
     }
   ],
-  "last_review_batch": "D2-033",
-  "last_review_source_commit": "540d367b146a82a2a425dd411b1c19614d560b92",
-  "last_review_note": "67 direct old source lines; confirmed invalid UTC normalization and targeted development-only code/test repair, exact CI pending. No test lines numerically credited. 948→1015/33."
+  "last_review_batch": "D2-034",
+  "last_review_source_commit": "5d1fbb76b6ad4cf1594db853ea77271fbf053fc3",
+  "last_review_note": "Direct entire current 78-line synthetic backup fallback/claim test after D2-033 fix; no new code changes; 1015→1093 and 33→34 post-pin complete files"
 }
