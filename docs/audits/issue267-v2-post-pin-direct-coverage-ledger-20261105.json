@@ -3,7 +3,7 @@
   "issue": 267,
   "review_standard": "Independent post-pin new source line semantic review; separate from original frozen/pinned V2 denominator",
   "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
-  "observed_development_commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+  "observed_development_commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
   "receipt_references": [
     {
       "batch_id": "D2-001",
@@ -228,10 +228,36 @@
       "line_count": 19,
       "verified_absent_at_pin": true,
       "reviewed_live_commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5"
+    },
+    {
+      "batch_id": "D2-019",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-019.json",
+      "path": "scripts/release/verify-release-artifact-receipt.mjs",
+      "blob_sha": "a524e54c4f47e52be0d6090417b44611db2f3f15",
+      "range": [
+        1,
+        36
+      ],
+      "line_count": 36,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c"
+    },
+    {
+      "batch_id": "D2-020",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-020.json",
+      "path": "tests/verify-release-artifact-receipt.test.mjs",
+      "blob_sha": "d2bd3d73d640b7d0bce84ba4f25faa46f7049ecf",
+      "range": [
+        1,
+        26
+      ],
+      "line_count": 26,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c"
     }
   ],
-  "unique_source_lines_direct_reviewed": 487,
-  "fully_reviewed_new_source_files": 18,
+  "unique_source_lines_direct_reviewed": 549,
+  "fully_reviewed_new_source_files": 20,
   "nonoverlap": true,
   "changed_existing_pinned_paths": "PENDING",
   "new_sql_migrations": "PENDING",
@@ -254,7 +280,7 @@
       "subtract_phantom_records": 4
     }
   ],
-  "last_review_batch": "D2-018",
-  "last_review_source_commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
-  "last_review_note": "D2-017/018: 41 exact original provider-predicate and unit-test physical lines, no independent human or new real provider QA. Prior confirmed read-only manifest false green fixed in PR #789; exact merged-source approval, Node22/lint/build, mobile-browser, cloud and no-publish rehearsal SUCCESS at b2c4add; PR-head SQL SUCCESS; original603 SKIPPED."
+  "last_review_batch": "D2-020",
+  "last_review_source_commit": "f8dd01618dc8f4d6513b7c31e7debfb91874464c",
+  "last_review_note": "D2-019-020 62 individually examined post-pin receipt verifier/test lines. Upstream exact-run CI check trust boundary traced, no active bug reproduced. S2 untouched; full live drift unfinished; runtime tests not run."
 }
