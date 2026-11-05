@@ -11,22 +11,35 @@
       "id": "DIC-Q-455-latest-shot-instant-order",
       "issue": 455,
       "title": "Select newest actual shot instant consistently in logging prefill and taste recommendation",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "e61a357176e4dbc90bb3b7ee38c2fcea2d1837cf",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
-        "Source-only reproduction: engine.js sorted ISO timestamp strings for recent shot prefill and last-rated recommendation; timezone offsets and malformed archived strings can displace newer measured evidence.",
-        "Four hydrated real-module negative/positive regression tests committed alongside code at tests/issue455-shot-instant-order.test.mjs; NOT RUN at commit time, no PASS claim.",
-        "Pending exact PR-head Node22, mobile/offline/accessibility and governance; after verified nonforce integration require exact merged-source CI and READY reconciliation."
+        "Source defect: date-offset text reverses real chronology; malformed legacy dates can appear newest; no observed production incident or cup-quality gain claimed.",
+        "Four hydrated real-module positive/negative regression cases cover Log Shot prefill, most recent rated recommendation, malformed legacy time, ordinary ISO and empty state, preserving original five tastes, notes and history.",
+        "Exact PR-head cd0b4090d35562e403caafe8f7cc166afa9d7967 Node22 tests/lint/build41997258658 SUCCESS: 2512 PASS / 0 FAIL / 6 SKIP (2518 total); focused preflight 13/13 PASS.",
+        "PR-head browser/mobile/offline/a11y41997258739, isolated SQL/JWT41997258637, security41997258614, approval41997258687 all SUCCESS; original60341997258570 SKIPPED not PASS.",
+        "PR737 squash merge e61a357176e4dbc90bb3b7ee38c2fcea2d1837cf nonforce, all four engine/test/queue/journal blobs exact match tested PR head.",
+        "Exact merged-source Node22/lint/build41997540819 SUCCESS 2512 PASS / 0 FAIL / 6 SKIP, browser/mobile/offline/a11y41997540857 SUCCESS, approval41997540520 SUCCESS.",
+        "Two following development commits through 02411ca3516ab6333178129b08ac26f7b7750fe4 touched only unrelated #267/#509 audit docs; code/test/queue unchanged."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Full applicable source-bound checks and verified merge pending."
+      "ci_runs": [
+        41997258614,
+        41997258687,
+        41997258570,
+        41997258637,
+        41997258658,
+        41997258739,
+        41997540520,
+        41997540857,
+        41997540819
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Development only. Preserve five sensory fields, original shots, private notes, dose, grinder/basket/feed/style and recipe families; actual-instant chronology only. No Locked or numerical policy change; no deploy, SQL/Auth/Edge/member/provider writes."
+      "notes": "READY development only, NOT DEPLOYED. Preserves original shots, five sensory fields, private notes, style/feed/basket, grinder/setup/calibration, Locked targets and one controllable change. Source regression proven but no current real-member/sensory trial. Original603 SKIPPED; no production or provider writes.",
+      "pr": 737
     },
     {
       "id": "DIC-Q-33-seasonal-program-release-provenance",
