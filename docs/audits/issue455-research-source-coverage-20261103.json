@@ -629,6 +629,20 @@
       "source_bytes_sha256": null,
       "source_byte_caveat": "Dynamic HTML not byte-archived or hashed; page may change. Manufacturer assertion that holes balance resistance and preliminary smoother-shot reports have no independent hole-size measurements or blinded randomized sensory data.",
       "claims_verified_externally": "Decent describes smaller holes on smaller-dosed baskets, designed to balance resistance. Its original 2021 blog reports informal 52-vs-58mm, same-grind 15g comparison and explicitly says separately dialing each basket finer remains to be done; do NOT infer a universal basket/channeling/sweetness percentage."
+    },
+    {
+      "id": "MFR-SLAYER-SG-MANUAL-20261105",
+      "type": "manufacturer_first_party_original_pdf_manual_and_brand_site_expert_guide",
+      "title": "Slayer Espresso Single Group User Manual v6.4 (June 7, 2021) and Dan Fellows' October 10, 2021 Slayer-branded dial-in article",
+      "url": "https://slayerespresso.com/wp-content/uploads/2022/04/manual-espressoSG-v6.4-060721.pdf",
+      "companion_url": "https://slayerespresso.com/dialing-in-the-slayer-espresso/",
+      "published": "Manual v6.4 June 7, 2021; on-brand article Oct 10, 2021; directly read 2026-11-05 UTC",
+      "access": "ORIGINAL_PUBLISHER_PDF_TEXT_PLUS_VISUAL_WEB_PAGES_16_20_21_22; FIRST_PARTY_WEB_ARTICLE_DIRECT_TEXT",
+      "evidence_grade": "MANUFACTURER_MACHINE_OPERATION_AND_IN_HOUSE_EXPERIENCE; NOT CONTROLLED_INDEPENDENT_SENSORY_OPTIMIZATION",
+      "review_status": "FOCUSED_PRIMARY_PAGES_16_20_21_22_AND_BRAND_ARTICLE; NO_FULL_MANUAL_OR_BYTE_HASH_CLAIM",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Original web PDF opened and relevant page screenshots visually checked; complete publisher PDF bytes were not downloaded and SHA-256 not calculated. Manufacturer page can change.",
+      "claims_verified_externally": "2021 manual specifies factory 40 g/30 s unimpeded Pre-Brew water and 9-bar pump (p16), actuator Off/Pre-Brew/Full-Brew (p20), recommended 18-19 g and approximately 15-20 s saturating prebrew (p21), user-adjustable needle-valve starting 40 g/30 s (p22); 2021 on-brand article proposes wider 40-60 g/30 s across roast as a personal dial-in guide, 18-20 g and 45-55 s total contact time, not factory specification or validated optimum."
     }
   ],
   "evidence_checks": [
@@ -1707,6 +1721,44 @@
       "result": "CONDITIONAL_PHYSICAL_EXTRACTION_RESULT_NOT_TASTE_OPTIMUM_NO_RULE_CHANGE",
       "owner_approval": false,
       "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-041-A",
+      "source": "ORG-05 original Markdown Git blob be455fe3c2dc8469c67c49bed7e9f539943ea463, lines 208-218; MFR-SLAYER-SG-MANUAL-20261105 original manual v6.4 pages 16,20-22 and Slayer website article",
+      "claim": "Original report's Slayer-specific Off/Pre-Brew/Full-Brew hardware, needle-valve free-flow measurement, factory 40g/30s, roughly 15-20s prebrew, 18-19g Slayer Shot dose and 9-bar pump are supported by manufacturer v6.4 manual; on-brand expert guide instead suggests a flexible 40-60g/30s based on roast, 18-20g and initial 45-55s total contact. 40-60 is NOT the manual factory setting, 45-55s is not a universal espresso timing standard, and without a basket the measured water free flow is not the puck extraction flow.",
+      "grade": "DIRECT_ORIGINAL_MANUFACTURER_MANUAL_PAGES_AND_BRANDED_OPERATIONAL_GUIDE_VERIFIED; NOT_INDEPENDENT_TASTE_EVIDENCE",
+      "primary_sources": [
+        "https://slayerespresso.com/wp-content/uploads/2022/04/manual-espressoSG-v6.4-060721.pdf",
+        "https://slayerespresso.com/dialing-in-the-slayer-espresso/"
+      ],
+      "source_pages": [
+        16,
+        20,
+        21,
+        22
+      ],
+      "current_app": "At development f287cdb6e22d435e30e0efc806ebdd7e5aebfd1d: engine.js Git blob 853131c9c812e4a7c1b1eea3640fc2eb308b3ac4 and model.js f48dc8967e2c2f7038c9324fdabca4348f5cb12d; current model has temperature/slowFeed/basket toggles and style-specific taste engine, but no Slayer-specific needle-valve input or timed prebrew prior.",
+      "result": "MACHINE_SPECIFIC_OPERATION_CONFIRMED_SEPARATE_BRAND_GUIDE_DIFFERENCE_NOT_APP_POLICY",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-041-B",
+      "source": "ORG-05 original Markdown Git blob be455fe3c2dc8469c67c49bed7e9f539943ea463, lines 212-218; Slayer manufacturer manual v6.4 p21, corporate article Step 6a/b",
+      "claim": "Slayer manuals recommend extended prebrew/2-3g initial low-flow beverage for perceived sweetness and late reduced flow for fuller body, and its brand author suggests 2-5g and 40-60g/30s unimpeded valve setup. These are manufacturer/barista operational hypotheses, NOT randomized blinded sweetness/acidity/body changes, independently proven causal shot families, verified espresso quality gains, or transferable automatic numerical corrections. Water-flow restriction before the puck is distinct from slow feeding beans to the grinder.",
+      "grade": "FIRST_PARTY_REPORTED_SENSORY_ASSUMPTIONS_NOT_INDEPENDENT_CONTROLLED_SENSORY_STUDY; NEGATIVE_GENERALIZATION_CHECK",
+      "primary_sources": [
+        "https://slayerespresso.com/wp-content/uploads/2022/04/manual-espressoSG-v6.4-060721.pdf",
+        "https://slayerespresso.com/dialing-in-the-slayer-espresso/"
+      ],
+      "source_pages": [
+        21,
+        22
+      ],
+      "current_app": "engine.js 853131c9c812e4a7c1b1eea3640fc2eb308b3ac4: all-five-taste and style/feed-specific next shot decisions; model.js f48dc8967e2c2f7038c9324fdabca4348f5cb12d: advanced.slowFeed concerns grinder feed, not machine Pre-Brew.",
+      "result": "RESEARCH_ONLY_NO_NEW_PRESCRIPTION_NO_TASTE_TARGET_OR_CAPTURE_CHANGE",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
     }
   ],
   "policy_decisions_pending": [],
@@ -1718,6 +1770,7 @@
     "reason": "R455-039 docs-only upgrade of previously indexed iScience RDT paper to focused original-method/result verification; retains existing source count and no new app behavior."
   },
   "next_actions": [
+    "R455-041: Slayer original manual factory 40g/30s versus 2021 Slayer-brand author adaptable 40-60g/30s, first-party prebrew flavor hypotheses only. No new prebrew/TCT numeric recipe recommendation, no grinder slow-feed conflation, no owner approval sought without concrete behavior choice; other original citations and inaccessible Oct29 pack/S019 continue.",
     "R455-039: Harper/Bumbaugh/Hendon 2024 iScience original published methods/Figs 2,4,5 confirm roast-conditional pregrind wetting, static/retention, flow and TDS observations; no blind taste preference, no universal numeric recipe/water/slow-feed rule. Publisher original PDF bytes/full raw HTML still not hashed; remaining citations separately pending.",
     "R455-038: Decent official calibrated basket holes (smaller for smaller dose) verified as manufacturer design; its 2021/2025 waisted-basket comparison was preliminary and not blinded/re-dialed. Never derive automatic diameter-to-grind/taste priors without owner choice and controlled evidence.",
     "R455-036: Rancilio manufacturer supports F.08 OFF/up to six seconds for its own machine; marketing experience is not independent channeling/taste proof. No product capture or fixed PI target authorized.",
@@ -1733,18 +1786,18 @@
     "R455-023: Continue full citation review of nine originals, raw inaccessible October29 ZIP/S019 PDFs and exact-byte provenance of Choi/Kim full manuscripts; assess translated label UX only after specific defect. No #267 V2 coverage credit."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-039",
-    "base_development_sha": "16ef285c581a34ead36d15cb65958807ec5b2965",
-    "source_document": "ORG-08 original audit RDT claim vs published Harper/Bumbaugh/Hendon 2024 iScience original methods/figures/limitations",
-    "primary_source_id": "LIT-2024-RDT-ISCIENCE",
+    "id": "R455-041",
+    "base_development_sha": "f287cdb6e22d435e30e0efc806ebdd7e5aebfd1d",
+    "source_document": "ORG-05 original report Slayer low-flow profile lines 208-218 versus original Slayer SG v6.4 manual and Slayer on-brand field guide",
+    "primary_source_id": "MFR-SLAYER-SG-MANUAL-20261105",
     "claim_ids": [
-      "R455-EV-CIT-039-A",
-      "R455-EV-CIT-039-B"
+      "R455-EV-CIT-041-A",
+      "R455-EV-CIT-041-B"
     ],
-    "number_of_curated_sources": 44,
-    "total_evidence_checks": 95,
+    "number_of_curated_sources": 45,
+    "total_evidence_checks": 97,
     "authority": "OWNER_OPTION_B_RESEARCH_VERIFICATION_ONLY_NO_NUMERIC_OR_CAPTURE_POLICY_CHANGE",
-    "review_type": "FOCUSED_PRIMARY_PUBLISHER_SEARCH_INDEXED_FULL_TEXT_METHOD_RESULTS_CAPTIONS_AND_AUTHOR_ABSTRACT",
+    "review_type": "FOCUSED_ORIGINAL_PUBLISHER_PDF_VISUAL_PAGES_16_20_21_22_AND_FIRST_PARTY_GUIDE",
     "source_pages_hashed": false,
     "github267_literal_line_review_credit": 0,
     "production_deployed": false
@@ -1866,6 +1919,23 @@
       "approval_required_for_behavior_change": true,
       "implementation": "RESEARCH_ONLY_HOLD",
       "test_plan": "Docs-only approval/continuity exact-source CI for this evidence update. If a model is explicitly approved later: paired same-coffee/shots for equal and retuned grind with controls; all five tastes; style/feed/grinder calibration; no history mutation; offline/mobile/privacy and negative extrapolation tests.",
+      "release_queue": "NO_NEW_ITEM"
+    },
+    {
+      "id": "R455-PROP-041-SLAYER-PREBREW-TRANSFER",
+      "finding": "Slayer-specific timed/needle-valve prebrew guidance and manufacturer sweetness claims cannot be promoted into automatic cross-machine preinfusion-to-taste directions, universal 45-55s shot rule, or slow-feed grinder adjustments.",
+      "evidence": [
+        "R455-EV-CIT-041-A",
+        "R455-EV-CIT-041-B"
+      ],
+      "severity": "P3_RESEARCH_GENERALIZATION_RISK_NO_REPRODUCED_APP_BUG",
+      "user_benefit": "Keep user-specific recipe/five taste evidence trustworthy and avoid machine-specific inputs, nonportable pressure-flow targets and false scientific confidence.",
+      "current_locked": "Current Master Specification and Decision Ledger: all five sensory ratings, one truly controllable recommendation change, independent espresso styles including Turbo and Fast-Flow, recipe-specific timing, machine adjustability, separated grinder slow-feed; no numeric rule or new data capture without owner approval.",
+      "current_app": "Source f287cdb6e22d435e30e0efc806ebdd7e5aebfd1d; engine.js blob 853131c9c812e4a7c1b1eea3640fc2eb308b3ac4; model.js blob f48dc8967e2c2f7038c9324fdabca4348f5cb12d; no automatic prebrew model.",
+      "proposed_change": "SAFE research-only: preserve app behavior. OPTIONAL new model-specific prebrew/needle-valve capture or auto sweetness/profile advice requires separate owner decision, reproducible competing same-coffee/setup tests and independently validated sensory outcomes.",
+      "approval_required_for_behavior_change": true,
+      "implementation": "RESEARCH_ONLY_HOLD",
+      "test_plan": "For documentation-only delta run exact PR-head/merged-source governance. Any future approved runtime change: machine capability gate, style-specific timing, five sensory inputs, single-control, recorded shot/notes integrity, accessible/mobile/offline/privacy and negative cross-equipment tests.",
       "release_queue": "NO_NEW_ITEM"
     }
   ]
