@@ -3,7 +3,7 @@
   "issue": 267,
   "review_standard": "Independent post-pin new source line semantic review; separate from original frozen/pinned V2 denominator",
   "pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
-  "observed_development_commit": "65ed480470ebea40281a4d5b2f7a5d65fc18f714",
+  "observed_development_commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
   "receipt_references": [
     {
       "batch_id": "D2-001",
@@ -202,10 +202,36 @@
       "line_count": 27,
       "verified_absent_at_pin": true,
       "reviewed_live_commit": "a374fcf68115be70643453657386539fde688789"
+    },
+    {
+      "batch_id": "D2-017",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-017.json",
+      "path": "scripts/release/netlify-provider-readback.mjs",
+      "blob_sha": "cfb5cec936843012f957ad0437791e06cb906899",
+      "range": [
+        1,
+        22
+      ],
+      "line_count": 22,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5"
+    },
+    {
+      "batch_id": "D2-018",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-018.json",
+      "path": "tests/netlify-provider-readback.test.mjs",
+      "blob_sha": "45ec36011cc6acaea65ef9229328b909e2f0f5fd",
+      "range": [
+        1,
+        19
+      ],
+      "line_count": 19,
+      "verified_absent_at_pin": true,
+      "reviewed_live_commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5"
     }
   ],
-  "unique_source_lines_direct_reviewed": 446,
-  "fully_reviewed_new_source_files": 16,
+  "unique_source_lines_direct_reviewed": 487,
+  "fully_reviewed_new_source_files": 18,
   "nonoverlap": true,
   "changed_existing_pinned_paths": "PENDING",
   "new_sql_migrations": "PENDING",
@@ -228,7 +254,7 @@
       "subtract_phantom_records": 4
     }
   ],
-  "last_review_batch": "D2-016",
-  "last_review_source_commit": "a374fcf68115be70643453657386539fde688789",
-  "last_review_note": "Reproduced genuine false-green manifest MIME acceptance from exact old blob; current code/test changed and all 53 new physical lines independently semantically inspected; local exact Node22 test 3/3 PASS; CI pending. Original head approval failed stale-base ancestry; nonforce two-parent reconciliation preserves exact source blobs and concurrent #33."
+  "last_review_batch": "D2-018",
+  "last_review_source_commit": "b2c4add4463fc60222ca0ccf2d082bb06c3673b5",
+  "last_review_note": "D2-017/018: 41 exact original provider-predicate and unit-test physical lines, no independent human or new real provider QA. Prior confirmed read-only manifest false green fixed in PR #789; exact merged-source approval, Node22/lint/build, mobile-browser, cloud and no-publish rehearsal SUCCESS at b2c4add; PR-head SQL SUCCESS; original603 SKIPPED."
 }
