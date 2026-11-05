@@ -4818,6 +4818,28 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "NARROW SOURCE VERIFIED READY IN DEVELOPMENT ONLY, NOT DEPLOYED. #18 origin now tied to present selected farm; no product/other roaster assumptions; original frozen603 coffees/201 roasters/1197 captures, oracle/scorer and CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6 unchanged. Whole 603 current manual semantic certification not done (source probe manual_certified=0); #33 OPEN, other #33 residual IN_PROGRESS. #267 V2/#96 scopes preserved. No new deployment, actual account auth/device, production SQL/Edge/member/provider writes, spend or forced history."
+    },
+    {
+      "id": "DIC-Q-455-sweetness-legacy-date",
+      "issue": 455,
+      "title": "Ignore undated historical shots in same-coffee sweetness yield-direction comparisons",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "SOURCE REPRODUCED: comparableSweetnessYields() accepted empty or whitespace string prior timestamps because only typeof string and lexicographic ordering were checked; this could reverse a current sweeter-yield suggestion.",
+        "3 negative/positive imported real-module tests appended: undated shorter-yield prior must abstain, correctly dated prior remains comparable, undated current shot must not claim a chronological comparison; tests NOT EXECUTED at commit time.",
+        "Pending Node22 targeted/full risk-scoped tests and CI, browser/offline/accessibility as applicable, merged-source governance. No SKIPPED/queued test is counted PASS.",
+        "Initial PR-head approval workflow41957092337 actually FAILED in executed release-queue intake: scope_paths must contain deployable files only; regression test remains documented in tests but not listed as deployable queue path. Repaired queue and journal; new exact-head CI required."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Repaired PR-head exact applicable CI and merged-source verification not yet confirmed"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Safe, nonmutating evidence-eligibility guard only; all five taste inputs and original private notes, timestamps, recipes and history preserved. No numeric taste, style, grinder, yield, or Locked rule change. TESTING only. No deployment or production writes."
     }
   ],
   "history": [
