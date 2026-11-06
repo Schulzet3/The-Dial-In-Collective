@@ -145,6 +145,17 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
  const namedEstateGrowers=new Map();
  const releases=new Set(),decafEvidence=new Set();
  let decafEvidenceOverflow=false;
+ // A current selected coffee's exact H1 can itself identify the water
+ // decaffeination treatment (e.g., "Honduran Decaf | Swiss Water® Processed").
+ // Require a full-decaf identity and a complete named-method suffix after a
+ // product-title delimiter; never credit SEO, other coffees, navigation or
+ // a bare educational mention of Swiss Water. Multiple incompatible exact
+ // current methods are still reconciled and withheld by the caller.
+ if(decafOnlyCoffee(name)&&
+    /\bdecaf(?:feinated)?\b/iu.test(name)&&
+    /[|–—]\s*(?:Swiss|Mountain)[ -]?Water\s*[®™]?\s+Process(?:ed|ing)?\s*$/iu.test(name)&&
+    inferDecaffeinationMethod({name,selectedMethod:name})==='Water Process')
+  decafEvidence.add(name);
  const selectedTitleTier=String(name).match(/\s+[—–-]\s+(Ultra Light|Very Light|Light|Medium[- ]Light|Medium|Medium[- ]Dark|Dark)$/iu);
  if(selectedTitleTier)roasts.add(normalizeRoastLabel(selectedTitleTier[1]));
  // A single current Product 'Coffee roast' option is a product-specific fixed tier,
