@@ -17,13 +17,22 @@ test('render audit reuses only source-matched intact evidence, never stale or pa
       dom_truncated: false, dom_bytes: Buffer.byteLength(html),
       dom_sha256: crypto.createHash('sha256').update(html).digest('hex')};
     await fs.writeFile(path.join(dir, 'rendered-source.json'), JSON.stringify(data));
+    const digestReceipt = {...receipt, text_sha256: crypto.createHash('sha256').update(data.visible_text).digest('hex')};
     await fs.writeFile(path.join(dir, 'rendered.html'), html);
+    assert.equal(await isReusableRenderReceipt(digestReceipt, packet, dir), true);
     assert.equal(await isReusableRenderReceipt(receipt, packet, dir), true);
     assert.equal(await isReusableRenderReceipt({...receipt, case_id: 'other'}, packet, dir), false);
     assert.equal(await isReusableRenderReceipt({...receipt, source_url: 'https://other.example/'}, packet, dir), false);
     assert.equal(await isReusableRenderReceipt({...receipt, status: 'unreviewed'}, packet, dir), false);
     assert.equal(await isReusableRenderReceipt({...receipt, not_production_transport_acceptance: false}, packet, dir), false);
     assert.equal(await isReusableRenderReceipt({...receipt, text_characters: 100}, packet, dir), false);
+    // Newly captured text is hash-bound even when the DOM HTML is truncated.
+    await fs.writeFile(path.join(dir, 'rendered-source.json'), JSON.stringify({visible_text: 'banana'}));
+    assert.equal(await isReusableRenderReceipt(digestReceipt, packet, dir), false);
+    assert.equal(await isReusableRenderReceipt({...digestReceipt, dom_truncated: true}, packet, dir), false);
+    assert.equal(await isReusableRenderReceipt({...digestReceipt, text_sha256: 'invalid'}, packet, dir), false);
+    assert.equal(await isReusableRenderReceipt(receipt, packet, dir), true); // Legacy residual intentionally retained.
+    await fs.writeFile(path.join(dir, 'rendered-source.json'), JSON.stringify(data));
     await fs.writeFile(path.join(dir, 'rendered.html'), 'corrupt');
     assert.equal(await isReusableRenderReceipt(receipt, packet, dir), false);
     await fs.unlink(path.join(dir, 'rendered.html'));
