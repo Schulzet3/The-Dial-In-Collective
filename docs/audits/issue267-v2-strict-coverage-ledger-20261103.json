@@ -5,29 +5,29 @@
   "frozen": {
     "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
     "denominator": 579961,
-    "strict_validated_lines": 7585,
+    "strict_validated_lines": 7635,
     "first_unvalidated_manifest_file_index": 59,
     "first_unvalidated_path": "docs/DECISION_LEDGER.json",
-    "first_unvalidated_line": 2695,
+    "first_unvalidated_line": 2745,
     "legacy_v2_reported_count": 5451,
     "legacy_v2_reported_count_is_not_strict_validated": true
   },
   "pinned_current": {
     "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
     "denominator": 57913,
-    "strict_validated_lines": 9258,
+    "strict_validated_lines": 9318,
     "first_unvalidated_file_index": 58,
     "first_unvalidated_path": "scripts/audit/issue267-coverage-contract.mjs",
-    "first_unvalidated_line": 1,
+    "first_unvalidated_line": 61,
     "legacy_v2_reported_count": 6462,
     "legacy_v2_reported_count_is_not_strict_validated": true,
-    "strict_live_counterpart_checked_through_line": 75,
+    "strict_live_counterpart_checked_through_line": 60,
     "last_live_counterpart_checked": {
-      "path": "scripts/audit/issue161-full-source-review.mjs",
-      "commit": "ea4ae43db8ad5e41e3795dc9dc3cdbf8ed5a19a2",
-      "blob": "85ed9bfca50f05c587320286f5d6f67ae7c905c8",
+      "path": "scripts/audit/issue267-coverage-contract.mjs",
+      "commit": "75705da2e7ad9ca08d5c07833cfaaa743dfdcac4",
+      "blob": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
       "first_line": 1,
-      "last_line": 75,
+      "last_line": 60,
       "offset": 0
     }
   },
@@ -3348,12 +3348,32 @@
       "strict_pinned_delta": 75,
       "old_v2_additional_credit": 0,
       "verification": "135 individually AI-semantic numbered original lines, nine dimensions/live counterpart, no machine-only credit or human claim."
+    },
+    {
+      "batch": "S2-143",
+      "receipt": "docs/audits/issue267-v2-strict-batches/S2-143.json",
+      "frozen_file": "docs/DECISION_LEDGER.json",
+      "frozen_lines": [
+        2695,
+        2744
+      ],
+      "frozen_blob": "195c3e4de415afef4515a6291c399a1c9001b610",
+      "pinned_file": "scripts/audit/issue267-coverage-contract.mjs",
+      "pinned_lines": [
+        1,
+        60
+      ],
+      "pinned_blob": "1508b9c1efc444f452cf2544e7538dbf4753c70b",
+      "strict_frozen_delta": 50,
+      "strict_pinned_delta": 60,
+      "old_v2_additional_credit": 0,
+      "verification": "110 distinct original numbered direct AI semantic notes (9 dims), exact current matching blob counterpart, no independent human review or runtime claims."
     }
   ],
   "completion": "IN_PROGRESS",
   "test_limit": "S2-142 combines source-only original line review with targeted CI-scope code/test edit. Exact PR-head full tests and postmerge source-bound CI REQUIRED; no tests claimed yet, postpin semantic incomplete.",
-  "last_batch": "S2-142",
-  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-142.json",
+  "last_batch": "S2-143",
+  "last_receipt": "docs/audits/issue267-v2-strict-batches/S2-143.json",
   "complete": false,
   "accounting_reconciliation_20261105": {
     "scope": "NONCREDIT historical source-ledger reference repair",
@@ -3466,5 +3486,27 @@
       "first_frozen_workflow_reread_without_duplicate_credit": true,
       "live_code_drift_complete": false
     }
+  },
+  "accounting_reconciliation_20261106_s2_143": {
+    "source_pr": 769,
+    "old_head": "8652c8f23747b7b8d4b545ef00c9e8ae3ab21fc0",
+    "old_receipt_blob": "28cd5a374d3f8682cc3adbd6fe350da9c400cb8a",
+    "source_parent": "75705da2e7ad9ca08d5c07833cfaaa743dfdcac4",
+    "previous_ledger_blob": "e0384620e056a6b8c525673a201d39d652dc2cb9",
+    "validated_original_lines": {
+      "frozen": 50,
+      "pinned": 60
+    },
+    "prior_batches_preserved": 142,
+    "earlier_source_coverage_counted_twice": false,
+    "latest_after_reconciliation": {
+      "frozen": 7635,
+      "pinned": 9318
+    },
+    "after_S2_143_new_bounded_receipts": "S2-144 onward remain append-only, outside central totals until independently reconciled",
+    "post_pin_complete": false,
+    "full_audit_complete": false,
+    "ci": "PENDING_DOCS_ONLY",
+    "human_certification": false
   }
 }
