@@ -10,10 +10,10 @@
     {
       "id": "DIC-Q-33-original603-199-selected-description-literal-sensory",
       "issue": 33,
-      "pr": null,
+      "pr": 1011,
       "title": "Retain exact selected description caramel/honey/cookies with labeled Brazil Cerrado notes",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "4f8ba11cb1a307b0bad73b832272e05472d11062",
       "scope_paths": [
         "src/server/coffee-selected-description-sensory.mjs",
         "src/server/coffee-page-metadata.mjs"
@@ -21,15 +21,30 @@
       "tests": [
         "Before: exact selected official original603 #199 Brazil Cerrado Natural 12 Oz. source and parsed fields verified via GitHub guarded 42200712752 job127835009694; H1 matches; parser notes only Golden Raisin, Pecan, & Honey Grahams despite direct product Description notes of caramel, pecan, honey and cookies; source identity and original corpus unchanged.",
         "Same-commit bounded generic selected-description helper and positive/adversarial Node fixtures, Add Coffee preview/source review; must pass PR CI and fresh exact merged official proof before READY.",
-        "This row is TESTING only until independent source, CI, nonforce integration and post-merge verification are completed."
+        "This row is TESTING only until independent source, CI, nonforce integration and post-merge verification are completed.",
+        "Initial PR-head 42207188747: 1882 Node PASS / 1 FAIL / 0 SKIP, related-product negative fixture wrongly suppressed valid selected notes. Fixed in same-commit journal; later 42207493318: 1883 Node PASS / 0 FAIL / 0 SKIP but eslint unused index warned, so validate FAILED (not mislabeled PASS). Fixed index in same-commit journal.",
+        "Final exact PR-head bf20b935b75bf06bbaadba910a1098c572bc5543 validate42207831193 SUCCESS: Node 1883 PASS/0 FAIL/0 SKIP, lint/build successful; cloud/mobile42207831142, isolated SQL42207831120, approval42207831160, security42207831050, source archive42207831096 SUCCESS. Original frozen60342207831094 SKIPPED.",
+        "Code PR #1011 safely squash merged development 4f8ba11cb1a307b0bad73b832272e05472d11062, exactly five changed files and one commit atop previous development SHA 42f5d5fc; exact merged Node/lint/build42208097429 SUCCESS 1883/0/0, cloud/mobile42208097230 and approval42208097298 SUCCESS. No new production actions.",
+        "Exact merged guarded public current original603 #184/#193/#199 run42208097232/job127859670606 SUCCESS: all 3 official selected products FETCHED/PARSED; Add Coffee and Source Review 3/3. #199 H1 Brazil Cerrado Natural 12 Oz. raw HTML SHA256 076c9b6400235f97e051027d62a1422239aa97cd016694080ca473926e2c89ba, final canonical tasting_notes Golden Raisin, Pecan, Honey Grahams, caramel, honey, cookies, Medium-Light roast, Natural process and zero conflicts. #184/#193 previous facts intact. Independently downloaded private ZIP13497996265 hash 8c6bd9df79eb4dfef98b4c882af44f3c6960f6b9800028e5e0a058131bb47e2d and rehashed 3 raw HTML bytes against runner reports."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "PR-head changed-surface Node/lint/build and approval pending",
-        "Nonforce merge, exact merged CI and current official HTTPS #199 after-proof pending"
+      "ci_runs": [
+        42207188747,
+        42207493318,
+        42207831193,
+        42207831142,
+        42207831120,
+        42207831160,
+        42207831050,
+        42207831096,
+        42207831094,
+        42208097429,
+        42208097230,
+        42208097298,
+        42208097232
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "DEVELOPMENT ONLY. No publication. Original 603/201/1197, oracle/scorer/captures, unrelated queue states, Auth/member/offline #267/#96 unchanged."
+      "notes": "Narrow original603 #199 current selected sensory completeness independently VERIFIED READY in DEVELOPMENT ONLY as of November 6, 2026; receipt docs/audits/issue33-original603-199-selected-description-ready-20261106.json. Source H1/lot and independently rehashed actual current HTML verified. Original full 603 individual semantic certification remains IN_PROGRESS and issue #33 OPEN. No deploy, Netlify publication, SQL/Auth/Edge/member/provider writes or frozen corpus changes."
     },
     {
       "id": "DIC-Q-455-history-stale-make-current-guard",
