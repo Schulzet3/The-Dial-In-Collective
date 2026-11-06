@@ -112,12 +112,29 @@ export function lastRecipeContextShot(shots,coffeeId,recipe,version){
  return latest;
 }
 
-export function chips(t){return `<div class="taste-chips">${SCALES.map(sc=>`<span class="taste-chip severity-${tasteSeverity(sc,t?.[sc.key])??4}">${e(sc.label==='Astringency / Dryness'?'Dryness':sc.label)}${sc.ideal===3&&t?.[sc.key]!==3?`: ${e(tasteLabel(sc,t?.[sc.key]))}`:''}</span>`).join('')}</div>`;}
-export function radar(t) {
+// Legacy or partially rated shots must not display absent taste scores as
+// red failures in chips or ideal-green data points on the compass.
+const hasRecordedTaste=value=>Number.isInteger(value)&&value>=1&&value<=5;
+export function chips(t){
+ return `<div class="taste-chips">${SCALES.map(sc=>{
+  const value=t?.[sc.key],rated=hasRecordedTaste(value);
+  const label=sc.label==='Astringency / Dryness'?'Dryness':sc.label;
+  const extra=!rated?': Not rated':sc.ideal===3&&value!==3?`: ${tasteLabel(sc,value)}`:'';
+  return `<span class="taste-chip ${rated?`severity-${tasteSeverity(sc,value)}`:'is-unrated'}">${e(label)}${e(extra)}</span>`;
+ }).join('')}</div>`;
+}
+export function radar(t){
  const cx=140,cy=125,r=80,pt=(i,n)=>{const a=(i*72-90)*Math.PI/180;return [cx+Math.cos(a)*n,cy+Math.sin(a)*n];};
  const poly=n=>SCALES.map((_,i)=>pt(i,n).join(',')).join(' ');
- const dots=SCALES.map((sc,i)=>{const severity=tasteSeverity(sc,t?.[sc.key])??0;const p=pt(i,16+severity*16);return {p,severity};});
- return `<svg class="radar" viewBox="0 0 280 250" role="img" aria-label="Taste compass: ${SCALES.map(sc=>`${sc.label} ${tasteLabel(sc,t?.[sc.key])}`).join(', ')}"><title>Taste compass. Green near the center means ideal for your taste.</title>${[.2,.4,.6,.8,1].map(k=>`<polygon points="${poly(r*k)}" class="radar-grid"/>`).join('')}${SCALES.map((sc,i)=>{const [x,y]=pt(i,r),[tx,ty]=pt(i,r+20);return `<path d="M${cx} ${cy}L${x} ${y}" class="radar-grid"/><text x="${tx}" y="${ty}" text-anchor="middle" dominant-baseline="middle">${e(sc.key==='astringency'?'Dryness':sc.label)}</text>`;}).join('')}<polygon points="${dots.map(d=>d.p.join(',')).join(' ')}" class="radar-result ${SCALES.every(sc=>t?.[sc.key]===sc.ideal)?'is-ideal':''}"/>${dots.map(d=>`<circle cx="${d.p[0]}" cy="${d.p[1]}" r="4.5" class="dot severity-${d.severity}"/>`).join('')}</svg>`;
+ const complete=SCALES.every(sc=>hasRecordedTaste(t?.[sc.key]));
+ const dots=SCALES.map((sc,i)=>{
+  const value=t?.[sc.key];if(!hasRecordedTaste(value))return null;
+  const severity=tasteSeverity(sc,value),p=pt(i,16+severity*16);
+  return {p,severity};
+ }).filter(Boolean);
+ const names=SCALES.map(sc=>`${sc.label} ${hasRecordedTaste(t?.[sc.key])?tasteLabel(sc,t[sc.key]):'Not rated'}`).join(', ');
+ const outline=complete?`<polygon points="${dots.map(d=>d.p.join(',')).join(' ')}" class="radar-result ${SCALES.every(sc=>t[sc.key]===sc.ideal)?'is-ideal':''}"/>`:'';
+ return `<svg class="radar" viewBox="0 0 280 250" role="img" aria-label="Taste compass: ${e(names)}"><title>Taste compass. Green near the center means ideal for your taste. Unrated tastes are not plotted.</title>${[.2,.4,.6,.8,1].map(k=>`<polygon points="${poly(r*k)}" class="radar-grid"/>`).join('')}${SCALES.map((sc,i)=>{const [x,y]=pt(i,r),[tx,ty]=pt(i,r+20);return `<path d="M${cx} ${cy}L${x} ${y}" class="radar-grid"/><text x="${tx}" y="${ty}" text-anchor="middle" dominant-baseline="middle">${e(sc.key==='astringency'?'Dryness':sc.label)}</text>`;}).join('')}${outline}${dots.map(d=>`<circle cx="${d.p[0]}" cy="${d.p[1]}" r="4.5" class="dot severity-${d.severity}"/>`).join('')}</svg>`;
 }
 export function scales(t={}) {
  return `<fieldset class="sensory"><legend>How did it taste?</legend>${SCALES.map(sc=>`<div class="scale" data-scale="${sc.key}"><div class="scale-top"><span>${e(sc.label)}</span><output>${e(tasteLabel(sc,t[sc.key]))}</output></div><div class="scale-control"><small>${e(sc.low)}</small><div role="group" aria-label="${e(sc.label)}">${(sc.reverse?[5,4,3,2,1]:[1,2,3,4,5]).map(n=>`<button type="button" class="scale-button severity-${tasteSeverity(sc,n)} ${t[sc.key]===n?'chosen':''}" data-action="rate" data-key="${sc.key}" data-value="${n}" aria-label="${e(sc.label)}: ${e(tasteLabel(sc,n))}" aria-pressed="${t[sc.key]===n}"><span>${t[sc.key]===n?'\u2713':''}</span></button>`).join('')}</div><small>${e(sc.high)}</small></div><p>${e(sc.hint)}</p></div>`).join('')}</fieldset>`;
