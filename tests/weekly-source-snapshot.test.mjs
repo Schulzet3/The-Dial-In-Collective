@@ -19,7 +19,19 @@ function check(source){
  assert.match(source,/cron: '0 8 \* \* 0'/);
  assert.match(source,/permissions:\n  contents: read\n/);
  assert.doesNotMatch(source,/\bwrite\b|secrets\.|^  push:|^  pull_request:/m);
- for(const command of ['npm test','npm run lint','npm run build:cloud','isolated-sql-regression.sh','isolated-signed-http-regression.sh','isolated-backup-snapshot-regression.sh','cloud_owner_qa.py','admin_invitation_qa.py','pwa_offline_qa.py'])assert.ok(source.includes(command),'lost regression '+command);
+ const requiredCommands=[
+  'npm test',
+  'npm run lint',
+  'npm run build:cloud',
+  'bash scripts/audit/isolated-sql-regression.sh',
+  'bash scripts/audit/isolated-signed-http-regression.sh',
+  'bash scripts/audit/isolated-backup-snapshot-regression.sh',
+  'python tests/browser/cloud_owner_qa.py',
+  'python tests/browser/admin_invitation_qa.py',
+  'python tests/browser/pwa_offline_qa.py'
+ ];
+ const activeRuns=source.split('\n').map(line=>line.trim()).filter(line=>line.startsWith('- run: '));
+ for(const command of requiredCommands)assert.ok(activeRuns.includes('- run: '+command),'lost regression '+command);
 }
 test('weekly suites share one immutable source and retain schedule/read-only boundaries',()=>check(workflow));
 test('one independently resolved moving branch fails',()=>assert.throws(()=>check(workflow.replace('ref: ${{ needs.resolve-source.outputs.sha }}','ref: development/backend-foundation')),/moving branch/));
@@ -27,3 +39,8 @@ test('missing source dependency fails',()=>assert.throws(()=>check(workflow.repl
 test('broken source output binding fails',()=>assert.throws(()=>check(workflow.replace('steps.source.outputs.sha','steps.wrong.outputs.sha'))));
 test('permission escalation fails',()=>assert.throws(()=>check(workflow.replace('contents: read','contents: write'))));
 test('lost offline coverage fails',()=>assert.throws(()=>check(workflow.replace('pwa_offline_qa.py','removed.py')),/lost regression/));
+test('comment-only weekly regression command is rejected',()=>{
+ const changed=workflow.replace('      - run: npm run lint','      # - run: npm run lint');
+ assert.notEqual(changed,workflow);
+ assert.throws(()=>check(changed),/lost regression npm run lint/);
+});
