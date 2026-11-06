@@ -86,7 +86,7 @@ test('#455 history does not call incomplete or nonideal archived taste a Dialed 
   const archived={...sampleShot,tasteScales,notes:'Original private historical note'};
   const original=structuredClone(archived);
   const html=shotCard(archived,{expanded:true,activeVersionId:'version'});
-  assert.doesNotMatch(html,/<span class="status-badge">Dialed In<\\/span>/);
+  assert.doesNotMatch(html,/<span class="status-badge">Dialed In/);
   assert.doesNotMatch(html,/data-action="make-current"/);
   assert.match(html,/data-action="edit"/);
   assert.match(html,/Original private historical note/);
@@ -94,17 +94,17 @@ test('#455 history does not call incomplete or nonideal archived taste a Dialed 
  }
  const unflagged={...sampleShot,tasteScales:ideal,dialedIn:false};
  const html=shotCard(unflagged,{expanded:true,activeVersionId:'version'});
- assert.doesNotMatch(html,/<span class="status-badge">Dialed In<\\/span>/);
+ assert.doesNotMatch(html,/<span class="status-badge">Dialed In/);
  assert.doesNotMatch(html,/data-action="make-current"/);
 });
 
 test('#455 genuine five-green shot keeps Make Current for its version, never pending or other-version',()=>{
  const record=structuredClone(sampleShot);
  const same=shotCard(record,{expanded:true,activeVersionId:'version'});
- assert.match(same,/<span class="status-badge">Dialed In<\\/span>/);
+ assert.match(same,/<span class="status-badge">Dialed In/);
  assert.match(same,/data-action="make-current"/);
  const otherVersion=shotCard(record,{expanded:true,activeVersionId:'other-version'});
- assert.match(otherVersion,/<span class="status-badge">Dialed In<\\/span>/);
+ assert.match(otherVersion,/<span class="status-badge">Dialed In/);
  assert.doesNotMatch(otherVersion,/data-action="make-current"/);
  const pending=shotCard({...record,cloudPending:true},{expanded:true,activeVersionId:'version'});
  assert.match(pending,/Pending Sync/);
