@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "kind": "ISSUE33_ORIGINAL603_CURRENT_SELECTED_OFFICIAL_SOURCE_INDEPENDENT_ARTIFACT_REVIEW",
+  "issue": 33,
+  "date_utc": "2026-11-06",
+  "scope": "DEVELOPMENT_ONLY; exact three current selected official product pages; not whole-603 manual semantic certification",
+  "source": {
+    "before_sha": "4bd7d79ecf4b075c3a8d798f38def260decbfc97",
+    "pr": 1112,
+    "pr_head": "81ca67e17fb365b6a9224fbe635c8e5000770de4",
+    "merged_sha": "5a770d5d277556253b3dfc32ae78e8e3c2ac97dd",
+    "merged_tree": "a77ebc8755e5bf0394359587a753c257f150ddb8",
+    "approval_run": 42310101162,
+    "source_run": 42310101165,
+    "source_job": 128209120138,
+    "source_job_conclusion": "success",
+    "artifact_id": 13548421261,
+    "artifact_name": "dic33-original603-focused-42310101165",
+    "artifact_zip_sha256": "995fef3c78c6334b37934117c6c57201862be17f44e7efddb35e76467d7c3aac",
+    "artifact_digest_matches_github_metadata": true,
+    "runner_json_sha256": "124998dd31fa0b2c3a53e6f8c4bb257bf49dbabcec1cb470476ff3beaee24b8f",
+    "capture_raw_bytes_independently_rehashed": true
+  },
+  "original_frozen": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "adjudication_csv_git_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "csv_oracle_scorer_captures_untouched": true
+  },
+  "ci": {
+    "pr_head": {
+      "node_lint_build": 42308781536,
+      "cloud_mobile_browser": 42308781610,
+      "isolated_sql": 42308781598,
+      "approval": 42308781557,
+      "conclusion": "success",
+      "cloud_targeted_tests": "NOT_APPLICABLE"
+    },
+    "merged": {
+      "approval": 42310101162,
+      "official_source": 42310101165,
+      "conclusion": "success"
+    },
+    "original_frozen603": "SKIPPED_NOT_A_PASS"
+  },
+  "checks": {
+    "attempted": 3,
+    "fetched": 3,
+    "parsed": 3,
+    "add_coffee_rendered": 3,
+    "source_review_rendered": 3,
+    "actual_raw_html_hashed": 3,
+    "manual_whole_coffee_certified": 0,
+    "generic_parser_defects_found": 0,
+    "new_ready_queue_items": 0,
+    "issue_status": "OPEN"
+  },
+  "cases": [
+    {
+      "number": 131,
+      "name": "Mexico Veracruz – Finca La Laja",
+      "url": "https://frontsidecoffee.com/products/mexican-veracruz",
+      "selected_h1": [
+        "Mexico Veracruz – Finca La Laja",
+        ""
+      ],
+      "html_bytes": 308980,
+      "html_sha256": "0384018045ea60b6a60e6703e0257794ea792f06b7881dad317a48841bf824fc",
+      "parser_ok": true,
+      "add_coffee_rendered": true,
+      "source_review_rendered": true,
+      "conflicts": [],
+      "verified_fields": {
+        "name": "Mexico Veracruz – Finca La Laja",
+        "roaster": "Frontside Coffee Roasters",
+        "roast_level": "Medium",
+        "origin": "Tlaltetela, Veracruz, Mexico",
+        "producer": "Milo Sampieri & Family, Finca La Laja",
+        "process": "Honey",
+        "process_source_literal": "Yellow honey",
+        "variety": "caturra, gárnica",
+        "elevation_m": "1250-1300 masl",
+        "tasting_notes": "honey dew melon, cashew, sweet bread",
+        "release_label": "Limited offering"
+      },
+      "pre_run_correction": "Earlier unbound provisional report of a truncated H1, 1130–1250m alternate altitude and milk chocolate/stone fruit/cane sugar was disproven by exact raw HTML; none appears in current hash-bound source. No same-page elevation contradiction.",
+      "status": "SOURCE_BOUND_FIELD_REVIEW_VERIFIED"
+    },
+    {
+      "number": 132,
+      "name": "Sumatra Mandheling",
+      "url": "https://frontsidecoffee.com/products/sumatra-lintong",
+      "selected_h1": [
+        "Sumatra Mandheling",
+        ""
+      ],
+      "html_bytes": 325552,
+      "html_sha256": "1d2b8bd846b53d41183dc7042bbe3a67f6cba320147b18e1fcdb556a7d4af7e5",
+      "parser_ok": true,
+      "add_coffee_rendered": true,
+      "source_review_rendered": true,
+      "conflicts": [],
+      "verified_fields": {
+        "name": "Sumatra Mandheling",
+        "origin": "Northern Sumatra, Indonesia",
+        "producer": "Multiple Smallholder Farms",
+        "process": "Other/Unknown",
+        "process_source_literal": "Giling Basah (Wet Hulled), greenhouse sun-dried",
+        "variety": "Ateng, Garundang, Catimore",
+        "elevation_m": "1,000–1,800 meters",
+        "roast_level": "Dark",
+        "tasting_notes": "Dark Chocolate, Bourbon, Forest Floor"
+      },
+      "disposition": "Coarse approved taxonomy lacks Wet Hulled; exact process literal retained in typed source facts, not falsely promoted to Washed/Honey.",
+      "status": "SOURCE_BOUND_FIELD_REVIEW_WITH_TAXONOMY_QUALIFICATION"
+    },
+    {
+      "number": 140,
+      "name": "Ethiopia",
+      "url": "https://grindinggearscoffee.com/products/ethiopia",
+      "selected_h1": [
+        "Ethiopia"
+      ],
+      "html_bytes": 360724,
+      "html_sha256": "e4afc709526f48912fc71032d95b7271e7be98e1f8d4ef2591054095c2ae85f3",
+      "parser_ok": true,
+      "add_coffee_rendered": true,
+      "source_review_rendered": true,
+      "conflicts": [
+        "tasting_notes"
+      ],
+      "verified_fields": {
+        "name": "Ethiopia",
+        "roaster": "Grinding Gears Coffee",
+        "roast_level": "Medium-Light",
+        "origin": "Yirgacheffe, Ethiopia, Gedeo",
+        "elevation_m": "2,200 – 2,300 meters above sea level",
+        "process": "Natural",
+        "variety": "Ethiopian Heirloom",
+        "producer": "Mengeche Derso",
+        "tasting_notes": null
+      },
+      "competing_selected_tasting_notes": [
+        "Raspberry, Cane Sugar, Lemon Zest",
+        "Ripe Berries, Florals, Sugarcane"
+      ],
+      "disposition": "Two distinct selected labeled tasting-note sets; parser preserved conflict and withheld canonical field rather than combine them.",
+      "status": "SOURCE_CONFLICT_REVIEW_REQUIRED"
+    }
+  ],
+  "guardrails": [
+    "No Netlify publication or production SQL/Edge/Auth/provider/member writes",
+    "No new accounts, paid services, secrets or forced history",
+    "No whole-603 individual semantic certification from inventory or runner replay",
+    "No new code fix without source-reproduced generic defect",
+    "Preserve all prior READY/DEPLOYED queue entries"
+  ],
+  "next_step": "Choose disjoint unresolved original603 current selected official source or reproduce a generic parser defect; on any fix add positive/negative regressions and exact-source CI. #33 stays OPEN."
+}
