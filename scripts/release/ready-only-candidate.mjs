@@ -134,9 +134,14 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
    // feature merely because its status changed after staging.
    const original=queue.items.find(i=>i.id===item.id);
    const previouslyUnready=original&&['IN_PROGRESS','TESTING','BLOCKED'].includes(original.state);
+   // An independently READY item may already exist at staging but is NOT in
+   // this owner's selected batch. Never require it to be published, and never
+   // let its source in unless the ENTIRE scoped file set is restored to the
+   // published blobs. Reject any mutation of its frozen READY receipt.
+   const frozenUnselectedReady=original?.state==='READY'&&JSON.stringify(original)===JSON.stringify(item);
    const scoped=Array.isArray(item.scope_paths)?item.scope_paths:[];
    let fullyExcluded=false;
-   if(previouslyUnready&&scoped.length>0&&equal(scoped,original.scope_paths||[])){
+   if((previouslyUnready||frozenUnselectedReady)&&scoped.length>0&&equal(scoped,original.scope_paths||[])){
     try{
      fullyExcluded=scoped.every(path=>
       manifest.restored_to_published_paths?.includes(path)&&
