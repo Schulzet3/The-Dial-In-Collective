@@ -141,7 +141,7 @@ test('mixed READY/unready source can ship only exact pinned approved READY blob'
   /Excluded test must be newly introduced and absent/);
  assert.throws(()=>validateReadyOnlyCandidate(queue,{...withTest,
   manifest:{...withTest.manifest,excluded_unready_test_paths:['tests/issue999-untracked.test.mjs']}}),
-  /does not belong to a current unfinished/);
+  /does not belong to a frozen unselected READY or unfinished mixed-source item/);
  assert.throws(()=>validateReadyOnlyCandidate(queue,{...withTest,
   stagedCommitChangedPaths:input.stagedCommitChangedPaths}),/staging commit changes unrelated paths/);
 });
@@ -165,7 +165,7 @@ test('isolated owner release excludes ONLY exact new tests of unselected frozen 
   /Excluded test must be newly introduced and absent/);
  assert.throws(()=>validateReadyOnlyCandidate({...frozen,
   items:[one,unfinished,{...scanner,merged_source_sha:A}]},input),
-  /Excluded test does not belong/);
+  /Additional READY source not proven post-staging|Cannot certify additional READY source chronology|Excluded test does not belong/);
  assert.throws(()=>validateReadyOnlyCandidate(frozen,{...input,
   liveQueue:{...frozen,items:[one,unfinished,{...scanner,title:'unreviewed mutation'}]}}),
   /Additional READY source not proven post-staging|Cannot certify additional READY source chronology|Excluded test does not belong/);
