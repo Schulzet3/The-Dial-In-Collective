@@ -129,7 +129,9 @@ export function translateGrind(sh,v) {
  return round(v.grinderMin+pos*(v.grinderMax-v.grinderMin));
 }
 export function grindGuidance(s,c,style,basket,feed,familyId=null) {
- const v=activeVersion(s),qual=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn&&sh.style===style&&sh.feedMode===feed&&hardwareMatch(sh,v)&&finite(sh.grindSetting));
+ // A legacy success flag alone is not evidence of five actually ideal ratings.
+ const validSuccess=sh=>sh.dialedIn===true&&isDialed(sh.tasteScales);
+ const v=activeVersion(s),qual=s.shots.filter(sh=>!sh.hidden&&validSuccess(sh)&&sh.style===style&&sh.feedMode===feed&&hardwareMatch(sh,v)&&finite(sh.grindSetting));
  const current=qual.filter(sh=>sh.calibrationId===v.calibrationId),same=current.filter(sh=>sh.coffeeId===c.id&&(!familyId||sh.familyId===familyId));
  const basketHits=same.filter(sh=>sh.basketId===basket.id);
  if(basketHits.length)return {value:round(quantile(basketHits.map(sh=>sh.grindSetting),.5)),source:'Your successful setting',proven:true};
@@ -170,7 +172,7 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
   const span=v.grinderMax-v.grinderMin;
   const paired=new Map();
   for(const sh of s.shots){
-   if(sh.hidden||!sh.dialedIn||sh.setupVersionId!==v.id||
+   if(sh.hidden||!validSuccess(sh)||sh.setupVersionId!==v.id||
       sh.calibrationId!==v.calibrationId||sh.style!==style||
       sh.basketId!==basket.id||!finite(sh.grindSetting)||
       !['standard','slow'].includes(sh.feedMode))continue;
@@ -181,7 +183,7 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
    .map(x=>quantile(x.standard,.5)-quantile(x.slow,.5))
    .filter(x=>x>=.1&&x<=span);
   const shift=gaps.length?quantile(gaps,.5):span*.4;
-  const standard=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn&&
+  const standard=s.shots.filter(sh=>!sh.hidden&&validSuccess(sh)&&
    sh.setupVersionId===v.id&&sh.calibrationId===v.calibrationId&&
    sh.coffeeId===c.id&&sh.style===style&&sh.basketId===basket.id&&
    sh.feedMode==='standard'&&finite(sh.grindSetting));
