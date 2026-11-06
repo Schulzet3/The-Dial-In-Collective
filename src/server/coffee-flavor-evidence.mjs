@@ -434,6 +434,25 @@ function primaryCurrentFlavor(sentence,clean){
  return match?shortFlavorList(match[1],clean,{allowSingle:true}):'';
 }
 function coordinatedFlavorSentence(sentence,blockText,clean){
+ // A current product can coordinate a printed flavour with an independently
+ // printed sensory finish in the SAME statement. A following serving suggestion
+ // is not an alternate flavor; disallow any conditional/prepared/milk claim
+ // within the assertion, or a substantive later sensory continuation.
+ const linked=sentence.match(/\bwith\s+(?:a|an)\s+([^.!?;,]{2,90}?)\s+flavou?r,\s+and\s+(?:a|an)\s+([^.!?;,]{2,90}?\bfinish)\b(?=\s+that\s+is\s+perfect\s+for\b|[.!?]?$)/i);
+ if(linked){
+  const before=sentence.slice(0,linked.index),after=sentence.slice(linked.index+linked[0].length).trim();
+  const safeServed=after===''||/^[.!?]$/.test(after)||
+   (/^that\s+is\s+perfect\s+for\s+[^.!?]{2,100}[.!?]?$/i.test(after)&&
+    !/\b(?:milk|creamer|syrup|added|adding|mixed|prepared|served|brewed|steeped|diluted|cooled|heated|warmed|cinnamon|chocolate|caramel|nutty)\b/i.test(after));
+  if(safeServed&&!CONDITIONAL_FLAVOR.test(before+' '+linked[0])&&
+   !PREPARATION_QUALIFIED_FLAVOR.test(before+' '+linked[0])&&
+   !NONCURRENT_COFFEE_PROSE.test(before)&&
+   SENSORY_ROLE.test(linked[1])&&SENSORY_ROLE.test(linked[2])){
+    const first=shortFlavorList(linked[1],clean,{allowSingle:true});
+    const finish=shortFlavorList(linked[2],clean,{allowSingle:true});
+    if(first&&finish)return shortFlavorList(first+', '+finish,clean,{allowSingle:true});
+  }
+ }
  if(sentence.length>700||CONDITIONAL_FLAVOR.test(sentence)||/\b(?:with\s+milk|previously|formerly|historically|(?:last|previous)\s+season)\b/i.test(sentence))return '';
  const combine=parts=>{
   const notes=parts.map(value=>shortFlavorList(value.trim(),clean,{allowSingle:true}));
