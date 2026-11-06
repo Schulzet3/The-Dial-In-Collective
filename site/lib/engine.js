@@ -605,7 +605,7 @@ export function editShot(s,id,input) {
 }
 export function hideShot(s,id) {const sh=s.shots.find(x=>x.id===id);if(!sh)return;sh.hidden=true;sh.hiddenAt=now();logAudit(s,'shot.hidden',{shotId:id,retainQualifyingContribution:sh.dialedIn});}
 export function makeCurrent(s,shotId) {
- const sh=s.shots.find(x=>x.id===shotId);if(!sh?.dialedIn||sh.hidden)throw new Error('Choose a visible all-green shot.');
+ const sh=s.shots.find(x=>x.id===shotId);if(sh?.dialedIn!==true||!isDialed(sh.tasteScales)||sh.hidden)throw new Error('Choose a visible all-green shot.');
  if(sh.setupVersionId!==activeVersion(s).id)throw new Error('This is a reference from another setup. Log a successful shot here first.');
  const p=ensureCoffeeState(s,sh.coffeeId);p.currentFamilies[sh.style]=sh.familyId;p.favoriteShots[sh.familyId]=sh.id;p.style=sh.style;
  logAudit(s,'recipe.preferred',{coffeeId:sh.coffeeId,familyId:sh.familyId,shotId});
