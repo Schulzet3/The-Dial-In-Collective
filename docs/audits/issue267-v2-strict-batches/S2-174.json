@@ -1,0 +1,1579 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch_id": "S2-174",
+  "date_utc": "2026-11-06",
+  "track": "FROZEN_HISTORICAL_STRICT_DIRECT_AI_REVIEW",
+  "reviewer": "AI source review, not independent human",
+  "source": {
+    "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+    "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+    "file_index": 60,
+    "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+    "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+    "range": [
+      75,
+      149
+    ],
+    "count": 75,
+    "original_file_lines": 149,
+    "file_eof_reached": true
+  },
+  "live_current": {
+    "observed_development_sha": "678940669055cc278c667bb5c1f4e13920a7ad1b",
+    "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+    "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+    "range": [
+      75,
+      149
+    ],
+    "byte_exact": 75
+  },
+  "previous": {
+    "batch": "S2-173",
+    "same_file_range": [
+      1,
+      74
+    ],
+    "no_overlap": true
+  },
+  "next_original": {
+    "file_index": 61,
+    "path": "docs/DECISION_LEDGER_2026_10_16_DAILY_BUDGET.json",
+    "blob_sha": "b2e5c623df319a4d509ad11832f8281ab3ca0b0c",
+    "line": 1,
+    "total_lines": 20
+  },
+  "strict_coverage_accounting": {
+    "new_unique_frozen": 75,
+    "new_unique_pinned": 0,
+    "central_ledger_increment": 0,
+    "reason": "PR769 remains open and owns central strict CAS, no duplicate credit."
+  },
+  "findings": [
+    {
+      "id": "S2-174-ONE-TIME-RELEASE",
+      "line": 121,
+      "observation": "Oct16 publication grant was single-use and consumed; no automatic future publication.",
+      "disposition": "Retain historic source, follow #417/#457."
+    },
+    {
+      "id": "S2-174-SSO",
+      "lines": [
+        125,
+        138,
+        139
+      ],
+      "observation": "Older SSO-preserve clause was narrowed for production visitor SSO; Supabase beta/Auth and RLS still mandatory.",
+      "disposition": "No provider changes, #96 owns current Auth."
+    },
+    {
+      "id": "S2-174-EDUCATION",
+      "line": 95,
+      "observation": "Tutorial medium and placement were Open in archived 2026-10-14 decisions.",
+      "disposition": "Check later owner choice before implementing."
+    }
+  ],
+  "line_records": [
+    {
+      "line": 75,
+      "source_text": "      \"integrity\": \"First submitted spelling retained globally; no older canonical changed merely because a later user spelled a roaster/coffee differently. Protect different harvests, source variants, producer/origin conflicts, account isolation and all shot/family relationships. Explicit stable-id confirmation is allowed only for compatible Pending-to-canonical matches.\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Protect first canonical spelling and stable coffee IDs",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Fuzzy merges could overwrite older member histories",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 75,
+        "byte_exact": true
+      },
+      "testability": "Test roaster and crop variants",
+      "improvement": "Preserve IDs",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 76,
+      "source_text": "      \"operational\": \"No service subscription required, no AI calls; source workers limited to curated official HTTPS product URLs, JWT authorization, manual redirect rejection, bounded HTML and rate limits. GitHub/Supabase remain source of truth while Netlify credit-paused.\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Require curated HTTPS URLs, JWT, rate limits, no AI",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Untrusted URLs risk SSRF",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 76,
+        "byte_exact": true
+      },
+      "testability": "Test redirects and unauthorized requests",
+      "improvement": "Keep #33 guards",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 77,
+      "source_text": "      \"implementation_status\": \"Core Supabase auto catalog and source worker target applied; real owner's four coffee submissions approved; Edge function and browser CI integration under test, Netlify intentionally unpublished.\"",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Record old Supabase and Edge state with browser testing underway",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Old status not current deployment proof",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 77,
+        "byte_exact": true
+      },
+      "testability": "Check release queue",
+      "improvement": "No current PASS",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 78,
+      "source_text": "    },",
+      "classification": "direct-read-JSON-syntax",
+      "behavior": "Close coffee approval object",
+      "quality": "Necessary structural delimiter, directly read original line",
+      "risk": "Syntax required",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 78,
+        "byte_exact": true
+      },
+      "testability": "Parse JSON",
+      "improvement": "Retain",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 79,
+      "source_text": "    {",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Separate coffee and domain objects",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Comma required",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 79,
+        "byte_exact": true
+      },
+      "testability": "Parse JSON",
+      "improvement": "Retain",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 80,
+      "source_text": "      \"id\": \"DOMAIN-20261014-01\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Identify domain policy key",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "ID is provenance not DNS proof",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 80,
+        "byte_exact": true
+      },
+      "testability": "Compare active Spec",
+      "improvement": "Keep",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 81,
+      "source_text": "      \"status\": \"Locked\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Mark domain choice Locked",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Later overrides may exist",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 81,
+        "byte_exact": true
+      },
+      "testability": "Check latest domain decision",
+      "improvement": "Retain scope",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 82,
+      "source_text": "      \"topic\": \"App hostname and future homepage\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Title hostname and homepage policy",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Title is not routing evidence",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 82,
+        "byte_exact": true
+      },
+      "testability": "Inspect decision",
+      "improvement": "Keep",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 83,
+      "source_text": "      \"owner_approval_date\": \"2026-10-14\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Record October14 domain date",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Provider states can drift",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 83,
+        "byte_exact": true
+      },
+      "testability": "Fresh read when relevant",
+      "improvement": "Keep date",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 84,
+      "source_text": "      \"decision\": \"Use https://app.dialincollective.com for the application and admin portal on the existing protected Netlify site. Reserve dialincollective.com for a future homepage; until ready, redirect the apex to the app only after verified TLS, login callbacks, and SSO.\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Set application subdomain and reserve apex homepage",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Wrong redirect breaks OAuth callbacks",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 84,
+        "byte_exact": true
+      },
+      "testability": "Test HTTPS and login callback",
+      "improvement": "Preserve hosts",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 85,
+      "source_text": "      \"constraints\": \"No new site, purchase, extra production deployment, weakening of auth/SSO/beta restrictions, or changes to the independent auth.dialincollective.com email subdomain. DNS, HTTPS and Supabase redirects must be verified separately.\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Ban new site, purchase, weakened beta or Auth",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Production team SSO has later scoped exception",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 85,
+        "byte_exact": true
+      },
+      "testability": "Compare visitor SSO",
+      "improvement": "Keep beta/RLS",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 86,
+      "source_text": "      \"implementation_status\": \"Verified 2026-10-15: app.dialincollective.com is the existing Netlify project's primary domain with Let's Encrypt HTTPS; owner opened app and completed real existing-account sign-in; Supabase Site URL and Redirect allowlist updated by owner while preserving netlify.app fallback; Cloudflare apex dialincollective.com redirects to app domain; existing Resend Auth sender and Cloudflare support forwarding were each confirmed via real email receipts. Existing Netlify team SSO remains enabled. Updated cloud UI and outside-user login are still awaiting a single controlled release and real nonadmin acceptance.\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Document dated owner domain and TLS receipts",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "October15 screenshots not today’s readback",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 86,
+        "byte_exact": true
+      },
+      "testability": "Verify live only on relevant change",
+      "improvement": "Keep history",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 87,
+      "source_text": "      \"verification_basis\": \"Owner-confirmed browser/screenshots plus connected Netlify site/deploy state, not a new production deployment.\"",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Clarify screenshots/settings not new deployment",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Incorrect deploy claim harms audit",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 87,
+        "byte_exact": true
+      },
+      "testability": "Compare published SHA",
+      "improvement": "No publish claim",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 88,
+      "source_text": "    },",
+      "classification": "direct-read-JSON-syntax",
+      "behavior": "Close domain object",
+      "quality": "Necessary structural delimiter, directly read original line",
+      "risk": "Structural JSON boundary",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 88,
+        "byte_exact": true
+      },
+      "testability": "Parse",
+      "improvement": "Retain",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 89,
+      "source_text": "    {",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Separate domain and education objects",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "JSON comma",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 89,
+        "byte_exact": true
+      },
+      "testability": "Parse",
+      "improvement": "Keep",
+      "locked_fit": "Accessible Log Shot -> Rate -> Recommendation guidance should match actual released UI; delivery format remained Open",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 90,
+      "source_text": "      \"id\": \"DOCS-20261014-01\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Identify education future deliverable",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "ID does not prove published guide",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 90,
+        "byte_exact": true
+      },
+      "testability": "Inspect current Help UI",
+      "improvement": "Keep",
+      "locked_fit": "Accessible Log Shot -> Rate -> Recommendation guidance should match actual released UI; delivery format remained Open",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 91,
+      "source_text": "      \"status\": \"Approved future deliverable\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Mark format future rather than Locked",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Video or written remains open",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 91,
+        "byte_exact": true
+      },
+      "testability": "Check latest owner decision",
+      "improvement": "Do not assume",
+      "locked_fit": "Accessible Log Shot -> Rate -> Recommendation guidance should match actual released UI; delivery format remained Open",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 92,
+      "source_text": "      \"topic\": \"User education and walkthrough\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Title user education",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "No behavior in title",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 92,
+        "byte_exact": true
+      },
+      "testability": "Inspect requirement",
+      "improvement": "Keep",
+      "locked_fit": "Accessible Log Shot -> Rate -> Recommendation guidance should match actual released UI; delivery format remained Open",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 93,
+      "source_text": "      \"owner_approval_date\": \"2026-10-14\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Date education request Oct14",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Release features can change",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 93,
+        "byte_exact": true
+      },
+      "testability": "Compare current shipped UX",
+      "improvement": "Retain",
+      "locked_fit": "Accessible Log Shot -> Rate -> Recommendation guidance should match actual released UI; delivery format remained Open",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 94,
+      "source_text": "      \"decision\": \"Provide accessible instructions and/or a video walkthrough that covers the functions available in the launched app. Keep it friendly to beginners and emphasize Log Shot -> Rate -> Recommendation.\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Request accessible beginner Log Shot Rate Recommendation guide",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Inaccurate guidance can mislead beginners",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 94,
+        "byte_exact": true
+      },
+      "testability": "Test guide against released flow",
+      "improvement": "Ensure accessible",
+      "locked_fit": "Accessible Log Shot -> Rate -> Recommendation guidance should match actual released UI; delivery format remained Open",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 95,
+      "source_text": "      \"remaining_open\": \"Written versus video format, placement, and timing are not locked. Build against the released feature set so material stays accurate; differentiate member and admin features.\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Leave medium, placement and timing Open",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Unapproved format is a product decision",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 95,
+        "byte_exact": true
+      },
+      "testability": "Check subsequent Locked rule",
+      "improvement": "Keep Open",
+      "locked_fit": "Accessible Log Shot -> Rate -> Recommendation guidance should match actual released UI; delivery format remained Open",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 96,
+      "source_text": "      \"implementation_status\": \"Roadmap recorded; no content/video published and no hosting changes.\"",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Record old absence of published content",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Dated snapshot not current truth",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 96,
+        "byte_exact": true
+      },
+      "testability": "Check present Help if needed",
+      "improvement": "Do not claim none today",
+      "locked_fit": "Accessible Log Shot -> Rate -> Recommendation guidance should match actual released UI; delivery format remained Open",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 97,
+      "source_text": "    },",
+      "classification": "direct-read-JSON-syntax",
+      "behavior": "Close education object",
+      "quality": "Necessary structural delimiter, directly read original line",
+      "risk": "JSON delimiter",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 97,
+        "byte_exact": true
+      },
+      "testability": "Parse",
+      "improvement": "Retain",
+      "locked_fit": "Accessible Log Shot -> Rate -> Recommendation guidance should match actual released UI; delivery format remained Open",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 98,
+      "source_text": "    {",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Separate education and visual policy",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Comma",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 98,
+        "byte_exact": true
+      },
+      "testability": "Parse",
+      "improvement": "Keep",
+      "locked_fit": "Accessible Log Shot -> Rate -> Recommendation guidance should match actual released UI; delivery format remained Open",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 99,
+      "source_text": "      \"id\": \"VISUAL-20261015-01\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Name visual supersession decision",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Old Recovery UI entry points here",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 99,
+        "byte_exact": true
+      },
+      "testability": "Crosscheck amended_by",
+      "improvement": "Preserve link",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 100,
+      "source_text": "      \"status\": \"Locked\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Lock visual styling guidance",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Accessibility can require later refinement",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 100,
+        "byte_exact": true
+      },
+      "testability": "Test contrast and mobile",
+      "improvement": "Preserve",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 101,
+      "source_text": "      \"topic\": \"Coordinated visual refinement, simpler beta Settings and no-publish review\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Title visual, Settings and historical release hold",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Hold later consumed",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 101,
+        "byte_exact": true
+      },
+      "testability": "Check Oct16 release",
+      "improvement": "Don't reapply hold",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 102,
+      "source_text": "      \"owner_approval_date\": \"2026-10-15\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Date visual rule Oct15",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Date does not prove current rendering",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 102,
+        "byte_exact": true
+      },
+      "testability": "Inspect source screenshot when changing",
+      "improvement": "Retain",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 103,
+      "source_text": "      \"decision\": \"Vibrant filled badges and clear borders in Light/Dark; consistent controls and dividers; prominent Search & Sort button; cleaner ff ligatures; Title Case for standalone UI labels excluding sentences, units and user content; grouped Settings and Sign Out last; Admin inherits saved appearance. Remove routine Recovery Options UI rather than enabling unrestricted historical imports.\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Specify filled badges, search, casing and remove routine Recovery UI",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Clutter and lost recovery are risks",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 103,
+        "byte_exact": true
+      },
+      "testability": "Test narrow UI and gated recovery",
+      "improvement": "Keep backend import guard",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 104,
+      "source_text": "      \"amends\": \"UX-20261014-05 visible Recovery UI only; backend import gate and operator recovery unchanged. Earlier request to unlock repeat imports withdrawn.\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Scope amendment to visible Recovery UI only",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Dropping backend lock risks unsafe import",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 104,
+        "byte_exact": true
+      },
+      "testability": "Test role guard",
+      "improvement": "No backend deletion",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 105,
+      "source_text": "      \"preserved\": [",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Begin invariant list",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Syntax container",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 105,
+        "byte_exact": true
+      },
+      "testability": "Parse",
+      "improvement": "Retain",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 106,
+      "source_text": "        \"Recommendation calculations\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Preserve recommendation calculations",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "UI refactor could mutate math",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 106,
+        "byte_exact": true
+      },
+      "testability": "Run engine regression",
+      "improvement": "No formula rewrite",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 107,
+      "source_text": "        \"Shot and coffee identity/history\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Preserve shot/coffee IDs and history",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Wrong optimistic update loses records",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 107,
+        "byte_exact": true
+      },
+      "testability": "Test old and edited IDs",
+      "improvement": "No data rewrite",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 108,
+      "source_text": "        \"Private data and server authorization\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Preserve private data/server authorization",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Client hide alone insufficient",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 108,
+        "byte_exact": true
+      },
+      "testability": "Use #96 negative RLS tests",
+      "improvement": "Keep",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 109,
+      "source_text": "        \"Encrypted backups and operator recovery\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Preserve encrypted backup and operator recovery",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Removed UI not operator restore retirement",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 109,
+        "byte_exact": true
+      },
+      "testability": "Check restore workflow",
+      "improvement": "Keep",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 110,
+      "source_text": "        \"Password reset\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Preserve password reset",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Settings change can break auth callback",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 110,
+        "byte_exact": true
+      },
+      "testability": "Test reset",
+      "improvement": "Keep",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 111,
+      "source_text": "        \"Emergency pending-sync download\"",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Preserve emergency pending-sync download",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Offline member might lose queue",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 111,
+        "byte_exact": true
+      },
+      "testability": "Test export offline",
+      "improvement": "Keep",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 112,
+      "source_text": "      ],",
+      "classification": "direct-read-JSON-syntax",
+      "behavior": "Close invariant array",
+      "quality": "Necessary structural delimiter, directly read original line",
+      "risk": "JSON syntax",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 112,
+        "byte_exact": true
+      },
+      "testability": "Parse",
+      "improvement": "Retain",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 113,
+      "source_text": "      \"implementation_status\": \"Published in the consolidated October 16 owner-approved protected release; see OPS-20261016-CONSOLIDATED-RELEASE. Genuine owner/nonadmin browser acceptance remains outstanding.\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Record historic release with browser acceptance pending",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Dated PASS not current acceptance",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 113,
+        "byte_exact": true
+      },
+      "testability": "Check exact source tests",
+      "improvement": "No new PASS",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 114,
+      "source_text": "      \"release_hold\": \"No Netlify deployment until owner approves screenshots and the next consolidated release.\"",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Record screenshot release hold",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Later scoped one-off release superseded",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 114,
+        "byte_exact": true
+      },
+      "testability": "Read Oct16 approval",
+      "improvement": "Do not hold universally",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 115,
+      "source_text": "    },",
+      "classification": "direct-read-JSON-syntax",
+      "behavior": "Close visual object",
+      "quality": "Necessary structural delimiter, directly read original line",
+      "risk": "JSON structure",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 115,
+        "byte_exact": true
+      },
+      "testability": "Parse",
+      "improvement": "Keep",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 116,
+      "source_text": "    {",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Separate visual and release objects",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Comma",
+      "dead_or_obsolete": "One-use historical grant and old credit controls are superseded; immutable source preserved, no live code deletion proven",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 116,
+        "byte_exact": true
+      },
+      "testability": "Parse",
+      "improvement": "Keep",
+      "locked_fit": "Later Locked #417 sole Git publisher and #457 owner-only one-use release, risk-aware CI, no credit gate",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 117,
+      "source_text": "      \"id\": \"OPS-20261016-CONSOLIDATED-RELEASE\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "ID historic consolidated release",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Grant consumed, not standing",
+      "dead_or_obsolete": "One-use historical grant and old credit controls are superseded; immutable source preserved, no live code deletion proven",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 117,
+        "byte_exact": true
+      },
+      "testability": "Check current one-use record",
+      "improvement": "No publish",
+      "locked_fit": "Later Locked #417 sole Git publisher and #457 owner-only one-use release, risk-aware CI, no credit gate",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 118,
+      "source_text": "      \"status\": \"Locked\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Mark historical release Locked",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Old scoped approval not evergreen",
+      "dead_or_obsolete": "One-use historical grant and old credit controls are superseded; immutable source preserved, no live code deletion proven",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 118,
+        "byte_exact": true
+      },
+      "testability": "Review release date",
+      "improvement": "Keep receipt",
+      "locked_fit": "Later Locked #417 sole Git publisher and #457 owner-only one-use release, risk-aware CI, no credit gate",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 119,
+      "source_text": "      \"topic\": \"One consolidated protected owner-preview release\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Title owner preview release",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Does not authorize future READY batch",
+      "dead_or_obsolete": "One-use historical grant and old credit controls are superseded; immutable source preserved, no live code deletion proven",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 119,
+        "byte_exact": true
+      },
+      "testability": "Check selected scope",
+      "improvement": "No release",
+      "locked_fit": "Later Locked #417 sole Git publisher and #457 owner-only one-use release, risk-aware CI, no credit gate",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 120,
+      "source_text": "      \"owner_approval_date\": \"2026-10-16\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Date October16 owner release",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "One-time time boundary",
+      "dead_or_obsolete": "One-use historical grant and old credit controls are superseded; immutable source preserved, no live code deletion proven",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 120,
+        "byte_exact": true
+      },
+      "testability": "Read receipt",
+      "improvement": "Never reuse",
+      "locked_fit": "Later Locked #417 sole Git publisher and #457 owner-only one-use release, risk-aware CI, no credit gate",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 121,
+      "source_text": "      \"decision\": \"Publish the current consolidated work after tests, then perform real beta-account/integration and complete hosted recovery verification.\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Permit historic tested consolidation and hosted checks",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Old authority already consumed",
+      "dead_or_obsolete": "One-use historical grant and old credit controls are superseded; immutable source preserved, no live code deletion proven",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 121,
+        "byte_exact": true
+      },
+      "testability": "Verify historic deploy only if needed",
+      "improvement": "No provider write",
+      "locked_fit": "Later Locked #417 sole Git publisher and #457 owner-only one-use release, risk-aware CI, no credit gate",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 122,
+      "source_text": "      \"amends\": \"The earlier VISUAL-20261015-01 and review-11 release holds are superseded only for this coordinated owner-approved release; ordinary branch/preview publication remains blocked.\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Supersede earlier holds solely for Oct16 batch",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Other holds remain independent",
+      "dead_or_obsolete": "One-use historical grant and old credit controls are superseded; immutable source preserved, no live code deletion proven",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 122,
+        "byte_exact": true
+      },
+      "testability": "Compare owner approvals",
+      "improvement": "Keep narrow scope",
+      "locked_fit": "Later Locked #417 sole Git publisher and #457 owner-only one-use release, risk-aware CI, no credit gate",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 123,
+      "source_text": "      \"preserved\": [",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Begin protected release list",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "JSON array",
+      "dead_or_obsolete": "One-use historical grant and old credit controls are superseded; immutable source preserved, no live code deletion proven",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 123,
+        "byte_exact": true
+      },
+      "testability": "Parse",
+      "improvement": "Retain",
+      "locked_fit": "Later Locked #417 sole Git publisher and #457 owner-only one-use release, risk-aware CI, no credit gate",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 124,
+      "source_text": "        \"Existing Netlify site and development/backend-foundation production branch\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Preserve existing site and old dev branch context",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Current release owner differs",
+      "dead_or_obsolete": "One-use historical grant and old credit controls are superseded; immutable source preserved, no live code deletion proven",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 124,
+        "byte_exact": true
+      },
+      "testability": "Check branch governance",
+      "improvement": "Do not publish dev",
+      "locked_fit": "Later Locked #417 sole Git publisher and #457 owner-only one-use release, risk-aware CI, no credit gate",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 125,
+      "source_text": "        \"Netlify team SSO\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Preserve former all-deploy team SSO",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Production visitor SSO later exception",
+      "dead_or_obsolete": "One-use historical grant and old credit controls are superseded; immutable source preserved, no live code deletion proven",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 125,
+        "byte_exact": true
+      },
+      "testability": "Read ACCESS override",
+      "improvement": "Keep nonproduction SSO",
+      "locked_fit": "Later Locked #417 sole Git publisher and #457 owner-only one-use release, risk-aware CI, no credit gate",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 126,
+      "source_text": "        \"Credit guard and one deliberate release\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Preserve historic credit gate",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Owner later removed credit preflight",
+      "dead_or_obsolete": "One-use historical grant and old credit controls are superseded; immutable source preserved, no live code deletion proven",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 126,
+        "byte_exact": true
+      },
+      "testability": "Check latest #457",
+      "improvement": "No screenshot demand",
+      "locked_fit": "Later Locked #417 sole Git publisher and #457 owner-only one-use release, risk-aware CI, no credit gate",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 127,
+      "source_text": "        \"Beta admission and RLS\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Preserve beta admission and RLS",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Still privacy-critical",
+      "dead_or_obsolete": "One-use historical grant and old credit controls are superseded; immutable source preserved, no live code deletion proven",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 127,
+        "byte_exact": true
+      },
+      "testability": "Run #96 access denials",
+      "improvement": "Keep",
+      "locked_fit": "Later Locked #417 sole Git publisher and #457 owner-only one-use release, risk-aware CI, no credit gate",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 128,
+      "source_text": "        \"Closed import/recovery gate\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Preserve closed import gate",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Removing routine Recovery UI cannot open import",
+      "dead_or_obsolete": "One-use historical grant and old credit controls are superseded; immutable source preserved, no live code deletion proven",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 128,
+        "byte_exact": true
+      },
+      "testability": "Test denied import",
+      "improvement": "Keep",
+      "locked_fit": "Later Locked #417 sole Git publisher and #457 owner-only one-use release, risk-aware CI, no credit gate",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 129,
+      "source_text": "        \"Owner data and all other Locked product requirements\"",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Preserve owner data and Locked rules",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "No blanket deletion authorized",
+      "dead_or_obsolete": "One-use historical grant and old credit controls are superseded; immutable source preserved, no live code deletion proven",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 129,
+        "byte_exact": true
+      },
+      "testability": "Check data preservation",
+      "improvement": "No mutation",
+      "locked_fit": "Later Locked #417 sole Git publisher and #457 owner-only one-use release, risk-aware CI, no credit gate",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 130,
+      "source_text": "      ],",
+      "classification": "direct-read-JSON-syntax",
+      "behavior": "Close release safeguards array",
+      "quality": "Necessary structural delimiter, directly read original line",
+      "risk": "Syntax",
+      "dead_or_obsolete": "One-use historical grant and old credit controls are superseded; immutable source preserved, no live code deletion proven",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 130,
+        "byte_exact": true
+      },
+      "testability": "Parse",
+      "improvement": "Retain",
+      "locked_fit": "Later Locked #417 sole Git publisher and #457 owner-only one-use release, risk-aware CI, no credit gate",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 131,
+      "source_text": "      \"implementation_status\": \"Published 2026-10-16T15:44:45.260Z: Netlify 6ad24660d0c6bdff2c065586, SHA 4e7d4a834dd92ec79f8cd99b373374fc0a584ef8, SSO all. Supabase URL-first migration 20261016154252, preview v1 and verifier v3 active with JWT checks. 198 tests, browser QA, isolated SQL and five live rollback-only suites passed. Existing data fingerprints unchanged.\"",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Record Oct16 deploy SHA, SQL and tests",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Old check count not today’s passed checks",
+      "dead_or_obsolete": "One-use historical grant and old credit controls are superseded; immutable source preserved, no live code deletion proven",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 131,
+        "byte_exact": true
+      },
+      "testability": "Verify source binding for reuse",
+      "improvement": "Keep historical",
+      "locked_fit": "Later Locked #417 sole Git publisher and #457 owner-only one-use release, risk-aware CI, no credit gate",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 132,
+      "source_text": "    },",
+      "classification": "direct-read-JSON-syntax",
+      "behavior": "Close consolidated release object",
+      "quality": "Necessary structural delimiter, directly read original line",
+      "risk": "JSON delimiter",
+      "dead_or_obsolete": "One-use historical grant and old credit controls are superseded; immutable source preserved, no live code deletion proven",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 132,
+        "byte_exact": true
+      },
+      "testability": "Parse",
+      "improvement": "Keep",
+      "locked_fit": "Later Locked #417 sole Git publisher and #457 owner-only one-use release, risk-aware CI, no credit gate",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 133,
+      "source_text": "    {",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Separate release and visitor access objects",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Comma",
+      "dead_or_obsolete": "One-use historical grant and old credit controls are superseded; immutable source preserved, no live code deletion proven",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 133,
+        "byte_exact": true
+      },
+      "testability": "Parse",
+      "improvement": "Keep",
+      "locked_fit": "Later Locked #417 sole Git publisher and #457 owner-only one-use release, risk-aware CI, no credit gate",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 134,
+      "source_text": "      \"id\": \"ACCESS-20261016-PRODUCTION-SSO\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Name production SSO exception ID",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Scoped only to Netlify visitor layer",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 134,
+        "byte_exact": true
+      },
+      "testability": "Check exact provider setting",
+      "improvement": "Preserve Supabase auth",
+      "locked_fit": "Netlify production visitor SSO exception preserves Supabase Auth, beta admission and RLS",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 135,
+      "source_text": "      \"status\": \"Locked\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Lock production visitor change",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Does not remove beta/RLS",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 135,
+        "byte_exact": true
+      },
+      "testability": "Check admission",
+      "improvement": "Keep guards",
+      "locked_fit": "Netlify production visitor SSO exception preserves Supabase Auth, beta admission and RLS",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 136,
+      "source_text": "      \"topic\": \"Production visitor access after real invitation test\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Title access after invitation",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Earlier invite success not current #96 acceptance",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 136,
+        "byte_exact": true
+      },
+      "testability": "Review test source",
+      "improvement": "No blanket PASS",
+      "locked_fit": "Netlify production visitor SSO exception preserves Supabase Auth, beta admission and RLS",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 137,
+      "source_text": "      \"owner_approval_date\": \"2026-10-16\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Date owner SSO rule Oct16",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Historical provider state could drift",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 137,
+        "byte_exact": true
+      },
+      "testability": "Read current if relevant",
+      "improvement": "No settings changes",
+      "locked_fit": "Netlify production visitor SSO exception preserves Supabase Auth, beta admission and RLS",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 138,
+      "source_text": "      \"decision\": \"Remove the additional Netlify team SSO login for production app.dialincollective.com, preserving Supabase email-password sign-in, email verification, beta invitation/admission, RLS account isolation, and nonadmin/admin role checks. Netlify SSO stays enabled for non-production deployments.\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Remove extra production Netlify team SSO, retain Supabase admission and RLS",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Wrongly removing backend role checks leaks data",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 138,
+        "byte_exact": true
+      },
+      "testability": "Test unauthorized/authenticated distinctions",
+      "improvement": "Keep",
+      "locked_fit": "Netlify production visitor SSO exception preserves Supabase Auth, beta admission and RLS",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 139,
+      "source_text": "      \"amends\": \"Earlier all-deploy team SSO access decision only; does not supersede beta admission, RLS, administrator protection, historical import lock, or recovery checks.\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Scope exception only to production team SSO",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Nonproduction and importer remain protected",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 139,
+        "byte_exact": true
+      },
+      "testability": "Check environment-specific gates",
+      "improvement": "Keep",
+      "locked_fit": "Netlify production visitor SSO exception preserves Supabase Auth, beta admission and RLS",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 140,
+      "source_text": "      \"implementation_status\": \"Applied in Netlify visitor controls on 2026-10-16: requiresSSOTeamLogin=true and whichProjectsRequireSSOTeamLogin=non_production. No new Netlify deploy. Real nonadmin signup and invite success confirmed by owner; full negative cross-account browser tests remain outstanding.\"",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Record owner Oct16 SSO and invite receipts",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Past browser acceptance is bounded",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 140,
+        "byte_exact": true
+      },
+      "testability": "Check exact tested date",
+      "improvement": "No current PASS",
+      "locked_fit": "Netlify production visitor SSO exception preserves Supabase Auth, beta admission and RLS",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 141,
+      "source_text": "    }",
+      "classification": "direct-read-JSON-syntax",
+      "behavior": "Close production SSO object",
+      "quality": "Necessary structural delimiter, directly read original line",
+      "risk": "JSON syntax",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 141,
+        "byte_exact": true
+      },
+      "testability": "Parse",
+      "improvement": "Retain",
+      "locked_fit": "Netlify production visitor SSO exception preserves Supabase Auth, beta admission and RLS",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 142,
+      "source_text": "  ],",
+      "classification": "direct-read-JSON-syntax",
+      "behavior": "Close historical decisions list",
+      "quality": "Necessary structural delimiter, directly read original line",
+      "risk": "Array terminator",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 142,
+        "byte_exact": true
+      },
+      "testability": "Parse full JSON",
+      "improvement": "Retain",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 143,
+      "source_text": "  \"unchanged_release_gates\": [",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Open unchanged release gates list",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Some specific gates later superseded",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 143,
+        "byte_exact": true
+      },
+      "testability": "Compare latest publisher contract",
+      "improvement": "Keep history",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 144,
+      "source_text": "    \"verified offsite restore before real historical import\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Require offsite restore before historic import",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Destructive work demands source-matched recovery evidence",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 144,
+        "byte_exact": true
+      },
+      "testability": "Check backup hash if authorized",
+      "improvement": "No import now",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 145,
+      "source_text": "    \"private beta access/Netlify SSO\",",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Record beta/Netlify SSO gate",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Visitor production exception modifies clause",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 145,
+        "byte_exact": true
+      },
+      "testability": "Apply scoped supersession",
+      "improvement": "No blanket SSO assertion",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 146,
+      "source_text": "    \"canonical coffee/admin/community verification\"",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Require coffee, Admin, Community verification",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Member privacy/source identity must remain",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 146,
+        "byte_exact": true
+      },
+      "testability": "Test relevant #33/#96 code",
+      "improvement": "Keep",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 147,
+      "source_text": "  ],",
+      "classification": "direct-read-JSON-syntax",
+      "behavior": "Close release gates list",
+      "quality": "Necessary structural delimiter, directly read original line",
+      "risk": "JSON delimiter",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 147,
+        "byte_exact": true
+      },
+      "testability": "Parse",
+      "improvement": "Retain",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 148,
+      "source_text": "  \"implementation_status\": \"October 16 consolidated owner preview is published and service versions verified. Real external-account acceptance and full hosted recovery remain incomplete; SSO and import lock remain.\"",
+      "classification": "direct-read-archived-policy",
+      "behavior": "Old status reports published preview and pending hosted checks",
+      "quality": "Dated owner policy or evidence, not present code behavior or independently checked live provider state",
+      "risk": "Dated state not current release certification",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 148,
+        "byte_exact": true
+      },
+      "testability": "Check CURRENT_STATUS",
+      "improvement": "Do not close issue",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    },
+    {
+      "line": 149,
+      "source_text": "}",
+      "classification": "direct-read-JSON-syntax",
+      "behavior": "Close archived 149-line original root",
+      "quality": "Necessary structural delimiter, directly read original line",
+      "risk": "End-of-file boundary verified by Git blob",
+      "dead_or_obsolete": "Original history preserved, later scoped Locked decisions govern current behavior; no demonstrated dead active code",
+      "duplication": "Archived continuity cross-reference is not proven redundant runtime implementation.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER_2026_10_14_UX.json",
+        "blob_sha": "ac53f04f83e49d83a0e0e21dbb0f2cbcafb81950",
+        "line": 149,
+        "byte_exact": true
+      },
+      "testability": "Verify 149 physical lines",
+      "improvement": "Advance frozen inventory",
+      "locked_fit": "Preserve privacy, member/offline shot records, Community and scoped historic supersessions",
+      "review_method": "Direct numbered AI source reading with exact original/live blob; not human semantic certification"
+    }
+  ]
+}
