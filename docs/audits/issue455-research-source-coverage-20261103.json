@@ -813,6 +813,21 @@
       "source_bytes_sha256": null,
       "source_byte_caveat": "Original publisher abstract and PubMed reproduction directly inspected. Full 6-page ACS PDF/methods, actual PSD distributions, grind burr/calibration, panels, randomized/blinded design, uncertainty, raw caffeine/solute/foam observations and raw bytes not verified; ACS charges for full text, no purchase made.",
       "claims_verified_externally": "ACS abstract names coarse/fine/very-fine grind classes on two 20% Arabica/80% Robusta blend roast conditions: natural and a condition with 50% of Robusta torrefacto roasted (sugar added during roast). It reports inverse relation between particle size and some solid/volatile extraction; higher foam/EY in torrefacto possibly due to caramelized sugar/melanoidins; its chosen grinding grade was FINE for natural but COARSE for torrefacto. Abstract proposes an acceptable extraction-yield upper bound of 25% for that torrefacto condition only, not a validated universal goal."
+    },
+    {
+      "id": "LIT-2023-VACA-GUERRA-PSD-BED-COMPRESSION",
+      "type": "peer_reviewed_primary_espresso_bed_compression_permeability_institutional_abstract_only",
+      "title": "Influence of particle size distribution on espresso extraction via packed bed compression",
+      "authors": "Mauricio Vaca Guerra; Yogesh M. Harshe; Lennart Fries; Hannah Sophia Rothberg; Stefan Palzer; Stefan Heinrich",
+      "published": "Journal of Food Engineering 340, article 111301 (March 2023); DOI string includes online 2022",
+      "doi": "10.1016/j.jfoodeng.2022.111301",
+      "url": "https://tore.tuhh.de/entities/publication/b536e437-44bf-4be5-880f-8bf28c44d1f4",
+      "access": "DIRECT_TU_HAMBURG_AUTHOR_INSTITUTIONAL_PUBLICATION_RECORD_AND_FULL_ABSTRACT_READ_20261106; ORIGINAL_ELSEVIER_FULL_ARTICLE_PDF_AND_DATA_NOT_READ",
+      "review_status": "BOUNDED_ABSTRACT_READ: BIMODAL_PSD_COARSE_FRACTION_MEAN_ALPHA_AND_UNIFORMITY_BETA; MATCHED_AXIAL_COMPRESSION_BED_POROSITY; EXPERIMENTAL_PERMEABILITY; MODIFIED_KOZENY_CARMAN_MODEL; ACTUAL_TASTE_NOT_TESTED_HERE",
+      "evidence_grade": "FIRST_PARTY_INSTITUTIONAL_RECORD_OF_PEER_REVIEWED_ORIGINAL_STUDY_ABSTRACT_ONLY; ORIGINAL_RAW_ARTICLE_NOT_HASHED; MATERIALS_SAMPLE_N_GRINDER_BURR_IDS_ERROR_BARS_AND_BLIND_SENSORY_OUTCOMES_UNVERIFIED",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Publisher DOI and institutional metadata/abstract were read, but the final binary article, methods/figures/tables, any raw trials and response-surface parameters were not obtained. The repository page does not expose a downloadable PDF. DOI landing page returned an access error. Do not equate abstract with full-text analysis or extrapolate to practical grinder setting, tamping instruction or taste improvement.",
+      "claims_verified_externally": "TU Hamburg author-institution repository abstract reports that at matched axial compression, decreasing coarse-distribution uniformity beta decreased dry bed porosity even when mean particle size alpha was larger. Espresso extraction experiments indicated similarly low permeability can arise from compression, size mean and size uniformity jointly; model predicted porosity/permeability for studied preparations. It DOES NOT establish a quantitative universal espresso grind step, optimal tamp force, five-taste rating threshold, or one-variable next-shot rule."
     }
   ],
   "evidence_checks": [
@@ -2244,6 +2259,37 @@
       "result": "TORREFACTO_POSSIBLE_CHEMISTRY_EY_ASSOCIATION_NOT_UNIVERSAL_25_PERCENT_SUCCESS_THRESHOLD",
       "owner_approval": false,
       "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-060-A",
+      "source": "TU Hamburg Institute repository original bibliographic record and abstract, DOI 10.1016/j.jfoodeng.2022.111301; original ORG-09 Git blob 1e1b8bbef0ecb05ed0b20195191bcad26663cf0d (source ZIP index SHA256 a3f9ed5f29e8ade7f5a2d051d8b491401f96c20c446aff1ef0ec7ab301774f1d)",
+      "claim": "Vaca Guerra et al. coarse PSD mean alpha and uniformity beta are separate measures; with the SAME applied axial compression, lower size uniformity beta produced lower dry bed porosity even at larger mean particle alpha. The original owner report's conditional claim about packing is supported at publisher-abstract scope; its downstream blanket burr-class/espresso flavor inference is not established by this comparison.",
+      "grade": "FIRST_PARTY_AUTHOR_INSTITUTION_PUBLICATION_RECORD_ABSTRACT_ONLY; NO_PDF_OR_SAMPLE_N_OR_CI_OR_PSD_MEASUREMENT_METADATA",
+      "primary_sources": [
+        "https://tore.tuhh.de/entities/publication/b536e437-44bf-4be5-880f-8bf28c44d1f4",
+        "https://doi.org/10.1016/j.jfoodeng.2022.111301"
+      ],
+      "page_number": "Journal of Food Engineering 340 article 111301; original full-text page/figure not verified",
+      "app_source_sha": "839d1888d245716fc1d6e24867435d44904a6a16",
+      "current_app": "Read actual site/lib/engine.js blob 93969d561e18205d8f87e19059ea0c66b519e934; grindGuidance uses setup/calibration and eligible same-coffee shot data, not a measured PSD beta/alpha or bed porosity field. No physical grinder-burr gap or compression-to-grind calculator in this source.",
+      "result": "CONDITIONAL_PACKING_DEPENDS_ON_DISTRIBUTION_SHAPE_AND_APPLIED_COMPRESSION_NOT_JUST_MEAN_SIZE",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-060-B",
+      "source": "TU Hamburg repository original peer-reviewed study abstract 2023, Journal of Food Engineering 340:111301",
+      "claim": "The abstract says comparable LOW permeability can be generated by jointly changing PSD mean, size uniformity and compression, with a modified Kozeny-Carman predictive expression. This is a material-hydraulics result, NOT verification of optimal taste, manual tamp-force changes for existing members, correction factors for slow feed, or ability to infer compression from five ratings/shot time. Detailed controlled methods and sensory panel data not available here.",
+      "grade": "ABSTRACT_STUDY_HYDRAULICS_CORRELATION_MODEL; NO_EMPIRICAL_APP_NEXT_SHOT_OR_SENSORY_OUTCOME_VALIDATION",
+      "primary_sources": [
+        "https://tore.tuhh.de/entities/publication/b536e437-44bf-4be5-880f-8bf28c44d1f4"
+      ],
+      "page_number": "Institutional ABSTRACT; exact printed page unavailable",
+      "app_source_sha": "839d1888d245716fc1d6e24867435d44904a6a16",
+      "current_app": "Existing owner-Locked five tastes, one controllable next-shot change, grinder calibration and measured dose/yield/time remain in engine.js; physical PSD, compression force and porosity are not captured inputs. No policy or code changed.",
+      "result": "PREDICTED_BED_PERMEABILITY_CANNOT_BE_AUTOMATIC_UNIVERSAL_GRIND_OR_TAMP_RECOMMENDATION",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
     }
   ],
   "policy_decisions_pending": [],
@@ -2277,27 +2323,28 @@
     "R455-043: The 2002 Andueza pressure paper full third-party facsimile pages 7426-7431 was visually inspected and publisher abstract matched; no raw mirror/publisher hash certification. Do not re-credit these narrow methods/table facts; next verify unrelated original citations or actionable user-workflow defect.",
     "R455-045: Original Gagné 2019 0.08 mm² surface-area result contradicts Kaffeemacher 2025 background 0.08 mm linear shorthand; Table1 lower fines ONLY same grind, rising after finer re-dial. Preserve condition qualifiers; no engine 40%-heuristic edit. Continue unrelated research citations or reproduced UX correctness. Recovered Library 10-page slow-feed variant SHA a068e5e3... differs from owner-archive registered member SHA a4db4f38...; archive bytes still unavailable.",
     "R455-056: Review Andueza et al. 2007 DOI 10.1002/jsfa.2720 full pages 586–592/methods only if accessible; abstract-level 6.5/7.5 g per 40 mL comparisons and torrefacto roasting sugar/descriptor observations are not measured 1:n beverage mass targets. Retain current Locked recipe logic. Source S019 remains unavailable.",
-    "R455-057: ACS 2003 grind/torrefacto source full text is paywalled; no PDF, raw sample/PSD or blind sensory validation. Avoid universal grind direction/25% EY recommendation. Resume independent unresolved source citations and actual Log Shot UX defect tests; S019 original still inaccessible."
+    "R455-057: ACS 2003 grind/torrefacto source full text is paywalled; no PDF, raw sample/PSD or blind sensory validation. Avoid universal grind direction/25% EY recommendation. Resume independent unresolved source citations and actual Log Shot UX defect tests; S019 original still inaccessible.",
+    "R455-060: Vaca Guerra 2023 bed-PSD compression result verified only from first-party author-institution abstract, original 2023 PDF/methods unavailable. Do not implement generic tamp or grind adjustment from laboratory permeability. Resume unverified papers and directly reproduce useful safe UX defect; original S019 PDF not accessible."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-057",
-    "base_development_sha": "28f9f053014a8aa8cffb8dd87415a413df763bc6",
-    "source_document": "Andueza/de Peña/Cid 2003 first-party ACS publisher abstract only, corroborated PubMed, original PDF not obtained",
+    "id": "R455-060",
+    "base_development_sha": "839d1888d245716fc1d6e24867435d44904a6a16",
+    "source_document": "Vaca Guerra et al. 2023 Journal of Food Engineering 340:111301; directly read TU Hamburg author institution's publisher-linked original abstract; no PDF or raw data",
     "source_ids": [
-      "LIT-2003-ANDUEZA-GRIND-TORREFACTO"
+      "LIT-2023-VACA-GUERRA-PSD-BED-COMPRESSION"
     ],
     "claim_ids": [
-      "R455-EV-CIT-057-A",
-      "R455-EV-CIT-057-B"
+      "R455-EV-CIT-060-A",
+      "R455-EV-CIT-060-B"
     ],
-    "number_of_curated_sources": 55,
-    "total_evidence_checks": 117,
-    "review_type": "PRIMARY_ORIGINAL_ACS_ABSTRACT_TWO_GRIND_PROCESSING_CONDITIONS_AND_EY_25_PERCENT_SCOPE; FULL_PAPER_UNVERIFIED",
+    "number_of_curated_sources": 56,
+    "total_evidence_checks": 119,
+    "review_type": "BOUNDED_INSTITUTIONAL_ABSTRACT_REVIEW_MATCHED_COMPRESSION_PSD_UNIFORMITY_POROSITY_AND_PERMEABILITY; FULL_TEXT_NOT_VERIFIED",
     "source_hash_verified_20261106": false,
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
     "code_or_policy_changed": false,
-    "next_action": "Verify exact PR-head docs CI; nonforce merge only after PASS; reread merged blobs/current-source governance; post #455 receipt. Continue source bibliography and real UX bug reproduction; S019 still unavailable."
+    "next_action": "Verify exact docs PR head CI and non-force merge only on PASS; independently read back both tested Git blobs and merged-source governance, then append Issue #455 final receipt. Continue unverified report citations and directly reproduced UX defects; original S019 PDF still inaccessible."
   },
   "policy_decisions_resolved": [
     {
@@ -2704,6 +2751,24 @@
       "release_queue": "DIC-Q-455-unrated-taste-visuals READY, no publication",
       "source_commit": "d8d8d9fc65e5b324382559cf9595b91b7172616b",
       "implementation_pr": 918
+    },
+    {
+      "id": "R455-PROP-060-PACKING-PERMEABILITY-NOT-FLAVOR",
+      "finding": "Original ORG-09 grinder/burr report cites Vaca Guerra et al. packed-bed study as support for conditional fines/PSD -> lower porosity/permeability. First-party author-institution abstract supports the specific matched-compression laboratory result but cannot validate grinder architecture superiority, app taste settings, a universal tamp adjustment, or personal espresso recommendations.",
+      "evidence": [
+        "ORG-09 original Markdown Git blob 1e1b8bbef0ecb05ed0b20195191bcad26663cf0d esp. PSD/porosity discussion and conditional grinder interpretation",
+        "Vaca Guerra 2023 TU Hamburg institute original bibliographic + abstract https://tore.tuhh.de/entities/publication/b536e437-44bf-4be5-880f-8bf28c44d1f4 (DOI 10.1016/j.jfoodeng.2022.111301); full PDF not accessed",
+        "Site engine.js live exact source Git blob 93969d561e18205d8f87e19059ea0c66b519e934 at base 839d1888d245716fc1d6e24867435d44904a6a16; five sensory inputs and same-coffee/calibration context remain separate from physical PSD/bed compression"
+      ],
+      "severity": "P3_RESEARCH_CLAIM_BOUNDARY_AND_FUTURE_FALSE_PRECISION_RISK",
+      "user_benefit": "Prevents asserting a false universal finer/coarser or tamp-pressure instruction based only on laboratory bed packing; retains understandable context-specific advice rather than pretending the app measured PSD or compression.",
+      "current_locked": "Five actual sensory inputs and all-green distinction, one truly controllable change, personalized same-coffee history and recipe families, no universal numeric targets or new mandatory input fields.",
+      "current_app": "Current recommendation engine has measured shot data and setup grinder version, not a PSD alpha/beta or measured dry bed compression parameter. Its numerical steps are approved heuristics, not this paper's validated output.",
+      "proposed_change": "NO SAFE APP CODE CHANGE justified by this paper alone. Record only bounded evidence and preserve existing behavior. Possible future opt-in actual compression/PSD instrumentation or new control priority is an OWNER PRODUCT DECISION and would also require supported prospective real measurements.",
+      "approval_required_for_behavior_change": true,
+      "implementation": "RESEARCH_REVIEW_COMPLETED; PRODUCT_CHANGE_NOT_PROPOSED_AND_NOT_AUTHORIZED",
+      "test_plan": "Direct exact live engine/read-only source matching and author-institution abstract crosscheck; no Node, browser, SQL, app or cup tests executed this docs-only evidence increment. PR docs governance required before merge.",
+      "release_queue": "NOT_APPLICABLE_RESEARCH_ONLY_NO_DEPLOYABLE_FILE"
     }
   ]
 }
