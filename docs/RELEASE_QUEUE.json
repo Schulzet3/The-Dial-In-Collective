@@ -5944,8 +5944,8 @@
       "issue": 508,
       "pr": 904,
       "title": "Discard stale failed URL autofill responses after source URL or form changes",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "0ce8bc4848dfb7768b1feb424f5c8e5922a401bd",
       "scope_paths": [
         "site/cloud/main.js",
         "site/cloud/coffee-url-autofill.js"
@@ -5953,20 +5953,32 @@
       "tests": [
         "Original current development 28f9f053014a8aa8cffb8dd87415a413df763bc6 main.js 790-814 source review confirms successful async URL previews reject changed/closed form while failed responses only guard form identity and can show stale error.",
         "PR #904 first head 7f26866dd444ff380dfc6cbc54966ae687675ad7 added a shared conservative current request guard, no network regression; exact PR-head approval run42146360005 FAILED queue intake because scope was not represented. Same-commit queue + scoped journal repair underway; this failed check is NOT PASS.",
-        "Require corrected exact PR-head Node22, targeted 2 new regression cases, lint/build, applicable cloud/offline/approval/security and isolated CI plus nonforce merge, merged blob readback and source-bound checks before READY."
+        "Require corrected exact PR-head Node22, targeted 2 new regression cases, lint/build, applicable cloud/offline/approval/security and isolated CI plus nonforce merge, merged blob readback and source-bound checks before READY.",
+        "PR #904 corrected immutable head b338efe02ccd4aa56fb9ebc21d2f8df8d6ffa32b approval42146482003, security42146481874, isolated SQL42146481890, source archive42146481910, cloud/mobile/browser/offline42146482184 and Node22/lint/build42146481905 all SUCCESS; original frozen60342146481984 SKIPPED, not PASS. First head approval42146360005 failed queue intake and was genuinely repaired.",
+        "Exact PR-head Node22 all tests 2614 total: 2608 PASS, 0 FAIL, 6 SKIP. Two new source-guard regression tests passed (ok 1995 and 1996). Lint and build completed. Scoped cloud-tests job NOT_APPLICABLE; separate browser/mobile/visual/offline checks passed, no live signed-in user scenario claimed.",
+        "Nonforce PR #904 squash merged at 0ce8bc4848dfb7768b1feb424f5c8e5922a401bd; reread merged blobs site/cloud/main.js=a5188bec750a948de9b473c60012f073affaf4fd, site/cloud/coffee-url-autofill.js=c3fc17242ea0fed011bc61fa66cdfce8dd54aa89, new focused test=392ea3feb2639b946b9e706bad8c4cdcae17d9ba: all identical to tested PR head.",
+        "Exact merged-source run42146762782 Node22/lint/build SUCCESS 2608 PASS/0 FAIL/6 SKIP; approval42146762767 SUCCESS; cloud/mobile/browser/offline42146762750 SUCCESS. Published Netlify READY 6aeceac987f179a62547f490 remains release SHA 6c729b928fad5fd59ae012c63d7c005f180b2b64; no audit deploy."
       ],
       "ci_runs": [
         42146360005,
         42146360131,
         42146359995,
         42146360045,
-        42146360007
+        42146360007,
+        42146482003,
+        42146481874,
+        42146481890,
+        42146481910,
+        42146482184,
+        42146481905,
+        42146481984,
+        42146762782,
+        42146762767,
+        42146762750
       ],
-      "blockers": [
-        "Corrected PR-head exact-source CI not yet passed; tests/PR merge pending; do not release or mark READY."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/508",
-      "notes": "N508-059 confirmed narrow source-derived UX race in preview failure path, not evidence of live signed-in incident. TESTING only; no Netlify/prod member/Auth/SQL/provider writes or release authority. Retain existing coffee fields, offline behavior, Log Shot -> Rate -> Recommendations, and single owner-published production branch."
+      "notes": "N508-059 confirmed narrow source-derived UX race in preview failure path, not evidence of live signed-in incident. TESTING only; no Netlify/prod member/Auth/SQL/provider writes or release authority. Retain existing coffee fields, offline behavior, Log Shot -> Rate -> Recommendations, and single owner-published production branch.\nNARROW SOURCE-VERIFIED READY in development at merged 0ce8bc4848dfb7768b1feb424f5c8e5922a401bd; source-bound merged Node/approval/browser/offline suites passed. Published release version and dev baseline of BOTH touched UI files were byte-identical before this repair, so no pre-existing divergent app edits in these two paths. Candidate packaging and owner-only one-use release preflight remain separate; NO PUBLICATION OR LIVE SIGNED-IN TEST. Source-only stale error feedback race repaired conservatively."
     }
   ],
   "history": [
