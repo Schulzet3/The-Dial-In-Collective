@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {collectCoffeeSourceFacts} from '../src/server/coffee-source-facts.mjs';
+import {collectCoffeeSourceFacts,reconcileSelectedCoffeeReviewActorRoles} from '../src/server/coffee-source-facts.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 
 // Original603 #440 selected current seller, not another coffee or frozen oracle.
@@ -54,4 +54,35 @@ test('unrelated product cannot lend a new farm/processing actor to current canon
  assert.equal(parsed.fields.process,'Anaerobic');
  assert.notEqual(exact(parsed.source_facts,'Farm','Other Estate')?.field,'producer');
  assert.notEqual(exact(parsed.source_facts,'Processing','Other Facility')?.field,'process');
+});
+
+test('merged selected product sources cannot restore Farm/Processing role errors from a second HTML representation',()=>{
+ const src=read(panel);
+ const duplicate=[
+  {label:'Farm',value:'El Rincon',field:'producer',source_url:url,source_type:'html',section:''},
+  {label:'Processing',value:'La Palma',field:'process',source_url:url,source_type:'html',section:''}
+ ];
+ const combined=[...src,...duplicate];
+ assert.equal(combined.some(f=>f.label==='Farm'&&f.value==='El Rincon'&&f.field==='producer'),true);
+ reconcileSelectedCoffeeReviewActorRoles(combined,{source_url:url});
+ assert.equal(combined.filter(f=>f.label==='Farm'&&f.value==='El Rincon').every(f=>f.field===undefined),true);
+ assert.equal(combined.filter(f=>f.label==='Processing'&&f.value==='La Palma').every(f=>f.field===undefined),true);
+ assert.ok(combined.some(f=>f.label==='Grower'&&f.field==='producer'&&f.value==='Diego Horta'));
+ assert.ok(combined.some(f=>f.label==='Process'&&f.field==='process'&&f.value==='Anaerobic Natural'));
+});
+
+test('final review normalization preserves conflicts, unrelated sources and literal other processing method',()=>{
+ const original=[
+  {label:'Grower',value:'Diego Horta',field:'producer',source_url:url,source_type:'html'},
+  {label:'Process',value:'Anaerobic Natural',field:'process',source_url:url,source_type:'html'},
+  {label:'Farm',value:'Other Farm',field:'producer',source_url:url,source_type:'html',conflicting:true},
+  {label:'Farm',value:'Unrelated Estate',field:'producer',source_url:'https://roaster.example/products/other',source_type:'html'},
+  {label:'Processing',value:'Washed',field:'process',source_url:url,source_type:'html'},
+  {label:'Farm',value:'El Rincon',field:'producer',source_url:url,source_type:'html'}
+ ];
+ reconcileSelectedCoffeeReviewActorRoles(original,{source_url:url});
+ assert.equal(original[2].field,'producer');
+ assert.equal(original[3].field,'producer');
+ assert.equal(original[4].field,'process');
+ assert.equal(original[5].field,undefined);
 });
