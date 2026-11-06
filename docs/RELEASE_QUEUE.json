@@ -8,6 +8,32 @@
   },
   "items": [
     {
+      "id": "DIC-Q-33-original603-346-washing-station-role",
+      "issue": 33,
+      "pr": 1056,
+      "title": "Retain selected Washing Station as review-only source; do not mistake station/village for canonical producer",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-semantic-specs.mjs"
+      ],
+      "tests": [
+        "Exact selected original603 #346 fresh merged official HTTPS 42249862789 revealed Washing Station | Idido improperly auto-assigned canonical producer=Idido; direct official source showed village/kebele, no named farmer; source HTML SHA256 191e6d9fb862d98c612a1ccdb6e0724208a5974ae34889f4dcb906c7162fcbbf.",
+        "Six positive/adversarial new fixture groups for selected station, preserved source role, distinct producer/farm/farmer, related and other-product JSON-LD boundaries; independent test pass pending.",
+        "PR-head approval42250325079 failed with untracked src/server/coffee-semantic-specs.mjs because first commit omitted queue row; this next same-commit queue/journal change fixes intake; not a code test failure. Exact head Node CI pending."
+      ],
+      "ci_runs": [
+        42250325079
+      ],
+      "blockers": [
+        "Rerun exact-head governance and Node/lint/build/cloud/SQL/security, fix failures",
+        "Non-force merge reviewed source",
+        "After-code exact current selected official source and Add Coffee/source-review verify #346, reconcile as READY only on proof"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "DEVELOPMENT ONLY; original frozen603 CSV/oracle/scorer/captures intact; #267 and #96 scope preserved, no deployment or production writes. Explicitly not READY before post-merge source proof."
+    },
+    {
       "id": "DIC-Q-455-similar-coffee-stale-success-evidence-guard",
       "issue": 455,
       "pr": 1046,
