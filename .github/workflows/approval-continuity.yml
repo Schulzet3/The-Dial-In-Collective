@@ -32,13 +32,14 @@ jobs:
         run: node scripts/audit/security-inventory.mjs
       - name: Fail on missing owner decisions or approved UI/source tests
         run: node scripts/audit/approval-coverage.mjs
-      - name: Validate durable queue schema and show next-batch status (never publishes)
-        run: |
-          node scripts/release/release-queue.mjs --validate
-          node scripts/release/release-queue.mjs --enforce-intake
-          node scripts/release/release-queue.mjs --status
+      - name: Validate queue schema and intake in one nonpublishing check
+        # --enforce-intake checks schema before exact-source coverage; the
+        # separate --validate and nonblocking --status invocations duplicated
+        # work on every push. On-demand queue status remains available.
+        run: node scripts/release/release-queue.mjs --enforce-intake
       - name: Audit EVERY pushed commit, including docs-only and earlier commits in batch
         env:
           DIC_BASE_SHA: ${{ github.event.before || github.event.pull_request.base.sha }}
           DIC_HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          DIC_EVENT_NAME: ${{ github.event_name }}
         run: node scripts/audit/verify-commit-checkpoint.mjs
