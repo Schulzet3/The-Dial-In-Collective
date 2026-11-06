@@ -32,11 +32,19 @@ export function baseline(coffee,style,dose,preferences='') {
 // Never promote an archived/imported `dialedIn` marker into personal recipe
 // evidence without verifying its five original recorded ideal ratings.
 export function familyShots(s,id) {return s.shots.filter(x=>!x.hidden&&x.dialedIn===true&&isDialed(x.tasteScales)&&x.familyId===id);}
+// Five green ratings do not validate malformed imported physical measurements.
+// Preserve all originals in History; only measured rows inform recipe evidence.
+function measuredRecipeShots(shots) {
+ return shots.filter(sh=>finite(sh.doseG)&&sh.doseG>0&&
+  finite(sh.yieldG)&&sh.yieldG>0&&finite(sh.yieldG/sh.doseG)&&
+  finite(sh.timeS)&&sh.timeS>0);
+}
 export function familyStats(s,id) {
- const shots=familyShots(s,id);if(!shots.length)return null;
+ const historical=familyShots(s,id);if(!historical.length)return null;
+ const shots=measuredRecipeShots(historical);
  return {ratio:stats(shots.map(x=>x.yieldG/x.doseG),{singleWidth:1/(mean(shots.map(x=>x.doseG))||18)}),time:stats(shots.map(x=>x.timeS),{singleWidth:2}),count:shots.length,confirmed:shots.length>=2};
 }
-export function familiesFor(s,coffeeId,style) {return s.families.filter(f=>f.coffeeId===coffeeId&&f.style===style&&familyShots(s,f.id).length);}
+export function familiesFor(s,coffeeId,style) {return s.families.filter(f=>f.coffeeId===coffeeId&&f.style===style&&measuredRecipeShots(familyShots(s,f.id)).length);}
 export function assignFamily(s,shot) {
  const ratio=shot.yieldG/shot.doseG;
  let best=null,dist=Infinity;
@@ -67,8 +75,7 @@ function recipeHardwareTier(sh,version,basket,feed){
 }
 export function chooseRecipeFamily(s,coffeeId,style,version,basket,feed,p=coffeeState(s,coffeeId)){
  const options=familiesFor(s,coffeeId,style).map(f=>{
-  const shots=familyShots(s,f.id).filter(sh=>sh.coffeeId===coffeeId&&sh.style===style&&
-   finite(sh.doseG)&&sh.doseG>0&&finite(sh.yieldG)&&finite(sh.timeS));
+  const shots=measuredRecipeShots(familyShots(s,f.id).filter(sh=>sh.coffeeId===coffeeId&&sh.style===style));
   if(!shots.length)return null;
   const tier=Math.max(...shots.map(sh=>recipeHardwareTier(sh,version,basket,feed)));
   const matched=shots.filter(sh=>recipeHardwareTier(sh,version,basket,feed)===tier);
