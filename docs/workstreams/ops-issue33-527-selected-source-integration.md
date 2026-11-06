@@ -1,3 +1,7 @@
+## Same-commit correction: exact source whitespace matcher
+
+Before opening the PR, self-review of branch commit `83f12f8cfe34dbbf05e72d613737f1e0a1fedd2a` found the new official-source contract accidentally emitted a double-escaped regex `/\\\\s+/`, which matches a literal backslash rather than spaces. Correct it to actual JS whitespace `/\\s+/` and keep the strict positive assertion (do not weaken it). This second code commit changes the one runner line and this scoped journal together; no CI/pass is claimed before rerunning exact new head. [skip netlify]
+
 # Issue #33 — #527 Mystic Monk current named pear note safe PR598 recovery
 
 **Owner authority:** Nov 5/6 2026 automated development-only active Issue33. Exact base development SHA `4b800866e7cf99cc6baf17f3399e18a4c6051c63`; previous PR #598 head `ce5e3fcba5f101c57da9da9071bc923d5a0535fb` was open/stale; same original base `15dcae408c91e611ecbe47cd246ebc1644a206c2`. Latest base source readback proved `src/server/coffee-flavor-evidence.mjs` blob `14714359765acd4e26e8bb1264191ca1a71ab066` is **exactly unchanged** from #598 old base; original PR reviewed implementation flavor blob `3c68a46158c29b64b21c3b0b6a72b2f377efd660`. Metadata changed concurrently to blob `46f7cbc6ec57bb4f37c2e2077a705a78b229e550`; DO NOT blindly replace with stale PR metadata `259a4d297519fc649a68983b5d98d2bebb5bbda2`.

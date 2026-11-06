@@ -131,7 +131,7 @@ for(const target of targets){
         current_h1:r.selected_h1,source_sha256:r.html_sha256,
         parsed_name:r.current_fields?.name||null,parsed_notes:notes,
         same_product_named_story:/The Kenya Peaberry offers notes of honeydew melon and pear, with a hint of jasmine/i.test(
-          exactSource.replace(/<[^>]{0,2000}>/g,' ').replace(/\\s+/g,' ')),
+          exactSource.replace(/<[^>]{0,2000}>/g,' ').replace(/\s+/g,' ')),
         conflicts:r.conflicts||[]
       };
       r.selected_527_contract_passed=r.selected_h1.length===1&&
