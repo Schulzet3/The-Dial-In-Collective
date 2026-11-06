@@ -8,6 +8,30 @@
   },
   "items": [
     {
+      "id": "DIC-Q-267-community-family-count-prior-consistency",
+      "issue": 267,
+      "pr": 1013,
+      "title": "Normalize invalid Community confirmed-family counts consistently for unproven starting-prior ranking",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/community-evidence.js"
+      ],
+      "tests": [
+        "Baseline Node v22.16.0 isolated reproduction: invalid numeric-string confirmed family count 999999 outranked legitimate integer two despite return normalization; affected weak Community ratio starting prior only, not personal calibrated grind.",
+        "New deterministic Node 22 unit test verifies invalid string, negative, fractional and Infinity counts in both candidate orders; selected legitimate count and no cross-member group identity.",
+        "Risk-appropriate exact PR-head Node, lint/build/cloud/browser and governance checks must pass before nonforce merge; exact merged-source CI and queue reconciliation required for READY."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "PR #1013 approval run 42209271856 FAIL: untracked app change; TESTING queue row added in this same-scoped follow-up, rerun required",
+        "Head Node/lint/build/cloud/SQL/security/approval must be assessed as executed or NOT_APPLICABLE; merge and merged-source checks pending",
+        "Application/Auth/SQL/provider or live member exposure not claimed or tested; no publication"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/267",
+      "notes": "Development-only narrow Community metadata ranking consistency fix. No changes to personal data, SQL, Auth, provider, historical or original603 oracle. Preserve #96 and #33 boundaries. Owner release instruction absent."
+    },
+    {
       "id": "DIC-Q-33-original603-199-selected-description-literal-sensory",
       "issue": 33,
       "pr": 1011,
