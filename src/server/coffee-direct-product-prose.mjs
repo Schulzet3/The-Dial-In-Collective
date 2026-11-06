@@ -11,6 +11,13 @@ const fold=v=>String(v||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toL
 // Accept direct, selected-product usage or a narrow current decaf process
 // description; never scan site-wide education, menus, other products or SEO.
 const CURRENT_DECAF_METHOD=/^(?:(?:this|our)\s+(?:decaf(?:feinated)?\s+)?coffee\s+(?:is|was|has been)\s+decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?(?:swiss[\s-]?water|mountain[\s-]?water|sugar(?:[\s-]?cane|[\s-]?process)|ethyl\s+acetate|natural[\s-]?ea|(?:supercritical\s+)?carbon[\s-]?dioxide|co\s*[- ]?[2\u2082])\b|the\s+(?:swiss[\s-]?water|mountain[\s-]?water|sugar[\s-]?cane|carbon[\s-]?dioxide)\s*[\u00ae\u2122]?\s+(?:process|method)\s+is\s+(?:an?\s+)?[^.!?]{0,150}\bdecaffeination\s+process\b[^.!?]{0,160}\bcaffeine[\s-]?free\b)/iu;
+// These two direct current-product decaf descriptions have a different subject
+// or syntax from "this coffee is decaffeinated". Both require the selected H1,
+// a wholly decaffeinated chosen coffee, bounded product prose and a named
+// water treatment. Never derive method from an old lot, site SEO or water
+// merely used for processing equipment.
+const CURRENT_SELECTED_BEANS_WATER_DECAF=/^(?:these|our|this)\s+(?:(?:[\p{L}\p{M}-]+|&)\s+){0,12}beans\s+(?:are|were)\s+(?:naturally\s+)?decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?['"‘’]?(?:swiss|mountain)[\s-]?water['"‘’]?(?:\s+process)?\b/iu;
+const CURRENT_SELECTED_OUR_WATER_DECAF=/(?:^|[.!?]\s+)using\s+the\s+(?:swiss|mountain)[\s-]?water\s+process,\s+our\s+decaf\s+uses\b(?:[^.!?]|\d\.\d){0,240}\bcaffeine[\s-]?free\b/iu;
 const NONCURRENT_DECAF_METHOD=/\b(?:previous(?:ly)?|formerly|historically|typically|generally|other coffees?|another coffee|last year|prior (?:lot|harvest))\b/iu;
 // Same selected-product highlight can state GREEN processing and a distinct
 // decaffeination treatment in one short line, without a "Decaf method:" label.
@@ -254,7 +261,7 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   // Reuse the conservative method classifier; if multiple incompatible
   // methods are printed, the caller withholds autofill and keeps both sources.
   if(decafOnlyCoffee(name)&&line.length<=360&&
-     (CURRENT_DECAF_METHOD.test(line)||currentNamedDecafMethod(name,line)||selectedNamedSourceDecafProcess(name,line))&&
+     (CURRENT_DECAF_METHOD.test(line)||CURRENT_SELECTED_BEANS_WATER_DECAF.test(line)||CURRENT_SELECTED_OUR_WATER_DECAF.test(line)||currentNamedDecafMethod(name,line)||selectedNamedSourceDecafProcess(name,line))&&
      !NONCURRENT_DECAF_METHOD.test(line)&&
      inferDecaffeinationMethod({name,selectedMethod:line})&&!decafEvidence.has(line)){
    if(decafEvidence.size<4)decafEvidence.add(line);
