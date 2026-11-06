@@ -10,24 +10,38 @@
     {
       "id": "DIC-Q-455-community-summary-stale-success-evidence-guard",
       "issue": 455,
-      "pr": null,
+      "pr": 1077,
       "title": "Require actual five-green taste evidence in local contributor-balanced Community summary",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "92f955357eef4a9892cc228169b450609b0ff063",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
         "Source engine blob 0d1335ee121bba059b4f01cbdeb80d039e17cceb: communitySummary counted truthy archival dialedIn flags without checking recorded five taste fields, potentially inflating Community counts/contributor ratios/confidence in its exported local helper; synthetic source logic only, no demonstrated hosted member issue.",
         "Narrow proposed predicate dialedIn===true && isDialed(original five) while preserving existing outlierReview pending exclusion, contributor weights, ratios, raw measurements, notes and all Locked numeric/community rules.",
-        "Four direct Node22 real-module positive/negative regression groups authored, NOT YET EXECUTED; PR-head app/compiled mobile/offline/SQL/security/governance CI and exact merged-source readback required before READY."
+        "Four direct Node22 real-module positive/negative regression groups authored, NOT YET EXECUTED; PR-head app/compiled mobile/offline/SQL/security/governance CI and exact merged-source readback required before READY.",
+        "Exact PR head 1095ada6072522a3f5b8099d5746271f7386efd5: Node22 tests/lint/build 42273793979 2749 PASS/0 FAIL/6 SKIP including four direct regression groups; compiled Chromium/mobile/390px/offline/a11y42273793778, isolated SQL/JWT42273793775, security42273793827 and approval42273793797 SUCCESS. Frozen60342273793796 SKIPPED, not PASS.",
+        "Nonforce code PR1077 squash MERGED 92f955357eef4a9892cc228169b450609b0ff063; development readback and all FOUR original code/test/TESTING queue/SAME-COMMIT journal blobs equal passing head (engine f13197fc0ac34a27d836d9557132551eacb49fe1; test 3f96cbdf6740e7966ac9d8ebe1d582ea6a499885). Exact merged code Node22/lint/build42274074584 and governance42274074424 SUCCESS.",
+        "Exact merged-code Chromium/mobile/offline42274074485 was CANCELLED by concurrent disjoint #508 push 4af5e241b83b03021575355cf7349b330ecfe8c4. New #508 commit changed only audit receipt scripts/test and issue508 journal, NOT source engine, #455 test, local/Cloud app/browser assets. Source-preserving newer Node/lint42274920869 and governance42274920643 SUCCESS.",
+        "New source-equivalent compiled browser/offline run42274920734 attempt1 FAILED in unrelated existing pwa_offline_qa.py:159 with 20s synthetic offline SW owner-switch label timeout; failed-job run attempt2 independently retried, completed SUCCESS on exact 4af5e241b83b03021575355cf7349b330ecfe8c4 with identical #455 engine blob. Initial FAIL and cancelled old run retained, not relabeled PASS. No real production authenticated or member-data test."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "PR head CI and integration not yet verified"
+      "ci_runs": [
+        42273793979,
+        42273793778,
+        42273793775,
+        42273793827,
+        42273793797,
+        42274074584,
+        42274074424,
+        42274074485,
+        42274920869,
+        42274920643,
+        42274920734
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "R455-074 development-only SAFE candidate; not READY, not deployed. This affects only exported local communitySummary, not authoritative Supabase eligibility, RLS or published Community records. #96 owns hosted/privacy acceptance. 58 source identities/123 bounded checks unchanged; original S019 PDF inaccessible. No production SQL/Auth/Edge/member/provider writes."
+      "notes": "R455-074 VERIFIED READY in development only, NOT DEPLOYED. Narrow exported local communitySummary strict original five-green eligibility, not server SQL/RLS/hosted Community correctness. All original metrics, notes, contributor weighting, five ratings, outlier review, Locked numeric/style/privacy rules unchanged. Source CI includes an explicitly recorded interrupted merged browser run and initial offline timeout; passing exact source-equivalent attempt2 verified. Research inventory 58 sources/123 checks unchanged, original S019 inaccessible; no #267 literal-line credit. No live production Netlify/SQL/Auth/Edge/member/provider writes."
     },
     {
       "id": "DIC-Q-33-original603-485-current-facility-ethyl-acetate-method",
