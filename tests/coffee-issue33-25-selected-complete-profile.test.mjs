@@ -3,7 +3,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
-import {extractProductFlavorProfileEvidence} from '../src/server/coffee-flavor-evidence.mjs';
+import {extractProductFlavorEvidence} from '../src/server/coffee-flavor-evidence.mjs';
 const url='https://bleucoffee.com/products/copy-of-papua-new-guinea';
 const name='Sumatra Mandheling| Fair Trade Organic';
 const profile="Coffee profile: Coffee features floral, fruity, and sweet aromas of vanilla and pipe tobacco, with rich, lush, and smooth flavors of black cherry, tobacco, and cocoa.";
@@ -16,9 +16,9 @@ const page=(p=profile,extra='',meta='')=>
  extra+'</body></html>';
 
 test('one directly selected Coffee profile retains BOTH aromas and flavors, unchanged literal distinction',()=>{
- const html=page(),ranked=extractProductFlavorProfileEvidence(html,{clean});
- assert.ok(ranked.some(x=>x.kind==='explicit_label'&&/vanilla and pipe tobacco/.test(x.value)&&
-   /flavors of black cherry, tobacco, and cocoa/.test(x.value)),JSON.stringify(ranked));
+ const html=page(),literal=extractProductFlavorEvidence(html,{clean});
+ assert.match(literal,/vanilla and pipe tobacco/);
+ assert.match(literal,/flavors of black cherry, tobacco, and cocoa/);
  const r=extractPublicCoffeeFacts(html,{source_url:url});
  assert.equal(r.ok,true,JSON.stringify(r));
  const notes=r.fields.tasting_notes||'';
@@ -38,8 +38,8 @@ test('historical, conditional, irrelevant or separately named coffee prose canno
   'Coffee profile: Coffee has floral aromas of vanilla, with chocolate flavors of cocoa when cooled.',
   'Coffee profile: Coffee features floral aromas of vanilla, with rich flavors of cocoa, if brewed with milk.'
  ]){
-  const ranked=extractProductFlavorProfileEvidence(page(bad),{clean});
-  assert.ok(!ranked.some(x=>/vanilla/i.test(x.value)),JSON.stringify({bad,ranked}));
+  const fallback=extractProductFlavorEvidence(page(bad),{clean});
+  assert.doesNotMatch(fallback,/vanilla/i,bad);
   const r=extractPublicCoffeeFacts(page(bad),{source_url:url});
   assert.doesNotMatch(r.fields?.tasting_notes||'',/vanilla/i,bad);
  }
@@ -60,7 +60,6 @@ test('SEO-only profile, wrong selected region, or unsupported separated aroma mu
   'Coffee profile: Coffee features aromas of vanilla, with flavors of cocoa and body.',
   'Coffee profile: Coffee features floral aromas of vanilla with cocoa flavors of chocolate.'
  ]){
-  assert.ok(!extractProductFlavorProfileEvidence(page(bad),{clean}).some(x=>
-   /vanilla/i.test(x.value)&&/cocoa/i.test(x.value)),bad);
+  assert.doesNotMatch(extractProductFlavorEvidence(page(bad),{clean}),/vanilla.*cocoa/i,bad);
  }
 });

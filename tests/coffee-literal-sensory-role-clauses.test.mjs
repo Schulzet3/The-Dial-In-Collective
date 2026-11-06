@@ -49,7 +49,7 @@ const cases=[
     "id": "bleu",
     "name": "Sumatra Mandheling| Fair Trade Organic",
     "source": "Coffee profile: Coffee features floral, fruity, and sweet aromas of vanilla and pipe tobacco, with rich, lush, and smooth flavors of black cherry, tobacco, and cocoa. Varietals: Bourbon, Tim Tim, Catimor Elevation: 1,200-1,500 Meters",
-    "notes": "rich, lush, and smooth flavors of black cherry, tobacco, and cocoa",
+    "notes": "floral, fruity, and sweet aromas of vanilla and pipe tobacco, with rich, lush, and smooth flavors of black cherry, tobacco, and cocoa",
     "quote": "Coffee profile: Coffee features floral, fruity, and sweet aromas of vanilla and pipe tobacco, with rich, lush, and smooth flavors of black cherry, tobacco, and cocoa.",
     "case_id": "bleucoffee-com__copy-of-papua-new-guinea-741ec193"
   },
@@ -138,13 +138,13 @@ test('country-qualified flavor adjectives cannot describe another origin or a bl
  assert.equal(whole.fields.tasting_notes,'ripe pear and cocoa');
 });
 
-test('one Coffee profile sentence keeps complete flavor clause and leaves the aroma clause in source facts',()=>{
+test('one selected Coffee profile preserves its complete aroma and flavor clauses as fallback',()=>{
  const entry=cases[4],result=parse(entry.name,'<p>'+entry.source+'</p>');
  assert.equal(result.fields.tasting_notes,entry.notes);
- for(const aroma of ['floral','fruity','vanilla','pipe tobacco'])assert.ok(!result.fields.tasting_notes.includes(aroma),aroma);
+ for(const aroma of ['floral','fruity','vanilla','pipe tobacco'])assert.ok(result.fields.tasting_notes.includes(aroma),aroma);
  assert.ok(retained(result,'floral, fruity, and sweet aromas of vanilla and pipe tobacco'));
  const other=parse('Current Coffee','<p>Coffee profile: Coffee features gentle aromas of jasmine and tea, with bright, rounded flavors of ripe pear and candied lime.</p>');
- assert.equal(other.fields.tasting_notes,'bright, rounded flavors of ripe pear and candied lime');
+ assert.equal(other.fields.tasting_notes,'gentle aromas of jasmine and tea, with bright, rounded flavors of ripe pear and candied lime');
 });
 
 test('separate Taste complexity statement supplies only its explicit cup list',()=>{

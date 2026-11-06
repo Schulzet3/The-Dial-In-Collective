@@ -634,15 +634,9 @@ function flavorProse(page,clean,{origin='',originConflict=false}={}){
    if(primary){rememberNarrative(primary);continue;}
    if(roastVariants.size>1||DIRECT_EXTRACTION_FLAVOR.test(sentence))continue;
    const literal=selectedLiteralFlavorSentence(sentence,selectedName,clean,blendScope,{origin,originConflict,section:block.section});
-   if(literal){
-    // An expressly labeled, whole selected Coffee profile outranks
-    // fallback story prose, without suppressing independent conflicting
-    // printed tasting lists. Keep source's aroma vs flavor wording intact.
-    if(/^Coffee\s+profile\s*:\s*Coffee\s+(?:features|offers|has)\s+/i.test(sentence))
-     explicit.set(noteKey(literal),literal);
-    else rememberNarrative(literal);
-    continue;
-   }
+   // Keep this complete aroma+flavor profile a lower-ranked narrative
+   // fallback. A separately printed Tasting Notes list wins unchanged.
+   if(literal){rememberNarrative(literal);continue;}
    const coordinated=coordinatedFlavorSentence(sentence,blockText,clean);
    if(coordinated){rememberNarrative(coordinated);continue;}
    const continuation=layeredComponentFlavor(sentence,clean)||straightShotFlavor(sentence,sentences[sentenceIndex-1],clean);
