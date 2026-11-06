@@ -180,10 +180,10 @@ export function focusShotValidationError(form,errors,tastes={}) {
 export function shotSummary(sh,unit='F') {
  const dose=numericMeasurement(sh.doseG)?Number(sh.doseG):NaN;
  const yieldG=numericMeasurement(sh.yieldG)?Number(sh.yieldG):NaN;
- const ratio=Number.isFinite(dose)&&dose>0&&Number.isFinite(yieldG)&&yieldG>0?` \\u00b7 1:${fmt(yieldG/dose,2)}`:'';
- const temperature=numericMeasurement(sh.tempC)?` \\u00b7 ${tempDisplay(sh.tempC,unit)}\\u00b0${unit}`:'';
- const grind=numericMeasurement(sh.grindSetting)?` \\u00b7 Grind ${fmt(sh.grindSetting)}`:'';
- return `<span class="shot-numbers">${fmt(sh.doseG)}g \\u2192 ${fmt(sh.yieldG)}g${ratio} \\u00b7 ${fmt(sh.timeS)}s${temperature}${grind}</span>`;
+ const ratio=Number.isFinite(dose)&&dose>0&&Number.isFinite(yieldG)&&yieldG>0?` \u00b7 1:${fmt(yieldG/dose,2)}`:'';
+ const temperature=numericMeasurement(sh.tempC)?` \u00b7 ${tempDisplay(sh.tempC,unit)}\u00b0${unit}`:'';
+ const grind=numericMeasurement(sh.grindSetting)?` \u00b7 Grind ${fmt(sh.grindSetting)}`:'';
+ return `<span class="shot-numbers">${fmt(sh.doseG)}g \u2192 ${fmt(sh.yieldG)}g${ratio} \u00b7 ${fmt(sh.timeS)}s${temperature}${grind}</span>`;
 }
 export const humanDate=d=>{if(typeof d!=='string'||!d.trim())return '';try{const date=new Date(d);return Number.isNaN(date.getTime())?'':date.toLocaleDateString('en-US',{month:'numeric',day:'numeric',year:'numeric'});}catch{return '';}};
 export const previewNotice=()=>`<div class="preview-note">${icon('eye',16)}<div><strong>Design preview</strong><span>Fictional sample data. Nothing is shared, synced or sent to an account.</span></div></div>`;
