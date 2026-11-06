@@ -530,11 +530,13 @@ function selectedLiteralFlavorSentence(sentence,name,clean,blendScope=false,{ori
  match=sentence.match(/^Taste\s+the\s+complexity\s+of\s+([^.!?;]{2,220}?)\s+in\s+(?:every|each)\s+cup[.!?]?$/i);
  if(match&&!/\b(?:body|mouthfeel|acidity|balance|balanced)\b/i.test(match[1]))
   return shortFlavorList(match[1],clean,{allowSingle:true});
- // One explicit profile sentence separates aroma from flavor. The complete
- // flavor clause keeps its modifiers; the preceding aromas remain source text.
- match=sentence.match(/^Coffee\s+profile\s*:\s*Coffee\s+(?:features|offers|has)\s+[^.!?;]{2,220}?\baromas?\s+of\s+[^.!?;]{2,150}?,\s+with\s+([^.!?;]{2,220}?\bflavou?rs?\s+of\s+[^.!?;]{2,180})[.!?]?$/i);
- return match&&!/\b(?:body|mouthfeel|acidity|balance|balanced)\b/i.test(match[1])?
-  shortFlavorList(match[1],clean,{allowSingle:true}):'';
+ // A selected coffee's single, expressly labeled Coffee profile may
+ // publish aromas AND flavors in one coordinated sentence. Do not discard
+ // the first clause or infer a flavor from a separate story/list/product.
+ // Preserve its literal aroma/flavor distinction for source review.
+ match=sentence.match(/^Coffee\s+profile\s*:\s*Coffee\s+(?:features|offers|has)\s+([^.!?;]{2,220}?\baromas?\s+of\s+[^.!?;]{2,150}?),\s+with\s+([^.!?;]{2,220}?\bflavou?rs?\s+of\s+[^.!?;]{2,180})[.!?]?$/i);
+ if(!match||/\b(?:body|mouthfeel|acidity|balance|balanced)\b/i.test(match[1]+' '+match[2]))return '';
+ return normalizeExplicitCoffeeTastingNotes(match[1]+', with '+match[2],{allowProse:true});
 }
 function mixedCharacteristicsFlavor(segment,clean,section=''){
  if(NONCURRENT_SENSORY_SECTION.test(section))return '';
@@ -632,7 +634,15 @@ function flavorProse(page,clean,{origin='',originConflict=false}={}){
    if(primary){rememberNarrative(primary);continue;}
    if(roastVariants.size>1||DIRECT_EXTRACTION_FLAVOR.test(sentence))continue;
    const literal=selectedLiteralFlavorSentence(sentence,selectedName,clean,blendScope,{origin,originConflict,section:block.section});
-   if(literal){rememberNarrative(literal);continue;}
+   if(literal){
+    // An expressly labeled, whole selected Coffee profile outranks
+    // fallback story prose, without suppressing independent conflicting
+    // printed tasting lists. Keep source's aroma vs flavor wording intact.
+    if(/^Coffee\s+profile\s*:\s*Coffee\s+(?:features|offers|has)\s+/i.test(sentence))
+     explicit.set(noteKey(literal),literal);
+    else rememberNarrative(literal);
+    continue;
+   }
    const coordinated=coordinatedFlavorSentence(sentence,blockText,clean);
    if(coordinated){rememberNarrative(coordinated);continue;}
    const continuation=layeredComponentFlavor(sentence,clean)||straightShotFlavor(sentence,sentences[sentenceIndex-1],clean);
