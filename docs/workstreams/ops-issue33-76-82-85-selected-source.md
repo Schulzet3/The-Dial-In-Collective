@@ -1,0 +1,15 @@
+# Issue #33 — original603 #76/#82/#85 current official selected source
+
+**Authority:** owner 2026-11-05 development-only hourly Issue #33; frozen603 inventory and decisions immutable. **Base development SHA:** `fd775bb4e71bc50f3698a4f535b6089d432ccd9c`; workflow original blob `40b29187f78601440dcebebf7b2bf803366cbc63`; original 603-row adjudication CSV blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6`.
+
+## Source evidence and current hypothesis (before guarded parser run)
+
+- Original #76 Fireworks — https://craftsmancliffroasters.com/products/fireworks ; selected official H1 Fireworks; dark-roast single-origin Brazil with directly named toasted almonds and sweet berry jam. Do not infer green processing from the adjective 'natural notes'. Direct page reviewed Nov 5; raw current HTML hash and parser outcome not yet verified.
+- Original #82 COSTA RICA TARRAZU — https://daggermountain.com/products/costa-rica-tarrazu ; selected H1, region Tarrazu, process Natural, listed Cattura and Catuai and 1200–1750 masl, gummy candy/lemon lime/honeydew/cherry pie filling. Avoid manufacturer-correcting literal variety spelling without authority. Direct official page reviewed Nov 5; raw HTML hash/parser outcome pending.
+- Original #85 Costa Rica Santa Elena — https://dailyrisecoffee.com/products/costa-rica-santa-elena ; exact selected H1, Light roast, listed Maple/Raisin/Buttered Toast, selected story identifies Luz Marina Trujillo as producer and Santa Elena coffee farm; 'pulped natural process' discussed in current selected story, but do not substitute AI-generated review or another lot's method. Actual parser and raw hash pending.
+
+**Scope of same commit:** only `.github/workflows/roaster-source-probe.yml` and this indexed scoped journal. Add bounded #76/#82/#85 marker and original-603-number selection; runner `scripts/audit/issue33-original603-focused-source-review.mjs` unchanged, captures the actual official raw HTML/sha, parser, source_facts, Add Coffee preview and source review. This is **not** automatic manual certification. No parser fix is asserted without source-bound before/after proof; no release queue item READY.
+
+**Acceptance and next executable action:** run all applicable PR-head CI, nonforce merge after review, verify exact merged SHA and current 3-case official HTTPS probe. Download artifact/re-hash actual raw HTML if accessible; individually compare direct selected claims to actual parsed current fields, identify positive and adversarial cases, make narrow generic corrections if evidenced; log exceptions, update the source register and Issue #33 before any scoped READY transition. If a page is inaccessible or selected identity changes, mark UNAVAILABLE/CONFLICT rather than reuse SEO, an adjacent coffee, old captures or fabricated facts. Original 603/201/1197 oracle/scorer/capture/CSV unchanged. No production, Netlify, provider/Auth/SQL/member operations; #267 V2 and #96 independent.
+
+**Status:** TESTING; official current parser/CI UNVERIFIED until actual runs complete. [skip netlify]
