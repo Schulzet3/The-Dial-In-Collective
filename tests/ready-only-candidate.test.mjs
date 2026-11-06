@@ -90,6 +90,25 @@ test('later READY promotion of originally unready source stays excluded if exact
   /Additional READY source not proven post-staging|Cannot certify additional READY source chronology/);
 });
 
+test('unselected frozen READY source stays excluded by exact published-byte restoration',()=>{
+ const unselected={...one,id:'DIC-Q-104',issue:104,title:'separately READY parser',
+  scope_paths:['src/server/extractor.mjs']};
+ const queue={...q,items:[one,unselected,unfinished]};
+ const validated=validateReadyOnlyCandidate(queue,{...validate,liveQueue:queue});
+ assert.equal(validated.ready,true);
+ assert.deepEqual(validated.ready_items.map(i=>i.id),[one.id]);
+ assert.deepEqual(validated.excluded_paths,['src/server/extractor.mjs']);
+ assert.throws(()=>validateReadyOnlyCandidate(queue,{...validate,liveQueue:queue,
+  sourceObjectAt:(sha,path)=>sha===C&&path==='src/server/extractor.mjs'?'unselected READY code leaked':validate.sourceObjectAt(sha,path)}),
+  /candidate HOLD/);
+ assert.throws(()=>validateReadyOnlyCandidate(queue,{...validate,
+  liveQueue:{...queue,items:[one,{...unselected,title:'Changed approval'},unfinished]}}),
+  /Additional READY source not proven post-staging|Cannot certify additional READY source chronology/);
+ assert.throws(()=>validateReadyOnlyCandidate(queue,{...validate,
+  liveQueue:{...queue,items:[one,{...unselected,scope_paths:['site/card.js']},unfinished]}}),
+  /Additional READY source not proven post-staging|Cannot certify additional READY source chronology/);
+});
+
 test('mixed READY/unready source can ship only exact pinned approved READY blob',()=>{
  const overlap={...unfinished,id:'DIC-Q-102',issue:102,state:'TESTING',scope_paths:['site/card.js']};
  const queue={...q,items:[one,unfinished,overlap]};
