@@ -32,7 +32,7 @@ export function refineSelectedDescriptionSensory(html,{clean,notes}={}){
    const candidates=literal.split(/\s+(?:and|&)\s+/i).map(x=>x.trim()).filter(Boolean);
    if(candidates.length<1||candidates.length>3)continue;
    const parsed=candidates.map(x=>normalizeExplicitCoffeeTastingNotes(x));
-   if(parsed.some((x,i)=>!x||x.length>52||x.split(/\s+/).length>5||
+   if(parsed.some(x=>!x||x.length>52||x.split(/\s+/).length>5||
       /\b(?:body|mouthfeel|acidity|finish|flavor|flavour|sweetness|coffee|beans?|notes?)\b/i.test(x)))continue;
    for(const phrase of parsed){
     const key=fold(phrase);
