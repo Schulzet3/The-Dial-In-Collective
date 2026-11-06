@@ -141,11 +141,38 @@ test('mixed READY/unready source can ship only exact pinned approved READY blob'
   /Excluded test must be newly introduced and absent/);
  assert.throws(()=>validateReadyOnlyCandidate(queue,{...withTest,
   manifest:{...withTest.manifest,excluded_unready_test_paths:['tests/issue999-untracked.test.mjs']}}),
-  /does not belong to a current unfinished/);
+  /does not belong to a frozen unselected READY or unfinished mixed-source item/);
  assert.throws(()=>validateReadyOnlyCandidate(queue,{...withTest,
   stagedCommitChangedPaths:input.stagedCommitChangedPaths}),/staging commit changes unrelated paths/);
 });
 
+
+test('isolated owner release excludes ONLY exact new tests of unselected frozen READY source',()=>{
+ const scanner={...one,id:'DIC-Q-102',issue:102,title:'separate READY scanner',
+  merged_source_sha:B,scope_paths:['src/server/extractor.mjs']};
+ const frozen={...q,items:[one,unfinished,scanner]};
+ const newTest='tests/coffee-issue102-new-scanner.test.mjs';
+ const objectAt=(sha,path)=>path===newTest?(sha===B?'scanner-test-blob':null):
+  path.startsWith('tests/coffee-issue102-')?null:validate.sourceObjectAt(sha,path);
+ const input={...validate,liveQueue:frozen,
+  manifest:{...manifest,excluded_unready_test_paths:[newTest]},
+  sourceObjectAt:objectAt,stagedCommitChangedPaths:[...validate.stagedCommitChangedPaths,newTest]};
+ const accepted=validateReadyOnlyCandidate(frozen,input);
+ assert.deepEqual(accepted.excluded_unready_test_paths,[newTest]);
+ assert.deepEqual(accepted.ready_items.map(x=>x.id),[one.id]);
+ assert.throws(()=>validateReadyOnlyCandidate(frozen,{...input,
+  sourceObjectAt:(sha,path)=>path===newTest&&sha===C?'leaked test':objectAt(sha,path)}),
+  /Excluded test must be newly introduced and absent/);
+ assert.throws(()=>validateReadyOnlyCandidate({...frozen,
+  items:[one,unfinished,{...scanner,merged_source_sha:A}]},input),
+  /Additional READY source not proven post-staging|Cannot certify additional READY source chronology|Excluded test does not belong/);
+ assert.throws(()=>validateReadyOnlyCandidate(frozen,{...input,
+  liveQueue:{...frozen,items:[one,unfinished,{...scanner,title:'unreviewed mutation'}]}}),
+  /Additional READY source not proven post-staging|Cannot certify additional READY source chronology|Excluded test does not belong/);
+ assert.throws(()=>validateReadyOnlyCandidate(frozen,{...input,
+  manifest:{...input.manifest,excluded_unready_test_paths:['tests/coffee-issue102-unrelated.test.mjs']}}),
+  /Excluded test does not belong/);
+});
 
 test('unready same-file overlap blocks even if another READY item covers the path',()=>{
  const overlapping={...unfinished,scope_paths:['site/card.js']};
