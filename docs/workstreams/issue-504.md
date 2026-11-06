@@ -532,3 +532,15 @@ Live source at review: development `fbb7cd072bf73cd65f088d9ed9e6687b2b612ea5`, m
 **Coverage:** 7919 file lines / 60754 words; 125 GitHub metadata records / 36434 words. SHA1 known vector and prior receipt, exact cursor continuity, unique IDs and totals PASS. Functional Node22/SQL/Auth/original603/browser/offline not run for docs-only evidence. New PR CI NOT YET VERIFIED; SKIPPED/unstarted != PASS. No READY/DEPLOYED promotion or release/production movement.
 
 **NEXT exact:** [Issue #267 comment `6644094012`](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267#issuecomment-6644094012), word 1; 35 historical #267 comments remain at snapshot, with other GitHub-wide texts and delegated strict source coverage incomplete. Issue #504 OPEN / IN_PROGRESS; no deployment, provider/member/Auth/Edge/SQL, history rewrite or force operations.
+
+## Issue #504 G1-047 — November 6 UTC: eight ordered historical #267 comments direct semantic review [skip netlify]
+
+**Live:** development `5c668fbb85ac845fbf8b37a6079f4866ffcb710a`, main `b62bc028fe1cda1fd2756bfb1162501ca629002a`, release/production `6c729b928fad5fd59ae012c63d7c005f180b2b64`. #504 and delegated #267/#455/#33/#96 remain OPEN; `get_repo` reports PUBLIC; #630's Nov4 owner-approved temporary PUBLIC window through Nov30 is the governing scoped exception. No visibility change.
+
+**Actually reviewed full bodies, words 1–EOF:** `6644094012`, `6644187945`, `6644262778`, `6644992901`, `6645916315`, `6645987857`, `6646235567`, `6647015407`. 2145 directly read newly counted words / 8 unique GitHub comment records; per-object SHA1, UTF8 byte count, exact inclusive lines/words, semantic interpretation and dispositions in [G1-047 receipt](../audits/issue504-review-G1-047.json). #267 immutable frozen/pinned/current source semantic credit **not imported**. Original prior SHA1 and arithmetic verified.
+
+**Findings:** Historical strict #267 S2-091..104 merged counts are timestamp-specific, not latest coverage. Historic Actions zero-step errors were subsequently rerun with exact checks, not retroactive PASS; #635 diagnostics privacy remediation and #655 nonfinite JSON guard were already repaired in #267, no redundant code edits. Earlier #267 privacy alarms must be read against newer #630 owner-directed temporary-public exception; owner-only private return remains Nov30, no secrets/exposure certification. Scope changes: documentation evidence only, no safe current code deletion shown.
+
+**Cumulative #504:** 7919 file lines/60754 words, 133 GitHub records/38579 words. Strict #267 ledger snapshot 7585/579961 frozen and 9258/57913 pinned; unvalidated code and live delta still excluded. Docs-only CI pending; no Node/SQL/Auth/mobile/browser/offline/original603 tests run here; SKIPPED != PASS. No release/production movement.
+
+**Exact next:** [#267 comment `6647307457`](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267#issuecomment-6647307457), word 1; 30 more #267 comments at snapshot, plus wider metadata and delegated source coverage. Issue OPEN / IN_PROGRESS. No deploy, purchases, provider/member/SQL/Auth/Edge writes or force Git.
