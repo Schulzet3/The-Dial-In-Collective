@@ -673,6 +673,29 @@ function addInlineWooVariations(html,nodes,blocked,result,source_url){
  }
 }
 
+// A complete selected-source review may merge several representations of one
+// Shopify product (visible HTML, chosen JSON, and preserved prose). Normalize
+// *review field attribution* only after those sources have merged: otherwise a
+// second copy of "Farm | ..." can silently re-tag an actor as Producer.
+// Never discard the seller's literal label, URL, value or text evidence.
+export function reconcileSelectedCoffeeReviewActorRoles(facts,{source_url}={}){
+ if(!Array.isArray(facts)||!source_url)return facts;
+ const eligible=f=>f?.source_url===source_url&&f.source_type==='html'&&
+  !f.conflicting&&!/different coffee|other coffee|previous (?:coffee|lot)|general guidance|educational/i.test(String(f.section||''));
+ const normLabel=f=>normalized(String(f?.label||'').replace(/[:：]\s*$/u,''));
+ const labeledGrower=facts.some(f=>eligible(f)&&f.field==='producer'&&/^(?:grower|producer|farmer)$/.test(normLabel(f)));
+ const methods=facts.filter(f=>eligible(f)&&f.field==='process'&&normLabel(f)==='process').map(f=>normalized(f.value));
+ for(const fact of facts){
+  if(!eligible(fact))continue;
+  if(labeledGrower&&fact.field==='producer'&&normLabel(fact)==='farm')delete fact.field;
+  if(methods.length&&fact.field==='process'&&normLabel(fact)==='processing'&&
+   !methods.includes(normalized(fact.value))&&
+   /^[\p{Lu}][\p{L}\p{M}.'’-]*(?:\s+[\p{Lu}][\p{L}\p{M}.'’-]*){0,4}$/u.test(fact.value)&&
+   !/\b(?:washed|natural|honey|anaerobic|wet.?hulled|ferment|carbonic|maceration|dry.?process|wet.?process|decaf)\b/i.test(fact.value))delete fact.field;
+ }
+ return facts;
+}
+
 export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
  const result=collector({source_url});
  if(typeof html!=='string'||html.length>2_000_000)return flag([],typeof html==='string'&&html.length>2_000_000);
