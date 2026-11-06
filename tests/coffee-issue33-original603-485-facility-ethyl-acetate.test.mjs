@@ -7,7 +7,6 @@ import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 // 3a5bf9c44cfab0fa9f7db793ddd751aca232bcc47dd7d33f1dba3a2b6b782145.
 // Compact selected-source fixtures, not the original captured page.
 const url='https://www.fazendacoffee.com/products/colombia-decaf-sugar-process';
-const selected='<main><h1>Colombia Decaf</h1>';
 const facility='The coffee is then decaffeinated at Descafecol, the only decaffeination plant in the Andean region of Colombia. The plant relies entirely on the pure water from the Navado el Ruis (a snow-capped volcano on the border of the departments of Caldas and Tolima) and natural ethyl acetate from sugar cane plants in Palmira, Colombia. Natural ethyl acetate is created during fermentation and contributes to what’s often described as the fruitiness in a young wine.';
 const parse=(body,name='Colombia Decaf')=>extractPublicCoffeeFacts('<main><h1>'+name+'</h1>'+body+'</main>',{source_url:url});
 
