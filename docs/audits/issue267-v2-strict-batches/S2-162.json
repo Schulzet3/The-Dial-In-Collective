@@ -1,0 +1,1345 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch_id": "S2-162",
+  "date_utc": "2026-11-06",
+  "reviewer": "AI direct line-specific review; no independent human certification",
+  "source": {
+    "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+    "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+    "file_index": 59,
+    "path": "docs/DECISION_LEDGER.json",
+    "blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+    "range": [
+      3869,
+      3928
+    ],
+    "count": 60
+  },
+  "current": {
+    "development_commit_observed": "2e13987964d4b91147659b851ea275d58b4d820a",
+    "path": "docs/DECISION_LEDGER.json",
+    "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+    "range": [
+      3977,
+      4036
+    ],
+    "byte_exact_count": 60
+  },
+  "previous": {
+    "batch_id": "S2-161",
+    "range": [
+      3809,
+      3868
+    ]
+  },
+  "line_records": [
+    {
+      "line": 3869,
+      "classification": "timestamp",
+      "source_text": "    \"owner_instruction_at_local\": \"2026-10-21 16:08 America/Denver\",",
+      "source_text_redacted": false,
+      "behavior": "Record dated admin permission decision at 16:08 Denver",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Old timestamp does not grant new access",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3977,
+        "byte_exact": true
+      },
+      "testability": "Crosswalk Oct21 owner instruction",
+      "improvement": "Keep time-scoped authority",
+      "locked_fit": "Admin authorization",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3870,
+      "classification": "scope",
+      "source_text": "    \"scope\": \"Reorder five admin dashboard cards and sections, clickable anchors, paged category listings with creator identity/email, operator-only notes and shots plus audited corrections, coffee corrections and server-owned URL preview fill blanks only\",",
+      "source_text_redacted": false,
+      "behavior": "Describe reorder/dashboard/cards and operator-only note/shot correction features",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Expansive list risks exposing sensitive member records",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3978,
+        "byte_exact": true
+      },
+      "testability": "Compare current admin RPC and UX controls under #96",
+      "improvement": "Retain intended narrow admin-only features",
+      "locked_fit": "Admin privacy",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3871,
+      "classification": "permission",
+      "source_text": "    \"permission\": \"Only current server-validated admitted administrator; no public or ordinary member rights; passwords/session tokens/auth secrets never returned\",",
+      "source_text_redacted": false,
+      "behavior": "Require server-validated admitted administrator and no secrets/passwords",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Client role assertion could expose tokens or member data",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3979,
+        "byte_exact": true
+      },
+      "testability": "Test denied ordinary member and secrets exclusions in #96",
+      "improvement": "Preserve server-side admission",
+      "locked_fit": "RLS/Auth",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3872,
+      "classification": "consent",
+      "source_text": "    \"owner_consent_assertion\": \"Owner states all users consented to admin reading/editing data including notes, passwords excepted; direct member consent records not independently checked\",",
+      "source_text_redacted": false,
+      "behavior": "Record owner's blanket member-consent assertion but admit direct records not checked",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Unverified per-member consent must never be represented as independently established",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3980,
+        "byte_exact": true
+      },
+      "testability": "Inspect actual consent and access policy only under #96",
+      "improvement": "Do not equate assertion with verified individual permissions",
+      "locked_fit": "Privacy",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3873,
+      "classification": "array",
+      "source_text": "    \"supersedes_only\": [",
+      "source_text_redacted": false,
+      "behavior": "Start narrow supersession list",
+      "quality": "Parsed JSON delimiter linked to adjacent scope; no independent executable behavior.",
+      "risk": "Broad reading could erase original sanitized dashboard guarantees",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3981,
+        "byte_exact": true
+      },
+      "testability": "Parse JSON with next entry",
+      "improvement": "Retain scope fence",
+      "locked_fit": "Authority",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3874,
+      "classification": "supersession",
+      "source_text": "      \"Old minimal read-only administrator dashboard scope, exclusively for NEW narrow admin-only RPC; original dic_admin_dashboard sanitized read-only endpoint remains unchanged\"",
+      "source_text_redacted": false,
+      "behavior": "Replace minimal read-only scope only for new admin RPC, preserve old sanitized endpoint",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Existing public API must not become editable by accident",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3982,
+        "byte_exact": true
+      },
+      "testability": "Trace RPC names and permissions in #96",
+      "improvement": "Keep old endpoint unchanged",
+      "locked_fit": "Admin boundary",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3875,
+      "classification": "array",
+      "source_text": "    ],",
+      "source_text_redacted": false,
+      "behavior": "Close narrow supersession list",
+      "quality": "Parsed JSON delimiter linked to adjacent scope; no independent executable behavior.",
+      "risk": "Misplaced delimiter could widen grants",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3983,
+        "byte_exact": true
+      },
+      "testability": "Validate JSON parse",
+      "improvement": "No edit",
+      "locked_fit": "Scope",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3876,
+      "classification": "array",
+      "source_text": "    \"preserves\": [",
+      "source_text_redacted": false,
+      "behavior": "Begin protections that admin enhancements must preserve",
+      "quality": "Parsed JSON delimiter linked to adjacent scope; no independent executable behavior.",
+      "risk": "Omitting controls undermines access boundary",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3984,
+        "byte_exact": true
+      },
+      "testability": "Read each subsequent protected invariant",
+      "improvement": "Keep all items",
+      "locked_fit": "Data",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3877,
+      "classification": "baseline",
+      "source_text": "      \"79 original Locked baseline items and 20 Open items\",",
+      "source_text_redacted": false,
+      "behavior": "Reference original 79 Locked and 20 Open requirements",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Count is historic, not current pass/completeness evidence",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3985,
+        "byte_exact": true
+      },
+      "testability": "Compare latest Master Spec and approval matrix",
+      "improvement": "Preserve record without claiming present count",
+      "locked_fit": "Decision precedence",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3878,
+      "classification": "privacy",
+      "source_text": "      \"private/member RLS isolation and Community DTO anonymity\",",
+      "source_text_redacted": false,
+      "behavior": "Preserve member RLS isolation and anonymous Community DTO",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Admin editing must not expose private fields to members",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3986,
+        "byte_exact": true
+      },
+      "testability": "Read #96 RLS policies and Community DTO tests",
+      "improvement": "Do not broaden Community reads",
+      "locked_fit": "RLS privacy",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3879,
+      "classification": "provenance",
+      "source_text": "      \"immutable shot provenance, per-record revision checks, before/after audits, original member data retention\",",
+      "source_text_redacted": false,
+      "behavior": "Protect immutable shot provenance and audit before/after records",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Unlogged edits break member audit history",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3987,
+        "byte_exact": true
+      },
+      "testability": "Trace revisions, guards and audits in current implementation",
+      "improvement": "Retain audit trail",
+      "locked_fit": "Shot history",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3880,
+      "classification": "source",
+      "source_text": "      \"official roaster evidence cannot be invented from an extractor preview\",",
+      "source_text_redacted": false,
+      "behavior": "Forbid fabricated roaster facts during URL preview",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Extractor previews may be partial or stale",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3988,
+        "byte_exact": true
+      },
+      "testability": "Check #33 source-specific accepted output",
+      "improvement": "Keep missing facts empty",
+      "locked_fit": "Extractor honesty",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3881,
+      "classification": "consent",
+      "source_text": "      \"no live SQL/Edge/Auth/Netlify or member data mutation without separate owner approval\",",
+      "source_text_redacted": false,
+      "behavior": "No live provider/Auth/SQL/member changes without separate owner grant in that original decision",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "One-use release instruction cannot justify unrelated writes",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3989,
+        "byte_exact": true
+      },
+      "testability": "Compare superseding specific publish approval",
+      "improvement": "No production activity in audit",
+      "locked_fit": "Owner authority",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3882,
+      "classification": "privacy",
+      "source_text": "      \"GitHub Free private and single-use release guard\"",
+      "source_text_redacted": false,
+      "behavior": "Private GitHub Free and single-use release guard",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Current public repository conflicts with this protection",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3990,
+        "byte_exact": true
+      },
+      "testability": "Compare actual repo visibility",
+      "improvement": "Escalate mismatch; no settings write",
+      "locked_fit": "Private repository",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3883,
+      "classification": "array",
+      "source_text": "    ],",
+      "source_text_redacted": false,
+      "behavior": "Close preserved-invariants list",
+      "quality": "Parsed JSON delimiter linked to adjacent scope; no independent executable behavior.",
+      "risk": "Malformed JSON can hide constraints",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3991,
+        "byte_exact": true
+      },
+      "testability": "Parse entire decision",
+      "improvement": "No edit",
+      "locked_fit": "Data",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3884,
+      "classification": "status",
+      "source_text": "    \"implementation\": \"DEVELOPMENT IMPLEMENTED: source JS/full isolated SQL/Chromium CI green. NOT DEPLOYED. Real signed administrator/member owner-device acceptance pending; requires named owner SQL+Netlify production consent before application\",",
+      "source_text_redacted": false,
+      "behavior": "Claim dev JS/SQL/Chromium green, not deployed and signed admin acceptance pending",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Old CI summary is not current proof of Auth acceptance or production",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3992,
+        "byte_exact": true
+      },
+      "testability": "Check exact historic CI and later #96 evidence",
+      "improvement": "Keep bounded historical evidence",
+      "locked_fit": "CI truth",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3885,
+      "classification": "issue-ref",
+      "source_text": "    \"linked_issue\": 47",
+      "source_text_redacted": false,
+      "behavior": "Link original admin editing issue47",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Issue link does not itself certify feature",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3993,
+        "byte_exact": true
+      },
+      "testability": "Fetch #47 when admin work proposed",
+      "improvement": "Avoid duplicate ownership",
+      "locked_fit": "Scope",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3886,
+      "classification": "object",
+      "source_text": "  },",
+      "source_text_redacted": false,
+      "behavior": "End admin records editing decision",
+      "quality": "Parsed JSON delimiter linked to adjacent scope; no independent executable behavior.",
+      "risk": "Prevent source-only approval bleeding into next consent",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3994,
+        "byte_exact": true
+      },
+      "testability": "Parse JSON boundary",
+      "improvement": "Keep separate",
+      "locked_fit": "Authority",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3887,
+      "classification": "object",
+      "source_text": "  \"current_owner_universal_deployment_consent_20261021\": {",
+      "source_text_redacted": false,
+      "behavior": "Start later Oct21 universal deployment consent interpretation",
+      "quality": "Parsed JSON delimiter linked to adjacent scope; no independent executable behavior.",
+      "risk": "New owner grant supersedes only described sub-consent handling",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3995,
+        "byte_exact": true
+      },
+      "testability": "Read later Locked #417/#457",
+      "improvement": "Do not treat universal as automatic deployment",
+      "locked_fit": "Owner grant",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3888,
+      "classification": "id",
+      "source_text": "    \"decision_id\": \"OPS-UNIVERSAL-DEPLOYMENT-CONSENT-20261021\",",
+      "source_text_redacted": false,
+      "behavior": "Identify OPS-UNIVERSAL-DEPLOYMENT-CONSENT",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "ID is provenance, not unrestricted deploy token",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3996,
+        "byte_exact": true
+      },
+      "testability": "Cross-check dated owner quote",
+      "improvement": "Retain exact key",
+      "locked_fit": "Audit",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3889,
+      "classification": "status",
+      "source_text": "    \"status\": \"Locked, explicitly owner approved, governs future deployment consent interpretation\",",
+      "source_text_redacted": false,
+      "behavior": "Label future deployment consent interpretation Locked",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Cannot outrank later explicit owner-discretion supersession",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3997,
+        "byte_exact": true
+      },
+      "testability": "Compare #457 no auto staging/publish",
+      "improvement": "Use latest scoped decision",
+      "locked_fit": "#457",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3890,
+      "classification": "quote",
+      "source_text": "    \"owner_quote\": \"You have approval to publish ALL pending changes including the backend changes. In the future, when I approve a deployment, you need to treat it as a universal approval unless I specifically say otherwise. Please remember and document that.\",",
+      "source_text_redacted": false,
+      "behavior": "Owner approves ALL then-pending work and broadens consent per explicitly approved release",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Historic 'universal' wording could be misread as perpetual blanket approval",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3998,
+        "byte_exact": true
+      },
+      "testability": "Compare one-grant-per-release condition",
+      "improvement": "Require new owner Publish READY command",
+      "locked_fit": "Release authorization",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3891,
+      "classification": "date",
+      "source_text": "    \"effective_date_local\": \"2026-10-21 America/Denver\",",
+      "source_text_redacted": false,
+      "behavior": "Give local effective date Oct21",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Age matters for later overrides",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 3999,
+        "byte_exact": true
+      },
+      "testability": "Check current local/UTC chronology",
+      "improvement": "Preserve date",
+      "locked_fit": "Supersession",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3892,
+      "classification": "permission",
+      "source_text": "    \"permission\": \"Each explicit approval to deploy covers the then-pending bounded release package, frontend and directly needed SQL/Edge/Auth/backend/provider actions unless the owner expressly limits it; no duplicate SQL or Edge approval question.\",",
+      "source_text_redacted": false,
+      "behavior": "Cover directly needed backend/SQL/Edge/provider steps WITH an explicit publish approval",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Must not enable unrelated provider or member writes",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4000,
+        "byte_exact": true
+      },
+      "testability": "Match approved bounded source package",
+      "improvement": "Scope by item/source, no release now",
+      "locked_fit": "One-use publishing",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3893,
+      "classification": "object",
+      "source_text": "    \"current_release_scope\": {",
+      "source_text_redacted": false,
+      "behavior": "Open exact then-pending release scope",
+      "quality": "Parsed JSON delimiter linked to adjacent scope; no independent executable behavior.",
+      "risk": "Old package must not be mapped to 2026 Nov5 queue",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4001,
+        "byte_exact": true
+      },
+      "testability": "Read named items in next lines",
+      "improvement": "Keep old bundle separate",
+      "locked_fit": "Historical release",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3894,
+      "classification": "boolean",
+      "source_text": "      \"one_release\": true,",
+      "source_text_redacted": false,
+      "behavior": "Record one_release true",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Explicit bound bars repeated runs",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4002,
+        "byte_exact": true
+      },
+      "testability": "Check historic spent claim",
+      "improvement": "Never reuse authorization",
+      "locked_fit": "Single-use",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3895,
+      "classification": "package",
+      "source_text": "      \"frontend\": \"All pending approved frontend and extractor/admin changes\",",
+      "source_text_redacted": false,
+      "behavior": "Define then-pending frontend/extractor/admin source",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "All pending is not future/unmerged work",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4003,
+        "byte_exact": true
+      },
+      "testability": "Compare dated package membership",
+      "improvement": "Do not infer today's queue authorized",
+      "locked_fit": "Source specificity",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3896,
+      "classification": "array",
+      "source_text": "      \"named_sql_order\": [",
+      "source_text_redacted": false,
+      "behavior": "Open ordered SQL migration filenames",
+      "quality": "Parsed JSON delimiter linked to adjacent scope; no independent executable behavior.",
+      "risk": "Order matters for migration idempotence",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4004,
+        "byte_exact": true
+      },
+      "testability": "Check listed filenames and past application only",
+      "improvement": "No live SQL",
+      "locked_fit": "SQL safety",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3897,
+      "classification": "migration",
+      "source_text": "        \"20261021221455_dic_source_worker_auth_and_admission.sql\",",
+      "source_text_redacted": false,
+      "behavior": "Name 20261021221455 source worker Auth/admission SQL",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Applying twice or out of order may alter permissions",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4005,
+        "byte_exact": true
+      },
+      "testability": "Cross-check migration history with #96",
+      "improvement": "No migration under audit",
+      "locked_fit": "Auth",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3898,
+      "classification": "migration",
+      "source_text": "        \"20261021224447_dic_admin_content_review.sql\"",
+      "source_text_redacted": false,
+      "behavior": "Name 20261021224447 admin content review SQL",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Could change sensitive admin RPCs",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4006,
+        "byte_exact": true
+      },
+      "testability": "Cross-check source and applied status separately",
+      "improvement": "Preserve migration immutability",
+      "locked_fit": "RLS/Auth",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3899,
+      "classification": "array",
+      "source_text": "      ],",
+      "source_text_redacted": false,
+      "behavior": "Close SQL order",
+      "quality": "Parsed JSON delimiter linked to adjacent scope; no independent executable behavior.",
+      "risk": "Lost order can misrepresent deployment sequence",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4007,
+        "byte_exact": true
+      },
+      "testability": "Parse array",
+      "improvement": "Retain",
+      "locked_fit": "Migration history",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3900,
+      "classification": "array",
+      "source_text": "      \"edge_functions\": [",
+      "source_text_redacted": false,
+      "behavior": "Open Edge function scope",
+      "quality": "Parsed JSON delimiter linked to adjacent scope; no independent executable behavior.",
+      "risk": "Function authorization limited to named single release",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4008,
+        "byte_exact": true
+      },
+      "testability": "Check next function name",
+      "improvement": "Preserve scope",
+      "locked_fit": "Provider",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3901,
+      "classification": "function",
+      "source_text": "        \"dic-verify-coffee\"",
+      "source_text_redacted": false,
+      "behavior": "Name dic-verify-coffee only",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "General Edge deployment not authorized",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4009,
+        "byte_exact": true
+      },
+      "testability": "Cross-check function version and source if needed",
+      "improvement": "No provider write",
+      "locked_fit": "Extractor security",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3902,
+      "classification": "array",
+      "source_text": "      ],",
+      "source_text_redacted": false,
+      "behavior": "Close Edge function scope",
+      "quality": "Parsed JSON delimiter linked to adjacent scope; no independent executable behavior.",
+      "risk": "Malformed closure can broaden service list",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4010,
+        "byte_exact": true
+      },
+      "testability": "Parse file",
+      "improvement": "Keep delimiter",
+      "locked_fit": "Scope",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3903,
+      "classification": "boolean",
+      "source_text": "      \"no_new_unrelated_work\": true",
+      "source_text_redacted": false,
+      "behavior": "Prohibit unrelated new work during old one-release package",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Scope creep violates bounded consent",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4011,
+        "byte_exact": true
+      },
+      "testability": "Compare package diff at receipt",
+      "improvement": "No new work piggyback",
+      "locked_fit": "Owner grant",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3904,
+      "classification": "object",
+      "source_text": "    },",
+      "source_text_redacted": false,
+      "behavior": "Close current_release_scope",
+      "quality": "Parsed JSON delimiter linked to adjacent scope; no independent executable behavior.",
+      "risk": "Following supersession must not expand old one-release",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4012,
+        "byte_exact": true
+      },
+      "testability": "Parse structure",
+      "improvement": "Retain boundary",
+      "locked_fit": "Scope",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3905,
+      "classification": "array",
+      "source_text": "    \"supersedes_only\": [",
+      "source_text_redacted": false,
+      "behavior": "Begin narrowly superseded extra-approval requirements",
+      "quality": "Parsed JSON delimiter linked to adjacent scope; no independent executable behavior.",
+      "risk": "Misread could erase future publish command",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4013,
+        "byte_exact": true
+      },
+      "testability": "Read exact clauses with #457",
+      "improvement": "Keep narrow supersession",
+      "locked_fit": "Authority",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3906,
+      "classification": "supersession",
+      "source_text": "      \"The older requirement to obtain an additional owner approval *specifically* for production SQL/Edge/Auth or required provider deployment actions, after an explicit approval to publish ALL pending release changes\",",
+      "source_text_redacted": false,
+      "behavior": "Drop duplicate SQL/Edge/Auth approval for approved named release package",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Only after actual explicit publish consent, not automatically",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4014,
+        "byte_exact": true
+      },
+      "testability": "Verify owner approval and source package",
+      "improvement": "No extra prompts for already scoped release; no deploy now",
+      "locked_fit": "Release UX",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3907,
+      "classification": "supersession",
+      "source_text": "      \"The immediately preceding October 21 production hold ONLY for separately named SQL/Edge consent\"",
+      "source_text_redacted": false,
+      "behavior": "Remove then-current SQL/Edge consent hold for same package",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Not permission for new unrelated migrations",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4015,
+        "byte_exact": true
+      },
+      "testability": "Check named migrations above",
+      "improvement": "Keep historical completed hold",
+      "locked_fit": "Migration consent",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3908,
+      "classification": "array",
+      "source_text": "    ],",
+      "source_text_redacted": false,
+      "behavior": "Close supersession list",
+      "quality": "Parsed JSON delimiter linked to adjacent scope; no independent executable behavior.",
+      "risk": "Syntax delimiter protects unrelated controls",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4016,
+        "byte_exact": true
+      },
+      "testability": "Parse JSON",
+      "improvement": "No edit",
+      "locked_fit": "Decision precedence",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3909,
+      "classification": "array",
+      "source_text": "    \"preserves\": [",
+      "source_text_redacted": false,
+      "behavior": "Start preserved owner data/release rules",
+      "quality": "Parsed JSON delimiter linked to adjacent scope; no independent executable behavior.",
+      "risk": "Each item remains active beyond consent simplification",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4017,
+        "byte_exact": true
+      },
+      "testability": "Inspect all following safeguards",
+      "improvement": "Preserve",
+      "locked_fit": "Safety",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3910,
+      "classification": "baseline",
+      "source_text": "      \"Prior 79 baseline Locked requirements and historical receipts\",",
+      "source_text_redacted": false,
+      "behavior": "Preserve baseline Locked requirements and historical receipts",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Later owner decisions govern explicit supersessions",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4018,
+        "byte_exact": true
+      },
+      "testability": "Compare latest ledger; do not replace history",
+      "improvement": "Keep immutable evidence",
+      "locked_fit": "Decision precedence",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3911,
+      "classification": "retention",
+      "source_text": "      \"Member privacy/RLS/history/offline shot data and non-destructive requirements\",",
+      "source_text_redacted": false,
+      "behavior": "Preserve member RLS, history and offline shots",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Deployment cannot discard owner/private records",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4019,
+        "byte_exact": true
+      },
+      "testability": "Trace relevant app invariants in #96",
+      "improvement": "No destructive changes",
+      "locked_fit": "Privacy",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3912,
+      "classification": "consent",
+      "source_text": "      \"No unapproved deletion, arbitrary personal-record mutation or paid purchase/top-up\",",
+      "source_text_redacted": false,
+      "behavior": "Forbid arbitrary member deletion and unapproved paid purchases",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Universal release does not allow irreversible unrelated actions",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4020,
+        "byte_exact": true
+      },
+      "testability": "Review owner consent boundaries",
+      "improvement": "Preserve restrictions",
+      "locked_fit": "Cost/data",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3913,
+      "classification": "privacy",
+      "source_text": "      \"Private GitHub Free, advisory checks, non-force single-use source-grant release with backup and credit evidence\",",
+      "source_text_redacted": false,
+      "behavior": "Require private repo, advisory CI, nonforce one-use release with backups/credits",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Public visibility now conflicting; bypassing single-use unsafe",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4021,
+        "byte_exact": true
+      },
+      "testability": "Compare repo metadata and release19 receipt",
+      "improvement": "Escalate privacy issue; do not publish",
+      "locked_fit": "Release integrity",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3914,
+      "classification": "grant",
+      "source_text": "      \"One explicit new owner approval for each future release; no unlimited release authority\",",
+      "source_text_redacted": false,
+      "behavior": "Require one fresh explicit owner approval per FUTURE release",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Clear denial of blanket standing authority",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4022,
+        "byte_exact": true
+      },
+      "testability": "Check current owner publish command",
+      "improvement": "No production deploy",
+      "locked_fit": "Owner authority",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3915,
+      "classification": "test",
+      "source_text": "      \"Actual CI, protected function roles, verified production readiness and owner device acceptance separate\"",
+      "source_text_redacted": false,
+      "behavior": "Preserve CI, function role controls, production readback and separately verified owner device acceptance",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Green CI alone not full acceptance",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4023,
+        "byte_exact": true
+      },
+      "testability": "Check executed vs skipped checks and #96 outcomes",
+      "improvement": "Don't label skipped as passed",
+      "locked_fit": "Acceptance integrity",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3916,
+      "classification": "array",
+      "source_text": "    ],",
+      "source_text_redacted": false,
+      "behavior": "Close preserved control list",
+      "quality": "Parsed JSON delimiter linked to adjacent scope; no independent executable behavior.",
+      "risk": "Malformed JSON could invalidate scope",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4024,
+        "byte_exact": true
+      },
+      "testability": "Validate parse",
+      "improvement": "No edit",
+      "locked_fit": "Safety",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3917,
+      "classification": "status",
+      "source_text": "    \"implementation\": \"POLICY RECORDED, all pending source already staged; this does not claim hosted deployment, migration application, new Edge version or published Netlify source\"",
+      "source_text_redacted": false,
+      "behavior": "State policy recorded but expressly NOT evidence of actual deployment",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Important instruction/result distinction",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4025,
+        "byte_exact": true
+      },
+      "testability": "Check actual Oct21 release receipts",
+      "improvement": "Keep qualified status",
+      "locked_fit": "Evidence",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3918,
+      "classification": "object",
+      "source_text": "  },",
+      "source_text_redacted": false,
+      "behavior": "End universal deployment consent entry",
+      "quality": "Parsed JSON delimiter linked to adjacent scope; no independent executable behavior.",
+      "risk": "Separates succeeding UX-only authorization",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4026,
+        "byte_exact": true
+      },
+      "testability": "Parse JSON boundary",
+      "improvement": "Keep intact",
+      "locked_fit": "Scope",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3919,
+      "classification": "object",
+      "source_text": "  \"current_owner_admin_low_friction_review_20261021\": {",
+      "source_text_redacted": false,
+      "behavior": "Begin low-friction admin review decision",
+      "quality": "Parsed JSON delimiter linked to adjacent scope; no independent executable behavior.",
+      "risk": "Specific UX change, not provider permission",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4027,
+        "byte_exact": true
+      },
+      "testability": "Read subsequent admin feature fields",
+      "improvement": "Preserve scope",
+      "locked_fit": "Admin UX",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3920,
+      "classification": "id",
+      "source_text": "    \"id\": \"UX-ADMIN-LOW-FRICTION-REVIEW-20261021\",",
+      "source_text_redacted": false,
+      "behavior": "Identify admin low-friction review decision",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Named ID does not bypass Auth controls",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4028,
+        "byte_exact": true
+      },
+      "testability": "Crosswalk Master Spec",
+      "improvement": "Retain key",
+      "locked_fit": "Provenance",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3921,
+      "classification": "status",
+      "source_text": "    \"status\": \"Owner-Locked, approved SOURCE IMPLEMENTATION AND TESTING, NOT new deployment\",",
+      "source_text_redacted": false,
+      "behavior": "Lock source implementation/test approval while excluding new deploy",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Direct negative permission limits operations",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4029,
+        "byte_exact": true
+      },
+      "testability": "Review exact latest release authorization",
+      "improvement": "No deployment",
+      "locked_fit": "Owner boundary",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3922,
+      "classification": "request",
+      "source_text": "    \"owner_instruction\": \"Pending Coffees show all details without nested expansion; all approved coffee fields including name editable; ordinary Approve Distinct one click without an extra reason or confirm unless genuine conflict.\",",
+      "source_text_redacted": false,
+      "behavior": "Demand Pending details visible, editable fields, one-click distinct approval if no conflict",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "UX convenience may not weaken near-duplicate checks",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4030,
+        "byte_exact": true
+      },
+      "testability": "Test admin UI after #96 role validation",
+      "improvement": "Preserve one deliberate action",
+      "locked_fit": "Admin UX",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3923,
+      "classification": "array",
+      "source_text": "    \"details\": [",
+      "source_text_redacted": false,
+      "behavior": "Begin detailed UX acceptance list",
+      "quality": "Parsed JSON delimiter linked to adjacent scope; no independent executable behavior.",
+      "risk": "No executable logic in delimiter",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4031,
+        "byte_exact": true
+      },
+      "testability": "Parse following items",
+      "improvement": "Keep complete list",
+      "locked_fit": "UX",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3924,
+      "classification": "ui",
+      "source_text": "      \"Use single accessible top-level Pending disclosure with all coffee fields visible per card\",",
+      "source_text_redacted": false,
+      "behavior": "Single accessible top-level Pending disclosure, full details visible",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Nested interactions risk accessibility regressions",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4032,
+        "byte_exact": true
+      },
+      "testability": "Visual/mobile/a11y test with synthetic data",
+      "improvement": "Keep accessible visible content",
+      "locked_fit": "A11y",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3925,
+      "classification": "admin-edit",
+      "source_text": "      \"Canonical fields name, roaster, release_label become editable to server-validated admin; record before/after and retain immutable UUID, all library/shot links\",",
+      "source_text_redacted": false,
+      "behavior": "Allow admin edit canonical name/roaster/release while preserving UUID links",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Renaming IDs incorrectly can orphan shots",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4033,
+        "byte_exact": true
+      },
+      "testability": "Test before/after audit and link retention",
+      "improvement": "Never mutate UUID or historical shots",
+      "locked_fit": "Data integrity",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3926,
+      "classification": "ui",
+      "source_text": "      \"Ordinary admin Approve Distinct uses one deliberate button and server-generated audit reason; no browser reason prompt or second confirmation\",",
+      "source_text_redacted": false,
+      "behavior": "One deliberate Approve Distinct action with server reason",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Removing all confirmation requires server duplicate safety",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4034,
+        "byte_exact": true
+      },
+      "testability": "Test one-click + conflict negative path",
+      "improvement": "Retain clear intent and provenance",
+      "locked_fit": "Admin UX",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3927,
+      "classification": "server-guard",
+      "source_text": "      \"Server performs existing role, revision and near-duplicate guard without adding user steps; conflicts surface clearly\"",
+      "source_text_redacted": false,
+      "behavior": "Require server role, revision and near-duplicate guard without extra user steps",
+      "quality": "Dated historical decision/claim, subject to exact later Locked supersession; not current runtime proof.",
+      "risk": "Unchecked optimistic approval may admit duplicates",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4035,
+        "byte_exact": true
+      },
+      "testability": "Test stale revisions, roles and conflicts",
+      "improvement": "Preserve fail-closed server checks",
+      "locked_fit": "Auth and UX",
+      "human_independently_certified": false
+    },
+    {
+      "line": 3928,
+      "classification": "array",
+      "source_text": "    ],",
+      "source_text_redacted": false,
+      "behavior": "Close low-friction details list",
+      "quality": "Parsed JSON delimiter linked to adjacent scope; no independent executable behavior.",
+      "risk": "Delimiter only; no approval implied",
+      "dead_or_obsolete": "Immutable historical decision metadata, not a proven obsolete current executable path. Do not delete.",
+      "duplication": "Byte-exact current Decision Ledger counterpart preserved intentionally, not identified duplicate active application logic.",
+      "exact_current_counterpart": {
+        "path": "docs/DECISION_LEDGER.json",
+        "blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+        "line": 4036,
+        "byte_exact": true
+      },
+      "testability": "Parse JSON",
+      "improvement": "No edit",
+      "locked_fit": "Scope",
+      "human_independently_certified": false
+    }
+  ],
+  "findings": [
+    {
+      "id": "S2-162-CONSENT",
+      "severity": "PRIVACY_REVIEW",
+      "status": "UNVERIFIED_ASSERTION",
+      "source_lines": [
+        3871,
+        3872
+      ],
+      "description": "Original owner states members consented to admin edits but same line expressly says direct consent records were not independently checked; never represent blanket consent as verified or weaken RLS. Coordinate #96 only."
+    },
+    {
+      "id": "S2-162-ONE-USE",
+      "severity": "RELEASE_GUARD",
+      "status": "HISTORICAL_SCOPE_ONLY",
+      "source_lines": [
+        3890,
+        3892,
+        3914,
+        3917
+      ],
+      "description": "October21 universal backend/SQL/Edge consent applies only to each explicitly approved bounded release, not automatically to future deployments; newer #417/#457 require explicit owner-selected READY release."
+    },
+    {
+      "id": "S2-162-REPO",
+      "severity": "HIGH",
+      "status": "CONFIRMED_POLICY_CONFLICT_PREVIOUSLY_LOGGED",
+      "source_lines": [
+        3882,
+        3913
+      ],
+      "description": "Repeat preservation of private GitHub Free conflicts with current public metadata. This is same existing finding S2-161-PUBLIC, not a new independent vulnerability count."
+    }
+  ],
+  "nonoverlap": {
+    "prior_last": 3868,
+    "first": 3869,
+    "last": 3928,
+    "overlap": 0,
+    "canonical_delta_before_merge": 0
+  },
+  "next": {
+    "file_index": 59,
+    "path": "docs/DECISION_LEDGER.json",
+    "first_unreviewed_line": 3929
+  },
+  "tests": "Source fetch/identical-line checks only; runtime/CI/provider tests not claimed."
+}
