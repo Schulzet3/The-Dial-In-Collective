@@ -90,7 +90,7 @@ for(const target of targets){
       .filter(([,v])=>v!=null&&typeof v!=='object').map(([k,v])=>[k,clip(v,400)]));
     r.conflicts=p.conflicts||[];
     r.source_facts=(p.source_facts||[]).slice(0,45).map(f=>({
-      field:clip(f.field,80),value:clip(f.value,360),section:clip(f.section,110),
+      label:clip(f.label,120),field:clip(f.field,80),value:clip(f.value,360),source_url:clip(f.source_url,320),section:clip(f.section,110),
       source_type:clip(f.source_type,55),conflicting:f.conflicting===true}));
     r.add_coffee_ui_rendered=coffeeUrlPreviewMarkup(p).includes('coffee-url-preview');
     r.source_review_rendered=!!coffeeSourceReviewSnapshot({...p,source_url:r.final_url});
