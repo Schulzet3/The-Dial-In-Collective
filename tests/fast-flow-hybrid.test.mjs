@@ -9,6 +9,7 @@ const setup=()=>{const s=hydrate(rawFixture());return {s,c:s.coffees[0]};};
 const shot=(id,coffeeId,style,extra={})=>({
  id,coffeeId,style,setupId:'setup',setupVersionId:'version',basketId:'basketv',
  calibrationId:'cal',feedMode:'standard',dialedIn:true,hidden:false,
+ tasteScales:{extraction:3,body:3,clarity:5,sweetness:5,astringency:1},
  doseG:18,yieldG:48,timeS:15,grindSetting:1.5,tempC:90,
  timestamp:'2026-10-22T00:00:00Z',familyId:null,...extra
 });

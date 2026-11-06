@@ -32,6 +32,7 @@ test('own successful exact family outranks same coffee community reference',()=>
  s.shots.push({id:'person-shot',coffeeId:id,setupId:'setup',setupVersionId:'version',
   basketId:'basketv',calibrationId:'cal',style:'Turbo',feedMode:'standard',doseG:18,
   yieldG:36,timeS:30,grindSetting:1.5,hidden:false,dialedIn:true,
+  tasteScales:{extraction:3,body:3,clarity:5,sweetness:5,astringency:1},
   familyId:'personal',timestamp:'2026-10-23T00:00:00Z'});
  s.communityEvidence={[id]:{Turbo:evidence('Turbo','exact',4.5)}};
  const rec=recommendation(s,id);

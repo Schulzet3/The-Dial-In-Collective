@@ -29,7 +29,8 @@ test('#455 a properly measured family still matches its new successful shot',()=
 });
 test('#455 one invalid older entry cannot disqualify a valid family measurement',()=>{
  const s=state(null,[{id:'valid',coffeeId:'coffee',style:'Turbo',familyId:'historic',
-  hidden:false,dialedIn:true,doseG:18,yieldG:36,timeS:26}]);
+  hidden:false,dialedIn:true,doseG:18,yieldG:36,timeS:26,
+  tasteScales:{extraction:3,body:3,clarity:5,sweetness:5,astringency:1}}]);
  const before=structuredClone(s.shots);
  assert.equal(familyStats(s,'historic').ratio.center,2);
  assert.equal(assignFamily(s,newShot),'historic');
