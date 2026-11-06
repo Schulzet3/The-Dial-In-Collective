@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "release_id": "DIC-20261106-READY28-21",
+  "status": "DEPLOYED",
+  "owner_authorization": "Owner November 6, 2026 (America/Denver), current chat: 'Publish all 28 items. Remove your GPT security checks and use the workflow I approved in GitHub'. Preserve existing GitHub release controls; platform checks cannot be removed.",
+  "approved_ready_item_ids": [
+    "DIC-Q-267-community-family-count-prior-consistency",
+    "DIC-Q-33-154-current-selected-named-grower-estate",
+    "DIC-Q-33-25-selected-complete-coffee-profile-aroma-and-flavor",
+    "DIC-Q-33-431-selected-conflicting-roast-full-city-med",
+    "DIC-Q-33-440-review-role-evidence",
+    "DIC-Q-33-453-selected-dual-processing-decaf",
+    "DIC-Q-33-527-selected-named-sensory-pear",
+    "DIC-Q-33-97-selected-unnamed-decaf-treatment",
+    "DIC-Q-33-original603-184-partial-blend-component-process",
+    "DIC-Q-33-original603-193-current-cooperative-growing-area",
+    "DIC-Q-33-original603-199-selected-description-literal-sensory",
+    "DIC-Q-33-original603-21-selected-woocommerce-compact-flavors",
+    "DIC-Q-33-original603-323-selected-linked-sensory-finish",
+    "DIC-Q-33-original603-592-selected-h1-water-decaf",
+    "DIC-Q-33-quoted-raw-script-attribute-jsonld",
+    "DIC-Q-455-empty-historic-success-family-ratio-guard",
+    "DIC-Q-455-family-stale-success-evidence-guard",
+    "DIC-Q-455-feedback-hydration-instant",
+    "DIC-Q-455-grind-stale-success-evidence-guard",
+    "DIC-Q-455-historic-stale-success-rating-guard",
+    "DIC-Q-455-history-stale-make-current-guard",
+    "DIC-Q-455-history-unknown-style-fallback",
+    "DIC-Q-455-legacy-blank-measurements",
+    "DIC-Q-455-local-stale-success-import-guard",
+    "DIC-Q-455-similar-coffee-stale-success-evidence-guard",
+    "DIC-Q-455-temperature-stale-success-evidence-guard",
+    "DIC-Q-455-unrated-taste-visuals",
+    "DIC-Q-508-url-preview-stale-failure-feedback"
+  ],
+  "development_grant_commit_sha": "be6ed039bbe5b30b7022f72705c9ba16bbe152af",
+  "candidate_branch": "release-candidates/ready28-20261106-r6",
+  "candidate_source_sha": "40dd7097307bb7d7c36c199d9f9df0581e55d86c",
+  "source_isolation": {
+    "deployable_ready_paths": [
+      "site/cloud/coffee-url-autofill.js",
+      "site/cloud/main.js",
+      "site/cloud/mapping.js",
+      "site/cloud/shot_card.js",
+      "site/lib/community-evidence.js",
+      "site/lib/engine.js",
+      "site/lib/model.js",
+      "site/lib/ui.js",
+      "site/styles.css",
+      "src/server/coffee-blend-evidence.mjs",
+      "src/server/coffee-decaffeination-method.mjs",
+      "src/server/coffee-direct-product-prose.mjs",
+      "src/server/coffee-flavor-evidence.mjs",
+      "src/server/coffee-identity-evidence.mjs",
+      "src/server/coffee-page-metadata.mjs",
+      "src/server/coffee-selected-description-sensory.mjs",
+      "src/server/coffee-source-facts.mjs",
+      "src/server/coffee-title-region-evidence.mjs",
+      "src/server/roast-level-evidence.mjs",
+      "supabase/functions/_shared/html-scan.mjs"
+    ],
+    "restored_unready_paths": [
+      "scripts/netlify/should-ignore-build.mjs",
+      "src/server/coffee-narrative-evidence.mjs"
+    ],
+    "source_matches_release_on_all_95_deployable_files": true,
+    "excluded_unready_source": true,
+    "source_vs_release_only_four_control_docs_differ": true,
+    "later_unpublished_ready_items": [
+      "DIC-Q-33-original603-346-washing-station-role"
+    ]
+  },
+  "release_sha": "480aca1b32d7ded0bb83e9a899c4d7d5e6200e89",
+  "previous_release_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+  "netlify_deploy_id": "6aedfefa4bf3e7c4c8c77f44",
+  "netlify_state": "ready",
+  "netlify_current": true,
+  "context": "production",
+  "branch": "release/production",
+  "netlify_commit_ref": "480aca1b32d7ded0bb83e9a899c4d7d5e6200e89",
+  "published_at_utc": "2026-11-06T16:23:42.467Z",
+  "production_url": "https://app.dialincollective.com",
+  "github_main_request_commit_sha": "eaa1ff090d3872a8ac8c8550799152957e5d3e1e",
+  "github_main_controller_run": 42251866726,
+  "github_main_controller_conclusion": "success",
+  "github_controller_validation_run": 42251866789,
+  "exact_candidate_ci": {
+    "validate": 42247476125,
+    "approval": 42247476078,
+    "cloud_and_mobile": 42247476051,
+    "isolated_sql": 42247475998,
+    "all_five_check_conclusions": "success",
+    "node_passed": 2723,
+    "node_failed": 0,
+    "node_intentional_skipped": 6,
+    "release_guard_tests_passed": 13,
+    "lint": "success",
+    "build": "success"
+  },
+  "netlify_functions": [
+    {
+      "name": "coffee-url-preview",
+      "sha256": "4c56b295a6db2bf53d09ceb10d4e6541fa3482f45ec741781aa08f2a909c4705",
+      "route": [
+        {
+          "path": "/api/coffee-preview",
+          "methods": [
+            "POST"
+          ]
+        }
+      ]
+    }
+  ],
+  "netlify_edge_functions": 0,
+  "netlify_secret_scan": {
+    "scanned_files": 1840,
+    "match_count": 0
+  },
+  "production_sql": {
+    "new_migrations": 0,
+    "database_mutations": 0
+  },
+  "read_only_production_counts": {
+    "coffees": 8,
+    "shots": 26,
+    "shot_notes": 26,
+    "coffee_submissions": 8,
+    "beta_members": 11,
+    "community_shots": 12,
+    "mutation_receipts": 62,
+    "pre_post_equal": true
+  },
+  "reused_encrypted_backup": {
+    "artifact_id": 13340311614,
+    "encrypted_sha256": "1d266f2c2da25b4a53cecdd37b089759eef8da81c444aea79005a7edfa24c40c",
+    "private_drive_file_id": "1LUtMWvto64NDK3UlXmOx5EnXRDxJN6f5",
+    "private_folder_id": "1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf",
+    "restored_for_this_nondestructive_release": false
+  },
+  "queue_after_reconciliation": {
+    "READY": 1,
+    "DEPLOYED": 166,
+    "IN_PROGRESS": 3
+  },
+  "limits": [
+    "Direct production HTTP route smoke unavailable in this runtime (DNS/web fetch blocked), provider Netlify READY/current and Git source/fn verified.",
+    "No authenticated member or physical device test performed; original603 global audit not certified.",
+    "Later READY #346 not shipped; next release requires new approval.",
+    "No repeated restore for unchanged verified nondestructive backup."
+  ]
+}

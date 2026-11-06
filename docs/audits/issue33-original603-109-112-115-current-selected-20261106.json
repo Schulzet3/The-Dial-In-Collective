@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "kind": "ORIGINAL603_CURRENT_EXACT_SELECTED_PRODUCT_MANUAL_FIELD_ADJUDICATION",
+  "authority": "DIC_ISSUE33_DEVELOPMENT_ONLY_2026-11-06",
+  "source_commit": "5d3dc469bb1c71f0e91b267997fae02fae4e18b5",
+  "original_immutable": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "csv_modified": false,
+    "oracle_scorer_captures_modified": false
+  },
+  "proof": {
+    "scoped_pr": 1073,
+    "corrected_head": "e8df39be7f4ab5998afafab51738cb44209d60a5",
+    "merge_sha": "5d3dc469bb1c71f0e91b267997fae02fae4e18b5",
+    "exact_pr_head_checks": [
+      "validate SUCCESS",
+      "mobile-browser-qa SUCCESS",
+      "cloud-tests SUCCESS",
+      "approval SUCCESS",
+      "sql SUCCESS"
+    ],
+    "merged_official_run": 42267615481,
+    "merged_official_job": 128063522879,
+    "merged_official_conclusion": "SUCCESS",
+    "merged_approval_run": 42267624522,
+    "merged_approval_conclusion": "SUCCESS",
+    "source_artifact_id": 13527029110,
+    "source_zip_sha256": "d2e72625589b442959634bc0b3f7519352ad778379987fbbd0d8b87da13eedb1",
+    "raw_html_hashes_independently_recomputed": true,
+    "selection": "direct current exact original product H1 and official URL; no other/archived slug filling",
+    "fetched": 3,
+    "parsed": 3,
+    "add_coffee_previews": 3,
+    "source_review_previews": 3,
+    "manual_selected_field_adjudications": 3,
+    "manual_complete_coffee_certifications": 0,
+    "original_frozen603_workflow": "SKIPPED_NOT_A_PASS"
+  },
+  "cases": [
+    {
+      "number": 109,
+      "name": "Anasora Natural",
+      "official_url": "https://eastpole.coffee/products/anasoranatural",
+      "source_sha256": "c575bff129c954a2d94417c4e5d0df3075910080ce8ea1324c856d0fc1d665ec",
+      "html_bytes": 172240,
+      "selected_h1": [
+        "Anasora Natural"
+      ],
+      "fields": {
+        "name": "Anasora Natural",
+        "roaster": "East Pole Coffee Co.",
+        "producer": "Anasora Farm Site",
+        "origin": "Guji, Ethiopia",
+        "elevation_m": "2300 masl",
+        "variety": "Heirloom",
+        "process": "Natural",
+        "tasting_notes": "Strawberry syrup, Blueberry, Blackberry juice"
+      },
+      "conflicts": [],
+      "adjudication": "SOURCE_SUPPORTED_WITH_PRODUCER_SITE_ROLE_QUALIFIED",
+      "semantic_notes": "Current exact selected official specification prints Anasora Farm Site in combined PRODUCER AMOUNT row and separate shipping sizes. The selected story calls Anasora a farm and discusses a station but does not name an independent farmer. Canonical producer matches row literal, but role is qualified: do not invent a human producer nor silently equate a station with a farmer. All seven other selected literals supported.",
+      "add_coffee": true,
+      "source_review": true,
+      "complete_coffee_certified": false
+    },
+    {
+      "number": 112,
+      "name": "Finca Santa Monica, Colombia",
+      "official_url": "https://elixrcoffee.com/products/finca-santa-monica-colombia",
+      "source_sha256": "212ebeb0c349260f888b226ae55c41f06f20edf98ece7b4a0212d6540d9833f2",
+      "html_bytes": 160255,
+      "selected_h1": [
+        "Finca Santa Monica, Colombia"
+      ],
+      "fields": {
+        "name": "Finca Santa Monica, Colombia",
+        "roaster": "Elixr Coffee",
+        "origin": "Quindío, Colombia",
+        "elevation_m": "2100 MASL",
+        "variety": "Castillo",
+        "process": "Honey",
+        "tasting_notes": "Passion Fruit / Pineapple Gummy Bears / Rose",
+        "producer": "Jairo Arcila"
+      },
+      "conflicts": [],
+      "adjudication": "CURRENT_SELECTED_DIRECT_FIELDS_SUPPORTED_NO_NEW_DEFECT",
+      "semantic_notes": "Jairo named as grower and direct same-lot Honey + Wine Yeast Fermentation label supports canonical coarse Honey. Historical other farms/varieties and techniques do not contribute selected cultivar, process or producer.",
+      "add_coffee": true,
+      "source_review": true,
+      "complete_coffee_certified": false
+    },
+    {
+      "number": 115,
+      "name": "Frinsa",
+      "official_url": "https://enjoycoffeeroasters.com/products/frinsa-lactic-honey-copy",
+      "source_sha256": "8ff0fab983c527b7e793238772a35658dc6d40b210ac0638a3f852b010544e2b",
+      "html_bytes": 251342,
+      "selected_h1": [
+        "Frinsa"
+      ],
+      "fields": {
+        "name": "Frinsa",
+        "roaster": "Enjoy Coffee Roasters",
+        "producer": "Fikri Raihan Hakim - Frinsa Estate",
+        "tasting_notes": "Orange, Graham Cracker, Pu-erh Tea",
+        "origin": "Pangalengan, Garut, West Java, Indonesia",
+        "elevation_m": "1350-1700 MASL",
+        "variety": "Field Blend",
+        "process": "Other/Unknown",
+        "roast_level": "Medium-Light"
+      },
+      "direct_selected_process_literal": "Wet Hulled",
+      "literal_source_fact_retained": true,
+      "conflicts": [],
+      "adjudication": "SOURCE_SUPPORTED_COARSE_PROCESS_QUALIFIED_NOT_HONEY",
+      "semantic_notes": "Despite reused lactic-honey-copy slug and farm-wide story enumerating Honey/Washed/Natural, current exact selected H1/spec says Wet Hulled. Source fact preserves literal, coarse canonical Other/Unknown does not falsely assert Honey; source taxonomy/category suitability remains separately reviewable rather than silently broaden enum.",
+      "add_coffee": true,
+      "source_review": true,
+      "complete_coffee_certified": false
+    }
+  ],
+  "outcome": {
+    "new_reproducible_parser_defect": false,
+    "code_change": "NONE",
+    "new_scoped_queue_ready_item": "NONE",
+    "issue33": "OPEN_FULL_ORIGINAL603_INDIVIDUAL_CERTIFICATION_INCOMPLETE",
+    "remaining_qualified": [
+      109,
+      115
+    ],
+    "next": "Continue next unreviewed original603 selected public evidence; if broader narrow generic producer-role or specific Wet Hulled canonical taxonomy issue is established under Locked decisions, reproduce from exact source, add positive/negative regressions, test and nonforce integrate. Do not invent missing fields."
+  },
+  "restrictions": {
+    "no_netlify_publish": true,
+    "no_production_sql_edge_auth_provider_member_write": true,
+    "no_force_git": true,
+    "no_new_accounts_or_purchases": true,
+    "no_real_auth_device_acceptance_claim": true
+  }
+}

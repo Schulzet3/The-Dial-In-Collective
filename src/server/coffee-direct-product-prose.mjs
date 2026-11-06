@@ -11,6 +11,13 @@ const fold=v=>String(v||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toL
 // Accept direct, selected-product usage or a narrow current decaf process
 // description; never scan site-wide education, menus, other products or SEO.
 const CURRENT_DECAF_METHOD=/^(?:(?:this|our)\s+(?:decaf(?:feinated)?\s+)?coffee\s+(?:is|was|has been)\s+decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?(?:swiss[\s-]?water|mountain[\s-]?water|sugar(?:[\s-]?cane|[\s-]?process)|ethyl\s+acetate|natural[\s-]?ea|(?:supercritical\s+)?carbon[\s-]?dioxide|co\s*[- ]?[2\u2082])\b|the\s+(?:swiss[\s-]?water|mountain[\s-]?water|sugar[\s-]?cane|carbon[\s-]?dioxide)\s*[\u00ae\u2122]?\s+(?:process|method)\s+is\s+(?:an?\s+)?[^.!?]{0,150}\bdecaffeination\s+process\b[^.!?]{0,160}\bcaffeine[\s-]?free\b)/iu;
+// These two direct current-product decaf descriptions have a different subject
+// or syntax from "this coffee is decaffeinated". Both require the selected H1,
+// a wholly decaffeinated chosen coffee, bounded product prose and a named
+// water treatment. Never derive method from an old lot, site SEO or water
+// merely used for processing equipment.
+const CURRENT_SELECTED_BEANS_WATER_DECAF=/^(?:these|our|this)\s+(?:(?:[\p{L}\p{M}-]+|&)\s+){0,12}beans\s+(?:are|were)\s+(?:naturally\s+)?decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?['"‘’]?(?:swiss|mountain)[\s-]?water['"‘’]?(?:\s+process)?\b/iu;
+const CURRENT_SELECTED_OUR_WATER_DECAF=/(?:^|[.!?]\s+)using\s+the\s+(?:swiss|mountain)[\s-]?water\s+process,\s+our\s+decaf\s+uses\b(?:[^.!?]|\d\.\d){0,240}\bcaffeine[\s-]?free\b/iu;
 const NONCURRENT_DECAF_METHOD=/\b(?:previous(?:ly)?|formerly|historically|typically|generally|other coffees?|another coffee|last year|prior (?:lot|harvest))\b/iu;
 // Same selected-product highlight can state GREEN processing and a distinct
 // decaffeination treatment in one short line, without a "Decaf method:" label.
@@ -21,6 +28,13 @@ const CURRENT_SELECTED_GREEN_AND_DECAF_CAPTION=/^(?:(?:extended[- ]fermentation\
 // Accept short current treatment only with the directly selected self-decaf
 // paragraph and exact H1; never infer from roaster identity or site SEO.
 const CURRENT_SELECTED_DECAF_WAY=/^(?:[\p{L}\p{M}]{3,24}['’]d|(?:this|our)\s+coffee\s+(?:is|was)\s+decaffeinated)\s+by\s+way\s+of\s+(?:the\s+)?(?:swiss[\s-]?water|mountain[\s-]?water|sugar[\s-]?cane|ethyl[\s-]?acetate|(?:supercritical\s+)?carbon[\s-]?dioxide|co\s*[- ]?[2\u2082])\b/iu;
+// An exact selected decaf's single product paragraph can locate its current
+// decaffeination at a named facility and immediately name that facility's
+// sugar-cane ethyl acetate solvent, even without a "Method:" specification.
+// Both clauses must be contiguous in the SAME paragraph, describe this coffee,
+// and remain inside the independently selected H1 product scope. Pure water
+// used at the plant is NOT itself a Swiss/Mountain Water decaf method.
+const CURRENT_SELECTED_FACILITY_EA=/^(?:the|this|our)\s+coffee\s+is\s+(?:then\s+)?decaffeinated\s+at\s+[\p{Lu}][\p{L}\p{M}\d'’-]{2,70}(?:\s+[\p{Lu}][\p{L}\p{M}\d'’-]{2,70}){0,3},\s+[^.!?]{6,160}\.\s+(?:the|this)\s+(?:plant|facility)\s+relies\b[^.!?]{0,310}\bnatural\s+ethyl\s+acetate\s+from\s+sugar\s+cane\b/iu;
 // A selected current decaf may identify its treatment as a roaster-translated
 // method, after an explicit at-origin decaffeination clause. This is not a
 // growing origin, green-bean process, or a general country method inference.
@@ -232,11 +246,22 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
    if(decafEvidence.size<4)decafEvidence.add(line);
    else decafEvidenceOverflow=true;
   }
+  // Exact current, one-paragraph facility + solvent provenance. A plant's
+  // plain water supply cannot become a Water Process method; named sugar-cane
+  // EA applies only to this directly selected, wholly decaffeinated coffee.
+  if(decafOnlyCoffee(name)&&b.tag==='p'&&line.length<=650&&
+     CURRENT_SELECTED_FACILITY_EA.test(line)&&
+     !NONCURRENT_DECAF_METHOD.test(line)&&
+     inferDecaffeinationMethod({name,selectedMethod:line})&&
+     !decafEvidence.has(line)){
+   if(decafEvidence.size<4)decafEvidence.add(line);
+   else decafEvidenceOverflow=true;
+  }
   // A decaf identity plus a current selected-product sentence is required.
   // Reuse the conservative method classifier; if multiple incompatible
   // methods are printed, the caller withholds autofill and keeps both sources.
   if(decafOnlyCoffee(name)&&line.length<=360&&
-     (CURRENT_DECAF_METHOD.test(line)||currentNamedDecafMethod(name,line)||selectedNamedSourceDecafProcess(name,line))&&
+     (CURRENT_DECAF_METHOD.test(line)||CURRENT_SELECTED_BEANS_WATER_DECAF.test(line)||CURRENT_SELECTED_OUR_WATER_DECAF.test(line)||currentNamedDecafMethod(name,line)||selectedNamedSourceDecafProcess(name,line))&&
      !NONCURRENT_DECAF_METHOD.test(line)&&
      inferDecaffeinationMethod({name,selectedMethod:line})&&!decafEvidence.has(line)){
    if(decafEvidence.size<4)decafEvidence.add(line);

@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 47,
+  "project_ref": "azviqqejypsefzilgonr",
+  "observed_at_utc": "2026-11-06T18:41:45.574968Z",
+  "source": {
+    "development_parent_sha": "058aaba03d836c11c3d6c88c22749ad27d630030",
+    "main_sha": "eaa1ff090d3872a8ac8c8550799152957e5d3e1e",
+    "release_sha": "480aca1b32d7ded0bb83e9a899c4d7d5e6200e89"
+  },
+  "scope": "Read-only live provider Edge bundle/source differential against exact current GitHub source; independent synthetic SQL/HTML parser reproduction; interval-based PostgreSQL aggregates, bounded log source counts and current advisors. Prior full bundle semantic coverage retained, not re-credited.",
+  "evidence": {
+    "edge_bundles": [
+      {
+        "slug": "dic-verify-coffee",
+        "version": 8,
+        "status": "ACTIVE",
+        "verify_jwt": true,
+        "provider_bundle_ezbr_sha256": "d59e9da29335f2d626a2779238b4f1176148f5f8f3d54539bf831ff20aa6a77e",
+        "deployed_files": 5,
+        "exact_to_both_dev_and_release": 4,
+        "changed_paths": [
+          "_shared/html-scan.mjs"
+        ]
+      },
+      {
+        "slug": "dic-preview-coffee",
+        "version": 4,
+        "status": "ACTIVE",
+        "verify_jwt": true,
+        "provider_bundle_ezbr_sha256": "ac928ceb4898414555fbcc96afb30b0963f7c819c5d7e211abd5b3893090648c",
+        "deployed_files": 6,
+        "exact_to_dev": 4,
+        "changed_paths": [
+          "_shared/html-scan.mjs",
+          "dic-verify-coffee/evidence.mjs"
+        ]
+      }
+    ],
+    "shared_parser": {
+      "path": "supabase/functions/_shared/html-scan.mjs",
+      "occurrences": 2,
+      "live_source_characters_per_bundle": 1723,
+      "github_current_source_characters": 2109,
+      "github_blob_sha": "c731e22fc2a05b1559b4619cd05e0deb24ddbcc5",
+      "changed_since_prior_receipt": true,
+      "live_behavior": "html.indexOf('>', open.lastIndex) terminates a script opening tag at a '>' embedded inside a quoted attribute; malformed JSON-LD payload begins at wrong offset",
+      "repo_behavior": "openingTagEnd tracks single/double quoted attributes and correctly locates the delimiter",
+      "observed_affected_clients": [
+        "dic-verify-coffee v8",
+        "dic-preview-coffee v4"
+      ]
+    },
+    "historical_preview_evidence": {
+      "path": "dic-verify-coffee/evidence.mjs",
+      "deployed_preview_chars": 10032,
+      "current_gh_chars": 11492,
+      "current_gh_blob_sha": "3cfb7a1b0a8c2064168ca41314085c48a0f768d1",
+      "status": "PREVIOUSLY_DOCUMENTED; preview imports only normalizeWords, sole helper behavior previously source-equivalent; no new security assertion"
+    },
+    "deterministic_reproduction": {
+      "fixture": "<script type=\"application/ld+json\" data-note=\"a > b\">{\"@type\":\"Product\",\"name\":\"Test Coffee\"}</script>",
+      "deployed_parser_attribute": " type=\"application/ld+json\" data-note=\"a ",
+      "deployed_json_parse_success": false,
+      "current_source_attribute": " type=\"application/ld+json\" data-note=\"a > b\"",
+      "current_json_parse_success": true,
+      "test_type": "in-process manually mirrored extracted parser logic, not real hosted request or exact-source CI"
+    },
+    "metrics_before": {
+      "captured_at_utc": "2026-11-06T17:48:00.328926Z",
+      "reset_wal": "2026-10-02T17:59:41.592046+00:00",
+      "reset_database": "2026-10-02T18:01:15.201525+00:00",
+      "wal_buffers_full": 1623919,
+      "wal_records": 136904,
+      "wal_bytes": "32229567",
+      "temp_files": 37724,
+      "temp_bytes": 94309826209
+    },
+    "metrics_after": {
+      "captured_at_utc": "2026-11-06T18:41:45.574968Z",
+      "reset_wal": "2026-10-02T17:59:41.592046+00:00",
+      "reset_database": "2026-10-02T18:01:15.201525+00:00",
+      "wal_buffers_full": 1623919,
+      "wal_records": 136904,
+      "wal_bytes": "32229567",
+      "temp_files": 37828,
+      "temp_bytes": 94613280799,
+      "waiting_locks": 0,
+      "replication_slots": 0
+    },
+    "delta": {
+      "elapsed_seconds": 3225.246042,
+      "temp_files": 104,
+      "temp_bytes": 303454590,
+      "wal_buffers_full": 0,
+      "wal_records": 0,
+      "wal_bytes": 0,
+      "interpretation": "Time-separated counters with unchanged resets: temporary files/bytes increased in interval, no WAL counter increase; not proof of DIC-driven bottleneck. Prior cumulative WAL_buffers_full is historical, not an active rate."
+    },
+    "safe_log_aggregation_last24h": {
+      "pgbouncer_logs": 72,
+      "edge_logs": 34,
+      "postgres_logs": 28,
+      "supavisor_logs": 10,
+      "auth_logs": 6,
+      "auth_audit_logs": 4,
+      "method": "query_logs source-only count; no messages, parameters, identities or raw log contents"
+    },
+    "advisors_at_utc": "2026-11-06T18:40:39Z",
+    "advisors": {
+      "security_rls_no_policy": 6,
+      "security_authenticated_definers": 10,
+      "auth_leaked_password_protection_disabled": 1,
+      "performance_unindexed_fkeys": 12,
+      "performance_unused_indexes": 9,
+      "health": 0,
+      "assessment": "Previously investigated warnings not new proof of defects or safe changes"
+    }
+  },
+  "verdict": {
+    "new_verified_source_to_deployment_drift": true,
+    "synthetic_parser_fault_reproduced": true,
+    "actual_coffee_case_or_member_impact": "UNVERIFIED",
+    "severity": "SOURCE_DEPLOYMENT_PARITY_REVIEW_REQUIRED",
+    "owner_issue": "33",
+    "live_fix_authorized": false,
+    "github_parser_fix_already_in_development_and_release": true,
+    "code_changes": 0,
+    "live_changes": 0,
+    "validated_tests": "source text equality and deterministic in-process reproducer; not Node22, signed JWT or hosted caller",
+    "review_boundary": "Do not deploy or change source without separate authorization; release queue unchanged"
+  },
+  "unverified": [
+    "Provider-hosted signed-in JWT/PostgREST/Storage/Realtime behavior (#96)",
+    "63 withheld potentially sensitive runtime settings",
+    "Compiled native PostgreSQL implementation source",
+    "Actual incidence of HTML opener quoted '>' in official coffee sites",
+    "Database-temp-file attribution to SQL caller",
+    "Console-only provider access controls"
+  ],
+  "next": "Coordinate documented Edge two-bundle redeploy parity with #33 in owner-authorized publication workflow; run exact-source Edge parser regression as appropriate; continue nonsecret provider drift and source isolated hourly temp-file rate."
+}

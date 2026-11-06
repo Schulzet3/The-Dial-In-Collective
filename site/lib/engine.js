@@ -278,7 +278,8 @@ export function recommendation(s,coffeeId,options={}) {
  // Section 25.2 tier 5: personal success on similar coffees from THIS setup.
  // Do not override more relevant exact-coffee successful family data or the
  // higher-priority same-coffee cross-style evidence.
- const exactOther=s.shots.some(sh=>!sh.hidden&&sh.dialedIn&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style!==style&&sh.style!=='Custom');
+ // Imported success markers cannot suppress or transfer style evidence without all five original ideal scores.
+ const exactOther=s.shots.some(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style!==style&&sh.style!=='Custom');
  // For Fast-Flow, comparable same-style successes outrank a Turbo cross-style fallback.
  const provisional=style==='Custom'||(exactOther&&style!=='Fast-Flow')?null:personalSimilarCoffeeReference(s,c,v,style,feed,basket.id);
  const familyChoice=chooseRecipeFamily(s,coffeeId,style,v,basket,feed,p);
@@ -345,7 +346,7 @@ export function recommendation(s,coffeeId,options={}) {
  } else if(style==='Fast-Flow'&&!provisional&&!peerFirst) {
   // Only closely compatible Turbo success can weakly inform the STARTING ratio.
   // Never import its measured time, grind, family, confirmation or shot count.
-  const turbo=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn&&sh.style==='Turbo'&&
+  const turbo=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&sh.style==='Turbo'&&
    sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.basketId===basket.id&&
    sh.feedMode===feed&&finite(sh.doseG)&&sh.doseG>0&&finite(sh.yieldG)&&
    finite(sh.timeS)&&sh.timeS>=8&&sh.timeS<=20&&
@@ -361,7 +362,7 @@ export function recommendation(s,coffeeId,options={}) {
   }
  } else if(!peerFirst&&style!=='Custom'&&style!=='Fast-Flow') {
   // Weak residual only for legacy styles. Fast-Flow never shares this generic cross-style path.
-  const other=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn&&sh.coffeeId===coffeeId&&sh.style!==style&&sh.style!=='Fast-Flow'&&sh.style!=='Custom'&&RATIOS[sh.style]);
+  const other=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&sh.coffeeId===coffeeId&&sh.style!==style&&sh.style!=='Fast-Flow'&&sh.style!=='Custom'&&RATIOS[sh.style]);
   if(other.length){const r=roastIndex(c.roastLevel)<0?roastIndex('Medium'):roastIndex(c.roastLevel);const residual=mean(other.map(sh=>sh.yieldG/sh.doseG-RATIOS[sh.style][r]));const bias=clamp(residual*.2,-.15,.15);for(const k of ['low','high','center'])rec.ratio[k]+=bias;rec.reasons.push('Small ratio adjustment informed by your other styles; time and grind stay style-specific.');}
  }
  rec.grind=grindGuidance(s,c,style,basket,feed,rec.familyId);
@@ -560,7 +561,7 @@ export function nextAdvice(s,shot,rec){
   grindSetting:clamp(round(advice.next.grindSetting),v.grinderMin,v.grinderMax)}};
 }
 export function isExtreme(s,shot) {
- const prior=s.shots.filter(x=>!x.hidden&&x.dialedIn&&x.coffeeId===shot.coffeeId&&x.style===shot.style&&x.setupVersionId===shot.setupVersionId&&x.id!==shot.id);
+ const prior=s.shots.filter(x=>!x.hidden&&x.dialedIn===true&&isDialed(x.tasteScales)&&x.coffeeId===shot.coffeeId&&x.style===shot.style&&x.setupVersionId===shot.setupVersionId&&x.id!==shot.id);
  if(prior.length<4)return false;
  return Math.abs(shot.yieldG/shot.doseG-quantile(prior.map(x=>x.yieldG/x.doseG),.5))>1.25||Math.abs(shot.timeS-quantile(prior.map(x=>x.timeS),.5))>25;
 }
@@ -618,7 +619,10 @@ export function makeCurrent(s,shotId) {
 }
 export function contributorWeight(n) {return n<=1?1:n===2?1.2:n<=4?1.4:n<=7?1.6:n<=12?1.8:2;}
 export function communitySummary(shots) {
- const valid=shots.filter(s=>s.dialedIn&&s.outlierReview!=='pending');const users=new Map();
+ // Only physically measured, finite, positive dose/yield ratios can support a
+ // contributor statistic. Keep malformed historical records untouched in History.
+ const valid=shots.filter(s=>s.dialedIn===true&&isDialed(s.tasteScales)&&s.outlierReview!=='pending'&&
+  finite(s.doseG)&&s.doseG>0&&finite(s.yieldG)&&s.yieldG>0&&finite(s.yieldG/s.doseG));const users=new Map();
  for(const sh of valid){const id=sh.contributorId||'local_user';if(!users.has(id))users.set(id,[]);users.get(id).push(sh);}
  let total=0,sum=0;
  const contributors=[...users.values()].map(arr=>({center:stats(arr.map(s=>s.yieldG/s.doseG)).center,weight:contributorWeight(arr.length)}));

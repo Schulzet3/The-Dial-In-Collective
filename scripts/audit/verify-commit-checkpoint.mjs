@@ -45,7 +45,14 @@ export function verifyLatestCommit(){
   // before has no ancestor to compare, so check HEAD and flag that limitation.
   if(isSha(base)&&!/^[0]+$/.test(base)){
    if(!isSha(head))throw Error('Missing exact Git head SHA');
-   run(['merge-base','--is-ancestor',base,head]);
+   // PR heads can legitimately fork from an older development SHA while
+   // the base advances concurrently. Audit only PR-exclusive commits even
+   // when the current base is not their ancestor; a real common ancestor is
+   // still mandatory. Pushes retain strict before->after ancestry.
+   if(process.env.DIC_EVENT_NAME==='pull_request'){
+    const bases=run(['merge-base','--all',base,head]).split(/\r?\n/).filter(Boolean);
+    if(bases.length!==1||!isSha(bases[0]))throw Error('PR source lacks one verified common ancestor');
+   }else run(['merge-base','--is-ancestor',base,head]);
    const all=run(['rev-list','--reverse',base+'..'+head]).split(/\r?\n/).filter(Boolean);
    if(!all.length||all.length>400)throw Error('Git commit range missing or exceeds bounded 400-commit audit');
    hashes.push(...all);

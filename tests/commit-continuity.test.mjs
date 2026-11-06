@@ -162,3 +162,79 @@ test('a real same-commit ops journal with a bounded uppercase run suffix counts,
  }
  assert.match(auditLatestCommit({paths:[code],subject}).join(' '),/SAME-COMMIT/);
 });
+
+
+test('PR base drift audits only feature commits; push ancestry stays strict',()=>{
+ const dir=mkdtempSync(join(tmpdir(),'dic-continuity-drift-'));
+ const env={cwd:process.cwd(),base:process.env.DIC_BASE_SHA,
+  head:process.env.DIC_HEAD_SHA,event:process.env.DIC_EVENT_NAME};
+ const git=(...args)=>execFileSync('git',['-C',dir,...args],{encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
+ try{
+  git('init','-q','-b','main');git('config','user.name','Continuity fixture');
+  git('config','user.email','continuity@example.invalid');
+  writeFileSync(join(dir,'base.md'),'baseline\n');git('add','.');git('commit','-qm','Base [skip netlify]');
+  git('checkout','-qb','feature');mkdirSync(join(dir,'scripts'));mkdirSync(join(dir,'docs/workstreams'),{recursive:true});
+  writeFileSync(join(dir,'scripts/feature.mjs'),'export const feature=true;\n');
+  writeFileSync(join(dir,'docs/workstreams/issue-457.md'),'Contemporaneous journal\n');
+  git('add','.');git('commit','-qm','Good feature [skip netlify]');
+  const feature=git('rev-parse','HEAD');
+  git('checkout','-q','main');writeFileSync(join(dir,'concurrent.md'),'Unrelated main advance\n');
+  git('add','.');git('commit','-qm','Concurrent docs [skip netlify]');
+  const advanced=git('rev-parse','HEAD');
+  process.chdir(dir);process.env.DIC_BASE_SHA=advanced;process.env.DIC_HEAD_SHA=feature;
+  process.env.DIC_EVENT_NAME='pull_request';
+  const result=verifyLatestCommit();
+  assert.equal(result.commitCount,1);
+  assert.equal(result.lastCommit,feature);
+  assert.equal(result.checkedPaths,2,'only PR exclusive source and journal are audited');
+  process.env.DIC_EVENT_NAME='push';
+  assert.throws(()=>verifyLatestCommit(),/Git commit range unavailable/,'push keeps strict ancestry');
+ }finally{
+  process.chdir(env.cwd);
+  for(const [k,v] of [['DIC_BASE_SHA',env.base],['DIC_HEAD_SHA',env.head],['DIC_EVENT_NAME',env.event]]){
+   if(v===undefined)delete process.env[k];else process.env[k]=v;
+  }
+  rmSync(dir,{recursive:true,force:true});
+ }
+});
+test('PR base drift does not exempt missing same-commit journals or unmarked commits',()=>{
+ const dir=mkdtempSync(join(tmpdir(),'dic-continuity-drift-negative-'));
+ const env={cwd:process.cwd(),base:process.env.DIC_BASE_SHA,
+  head:process.env.DIC_HEAD_SHA,event:process.env.DIC_EVENT_NAME};
+ const git=(...args)=>execFileSync('git',['-C',dir,...args],{encoding:'utf8',stdio:['ignore','pipe','pipe']}).trim();
+ try{
+  git('init','-q','-b','main');git('config','user.name','Continuity fixture');
+  git('config','user.email','continuity@example.invalid');
+  writeFileSync(join(dir,'base.md'),'baseline\n');git('add','.');git('commit','-qm','Base [skip netlify]');
+  git('checkout','-qb','feature');mkdirSync(join(dir,'scripts'));
+  writeFileSync(join(dir,'scripts/untracked.mjs'),'export const x=1;\n');
+  git('add','.');git('commit','-qm','Missing journal [skip netlify]');
+  const bad=git('rev-parse','HEAD');
+  git('checkout','-q','main');writeFileSync(join(dir,'concurrent.md'),'main moved\n');
+  git('add','.');git('commit','-qm','Base moved [skip netlify]');
+  process.chdir(dir);
+  process.env.DIC_EVENT_NAME='pull_request';process.env.DIC_BASE_SHA=git('rev-parse','HEAD');
+  process.env.DIC_HEAD_SHA=bad;
+  assert.throws(()=>verifyLatestCommit(),/SAME-COMMIT.*scripts\/untracked\.mjs/);
+  git('checkout','-q','feature');mkdirSync(join(dir,'docs/workstreams'),{recursive:true});
+  writeFileSync(join(dir,'docs/workstreams/issue-457.md'),'journal\n');
+  git('add','.');git('commit','-qm','Unmarked journal');
+  process.env.DIC_HEAD_SHA=git('rev-parse','HEAD');
+  assert.throws(()=>verifyLatestCommit(),/Unmarked commit/);
+ }finally{
+  process.chdir(env.cwd);
+  for(const [k,v] of [['DIC_BASE_SHA',env.base],['DIC_HEAD_SHA',env.head],['DIC_EVENT_NAME',env.event]]){
+   if(v===undefined)delete process.env[k];else process.env[k]=v;
+  }
+  rmSync(dir,{recursive:true,force:true});
+ }
+});
+test('approval keeps queue schema/intake and PR-head continuity without redundant status process',()=>{
+ const src=readFileSync(new URL('../.github/workflows/approval-continuity.yml',import.meta.url),'utf8');
+ assert.match(src,/DIC_EVENT_NAME: \$\{\{ github\.event_name \}\}/);
+ assert.match(src,/DIC_HEAD_SHA: \$\{\{ github\.event\.pull_request\.head\.sha \|\| github\.sha \}\}/);
+ assert.match(src,/scripts\/release\/release-queue\.mjs --enforce-intake/);
+ assert.doesNotMatch(src,/scripts\/release\/release-queue\.mjs --status/);
+ assert.doesNotMatch(src,/scripts\/release\/release-queue\.mjs --validate/);
+ assert.match(src,/node scripts\/audit\/verify-commit-checkpoint\.mjs/);
+});

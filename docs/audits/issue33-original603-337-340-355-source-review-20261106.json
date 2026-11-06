@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "scope": "Issue #33 bounded current selected original603 #337/#340/#355, not whole-coffee certification",
+  "status": "IN_PROGRESS_SOURCE_CASE_355_UNAVAILABLE",
+  "review_utc": "2026-11-06",
+  "authority_issue": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+  "repository": "Schulzet3/The-Dial-In-Collective",
+  "development_branch": "development/backend-foundation",
+  "exact_source_merge_sha": "1133f9b09affeedd7baad3a689a1e72733012b0c",
+  "merged_selector_pr": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/1089",
+  "first_invalid_pr": {
+    "pr": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/1088",
+    "status": "CLOSED_UNMERGED",
+    "approval_run": 42284638018,
+    "reason": "same-commit unrecognized journal suffix; repaired by recognized ops-issue33 journal in #1089"
+  },
+  "head_checks": {
+    "sha": "a37187defa29c5262ce17a8369b3f83aa0e98c75",
+    "conclusions": {
+      "validate": "SUCCESS",
+      "approval": "SUCCESS",
+      "sql": "SUCCESS",
+      "cloud_tests": "SUCCESS",
+      "mobile_browser_qa": "SUCCESS"
+    },
+    "runs": [
+      42284806079,
+      42284806111,
+      42284806109,
+      42284806040
+    ]
+  },
+  "merged_approval": {
+    "run": 42285141445,
+    "conclusion": "SUCCESS"
+  },
+  "official_public_workflow": {
+    "run_id": 42285141369,
+    "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42285141369",
+    "conclusion": "FAILURE_EXPECTED_FAIL_CLOSED_SOURCE_UNAVAILABLE",
+    "attempts": [
+      {
+        "attempt": 1,
+        "source_sha": "1133f9b09affeedd7baad3a689a1e72733012b0c",
+        "job_id": 128123897194,
+        "conclusion": "FAILURE",
+        "artifact_id": 13536219022,
+        "zip_sha256": "1cf3e0f14136fc0f9488b393eb765ebfded109b26402befa7aaea29dc01a1047",
+        "case_html_sha256": {
+          "337": "a9e491b53234f7ab14fb2418911c7d44fdce77aedaf89e037ef96343bab100b3",
+          "340": "ebd58ad1a80f7e0036c327d3050666146bd6c025157ba8128a553252665b48da"
+        }
+      },
+      {
+        "attempt": 2,
+        "source_sha": "1133f9b09affeedd7baad3a689a1e72733012b0c",
+        "job_id": 128124225119,
+        "conclusion": "FAILURE",
+        "artifact_id": 13536304124,
+        "zip_sha256": "84b25435cbca56f56d0dec8f0073c8b1c1ee121e63e3db14a82c98bf62e57105",
+        "case_html_sha256": {
+          "337": "2f1e9b384b6843eea12c452208e8e307130920a66d2fb95c62e08eff5d22a3b1",
+          "340": "4e9ea99f494cd52153a43c5b985e0920ea112af8d967b8adacda30798b063983"
+        }
+      }
+    ],
+    "retained_artifact_contains": [
+      "case-337.html",
+      "case-340.html",
+      "focused-current-evidence.json"
+    ],
+    "case355_html_not_captured": true,
+    "independent_zip_raw_html_sha256_verified": true,
+    "observed": {
+      "attempted": 3,
+      "fetched": 2,
+      "parsed": 2,
+      "add_coffee_rendered": 2,
+      "source_review_rendered": 2,
+      "manually_whole_coffee_certified": 0
+    },
+    "other_skipped_source_jobs": "SKIPPED_NOT_PASS"
+  },
+  "cases": [
+    {
+      "number": 337,
+      "archived_coffee": "Corpse Pose Decaf",
+      "url": "https://snowyelk.com/products/corpse-pose-decaf",
+      "status": "FETCHED_PARSED_FIELDS_SUPPORTED",
+      "selected_h1": [
+        "Corpse Pose Decaf"
+      ],
+      "current_fields": {
+        "name": "Corpse Pose Decaf",
+        "roaster": "Snowy Elk Coffee Co.",
+        "tasting_notes": "Nutty and smooth with a delicate sweetness and hints of chocolate",
+        "roast_level": "Medium",
+        "origin": "Peru",
+        "process": "Washed",
+        "decaffeination_method": "Water Process"
+      },
+      "current_source_labeled_evidence": [
+        "Tasting Notes",
+        "Roast Level",
+        "Origin",
+        "Process: Washed, Swiss Water Processed"
+      ],
+      "conflicts": [],
+      "parser_ok": true,
+      "add_coffee_rendered": true,
+      "source_review_rendered": true,
+      "adjudication": "Separate selected-product green washed process from Swiss Water decaffeination; both facts accurately represented. Only bounded source-field accuracy reviewed, not complete-coffee certified."
+    },
+    {
+      "number": 340,
+      "archived_coffee": "Las Brisas",
+      "url": "https://sodality.coffee/products/las-brisas-nicaragua",
+      "status": "FETCHED_PARSED_FIELDS_SUPPORTED_QUALIFIED_H1_MULTIPLE",
+      "selected_h1": [
+        "Las Brisas",
+        "Nicaragua",
+        "Las Brisas"
+      ],
+      "current_fields": {
+        "name": "Las Brisas",
+        "roaster": "Sodality Coffee",
+        "producer": "Las Brisas Microfarm",
+        "process": "Washed",
+        "variety": "Centroamericano",
+        "elevation_m": "1300-1500 masl",
+        "tasting_notes": "Lemon Lime Soda, Greek Yogurt, Dried Fruit, Graham, Rooibos Tea",
+        "origin": "Jinotega, NIcaragua"
+      },
+      "current_source_labeled_evidence": [
+        "Notes",
+        "Producer: Las Brisas Microfarm",
+        "Process: Washed",
+        "Variety: Centroamericano",
+        "Elevation: 1300-1500 masl"
+      ],
+      "conflicts": [],
+      "parser_ok": true,
+      "add_coffee_rendered": true,
+      "source_review_rendered": true,
+      "adjudication": "Direct selected product producer is Las Brisas Microfarm; do not substitute La Bastilla/Finca Santa Luz appearing in historical narrative or generic coffee details. Page has multiple H1 labels, so identity remains source-qualified despite matching chosen coffee name."
+    },
+    {
+      "number": 355,
+      "archived_coffee": "Brazil João Hamilton",
+      "url": "https://stovetoproasters.com/products/brazil-joao-hamilton",
+      "status": "UNAVAILABLE_TWO_SEPARATE_GUARDED_ATTEMPTS",
+      "current_fields": null,
+      "selected_h1": [],
+      "parser_ok": false,
+      "add_coffee_rendered": false,
+      "source_review_rendered": false,
+      "reason": "source_unavailable",
+      "adjudication": "Exact official selected URL is unavailable to guarded live fetch twice; independent same exact URL and same-handle collection path live browser read gave HTTP 404 on November 6, while search cache retains older visible text. A cached/archived or alternate unrelated product is not live primary evidence; leave current product source unverified. No parser defect can be inferred and no automatic source substitute is authorized.",
+      "live_404_url_checks": [
+        "https://stovetoproasters.com/products/brazil-joao-hamilton",
+        "https://stovetoproasters.com/collections/shop/products/brazil-joao-hamilton"
+      ]
+    }
+  ],
+  "preservation": {
+    "original603_coffee_count": 603,
+    "original_roaster_count": 201,
+    "original_captures": 1197,
+    "original603_csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "original603_register_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "original_oracle_scorer_captures_modified": false,
+    "parser_source_changed": false,
+    "member_or_provider_data_modified": false
+  },
+  "acceptance": {
+    "original603_individual_whole_coffee_certification": "NOT_DONE",
+    "issue33": "OPEN",
+    "release_queue_change": "NONE_KEEP_PARENT_IN_PROGRESS_ALL_PRIOR_READY_DEPLOYED",
+    "ready_promotion": false,
+    "production_publication": "NOT_AUTHORIZED_NOT_PERFORMED",
+    "real_signed_in_auth_or_device": "NOT_TESTED"
+  },
+  "next_action": "Continue with a disjoint current selected-product source case while keeping #355 explicitly source-unavailable. Recheck #355 only when fresh official exact product returns with same identity/lot or a safe same-handle verified alternate. Never mislabel FAILED/SKIPPED as PASS."
+}

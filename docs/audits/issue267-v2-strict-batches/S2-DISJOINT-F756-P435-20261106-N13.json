@@ -1,0 +1,861 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "S2-DISJOINT-F756-P435-20261106-N13",
+  "review_date_utc": "2026-11-06",
+  "method": "Direct sequential physical line1–29 inspection and per-line nine-dimension reasoning; no machine-only certification",
+  "frozen": {
+    "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+    "source_tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+    "file_index_1_based": 756,
+    "path": "tests/weekly-source-snapshot.test.mjs",
+    "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+    "first_line": 1,
+    "last_line": 29
+  },
+  "pinned_current": {
+    "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "source_tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+    "file_index_1_based": 435,
+    "path": "tests/weekly-source-snapshot.test.mjs",
+    "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+    "first_line": 1,
+    "last_line": 29
+  },
+  "observed_live": {
+    "source_commit": "fea7843de8efa1773e1ff60256935ed381e7a110",
+    "path": "tests/weekly-source-snapshot.test.mjs",
+    "blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+    "exact_source_text_match": true
+  },
+  "per_line": [
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 1,
+      "source_text": "import test from 'node:test';",
+      "inspection_classification": "imports_and_fixture",
+      "behavior": "Imports native Node test runner",
+      "quality": "Built-in, no extra dependency",
+      "risk_security_privacy_performance": "No product or privacy side effect",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 1,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 1,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Keep",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 2,
+      "source_text": "import assert from 'node:assert/strict';",
+      "inspection_classification": "imports_and_fixture",
+      "behavior": "Imports strict assertion library",
+      "quality": "Appropriate exact assertions",
+      "risk_security_privacy_performance": "Cannot attest YAML meaning",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 2,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 2,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Keep",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 3,
+      "source_text": "import {readFileSync} from 'node:fs';",
+      "inspection_classification": "imports_and_fixture",
+      "behavior": "Imports local file read",
+      "quality": "Deterministic fixture",
+      "risk_security_privacy_performance": "Missing workflow fails at load; no writes",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 3,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 3,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Keep",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 4,
+      "source_text": "const workflow=readFileSync(new URL('../.github/workflows/weekly-full-regression.yml',import.meta.url),'utf8');",
+      "inspection_classification": "imports_and_fixture",
+      "behavior": "Reads checked-in weekly workflow via module URL",
+      "quality": "Correct local target",
+      "risk_security_privacy_performance": "Only textual, not naturally scheduled execution",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 4,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 4,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Separate actual GitHub run proof",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 5,
+      "source_text": "function check(source){",
+      "inspection_classification": "policy_test_logic",
+      "behavior": "Defines reusable policy checker",
+      "quality": "Shared positive/negative assertions",
+      "risk_security_privacy_performance": "No semantic YAML parser",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 5,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 5,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Retain and harden",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 6,
+      "source_text": " const jobs=Object.fromEntries([...source.matchAll(/^  ([a-z][a-z-]+):\\n([\\s\\S]*?)(?=^  [a-z][a-z-]+:|$(?![\\s\\S]))/gm)].map(m=>[m[1],m[2]]));",
+      "inspection_classification": "policy_test_logic",
+      "behavior": "Regex extracts three job bodies",
+      "quality": "Fast on 86-line fixture",
+      "risk_security_privacy_performance": "YAML block/alias can spoof regex",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 6,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 6,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Consider parsed YAML AST",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 7,
+      "source_text": " assert.ok(jobs['resolve-source'],'source resolution job missing');",
+      "inspection_classification": "policy_test_logic",
+      "behavior": "Requires resolution job",
+      "quality": "Baseline immutable-source guard",
+      "risk_security_privacy_performance": "Text existence alone",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 7,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 7,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Retain",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 8,
+      "source_text": " assert.match(jobs['resolve-source'],/sha: \\$\\{\\{ steps\\.source\\.outputs\\.sha \\}\\}/);",
+      "inspection_classification": "policy_test_logic",
+      "behavior": "Requires step output SHA binding",
+      "quality": "Intended one SHA provenance",
+      "risk_security_privacy_performance": "Text may exist without behavior",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 8,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 8,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Parse active output",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 9,
+      "source_text": " assert.match(jobs['resolve-source'],/id: source/);",
+      "inspection_classification": "policy_test_logic",
+      "behavior": "Requires source step ID",
+      "quality": "Matches source selector",
+      "risk_security_privacy_performance": "Unanchored token can be inert",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 9,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 9,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Scope to step",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 10,
+      "source_text": " assert.match(jobs['resolve-source'],/git rev-parse HEAD/);",
+      "inspection_classification": "policy_test_logic",
+      "behavior": "Requires git rev-parse HEAD",
+      "quality": "Correct Git source resolution intent",
+      "risk_security_privacy_performance": "Can be present in comment",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 10,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 10,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Parse active shell",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 11,
+      "source_text": " assert.match(jobs['resolve-source'],/GITHUB_OUTPUT/);",
+      "inspection_classification": "policy_test_logic",
+      "behavior": "Requires GITHUB_OUTPUT",
+      "quality": "Correct output channel",
+      "risk_security_privacy_performance": "Token check not execution guarantee",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 11,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 11,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Keep with negative test",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 12,
+      "source_text": " assert.equal((source.match(/ref: development\\/backend-foundation/g)||[]).length,1,'moving branch must be resolved only once');",
+      "inspection_classification": "policy_test_logic",
+      "behavior": "Counts one development moving ref",
+      "quality": "Protects pinned downstream jobs",
+      "risk_security_privacy_performance": "Counts inert text; not checkout semantics",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 12,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 12,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Parse checkout refs",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 13,
+      "source_text": " for(const name of ['node-build','database','mobile-offline']){",
+      "inspection_classification": "policy_test_logic",
+      "behavior": "Enumerates three suite jobs",
+      "quality": "Covers relevant known suites",
+      "risk_security_privacy_performance": "No completeness beyond hard-coded names",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 13,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 13,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Keep against current Locked scope",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 14,
+      "source_text": "  assert.ok(jobs[name],name+' job missing');",
+      "inspection_classification": "policy_test_logic",
+      "behavior": "Requires each named job",
+      "quality": "Guards deletion",
+      "risk_security_privacy_performance": "Regex extraction only",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 14,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 14,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Keep",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 15,
+      "source_text": "  assert.match(jobs[name],/^    needs: resolve-source$/m,name+' dependency missing');",
+      "inspection_classification": "policy_test_logic",
+      "behavior": "Requires needs resolve-source",
+      "quality": "Maintains immutable order",
+      "risk_security_privacy_performance": "Could be inert text",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 15,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 15,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Parse dependency",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 16,
+      "source_text": "  assert.match(jobs[name],/ref: \\$\\{\\{ needs\\.resolve-source\\.outputs\\.sha \\}\\}/,name+' not pinned');",
+      "inspection_classification": "policy_test_logic",
+      "behavior": "Requires SHA-pinned checkout",
+      "quality": "Prevents branch drift",
+      "risk_security_privacy_performance": "Regex may be spoofed",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 16,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 16,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Keep negative check",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 17,
+      "source_text": " }",
+      "inspection_classification": "policy_test_logic",
+      "behavior": "Closes suite loop",
+      "quality": "Control-flow only",
+      "risk_security_privacy_performance": "No independent exposure",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 17,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 17,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Keep",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 18,
+      "source_text": " assert.equal((source.match(/persist-credentials: false/g)||[]).length,4);",
+      "inspection_classification": "policy_test_logic",
+      "behavior": "Requires four persist-credentials false",
+      "quality": "Constrains token persistence",
+      "risk_security_privacy_performance": "Plain string count not per-step proof",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 18,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 18,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Per-checkout YAML validation",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 19,
+      "source_text": " assert.match(source,/cron: '0 8 \\* \\* 0'/);",
+      "inspection_classification": "policy_test_logic",
+      "behavior": "Checks Sunday 08:00 UTC cron",
+      "quality": "Matches defined cadence",
+      "risk_security_privacy_performance": "Does not prove naturally scheduled #134 run",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 19,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 19,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Keep provider evidence distinct",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 20,
+      "source_text": " assert.match(source,/permissions:\\n  contents: read\\n/);",
+      "inspection_classification": "policy_test_logic",
+      "behavior": "Checks contents read",
+      "quality": "Least-privilege policy",
+      "risk_security_privacy_performance": "Cannot detect all job-level overrides",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 20,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 20,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Review job permissions",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 21,
+      "source_text": " assert.doesNotMatch(source,/\\bwrite\\b|secrets\\.|^  push:|^  pull_request:/m);",
+      "inspection_classification": "policy_test_logic",
+      "behavior": "Forbids push/PR, write, secrets text",
+      "quality": "Conservative negative guard",
+      "risk_security_privacy_performance": "Text regex may false fail/pass YAML semantics",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 21,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 21,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "YAML semantic parser future",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 22,
+      "source_text": " for(const command of ['npm test','npm run lint','npm run build:cloud','isolated-sql-regression.sh','isolated-signed-http-regression.sh','isolated-backup-snapshot-regression.sh','cloud_owner_qa.py','admin_invitation_qa.py','pwa_offline_qa.py'])assert.ok(source.includes(command),'lost regression '+command);",
+      "inspection_classification": "confirmed_test_gap",
+      "behavior": "Asserts nine command substrings",
+      "quality": "Original suite completeness intention",
+      "risk_security_privacy_performance": "CONFIRMED false PASS: lint only in YAML comment passes",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 22,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 22,
+        "exact": true
+      },
+      "testability": "Exact existing policy source and synthetic YAML mutation: legacy predicate false-pass reproduced; proposed predicate rejects it; real Node CI pending.",
+      "fix_or_improvement": "Replace substring with active exact - run: assertions",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 23,
+      "source_text": "}",
+      "inspection_classification": "policy_test_logic",
+      "behavior": "Ends helper",
+      "quality": "Control-flow only",
+      "risk_security_privacy_performance": "No independent exposure",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 23,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 23,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Keep",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 24,
+      "source_text": "test('weekly suites share one immutable source and retain schedule/read-only boundaries',()=>check(workflow));",
+      "inspection_classification": "negative_or_positive_test",
+      "behavior": "Positive weekly policy test",
+      "quality": "Exercises checked-in YAML",
+      "risk_security_privacy_performance": "Not provider natural schedule proof",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 24,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 24,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Keep",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 25,
+      "source_text": "test('one independently resolved moving branch fails',()=>assert.throws(()=>check(workflow.replace('ref: ${{ needs.resolve-source.outputs.sha }}','ref: development/backend-foundation')),/moving branch/));",
+      "inspection_classification": "negative_or_positive_test",
+      "behavior": "Mutant changes pinned ref to moving",
+      "quality": "Meaningful drift negative",
+      "risk_security_privacy_performance": "Single exact replacement only",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 25,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 25,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Keep",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 26,
+      "source_text": "test('missing source dependency fails',()=>assert.throws(()=>check(workflow.replace('    needs: resolve-source\\n','')),/dependency missing/));",
+      "inspection_classification": "negative_or_positive_test",
+      "behavior": "Mutant deletes needs line",
+      "quality": "Meaningful dependency negative",
+      "risk_security_privacy_performance": "Only first occurrence targeted",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 26,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 26,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Keep",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 27,
+      "source_text": "test('broken source output binding fails',()=>assert.throws(()=>check(workflow.replace('steps.source.outputs.sha','steps.wrong.outputs.sha'))));",
+      "inspection_classification": "negative_or_positive_test",
+      "behavior": "Mutant breaks SHA output",
+      "quality": "Meaningful provenance negative",
+      "risk_security_privacy_performance": "Does not exhaust bindings",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 27,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 27,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Keep",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 28,
+      "source_text": "test('permission escalation fails',()=>assert.throws(()=>check(workflow.replace('contents: read','contents: write'))));",
+      "inspection_classification": "negative_or_positive_test",
+      "behavior": "Mutant escalates permissions",
+      "quality": "Meaningful least-privilege negative",
+      "risk_security_privacy_performance": "Literal contents test only",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 28,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 28,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Keep",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    },
+    {
+      "path": "tests/weekly-source-snapshot.test.mjs",
+      "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+      "line": 29,
+      "source_text": "test('lost offline coverage fails',()=>assert.throws(()=>check(workflow.replace('pwa_offline_qa.py','removed.py')),/lost regression/));",
+      "inspection_classification": "negative_or_positive_test",
+      "behavior": "Mutant deletes offline command string",
+      "quality": "Maintains offline coverage",
+      "risk_security_privacy_performance": "Comment-only token could fool old check",
+      "dead_obsolete": "Tracked frozen/pinned/current source is active test text, no dead-code proof; whole-repository callers not exhaustively certified.",
+      "redundant_duplicate": "No exact disposable duplicate established; broader cross-file dedup remains unverified.",
+      "pinned_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 29,
+        "exact": true
+      },
+      "live_counterpart": {
+        "path": "tests/weekly-source-snapshot.test.mjs",
+        "source_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+        "line": 29,
+        "exact": true
+      },
+      "testability": "Direct Node22 fixture test possible; no claim of actual scheduled provider execution.",
+      "fix_or_improvement": "Covered by active-run hardening",
+      "locked_fit": "Latest Locked #457 risk-proportionate CI; #134 natural Sunday evidence separately; no new deployment authority.",
+      "reviewer": "AI direct original physical-line semantic inspection, not independent human reviewer"
+    }
+  ],
+  "prior_credit": "No R2/C2 0→strict promotion or repeated source credit; 29 disjoint sparse original lines on each of two separate source denominators. Original workflow file#1 41 strict S2-001 records already checked, not counted again.",
+  "separate_current_remediation": {
+    "path": "tests/weekly-source-snapshot.test.mjs",
+    "original_blob_sha": "b5040b5ad0b6c45659b705395b3730c5d48fd270",
+    "workflow_yaml_blob_sha": "1fae89f9b7f514986a65b622506a11f78d623b36",
+    "reproduced_gap_line_1_based": 22,
+    "fix": "Parse exact active - run: commands not substrings; add commented-out lint negative fixture",
+    "specific_synthetic_test": "Moving lint command from active - run line to YAML comment previously retained false PASS; corrected exact-run predicate rejects; this is not a real scheduling/production breach",
+    "test_status": "Remote Node22 and exact-source governance pending; do not claim PASS"
+  },
+  "frozen_new_lines": 29,
+  "pinned_new_lines": 29,
+  "canonical_coverage_counters_updated": false,
+  "binary_asset_changes": 0,
+  "app_or_production_changes": 0,
+  "status": "PR_HEAD_TESTING"
+}
