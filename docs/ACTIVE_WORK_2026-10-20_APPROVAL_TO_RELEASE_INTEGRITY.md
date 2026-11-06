@@ -1,3 +1,9 @@
+## 2026-11-06 UTC — #33 #199 same-commit test-preflight correction (TESTING)
+
+Before PR-head CI finished, inspected the new negative fixture and found it invoked the helper with the default compact notes instead of the synthetic contradictory Cherry/Peach label, which would falsely test a different contract. Corrected the helper input to Cherry/Peach in the same commit as this canonical journal. Original code, frozen603 and unrelated source/queue unchanged. Earlier PR-head checks on the superseded SHA are NOT certified as current; rerun exact new SHA, resolve any genuine failures before merging.
+
+---
+
 ## 2026-11-06 UTC — Issue #33 #199 selected Brazil Cerrado literal description notes (TESTING, [skip netlify])
 
 Owner authority: Issue #33 development-only continuation; live development source parent `42f5d5fcbf7cd52c63ca3852d65750faad80d56b` and tree `d77f753c8a7a61c147e8621d0de5c59e9f3f1aaf`. Retrieved AGENTS.md, AI CONTEXT_ENTRYPOINT/PREFLIGHT, Master Specification, Decision Ledger, approval, release queue, current status, original selected evidence register/CSV blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6`, #33 comments, #267 V2 and #96; distinct #267 PRs are not edited. Prior #184 and #193 fixes and scoped READY statuses preserved.

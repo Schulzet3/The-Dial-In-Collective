@@ -56,5 +56,5 @@ test('historical, conditional serving, alternate roast and duplicate description
 });
 test('unverified descriptions, contradictory selected profile wording and absent overlap remain reviewable',()=>{
  assert.equal(refine(page('Description: This coffee has notes of caramel and vanilla.')),'');
- assert.equal(refine(page(literal,{notes:'Cherry, Peach'}),'');
+ assert.equal(refine(page(literal,{notes:'Cherry, Peach'}),'Cherry, Peach'),'');
 });
