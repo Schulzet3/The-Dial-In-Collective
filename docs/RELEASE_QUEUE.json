@@ -12,26 +12,41 @@
       "issue": 33,
       "pr": 1056,
       "title": "Retain selected Washing Station as review-only source; do not mistake station/village for canonical producer",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "743b344add732766952dc78e59c3025b4f37599b",
       "scope_paths": [
         "src/server/coffee-semantic-specs.mjs"
       ],
       "tests": [
         "Exact selected original603 #346 fresh merged official HTTPS 42249862789 revealed Washing Station | Idido improperly auto-assigned canonical producer=Idido; direct official source showed village/kebele, no named farmer; source HTML SHA256 191e6d9fb862d98c612a1ccdb6e0724208a5974ae34889f4dcb906c7162fcbbf.",
         "Six positive/adversarial new fixture groups for selected station, preserved source role, distinct producer/farm/farmer, related and other-product JSON-LD boundaries; independent test pass pending.",
-        "PR-head approval42250325079 failed with untracked src/server/coffee-semantic-specs.mjs because first commit omitted queue row; this next same-commit queue/journal change fixes intake; not a code test failure. Exact head Node CI pending."
+        "PR-head approval42250325079 failed with untracked src/server/coffee-semantic-specs.mjs because first commit omitted queue row; this next same-commit queue/journal change fixes intake; not a code test failure. Exact head Node CI pending.",
+        "Corrected code PR #1056 exact head f226a7bfd7f13928de8649145de52ac79e02144d, Node/lint/build 42250548802 SUCCESS: 1894 pass, 0 fail, 0 skip; approval42250548634, SQL42250548671, cloud/mobile42250548841, security42250548481, source archive42250548729 SUCCESS. Frozen603 workflow42250548502 SKIPPED (NOT PASS).",
+        "Nonforce code merge 743b344add732766952dc78e59c3025b4f37599b; exact merged Node/lint/build42250849518 SUCCESS 1894 pass/0 fail/0 skip, approval42250849489, cloud/mobile42250849491 SUCCESS; predecessor 42250849393 official source job SKIPPED because no selector, not misrepresented.",
+        "After-code verification PR #1057 exact head d4c9f1d881b03f9621b79b37b149dbd4db9cc5ba: 2729 pass/0 fail/6 skipped on Node/lint42250989725, approval42250989648, SQL42250989534, cloud/mobile42250989823 SUCCESS; safe nonforce merged source 193df058cd6dfbdc2eca8d4183a59b58f01c26c5; exact merged approval42251345401 and guarded official source42251345559 SUCCESS.",
+        "Independent ZIP134 prior e2? (actual before SHA a2c95cfedc00d2140b4940ec734694d412514e03eedb9146d17d104db8b18bad) and after artifact13521480347 zip SHA256 eaea0357e1555066319fb180bef4cc8fbb4694d9c141ba58bf14c01041295491: source 346 raw HTML SHA256 398e5ee9631a3ee051896c569aa8d04272f67813e6b59444d0e17e78a6b3b7ee; all 3 hashes match report, #346 correct chosen H1, producer absent, washing_station review literal Idido, origin/process/variety/elevation/notes preserved, Add Coffee & Review true. Controls #214/#259 remain unchanged, all fetched/parsed, no conflicts."
       ],
       "ci_runs": [
-        42250325079
+        42250325079,
+        42250548802,
+        42250548634,
+        42250548671,
+        42250548841,
+        42250548481,
+        42250548729,
+        42250849518,
+        42250849489,
+        42250849491,
+        42250989725,
+        42250989648,
+        42250989534,
+        42250989823,
+        42251345559,
+        42251345401
       ],
-      "blockers": [
-        "Rerun exact-head governance and Node/lint/build/cloud/SQL/security, fix failures",
-        "Non-force merge reviewed source",
-        "After-code exact current selected official source and Add Coffee/source-review verify #346, reconcile as READY only on proof"
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "DEVELOPMENT ONLY; original frozen603 CSV/oracle/scorer/captures intact; #267 and #96 scope preserved, no deployment or production writes. Explicitly not READY before post-merge source proof."
+      "notes": "Narrow Issue33 original603 #346 Washing Station misattribution corrected and independently VERIFIED READY in DEVELOPMENT only, no release. One station/place is not a named farm/individual producer; literal direct station source remains reviewable. Original immutable603 CSV/oracle/scorer/captures intact. This does NOT certify all 603 or real authenticated device. Issue33 OPEN. #267/#96 separate."
     },
     {
       "id": "DIC-Q-455-similar-coffee-stale-success-evidence-guard",
