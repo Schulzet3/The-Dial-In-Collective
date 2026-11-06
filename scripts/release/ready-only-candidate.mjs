@@ -196,12 +196,25 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
  if(!Array.isArray(excludedTests)||new Set(excludedTests).size!==excludedTests.length)
   reject('Invalid or duplicate excluded unfinished test paths');
  for(const path of excludedTests){
-  const m=typeof path==='string'?/^tests\/issue([1-9][0-9]*)-[a-z0-9-]+\.test\.mjs$/.exec(path):null;
-  if(!m)reject('Only issue-scoped unfinished test files can be excluded');
+  const m=typeof path==='string'?/^tests\/(?:coffee-)?issue([1-9][0-9]*)-[a-z0-9-]+\.test\.mjs$/.exec(path):null;
+  if(!m)reject('Only issue-scoped unpublished test files can be excluded');
   const issue=Number(m[1]);
-  if(!queue.items.some(i=>i.issue===issue&&['IN_PROGRESS','TESTING','BLOCKED'].includes(i.state)&&
-      i.scope_paths?.some(p=>plan.pinned_ready_paths.includes(p))))
-   reject('Excluded test does not belong to a current unfinished mixed-source item');
+  const unfinishedMixed=queue.items.some(i=>i.issue===issue&&
+   ['IN_PROGRESS','TESTING','BLOCKED'].includes(i.state)&&
+   i.scope_paths?.some(p=>plan.pinned_ready_paths.includes(p)));
+  // A separately verified READY item NOT selected for this owner release
+  // may carry NEW tests of code deliberately restored to published bytes.
+  // Exclude ONLY its original CI-tested test blob, never a selected test or
+  // a changed/unattributed test. Require every owned runtime file restored.
+  const frozenOtherReady=queue.items.some(i=>i.issue===issue&&i.state==='READY'&&
+   !manifest.selected_ready_item_ids.includes(i.id)&&
+   i.scope_paths?.length>0&&i.scope_paths.every(p=>plan.restored_paths.includes(p))&&
+   liveQueue?.items.some(now=>now.id===i.id&&JSON.stringify(now)===JSON.stringify(i))&&
+   SHA.test(i.merged_source_sha||'')&&
+   sourceObjectAt(i.merged_source_sha,path)!==null&&
+   sourceObjectAt(i.merged_source_sha,path)===sourceObjectAt(manifest.development_source_sha,path));
+  if(!unfinishedMixed&&!frozenOtherReady)
+   reject('Excluded test does not belong to a frozen unselected READY or unfinished mixed-source item');
   if(sourceObjectAt(publishedSourceSha,path)!==null||
      sourceObjectAt(manifest.development_source_sha,path)===null||
      sourceObjectAt(candidateSha,path)!==null)
