@@ -682,7 +682,7 @@ export function reconcileSelectedCoffeeReviewActorRoles(facts,{source_url}={}){
  if(!Array.isArray(facts)||!source_url)return facts;
  const eligible=f=>f?.source_url===source_url&&f.source_type==='html'&&
   !f.conflicting&&!/different coffee|other coffee|previous (?:coffee|lot)|general guidance|educational/i.test(String(f.section||''));
- const normLabel=f=>normalized(String(f?.label||'').replace(/[:：]\s*$/u,''));
+ const normLabel=f=>normalized(String(f?.label||'').replace(/[|:：]\s*$/u,''));
  const labeledGrower=facts.some(f=>eligible(f)&&f.field==='producer'&&/^(?:grower|producer|farmer)$/.test(normLabel(f)));
  const methods=facts.filter(f=>eligible(f)&&f.field==='process'&&normLabel(f)==='process').map(f=>normalized(f.value));
  for(const fact of facts){
@@ -769,7 +769,7 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
  const hasLabeledGrower=semantic.facts.some(fact=>fact.kind==='producer'&&/^(?:grower|producer|farmer)$/i.test(fact.label.trim()));
  const selectedProcessMethods=semantic.facts.filter(fact=>fact.kind==='process'&&/^process$/i.test(fact.label.trim())).map(fact=>normalized(fact.value));
  const sourceReviewField=(label,value,field)=>{
-  const caption=normalized(label);
+  const caption=normalized(label).replace(/\s*[|:：]\s*$/u,'');
   if(field==='producer'&&caption==='farm'&&hasLabeledGrower)return undefined;
   if(field==='process'&&caption==='processing'&&selectedProcessMethods.length&&!selectedProcessMethods.includes(normalized(value))&&
    /^[\p{Lu}][\p{L}\p{M}.'’-]*(?:\s+[\p{Lu}][\p{L}\p{M}.'’-]*){0,4}$/u.test(value)&&
