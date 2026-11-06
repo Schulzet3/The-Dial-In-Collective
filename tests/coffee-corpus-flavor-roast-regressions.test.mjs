@@ -52,12 +52,19 @@ test('a later negative sentence does not erase a positive current-coffee profile
 
 for(const [label,expected] of [
  ['Medium roast','Medium'],['Light/Medium Roast','Medium-Light'],['Medium/ Dark Roast','Medium-Dark'],
- ['Medium Roast.','Medium'],['Medium (Full City)','Medium'],['Full City (Med)','Medium'],
- ['Medium-dark (Light to Extra Dark)','Medium-Dark']
+ ['Medium Roast.','Medium'],['Medium-dark (Light to Extra Dark)','Medium-Dark']
 ])test('supported roast category survives source formatting: '+label,()=>{
  assert.equal(normalizeRoastLabel(label),expected);
  assert.equal(parse('<p>Roast Type: '+label+'</p>').fields.roast_level,expected);
 });
+// Full City is owner-Locked Medium-Dark. A separate selected "(Med)" means
+// Medium and therefore contradicts Full City, rather than clarifying it.
+// Old tests formerly expected Medium by silently favoring the parenthesis.
+for(const label of ['Medium (Full City)','Full City (Med)'])
+ test('opposed supported roast categories require manual review: '+label,()=>{
+  assert.equal(normalizeRoastLabel(label),null);
+  assert.equal(parse('<p>Roast Type: '+label+'</p>').fields.roast_level,undefined);
+ });
 for(const [body,expected] of [
  ['<p>This decaf is a medium roast.</p>','Medium'],
  ['<p>Mellow and easy-going — Medium Roast</p>','Medium'],
