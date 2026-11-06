@@ -843,6 +843,21 @@
       "source_bytes_sha256": null,
       "source_byte_caveat": "Publisher search index exposed original detailed methods and table text; live DOI redirect blocked direct page. No HTML/PDF bytes or figures downloaded/hashed; this is not complete paper certification.",
       "claims_verified_externally": "350 g single Kenyan Arabica regional blend, 0.0228 kg/s air flow, 220/235/250/265/280C inlet temperatures to measured color 70 +/-1; Micro-CT triplicate, 100 cross-sections of 0.76 mm chosen bean region. Time to final color 700s at 220C vs 168s at 280C. Porosity rose approximately 40-60% through roasting, final porosity differs despite matched color; larger differences at 280C versus 220-265C. Authors explicitly excluded flavor chemistry/sensory studies; some partial-roast porosity observations had SE ~4.6%."
+    },
+    {
+      "id": "LIT-2026-BUMBAUGH-CV-FILTER-CUPPING",
+      "type": "peer_reviewed_primary_filter_cupping_electrochemical_analytical_methods",
+      "title": "Direct electrochemical appraisal of black coffee quality using cyclic voltammetry",
+      "authors": "Robin E. Bumbaugh; Doran L. Pennington; Lena C. Wehn; Elias J. Rheingold; Joshua R. Williams; Benjamin J. Aleman; Christopher H. Hendon",
+      "published": "2026-04-28, Nature Communications 17 article 3618",
+      "doi": "10.1038/s41467-026-71526-5",
+      "url": "https://www.nature.com/articles/s41467-026-71526-5",
+      "access": "DIRECT_FIRST_PARTY_NATURE_COMMUNICATIONS_FULL_HTML_METHODS_FIGURES_CAPTIONS_RESULTS_AND_DISCUSSION_READ_20261106",
+      "review_status": "DIRECT_2026_PRIMARY_FULL_HTML_FOCUSED_METHODS_ROAST_SERIES_BATCH_QC_AND_STATISTICAL_CLAIMS; SUPPLEMENTS_FIGSHARE_AND_RAW_PDF_BYTES_UNREVIEWED",
+      "evidence_grade": "ORIGINAL_PEER_REVIEWED_FILTER_COFFEE_ELECTROCHEMISTRY_ONE_COLOMBIAN_ROAST_SERIES_PLUS_FOUR_BATCH_ROASTER_ACCEPTANCE_COMPARISON; NOT_ESPRESSO_INTERVENTION_OR_BLINDED_CONSUMER_FIVE_TASTE_VALIDATION",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Primary publisher HTML directly reviewed; no raw HTML/PDF byte download or SHA-256, no raw Figshare dataset or supplemental figure re-analysis. A roaster's preregistered sensory QC label is not a new controlled consumer taste preference trial.",
+      "claims_verified_externally": "One Colombian coffee in six roasts Agtron 75.8 to 55.7, rested seven days, EK43 ground, SCA cupped at 1:13.5 with 93 C water for 4 min and V60-filtered, analyzed cool (21.6 C), NOT espresso. CV Pt electrode measured roast- and TDS-sensitive charge; calibration is coffee-conditional. Four batches of a different same-spec coffee (three accepted, one light rejected Agtron 98.9 against target 93+/-1) were provided single-blind to investigators, each batch brewed five times. First-cycle CV separated the rejected batch while TDS did not; n=5 denotes within-batch preparations, NOT independent coffees or human assessors. No five-score user taste intervention, espresso grinder tuning or optimal beverage recipe established."
     }
   ],
   "evidence_checks": [
@@ -2335,6 +2350,36 @@
       "result": "WHOLE_BEAN_POROSITY_NOT_ESPRESSO_FLAVOR_OPTIMUM",
       "owner_approval": false,
       "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-064-A",
+      "source": "Bumbaugh et al. 2026 Nature Communications 17:3618 original publisher full HTML; Git original ORG-07 blob 43912d0dec0969c090d525c853f3a456136a2311 lines 5-31, 41-45",
+      "claim": "Published CV chemistry study ran SCA filter/cupping: EK43-ground single Colombian coffee, six roasts Agtron 75.8-55.7, seven-day rest, 1:13.5 dose-water and 93 C, four-minute immersion, filtered through V60 paper; Pt electrode charge responds to total solids and roast state but does not directly observe espresso extraction, five member taste inputs or sensory preferences.",
+      "grade": "PEER_REVIEWED_DIRECT_ORIGINAL_FULL_TEXT_METHODS_2026; NO_ESPRESSO_OR_MEMBER_RATING_VALIDATION; ONE_COFFEE_SERIES_AND_UNHASHED_PUBLISHER_BINARY",
+      "primary_sources": [
+        "https://www.nature.com/articles/s41467-026-71526-5"
+      ],
+      "page_number": "Publisher online Methods: Sample preparation, lines around 167-175; Results: roast profile and electrode response, around 127-141; printed PDF page not verified",
+      "app_source_sha": "cd8e58fb0cbb0c4fe7302930c9ed2bede6e66195",
+      "current_app": "Current site/lib/engine.js Git blob 93969d561e18205d8f87e19059ea0c66b519e934 uses owned five sensory ratings, measured shot dose/yield/time and source-bounded equipment context; does not measure voltammetry, TDS or chemical assays. Do not treat chemical signals as direct input ratings.",
+      "result": "CV_CUPPING_CHEMISTRY_AND_BEVERAGE_STRENGTH_NOT_VALIDATED_ESPRESSO_FIVE_TASTE_PREFERENCE",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-064-B",
+      "source": "Bumbaugh et al. 2026 Nature Communications primary original Results Fig4 and Methods; ORG-07 sensory causal report Git blob 43912d0dec0969c090d525c853f3a456136a2311",
+      "claim": "Four same-spec roaster batches, one rejected for Agtron 98.9 outside target 93.0 +/-1, were analyzed single-blind to authors. The rejected batch's first-cycle charge differed statistically from three accepted batches while refractometer TDS did not. Each roaster sample was prepared in quintuplicate (n=5 within-batch replicates), not five independent coffees, five independent human panelists, or randomized sensory testing. Labels came from the roaster's separate quality control. Cannot infer the same electrochemical marker generalizes to unmeasured member coffee or proves a universal flavor/scalar recipe change.",
+      "grade": "ORIGINAL_PEER_REVIEWED_SINGLE_BLIND_ANALYTICAL_ROASTER_BATCH_DISCRIMINATION_ONLY; NO_BLINDED_CONSUMER_PANEL_OR_MULTICOFFEE_ESPRESSO_TRIAL",
+      "primary_sources": [
+        "https://www.nature.com/articles/s41467-026-71526-5"
+      ],
+      "page_number": "Publisher online Results quality control lines around 142-157; Methods sourced coffee samples around 200-202; printed pages and original figures not independently remeasured",
+      "app_source_sha": "cd8e58fb0cbb0c4fe7302930c9ed2bede6e66195",
+      "current_app": "Current recommendation engine cannot infer CV electrochemical response or externally verified flavor score from source bean roast/color. Preserve all five original member ratings and the existing one-controllable-variable advice limits.",
+      "result": "ROASTER_QC_CV_CLASSIFICATION_NOT_ESPRESSO_NEXT_SHOT_OR_FIVE_SCALE_SENSORY_OPTIMUM",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
     }
   ],
   "policy_decisions_pending": [],
@@ -2343,9 +2388,10 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R455-057 verifies the original ACS peer-reviewed abstract and qualifies process-conditional grind/EY observations only. No app/Locked, source originals, matrix, queue or CI code changed."
+    "reason": "R455-064 independently qualifies peer-reviewed filter-cupping electrochemical chemistry and a bounded roaster QC comparison only. Original reports/code/Locked rules/queue/approval matrix/status untouched."
   },
   "next_actions": [
+    "R455-064: Direct Nature Communications 2026 primary full HTML validates Pt voltammetry on SCA cupped/filtered 1:13.5 coffee, NOT espresso; 4 batch blind analytical QC (n=5 brew replicates per batch), NOT five consumer tasting scores. No new app policy, sensor, grinder/taste correction. Source bytes/supplements not hashed; S019 original still inaccessible.",
     "R455-054: Fitri et al. 2025 primary peer-reviewed 7-page publisher PDF (focused pages 2-4, visual p3) checked 3 bean origins, 4 distinct beverages, n=30 CATA consumers, 21 descriptors, fixed 18g dose, 36mL volume NOT measured grams; no universal ratio, five-scale validation or origin/grind causal rules. Raw PDF hash/supplementals unchecked; original S019 still unavailable.",
     "R455-053: Direct Wiley original Chambers et al. (2016) 105 coffees/14 countries, development panel 5 trained, validation 6 trained/20 coffees/3 reps, 0-15 intensity; mostly immersion/drip and some automated espresso. WCR Oct 2017 v2 Sour/Bitter/Salty standards. Does NOT certify consumer five 1-5 ratings, espresso-specific optimal taste thresholds, or app UX success. No app changes. Original S019 PDF not retrieved.",
     "R455-052: Original peer-reviewed Klotz 2020 espresso single-blend ECM Synchronika 24-person triangle found 11/24 80-versus-93C non-significant, 15/24 80-versus-128C significant; NOT an equivalence, preference, multi-espresso, health or puck-sensor proof. All sampled to ~55C. No new universal 93C cap/80C recipe or temp step policy. Original S019 inaccessible.",
@@ -2372,19 +2418,24 @@
     "R455-060: Vaca Guerra 2023 bed-PSD compression result verified only from first-party author-institution abstract, original 2023 PDF/methods unavailable. Do not implement generic tamp or grind adjustment from laboratory permeability. Resume unverified papers and directly reproduce useful safe UX defect; original S019 PDF not accessible."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-063",
-    "base_development_sha": "0bd5269d3f6b2b7411912dc3f8cc231b09f598bb",
-    "merged_code_sha": "82d799be33eb90abfd65fd17a9223c9bdad2e0f9",
-    "source_ids": [],
-    "claim_ids": [],
-    "number_of_curated_sources": 57,
-    "total_evidence_checks": 121,
-    "review_type": "SOURCE_REPRODUCED_CLIENT_HYDRATION_STALE_SUCCESS_GUARD_VERIFIED_READY_NOT_DEPLOYED",
-    "source_hash_verified_20261106": true,
+    "id": "R455-064",
+    "base_development_sha": "cd8e58fb0cbb0c4fe7302930c9ed2bede6e66195",
+    "merged_code_sha": null,
+    "source_ids": [
+      "LIT-2026-BUMBAUGH-CV-FILTER-CUPPING"
+    ],
+    "claim_ids": [
+      "R455-EV-CIT-064-A",
+      "R455-EV-CIT-064-B"
+    ],
+    "number_of_curated_sources": 58,
+    "total_evidence_checks": 123,
+    "review_type": "PRIMARY_PUBLISHER_FILTER_CUPPING_ELECTROCHEMISTRY_SCOPE_VERIFIED_NO_PRODUCT_POLICY_CHANGE",
+    "source_hash_verified_20261106": false,
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
-    "code_or_policy_changed": "SAFE_CLIENT_HYDRATION_CODE_CHANGE_NO_LOCKED_CHANGE",
-    "next_action": "Complete verified docs-only READY reconciliation and issue checkpoint; continue independent S019/remaining source studies and disjoint Log Shot-Rate-Recommendation UX checks. No deployment."
+    "code_or_policy_changed": "NONE_RESEARCH_ONLY",
+    "next_action": "Check docs-only PR-head CI at exact source SHA; repair if necessary and merge nonforce only on PASS, read back merged source and governance, post durable Issue #455 checkpoint. Resume remaining source citations and reproducible safe Log Shot UX gaps."
   },
   "policy_decisions_resolved": [
     {
@@ -2865,6 +2916,44 @@
       "release_queue": "DIC-Q-455-historic-stale-success-rating-guard",
       "source_commit": "82d799be33eb90abfd65fd17a9223c9bdad2e0f9",
       "implementation_pr": 962
+    },
+    {
+      "id": "R455-PROP-064-CV-FILTER-CUPPING-NOT-ESPRESSO-TASTE",
+      "finding": "Original peer-reviewed voltammetry study can discriminate a roaster-rejected, lighter batch among four by first-cycle electrode charge, but studies filter-strength cupping and chemistry, not a five-score espresso recipe change or personalized flavor prediction.",
+      "evidence": [
+        "Full primary Nature Communications article DOI 10.1038/s41467-026-71526-5, Methods sample preparation and sourced coffees, Results roast/CV and single-blind batch discrimination; original publisher HTML directly reviewed 2026-11-06, source bytes not hashed.",
+        "Original causal report ORG-07 Git blob 43912d0dec0969c090d525c853f3a456136a2311 lines 5-31,41-45 contrasts chemical measurement and downstream sensory preference.",
+        "Current engine.js Git blob 93969d561e18205d8f87e19059ea0c66b519e934 source-bound to development cd8e58fb0cbb0c4fe7302930c9ed2bede6e66195"
+      ],
+      "severity": "P3_RESEARCH_TO_PRODUCT_EVIDENCE_GENERALIZATION_RISK",
+      "user_benefit": "Avoid promoting analytic coffee chemistry or a roaster's preclassified reject label to purported personally validated five-slider espresso optimization.",
+      "current_locked": "Five real subjective ratings, actual original dose/yield/time/grind and history, same-coffee/recipe family evidence, one truly controllable next-step; no unapproved new sensors/inputs or universal numeric scientific certainty.",
+      "current_app": "Current engine does not ingest CV, TDS or roast-batch QC assay. Roaster-color starting heuristics are owner Locked product choices, not outcomes experimentally confirmed by this electrochemistry study.",
+      "proposed_change": "RESEARCH_ONLY; preserve all five scores and approved heuristics. Optional future CV sensor capture, confidence score derived from chemistry or CV-guided recommendations would require a separate explicit owner product/data-policy decision AND measured espresso-specific prospective validation.",
+      "approval_required_for_behavior_change": true,
+      "implementation": "NO_APP_CODE_CHANGE_JUSTIFIED_OR_MADE; FUTURE_DATA_CAPTURE_OWNER_APPROVAL_REQUIRED",
+      "test_plan": "Direct primary publisher methods and original ORG-07 and exact engine reviewed. Docs-only GitHub PR governance pending; no new application/Node22/Chromium/SQL/mobile/espresso cup tests executed; original frozen 603 not run and not claimed PASS.",
+      "release_queue": "NOT_APPLICABLE_RESEARCH_ONLY_NO_DEPLOYABLE_SCOPE"
+    },
+    {
+      "id": "R455-PROP-065-EMPTY-HISTORIC-FAMILY-RATIO",
+      "finding": "Assigning a new rated shot to an existing family can throw when that family contains only historically all-green shots with missing/zero dose: familyStats returns ratio:null but assignFamily dereferences .ratio.center.",
+      "evidence": [
+        "Direct live site/lib/engine.js blob 93969d561e18205d8f87e19059ea0c66b519e934 at parent 261681c2e18364d22f80077d71790bd70cf56784",
+        "ORG-07 archival causal report blob 43912d0dec0969c090d525c853f3a456136a2311: ratio is derived from measured beverage mass and dose, not inferred from taste alone; not scientific numeric policy.",
+        "Current chooseRecipeFamily already excludes nonfinite dose/ratio from matching recommendation evidence."
+      ],
+      "severity": "P2_SAFE_SHOT_LOGGING_CRASH_GUARD",
+      "user_benefit": "A malformed past success cannot crash new shot logging or editing; previously measured successes continue matching their correct recipe family.",
+      "current_locked": "Retain original measured shot, five scores, private notes, multiple recipe families, separate espresso styles, one-controllable-recommendation, personal vs community evidence.",
+      "current_app": "familyStats returns ratio:null if all historic dose values are null/zero/nonfinite; assignFamily previously dereferences center without guard.",
+      "proposed_change": "SAFE small guard only: skip family candidate if measured ratio center unavailable, preserve all original family/shot data and valid comparisons.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "VERIFIED_NONFORCE_MERGED_CODE_READY_NOT_DEPLOYED",
+      "test_plan": "PR head 0535dc5d63b0e101ebaa74df6c62b29524045370 2664 PASS/0 FAIL/6 SKIP Node22/lint 42189892844; browser/mobile/390px/offline/a11y 42189893017, SQL 42189892840, security 42189892994, approval 42189893034 SUCCESS. Nonforce merge PR977 exact 230c754426567f332d1f854146b762e24bb339e3; same five blob SHAs. Exact merged-source Node22/lint 42190192081 2664 PASS/0 FAIL/6 SKIP, browser/mobile/offline/a11y 42190192126 and approval/governance 42190192054 SUCCESS. Frozen 603 SKIPPED 42189892993; no real member or espresso cup trial.",
+      "release_queue": "DIC-Q-455-empty-historic-success-family-ratio-guard",
+      "source_commit": "230c754426567f332d1f854146b762e24bb339e3",
+      "implementation_pr": 977
     }
   ]
 }

@@ -195,6 +195,27 @@ function containerNotes(page,nodes,children,index,kind,clean){
  const value=parts.length?parts.join(', '):clean(body.replace(/<br\s*\/?\s*>/gi,', '),220).replace(FLAVOR_LABEL,'');
  return shortFlavorList(value,clean,{allowSingle:true});
 }
+// Exact current WooCommerce product summaries may print a compact sensory
+// list after four BR-separated product roles, with no explicit "Notes" label.
+// Require one selected scoped panel, all four typed roles and a short flavor
+// list. Never mine unrelated descriptions, SEO, option menus or other coffees.
+function selectedWooCommerceShortDescriptionNotes(page,nodes,clean){
+ const panels=nodes.filter(n=>n.tag==='div'&&hasClass(attributesOf(n,page),'woocommerce-product-details__short-description'));
+ if(panels.length!==1)return '';
+ const n=panels[0];if(n.contentEnd-n.headEnd>1800)return '';
+ const body=page.slice(n.headEnd,n.contentEnd);
+ const p=/^\s*<p\b[^<>]{0,240}>([\s\S]{1,1100}?)<\/p\s*>\s*$/i.exec(body);
+ if(!p)return '';
+ const lines=p[1].split(/<br\s*\/?>/gi).map(row=>clean(row,180).trim());
+ if(lines.length!==5||lines.some(s=>!s||s.length>160))return '';
+ if(!/^(?:ultra\s+light|very\s+light|light|medium[ -]light|light[ -]medium|medium|medium[ -]dark|dark|very\s+dark)\s+roast$/i.test(lines[0])||
+  !/^(?:very\s+low|low|below\s+average|medium|average|above\s+average|high|very\s+high)\s+acidity$/i.test(lines[1])||
+  !/^(?:very\s+low|low|below\s+average|medium|average|above\s+average|high|very\s+high|full|light|delicate)\s+body$/i.test(lines[2])||
+  !/^(?:very\s+low|low|below\s+average|medium|average|above\s+average|high|very\s+high)\s+sweetness$/i.test(lines[3]))return '';
+ const flavor=shortFlavorList(lines[4],clean);
+ return flavor&&SENSORY_ROLE.test(flavor)?flavor:'';
+}
+
 function detailsFlavorContainer(page,nodes,children,index,clean){
  const node=nodes[index];if(node.tag!=='details'||node.contentEnd-node.headEnd>12000)return '';
  const summaries=(children.get(index)||[]).filter(at=>nodes[at].tag==='summary');
@@ -835,6 +856,8 @@ export function extractProductFlavorProfileEvidence(html,{clean}={}){
   if(found.length>=128)break;
  }
  for(const row of iconLabeledFlavorRows(page,nodes,children,clean,covered))found.push({value:row.value,kind:row.kind});
+ const selectedShortNotes=selectedWooCommerceShortDescriptionNotes(page,nodes,clean);
+ if(selectedShortNotes)found.push({value:selectedShortNotes,kind:'explicit_label'});
  for(const value of flavorProse(page,clean).explicit)found.push({value,kind:'explicit_label'});
  extendSelectedFlavorWithCorroboratedNamedNote(page,clean,found);
  if(!found.length)found.push(...productHeroFlavorProfiles(page,nodes,clean));
