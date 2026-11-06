@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "case_number": 184,
+  "date_utc": "2026-11-06",
+  "status": "VERIFIED_READY_DEVELOPMENT_ONLY",
+  "not_deployed": true,
+  "official_url": "https://lamulitacoffee.com/products/exotic-mule",
+  "selected_h1": "Exotic Mule",
+  "source_authority": "exact current selected product prose and selected specs",
+  "selected_source": {
+    "first_component": "Villa Betulia's Yellow Natural Pacamara, grown by Luis Anibal Calderon",
+    "separate_partner": "regional coffee from Huila",
+    "unspecified_partner_method": true,
+    "direct_labeled_process": "Natural",
+    "canonical_whole_blend_process": "BLANK_FOR_REVIEW"
+  },
+  "original603": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "modified": false,
+    "oracle_scorer_unchanged": true,
+    "original_csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6"
+  },
+  "before": {
+    "frozen_csv_process": "Natural",
+    "earlier_current_official_run": 42197410495
+  },
+  "superseded_failure": {
+    "pr": 1000,
+    "node_run": 42200030442,
+    "pass": 1875,
+    "fail": 2,
+    "cause": "source_facts temporal dead zone",
+    "approval_run": 42200030226,
+    "approval": "FAILED recognized same-commit work journal contract",
+    "merged": false
+  },
+  "corrected": {
+    "pr": 1001,
+    "head": "ace5e10aba3d7f33db9d00694e4b0e7be04c5299",
+    "nonforce_merge_sha": "4996e8e791110e290a5f43ca0af05934a9f534d7",
+    "source_paths": [
+      "src/server/coffee-blend-evidence.mjs",
+      "src/server/coffee-page-metadata.mjs"
+    ],
+    "regressions": "tests/coffee-issue33-original603-184-partial-blend-process.test.mjs",
+    "same_commit_canonical_journal": "docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md"
+  },
+  "ci": {
+    "pr_head": {
+      "node": 42200472416,
+      "tests": 1877,
+      "pass": 1877,
+      "fail": 0,
+      "skip": 0,
+      "cloud_mobile": 42200472408,
+      "sql": 42200472473,
+      "security": 42200472318,
+      "approval": 42200472383,
+      "source_archive": 42200472438,
+      "frozen603": 42200472442,
+      "frozen603_conclusion": "SKIPPED"
+    },
+    "merged": {
+      "node": 42200712553,
+      "pass": 1877,
+      "fail": 0,
+      "skip": 0,
+      "cloud_mobile": 42200712796,
+      "approval": 42200713002,
+      "official_current": 42200712752,
+      "frozen603": 42200712605,
+      "frozen603_conclusion": "SKIPPED"
+    }
+  },
+  "actual_current_official_after": {
+    "workflow_run": 42200712752,
+    "job": 127835009694,
+    "status": "SUCCESS",
+    "requested": [
+      184,
+      193,
+      199
+    ],
+    "fetched": 3,
+    "parsed": 3,
+    "certified_all603": false,
+    "number184_h1": [
+      "Exotic Mule"
+    ],
+    "number184_html_sha256": "304cbbe3855550f8ae886fa0896b7701e35faf94e48b31cfe272009f531ab029",
+    "number184_fields": {
+      "name": "Exotic Mule",
+      "roaster": "La Mulita Coffee",
+      "origin": "Huila",
+      "variety": "Yellow Pacamara",
+      "elevation_m": "1,500-1,600 MASL",
+      "producer": "Luis Anibal Calderon",
+      "tasting_notes": "Chocolate, Red Fruits, and Hazelnut",
+      "roast_level": "Medium"
+    },
+    "number184_process_present": false,
+    "number184_conflicts": []
+  },
+  "limitations": "Only #184 narrow field disposition independently corrected; #199 supplementary narrative notes and full 603 individual original-scope semantic certification remain unresolved; no real signed-in GoTrue/device; no source/production release.",
+  "boundaries": "Development-only: no Netlify publication, production data/SQL/Auth/Edge, member data, original603, or #267/#96 code changes."
+}
