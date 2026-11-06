@@ -11,7 +11,7 @@ import {emailConfirmationView} from './confirmation.js';
 import {shotCard} from './shot_card.js';
 import {applyAppearance,readAppearance} from './appearance.js';
 import {nextCoffeeAction,proposalWithRecognizedRoaster,matchReviewMarkup} from './coffee-match-ui.js';
-import {coffeeUrlPreviewMarkup,applyCoffeeUrlFields,coffeeSourceReviewSnapshot,downloadCoffeeSourceReview,coffeeSourceDifferences,coffeeConflictReviewOptions,autofillFields,coffeeRoastVariantPreview,applyCoffeeRoastVariant} from './coffee-url-autofill.js';
+import {coffeeUrlPreviewMarkup,applyCoffeeUrlFields,coffeeSourceReviewSnapshot,downloadCoffeeSourceReview,coffeeSourceDifferences,coffeeConflictReviewOptions,autofillFields,coffeeRoastVariantPreview,applyCoffeeRoastVariant,coffeeUrlRequestIsCurrent} from './coffee-url-autofill.js';
 import {communityReviewBanner,communityPage} from './community.js';
 import {walkthroughMarkup,gettingStartedMarkup} from './help.js';
 const {e,button,icon,field,select,checkbox,recipeGrid,styleBadge,chips,radar,scales,nextShotGuidance,nextShotTitle}=U;
@@ -788,7 +788,7 @@ class CloudApp {
      const original=target.textContent;target.disabled=true;target.textContent='Checking URL...';
      try{
       const found=await this.inSession(()=>this.client.previewCoffeeUrl(raw,{refreshSource:a==='preview-coffee-url-refresh'}));
-      if(!sheet.open||sheet.querySelector('#new-coffee')!==form||form.elements.source_url.value.trim()!==raw)return;
+      if(!coffeeUrlRequestIsCurrent(sheet,form,raw))return;
       
       this.coffeeUrlPreviewInput=found?.ok?raw:null;
       this.coffeeUrlBasePreview=found?.ok?found:null;this.coffeeUrlActivePreview=found?.ok?found:null;
@@ -810,7 +810,7 @@ class CloudApp {
        }
       }
      }catch{
-      if(sheet.querySelector('#new-coffee')===form)panel.innerHTML=coffeeUrlPreviewMarkup({ok:false,reason:'preview_unavailable'});
+      if(coffeeUrlRequestIsCurrent(sheet,form,raw))panel.innerHTML=coffeeUrlPreviewMarkup({ok:false,reason:'preview_unavailable'});
      }finally{this.coffeeUrlBusy=false;target.disabled=false;target.textContent=original;}
      return;
     }

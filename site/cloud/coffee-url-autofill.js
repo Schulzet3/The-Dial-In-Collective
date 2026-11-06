@@ -4,6 +4,13 @@ import {e} from '../lib/ui.js';
 // retain their existing size and part limits for compatible local exports.
 export const MAX_SOURCE_REVIEW_FACTS=384;
 
+// Both resolved and rejected asynchronous previews must still belong to the
+// visible form and URL. A stale failure must not replace newer input feedback.
+export function coffeeUrlRequestIsCurrent(sheet,form,sourceUrl){
+ return !!sheet?.open&&sheet.querySelector?.('#new-coffee')===form&&
+  String(form?.elements?.source_url?.value||'').trim()===sourceUrl;
+}
+
 export const autofillFields=[
  ['name','Coffee Name'],['roaster','Roaster'],['release_label','Release / Harvest'],
  ['origin','Origin'],['roast_level','Roast Level'],['elevation_m','Elevation'],
