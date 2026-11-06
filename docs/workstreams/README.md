@@ -12,6 +12,7 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 - [Issue #96 source-transfer and receipt evidence](ops-issue96-receipt.md)
 - [Selected-product extraction completeness: Issue #33](issue-33.md)
 - [Issue #33 November 2 targeted official-source probe and adversarial tests](issue-33-tenth3.md)
+- [Issue #33 Nov 6 selected-current original603 #121/#124/#130 bounded review](ops-issue33-seventyfirst3.md) — source-page field review; real current parser, raw captures and CI pending
 - [Issue #33 Nov 6 selected-current original603 #337/#340/#355 bounded review](ops-issue33-sixtyninth3.md) — in-progress official parser evidence and per-case adjudication
 - [Numeric grinder range and Slow Feed recommendation: Issue #17](issue-17.md)
 - [Owner-retired screenshot extraction and Claude BYOK: Issue #18](issue-18.md)
