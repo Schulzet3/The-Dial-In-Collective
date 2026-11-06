@@ -19,6 +19,7 @@ test('workflow cleanup preserves exact historical blobs, not paraphrased evidenc
 test('reconciliation retains every classified owner key and source assertion',()=>{
  for(const key of old.owner_decision_key_inventory)assert.ok(matrix.owner_decision_key_inventory.includes(key),'missing historical owner decision '+key);
  assert.deepEqual(matrix.owner_decision_key_inventory,[...matrix.owner_decision_key_inventory].sort(),'current inventory remains sorted');
+ assert.ok(uniqueOwnerKeys(matrix.owner_decision_key_inventory),'current inventory must not duplicate owner decision keys');
  // Historical contracts remain exact. Later approved implementations may
  // add coverage; approval-coverage separately validates every current item.
  const originalIds=new Set(old.contracts.map(item=>item.id));
