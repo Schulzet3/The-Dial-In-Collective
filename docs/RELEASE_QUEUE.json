@@ -11,8 +11,8 @@
       "id": "DIC-Q-33-527-selected-named-sensory-pear",
       "issue": 33,
       "title": "Recover exactly selected named Tasting Notes prose missing one descriptor without losing list",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "966dfeaaf1838ebe48730d574fdd9833819a9a57",
       "scope_paths": [
         "src/server/coffee-flavor-evidence.mjs",
         "src/server/coffee-page-metadata.mjs"
@@ -22,20 +22,35 @@
         "Three synthetic positive and negative regression test groups added; exact-head checks, post-merge official HTTPS parser/Add Coffee and final source-blobs pending.",
         "PR first-head Node41860281958 completed 1680 PASS /1 FAIL: synthetic fixture misclassified full Tasting Notes paragraph, positive canonical blank; fixed by realistic separate story/roast-chip DOM test and canonical after-layout generic refinement.",
         "Second PR Node41861422028 1680 PASS /1 FAIL: exact mock selected layout had canonical 3 notes from source_facts, but refinement ran BEFORE printedNotes had populated canonical; helper itself independently passed. Move guarded refinement AFTER direct printed-notes/selected-description final precedence and BEFORE source-facts disagreement annotation.",
-        "Nov 6 recovery verified actual current development flavor module is byte-identical to PR598 base, parser metadata changed concurrently and was surgically adapted; exact official current page again shows Kenya Peaberry / pear in selected paragraph. Before parser omitted pear, new exact source runner must prove after."
+        "Nov 6 recovery verified actual current development flavor module is byte-identical to PR598 base, parser metadata changed concurrently and was surgically adapted; exact official current page again shows Kenya Peaberry / pear in selected paragraph. Before parser omitted pear, new exact source runner must prove after.",
+        "PR896 exact tested integrated head e0b149b18a519c00bbb4a459a2867f1b35984c66: Node22/lint/build 42142926444 SUCCESS (2606 PASS, 0 FAIL, 6 SKIP); cloud/mobile 42142926562, SQL 42142926567, security 42142926464, Python 42142926608, approval 42142926533, private source 42142926452 all SUCCESS; frozen603 42142926566 SKIPPED, not PASS.",
+        "Nonforce squash merge 966dfeaaf1838ebe48730d574fdd9833819a9a57, source/test/runner SHA identical between verified PR head, merged and later development. Merged Node 42143187961, cloud/mobile 42143188023 and Python 42143188034 SUCCESS; merged approval 42143188039 CANCELLED by concurrent push NOT claimed passed, tested PR-head approval SUCCESS.",
+        "Actual merged exact-current public official 42143187839 job 127648257305 SUCCESS 3/3 source fetched/parsed and UI rendered. #527 H1 Kenya Peaberry, literal pear plus retained Honeydew Melon/Jasmine/Red Wine, no conflicts, Add Coffee and source review contract PASS; raw current HTML SHA256 612ca9ea01d7c4eb2bf15b977e42a1707ab0bcc61712c84d36f28e8371161f91.",
+        "Independent actual artifact13467919492 ZIP SHA256 ec8f28b206a62c9b38095841149eff8e52837ff989c4d09ccae6e75f83eb2e3d; all three original public HTML SHA256 independently rehashed match official runner. Historical immutables preserved. Stale PR598 closed as safely superseded."
       ],
       "ci_runs": [
         41859218519,
         41861961701,
         41861961681,
         41861961726,
-        41861961687
+        41861961687,
+        42142926444,
+        42142926562,
+        42142926567,
+        42142926464,
+        42142926608,
+        42142926533,
+        42142926452,
+        42142926566,
+        42143187839,
+        42143187961,
+        42143188023,
+        42143188034,
+        42143188039
       ],
-      "blockers": [
-        "Current integrated PR-head tests and merged exact official #527 source/Add Coffee still pending"
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "IN_PROGRESS. Recovered already-green PR598 code/test into current development without overwriting concurrent metadata, queue, journal. Original603 current selected historical hash changes with live source; verify fresh. Not deployed."
+      "notes": "VERIFIED narrow READY DEVELOPMENT ONLY: #527 selected Kenya Peaberry exact seller literal pear now preserved without losing existing three notes; source-bound after-merge and Add Coffee passed. Original603 individual all-coffee verification incomplete, #25/#85 sensory review outstanding. Actual merged approval cancelled (not PASS), exact tested PR-head approval SUCCESS and source/test/runner blobs identical. No publication/production/provider/member writes."
     },
     {
       "id": "DIC-Q-455-feedback-hydration-instant",
