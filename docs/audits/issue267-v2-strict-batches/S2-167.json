@@ -1,0 +1,1319 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch_id": "S2-167",
+  "date_utc": "2026-11-06",
+  "track": "PINNED_CURRENT_EXECUTABLE",
+  "reviewer": "Direct AI per-physical-line semantic inspection (not independent human review)",
+  "source": {
+    "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+    "file_index": 48,
+    "path": "scripts/audit/coffee-frozen-ci.py",
+    "blob_sha": "266631b5a9abf05f574e2a1058a9cd7372172d08",
+    "range": [
+      2131,
+      2190
+    ],
+    "count": 60
+  },
+  "live_current": {
+    "development_sha_observed": "95861e3bf98ae85e6b124e7630045b9fae066394",
+    "path": "scripts/audit/coffee-frozen-ci.py",
+    "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+    "range": [
+      2147,
+      2206
+    ],
+    "exact_byte_matches": 60,
+    "other_changed_source_not_credited": true
+  },
+  "previous": {
+    "batch_id": "S2-165",
+    "range": [
+      2051,
+      2130
+    ],
+    "same_source_blob": true
+  },
+  "source_interpretation": "Tests validate rejection of unreviewed decisions, export/retention losses, simulated attempted network access, stale candidate11 artifact names, and absent-manifest approvals; fixtures are not actual production acceptance.",
+  "findings": [
+    {
+      "id": "S2-167-01",
+      "location": "scripts/audit/coffee-frozen-ci.py:2146",
+      "type": "evidence-limitation",
+      "observation": "603-pass helper in test is a synthetic fixture, not an actual 603-case run.",
+      "disposition": "TRIAGED: no application fix warranted from this evidence; seek executed exact-source Python results for acceptance."
+    },
+    {
+      "id": "S2-167-02",
+      "location": "scripts/audit/coffee-frozen-ci.py:2149",
+      "type": "test-specificity",
+      "observation": "A truthy blockers assertion checks presence, not exact blocker classification; other tests assert named blocker messages.",
+      "disposition": "Monitor and improve only if reproduced missing-category failure; source-only observation not actionable defect."
+    }
+  ],
+  "line_records": [
+    {
+      "line": 2131,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                for decision, evidence in ((\"unknown\", []), (\"source_supported_improvement\", []),",
+      "behavior": "Iterates invalid review decisions and accompanying evidence",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Two-case tuple split across lines; failures must cover all variants",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2147,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Execute negative-review test",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2132,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                                           (\"nonsemantic_order_only\", [{\"quote\": \"Irrelevant source claim\"}])):",
+      "behavior": "Adds nonsemantic-order-only case backed by irrelevant quote",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Irrelevant quote must not turn into source-supported approval",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2148,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Check ValueError for this case",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2133,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                    bad = json.loads(json.dumps(manifest))",
+      "behavior": "Deep-clones fixture manifest for each negative case",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Mutation of fixture across cases would contaminate tests",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2149,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Verify cloned state",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2134,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                    bad[\"changes\"][0][\"decision\"] = decision",
+      "behavior": "Mutates first change decision to tested invalid value",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Index assumptions rely on fixture having a change",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2150,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Exercise negative decision",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2135,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                    bad[\"changes\"][0][\"source_evidence\"] = evidence",
+      "behavior": "Mutates evidence field for same invalid decision",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Evidence and decision must remain coupled",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2151,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Exercise misleading evidence",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2136,
+      "classification": "test-assertion",
+      "source_text": "                    with self.subTest(decision=decision), self.assertRaises(ValueError):",
+      "behavior": "Defines per-decision subtest expecting ValueError",
+      "quality": "Direct executable assertion, but no fresh test run or demonstrated pass by source existence.",
+      "risk": "A permissive validator might allow invalid manifest",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2152,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Run this subtest",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2137,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                        verify_reviewed_changes(bad, material, root, expected, index, \"789\",",
+      "behavior": "Invokes reviewed-change validator with mutated manifest",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Validator must detect invalid decision before acceptance",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2153,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Inspect called function handling",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2138,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                                                case_records=records)",
+      "behavior": "Passes expected case-record context to validator",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Missing context may bypass bound source checks",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2154,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Exercise case record verification",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2139,
+      "classification": "blank",
+      "source_text": "",
+      "behavior": "Separates following test method with blank line",
+      "quality": "Read as actual physical blank line; preserves Python test-method separation.",
+      "risk": "No executable effect",
+      "dead_or_obsolete": "No executable instruction; retained for readable structure.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2155,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Syntax parse",
+      "improvement": "No change",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2140,
+      "classification": "test-definition",
+      "source_text": "        def test_order_only_acceptance_cannot_waive_losses_export_fidelity_or_offline_checks(self):",
+      "behavior": "Defines order-only acceptance cannot waive loss, export or offline checks test",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Test name alone not proof all invariants",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2156,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Verify assertions below",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2141,
+      "classification": "test-fixture-or-flow",
+      "source_text": "            with tempfile.TemporaryDirectory() as temporary:",
+      "behavior": "Creates isolated temporary fixture directory",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Temporary test filesystem must be isolated",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2157,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Run Python unit test",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2142,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                root = Path(temporary).resolve()",
+      "behavior": "Resolves canonical root path for fixture",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Path normalization should prevent accidental escape",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2158,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Check fixture operations",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2143,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                manifest, material, expected, index, records, exports = self._order_review_fixture(root)",
+      "behavior": "Loads order-only review fixture and export records",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Fixture must represent original 603 evidence rules",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2159,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Inspect fixture helper",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2144,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                accepted = verify_reviewed_changes(manifest, material, root, expected, index, \"789\",",
+      "behavior": "Calls source-review verification for accepted order-only fixture",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Acceptance must remain scoped to allowed order",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2160,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Exercise validator",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2145,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                                                   case_records=records)",
+      "behavior": "Passes case records to verification function",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Dropping records could weaken source binding",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2161,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Check signature branch",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2146,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                helper = {\"passed\": 603, \"failures\": [], \"attempted_external_operations\": []}",
+      "behavior": "Constructs simulated 603-pass offline helper with no network",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Mock success is not a live run result",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2162,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Keep test evidence bounded",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2147,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                for exact, retention in (([{\"case_id\": \"case-0000\"}], []),",
+      "behavior": "Introduces exact-regression negative scenario in iteration",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Exact failures must block any order-only waiver",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2163,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Run blocker assertion",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2148,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                                         ([], [{\"case_id\": \"case-0000\"}])):",
+      "behavior": "Adds retention-loss alternative to same scenario loop",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Retention losses must block despite accepted manifest",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2164,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Run both alternatives",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2149,
+      "classification": "test-assertion",
+      "source_text": "                    self.assertTrue(benchmark_change_blockers(material, accepted, exact, retention, exports, helper))",
+      "behavior": "Asserts blocker result truthy for each regression scenario",
+      "quality": "Direct executable assertion, but no fresh test run or demonstrated pass by source existence.",
+      "risk": "Boolean existence check does not inspect blocker reasons",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2165,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Consider explicit message tests separately",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2150,
+      "classification": "test-assertion",
+      "source_text": "                self.assertTrue(benchmark_change_blockers(material, accepted, [], [], {**exports, \"exports\": 602}, helper))",
+      "behavior": "Asserts blocker when export count reduced to 602",
+      "quality": "Direct executable assertion, but no fresh test run or demonstrated pass by source existence.",
+      "risk": "Full 603 export fidelity is required",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2166,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Run export-count negative",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2151,
+      "classification": "test-assertion",
+      "source_text": "                self.assertTrue(benchmark_change_blockers(material, accepted, [], [], exports,",
+      "behavior": "Starts blocker assertion for offline helper mutation",
+      "quality": "Direct executable assertion, but no fresh test run or demonstrated pass by source existence.",
+      "risk": "Offline helper gaps must not be waived",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2167,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Check continuation",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2152,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                                                          {**helper, \"attempted_external_operations\": [\"socket.connect\"]}))",
+      "behavior": "Injects attempted socket.connect operation in helper and asserts blocker",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Network operation guard must reject external operation",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2168,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Run offline-negative fixture",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2153,
+      "classification": "blank",
+      "source_text": "",
+      "behavior": "Blank separator closes negative test group",
+      "quality": "Read as actual physical blank line; preserves Python test-method separation.",
+      "risk": "No executable logic",
+      "dead_or_obsolete": "No executable instruction; retained for readable structure.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2169,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Syntax check",
+      "improvement": "No change",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2154,
+      "classification": "blank",
+      "source_text": "",
+      "behavior": "Second blank separates test methods",
+      "quality": "Read as actual physical blank line; preserves Python test-method separation.",
+      "risk": "No executable logic",
+      "dead_or_obsolete": "No executable instruction; retained for readable structure.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2170,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Syntax check",
+      "improvement": "No change",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2155,
+      "classification": "test-definition",
+      "source_text": "        def test_reviewed_changes_accept_only_exact_source_supported_case_and_export(self):",
+      "behavior": "Defines exact source-supported case and export positive test",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Positive control should not dilute strict negative checks",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2171,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Run positive acceptance fixture",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2156,
+      "classification": "test-fixture-or-flow",
+      "source_text": "            with tempfile.TemporaryDirectory() as temporary:",
+      "behavior": "Creates temporary test workspace",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Protects repository and member data from fixture writes",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2172,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Run isolated test",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2157,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                root = Path(temporary).resolve()",
+      "behavior": "Resolves workspace root",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Path safety depends on helper paths",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2173,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Inspect fixture path usage",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2158,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                manifest, material, expected, index, _old, _current, exports = self._review_fixture(root)",
+      "behavior": "Loads reviewed-change fixture and old/current export material",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Fixture contents define accepted scope",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2174,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Review fixture helper",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2159,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                result = verify_reviewed_changes(manifest, material, root, expected, index, \"789\")",
+      "behavior": "Calls reviewed-change verifier for accepted case",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Positive result needs genuine evidence matching fixture",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2175,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Run verifier positive",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2160,
+      "classification": "test-assertion",
+      "source_text": "                self.assertEqual(result[\"status\"], \"ACCEPTED\")",
+      "behavior": "Asserts status accepted",
+      "quality": "Direct executable assertion, but no fresh test run or demonstrated pass by source existence.",
+      "risk": "Status alone does not prove no losses",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2176,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Check subsequent assertions",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2161,
+      "classification": "test-assertion",
+      "source_text": "                self.assertEqual(result[\"reviewed_cases\"], 1)",
+      "behavior": "Asserts exactly one reviewed case",
+      "quality": "Direct executable assertion, but no fresh test run or demonstrated pass by source existence.",
+      "risk": "Avoid accepting unreviewed case changes",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2177,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Run count assertion",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2162,
+      "classification": "test-assertion",
+      "source_text": "                self.assertEqual(result[\"reviewed_export_changes\"], 1)",
+      "behavior": "Asserts exactly one reviewed export change",
+      "quality": "Direct executable assertion, but no fresh test run or demonstrated pass by source existence.",
+      "risk": "Avoid unbounded exported differences",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2178,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Run export-count assertion",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2163,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                helper = {\"passed\": 603, \"failures\": [], \"attempted_external_operations\": []}",
+      "behavior": "Builds mock 603-pass helper without external operations",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Mock is test input, not production acceptance",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2179,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Review helper usage",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2164,
+      "classification": "test-assertion",
+      "source_text": "                self.assertEqual(benchmark_change_blockers(material, result, [], [], exports, helper), [])",
+      "behavior": "Asserts benchmark blockers empty for supported change",
+      "quality": "Direct executable assertion, but no fresh test run or demonstrated pass by source existence.",
+      "risk": "False acceptance possible if blocker absent; negative tests compensate",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2180,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Pair with loss negatives",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2165,
+      "classification": "test-assertion",
+      "source_text": "                self.assertFalse(result[\"zero_loss_requirements_waived\"])",
+      "behavior": "Asserts zero-loss requirements never waived",
+      "quality": "Direct executable assertion, but no fresh test run or demonstrated pass by source existence.",
+      "risk": "Protect immutable original oracle commitments",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2181,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Run immutable guard",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2166,
+      "classification": "test-assertion",
+      "source_text": "                self.assertFalse(material[\"approval_manifest_generated\"])",
+      "behavior": "Asserts approval manifest was not auto-generated",
+      "quality": "Direct executable assertion, but no fresh test run or demonstrated pass by source existence.",
+      "risk": "Test must not manufacture owner approval",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2182,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Inspect material mutation",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2167,
+      "classification": "test-assertion",
+      "source_text": "                self.assertEqual(material[\"status\"], \"UNREVIEWED\")",
+      "behavior": "Asserts original material remains UNREVIEWED",
+      "quality": "Direct executable assertion, but no fresh test run or demonstrated pass by source existence.",
+      "risk": "Review output must not mutate baseline source state",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2183,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Verify fixture immutability",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2168,
+      "classification": "blank",
+      "source_text": "",
+      "behavior": "Blank line separating positive and next test",
+      "quality": "Read as actual physical blank line; preserves Python test-method separation.",
+      "risk": "No executable behavior",
+      "dead_or_obsolete": "No executable instruction; retained for readable structure.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2184,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Syntax check",
+      "improvement": "No change",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2169,
+      "classification": "blank",
+      "source_text": "",
+      "behavior": "Blank method separator",
+      "quality": "Read as actual physical blank line; preserves Python test-method separation.",
+      "risk": "No executable behavior",
+      "dead_or_obsolete": "No executable instruction; retained for readable structure.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2185,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Syntax check",
+      "improvement": "No change",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2170,
+      "classification": "test-definition",
+      "source_text": "        def test_reviewed_changes_reject_previous_candidate_artifact_names(self):",
+      "behavior": "Defines rejection of prior-candidate artifact filenames",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Legacy candidate artifact could pollute present acceptance",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2186,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Run stale candidate test",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2171,
+      "classification": "test-assertion",
+      "source_text": "            self.assertEqual(CANDIDATE, 12)",
+      "behavior": "Pins candidate constant to 12 in test",
+      "quality": "Direct executable assertion, but no fresh test run or demonstrated pass by source existence.",
+      "risk": "Future legitimate candidate bump would require deliberate update",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2187,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Verify current candidate decision",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2172,
+      "classification": "test-fixture-or-flow",
+      "source_text": "            with tempfile.TemporaryDirectory() as temporary:",
+      "behavior": "Creates candidate test temp directory",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Avoids writing to fixed files",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2188,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Run isolated fixture",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2173,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                root = Path(temporary).resolve()",
+      "behavior": "Resolves canonical fixture root",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Path normalisation expected",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2189,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Inspect file creation paths",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2174,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                manifest, material, expected, index, *_rest = self._review_fixture(root)",
+      "behavior": "Loads review fixture for candidate rejection",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Fixture baseline should be current candidate",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2190,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Check helper",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2175,
+      "classification": "test-assertion",
+      "source_text": "                self.assertEqual(material[\"candidate\"], 12)",
+      "behavior": "Asserts material candidate remains 12",
+      "quality": "Direct executable assertion, but no fresh test run or demonstrated pass by source existence.",
+      "risk": "Original test frozen candidate must be preserved",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2191,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Run invariant test",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2176,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                for key in (\"replay\", \"comparison\", \"retention\"):",
+      "behavior": "Iterates replay, comparison and retention artifact keys",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Each artifact type must be candidate pinned",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2192,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Exercise three subtests",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2177,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                    bad = json.loads(json.dumps(manifest))",
+      "behavior": "Clones manifest separately for each key",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Prevent cross-iteration mutation masking defect",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2193,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Run fixture negative",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2178,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                    bad[\"first_observed_run\"][\"artifacts\"][key][\"file\"] = \"candidate11-\" + key + \".json\"",
+      "behavior": "Substitutes previous candidate11 filename for current artifact",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Stale artifact should not pass source binding",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2194,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Run stale-name negative",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2179,
+      "classification": "test-assertion",
+      "source_text": "                    with self.subTest(artifact=key), self.assertRaises(ValueError):",
+      "behavior": "Asserts ValueError in named artifact-specific subtest",
+      "quality": "Direct executable assertion, but no fresh test run or demonstrated pass by source existence.",
+      "risk": "Validator must reject each stale artifact",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2195,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Review exceptions",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2180,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                        verify_reviewed_changes(bad, material, root, expected, index, \"789\")",
+      "behavior": "Calls reviewed-change validator on stale filename",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Input path validation is essential",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2196,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Run validator test",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2181,
+      "classification": "blank",
+      "source_text": "",
+      "behavior": "Blank method separator",
+      "quality": "Read as actual physical blank line; preserves Python test-method separation.",
+      "risk": "No executable behavior",
+      "dead_or_obsolete": "No executable instruction; retained for readable structure.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2197,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Syntax check",
+      "improvement": "No change",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2182,
+      "classification": "test-definition",
+      "source_text": "        def test_reviewed_changes_missing_manifest_remains_strict(self):",
+      "behavior": "Defines missing-manifest strictness test",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "No owner review manifest should not imply acceptance",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2198,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Run missing-manifest case",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2183,
+      "classification": "test-fixture-or-flow",
+      "source_text": "            with tempfile.TemporaryDirectory() as temporary:",
+      "behavior": "Opens temporary fixture scope",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Avoids local artifact mutation",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2199,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Run isolated test",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2184,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                root = Path(temporary).resolve()",
+      "behavior": "Resolves root path for fixture",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Canonical path prevents ambiguous relative paths",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2200,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Check test setup",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2185,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                _manifest, material, _expected, _index, old, _current, exports = self._review_fixture(root)",
+      "behavior": "Loads old and current data with absent manifest simulation",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Fixtures must preserve source oracle identity",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2201,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Review helper",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2186,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                helper = {\"passed\": 603, \"failures\": [], \"attempted_external_operations\": []}",
+      "behavior": "Sets simulated helper 603 passing with no external work",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Successful helper does not compensate missing approval",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2202,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Run blocker test",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2187,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                absent = {\"status\": \"NOT_PROVIDED\"}",
+      "behavior": "Sets review status to NOT_PROVIDED",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Missing manifest must be explicit",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2203,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Check failure list",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2188,
+      "classification": "test-fixture-or-flow",
+      "source_text": "                failures = benchmark_change_blockers(material, absent, [], [], exports, helper)",
+      "behavior": "Computes blocker list under absent review",
+      "quality": "Direct Python test source, exact runtime behavior depends on fixture and tested helper.",
+      "risk": "Result must show all relevant missing evidence",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2204,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Inspect messages",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2189,
+      "classification": "test-assertion",
+      "source_text": "                self.assertTrue(any(\"output/call changes\" in message for message in failures))",
+      "behavior": "Asserts blocker mentions output/call changes",
+      "quality": "Direct executable assertion, but no fresh test run or demonstrated pass by source existence.",
+      "risk": "Missing review must not silently allow change set",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2205,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Run message assertion",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    },
+    {
+      "line": 2190,
+      "classification": "test-assertion",
+      "source_text": "                self.assertTrue(any(\"Canonical counts\" in message for message in failures))",
+      "behavior": "Asserts blocker mentions canonical counts",
+      "quality": "Direct executable assertion, but no fresh test run or demonstrated pass by source existence.",
+      "risk": "Canonical oracle changes require review even if helper passes",
+      "dead_or_obsolete": "No proven unused executable test or code; preserve original immutable 603 harness and #33 ownership.",
+      "duplication": "Fixture/assertion repetition may intentionally isolate independent negative states; no proven safe code removal.",
+      "exact_current_counterpart": {
+        "path": "scripts/audit/coffee-frozen-ci.py",
+        "blob_sha": "d44de8adebfb0fc87e6fceff9c7fe55b65d68cf7",
+        "line": 2206,
+        "byte_exact": true,
+        "live_blob_differs_from_pin": true
+      },
+      "testability": "Run message assertion",
+      "improvement": "No speculative removal; strengthen only on a demonstrated regression with #33 coordination",
+      "locked_fit": "Immutable 603-coffee capture/oracle/scorer, source evidence, zero-loss and offline safety requirements",
+      "human_independently_certified": false
+    }
+  ],
+  "canonical_policy": "60 strict current pinned source lines independently annotated. Historical R2/C2 and V1 cannot count; canonical strict denominator not incremented pending PR #769 reconciliation."
+}
