@@ -8,6 +8,7 @@ const matrix=json('docs/APPROVAL_COVERAGE_MATRIX.json');
 const manifest=json('docs/audits/2026-10-23-archive-manifest.json');
 const old=json(matrix.historical_snapshot);
 const projection=m=>m.contracts.map(({id,decision_key,assertions})=>({id,decision_key,assertions}));
+const uniqueOwnerKeys=keys=>new Set(keys).size===keys.length;
 test('workflow cleanup preserves exact historical blobs, not paraphrased evidence',()=>{
  for(const [name,sha] of Object.entries(manifest.blobs)){
   const bytes=readFileSync(new URL('../'+manifest.directory+'/'+name,import.meta.url));
@@ -18,6 +19,7 @@ test('workflow cleanup preserves exact historical blobs, not paraphrased evidenc
 test('reconciliation retains every classified owner key and source assertion',()=>{
  for(const key of old.owner_decision_key_inventory)assert.ok(matrix.owner_decision_key_inventory.includes(key),'missing historical owner decision '+key);
  assert.deepEqual(matrix.owner_decision_key_inventory,[...matrix.owner_decision_key_inventory].sort(),'current inventory remains sorted');
+ assert.ok(uniqueOwnerKeys(matrix.owner_decision_key_inventory),'current inventory must not duplicate owner decision keys');
  // Historical contracts remain exact. Later approved implementations may
  // add coverage; approval-coverage separately validates every current item.
  const originalIds=new Set(old.contracts.map(item=>item.id));
@@ -30,6 +32,10 @@ test('reconciliation retains every classified owner key and source assertion',()
  for(const key of ['locked_count','open_count','fnv1a32'])assert.equal(matrix.original_baseline[key],old.original_baseline[key]);
  assert.equal(historical.contracts.length,15);
  assert.equal(historical.contracts.reduce((sum,item)=>sum+item.assertions.length,0),66);
+});
+test('owner decision key duplicate negative control',()=>{
+ const keys=matrix.owner_decision_key_inventory;
+ assert.equal(uniqueOwnerKeys([...keys,keys.at(-1)]),false);
 });
 test('production evidence survives compact current view without a new release grant',()=>{
  for(const key of ['exact_source_sha','tested_application_source_sha','netlify_deploy_id'])assert.equal(matrix.production[key],old.production[key]);
