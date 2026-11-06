@@ -8,6 +8,38 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-family-stale-success-evidence-guard",
+      "issue": 455,
+      "pr": 1017,
+      "title": "Exclude incomplete or nonideal historical taste ratings from successful personal recipe-family evidence",
+      "state": "READY",
+      "merged_source_sha": "6854b7ffb94f3cfb542a2695578afea4cb0ddb30",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Exact original engine source blob d9dee12deee5400ff38393abf5ee1e3dc1adfc8f source-fixture reproduction: truthy archived dialedIn with missing sweetness was admitted to familyShots; synthetic, no observed real-member incident. New strict true AND canonical five-taste isDialed guard engine blob f2cde6192a5bdad4956426aed2703b3ebc9e6df5.",
+        "Five focused new tests and four repaired existing positive success fixtures. First PR head d9e1f0b84cb4e905c2da4f21b0f799ac88e0c864 CI Node run42212630833 FAILED: 2699 PASS / 4 FAIL / 6 SKIP, all four old synthetic success fixtures lacked original five rating fields. Same-commit source-exact test fixture repair at d8ba7ac13dd22aef68537ce76413f6ed9c09f559; original app code byte-identical. Negative missing/nonideal/typed scores, invalid status, retained all-green across Traditional/Turbo/Fast-Flow/Ristretto/Lungo/retired Custom, exact family center, immutability.",
+        "Final exact PR head d8ba7ac13dd22aef68537ce76413f6ed9c09f559: Node22/lint/build run42213093554 2703 PASS / 0 FAIL / 6 intentional SKIP; built browser/390px/UX/offline/accessibility run42213093552 SUCCESS, isolated SQL42213093573, source security42213093636, governance42213093604 SUCCESS; cloud-tests NOT_APPLICABLE under successful job; frozen60342213093677 SKIPPED, NOT PASS.",
+        "Nonforce PR #1017 squash merge 6854b7ffb94f3cfb542a2695578afea4cb0ddb30 preserved concurrent issue509 disjoint changes and all 7 source/test/scoped journal Git blobs exactly match final green head. Exact merged-source Node22/lint/build run42213361962: 2703 PASS /0 FAIL /6 SKIP. Exact merged-source built browser/mobile/offline/a11y run42213362147 SUCCESS, governance42213361993 SUCCESS. No production/member/provider use or empirical espresso quality test."
+      ],
+      "ci_runs": [
+        42212630833,
+        42213093554,
+        42213093552,
+        42213093573,
+        42213093636,
+        42213093604,
+        42213093677,
+        42213361962,
+        42213362147,
+        42213361993
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "R455-068 independently reproduced SAFE Locked-compatible personal family evidence correction. Development READY, NOT DEPLOYED. Missing/invalid archived taste ratings never become verified green recipe-family evidence; original stored data, all 5 taste fields, notes and styles remain intact. No new numeric science policy or published application."
+    },
+    {
       "id": "DIC-Q-267-community-family-count-prior-consistency",
       "issue": 267,
       "pr": 1013,
