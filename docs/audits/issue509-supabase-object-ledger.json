@@ -6318,5 +6318,31 @@
     "production_changes": false,
     "hosted_api": "UNVERIFIED",
     "next": "Remaining 439 non-system provider columns: auth 271, extensions 51, realtime 21, storage 73, supabase_migrations 6, vault 17; independently verify previous pg_catalog 3,319 complete declaration receipts versus potential new drift, then hosted #96 API/auth."
+  },
+  "provider_nonapp_column_ddl_run29b": {
+    "status": "ALL_439_PROVIDER_NON_SYSTEM_COLUMN_DDL_COMPONENTS_REVIEWED; ALL_805_TOTAL_NON_SYSTEM_COLUMN_DDL_COMPLETE; FULL_PROVIDER_AUDIT_IN_PROGRESS",
+    "receipt_path": "docs/audits/issue509-provider-nonapp-column-ddl-367-805-20261106-run29b.json",
+    "source_development_parent_sha": "4e9a58793edbdac7b0681b12593bf234054ff0b4",
+    "counts": {
+      "reviewed_this_run": 439,
+      "by_schema": {
+        "auth": 271,
+        "extensions": 51,
+        "realtime": 21,
+        "storage": 73,
+        "supabase_migrations": 6,
+        "vault": 17
+      },
+      "provider_tables": 43,
+      "app_columns_from_run29": 366,
+      "cumulative_non_system_column_DDL_components": 805,
+      "total_non_system_column_DDL_components": 805,
+      "full_provider_object_baseline_complete": false
+    },
+    "new_confirmed_app_bugs": 0,
+    "safe_deletions": 0,
+    "live_provider_changes": false,
+    "hosted_api": "UNVERIFIED",
+    "next": "Unreviewed provider-console-only configurations and hosted Auth/JWT/PostgREST/Realtime/Storage API boundaries; source-dependent ACL and drift verification with #96, and formal reconcile of existing 3,319 pg_catalog declaration receipts. If complete accessible baseline proven, continue hourly delta."
   }
 }
