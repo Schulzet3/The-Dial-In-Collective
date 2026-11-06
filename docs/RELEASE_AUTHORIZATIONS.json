@@ -507,7 +507,7 @@
       "id": "DIC-20261106-READY7-22",
       "tested_source_sha": "76f9af78bc667ffabf0f70aab8c2f7f4548419a8",
       "owner_approved": true,
-      "status": "APPROVED",
+      "status": "SUPERSEDED",
       "production_branch": "release/production",
       "max_publications": 1,
       "approved_at_utc": "2026-11-06T20:36:28.626Z",
@@ -526,6 +526,32 @@
       "owner_private_free_compensating_controls": true,
       "sql_evidence": [
         "Exact immutable candidate 76f9af78bc667ffabf0f70aab8c2f7f4548419a8 has no SQL migration change; isolated SQL/JWT GitHub CI 42289406163 SUCCESS, approval42289405979/validate42289406056/cloud+mobile42289405951 SUCCESS; code/test-isolated runtime only, prior verified encrypted offsite recovery retained."
+      ],
+      "superseded_by": "DIC-20261106-READY7-23"
+    },
+    {
+      "id": "DIC-20261106-READY7-23",
+      "tested_source_sha": "21e8db053a542f53ff38227977e279f6acf0abbf",
+      "owner_approved": true,
+      "status": "APPROVED",
+      "production_branch": "release/production",
+      "max_publications": 1,
+      "approved_at_utc": "2026-11-06T20:40:35.318Z",
+      "expires_at_utc": "2026-11-07T00:40:35.318Z",
+      "approval_source": "Owner November 6, 2026 (America/Denver), current chat: 'Publish the queue. I want this implemented immediately'.",
+      "scope": "Exactly one source-isolated production release of the seven READY item IDs. Candidate r3 restores both unfinished Netlify build guard and coffee narrative to the previously published Git blobs; only three selected app paths may ship. No direct publisher, force, replay, Auth/SQL/Edge/member changes, purchases or future authorization. Netlify READY/current and source/data verification required.",
+      "approved_ready_item_ids": [
+        "DIC-Q-33-original603-346-washing-station-role",
+        "DIC-Q-33-original603-400-413-selected-decaf-water-prose",
+        "DIC-Q-33-original603-485-current-facility-ethyl-acetate-method",
+        "DIC-Q-455-community-measured-ratio-integrity",
+        "DIC-Q-455-community-summary-stale-success-evidence-guard",
+        "DIC-Q-455-cross-style-stale-success-evidence-guard",
+        "DIC-Q-455-historic-outlier-stale-success-evidence-guard"
+      ],
+      "owner_private_free_compensating_controls": true,
+      "sql_evidence": [
+        "Candidate 21e8db053a542f53ff38227977e279f6acf0abbf passed five exact-source checks: approval42290049209, validate42290049246, cloud/mobile42290049272, sql42290049362. No SQL migrations or destructive DB writes, verified ciphertext/offsite evidence reused."
       ]
     }
   ],
