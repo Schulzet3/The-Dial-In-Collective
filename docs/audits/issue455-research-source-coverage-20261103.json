@@ -2385,10 +2385,10 @@
   "policy_decisions_pending": [],
   "change_scope": {
     "application_code_changed": true,
-    "tests_executed": false,
+    "tests_executed": true,
     "production_deployed": false,
     "queue_changed": true,
-    "reason": "SAFE code and focused tests proposed on feature branch only; all checks PENDING; no numeric/Locked rule change."
+    "reason": "R455-067 safe code/test verified PR-head and exact merged code; no data model/scientific/numeric/Locked policy or provider writes."
   },
   "next_actions": [
     "R455-064: Direct Nature Communications 2026 primary full HTML validates Pt voltammetry on SCA cupped/filtered 1:13.5 coffee, NOT espresso; 4 batch blind analytical QC (n=5 brew replicates per batch), NOT five consumer tasting scores. No new app policy, sensor, grinder/taste correction. Source bytes/supplements not hashed; S019 original still inaccessible.",
@@ -2416,21 +2416,22 @@
     "R455-056: Review Andueza et al. 2007 DOI 10.1002/jsfa.2720 full pages 586–592/methods only if accessible; abstract-level 6.5/7.5 g per 40 mL comparisons and torrefacto roasting sugar/descriptor observations are not measured 1:n beverage mass targets. Retain current Locked recipe logic. Source S019 remains unavailable.",
     "R455-057: ACS 2003 grind/torrefacto source full text is paywalled; no PDF, raw sample/PSD or blind sensory validation. Avoid universal grind direction/25% EY recommendation. Resume independent unresolved source citations and actual Log Shot UX defect tests; S019 original still inaccessible.",
     "R455-060: Vaca Guerra 2023 bed-PSD compression result verified only from first-party author-institution abstract, original 2023 PDF/methods unavailable. Do not implement generic tamp or grind adjustment from laboratory permeability. Resume unverified papers and directly reproduce useful safe UX defect; original S019 PDF not accessible.",
-    "R455-067: Verify same-commit archived UI/Make Current guarded tests and exact-source CI; merge nonforce only after passing all applicable checks, reconcile READY and remaining independent historical flags; original S019 and Implementation Pack source bytes inaccessible."
+    "R455-067: Verify same-commit archived UI/Make Current guarded tests and exact-source CI; merge nonforce only after passing all applicable checks, reconcile READY and remaining independent historical flags; original S019 and Implementation Pack source bytes inaccessible.",
+    "R455-067 VERIFIED READY not deployed: next independently reproduce and bound remaining archived success flags in family evidence and explore S019/implementation-pack source gap, without claiming #267 semantic line coverage."
   ],
   "latest_review_checkpoint": {
     "id": "R455-067",
     "base_development_sha": "f3d1d5508249f5f0346a86ddce221fc7979dbc97",
-    "merged_code_sha": null,
+    "merged_code_sha": "cfe25763f3975fe87838066ea5f4e3b93cb3a554",
     "source_ids": [],
     "claim_ids": [],
     "number_of_curated_sources": 58,
     "total_evidence_checks": 123,
-    "review_type": "DIRECT_ARCHIVED_HISTORY_MAKE_CURRENT_SOURCE_REPRODUCTION_AND_FOCUSED_REGRESSION",
+    "review_type": "DIRECT_ARCHIVED_HISTORY_MAKE_CURRENT_SAFE_VERIFIED_CODE_AND_REAL_UI_REGRESSION",
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
-    "code_or_policy_changed": "BOUNDED_SAFE_UI_AND_LOCAL_SELECTION_CANDIDATE_NOT_YET_TESTED_OR_MERGED",
-    "next_action": "Verify exact candidate PR-head CI; diagnose failures, nonforce merge, read back exact merge SHA and CI; finalize queue READY with separate docs reconciliation. Continue separate residual historic dialedIn paths and S019 provenance."
+    "code_or_policy_changed": "ONLY_SAFE_SHOT_HISTORY_AND_EXPLICIT_LOCAL_FAVORITE_GUARD; VERIFIED_DEV_READY_NO_LOCKED_CHANGE",
+    "next_action": "Continue source-bound research and directly inspect residual engine.familyShots and cross-style archived success flags without overlapping #267; original S019 and implementation-pack bytes still inaccessible. Keep #455 OPEN."
   },
   "policy_decisions_resolved": [
     {
@@ -2984,11 +2985,11 @@
       "current_app": "Before guard, Shot History UI badge/Make Current and local makeCurrent trust independent stale archival dialedIn flag; cloud hydration and local hasLocalSuccess are guarded by earlier R455-063/066, not a full UI/favorite guard.",
       "proposed_change": "SAFE: require sh.dialedIn===true AND constants.isDialed(unmodified sh.tasteScales) for history status, Make Current UI and local makeCurrent; retain pending and version gates.",
       "approval_required_for_behavior_change": false,
-      "implementation": "BOUNDED_CODE_CANDIDATE_TESTING_NOT_MERGED_NOT_DEPLOYED",
-      "test_plan": "New focused imported real-module negative/positive regression tests for incomplete, nonideal, string-typed and missing fifth rating, old truthy flag, hidden/other-version, genuine all-five ideal, original notes/measurements/ratings and no selection on failure. Exact source Node22, browser/mobile/offline/a11y, SQL/security and CI NOT YET RUN. Continue with exact head PR, nonforce merge, merged CI, docs READY reconciliation.",
+      "implementation": "VERIFIED_NONFORCE_MERGED_CODE_READY_NOT_DEPLOYED",
+      "test_plan": "PR-head exact 6042b77f9c9d5a28eef2a52d8c316e3276017d0b Node22/lint/build run42204875488 2689 PASS/0 FAIL/6 SKIP. Real direct module 5 new groups positive+negative, history real UI, local makeCurrent no-write negative, green success positive, versions/pending retained. Browser/mobile/offline/a11y and cloud run42204875433 SUCCESS; isolated SQL/JWT run42204875465, security42204875447, approval42204875419 SUCCESS; frozen60342204875461 SKIPPED (not PASS). Nonforce PR1008 squash merged cfe25763f3975fe87838066ea5f4e3b93cb3a554, exact 7 Git blobs match PR head. Merged-source Node22 42205202856 2689/0/6, browser/cloud 42205202832, governance 42205202870 all SUCCESS. No empirical espresso quality or real member occurrence demonstrated.",
       "release_queue": "DIC-Q-455-history-stale-make-current-guard",
-      "source_commit": null,
-      "implementation_pr": null
+      "source_commit": "cfe25763f3975fe87838066ea5f4e3b93cb3a554",
+      "implementation_pr": 1008
     }
   ]
 }
