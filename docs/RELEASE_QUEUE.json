@@ -8,6 +8,27 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-similar-coffee-measured-yield-integrity",
+      "issue": 455,
+      "title": "Ignore malformed archived yield and nonfinite ratios in personal similar-coffee starting reference",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Current source engine blob 938a15dab69b0df84640f3c36e8603b3388b1924 personalSimilarCoffeeReference accepted all-five-green archival same-roast donor rows with yield zero or negative, or finite dose/yield whose ratio overflowed; an invalid donor could bias starting ratio and count. Source logic counterexample, not actual member incidence.",
+        "SAFE strictly measured donor qualifier: require positive finite numeric yield and finite yield/dose quotient; all existing five original ideal tastes, positive dose/time, style/feed/setup/roast requirements, unproven personal similar fallback and source data retained.",
+        "Five targeted actual-module synthetic Node22 regression groups prepared. At creation all tests/CI UNEXECUTED, exact PR head and merged tests required; original603 reference remains SKIPPED/NOT APPLICABLE."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact PR-head and merged-source CI not yet completed"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "R455-077 development-only SAFE correction; no recipe targets, taste policy, source science, original shots/notes, hosted Community/RLS, Supabase member data, or deployment modified. Not READY."
+    },
+    {
       "id": "DIC-Q-455-outlier-historical-measurement-integrity",
       "issue": 455,
       "pr": 1095,
