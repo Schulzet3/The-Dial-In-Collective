@@ -12,24 +12,40 @@
       "issue": 267,
       "pr": 1013,
       "title": "Normalize invalid Community confirmed-family counts consistently for unproven starting-prior ranking",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "4b4984dc81d64d835648172dd6daa201f326f041",
       "scope_paths": [
         "site/lib/community-evidence.js"
       ],
       "tests": [
-        "Baseline Node v22.16.0 isolated reproduction: invalid numeric-string confirmed family count 999999 outranked legitimate integer two despite return normalization; affected weak Community ratio starting prior only, not personal calibrated grind.",
-        "New deterministic Node 22 unit test verifies invalid string, negative, fractional and Infinity counts in both candidate orders; selected legitimate count and no cross-member group identity.",
-        "Risk-appropriate exact PR-head Node, lint/build/cloud/browser and governance checks must pass before nonforce merge; exact merged-source CI and queue reconciliation required for READY."
+        "Before: exact original current Git blob 004c77a332d41706bd99fe80500fac1ca9be4808; deterministic Node22 regression fails, same-tier/contributor/shot malformed confirmed_personal_family_count='999999' outranks valid integer count 2 despite output reporting zero: ratio 3.8 vs expected 1.8. This is a source-reproduced logic bug, NOT a proven real-member exploit.",
+        "After: exact fixed source blob 74c93c7ff7814337752e0ef9052412eaf55890e3; deterministic Node22 same unit test PASS 1/1; original library's Community eligibility/weak reference and personal-grind restrictions preserved. New checked-in regression covers string, negative, fraction and Infinity both candidate orders, retaining valid count and unverified group identity.",
+        "PR #1013 head e75221d6ed3184e3d7a651782d68ab8eb863e277: Node22/lint 42209433363, browser/offline 42209433394, SQL 42209433662, security 42209433384, approval 42209433470 SUCCESS; original603 42209433474 intentionally SKIPPED (not a PASS). Nonforce merged exact source 4b4984dc81d64d835648172dd6daa201f326f041; all source/test/receipt/journal/queue blobs byte-match approved head.",
+        "Exact first merged-source approval 42209919409 FAILED on bounded source-verified SAME-COMMIT journal filename uppercase '-N12' (journal was present). Fix PR #1014 narrows validator to positive-number suffix and adds adversarial tests; head Node22, browser/mobile, SQL, approval and Python SUCCESS (42210249444/42210249254/42210249378/42210249221/42210249438), frozen603 SKIPPED.",
+        "PR #1014 safely merged d2932802b152bcc17ba412c4c97f9dbf49fa81c0: exact merged governance 42210872473, Node22/lint 42210872478, browser/offline 42210872534, Python 42210872452 SUCCESS, public source probe 42210872580 SKIPPED (not source certification). The older first merged-source governance failure is preserved; these later exact CI checks substantiate accepted integration. No production, member/Auth/SQL writes or publication."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "PR #1013 approval run 42209271856 FAIL: untracked app change; TESTING queue row added in this same-scoped follow-up, rerun required",
-        "Head Node/lint/build/cloud/SQL/security/approval must be assessed as executed or NOT_APPLICABLE; merge and merged-source checks pending",
-        "Application/Auth/SQL/provider or live member exposure not claimed or tested; no publication"
+      "ci_runs": [
+        42209433470,
+        42209433384,
+        42209433662,
+        42209433363,
+        42209433394,
+        42209433474,
+        42210249221,
+        42210249378,
+        42210249254,
+        42210249444,
+        42210249438,
+        42210249336,
+        42210872473,
+        42210872452,
+        42210872478,
+        42210872534,
+        42210872580
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/267",
-      "notes": "Development-only narrow Community metadata ranking consistency fix. No changes to personal data, SQL, Auth, provider, historical or original603 oracle. Preserve #96 and #33 boundaries. Owner release instruction absent."
+      "notes": "Narrow development-only verified fix READY for separate owner-directed release. Original historical and pinned original source review separately 55 frozen F143 and 27 P116 SHA-bound records, no central ledger/cursor credit or claim of whole-issue completion. Release authorization absent. #96/#33 remain separate; no live member incidence verified."
     },
     {
       "id": "DIC-Q-33-original603-199-selected-description-literal-sensory",
