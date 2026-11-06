@@ -150,3 +150,15 @@ test('actual Git merge body-only skip marker passes full-message audit without r
   rmSync(dir,{recursive:true,force:true});
  }
 });
+test('a real same-commit ops journal with a bounded uppercase run suffix counts, but arbitrary names do not',()=>{
+ const code='site/lib/community-evidence.js',subject='fix: source and same-commit journal [skip netlify]';
+ const documented='docs/workstreams/ops-issue267-disjoint-f143-p116-20261106-N12.md';
+ assert.deepEqual(auditLatestCommit({sha:'4b4984dc81d64d835648172dd6daa201f326f041',paths:[code,documented],subject}),[]);
+ for(const invalid of ['docs/workstreams/ops-issue267-disjoint-f143-p116-20261106-N0.md',
+  'docs/workstreams/ops-issue267-disjoint-f143-p116-20261106-Nabc.md',
+  'docs/workstreams/ops-issue267-disjoint-f143-p116-20261106-N12.md.bak',
+  'docs/workstreams/ops-issue267-disjoint-f143-p116-20261106-UNCHECKED.md']){
+  assert.match(auditLatestCommit({paths:[code,invalid],subject}).join(' '),/SAME-COMMIT/);
+ }
+ assert.match(auditLatestCommit({paths:[code],subject}).join(' '),/SAME-COMMIT/);
+});
