@@ -6116,6 +6116,26 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
       "notes": "SAFE #455 P2 display-only historical unrated taste correction VERIFIED READY on development, NOT DEPLOYED. All five genuine taste ratings, notes, original shot data/history, grinder/style/feed and Locked one-controllable recommendation preserved. Original failed CI is transparently documented; passing corrected source and merged-source checks independently read. No real member/cup-quality claim, no S019 certification, no #267 literal review credit."
+    },
+    {
+      "id": "DIC-Q-455-history-unknown-style-fallback",
+      "issue": 455,
+      "title": "Render missing historical shot styles without crashing Shot History",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/ui.js"
+      ],
+      "tests": [
+        "Source repro: styleBadge(style) dereferenced style.toLowerCase() without validation; shot_card.js invoked it for every historical record; mapping.js passes through source sh.style. Missing/legacy nonstring styles throw before history can render.",
+        "Targeted real-module tests added: missing and malformed types, private notes/tastes/measurements immutability, known Turbo/Fast-Flow/Custom styles, escaping of unexpected text. Execution PENDING at commit; do not call PASS."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact PR-head checks, safe non-force merge, merged-source checks, and READY documentation reconciliation remain pending."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Development-only safe display fallback. No creation of a new espresso style or alteration of historical shot, five taste scores, style recommendations, privacy/RLS, or locked policy. No deployment."
     }
   ],
   "history": [
