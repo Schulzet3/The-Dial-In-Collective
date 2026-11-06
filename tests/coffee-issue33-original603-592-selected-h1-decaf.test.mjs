@@ -47,7 +47,8 @@ test('SEO, recommendation and unselected product headings cannot donate a water 
  const related='<section class="product-recommendations"><h2>Other coffees</h2><h3>'+woodshed+'</h3></section>';
  assert.equal(parse('Honduran Decaf',related).fields.decaffeination_method,undefined);
  const competing=parse('Honduran Decaf','<h1>'+woodshed+'</h1><p>Origin: Honduras</p>');
- assert.equal(competing.fields.decaffeination_method,undefined);
+ assert.equal(competing.fields?.decaffeination_method,undefined,
+  'a competing product H1 fails the entire parse; no field can be donated');
 });
 
 test('bare mention, negation, past lot and incomplete water suffix do not authorize current method',()=>{
