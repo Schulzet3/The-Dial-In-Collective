@@ -2847,7 +2847,7 @@
       "next": "active runtime/schema/auth/Edge drift and hosted API security"
     }
   ],
-  "state": "APP_SQL_FUNCTIONS_99_OF_99; APP_TABLES_46_OF_46_COMPONENTS_DIRECTLY_READ; EDGE_DEPLOYED_SOURCE_9_OF_9_VARIANTS; FULL_PROVIDER_AUDIT_IN_PROGRESS; #527_READY_NOT_DEPLOYED; PLATFORM_AUTH_27_STORAGE_8_REALTIME_3_TABLE_DEFINITIONS_DIRECT_REVIEWED; FULL_PROVIDER_AUDIT_IN_PROGRESS; VENDOR_OTHER_TABLE_VIEWS_5_DIRECT_COMPONENTS_READ; PLATFORM_SOURCE_FUNCS_AUTH4_GRAPHQL1_STORAGE10_REALTIME7_DIRECT_REVIEW; PLATFORM_SQL_FUNCTION_BODIES_42_OF_42_FOR_AUTH_GRAPHQL_STORAGE_REALTIME; ALL_PROVIDER_NATIVE_AND_HOSTED_BASELINE_IN_PROGRESS; ADJACENT_PROVIDER_DECLARATIONS_96_96_NATIVE_CODE_UNVERIFIED",
+  "state": "VISIBLE_PG_CATALOG_3319_3319_COMPLETE; EFFECTIVE_ROLE_CATALOG_RUN40_COMPLETE; HOSTED_API_NATIVE_PROVIDER_FULL_BASELINE_IN_PROGRESS",
   "application_table_review": {
     "total": 46,
     "current_index": 46,
@@ -6550,5 +6550,25 @@
     "new_app_bugs": 0,
     "safe_deletions": 0,
     "next": "Available Auth/JWT/PostgREST/Realtime/Storage settings and source-bound changed/new objects, compiled native source unavailable"
+  },
+  "provider_effective_api_acl_run40": {
+    "status": "CATALOG_EFFECTIVE_ROLE_RIGHTS_COMPLETE_HOSTED_API_UNVERIFIED",
+    "receipt_path": "docs/audits/issue509-effective-api-acl-20261106-run40.json",
+    "development_parent_sha": "caa0501be23ceea477ab0aef6434bbbcd8069274",
+    "function_records": 236,
+    "relation_records": 88,
+    "schema_role_records": 32,
+    "app_source_hashes_matching_original": 98,
+    "unexpected_app_source_hashes": 0,
+    "anon_app_sql_callable": 0,
+    "authenticated_private_sql_callable": 28,
+    "public_security_definers": 10,
+    "rls_app_table_count": 46,
+    "subscription_aggregate_row_count": 0,
+    "github_visibility": "public",
+    "hosted_api_jwt": "UNVERIFIED",
+    "production_writes": false,
+    "code_fixes": 0,
+    "next": "Live PostgREST exposed schemas and #96 hosted signed-JWT authorization, then drift change-only audit"
   }
 }
