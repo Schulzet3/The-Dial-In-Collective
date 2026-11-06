@@ -8,6 +8,28 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-community-measured-ratio-integrity",
+      "issue": 455,
+      "pr": null,
+      "title": "Exclude invalid archived dose/yield ratios from exported local Community evidence",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Original engine Git blob f13197fc0ac34a27d836d9557132551eacb49fe1: communitySummary's all-five-green predicate still counted historical success rows with zero, negative, null, typed or non-finite dose/yield; the ratio expression could yield Infinity/NaN or a missing contributor statistic, inflating count and confidence or throwing in stats(). Synthetic deterministic source scenario, not evidence of hosted Community member incidence.",
+        "SAFE guard uses primitive finite positive measured dose/yield and finite quotient; no new espresso taste targets or ratio windows. Retains existing five-green, pending outlier, contributor caps, ratios for valid shots, saved notes and all history.",
+        "Five direct real-module positive/negative Node22 suites authored, NOT YET EXECUTED. Require applicable CI and exact merged-source verification before READY."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "PR-head tests, applicable CI, non-force integration and merged-source checks not yet verified"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "R455-075 SAFE development-only; exported local helper, not authoritative hosted Supabase Community/RLS. Original 58 sources/123 prior evidence checks unchanged; Library slow-feed PDF 10/10 text reread, byte-equivalence to owner archive unverified; separate original S019 not accessible. No production write, publication or Locked policy change."
+    },
+    {
       "id": "DIC-Q-33-original603-400-413-selected-decaf-water-prose",
       "issue": 33,
       "pr": 1081,
