@@ -8,6 +8,28 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-empty-historic-success-family-ratio-guard",
+      "issue": 455,
+      "pr": null,
+      "title": "Keep invalid legacy success ratios from crashing new shot family assignment",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Reproduced directly in current source: assignFamily calls familyStats(...).ratio.center even when stats returned ratio=null for all-green legacy shot with null/zero dose.",
+        "Focused imported-module tests: invalid-only old family does not crash, valid measured family still reuses, mixed valid/invalid retains valid selection and raw history.",
+        "New tests, Node22, lint, browser/mobile/offline/a11y, isolated SQL/security/governance NOT RUN at creation; exact PR-head CI and merged verification required."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact PR-head CI, nonforce merge, merged-source readback and READY docs still pending"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "SAFE null-guard; no data edits, numeric model/taste changes, user policy decisions, production operations or deploy."
+    },
+    {
       "id": "DIC-Q-33-original603-21-selected-woocommerce-compact-flavors",
       "issue": 33,
       "pr": 972,
