@@ -10,24 +10,33 @@
     {
       "id": "DIC-Q-455-history-stale-make-current-guard",
       "issue": 455,
-      "pr": null,
+      "pr": 1008,
       "title": "Prevent a stale archived success flag from labeling or selecting an unrated shot as current",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "cfe25763f3975fe87838066ea5f4e3b93cb3a554",
       "scope_paths": [
         "site/cloud/shot_card.js",
         "site/lib/engine.js"
       ],
       "tests": [
-        "3 new direct imported-module local makeCurrent regression tests and 2 expanded real Shot History rendering tests authored; NOT YET EXECUTED.",
-        "Exact-source Node22, browser/mobile/offline/a11y, SQL/security/governance are PENDING; no green run claimed."
+        "Five focused direct imported-module regression groups: original five green selections and history badge, 4 incomplete/nonideal/typed/missing fifth ratings, strict true flag, no changes on rejected Make Current, private notes/measurements unchanged, hidden/other-version/pending constraints. PR-head Node22 42204875488: 2,689 PASS / 0 FAIL / 6 intentional SKIP, lint and build SUCCESS.",
+        "Exact PR head 6042b77f9c9d5a28eef2a52d8c316e3276017d0b: compiled cloud/mobile/browser/offline/a11y 42204875433 SUCCESS (cloud-tests+mobile-browser-qa), isolated SQL/JWT 42204875465 SUCCESS, security 42204875447 SUCCESS, approval/governance 42204875419 SUCCESS; frozen603 42204875461 SKIPPED, not PASS.",
+        "Nonforce PR #1008 squash merged cfe25763f3975fe87838066ea5f4e3b93cb3a554; all seven source/test/queue/ledger/journal Git blobs identical to successful exact PR head. Merged-source Node22 42205202856 2,689 PASS / 0 FAIL / 6 SKIP, cloud/mobile/browser/offline/a11y 42205202832 SUCCESS, approval/governance 42205202870 SUCCESS. No actual member incidence or physical espresso outcome claim."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact PR-head CI, nonforce integration, exact merged-source checks, and READY documentation reconciliation not yet verified"
+      "ci_runs": [
+        42204875488,
+        42204875433,
+        42204875447,
+        42204875465,
+        42204875419,
+        42204875461,
+        42205202856,
+        42205202832,
+        42205202870
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Development only, never deployed. Preserve five original ratings, private notes and measurements, recipe families, historical styles, pending sync, and active version scoping. Test fixtures synthetic/local only; live member incidence unknown."
+      "notes": "R455-067 VERIFIED READY on development ONLY, NOT DEPLOYED. Safe historic UI badge and local explicit favorite validation use unchanged Locked five ideal tastes. Five original ratings, private notes, measurements, styles, setup/version/coffee scope preserved. No provider/member writes, no release authorization."
     },
     {
       "id": "DIC-Q-33-original603-184-partial-blend-component-process",
