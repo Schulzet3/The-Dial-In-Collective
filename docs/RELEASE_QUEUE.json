@@ -6015,6 +6015,39 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/508",
       "notes": "N508-059 confirmed narrow source-derived UX race in preview failure path, not evidence of live signed-in incident. TESTING only; no Netlify/prod member/Auth/SQL/provider writes or release authority. Retain existing coffee fields, offline behavior, Log Shot -> Rate -> Recommendations, and single owner-published production branch.\nNARROW SOURCE-VERIFIED READY in development at merged 0ce8bc4848dfb7768b1feb424f5c8e5922a401bd; source-bound merged Node/approval/browser/offline suites passed. Published release version and dev baseline of BOTH touched UI files were byte-identical before this repair, so no pre-existing divergent app edits in these two paths. Candidate packaging and owner-only one-use release preflight remain separate; NO PUBLICATION OR LIVE SIGNED-IN TEST. Source-only stale error feedback race repaired conservatively."
+    },
+    {
+      "id": "DIC-Q-455-legacy-blank-measurements",
+      "issue": 455,
+      "pr": 910,
+      "title": "Render missing legacy Shot History measurements as unknown, not a fabricated zero",
+      "state": "READY",
+      "merged_source_sha": "afda28589b693645d9b5eabb20d241dc6d7a2252",
+      "scope_paths": [
+        "site/lib/ui.js"
+      ],
+      "tests": [
+        "Baseline exact site/lib/ui.js blob b297da0ba44826b1cf97a92f4e89166d41d9371f: Number('') and Number('   ') returned 0, Number(false) 0, so invalid historical source fields displayed misleading 0.0, 32°F or grinder zero.",
+        "PR #910 exact head 71a4e98aaeb2d460c13967aef249ea1a51f71186 Node22 all checked-in Node tests 2614 PASS / 0 FAIL / 6 intentional SKIP, total 2620 (run42151967992), including all three new positive/negative real-module tests; lint SUCCESS.",
+        "PR #910 exact head browser, mobile 390px, responsive, offline/service-worker, accessibility, build graph, owner-only permissions SUCCESS run42151968044. Cloud targeted tests NOT_APPLICABLE despite wrapper SUCCESS.",
+        "PR #910 exact head isolated SQL, signed JWT/RLS isolation 42151967971; security inventory 42151968001; approval/continuity42151967985 all SUCCESS. Frozen603 42151967987 SKIPPED, not PASS.",
+        "PR #910 nonforce squash merged afda28589b693645d9b5eabb20d241dc6d7a2252; exact 3 Git blobs match passed head: ui c24737f142d50a2da565514f75b2772e29c4dce9; new regression 338858eb11389e368f96269c9509d0db510de6b2; same-commit journal a0d7a54272b084b1c930008fb92f082b44f23e2a.",
+        "Exact merged-source governance run42152320931 SUCCESS; Node22/lint run42152320913 actual 2614 PASS/0 FAIL/6 SKIP, Chromium responsive/390px workflow/offline/a11y run42152320904 SUCCESS, same 3 code/test/journal Git blobs as exact PR-head. Targeted cloud NOT_APPLICABLE, frozen603 SKIPPED, no live member/cup trial."
+      ],
+      "ci_runs": [
+        42151967992,
+        42151968044,
+        42151967985,
+        42151967971,
+        42151968001,
+        42151967987,
+        42152320931,
+        42152320913,
+        42152320904
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Verified SAFE display-only correction READY on development, NOT DEPLOYED. Original shot measurements, all five sensory ratings, personal history/notes, coffee/style/feed/calibration, one-variable recommendation and Locked defaults unchanged. Source, PR-head and merged-source CI verified; no actual-member incident, empirical taste benefit, or provider release claimed."
     }
   ],
   "history": [

@@ -2661,6 +2661,27 @@
       "implementation": "RESEARCH_ONLY_NO_APP_CHANGE_NO_OWNER_DECISION_REQUESTED",
       "test_plan": "Docs JSON/schema/uniqueness plus exact-source governance. Behavior changes would require owner decision plus five-input/one-control/metadata, grinder-version, cross-coffee, mobile/offline and genuine outcome testing.",
       "release_queue": "NO_NEW_ITEM"
+    },
+    {
+      "id": "R455-PROP-058-BLANK-HISTORIC-MEASUREMENTS",
+      "finding": "Actual site/lib/ui.js shared formatter coerced missing/whitespace/boolean historical shot measurements to numeric zero/one and shotSummary rendered blank temperature as 32°F or missing grind as 0.0; obscured missing source data versus actually measured zeros.",
+      "evidence": [
+        "development pre-fix SHA 5dc5395d8fa2505763e5dad311841b874ad6987f, site/lib/ui.js blob b297da0ba44826b1cf97a92f4e89166d41d9371f; exact formatter Number() coercion reproduced",
+        "new focused real-module tests tests/issue455-legacy-blank-shot-metrics.test.mjs Git blob 338858eb11389e368f96269c9509d0db510de6b2; 3/3 PASS in 42151967992, full 2614 PASS / 0 FAIL / 6 SKIP",
+        "PR #910 source head 71a4e98aaeb2d460c13967aef249ea1a51f71186 and non-force merged code afda28589b693645d9b5eabb20d241dc6d7a2252; merged ui blob c24737f142d50a2da565514f75b2772e29c4dce9",
+        "PR head browser/mobile/offline/accessibility 42151968044; SQL 42151967971; security42151968001; governance42151967985 SUCCESS, frozen603 SKIPPED"
+      ],
+      "severity": "P2_REPRODUCED_LEGACY_SHOT_HISTORY_MEASUREMENT_PRESENTATION_INTEGRITY",
+      "user_benefit": "Historical incomplete/legacy shots distinguish unknown dose/yield/time/grind/temp from actual measured zero without fabricated timestamp/ratio; private historical shots and notes remain untouched.",
+      "current_locked": "All five taste fields, distinct all-green vs unrated, one controllable Next Shot setting, exact measured shot, notes and privacy/history, Turbo/Fast-Flow, per-coffee calibration/style/feed and original successful recipe families.",
+      "current_app": "Before ui.js::fmt used Number(value) with whitespace/booleans, and optional temperature/grind only checked !=null; now numericMeasurement requires actual finite number or nonblank finite numeric string, protects ratio eligibility and optional display.",
+      "proposed_change": "SAFE Locked-compatible narrow display-only correction and dedicated negative/positive tests, no numeric espresso rule, member data mutation or new captured attribute.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "VERIFIED_NONFORCE_MERGED_CODE_READY_NOT_DEPLOYED",
+      "implementation_pr": 910,
+      "source_commit": "afda28589b693645d9b5eabb20d241dc6d7a2252",
+      "test_plan": "Exact PR-head Node22/lint 2614 PASS/0 FAIL/6 SKIP run42151967992; actual browser/mobile/offline/a11y 42151968044, isolated SQL42151967971, security42151968001, approval42151967985 SUCCESS. Merged source identical 3 code/test/journal blobs: Node22/lint 2614 PASS/0 FAIL/6 SKIP run42152320913, browser/mobile/offline/a11y42152320904 and approval42152320931 SUCCESS. Targeted cloud NOT_APPLICABLE, frozen603 SKIPPED; no live member/cup trials.",
+      "release_queue": "DIC-Q-455-legacy-blank-measurements"
     }
   ]
 }
