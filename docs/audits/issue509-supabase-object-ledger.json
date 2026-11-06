@@ -2866,6 +2866,16 @@
       "production_writes": 0,
       "verified_defects": 0,
       "next": "#96 hosted Auth/JWT API; provider-console-only settings and native source"
+    },
+    {
+      "event": "2026-11-06_run52_range_enum_language_partition_catalog_direct",
+      "source_development_parent_sha": "1951ea17085c97bbf744ec897a06239abecb0f21",
+      "provider_at": "2026-11-06 23:48:37.080225+00",
+      "records_direct_reviewed": 58,
+      "receipt_path": "docs/audits/issue509-provider-range-enum-language-partition-20261106-run52.json",
+      "verified_app_defects": 0,
+      "provider_writes": false,
+      "next": "Unreviewed provider catalog class pg_statistic_ext_data metadata-safe aggregate (avoid per-column statistical data exposing values) or pg_parameter_acl; first check ledger to prevent duplicate. Hosted Auth coordination #96 and change-only provider drift."
     }
   ],
   "state": "VISIBLE_PG_CATALOG_3319_3319_AND_PG_SETTINGS_DESCRIPTORS_480_480_COMPLETE; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -6851,5 +6861,25 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "pg_conversion ordered ordinal 1; hosted Auth/JWT/API in #96, changed provider objects"
+  },
+  "provider_range_enum_language_partition_run52": {
+    "state": "DIRECT_ALL_58_RANGE_ENUM_LANGUAGE_PARTITION_CATALOG_RECORDS_REVIEWED_NATIVE_HOSTED_UNVERIFIED",
+    "receipt_path": "docs/audits/issue509-provider-range-enum-language-partition-20261106-run52.json",
+    "source_development_parent_sha": "1951ea17085c97bbf744ec897a06239abecb0f21",
+    "main_sha": "7e67177a64cad879e34d27902a4d504f2ad7db4b",
+    "release_sha": "2ec10324fcaa4b60d1e48240b44b77b141b9ba54",
+    "observed_at": "2026-11-06 23:48:37.080225+00",
+    "range_records": 6,
+    "enum_labels": 47,
+    "enum_types": 12,
+    "language_records": 4,
+    "partitioned_parents": 1,
+    "attached_realtime_message_partitions": 0,
+    "observed_realtime_parent_inserts": 0,
+    "confirmed_app_defects": 0,
+    "source_fixes": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "Unreviewed provider catalog class pg_statistic_ext_data metadata-safe aggregate (avoid per-column statistical data exposing values) or pg_parameter_acl; first check ledger to prevent duplicate. Hosted Auth coordination #96 and change-only provider drift."
   }
 }
