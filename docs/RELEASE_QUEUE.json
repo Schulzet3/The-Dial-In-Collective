@@ -8,6 +8,28 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-outlier-historical-measurement-integrity",
+      "issue": 455,
+      "pr": null,
+      "title": "Exclude invalid archived dose/yield/time measurements from local outlier review baseline",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Source blob 2365cf5170567d94fe405c7c1ef32dab05cccda7 current isExtreme accepted truthy all-green historical rows with zero/nonfinite/typed dose, yield or time; nonfinite ratio/invalid time could fabricate a false outlier, or a malformed fourth record could reach the four-shot threshold. Deterministic synthetic source defect, not member incidence.",
+        "Narrow existing measurement-integrity qualifier: primitive finite positive dose, yield and time and finite yield/dose ratio, in addition to existing five-green, style, setup and visible history. No new taste/ratio/time thresholds, metadata capture, note or shot mutation.",
+        "Five focused real-engine positive/negative Node22 tests added; CI and compiled browser/mobile/offline/a11y/SQL/security/governance NOT RUN at commit creation. Frozen603 reference corpus unchanged; no PASS or READY claim."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Await source-bound Node22/lint/build, compiled browser/mobile/offline/a11y, isolated SQL/security and approval governance, safe nonforce merge and exact merged-source verification."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "R455-076 candidate, development only. Preserve all original shots and five taste ratings, new real measured outlier detection and Locked thresholds. Not deployed; no live provider/member writes."
+    },
+    {
       "id": "DIC-Q-455-community-measured-ratio-integrity",
       "issue": 455,
       "pr": 1086,
