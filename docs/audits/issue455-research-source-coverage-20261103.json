@@ -2783,11 +2783,11 @@
       "current_app": "Before fix, missing nonstring style crashes styleBadge during Shot History rendering. This is a presentation fallback only, not a change to persisted data or style selection.",
       "proposed_change": "SAFE display-only guard for empty or nonstring style; preserve recorded current/retired string styles, escape untrusted legacy labels and use safe neutral CSS fallback; focused negative and positive tests.",
       "approval_required_for_behavior_change": false,
-      "implementation": "SOURCE_BOUND_CODE_COMMITTED_CI_PENDING_NOT_READY",
-      "test_plan": "Direct module Node22 regression for missing/known/malicious history styles, full scoped app UX/mobile/browser/offline/a11y according to source impact, SQL/Auth privacy governance where CI requires. No test result claimed until verified.",
+      "implementation": "VERIFIED_NONFORCE_MERGED_CODE_READY_NOT_DEPLOYED",
+      "test_plan": "PR head Node22/lint 42169784490 2628 PASS/0 FAIL/6 SKIP (incl 3 new real-module tests); actual built-browser/390px/mobile/offline/a11y42169784474 SUCCESS, security42169784477, isolated SQL42169784512, governance42169784501 SUCCESS. Nonforce code PR #942 merged d65013449df92827ce3c89f37be8c9ab530c28b9 exact 5 tested Git blobs; merged-source Node22/lint42170927893 same 2628/0/6, browser/mobile/offline/a11y42170927922 and governance42170927745 SUCCESS. Frozen603 SKIPPED, targeted cloud NOT_APPLICABLE; no member/cup trial.",
       "release_queue": "DIC-Q-455-history-unknown-style-fallback",
-      "source_commit": "4683483f73d8eaab7b08940ecda1c407a993fbce",
-      "implementation_pr": null
+      "source_commit": "d65013449df92827ce3c89f37be8c9ab530c28b9",
+      "implementation_pr": 942
     }
   ]
 }
