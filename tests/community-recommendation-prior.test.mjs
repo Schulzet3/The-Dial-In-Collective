@@ -89,3 +89,18 @@ test('confirmed member families provide distinct evidence without falsely verify
  assert.equal(rec.established,false);
  assert.equal(rec.familyId,null);
 });
+test('invalid Community confirmed-family metadata cannot outrank verified integer counts',()=>{
+ const base={tier:'exact',style:'Turbo',ratio:3.8,time_s:25,shot_count:8,contributor_count:2,
+  source:'eligible_verified_community',calibrated_grind:false};
+ const established={...base,ratio:1.8,confirmed_personal_family_count:2};
+ for(const invalid of ['999999',-5,2.5,Infinity]){
+  const malformed={...base,confirmed_personal_family_count:invalid};
+  for(const order of [[malformed,established],[established,malformed]]){
+   const selected=selectCommunityPrior({style:'Turbo',candidates:order},'Turbo');
+   assert.equal(selected.ratio,1.8);
+   assert.equal(selected.confirmedPersonalFamilyCount,2);
+   assert.equal(selected.communityGroupIdentityVerified,false);
+  }
+  assert.equal(selectCommunityPrior({style:'Turbo',candidates:[malformed]},'Turbo').confirmedPersonalFamilyCount,0);
+ }
+});
