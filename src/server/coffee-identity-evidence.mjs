@@ -1,4 +1,4 @@
-import {selectedCountryFirstTitleRegion,selectedCountryProducerRegion,selectedCountryAreaOfRegion,selectedCountrySmallholderGrowingLocality} from './coffee-title-region-evidence.mjs';
+import {selectedCountryFirstTitleRegion,selectedCountryProducerRegion,selectedCountryAreaOfRegion,selectedCountrySmallholderGrowingLocality,selectedCountryCooperativeGrowingArea} from './coffee-title-region-evidence.mjs';
 import {productCoffeeProse,NONCURRENT_COFFEE_PROSE} from './coffee-product-prose.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {coffeeHtmlAttributes,productMarkup} from './coffee-product-scope.mjs';
@@ -834,6 +834,13 @@ export function extractCoffeeIdentityEvidence(html,{name='',fields={},clean}={})
  if(producerTitleRegion)add('Origin',producerTitleRegion.value,producerTitleRegion.quote);
  const selectedAreaOrigin=selectedCountryAreaOfRegion({name,country:titleCountries.length===1?titleCountries[0]:'',origin:fields.origin,blocks});
  if(selectedAreaOrigin)add('Origin',selectedAreaOrigin.value,selectedAreaOrigin.quote);
+ // A cooperative's explicit contributing family-farm growing locality is
+ // direct current-coffee evidence, not an importer or roaster location.
+ const cooperativeCountry=titleCountries.length===1?titleCountries[0]:'';
+ const cooperativeDemonym=Object.entries(DEMONYMS).find(([,value])=>key(value)===key(cooperativeCountry))?.[0]||'';
+ const selectedCoopArea=selectedCountryCooperativeGrowingArea({name,country:cooperativeCountry,
+  demonym:cooperativeDemonym,origin:fields.origin,producer:fields.producer,blocks});
+ if(selectedCoopArea)add('Origin',selectedCoopArea.value,selectedCoopArea.quote);
  const selectedGrowersLocality=selectedCountrySmallholderGrowingLocality({name,country:titleCountries.length===1?titleCountries[0]:'',origin:fields.origin,blocks});
  if(selectedGrowersLocality)add('Origin',selectedGrowersLocality.value,selectedGrowersLocality.quote);
  // Country words in the exact selected name are explicit geography; do not
