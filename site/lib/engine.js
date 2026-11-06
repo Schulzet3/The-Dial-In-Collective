@@ -29,7 +29,9 @@ export function baseline(coffee,style,dose,preferences='') {
  if(index<0)reasons.push('Roast level unknown; Medium is a recipe fallback, not a coffee fact.');
  return {doseG:dose,ratio:{low:Math.max(.8,ratio-CONFIG.rangeHalfWidth),high:ratio+CONFIG.rangeHalfWidth,center:ratio},time:{low:time[0],high:time[1],center:mean(time)},tempC:temp,reasons,source:'Starting recommendation',observations:0,familyId:null,established:false};
 }
-export function familyShots(s,id) {return s.shots.filter(x=>!x.hidden&&x.dialedIn&&x.familyId===id);}
+// Never promote an archived/imported `dialedIn` marker into personal recipe
+// evidence without verifying its five original recorded ideal ratings.
+export function familyShots(s,id) {return s.shots.filter(x=>!x.hidden&&x.dialedIn===true&&isDialed(x.tasteScales)&&x.familyId===id);}
 export function familyStats(s,id) {
  const shots=familyShots(s,id);if(!shots.length)return null;
  return {ratio:stats(shots.map(x=>x.yieldG/x.doseG),{singleWidth:1/(mean(shots.map(x=>x.doseG))||18)}),time:stats(shots.map(x=>x.timeS),{singleWidth:2}),count:shots.length,confirmed:shots.length>=2};

@@ -17,6 +17,7 @@ const good=(id,coffeeId,extra={})=>({
  basketId:'basketv',calibrationId:'cal',feedMode:'standard',
  doseG:18,yieldG:39,timeS:27,grindSetting:1.3,
  tempC:null,dialedIn:true,hidden:false,timestamp:'2026-10-08T12:00:00Z',
+ tasteScales:{extraction:3,body:3,clarity:5,sweetness:5,astringency:1},
  familyId:null,...extra
 });
 test('personal similar coffees improve starting yield/time but stay unproven',()=>{
