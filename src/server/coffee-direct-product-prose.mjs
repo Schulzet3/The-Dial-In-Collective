@@ -21,6 +21,13 @@ const CURRENT_SELECTED_GREEN_AND_DECAF_CAPTION=/^(?:(?:extended[- ]fermentation\
 // Accept short current treatment only with the directly selected self-decaf
 // paragraph and exact H1; never infer from roaster identity or site SEO.
 const CURRENT_SELECTED_DECAF_WAY=/^(?:[\p{L}\p{M}]{3,24}['’]d|(?:this|our)\s+coffee\s+(?:is|was)\s+decaffeinated)\s+by\s+way\s+of\s+(?:the\s+)?(?:swiss[\s-]?water|mountain[\s-]?water|sugar[\s-]?cane|ethyl[\s-]?acetate|(?:supercritical\s+)?carbon[\s-]?dioxide|co\s*[- ]?[2\u2082])\b/iu;
+// An exact selected decaf's single product paragraph can locate its current
+// decaffeination at a named facility and immediately name that facility's
+// sugar-cane ethyl acetate solvent, even without a "Method:" specification.
+// Both clauses must be contiguous in the SAME paragraph, describe this coffee,
+// and remain inside the independently selected H1 product scope. Pure water
+// used at the plant is NOT itself a Swiss/Mountain Water decaf method.
+const CURRENT_SELECTED_FACILITY_EA=/^(?:the|this|our)\s+coffee\s+is\s+(?:then\s+)?decaffeinated\s+at\s+[\p{Lu}][\p{L}\p{M}\d'’-]{2,70}(?:\s+[\p{Lu}][\p{L}\p{M}\d'’-]{2,70}){0,3},\s+[^.!?]{6,160}\.\s+(?:the|this)\s+(?:plant|facility)\s+relies\b[^.!?]{0,310}\bnatural\s+ethyl\s+acetate\s+from\s+sugar\s+cane\b/iu;
 // A selected current decaf may identify its treatment as a roaster-translated
 // method, after an explicit at-origin decaffeination clause. This is not a
 // growing origin, green-bean process, or a general country method inference.
@@ -226,6 +233,17 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   // enter this evidence tier. Incompatible current methods fail closed later.
   if(decafOnlyCoffee(name)&&b.tag==='p'&&line.length<=180&&
      CURRENT_SELECTED_GREEN_AND_DECAF_CAPTION.test(line)&&
+     !NONCURRENT_DECAF_METHOD.test(line)&&
+     inferDecaffeinationMethod({name,selectedMethod:line})&&
+     !decafEvidence.has(line)){
+   if(decafEvidence.size<4)decafEvidence.add(line);
+   else decafEvidenceOverflow=true;
+  }
+  // Exact current, one-paragraph facility + solvent provenance. A plant's
+  // plain water supply cannot become a Water Process method; named sugar-cane
+  // EA applies only to this directly selected, wholly decaffeinated coffee.
+  if(decafOnlyCoffee(name)&&b.tag==='p'&&line.length<=650&&
+     CURRENT_SELECTED_FACILITY_EA.test(line)&&
      !NONCURRENT_DECAF_METHOD.test(line)&&
      inferDecaffeinationMethod({name,selectedMethod:line})&&
      !decafEvidence.has(line)){
