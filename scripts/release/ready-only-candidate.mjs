@@ -126,6 +126,25 @@ export function validateReadyOnlyCandidate(queue,{manifest,publishedSourceSha,de
   // be silently added to this one-use grant or source. They can coexist only
   // when their exact merge happened after this candidate staging anchor.
   for(const item of liveReady.filter(i=>!selectedSet.has(i.id))){
+   // A separately unfinished item may be certified READY while this approved
+   // candidate is tested. If its app bytes were already in the staging
+   // ancestry, allow it ONLY when it was tracked as unready in the frozen
+   // staging queue and EVERY scoped deployable file was restored to the
+   // published Git object in this candidate. Never include an added READY
+   // feature merely because its status changed after staging.
+   const original=queue.items.find(i=>i.id===item.id);
+   const previouslyUnready=original&&['IN_PROGRESS','TESTING','BLOCKED'].includes(original.state);
+   const scoped=Array.isArray(item.scope_paths)?item.scope_paths:[];
+   let fullyExcluded=false;
+   if(previouslyUnready&&scoped.length>0&&equal(scoped,original.scope_paths||[])){
+    try{
+     fullyExcluded=scoped.every(path=>
+      manifest.restored_to_published_paths?.includes(path)&&
+      sourceObjectAt(candidateSha,path)===sourceObjectAt(publishedSourceSha,path)&&
+      sourceObjectAt(manifest.development_source_sha,path)!==sourceObjectAt(publishedSourceSha,path));
+    }catch(e){reject('Cannot verify newly READY excluded source blobs: '+e.message);}
+   }
+   if(fullyExcluded)continue;
    try{
     if(!SHA.test(item.merged_source_sha||'')||
        item.merged_source_sha===manifest.development_source_sha||
