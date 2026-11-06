@@ -561,7 +561,13 @@ export function nextAdvice(s,shot,rec){
   grindSetting:clamp(round(advice.next.grindSetting),v.grinderMin,v.grinderMax)}};
 }
 export function isExtreme(s,shot) {
- const prior=s.shots.filter(x=>!x.hidden&&x.dialedIn===true&&isDialed(x.tasteScales)&&x.coffeeId===shot.coffeeId&&x.style===shot.style&&x.setupVersionId===shot.setupVersionId&&x.id!==shot.id);
+ // Incomplete imported measurements remain in History, but cannot establish
+ // the four measured reference shots or median for an outlier prompt.
+ const prior=s.shots.filter(x=>!x.hidden&&x.dialedIn===true&&isDialed(x.tasteScales)&&
+  x.coffeeId===shot.coffeeId&&x.style===shot.style&&
+  x.setupVersionId===shot.setupVersionId&&x.id!==shot.id&&
+  finite(x.doseG)&&x.doseG>0&&finite(x.yieldG)&&x.yieldG>0&&
+  finite(x.yieldG/x.doseG)&&finite(x.timeS)&&x.timeS>0);
  if(prior.length<4)return false;
  return Math.abs(shot.yieldG/shot.doseG-quantile(prior.map(x=>x.yieldG/x.doseG),.5))>1.25||Math.abs(shot.timeS-quantile(prior.map(x=>x.timeS),.5))>25;
 }
