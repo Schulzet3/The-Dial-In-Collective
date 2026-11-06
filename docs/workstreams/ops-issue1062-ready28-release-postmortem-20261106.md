@@ -1,0 +1,11 @@
+# #1062 scoped publication incident journal — 2026-11-06
+
+**Authority:** Owner asks to document the latest published release in depth and prevent recurrence. Documentation/governance clarification, **NOT a new release or permission to weaken security/source checks**. Locked Master Specification, Decision Ledger, Auth/privacy, SQL/member data, Git publisher and app runtime remain unchanged.
+
+**Recovered exact source anchors:** development base 264112eb501ac181478e4da6925fc6dbec325205, main eaa1ff090d3872a8ac8c8550799152957e5d3e1e, release/production 480aca1b32d7ded0bb83e9a899c4d7d5e6200e89, candidate 40dd7097307bb7d7c36c199d9f9df0581e55d86c. Netlify provider READY/current commit_ref matches, deploy 6aedfefa4bf3e7c4c8c77f44. Controller run42251866726 SUCCESS. Candidate validate42247476125 SUCCESS: 2723 PASS/0 FAIL/6 SKIP. No production HTTP/authenticated device smoke was performed in this incident. Read source issue #1044, repair PRs #1039/#1042/#1048/#1049/#1050/#1051, release receipt, main workflows, schema-v4, queue/current status/AGENTS and live queue.
+
+**One atomic documentation change:** detailed source-linked causes/timeline and future decision tree at docs/releases/2026-11-06_READY28_RELEASE_POSTMORTEM.md; required pointer and proven trigger guidance in AGENTS.md and docs/RELEASE_QUEUE_RUNBOOK.md; docs-only delta in docs/CURRENT_STATUS.md; GitHub copy of ChatGPT Project Instructions kept below 8,000 characters; and this same-commit journal. No app, tests, CI, backup, provider, GitHub main/release, queue statuses or Locked files touched.
+
+**Acceptance:** Facts/provider/source verified before draft. The postmortem and standing checklist authored. Remaining until merge: confirm exact changed paths/parent/tree, relevant docs/approval CI, nonforce merge, merged ref readback, current queue and provider remain untouched. These future checks are **PENDING** at author time, not asserted PASS. Record actual results in issue #1062.
+
+**Next action:** Open PR against development/backend-foundation, verify source diff and applicable CI; merge without force, read back final SHA/paths and unchanged production, then close #1062 with evidence. No extra build, Netlify action, backup or production data mutation.
