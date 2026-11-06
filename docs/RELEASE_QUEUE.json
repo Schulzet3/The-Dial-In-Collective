@@ -11,22 +11,34 @@
       "id": "DIC-Q-455-similar-coffee-measured-yield-integrity",
       "issue": 455,
       "title": "Ignore malformed archived yield and nonfinite ratios in personal similar-coffee starting reference",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "813e3d53b86eebbb15faeec16c9790b3fae19da6",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
         "Current source engine blob 938a15dab69b0df84640f3c36e8603b3388b1924 personalSimilarCoffeeReference accepted all-five-green archival same-roast donor rows with yield zero or negative, or finite dose/yield whose ratio overflowed; an invalid donor could bias starting ratio and count. Source logic counterexample, not actual member incidence.",
         "SAFE strictly measured donor qualifier: require positive finite numeric yield and finite yield/dose quotient; all existing five original ideal tastes, positive dose/time, style/feed/setup/roast requirements, unproven personal similar fallback and source data retained.",
-        "Five targeted actual-module synthetic Node22 regression groups prepared. At creation all tests/CI UNEXECUTED, exact PR head and merged tests required; original603 reference remains SKIPPED/NOT APPLICABLE."
+        "Five targeted actual-module synthetic Node22 regression groups prepared. At creation all tests/CI UNEXECUTED, exact PR head and merged tests required; original603 reference remains SKIPPED/NOT APPLICABLE.",
+        "Exact PR-head commit 4b56e813261603c3f02bdea251d30c4d256a74a4 Node22/lint/build 42306608453 2,778 PASS/0 FAIL/6 intentional SKIP; five new R077 synthetic actual-module regression groups pass. Compiled Chromium/browser/390px/mobile/offline/a11y42306608262, isolated SQL42306608540, source security42306608230, approval42306608321 SUCCESS. Cloud-targeted NOT_APPLICABLE/SKIPPED within wrapper; original frozen60342306608254 SKIPPED, not PASS.",
+        "Non-force squash merge PR1110 813e3d53b86eebbb15faeec16c9790b3fae19da6. Original code/test/TESTING queue/SAME-COMMIT journal Git blob hashes match passing PR head: engine451b2f52e1609c9ccebff8cf30677d0b14110aae, test59bb8d57ba8bf7243918893781edebd466affacb, queue bf7cc2c0ed8be7b62e25d64f64a6ed28bb38fa12, journal410d1dbe45e3ccceae076135e6ed6f2e28b96678.",
+        "Exact merged-source Node22/lint/build42306826709 2,778 PASS/0 FAIL/6 SKIP; mobile/compiled Chromium/390px/offline/a11y42306826774 and approval/continuity42306827035 SUCCESS; targeted cloud job NOT_APPLICABLE/SKIPPED. No live member, SQL/Auth/Edge/provider operations, physical device or taste trial."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact PR-head and merged-source CI not yet completed"
+      "ci_runs": [
+        42306608453,
+        42306608262,
+        42306608540,
+        42306608321,
+        42306608230,
+        42306608254,
+        42306826709,
+        42306826774,
+        42306827035
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "R455-077 development-only SAFE correction; no recipe targets, taste policy, source science, original shots/notes, hosted Community/RLS, Supabase member data, or deployment modified. Not READY."
+      "notes": "SAFE local personal similar-coffee measured-ratio donor integrity. Code independently verified on PR head and merged source. Development READY, NOT DEPLOYED; original measured shots, private notes, five ratings, one-change, style/feed/setup/roast and Locked numeric rules preserved. No real member incidence, science or taste outcome claim. No new approved product policy.",
+      "pr": 1110
     },
     {
       "id": "DIC-Q-455-outlier-historical-measurement-integrity",
