@@ -55,7 +55,7 @@ async function capture(packet){
   });
   const html=await page.content();record.dom_bytes=Buffer.byteLength(html);record.dom_truncated=record.dom_bytes>3000000;
   if(!record.dom_truncated){await fs.writeFile(path.join(dir,'rendered.html'),html);record.dom_sha256=sha(html);}
-  await fs.writeFile(path.join(dir,'rendered-source.json'),JSON.stringify(data,null,2));record.text_characters=data.visible_text.length;record.page_errors=errors;record.status='render_captured';
+  await fs.writeFile(path.join(dir,'rendered-source.json'),JSON.stringify(data,null,2));record.text_characters=data.visible_text.length;record.text_sha256=sha(data.visible_text);record.page_errors=errors;record.status='render_captured';
  }catch(e){record.status='unreviewed';record.error=String(e).slice(0,300);}
  finally{await context.close();}
  await fs.writeFile(receipt,JSON.stringify(record,null,2));results.push(record);completed++;console.log(JSON.stringify({completed,case_id:packet.id,status:record.status,text_characters:record.text_characters}));

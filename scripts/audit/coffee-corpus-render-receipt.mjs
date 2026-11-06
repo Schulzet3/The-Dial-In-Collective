@@ -10,6 +10,11 @@ export async function isReusableRenderReceipt(receipt, packet, dir) {
   try {
     const data = JSON.parse(await fs.readFile(path.join(dir, 'rendered-source.json'), 'utf8'));
     if (typeof data?.visible_text !== 'string' || receipt.text_characters !== data.visible_text.length) return false;
+    // New captures bind equal-length visible-text edits to their original evidence.
+    // Legacy receipts have no digest and stay reusable pending coordinated migration.
+    if (receipt.text_sha256 !== undefined &&
+        (!/^[0-9a-f]{64}$/.test(receipt.text_sha256) ||
+         crypto.createHash('sha256').update(data.visible_text).digest('hex') !== receipt.text_sha256)) return false;
     if (receipt.dom_truncated === true) return true; // HTML intentionally omitted above the size cap.
     if (receipt.dom_truncated !== false || !Number.isSafeInteger(receipt.dom_bytes) ||
         !/^[0-9a-f]{64}$/.test(receipt.dom_sha256 ?? '')) return false;
