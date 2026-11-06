@@ -40,7 +40,8 @@ function measuredRecipeShots(shots) {
   finite(sh.timeS)&&sh.timeS>0);
 }
 export function familyStats(s,id) {
- const shots=measuredRecipeShots(familyShots(s,id));if(!shots.length)return null;
+ const historical=familyShots(s,id);if(!historical.length)return null;
+ const shots=measuredRecipeShots(historical);
  return {ratio:stats(shots.map(x=>x.yieldG/x.doseG),{singleWidth:1/(mean(shots.map(x=>x.doseG))||18)}),time:stats(shots.map(x=>x.timeS),{singleWidth:2}),count:shots.length,confirmed:shots.length>=2};
 }
 export function familiesFor(s,coffeeId,style) {return s.families.filter(f=>f.coffeeId===coffeeId&&f.style===style&&measuredRecipeShots(familyShots(s,f.id)).length);}

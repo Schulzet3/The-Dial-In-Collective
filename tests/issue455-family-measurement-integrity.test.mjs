@@ -27,7 +27,11 @@ test('#455 R078 corrupted all-green imported rows cannot establish personal reci
   {doseG:Infinity},{yieldG:Infinity}
  ]){
   const s=state([shot('invalid',overrides)]),before=structuredClone(s);
-  assert.equal(familyStats(s,'family-a'),null,JSON.stringify(overrides));
+  const stats=familyStats(s,'family-a');
+  assert.equal(stats.ratio,null,JSON.stringify(overrides));
+  assert.equal(stats.time,null);
+  assert.equal(stats.count,0);
+  assert.equal(stats.confirmed,false);
   assert.equal(familiesFor(s,'coffee','Turbo').length,0);
   assert.equal(choose(s),null);
   assert.equal(familyShots(s,'family-a').length,1,'historical five-green record remains visible');
