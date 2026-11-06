@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// Release20 blocked dependency #1044: independently verify current #431/#437/#440 source, Add Coffee and review output; no corpus certification.
 // Issue33: selected original603 public URLs; captures are NOT automatic certification.
 import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
 import {join} from 'node:path';
