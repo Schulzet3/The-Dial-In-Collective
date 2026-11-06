@@ -1,0 +1,839 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "S2-DISJOINT-F059-P059-20261106-N15A",
+  "review_date_utc": "2026-11-06",
+  "review_class": "AI_DIRECT_NUMBERED_LINE_SEMANTIC_REVIEW_NOT_HUMAN_CERTIFICATION",
+  "authorizations": "Development-only; no deployment, provider, member data, production SQL/Auth/Edge actions",
+  "frozen_source": {
+    "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+    "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+    "file_index": 59,
+    "path": "docs/DECISION_LEDGER.json",
+    "blob_sha": "195c3e4de415afef4515a6291c399a1c9001b610",
+    "range": [
+      2806,
+      2825
+    ],
+    "per_line": [
+      {
+        "line": 2806,
+        "source_text": "    \"baseline_guard_commit\": \"26a63b583b5e37ab5e4b47347ab8ce51577d1a2e\",",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Records the historical baseline-guard commit for migration reconciliation",
+        "quality": "Dated JSON ledger provenance; not current empirical acceptance",
+        "security_privacy_performance_integrity_risk": "A Git SHA is provenance, not independently verified migration behavior",
+        "dead_or_obsolete": "Historical entry must be preserved; present-day applicability requires later decision/provider reconciliation",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2914,
+          "exact_text": true
+        },
+        "testability": "Check referenced commit and migration-history test before claiming effectiveness",
+        "fix_removal_improvement": "Keep dated reference; no live code edit",
+        "locked_decisions_fit": "Historical evidence only; latest Locked #417/#457 and #96 apply, no new authority"
+      },
+      {
+        "line": 2807,
+        "source_text": "    \"test_path_corrections\": [",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Begins the list of two test-path correction commits",
+        "quality": "Dated JSON ledger provenance; not current empirical acceptance",
+        "security_privacy_performance_integrity_risk": "Structural array only; falsely describing this as test execution would overstate confidence",
+        "dead_or_obsolete": "Historical entry must be preserved; present-day applicability requires later decision/provider reconciliation",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2915,
+          "exact_text": true
+        },
+        "testability": "Parse JSON and inspect each referenced patch",
+        "fix_removal_improvement": "No cleanup justified",
+        "locked_decisions_fit": "Historical evidence only; latest Locked #417/#457 and #96 apply, no new authority"
+      },
+      {
+        "line": 2808,
+        "source_text": "      \"5255e817c98cc0597c074f7cca44d9cead7882ac\",",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Identifies first past test-path correction by exact commit ID",
+        "quality": "Dated JSON ledger provenance; not current empirical acceptance",
+        "security_privacy_performance_integrity_risk": "Git SHA itself does not prove old test-path repair still holds",
+        "dead_or_obsolete": "Historical entry must be preserved; present-day applicability requires later decision/provider reconciliation",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2916,
+          "exact_text": true
+        },
+        "testability": "Trace the referenced commit's diff and old CI",
+        "fix_removal_improvement": "Retain provenance",
+        "locked_decisions_fit": "Historical evidence only; latest Locked #417/#457 and #96 apply, no new authority"
+      },
+      {
+        "line": 2809,
+        "source_text": "      \"7891fc22f995bbdca902ca6766d88875b43d843a\"",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Identifies second past test-path correction by exact commit ID",
+        "quality": "Dated JSON ledger provenance; not current empirical acceptance",
+        "security_privacy_performance_integrity_risk": "Separate from preceding commit; order does not establish causality",
+        "dead_or_obsolete": "Historical entry must be preserved; present-day applicability requires later decision/provider reconciliation",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2917,
+          "exact_text": true
+        },
+        "testability": "Compare second diff to first and dated tests",
+        "fix_removal_improvement": "Retain audit trail without speculative deduplication",
+        "locked_decisions_fit": "Historical evidence only; latest Locked #417/#457 and #96 apply, no new authority"
+      },
+      {
+        "line": 2810,
+        "source_text": "    ],",
+        "classification": "reviewed_structure_or_comment",
+        "behavior": "Closes the historical test-path correction list",
+        "quality": "Dated JSON ledger provenance; not current empirical acceptance",
+        "security_privacy_performance_integrity_risk": "Pure JSON structure; list values alone are no live CI guarantee",
+        "dead_or_obsolete": "Historical entry must be preserved; present-day applicability requires later decision/provider reconciliation",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2918,
+          "exact_text": true
+        },
+        "testability": "Run JSON parse and validate expected two-item shape",
+        "fix_removal_improvement": "No improvement indicated",
+        "locked_decisions_fit": "Historical evidence only; latest Locked #417/#457 and #96 apply, no new authority"
+      },
+      {
+        "line": 2811,
+        "source_text": "    \"verified_checks\": {",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Opens dated verification-check identifiers",
+        "quality": "Dated JSON ledger provenance; not current empirical acceptance",
+        "security_privacy_performance_integrity_risk": "These are recorded historical run IDs, not active CI statuses",
+        "dead_or_obsolete": "Historical entry must be preserved; present-day applicability requires later decision/provider reconciliation",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2919,
+          "exact_text": true
+        },
+        "testability": "Open the three exact historical Actions runs",
+        "fix_removal_improvement": "Do not infer current pass from old references",
+        "locked_decisions_fit": "Historical evidence only; latest Locked #417/#457 and #96 apply, no new authority"
+      },
+      {
+        "line": 2812,
+        "source_text": "      \"isolated_sql\": 39173038464,",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Points to the isolated-SQL run 39173038464",
+        "quality": "Dated JSON ledger provenance; not current empirical acceptance",
+        "security_privacy_performance_integrity_risk": "A past isolated SQL result cannot certify hosted SQL/Auth",
+        "dead_or_obsolete": "Historical entry must be preserved; present-day applicability requires later decision/provider reconciliation",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2920,
+          "exact_text": true
+        },
+        "testability": "Check that run's actual conclusion and skipped jobs",
+        "fix_removal_improvement": "Preserve as historical evidence",
+        "locked_decisions_fit": "Historical evidence only; latest Locked #417/#457 and #96 apply, no new authority"
+      },
+      {
+        "line": 2813,
+        "source_text": "      \"node_build\": 39173210144,",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Points to Node/build run 39173210144",
+        "quality": "Dated JSON ledger provenance; not current empirical acceptance",
+        "security_privacy_performance_integrity_risk": "Old test count and source SHA are not supplied on this line",
+        "dead_or_obsolete": "Historical entry must be preserved; present-day applicability requires later decision/provider reconciliation",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2921,
+          "exact_text": true
+        },
+        "testability": "Read run and confirm its exact commit before reusing evidence",
+        "fix_removal_improvement": "No live test change supported",
+        "locked_decisions_fit": "Historical evidence only; latest Locked #417/#457 and #96 apply, no new authority"
+      },
+      {
+        "line": 2814,
+        "source_text": "      \"cloud_mobile\": 39173210150",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Points to cloud/mobile run 39173210150",
+        "quality": "Dated JSON ledger provenance; not current empirical acceptance",
+        "security_privacy_performance_integrity_risk": "Historical cloud/mobile CI cannot prove current physical device operation",
+        "dead_or_obsolete": "Historical entry must be preserved; present-day applicability requires later decision/provider reconciliation",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2922,
+          "exact_text": true
+        },
+        "testability": "Read run's job steps and tested commit",
+        "fix_removal_improvement": "No duplicate current test needed merely for this record",
+        "locked_decisions_fit": "Historical evidence only; latest Locked #417/#457 and #96 apply, no new authority"
+      },
+      {
+        "line": 2815,
+        "source_text": "    },",
+        "classification": "reviewed_structure_or_comment",
+        "behavior": "Closes the verified_checks mapping",
+        "quality": "Dated JSON ledger provenance; not current empirical acceptance",
+        "security_privacy_performance_integrity_risk": "Only a JSON delimiter; implies no additional CI checks",
+        "dead_or_obsolete": "Historical entry must be preserved; present-day applicability requires later decision/provider reconciliation",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2923,
+          "exact_text": true
+        },
+        "testability": "Parse JSON and inspect adjacent three properties",
+        "fix_removal_improvement": "Retain structural delimiter",
+        "locked_decisions_fit": "Historical evidence only; latest Locked #417/#457 and #96 apply, no new authority"
+      },
+      {
+        "line": 2816,
+        "source_text": "    \"hosted_migration_count\": 28,",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Reports 28 production-applied migrations at October 18 checkpoint",
+        "quality": "Dated JSON ledger provenance; not current empirical acceptance",
+        "security_privacy_performance_integrity_risk": "Historical hosted count is not current authoritative production count",
+        "dead_or_obsolete": "Historical entry must be preserved; present-day applicability requires later decision/provider reconciliation",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2924,
+          "exact_text": true
+        },
+        "testability": "Compare with dated migration-history evidence, not latest provider assumptions",
+        "fix_removal_improvement": "Leave immutable old count as historical",
+        "locked_decisions_fit": "Historical evidence only; latest Locked #417/#457 and #96 apply, no new authority"
+      },
+      {
+        "line": 2817,
+        "source_text": "    \"unpublished_candidate\": \"20261018221843_dic_community_release_context.sql\",",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Names a 20261018221843 Community migration then unpublished",
+        "quality": "Dated JSON ledger provenance; not current empirical acceptance",
+        "security_privacy_performance_integrity_risk": "This is time-scoped and must not be treated as permission to apply SQL now",
+        "dead_or_obsolete": "Historical entry must be preserved; present-day applicability requires later decision/provider reconciliation",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2925,
+          "exact_text": true
+        },
+        "testability": "Cross-reference later applied/released migration receipts",
+        "fix_removal_improvement": "Preserve original migration, do not run it",
+        "locked_decisions_fit": "Historical evidence only; latest Locked #417/#457 and #96 apply, no new authority"
+      },
+      {
+        "line": 2818,
+        "source_text": "    \"effect_on_locked_decisions\": \"none; original 79 Locked and 20 Open preserved\",",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Claims 79 Locked/20 Open original baseline unaffected",
+        "quality": "Dated JSON ledger provenance; not current empirical acceptance",
+        "security_privacy_performance_integrity_risk": "Historical assertion does not supersede later explicit Locked decisions",
+        "dead_or_obsolete": "Historical entry must be preserved; present-day applicability requires later decision/provider reconciliation",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2926,
+          "exact_text": true
+        },
+        "testability": "Compare exact archived baseline and later owner decisions",
+        "fix_removal_improvement": "No Locked decision rewrite",
+        "locked_decisions_fit": "Historical evidence only; latest Locked #417/#457 and #96 apply, no new authority"
+      },
+      {
+        "line": 2819,
+        "source_text": "    \"verified_production_mutations\": \"none\",",
+        "classification": "reviewed_substantive_source",
+        "behavior": "States this checkpoint performed no verified production mutations",
+        "quality": "Dated JSON ledger provenance; not current empirical acceptance",
+        "security_privacy_performance_integrity_risk": "Limited to the historical task scope; not a claim of global absence of mutations",
+        "dead_or_obsolete": "Historical entry must be preserved; present-day applicability requires later decision/provider reconciliation",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2927,
+          "exact_text": true
+        },
+        "testability": "Read contemporaneous provider/audit logs if needed",
+        "fix_removal_improvement": "No provider write",
+        "locked_decisions_fit": "Historical evidence only; latest Locked #417/#457 and #96 apply, no new authority"
+      },
+      {
+        "line": 2820,
+        "source_text": "    \"external_limits\": [",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Begins list of known evidence gaps",
+        "quality": "Dated JSON ledger provenance; not current empirical acceptance",
+        "security_privacy_performance_integrity_risk": "Scope of limits matters for current security/integrity assurance",
+        "dead_or_obsolete": "Historical entry must be preserved; present-day applicability requires later decision/provider reconciliation",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2928,
+          "exact_text": true
+        },
+        "testability": "Parse enumerated limits separately",
+        "fix_removal_improvement": "Preserve gaps and their ownership",
+        "locked_decisions_fit": "Historical evidence only; latest Locked #417/#457 and #96 apply, no new authority"
+      },
+      {
+        "line": 2821,
+        "source_text": "      \"no linked CLI db push --dry-run evidence\",",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Records lack of linked CLI database dry-run evidence",
+        "quality": "Dated JSON ledger provenance; not current empirical acceptance",
+        "security_privacy_performance_integrity_risk": "Without dry-run proof, do not label that operation tested",
+        "dead_or_obsolete": "Historical entry must be preserved; present-day applicability requires later decision/provider reconciliation",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2929,
+          "exact_text": true
+        },
+        "testability": "Locate original CLI evidence, if any; avoid running provider write",
+        "fix_removal_improvement": "Historical gap, not current migration blocker by itself",
+        "locked_decisions_fit": "Historical evidence only; latest Locked #417/#457 and #96 apply, no new authority"
+      },
+      {
+        "line": 2822,
+        "source_text": "      \"Auth leaked-password protection disabled\",",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Notes leaked-password check disabled at dated provider state",
+        "quality": "Dated JSON ledger provenance; not current empirical acceptance",
+        "security_privacy_performance_integrity_risk": "Security feature depends on owner Locked opt-out and plan policy, not automatic misconfiguration remediation",
+        "dead_or_obsolete": "Historical entry must be preserved; present-day applicability requires later decision/provider reconciliation",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2930,
+          "exact_text": true
+        },
+        "testability": "Cross-check latest #96 decision and provider settings before policy change",
+        "fix_removal_improvement": "No paid upgrade or Auth setting mutation",
+        "locked_decisions_fit": "Historical evidence only; latest Locked #417/#457 and #96 apply, no new authority"
+      },
+      {
+        "line": 2823,
+        "source_text": "      \"real-member JWT negative acceptance open\",",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Notes missing real-member JWT negative acceptance at checkpoint",
+        "quality": "Dated JSON ledger provenance; not current empirical acceptance",
+        "security_privacy_performance_integrity_risk": "Real signed-in privacy coverage gap; independent #96 owner controls",
+        "dead_or_obsolete": "Historical entry must be preserved; present-day applicability requires later decision/provider reconciliation",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2931,
+          "exact_text": true
+        },
+        "testability": "Review #96 later genuine JWT checks, not isolated fixture-only passing tests",
+        "fix_removal_improvement": "No test account or Auth modification",
+        "locked_decisions_fit": "Historical evidence only; latest Locked #417/#457 and #96 apply, no new authority"
+      },
+      {
+        "line": 2824,
+        "source_text": "      \"offsite Drive courier bytes not independently proven\",",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Notes offsite Drive courier bytes were not independently verified",
+        "quality": "Dated JSON ledger provenance; not current empirical acceptance",
+        "security_privacy_performance_integrity_risk": "Backup durability assertion is bounded; no proof of current loss",
+        "dead_or_obsolete": "Historical entry must be preserved; present-day applicability requires later decision/provider reconciliation",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2932,
+          "exact_text": true
+        },
+        "testability": "Check #28 subsequent independent encrypted byte/hash verification",
+        "fix_removal_improvement": "Do not change backup destination or delete old files",
+        "locked_decisions_fit": "Historical evidence only; latest Locked #417/#457 and #96 apply, no new authority"
+      },
+      {
+        "line": 2825,
+        "source_text": "      \"other restricted provider controls owner-managed\"",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Notes other restricted provider controls were owner-managed",
+        "quality": "Dated JSON ledger provenance; not current empirical acceptance",
+        "security_privacy_performance_integrity_risk": "Provider restrictions do not grant automated administrative authority",
+        "dead_or_obsolete": "Historical entry must be preserved; present-day applicability requires later decision/provider reconciliation",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "docs/DECISION_LEDGER.json",
+          "live_blob_sha": "90233639bef05b1671f5325ebbf89fde1031eac6",
+          "live_line": 2933,
+          "exact_text": true
+        },
+        "testability": "Verify explicit owner authority per specific control",
+        "fix_removal_improvement": "No provider settings changes",
+        "locked_decisions_fit": "Historical evidence only; latest Locked #417/#457 and #96 apply, no new authority"
+      }
+    ]
+  },
+  "pinned_source": {
+    "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+    "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+    "file_index": 59,
+    "path": "scripts/audit/issue33-current-all77-source-probe.mjs",
+    "blob_sha": "2b4f33a364444033edc2872d95f0a7d2f95ab8d4",
+    "range": [
+      1,
+      20
+    ],
+    "per_line": [
+      {
+        "line": 1,
+        "source_text": "// Read-only selected-product source coverage for exactly the 77 original owner URLs.",
+        "classification": "reviewed_structure_or_comment",
+        "behavior": "Comment defines exactly 77 original owner URLs as this probe's intended input",
+        "quality": "Scope comment inspected against actual subsequent guards",
+        "security_privacy_performance_integrity_risk": "Comment cannot itself enforce intake count",
+        "dead_or_obsolete": "Live source present and imported; not proven dead",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "scripts/audit/issue33-current-all77-source-probe.mjs",
+          "live_blob_sha": "2b4f33a364444033edc2872d95f0a7d2f95ab8d4",
+          "live_line": 1,
+          "exact_text": true
+        },
+        "testability": "Compare validation at lines 11-13 and current register",
+        "fix_removal_improvement": "Retain precise scope comment",
+        "locked_decisions_fit": "Read-only diagnostic scope; owner #33 retains extractor adjudication"
+      },
+      {
+        "line": 2,
+        "source_text": "// This is a CURRENT SOURCE PROBE, not a claim of correct fields or a substitute",
+        "classification": "reviewed_structure_or_comment",
+        "behavior": "Warns that current-source probe is diagnostic rather than adjudication",
+        "quality": "Scope comment inspected against actual subsequent guards",
+        "security_privacy_performance_integrity_risk": "A diagnostic success must never be sold as an accepted coffee field",
+        "dead_or_obsolete": "Live source present and imported; not proven dead",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "scripts/audit/issue33-current-all77-source-probe.mjs",
+          "live_blob_sha": "2b4f33a364444033edc2872d95f0a7d2f95ab8d4",
+          "live_line": 2,
+          "exact_text": true
+        },
+        "testability": "Inspect returned statuses and #33 acceptance separately",
+        "fix_removal_improvement": "No change to policy",
+        "locked_decisions_fit": "Read-only diagnostic scope; owner #33 retains extractor adjudication"
+      },
+      {
+        "line": 3,
+        "source_text": "// for individual source adjudication, original603 acceptance or signed-in app QA.",
+        "classification": "reviewed_structure_or_comment",
+        "behavior": "Separates individual source review, 603 oracle and live authenticated QA",
+        "quality": "Scope comment inspected against actual subsequent guards",
+        "security_privacy_performance_integrity_risk": "All three are distinct unperformed acceptances for this file",
+        "dead_or_obsolete": "Live source present and imported; not proven dead",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "scripts/audit/issue33-current-all77-source-probe.mjs",
+          "live_blob_sha": "2b4f33a364444033edc2872d95f0a7d2f95ab8d4",
+          "live_line": 3,
+          "exact_text": true
+        },
+        "testability": "Check official source and frozen tests independently",
+        "fix_removal_improvement": "Avoid conflating test evidence",
+        "locked_decisions_fit": "Read-only diagnostic scope; owner #33 retains extractor adjudication"
+      },
+      {
+        "line": 4,
+        "source_text": "// Never use credentials, pay-per-request APIs, member data or production DB writes.",
+        "classification": "reviewed_structure_or_comment",
+        "behavior": "Forbids credentials, paid APIs, member data and production mutations",
+        "quality": "Scope comment inspected against actual subsequent guards",
+        "security_privacy_performance_integrity_risk": "Comment alone does not enforce network boundaries",
+        "dead_or_obsolete": "Live source present and imported; not proven dead",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "scripts/audit/issue33-current-all77-source-probe.mjs",
+          "live_blob_sha": "2b4f33a364444033edc2872d95f0a7d2f95ab8d4",
+          "live_line": 4,
+          "exact_text": true
+        },
+        "testability": "Trace fetchPublicCoffeeHtml and deployment context for guardrails",
+        "fix_removal_improvement": "No production invocation or provider write",
+        "locked_decisions_fit": "Read-only diagnostic scope; owner #33 retains extractor adjudication"
+      },
+      {
+        "line": 5,
+        "source_text": "import {readFileSync} from 'node:fs';",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Imports synchronous local file reader for fixed register",
+        "quality": "Readable direct source; behavior assessed against parser and URL-guard interfaces",
+        "security_privacy_performance_integrity_risk": "Synchronous read is startup-only but can throw if source register absent",
+        "dead_or_obsolete": "Live source present and imported; not proven dead",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "scripts/audit/issue33-current-all77-source-probe.mjs",
+          "live_blob_sha": "2b4f33a364444033edc2872d95f0a7d2f95ab8d4",
+          "live_line": 5,
+          "exact_text": true
+        },
+        "testability": "Run with missing file negative test in isolated process",
+        "fix_removal_improvement": "No performance rewrite without measured bottleneck",
+        "locked_decisions_fit": "Subject to latest Locked #417/#457 and #33 source-specific rules, no publication authority"
+      },
+      {
+        "line": 6,
+        "source_text": "import {createHash} from 'node:crypto';",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Imports createHash for later HTML SHA-256 provenance",
+        "quality": "Readable direct source; behavior assessed against parser and URL-guard interfaces",
+        "security_privacy_performance_integrity_risk": "Hashing captures public HTML; a hash is not semantic extraction proof",
+        "dead_or_obsolete": "Live source present and imported; not proven dead",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "scripts/audit/issue33-current-all77-source-probe.mjs",
+          "live_blob_sha": "2b4f33a364444033edc2872d95f0a7d2f95ab8d4",
+          "live_line": 6,
+          "exact_text": true
+        },
+        "testability": "Recompute SHA on stable fixture HTML",
+        "fix_removal_improvement": "Retain source-bound digest",
+        "locked_decisions_fit": "Subject to latest Locked #417/#457 and #33 source-specific rules, no publication authority"
+      },
+      {
+        "line": 7,
+        "source_text": "import {safeCoffeeUrl,fetchPublicCoffeeHtml} from '../../src/server/coffee-url-guard.mjs';",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Imports URL validator and public HTML fetcher from guarded module",
+        "quality": "Readable direct source; behavior assessed against parser and URL-guard interfaces",
+        "security_privacy_performance_integrity_risk": "SSRF protection depends on actual guard, not import name",
+        "dead_or_obsolete": "Live source present and imported; not proven dead",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "scripts/audit/issue33-current-all77-source-probe.mjs",
+          "live_blob_sha": "2b4f33a364444033edc2872d95f0a7d2f95ab8d4",
+          "live_line": 7,
+          "exact_text": true
+        },
+        "testability": "Trace safeCoffeeUrl and DNS-pinned fetch implementation/tests under #33",
+        "fix_removal_improvement": "No parallel #33 implementation changes",
+        "locked_decisions_fit": "Subject to latest Locked #417/#457 and #33 source-specific rules, no publication authority"
+      },
+      {
+        "line": 8,
+        "source_text": "import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Imports public coffee metadata parser",
+        "quality": "Readable direct source; behavior assessed against parser and URL-guard interfaces",
+        "security_privacy_performance_integrity_risk": "Source parser may yield partial fields and conflicts",
+        "dead_or_obsolete": "Live source present and imported; not proven dead",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "scripts/audit/issue33-current-all77-source-probe.mjs",
+          "live_blob_sha": "2b4f33a364444033edc2872d95f0a7d2f95ab8d4",
+          "live_line": 8,
+          "exact_text": true
+        },
+        "testability": "Trace selected product identity regression tests owned by #33",
+        "fix_removal_improvement": "Preserve official source-only extraction",
+        "locked_decisions_fit": "Subject to latest Locked #417/#457 and #33 source-specific rules, no publication authority"
+      },
+      {
+        "line": 9,
+        "source_text": "const register=JSON.parse(readFileSync(new URL('../../docs/audits/extractor-issue33-independent-77-review-register.json',import.meta.url),'utf8'));",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Reads JSON intake register relative to module and parses synchronously",
+        "quality": "Readable direct source; behavior assessed against parser and URL-guard interfaces",
+        "security_privacy_performance_integrity_risk": "No try/catch: corrupt register fails closed before network; file integrity not hash-pinned here",
+        "dead_or_obsolete": "Live source present and imported; not proven dead",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "scripts/audit/issue33-current-all77-source-probe.mjs",
+          "live_blob_sha": "2b4f33a364444033edc2872d95f0a7d2f95ab8d4",
+          "live_line": 9,
+          "exact_text": true
+        },
+        "testability": "Test malformed/missing register and authoritative 77 identity",
+        "fix_removal_improvement": "Consider digest pin only after approved policy review",
+        "locked_decisions_fit": "Subject to latest Locked #417/#457 and #33 source-specific rules, no publication authority"
+      },
+      {
+        "line": 10,
+        "source_text": "const rows=register.records;",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Retrieves records collection from parsed register",
+        "quality": "Readable direct source; behavior assessed against parser and URL-guard interfaces",
+        "security_privacy_performance_integrity_risk": "Missing records handled by next validation, not silently accepted",
+        "dead_or_obsolete": "Live source present and imported; not proven dead",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "scripts/audit/issue33-current-all77-source-probe.mjs",
+          "live_blob_sha": "2b4f33a364444033edc2872d95f0a7d2f95ab8d4",
+          "live_line": 10,
+          "exact_text": true
+        },
+        "testability": "Test no records property",
+        "fix_removal_improvement": "No duplicated guard",
+        "locked_decisions_fit": "Subject to latest Locked #417/#457 and #33 source-specific rules, no publication authority"
+      },
+      {
+        "line": 11,
+        "source_text": "if(!Array.isArray(rows)||rows.length!==77||new Set(rows.map(x=>x.original_product_url)).size!==77||",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Starts strict array, count-77 and URL uniqueness predicate",
+        "quality": "Readable direct source; behavior assessed against parser and URL-guard interfaces",
+        "security_privacy_performance_integrity_risk": "Set uniqueness is exact-string, not canonical URL equivalence; URL guard follows",
+        "dead_or_obsolete": "Live source present and imported; not proven dead",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "scripts/audit/issue33-current-all77-source-probe.mjs",
+          "live_blob_sha": "2b4f33a364444033edc2872d95f0a7d2f95ab8d4",
+          "live_line": 11,
+          "exact_text": true
+        },
+        "testability": "Negative tests: 76/78 rows and duplicated literal URL",
+        "fix_removal_improvement": "Keep source-specific owner-approved count",
+        "locked_decisions_fit": "Subject to latest Locked #417/#457 and #33 source-specific rules, no publication authority"
+      },
+      {
+        "line": 12,
+        "source_text": "   rows.some((x,i)=>x.number!==i+1||typeof x.original_product_url!=='string'||!safeCoffeeUrl(x.original_product_url)))",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Checks numbered row sequence, URL string type and safe URL format",
+        "quality": "Readable direct source; behavior assessed against parser and URL-guard interfaces",
+        "security_privacy_performance_integrity_risk": "Unsafe URL should abort all requests before any fetch",
+        "dead_or_obsolete": "Live source present and imported; not proven dead",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "scripts/audit/issue33-current-all77-source-probe.mjs",
+          "live_blob_sha": "2b4f33a364444033edc2872d95f0a7d2f95ab8d4",
+          "live_line": 12,
+          "exact_text": true
+        },
+        "testability": "Test unsafe scheme/loopback and swapped numbering with guarded test fixtures",
+        "fix_removal_improvement": "No weaker URL validation",
+        "locked_decisions_fit": "Subject to latest Locked #417/#457 and #33 source-specific rules, no publication authority"
+      },
+      {
+        "line": 13,
+        "source_text": " throw Error('Authoritative numbered 77 intake changed: refuse to probe an unreviewed or unsafe URL list');",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Throws if authoritative numbered intake changes",
+        "quality": "Readable direct source; behavior assessed against parser and URL-guard interfaces",
+        "security_privacy_performance_integrity_risk": "Fail-closed behavior protects 77-case denominator; does not prove source authenticity",
+        "dead_or_obsolete": "Live source present and imported; not proven dead",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "scripts/audit/issue33-current-all77-source-probe.mjs",
+          "live_blob_sha": "2b4f33a364444033edc2872d95f0a7d2f95ab8d4",
+          "live_line": 13,
+          "exact_text": true
+        },
+        "testability": "Assert throw on invalid register and no network requests",
+        "fix_removal_improvement": "Preserve explicit refusal",
+        "locked_decisions_fit": "Subject to latest Locked #417/#457 and #33 source-specific rules, no publication authority"
+      },
+      {
+        "line": 14,
+        "source_text": "const clamp=value=>typeof value==='string'?value.replace(/\\s+/g,' ').trim().slice(0,240):null;",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Defines string-only whitespace normalization, trim and 240-character bound",
+        "quality": "Readable direct source; behavior assessed against parser and URL-guard interfaces",
+        "security_privacy_performance_integrity_risk": "Non-string values become null; current parser normalizes elevation display to string; loss of other typed evidence unproven",
+        "dead_or_obsolete": "Live source present and imported; not proven dead",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "scripts/audit/issue33-current-all77-source-probe.mjs",
+          "live_blob_sha": "2b4f33a364444033edc2872d95f0a7d2f95ab8d4",
+          "live_line": 14,
+          "exact_text": true
+        },
+        "testability": "Test long/multiline strings and type-sensitive parsed fields",
+        "fix_removal_improvement": "Do not expand types absent #33 source contract",
+        "locked_decisions_fit": "Subject to latest Locked #417/#457 and #33 source-specific rules, no publication authority"
+      },
+      {
+        "line": 15,
+        "source_text": "const takeFields=result=>{",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Begins takeFields helper for bounded parser result",
+        "quality": "Readable direct source; behavior assessed against parser and URL-guard interfaces",
+        "security_privacy_performance_integrity_risk": "Helper must reject fields on parser failure",
+        "dead_or_obsolete": "Live source present and imported; not proven dead",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "scripts/audit/issue33-current-all77-source-probe.mjs",
+          "live_blob_sha": "2b4f33a364444033edc2872d95f0a7d2f95ab8d4",
+          "live_line": 15,
+          "exact_text": true
+        },
+        "testability": "Test ok=false and missing result",
+        "fix_removal_improvement": "No current defect shown",
+        "locked_decisions_fit": "Subject to latest Locked #417/#457 and #33 source-specific rules, no publication authority"
+      },
+      {
+        "line": 16,
+        "source_text": " const fields=result?.ok?result.fields||{}:{};",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Returns field object only for ok truthy result, otherwise empty",
+        "quality": "Readable direct source; behavior assessed against parser and URL-guard interfaces",
+        "security_privacy_performance_integrity_risk": "Truthy ok convention comes from parser contract; malformed payloads with truthy ok remain possible in synthetic calls",
+        "dead_or_obsolete": "Live source present and imported; not proven dead",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "scripts/audit/issue33-current-all77-source-probe.mjs",
+          "live_blob_sha": "2b4f33a364444033edc2872d95f0a7d2f95ab8d4",
+          "live_line": 16,
+          "exact_text": true
+        },
+        "testability": "Test failed parser and empty fields outputs",
+        "fix_removal_improvement": "Preserve conservative handling",
+        "locked_decisions_fit": "Subject to latest Locked #417/#457 and #33 source-specific rules, no publication authority"
+      },
+      {
+        "line": 17,
+        "source_text": " return Object.fromEntries(['name','roaster','origin','elevation_m','roast_level','process','variety','producer','tasting_notes','release_label']",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Builds allowlist of ten selected public source fields",
+        "quality": "Readable direct source; behavior assessed against parser and URL-guard interfaces",
+        "security_privacy_performance_integrity_risk": "Allowlists prevent accidental exposure of nonselected source metadata; omission of evidence extras is intentional scope",
+        "dead_or_obsolete": "Live source present and imported; not proven dead",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "scripts/audit/issue33-current-all77-source-probe.mjs",
+          "live_blob_sha": "2b4f33a364444033edc2872d95f0a7d2f95ab8d4",
+          "live_line": 17,
+          "exact_text": true
+        },
+        "testability": "Check output keys against #33 intake acceptance matrix",
+        "fix_removal_improvement": "Do not broaden without source-specific approval",
+        "locked_decisions_fit": "Subject to latest Locked #417/#457 and #33 source-specific rules, no publication authority"
+      },
+      {
+        "line": 18,
+        "source_text": "   .filter(key=>fields[key]!=null).map(key=>[key,clamp(fields[key])]));",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Drops null/undefined values before mapping values through clamp",
+        "quality": "Readable direct source; behavior assessed against parser and URL-guard interfaces",
+        "security_privacy_performance_integrity_risk": "A non-string non-null value would be retained with null result; parser currently normalizes elevation display to string",
+        "dead_or_obsolete": "Live source present and imported; not proven dead",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "scripts/audit/issue33-current-all77-source-probe.mjs",
+          "live_blob_sha": "2b4f33a364444033edc2872d95f0a7d2f95ab8d4",
+          "live_line": 18,
+          "exact_text": true
+        },
+        "testability": "Test strict field types and avoid treating null as confirmed origin",
+        "fix_removal_improvement": "Potential hygiene test only; no proven real failure",
+        "locked_decisions_fit": "Subject to latest Locked #417/#457 and #33 source-specific rules, no publication authority"
+      },
+      {
+        "line": 19,
+        "source_text": "};",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Closes takeFields helper",
+        "quality": "Readable direct source; behavior assessed against parser and URL-guard interfaces",
+        "security_privacy_performance_integrity_risk": "Structural syntax no side effect except function completion",
+        "dead_or_obsolete": "Live source present and imported; not proven dead",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "scripts/audit/issue33-current-all77-source-probe.mjs",
+          "live_blob_sha": "2b4f33a364444033edc2872d95f0a7d2f95ab8d4",
+          "live_line": 19,
+          "exact_text": true
+        },
+        "testability": "Node parse/syntax test and helper-focused fixtures",
+        "fix_removal_improvement": "No refactor justified",
+        "locked_decisions_fit": "Subject to latest Locked #417/#457 and #33 source-specific rules, no publication authority"
+      },
+      {
+        "line": 20,
+        "source_text": "async function one(row){",
+        "classification": "reviewed_substantive_source",
+        "behavior": "Declares async one-row probe unit",
+        "quality": "Readable direct source; behavior assessed against parser and URL-guard interfaces",
+        "security_privacy_performance_integrity_risk": "Later caller controls batching; opening signature alone supplies no concurrency bound",
+        "dead_or_obsolete": "Live source present and imported; not proven dead",
+        "redundancy_duplication": "No safe deletion or duplicate logic established by this individual record",
+        "exact_current_counterpart": {
+          "path": "scripts/audit/issue33-current-all77-source-probe.mjs",
+          "live_blob_sha": "2b4f33a364444033edc2872d95f0a7d2f95ab8d4",
+          "live_line": 20,
+          "exact_text": true
+        },
+        "testability": "Inspect lines 20-49 and test one-row error isolation",
+        "fix_removal_improvement": "Preserve bounded public-source call path",
+        "locked_decisions_fit": "Subject to latest Locked #417/#457 and #33 source-specific rules, no publication authority"
+      }
+    ]
+  },
+  "live_counterpart": {
+    "observed_commit": "3bb44344520629145402c7120352a38b30b6889b",
+    "source_blobs": {
+      "docs/DECISION_LEDGER.json": "90233639bef05b1671f5325ebbf89fde1031eac6",
+      "scripts/audit/issue33-current-all77-source-probe.mjs": "2b4f33a364444033edc2872d95f0a7d2f95ab8d4"
+    },
+    "mapping": "Frozen lines 2806-2825 map byte-exact to live 2914-2933; pinned lines 1-20 map same physical lines and SHA."
+  },
+  "prior_evidence": "Original workflow S2-001 41/41 source_text reverified this run, no duplicate credit. Older grouped R2-001 is insufficient as nine-dimension strict proof; not promoted. Previous N14B frozen ended 2805 and P058 ended 121, disjoint paths/intervals.",
+  "findings_disposition": [
+    {
+      "id": "F059-20261106-historical-evidence-gaps",
+      "type": "historical_limits",
+      "conclusion": "Recorded lack of JWT negative acceptance, optional leaked-password protection and backup independent bytes at 2026-10-18; these are dated evidence, not new unmitigated current facts.",
+      "owner": "Issues #96/#28; later owner locked supersessions",
+      "status": "No new active defect established"
+    },
+    {
+      "id": "P059-20261106-probe-clamp",
+      "type": "diagnostic_boundary",
+      "conclusion": "clamp() is string-only; source metadata normalizer explicitly returns a string for elevation_m, so numeric-loss hypothesis is not a demonstrated current source defect.",
+      "owner": "Issue #33",
+      "status": "No change"
+    }
+  ],
+  "coverage_status": {
+    "new_frozen_original_lines": 20,
+    "new_pinned_original_lines": 20,
+    "new_postpin_live_delta_lines": 0,
+    "canonical_cursors_unchanged": true,
+    "requires_cross_agent_nonoverlap_CAS": true,
+    "full_audit_complete": false
+  },
+  "tests": {
+    "manual_source_line_count": 40,
+    "exact_source_text_live_counterpart": 40,
+    "app_node_browser_sql_auth_original603": "NOT_RUN (evidence-only commit)",
+    "ci": "PENDING exact head checks after PR creation"
+  },
+  "safeguards": {
+    "original603_oracle_unchanged": true,
+    "no_runtime_changes": true,
+    "no_production_writes": true,
+    "no_release_ready_promotion": true
+  }
+}
