@@ -7,7 +7,7 @@ import {isRecurringCoffeeHarvestWindow,isGenericCoffeeLotLabel} from '../../supa
 import {extractRoastVisualEvidence,normalizeRoastLabel} from './roast-level-evidence.mjs';
 import {extractLayoutEvidence,coffeeLayoutDetailConflicts} from './coffee-product-layouts.mjs';
 import {extractNarrativeCoffeeEvidence} from './coffee-narrative-evidence.mjs';
-import {extractCoffeeBlendEvidence,extractSelectedBlendCommunityCredit,extractSelectedRegionalBlendElevation,withoutCoffeeBlendComponentSpecs} from './coffee-blend-evidence.mjs';
+import {extractCoffeeBlendEvidence,extractSelectedBlendCommunityCredit,extractSelectedRegionalBlendElevation,selectedPartialBlendProcess,withoutCoffeeBlendComponentSpecs} from './coffee-blend-evidence.mjs';
 import {extractCoffeeIdentityEvidence,extractCoffeeCurrentReleasePrefixes,extractCoffeeTitleOrigin,extractCoffeeGeographyTuples,coffeeDescriptionCountryMismatch,coffeeDescriptionNamedCoffeeMismatch,explicitCoffeeVarietyList,literalCoffeeSourcePlaces} from './coffee-identity-evidence.mjs';
 import {extractProductEspressoReference} from './coffee-espresso-evidence.mjs';
 import {productMarkup,coffeeHtmlAttributes,withoutDetachedFarmerProfiles} from './coffee-product-scope.mjs';
@@ -1666,6 +1666,24 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    // whose other component's treatment is not published.
    delete fields.process;
   }else if(!fields.process&&blend.complete_process)fields.process=blend.processes[0];
+ }
+ // The selected blend names an explicitly processed component and a separate
+ // regional coffee with no method. Do not assign the first method to both.
+ const partialProcess=selectedPartialBlendProcess(canonicalProduct,{
+  name:fields.name,process:fields.process,decode:clean
+ });
+ if(partialProcess&&!conflicts.has('process')){
+  delete fields.process;
+  const note='Selected blend component '+partialProcess.component+
+   ' uses '+partialProcess.method+'; '+partialProcess.unverified_partner+
+   ' has no published process. Whole blend processing remains unverified.';
+  roaster_details.processing_detail=[roaster_details.processing_detail,note]
+   .filter(Boolean).join(' | ').slice(0,900);
+  if(source_facts.length<384)source_facts.push({
+   field:'component_process',label:'Incomplete selected blend processing',
+   value:note,source_url,source_type:'html',
+   section:'Selected blend description versus component processing'
+  });
  }
  // Community is an explicitly labeled producing group, not a named farmer.
  // Reject mentions missing the same selected Product's location and process.

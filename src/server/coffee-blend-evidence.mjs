@@ -302,6 +302,34 @@ function narrativeComposition(page,name){
   incomplete_component_process:!wholeProcess&&places.length>1&&!multiProcess,
   complete_producers:false,complete_varieties:false,complete_origins:wholeOrigins,incomplete_component_origins:incompleteOrigins,component_format:'narrative'};
 }
+/**
+ * A selected blend's current first component can have a named process while
+ * its expressly different partner has no process. Never infer whole-blend
+ * processing from only the first component, related products or old SEO.
+ */
+export function selectedPartialBlendProcess(html,{name='',process='',decode=clean}={}){
+ if(typeof html!=='string'||!name||!['Natural','Washed','Honey','Anaerobic'].includes(process)||
+    typeof decode!=='function'||html.length>2_000_000)return null;
+ const blocks=productCoffeeProse(html,decode);
+ const headings=[...new Set(blocks.filter(block=>block.tag==='h1'&&!block.educational).map(block=>block.text))];
+ if(headings.length!==1||key(headings[0])!==key(name))return null;
+ const allText=blocks.filter(block=>!block.educational).map(block=>block.text).join(' ');
+ const method=new RegExp('\\b'+process+'\\b','i');
+ const global=new RegExp('\\b(?:this|our|the)\\s+blend\\s+(?:(?:is|was)\\s+)?(?:fully\\s+)?'+process+'\\s+processed\\b','i');
+ const both=new RegExp('\\b(?:both|all|each)\\s+(?:(?:of|the|our|its)\\s+)?(?:two\\s+)?(?:blend\\s+)?(?:components?|coffees?|lots?)\\s+(?:are|is|were)\\s+(?:fully\\s+)?'+process+'\\s+processed\\b','i');
+ if(global.test(allText)||both.test(allText))return null;
+ for(const block of blocks){
+  if(block.educational||!['p','li','div'].includes(block.tag)||block.text.length>1500||
+     NONCURRENT_COFFEE_PROSE.test(block.text))continue;
+  const match=block.text.match(/\b(?:this|our|the)\s+blend\s+(?:features|includes)\s+([^.!?]{10,280}?),\s+and\s+pairs\s+it\s+with\s+((?:an?|the)\s+[^.!?]{8,160}?\bcoffee\s+from\s+[^.!?]{3,70})(?=[.!?]|$)/i);
+  if(!match||!method.test(match[1])||
+     /\b(?:processed|processing|process|natural|washed|honey|anaerobic)\b/i.test(match[2]))continue;
+  return {method:process,component:match[1].trim().slice(0,230),
+    unverified_partner:match[2].trim().slice(0,160)};
+ }
+ return null;
+}
+
 export function withoutCoffeeBlendComponentSpecs(html,blend){
  if(!blend?.component_ranges?.length)return html;
  const ranges=blend.component_ranges.filter(range=>Array.isArray(range)&&range.length===2&&range[0]>=0&&range[1]<=html.length&&range[1]>range[0]).sort((a,b)=>a[0]-b[0]);
