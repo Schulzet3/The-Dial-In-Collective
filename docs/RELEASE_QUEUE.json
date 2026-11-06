@@ -10,24 +10,34 @@
     {
       "id": "DIC-Q-455-empty-historic-success-family-ratio-guard",
       "issue": 455,
-      "pr": null,
+      "pr": 977,
       "title": "Keep invalid legacy success ratios from crashing new shot family assignment",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "230c754426567f332d1f854146b762e24bb339e3",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
         "Reproduced directly in current source: assignFamily calls familyStats(...).ratio.center even when stats returned ratio=null for all-green legacy shot with null/zero dose.",
         "Focused imported-module tests: invalid-only old family does not crash, valid measured family still reuses, mixed valid/invalid retains valid selection and raw history.",
-        "New tests, Node22, lint, browser/mobile/offline/a11y, isolated SQL/security/governance NOT RUN at creation; exact PR-head CI and merged verification required."
+        "Exact PR head 0535dc5d63b0e101ebaa74df6c62b29524045370 validate Node22 42189892844 SUCCESS: 2664 PASS, 0 FAIL, 6 intentional SKIP; three new focused direct module cases PASS, lint/build SUCCESS.",
+        "PR-head built Chromium/mobile/390px Log Shot→Rate→Recommendation, visual/accessibility and real service-worker offline 42189893017 SUCCESS; isolated SQL 42189892840 SUCCESS, security 42189892994 SUCCESS and approval/governance 42189893034 SUCCESS. Targeted cloud-tests job SUCCESS but applicability must be read from job steps; original frozen603 42189892993 SKIPPED, never PASS.",
+        "Nonforce PR #977 squash merged 230c754426567f332d1f854146b762e24bb339e3. All five actual code/test/queue/ledger/journal blobs EXACTLY matched successful PR head. Merged-source Node22/lint 42190192081 SUCCESS, 2664/0/6. Built mobile/browser/offline/a11y 42190192126 SUCCESS; merged governance 42190192054 SUCCESS. No physical taste/member trial."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact PR-head CI, nonforce merge, merged-source readback and READY docs still pending"
+      "ci_runs": [
+        42189892844,
+        42189893017,
+        42189893034,
+        42189892994,
+        42189892840,
+        42189892993,
+        42190192081,
+        42190192126,
+        42190192054
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "SAFE null-guard; no data edits, numeric model/taste changes, user policy decisions, production operations or deploy."
+      "notes": "SAFE null-guard; no data edits, numeric model/taste changes, user policy decisions, production operations or deploy.\n2026-11-06 R455-065 source-verified READY development only, code PR977 merged 230c754426567f332d1f854146b762e24bb339e3; no deployment. Invalid old ratio candidate safely skipped, valid family selection/history unchanged; risk-appropriate CI as recorded. Original S019 unavailable, #455 remains OPEN."
     },
     {
       "id": "DIC-Q-33-original603-21-selected-woocommerce-compact-flavors",

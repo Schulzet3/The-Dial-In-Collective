@@ -2949,10 +2949,11 @@
       "current_app": "familyStats returns ratio:null if all historic dose values are null/zero/nonfinite; assignFamily previously dereferences center without guard.",
       "proposed_change": "SAFE small guard only: skip family candidate if measured ratio center unavailable, preserve all original family/shot data and valid comparisons.",
       "approval_required_for_behavior_change": false,
-      "implementation": "TESTING_SOURCE_COMMIT_CI_NOT_YET_EXECUTED",
-      "test_plan": "Three imported-module negative and positive regression cases, exact Node22/lint, browser/mobile/offline/a11y, SQL/security/governance CI, nonforce merge and exact merged-source readback before READY.",
+      "implementation": "VERIFIED_NONFORCE_MERGED_CODE_READY_NOT_DEPLOYED",
+      "test_plan": "PR head 0535dc5d63b0e101ebaa74df6c62b29524045370 2664 PASS/0 FAIL/6 SKIP Node22/lint 42189892844; browser/mobile/390px/offline/a11y 42189893017, SQL 42189892840, security 42189892994, approval 42189893034 SUCCESS. Nonforce merge PR977 exact 230c754426567f332d1f854146b762e24bb339e3; same five blob SHAs. Exact merged-source Node22/lint 42190192081 2664 PASS/0 FAIL/6 SKIP, browser/mobile/offline/a11y 42190192126 and approval/governance 42190192054 SUCCESS. Frozen 603 SKIPPED 42189892993; no real member or espresso cup trial.",
       "release_queue": "DIC-Q-455-empty-historic-success-family-ratio-guard",
-      "source_commit": null
+      "source_commit": "230c754426567f332d1f854146b762e24bb339e3",
+      "implementation_pr": 977
     }
   ]
 }
