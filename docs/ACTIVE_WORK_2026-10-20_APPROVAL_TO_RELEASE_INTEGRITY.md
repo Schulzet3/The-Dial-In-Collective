@@ -1,3 +1,9 @@
+## November 6, 2026 — #33 #199 genuine negative-fixture expectation corrected (TESTING)
+
+Actual exact PR head `438d3259fde76ee01bc9de7df9fecef43ebb1e10` Node22 validate run [42207188747](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42207188747) **1,882 PASS, 1 FAIL, 0 SKIP**. Failure at new test `coffee-issue33-original603-199-selected-description-notes.test.mjs:55`: expected blank when unrelated second article followed the valid selected description, while correctly scoped productMarkup ignored that unrelated article and retained the selected notes (Golden Raisin, Pecan, Honey Grahams, caramel, honey, cookies). The negative test had accidentally demanded suppression of a valid selected product on account of a separate related article. Fixed the fixture to specifically assert no *chocolate from unrelated article* is incorporated, retaining the valid selected evidence. Approval/cloud/mobile/SQL/security/source archive checks succeeded on the failed head; frozen603 SKIPPED. This is not called all-green. Re-run exact changed-head Node checks, do not merge until proper PASS, exact merged source and official after-proof. Code helper, original oracle/captures and prior queue remain unchanged.
+
+---
+
 ## 2026-11-06 UTC — #33 #199 same-commit test-preflight correction (TESTING)
 
 Before PR-head CI finished, inspected the new negative fixture and found it invoked the helper with the default compact notes instead of the synthetic contradictory Cherry/Peach label, which would falsely test a different contract. Corrected the helper input to Cherry/Peach in the same commit as this canonical journal. Original code, frozen603 and unrelated source/queue unchanged. Earlier PR-head checks on the superseded SHA are NOT certified as current; rerun exact new SHA, resolve any genuine failures before merging.

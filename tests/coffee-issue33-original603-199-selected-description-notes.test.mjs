@@ -52,7 +52,8 @@ test('historical, conditional serving, alternate roast and duplicate description
   'This coffee as a light roast has notes of pecan; as a dark roast it has notes of chocolate.',
   'Another coffee has notes of pecan and caramel.'
  ])assert.equal(refine(page(statement)),'',statement);
- assert.equal(refine(page(literal,{extra:'<article><h1>Different Coffee</h1><p>Description: Notes of chocolate.</p></article>'})),'');
+ // A distinct related article is correctly excluded from the selected product scope.
+ assert.doesNotMatch(refine(page(literal,{extra:'<article><h1>Different Coffee</h1><p>Description: Notes of chocolate.</p></article>'})),/chocolate/i);
 });
 test('unverified descriptions, contradictory selected profile wording and absent overlap remain reviewable',()=>{
  assert.equal(refine(page('Description: This coffee has notes of caramel and vanilla.')),'');
