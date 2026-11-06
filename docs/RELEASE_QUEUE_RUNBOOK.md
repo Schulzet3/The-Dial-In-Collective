@@ -1,3 +1,11 @@
+## November 6 READY7 published — divergent-diff preflight lesson (#417/#457/#1062)
+
+Owner-approved DIC-20261106-READY7-23 successfully deployed seven READY items from exact source 21e8db053a542f53ff38227977e279f6acf0abbf through ONE nonforce main GitHub controller and one Git-connected Netlify READY/current deploy 6aee3b75065b1dac2f35fcfe; release Git 2ec10324fcaa4b60d1e48240b44b77b141b9ba54, published 2026-11-06T20:41:45.656Z. Verified receipt: docs/releases/2026-11-06_READY7_DEPLOYED_VERIFIED.md. Three approved deployable files, two unfinished byte-restored. Postflight: 173 DEPLOYED, 0 READY, 3 IN_PROGRESS.
+
+**Source-isolation correction:** GitHub compare_commits on divergent refs can return merge-base changes that UNDERCOUNT the actual published-to-development diff. Before full CI reconcile published source to development ancestry without copying app bytes; enumerate exact git diff publishedSourceSha..developmentSourceSha including special deployable paths such as scripts/netlify/should-ignore-build.mjs. Compute every unready restoration from queue ownership and exact original published modes/blobs, and validate manifest against this full path inventory BEFORE candidate CI. r1/r2 missed build guard; controller 42289880381 correctly DENIED with no publication. Fresh unique grant/request only after corrected source-bound CI; never force/replay.
+
+---
+
 ## November 6 READY28 incident — required continuity for the next publication (#1062)
 
 **Read the [verified incident postmortem and future publish decision tree](releases/2026-11-06_READY28_RELEASE_POSTMORTEM.md) before the next explicit owner Publish.** Successful DIC-20261106-READY28-21 used tested source 40dd7097307bb7d7c36c199d9f9df0581e55d86c, main two-file push eaa1ff090d3872a8ac8c8550799152957e5d3e1e, controller [42251866726](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42251866726), nonforce release 480aca1b32d7ded0bb83e9a899c4d7d5e6200e89 and Netlify [READY/current deploy](https://app.netlify.com/sites/153277f2-e19e-4862-b9a6-f2e18ccde271/deploys/6aedfefa4bf3e7c4c8c77f44). The chat-led preferred route WORKED without a manual owner UI step; absence of workflow_dispatch connector support was never a blocker to the **existing main-push trigger**.
