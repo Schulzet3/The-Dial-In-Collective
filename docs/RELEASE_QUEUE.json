@@ -8,6 +8,42 @@
   },
   "items": [
     {
+      "id": "DIC-Q-33-25-selected-complete-coffee-profile-aroma-and-flavor",
+      "issue": 33,
+      "title": "Recover original603 #25 exactly selected aroma plus flavor without overriding separately labeled notes",
+      "state": "READY",
+      "merged_source_sha": "ffac1439ef7be6ef6df360d8be76ce39188a1091",
+      "scope_paths": [
+        "src/server/coffee-flavor-evidence.mjs"
+      ],
+      "tests": [
+        "Original selected #25 current official prose contains vanilla and pipe tobacco aromas plus black cherry, tobacco, cocoa flavors; old parser dropped first clause, run42133761142.",
+        "PR905 preserved full literal selected Coffee profile as lower-ranked narrative only; corrected 3 earlier test failures (2 prior incomplete assertions; explicit Notes precedence), retained adversarial tests.",
+        "PR head 59796f84e9714bf4ba9dfd96addab9f4a8c32e23 Node42148133717/cloud42148133603/approval42148133634/Python42148133666/SQL42148133713/security42148133788/archive42148133818 SUCCESS, frozen603 SKIPPED.",
+        "Nonforce merged code ffac1439ef7be6ef6df360d8be76ce39188a1091; merged Node42148630684 2611 PASS/0 FAIL/6 SKIP; cloud/mobile42148630701, approval42148630739 and Python42148630733 SUCCESS.",
+        "Exact merged official current run42148630712 3/3 fetched/parsed and Add Coffee/source review; #25 H1 exact selected, both full literal notes, no conflicts, roast/process blank. ZIP artifact13471510992 and all three current raw HTML independently SHA256 matched runner; #25 777b4a076663b6786171e1a93fa20a17968429d38bf20e47c1e608f9c315c8bc.",
+        "Original603 oracle/scorer/603-row source CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6 untouched; individual full 603 verification incomplete."
+      ],
+      "ci_runs": [
+        42148133717,
+        42148133603,
+        42148133634,
+        42148133666,
+        42148133713,
+        42148133788,
+        42148133818,
+        42148133708,
+        42148630684,
+        42148630701,
+        42148630739,
+        42148630733,
+        42148630712
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "VERIFIED narrow READY in development only; #85 and other original603 gaps not certified; do not deploy."
+    },
+    {
       "id": "DIC-Q-33-527-selected-named-sensory-pear",
       "issue": 33,
       "title": "Recover exactly selected named Tasting Notes prose missing one descriptor without losing list",
