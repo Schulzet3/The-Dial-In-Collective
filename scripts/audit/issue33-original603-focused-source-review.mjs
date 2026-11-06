@@ -237,10 +237,9 @@ for(const target of targets){
       }));
     }
 
-    // Diagnostic only: a DIFFERENT Lowcountry coffee's flavor appears in
-    // review-only source_facts for Breakfast Blend. Find the precise public
-    // HTML product scope/ancestor rather than silently filtering genuine
-    // selected-product conflicting labels. No page content is changed.
+    // Diagnostic: the selected Breakfast Blend details itself prints two
+    // incompatible direct flavor sets; neither is another coffee's proof.
+    // Keep their selected HTML placement and source-review provenance visible.
     if(r.number===205){
       const selectedHtml=productMarkup(res.html);
       const pattern=/Nutmeg[\s\S]{0,160}(?:Whole Bean )?Vanilla[\s\S]{0,160}(?:Creamy )?Butter/gi;
@@ -254,7 +253,7 @@ for(const target of targets){
       }
       console.log('[DIC33 LOWCOUNTRY PUBLIC RELATED-SCOPE DIAG] '+JSON.stringify({
         case:205,correct_selected_tasting_notes:r.current_fields?.tasting_notes,
-        unrelated_fact_retained:r.source_facts?.some(f=>f.field==='tasting_notes'&&/Nutmeg.*Vanilla/i.test(f.value)),
+        selected_flavor_caption_conflicts:r.source_facts?.some(f=>f.field==='tasting_notes'&&f.conflicting&&/Nutmeg.*Vanilla/i.test(f.value)),
         contexts
       }));
     }

@@ -1895,6 +1895,29 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   // while the contrary exact selected product Flavor caption is reviewable.
   if(fields.tasting_notes&&!seoFallbackByFields.get(fields)?.has('tasting_notes'))
    markSelectedTastingSourceDisagreements(source_facts,fields.tasting_notes);
+  // Exact current-product Flavor captions are independent direct claims.
+  // When one contradicts the chosen prose notes, preserve BOTH literal
+  // alternatives for review but do not preselect either as verified truth.
+  // Restrict this to one unambiguous selected H1 and selected HTML source
+  // facts; related-product/SEO and historical notes never qualify.
+  if(fields.tasting_notes&&!conflicts.has('tasting_notes')){
+   const currentH1=[...canonicalProduct.matchAll(/<h1\b[^>]{0,500}>([\s\S]{0,1800}?)<\/h1>/gi)]
+    .map(m=>keyOf(clean(m[1],200)));
+   const disagreeingFlavorCaptions=source_facts.filter(f=>
+    f.field==='tasting_notes'&&f.conflicting===true&&
+    f.source_type==='html'&&/^flavou?r\s*:?\s*$/i.test(String(f.label||'').trim())&&
+    !/(?:different coffee|related products?|general guidance|education|recommendation|published page metadata)/i.test(String(f.section||''))&&
+    typeof f.value==='string'&&f.value.length>=6&&f.value.length<=220);
+   if(currentH1.length===1&&currentH1[0]===keyOf(fields.name)&&disagreeingFlavorCaptions.length){
+    rememberCoffeeReviewCandidate(fields,'tasting_notes',fields.tasting_notes,
+     'Current selected product description');
+    for(const fact of disagreeingFlavorCaptions)
+     rememberCoffeeReviewCandidate(fields,'tasting_notes',fact.value,
+      'Conflicting selected product Flavor caption');
+    delete fields.tasting_notes;
+    conflicts.add('tasting_notes');
+   }
+  }
   for(const fact of source_facts){
   if(fact.field==='release_label'&&isRecurringCoffeeHarvestWindow(fact.value))fact.field='harvest_season';
   else if(fact.field==='release_label'&&isGenericCoffeeLotLabel(fact.value))fact.field='lot_type';
