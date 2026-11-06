@@ -10,24 +10,40 @@
     {
       "id": "DIC-Q-455-outlier-historical-measurement-integrity",
       "issue": 455,
-      "pr": null,
+      "pr": 1095,
       "title": "Exclude invalid archived dose/yield/time measurements from local outlier review baseline",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "ef8fac50572dc3205d940e0b6a6cd7446a65d0c8",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
         "Source blob 2365cf5170567d94fe405c7c1ef32dab05cccda7 current isExtreme accepted truthy all-green historical rows with zero/nonfinite/typed dose, yield or time; nonfinite ratio/invalid time could fabricate a false outlier, or a malformed fourth record could reach the four-shot threshold. Deterministic synthetic source defect, not member incidence.",
         "Narrow existing measurement-integrity qualifier: primitive finite positive dose, yield and time and finite yield/dose ratio, in addition to existing five-green, style, setup and visible history. No new taste/ratio/time thresholds, metadata capture, note or shot mutation.",
-        "Five focused real-engine positive/negative Node22 tests added; CI and compiled browser/mobile/offline/a11y/SQL/security/governance NOT RUN at commit creation. Frozen603 reference corpus unchanged; no PASS or READY claim."
+        "Five focused real-engine positive/negative Node22 tests added; CI and compiled browser/mobile/offline/a11y/SQL/security/governance NOT RUN at commit creation. Frozen603 reference corpus unchanged; no PASS or READY claim.",
+        "Original PR-head ffa903aa90cb1f52d48348d86ef597fe6aee5396 verified: Node22/lint/build42289981252 2773 PASS, 0 FAIL, 6 intentional SKIP; Chromium/mobile/offline/a11y42289981100, SQL/JWT42289981126, security42289981357, approval42289981161 all SUCCESS. Original frozen60342289981153 SKIPPED, NOT PASS.",
+        "Concurrent development had owner READY7 release: preserved 173 DEPLOYED, 3 IN_PROGRESS, 0 previously READY source records and published_base/history. Two-parent PR branch integration 9d68c4f340d98ab1954bf35395fb42460fbb5625 nonforce source-preserving; same engine and focused test blobs. Six applicable PR-head merge-candidate CI checks SUCCESS: Node42298336845, browser/mobile/offline42298336679, SQL42298336769, governance42298336730, security42298336670, cloud-tests same42298336679; frozen60342298336728 SKIPPED.",
+        "PR1095 nonforce squash merged ef8fac50572dc3205d940e0b6a6cd7446a65d0c8. Merged exact engine SHA 938a15dab69b0df84640f3c36e8603b3388b1924 and five real-module regression test SHA 2acec9fd476794b3846eb19567c3c355b4c83297 match passing candidate. Merge queue TESTING blob dc53131e657b8ea6e51fbad44e3b88db5dcaf5cc preserved actual READY7 deployed statuses.",
+        "Exact merged-code source CI: Node22/lint/build42298621453 SUCCESS 2773 PASS/0 FAIL/6 intentional SKIP (raw job log readback); compiled browser/mobile/390px/offline/a11y plus cloud-tests42298621466 SUCCESS; governance/continuity42298621551 SUCCESS. Original frozen603 not claimed executed; no new real production Auth/member/privacy or empirical cup trial."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Await source-bound Node22/lint/build, compiled browser/mobile/offline/a11y, isolated SQL/security and approval governance, safe nonforce merge and exact merged-source verification."
+      "ci_runs": [
+        42289981252,
+        42289981100,
+        42289981126,
+        42289981357,
+        42289981161,
+        42298336845,
+        42298336679,
+        42298336769,
+        42298336730,
+        42298336670,
+        42298621453,
+        42298621466,
+        42298621551
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "R455-076 candidate, development only. Preserve all original shots and five taste ratings, new real measured outlier detection and Locked thresholds. Not deployed; no live provider/member writes."
+      "notes": "R455-076 VERIFIED code READY in development only, NOT DEPLOYED. Reject malformed measured archived reference rows from local outlier baseline while preserving every shot, original five ratings and notes, and owner Locked outlier thresholds. Synthetic real-engine regression, not hosted incidence or espresso-quality validation. No S019 original evidence; #267 separate."
     },
     {
       "id": "DIC-Q-455-community-measured-ratio-integrity",
