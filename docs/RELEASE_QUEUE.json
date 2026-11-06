@@ -5938,6 +5938,35 @@
       "delivered_tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
       "delivered_release_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
       "delivered_netlify_deploy_id": "6aeceac987f179a62547f490"
+    },
+    {
+      "id": "DIC-Q-508-url-preview-stale-failure-feedback",
+      "issue": 508,
+      "pr": 904,
+      "title": "Discard stale failed URL autofill responses after source URL or form changes",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/cloud/coffee-url-autofill.js"
+      ],
+      "tests": [
+        "Original current development 28f9f053014a8aa8cffb8dd87415a413df763bc6 main.js 790-814 source review confirms successful async URL previews reject changed/closed form while failed responses only guard form identity and can show stale error.",
+        "PR #904 first head 7f26866dd444ff380dfc6cbc54966ae687675ad7 added a shared conservative current request guard, no network regression; exact PR-head approval run42146360005 FAILED queue intake because scope was not represented. Same-commit queue + scoped journal repair underway; this failed check is NOT PASS.",
+        "Require corrected exact PR-head Node22, targeted 2 new regression cases, lint/build, applicable cloud/offline/approval/security and isolated CI plus nonforce merge, merged blob readback and source-bound checks before READY."
+      ],
+      "ci_runs": [
+        42146360005,
+        42146360131,
+        42146359995,
+        42146360045,
+        42146360007
+      ],
+      "blockers": [
+        "Corrected PR-head exact-source CI not yet passed; tests/PR merge pending; do not release or mark READY."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/508",
+      "notes": "N508-059 confirmed narrow source-derived UX race in preview failure path, not evidence of live signed-in incident. TESTING only; no Netlify/prod member/Auth/SQL/provider writes or release authority. Retain existing coffee fields, offline behavior, Log Shot -> Rate -> Recommendations, and single owner-published production branch."
     }
   ],
   "history": [
