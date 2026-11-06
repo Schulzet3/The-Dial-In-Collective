@@ -6688,8 +6688,7 @@
     "code_fixes": 0,
     "production_writes": false,
     "next": "Safe remaining string values, hosted #96 security, source drift"
-  }
-,
+  },
   "provider_guc_runtime_run45": {
     "state": "68_NEW_COMPLETE_SAFE_GUC_VALUES_SEMANTIC_REVIEWED_63_WITHHELD_BASELINE_IN_PROGRESS",
     "receipt_path": "docs/audits/issue509-guc-safe-values-20261106-run45.json",
@@ -6719,5 +6718,23 @@
     "hosted_auth_security": "UNVERIFIED",
     "native_compiled_code": "UNVERIFIED",
     "next": "63 withheld settings review by privacy-safe metadata/hashes; #96 hosted API/TLS/auth/log policy; provider change-only drift"
+  },
+  "provider_io_runtime_run46": {
+    "status": "DIRECT_NEW_35_PLUS_8_PROVIDER_COUNTER_SEMANTIC_REVIEW_NO_CONFIRMED_DEFECT",
+    "receipt": "docs/audits/issue509-provider-io-wal-temp-20261106-run46.json",
+    "development_parent": "4f969f118120b3677e2f25e23aa23f87e84bf648",
+    "main": "eaa1ff090d3872a8ac8c8550799152957e5d3e1e",
+    "release": "480aca1b32d7ded0bb83e9a899c4d7d5e6200e89",
+    "io_records": 35,
+    "slru_records": 8,
+    "wait_groups": 10,
+    "lock_groups": 2,
+    "statement_signatures": 3456,
+    "wal_buffers_full_cumulative": 1623919,
+    "database_temp_bytes_cumulative": 94309826209,
+    "source_code_fixes": 0,
+    "live_writes": false,
+    "baseline_complete": false,
+    "next": "Timely cumulative WAL/I/O/temp delta and attribution only if source-safe; hosted Auth API coordination #96; change-only provider drift"
   }
 }
