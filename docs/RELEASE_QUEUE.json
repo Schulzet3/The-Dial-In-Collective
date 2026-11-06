@@ -10,24 +10,35 @@
     {
       "id": "DIC-Q-455-community-measured-ratio-integrity",
       "issue": 455,
-      "pr": null,
+      "pr": 1086,
       "title": "Exclude invalid archived dose/yield ratios from exported local Community evidence",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "4bb45401e0ed7b2ca807f9857d39dc85a7948d5b",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
         "Original engine Git blob f13197fc0ac34a27d836d9557132551eacb49fe1: communitySummary's all-five-green predicate still counted historical success rows with zero, negative, null, typed or non-finite dose/yield; the ratio expression could yield Infinity/NaN or a missing contributor statistic, inflating count and confidence or throwing in stats(). Synthetic deterministic source scenario, not evidence of hosted Community member incidence.",
         "SAFE guard uses primitive finite positive measured dose/yield and finite quotient; no new espresso taste targets or ratio windows. Retains existing five-green, pending outlier, contributor caps, ratios for valid shots, saved notes and all history.",
-        "Five direct real-module positive/negative Node22 suites authored, NOT YET EXECUTED. Require applicable CI and exact merged-source verification before READY."
+        "Five direct real-module positive/negative Node22 suites authored, NOT YET EXECUTED. Require applicable CI and exact merged-source verification before READY.",
+        "PR-head commit 049d140ef12a79e0d19410dd50caabf7f5feda75 and all four checked Git blobs: engine 2365cf5170567d94fe405c7c1ef32dab05cccda7, direct five-test module 895ebbc1614bab84f0875e0a0774318792dba21d, TESTING queue 5a8021ce21c73ae679171fb21af4d6a093c8b2d0, same-commit journal ded8322b5ccdeced41c74966732a24658c41abda.",
+        "Source-bound PR-head Node22/lint/build GitHub run42282704362 2764 PASS /0 FAIL /6 intentional SKIP including five new real engine tests. Compiled Chromium/mobile/390px/offline/a11y run42282704211, isolated SQL/JWT42282704361, security42282705006, approval42282704463 SUCCESS. Frozen60342282704204 SKIPPED (not PASS).",
+        "PR1086 nonforce squash MERGED 4bb45401e0ed7b2ca807f9857d39dc85a7948d5b, preserving disjoint #509 research/audit source updates. Git branch readback and all four changed blob SHAs match passing PR head, source engine/test exact.",
+        "Exact merged code Node22/lint/build run42282981686 2764 PASS /0 FAIL /6 intentional SKIP; compiled browser/mobile/390px/offline/a11y run42282981526 SUCCESS, governance run42282981818 SUCCESS. No production provider/member authentication test or espresso taste trial claimed."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "PR-head tests, applicable CI, non-force integration and merged-source checks not yet verified"
+      "ci_runs": [
+        42282704362,
+        42282704211,
+        42282704361,
+        42282705006,
+        42282704463,
+        42282981686,
+        42282981526,
+        42282981818
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "R455-075 SAFE development-only; exported local helper, not authoritative hosted Supabase Community/RLS. Original 58 sources/123 prior evidence checks unchanged; Library slow-feed PDF 10/10 text reread, byte-equivalence to owner archive unverified; separate original S019 not accessible. No production write, publication or Locked policy change."
+      "notes": "R455-075 VERIFIED source-bound code READY, NOT DEPLOYED. Local exported Community summary filters nonfinite/nonpositive/unmeasured archived dose/yield ratios in addition to strict original five-green and pending-outlier requirements, preserving all valid contributor-weighted evidence and original saved data. Synthetic app-source fix only, not hosted Community SQL/RLS/security or actual member incidence. 58 prior curated research sources/123 checks unchanged; original S019 remains inaccessible. No production/Netlify publish/provider writes or Locked policy change."
     },
     {
       "id": "DIC-Q-33-original603-400-413-selected-decaf-water-prose",
