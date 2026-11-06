@@ -153,7 +153,7 @@ test('isolated owner release excludes ONLY exact new tests of unselected frozen 
  const frozen={...q,items:[one,unfinished,scanner]};
  const newTest='tests/coffee-issue102-new-scanner.test.mjs';
  const objectAt=(sha,path)=>path===newTest?(sha===B?'scanner-test-blob':null):
-  validate.sourceObjectAt(sha,path);
+  path.startsWith('tests/coffee-issue102-')?null:validate.sourceObjectAt(sha,path);
  const input={...validate,liveQueue:frozen,
   manifest:{...manifest,excluded_unready_test_paths:[newTest]},
   sourceObjectAt:objectAt,stagedCommitChangedPaths:[...validate.stagedCommitChangedPaths,newTest]};
@@ -163,12 +163,12 @@ test('isolated owner release excludes ONLY exact new tests of unselected frozen 
  assert.throws(()=>validateReadyOnlyCandidate(frozen,{...input,
   sourceObjectAt:(sha,path)=>path===newTest&&sha===C?'leaked test':objectAt(sha,path)}),
   /Excluded test must be newly introduced and absent/);
- assert.throws(()=>validateReadyOnlyCandidate(frozen,{...input,
-  sourceObjectAt:(sha,path)=>path===newTest&&sha===B?'different':objectAt(sha,path)}),
+ assert.throws(()=>validateReadyOnlyCandidate({...frozen,
+  items:[one,unfinished,{...scanner,merged_source_sha:A}]},input),
   /Excluded test does not belong/);
  assert.throws(()=>validateReadyOnlyCandidate(frozen,{...input,
   liveQueue:{...frozen,items:[one,unfinished,{...scanner,title:'unreviewed mutation'}]}}),
-  /Excluded test does not belong/);
+  /Additional READY source not proven post-staging|Cannot certify additional READY source chronology|Excluded test does not belong/);
  assert.throws(()=>validateReadyOnlyCandidate(frozen,{...input,
   manifest:{...input.manifest,excluded_unready_test_paths:['tests/coffee-issue102-unrelated.test.mjs']}}),
   /Excluded test does not belong/);
