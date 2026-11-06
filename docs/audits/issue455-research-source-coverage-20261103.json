@@ -2682,6 +2682,25 @@
       "source_commit": "afda28589b693645d9b5eabb20d241dc6d7a2252",
       "test_plan": "Exact PR-head Node22/lint 2614 PASS/0 FAIL/6 SKIP run42151967992; actual browser/mobile/offline/a11y 42151968044, isolated SQL42151967971, security42151968001, approval42151967985 SUCCESS. Merged source identical 3 code/test/journal blobs: Node22/lint 2614 PASS/0 FAIL/6 SKIP run42152320913, browser/mobile/offline/a11y42152320904 and approval42152320931 SUCCESS. Targeted cloud NOT_APPLICABLE, frozen603 SKIPPED; no live member/cup trials.",
       "release_queue": "DIC-Q-455-legacy-blank-measurements"
+    },
+    {
+      "id": "R455-PROP-059-UNRATED-TASTE-COMPASS",
+      "finding": "Reproduced presentational disagreement for absent legacy/partial five sensory ratings: chips mapped null through ??4 to red severity-4 while radar mapped null through ??0 to ideal-green center, even though neither is a measured rating.",
+      "evidence": [
+        "Pinned development source ded4cc5531b0ae89dc3b15f924ea30b07eb15fd8; site/lib/ui.js prechange blob c24737f142d50a2da565514f75b2772e29c4dce9 lines 115-120; constants.js tasteSeverity returns null when no score",
+        "site/styles.css prechange blob d2ab4aa68366c7361389b051c651e8e96e43f29c severity-0 green / severity-4 red",
+        "site/cloud/shot_card.js live expanded historical shot uses chips and radar; site/cloud/main.js uses them for recipe feedback",
+        "New source-level negative/positive tests in tests/issue455-unrated-taste-compass.test.mjs; exact-source CI PENDING"
+      ],
+      "severity": "P2_REPRODUCED_HISTORIC_AND_PARTIAL_TASTE_VISUAL_MISREPRESENTATION",
+      "user_benefit": "Unknown/unrated sensory evidence is shown as neutral/unrated and not mistaken for success or failure; genuinely rated five tastes retain exact meaning.",
+      "current_locked": "Five required 1-5 sensory inputs on new shot, true fully green success versus missing scores, all original measurements/tastes/notes/history and one genuinely controllable recommendation change; no speculative target change.",
+      "current_app": "Pre-fix chips showed missing as red severity-4; pre-fix radar plotted missing at center as green severity-0. Historical/partial ratings are still preserved; new log validation already requires five.",
+      "proposed_change": "SAFE UI-only: mark missing/invalid historical taste chips explicitly Not rated with neutral styling; omit missing radar dots and all incomplete polygons; preserve all valid 1-5 values and original five-score data unchanged.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "CODE_PR_PENDING_EXACT_SOURCE_CI",
+      "test_plan": "5 focused Node22 negative/positive real-module regressions, exact-source Node/lint plus browser/mobile/offline/accessibility for shared UI/CSS; SQL/Auth only if applicable and do not mislabel skipped; readback source-specific merge and READY docs after proof.",
+      "release_queue": "NOT_READY_UNTIL_MERGED_VERIFIED"
     }
   ]
 }
