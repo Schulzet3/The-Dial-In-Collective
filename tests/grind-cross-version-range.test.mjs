@@ -15,6 +15,7 @@ const prior=(coffee,extra={})=>({
  calibrationId:'previous-cal',basketId:'previous-basket',
  style:'Turbo',feedMode:'standard',grindSetting:3,
  dialedIn:true,hidden:false,
+ tasteScales:{extraction:3,body:3,clarity:5,sweetness:5,astringency:1},
  snapshot:{grinder:'Test grinder',burrs:'Test burrs',grinderMin:0,grinderMax:5},...extra
 });
 test('matching grinder with different calibration ranges translates an unproven old dial',()=>{
