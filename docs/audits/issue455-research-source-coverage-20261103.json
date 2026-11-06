@@ -2934,6 +2934,25 @@
       "implementation": "NO_APP_CODE_CHANGE_JUSTIFIED_OR_MADE; FUTURE_DATA_CAPTURE_OWNER_APPROVAL_REQUIRED",
       "test_plan": "Direct primary publisher methods and original ORG-07 and exact engine reviewed. Docs-only GitHub PR governance pending; no new application/Node22/Chromium/SQL/mobile/espresso cup tests executed; original frozen 603 not run and not claimed PASS.",
       "release_queue": "NOT_APPLICABLE_RESEARCH_ONLY_NO_DEPLOYABLE_SCOPE"
+    },
+    {
+      "id": "R455-PROP-065-EMPTY-HISTORIC-FAMILY-RATIO",
+      "finding": "Assigning a new rated shot to an existing family can throw when that family contains only historically all-green shots with missing/zero dose: familyStats returns ratio:null but assignFamily dereferences .ratio.center.",
+      "evidence": [
+        "Direct live site/lib/engine.js blob 93969d561e18205d8f87e19059ea0c66b519e934 at parent 261681c2e18364d22f80077d71790bd70cf56784",
+        "ORG-07 archival causal report blob 43912d0dec0969c090d525c853f3a456136a2311: ratio is derived from measured beverage mass and dose, not inferred from taste alone; not scientific numeric policy.",
+        "Current chooseRecipeFamily already excludes nonfinite dose/ratio from matching recommendation evidence."
+      ],
+      "severity": "P2_SAFE_SHOT_LOGGING_CRASH_GUARD",
+      "user_benefit": "A malformed past success cannot crash new shot logging or editing; previously measured successes continue matching their correct recipe family.",
+      "current_locked": "Retain original measured shot, five scores, private notes, multiple recipe families, separate espresso styles, one-controllable-recommendation, personal vs community evidence.",
+      "current_app": "familyStats returns ratio:null if all historic dose values are null/zero/nonfinite; assignFamily previously dereferences center without guard.",
+      "proposed_change": "SAFE small guard only: skip family candidate if measured ratio center unavailable, preserve all original family/shot data and valid comparisons.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "TESTING_SOURCE_COMMIT_CI_NOT_YET_EXECUTED",
+      "test_plan": "Three imported-module negative and positive regression cases, exact Node22/lint, browser/mobile/offline/a11y, SQL/security/governance CI, nonforce merge and exact merged-source readback before READY.",
+      "release_queue": "DIC-Q-455-empty-historic-success-family-ratio-guard",
+      "source_commit": null
     }
   ]
 }

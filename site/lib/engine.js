@@ -38,7 +38,13 @@ export function familiesFor(s,coffeeId,style) {return s.families.filter(f=>f.cof
 export function assignFamily(s,shot) {
  const ratio=shot.yieldG/shot.doseG;
  let best=null,dist=Infinity;
- for(const f of familiesFor(s,shot.coffeeId,shot.style)){const value=familyStats(s,f.id).ratio.center;const d=Math.abs(value-ratio);if(d<dist&&d<=CONFIG.ratioFamilyDistance){best=f;dist=d;}}
+ for(const f of familiesFor(s,shot.coffeeId,shot.style)){
+  // Keep incomplete legacy shots in History; they cannot anchor a recipe ratio.
+  const value=familyStats(s,f.id)?.ratio?.center;
+  if(!finite(value))continue;
+  const d=Math.abs(value-ratio);
+  if(d<dist&&d<=CONFIG.ratioFamilyDistance){best=f;dist=d;}
+ }
  if(!best){best={id:newId('family'),coffeeId:shot.coffeeId,style:shot.style,seedRatio:ratio,createdAt:now()};s.families.push(best);}
  return best.id;
 }
