@@ -5,6 +5,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import {isIP} from 'node:net';
 import {createRequire} from 'node:module';
+import {isReusableRenderReceipt} from './coffee-corpus-render-receipt.mjs';
 const require=createRequire(import.meta.url);
 const {chromium}=require(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES+'/playwright');
 const [root,executablePath,limitArg]=process.argv.slice(2);
@@ -29,7 +30,7 @@ const publicUrl=raw=>{try{const u=new URL(raw);const host=u.hostname.replace(/\.
 const sha=data=>crypto.createHash('sha256').update(data).digest('hex');
 async function capture(packet){
  const dir=path.join(out,packet.id);await fs.mkdir(dir,{recursive:true});const receipt=path.join(dir,'receipt.json');
- try{const old=JSON.parse(await fs.readFile(receipt,'utf8'));if(old.status==='render_captured'){results.push(old);completed++;return;}await fs.writeFile(path.join(dir,'previous-receipt.json'),JSON.stringify(old,null,2));}catch{}
+ try{const old=JSON.parse(await fs.readFile(receipt,'utf8'));if(await isReusableRenderReceipt(old,packet,dir)){results.push(old);completed++;return;}await fs.writeFile(path.join(dir,'previous-receipt.json'),JSON.stringify(old,null,2));}catch{}
  const record={case_id:packet.id,source_url:packet.source_url,captured_at:new Date().toISOString(),method:'isolated_local_chromium',not_production_transport_acceptance:true,interactions:[],blocked_requests:[],status:'started'};
  const context=await browser.newContext({viewport:{width:1440,height:1000},userAgent:'DialInCollective-CoffeeSourceAudit/1.0 (Chromium public product review)',serviceWorkers:'block',acceptDownloads:false});
  const page=await context.newPage();
