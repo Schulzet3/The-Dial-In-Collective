@@ -781,6 +781,21 @@
       "source_bytes_sha256": null,
       "source_byte_caveat": "First-party 7-page original publisher PDF text inspected through browser; publisher PDF physical page 3 visually inspected; full binary download failed, no raw PDF SHA-256, supplemental tables or participant-level data validation.",
       "claims_verified_externally": "Fixed HeyCafe H1 2.0 grind, 18g dose and Rancilio Silvia Pro; output called 36mL (two 18mL cups), NOT a directly measured 36g mass yield. Three Indonesian origins roasted medium-dark L*26-27, four drink preparations (black espresso and three milk/sugar recipes); 3x4x3 design reports 36 experimental chemistry units. Sensory CATA had 30 volunteer drinkers checking 21 attributes including taste sweet, aftertaste astringent and mouthfeel dry, not a 1-5 five-score espresso dial-in tool. Sugar quantified for Gayo recipe subset only; black espresso sugar reported non-detect in that laboratory assay. Source cannot identify causal isolated origin or grinder adjustment effects, sensory sweetness from measured sugar, clinical benefit or universally optimum temperature/yield."
+    },
+    {
+      "id": "LIT-2007-ANDUEZA-ESPRESSO-RATIO",
+      "type": "peer_reviewed_primary_espresso_coffee_to_water_ratio_study_abstract_only",
+      "title": "Influence of coffee/water ratio on the final quality of espresso coffee",
+      "authors": "Susana Andueza, María A. Vila, M. Paz de Peña, Concepción Cid",
+      "published": "2007-01-15 version of record; Journal of the Science of Food and Agriculture 87(4):586–592",
+      "doi": "10.1002/jsfa.2720",
+      "url": "https://scijournals.onlinelibrary.wiley.com/doi/abs/10.1002/jsfa.2720",
+      "access": "FIRST_PARTY_WILEY_PUBLISHER_METADATA_AND_ABSTRACT_DIRECTLY_READ_20261106; FULL_ARTICLE_TABLES_NOT_ACCESSED",
+      "review_status": "BOUNDED_ABSTRACT_DIRECTLY_REVIEWED_COFFEE_G_PER_40ML_SENSORY_TRADEOFFS_AND_TORREFACTO_PROCESSING; REPLICATION_INSTRUMENT_SENSORY_PANEL_DETAILS_PENDING",
+      "evidence_grade": "PEER_REVIEWED_ORIGINAL_ESPRESSO_STUDY_BUT_ONLY_FIRST_PARTY_ABSTRACT_CHECKED; SENSORY_BEV_VOLUME_ML_NOT_MEASURED_BEVERAGE_MASS_G; LIMITED_COFFEES_AND_ROAST_TYPES; NO_APPLICATION_FIVE_TASTE_OR_NEXT_SHOT_EFFICACY_VALIDATION",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Publisher official abstract and publication history inspected directly; complete original paper/PDF binary, explicit methods/sample sizes, detailed sensory panel, processing controls, statistical tables and actual beverage mass not checked.",
+      "claims_verified_externally": "Wiley abstract reports comparing coffee/water ratio by botanical variety (Arabica and Robusta) and roast (conventional vs torrefacto). Conditional sensory attributes bitterness, astringency and burnt/acrid/earthy/musty flavors prompted author selection of 6.5 g ground coffee per 40 mL nominal beverage or 7.5 g/40 mL for conventional roast groups, and 6.5 g/40 mL for torrefacto. Authors suggest torrefacto roasted-with-sugar processing may affect acids and melanoidins. These are coffee-dose / beverage-VOLUME comparisons and NOT modern beverage mass ratios, taste-optimal dose formulas or verification that automatically reducing dose improves an individual's modern double-shot espresso."
     }
   ],
   "evidence_checks": [
@@ -2149,6 +2164,37 @@
       "result": "CATA_21_ATTRIBUTES_AND_LAB_SUGAR_DO_NOT_VALIDATE_APP_SCORE_OR_UNIVERSAL_OPTIMA",
       "owner_approval": false,
       "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-056-A",
+      "source": "Andueza et al. 2007 Wiley publisher abstract (DOI 10.1002/jsfa.2720)",
+      "claim": "Publisher's research abstract distinguishes 6.5 g / 40 mL and 7.5 g / 40 mL ground-coffee-to-nominal-beverage-VOLUME experiments. DIC logs measured doseG and yieldG (mass ratio); the paper's volumetric units cannot be arithmetically converted to DIC gram-yield ratio without density/crema measurements. Detailed protocol, full 8.5 g treatment, n and calibration remain unverified without full article.",
+      "grade": "PRIMARY_PUBLISHER_ABSTRACT_DIRECT_METHODS_SCOPE; NO_FULL_PAPER_OR_VOLUME_TO_MASS_VALIDATION",
+      "primary_sources": [
+        "https://scijournals.onlinelibrary.wiley.com/doi/abs/10.1002/jsfa.2720",
+        "https://doi.org/10.1002/jsfa.2720"
+      ],
+      "page_number": "Official Wiley abstract for JSFA 87(4):586–592; no page-by-page full-paper review",
+      "app_source_sha": "206697361ed621b0ef8f862b3a9ab9026bcbcf25",
+      "current_app": "Live model.js validateShot records doseG/yieldG/timeS/temperature and engine.js derives ratio via measured yieldG/doseG; source blobs model 2d1e3298952ebc74eed176c852cf919730225e72, engine 93969d561e18205d8f87e19059ea0c66b519e934; no automatic translation of mL to g approved.",
+      "result": "VOLUMETRIC_BREW_EXPERIMENT_NOT_MEASURED_MODERN_MASS_RATIO_TARGET",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-056-B",
+      "source": "Andueza et al. 2007 Wiley publisher abstract (DOI 10.1002/jsfa.2720)",
+      "claim": "Within the historical studied Arabica, Robusta and torrefacto coffees, the authors identify bitterness, astringency, acrid/burnt/earthy traits as relevant to selecting between coffee:water preparation conditions; the torrefacto group has sugar-added roasting, and the authors prefer a lower coffee/water ratio under their design. That is conditional comparative sensory evidence, not a demonstrated universal DIC dose/yield correction, nor sensory sweetness calibration, controlled all-green personal success or validation of the one-change recommendation.",
+      "grade": "PRIMARY_PUBLISHER_ABSTRACT_DESCRIPTIVE_SENSORY_CONCLUSION; NO_GENERALIZED_CAUSAL_DOSE_TO_DIC_FIVE_RATINGS",
+      "primary_sources": [
+        "https://scijournals.onlinelibrary.wiley.com/doi/abs/10.1002/jsfa.2720"
+      ],
+      "page_number": "Official Wiley publisher abstract; article tables and statistical significance unverified",
+      "app_source_sha": "206697361ed621b0ef8f862b3a9ab9026bcbcf25",
+      "current_app": "Owner-Locked five tastes, all-green success, independent shot style/basket and one controllable change continue unchanged. constants.js source blob 72221331ce4dffabe416eebec1ae2fceced3a095 and engine.js blob 93969d561e18205d8f87e19059ea0c66b519e934 checked at pinned development.",
+      "result": "COFFEE_AND_ROAST_SENSORY_TRADEOFF_NOT_UNIVERSAL_NUMERIC_YIELD_OR_DOSE_HEURISTIC",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
     }
   ],
   "policy_decisions_pending": [],
@@ -2157,7 +2203,7 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R455-051 primary-source context and model vs actual taste boundary only."
+    "reason": "R455-056 source-evidence and semantic unit-transfer guard only; no application, policy or release queue edits."
   },
   "next_actions": [
     "R455-054: Fitri et al. 2025 primary peer-reviewed 7-page publisher PDF (focused pages 2-4, visual p3) checked 3 bean origins, 4 distinct beverages, n=30 CATA consumers, 21 descriptors, fixed 18g dose, 36mL volume NOT measured grams; no universal ratio, five-scale validation or origin/grind causal rules. Raw PDF hash/supplementals unchecked; original S019 still unavailable.",
@@ -2180,28 +2226,28 @@
     "Continue actual UX code/test workflow review for one demonstrable narrow safe bug rather than speculative roast-age or cold-grind controls.",
     "R455-023: Continue full citation review of nine originals, raw now-accessible October29 ZIP (research-only) / still-inaccessible S019 PDFs and exact-byte provenance of Choi/Kim full manuscripts; assess translated label UX only after specific defect. No #267 V2 coverage credit.",
     "R455-043: The 2002 Andueza pressure paper full third-party facsimile pages 7426-7431 was visually inspected and publisher abstract matched; no raw mirror/publisher hash certification. Do not re-credit these narrow methods/table facts; next verify unrelated original citations or actionable user-workflow defect.",
-    "R455-045: Original Gagné 2019 0.08 mm² surface-area result contradicts Kaffeemacher 2025 background 0.08 mm linear shorthand; Table1 lower fines ONLY same grind, rising after finer re-dial. Preserve condition qualifiers; no engine 40%-heuristic edit. Continue unrelated research citations or reproduced UX correctness. Recovered Library 10-page slow-feed variant SHA a068e5e3... differs from owner-archive registered member SHA a4db4f38...; archive bytes still unavailable."
+    "R455-045: Original Gagné 2019 0.08 mm² surface-area result contradicts Kaffeemacher 2025 background 0.08 mm linear shorthand; Table1 lower fines ONLY same grind, rising after finer re-dial. Preserve condition qualifiers; no engine 40%-heuristic edit. Continue unrelated research citations or reproduced UX correctness. Recovered Library 10-page slow-feed variant SHA a068e5e3... differs from owner-archive registered member SHA a4db4f38...; archive bytes still unavailable.",
+    "R455-056: Review Andueza et al. 2007 DOI 10.1002/jsfa.2720 full pages 586–592/methods only if accessible; abstract-level 6.5/7.5 g per 40 mL comparisons and torrefacto roasting sugar/descriptor observations are not measured 1:n beverage mass targets. Retain current Locked recipe logic. Source S019 remains unavailable."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-054",
-    "base_development_sha": "e8dfd8be67d3cd8c33abb322eaaad1454caeddd4",
-    "source_document": "Fitri et al. (2025) original seven-page publisher espresso-origin/chemistry/consumer-CATA primary paper",
+    "id": "R455-056",
+    "base_development_sha": "206697361ed621b0ef8f862b3a9ab9026bcbcf25",
+    "source_document": "Andueza et al. 2007 original Wiley publisher abstract, not full article",
     "source_ids": [
-      "ORG-03",
-      "LIT-2025-FITRI-ESPRESSO-ORIGIN-SENSORY"
+      "LIT-2007-ANDUEZA-ESPRESSO-RATIO"
     ],
     "claim_ids": [
-      "R455-EV-CIT-054-A",
-      "R455-EV-CIT-054-B"
+      "R455-EV-CIT-056-A",
+      "R455-EV-CIT-056-B"
     ],
-    "number_of_curated_sources": 53,
-    "total_evidence_checks": 113,
-    "review_type": "FIRST_PARTY_PUBLISHER_PDF_TEXT_AND_VISUAL_PAGE3_PRIMARY_METHODS_TREATMENT_UNITS_LAB_ASSAY_SENSORY_BOUNDARIES",
-    "source_hash_verified_20261105": false,
+    "number_of_curated_sources": 54,
+    "total_evidence_checks": 115,
+    "review_type": "FIRST_PARTY_WILEY_PUBLISHER_ABSTRACT_DIRECT_VERIFICATION; VOLUME_ML_VS_MASS_G_CONFOUNDING",
+    "source_hash_verified_20261106": false,
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
     "code_or_policy_changed": false,
-    "next_action": "Verify exact PR-head docs governance, non-force merge only after required checks, read back merged blobs and durable Issue #455 checkpoint. Continue live reproducible UX issues/source verification; original S019 remains unavailable."
+    "next_action": "Validate PR-head docs/governance, nonforce merge only if applicable checks succeed, read back merged blobs/CI and post Issue #455 checkpoint. Resume source-by-source and real UX review; original S019 still missing."
   },
   "policy_decisions_resolved": [
     {
@@ -2527,6 +2573,25 @@
       "source_commit": "abb010b8ce6c449279913750b1b8147b987384b1",
       "test_plan": "Actual PR-head Node22 full 2602 PASS/0 FAIL/6 SKIP, mobile/browser/offline/a11y and governance SUCCESS; exact merged-source same Node22+browser/offline/governance SUCCESS. Original603, targeted cloud and real signed-in/member taste outcomes NOT executed and NOT called PASS.",
       "release_queue": "DIC-Q-455-feedback-hydration-instant"
+    },
+    {
+      "id": "R455-PROP-056-ANDUEZA-VOLUME-MASS-TRANSFER",
+      "finding": "Older espresso paper's dose per 40 mL coffee/water treatments and conditional torrefacto sensory preference should not be read as modern DIC doseG:yieldG beverage-mass targets or automatic dose-reduction benefit.",
+      "evidence": [
+        "First-party Wiley DOI 10.1002/jsfa.2720 official abstract (2007-01-15)",
+        "R455-EV-CIT-056-A",
+        "R455-EV-CIT-056-B",
+        "live engine.js/model.js measured-dose-and-yield schema pinned at 206697361ed621b0ef8f862b3a9ab9026bcbcf25"
+      ],
+      "severity": "P2_RESEARCH_GENERALIZATION_GUARDRAIL_NO_REPRODUCED_CURRENT_APP_DEFECT",
+      "user_benefit": "Maintain honest recommendation confidence and mass-based recipe interpretation, preventing unverified 'older espresso study proves universal ratio' messaging.",
+      "current_locked": "Five required taste scores, complete all-green success, one controllable next-shot change, style/basket/feed/equipment context and original dose/yield/time/notes; original successful families.",
+      "current_app": "site/lib/engine.js computes ratio as measured yield grams over dose grams; model.js validates these mass fields. Current app does not mechanically copy 2007 volumetric doses.",
+      "proposed_change": "RESEARCH ONLY: preserve present mass-based measured shot and owner-Locked priors. Do not import 6.5 g/40 mL or 7.5 g/40 mL as a universal 1:n mass ratio. Any new dose-control policy requires separate owner decision plus fully verified experimental relevance and UX validation.",
+      "approval_required_for_behavior_change": true,
+      "implementation": "RESEARCH_ONLY_NO_APP_CODE_CHANGE_NO_RELEASE",
+      "test_plan": "None for docs-only source record. Any future owner-authorized mass-ratio/score recommendation requires positive/negative all-five-taste, style/basket and privacy/offline tests and risk-appropriate exact-source CI.",
+      "release_queue": "NONE"
     }
   ]
 }
