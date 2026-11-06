@@ -12,6 +12,12 @@ const fold=v=>String(v||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toL
 // description; never scan site-wide education, menus, other products or SEO.
 const CURRENT_DECAF_METHOD=/^(?:(?:this|our)\s+(?:decaf(?:feinated)?\s+)?coffee\s+(?:is|was|has been)\s+decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?(?:swiss[\s-]?water|mountain[\s-]?water|sugar(?:[\s-]?cane|[\s-]?process)|ethyl\s+acetate|natural[\s-]?ea|(?:supercritical\s+)?carbon[\s-]?dioxide|co\s*[- ]?[2\u2082])\b|the\s+(?:swiss[\s-]?water|mountain[\s-]?water|sugar[\s-]?cane|carbon[\s-]?dioxide)\s*[\u00ae\u2122]?\s+(?:process|method)\s+is\s+(?:an?\s+)?[^.!?]{0,150}\bdecaffeination\s+process\b[^.!?]{0,160}\bcaffeine[\s-]?free\b)/iu;
 const NONCURRENT_DECAF_METHOD=/\b(?:previous(?:ly)?|formerly|historically|typically|generally|other coffees?|another coffee|last year|prior (?:lot|harvest))\b/iu;
+// Same selected-product highlight can state GREEN processing and a distinct
+// decaffeination treatment in one short line, without a "Decaf method:" label.
+// Exact chosen H1 and product-scoped paragraph are required by the caller.
+// Neither "Honey Sweet" notes nor green Natural processing imply a treatment.
+const CURRENT_SELECTED_GREEN_AND_DECAF_CAPTION=/^(?:(?:extended[- ]fermentation\s+)?(?:wet|washed|natural|honey|anaerobic)\s+process(?:ed|ing)?)\s*(?:&|and)\s*(?:sugar[ -]?cane(?:\s+ethyl[ -]?acetate)?|ethyl[ -]?acetate|swiss[ -]?water|mountain[ -]?water|carbon[ -]?dioxide|co\s*[- ]?2)\s+decaffeination$/iu;
+
 // Accept short current treatment only with the directly selected self-decaf
 // paragraph and exact H1; never infer from roaster identity or site SEO.
 const CURRENT_SELECTED_DECAF_WAY=/^(?:[\p{L}\p{M}]{3,24}['’]d|(?:this|our)\s+coffee\s+(?:is|was)\s+decaffeinated)\s+by\s+way\s+of\s+(?:the\s+)?(?:swiss[\s-]?water|mountain[\s-]?water|sugar[\s-]?cane|ethyl[\s-]?acetate|(?:supercritical\s+)?carbon[\s-]?dioxide|co\s*[- ]?[2\u2082])\b/iu;
@@ -198,6 +204,19 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   if(selectedUnnamedDecafIdentity&&line.length<=240&&
      CURRENT_SELECTED_DECAF_WAY.test(line)&&!NONCURRENT_DECAF_METHOD.test(line)&&
      inferDecaffeinationMethod({name,selectedMethod:line,selectedCurrentDecafIdentity:true})&&
+     !decafEvidence.has(line)){
+   if(decafEvidence.size<4)decafEvidence.add(line);
+   else decafEvidenceOverflow=true;
+  }
+  // Product-only current highlight: "Wet Process & SugarCane Ethyl Acetate
+  // Decaffeination" is two distinct treatments, not a single green process.
+  // Require a whole bounded selected-product P and its exact current H1;
+  // descriptions of other coffees, SEO, FAQs and negated statements do not
+  // enter this evidence tier. Incompatible current methods fail closed later.
+  if(decafOnlyCoffee(name)&&b.tag==='p'&&line.length<=180&&
+     CURRENT_SELECTED_GREEN_AND_DECAF_CAPTION.test(line)&&
+     !NONCURRENT_DECAF_METHOD.test(line)&&
+     inferDecaffeinationMethod({name,selectedMethod:line})&&
      !decafEvidence.has(line)){
    if(decafEvidence.size<4)decafEvidence.add(line);
    else decafEvidenceOverflow=true;
