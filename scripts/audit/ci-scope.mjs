@@ -29,6 +29,9 @@ const POST_PIN_AUDIT_EVIDENCE_RECEIPT=/^docs\/audits\/issue267-v2-post-pin-direc
 const POST_PIN_PENDING_REVIEW_INDEX=/^docs\/audits\/issue267-v2-post-pin-direct-pending\/D2-[0-9]{3}-[0-9]{3}-20[0-9]{6}-hour(?:[0-9]|1[0-9]|2[0-3])\.json$/;
 // Narrow owner-audit snapshots: original exact path or dated SHA-prefix-bound machine inventory.
 const POST_PIN_AUDIT_TREE_INVENTORY=/^docs\/audits\/issue267-v2-post-pin-tree-drift-(?:20261105|20[0-9]{6}-[a-f0-9]{6,40})\.json$/;
+// Date- and ordinal-scoped #267 post-S2 complete Git-tree evidence (never a source file).
+// Exact JSON naming only; unknown/malformed JSON and mixed executable changes remain HIGH.
+const POST_PIN_AUDIT_TREE_POST_S2=/^docs\/audits\/issue267-v2-post-pin-(?:tree-drift|drift-delta)-20[0-9]{6}-post-S2-[0-9]{3,6}\.json$/;
 // #504's source-bound G1 receipts contain governance evidence, not app/test inputs.
 const GITHUB_RECORDS_EVIDENCE_RECEIPT=/^docs\/audits\/issue504-review-G1-[0-9]{3,6}\.json$/;
 
@@ -46,7 +49,7 @@ function impactKind(path){
  if(path==='README.md'||path==='AGENTS.md'||/^docs\/[A-Za-z0-9_.\/-]+\.md$/.test(path)||SAFE_META.has(path)||
   AUDIT_EVIDENCE_META.has(path)||AUDIT_EVIDENCE_RECEIPT.test(path)||
   POST_PIN_AUDIT_EVIDENCE_RECEIPT.test(path)||POST_PIN_PENDING_REVIEW_INDEX.test(path)||
-   POST_PIN_AUDIT_TREE_INVENTORY.test(path)||
+   POST_PIN_AUDIT_TREE_INVENTORY.test(path)||POST_PIN_AUDIT_TREE_POST_S2.test(path)||
   GITHUB_RECORDS_EVIDENCE_RECEIPT.test(path))
   return 'docs';
  if(/^site\/.*\.css$/.test(path))return 'style';
