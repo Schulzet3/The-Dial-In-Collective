@@ -122,6 +122,32 @@ for(const target of targets){
       }));
     }
 
+    // Original603 #25 exact current selected Coffee profile MUST preserve
+    // both its published aromas and flavors, not only the latter clause.
+    // This is an exact-source live contract, never an automatic 603 sign-off.
+    if(r.number===25){
+      const notes=r.current_fields?.tasting_notes||'';
+      const ownText=selected.replace(/<[^>]{0,2000}>/g,' ').replace(/\s+/g,' ');
+      r.selected_25_contract={
+        exact_selected_h1:r.selected_h1,parsed_name:r.current_fields?.name||null,
+        source_sha256:r.html_sha256,parsed_notes:notes,
+        selected_profile_printed:/Coffee profile:\s*Coffee features floral, fruity, and sweet aromas of vanilla and pipe tobacco, with rich, lush, and smooth flavors of black cherry, tobacco, and cocoa/i.test(ownText),
+        current_conflicts:r.conflicts||[]
+      };
+      r.selected_25_contract_passed=r.selected_h1.length===1&&
+        r.selected_h1[0]==='Sumatra Mandheling| Fair Trade Organic'&&
+        r.current_fields?.name===r.selected_h1[0]&&
+        r.selected_25_contract.selected_profile_printed&&
+        ['floral','fruity','vanilla','pipe tobacco','black cherry','tobacco','cocoa'].every(word=>notes.toLowerCase().includes(word))&&
+        r.current_fields?.origin==='Sumatra'&&
+        !r.current_fields?.process&&!r.current_fields?.roast_level&&
+        !(r.conflicts||[]).includes('tasting_notes')&&
+        r.add_coffee_ui_rendered&&r.source_review_rendered;
+      console.log('[DIC33 #25 COMPLETE SELECTED COFFEE PROFILE CONTRACT] '+JSON.stringify({
+        number:r.number,...r.selected_25_contract,passed:r.selected_25_contract_passed
+      }));
+    }
+
     // Original603 #527 strict post-fix current official selected product.
     // Do not use menu, related-coffee or historic SEO to create a false pear.
     if(r.number===527){
@@ -280,6 +306,18 @@ if(selectedRole154Control196 &&
  process.exitCode=1;
 }
 
+
+// Original603 #25: strictly prove current exact selected-source aroma+flavor
+// completeness, chosen H1 and actual Add Coffee and source-review outputs.
+if(targetNumbers.includes(25)){
+ const r=records.find(r=>r.number===25);
+ if(!r||r.status!=='FETCHED'||!r.parser_ok||r.selected_25_contract_passed!==true){
+  console.error('[DIC33 #25 OFFICIAL CURRENT COMPLETE PROFILE UNVERIFIED] '+
+   JSON.stringify({source_sha:summary.source_sha,status:r?.status,h1:r?.selected_h1,
+    fields:r?.current_fields,proof:r?.selected_25_contract}));
+  process.exitCode=1;
+ }
+}
 
 // #527 literal pear current exact selected-source after contract (not 603).
 if(targetNumbers.includes(527)){
