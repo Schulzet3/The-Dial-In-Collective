@@ -39,7 +39,13 @@ export function field(label,name,value='',options={}) {
 }
 export function select(label,name,items,value='',extra='') {return `<label class="field"><span>${e(label)}</span><select name="${name}" ${extra}>${items.map(x=>{const val=typeof x==='object'?x.value:x,lab=typeof x==='object'?x.label:x;return `<option value="${e(val)}" ${val===value?'selected':''}>${e(lab)}</option>`;}).join('')}</select></label>`;}
 export const checkbox=(name,label,checked=false,help='')=>`<label class="checkline"><input type="checkbox" name="${name}" ${checked?'checked':''}><span>${e(label)}${help?`<small>${e(help)}</small>`:''}</span></label>`;
-export function styleBadge(style){return `<span class="style-badge style-${e(style.toLowerCase())}">${style==='Turbo'?icon('bolt',12):''}${e(style)}</span>`;}
+// Preserve historical/unrecognized shot styles without crashing Shot History.
+export function styleBadge(style){
+ const recorded=typeof style==='string'&&style.trim()!=='';
+ const label=recorded?style:'Style not recorded';
+ const safeClass=recorded&&/^[a-z0-9]+(?:-[a-z0-9]+)*$/i.test(style)?'style-'+style.toLowerCase():'style-unknown';
+ return `<span class="style-badge ${safeClass}">${style==='Turbo'?icon('bolt',12):''}${e(label)}</span>`;
+}
 // A missing historic measurement is unknown, not zero. Keep genuine 0 and numeric strings.
 const numericMeasurement=v=>typeof v==='number'?Number.isFinite(v):
  typeof v==='string'&&v.trim()!==''&&Number.isFinite(Number(v));
