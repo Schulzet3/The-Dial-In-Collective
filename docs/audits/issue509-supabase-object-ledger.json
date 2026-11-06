@@ -2854,9 +2854,21 @@
       "provider_catalog_fingerprint_categories": 5,
       "production_writes": 0,
       "next": "#96 read-only actual hosted API/JWT security"
+    },
+    {
+      "event": "2026-11-06_run43_pg_settings_full_visible_descriptors",
+      "source_development_sha": "62404598d12415139dd871111b78bef3baa7da98",
+      "new_descriptor_records": 480,
+      "descriptor_chars": 39695,
+      "nonsecret_setting_values": 39,
+      "first_party_table_statistics": 46,
+      "source_evidence_path": "docs/audits/issue509-pg-settings-001-480-and-table-stats-20261106-run43.json",
+      "production_writes": 0,
+      "verified_defects": 0,
+      "next": "#96 hosted Auth/JWT API; provider-console-only settings and native source"
     }
   ],
-  "state": "VISIBLE_PG_CATALOG_3319_3319_COMPLETE; RUN42_PROVIDER_DRIFT_NO_CHANGE; FULL_SUPABASE_BASELINE_IN_PROGRESS",
+  "state": "VISIBLE_PG_CATALOG_3319_3319_AND_PG_SETTINGS_DESCRIPTORS_480_480_COMPLETE; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
   "application_table_review": {
     "total": 46,
     "current_index": 46,
@@ -6637,5 +6649,26 @@
     "source_code_fixes": 0,
     "next": "Hosted JWT/PostgREST/Realtime/Storage #96; changed provider objects",
     "baseline_complete": false
+  },
+  "provider_pg_settings_run43": {
+    "status": "480_OF_480_PG_SETTINGS_FULL_VISIBLE_DESCRIPTORS_SEMANTICALLY_REVIEWED_39_SAFE_VALUES_46_TABLE_STATS_NO_PROVEN_NEW_DEFECT",
+    "evidence_path": "docs/audits/issue509-pg-settings-001-480-and-table-stats-20261106-run43.json",
+    "reviewed": 480,
+    "total": 480,
+    "descriptor_chars": 39695,
+    "source_development_parent_sha": "62404598d12415139dd871111b78bef3baa7da98",
+    "main_sha": "ba5b9d3b89dd7fae1575edf10d8e97e80d4f1b3e",
+    "production_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+    "nonsecret_values": 39,
+    "first_party_table_stats": 46,
+    "pending_restart": 0,
+    "cron_extension": false,
+    "cron_schema": false,
+    "hosted_api_security": "UNVERIFIED",
+    "native_compiled_source": "UNVERIFIED",
+    "production_writes": false,
+    "source_code_fixes": 0,
+    "baseline_complete": false,
+    "next": "Changed provider sources; #96 signed-in hosted API/JWT checks; externally unavailable GUC values"
   }
 }
