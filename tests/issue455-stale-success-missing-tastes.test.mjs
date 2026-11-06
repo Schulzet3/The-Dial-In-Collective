@@ -23,7 +23,7 @@ function read(raw){
  assert.deepEqual(raw,before,'hydration must not rewrite server data, tastes or private notes');
  assert.equal(shot.doseG,18);assert.equal(shot.yieldG,36);
  assert.equal(shot.notes,'Original private note');assert.equal(shot.style,raw.shots[0].style);
- assert.match(html,/18\\.0g → 36\\.0g/);assert.match(html,/Original private note/);
+ assert.ok(html.includes('18.0g → 36.0g'),'original measured shot remains visible');assert.match(html,/Original private note/);
  return {state,shot,html};
 }
 test('#455 a server success flag with one unrecorded rating never becomes a green recipe',()=>{
