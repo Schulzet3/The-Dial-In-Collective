@@ -2699,9 +2699,11 @@
       "current_app": "Pre-fix chips showed missing as red severity-4; pre-fix radar plotted missing at center as green severity-0. Historical/partial ratings are still preserved; new log validation already requires five.",
       "proposed_change": "SAFE UI-only: mark missing/invalid historical taste chips explicitly Not rated with neutral styling; omit missing radar dots and all incomplete polygons; preserve all valid 1-5 values and original five-score data unchanged.",
       "approval_required_for_behavior_change": false,
-      "implementation": "TESTING_CODE_PR_918_QUEUE_INTAKE_REPAIRED_CI_PENDING",
-      "test_plan": "5 focused Node22 negative/positive real-module regressions, exact-source Node/lint plus browser/mobile/offline/accessibility for shared UI/CSS; SQL/Auth only if applicable and do not mislabel skipped; readback source-specific merge and READY docs after proof.",
-      "release_queue": "DIC-Q-455-unrated-taste-visuals (TESTING, not READY)"
+      "implementation": "VERIFIED_NONFORCE_MERGED_CODE_READY_NOT_DEPLOYED",
+      "test_plan": "Final PR head Node22/lint42158304489 2619 PASS/0 FAIL/6 SKIP incl 5 new true UI/History tests; real Chromium/390px/offline/a11y42158304444; SQL42158304401, security42158304402, governance42158304514 SUCCESS; exact merged Node22/lint42158517866 same 2619/0/6, built browser/mobile/offline/a11y42158517943 and governance42158517872 SUCCESS. Cloud targeted NOT_APPLICABLE, frozen603 SKIPPED. No member or cup empirical trial.",
+      "release_queue": "DIC-Q-455-unrated-taste-visuals READY, no publication",
+      "source_commit": "d8d8d9fc65e5b324382559cf9595b91b7172616b",
+      "implementation_pr": 918
     }
   ]
 }

@@ -6054,26 +6054,33 @@
       "issue": 455,
       "pr": 918,
       "title": "Show missing historic taste ratings as neutral unrated instead of simultaneous red failure/green ideal",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "d8d8d9fc65e5b324382559cf9595b91b7172616b",
       "scope_paths": [
         "site/lib/ui.js",
         "site/styles.css"
       ],
       "tests": [
-        "Current pre-fix development ded4cc5531b0ae89dc3b15f924ea30b07eb15fd8 site/lib/ui.js: missing tasteSeverity(null) maps ??4 to red chips, ??0 to green ideal compass; expanded Shot History and recipe feedback consume these same helpers.",
-        "Five direct real-module negative/positive regression tests in tests/issue455-unrated-taste-compass.test.mjs committed on PR #918 head a4edd71fafb450af1074a0220d59307e403585e6. Tests NOT yet certified by exact-head Node22 CI at queue intake.",
-        "Initial exact PR #918 approval/continuity run42158189345 FAILED solely because site/styles.css was not tracked in release queue; direct log reported Untracked app change. Repair is this in-progress queue entry; original failure is NOT PASS.",
-        "Re-run exact corrected PR-head Node22/lint/build, mobile/browser/offline/a11y, source security, isolated SQL and approval; mark skipped/not-applicable accurately; nonforce merge only after confirmed acceptance, then merged-source tests and separate READY reconciliation."
+        "Source-reproduced pre-fix at ded4cc5531b0ae89dc3b15f924ea30b07eb15fd8: tasteSeverity(null) returned null; chips ??4 presented missing rating as red failure, radar ??0 plotted green ideal; source UI/shot_card/main crosswalk verified. No member incident claimed.",
+        "First exact PR head a4edd71fafb450af1074a0220d59307e403585e6 approval run42158189345 FAILED queue intake (untracked site/styles.css); repaired without touching source code, tests or CSS on final head 955974184f905431d23a24724d4c2c2a03aecf34.",
+        "Corrected exact PR head Node22/lint [42158304489] 2625 total / 2619 PASS / 0 FAIL / 6 intentional SKIP including ALL FIVE new real-module negative/positive tastes/history/notes tests; one packaged UI build owned by browser run42158304444.",
+        "Corrected head real Chromium/390px responsive Log Shot->Rate->Recommendation, visual/contrast, offline/service-worker, a11y and permission checks [42158304444] SUCCESS; targeted cloud suite NOT_APPLICABLE/SKIPPED despite successful wrapper. Isolated SQL/JWT42158304401, source-security42158304402 and approval/governance42158304514 SUCCESS. Frozen60342158304386 SKIPPED not PASS.",
+        "Nonforce squash PR #918 code merge d8d8d9fc65e5b324382559cf9595b91b7172616b. All six merged original paths match exact successful final PR head Git blobs: UI36db18009a8781b099435ca2364b8f5c9e89b50c; CSS51751a2a2ba25019c6b97ecb93e55b27a3e7d314; test f1ded8de2d4269326f5946190be3620c5098a76b; queue2c5b9a86c9ad0369da7b1b323fc075f2b36e4f80; journal f522e2b37f18dfc3e8a94492fbede5902c72d0b8; ledger22d1ef7cd276e2fec4e04343355f9ca67114f894.",
+        "Exact merged-source push Node22/lint42158517866 2625 total / 2619 PASS / 0 FAIL / 6 SKIP including five #455 cases; actual built-browser/mobile390/offline/a11y42158517943 SUCCESS; merged approval/continuity42158517872 SUCCESS. Cloud targeted NOT_APPLICABLE/SKIPPED, no live member Auth/SQL mutation or physical espresso quality experiment."
       ],
       "ci_runs": [
-        42158189345
+        42158304489,
+        42158304444,
+        42158304401,
+        42158304402,
+        42158304514,
+        42158517866,
+        42158517943,
+        42158517872
       ],
-      "blockers": [
-        "Pending corrected PR-head CI, nonforce merge and exact merged-source verification. NOT READY or deployed."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Engineering-safe neutral legacy taste visualization only. All five actual sensory ratings, existing scoring/new-shot validation, original measured shots and notes, one-control engine advice, styles/calibrations, privacy preserved. NOT DEPLOYED."
+      "notes": "SAFE #455 P2 display-only historical unrated taste correction VERIFIED READY on development, NOT DEPLOYED. All five genuine taste ratings, notes, original shot data/history, grinder/style/feed and Locked one-controllable recommendation preserved. Original failed CI is transparently documented; passing corrected source and merged-source checks independently read. No real member/cup-quality claim, no S019 certification, no #267 literal review credit."
     }
   ],
   "history": [
