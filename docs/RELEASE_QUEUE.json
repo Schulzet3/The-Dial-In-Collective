@@ -12,8 +12,8 @@
       "issue": 33,
       "pr": 1037,
       "title": "Preserve exact current product JSON-LD when a script opening attribute contains quoted >",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "18fb1c678c2e9fa5225e4f513ba0ef8ffdfa936d",
       "scope_paths": [
         "supabase/functions/_shared/html-scan.mjs"
       ],
@@ -21,18 +21,28 @@
         "Reproduced directly from original shared scanner blob e07319a5cfe5bb96cdf4891563b493bf2abb2f0e: quoted > causes early tag close and JSON.parse failure; #267 V2 referred precise evidence to #33.",
         "Scoped code PR1037 source blob c731e22fc2a05b1559b4619cd05e0deb24ddbcc5; new tests blob 57dee7180fec6c29de8226bd784e5ff77a34fc8c for double/single quote, matching current Product JSON-LD, different-product negative, offsets, unclosed malformed and long bounded attribute.",
         "Initial PR-head run42230604998/42230604974 approval/archive failed because new indexed scoped journal lacked 4002 historical marker; journal corrected on exact PR branch commit 9276505f9b957788a97955ac7bd3141a85e3d946. Corrected PR-head approval42230782205 subsequently passed coverage but failed queue intake because scanner path lacked scoped queue row. This row addresses actual intake violation.",
-        "No live selected-roaster incidence verified, original immutable603 replay SKIPPED, no original coffee individually certified in this change."
+        "No live selected-roaster incidence verified, original immutable603 replay SKIPPED, no original coffee individually certified in this change.",
+        "Exact PR #1037 head 645e944b802dd212d595bc5f84c3fff93ddcf9f4 Node22/lint/build 42231531512: 2719 PASS/0 FAIL/6 intentional SKIP; five quoted-tag-end direct Positive/negative cases PASS. Head cloud/mobile42231531281, SQL42231531148, security42231531317, approval42231531510, source archive42231531386 SUCCESS; original frozen60342231531714 SKIPPED.",
+        "Nonforce merged source 18fb1c678c2e9fa5225e4f513ba0ef8ffdfa936d, scanner blob c731e22fc2a05b1559b4619cd05e0deb24ddbcc5, test blob 57dee7180fec6c29de8226bd784e5ff77a34fc8c. Exact merged Node/lint/build 42231914295: 2719 PASS/0 FAIL/6 intentional SKIP; cloud/mobile42231914644 and approval42231914506 SUCCESS. Head SQL/security still applicable; 603 certification not claimed.",
+        "Repairs shared quoted-attribute raw-script JSON-LD parsing, not an observed new roaster-page incident. Same source/selected product isolation and malformed-input safety enforced. Other READY/DEPLOYED queue items untouched."
       ],
       "ci_runs": [
         42230604998,
         42230604974,
-        42230782205
+        42230782205,
+        42231531512,
+        42231531281,
+        42231531148,
+        42231531317,
+        42231531510,
+        42231531386,
+        42231914295,
+        42231914644,
+        42231914506
       ],
-      "blockers": [
-        "Needs corrected source-exact required CI on PR including this queue intake, safe nonforce merge/readback, and applicable merged-source CI before READY. No deployment authorization."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Development-only scoped parsing correction. No production Netlify/SQL/Edge/Auth/member/provider writes, and 603/201/1197 immutable corpus/oracle/captures unchanged. #267 owns separate V2 audit and #96 authenticated security."
+      "notes": "Development-only scoped parsing correction. No production Netlify/SQL/Edge/Auth/member/provider writes, and 603/201/1197 immutable corpus/oracle/captures unchanged. #267 owns separate V2 audit and #96 authenticated security. VERIFIED narrow READY NOT DEPLOYED after exact source-merge and checked application CI, no live roaster incidence."
     },
     {
       "id": "DIC-Q-455-temperature-stale-success-evidence-guard",
