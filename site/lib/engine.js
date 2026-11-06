@@ -220,8 +220,10 @@ export function learnSensitivity(shots) {
  }
  return slopes.length>=2?{secondsPerUnit:quantile(slopes,.5),samples:slopes.length}:null;
 }
+// A historical success marker is not temperature evidence without five recorded green ratings.
 function temperatureGuidance(s,c,style,v,defaultC,familyId=null) {
- const sh=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn&&sh.coffeeId===c.id&&finite(sh.tempC)&&
+ const sh=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&
+  sh.coffeeId===c.id&&finite(sh.tempC)&&
   (sh.setupVersionId===v.id||(norm(v.machine)&&norm(sh.snapshot?.machine)===norm(v.machine))));
  if(familyId){
   const exact=sh.filter(x=>x.style===style&&x.familyId===familyId&&x.setupVersionId===v.id);
