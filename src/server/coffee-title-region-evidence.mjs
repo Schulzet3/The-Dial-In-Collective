@@ -122,6 +122,46 @@ export function selectedCountrySmallholderGrowingLocality({name='',country='',or
 }
 
 
+// Selected current country-first named-coffee and independently same-selected
+// contributing COOPERATIVE's present growing region. Not the importer address,
+// a co-op headquarters, a different lot or a geographic lookup. Multiple
+// different direct areas with this proof remain review-only.
+export function selectedCountryCooperativeGrowingArea({name='',country='',demonym='',origin='',producer='',blocks=[]}={}){
+ if(typeof name!=='string'||name.length>165||!country||!demonym||!producer||
+    norm(origin)!==norm(country)||!Array.isArray(blocks)||blocks.length>2500||
+    /\b(?:blend|sampler|assortment)\b/iu.test(name))return null;
+ const headings=blocks.filter(b=>b.tag==='h1');
+ if(headings.length!==1||norm(headings[0].text)!==norm(name)||
+    !new RegExp('^'+quoteRegex(country)+'\\s+','iu').test(name))return null;
+ const place=String.raw`[\p{Lu}][\p{L}\p{M}'’.-]{2,45}(?:\s+(?:(?:de|del|da|do|dos|of|the)\s+)?[\p{Lu}][\p{L}\p{M}'’.-]{2,45}){0,3}`;
+ const grammar=new RegExp(
+  String.raw`^(?:This|Our)\s+(?:(?:natural|washed|honey|anaerobic|organic|processed|fully|single[ -]origin)\s+){0,5}`+
+  quoteRegex(demonym)+
+  String.raw`\s+is\s+(?:produced|grown|cultivated|sourced)\s+by\s+(?:the\s+)?([\p{L}\p{M}\d&.'’ -]{3,120}?)\s+(?:composed|consisting)\s+of\s+(\d{1,4})\s+(?:family\s+)?farms\s+in\s+(?:the\s+)?(?:high\s+altitude\s+)?(`+
+  place+String.raw`)\s+area\s+of\s+(?:the\s+)?(`+
+  place+String.raw`)\s+region\s+in\s+(?:(?:eastern|western|northern|southern|central)\s+)?(`+
+  quoteRegex(country)+String.raw`)(?=[.!?;]|\s|$)`,'iu');
+ const results=new Map();
+ for(const block of blocks){
+  if(block.educational||!['p','li'].includes(block.tag)||
+    typeof block.text!=='string'||block.text.length>1200||
+    /\b(?:related|recommended|you may also like|other coffees?|other roasts?|catalog|customer reviews)\b/iu.test(block.section||''))continue;
+  for(const sentence of block.text.split(/(?<=[.!?])\s+/u)){
+   if(sentence.length>700||
+      /\b(?:previous(?:ly)?|former(?:ly)?|historical(?:ly)?|other lot|another coffee|not from|used to|hypothetical|might|could|would|if only)\b/iu.test(sentence))continue;
+   const hit=grammar.exec(sentence);
+   if(!hit||Number(hit[2])<2||!norm(producer).startsWith(norm(hit[1])))continue;
+   const area=hit[3].trim(),region=hit[4].trim();
+   if([area,region].some(value=>value.length>85||norm(value)===norm(country)||
+      /\b(?:coffee|roast|blend|tasting|flavou?r|chocolate|cocoa|natural|washed|farm|finca|estate|shipping|street|county|producer|process)\b/iu.test(value))||
+      norm(area)===norm(region))continue;
+   const value=area+', '+region+', '+country[0].toUpperCase()+country.slice(1);
+   results.set(norm(value),{value,quote:sentence.slice(0,420)});
+  }
+ }
+ return results.size===1?[...results.values()][0]:null;
+}
+
 // A selected named farm's current story can expose an incompatible one-letter
 // Region spelling. Preserve both literals for user review; never auto-correct.
 function oneLetterDifference(a,b){

@@ -1,190 +1,273 @@
 {
   "schema_version": 1,
-  "release_id": "DIC-20261105-READY19-19",
-  "tested_source_sha": "06418ca2c9d391892747da77851a9384ca6e31e5",
-  "previous_release_head_sha": "b386a977a7c43bf190f6315105894334d96f0f18",
-  "claimed_at_utc": "2026-11-05T20:44:51.701Z",
+  "release_id": "DIC-20261106-READY28-21",
+  "tested_source_sha": "40dd7097307bb7d7c36c199d9f9df0581e55d86c",
+  "previous_release_head_sha": "6c729b928fad5fd59ae012c63d7c005f180b2b64",
+  "claimed_at_utc": "2026-11-06T16:23:18.149Z",
   "status": "GIT_CONNECTED_BUILD_PENDING_NETLIFY_PROVIDER_READBACK",
   "granted_single_publication": true,
   "approved_ready_queue_items": [
     {
-      "id": "DIC-Q-455-shot-history-missing-date-display",
+      "id": "DIC-Q-455-similar-coffee-stale-success-evidence-guard",
       "issue": 455,
-      "title": "Avoid fabricated January 1970 dates for undated legacy Shot History and provide accessible unknown-date label",
-      "merged_source_sha": "cfdcbcaafe0d02d1bfb5b2c4df0176ddbf1dec35",
+      "title": "Exclude historical missing or nonideal five-taste ratings from personal similar-coffee references",
+      "merged_source_sha": "2e16a894a3259f1302d997497610fefaff677550",
       "scope_paths": [
-        "site/lib/ui.js",
-        "site/cloud/shot_card.js"
+        "site/lib/engine.js"
       ]
     },
     {
-      "id": "DIC-Q-455-shot-history-instant-order",
-      "issue": 455,
-      "title": "Show per-coffee Shot History newest by real instant, not lexical timezone offset",
-      "merged_source_sha": "667fbaa92fefa9cac0a584a6e74ba242757282ac",
+      "id": "DIC-Q-33-quoted-raw-script-attribute-jsonld",
+      "issue": 33,
+      "title": "Preserve exact current product JSON-LD when a script opening attribute contains quoted >",
+      "merged_source_sha": "18fb1c678c2e9fa5225e4f513ba0ef8ffdfa936d",
       "scope_paths": [
-        "site/cloud/main.js",
+        "supabase/functions/_shared/html-scan.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-temperature-stale-success-evidence-guard",
+      "issue": 455,
+      "title": "Exclude unverified archived five-rating success from personal temperature guidance",
+      "merged_source_sha": "9c4824e4c0c8311872c487aa59ffeaa0f3bfb513",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-grind-stale-success-evidence-guard",
+      "issue": 455,
+      "title": "Reject unrated or nonideal archived history as successful grinder setting or slow-feed evidence",
+      "merged_source_sha": "2fc6ebcd0c9fe7131bc36dbf60eaa4735c84b35b",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-family-stale-success-evidence-guard",
+      "issue": 455,
+      "title": "Exclude incomplete or nonideal historical taste ratings from successful personal recipe-family evidence",
+      "merged_source_sha": "6854b7ffb94f3cfb542a2695578afea4cb0ddb30",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-267-community-family-count-prior-consistency",
+      "issue": 267,
+      "title": "Normalize invalid Community confirmed-family counts consistently for unproven starting-prior ranking",
+      "merged_source_sha": "4b4984dc81d64d835648172dd6daa201f326f041",
+      "scope_paths": [
+        "site/lib/community-evidence.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-199-selected-description-literal-sensory",
+      "issue": 33,
+      "title": "Retain exact selected description caramel/honey/cookies with labeled Brazil Cerrado notes",
+      "merged_source_sha": "4f8ba11cb1a307b0bad73b832272e05472d11062",
+      "scope_paths": [
+        "src/server/coffee-selected-description-sensory.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-history-stale-make-current-guard",
+      "issue": 455,
+      "title": "Prevent a stale archived success flag from labeling or selecting an unrated shot as current",
+      "merged_source_sha": "cfe25763f3975fe87838066ea5f4e3b93cb3a554",
+      "scope_paths": [
+        "site/cloud/shot_card.js",
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-184-partial-blend-component-process",
+      "issue": 33,
+      "title": "Withhold unverified whole-blend process copied from a selected named component",
+      "merged_source_sha": "4996e8e791110e290a5f43ca0af05934a9f534d7",
+      "scope_paths": [
+        "src/server/coffee-blend-evidence.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-local-stale-success-import-guard",
+      "issue": 455,
+      "title": "Refuse stale local-backup success flags without five complete ideal ratings",
+      "merged_source_sha": "81c2fb83d5b784545759f4d940f337dfadc4ca0d",
+      "scope_paths": [
         "site/lib/model.js"
       ]
     },
     {
-      "id": "DIC-Q-33-original603-603-coop-drymill-town-origin",
+      "id": "DIC-Q-33-original603-193-current-cooperative-growing-area",
       "issue": 33,
-      "title": "Preserve selected Nicaragua Segovia growing locality by distinguishing processing-mill town",
-      "merged_source_sha": "caa2122944b340e7f4f486b120dea78873d90f0f",
+      "title": "Recover exact selected family-cooperative growing area, region and country with literal current product proof",
+      "merged_source_sha": "eb5a2d5d22d9d05eabc1883b6d693013f8ef79a8",
       "scope_paths": [
-        "src/server/coffee-processing-site-origin-guard.mjs",
-        "src/server/coffee-page-metadata.mjs"
+        "src/server/coffee-identity-evidence.mjs",
+        "src/server/coffee-title-region-evidence.mjs"
       ]
     },
     {
-      "id": "DIC-Q-455-coffee-recency-instant-order",
+      "id": "DIC-Q-455-empty-historic-success-family-ratio-guard",
       "issue": 455,
-      "title": "Current coffee recency and hidden-current reselection use real timezone instants",
-      "merged_source_sha": "a050f325effe5aba25838b95950650d9404aff71",
-      "scope_paths": [
-        "site/lib/model.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-33-original603-363-selected-area-direct-origin",
-      "issue": 33,
-      "title": "Current selected Bellavista/Chiapas origin from exact H1 and direct same-coffee locality statement",
-      "merged_source_sha": "99d5f5a3df6d42922c614189fca7b21ba86745cd",
-      "scope_paths": [
-        "src/server/coffee-title-region-evidence.mjs",
-        "src/server/coffee-identity-evidence.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-33-410-selected-heading-price-separation",
-      "issue": 33,
-      "title": "Selected current product display name excludes adjacent numeric commerce price",
-      "merged_source_sha": "0cc99e6601d13ffb038edc6dedf2dff95191284a",
-      "scope_paths": [
-        "src/server/coffee-product-identity.mjs",
-        "src/server/coffee-page-metadata.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-latest-shot-instant-order",
-      "issue": 455,
-      "title": "Select newest actual shot instant consistently in logging prefill and taste recommendation",
-      "merged_source_sha": "e61a357176e4dbc90bb3b7ee38c2fcea2d1837cf",
+      "title": "Keep invalid legacy success ratios from crashing new shot family assignment",
+      "merged_source_sha": "230c754426567f332d1f854146b762e24bb339e3",
       "scope_paths": [
         "site/lib/engine.js"
       ]
     },
     {
-      "id": "DIC-Q-33-seasonal-program-release-provenance",
+      "id": "DIC-Q-33-original603-21-selected-woocommerce-compact-flavors",
       "issue": 33,
-      "title": "Suppress archived selected-product seasonal-program edition leakage without erasing direct dated release",
-      "merged_source_sha": "b85ded3e40e8c59633e8261ad326e58e8ef682aa",
+      "title": "Recover exact selected original603 #21 unlabeled compact WooCommerce tasting list without unrelated narrative",
+      "merged_source_sha": "75705da2e7ad9ca08d5c07833cfaaa743dfdcac4",
       "scope_paths": [
-        "src/server/coffee-identity-evidence.mjs"
+        "src/server/coffee-flavor-evidence.mjs"
       ]
     },
     {
-      "id": "DIC-Q-33-original603-292-selected-guji-producer-region",
+      "id": "DIC-Q-33-440-review-role-evidence",
       "issue": 33,
-      "title": "Exact selected country-first Guji locality corroborated by same-product named producer",
-      "merged_source_sha": "7ecfee5299bdfac5e57392c23aa762041aa90c0b",
+      "title": "Keep farm, grower, processing facility and green method roles distinct in selected source review",
+      "merged_source_sha": "e4d6551beed0f59cbb27f44f1fa23e77caabb565",
       "scope_paths": [
-        "src/server/coffee-title-region-evidence.mjs",
-        "src/server/coffee-identity-evidence.mjs"
+        "src/server/coffee-source-facts.mjs"
       ]
     },
     {
-      "id": "DIC-Q-455-sweetness-instant-chronology",
-      "issue": 455,
-      "title": "Use actual shot instants, not ISO offset text order, for comparable same-coffee sweetness evidence",
-      "merged_source_sha": "6721cd38f7adf0e950c37d1eb0a6f615bc7e85dd",
-      "scope_paths": [
-        "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-33-original603-46-current-barrel-green-bean-origin",
+      "id": "DIC-Q-33-431-selected-conflicting-roast-full-city-med",
       "issue": 33,
-      "title": "Recover selected barrel-aged coffee green-bean named origin from adjacent current product prose",
-      "merged_source_sha": "5598c8811e9ab9c9fce19062b06ced39f59b1d5b",
+      "title": "Withhold contradictory exact selected Full City (Med) roast and expose manual review hint",
+      "merged_source_sha": "1857cbfc212f1c6c6268d1c56dae806a2dcc090c",
       "scope_paths": [
-        "src/server/coffee-identity-evidence.mjs"
+        "src/server/roast-level-evidence.mjs"
       ]
     },
     {
-      "id": "DIC-Q-33-original603-358-current-labeled-farm-region",
+      "id": "DIC-Q-33-453-selected-dual-processing-decaf",
       "issue": 33,
-      "title": "Use exact selected farm H1 literal country with independently labeled Region",
-      "merged_source_sha": "4c3de83549efc9da50c960346dc6b193f02543fb",
-      "scope_paths": [
-        "src/server/coffee-page-metadata.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-grind-observation-instant-order",
-      "issue": 455,
-      "title": "Use actual shot instants for prior-calibration reference and learned grind-time response",
-      "merged_source_sha": "c0ea44bf82db4f981af3be8d7d342f742cbbef76",
-      "scope_paths": [
-        "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-33-original603-64-cultivar-percentage-decimal-comma",
-      "issue": 33,
-      "title": "Preserve exact selected cultivar-composition decimal commas and percent shares",
-      "merged_source_sha": "0594e11ede570547ea4240d74e71ff6039df71dd",
-      "scope_paths": [
-        "src/server/coffee-page-metadata.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-33-original603-298-translated-at-origin-decaf",
-      "issue": 33,
-      "title": "Recover exact selected currently stated at-origin translated decaffeination method",
-      "merged_source_sha": "0946b15862f4e6dbcc91db22ab03367a3d9110eb",
+      "title": "Restore distinct sugarcane EA decaffeination method from selected combined wet-process product highlight",
+      "merged_source_sha": "4368136351594492a7077b44b437585c3ba9e982",
       "scope_paths": [
         "src/server/coffee-direct-product-prose.mjs"
       ]
     },
     {
-      "id": "DIC-Q-33-original603-593-conditional-selected-process",
+      "id": "DIC-Q-33-25-selected-complete-coffee-profile-aroma-and-flavor",
       "issue": 33,
-      "title": "Withhold falsely chosen Natural process when exact selected coffee only says whether washed or natural",
-      "merged_source_sha": "20a87e3008b4ef53268d028351ec45934b6afab2",
+      "title": "Recover original603 #25 exactly selected aroma plus flavor without overriding separately labeled notes",
+      "merged_source_sha": "ffac1439ef7be6ef6df360d8be76ce39188a1091",
       "scope_paths": [
+        "src/server/coffee-flavor-evidence.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-527-selected-named-sensory-pear",
+      "issue": 33,
+      "title": "Recover exactly selected named Tasting Notes prose missing one descriptor without losing list",
+      "merged_source_sha": "966dfeaaf1838ebe48730d574fdd9833819a9a57",
+      "scope_paths": [
+        "src/server/coffee-flavor-evidence.mjs",
         "src/server/coffee-page-metadata.mjs"
       ]
     },
     {
-      "id": "DIC-Q-33-original603-575-selected-smallholder-growing-locality",
-      "issue": 33,
-      "title": "Exact selected Stumptown current-lot contributing smallholders' growing locality from direct selected prose",
-      "merged_source_sha": "b68b826a2181b7f92650479c0381d5ac5d80d1fe",
+      "id": "DIC-Q-455-feedback-hydration-instant",
+      "issue": 455,
+      "title": "Choose recipe-context and rehydrated rating feedback by actual shot instant across offsets",
+      "merged_source_sha": "abb010b8ce6c449279913750b1b8147b987384b1",
       "scope_paths": [
-        "src/server/coffee-title-region-evidence.mjs",
-        "src/server/coffee-identity-evidence.mjs"
+        "site/lib/ui.js",
+        "site/cloud/mapping.js"
       ]
     },
     {
-      "id": "DIC-Q-33-original603-596-selected-farm-region-disagreement",
+      "id": "DIC-Q-33-97-selected-unnamed-decaf-treatment",
       "issue": 33,
-      "title": "Guard selected current named-farm region spelling disagreement and preserve both literals for Add Coffee review",
-      "merged_source_sha": "5e530b4a7ee373ad8413009a759c7ec342fba280",
+      "title": "Selected source declares decaf despite unnamed H1: recover same-product short water-process treatment",
+      "merged_source_sha": "f5774b4c802131d7b0392dfc158c495b2ee3136b",
       "scope_paths": [
-        "src/server/coffee-title-region-evidence.mjs",
+        "src/server/coffee-decaffeination-method.mjs",
+        "src/server/coffee-direct-product-prose.mjs",
         "src/server/coffee-page-metadata.mjs"
       ]
     },
     {
-      "id": "DIC-Q-33-original603-570-selected-farm-growing-locality",
+      "id": "DIC-Q-33-154-current-selected-named-grower-estate",
       "issue": 33,
-      "title": "Corroborate exact current selected named farm growing locality without extrapolation",
-      "merged_source_sha": "4f8a66a6a71b59146019924f7bbd8977d98c25fb",
+      "title": "Do not confuse the named selected grower with their separately labeled estate",
+      "merged_source_sha": "cf24bc22b79fabb8038e540cb04731172c2da8f0",
       "scope_paths": [
-        "src/server/coffee-selected-farm-growing-locality.mjs",
+        "src/server/coffee-direct-product-prose.mjs",
         "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-508-url-preview-stale-failure-feedback",
+      "issue": 508,
+      "title": "Discard stale failed URL autofill responses after source URL or form changes",
+      "merged_source_sha": "0ce8bc4848dfb7768b1feb424f5c8e5922a401bd",
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/cloud/coffee-url-autofill.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-legacy-blank-measurements",
+      "issue": 455,
+      "title": "Render missing legacy Shot History measurements as unknown, not a fabricated zero",
+      "merged_source_sha": "afda28589b693645d9b5eabb20d241dc6d7a2252",
+      "scope_paths": [
+        "site/lib/ui.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-unrated-taste-visuals",
+      "issue": 455,
+      "title": "Show missing historic taste ratings as neutral unrated instead of simultaneous red failure/green ideal",
+      "merged_source_sha": "d8d8d9fc65e5b324382559cf9595b91b7172616b",
+      "scope_paths": [
+        "site/lib/ui.js",
+        "site/styles.css"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-history-unknown-style-fallback",
+      "issue": 455,
+      "title": "Render missing historical shot styles without crashing Shot History",
+      "merged_source_sha": "d65013449df92827ce3c89f37be8c9ab530c28b9",
+      "scope_paths": [
+        "site/lib/ui.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-historic-stale-success-rating-guard",
+      "issue": 455,
+      "title": "Require actual five all-green ratings and server confirmation before historic shot is considered Dialed In",
+      "merged_source_sha": "82d799be33eb90abfd65fd17a9223c9bdad2e0f9",
+      "scope_paths": [
+        "site/cloud/mapping.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-592-selected-h1-water-decaf",
+      "issue": 33,
+      "title": "Recover exact selected current Swiss Water decaffeination method from a qualified full-decaf product H1",
+      "merged_source_sha": "50dfea097ed077045fac03d680db7a7d5297cdc2",
+      "scope_paths": [
+        "src/server/coffee-direct-product-prose.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-323-selected-linked-sensory-finish",
+      "issue": 33,
+      "title": "Preserve directly coordinated caramel flavor and nutty finish from exactly selected coffee narrative",
+      "merged_source_sha": "ad61c862758476cb574a96b2241134659e1bc37d",
+      "scope_paths": [
+        "src/server/coffee-flavor-evidence.mjs"
       ]
     }
   ]

@@ -195,6 +195,27 @@ function containerNotes(page,nodes,children,index,kind,clean){
  const value=parts.length?parts.join(', '):clean(body.replace(/<br\s*\/?\s*>/gi,', '),220).replace(FLAVOR_LABEL,'');
  return shortFlavorList(value,clean,{allowSingle:true});
 }
+// Exact current WooCommerce product summaries may print a compact sensory
+// list after four BR-separated product roles, with no explicit "Notes" label.
+// Require one selected scoped panel, all four typed roles and a short flavor
+// list. Never mine unrelated descriptions, SEO, option menus or other coffees.
+function selectedWooCommerceShortDescriptionNotes(page,nodes,clean){
+ const panels=nodes.filter(n=>n.tag==='div'&&hasClass(attributesOf(n,page),'woocommerce-product-details__short-description'));
+ if(panels.length!==1)return '';
+ const n=panels[0];if(n.contentEnd-n.headEnd>1800)return '';
+ const body=page.slice(n.headEnd,n.contentEnd);
+ const p=/^\s*<p\b[^<>]{0,240}>([\s\S]{1,1100}?)<\/p\s*>\s*$/i.exec(body);
+ if(!p)return '';
+ const lines=p[1].split(/<br\s*\/?>/gi).map(row=>clean(row,180).trim());
+ if(lines.length!==5||lines.some(s=>!s||s.length>160))return '';
+ if(!/^(?:ultra\s+light|very\s+light|light|medium[ -]light|light[ -]medium|medium|medium[ -]dark|dark|very\s+dark)\s+roast$/i.test(lines[0])||
+  !/^(?:very\s+low|low|below\s+average|medium|average|above\s+average|high|very\s+high)\s+acidity$/i.test(lines[1])||
+  !/^(?:very\s+low|low|below\s+average|medium|average|above\s+average|high|very\s+high|full|light|delicate)\s+body$/i.test(lines[2])||
+  !/^(?:very\s+low|low|below\s+average|medium|average|above\s+average|high|very\s+high)\s+sweetness$/i.test(lines[3]))return '';
+ const flavor=shortFlavorList(lines[4],clean);
+ return flavor&&SENSORY_ROLE.test(flavor)?flavor:'';
+}
+
 function detailsFlavorContainer(page,nodes,children,index,clean){
  const node=nodes[index];if(node.tag!=='details'||node.contentEnd-node.headEnd>12000)return '';
  const summaries=(children.get(index)||[]).filter(at=>nodes[at].tag==='summary');
@@ -413,6 +434,25 @@ function primaryCurrentFlavor(sentence,clean){
  return match?shortFlavorList(match[1],clean,{allowSingle:true}):'';
 }
 function coordinatedFlavorSentence(sentence,blockText,clean){
+ // A current product can coordinate a printed flavour with an independently
+ // printed sensory finish in the SAME statement. A following serving suggestion
+ // is not an alternate flavor; disallow any conditional/prepared/milk claim
+ // within the assertion, or a substantive later sensory continuation.
+ const linked=sentence.match(/\bwith\s+(?:a|an)\s+([^.!?;,]{2,90}?)\s+flavou?r,\s+and\s+(?:a|an)\s+([^.!?;,]{2,90}?\bfinish)\b(?=\s+that\s+is\s+perfect\s+for\b|[.!?]?$)/i);
+ if(linked){
+  const before=sentence.slice(0,linked.index),after=sentence.slice(linked.index+linked[0].length).trim();
+  const safeServed=after===''||/^[.!?]$/.test(after)||
+   (/^that\s+is\s+perfect\s+for\s+[^.!?]{2,100}[.!?]?$/i.test(after)&&
+    !/\b(?:milk|creamer|syrup|added|adding|mixed|prepared|served|brewed|steeped|diluted|cooled|heated|warmed|cinnamon|chocolate|caramel|nutty)\b/i.test(after));
+  if(safeServed&&!CONDITIONAL_FLAVOR.test(before+' '+linked[0])&&
+   !PREPARATION_QUALIFIED_FLAVOR.test(before+' '+linked[0])&&
+   !NONCURRENT_COFFEE_PROSE.test(before)&&
+   SENSORY_ROLE.test(linked[1])&&SENSORY_ROLE.test(linked[2])){
+    const first=shortFlavorList(linked[1],clean,{allowSingle:true});
+    const finish=shortFlavorList(linked[2],clean,{allowSingle:true});
+    if(first&&finish)return shortFlavorList(first+', '+finish,clean,{allowSingle:true});
+  }
+ }
  if(sentence.length>700||CONDITIONAL_FLAVOR.test(sentence)||/\b(?:with\s+milk|previously|formerly|historically|(?:last|previous)\s+season)\b/i.test(sentence))return '';
  const combine=parts=>{
   const notes=parts.map(value=>shortFlavorList(value.trim(),clean,{allowSingle:true}));
@@ -530,11 +570,13 @@ function selectedLiteralFlavorSentence(sentence,name,clean,blendScope=false,{ori
  match=sentence.match(/^Taste\s+the\s+complexity\s+of\s+([^.!?;]{2,220}?)\s+in\s+(?:every|each)\s+cup[.!?]?$/i);
  if(match&&!/\b(?:body|mouthfeel|acidity|balance|balanced)\b/i.test(match[1]))
   return shortFlavorList(match[1],clean,{allowSingle:true});
- // One explicit profile sentence separates aroma from flavor. The complete
- // flavor clause keeps its modifiers; the preceding aromas remain source text.
- match=sentence.match(/^Coffee\s+profile\s*:\s*Coffee\s+(?:features|offers|has)\s+[^.!?;]{2,220}?\baromas?\s+of\s+[^.!?;]{2,150}?,\s+with\s+([^.!?;]{2,220}?\bflavou?rs?\s+of\s+[^.!?;]{2,180})[.!?]?$/i);
- return match&&!/\b(?:body|mouthfeel|acidity|balance|balanced)\b/i.test(match[1])?
-  shortFlavorList(match[1],clean,{allowSingle:true}):'';
+ // A selected coffee's single, expressly labeled Coffee profile may
+ // publish aromas AND flavors in one coordinated sentence. Do not discard
+ // the first clause or infer a flavor from a separate story/list/product.
+ // Preserve its literal aroma/flavor distinction for source review.
+ match=sentence.match(/^Coffee\s+profile\s*:\s*Coffee\s+(?:features|offers|has)\s+([^.!?;]{2,220}?\baromas?\s+of\s+[^.!?;]{2,150}?),\s+with\s+([^.!?;]{2,220}?\bflavou?rs?\s+of\s+[^.!?;]{2,180})[.!?]?$/i);
+ if(!match||/\b(?:body|mouthfeel|acidity|balance|balanced)\b/i.test(match[1]+' '+match[2]))return '';
+ return normalizeExplicitCoffeeTastingNotes(match[1]+', with '+match[2],{allowProse:true});
 }
 function mixedCharacteristicsFlavor(segment,clean,section=''){
  if(NONCURRENT_SENSORY_SECTION.test(section))return '';
@@ -632,6 +674,8 @@ function flavorProse(page,clean,{origin='',originConflict=false}={}){
    if(primary){rememberNarrative(primary);continue;}
    if(roastVariants.size>1||DIRECT_EXTRACTION_FLAVOR.test(sentence))continue;
    const literal=selectedLiteralFlavorSentence(sentence,selectedName,clean,blendScope,{origin,originConflict,section:block.section});
+   // Keep this complete aroma+flavor profile a lower-ranked narrative
+   // fallback. A separately printed Tasting Notes list wins unchanged.
    if(literal){rememberNarrative(literal);continue;}
    const coordinated=coordinatedFlavorSentence(sentence,blockText,clean);
    if(coordinated){rememberNarrative(coordinated);continue;}
@@ -746,6 +790,65 @@ function flavorProse(page,clean,{origin='',originConflict=false}={}){
    !genericProfiles.size&&!tastingStatements.size&&candidates.length===1?candidates[0]:''};
 }
 
+// A direct, current, exactly named coffee can print one extra literal note
+// in the prose immediately under its own Tasting Notes heading, alongside
+// a shorter compact notes list. Require two word-identical anchors, exactly
+// one additional literal descriptor and NO independent conflicting profile.
+// Never use another coffee, marketing, SEO, milk-qualified or historical prose.
+function extendSelectedFlavorWithCorroboratedNamedNote(page,clean,profiles){
+ if(!profiles.length||new Set(profiles.map(row=>noteKey(row.value))).size!==1)return;
+ const blocks=productCoffeeProse(page,clean);
+ const names=[...new Set(blocks.filter(b=>b.tag==='h1'&&!b.educational).map(b=>b.text))];
+ if(names.length!==1)return;
+ const original=profiles[0].value,parts=original.split(/\s*(?:,|&|[•·;/]|\band\b)\s*/i).filter(Boolean);
+ if(parts.length<2||parts.length>10)return;
+ const normalized=parts.map(fold);
+ const candidates=new Map();
+ for(const block of blocks){
+  if(block.tag!=='p'||block.educational||NONCURRENT_SENSORY_SECTION.test(block.section)||
+   !/^(?:(?:tasting|taste|flavou?r|cupping)\s+notes?|what you['’]ll taste)$/i.test(block.section.trim())||
+   block.text.length>600)continue;
+  for(const sentence of block.text.split(/(?<=[.!?])\s+/u).slice(0,6)){
+   if(CONDITIONAL_FLAVOR.test(sentence)||PREPARATION_QUALIFIED_FLAVOR.test(sentence)||
+    NONCURRENT_COFFEE_PROSE.test(sentence))continue;
+   const match=sentence.match(/^(?:The|This|Our)\s+(.{2,110}?)\s+offers?\s+(?:(?:tasting|flavou?r)\s+)?notes?\s+of\s+([^,.!?;]{2,80}?)\s+and\s+([^,.!?;]{2,80}?),\s+with\s+(?:a|an)\s+hint\s+of\s+([^,.!?;]{2,80}?)(?:,|[.!?]|$)/iu);
+   if(!match||fold(match[1])!==fold(names[0]))continue;
+   const literals=match.slice(2).map(s=>shortFlavorList(s,clean,{allowSingle:true}));
+   if(literals.some(v=>!v||!SENSORY_ROLE.test(v)))continue;
+   const keys=literals.map(fold),missing=keys.filter(key=>!normalized.includes(key));
+   if(missing.length!==1||keys.filter(key=>normalized.includes(key)).length!==2)continue;
+   const value=literals[keys.indexOf(missing[0])];
+   candidates.set(fold(value),value);
+  }
+ }
+ // Competing direct descriptions are not a mandate to merge profiles.
+ if(candidates.size!==1)return;
+ const extra=[...candidates.values()][0];
+ // Insert after the first corroborating literal, retaining the seller's
+ // existing notes instead of replacing Red Wine with guessed synonyms.
+ const source=blocks.find(block=>block.tag==='p'&&
+  /^(?:(?:tasting|taste|flavou?r|cupping)\s+notes?|what you['’]ll taste)$/i.test(block.section.trim())&&
+  block.text.includes(extra));
+ if(!source)return;
+ const indexed=parts.findIndex(part=>source.text.toLowerCase().includes(part.toLowerCase()));
+ if(indexed<0)return;
+ parts.splice(indexed+1,0,extra);
+ const completed=parts.join(', ');
+ if(!shortFlavorList(completed,clean))return;
+ for(const row of profiles)row.value=completed;
+}
+
+// Refinement is also available after non-chip layout evidence has filled the
+// canonical selected notes (e.g., a roast-level panel holding labeled icons).
+// The same exact-H1, same-section, two-anchor and one-literal guard applies.
+export function refineSelectedNamedTastingNotes(html,{clean,notes}={}){
+ if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function'||
+  typeof notes!=='string'||notes.length<4||notes.length>350)return '';
+ const rows=[{value:notes}];
+ extendSelectedFlavorWithCorroboratedNamedNote(flavorPage(html),flavorCleaner(clean),rows);
+ return rows[0].value===notes?'':rows[0].value;
+}
+
 export function extractProductFlavorProfileEvidence(html,{clean}={}){
  if(typeof html!=='string'||typeof clean!=='function'||html.length>2_000_000)return [];
  clean=flavorCleaner(clean);
@@ -772,7 +875,10 @@ export function extractProductFlavorProfileEvidence(html,{clean}={}){
   if(found.length>=128)break;
  }
  for(const row of iconLabeledFlavorRows(page,nodes,children,clean,covered))found.push({value:row.value,kind:row.kind});
+ const selectedShortNotes=selectedWooCommerceShortDescriptionNotes(page,nodes,clean);
+ if(selectedShortNotes)found.push({value:selectedShortNotes,kind:'explicit_label'});
  for(const value of flavorProse(page,clean).explicit)found.push({value,kind:'explicit_label'});
+ extendSelectedFlavorWithCorroboratedNamedNote(page,clean,found);
  if(!found.length)found.push(...productHeroFlavorProfiles(page,nodes,clean));
  if(!found.length)found.push(...lowPriority);
  const unique=new Map();

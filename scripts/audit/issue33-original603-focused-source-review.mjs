@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// Release20 blocked dependency #1044: independently verify current #431/#437/#440 source, Add Coffee and review output; no corpus certification.
 // Issue33: selected original603 public URLs; captures are NOT automatic certification.
 import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
 import {join} from 'node:path';
@@ -10,6 +11,7 @@ import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 import {productCoffeeProse} from '../../src/server/coffee-product-prose.mjs';
 import {extractCoffeeBlendEvidence} from '../../src/server/coffee-blend-evidence.mjs';
 import {sameHandleCollectionAlternate,identicalCurrentSelectedTitle} from './issue33-selected-public-alternate.mjs';
+import {requiredFocusedSourceFailures} from './issue33-focused-source-acceptance.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../../site/cloud/coffee-url-autofill.js';
 const sha=value=>createHash('sha256').update(value).digest('hex');
 const clip=(v,n=350)=>String(v??'').replace(/\s+/g,' ').trim().slice(0,n);
@@ -90,10 +92,115 @@ for(const target of targets){
       .filter(([,v])=>v!=null&&typeof v!=='object').map(([k,v])=>[k,clip(v,400)]));
     r.conflicts=p.conflicts||[];
     r.source_facts=(p.source_facts||[]).slice(0,45).map(f=>({
-      field:clip(f.field,80),value:clip(f.value,360),section:clip(f.section,110),
+      label:clip(f.label,120),field:clip(f.field,80),value:clip(f.value,360),source_url:clip(f.source_url,320),section:clip(f.section,110),
       source_type:clip(f.source_type,55),conflicting:f.conflicting===true}));
     r.add_coffee_ui_rendered=coffeeUrlPreviewMarkup(p).includes('coffee-url-preview');
     r.source_review_rendered=!!coffeeSourceReviewSnapshot({...p,source_url:r.final_url});
+    // #154/#196 real selected-product AFTER-test. This is a bounded current
+    // official-source contract, not a universal 603-coffee certification.
+    // A changed/unavailable identity must FAIL and return for human review;
+    // never substitute a prior lot, SEO/menu copy or another farm.
+    const selectedRoleContract={
+      154:{h1:'Colombia José Giraldo Entre Montañas',producer:'José Giraldo',farm:'Las Marias',process:'Washed'},
+      196:{h1:'El Silencio — Chiroso Washed',producer:'El Silencio (Alex Metrio)',process:'Anaerobic'}
+    }[r.number];
+    if(selectedRoleContract){
+      r.selected_role_contract={
+        source_h1: r.selected_h1,
+        observed_producer:r.current_fields?.producer||null,
+        observed_farm:p.roaster_details?.farm||null,
+        observed_process:r.current_fields?.process||null,
+        expected:selectedRoleContract
+      };
+      r.selected_role_contract_passed=
+        r.selected_h1.length===1 && r.selected_h1[0]===selectedRoleContract.h1 &&
+        r.current_fields?.producer===selectedRoleContract.producer &&
+        r.current_fields?.process===selectedRoleContract.process &&
+        (!selectedRoleContract.farm||p.roaster_details?.farm===selectedRoleContract.farm) &&
+        r.add_coffee_ui_rendered && r.source_review_rendered;
+      console.log('[DIC33 CURRENT SELECTED GROWER ESTATE ROLE ACCEPTANCE] '+JSON.stringify({
+        number:r.number,source_sha256:r.html_sha256,
+        ...r.selected_role_contract,passed:r.selected_role_contract_passed
+      }));
+    }
+
+    // Original603 #25 exact current selected Coffee profile MUST preserve
+    // both its published aromas and flavors, not only the latter clause.
+    // This is an exact-source live contract, never an automatic 603 sign-off.
+    if(r.number===25){
+      const notes=r.current_fields?.tasting_notes||'';
+      const ownText=selected.replace(/<[^>]{0,2000}>/g,' ').replace(/\s+/g,' ');
+      r.selected_25_contract={
+        exact_selected_h1:r.selected_h1,parsed_name:r.current_fields?.name||null,
+        source_sha256:r.html_sha256,parsed_notes:notes,
+        selected_profile_printed:/Coffee profile:\s*Coffee features floral, fruity, and sweet aromas of vanilla and pipe tobacco, with rich, lush, and smooth flavors of black cherry, tobacco, and cocoa/i.test(ownText),
+        current_conflicts:r.conflicts||[]
+      };
+      r.selected_25_contract_passed=r.selected_h1.length===1&&
+        r.selected_h1[0]==='Sumatra Mandheling| Fair Trade Organic'&&
+        r.current_fields?.name===r.selected_h1[0]&&
+        r.selected_25_contract.selected_profile_printed&&
+        ['floral','fruity','vanilla','pipe tobacco','black cherry','tobacco','cocoa'].every(word=>notes.toLowerCase().includes(word))&&
+        r.current_fields?.origin==='Sumatra'&&
+        !r.current_fields?.process&&!r.current_fields?.roast_level&&
+        !(r.conflicts||[]).includes('tasting_notes')&&
+        r.add_coffee_ui_rendered&&r.source_review_rendered;
+      console.log('[DIC33 #25 COMPLETE SELECTED COFFEE PROFILE CONTRACT] '+JSON.stringify({
+        number:r.number,...r.selected_25_contract,passed:r.selected_25_contract_passed
+      }));
+    }
+
+    // Original603 #527 strict post-fix current official selected product.
+    // Do not use menu, related-coffee or historic SEO to create a false pear.
+    if(r.number===527){
+      const exactSource=selected;
+      const notes=r.current_fields?.tasting_notes||'';
+      r.selected_527_contract={
+        current_h1:r.selected_h1,source_sha256:r.html_sha256,
+        parsed_name:r.current_fields?.name||null,parsed_notes:notes,
+        same_product_named_story:/The Kenya Peaberry offers notes of honeydew melon and pear, with a hint of jasmine/i.test(
+          exactSource.replace(/<[^>]{0,2000}>/g,' ').replace(/\s+/g,' ')),
+        conflicts:r.conflicts||[]
+      };
+      r.selected_527_contract_passed=r.selected_h1.length===1&&
+        r.selected_h1[0]==='Kenya Peaberry'&&r.current_fields?.name==='Kenya Peaberry'&&
+        r.selected_527_contract.same_product_named_story&&
+        ['Honeydew Melon','pear','Jasmine','Red Wine'].every(note=>notes.toLowerCase().includes(note.toLowerCase()))&&
+        !(r.conflicts||[]).includes('tasting_notes')&&
+        r.add_coffee_ui_rendered&&r.source_review_rendered;
+      console.log('[DIC33 #527 EXACT SELECTED NAMED NOTE AFTER CONTRACT] '+JSON.stringify({
+        number:r.number,...r.selected_527_contract,passed:r.selected_527_contract_passed
+      }));
+    }
+
+    // Original603 #97: a selected product can declare decaf even when the
+    // exact H1 lacks the word Decaf. The selected same-product accordion,
+    // not DEKAF brand/navigation or decaffeination education, proves METHOD.
+    // A changed lot/identity, missing method, spurious green process or
+    // failure to render explicit Add Coffee/Source Review fails closed.
+    if(r.number===97){
+      r.selected_97_contract={
+        exact_selected_h1:r.selected_h1,
+        source_sha256:r.html_sha256,
+        parsed_name:r.current_fields?.name||null,
+        water_decaffeination_method:r.current_fields?.decaffeination_method||null,
+        green_processing:r.current_fields?.process||null,
+        method_source_fact:(p.source_facts||[]).filter(x=>
+          x.field==='decaffeination_method'&&/swiss[\s-]*water/i.test(x.value||'')).slice(0,4)
+          .map(x=>clip(x.value,240)),
+        conflicts:r.conflicts||[]
+      };
+      r.selected_97_contract_passed=r.selected_h1.length===1&&
+        r.selected_h1[0]==='Brazil Arabela'&&r.current_fields?.name==='Brazil Arabela'&&
+        r.current_fields?.decaffeination_method==='Water Process'&&
+        !r.current_fields?.process&&r.selected_97_contract.method_source_fact.length>0&&
+        !(r.conflicts||[]).includes('decaffeination_method')&&
+        r.add_coffee_ui_rendered&&r.source_review_rendered;
+      console.log('[DIC33 #97 EXACT SELECTED DECAF AFTER CONTRACT] '+JSON.stringify({
+        number:r.number,...r.selected_97_contract,passed:r.selected_97_contract_passed
+      }));
+    }
+
     // Independent exact selected current #490 H1/price badge acceptance:
     // never treat general navigation or customer-review prose as a release.
     if(r.number===490){
@@ -131,10 +238,9 @@ for(const target of targets){
       }));
     }
 
-    // Diagnostic only: a DIFFERENT Lowcountry coffee's flavor appears in
-    // review-only source_facts for Breakfast Blend. Find the precise public
-    // HTML product scope/ancestor rather than silently filtering genuine
-    // selected-product conflicting labels. No page content is changed.
+    // Diagnostic: the selected Breakfast Blend details itself prints two
+    // incompatible direct flavor sets; neither is another coffee's proof.
+    // Keep their selected HTML placement and source-review provenance visible.
     if(r.number===205){
       const selectedHtml=productMarkup(res.html);
       const pattern=/Nutmeg[\s\S]{0,160}(?:Whole Bean )?Vanilla[\s\S]{0,160}(?:Creamy )?Butter/gi;
@@ -148,7 +254,7 @@ for(const target of targets){
       }
       console.log('[DIC33 LOWCOUNTRY PUBLIC RELATED-SCOPE DIAG] '+JSON.stringify({
         case:205,correct_selected_tasting_notes:r.current_fields?.tasting_notes,
-        unrelated_fact_retained:r.source_facts?.some(f=>f.field==='tasting_notes'&&/Nutmeg.*Vanilla/i.test(f.value)),
+        selected_flavor_caption_disagrees:r.source_facts?.some(f=>f.field==='tasting_notes'&&f.conflicting===true&&/Nutmeg.*Vanilla/i.test(f.value)),
         contexts
       }));
     }
@@ -184,6 +290,61 @@ const summary={schema_version:1,kind:'ORIGINAL603_FOCUSED_CURRENT_SOURCE_NOT_AUT
 writeFileSync(join(dest,'focused-current-evidence.json'),JSON.stringify(summary,null,2)+'\n');
 console.log('[DIC33 FOCUSED SUMMARY] '+JSON.stringify({attempted:records.length,fetched:summary.fetched,
  parsed:summary.parsed,manual_certified:0}));
-if(records.length!==targetNumbers.length||records.some(x=>x.status==='FETCHED'&&(!x.parser_ok||!x.add_coffee_ui_rendered||x.selected_price_badge_accepted===false)))process.exitCode=1;
+const requiredSourceFailures=requiredFocusedSourceFailures(targetNumbers,records);
+if(requiredSourceFailures.length){
+ console.error('[DIC33 FOCUSED REQUIRED CURRENT SOURCE UNVERIFIED] '+JSON.stringify({
+  source_sha:summary.source_sha,required_cases:targetNumbers,failures:requiredSourceFailures
+ }));
+ process.exitCode=1;
+}
 // Issue #33 exact selected-station post-merge official fifth20 source recheck; no parser change.
 // Issue #33 second exact current selected Chelchele post-PR341 public fifth20 source readback.
+
+const selectedRole154Control196=targetNumbers.length===2 && targetNumbers.includes(154) && targetNumbers.includes(196);
+if(selectedRole154Control196 &&
+ (summary.fetched!==2 || summary.parsed!==2 || records.some(r=>r.selected_role_contract_passed!==true))){
+ console.error('[DIC33 SELECTED ROLE REAL OFFICIAL INCOMPLETE] '+JSON.stringify({
+  source_sha:summary.source_sha,attempted:records.length,
+  fetched:summary.fetched,parsed:summary.parsed,
+  cases:records.map(r=>({number:r.number,status:r.status,h1:r.selected_h1,
+   producer:r.current_fields?.producer||null,farm:r.selected_role_contract?.observed_farm||null,
+   selected_role_contract_passed:r.selected_role_contract_passed===true}))
+ }));
+ process.exitCode=1;
+}
+
+
+// Original603 #25: strictly prove current exact selected-source aroma+flavor
+// completeness, chosen H1 and actual Add Coffee and source-review outputs.
+if(targetNumbers.includes(25)){
+ const r=records.find(r=>r.number===25);
+ if(!r||r.status!=='FETCHED'||!r.parser_ok||r.selected_25_contract_passed!==true){
+  console.error('[DIC33 #25 OFFICIAL CURRENT COMPLETE PROFILE UNVERIFIED] '+
+   JSON.stringify({source_sha:summary.source_sha,status:r?.status,h1:r?.selected_h1,
+    fields:r?.current_fields,proof:r?.selected_25_contract}));
+  process.exitCode=1;
+ }
+}
+
+// #527 literal pear current exact selected-source after contract (not 603).
+if(targetNumbers.includes(527)){
+ const r=records.find(r=>r.number===527);
+ if(!r||r.status!=='FETCHED'||r.parser_ok!==true||r.selected_527_contract_passed!==true){
+  console.error('[DIC33 #527 OFFICIAL CURRENT LITERAL COMPLETENESS UNVERIFIED] '+
+   JSON.stringify({source_sha:summary.source_sha,status:r?.status,h1:r?.selected_h1,
+    fields:r?.current_fields,proof:r?.selected_527_contract,passed:r?.selected_527_contract_passed}));
+  process.exitCode=1;
+ }
+}
+
+// Original603 #97 after-merge public-only source acceptance (not 603 certification).
+if(targetNumbers.length===1 && targetNumbers[0]===97 &&
+ (summary.fetched!==1 || summary.parsed!==1 || records[0].selected_97_contract_passed!==true)){
+ console.error('[DIC33 #97 OFFICIAL AFTER CONTRACT UNVERIFIED] '+JSON.stringify({
+  source_sha:summary.source_sha,fetched:summary.fetched,parsed:summary.parsed,
+  status:records[0]?.status,h1:records[0]?.selected_h1,
+  observed_method:records[0]?.current_fields?.decaffeination_method||null,
+  contract_passed:records[0]?.selected_97_contract_passed===true
+ }));
+ process.exitCode=1;
+}

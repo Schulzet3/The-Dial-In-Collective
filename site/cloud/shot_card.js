@@ -1,4 +1,5 @@
 import {e,button,icon,shotSummary,styleBadge,humanDate,chips,radar} from '../lib/ui.js';
+import {isDialed} from '../lib/constants.js';
 
 // One-line shot summary on wide screens, like the original JSX.
 // Equipment context is preserved at the bottom of expanded details.
@@ -16,7 +17,8 @@ export function shotCard(shot,{expanded=false,activeVersionId=null,unit='F'}={})
  const source=provenance?.kind==='member_selected_starting_reference'&&used.length?String(provenance.source_label||'Starting recommendation'):null;
  const displayDate=humanDate(shot.timestamp)||'Date not recorded';
  const canEdit=!shot.cloudPending;
- const canChoose=canEdit&&shot.dialedIn&&shot.setupVersionId===activeVersionId;
+ const genuineSuccess=shot.dialedIn===true&&isDialed(shot.tasteScales);
+ const canChoose=canEdit&&genuineSuccess&&shot.setupVersionId===activeVersionId;
  return `<section class="shot">
   <button class="shot-toggle" data-action="shot-expand" data-id="${e(shot.id)}" aria-expanded="${expanded}" aria-label="Toggle details for shot on ${e(displayDate)}">
    <div class="shot-overview">
@@ -25,7 +27,7 @@ export function shotCard(shot,{expanded=false,activeVersionId=null,unit='F'}={})
      <span class="shot-date">${e(displayDate)}</span>
     </div>
     <div class="shot-meta">${styleBadge(shot.style)}
-     ${shot.cloudPending?'<span class="preview-pill">Pending Sync</span>':shot.dialedIn?'<span class="status-badge">Dialed In</span>':''}
+     ${shot.cloudPending?'<span class="preview-pill">Pending Sync</span>':genuineSuccess?'<span class="status-badge">Dialed In</span>':''}
     </div>
    </div>${icon('chevron',15)}
   </button>

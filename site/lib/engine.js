@@ -29,7 +29,9 @@ export function baseline(coffee,style,dose,preferences='') {
  if(index<0)reasons.push('Roast level unknown; Medium is a recipe fallback, not a coffee fact.');
  return {doseG:dose,ratio:{low:Math.max(.8,ratio-CONFIG.rangeHalfWidth),high:ratio+CONFIG.rangeHalfWidth,center:ratio},time:{low:time[0],high:time[1],center:mean(time)},tempC:temp,reasons,source:'Starting recommendation',observations:0,familyId:null,established:false};
 }
-export function familyShots(s,id) {return s.shots.filter(x=>!x.hidden&&x.dialedIn&&x.familyId===id);}
+// Never promote an archived/imported `dialedIn` marker into personal recipe
+// evidence without verifying its five original recorded ideal ratings.
+export function familyShots(s,id) {return s.shots.filter(x=>!x.hidden&&x.dialedIn===true&&isDialed(x.tasteScales)&&x.familyId===id);}
 export function familyStats(s,id) {
  const shots=familyShots(s,id);if(!shots.length)return null;
  return {ratio:stats(shots.map(x=>x.yieldG/x.doseG),{singleWidth:1/(mean(shots.map(x=>x.doseG))||18)}),time:stats(shots.map(x=>x.timeS),{singleWidth:2}),count:shots.length,confirmed:shots.length>=2};
@@ -38,7 +40,13 @@ export function familiesFor(s,coffeeId,style) {return s.families.filter(f=>f.cof
 export function assignFamily(s,shot) {
  const ratio=shot.yieldG/shot.doseG;
  let best=null,dist=Infinity;
- for(const f of familiesFor(s,shot.coffeeId,shot.style)){const value=familyStats(s,f.id).ratio.center;const d=Math.abs(value-ratio);if(d<dist&&d<=CONFIG.ratioFamilyDistance){best=f;dist=d;}}
+ for(const f of familiesFor(s,shot.coffeeId,shot.style)){
+  // Keep incomplete legacy shots in History; they cannot anchor a recipe ratio.
+  const value=familyStats(s,f.id)?.ratio?.center;
+  if(!finite(value))continue;
+  const d=Math.abs(value-ratio);
+  if(d<dist&&d<=CONFIG.ratioFamilyDistance){best=f;dist=d;}
+ }
  if(!best){best={id:newId('family'),coffeeId:shot.coffeeId,style:shot.style,seedRatio:ratio,createdAt:now()};s.families.push(best);}
  return best.id;
 }
@@ -121,7 +129,9 @@ export function translateGrind(sh,v) {
  return round(v.grinderMin+pos*(v.grinderMax-v.grinderMin));
 }
 export function grindGuidance(s,c,style,basket,feed,familyId=null) {
- const v=activeVersion(s),qual=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn&&sh.style===style&&sh.feedMode===feed&&hardwareMatch(sh,v)&&finite(sh.grindSetting));
+ // A legacy success flag alone is not evidence of five actually ideal ratings.
+ const validSuccess=sh=>sh.dialedIn===true&&isDialed(sh.tasteScales);
+ const v=activeVersion(s),qual=s.shots.filter(sh=>!sh.hidden&&validSuccess(sh)&&sh.style===style&&sh.feedMode===feed&&hardwareMatch(sh,v)&&finite(sh.grindSetting));
  const current=qual.filter(sh=>sh.calibrationId===v.calibrationId),same=current.filter(sh=>sh.coffeeId===c.id&&(!familyId||sh.familyId===familyId));
  const basketHits=same.filter(sh=>sh.basketId===basket.id);
  if(basketHits.length)return {value:round(quantile(basketHits.map(sh=>sh.grindSetting),.5)),source:'Your successful setting',proven:true};
@@ -162,7 +172,7 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
   const span=v.grinderMax-v.grinderMin;
   const paired=new Map();
   for(const sh of s.shots){
-   if(sh.hidden||!sh.dialedIn||sh.setupVersionId!==v.id||
+   if(sh.hidden||!validSuccess(sh)||sh.setupVersionId!==v.id||
       sh.calibrationId!==v.calibrationId||sh.style!==style||
       sh.basketId!==basket.id||!finite(sh.grindSetting)||
       !['standard','slow'].includes(sh.feedMode))continue;
@@ -173,7 +183,7 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
    .map(x=>quantile(x.standard,.5)-quantile(x.slow,.5))
    .filter(x=>x>=.1&&x<=span);
   const shift=gaps.length?quantile(gaps,.5):span*.4;
-  const standard=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn&&
+  const standard=s.shots.filter(sh=>!sh.hidden&&validSuccess(sh)&&
    sh.setupVersionId===v.id&&sh.calibrationId===v.calibrationId&&
    sh.coffeeId===c.id&&sh.style===style&&sh.basketId===basket.id&&
    sh.feedMode==='standard'&&finite(sh.grindSetting));
@@ -210,8 +220,10 @@ export function learnSensitivity(shots) {
  }
  return slopes.length>=2?{secondsPerUnit:quantile(slopes,.5),samples:slopes.length}:null;
 }
+// A historical success marker is not temperature evidence without five recorded green ratings.
 function temperatureGuidance(s,c,style,v,defaultC,familyId=null) {
- const sh=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn&&sh.coffeeId===c.id&&finite(sh.tempC)&&
+ const sh=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&
+  sh.coffeeId===c.id&&finite(sh.tempC)&&
   (sh.setupVersionId===v.id||(norm(v.machine)&&norm(sh.snapshot?.machine)===norm(v.machine))));
  if(familyId){
   const exact=sh.filter(x=>x.style===style&&x.familyId===familyId&&x.setupVersionId===v.id);
@@ -229,7 +241,7 @@ export function personalSimilarCoffeeReference(s,coffee,version,style,feed,baske
  const byId=new Map(s.coffees.map(c=>[c.id,c]));
  const matches=[],nearby=[];
  for(const sh of s.shots){
-  if(sh.hidden||!sh.dialedIn||sh.coffeeId===coffee.id||
+  if(sh.hidden||sh.dialedIn!==true||!isDialed(sh.tasteScales)||sh.coffeeId===coffee.id||
      sh.setupVersionId!==version.id||sh.style!==style||sh.feedMode!==feed||
      !finite(sh.yieldG)||!finite(sh.doseG)||!finite(sh.timeS)||sh.doseG<=0||
      sh.timeS<=0)continue;
@@ -599,7 +611,7 @@ export function editShot(s,id,input) {
 }
 export function hideShot(s,id) {const sh=s.shots.find(x=>x.id===id);if(!sh)return;sh.hidden=true;sh.hiddenAt=now();logAudit(s,'shot.hidden',{shotId:id,retainQualifyingContribution:sh.dialedIn});}
 export function makeCurrent(s,shotId) {
- const sh=s.shots.find(x=>x.id===shotId);if(!sh?.dialedIn||sh.hidden)throw new Error('Choose a visible all-green shot.');
+ const sh=s.shots.find(x=>x.id===shotId);if(sh?.dialedIn!==true||!isDialed(sh.tasteScales)||sh.hidden)throw new Error('Choose a visible all-green shot.');
  if(sh.setupVersionId!==activeVersion(s).id)throw new Error('This is a reference from another setup. Log a successful shot here first.');
  const p=ensureCoffeeState(s,sh.coffeeId);p.currentFamilies[sh.style]=sh.familyId;p.favoriteShots[sh.familyId]=sh.id;p.style=sh.style;
  logAudit(s,'recipe.preferred',{coffeeId:sh.coffeeId,familyId:sh.familyId,shotId});

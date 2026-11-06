@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "review_date_utc": "2026-11-06",
+  "issue": 33,
+  "state": "READY_NOT_DEPLOYED",
+  "scoped_original603_case": 25,
+  "merged_code_source_sha": "ffac1439ef7be6ef6df360d8be76ce39188a1091",
+  "documentation_parent_sha": "2e13987964d4b91147659b851ea275d58b4d820a",
+  "code_pr": 905,
+  "official_selected_url": "https://bleucoffee.com/products/copy-of-papua-new-guinea",
+  "current_selected_h1": "Sumatra Mandheling| Fair Trade Organic",
+  "current_official_selected_literal": "Coffee profile: Coffee features floral, fruity, and sweet aromas of vanilla and pipe tobacco, with rich, lush, and smooth flavors of black cherry, tobacco, and cocoa.",
+  "before_defect": "Omitted directly published vanilla and pipe tobacco aromas from canonical notes while retaining black cherry/tobacco/cocoa flavors",
+  "after_canonical_tasting_notes": "floral, fruity, and sweet aromas of vanilla and pipe tobacco, with rich, lush, and smooth flavors of black cherry, tobacco, and cocoa",
+  "after_origin": "Sumatra",
+  "roast": "UNPUBLISHED_BLANK",
+  "process": "UNPUBLISHED_BLANK",
+  "conflicts": [],
+  "official": {
+    "run": 42148630712,
+    "job": 127666114366,
+    "conclusion": "SUCCESS",
+    "artifact_id": 13471510992,
+    "zip_sha256": "0ce694ffcd600e1f56408c717711f6604067cabc71730d380bde8c2432bf8099",
+    "html_sha256": {
+      "13": "9563bf9d22ca2933e958ed4802eb2699740168ba778a3c025d30342db571fac5",
+      "19": "9715dd82a047953e1dcf57be75ae0bba9867adbbb814ee9308e6344c84f13db6",
+      "25": "777b4a076663b6786171e1a93fa20a17968429d38bf20e47c1e608f9c315c8bc"
+    },
+    "independent_zip_and_raw_html_rehash": "ALL_MATCH",
+    "fetched": 3,
+    "parsed": 3,
+    "add_coffee_ui": 3,
+    "source_review": 3,
+    "strict_case25_pass": true,
+    "automatic_manual_count": 0
+  },
+  "ci": {
+    "head": {
+      "source_sha": "59796f84e9714bf4ba9dfd96addab9f4a8c32e23",
+      "node": 42148133717,
+      "cloud_mobile": 42148133603,
+      "approval": 42148133634,
+      "python": 42148133666,
+      "sql": 42148133713,
+      "security": 42148133788,
+      "archive": 42148133818,
+      "applicable": "SUCCESS",
+      "frozen603": 42148133708,
+      "frozen603_result": "SKIPPED"
+    },
+    "merged": {
+      "source_sha": "ffac1439ef7be6ef6df360d8be76ce39188a1091",
+      "node": 42148630684,
+      "cloud_mobile": 42148630701,
+      "approval": 42148630739,
+      "python": 42148630733,
+      "all_applicable": "SUCCESS",
+      "node_pass": 2611,
+      "node_fail": 0,
+      "node_skip": 6
+    }
+  },
+  "regression_scope": [
+    "selected direct same-product prose positive",
+    "history, conditional, other-coffee, unrelated product, SEO and unsupported syntax negative",
+    "separately printed Tasting Notes precedence preserved"
+  ],
+  "source_blobs_same_on_pr_head_and_merge": true,
+  "original_immutables": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "oracle_scorer_modified": false
+  },
+  "exceptions": [
+    "Full 603 individually manually/semantically certified: NO",
+    "frozen603 workflow: SKIPPED",
+    "Original603 #85 story vs labeled tasting sensory unresolved",
+    "No genuine signed-in or device acceptance claimed"
+  ],
+  "guards": {
+    "no_deployment": true,
+    "no_production_sql_edge_auth_member_writes": true,
+    "no_purchases": true,
+    "no_force_history": true
+  },
+  "next": "Keep #33 OPEN, continue independent selected-source semantic reviews; #267 V2 and #96 remain separately owned."
+}

@@ -28,9 +28,6 @@ export function normalizeRoastLabel(value){
  if(qualifiedSentence&&!/\b(?:light|medium|dark|not|rather|instead)\b/.test(qualifiedSentence[2]))v=qualifiedSentence[1];
  // A merchant may print its traditional label beside an explicit supported
  // category. The category is evidence; owner-approved Full City is Medium-Dark.
- const qualified=v.match(/^(ultra light|very light|light medium|medium light|medium dark|dark medium|light|medium|dark)\s*\([^()]{1,45}\)$/)||
-  v.match(/^[^()]{1,45}\s*\((ultra light|very light|light medium|medium light|medium dark|dark medium|light|medium|med|dark)\)$/);
- if(qualified)v=qualified[1]==='med'?'medium':qualified[1];
  const lookup=new Map([
   ['ultra light','Ultra Light'],['very light','Very Light'],['light','Light'],
   ['light medium','Medium-Light'],['medium light','Medium-Light'],
@@ -38,6 +35,21 @@ export function normalizeRoastLabel(value){
    ['full city','Medium-Dark'],
   ['dark','Dark']
  ]);
+ // A current coffee may print both a traditional roast category and its
+ // parenthetical category. Never discard the first and silently accept a
+ // contradictory second label (e.g. Full City = Medium-Dark vs "Med").
+ // Whole source remains available for review; consistent pairs retain value.
+ const paired=v.match(/^([^()]{2,45})\s*\(([^()]{2,45})\)$/);
+ if(paired){
+  const tier=label=>lookup.get((label.trim()==='med'?'medium':label.trim()).replace(/\s+roast$/,''));
+  const outer=tier(paired[1]),inner=tier(paired[2]);
+  if(outer&&inner&&outer!==inner)return null;
+  if(outer&&inner)v=paired[1].trim();
+ }
+ const qualified=v.match(/^(ultra light|very light|light medium|medium light|medium dark|dark medium|light|medium|dark)\s*\([^()]{1,45}\)$/)||
+  v.match(/^[^()]{1,45}\s*\((ultra light|very light|light medium|medium light|medium dark|dark medium|light|medium|med|dark)\)$/);
+ if(qualified)v=qualified[1]==='med'?'medium':qualified[1];
+
  // Never infer an Ultra Light roast from a roaster's brand/reputation,
  // flavor profile, marketing terms or an unlabeled graphical marker.
  return lookup.get(v)||null;
@@ -49,6 +61,15 @@ export function roastLabelHint(value){
  // White is a distinct literal roaster category, not a supported seven-tier
  // roast. Only an explicitly identified roast label triggers a manual hint.
  const explicit=v.replace(/^roast(?:\s+(?:level|profile|degree|type))?\s*[:=]\s*/i,'').trim();
+ // Retain an exact current selected source's incompatible printed labels
+ // as an explicit manual hint rather than manufacturing a supported tier.
+ const pair=explicit.match(/^([^()]{2,45})\s*\(([^()]{2,45})\)$/);
+ if(pair){
+  const left=normalizeRoastLabel(pair[1]);
+  const right=normalizeRoastLabel(/^med$/i.test(pair[2].trim())?'Medium':pair[2]);
+  if(left&&right&&left!==right)
+   return 'Roaster prints inconsistent roast categories ('+pair[1].trim()+' versus '+pair[2].trim()+'); confirm the selected coffee roast manually.';
+ }
  if(/^white(?:[ -](?:coffee|roast))?$/i.test(explicit))
   return 'Roaster labels this coffee '+explicit+'. White is outside the standardized roast tiers; choose a level manually if known.';
  // Adjacent categories on an exact selected-product Roast line are a

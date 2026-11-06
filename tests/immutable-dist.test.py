@@ -18,4 +18,27 @@ class TestImmutableDist(unittest.TestCase):
  def test_missing_index_denied(self):
   with tempfile.TemporaryDirectory() as d:
    with self.assertRaises(ValueError):mod.package(pathlib.Path(d),pathlib.Path(d)/"a.zip")
+ def test_unsafe_symlink_keeps_existing_certified_zip(self):
+  with tempfile.TemporaryDirectory() as d:
+   root=pathlib.Path(d)/"dist";root.mkdir()
+   (root/"index.html").write_text("safe")
+   (root/"leak").symlink_to(pathlib.Path(d))
+   existing=pathlib.Path(d)/"certified.zip"
+   with zipfile.ZipFile(existing,"w") as z:
+    z.writestr("index.html","previous verified");z.writestr("app.js","persist")
+   before=existing.read_bytes()
+   with self.assertRaisesRegex(ValueError,"Unsafe symlink"):mod.package(root,existing)
+   self.assertEqual(existing.read_bytes(),before)
+   self.assertEqual(sorted(p.name for p in pathlib.Path(d).iterdir()),["certified.zip","dist"])
+ def test_zip_write_failure_keeps_existing_certified_zip(self):
+  with tempfile.TemporaryDirectory() as d:
+   root=pathlib.Path(d)/"dist";root.mkdir()
+   (root/"index.html").write_text("safe")
+   existing=pathlib.Path(d)/"certified.zip"
+   with zipfile.ZipFile(existing,"w") as z:z.writestr("index.html","previous verified")
+   before=existing.read_bytes()
+   with patch.object(zipfile.ZipFile,"writestr",side_effect=OSError("injected write failure")):
+    with self.assertRaisesRegex(OSError,"injected write failure"):mod.package(root,existing)
+   self.assertEqual(existing.read_bytes(),before)
+   self.assertEqual(sorted(p.name for p in pathlib.Path(d).iterdir()),["certified.zip","dist"])
 if __name__=="__main__":unittest.main()

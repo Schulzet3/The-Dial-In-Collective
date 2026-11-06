@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "kind": "ISSUE33_ORIGINAL603_CURRENT_SELECTED_INDEPENDENT_ADJUDICATION",
+  "authority": "Issue #33 owner 2026-11-05 DEVELOPMENT-only per-coffee selected-source review",
+  "date_utc": "2026-11-06",
+  "original_frozen": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "csv_changed": false,
+    "oracle_scorer_changed": false
+  },
+  "proof": {
+    "pr": 912,
+    "reviewed_head": "e1e358254381bc52127a149297f6ac9f4e9603bb",
+    "merged_sha": "8eac8b7bb0c584a86fda47c886246bc16234e968",
+    "head_checks": [
+      "approval SUCCESS",
+      "validate SUCCESS",
+      "cloud-tests SUCCESS",
+      "mobile-browser-qa SUCCESS",
+      "sql SUCCESS"
+    ],
+    "merged_approval_run": 42154097045,
+    "merged_approval_conclusion": "SUCCESS",
+    "merged_official_live_run": 42154097049,
+    "merged_official_live_job": 127684001687,
+    "merged_official_conclusion": "SUCCESS",
+    "other_official_jobs": "SKIPPED_NOT_PASSED",
+    "artifact_id": 13473384023,
+    "artifact_zip_sha256": "7e376535cd92dff51f1f3201d26097a214adcd38cb76eb0b8c9aa376e498fb19",
+    "artifact_html_sha256_independently_verified": true,
+    "artifact_evidence_json_source_sha_matches_merge": true,
+    "live_fetches": 3,
+    "live_parsed": 3,
+    "add_coffee_and_review_rendered": 3,
+    "workflow_auto_manual_certified": 0
+  },
+  "cases": [
+    {
+      "number": 40,
+      "name": "Black",
+      "official_url": "https://brickhouseroasters.com/products/black-certified-organic-coffee",
+      "html_sha256": "cd7e8ccbaccb34a6537b0bee0cff4cfff9770169d09cc670f492efed97636eaa",
+      "html_bytes": 496113,
+      "selected_h1": [
+        "Black"
+      ],
+      "fields": {
+        "name": "Black",
+        "roaster": "Brickhouse Coffee Co.",
+        "origin": "Lempira, Honduras",
+        "producer": "Flor del Cafe",
+        "elevation_m": "1650 MASL",
+        "process": "Washed",
+        "roast_level": "Dark"
+      },
+      "conflicts": [],
+      "adjudication": "CURRENT_SELECTED_SUPPORTED_NO_NEW_DEFECT",
+      "notes": "Direct selected BEAN PROFILE Honduras/Lempira, producer Flor del Cafe, Washed 1650 MASL; current selected description labels darkest roast. Nearby Black & Tan/Descafeinado excluded; general organic nutrition copy not a coffee flavor fact."
+    },
+    {
+      "number": 58,
+      "name": "Bali Blue Moon - Organic",
+      "official_url": "https://coffeeroasterlnk.com/products/bali",
+      "html_sha256": "737300d2c68c5df36b1b2792d62dd63d3bad761dbb2640ff19b78c5a011fe37c",
+      "html_bytes": 416731,
+      "selected_h1": [
+        "Bali Blue Moon - Organic"
+      ],
+      "fields": {
+        "name": "Bali Blue Moon - Organic",
+        "roaster": "Coffee Roaster",
+        "roast_level": "Dark",
+        "tasting_notes": "Cedar, Molasses, Herbal",
+        "producer": "small family farms",
+        "origin": "Kintamani, Bali",
+        "process": "Washed",
+        "elevation_m": "1200–1600 masl"
+      },
+      "conflicts": [],
+      "adjudication": "SELECTED_IDENTITY_SUPPORTED_QUALIFIED_SENSORY_AND_LOT_PROCESS_REVIEW",
+      "notes": "Actual product H1 is Bali Blue Moon despite legacy Sulawesi HTML title/description. Current Lot: Washed PSC Screen 15+ and direct Flavor Notes Cedar/Molasses/Herbal; same selected ABOUT THIS COFFEE describes wet hulling and orange/stone fruit. Labeled list omits latter two. Current extraction retains label and Washed, with no parser conflict; cannot assert supplementary sensory completeness or whether wet-hull narrative describes exact current lot. No auto-fill from stale SEO/customer reviews. Source-bound review still pending."
+    },
+    {
+      "number": 100,
+      "name": "Guatemala Honey Process - Organic Coffee Beans",
+      "official_url": "https://disciplescoffee.com/products/guatemala",
+      "html_sha256": "4ec92c57e2b6122848d6a92f1e465f338482aa07a8631f2b99bf3549c23b90fb",
+      "html_bytes": 324305,
+      "selected_h1": [
+        "Guatemala Honey Process - Organic Coffee Beans"
+      ],
+      "fields": {
+        "name": "Guatemala Honey Process - Organic Coffee Beans",
+        "roaster": "Disciples Coffee",
+        "origin": "Joyabaj, Quiché, Guatemala",
+        "process": "Honey",
+        "tasting_notes": "cherry, malt, anise, and cinnamon",
+        "elevation_m": "1300–2000 masl",
+        "roast_level": "Light"
+      },
+      "conflicts": [],
+      "adjudication": "CURRENT_SELECTED_SUPPORTED_NO_NEW_DEFECT",
+      "notes": "Selected exact description gives Joyabaj Quiché, honey-processed, 1300–2000m and all four flavor literals; selected Light roast caption. Washed/Natural terms in nearby educational comparison not selected process."
+    }
+  ],
+  "result": {
+    "new_parser_defect_reproduced": false,
+    "parser_change": "NONE",
+    "new_queue_ready_item": "NONE",
+    "queue_preserved": true,
+    "issue33": "OPEN_PER_COFFEE_603_CERTIFICATION_INCOMPLETE",
+    "source_bound_remaining_review": [
+      58
+    ],
+    "frozen603_workflow": "SKIPPED_NEITHER_PASS_NOR_FAIL",
+    "netlify_publication": false,
+    "production_sql_auth_edge_member_writes": false,
+    "genuine_signed_in_go_true_test": false,
+    "next_step": "Investigate #58 supplementary orange/stone fruit tasting note and current-lot Washed versus wet-hulled story with adversarial product-specific tests before generic parser changes; continue untouched unresolved original603."
+  }
+}

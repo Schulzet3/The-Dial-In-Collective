@@ -7,7 +7,7 @@ import {isRecurringCoffeeHarvestWindow,isGenericCoffeeLotLabel} from '../../supa
 import {extractRoastVisualEvidence,normalizeRoastLabel} from './roast-level-evidence.mjs';
 import {extractLayoutEvidence,coffeeLayoutDetailConflicts} from './coffee-product-layouts.mjs';
 import {extractNarrativeCoffeeEvidence} from './coffee-narrative-evidence.mjs';
-import {extractCoffeeBlendEvidence,extractSelectedBlendCommunityCredit,extractSelectedRegionalBlendElevation,withoutCoffeeBlendComponentSpecs} from './coffee-blend-evidence.mjs';
+import {extractCoffeeBlendEvidence,extractSelectedBlendCommunityCredit,extractSelectedRegionalBlendElevation,selectedPartialBlendProcess,withoutCoffeeBlendComponentSpecs} from './coffee-blend-evidence.mjs';
 import {extractCoffeeIdentityEvidence,extractCoffeeCurrentReleasePrefixes,extractCoffeeTitleOrigin,extractCoffeeGeographyTuples,coffeeDescriptionCountryMismatch,coffeeDescriptionNamedCoffeeMismatch,explicitCoffeeVarietyList,literalCoffeeSourcePlaces} from './coffee-identity-evidence.mjs';
 import {extractProductEspressoReference} from './coffee-espresso-evidence.mjs';
 import {productMarkup,coffeeHtmlAttributes,withoutDetachedFarmerProfiles} from './coffee-product-scope.mjs';
@@ -20,12 +20,13 @@ import {equivalentCoffeeVarieties,compatibleGenericCoffeeVarieties,explicitCoffe
 import {equivalentCoffeeProductNames,preferredCoffeeRoasterName,selectedCoffeeNameWithoutPrice} from './coffee-product-identity.mjs';
 import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
-import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
+import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,refineSelectedNamedTastingNotes,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
+import {refineSelectedDescriptionSensory} from './coffee-selected-description-sensory.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
 import {withoutNaturalDecaffeinationModifier,recordCoffeeProcessingClaim,reconcileCoffeeProcessingClaims} from './coffee-processing-evidence.mjs';
 import {inferDecaffeinationMethod} from './coffee-decaffeination-method.mjs';
-import {collectCoffeeSourceFacts,collectStructuredCoffeeSourceFacts,collectCoffeePageMetaSourceFacts,collectCoffeePageGuidanceFacts,mergeCoffeeSourceFacts} from './coffee-source-facts.mjs';
+import {collectCoffeeSourceFacts,collectStructuredCoffeeSourceFacts,collectCoffeePageMetaSourceFacts,collectCoffeePageGuidanceFacts,mergeCoffeeSourceFacts,reconcileSelectedCoffeeReviewActorRoles} from './coffee-source-facts.mjs';
 import {collectSupplementaryCoffeePageFacts} from './coffee-supplementary-source-evidence.mjs';
 import {selectedCurrentCoffeeReleaseBadge,selectedStructuredCoffeeEvidence,selectedPageCoffeeEvidence,explicitlyRotatingCoffeeOrigin} from './coffee-selected-source-evidence.mjs';
 import {selectedCurrentInlineShopifyRoastTag} from './coffee-current-inline-shopify-product.mjs';
@@ -1451,7 +1452,14 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   if(selectedPriceBadge&&!fields.release_label&&!conflicts.has('release_label'))
    addField(fields,'release_label',selectedPriceBadge);
 
-  if(directSelected.producer&&!fields.producer&&!conflicts.has('producer')){
+  // Exact-H1 current prose "from producer NAME's ESTATE estate" distinguishes
+  // the named grower from the independently labeled Farm. Override only a
+  // Farm-fallback, never another explicit producer or a contrary Farm.
+  const namedEstateFarm=farmEvidenceByFields.get(fields)||roaster_details.farm||'';
+  const namedEstateFarmMatches=directSelected.named_estate_producer===true&&
+   namedEstateFarm&&keyOf(namedEstateFarm)===keyOf(directSelected.named_estate_farm||'');
+  if(directSelected.producer&&!conflicts.has('producer')&&
+     (!fields.producer||(producerEvidenceByFields.get(fields)==='farm'&&namedEstateFarmMatches))){
    addField(fields,'Producer',directSelected.producer);narrativeProducerByFields.add(fields);
   }
   if(directSelected.roast_level&&!fields.roast_level&&!conflicts.has('roast_level'))
@@ -1660,6 +1668,21 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    delete fields.process;
   }else if(!fields.process&&blend.complete_process)fields.process=blend.processes[0];
  }
+ // The selected blend names an explicitly processed component and a separate
+ // regional coffee with no method. Do not assign the first method to both.
+ let partialProcessReviewNote='';
+ const partialProcess=selectedPartialBlendProcess(canonicalProduct,{
+  name:fields.name,process:fields.process,decode:clean
+ });
+ if(partialProcess&&!conflicts.has('process')){
+  delete fields.process;
+  const note='Selected blend component '+partialProcess.component+
+   ' uses '+partialProcess.method+'; '+partialProcess.unverified_partner+
+   ' has no published process. Whole blend processing remains unverified.';
+  roaster_details.processing_detail=[roaster_details.processing_detail,note]
+   .filter(Boolean).join(' | ').slice(0,900);
+  partialProcessReviewNote=note;
+ }
  // Community is an explicitly labeled producing group, not a named farmer.
  // Reject mentions missing the same selected Product's location and process.
  const producingCommunity=selectedProducingCommunity(canonicalProduct);
@@ -1724,6 +1747,14 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   ...(matchedDescriptions.length?[collectStructuredCoffeeSourceFacts({description:matchedDescriptions.join('\n\n')},{source_url,source_type:'html'})]:[]),
   ...[p,...equivalentProducts.filter(candidate=>candidate!==p)].map(candidate=>collectStructuredCoffeeSourceFacts(candidate,{source_url}))
  );
+ if(partialProcessReviewNote&&source_facts.length<384)source_facts.push({
+  field:'component_process',label:'Incomplete selected blend processing',
+  value:partialProcessReviewNote,source_url,source_type:'html',
+  section:'Selected blend description versus component processing'
+ });
+ // Normalize duplicated selected HTML reviewer roles after all product sources
+ // have merged; source labels/values remain literal and canonical unaffected.
+ reconcileSelectedCoffeeReviewActorRoles(source_facts,{source_url});
  if(inlineProductRoast&&source_facts.length<384)source_facts.push({
   field:'roast_level',label:'Roast',value:inlineProductRoast.value,
   source_url,source_type:'product_json',
@@ -1846,6 +1877,18 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     source_facts.push({field:'tasting_notes',label:'Tastes like',
       value:directSelected.explicit_tastes_like,source_url,source_type:'html',
       section:'Exact selected product literal tasting description'});
+  }
+  // Current exact selected named flavor prose can add exactly one seller-
+  // printed literal note only after ranked printed/current notes exist. Never
+  // use SEO, another coffee, historical, conditional or unrelated description.
+  if(fields.tasting_notes&&!conflicts.has('tasting_notes')&&
+   !seoFallbackByFields.get(fields)?.has('tasting_notes')){
+   const named=refineSelectedNamedTastingNotes(currentProduct,{clean,notes:fields.tasting_notes});
+   if(named)fields.tasting_notes=named;
+   // A directly labeled selected product description may add only corroborated
+   // literal notes, never SEO or unrelated roast/preparation narratives.
+   const description=refineSelectedDescriptionSensory(currentProduct,{clean,notes:fields.tasting_notes});
+   if(description)fields.tasting_notes=description;
   }
   // Flag only direct selected-source disagreements, not unsupported SEO.
   // A higher-priority current description may remain the canonical suggestion
@@ -1972,6 +2015,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  const decaffeination_method=eligibleSelectedDecafMethod?inferDecaffeinationMethod({
   name:fields.name,processingDetail:roaster_details.processing_detail,
   selectedMethod:selectedDecafStatements.join('\n'),
+  selectedCurrentDecafIdentity:directSelected.selected_current_decaf_identity===true,
   conflicting:decafSourceConflict
  }):'';
  if(decaffeination_method)fields.decaffeination_method=decaffeination_method;

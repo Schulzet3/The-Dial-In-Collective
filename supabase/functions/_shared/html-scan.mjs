@@ -1,13 +1,25 @@
 // Linear raw-block scanning for untrusted HTML. This is NOT an HTML sanitizer.
 // Each search resumes AFTER the last consumed block; missing closes consume the
 // remainder instead of retrying a lazy whole-document regex at every opener.
+// HTML attributes may quote '>' (including in JSON-LD script openers).
+// A closing delimiter inside quotes is not the end of the opening tag.
+function openingTagEnd(html,from){
+ let quote='';
+ for(let i=from;i<html.length;i++){
+  const char=html[i];
+  if(quote){if(char===quote)quote='';}
+  else if(char==='"'||char==="'")quote=char;
+  else if(char==='>')return i;
+ }
+ return -1;
+}
 export function* rawElements(html,names=['script']){
  if(typeof html!=='string')return;
  if(!names.length||names.some(n=>!/^[a-z][a-z0-9]{0,31}$/.test(n)))throw new TypeError('Invalid tag names');
  const open=new RegExp('<('+names.join('|')+')(?=[\\s/>])','gi');
  let match;
  while((match=open.exec(html))){
-  const name=match[1].toLowerCase(),start=match.index,headEnd=html.indexOf('>',open.lastIndex);
+  const name=match[1].toLowerCase(),start=match.index,headEnd=openingTagEnd(html,open.lastIndex);
   if(headEnd<0){yield {start,end:html.length,attributes:'',body:'',closed:false,name};return;}
   const close=new RegExp('</'+name+'\\s*>','gi');close.lastIndex=headEnd+1;
   const end=close.exec(html);

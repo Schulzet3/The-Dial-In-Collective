@@ -1,14 +1,10 @@
 import test from 'node:test';
-import {createHash} from 'node:crypto';
 import assert from 'node:assert/strict';
 import {chmodSync,mkdirSync,mkdtempSync,readFileSync,rmSync,writeFileSync} from 'node:fs';
 import {spawnSync} from 'node:child_process';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {decide} from '../scripts/netlify/should-ignore-build.mjs';
-
-const requirePublishedGitBlobSha=source=>createHash('sha1')
- .update('blob '+Buffer.byteLength(source)+'\0').update(source).digest('hex');
 
 const release={context:'production',branch:'release/production',
  subject:'Release DIC: DIC-20261020-ONE123 [dic-publish]'};
@@ -19,22 +15,27 @@ test('strict release marker on dedicated branch authorizes build without any cre
   release_policy:{maximum_snapshot_age_days:0,post_release_billing_refresh_needed:true}
  }])assert.equal(decide({...release,ledger,today:'2099-01-01'}).ignore,false);
 });
-test('isolated READY candidates use the exact previously published guard, while upgraded guards enforce skip',()=>{
+test('isolated READY candidates restore EXACT published Netlify guard bytes; upgraded guards enforce skip',()=>{
  const claim={...release,commitMessage:release.subject+'\n\n[skip netlify]\n'};
  const source=readFileSync(new URL('../scripts/netlify/should-ignore-build.mjs',import.meta.url),'utf8');
  let manifest=null;
  try{manifest=JSON.parse(readFileSync(new URL('../docs/RELEASE_CANDIDATE.json',import.meta.url),'utf8'));}catch{}
- const publishedSource=JSON.parse(readFileSync(new URL('../docs/RELEASE_QUEUE.json',import.meta.url),'utf8')).published_base?.tested_source_sha;
- const approvedRestoration=manifest?.kind==='DIC-READY-ONLY-SOURCE-1'&&
-  manifest.published_source_sha===publishedSource&&
+ const restored=manifest?.kind==='DIC-READY-ONLY-SOURCE-1'&&
   manifest.restored_to_published_paths?.includes('scripts/netlify/should-ignore-build.mjs');
- if(approvedRestoration){
-  const blob=requirePublishedGitBlobSha(source);
-  assert.equal(blob,'22b4cd101006130513b45c6c5e932b5543ca8141',
-   'release isolation may use ONLY exact previously published Netlify guard bytes');
-  assert.equal(decide(claim).ignore,false,
-   'published guard allowed only exact release subjects; unfinished skip feature remains excluded');
-  assert.doesNotMatch(source,/--format=%B/);
+ if(restored){
+  const queue=JSON.parse(readFileSync(new URL('../docs/RELEASE_QUEUE.json',import.meta.url),'utf8'));
+  assert.equal(manifest.published_source_sha,queue.published_base.tested_source_sha,
+   'isolation baseline must equal the queue last published source');
+  const previous=spawnSync('git',['show',manifest.published_source_sha+':scripts/netlify/should-ignore-build.mjs'],
+   {encoding:'utf8',maxBuffer:2*1024*1024});
+  assert.ifError(previous.error);
+  assert.equal(previous.status,0,'last published guard must be independently available in Git history');
+  assert.equal(source,previous.stdout,'READY candidate must restore EXACT last published guard bytes');
+  if(source.includes('--format=%B')){
+   assert.equal(decide(claim).ignore,true,'published full-message guard must suppress skip');
+  }else{
+   assert.equal(decide(claim).ignore,false,'older published subject-only guard must retain original behavior');
+  }
   return;
  }
  assert.equal(decide(claim).ignore,true);

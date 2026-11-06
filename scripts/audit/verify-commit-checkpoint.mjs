@@ -6,7 +6,7 @@ import {resolve} from 'node:path';
 
 const work='docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md';
 // Explicit scoped READY and 2026-11-02 queue-preparation journals; arbitrary release names remain excluded.
-const scopedWork=/^docs\/workstreams\/(?:issue-[1-9][0-9]*|ops-[a-z0-9-]+|release-[0-9]{8}|release-ready-batch|release-queue-prep-20261102)\.md$/;
+const scopedWork=/^docs\/workstreams\/(?:issue-[1-9][0-9]*|ops-[a-z0-9-]+(?:-N[1-9][0-9]*)?|release-[0-9]{8}|release-ready-batch|release-queue-prep-20261102)\.md$/;
 // Exact one-use historical GitHub-generated merge receipt for PR #122 only.
 // This commit has the identical tested PR-head tree, a scoped same-commit
 // work journal, and no publication; GitHub auto-generated its title without

@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "kind": "ISSUE33_ORIGINAL603_SELECTED_OFFICIAL_SOURCE_REVIEW_NO_FULL_CERTIFICATION",
+  "authority": "Owner Issue #33 development-only; AGENTS, AI preflight, Locked Master Spec/Decision Ledger, approval coverage and release queue, #267 V2/#96 boundaries",
+  "review_date_utc": "2026-11-06",
+  "repository": "Schulzet3/The-Dial-In-Collective",
+  "issue": 33,
+  "branch": "development/backend-foundation",
+  "immutable_original": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "source_register_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "modified": false,
+    "oracle_scorer_modified": false
+  },
+  "code_and_source": {
+    "pr": 1030,
+    "merged_sha": "ad97adc3ee946b15584023dbbdd0ca351f318da9",
+    "exact_head": "6c1dc04fb109b54187d68769ba11b15f7b320cf5",
+    "merged_source_run": 42223491261,
+    "merged_source_job": 127911026495,
+    "source_conclusion": "success",
+    "merged_approval_run": 42223491223,
+    "merged_approval_conclusion": "success",
+    "exact_pr_head_checks": {
+      "validate": "success",
+      "approval": "success",
+      "cloud-tests": "success",
+      "sql": "success",
+      "mobile-browser-qa": "success"
+    },
+    "source_artifact_id": 13504687167,
+    "source_artifact_zip_sha256": "26d3a0c0bcf6e1318ce19c1a4921ee60a6b6063f99e46d956a1607d85ad4acc4",
+    "artifact_zip_size": 159545,
+    "raw_html_sha256_independently_verified": true,
+    "report_sha256": "4858e2219f494144cfece3ce9aae87d886ffccd731e8cce4b0ee0e488c4fcb1f",
+    "attempted": 3,
+    "fetched": 3,
+    "parsed": 3,
+    "add_coffee_previews": 3,
+    "source_review_previews": 3,
+    "manual_whole_coffee_certifications": 0,
+    "original_frozen603": "SKIPPED_NOT_PASS"
+  },
+  "cases": [
+    {
+      "number": 524,
+      "name": "Kona",
+      "official_url": "https://www.millcreekcoffee.com/products/kona",
+      "selected_h1": [
+        "Kona"
+      ],
+      "html_sha256": "7dbd78d8e671544e186d93e1e6d17bf15fcc6a5611c1e893192fa6355a03aa07",
+      "html_bytes": 122287,
+      "current_fields": {
+        "name": "Kona",
+        "roaster": "Millcreek Coffee",
+        "origin": "Kona",
+        "tasting_notes": "Subtlety-sweet, earthy, full-bodied, citrus fruit, smooth and nutty",
+        "process": "Washed"
+      },
+      "conflicts": [
+        "roast_level"
+      ],
+      "decision": "SOURCE_CONTRADICTION_REVIEW_REQUIRED_CORRECTLY_BLANK",
+      "evidence": "Same selected product narrative says medium roasted while explicit Roast Type says Medium Light. Existing parser leaves roast_level blank and marks source review conflict. Do not silently select either without product policy and source reconciliation.",
+      "app_preview": true,
+      "source_review": true
+    },
+    {
+      "number": 80,
+      "name": "Costa Rica",
+      "official_url": "https://csrcoffee.com/products/costa-rica",
+      "selected_h1": [
+        "Costa Rica"
+      ],
+      "html_sha256": "38f312d6e305b8fd512cb126415872716f71fee72c5de5622db82f7385bfbb37",
+      "html_bytes": 798308,
+      "current_fields": {
+        "name": "Costa Rica",
+        "roaster": "Columbia Street Roastery",
+        "tasting_notes": "sweet, chocolaty",
+        "origin": "Costa Rica",
+        "process": "Washed"
+      },
+      "conflicts": [],
+      "decision": "CURRENT_SELECTED_SOURCE_SUPERSEDES_OLDER_METADATA_ONLY_NOT_BUG",
+      "evidence": "Current selected rendered product prose supports sweet/chocolaty and washed Costa Rica; historical original expected other notes of green grapes/cherries/floral persist as older page meta/SEO and must not override current selected body without verified same-product current precedence.",
+      "app_preview": true,
+      "source_review": true
+    },
+    {
+      "number": 551,
+      "name": "Uganda Organic",
+      "official_url": "https://www.roasted-beans.com/products/uganda-organic",
+      "selected_h1": [
+        "Uganda Organic"
+      ],
+      "html_sha256": "5617ac85193b2222fe6572580e7d52df6745420f3c3e4c3a81065584f52bab34",
+      "html_bytes": 134798,
+      "current_fields": {
+        "name": "Uganda Organic",
+        "roaster": "Vermont Roasted Specialty Coffee",
+        "tasting_notes": "Dark Chocolate, Raisins, Vanilla",
+        "variety": "Bourbon, Kenya SL14, Kenya SL28",
+        "process": "Washed",
+        "origin": "Uganda",
+        "producer": "individual smallholder farmers",
+        "elevation_m": "1300 to 2000 meters"
+      },
+      "conflicts": [],
+      "decision": "SELECTED_DIRECT_FIELDS_VERIFIED_GENERAL_NARRATIVE_NOT_LOT_SPECIFIC",
+      "evidence": "Selected product labels Milling Process: Fully Washed and Drying Process: Patio Drying. Historical generalized Kawacom and Bugisu district/project prose is not proof that all named localities or Kawacom apply to this selected lot as single producer. Preserve direct Washed, omit unproven regional detail.",
+      "app_preview": true,
+      "source_review": true
+    }
+  ],
+  "scope": {
+    "parser_changed": false,
+    "focused_runner_changed": false,
+    "source_workflow_selector_changed": true,
+    "queue_changed": false,
+    "previous_queue_total": 166,
+    "ready_items_added": 0,
+    "unresolved_semantic_cases": "603 still not individually fully certified",
+    "issue33": "OPEN",
+    "visibility": "PUBLIC_OWNER_APPROVED_TEMPORARY_THROUGH_2026-11-30_ISSUE630",
+    "real_gotrue_device_acceptance": false,
+    "netlify_publication": false,
+    "production_sql_auth_edge_member_writes": false,
+    "provider_writes": false,
+    "secret_rotations": false,
+    "paid_services": false,
+    "forced_history": false
+  },
+  "next": "Choose a new unreviewed high-confidence literal omission; require current official product identity, guarded raw-source SHA, actual parser and adversarial positive/negative regressions before any narrow generic fix. Keep #33 OPEN and avoid #267 V2/#96 ownership."
+}

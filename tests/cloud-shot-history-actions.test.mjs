@@ -7,7 +7,7 @@ import {Outbox,ACTIONS} from '../site/cloud/outbox.js';
 const sampleShot={
  id:'9f161ab1-9781-4f69-ac17-12184e090bc4',timestamp:'2026-10-21T19:00:00Z',
  doseG:18,yieldG:36,timeS:28,grindSetting:5.5,tempC:null,style:'Traditional',
- tasteScales:{extraction:3,body:3,clarity:3,sweetness:3,astringency:3},
+ tasteScales:{extraction:3,body:3,clarity:5,sweetness:5,astringency:1},
  notes:'Saved personal note',dialedIn:true,setupVersionId:'version',
  snapshot:{setupName:'Personal Setup',basketDoseG:18,tempUnit:'F'},revision:7
 };
@@ -71,4 +71,43 @@ test('shot history summary preserves desktop one-row date while narrow cards can
  assert.match(css,/@media\(min-width:700px\)\{\s*\.shot-topline\{grid-template-columns:minmax\(0,1fr\) auto;align-items:baseline/);
  assert.match(css,/\.shot-topline \.shot-date\{justify-self:end;white-space:nowrap/);
  assert.match(css,/\.shot-numbers\{[^}]*overflow:visible;white-space:normal/);
+});
+
+
+test('#455 history does not call incomplete or nonideal archived taste a Dialed In recipe',()=>{
+ const ideal=sampleShot.tasteScales;
+ const cases=[
+  {extraction:3,body:3,clarity:null,sweetness:5,astringency:1},
+  {extraction:3,body:3,clarity:5,sweetness:4,astringency:1},
+  {extraction:'3',body:3,clarity:5,sweetness:5,astringency:1},
+  {extraction:3,body:3,clarity:5,astringency:1},
+ ];
+ for(const tasteScales of cases){
+  const archived={...sampleShot,tasteScales,notes:'Original private historical note'};
+  const original=structuredClone(archived);
+  const html=shotCard(archived,{expanded:true,activeVersionId:'version'});
+  assert.doesNotMatch(html,/<span class="status-badge">Dialed In/);
+  assert.doesNotMatch(html,/data-action="make-current"/);
+  assert.match(html,/data-action="edit"/);
+  assert.match(html,/Original private historical note/);
+  assert.deepEqual(archived,original,'render never rewrites historical ratings or notes');
+ }
+ const unflagged={...sampleShot,tasteScales:ideal,dialedIn:false};
+ const html=shotCard(unflagged,{expanded:true,activeVersionId:'version'});
+ assert.doesNotMatch(html,/<span class="status-badge">Dialed In/);
+ assert.doesNotMatch(html,/data-action="make-current"/);
+});
+
+test('#455 genuine five-green shot keeps Make Current for its version, never pending or other-version',()=>{
+ const record=structuredClone(sampleShot);
+ const same=shotCard(record,{expanded:true,activeVersionId:'version'});
+ assert.match(same,/<span class="status-badge">Dialed In/);
+ assert.match(same,/data-action="make-current"/);
+ const otherVersion=shotCard(record,{expanded:true,activeVersionId:'other-version'});
+ assert.match(otherVersion,/<span class="status-badge">Dialed In/);
+ assert.doesNotMatch(otherVersion,/data-action="make-current"/);
+ const pending=shotCard({...record,cloudPending:true},{expanded:true,activeVersionId:'version'});
+ assert.match(pending,/Pending Sync/);
+ assert.doesNotMatch(pending,/data-action="make-current"/);
+ assert.deepEqual(record,sampleShot);
 });

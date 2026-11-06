@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "case_number": 199,
+  "date_utc": "2026-11-06",
+  "status": "VERIFIED_READY_DEVELOPMENT_ONLY",
+  "not_deployed": true,
+  "original603": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "modified": false,
+    "oracle_scorer_unchanged": true,
+    "original_csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "full_manual_certified": false
+  },
+  "source": {
+    "official_url": "https://localroasters.com/products/brazil-natural-12-oz",
+    "selected_h1": "Brazil Cerrado Natural 12 Oz.",
+    "identity_confirmed": true,
+    "selected_literal_label": "Golden Raisin, Pecan, & Honey Grahams",
+    "selected_literal_description": [
+      "notes of caramel",
+      "notes of pecan",
+      "lingering notes of honey and cookies"
+    ],
+    "source_authority": "Exact current selected official product direct specification and Description paragraph, not SEO, catalog or related products",
+    "previous_guarded_run": 42200712752,
+    "previous_actual_tasting_notes": "Golden Raisin, Pecan, & Honey Grahams"
+  },
+  "implementation": {
+    "pr": 1011,
+    "exact_final_pr_head": "bf20b935b75bf06bbaadba910a1098c572bc5543",
+    "merged_sha": "4f8ba11cb1a307b0bad73b832272e05472d11062",
+    "nonforce_squash": true,
+    "changed_paths": [
+      "src/server/coffee-selected-description-sensory.mjs",
+      "src/server/coffee-page-metadata.mjs",
+      "tests/coffee-issue33-original603-199-selected-description-notes.test.mjs",
+      "docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md",
+      "docs/RELEASE_QUEUE.json"
+    ]
+  },
+  "failures": [
+    {
+      "run": 42207188747,
+      "result": "NODE_1882_PASS_1_FAIL_fixture_negative_scope"
+    },
+    {
+      "run": 42207493318,
+      "result": "NODE_1883_PASS_0_FAIL_BUT_LINT_FAILED_unused_index"
+    }
+  ],
+  "ci": {
+    "pr_head": {
+      "validate": 42207831193,
+      "node_pass": 1883,
+      "node_fail": 0,
+      "node_skip": 0,
+      "lint": "PASS",
+      "build": "PASS",
+      "cloud_mobile": 42207831142,
+      "sql": 42207831120,
+      "approval": 42207831160,
+      "security": 42207831050,
+      "source_archive": 42207831096,
+      "frozen603": 42207831094,
+      "frozen603_conclusion": "SKIPPED"
+    },
+    "merged": {
+      "validate": 42208097429,
+      "node_pass": 1883,
+      "node_fail": 0,
+      "node_skip": 0,
+      "lint": "PASS",
+      "build": "PASS",
+      "cloud_mobile": 42208097230,
+      "approval": 42208097298,
+      "guarded_live_source": 42208097232,
+      "other_public_probes": "SKIPPED"
+    }
+  },
+  "actual_current_official": {
+    "run": 42208097232,
+    "job": 127859670606,
+    "result": "SUCCESS",
+    "requested": [
+      184,
+      193,
+      199
+    ],
+    "fetched": 3,
+    "parsed": 3,
+    "preview_and_review_rendered": 3,
+    "number199": {
+      "html_sha256": "076c9b6400235f97e051027d62a1422239aa97cd016694080ca473926e2c89ba",
+      "h1": [
+        "Brazil Cerrado Natural 12 Oz."
+      ],
+      "name": "Brazil Cerrado Natural 12 Oz.",
+      "origin": "Cerrado Mineiro, Brazil",
+      "process": "Natural",
+      "roast_level": "Medium-Light",
+      "tasting_notes": "Golden Raisin, Pecan, Honey Grahams, caramel, honey, cookies",
+      "conflicts": []
+    },
+    "number184_html_sha256": "369235d369efe49b92c8f7bf618b0a22afaf7f030f3f41ebf649e70d532a4043",
+    "number193_html_sha256": "421fe1e7f8ef6b59024853f11a5afb6bd8a21cff3013423ac5d7cfa2ffcbe811",
+    "artifact_id": 13497996265,
+    "artifact_zip_sha256": "8c6bd9df79eb4dfef98b4c882af44f3c6960f6b9800028e5e0a058131bb47e2d",
+    "independent_raw_html_hash_match": true,
+    "manual_certified_all603": false
+  },
+  "scope_limits": "Narrow exact-selected #199 sensory correctness; does not certify source-supported completion of all remaining original 603, original frozen replay not run, no genuine current GoTrue/device evidence, no Netlify/release/production/SQL/Edge/Auth/provider/member record writes, #267 V2 and #96 ownership untouched."
+}

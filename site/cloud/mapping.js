@@ -44,7 +44,10 @@ export function hydrate(raw){
  for(const setup of s.setups)if(!versionsBySetupId.has(setup.id))versionsBySetupId.set(setup.id,firstBy(setup.versions,'id'));
  for(const sh of rows(raw,'shots')){
   const old=sh.equipment_snapshot||{},setup=setupById.get(sh.setup_id),version=versionsBySetupId.get(sh.setup_id)?.get(sh.setup_version_id);
-  s.shots.push({id:sh.id,coffeeId:sh.library_entry_id,setupId:sh.setup_id,setupVersionId:sh.setup_version_id,calibrationId:sh.calibration_id,basketId:sh.basket_version_id,bagId:sh.bag_id,style:sh.style,timestamp:sh.pulled_at,doseG:number(sh.dose_g),yieldG:number(sh.yield_g),timeS:number(sh.time_s),grindSetting:number(sh.grind_setting),tempC:number(sh.temperature_c),feedMode:sh.feed_mode==='unknown'?null:sh.feed_mode,tasteScales:{extraction:sh.extraction,body:sh.body,clarity:sh.clarity,sweetness:sh.sweetness,astringency:sh.astringency},notes:noteByShot.get(sh.id)?.notes||'',dialedIn:sh.is_dialed_in,hidden:!!sh.hidden_at,familyId:sh.personal_family_id,revision:sh.revision,recommendationContext:sh.recommendation_context||null,outlierReview:'not_needed',snapshot:{setupId:sh.setup_id,setupName:setup?.name||'',versionId:sh.setup_version_id,machine:old.machine_model||'',grinder:old.grinder_model||'',burrs:old.burr_set||'',grinderMin:number(old.finest_setting),grinderMax:number(old.coarsest_setting),calibrationId:sh.calibration_id,basketId:sh.basket_version_id,basketDoseG:number(old.basket_dose_g),tempUnit:version?.tempUnit||'F'}});
+  // A historical server success flag cannot promote missing or invalid taste ratings.
+  // This conservative client-only eligibility check never rewrites the original row.
+  const tastes={extraction:sh.extraction,body:sh.body,clarity:sh.clarity,sweetness:sh.sweetness,astringency:sh.astringency};
+  s.shots.push({id:sh.id,coffeeId:sh.library_entry_id,setupId:sh.setup_id,setupVersionId:sh.setup_version_id,calibrationId:sh.calibration_id,basketId:sh.basket_version_id,bagId:sh.bag_id,style:sh.style,timestamp:sh.pulled_at,doseG:number(sh.dose_g),yieldG:number(sh.yield_g),timeS:number(sh.time_s),grindSetting:number(sh.grind_setting),tempC:number(sh.temperature_c),feedMode:sh.feed_mode==='unknown'?null:sh.feed_mode,tasteScales:tastes,notes:noteByShot.get(sh.id)?.notes||'',dialedIn:sh.is_dialed_in===true&&C.isDialed(tastes),hidden:!!sh.hidden_at,familyId:sh.personal_family_id,revision:sh.revision,recommendationContext:sh.recommendation_context||null,outlierReview:'not_needed',snapshot:{setupId:sh.setup_id,setupName:setup?.name||'',versionId:sh.setup_version_id,machine:old.machine_model||'',grinder:old.grinder_model||'',burrs:old.burr_set||'',grinderMin:number(old.finest_setting),grinderMax:number(old.coarsest_setting),calibrationId:sh.calibration_id,basketId:sh.basket_version_id,basketDoseG:number(old.basket_dose_g),tempUnit:version?.tempUnit||'F'}});
  }
  // Advice is derived from server observations, never treated as measured input.
  // Restore it after hydration so the recipe card and latest-shot advice agree.
@@ -53,11 +56,15 @@ export function hydrate(raw){
   // Legacy rows without a usable date remain saved, but cannot be the latest
   // recipe-feedback observation or an ordering anchor.
   if(sh.hidden||typeof sh.timestamp!=='string'||!sh.timestamp.trim())continue;
+  // A restored offset timestamp can sort lexically before a later instant;
+  // malformed legacy dates must not select a live advice observation.
+  const at=Date.parse(sh.timestamp);
+  if(!Number.isFinite(at))continue;
   if(!latestByVersion.has(sh.setupVersionId))latestByVersion.set(sh.setupVersionId,new Map());
   const byCoffee=latestByVersion.get(sh.setupVersionId);
   if(!byCoffee.has(sh.coffeeId))byCoffee.set(sh.coffeeId,new Map());
   const byStyle=byCoffee.get(sh.coffeeId),old=byStyle.get(sh.style);
-  if(!old||sh.timestamp.localeCompare(old.timestamp)>0)byStyle.set(sh.style,sh);
+  if(!old||at>Date.parse(old.timestamp))byStyle.set(sh.style,sh);
  }
  const active=s.activeSetupId;
  for(const setup of s.setups){s.activeSetupId=setup.id;const version=M.activeVersion(s);
