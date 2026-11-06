@@ -69,6 +69,27 @@ test('post-staging unready development drift is excluded without weakening exact
    path==='site/card.js'&&sha===C?'unready late edit':validate.sourceObjectAt(sha,path)}),/changed during isolation/);
 });
 
+test('later READY promotion of originally unready source stays excluded if exactly restored',()=>{
+ const promoted={...unfinished,state:'READY',merged_source_sha:D,
+  tests:['passed focused source check'],ci_runs:[456],blockers:[]};
+ const live={...q,items:[one,promoted]};
+ const input={...validate,liveQueue:live};
+ const accepted=validateReadyOnlyCandidate(q,input);
+ assert.equal(accepted.ready,true,
+  'separately promoted READY source predating staging cannot enter candidate when restored');
+ assert.deepEqual(accepted.deployable_paths,['site/card.js']);
+ assert.deepEqual(accepted.excluded_paths,['src/server/extractor.mjs']);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...input,
+  sourceObjectAt:(sha,path)=>sha===C&&path==='src/server/extractor.mjs'?'accidental-ready-code':validate.sourceObjectAt(sha,path)}),
+  /Additional READY source not proven post-staging|Cannot certify additional READY source chronology/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...input,
+  liveQueue:{...q,items:[one,{...promoted,scope_paths:['site/card.js']}]}}),
+  /Additional READY source not proven post-staging|Cannot certify additional READY source chronology/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...input,
+  liveQueue:{...q,items:[one,unfinished,{...promoted,id:'DIC-Q-102',issue:102}]}}),
+  /Additional READY source not proven post-staging|Cannot certify additional READY source chronology/);
+});
+
 test('mixed READY/unready source can ship only exact pinned approved READY blob',()=>{
  const overlap={...unfinished,id:'DIC-Q-102',issue:102,state:'TESTING',scope_paths:['site/card.js']};
  const queue={...q,items:[one,unfinished,overlap]};
