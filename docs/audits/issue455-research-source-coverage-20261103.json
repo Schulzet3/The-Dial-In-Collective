@@ -828,6 +828,21 @@
       "source_bytes_sha256": null,
       "source_byte_caveat": "Publisher DOI and institutional metadata/abstract were read, but the final binary article, methods/figures/tables, any raw trials and response-surface parameters were not obtained. The repository page does not expose a downloadable PDF. DOI landing page returned an access error. Do not equate abstract with full-text analysis or extrapolate to practical grinder setting, tamping instruction or taste improvement.",
       "claims_verified_externally": "TU Hamburg author-institution repository abstract reports that at matched axial compression, decreasing coarse-distribution uniformity beta decreased dry bed porosity even when mean particle size alpha was larger. Espresso extraction experiments indicated similarly low permeability can arise from compression, size mean and size uniformity jointly; model predicted porosity/permeability for studied preparations. It DOES NOT establish a quantitative universal espresso grind step, optimal tamp force, five-taste rating threshold, or one-variable next-shot rule."
+    },
+    {
+      "id": "LIT-2024-AL-SHEMMERI-MICROCT",
+      "type": "peer_reviewed_original_roasting_microCT_experiment",
+      "title": "Development of coffee bean porosity and thermophysical properties during roasting",
+      "authors": "M. Al-Shemmeri; P. Fryer; R. Farr; E. Lopez-Quiroga",
+      "published": "October 2024, Journal of Food Engineering 378:112096",
+      "doi": "10.1016/j.jfoodeng.2024.112096",
+      "url": "https://doi.org/10.1016/j.jfoodeng.2024.112096",
+      "access": "FIRST_PARTY_SCIENCEDIRECT_SEARCH_INDEXED_OPEN_ACCESS_FULL_ARTICLE_METHODS_TABLE1_RESULTS_CONCLUSION_READ_20261106; DIRECT_DOI_OPEN_FAILED_REDIRECT",
+      "review_status": "FOCUSED_ORIGINAL_HTML_SECTIONS_2_1_2_2_6_3_3_AND_4_READ_FROM_PUBLISHER_SEARCH_TEXT; PDF_FIGURES_SUPPLEMENT_RAW_CT_NOT_INSPECTED",
+      "evidence_grade": "PEER_REVIEWED_CONTROLLED_ONE_KENYAN_ARABICA_BLEND_SPOUTED_ROASTER_COLOR_MATCHED_INLET_TEMPERATURE_VARIATION; WHOLE_BEAN_MICROCT_NOT_ESPRESSO_OR_HUMAN_SENSORY",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Publisher search index exposed original detailed methods and table text; live DOI redirect blocked direct page. No HTML/PDF bytes or figures downloaded/hashed; this is not complete paper certification.",
+      "claims_verified_externally": "350 g single Kenyan Arabica regional blend, 0.0228 kg/s air flow, 220/235/250/265/280C inlet temperatures to measured color 70 +/-1; Micro-CT triplicate, 100 cross-sections of 0.76 mm chosen bean region. Time to final color 700s at 220C vs 168s at 280C. Porosity rose approximately 40-60% through roasting, final porosity differs despite matched color; larger differences at 280C versus 220-265C. Authors explicitly excluded flavor chemistry/sensory studies; some partial-roast porosity observations had SE ~4.6%."
     }
   ],
   "evidence_checks": [
@@ -2290,6 +2305,36 @@
       "result": "PREDICTED_BED_PERMEABILITY_CANNOT_BE_AUTOMATIC_UNIVERSAL_GRIND_OR_TAMP_RECOMMENDATION",
       "owner_approval": false,
       "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-062-A",
+      "source": "ORG-03 original Markdown Git blob 9a66449c6adfe27bc7e64dae086d3dfcfc647de6 lines 316-326 and 421; Al-Shemmeri et al. 2024 original ScienceDirect indexed sections 2.1/2.2.6 Table 1",
+      "claim": "One Kenyan Arabica blend in a pilot spouted-bed roaster, 350g, 0.0228 kg/s, reached one surface color 70 +/-1 after five different temperatures: 220C 700s, 235C 415s, 250C 278s, 265C 218s, 280C 168s. Micro-CT analyzed 100 slices/0.76mm in a selected bean region; matched measured color was not identical structural roast trajectory.",
+      "grade": "ORIGINAL_PEER_REVIEWED_PUBLISHER_INDEXED_PRIMARY_METHODS_AND_TABLE; ONE_BLEND_ROASTER_SINGLE_REGION_OF_INTEREST; PDF_AND_FIGURES_UNHASHED",
+      "primary_sources": [
+        "https://doi.org/10.1016/j.jfoodeng.2024.112096"
+      ],
+      "page_number": "Online original sections 2.1, 2.2.6, Table 1; PDF printed page unverified",
+      "app_source_sha": "7f76dff12826244d27eb8aa6de109d01cd347cde",
+      "current_app": "site/lib/engine.js blob 93969d561e18205d8f87e19059ea0c66b519e934 uses roast starting heuristics and coffee/shot history but has no measured whole-bean porosity or known member roast curve",
+      "result": "MATCHED_ROAST_COLOR_NOT_UNIQUE_BEAN_MICROSTRUCTURE",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-062-B",
+      "source": "Al-Shemmeri et al. original ScienceDirect indexed sections 3.3 and 4, DOI 10.1016/j.jfoodeng.2024.112096; ORG-03 original lines 316-326,421",
+      "claim": "Total bean porosity rose approximately 40-60% during these roasts; final color-matched porosity varied with temperature, with relatively small 220-265C differences and larger divergence around 280C. Some part-roast measurements had ~4.6% SE. Authors explicitly excluded flavor development/chemistry, and did not directly measure espresso grinding, puck hydraulics, cup sweetness, or five-score sensory preference; cannot justify a numeric roast-to-grind/temperature recipe correction.",
+      "grade": "FIRST_PARTY_INDEXED_PRIMARY_POROSITY_RESULTS_AND_EXPLICIT_ENDPOINT_LIMIT; NO_ESPRESSO_TRIAL_OR_FIGURE_REMEASUREMENT",
+      "primary_sources": [
+        "https://doi.org/10.1016/j.jfoodeng.2024.112096"
+      ],
+      "page_number": "Original online paper sections 3.3 and 4; Fig 19 data not remeasured",
+      "app_source_sha": "7f76dff12826244d27eb8aa6de109d01cd347cde",
+      "current_app": "Engine uses categorical roast priors but does not measure bean CT porosity or make a causal roast-profile conversion",
+      "result": "WHOLE_BEAN_POROSITY_NOT_ESPRESSO_FLAVOR_OPTIMUM",
+      "owner_approval": false,
+      "publisher_binary_sha256": null
     }
   ],
   "policy_decisions_pending": [],
@@ -2327,24 +2372,24 @@
     "R455-060: Vaca Guerra 2023 bed-PSD compression result verified only from first-party author-institution abstract, original 2023 PDF/methods unavailable. Do not implement generic tamp or grind adjustment from laboratory permeability. Resume unverified papers and directly reproduce useful safe UX defect; original S019 PDF not accessible."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-060",
-    "base_development_sha": "839d1888d245716fc1d6e24867435d44904a6a16",
-    "source_document": "Vaca Guerra et al. 2023 Journal of Food Engineering 340:111301; directly read TU Hamburg author institution's publisher-linked original abstract; no PDF or raw data",
+    "id": "R455-062",
+    "base_development_sha": "7f76dff12826244d27eb8aa6de109d01cd347cde",
+    "source_document": "Al-Shemmeri et al. Journal of Food Engineering 378:112096 original indexed open-access publisher methods/results",
     "source_ids": [
-      "LIT-2023-VACA-GUERRA-PSD-BED-COMPRESSION"
+      "LIT-2024-AL-SHEMMERI-MICROCT"
     ],
     "claim_ids": [
-      "R455-EV-CIT-060-A",
-      "R455-EV-CIT-060-B"
+      "R455-EV-CIT-062-A",
+      "R455-EV-CIT-062-B"
     ],
-    "number_of_curated_sources": 56,
-    "total_evidence_checks": 119,
-    "review_type": "BOUNDED_INSTITUTIONAL_ABSTRACT_REVIEW_MATCHED_COMPRESSION_PSD_UNIFORMITY_POROSITY_AND_PERMEABILITY; FULL_TEXT_NOT_VERIFIED",
+    "number_of_curated_sources": 57,
+    "total_evidence_checks": 121,
+    "review_type": "PRIMARY_PUBLISHER_INDEXED_ORIGINAL_ONE_COFFEE_SPOUTED_ROASTER_MICROCT_ROAST_COLOR_METHODS_AND_NON_ESPRESSO_ENDPOINT",
     "source_hash_verified_20261106": false,
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
     "code_or_policy_changed": false,
-    "next_action": "Verify exact docs PR head CI and non-force merge only on PASS; independently read back both tested Git blobs and merged-source governance, then append Issue #455 final receipt. Continue unverified report citations and directly reproduced UX defects; original S019 PDF still inaccessible."
+    "next_action": "Check exact PR-head docs governance then nonforce merge and read merged source blob/continuity; next study actual UX gap or independent primary reference. S019 PDF remains inaccessible."
   },
   "policy_decisions_resolved": [
     {
@@ -2788,6 +2833,24 @@
       "release_queue": "DIC-Q-455-history-unknown-style-fallback",
       "source_commit": "d65013449df92827ce3c89f37be8c9ab530c28b9",
       "implementation_pr": 942
+    },
+    {
+      "id": "R455-PROP-062-ROAST-MICROCT-NO-UNIVERSAL-RULE",
+      "finding": "Direct original 2024 paper verifies color-matched roast histories can have different physical porosity in one controlled system, not that roast color should automatically alter espresso grind or taste thresholds.",
+      "evidence": [
+        "ORG-03 original exact Git blob 9a66449c6adfe27bc7e64dae086d3dfcfc647de6 lines 316-326 and 421",
+        "Al-Shemmeri et al. 2024 original primary indexed article https://doi.org/10.1016/j.jfoodeng.2024.112096 sections 2.1/2.2.6/Table1/3.3/4",
+        "Current engine exact Git blob 93969d561e18205d8f87e19059ea0c66b519e934"
+      ],
+      "severity": "P3_EVIDENCE_BOUNDARY_AND_FUTURE_FALSE_PRECISION_RISK",
+      "user_benefit": "Avoid presenting an empirically untested roast color to numeric espresso recipe correction as scientific certainty.",
+      "current_locked": "Original shot measurements and all five ratings, one controllable recommendation, style/grinder/feed boundaries and approved roast/style starting priors remain unchanged.",
+      "current_app": "Live engine uses nominal roast category to propose starting ranges; individual bean microCT and roast history are not inputs.",
+      "proposed_change": "RESEARCH_ONLY; do not change engine, request new raw porosity input, or infer an espresso optimum from whole-bean structural observations.",
+      "approval_required_for_behavior_change": true,
+      "implementation": "NO_PRODUCT_CHANGE_AUTHORIZED_OR_MADE",
+      "test_plan": "Primary original indexed methodology and limits + original report + pinned live engine source; risk-appropriate docs-only exact governance, no app tests/physical cup trials.",
+      "release_queue": "NOT_APPLICABLE_RESEARCH_ONLY"
     }
   ]
 }
