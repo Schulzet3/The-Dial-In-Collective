@@ -54,3 +54,39 @@ test('CLI emits a GitHub output value when run with a relative script path',()=>
   assert.ok(readFileSync(path,'utf8').split('\n').includes('tier=high'));
  }finally{rmSync(root,{recursive:true,force:true});}
 });
+test('Issue #267 post-S2 historical Git-tree inventory delta stays docs-only without exempting unknown runtime',()=>{
+ const listed=[
+  'docs/audits/issue267-v2-post-pin-tree-drift-20261105-post-S2-148.json',
+  'docs/audits/issue267-v2-post-pin-drift-delta-20261105-post-S2-154.json',
+  'docs/workstreams/ops-issue267-postpin-delta-s2-154-20261105.md'
+ ];
+ const recognized=classifyImpactPaths(listed);
+ assert.equal(recognized.tier,'docs');assert.equal(recognized.docs_only,true);
+ assert.equal(recognized.node_mode,'none');assert.equal(recognized.sql,false);
+ assert.equal(recognized.browser_mode,'none');assert.equal(recognized.provider_guard,false);
+ const current=classifyChanges({base:A,head:B,event:'pull_request',git:()=>listed.join('\n')+'\n'});
+ assert.equal(current.reason,'NON_RUNTIME_ONLY');
+ for(const invalid of [
+  'docs/audits/issue267-v2-post-pin-drift-delta-20261105-post-S2-15.json',
+  'docs/audits/issue267-v2-post-pin-tree-drift-20261105-post-S2-x54.json',
+  'docs/audits/issue267-v2-post-pin-drift-delta-20261105-post-S2-154.json.bak',
+  'docs/audits/issue267-v2-post-pin-drift-delta-20261105-post-S2-154/../secret.json',
+  'docs/audits/issue267-v2-post-pin-drift-delta-20261105-post-S2-154.json/../secret.json',
+  'docs/audits/issue267-v2-post-pin-drift-delta-20261105-post-S2-154-runtime.json',
+  'docs/audits/issue267-v2-post-pin-code-delta-20261105-post-S2-154.json',
+  'docs/audits/issue267-v2-post-pin-drift-delta-20261105-post-S2-154.json.gz',
+  'docs/audits/unexpected-new.json'
+ ]){
+  const v=classifyImpactPaths([invalid]);
+  assert.equal(v.tier,'high',invalid);assert.equal(v.sql,true,invalid);
+ }
+ for(const runtime of ['scripts/audit/ci-scope.mjs',
+  '.github/workflows/roaster-source-probe.yml',
+  'supabase/migrations/new.sql','site/lib/engine.js','tests/ci-scope.test.mjs']){
+  const mixed=classifyImpactPaths([...listed,runtime]);
+  const bare=classifyImpactPaths([runtime]);
+  assert.equal(mixed.tier,bare.tier,runtime);
+  assert.equal(mixed.node_mode,bare.node_mode,runtime);
+  assert.equal(mixed.sql,bare.sql,runtime);
+ }
+});
