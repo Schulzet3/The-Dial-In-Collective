@@ -2954,6 +2954,25 @@
       "release_queue": "DIC-Q-455-empty-historic-success-family-ratio-guard",
       "source_commit": "230c754426567f332d1f854146b762e24bb339e3",
       "implementation_pr": 977
+    },
+    {
+      "id": "R455-PROP-066-LOCAL-ARCHIVE-STale-SUCCESS-INPUT",
+      "finding": "Local/imported backup shots can carry stale truthy dialedIn flags with incomplete/invalid ratings. model.hasLocalSuccess trusted those flags, so a recipe's 'your successful shot' gate could be satisfied without five green tastes.",
+      "evidence": [
+        "Direct live site/lib/model.js Git blob 2d1e3298952ebc74eed176c852cf919730225e72 at development eb5a2d5d22d9d05eabc1883b6d693013f8ef79a8: hasLocalSuccess used sh.dialedIn without isDialed(sh.tasteScales).",
+        "site/lib/constants.js canonical isDialed requires all five exact 1-5 integral ideal ratings; previously merged #455 PR962 only validated cloud hydrate; local backup snapshots retain their literal flags.",
+        "Existing original local validateBackup checks structural references, not legacy sensory completeness; no actual member incidence asserted."
+      ],
+      "severity": "P2_SAFE_LOCAL_OFFLINE_RECOMMENDATION_CORRECTNESS",
+      "user_benefit": "Unrated/inconsistent old shots cannot suppress post-rating feedback as invented personal successes; genuine five-green historical shots remain available in every style.",
+      "current_locked": "Five exact taste scores, complete-green success independent of time, existing measured shots/notes, user-private history, same-coffee evidence and one controllable change; no new numeric policy.",
+      "current_app": "Before fix the local/backup source checked only truthy dialedIn status by coffee/version/style; cloud hydrate was separately guarded by PR962.",
+      "proposed_change": "SAFE: require strict true archived success AND constants.isDialed(original tasteScales) for hasLocalSuccess; do not mutate original shot or override server success semantics.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "TESTING_ON_BRANCH_NO_TESTS_EXECUTED_YET",
+      "test_plan": "Four imported-module tests direct local stale flags and valid cross-style/legacy history preservation; exact-source CI and nonforce integration pending.",
+      "release_queue": "DIC-Q-455-local-stale-success-import-guard",
+      "source_commit": null
     }
   ]
 }
