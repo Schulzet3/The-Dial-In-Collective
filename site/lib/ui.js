@@ -40,7 +40,10 @@ export function field(label,name,value='',options={}) {
 export function select(label,name,items,value='',extra='') {return `<label class="field"><span>${e(label)}</span><select name="${name}" ${extra}>${items.map(x=>{const val=typeof x==='object'?x.value:x,lab=typeof x==='object'?x.label:x;return `<option value="${e(val)}" ${val===value?'selected':''}>${e(lab)}</option>`;}).join('')}</select></label>`;}
 export const checkbox=(name,label,checked=false,help='')=>`<label class="checkline"><input type="checkbox" name="${name}" ${checked?'checked':''}><span>${e(label)}${help?`<small>${e(help)}</small>`:''}</span></label>`;
 export function styleBadge(style){return `<span class="style-badge style-${e(style.toLowerCase())}">${style==='Turbo'?icon('bolt',12):''}${e(style)}</span>`;}
-export const fmt=(v,places=1)=>Number.isFinite(Number(v))&&v!=null?Number(v).toFixed(places):'\u2014';
+// A missing historic measurement is unknown, not zero. Keep genuine 0 and numeric strings.
+const numericMeasurement=v=>typeof v==='number'?Number.isFinite(v):
+ typeof v==='string'&&v.trim()!==''&&Number.isFinite(Number(v));
+export const fmt=(v,places=1)=>numericMeasurement(v)?Number(v).toFixed(places):'\u2014';
 export const range=(v,unit='')=>`${fmt(v.low)}<span class="range-dash">\u2013</span>${fmt(v.high)}${unit?` <span class="unit">${unit}</span>`:''}`;
 export function recipeGrid(rec,showTemp=false,unit='F') {
  if(!rec)return '';
@@ -175,8 +178,12 @@ export function focusShotValidationError(form,errors,tastes={}) {
 }
 
 export function shotSummary(sh,unit='F') {
- const dose=Number(sh.doseG),yieldG=Number(sh.yieldG);
- const ratio=Number.isFinite(dose)&&dose>0&&Number.isFinite(yieldG)&&yieldG>0?` \u00b7 1:${fmt(yieldG/dose,2)}`:'';
- return `<span class="shot-numbers">${fmt(sh.doseG)}g \u2192 ${fmt(sh.yieldG)}g${ratio} \u00b7 ${fmt(sh.timeS)}s${sh.tempC!=null?` \u00b7 ${tempDisplay(sh.tempC,unit)}\u00b0${unit}`:''}${sh.grindSetting!=null?` \u00b7 Grind ${fmt(sh.grindSetting)}`:''}</span>`;}
+ const dose=numericMeasurement(sh.doseG)?Number(sh.doseG):NaN;
+ const yieldG=numericMeasurement(sh.yieldG)?Number(sh.yieldG):NaN;
+ const ratio=Number.isFinite(dose)&&dose>0&&Number.isFinite(yieldG)&&yieldG>0?` \\u00b7 1:${fmt(yieldG/dose,2)}`:'';
+ const temperature=numericMeasurement(sh.tempC)?` \\u00b7 ${tempDisplay(sh.tempC,unit)}\\u00b0${unit}`:'';
+ const grind=numericMeasurement(sh.grindSetting)?` \\u00b7 Grind ${fmt(sh.grindSetting)}`:'';
+ return `<span class="shot-numbers">${fmt(sh.doseG)}g \\u2192 ${fmt(sh.yieldG)}g${ratio} \\u00b7 ${fmt(sh.timeS)}s${temperature}${grind}</span>`;
+}
 export const humanDate=d=>{if(typeof d!=='string'||!d.trim())return '';try{const date=new Date(d);return Number.isNaN(date.getTime())?'':date.toLocaleDateString('en-US',{month:'numeric',day:'numeric',year:'numeric'});}catch{return '';}};
 export const previewNotice=()=>`<div class="preview-note">${icon('eye',16)}<div><strong>Design preview</strong><span>Fictional sample data. Nothing is shared, synced or sent to an account.</span></div></div>`;
