@@ -10,6 +10,7 @@ import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 import {productCoffeeProse} from '../../src/server/coffee-product-prose.mjs';
 import {extractCoffeeBlendEvidence} from '../../src/server/coffee-blend-evidence.mjs';
 import {sameHandleCollectionAlternate,identicalCurrentSelectedTitle} from './issue33-selected-public-alternate.mjs';
+import {requiredFocusedSourceFailures} from './issue33-focused-source-acceptance.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../../site/cloud/coffee-url-autofill.js';
 const sha=value=>createHash('sha256').update(value).digest('hex');
 const clip=(v,n=350)=>String(v??'').replace(/\s+/g,' ').trim().slice(0,n);
@@ -289,7 +290,13 @@ const summary={schema_version:1,kind:'ORIGINAL603_FOCUSED_CURRENT_SOURCE_NOT_AUT
 writeFileSync(join(dest,'focused-current-evidence.json'),JSON.stringify(summary,null,2)+'\n');
 console.log('[DIC33 FOCUSED SUMMARY] '+JSON.stringify({attempted:records.length,fetched:summary.fetched,
  parsed:summary.parsed,manual_certified:0}));
-if(records.length!==targetNumbers.length||records.some(x=>x.status==='FETCHED'&&(!x.parser_ok||!x.add_coffee_ui_rendered||x.selected_price_badge_accepted===false)))process.exitCode=1;
+const requiredSourceFailures=requiredFocusedSourceFailures(targetNumbers,records);
+if(requiredSourceFailures.length){
+ console.error('[DIC33 FOCUSED REQUIRED CURRENT SOURCE UNVERIFIED] '+JSON.stringify({
+  source_sha:summary.source_sha,required_cases:targetNumbers,failures:requiredSourceFailures
+ }));
+ process.exitCode=1;
+}
 // Issue #33 exact selected-station post-merge official fifth20 source recheck; no parser change.
 // Issue #33 second exact current selected Chelchele post-PR341 public fifth20 source readback.
 
