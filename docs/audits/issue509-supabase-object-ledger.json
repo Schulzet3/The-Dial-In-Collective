@@ -2845,9 +2845,18 @@
       "provider_mutations": 0,
       "code_fixes": 0,
       "next": "active runtime/schema/auth/Edge drift and hosted API security"
+    },
+    {
+      "event": "2026-11-06_run42_catalog_source_privilege_drift",
+      "source_development_sha": "72bf28dff099a6b53c24dd75ab46fc84d25f36b0",
+      "records_compared": 356,
+      "definition_and_privilege_changes": 0,
+      "provider_catalog_fingerprint_categories": 5,
+      "production_writes": 0,
+      "next": "#96 read-only actual hosted API/JWT security"
     }
   ],
-  "state": "VISIBLE_PG_CATALOG_3319_3319_COMPLETE; EFFECTIVE_ROLE_CATALOG_RUN40_COMPLETE; HOSTED_API_NATIVE_PROVIDER_FULL_BASELINE_IN_PROGRESS",
+  "state": "VISIBLE_PG_CATALOG_3319_3319_COMPLETE; RUN42_PROVIDER_DRIFT_NO_CHANGE; FULL_SUPABASE_BASELINE_IN_PROGRESS",
   "application_table_review": {
     "total": 46,
     "current_index": 46,
@@ -6585,5 +6594,48 @@
     "safe_deletions": 0,
     "production_writes": false,
     "next": "#96 hosted exposure and SQL migration drift"
+  },
+  "provider_drift_run42": {
+    "state": "236_FUNCTION_88_RELATION_32_SCHEMA_GRANT_NO_DRIFT; CATALOG_PERFORMANCE_PUBLICATION_LOGS_AGGREGATED",
+    "evidence_path": "docs/audits/issue509-provider-drift-and-statistics-20261106-run42.json",
+    "source_development_sha": "72bf28dff099a6b53c24dd75ab46fc84d25f36b0",
+    "functions": 236,
+    "relations": 88,
+    "roles": 32,
+    "changes": 0,
+    "inventory": [
+      {
+        "kind": "constraint",
+        "total": 401,
+        "md5": "4c49ccfb124e57d2c46047a980b7082a"
+      },
+      {
+        "kind": "index",
+        "total": 235,
+        "md5": "49dc03ebbcdb527f0bd5315f08264ed4"
+      },
+      {
+        "kind": "policy",
+        "total": 42,
+        "md5": "979bb1becf476c83b13a5b9d7c58a70b"
+      },
+      {
+        "kind": "sequence",
+        "total": 7,
+        "md5": "d074789537099d213f4eb7e0dc2ed245"
+      },
+      {
+        "kind": "trigger",
+        "total": 33,
+        "md5": "4f4d7ee49758009fa55b42c6cce64c27"
+      }
+    ],
+    "publication_explicit_tables": 0,
+    "storage_bucket_count": 0,
+    "log_source_count": 6,
+    "production_mutations": false,
+    "source_code_fixes": 0,
+    "next": "Hosted JWT/PostgREST/Realtime/Storage #96; changed provider objects",
+    "baseline_complete": false
   }
 }
