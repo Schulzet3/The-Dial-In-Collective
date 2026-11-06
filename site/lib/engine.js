@@ -241,7 +241,7 @@ export function personalSimilarCoffeeReference(s,coffee,version,style,feed,baske
  const byId=new Map(s.coffees.map(c=>[c.id,c]));
  const matches=[],nearby=[];
  for(const sh of s.shots){
-  if(sh.hidden||!sh.dialedIn||sh.coffeeId===coffee.id||
+  if(sh.hidden||sh.dialedIn!==true||!isDialed(sh.tasteScales)||sh.coffeeId===coffee.id||
      sh.setupVersionId!==version.id||sh.style!==style||sh.feedMode!==feed||
      !finite(sh.yieldG)||!finite(sh.doseG)||!finite(sh.timeS)||sh.doseG<=0||
      sh.timeS<=0)continue;
