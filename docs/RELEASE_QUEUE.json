@@ -7059,24 +7059,34 @@
       "id": "DIC-Q-455-historic-outlier-stale-success-evidence-guard",
       "issue": 455,
       "title": "Exclude unverified archived five-taste success flags from local shot outlier-review baseline",
-      "state": "TESTING",
+      "state": "READY",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
-        "Source isExtreme historical truthy dialedIn gate reproduced at original engine blob 4a49d32430ac255ac80c00a52ce00757f762b7ac; synthetic four stale time records can incorrectly trigger outlier review.",
-        "Five new direct real-module groups test absent/nonideal/typed historic ratings, strict valid success threshold, ratio/time and hardware/coffee boundaries, historical immutability and local saveShot flag; GitHub head CI NOT YET RUN.",
-        "Initial PR-head approval/governance run42264243208 FAILED at queue schema validation only: missing merged_source_sha required explicitly null while TESTING; corrected in follow-up docs-only commit; all other checks not yet certified."
+        "Original source blob 4a49d32430ac255ac80c00a52ce00757f762b7ac isExtreme used archived truthy dialedIn; four stale imported histories could falsely trigger a measurement outlier review. Synthetic scenario; no user incident or measured espresso difference claimed.",
+        "Code PR #1071 corrected tested head 6c1bf220b0f1a64efc1d9c2291ae19fe83c90df0: strict dialedIn===true and isDialed(original five) only in isExtreme previous-shot eligibility; five direct real-module positive/negative tests blob ea716acb0b0ff1703d10ad734bf3c9d3c43fb3ef. Numeric ratio/time thresholds and all original records unchanged.",
+        "Initial PR-head governance 42264243208 FAILED because TESTING queue omitted mandatory null merged_source_sha. Same PR docs-only follow-up repaired queue/journal, corrected head approval42264419127 SUCCESS; prior failure preserved as history, not a PASS.",
+        "Corrected exact PR-head Node22/lint/build42264419281 2745 PASS/0 FAIL/6 intentional SKIP; Chromium/mobile/offline/a11y42264419488, isolated SQL/JWT42264419200, security42264419144, governance42264419127 all SUCCESS. Frozen60342264419117 SKIPPED NOT PASS.",
+        "PR #1071 nonforce squash merged 1b9168f31eed7a1a2d6aa3f748b81cd663f49dde on top of concurrent disjoint #509 commit 3ead9e3923b327658c17b1fc1fcc44a60dd9ab08; all FOUR code/test/TESTING queue/SAME-COMMIT journal Git blobs exactly matched corrected tested PR head and merged source.",
+        "Exact merged app Node22/lint/build42265001197 SUCCESS, Chromium/mobile/offline/a11y42265001104 SUCCESS, approval/queue governance42265001232 SUCCESS; no hosted Auth/member write, provider mutation, device or cup-quality measurement."
       ],
       "ci_runs": [
-        42264243208
+        42264243208,
+        42264419281,
+        42264419488,
+        42264419200,
+        42264419144,
+        42264419127,
+        42265001197,
+        42265001104,
+        42265001232
       ],
-      "blockers": [
-        "Await exact PR-head Node22/lint and applicable browser/mobile/offline/a11y, SQL/security/governance CI, exact merged readback and governance READY reconciliation."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "SAFE Locked-compatible eligibility correction, synthetic source bug only, no real member incident or espresso quality claim. NOT DEPLOYED. No production, provider or member writes.",
-      "merged_source_sha": null
+      "notes": "R455-073 VERIFIED READY in development only, NOT DEPLOYED. Existing five-green historical-success evidence integrity; original notes/measurements, ratio/time outlier thresholds, confirmed outlier requirement, style/equipment boundaries, offline/privacy and Locked policies unchanged. Initial schema CI failure repaired and archived. Research inventory unchanged 58/123; original S019 still unavailable. No release/prod/provider/member writes.",
+      "merged_source_sha": "1b9168f31eed7a1a2d6aa3f748b81cd663f49dde",
+      "pr": 1071
     }
   ],
   "history": [
