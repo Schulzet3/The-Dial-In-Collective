@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "run25",
+  "date_utc": "2026-11-06",
+  "project_ref": "azviqqejypsefzilgonr",
+  "provider_status": "ACTIVE_HEALTHY",
+  "postgres_version": "17.11.0.003",
+  "git_refs": {
+    "development_parent": "cd35ebf4708afce24d55ae69aa939cea56d82134",
+    "main": "b62bc028fe1cda1fd2756bfb1162501ca629002a",
+    "release_production": "6c729b928fad5fd59ae012c63d7c005f180b2b64"
+  },
+  "scope": "READ_ONLY_RUNTIME_DRIFT_AND_CATALOG_SECURITY_RECHECK; PRIOR_DIRECT_PROVIDER_SOURCE_REVIEW_NOT_RECREDITED",
+  "current_function_definition_drift": {
+    "total_live_public_private": 99,
+    "previously_reviewed_baseline": 99,
+    "unchanged_against_previous_function_manifest": 98,
+    "changed": [
+      {
+        "identity": "private.dic_admin_search_records(p_kind text, p_query text, p_offset integer, p_limit integer)",
+        "current_md5": "4e094f4f47bc30cbf63a7bfaf0c1100b",
+        "current_chars": 8921,
+        "status": "PREVIOUSLY_VERIFIED_EXPIRED_INVITE_FILTER_FIX; NOT_NEW_PRODUCTION_CHANGE"
+      }
+    ],
+    "removed": [],
+    "aggregate_current_function_source_chars": 207594,
+    "method": "Live read-only pg_proc/pg_get_functiondef MD5+length for each of 99; identity+MD5 compared with prior 99 per-object ledger entries; no wholesale source reread credited."
+  },
+  "edge_bundle_drift": {
+    "deployments": [
+      {
+        "slug": "dic-verify-coffee",
+        "version": 8,
+        "active": true,
+        "verify_jwt": true,
+        "bundle_sha256": "d59e9da29335f2d626a2779238b4f1176148f5f8f3d54539bf831ff20aa6a77e",
+        "file_entries": 5,
+        "exact_source_matches_development": 5,
+        "exact_source_matches_release": 5
+      },
+      {
+        "slug": "dic-preview-coffee",
+        "version": 4,
+        "active": true,
+        "verify_jwt": true,
+        "bundle_sha256": "ac928ceb4898414555fbcc96afb30b0963f7c819c5d7e211abd5b3893090648c",
+        "file_entries": 6,
+        "exact_source_matches_development": 5,
+        "exact_source_matches_release": 5
+      }
+    ],
+    "compared_bundle_entries": 11,
+    "exact_entries": 10,
+    "different_entries": 1,
+    "unique_file_variants": 9,
+    "previously_documented_direct_semantic_coverage": 9,
+    "different_file": {
+      "bundle": "dic-preview-coffee@v4",
+      "path": "dic-verify-coffee/evidence.mjs",
+      "deployed_chars": 10032,
+      "development_and_release_chars": 11492,
+      "unchanged_imported_export": "normalizeWords",
+      "imported_export_direct_body_equal": true,
+      "preview_imported_symbols_from_different_file": [
+        "normalizeWords"
+      ],
+      "current_file_adds_release_label_helpers": true,
+      "outcome": "HISTORICAL_BUNDLE_VARIANT_NOT_PROVEN_RUNTIME_BUG; COORDINATE_ISSUE_33; NO_DEPLOYMENT"
+    },
+    "method": "Live Supabase get_edge_function returned full file content; exact string equality versus current GitHub files in development and release/production. No running Edge JWT/API probes or current source audit #267 credit."
+  },
+  "catalog_privilege_checks": {
+    "private_delete_admin": [
+      {
+        "function": "private.dic_admin_delete_preview(text,uuid)",
+        "definition_md5": "733e337473ef8f190e3a78ebf5ebfad1",
+        "anon_execute": true,
+        "anon_private_schema_usage": false,
+        "authenticated_execute": true,
+        "authenticated_private_schema_usage": true,
+        "required_guards": "private.require_member(),auth.uid(),private.is_admin()"
+      },
+      {
+        "function": "private.dic_admin_delete_record(text,uuid,bigint,jsonb)",
+        "definition_md5": "71d4703233388fb04e263767caa5b57b",
+        "anon_execute": true,
+        "anon_private_schema_usage": false,
+        "authenticated_execute": true,
+        "authenticated_private_schema_usage": true,
+        "required_guards": "private.require_member(),private.is_admin(),revision and impact check"
+      }
+    ],
+    "conclusion": "ANON_FUNCTION_EXECUTE_ACL_PRESENT_BUT_ANON_SCHEMA_USAGE_DENIED; NO_PROVEN_ANON_CALLABILITY_OR_BYPASS; LIVE_SIGNED_ACCOUNT_BEHAVIOR_UNVERIFIED",
+    "realtime_subscription": {
+      "rls_enabled": false,
+      "anon_schema_usage": true,
+      "authenticated_schema_usage": true,
+      "anon_select": true,
+      "authenticated_select": true,
+      "service_role_select": true,
+      "aggregate_live_row_count": 0,
+      "conclusion": "POSTGRES_DB_PRIVILEGE_SURFACE_CONFIRMED; POSTGREST_EXPOSED_SCHEMAS_AND_HTTP_ACCESS_UNVERIFIED; VENDOR_REALTIME_OWNED; ESCALATE_TO_ISSUE_96_BEFORE_ANY_PRIVILEGE_CHANGE"
+    }
+  },
+  "current_provider_advisories": {
+    "security": {
+      "rls_enabled_no_policy": 6,
+      "authenticated_security_definer_function_executable": 10,
+      "auth_leaked_password_protection": 1
+    },
+    "performance": {
+      "unindexed_foreign_keys": 12,
+      "unused_index": 9
+    },
+    "health": 0,
+    "remediation_urls": [
+      "https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable",
+      "https://supabase.com/docs/guides/database/database-linter?lint=0001_unindexed_foreign_keys",
+      "https://supabase.com/docs/guides/database/database-linter?lint=0005_unused_index"
+    ],
+    "conclusion": "REPEATED_ADVISOR_COUNTS_NOT_PROOF_OF_DEFECT"
+  },
+  "unindexed_fk_workload": {
+    "records": 12,
+    "rel_estimated_live_rows_min": 0,
+    "rel_estimated_live_rows_max": 14,
+    "stats_reset_utc": "2026-10-02 18:01:15.201525+00",
+    "method": "pg_constraint + pg_stat_user_tables metadata only, no member row data",
+    "conclusion": "Small currently estimated tables; neither missing-index notice nor aggregate scans establish material bottleneck; avoid unproved write overhead"
+  },
+  "confirmed_new_application_defect": false,
+  "development_code_fix": false,
+  "production_provider_writes": false,
+  "public_release": false,
+  "current_state": "IN_PROGRESS",
+  "next": "Inspect effective PostgreSQL view/privilege/API-surface drift and hosted Auth/Realtime security with #96, then bounded workload plans and inaccessible admin-console settings. No duplicate historical migration baseline review.",
+  "unverified": [
+    "Actual PostgREST exposed schemas and direct anon/authenticated HTTP behavior",
+    "Live real signed JWT/session authorization acceptance owned by #96",
+    "Supabase hosted Auth configuration beyond advisor",
+    "Provider C/native implementations",
+    "Exact provider engine/package runtime dependencies",
+    "Secret/restricted hosted console-only configuration",
+    "Cross-provider publication acceptance"
+  ],
+  "ci": "PENDING_EXACT_SOURCE_GOVERNANCE_READBACK_FOR_THIS_DOCUMENTATION_ONLY_COMMIT; NO_NODE22_ISOLATED_POSTGRES_REAL_JWT_TESTS_PERFORMED",
+  "privacy": "No Auth identities/member records/shots/notes/passwords/log text returned; aggregate counts and catalog definitions only."
+}
