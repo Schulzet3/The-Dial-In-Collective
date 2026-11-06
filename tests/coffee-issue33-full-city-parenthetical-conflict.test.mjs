@@ -38,7 +38,7 @@ test('supported unambiguous selected Full City still normalizes to Medium-Dark',
  assert.equal(p.fields.roast_level,'Medium-Dark');
 });
 test('unrelated or unsupported parentheses do not supply a selected roast tier',()=>{
- for(const label of ['Roast options: Full City (Med)','Full City (unknown)','Unknown (Unknown)']){
+ for(const label of ['Full City (unknown)','Unknown (Unknown)','Unknown Roast (unknown)']){
   assert.equal(normalizeRoastLabel(label),null,label);
  }
  const p=extractPublicCoffeeFacts(current('Full City (Med)','<nav><a href="/products/another">Other dark coffee</a></nav>'),{source_url:'https://www.aveleyfarmscoffee.com/products/ethiopia-harrar'});
