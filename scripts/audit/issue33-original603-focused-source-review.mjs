@@ -122,6 +122,29 @@ for(const target of targets){
       }));
     }
 
+    // Original603 #527 strict post-fix current official selected product.
+    // Do not use menu, related-coffee or historic SEO to create a false pear.
+    if(r.number===527){
+      const exactSource=selected;
+      const notes=r.current_fields?.tasting_notes||'';
+      r.selected_527_contract={
+        current_h1:r.selected_h1,source_sha256:r.html_sha256,
+        parsed_name:r.current_fields?.name||null,parsed_notes:notes,
+        same_product_named_story:/The Kenya Peaberry offers notes of honeydew melon and pear, with a hint of jasmine/i.test(
+          exactSource.replace(/<[^>]{0,2000}>/g,' ').replace(/\\s+/g,' ')),
+        conflicts:r.conflicts||[]
+      };
+      r.selected_527_contract_passed=r.selected_h1.length===1&&
+        r.selected_h1[0]==='Kenya Peaberry'&&r.current_fields?.name==='Kenya Peaberry'&&
+        r.selected_527_contract.same_product_named_story&&
+        ['Honeydew Melon','pear','Jasmine','Red Wine'].every(note=>notes.toLowerCase().includes(note.toLowerCase()))&&
+        !(r.conflicts||[]).includes('tasting_notes')&&
+        r.add_coffee_ui_rendered&&r.source_review_rendered;
+      console.log('[DIC33 #527 EXACT SELECTED NAMED NOTE AFTER CONTRACT] '+JSON.stringify({
+        number:r.number,...r.selected_527_contract,passed:r.selected_527_contract_passed
+      }));
+    }
+
     // Original603 #97: a selected product can declare decaf even when the
     // exact H1 lacks the word Decaf. The selected same-product accordion,
     // not DEKAF brand/navigation or decaffeination education, proves METHOD.
@@ -257,6 +280,17 @@ if(selectedRole154Control196 &&
  process.exitCode=1;
 }
 
+
+// #527 literal pear current exact selected-source after contract (not 603).
+if(targetNumbers.includes(527)){
+ const r=records.find(r=>r.number===527);
+ if(!r||r.status!=='FETCHED'||r.parser_ok!==true||r.selected_527_contract_passed!==true){
+  console.error('[DIC33 #527 OFFICIAL CURRENT LITERAL COMPLETENESS UNVERIFIED] '+
+   JSON.stringify({source_sha:summary.source_sha,status:r?.status,h1:r?.selected_h1,
+    fields:r?.current_fields,proof:r?.selected_527_contract,passed:r?.selected_527_contract_passed}));
+  process.exitCode=1;
+ }
+}
 
 // Original603 #97 after-merge public-only source acceptance (not 603 certification).
 if(targetNumbers.length===1 && targetNumbers[0]===97 &&

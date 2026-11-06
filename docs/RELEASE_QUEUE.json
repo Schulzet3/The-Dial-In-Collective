@@ -8,6 +8,36 @@
   },
   "items": [
     {
+      "id": "DIC-Q-33-527-selected-named-sensory-pear",
+      "issue": 33,
+      "title": "Recover exactly selected named Tasting Notes prose missing one descriptor without losing list",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-flavor-evidence.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "Pre-fix exact official current source run41859218519 / job126676072737: selected H1 Kenya Peaberry; raw HTML SHA256 8deb2be902148578157e39b26ec503e3117c423a1cb1768067e6195f0c5efb58; canonical Honeydew Melon/Jasmine/Red Wine without directly selected pear; no conflicts.",
+        "Three synthetic positive and negative regression test groups added; exact-head checks, post-merge official HTTPS parser/Add Coffee and final source-blobs pending.",
+        "PR first-head Node41860281958 completed 1680 PASS /1 FAIL: synthetic fixture misclassified full Tasting Notes paragraph, positive canonical blank; fixed by realistic separate story/roast-chip DOM test and canonical after-layout generic refinement.",
+        "Second PR Node41861422028 1680 PASS /1 FAIL: exact mock selected layout had canonical 3 notes from source_facts, but refinement ran BEFORE printedNotes had populated canonical; helper itself independently passed. Move guarded refinement AFTER direct printed-notes/selected-description final precedence and BEFORE source-facts disagreement annotation.",
+        "Nov 6 recovery verified actual current development flavor module is byte-identical to PR598 base, parser metadata changed concurrently and was surgically adapted; exact official current page again shows Kenya Peaberry / pear in selected paragraph. Before parser omitted pear, new exact source runner must prove after."
+      ],
+      "ci_runs": [
+        41859218519,
+        41861961701,
+        41861961681,
+        41861961726,
+        41861961687
+      ],
+      "blockers": [
+        "Current integrated PR-head tests and merged exact official #527 source/Add Coffee still pending"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "IN_PROGRESS. Recovered already-green PR598 code/test into current development without overwriting concurrent metadata, queue, journal. Original603 current selected historical hash changes with live source; verify fresh. Not deployed."
+    },
+    {
       "id": "DIC-Q-455-feedback-hydration-instant",
       "issue": 455,
       "title": "Choose recipe-context and rehydrated rating feedback by actual shot instant across offsets",

@@ -20,7 +20,7 @@ import {equivalentCoffeeVarieties,compatibleGenericCoffeeVarieties,explicitCoffe
 import {equivalentCoffeeProductNames,preferredCoffeeRoasterName,selectedCoffeeNameWithoutPrice} from './coffee-product-identity.mjs';
 import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
-import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
+import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,refineSelectedNamedTastingNotes,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
 import {withoutNaturalDecaffeinationModifier,recordCoffeeProcessingClaim,reconcileCoffeeProcessingClaims} from './coffee-processing-evidence.mjs';
@@ -1853,6 +1853,14 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     source_facts.push({field:'tasting_notes',label:'Tastes like',
       value:directSelected.explicit_tastes_like,source_url,source_type:'html',
       section:'Exact selected product literal tasting description'});
+  }
+  // Current exact selected named flavor prose can add exactly one seller-
+  // printed literal note only after ranked printed/current notes exist. Never
+  // use SEO, another coffee, historical, conditional or unrelated description.
+  if(fields.tasting_notes&&!conflicts.has('tasting_notes')&&
+   !seoFallbackByFields.get(fields)?.has('tasting_notes')){
+   const named=refineSelectedNamedTastingNotes(currentProduct,{clean,notes:fields.tasting_notes});
+   if(named)fields.tasting_notes=named;
   }
   // Flag only direct selected-source disagreements, not unsupported SEO.
   // A higher-priority current description may remain the canonical suggestion
