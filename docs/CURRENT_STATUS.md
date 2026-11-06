@@ -1,3 +1,11 @@
+## November 6, 2026 UTC — R455-078 measured-family evidence VERIFIED READY, NOT DEPLOYED [skip netlify]
+
+**Safe fix:** Archived five-green shot with invalid measured dose/yield/time or overflowing quotient no longer influences personal successful recipe family statistics, confirmation or choice. Original shots, notes, five original taste ratings, manual favorites, independent recipe families, and Locked behavior are preserved. Synthetic source-level reproduction only, not measured member incident or better espresso.
+
+[Code PR #1116](https://github.com/Schulzet3/The-Dial-In-Collective/pull/1116) initial Node 42314278379 failed one existing legacy contract test; same PR corrected preserving invalid-only familyStats ratio:null/count0. Corrected source `73b2053518bf5aa058a3ba77506c63143b7eedda` Node22 CI42314622155 2,784 PASS/0 FAIL/6 SKIP, browser/mobile/offline42314622129, SQL42314622141, security42314622137, governance42314622134 SUCCESS, frozen60342314622154 SKIPPED. Nonforce code merge `45830c66e16984bfaf759f91268fbae69f15d47f`, engine blob `bdd59c6252049596f3169fae8517fb5ebeee49ca`, test blob `73f1c4ce1532f1f95ff4d2a71ef943fb618b6a81`; exact merged Node22 42314860468 2,784 PASS/0 FAIL/6 SKIP, browser/mobile/offline/a11y42314860536 and governance42314860489 SUCCESS. Queue `DIC-Q-455-family-measurement-integrity` READY, not deployed. Research ledger 58 sources/123 checks unchanged; original S019 unavailable, no #267 literal audit credit.
+
+---
+
 ## November 6, 2026 UTC — R455-077 personal similar-coffee measurement integrity VERIFIED READY, NOT DEPLOYED [skip netlify]
 
 **Source-exact safe correction:** Exported local `personalSimilarCoffeeReference` previously allowed archived five-green donor shot with nonpositive measured yield or overflowing ratio into an unproven similar-coffee starting estimate and observations. Only eligibility `yieldG>0` and `finite(yieldG/doseG)` added. Existing five taste scores, actual measurements, style/feed/setup/roast matching, original shot history and private notes, Locked numeric priors and no-more-than-one-controllable-change behavior are preserved. No real member record incidence, hosted Community or empirical espresso-quality claim.
