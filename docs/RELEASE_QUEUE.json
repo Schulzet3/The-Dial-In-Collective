@@ -6048,6 +6048,32 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
       "notes": "Verified SAFE display-only correction READY on development, NOT DEPLOYED. Original shot measurements, all five sensory ratings, personal history/notes, coffee/style/feed/calibration, one-variable recommendation and Locked defaults unchanged. Source, PR-head and merged-source CI verified; no actual-member incident, empirical taste benefit, or provider release claimed."
+    },
+    {
+      "id": "DIC-Q-455-unrated-taste-visuals",
+      "issue": 455,
+      "pr": 918,
+      "title": "Show missing historic taste ratings as neutral unrated instead of simultaneous red failure/green ideal",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/ui.js",
+        "site/styles.css"
+      ],
+      "tests": [
+        "Current pre-fix development ded4cc5531b0ae89dc3b15f924ea30b07eb15fd8 site/lib/ui.js: missing tasteSeverity(null) maps ??4 to red chips, ??0 to green ideal compass; expanded Shot History and recipe feedback consume these same helpers.",
+        "Five direct real-module negative/positive regression tests in tests/issue455-unrated-taste-compass.test.mjs committed on PR #918 head a4edd71fafb450af1074a0220d59307e403585e6. Tests NOT yet certified by exact-head Node22 CI at queue intake.",
+        "Initial exact PR #918 approval/continuity run42158189345 FAILED solely because site/styles.css was not tracked in release queue; direct log reported Untracked app change. Repair is this in-progress queue entry; original failure is NOT PASS.",
+        "Re-run exact corrected PR-head Node22/lint/build, mobile/browser/offline/a11y, source security, isolated SQL and approval; mark skipped/not-applicable accurately; nonforce merge only after confirmed acceptance, then merged-source tests and separate READY reconciliation."
+      ],
+      "ci_runs": [
+        42158189345
+      ],
+      "blockers": [
+        "Pending corrected PR-head CI, nonforce merge and exact merged-source verification. NOT READY or deployed."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Engineering-safe neutral legacy taste visualization only. All five actual sensory ratings, existing scoring/new-shot validation, original measured shots and notes, one-control engine advice, styles/calibrations, privacy preserved. NOT DEPLOYED."
     }
   ],
   "history": [
