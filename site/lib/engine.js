@@ -619,7 +619,7 @@ export function makeCurrent(s,shotId) {
 }
 export function contributorWeight(n) {return n<=1?1:n===2?1.2:n<=4?1.4:n<=7?1.6:n<=12?1.8:2;}
 export function communitySummary(shots) {
- const valid=shots.filter(s=>s.dialedIn&&s.outlierReview!=='pending');const users=new Map();
+ const valid=shots.filter(s=>s.dialedIn===true&&isDialed(s.tasteScales)&&s.outlierReview!=='pending');const users=new Map();
  for(const sh of valid){const id=sh.contributorId||'local_user';if(!users.has(id))users.set(id,[]);users.get(id).push(sh);}
  let total=0,sum=0;
  const contributors=[...users.values()].map(arr=>({center:stats(arr.map(s=>s.yieldG/s.doseG)).center,weight:contributorWeight(arr.length)}));
