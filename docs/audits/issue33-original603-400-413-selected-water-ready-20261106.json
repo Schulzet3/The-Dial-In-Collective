@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "kind": "ORIGINAL603_EXACT_SELECTED_WATER_DECAF_CORRECTION_VERIFIED_READY",
+  "authority": "ISSUE_33_DEVELOPMENT_ONLY_2026_11_06",
+  "code_pr": 1081,
+  "code_merge_sha": "0c83360a4f9949f0d7feb23b99fd32a69784ad48",
+  "ready_docs_pr": "PENDING_THIS_PR",
+  "ready_item": "DIC-Q-33-original603-400-413-selected-decaf-water-prose",
+  "state": "READY_NOT_DEPLOYED",
+  "original_immutable": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "csv_modified": false,
+    "oracle_scorer_captures_modified": false
+  },
+  "before": {
+    "runner": 42277219748,
+    "source_sha": "ee439262e2f54ff77f3cee8e87f2a111fd51359f",
+    "artifact_id": 13533582105,
+    "zip_sha256": "71238a47013e4100779729976e4b2cb94d9542e43f55f74dcc048ccde8bf72bf",
+    "methods": {
+      "352": "Sugar Process",
+      "400": null,
+      "413": null
+    },
+    "current_selected_html_sha256": {
+      "352": "16eb95b74d71355db57ef132e01c93161f2acece4cab13f77343c21bf41979d1",
+      "400": "df0e3467ef65cc720f81df8963990610f1353589ae133860ea882aece3713f67",
+      "413": "4406ce927e5fd955e00b7b1b20b52a4683d337524af162c4102bb499315805f1"
+    }
+  },
+  "fix": {
+    "source_code_blob": "c7d042ac71d568902d6f14dc89f221b254dc184c",
+    "focused_test_blob": "befa786c86d417a599b109c8f935a283b16b1c4b",
+    "new_test_groups": 9,
+    "scope": "exact H1, wholly decaffeinated selected product, bounded same-product paragraph, Mountain/Swiss Water phrasing, other-coffee/SEO/historical/half-caf/regular negatives"
+  },
+  "ci": {
+    "pr_head": "254b2c7a26e6d9d475ef793738116ea771d1a9b1",
+    "node22": {
+      "run": 42277631498,
+      "passed": 1910,
+      "failed": 0,
+      "skipped": 0,
+      "lint": "PASS",
+      "build": "PASS"
+    },
+    "cloud_mobile": 42277632024,
+    "sql": 42277631750,
+    "security": 42277631580,
+    "archive": 42277631619,
+    "approval": 42277631596,
+    "merged_source": {
+      "node22_run": 42277913884,
+      "passed": 1910,
+      "failed": 0,
+      "skipped": 0,
+      "lint": "PASS",
+      "build": "PASS",
+      "cloud_mobile": 42277914052,
+      "approval": 42277914003
+    },
+    "original_frozen603": "SKIPPED_NOT_PASS"
+  },
+  "after": {
+    "runner": 42277914214,
+    "source_sha": "0c83360a4f9949f0d7feb23b99fd32a69784ad48",
+    "artifact_id": 13533627670,
+    "zip_sha256": "b544b0766d678fdfb6f6aeefaff0841b7a0432879a3d8b63288d3acd1f6ac7f8",
+    "fetched": 3,
+    "parsed": 3,
+    "add_coffee": 3,
+    "source_review": 3,
+    "manual_whole_coffee_certified": 0,
+    "methods": {
+      "352": "Sugar Process",
+      "400": "Water Process",
+      "413": "Water Process"
+    },
+    "current_selected_html_sha256": {
+      "352": "ee700c68e53250ce94c7a35246674b519a105b7ebebde931c69c81e6b083dfeb",
+      "400": "76bf9a236a0c56465ebe83519a4a2625897147978d176890c9e547ac0198467a",
+      "413": "dac7794d5657b9c4d1828379815a439fe97ea97d4e190d21755e10d7d813608d"
+    },
+    "conflicts": {
+      "352": [],
+      "400": [],
+      "413": []
+    }
+  },
+  "cases": [
+    {
+      "number": 400,
+      "official_url": "https://vtartisan.com/products/dark-decaf",
+      "current_h1": "Dark Decaf",
+      "direct_selected": "These Central American & African beans are naturally decaffeinated using the 'Mountain Water' process.",
+      "field": "decaffeination_method",
+      "before": null,
+      "after": "Water Process"
+    },
+    {
+      "number": 413,
+      "official_url": "https://woodscoffee.com/products/decaf",
+      "current_h1": "Decaf",
+      "direct_selected": "Using the Swiss Water Process, our decaf uses the elements of water, temperature and time to offer a decaf blend that is 99.9% caffeine free.",
+      "field": "decaffeination_method",
+      "before": null,
+      "after": "Water Process"
+    },
+    {
+      "number": 352,
+      "official_url": "https://staccatoroasters.com/products/colombia-valle-del-cauca-ea-decaf",
+      "current_h1": "Colombia EA Sugarcane Decaf Coffee Beans",
+      "direct_selected": "Process: Washed • EA Sugarcane Decaffeination",
+      "field": "decaffeination_method",
+      "before": "Sugar Process",
+      "after": "Sugar Process"
+    }
+  ],
+  "limits": {
+    "issue33": "OPEN_FULL_ORIGINAL603_MANUAL_CERTIFICATION_INCOMPLETE",
+    "real_go_true_device": "NOT_TESTED",
+    "publication": "NOT_AUTHORIZED",
+    "production_writes": 0,
+    "original_frozen603": "SKIPPED_NOT_PASS"
+  }
+}

@@ -10,22 +10,36 @@
     {
       "id": "DIC-Q-33-original603-400-413-selected-decaf-water-prose",
       "issue": 33,
-      "pr": null,
+      "pr": 1081,
       "title": "Recognize two exact selected-product Mountain/Swiss Water decaf prose forms without inferring from other coffee or generic water",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "0c83360a4f9949f0d7feb23b99fd32a69784ad48",
       "scope_paths": [
         "src/server/coffee-direct-product-prose.mjs"
       ],
       "tests": [
         "Actual 2026-11-06 exact merged official source runner42277219748 fetched/parsed all three: #400 VT Artisan Dark Decaf selected H1 and Mountain Water prose, method absent; #413 Woods Decaf selected H1 and Swiss Water direct prose, method absent; #352 Staccato current EA sugarcane correct Sugar Process.",
         "Raw GitHub artifact13533582105 ZIP independently SHA256 71238a47013e4100779729976e4b2cb94d9542e43f55f74dcc048ccde8bf72bf; raw HTML #400 df0e3467ef65cc720f81df8963990610f1353589ae133860ea882aece3713f67; #413 4406ce927e5fd955e00b7b1b20b52a4683d337524af162c4102bb499315805f1; #352 16eb95b74d71355db57ef132e01c93161f2acece4cab13f77343c21bf41979d1.",
-        "Nine positive/adversarial synthetic exact selected-product parser regressions added but PR-head tests and official post-code proof PENDING: not READY. Frozen original603 immutable."
+        "Nine positive/adversarial synthetic exact selected-product parser regressions added but PR-head tests and official post-code proof PENDING: not READY. Frozen original603 immutable.",
+        "PR1081 exact head 254b2c7a26e6d9d475ef793738116ea771d1a9b1: Node22/lint/build run42277631498 1910 PASS / 0 FAIL / 0 SKIP including nine new positive/negative guards; cloud/mobile42277632024, isolated SQL42277631750, security42277631580, source-archive42277631619, approval42277631596 SUCCESS. Original frozen60342277632104 SKIPPED (not a PASS).",
+        "Nonforce squash merge PR1081 0c83360a4f9949f0d7feb23b99fd32a69784ad48; code blob c7d042ac71d568902d6f14dc89f221b254dc184c, test blob befa786c86d417a599b109c8f935a283b16b1c4b. Exact merged Node/lint/build42277913884 1910 PASS/0 FAIL/0 SKIP, cloud/mobile42277914052 SUCCESS, approval42277914003 SUCCESS, original frozen603 source acceptance42277914167 SKIPPED, not PASS.",
+        "Exact merged current official runner42277914214 selected job SUCCESS; #400/#413/#352 all FETCHED PARSED Add Coffee/Source Review 3/3, 0 automatically whole-coffee certified. #400 and #413 decaffeination_method now Water Process, #352 still Sugar Process, 0 conflicts. Independent ZIP SHA256 b544b0766d678fdfb6f6aeefaff0841b7a0432879a3d8b63288d3acd1f6ac7f8 and all three raw source HTML SHA256 rechecked: #400 76bf9a236a0c56465ebe83519a4a2625897147978d176890c9e547ac0198467a, #413 dac7794d5657b9c4d1828379815a439fe97ea97d4e190d21755e10d7d813608d, #352 ee700c68e53250ce94c7a35246674b519a105b7ebebde931c69c81e6b083dfeb."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        42277631498,
+        42277632024,
+        42277631750,
+        42277631580,
+        42277631619,
+        42277631596,
+        42277913884,
+        42277914052,
+        42277914003,
+        42277914214
+      ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "TESTING; only exact current selected direct prose, source fact provenance and fail-closed negative guards. Development-only, not a complete 603-coffee certification or release."
+      "notes": "VERIFIED narrow READY in development only; both exact selected official water-method omissions corrected, sugarcane EA control preserved. Original603 whole-coffee manual certification remains 0 for this cohort; NOT DEPLOYED."
     },
     {
       "id": "DIC-Q-455-community-summary-stale-success-evidence-guard",
