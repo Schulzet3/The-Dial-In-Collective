@@ -7520,8 +7520,8 @@
       "id": "DIC-Q-455-archived-temperature-evidence-integrity",
       "issue": 455,
       "title": "Exclude invalid archived temperatures from Log Shot prefill and personal temperature guidance",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "8f767a7e7af17d4358e54a0ef320cdc1f5b11389",
       "scope_paths": [
         "site/lib/engine.js"
       ],
@@ -7529,14 +7529,27 @@
         "R083 source parent a22dd810d1265d4a1c5804f3b3ca3f6e6131a198; engine blob bda74966e13e8bf810c5ddc5d081390350365248: historical prefill and five-green personal temperature guidance accepted any finite archived temp, even outside existing CONFIG.bounds.tempC=[70,100]. Synthetic counterexamples, no real member incident.",
         "SAFE: apply existing validated 70–100 C logging bounds to historical temperature evidence only; keep all original shots, private notes, five taste ratings, setup/style selection and unchanged recipe temperature targets.",
         "Seven real-module positive/negative/immutable synthetic tests authored in tests/issue455-temperature-history-integrity.test.mjs; UNEXECUTED at authoring.",
-        "Exact source-bound Node22/lint/build, compiled browser/mobile/offline/a11y, isolated SQL/security and governance PR-head checks, non-force merge and applicable exact merged-source verification PENDING. Frozen603 not run."
+        "Exact source-bound Node22/lint/build, compiled browser/mobile/offline/a11y, isolated SQL/security and governance PR-head checks, non-force merge and applicable exact merged-source verification PENDING. Frozen603 not run.",
+        "PR #1159 head 779873414c2e8a2cb51eba58cf686a1caa027fb5 seven-group real-module synthetic test blob 7214fc9bd8f4fbbf35d26b28964441384785707d; engine blob 309206e3ee1fd28bf2edc9d06a31d623551e2c19; same-commit queue/journal.",
+        "Exact PR-head Node22/lint/build 42344002818 2,822 PASS/0 FAIL/6 intentional SKIP; compiled browser/mobile/offline/a11y/cloud 42344003025, isolated SQL 42344002891, security 42344003218 and approval/governance 42344002975 SUCCESS. Frozen original603 42344002853 SKIPPED, NOT PASS.",
+        "Non-force squash merged PR #1159 as 8f767a7e7af17d4358e54a0ef320cdc1f5b11389 above disjoint concurrent #509 docs. Merged engine/test/queue/journal blobs identical to checked head: engine 309206e3ee1fd28bf2edc9d06a31d623551e2c19; tests 7214fc9bd8f4fbbf35d26b28964441384785707d; TESTING queue 89db509f75330e8817f588bf6767ab74bc7fcaf9; same-commit journal 4bc850c699a26f3ab308a5445503d5dd4b8d5883.",
+        "Exact merged-source Node22/lint/build 42344170433 SUCCESS, 2,822 PASS/0 FAIL/6 intentional SKIP; compiled Chromium/mobile/390/offline/a11y/cloud 42344170453 SUCCESS; governance/approval 42344170432 SUCCESS. Runtime/test blobs equal PR head; no direct production/member tests or empirical coffee-quality inference. R083 READY only after this docs-only reconciliation and exact merged docs governance."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact PR-head and merged-source applicable CI not yet verified"
+      "ci_runs": [
+        42344002818,
+        42344003025,
+        42344002891,
+        42344003218,
+        42344002975,
+        42344002853,
+        42344170433,
+        42344170453,
+        42344170432
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "R083 development-only SAFE archived-temperature input integrity. No new taste or scientific threshold; existing logged-temperature validation re-used. No deployment or production/provider/member writes."
+      "notes": "SAFE existing-logged-temperature bounds for archived prefill/personal temperature evidence; PR1159 verified exact development merge 8f767a7e7af17d4358e54a0ef320cdc1f5b11389. 7 direct synthetic regression groups; Node22 2,822/0/6 and applicable compiled browser/mobile/offline/a11y, SQL, security and governance success. Original private shots/notes retained. READY in development only, NOT DEPLOYED. No Locked change, physical cup evidence or member-data writes.",
+      "pr": 1159
     }
   ],
   "history": [
