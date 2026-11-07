@@ -374,7 +374,14 @@ export function recommendation(s,coffeeId,options={}) {
   }
  } else if(!peerFirst&&style!=='Custom'&&style!=='Fast-Flow') {
   // Weak residual only for legacy styles. Fast-Flow never shares this generic cross-style path.
-  const other=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&sh.coffeeId===coffeeId&&sh.style!==style&&sh.style!=='Fast-Flow'&&sh.style!=='Custom'&&RATIOS[sh.style]);
+  // Archived five-green taste ratings do not validate malformed measured
+  // dose/yield/time. Only genuinely measured ratios may weakly bias another
+  // style's starting ratio; no cross-style time or grind transfer.
+  const other=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&
+   sh.coffeeId===coffeeId&&sh.style!==style&&sh.style!=='Fast-Flow'&&
+   sh.style!=='Custom'&&RATIOS[sh.style]&&
+   finite(sh.doseG)&&sh.doseG>0&&finite(sh.yieldG)&&sh.yieldG>0&&
+   finite(sh.yieldG/sh.doseG)&&finite(sh.timeS)&&sh.timeS>0);
   if(other.length){const r=roastIndex(c.roastLevel)<0?roastIndex('Medium'):roastIndex(c.roastLevel);const residual=mean(other.map(sh=>sh.yieldG/sh.doseG-RATIOS[sh.style][r]));const bias=clamp(residual*.2,-.15,.15);for(const k of ['low','high','center'])rec.ratio[k]+=bias;rec.reasons.push('Small ratio adjustment informed by your other styles; time and grind stay style-specific.');}
  }
  rec.grind=grindGuidance(s,c,style,basket,feed,rec.familyId);
