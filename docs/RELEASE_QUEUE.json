@@ -8,6 +8,28 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-controlled-sensitivity-history-integrity",
+      "issue": 455,
+      "title": "Reject invalid archived measurements from same-coffee grind-time response",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "R084 source parent c05c8bb1359d53422414ee5c2d76b019d1fd02d6 engine blob 309206e3ee1fd28bf2edc9d06a31d623551e2c19: historical time-response fitting accepted archival grinder dials outside today's configured espresso range and dose/yield/time/temp outside existing Log Shot bounds. Synthetic deterministic source observation; no member incidence claimed.",
+        "SAFE fix: use existing CONFIG.bounds for measured dose/yield/time/temperature; verify current range when available and complete historical snapshot range when present; preserve eligible legacy partial snapshots, all recorded shots/notes, five ratings and Locked rules.",
+        "Seven synthetic real-module negative, positive, inclusive-endpoint and immutability regressions at tests/issue455-controlled-sensitivity-measurements.test.mjs. All tests and CI NOT EXECUTED at authoring."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Applicable PR-head tests/CI and merge pending",
+        "Exact merged source CI and docs-only READY reconciliation pending"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "R455-084 development-only, NOT READY/DEPLOYED. No actual espresso-cup or member-outcome claim."
+    },
+    {
       "id": "DIC-Q-455-prefill-measured-history-integrity",
       "issue": 455,
       "title": "Exclude invalid imported dose and out-of-current-range grind from Log Shot prefill",

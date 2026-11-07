@@ -215,13 +215,29 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
  }
  return {value:round(v.grinderMin+(v.grinderMax-v.grinderMin)*starterFraction),source:'Espresso range starting estimate',proven:false};
 }
-export function learnSensitivity(shots) {
+// Historical rows may be retained in History without being admissible as
+// measured grind-to-time calibration. Use existing Log Shot numeric bounds.
+function validSensitivityMeasurement(s,version){
+ if(!finite(s.grindSetting)||s.grindSetting<0)return false;
+ for(const field of ['doseG','yieldG','timeS']){
+  const [lo,hi]=CONFIG.bounds[field];
+  if(!finite(s[field])||s[field]<lo||s[field]>hi)return false;
+ }
+ if(s.tempC!=null&&!validRecordedTemperature(s.tempC))return false;
+ if(version&&(!finite(version.grinderMin)||!finite(version.grinderMax)||
+  s.grindSetting<version.grinderMin||s.grindSetting>version.grinderMax))return false;
+ const old=s.snapshot;
+ if(old&&finite(old.grinderMin)&&finite(old.grinderMax)&&
+  (old.grinderMax<old.grinderMin||
+   s.grindSetting<old.grinderMin||s.grindSetting>old.grinderMax))return false;
+ return true;
+}
+export function learnSensitivity(shots,version=null) {
  const groups=new Map();
  for(const s of shots){
-  // Legacy and offline entries can be partial. Only complete measured inputs
-  // with parseable instants can calibrate a grind-to-time response.
-  if(!finite(s.grindSetting)||!finite(s.timeS)||s.timeS<=0||
-     !finite(s.doseG)||s.doseG<=0||!finite(s.yieldG)||s.yieldG<=0||
+  // Incomplete, out-of-bounds or undated imports cannot establish timing
+  // sensitivity. Do not mutate their original private observations.
+  if(!validSensitivityMeasurement(s,version)||
      s.hidden||s.feedMode==null||typeof s.timestamp!=='string'||!s.timestamp.trim()||
      !Number.isFinite(Date.parse(s.timestamp)))continue;const key=[s.coffeeId,s.style,s.setupVersionId,s.calibrationId,s.basketId,s.feedMode].join('|');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(s);}
  const slopes=[];
@@ -556,7 +572,7 @@ function nextAdviceRaw(s,shot,rec) {
   const exact=s.shots.filter(x=>x.coffeeId===shot.coffeeId&&
    x.setupVersionId===shot.setupVersionId&&x.calibrationId===shot.calibrationId&&
    x.feedMode===shot.feedMode&&x.style===shot.style&&x.basketId===shot.basketId);
-  const sens=learnSensitivity(exact);
+  const sens=learnSensitivity(exact,v);
   let move=step;if(sens){move=Math.max(.1,round(Math.min(step*4,Math.abs((rec.time.center-shot.timeS)/sens.secondsPerUnit))));}
   const val=clamp(round(shot.grindSetting+(direction==='finer'?-move:move)),v.grinderMin,v.grinderMax);
   if(val!==shot.grindSetting)return {title:`Try a little ${direction}`,text:`Try grind ${val.toFixed(1)}. Keep dose and yield similar, then taste again.${sens?' Sized from your own comparable adjustments.':''}`,next:{grindSetting:val,yieldCenter:shot.yieldG}};

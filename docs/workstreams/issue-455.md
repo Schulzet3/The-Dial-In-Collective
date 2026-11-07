@@ -1,5 +1,16 @@
 # Issue #455 — Espresso research → Log Shot → Rate → Recommendations
 
+## November 7, 2026 UTC — R455-084 ACTIVE measured grind-time calibration guard [skip netlify]
+
+**Owner authority:** Issue #455 Option B SAFE bug/test work only; enforce current `CONFIG.bounds` and `validateShot` numeric admission without new tastes, temperature targets, grinder heuristic or Locked policy. **Parent pinned:** development `c05c8bb1359d53422414ee5c2d76b019d1fd02d6` / engine blob `309206e3ee1fd28bf2edc9d06a31d623551e2c19`; main `bd627d40f7e65321323512b303d2e3f75709af39`, release `2ec10324fcaa4b60d1e48240b44b77b141b9ba54` read-only. AGENTS, context/preflight, Master Specification, Decision Ledger, coverage, status, release queue, source register, research originals, issue #455, #335, #267, #33, #96 and seven open disjoint #267 PRs checked. Temporary public repo owner #630 acknowledged unchanged.
+
+**Reproduction:** current `learnSensitivity` only required positive finite dose/yield/time plus finite grinder setting. Two historical same-coffee slopes from dials 8/8.1/8.2 beyond the current espresso [0,5] could falsely size a "measured" next grind instead of the existing bounded fallback, and malformed archived shot-entry values could also contribute. Synthetic source scenario, no actual member incident or measured espresso improvement asserted.
+
+**SAME-COMMIT scoped change:** `site/lib/engine.js` now passes active grinder range into `learnSensitivity` and checks only physical record eligibility (existing dose/yield/time/temp limits and complete historical snapshot range); original private history, five tastes, styles/feed, families, numerical advice rules and missing old snapshots preserved. Seven focused real-module regressions in `tests/issue455-controlled-sensitivity-measurements.test.mjs`; release queue `DIC-Q-455-controlled-sensitivity-history-integrity` TESTING. **UNEXECUTED at authoring**, not READY. Research 58 curated identities/123 bounded source checks/45 proposals prior unchanged; S019 inaccessible; no #267 direct-line credit.
+
+**Next:** inspect exact PR-head Node22/lint/build, compiled browser/mobile/offline/a11y/cloud, isolated SQL/security/governance, correct failures, nonforce integrate, read actual merge SHA/blobs and exact merged CI. Docs-only evidence/proposal/status/queue TESTING→READY reconciliation afterward. No deploy, production provider/member/SQL/Auth/Edge, visibility, main/release move, purchase or force Git.
+
+
 ## 2026-11-03 — R455-001 initial source-to-runtime review (development-only)
 
 **Authority:** Owner selected Option B (autonomous safe development, no deployment), hourly worker and daily 07:00 fixed MST decision digest. [Issue #455](https://github.com/Schulzet3/The-Dial-In-Collective/issues/455). **Source baseline:** development `80efa379f94b8a584ddb66f6e7ade0ea5188606f` at start; main `8b58dbf803a60cc201996f250e71444c03a9e7c8`; publication `8e3808f0d7532f47ea348ef9a58e5aa87d714ffe`. Current engine blob `bc8bbcee9ec349145a51552ab5dd3337115feca6`, constants `72221331ce4dffabe416eebec1ae2fceced3a095`, model `19aaca401cab7bbd2059b9a34c6b8df263f4181c`, cloud hydration `b2d9a1d640a7bde74ddda1f4b7891670a07b1abd`.
