@@ -501,9 +501,13 @@ function comparableSweetnessYields(s,shot){
   if(!Number.isFinite(priorAt)||priorAt>=shotAt)return false;
   // An archived taste observation is not valid measured-yield evidence when
   // its dose/yield is zero, negative, nonnumeric or has an overflowing ratio.
-  if(!finite(prior.doseG)||prior.doseG<=0||
-   !finite(prior.grindSetting)||!finite(prior.yieldG)||prior.yieldG<=0||
-   !finite(prior.yieldG/prior.doseG)||
+  // Apply existing shot-entry bounds to imported history used as
+  // measured sweetness evidence, without rewriting archived observations.
+  if(['doseG','yieldG','timeS'].some(field=>{
+   const [low,high]=CONFIG.bounds[field];
+   return !finite(prior[field])||prior[field]<low||prior[field]>high;
+  })||
+   !finite(prior.grindSetting)||!finite(prior.yieldG/prior.doseG)||
    Math.abs(prior.doseG-shot.doseG)>.1||
    Math.abs(prior.grindSetting-shot.grindSetting)>.05||
    Math.abs(prior.yieldG-shot.yieldG)<meaningfulYieldStep(shot))return false;
