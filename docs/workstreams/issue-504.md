@@ -1078,3 +1078,16 @@ Source branch `558261c74f386be848d0f87a0b01fe1cf5d3e12d`; main `bd627d40f7e65321
 **Scope/test:** This is a three-file documentation/coverage ledger/receipt commit, with no app/test/workflow/data modifications. Structural arithmetic and source uniqueness PASS; Node22/SQL/Auth/browser/mobile/offline/original603 NOT RUN, not represented as PASS. Exact PR head and merged-source CI to be recorded from GitHub after integration. No production/Netlify, main or release movement, provider/member/backups/Locked decisions, forced Git or deletion.
 
 **NEXT word 1:** [#33 comment `6631030565`](https://github.com/Schulzet3/The-Dial-In-Collective/issues/33#issuecomment-6631030565); historical issue/PR/review/Actions/commit metadata and delegated #267 uncompleted baseline remain open. #504 **OPEN / IN_PROGRESS**.
+
+
+## Issue #504 G1-091 — November 7 UTC: eight direct historical #33 comment reviews [skip netlify]
+
+**Recovered refs:** development `7e62d4a74d7d518383037e8f81c0ef0ca2a8b365`; main `bd627d40f7e65321323512b303d2e3f75709af39`; release/production `2ec10324fcaa4b60d1e48240b44b77b141b9ba54`. Governing AGENTS, AI entrypoint/preflight, Current Status, Locked Spec/Decision Ledger, Approval Coverage, Queue, source register, #504/#267/#455/#33/#96 and recent PR state checked. Repo PUBLIC under owner-approved #630 temporary Nov4–30; no visibility/provider changes.
+
+**Direct review:** All original words 1-EOF of eight Issue #33 comments `6631030565`, `6632988070`, `6635542888`, `6636861278`, `6637327034`, `6638260818`, `6639483107`, `6640875491`: **2668 whitespace words / 26334 UTF8 bytes**. Original REST dates, complete SHA1, inclusive line/word bounds and semantic individual dispositions in [G1-091 receipt](../audits/issue504-review-G1-091.json). Append-only [coverage ledger](../audits/issue504-coverage-ledger.json) cumulative **483 GitHub original objects / 141330 words**; file lines/words remain **7,919 / 60,754**; all other GitHub and delegated #267 coverage incomplete.
+
+**Historic reconciliation:** PR #565/#601/#607/#610/#615 now MERGED and #569/#579 CLOSED unmerged. Historical CI no-runner failure and selected SEO origin/deduped second region/sensory conflicting-source fixes do not prove a new #504-owned current error; #62 generic geography-prose leakage and #79 roast evidence remain unproven #33-owned future checks. Independently matched #267 corrected recovery SQL lines 44–49, 6/6 exact source literals and annotations, **zero double code-line credit**; known conditional RLS exception-path hypothesis not new proven exposure.
+
+**Tests & limits:** SHA1 and source/word/byte/count arithmetic PASS. Documentation-only 3 paths in atomic change, applicable exact-head CI requires readback before merge; Node22, real SQL/Auth, browser/mobile/offline and frozen603 functional checks NOT RUN, no PASS claimed. No owner policy, READY/DEPLOYED, publication, main/release/Netlify, live database/member/provider/backup or forced Git writes.
+
+**Next:** [Issue #33 comment `6642186837`](https://github.com/Schulzet3/The-Dial-In-Collective/issues/33#issuecomment-6642186837) word **1**. #504 OPEN / IN_PROGRESS; whole GitHub baseline and #267 V2 uncompleted.
