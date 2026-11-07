@@ -6,7 +6,7 @@ import {selectedDirectProductCredits} from '../src/server/coffee-direct-product-
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../site/cloud/coffee-url-autofill.js';
 const source_url='https://coffee.example/products/mexico-luis-ordonez-2026';
 const chosen='Mexico Luis Ordóñez';
-const story="We first purchased Luis’s coffee in 2020 and we've continued to do so every year since. Located in the Amatenango de la Frontera municipality of Chiapas, Mexico, Luis cultivates more than a dozen varieties and is focused on quality.";
+const story="We first purchased Luis’s coffee in 2020 and we've continued to do so every year since. Located in the Amatenango de la Frontera municipality of Chiapas, Mexico, Luis cultivates more than a dozen different varieties and is highly focused on quality.";
 const spec='<p>Country: Mexico</p><p>State: Chiapas</p><p>Municipality: Amatenango de la Frontera</p><p>Farm: La Piedra</p><p>Process: Washed</p><p>Notes: Nut Brittle, Chocolate, Clementine</p>';
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const page=(name,body,storyFirst=false)=>'<html><head><meta property="og:type" content="product"></head><body><main class="product">'+(storyFirst?body+'<h1>'+esc(name)+'</h1>':'<h1>'+esc(name)+'</h1><section class="product-information">'+body+'</section>')+'</main></body></html>';
@@ -41,6 +41,7 @@ test('competing title, missing present cultivation, old/other lot and absent con
   [chosen,"We first purchased Luis’s coffee in 2020 and we've continued to do so every year since. María cultivates coffee."],
   [chosen,"We first purchased Luis’s coffee in 2020 and we've continued to do so every year since. Luis previously cultivated coffee."],
   [chosen,"Our other coffee: We first purchased Luis’s coffee in 2020 and we've continued to do so every year since. Luis cultivates coffee."],
+  [chosen,"A different farmer's coffee: We first purchased Luis’s coffee in 2020 and we've continued to do so every year since. Luis cultivates coffee."],
   [chosen,"In 2020 we first bought Luis’s coffee. Luis cultivates coffee."],
   [chosen,"We first purchased Luis’s coffee in 2020 and we've continued to do so every year since, but no longer work with him. Luis cultivates coffee."],
   [chosen,"Luis cultivates coffee at this farm. Last season we purchased his coffee."],
