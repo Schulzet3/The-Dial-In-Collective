@@ -15,7 +15,7 @@ const archive=(id,extra={})=>({
  timestamp:'2026-11-06T12:00:00Z',dialedIn:false,
  tasteScales:{...ratings},notes:'Keep original private notes',
  suggestion:{title:'Next shot',text:'Original cached advice',
-  next:{grindSetting:1.4,yieldCenter:52}},
+  next:{grindSetting:1.2,yieldCenter:55}},
  ...extra
 });
 const guide=s=>recommendation(s,'coffee',{style:'Turbo',basketId:'basketv',feedMode:'standard'});
@@ -66,8 +66,8 @@ test('R093 legitimate latest partially rated shot still keeps one adjustment and
  const s=make();s.shots.push(archive('valid'));
  const before=structuredClone(s),r=guide(s);
  assert.equal(r.source,'Adjustment from your latest taste rating');
- assert.equal(r.doseG,20);assert.equal(r.yield.center,52);
- assert.equal(r.grind.value,1.4);assert.equal(r.tempC,91);
+ assert.equal(r.doseG,20);assert.equal(r.yield.center,55);
+ assert.equal(r.grind.value,1.2);assert.equal(r.tempC,91);
  assert.deepEqual(s,before);
 });
 
@@ -79,7 +79,7 @@ test('R093 corrupt most recent imported shot yields to an older valid measured s
     next:{grindSetting:0,yieldCenter:190}}}));
  const before=structuredClone(s),r=guide(s);
  assert.equal(r.source,'Adjustment from your latest taste rating');
- assert.equal(r.grind.value,1.4);assert.equal(r.yield.center,52);
+ assert.equal(r.grind.value,1.2);assert.equal(r.yield.center,55);
  assert.equal(r.doseG,20);
  assert.deepEqual(s,before);
 });
@@ -90,7 +90,7 @@ test('R093 valid older shot remains untouched when latest invalid carries no rat
    doseG:0,tasteScales:{...ratings,clarity:null},suggestion:null}));
  const before=structuredClone(s),r=guide(s);
  assert.equal(r.source,'Adjustment from your latest taste rating');
- assert.equal(r.yield.center,52);
+ assert.equal(r.yield.center,55);
  assert.deepEqual(s,before);
 });
 

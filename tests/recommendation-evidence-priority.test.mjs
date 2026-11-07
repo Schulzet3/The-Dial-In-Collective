@@ -92,8 +92,10 @@ test('a Dialed In grinder result retains a proven precise value',()=>{
  assert.equal(rec.grind.range,undefined);
 });
 test('explicit post-taste adjustment remains a single target',()=>{
- const {s,target}=create();const sh=good('under',target.id,{dialedIn:false,grindSetting:1.3,timeS:10});
- sh.suggestion={next:{grindSetting:1.1,yieldCenter:50}};
+ const {s,target}=create();const sh=good('under',target.id,{dialedIn:false,grindSetting:1.3,timeS:10,
+  tasteScales:{extraction:2,body:3,clarity:5,sweetness:4,astringency:1}});
+ // One deliberate Grind change; output stays at the measured 39 g.
+ sh.suggestion={next:{grindSetting:1.1,yieldCenter:39}};
  s.shots.push(sh);
  const rec=recommendation(s,target.id);
  assert.equal(rec.grind.value,1.1);
