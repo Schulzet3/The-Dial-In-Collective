@@ -2876,6 +2876,19 @@
       "verified_app_defects": 0,
       "provider_writes": false,
       "next": "Unreviewed provider catalog class pg_statistic_ext_data metadata-safe aggregate (avoid per-column statistical data exposing values) or pg_parameter_acl; first check ledger to prevent duplicate. Hosted Auth coordination #96 and change-only provider drift."
+    },
+    {
+      "event": "2026-11-07_run55_pg_rewrite_148_source_fingerprint_146_reused_2_new_direct",
+      "source_development_parent_sha": "ee74b09f53476bb353e7f7cc9a2653a221933044",
+      "provider_at": "2026-11-07 02:47:45.161611+00",
+      "rule_fingerprints": 148,
+      "prior_direct_view_semantics_reused": 146,
+      "new_update_rule_definitions_direct_read": 2,
+      "raw_ast_not_direct_reviewed": true,
+      "receipt_path": "docs/audits/issue509-provider-rewrite-20261107-run55.json",
+      "verified_new_defects": 0,
+      "provider_writes": 0,
+      "next": "pg_amop ordinal 1/964; pg_amproc 1/710"
     }
   ],
   "state": "VISIBLE_PG_CATALOG_3319_3319_AND_PG_SETTINGS_DESCRIPTORS_480_480_COMPLETE; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -6930,5 +6943,23 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "pg_rewrite ordinal 1/148, then provider drift and #96 hosted JWT/Auth/API"
+  },
+  "provider_rewrite_run55": {
+    "status": "RECONCILED_148_OF_148_REWRITE_RULE_SQL_146_PRIOR_EXACT_SOURCE_REUSE_2_NEW_DIRECT_NATIVE_AST_UNVERIFIED",
+    "receipt_path": "docs/audits/issue509-provider-rewrite-20261107-run55.json",
+    "provider_at": "2026-11-07 02:47:45.161611+00",
+    "development_parent_sha": "ee74b09f53476bb353e7f7cc9a2653a221933044",
+    "main_sha": "bd627d40f7e65321323512b303d2e3f75709af39",
+    "release_sha": "2ec10324fcaa4b60d1e48240b44b77b141b9ba54",
+    "rule_fingerprints_compared": 148,
+    "prior_full_view_sql_hashes_reused": 146,
+    "new_update_rule_sql_direct_reviewed": 2,
+    "hash_mismatches": 0,
+    "raw_ast_chars_not_tokenwise_reviewed": 3081720,
+    "proven_app_defects": 0,
+    "source_fixes": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "pg_amop 1/964, then pg_amproc 1/710; provider drift and #96 actual hosted Auth"
   }
 }
