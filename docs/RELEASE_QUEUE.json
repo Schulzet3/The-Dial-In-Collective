@@ -11,21 +11,34 @@
       "id": "DIC-Q-455-family-measurement-integrity",
       "issue": 455,
       "title": "Exclude malformed historical measured shots from personal successful family ratio and recipe evidence",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "45830c66e16984bfaf759f91268fbae69f15d47f",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
         "R078 source reproduction: familyStats and chooseRecipeFamily allowed all-five-green archival family rows with zero/negative measured yield/time, invalid dose or overflow quotient, distorting personal family statistics and selection; synthetic scenario, not demonstrated member incident.",
         "Safe internal measured-family eligibility requires positive finite dose/yield/time and finite yield/dose quotient; preserves original familyShots archive, all five ratings, notes, family identities, preferences, Locked recipe rules and history.",
-        "Five synthetic real-module positive/negative tests prepared. At initial commit all CI UNEXECUTED; original 603 and physical espresso outcome NOT tested."
+        "Five synthetic real-module positive/negative tests prepared. At initial commit all CI UNEXECUTED; original 603 and physical espresso outcome NOT tested.",
+        "Initial PR1116 head 7a0c47039f6b7d57ad4cd53664092a5a955b52ce Node 42314278379 FAILED (2783 pass/1 fail/6 skip): legacy familyStats invalid-only .ratio contract broke. Repaired same PR commit 73b2053518bf5aa058a3ba77506c63143b7eedda; original failure retained as history, not PASS.",
+        "Corrected head Node22/lint/build 42314622155 2784 PASS/0 FAIL/6 SKIP; browser/mobile/offline/a11y42314622129, SQL42314622141, security42314622137, governance42314622134 SUCCESS. Original60342314622154 SKIPPED.",
+        "Nonforce squash PR1116 MERGED 45830c66e16984bfaf759f91268fbae69f15d47f; engine blob bdd59c6252049596f3169fae8517fb5ebeee49ca and test blob 73f1c4ce1532f1f95ff4d2a71ef943fb618b6a81 read back unchanged; merged Node22 42314860468 2784 PASS/0 FAIL/6 SKIP, cloud/browser/mobile/offline42314860536 and approval42314860489 SUCCESS. No production writes, member incident or espresso outcome claimed."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        42314622155,
+        42314622129,
+        42314622141,
+        42314622137,
+        42314622134,
+        42314622154,
+        42314860468,
+        42314860536,
+        42314860489
+      ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Scoped Locked-compatible evidence-integrity correction; TESTING only. No production, provider or publication write.",
-      "pr": null
+      "notes": "Scoped Locked-compatible evidence-integrity correction; TESTING only. No production, provider or publication write. READY source-verified, development-only, NOT DEPLOYED. Invalid-only familyStats preserves ratio:null, measured count0, confirmed:false.",
+      "pr": 1116
     },
     {
       "id": "DIC-Q-455-similar-coffee-measured-yield-integrity",
