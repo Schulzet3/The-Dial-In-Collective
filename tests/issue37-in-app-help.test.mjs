@@ -5,6 +5,7 @@ import {createHash} from 'node:crypto';
 import {walkthroughMarkup,gettingStartedMarkup,WALKTHROUGH_SHA256} from '../site/cloud/help.js';
 import {fileAllowlist} from '../scripts/audit/site-integrity.mjs';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
+const containsActiveHelpVideoFit=css=>/\.help-video-frame\s+video\s*\{[^}]*\bobject-fit\s*:\s*contain(?:\s*[;}])/.test(css.replace(/\/\*[\s\S]*?\*\//g,''));
 test('first-use and Settings offer keyboard-operable help routes',()=>{
  const app=read('site/cloud/main.js');
  assert.match(app,/Help &amp; Getting Started/);
@@ -21,11 +22,18 @@ test('video controls, caption and readable layout',()=>{
  assert.match(h,/kind="captions"/);
  assert.match(h,/data-walkthrough-error/);
  assert.match(h,/Transcript and accessible alternative/);
- assert.match(read('site/visual.css'),/object-fit:contain/);
+ assert.equal(containsActiveHelpVideoFit(read('site/visual.css')),true);
  assert.match(WALKTHROUGH_SHA256,/^[a-f0-9]{64}$/);
  for(const p of ['cloud/help.js','media/first-shot.en.vtt','media/first-shot-transcript.txt','media/first-shot-poster.svg'])assert.ok(fileAllowlist().has(p),p);
 });
 
+test('help video object-fit rule is active, not a commented or unrelated CSS declaration',()=>{
+ const live='.help-video-frame video{display:block;object-fit:contain;border:0}';
+ assert.equal(containsActiveHelpVideoFit(live),true);
+ for(const disabled of ['/* '+live+' */','.other video{object-fit:contain}',
+  '.help-video-frame video{/*object-fit:contain*/display:block}'])
+  assert.equal(containsActiveHelpVideoFit(disabled),false,disabled);
+});
 test('exact approved video bytes exist and are playable MP4 format',()=>{
  const p=new URL('../site/media/first-shot-walkthrough.mp4',import.meta.url),bytes=readFileSync(p);
  assert.equal(bytes.length,2320714);
