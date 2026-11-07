@@ -1,0 +1,1676 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "S2-DISJOINT-F754-P433-20261106-N18",
+  "review_date_utc": "2026-11-07",
+  "source": {
+    "path": "tests/ux-refinements.test.mjs",
+    "frozen": {
+      "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+      "index_1_based": 754,
+      "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+      "physical_line_range": [
+        1,
+        62
+      ]
+    },
+    "pinned": {
+      "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "index_1_based": 433,
+      "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+      "physical_line_range": [
+        1,
+        62
+      ]
+    },
+    "prechange_live": {
+      "commit": "7972b34dc542ecc9abe0d4631ca249f0b292eba4",
+      "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461"
+    },
+    "total_original_lines": 196
+  },
+  "per_line": [
+    {
+      "line_1_based": 1,
+      "literal": "import test from 'node:test';",
+      "classification": "executable",
+      "behavior": "Node test registry",
+      "quality": "Built-in test framework deterministic",
+      "security_privacy_performance": "Only test registration",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 1,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 1,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 module load",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Tests approved application behavior",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 2,
+      "literal": "import assert from 'node:assert/strict';",
+      "classification": "executable",
+      "behavior": "Strict assertion primitives",
+      "quality": "Strict assert guards expected output",
+      "security_privacy_performance": "No runtime member or credential data",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 2,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 2,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 module load",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Tests approved application behavior",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 3,
+      "literal": "import {readFile} from 'node:fs/promises';",
+      "classification": "executable",
+      "behavior": "Promise-based source file read",
+      "quality": "Local source read async, no network",
+      "security_privacy_performance": "Reads repository-local source only",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 3,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 3,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 module load",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Tests approved application behavior",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 4,
+      "literal": "import {hydrate} from '../site/cloud/mapping.js';",
+      "classification": "executable",
+      "behavior": "Cloud raw-data hydrate transform",
+      "quality": "Real cloud hydration import instead of mock",
+      "security_privacy_performance": "Fixture data transforms, not live server",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 4,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 4,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 module load",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Tests approved application behavior",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 5,
+      "literal": "import {patchAcknowledgement} from '../site/cloud/cache.js';",
+      "classification": "executable",
+      "behavior": "Offline/server acknowledgement cache update",
+      "quality": "Actual cache transition function under test",
+      "security_privacy_performance": "No write to production; synthetic offline cache",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 5,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 5,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 module load",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Tests approved application behavior",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 6,
+      "literal": "import {shotCard,feedLabel} from '../site/cloud/shot_card.js';",
+      "classification": "executable",
+      "behavior": "Shot card HTML and feed label generation",
+      "quality": "Actual shot-card presentation module",
+      "security_privacy_performance": "Generated HTML potentially privacy-sensitive but synthetic",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 6,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 6,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 module load",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Tests approved application behavior",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 7,
+      "literal": "import {shotSummary,recipeGrid,nextShotAdjustment,nextShotGuidance,nextShotTitle} from '../site/lib/ui.js';",
+      "classification": "executable",
+      "behavior": "UI recommendation and shot summary helpers",
+      "quality": "Actual recommendation display helpers",
+      "security_privacy_performance": "No live browser/a11y assertion",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 7,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 7,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 module load",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Tests approved application behavior",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 8,
+      "literal": "import * as E from '../site/lib/engine.js';",
+      "classification": "executable",
+      "behavior": "Recipe/shot engine namespace",
+      "quality": "Real engine logic under synthetic fixture",
+      "security_privacy_performance": "Engine functions operate on synthetic objects",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 8,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 8,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 module load",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Tests approved application behavior",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 9,
+      "literal": "import {rawFixture,rawShot,OWNER,TIME} from './cloud-fixtures/raw.js';",
+      "classification": "executable",
+      "behavior": "Synthetic raw fixture and owner/time constants",
+      "quality": "Shared deterministic fixture avoids real member data",
+      "security_privacy_performance": "OWNER is fixture identifier, not live user",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 9,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 9,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 module load",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Tests approved application behavior",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 10,
+      "literal": "",
+      "classification": "blank",
+      "behavior": "Blank separator",
+      "quality": "Mechanical separation",
+      "security_privacy_performance": "None",
+      "dead_obsolete": "Non-executable blank",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 10,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 10,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 module load",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Tests approved application behavior",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 11,
+      "literal": "test('Slow Feed defaults remain independent between home and office',()=>{",
+      "classification": "executable",
+      "behavior": "Starts independent Slow Feed setup preference regression",
+      "quality": "Focuses cross-setup preference isolation",
+      "security_privacy_performance": "Per-setup feed preference can affect espresso guidance; synthetic coverage",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 11,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 11,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 per-setup feed preference test",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Tests approved application behavior",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 12,
+      "literal": " const raw=rawFixture();",
+      "classification": "executable",
+      "behavior": "Creates isolated raw test fixture",
+      "quality": "Recreates baseline state for test independence",
+      "security_privacy_performance": "No production records touched",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 12,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 12,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 per-setup feed preference test",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves per-setup Slow Feed choices",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 13,
+      "literal": " raw.setups.push({...raw.setups[0],id:'office',name:'Office',active_version_id:'office-version'});",
+      "classification": "executable",
+      "behavior": "Adds Office setup with distinct active version",
+      "quality": "Distinct id and active version prevent setup aliasing",
+      "security_privacy_performance": "Unique office id avoids cross-member confusion",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 13,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 13,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 per-setup feed preference test",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves per-setup Slow Feed choices",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 14,
+      "literal": " raw.versions.push({...raw.versions[0],id:'office-version',setup_id:'office'});",
+      "classification": "executable",
+      "behavior": "Adds Office setup version",
+      "quality": "Links version to new setup id",
+      "security_privacy_performance": "Version consistency impacts settings selection",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 14,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 14,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 per-setup feed preference test",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves per-setup Slow Feed choices",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 15,
+      "literal": " raw.calibrations.push({...raw.calibrations[0],id:'office-cal',setup_id:'office'});",
+      "classification": "executable",
+      "behavior": "Adds Office grinder calibration",
+      "quality": "Links calibration to Office",
+      "security_privacy_performance": "Calibration relationship relevant to prefill",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 15,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 15,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 per-setup feed preference test",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves per-setup Slow Feed choices",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 16,
+      "literal": " raw.baskets.push({...raw.baskets[0],id:'office-basket',setup_id:'office'});",
+      "classification": "executable",
+      "behavior": "Adds Office basket",
+      "quality": "Creates separate basket context",
+      "security_privacy_performance": "Equipment association relevant to recommendation",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 16,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 16,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 per-setup feed preference test",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves per-setup Slow Feed choices",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 17,
+      "literal": " raw.basketVersions.push({...raw.basketVersions[0],id:'office-basketv',setup_id:'office',basket_id:'office-basket'});",
+      "classification": "executable",
+      "behavior": "Adds Office basket version tied to Office",
+      "quality": "Ensures basket version references office basket",
+      "security_privacy_performance": "Basket-version references must not leak across setups",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 17,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 17,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 per-setup feed preference test",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves per-setup Slow Feed choices",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 18,
+      "literal": " raw.setupPreferences[0].track_slow_feed=true;raw.setupPreferences[0].slow_feed=true;",
+      "classification": "executable",
+      "behavior": "Sets Home tracking and saved slow-feed default true",
+      "quality": "Turns on tracked Home slow-feed default",
+      "security_privacy_performance": "Home slow-feed flag simulates a real preference",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 18,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 18,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 per-setup feed preference test",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves per-setup Slow Feed choices",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 19,
+      "literal": " raw.setupPreferences.push({...raw.setupPreferences[0],setup_id:'office',setup_version_id:'office-version',calibration_id:'office-cal',default_basket_version_id:'office-basketv',slow_feed:false});",
+      "classification": "executable",
+      "behavior": "Sets separate Office preference and standard feed default",
+      "quality": "Explicit opposite Office default isolates modes",
+      "security_privacy_performance": "Opposite Office preference exercises isolation",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 19,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 19,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 per-setup feed preference test",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves per-setup Slow Feed choices",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 20,
+      "literal": " const state=hydrate(raw);",
+      "classification": "executable",
+      "behavior": "Hydrates updated raw collection into effective state",
+      "quality": "Hydrate invoked after fixture modifications",
+      "security_privacy_performance": "Hydration not actual authenticated backend read",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 20,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 20,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 per-setup feed preference test",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves per-setup Slow Feed choices",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 21,
+      "literal": " assert.equal(E.prefill(state,'coffee').feedMode,'slow');",
+      "classification": "executable",
+      "behavior": "Home prefill must report slow feed",
+      "quality": "Expected Home feed state explicit",
+      "security_privacy_performance": "Asserts Home-only selection",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 21,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 21,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 per-setup feed preference test",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves per-setup Slow Feed choices",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 22,
+      "literal": " state.activeSetupId='office';assert.equal(E.prefill(state,'coffee').feedMode,'standard');",
+      "classification": "executable",
+      "behavior": "Office prefill must report standard feed",
+      "quality": "Expected Office feed state explicit",
+      "security_privacy_performance": "Asserts Office-only selection",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 22,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 22,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 per-setup feed preference test",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves per-setup Slow Feed choices",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 23,
+      "literal": " state.activeSetupId='setup';assert.equal(E.prefill(state,'coffee').feedMode,'slow');",
+      "classification": "executable",
+      "behavior": "Home preference must remain slow after switching",
+      "quality": "Checks round-trip switching with no bleed",
+      "security_privacy_performance": "Asserts no cross-setup state leak",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 23,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 23,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 per-setup feed preference test",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves per-setup Slow Feed choices",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 24,
+      "literal": "});",
+      "classification": "executable",
+      "behavior": "Closes per-setup regression",
+      "quality": "Correct syntax closure",
+      "security_privacy_performance": "None",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 24,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 24,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 per-setup feed preference test",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves per-setup Slow Feed choices",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 25,
+      "literal": "",
+      "classification": "blank",
+      "behavior": "Blank separator",
+      "quality": "Mechanical separation",
+      "security_privacy_performance": "None",
+      "dead_obsolete": "Non-executable blank",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 25,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 25,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 per-setup feed preference test",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves per-setup Slow Feed choices",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 26,
+      "literal": "test('cloud-acknowledged new shot updates cached feed; editing an old shot does not',()=>{",
+      "classification": "executable",
+      "behavior": "Starts cloud-acknowledged shot/default regression",
+      "quality": "Separates creation from editing behavior",
+      "security_privacy_performance": "Saved shot preference could affect subsequent recommendations",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 26,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 26,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 acknowledgement edit regression",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves offline ordering and historical data",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 27,
+      "literal": " const raw=rawFixture();raw.setupPreferences[0].track_slow_feed=true;",
+      "classification": "executable",
+      "behavior": "Enables tracking for Home preference",
+      "quality": "Tracking enabled before ack",
+      "security_privacy_performance": "Only fixture preference mutated",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 27,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 27,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 acknowledgement edit regression",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves offline ordering and historical data",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 28,
+      "literal": " const sh=rawShot({feed_mode:'slow',pulled_at:'2026-10-14T18:00:00Z'});",
+      "classification": "executable",
+      "behavior": "Creates synthetic dated slow-feed shot",
+      "quality": "Fixed UTC event date for deterministic order",
+      "security_privacy_performance": "Synthetic UTC timestamp, no live member data",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 28,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 28,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 acknowledgement edit regression",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves offline ordering and historical data",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 29,
+      "literal": " const next=patchAcknowledgement(raw,{owner:OWNER,action:'save_shot',payload:{},createdAt:sh.pulled_at},{record:sh});",
+      "classification": "executable",
+      "behavior": "Applies save-shot acknowledgement to raw fixture",
+      "quality": "Exercises actual patch acknowledgement return",
+      "security_privacy_performance": "Patch function may mutate local cache only in test",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 29,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 29,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 acknowledgement edit regression",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves offline ordering and historical data",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 30,
+      "literal": " assert.equal(next.setupPreferences[0].slow_feed,true);",
+      "classification": "executable",
+      "behavior": "Asserts newly saved slow-feed preference",
+      "quality": "Asserts feed default changed",
+      "security_privacy_performance": "Guards automatic Slow Feed carry-forward",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 30,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 30,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 acknowledgement edit regression",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves offline ordering and historical data",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 31,
+      "literal": " assert.equal(next.setupPreferences[0].last_feed_shot_at,sh.pulled_at);",
+      "classification": "executable",
+      "behavior": "Asserts saved preference timestamp records shot time",
+      "quality": "Asserts chronological marker persisted",
+      "security_privacy_performance": "Chronological marker protects out-of-order offline sync",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 31,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 31,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 acknowledgement edit regression",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves offline ordering and historical data",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 32,
+      "literal": " assert.equal(E.prefill(hydrate(next),'coffee').feedMode,'slow');",
+      "classification": "executable",
+      "behavior": "Asserts hydrated next prefill follows slow feed",
+      "quality": "Tests next UI prefill not just raw cache",
+      "security_privacy_performance": "Prefill integration boundary but not browser test",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 32,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 32,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 acknowledgement edit regression",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves offline ordering and historical data",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 33,
+      "literal": " const edited=patchAcknowledgement(next,{owner:OWNER,action:'save_shot',payload:{expected_revision:2}},{record:{...sh,feed_mode:'standard'}});",
+      "classification": "executable",
+      "behavior": "Applies edit to an older shot with changed feed and revision",
+      "quality": "Uses expected_revision=2 to distinguish historical edit",
+      "security_privacy_performance": "Old shot edits must not redefine preference",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 33,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 33,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 acknowledgement edit regression",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves offline ordering and historical data",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 34,
+      "literal": " assert.equal(edited.setupPreferences[0].slow_feed,true);",
+      "classification": "executable",
+      "behavior": "Asserts historical edit cannot rewrite current default",
+      "quality": "Checks non-retroactivity of old edit",
+      "security_privacy_performance": "Historical edits allowed while defaults stay intact",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 34,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 34,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 acknowledgement edit regression",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves offline ordering and historical data",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 35,
+      "literal": " assert.equal(raw.setupPreferences[0].slow_feed,false);",
+      "classification": "executable",
+      "behavior": "Asserts original fixture not mutated by patch",
+      "quality": "Checks immutable raw input preserved",
+      "security_privacy_performance": "Input immutability protects offline state",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 35,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 35,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 acknowledgement edit regression",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves offline ordering and historical data",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 36,
+      "literal": "});",
+      "classification": "executable",
+      "behavior": "Closes save-vs-edit regression",
+      "quality": "Correct syntax closure",
+      "security_privacy_performance": "None",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 36,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 36,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 acknowledgement edit regression",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves offline ordering and historical data",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 37,
+      "literal": "test('stale offline shots cannot roll back the newer default',()=>{",
+      "classification": "executable",
+      "behavior": "Starts stale-offline-ordering regression",
+      "quality": "Explicit chronological negative case",
+      "security_privacy_performance": "Offline outbox can replay late shots; negative coverage",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 37,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 37,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 acknowledgement edit regression",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves offline ordering and historical data",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 38,
+      "literal": " const raw=rawFixture();raw.setupPreferences[0].track_slow_feed=true;",
+      "classification": "executable",
+      "behavior": "Enables Home slow-feed tracking",
+      "quality": "Tracks feed preference",
+      "security_privacy_performance": "No live outbox access",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 38,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 38,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 out-of-order offline regression",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves offline ordering and historical data",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 39,
+      "literal": " raw.setupPreferences[0].slow_feed=false;raw.setupPreferences[0].last_feed_shot_at='2026-10-14T18:00:00Z';",
+      "classification": "executable",
+      "behavior": "Sets newer standard-feed choice timestamp",
+      "quality": "Sets newer saved preference and marker",
+      "security_privacy_performance": "Timestamp required to establish recency",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 39,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 39,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 out-of-order offline regression",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves offline ordering and historical data",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 40,
+      "literal": " const stale=rawShot({feed_mode:'slow',pulled_at:'2026-10-14T17:00:00Z'});",
+      "classification": "executable",
+      "behavior": "Constructs older slow-feed shot with one-hour earlier time",
+      "quality": "Older event precedes newer default",
+      "security_privacy_performance": "Historical shot older by one hour",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 40,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 40,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 out-of-order offline regression",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves offline ordering and historical data",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 41,
+      "literal": " const next=patchAcknowledgement(raw,{owner:OWNER,action:'save_shot',payload:{}},{record:stale});",
+      "classification": "executable",
+      "behavior": "Merges older acknowledged shot",
+      "quality": "Exercises real patch function for stale event",
+      "security_privacy_performance": "Simulates acknowledgment, not real network ordering",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 41,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 41,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 out-of-order offline regression",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves offline ordering and historical data",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 42,
+      "literal": " assert.equal(next.setupPreferences[0].slow_feed,false);",
+      "classification": "executable",
+      "behavior": "Asserts newer standard feed remains intact",
+      "quality": "Retains newer default when stale event arrives",
+      "security_privacy_performance": "Prevents stale overwrite of later user choice",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 42,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 42,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 out-of-order offline regression",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves offline ordering and historical data",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 43,
+      "literal": "});",
+      "classification": "executable",
+      "behavior": "Closes out-of-order acknowledgement regression",
+      "quality": "Correct syntax closure",
+      "security_privacy_performance": "None",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 43,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 43,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 out-of-order offline regression",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves offline ordering and historical data",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 44,
+      "literal": "test('shot history is compact and equipment context only appears at bottom when expanded',()=>{",
+      "classification": "executable",
+      "behavior": "Starts compact shot-history expanded-context regression",
+      "quality": "Tests expanded and collapsed shot card output",
+      "security_privacy_performance": "Shot history presentation contains private data when hosted; fixture only",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 44,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 44,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 out-of-order offline regression",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves offline ordering and historical data",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 45,
+      "literal": " const raw=rawFixture();raw.shots=[rawShot({feed_mode:'slow'})];",
+      "classification": "executable",
+      "behavior": "Builds one synthetic slow-feed shot",
+      "quality": "Single controlled shot fixture",
+      "security_privacy_performance": "Synthetic shot prevents personal-data exposure",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 45,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 45,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 shot-card fixture; real browser/mobile not proven",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves history, privacy and Log Shot -> Rate UX",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 46,
+      "literal": " const sh=hydrate(raw).shots[0],html=shotCard(sh,{expanded:true,activeVersionId:'version'});",
+      "classification": "executable",
+      "behavior": "Hydrates and renders expanded shot HTML",
+      "quality": "Renders real shot-card function expanded",
+      "security_privacy_performance": "No browser accessibility or responsive layout verified",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 46,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 46,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 shot-card fixture; real browser/mobile not proven",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves history, privacy and Log Shot -> Rate UX",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 47,
+      "literal": " assert.ok(html.indexOf('Test Home')>html.indexOf('class=\"radar\"'));",
+      "classification": "executable",
+      "behavior": "Asserts Setup label follows radar section",
+      "quality": "Relative order assertion for metadata",
+      "security_privacy_performance": "Missing radar marker could allow order check to pass if Setup label present",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 47,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 47,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 shot-card fixture; real browser/mobile not proven",
+      "improvement": "Source check only; possible further existence guard if independently justified",
+      "locked_fit": "Preserves history, privacy and Log Shot -> Rate UX",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 48,
+      "literal": " assert.match(html,/class=\"shot-topline\"/);",
+      "classification": "executable",
+      "behavior": "Asserts shot header class exists",
+      "quality": "Checks visual header marker",
+      "security_privacy_performance": "Only static rendered HTML class check",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 48,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 48,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 shot-card fixture; real browser/mobile not proven",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves history, privacy and Log Shot -> Rate UX",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 49,
+      "literal": " assert.match(html,/class=\"shot-date\">\\d{1,2}\\/\\d{1,2}\\/\\d{4}<\\/span>/);",
+      "classification": "executable",
+      "behavior": "Asserts human-readable shot date",
+      "quality": "Date formatter expectation",
+      "security_privacy_performance": "Date format is locale-sensitive but deterministic in suite",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 49,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 49,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 shot-card fixture; real browser/mobile not proven",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves history, privacy and Log Shot -> Rate UX",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 50,
+      "literal": " assert.ok(html.indexOf('18 g')>html.indexOf('class=\"radar\"'));",
+      "classification": "executable",
+      "behavior": "Asserts dose appears below radar",
+      "quality": "Dose position relative to graph",
+      "security_privacy_performance": "Missing radar marker could allow position false pass",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 50,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 50,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 shot-card fixture; real browser/mobile not proven",
+      "improvement": "Source check only; possible further existence guard if independently justified",
+      "locked_fit": "Preserves history, privacy and Log Shot -> Rate UX",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 51,
+      "literal": " assert.doesNotMatch(shotCard(sh,{expanded:false,activeVersionId:'version'}),/Test Home|Basket Dose/);",
+      "classification": "executable",
+      "behavior": "Asserts collapsed view omits setup/basket context",
+      "quality": "Opposite collapsed-state assertion",
+      "security_privacy_performance": "Collapsed privacy boundary explicitly checked",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 51,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 51,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 shot-card fixture; real browser/mobile not proven",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves history, privacy and Log Shot -> Rate UX",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 52,
+      "literal": " assert.ok(html.indexOf('Slow Feed')>html.indexOf('class=\"radar\"'));",
+      "classification": "executable",
+      "behavior": "Asserts feed mode appears after radar",
+      "quality": "Feed position checked below graph",
+      "security_privacy_performance": "Similar indexOf pitfall if radar missing",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 52,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 52,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 shot-card fixture; real browser/mobile not proven",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves history, privacy and Log Shot -> Rate UX",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 53,
+      "literal": " assert.ok(html.indexOf('data-action=\"edit\"')<html.indexOf('data-action=\"make-current\"'));",
+      "classification": "executable",
+      "behavior": "Asserts Edit action precedes Make Current",
+      "quality": "Action order between Edit and Make Current",
+      "security_privacy_performance": "Both absent actions return -1 and assertion false, but cross-markup not tested",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 53,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 53,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 shot-card fixture; real browser/mobile not proven",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves history, privacy and Log Shot -> Rate UX",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 54,
+      "literal": " assert.ok(html.indexOf('data-action=\"edit\"')>html.indexOf('class=\"shot-record-context\"'));",
+      "classification": "executable",
+      "behavior": "Asserts Edit action follows record-context marker",
+      "quality": "Relative check omits required existence of record-context marker",
+      "security_privacy_performance": "If context marker absent, indexOf returns -1 so original check could falsely pass; reproduced",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 54,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 54,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 shot-card fixture; real browser/mobile not proven",
+      "improvement": "FIX: explicitly assert record-context marker exists before positional check",
+      "locked_fit": "Preserves history, privacy and Log Shot -> Rate UX",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 55,
+      "literal": " assert.doesNotMatch(shotCard(sh,{expanded:false,activeVersionId:'version'}),/data-action=\"edit\"/);",
+      "classification": "executable",
+      "behavior": "Asserts collapsed card hides Edit",
+      "quality": "Collapsed view exclusion assertion",
+      "security_privacy_performance": "Collapsed Edit restriction is local markup, not server auth",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 55,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 55,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 shot-card fixture; real browser/mobile not proven",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves history, privacy and Log Shot -> Rate UX",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 56,
+      "literal": " assert.match(html,/class=\"shot-actions\"/);",
+      "classification": "executable",
+      "behavior": "Asserts action container exists",
+      "quality": "Checks action wrapper marker",
+      "security_privacy_performance": "Action container marker has duplicate later",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "Exact same assertion reappears at source line 59; retain first only",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 56,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 56,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 shot-card fixture; real browser/mobile not proven",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves history, privacy and Log Shot -> Rate UX",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 57,
+      "literal": " assert.match(html,/class=\"primary compact history-edit\" data-action=\"edit\"/);",
+      "classification": "executable",
+      "behavior": "Asserts primary Edit button markup",
+      "quality": "Checks Edit class and action",
+      "security_privacy_performance": "Static CSS class and action token",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 57,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 57,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 shot-card fixture; real browser/mobile not proven",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves history, privacy and Log Shot -> Rate UX",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 58,
+      "literal": " assert.match(html,/class=\"ghost compact history-make-current\" data-action=\"make-current\"/);",
+      "classification": "executable",
+      "behavior": "Asserts secondary Make Current button markup",
+      "quality": "Checks Make Current action label",
+      "security_privacy_performance": "Static action token, not clicked",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 58,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 58,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 shot-card fixture; real browser/mobile not proven",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves history, privacy and Log Shot -> Rate UX",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 59,
+      "literal": " assert.match(html,/class=\"shot-actions\"/);",
+      "classification": "executable",
+      "behavior": "Repeats exact action-container assertion from line 56",
+      "quality": "Exact duplicate; contributes no new failure case",
+      "security_privacy_performance": "Identical second assertion wastes suite work",
+      "dead_obsolete": "PROVEN redundant original assertion, safe to remove only in current test",
+      "redundancy": "Exactly same assertion as source line 56: same html object and regex",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 59,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 59,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 shot-card fixture; real browser/mobile not proven",
+      "improvement": "REMOVE duplicate from CURRENT test, retain line 56",
+      "locked_fit": "Preserves history, privacy and Log Shot -> Rate UX",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 60,
+      "literal": " assert.doesNotMatch(shotCard(sh,{expanded:true,activeVersionId:'other'}),/data-action=\"make-current\"/);",
+      "classification": "executable",
+      "behavior": "Asserts other active version hides Make Current",
+      "quality": "Checks active-version-specific action suppression",
+      "security_privacy_performance": "Different active version must not offer Make Current",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 60,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 60,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 shot-card fixture; real browser/mobile not proven",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves history, privacy and Log Shot -> Rate UX",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 61,
+      "literal": " assert.equal(feedLabel(null),'Feed Not Recorded');",
+      "classification": "executable",
+      "behavior": "Asserts undefined feed displays fallback label",
+      "quality": "Explicit unknown-feed text state",
+      "security_privacy_performance": "Missing feed mode represented explicitly",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 61,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 61,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 shot-card fixture; real browser/mobile not proven",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves history, privacy and Log Shot -> Rate UX",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    },
+    {
+      "line_1_based": 62,
+      "literal": "});",
+      "classification": "executable",
+      "behavior": "Closes shot-card layout test",
+      "quality": "Correct syntax closure",
+      "security_privacy_performance": "None",
+      "dead_obsolete": "Used test/fixture code; no other dead line proven",
+      "redundancy": "No separate duplicate proven in this line's scoped function",
+      "pinned_counterpart": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 62,
+        "exact_text_match": true
+      },
+      "live_counterpart_prechange": {
+        "path": "tests/ux-refinements.test.mjs",
+        "blob_sha": "a6a0fb7886fbe2cbbeb72b82e25de9799f258461",
+        "line_1_based": 62,
+        "exact_text_match": true
+      },
+      "testability": "Node 22 shot-card fixture; real browser/mobile not proven",
+      "improvement": "No safe change demonstrated for this line",
+      "locked_fit": "Preserves history, privacy and Log Shot -> Rate UX",
+      "method": "AI literal numbered semantic review, not independent human certification"
+    }
+  ],
+  "original_distinct_positions": 62,
+  "accounting": {
+    "frozen_candidate_lines": 62,
+    "pinned_candidate_lines": 62,
+    "central_CAS_credit": 0,
+    "prior_work_rechecked_not_recredited": "F755/P434 N17 and file #1 S2-001; original frozen and pinned are separately tracked immutable sources"
+  },
+  "findings": [
+    {
+      "id": "N18-F1",
+      "path": "tests/ux-refinements.test.mjs",
+      "line": 54,
+      "state": "REPRODUCED_STATIC_TEST_FALSE_POSITIVE",
+      "reproduction": "With a synthetic HTML string containing data-action=\"edit\" but no class=\"shot-record-context\", current indexOf(edit)>indexOf(context) returns true because context=-1. Actual rendered fixture source includes context.",
+      "disposition": "Require exact context marker presence before positional test; test-only safeguard, not evidence of member-data exposure."
+    },
+    {
+      "id": "N18-F2",
+      "path": "tests/ux-refinements.test.mjs",
+      "lines": [
+        56,
+        59
+      ],
+      "state": "PROVEN_REDUNDANT_ASSERTION",
+      "reproduction": "Source lines 56 and 59 have byte-identical assert.match(html,/class=\"shot-actions\"/); same html operand; second assertion adds no coverage.",
+      "disposition": "Remove second assertion from current test only; frozen/pinned sources stay immutable."
+    }
+  ],
+  "scope_limitations": "Synthetic current test source does not prove actual browser, offline outbox, authenticated member DB, 603 source oracle, production SQL/Edge/Netlify, or physical espresso. Full 579961/57913 semantic coverage plus post-pin delta remains open.",
+  "post_pin_current_change": "Test source changed after pin by exact source-bound edit; independent live drift diff and CI still required."
+}
