@@ -1,0 +1,2268 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "S2-DISJOINT-F424-L061-L096-P111-L321-L355-20261107-H13B",
+  "date_utc": "2026-11-07",
+  "reviewer": "ChatGPT AI direct semantic source review; no independent human certification",
+  "source_dev_parent": "767f541f34828d38f7fa54f3b7a664a946e650ac",
+  "prior_immutable_receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F424-L001-L060-P111-L291-L320-20261107-H13.json",
+  "original_new_positions": 71,
+  "operational_main_distinct_positions": 13,
+  "tracks": [
+    {
+      "track": "FROZEN_STRICT",
+      "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+      "tree_sha": "c54ade64eca30946df8858297578a172f5cf6fa8",
+      "inventory_index": 424,
+      "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+      "blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+      "original_total_physical_lines": 96,
+      "from_line": 61,
+      "through_line": 96,
+      "per_line": [
+        {
+          "line": 61,
+          "source_text": "fi",
+          "inspection_class": "delimiter",
+          "behavior": "End Storage object guard",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Nonexecuting delimiter/comment/blank; context reviewed",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 61,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 61,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 62,
+          "source_text": "",
+          "inspection_class": "physical_blank",
+          "behavior": "Blank separator",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Nonexecuting delimiter/comment/blank; context reviewed",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 62,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 62,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 63,
+          "source_text": "# The second checkout is pinned to the independently verified live application commit.",
+          "inspection_class": "comment",
+          "behavior": "Comment source pin",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Nonexecuting delimiter/comment/blank; context reviewed",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 63,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 63,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 64,
+          "source_text": "# Only tracked repository source is present; do not include .git, credentials, or exports.",
+          "inspection_class": "comment",
+          "behavior": "Comment tracked checkout exclusions",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Nonexecuting delimiter/comment/blank; context reviewed",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 64,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 64,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 65,
+          "source_text": "SOURCE_DIR=\"$GITHUB_WORKSPACE/backup-app-source\"",
+          "inspection_class": "executable_or_config",
+          "behavior": "Set source checkout path",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Runner workspace path must reflect a clean trusted checkout",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 65,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 65,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 66,
+          "source_text": "if [[ ! -f \"$SOURCE_DIR/package.json\" || ! -d \"$SOURCE_DIR/supabase/migrations\" || ! -f \"$SOURCE_DIR/netlify.toml\" ]]; then",
+          "inspection_class": "executable_or_config",
+          "behavior": "Check source checkout files",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Presence of files not proof of source completeness or tracked-only contents",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 66,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 66,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 67,
+          "source_text": "  echo \"::error::Application source checkout is missing or incomplete.\"",
+          "inspection_class": "executable_or_config",
+          "behavior": "Report missing source",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 67,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 67,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 68,
+          "source_text": "  exit 1",
+          "inspection_class": "executable_or_config",
+          "behavior": "Fail missing checkout",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 68,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 68,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 69,
+          "source_text": "fi",
+          "inspection_class": "delimiter",
+          "behavior": "End checkout guard",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Nonexecuting delimiter/comment/blank; context reviewed",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 69,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 69,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 70,
+          "source_text": "SOURCE_COMMIT=\"$(git -C \"$SOURCE_DIR\" rev-parse HEAD)\"",
+          "inspection_class": "executable_or_config",
+          "behavior": "Read Git source commit",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Git commit binding only if checkout is trustworthy",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 70,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 70,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 71,
+          "source_text": "tar -czf \"$OUT/plain/app-source.tar.gz\" --exclude=.git --exclude=node_modules \\",
+          "inspection_class": "executable_or_config",
+          "behavior": "Create app source tar with excludes",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Tar of '.' includes any untracked files not specifically excluded; caller uses clean checkout, yet tracked-only assumption depends on checkout hygiene",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 71,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 71,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "Verify tracked checkout excludes untracked files before backup source integrity certification",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 72,
+          "source_text": "  --exclude=dist -C \"$SOURCE_DIR\" .",
+          "inspection_class": "executable_or_config",
+          "behavior": "Continue tar excluding dist",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Excludes dist but not arbitrary untracked hidden files; no demonstrated real leak",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 72,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 72,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "Verify tracked checkout excludes untracked files before backup source integrity certification",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 73,
+          "source_text": "test -s \"$OUT/plain/app-source.tar.gz\"",
+          "inspection_class": "executable_or_config",
+          "behavior": "Require nonempty tar",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Nonempty tar is weaker than restore test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 73,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 73,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 74,
+          "source_text": "SOURCE_SHA256=\"$(sha256sum \"$OUT/plain/app-source.tar.gz\" | awk '{print $1}')\"",
+          "inspection_class": "executable_or_config",
+          "behavior": "Hash app source tar",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Hash verifies archive content, not restore behavior",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 74,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 74,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 75,
+          "source_text": "",
+          "inspection_class": "physical_blank",
+          "behavior": "Blank separator",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Nonexecuting delimiter/comment/blank; context reviewed",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 75,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 75,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 76,
+          "source_text": "DUMP_SHA256=\"$(sha256sum \"$OUT/plain/database.dump\" | awk '{print $1}')\"",
+          "inspection_class": "executable_or_config",
+          "behavior": "Hash database dump",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "SHA-256 dump digest supports integrity verification",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 76,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 76,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 77,
+          "source_text": "COUNTS=\"$(tr -d '[:space:]' < \"$OUT/plain/observed-counts.txt\")\"",
+          "inspection_class": "executable_or_config",
+          "behavior": "Strip count whitespace",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 77,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 77,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 78,
+          "source_text": "if ! [[ \"$COUNTS\" =~ ^[0-9]+\\|[0-9]+\\|[0-9]+\\|[0-9]+\\|[0-9]+$ ]]; then",
+          "inspection_class": "executable_or_config",
+          "behavior": "Validate five integers",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Strict grammar for five numeric fields, not count-to-snapshot equality",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 78,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 78,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 79,
+          "source_text": "  echo \"::error::Backup row-count inventory is invalid.\"",
+          "inspection_class": "executable_or_config",
+          "behavior": "Report invalid count",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 79,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 79,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 80,
+          "source_text": "  exit 1",
+          "inspection_class": "executable_or_config",
+          "behavior": "Exit invalid count",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 80,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 80,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 81,
+          "source_text": "fi",
+          "inspection_class": "delimiter",
+          "behavior": "End count guard",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Nonexecuting delimiter/comment/blank; context reviewed",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 81,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 81,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 82,
+          "source_text": "IFS='|' read -r USERS SHOTS VERIFIED_COFFEES LIBRARY_ENTRIES APPROVED_SUBMISSIONS <<< \"$COUNTS\"",
+          "inspection_class": "executable_or_config",
+          "behavior": "Split five count fields",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Field ordering depends on static SQL and count output consistency",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 82,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 82,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 83,
+          "source_text": "echo \"Snapshot sanity inventory (observed after export): users=$USERS shots=$SHOTS verified_coffees=$VERIFIED_COFFEES library_entries=$LIBRARY_ENTRIES approved_submissions=$APPROVED_SUBMISSIONS\"",
+          "inspection_class": "executable_or_config",
+          "behavior": "Log aggregated counts",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Aggregate log includes only counts, not member rows",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 83,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 83,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 84,
+          "source_text": "cat > \"$OUT/plain/manifest.json\" <<EOF",
+          "inspection_class": "executable_or_config",
+          "behavior": "Open manifest here-doc",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 84,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 84,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 85,
+          "source_text": "{\"format\":\"dic-age-postgres-v1\",\"project_ref\":\"$SUPABASE_PROJECT_REF\",\"snapshot_started_at_utc\":\"$SNAPSHOT_STARTED_AT_UTC\",\"created_utc\":\"$(date -u +%Y-%m-%dT%H:%M:%SZ)\",\"commit\":\"$GITHUB_SHA\",\"postgres_client_major\":17,\"storage_object_count\":0,\"dump_sha256\":\"$DUMP_SHA256\",\"app_source_commit\":\"$SOURCE_COMMIT\",\"app_source_sha256\":\"$SOURCE_SHA256\",\"observed_after_export\":{\"auth_users\":$USERS,\"shots\":$SHOTS,\"verified_coffees\":$VERIFIED_COFFEES,\"library_entries\":$LIBRARY_ENTRIES,\"approved_submissions\":$APPROVED_SUBMISSIONS},\"restore_notice\":\"Auth and application tables are backed up. Separate external configuration and isolated restore testing remain required.\"}",
+          "inspection_class": "executable_or_config",
+          "behavior": "Compose SHA-bound JSON manifest",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Unescaped shell env in JSON may break format if project ref malformed; configured source expected trusted",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 85,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 85,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 86,
+          "source_text": "EOF",
+          "inspection_class": "delimiter",
+          "behavior": "End manifest here-doc",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Nonexecuting delimiter/comment/blank; context reviewed",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 86,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 86,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 87,
+          "source_text": "",
+          "inspection_class": "physical_blank",
+          "behavior": "Blank separator",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Nonexecuting delimiter/comment/blank; context reviewed",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 87,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 87,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 88,
+          "source_text": "tar -czf \"$OUT/bundle.tar.gz\" -C \"$OUT/plain\" database.dump manifest.json toc.txt storage-object-count.txt observed-counts.txt app-source.tar.gz",
+          "inspection_class": "executable_or_config",
+          "behavior": "Tar dump/source and inventory",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Unencrypted temporary bundle exists on restricted ephemeral runner until trap",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 88,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 88,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 89,
+          "source_text": "# Verify the compressed archive is readable before destroying its plaintext",
+          "inspection_class": "comment",
+          "behavior": "Comment compressed archive readability",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Nonexecuting delimiter/comment/blank; context reviewed",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 89,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 89,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 90,
+          "source_text": "# and uploading only its age-encrypted counterpart.",
+          "inspection_class": "comment",
+          "behavior": "Comment encryption-only upload intent",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Nonexecuting delimiter/comment/blank; context reviewed",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 90,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 90,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 91,
+          "source_text": "tar -tzf \"$OUT/bundle.tar.gz\" > /dev/null",
+          "inspection_class": "executable_or_config",
+          "behavior": "Verify tar listing",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Tar listing verifies archive parse but not full restore",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 91,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 91,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 92,
+          "source_text": "age --encrypt --recipient \"$BACKUP_AGE_RECIPIENT\" \\",
+          "inspection_class": "executable_or_config",
+          "behavior": "Invoke age with primary recipient",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Encryption recipient is public; private key never included",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 92,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 92,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 93,
+          "source_text": "  --output \"$OUT/encrypted/backup.age\" \"$OUT/bundle.tar.gz\"",
+          "inspection_class": "executable_or_config",
+          "behavior": "Set encrypted output path",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 93,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 93,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 94,
+          "source_text": "test -s \"$OUT/encrypted/backup.age\"",
+          "inspection_class": "executable_or_config",
+          "behavior": "Require nonempty ciphertext",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Nonempty ciphertext doesn't prove decryption",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 94,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 94,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 95,
+          "source_text": "echo 'Encrypted archive created; no plaintext artifact will be uploaded.'",
+          "inspection_class": "executable_or_config",
+          "behavior": "Emit archive-created log",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No plaintext uploaded intended; not proof of physical disk sanitization",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 95,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 95,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 96,
+          "source_text": "",
+          "inspection_class": "physical_blank",
+          "behavior": "Final physical blank line",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Nonexecuting delimiter/comment/blank; context reviewed",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 96,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "113caf472a0b3d7b85f1090c787d53f1e7669002",
+            "line": 96,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        }
+      ]
+    },
+    {
+      "track": "PINNED_STRICT",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "inventory_index": 111,
+      "path": "site/cloud/main.js",
+      "blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+      "original_total_physical_lines": 1027,
+      "from_line": 321,
+      "through_line": 355,
+      "per_line": [
+        {
+          "line": 321,
+          "source_text": "  const focusId=focused?.dataset?.id??null;",
+          "inspection_class": "executable_or_config",
+          "behavior": "Capture focused element id",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 321,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 321,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 322,
+          "source_text": "  const restoreFocus=['search-toggle','expand','shot-expand','shot-toggle-all'].includes(focusAction);",
+          "inspection_class": "executable_or_config",
+          "behavior": "Select keyboard-restore actions",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 322,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 322,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 323,
+          "source_text": "  const openDetails=[...root.querySelectorAll('details[data-retain][open]')].map(x=>x.dataset.retain);",
+          "inspection_class": "executable_or_config",
+          "behavior": "Collect open details keys",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 323,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 323,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 324,
+          "source_text": "  this.theme();const connected=this.identity&&(this.status?.admitted||(this.localOfflineOwner===this.identity.id&&globalThis.navigator?.onLine===false))&&!this.recovery;",
+          "inspection_class": "executable_or_config",
+          "behavior": "Apply theme and admission/offline owner gate",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Guard requires admitted account or previously authenticated local offline owner; preserves privacy",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 324,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 324,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 325,
+          "source_text": "  root.innerHTML=`<header class=app-header><div class=header-inner><div class=brand>${icon('coffee',27)}<div><h1>The Dial In Collective</h1><div class=tagline>Better espresso through shared experience.</div></div></div>${connected?button(icon('settings',20),'settings','aria-label=\"Settings\"','icon-button'):''}</div></header><main class=shell>${connected?this.coffees():this.auth()}${this.notice?`<p class=\"helper space-top\" role=status>${e(this.notice)}</p>`:''}<footer class=footer>Private Beta <span aria-hidden=true>·</span> Better espresso, one shot at a time.</footer></main>`;",
+          "inspection_class": "executable_or_config",
+          "behavior": "Replace entire root with coffee/auth template and escaped notice",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Root innerHTML sink contains dynamic coffee/auth markup, demand all helper escaping review",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 325,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 325,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 326,
+          "source_text": "  for(const details of root.querySelectorAll('details[data-retain]'))if(openDetails.includes(details.dataset.retain))details.open=true;",
+          "inspection_class": "executable_or_config",
+          "behavior": "Restore disclosure open state",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Only data-retain details retain expansion state, not all controls",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 326,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 326,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 327,
+          "source_text": "  if(restoreFocus){",
+          "inspection_class": "executable_or_config",
+          "behavior": "If eligible restore focus",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 327,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 327,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 328,
+          "source_text": "   const matching=[...root.querySelectorAll('[data-action]')].find(el=>",
+          "inspection_class": "executable_or_config",
+          "behavior": "Find new control by action",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 328,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 328,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 329,
+          "source_text": "    el.dataset.action===focusAction&&(focusId===null||el.dataset.id===focusId));",
+          "inspection_class": "executable_or_config",
+          "behavior": "Compare prior id for exact focus target",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 329,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 329,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 330,
+          "source_text": "   matching?.focus({preventScroll:true});",
+          "inspection_class": "executable_or_config",
+          "behavior": "Focus matching control",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Focus restore not proven across every mobile AT/browser combination",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 330,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 330,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 331,
+          "source_text": "  }",
+          "inspection_class": "delimiter",
+          "behavior": "End focus conditional",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Nonexecuting delimiter/comment/blank; context reviewed",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 331,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 331,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 332,
+          "source_text": "  this.syncReviewDialog();",
+          "inspection_class": "executable_or_config",
+          "behavior": "Sync pending review dialog",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 332,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 332,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 333,
+          "source_text": " }",
+          "inspection_class": "delimiter",
+          "behavior": "End render",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Nonexecuting delimiter/comment/blank; context reviewed",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 333,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 333,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 334,
+          "source_text": " auth(){",
+          "inspection_class": "executable_or_config",
+          "behavior": "Begin auth view",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 334,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 334,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 335,
+          "source_text": "  const email=()=>field('Email','email','',{type:'email',required:true,extra:'autocomplete=\"email\"'});",
+          "inspection_class": "executable_or_config",
+          "behavior": "Define email input with autocomplete",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 335,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 335,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 336,
+          "source_text": "  const freshHint=`<p class=\"helper\" id=\"password-requirements\">${e(PASSWORD_HINT)}</p>`;",
+          "inspection_class": "executable_or_config",
+          "behavior": "Supply password requirements hint",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 336,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 336,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 337,
+          "source_text": "  const password=(fresh=false)=>field(fresh?'New Password':'Password','password','',{type:'password',required:true,extra:`autocomplete=\"${fresh?'new-password':'current-password'}\" ${fresh?'minlength=\"8\" aria-describedby=\"password-requirements\"':''}`});",
+          "inspection_class": "executable_or_config",
+          "behavior": "Set password input/autocomplete/minlength",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Minimum length hint not complete server password policy",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 337,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 337,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 338,
+          "source_text": "  if(this.recovery)return `<section class=welcome><h2>Choose A New Password</h2><form id=auth-password>${password(true)}${freshHint}<button class=\"primary full space-top\">Save Password</button></form></section>`;",
+          "inspection_class": "executable_or_config",
+          "behavior": "Render recovery password form",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Recovery mode guard is local UI only; server verifies recovery token",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 338,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 338,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 339,
+          "source_text": "  if(this.identity&&globalThis.navigator?.onLine===false)return `<section class=welcome><h2>Reconnect To Continue</h2><p class=helper>Your saved workspace is unavailable offline until a previously admitted account and local session can be confirmed.</p></section>`;",
+          "inspection_class": "executable_or_config",
+          "behavior": "Render reconnection gate for offline identity",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Offline unadmitted account denied workspace without owner confirmation",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 339,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 339,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 340,
+          "source_text": "  if(this.identity)return `<section class=welcome><h2>Your Invitation</h2><p class=helper>${e(this.identity.email)}</p><p class=helper>${this.status?.emailVerified?'Use the beta invitation supplied for your account.':'Verify your email before requesting beta access.'}</p><form id=auth-invite>${field('Invitation Code','token','',{required:true})}<button class=\"primary full space-top\">Use Invitation</button></form>${button('Sign Out','signout','','text-button')}</section>`;",
+          "inspection_class": "executable_or_config",
+          "behavior": "Show identity/invitation with escaped email",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Escaped email and separate invite-only admission server remains necessary",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 340,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 340,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 341,
+          "source_text": "  if(this.authView==='check-email')return emailConfirmationView(this.confirmationEmail);",
+          "inspection_class": "executable_or_config",
+          "behavior": "Render email confirmation state",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 341,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 341,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 342,
+          "source_text": "  const reset=this.authView==='reset',signup=this.authView==='signup';",
+          "inspection_class": "executable_or_config",
+          "behavior": "Derive reset and signup modes",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 342,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 342,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 343,
+          "source_text": "  return `<section class=\"welcome cloud-auth\"><h2>${reset?'Reset Your Password':signup?'Create Your Account':'Welcome Back'}</h2><p class=helper>Your coffee, wherever you brew.</p><form id=\"auth-${this.authView}\">${email()}${reset?'':password(signup)}${signup?freshHint:''}<button class=\"primary full space-top\">${reset?'Send Recovery Email':signup?'Create Account':'Sign In'}</button></form><div class=row-actions>${button(signup||reset?'Back To Sign In':'Create An Account','auth-view',`data-view=\"${signup||reset?'signin':'signup'}\"`,'text-button')}${!reset?button('Forgot Password?','auth-view','data-view=\"reset\"','text-button'):''}</div></section>`;",
+          "inspection_class": "executable_or_config",
+          "behavior": "Return signin/signup/reset form and actions",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Auth form dynamic markup needs escaping of any user strings via helpers",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 343,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 343,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 344,
+          "source_text": " }",
+          "inspection_class": "delimiter",
+          "behavior": "End auth view",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Nonexecuting delimiter/comment/blank; context reviewed",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 344,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 344,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 345,
+          "source_text": " coffees(){",
+          "inspection_class": "executable_or_config",
+          "behavior": "Begin coffee workspace UI",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 345,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 345,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 346,
+          "source_text": "  const s=this.state,setup=M.activeSetup(s),w=M.workspace(s);",
+          "inspection_class": "executable_or_config",
+          "behavior": "Get active setup and workspace",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 346,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 346,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 347,
+          "source_text": "  if(!setup)return `<section class=\"welcome text-center\"><h2>A better next shot.</h2><p class=helper>Add your equipment setup to start logging shots and dialing in.</p>${button('Set Up My Workspace','new-setup','','primary')}${button('Watch Walkthrough','watch-walkthrough','','ghost full space-top')}${button('Read Getting Started Guide','getting-started-guide','','text-button space-top')}</section>`;",
+          "inspection_class": "executable_or_config",
+          "behavior": "Show setup onboarding when none",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 347,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 347,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 348,
+          "source_text": "  if(this.view==='community')return this.communityScreen();",
+          "inspection_class": "executable_or_config",
+          "behavior": "Route Community view",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 348,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 348,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 349,
+          "source_text": "  const list=M.visibleCoffees(s,this.sort,this.search,this.tempCoffee);",
+          "inspection_class": "executable_or_config",
+          "behavior": "Filter and sort coffees",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 349,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 349,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 350,
+          "source_text": "  const offlineNow=globalThis.navigator?.onLine===false;",
+          "inspection_class": "executable_or_config",
+          "behavior": "Read navigator online heuristic",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Browser onLine heuristic not authenticated network probe",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 350,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 350,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 351,
+          "source_text": "  const offlineOnly=offlineNow||(!this.status?.admitted&&this.localOfflineOwner===this.identity?.id);",
+          "inspection_class": "executable_or_config",
+          "behavior": "Derive offline-only owner view",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Offline owner match prevents unrelated account local workspace display",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 351,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 351,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 352,
+          "source_text": "  const syncLabel=offlineNow?(this.pending.length?`Offline · ${this.pending.length} Pending`:'Offline'):this.pending.length?`${this.pending.length} Pending`:this.syncState==='synced'?'Synced':'Offline';",
+          "inspection_class": "executable_or_config",
+          "behavior": "Compute pending sync label",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Pending indicator can lag provider sync state",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 352,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 352,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 353,
+          "source_text": "  return `<nav class=app-nav>${button(`${icon('coffee',16)} Coffees`,'home','','active')}${offlineOnly?'':button(`${icon('users',16)} Community`,'community','','')}<span class=local-label>${button(`${icon('cloud',14)} ${e(syncLabel)}`,'sync',`data-sync-state=\"${this.pending.length?'pending':offlineNow?'offline':this.syncState}\"`,'sync-indicator')}</span></nav><div class=workspace-bar><div><div class=eyebrow>Your Workspace</div><h2>Coffees</h2></div>${button(`${e(setup.name)} ${icon('chevron',14)}`,'switch','','setup-switch')}</div>${offlineOnly?'<p class=\"helper\" role=\"status\">Offline: saved coffees and shot logging are available. Coffee lookup and Community require a connection.</p>':button(`${icon('plus',16)} Add Coffee`,'add','','primary full')}${button(`${icon('search',18)}<span>Search & Sort</span>${icon('chevron',16)}`,'search-toggle',`aria-expanded=\"${this.searchOpen}\" aria-controls=\"coffee-search-tools\"`,'browse-toggle secondary full')}${this.searchOpen?`<div class=search-tools id=coffee-search-tools><input id=search type=search value=\"${e(this.search)}\" aria-label=\"Search coffee information\" placeholder=\"Name, origin, notes...\"><select id=sort aria-label=Sort><option value=recent ${this.sort==='recent'?'selected':''}>Recent</option><option value=az ${this.sort==='az'?'selected':''}>A-Z</option></select></div>`:''}${list.map(c=>{",
+          "inspection_class": "executable_or_config",
+          "behavior": "Compose coffee navigation and search plus coffee iterator",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Large html template mixes escaped variables and helper markup; caller/output tests required",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 353,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 353,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 354,
+          "source_text": "   const open=this.expanded.has(c.id),p=M.coffeeState(s,c.id),rec=E.recommendation(s,c.id),v=M.activeVersion(s);const shots=s.shots.filter(sh=>sh.coffeeId===c.id&&!sh.hidden).sort((a,b)=>b.timestamp.localeCompare(a.timestamp));const local=shots.filter(sh=>sh.setupVersionId===v.id&&sh.style===p.style),last=local[0];const success=M.hasLocalSuccess(s,c.id,p.style);const advice=last?E.nextAdvice(s,last,rec):null;",
+          "inspection_class": "executable_or_config",
+          "behavior": "Compute pinned shot context/recipe/advice from timestamp-sorted shots",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Pinned timestamp sort/current latest matching recipe context helper differ; one affected LIVE post-pin line, no assumed regression",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 354,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 354,
+            "exact_match": false
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "Independently source-audit live M.orderedShotHistory/U.lastRecipeContextShot and test rule before judging behavior",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 355,
+          "source_text": "    const firstStyle=this.firstStylePromptId===c.id&&shots.length===0;",
+          "inspection_class": "executable_or_config",
+          "behavior": "Determine first-shot style prompt",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "source_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 355,
+            "exact_match": true
+          },
+          "live_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 355,
+            "exact_match": true
+          },
+          "testability": "Node22/browser/mobile/offline/Auth focus tests; not executed for documentation-only audit",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve Login/Shot-Rate-Recommendation, Community, accessibility, offline owner privacy",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        }
+      ]
+    },
+    {
+      "track": "MAIN_OPERATIONAL_DELTA",
+      "source_commit": "bd627d40f7e65321323512b303d2e3f75709af39",
+      "tree_sha": "5fa79c0df6996c948a661fbd677f42dc461cbd05",
+      "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+      "blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+      "original_total_physical_lines": 104,
+      "from_line": 92,
+      "through_line": 104,
+      "per_line": [
+        {
+          "line": 92,
+          "source_text": "AGE_RECIPIENT_ARGS=(--recipient \"$BACKUP_AGE_RECIPIENT\")",
+          "inspection_class": "executable_or_config",
+          "behavior": "Build primary age recipient argv",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Primary recipient remains mandatory",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 92,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 92,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 93,
+          "source_text": "if [[ -n \"${BACKUP_AGE_SECOND_RECIPIENT:-}\" ]]; then",
+          "inspection_class": "executable_or_config",
+          "behavior": "Branch on optional second recipient",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Optional second recipient configured outside permanent base",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 93,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 93,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 94,
+          "source_text": "  if ! [[ \"$BACKUP_AGE_SECOND_RECIPIENT\" =~ ^age1[a-z0-9]{20,}$ || \"$BACKUP_AGE_SECOND_RECIPIENT\" =~ ^ssh-ed25519[[:space:]][A-Za-z0-9+/]+={0,2}$ ]]; then",
+          "inspection_class": "executable_or_config",
+          "behavior": "Validate syntax of second public recipient",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Public-key regex syntax check only; cannot prove private key possession",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 94,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 94,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 95,
+          "source_text": "    echo \"::error::Invalid automation-only public recovery recipient.\"",
+          "inspection_class": "executable_or_config",
+          "behavior": "Log malformed second recipient",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Logs public-key format error, no secrets",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 95,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 95,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 96,
+          "source_text": "    exit 1",
+          "inspection_class": "executable_or_config",
+          "behavior": "Exit unsafe second key",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Exit fail closed",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 96,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 96,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 97,
+          "source_text": "  fi",
+          "inspection_class": "delimiter",
+          "behavior": "End format guard",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Nonexecuting delimiter/comment/blank; context reviewed",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 97,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 97,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 98,
+          "source_text": "  AGE_RECIPIENT_ARGS+=(--recipient \"$BACKUP_AGE_SECOND_RECIPIENT\")",
+          "inspection_class": "executable_or_config",
+          "behavior": "Append optional recipient to argv",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Preserve primary plus authorized second key",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 98,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 98,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 99,
+          "source_text": "fi",
+          "inspection_class": "delimiter",
+          "behavior": "End optional key condition",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Nonexecuting delimiter/comment/blank; context reviewed",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 99,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 99,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 100,
+          "source_text": "age --encrypt \"${AGE_RECIPIENT_ARGS[@]}\" \\",
+          "inspection_class": "executable_or_config",
+          "behavior": "Encrypt with properly quoted recipient array",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Quoted Bash array avoids argument splitting",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 100,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 100,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 101,
+          "source_text": "  --output \"$OUT/encrypted/backup.age\" \"$OUT/bundle.tar.gz\"",
+          "inspection_class": "executable_or_config",
+          "behavior": "Write encrypted output filename",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Ciphertext path remains same",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 101,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 101,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 102,
+          "source_text": "test -s \"$OUT/encrypted/backup.age\"",
+          "inspection_class": "executable_or_config",
+          "behavior": "Require ciphertext nonempty",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Nonzero file isn't decrypt/restore proof",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 102,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 102,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 103,
+          "source_text": "echo 'Encrypted archive created; no plaintext artifact will be uploaded.'",
+          "inspection_class": "executable_or_config",
+          "behavior": "Log encrypted archive",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "No separate confirmed risk on this line; external correctness remains under test",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 103,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 103,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        },
+        {
+          "line": 104,
+          "source_text": "",
+          "inspection_class": "physical_blank",
+          "behavior": "Physical blank",
+          "quality": "Direct original numbered source read with surrounding function/control flow; source-bound but not runtime acceptance",
+          "risk": "Nonexecuting delimiter/comment/blank; context reviewed",
+          "obsolescence": "Present in source, historical original preserved; no proven obsolete/unused classification",
+          "duplication": "No duplicate safely removable on this line in isolation",
+          "pinned_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "source_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 104,
+            "eligibility": "This position belongs to frozen or operational main, no duplicate pinned-current credit"
+          },
+          "live_current_counterpart": {
+            "path": "scripts/backups/create-nightly-encrypted-dump.sh",
+            "live_blob_sha": "e43c7f0c88557067616cb24f36b6c05d947c9c2a",
+            "line": 104,
+            "exact_match": true
+          },
+          "testability": "Syntax, isolated backup/restore, two recipient age integration and invalid URI fixtures; not executed against any provider",
+          "fix_opportunity": "No safe source edit demonstrated from this line alone",
+          "locked_decision_fit": "Preserve backup encryption/recovery and #28 operational main ownership",
+          "review_method": "AI directly interpreted exact numbered line; NOT independent human certification"
+        }
+      ]
+    }
+  ],
+  "literal_checks": {
+    "frozen_equal_dev_lines_61_96": true,
+    "operational_main_equal_frozen_61_91": true,
+    "operational_main_distinct_encryption_92_104": true,
+    "pinned_equal_live_321_353_and_355": true,
+    "pinned_live_354_semantic_diff": true,
+    "original_f424_complete_via_H13_plus_H13B": true
+  },
+  "observations": [
+    {
+      "id": "F424-APP-SOURCE-TAR",
+      "status": "potential_only",
+      "lines": [
+        71,
+        72
+      ],
+      "note": "tar -C checkout . could include untracked source not expressly excluded; clean checkout contract remains necessary, no current leak reproduced"
+    },
+    {
+      "id": "P111-354-POSTPIN",
+      "status": "drift_verified_not_regression",
+      "line": 354,
+      "pinned": "Local shots selected with timestamp sort",
+      "live": "M.orderedShotHistory plus U.lastRecipeContextShot choose context",
+      "next": "Directly source-audit helpers and applicable tests before PASS or fix"
+    }
+  ],
+  "limitations": [
+    "F424 complete original 96 lines across H13/H13B; P111 reviewed original 1-355 when combined with earlier S2, remainder still pending",
+    "Operational main changed 13 positions 92-104 reviewed separately, not double-counted in frozen or pinned denominator",
+    "No app/auth/database/provider/production changes, no Node/SQL/browser/recovery suite claimed passed",
+    "Remaining current post-pin delta and central CAS reconciliation outstanding"
+  ]
+}
