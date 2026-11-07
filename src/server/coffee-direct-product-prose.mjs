@@ -34,6 +34,11 @@ const CURRENT_SELECTED_DECAF_WAY=/^(?:[\p{L}\p{M}]{3,24}['’]d|(?:this|our)\s+c
 // Both clauses must be contiguous in the SAME paragraph, describe this coffee,
 // and remain inside the independently selected H1 product scope. Pure water
 // used at the plant is NOT itself a Swiss/Mountain Water decaf method.
+// The selected decaf can describe caffeine removal directly rather than with
+// "this coffee is decaffeinated" syntax. Require a whole current product prose
+// paragraph, literal EA and sugarcane in one affirmative contiguous claim.
+// No general page/roaster education, other products, former lots or vague EA.
+const CURRENT_SELECTED_DIRECT_EA_REMOVAL=/^(?:(?:then|next)\s+the\s+sugar[ -]?cane\s+(?:part|step)\.\s+)?(?:the|its)\s+caffeine\s+is\s+removed\s+(?:with|using|via|through|by)\s+ethyl\s+acetate\b[^.!?]{0,220}\b(?:fermented\s+)?(?:[\p{L}\p{M}-]+\s+){0,3}sugar[ -]?cane\b/iu;
 const CURRENT_SELECTED_FACILITY_EA=/^(?:the|this|our)\s+coffee\s+is\s+(?:then\s+)?decaffeinated\s+at\s+[\p{Lu}][\p{L}\p{M}\d'’-]{2,70}(?:\s+[\p{Lu}][\p{L}\p{M}\d'’-]{2,70}){0,3},\s+[^.!?]{6,160}\.\s+(?:the|this)\s+(?:plant|facility)\s+relies\b[^.!?]{0,310}\bnatural\s+ethyl\s+acetate\s+from\s+sugar\s+cane\b/iu;
 // A selected current decaf may identify its treatment as a roaster-translated
 // method, after an explicit at-origin decaffeination clause. This is not a
@@ -256,6 +261,20 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
      !decafEvidence.has(line)){
    if(decafEvidence.size<4)decafEvidence.add(line);
    else decafEvidenceOverflow=true;
+  }
+  // Exactly selected current decaf: direct EA caffeine-removal prose with
+  // specific sugarcane provenance; NOT site education, another coffee or a
+  // negated/unspecified solvent. Current conflicting methods still fail closed.
+  const eaClaim=line.match(CURRENT_SELECTED_DIRECT_EA_REMOVAL)?.[0]||'';
+  if(decafOnlyCoffee(name)&&b.tag==='p'&&!b.educational&&
+     !/^(?:faq|frequently asked questions|decaf process education)$/iu.test(b.section||'')&&
+     line.length<=650&&eaClaim&&
+     !/\b(?:not|never|without|rather than|instead of|unlike)\b/iu.test(eaClaim)&&
+     !NONCURRENT_DECAF_METHOD.test(line)&&
+     inferDecaffeinationMethod({name,selectedMethod:eaClaim})==='Sugar Process'&&
+     !decafEvidence.has(eaClaim)){
+    if(decafEvidence.size<4)decafEvidence.add(eaClaim);
+    else decafEvidenceOverflow=true;
   }
   // A decaf identity plus a current selected-product sentence is required.
   // Reuse the conservative method classifier; if multiple incompatible
