@@ -1006,3 +1006,18 @@ Independent no-credit #267 check: frozen F423 `scripts/backups/capture-recovery-
 Only new audit receipt, append-only ledger and this same-commit journal altered. Source metadata/hashes and overlap checks PASS. Application Node22, SQL/Auth, browser/mobile/offline, frozen original603 functional suites NOT RUN for docs-only changes, not reported PASS. Applicable PR-head and merged-source approval CI still requires readback. No runtime, queue, Netlify, release/production, member, provider, backup, SQL/Auth/Edge, force-Git or visibility changes.
 
 **Exact next unreviewed original:** [#33 comment `6502591944`](https://github.com/Schulzet3/The-Dial-In-Collective/issues/33#issuecomment-6502591944) word 1. **#504 OPEN / IN_PROGRESS**.
+
+
+## Issue #504 G1-086 — Nov 7 UTC: eight direct historical #33 comment bodies [skip netlify]
+
+Live development `fbe69ca69203d73988c843ae1d921b1480117821`, main `bd627d40f7e65321323512b303d2e3f75709af39`, release/production `2ec10324fcaa4b60d1e48240b44b77b141b9ba54`; prior ledger Git blob `0455bdb221a577c8d302b8efe09603069fde867e`, prior journal `6ef83b9ea8b54bc3b6145253ea74eba163cfe428`. Issue #504 OPEN; temporary public visibility is owner-approved #630 November 4–30, owner-only privacy restoration. #267 solely audits original/current source code; #33 extractor, #455 espresso UX, #96 live Auth/privacy retain ownership.
+
+Directly read entire original source words **1–EOF** of #33 comments `6502591944`, `6505546673`, `6507757648`, `6507839472`, `6508640976`, `6508883960`, `6509009167`, `6513235844`. Eight independently interpreted original GitHub records / **2155 words**, **20532 UTF8 bytes**. Every object's SHA1, REST timestamps, inclusive word/physical-line bounds and individual semantic disposition are in [G1-086 receipt](../audits/issue504-review-G1-086.json). No overlap with preceding 85 batches. Cumulative: **7,919 file lines / 60,754 file words plus 443 GitHub objects / 129,706 original words**. Whole GitHub audit and delegated #267 baseline NOT complete.
+
+Historical PR236/245/255/260/261/262/269 all presently MERGED; PR257/259 closed unmerged. Owner Release11/12 exact deployed scopes distinguished from PR260 concurrent later READY, original603 hosted SKIPPED not PASS, current selected Ketch Tier2 Honduras owner Locked rule distinct from Tier3 Mexico (do not trust stale Honduras image-alt), PR269 corrected Ketch original source false roast conflicts, live five official source pages 61 assertions with simulated RPC not genuine signed-in acceptance. Prior failed PR257 CI and Ketch failure receipts remain historical. No newly reproduced current #504-owned bug, verified unused current material or owner decision.
+
+Independently matched strict #267 F468 first **12/12** and pinned P409 first **12/12** original source literal lines and behavior/quality annotations using source Git blobs `ac1868512d17fbab0d9a6002ddc4213666a3828c` / `c9b83b01cb61b345f8a826c70baa98c5da814913` and receipt `4bf1acc3b35c0776937aef5b723758e09cbd744f`; **ZERO** #504 duplicate code credit; this sampled verification does not certify 267 baseline.
+
+Only three docs-only paths in one source commit: append-only receipt, coverage ledger and this scoped journal. Count arithmetic, direct original source ID, SHA1 abc vector, next boundary and no duplicate record PASS; Node22/app/browser/mobile/offline/SQL/Auth/original603 functional tests not run (not PASS). Confirm PR-head/merged-source checks separately. No release/publish, main/production, provider/member/auth/backup/queue/Locked changes, force or visibility mutations.
+
+**NEXT:** [Issue #33 comment `6513863451`](https://github.com/Schulzet3/The-Dial-In-Collective/issues/33#issuecomment-6513863451), original word 1. **OPEN / IN_PROGRESS**.
