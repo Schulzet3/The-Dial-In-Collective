@@ -9,6 +9,7 @@ import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mj
 import {selectedCurrentCoffeeReleaseBadge} from '../../src/server/coffee-selected-source-evidence.mjs';
 import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 import {productCoffeeProse} from '../../src/server/coffee-product-prose.mjs';
+import {selectedDirectProductCredits} from '../../src/server/coffee-direct-product-prose.mjs';
 import {extractCoffeeBlendEvidence} from '../../src/server/coffee-blend-evidence.mjs';
 import {sameHandleCollectionAlternate,identicalCurrentSelectedTitle} from './issue33-selected-public-alternate.mjs';
 import {requiredFocusedSourceFailures} from './issue33-focused-source-acceptance.mjs';
@@ -95,6 +96,27 @@ for(const target of targets){
     r.current_fields=Object.fromEntries(Object.entries(p.fields||{})
       .filter(([,v])=>v!=null&&typeof v!=='object').map(([k,v])=>[k,clip(v,400)]));
     r.conflicts=p.conflicts||[];
+    if(r.number===336){
+      const cleanProbe=(v,n=6001)=>String(v||'').slice(0,n*6)
+       .replace(/<[^<>]{0,1200}>/gu,' ').replace(/&(?:nbsp|amp);/giu,' ')
+       .replace(/\s+/gu,' ').trim().slice(0,n);
+      const prose=productCoffeeProse(selected,cleanProbe);
+      const currentStory=prose.filter(block=>/We first purchased Luis['’]s coffee/u.test(block.text));
+      const direct=selectedDirectProductCredits(selected,{name:p.fields?.name||'',clean:cleanProbe});
+      r.selected_336_role_diagnostic={
+       selected_h1:r.selected_h1,source_sha256:r.html_sha256,
+       scoped_blocks:prose.length,
+       selected_story_blocks:currentStory.slice(0,4).map(block=>({
+        tag:block.tag,educational:block.educational,section:clip(block.section,90),
+        length:block.text.length,quote:clip(block.text,320)
+       })),
+       direct_selected_person:direct.producer||null,
+       direct_named_current_cultivator:direct.named_current_cultivator_producer===true,
+       observed_canonical_producer:p.fields?.producer||null,
+       observed_farm:p.roaster_details?.farm||null
+      };
+      console.log('[DIC33 #336 DIRECT CURRENT GROWER DIAG] '+JSON.stringify(r.selected_336_role_diagnostic));
+    }
     r.source_facts=(p.source_facts||[]).slice(0,45).map(f=>({
       label:clip(f.label,120),field:clip(f.field,80),value:clip(f.value,360),source_url:clip(f.source_url,320),section:clip(f.section,110),
       source_type:clip(f.source_type,55),conflicting:f.conflicting===true}));
