@@ -7341,8 +7341,8 @@
       "id": "DIC-Q-455-current-grind-range-evidence",
       "issue": 455,
       "title": "Exclude out-of-range archived same-calibration grind from proven/paired recommendations",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "a6ecfa577a52957dcb58a40fddc1c897bf274134",
       "scope_paths": [
         "site/lib/engine.js"
       ],
@@ -7350,12 +7350,25 @@
         "Observed current-source logic: an archived five-green current-calibration dial outside active entered espresso range was labeled proven and only later clamped. Synthetic counterexample, no real member incident.",
         "SAFE: require inclusive active espresso range before using current-calibration grind as proven, similar/nearby or slow-feed paired/standard anchor; keep past values and legitimate old-range snapshot translation.",
         "Six real-module synthetic regression scenarios written, not yet run. Exact source Node22/lint/build, browser/mobile/offline/a11y, SQL, security, governance, merged CI required before READY.",
-        "Governance first PR-head run 42320215550 FAILED queue intake: scope_paths may contain only deployable runtime files, not tests. Corrected queue metadata only; prior failure preserved, CI rerun required."
+        "Governance first PR-head run 42320215550 FAILED queue intake: scope_paths may contain only deployable runtime files, not tests. Corrected queue metadata only; prior failure preserved, CI rerun required.",
+        "Corrected exact PR head e27a1392390b00e9dabcb470a139622b2acb0e04 Node22/lint/build 42320321904 2792 PASS/0 FAIL/6 intentional SKIP; compiled browser/mobile/390px/offline/a11y 42320321891, isolated SQL/JWT42320321931, security42320321940, approval42320321920 all SUCCESS; original60342320321917 SKIPPED, not PASS.",
+        "Nonforce squash PR1124 merged a6ecfa577a52957dcb58a40fddc1c897bf274134; engine blob f3435a05618df3f21caccd6b69530c8b68fe5156, 6-group regression test blob f6d127583070acea6621481c9da3700c1290ce56 unchanged. Exact merged-source Node22/lint/build42320551881 2792 PASS/0 FAIL/6 SKIP, governance42320551996 SUCCESS, cloud/mobile/Chromium/offline/a11y42320551878 SUCCESS (run head_sha matches merge). No original603, real member, physical espresso, or provider mutation claim."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        42320215550,
+        42320321904,
+        42320321891,
+        42320321931,
+        42320321940,
+        42320321920,
+        42320321917,
+        42320551881,
+        42320551996,
+        42320551878
+      ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "TESTING, NOT DEPLOYED, no new Locked rule or research-derived numeric target, no production writes."
+      "notes": "READY only in development, NOT DEPLOYED. Historical current-calibration grind outside active configured espresso bounds is excluded from proven personal/similar/nearby/paired-feed evidence, without erasing notes/history or altering Locked target thresholds. Initial approval queue-intake failure 42320215550 corrected before passing retest; same code/test blobs verified on merged SHA. No new authority, release grant or production action."
     }
   ],
   "history": [
