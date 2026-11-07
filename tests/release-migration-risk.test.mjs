@@ -51,3 +51,28 @@ test('insert, merge and COPY data-write paths require potentially-destructive re
   assert.equal(risk.reason,'SQL_CAN_MODIFY_OR_REMOVE_EXISTING_DATA');
  }
 });
+
+test('SQL literal comment markers cannot conceal later destructive statements',()=>{
+ const hidden=[
+  "SELECT '--'; DELETE FROM public.dic_shots;",
+  "SELECT '/*'; DROP TABLE public.dic_shots; SELECT '*/';",
+  "SELECT 'a -- comment'; UPDATE public.dic_shots SET shot_id=null;",
+  'SELECT "col--name"; TRUNCATE public.dic_shots;',
+  "SELECT 'an''--escaped'; DELETE FROM public.dic_shots;",
+  'SELECT $$ literal -- $$; DELETE FROM public.dic_shots;',
+  'SELECT $tag$ literal /* $tag$; DROP TABLE public.dic_shots;',
+  '/* nested /* mid */ closed */ DROP TABLE public.dic_shots;'
+ ];
+ for(const sql of hidden)assert.equal(classifyMigrationDiff('A\t'+add,()=>sql).risk,'potentially_destructive',sql);
+});
+test('real SQL comments remain non-destructive; malformed quotes fail closed',()=>{
+ for(const sql of [
+  "-- DROP TABLE public.dic_shots;\nCREATE TABLE public.extra (id int);",
+  '/* DELETE FROM public.dic_shots; */ CREATE TABLE public.extra (id int);',
+  '/* nested /* UPDATE public.x */ DELETE FROM public.y */ SELECT 1;',
+  "CREATE TABLE public.x(id text DEFAULT '--');",
+  "CREATE TABLE public.x(id text DEFAULT '/*');"
+ ])assert.equal(classifyMigrationDiff('A\t'+add,()=>sql).risk,'non_destructive',sql);
+ for(const sql of ["/* unclosed","SELECT 'broken","SELECT $tag$ unclosed"])
+  assert.equal(classifyMigrationDiff('A\t'+add,()=>sql).risk,'potentially_destructive',sql);
+});
