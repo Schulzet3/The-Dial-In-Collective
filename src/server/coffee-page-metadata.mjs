@@ -34,6 +34,7 @@ import {countrywideEducationalOriginCorrection} from './coffee-countrywide-conte
 import {selectedFarmStoryRegionMismatch} from './coffee-title-region-evidence.mjs';
 import {selectedCurrentFarmGrowingLocality} from './coffee-selected-farm-growing-locality.mjs';
 import {selectedCurrentFarmCountryLocality} from './coffee-selected-farm-country-locality.mjs';
+import {selectedCurrentFarmVolcanoRegion} from './coffee-selected-farm-volcano-region.mjs';
 import {selectedProcessingSiteNotFarmOrigin} from './coffee-processing-site-origin-guard.mjs';
 import {selectedCurrentColombianDepartmentOrigin} from './coffee-selected-department-origin.mjs';
 import {selectedCurrentNamedMicroLotSector} from './coffee-selected-microlot-sector-origin.mjs';
@@ -2187,6 +2188,24 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     field:'origin',label:'Exact selected farm growing locality',
     value:growing.quote.slice(0,400),source_url,source_type:'html',
     section:'Exact selected current growing prose'});
+  }
+ }
+
+ // An exact selected current named farm's volcano can substantiate a
+ // title-matched growing region, but not an unverified farm-name municipality.
+ if(fields.origin&&!conflicts.has('origin')){
+  const region=selectedCurrentFarmVolcanoRegion({
+   name:fields.name,origin:fields.origin,producer:fields.producer,
+   process:fields.process,blocks:productCoffeeProse(canonicalProduct,clean)
+  });
+  if(region){
+   rememberCoffeeReviewCandidate(fields,'origin',fields.origin,'Broader selected Country label');
+   fields.origin=region.value;
+   if(source_facts.length<384)source_facts.push({
+    field:'origin',label:'Exact selected named-farm growing region',
+    value:region.quote.slice(0,430),source_url,source_type:'html',
+    section:'Selected current farm-and-producer narrative'
+   });
   }
  }
 
