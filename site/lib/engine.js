@@ -620,11 +620,12 @@ export function nextAdvice(s,shot,rec){
 export function isExtreme(s,shot) {
  // Incomplete imported measurements remain in History, but cannot establish
  // the four measured reference shots or median for an outlier prompt.
- const prior=s.shots.filter(x=>!x.hidden&&x.dialedIn===true&&isDialed(x.tasteScales)&&
+ // An imported positive but out-of-entry-bounds measurement is not a
+ // qualifying reference for the mandatory four-shot outlier baseline.
+ // Keep the original archived row and all five original ratings untouched.
+ const prior=measuredRecipeShots(s.shots).filter(x=>!x.hidden&&x.dialedIn===true&&isDialed(x.tasteScales)&&
   x.coffeeId===shot.coffeeId&&x.style===shot.style&&
-  x.setupVersionId===shot.setupVersionId&&x.id!==shot.id&&
-  finite(x.doseG)&&x.doseG>0&&finite(x.yieldG)&&x.yieldG>0&&
-  finite(x.yieldG/x.doseG)&&finite(x.timeS)&&x.timeS>0);
+  x.setupVersionId===shot.setupVersionId&&x.id!==shot.id);
  if(prior.length<4)return false;
  return Math.abs(shot.yieldG/shot.doseG-quantile(prior.map(x=>x.yieldG/x.doseG),.5))>1.25||Math.abs(shot.timeS-quantile(prior.map(x=>x.timeS),.5))>25;
 }
