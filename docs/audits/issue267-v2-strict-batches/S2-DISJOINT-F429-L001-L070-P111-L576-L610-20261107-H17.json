@@ -1,0 +1,2217 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "S2-DISJOINT-F429-L001-L070-P111-L576-L610-20261107-H17",
+  "date_utc": "2026-11-07",
+  "source_dev_parent_sha": "0eb819414433dc206c0485c868edeee1beb4fcbc",
+  "original_frozen_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+  "original_frozen_tree_sha": "c54ade64eca30946df8858297578a172f5cf6fa8",
+  "original_pinned_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+  "original_pinned_tree_sha": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+  "first_file_revalidation": {
+    "path": ".github/workflows/approval-continuity.yml",
+    "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+    "lines_exactly_read": 41,
+    "existing_S2_receipt": "docs/audits/issue267-v2-strict-batches/S2-001.json",
+    "original_literal_matches": 41,
+    "new_line_credit": 0,
+    "semantic_warning": "Older grouped summaries not broadly promoted."
+  },
+  "predecessor": {
+    "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F428-L001-L110-P111-L551-L575-20261107-H16.json",
+    "last_pinned_line": 575
+  },
+  "tracks": [
+    {
+      "track": "FROZEN_STRICT",
+      "inventory_index": 429,
+      "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+      "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+      "original_blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+      "original_physical_line_count": 70,
+      "first_line": 1,
+      "last_line": 70,
+      "live_blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+      "per_line": [
+        {
+          "line": 1,
+          "source_text": "-- The Dial In Collective: restore an operator-created RLS safety guard",
+          "inspection_class": "comment",
+          "behavior": "Historical recovery auto-RLS function reconstruction header",
+          "quality": "Non-executable recovery scope claim checked against SQL",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 1,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 2,
+          "source_text": "-- RECONSTRUCTION ONLY. Apply to a NEW ISOLATED recovery Supabase project.",
+          "inspection_class": "comment",
+          "behavior": "Only NEW ISOLATED Supabase recovery target authorized",
+          "quality": "Non-executable recovery scope claim checked against SQL",
+          "bug_security_privacy_performance_risk": "Do not run on production",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 2,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 3,
+          "source_text": "-- Do NOT include in general production migrations or rerun over a live production database.",
+          "inspection_class": "comment",
+          "behavior": "Explicit ban on general production migration or live rerun",
+          "quality": "Non-executable recovery scope claim checked against SQL",
+          "bug_security_privacy_performance_risk": "Production migration/live DB execution forbidden",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 3,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 4,
+          "source_text": "-- Source of record: read-only 2026-10-16 live pg_get_functiondef() and pg_event_trigger inventory.",
+          "inspection_class": "comment",
+          "behavior": "Provenance Oct16 read-only pg_get_functiondef and event trigger inventory",
+          "quality": "Non-executable recovery scope claim checked against SQL",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 4,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 5,
+          "source_text": "-- Product policies are not changed: this reproduces the existing prod guard for newly created public tables.",
+          "inspection_class": "comment",
+          "behavior": "Reproduce existing auto-RLS semantics, no new product policy",
+          "quality": "Non-executable recovery scope claim checked against SQL",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 5,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 6,
+          "source_text": "do $recovery$",
+          "inspection_class": "executable_sql",
+          "behavior": "Open outer recovery dollar-tagged DO",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 6,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 7,
+          "source_text": "begin",
+          "inspection_class": "executable_sql",
+          "behavior": "Begin recovery procedure",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 7,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 8,
+          "source_text": " if not exists (",
+          "inspection_class": "executable_sql",
+          "behavior": "Skip create if matching public function already exists",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 8,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 9,
+          "source_text": "   select 1 from pg_proc p join pg_namespace n on n.oid=p.pronamespace",
+          "inspection_class": "executable_sql",
+          "behavior": "Catalog pg_proc joined with pg_namespace",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "Name-only function lookup may match divergent existing function",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 9,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 10,
+          "source_text": "   where n.nspname='public' and p.proname='rls_auto_enable'",
+          "inspection_class": "executable_sql",
+          "behavior": "Select function by schema public and name rls_auto_enable",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 10,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 11,
+          "source_text": " ) then",
+          "inspection_class": "executable_sql",
+          "behavior": "Close function existence condition",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 11,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 12,
+          "source_text": "   execute $fn$",
+          "inspection_class": "executable_sql",
+          "behavior": "Open dynamic CREATE FUNCTION SQL literal",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 12,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 13,
+          "source_text": "     create function public.rls_auto_enable()",
+          "inspection_class": "executable_sql",
+          "behavior": "Create public.rls_auto_enable function",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 13,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 14,
+          "source_text": "     returns event_trigger",
+          "inspection_class": "executable_sql",
+          "behavior": "Declare event_trigger result type",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 14,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 15,
+          "source_text": "     language plpgsql",
+          "inspection_class": "executable_sql",
+          "behavior": "Set PL/pgSQL language",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 15,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 16,
+          "source_text": "     security definer",
+          "inspection_class": "executable_sql",
+          "behavior": "Execute as SECURITY DEFINER",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "SECURITY DEFINER privilege demands trusted owner",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 16,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 17,
+          "source_text": "     set search_path to 'pg_catalog'",
+          "inspection_class": "executable_sql",
+          "behavior": "Pin search_path to trusted pg_catalog",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "Pinned pg_catalog path reduces search-path hijack",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 17,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 18,
+          "source_text": "     as $function$",
+          "inspection_class": "executable_sql",
+          "behavior": "Open nested function body literal",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 18,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 19,
+          "source_text": "     declare cmd record; tbl name;",
+          "inspection_class": "executable_sql",
+          "behavior": "Declare DDL command record and table name variable",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 19,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 20,
+          "source_text": "     begin",
+          "inspection_class": "executable_sql",
+          "behavior": "Enter trigger body",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 20,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 21,
+          "source_text": "       for cmd in",
+          "inspection_class": "executable_sql",
+          "behavior": "Begin for-each event DDL command",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 21,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 22,
+          "source_text": "         select * from pg_event_trigger_ddl_commands()",
+          "inspection_class": "executable_sql",
+          "behavior": "Query pg_event_trigger_ddl_commands()",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 22,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 23,
+          "source_text": "         where command_tag in ('CREATE TABLE', 'CREATE TABLE AS', 'SELECT INTO')",
+          "inspection_class": "executable_sql",
+          "behavior": "Match CREATE TABLE / CREATE TABLE AS / SELECT INTO commands",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 23,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 24,
+          "source_text": "         and object_type in ('table','partitioned table')",
+          "inspection_class": "executable_sql",
+          "behavior": "Limit objects to tables or partitioned tables",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "Partitioned tables must remain in covered table kinds",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 24,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 25,
+          "source_text": "       loop",
+          "inspection_class": "executable_sql",
+          "behavior": "Begin DDL iteration block",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 25,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 26,
+          "source_text": "         if cmd.schema_name is not null and cmd.schema_name in ('public')",
+          "inspection_class": "executable_sql",
+          "behavior": "Require nonnull public schema",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 26,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 27,
+          "source_text": "            and cmd.schema_name not in ('pg_catalog','information_schema')",
+          "inspection_class": "executable_sql",
+          "behavior": "Exclude system pg_catalog and information_schema",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 27,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 28,
+          "source_text": "            and cmd.schema_name not like 'pg_toast%'",
+          "inspection_class": "executable_sql",
+          "behavior": "Exclude toast namespace",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 28,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 29,
+          "source_text": "            and cmd.schema_name not like 'pg_temp%' then",
+          "inspection_class": "executable_sql",
+          "behavior": "Exclude temporary namespace",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 29,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 30,
+          "source_text": "           begin",
+          "inspection_class": "executable_sql",
+          "behavior": "Begin public-table RLS work",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 30,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 31,
+          "source_text": "             select c.relname into tbl from pg_catalog.pg_class c where c.oid=cmd.objid;",
+          "inspection_class": "executable_sql",
+          "behavior": "Open nested exception-handled block",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "Nested exception handling can swallow enforcement failure",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 31,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 32,
+          "source_text": "             execute format('alter table if exists %I.%I enable row level security',cmd.schema_name,tbl);",
+          "inspection_class": "executable_sql",
+          "behavior": "Resolve created relation name using pg_class OID",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "Unknown OID/relation may make dynamic ALTER fail",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 32,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 33,
+          "source_text": "             raise log 'rls_auto_enable: enabled RLS on %',cmd.object_identity;",
+          "inspection_class": "executable_sql",
+          "behavior": "Dynamic ALTER TABLE enabling row level security",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "Must enable RLS for new public tables before queries",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 33,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 34,
+          "source_text": "           exception when others then",
+          "inspection_class": "executable_sql",
+          "behavior": "Write success to server log",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 34,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 35,
+          "source_text": "             raise log 'rls_auto_enable: failed to enable RLS on %',cmd.object_identity;",
+          "inspection_class": "executable_sql",
+          "behavior": "Catch ANY failure during RLS ALTER",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "Catch-all may turn failed RLS protection into mere log",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 35,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 36,
+          "source_text": "           end;",
+          "inspection_class": "executable_sql",
+          "behavior": "Log RLS failure without raising",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "Potential fail-open on ALTER failure; NEED ISOLATED TEST, no confirmed production risk",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 36,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 37,
+          "source_text": "         else",
+          "inspection_class": "executable_sql",
+          "behavior": "End inner exception-protected block",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 37,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 38,
+          "source_text": "           raise log 'rls_auto_enable: skip % (either system schema or not in enforced list: %.)',cmd.object_identity,cmd.schema_name;",
+          "inspection_class": "executable_sql",
+          "behavior": "Enter system-schema skip branch",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 38,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 39,
+          "source_text": "         end if;",
+          "inspection_class": "executable_sql",
+          "behavior": "Log skipped system/nonpublic object",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 39,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 40,
+          "source_text": "       end loop;",
+          "inspection_class": "executable_sql",
+          "behavior": "Close namespace conditional",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 40,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 41,
+          "source_text": "     end;",
+          "inspection_class": "executable_sql",
+          "behavior": "End DDL iteration",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 41,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 42,
+          "source_text": "     $function$;",
+          "inspection_class": "executable_sql",
+          "behavior": "End event trigger function PL/pgSQL body",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 42,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 43,
+          "source_text": "   $fn$;",
+          "inspection_class": "executable_sql",
+          "behavior": "Close inner function dollar quote",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 43,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 44,
+          "source_text": " end if;",
+          "inspection_class": "executable_sql",
+          "behavior": "Close dynamic execute statement",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 44,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 45,
+          "source_text": " if not exists (select 1 from pg_event_trigger where evtname='ensure_rls') then",
+          "inspection_class": "executable_sql",
+          "behavior": "End function creation condition",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "Name-only existence check may not verify expected function semantics",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 45,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 46,
+          "source_text": "   execute 'create event trigger ensure_rls on ddl_command_end when tag in (''CREATE TABLE'',''CREATE TABLE AS'',''SELECT INTO'') execute function public.rls_auto_enable()';",
+          "inspection_class": "executable_sql",
+          "behavior": "Check ensure_rls event-trigger name existence",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "Existing trigger name without tag/function validation is an unproven correctness risk",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 46,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 47,
+          "source_text": " end if;",
+          "inspection_class": "executable_sql",
+          "behavior": "Create DDL-end event trigger bound to RLS function",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "DDL tag wiring must be source-verified in isolated recovery",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 47,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 48,
+          "source_text": "end",
+          "inspection_class": "executable_sql",
+          "behavior": "End event-trigger condition",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 48,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 49,
+          "source_text": "$recovery$;",
+          "inspection_class": "executable_sql",
+          "behavior": "End outer recovery DO",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 49,
+            "exact_text_match": true
+          },
+          "testability": "Isolated recovery project: CREATE TABLE and forced permission failure",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 50,
+          "source_text": "",
+          "inspection_class": "blank",
+          "behavior": "Physical blank line",
+          "quality": "Real physical blank accounted",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 50,
+            "exact_text_match": true
+          },
+          "testability": "Check isolated role grants and statement boundaries",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 51,
+          "source_text": "revoke execute on function public.rls_auto_enable() from public, anon, authenticated;",
+          "inspection_class": "executable_sql",
+          "behavior": "Revoke function execute from public/anon/authenticated",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "Revoke broad SQL execute privileges as soon as constructed",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 51,
+            "exact_text_match": true
+          },
+          "testability": "Check isolated role grants and statement boundaries",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 52,
+          "source_text": "grant execute on function public.rls_auto_enable() to service_role;",
+          "inspection_class": "executable_sql",
+          "behavior": "Grant execute permission to service_role",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "Grant only trusted role, no application identities",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 52,
+            "exact_text_match": true
+          },
+          "testability": "Check isolated role grants and statement boundaries",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 53,
+          "source_text": "",
+          "inspection_class": "blank",
+          "behavior": "Physical blank line",
+          "quality": "Real physical blank accounted",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 53,
+            "exact_text_match": true
+          },
+          "testability": "Check isolated role grants and statement boundaries",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 54,
+          "source_text": "-- Transactional validation: create and discard a new public table. The RLS event",
+          "inspection_class": "comment",
+          "behavior": "Comment: test auto-enable with transient new public table",
+          "quality": "Non-executable recovery scope claim checked against SQL",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 54,
+            "exact_text_match": true
+          },
+          "testability": "Check isolated role grants and statement boundaries",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 55,
+          "source_text": "-- trigger must automatically enable RLS before the probe is removed.",
+          "inspection_class": "comment",
+          "behavior": "Comment: RLS probe must be hardened before removal",
+          "quality": "Non-executable recovery scope claim checked against SQL",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 55,
+            "exact_text_match": true
+          },
+          "testability": "Isolated probe CREATE, RLS true check and DROP cleanup",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 56,
+          "source_text": "do $probe$",
+          "inspection_class": "executable_sql",
+          "behavior": "Start $probe$ DO validation",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 56,
+            "exact_text_match": true
+          },
+          "testability": "Isolated probe CREATE, RLS true check and DROP cleanup",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 57,
+          "source_text": "declare enabled boolean;",
+          "inspection_class": "executable_sql",
+          "behavior": "Declare Boolean RLS-enabled flag",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 57,
+            "exact_text_match": true
+          },
+          "testability": "Isolated probe CREATE, RLS true check and DROP cleanup",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 58,
+          "source_text": "begin",
+          "inspection_class": "executable_sql",
+          "behavior": "Enter validation procedure",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 58,
+            "exact_text_match": true
+          },
+          "testability": "Isolated probe CREATE, RLS true check and DROP cleanup",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 59,
+          "source_text": " if to_regclass('public.__dic_recovery_rls_probe') is not null then",
+          "inspection_class": "executable_sql",
+          "behavior": "Check for preexisting probe table",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "Name collision should block probe before CREATE",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 59,
+            "exact_text_match": true
+          },
+          "testability": "Isolated probe CREATE, RLS true check and DROP cleanup",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 60,
+          "source_text": "   raise exception 'Unexpected pre-existing RLS probe table';",
+          "inspection_class": "executable_sql",
+          "behavior": "Throw exception if probe already exists",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 60,
+            "exact_text_match": true
+          },
+          "testability": "Isolated probe CREATE, RLS true check and DROP cleanup",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 61,
+          "source_text": " end if;",
+          "inspection_class": "executable_sql",
+          "behavior": "Close probe collision check",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 61,
+            "exact_text_match": true
+          },
+          "testability": "Isolated probe CREATE, RLS true check and DROP cleanup",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 62,
+          "source_text": " execute 'create table public.__dic_recovery_rls_probe (id bigint primary key)';",
+          "inspection_class": "executable_sql",
+          "behavior": "Create temporary public RLS probe table",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "Creating public probe is forbidden on production",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 62,
+            "exact_text_match": true
+          },
+          "testability": "Isolated probe CREATE, RLS true check and DROP cleanup",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 63,
+          "source_text": " select c.relrowsecurity into enabled from pg_class c join pg_namespace n on n.oid=c.relnamespace",
+          "inspection_class": "executable_sql",
+          "behavior": "Read pg_class relrowsecurity state",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 63,
+            "exact_text_match": true
+          },
+          "testability": "Isolated probe CREATE, RLS true check and DROP cleanup",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 64,
+          "source_text": " where n.nspname='public' and c.relname='__dic_recovery_rls_probe';",
+          "inspection_class": "executable_sql",
+          "behavior": "Check exact public schema/table identifier",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 64,
+            "exact_text_match": true
+          },
+          "testability": "Isolated probe CREATE, RLS true check and DROP cleanup",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 65,
+          "source_text": " if enabled is distinct from true then",
+          "inspection_class": "executable_sql",
+          "behavior": "Reject missing or false relrowsecurity",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "NULL relrowsecurity must fail probe",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 65,
+            "exact_text_match": true
+          },
+          "testability": "Isolated probe CREATE, RLS true check and DROP cleanup",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 66,
+          "source_text": "   raise exception 'Recovery RLS auto-enable probe failed';",
+          "inspection_class": "executable_sql",
+          "behavior": "Raise RLS probe failure exception",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "Probe failure should abort recovery acceptance",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 66,
+            "exact_text_match": true
+          },
+          "testability": "Isolated probe CREATE, RLS true check and DROP cleanup",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 67,
+          "source_text": " end if;",
+          "inspection_class": "executable_sql",
+          "behavior": "Close RLS condition",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 67,
+            "exact_text_match": true
+          },
+          "testability": "Isolated probe CREATE, RLS true check and DROP cleanup",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 68,
+          "source_text": " execute 'drop table public.__dic_recovery_rls_probe';",
+          "inspection_class": "executable_sql",
+          "behavior": "Drop probe table",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "Drop only the newly created probe table",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 68,
+            "exact_text_match": true
+          },
+          "testability": "Isolated probe CREATE, RLS true check and DROP cleanup",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 69,
+          "source_text": "end",
+          "inspection_class": "executable_sql",
+          "behavior": "End validation procedure",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 69,
+            "exact_text_match": true
+          },
+          "testability": "Isolated probe CREATE, RLS true check and DROP cleanup",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        },
+        {
+          "line": 70,
+          "source_text": "$probe$;",
+          "inspection_class": "executable_sql",
+          "behavior": "Close probe dollar-quote",
+          "quality": "Statement analyzed as part of original SQL event-trigger control flow",
+          "bug_security_privacy_performance_risk": "No independent active defect proven; recovery script isolated-only",
+          "dead_or_obsolete": "Archived restoration-only SQL still live blob-identical; no demonstrated safe deletion",
+          "duplicate_or_redundant": "Defensive schema conditions partly overlap but not proven redundant after execution",
+          "exact_current_counterpart": {
+            "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+            "blob_sha": "34f0f7d716912cd86decc8c5e5e966d366f268fc",
+            "line": 70,
+            "exact_text_match": true
+          },
+          "testability": "Isolated probe CREATE, RLS true check and DROP cleanup",
+          "fix_or_improvement_opportunity": "Do not modify original or run production SQL; coordinate isolated test with #96/#28 before remediation",
+          "locked_decision_fit": "Locked RLS, member privacy, isolation-only recovery, no publication",
+          "review_method": "Direct numbered immutable SQL source AI semantic interpretation"
+        }
+      ]
+    },
+    {
+      "track": "PINNED_CURRENT_STRICT",
+      "inventory_index": 111,
+      "path": "site/cloud/main.js",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "original_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+      "original_physical_line_count": 1027,
+      "first_line": 576,
+      "last_line": 610,
+      "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+      "per_line": [
+        {
+          "line": 576,
+          "source_text": " }",
+          "inspection_class": "structural",
+          "behavior": "Close New Coffee form presenter",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "No active defect demonstrated; state transition remains member-scoped",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 576,
+            "exact_text_match": true
+          },
+          "testability": "Simulate matched catalog coffee, offline rejection, account epoch switch, pending hold",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 577,
+          "source_text": " async finishCoffeeAdd(d,matched,chosenId=null,{confirmedDistinct=false}={}){",
+          "inspection_class": "executable_js",
+          "behavior": "Start finishCoffeeAdd with existing-choice and distinct-confirmation inputs",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "No active defect demonstrated; state transition remains member-scoped",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 577,
+            "exact_text_match": true
+          },
+          "testability": "Simulate matched catalog coffee, offline rejection, account epoch switch, pending hold",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 578,
+          "source_text": "  const owner=this.identity?.id,epoch=this.epoch;",
+          "inspection_class": "executable_js",
+          "behavior": "Capture current member identity and session epoch",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "Keep owner epoch around async mutation",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 578,
+            "exact_text_match": true
+          },
+          "testability": "Simulate matched catalog coffee, offline rejection, account epoch switch, pending hold",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 579,
+          "source_text": "  if(chosenId){",
+          "inspection_class": "executable_js",
+          "behavior": "Enter selected verified coffee branch",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "No active defect demonstrated; state transition remains member-scoped",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 579,
+            "exact_text_match": true
+          },
+          "testability": "Simulate matched catalog coffee, offline rejection, account epoch switch, pending hold",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 580,
+          "source_text": "   const proposedId=uuid();",
+          "inspection_class": "executable_js",
+          "behavior": "Generate provisional saved library ID",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "No active defect demonstrated; state transition remains member-scoped",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 580,
+            "exact_text_match": true
+          },
+          "testability": "Simulate matched catalog coffee, offline rejection, account epoch switch, pending hold",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 581,
+          "source_text": "   const added=await this.mutate('add_verified_coffee',{coffee_id:chosenId,library_entry_id:proposedId},{onlineOnly:true});",
+          "inspection_class": "executable_js",
+          "behavior": "Call online-only add_verified_coffee mutation with selected catalog ID",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "OnlineOnly avoids invalid offline pending add flow",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 581,
+            "exact_text_match": true
+          },
+          "testability": "Simulate matched catalog coffee, offline rejection, account epoch switch, pending hold",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 582,
+          "source_text": "   this.assertSession(owner,epoch);",
+          "inspection_class": "executable_js",
+          "behavior": "Reassert current owner/epoch after request",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "Abort response after switch to another account",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 582,
+            "exact_text_match": true
+          },
+          "testability": "Simulate matched catalog coffee, offline rejection, account epoch switch, pending hold",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 583,
+          "source_text": "   const library=this.raw?.library?.find(x=>typeof added?.library_entry_id==='string'?x.id===added.library_entry_id:x.coffee_id===chosenId);",
+          "inspection_class": "executable_js",
+          "behavior": "Resolve saved entry via server receipt or catalog coffee ID",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "Server-provided library ID should win if available",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 583,
+            "exact_text_match": true
+          },
+          "testability": "Simulate matched catalog coffee, offline rejection, account epoch switch, pending hold",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 584,
+          "source_text": "   if(added?.acknowledgement_unavailable||!library||!this.raw?.coffees?.some(x=>x.id===library.coffee_id)){",
+          "inspection_class": "executable_js",
+          "behavior": "Hold if acknowledgement unavailable, library/canonical missing",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "No missing acknowledgement may be represented as success",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 584,
+            "exact_text_match": true
+          },
+          "testability": "Simulate matched catalog coffee, offline rejection, account epoch switch, pending hold",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 585,
+          "source_text": "    this.holdAddedCoffeeReview(d,{libraryId:added?.library_entry_id||library?.id||proposedId,coffeeId:chosenId,result:added});return;",
+          "inspection_class": "executable_js",
+          "behavior": "Preserve source draft and returned IDs in pending review",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "Preserve input and returned IDs on not-yet-synced state",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 585,
+            "exact_text_match": true
+          },
+          "testability": "Simulate matched catalog coffee, offline rejection, account epoch switch, pending hold",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 586,
+          "source_text": "   }",
+          "inspection_class": "structural",
+          "behavior": "Close waiting branch",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "No active defect demonstrated; state transition remains member-scoped",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 586,
+            "exact_text_match": true
+          },
+          "testability": "Simulate matched catalog coffee, offline rejection, account epoch switch, pending hold",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 587,
+          "source_text": "   this.tempCoffee=library?.id||null;",
+          "inspection_class": "executable_js",
+          "behavior": "Select saved verified library coffee",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "No active defect demonstrated; state transition remains member-scoped",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 587,
+            "exact_text_match": true
+          },
+          "testability": "Simulate matched catalog coffee, offline rejection, account epoch switch, pending hold",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 588,
+          "source_text": "   // New coffee is ready to expand intentionally, not auto-expanded.",
+          "inspection_class": "comment",
+          "behavior": "Comment: do not auto-expand saved coffee unexpectedly",
+          "quality": "Documented safe Add Coffee state verified against branch",
+          "bug_security_privacy_performance_risk": "Do not automatically expand when in editing flow",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 588,
+            "exact_text_match": true
+          },
+          "testability": "Simulate matched catalog coffee, offline rejection, account epoch switch, pending hold",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 589,
+          "source_text": "   sheet.close();this.notice='Added the existing verified coffee. No duplicate was created.';this.render();",
+          "inspection_class": "executable_js",
+          "behavior": "Close sheet, confirm existing coffee without duplicate, render",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "Server duplicate reuse messaging must be grounded",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 589,
+            "exact_text_match": true
+          },
+          "testability": "Simulate matched catalog coffee, offline rejection, account epoch switch, pending hold",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 590,
+          "source_text": "   this.reviewAddedCoffeeDetails(library,d);return;",
+          "inspection_class": "executable_js",
+          "behavior": "Present existing coffee details and return",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "No active defect demonstrated; state transition remains member-scoped",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 590,
+            "exact_text_match": true
+          },
+          "testability": "Simulate matched catalog coffee, offline rejection, account epoch switch, pending hold",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 591,
+          "source_text": "  }",
+          "inspection_class": "structural",
+          "behavior": "Close existing catalog branch",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "No active defect demonstrated; state transition remains member-scoped",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 591,
+            "exact_text_match": true
+          },
+          "testability": "Simulate matched catalog coffee, offline rejection, account epoch switch, pending hold",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 592,
+          "source_text": "  const lid=uuid(),{source_url,proposed_data}=proposalWithRecognizedRoaster(d,matched);",
+          "inspection_class": "executable_js",
+          "behavior": "Build new library ID + recognized-roaster proposal data",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "Recognized roaster proposal cannot fabricate missing coffee facts (#33)",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 592,
+            "exact_text_match": true
+          },
+          "testability": "Simulate server returned different saved ID, private pending vs approval and source verify",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 593,
+          "source_text": "  const added=await this.mutate('submit_coffee',{library_entry_id:lid,source_url,proposed_data,confirmed_distinct:confirmedDistinct},{onlineOnly:true});",
+          "inspection_class": "executable_js",
+          "behavior": "Online-only submit_coffee with source/dedup distinct confirmation",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "Member submission only on explicit user action with online mutation",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 593,
+            "exact_text_match": true
+          },
+          "testability": "Simulate server returned different saved ID, private pending vs approval and source verify",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 594,
+          "source_text": "  this.assertSession(owner,epoch);",
+          "inspection_class": "executable_js",
+          "behavior": "Recheck identity after asynchronous mutation",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "Check account epoch after server await",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 594,
+            "exact_text_match": true
+          },
+          "testability": "Simulate server returned different saved ID, private pending vs approval and source verify",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 595,
+          "source_text": "  // The server may reuse a library entry that already existed. Follow this",
+          "inspection_class": "comment",
+          "behavior": "Comment: server can reuse existing member library row",
+          "quality": "Documented safe Add Coffee state verified against branch",
+          "bug_security_privacy_performance_risk": "No active defect demonstrated; state transition remains member-scoped",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 595,
+            "exact_text_match": true
+          },
+          "testability": "Simulate server returned different saved ID, private pending vs approval and source verify",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 596,
+          "source_text": "  // exact event's acknowledgement instead of guessing by name or losing the",
+          "inspection_class": "comment",
+          "behavior": "Comment: depend on exact server ack, not fuzzy name",
+          "quality": "Documented safe Add Coffee state verified against branch",
+          "bug_security_privacy_performance_risk": "No active defect demonstrated; state transition remains member-scoped",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 596,
+            "exact_text_match": true
+          },
+          "testability": "Simulate server returned different saved ID, private pending vs approval and source verify",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 597,
+          "source_text": "  // imported details because its ID differs from the proposed new ID.",
+          "inspection_class": "comment",
+          "behavior": "Comment: preserve source details when returned ID differs",
+          "quality": "Documented safe Add Coffee state verified against branch",
+          "bug_security_privacy_performance_risk": "No active defect demonstrated; state transition remains member-scoped",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 597,
+            "exact_text_match": true
+          },
+          "testability": "Simulate server returned different saved ID, private pending vs approval and source verify",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 598,
+          "source_text": "  const savedId=typeof added?.library_entry_id==='string'?added.library_entry_id:lid;",
+          "inspection_class": "executable_js",
+          "behavior": "Prefer returned saved library ID over provisional ID",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "Server may reuse alternate member library ID",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 598,
+            "exact_text_match": true
+          },
+          "testability": "Simulate server returned different saved ID, private pending vs approval and source verify",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 599,
+          "source_text": "  const entry=this.raw?.library?.find(x=>x.id===savedId);",
+          "inspection_class": "executable_js",
+          "behavior": "Find exact library entry by accepted saved ID",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "No active defect demonstrated; state transition remains member-scoped",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 599,
+            "exact_text_match": true
+          },
+          "testability": "Simulate server returned different saved ID, private pending vs approval and source verify",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 600,
+          "source_text": "  if(added?.acknowledgement_unavailable||!entry||(entry.coffee_id&&!this.raw?.coffees?.some(x=>x.id===entry.coffee_id))){",
+          "inspection_class": "executable_js",
+          "behavior": "Defer while ack/entry/canonical coffee incomplete",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "Keep pending until referenced catalog is available",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 600,
+            "exact_text_match": true
+          },
+          "testability": "Simulate server returned different saved ID, private pending vs approval and source verify",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 601,
+          "source_text": "   this.holdAddedCoffeeReview(d,{libraryId:savedId,coffeeId:added?.coffee_id,result:added});return;",
+          "inspection_class": "executable_js",
+          "behavior": "Hold pending source details and receipt for retry/review",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "Preserve source fields, avoid duplicate resubmission",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 601,
+            "exact_text_match": true
+          },
+          "testability": "Simulate server returned different saved ID, private pending vs approval and source verify",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 602,
+          "source_text": "  }",
+          "inspection_class": "structural",
+          "behavior": "Close pending hold branch",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "No active defect demonstrated; state transition remains member-scoped",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 602,
+            "exact_text_match": true
+          },
+          "testability": "Simulate server returned different saved ID, private pending vs approval and source verify",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 603,
+          "source_text": "  this.tempCoffee=savedId;sheet.close();",
+          "inspection_class": "executable_js",
+          "behavior": "Select saved private/auto-approved coffee and close sheet",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "No active defect demonstrated; state transition remains member-scoped",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 603,
+            "exact_text_match": true
+          },
+          "testability": "Simulate server returned different saved ID, private pending vs approval and source verify",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 604,
+          "source_text": "  const proposal=this.raw?.submissions?.find(x=>x.id===entry?.submission_id);",
+          "inspection_class": "executable_js",
+          "behavior": "Lookup private submission linked to entry",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "No active defect demonstrated; state transition remains member-scoped",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 604,
+            "exact_text_match": true
+          },
+          "testability": "Simulate server returned different saved ID, private pending vs approval and source verify",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 605,
+          "source_text": "  if(entry?.coffee_id){",
+          "inspection_class": "executable_js",
+          "behavior": "Branch when catalog coffee ID is assigned",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "No active defect demonstrated; state transition remains member-scoped",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 605,
+            "exact_text_match": true
+          },
+          "testability": "Simulate server returned different saved ID, private pending vs approval and source verify",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 606,
+          "source_text": "   this.notice=added?.reused?'Added the existing verified coffee. No duplicate was created.':'Coffee automatically approved and added to the shared catalog.';",
+          "inspection_class": "executable_js",
+          "behavior": "Report server confirmed reuse or automatic catalog approval",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "Only authoritative backend result says auto-approved/reused",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 606,
+            "exact_text_match": true
+          },
+          "testability": "Simulate server returned different saved ID, private pending vs approval and source verify",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 607,
+          "source_text": "  }else{",
+          "inspection_class": "executable_js",
+          "behavior": "Enter private pending submission branch",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "No active defect demonstrated; state transition remains member-scoped",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 607,
+            "exact_text_match": true
+          },
+          "testability": "Simulate server returned different saved ID, private pending vs approval and source verify",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 608,
+          "source_text": "   this.notice='Saved privately because a possible duplicate needs review. You can log shots now.';",
+          "inspection_class": "executable_js",
+          "behavior": "Inform member private coffee saved and usable for shots",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "Pending coffee remains private until review while shot logging allowed",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 608,
+            "exact_text_match": true
+          },
+          "testability": "Simulate server returned different saved ID, private pending vs approval and source verify",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 609,
+          "source_text": "   if(proposal?.id&&proposal?.source_url&&this.client.verifyCoffeeSource){",
+          "inspection_class": "executable_js",
+          "behavior": "Require submission source URL and verified-source client capability",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "Source verifier restricted to public roaster URL and no member leak",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 609,
+            "exact_text_match": true
+          },
+          "testability": "Simulate server returned different saved ID, private pending vs approval and source verify",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        },
+        {
+          "line": 610,
+          "source_text": "    try{",
+          "inspection_class": "executable_js",
+          "behavior": "Enter guarded verify source try block",
+          "quality": "Async Add Coffee owner/receipt/identity path interpreted in method scope",
+          "bug_security_privacy_performance_risk": "No active defect demonstrated; state transition remains member-scoped",
+          "dead_or_obsolete": "Current Add Coffee saved and pending source is needed; not proven removable",
+          "duplicate_or_redundant": "Selected verified and new submissions are distinct; no dead duplicate proven",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 610,
+            "exact_text_match": true
+          },
+          "testability": "Simulate server returned different saved ID, private pending vs approval and source verify",
+          "fix_or_improvement_opportunity": "No speculative edit; continue tests under #33/#96 ownership",
+          "locked_decision_fit": "Locked Add Coffee source confirmation, member data and privacy preserved",
+          "review_method": "Direct numbered pinned original source AI semantic interpretation"
+        }
+      ]
+    }
+  ],
+  "new_original_line_positions": 105,
+  "source_literal_verified": "105/105",
+  "live_same_line_verified": "105/105",
+  "findings": [
+    {
+      "severity": "P2_unconfirmed_source_hypothesis",
+      "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+      "lines": [
+        31,
+        32,
+        33,
+        35,
+        36
+      ],
+      "disposition": "Original recovery-only SECURITY DEFINER auto-RLS event trigger catches and logs ALL errors during ALTER TABLE. If ALTER fails, CREATE might continue with non-RLS public table; not reproduced in isolated Postgres, not evidence of active production misconfiguration or incident. Requires #96/#28-coordinated isolated negative test; NO SQL executed/changed."
+    },
+    {
+      "severity": "P3_source_hypothesis",
+      "path": "scripts/recovery/restore_public_rls_creation_guard.sql",
+      "lines": [
+        9,
+        10,
+        45,
+        46
+      ],
+      "disposition": "Function/trigger name-only existence guard may accept preexisting different definitions. No isolated test or safe removal established."
+    },
+    {
+      "severity": "confirmed_source_state_not_runtime_certification",
+      "path": "site/cloud/main.js",
+      "lines": [
+        581,
+        582,
+        585,
+        592,
+        593,
+        598,
+        600,
+        601,
+        606,
+        608
+      ],
+      "disposition": "Source retains online-only Add Coffee and pending draft/receipt data, no independent real member validation."
+    }
+  ],
+  "central_count_CAS_unchanged": true,
+  "legacy_R2_C2_provisional": true,
+  "first_file_duplicate_credit": 0,
+  "nonoverlap": "Frozen F429 follows complete F428; P111 original 576-610 follows merged H16 pinned line575; all original source SHA/literals exact",
+  "tests": {
+    "original_source_105": "VERIFIED",
+    "live_counterpart_105": "VERIFIED",
+    "original_first_file_41": "REVALIDATED_0_DUPLICATE",
+    "isolated_postgres": "NOT_RUN",
+    "node22": "NOT_RUN",
+    "real_auth_member": "NOT_RUN",
+    "browser_mobile_offline": "NOT_RUN",
+    "original603": "NOT_RUN",
+    "pr_head_approval": "PENDING",
+    "merged_approval": "PENDING"
+  },
+  "status": "IN_PROGRESS_NOT_READY_NO_DEPLOY",
+  "next_frozen": "F430 line1 scripts/release/chat-release-request.mjs",
+  "next_pinned": "P111 site/cloud/main.js line611",
+  "remaining": "Full frozen 579961/pinned 57913 and drift 100% semantic coverage and final owner report incomplete"
+}
