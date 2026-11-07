@@ -752,11 +752,6 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
   const heading=inherited||headings.filter(Boolean).join(' / ').slice(0,100);
   sections.set(i,(secondaryPanels.has(i)?'Supplementary page panel / '+heading:heading).slice(0,100));
  }
- const sectionAt=start=>{
-  let low=0,high=nodes.length;
-  while(low<high){const mid=(low+high)>>>1;if(nodes[mid].start<=start)low=mid+1;else high=mid;}
-  return sections.get(low-1)||'';
- };
  // Reserve the selected page's complete prose before iterating its many
  // individual labels. Supplementary dialogs remain available separately.
  if(primaryExcluded.length){
