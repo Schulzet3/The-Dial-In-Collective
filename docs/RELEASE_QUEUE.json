@@ -10,28 +10,39 @@
     {
       "id": "DIC-Q-33-original603-336-current-grower-vs-farm",
       "issue": 33,
-      "pr": null,
+      "pr": 1309,
       "title": "Exact selected current named grower vs separately labeled Farm for original603 #336",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "01c0358b35cafea75745b65eb04649d0a8fac07b",
       "scope_paths": [
         "src/server/coffee-direct-product-prose.mjs",
         "src/server/coffee-page-metadata.mjs",
         "src/server/coffee-source-facts.mjs"
       ],
       "tests": [
-        "Original603 guarded official source run 42423953143 at merged c50b2d566d75dc990f2fd5a3f283dfcbffecc3b2: #336 raw SHA256 0cbc4bce520da7a119b7cf24deee4b530b5d2cb17524a9feea2049778150f395; selected H1 Mexico Luis Ordóñez; continuing direct source of Luis’s coffee and present Luis cultivates; independent Farm: La Piedra. Before parser producer=La Piedra (farm not person).",
-        "New generic positive/negative source, Add Coffee, review, historical/other/explicit contrary farmer and farm-only regression tests in tests/coffee-issue33-original603-336-selected-named-grower.test.mjs. Exact PR-head and merged CI NOT YET EXECUTED."
+        "PR #1304 initially passed synthetic tests but real exact selected original603 #336 remained incorrect: merged official probe 42424435863 producer=La Piedra despite directly named cultivator Luis Ordóñez. Diagnostic merged 42425293638 located current actual 249-char p/span story with 'different varieties'; the overbroad 'different' exclusion suppressed the current named grower.",
+        "PR #1309 scopes other/different to unrelated coffee/lot/grower/farm/producer/product/crop terms, not current cultivar diversity; source-exact positive and unrelated-different-farmer/old lot/contrary producer/farm-only/related coffee negative tests. Same-commit journal with exact source SHA and authority; original 603 CSV, oracle, scorer, and captures unchanged.",
+        "Exact PR1309 code-head Node/lint/build 42425782914 SUCCESS; exact merged source medium scoped Node 42425913343 SUCCESS: 1,983 actual coffee/preview tests PASS, 0 FAIL, 0 SKIP; lint/build/packaging SUCCESS. Full HIGH Node suite and frozen603 were SKIPPED, not PASS.",
+        "Applicable PR-head cloud 42425782923, isolated SQL 42425782916, approval 42425782921 and security advisory 42425782924 SUCCESS; exact merged cloud 42425913466 and approval 42425913391 SUCCESS. No real GoTrue/mobile-device acceptance claimed.",
+        "Exact merged 42425913508 guarded official-source job 128564025260 SUCCESS: 3/3 actual official URLs FETCHED and parsed, exact H1 3/3, Add Coffee 3/3 and Source Review 3/3; #336 producer Luis Ordóñez, independent Farm La Piedra, origin/process/roast/notes unchanged, no conflicts. #338 and #339 preserved. Artifact 13595227448 ZIP SHA256 fc67489667afca50f0b42dc124f499f1ae1c60cfcb36ca4bb8c6b6f2469edc0a independently recomputed; JSON SHA256 da81e66937e63b85c1bbcf88db6f35b7877f2572b0fdf2b13c038e1885a1ca61 and all three raw current HTML hashes recomputed independently. Evidence in docs/audits/issue33-original603-336-338-339-current-selected-verified-20261107.json. Full independent original603 semantic certification still incomplete."
       ],
       "ci_runs": [
         42423953143,
-        42423953124
+        42424435863,
+        42425293638,
+        42425782914,
+        42425782923,
+        42425782916,
+        42425782921,
+        42425782924,
+        42425913343,
+        42425913466,
+        42425913391,
+        42425913508
       ],
-      "blockers": [
-        "PR-head/merged code, Node/lint/build and fresh exact official guarded source after-run not verified."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "DEVELOPMENT ONLY; preserves all prior queue states/Locked decisions, original frozen603, member data and no production release."
+      "notes": "Development-only narrowly verified correction READY, NOT DEPLOYED. Scope includes previous #1304 role guard and #1309 real-source lexical fix; preserves all other queue items, frozen source, Locked decisions, credentials/member data. Issue #33 stays OPEN for 603-coffee individual source certification, with unrelated qualified/unavailable products separately reviewable."
     },
     {
       "id": "DIC-Q-33-335-current-ea-processed-decaf",
