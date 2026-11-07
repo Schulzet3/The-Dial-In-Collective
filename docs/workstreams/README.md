@@ -11,7 +11,7 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 - [GitHub-wide exhaustive word-level records/doc audit: Issue #504](issue-504.md) — nonoverlapping with #267 source-code review
 - [Issue #96 source-transfer and receipt evidence](ops-issue96-receipt.md)
 - [Selected-product extraction completeness: Issue #33](issue-33.md)
-- [Issue #33 Nov 7 original603 #219/#220/#222 selected-source review (TESTING)](ops-issue33-eightythird3.md) — current exact public source qualification; guarded official parser run pending, full603 OPEN
+- [Issue #33 Nov 7 original603 #219/#220/#222 independently hashed current official sources](ops-issue33-eightythird3.md) — executed 3/3 selected parser/Add Coffee, #219 roast variants and #220/#222 semantic qualifications; full603 OPEN
 - [Issue #33 Nov 7 original603 #212/#213/#218 verified selected source and #213 Q’Ail/Rio Ocho correction](ops-issue33-eightysecond3.md) — exact current official HTML + independent hashes, code CI/merge READY; full603 OPEN
 - [Issue #33 November 2 targeted official-source probe and adversarial tests](issue-33-tenth3.md)
 - [Issue #33 Nov 7 selected original603 #202/#203/#211 verification and #203 method READY](ops-issue33-seventyninth3.md) — actual guarded official HTML SHA evidence; #203 exact Sugar Process fix verified, #211 geography qualified, entire 603 OPEN
