@@ -11,7 +11,7 @@
       "id": "DIC-Q-455-outlier-feed-basket-calibration-context",
       "issue": 455,
       "title": "Prevent explicit cross-feed/basket/calibration successes from creating false shot outlier prompts",
-      "state": "TESTING",
+      "state": "READY",
       "scope_paths": [
         "site/lib/engine.js"
       ],
@@ -19,13 +19,26 @@
         "R455-097 original development 30f040f62772ab4f5d4745f0b8ebc83af16561bc; engine prior blob 777303fea493dcb85f3aac6a5ac1e76093502fe3. Code inspection: isExtreme() mixes four past all-green same-style/setup successes across explicitly different feed, basket and grinder calibration to trigger mandatory 25-second or 1.25-ratio outlier review. Reproduction is source-derived synthetic, not actual member incident.",
         "SAFE filter only known conflicting feedMode, basketId and calibrationId in outlier prior evidence. No new outlier numeric threshold, no access/approval change; archived missing fields retain current legacy fallback and original notes/ratings/history. This preserves standard vs slow feed hydraulic context, without using research as a new grinder/taste policy.",
         "Five synthetic direct real-module test groups: wrong context quorum, mixed fourth, valid positive original thresholds, missing-legacy compatibility, integrated saveShot. Exact PR-head Node22/UX/mobile/offline/SQL/privacy/governance tests NOT EXECUTED; frozen603 NOT RUN; real user/physical quality not verified.",
-        "Not READY until tested-head and exact merged required CI plus nonforce integration/reconciliation."
+        "Not READY until tested-head and exact merged required CI plus nonforce integration/reconciliation.",
+        "PR #1276 exact head 62e87f4f4c38cb0784265aa3806a650a103b5e5b validated Node22/lint 2,984 PASS/0 FAIL/6 SKIP in run42407686373. Browser/mobile/offline/a11y/cloud run42407686437 SUCCESS; isolated SQL42407686271, security42407686268 and governance42407686275 SUCCESS. Frozen original60342407686300 SKIPPED NOT PASS.",
+        "Nonforce squash code merge 028e2bd2db3e6cbc5931a95b82d9217cab38c439, exact engine blob ac80d5dae00efe101c1bd494956a19690c93e254 and regression test blob f963f6e01f183a00b98573e1d983e44646bc46cf read back byte-identical to tested PR head. First merged-source Node run42407879552 attempt1 had one unrelated extractor HTML parser stress spawnSync ETIMEDOUT, not our test; targeted retry of only failing job attempt2 SUCCESS with 2,984 PASS/0 FAIL/6 SKIP plus lint. Merged UX/browser/mobile/offline42407879577 and governance42407879576 SUCCESS. SQL/security from PR head only; not asserted re-run at merged source. Frozen603 remained SKIPPED.",
+        "READY means tested development integration only, publication not authorized. Same-commit R455-097 journal and TESTING queue persisted with code; this docs-only reconciliation verifies the exact merge and research coverage."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        42407686373,
+        42407686437,
+        42407686271,
+        42407686268,
+        42407686275,
+        42407879552,
+        42407879577,
+        42407879576
+      ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Development-only Option B, under test. No production release, SQL/Auth/Edge/member/provider writes.",
-      "merged_source_sha": null
+      "notes": "Development-only READY after exact head/merged CI and nonforce source merge. 2984/0/6 Node22, UI/mobile/offline, SQL/security source-head and governance, no production deployment. Outlier four-shot/25s/1.25 guards unchanged.",
+      "merged_source_sha": "028e2bd2db3e6cbc5931a95b82d9217cab38c439",
+      "pr": 1276
     },
     {
       "id": "DIC-Q-33-original603-321-current-country-first-region",
