@@ -2014,7 +2014,11 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   decafSpec.candidates.length>0;
  const decaffeination_method=eligibleSelectedDecafMethod?inferDecaffeinationMethod({
   name:fields.name,processingDetail:roaster_details.processing_detail,
-  selectedMethod:selectedDecafStatements.join('\n'),
+  // Include only already exact-selected-H1 product spec captions alongside
+  // directly selected method prose. Conflict and mixed-caffeine gates remain.
+  // A literal "Decaffeination: Sugarcane" is independent of "Process: Washed".
+  selectedMethod:[...selectedDecafStatements,
+   ...decafSpec.candidates.map(spec=>spec.value)].join('\n'),
   selectedCurrentDecafIdentity:directSelected.selected_current_decaf_identity===true,
   conflicting:decafSourceConflict
  }):'';
