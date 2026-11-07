@@ -16,13 +16,28 @@ test('temporary IndexedDB open errors do not permanently disable later attempts'
 });
 test('blocked IndexedDB opening can be retried without losing queued owner records',async()=>{
  let attempts=0;
- const idb={open(){attempts++;const request={result:{objectStoreNames:{contains(){return true;}}}};
+ // An existing pending write is read back after a failed opening and retry.
+ const queued={owner:'member-a',id:'pending-1',sequence:1,action:'save_shot',payload:{shot_id:'shot-1'},status:'pending'};
+ const existingDb={objectStoreNames:{contains(){return true;}},transaction(name){
+  assert.equal(name,'events');
+  return {objectStore(storeName){
+   assert.equal(storeName,'events');
+   return {getAll(){
+    const request={};
+    queueMicrotask(()=>{request.result=[structuredClone(queued)];request.onsuccess();});
+    return request;
+   }};
+  }};
+ }};
+ const idb={open(){attempts++;const request={result:existingDb};
   queueMicrotask(()=>{if(attempts===1)request.onblocked();else request.onsuccess();});
   return request;}};
  const store=new IndexedStore(idb);
  await assert.rejects(()=>store.db(),/another open app tab/);
  await store.db();
  assert.equal(attempts,2);
+ assert.deepEqual(await store.list('member-a'),[queued]);
+ assert.deepEqual(await store.list('other-member'),[]);
 });
 test('transaction callback errors reject immediately and abort instead of hanging',async()=>{
  let aborted=0;
