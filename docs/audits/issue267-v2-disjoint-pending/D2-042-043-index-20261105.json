@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "source_branch_parent_sha": "c563c8c2379e9fbce658eae2216e9582ab8664d1",
+  "reason": "Append-only disjoint evidence while concurrent PR #835 (D2-039) and #769 (S2-143) modify canonical ledgers/central workstream; never overwrite.",
+  "batches": [
+    {
+      "id": "D2-042",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-042.json",
+      "path": "tests/immutable-dist.test.py",
+      "source_blob": "d6c36dae8c8dfefceeb72a339b0510b8de5ee374",
+      "physical_lines": 21,
+      "range": [
+        1,
+        21
+      ]
+    },
+    {
+      "id": "D2-043",
+      "receipt": "docs/audits/issue267-v2-post-pin-direct-batches/D2-043.json",
+      "path": "tests/immutable-dist-manifest.test.py",
+      "source_blob": "ca1991e4976041fb92f9b22b1933060b20ef9b31",
+      "physical_lines": 23,
+      "range": [
+        1,
+        23
+      ]
+    }
+  ],
+  "provisional_distinct_source_lines": 44,
+  "prior_disjoint_staged": [
+    "D2-040",
+    "D2-041"
+  ],
+  "combined_staged_lines": 78,
+  "preexisting_merged_ledger_last_read": {
+    "lines": 1446,
+    "files": 38
+  },
+  "tests": {
+    "python": "6/6 PASS",
+    "runner": "Python 3.13",
+    "source_hash_checked": [
+      "39bb1d7511aa1a3ca206eb16e4c8e3c9880d0d2e",
+      "08ad9b80e30efe87f77700e81fef878f99d71fe3",
+      "d6c36dae8c8dfefceeb72a339b0510b8de5ee374",
+      "ca1991e4976041fb92f9b22b1933060b20ef9b31"
+    ]
+  },
+  "publication_authorized": false,
+  "merge_requires_canonical_ledger_reconciliation": true
+}
