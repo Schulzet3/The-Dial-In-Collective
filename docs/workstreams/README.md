@@ -12,6 +12,7 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 - [Issue #96 source-transfer and receipt evidence](ops-issue96-receipt.md)
 - [Selected-product extraction completeness: Issue #33](issue-33.md)
 - [Issue #33 November 2 targeted official-source probe and adversarial tests](issue-33-tenth3.md)
+- [Issue #33 Nov 7 original603 #153/#156/#164 selected official source review](ops-issue33-seventyfifth3.md) — guarded public current-source evidence pending; no parser change or certification claim
 - [Issue #33 Nov 7 original603 #144/#145/#147 selected official source review](ops-issue33-seventyfourth3.md) — exact merged public parser/Add Coffee and independent raw SHA proof; #144 conflicting roast, #145 multiple selectable roast variants qualified
 - [Issue #33 Nov 6 original603 #141/#142/#143 current selected-source review](ops-issue33-seventythird3.md) — raw HTML artifact independently SHA-verified, field and producer-role qualifications recorded
 - [Issue #33 Nov 6 selected-current original603 #131/#132/#140 bounded review](ops-issue33-seventysecond3.md) — official parser/Add Coffee evidence and independent raw hashes verified; #131 provisional mismatch corrected
