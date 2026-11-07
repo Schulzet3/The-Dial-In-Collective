@@ -141,6 +141,22 @@ function selectedProductAccordionDecafMethods(html,name,clean){
  return [...new Set(methods)];
 }
 
+
+// The exact selected H1 may name a human cultivator while the product
+// explicitly labels their distinct estate as Farm. Require a present-tense
+// cultivation clause and continued current purchases, never H1/name alone.
+function selectedCurrentContinuingCultivator(name,line){
+ if(typeof name!=='string'||typeof line!=='string'||line.length>650)return '';
+ const named=name.match(/(?:^|[\s,;|:–—-])([\p{Lu}][\p{L}\p{M}’'-]{2,30})\s+([\p{Lu}][\p{L}\p{M}’'-]{2,40})$/u);
+ if(!named)return '';
+ const first=named[1];
+ if(/\b(?:other|different|formerly|historically|previously|prior\s+(?:year|lot|harvest)|last\s+(?:year|season)|no\s+longer|not\s+our|unrelated|former)\b/iu.test(line))return '';
+ const credited=new RegExp("\\b(?:we\\s+)?(?:first\\s+)?(?:purchased|sourced|bought)\\s+"+first+"['’]s\\s+coffee\\b",'iu').test(line);
+ const continued=/\b(?:we['’]ve\s+continued\s+to\s+do\s+so\s+every\s+year\s+since|we\s+(?:still|continue\s+to)\s+(?:buy|purchase|source)\b)/iu.test(line);
+ const cultivated=new RegExp("\\b"+first+"\\s+(?:cultivates|grows|farms)\\b",'iu').test(line);
+ return credited&&continued&&cultivated?named[1]+' '+named[2]:'';
+}
+
 export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html}={}){
  if(typeof html!=='string'||html.length>2_000_000||!name||typeof clean!=='function')return {};
  const blocks=productCoffeeProse(html,clean);
@@ -166,7 +182,7 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
    /\bthis\s+(?:[\p{L}\p{M}-]+\s+){0,8}decaf(?:feinated)?\s+coffee\b/iu.test(b.text)&&
    !NONCURRENT_DECAF_METHOD.test(b.text));
  const organizations=new Set(),farms=new Set(),sensory=new Set(),literals=new Set(),roasts=new Set();
- const namedEstateGrowers=new Map();
+ const namedEstateGrowers=new Map(),namedCurrentCultivators=new Set();
  const releases=new Set(),decafEvidence=new Set();
  let decafEvidenceOverflow=false;
  // A current selected coffee's exact H1 can itself identify the water
@@ -235,6 +251,10 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
  let anotherExplicitList=false;
  for(const b of body){
   const line=b.text.replace(/\s+/g,' ').trim();
+  if(b.tag==='p'){
+   const grower=selectedCurrentContinuingCultivator(name,line);
+   if(grower)namedCurrentCultivators.add(grower);
+  }
   // An unambiguous same-paragraph current selected bean antecedent makes
   // the subsequent pronoun refer to THIS named decaf, not another offering.
   // Reject site/educational context, historical alternatives and missing H1.
@@ -380,6 +400,10 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   out.producer=pair.producer;
   out.named_estate_producer=true;
   out.named_estate_farm=pair.estate;
+ }
+ if(!out.producer&&namedCurrentCultivators.size===1){
+  out.producer=[...namedCurrentCultivators][0];
+  out.named_current_cultivator_producer=true;
  }
  if(!out.producer&&farms.size===1){
   const farm='Finca '+[...farms][0];
