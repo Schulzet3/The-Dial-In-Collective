@@ -7054,5 +7054,47 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "pg_amop ordinal 301/964 then pg_amproc ordinal 1/710; #96 signed-in hosted boundary and changes-only drift"
+  },
+  "provider_amop_run58": {
+    "status": "150_NEW_FULL_PG_AMOP_MAPPINGS_DIRECTLY_REVIEWED_NATIVE_AND_HOSTED_UNVERIFIED",
+    "receipt_path": "docs/audits/issue509-provider-amop-301-450-20261107-run58.json",
+    "project_ref": "azviqqejypsefzilgonr",
+    "provider_at": "2026-11-07 05:45:39.536507+00",
+    "development_parent_sha": "a22dd810d1265d4a1c5804f3b3ca3f6e6131a198",
+    "main_sha": "bd627d40f7e65321323512b303d2e3f75709af39",
+    "release_sha": "2ec10324fcaa4b60d1e48240b44b77b141b9ba54",
+    "reviewed_new": 150,
+    "reviewed_cumulative": 450,
+    "total": 964,
+    "remaining": 514,
+    "raw_chars": 25300,
+    "access_methods": {
+      "brin": 121,
+      "btree": 25,
+      "hash": 4
+    },
+    "categories": {
+      "float_minmax_multi_ops/brin": 8,
+      "float_minmax_ops/brin": 20,
+      "float_ops/btree": 20,
+      "float_ops/hash": 4,
+      "integer_bloom_ops/brin": 3,
+      "integer_minmax_multi_ops/brin": 45,
+      "integer_minmax_ops/brin": 45,
+      "integer_ops/btree": 5
+    },
+    "validation": {
+      "missing_operator_or_impl": 0,
+      "mismatched_strategy": 0,
+      "duplicates": 0,
+      "invalid_purpose": 0,
+      "sort_family_errors": 0,
+      "raw_catalog_mismatches": 0
+    },
+    "verified_new_defects": 0,
+    "source_fixes": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "pg_amop ordinal 451/964, then pg_amproc ordinal 1/710; changed-only provider drift and #96 hosted Auth/JWT/API"
   }
 }
