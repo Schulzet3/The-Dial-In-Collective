@@ -8,6 +8,27 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-prefill-measured-history-integrity",
+      "issue": 455,
+      "title": "Exclude invalid imported dose and out-of-current-range grind from Log Shot prefill",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "R082 source repro: prefill previously reused the latest same-basket dose even when imported nonfinite/nonpositive/outside allowed dose bounds, and reused current-calibration grind even when recorded outside grinder espresso range; originals preserved. Synthetic counterexamples only.",
+        "Only eligible finite measured dose within existing CONFIG.bounds.doseG and grind inside active espresso calibration bounds prefill next shot; valid older measurements/endpoints remain, no history rewrite, rating/style/feed or Locked-policy change.",
+        "Six focused isolated real-module synthetic test groups at tests/issue455-prefill-measurement-integrity.test.mjs; tests/CI unexecuted when authored. Original frozen603 not counted."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Await exact PR-head and merged-source CI, nonforce integration and docs reconciliation; not READY."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Development only, no release permission. Preserve all five ratings, manual record, notes, latest valid input, style/feed/calibration and offline source. R455-082 SAFE deterministic log-input bug correction."
+    },
+    {
       "id": "DIC-Q-455-cross-style-measured-ratio-integrity",
       "issue": 455,
       "title": "Exclude malformed archived physical measurements from weak cross-style ratio starting prior",
