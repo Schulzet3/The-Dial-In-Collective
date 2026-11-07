@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "receipt_type": "append_only_proposed_code_generation_correction",
+  "date_utc": "2026-11-06",
+  "original_frozen_pinned_line_evidence_unchanged": true,
+  "prior_receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F607-P086-20261106-N20.json",
+  "prior_commit": "4086bc06f1562e1b3ee5823e0d5dd9c4b72d41ff",
+  "prior_proposed_blob": "4e535f09dd09d51752394d8177c5b374cb78515d",
+  "incorrect_prior_state": "Initial PR proposal accidentally used JavaScript replacement-string expansion for the literal $' substring in SQL quote scanner; malformed generated source, no production or merge. Caught by PR diff pre-merge inspection before CI certification.",
+  "corrected_proposed_blob": "1039ff2318fa1bb9d1e05e68152679b8b3489a53",
+  "source_original_blob": "d7642437e87378438009f3ad7241dac78f7905cf",
+  "validation": "Exact corrected Git blob equals independently Node22 syntax-checked local code artifact Git hash; full original text source deterministic 88 physical lines; smoke 16 SQL lexical scenarios pass on that local artifact.",
+  "original_source_line_count_credit": 0,
+  "tests": "PR-head and merged-source CI to be verified independently; earlier queued status not PASS",
+  "no_deploy": true
+}
