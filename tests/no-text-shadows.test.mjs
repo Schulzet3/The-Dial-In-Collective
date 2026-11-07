@@ -4,7 +4,10 @@ import {readFileSync,readdirSync} from 'node:fs';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const css=['site/styles.css','site/visual.css','site/cloud/import.css','site/admin/styles.css'];
 test('app-wide text shadows explicitly disabled for all elements in Light and Dark',()=>{
- assert.match(read('site/visual.css'),/\*,\*::before,\*::after\{text-shadow:none!important\}/);
+ const textShadowRule=/\*,\*::before,\*::after\{text-shadow:none!important\}/;
+ const activeCss=css=>css.replace(/\/\*[\s\S]*?\*\//g,'');
+ assert.doesNotMatch(activeCss('/* *,*::before,*::after{text-shadow:none!important} */'),textShadowRule);
+ assert.match(activeCss(read('site/visual.css')),textShadowRule);
  for(const path of css){const source=read(path);const decls=[...source.matchAll(/text-shadow\s*:\s*([^;}]+)/gi)].map(m=>m[1].trim().toLowerCase());assert.ok(decls.every(v=>v==='none'||v==='none!important'),path+' unexpected text shadow '+decls);}
 });
 test('no decorative surface, toast or modal shadows remain',()=>{
