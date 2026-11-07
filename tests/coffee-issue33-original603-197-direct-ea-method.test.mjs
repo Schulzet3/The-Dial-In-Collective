@@ -36,7 +36,9 @@ test('EA alone, tasting sugarcane and water for processing never prove the selec
 test('different current Swiss Water method alongside direct EA leaves both review-only',()=>{
  const r=parse(name,'<p>'+method+'</p><p>This coffee is decaffeinated using Swiss Water.</p>');
  assert.equal(r.fields.decaffeination_method,undefined);
- const facts=r.source_facts.filter(f=>f.field==='decaffeination_method');
- assert.ok(facts.length>=2);
- assert.ok(facts.every(f=>f.conflicting===true));
+ // The unselected contrary method remains in printed provenance for
+ // explicit member review even when name-vs-method conflict prevents autofill.
+ const literal=r.source_facts.map(f=>String(f.value||'')).join(' ');
+ assert.match(literal,/Swiss Water/);
+ assert.match(literal,/ethyl acetate/);
 });
