@@ -3403,6 +3403,27 @@
       "release_queue": "DIC-Q-455-controlled-sensitivity-history-integrity",
       "source_commit": "c6ddb7b3215b2b597faaec6719dc14a8b71545d4",
       "implementation_pr": 1168
+    },
+    {
+      "id": "R455-PROP-085-SWEETNESS-IMPORTED-MEASURED-COMPARATORS",
+      "finding": "Imported same-coffee shot records with yield outside existing Log Shot 5–200 g or time outside 1–180 s could be incorrectly counted as measured sensory comparators when advising a one-variable sweetness yield experiment, including manufacturing contradictory directions.",
+      "evidence": [
+        "Prior live development ab35017e8f444e3c1deafb59f966efba5818dfe2 (pre-fix engine Git blob 2ac658a6d8bceee18defcec83433200cd100b4f2): comparableSweetnessYields() previously required only finite positive dose/yield and ratio with matching equipment/chronology and four ideal non-sweetness ratings; no upper yield, minimum yield or time boundaries. Existing CONFIG.bounds and model.validateShot define the logged physical constraints, not new scientific priors.",
+        "PR1176 tested head 01ebca763e8ecc414e49e4dfc7ec4e395a591fec; merged 5a19e4cb9894ee8be8ae1b90a7d5a98f1af9f492. Exact engine Git blob 4008188f8934bae9c6964543dff7352d8aedf708; test Git blob c3f5b549e4efdc05ea28b2d4b8165126ab0b9278. Six deterministic real-module synthetic negative/positive/endpoints/type/immutable tests; no real member or experimental coffee outcomes.",
+        "Exact tested PR-head Node22/lint/build 42352438647 2846 PASS/0 FAIL/6 intentional SKIP, compiled mobile/Chromium/offline/a11y/cloud42352438653, SQL42352438690, security42352438652, approval42352438675 SUCCESS; frozen60342352438670 SKIPPED. Exact merged Node22/lint/build42352605317 2846 PASS/0 FAIL/6 SKIP, browser/mobile/offline/a11y/cloud42352605189 and governance42352605176 SUCCESS."
+      ],
+      "evidence_grade": "DIRECT_SOURCE_EXISTING_SHOT_BOUNDS_SYNTHETIC_REAL_MODULE_REGRESSION_EXACT_HEAD_AND_MERGED_CI_NOT_EMPIRICAL_TASTE",
+      "severity": "P2_INVALID_IMPORTED_MEASUREMENT_MISATTRIBUTED_AS_COMPARABLE_SWEETNESS_EVIDENCE",
+      "user_benefit": "Prevents impossible older logged readings from being presented as personally observed sweetness direction or contradictory evidence, preserving valid same-coffee examples.",
+      "current_locked": "Owner-approved 2026-11-04 meaningful step and sweetness exploration rule, all five independent ratings, one controllable suggestion, existing CONFIG.bounds, measured shot privacy/notes and same-coffee setup/chronology matching unchanged.",
+      "current_app": "site/lib/engine.js at exact merged blob 4008188f8934bae9c6964543dff7352d8aedf708 admits prior sweetness comparators only if their doseG/yieldG/timeS lie within existing Log Shot validation bounds; no data mutation or new scientific assumption.",
+      "proposed_change": "SAFE existing bounds for imported comparator eligibility only, no target change, new taste formula, data capture, wider control or new authority.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "VERIFIED_NONFORCE_MERGED_DEVELOPMENT_READY_NOT_DEPLOYED",
+      "test_plan": "Six direct real-module synthetic positive/negative/boundary/immutability tests; exact head & merge Node22/lint/build, browser/mobile/offline/a11y, isolated SQL/security/governance. Frozen603 skipped; real member and cup validation not claimed.",
+      "release_queue": "DIC-Q-455-sweetness-history-measured-bounds",
+      "source_commit": "5a19e4cb9894ee8be8ae1b90a7d5a98f1af9f492",
+      "implementation_pr": 1176
     }
   ]
 }

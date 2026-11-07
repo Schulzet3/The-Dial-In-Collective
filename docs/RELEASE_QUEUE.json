@@ -11,8 +11,8 @@
       "id": "DIC-Q-455-sweetness-history-measured-bounds",
       "issue": 455,
       "title": "Exclude out-of-log-bounds archived shot measures from same-coffee sweetness evidence",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "5a19e4cb9894ee8be8ae1b90a7d5a98f1af9f492",
       "scope_paths": [
         "site/lib/engine.js"
       ],
@@ -20,14 +20,25 @@
         "R085 base 4dd374ff650644bf7fffd83312b037aecf479f7e: current comparableSweetnessYields admitted otherwise matching archived yield 230g or 2g and time 0/181s as measured directional taste evidence despite established Log Shot CONFIG.bounds; synthetic imported-history counterexamples only.",
         "SAFE change: reuse existing doseG 5-40, yieldG 5-200, timeS 1-180 admission bounds for historical sweetness comparators. Preserve all five ratings, stored private shots/notes, one-control meaningful yield thresholds, evidence uncertainty and Locked policies.",
         "Six synthetic direct-module positive, negative, inclusive-endpoint and history-immutability regressions authored at tests/issue455-sweetness-history-measured-bounds.test.mjs. UNEXECUTED at commit authoring.",
-        "Applicable exact PR-head Node22, browser/mobile/offline and governance checks, nonforce merge, exact merged-source CI and separate docs-ready reconciliation PENDING. SQL/Auth/Edge unchanged; original frozen603 NOT RUN."
+        "Applicable exact PR-head Node22, browser/mobile/offline and governance checks, nonforce merge, exact merged-source CI and separate docs-ready reconciliation PENDING. SQL/Auth/Edge unchanged; original frozen603 NOT RUN.",
+        "Exact PR #1176 head 01ebca763e8ecc414e49e4dfc7ec4e395a591fec Node22/lint 42352438647: 2,846 PASS / 0 FAIL / 6 intentional SKIP (2,852 tests); compiled browser/mobile/offline/a11y/cloud 42352438653, isolated SQL/JWT 42352438690, security 42352438652, approval 42352438675 ALL SUCCESS. Original603 42352438670 SKIPPED, not PASS.",
+        "Nonforce squash PR #1176 merged 5a19e4cb9894ee8be8ae1b90a7d5a98f1af9f492; all four same-commit engine/test/TESTING-queue/journal blobs identical to CI-passed PR head (engine 4008188f8934bae9c6964543dff7352d8aedf708, test c3f5b549e4efdc05ea28b2d4b8165126ab0b9278, queue 907f9f96ff2c1a947e54fbdbb1e8daa1857adb9c, journal c29b4227685835f717b92dd45db7b54356704ecc). Exact merged Node22/lint 42352605317 2,846 PASS/0 FAIL/6 SKIP, browser/mobile/offline/a11y/cloud 42352605189 and approval/governance 42352605176 SUCCESS. No real member or physical cup/espresso validation."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Required exact-source checks and merge not yet verified"
+      "ci_runs": [
+        42352438647,
+        42352438653,
+        42352438690,
+        42352438652,
+        42352438675,
+        42352438670,
+        42352605317,
+        42352605189,
+        42352605176
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "R455-085 TESTING development only; no runtime behavior active in production. No science target or user data mutation."
+      "notes": "R455-085 VERIFIED SAFE source-only development READY NOT DEPLOYED; existing bounds exclude imported malformed measured-yield comparisons for sweetness without changing the all-five taste model, original saved history/notes, numeric targets or evidence caveats. No provider/member/Netlify/production change.",
+      "pr": 1176
     },
     {
       "id": "DIC-Q-33-original603-211-current-selected-department",
