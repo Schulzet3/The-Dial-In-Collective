@@ -877,6 +877,21 @@
       "claims_verified_externally": "Author university states particle size significantly changed extracted caffeine and trigonelline per beverage mass; in that specific experimental comparison varying tamping pressure had no detectable effect on these two analyte kinetics; total collected beverage mass affected their ratio. Tested tamp-pressure values and uncertainty intervals not verified from full text.",
       "source_bytes_sha256": null,
       "source_byte_caveat": "Only institution-hosted original abstract/bibliography was read; no direct publisher manuscript/PDF, tables or original bytes retrieved or hashed. Does not prove tamp force never affects extraction, hydraulic flow, taste or style-specific outcomes."
+    },
+    {
+      "id": "MFR-LA-MARZOCCO-STRADA-EP-GUIDEBOOK-REV11",
+      "type": "first_party_espresso_machine_manufacturer_profile_guide",
+      "title": "Strada EP guidebook: an introduction to pressure profiling",
+      "publisher": "La Marzocco",
+      "revision": "rev. 1.1, historical manufacturer guidebook, currently hosted 2023/09",
+      "url": "https://au.lamarzocco.com/wp-content/uploads/2023/09/Strada-EP-Guidebook-1.pdf",
+      "publisher_index_url": "https://au.lamarzocco.com/support/",
+      "access": "DIRECT_ORIGINAL_MANUFACTURER_HOSTED_27_PAGE_PDF_WEB_TEXT_AND_SCREENSHOTS_PAGES_20_22_23_24_25_VERIFIED_20261107",
+      "review_status": "FOCUSED_FIRST_PARTY_PAGES_20_AND_22_TO_25_DIRECT_RENDERED_AND_READ; REMAINING_22_PAGES_NOT_FULLY_SEMANTICALLY_REVIEWED; EXACT_PDF_BYTES_UNAVAILABLE_FOR_SHA256",
+      "evidence_grade": "PRIMARY_EQUIPMENT_MANUFACTURER_OPERATIONAL_DESCRIPTION_AND_HISTORICAL_IN_HOUSE_EXPLORATORY_TASTE_NOT_CONTROLLED_BLINDED_PEER_REVIEWED_SENSORY_OR_UNIVERSAL_ESPRESSO_EXPERIMENT",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Original PDF visible in manufacturer-hosted web viewer with page screenshots. Direct HTTP download into research container failed due unavailable DNS/network, so no byte hash or offline full-file archival assertion. Document may change; ref/page provenance pinned. Does not confer S019 or nine author-report citation certification.",
+      "claims_verified_externally": "Guide page 20 says pressure programmed Strada gear pump must raise flow to maintain pressure when puck resistance falls, and reduce flow when resistance rises after grind/dose changes. Pages 22-25 chart a 12 bar peak Golden Profile and historical shop examples with lower 6 bar peak for higher-solubility/darker and 9 bar for intermediate coffees; author says one profile is not best for every coffee. These are machine-specific practitioner examples without presented trial n, blinded sensory, uncertainty or general brew-pressure optimum."
     }
   ],
   "evidence_checks": [
@@ -2527,6 +2542,37 @@
       "original_source_sha": "7f5e6d214bf11337338647c0842b879630b00d32",
       "figure_s1_status": "REFERENCED_BUT_UNREVIEWED",
       "publisher_pdf_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-101-A",
+      "source": "Original report #05 Git blob be455fe3c2dc8469c67c49bed7e9f539943ea463 lines 11, 41-45, 69-80, 184-194 and original La Marzocco Strada EP rev 1.1 guidebook page 20 (manufacturer first party) visual PDF screenshot",
+      "primary_sources": [
+        "https://au.lamarzocco.com/wp-content/uploads/2023/09/Strada-EP-Guidebook-1.pdf",
+        "https://au.lamarzocco.com/support/"
+      ],
+      "claim": "Manufacturer confirms a pressure-programmed Strada varies motor-driven water flow to hold a requested pressure when puck resistance changes with dose/grind; therefore programmed pressure and resulting flow should not be treated as two independent user actuators on a real shot. Statement applies to this particular control architecture, not universal machine flow sensing or a five-taste outcome model.",
+      "grade": "FIRST_PARTY_MANUFACTURER_PDF_PAGE20_DIRECT_RENDER; EQUIPMENT_CONTROL_FACT_NOT_HUMAN_SENSORY_TRIAL; NO_PDF_BYTE_HASH",
+      "current_app": "Exact live site/lib/constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095 declares Traditional, Turbo, Fast-Flow, Ristretto and Lungo plus Locked style-specific ratios/time; site/lib/engine.js blob f255d217cac4d909aa4ea6fb921e5e6e9da5d23b uses shot dose/yield/time and controllable recipe adjustment; no validated continuous pressure/flow trace sensor or Strada-specific pump law.",
+      "result": "PRESERVE_STYLE_AND_EQUIPMENT_UNCERTAINTY; NO_PRESSURE_FLOW_TASTE_ADJUSTMENT_OR_NEW_FIELD",
+      "owner_approval": false,
+      "original_source_sha": "2f329be7be64d89046a0da33c361f9ac0a711c11",
+      "original_report_git_blob_sha": "be455fe3c2dc8469c67c49bed7e9f539943ea463",
+      "publisher_pdf_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-101-B",
+      "source": "Original report #05 Git blob be455fe3c2dc8469c67c49bed7e9f539943ea463 lines 69-80, 92 and 184-194; original manufacturer La Marzocco Strada EP guidebook rev 1.1 pages 22-25 direct screenshots",
+      "primary_sources": [
+        "https://au.lamarzocco.com/wp-content/uploads/2023/09/Strada-EP-Guidebook-1.pdf"
+      ],
+      "claim": "Original manufacturer displays historical 12-bar Golden, exploratory 6-bar peak for more soluble/dark and 9-bar intermediate pressure trajectories and explicitly says one profile is not best for all coffees. Guide is a practice account, not a controlled randomized taste study or evidence that 6/9/12 bar are universally best pressure targets for roasts, Turbo, Fast-Flow or a specific user's tastes. Image curves are illustrative.",
+      "grade": "FIRST_PARTY_PRIMARY_HISTORICAL_MANUFACTURER_GUIDE_PAGES22_25_VISUALLY_INSPECTED; NO_PUBLISHED_TRIAL_DESIGN_SAMPLE_SIZE_UNCERTAINTY_OR_BLINDED_SENSORY; PDF_BYTES_NOT_HASHED",
+      "current_app": "Owner Locked styles and adaptive personal recipe recommendations cannot add new cross-style pressure priors, measured-flow inference or pressure controls solely from this booklet. Existing app stores measured shot history and all five ratings with no pressure profile trace.",
+      "result": "EVIDENCE_SCOPE_RECORDED_RESEARCH_ONLY; NO_PRESSURE_NUMERIC_POLICY_CHANGE_OR_CROSS_STYLE_TRANSFER",
+      "owner_approval": false,
+      "original_source_sha": "2f329be7be64d89046a0da33c361f9ac0a711c11",
+      "original_report_git_blob_sha": "be455fe3c2dc8469c67c49bed7e9f539943ea463",
+      "publisher_pdf_sha256": null
     }
   ],
   "policy_decisions_pending": [],
@@ -2554,26 +2600,28 @@
     "R455-073: isExtreme historic truthy success false outlier-review eligibility fixed with five synthetic real-module regressions; code PR1071 nonforce merged 1b9168f31eed7a1a2d6aa3f748b81cd663f49dde; exact PR-head and merged source applicable CI passed. READY, NOT DEPLOYED. Retain research 58/123, no #267 literal line credit, original S019 still inaccessible; next Community selector coordinated with #96.",
     "R455-094: local Make Current physically invalid archived favorite eligibility corrected, code PR1241 nonforce merged a622e9027b640fd7049c3a6b5b5cabd2bc68f150, exact PR-head and merged CI PASS 2941/0/6 with original603 SKIPPED; docs-only READY reconciliation in progress. Note hosted Cloud server MAKE_CURRENT uses existing public.shots SQL CHECK guard, not affected by local code change; no policy or original S019 certification.",
     "R455-099: newly independently source-checked Kuhn 2017 TUM first-party peer-reviewed abstract against preserved original report #08 and already-reviewed Vaca Guerra 2023 dry-bed compression abstract: analyte kinetics vs porosity/permeability are different endpoints; no universal tamp force, recipe adjustment or taste gain established. Added one source, two bounded checks and one research-only proposal. No runtime/test/queue/Locked change; original full text and S019 remain pending.",
-    "R455-100: original #09 burr alignment claim checked against Uman 2016 primary NIH full Methods; evidence 100-A/B, research-only proposal 100; 59 sources/130 checks/62 proposals. No quantifiable aligned-vs-misaligned/retention/espresso taste effect or owner-approved new alignment capture. Docs CI/merge pending, S019 inaccessible, #267 audit unchanged."
+    "R455-100: original #09 burr alignment claim checked against Uman 2016 primary NIH full Methods; evidence 100-A/B, research-only proposal 100; 59 sources/130 checks/62 proposals. No quantifiable aligned-vs-misaligned/retention/espresso taste effect or owner-approved new alignment capture. Docs CI/merge pending, S019 inaccessible, #267 audit unchanged.",
+    "R455-101: first-party La Marzocco Strada EP rev1.1 original manufacturer PDF visually verified pp20,22-25, not full PDF byte-hashed; source MFR-LA-MARZOCCO-STRADA-EP-GUIDEBOOK-REV11 with checks R455-EV-CIT-101-A/R455-EV-CIT-101-B and proposal R455-PROP-101-STRADA-PRESSURE-FLOW-EVIDENCE-SCOPE. Pressure-programmed pump varies flow with puck resistance and manufacturer 12/9/6-bar examples are exploratory machine-specific, NOT universal taste/style optima. 60 source identities, 132 evidence checks, 63 proposals; no application, Locked policy or release change. Docs-only exact governance and nonforce merge pending. S019 remains inaccessible, #267 gets no line-by-line credit."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-100",
-    "base_development_sha": "7f5e6d214bf11337338647c0842b879630b00d32",
+    "id": "R455-101",
+    "base_development_sha": "2f329be7be64d89046a0da33c361f9ac0a711c11",
     "merged_code_sha": null,
     "verified_integrated_source_sha": null,
     "source_ids": [
-      "ORG-09",
-      "LIT-2016-UMAN-BEAN-TEMP-PSD",
-      "site/lib/engine.js"
+      "ORG-05",
+      "MFR-LA-MARZOCCO-STRADA-EP-GUIDEBOOK-REV11",
+      "site/lib/engine.js",
+      "site/lib/constants.js"
     ],
     "claim_ids": [
-      "R455-EV-CIT-100-A",
-      "R455-EV-CIT-100-B"
+      "R455-EV-CIT-101-A",
+      "R455-EV-CIT-101-B"
     ],
-    "number_of_curated_sources": 59,
-    "total_evidence_checks": 130,
-    "number_of_proposals": 62,
-    "review_type": "DIRECT_FIRST_PARTY_FULL_PRIMARY_METHODS_ALIGNMENT_SCOPE_RESEARCH_ONLY",
+    "number_of_curated_sources": 60,
+    "total_evidence_checks": 132,
+    "number_of_proposals": 63,
+    "review_type": "DIRECT_FIRST_PARTY_MANUFACTURER_GUIDE_PAGES20_22_25_PRESSURE_FLOW_EQUIPMENT_SCOPE_RESEARCH_ONLY",
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
     "code_or_policy_changed": false,
@@ -2586,7 +2634,7 @@
     },
     "original603": "NOT_RUN_NOT_PASS",
     "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "Open PR and exact docs governance; nonforce merge with readback; then next independent source/claim or proven safe UX gap."
+    "next_action": "Open docs-only PR and verify exact governance; nonforce merge readback; next separate primary claim or reproduced safe UX gap."
   },
   "policy_decisions_resolved": [
     {
@@ -3890,6 +3938,25 @@
       "future_owner_approval_boundary": "YES_IF_ACTUAL_NEW_ALIGNMENT_INPUT_OR_AUTO_RECIPROCAL_CORRECTION_PROPOSED; NONE_NEEDED_NOW",
       "implementation": "EVIDENCE_LEDGER_ONLY_NO_RUNTIME_OR_RELEASE_READY",
       "test_plan": "Direct original report #09 vs primary full NIH PMC Methods and existing engine. Figure S1 underlying supplement remains unreviewed. GitHub docs governance/continuity should pass; Node/browser/mobile/offline/SQL/Auth not invoked for docs-only scoped record, no empirical cup effect.",
+      "release_queue": "NOT_APPLICABLE_RESEARCH_ONLY",
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-101-STRADA-PRESSURE-FLOW-EVIDENCE-SCOPE",
+      "finding": "Original #05's La Marzocco pressure/flow explanation and historical 12/9/6 bar curves are independently traceable to a genuine manufacturer-hosted 27-page Rev 1.1 PDF, but cannot be elevated to universal roast/style/sensory pressure optimum or independent flow-control recommendations.",
+      "evidence": [
+        "R455-EV-CIT-101-A",
+        "R455-EV-CIT-101-B"
+      ],
+      "severity": "P3_PROVENANCE_PROTECT_AGAINST_UNAUTHORIZED_NUMERIC_PRESSURE_POLICY",
+      "user_benefit": "Keep Log Shot fast and recommendations honest, tailored to actually available controls and observed comparable shots, without suggesting unsupported pressure trajectories or additional mandatory inputs.",
+      "current_locked": "Preserve five taste ratings, original private shot/notes, five selectable separate styles including Turbo vs Fast-Flow, one truly controllable next adjustment, per-recipe timing and grinder/temperature equipment limits; no new speculative targets or data capture without owner decision.",
+      "current_app": "development 2f329be7be64d89046a0da33c361f9ac0a711c11 constants blob 72221331ce4dffabe416eebec1ae2fceced3a095 and engine blob f255d217cac4d909aa4ea6fb921e5e6e9da5d23b; app contains no supported continuous pump/pressure/flow curve capture from a Strada.",
+      "proposed_change": "RESEARCH-ONLY. Keep current engine and UI unchanged. Do not equate suggested pressure profile with measured flow, add 6/9/12 bar as general targets, infer machine capability or automate style switching. If a future independently proven equipment-specific pressure field or numerical control is desired, present exact alternatives and privacy/UX costs for separate owner approval.",
+      "approval_required_for_behavior_change": false,
+      "future_owner_approval_boundary": "YES_IF_NEW_PRESSURE_CONTROL_OR_DATA_CAPTURE_OR_NUMERIC_STYLE_PRIORS_ARE_PROPOSED; NONE_REQUIRED_NOW",
+      "implementation": "SOURCE_CLAIM_LEDGER_AND_SCOPED_JOURNAL_ONLY; NO_APP_TEST_SQL_OR_RELEASE_READY_ITEM",
+      "test_plan": "Direct original #05 Git text and manufacturer-hosted original PDF page screenshots checked against current Locked spec/constants/engine. Documentation-only PR requires exact-source governance; Node22/browser/mobile/offline/SQL/Auth not claimed run. No measured user cup improvement.",
       "release_queue": "NOT_APPLICABLE_RESEARCH_ONLY",
       "production_deployed": false
     }
