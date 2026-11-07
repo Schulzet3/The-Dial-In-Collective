@@ -150,7 +150,7 @@ function selectedCurrentContinuingCultivator(name,line){
  const named=name.match(/(?:^|[\s,;|:–—-])([\p{Lu}][\p{L}\p{M}’'-]{2,30})\s+([\p{Lu}][\p{L}\p{M}’'-]{2,40})$/u);
  if(!named)return '';
  const first=named[1];
- if(/\b(?:other|different|formerly|historically|previously|prior\s+(?:year|lot|harvest)|last\s+(?:year|season)|no\s+longer|not\s+our|unrelated|former)\b/iu.test(line))return '';
+ if(/\b(?:(?:other|different)\s+(?:coffees?|lots?|harvests?|producers?|farmers?|products?|offerings?|growers?|farms?|crops?)|formerly|historically|previously|prior\s+(?:year|lot|harvest)|last\s+(?:year|season)|no\s+longer|not\s+our|unrelated|former)\b/iu.test(line))return '';
  const credited=new RegExp("\\b(?:we\\s+)?(?:first\\s+)?(?:purchased|sourced|bought)\\s+"+first+"['’]s\\s+coffee\\b",'iu').test(line);
  const continued=/\b(?:we['’]ve\s+continued\s+to\s+do\s+so\s+every\s+year\s+since|we\s+(?:still|continue\s+to)\s+(?:buy|purchase|source)\b)/iu.test(line);
  const cultivated=new RegExp("\\b"+first+"\\s+(?:cultivates|grows|farms)\\b",'iu').test(line);
