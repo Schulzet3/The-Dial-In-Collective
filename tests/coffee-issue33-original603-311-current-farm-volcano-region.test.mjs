@@ -27,7 +27,7 @@ test('Add Coffee parser and Source Review preserve chosen identity and geographi
  assert.equal(r.fields.origin,'Atitlán, Guatemala',JSON.stringify(r.fields));
  assert.equal(r.fields.producer,producer);
  assert.equal(r.fields.process,process);
- assert.ok(!r.conflicts.includes('origin'));
+ assert.ok(!(r.conflicts||[]).includes('origin'));
  assert.match(coffeeUrlPreviewMarkup(r),/Atitlán, Guatemala/);
  assert.ok(coffeeSourceReviewSnapshot({...r,source_url:url}));
  assert.ok(r.source_facts.some(f=>f.field==='origin'&&/Finca San Jerónimo Miramar/.test(f.value)));
