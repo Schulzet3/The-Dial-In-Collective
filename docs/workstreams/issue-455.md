@@ -1,5 +1,16 @@
 # Issue #455 — Espresso research → Log Shot → Rate → Recommendations
 
+## November 7, 2026 UTC — R455-086 ACTIVE family measured-recipe historical bounds [skip netlify]
+
+**Pinned actual source:** development `087f548be7452550cbfcf5e0a6872ee4534ab66f` (tree `62f9a54dcdf5a9c714f8d4af08907dcf79831d6d`), main `bd627d40f7e65321323512b303d2e3f75709af39`, production `2ec10324fcaa4b60d1e48240b44b77b141b9ba54`; engine Git blob `4008188f8934bae9c6964543dff7352d8aedf708`. Recovered governing AGENTS/context/PREFLIGHT/Master/Decision/approval/status/queue/source register, nine originals index, live #455/#335/#267/#33/#96 and 7 disjoint #267 open PRs. Google Drive Espresso/S019/slow-feed searches did not reveal original S019; not reviewed. Temporary owner-approved public repository exception #630 unchanged; no visibility action.
+
+**Source-reproduced gap:** `measuredRecipeShots()`, which gates `familyStats()`, `familiesFor()` and `recommendation()`, accepted imported five-green records with positive but impossible dose/yield/time outside existing `CONFIG.bounds` (e.g. 18 g/230 g/181 s) as measured, personally established recipe family evidence. Negative fixture before change would have 2 counted records and a skewed family ratio; corrected test expects only valid 18/36/16. This is deterministic synthetic source behavior, NOT an actual member incident or empirical espresso outcome.
+
+**Same-commit SAFE patch and seven regression groups:** `site/lib/engine.js` now applies only existing Log Shot dose 5–40 g, yield 5–200 g, time 1–180 s to historical recipe-family eligibility, without deleting/changing original saved readings, five tastes, hidden/retired family, style/feed/calibration, range or numeric policy. `tests/issue455-family-measurement-bounds.test.mjs` covers invalid types/physical bounds, inclusive endpoints, true five-green, competing separate families, selected recommendation, immutability; queue `DIC-Q-455-family-recipe-history-bounds` added TESTING. No approval needed for existing-constraint eligibility bugfix. Relevant original causal research files are separate unverified citation narratives; this change follows already approved app input bounds, NOT a claim that espresso science proved these numbers.
+
+**CI status at authoring:** NO TEST EXECUTED. Follow source-bound GitHub Node22/lint/build, browser/mobile/offline/a11y, SQL/privacy/security and governance, then safe nonforce merge, exact merge receipt and docs-only proposal/status/queue reconciliation. Frozen603 is a different #33 task; #267 V2 literal line review not credited. Issue #455 OPEN, no deploy/Netlify/main/release/SQL/Auth/Edge/member/provider writes, force-Git or purchase.
+
+
 ## November 7, 2026 UTC — R455-084 FINAL source-bound READY documentation reconciliation [skip netlify]
 
 **Recovery and authority:** originally audited development source `c05c8bb1359d53422414ee5c2d76b019d1fd02d6`; current docs parent `2f4b7617069d05e49837b5a0c302ceb6c1367526` after non-force code merge `c6ddb7b3215b2b597faaec6719dc14a8b71545d4`. Main `bd627d40f7e65321323512b303d2e3f75709af39` and release `2ec10324fcaa4b60d1e48240b44b77b141b9ba54` untouched. Owner #630 PUBLIC exception unchanged. All five tastes, stored history, style/feed, approved input and recommendations preserved.

@@ -35,9 +35,12 @@ export function familyShots(s,id) {return s.shots.filter(x=>!x.hidden&&x.dialedI
 // Five green ratings do not validate malformed imported physical measurements.
 // Preserve all originals in History; only measured rows inform recipe evidence.
 function measuredRecipeShots(shots) {
- return shots.filter(sh=>finite(sh.doseG)&&sh.doseG>0&&
-  finite(sh.yieldG)&&sh.yieldG>0&&finite(sh.yieldG/sh.doseG)&&
-  finite(sh.timeS)&&sh.timeS>0);
+ // Imported five-green ratings do not make out-of-entry-bounds readings
+ // admissible measured recipes. Keep the original rows in private History.
+ return shots.filter(sh=>['doseG','yieldG','timeS'].every(field=>{
+  const [low,high]=CONFIG.bounds[field];
+  return finite(sh[field])&&sh[field]>=low&&sh[field]<=high;
+ })&&finite(sh.yieldG/sh.doseG));
 }
 // Existing shot-entry temperature bounds also govern imported historical
 // evidence. Never rewrite older measurements or infer a temperature target.
