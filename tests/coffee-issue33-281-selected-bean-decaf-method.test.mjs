@@ -15,7 +15,7 @@ test('exact selected decaf bean and matching same-paragraph pronoun restore docu
  assert.equal(r.fields.roast_level,'Dark');
  assert.equal(r.fields.decaffeination_method,'Water Process',JSON.stringify(r));
  assert.equal(r.fields.process,undefined);
- assert.ok((r.source_facts||[]).some(f=>f.field==='decaffeination_method'&&/It is decaffeinated using the Swiss Water Process/i.test(f.value)));
+ assert.ok((r.source_facts||[]).some(f=>f.field==='decaffeination_method'&&/It is decaffeinated using the Swiss Water Process/i.test(f.value)),JSON.stringify((r.source_facts||[]).filter(f=>/decaf|swiss|water/i.test((f.field||'')+' '+(f.value||''))).slice(0,18)));
  assert.match(coffeeUrlPreviewMarkup(r),/Water Process/);
  assert.ok(coffeeSourceReviewSnapshot({...r,source_url:url}));
 });
@@ -43,9 +43,9 @@ test('absent, changed, generic and competing selected H1 never inherit method',(
   const r=parse(name,claim);assert.equal(r.fields.decaffeination_method,undefined,name);
  }
  const none=extractPublicCoffeeFacts(page('Easy Rider SWP Decaf',claim).replace(/<h1>[^<]+<\/h1>/,''),{source_url:url});
- assert.equal(none.fields.decaffeination_method,undefined);
+ assert.equal(none.fields?.decaffeination_method,undefined);
  const extra=extractPublicCoffeeFacts(page('Easy Rider SWP Decaf',claim,'<main><h1>Different Decaf</h1><p>'+claim+'</p></main>'),{source_url:url});
- assert.notEqual(extra.fields.decaffeination_method,'Water Process');
+ assert.notEqual(extra.fields?.decaffeination_method,'Water Process');
 });
 test('outside current product, SEO and educational contexts do not confer decaf method',()=>{
  const blank='<p>Our carefully sourced decaf is a joy.</p>';
@@ -53,7 +53,9 @@ test('outside current product, SEO and educational contexts do not confer decaf 
  assert.equal(parse('Easy Rider SWP Decaf',blank,extra).fields.decaffeination_method,undefined);
  const seo=extractPublicCoffeeFacts(page('Easy Rider SWP Decaf',blank).replace('</head>','<meta name="description" content="'+claim+'"></head>'),{source_url:url});
  assert.equal(seo.fields.decaffeination_method,undefined);
- assert.equal(parse('Easy Rider SWP Decaf',blank+'<h2>What is decaffeination?</h2><p>'+claim+'</p>').fields.decaffeination_method,undefined);
+ const education=page('Easy Rider SWP Decaf','Our carefully sourced decaf is a joy.').replace('</main>','<h2>What is decaffeination?</h2><p>'+claim+'</p></main>');
+ const educational=extractPublicCoffeeFacts(education,{source_url:url});
+ assert.equal(educational.fields?.decaffeination_method,undefined);
 });
 test('same-product conflicting selected methods retain review, never guess',()=>{
  const both=claim+' We also use this standout bean. It is decaffeinated using the Sugar Cane Process.';

@@ -14,3 +14,6 @@
 
 
 **Same-PR-head pre-merge safety review correction:** The initial candidate used a single `.match()` for pronoun statements, which could ignore a second conflicting method printed later in the SAME selected paragraph. The focused negative explicitly requires withholding such a contradiction. Replaced with bounded `.matchAll()` and global regex to collect every current selected method, preserving the existing conflict reconciliation. This is a source-code correction, not new owner policy, not a passed test claim; exact new-head CI required.
+
+
+**Observed CI failure on amended PR head `6eaa1296ebe5daa9952e9c21da4de2af06c9eeec`:** exact-source coffee Node job 42389841808 FAIL (3 new tests, unrelated existing tests passed): (a) method source_fact assertion lacks a matching literal (need print actual source facts, not suppress provenance); (b) missing H1 causes `fields` undefined correctly but test crashed; (c) negative education test had invalid nested `<p>`/`<h2>` construction that accidentally treated nested prose as selected rather than an explicit education section. This same-commit test correction adds diagnostic source-fact excerpt, optional-chain for failed parse, and correctly structured education heading; runtime was not weakened. Next CI must pass after any legitimate source provenance correction.
