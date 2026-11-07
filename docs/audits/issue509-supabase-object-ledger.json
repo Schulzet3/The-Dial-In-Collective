@@ -2901,6 +2901,24 @@
       "confirmed_new_defects": 0,
       "provider_writes": false,
       "next": "pg_amop ordinal 301/964"
+    },
+    {
+      "event": "2026-11-07_run62_pg_amproc_ordinals_151_710_direct_full_visible_catalog_tuples",
+      "source_development_parent_sha": "2f6e23606ca339ec0df34a62be70b38ce7f4b693",
+      "provider_at": "2026-11-07 09:49:31.366318+00",
+      "reviewed_new": 560,
+      "cumulative": 710,
+      "total": 710,
+      "raw_catalog_characters": 72282,
+      "receipt_paths": [
+        "docs/audits/issue509-provider-amproc-151-300-20261107-run62.json",
+        "docs/audits/issue509-provider-amproc-301-450-20261107-run62.json",
+        "docs/audits/issue509-provider-amproc-451-600-20261107-run62.json",
+        "docs/audits/issue509-provider-amproc-601-710-20261107-run62.json"
+      ],
+      "confirmed_new_defects": 0,
+      "provider_writes": false,
+      "next": "pg_opclass ordinal 1/179; pg_opfamily 1/148; pg_am 1/7; native and hosted controls unverified"
     }
   ],
   "state": "VISIBLE_PG_CATALOG_3319_3319_AND_PG_SETTINGS_DESCRIPTORS_480_480_COMPLETE; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -7236,5 +7254,62 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "pg_amproc ordinal 151/710; source fingerprint and provider drift, hosted #96 Auth/JWT/API"
+  },
+  "provider_amproc_run62": {
+    "status": "ALL_710_VISIBLE_PG_AMPROC_MAPPING_TUPLES_DIRECTLY_REVIEWED; COMPILED_NATIVE_AND_HOSTED_UNVERIFIED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "provider_at": "2026-11-07 09:49:31.366318+00",
+    "development_parent_sha": "2f6e23606ca339ec0df34a62be70b38ce7f4b693",
+    "main_sha": "bd627d40f7e65321323512b303d2e3f75709af39",
+    "release_sha": "2ec10324fcaa4b60d1e48240b44b77b141b9ba54",
+    "receipt_paths": [
+      "docs/audits/issue509-provider-amproc-151-300-20261107-run62.json",
+      "docs/audits/issue509-provider-amproc-301-450-20261107-run62.json",
+      "docs/audits/issue509-provider-amproc-451-600-20261107-run62.json",
+      "docs/audits/issue509-provider-amproc-601-710-20261107-run62.json"
+    ],
+    "reviewed_new": 560,
+    "reviewed_cumulative": 710,
+    "total": 710,
+    "remaining": 0,
+    "raw_chars": 72282,
+    "access_methods": {
+      "brin": 302,
+      "btree": 105,
+      "hash": 58,
+      "gin": 16,
+      "spgist": 31,
+      "gist": 48
+    },
+    "namespaces": {
+      "pg_catalog": 560
+    },
+    "distinct_families": 116,
+    "first_md5": "3299ab79533cf394a53f0097f8c730de",
+    "last_md5": "b41e09eccdd474b1ffa748524df138d4",
+    "validation": {
+      "mappings": 710,
+      "dangling_procedures_or_families": 0,
+      "duplicate_family_type_slot": 0,
+      "security_definer": 0,
+      "not_parallel_safe": 0,
+      "stable_datetime_timezone_comparators": 5,
+      "volatile": 0,
+      "opclasses": 179,
+      "opfamilies": 148,
+      "access_methods": 7,
+      "observed_at": "2026-11-07 09:47:44.609101+00"
+    },
+    "flags": {
+      "stable": 5,
+      "security_definer": 0,
+      "non_parallel_safe": 0,
+      "uncompiled": 0
+    },
+    "verified_new_defects": 0,
+    "source_fixes": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "pg_opclass ordinal 1/179; pg_opfamily 1/148 and pg_am 1/7, changed-provider drift; hosted #96 Auth/JWT/API"
   }
 }
