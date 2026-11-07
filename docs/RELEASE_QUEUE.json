@@ -7982,8 +7982,8 @@
       "id": "DIC-Q-455-community-physical-ratio-bounds",
       "issue": 455,
       "title": "Exclude out-of-entry-bounds archived dose/yield from local Community ratio summary",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "0ce97c4080d0285a2e9b25c03b0e1dc7b178514e",
       "scope_paths": [
         "site/lib/engine.js"
       ],
@@ -7991,14 +7991,25 @@
         "R455-092 source 7291592712a87a64821913191b5540f5bee88643, engine blob 2fb2b038860b787575a4ad13b75193cd32e0e595: communitySummary accepted finite positive imported dose 4g/41g or yield 4g/201g despite existing logging bounds; could skew contributor ratio/quorum. Synthetic source gap, no demonstrated real member incident.",
         "SAFE: apply existing CONFIG.bounds dose [5,40]g and yield [5,200]g to Community local ratio evidence; no new science, numeric target, timing requirement, user data capture or taste policy.",
         "Seven direct real-module synthetic regression groups added at tests/issue455-community-physical-ratio-bounds.test.mjs. Auth/SQL/provider/real-member writes not performed.",
-        "Node22, relevant browser/offline/mobile/a11y/security/SQL/approval CI, exact PR-head/merged readback UNEXECUTED at authoring; no PASS, READY or DEPLOYED claim."
+        "Node22, relevant browser/offline/mobile/a11y/security/SQL/approval CI, exact PR-head/merged readback UNEXECUTED at authoring; no PASS, READY or DEPLOYED claim.",
+        "Exact code PR #1227 tested source head 06efd055f79b5202f3965ebc2f986711470b9788: Node22/lint/build run42382901130 SUCCESS 2,915 PASS/0 FAIL/6 intentional SKIP; browser/mobile/offline/a11y/cloud run42382901143 SUCCESS; isolated SQL42382901171, security42382901125, approval42382901158 SUCCESS. Frozen60342382901149 SKIPPED, NOT PASS.",
+        "PR #1227 safely nonforce squash merged at 0ce97c4080d0285a2e9b25c03b0e1dc7b178514e. Exact 4 Git blobs match tested head: engine143dc22edccd4c52c3250d251e530ed472495155, new 7-group regression241f0ae340f975c1934dda769b7d40f2418baf56, original TESTING queue6df1e68f780291fa6934891175b5e764721abd64, same-commit journaldb22778984a4aa7300f8edf9709605fead2bb791.",
+        "Exact merged Node22/lint/build run42383105529 SUCCESS 2915 PASS/0 FAIL/6 intentional SKIP, browser/mobile/offline/a11y/cloud run42383105510 SUCCESS, approval/governance42383105499 SUCCESS. No real Community user/member history or physical espresso result tested. Docs-only governance pending at reconciliation authoring."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Applicable exact source-bound PR-head and merged-source CI and docs reconciliation pending"
+      "ci_runs": [
+        42382901130,
+        42382901143,
+        42382901171,
+        42382901125,
+        42382901158,
+        42382901149,
+        42383105529,
+        42383105510,
+        42383105499
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "R455-092 SAFE current entry-bounds eligibility for existing ratio-only Community summary. Original notes/history and all five taste values remain untouched. No production deployment or database/provider operation."
+      "notes": "R455-092 VERIFIED development SAFE READY, NOT DEPLOYED. Existing dose 5–40g/yield 5–200g input bounds applied to archived local Community ratio donor eligibility; no timeS requirement for ratio-only legacy summary. Original notes/history, all five taste ratings and privacy preserved. Exact PR head and merged CI passed; docs governance pending at authoring."
     }
   ],
   "history": [
