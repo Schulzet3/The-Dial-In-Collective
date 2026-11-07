@@ -328,3 +328,23 @@ test('distinct selected Washed green processing remains separate from exact labe
  assert.equal(r.fields.decaffeination_method,'Water Process');
  assert.equal(r.fields.process,'Washed');
 });
+
+test('selected decaf-context source review does not relabel named water treatment as green processing',()=>{
+ const selected=bpPage(bpName,bpSpec+'<h3>Mountain Water Process Decaf</h3>'+
+ '<p><strong>Process:</strong> Mountain Water</p>');
+ assert.equal(selected.fields.decaffeination_method,'Water Process');
+ assert.equal(selected.fields.process,undefined);
+ assert.ok(!selected.source_facts?.some(f=>f.field==='process'&&/mountain water/i.test(f.value)&&
+  /decaf/i.test(f.section||'')),'decaf water cannot masquerade as green process source');
+ assert.ok(selected.source_facts?.some(f=>/mountain water/i.test(f.value)),'original literal remains reviewable');
+});
+test('separate selected washed and natural green processing remain attributed as processing',()=>{
+ for(const process of ['Washed','Natural']){
+  const selected=bpPage(bpName,bpSpec+'<h3>Farm Green Processing</h3>'+
+   '<p><strong>Process:</strong> '+process+'</p>');
+  assert.equal(selected.fields.decaffeination_method,'Water Process');
+  assert.equal(selected.fields.process,process);
+  assert.ok(selected.source_facts?.some(f=>f.field==='process'&&
+   new RegExp(process,'i').test(f.value)));
+ }
+});
