@@ -1,6 +1,6 @@
 // Read tracked bytes and record a redacted, reproducible security inventory.
 // Signatures are deliberately high-confidence; this is not a history or artifact audit.
-import {readFileSync,mkdirSync,writeFileSync} from 'node:fs';
+import {readFileSync,lstatSync,readlinkSync,mkdirSync,writeFileSync} from 'node:fs';
 import {execFileSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
 import {fileURLToPath} from 'node:url';
@@ -29,18 +29,23 @@ export function secretRulesOnLine(line){
  if(typeof line!=='string')return [];
  return rules.filter(([,pattern])=>pattern.test(line)).map(([name])=>name);
 }
-export function inspectTrackedSource({paths,read=readFileSync,git=execFileSync}={}){
+export function inspectTrackedSource({paths,read=readFileSync,stat=lstatSync,readLink=readlinkSync,git=execFileSync}={}){
  const names=paths||String(git('git',['ls-files','-z'],{encoding:'utf8'})).split('\0').filter(Boolean);
  const files=[],candidates=[];
  for(const path of names){
-  const bytes=read(path),text=bytes.toString('utf8'),binary=bytes.includes(0);
+  // Git stores a symbolic link's target path bytes, not the target file's bytes.
+  // Do not follow tracked links into untracked, private, or unavailable files.
+  const symlink=stat(path).isSymbolicLink();
+  const bytes=symlink?readLink(path,{encoding:'buffer'}):read(path);
+  const text=bytes.toString('utf8'),binary=bytes.includes(0);
   const lines=binary?[]:text.split(/\r?\n/);
   if(lines.at(-1)==='')lines.pop();
-  const category=path.startsWith('docs/')?'documentation_or_historical_evidence':
+  const category=symlink?'tracked_symlink_target':
+   path.startsWith('docs/')?'documentation_or_historical_evidence':
    path.startsWith('tests/')||path.startsWith('supabase/tests/')?'test_fixture_or_assertion':
    binary?'binary_asset':'source_or_configuration';
-  files.push({path,sha256:sha256(bytes),bytes:bytes.length,lines:lines.length,binary,category,
-   coverage:binary?'byte_inventory_only':'every_text_line_pattern_screened_not_manual_certification'});
+  files.push({path,sha256:sha256(bytes),bytes:bytes.length,lines:lines.length,binary,symlink,category,
+   coverage:symlink?'tracked_link_target_bytes_only_not_dereferenced':binary?'byte_inventory_only':'every_text_line_pattern_screened_not_manual_certification'});
   if(sensitiveTrackedPath(path))candidates.push({path,line:0,rule:'sensitive_tracked_filename'});
   for(let i=0;i<lines.length;i++)for(const rule of secretRulesOnLine(lines[i]))
    candidates.push({path,line:i+1,rule});
