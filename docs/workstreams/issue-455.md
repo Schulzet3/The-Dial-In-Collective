@@ -1,5 +1,16 @@
 # Issue #455 — Espresso research → Log Shot → Rate → Recommendations
 
+## November 7, 2026 UTC — R455-084 FINAL source-bound READY documentation reconciliation [skip netlify]
+
+**Recovery and authority:** originally audited development source `c05c8bb1359d53422414ee5c2d76b019d1fd02d6`; current docs parent `2f4b7617069d05e49837b5a0c302ceb6c1367526` after non-force code merge `c6ddb7b3215b2b597faaec6719dc14a8b71545d4`. Main `bd627d40f7e65321323512b303d2e3f75709af39` and release `2ec10324fcaa4b60d1e48240b44b77b141b9ba54` untouched. Owner #630 PUBLIC exception unchanged. All five tastes, stored history, style/feed, approved input and recommendations preserved.
+
+**Code PR1168:** exact head `0a35f94e6ef47c9a38e30b54dee5e30ab6a964a2` tested Node22/lint/build42348148975 **2,836 PASS, 0 FAIL, six SKIP**, compiled UX/offline/mobile/a11y42348148969, SQL42348148949, security42348148798, approval42348149064 SUCCESS; frozen60342348149008 SKIPPED. Nonforce merge `c6ddb7b3215b2b597faaec6719dc14a8b71545d4`; all four Git blobs equal passing PR head (engine 2ac658a6d8bceee18defcec83433200cd100b4f2, seven-group test fb66a7cac2120e16cdc344000439a207fadc5b09, original TESTING queue 12d8158ffbe749d8ab3f89ca8de53b0de4a9f7a1 and same-commit journal 9c4d6f47edcf687afcf56a228a2728741fa8bfa6). Merged Node22/build42348284392 **2,836/0/6**, compiled browser/mobile/offline/a11y/cloud42348284379 and approval42348284396 SUCCESS.
+
+**Docs-only current commit:** update existing `DIC-Q-455-controlled-sensitivity-history-integrity` TESTING→READY/no blockers, append scoped evidence proposal R455-PROP-084, update CURRENT_STATUS and scoped journal with exact receipts. Docs head and merged governance UNEXECUTED at authoring; no app/test/CI/policy change by this documentation commit. Existing evidence identity inventory 58, bounded checks 123, proposal rows 46; #267 separate strict source audit receives no credit. Standalone S019 remains inaccessible, no fabricated source verification, no real-member/experimental outcome.
+
+**Next:** verify docs-only exact-source CI, nonforce merge, read back merged docs Git blobs/governance, post final Issue #455 checkpoint; then inspect a new disjoint source/UX defect and claim provenance. No deploy, production SQL/Auth/Edge/member/provider, main/release/visibility, purchase or force Git. Issue #455 OPEN.
+
+
 ## November 7, 2026 UTC — R455-084 ACTIVE measured grind-time calibration guard [skip netlify]
 
 **Owner authority:** Issue #455 Option B SAFE bug/test work only; enforce current `CONFIG.bounds` and `validateShot` numeric admission without new tastes, temperature targets, grinder heuristic or Locked policy. **Parent pinned:** development `c05c8bb1359d53422414ee5c2d76b019d1fd02d6` / engine blob `309206e3ee1fd28bf2edc9d06a31d623551e2c19`; main `bd627d40f7e65321323512b303d2e3f75709af39`, release `2ec10324fcaa4b60d1e48240b44b77b141b9ba54` read-only. AGENTS, context/preflight, Master Specification, Decision Ledger, coverage, status, release queue, source register, research originals, issue #455, #335, #267, #33, #96 and seven open disjoint #267 PRs checked. Temporary public repo owner #630 acknowledged unchanged.

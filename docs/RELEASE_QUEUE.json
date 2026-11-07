@@ -11,23 +11,32 @@
       "id": "DIC-Q-455-controlled-sensitivity-history-integrity",
       "issue": 455,
       "title": "Reject invalid archived measurements from same-coffee grind-time response",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "c6ddb7b3215b2b597faaec6719dc14a8b71545d4",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
         "R084 source parent c05c8bb1359d53422414ee5c2d76b019d1fd02d6 engine blob 309206e3ee1fd28bf2edc9d06a31d623551e2c19: historical time-response fitting accepted archival grinder dials outside today's configured espresso range and dose/yield/time/temp outside existing Log Shot bounds. Synthetic deterministic source observation; no member incidence claimed.",
         "SAFE fix: use existing CONFIG.bounds for measured dose/yield/time/temperature; verify current range when available and complete historical snapshot range when present; preserve eligible legacy partial snapshots, all recorded shots/notes, five ratings and Locked rules.",
-        "Seven synthetic real-module negative, positive, inclusive-endpoint and immutability regressions at tests/issue455-controlled-sensitivity-measurements.test.mjs. All tests and CI NOT EXECUTED at authoring."
+        "Seven synthetic real-module negative, positive, inclusive-endpoint and immutability regressions at tests/issue455-controlled-sensitivity-measurements.test.mjs. All tests and CI NOT EXECUTED at authoring.",
+        "Exact PR #1168 head 0a35f94e6ef47c9a38e30b54dee5e30ab6a964a2: Node22/lint/build 42348148975 had 2,836 PASS, 0 FAIL, six intentional SKIP (2,842 total); focused 13/13. Compiled cloud/browser/mobile/offline/a11y 42348148969, isolated SQL/JWT 42348148949, source security 42348148798 and approval governance 42348149064 SUCCESS; frozen original603 42348149008 SKIPPED, not PASS.",
+        "Non-force code PR1168 squash merge c6ddb7b3215b2b597faaec6719dc14a8b71545d4; exact four merged Git blobs equal passing PR head: engine 2ac658a6d8bceee18defcec83433200cd100b4f2, test fb66a7cac2120e16cdc344000439a207fadc5b09, TESTING queue 12d8158ffbe749d8ab3f89ca8de53b0de4a9f7a1, same-commit journal 9c4d6f47edcf687afcf56a228a2728741fa8bfa6. Exact merged Node22/lint/build 42348284392 2,836 PASS/0 FAIL/6 SKIP; browser/mobile/offline/a11y/cloud 42348284379 and governance 42348284396 SUCCESS. No external/live member test or measured cup outcome."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Applicable PR-head tests/CI and merge pending",
-        "Exact merged source CI and docs-only READY reconciliation pending"
+      "ci_runs": [
+        42348148975,
+        42348148969,
+        42348148949,
+        42348148798,
+        42348149064,
+        42348149008,
+        42348284392,
+        42348284379,
+        42348284396
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "R455-084 development-only, NOT READY/DEPLOYED. No actual espresso-cup or member-outcome claim."
+      "notes": "R455-084 VERIFIED development-only READY NOT DEPLOYED; existing bounds prevent invalid archived grinders/shot metrics from fitting same-coffee grind-time sensitivity. Stored private history unchanged; original 603 skipped; no policy change, empirical taste claim or publication authority."
     },
     {
       "id": "DIC-Q-455-prefill-measured-history-integrity",

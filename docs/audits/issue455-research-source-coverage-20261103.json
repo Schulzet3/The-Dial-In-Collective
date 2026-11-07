@@ -2433,20 +2433,20 @@
     "R455-076 VERIFIED development READY, PR1095 nonforce merged ef8fac50572dc3205d940e0b6a6cd7446a65d0c8, merged Node22 42298621453 (2773/0/6), mobile/browser/offline42298621466 and governance42298621551 SUCCESS; 58 source identities/123 checks unchanged; S019 original inaccessible. Continue distinct source/UX gaps; do not deploy."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-082",
-    "base_development_sha": "b1c8360da74d511e897941a4b8f5a4d02f77c5d6",
-    "merged_code_sha": "2c682733aae06fdb0ac2fe818ee0fe3c941898a3",
-    "verified_integrated_source_sha": "2c682733aae06fdb0ac2fe818ee0fe3c941898a3",
+    "id": "R455-084",
+    "base_development_sha": "c05c8bb1359d53422414ee5c2d76b019d1fd02d6",
+    "merged_code_sha": "c6ddb7b3215b2b597faaec6719dc14a8b71545d4",
+    "verified_integrated_source_sha": "c6ddb7b3215b2b597faaec6719dc14a8b71545d4",
     "source_ids": [],
     "claim_ids": [],
     "number_of_curated_sources": 58,
     "total_evidence_checks": 123,
-    "number_of_proposals": 44,
-    "review_type": "DIRECT_CURRENT_LOG_SHOT_ARCHIVAL_PREFILL_MEASUREMENT_ELIGIBILITY_SYNTHETIC_REAL_MODULE_EXACT_PR_AND_MERGED_CI",
+    "number_of_proposals": 46,
+    "review_type": "DIRECT_SAME_COFFEE_GRIND_TIME_ARCHIVED_INPUT_BOUNDS_SYNTHETIC_EXACT_CODE_PR_AND_MERGED_CI",
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
-    "code_or_policy_changed": "SAFE_HISTORICAL_LOG_SHOT_PREFILL_GATE_ONLY_NO_LOCKED_PRODUCT_CHANGE",
-    "next_action": "Finish docs-only exact-source governance; continue next independent Log Shot/Rate/Recommendation source gap and outstanding primary citation verification, standalone S019 original remains inaccessible.",
+    "code_or_policy_changed": "SAFE_EXISTING_BOUNDS_HISTORICAL_MEASUREMENT_ELIGIBILITY_ONLY",
+    "next_action": "After docs-only merged governance, continue a different disjoint Log Shot -> Rate -> Recommendation source gap and unverified research citation/S019 access. Do not deploy.",
     "issue455_r083": {
       "source_sha": "8f767a7e7af17d4358e54a0ef320cdc1f5b11389",
       "source_engine_blob": "309206e3ee1fd28bf2edc9d06a31d623551e2c19",
@@ -2458,6 +2458,18 @@
         42344170432
       ],
       "note": "Source identity 58, bounded claims 123, proposal count 45. No #267 line credit, original S019 inaccessible."
+    },
+    "issue455_r084": {
+      "source_sha": "c6ddb7b3215b2b597faaec6719dc14a8b71545d4",
+      "engine_blob": "2ac658a6d8bceee18defcec83433200cd100b4f2",
+      "proposal": "R455-PROP-084-CONTROLLED-GRIND-TIME-MEASUREMENT-INTEGRITY",
+      "status": "VERIFIED_DEVELOPMENT_READY_NOT_DEPLOYED",
+      "ci_runs": [
+        42348284392,
+        42348284379,
+        42348284396
+      ],
+      "note": "58 curated sources/123 checks/46 proposals. No new scientific certification; S019 unavailable, no #267 line-review credit."
     }
   },
   "policy_decisions_resolved": [
@@ -3370,6 +3382,27 @@
       "release_queue": "DIC-Q-455-archived-temperature-evidence-integrity",
       "source_commit": "8f767a7e7af17d4358e54a0ef320cdc1f5b11389",
       "implementation_pr": 1159
+    },
+    {
+      "id": "R455-PROP-084-CONTROLLED-GRIND-TIME-MEASUREMENT-INTEGRITY",
+      "finding": "Archived same-coffee shot observations could fit a false grind-to-time response when they were outside the existing configured grinder espresso range or existing Log Shot validated physical dose/yield/time/temp bounds. That fitted slope could falsely size the next-step grind as comparable measured evidence.",
+      "evidence": [
+        "Direct original development source 2f4b7617069d05e49837b5a0c302ceb6c1367526 (prechange parent c05c8bb1359d53422414ee5c2d76b019d1fd02d6) site/lib/engine.js original blob 309206e3ee1fd28bf2edc9d06a31d623551e2c19 learnSensitivity() accepted archived 8/8.1/8.2 grind values even with active 0-5 range and large malformed physical measurements. Existing model.validateShot and CONFIG.bounds already define numeric eligibility. Synthetic counterexample, no actual member incidence.",
+        "Code PR1168 head 0a35f94e6ef47c9a38e30b54dee5e30ab6a964a2, engine blob 2ac658a6d8bceee18defcec83433200cd100b4f2 and seven-group synthetic test blob fb66a7cac2120e16cdc344000439a207fadc5b09. History/notes/ratings preserved; valid old partial snapshots and inclusive endpoints remain eligible.",
+        "Exact PR-head Node22/lint/build42348148975 2836 PASS/0 FAIL/6 intentional SKIP; compiled UX/mobile/offline42348148969, isolated SQL42348148949, security42348148798 and governance42348149064 SUCCESS; original60342348149008 SKIPPED. Nonforce code PR1168 merged c6ddb7b3215b2b597faaec6719dc14a8b71545d4 identical app and test blob; merged Node22/build42348284392 2836/0/6, compiled browser/mobile/offline/cloud42348284379, governance42348284396 SUCCESS."
+      ],
+      "evidence_grade": "DIRECT_CURRENT_CODE_EXISTING_VALIDATION_BOUNDS_SYNTHETIC_REAL_MODULE_POSITIVE_NEGATIVE_TESTS_EXACT_PR_AND_MERGED_CI_NOT_EMPIRICAL_MEMBER_OR_CUP",
+      "severity": "P2_SAME_COFFEE_GRIND_TIME_SENSITIVITY_FALSE_PERSONAL_EVIDENCE",
+      "user_benefit": "Stops invalid imported measurements from being framed as a calibrated time response, while keeping valid individual shot history and conservative fallback next-step.",
+      "current_locked": "Existing entered grinder espresso range and CONFIG.bounds, preserve five taste ratings, original measured history and notes, one intentional recommendation control, independent style/feed/calibration, established numeric priors and privacy. No change to targets or new feed offsets.",
+      "current_app": "site/lib/engine.js at merged blob 2ac658a6d8bceee18defcec83433200cd100b4f2 calls learnSensitivity(exact,activeVersion) for fitted same-coffee taste advice and excludes physically invalid historical inputs without modifying stored records.",
+      "proposed_change": "SAFE narrow existing-bounds historical eligibility validation in fitted grind-to-time sensitivity; no data capture, new numeric threshold or research policy.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "VERIFIED_NONFORCE_MERGED_DEVELOPMENT_READY_NOT_DEPLOYED",
+      "test_plan": "Seven synthetic real-module controlled prior/invalid/valid/inclusive/legacy/immutable regressions, exact PR and merged Node22 full+build, compiled browser/mobile/offline/a11y, isolated SQL/JWT/security and governance; frozen603 skipped, no real member or espresso taste comparison.",
+      "release_queue": "DIC-Q-455-controlled-sensitivity-history-integrity",
+      "source_commit": "c6ddb7b3215b2b597faaec6719dc14a8b71545d4",
+      "implementation_pr": 1168
     }
   ]
 }
