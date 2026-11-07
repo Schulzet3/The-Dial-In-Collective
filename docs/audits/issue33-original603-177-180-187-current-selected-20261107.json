@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "kind": "ISSUE33_INDEPENDENT_CURRENT_SELECTED_OFFICIAL_RAW_HTML_AND_ACTUAL_PARSER_REVIEW",
+  "issue": 33,
+  "utc_date": "2026-11-07",
+  "scope": "DEVELOPMENT_ONLY; 3 bounded field adjudications, zero whole-coffee certification",
+  "source": {
+    "reviewed_base": "318db82ff12c80331ab381a7487132f0855ae31f",
+    "selector_pr": 1148,
+    "selector_head": "313a08216f61eee047fc39afb65a79a003f44fcd",
+    "nonforce_merged_sha": "83b77389e465107832b6b3d89cc374952ff9722d",
+    "merged_git_tree": "c1721846e782ea2ae7acda9f81c8a127ba5d8382",
+    "merge_one_parent": true,
+    "merged_source_workflow": 42336620954,
+    "focused_job": 128294874348,
+    "focused_job_conclusion": "success",
+    "approval_run": 42336620955,
+    "approval_conclusion": "success",
+    "github_artifact_id": 13559915878,
+    "artifact_zip_bytes": 201404,
+    "artifact_zip_sha256": "a2eccaba2a625fb00178d08565e0af48c6b366d070053347a61c58a94574e30d",
+    "github_artifact_digest_equal": true,
+    "actual_runner_json_sha256": "baaae88bef6e6f55c02dd6b8ce79fca6aa7a8a4ace6d3986889aaef2561fdde0",
+    "actual_runner_source_sha_equal": true,
+    "raw_selected_official_html_each_independently_rehashed": true
+  },
+  "ci": {
+    "exact_pr_head": "313a08216f61eee047fc39afb65a79a003f44fcd",
+    "approval": 42336440991,
+    "node_lint_build_workflow": 42336440973,
+    "cloud_mobile_browser_workflow": 42336441100,
+    "isolated_sql": 42336440965,
+    "required_check_jobs": [
+      "approval",
+      "validate",
+      "cloud-tests",
+      "mobile-browser-qa",
+      "sql"
+    ],
+    "checked_jobs": "success",
+    "not_applicable_or_skipped_steps": "not counted as executed test passes",
+    "other_public_probe_jobs": "SKIPPED_NOT_PASS",
+    "original_frozen603": "NOT_EXECUTED_NOT_CERTIFIED"
+  },
+  "public_source_result": {
+    "attempted": 3,
+    "fetched": 3,
+    "parsed": 3,
+    "add_coffee_rendered": 3,
+    "source_review_rendered": 3,
+    "whole_coffee_manual_certified": 0
+  },
+  "cases": [
+    {
+      "number": 177,
+      "selected_name": "Nicaragua La Bastilla Coffee Estates",
+      "url": "https://kingspeakcoffee.com/products/nicaragua-finca-idealista",
+      "final_url": "https://kingspeakcoffee.com/products/nicaragua-finca-idealista",
+      "current_selected_h1": [
+        "Nicaragua La Bastilla Coffee Estates"
+      ],
+      "html_bytes": 160282,
+      "html_sha256": "695c6d20714114e4100d1f808d61ca0ccd8d49f93fc8f3bd42fa7b2dfc5006b1",
+      "exact_parser_fields": {
+        "name": "Nicaragua La Bastilla Coffee Estates",
+        "process": "Natural",
+        "variety": "Catuai & Caturra",
+        "roast_level": "Light",
+        "tasting_notes": "Strawberries & Honey",
+        "origin": "Jinotega, Nicaragua",
+        "producer": "La Bastilla farm"
+      },
+      "conflicts": [],
+      "disposition": "Direct selected description and named H1 support extracted fields. La Bastilla is the named farm, not a separately named individual farmer. Historical URL slug finca-idealista cannot replace selected identity. Bounded field verification, not whole-coffee certification."
+    },
+    {
+      "number": 180,
+      "selected_name": "Lū‘au",
+      "url": "https://konacoffee.nyc/products/lu-au",
+      "final_url": "https://konacoffee.nyc/products/lu-au",
+      "current_selected_h1": [
+        "Lū‘au"
+      ],
+      "html_bytes": 285453,
+      "html_sha256": "eeca8975af4de84f1ad4db0bf7056f0fac62e8db0207cfdd415f22d93d736013",
+      "exact_parser_fields": {
+        "name": "Lū‘au",
+        "roast_level": "Medium",
+        "process": "Washed",
+        "variety": "Caturra, Typica, Castillo",
+        "elevation_m": "1300-1650 masl",
+        "tasting_notes": "Stone Fruits, Caramel, Cacao",
+        "origin": null
+      },
+      "conflicts": [],
+      "disposition": "Selected page literally labels Origin: Various. Actual parser correctly preserves this as a typed source fact but withholds a fixed canonical origin. No invented geography for rotating house blend."
+    },
+    {
+      "number": 187,
+      "selected_name": "Bolivia",
+      "url": "https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee",
+      "final_url": "https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee",
+      "current_selected_h1": [
+        "Bolivia"
+      ],
+      "html_bytes": 646740,
+      "html_sha256": "72207be27cb7cdb4c13eb72209222ffd339c71f996ac753e92a87283595e42fc",
+      "exact_parser_fields": {
+        "name": "Bolivia",
+        "origin": "Yungas Mountains, Caranavi Province, Pumiri, Bolivia",
+        "process": "Washed",
+        "elevation_m": "1097–1494 m",
+        "producer": "AIPEP",
+        "tasting_notes": "Nougat, Milk Chocolate, Golden Raisin",
+        "roast_level": null
+      },
+      "conflicts": [
+        "roast_level"
+      ],
+      "source_fact": {
+        "roast_label": "Light Roast",
+        "selected_description": "The light-to-medium roast keeps things bright and open",
+        "observed_taste_line": "Tasting Notes: Nougat | Milk Chocolate | Golden Raisin",
+        "second_selected_taste_text": "Creamy: red berry jam, smooth milk chocolate, and a raisin sweetness that carries through to the end"
+      },
+      "disposition": "REAL SOURCE TENSION, not proven extractor bug. Explicit selected roast label Light versus same selected description light-to-medium roast: parser correctly flags roast_level conflict and withholds canonical roast. Conflicting selected tasting prose remains source-role-qualified, not a whole-coffee signoff; top listed notes chosen. AIPEP association/processing facility not assumed individual farmer. Avoid unrelated bundle cards."
+    }
+  ],
+  "immutable": {
+    "original603_cases": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_git_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "oracle_scorer_captures_modified": false
+  },
+  "disposition": {
+    "new_proven_generic_parser_defect": false,
+    "parser_correction_committed": false,
+    "new_queue_ready": false,
+    "issue33": "OPEN_IN_PROGRESS",
+    "next_action": "Continue disjoint unresolved current exact selected sources. Revisit #187 only on independently established generic erroneous conflict, source/lot change or owner decision. Do not infer roasts."
+  },
+  "security": {
+    "netlify_published": false,
+    "production_sql_edge_auth_provider_member_writes": false,
+    "paid_services": false,
+    "forced_git": false,
+    "real_gotrue_test_claim": false
+  }
+}
