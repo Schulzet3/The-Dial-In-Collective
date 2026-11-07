@@ -1,0 +1,840 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "S2-H12-F423-001-020-P111-231-240",
+  "reviewed_utc_date": "2026-11-07",
+  "reviewer": "AI direct per-line semantic inspection, not independent human review",
+  "tracks": [
+    {
+      "track": "frozen_original",
+      "commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+      "tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+      "file_index_1_based": 423,
+      "path": "scripts/backups/capture-recovery-snapshot.sh",
+      "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+      "original_line_count": 103,
+      "start": 1,
+      "end": 20,
+      "live_blob_sha": "535718d632946293341325adde49849f5c875ba8",
+      "lines": [
+        {
+          "line": 1,
+          "source_text": "#!/bin/sh",
+          "classification": "interpreter_shebang",
+          "behavior": "Choose POSIX sh interpreter",
+          "quality": "Read-only recovery capture structure, correctness depends on caller transaction and restore validation",
+          "risk": "Shebang is interpreter, not comment",
+          "obsolescence": "Historical source blob equals live current source; not proven obsolete",
+          "duplication": "Distinct count/metadata stages, no redundant logic established",
+          "pinned_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 1,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 1,
+            "identical": true
+          },
+          "testability": "PostgreSQL 17 isolated transaction and failed command recovery test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "#28 backups and preservation; no production database write",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 2,
+          "source_text": "# PostgreSQL 17 collector. The caller owns a private output directory and its",
+          "classification": "comment_inspected",
+          "behavior": "Explain PostgreSQL 17/private caller folder",
+          "quality": "Read-only recovery capture structure, correctness depends on caller transaction and restore validation",
+          "risk": "No active defect established; private recovery output is required",
+          "obsolescence": "Historical source blob equals live current source; not proven obsolete",
+          "duplication": "Distinct count/metadata stages, no redundant logic established",
+          "pinned_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 2,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 2,
+            "identical": true
+          },
+          "testability": "PostgreSQL 17 isolated transaction and failed command recovery test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "#28 backups and preservation; no production database write",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 3,
+          "source_text": "# cleanup trap. Source access stays read-only; nothing is uploaded here.",
+          "classification": "comment_inspected",
+          "behavior": "Explain read-only source and no upload",
+          "quality": "Read-only recovery capture structure, correctness depends on caller transaction and restore validation",
+          "risk": "No active defect established; private recovery output is required",
+          "obsolescence": "Historical source blob equals live current source; not proven obsolete",
+          "duplication": "Distinct count/metadata stages, no redundant logic established",
+          "pinned_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 3,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 3,
+            "identical": true
+          },
+          "testability": "PostgreSQL 17 isolated transaction and failed command recovery test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "#28 backups and preservation; no production database write",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 4,
+          "source_text": "set -eu",
+          "classification": "shell_sql_source",
+          "behavior": "Exit on shell error and unset var",
+          "quality": "Read-only recovery capture structure, correctness depends on caller transaction and restore validation",
+          "risk": "No active defect established; private recovery output is required",
+          "obsolescence": "Historical source blob equals live current source; not proven obsolete",
+          "duplication": "Distinct count/metadata stages, no redundant logic established",
+          "pinned_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 4,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 4,
+            "identical": true
+          },
+          "testability": "PostgreSQL 17 isolated transaction and failed command recovery test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "#28 backups and preservation; no production database write",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 5,
+          "source_text": "umask 077",
+          "classification": "shell_sql_source",
+          "behavior": "Restrict new files with umask 077",
+          "quality": "Read-only recovery capture structure, correctness depends on caller transaction and restore validation",
+          "risk": "No active defect established; private recovery output is required",
+          "obsolescence": "Historical source blob equals live current source; not proven obsolete",
+          "duplication": "Distinct count/metadata stages, no redundant logic established",
+          "pinned_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 5,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 5,
+            "identical": true
+          },
+          "testability": "PostgreSQL 17 isolated transaction and failed command recovery test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "#28 backups and preservation; no production database write",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 6,
+          "source_text": ": \"${SUPABASE_DB_URL:?Missing source connection}\"",
+          "classification": "shell_sql_source",
+          "behavior": "Require SUPABASE_DB_URL without logging it",
+          "quality": "Read-only recovery capture structure, correctness depends on caller transaction and restore validation",
+          "risk": "Secret connection string must never enter logs",
+          "obsolescence": "Historical source blob equals live current source; not proven obsolete",
+          "duplication": "Distinct count/metadata stages, no redundant logic established",
+          "pinned_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 6,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 6,
+            "identical": true
+          },
+          "testability": "PostgreSQL 17 isolated transaction and failed command recovery test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "#28 backups and preservation; no production database write",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 7,
+          "source_text": "cd \"${1:?Missing private snapshot output directory}\"",
+          "classification": "shell_sql_source",
+          "behavior": "Require private output path and cd into it",
+          "quality": "Read-only recovery capture structure, correctness depends on caller transaction and restore validation",
+          "risk": "Private path ownership is caller responsibility",
+          "obsolescence": "Historical source blob equals live current source; not proven obsolete",
+          "duplication": "Distinct count/metadata stages, no redundant logic established",
+          "pinned_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 7,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 7,
+            "identical": true
+          },
+          "testability": "PostgreSQL 17 isolated transaction and failed command recovery test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "#28 backups and preservation; no production database write",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 8,
+          "source_text": "",
+          "classification": "blank_inspected",
+          "behavior": "Empty separator inspected",
+          "quality": "Read-only recovery capture structure, correctness depends on caller transaction and restore validation",
+          "risk": "No active defect established; private recovery output is required",
+          "obsolescence": "Historical source blob equals live current source; not proven obsolete",
+          "duplication": "Distinct count/metadata stages, no redundant logic established",
+          "pinned_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 8,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 8,
+            "identical": true
+          },
+          "testability": "PostgreSQL 17 isolated transaction and failed command recovery test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "#28 backups and preservation; no production database write",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 9,
+          "source_text": "cat > core-counts.sql <<'SQL'",
+          "classification": "shell_sql_source",
+          "behavior": "Open literal core-counts.sql heredoc",
+          "quality": "Read-only recovery capture structure, correctness depends on caller transaction and restore validation",
+          "risk": "Quoted heredoc prevents shell expansion",
+          "obsolescence": "Historical source blob equals live current source; not proven obsolete",
+          "duplication": "Distinct count/metadata stages, no redundant logic established",
+          "pinned_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 9,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 9,
+            "identical": true
+          },
+          "testability": "PostgreSQL 17 isolated transaction and failed command recovery test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "#28 backups and preservation; no production database write",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 10,
+          "source_text": "select (select count(*) from auth.users),",
+          "classification": "shell_sql_source",
+          "behavior": "Select auth.users row count",
+          "quality": "Read-only recovery capture structure, correctness depends on caller transaction and restore validation",
+          "risk": "Counting auth users may reveal sensitive cardinalities; private outputs only",
+          "obsolescence": "Historical source blob equals live current source; not proven obsolete",
+          "duplication": "Distinct count/metadata stages, no redundant logic established",
+          "pinned_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 10,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 10,
+            "identical": true
+          },
+          "testability": "PostgreSQL 17 isolated transaction and failed command recovery test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "#28 backups and preservation; no production database write",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 11,
+          "source_text": "       (select count(*) from auth.identities),",
+          "classification": "shell_sql_source",
+          "behavior": "Select auth.identities row count",
+          "quality": "Read-only recovery capture structure, correctness depends on caller transaction and restore validation",
+          "risk": "Auth identities count sensitive; private output only",
+          "obsolescence": "Historical source blob equals live current source; not proven obsolete",
+          "duplication": "Distinct count/metadata stages, no redundant logic established",
+          "pinned_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 11,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 11,
+            "identical": true
+          },
+          "testability": "PostgreSQL 17 isolated transaction and failed command recovery test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "#28 backups and preservation; no production database write",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 12,
+          "source_text": "       (select count(*) from private.beta_members),",
+          "classification": "shell_sql_source",
+          "behavior": "Select private.beta_members row count",
+          "quality": "Read-only recovery capture structure, correctness depends on caller transaction and restore validation",
+          "risk": "Private beta count needs backup trust role",
+          "obsolescence": "Historical source blob equals live current source; not proven obsolete",
+          "duplication": "Distinct count/metadata stages, no redundant logic established",
+          "pinned_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 12,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 12,
+            "identical": true
+          },
+          "testability": "PostgreSQL 17 isolated transaction and failed command recovery test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "#28 backups and preservation; no production database write",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 13,
+          "source_text": "       (select count(*) from private.import_control),",
+          "classification": "shell_sql_source",
+          "behavior": "Select private.import_control row count",
+          "quality": "Read-only recovery capture structure, correctness depends on caller transaction and restore validation",
+          "risk": "No active defect established; private recovery output is required",
+          "obsolescence": "Historical source blob equals live current source; not proven obsolete",
+          "duplication": "Distinct count/metadata stages, no redundant logic established",
+          "pinned_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 13,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 13,
+            "identical": true
+          },
+          "testability": "PostgreSQL 17 isolated transaction and failed command recovery test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "#28 backups and preservation; no production database write",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 14,
+          "source_text": "       (select count(*) from public.account_preferences),",
+          "classification": "shell_sql_source",
+          "behavior": "Select public.account_preferences count",
+          "quality": "Read-only recovery capture structure, correctness depends on caller transaction and restore validation",
+          "risk": "No active defect established; private recovery output is required",
+          "obsolescence": "Historical source blob equals live current source; not proven obsolete",
+          "duplication": "Distinct count/metadata stages, no redundant logic established",
+          "pinned_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 14,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 14,
+            "identical": true
+          },
+          "testability": "PostgreSQL 17 isolated transaction and failed command recovery test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "#28 backups and preservation; no production database write",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 15,
+          "source_text": "       (select count(*) from public.coffees),",
+          "classification": "shell_sql_source",
+          "behavior": "Select public.coffees row count",
+          "quality": "Read-only recovery capture structure, correctness depends on caller transaction and restore validation",
+          "risk": "No active defect established; private recovery output is required",
+          "obsolescence": "Historical source blob equals live current source; not proven obsolete",
+          "duplication": "Distinct count/metadata stages, no redundant logic established",
+          "pinned_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 15,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 15,
+            "identical": true
+          },
+          "testability": "PostgreSQL 17 isolated transaction and failed command recovery test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "#28 backups and preservation; no production database write",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 16,
+          "source_text": "       (select count(*) from public.setups),",
+          "classification": "shell_sql_source",
+          "behavior": "Select public.setups row count",
+          "quality": "Read-only recovery capture structure, correctness depends on caller transaction and restore validation",
+          "risk": "No active defect established; private recovery output is required",
+          "obsolescence": "Historical source blob equals live current source; not proven obsolete",
+          "duplication": "Distinct count/metadata stages, no redundant logic established",
+          "pinned_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 16,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 16,
+            "identical": true
+          },
+          "testability": "PostgreSQL 17 isolated transaction and failed command recovery test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "#28 backups and preservation; no production database write",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 17,
+          "source_text": "       (select count(*) from public.library_entries),",
+          "classification": "shell_sql_source",
+          "behavior": "Select public.library_entries row count",
+          "quality": "Read-only recovery capture structure, correctness depends on caller transaction and restore validation",
+          "risk": "No active defect established; private recovery output is required",
+          "obsolescence": "Historical source blob equals live current source; not proven obsolete",
+          "duplication": "Distinct count/metadata stages, no redundant logic established",
+          "pinned_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 17,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 17,
+            "identical": true
+          },
+          "testability": "PostgreSQL 17 isolated transaction and failed command recovery test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "#28 backups and preservation; no production database write",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 18,
+          "source_text": "       (select count(*) from public.shots);",
+          "classification": "shell_sql_source",
+          "behavior": "Select public.shots count; terminate query",
+          "quality": "Read-only recovery capture structure, correctness depends on caller transaction and restore validation",
+          "risk": "No active defect established; private recovery output is required",
+          "obsolescence": "Historical source blob equals live current source; not proven obsolete",
+          "duplication": "Distinct count/metadata stages, no redundant logic established",
+          "pinned_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 18,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 18,
+            "identical": true
+          },
+          "testability": "PostgreSQL 17 isolated transaction and failed command recovery test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "#28 backups and preservation; no production database write",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 19,
+          "source_text": "SQL",
+          "classification": "heredoc_delimiter",
+          "behavior": "Close literal SQL heredoc",
+          "quality": "Read-only recovery capture structure, correctness depends on caller transaction and restore validation",
+          "risk": "Heredoc delimiter closes SQL, not executed as query",
+          "obsolescence": "Historical source blob equals live current source; not proven obsolete",
+          "duplication": "Distinct count/metadata stages, no redundant logic established",
+          "pinned_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 19,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 19,
+            "identical": true
+          },
+          "testability": "PostgreSQL 17 isolated transaction and failed command recovery test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "#28 backups and preservation; no production database write",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 20,
+          "source_text": "cat > table-list-query.sql <<'SQL'",
+          "classification": "shell_sql_source",
+          "behavior": "Open literal table-list-query.sql heredoc",
+          "quality": "Read-only recovery capture structure, correctness depends on caller transaction and restore validation",
+          "risk": "No active defect established; private recovery output is required",
+          "obsolescence": "Historical source blob equals live current source; not proven obsolete",
+          "duplication": "Distinct count/metadata stages, no redundant logic established",
+          "pinned_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 20,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "scripts/backups/capture-recovery-snapshot.sh",
+            "blob_sha": "535718d632946293341325adde49849f5c875ba8",
+            "line": 20,
+            "identical": true
+          },
+          "testability": "PostgreSQL 17 isolated transaction and failed command recovery test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "#28 backups and preservation; no production database write",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        }
+      ]
+    },
+    {
+      "track": "pinned_current",
+      "commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+      "file_index_1_based": 111,
+      "path": "site/cloud/main.js",
+      "blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+      "original_line_count": 1027,
+      "start": 231,
+      "end": 240,
+      "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+      "lines": [
+        {
+          "line": 231,
+          "source_text": "   if(epoch!==this.epoch||who.id!==this.identity?.id)return;",
+          "classification": "js_runtime_source",
+          "behavior": "Discard stale async result from different owner or epoch",
+          "quality": "Asynchronous owner-epoch state guard, correctness depends on client and persistence contracts",
+          "risk": "Prevents stale cross-account refresh mutation",
+          "obsolescence": "Pinned line equals live same-position current; not proven obsolete",
+          "duplication": "No duplicate caller or state transition established",
+          "pinned_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 231,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 231,
+            "identical": true
+          },
+          "testability": "Offline/reconnect plus cross-owner switch signed-in browser test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "Offline Log Shot, user privacy and Community integrity, #96 authority",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 232,
+          "source_text": "   if(renewed?.admitted!==true){await this.denyAccess(who,epoch);return;}",
+          "classification": "js_runtime_source",
+          "behavior": "Call denyAccess for absent or false renewed admission",
+          "quality": "Asynchronous owner-epoch state guard, correctness depends on client and persistence contracts",
+          "risk": "Denial must invalidate previous owner cache/session state",
+          "obsolescence": "Pinned line equals live same-position current; not proven obsolete",
+          "duplication": "No duplicate caller or state transition established",
+          "pinned_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 232,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 232,
+            "identical": true
+          },
+          "testability": "Offline/reconnect plus cross-owner switch signed-in browser test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "Offline Log Shot, user privacy and Community integrity, #96 authority",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 233,
+          "source_text": "   this.status=renewed;this.deniedOfflineOwners.delete(who.id);",
+          "classification": "js_runtime_source",
+          "behavior": "Update admission and clear this owner's offline-denial marker",
+          "quality": "Asynchronous owner-epoch state guard, correctness depends on client and persistence contracts",
+          "risk": "Offline denial reset only after admitted true",
+          "obsolescence": "Pinned line equals live same-position current; not proven obsolete",
+          "duplication": "No duplicate caller or state transition established",
+          "pinned_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 233,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 233,
+            "identical": true
+          },
+          "testability": "Offline/reconnect plus cross-owner switch signed-in browser test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "Offline Log Shot, user privacy and Community integrity, #96 authority",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 234,
+          "source_text": "  }",
+          "classification": "js_runtime_source",
+          "behavior": "Close admission-check branch",
+          "quality": "Asynchronous owner-epoch state guard, correctness depends on client and persistence contracts",
+          "risk": "No active defect established; #96 Auth and queue tests are separate",
+          "obsolescence": "Pinned line equals live same-position current; not proven obsolete",
+          "duplication": "No duplicate caller or state transition established",
+          "pinned_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 234,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 234,
+            "identical": true
+          },
+          "testability": "Offline/reconnect plus cross-owner switch signed-in browser test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "Offline Log Shot, user privacy and Community integrity, #96 authority",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 235,
+          "source_text": "  this.syncState=outcome.state;const pending=await this.store.list(who.id);",
+          "classification": "js_runtime_source",
+          "behavior": "Store sync state and load owner-specific pending list",
+          "quality": "Asynchronous owner-epoch state guard, correctness depends on client and persistence contracts",
+          "risk": "store.list must partition by owner; external proof #96 remains",
+          "obsolescence": "Pinned line equals live same-position current; not proven obsolete",
+          "duplication": "No duplicate caller or state transition established",
+          "pinned_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 235,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 235,
+            "identical": true
+          },
+          "testability": "Offline/reconnect plus cross-owner switch signed-in browser test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "Offline Log Shot, user privacy and Community integrity, #96 authority",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 236,
+          "source_text": "  if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.pending=pending;",
+          "classification": "js_runtime_source",
+          "behavior": "Only assign pending if same owner and epoch",
+          "quality": "Asynchronous owner-epoch state guard, correctness depends on client and persistence contracts",
+          "risk": "Async result must not leak to switched identity",
+          "obsolescence": "Pinned line equals live same-position current; not proven obsolete",
+          "duplication": "No duplicate caller or state transition established",
+          "pinned_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 236,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 236,
+            "identical": true
+          },
+          "testability": "Offline/reconnect plus cross-owner switch signed-in browser test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "Offline Log Shot, user privacy and Community integrity, #96 authority",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 237,
+          "source_text": "  try{const raw=await this.client.read();if(epoch!==this.epoch||who.id!==this.identity?.id)return;await this.store.saveCache(who.id,raw);if(epoch!==this.epoch||who.id!==this.identity?.id)return;this.raw=raw;this.lastHeavySyncAt=Date.now();}",
+          "classification": "js_runtime_source",
+          "behavior": "Read remote, cache and assign guarded raw state, record sync time",
+          "quality": "Asynchronous owner-epoch state guard, correctness depends on client and persistence contracts",
+          "risk": "Guard around cache save and read prevents stale user overwrite",
+          "obsolescence": "Pinned line equals live same-position current; not proven obsolete",
+          "duplication": "No duplicate caller or state transition established",
+          "pinned_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 237,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 237,
+            "identical": true
+          },
+          "testability": "Offline/reconnect plus cross-owner switch signed-in browser test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "Offline Log Shot, user privacy and Community integrity, #96 authority",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 238,
+          "source_text": "  catch(err){if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(isAccessDenied(err)){await this.denyAccess(who,epoch);return;}this.syncState='offline';const saved=await this.store.readCache(who.id);if(epoch!==this.epoch||who.id!==this.identity?.id)return;if(saved)this.raw=saved.snapshot;if(!this.raw)throw err;}",
+          "classification": "js_runtime_source",
+          "behavior": "On denial revoke; otherwise restore owner cache and mark offline",
+          "quality": "Asynchronous owner-epoch state guard, correctness depends on client and persistence contracts",
+          "risk": "Fallback cache must remain owner-only and not silently bypass denial",
+          "obsolescence": "Pinned line equals live same-position current; not proven obsolete",
+          "duplication": "No duplicate caller or state transition established",
+          "pinned_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 238,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 238,
+            "identical": true
+          },
+          "testability": "Offline/reconnect plus cross-owner switch signed-in browser test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "Offline Log Shot, user privacy and Community integrity, #96 authority",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 239,
+          "source_text": "  this.state=applyPending(hydrate(this.raw),this.pending);this.state.communityEvidence=this.recommendationEvidence;",
+          "classification": "js_runtime_source",
+          "behavior": "Hydrate and overlay pending events and attach Community evidence",
+          "quality": "Asynchronous owner-epoch state guard, correctness depends on client and persistence contracts",
+          "risk": "Pending overlay requires validated owner-scoped queue",
+          "obsolescence": "Pinned line equals live same-position current; not proven obsolete",
+          "duplication": "No duplicate caller or state transition established",
+          "pinned_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 239,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 239,
+            "identical": true
+          },
+          "testability": "Offline/reconnect plus cross-owner switch signed-in browser test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "Offline Log Shot, user privacy and Community integrity, #96 authority",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        },
+        {
+          "line": 240,
+          "source_text": "  await this.syncFirstStylePrompts(who.id);if(epoch!==this.epoch||who.id!==this.identity?.id)return;",
+          "classification": "js_runtime_source",
+          "behavior": "Sync first-style prompts then check owner epoch",
+          "quality": "Asynchronous owner-epoch state guard, correctness depends on client and persistence contracts",
+          "risk": "Sync first-style prompts could be async; epoch rechecked afterwards",
+          "obsolescence": "Pinned line equals live same-position current; not proven obsolete",
+          "duplication": "No duplicate caller or state transition established",
+          "pinned_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+            "line": 240,
+            "identical": true
+          },
+          "live_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 240,
+            "identical": true
+          },
+          "testability": "Offline/reconnect plus cross-owner switch signed-in browser test, not executed",
+          "fix_opportunity": "None safely justified from this source line; preserve original until reproducible finding",
+          "locked_decision_fit": "Offline Log Shot, user privacy and Community integrity, #96 authority",
+          "reviewer": "Direct literal AI inspection, NOT human certification"
+        }
+      ]
+    }
+  ],
+  "new_unique_original_positions": 30,
+  "strict_first_line_revalidation": {
+    "path": ".github/workflows/approval-continuity.yml",
+    "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+    "matched_S2_001": 41,
+    "duplicate_credit": 0
+  },
+  "provisional_R2_C2_grouped_summary_credit": 0,
+  "central_ledger": "UNCHANGED_PENDING_CROSS_AGENT_CAS",
+  "findings": [
+    {
+      "status": "TRIAGED_NO_ACTIVE_DEFECT",
+      "detail": "Auth user-count outputs contain sensitive cardinalities, private backup folder and caller security required; no provider invocation done."
+    },
+    {
+      "status": "TRIAGED_NO_ACTIVE_DEFECT",
+      "detail": "Session epoch and cached offline ownership guards present; live Auth validation remains #96."
+    }
+  ],
+  "actual_tests": "Exact GitHub original/live blob plus all 30 source text and per-line dimensions verified; runtime tests and full live drift NOT RUN.",
+  "next": "F423 line21, P111 line241, remaining pinned/current/post-pin and cross-agent reconciliation.",
+  "ready": false,
+  "deployed": false
+}
