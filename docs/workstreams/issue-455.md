@@ -1,5 +1,50 @@
 # Issue #455 — Espresso research → Log Shot → Rate → Recommendations
 
+## November 7, 2026 UTC — R455-096 failed exact-source tests and fixture repair [skip netlify]
+
+**Actual CI failure (NOT PASS):** [PR #1264 head `262431e6ee92eaf66164c4a4974d124936d8ede3`, Node22 run 42403146672](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42403146672) ran 2,978 tests, **2,968 PASS / 4 FAIL / 6 intentional SKIP**. Four **pre-existing positive fixture assumptions** were inconsistent with owner-Locked one-intentional-control and five-rating semantics: three cases in `tests/issue455-next-shot-import-validity.test.mjs` expected prior cached plan to simultaneously change Grind 1.2→1.4 and Yield 50→52 (a 2g microstep), and one in `tests/recommendation-evidence-priority.test.mjs` stored an all-green rating with `dialedIn:false` while simultaneously changing Grind and Yield in its cache. The new SAFE code correctly recomputed or refused those malformed archives rather than applying invalid cached next targets.
+
+**This SAME-COMMIT repair** changes ONLY those two prior positive synthetic fixtures and this journal, leaving their negative malformed-shot rejection, chronological selection, retained original notes/ratings, all-green success and evidence priorities intact. R093 now uses a single approved measured **Yield 50→55g** control change at unchanged Grind 1.2; in the evidence priority fixture use non-green five-rating feedback with a single **Grind 1.3→1.1** cached change and unchanged actual Yield 39g. Explicitly verify earlier and new regressions plus exact source Node22/UX/mobile/offline/a11y/SQL/security/governance on new PR head; do not mark READY before success. Original603 SKIPPED not passed. Parent Git blobs R093 `daa12377b4c0c60201954bf55c820b94fcc5b588`, evidence-priority `144bad0854a282955c6ea9b284aa90afc1dbb56b`, journal `1e7a1430c7e99c3d7c8499abbea64d7269687335`; current merged-dev context pinned by `262431e6ee92eaf66164c4a4974d124936d8ede3`. No numeric/product policy change; no scientific outcome or production write.
+
+---
+
+## November 7, 2026 UTC — R455-096 concurrent development merge reconciliation [skip netlify]
+
+**Nonforce preservation:** Development advanced from initial source parent `e9f8f752102f0611d44a0f83bb754de65c4ea347` to `d12966f42a832fa95680dbae44a54b8cbb4d4a63` while code PR #1264 was open. Current dev engine remains byte-identical to initial engine Git blob `70bac504ceb2055e0f1ebc8da33f1b7da8128442`; independent Issue #33/#509 modified docs/status/queue and own audit files. Resolve queue overlap by starting with dev's exact current queue Git blob `bc6710a5fcb9015a4d30e9296b5dfb1fed0c7fda`, inserting **only** R455-096 TESTING item without deleting or rewriting any concurrently updated entries. Preserve dev CURRENT_STATUS/#33/#509/audits through dev-tree merge; preserve feature engine/test/journal. This commit has two nonforce ancestors (existing feature head `b83eeab6ed9b73283bcc3a1aef6733050f75053f` plus current dev `d12966f42a832fa95680dbae44a54b8cbb4d4a63`). Applicable exact head PR CI **UNEXECUTED** for this merged source; superseded runs must not be counted PASS. Original frozen603 remains SKIPPED.
+
+Next: source-bound full risk-appropriate PR checks, nonforce squash merge only on PASS, independently read actual merged Git blobs/CI, reconcile docs READY. No deployment, production SQL/Auth/Edge/member/provider writes, forced Git or owner-policy changes; #455 open.
+
+---
+
+## November 7, 2026 UTC — R455-096 scope-safe cached multi-control follow-up [skip netlify]
+
+During premerge test review, the initial positive endpoint test itself described a cached plan changing grinder, yield and temperature simultaneously. This contradicted the already-Locked Master Specification §19.3 one-intentional-adjustable-control rule; initial HEAD tests did **not** verify that invariant. This same commit adds a narrow in-range legacy-cache multi-control safety guard to `recommendation()` and corrects endpoint test fixtures to exercise **only one** changed controllable setting. New direct-module negative regression verifies four otherwise in-range cached multiple-change combinations are recalculated from the original measured shot, while retaining every original note, taste scale and suggestion. No new numeric threshold, capture, UI, privacy or scientific prior. Parent commit `deec38d7aaa9c72e89390a9142b526f15e2d23d4`, engine blob `4b37c1ad03e5a978fcf9e30fc09bb67d74a8b8c9`, test blob `c154ae3d09439fbac524f6a842a184a0538297a9`, journal blob `cf4829a6df8d50b9cd218202ee7ef404afe8678c`. New CI **UNEXECUTED at authoring**. Previous corrected PR head `deec38d7aaa9c72e89390a9142b526f15e2d23d4` approval run 42402878449 SUCCESS, but other head workflows are superseded/pending and cannot count for this new source. Next: exact new head CI, nonforce integration, merged-readback and docs READY reconciliation. No deploy.
+
+---
+
+## November 7, 2026 UTC — R455-096 PR-head queue schema repair [skip netlify]
+
+**Observed, diagnosed failure:** PR #1264 initial head `da1b795bb42712e2cfe82af5b4dd7a7e3e5db288` exact approval run [42402731610](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42402731610), approval coverage PASS but release-queue intake **FAIL**: `DIC-Q-455-cached-next-physical-bounds invalid merged source SHA`. The initial TESTING queue entry omitted the required explicit JSON `merged_source_sha:null`. Do not misstate this initial failure as PASS.
+
+**Narrow docs-only correction in this commit:** Add `merged_source_sha:null` and `pr:1264` to that TESTING item; no runtime, test, other queue, scope, source policy, member data or provider change. Original feature head already contains four-path same-commit issue journal. Retry exact PR-head governance and application suites; frozen603 remains a separate unrun/SKIPPED workflow, not PASS. Next action: resolve remaining CI failures if any, nonforce merge only after applicable checks SUCCESS, verify exact merge and docs READY separately. Owner publication not authorized.
+
+---
+
+## November 7, 2026 UTC — R455-096 ACTIVE SAFE cached next-shot target integrity [skip netlify]
+
+**Source-bound recovery:** development parent `e9f8f752102f0611d44a0f83bb754de65c4ea347`, tree `2288b2558ee2a7597ad9c4dc2c588ddaec99dee1`; original `site/lib/engine.js` blob `70bac504ceb2055e0f1ebc8da33f1b7da8128442`, `docs/RELEASE_QUEUE.json` blob `65b7be7aaf45c402d47b1081afada39040bcee9f`, scoped journal blob `164dca2e18897248785b280d718f91c03103fc06`. Main `bd627d40f7e65321323512b303d2e3f75709af39`, release/production `2ec10324fcaa4b60d1e48240b44b77b141b9ba54` observed and untouched. Reviewed AGENTS, context entrypoint/PREFLIGHT, Master §19.3/§25.2, Decision Ledger, approval coverage/status/source register, #455/#335/#267/#33/#96 and concurrently open #267 draft PRs; Drive S019/slow feeding/espresso searches returned no new originals and available Space search no DIC project page. Owner #630 temporary PUBLIC GitHub exception remains owner-controlled.
+
+**Reproduced source gap:** A valid dated, in-range last shot can include an *older cached next plan* with an impossible yield (0/201 g), grinder outside current espresso range, temperature outside 70–100 C or dose outside 5–40 g. `recommendation()` screens the measured *last* shot but accepted `last.suggestion.next` without screening that next plan, and then exposed it as a current recommendation. This is a direct source-reproducible synthetic risk, not a known member failure or evidence of better espresso.
+
+**SAFE remedy:** Before applying a cached next plan, use only existing owner-Locked entry/equipment bounds to identify invalid next controls; re-evaluate `nextAdvice` from the latest actual measured shot when any are invalid. Preserve historical cached suggestion, notes and five sensory ratings, same-coffee context, Time as outcome, distinct style/feed/family, privacy and original history. Do not invent any scientific espresso optimum, modify schema or change owner-approved meaningful yield size. Valid archived advice and inclusive endpoints remain intact.
+
+**SAME-COMMIT file scope:** `site/lib/engine.js`, `tests/issue455-cached-next-physical-bounds.test.mjs`, `docs/RELEASE_QUEUE.json` (TESTING only), this scoped journal. Seven positive/negative direct-module synthetic groups prepared; Node22/build, browser/mobile/offline/a11y/cloud, isolated SQL, security and governance **UNEXECUTED at authoring, NOT PASS/READY**. Original603 separate SKIPPED/unrun. No prod/member/provider/Netlify writes, no main/release move, no force. #267 line-by-line audit owned separately, zero new credit. Research source register unchanged; unresolved original S019 remains unreviewed.
+
+**Next executable action:** Open PR against current development, wait for exact PR-head CI; fix regressions without weakening protections, nonforce integrate only on verified success; read exact merged code blobs/CI, then docs-only proposal #58 and CURRENT_STATUS/queue READY reconciliation with governance and Issue #455 receipt. Keep Issue #455 OPEN. No owner product decision taken.
+
+---
+
+
 ## November 7, 2026 UTC — R455-095 merged source PASS and docs-only READY reconciliation [skip netlify]
 
 Code PR #1250 exact head 3d2cdac4655e567bd6b6a09f060fbeeb8cf8c884 nonforce squash merge b568337c2d4dc827404d7b57d5277b96d87a0f2a; original code/test/TESTING queue/same-commit journal blobs head→merge byte-identical: engine 70bac504ceb2055e0f1ebc8da33f1b7da8128442; seven-group real-module test 371c8ba1562561ae13b18cab70cd1aefb6faa4a2; queue 59584b9c8f11dd310bd378b7caedfe15109819b6; journal 35aa52ab5e1cb2ac74af9089f6520fb3d411aba6. Exact head Node22/lint/build42397605409 2952/0/6 PASS, mobile/browser/offline/a11y/cloud42397605398, SQL42397605677, security42397605437, approval42397605440 SUCCESS; frozen60342397605510 SKIPPED. Exact code-merged Node22/lint/build42397815655 2952/0/6 SUCCESS, mobile/browser/offline/a11y/cloud42397815660 and governance42397815649 SUCCESS. No physical cup or hosted Auth test claimed.

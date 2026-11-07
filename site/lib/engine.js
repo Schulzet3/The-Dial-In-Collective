@@ -446,7 +446,26 @@ export function recommendation(s,coffeeId,options={}) {
    (cached.next.tempC==null||cached.next.tempC===last.tempC)&&
    Math.abs(cached.next.yieldCenter-last.yieldG)>1e-8&&
    Math.abs(cached.next.yieldCenter-last.yieldG)<meaningfulYieldStep(last);
-  const a=(oldNoOp||oldSmallYield)?nextAdvice(s,last,rec):cached||nextAdvice(s,last,rec);
+  // A valid measured last shot does not certify a legacy cached *next* recipe.
+  // Re-evaluate unsafe archival targets using the existing Log Shot limits;
+  // preserve the original private suggestion, measurements and five ratings.
+  const cachedNext=cached?.next;
+  const outsideEntry=(field,value)=>value!=null&&
+   (!finite(value)||value<CONFIG.bounds[field][0]||value>CONFIG.bounds[field][1]);
+  const unsafeCachedNext=!!cachedNext&&(
+   outsideEntry('doseG',cachedNext.doseG)||
+   outsideEntry('yieldG',cachedNext.yieldCenter)||
+   (cachedNext.grindSetting!=null&&(!finite(cachedNext.grindSetting)||
+    cachedNext.grindSetting<v.grinderMin||cachedNext.grindSetting>v.grinderMax))||
+   (cachedNext.tempC!=null&&!validRecordedTemperature(cachedNext.tempC))||
+   // Older cached plans may be in-range yet change two or more controlled
+   // settings at once; keep the approved single-intentional-change contract.
+   [cachedNext.doseG!=null&&cachedNext.doseG!==last.doseG,
+    cachedNext.yieldCenter!=null&&cachedNext.yieldCenter!==last.yieldG,
+    cachedNext.grindSetting!=null&&cachedNext.grindSetting!==last.grindSetting,
+    cachedNext.tempC!=null&&cachedNext.tempC!==last.tempC]
+    .filter(Boolean).length>1);
+  const a=(oldNoOp||oldSmallYield||unsafeCachedNext)?nextAdvice(s,last,rec):cached||nextAdvice(s,last,rec);
   if(a.next||a.kind==='diagnostic'){
    // An applied next-shot adjustment keeps every other measured control
    // steady. Do not silently reset dose/temperature to starting defaults.
