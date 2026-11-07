@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "kind": "ISSUE33_ORIGINAL603_CURRENT_SELECTED_EVIDENCE_SCOPED_NOT_603_CERTIFICATION",
+  "verified_at_utc": "2026-11-07",
+  "issue": 33,
+  "development_only": true,
+  "production_operations": 0,
+  "baseline_sha": "df16ce67e87440f770c5453f5bc0be38cfbb6ad2",
+  "fix_code_merge_sha": "728cde03f7c79b33cb9d2683d99de8472ebaba97",
+  "exact_official_source_sha": "7c1d3006e91d3e02ad7d3ebf431516d2743112d9",
+  "frozen_original_csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "frozen_original_csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+  "base_run": {
+    "run_id": 42345684805,
+    "job_id": 128322797814,
+    "artifact_id": 13563492383,
+    "zip_sha256": "9f97da40532b7c940a4e0567fd1bd417978081295bcf16085b176ba5c9f2d32b",
+    "raw_html_by_case": {
+      "202": "98f1ae3530423349155a89969f92f835d40e1a512391e1af82bbf24201f8e4c3",
+      "203": "a3c287051152d634a569ae98ff49c9f5e33653e711ce2cd8f133b53bec0d806b",
+      "211": "20893716ae54a208d2e139bfc29b3b2a4e59f84de9f5967062570cd11cc42ac2"
+    },
+    "fetched": 3,
+    "parsed": 3,
+    "ui_rendered": 3,
+    "manual_full_certified": 0
+  },
+  "post_fix_run": {
+    "run_id": 42346284455,
+    "job_id": 128324630690,
+    "artifact_id": 13563533502,
+    "zip_sha256": "4858fe71e8af9275057136b71bc043ab92ae57623066598161ef2b9d278dcf76",
+    "raw_html_sha256": "9c4e9b1d9c4305b7f6cd8fb01c296b7a01618d68c699179106459f13d5514d0b",
+    "json_sha256": "8030e9fbf8a701478cbc7d8da813e096b0b0ad96515d36de0b5b5a19de07d747",
+    "selected_h1": "DECAF, Colombia 10oz",
+    "fields": {
+      "decaffeination_method": "Sugar Process",
+      "process": "Washed",
+      "roast_level": "Medium",
+      "origin": "Huila, Colombia"
+    },
+    "conflicts": [],
+    "parsed": true,
+    "add_coffee_ui_rendered": true,
+    "source_review_rendered": true,
+    "manual_full_certified": 0
+  },
+  "adjudications": [
+    {
+      "number": 202,
+      "official_url": "https://lostsockroasters.com/products/el-tempixque",
+      "selected_h1": "EL TEMPIXQUE, Guatemala",
+      "status": "selected direct fields current parser source supported",
+      "manual_full_certified": false,
+      "notes": "Date/Bing Cherry/Praline, Washed, Antigua, The Falla Family, Bourbon/Caturra, 1850m; original selection intact"
+    },
+    {
+      "number": 203,
+      "official_url": "https://lostsockroasters.com/products/madre-laura-decaf-10oz",
+      "selected_h1": "DECAF, Colombia 10oz",
+      "status": "narrow decaffeination_method correction verified READY",
+      "manual_full_certified": false,
+      "notes": "Sugarcane decaf label distinct from Washed; roaster prose adds orange/tangerine as conditional at its best, parser captures chocolate/caramel; preserve for independent full sensory adjudication"
+    },
+    {
+      "number": 211,
+      "official_url": "https://mapscoffee.com/products/emerald-of-the-andes",
+      "selected_h1": "Emerald of the Andes",
+      "status": "source geography discrepancy qualified unresolved",
+      "manual_full_certified": false,
+      "notes": "Direct origin Colombia and Behind Beans Nariño department; historical page metadata says Huila and parser currently returns Colombia, Latin America. No automatic guessed region or unrelated SEO import; next separate source-owned review"
+    }
+  ],
+  "test_evidence": {
+    "pr_head_node_tests": 1922,
+    "pr_head_fail": 0,
+    "pr_head_skip": 0,
+    "pr_head_lint_build": "SUCCESS",
+    "pr_head_cloud_mobile_sql_security_approval": "SUCCESS",
+    "verified_nonforce_prs": [
+      1161,
+      1162,
+      1163
+    ],
+    "merged_governance": "SUCCESS",
+    "original_full_frozen603": "SKIPPED_NOT_VERIFIED"
+  },
+  "scoped_queue_state": "READY",
+  "issue33_state": "OPEN",
+  "remaining_scope": "Individual original603 selected-product manual semantic certification and exception adjudication incomplete. #267 historical V2 and #96 authenticated security remain independently owned.",
+  "no_production_publish": true,
+  "no_member_provider_auth_sql_writes": true,
+  "no_original_corpus_mutation": true
+}
