@@ -8,6 +8,27 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-temperature-physical-history-evidence",
+      "issue": 455,
+      "title": "Exclude physically invalid archived five-green measurements from personal temperature evidence",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "R091 live source 443525c0d35b4df02ab2fe8b4d6ae67572b5118c engine blob 618677468e22a522ab6ceb80f26dd778749ac5ac: temperatureGuidance already checked five green ratings and 70-100 C temperatures, but could reuse historic dose/yield/time outside existing Log Shot bounds. Source-synthetic counterexample, not observed member incident.",
+        "SAFE: reuse preexisting measuredRecipeShots physical eligibility (dose 5-40g, yield 5-200g, time 1-180s) for archival temperature evidence only; preserve recorded shots, all five tastes, recipe families and Locked numerical targets.",
+        "7 synthetic real-module negative/positive/bounds/family/immutability regression groups authored; Node22 and cloud/browser/mobile/offline/a11y/SQL/security/governance/merged-source CI UNEXECUTED at commit authoring; frozen603 not claimed."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact head and merged source CI pending; documentation/READY reconciliation pending."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Development-only SAFE existing-entry physical gate; no deploy or production writes. Original S019 PDF remains unavailable; no new scientific recommendation, external primary-source certification or owner-policy authorization."
+    },
+    {
       "id": "DIC-Q-33-original603-256-direct-selected-decaf-origin-conflict",
       "issue": 33,
       "title": "Withhold incompatible named present-decaf country prose versus exact chosen Origin caption",
