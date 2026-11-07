@@ -7908,5 +7908,59 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "Identify next distinct unreviewed safe provider catalog definition cohort, recheck changed/new DIC application definitions and provider drift; native compiled and hosted Auth/JWT/API remain unverified"
+  },
+  "provider_pg_catalog_class_relations_run73": {
+    "status": "266_OF_266_VISIBLE_RELATION_DESCRIPTORS_REVIEWED_METADATA_ONLY",
+    "project_ref": "azviqqejypsefzilgonr",
+    "provider_snapshot": "2026-11-07 20:48:22.116308+00",
+    "development_parent_sha": "f76b3c383980f70db136bfd6690bee78dbf7dc27",
+    "main_sha": "bd627d40f7e65321323512b303d2e3f75709af39",
+    "release_sha": "2ec10324fcaa4b60d1e48240b44b77b141b9ba54",
+    "receipt_paths": [
+      "docs/audits/issue509-provider-pg-class-relations-001-133-20261107-run73.json",
+      "docs/audits/issue509-provider-pg-class-relations-134-266-20261107-run73.json"
+    ],
+    "reviewed_new": 266,
+    "total": 266,
+    "kinds": {
+      "r": 64,
+      "i": 124,
+      "v": 78
+    },
+    "acl_counts": {
+      "r": 64,
+      "i": 0,
+      "v": 78
+    },
+    "nondefault_options": [
+      {
+        "name": "pg_catalog.pg_stats",
+        "options": [
+          "security_barrier=true"
+        ]
+      },
+      {
+        "name": "pg_catalog.pg_stats_ext",
+        "options": [
+          "security_barrier=true"
+        ]
+      },
+      {
+        "name": "pg_catalog.pg_stats_ext_exprs",
+        "options": [
+          "security_barrier=true"
+        ]
+      }
+    ],
+    "validated": {
+      "duplicate_oids": 0,
+      "attribute_count_mismatch": 0,
+      "semantic_flags": []
+    },
+    "scope": "Per-object visible pg_class metadata; prior index/table/view SQL definitions not double-counted",
+    "source_fix_count": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "New unreviewed safe provider catalog declarations, plus changed/new application SQL/Edge drift; compiled native PostgreSQL and hosted Auth/JWT/API UNVERIFIED"
   }
 }
