@@ -804,7 +804,15 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
  // producers and green methods. Exact source captions/values remain retained.
  const hasLabeledGrower=semantic.facts.some(fact=>fact.kind==='producer'&&/^(?:grower|producer|farmer)$/i.test(fact.label.trim()));
  const selectedProcessMethods=semantic.facts.filter(fact=>fact.kind==='process'&&/^process$/i.test(fact.label.trim())).map(fact=>normalized(fact.value));
- const sourceReviewField=(label,value,field)=>{
+ const sourceReviewField=(label,value,field,section='')=>{
+  // Decaffeination equipment/treatment is not green cherry processing.
+  // The semantic scanner may shorten an exact selected "Decaf Process" caption
+  // to a generic "Process" fact inside the decaf-method section. Preserve the
+  // published text for review, but do NOT falsely attribute it to the green
+  // process field. Do not suppress genuine Washed/Natural/Honey facts.
+  if(field==='process'&&
+   /^(?:swiss|mountain)[ -]?water(?:[ -]?process)?$/iu.test(String(value).trim())&&
+   /\bdecaf(?:feinated|feination)?\b/iu.test(String(section)))return undefined;
   const caption=normalized(label).replace(/\s*[|:：]\s*$/u,'');
   if(field==='producer'&&caption==='farm'&&hasLabeledGrower)return undefined;
   if(field==='process'&&caption==='processing'&&selectedProcessMethods.length&&!selectedProcessMethods.includes(normalized(value))&&
@@ -812,7 +820,10 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
    !/\b(?:washed|natural|honey|anaerobic|wet.?hulled|ferment|carbonic|maceration|dry.?process|wet.?process|decaf)\b/i.test(value))return undefined;
   return field;
  };
- for(const fact of semantic.facts)result.add(fact.label,fact.value,sourceReviewField(fact.label,fact.value,fact.kind),semanticSectionAt(fact.start));
+ for(const fact of semantic.facts){
+  const section=semanticSectionAt(fact.start);
+  result.add(fact.label,fact.value,sourceReviewField(fact.label,fact.value,fact.kind,section),section);
+ }
  // Definition lists and tables preserve unfamiliar labels, units and values.
  for(let i=0;i<nodes.length;i++){
   const node=nodes[i];if(blocked.has(i))continue;

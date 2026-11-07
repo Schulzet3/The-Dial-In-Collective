@@ -13,23 +13,33 @@
       "title": "Recognize product-scoped Decaf Process label as a decaffeination method rather than green processing",
       "state": "TESTING",
       "scope_paths": [
-        "src/server/coffee-direct-product-prose.mjs"
+        "src/server/coffee-direct-product-prose.mjs",
+        "src/server/coffee-source-facts.mjs"
       ],
       "tests": [
         "R13 official current original603 #302 H1 Decaf - Colombian Water Process; raw HTML SHA256 05a139285cac5e384403cd0fc021bcc98e54a9803cfffa9042841bc363954646, PDF? no, HTML direct. Explicit selected Decaf Process: Mountain Water Process printed twice and repeated direct same-product description.",
         "Pre-change exact merged source 85d2c634ae1bcf564cdebd6bbf56f6b395cb8b96 guarded live workflow 42399428877 / focused job 128483787307 SUCCESS, but parsed fields omitted decaffeination_method; review source facts mislabelled process: Mountain Water. A successful fetch/parse does not prove semantic field completeness.",
         "Positive: selected strong/BR label with chosen H1 preserves Water Process separate from green processing and provenance; negative: regular/half-caf, missing/unsupported method, FAQ/related/history, contradictory Sugar Cane EA, distinct Washed green processing.",
         "Not READY until exact PR-head and nonforce merged source applicable CI, repeat guarded official HTTPS probe, independent raw HTML/artifact hashes and selected Add Coffee/Source Review readback. Original full603 SKIPPED not accepted.",
-        "First PR-head Node run42399647277 FAILED 1958 PASS, 2 FAIL / 1960: new negative guards caught Mountain water used to rinse green beans incorrectly classified, and h2 Frequently Asked Questions section incorrectly allowed as selected decaf evidence. Not merged. Revised SAME-COMMIT generic Decaf Process strict value grammar and FAQ headings h1-h6 gate; retain test failures as evidence, rerun exact amended head."
+        "First PR-head Node run42399647277 FAILED 1958 PASS, 2 FAIL / 1960: new negative guards caught Mountain water used to rinse green beans incorrectly classified, and h2 Frequently Asked Questions section incorrectly allowed as selected decaf evidence. Not merged. Revised SAME-COMMIT generic Decaf Process strict value grammar and FAQ headings h1-h6 gate; retain test failures as evidence, rerun exact amended head.",
+        "PR#1253 amended head 3709201a49f2ef4fffacc484fef7c404358cb1a0 exact-source Node/lint/build 42399890246 PASS; approval42399890221, UX42399890199, isolated SQL42399890218, security42399890176, source bundle42399890170 PASS, frozen60342399890185 SKIPPED. Nonforce squash merged 839795b93c73484607ad3330d04b658f884df0e3, identical reviewed tree f41441e920ac712d70bcc6502cec7d3fa7348141.",
+        "Merged Node/lint/build42400060706, approval42400060769, focused official case 293/294/302 runner42400060751 EXECUTED SUCCESS. Fresh raw HTML #302 b6443f5a503dd2ea9cd122f3435c7f58549c84d24ac8afdc071093195d1e7399 confirms selected H1, exact native Decaf Process: Mountain Water Process and correct canonical decaffeination_method Water Process; process blank. Add Coffee/Source Review both rendered and no conflicts.",
+        "Independent fresh artifact ZIP SHA256 f982723945b9021a08e8b0a2c2dadfe7c6c8877466caaa4eb5cac140bf22cfdf matches GitHub digest; JSON 384a0c01f2275d21763c3600397954756514b957e1d6474280f2ba73ccc74c33; #293 b17790e8dd29361ac39ba521dbb2df2c3a4d121affa32ba700f8a25286da9bf8; #294 7ab4c3305b651516bd0a7afd8a2cc4fcbfaca3b40da8beb99e8577342097bd36; #302 b6443f5a503dd2ea9cd122f3435c7f58549c84d24ac8afdc071093195d1e7399. All independently SHA256 rehashed.",
+        "Still TESTING: fresh #302 Source Review carries incorrectly typed field=process value=Mountain Water section=Mountain Water Process Decaf although canonical process remains blank; this separate semantic source-fact misattribution is an acceptance blocker. Same-commit generic evidence-only source-field guard now under test; all original/source data retained."
       ],
       "ci_runs": [
         42399428877,
         42399428981,
-        42399647277
+        42399647277,
+        42399890246,
+        42399890221,
+        42400060706,
+        42400060769,
+        42400060751
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "TESTING; literal real #302 selected Decaf Process caption omitted from current canonical method. Keep #33 OPEN and all existing READY/DEPLOYED queue states untouched. Production release not authorized.",
+      "notes": "TESTING. Canonical #302 water method verified in merged exact public probe; source review process-fact provenance now under additional generic regression/real-source verification. Parent #33 remains OPEN. No deploy or production writes.",
       "merged_source_sha": null
     },
     {
