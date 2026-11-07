@@ -1501,13 +1501,35 @@
         6687234179
       ],
       "confirmed_safe_fixes": 1
+    },
+    {
+      "id": "G1-075",
+      "receipt": "docs/audits/issue504-review-G1-075.json",
+      "text_files_entire": 0,
+      "text_files_partial": 0,
+      "reviewed_file_lines": 0,
+      "reviewed_file_words": 0,
+      "reviewed_github_objects": 8,
+      "reviewed_github_words": 2958,
+      "source_issue": 267,
+      "reviewed_comment_ids": [
+        6688283446,
+        6689771461,
+        6690953030,
+        6692223658,
+        6693557330,
+        6694830634,
+        6695826061,
+        6695914728
+      ],
+      "confirmed_safe_fixes": 0
     }
   ],
   "totals": {
     "source_file_lines": 7919,
     "source_file_words": 60754,
-    "github_objects": 347,
-    "github_words": 106225
+    "github_objects": 355,
+    "github_words": 109183
   },
   "delegated_267_no_double_count": true,
   "source_manifests": [
@@ -1524,13 +1546,13 @@
   "next": {
     "kind": "github_issue_comment",
     "issue": 267,
-    "comment_id": 6688283446,
+    "comment_id": 6697368782,
     "first_unreviewed_word": 1,
-    "url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/267#issuecomment-6688283446",
-    "then": "Continue older unreviewed #267 comments after cross-check against all prior #504 receipts; other GitHub PR/review/Actions/commit/release/tag records remain."
+    "url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/267#issuecomment-6697368782",
+    "then": "Continue ordered #267 comment objects only after existing receipt ID crosscheck, then issues/PRs/reviews/Actions/logs/artifacts/commits/releases/tags and new drift"
   },
   "uncovered": "Unreviewed newer #504 and #267 comments, PR/review/thread/Actions/log/artifact/commit/release metadata, and #267 frozen/pinned/current source semantic gaps. Pinned inventory/hashes are not semantic credit.",
-  "latest_review_source_anchor": "0c33f1c52d8961d18272e7eed5903f5c0a44bfcb",
+  "latest_review_source_anchor": "005fcf5b13fa16a089f6eecfc6eceadeed99ba06",
   "inventory_metadata_only": {
     "github_issue_rest": 523,
     "github_pr_rest": 454,
@@ -1548,7 +1570,8 @@
     "queue_unique_items_observed": 119,
     "issue267_github_description_and_six_comments_directly_reviewed": 7,
     "issue455_comment_bodies_observed_20261106": 108,
-    "issue455_comment_bodies_observed_20261107": 113
+    "issue455_comment_bodies_observed_20261107": 113,
+    "issue267_github_comments_observed_20261107": 140
   },
   "last_completely_reviewed_document": {
     "kind": "github_issue_comment",
@@ -4031,5 +4054,32 @@
       "url": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/267#issuecomment-6688283446",
       "then": "Continue older unreviewed #267 comments after cross-check against all prior #504 receipts; other GitHub PR/review/Actions/commit/release/tag records remain."
     }
+  },
+  "g1075_reconciliation_20261107": {
+    "source_shas": {
+      "development": "005fcf5b13fa16a089f6eecfc6eceadeed99ba06",
+      "main": "bd627d40f7e65321323512b303d2e3f75709af39",
+      "release_production": "2ec10324fcaa4b60d1e48240b44b77b141b9ba54"
+    },
+    "original_comment_ids": [
+      6688283446,
+      6689771461,
+      6690953030,
+      6692223658,
+      6693557330,
+      6694830634,
+      6695826061,
+      6695914728
+    ],
+    "source_comment_count": 140,
+    "previous_ledger_sha": "ae786d426a2171ef289a040399d8a8bc754d0bf9",
+    "previous_receipt_sha": "f6b51e283f303315bef997ca12b6c5734dca09f6",
+    "per_body_sha1_and_words": true,
+    "all_eight_direct_semantic_review": true,
+    "independent_267_strict_n14b": "62/62 matched originals with zero #504 source credit",
+    "nonoverlap": true,
+    "next_id": 6697368782,
+    "remaining_other_surfaces": "UNREVIEWED",
+    "status": "IN_PROGRESS"
   }
 }
