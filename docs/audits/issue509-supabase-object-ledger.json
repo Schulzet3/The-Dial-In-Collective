@@ -7962,5 +7962,76 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "New unreviewed safe provider catalog declarations, plus changed/new application SQL/Edge drift; compiled native PostgreSQL and hosted Auth/JWT/API UNVERIFIED"
+  },
+  "provider_pg_catalog_types_run74": {
+    "status": "469_OF_469_PG_CATALOG_TYPE_FULL_VISIBLE_TUPLES_CAPTURED_AND_INDIVIDUALLY_FIELD_VALIDATED_NATIVE_IMPLEMENTATION_UNVERIFIED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "development_parent_sha": "6fd1905b0bd4cbfb33a528ff5f8f544692e0d44f",
+    "main_sha": "bd627d40f7e65321323512b303d2e3f75709af39",
+    "release_sha": "2ec10324fcaa4b60d1e48240b44b77b141b9ba54",
+    "provider_snapshot": "2026-11-07 21:41 UTC (bounded read-only select)",
+    "scope": "pg_catalog.pg_type only: full raw system type tuple plus human-readable names, per-row provider MD5; not source of compiled native code",
+    "reviewed_new": 469,
+    "total": 469,
+    "first_ordinal": 1,
+    "last_ordinal": 469,
+    "counts_by_kind": {
+      "b": 289,
+      "p": 26,
+      "m": 6,
+      "r": 6,
+      "c": 142
+    },
+    "counts_by_category": {
+      "A": 221,
+      "P": 25,
+      "U": 20,
+      "V": 2,
+      "B": 1,
+      "G": 7,
+      "S": 4,
+      "Z": 7,
+      "I": 2,
+      "D": 5,
+      "R": 12,
+      "N": 19,
+      "T": 1,
+      "C": 142,
+      "X": 1
+    },
+    "cross_checks": {
+      "total": 469,
+      "normal_arrays": 220,
+      "specialized_vectors": 2,
+      "invalid_array_links": 0,
+      "invalid_composites": 0,
+      "invalid_ranges": 0,
+      "missing_io_or_type": 0,
+      "special_privileges_defaults": 0
+    },
+    "specialized_builtins": [
+      {
+        "ordinal": 255,
+        "name": "int2vector",
+        "status": "expected special built-in vector type with non-array input function"
+      },
+      {
+        "ordinal": 278,
+        "name": "oidvector",
+        "status": "expected special built-in vector type with non-array input function"
+      }
+    ],
+    "receipt_paths": [
+      "docs/audits/issue509-provider-pg-catalog-types-001-100-20261107-run74.json",
+      "docs/audits/issue509-provider-pg-catalog-types-101-200-20261107-run74.json",
+      "docs/audits/issue509-provider-pg-catalog-types-201-300-20261107-run74.json",
+      "docs/audits/issue509-provider-pg-catalog-types-301-400-20261107-run74.json",
+      "docs/audits/issue509-provider-pg-catalog-types-401-469-20261107-run74.json"
+    ],
+    "confirmed_defects": 0,
+    "source_fixes": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "Unreviewed non-system pg_type metadata (information_schema and app/provider schemas), changed/new provider drift; compiled native/PostgREST/JWT/Auth hosted and 63 withheld sensitive GUC values UNVERIFIED"
   }
 }
