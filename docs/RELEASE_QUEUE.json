@@ -11,22 +11,32 @@
       "id": "DIC-Q-455-sweetness-comparable-measured-yield-integrity",
       "issue": 455,
       "title": "Exclude malformed archived measured yields from same-coffee sweetness comparison direction",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "0881b3405d870843c98c64b706c320b68d2b8d08",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
         "Original development source 3fd001035a6baaaa90927a9d8d02907a14e06435 engine blob f3435a05618df3f21caccd6b69530c8b68fe5156 comparableSweetnessYields accepted same-coffee prior yieldG=0 or -1 as a directional sweetness observation (and same-sweetness 0g as a plateau), despite invalid measured history. Real module synthetic negative tests R080 authored, NOT yet run.",
         "Narrow positive finite prior dose/yield/ratio eligibility; previously required chronology, same coffee/equipment/style/feed/dose/grind/temperature/four green taste inputs retained. No new numeric target, causal claim, stored shot edit or owner Locked policy change.",
-        "Four focused real-module synthetic negative/positive/immutability regressions appended to tests/issue455-yield-step.test.mjs. Node22/app/compiled browser/mobile/offline/a11y/SQL/security/governance UNEXECUTED at commit creation; original frozen 603 not run or claimed."
+        "Four focused real-module synthetic negative/positive/immutability regressions appended to tests/issue455-yield-step.test.mjs. Node22/app/compiled browser/mobile/offline/a11y/SQL/security/governance UNEXECUTED at commit creation; original frozen 603 not run or claimed.",
+        "Exact PR1135 head ae3b883e9a528fe0242651f86374cc9530b9cc5d Node22/lint/build42330453320 2,798 PASS/0 FAIL/6 intentional SKIP, compiled Chromium/browser/mobile/offline/a11y42330453335, SQL/JWT42330453243, security42330453348, approval42330453294 SUCCESS; frozen60342330453230 SKIPPED, not PASS. The four R080 tests run in actual checked-in Node 22 suite.",
+        "PR1135 non-force squash MERGED 0881b3405d870843c98c64b706c320b68d2b8d08. Exact 4 merged Git blobs match passing PR head: engine02148f1ed1b0944d59110baa6da3bf322cfbefc5, yield tests c8f7c23bea9f06a3911429c9beb58f2161f09c12, queue184dea0f03bcd0c1d99667b97e663ab50c0459b6, journal6f843eb116ce70f22915343d675261d2f3010397. Exact merged-source Node22/lint/build42330605877 2,798 PASS/0 FAIL/6 SKIP, compiled browser/mobile/offline/a11y42330605927 and approval42330605886 SUCCESS; prior SQL/security head evidence unchanged and reused. No physical cup/member data checks claimed."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Await applicable source-bound CI, non-force merge, exact merged checks and docs-only READY reconciliation"
+      "ci_runs": [
+        42330453320,
+        42330453335,
+        42330453243,
+        42330453348,
+        42330453294,
+        42330453230,
+        42330605877,
+        42330605927,
+        42330605886
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "R455-080 owner-authorized SAFE measured evidence validity gate, research-only and development only; historical ratings/notes preserved; no deployment, member/provider writes, or actual cup testing."
+      "notes": "SAFE R455-080 measured sweetness-evidence eligibility correction. Source exact nonforce merge PR1135 and app/UX/SQL/security/governance pass; development READY, NOT DEPLOYED. Preserves full saved shots/five tastes/notes/one-control Locked policy. No member incidence, production write or empirically proven sweetness improvement."
     },
     {
       "id": "DIC-Q-455-family-measurement-integrity",
