@@ -1,5 +1,20 @@
 # Issue #455 — Espresso research → Log Shot → Rate → Recommendations
 
+## November 7, 2026 UTC — R455-096 ACTIVE SAFE cached next-shot target integrity [skip netlify]
+
+**Source-bound recovery:** development parent `e9f8f752102f0611d44a0f83bb754de65c4ea347`, tree `2288b2558ee2a7597ad9c4dc2c588ddaec99dee1`; original `site/lib/engine.js` blob `70bac504ceb2055e0f1ebc8da33f1b7da8128442`, `docs/RELEASE_QUEUE.json` blob `65b7be7aaf45c402d47b1081afada39040bcee9f`, scoped journal blob `164dca2e18897248785b280d718f91c03103fc06`. Main `bd627d40f7e65321323512b303d2e3f75709af39`, release/production `2ec10324fcaa4b60d1e48240b44b77b141b9ba54` observed and untouched. Reviewed AGENTS, context entrypoint/PREFLIGHT, Master §19.3/§25.2, Decision Ledger, approval coverage/status/source register, #455/#335/#267/#33/#96 and concurrently open #267 draft PRs; Drive S019/slow feeding/espresso searches returned no new originals and available Space search no DIC project page. Owner #630 temporary PUBLIC GitHub exception remains owner-controlled.
+
+**Reproduced source gap:** A valid dated, in-range last shot can include an *older cached next plan* with an impossible yield (0/201 g), grinder outside current espresso range, temperature outside 70–100 C or dose outside 5–40 g. `recommendation()` screens the measured *last* shot but accepted `last.suggestion.next` without screening that next plan, and then exposed it as a current recommendation. This is a direct source-reproducible synthetic risk, not a known member failure or evidence of better espresso.
+
+**SAFE remedy:** Before applying a cached next plan, use only existing owner-Locked entry/equipment bounds to identify invalid next controls; re-evaluate `nextAdvice` from the latest actual measured shot when any are invalid. Preserve historical cached suggestion, notes and five sensory ratings, same-coffee context, Time as outcome, distinct style/feed/family, privacy and original history. Do not invent any scientific espresso optimum, modify schema or change owner-approved meaningful yield size. Valid archived advice and inclusive endpoints remain intact.
+
+**SAME-COMMIT file scope:** `site/lib/engine.js`, `tests/issue455-cached-next-physical-bounds.test.mjs`, `docs/RELEASE_QUEUE.json` (TESTING only), this scoped journal. Seven positive/negative direct-module synthetic groups prepared; Node22/build, browser/mobile/offline/a11y/cloud, isolated SQL, security and governance **UNEXECUTED at authoring, NOT PASS/READY**. Original603 separate SKIPPED/unrun. No prod/member/provider/Netlify writes, no main/release move, no force. #267 line-by-line audit owned separately, zero new credit. Research source register unchanged; unresolved original S019 remains unreviewed.
+
+**Next executable action:** Open PR against current development, wait for exact PR-head CI; fix regressions without weakening protections, nonforce integrate only on verified success; read exact merged code blobs/CI, then docs-only proposal #58 and CURRENT_STATUS/queue READY reconciliation with governance and Issue #455 receipt. Keep Issue #455 OPEN. No owner product decision taken.
+
+---
+
+
 ## November 7, 2026 UTC — R455-095 merged source PASS and docs-only READY reconciliation [skip netlify]
 
 Code PR #1250 exact head 3d2cdac4655e567bd6b6a09f060fbeeb8cf8c884 nonforce squash merge b568337c2d4dc827404d7b57d5277b96d87a0f2a; original code/test/TESTING queue/same-commit journal blobs head→merge byte-identical: engine 70bac504ceb2055e0f1ebc8da33f1b7da8128442; seven-group real-module test 371c8ba1562561ae13b18cab70cd1aefb6faa4a2; queue 59584b9c8f11dd310bd378b7caedfe15109819b6; journal 35aa52ab5e1cb2ac74af9089f6520fb3d411aba6. Exact head Node22/lint/build42397605409 2952/0/6 PASS, mobile/browser/offline/a11y/cloud42397605398, SQL42397605677, security42397605437, approval42397605440 SUCCESS; frozen60342397605510 SKIPPED. Exact code-merged Node22/lint/build42397815655 2952/0/6 SUCCESS, mobile/browser/offline/a11y/cloud42397815660 and governance42397815649 SUCCESS. No physical cup or hosted Auth test claimed.

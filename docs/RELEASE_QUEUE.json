@@ -8,6 +8,27 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-cached-next-physical-bounds",
+      "issue": 455,
+      "title": "Recompute physically invalid archived cached next-shot controls before showing measured advice",
+      "state": "TESTING",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "R455-096 source e9f8f752102f0611d44a0f83bb754de65c4ea347; engine blob 70bac504ceb2055e0f1ebc8da33f1b7da8128442. Source-reproducible risk: valid latest measured shot may carry a cached historical next target outside existing dose/yield/grinder/temperature entry range. Source inspection; not an observed member incident or actual espresso outcome.",
+        "Narrow SAFE guard: only when cached next contains a nonfinite/out-of-entry-bounds target, recalculate approved nextAdvice from the unchanged measured shot. Preserve cached historical original, notes, five ratings, dose, style/feed/family and one-controllable-control behavior.",
+        "Seven synthetic direct real-module regression groups: invalid/valid endpoints, positive valid cached target retention, missing cache/ratings, original immutability. Node22/UX/mobile/offline/a11y/SQL/security/governance exact-source CI NOT YET EXECUTED.",
+        "Frozen603 source replay NOT RUN; no hosted Auth/provider data or physical cup measurement. READY requires exact PR-head and merged applicable CI plus docs-only ledger/status/queue reconciliation."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Source-bound PR/head and merged-app CI unexecuted; docs-only reconciliation and governance pending"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Development-only Option B; existing CONFIG.bounds dose 5-40 g/yield 5-200 g/temperature 70-100 C and member-entered grinder espresso range unchanged. No publication."
+    },
+    {
       "id": "DIC-Q-33-original603-311-selected-farm-volcano-region",
       "issue": 33,
       "title": "Refine current selected named producing farm's volcano region without inventing a farm-name municipality",
