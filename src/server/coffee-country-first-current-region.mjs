@@ -29,7 +29,7 @@ export function selectedCountryFirstCurrentRegion({name='',origin='',blocks=[]}=
  const identity=new RegExp('\\b(?:our|this)\\b.{0,100}\\b'+escapeRegex(country)+'\\s+'+escapeRegex(region)+'\\b.{0,70}\\b(?:is roasted|is grown|is sourced|are roasted|are grown|are sourced)\\b','iu');
  const proofs=new Map();
  for(const block of blocks){
-  if(!block||block.tag!=='p'||block.educational||
+  if(!block||!['p','span','div'].includes(block.tag)||block.educational||
    typeof block.text!=='string'||block.text.length>1300||
    disallowed.test(block.section||''))continue;
   for(const sentence of block.text.split(/(?<=[.!?])\s+/u)){
