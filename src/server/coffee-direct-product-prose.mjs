@@ -427,7 +427,7 @@ export function selectedCurrentDecafSpecMethodEvidence(productHtml,{name,clean}=
     headings.some((heading,i)=>i>0&&heading!==selected&&!editorial.test(heading))||
     /^(?:all|shop|catalog|collection)\s+(?:decaf|coffee)/iu.test(String(name)))return empty;
  // FAQ and educational examples are not actual selected-product specs.
- const faqStart=blocks.find(b=>b.tag==='h1'&&fold(b.text)==='frequently asked questions')?.start??Infinity;
+ const faqStart=blocks.find(b=>/^h[1-6]$/.test(b.tag)&&fold(b.text)==='frequently asked questions')?.start??Infinity;
  const seen=new Map();
  for(const block of blocks){
   if(block.start>=faqStart||block.educational||!['li','p','div','span'].includes(block.tag)||
@@ -447,15 +447,21 @@ export function selectedCurrentDecafSpecMethodEvidence(productHtml,{name,clean}=
    // literal value without a colon: <strong>Processing</strong>Washed:
    // Mountain Water Decaf. Require an actual adjacent strong label in a
    // bounded product BR segment, not a freeform prose or FAQ substring.
-   let hit=caption.text.trim().match(/^(Decaffeination(?:\s+(?:Method|Process))?|Process(?:ing)?(?:\s+Method)?)\s*[:：]\s*(.{3,180})$/iu);
+   let hit=caption.text.trim().match(/^(Decaffeination(?:\s+(?:Method|Process))?|Decaf\s+Process|Process(?:ing)?(?:\s+Method)?)\s*[:：]\s*(.{3,180})$/iu);
    if(!hit){
-    const structured=caption.html.trim().match(/^<strong\b[^>]{0,240}>\s*(Decaffeination(?:\s+(?:Method|Process))?|Process(?:ing)?(?:\s+Method)?)\s*<\/strong>\s*(.{3,250})$/iu);
-    const splitLabel=caption.splitStrong?caption.html.trim().match(/^(Decaffeination(?:\s+(?:Method|Process))?|Process(?:ing)?(?:\s+Method)?)\s*<\/strong>\s*(.{3,250})$/iu):null;
+    const structured=caption.html.trim().match(/^<strong\b[^>]{0,240}>\s*(Decaffeination(?:\s+(?:Method|Process))?|Decaf\s+Process|Process(?:ing)?(?:\s+Method)?)\s*<\/strong>\s*(.{3,250})$/iu);
+    const splitLabel=caption.splitStrong?caption.html.trim().match(/^(Decaffeination(?:\s+(?:Method|Process))?|Decaf\s+Process|Process(?:ing)?(?:\s+Method)?)\s*<\/strong>\s*(.{3,250})$/iu):null;
     const selected=structured||splitLabel;
     if(selected)hit=[selected[0],selected[1],clean(selected[2],180)];
    }
    if(!hit)continue;
    const value=hit[2].trim();
+   // "Decaf Process" is itself an affirmative decaffeination label, but
+   // its VALUE must still be a complete named treatment, not generic water
+   // rinsing/washing or equipment use. A vague label never licenses a guess.
+   // Other existing Process/Decaffeination captions retain their own guards.
+   if(/^Decaf\s+Process$/iu.test(hit[1])&&
+      !/^(?:(?:swiss|mountain)[ -]?water|water[ -]?process|sugar(?:[ -]?cane|[ -]?process)|ethyl[ -]?acetate|co[ -]?2|(?:supercritical[ -]?)?carbon[ -]?dioxide)(?:\s+\(co\s*2\))?(?:\s+(?:ea|decaf(?:feination)?|method|process)){0,2}\.?$/iu.test(value))continue;
    // Process: Washed is green processing; Process: Washed + EA Sugarcane
    // Decaffeination explicitly supplies an independent decaf treatment.
    if(!/^decaffeination/i.test(hit[1])&&
