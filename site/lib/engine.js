@@ -417,7 +417,13 @@ export function recommendation(s,coffeeId,options={}) {
  rec.style=style;rec.basketId=basket.id;rec.feedMode=feed;
  rec.yield={low:round(rec.ratio.low*rec.doseG),high:round(rec.ratio.high*rec.doseG),center:round(rec.ratio.center*rec.doseG)};
  // Successful shot families are chosen independently of any retired Experiment workflow.
- const last=s.shots.filter(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.basketId===basket.id&&sh.feedMode===feed&&sh.calibrationId===v.calibrationId&&typeof sh.timestamp==='string'&&sh.timestamp.trim()&&Number.isFinite(Date.parse(sh.timestamp))).sort((a,b)=>Date.parse(b.timestamp)-Date.parse(a.timestamp))[0];
+ // An unloggable archived shot must never replace a usable fresh recommendation
+  // with a cached adjustment or diagnostic based on impossible measured controls.
+  // Preserve that shot, its original notes/ratings and its saved suggestion in History.
+  const last=measuredRecipeShots(s.shots).filter(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.basketId===basket.id&&sh.feedMode===feed&&sh.calibrationId===v.calibrationId&&
+   finite(sh.grindSetting)&&sh.grindSetting>=v.grinderMin&&sh.grindSetting<=v.grinderMax&&
+   (sh.tempC==null||validRecordedTemperature(sh.tempC))&&
+   typeof sh.timestamp==='string'&&sh.timestamp.trim()&&Number.isFinite(Date.parse(sh.timestamp))).sort((a,b)=>Date.parse(b.timestamp)-Date.parse(a.timestamp))[0];
  if(!options.ignoreAdvice&&last&&!hasLocalSuccess(s,coffeeId,style)){
   // Keep the recipe card consistent with fresh taste feedback, even before a
   // derived suggestion is cached (e.g. immediately after an offline shot).

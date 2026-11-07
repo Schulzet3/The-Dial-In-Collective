@@ -8,6 +8,28 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-next-shot-import-measurement-eligibility",
+      "issue": 455,
+      "title": "Keep physically invalid archived last-shot readings out of next recipe adjustment display",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Source baseline 7754a8054b8e1fdf0eeb12d69f23e6d2e1b0379b engine blob 143dc22edccd4c52c3250d251e530ed472495155 recommendation() last-shot fallback accepted imported dated non-green dose/yield/time, grind or temp outside existing Log Shot/espresso bounds; could surface stale cached next-shot changes; synthetic code-level defect, no observed member incident.",
+        "SAFE: Reuse existing measuredRecipeShots, current grinder espresso bounds and validRecordedTemperature when selecting archived latest shot to drive recommendation next/diagnostic; prefer next eligible older shot or normal starting recipe; preserve all original records, notes, five ratings and cached suggestions.",
+        "Eight synthetic real-module positive/negative, boundary, chronological fallback, immutable and all-green regression groups at tests/issue455-next-shot-import-validity.test.mjs.",
+        "Node22, browser/mobile/offline/accessibility/cloud, isolated SQL, source security and governance CI not yet executed at authoring; not READY or deployed."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact PR-head and merged-source checks pending"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "R455-093 focused safe import evidence guard. No new numerical rule, taste model, data capture, recipe style merging or production operations; all tests pending at source authoring."
+    },
+    {
       "id": "DIC-Q-33-original603-273-h1-source-section-provenance",
       "issue": 33,
       "title": "Do not inherit unrelated testimonial headings in selected coffee Source Review",
