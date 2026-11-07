@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {mkdtempSync,writeFileSync,readFileSync,rmSync} from 'node:fs';
+import {mkdtempSync,mkdirSync,writeFileSync,readFileSync,symlinkSync,rmSync} from 'node:fs';
+import {createHash} from 'node:crypto';
 import {execFileSync,spawnSync} from 'node:child_process';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
@@ -41,7 +42,7 @@ test('rejects accidentally tracked private credential files and preserves public
 test('records redacted paths and line numbers, not embedded secret values',()=>{
  const secret='sb_secret_'+'B'.repeat(27);
  const path='docs/private-note.txt';
- const result=inspectTrackedSource({paths:[path],read:()=>Buffer.from('head\n'+secret+'\n')});
+ const result=inspectTrackedSource({paths:[path],read:()=>Buffer.from('head\n'+secret+'\n'),stat:()=>({isSymbolicLink:()=>false})});
  assert.equal(result.candidates.length,1);
  assert.deepEqual(result.candidates[0],{path,line:2,rule:'supabase_secret'});
  assert.ok(!JSON.stringify(result.candidates).includes(secret));
@@ -70,4 +71,26 @@ test('CLI screens tracked files and reports rule/line but never raw credential b
 test('security scanner source itself produces zero high-confidence matches',()=>{
  const source=readFileSync(new URL('../scripts/audit/security-inventory.mjs',import.meta.url),'utf8');
  assert.deepEqual(source.split(/\r?\n/).flatMap(secretRulesOnLine),[]);
+});
+
+test('tracked symlinks hash Git link bytes without dereferencing untracked outside files',()=>{
+ const temp=mkdtempSync(join(tmpdir(),'dic-symlink-guard-'));
+ const root=join(temp,'repo');
+ const secret='ghp_'+'X'.repeat(40);
+ try{
+  mkdirSync(root);
+  writeFileSync(join(temp,'not-tracked-secret.txt'),secret+'\n');
+  symlinkSync('../not-tracked-secret.txt',join(root,'tracked-link'));
+  execFileSync('git',['init','-q'],{cwd:root});
+  execFileSync('git',['add','tracked-link'],{cwd:root});
+  const staged=execFileSync('git',['show',':tracked-link'],{cwd:root});
+  assert.equal(staged.toString('utf8'),'../not-tracked-secret.txt');
+  const result=inspectTrackedSource({paths:[join(root,'tracked-link')]});
+  assert.equal(result.files[0].symlink,true);
+  assert.equal(result.files[0].category,'tracked_symlink_target');
+  assert.equal(result.files[0].sha256,createHash('sha256').update(staged).digest('hex'));
+  assert.equal(result.files[0].bytes,staged.length);
+  assert.deepEqual(result.candidates,[]);
+  assert.ok(!JSON.stringify(result).includes(secret));
+ }finally{rmSync(temp,{recursive:true,force:true});}
 });
