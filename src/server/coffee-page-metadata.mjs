@@ -33,6 +33,7 @@ import {selectedCurrentInlineShopifyRoastTag} from './coffee-current-inline-shop
 import {countrywideEducationalOriginCorrection} from './coffee-countrywide-context-guard.mjs';
 import {selectedFarmStoryRegionMismatch} from './coffee-title-region-evidence.mjs';
 import {selectedCurrentFarmGrowingLocality} from './coffee-selected-farm-growing-locality.mjs';
+import {selectedCurrentFarmCountryLocality} from './coffee-selected-farm-country-locality.mjs';
 import {selectedProcessingSiteNotFarmOrigin} from './coffee-processing-site-origin-guard.mjs';
 import {selectedCurrentColombianDepartmentOrigin} from './coffee-selected-department-origin.mjs';
 import {selectedCurrentNamedMicroLotSector} from './coffee-selected-microlot-sector-origin.mjs';
@@ -2186,6 +2187,24 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     field:'origin',label:'Exact selected farm growing locality',
     value:growing.quote.slice(0,400),source_url,source_type:'html',
     section:'Exact selected current growing prose'});
+  }
+ }
+
+ // A selected current family farm plus matching named method can corroborate
+ // a town within the already documented country, but not an unverified district.
+ if(fields.origin&&!conflicts.has('origin')){
+  const locality=selectedCurrentFarmCountryLocality({
+   name:fields.name,origin:fields.origin,producer:fields.producer,
+   process:fields.process,blocks:productCoffeeProse(canonicalProduct,clean)
+  });
+  if(locality){
+   rememberCoffeeReviewCandidate(fields,'origin',fields.origin,'Broader selected Country label');
+   fields.origin=locality.value;
+   if(source_facts.length<384)source_facts.push({
+    field:'origin',label:'Exact selected producing farm town',
+    value:locality.quote.slice(0,400),source_url,source_type:'html',
+    section:'Exact selected current producing farm prose'
+   });
   }
  }
 
