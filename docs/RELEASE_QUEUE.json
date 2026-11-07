@@ -19,7 +19,8 @@
       "tests": [
         "Source: original selected Rise Up Nicaragua Honey official H1, Finca Los Pinos family farm located in Aranjuez, literal roaster region Mataglapa (unverified spelling), producer Byron Corrales and Honey Process.",
         "Exact initial code PR #1243 head 8b71c2855a2ba995cc00e27ed002fbf9cc74a7ba; approval run 42394082257 FAIL strictly because new runtime path absent from queue; first cloud/mobile/SQL/security/archive SUCCESS; Node/lint/build still running at diagnosis. This TESTING intake row fixes that failure.",
-        "Proposed independent source post-merge review, full exact selected official source H1, parser, Add Coffee/Source Review and raw source hash still REQUIRED."
+        "Proposed independent source post-merge review, full exact selected official source H1, parser, Add Coffee/Source Review and raw source hash still REQUIRED.",
+        "Approval 42394179835 FAILED because optional merged_source_sha omitted; schema requires explicit null for TESTING before merge. Repaired exact validation schema; queue remains TESTING, no merge/pass claim."
       ],
       "ci_runs": [
         42394082257,
@@ -27,14 +28,16 @@
         42394082258,
         42394082025,
         42394082072,
-        42394082064
+        42394082064,
+        42394179835
       ],
       "blockers": [
         "PR exact head CI and full guarded official readback pending; original603 individual semantic certification incomplete"
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "R12 proposal only TESTING / development NOT READY nor DEPLOYED; no automatic promotion; original frozen oracle/corpus unchanged.",
-      "pr": 1243
+      "pr": 1243,
+      "merged_source_sha": null
     },
     {
       "id": "DIC-Q-455-make-current-measured-eligibility",
