@@ -52,12 +52,12 @@ test('R093 invalid recorded temperature cannot silently transfer to next recipe'
 test('R093 still accepts both inclusive grinder and temperature endpoints',()=>{
  for(const [grindSetting,tempC] of [[0,70],[5,100]]){
   const s=make();s.shots.push(archive('valid',{grindSetting,tempC,
-   suggestion:{title:'Next shot',next:{grindSetting,yieldCenter:52}}}));
+   suggestion:{title:'Next shot',next:{grindSetting,yieldCenter:55}}}));
   const r=guide(s);
   assert.equal(r.source,'Adjustment from your latest taste rating');
   assert.equal(r.doseG,20);
   assert.equal(r.tempC,tempC);
-  assert.equal(r.yield.center,52);
+  assert.equal(r.yield.center,55);
   assert.equal(r.grind.value,grindSetting);
  }
 });
