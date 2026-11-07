@@ -2919,9 +2919,24 @@
       "confirmed_new_defects": 0,
       "provider_writes": false,
       "next": "pg_opclass ordinal 1/179; pg_opfamily 1/148; pg_am 1/7; native and hosted controls unverified"
+    },
+    {
+      "event": "2026-11-07_run63_pg_opclass_179_pg_opfamily_148_pg_am_7_full_visible_declaration_review",
+      "source_development_parent_sha": "a41b7c315a7e37b23bdee5902a17007c6dbf25ae",
+      "provider_at": "2026-11-07 10:48:56.811315+00",
+      "reviewed_new": 334,
+      "receipt_paths": [
+        "docs/audits/issue509-provider-opclass-001-179-20261107-run63.json",
+        "docs/audits/issue509-provider-opfamily-001-148-20261107-run63.json",
+        "docs/audits/issue509-provider-am-001-007-20261107-run63.json"
+      ],
+      "confirmed_new_defects": 0,
+      "provider_writes": false,
+      "baseline_complete": false,
+      "next": "pg_collation ordinal 1/861; pg_conversion 1/128; native/hosted unverified"
     }
   ],
-  "state": "VISIBLE_PG_CATALOG_3319_3319_AND_PG_SETTINGS_DESCRIPTORS_480_480_COMPLETE; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
+  "state": "PG_OPCLASS_179_PG_OPFAMILY_148_PG_AM_7_VISIBLE_DECLARATIONS_COMPLETE; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
   "application_table_review": {
     "total": 46,
     "current_index": 46,
@@ -7311,5 +7326,73 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "pg_opclass ordinal 1/179; pg_opfamily 1/148 and pg_am 1/7, changed-provider drift; hosted #96 Auth/JWT/API"
+  },
+  "provider_opclass_run63": {
+    "status": "ALL_179_VISIBLE_PG_OPCLASS_DECLARATIONS_DIRECTLY_REVIEWED; NATIVE_IMPLEMENTATIONS_UNVERIFIED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "provider_at": "2026-11-07 10:48:56.811315+00",
+    "development_parent_sha": "a41b7c315a7e37b23bdee5902a17007c6dbf25ae",
+    "main_sha": "bd627d40f7e65321323512b303d2e3f75709af39",
+    "release_sha": "2ec10324fcaa4b60d1e48240b44b77b141b9ba54",
+    "receipt_path": "docs/audits/issue509-provider-opclass-001-179-20261107-run63.json",
+    "reviewed_new": 179,
+    "total": 179,
+    "remaining": 0,
+    "raw_catalog_characters": 33313,
+    "access_methods": {
+      "gin": 5,
+      "gist": 10,
+      "hash": 41,
+      "btree": 44,
+      "brin": 72,
+      "spgist": 7
+    },
+    "first_md5": "bec5fff8c353568f6d44284737ffcc98",
+    "last_md5": "48a5154cb2ede0f94acd39a7a5b9f5fa",
+    "integrity": {
+      "duplicate_defaults": 0,
+      "missing_or_mismatched_family_method": 0,
+      "empty_families": 0,
+      "tsvector_gin_gist_cross_type_ops_expected": 2
+    },
+    "confirmed_new_defects": 0,
+    "source_fixes": 0,
+    "provider_writes": false,
+    "next": "pg_collation 1/861, then pg_conversion 1/128; native and hosted security unverified"
+  },
+  "provider_opfamily_run63": {
+    "status": "ALL_148_VISIBLE_PG_OPFAMILY_DECLARATIONS_DIRECTLY_REVIEWED; NATIVE_UNVERIFIED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "provider_at": "2026-11-07 10:48:56.811315+00",
+    "receipt_path": "docs/audits/issue509-provider-opfamily-001-148-20261107-run63.json",
+    "reviewed_new": 148,
+    "total": 148,
+    "remaining": 0,
+    "raw_catalog_characters": 15341,
+    "first_md5": "8269b2141cd5ba9dc0ef80c13f6e3df2",
+    "last_md5": "d58a6422bdf02a63b6ce00c558a3f771",
+    "confirmed_new_defects": 0,
+    "provider_writes": false
+  },
+  "provider_am_run63": {
+    "status": "ALL_7_VISIBLE_PG_AM_HANDLER_DECLARATIONS_DIRECTLY_REVIEWED; NATIVE_COMPILED_UNVERIFIED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "provider_at": "2026-11-07 10:48:56.811315+00",
+    "receipt_path": "docs/audits/issue509-provider-am-001-007-20261107-run63.json",
+    "reviewed_new": 7,
+    "total": 7,
+    "remaining": 0,
+    "raw_catalog_characters": 533,
+    "handler_symbols": [
+      "brinhandler",
+      "bthandler",
+      "ginhandler",
+      "gisthandler",
+      "hashhandler",
+      "heap_tableam_handler",
+      "spghandler"
+    ],
+    "confirmed_new_defects": 0,
+    "provider_writes": false
   }
 }
