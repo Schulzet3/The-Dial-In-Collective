@@ -8,6 +8,26 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-outlier-feed-basket-calibration-context",
+      "issue": 455,
+      "title": "Prevent explicit cross-feed/basket/calibration successes from creating false shot outlier prompts",
+      "state": "TESTING",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "R455-097 original development 30f040f62772ab4f5d4745f0b8ebc83af16561bc; engine prior blob 777303fea493dcb85f3aac6a5ac1e76093502fe3. Code inspection: isExtreme() mixes four past all-green same-style/setup successes across explicitly different feed, basket and grinder calibration to trigger mandatory 25-second or 1.25-ratio outlier review. Reproduction is source-derived synthetic, not actual member incident.",
+        "SAFE filter only known conflicting feedMode, basketId and calibrationId in outlier prior evidence. No new outlier numeric threshold, no access/approval change; archived missing fields retain current legacy fallback and original notes/ratings/history. This preserves standard vs slow feed hydraulic context, without using research as a new grinder/taste policy.",
+        "Five synthetic direct real-module test groups: wrong context quorum, mixed fourth, valid positive original thresholds, missing-legacy compatibility, integrated saveShot. Exact PR-head Node22/UX/mobile/offline/SQL/privacy/governance tests NOT EXECUTED; frozen603 NOT RUN; real user/physical quality not verified.",
+        "Not READY until tested-head and exact merged required CI plus nonforce integration/reconciliation."
+      ],
+      "ci_runs": [],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Development-only Option B, under test. No production release, SQL/Auth/Edge/member/provider writes.",
+      "merged_source_sha": null
+    },
+    {
       "id": "DIC-Q-33-original603-321-current-country-first-region",
       "issue": 33,
       "title": "Refine exact selected current single-origin named region in country-first H1 and source narrative",
