@@ -7977,6 +7977,28 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
       "notes": "Development-only SAFE existing measurement gate; no publication, production or provider writes, policy changes or new owner approval.\nR455-090 verified narrow development-only READY, NOT DEPLOYED. Boundaries: physical measurement validity ONLY for archived personal grinder evidence; original private history and all five taste scores preserved. Original S019 PDF inaccessible."
+    },
+    {
+      "id": "DIC-Q-455-community-physical-ratio-bounds",
+      "issue": 455,
+      "title": "Exclude out-of-entry-bounds archived dose/yield from local Community ratio summary",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "R455-092 source 7291592712a87a64821913191b5540f5bee88643, engine blob 2fb2b038860b787575a4ad13b75193cd32e0e595: communitySummary accepted finite positive imported dose 4g/41g or yield 4g/201g despite existing logging bounds; could skew contributor ratio/quorum. Synthetic source gap, no demonstrated real member incident.",
+        "SAFE: apply existing CONFIG.bounds dose [5,40]g and yield [5,200]g to Community local ratio evidence; no new science, numeric target, timing requirement, user data capture or taste policy.",
+        "Seven direct real-module synthetic regression groups added at tests/issue455-community-physical-ratio-bounds.test.mjs. Auth/SQL/provider/real-member writes not performed.",
+        "Node22, relevant browser/offline/mobile/a11y/security/SQL/approval CI, exact PR-head/merged readback UNEXECUTED at authoring; no PASS, READY or DEPLOYED claim."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Applicable exact source-bound PR-head and merged-source CI and docs reconciliation pending"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "R455-092 SAFE current entry-bounds eligibility for existing ratio-only Community summary. Original notes/history and all five taste values remain untouched. No production deployment or database/provider operation."
     }
   ],
   "history": [
