@@ -7336,6 +7336,26 @@
       "delivered_tested_source_sha": "21e8db053a542f53ff38227977e279f6acf0abbf",
       "delivered_release_sha": "2ec10324fcaa4b60d1e48240b44b77b141b9ba54",
       "delivered_netlify_deploy_id": "6aee3b75065b1dac2f35fcfe"
+    },
+    {
+      "id": "DIC-Q-455-current-grind-range-evidence",
+      "issue": 455,
+      "title": "Exclude out-of-range archived same-calibration grind from proven/paired recommendations",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js",
+        "tests/issue455-current-grind-range-evidence.test.mjs"
+      ],
+      "tests": [
+        "Observed current-source logic: an archived five-green current-calibration dial outside active entered espresso range was labeled proven and only later clamped. Synthetic counterexample, no real member incident.",
+        "SAFE: require inclusive active espresso range before using current-calibration grind as proven, similar/nearby or slow-feed paired/standard anchor; keep past values and legitimate old-range snapshot translation.",
+        "Six real-module synthetic regression scenarios written, not yet run. Exact source Node22/lint/build, browser/mobile/offline/a11y, SQL, security, governance, merged CI required before READY."
+      ],
+      "ci_runs": [],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "TESTING, NOT DEPLOYED, no new Locked rule or research-derived numeric target, no production writes."
     }
   ],
   "history": [

@@ -139,7 +139,10 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
  // A legacy success flag alone is not evidence of five actually ideal ratings.
  const validSuccess=sh=>sh.dialedIn===true&&isDialed(sh.tasteScales);
  const v=activeVersion(s),qual=s.shots.filter(sh=>!sh.hidden&&validSuccess(sh)&&sh.style===style&&sh.feedMode===feed&&hardwareMatch(sh,v)&&finite(sh.grindSetting));
- const current=qual.filter(sh=>sh.calibrationId===v.calibrationId),same=current.filter(sh=>sh.coffeeId===c.id&&(!familyId||sh.familyId===familyId));
+ // Current-calibration history outside the entered espresso range remains
+  // untouched in History, but is not proven current-scale grind evidence.
+  const current=qual.filter(sh=>sh.calibrationId===v.calibrationId&&
+   sh.grindSetting>=v.grinderMin&&sh.grindSetting<=v.grinderMax),same=current.filter(sh=>sh.coffeeId===c.id&&(!familyId||sh.familyId===familyId));
  const basketHits=same.filter(sh=>sh.basketId===basket.id);
  if(basketHits.length)return {value:round(quantile(basketHits.map(sh=>sh.grindSetting),.5)),source:'Your successful setting',proven:true};
  if(same.length)return {value:round(quantile(same.map(sh=>sh.grindSetting),.5)),source:'Reference from your other basket or setup',proven:false};
@@ -182,6 +185,7 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
    if(sh.hidden||!validSuccess(sh)||sh.setupVersionId!==v.id||
       sh.calibrationId!==v.calibrationId||sh.style!==style||
       sh.basketId!==basket.id||!finite(sh.grindSetting)||
+      sh.grindSetting<v.grinderMin||sh.grindSetting>v.grinderMax||
       !['standard','slow'].includes(sh.feedMode))continue;
    const row=paired.get(sh.coffeeId)||{standard:[],slow:[]};
    row[sh.feedMode].push(sh.grindSetting);paired.set(sh.coffeeId,row);
@@ -193,7 +197,8 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
   const standard=s.shots.filter(sh=>!sh.hidden&&validSuccess(sh)&&
    sh.setupVersionId===v.id&&sh.calibrationId===v.calibrationId&&
    sh.coffeeId===c.id&&sh.style===style&&sh.basketId===basket.id&&
-   sh.feedMode==='standard'&&finite(sh.grindSetting));
+   sh.feedMode==='standard'&&finite(sh.grindSetting)&&
+   sh.grindSetting>=v.grinderMin&&sh.grindSetting<=v.grinderMax);
   const anchor=standard.length?quantile(standard.map(sh=>sh.grindSetting),.5):
    v.grinderMin+span*starterFraction;
   const value=round(clamp(anchor-shift,v.grinderMin,v.grinderMax));
