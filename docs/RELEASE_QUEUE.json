@@ -7344,13 +7344,13 @@
       "state": "TESTING",
       "merged_source_sha": null,
       "scope_paths": [
-        "site/lib/engine.js",
-        "tests/issue455-current-grind-range-evidence.test.mjs"
+        "site/lib/engine.js"
       ],
       "tests": [
         "Observed current-source logic: an archived five-green current-calibration dial outside active entered espresso range was labeled proven and only later clamped. Synthetic counterexample, no real member incident.",
         "SAFE: require inclusive active espresso range before using current-calibration grind as proven, similar/nearby or slow-feed paired/standard anchor; keep past values and legitimate old-range snapshot translation.",
-        "Six real-module synthetic regression scenarios written, not yet run. Exact source Node22/lint/build, browser/mobile/offline/a11y, SQL, security, governance, merged CI required before READY."
+        "Six real-module synthetic regression scenarios written, not yet run. Exact source Node22/lint/build, browser/mobile/offline/a11y, SQL, security, governance, merged CI required before READY.",
+        "Governance first PR-head run 42320215550 FAILED queue intake: scope_paths may contain only deployable runtime files, not tests. Corrected queue metadata only; prior failure preserved, CI rerun required."
       ],
       "ci_runs": [],
       "blockers": [],
