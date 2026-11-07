@@ -11,7 +11,7 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 - [GitHub-wide exhaustive word-level records/doc audit: Issue #504](issue-504.md) — nonoverlapping with #267 source-code review
 - [Issue #96 source-transfer and receipt evidence](ops-issue96-receipt.md)
 - [Selected-product extraction completeness: Issue #33](issue-33.md)
-- [Issue #33 Nov 7 original603 #247/#248/#249 Onyx current exact source intake](ops-issue33-eightyfifth3.md) — source-bound current official selection, 2026 lot/history negatives, parser CI pending; whole603 OPEN
+- [Issue #33 Nov 7 original603 #247/#248/#249 Onyx current exact source intake](ops-issue33-eightyfifth3.md) — actual 3/3 current official source hash verified; native animated H1 identity guard TESTING, full603 OPEN
 - [Issue #33 Nov 7 original603 #223/#224/#225 independently hash-verified exact selected official sources](ops-issue33-eightyfourth3.md) — 3/3 parser/Add Coffee and Source Review executed, same-product role/lot qualifications; whole603 OPEN
 - [Issue #33 Nov 7 original603 #219/#220/#222 independently hashed current official sources](ops-issue33-eightythird3.md) — executed 3/3 selected parser/Add Coffee, #219 roast variants and #220/#222 semantic qualifications; full603 OPEN
 - [Issue #33 Nov 7 original603 #212/#213/#218 verified selected source and #213 Q’Ail/Rio Ocho correction](ops-issue33-eightysecond3.md) — exact current official HTML + independent hashes, code CI/merge READY; full603 OPEN

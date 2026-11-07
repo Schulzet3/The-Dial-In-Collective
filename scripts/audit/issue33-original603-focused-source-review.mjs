@@ -12,6 +12,7 @@ import {productCoffeeProse} from '../../src/server/coffee-product-prose.mjs';
 import {extractCoffeeBlendEvidence} from '../../src/server/coffee-blend-evidence.mjs';
 import {sameHandleCollectionAlternate,identicalCurrentSelectedTitle} from './issue33-selected-public-alternate.mjs';
 import {requiredFocusedSourceFailures} from './issue33-focused-source-acceptance.mjs';
+import {selectedProductHeadings} from './issue33-selected-product-heading.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../../site/cloud/coffee-url-autofill.js';
 const sha=value=>createHash('sha256').update(value).digest('hex');
 const clip=(v,n=350)=>String(v??'').replace(/\s+/g,' ').trim().slice(0,n);
@@ -72,8 +73,8 @@ for(const target of targets){
    r.status='FETCHED';r.final_url=res.source_url||r.official_url;
    r.html_sha256=sha(res.html);r.html_bytes=Buffer.byteLength(res.html,'utf8');
    const selected=productMarkup(res.html);
-   r.selected_h1=[...selected.matchAll(/<h1\b[^>]{0,500}>([\s\S]{0,1800}?)<\/h1>/gi)]
-     .slice(0,4).map(m=>clip(m[1].replace(/<[^>]+>/g,' '),200));
+   r.selected_h1=selectedProductHeadings(selected);
+   r.selected_h1_present_in_scoped_html=/<h1\\b/i.test(selected);
    // Diagnostic provenance only: an old SEO page title may name a DIFFERENT
    // coffee even while the current selected product H1 and body are correct.
    // Never use this as a canonical identity or field assertion.
@@ -83,6 +84,9 @@ for(const target of targets){
    writeFileSync(join(dest,r.html_artifact),res.html,'utf8');
    const p=extractPublicCoffeeFacts(res.html,{source_url:r.final_url});
    r.parser_ok=p?.ok===true;r.parser_reason=clip(p?.reason,140);
+   r.selected_heading_identity_verified=r.selected_h1_present_in_scoped_html
+     ?r.selected_h1.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p?.fields?.name))
+     :null;
    if(r.alternate_url_attempted){
     r.alternate_identity_match=r.parser_ok&&r.selected_h1.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p.fields?.name));
     if(!r.alternate_identity_match){r.status='IDENTITY_MISMATCH';r.parser_ok=false;r.reason='alternate_selected_identity_unconfirmed';}
