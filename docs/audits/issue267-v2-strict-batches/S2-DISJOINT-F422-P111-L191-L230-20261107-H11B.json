@@ -23,10 +23,10 @@
         "source_blob_sha": "a6ecb5a57c36ebf71d71c484e673eb75924ecc23",
         "line": 1,
         "source_text": "#!/bin/sh",
-        "classification": "comment",
+        "classification": "interpreter_shebang",
         "behavior": "POSIX sh shebang for portable private restore-inventory comparison",
-        "quality": "Readable intent only.",
-        "bug_security_privacy_performance_risk": "Comment is not runtime assurance; caller test needed.",
+        "quality": "POSIX /bin/sh interpreter directive; executable entrypoint, not an ordinary comment.",
+        "bug_security_privacy_performance_risk": "Explicit POSIX shell interpreter; caller invokes sh directly; no shell portability defect demonstrated.",
         "dead_or_obsolete": "Historical recovery comparator; same live blob and known recovery-drill caller, not dead.",
         "redundant_duplicate": "No duplicate established in bounded call graph; entire repo dedup remains open.",
         "exact_current_counterpart": {
@@ -37,7 +37,7 @@
           "exact_literal_equal": true,
           "whole_blob_equal": true
         },
-        "testability": "Shell compare: missing, empty, identical, differing, unknown type; caller in isolated-recovery-drill.sh; tests not executed in docs pass.",
+        "testability": "Invoke script with /bin/sh against synthetic matching, missing, differing and unknown-mode private-safe fixture files. NOT EXECUTED in this docs-only pass.",
         "fix_removal_opportunity": "No demonstrated current defect or removable unused branch.",
         "locked_decision_fit": "Retain encrypted recovery, migration history, privacy and owner-controlled publishing.",
         "review_method": "AI direct numbered original literal interpretation; no independent human certification."
@@ -1323,5 +1323,13 @@
   "production_writes": false,
   "complete": false,
   "next_frozen": "F423 scripts/backups/... manifest next file",
-  "next_pinned": "P111 site/cloud/main.js:231"
+  "next_pinned": "P111 site/cloud/main.js:231",
+  "correction": {
+    "kind": "NONFORCE_PREMERGE_EVIDENCE_FIX",
+    "previous_proposed_commit": "baa53ac72c5fdb618350dd041b4d6f78912e0bb5",
+    "path": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F422-P111-L191-L230-20261107-H11B.json",
+    "line": 1,
+    "reason": "Shebang #!/bin/sh was mistakenly categorized as an ordinary comment; corrected to interpreter_shebang while retaining exact source literal and previous immutable commit history.",
+    "semantic_line_review_count_change": 0
+  }
 }
