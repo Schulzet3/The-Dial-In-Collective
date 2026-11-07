@@ -99,7 +99,7 @@ for(const target of targets){
     if(r.number===336){
       const cleanProbe=(v,n=6001)=>String(v||'').slice(0,n*6)
        .replace(/<[^<>]{0,1200}>/gu,' ').replace(/&(?:nbsp|amp);/giu,' ')
-       .replace(/\\s+/gu,' ').trim().slice(0,n);
+       .replace(/\s+/gu,' ').trim().slice(0,n);
       const prose=productCoffeeProse(selected,cleanProbe);
       const currentStory=prose.filter(block=>/We first purchased Luis['’]s coffee/u.test(block.text));
       const direct=selectedDirectProductCredits(selected,{name:p.fields?.name||'',clean:cleanProbe});

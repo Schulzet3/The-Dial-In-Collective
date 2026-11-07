@@ -7,3 +7,5 @@
 **Same commit:** only `scripts/audit/issue33-original603-focused-source-review.mjs` and `docs/workstreams/ops-issue33-r19-336-role-diagnostic-20261107.md`. Bounded public-only diagnostic for case336 inside exact chosen product parse prints structured selected H1, real paragraph tags, direct selected credit vs actual canonical Producer/Farm, source SHA, under existing 336/338/339 guarded HTTPS selector `[dic-issue33-ninetysixth3]`. No additional URLs, no elevated credentials, no production calls or altered parser. PR/merged tests **NOT YET EXECUTED**, no PASS claim at authoring.
 
 **Next executable:** PR-head changed-surface CI, safe nonforce merge, verify merged source SHA, captured diagnosis and artifact checks, trace why direct current actor not used in main extractor; fix root cause generically with positive/negative regressions and exact selected official merged after tests, then update queue and issue. Frozen603 SKIPPED is not PASS.
+
+**Same-commit verification fix:** corrected diagnostic-only whitespace collapse from an overescaped regex to `/\\s+/gu` before official source execution; this changes no parser/runtime behavior. Exact CI pending.
