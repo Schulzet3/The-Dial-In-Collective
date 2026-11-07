@@ -46,3 +46,15 @@ test('the real focused public script invokes fail-closed predicate and keeps ori
  assert.match(source,/manual_certified:0/);
  assert.doesNotMatch(source,/records\.some\(x=>x\.status==='FETCHED'&&/);
 });
+
+test('present selected original heading must be exact-product identity, not an unverified empty/changed animated H1',()=>{
+ assert.deepEqual(requiredFocusedSourceFailures([247],[{...good(247),
+  selected_h1_present_in_scoped_html:true,selected_heading_identity_verified:true}]),[]);
+ for(const value of [false,null,undefined]){
+  const failures=requiredFocusedSourceFailures([247],[{...good(247),
+    selected_h1_present_in_scoped_html:true,selected_heading_identity_verified:value}]);
+  assert.ok(failures.some(x=>x.reason==='selected_original_product_heading_identity_unverified'));
+ }
+ assert.deepEqual(requiredFocusedSourceFailures([247],[{...good(247),
+  selected_h1_present_in_scoped_html:false,selected_heading_identity_verified:null}]),[]);
+});

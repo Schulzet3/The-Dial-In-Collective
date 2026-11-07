@@ -19,6 +19,8 @@ export function requiredFocusedSourceFailures(targetNumbers,records){
    continue;
   }
   if(r.parser_ok!==true)failures.push({number,reason:'selected_product_parser_not_verified'});
+  if(r.selected_h1_present_in_scoped_html===true&&r.selected_heading_identity_verified!==true)
+   failures.push({number,reason:'selected_original_product_heading_identity_unverified'});
   if(r.add_coffee_ui_rendered!==true)failures.push({number,reason:'add_coffee_preview_not_rendered'});
   if(r.source_review_rendered!==true)failures.push({number,reason:'source_review_not_rendered'});
   if(r.selected_price_badge_accepted===false)failures.push({number,reason:'selected_price_badge_rejected'});
