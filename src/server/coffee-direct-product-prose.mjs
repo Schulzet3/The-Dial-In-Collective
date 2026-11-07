@@ -31,7 +31,7 @@ const CURRENT_SELECTED_GREEN_AND_DECAF_CAPTION=/^(?:(?:extended[- ]fermentation\
 // paragraph explicitly introduced "this [adjective] bean/coffee". Require
 // an antecedent before the method sentence; the H1, product prose and all
 // other-coffee/history/contradiction guards remain in force.
-const CURRENT_SELECTED_BEAN_PRONOUN_METHOD=/(?:^|[.!?]\s+)(it|this\s+coffee)\s+is\s+decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?(?:swiss[ -]?water|mountain[ -]?water|sugar(?:[ -]?cane|[ -]?process)|ethyl[ -]?acetate|(?:supercritical\s+)?carbon[ -]?dioxide|co\s*[- ]?[2\u2082])\b/giu;
+const CURRENT_SELECTED_BEAN_PRONOUN_METHOD=/(?:^|[.!?]\s+)(it|this\s+coffee)\s+is\s+decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?(?:swiss[ -]?water(?:\s+process)?|mountain[ -]?water(?:\s+process)?|sugar(?:[ -]?cane|[ -]?process)|ethyl[ -]?acetate|(?:supercritical\s+)?carbon[ -]?dioxide|co\s*[- ]?[2\u2082])\b/giu;
 const CURRENT_SELECTED_DECAF_WAY=/^(?:[\p{L}\p{M}]{3,24}['’]d|(?:this|our)\s+coffee\s+(?:is|was)\s+decaffeinated)\s+by\s+way\s+of\s+(?:the\s+)?(?:swiss[\s-]?water|mountain[\s-]?water|sugar[\s-]?cane|ethyl[\s-]?acetate|(?:supercritical\s+)?carbon[\s-]?dioxide|co\s*[- ]?[2\u2082])\b/iu;
 // An exact selected decaf's single product paragraph can locate its current
 // decaffeination at a named facility and immediately name that facility's

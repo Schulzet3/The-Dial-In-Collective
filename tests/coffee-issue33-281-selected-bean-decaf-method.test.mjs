@@ -44,8 +44,10 @@ test('absent, changed, generic and competing selected H1 never inherit method',(
  }
  const none=extractPublicCoffeeFacts(page('Easy Rider SWP Decaf',claim).replace(/<h1>[^<]+<\/h1>/,''),{source_url:url});
  assert.equal(none.fields?.decaffeination_method,undefined);
- const extra=extractPublicCoffeeFacts(page('Easy Rider SWP Decaf',claim,'<main><h1>Different Decaf</h1><p>'+claim+'</p></main>'),{source_url:url});
- assert.notEqual(extra.fields?.decaffeination_method,'Water Process');
+ const unrelated=extractPublicCoffeeFacts(page('Easy Rider SWP Decaf',claim,'<main><h1>Different Decaf</h1><p>'+claim+'</p></main>'),{source_url:url});
+ assert.equal(unrelated.fields?.decaffeination_method,'Water Process','unselected external H1 must not displace selected product');
+ const competing=extractPublicCoffeeFacts(page('Easy Rider SWP Decaf',claim).replace('</div></main>','<h1>Different Decaf</h1></div></main>'),{source_url:url});
+ assert.equal(competing.fields?.decaffeination_method,undefined,'competing SAME selected product scope H1 blocks method');
 });
 test('outside current product, SEO and educational contexts do not confer decaf method',()=>{
  const blank='<p>Our carefully sourced decaf is a joy.</p>';
