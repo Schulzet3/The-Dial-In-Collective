@@ -2986,6 +2986,17 @@
       "provider_writes": false,
       "baseline_complete": false,
       "next": "pg_statistic_ext metadata (not pg_statistic_ext_data contents), then other unreviewed safe catalog objects"
+    },
+    {
+      "event": "2026-11-07_run69_pg_catalog_system_indexes_124_complete_visible_ddl_review",
+      "source_development_parent_sha": "a622e9027b640fd7049c3a6b5b5cabd2bc68f150",
+      "provider_at": "2026-11-07T16:49:32.883Z",
+      "reviewed_new": 124,
+      "total": 124,
+      "receipt_path": "docs/audits/issue509-provider-pg-catalog-indexes-001-124-20261107-run69.json",
+      "confirmed_new_defects": 0,
+      "provider_writes": false,
+      "next": "Unreviewed pg_catalog system-table definition families; #96 signed-in Auth/JWT/API remains unverified"
     }
   ],
   "state": "PG_OPCLASS_179_PG_OPFAMILY_148_PG_AM_7_VISIBLE_DECLARATIONS_COMPLETE; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -7699,5 +7710,50 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "pg_statistic_ext metadata (not pg_statistic_ext_data contents), then other unreviewed safe catalog objects"
+  },
+  "provider_pg_catalog_index_ddl_run69": {
+    "status": "124_OF_124_CURRENT_PG_CATALOG_SYSTEM_INDEX_FULL_VISIBLE_DDL_SEMANTIC_REVIEW; NATIVE_RUNTIME_UNVERIFIED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "provider_at": "2026-11-07T16:49:32.883Z",
+    "development_parent_sha": "a622e9027b640fd7049c3a6b5b5cabd2bc68f150",
+    "main_sha": "bd627d40f7e65321323512b303d2e3f75709af39",
+    "publication_sha": "2ec10324fcaa4b60d1e48240b44b77b141b9ba54",
+    "receipt_path": "docs/audits/issue509-provider-pg-catalog-indexes-001-124-20261107-run69.json",
+    "reviewed_new": 124,
+    "total": 124,
+    "validation": {
+      "index_count": 124,
+      "unique_indexes": 110,
+      "primary_indexes": 62,
+      "catalog_constraint_linked": 110,
+      "nonunique_indexes": 14,
+      "invalid_or_unready_or_dead": 0,
+      "non_btree": 0,
+      "partial_or_expression": 0,
+      "nondefault_nulls_equal": 0,
+      "duplicate_same_table_key_opclass": 0,
+      "flag_ddl_disagreements": 0,
+      "nonunique_lookup_indexes": [
+        "pg_auth_members_grantor_index",
+        "pg_class_tblspc_relfilenode_index",
+        "pg_constraint_conname_nsp_index",
+        "pg_constraint_conparentid_index",
+        "pg_constraint_contypid_index",
+        "pg_depend_depender_index",
+        "pg_depend_reference_index",
+        "pg_index_indrelid_index",
+        "pg_inherits_parent_index",
+        "pg_publication_rel_prpubid_index",
+        "pg_shdepend_depender_index",
+        "pg_shdepend_reference_index",
+        "pg_statistic_ext_relid_index",
+        "pg_trigger_tgconstraint_index"
+      ]
+    },
+    "verified_new_app_defects": 0,
+    "source_fixes": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "Next unreviewed pg_catalog system-table column/default/constraint definition family and current live drift; hosted Auth/JWT/API #96 and native compiled code unverified"
   }
 }
