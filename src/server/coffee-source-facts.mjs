@@ -4,7 +4,7 @@
 import {removeElements,removeComments} from '../../supabase/functions/_shared/html-scan.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {coffeeFieldKey,extractSemanticCoffeeSpecs} from './coffee-semantic-specs.mjs';
-import {coffeeHtmlAttributes} from './coffee-product-scope.mjs';
+import {coffeeHtmlAttributes,productMarkup} from './coffee-product-scope.mjs';
 import {isRecurringCoffeeHarvestWindow,isGenericCoffeeLotLabel} from '../../supabase/functions/_shared/coffee-release-label.mjs';
 import {collectSupplementaryStructuredCoffeeFacts} from './coffee-supplementary-source-evidence.mjs';
 
@@ -732,6 +732,8 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
  const sections=new Map(),panelSections=new Map(),secondaryPanels=new Set(),primaryExcluded=[],headings=[];
  for(let i=0;i<nodes.length;i++){
   const node=nodes[i],attrs=coffeeHtmlAttributes(node.attributes);
+  // An independent storefront component may precede selected product H1.
+  if(node.tag==='section'&&String(attrs.class||'').split(/\s+/).includes('shopify-section'))headings.length=0;
   const panel=controls.get(attrs.id)||(/\bguide-body\b/.test(attrs.class||'')?controls.get(attrs['data-guide']):'');
   const inherited=panel||panelSections.get(node.parent)||'';
   if(inherited)panelSections.set(i,inherited);
@@ -740,6 +742,9 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
    secondaryPanels.add(i);
    if(!secondaryPanels.has(node.parent))primaryExcluded.push([node.start,node.end]);
   }
+  // H1 establishes a new document/product section. Prior storefront heading
+  // context (including testimonials) cannot label later selected coffee facts.
+  if(node.tag==='h1'&&!blocked.has(i))headings.length=0;
   if(/^h[2-6]$/.test(node.tag)&&!blocked.has(i)){
    const heading=text(i),level=Number(node.tag[1]);
    if(heading&&heading.length<=100){headings.length=level;headings[level]=heading;}
@@ -747,11 +752,6 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
   const heading=inherited||headings.filter(Boolean).join(' / ').slice(0,100);
   sections.set(i,(secondaryPanels.has(i)?'Supplementary page panel / '+heading:heading).slice(0,100));
  }
- const sectionAt=start=>{
-  let low=0,high=nodes.length;
-  while(low<high){const mid=(low+high)>>>1;if(nodes[mid].start<=start)low=mid+1;else high=mid;}
-  return sections.get(low-1)||'';
- };
  // Reserve the selected page's complete prose before iterating its many
  // individual labels. Supplementary dialogs remain available separately.
  if(primaryExcluded.length){
@@ -764,6 +764,42 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
  const fullText=plain(removeElements(html,[...BLOCKED]),MAX_SOURCE_FACT_CHARACTERS+2);
  if(fullText&&normalized(fullText)!==normalized(name))result.add('Published product text',fullText,undefined,primaryExcluded.length?'Complete page scope':undefined);
  const semantic=extractSemanticCoffeeSpecs(html,{clean:plain});
+ // Semantic facts use productMarkup(html) offsets, not original document
+ // offsets. Selected <main> can follow unrelated testimonials; do not label
+ // selected facts from earlier full-document section coordinates.
+ const semanticPage=productMarkup(html),semanticNodes=coffeeHtmlElements(semanticPage).nodes;
+ // Controls and their owned content must use the same section label as the
+ // full-page review ledger. Otherwise identical hidden-panel facts duplicate.
+ const semanticControls=new Map(),semanticPanelSections=new Map();
+ for(let i=0;i<semanticNodes.length&&semanticControls.size<128;i++){
+  const node=semanticNodes[i];if(!['button','a'].includes(node.tag))continue;
+  const attrs=coffeeHtmlAttributes(node.attributes),target=attrs['aria-controls']||attrs['data-guide'];
+  if(!target||target.length>160||node.contentEnd-node.headEnd>1200)continue;
+  const title=plain(semanticPage.slice(node.headEnd,node.contentEnd),100);
+  if(/\b(?:espresso|filter|pour.?over|v60|aeropress|french press|brew|coffee details|specifications)\b/i.test(title))semanticControls.set(target,title);
+ }
+ const semanticBlocked=new Set(),semanticHeadings=[],semanticSections=[];
+ for(let i=0;i<semanticNodes.length;i++){
+  const node=semanticNodes[i];
+  if(BLOCKED.has(node.tag)||semanticBlocked.has(node.parent))semanticBlocked.add(i);
+  if(!semanticBlocked.has(i)&&node.tag==='section'&&
+   String(coffeeHtmlAttributes(node.attributes).class||'').split(/\s+/).includes('shopify-section'))semanticHeadings.length=0;
+  if(!semanticBlocked.has(i)&&node.tag==='h1')semanticHeadings.length=0;
+  if(!semanticBlocked.has(i)&&/^h[2-6]$/.test(node.tag)&&node.contentEnd-node.headEnd<=2000){
+   const heading=plain(semanticPage.slice(node.headEnd,node.contentEnd),101),level=Number(node.tag[1]);
+   if(heading&&heading.length<=100){semanticHeadings.length=level;semanticHeadings[level]=heading;}
+  }
+  const attrs=coffeeHtmlAttributes(node.attributes);
+  const owned=semanticControls.get(attrs.id)||(/\bguide-body\b/.test(attrs.class||'')?semanticControls.get(attrs['data-guide']):'');
+  const inherited=owned||semanticPanelSections.get(node.parent)||'';
+  if(inherited)semanticPanelSections.set(i,inherited);
+  semanticSections.push([node.start,inherited||semanticHeadings.filter(Boolean).join(' / ').slice(0,100)]);
+ }
+ const semanticSectionAt=start=>{
+  let low=0,high=semanticSections.length;
+  while(low<high){const mid=(low+high)>>>1;if(semanticSections[mid][0]<=start)low=mid+1;else high=mid;}
+  return semanticSections[low-1]?.[1]||'';
+ };
  // Review-only roles distinguish named farms/facilities from current selected
  // producers and green methods. Exact source captions/values remain retained.
  const hasLabeledGrower=semantic.facts.some(fact=>fact.kind==='producer'&&/^(?:grower|producer|farmer)$/i.test(fact.label.trim()));
@@ -776,7 +812,7 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
    !/\b(?:washed|natural|honey|anaerobic|wet.?hulled|ferment|carbonic|maceration|dry.?process|wet.?process|decaf)\b/i.test(value))return undefined;
   return field;
  };
- for(const fact of semantic.facts)result.add(fact.label,fact.value,sourceReviewField(fact.label,fact.value,fact.kind),sectionAt(fact.start));
+ for(const fact of semantic.facts)result.add(fact.label,fact.value,sourceReviewField(fact.label,fact.value,fact.kind),semanticSectionAt(fact.start));
  // Definition lists and tables preserve unfamiliar labels, units and values.
  for(let i=0;i<nodes.length;i++){
   const node=nodes[i];if(blocked.has(i))continue;
