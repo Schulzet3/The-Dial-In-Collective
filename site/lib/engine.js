@@ -39,6 +39,12 @@ function measuredRecipeShots(shots) {
   finite(sh.yieldG)&&sh.yieldG>0&&finite(sh.yieldG/sh.doseG)&&
   finite(sh.timeS)&&sh.timeS>0);
 }
+// Existing shot-entry temperature bounds also govern imported historical
+// evidence. Never rewrite older measurements or infer a temperature target.
+function validRecordedTemperature(value){
+ const [low,high]=CONFIG.bounds.tempC;
+ return finite(value)&&value>=low&&value<=high;
+}
 export function familyStats(s,id) {
  const historical=familyShots(s,id);if(!historical.length)return null;
  const shots=measuredRecipeShots(historical);
@@ -235,7 +241,7 @@ export function learnSensitivity(shots) {
 // A historical success marker is not temperature evidence without five recorded green ratings.
 function temperatureGuidance(s,c,style,v,defaultC,familyId=null) {
  const sh=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&
-  sh.coffeeId===c.id&&finite(sh.tempC)&&
+  sh.coffeeId===c.id&&validRecordedTemperature(sh.tempC)&&
   (sh.setupVersionId===v.id||(norm(v.machine)&&norm(sh.snapshot?.machine)===norm(v.machine))));
  if(familyId){
   const exact=sh.filter(x=>x.style===style&&x.familyId===familyId&&x.setupVersionId===v.id);
@@ -448,7 +454,7 @@ export function prefill(s,coffeeId,options={}) {
  const doses=shots.filter(x=>x.basketId===basket.id&&finite(x.doseG)&&x.doseG>=minDose&&x.doseG<=maxDose),
   grinds=shots.filter(x=>x.basketId===basket.id&&x.style===style&&x.feedMode===feed&&x.calibrationId===v.calibrationId&&
    finite(x.grindSetting)&&x.grindSetting>=v.grinderMin&&x.grindSetting<=v.grinderMax);
- const temps=shots.filter(x=>finite(x.tempC)),same=temps.find(x=>x.style===style),temp=same||temps[0];
+ const temps=shots.filter(x=>validRecordedTemperature(x.tempC)),same=temps.find(x=>x.style===style),temp=same||temps[0];
  return {doseG:doses[0]?.doseG??basket.doseG,yieldG:'',timeS:'',grindSetting:grinds[0]?.grindSetting??'',tempC:v.advanced.temperature?(temp?.tempC??null):null,tempSource:temp&&temp.style!==style?`Last used on ${temp.style}`:'',style,basketId:basket.id,feedMode:feed,tasteScales:{extraction:null,body:null,clarity:null,sweetness:null,astringency:null},notes:''};
 }
 
