@@ -1,5 +1,20 @@
 # Issue #455 — Espresso research → Log Shot → Rate → Recommendations
 
+## November 7, 2026 UTC — R455-095 ACTIVE local measured-success next-advice consistency [skip netlify]
+
+**SAME-COMMIT pre-CI/source checkpoint:** Latest development parent `a6aab8d404ea901bb413d2fff63d9ccedd7b0089`, source `site/lib/engine.js` Git blob `9aa361922a57c2dcb16b565e3a25d5624c34b5c7`, original queue blob `1f42f226abfd818b93018384cf31569bbc4617a4`, original scoped journal blob `dd3095a617051d8ba9bab4ab233bc7d96f70ae4f`. This one commit changes `site/lib/engine.js`, `tests/issue455-measured-green-advice-eligibility.test.mjs`, `docs/RELEASE_QUEUE.json` (TESTING only), and this scoped workstream journal. Owner #455 Option B authorizes only narrow SAFE alignment with existing physical measured-shot entry bounds; Master Specification §§15–16, 17 and 19.3 and Decision Ledger continue to control.
+
+**Reproduced source inconsistency:** The newest valid local non-green measured shot is correctly eligible for last-shot adjustment, and the imported newer five-green archival row with impossible dose/yield/time is filtered by `measuredRecipeShots`; however the independent `hasLocalSuccess` helper accepted that unmeasured five-green row and vetoed all next-shot feedback. Synthetic imported-data scenario, **not a known member incident or empirical cup outcome**.
+
+**SAFE code:** Apply the same existing `measuredRecipeShots` physical eligibility when checking *local recommendation success evidence*, without changing the global `hasLocalSuccess` historical UI semantics or saved `dialedIn` flag. Original all-five taste ratings, archived shot/notes, last measured controls, meaningful-yield/single-change rule, same-coffee/version/style, independent Turbo/Fast-Flow and Slow Feed, old recipe families and privacy remain intact. Typical style time/ratio guidelines are NOT validity bounds. No scientific priors, numeric targets, schema, capture, SQL/Auth/Edge/member/provider writes, or publication.
+
+**Regression plan, NOT PASS at authoring:** Seven direct real-module synthetic test groups include low/high/null/string/nonfinite physical measurements, inclusive entry endpoints, valid all-green outside style time guideline, missing/nonideal ratings, hidden and foreign setup/style/coffee, older valid green, and original-history immutability. Node22/lint/build, compiled browser/mobile/offline/a11y/cloud, isolated SQL/security/approval, exact merged CI UNEXECUTED; original603 not in this proposal. Queue `DIC-Q-455-measured-green-advice-eligibility` **TESTING, NOT READY**. #267 historical/current direct line audit separate; no cross-credit. Latest source 58 curated research identities/123 bounded checks/56 proposals (before this proposal) and standalone S019 PDF inaccessible on repeat connected Drive search; owner #630 temporary public-visibility exception unchanged.
+
+**Next:** Open nonforce PR to development, verify exact PR-head applicable CI, repair failures via same-commit journal, nonforce merge/read back source and merged CI, then separately reconcile ledger proposal #57, CURRENT_STATUS, queue READY only after proof. No main/release/Netlify/production movements. #455 remains OPEN.
+
+---
+
+
 ## November 7, 2026 UTC — R455-094 exact tested local Make Current code merge and docs READY [skip netlify]
 
 Development initial parent `69fff2c5eb5f98bc974b2b9aa3f6279293f5543d`, code PR #1241 feature `3949e8ccc5119a1e95a2ee66bc83e72b9660720a` and nonforce squash-merged `a622e9027b640fd7049c3a6b5b5cabd2bc68f150`. Original four docs blobs at exact docs commit parent: research `6969d9a055dc3fd86fe548a8a25fb199ac9c2f54`, CURRENT_STATUS `9c2f9fb442d0123aa4b79ea205c8126c5beef900`, queue `8f7941a16fa46ebb28935513972020b51adc8a16`, journal `138610459fc7c755ba7a65ee7bd909bbabc794dc`. This docs-only reconciliation adds proposal #56 without new source/claim assertions, keeps 58 source identities/123 bounded checks, moves ONLY R455-094 from TESTING to READY with source-bound results and preserves #267 separate literal coverage. Source-safe local guard only, no hosted Cloud RPC claim.

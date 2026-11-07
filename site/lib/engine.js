@@ -1,5 +1,5 @@
 import {CONFIG,RATIOS,TIMES,TEMPS,roastIndex,num,round,clamp,norm,finite,newId,now,isDialed,tastesComplete} from './constants.js';
-import {activeSetup,activeVersion,workspace,coffeeState,ensureCoffeeState,selectedBasket,feedMode,snapshot,hasLocalSuccess,validateShot,logAudit} from './model.js';
+import {activeSetup,activeVersion,workspace,coffeeState,ensureCoffeeState,selectedBasket,feedMode,snapshot,validateShot,logAudit} from './model.js';
 import {selectCommunityPrior} from './community-evidence.js';
 export const mean = a => a.length ? a.reduce((x,y)=>x+y,0)/a.length : null;
 export function quantile(a,q) {const b=[...a].sort((x,y)=>x-y);if(!b.length)return null;const pos=(b.length-1)*q,lo=Math.floor(pos);return b[lo]+(b[Math.min(lo+1,b.length-1)]-b[lo])*(pos-lo);}
@@ -424,7 +424,13 @@ export function recommendation(s,coffeeId,options={}) {
    finite(sh.grindSetting)&&sh.grindSetting>=v.grinderMin&&sh.grindSetting<=v.grinderMax&&
    (sh.tempC==null||validRecordedTemperature(sh.tempC))&&
    typeof sh.timestamp==='string'&&sh.timestamp.trim()&&Number.isFinite(Date.parse(sh.timestamp))).sort((a,b)=>Date.parse(b.timestamp)-Date.parse(a.timestamp))[0];
- if(!options.ignoreAdvice&&last&&!hasLocalSuccess(s,coffeeId,style)){
+ // Imported all-green taste scores remain preserved, but an unloggable
+ // physical record cannot veto advice from a valid measured non-green shot.
+ // Style-specific time/ratio *guidelines* are not validity constraints.
+ const measuredLocalSuccess=measuredRecipeShots(s.shots).some(sh=>
+  !sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&
+  sh.dialedIn===true&&isDialed(sh.tasteScales));
+ if(!options.ignoreAdvice&&last&&!measuredLocalSuccess){
   // Keep the recipe card consistent with fresh taste feedback, even before a
   // derived suggestion is cached (e.g. immediately after an offline shot).
   const cached=last.suggestion;
