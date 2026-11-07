@@ -11,8 +11,8 @@
       "id": "DIC-Q-455-next-shot-import-measurement-eligibility",
       "issue": 455,
       "title": "Keep physically invalid archived last-shot readings out of next recipe adjustment display",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "607c53ff7194d39a25cc34bba2574050f209e9bb",
       "scope_paths": [
         "site/lib/engine.js"
       ],
@@ -20,14 +20,26 @@
         "Source baseline 7754a8054b8e1fdf0eeb12d69f23e6d2e1b0379b engine blob 143dc22edccd4c52c3250d251e530ed472495155 recommendation() last-shot fallback accepted imported dated non-green dose/yield/time, grind or temp outside existing Log Shot/espresso bounds; could surface stale cached next-shot changes; synthetic code-level defect, no observed member incident.",
         "SAFE: Reuse existing measuredRecipeShots, current grinder espresso bounds and validRecordedTemperature when selecting archived latest shot to drive recommendation next/diagnostic; prefer next eligible older shot or normal starting recipe; preserve all original records, notes, five ratings and cached suggestions.",
         "Eight synthetic real-module positive/negative, boundary, chronological fallback, immutable and all-green regression groups at tests/issue455-next-shot-import-validity.test.mjs.",
-        "Node22, browser/mobile/offline/accessibility/cloud, isolated SQL, source security and governance CI not yet executed at authoring; not READY or deployed."
+        "Node22, browser/mobile/offline/accessibility/cloud, isolated SQL, source security and governance CI not yet executed at authoring; not READY or deployed.",
+        "Corrected source PR #1234 head 0873ba7083d15eef783e9131477af02e6612306f: 8 synthetic positive/negative real-module test groups, Node22/lint/build run42388165871 SUCCESS 2,929 PASS/0 FAIL/6 intentional SKIP; UX/cloud compiled Chromium/mobile/offline/a11y42388165886, isolated SQL42388165876, security42388165872, approval42388165893 SUCCESS; original frozen60342388165916 SKIPPED not PASS.",
+        "Correction was positive-only cached-grind-unchanged +2g yield endpoint fixture replaced by actual owner-Locked meaningful +5g step in same-commit test/journal; no weakening of negatives or code runtime. Initial superseded head Node/UX runs CANCELLED not PASS.",
+        "Nonforce merged PR #1234 as 607c53ff7194d39a25cc34bba2574050f209e9bb. All four head vs code-merged blobs match: runtime ff148e7c6646c82b7f10d100fe837ae3c15b3f36, test daa12377b4c0c60201954bf55c820b94fcc5b588, original queue 3306b46777fe716a42bb0d9a8911f4b435b58986, journal 228a806415de76dc986c509ca11568ccd0fda242.",
+        "Exact code-merged Node22/lint/build run42388380596 2,929 PASS/0 FAIL/6 intentional SKIP, compiled browser/mobile/offline/a11y/cloud42388380559 and approval42388380535 SUCCESS. No actual hosted signed-in member or physical espresso test performed. Docs-only governance pending at this status authoring."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact PR-head and merged-source checks pending"
+      "ci_runs": [
+        42388165871,
+        42388165886,
+        42388165876,
+        42388165893,
+        42388165872,
+        42388165916,
+        42388380596,
+        42388380559,
+        42388380535
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "R455-093 focused safe import evidence guard. No new numerical rule, taste model, data capture, recipe style merging or production operations; all tests pending at source authoring."
+      "notes": "R455-093 verified development READY, NOT DEPLOYED. Only existing physically valid Log Shot/espresso bounds qualify a historical latest-shot candidate to override the displayed next recipe; originals/notes/ratings/cached suggestions preserved. PR head/merged CI success verified. Docs-only merged governance pending at authoring."
     },
     {
       "id": "DIC-Q-33-original603-273-h1-source-section-provenance",
