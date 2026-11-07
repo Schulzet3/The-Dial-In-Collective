@@ -12,7 +12,7 @@ export function selectedCurrentColombianDepartmentOrigin({name='',origin='',bloc
  if(!current.some(b=>country.test(b.text))||
  current.some(b=>/\bOrigin\s*:\s*(?!Colombia\b)[\p{L}\p{M}]/iu.test(b.text)))return null;
  const farmers=current.filter(b=>b.tag==='p'&&/\bSourced from small family farms\b/iu.test(b.text));
- const results=new Map();
+ const results=new Map(), allCurrentClaims=new Set();
  for(const block of current){
   if(block.tag!=='p'||typeof block.text!=='string'||block.text.length>1450||
   /\b(?:related products|you may also like|other coffees|customer reviews)\b/iu.test(block.section||''))continue;
@@ -22,10 +22,14 @@ export function selectedCurrentColombianDepartmentOrigin({name='',origin='',bloc
    const match=sentence.match(/^These beans come from the\s+([\p{Lu}][\p{L}\p{M}'’-]{2,44}(?:\s+[\p{Lu}][\p{L}\p{M}'’-]{2,44}){0,2})\s+department\b/u);
    if(!match)continue;
    const place=match[1].trim();
+   // Every present-tense selected beans department is a competing witness,
+   // even if the competing paragraph lacks independent farm attribution.
+   allCurrentClaims.add(key(place));
    if(place.length>72||/\b(?:Colombia|Latin America|Coffee|Andes|World|Region)\b/iu.test(place)||
     !farmers.some(f=>f.start>=block.start&&f.start<block.end+2500))continue;
    results.set(key(place),{value:place+', Colombia',quote:sentence.slice(0,450)});
   }
  }
- return results.size===1?[...results.values()][0]:null;
+ return results.size===1&&allCurrentClaims.size===1&&
+  allCurrentClaims.has([...results.keys()][0])?[...results.values()][0]:null;
 }
