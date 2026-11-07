@@ -2472,10 +2472,10 @@
       ],
       "note": "58 curated sources/123 checks/46 proposals. No new scientific certification; S019 unavailable, no #267 line-review credit."
     },
-    "run": "R455-086",
+    "run": "R455-087",
     "date_utc": "2026-11-07",
-    "source_commit": "71e20cf5abfd928c3e6eae1dfc29e24bfcc0dde8",
-    "proposal_count": 48,
+    "source_commit": "1f251932e77b387cde429d8f064b360f1c59912c",
+    "proposal_count": 49,
     "source_count": 58,
     "evidence_check_count": 123,
     "completion": "VERIFIED_NARROW_SAFE_FIX_DEVELOPMENT_READY_NOT_DEPLOYED"
@@ -3453,6 +3453,28 @@
       "release_queue": "DIC-Q-455-family-recipe-history-bounds",
       "source_commit": "71e20cf5abfd928c3e6eae1dfc29e24bfcc0dde8",
       "implementation_pr": 1183
+    },
+    {
+      "id": "R455-PROP-087-SIMILAR-COFFEE-IMPORTED-MEASURED-PRIOR",
+      "finding": "Historical other-coffee five-green records with finite positive but out-of-current-shot-entry-bounds dose/yield/time were treated as measured personal similar-coffee ratio/time priors, leading to misleading confidence or changed suggested starting values.",
+      "evidence": [
+        "Fresh 2026-11-07 development parent 555606e288a687064500126f5bc886a10b059206; original engine Git blob 5fb802aa137b65ad3021f4100af03c0f5a41415c; personalSimilarCoffeeReference accepted finite positive ratio/time but no CONFIG.bounds, unlike validated new Log Shot dose [5,40]g/yield [5,200]g/time [1,180]s and measuredRecipeShots.",
+        "Exact PR1190 head 0af4b594577a7b0cb2f267f5a9bdaeb7278b2e1f; nonforce squash merge 1f251932e77b387cde429d8f064b360f1c59912c. New direct-module synthetic regression test Git blob 81c194ac7b877ddbaad0022e4e2197c6af691023, seven positive/negative/numeric-type/inclusive-endpoint/mixed-history/immutability/style-feed tests; runtime engine Git blob 40537c66a682975eada9e3b0ad6db9ce937c8b80, originals preserved.",
+        "Exact PR-head Node22/lint/build42360690268 2865 PASS/0 FAIL/6 SKIP, compiled UX browser/mobile/offline/a11y42360690249, isolated SQL42360690242, source security42360690243, governance42360690220 SUCCESS; original frozen60342360690192 SKIPPED, not PASS. Exact merged source Node22/lint/build42360815559 2865/0/6, UX42360815527 and governance42360815576 SUCCESS.",
+        "10-page Library slow-feeding PDF read again in this run, original ZHAW/Kaffeemacher first-party methods and fines mechanism rechecked; previously registered source identity/evidence-check coverage unchanged. These observations do not certify policy thresholds, espresso improvement, or the missing S019 PDF."
+      ],
+      "evidence_grade": "DIRECT_LIVE_SOURCE_EXISTING_SHOT_ENTRY_BOUNDS_SYNTHETIC_DIRECT_MODULE_REGRESSION_EXACT_HEAD_AND_MERGED_CI_NOT_EMPIRICAL_ESPRESSO",
+      "severity": "P2_INVALID_ARCHIVED_MEASUREMENTS_MISATTRIBUTED_AS_SUCCESSFUL_SIMILAR_COFFEE",
+      "user_benefit": "Stops impossible legacy measurements from biasing weak similar-coffee ratio/time recommendations without deleting archived observations or overshadowing valid personal evidence.",
+      "current_locked": "Only existing CONFIG.bounds dose 5–40g, yield 5–200g, time 1–180s; five independent ratings, same-style/feed/setup/roast matching, actual personal coffee identity, separate slow-feed and Turbo/Fast-Flow, private notes/history, one controlled next change and numerical priors unchanged.",
+      "current_app": "site/lib/engine.js exact merged Git blob 40537c66a682975eada9e3b0ad6db9ce937c8b80 now screens historical similar-coffee comparators with measuredRecipeShots([sh]) using existing physical Log Shot validation bounds; no historical writes.",
+      "proposed_change": "SAFE existing measured eligibility for imported personal similar-coffee comparison only, no source or taste precision upgrades, numeric product rule changes or capture/production changes.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "VERIFIED_NONFORCE_MERGED_DEVELOPMENT_READY_NOT_DEPLOYED",
+      "test_plan": "Seven synthetic direct-module positive/negative/inclusive/endpoints/immutability/type/hidden/style/feed scenarios; actual PR-head and merged-source Node22/lint/build, browser/mobile/offline/a11y, isolated SQL/security/governance PASS; frozen603 SKIPPED, actual member tasting unverified.",
+      "release_queue": "DIC-Q-455-similar-coffee-measured-history-bounds",
+      "source_commit": "1f251932e77b387cde429d8f064b360f1c59912c",
+      "implementation_pr": 1190
     }
   ]
 }
