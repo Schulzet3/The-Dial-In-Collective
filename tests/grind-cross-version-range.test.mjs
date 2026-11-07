@@ -14,6 +14,7 @@ const prior=(coffee,extra={})=>({
  id:'old-shot',coffeeId:coffee.id,setupVersionId:'previous-version',
  calibrationId:'previous-cal',basketId:'previous-basket',
  style:'Turbo',feedMode:'standard',grindSetting:3,
+ doseG:18,yieldG:36,timeS:15,
  dialedIn:true,hidden:false,
  tasteScales:{extraction:3,body:3,clarity:5,sweetness:5,astringency:1},
  snapshot:{grinder:'Test grinder',burrs:'Test burrs',grinderMin:0,grinderMax:5},...extra

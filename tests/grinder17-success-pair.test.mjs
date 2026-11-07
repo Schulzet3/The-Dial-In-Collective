@@ -9,6 +9,7 @@ const add=(s,mode,n,coffeeId='coffee',cal='cal')=>{s.shots.push({
  id:'sample'+(++i),coffeeId,style:'Turbo',feedMode:mode,
  setupVersionId:'version',calibrationId:cal,basketId:'basketv',
  hidden:false,dialedIn:true,grindSetting:n,
+ doseG:18,yieldG:36,timeS:15,
  tasteScales:{extraction:3,body:3,clarity:5,sweetness:5,astringency:1}});};
 test('successful slow feed setting is preferred over any generic adjustment',()=>{
  const {s,c,basket}=base();add(s,'standard',3.1);add(s,'slow',0.6);

@@ -147,7 +147,9 @@ export function translateGrind(sh,v) {
 export function grindGuidance(s,c,style,basket,feed,familyId=null) {
  // A legacy success flag alone is not evidence of five actually ideal ratings.
  const validSuccess=sh=>sh.dialedIn===true&&isDialed(sh.tasteScales);
- const v=activeVersion(s),qual=s.shots.filter(sh=>!sh.hidden&&validSuccess(sh)&&sh.style===style&&sh.feedMode===feed&&hardwareMatch(sh,v)&&finite(sh.grindSetting));
+ // Retain malformed imported shots in History, but not in measured grinder
+ // or paired Slow Feed evidence. Do not change the original measurements.
+ const v=activeVersion(s),measured=measuredRecipeShots(s.shots),qual=measured.filter(sh=>!sh.hidden&&validSuccess(sh)&&sh.style===style&&sh.feedMode===feed&&hardwareMatch(sh,v)&&finite(sh.grindSetting));
  // Current-calibration history outside the entered espresso range remains
   // untouched in History, but is not proven current-scale grind evidence.
   const current=qual.filter(sh=>sh.calibrationId===v.calibrationId&&
@@ -190,7 +192,7 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
  if(feed==='slow'){
   const span=v.grinderMax-v.grinderMin;
   const paired=new Map();
-  for(const sh of s.shots){
+  for(const sh of measured){
    if(sh.hidden||!validSuccess(sh)||sh.setupVersionId!==v.id||
       sh.calibrationId!==v.calibrationId||sh.style!==style||
       sh.basketId!==basket.id||!finite(sh.grindSetting)||
@@ -203,7 +205,7 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
    .map(x=>quantile(x.standard,.5)-quantile(x.slow,.5))
    .filter(x=>x>=.1&&x<=span);
   const shift=gaps.length?quantile(gaps,.5):span*.4;
-  const standard=s.shots.filter(sh=>!sh.hidden&&validSuccess(sh)&&
+  const standard=measured.filter(sh=>!sh.hidden&&validSuccess(sh)&&
    sh.setupVersionId===v.id&&sh.calibrationId===v.calibrationId&&
    sh.coffeeId===c.id&&sh.style===style&&sh.basketId===basket.id&&
    sh.feedMode==='standard'&&finite(sh.grindSetting)&&
