@@ -317,7 +317,9 @@ export function recommendation(s,coffeeId,options={}) {
  // Do not override more relevant exact-coffee successful family data or the
  // higher-priority same-coffee cross-style evidence.
  // Imported success markers cannot suppress or transfer style evidence without all five original ideal scores.
- const exactOther=s.shots.some(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style!==style&&sh.style!=='Custom');
+ // Archived five-green rows are not physical evidence unless dose/yield/time
+ // meet existing Log Shot bounds; original History remains untouched.
+ const exactOther=measuredRecipeShots(s.shots).some(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style!==style&&sh.style!=='Custom');
  // For Fast-Flow, comparable same-style successes outrank a Turbo cross-style fallback.
  const provisional=style==='Custom'||(exactOther&&style!=='Fast-Flow')?null:personalSimilarCoffeeReference(s,c,v,style,feed,basket.id);
  const familyChoice=chooseRecipeFamily(s,coffeeId,style,v,basket,feed,p);
@@ -384,10 +386,9 @@ export function recommendation(s,coffeeId,options={}) {
  } else if(style==='Fast-Flow'&&!provisional&&!peerFirst) {
   // Only closely compatible Turbo success can weakly inform the STARTING ratio.
   // Never import its measured time, grind, family, confirmation or shot count.
-  const turbo=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&sh.style==='Turbo'&&
+  const turbo=measuredRecipeShots(s.shots).filter(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&sh.style==='Turbo'&&
    sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.basketId===basket.id&&
-   sh.feedMode===feed&&finite(sh.doseG)&&sh.doseG>0&&finite(sh.yieldG)&&
-   finite(sh.timeS)&&sh.timeS>=8&&sh.timeS<=20&&
+   sh.feedMode===feed&&sh.timeS>=8&&sh.timeS<=20&&
    sh.yieldG/sh.doseG>=1.8&&sh.yieldG/sh.doseG<=3.2);
   if(turbo.length){
    const r=roastIndex(c.roastLevel)<0?roastIndex('Medium'):roastIndex(c.roastLevel);
@@ -403,11 +404,9 @@ export function recommendation(s,coffeeId,options={}) {
   // Archived five-green taste ratings do not validate malformed measured
   // dose/yield/time. Only genuinely measured ratios may weakly bias another
   // style's starting ratio; no cross-style time or grind transfer.
-  const other=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&
+  const other=measuredRecipeShots(s.shots).filter(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&
    sh.coffeeId===coffeeId&&sh.style!==style&&sh.style!=='Fast-Flow'&&
-   sh.style!=='Custom'&&RATIOS[sh.style]&&
-   finite(sh.doseG)&&sh.doseG>0&&finite(sh.yieldG)&&sh.yieldG>0&&
-   finite(sh.yieldG/sh.doseG)&&finite(sh.timeS)&&sh.timeS>0);
+   sh.style!=='Custom'&&RATIOS[sh.style]);
   if(other.length){const r=roastIndex(c.roastLevel)<0?roastIndex('Medium'):roastIndex(c.roastLevel);const residual=mean(other.map(sh=>sh.yieldG/sh.doseG-RATIOS[sh.style][r]));const bias=clamp(residual*.2,-.15,.15);for(const k of ['low','high','center'])rec.ratio[k]+=bias;rec.reasons.push('Small ratio adjustment informed by your other styles; time and grind stay style-specific.');}
  }
  rec.grind=grindGuidance(s,c,style,basket,feed,rec.familyId);
