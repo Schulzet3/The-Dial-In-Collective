@@ -12,24 +12,34 @@
       "issue": 33,
       "pr": 1297,
       "title": "Recognize directly selected Decaf Desvelado E.A. Processed Decaf separately from green Washed processing",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "d539ca8c119fe3d2686372c525080676f6eead39",
       "scope_paths": [
         "src/server/coffee-decaffeination-method.mjs"
       ],
       "tests": [
         "Before source #335 exact selected official 2026-11-07 raw 359325-byte HTML SHA256 1816a3d59d87fdd0a9fd9646ca2ee168b14b4f89ca0be3f2dfe7c24f3a2458b6, R18 run42419016760 3/3 fetched and parsed; actual parser omitted decaffeination_method even though current selected label Processing: Fully Washed, E.A. Processed Decaf and product prose confirm E.A. from sugar cane. Washed remains separate green processing.",
         "Generic E.A. Processed Decaf recognized under exact selected full-decaf identity, with negative tests for equipment language, negation, absent selected H1, SEO/related-product, nondecaf/half-caf, conflicting Water method. Same-commit test tests/coffee-issue33-335-selected-ea-decaf.test.mjs, scoped journal ops-issue33-r18-335-ea-method-fix-20261107.md.",
-        "PR1297 current head and post-merge exact-source CI, actual Add Coffee and Source Review official live-after and independent source hashes are NOT YET VERIFIED; TESTING only. Original 603 frozen manual certification remains unverified."
+        "Corrected PR #1297 head 4c260c9aa8b721a48da09c3de1f59130dfb6a6f1 source Node22 1,979 PASS/0 FAIL/0 SKIP, lint and build run42419440878 SUCCESS; cloud/mobile42419440799, isolated SQL42419440772, source-security42419440921, approval42419440839, private-source42419440832 all SUCCESS. Superseded governance runs42419241664 and42419370302 FAILED strict intake/queue ID and were repaired; not PASS. Frozen60342419440717 SKIPPED.",
+        "Safe nonforce PR1297 merged d539ca8c119fe3d2686372c525080676f6eead39; matched source blob 73fe0aa0d935827a81c45eb2e0a0220163dad623, test blob df60877c9deba11367fc60f3637243c53eb3cb42 and pending-queue blob f53f8672a0ca0550f5deded56de145ccf0f146d0. Exact merged source Node22 1,979 PASS/0 FAIL/0 SKIP, lint/build42419569779; cloud/mobile42419569784, approval42419569759 SUCCESS. Head isolated SQL/security reused unchanged.",
+        "Actual merged guarded official run42419569790 3/3 selected current exact product H1/parser/Add Coffee/Source Review; independently rehashed artifact13593066733 ZIP SHA256 3174ad6e93c80508a0a09c490a342fbb95628c285461de2d1014572003b0eaa2. Before source run42419016760 vs after: #332/#334 all extracted fields unchanged; #335 only added Sugar Process decaffeination method, separate Washed green process unchanged, 3 conflicts arrays unchanged. Full603 original semantic audit NOT certified (manual_certified=0); generic 42419569774 SKIPPED."
       ],
       "ci_runs": [
-        42419016760
+        42419016760,
+        42419440878,
+        42419440799,
+        42419440772,
+        42419440921,
+        42419440839,
+        42419440832,
+        42419569779,
+        42419569784,
+        42419569759,
+        42419569790
       ],
-      "blockers": [
-        "Corrected PR-head CI, safe nonforce merge, verified exact merged official selected #335 after-run and documentation acceptance pending."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Development only; preserve immutable 603/201/1197 original captures/CSV/oracle, current selected product, user-entered values, locked approvals, all existing READY/DEPLOYED queue entries. Do not publish/deploy or write to production; overlapping #267/#96 work separate."
+      "notes": "NARROW verified READY in DEVELOPMENT, NOT DEPLOYED: current selected Decaf Desvelado E.A. Processed Decaf => Sugar Process, preserve Washed green process and current H1 over historical /frontera-decaf slug. Negative checks for equipment, negation, half-caf, other-product SEO and competing methods. Original 603/201/1197 frozen/CSV/scorer, all other queue entries/locked decisions and user data unchanged. Full603 individually semantic review and genuine real GoTrue unverified, #33 OPEN. No release or production action authorized."
     },
     {
       "id": "DIC-Q-455-prefill-temperature-physical-history",
