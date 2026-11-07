@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "authority": "DIC-ISSUE33-OWNER-20261106-DEVELOPMENT-ONLY",
+  "state": "VERIFIED_NARROW_READY_DEVELOPMENT_ONLY",
+  "verified_at_utc": "2026-11-07",
+  "issue": 33,
+  "issue_remains_open": true,
+  "full_603_individual_certification": false,
+  "manual_certified_original603_case_count_from_this_receipt": 0,
+  "immutable_corpus": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "original_csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "current_original603_register_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "modified": false
+  },
+  "source_before": {
+    "sha": "2d1cc7eeb96ecfed30a03c4cdbf809c81eb30068",
+    "pr": 1154,
+    "run": 42340840286,
+    "job": 128307955181,
+    "artifact_id": 13561433202,
+    "zip_sha256": "8ffba8f3e1216374027a95a0e71b6adcbc937109c8384fa87720c57119260555",
+    "raw_html_sha256": {
+      "189": "597cc49169d23a7b9a76bd26730b73832f186c595e803d1f0a646e850393aebf",
+      "192": "e28f70390dfd28b576659ce3135423b7730e991297c91f71d985310831a4c3b5",
+      "197": "520d5a2ac42235c722c47fcf8b72c0c0fce2c5946bc7c8a1501df10d17d85924"
+    },
+    "reproduced_defect": "#197 decaffeination_method omitted while selected direct EA sugarcane source printed"
+  },
+  "source_after": {
+    "sha": "923c8a0ed75966beb4374874117908b1199750db",
+    "pr": 1155,
+    "merge_tree": "64551151db067117e53fb2fbe5411cb7503e7ebf",
+    "run": 42341498865,
+    "job": 128309962229,
+    "artifact_id": 13561109945,
+    "zip_sha256": "1e1a81a1575329bde9ea2d49a9bbd738c3f0a04cef53d7af02ba1a1d427209a0",
+    "json_sha256": "ba4fc6d50aca4601f8938c17fb08677095b8f384687963ef4ab745700d6f119f",
+    "raw_html_sha256": {
+      "189": "50b1edc824cbb4750e4e7dc397a325622b43f6adf7c98ba50eab925901fc01ea",
+      "192": "990be4ff37793a885c0c3fa3d618dbba668b2fe46101ed7031d753e9b71602bf",
+      "197": "026666dde16420f5dc61240b13eec763d2e1de78a1192aa88ab255661ba9dbe1"
+    },
+    "fetched": 3,
+    "parsed": 3,
+    "add_coffee_rendered": 3,
+    "source_review_rendered": 3,
+    "actual_auth": false,
+    "production_operations": 0
+  },
+  "case_reviews": [
+    {
+      "number": 189,
+      "url": "https://larryscoffee.com/products/sumatra-single-origin-light-roast-organic-coffee",
+      "h1": "Sumatra",
+      "current_process": "Other/Unknown",
+      "literal_process": "wet hulled",
+      "roast": "Light",
+      "producer": "Permata Gayo",
+      "semantic_note": "Wet hulling literal selected evidence; preserve supported canonical Other/Unknown and producer/source role without guessing a Washed/Honey category.",
+      "manual_full_case_certified": false
+    },
+    {
+      "number": 192,
+      "url": "https://laterzacoffee.com/products/honduras-copan-ruinas-san-isidro-katia-duke-natural-processed",
+      "h1": "Honduras Copan Ruinas- San Isidro Katia Duke (Natural Processed)",
+      "current_process": "Natural",
+      "current_producer": "Katia Duke",
+      "selected_farm": "San Isidro",
+      "semantic_note": "Product directly says Katia Duke farm owner and natural in exact title; 'Medium Body' is not Medium roast.",
+      "manual_full_case_certified": false
+    },
+    {
+      "number": 197,
+      "url": "https://lionrushcoffee.com/products/huila-decaf-sugarcane",
+      "h1": "HUILA DECAF — SUGARCANE PROCESS",
+      "before_decaffeination_method": null,
+      "after_decaffeination_method": "Sugar Process",
+      "after_green_process": "Washed",
+      "after_roast": "Medium",
+      "selected_source_method_sentence": "Then the sugarcane part. The caffeine is removed with ethyl acetate — a natural compound made from fermented Colombian sugarcane",
+      "roast_scale": "Static role=img, aria-label Roast level: 50 out of 100; Light/Medium/Dark are legend labels NOT purchase options; five Shopify variants are grind only.",
+      "semantic_note": "Current selected product says We roast it medium on purpose, decaffeination with EA derived from fermented sugarcane, and washed green coffee; separates distinct treatments and rejects generic Swiss Water FAQ.",
+      "manual_full_case_certified": false
+    }
+  ],
+  "code_change": {
+    "file": "src/server/coffee-direct-product-prose.mjs",
+    "focused_regression": "tests/coffee-issue33-original603-197-direct-ea-method.test.mjs",
+    "same_commit_journal": "docs/workstreams/ops-issue33-seventyseighth3.md",
+    "pr": 1155,
+    "head_sha": "6523ac25e82c45503dfc6c95589f7a2e8535ca3a",
+    "merged_sha": "923c8a0ed75966beb4374874117908b1199750db"
+  },
+  "ci": {
+    "head_node_lint_build": 42341357574,
+    "head_node_pass": 1915,
+    "head_node_fail": 0,
+    "head_cloud_mobile": 42341357567,
+    "head_sql": 42341357521,
+    "head_security": 42341358231,
+    "head_approval": 42341357592,
+    "head_source_archive": 42341357623,
+    "merged_node_lint_build": 42341498873,
+    "merged_node_pass": 1915,
+    "merged_node_fail": 0,
+    "merged_cloud_mobile": 42341498907,
+    "merged_approval": 42341498929,
+    "merged_public_source": 42341498865,
+    "frozen603": 42341498870,
+    "frozen603_conclusion": "SKIPPED_NOT_PASS",
+    "early_queue_failure": 42341069138,
+    "early_assertion_failure": 42341201233
+  },
+  "queue_item_id": "DIC-Q-33-original603-197-selected-direct-ea-caffeine-removal",
+  "unresolved": [
+    "Full original603 independent individual semantic certification and exceptions remain",
+    "#189 process wet-hulling not represented as separate canonical enum",
+    "Dynamic official HTML snapshots not byte identical; exact H1/selected source rechecked",
+    "No real GoTrue, production/member or device acceptance claimed"
+  ],
+  "not_authorized": [
+    "Netlify deployment",
+    "production Supabase SQL/Edge/Auth",
+    "member/provider writes",
+    "paid service",
+    "force push",
+    "release approval"
+  ]
+}
