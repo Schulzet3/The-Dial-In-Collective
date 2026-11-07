@@ -158,3 +158,40 @@ test('#455 undated current legacy shot cannot infer a chronological sweetness tr
  assert.match(a.evidenceNote,/Exploratory starting step/);
  assert.deepEqual(state.shots,original);
 });
+
+test('#455 R080 zero, negative and nonnumeric archived yields cannot reverse a sweetness experiment',()=>{
+ for(const yieldG of [0,-1,NaN,Infinity,'31']){
+  const {state,shot,advice}=fixture();
+  state.shots.push(comparable(shot,{yieldG,notes:'Preserve private archival notes and measurements.'}));
+  const original=structuredClone(state.shots),a=advice();
+  assert.equal(a.next?.yieldCenter,41,'invalid prior yield '+String(yieldG));
+  assert.match(a.evidenceNote,/Exploratory starting step/);
+  assert.deepEqual(state.shots,original,'read-only evidence filtering must preserve full history');
+ }
+});
+test('#455 R080 archived zero yield with equal sweetness cannot fabricate a plateau or a 5 g bound failure',()=>{
+ const {state,shot,advice}=fixture();
+ state.shots.push(comparable(shot,{yieldG:0,tasteScales:{...GREEN,sweetness:4}}));
+ const original=structuredClone(state.shots),a=advice();
+ assert.equal(a.next?.yieldCenter,41);
+ assert.match(a.evidenceNote,/Exploratory starting step/);
+ assert.deepEqual(state.shots,original);
+});
+test('#455 R080 malformed archive cannot manufacture conflicting direction beside valid longer evidence',()=>{
+ const {state,shot,advice}=fixture();
+ state.shots.push(comparable(shot,{id:'invalid',yieldG:0}),
+  comparable(shot,{id:'valid',yieldG:41}));
+ const original=structuredClone(state.shots),a=advice();
+ assert.equal(a.next?.yieldCenter,41);
+ assert.match(a.evidenceNote,/Earlier comparable same-coffee ratings/);
+ assert.deepEqual(state.shots,original);
+});
+test('#455 R080 shorter valid same-coffee evidence survives invalid contradictory historical yield',()=>{
+ const {state,shot,advice}=fixture();
+ state.shots.push(comparable(shot,{id:'invalid',yieldG:0,tasteScales:{...GREEN,sweetness:3}}),
+  comparable(shot,{id:'valid',yieldG:31}));
+ const original=structuredClone(state.shots),a=advice();
+ assert.equal(a.next?.yieldCenter,31);
+ assert.match(a.evidenceNote,/do not prove causation/i);
+ assert.deepEqual(state.shots,original);
+});

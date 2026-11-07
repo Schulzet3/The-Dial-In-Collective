@@ -8,6 +8,27 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-sweetness-comparable-measured-yield-integrity",
+      "issue": 455,
+      "title": "Exclude malformed archived measured yields from same-coffee sweetness comparison direction",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Original development source 3fd001035a6baaaa90927a9d8d02907a14e06435 engine blob f3435a05618df3f21caccd6b69530c8b68fe5156 comparableSweetnessYields accepted same-coffee prior yieldG=0 or -1 as a directional sweetness observation (and same-sweetness 0g as a plateau), despite invalid measured history. Real module synthetic negative tests R080 authored, NOT yet run.",
+        "Narrow positive finite prior dose/yield/ratio eligibility; previously required chronology, same coffee/equipment/style/feed/dose/grind/temperature/four green taste inputs retained. No new numeric target, causal claim, stored shot edit or owner Locked policy change.",
+        "Four focused real-module synthetic negative/positive/immutability regressions appended to tests/issue455-yield-step.test.mjs. Node22/app/compiled browser/mobile/offline/a11y/SQL/security/governance UNEXECUTED at commit creation; original frozen 603 not run or claimed."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Await applicable source-bound CI, non-force merge, exact merged checks and docs-only READY reconciliation"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "R455-080 owner-authorized SAFE measured evidence validity gate, research-only and development only; historical ratings/notes preserved; no deployment, member/provider writes, or actual cup testing."
+    },
+    {
       "id": "DIC-Q-455-family-measurement-integrity",
       "issue": 455,
       "title": "Exclude malformed historical measured shots from personal successful family ratio and recipe evidence",
