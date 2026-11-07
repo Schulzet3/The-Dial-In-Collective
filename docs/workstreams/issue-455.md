@@ -1,5 +1,13 @@
 # Issue #455 — Espresso research → Log Shot → Rate → Recommendations
 
+## November 7, 2026 UTC — R455-096 PR-head queue schema repair [skip netlify]
+
+**Observed, diagnosed failure:** PR #1264 initial head `da1b795bb42712e2cfe82af5b4dd7a7e3e5db288` exact approval run [42402731610](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42402731610), approval coverage PASS but release-queue intake **FAIL**: `DIC-Q-455-cached-next-physical-bounds invalid merged source SHA`. The initial TESTING queue entry omitted the required explicit JSON `merged_source_sha:null`. Do not misstate this initial failure as PASS.
+
+**Narrow docs-only correction in this commit:** Add `merged_source_sha:null` and `pr:1264` to that TESTING item; no runtime, test, other queue, scope, source policy, member data or provider change. Original feature head already contains four-path same-commit issue journal. Retry exact PR-head governance and application suites; frozen603 remains a separate unrun/SKIPPED workflow, not PASS. Next action: resolve remaining CI failures if any, nonforce merge only after applicable checks SUCCESS, verify exact merge and docs READY separately. Owner publication not authorized.
+
+---
+
 ## November 7, 2026 UTC — R455-096 ACTIVE SAFE cached next-shot target integrity [skip netlify]
 
 **Source-bound recovery:** development parent `e9f8f752102f0611d44a0f83bb754de65c4ea347`, tree `2288b2558ee2a7597ad9c4dc2c588ddaec99dee1`; original `site/lib/engine.js` blob `70bac504ceb2055e0f1ebc8da33f1b7da8128442`, `docs/RELEASE_QUEUE.json` blob `65b7be7aaf45c402d47b1081afada39040bcee9f`, scoped journal blob `164dca2e18897248785b280d718f91c03103fc06`. Main `bd627d40f7e65321323512b303d2e3f75709af39`, release/production `2ec10324fcaa4b60d1e48240b44b77b141b9ba54` observed and untouched. Reviewed AGENTS, context entrypoint/PREFLIGHT, Master §19.3/§25.2, Decision Ledger, approval coverage/status/source register, #455/#335/#267/#33/#96 and concurrently open #267 draft PRs; Drive S019/slow feeding/espresso searches returned no new originals and available Space search no DIC project page. Owner #630 temporary PUBLIC GitHub exception remains owner-controlled.
