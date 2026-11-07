@@ -2972,6 +2972,20 @@
       "provider_writes": false,
       "confirmed_new_defects": 0,
       "baseline_complete": false
+    },
+    {
+      "event": "2026-11-07_run68_pg_statistic_565_planner_metadata_only",
+      "provider_at": "2026-11-07 15:43:15.840079+00",
+      "source_development_parent_sha": "249471aae200f1ddc219ba01d58906f6ac791d22",
+      "reviewed_new": 565,
+      "cumulative": 565,
+      "total": 565,
+      "receipt_path": "docs/audits/issue509-provider-pg-statistic-metadata-0001-0565-20261107-run68.json",
+      "source_content_excludes_statistic_histograms_mcv_samples": true,
+      "confirmed_new_app_defects": 0,
+      "provider_writes": false,
+      "baseline_complete": false,
+      "next": "pg_statistic_ext metadata (not pg_statistic_ext_data contents), then other unreviewed safe catalog objects"
     }
   ],
   "state": "PG_OPCLASS_179_PG_OPFAMILY_148_PG_AM_7_VISIBLE_DECLARATIONS_COMPLETE; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -7639,5 +7653,51 @@
     "blocked": "Native PostgreSQL/extension implementation text, 63 potentially sensitive configuration values, hosted real Auth/JWT/API and provider console-only controls UNVERIFIED",
     "provider_writes": false,
     "baseline_complete": false
+  },
+  "provider_pg_statistic_metadata_run68": {
+    "status": "VISIBLE_METADATA_ONLY_REVIEWED",
+    "provider_at": "2026-11-07 15:43:15.840079+00",
+    "development_parent_sha": "249471aae200f1ddc219ba01d58906f6ac791d22",
+    "receipt_path": "docs/audits/issue509-provider-pg-statistic-metadata-0001-0565-20261107-run68.json",
+    "reviewed": 565,
+    "total": 565,
+    "schemas": {
+      "pg_catalog": 422,
+      "information_schema": 21,
+      "auth": 66,
+      "storage": 4,
+      "realtime": 2,
+      "supabase_migrations": 6,
+      "private": 12,
+      "public": 32
+    },
+    "kind_slots": {
+      "0": 1706,
+      "1": 387,
+      "2": 232,
+      "3": 476,
+      "4": 12,
+      "5": 12
+    },
+    "checks": {
+      "invalid_key": 0,
+      "duplicate_key": 0,
+      "bad_null_fraction": 0,
+      "bad_width": 0,
+      "bad_distinct_range": 0,
+      "kind_zero_nonzero_operator": 0,
+      "kind_zero_nonzero_collation": 0,
+      "unresolved_attribute": 0,
+      "unknown_kind": 0,
+      "invalid_operator_reference": 0,
+      "invalid_collation_reference": 0
+    },
+    "raw_samples_accessed": false,
+    "numeric_estimates_republished": false,
+    "confirmed_app_defects": 0,
+    "source_fixes": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "pg_statistic_ext metadata (not pg_statistic_ext_data contents), then other unreviewed safe catalog objects"
   }
 }
