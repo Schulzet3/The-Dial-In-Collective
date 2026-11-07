@@ -8,6 +8,30 @@
   },
   "items": [
     {
+      "id": "DIC-Q-33-335-current-EA-processed-decaf",
+      "issue": 33,
+      "pr": 1297,
+      "title": "Recognize directly selected Decaf Desvelado E.A. Processed Decaf separately from green Washed processing",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-decaffeination-method.mjs"
+      ],
+      "tests": [
+        "Before source #335 exact selected official 2026-11-07 raw 359325-byte HTML SHA256 1816a3d59d87fdd0a9fd9646ca2ee168b14b4f89ca0be3f2dfe7c24f3a2458b6, R18 run42419016760 3/3 fetched and parsed; actual parser omitted decaffeination_method even though current selected label Processing: Fully Washed, E.A. Processed Decaf and product prose confirm E.A. from sugar cane. Washed remains separate green processing.",
+        "Generic E.A. Processed Decaf recognized under exact selected full-decaf identity, with negative tests for equipment language, negation, absent selected H1, SEO/related-product, nondecaf/half-caf, conflicting Water method. Same-commit test tests/coffee-issue33-335-selected-ea-decaf.test.mjs, scoped journal ops-issue33-r18-335-ea-method-fix-20261107.md.",
+        "PR1297 current head and post-merge exact-source CI, actual Add Coffee and Source Review official live-after and independent source hashes are NOT YET VERIFIED; TESTING only. Original 603 frozen manual certification remains unverified."
+      ],
+      "ci_runs": [
+        42419016760
+      ],
+      "blockers": [
+        "Corrected PR-head CI, safe nonforce merge, verified exact merged official selected #335 after-run and documentation acceptance pending."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Development only; preserve immutable 603/201/1197 original captures/CSV/oracle, current selected product, user-entered values, locked approvals, all existing READY/DEPLOYED queue entries. Do not publish/deploy or write to production; overlapping #267/#96 work separate."
+    },
+    {
       "id": "DIC-Q-455-prefill-temperature-physical-history",
       "issue": 455,
       "title": "Exclude unloggable imported measurements from actual temperature prefill",
