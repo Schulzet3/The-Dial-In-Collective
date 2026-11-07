@@ -740,6 +740,9 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
    secondaryPanels.add(i);
    if(!secondaryPanels.has(node.parent))primaryExcluded.push([node.start,node.end]);
   }
+  // H1 establishes a new document/product section. Prior storefront heading
+  // context (including testimonials) cannot label later selected coffee facts.
+  if(node.tag==='h1'&&!blocked.has(i))headings.length=0;
   if(/^h[2-6]$/.test(node.tag)&&!blocked.has(i)){
    const heading=text(i),level=Number(node.tag[1]);
    if(heading&&heading.length<=100){headings.length=level;headings[level]=heading;}
