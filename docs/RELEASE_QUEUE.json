@@ -7830,8 +7830,8 @@
       "id": "DIC-Q-455-outlier-physical-history-bounds",
       "issue": 455,
       "title": "Exclude physically out-of-bounds archived measurements from mandatory shot outlier comparisons",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "661593cd78ce61420218b05600b83e0f3bdcb1c0",
       "scope_paths": [
         "site/lib/engine.js"
       ],
@@ -7839,14 +7839,26 @@
         "R089 source parent 1b2e4d6be1e8683c87f27e8d6ba13bfec8c57729 engine Git blob f0e330c60033562bcbe9e8582c849a2877c5e403: isExtreme required prior archived dose/yield/time merely positive and finite; four imported 18g/230g/181s records were physically outside existing Log Shot entry bounds but could establish a mandatory review median. Source counterexample; no real member incident.",
         "SAFE: reuse existing measuredRecipeShots/CONFIG.bounds dose 5–40g, yield 5–200g, time 1–180s for historical four-reference outlier comparison only. Original history/notes, five taste ratings, exactly >1.25 ratio and >25s time, immediate confirm/correct obligation and privacy are unchanged.",
         "Seven direct engine-module negative/positive/endpoints/threshold/saveShot/immutability synthetic tests authored; UNEXECUTED at commit creation.",
-        "Pending exact PR-head Node22/lint/build, compiled browser/mobile/offline/a11y, isolated SQL/security/governance as applicable, non-force merge, verified merged-source CI, and separate docs-only READY reconciliation. Original603 not run."
+        "Pending exact PR-head Node22/lint/build, compiled browser/mobile/offline/a11y, isolated SQL/security/governance as applicable, non-force merge, verified merged-source CI, and separate docs-only READY reconciliation. Original603 not run.",
+        "PR #1204 source head 5b186539651f0ed045a3f5aefa4d11f96d1116b8: Node22/lint/build 42369164375 2886 PASS/0 FAIL/6 intentional SKIP, compiled browser/mobile/offline/a11y/cloud 42369164369 SUCCESS; SQL 42369164425, source security 42369164404 and governance 42369164370 SUCCESS; original frozen603 42369164380 SKIPPED, NOT PASS.",
+        "Non-force squash PR1204 code merge 661593cd78ce61420218b05600b83e0f3bdcb1c0 (dev source at readback); all four SAME-COMMIT original blobs engine d2b8f1f6b9dbb83021291983f4e94c40911f47d4, direct-module tests 00e96c7ae30ae0f4bcd20e82fad9d0b4eb0425b9, TESTING queue 2e3ffab8170a2b65e2e4d48f00d3e4fa59a7d107 and journal 192a8a35a132f54bc2442b2c098ef4475569f0b3 match exactly checked head.",
+        "Exact code-merged Node22/lint/build 42369330437 SUCCESS: 2886 PASS, 0 FAIL, 6 intentional SKIP; compiled browser/mobile/390/offline/a11y/cloud 42369330427 and governance/approval 42369330417 SUCCESS. No hosted member/device testing or empirical espresso outcome claim. READY only after docs reconciliation and exact docs-governance."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact PR-head tests and source-bound non-force merge, merged-source CI and final READY reconciliation not yet verified."
+      "ci_runs": [
+        42369164375,
+        42369164369,
+        42369164425,
+        42369164404,
+        42369164370,
+        42369164380,
+        42369330437,
+        42369330427,
+        42369330417
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Owner-Approved Option B SAFE existing validated measurement admission; no new numeric taste/shot targets, source claims, data capture, real member operations or release authority. TESTING only; NOT DEPLOYED."
+      "notes": "R455-089 SAFE existing CONFIG.bounds dose 5–40g, yield 5–200g, time 1–180s now govern historical four-shot mandatory-outlier median eligibility. All five ratings, original private history/notes, four-row quorum, >1.25 ratio and >25s time, immediate confirmation preserved. PR #1204 head/merged exact source Node22 2886/0/6, browser/mobile/offline/a11y/cloud/SQL/security/governance all applicable PASS, frozen603 SKIPPED. Development READY NOT DEPLOYED; no new policy/owner action.",
+      "pr": 1204
     }
   ],
   "history": [
