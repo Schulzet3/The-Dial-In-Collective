@@ -2380,6 +2380,35 @@
       "result": "ROASTER_QC_CV_CLASSIFICATION_NOT_ESPRESSO_NEXT_SHOT_OR_FIVE_SCALE_SENSORY_OPTIMUM",
       "owner_approval": false,
       "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-APP-065-A",
+      "source": "site/lib/engine.js Git blob 70bac504ceb2055e0f1ebc8da33f1b7da8128442, corrected Git blob 777303fea493dcb85f3aac6a5ac1e76093502fe3; direct synthetic tests issue455-cached-next-physical-bounds",
+      "claim": "Even with a valid measured most recent shot, an imported or local archival cached next plan may include out-of-bound yield/dose/grind/temperature or multiple independently changed controls. The existing next-card guard screened actual measurements, not cached next targets. The corrected engine re-evaluates invalid cached next controls and preserves the original measured shot, five ratings, private note and cached history; legitimate in-range single-control cached plans continue to apply.",
+      "grade": "DIRECT_EXACT_LIVE_SOURCE_SYNTHETIC_REAL_MODULE_NEGATIVE_POSITIVE_AND_MERGED_CI; NO_PRIMARY_ESPRESSO_OUTCOME_TRIAL",
+      "source_sha": "e7ef11fdcc510f14b9686b6d5565e77277887809",
+      "source_blob_sha": "777303fea493dcb85f3aac6a5ac1e76093502fe3",
+      "tests": [
+        "tests/issue455-cached-next-physical-bounds.test.mjs",
+        "tests/issue455-next-shot-import-validity.test.mjs",
+        "tests/recommendation-evidence-priority.test.mjs"
+      ],
+      "ci_head": [
+        42403409435,
+        42403409437,
+        42403409438,
+        42403409524,
+        42403409506
+      ],
+      "ci_merged": [
+        42403612393,
+        42403612365,
+        42403612388
+      ],
+      "result": "VERIFIED_SAFE_CODE_FIXED_DEVELOPMENT_READY_NO_DEPLOY",
+      "owner_approval": false,
+      "privacy_note": "synthetic fixture only; no live member writes",
+      "external_espresso_paper_validation": "NOT_APPLICABLE_TO_OWNED_ENTRY_BOUNDS_AND_UI_BUG"
     }
   ],
   "policy_decisions_pending": [],
@@ -2388,9 +2417,10 @@
     "tests_executed": true,
     "production_deployed": false,
     "queue_changed": true,
-    "reason": "R455-095 SAFE source-reproduced measured green next-advice veto fixed with exact PR #1250 head/merged CI and no production release."
+    "reason": "R455-096 SAFE existing-entry-bounds/single-change cached next-plan integrity; exact head and merged CI verified, no release/deployment."
   },
   "next_actions": [
+    "R455-096 code PR #1264 merged e7ef11fdcc510f14b9686b6d5565e77277887809; exact head and merged 2972/0/6 Node22 and browser/mobile/offline/SQL/security/governance evidence; docs-only READY reconciliation underway. Next substantive nonoverlap research claim review, S019 inaccessible, #267 line credit zero.",
     "R455-095 VERIFIED code PR #1250 nonforce merged b568337c2d4dc827404d7b57d5277b96d87a0f2a; 2952/0/6 exact Node22 and applicable mobile/browser/offline/SQL/security/governance passed. Docs reconciliation READY development NOT deployed. Next disjoint workflow/source evidence.",
     "R455-092 VERIFIED development READY: PR1227 exact code merge 0ce97c4080d0285a2e9b25c03b0e1dc7b178514e; 2915/0/6 source/merged Node22 and applicable browser/mobile/offline/SQL/security/governance SUCCESS. Existing Community summary dose 5–40g/yield 5–200g bounds on historical donors; no new scientific claims or real members, no deployment. 58 source identities/123 bounded evidence checks, now 54 proposals; source #05 fully read in R005 and partially re-read here, primary claims still only partly verified. S019 original unavailable, #267 separate.",
     "R455-089 SAFE PR1204 verified nonforce code merge 661593cd78ce61420218b05600b83e0f3bdcb1c0; exact source PR-head and merged Node22 2886 PASS/0 FAIL/6 SKIP, browser/mobile/offline/a11y/cloud/SQL/security/governance SUCCESS, original603 SKIPPED. After docs governance queue READY/not deployed. 58 research identities/123 bounded checks/51 proposals, no #267 literal review, original S019 inaccessible. Next new disjoint UX/source claim review.",
@@ -2406,23 +2436,25 @@
     "R455-094: local Make Current physically invalid archived favorite eligibility corrected, code PR1241 nonforce merged a622e9027b640fd7049c3a6b5b5cabd2bc68f150, exact PR-head and merged CI PASS 2941/0/6 with original603 SKIPPED; docs-only READY reconciliation in progress. Note hosted Cloud server MAKE_CURRENT uses existing public.shots SQL CHECK guard, not affected by local code change; no policy or original S019 certification."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-095",
-    "base_development_sha": "a6aab8d404ea901bb413d2fff63d9ccedd7b0089",
-    "merged_code_sha": "b568337c2d4dc827404d7b57d5277b96d87a0f2a",
-    "verified_integrated_source_sha": "b568337c2d4dc827404d7b57d5277b96d87a0f2a",
+    "id": "R455-096",
+    "base_development_sha": "e9f8f752102f0611d44a0f83bb754de65c4ea347",
+    "merged_code_sha": "e7ef11fdcc510f14b9686b6d5565e77277887809",
+    "verified_integrated_source_sha": "e7ef11fdcc510f14b9686b6d5565e77277887809",
     "source_ids": [
       "ORG-08",
-      "ORG-05"
+      "ORG-09"
     ],
-    "claim_ids": [],
+    "claim_ids": [
+      "R455-EV-APP-065-A"
+    ],
     "number_of_curated_sources": 58,
-    "total_evidence_checks": 123,
-    "number_of_proposals": 57,
-    "review_type": "DIRECT_LOCAL_MEASURED_GREEN_ARCHIVE_NEXT_ADVICE_VETO",
+    "total_evidence_checks": 124,
+    "number_of_proposals": 58,
+    "review_type": "DIRECT_ARCHIVED_CACHED_NEXT_CONTROL_VALIDITY_AND_SINGLE_ADJUSTMENT",
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
-    "code_or_policy_changed": "SAFE_EXISTING_ENTRY_BOUNDS_LOCAL_NEXT_ADVICE_SUCCESS_EVIDENCE",
-    "next_action": "Recover live latest development, continue new distinct Log Shot→Rate→Recommendation/research claim checks, original S019 source still pending, no speculative taste policy or production writes.",
+    "code_or_policy_changed": "SAFE_EXISTING_LOCKED_MEASURED_NEXT_CONTROL_CHECK_NO_NEW_POLICY",
+    "next_action": "Continue distinct Log Shot→Rate→Recommendations research review or source-ledger claims from current SHA, S019 original PDF remains inaccessible, no new policy approval or production changes.",
     "issue455_r083": {
       "source_sha": "8f767a7e7af17d4358e54a0ef320cdc1f5b11389",
       "source_engine_blob": "309206e3ee1fd28bf2edc9d06a31d623551e2c19",
@@ -2534,6 +2566,33 @@
       "total_evidence_checks": 123,
       "number_of_proposals": 55,
       "external_scientific_confirmation_added": false
+    },
+    "issue455_r096": {
+      "source_sha": "e7ef11fdcc510f14b9686b6d5565e77277887809",
+      "engine_blob": "777303fea493dcb85f3aac6a5ac1e76093502fe3",
+      "test_blob": "7c8a4b248e71342f52cbfd0f35b0d15bef437b98",
+      "proposal": "R455-PROP-096-CACHED-NEXT-PHYSICAL-SINGLE-CONTROL",
+      "ci_runs": [
+        42403409435,
+        42403409437,
+        42403409438,
+        42403409524,
+        42403409506,
+        42403612393,
+        42403612365,
+        42403612388
+      ],
+      "status": "VERIFIED_DEVELOPMENT_READY_NOT_DEPLOYED",
+      "node_tests": {
+        "pass": 2972,
+        "fail": 0,
+        "skip": 6
+      },
+      "source_count": 58,
+      "evidence_check_count": 124,
+      "proposal_count": 58,
+      "original603": "SKIPPED_NOT_PASS",
+      "s019": "UNREVIEWED_SOURCE_ACCESS_NOT_RESOLVED"
     }
   },
   "policy_decisions_resolved": [
@@ -3718,6 +3777,29 @@
       "release_queue": "DIC-Q-455-measured-green-advice-eligibility",
       "source_commit": "b568337c2d4dc827404d7b57d5277b96d87a0f2a",
       "implementation_pr": 1250
+    },
+    {
+      "id": "R455-PROP-096-CACHED-NEXT-PHYSICAL-SINGLE-CONTROL",
+      "finding": "A physically valid last measured shot could reuse a malformed stored next-plan with an impossible recommended numeric control or multiple simultaneous changes. Direct source-reproduced synthetic risk, not observed user data.",
+      "evidence": [
+        "R455-EV-APP-065-A",
+        "Source parent e9f8f752102f0611d44a0f83bb754de65c4ea347, engine blob70bac504ceb2055e0f1ebc8da33f1b7da8128442; final changed engine blob777303fea493dcb85f3aac6a5ac1e76093502fe3.",
+        "Master Specification §19.3 one intentional next-shot controllable change and existing shot-entry bounds; Decision Ledger prior owner approval; no new numeric science or mandatory data capture.",
+        "Code PR #1264 tested head e3cd034a70f79e7c12adea61cddf8bf728e9076a, nonforce merge e7ef11fdcc510f14b9686b6d5565e77277887809, all six changed code/test/original queue/journal blobs read back identical.",
+        "Final PR-head Node22/lint42403409435 2972 pass/0 fail/6 SKIP, cloud/mobile/browser/offline/a11y42403409437, isolated SQL42403409438, security42403409524, governance42403409506 SUCCESS; exact code-merged Node22/lint42403612393 2972/0/6, cloud UX42403612365 and governance42403612388 SUCCESS. Original603 SKIPPED NOT PASS."
+      ],
+      "evidence_grade": "DIRECT_LIVE_CODE_AND_LOCKED_PRODUCT_VALIDATION_WITH_SYNTHETIC_POSITIVE_NEGATIVE_FULL_EXACT_SOURCE_CI; NOT_PUBLISHED_MEMBER_INCIDENT_OR_ESPRESSO_QUALITY_IMPROVEMENT",
+      "severity": "P2_CACHED_NEXT_SHOT_TARGET_BOUNDS_AND_CONFLICTING_CONTROLS",
+      "user_benefit": "Prevents previously cached unsafe target values or multi-control adjustments being surfaced as a current actionable next-shot recipe, while keeping past taste/measurement records and valid archived advice.",
+      "current_locked": "Master Spec §19.3 one controllable change, 5g scaled existing yield step and actual shot origin, five rated taste inputs, existing dose/yield/temperature bounds and member grinder espresso range; preserve distinct feed/style and privacy, no new product tuning policy.",
+      "current_app": "site/lib/engine.js recommendation() recomputes nextAdvice only if historic cached next targets fail existing entry/temperature/current grinder bounds or change multiple controls from the measured last shot. Valid one-control caches and original shot suggestions remain immutable; no hosted Cloud SQL change.",
+      "proposed_change": "SAFE narrow validation before reusing archival next plan; fall back to existing deterministic nextAdvice, never rewrite stored suggestion, no policy/science inference.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "VERIFIED_NONFORCE_MERGED_DEVELOPMENT_READY_NOT_DEPLOYED",
+      "test_plan": "Eight newly scoped R096 synthetic real-module groups plus repaired inherited R093 and evidence-priority one-control positive fixtures, strict negative cases and immutable originals; exact PR head and code-merged Node22/UX/mobile/offline/a11y/cloud, SQL/security/governance receipts; no original603 replay or real espresso intervention claim.",
+      "release_queue": "DIC-Q-455-cached-next-physical-bounds",
+      "source_commit": "e7ef11fdcc510f14b9686b6d5565e77277887809",
+      "implementation_pr": 1264
     }
   ]
 }

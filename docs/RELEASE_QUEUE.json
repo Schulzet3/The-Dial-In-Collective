@@ -11,7 +11,7 @@
       "id": "DIC-Q-455-cached-next-physical-bounds",
       "issue": 455,
       "title": "Recompute physically invalid archived cached next-shot controls before showing measured advice",
-      "state": "TESTING",
+      "state": "READY",
       "scope_paths": [
         "site/lib/engine.js"
       ],
@@ -19,15 +19,26 @@
         "R455-096 source e9f8f752102f0611d44a0f83bb754de65c4ea347; engine blob 70bac504ceb2055e0f1ebc8da33f1b7da8128442. Source-reproducible risk: valid latest measured shot may carry a cached historical next target outside existing dose/yield/grinder/temperature entry range. Source inspection; not an observed member incident or actual espresso outcome.",
         "Narrow SAFE guard: only when cached next contains a nonfinite/out-of-entry-bounds target, recalculate approved nextAdvice from the unchanged measured shot. Preserve cached historical original, notes, five ratings, dose, style/feed/family and one-controllable-control behavior.",
         "Seven synthetic direct real-module regression groups: invalid/valid endpoints, positive valid cached target retention, missing cache/ratings, original immutability. Node22/UX/mobile/offline/a11y/SQL/security/governance exact-source CI NOT YET EXECUTED.",
-        "Frozen603 source replay NOT RUN; no hosted Auth/provider data or physical cup measurement. READY requires exact PR-head and merged applicable CI plus docs-only ledger/status/queue reconciliation."
+        "Frozen603 source replay NOT RUN; no hosted Auth/provider data or physical cup measurement. READY requires exact PR-head and merged applicable CI plus docs-only ledger/status/queue reconciliation.",
+        "PR #1264 final source head e3cd034a70f79e7c12adea61cddf8bf728e9076a; Node22 run42403409435 2,972 PASS/0 FAIL/6 intentional SKIP and lint SUCCESS; UX/browser/mobile/offline/a11y/cloud42403409437, isolated SQL42403409438, security42403409524, governance42403409506 all SUCCESS. Original60342403409461 SKIPPED NOT PASS.",
+        "Initial head approval42402731610 failed explicit TESTING merged_source_sha:null schema; fixed. Later exact merge-candidate Node run42403146672 2,968 PASS/4 FAIL/6 SKIP due four pre-existing synthetic fixtures wrongly expecting simultaneous controls or all-green/dialedIn conflict; repaired without relaxing negative tests or Locked policy. Intermediate runs superseded, not asserted PASS.",
+        "Code PR #1264 NONFORCE squash merged e7ef11fdcc510f14b9686b6d5565e77277887809. Readback exact engine/test/queue/journal blobs identical tested final head: engine777303fea493dcb85f3aac6a5ac1e76093502fe3, new R096 test7c8a4b248e71342f52cbfd0f35b0d15bef437b98, adapted R093 tests2ea8caf05dec670018dcf66c71a66e5f64a34fad and recommendation evidence priority99f425d71df66ade83b0cdfaab96e90537a1b53b. Exact merged-source Node22/lint42403612393 2,972 PASS/0 FAIL/6 SKIP, cloud/mobile/browser/offline/a11y42403612365, governance42403612388 SUCCESS. No new SQL/security source compared with passing final PR head, reused read-only exact blob evidence. Not empirically tested coffee outcomes or live member Auth.",
+        "Development-only READY; docs proposal/source ledger and CURRENT_STATUS reconciliation via separate docs-only PR, checked before merge. Build stage not claimed PASS if classified NOT_APPLICABLE; no Netlify deploy, member/SQL/Auth/Edge/provider production writes, main/release changes or visibility operations."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Source-bound PR/head and merged-app CI unexecuted; docs-only reconciliation and governance pending"
+      "ci_runs": [
+        42403409435,
+        42403409437,
+        42403409438,
+        42403409524,
+        42403409506,
+        42403612393,
+        42403612365,
+        42403612388
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Development-only Option B; existing CONFIG.bounds dose 5-40 g/yield 5-200 g/temperature 70-100 C and member-entered grinder espresso range unchanged. No publication.",
-      "merged_source_sha": null,
+      "notes": "Development-only Option B; existing CONFIG.bounds dose 5-40 g/yield 5-200 g/temperature 70-100 C and member-entered grinder espresso range unchanged. No publication. Full exact head and code-merged CI PASS, 2,972/0/6 Node22; code SHA e7ef11fdcc510f14b9686b6d5565e77277887809; developer READY only, not deployed.",
+      "merged_source_sha": "e7ef11fdcc510f14b9686b6d5565e77277887809",
       "pr": 1264
     },
     {
