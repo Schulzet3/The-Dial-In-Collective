@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "kind": "ISSUE33_ORIGINAL603_THREE_CURRENT_SELECTED_OFFICIAL_SOURCES_VERIFIED_NOT_WHOLE603_CERTIFICATION",
+  "date_utc": "2026-11-07",
+  "authority": "Owner Issue #33 DEVELOPMENT ONLY; AGENTS, AI preflight, Master Specification, Decision Ledger, scoped journal, source-based conflict review",
+  "repository": "Schulzet3/The-Dial-In-Collective",
+  "original_corpus": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "modified": false,
+    "oracle_changed": false,
+    "scorer_changed": false
+  },
+  "code_intake": {
+    "pr": 1215,
+    "source_head": "e2b7f51fe5988ff681918f5fe983aff2b8e34c50",
+    "pr_tested_tree": "b568fe9aa24dfb4b4c5a2fdf78182c487adef5a4",
+    "merge_sha": "2f373771bb6c5e11f7c189bdb92a51d67d0282e1",
+    "merge_tree": "b568fe9aa24dfb4b4c5a2fdf78182c487adef5a4",
+    "parent_sha": "39692b66bd692350ef8265a574c3b62950636404",
+    "scope_paths": [
+      ".github/workflows/roaster-source-probe.yml",
+      "docs/workstreams/README.md",
+      "docs/workstreams/ops-issue33-eightyseventh3.md"
+    ],
+    "marker": "[dic-issue33-eightyseventh3]",
+    "pr_head_checks": {
+      "approval": "42375535866 SUCCESS",
+      "validate_node_lint_build": "42375535889 SUCCESS",
+      "cloud_mobile": "42375535906 SUCCESS",
+      "isolated_sql": "42375535937 SUCCESS"
+    }
+  },
+  "official_proof": {
+    "run": 42375730326,
+    "selected_job": 128412789297,
+    "selected_job_status": "EXECUTED_SUCCESS",
+    "merged_approval_run": 42375730321,
+    "merged_approval_status": "SUCCESS",
+    "fetched": 3,
+    "parsed": 3,
+    "selected_h1_verified": 3,
+    "add_coffee_rendered": 3,
+    "source_review_rendered": 3,
+    "conflicts": 0,
+    "manual_certified_by_job": 0,
+    "artifact_id": 13575851291,
+    "zip_sha256": "b1b142a6520ba74ff89efa98b564a598470cb7be4718f067c4c5991a9c496fda",
+    "provider_digest_matched": true,
+    "json_sha256": "900805a4a5edc07c689c38ac160f307f4d8d1f2dd897cbb3e7ec00035c07a798",
+    "unrelated_jobs": "SKIPPED_NOT_PASS",
+    "full_original603_frozen": "NOT_EXECUTED_NOT_PASS"
+  },
+  "cases": [
+    {
+      "number": 263,
+      "name": "Costa Rica",
+      "url": "https://quartermaine.com/products/costa-rica-special-estate",
+      "raw_html_sha256": "ca68656ccbc3a6519abdfaa28b83be378aad866837074f87c712251c2e2396cf",
+      "raw_html_bytes": 364819,
+      "selected_h1": "Costa Rica",
+      "actual_fields": {
+        "origin": "Tarrazu, Costa Rica",
+        "tasting_notes": "baking chocolate, and hints of citrus rind"
+      },
+      "current_conflicts": [],
+      "adjudication": "Original archived parser repeated From the Tarrazu, Costa Rica, Tarrazu; current parser resolves this correctly. Direct selected separate floral aroma appears in prose but is not included in current tasting_notes; qualify whether aroma belongs in flavor field, do not silently assert a new generic defect. Medium body is texture, not roast. No fix or full field certification claimed."
+    },
+    {
+      "number": 266,
+      "name": "Colombia Decaf",
+      "url": "https://queencitycoffeeroasters.com/products/colombia-decaf",
+      "raw_html_sha256": "b5723e4a9b5e0884b46245ded8f360b5dcbcde38b0498ff569bf116cd91c2675",
+      "raw_html_bytes": 151577,
+      "selected_h1": "Colombia Decaf",
+      "actual_fields": {
+        "origin": "Colombia",
+        "elevation_m": "1100 masl",
+        "decaffeination_method": "Water Process",
+        "roast_level": "Medium",
+        "tasting_notes": "Graham Crackers, Milk Chocolate",
+        "variety": null,
+        "process": null
+      },
+      "current_conflicts": [],
+      "adjudication": "Live literal Varietal: Vertical dryers is equipment, not cultivar. Actual parser correctly withholds variety, preserves raw labeled spec in source_facts; classifies selected Process: Swiss Water Process as decaffeination treatment, not green-bean process. No safe actual green-bean process or cultivar is published here; leave blank. No code fix."
+    },
+    {
+      "number": 269,
+      "name": "Liliana Ramírez // Colombia",
+      "url": "https://queencitycollectivecoffee.com/products/liliana-ramirez-colombia",
+      "raw_html_sha256": "207fc3544570f038c4a5e3af381a6365b97b8e70bb29ee3d713d7d438051bfac",
+      "raw_html_bytes": 260582,
+      "selected_h1": "Liliana Ramírez // Colombia",
+      "actual_fields": {
+        "origin": "Anzá, Antioquia, Colombia",
+        "producer": "Liliana Ramírez",
+        "process": "Washed",
+        "variety": "Chiroso"
+      },
+      "current_conflicts": [],
+      "adjudication": "Direct selected source says Liliana farms El Yolombo in Anzá; exporter Desarrolladores de Café is not the grower. Direct selected traditional Tres Cochadas method comprises sequential pulping, shared fermentation, washing fourth day; parser classifies Washed but does not encode the full named method as canonical process; literal narrative remains source context, preserve qualification. 2025 is historical exporter conversation, 2026 current harvest. Do not add unverified process synonym, source role or missing tasting notes."
+    }
+  ],
+  "issue_state": "OPEN",
+  "queue_change": "NONE",
+  "no_runtime_change": true,
+  "no_production_publishing_or_member_writes": true,
+  "following_actions": "Continue distinct unresolved exact current selected cases; investigate #263 aroma vs tasting label and #269 named Tres Cochadas taxonomy only with a demonstrable reproducible generic defect and adversarial controls. Preserve individual 603 semantic review and exceptions as separate scope."
+}
