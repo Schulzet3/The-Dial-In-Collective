@@ -259,9 +259,10 @@ export function learnSensitivity(shots,version=null) {
  }
  return slopes.length>=2?{secondsPerUnit:quantile(slopes,.5),samples:slopes.length}:null;
 }
-// A historical success marker is not temperature evidence without five recorded green ratings.
+// Five green ratings and an in-range temperature are insufficient when the
+// imported shot's dose/yield/time are physically invalid. Preserve History.
 function temperatureGuidance(s,c,style,v,defaultC,familyId=null) {
- const sh=s.shots.filter(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&
+ const sh=measuredRecipeShots(s.shots).filter(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&
   sh.coffeeId===c.id&&validRecordedTemperature(sh.tempC)&&
   (sh.setupVersionId===v.id||(norm(v.machine)&&norm(sh.snapshot?.machine)===norm(v.machine))));
  if(familyId){
