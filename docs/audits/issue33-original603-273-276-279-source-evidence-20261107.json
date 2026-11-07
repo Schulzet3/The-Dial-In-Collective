@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "kind": "ISSUE33_ORIGINAL603_THREE_CURRENT_SELECTED_OFFICIAL_SOURCES_VERIFIED_NOT_WHOLE603_CERTIFICATION",
+  "date_utc": "2026-11-07",
+  "authority": "Issue #33 owner development only; AGENTS, AI preflight, locked spec/decision and original frozen603 source",
+  "repository": "Schulzet3/The-Dial-In-Collective",
+  "original_corpus": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "modified": false,
+    "oracle_changed": false,
+    "scorer_changed": false
+  },
+  "source_intake": {
+    "pr": 1222,
+    "source_parent_sha": "9867f4c978340bb13b0b96aae4ea81d29cbe0a72",
+    "tested_head_sha": "c22207f8f68389a4cad2a6d846fad51debd87992",
+    "tested_head_tree": "5e7577284e6efe5aab5085c0ac65cd1913ca97eb",
+    "nonforce_merge_sha": "9b43cfc8ebbf7499acd503d3f73fcd3b4ba9abbc",
+    "merge_tree": "5e7577284e6efe5aab5085c0ac65cd1913ca97eb",
+    "exact_tree_match": true,
+    "scope_paths": [
+      ".github/workflows/roaster-source-probe.yml",
+      "docs/workstreams/README.md",
+      "docs/workstreams/ops-issue33-eightyeighth3.md"
+    ],
+    "marker": "[dic-issue33-eightyeighth3]",
+    "pr_head_checks": {
+      "approval": "42379533802 SUCCESS",
+      "cloud_and_mobile": "42379533816 SUCCESS",
+      "isolated_sql": "42379533840 SUCCESS",
+      "validate": "42379533853 rerun attempt2 SUCCESS",
+      "node": "2908 PASS, 0 FAIL, 6 intentional SKIP",
+      "lint": "SUCCESS"
+    },
+    "initial_ci_failure": {
+      "run": 42379533853,
+      "attempt": 1,
+      "diagnosis": "HTML resource test spawnSync Node child ETIMEDOUT at 4.0s under full parallel test load; 2907 PASS, 1 FAIL, 6 intentional SKIP, no changed parser/test files",
+      "retry_same_source": "attempt 2 2908 PASS 0 FAIL 6 SKIP, lint SUCCESS; no timeout removed or guard weakened"
+    }
+  },
+  "official_source": {
+    "run": 42380002600,
+    "focused_job": 128425419867,
+    "status": "EXECUTED_SUCCESS",
+    "source_sha": "9b43cfc8ebbf7499acd503d3f73fcd3b4ba9abbc",
+    "merged_approval_run": 42380002559,
+    "merged_approval_status": "SUCCESS",
+    "fetched": 3,
+    "parsed": 3,
+    "native_selected_h1_verified": 3,
+    "add_coffee_rendered": 3,
+    "source_review_rendered": 3,
+    "parsed_conflicts": 0,
+    "manual_certified_by_job": 0,
+    "unrelated_jobs": "SKIPPED_NOT_PASS",
+    "full_frozen603": "NOT_EXECUTED_NOT_PASS",
+    "artifact": {
+      "id": 13576983870,
+      "zip_bytes": 224720,
+      "zip_sha256": "8bf467c44c7570510eed0954ce92a4a653616a448aa11c2e2d7f6cdc3c9d4134",
+      "provider_digest_independently_matched": true,
+      "json_sha256": "f9b4a24abfe4031ee11ae01e23c8fd75130c365cfe9536735333c0d72cf743c7",
+      "independent_original_html_rehash": true
+    }
+  },
+  "cases": [
+    {
+      "number": 273,
+      "name": "Guatemala | Quetzal",
+      "url": "https://quillscoffee.com/products/guatemala-quetzal",
+      "html_bytes": 464127,
+      "html_sha256": "b4b5c4eccc8994f2b850576a901dc1f9ed083051af8727e57fc701afd7473b45",
+      "native_selected_h1": [
+        "Guatemala | Quetzal"
+      ],
+      "parser_fields": {
+        "name": "Guatemala | Quetzal",
+        "roaster": "Quills Coffee",
+        "origin": "Huehuetenango, Guatemala",
+        "variety": "Bourbon, Catimor, Caturra, Maragogype, Pache",
+        "process": "Washed",
+        "elevation_m": "1,400 - 2,200 Meters Above Sea Level",
+        "tasting_notes": "molasses, pecan, & red grape"
+      },
+      "qualification": "Selected product description agrees. Some direct selected source_facts labels Country/Region/Variety/Process/Elevation carry misleading section 'Love for our coffee from customers' from preceding testimonial heading. Actual values independently validated in exact product description, so not an invalid canonical field. Misleading review-section provenance requires bounded generic reproduction/adversarial regression before correction; not certified exception resolved."
+    },
+    {
+      "number": 276,
+      "name": "Honduras Manos de Mujer, Organic, Fair Trade",
+      "url": "https://readysetcoffee.com/products/honduras-manos-de-mujer-organic-fair-trade",
+      "html_bytes": 324832,
+      "html_sha256": "65f0820484512a3184f026b96d179ee1812c02d3e164fb72679903ccbdcf2cba",
+      "native_selected_h1": [
+        "Honduras Manos de Mujer, Organic, Fair Trade"
+      ],
+      "parser_fields": {
+        "name": "Honduras Manos de Mujer, Organic, Fair Trade",
+        "roaster": "Ready Set!",
+        "elevation_m": "1219 m",
+        "process": "Honey",
+        "variety": "Bourbon | Catuai | Caturra | Typica",
+        "tasting_notes": "Hazelnut, Orange Blossom, Agave",
+        "roast_level": "Medium",
+        "origin": "Marcala, Honduras",
+        "producer": "Manos de Mujer"
+      },
+      "qualification": "Direct selected text names Manos de Mujer as an association/group of female producers within COMSA, not an individual farmer or COMSA solely; preserve group role explicitly and do not assert individual producer. 4000ft converted to 1219m consistent."
+    },
+    {
+      "number": 279,
+      "name": "Sumatra",
+      "url": "https://redhouseroasters.com/products/sumatra",
+      "html_bytes": 198742,
+      "html_sha256": "164057dd3497cb6093374d654d5d8a0eae1a1858f7ff3ab446290d88e0044e73",
+      "native_selected_h1": [
+        "Sumatra"
+      ],
+      "parser_fields": {
+        "name": "Sumatra",
+        "roaster": "Red House Roasters",
+        "elevation_m": "1500-1800 Meters",
+        "tasting_notes": "Molasses, floral. Spice. Full body, sweet finish.",
+        "roast_level": "Medium-Dark",
+        "origin": "Kerinci",
+        "process": "Other/Unknown",
+        "variety": "Djember (S-795)"
+      },
+      "qualification": "Direct selected Full City properly normalized Medium-Dark (Locked). The exact selected process spec Wet-Hulled is retained in source facts but dropdown can only hold Other/Unknown; do not convert to Washed. Full body/sweet finish copied under actual Cupping Notes caption, not inferred roast."
+    }
+  ],
+  "status": "ISSUE33_OPEN",
+  "new_runtime_correction": false,
+  "queue_change": "NONE",
+  "no_publishing_or_production_member_provider_writes": true,
+  "next_actions": "Test section-heading scoping on exact #273 current selected HTML and adversarial unrelated-heading / in-scope specs; implement generic fix only if safe and proven, with focused CI and post-fix source. Continue other original603 unresolved exact selected cases; preserve inherited source conflicts as reviewable. Full 603 individual semantic certification remains outstanding."
+}
