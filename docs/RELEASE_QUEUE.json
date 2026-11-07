@@ -11,22 +11,33 @@
       "id": "DIC-Q-455-temperature-physical-history-evidence",
       "issue": 455,
       "title": "Exclude physically invalid archived five-green measurements from personal temperature evidence",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "569e1c8b9b216ea4e3f3a135004a9c8cea14cc8c",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
         "R091 live source 443525c0d35b4df02ab2fe8b4d6ae67572b5118c engine blob 618677468e22a522ab6ceb80f26dd778749ac5ac: temperatureGuidance already checked five green ratings and 70-100 C temperatures, but could reuse historic dose/yield/time outside existing Log Shot bounds. Source-synthetic counterexample, not observed member incident.",
         "SAFE: reuse preexisting measuredRecipeShots physical eligibility (dose 5-40g, yield 5-200g, time 1-180s) for archival temperature evidence only; preserve recorded shots, all five tastes, recipe families and Locked numerical targets.",
-        "7 synthetic real-module negative/positive/bounds/family/immutability regression groups authored; Node22 and cloud/browser/mobile/offline/a11y/SQL/security/governance/merged-source CI UNEXECUTED at commit authoring; frozen603 not claimed."
+        "7 synthetic real-module negative/positive/bounds/family/immutability regression groups authored; Node22 and cloud/browser/mobile/offline/a11y/SQL/security/governance/merged-source CI UNEXECUTED at commit authoring; frozen603 not claimed.",
+        "PR1220 feature head ec66f24d0fbb201333418453364ea1ea13074fbb: Node22/lint/build run42378241090 2,908 PASS/0 FAIL/6 intentional SKIP; browser/mobile/offline/a11y/cloud run42378241114 (cloud-tests and mobile-browser-qa) SUCCESS, isolated SQL42378241003 SUCCESS, security42378241111 SUCCESS, governance42378241058 SUCCESS; frozen60342378241070 SKIPPED, not PASS.",
+        "PR1220 nonforce squash merged 569e1c8b9b216ea4e3f3a135004a9c8cea14cc8c; exact four original runtime/test/TESTING-queue/same-commit-journal Git blobs equal passing head: 2fb2b038860b787575a4ad13b75193cd32e0e595 / f751691cbe0f208568fc4772f3a4fa891617c833 / 74be6498d285876ccec97f5044ce85b17bea2f5c / e9d039713db6761cdc4d897c7a6a779430434221.",
+        "Exact code-merged Node22/lint/build run42378387367 2,908 PASS/0 FAIL/6 intentional SKIP; browser/mobile/offline/a11y/cloud run42378387308 SUCCESS and governance42378387316 SUCCESS; source-bound check-run head 569e1c8b9b216ea4e3f3a135004a9c8cea14cc8c. No actual real member/cup-quality validation. Docs-only governance requires separate exact-source verification."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact head and merged source CI pending; documentation/READY reconciliation pending."
+      "ci_runs": [
+        42378241090,
+        42378241114,
+        42378241003,
+        42378241111,
+        42378241058,
+        42378241070,
+        42378387367,
+        42378387308,
+        42378387316
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Development-only SAFE existing-entry physical gate; no deploy or production writes. Original S019 PDF remains unavailable; no new scientific recommendation, external primary-source certification or owner-policy authorization."
+      "notes": "Development-only SAFE existing-entry physical gate; no deploy or production writes. Original S019 PDF remains unavailable; no new scientific recommendation, external primary-source certification or owner-policy authorization. R455-091 narrow code/fixture verified exact PR and merged CI, development READY NOT DEPLOYED. Standalone original S019 unavailable and scientific citations unverified."
     },
     {
       "id": "DIC-Q-33-original603-256-direct-selected-decaf-origin-conflict",
