@@ -1,0 +1,1831 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch_id": "S2-DISJOINT-F427-L001-L040-P111-L531-L550-20261107-H15",
+  "date_utc": "2026-11-07",
+  "source_dev_parent_sha": "f08bcc9c186671589f928ef3630307a56bb42789",
+  "source_frozen_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+  "source_frozen_tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+  "source_current_pin": "9707553a64f88127826e8f5b2b36cd0651296e83",
+  "source_current_pin_tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+  "first_file_revalidation": {
+    "path": ".github/workflows/approval-continuity.yml",
+    "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+    "numbered_original_lines_directly_read": 41,
+    "strict_receipt": "docs/audits/issue267-v2-strict-batches/S2-001.json",
+    "literal_matches": 41,
+    "duplicate_credit": 0,
+    "semantic_certification": "Prior generic semantic fields not promoted without per-dimension confirmation."
+  },
+  "previous_nonoverlap": {
+    "receipt": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F426-L001-L065-P111-L501-L530-20261107-H14D.json",
+    "last_original_current_line": 530
+  },
+  "tracks": [
+    {
+      "track": "FROZEN_STRICT",
+      "index": 427,
+      "path": "scripts/pwa/service-worker.template.txt",
+      "source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+      "original_blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+      "original_physical_line_count": 40,
+      "first_line": 1,
+      "last_line": 40,
+      "live_blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+      "per_line": [
+        {
+          "line": 1,
+          "source_text": "// Build-injected fingerprint follows the exact revision of these public assets.",
+          "inspection_class": "comment",
+          "behavior": "Build-injected fingerprint tracks public asset revision",
+          "quality": "Checked explanatory policy against actual source operations.",
+          "bug_security_privacy_performance_risk": "Bad fingerprint may retain outdated UI",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 1,
+            "exact_text_match": true
+          },
+          "testability": "Generated worker build ID/manifest and install mock",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 2,
+          "source_text": "// Strict allowlist: no fetch interception for Supabase, RPC, admin, or member data.",
+          "inspection_class": "comment",
+          "behavior": "Comment excludes Supabase/RPC/admin/member interception",
+          "quality": "Checked explanatory policy against actual source operations.",
+          "bug_security_privacy_performance_risk": "Comment alone is not privacy enforcement",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 2,
+            "exact_text_match": true
+          },
+          "testability": "Generated worker build ID/manifest and install mock",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 3,
+          "source_text": "const CACHE_NAME='dic-public-shell-__DIC_BUILD_ID__';",
+          "inspection_class": "executable",
+          "behavior": "Define revision-scoped public cache name",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "Unchanged ID across builds causes stale shell",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 3,
+            "exact_text_match": true
+          },
+          "testability": "Generated worker build ID/manifest and install mock",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 4,
+          "source_text": "const SHELL=__DIC_ASSETS__;",
+          "inspection_class": "executable",
+          "behavior": "Inject public shell asset manifest",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "Missing assets break offline install",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 4,
+            "exact_text_match": true
+          },
+          "testability": "Generated worker build ID/manifest and install mock",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 5,
+          "source_text": "const ALLOWED=new Set(SHELL);",
+          "inspection_class": "executable",
+          "behavior": "Build exact path allowlist as a set",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "Manifest must never include member endpoints",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 5,
+            "exact_text_match": true
+          },
+          "testability": "Generated worker build ID/manifest and install mock",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 6,
+          "source_text": "const NAVIGATION=new Set(['/','/index.html']);",
+          "inspection_class": "executable",
+          "behavior": "Limit allowed navigation to root or index",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "Avoid intercepting private arbitrary navigation",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 6,
+            "exact_text_match": true
+          },
+          "testability": "Generated worker build ID/manifest and install mock",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 7,
+          "source_text": "self.addEventListener('install',event=>{",
+          "inspection_class": "executable",
+          "behavior": "Register install listener",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "Install failure must not activate incomplete shell",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 7,
+            "exact_text_match": true
+          },
+          "testability": "Generated worker build ID/manifest and install mock",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 8,
+          "source_text": " // Precache the *complete* revision before activating; a perpetually open",
+          "inspection_class": "comment",
+          "behavior": "Comment: require full precache before activation",
+          "quality": "Checked explanatory policy against actual source operations.",
+          "bug_security_privacy_performance_risk": "Partial shell would strand offline users",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 8,
+            "exact_text_match": true
+          },
+          "testability": "Generated worker build ID/manifest and install mock",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 9,
+          "source_text": " // iOS Home Screen app must not keep the old UI pinned indefinitely.",
+          "inspection_class": "comment",
+          "behavior": "Comment: installed iOS app must eventually update",
+          "quality": "Checked explanatory policy against actual source operations.",
+          "bug_security_privacy_performance_risk": "Old installed clients may remain stale",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 9,
+            "exact_text_match": true
+          },
+          "testability": "Generated worker build ID/manifest and install mock",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 10,
+          "source_text": " // Do not force-reload an editing/logging tab: the next navigation upgrades.",
+          "inspection_class": "comment",
+          "behavior": "Comment: do not reload editing/logging active tab",
+          "quality": "Checked explanatory policy against actual source operations.",
+          "bug_security_privacy_performance_risk": "Forced update could lose unsaved shot entry",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 10,
+            "exact_text_match": true
+          },
+          "testability": "Generated worker build ID/manifest and install mock",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 11,
+          "source_text": " event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(SHELL))",
+          "inspection_class": "executable",
+          "behavior": "Wait for opening cache and adding every shell asset",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "addAll rejection must prevent activation",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 11,
+            "exact_text_match": true
+          },
+          "testability": "Generated worker build ID/manifest and install mock",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 12,
+          "source_text": "  .then(()=>self.skipWaiting()));",
+          "inspection_class": "executable",
+          "behavior": "Invoke skipWaiting only once precache succeeds",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "skipWaiting can leave old controlled tabs",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 12,
+            "exact_text_match": true
+          },
+          "testability": "Generated worker build ID/manifest and install mock",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 13,
+          "source_text": "});",
+          "inspection_class": "structural",
+          "behavior": "Close install listener",
+          "quality": "Required parse/control-flow delimiter in reviewed listener.",
+          "bug_security_privacy_performance_risk": "Parse errors prevent worker installation",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 13,
+            "exact_text_match": true
+          },
+          "testability": "Generated worker build ID/manifest and install mock",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 14,
+          "source_text": "self.addEventListener('activate',event=>{",
+          "inspection_class": "executable",
+          "behavior": "Register old activate listener",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "Old tabs may depend on old CacheStorage",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 41,
+            "exact_text_match": true
+          },
+          "testability": "Multiple open controlled workers and offline cached shell",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Offline and unsaved shot safety",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 15,
+          "source_text": " event.waitUntil(caches.keys().then(names=>Promise.all(names",
+          "inspection_class": "executable",
+          "behavior": "Immediately inspect all CacheStorage names",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "Old-cache cleanup ignored current clients",
+          "dead_or_obsolete": "Historical old-cache disposal superseded in live by conditional client-aware pruning.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": null,
+            "exact_text_match": false
+          },
+          "testability": "Multiple open controlled workers and offline cached shell",
+          "fix_or_improvement_opportunity": "Already corrected in live code; no historical rewrite; execute lifecycle regression.",
+          "locked_decision_fit": "Offline and unsaved shot safety",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 16,
+          "source_text": "  .filter(name=>name.startsWith('dic-public-shell-')&&name!==CACHE_NAME)",
+          "inspection_class": "executable",
+          "behavior": "Select old public-shell caches excluding current",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "Prior controlled tab may still need cache",
+          "dead_or_obsolete": "Historical old-cache disposal superseded in live by conditional client-aware pruning.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": null,
+            "exact_text_match": false
+          },
+          "testability": "Multiple open controlled workers and offline cached shell",
+          "fix_or_improvement_opportunity": "Already corrected in live code; no historical rewrite; execute lifecycle regression.",
+          "locked_decision_fit": "Offline and unsaved shot safety",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 17,
+          "source_text": "  .map(name=>caches.delete(name)))));",
+          "inspection_class": "executable",
+          "behavior": "Immediately delete all selected old caches",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "Historical old-tab offline break; already revised in live",
+          "dead_or_obsolete": "Historical old-cache disposal superseded in live by conditional client-aware pruning.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": null,
+            "exact_text_match": false
+          },
+          "testability": "Multiple open controlled workers and offline cached shell",
+          "fix_or_improvement_opportunity": "Already corrected in live code; no historical rewrite; execute lifecycle regression.",
+          "locked_decision_fit": "Offline and unsaved shot safety",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 18,
+          "source_text": " // No clients.claim(): never change control of an already active tab.",
+          "inspection_class": "comment",
+          "behavior": "Comment: do not call clients.claim on existing tabs",
+          "quality": "Checked explanatory policy against actual source operations.",
+          "bug_security_privacy_performance_risk": "clients.claim would upset in-progress draft",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 43,
+            "exact_text_match": true
+          },
+          "testability": "Multiple open controlled workers and offline cached shell",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Offline and unsaved shot safety",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 19,
+          "source_text": "});",
+          "inspection_class": "structural",
+          "behavior": "Close old activate listener",
+          "quality": "Required parse/control-flow delimiter in reviewed listener.",
+          "bug_security_privacy_performance_risk": "No standalone risk beyond syntax",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 44,
+            "exact_text_match": true
+          },
+          "testability": "Multiple open controlled workers and offline cached shell",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Offline and unsaved shot safety",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 20,
+          "source_text": "self.addEventListener('fetch',event=>{",
+          "inspection_class": "executable",
+          "behavior": "Register fetch listener",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "All fetches require strict guard",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 45,
+            "exact_text_match": true
+          },
+          "testability": "Fetch GET, origin, pathname, query and navigate negative cases",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 21,
+          "source_text": " const request=event.request;",
+          "inspection_class": "executable",
+          "behavior": "Read incoming Request",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "Request must be authentic",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 46,
+            "exact_text_match": true
+          },
+          "testability": "Fetch GET, origin, pathname, query and navigate negative cases",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 22,
+          "source_text": " if(request.method!=='GET')return;",
+          "inspection_class": "executable",
+          "behavior": "Pass through non-GET requests",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "POST mutation must never be intercepted",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 47,
+            "exact_text_match": true
+          },
+          "testability": "Fetch GET, origin, pathname, query and navigate negative cases",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 23,
+          "source_text": " const url=new URL(request.url);",
+          "inspection_class": "executable",
+          "behavior": "Parse Request URL",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "URL parser controls origin/search behavior",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 48,
+            "exact_text_match": true
+          },
+          "testability": "Fetch GET, origin, pathname, query and navigate negative cases",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 24,
+          "source_text": " if(url.origin!==self.location.origin||url.search||!ALLOWED.has(url.pathname))return;",
+          "inspection_class": "executable",
+          "behavior": "Pass through cross-origin, queried or non-allowed pathname",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "Privacy-critical allowlist, avoid query caching",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 49,
+            "exact_text_match": true
+          },
+          "testability": "Fetch GET, origin, pathname, query and navigate negative cases",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 25,
+          "source_text": " if(request.mode==='navigate'){",
+          "inspection_class": "executable",
+          "behavior": "Handle navigation requests separately",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "Navigation requires online-first policy",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 51,
+            "exact_text_match": true
+          },
+          "testability": "Fetch GET, origin, pathname, query and navigate negative cases",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 26,
+          "source_text": "  if(!NAVIGATION.has(url.pathname))return;",
+          "inspection_class": "executable",
+          "behavior": "Ignore navigation outside root/index",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "Unknown routes must pass through",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 52,
+            "exact_text_match": true
+          },
+          "testability": "Fetch GET, origin, pathname, query and navigate negative cases",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 27,
+          "source_text": "  // Online startup checks the live HTML, so a cached install cannot mask a",
+          "inspection_class": "comment",
+          "behavior": "Comment: online starts with fresh HTML",
+          "quality": "Checked explanatory policy against actual source operations.",
+          "bug_security_privacy_performance_risk": "Fresh release must not be masked",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 53,
+            "exact_text_match": true
+          },
+          "testability": "Network failure, HTTP non-OK, public cached fallback and static asset cases",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 28,
+          "source_text": "  // published release. Offline startup still uses the same cached shell.",
+          "inspection_class": "comment",
+          "behavior": "Comment: offline returns public cached HTML",
+          "quality": "Checked explanatory policy against actual source operations.",
+          "bug_security_privacy_performance_risk": "Offline must show shell, never personal data",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 54,
+            "exact_text_match": true
+          },
+          "testability": "Network failure, HTTP non-OK, public cached fallback and static asset cases",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 29,
+          "source_text": "  event.respondWith(fetch(request,{cache:'no-store'}).then(response=>{",
+          "inspection_class": "executable",
+          "behavior": "Fetch navigation with no-store policy",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "Outage/non-OK must fall back safely",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 55,
+            "exact_text_match": true
+          },
+          "testability": "Network failure, HTTP non-OK, public cached fallback and static asset cases",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 30,
+          "source_text": "   if(response.ok)return response;",
+          "inspection_class": "executable",
+          "behavior": "Return successful HTTP response",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "Only response.ok is accepted",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 56,
+            "exact_text_match": true
+          },
+          "testability": "Network failure, HTTP non-OK, public cached fallback and static asset cases",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 31,
+          "source_text": "   throw new Error('shell_navigation_unavailable');",
+          "inspection_class": "executable",
+          "behavior": "Throw explicit unavailable marker for non-OK",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "Error marker should not include private payload",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 57,
+            "exact_text_match": true
+          },
+          "testability": "Network failure, HTTP non-OK, public cached fallback and static asset cases",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 32,
+          "source_text": "  }).catch(async()=>{",
+          "inspection_class": "executable",
+          "behavior": "Catch failed online navigation",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "Broad catch can hide other exceptions",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 58,
+            "exact_text_match": true
+          },
+          "testability": "Network failure, HTTP non-OK, public cached fallback and static asset cases",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 33,
+          "source_text": "   const cache=await caches.open(CACHE_NAME);",
+          "inspection_class": "executable",
+          "behavior": "Open current public cache for fallback",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "Cache open can reject during offline fallback",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 59,
+            "exact_text_match": true
+          },
+          "testability": "Network failure, HTTP non-OK, public cached fallback and static asset cases",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 34,
+          "source_text": "   return await cache.match(url.pathname)||await cache.match('/index.html');",
+          "inspection_class": "executable",
+          "behavior": "Lookup cached pathname or root index",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "Both lookup misses produce undefined response",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 60,
+            "exact_text_match": true
+          },
+          "testability": "Network failure, HTTP non-OK, public cached fallback and static asset cases",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 35,
+          "source_text": "  }));",
+          "inspection_class": "structural",
+          "behavior": "Close fallback promise and respondWith",
+          "quality": "Required parse/control-flow delimiter in reviewed listener.",
+          "bug_security_privacy_performance_risk": "Syntax depends on correct promise closure",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 61,
+            "exact_text_match": true
+          },
+          "testability": "Network failure, HTTP non-OK, public cached fallback and static asset cases",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 36,
+          "source_text": "  return;",
+          "inspection_class": "executable",
+          "behavior": "Return after handling navigation",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "Prevent second respondWith call",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 62,
+            "exact_text_match": true
+          },
+          "testability": "Network failure, HTTP non-OK, public cached fallback and static asset cases",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 37,
+          "source_text": " }",
+          "inspection_class": "structural",
+          "behavior": "Close navigation conditional",
+          "quality": "Required parse/control-flow delimiter in reviewed listener.",
+          "bug_security_privacy_performance_risk": "Syntax only",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 63,
+            "exact_text_match": true
+          },
+          "testability": "Network failure, HTTP non-OK, public cached fallback and static asset cases",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 38,
+          "source_text": " event.respondWith(caches.open(CACHE_NAME).then(async cache=>",
+          "inspection_class": "executable",
+          "behavior": "Respond to allowed static fetch cache-first",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "Static assets intentionally cached until new build",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 64,
+            "exact_text_match": true
+          },
+          "testability": "Network failure, HTTP non-OK, public cached fallback and static asset cases",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 39,
+          "source_text": "  await cache.match(url.pathname)||fetch(request)));",
+          "inspection_class": "executable",
+          "behavior": "Use cached pathname or network fetch on miss",
+          "quality": "Executable branch individually interpreted within its enclosing lifecycle.",
+          "bug_security_privacy_performance_risk": "Cache miss falls through to network",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 65,
+            "exact_text_match": true
+          },
+          "testability": "Network failure, HTTP non-OK, public cached fallback and static asset cases",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        },
+        {
+          "line": 40,
+          "source_text": "});",
+          "inspection_class": "structural",
+          "behavior": "Close fetch listener",
+          "quality": "Required parse/control-flow delimiter in reviewed listener.",
+          "bug_security_privacy_performance_risk": "Syntax only",
+          "dead_or_obsolete": "Immutable historical source; current counterpart retains or safely refactors semantics.",
+          "duplicate_or_redundant": "No proven same-effect code removable at this location; all-repository duplication assessment unfinished.",
+          "exact_current_counterpart": {
+            "path": "scripts/pwa/service-worker.template.txt",
+            "blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+            "line": 66,
+            "exact_text_match": true
+          },
+          "testability": "Network failure, HTTP non-OK, public cached fallback and static asset cases",
+          "fix_or_improvement_opportunity": "Keep public-only behavior absent demonstrated defect; test before cleanup.",
+          "locked_decision_fit": "Public-only offline shell, member privacy and owner-gated publication",
+          "review_method": "AI directly read original physical line in source context, not independent human review"
+        }
+      ]
+    },
+    {
+      "track": "PINNED_CURRENT_STRICT",
+      "index": 111,
+      "path": "site/cloud/main.js",
+      "source_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+      "original_blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+      "original_physical_line_count": 1027,
+      "first_line": 531,
+      "last_line": 550,
+      "live_blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+      "per_line": [
+        {
+          "line": 531,
+          "source_text": " async refreshAddedCoffeeReview(){",
+          "inspection_class": "executable",
+          "behavior": "Begin asynchronous pending coffee review refresh",
+          "quality": "Directly interpreted owner-epoch/receipt/add-coffee state flow.",
+          "bug_security_privacy_performance_risk": "Race with logout and session switch",
+          "dead_or_obsolete": "Current Add Coffee code is live; no proven unused behavior.",
+          "duplicate_or_redundant": "Repeated owner/epoch checks protect distinct awaits and cannot safely be deduplicated.",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 531,
+            "exact_text_match": true
+          },
+          "testability": "Race login/logout against sync/offline error",
+          "fix_or_improvement_opportunity": "No speculative code change; coordinate current extractor #33 and Auth/privacy #96 test ownership.",
+          "locked_decision_fit": "Locked Add Coffee, owner-isolated private data and offline pending mutation integrity.",
+          "review_method": "AI directly read original physical line in surrounding async method"
+        },
+        {
+          "line": 532,
+          "source_text": "  const pending=this.pendingCoffeeReview;if(!pending)return;",
+          "inspection_class": "executable",
+          "behavior": "Return when no pending review exists",
+          "quality": "Directly interpreted owner-epoch/receipt/add-coffee state flow.",
+          "bug_security_privacy_performance_risk": "Do not reopen abandoned pending form",
+          "dead_or_obsolete": "Current Add Coffee code is live; no proven unused behavior.",
+          "duplicate_or_redundant": "Repeated owner/epoch checks protect distinct awaits and cannot safely be deduplicated.",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 532,
+            "exact_text_match": true
+          },
+          "testability": "Race login/logout against sync/offline error",
+          "fix_or_improvement_opportunity": "No speculative code change; coordinate current extractor #33 and Auth/privacy #96 test ownership.",
+          "locked_decision_fit": "Locked Add Coffee, owner-isolated private data and offline pending mutation integrity.",
+          "review_method": "AI directly read original physical line in surrounding async method"
+        },
+        {
+          "line": 533,
+          "source_text": "  this.assertSession(pending.owner,pending.epoch);",
+          "inspection_class": "executable",
+          "behavior": "Validate pending owner and epoch before await",
+          "quality": "Directly interpreted owner-epoch/receipt/add-coffee state flow.",
+          "bug_security_privacy_performance_risk": "Cross-account state isolation boundary",
+          "dead_or_obsolete": "Current Add Coffee code is live; no proven unused behavior.",
+          "duplicate_or_redundant": "Repeated owner/epoch checks protect distinct awaits and cannot safely be deduplicated.",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 533,
+            "exact_text_match": true
+          },
+          "testability": "Race login/logout against sync/offline error",
+          "fix_or_improvement_opportunity": "No speculative code change; coordinate current extractor #33 and Auth/privacy #96 test ownership.",
+          "locked_decision_fit": "Locked Add Coffee, owner-isolated private data and offline pending mutation integrity.",
+          "review_method": "AI directly read original physical line in surrounding async method"
+        },
+        {
+          "line": 534,
+          "source_text": "  try{await this.inSession(()=>this.sync());}",
+          "inspection_class": "executable",
+          "behavior": "Synchronize through current session",
+          "quality": "Directly interpreted owner-epoch/receipt/add-coffee state flow.",
+          "bug_security_privacy_performance_risk": "Offline sync failure must preserve pending data",
+          "dead_or_obsolete": "Current Add Coffee code is live; no proven unused behavior.",
+          "duplicate_or_redundant": "Repeated owner/epoch checks protect distinct awaits and cannot safely be deduplicated.",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 534,
+            "exact_text_match": true
+          },
+          "testability": "Race login/logout against sync/offline error",
+          "fix_or_improvement_opportunity": "No speculative code change; coordinate current extractor #33 and Auth/privacy #96 test ownership.",
+          "locked_decision_fit": "Locked Add Coffee, owner-isolated private data and offline pending mutation integrity.",
+          "review_method": "AI directly read original physical line in surrounding async method"
+        },
+        {
+          "line": 535,
+          "source_text": "  catch(error){this.assertSession(pending.owner,pending.epoch);if(error.code==='account_changed')throw error;}",
+          "inspection_class": "executable",
+          "behavior": "Handle sync failure, rethrow account_changed",
+          "quality": "Directly interpreted owner-epoch/receipt/add-coffee state flow.",
+          "bug_security_privacy_performance_risk": "Non-Error rejection has fragile error.code dereference",
+          "dead_or_obsolete": "Current Add Coffee code is live; no proven unused behavior.",
+          "duplicate_or_redundant": "Repeated owner/epoch checks protect distinct awaits and cannot safely be deduplicated.",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 535,
+            "exact_text_match": true
+          },
+          "testability": "Race login/logout against sync/offline error",
+          "fix_or_improvement_opportunity": "No speculative code change; coordinate current extractor #33 and Auth/privacy #96 test ownership.",
+          "locked_decision_fit": "Locked Add Coffee, owner-isolated private data and offline pending mutation integrity.",
+          "review_method": "AI directly read original physical line in surrounding async method"
+        },
+        {
+          "line": 536,
+          "source_text": "  this.assertSession(pending.owner,pending.epoch);",
+          "inspection_class": "executable",
+          "behavior": "Recheck owner/epoch after sync",
+          "quality": "Directly interpreted owner-epoch/receipt/add-coffee state flow.",
+          "bug_security_privacy_performance_risk": "Await must not promote previous account data",
+          "dead_or_obsolete": "Current Add Coffee code is live; no proven unused behavior.",
+          "duplicate_or_redundant": "Repeated owner/epoch checks protect distinct awaits and cannot safely be deduplicated.",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 536,
+            "exact_text_match": true
+          },
+          "testability": "Race login/logout against sync/offline error",
+          "fix_or_improvement_opportunity": "No speculative code change; coordinate current extractor #33 and Auth/privacy #96 test ownership.",
+          "locked_decision_fit": "Locked Add Coffee, owner-isolated private data and offline pending mutation integrity.",
+          "review_method": "AI directly read original physical line in surrounding async method"
+        },
+        {
+          "line": 537,
+          "source_text": "  if(pending.mutationId){",
+          "inspection_class": "executable",
+          "behavior": "Branch on pending mutation receipt identity",
+          "quality": "Directly interpreted owner-epoch/receipt/add-coffee state flow.",
+          "bug_security_privacy_performance_risk": "Missing receipt must not imply persistence",
+          "dead_or_obsolete": "Current Add Coffee code is live; no proven unused behavior.",
+          "duplicate_or_redundant": "Repeated owner/epoch checks protect distinct awaits and cannot safely be deduplicated.",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 537,
+            "exact_text_match": true
+          },
+          "testability": "Mock readReceipt success/error and account epoch switch",
+          "fix_or_improvement_opportunity": "No speculative code change; coordinate current extractor #33 and Auth/privacy #96 test ownership.",
+          "locked_decision_fit": "Locked Add Coffee, owner-isolated private data and offline pending mutation integrity.",
+          "review_method": "AI directly read original physical line in surrounding async method"
+        },
+        {
+          "line": 538,
+          "source_text": "   let receipt;",
+          "inspection_class": "executable",
+          "behavior": "Declare receipt variable",
+          "quality": "Directly interpreted owner-epoch/receipt/add-coffee state flow.",
+          "bug_security_privacy_performance_risk": "Uninitialized variable cannot assert success",
+          "dead_or_obsolete": "Current Add Coffee code is live; no proven unused behavior.",
+          "duplicate_or_redundant": "Repeated owner/epoch checks protect distinct awaits and cannot safely be deduplicated.",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 538,
+            "exact_text_match": true
+          },
+          "testability": "Mock readReceipt success/error and account epoch switch",
+          "fix_or_improvement_opportunity": "No speculative code change; coordinate current extractor #33 and Auth/privacy #96 test ownership.",
+          "locked_decision_fit": "Locked Add Coffee, owner-isolated private data and offline pending mutation integrity.",
+          "review_method": "AI directly read original physical line in surrounding async method"
+        },
+        {
+          "line": 539,
+          "source_text": "   try{receipt=await this.inSession(()=>this.store.readReceipt(pending.owner,pending.mutationId));}",
+          "inspection_class": "executable",
+          "behavior": "Read saved receipt inside owner session",
+          "quality": "Directly interpreted owner-epoch/receipt/add-coffee state flow.",
+          "bug_security_privacy_performance_risk": "Owner-scoped receipt access depends on store/Auth #96",
+          "dead_or_obsolete": "Current Add Coffee code is live; no proven unused behavior.",
+          "duplicate_or_redundant": "Repeated owner/epoch checks protect distinct awaits and cannot safely be deduplicated.",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 539,
+            "exact_text_match": true
+          },
+          "testability": "Mock readReceipt success/error and account epoch switch",
+          "fix_or_improvement_opportunity": "No speculative code change; coordinate current extractor #33 and Auth/privacy #96 test ownership.",
+          "locked_decision_fit": "Locked Add Coffee, owner-isolated private data and offline pending mutation integrity.",
+          "review_method": "AI directly read original physical line in surrounding async method"
+        },
+        {
+          "line": 540,
+          "source_text": "   catch(error){this.assertSession(pending.owner,pending.epoch);if(error.code==='account_changed')throw error;}",
+          "inspection_class": "executable",
+          "behavior": "Handle read errors while preserving account safety",
+          "quality": "Directly interpreted owner-epoch/receipt/add-coffee state flow.",
+          "bug_security_privacy_performance_risk": "Transient failure must not fake acknowledgement",
+          "dead_or_obsolete": "Current Add Coffee code is live; no proven unused behavior.",
+          "duplicate_or_redundant": "Repeated owner/epoch checks protect distinct awaits and cannot safely be deduplicated.",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 540,
+            "exact_text_match": true
+          },
+          "testability": "Mock readReceipt success/error and account epoch switch",
+          "fix_or_improvement_opportunity": "No speculative code change; coordinate current extractor #33 and Auth/privacy #96 test ownership.",
+          "locked_decision_fit": "Locked Add Coffee, owner-isolated private data and offline pending mutation integrity.",
+          "review_method": "AI directly read original physical line in surrounding async method"
+        },
+        {
+          "line": 541,
+          "source_text": "   this.assertSession(pending.owner,pending.epoch);",
+          "inspection_class": "executable",
+          "behavior": "Recheck owner/epoch after receipt read",
+          "quality": "Directly interpreted owner-epoch/receipt/add-coffee state flow.",
+          "bug_security_privacy_performance_risk": "Recheck protects delayed Promise response",
+          "dead_or_obsolete": "Current Add Coffee code is live; no proven unused behavior.",
+          "duplicate_or_redundant": "Repeated owner/epoch checks protect distinct awaits and cannot safely be deduplicated.",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 541,
+            "exact_text_match": true
+          },
+          "testability": "Mock readReceipt success/error and account epoch switch",
+          "fix_or_improvement_opportunity": "No speculative code change; coordinate current extractor #33 and Auth/privacy #96 test ownership.",
+          "locked_decision_fit": "Locked Add Coffee, owner-isolated private data and offline pending mutation integrity.",
+          "review_method": "AI directly read original physical line in surrounding async method"
+        },
+        {
+          "line": 542,
+          "source_text": "   if(receipt?.result?.ok===true){",
+          "inspection_class": "executable",
+          "behavior": "Require strict literal true success receipt",
+          "quality": "Directly interpreted owner-epoch/receipt/add-coffee state flow.",
+          "bug_security_privacy_performance_risk": "Truthy string must not be accepted",
+          "dead_or_obsolete": "Current Add Coffee code is live; no proven unused behavior.",
+          "duplicate_or_redundant": "Repeated owner/epoch checks protect distinct awaits and cannot safely be deduplicated.",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 542,
+            "exact_text_match": true
+          },
+          "testability": "Fake strict result and malformed receipt fields",
+          "fix_or_improvement_opportunity": "No speculative code change; coordinate current extractor #33 and Auth/privacy #96 test ownership.",
+          "locked_decision_fit": "Locked Add Coffee, owner-isolated private data and offline pending mutation integrity.",
+          "review_method": "AI directly read original physical line in surrounding async method"
+        },
+        {
+          "line": 543,
+          "source_text": "    pending.acknowledged=true;pending.mutationId=null;",
+          "inspection_class": "executable",
+          "behavior": "Mark acknowledged and clear pending mutation ID",
+          "quality": "Directly interpreted owner-epoch/receipt/add-coffee state flow.",
+          "bug_security_privacy_performance_risk": "Only verified receipt may clear pending mutation",
+          "dead_or_obsolete": "Current Add Coffee code is live; no proven unused behavior.",
+          "duplicate_or_redundant": "Repeated owner/epoch checks protect distinct awaits and cannot safely be deduplicated.",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 543,
+            "exact_text_match": true
+          },
+          "testability": "Fake strict result and malformed receipt fields",
+          "fix_or_improvement_opportunity": "No speculative code change; coordinate current extractor #33 and Auth/privacy #96 test ownership.",
+          "locked_decision_fit": "Locked Add Coffee, owner-isolated private data and offline pending mutation integrity.",
+          "review_method": "AI directly read original physical line in surrounding async method"
+        },
+        {
+          "line": 544,
+          "source_text": "    if(typeof receipt.result.library_entry_id==='string')pending.libraryId=receipt.result.library_entry_id;",
+          "inspection_class": "executable",
+          "behavior": "Adopt receipt library ID only if string",
+          "quality": "Directly interpreted owner-epoch/receipt/add-coffee state flow.",
+          "bug_security_privacy_performance_risk": "Trusted receipt shape not UUID checked here",
+          "dead_or_obsolete": "Current Add Coffee code is live; no proven unused behavior.",
+          "duplicate_or_redundant": "Repeated owner/epoch checks protect distinct awaits and cannot safely be deduplicated.",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 544,
+            "exact_text_match": true
+          },
+          "testability": "Fake strict result and malformed receipt fields",
+          "fix_or_improvement_opportunity": "No speculative code change; coordinate current extractor #33 and Auth/privacy #96 test ownership.",
+          "locked_decision_fit": "Locked Add Coffee, owner-isolated private data and offline pending mutation integrity.",
+          "review_method": "AI directly read original physical line in surrounding async method"
+        },
+        {
+          "line": 545,
+          "source_text": "    if(typeof receipt.result.coffee_id==='string')pending.coffeeId=receipt.result.coffee_id;",
+          "inspection_class": "executable",
+          "behavior": "Adopt receipt coffee ID only if string",
+          "quality": "Directly interpreted owner-epoch/receipt/add-coffee state flow.",
+          "bug_security_privacy_performance_risk": "Do not infer coffee identity from URL",
+          "dead_or_obsolete": "Current Add Coffee code is live; no proven unused behavior.",
+          "duplicate_or_redundant": "Repeated owner/epoch checks protect distinct awaits and cannot safely be deduplicated.",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 545,
+            "exact_text_match": true
+          },
+          "testability": "Fake strict result and malformed receipt fields",
+          "fix_or_improvement_opportunity": "No speculative code change; coordinate current extractor #33 and Auth/privacy #96 test ownership.",
+          "locked_decision_fit": "Locked Add Coffee, owner-isolated private data and offline pending mutation integrity.",
+          "review_method": "AI directly read original physical line in surrounding async method"
+        },
+        {
+          "line": 546,
+          "source_text": "   }",
+          "inspection_class": "structural",
+          "behavior": "Close receipt success branch",
+          "quality": "Conditional scope syntax checked against surrounding method.",
+          "bug_security_privacy_performance_risk": "Syntax branch scope",
+          "dead_or_obsolete": "Current Add Coffee code is live; no proven unused behavior.",
+          "duplicate_or_redundant": "Repeated owner/epoch checks protect distinct awaits and cannot safely be deduplicated.",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 546,
+            "exact_text_match": true
+          },
+          "testability": "Fake strict result and malformed receipt fields",
+          "fix_or_improvement_opportunity": "No speculative code change; coordinate current extractor #33 and Auth/privacy #96 test ownership.",
+          "locked_decision_fit": "Locked Add Coffee, owner-isolated private data and offline pending mutation integrity.",
+          "review_method": "AI directly read original physical line in surrounding async method"
+        },
+        {
+          "line": 547,
+          "source_text": "  }",
+          "inspection_class": "structural",
+          "behavior": "Close conditional receipt branch",
+          "quality": "Conditional scope syntax checked against surrounding method.",
+          "bug_security_privacy_performance_risk": "Syntax branch scope",
+          "dead_or_obsolete": "Current Add Coffee code is live; no proven unused behavior.",
+          "duplicate_or_redundant": "Repeated owner/epoch checks protect distinct awaits and cannot safely be deduplicated.",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 547,
+            "exact_text_match": true
+          },
+          "testability": "Fake strict result and malformed receipt fields",
+          "fix_or_improvement_opportunity": "No speculative code change; coordinate current extractor #33 and Auth/privacy #96 test ownership.",
+          "locked_decision_fit": "Locked Add Coffee, owner-isolated private data and offline pending mutation integrity.",
+          "review_method": "AI directly read original physical line in surrounding async method"
+        },
+        {
+          "line": 548,
+          "source_text": "  const entry=this.raw?.library?.find(x=>x.id===pending.libraryId);",
+          "inspection_class": "executable",
+          "behavior": "Find saved library item matching pending ID",
+          "quality": "Directly interpreted owner-epoch/receipt/add-coffee state flow.",
+          "bug_security_privacy_performance_risk": "Not-yet-synced library row must defer review",
+          "dead_or_obsolete": "Current Add Coffee code is live; no proven unused behavior.",
+          "duplicate_or_redundant": "Repeated owner/epoch checks protect distinct awaits and cannot safely be deduplicated.",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 548,
+            "exact_text_match": true
+          },
+          "testability": "Saved canonical/private pending submission status tests",
+          "fix_or_improvement_opportunity": "No speculative code change; coordinate current extractor #33 and Auth/privacy #96 test ownership.",
+          "locked_decision_fit": "Locked Add Coffee, owner-isolated private data and offline pending mutation integrity.",
+          "review_method": "AI directly read original physical line in surrounding async method"
+        },
+        {
+          "line": 549,
+          "source_text": "  const canonical=entry?.coffee_id&&this.raw?.coffees?.find(x=>x.id===entry.coffee_id);",
+          "inspection_class": "executable",
+          "behavior": "Resolve current canonical coffee from saved entry",
+          "quality": "Directly interpreted owner-epoch/receipt/add-coffee state flow.",
+          "bug_security_privacy_performance_risk": "Missing canonical coffee must not be invented",
+          "dead_or_obsolete": "Current Add Coffee code is live; no proven unused behavior.",
+          "duplicate_or_redundant": "Repeated owner/epoch checks protect distinct awaits and cannot safely be deduplicated.",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 549,
+            "exact_text_match": true
+          },
+          "testability": "Saved canonical/private pending submission status tests",
+          "fix_or_improvement_opportunity": "No speculative code change; coordinate current extractor #33 and Auth/privacy #96 test ownership.",
+          "locked_decision_fit": "Locked Add Coffee, owner-isolated private data and offline pending mutation integrity.",
+          "review_method": "AI directly read original physical line in surrounding async method"
+        },
+        {
+          "line": 550,
+          "source_text": "  const privateSubmission=!entry?.coffee_id&&this.raw?.submissions?.find(x=>x.id===entry?.submission_id&&x.status==='pending');",
+          "inspection_class": "executable",
+          "behavior": "Resolve private pending identity-review submission",
+          "quality": "Directly interpreted owner-epoch/receipt/add-coffee state flow.",
+          "bug_security_privacy_performance_risk": "Reject/approved submission is not 'pending'",
+          "dead_or_obsolete": "Current Add Coffee code is live; no proven unused behavior.",
+          "duplicate_or_redundant": "Repeated owner/epoch checks protect distinct awaits and cannot safely be deduplicated.",
+          "exact_current_counterpart": {
+            "path": "site/cloud/main.js",
+            "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+            "line": 550,
+            "exact_text_match": true
+          },
+          "testability": "Saved canonical/private pending submission status tests",
+          "fix_or_improvement_opportunity": "No speculative code change; coordinate current extractor #33 and Auth/privacy #96 test ownership.",
+          "locked_decision_fit": "Locked Add Coffee, owner-isolated private data and offline pending mutation integrity.",
+          "review_method": "AI directly read original physical line in surrounding async method"
+        }
+      ]
+    }
+  ],
+  "new_original_line_positions": 60,
+  "live_post_pin": {
+    "path": "scripts/pwa/service-worker.template.txt",
+    "live_blob_sha": "59c68e4b460218a31b48370ab59b4ce87bfcbaeb",
+    "full_live_physical_lines_read": 66,
+    "unchanged_original_lines_verified": 37,
+    "original_lines_removed_or_refactored": [
+      15,
+      16,
+      17
+    ],
+    "new_live_positions": 29,
+    "per_line": [
+      {
+        "line": 14,
+        "source_text": "// After skipWaiting, existing tabs still use their previous worker and cache.",
+        "inspection_class": "comment",
+        "behavior": "Explain old clients remain on prior SW after skipWaiting",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "No new active defect proven solely from this direct line review.",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 15,
+        "source_text": "// Deleting that cache on activation breaks an offline reload of those tabs.",
+        "inspection_class": "comment",
+        "behavior": "Flag premature prior cache deletion breaks offline old tab",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "No new active defect proven solely from this direct line review.",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 16,
+        "source_text": "// Retire old public shells only when every open window is controlled by this",
+        "inspection_class": "comment",
+        "behavior": "Specify postpone cleanup until all windows controlled by latest worker",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "No new active defect proven solely from this direct line review.",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 17,
+        "source_text": "// worker, then retry cheaply on a later static fetch. Never touch member data.",
+        "inspection_class": "comment",
+        "behavior": "Never touch personal/member caches",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "No new active defect proven solely from this direct line review.",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 18,
+        "source_text": "const SHELL_PREFIX='dic-public-shell-';",
+        "inspection_class": "executable",
+        "behavior": "Use public-shell prefix to scope cleanup",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "No new active defect proven solely from this direct line review.",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 19,
+        "source_text": "let shellCleanupDone=false,shellCleanupInFlight=null,nextShellCleanupAt=0;",
+        "inspection_class": "executable",
+        "behavior": "Track completed/inflight/throttled cleanup state",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "No new active defect proven solely from this direct line review.",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 20,
+        "source_text": "async function pruneUnusedShells(){",
+        "inspection_class": "executable",
+        "behavior": "Define async old-shell pruning",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "No new active defect proven solely from this direct line review.",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 21,
+        "source_text": " const [all,controlled]=await Promise.all([",
+        "inspection_class": "executable",
+        "behavior": "Start concurrent client queries",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "No new active defect proven solely from this direct line review.",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 22,
+        "source_text": "  self.clients.matchAll({type:'window',includeUncontrolled:true}),",
+        "inspection_class": "executable",
+        "behavior": "Include uncontrolled window clients",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "No new active defect proven solely from this direct line review.",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 23,
+        "source_text": "  self.clients.matchAll({type:'window'})",
+        "inspection_class": "executable",
+        "behavior": "Query only currently controlled windows",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "No new active defect proven solely from this direct line review.",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 24,
+        "source_text": " ]);",
+        "inspection_class": "structural",
+        "behavior": "Close client query inputs",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "No new active defect proven solely from this direct line review.",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 25,
+        "source_text": " const currentIds=new Set(controlled.map(client=>client.id));",
+        "inspection_class": "executable",
+        "behavior": "Build controlled window ID set",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "No new active defect proven solely from this direct line review.",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 26,
+        "source_text": " if(all.some(client=>!currentIds.has(client.id)))return false;",
+        "inspection_class": "executable",
+        "behavior": "Return false when any open window still uncontrolled",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "Uncontrolled tab detection is key, needs multi-client regression",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 27,
+        "source_text": " const names=await caches.keys();",
+        "inspection_class": "executable",
+        "behavior": "Read CacheStorage names after client check",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "No new active defect proven solely from this direct line review.",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 28,
+        "source_text": " await Promise.all(names.filter(name=>name.startsWith(SHELL_PREFIX)&&name!==CACHE_NAME)",
+        "inspection_class": "executable",
+        "behavior": "Filter old public-shell names, exclude current revision",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "Prefix-scope deletion must exclude non-shell/member caches",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 29,
+        "source_text": "  .map(name=>caches.delete(name)));",
+        "inspection_class": "executable",
+        "behavior": "Delete filtered old public shells",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "Prefix-scope deletion must exclude non-shell/member caches",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 30,
+        "source_text": " return true;",
+        "inspection_class": "executable",
+        "behavior": "Return success",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "No new active defect proven solely from this direct line review.",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 31,
+        "source_text": "}",
+        "inspection_class": "structural",
+        "behavior": "Close pruning function",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "No new active defect proven solely from this direct line review.",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 32,
+        "source_text": "function scheduleShellCleanup(event){",
+        "inspection_class": "executable",
+        "behavior": "Define cleanup scheduler",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "No new active defect proven solely from this direct line review.",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 33,
+        "source_text": " if(shellCleanupDone||shellCleanupInFlight||Date.now()<nextShellCleanupAt)return;",
+        "inspection_class": "executable",
+        "behavior": "Throttle if done, active or too early",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "No new active defect proven solely from this direct line review.",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 34,
+        "source_text": " nextShellCleanupAt=Date.now()+12000;",
+        "inspection_class": "executable",
+        "behavior": "Set future cleanup chance twelve seconds later",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "No new active defect proven solely from this direct line review.",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 35,
+        "source_text": " shellCleanupInFlight=pruneUnusedShells()",
+        "inspection_class": "executable",
+        "behavior": "Assign one in-flight prune Promise",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "No new active defect proven solely from this direct line review.",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 36,
+        "source_text": "  .then(done=>{shellCleanupDone=done;})",
+        "inspection_class": "executable",
+        "behavior": "Track cleanup success as terminal",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "No new active defect proven solely from this direct line review.",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 37,
+        "source_text": "  .catch(()=>{/* Leave old shell cached until another safe opportunity. */})",
+        "inspection_class": "executable",
+        "behavior": "Suppress failure but permit later retry",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "No new active defect proven solely from this direct line review.",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 38,
+        "source_text": "  .finally(()=>{shellCleanupInFlight=null;});",
+        "inspection_class": "executable",
+        "behavior": "Reset inflight handle on settlement",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "No new active defect proven solely from this direct line review.",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 39,
+        "source_text": " event.waitUntil(shellCleanupInFlight);",
+        "inspection_class": "executable",
+        "behavior": "Keep triggering event alive through prune",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "Event lifetime and deferred retry need actual offline test",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 40,
+        "source_text": "}",
+        "inspection_class": "structural",
+        "behavior": "Close scheduler",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "No new active defect proven solely from this direct line review.",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 42,
+        "source_text": " scheduleShellCleanup(event);",
+        "inspection_class": "executable",
+        "behavior": "Call guarded cleanup on activation",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "Event lifetime and deferred retry need actual offline test",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      },
+      {
+        "line": 50,
+        "source_text": " scheduleShellCleanup(event);",
+        "inspection_class": "executable",
+        "behavior": "Call guarded cleanup during eligible static fetch",
+        "quality": "Read and interpreted in full current 66-line worker alongside preserved original source.",
+        "bug_security_privacy_performance_risk": "Event lifetime and deferred retry need actual offline test",
+        "dead_or_obsolete": "Live added code absent in immutable original worker.",
+        "duplicate_or_redundant": "No proven unused duplicate; protects safe old-client cache lifetime.",
+        "exact_original_counterpart": {
+          "blob_sha": "72228aa18ad12fcee887f8fa09dbebb727de2fdd",
+          "exists": false
+        },
+        "testability": "Mock install/activate/fetch CacheStorage and two-window controlled vs uncontrolled state; check retries.",
+        "fix_or_improvement_opportunity": "Maintain guarded cleanup pending real multi-client/offline verification.",
+        "locked_decision_fit": "Locked offline safety, member privacy, no production publish.",
+        "review_method": "Direct line-specific AI source interpretation of live addition"
+      }
+    ],
+    "tests_run": false
+  },
+  "finding_dispositions": [
+    {
+      "classification": "historical_offline_risk_corrected_in_live_source",
+      "source_lines": [
+        15,
+        16,
+        17
+      ],
+      "disposition": "Historical activation deleted older cache before old controlled tabs retired. Current code adds client-aware deferred safe pruning; source correctness reviewed, actual multi-client offline runtime test NOT EXECUTED."
+    },
+    {
+      "classification": "test_hypothesis_not_confirmed_bug",
+      "source_lines": [
+        535,
+        539,
+        540,
+        542,
+        544,
+        545,
+        550
+      ],
+      "disposition": "Pending Add Coffee session assertions present around awaits. Malformed receipt and non-Error rejection test coverage is an observation, not a proven exploit; respect #33/#96."
+    }
+  ],
+  "coverage_policy": "No overlap with F426/P111<=530; no V1/R2/C2 credit or main coverage CAS; old counters provisional.",
+  "tests": {
+    "frozen_literal_checks": "40/40",
+    "pinned_literal_checks": "20/20",
+    "first_file_literal_revalidation": "41/41 zero credit",
+    "live_worker_full_file": "66/66 source read and mapped",
+    "github_pr_head_approval": "PENDING",
+    "github_merged_approval": "PENDING",
+    "node22": "NOT_RUN",
+    "offline_mobile_browser": "NOT_RUN",
+    "sql_auth": "NOT_RUN",
+    "original603": "NOT_RUN"
+  },
+  "status": "IN_PROGRESS_NOT_READY",
+  "next_frozen": "F428 line1",
+  "next_pinned": "P111 line551",
+  "remaining": "Full frozen/current/post-pin semantic coverage, confirmed finding disposition tests, final owner review report outstanding; no deployment."
+}
