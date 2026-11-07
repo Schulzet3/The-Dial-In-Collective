@@ -7,6 +7,7 @@ import {shotCard,feedLabel} from '../site/cloud/shot_card.js';
 import {shotSummary,recipeGrid,nextShotAdjustment,nextShotGuidance,nextShotTitle} from '../site/lib/ui.js';
 import * as E from '../site/lib/engine.js';
 import {rawFixture,rawShot,OWNER,TIME} from './cloud-fixtures/raw.js';
+const settingsLabelsOrdered=(source,before,after)=>{const a=source.indexOf(before),b=source.indexOf(after);return a>=0&&b>a;};
 
 test('Slow Feed defaults remain independent between home and office',()=>{
  const raw=rawFixture();
@@ -79,11 +80,18 @@ test('rename_setup acknowledgement only updates the setup display record',()=>{
 });
 test('Settings follows approved sections and removes routine Recovery UI',async()=>{
  const main=await readFile(new URL('../site/cloud/main.js',import.meta.url),'utf8');
- const settings=main.slice(main.indexOf(' settings(){'),main.indexOf(' showSetup(){'));
+ const first=main.indexOf(' settings(){'),last=main.indexOf(' showSetup(){');
+ assert.ok(first>=0&&last>first,'Settings source block must exist before checking controls');
+ const settings=main.slice(first,last);
  assert.doesNotMatch(settings,/recovery-options|import-backup|settings-recovery/);
  assert.match(settings,/button\('Rename','rename-setup'/);
- for(const [a,b] of [['Active Setup','Add Another Setup'],['Add Another Setup','Advanced Setup Options'],['Admin Dashboard','Cloud Sync Details'],['Cloud Sync Details','Sign Out On This Device']])assert.ok(settings.indexOf(a)<settings.indexOf(b));
+ for(const [a,b] of [['Active Setup','Add Another Setup'],['Add Another Setup','Advanced Setup Options'],['Admin Dashboard','Cloud Sync Details'],['Cloud Sync Details','Sign Out On This Device']])assert.ok(settingsLabelsOrdered(settings,a,b),'missing or out-of-order Settings label: '+a+' before '+b);
  assert.match(settings,/settings-signout/);
+});
+test('Settings order guard rejects missing or reversed labels',()=>{
+ assert.equal(settingsLabelsOrdered('Add Another Setup','Active Setup','Add Another Setup'),false);
+ assert.equal(settingsLabelsOrdered('Cloud Sync Details Admin Dashboard','Admin Dashboard','Cloud Sync Details'),false);
+ assert.equal(settingsLabelsOrdered('Active Setup Add Another Setup','Active Setup','Add Another Setup'),true);
 });
 
 test('shot summary labels Grind in Title Case without altering notes',()=>{
