@@ -949,3 +949,17 @@ Only new receipt, updated append-only coverage ledger and same-commit scoped jou
 **Negative and scoped validation:** original REST source IDs/timestamps/SHA1/bytes/word/line counts, 80 prior-batch disjointness, SHA1 abc fixture and independent #267 evidence PASS. Node22/SQL/Auth/browser/mobile/offline/original603 NOT_RUN as no application change; PR governance and exact merged SHA CI to verify separately, never promote SKIPPED. All audit changes docs-only; no app, queue, Locked, oracle, member data, Auth/SQL/Edge, backups, provider, Netlify, publication or visibility change.
 
 **Exact next uncovered item:** [#33 comment `6422841466`](https://github.com/Schulzet3/The-Dial-In-Collective/issues/33#issuecomment-6422841466), **word 1**; Issue #504 **OPEN / IN_PROGRESS**.
+
+## Issue #504 G1-082 — November 7 UTC: eight historical #33 comment bodies directly reviewed [skip netlify]
+
+**Recovered SHAs** development `d941b3595e2f7c61b50f13a4c110d6e80188c037`, main `bd627d40f7e65321323512b303d2e3f75709af39`, release/production `2ec10324fcaa4b60d1e48240b44b77b141b9ba54`; Issue #504 OPEN, temporary PUBLIC under owner #630 Nov4–30. Read AGENTS, AI context and preflight, current status, master/decision supersessions, approval matrix, release queue, source register, #267/#455/#33/#96 coordination and active #504 journal/ledger. No visibility or deployment changes.
+
+**Direct original word-level semantics:** complete eight Issue #33 original bodies `6422841466`, `6423595594`, `6423743670`, `6426806780`, `6428464534`, `6431717637`, `6432197152`, `6433361433` at word 1-EOF, **8 newly credited records / 1732 words**. Per-item source-time REST timestamps, original UTF8 SHA1/bytes/characters/physical lines and words, dated interpretation and disposition in [G1-082 receipt](../audits/issue504-review-G1-082.json). All 81 previous batch IDs checked nonoverlapping. Cumulative **7919 source file lines / 60754 file words + 411 GitHub original records / 122084 words**. Whole inventory and delegated #267 coverage remain unfinished.
+
+**Historic reconciliations:** original603 archive recovered (not new replay), narrow Shopify tag repair, PR139 merged; PR152 postmerge original603 HOLD correctly separated from PR-head CI, later Uganda contradictory roast identified and safely withheld, PR158 correction merged. Oct27 interim original603 timeouts not PASS; hosted private603 SKIPPED, browser checks synthetic Auth rather than real user. PR162 DRAFT/TESTING at dated source, subsequently merged. PR139/152/158/162 current merge state cross-checked. No new #504-owned reproducible current defect, safe deletion or Locked product decision.
+
+**Independently verified #267 source, no code credit:** frozen F415 original blob `68b72e56ab6d2429011ae180477abfe25a8c0a87`, strict receipt `dbc3503efa095441e3e54afe28d374132c2241ce`, **59/59 literal lines and nine mandatory annotation fields matched**, counted ZERO lines for #504. #267 V2 full original/current/post-pin coverage incomplete.
+
+**Tests:** SHA1 abc vector, eight original REST object provenance/hash/range/word arithmetic, prior 81 batches nonoverlap, #267 source evidence PASS. Docs-only changes; Node22/SQL/real Auth/browser/mobile/offline/original603 NOT_RUN, PR-head/merged CI PENDING. No app, queue, provider/production, member, Auth/SQL/Edge, Netlify, backups, historic assets, secrets or release branch changes.
+
+**Next original object:** [#33 comment `6434307862`](https://github.com/Schulzet3/The-Dial-In-Collective/issues/33#issuecomment-6434307862), word 1; Issue #504 OPEN / IN_PROGRESS.
