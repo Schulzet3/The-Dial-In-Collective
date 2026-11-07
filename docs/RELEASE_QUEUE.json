@@ -11,21 +11,32 @@
       "id": "DIC-Q-455-make-current-measured-eligibility",
       "issue": 455,
       "title": "Require physically valid archived measurements before explicit Make Current favorite selection",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "a622e9027b640fd7049c3a6b5b5cabd2bc68f150",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
         "Source parent 69fff2c5eb5f98bc974b2b9aa3f6279293f5543d, original engine ff148e7c6646c82b7f10d100fe837ae3c15b3f36: manual Make Current accepted all-green imported shots outside already-Locked 5-40g dose, 5-200g yield, 1-180s timing, while existing familyStats excluded same rows; synthetic source-level reproduction, no member evidence.",
-        "Reuse existing measuredRecipeShots physical checks; preserve original five tastes, history and manual valid family choices. Six new positive/negative synthetic direct-module Node test groups; all CI UNEXECUTED at source commit."
+        "Reuse existing measuredRecipeShots physical checks; preserve original five tastes, history and manual valid family choices. Six new positive/negative synthetic direct-module Node test groups; all CI UNEXECUTED at source commit.",
+        "PR #1241 exact head 3949e8ccc5119a1e95a2ee66bc83e72b9660720a, Node22/lint/build run42392477962 SUCCESS 2,941 PASS/0 FAIL/6 intentional SKIP; cloud+compiled browser/mobile/offline/a11y42392478040, SQL42392477953, security42392478046, approval42392477964 SUCCESS; frozen60342392478015 SKIPPED not PASS.",
+        "Nonforce squash merged PR #1241 into development at a622e9027b640fd7049c3a6b5b5cabd2bc68f150. All four feature-head/merged Git blobs byte-identical: engine 9aa361922a57c2dcb16b565e3a25d5624c34b5c7, six real-module test groups f9b6e4cb023a7459b65c4908ecbbd77d8a46fdbc, original TESTING queue 8f7941a16fa46ebb28935513972020b51adc8a16, same-commit journal 138610459fc7c755ba7a65ee7bd909bbabc794dc.",
+        "Exact merged Node22/lint/build42392707912 SUCCESS 2,941 PASS/0 FAIL/6 intentional SKIP; compiled cloud/browser/mobile/offline/accessibility42392707843 SUCCESS and governance42392707750 SUCCESS. Hosted member/production not tested; server public.shots has existing column CHECK bounds in original migration 20261012015600 (blob 15a832e8cdae53090c8d61e7b1131d7ab8a4ad74); this is a local engine guard, not a hosted make_current RPC change."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Await verified PR-head and exact merged-source applicable CI; not READY"
+      "ci_runs": [
+        42392477962,
+        42392478040,
+        42392477953,
+        42392478046,
+        42392477964,
+        42392478015,
+        42392707912,
+        42392707843,
+        42392707750
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "R455-094 development-only proposed bug fix. No deployment, no science/Locked change."
+      "notes": "R455-094 VERIFIED development READY, NOT DEPLOYED. Local engine Make Current now refuses archived physically invalid dose/yield/time as preferred recipe evidence, preserves original history, notes, all five taste ratings and valid preference. No hosted SQL/Auth/member operations or empirical cup results. Docs-only merged governance not yet checked at authoring."
     },
     {
       "id": "DIC-Q-33-original603-281-selected-bean-pronoun-water-decaf",
