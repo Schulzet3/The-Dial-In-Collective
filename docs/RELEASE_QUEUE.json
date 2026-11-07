@@ -11,8 +11,8 @@
       "id": "DIC-Q-455-cross-style-measured-ratio-integrity",
       "issue": 455,
       "title": "Exclude malformed archived physical measurements from weak cross-style ratio starting prior",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "ce20a270cd598a415fc7f959e98d71f53ebbf323",
       "scope_paths": [
         "site/lib/engine.js"
       ],
@@ -20,14 +20,26 @@
         "R081 live source defect: five-green archived prior-style shot with 0g dose, typed yield, invalid time, or overflowing yield/dose was admitted into weak cross-style ratio residual; synthetic reproduction is source-deterministic, not observed member incidence.",
         "Narrow eligibility gate: positive finite measured dose/yield/time and finite ratio on otherwise already-qualifying five-green donor; retains legitimate weak cross-style ratio only, separates Fast-Flow, never transfers cross-style time/grind or rewrites history.",
         "Five direct real-module synthetic regression groups at tests/issue455-cross-style-measurement-integrity.test.mjs include invalid-only, mixed valid+corrupt, valid positive, missing/nonideal ratings, independent Fast-Flow and immutability.",
-        "At authoring Node22/build, browser/mobile/offline/a11y, isolated SQL/privacy/security, approval/governance and exact merged-source checks UNEXECUTED; original frozen603 not claimed."
+        "At authoring Node22/build, browser/mobile/offline/a11y, isolated SQL/privacy/security, approval/governance and exact merged-source checks UNEXECUTED; original frozen603 not claimed.",
+        "Initial PR1146 Node22 42335147180 FAIL: newly authored valid positive fixture had 54g/18g=3.0, identical to Light Turbo prior 3.0 and no expected residual; same-PR test/journal commit ad713c90dfa968f43418dd4e22dab96778354548 corrected fixture to 45g/18g=2.5. Actual source unchanged, failure preserved.",
+        "Corrected exact PR-head ad713c90dfa968f43418dd4e22dab96778354548 Node22/lint/build42335376367: 2,803 PASS/0 FAIL/6 intentional SKIP including all 5 R081 new direct tests. Browser/390px/mobile/offline/a11y42335376491, isolated SQL/JWT42335376388, security42335376375 and approval42335376405 SUCCESS; frozen60342335376382 SKIPPED, not passed. Cloud tests NOT_APPLICABLE on this scope.",
+        "Nonforce PR1146 squash merged ce20a270cd598a415fc7f959e98d71f53ebbf323, after disjoint concurrent Issue509 docs change. Merged engine b9a5716aaad2f8a146421156a460ea68a295699b and new test cd09243c3b2df61070d20c528ad464d54f8faaf9 equal passing corrected PR-head. Exact merged-source Node22/lint/build42335593985 2,803 PASS/0 FAIL/6 SKIP, browser/mobile/offline/a11y42335593979 and governance42335593982 SUCCESS; original PR-head SQL/security reused. No empirical cup or member incident claim."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Await PR-head applicable exact-source CI, nonforce integration, exact merged CI and docs-only READY reconciliation."
+      "ci_runs": [
+        42335147180,
+        42335376367,
+        42335376491,
+        42335376388,
+        42335376375,
+        42335376405,
+        42335376382,
+        42335593985,
+        42335593979,
+        42335593982
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Option B SAFE, no Locked numeric/science changes, no production or provider writes, development only."
+      "notes": "R455-081 SAFE verified nonforce development READY, NOT DEPLOYED. Positive malformed-archive physical measurements no longer bias weak cross-style starting ratio. Original private archive and five taste ratings preserved; no Locked product or numeric change, no production/provider action."
     },
     {
       "id": "DIC-Q-455-sweetness-comparable-measured-yield-integrity",
