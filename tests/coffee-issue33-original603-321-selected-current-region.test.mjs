@@ -29,6 +29,27 @@ test('actual Add Coffee parser and Source Review preserve selected name, roast a
  assert.ok((r.source_facts||[]).some(f=>f.field==='origin'&&
   /our meticulously sourced Ethiopia Yirgacheffe/.test(f.value)));
 });
+test('real selected Shopify rich text with nested spans is current coffee description, not meta-only text',()=>{
+ const html='<html><head><meta property="og:type" content="product"></head><body><main class="product"><article>'+
+  '<h1>Ethiopia Yirgacheffe</h1><div class="product__description rte">'+
+  '<span style="font-weight:400;" data-mce-fragment="1">'+quote+
+  '<span data-mce-fragment="1"> Sold as a 1-pound bag.</span></span></div></article></main></body></html>';
+ const r=extractPublicCoffeeFacts(html,{source_url:url});
+ assert.equal(r.ok,true,JSON.stringify(r));
+ assert.equal(r.fields.name,title);
+ assert.equal(r.fields.origin,'Yirgacheffe, Ethiopia',JSON.stringify(r.fields));
+ assert.match(coffeeUrlPreviewMarkup(r),/Yirgacheffe, Ethiopia/);
+ assert.ok(coffeeSourceReviewSnapshot({...r,source_url:url}));
+ assert.ok((r.source_facts||[]).some(f=>f.field==='origin'&&
+  /our meticulously sourced Ethiopia Yirgacheffe/.test(f.value)));
+});
+test('nested span source from unrelated review section does not qualify',()=>{
+ for(const tag of ['p','span','div']){
+  assert.equal(select({name:title,origin:country,blocks:[
+   {tag:'h1',text:title},{tag,text:quote,section:'Other coffees'}]}),null);
+ }
+});
+
 test('same source-bound rule is not roaster, URL or selected region-specific',()=>{
  const p='Our single-origin Colombia Huila Finca Esperanza is roasted light to preserve floral notes.';
  const result=select({name:'Colombia Huila',origin:'Colombia',blocks:[
