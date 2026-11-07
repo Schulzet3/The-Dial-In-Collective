@@ -6961,5 +6961,53 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "pg_amop 1/964, then pg_amproc 1/710; provider drift and #96 actual hosted Auth"
+  },
+  "provider_amop_run56": {
+    "status": "PG_AMOP_001_150_FULL_VISIBLE_DECLARATION_AND_SEMANTIC_MAPPING_REVIEW_NATIVE_HOSTED_UNVERIFIED",
+    "receipt_path": "docs/audits/issue509-provider-amop-001-150-20261107-run56.json",
+    "project_ref": "azviqqejypsefzilgonr",
+    "provider_at": "2026-11-07 03:45:32.918627+00",
+    "development_parent_sha": "5cdb5e0ad0911501d56c40b576850874ddc95287",
+    "main_sha": "bd627d40f7e65321323512b303d2e3f75709af39",
+    "release_sha": "2ec10324fcaa4b60d1e48240b44b77b141b9ba54",
+    "reviewed": 150,
+    "total": 964,
+    "remaining": 814,
+    "validity_checks": {
+      "total_current": 964,
+      "reviewed_current_range": [
+        1,
+        150
+      ],
+      "range_count": 150,
+      "remaining": 814,
+      "dangling_operators": 0,
+      "missing_implementation": 0,
+      "unknown_purpose": 0,
+      "missing_orderby_sortfamily": 0,
+      "duplicate_family_type_strategy": 0,
+      "unexpected_namespace": 0,
+      "access_methods": {
+        "brin": 44,
+        "btree": 35,
+        "gin": 12,
+        "gist": 37,
+        "hash": 9,
+        "spgist": 13
+      },
+      "namespaces": {
+        "extensions": 19,
+        "pg_catalog": 131
+      },
+      "purpose": {
+        "search": 144,
+        "orderby": 6
+      }
+    },
+    "verified_new_defects": 0,
+    "source_fixes": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "pg_amop ordinal 151/964 then pg_amproc 1/710; changes-only provider drift and #96"
   }
 }
