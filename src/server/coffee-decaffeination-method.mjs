@@ -4,7 +4,7 @@ export const DECAFFEINATION_METHODS=Object.freeze(['Water Process','Sugar Proces
 const fold=value=>String(value||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/\u2082/g,'2').toLowerCase().replace(/\s+/g,' ').trim();
 const fullyDecaf=value=>/\b(?:decaf(?:feinated|feination)?|caffeine[ -]?free|without caffeine)\b/i.test(fold(value));
 const mixedCaffeine=value=>/\b(?:half[ -]?caf(?:f|feinated)?|semi[ -]?decaf(?:feinated)?|partially[ -]?decaf(?:feinated)?|regular\s*(?:and|\+)\s*decaf|decaf\s*(?:and|\+)\s*regular)\b/i.test(fold(value));
-const exclusions=/\b(?:not|never|without|instead of|rather than|unlike|other than|no)\s+(?:(?:the|a|an)\s+)?(?:swiss[ -]?water|mountain[ -]?water|water[ -]?process|sugar(?:cane|[ -]?cane|[ -]?process)|ethyl[ -]?acetate|e\.?a\.?\s+decaf|co2|carbon[ -]?dioxide)\b/i;
+const exclusions=/\b(?:not|never|without|instead of|rather than|unlike|other than|no)\s+(?:(?:the|a|an)\s+)?(?:swiss[ -]?water|mountain[ -]?water|water[ -]?process|sugar(?:cane|[ -]?cane|[ -]?process)|ethyl[ -]?acetate|e\.?a\.?\s+(?:process(?:ed)?(?:\s+decaf)?|decaf)|co2|carbon[ -]?dioxide)\b/i;
 function methodsIn(raw){
  const v=fold(raw);if(!v||exclusions.test(v))return [];
  const results=[];
