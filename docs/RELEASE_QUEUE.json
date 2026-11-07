@@ -25,7 +25,8 @@
         "PR#1253 amended head 3709201a49f2ef4fffacc484fef7c404358cb1a0 exact-source Node/lint/build 42399890246 PASS; approval42399890221, UX42399890199, isolated SQL42399890218, security42399890176, source bundle42399890170 PASS, frozen60342399890185 SKIPPED. Nonforce squash merged 839795b93c73484607ad3330d04b658f884df0e3, identical reviewed tree f41441e920ac712d70bcc6502cec7d3fa7348141.",
         "Merged Node/lint/build42400060706, approval42400060769, focused official case 293/294/302 runner42400060751 EXECUTED SUCCESS. Fresh raw HTML #302 b6443f5a503dd2ea9cd122f3435c7f58549c84d24ac8afdc071093195d1e7399 confirms selected H1, exact native Decaf Process: Mountain Water Process and correct canonical decaffeination_method Water Process; process blank. Add Coffee/Source Review both rendered and no conflicts.",
         "Independent fresh artifact ZIP SHA256 f982723945b9021a08e8b0a2c2dadfe7c6c8877466caaa4eb5cac140bf22cfdf matches GitHub digest; JSON 384a0c01f2275d21763c3600397954756514b957e1d6474280f2ba73ccc74c33; #293 b17790e8dd29361ac39ba521dbb2df2c3a4d121affa32ba700f8a25286da9bf8; #294 7ab4c3305b651516bd0a7afd8a2cc4fcbfaca3b40da8beb99e8577342097bd36; #302 b6443f5a503dd2ea9cd122f3435c7f58549c84d24ac8afdc071093195d1e7399. All independently SHA256 rehashed.",
-        "Still TESTING: fresh #302 Source Review carries incorrectly typed field=process value=Mountain Water section=Mountain Water Process Decaf although canonical process remains blank; this separate semantic source-fact misattribution is an acceptance blocker. Same-commit generic evidence-only source-field guard now under test; all original/source data retained."
+        "Still TESTING: fresh #302 Source Review carries incorrectly typed field=process value=Mountain Water section=Mountain Water Process Decaf although canonical process remains blank; this separate semantic source-fact misattribution is an acceptance blocker. Same-commit generic evidence-only source-field guard now under test; all original/source data retained.",
+        "PR#1254 first exact-head Node run42400288907 FAILED 1961 PASS/1 FAIL/1962: negative source-review provenance test retained field=process Mountain Water under decaf H3 because HTML label/table/paragraph collectors did not forward their already-computed section to the new sourceReviewField safety gate. Current production source fact likewise field=process Mountain Water in decaf section. Repaired all four generic source-review call sites (table, definition list, BR pair and heading sibling) with section argument, retaining raw fact and green process guards; rerun exact amended CI required."
       ],
       "ci_runs": [
         42399428877,
@@ -35,7 +36,8 @@
         42399890221,
         42400060706,
         42400060769,
-        42400060751
+        42400060751,
+        42400288907
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",

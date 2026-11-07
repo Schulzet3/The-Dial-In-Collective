@@ -847,7 +847,7 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
   if(node.tag==='tr'){
    const cells=(children.get(i)||[]).filter(j=>/^(?:th|td)$/.test(nodes[j].tag)&&text(j));
    if(cells.length>=2&&cells.length<=12&&labelLike(text(cells[0])))
-    {const label=text(cells[0]),value=cells.slice(1).map(text).join(' | ');result.add(label,value,sourceReviewField(label,value,coffeeFieldKey(label)),sections.get(i));}
+    {const label=text(cells[0]),value=cells.slice(1).map(text).join(' | ');result.add(label,value,sourceReviewField(label,value,coffeeFieldKey(label),sections.get(i)),sections.get(i));}
   }
   if(node.tag==='dt'){
    const siblings=children.get(node.parent)||[],index=positions.get(i),values=[];
@@ -855,7 +855,7 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
     if(nodes[siblings[j]].tag!=='dd')break;
     if(text(siblings[j]))values.push(text(siblings[j]));
    }
-   if(labelLike(text(i))&&values.length){const label=text(i),value=values.join(', ');result.add(label,value,sourceReviewField(label,value,coffeeFieldKey(label)),sections.get(i));}
+   if(labelLike(text(i))&&values.length){const label=text(i),value=values.join(', ');result.add(label,value,sourceReviewField(label,value,coffeeFieldKey(label),sections.get(i)),sections.get(i));}
   }
   if(!CONTENT.has(node.tag)||!text(i))continue;
   const childList=children.get(i)||[];
@@ -865,7 +865,7 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
   const lines=html.slice(node.headEnd,node.contentEnd).split(/<br\b[^<>]{0,2000}>/gi).slice(0,128).map(line=>plain(line)).filter(Boolean);
   for(const line of lines){
    const pair=line.match(/^([\p{L}\p{N}][\p{L}\p{M}\p{N} /&()_.%+–-]{0,79}?)\s*[:：]\s*(.+)$/u);
-   if(pair&&labelLike(pair[1]))result.add(pair[1],pair[2],sourceReviewField(pair[1],pair[2],coffeeFieldKey(pair[1])),sections.get(i));
+   if(pair&&labelLike(pair[1]))result.add(pair[1],pair[2],sourceReviewField(pair[1],pair[2],coffeeFieldKey(pair[1]),sections.get(i)),sections.get(i));
   }
  }
  // Short heading/value sibling groups include metrics that have no colon.
@@ -877,7 +877,7 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
    if(!/^(?:h[2-6]|strong|b|label|summary)$/.test(nodes[a].tag))continue;
    if(!/^(?:p|div|span|ul|ol|dd)$/.test(nodes[b].tag))continue;
    if(nodes[b].start-nodes[a].end>1500)continue;
-   result.add(label,value,sourceReviewField(label,value,coffeeFieldKey(label)),sections.get(a));
+   result.add(label,value,sourceReviewField(label,value,coffeeFieldKey(label),sections.get(a)),sections.get(a));
   }
  }
  // Retain product prose as evidence as well as classified facts. Paragraphs
