@@ -30,8 +30,10 @@ export function conflictingCurrentSelectedDecafSource({name='',origin='',blocks=
    // Only negation/history in this SAME clause can veto selected country;
    // unrelated earlier sensory prose (e.g. "not bitter.") cannot.
    const clause=before.split(/(?<=[.!?])\s+/u).at(-1)||'';
-   if(past.test(clause)||(!fold(clause).includes(fold(name))&&
-      !/\b(?:this|our)\s+(?:decaf(?:feinated)?\s+)?coffee\b/iu.test(clause)))continue;
+   // Attribution can span neighboring sentences ("Coast Decaf... Crafted from"),
+   // but negation/history may veto only the current source-claim clause.
+   if(past.test(clause)||(!fold(before).includes(fold(name))&&
+      !/\b(?:this|our)\s+(?:decaf(?:feinated)?\s+)?coffee\b/iu.test(before)))continue;
    all.push({country:countries[m[1].toLowerCase()],quote:m[0]});
   }
  }
