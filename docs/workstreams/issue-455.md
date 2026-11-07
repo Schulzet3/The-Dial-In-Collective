@@ -1,5 +1,11 @@
 # Issue #455 — Espresso research → Log Shot → Rate → Recommendations
 
+## November 7, 2026 UTC — R455-096 scope-safe cached multi-control follow-up [skip netlify]
+
+During premerge test review, the initial positive endpoint test itself described a cached plan changing grinder, yield and temperature simultaneously. This contradicted the already-Locked Master Specification §19.3 one-intentional-adjustable-control rule; initial HEAD tests did **not** verify that invariant. This same commit adds a narrow in-range legacy-cache multi-control safety guard to `recommendation()` and corrects endpoint test fixtures to exercise **only one** changed controllable setting. New direct-module negative regression verifies four otherwise in-range cached multiple-change combinations are recalculated from the original measured shot, while retaining every original note, taste scale and suggestion. No new numeric threshold, capture, UI, privacy or scientific prior. Parent commit `deec38d7aaa9c72e89390a9142b526f15e2d23d4`, engine blob `4b37c1ad03e5a978fcf9e30fc09bb67d74a8b8c9`, test blob `c154ae3d09439fbac524f6a842a184a0538297a9`, journal blob `cf4829a6df8d50b9cd218202ee7ef404afe8678c`. New CI **UNEXECUTED at authoring**. Previous corrected PR head `deec38d7aaa9c72e89390a9142b526f15e2d23d4` approval run 42402878449 SUCCESS, but other head workflows are superseded/pending and cannot count for this new source. Next: exact new head CI, nonforce integration, merged-readback and docs READY reconciliation. No deploy.
+
+---
+
 ## November 7, 2026 UTC — R455-096 PR-head queue schema repair [skip netlify]
 
 **Observed, diagnosed failure:** PR #1264 initial head `da1b795bb42712e2cfe82af5b4dd7a7e3e5db288` exact approval run [42402731610](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42402731610), approval coverage PASS but release-queue intake **FAIL**: `DIC-Q-455-cached-next-physical-bounds invalid merged source SHA`. The initial TESTING queue entry omitted the required explicit JSON `merged_source_sha:null`. Do not misstate this initial failure as PASS.

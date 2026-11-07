@@ -53,15 +53,31 @@ test('R096 invalid cached dose is not imported into a next shot',()=>{
   assert.deepEqual(s,before);
  }
 });
-test('R096 inclusive existing espresso/temperature/physical endpoints remain valid cached targets',()=>{
- for(const [grindSetting,tempC] of [[0,70],[5,100]]){
-  const s=make({grindSetting,yieldCenter:60,tempC}),before=structuredClone(s),r=guide(s);
-  assert.equal(r.grind.value,grindSetting);
-  assert.equal(r.tempC,tempC);assert.equal(r.yield.center,60);
+test('R096 inclusive espresso and temperature endpoints retain valid single-control cached plans',()=>{
+ for(const [cachedNext,grind,yieldG,temp] of [
+  [{grindSetting:0,yieldCenter:50,tempC:91},0,50,91],
+  [{grindSetting:5,yieldCenter:50,tempC:91},5,50,91],
+  [{grindSetting:1.2,yieldCenter:50,tempC:70},1.2,50,70],
+  [{grindSetting:1.2,yieldCenter:50,tempC:100},1.2,50,100]
+ ]){
+  const s=make(cachedNext),before=structuredClone(s),r=guide(s);
+  assert.equal(r.grind.value,grind);assert.equal(r.tempC,temp);assert.equal(r.yield.center,yieldG);
   assert.deepEqual(s,before);
  }
 });
-test('R096 valid cached single-variable yield and a missing cache retain prior semantics',()=>{
+test('R096 in-range stale multi-control plans cannot bypass the Locked one-change rule',()=>{
+ for(const cachedNext of [
+  {grindSetting:0,yieldCenter:60,tempC:91},
+  {grindSetting:1.2,yieldCenter:60,tempC:90},
+  {grindSetting:1.2,yieldCenter:60,doseG:19},
+  {grindSetting:0,yieldCenter:50,tempC:70}
+ ]){
+  const s=make(cachedNext),before=structuredClone(s),r=guide(s);
+  assert.equal(r.grind.value,1.2);assert.equal(r.yield.center,55);assert.equal(r.tempC,91);
+  assert.equal(r.doseG,20);assert.deepEqual(s,before);
+ }
+});
+test('R096 valid cached one-control yield and missing cache retain approved semantics',()=>{
  const valid=make({grindSetting:1.2,yieldCenter:60}),before=structuredClone(valid);
  assert.equal(guide(valid).yield.center,60);
  assert.deepEqual(valid,before);

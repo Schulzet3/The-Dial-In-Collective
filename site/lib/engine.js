@@ -457,7 +457,14 @@ export function recommendation(s,coffeeId,options={}) {
    outsideEntry('yieldG',cachedNext.yieldCenter)||
    (cachedNext.grindSetting!=null&&(!finite(cachedNext.grindSetting)||
     cachedNext.grindSetting<v.grinderMin||cachedNext.grindSetting>v.grinderMax))||
-   (cachedNext.tempC!=null&&!validRecordedTemperature(cachedNext.tempC)));
+   (cachedNext.tempC!=null&&!validRecordedTemperature(cachedNext.tempC))||
+   // Older cached plans may be in-range yet change two or more controlled
+   // settings at once; keep the approved single-intentional-change contract.
+   [cachedNext.doseG!=null&&cachedNext.doseG!==last.doseG,
+    cachedNext.yieldCenter!=null&&cachedNext.yieldCenter!==last.yieldG,
+    cachedNext.grindSetting!=null&&cachedNext.grindSetting!==last.grindSetting,
+    cachedNext.tempC!=null&&cachedNext.tempC!==last.tempC]
+    .filter(Boolean).length>1);
   const a=(oldNoOp||oldSmallYield||unsafeCachedNext)?nextAdvice(s,last,rec):cached||nextAdvice(s,last,rec);
   if(a.next||a.kind==='diagnostic'){
    // An applied next-shot adjustment keeps every other measured control
