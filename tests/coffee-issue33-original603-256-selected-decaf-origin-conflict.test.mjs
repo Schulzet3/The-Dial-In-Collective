@@ -60,5 +60,5 @@ test('historic, other-coffee, missing method and related section prose never vet
 test('without a selected country contradiction, current Origin stays eligible',()=>{
  const r=make('Coast Decaf is a smooth cup with molasses and brown sugar.');
  assert.equal(r.ok,true,JSON.stringify(r));
- assert.ok(!r.conflicts.includes('origin'),JSON.stringify(r));
+ assert.ok(!(r.conflicts??[]).includes('origin'),JSON.stringify(r));
 });
