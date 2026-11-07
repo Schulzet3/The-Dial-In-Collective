@@ -773,6 +773,16 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
  // offsets. Selected <main> can follow unrelated testimonials; do not label
  // selected facts from earlier full-document section coordinates.
  const semanticPage=productMarkup(html),semanticNodes=coffeeHtmlElements(semanticPage).nodes;
+ // Controls and their owned content must use the same section label as the
+ // full-page review ledger. Otherwise identical hidden-panel facts duplicate.
+ const semanticControls=new Map(),semanticPanelSections=new Map();
+ for(let i=0;i<semanticNodes.length&&semanticControls.size<128;i++){
+  const node=semanticNodes[i];if(!['button','a'].includes(node.tag))continue;
+  const attrs=coffeeHtmlAttributes(node.attributes),target=attrs['aria-controls']||attrs['data-guide'];
+  if(!target||target.length>160||node.contentEnd-node.headEnd>1200)continue;
+  const title=plain(semanticPage.slice(node.headEnd,node.contentEnd),100);
+  if(/\b(?:espresso|filter|pour.?over|v60|aeropress|french press|brew|coffee details|specifications)\b/i.test(title))semanticControls.set(target,title);
+ }
  const semanticBlocked=new Set(),semanticHeadings=[],semanticSections=[];
  for(let i=0;i<semanticNodes.length;i++){
   const node=semanticNodes[i];
@@ -784,7 +794,11 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
    const heading=plain(semanticPage.slice(node.headEnd,node.contentEnd),101),level=Number(node.tag[1]);
    if(heading&&heading.length<=100){semanticHeadings.length=level;semanticHeadings[level]=heading;}
   }
-  semanticSections.push([node.start,semanticHeadings.filter(Boolean).join(' / ').slice(0,100)]);
+  const attrs=coffeeHtmlAttributes(node.attributes);
+  const owned=semanticControls.get(attrs.id)||(/\bguide-body\b/.test(attrs.class||'')?semanticControls.get(attrs['data-guide']):'');
+  const inherited=owned||semanticPanelSections.get(node.parent)||'';
+  if(inherited)semanticPanelSections.set(i,inherited);
+  semanticSections.push([node.start,inherited||semanticHeadings.filter(Boolean).join(' / ').slice(0,100)]);
  }
  const semanticSectionAt=start=>{
   let low=0,high=semanticSections.length;
