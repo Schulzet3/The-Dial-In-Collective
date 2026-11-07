@@ -14,7 +14,7 @@ function decode(value){
 export function selectedProductHeadings(markup){
  const headings=[];
  for(const hit of String(markup||'').matchAll(/<h1\b[^>]{0,500}>([\s\S]{0,16000}?)<\/h1>/gi)){
-  const inner=hit[1],chars=[...inner.matchAll(/<span\b[^>]{0,450}\bclass=(['"])[^'"]*\bchar-clip\b[^'"]*\1[^>]{0,450}>\s*<span\b[^>]{0,450}>([\s\S]{0,20}?)<\/span>\s*<\/span>/gi)];
+  const inner=hit[1],chars=[...inner.matchAll(/<span\b[^>]{0,450}\bclass=(['"])[^'"]*\bchar-clip(?=\s|["'])[^'"]*\1[^>]{0,450}>\s*<span\b[^>]{0,450}>([\s\S]{0,20}?)<\/span>\s*<\/span>/gi)];
   const total=(inner.match(/<span\b[^>]{0,450}\bclass=(['"])[^'"]*\bchar-clip\b/gi)||[]).length;
   let title='';
   if(total){
