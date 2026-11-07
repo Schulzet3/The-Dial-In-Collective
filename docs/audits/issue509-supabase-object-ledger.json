@@ -8033,5 +8033,68 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "Unreviewed non-system pg_type metadata (information_schema and app/provider schemas), changed/new provider drift; compiled native/PostgREST/JWT/Auth hosted and 63 withheld sensitive GUC values UNVERIFIED"
+  },
+  "provider_nonpg_types_run75": {
+    "status": "ALL_358_NON_PG_CATALOG_VISIBLE_TYPE_DECLARATIONS_CAPTURED_AND_SEMANTICALLY_SCREENED; NATIVE_AND_HOSTED_SECURITY_UNVERIFIED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "provider_snapshot": "2026-11-07 22:43:49.37691+00",
+    "development_read_parent_sha": "9cdc34c407569db10469fc6216b7610cb45b2010",
+    "development_integration_parent_sha": "57b2e89305ce3fd0318df0d58387a65b02b40db7",
+    "main_sha": "bd627d40f7e65321323512b303d2e3f75709af39",
+    "release_sha": "2ec10324fcaa4b60d1e48240b44b77b141b9ba54",
+    "source": "LIVE_READ_ONLY_PG_TYPE_WITH_ENUM_DOMAIN_CONSTRAINTS",
+    "inventory_md5": "5aced0a9429d054d15e2a8948169471c",
+    "reviewed_new": 358,
+    "total": 358,
+    "counts_by_schema": {
+      "auth": 72,
+      "extensions": 6,
+      "information_schema": 148,
+      "private": 48,
+      "public": 44,
+      "realtime": 16,
+      "storage": 18,
+      "supabase_migrations": 2,
+      "vault": 4
+    },
+    "counts_by_kind": {
+      "b": 180,
+      "c": 161,
+      "e": 12,
+      "d": 5
+    },
+    "composite_types": 161,
+    "enum_types": 12,
+    "domain_types": 5,
+    "checks": {
+      "undefined": 0,
+      "missing_io": 0,
+      "missing_element": 0,
+      "orphan_composite_relation": 0,
+      "duplicate_enum_label": 0,
+      "anomalous_array_mapping": 0,
+      "missing_domain_base": 0,
+      "malformed_source_record": 0
+    },
+    "domain_checks_direct_sql": 2,
+    "domain_default_present": 1,
+    "special_enum_values_and_domain_checks_examined": true,
+    "receipt_paths": [
+      "docs/audits/issue509-provider-nonpg-types-001-090-20261107-run75.json",
+      "docs/audits/issue509-provider-nonpg-types-091-180-20261107-run75.json",
+      "docs/audits/issue509-provider-nonpg-types-181-270-20261107-run75.json",
+      "docs/audits/issue509-provider-nonpg-types-271-358-20261107-run75.json"
+    ],
+    "receipt_blobs": [
+      "bb8f6f4f3a447513c921336fde881b200915b1b0",
+      "081b9ba0ab36586cebddb1548288ad5fa4edffbc",
+      "79c5301d3f9d8c3bb67eb0eba9d1edf8142f88ef",
+      "e2e2dbc72f0d1c2e5b07503312ba2e314dd98f1a"
+    ],
+    "source_fix_count": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "limitations": "Visible metadata/SQL declarations only; native compiled implementations, hosted signed-in JWT/Auth/PostgREST under #96, 63 withheld potentially sensitive settings and console-only settings not independently inspectable; no user, Auth or member row values accessed.",
+    "next": "pg_catalog.pg_namespace complete descriptor tuples, ordinal 1/36 (including temporary schema descriptors; prior ACL audits not re-credited); then remaining distinct catalog object families and changed/new provider drift"
   }
 }
