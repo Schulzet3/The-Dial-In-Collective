@@ -732,6 +732,8 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
  const sections=new Map(),panelSections=new Map(),secondaryPanels=new Set(),primaryExcluded=[],headings=[];
  for(let i=0;i<nodes.length;i++){
   const node=nodes[i],attrs=coffeeHtmlAttributes(node.attributes);
+  // An independent storefront component may precede selected product H1.
+  if(node.tag==='section'&&String(attrs.class||'').split(/\s+/).includes('shopify-section'))headings.length=0;
   const panel=controls.get(attrs.id)||(/\bguide-body\b/.test(attrs.class||'')?controls.get(attrs['data-guide']):'');
   const inherited=panel||panelSections.get(node.parent)||'';
   if(inherited)panelSections.set(i,inherited);
@@ -775,6 +777,8 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
  for(let i=0;i<semanticNodes.length;i++){
   const node=semanticNodes[i];
   if(BLOCKED.has(node.tag)||semanticBlocked.has(node.parent))semanticBlocked.add(i);
+  if(!semanticBlocked.has(i)&&node.tag==='section'&&
+   String(coffeeHtmlAttributes(node.attributes).class||'').split(/\s+/).includes('shopify-section'))semanticHeadings.length=0;
   if(!semanticBlocked.has(i)&&node.tag==='h1')semanticHeadings.length=0;
   if(!semanticBlocked.has(i)&&/^h[2-6]$/.test(node.tag)&&node.contentEnd-node.headEnd<=2000){
    const heading=plain(semanticPage.slice(node.headEnd,node.contentEnd),101),level=Number(node.tag[1]);

@@ -48,3 +48,31 @@ test('a later independent H1 cannot inherit earlier product heading',()=>{
  '<h1>Guatemala | Quetzal</h1><p>Region: Huehuetenango, Guatemala</p></main>';
  assert.equal(field(selected(html),'Region')?.section,undefined);
 });
+
+
+test('real #273 Shopify layout: specs before H1 must not inherit prior testimonial section',()=>{
+ const html='<main><section class="shopify-section"><h2>Love for our coffee from customers</h2></section>'+
+  '<section class="shopify-section product-section"><div class="wt-product__wrapper">'+
+  '<div class="wt-collapse__target--text rte"><p>Country: Guatemala</p>'+
+  '<p>Region: Huehuetenango</p><p>Process: Washed</p></div>'+
+  '<section class="wt-product__main"><h1>Guatemala | Quetzal</h1></section></div></section></main>';
+ const facts=selected(html);
+ for(const [label,value] of [['Country','Guatemala'],['Region','Huehuetenango'],['Process','Washed']]){
+  const match=field(facts,label);
+  assert.ok(match,`Missing ${label}`);assert.equal(match.value,value);
+  assert.equal(match.section,undefined,`Prior unrelated Shopify section attributed to ${label}`);
+ }
+ const parsed=extractPublicCoffeeFacts(html,{source_url:url});
+ assert.equal(parsed.ok,true);
+ assert.equal(parsed.fields.process,'Washed');
+});
+
+test('legitimate pre-H1 heading within selected Shopify section retains its provenance',()=>{
+ const html='<main><section class="shopify-section"><h2>Customer testimonials</h2></section>'+
+  '<section class="shopify-section product-section"><h2>Selected coffee specifications</h2>'+
+  '<p>Region: Huehuetenango</p><p>Process: Washed</p>'+
+  '<h1>Guatemala | Quetzal</h1></section></main>';
+ const facts=selected(html);
+ assert.equal(field(facts,'Region')?.section,'Selected coffee specifications');
+ assert.equal(field(facts,'Process')?.section,'Selected coffee specifications');
+});
