@@ -37,7 +37,7 @@ test('#455 R081 malformed archived Turbo measurements cannot bias Traditional st
 
 test('#455 R081 a valid five-green Turbo measured ratio still gives its existing weak Traditional prior',()=>{
  const s=setup(),base=rec(s).ratio;
- s.shots.push(shot('valid'));
+ s.shots.push(shot('valid',{yieldG:45}));
  const before=structuredClone(s.shots),actual=rec(s);
  assert.notDeepEqual(actual.ratio,base,'legitimate weak ratio-only transfer remains');
  assert.ok(Number.isFinite(actual.ratio.center));
