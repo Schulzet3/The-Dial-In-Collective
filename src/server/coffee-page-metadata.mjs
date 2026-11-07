@@ -34,6 +34,7 @@ import {countrywideEducationalOriginCorrection} from './coffee-countrywide-conte
 import {selectedFarmStoryRegionMismatch} from './coffee-title-region-evidence.mjs';
 import {selectedCurrentFarmGrowingLocality} from './coffee-selected-farm-growing-locality.mjs';
 import {selectedProcessingSiteNotFarmOrigin} from './coffee-processing-site-origin-guard.mjs';
+import {selectedCurrentColombianDepartmentOrigin} from './coffee-selected-department-origin.mjs';
 
 // A chosen current selected coffee description can be more authoritative than
 // another labeled tasting list printed in the same selected product detail
@@ -2063,6 +2064,22 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   }
   delete fields.origin;
   conflicts.add('origin');
+ }
+ // Direct present selected department beats irrelevant continental context.
+ if(fields.origin&&!conflicts.has('origin')){
+  const selectedDepartment=selectedCurrentColombianDepartmentOrigin({
+   name:fields.name,origin:fields.origin,blocks:productCoffeeProse(canonicalProduct,clean)
+  });
+  if(selectedDepartment){
+   if(keyOf(fields.origin)!==keyOf(selectedDepartment.value))
+    rememberCoffeeReviewCandidate(fields,'origin',fields.origin,'Prior broad origin (review only)');
+   fields.origin=selectedDepartment.value;
+   if(source_facts.length<384)source_facts.push({
+    field:'origin',label:'Exact current selected growing department',
+    value:selectedDepartment.quote,source_url,source_type:'html',
+    section:'Selected current beans and family farm sourcing'
+   });
+  }
  }
  // Generic *countrywide* educational mountain context is not proof of
  // this selected lot's narrower origin. Retain all raw source facts and the
