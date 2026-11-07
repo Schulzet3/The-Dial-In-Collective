@@ -8096,5 +8096,55 @@
     "baseline_complete": false,
     "limitations": "Visible metadata/SQL declarations only; native compiled implementations, hosted signed-in JWT/Auth/PostgREST under #96, 63 withheld potentially sensitive settings and console-only settings not independently inspectable; no user, Auth or member row values accessed.",
     "next": "pg_catalog.pg_namespace complete descriptor tuples, ordinal 1/36 (including temporary schema descriptors; prior ACL audits not re-credited); then remaining distinct catalog object families and changed/new provider drift"
+  },
+  "provider_pg_namespace_run75b": {
+    "status": "36_OF_36_VISIBLE_PG_NAMESPACE_DESCRIPTORS_AND_EFFECTIVE_SCHEMA_USAGE_FLAGS_REVIEWED; HOSTED_API_UNVERIFIED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "provider_date": "2026-11-07 UTC",
+    "development_parent_sha": "3d7dd9fe7280508a9604c075998a928d9d2ff923",
+    "receipt_path": "docs/audits/issue509-provider-pg-namespace-001-036-20261107-run75b.json",
+    "receipt_blob_sha": "c2981bb0a64172755c143d85f30c8c4eedb89d06",
+    "reviewed_new": 36,
+    "total": 36,
+    "owner_counts": {
+      "supabase_admin": 31,
+      "postgres": 3,
+      "pgbouncer": 1,
+      "pg_database_owner": 1
+    },
+    "client_create_privilege_schemas": 0,
+    "effective_usage_schemas": [
+      "auth",
+      "extensions",
+      "graphql",
+      "graphql_public",
+      "information_schema",
+      "pg_catalog",
+      "private",
+      "public",
+      "realtime",
+      "storage"
+    ],
+    "private_schema_usage": {
+      "anonymous": false,
+      "authenticated": true,
+      "explicit_acl": "{postgres=UC/postgres,authenticated=U/postgres,service_role=U/postgres}"
+    },
+    "private_relation_effective_select": {
+      "anonymous": 0,
+      "authenticated": 0
+    },
+    "private_routine_execute": {
+      "anonymous": 2,
+      "authenticated": 28,
+      "authenticated_security_definer": 28
+    },
+    "note": "These are catalog-effective SQL privileges; 28 private signed-in callable SECURITY DEFINER functions were separately reviewed in prior function cohorts. Auth runtime/API exposure remains #96 and is not established by catalog grants alone. Metadata does not independently prove a vulnerability.",
+    "anomalies": [],
+    "confirmed_new_security_bugs": 0,
+    "provider_writes": false,
+    "source_fixes": 0,
+    "baseline_complete": false,
+    "next": "Next distinct provider catalog definition after pg_namespace 36/36; pg_statistic_ext has 0/0 metadata declarations, hosted Auth/JWT/PostgREST and native compiled source UNVERIFIED"
   }
 }
