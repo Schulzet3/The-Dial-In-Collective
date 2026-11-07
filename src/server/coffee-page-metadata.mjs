@@ -35,6 +35,7 @@ import {selectedFarmStoryRegionMismatch} from './coffee-title-region-evidence.mj
 import {selectedCurrentFarmGrowingLocality} from './coffee-selected-farm-growing-locality.mjs';
 import {selectedProcessingSiteNotFarmOrigin} from './coffee-processing-site-origin-guard.mjs';
 import {selectedCurrentColombianDepartmentOrigin} from './coffee-selected-department-origin.mjs';
+import {selectedCurrentNamedMicroLotSector} from './coffee-selected-microlot-sector-origin.mjs';
 
 // A chosen current selected coffee description can be more authoritative than
 // another labeled tasting list printed in the same selected product detail
@@ -2162,6 +2163,24 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     field:'origin',label:'Exact selected farm growing locality',
     value:growing.quote.slice(0,400),source_url,source_type:'html',
     section:'Exact selected current growing prose'});
+  }
+ }
+
+ // Only present exact selected micro-lot+named-producer growing-sector prose
+ // can refine a corroborated existing mountain/region/country tuple.
+ if(fields.origin&&!conflicts.has('origin')){
+  const sector=selectedCurrentNamedMicroLotSector({
+   name:fields.name,origin:fields.origin,producer:fields.producer,
+   blocks:productCoffeeProse(canonicalProduct,clean)
+  });
+  if(sector){
+   rememberCoffeeReviewCandidate(fields,'origin',fields.origin,'Broader selected mountain region');
+   fields.origin=sector.value;
+   if(source_facts.length<384)source_facts.push({
+    field:'origin',label:'Exact selected named micro-lot growing sector',
+    value:sector.quote.slice(0,430),source_url,source_type:'html',
+    section:'Present selected micro-lot and credited grower'
+   });
   }
  }
 
