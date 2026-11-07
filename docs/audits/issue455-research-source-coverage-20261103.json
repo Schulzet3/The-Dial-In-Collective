@@ -525,7 +525,9 @@
       "evidence_grade": "PEER_REVIEWED_CONTROLLED_BEAN_TEMPERATURE_VS_LASER_DIFFRACTION_PARTICLE_SIZE; NO_BLINDED_SENSORY_OR_ESPRESSO_SHOT_OUTCOME",
       "review_status": "FULL_PRIMARY_HTML_METHODS_FOR_EK43_TEMPERATURE_AND_FOUR_COFFEE_COMPARISON_READ; 31_PERCENT_MODAL_CHANGE_VERIFIED; NONCAUSE_ORIGIN_CAVEAT",
       "source_bytes_sha256": null,
-      "source_byte_caveat": "NIH PMC original full HTML read 2026-11-04, raw PDF bytes not downloaded, hash not verified; image/graph data not independently remeasured."
+      "source_byte_caveat": "NIH PMC original full HTML read 2026-11-04, raw PDF bytes not downloaded, hash not verified; image/graph data not independently remeasured.",
+      "alignment_claim_scope_review_20261107": "Direct full NIH PMC Methods at https://pmc.ncbi.nlm.nih.gov/articles/PMC4834475/: EK43 burr misalignment susceptibility and ONE supplemental Figure S1 PSD example explicitly described. Experiment ran selected EK43 Turkish burrs at 1480 rpm; supplementary numeric data and a controlled alignment intervention were not inspected. Does not prove a general alignment effect size, retention mechanism or espresso taste advantage.",
+      "alignment_supplement_s1": "NOT_DIRECTLY_INSPECTED_OR_QUANTIFIED"
     },
     {
       "id": "LIT-2018-GRIFFITHS-BURR-WEAR",
@@ -2494,6 +2496,37 @@
       "owner_approval": false,
       "original_source_sha": "6fd1905b0bd4cbfb33a528ff5f8f544692e0d44f",
       "publisher_binary_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-100-A",
+      "source": "Original #09 Git blob 1e1b8bbef0ecb05ed0b20195191bcad26663cf0d lines 23 and 191-209; Uman et al. 2016 primary NIH PMC full text Methods Grinding lines 198-209, DOI 10.1038/srep24483",
+      "primary_sources": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC4834475/",
+        "https://doi.org/10.1038/srep24483"
+      ],
+      "claim": "Uman et al. explicitly noted that replaceable EK43 burrs are susceptible to misalignment and included one supplementary PSD example related to burr alignment. They did not randomize or repeatedly adjust alignments in a controlled sensory/grind-calibration trial; reported Figure S1 underlying results were not reanalyzed. The report's 'first-order' alignment wording is a physical hypothesis, not published universal magnitude or taste correction.",
+      "grade": "PEER_REVIEWED_PRIMARY_FULL_HTML_METHODS_DIRECT_20261107; SUPPLEMENTARY_FIGURE_S1_NOT_REANALYZED; NO_CONTROLLED_ALIGNMENT_EFFECT_SIZE_OR_SENSORY_TRIAL",
+      "current_app": "Pinned engine SHA f255d217cac4d909aa4ea6fb921e5e6e9da5d23b: hardwareMatch, translateGrind and grindGuidance (lines 130-171) use nominal grinder/burr identity, range-relative estimate with proven:false. No physical alignment measurement.",
+      "result": "RETAIN_UNPROVEN_LABEL_AND_NO_AUTOMATIC_ALIGNMENT_COMPENSATION_NO_APP_CHANGE",
+      "owner_approval": false,
+      "original_source_sha": "7f5e6d214bf11337338647c0842b879630b00d32",
+      "original_report_git_blob_sha": "1e1b8bbef0ecb05ed0b20195191bcad26663cf0d",
+      "publisher_pdf_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-100-B",
+      "source": "Uman et al. 2016 NIH PMC Methods Grinding, Origin and Temperature at https://pmc.ncbi.nlm.nih.gov/articles/PMC4834475/ (web lines 203-218), original #09 paragraph 23 and lines 191-211",
+      "primary_sources": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC4834475/"
+      ],
+      "claim": "Four relatively light-to-medium coffees were tested on one selected EK43 Turkish-burr grinder at 1480 rpm; bean-temperature trials and PSD, not aligned-versus-misaligned grinder interventions, measured experimental outcomes. Choosing this low-retention grinder is not testing whether misalignment causes retention. The evidence cannot establish cross-grinder setting equivalence or improvement in the application's five taste ratings.",
+      "grade": "PRIMARY_FULL_HTML_EXPERIMENT_SCOPE_VALIDATED_NO_CAUSAL_ALIGNMENT_TO_RETENTION_OR_HUMAN_TASTE_EVIDENCE",
+      "current_app": "Current owner-Locked grinder ranges, calibration versions, original measured history and uncertainty labeling already make no physical burr alignment or retention claim.",
+      "result": "RESEARCH_SCOPE_AND_UNCERTAINTY_CLARIFIED_NO_NEW_USER_FIELD_OR_NUMERIC_POLICY",
+      "owner_approval": false,
+      "original_source_sha": "7f5e6d214bf11337338647c0842b879630b00d32",
+      "figure_s1_status": "REFERENCED_BUT_UNREVIEWED",
+      "publisher_pdf_sha256": null
     }
   ],
   "policy_decisions_pending": [],
@@ -2520,40 +2553,40 @@
     "R455-074 VERIFIED READY development only: local communitySummary five-green gate PR1077 merged 92f955357eef4a9892cc228169b450609b0ff063; Node/lint/SQL/security/governance and exact source-equivalent Chromium/mobile/offline PASS after recorded cancel/failed first attempt + successful retry; no hosted Community member/RLS proof, no deploy. 58 sources/123 checks, original S019 still inaccessible, no #267 literal-line credit. Next separate high-confidence UX/citation research.",
     "R455-073: isExtreme historic truthy success false outlier-review eligibility fixed with five synthetic real-module regressions; code PR1071 nonforce merged 1b9168f31eed7a1a2d6aa3f748b81cd663f49dde; exact PR-head and merged source applicable CI passed. READY, NOT DEPLOYED. Retain research 58/123, no #267 literal line credit, original S019 still inaccessible; next Community selector coordinated with #96.",
     "R455-094: local Make Current physically invalid archived favorite eligibility corrected, code PR1241 nonforce merged a622e9027b640fd7049c3a6b5b5cabd2bc68f150, exact PR-head and merged CI PASS 2941/0/6 with original603 SKIPPED; docs-only READY reconciliation in progress. Note hosted Cloud server MAKE_CURRENT uses existing public.shots SQL CHECK guard, not affected by local code change; no policy or original S019 certification.",
-    "R455-099: newly independently source-checked Kuhn 2017 TUM first-party peer-reviewed abstract against preserved original report #08 and already-reviewed Vaca Guerra 2023 dry-bed compression abstract: analyte kinetics vs porosity/permeability are different endpoints; no universal tamp force, recipe adjustment or taste gain established. Added one source, two bounded checks and one research-only proposal. No runtime/test/queue/Locked change; original full text and S019 remain pending."
+    "R455-099: newly independently source-checked Kuhn 2017 TUM first-party peer-reviewed abstract against preserved original report #08 and already-reviewed Vaca Guerra 2023 dry-bed compression abstract: analyte kinetics vs porosity/permeability are different endpoints; no universal tamp force, recipe adjustment or taste gain established. Added one source, two bounded checks and one research-only proposal. No runtime/test/queue/Locked change; original full text and S019 remain pending.",
+    "R455-100: original #09 burr alignment claim checked against Uman 2016 primary NIH full Methods; evidence 100-A/B, research-only proposal 100; 59 sources/130 checks/62 proposals. No quantifiable aligned-vs-misaligned/retention/espresso taste effect or owner-approved new alignment capture. Docs CI/merge pending, S019 inaccessible, #267 audit unchanged."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-099",
-    "base_development_sha": "6fd1905b0bd4cbfb33a528ff5f8f544692e0d44f",
+    "id": "R455-100",
+    "base_development_sha": "7f5e6d214bf11337338647c0842b879630b00d32",
     "merged_code_sha": null,
     "verified_integrated_source_sha": null,
     "source_ids": [
-      "docs/research/originals/08_Manual_Audit_of_Espresso_Extraction_Dosing_and_Puck-Preparation_Claims.md",
-      "LIT-2017-KUHN-TAMP-ANALYTES",
-      "LIT-2023-VACA-GUERRA-PSD-BED-COMPRESSION",
+      "ORG-09",
+      "LIT-2016-UMAN-BEAN-TEMP-PSD",
       "site/lib/engine.js"
     ],
     "claim_ids": [
-      "R455-EV-CIT-061-A",
-      "R455-EV-CIT-061-B"
+      "R455-EV-CIT-100-A",
+      "R455-EV-CIT-100-B"
     ],
     "number_of_curated_sources": 59,
-    "total_evidence_checks": 128,
-    "number_of_proposals": 61,
-    "review_type": "NONOVERLAPPING_PRIMARY_AUTHOR_INSTITUTION_ABSTRACT_AND_ACTUAL_ENGINE_BEHAVIOR_SCOPE_RESEARCH_ONLY",
+    "total_evidence_checks": 130,
+    "number_of_proposals": 62,
+    "review_type": "DIRECT_FIRST_PARTY_FULL_PRIMARY_METHODS_ALIGNMENT_SCOPE_RESEARCH_ONLY",
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
     "code_or_policy_changed": false,
     "ci_runs": [],
     "node_tests": {
-      "status": "NOT_RUN_DOCUMENTATION_RESEARCH_ONLY",
+      "status": "NOT_RUN_DOCS_ONLY",
       "pass": null,
       "fail": null,
       "skip": null
     },
     "original603": "NOT_RUN_NOT_PASS",
-    "s019": "UNREVIEWED_SOURCE_ACCESS_NOT_RESOLVED",
-    "next_action": "After docs-source PR/head governance, nonforce integrate and verify exact merged source; next independent original research claim/page audit or safe reproducible UX gap. S019 remains unavailable, no speculative numeric tamp rule."
+    "s019": "INACCESSIBLE_UNREVIEWED",
+    "next_action": "Open PR and exact docs governance; nonforce merge with readback; then next independent source/claim or proven safe UX gap."
   },
   "policy_decisions_resolved": [
     {
@@ -3837,6 +3870,27 @@
       "implementation": "RESEARCH_EVIDENCE_LEDGER_ONLY_NO_APP_CHANGE_NO_READY_RELEASE_ITEM",
       "test_plan": "Source-by-source author-institution abstract entailment, direct live source comparison and publication-scope distinction. No Node/UX/SQL/Auth tests for docs-only research classification; approval/continuity governance should validate any documentation commit. No empirical user outcome or new numeric target claimed.",
       "release_queue": "NOT_APPLICABLE_NO_APP_CODE_OR_READY_SCOPE",
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-100-BURR-ALIGNMENT-EVIDENCE-SCOPE",
+      "finding": "Original #09's burr-alignment claim is directly traceable to Uman (2016), but its single illustrative supplementary PSD example and selected EK43 are not a controlled alignment intervention, quantitative universal calibration, retention-causation or five-taste sensory study.",
+      "evidence": [
+        "R455-EV-009-C",
+        "R455-EV-CIT-020-C",
+        "R455-EV-CIT-100-A",
+        "R455-EV-CIT-100-B"
+      ],
+      "severity": "P3_RESEARCH_PROVENANCE_PREVENT_UNGROUNDED_GRINDER_ADVICE",
+      "user_benefit": "Avoid false automatic burr-alignment or retention correction and preserve simple Log Shot with honest equipment translation uncertainty.",
+      "current_locked": "All five taste inputs, original shots/notes, individual grinder calibration/version ranges, one controllable next step, independent styles and existing proven/unproven labels. Numeric alignment policy or mandatory capture needs separate owner approval.",
+      "current_app": "At development 7f5e6d214bf11337338647c0842b879630b00d32 site/lib/engine.js engine blob f255d217cac4d909aa4ea6fb921e5e6e9da5d23b lines 130-171: nominal grinder+burr match and range-relative translation (proven:false); no physical alignment sensor or claim.",
+      "proposed_change": "RESEARCH-ONLY, NO APP CHANGE. Preserve existing unproven label. Neither infer misalignment/retention from taste or shot time nor add a universal alignment/seasoning correction. Any new alignment control, measurement, calibration reset or mandatory field requires separate owner product decision and hardware validation.",
+      "approval_required_for_behavior_change": false,
+      "future_owner_approval_boundary": "YES_IF_ACTUAL_NEW_ALIGNMENT_INPUT_OR_AUTO_RECIPROCAL_CORRECTION_PROPOSED; NONE_NEEDED_NOW",
+      "implementation": "EVIDENCE_LEDGER_ONLY_NO_RUNTIME_OR_RELEASE_READY",
+      "test_plan": "Direct original report #09 vs primary full NIH PMC Methods and existing engine. Figure S1 underlying supplement remains unreviewed. GitHub docs governance/continuity should pass; Node/browser/mobile/offline/SQL/Auth not invoked for docs-only scoped record, no empirical cup effect.",
+      "release_queue": "NOT_APPLICABLE_RESEARCH_ONLY",
       "production_deployed": false
     }
   ],
