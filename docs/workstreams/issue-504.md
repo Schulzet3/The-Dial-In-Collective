@@ -1091,3 +1091,15 @@ Source branch `558261c74f386be848d0f87a0b01fe1cf5d3e12d`; main `bd627d40f7e65321
 **Tests & limits:** SHA1 and source/word/byte/count arithmetic PASS. Documentation-only 3 paths in atomic change, applicable exact-head CI requires readback before merge; Node22, real SQL/Auth, browser/mobile/offline and frozen603 functional checks NOT RUN, no PASS claimed. No owner policy, READY/DEPLOYED, publication, main/release/Netlify, live database/member/provider/backup or forced Git writes.
 
 **Next:** [Issue #33 comment `6642186837`](https://github.com/Schulzet3/The-Dial-In-Collective/issues/33#issuecomment-6642186837) word **1**. #504 OPEN / IN_PROGRESS; whole GitHub baseline and #267 V2 uncompleted.
+
+## Issue #504 G1-092 — November 7, 2026: eight original #33 comments complete [skip netlify]
+
+Source recovery: development `7f5e6d214bf11337338647c0842b879630b00d32`, main `bd627d40f7e65321323512b303d2e3f75709af39`, release `2ec10324fcaa4b60d1e48240b44b77b141b9ba54`. Repo public only under owner-authorized temporary #630 Nov4–30; no visibility change. Issue OPEN; #267/#455/#33/#96 ownership unchanged.
+
+Original REST bodies fully read (word 1-EOF): `6642186837, 6643289453, 6644091944, 6644260737, 6644635256, 6645279242, 6645826911, 6646739785`; **8 distinct comments / 2462 words / 24177 UTF8 bytes**. Exact timestamps, SHA1, line/word ranges, semantic dispositions in [G1-092 receipt](../audits/issue504-review-G1-092.json). 91 predecessor batches nonoverlap. Cumulative **7,919 file lines / 60,754 file words + 491 GitHub original records / 143792 words**. Baseline GitHub-wide inventory and delegated #267 source review INCOMPLETE.
+
+PRs #615/#637/#638/#639/#641/#644/#645/#646/#650/#651 all independently MERGED. Historical GitHub Actions no-runner startup issue resolved, #62 generic Andes leakage, #106 title-grown-region and #309 Shopify inline Light roast fixes integrated as #33-owned work, not new #504 defect/fix. #151/#531 EA method and #571 mixed constituent processing are source-time cautions, not current parser certification. Original603 SKIPPED != PASS. No new current #504-owned reproducible defect, safe deletion, policy decision, or owner action.
+
+Independent #267 H22 literal/annotations check: frozen F431 lines 1–6, original blob `5c21ffbb20d5a61cd132c8098e1244e2f1a02759` all 6 matched, **zero duplicate code-line credit**. Full #267 not certified.
+
+Three audit docs only, one proposed commit; PR-head and merged-source governance pending readback. Node22, functional SQL/Auth, original603, browser/mobile/offline NOT RUN; no main/production/Netlify/provider/member/backup/release queue/Locked history changes. Exact next source [#33 comment `6646887685`](https://github.com/Schulzet3/The-Dial-In-Collective/issues/33#issuecomment-6646887685), word 1. **OPEN / IN_PROGRESS**.
