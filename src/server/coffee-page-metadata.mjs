@@ -36,6 +36,7 @@ import {selectedCurrentFarmGrowingLocality} from './coffee-selected-farm-growing
 import {selectedProcessingSiteNotFarmOrigin} from './coffee-processing-site-origin-guard.mjs';
 import {selectedCurrentColombianDepartmentOrigin} from './coffee-selected-department-origin.mjs';
 import {selectedCurrentNamedMicroLotSector} from './coffee-selected-microlot-sector-origin.mjs';
+import {conflictingCurrentSelectedDecafSource} from './coffee-selected-decaf-origin-conflict.mjs';
 
 // A chosen current selected coffee description can be more authoritative than
 // another labeled tasting list printed in the same selected product detail
@@ -2065,6 +2066,28 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   }
   delete fields.origin;
   conflicts.add('origin');
+ }
+ // When the same current decaf explicitly claims beans from an incompatible
+ // country versus its chosen product's own Origin caption, withhold origin.
+ // Preserve BOTH literal claims and the existing green Process separately.
+ const selectedDecafDisagreement=fields.origin&&!conflicts.has('origin')
+  ?conflictingCurrentSelectedDecafSource({
+   name:fields.name,origin:fields.origin,blocks:productCoffeeProse(canonicalProduct,clean)
+  }):null;
+ if(selectedDecafDisagreement){
+  for(const [label,value,section] of [
+   ['Current selected decaf source country',selectedDecafDisagreement.prose_country,
+    selectedDecafDisagreement.prose_quote],
+   ['Direct selected Origin caption',selectedDecafDisagreement.selected_origin,
+    'Selected current product specification']
+  ]){
+   rememberCoffeeReviewCandidate(fields,'origin',value,label);
+   if(source_facts.length<384)source_facts.push({
+    field:'origin',label,value,source_url,source_type:'html',
+    section,conflicting:true
+   });
+  }
+  delete fields.origin;conflicts.add('origin');
  }
  // Direct present selected department beats irrelevant continental context.
  if(fields.origin&&!conflicts.has('origin')){
