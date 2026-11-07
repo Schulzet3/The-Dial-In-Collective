@@ -5,6 +5,13 @@ import {normalizeAppearance,resolveAppearance,readAppearance} from '../site/clou
 import {decide} from '../scripts/netlify/should-ignore-build.mjs';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const css=read('site/visual.css');
+const adminThemeGateBeforeRead=main=>{
+ const guard=main.indexOf('if(!status?.authenticated||!status?.admitted||!status?.admin){');
+ const denial=main.indexOf('root.innerHTML=renderAdminDenied();return;',guard);
+ const preference=main.indexOf("from('account_preferences')");
+ return guard>=0&&denial>guard&&preference>denial;
+};
+
 const scopes=[...css.matchAll(/:root(?:\[data-theme=dark\])?\s*\{([^}]+)\}/g)].map(m=>Object.fromEntries([...m[1].matchAll(/--([a-z0-9-]+):\s*(#[a-f0-9]{6})/gi)].map(x=>[x[1],x[2]])));
 const luminance=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255).map(x=>x<=.04045?x/12.92:((x+.055)/1.055)**2.4).reduce((a,x,i)=>a+x*[.2126,.7152,.0722][i],0);
 const contrast=(a,b)=>{const x=luminance(a),y=luminance(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05);};
@@ -19,7 +26,17 @@ test('appearance supports light/dark/system and safely normalizes untrusted valu
 test('unavailable local storage falls back without blocking app or Admin',()=>assert.equal(readAppearance({getItem(){throw Error('denied');}}),'system'));
 test('Netlify cannot deploy this review branch in any context',()=>{for(const context of ['production','deploy-preview','branch-deploy'])assert.equal(decide({context,branch:'work/visual-refresh-20261015'}).ignore,true);});
 test('shared appearance is allowlisted and early theme bootstrap is used by both pages',()=>{for(const page of ['site/cloud.html','site/admin.html'])assert.match(read(page),/appearance-bootstrap\.js/);assert.match(read('build_cloud.mjs'),/cloud\/appearance\.js/);});
-test('Admin reads only current-account theme after authorization',()=>{const main=read('site/admin/main.js');assert.ok(main.indexOf('!status?.admin')<main.indexOf("from('account_preferences')"));assert.match(main,/select\('theme'\)\.eq\('owner_id',identity.user.id\)/);});
+test('Admin reads only current-account theme after authorization',()=>{
+ const main=read('site/admin/main.js');
+ assert.ok(adminThemeGateBeforeRead(main),'active Admin gate and fail-closed denial must precede account preference read');
+ assert.match(main,/select\('theme'\)\.eq\('owner_id',identity.user.id\)/);
+});
+test('Admin appearance source check rejects missing session gate',()=>{
+ const main=read('site/admin/main.js');
+ const degraded=main.replace('if(!status?.authenticated||!status?.admitted||!status?.admin){','if(false){');
+ assert.notEqual(degraded,main,'fixture must remove the real session guard');
+ assert.equal(adminThemeGateBeforeRead(degraded),false);
+});
 test('search toggle and icon-labelled Sign Out preserve action semantics',()=>{const main=read('site/cloud/main.js');assert.match(main,/Search & Sort/);assert.match(main,/aria-controls="coffee-search-tools"/);assert.match(main,/icon\('signout',18\)/);});
 test('style retains clean display ligatures and visible focus states',()=>{assert.match(css,/font-variant-ligatures:none/);assert.match(css,/:focus-visible/);assert.match(css,/prefers-reduced-motion/);});
 
