@@ -507,7 +507,10 @@ export function prefill(s,coffeeId,options={}) {
  const doses=shots.filter(x=>x.basketId===basket.id&&finite(x.doseG)&&x.doseG>=minDose&&x.doseG<=maxDose),
   grinds=shots.filter(x=>x.basketId===basket.id&&x.style===style&&x.feedMode===feed&&x.calibrationId===v.calibrationId&&
    finite(x.grindSetting)&&x.grindSetting>=v.grinderMin&&x.grindSetting<=v.grinderMax);
- const temps=shots.filter(x=>validRecordedTemperature(x.tempC)),same=temps.find(x=>x.style===style),temp=same||temps[0];
+ // A recorded temperature is still retained in History, but an archive
+  // with impossible dose/yield/time is not a reliable prior actual shot.
+  // Reuse existing Log Shot bounds; do not invent temperature thresholds.
+  const temps=measuredRecipeShots(shots).filter(x=>validRecordedTemperature(x.tempC)),same=temps.find(x=>x.style===style),temp=same||temps[0];
  return {doseG:doses[0]?.doseG??basket.doseG,yieldG:'',timeS:'',grindSetting:grinds[0]?.grindSetting??'',tempC:v.advanced.temperature?(temp?.tempC??null):null,tempSource:temp&&temp.style!==style?`Last used on ${temp.style}`:'',style,basketId:basket.id,feedMode:feed,tasteScales:{extraction:null,body:null,clarity:null,sweetness:null,astringency:null},notes:''};
 }
 

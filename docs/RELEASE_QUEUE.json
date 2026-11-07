@@ -8,6 +8,27 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-prefill-temperature-physical-history",
+      "issue": 455,
+      "title": "Exclude unloggable imported measurements from actual temperature prefill",
+      "state": "TESTING",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "R455-098 source development 36c4d3f5f7037254b585171d427e6fdd8250977e, original engine blob ac80d5dae00efe101c1bd494956a19690c93e254. The prefill() temperature path admitted historical rows with in-bounds temperature despite physically impossible archived dose/yield/time, unlike temperatureGuidance().",
+        "SAFE use existing measuredRecipeShots physical input bounds (dose 5-40 g, yield 5-200 g, time 1-180s) only for temperature evidence eligibility; keep original notes, five ratings, history, style-specific temperature priority and off toggle.",
+        "Six source-derived synthetic Node real-module regression groups for newer invalid/older good, invalid dose/yield/time and null, exact style precedence, other-style label, inclusive physical endpoints and temperature bounds, disabled tracking; execution/CI not yet observed.",
+        "Exact PR-head, merged-source and applicable required CI PENDING/NOT EXECUTED; not READY, original603 not run. No actual member or cup taste claim."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact required source-bound CI and nonforce integration pending"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Development-only owner Option B safe bug fix, not approved release or new science rule. Must not deploy or modify production/provider/member data."
+    },
+    {
       "id": "DIC-Q-455-outlier-feed-basket-calibration-context",
       "issue": 455,
       "title": "Prevent explicit cross-feed/basket/calibration successes from creating false shot outlier prompts",
