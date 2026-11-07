@@ -280,8 +280,9 @@ export function personalSimilarCoffeeReference(s,coffee,version,style,feed,baske
  for(const sh of s.shots){
   if(sh.hidden||sh.dialedIn!==true||!isDialed(sh.tasteScales)||sh.coffeeId===coffee.id||
      sh.setupVersionId!==version.id||sh.style!==style||sh.feedMode!==feed||
-     !finite(sh.yieldG)||!finite(sh.doseG)||!finite(sh.timeS)||sh.doseG<=0||
-     sh.yieldG<=0||!finite(sh.yieldG/sh.doseG)||sh.timeS<=0)continue;
+     // Reuse current Log Shot physical bounds for historical *evidence* only.
+     // Imported originals remain untouched in private shot History.
+     !measuredRecipeShots([sh]).length)continue;
   const other=byId.get(sh.coffeeId);
   const rank=roastIndex(other?.roastLevel);
   if(rank<0)continue;
