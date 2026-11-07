@@ -4,7 +4,7 @@
 import {removeElements,removeComments} from '../../supabase/functions/_shared/html-scan.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {coffeeFieldKey,extractSemanticCoffeeSpecs} from './coffee-semantic-specs.mjs';
-import {coffeeHtmlAttributes} from './coffee-product-scope.mjs';
+import {coffeeHtmlAttributes,productMarkup} from './coffee-product-scope.mjs';
 import {isRecurringCoffeeHarvestWindow,isGenericCoffeeLotLabel} from '../../supabase/functions/_shared/coffee-release-label.mjs';
 import {collectSupplementaryStructuredCoffeeFacts} from './coffee-supplementary-source-evidence.mjs';
 
@@ -767,6 +767,26 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
  const fullText=plain(removeElements(html,[...BLOCKED]),MAX_SOURCE_FACT_CHARACTERS+2);
  if(fullText&&normalized(fullText)!==normalized(name))result.add('Published product text',fullText,undefined,primaryExcluded.length?'Complete page scope':undefined);
  const semantic=extractSemanticCoffeeSpecs(html,{clean:plain});
+ // Semantic facts use productMarkup(html) offsets, not original document
+ // offsets. Selected <main> can follow unrelated testimonials; do not label
+ // selected facts from earlier full-document section coordinates.
+ const semanticPage=productMarkup(html),semanticNodes=coffeeHtmlElements(semanticPage).nodes;
+ const semanticBlocked=new Set(),semanticHeadings=[],semanticSections=[];
+ for(let i=0;i<semanticNodes.length;i++){
+  const node=semanticNodes[i];
+  if(BLOCKED.has(node.tag)||semanticBlocked.has(node.parent))semanticBlocked.add(i);
+  if(!semanticBlocked.has(i)&&node.tag==='h1')semanticHeadings.length=0;
+  if(!semanticBlocked.has(i)&&/^h[2-6]$/.test(node.tag)&&node.contentEnd-node.headEnd<=2000){
+   const heading=plain(semanticPage.slice(node.headEnd,node.contentEnd),101),level=Number(node.tag[1]);
+   if(heading&&heading.length<=100){semanticHeadings.length=level;semanticHeadings[level]=heading;}
+  }
+  semanticSections.push([node.start,semanticHeadings.filter(Boolean).join(' / ').slice(0,100)]);
+ }
+ const semanticSectionAt=start=>{
+  let low=0,high=semanticSections.length;
+  while(low<high){const mid=(low+high)>>>1;if(semanticSections[mid][0]<=start)low=mid+1;else high=mid;}
+  return semanticSections[low-1]?.[1]||'';
+ };
  // Review-only roles distinguish named farms/facilities from current selected
  // producers and green methods. Exact source captions/values remain retained.
  const hasLabeledGrower=semantic.facts.some(fact=>fact.kind==='producer'&&/^(?:grower|producer|farmer)$/i.test(fact.label.trim()));
@@ -779,7 +799,7 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
    !/\b(?:washed|natural|honey|anaerobic|wet.?hulled|ferment|carbonic|maceration|dry.?process|wet.?process|decaf)\b/i.test(value))return undefined;
   return field;
  };
- for(const fact of semantic.facts)result.add(fact.label,fact.value,sourceReviewField(fact.label,fact.value,fact.kind),sectionAt(fact.start));
+ for(const fact of semantic.facts)result.add(fact.label,fact.value,sourceReviewField(fact.label,fact.value,fact.kind),semanticSectionAt(fact.start));
  // Definition lists and tables preserve unfamiliar labels, units and values.
  for(let i=0;i<nodes.length;i++){
   const node=nodes[i];if(blocked.has(i))continue;
