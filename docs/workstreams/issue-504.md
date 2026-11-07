@@ -1035,3 +1035,16 @@ Independent #267 overlap spot check: original frozen F425 `scripts/backups/isola
 Only receipt, append-only coverage ledger and this scoped journal updated together; direct source identity, original SHA1, word/line arithmetic and prior-boundary nonoverlap PASS. No application Node22, browser/mobile/offline, SQL/Auth, or original603 functional tests run for docs-only changes (NOT PASS); applicable PR-head and exact merged-source CI require separate confirmation. No publication, main/production, queue, provider/member/Auth/SQL/Edge, backups, immutable evidence or visibility change.
 
 **Exact NEXT original:** [#33 comment `6564789182`](https://github.com/Schulzet3/The-Dial-In-Collective/issues/33#issuecomment-6564789182), word 1. **#504 OPEN / IN_PROGRESS**.
+
+
+## Issue #504 G1-088 — November 7, 2026 UTC: eight complete issue #33 historical comments [skip netlify]
+
+Live source branches: development `30eec9a36c52235463604e31432bad453576c18f`, main `bd627d40f7e65321323512b303d2e3f75709af39`, release/production `2ec10324fcaa4b60d1e48240b44b77b141b9ba54`. Prior ledger Git blob `3d26c5b7c296b9dfd297278880d4a50396235d03`; prior journal Git blob `055c106e05cf9ffb820615954bfda529788c72ba`. Repo PUBLIC temporarily by owner #630 Nov4–30. #267 solely owns direct original/current code review; #33 extraction, #455 research/UX, #96 Auth/privacy remain distinct.
+
+Direct original source review: #33 comments `6564789182`, `6565446924`, `6566039719`, `6566721857`, `6568815580`, `6572639677`, `6615467700`, `6615528094` words 1–EOF, **8 unique original GitHub records / 2015 words / 19505 UTF-8 bytes**, exact REST metadata SHA1, word/line bounds and individual historical semantic dispositions in [G1-088 receipt](../audits/issue504-review-G1-088.json). No prior overlap; cumulative **7919 file lines / 60754 file words plus 459 unique GitHub source objects / 133224 source words**. Full GitHub inventory and delegated #267 V2 still unfinished.
+
+Historic reconciliations: Beanstock village and selected Origin/method fixes PR341/343; PR346 educational synthetic source boundary; PR348/349 station-vs-producer distinction; PR370 Token Dark selected roast regression all MERGED. Prior Release14 source-isolation outside approved 17 IDs remains explicitly tracked OPEN in **#356**; PR357 corrected queue records, not original publication history. Old #33 automation setup and inline run do not prove current schedule. La Terza Girja founder-history and Leap Decaf Medium are unproven candidate discrepancies that remain under #33 current-source ownership. Frozen603 protected SKIPPED != PASS; selected page tests not universal nor real hosted Auth. **No new confirmed current #504-owned defect, verified safe deletion, policy decision or owner alert.**
+
+Only receipt/append-only ledger/scoped journal change. Zero #267 code line semantic credit; no runtime/app/queue modification. Node22/browser/mobile/offline/SQL/Auth/original603 NOT_RUN for docs-only work; CI must be checked at PR head and merged exact source. No publication, backup, history, main/production movement, provider/member/Auth/SQL/Edge, forced Git or visibility changes.
+
+**Exact next original unreviewed:** [#33 comment `6616598093`](https://github.com/Schulzet3/The-Dial-In-Collective/issues/33#issuecomment-6616598093), word 1. **OPEN / IN_PROGRESS.**
