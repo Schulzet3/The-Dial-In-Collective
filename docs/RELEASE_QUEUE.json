@@ -11,22 +11,32 @@
       "id": "DIC-Q-455-prefill-measured-history-integrity",
       "issue": 455,
       "title": "Exclude invalid imported dose and out-of-current-range grind from Log Shot prefill",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "2c682733aae06fdb0ac2fe818ee0fe3c941898a3",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
         "R082 source repro: prefill previously reused the latest same-basket dose even when imported nonfinite/nonpositive/outside allowed dose bounds, and reused current-calibration grind even when recorded outside grinder espresso range; originals preserved. Synthetic counterexamples only.",
         "Only eligible finite measured dose within existing CONFIG.bounds.doseG and grind inside active espresso calibration bounds prefill next shot; valid older measurements/endpoints remain, no history rewrite, rating/style/feed or Locked-policy change.",
-        "Six focused isolated real-module synthetic test groups at tests/issue455-prefill-measurement-integrity.test.mjs; tests/CI unexecuted when authored. Original frozen603 not counted."
+        "Six focused isolated real-module synthetic test groups at tests/issue455-prefill-measurement-integrity.test.mjs; tests/CI unexecuted when authored. Original frozen603 not counted.",
+        "Exact PR #1152 head 3e41ff48e8dc1a1ca23726e472eafe448dd3c660 validated Node22/lint/build run42339751197: 2,809 PASS/0 FAIL/6 intentional SKIP, six R082 focused tests included. Compiled mobile/390px/browser/offline/a11y/cloud42339751220, isolated SQL/JWT42339751309, source security42339751212 and approval42339751429 SUCCESS. frozen60342339751179 SKIPPED, not PASS.",
+        "Nonforce squash merged code PR1152 as 2c682733aae06fdb0ac2fe818ee0fe3c941898a3. Exact engine/test blobs bda74966e13e8bf810c5ddc5d081390350365248 / 6f3587417cbb2056e0d66f70d934e164f9e00f88 identical to passing head. Merged Node22/lint/build42339916254: 2,809/0/6; browser/mobile/offline/a11y42339916222 and governance42339916279 SUCCESS, overall shared cloud/compiled run42339916222 completed SUCCESS. No live-user or empirical espresso assessment."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Await exact PR-head and merged-source CI, nonforce integration and docs reconciliation; not READY."
+      "ci_runs": [
+        42339751179,
+        42339751197,
+        42339751220,
+        42339751212,
+        42339751309,
+        42339751429,
+        42339916254,
+        42339916222,
+        42339916279
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Development only, no release permission. Preserve all five ratings, manual record, notes, latest valid input, style/feed/calibration and offline source. R455-082 SAFE deterministic log-input bug correction."
+      "notes": "R455-082 VERIFIED development READY; NOT DEPLOYED. Invalid archived doses and out-of-current-range grinder measurements cannot corrupt new Log Shot prefill; eligible prior inputs/0 and 5 endpoints retained. No history or Locked changes, no release authority."
     },
     {
       "id": "DIC-Q-455-cross-style-measured-ratio-integrity",
