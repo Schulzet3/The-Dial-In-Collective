@@ -1464,8 +1464,12 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   const namedEstateFarm=farmEvidenceByFields.get(fields)||roaster_details.farm||'';
   const namedEstateFarmMatches=directSelected.named_estate_producer===true&&
    namedEstateFarm&&keyOf(namedEstateFarm)===keyOf(directSelected.named_estate_farm||'');
+  // A selected named current grower may replace only the separate Farm fallback.
+  const namedCurrentFarmGrower=directSelected.named_current_cultivator_producer===true&&
+   !!namedEstateFarm&&producerEvidenceByFields.get(fields)==='farm';
   if(directSelected.producer&&!conflicts.has('producer')&&
-     (!fields.producer||(producerEvidenceByFields.get(fields)==='farm'&&namedEstateFarmMatches))){
+     (!fields.producer||(producerEvidenceByFields.get(fields)==='farm'&&
+        (namedEstateFarmMatches||namedCurrentFarmGrower)))){
    addField(fields,'Producer',directSelected.producer);narrativeProducerByFields.add(fields);
   }
   if(directSelected.roast_level&&!fields.roast_level&&!conflicts.has('roast_level'))
@@ -1760,7 +1764,8 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  });
  // Normalize duplicated selected HTML reviewer roles after all product sources
  // have merged; source labels/values remain literal and canonical unaffected.
- reconcileSelectedCoffeeReviewActorRoles(source_facts,{source_url});
+ reconcileSelectedCoffeeReviewActorRoles(source_facts,{source_url,
+  selected_producer:fields.producer,selected_farm:roaster_details.farm});
  if(inlineProductRoast&&source_facts.length<384)source_facts.push({
   field:'roast_level',label:'Roast',value:inlineProductRoast.value,
   source_url,source_type:'product_json',
