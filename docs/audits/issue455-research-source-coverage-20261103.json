@@ -2420,6 +2420,30 @@
       "owner_approval": false,
       "test_receipt": "PR head 42407686373 2984 PASS/0 FAIL/6 SKIP; merged 42407879552 attempt2 after unrelated parser timeout, 2984 PASS/0 FAIL/6 SKIP; UX/offline, SQL/security and governance checks in scope; original603 skipped.",
       "limitations": "Library PDF SHA a068e5e3ae4ab30dda58e7f0f9e24bca16bd570fb67061c3ca4b00cfd28ac28b distinct from archive member a4db4f38...; original S019 PDF not retrieved; unrecorded legacy contexts keep prior fallback; not a field taste validation or physical espresso measurement."
+    },
+    {
+      "id": "R455-EV-APP-067-A",
+      "source": "Original live site/lib/engine.js blob ac80d5dae00efe101c1bd494956a19690c93e254 (prefill lines501-512); Master Specification §14.7 actual temperature prefill priority; corrected engine blob f255d217cac4d909aa4ea6fb921e5e6e9da5d23b; tests/issue455-prefill-temperature-measured-history.test.mjs blob 19aa7017a0fe384d29cad43ab50f798177884f33",
+      "claim": "A newer imported same-coffee/setup archived row with temperature 70 C but unloggable yield 230g (dose18g/time22s) was previously preferred over an older valid measured 93 C as actual temperature prefill. Existing measuredRecipeShots physical Log Shot bounds 5-40g dose, 5-200g yield and 1-180s time now qualify prior-temperature evidence without altering history, notes, five ratings, actual style precedence or temperature tracking. Direct synthetic real-module negative/positive tests and exact source-bound CI verify code behavior; no empirical member or coffee-quality claim.",
+      "grade": "LOCKED_SPEC_AND_ACTUAL_CODE_SYNTHETIC_REPRODUCTION_PLUS_EXACT_PR_HEAD_AND_MERGED_SOURCE_CI; NO_PRIMARY_EXPERIMENTAL_ESPRESSO_OR_HOSTED_MEMBER_VALIDATION",
+      "result": "SAFE_EXISTING_MEASURED_ENTRY_ELIGIBILITY_APPLIED_TO_ARCHIVED_TEMPERATURE_PREFILL",
+      "original_source_sha": "36c4d3f5f7037254b585171d427e6fdd8250977e",
+      "merged_source_sha": "f76b3c383980f70db136bfd6690bee78dbf7dc27",
+      "code_pr": 1285,
+      "ci_runs": [
+        42412374024,
+        42412374028,
+        42412374121,
+        42412374122,
+        42412374018,
+        42412592850,
+        42412592942,
+        42412592875
+      ],
+      "owner_approval_required": false,
+      "production_deployed": false,
+      "original603": "SKIPPED_NOT_PASS",
+      "original_s019": "INACCESSIBLE_NOT_REVIEWED"
     }
   ],
   "policy_decisions_pending": [],
@@ -2448,43 +2472,44 @@
     "R455-094: local Make Current physically invalid archived favorite eligibility corrected, code PR1241 nonforce merged a622e9027b640fd7049c3a6b5b5cabd2bc68f150, exact PR-head and merged CI PASS 2941/0/6 with original603 SKIPPED; docs-only READY reconciliation in progress. Note hosted Cloud server MAKE_CURRENT uses existing public.shots SQL CHECK guard, not affected by local code change; no policy or original S019 certification."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-097",
-    "base_development_sha": "30f040f62772ab4f5d4745f0b8ebc83af16561bc",
-    "merged_code_sha": "028e2bd2db3e6cbc5931a95b82d9217cab38c439",
-    "verified_integrated_source_sha": "028e2bd2db3e6cbc5931a95b82d9217cab38c439",
+    "id": "R455-098",
+    "base_development_sha": "36c4d3f5f7037254b585171d427e6fdd8250977e",
+    "merged_code_sha": "f76b3c383980f70db136bfd6690bee78dbf7dc27",
+    "verified_integrated_source_sha": "f76b3c383980f70db136bfd6690bee78dbf7dc27",
     "source_ids": [
-      "PDF-SLOW-FEED-LIBRARY-20261101",
-      "LAB-KAFFEEMACHER-2025-SLOWFEED"
+      "docs/MASTER_SPECIFICATION.md",
+      "site/lib/engine.js",
+      "tests/issue455-prefill-temperature-measured-history.test.mjs"
     ],
     "claim_ids": [
-      "R455-EV-APP-066-A"
+      "R455-EV-APP-067-A"
     ],
     "number_of_curated_sources": 58,
-    "total_evidence_checks": 125,
-    "number_of_proposals": 59,
-    "review_type": "DIRECT_ISSUE455_OUTLIER_CROSS_FEED_BASKET_CALIBRATION_CONTEXT_BOUNDARY",
+    "total_evidence_checks": 126,
+    "number_of_proposals": 60,
+    "review_type": "DIRECT_SHOT_LOG_ACTUAL_TEMPERATURE_PREFILL_PHYSICAL_EVIDENCE_ELIGIBILITY",
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
-    "code_or_policy_changed": "SAFE_EXISTING_LOCKED_OUTLIER_COMPARABILITY_ONLY_NO_NEW_NUMERIC_POLICY",
+    "code_or_policy_changed": "SAFE_EXISTING_LOCKED_ENTRY_BOUNDS_NO_NEW_ESPRESSO_POLICY",
     "ci_runs": [
-      42407686373,
-      42407686437,
-      42407686271,
-      42407686268,
-      42407686275,
-      42407879552,
-      42407879577,
-      42407879576
+      42412374024,
+      42412374028,
+      42412374121,
+      42412374122,
+      42412374018,
+      42412592850,
+      42412592942,
+      42412592875
     ],
     "node_tests": {
-      "pass": 2984,
+      "pass": 2990,
       "fail": 0,
       "skip": 6
     },
     "original603": "SKIPPED_NOT_PASS",
     "s019": "UNREVIEWED_SOURCE_ACCESS_NOT_RESOLVED",
-    "first_merged_node_ci": "ATTEMPT1_FAIL_UNRELATED_EXTRACTOR_PARSER_STRESS_SPAWNSYNC_ETIMEDOUT_ATTEMPT2_PASS",
-    "next_action": "Continue source-SHA-bound nonoverlapping literature/workflow review. Keep original S019 inaccessible/unknown, maintain #267 line-audit separation, no production deployment."
+    "failed_pr_head_governance": "INITIAL_42412319995_FAILED_QUEUE_NULL_SHA_CORRECTED_42412374018_PASSED",
+    "next_action": "Continue nonoverlapping source-bound Log Shot/Rate/Recommendation defect and research review; original S019 remains inaccessible, #267 line review independently incomplete; do not deploy."
   },
   "policy_decisions_resolved": [
     {
@@ -3720,6 +3745,40 @@
         42407879577,
         42407879576
       ]
+    },
+    {
+      "id": "R455-PROP-098-PREFILL-TEMP-MEASURED-HISTORY",
+      "finding": "Newer physically unloggable archived shot was treated as previous actual temperature during Log Shot prefill, masking older valid measured temperature.",
+      "evidence": [
+        "R455-EV-APP-067-A"
+      ],
+      "severity": "P2_ACTUAL_SHOT_LOG_TEMPERATURE_DATA_INTEGRITY",
+      "user_benefit": "Avoid prefilled brew temperatures from impossible imported measurements while still using actual recorded same-style or labeled other-style temperature and preserving original private history.",
+      "current_locked": "Master Specification §14.7 requires previous actual same coffee/setup/style temperature first, actual other-style labeled fallback next; optional tracking toggle. Existing entry bounds for physical dose/yield/time and temperature are unchanged.",
+      "current_app": "Prior engine blob ac80d5dae00efe101c1bd494956a19690c93e254 prefill lines503-511 screened only validRecordedTemperature; corrected merged blob f255d217cac4d909aa4ea6fb921e5e6e9da5d23b uses measuredRecipeShots(shots) before temperature filter.",
+      "proposed_change": "SAFE already implemented prefill eligibility reuse only; no history mutation, new science or manual preference interference. Custom style, Turbo, Fast-Flow, Slow Feed, privacy and Community remain unchanged.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "VERIFIED_DEVELOPMENT_READY_NOT_DEPLOYED_CODE_PR1285",
+      "test_plan": "Six synthetic direct real-module test groups with invalid dose/yield/time/null, newer-invalid older-valid, exact vs other-style priority/label, inclusive endpoints, temperature bounds, tracking disabled, history immutability; PR-head/merged Node22 2990 PASS 0 FAIL 6 SKIP; applicable mobile/offline/a11y/browser/cloud, SQL/security head and governance. Frozen603 SKIPPED, no live member or empirical cup testing.",
+      "release_queue": "DIC-Q-455-prefill-temperature-physical-history",
+      "merged_source_sha": "f76b3c383980f70db136bfd6690bee78dbf7dc27",
+      "ci_runs": [
+        42412374024,
+        42412374028,
+        42412374121,
+        42412374122,
+        42412374018,
+        42412592850,
+        42412592942,
+        42412592875
+      ]
     }
-  ]
+  ],
+  "changeScope": {
+    "application_code_changed": true,
+    "tests_executed": true,
+    "production_deployed": false,
+    "queue_changed": true,
+    "reason": "R455-098 nonforce PR1285 code merged f76b3c383980f70db136bfd6690bee78dbf7dc27 with exact Node/mobile/offline/governance success; docs-only reconciliation READY, no Locked change."
+  }
 }
