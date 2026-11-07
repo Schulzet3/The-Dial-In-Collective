@@ -270,3 +270,61 @@ test('unsupported or ambiguous processing spec must not invent decaf method',()=
   assert.equal(result.fields.decaffeination_method,undefined,value);
  }
 });
+
+// Original603 #302 exact 2026-11-07 Broad Porch selected HTML: a product's
+// explicit "Decaf Process" caption is decaffeination, never green processing.
+// Reproduced from official read-only case-302.html SHA256
+// 05a139285cac5e384403cd0fc021bcc98e54a9803cfffa9042841bc363954646.
+const broadPorch='https://shop.broadporchcoffee.com/products/decaf';
+const bpName='Decaf - Colombian Water Process';
+const bpSpec='<p><strong>Tasting Notes:</strong> Dark Chocolate · Hazelnut<br>'+
+ '<strong>Coffee Type:</strong> Single Origin Decaf<br>'+
+ '<strong>Origin:</strong> Colombia<br>'+
+ '<strong>Decaf Process:</strong> Mountain Water Process</p>';
+const bpPage=(name=bpName,body=bpSpec)=>extractPublicCoffeeFacts(
+ '<html><head><meta property="og:type" content="product"></head><body>'+
+ '<main class="product"><h1>'+name+'</h1><div class="product__description">'+body+
+ '</div></main></body></html>',{source_url:broadPorch});
+test('current chosen product Decaf Process caption restores separate Water Process method and provenance',()=>{
+ const r=bpPage(bpName,bpSpec+'<h3>Mountain Water Process Decaf</h3>'+
+ '<p>Our Colombia is decaffeinated using the Mountain Water Process, a water-based method.</p>');
+ assert.equal(r.ok,true);
+ assert.equal(r.fields.name,bpName);
+ assert.equal(r.fields.origin,'Colombia');
+ assert.equal(r.fields.decaffeination_method,'Water Process',JSON.stringify(r.fields));
+ assert.equal(r.fields.process,undefined,'Water decaffeination is not green processing');
+ assert.ok(r.source_facts?.some(f=>f.field==='decaffeination_method'&&
+  /Decaf Process: Mountain Water Process/i.test(f.value)&&!f.conflicting));
+ assert.match(coffeeUrlPreviewMarkup(r),/Water Process/);
+});
+test('Decaf Process caption rejects unspecified, regular and half-caf source identities',()=>{
+ for(const name of ['Regular Colombia','Colombian Half-Caf','Coffee Collection']){
+  assert.equal(bpPage(name).fields.decaffeination_method,undefined,name);
+ }
+ for(const value of ['Mountain water used to rinse green beans','Decaf Process not published']){
+  const r=bpPage(bpName,bpSpec.replace('Mountain Water Process',value));
+  assert.equal(r.fields.decaffeination_method,undefined,value);
+ }
+});
+test('competing current decaf captions preserve opposing source facts but withhold autofill',()=>{
+ const r=bpPage(bpName,bpSpec+
+  '<p><strong>Decaffeination Method:</strong> Sugar Cane EA Decaf</p>');
+ assert.equal(r.fields.decaffeination_method,undefined);
+ assert.ok(r.source_facts?.some(f=>f.field==='decaffeination_method'&&f.conflicting));
+});
+test('historical, FAQ, and recommended-coffee Decaf Process captions are not selected method',()=>{
+ for(const body of [
+  '<section><h2>Decaf Process Education</h2>'+bpSpec+'</section>',
+  '<section class="product-recommendations"><h2>Other coffees</h2>'+bpSpec+'</section>',
+  '<section><h2>Frequently Asked Questions</h2><p><strong>Decaf Process:</strong> Mountain Water Process</p></section>',
+  '<p>Previously the selected coffee used Mountain Water Process, now decaf method unlisted.</p>'
+ ]){
+  const r=bpPage(bpName,body);
+  assert.equal(r.fields.decaffeination_method,undefined,body);
+ }
+});
+test('distinct selected Washed green processing remains separate from exact labeled decaf treatment',()=>{
+ const r=bpPage(bpName,bpSpec+'<p><strong>Process:</strong> Washed</p>');
+ assert.equal(r.fields.decaffeination_method,'Water Process');
+ assert.equal(r.fields.process,'Washed');
+});

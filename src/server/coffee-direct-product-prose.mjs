@@ -447,10 +447,10 @@ export function selectedCurrentDecafSpecMethodEvidence(productHtml,{name,clean}=
    // literal value without a colon: <strong>Processing</strong>Washed:
    // Mountain Water Decaf. Require an actual adjacent strong label in a
    // bounded product BR segment, not a freeform prose or FAQ substring.
-   let hit=caption.text.trim().match(/^(Decaffeination(?:\s+(?:Method|Process))?|Process(?:ing)?(?:\s+Method)?)\s*[:：]\s*(.{3,180})$/iu);
+   let hit=caption.text.trim().match(/^(Decaffeination(?:\s+(?:Method|Process))?|Decaf\s+Process|Process(?:ing)?(?:\s+Method)?)\s*[:：]\s*(.{3,180})$/iu);
    if(!hit){
-    const structured=caption.html.trim().match(/^<strong\b[^>]{0,240}>\s*(Decaffeination(?:\s+(?:Method|Process))?|Process(?:ing)?(?:\s+Method)?)\s*<\/strong>\s*(.{3,250})$/iu);
-    const splitLabel=caption.splitStrong?caption.html.trim().match(/^(Decaffeination(?:\s+(?:Method|Process))?|Process(?:ing)?(?:\s+Method)?)\s*<\/strong>\s*(.{3,250})$/iu):null;
+    const structured=caption.html.trim().match(/^<strong\b[^>]{0,240}>\s*(Decaffeination(?:\s+(?:Method|Process))?|Decaf\s+Process|Process(?:ing)?(?:\s+Method)?)\s*<\/strong>\s*(.{3,250})$/iu);
+    const splitLabel=caption.splitStrong?caption.html.trim().match(/^(Decaffeination(?:\s+(?:Method|Process))?|Decaf\s+Process|Process(?:ing)?(?:\s+Method)?)\s*<\/strong>\s*(.{3,250})$/iu):null;
     const selected=structured||splitLabel;
     if(selected)hit=[selected[0],selected[1],clean(selected[2],180)];
    }

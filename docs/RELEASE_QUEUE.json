@@ -8,6 +8,29 @@
   },
   "items": [
     {
+      "id": "DIC-Q-33-original603-302-selected-decaf-process-caption",
+      "issue": 33,
+      "title": "Recognize product-scoped Decaf Process label as a decaffeination method rather than green processing",
+      "state": "TESTING",
+      "scope_paths": [
+        "src/server/coffee-direct-product-prose.mjs"
+      ],
+      "tests": [
+        "R13 official current original603 #302 H1 Decaf - Colombian Water Process; raw HTML SHA256 05a139285cac5e384403cd0fc021bcc98e54a9803cfffa9042841bc363954646, PDF? no, HTML direct. Explicit selected Decaf Process: Mountain Water Process printed twice and repeated direct same-product description.",
+        "Pre-change exact merged source 85d2c634ae1bcf564cdebd6bbf56f6b395cb8b96 guarded live workflow 42399428877 / focused job 128483787307 SUCCESS, but parsed fields omitted decaffeination_method; review source facts mislabelled process: Mountain Water. A successful fetch/parse does not prove semantic field completeness.",
+        "Positive: selected strong/BR label with chosen H1 preserves Water Process separate from green processing and provenance; negative: regular/half-caf, missing/unsupported method, FAQ/related/history, contradictory Sugar Cane EA, distinct Washed green processing.",
+        "Not READY until exact PR-head and nonforce merged source applicable CI, repeat guarded official HTTPS probe, independent raw HTML/artifact hashes and selected Add Coffee/Source Review readback. Original full603 SKIPPED not accepted."
+      ],
+      "ci_runs": [
+        42399428877,
+        42399428981
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "TESTING; literal real #302 selected Decaf Process caption omitted from current canonical method. Keep #33 OPEN and all existing READY/DEPLOYED queue states untouched. Production release not authorized.",
+      "merged_source_sha": null
+    },
+    {
       "id": "DIC-Q-33-original603-284-selected-family-farm-town",
       "issue": 33,
       "title": "Restore safely corroborated selected producing farm town for original603 #284 (without guessing region spelling)",
