@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "kind": "ORIGINAL603_212_213_218_SCOPED_OFFICIAL_SELECTED_SOURCE_WITH_213_CORRECTION",
+  "verified_at_utc": "2026-11-07",
+  "development_only": true,
+  "source_parent": "6259db45ecefa7647aa77d6479c25d1e552404a3",
+  "immutable_original603_csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "immutable_original603_csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+  "original603_coffees": 603,
+  "original603_roasters": 201,
+  "original_captures": 1197,
+  "manual_full_603_certified": false,
+  "source_oracle_scorer_modified": false,
+  "baseline": {
+    "pr": 1178,
+    "head_sha": "b883951c34b63835bac4aa48af50088d4adea5cc",
+    "nonforce_merge_sha": "6259db45ecefa7647aa77d6479c25d1e552404a3",
+    "exact_reviewed_tree_identical": true,
+    "pr_head_ci_success": [
+      42353676705,
+      42353676570,
+      42353676553,
+      42353676662
+    ],
+    "merged_approval_success": 42353810475,
+    "official_runner": {
+      "run": 42353810427,
+      "focused_job": 128347396848,
+      "artifact": 13566627469,
+      "zip_sha256": "adb28b6bad6424214f6153f58320aee551b2aa441d8d3d3b6a057bebb58896e5",
+      "json_sha256": "074e52416cc9c69eacf96a1d71b626475fb4a5c3eb4a99691124ca4abff36d1d",
+      "fetched": 3,
+      "parsed": 3,
+      "ui_rendered": 3
+    }
+  },
+  "narrow_fix": {
+    "pr": 1179,
+    "reviewed_pr_head": "88cf7c54df9d4eedd64e665d4972bd7f32035d1e",
+    "nonforce_merge_sha": "04712ffa1e6ffd9cb97695b16a301d01ed81dc1b",
+    "parent_sha": "6259db45ecefa7647aa77d6479c25d1e552404a3",
+    "exact_reviewed_tree_sha": "65c7a13448bcc910bfa3a876d7bb31692327ae57",
+    "merged_tree_identical": true,
+    "source_paths": [
+      "src/server/coffee-selected-microlot-sector-origin.mjs",
+      "src/server/coffee-page-metadata.mjs"
+    ],
+    "test_path": "tests/coffee-issue33-213-current-microlot-sector.test.mjs",
+    "head_ci_success": [
+      42354186722,
+      42354186726,
+      42354186760,
+      42354186686,
+      42354186907,
+      42354186693
+    ],
+    "original_frozen603": "SKIPPED_NOT_PASS",
+    "merged_ci_success": [
+      42354291499,
+      42354291460,
+      42354291412
+    ],
+    "merged_public_official": {
+      "run": 42354291405,
+      "executed_focused_job": true,
+      "artifact_id": 13566858085,
+      "zip_sha256": "622ac662916d92546da5f61375f4abe1e7ea1b6c170be3a65dcc33fc00522d0f",
+      "json_sha256": "a6c7ffc10656deb8ab139b1081cbd224e6a29921816ba41ff6e12ce064bc1741",
+      "source_sha": "04712ffa1e6ffd9cb97695b16a301d01ed81dc1b",
+      "fetched": 3,
+      "parsed": 3,
+      "ui_rendered": 3,
+      "manual_certified": 0
+    }
+  },
+  "cases": [
+    {
+      "number": 212,
+      "official_url": "https://mapscoffee.com/products/scarlet-macaw",
+      "current_selected_h1": "Scarlet Macaw",
+      "before_html_sha256": "81fa6502baa02f8e18eff5f8e28d1781fb38e9fc9063b60a91e383ab6151b4e2",
+      "after_html_sha256": "2fe91e2a6616538678f63b243a79e33f27ca7a57158845c2c7c21a4e7197f6e0",
+      "current_origin": "Pacavita, Honduras",
+      "source_supported": true,
+      "semantic_whole_coffee_certified": false,
+      "change": "None; current selected product literal-supported parse and actor role"
+    },
+    {
+      "number": 213,
+      "official_url": "https://mapscoffee.com/products/volcan-37",
+      "current_selected_h1": "Volcan 37",
+      "before_html_sha256": "5d2c73eb7e9bbaff571f30f432020ad74b9a4c45237c407bc6c888e99036136d",
+      "after_html_sha256": "f2dc0abea3f5e7ef25e69ffa012281f9eb9b69a33b9f96e56f5e6fb6c217f1ae",
+      "source_producer": "Juan Hernandez Aguilar",
+      "before_actual_parser_origin": "Huehuetenango, Sierra de Los Cuchumatanes, Guatemala",
+      "after_actual_parser_origin": "Q’Ail, Rio Ocho, Huehuetenango, Guatemala",
+      "source_tether": "Exact selected present micro-lot from Juan located in sector of Rio Ocho called Q’Ail",
+      "after_conflicts": [],
+      "add_coffee_ui": true,
+      "source_review_ui": true,
+      "source_supported_narrow_fix": true,
+      "semantic_whole_coffee_certified": false
+    },
+    {
+      "number": 218,
+      "official_url": "https://mbingomountaincoffee.com/products/rwanda-inzovu-supreme-natural",
+      "current_selected_h1": "RWANDA INZOVU SUPREME NATURAL",
+      "before_html_sha256": "38cc5476dc3d2f8bf7e96e9b2a2218a17a60d67825e7f68b89db97fedfc86255",
+      "after_html_sha256": "732c34f521c896361784bc68303fb48a73db096655fc4b82a3c213dc7855a73f",
+      "current_origin": "Western Rwanda, Nyamasheke District",
+      "current_process": "Natural",
+      "roast_unset": "Buyer-selected Medium or Medium-Dark; never guess",
+      "quality_score_unset": "85+ vs 94+ direct text contradiction; no canonical unqualified assertion",
+      "narrative_flavor_vs_labeled_cupping": "QUALIFIED_SOURCE_REVIEW",
+      "producer_role": "Rwanda Trading Company processing/hulling not proven producer",
+      "semantic_whole_coffee_certified": false
+    }
+  ],
+  "queue": {
+    "id": "DIC-Q-33-original603-213-selected-microlot-sector",
+    "status": "READY",
+    "publication_status": "NOT_DEPLOYED"
+  },
+  "remaining": "Individual original603 selected-source semantic certification incomplete. Whole frozen603 not run for narrow feature; separate #267 V2/#96 scopes remain open.",
+  "production_operations": 0,
+  "release_published": false,
+  "netlify_changed": false,
+  "provider_member_auth_sql_edge_writes": false
+}
