@@ -9,7 +9,7 @@ function methodsIn(raw){
  const v=fold(raw);if(!v||exclusions.test(v))return [];
  const results=[];
  if(/\b(?:swiss[ -]?water|mountain[ -]?water|water[ -]?(?:based\s+)?(?:decaf(?:feination|feinated)?|process(?:ed|ing)?(?:\s+decaf)?|method(?:\s+decaf)?)|h2o\s+decaf)\b/.test(v))results.push('Water Process');
- if(/\b(?:sugar[ -]?cane|sugar[ -]?process|ethyl[ -]?acetate|e\.?a\.?\s*(?:decaf(?:feination|feinated)?|process(?:ed|ing)?(?:\s+decaf)?|method)|natural[ -]?ea)\b/.test(v))results.push('Sugar Process');
+ if(/\b(?:sugar[ -]?cane|sugar[ -]?process|ethyl[ -]?acetate|e\.?a\.?\s*(?:decaf(?:feination|feinated)?|process(?:ed)?(?:\s+decaf)?|method)|natural[ -]?ea)\b/.test(v))results.push('Sugar Process');
  if(/\b(?:co\s*[- ]?2|carbon[ -]?dioxide|supercritical\s+co\s*2|liquid\s+co\s*2)\b/.test(v))results.push('Carbon Dioxide (CO2)');
  return results;
 }
