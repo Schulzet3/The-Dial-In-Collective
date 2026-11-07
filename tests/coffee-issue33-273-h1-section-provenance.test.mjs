@@ -26,7 +26,7 @@ test('#273 a prior testimonial H2 does not attribute later current product facts
  assert.equal(actual.ok,true);
  assert.equal(actual.fields.name,'Guatemala | Quetzal');
  assert.equal(actual.fields.process,'Washed');
- const review=coffeeSourceReviewSnapshot(actual).published_source_information;
+ const review=coffeeSourceReviewSnapshot({...actual,source_url:url}).published_source_information;
  assert.ok(review.some(x=>x.label==='Region'&&x.value==='Huehuetenango, Guatemala'));
  assert.ok(review.filter(x=>x.label==='Region').every(x=>!/Love for our coffee from customers/.test(x.section||'')));
 });
