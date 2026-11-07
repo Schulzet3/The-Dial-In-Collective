@@ -27,8 +27,11 @@ export function conflictingCurrentSelectedDecafSource({name='',origin='',blocks=
   const value=String(b.text||'');
   for(const m of value.matchAll(claim)){
    const before=value.slice(Math.max(0,m.index-140),m.index);
-   if(past.test(before)||(!fold(before).includes(fold(name))&&
-      !/\b(?:this|our)\s+(?:decaf(?:feinated)?\s+)?coffee\b/iu.test(before)))continue;
+   // Only negation/history in this SAME clause can veto selected country;
+   // unrelated earlier sensory prose (e.g. "not bitter.") cannot.
+   const clause=before.split(/(?<=[.!?])\s+/u).at(-1)||'';
+   if(past.test(clause)||(!fold(clause).includes(fold(name))&&
+      !/\b(?:this|our)\s+(?:decaf(?:feinated)?\s+)?coffee\b/iu.test(clause)))continue;
    all.push({country:countries[m[1].toLowerCase()],quote:m[0]});
   }
  }

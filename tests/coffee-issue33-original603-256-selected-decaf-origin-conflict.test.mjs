@@ -62,3 +62,16 @@ test('without a selected country contradiction, current Origin stays eligible',(
  assert.equal(r.ok,true,JSON.stringify(r));
  assert.ok(!(r.conflicts??[]).includes('origin'),JSON.stringify(r));
 });
+test('unrelated earlier tasting negation does not suppress a direct selected-country conflict',()=>{
+ const body='Coast Decaf is not bitter. Coast Decaf is crafted from Mexican coffees decaffeinated with a natural sugar process.';
+ const direct=conflictingCurrentSelectedDecafSource({name,origin:'African Blend',blocks:blocks({body})});
+ assert.equal(direct?.prose_country,'Mexico');
+ const parsed=make(body);
+ assert.equal(parsed.ok,true,JSON.stringify(parsed));
+ assert.equal(parsed.fields.origin,undefined,JSON.stringify(parsed.fields));
+ assert.ok(parsed.conflicts.includes('origin'),JSON.stringify(parsed));
+ assert.ok(parsed.source_facts.some(x=>x.field==='origin'&&x.value==='Mexico'&&x.conflicting));
+ // A negated claim IN THE SAME sentence still must not veto the chosen Origin.
+ const negated='Coast Decaf was not crafted from Mexican coffees decaffeinated with a natural sugar process.';
+ assert.equal(conflictingCurrentSelectedDecafSource({name,origin:'African Blend',blocks:blocks({body:negated})}),null);
+});
