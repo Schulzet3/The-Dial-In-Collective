@@ -427,7 +427,7 @@ export function selectedCurrentDecafSpecMethodEvidence(productHtml,{name,clean}=
     headings.some((heading,i)=>i>0&&heading!==selected&&!editorial.test(heading))||
     /^(?:all|shop|catalog|collection)\s+(?:decaf|coffee)/iu.test(String(name)))return empty;
  // FAQ and educational examples are not actual selected-product specs.
- const faqStart=blocks.find(b=>b.tag==='h1'&&fold(b.text)==='frequently asked questions')?.start??Infinity;
+ const faqStart=blocks.find(b=>/^h[1-6]$/.test(b.tag)&&fold(b.text)==='frequently asked questions')?.start??Infinity;
  const seen=new Map();
  for(const block of blocks){
   if(block.start>=faqStart||block.educational||!['li','p','div','span'].includes(block.tag)||
@@ -456,6 +456,12 @@ export function selectedCurrentDecafSpecMethodEvidence(productHtml,{name,clean}=
    }
    if(!hit)continue;
    const value=hit[2].trim();
+   // "Decaf Process" is itself an affirmative decaffeination label, but
+   // its VALUE must still be a complete named treatment, not generic water
+   // rinsing/washing or equipment use. A vague label never licenses a guess.
+   // Other existing Process/Decaffeination captions retain their own guards.
+   if(/^Decaf\s+Process$/iu.test(hit[1])&&
+      !/^(?:(?:swiss|mountain)[ -]?water|water[ -]?process|sugar(?:[ -]?cane|[ -]?process)|ethyl[ -]?acetate|co[ -]?2|(?:supercritical[ -]?)?carbon[ -]?dioxide)(?:\s+\(co\s*2\))?(?:\s+(?:ea|decaf(?:feination)?|method|process)){0,2}\.?$/iu.test(value))continue;
    // Process: Washed is green processing; Process: Washed + EA Sugarcane
    // Decaffeination explicitly supplies an independent decaf treatment.
    if(!/^decaffeination/i.test(hit[1])&&
