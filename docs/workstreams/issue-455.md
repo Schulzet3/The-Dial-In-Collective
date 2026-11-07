@@ -1,3 +1,15 @@
+## November 7, 2026 UTC — R455-097 source-bound outlier evidence-context fix proposal [skip netlify]
+
+**Parent development commit:** `30f040f62772ab4f5d4745f0b8ebc83af16561bc`. Source before change: `site/lib/engine.js` blob `777303fea493dcb85f3aac6a5ac1e76093502fe3`. Active authority: owner Option B Issue #455; Master Specification §§16.2, 19.3, 26.4 and Locked Slow Feed mode and mandatory outlier review. Prior original research/S019 source status is unchanged; previously reviewed Library 10-page slow-feed variant was re-accessed and its publisher evidence rechecked; this does not justify a universal grind adjustment.
+
+**Deterministic source risk:** The local `isExtreme` four-success prior uses same coffee, style and setup version but mixes explicitly different feed modes, baskets and grinder calibrations, so four otherwise legitimate standard-fed greens can require a spurious mandatory confirmation for a slow-fed shot. The separate engine recommendation/prefill filters those contexts. Source-derived synthetic case only; not an observed member incident.
+
+**SAME-COMMIT scoped change:** `site/lib/engine.js` rejects *recorded known mismatches* in feedMode, basketId and calibrationId before counting an archived shot toward the four-shot outlier quorum, preserving missing-field legacy handling. `tests/issue455-outlier-feed-context.test.mjs` covers five negative/positive direct-module groups including original time/ratio boundaries, mixed fourth, real saveShot and original private history immutability. `docs/RELEASE_QUEUE.json` adds `DIC-Q-455-outlier-feed-basket-calibration-context` in TESTING. This journal is in the same code/test commit. Existing 25 s/1.25 ratio thresholds and four-shot requirement, all five taste inputs, historical records, normal/slow feed, original privacy/Community gates stay unchanged. No synthetic user or production write.
+
+**CI and integration as of this commit:** NOT EXECUTED. Do not mark tests PASS, READY, merged or deployed. On this exact PR head, run risk-proportionate Node22, UX/mobile/offline/accessibility, isolated SQL/security/governance as applicable; fix failures without weakening assertions, reconcile concurrent writes, nonforce PR merge only on PASS; independently read merged SHA, tests, issue/checkpoint and queue before READY. Original603 exhaustive replay, physical espresso outcomes and live member Auth NOT TESTED. S019 PDF still unavailable. #267 line-credit zero. If check cannot finish this run, preserve these exact pending tasks as checkpoint and continue on the existing authorized automation.
+
+---
+
 # Issue #455 — Espresso research → Log Shot → Rate → Recommendations
 
 ## November 7, 2026 UTC — R455-096 final nonforce code merge and verified reconciliation [skip netlify]

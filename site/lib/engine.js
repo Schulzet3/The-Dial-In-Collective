@@ -659,7 +659,13 @@ export function isExtreme(s,shot) {
  // Keep the original archived row and all five original ratings untouched.
  const prior=measuredRecipeShots(s.shots).filter(x=>!x.hidden&&x.dialedIn===true&&isDialed(x.tasteScales)&&
   x.coffeeId===shot.coffeeId&&x.style===shot.style&&
-  x.setupVersionId===shot.setupVersionId&&x.id!==shot.id);
+  x.setupVersionId===shot.setupVersionId&&x.id!==shot.id&&
+  // Do not let *explicitly different* feed, basket, or grind-calibration
+  // results create a four-shot outlier baseline for this recipe context.
+  // Unrecorded legacy fields retain their existing fallback behavior;
+  // this does not recategorize or mutate any archived shot.
+  ['feedMode','basketId','calibrationId'].every(key=>
+   x[key]==null||shot[key]==null||x[key]===shot[key]));
  if(prior.length<4)return false;
  return Math.abs(shot.yieldG/shot.doseG-quantile(prior.map(x=>x.yieldG/x.doseG),.5))>1.25||Math.abs(shot.timeS-quantile(prior.map(x=>x.timeS),.5))>25;
 }
