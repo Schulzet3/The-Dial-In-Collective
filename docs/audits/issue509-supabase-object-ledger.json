@@ -7199,5 +7199,42 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "pg_amproc 1/710; changed-provider drift and #96 hosted real-session acceptance"
+  },
+  "provider_amproc_run61": {
+    "status": "150_OF_710_COMPLETE_VISIBLE_SUPPORT_MAPPING_TUPLES_DIRECT_INSPECTED_COMPILED_AND_HOSTED_UNVERIFIED",
+    "receipt_path": "docs/audits/issue509-provider-amproc-001-150-20261107-run61.json",
+    "project_ref": "azviqqejypsefzilgonr",
+    "provider_at": "2026-11-07 08:49:38.115537+00",
+    "development_parent_sha": "71e20cf5abfd928c3e6eae1dfc29e24bfcc0dde8",
+    "main_sha": "bd627d40f7e65321323512b303d2e3f75709af39",
+    "release_sha": "2ec10324fcaa4b60d1e48240b44b77b141b9ba54",
+    "reviewed_new": 150,
+    "total": 710,
+    "remaining": 560,
+    "raw_chars": 19271,
+    "access_methods": {
+      "gin": 9,
+      "gist": 22,
+      "hash": 18,
+      "btree": 16,
+      "brin": 80,
+      "spgist": 5
+    },
+    "first_md5": "34686f0f773319021c47d6e4bed83099",
+    "last_md5": "e979658effa9c32ea43a1b9020035c76",
+    "validation": {
+      "raw_field_mismatch": 0,
+      "duplicate_slice_identity": 0,
+      "unexpected_security_flags": 0,
+      "global_dangling_implementations": 0,
+      "global_duplicate_mapping_keys": 0,
+      "global_nonimmutable": 5,
+      "global_nonimmutable_classification": "timezone-dependent cross-type datetime comparisons; not confirmed defect"
+    },
+    "verified_new_defects": 0,
+    "source_fixes": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "pg_amproc ordinal 151/710; source fingerprint and provider drift, hosted #96 Auth/JWT/API"
   }
 }
