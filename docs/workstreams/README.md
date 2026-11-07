@@ -12,7 +12,7 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 - [Issue #96 source-transfer and receipt evidence](ops-issue96-receipt.md)
 - [Selected-product extraction completeness: Issue #33](issue-33.md)
 - [Issue #33 November 2 targeted official-source probe and adversarial tests](issue-33-tenth3.md)
-- [Issue #33 Nov 7 original603 #189/#192/#197 guarded exact selected official pages](ops-issue33-seventyeighth3.md) — public-only source capture planned; parser/HTML hashes pending
+- [Issue #33 Nov 7 original603 #189/#192/#197 independently hashed selected official sources and #197 Sugar Process fix](ops-issue33-seventyeighth3.md) — narrow verified development READY; full603 certification OPEN
 - [Issue #33 Nov 7 original603 #177/#180/#187 independently verified official selected source](ops-issue33-seventyseventh3.md) — raw HTML + actual extractor/Add Coffee verified; #187 same-selected roast contradiction correctly withheld
 - [Issue #33 Nov 7 original603 #166/#172/#175 selected official source review](ops-issue33-seventysixth3.md) — exact merged source/Add Coffee and 3 raw HTML hashes verified; semantic role qualifications retained
 - [Issue #33 Nov 7 original603 #153/#156/#164 selected official source review](ops-issue33-seventyfifth3.md) — independent raw HTML hashes + actual extractor/Add Coffee verified; semantic qualifications retained, no generic defect
