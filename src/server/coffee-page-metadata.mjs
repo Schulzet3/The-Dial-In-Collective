@@ -35,6 +35,7 @@ import {selectedFarmStoryRegionMismatch} from './coffee-title-region-evidence.mj
 import {selectedCurrentFarmGrowingLocality} from './coffee-selected-farm-growing-locality.mjs';
 import {selectedCurrentFarmCountryLocality} from './coffee-selected-farm-country-locality.mjs';
 import {selectedCurrentFarmVolcanoRegion} from './coffee-selected-farm-volcano-region.mjs';
+import {selectedCountryFirstCurrentRegion} from './coffee-country-first-current-region.mjs';
 import {selectedProcessingSiteNotFarmOrigin} from './coffee-processing-site-origin-guard.mjs';
 import {selectedCurrentColombianDepartmentOrigin} from './coffee-selected-department-origin.mjs';
 import {selectedCurrentNamedMicroLotSector} from './coffee-selected-microlot-sector-origin.mjs';
@@ -2205,6 +2206,24 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     field:'origin',label:'Exact selected named-farm growing region',
     value:region.quote.slice(0,430),source_url,source_type:'html',
     section:'Selected current farm-and-producer narrative'
+   });
+  }
+ }
+
+ // A current exact country-first H1 plus its own present single-origin
+ // source sentence may corroborate a known geographic region. This never
+ // uses URL/SEO, a cultivar/grade, a recycled SKU, or historical commentary.
+ if(fields.origin&&!conflicts.has('origin')){
+  const currentRegion=selectedCountryFirstCurrentRegion({
+   name:fields.name,origin:fields.origin,blocks:productCoffeeProse(canonicalProduct,clean)
+  });
+  if(currentRegion){
+   rememberCoffeeReviewCandidate(fields,'origin',fields.origin,'Broader current selected country');
+   fields.origin=currentRegion.value;
+   if(source_facts.length<384)source_facts.push({
+    field:'origin',label:'Current selected single-origin named growing region',
+    value:currentRegion.quote.slice(0,500),
+    source_url,source_type:'html',section:'Exact selected current product description'
    });
   }
  }
