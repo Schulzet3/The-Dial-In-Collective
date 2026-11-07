@@ -51,12 +51,12 @@ test('shot history is compact and equipment context only appears at bottom when 
  assert.doesNotMatch(shotCard(sh,{expanded:false,activeVersionId:'version'}),/Test Home|Basket Dose/);
  assert.ok(html.indexOf('Slow Feed')>html.indexOf('class="radar"'));
  assert.ok(html.indexOf('data-action="edit"')<html.indexOf('data-action="make-current"'));
+  assert.match(html,/class="shot-record-context"/);
  assert.ok(html.indexOf('data-action="edit"')>html.indexOf('class="shot-record-context"'));
  assert.doesNotMatch(shotCard(sh,{expanded:false,activeVersionId:'version'}),/data-action="edit"/);
  assert.match(html,/class="shot-actions"/);
  assert.match(html,/class="primary compact history-edit" data-action="edit"/);
  assert.match(html,/class="ghost compact history-make-current" data-action="make-current"/);
- assert.match(html,/class="shot-actions"/);
  assert.doesNotMatch(shotCard(sh,{expanded:true,activeVersionId:'other'}),/data-action="make-current"/);
  assert.equal(feedLabel(null),'Feed Not Recorded');
 });
