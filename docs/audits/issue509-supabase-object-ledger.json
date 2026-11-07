@@ -2997,6 +2997,23 @@
       "confirmed_new_defects": 0,
       "provider_writes": false,
       "next": "Unreviewed pg_catalog system-table definition families; #96 signed-in Auth/JWT/API remains unverified"
+    },
+    {
+      "event": "2026-11-07_run70_pg_catalog_columns_598_constraints_110",
+      "provider_at": "2026-11-07 17:46:13.441671+00",
+      "development_source_parent_sha": "b568337c2d4dc827404d7b57d5277b96d87a0f2a",
+      "reviewed_new": 708,
+      "receipt_paths": [
+        "docs/audits/issue509-provider-pg-catalog-columns-001-150-20261107-run70.json",
+        "docs/audits/issue509-provider-pg-catalog-columns-151-300-20261107-run70.json",
+        "docs/audits/issue509-provider-pg-catalog-columns-301-450-20261107-run70.json",
+        "docs/audits/issue509-provider-pg-catalog-columns-451-598-20261107-run70.json",
+        "docs/audits/issue509-provider-pg-catalog-constraints-001-110-20261107-run70.json"
+      ],
+      "confirmed_defects": 0,
+      "production_writes": false,
+      "baseline_complete": false,
+      "next": "Unreviewed catalog family and changed/new provider drift; compiled C and hosted Auth/JWT/API UNVERIFIED"
     }
   ],
   "state": "PG_OPCLASS_179_PG_OPFAMILY_148_PG_AM_7_VISIBLE_DECLARATIONS_COMPLETE; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -7755,5 +7772,48 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "Next unreviewed pg_catalog system-table column/default/constraint definition family and current live drift; hosted Auth/JWT/API #96 and native compiled code unverified"
+  },
+  "provider_pg_catalog_columns_run70": {
+    "status": "598_OF_598_VISIBLE_PG_CATALOG_COLUMN_DECLARATIONS_FIELD_REVIEW_COMPLETE; NATIVE_UNVERIFIED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "provider_at": "2026-11-07 17:46:13.441671+00",
+    "development_parent_sha": "b568337c2d4dc827404d7b57d5277b96d87a0f2a",
+    "main_sha": "bd627d40f7e65321323512b303d2e3f75709af39",
+    "publication_sha": "2ec10324fcaa4b60d1e48240b44b77b141b9ba54",
+    "reviewed_new": 598,
+    "total": 598,
+    "tables": 64,
+    "not_null": 509,
+    "nullable": 89,
+    "column_acl_present": 17,
+    "default_expressions": 0,
+    "generated_columns": 0,
+    "identity_columns": 0,
+    "consistency_failures": [],
+    "receipt_paths": [
+      "docs/audits/issue509-provider-pg-catalog-columns-001-150-20261107-run70.json",
+      "docs/audits/issue509-provider-pg-catalog-columns-151-300-20261107-run70.json",
+      "docs/audits/issue509-provider-pg-catalog-columns-301-450-20261107-run70.json",
+      "docs/audits/issue509-provider-pg-catalog-columns-451-598-20261107-run70.json"
+    ],
+    "source_fix_count": 0,
+    "baseline_complete": false
+  },
+  "provider_pg_catalog_constraints_run70": {
+    "status": "110_OF_110_PG_CATALOG_TABLE_CONSTRAINT_FULL_VISIBLE_DDL_REVIEW_COMPLETE; NATIVE_UNVERIFIED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "provider_at": "2026-11-07 17:46:13.441671+00",
+    "development_parent_sha": "b568337c2d4dc827404d7b57d5277b96d87a0f2a",
+    "reviewed_new": 110,
+    "total": 110,
+    "primary_keys": 62,
+    "unique_constraints": 48,
+    "invalid_or_unmatched_bindings": [],
+    "receipt_paths": [
+      "docs/audits/issue509-provider-pg-catalog-constraints-001-110-20261107-run70.json"
+    ],
+    "source_fix_count": 0,
+    "baseline_complete": false,
+    "next": "Next previously unreviewed provider catalog object family and changed/new drift; native implementation and hosted Auth/JWT/API unverified"
   }
 }
