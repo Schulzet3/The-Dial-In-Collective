@@ -74,7 +74,7 @@ for(const target of targets){
    r.html_sha256=sha(res.html);r.html_bytes=Buffer.byteLength(res.html,'utf8');
    const selected=productMarkup(res.html);
    r.selected_h1=selectedProductHeadings(selected);
-   r.selected_h1_present_in_scoped_html=/<h1\\b/i.test(selected);
+   r.selected_h1_present_in_scoped_html=/<h1\b/i.test(selected);
    // Diagnostic provenance only: an old SEO page title may name a DIFFERENT
    // coffee even while the current selected product H1 and body are correct.
    // Never use this as a canonical identity or field assertion.
