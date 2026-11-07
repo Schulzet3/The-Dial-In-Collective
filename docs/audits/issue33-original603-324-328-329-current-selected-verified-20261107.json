@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "source_kind": "ISSUE33_R17_MANUALLY_INSPECTED_EXACT_CURRENT_OFFICIAL_SELECTED_PRODUCTS",
+  "date_utc": "2026-11-07",
+  "recovery_base_sha": "fbca2488ff0aa4cabc1c9baa1dc5add0c152a0e5",
+  "exact_merged_source_sha": "d1b4576a69c6a7d2d1d44fd55462480507aaeff8",
+  "code_pr": 1287,
+  "verified_ci_head_sha": "c5196fcdfe836b923817777fd9c654e13d0c8ada",
+  "pr_head_checks": {
+    "node_lint_build": "42414053179 SUCCESS",
+    "cloud_mobile": "42414053216 SUCCESS",
+    "isolated_sql": "42414053102 SUCCESS",
+    "approval": "42414053158 SUCCESS"
+  },
+  "merged_checks": {
+    "approval": "42414236042 SUCCESS",
+    "focused_official": "42414236036 EXECUTED SUCCESS",
+    "other_jobs": "SKIPPED_NOT_PASS"
+  },
+  "original_corpus": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "modified": false
+  },
+  "actual_official_probe": {
+    "run": 42414236036,
+    "job": 128528741454,
+    "artifact_id": 13591111397,
+    "artifact_zip_bytes": 187445,
+    "artifact_zip_sha256": "a8aae743f47599ca77957b7a0c2840ac9aa1af83f48b4f756880a30624b72056",
+    "provider_digest_matches": true,
+    "artifact_json_sha256": "0f21fc7a13145d5ea168aea0e39ff5b327522dc6ca3777a8f1ef9fefaa2e0720",
+    "cases_attempted": 3,
+    "fetched": 3,
+    "parsed": 3,
+    "add_coffee_ui_rendered": 3,
+    "source_review_rendered": 3,
+    "manual_certified_by_runner": 0,
+    "original_corpus_modified": false
+  },
+  "cases": [
+    {
+      "number": 324,
+      "coffee": "Rwanda Select Reserve",
+      "url": "https://shop.westrockcoffee.com/products/rwanda-select-reserve",
+      "raw_html_bytes": 121294,
+      "raw_html_sha256": "bdca624e62254cbd7aeb12191fa22c1629112505ac9e4efae7f1c266d799a4f8",
+      "selected_h1": [
+        "Rwanda Select Reserve"
+      ],
+      "exact_identity_match": true,
+      "parser_fields": {
+        "name": "Rwanda Select Reserve",
+        "roaster": "S&D Coffee & Tea",
+        "origin": "Rwanda"
+      },
+      "source_review": "Current exact selected H1, SKU FG04080007, size 80ct. Published text says coffee flavors unique to Rwandan soil, consistent with Rwanda only. Westrock corporate founding location is not a product farm, region or producer. No named cup flavors, farm, processing or roast certified.",
+      "remaining_qualification": "Other source fields not published, remain blank."
+    },
+    {
+      "number": 328,
+      "coffee": "Ethiopia Yirgacheffe",
+      "url": "https://singlespeedcoffeeroasters.com/products/copy-of-espresso-blend",
+      "raw_html_bytes": 416111,
+      "raw_html_sha256": "b745611f78488a48f3ce8ea093d6f8c1b2b8f409529e7761c7643fed82f6505a",
+      "selected_h1": [
+        "Ethiopia Yirgacheffe"
+      ],
+      "exact_identity_match": true,
+      "parser_fields": {
+        "name": "Ethiopia Yirgacheffe",
+        "roaster": "Single Speed Coffee Roasters",
+        "origin": "Yirgacheffe, Ethiopia",
+        "producer": "Local Producers",
+        "elevation_m": "1.800-2.000",
+        "variety": "Heirloom",
+        "process": "Washed",
+        "roast_level": "Medium-Light",
+        "tasting_notes": "Floral, black tea, lemon, orange, bright and crisp"
+      },
+      "source_review": "Exact selected current H1/OG title and product specs outrank reused original URL slug copy-of-espresso-blend; printed Origin Africa plus Region Yirgacheffe and selected title Ethiopia support current country+region. Named Aynalem Kupo facility supports area smallholders in Gedeb, but current selected producer caption is Local Producers. Do not assign washing-station identity or Gedeb/Bareda geography as selected farm.",
+      "remaining_qualification": "Do not infer that background station is current selected producer/lot; preserve 1.800-2.000 printed elevation over narrative nearby farm 1800-2200."
+    },
+    {
+      "number": 329,
+      "coffee": "Costa Rican - Tesoros Volcanicos",
+      "url": "https://singlespeedcoffeeroasters.com/products/costa-rican-tesoros-volcanicos",
+      "raw_html_bytes": 416248,
+      "raw_html_sha256": "f22294ee73dbe8273e841e1b80ffee0c834f980aa2133a2aa43aae089e993e3e",
+      "selected_h1": [
+        "Costa Rican - Tesoros Volcanicos"
+      ],
+      "exact_identity_match": true,
+      "parser_fields": {
+        "name": "Costa Rican - Tesoros Volcanicos",
+        "roaster": "Single Speed Coffee Roasters",
+        "origin": "West Valley, Brunca, Tarrazu, Costa Rica",
+        "producer": "Regional Producers",
+        "elevation_m": "1.200 - 1.800 masl",
+        "variety": "Cattura, Catuai",
+        "process": "Washed",
+        "roast_level": "Medium-Light",
+        "tasting_notes": "Moderate acidity and body, clean, sweet, balanced"
+      },
+      "source_review": "Actual current selected description says three-region smallholder blend features cocoa/caramel, floral and citrus aspects; separately labeled current Cupping Notes reads Moderate acidity and body - clean - sweet - balanced and is what parser populates. Preserve this distinction and source prose; not a proven identity or cross-product parser defect.",
+      "remaining_qualification": "Direct selected explanatory flavor prose has different granularity from structured cupping caption; further source-level aroma/note completeness evaluation is admissible but not an automatic field-error claim."
+    }
+  ],
+  "defect_reproduced": false,
+  "new_parser_correction": false,
+  "new_ready_queue_item": false,
+  "manual_603_semantic_certification": "IN_PROGRESS_UNVERIFIED",
+  "frozen603": "SKIPPED_NOT_PASS",
+  "production_deployment": false,
+  "production_operations": 0,
+  "real_signed_in_auth_test": false,
+  "owner_approval_needed": false,
+  "next_action": "Select next disjoint unresolved original603 high-confidence source cases, compare actual selected official H1/body/specs against real parser, implement narrow generic fix only if a specific false or missing selected-product field is reproduced with adversarial negative coverage. Preserve unreviewable fields blank. Do not deploy."
+}
