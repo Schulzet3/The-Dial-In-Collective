@@ -8,6 +8,28 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-sweetness-history-measured-bounds",
+      "issue": 455,
+      "title": "Exclude out-of-log-bounds archived shot measures from same-coffee sweetness evidence",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "R085 base 4dd374ff650644bf7fffd83312b037aecf479f7e: current comparableSweetnessYields admitted otherwise matching archived yield 230g or 2g and time 0/181s as measured directional taste evidence despite established Log Shot CONFIG.bounds; synthetic imported-history counterexamples only.",
+        "SAFE change: reuse existing doseG 5-40, yieldG 5-200, timeS 1-180 admission bounds for historical sweetness comparators. Preserve all five ratings, stored private shots/notes, one-control meaningful yield thresholds, evidence uncertainty and Locked policies.",
+        "Six synthetic direct-module positive, negative, inclusive-endpoint and history-immutability regressions authored at tests/issue455-sweetness-history-measured-bounds.test.mjs. UNEXECUTED at commit authoring.",
+        "Applicable exact PR-head Node22, browser/mobile/offline and governance checks, nonforce merge, exact merged-source CI and separate docs-ready reconciliation PENDING. SQL/Auth/Edge unchanged; original frozen603 NOT RUN."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Required exact-source checks and merge not yet verified"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "R455-085 TESTING development only; no runtime behavior active in production. No science target or user data mutation."
+    },
+    {
       "id": "DIC-Q-33-original603-211-current-selected-department",
       "issue": 33,
       "title": "Conservatively refine current selected Colombia department",
