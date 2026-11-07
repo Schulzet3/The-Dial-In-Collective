@@ -6903,5 +6903,32 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "pg_init_privs ordinal 1/233, pg_rewrite ordinal 1/148, source drift and provider-only hosted #96 security"
+  },
+  "provider_initial_privileges_run54": {
+    "state": "DIRECT_ALL_233_PG_INIT_PRIVS_RAW_CATALOG_INITIAL_GRANTS_REVIEWED_EFFECTIVE_PRIVILEGE_SAMPLE_NATIVE_HOSTED_UNVERIFIED",
+    "receipt_path": "docs/audits/issue509-provider-initial-privileges-20261107-run54.json",
+    "source_development_parent_sha": "5f0739565bc09e583ac036f7f8e26703391a9187",
+    "main_sha": "bd627d40f7e65321323512b303d2e3f75709af39",
+    "release_sha": "2ec10324fcaa4b60d1e48240b44b77b141b9ba54",
+    "provider_at": "2026-11-07T01:49:40.110Z",
+    "reviewed": 233,
+    "total": 233,
+    "catalog_chars": 32264,
+    "classes": {
+      "pg_class": 161,
+      "pg_namespace": 4,
+      "pg_proc": 68
+    },
+    "grant_origins": {
+      "i": 223,
+      "e": 10
+    },
+    "app_custom_initial_acl": 0,
+    "security_checks": "18 targeted relation role checks + 18 function-role checks (metadata only)",
+    "confirmed_app_defects": 0,
+    "source_fixes": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "pg_rewrite ordinal 1/148, then provider drift and #96 hosted JWT/Auth/API"
   }
 }
