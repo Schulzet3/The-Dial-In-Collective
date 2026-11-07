@@ -465,7 +465,11 @@ function comparableSweetnessYields(s,shot){
   if(prior.id===shot.id||prior.hidden||keys.some(key=>prior[key]!==shot[key]))return false;
   const priorAt=typeof prior.timestamp==='string'?Date.parse(prior.timestamp):NaN;
   if(!Number.isFinite(priorAt)||priorAt>=shotAt)return false;
-  if(!finite(prior.doseG)||!finite(prior.grindSetting)||!finite(prior.yieldG)||
+  // An archived taste observation is not valid measured-yield evidence when
+  // its dose/yield is zero, negative, nonnumeric or has an overflowing ratio.
+  if(!finite(prior.doseG)||prior.doseG<=0||
+   !finite(prior.grindSetting)||!finite(prior.yieldG)||prior.yieldG<=0||
+   !finite(prior.yieldG/prior.doseG)||
    Math.abs(prior.doseG-shot.doseG)>.1||
    Math.abs(prior.grindSetting-shot.grindSetting)>.05||
    Math.abs(prior.yieldG-shot.yieldG)<meaningfulYieldStep(shot))return false;
