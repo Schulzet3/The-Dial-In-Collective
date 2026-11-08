@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "date_utc": "2026-11-08",
+  "kind": "R30_EXACT_CURRENT_SELECTED_PRODUCT_EA_METHOD_VERIFIED_READY_NARROW",
+  "authority": "Issue #33 owner autonomous DEVELOPMENT ONLY, NO RELEASE",
+  "preserved_original": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "oracle_and_scorer_unchanged": true,
+    "manual_semantic_603_certification": "INCOMPLETE"
+  },
+  "source_intake": {
+    "pr": 1387,
+    "merged_source_sha": "3bd8a248c42ef1b08056fd47c1a59c2dc49bf475",
+    "official_run": 42461021649,
+    "job": 128670146608,
+    "artifact_id": 13609229770,
+    "zip_sha256": "07adde610db114aaca368a3a5fd17dcf4d118d61592df94a8d44368c4f60848e",
+    "json_sha256": "6abdaedc9057fdc7e0f70e0580dc5ddaf39aa0ffe9456912d0000091ba6a01b8",
+    "fetched": 3,
+    "parsed": 3,
+    "manual_certified": 0
+  },
+  "code": {
+    "pr": 1388,
+    "original_tested_head": "a987e81ebb65dbce4e623780e3a622a120edacc8",
+    "merged_source_sha": "096d143bd751b7f8c312f8050719c0c484f8c7f9",
+    "files": [
+      "src/server/coffee-direct-product-prose.mjs",
+      "tests/coffee-issue33-original603-424-441-selected-ea-current.test.mjs",
+      "docs/workstreams/ops-issue33-r30-424-441-sugar-method-fix-20261108.md"
+    ],
+    "pr_head_ci": {
+      "validate": 42461200428,
+      "cloud_mobile": 42461200406,
+      "sql": 42461200425,
+      "security": 42461200349,
+      "approval": 42461200348,
+      "source_bundle": 42461200398
+    },
+    "exact_merged_ci": {
+      "node_lint_build": 42461341460,
+      "node_pass": 2014,
+      "node_fail": 0,
+      "node_skip": 0,
+      "cloud_mobile": 42461341479,
+      "approval": 42461341562,
+      "official": 42461341508
+    },
+    "frozen603": "SKIPPED_NOT_PASS"
+  },
+  "official_after": {
+    "source_sha": "096d143bd751b7f8c312f8050719c0c484f8c7f9",
+    "run": 42461341508,
+    "job": 128671085325,
+    "result": "SUCCESS",
+    "artifact_id": 13608929254,
+    "artifact_zip_sha256": "a79baed41221a60d45fddb97ed112968348f831fc51a02945aed5787ae110b74",
+    "artifact_json_sha256": "a17bd8529babd59cd10ad6b4f910e5ff355716bbe13626a69bb2b31ff8d64de9",
+    "independently_rehashed_artifact": true,
+    "fetched": 3,
+    "parsed": 3,
+    "selected_h1_identity_verified": 3,
+    "add_coffee_rendered": 3,
+    "source_review_rendered": 3,
+    "manual_certified": 0,
+    "cases": [
+      {
+        "number": 424,
+        "url": "https://www.aldeacoffee.com/products/flow_state_decaf",
+        "selected_h1": "Flow State Decaf",
+        "before_html_sha256": "d612bf0ad96a4574bfc2bc09910821db8e81ecd9cc1314b75f984642cf1eed4d",
+        "after_html_sha256": "692e31092859e0643ed1b7a6843b6876e558828a814f8f844b99d77a2ac3d3ed",
+        "before_decaffeination_method": null,
+        "after_decaffeination_method": "Sugar Process",
+        "selected_literal": "this flavorful E.A. Process Decaf",
+        "after_green_process": null,
+        "conflicts": [],
+        "adjudication": "Exact chosen product directly says E.A. Process Decaf; no selected green processing field is established, no page-wide educational transfer."
+      },
+      {
+        "number": 432,
+        "url": "https://www.aveleyfarmscoffee.com/products/ethiopia-natural-halo-beriti",
+        "selected_h1": "Ethiopia Qabballe",
+        "before_html_sha256": "e790571467ca0b6097a7bb97d2c7d3e0cb7bca3d2bffe4b786d08dcabcd406b3",
+        "after_html_sha256": "553fcbe6fb1f3f7dd61c7b24f4f44e3a225d61cf02c87b150505637d73fb52b4",
+        "after_fields": {
+          "name": "Ethiopia Qabballe",
+          "roast_level": "Light",
+          "process": "Natural",
+          "variety": "Heirloom",
+          "tasting_notes": "Sweet, Blueberry, Lemon, Lime"
+        },
+        "contradictory_elevation": [
+          "over 2,200 meters high",
+          "2000 MASL"
+        ],
+        "elevation_m": null,
+        "conflicts": [
+          "elevation_m"
+        ],
+        "adjudication": "Current chosen H1 agrees with title Qabballe despite archived Halo Beriti URL slug. Contradictory two direct elevations withheld."
+      },
+      {
+        "number": 441,
+        "url": "https://www.blackwhiteroasters.com/products/r-sebastian-ramirez-red-fruits-decaf",
+        "selected_h1": "Sebastian Ramirez - Red Fruits Decaf",
+        "before_html_sha256": "6ac73c53e9546baa00e6fbad8d60c6cbcb0c54b76d1693beecad78375964c678",
+        "after_html_sha256": "50985e097d68961f78adc2b77897198774eb602519356f9cd97a69c1e1fd0324",
+        "before_decaffeination_method": null,
+        "after_decaffeination_method": "Sugar Process",
+        "green_process": "Other/Unknown",
+        "selected_literal": "That blended lot was then sent to the decaffeination facility ... known as Ethyl Acetate Decaffeination (EAD)",
+        "not_decaf_method": "CO2 mentioned only for green-coffee co-fermentation; Washed is component only",
+        "conflicts": [],
+        "adjudication": "Preserve distinct green co-ferment+washed component statuses; exact chosen mixed green lot received EA after blending."
+      }
+    ]
+  },
+  "release_queue": {
+    "original_items": 223,
+    "after_items": 224,
+    "before_states": {
+      "READY": 47,
+      "DEPLOYED": 173,
+      "IN_PROGRESS": 3
+    },
+    "after_states": {
+      "READY": 48,
+      "DEPLOYED": 173,
+      "IN_PROGRESS": 3
+    },
+    "only_added_ready_item": "DIC-Q-33-original603-424-441-current-ea-method",
+    "all_previous_states_preserved": true
+  },
+  "boundaries": {
+    "issue33": "OPEN",
+    "issue267": "SEPARATE_V2_LINE_AUDIT",
+    "issue96": "SEPARATE_AUTHENTICATED_SECURITY",
+    "source_evidence_only": true,
+    "deployed": false,
+    "production_writes": 0,
+    "netlify_publication": false,
+    "go_true_live_authenticated_acceptance": "NOT_TESTED",
+    "physical_device": "NOT_TESTED"
+  },
+  "next": "Continue unique outstanding current selected original603 cases; preserve #388 source unavailable/#362 changed identity; never equate focused 3/3 with full 603 semantic certification."
+}
