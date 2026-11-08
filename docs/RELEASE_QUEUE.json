@@ -11,22 +11,33 @@
       "id": "DIC-Q-455-shot-history-measured-make-current",
       "issue": 455,
       "title": "Hide unavailable Make Current Recipe action on unloggable all-green historical shots",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "b9774048e8136aadfc900d5f8bb521fd579f6478",
       "scope_paths": [
         "site/cloud/shot_card.js"
       ],
       "tests": [
-        "Pinned 130aea562358998354d6dcffdbcd49f00412fa75 archived all-five-green physical invalid row displayed Make Current yet existing engine rejects invalid physical dose/yield/time. No real member incident asserted.",
-        "Three direct synthetic test groups: invalid/missing/out-of-range measurements vs inclusive endpoints; full five senses; engine refusal/acceptance and unmodified original notes/shots; pending sync/version restrictions.",
-        "Node22/lint/build, mobile/browser/offline/a11y, isolated SQL/security and governance PR-head plus exact merged-source CI PENDING, not passed."
+        "Source parent 130aea562358998354d6dcffdbcd49f00412fa75: imported five-green 18g/230g/17s archive displayed Make Current in history while existing engine refused unloggable physical measurement. Badge and original notes/history remain.",
+        "SAFE UI-only gate reuses CONFIG dose 5-40g, yield 5-200g, time 1-180s bounds; no new numeric targets or policy. Preserve five tastes, good green badge, original notes, Edit, other-version/pending rejection and existing engine private data guard.",
+        "Three R104 synthetic direct-module tests: malformed/nonfinite/out-of-range measurements negative, inclusive endpoints positive and actual engine makeCurrent agreement, missing rating/pending/other setup and immutable history.",
+        "Exact PR-head SHA bdb1fd0a3020d760749c6934c770d2cb0a6d7b0a Node22 3,008 PASS/0 FAIL/6 intentional SKIP run 42439853513; head browser/mobile/offline/a11y 42439853607, SQL 42439853592, security 42439853599 and approval 42439853547 SUCCESS. Original frozen603 run 42439853491 SKIPPED, not PASS.",
+        "PR #1334 nonforce squash merged b9774048e8136aadfc900d5f8bb521fd579f6478 after concurrent unrelated #508 disjoint source. Tested head and merge Git blobs equal: site/cloud/shot_card.js 56ba4716b190b0da9330f1bc740edb45e9f54ae5; regression b0cc256802c2f69305f2a1c99afbc0578eb546df; journal c5307453b183e1a5a9c0a9ca14c8ca220b25f0ec; initial TESTING queue f4d0e92cff7d8776b7e13092596932d862546690.",
+        "Exact merged Node22 3,009 PASS/0 FAIL/6 intentional SKIP run 42440045921; merged browser/mobile/offline/a11y and cloud 42440045915 SUCCESS; merged approval/governance 42440045951 SUCCESS. Unchanged earlier head SQL/security reused; no new production/member or coffee taste testing."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact PR-head, merge and merged-source CI unexecuted"
+      "ci_runs": [
+        42439853513,
+        42439853607,
+        42439853592,
+        42439853599,
+        42439853547,
+        42440045921,
+        42440045915,
+        42440045951
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Owner Option B safe UI gate; same existing physical eligibility as engine. No deployment or Locked changes."
+      "notes": "READY in development only, not deployed. User Option B safe single UI affordance correction; existing Locked, data, privacy and release branches unchanged. Docs-only reconciliation requires independent applicable docs-head and merged governance success.",
+      "pr": 1334
     },
     {
       "id": "DIC-Q-455-prefill-measured-physical-history",
