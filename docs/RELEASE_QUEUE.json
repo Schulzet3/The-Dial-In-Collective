@@ -11,22 +11,33 @@
       "id": "DIC-Q-455-next-recipe-yield-band-bounds",
       "issue": 455,
       "title": "Bound next recipe displayed +/-1 g yield band to existing 5-200 g Log Shot limits",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "7300de331f3978cd866654da17f15489520f2722",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
         "R455-109 source d6fba0c8388721947dc4dd1542a3f78c5b3e671d original engine blob 3823b70b0a954a9a4182b45de11d667cfe1c98a4: valid 195 g + approved meaningful 5 g yield produces 200 g center but unbounded round(nextYield+1)=201 g display high; allowed cached 200 g target has same defect. No owner-policy or espresso-taste premise.",
         "SAFE change only: constrain displayed +/-1 g endpoints to existing CONFIG.bounds.yieldG [5,200], derived rec.ratio matches; actual recipe center and every original history/notes/five tastes untouched.",
-        "Three source-driven synthetic real-module test groups added, Node22/UX/browser/mobile/offline/approval exact-source CI NOT RUN yet. Do not classify TESTING as READY, or skipped unrelated suites as PASS."
+        "Three source-driven synthetic real-module test groups added, Node22/UX/browser/mobile/offline/approval exact-source CI NOT RUN yet. Do not classify TESTING as READY, or skipped unrelated suites as PASS.",
+        "Exact code PR #1385 tested head 0c217fe13ad73f4fbf57244104173038332a41ac: Node22 full 3,039 PASS/0 FAIL/6 intentional SKIP and lint run42460208354; three new R109 real-module negative/positive/source synthetic regression groups individually PASS; browser/mobile/visual/offline run42460208325, cloud same run, isolated SQL run42460208324, security inventory run42460208285, approval run42460208341 all SUCCESS. Frozen603 run42460208392 SKIPPED, not PASS. No physical espresso/member/provider acceptance claimed.",
+        "PR #1385 nonforce squash MERGED exact development code 7300de331f3978cd866654da17f15489520f2722; code/test/ledger/journal/status/TESTING queue Git blobs identical to tested PR head, and concurrent #509 docs unaffected. Source engine blob 3b224e8433fb175929b7c427b0962c1004a8a0de, R109 test 35a06510009bef51c36d85f91dde87d428fd0ff3.",
+        "Exact code-merged source Node22 full run42460399138 3,039 PASS/0 FAIL/6 intentional SKIP, lint PASS; cloud/mobile/browser/offline run42460399041 and governance/approval run42460398996 SUCCESS. PR-head SQL/security evidence source unchanged after nonforce merge, no new DB/Auth data introduced. Documentation-only READY reconciliation requires separate exact-source governance CI."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "PR exact-source tests, nonforce merge and merged SHA/CI verification pending"
+      "ci_runs": [
+        42460208354,
+        42460208325,
+        42460208324,
+        42460208285,
+        42460208341,
+        42460399138,
+        42460399041,
+        42460398996
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Safe development-only UI recommendation range correction under Option B. Not deployed; no production/SQL/Auth/provider writes or owner numeric changes."
+      "notes": "SAFE R109 existing 5-200 g displayed yield-band boundary verified in development, READY NOT DEPLOYED, no numeric/taste policy changes or production operations.",
+      "pr": 1385
     },
     {
       "id": "DIC-Q-33-original603-409-priced-selected-water-process",
