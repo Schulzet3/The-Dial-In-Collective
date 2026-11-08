@@ -14041,5 +14041,84 @@
     "source_fixes": 0,
     "provider_writes": false,
     "baseline_complete": false
+  },
+  "provider_pg_attribute_raw_run100": {
+    "status": "VISIBLE_SAFE_FIELD_TUPLES_1701_TO_2400",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_development_parent_sha": "2bb6c5952e6b08174407f7b789607cb4046cbacd",
+    "source_main_sha": "a4028e42b0d0316fd539c0563fd07832d509aed0",
+    "source_release_sha": "92829cb6aff82aaec212eabbd921183e7997f1a7",
+    "reviewed_new": 700,
+    "reviewed_cumulative": 2400,
+    "total": 4030,
+    "range": [
+      1701,
+      2400
+    ],
+    "stable_order": "schema_name,relation_name,attnum,relation_oid",
+    "anchors": [
+      {
+        "ordinal": 1700,
+        "column_name": "partexprs",
+        "schema_name": "pg_catalog",
+        "relation_oid": "3350",
+        "relation_name": "pg_partitioned_table"
+      },
+      {
+        "ordinal": 1701,
+        "column_name": "partrelid",
+        "schema_name": "pg_catalog",
+        "relation_oid": "3351",
+        "relation_name": "pg_partitioned_table_partrelid_index"
+      },
+      {
+        "ordinal": 2400,
+        "column_name": "tidx_blks_hit",
+        "schema_name": "pg_catalog",
+        "relation_oid": "12170",
+        "relation_name": "pg_statio_all_tables"
+      },
+      {
+        "ordinal": 2401,
+        "column_name": "relid",
+        "schema_name": "pg_catalog",
+        "relation_oid": "12201",
+        "relation_name": "pg_statio_sys_indexes"
+      }
+    ],
+    "schemas": {
+      "pg_catalog": 700
+    },
+    "kinds": {
+      "i": 40,
+      "v": 561,
+      "r": 99
+    },
+    "flags": {
+      "not_null": 86,
+      "has_default": 0,
+      "has_missing_value": 0,
+      "identity": 0,
+      "generated": 0,
+      "column_acl_present": 0,
+      "column_options_present": 0,
+      "fdw_options_present": 0
+    },
+    "confirmed_metadata_anomalies": 0,
+    "receipt_paths": [
+      "docs/audits/issue509-provider-pg-attribute-raw-1701-1800-2026-11-08-run100.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-1801-1900-2026-11-08-run100.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-1901-2000-2026-11-08-run100.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-2001-2100-2026-11-08-run100.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-2101-2200-2026-11-08-run100.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-2201-2300-2026-11-08-run100.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-2301-2400-2026-11-08-run100.json"
+    ],
+    "next_ordinal": 2401,
+    "prior_column_ddl_not_recredited": true,
+    "native_and_hosted": "UNVERIFIED",
+    "source_fixes": 0,
+    "provider_writes": false,
+    "baseline_complete": false
   }
 }
