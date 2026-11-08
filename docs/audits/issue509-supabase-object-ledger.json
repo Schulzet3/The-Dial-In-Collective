@@ -3124,9 +3124,26 @@
       "confirmed_new_defects": 0,
       "provider_writes": false,
       "baseline_complete": false
+    },
+    {
+      "event": "2026-11-08_run97b_pg_attribute_raw_201_600",
+      "development_parent_sha": "c242fb3270ad4901069f8ef69c4de9c723b6bf14",
+      "provider_fingerprint": "b396221ee55db01a5df947642550599f",
+      "new_reviewed": 400,
+      "cumulative": 600,
+      "total": 4030,
+      "receipts": [
+        "docs/audits/issue509-provider-pg-attribute-raw-201-300-2026-11-08-run97b.json",
+        "docs/audits/issue509-provider-pg-attribute-raw-301-400-2026-11-08-run97b.json",
+        "docs/audits/issue509-provider-pg-attribute-raw-401-500-2026-11-08-run97b.json",
+        "docs/audits/issue509-provider-pg-attribute-raw-501-600-2026-11-08-run97b.json"
+      ],
+      "verified_defects": 0,
+      "provider_writes": false,
+      "baseline_complete": false
     }
   ],
-  "state": "PG_ATTRIBUTE_RAW_VISIBLE_TUPLES_200_OF_4030; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
+  "state": "PG_ATTRIBUTE_RAW_SAFE_VISIBLE_TUPLES_600_OF_4030; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
   "application_table_review": {
     "total": 46,
     "current_index": 46,
@@ -13863,6 +13880,47 @@
     "previous_column_ddl_semantic_review_credit": "NOT_DUPLICATED",
     "withheld": "attmissingval payload, raw FDW options, private table data, compiled storage code, hosted Auth/JWT/API/config",
     "provider_writes": false,
+    "baseline_complete": false
+  },
+  "provider_pg_attribute_raw_run97b": {
+    "status": "600_OF_4030_PG_ATTRIBUTE_ORIGINAL_VISIBLE_FIELD_TUPLES_SEMANTIC_CHECKED_NOT_FULL_NATIVE_OR_HOSTED_IMPL",
+    "source_development_parent_sha": "c242fb3270ad4901069f8ef69c4de9c723b6bf14",
+    "ops_main_sha": "a4028e42b0d0316fd539c0563fd07832d509aed0",
+    "publication_sha": "92829cb6aff82aaec212eabbd921183e7997f1a7",
+    "inventory_md5": "b396221ee55db01a5df947642550599f",
+    "reviewed_new": 400,
+    "reviewed_cumulative": 600,
+    "total": 4030,
+    "range": "201-600",
+    "schemas": {
+      "auth": 208,
+      "extensions": 51,
+      "information_schema": 141
+    },
+    "metadata_flags": {
+      "by_schema": {
+        "auth": 208,
+        "extensions": 51,
+        "information_schema": 141
+      },
+      "default_columns": 29,
+      "missing_value_present": 5,
+      "generated": 4,
+      "acl": 0,
+      "options": 0
+    },
+    "confirmed_anomalies": 0,
+    "receipt_paths": [
+      "docs/audits/issue509-provider-pg-attribute-raw-201-300-2026-11-08-run97b.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-301-400-2026-11-08-run97b.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-401-500-2026-11-08-run97b.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-501-600-2026-11-08-run97b.json"
+    ],
+    "last_object": "information_schema.columns.character_maximum_length",
+    "next": "pg_attribute ordinal 601/4030; keep schema/relation OID/column ordinal ordering and fingerprint; if changed, reconcile first",
+    "privacy": "no actual Auth/user/member rows, secret/default missing payload or FDW options read",
+    "native_and_hosted": "UNVERIFIED",
+    "provider_writes": 0,
     "baseline_complete": false
   }
 }
