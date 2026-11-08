@@ -156,10 +156,14 @@ export function snapshot(s,coffeeId,basketId) {
  return {setupId:set.id,setupName:set.name,versionId:v.id,machine:v.machine,grinder:v.grinder,burrs:v.burrs,grinderMin:v.grinderMin,grinderMax:v.grinderMax,calibrationId:v.calibrationId,basketId:b.id,basketName:b.name,basketDoseG:b.doseG,tempUnit:v.tempUnit};
 }
 export function hasLocalSuccess(s,coffeeId,style) {
- // A legacy local backup can carry an obsolete success flag while one of
- // its five original sensory ratings is missing or invalid. Trust neither
- // truthy archival flags nor fabricated green scores as personal evidence.
- const v=activeVersion(s);return !!v&&s.shots.some(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.dialedIn===true&&isDialed(sh.tasteScales));
+ // A historical success is usable for the Coffee overview only when its
+ // five original ratings AND actual measurements meet existing Log Shot bounds.
+ // Keep unloggable imported originals and their green History badge untouched.
+ const physical=sh=>['doseG','yieldG','timeS'].every(field=>{
+  const [lo,hi]=CONFIG.bounds[field],value=sh[field];
+  return typeof value==='number'&&Number.isFinite(value)&&value>=lo&&value<=hi;
+ });
+ const v=activeVersion(s);return !!v&&s.shots.some(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&physical(sh));
 }
 export function validateShot(d,{allowLegacyCustom=false}={}) {
  const errors=[];
