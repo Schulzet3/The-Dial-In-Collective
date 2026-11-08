@@ -127,11 +127,11 @@ function withoutRelatedProducts(page,onTruncated){
   // after the selected bag. A review about a DIFFERENT roast is not a second
   // current-roast label. Require a bounded review-card group with explicit
   // review ratings, never a generic `stars` class or coffee description.
-  if(node.tag==='div'&&String(attrs.class||'').split(/[\\t\\n\\f\\r ]+/).includes('rcards')&&
+  if(node.tag==='div'&&String(attrs.class||'').split(/[\t\n\f\r ]+/).includes('rcards')&&
      node.contentEnd-node.headEnd<=120000){
    const body=page.slice(node.headEnd,node.contentEnd);
-   if(/<div\\b[^<>]{0,800}class=["'][^"']*\\brcard\\b/i.test(body)&&
-      /aria-label=["'][0-5]\\s+out\\s+of\\s+5\\s+stars["']/i.test(body))
+   if(/<div\b[^<>]{0,800}class=["'][^"']*\brcard\b/i.test(body)&&
+      /aria-label=["'][0-5]\s+out\s+of\s+5\s+stars["']/i.test(body))
     ranges.push([node.start,node.end]);
   }
   if(node.tag==='aside'&&!isProductCostAside(node,attrs))ranges.push([node.start,node.end]);
