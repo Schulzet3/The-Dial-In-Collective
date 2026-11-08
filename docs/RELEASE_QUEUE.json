@@ -9641,22 +9641,31 @@
     {
       "id": "DIC-Q-455-family-cross-identity-evidence",
       "issue": 455,
-      "pr": null,
+      "pr": 1477,
       "title": "Exclude foreign-coffee/style imported family IDs from valid personal recipe evidence without deleting shot history",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "82238ac149ab81c6da5e110ca16b3b3453af11fe",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
-        "R120 five synthetic real-module positive/negative tests authored; Node22 execution and exact-source CI UNRUN at commit authoring."
+        "R120 five synthetic real-module negative/positive tests PASS on both exact tested head and merged source; wrong-coffee/style/orphan archived family IDs excluded from familyStats and assignFamily without rewriting any raw shot/ratings/notes.",
+        "PR-head Node22/lint 42511197904: 3102 PASS/0 FAIL/6 intentional SKIP, eslint PASS; UX/mobile/Chromium/cloud 42511198006, SQL 42511197915, security 42511197764, approval 42511197922 SUCCESS. Frozen603 42511197790 SKIPPED, not PASS.",
+        "Exact squash merge 82238ac149ab81c6da5e110ca16b3b3453af11fe; original four code/test/journal/queue Git blob SHA equal passing PR head 1320f868a3495fd97fe09623648aeb24c581c303; exact merged Node22/lint 42511432880 3102 PASS/0 FAIL/6 SKIP, mobile/browser/cloud 42511432854 SUCCESS, governance 42511432859 SUCCESS; unchanged PR-head SQL/security evidence reused. No real-member/empirical espresso claim."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Pending focused/CI verification and nonforce source merge."
+      "ci_runs": [
+        42511197904,
+        42511198006,
+        42511197915,
+        42511197764,
+        42511197922,
+        42511432880,
+        42511432854,
+        42511432859
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Safe Locked-compatible correction only; original archived shots/notes/five ratings preserved; no deployment authorization."
+      "notes": "SAFE owner-authorized #455, READY in development only and NOT DEPLOYED. Preserve five tastes, original private shots/notes, all legitimate styles, families, grinder/feed/version, privacy and one-controllable next step. Owner #630 temporary PUBLIC exception unaffected; no deploy or provider/member SQL writes."
     }
   ],
   "history": [
