@@ -3261,6 +3261,17 @@
       "owner_approval": false,
       "test_source": "Science-only evidence audit. No physical cup-outcome, app CI, provider test or original603 benchmark claimed.",
       "date": "2026-11-08"
+    },
+    {
+      "id": "R455-EV-APP-087-A",
+      "source": "Direct code engine blob 26d0ffee46ad3bd5fd82ef608575ee0a0d8e0afa, model snapshot blob 1efeeac985b7f2fb68a67e34af1f40c38437666c, PR #1525 exact head 2dc9489b8c8fb5b59039afc4adca2bc246733119 and final engine blob 21d6e822599e21db95b9f30ce3178db3542a6eb6.",
+      "claim": "New shot save previously accepted archived/unknown basket ID while snapshot fell back to an active basket; preserved original measured shot could acquire inconsistent equipment identity. The safe guard now rejects NEW invalid IDs before writes and retains idempotent old-shot replay even after basket archival.",
+      "grade": "DIRECT_SOURCE_AND_4_SYNTHETIC_REAL_MODULE_POSITIVE_NEGATIVE_TESTS; NO_REAL_MEMBER_OR_TASTE_OUTCOMES",
+      "result": "LOCKED_COMPATIBLE_FIX_MERGED_READY_DEV_NOT_DEPLOYED",
+      "current_app": "saveShot now checks new active basket identity, historical records and all five ratings preserved; no provider operation.",
+      "owner_approval": false,
+      "test_source": "PR-head Node22 42536695126 3138/0/6; SQL42536695078 security42536695084 UX42536695019 approval42536695056 SUCCESS; merged Node42536921751 3138/0/6 UX42536921758 approval42536921708 SUCCESS. Frozen60342536695290 SKIPPED. Initial malformed candidate PR1524 closed unmerged.",
+      "date": "2026-11-08"
     }
   ],
   "policy_decisions_pending": [],
@@ -3316,39 +3327,42 @@
     "R455-124 FINAL: PR1514 tested head 0e552b5ccc434f5044a2581ad904426b74041a1a 5/5 exact PR checks SUCCESS (approval42531684784, Node validate42531684895, SQL42531684914, browser/mobile/cloud42531684960); nonforce squash merged c0d997f646d6053f0a2cd99813770376e4469d31 with all three source Git blobs identical. Exact merged approval42531952023 SUCCESS. 69 curated sources/167 bounded checks/86 proposals; no new READY or deployment; screenshot HTTP429 and standalone S019 still unverified."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-124",
-    "base_development_sha": "64cb736981b708e41f5578cbdd2ad6eed8db1db8",
-    "engine_blob_sha": "26d0ffee46ad3bd5fd82ef608575ee0a0d8e0afa",
+    "id": "R455-125",
+    "base_development_sha": "da4989c83142cfca9e76dcb276b0f172e931a43d",
+    "merged_development_source_sha": "1a54269e8f7d2c1189fd948c959de5e61dab3312",
+    "engine_blob_sha": "21d6e822599e21db95b9f30ce3178db3542a6eb6",
     "source_ids": [
-      "LIT-2023-SCHMIEDER-ESPRESSO-EXTRACTION-KINETICS"
+      "LIVE_CODE_SAVE_SHOT_BASKET_ID"
     ],
     "claim_ids": [
-      "R455-EV-CIT-124-A",
-      "R455-EV-CIT-124-B"
+      "R455-EV-APP-087-A"
     ],
     "proposal_ids": [
-      "R455-PROP-124-ESPRESSO-EXTRACTION-FLOW-TEMP-CHEMICAL-TRANSFER-BOUNDARY"
+      "R455-PROP-125-NEW-SHOT-ACTIVE-BASKET-IDENTITY"
     ],
     "number_of_curated_sources": 69,
-    "total_evidence_checks": 167,
-    "number_of_proposals": 86,
-    "review_type": "DIRECT_PRIMARY_2023_18_PAGE_ESPRESSO_CHEMICAL_EXTRACTION_METHOD_RESULTS_AND_TUM_CROSSCHECK; PDF_SCREENSHOT_HTTP429",
-    "code_or_policy_changed": false,
+    "total_evidence_checks": 168,
+    "number_of_proposals": 87,
+    "review_type": "DIRECT_SOURCE_REAL_MODULE_SYNTHETIC_AND_EXACT_MERGED_NODE22_UX_SQL_SECURITY",
+    "code_or_policy_changed": true,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
     "ci_runs": [
-      42531684784,
-      42531684895,
-      42531684914,
-      42531684960,
-      42531952023
+      42536695126,
+      42536695019,
+      42536695078,
+      42536695084,
+      42536695056,
+      42536695290,
+      42536921751,
+      42536921758,
+      42536921708
     ],
     "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "Continue next disjoint source-backed R455 research/UX evidence increment from fresh development; standalone S019 inaccessible; do not deploy.",
-    "merged_development_source_sha": "c0d997f646d6053f0a2cd99813770376e4469d31",
-    "github_pr": 1514,
-    "review_status": "SOURCE_BOUND_DOCUMENTED_RESEARCH_ONLY_PR_HEAD_5_SUCCESS_EXACT_MERGED_GOVERNANCE_SUCCESS"
+    "next_action": "Recover latest refs and continue separate source/claim-level research and UX review; no deploy.",
+    "github_pr": 1525,
+    "review_status": "SOURCE_BOUND_SAFE_CODE_MERGED_VERIFIED_READY_NOT_DEPLOYED"
   },
   "policy_decisions_resolved": [
     {
@@ -5120,6 +5134,26 @@
       "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY_NO_READY_ITEM",
       "github267_literal_review_credit": 0,
       "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-125-NEW-SHOT-ACTIVE-BASKET-IDENTITY",
+      "finding": "Stale/retired/unknown basket ID in new Log Shot save could disagree with fallback snapshot basket identity; source-level/synthetic defect, no observed real member incidence.",
+      "evidence": [
+        "R455-EV-APP-087-A"
+      ],
+      "severity": "P2_NEW_SHOT_EQUIPMENT_PROVENANCE_INTEGRITY",
+      "user_benefit": "Keep new measured shot and basket snapshot consistent without rewriting history.",
+      "current_locked": "Five sensory inputs, honest dose/basket context, idempotent offline shot persistence, successful style/family and grinder/feed/version distinctions, privacy and unchanged notes/history.",
+      "current_app": "Original saveShot lacked active basket ID check; repaired engine blob 21d6e822599e21db95b9f30ce3178db3542a6eb6 rejects invalid NEW basket before mutation; existing saved duplicates returned intact.",
+      "proposed_change": "SAFE IMPLEMENTED: active basket verification for new saves, no silently remapped archived IDs; no new UI, science targets, data migration or member writes.",
+      "evidence_grade": "DIRECT_GITHUB_SOURCE_POSITIVE_NEGATIVE_NODE22_AND_EXACT_MERGED_CI_NO_REAL_MEMBER_INCIDENT",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "PR1525_NONFORCE_SQUASH_MERGED_1a54269e8f7d2c1189fd948c959de5e61dab3312_ALL_FOUR_BLOBS_IDENTICAL_TO_TESTED_HEAD",
+      "test_plan": "Four synthetic real-module positives/negatives, Node22 3138 PASS/0 FAIL/6 SKIP head and merge, head SQL/security/UX/approval and merged UX/approval PASS; frozen603 SKIPPED not PASS.",
+      "release_queue_status": "DIC-Q-455-new-shot-active-basket-integrity READY_DEV_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
     }
   ],
   "changeScope": {
@@ -5127,6 +5161,6 @@
     "tests_executed": true,
     "production_deployed": false,
     "queue_changed": true,
-    "reason": "R455-123 verified existing Locked 70-100 C recorded-temperature guard prevents invalid imported temp from becoming personal grind evidence; six direct-module tests and exact source CI, no scientific target or deployed change."
+    "reason": "R125 safe basket identity fix, four synthetic positives/negatives and passing exact source CI."
   }
 }
