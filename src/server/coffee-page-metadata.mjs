@@ -1,5 +1,5 @@
 import {selectedCoffeeContextRoles} from './coffee-selected-context-roles.mjs';
-import {selectedDirectProductCredits,selectedNamedCurrentDecafEvidence,selectedCurrentDecafSpecMethodEvidence} from './coffee-direct-product-prose.mjs';
+import {selectedDirectProductCredits,selectedNamedCurrentDecafEvidence,selectedCurrentDecafSpecMethodEvidence,selectedFormTitleWaterDecafEvidence} from './coffee-direct-product-prose.mjs';
 import {rawElements,removeElements,removeComments} from '../../supabase/functions/_shared/html-scan.mjs';
 import {isRecurringCoffeeHarvestWindow,isGenericCoffeeLotLabel} from '../../supabase/functions/_shared/coffee-release-label.mjs';
 // Best-effort facts from arbitrary PUBLIC coffee pages. This is NOT official
@@ -1996,7 +1996,8 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  const selectedDecafStatements=[...new Set([
   ...(Array.isArray(directSelected.decaffeination_method_evidence)?
    directSelected.decaffeination_method_evidence:[]),
-  ...namedDecafStatements
+  ...namedDecafStatements,
+  ...selectedFormTitleWaterDecafEvidence(product,{name:fields.name,clean})
  ])];
  // Generic Process labels can conflict in the layout reader while the EXACT
  // selected named decaf sentence and the selected EA Process spec AGREE.

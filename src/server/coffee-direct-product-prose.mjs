@@ -574,3 +574,45 @@ export function selectedCurrentDecafSpecMethodEvidence(productHtml,{name,clean}=
  }
  return {candidates:[...seen.values()],complete:true};
 }
+
+
+// Some selected storefronts have no H1: the exact chosen H2 appears inside the
+// purchase form. Admit ONLY a direct water DECAFFEINATION witness, never any
+// other source field. Require current, same-form, self-described product facts.
+export function selectedFormTitleWaterDecafEvidence(html,{name='',clean}={}){
+ if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function'||!decafOnlyCoffee(name))return [];
+ const match=String(name).match(/\b(swiss|mountain)[ -]?water\s*[®™]?\s+decaf(?:feinated)?\b/iu);
+ if(!match||inferDecaffeinationMethod({name,selectedMethod:name})!=='Water Process')return [];
+ const tree=coffeeHtmlElements(html);
+ if(tree.truncated||tree.nodes.some(n=>n.tag==='h1'))return [];
+ const nodes=tree.nodes,selected=fold(name),method=match[1].toLowerCase();
+ const self=new RegExp('^(?:this|our)\\s+'+method+'[ -]?water\\s+decaf(?:feinated)?\\b','iu');
+ const unsafe=/\b(?:not|never|without|rather than|instead of|formerly|previously|historically|another coffee|other coffee)\b/iu;
+ const opposite=/\b(?:decaffeination(?:\s+(?:method|process))?|decaf\s+process|processing\s+method)\s*[:：]?\s*(?:ethyl\s+acetate|sugar(?:[ -]?cane|[ -]?process)|carbon\s+dioxide|co\s*[- ]?2)\b/iu;
+ for(let i=0;i<nodes.length;i++){
+  const form=nodes[i],classes=String(coffeeHtmlAttributes(form.attributes).class||'').split(/\s+/u);
+  if(form.tag!=='form'||!classes.includes('product-form'))continue;
+  const inside=nodes.filter(n=>n.start>=form.headEnd&&n.end<=form.contentEnd);
+  const titles=inside.filter(n=>n.tag==='h2');
+  if(titles.length!==1||fold(clean(html.slice(titles[0].headEnd,titles[0].contentEnd),220))!==selected)continue;
+  const directDescription=inside.some(n=>{
+   if(n.tag!=='h3'||n.contentEnd-n.headEnd>650)return false;
+   const statement=clean(html.slice(n.headEnd,n.contentEnd),550).trim();
+   if(!self.test(statement)||unsafe.test(statement))return false;
+   let parent=n.parent;
+   for(let depth=0;parent!==null&&depth<18;depth++){
+    const ancestor=nodes[parent];
+    if(!ancestor||ancestor.start<form.start||ancestor.end>form.end)break;
+    if(String(coffeeHtmlAttributes(ancestor.attributes).class||'')
+       .split(/\s+/u).includes('product-form--block--description'))return true;
+    if(parent===i)break;
+    parent=ancestor.parent;
+   }
+   return false;
+  });
+  if(!directDescription)continue;
+  if(opposite.test(clean(html.slice(form.headEnd,form.contentEnd),12000)))continue;
+  return [name];
+ }
+ return [];
+}
