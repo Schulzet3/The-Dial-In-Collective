@@ -15,8 +15,8 @@ function extract(body){
  assert.equal(result.ok,true,JSON.stringify(result));
  return result;
 }
-const forged=(result)=>result.source_facts?.filter(f=>f.field==='process'&&
- /^(?:origin\\s+(?:and|&)\\s*|origin\\s*\\/\\s*)$/iu.test(f.value||''))||[];
+const falseLabel=value=>['origin and','origin &','origin /'].includes(String(value||'').trim().toLowerCase());
+const forged=(result)=>result.source_facts?.filter(f=>f.field==='process'&&falseLabel(f.value))||[];
 
 test('composite Origin and process, ampersand and slash headings are not invented process values',()=>{
  for(const caption of ['Origin and process','Origin & process','Origin / process']){
@@ -31,7 +31,7 @@ test('composite Origin and process, ampersand and slash headings are not invente
   assert.ok(review,'current selected Source Review must still render');
   assert.equal(review.field_suggestions.process,'Washed');
   assert.equal((review.published_source_information||[]).some(f=>
-   f.field==='process'&&/^(?:Origin and|Origin &|Origin \/)$/i.test(String(f.value||''))),false);
+   f.field==='process'&&falseLabel(f.value)),false);
  }
 });
 
