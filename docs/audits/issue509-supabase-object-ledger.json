@@ -3141,9 +3141,28 @@
       "verified_defects": 0,
       "provider_writes": false,
       "baseline_complete": false
+    },
+    {
+      "event": "2026-11-08_run99_pg_attribute_raw_1001_1700",
+      "development_parent_sha": "82238ac149ab81c6da5e110ca16b3b3453af11fe",
+      "new_reviewed": 700,
+      "cumulative": 1700,
+      "total": 4030,
+      "receipts": [
+        "docs/audits/issue509-provider-pg-attribute-raw-1001-1100-2026-11-08-run99.json",
+        "docs/audits/issue509-provider-pg-attribute-raw-1101-1200-2026-11-08-run99.json",
+        "docs/audits/issue509-provider-pg-attribute-raw-1201-1300-2026-11-08-run99.json",
+        "docs/audits/issue509-provider-pg-attribute-raw-1301-1400-2026-11-08-run99.json",
+        "docs/audits/issue509-provider-pg-attribute-raw-1401-1500-2026-11-08-run99.json",
+        "docs/audits/issue509-provider-pg-attribute-raw-1501-1600-2026-11-08-run99.json",
+        "docs/audits/issue509-provider-pg-attribute-raw-1601-1700-2026-11-08-run99.json"
+      ],
+      "confirmed_defects": 0,
+      "production_writes": false,
+      "baseline_complete": false
     }
   ],
-  "state": "PG_ATTRIBUTE_RAW_SAFE_VISIBLE_TUPLES_600_OF_4030; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
+  "state": "PG_ATTRIBUTE_RAW_SAFE_VISIBLE_TUPLES_1700_OF_4030; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
   "application_table_review": {
     "total": 46,
     "current_index": 46,
@@ -13955,6 +13974,71 @@
     "next": "pg_attribute ordinal 1001/4030, recheck count/order/anchor",
     "previous_column_ddl_credit": "NOT_DUPLICATED",
     "compiled_and_hosted": "UNVERIFIED",
+    "provider_writes": false,
+    "baseline_complete": false
+  },
+  "provider_pg_attribute_raw_run99": {
+    "status": "VISIBLE_FIELD_TUPLES_1001_TO_1700",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_development_parent_sha": "82238ac149ab81c6da5e110ca16b3b3453af11fe",
+    "source_main_sha": "a4028e42b0d0316fd539c0563fd07832d509aed0",
+    "source_release_sha": "92829cb6aff82aaec212eabbd921183e7997f1a7",
+    "reviewed_new": 700,
+    "reviewed_cumulative": 1700,
+    "total": 4030,
+    "range": [
+      1001,
+      1700
+    ],
+    "anchor": [
+      {
+        "ordinal": 1000,
+        "schema_name": "information_schema",
+        "relation_name": "sql_implementation_info",
+        "column_name": "integer_value",
+        "relation_oid": "13453"
+      },
+      {
+        "ordinal": 1001,
+        "schema_name": "information_schema",
+        "relation_name": "sql_implementation_info",
+        "column_name": "character_value",
+        "relation_oid": "13453"
+      }
+    ],
+    "schemas": {
+      "information_schema": 155,
+      "pg_catalog": 545
+    },
+    "kinds": {
+      "r": 349,
+      "v": 230,
+      "i": 121
+    },
+    "flags": {
+      "not_null": 291,
+      "has_default": 0,
+      "has_missing_value": 0,
+      "identity": 0,
+      "generated": 0,
+      "column_acl_present": 0,
+      "column_options_present": 0,
+      "fdw_options_present": 0
+    },
+    "confirmed_metadata_anomalies": 0,
+    "receipt_paths": [
+      "docs/audits/issue509-provider-pg-attribute-raw-1001-1100-2026-11-08-run99.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-1101-1200-2026-11-08-run99.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-1201-1300-2026-11-08-run99.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-1301-1400-2026-11-08-run99.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-1401-1500-2026-11-08-run99.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-1501-1600-2026-11-08-run99.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-1601-1700-2026-11-08-run99.json"
+    ],
+    "next_ordinal": 1701,
+    "prior_column_ddl_not_recredited": true,
+    "native_and_hosted": "UNVERIFIED",
+    "source_fixes": 0,
     "provider_writes": false,
     "baseline_complete": false
   }
