@@ -8,6 +8,27 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-shot-history-measured-make-current",
+      "issue": 455,
+      "title": "Hide unavailable Make Current Recipe action on unloggable all-green historical shots",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/shot_card.js"
+      ],
+      "tests": [
+        "Pinned 130aea562358998354d6dcffdbcd49f00412fa75 archived all-five-green physical invalid row displayed Make Current yet existing engine rejects invalid physical dose/yield/time. No real member incident asserted.",
+        "Three direct synthetic test groups: invalid/missing/out-of-range measurements vs inclusive endpoints; full five senses; engine refusal/acceptance and unmodified original notes/shots; pending sync/version restrictions.",
+        "Node22/lint/build, mobile/browser/offline/a11y, isolated SQL/security and governance PR-head plus exact merged-source CI PENDING, not passed."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact PR-head, merge and merged-source CI unexecuted"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Owner Option B safe UI gate; same existing physical eligibility as engine. No deployment or Locked changes."
+    },
+    {
       "id": "DIC-Q-455-prefill-measured-physical-history",
       "issue": 455,
       "pr": 1326,

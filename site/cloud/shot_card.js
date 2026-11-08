@@ -1,5 +1,13 @@
 import {e,button,icon,shotSummary,styleBadge,humanDate,chips,radar} from '../lib/ui.js';
-import {isDialed} from '../lib/constants.js';
+import {CONFIG,finite,isDialed} from '../lib/constants.js';
+
+// A historical five-green shot can retain its success badge and original notes
+// while being ineligible for Make Current when recorded physical values
+// could not pass the same Log Shot bounds already enforced by the engine.
+const isMeasuredRecipeShot=shot=>['doseG','yieldG','timeS'].every(field=>{
+ const [low,high]=CONFIG.bounds[field];
+ return finite(shot[field])&&shot[field]>=low&&shot[field]<=high;
+})&&finite(shot.yieldG/shot.doseG);
 
 // One-line shot summary on wide screens, like the original JSX.
 // Equipment context is preserved at the bottom of expanded details.
@@ -18,7 +26,7 @@ export function shotCard(shot,{expanded=false,activeVersionId=null,unit='F'}={})
  const displayDate=humanDate(shot.timestamp)||'Date not recorded';
  const canEdit=!shot.cloudPending;
  const genuineSuccess=shot.dialedIn===true&&isDialed(shot.tasteScales);
- const canChoose=canEdit&&genuineSuccess&&shot.setupVersionId===activeVersionId;
+ const canChoose=canEdit&&genuineSuccess&&isMeasuredRecipeShot(shot)&&shot.setupVersionId===activeVersionId;
  return `<section class="shot">
   <button class="shot-toggle" data-action="shot-expand" data-id="${e(shot.id)}" aria-expanded="${expanded}" aria-label="Toggle details for shot on ${e(displayDate)}">
    <div class="shot-overview">
