@@ -3160,9 +3160,29 @@
       "confirmed_defects": 0,
       "production_writes": false,
       "baseline_complete": false
+    },
+    {
+      "event": "2026-11-08_run104_system_pg_class_raw_484",
+      "development_parent_sha": "edf2e25666c25cb0fe7e43712d4e285e389ca40c",
+      "inventory_identity_md5": "9be0870fe6df8ccc24f9db810afd3189",
+      "reviewed_new": 484,
+      "reviewed_total": 484,
+      "population": 484,
+      "receipt_paths": [
+        "docs/audits/issue509-provider-pg-class-system-raw-001-080-2026-11-08-run104.json",
+        "docs/audits/issue509-provider-pg-class-system-raw-081-160-2026-11-08-run104.json",
+        "docs/audits/issue509-provider-pg-class-system-raw-161-240-2026-11-08-run104.json",
+        "docs/audits/issue509-provider-pg-class-system-raw-241-320-2026-11-08-run104.json",
+        "docs/audits/issue509-provider-pg-class-system-raw-321-400-2026-11-08-run104.json",
+        "docs/audits/issue509-provider-pg-class-system-raw-401-480-2026-11-08-run104.json",
+        "docs/audits/issue509-provider-pg-class-system-raw-481-484-2026-11-08-run104.json"
+      ],
+      "confirmed_new_defects": 0,
+      "provider_writes": false,
+      "baseline_complete": false
     }
   ],
-  "state": "PG_ATTRIBUTE_RAW_SAFE_VISIBLE_TUPLES_1700_OF_4030; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
+  "state": "SYSTEM_PG_CLASS_RAW_SAFE_VISIBLE_484_OF_484; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
   "application_table_review": {
     "total": 46,
     "current_index": 46,
@@ -14362,5 +14382,65 @@
     "source_fixes": 0,
     "baseline_complete": false,
     "next": "Distinct unreviewed provider catalog/definition family after ledger-to-live gap check; changed/new SQL/Edge drift; compiled native/hosted Auth/API and restricted console settings UNVERIFIED."
+  },
+  "provider_system_pg_class_raw_run104": {
+    "status": "PG_CATALOG_AND_PG_TOAST_SAFE_RAW_PG_CLASS_484_OF_484_FIELD_LEVEL_STRUCTURAL_CHECKED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_development_parent_sha": "edf2e25666c25cb0fe7e43712d4e285e389ca40c",
+    "source_main_sha": "a4028e42b0d0316fd539c0563fd07832d509aed0",
+    "source_release_sha": "92829cb6aff82aaec212eabbd921183e7997f1a7",
+    "schema_groups": {
+      "pg_catalog": {
+        "table": 64,
+        "index": 124,
+        "view": 78
+      },
+      "pg_toast": {
+        "toast_table": 109,
+        "toast_index": 109
+      }
+    },
+    "reviewed_new": 484,
+    "reviewed_cumulative": 484,
+    "total": 484,
+    "range": [
+      1,
+      484
+    ],
+    "ordered_by": "schema_name,relation_name,relation_oid",
+    "inventory_identity_md5": "9be0870fe6df8ccc24f9db810afd3189",
+    "full_raw_tuple_field_md5": "md5(to_jsonb(pg_class)::text) per each row; physical stats may drift without DDL",
+    "checked": [
+      "complete safe original pg_class tuple flags and owner/ACL/reloptions",
+      "pg_index row existence and valid-ready-live for indices",
+      "pg_constraint check counts vs relchecks",
+      "pg_trigger counts vs relhastriggers",
+      "toast-reference target kind existence",
+      "pg_inherits parent for partitions",
+      "pg_class table index counters vs pg_index"
+    ],
+    "new_structural_catalog_anomalies": 0,
+    "confirmed_new_application_errors": 0,
+    "source_fixes": 0,
+    "not_credited": [
+      "prior catalog DDL and SQL source review",
+      "#267 source lines",
+      "compiled/native PostgreSQL source",
+      "hosted Auth JWT/PostgREST/direct API enforcement",
+      "private table rows and secrets"
+    ],
+    "receipt_paths": [
+      "docs/audits/issue509-provider-pg-class-system-raw-001-080-2026-11-08-run104.json",
+      "docs/audits/issue509-provider-pg-class-system-raw-081-160-2026-11-08-run104.json",
+      "docs/audits/issue509-provider-pg-class-system-raw-161-240-2026-11-08-run104.json",
+      "docs/audits/issue509-provider-pg-class-system-raw-241-320-2026-11-08-run104.json",
+      "docs/audits/issue509-provider-pg-class-system-raw-321-400-2026-11-08-run104.json",
+      "docs/audits/issue509-provider-pg-class-system-raw-401-480-2026-11-08-run104.json",
+      "docs/audits/issue509-provider-pg-class-system-raw-481-484-2026-11-08-run104.json"
+    ],
+    "provider_writes": false,
+    "production_deployment": false,
+    "baseline_complete": false,
+    "next": "Reconcile remaining distinct uncovered positive-count provider catalog and deployment definition families; continue drift and provider-advisor readbacks. Hosted Auth/JWT/PostgREST/native implementation/restricted console settings UNVERIFIED."
   }
 }
