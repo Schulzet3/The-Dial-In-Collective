@@ -2629,6 +2629,31 @@
       ],
       "owner_approval": false,
       "production_deployed": false
+    },
+    {
+      "id": "R455-EV-APP-069-A",
+      "source": "site/cloud/shot_card.js initial Git blob 96bf384fc9e5df0836dbe6b09e7089c42937173d; site/lib/engine.js::makeCurrent current measuredRecipeShots 3823b70b0a954a9a4182b45de11d667cfe1c98a4; corrected Shot History Git blob 56ba4716b190b0da9330f1bc740edb45e9f54ae5",
+      "claim": "For an imported five-green historical shot with physically unloggable dose/yield/time, Shot History previously offered Make Current Recipe although the unchanged existing engine action correctly rejected it. Reusing existing CONFIG bounds only in the card affordance removes the dead-end, without stripping historical notes, badge, ratings or changing any saved record.",
+      "grade": "DETERMINISTIC_LIVE_SOURCE_CROSSCHECK_SYNTHETIC_POSITIVE_NEGATIVE_REAL_MODULE_NODE22; NOT_A_KNOWN_MEMBER_INCIDENT_OR_EMPIRICAL_TASTE_VALIDATION",
+      "current_app": "Corrected UI gated by dose 5-40g/yield 5-200g/time 1-180s finite bounds, same as existing engine selection; all-five-green Dialed In badge remains independent of style window.",
+      "source_parent_sha": "130aea562358998354d6dcffdbcd49f00412fa75",
+      "code_merge_sha": "b9774048e8136aadfc900d5f8bb521fd579f6478",
+      "original_blob_sha": "96bf384fc9e5df0836dbe6b09e7089c42937173d",
+      "corrected_blob_sha": "56ba4716b190b0da9330f1bc740edb45e9f54ae5",
+      "result": "SAFE_LOCKED_COMPATIBLE_VERIFIED_PR1334_NONFORCE_MERGED_READY_NOT_DEPLOYED",
+      "tests": "Three new R104 real-module tests pass; head Node22 3008 PASS/0 FAIL/6 intentional SKIP; exact merged Node22 3009 PASS/0 FAIL/6 SKIP. Head browser/mobile/offline/a11y, SQL, security, governance and merged browser/mobile/offline/a11y, cloud umbrella, governance SUCCESS; original603 intentionally SKIPPED, not PASS.",
+      "ci_runs": [
+        42439853513,
+        42439853607,
+        42439853592,
+        42439853599,
+        42439853547,
+        42440045921,
+        42440045915,
+        42440045951
+      ],
+      "owner_approval": false,
+      "production_deployed": false
     }
   ],
   "policy_decisions_pending": [],
@@ -2637,9 +2662,10 @@
     "tests_executed": true,
     "production_deployed": false,
     "queue_changed": true,
-    "reason": "R455-097 verified nonforce code PR1276, no Locked policy/SQL/privacy change, docs-only READY reconciliation."
+    "reason": "R455-104 SAFE Shot History card fix merged PR1334, no Locked policy/SQL/privacy change; docs-only READY reconciliation."
   },
   "next_actions": [
+    "R455-104 code PR #1334 merged b9774048e8136aadfc900d5f8bb521fd579f6478; head Node22 3008/0/6, merged Node22 3009/0/6, all applicable UI/mobile/offline/a11y/SQL/security/governance successes; 3 R104 positive/negative tests PASS; queue READY development-only after docs reconciliation, no deployment; 60 source identities/136 bounded checks/66 proposals, S019 inaccessible, #267 no literal credit. Continue distinct safe finding.",
     "R455-103: SAFE Log Shot measured-prefill consistency PR #1326 nonforce merged 531e5fce190a696f52f83326d9c767570c8b3945; exact tested/merged engine, test and same-commit journal blobs identical. Node22 3005 PASS/0 FAIL/6 SKIP both, applicable UX/browser/mobile/approval/SQL/security success, original603 SKIPPED. Queue READY development only on docs reconciliation, NOT DEPLOYED. 60 source identities/135 bounded checks/65 proposals. S019 unreviewed, #267 no literal credit. Next fresh source and distinct finding.",
     "R455-097 verified code PR #1276 exact merge 028e2bd2db3e6cbc5931a95b82d9217cab38c439; 2984 PASS/0 FAIL/6 SKIP PR head/merged retry (first merged Node parser stress timed out in unrelated extractor; second attempt full Node and lint PASS), applicable UX/mobile/offline, PR-head SQL/security and governance; archived context mismatch only, legacy missing unchanged, development READY, no deploy. 58 sources/125 evidence checks/59 proposals, S019 inaccessible, no #267 line review.",
     "R455-096 code PR #1264 merged e7ef11fdcc510f14b9686b6d5565e77277887809; exact head and merged 2972/0/6 Node22 and browser/mobile/offline/SQL/security/governance evidence; docs-only READY reconciliation underway. Next substantive nonoverlap research claim review, S019 inaccessible, #267 line credit zero.",
@@ -2662,44 +2688,52 @@
     "R455-102: independently cross-checked MDPI-indexed primary Choi et al. 2025 methods/results/conclusions (direct HTML 429; full publisher bytes unverified) against original #01 and current Locked rating/recipe code. Experimental 15-17g and 70-90mL cups are protocol standards, not universal DIC dose; expert CATA three-replicate repeatability across variable country brew conditions is not five-slider app validity. Source identity unchanged: 60 sources, 134 bounded checks, 64 proposals; no code/Locked rule/queue changes. Direct original PDF and S019 remain inaccessible, docs-only PR governance pending."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-103",
-    "base_development_sha": "b16ea199314c32fbe094f3637138a5f3b0bdf3bf",
-    "merged_code_sha": "531e5fce190a696f52f83326d9c767570c8b3945",
-    "verified_integrated_source_sha": "531e5fce190a696f52f83326d9c767570c8b3945",
+    "id": "R455-104",
+    "base_development_sha": "130aea562358998354d6dcffdbcd49f00412fa75",
+    "merged_code_sha": "b9774048e8136aadfc900d5f8bb521fd579f6478",
+    "verified_integrated_source_sha": "b9774048e8136aadfc900d5f8bb521fd579f6478",
     "source_ids": [
+      "site/cloud/shot_card.js",
       "site/lib/engine.js",
-      "tests/issue455-prefill-measurement-integrity.test.mjs",
+      "tests/issue455-shot-history-measured-make-current.test.mjs",
       "docs/workstreams/issue-455.md"
     ],
     "claim_ids": [
-      "R455-EV-APP-068-A"
+      "R455-EV-APP-069-A"
     ],
     "number_of_curated_sources": 60,
-    "total_evidence_checks": 135,
-    "number_of_proposals": 65,
-    "review_type": "BOUNDED_REPRODUCED_SAFE_LOG_SHOT_PREFILL_PHYSICAL_MEASUREMENT_CONSISTENCY",
+    "total_evidence_checks": 136,
+    "number_of_proposals": 66,
+    "review_type": "BOUNDED_SAFE_HISTORY_CARD_ACTION_VS_ENGINE_MEASURED_ELIGIBILITY",
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
     "code_or_policy_changed": true,
     "ci_runs": [
-      42435565232,
-      42435565274,
-      42435565259,
-      42435565249,
-      42435565193,
-      42435760941,
-      42435760901,
-      42435760884
+      42439853513,
+      42439853607,
+      42439853592,
+      42439853599,
+      42439853547,
+      42440045921,
+      42440045915,
+      42440045951
     ],
     "node_tests": {
-      "status": "PR_HEAD_AND_EXACT_MERGED_DEVELOPMENT_PASS",
-      "pass": 3005,
-      "fail": 0,
-      "skip": 6
+      "head": {
+        "pass": 3008,
+        "fail": 0,
+        "skip": 6
+      },
+      "merged": {
+        "pass": 3009,
+        "fail": 0,
+        "skip": 6
+      },
+      "status": "PR_HEAD_AND_EXACT_MERGED_DEVELOPMENT_PASS"
     },
     "original603": "SKIPPED_NOT_PASS",
     "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "R455-103 code and source-bound tests merged/read back; finish docs-only reconciliation PR governance and continue next nonoverlapping safe UX defect or primary research claim at newer development SHA; #267 audit independent."
+    "next_action": "After docs-only PR merge and governance confirmation, continue distinct primary research paper/source or bounded Log Shot→Rate→Recommendation UX defect; #267 has independent literal audit ownership."
   },
   "policy_decisions_resolved": [
     {
@@ -4061,6 +4095,23 @@
       "implementation": "VERIFIED_CODE_PR1326_NONFORCE_SQUASH_MERGED_531e5fce190a696f52f83326d9c767570c8b3945; SAME_COMMIT_JOURNAL; FOLLOWUP_RELEASE_QUEUE_READY_NOT_DEPLOYED",
       "test_plan": "Node22 3,005 PASS 0 FAIL 6 SKIP both tested PR head and exact merged development, three R103 regressions pass; browser/mobile/offline and approval pass, isolated SQL/security PR head pass; frozen603 intentionally SKIPPED; no hosted Auth/consumer tests or measured coffee quality claim.",
       "release_queue": "DIC-Q-455-prefill-measured-physical-history READY_DEVELOPMENT_ONLY",
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-104-SHOT-HISTORY-MEASURED-MAKE-CURRENT-ELIGIBILITY",
+      "finding": "Shot History exposed Make Current Recipe for an otherwise all-five-green imported historical row whose dose/yield/time fail the already approved physical Log Shot bounds, even though existing engine makeCurrent explicitly refuses it.",
+      "evidence": [
+        "R455-EV-APP-069-A"
+      ],
+      "severity": "P2_DETERMINISTIC_HISTORY_ACTION_AFFORDANCE_CORRECTNESS",
+      "user_benefit": "Avoid inviting a futile Make Current tap, while retaining original successful sensory badges, private notes and Edit, and allowing genuinely measured all-green shots including inclusive limits to remain selectable.",
+      "current_locked": "Keep all five tastes, sensory-green success vs physical recipe eligibility, explicit Make Current on eligible current setup shot, retained notes/history/Community, privacy/RLS, current 5-40g dose/5-200g yield/1-180s time Log Shot bounds, version/pending guards; no new policy/target.",
+      "current_app": "Original shot card blob 96bf384fc9e5df0836dbe6b09e7089c42937173d checked all-green and version but ignored physical measurements; existing engine blob 3823b70b0a954a9a4182b45de11d667cfe1c98a4 already rejected unmeasured records; corrected card blob 56ba4716b190b0da9330f1bc740edb45e9f54ae5 applies exact entry bounds to affordance only.",
+      "proposed_change": "SAFE implemented: hide the action on physically invalid imported history while preserving Dialed In badge, raw history, notes, Edit and actual eligible choices.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "VERIFIED_CODE_PR1334_NONFORCE_SQUASH_MERGED_b9774048e8136aadfc900d5f8bb521fd579f6478; SAME_COMMIT_JOURNAL; FOLLOWUP_RELEASE_QUEUE_READY_NOT_DEPLOYED",
+      "test_plan": "Head Node22 3008/0/6 and merged Node22 3009/0/6, both exact-source 3 new tests PASS; scoped UX/mobile/offline/a11y/SQL/security/governance SUCCESS; frozen603 SKIPPED; real member and cup outcomes untested.",
+      "release_queue": "DIC-Q-455-shot-history-measured-make-current READY_DEVELOPMENT_ONLY",
       "production_deployed": false
     }
   ],
