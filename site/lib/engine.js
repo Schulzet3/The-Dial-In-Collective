@@ -31,7 +31,15 @@ export function baseline(coffee,style,dose,preferences='') {
 }
 // Never promote an archived/imported `dialedIn` marker into personal recipe
 // evidence without verifying its five original recorded ideal ratings.
-export function familyShots(s,id) {return s.shots.filter(x=>!x.hidden&&x.dialedIn===true&&isDialed(x.tasteScales)&&x.familyId===id);}
+// A restored shot may carry a stale family ID from a different coffee or
+// espresso style. Only the recorded family identity can anchor same-coffee
+// recipe evidence. Preserve the original archived row without modifying it.
+export function familyShots(s,id) {
+ const family=s.families?.find(f=>f.id===id);
+ if(!family)return [];
+ return s.shots.filter(x=>!x.hidden&&x.dialedIn===true&&isDialed(x.tasteScales)&&
+  x.familyId===id&&x.coffeeId===family.coffeeId&&x.style===family.style);
+}
 // Five green ratings do not validate malformed imported physical measurements.
 // Preserve all originals in History; only measured rows inform recipe evidence.
 function measuredRecipeShots(shots) {
