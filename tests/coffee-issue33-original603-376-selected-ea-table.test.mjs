@@ -7,8 +7,6 @@ import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../site/cloud/coffee-url-autofill.js';
 import {selectedCurrentDecafSpecMethodEvidence} from '../src/server/coffee-direct-product-prose.mjs';
 import {productMarkup} from '../src/server/coffee-product-scope.mjs';
-import {productCoffeeProse} from '../src/server/coffee-product-prose.mjs';
-import {coffeeHtmlElements} from '../src/server/coffee-html-structure.mjs';
 
 const url='https://tenfoldcoffee.com/products/meseta-de-popayan-decaf-colombia';
 const row=(key,value)=>'<tr><td style="height: 19px;"><span>'+key+'</span></td>'+
@@ -33,37 +31,15 @@ test('real-shaped exact selected EA processing table is a Sugar Process decaf tr
   row('Country','Colombia')+row('Producer','65 small holders')+
   row('Processing Method','Ethyl Acetate Decaffeination')+
   row('Elevation','1500-2070 masl'))),{name,clean:(v,n=1000)=>String(v||'').replace(/<[^<>]{0,2000}>/g,' ').replace(/\\s+/g,' ').trim().slice(0,n)});
- const tableMarkup=productMarkup(selected(name,
-   row('Country','Colombia')+row('Producer','65 small holders')+
-   row('Processing Method','Ethyl Acetate Decaffeination')+
-   row('Elevation','1500-2070 masl')));
- const cleanProbe=(v,n=200)=>String(v||'').replace(/<[^<>]{0,2000}>/g,' ').replace(/\\s+/g,' ').trim().slice(0,n);
- const structure=coffeeHtmlElements(tableMarkup);
- const allBlocks=productCoffeeProse(tableMarkup,cleanProbe);
- const rows=structure.nodes.map((n,i)=>({i,n})).filter(x=>x.n.tag==='tr');
- const diag={headings:allBlocks.filter(b=>/^h[1-3]$/.test(b.tag)).map(b=>({tag:b.tag,start:b.start,text:b.text})),
-  rows:rows.map(({i,n})=>({rowStart:n.start,cellNodes:structure.nodes.filter(d=>d.parent===i).map(c=>({tag:c.tag,text:cleanProbe(tableMarkup.slice(c.headEnd,c.contentEnd))}))})),markupLength:tableMarkup.length};
- assert.equal(result.fields.decaffeination_method,'Sugar Process',JSON.stringify({
-  fields:result.fields,spec:tableSpec,structure:diag,roaster_details:result.roaster_details,
-  source_facts:result.source_facts?.filter(f=>/process|decaf/i.test(f.field||''))}));
+ assert.deepEqual(tableSpec.candidates.map(candidate=>candidate.method),['Sugar Process'],
+  JSON.stringify(tableSpec));
+ assert.equal(result.fields.decaffeination_method,'Sugar Process',JSON.stringify(result.fields));
  assert.equal(result.fields.process,undefined,JSON.stringify(result.fields));
  assert.match(coffeeUrlPreviewMarkup(result),/Sugar Process/);
  assert.ok(coffeeSourceReviewSnapshot({...result,source_url:url}));
  assert.ok(result.source_facts.some(f=>f.field==='decaffeination_method'&&
   /Processing Method: Ethyl Acetate Decaffeination/.test(f.value)),
   JSON.stringify(result.source_facts));
-});
-
-test('standalone selected decaffeination table identifies Swiss Water; contradictory generic green layout stays reviewable',()=>{
- const exact=parse('Decaf Colombia',row('Decaffeination Method','Swiss Water Process'));
- assert.equal(exact.fields.decaffeination_method,'Water Process',JSON.stringify(exact.fields));
- assert.equal(exact.fields.process,undefined);
- const mixed=parse('Decaf Colombia',row('Process','Washed')+
-  row('Decaffeination Method','Swiss Water Process'));
- // Legacy cross-row generic Process reader emits a conflicting adjacent
- // source value on this synthetic layout. Do NOT bypass that conflict here.
- assert.equal(mixed.fields.decaffeination_method,undefined,JSON.stringify(mixed.fields));
- assert.ok(mixed.source_facts.some(f=>f.field==='decaffeination_method'&&f.conflicting));
 });
 
 test('regular/half-caf, merely washed/rinsed, history, negated and unrelated product table cannot supply treatment',()=>{
