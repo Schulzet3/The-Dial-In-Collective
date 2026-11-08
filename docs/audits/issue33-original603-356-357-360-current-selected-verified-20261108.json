@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "kind": "ISSUE33_R21_EXACT_CURRENT_OFFICIAL_SELECTED_SOURCE_INDEPENDENT_RECEIPT",
+  "date_utc": "2026-11-08",
+  "repository": "Schulzet3/The-Dial-In-Collective",
+  "issue": 33,
+  "status": "PARTIAL_CURRENT_SELECTED_CASE_ADJUDICATION_NOT_ORIGINAL603_COMPLETE",
+  "privacy": "public read-only development",
+  "prior_source_sha": "3ba46f6f333ca6f7afdf0d82eb1e2790bb0eaf20",
+  "source_pr": 1321,
+  "source_reviewed_head": "4bb9c833c17250055514030b861c38fc830cfc1b",
+  "source_nonforce_merged_sha": "b5f7894c63ce09063c1f07322966cfc7304c86c5",
+  "source_reviewed_tree": "d382ea733ed36455a49124e1415eb50777e79f9a",
+  "scope": {
+    "frozen_coffees": 603,
+    "roasters": 201,
+    "original_captures": 1197,
+    "original_csv_git_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "original_frozen_csv_modified": false,
+    "oracle_modified": false,
+    "scorer_modified": false,
+    "universal_manual_semantic_certification": false
+  },
+  "ci": {
+    "pr_head_node_lint_build": {
+      "run": 42432356022,
+      "conclusion": "SUCCESS"
+    },
+    "pr_head_cloud_mobile": {
+      "run": 42432356012,
+      "conclusion": "SUCCESS"
+    },
+    "pr_head_isolated_sql": {
+      "run": 42432355974,
+      "conclusion": "SUCCESS"
+    },
+    "pr_head_approval": {
+      "run": 42432356044,
+      "conclusion": "SUCCESS"
+    },
+    "exact_merged_public_official": {
+      "run": 42432528978,
+      "job": 128584337065,
+      "conclusion": "SUCCESS",
+      "fetched": 3,
+      "parsed": 3,
+      "add_coffee_rendered": 3,
+      "source_review_rendered": 3,
+      "manual_certified_by_automated_runner": 0
+    },
+    "exact_merged_approval": {
+      "run": 42432528982,
+      "conclusion": "SUCCESS"
+    },
+    "frozen603_aggregate": "NOT_RUN_FOR_THIS_SCOPE_NOT_CREDITED_AS_PASS",
+    "authenticated_gotrue": "NOT_TESTED"
+  },
+  "public_artifact": {
+    "id": 13598535543,
+    "name": "dic33-original603-focused-42432528978",
+    "sha256": "09d7dd3ce57ea9d0d97397986d3a1bff49734d9c7f4a56646a4b3fe3e2a03869",
+    "evidence_json_sha256": "cff1dacd75d00164f2f20cd70a922ce2dca3f25aed1bd44ba4168fc46f3ee2a7",
+    "independently_recomputed_in_container": true,
+    "raw_html_sha256_verified_for_each_selected_case": true
+  },
+  "cases": [
+    {
+      "number": 356,
+      "official_url": "https://stovetoproasters.com/products/decaf-colombia",
+      "h1": "Decaf Colombia",
+      "html_sha256": "c3e884cf3e803b8ed26071332cc433b9db423bd99e69c927459c3f2e2e6b106c",
+      "source_primary": "Region Huila; Processing Washed plus sugar-cane E.A. decaf; literal tasting Sweet/Lemon/Creamy",
+      "current_fields": {
+        "origin": "Huila, Colombia",
+        "process": "Washed",
+        "decaffeination_method": "Sugar Process",
+        "variety": "Various",
+        "elevation_m": "1,200-2,100 masl",
+        "tasting_notes": "Sweet, Lemon, Creamy"
+      },
+      "identity_result": "MATCH",
+      "semantic_result": "CURRENT_SELECTED_COMPATIBLE_NO_DEFECT",
+      "source_review": true,
+      "add_coffee": true,
+      "conflicts": []
+    },
+    {
+      "number": 357,
+      "official_url": "https://stovetoproasters.com/products/ethiopia-worka-chelbessa",
+      "h1": "Ethiopia Worka Chelbessa",
+      "html_sha256": "02b045dd527e730a35cd82b2e73eed98219fcb184b90b299fa68d889272c89f9",
+      "source_primary": "Region Gedeb, Washed, heirloom, 1900-2200masl, Pear/Orange/Rose; text says sourced from privately owned Worka Chelbessa washing station with several hundred smallholder suppliers via SNAP",
+      "current_fields": {
+        "origin": "Gedeb, Ethiopia",
+        "process": "Washed",
+        "producer": "privately owned Worka Chelbessa washing station",
+        "variety": "Ethiopian Heirloom",
+        "elevation_m": "1,900-2,200 masl",
+        "tasting_notes": "Pear, Orange, Rose"
+      },
+      "identity_result": "MATCH",
+      "semantic_result": "QUALIFIED_STATION_PROCESSING_SOURCE_NOT_NAMED_GROWER",
+      "qualification": "Parser producer matches prior approved test in tests/coffee-producer-source-evidence.test.mjs (literal station-as-supply-source fallback) while separate tests/coffee-issue33-original603-346-washing-station-role.test.mjs forbid bare Washing Station captions promoting to grower. Source does not identify an individual grower. Do not assert station grew cherries or relabel the station as an individual grower; inspect future producer-role semantics before any change, preserve direct statement/source.",
+      "source_review": true,
+      "add_coffee": true,
+      "conflicts": []
+    },
+    {
+      "number": 360,
+      "official_url": "https://subliminalcoffee.com/products/la-piragua-anaerobic-natural-colombia",
+      "h1": "La Piragua - Anaerobic Natural Colombia",
+      "html_sha256": "c3549bf8870dfc904e68a1c1bf48b8932bac9a40c901da02a986ffef57f0a28a",
+      "source_primary": "Selected Coffee Info explicitly Producer The Vargas Family, Region Huila, Process Anaerobic Natural, Varietal Caturra, Altitude 1800m; import partner separate.",
+      "current_fields": {
+        "origin": "Huila, Colombia",
+        "process": "Anaerobic",
+        "producer": "The Vargas Family",
+        "variety": "Caturra",
+        "elevation_m": "1800m",
+        "tasting_notes": "Pink Lemonade, Hibiscus Tea, & Apricot"
+      },
+      "identity_result": "MATCH",
+      "semantic_result": "CURRENT_SELECTED_COMPATIBLE_NO_DEFECT_CONSERVATIVE_CANONICAL_PROCESS",
+      "source_review": true,
+      "add_coffee": true,
+      "conflicts": []
+    }
+  ],
+  "outcome": {
+    "new_parser_defect_reproduced": false,
+    "prior_station_fallback_identified_as_intentionally_tested_qualification": true,
+    "new_queue_item_ready": false,
+    "parent_issue_open": true,
+    "netlify_deployed": false,
+    "production_write_count": 0,
+    "authorization": "development-only"
+  },
+  "next": "Select truly unreviewed high-confidence original603 direct-current source case(s); for any reproduced generic parser defect, write focused positive/negative tests and fix with same-commit journal before development READY; don't relabel the #357 station as individual grower without direct proof. Continue independent case certification and preserve #267/#96 boundaries."
+}
