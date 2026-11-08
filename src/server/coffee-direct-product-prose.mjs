@@ -314,6 +314,23 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
     if(decafEvidence.size<4)decafEvidence.add(eaClaim);
     else decafEvidenceOverflow=true;
   }
+  // A selected product may print its caffeine-removal method inside one
+  // plain-text description DIV, not a labeled spec or separate paragraph.
+  // Require exact selected H1, a directly named current decaf introduction,
+  // and named water DECAFFEINATION evidence in that same bounded source.
+  const currentDecafIntro=line.match(/^([\p{L}][\p{L}\p{M}'’.-]{3,64})\s+is\s+a\s+decaf(?:feinated)?\s+coffee\b/iu);
+  const currentWaterWitness=line.match(/\b(?:the|this)\s+(?:swiss|mountain)[ -]?water\s+decaffeination\s+process\s+is\s+[^!?]{0,260}\bcaffeine[ -]?free\b/iu)?.[0]||'';
+  const decafSubject=fold(currentDecafIntro?.[1]);
+  if(decafOnlyCoffee(name)&&!b.educational&&['div','p'].includes(b.tag)&&
+     line.length<=650&&decafSubject.length>=5&&
+     (selected===decafSubject||selected.startsWith(decafSubject+' '))&&
+     currentWaterWitness&&!NONCURRENT_DECAF_METHOD.test(line)&&
+     !/\b(?:not|never|without|instead of|rather than|formerly|previously)\b/iu.test(currentWaterWitness)&&
+     inferDecaffeinationMethod({name,selectedMethod:currentWaterWitness})==='Water Process'&&
+     !decafEvidence.has(currentWaterWitness)){
+   if(decafEvidence.size<4)decafEvidence.add(currentWaterWitness);
+   else decafEvidenceOverflow=true;
+  }
   // A decaf identity plus a current selected-product sentence is required.
   // Reuse the conservative method classifier; if multiple incompatible
   // methods are printed, the caller withholds autofill and keeps both sources.
