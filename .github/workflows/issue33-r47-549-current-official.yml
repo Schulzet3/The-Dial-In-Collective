@@ -1,0 +1,38 @@
+name: DIC Issue33 R47 selected #549 exact current official source
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r47-549-current-official.yml
+      - scripts/audit/issue33-r47-549-current-afterproof.mjs
+permissions:
+  contents: read
+jobs:
+  selected-r47-549:
+    name: current-original603-549-source-and-review
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Capture selected official HTTPS and run actual parser and preview
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r47-549
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '549'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Exact selected identity, fields, raw bytes, and Source Review fail-closed checks
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r47-549
+        run: node scripts/audit/issue33-r47-549-current-afterproof.mjs
+      - name: Retain only one day of public raw source and evidence for independent hashes
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r47-selected-549-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r47-549/
+          if-no-files-found: error
+          retention-days: 1
