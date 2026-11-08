@@ -57,9 +57,9 @@ for(const [number,name,host] of [
   // generic menu or former lot) and includes a note list absent from visible
   // product description. Locked hierarchy permits this ONLY as last-resort
   // unverified identity-matched metadata, explicitly flagged for review.
-  const selectedMetaTags=[...raw.matchAll(/<meta\\b[^>]{0,3000}>/gi)].map(m=>m[0]);
+  const selectedMetaTags=[...raw.matchAll(/<meta\b[^>]{0,3000}>/gi)].map(m=>m[0]);
   const ownNoteMeta=selectedMetaTags.some(tag=>
-    /\\b(?:name|property)=["'](?:description|og:description)["']/i.test(tag)&&
+    /\b(?:name|property)=["'](?:description|og:description)["']/i.test(tag)&&
     /Mexico Chiapas[^"']{0,20}Seasonal Espresso/i.test(tag)&&
     /tasting notes of red apple, panels, brown sugar/i.test(tag));
   check(ownNoteMeta,'543_exact_current_selected_identity_meta_not_verified');
