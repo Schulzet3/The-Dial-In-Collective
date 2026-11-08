@@ -2955,15 +2955,39 @@
       "owner_approval": false,
       "original_source_sha": "005f2c57f81f0ddd5ee9f30f6ea488abd7e1a248",
       "publisher_pdf_sha256": null
+    },
+    {
+      "id": "R455-EV-APP-076-A",
+      "source": "Live Git blob site/cloud/shot_card.js 56ba4716b190b0da9330f1bc740edb45e9f54ae5, site/lib/engine.js 59696aada657fb5b46ef64cf26065e6601f35dff, source SHA a4892e8c2d77d383265663e6decaefeb186db9d3; mapping.js personal_family_id hydration; R114 direct-module tests",
+      "claim": "Physically valid, all-five-green imported shot with null/empty/nonstring familyId previously showed Make Current; makeCurrent could set currentFamilies[style]=undefined and favoriteShots['undefined']=shot.id, an invalid personal preference. Real module synthetic negatives null, undefined, '', whitespace, numeric and positive named family, without modifying original history.",
+      "grade": "REPRODUCIBLE_DETERMINISTIC_LIVE_CODE_AND_SYNTHETIC_TESTS; EXACT_HEAD_AND_MERGED_NODE22_3066_PASS_0_FAIL_6_INTENTIONAL_SKIP; NOT_REAL_MEMBER_OR_PHYSICAL_TASTE_VERIFICATION",
+      "current_app": "History UI now hides invalid-family action, engine rejects it before mutating preferences/audit; original Dialed In badge, all five tastes, measurements, notes and valid family prefs unchanged.",
+      "result": "SAFE_PREFERENCE_INTEGRITY_FIX_READY_DEVELOPMENT_NOT_DEPLOYED",
+      "original_source_sha": "a4892e8c2d77d383265663e6decaefeb186db9d3",
+      "verified_code_head_sha": "4dcadfea1f3e7f490e339ebbeb97efc01c42a4e0",
+      "verified_merge_sha": "a4010fbda71a6a600371de563096dd0715011a02",
+      "verified_head_runs": [
+        42481980489,
+        42481980546,
+        42481980519,
+        42481980539,
+        42481980597
+      ],
+      "verified_merged_runs": [
+        42482202500,
+        42482202513,
+        42482202491
+      ],
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [],
   "change_scope": {
-    "application_code_changed": false,
-    "tests_executed": false,
+    "application_code_changed": true,
+    "tests_executed": true,
     "production_deployed": false,
-    "queue_changed": false,
-    "reason": "R455-112 direct published drip-coffee sensory preference study research-only; no app policy/algorithm/data capture/queue change"
+    "queue_changed": true,
+    "reason": "R455-114 independently verified SAFE legacy family-id UI/engine guard, same-commit journal, nonforce code merge, Node22/UX/governance CI."
   },
   "next_actions": [
     "R455-108: independently inspected original Pannusch 2024 author-affiliated kinetic extraction abstract and live ORG-02/engine; 63 sources, 143 bounded checks, 70 proposals. No universal chemistry-to-taste mapping. Docs-only exact governance pending; full publisher PDF/S019 unavailable.",
@@ -2995,31 +3019,42 @@
     "R455-109: PR1385 safely merged 7300de331f3978cd866654da17f15489520f2722; exact Node22 3039/0/6 on PR and merge, 3 R109 groups pass, browser/mobile/offline/SQL/security/approval applicable CI succeeded. READY documentation PR pending; no deployment.",
     "R455-111: source-corrected PR1404 nonforce merged 29ce55dcf0abe87cb5db906a0146faa6c3383c0c, exact PR/merged Node 3055/0/6 + applicable UX/mobile/offline/SQL/security/governance PASS. Queue READY docs PR and merged governance pending at authoring; no deployment; S019 missing.",
     "R455-112: verified publisher full HTML 2023 Guinard 27+27 drip brew conditions and 57/43 sample-specific liking segments vs ORG-07/engine/constants. No espresso taste calibration or universal target; 64 sources / 148 bounded checks / 74 proposals; exact docs governance/merge pending. No #267 direct-line credit or app changes.",
-    "R455-113: direct Springer 2021 3-trial stratified puck original study and patent/industrial conflict checked; 65 curated sources/150 bounded checks/75 proposals; docs-only exact-source PR CI/merge pending; no policy change, no 267 line credit, S019 inaccessible."
+    "R455-113: direct Springer 2021 3-trial stratified puck original study and patent/industrial conflict checked; 65 curated sources/150 bounded checks/75 proposals; docs-only exact-source PR CI/merge pending; no policy change, no 267 line credit, S019 inaccessible.",
+    "R455-114 final code PR1425 merged a4010fbda71a6a600371de563096dd0715011a02 source-bound Node22 3066 PASS/0 FAIL/6 SKIP on PR-head and merged; applicable UX/SQL/security/approval SUCCESS. Research source identities unchanged 65, checks 151, proposals 76. READY development only, not deployed. S019 inaccessible; #267 direct-line audit credit zero."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-113",
-    "base_development_sha": "005f2c57f81f0ddd5ee9f30f6ea488abd7e1a248",
+    "id": "R455-114",
+    "base_development_sha": "a4892e8c2d77d383265663e6decaefeb186db9d3",
+    "verified_development_merge_sha": "a4010fbda71a6a600371de563096dd0715011a02",
+    "verified_code_head_sha": "4dcadfea1f3e7f490e339ebbeb97efc01c42a4e0",
     "source_ids": [
-      "LIT-2021-ANGELONI-LAYERED-PUCK-FLOW",
-      "ORG-08",
+      "site/cloud/shot_card.js",
       "site/lib/engine.js",
-      "site/lib/model.js"
+      "site/cloud/mapping.js",
+      "tests/issue455-shot-history-measured-make-current.test.mjs"
     ],
     "claim_ids": [
-      "R455-EV-CIT-113-A",
-      "R455-EV-CIT-113-B"
+      "R455-EV-APP-076-A"
     ],
     "number_of_curated_sources": 65,
-    "total_evidence_checks": 150,
-    "number_of_proposals": 75,
-    "review_type": "PRIMARY_SPRINGER_PUBLISHER_FULL_HTML_THREE_TRIAL_REVIEW_PLUS_PATENT_CONFLICT_AND_LIVE_CODE_CROSSWALK_DOCS_ONLY",
+    "total_evidence_checks": 151,
+    "number_of_proposals": 76,
+    "review_type": "LIVE_REPRODUCED_SAFE_HISTORY_FAMILY_ID_PREFERENCE_INTEGRITY_GUARD",
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
-    "code_or_policy_changed": false,
-    "ci_runs": [],
+    "code_or_policy_changed": true,
+    "ci_runs": [
+      42481980489,
+      42481980546,
+      42481980519,
+      42481980539,
+      42481980597,
+      42482202500,
+      42482202513,
+      42482202491
+    ],
     "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "Verify exact R113 docs PR-head CI, nonforce merge and merged governance, read back source blobs and Issue #455 checkpoint; next independent unreviewed primary claim or source-reproducible safe UX gap. No new Locked decision or production action."
+    "next_action": "Recover latest live SHA and continue next distinct primary research or source-reproducible safe UX gap; preserve #267/#33/#96 ownership; no unapproved deployment."
   },
   "policy_decisions_resolved": [
     {
@@ -4564,13 +4599,30 @@
       "test_plan": "Direct original full Springer publisher HTML methods/results/disclosures crosswalked with live ORG-08/engine/model Git blobs; docs-only source-bound approval/continuity CI. No Node22 app suite, mobile, physical flow reproduction, blind tasting, or statistical independent reanalysis. Do not credit #267.",
       "release_queue": "NOT_APPLICABLE_RESEARCH_ONLY",
       "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-114-HISTORY-FAMILY-IDENTITY-CURRENT-GUARD",
+      "finding": "Legacy imported all-five-green shot can have no actual familyId, yet History offered Make Current and engine could create a phantom favoriteShots['undefined'] preference instead of a valid current recipe.",
+      "evidence": [
+        "R455-EV-APP-076-A"
+      ],
+      "severity": "P2_DETERMINISTIC_PERSONAL_RECIPE_PREFERENCE_INTEGRITY",
+      "user_benefit": "Prevent invalid Current recipe selection without rewriting measured shots, sensory inputs or historical private notes.",
+      "current_locked": "All five sensory ratings, true all-green success and original history retained; explicitly favored recipe must reference a genuine historical family; one controllable recommendation change; no new numeric targets or data capture.",
+      "current_app": "Original shot card blob 56ba4716b190b0da9330f1bc740edb45e9f54ae5 and engine blob 59696aada657fb5b46ef64cf26065e6601f35dff lacked family guard. Fixed merged blobs shotCard 1eef3177f882e5dbec91e8218c20b7b3a39b7c6a / engine 3c0fae303be46e21fefd2b2ff4822227c4cf3e05.",
+      "proposed_change": "SAFE Locked-compatible UI eligibility plus engine fail-closed before preference/audit write when familyId is missing, blank or non-string; retain existing successful valid family cases and all archived contents.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "Code PR #1425 nonforce merged a4010fbda71a6a600371de563096dd0715011a02; first Node22 CI run42481789237 3063 PASS/3 FAIL/6 SKIP from three old fixtures omitting family ID; corrected exact positive fixtures in SAME-COMMIT journal. Final PR-head Node22 3066 PASS/0 FAIL/6 SKIP and exact merged same counts; applicable CI success.",
+      "test_plan": "New negative+positive direct real-module tests in issue455 R104 suite, three older legitimate positive fixtures corrected to carry actual family ID; exact Node22/lint/build, UX/mobile/offline/a11y, SQL, security and approval; frozen603 SKIPPED, not PASS.",
+      "release_queue": "DIC-Q-455-history-make-current-family-id-guard",
+      "production_deployed": false
     }
   ],
   "changeScope": {
-    "application_code_changed": false,
-    "tests_executed": false,
+    "application_code_changed": true,
+    "tests_executed": true,
     "production_deployed": false,
-    "queue_changed": false,
-    "reason": "R455-112 direct published drip-coffee sensory preference study research-only; no app policy/algorithm/data capture/queue change"
+    "queue_changed": true,
+    "reason": "R455-114 independently verified SAFE legacy family-id UI/engine guard, same-commit journal, nonforce code merge, Node22/UX/governance CI."
   }
 }

@@ -9105,6 +9105,40 @@
       "blockers": [],
       "owner_source": "Issue #33 development-only original603 direct selected current source acceptance",
       "notes": "Narrow correction READY in DEVELOPMENT ONLY, NOT DEPLOYED. Original603 source #454 inaccessible/unverified, entire 603 individual semantic certification unfinished; original immutable CSV/oracle/scorer and 228 other queue entries/states preserved. See docs/audits/issue33-original603-455-456-species-verified-454-unavailable-20261108.md."
+    },
+    {
+      "id": "DIC-Q-455-history-make-current-family-id-guard",
+      "issue": 455,
+      "pr": 1425,
+      "title": "Prevent invalid Make Current recipe from imported historical shots without assigned family identity",
+      "state": "READY",
+      "merged_source_sha": "a4010fbda71a6a600371de563096dd0715011a02",
+      "scope_paths": [
+        "site/cloud/shot_card.js",
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Old all-five-green physically valid imported shot with missing family could write phantom favoriteShots['undefined']; reproduced from live source, synthetic regression not asserted member incident.",
+        "R114 direct real module negative: null/undefined/blank/whitespace/numeric family ID hides Make Current and direct engine invocation fails before audit/current/preference mutation; positive: named family retained, all five tastes/notes/history intact.",
+        "Initial Node22 run42481789237 FAILED 3063 PASS/3 FAIL/6 intentional SKIP, due solely to 3 older positive fixtures missing a real family ID. Corrected fixtures and SAME-COMMIT journal; negative behavior unchanged.",
+        "Exact repaired PR-head 4dcadfea1f3e7f490e339ebbeb97efc01c42a4e0 Node22/lint run42481980489 3066 PASS/0 FAIL/6 intentional SKIP; UX/mobile/offline/a11y42481980546, SQL42481980519, security42481980539, approval42481980597 SUCCESS, frozen60342481980565 SKIPPED not PASS.",
+        "Nonforce PR1425 merged a4010fbda71a6a600371de563096dd0715011a02, six runtime/test/journal Git blobs independently read back identical to tested head; exact merged Node22/lint run42482202500 3066 PASS/0 FAIL/6 intentional SKIP, mobile/UX42482202513 and approval42482202491 SUCCESS."
+      ],
+      "ci_runs": [
+        42481789237,
+        42481980489,
+        42481980546,
+        42481980519,
+        42481980539,
+        42481980597,
+        42481980565,
+        42482202500,
+        42482202513,
+        42482202491
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "R455-114 SAFE READY DEVELOPMENT ONLY, NOT DEPLOYED. Retained all five ratings, notes, archived measurements, same-coffee and style families, privacy, offline and Locked rules. No main/production release, Netlify, provider SQL/Auth/Edge/member writes, purchases, force or visibility change. S019 missing, #267 remains separate."
     }
   ],
   "history": [
