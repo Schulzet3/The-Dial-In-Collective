@@ -65,7 +65,7 @@ test('original603 #462 exact selected source fraction keeps named coffee, green 
   '<p>Region: Mantiqueira de Minas</p><p>Altitude: 1300 masl</p>'+ 
   '<p>Variety: Catuai</p><p>Process: Washed/ Swiss Water Process</p>'+ 
   '<p>Roast Level: Medium/ Dark</p>'+ 
-  '<p>What you\\'ll taste in your cup: Chocolate, Toffee, and Apricot.</p></section>');
+  '<p>What you&#39;ll taste in your cup: Chocolate, Toffee, and Apricot.</p></section>');
  assert.equal(parsed.fields.name,selectedName);
  assert.equal(parsed.fields.decaffeination_method,undefined);
  // Preserve selected-scope facts for source review; the competing published
