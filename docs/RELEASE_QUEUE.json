@@ -15,12 +15,12 @@
       "state": "TESTING",
       "merged_source_sha": null,
       "scope_paths": [
-        "site/lib/engine.js",
-        "tests/issue455-archived-basket-context.test.mjs"
+        "site/lib/engine.js"
       ],
       "tests": [
         "Source parent 1d8648c4055e53ddfcdfbf736730035b85b59405 engine blob 91e04dc0c61f9a63c835cbed924dc5e33f3c2d95: explicit basket lookup was not filtering archived IDs while selectedBasket did, so stale archived explicit ID can seed retired basket dose. Direct reproducible source discrepancy; CI synthetic test not yet executed.",
-        "Four new real-module positive/negative synthetic tests cover archived explicit, active alternative, archived saved preference, missing explicit ID, state preservation; exact PR-head CI PENDING."
+        "Four new real-module positive/negative synthetic tests cover archived explicit, active alternative, archived saved preference, missing explicit ID, state preservation; exact PR-head CI PENDING.",
+        "First exact PR-head approval GitHub run42521544184 FAILED queue intake because scope_paths included test fixture file; scope_paths must include deployable runtime paths only. Retained test coverage in changed paths/journal, corrected queue only; new exact PR-head CI needed."
       ],
       "ci_runs": [],
       "blockers": [

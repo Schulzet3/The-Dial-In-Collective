@@ -1,3 +1,9 @@
+## November 8, 2026 UTC — R455-122 queue-scope correction [skip netlify]
+
+PR #1495 original head `687a01076dae432fa9f3c562412e9d1cb3071fa6` **approval run42521544184 FAILED** `release-queue.mjs --enforce-intake`: the new test file was incorrectly listed in `scope_paths`, which accepts only deployable paths. Kept the actual synthetic test unchanged; corrected the queue to `scope_paths: ["site/lib/engine.js"]`. Source-bound Node22/UX/SQL/security checks on first head are distinct from the failed governance; new PR-head exact CI must pass before merging. No code, tests, Locked rule, data, provider or release branch changes.
+
+---
+
 ## November 8, 2026 UTC — R455-122 SAME-COMMIT archived-basket active recipe protection [skip netlify]
 
 **Bound source:** development parent `1d8648c4055e53ddfcdfbf736730035b85b59405`; main `a4028e42b0d0316fd539c0563fd07832d509aed0`; release/production `92829cb6aff82aaec212eabbd921183e7997f1a7`; recovered AGENTS, context/PREFLIGHT, Master Spec/Decision Ledger/coverage/queue/status/source register, nine originals index and #455/#335/#267/#33/#96. Concurrent issue #33/#267 unchanged; zero #267 literal-line credit. Owner #630 temporary PUBLIC exception preserved.
