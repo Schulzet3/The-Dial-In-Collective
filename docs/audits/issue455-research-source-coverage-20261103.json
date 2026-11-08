@@ -2838,15 +2838,27 @@
       "publisher_full_text_sha256": null,
       "verified_merge_sha": "7300de331f3978cd866654da17f15489520f2722",
       "verified_test_run": 42460399138
+    },
+    {
+      "id": "R455-EV-APP-072-A",
+      "source": "development source 49336124215b7e81a13d979eacdeaad7efaa5fa0; engine blob 3b224e8433fb175929b7c427b0962c1004a8a0de, stats() lines 6-12 and comparable family time lines 370-380, CONFIG.bounds.timeS [1,180], UI recipeGrid(), model.validateShot()",
+      "claim": "Single successful 180s/1s measured time produces an unloggable displayed reference interval [178,182] or [-1,3]; measurements/history remain valid.",
+      "grade": "DETERMINISTIC_DIRECT_SOURCE_ARITHMETIC_EXECUTABLE_CI_NOT_YET_RUN",
+      "current_app": "Before fix stats(single successful time,+/-2s) shows out-of-bounds reference in recipe card. Only interval endpoints are proposed to change.",
+      "result": "SAFE_CODE_AUTHORED_TESTING_PENDING_NOT_READY",
+      "owner_approval": false,
+      "original_source_sha": "49336124215b7e81a13d979eacdeaad7efaa5fa0",
+      "verified_merge_sha": null,
+      "verified_test_run": null
     }
   ],
   "policy_decisions_pending": [],
   "change_scope": {
-    "application_code_changed": false,
-    "tests_executed": true,
+    "application_code_changed": true,
+    "tests_executed": false,
     "production_deployed": false,
-    "queue_changed": true,
-    "reason": "R109 verified code merge 7300de3 and exact head/merged CI, docs-only ready reconciliation."
+    "queue_changed": false,
+    "reason": "R110 safe code, synthetic tests and same-commit journal authored; READY contingent on CI"
   },
   "next_actions": [
     "R455-108: independently inspected original Pannusch 2024 author-affiliated kinetic extraction abstract and live ORG-02/engine; 63 sources, 143 bounded checks, 70 proposals. No universal chemistry-to-taste mapping. Docs-only exact governance pending; full publisher PDF/S019 unavailable.",
@@ -2878,37 +2890,28 @@
     "R455-109: PR1385 safely merged 7300de331f3978cd866654da17f15489520f2722; exact Node22 3039/0/6 on PR and merge, 3 R109 groups pass, browser/mobile/offline/SQL/security/approval applicable CI succeeded. READY documentation PR pending; no deployment."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-109",
-    "base_development_sha": "7300de331f3978cd866654da17f15489520f2722",
+    "id": "R455-110",
+    "base_development_sha": "49336124215b7e81a13d979eacdeaad7efaa5fa0",
     "source_ids": [
       "site/lib/engine.js",
       "site/lib/constants.js",
-      "tests/issue455-yield-step.test.mjs",
-      "tests/next-shot-control-consistency.test.mjs"
+      "site/lib/model.js",
+      "site/lib/ui.js",
+      "tests/issue455-recipe-time-band-bounds.test.mjs"
     ],
     "claim_ids": [
-      "R455-EV-APP-071-A"
+      "R455-EV-APP-072-A"
     ],
     "number_of_curated_sources": 63,
-    "total_evidence_checks": 144,
-    "number_of_proposals": 71,
-    "review_type": "SAFE_VERIFIED_CODE_MERGE_AND_RELEASE_QUEUE_RECONCILIATION",
+    "total_evidence_checks": 145,
+    "number_of_proposals": 72,
+    "review_type": "SAFE_CODE_TEST_AUTHORING_CI_PENDING",
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
     "code_or_policy_changed": true,
-    "ci_runs": [
-      42460208354,
-      42460208325,
-      42460208324,
-      42460208285,
-      42460208341,
-      42460399138,
-      42460399041,
-      42460398996
-    ],
-    "doc_pr_ci": "PENDING_AT_READY_DOCS_AUTHORING",
+    "ci_runs": [],
     "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "Verify exact docs-only reconciliation PR approval/continuity CI, nonforce merge and readback; keep #455 OPEN and no deployment; resume another independent source claim or narrow SAFE UX defect."
+    "next_action": "Execute exact CI, fix failures, nonforce merge, reconcile queue/STATUS, record Issue #455 checkpoint."
   },
   "policy_decisions_resolved": [
     {
@@ -4380,6 +4383,23 @@
       "implementation": "VERIFIED_CODE_PR1385_NONFORCE_SQUASH_MERGED_7300de331f3978cd866654da17f15489520f2722; SAME_COMMIT_JOURNAL_AND_TESTING_QUEUE; DOC_READY_RECONCILIATION_CI_PENDING",
       "test_plan": "Exact tested PR-head Node22 full 3,039 PASS/0 FAIL/6 SKIP and 3 new R109 direct real-module tests PASS (run42460208354); merged source Node22 full 3,039/0/6 (run42460399138), scoped browser/mobile/offline/visual and approval/cloud SUCCESS on PR head and merged source; isolated SQL and security PR head SUCCESS. Original603 intentionally SKIPPED; no real member, device or espresso taste outcomes tested.",
       "release_queue": "DIC-Q-455-next-recipe-yield-band-bounds READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-110-SUCCESSFUL-TIME-RANGE-ENTRY-BOUNDS",
+      "finding": "A lone valid all-green successful family measurement at 1 or 180 seconds yields a display-only recommendation range outside existing time entry limits.",
+      "evidence": [
+        "R455-EV-APP-072-A"
+      ],
+      "severity": "P2_DETERMINISTIC_RECIPE_UI_CORRECTNESS",
+      "user_benefit": "Ensure displayed successful reference time ranges are loggable while retaining original successful time centers and private records.",
+      "current_locked": "Existing 1–180s Log Shot time bound, five sensory scales, measured original, alternative family behavior and style-specific boundaries.",
+      "current_app": "Single-observation stats expands time +/-2s; recipeGrid renders endpoints.",
+      "proposed_change": "SAFE bound displayed rec.time.low/high only in comparable successful-family time branch using CONFIG.bounds.timeS; do not change center or numeric policy.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "AUTHORING_PENDING_EXACT_NODE22_CI_NONFORCE_MERGE",
+      "test_plan": "Three synthetic real-module positive/negative endpoint, ordinary band, UI/immutability cases; exact PR and merged-source applicable checks REQUIRED, not yet run.",
+      "release_queue": "NOT_READY_PENDING_CI",
       "production_deployed": false
     }
   ],

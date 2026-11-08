@@ -1,3 +1,15 @@
+## November 8, 2026 UTC — R455-110 SAFE successful-recipe time-band bounds (CODE TEST AUTHORING) [skip netlify]
+
+**Exact authority/source:** Development source parent `49336124215b7e81a13d979eacdeaad7efaa5fa0`, `site/lib/engine.js` blob `3b224e8433fb175929b7c427b0962c1004a8a0de`; read AGENTS, AI context/PREFLIGHT, Master Spec/Decision Ledger and supersessions, approval matrix, CURRENT_STATUS, queue and source register, #455/#335/#267/#33/#96, open PRs, nine original report index. Main `bd627d40f7e65321323512b303d2e3f75709af39`; release/production `2ec10324fcaa4b60d1e48240b44b77b141b9ba54`. Owner #630 temporary PUBLIC GH exception unchanged. Standalone S019 PDF inaccessible after fresh Drive/Library search; distinct slow-feed PDF exists. No #267 line-review credit.
+
+**Defect/negative evidence:** Actual `engine.stats()` for one all-green measured time at valid 180 seconds yields [178,182] and for valid 1 second yields [-1,3]; `site/lib/ui.js::recipeGrid()` displays these endpoints despite the existing `CONFIG.bounds.timeS=[1,180]` enforced by `model.validateShot()`. Direct source arithmetic, NOT observed user incident/physical espresso benefit.
+
+**Same-commit SAFE code/test:** In only the `comparable.length` successful-family time branch, constrain *displayed* `rec.time.low/high` to current `CONFIG.bounds.timeS`. Leave measured center/time, notes, all five original ratings, independent style families, grind/feed/equipment, private records, Locked values and other starting recommendations unchanged. Synthetic offline real-module `tests/issue455-recipe-time-band-bounds.test.mjs` tests 180→178–180, 1→1–3, ordinary 22→20–24, rendered UI, five original tastes and state immutability. Evidence `R455-EV-APP-072-A`, proposal `R455-PROP-110-SUCCESSFUL-TIME-RANGE-ENTRY-BOUNDS`; ledger 63 curated sources/145 checks/72 proposals.
+
+**AT AUTHORING:** CI/tests, exact merge SHA, queue READY and runtime success NOT YET EXECUTED/NOT PASSED. Next: exact-source risk-proportionate Node22/UI/mobile/offline/security/approval checks, diagnose any failures, non-force integrate only if verified, reconcile CURRENT_STATUS/RELEASE_QUEUE, comment in Issue #455. No deployment, main/release movement, provider/member/SQL/Auth/Edge writes, force Git, purchases, rights changes or scientific/numeric policy change.
+
+---
+
 ## November 8, 2026 UTC — R455-109 verified SAFE next-recipe displayed yield band (READY documentation reconciliation) [skip netlify]
 
 **Source integration:** Original safe-code PR [#1385](https://github.com/Schulzet3/The-Dial-In-Collective/pull/1385) head `0c217fe13ad73f4fbf57244104173038332a41ac` preserved concurrent #509 provider-audit docs; nonforce squash MERGED `7300de331f3978cd866654da17f15489520f2722`, dev ref reread identical. Git blobs head=merge: engine `3b224e8433fb175929b7c427b0962c1004a8a0de`, three-group test `35a06510009bef51c36d85f91dde87d428fd0ff3`, and all same-commit original status/queue/journal/ledger. No source drift or production/release main movement.
