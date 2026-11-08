@@ -58,3 +58,28 @@ test('R104 missing fifth rating, pending sync or other version still cannot show
   assert.doesNotMatch(html,/data-action="make-current"/);
  }
 });
+
+test('R114 missing legacy family ID keeps all-five-green History but cannot create phantom Current',()=>{
+ for(const familyId of [null,undefined,'','   ',0]){
+  const shot={...structuredClone(source),familyId},before=structuredClone(shot);
+  const html=shotCard(shot,options);
+  assert.match(html,/<span class="status-badge">Dialed In<\\/span>/);
+  assert.doesNotMatch(html,/data-action="make-current"/);
+  assert.match(html,/data-action="edit"/);
+  assert.match(html,/Preserve original private historical notes/);
+  const s=state(shot),snapshot=structuredClone(s);
+  assert.throws(()=>makeCurrent(s,shot.id),/assigned recipe family/);
+  assert.deepEqual(s,snapshot,'reject without phantom Current, favorite, or audit mutation');
+  assert.deepEqual(shot,before,'original measurements, notes and five tastes are immutable');
+ }
+});
+test('R114 explicitly assigned family remains selectable with exact prior preference semantics',()=>{
+ const shot=structuredClone(source),before=structuredClone(shot),s=state(shot);
+ assert.match(shotCard(shot,options),/data-action="make-current"/);
+ makeCurrent(s,shot.id);
+ const p=s.setups[0].workspaces.version.coffees.coffee;
+ assert.equal(p.currentFamilies.Turbo,'family');
+ assert.equal(p.favoriteShots.family,shot.id);
+ assert.equal(Object.keys(p.favoriteShots).length,1);
+ assert.deepEqual(shot,before);
+});

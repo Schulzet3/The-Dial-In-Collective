@@ -26,7 +26,10 @@ export function shotCard(shot,{expanded=false,activeVersionId=null,unit='F'}={})
  const displayDate=humanDate(shot.timestamp)||'Date not recorded';
  const canEdit=!shot.cloudPending;
  const genuineSuccess=shot.dialedIn===true&&isDialed(shot.tasteScales);
- const canChoose=canEdit&&genuineSuccess&&isMeasuredRecipeShot(shot)&&shot.setupVersionId===activeVersionId;
+ // A legacy all-green record without a real family identity cannot be a
+ // selectable Current recipe. Preserve its original success badge and history.
+ const hasFamily=typeof shot.familyId==='string'&&!!shot.familyId.trim();
+ const canChoose=canEdit&&genuineSuccess&&isMeasuredRecipeShot(shot)&&hasFamily&&shot.setupVersionId===activeVersionId;
  return `<section class="shot">
   <button class="shot-toggle" data-action="shot-expand" data-id="${e(shot.id)}" aria-expanded="${expanded}" aria-label="Toggle details for shot on ${e(displayDate)}">
    <div class="shot-overview">

@@ -747,6 +747,9 @@ export function makeCurrent(s,shotId) {
  // Keep original History/notes; a chosen Current must qualify as recipe evidence.
  if(!measuredRecipeShots([sh]).length)throw new Error('Choose a shot with valid recorded dose, yield and time.');
  if(sh.setupVersionId!==activeVersion(s).id)throw new Error('This is a reference from another setup. Log a successful shot here first.');
+ // Do not store a phantom currentFamilies/favoriteShots key for malformed
+ // imported all-green rows missing their historical recipe-family identity.
+ if(typeof sh.familyId!=='string'||!sh.familyId.trim())throw new Error('Choose a shot with an assigned recipe family. The original history remains unchanged.');
  const p=ensureCoffeeState(s,sh.coffeeId);p.currentFamilies[sh.style]=sh.familyId;p.favoriteShots[sh.familyId]=sh.id;p.style=sh.style;
  logAudit(s,'recipe.preferred',{coffeeId:sh.coffeeId,familyId:sh.familyId,shotId});
 }
