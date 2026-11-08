@@ -1,0 +1,177 @@
+{
+  "schema_version": 1,
+  "kind": "DIC_ISSUE33_R20_EXACT_SELECTED_OFFICIAL_SOURCE_AND_NARROW_FIX_RECEIPT",
+  "date_utc": "2026-11-08",
+  "owner_issue": 33,
+  "original603": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "csv_modified": false,
+    "original_oracle_modified": false,
+    "full_semantic_certification_complete": false
+  },
+  "scope": {
+    "source_pr": 1313,
+    "source_merged_sha": "e7141fa599602fceb5f92fa6e4feded40e430eb9",
+    "source_run": 42428093727,
+    "code_pr": 1314,
+    "code_merged_sha": "269974e3a2788d81a3442c08cc3ba3386fb3fe43",
+    "code_reviewed_head_sha": "7467802bf135d8535326ba6feb112cdeef8af74f",
+    "same_tree_as_reviewed_head": true,
+    "reviewed_tree_sha": "0c7e88fb9b195df16a3fc464b019175083e8eb42",
+    "parser_blob_sha": "db4fbfc539395a5a0ab8d3f7ffaea9eb31b485c4",
+    "regression_blob_sha": "00ec73740f1a785ee985662cdca58a12906a1eb8",
+    "source_runner_post_run": 42428597910,
+    "source_runner_post_job": 128572223545,
+    "source_runner_post_status": "SUCCESS",
+    "selected_count": 3,
+    "html_sources_public": true,
+    "owner_signed_in_acceptance": false
+  },
+  "ci": {
+    "first_pr_head_governance_failure": {
+      "run": 42428267383,
+      "reason": "Untracked app source path; corrected by TESTING queue item"
+    },
+    "first_pr_head_node_failure": {
+      "run": 42428267391,
+      "reason": "New synthetic test contained invalid doubled regex slash; corrected without parser change"
+    },
+    "recovered_pr_head": {
+      "node_lint_build": 42428409075,
+      "tests_passed": 1986,
+      "tests_failed": 0,
+      "tests_skipped": 0,
+      "cloud_mobile": 42428409025,
+      "isolated_sql": 42428409026,
+      "security": 42428409076,
+      "approval": 42428409031,
+      "exact_source_archive": 42428409112,
+      "all_applicable": "SUCCESS"
+    },
+    "exact_merged": {
+      "node_lint_build": 42428597921,
+      "tests_passed": 1986,
+      "tests_failed": 0,
+      "tests_skipped": 0,
+      "cloud_mobile": 42428597934,
+      "approval": 42428597950,
+      "official_selected": 42428597910,
+      "all_applicable": "SUCCESS"
+    },
+    "frozen603": {
+      "run": 42428409038,
+      "conclusion": "SKIPPED",
+      "certified": false
+    }
+  },
+  "artifact": {
+    "pre_run": {
+      "id": 13596053517,
+      "zip_sha256": "fb0d3af54bfd1298cf819428e84cb5f4874e5fcd41d5127d32875b6c188f9851",
+      "json_sha256": "27fbec792c492183b2c53a0df59b0e691300d56da75b920d15e1f3fe786f2166"
+    },
+    "post_run": {
+      "id": 13596785866,
+      "zip_sha256": "2aa584c460c3bcd5f65856d8943f2eee09d85f004668aea155182658eefc8b99",
+      "json_sha256": "4e169e1a1f46b67bb88ebffd40b691b54637fab7b7c66d103df2050e3c1ea582"
+    },
+    "independently_rehashed": true,
+    "note": "Raw source captures vary by request due storefront dynamic markup; exact H1 and selected semantic claims were separately checked. Never assert byte-identical pre/post HTML."
+  },
+  "cases": [
+    {
+      "number": 347,
+      "url": "https://sparkyscraftcoffeeroasting.com/products/las-lajas-micromill-finca-calle-liles-black-honey",
+      "selected_h1": "Las Lajas Micromill – Finca Calle Liles - Black Honey",
+      "pre_html_sha256": "ed73354cfb2faadd9e8c6fb662ef7a53290b45fb9fa919a0c0636db87e72fd29",
+      "post_html_sha256": "d998bc53f647f42e82e9005370b99ebb793c7f4c55004b9c70597b6d20d6346d",
+      "selected_parser": {
+        "process": "Honey",
+        "origin": "Sabanilla de Alajuela, Central Valley, Costa Rica",
+        "variety": "San Isidro",
+        "producer": "Las Lajas"
+      },
+      "selected_source": {
+        "process_literal": "Black Honey",
+        "producer_role_label": "Micromill",
+        "unpublished_individual_farmer": true
+      },
+      "semantic_status": "QUALIFIED: source-backed typed micromill, not established named individual farm grower; literal modifier retained in review",
+      "regression": "unchanged selected product; no cross-coffee customer testimonial leak"
+    },
+    {
+      "number": 350,
+      "url": "https://spirituscoffee.com/products/guatemala-manos-de-mujer",
+      "selected_h1": "Guatemala Manos de Mujer",
+      "pre_html_sha256": "021f156f8dec30501fbae88dc4778344216bc98ea7a200f18f1896e2dcb22798",
+      "post_html_sha256": "e664a3dde364b8c6b137917fdd1fa403fa9e36bda96d96837445b08dca0e9deb",
+      "selected_parser": {
+        "origin": "Huehuetenango, Guatemala",
+        "process": "Washed",
+        "roast_level": "Medium",
+        "producer": "Guaya'b Asociación Civil, Manos de Mujer women producers program",
+        "tasting_notes": null,
+        "conflicts": [
+          "tasting_notes"
+        ]
+      },
+      "selected_source": {
+        "false_pre_fact": {
+          "label": "process",
+          "value": "Origin and",
+          "field": "process"
+        },
+        "correct_post_process_facts": [
+          "Fully washed, sun dried"
+        ],
+        "notes_profile_a": "Citrus, Stone fruit, Milk chocolate",
+        "notes_profile_b": "Dark chocolate, hazelnut, vanilla, dried cherry",
+        "other_coffee_faq_origin_excluded": "Antigua"
+      },
+      "semantic_status": "VERIFIED narrow caption correction. Source-selected tasting conflict remains correctly blank/reviewable; no guessed merged notes",
+      "negative_control": "Source Review no longer publishes false process 'Origin and' while preserving whole Origin and process composite story evidence"
+    },
+    {
+      "number": 353,
+      "url": "https://staccatoroasters.com/products/ethiopia-sasaba-natural-coffee",
+      "selected_h1": "Ethiopia Sasaba Natural Coffee",
+      "pre_html_sha256": "b4534db4be38bd44f22079df27fbb86c046763e2b3df412c6ef90271ba86bed4",
+      "post_html_sha256": "93db8491f9ed461e9b407f42fb966d69fb5ff2e613f07f453a39ee7cbb2d7581",
+      "selected_parser": {
+        "origin": "Kercha, Guji, Ethiopia",
+        "process": "Natural",
+        "roast_level": "Light",
+        "producer": "smallholder farmers",
+        "variety": "Mixed Heirloom",
+        "tasting_notes": "Berry, Stone Fruit, Sweet, Bright & Juicy"
+      },
+      "selected_source": {
+        "station_founder": "Tsegay Hagos Tesfaye",
+        "founder_is_not_coffee_lot_producer": true,
+        "importer": "Trabocca"
+      },
+      "semantic_status": "Current selected direct claim source-backed; founder, importer and station not misassigned as grower"
+    }
+  ],
+  "acceptance": {
+    "source_runner_public_cases_fetched": 3,
+    "selected_h1_verified": 3,
+    "parser_ok": 3,
+    "add_coffee_rendered": 3,
+    "source_review_rendered": 3,
+    "selected_raw_html_hashes_independently_verified": 3,
+    "owner_real_auth": false,
+    "no_production_changes": true,
+    "narrow_queue_state": "READY",
+    "parent_issue_33": "OPEN",
+    "original603_manual_total_not_claimed": true
+  },
+  "next_actions": [
+    "Continue remaining original603 individual official selected source adjudication, qualified/context and historical source-present blanks before parent closure.",
+    "Do not replace #267 V2 historical line-by-line audit or #96 signed-in security acceptance with public source probes.",
+    "Preserve all existing READY/DEPLOYED queue entries, locked approvals, original captures and publish guard."
+  ]
+}
