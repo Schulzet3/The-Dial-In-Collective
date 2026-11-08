@@ -24,6 +24,11 @@ const CURRENT_DECAF_METHOD=/^(?:(?:this|our)\s+(?:decaf(?:feinated)?\s+)?coffee\
 // The chosen coffee must itself be full decaf; generic green washing, SEO,
 // roaster education and unrelated/negated treatments do not qualify.
 const CURRENT_SELECTED_SOURCED_WATER_DECAF=/^(?:an?|this|our)\s+[^.!?]{0,140}?\bcoffee\s+sourced(?:\s*,\s*[\p{L}\p{M}-]+){0,3}\s*,?\s+by\s+(?:the\s+)?(?:swiss|mountain)[ -]?water\s+process\b[^.!?]{0,150}\bdecaf\s+processing\s+method\.?$/iu;
+// A directly selected full-decaf coffee can name its OWN current treatment as
+// "[exact named coffee] is a single-origin mountain water decaf". Bind the
+// grammatical subject to the selected H1 name/prefix; generic decaf FAQs,
+// previous lots and another named coffee cannot authorize this method.
+const CURRENT_SELECTED_NAMED_WATER_DECAF=/\b([\p{Lu}][\p{L}\p{M}'’.-]{2,45}(?:\s+[\p{Lu}][\p{L}\p{M}'’.-]{2,45}){0,3})\s+is\s+(?:a|an)\s+(?:(?:single[ -]origin|organic|fully|current)\s+){0,3}(?:swiss|mountain)[ -]?water\s+decaf(?:feinated)?\b/iu;
 const CURRENT_SELECTED_BEANS_WATER_DECAF=/^(?:these|our|this)\s+(?:(?:[\p{L}\p{M}-]+|&)\s+){0,12}beans\s+(?:are|were)\s+(?:naturally\s+)?decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?['"‘’]?(?:swiss|mountain)[\s-]?water['"‘’]?(?:\s+process)?\b/iu;
 const CURRENT_SELECTED_OUR_WATER_DECAF=/(?:^|[.!?]\s+)using\s+the\s+(?:swiss|mountain)[\s-]?water\s+process,\s+our\s+decaf\s+uses\b(?:[^.!?]|\d\.\d){0,240}\bcaffeine[\s-]?free\b/iu;
 const NONCURRENT_DECAF_METHOD=/\b(?:previous(?:ly)?|formerly|historically|typically|generally|other coffees?|another coffee|last year|prior (?:lot|harvest))\b/iu;
@@ -377,6 +382,22 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
      inferDecaffeinationMethod({name,selectedMethod:currentWaterWitness})==='Water Process'&&
      !decafEvidence.has(currentWaterWitness)){
    if(decafEvidence.size<4)decafEvidence.add(currentWaterWitness);
+   else decafEvidenceOverflow=true;
+  }
+  // Require a literal, product-specific named decaf subject inside the
+  // independently selected H1 body. The prefix before a product title suffix
+  // must match EXACTLY; shared roaster geography or another coffee cannot.
+  // Direct method evidence is reviewable; green processing stays separate.
+  const namedWater=line.match(CURRENT_SELECTED_NAMED_WATER_DECAF);
+  const selectedPrefix=String(name).split(/\s+(?:-|–|—|\|)\s+/u)[0].trim();
+  if(decafOnlyCoffee(name)&&b.tag==='p'&&line.length<=700&&
+     namedWater&&selectedPrefix.length>=4&&selectedPrefix.length<=90&&
+     fold(namedWater[1])===fold(selectedPrefix)&&
+     !NONCURRENT_DECAF_METHOD.test(line)&&
+     !/\b(?:not|never|without|rather than|instead of|unlike)\b/iu.test(namedWater[0])&&
+     inferDecaffeinationMethod({name,selectedMethod:namedWater[0]})==='Water Process'&&
+     !decafEvidence.has(namedWater[0])){
+   if(decafEvidence.size<4)decafEvidence.add(namedWater[0]);
    else decafEvidenceOverflow=true;
   }
   // A decaf identity plus a current selected-product sentence is required.
