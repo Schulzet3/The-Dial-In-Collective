@@ -1319,3 +1319,18 @@ Recovered original GitHub development `543bcc0c598571471e72969618e064da1bc11b10`
 **Validation:** Original raw REST equality 8/8; source SHA1 arithmetic, word/byte counts, unique-ID negative test and independent 267 line identity 3/3 PASS. Node22 functional, live GoTrue/SQL/provider, mobile/browser/offline and original603 NOT RUN for docs-only audit, never credited. Receipt, append-only ledger and same-commit scoped journal only; no app/Auth/extractor/backup/queue/Locked/provider/Netlify/production/main/release writes. PR-head CI to be checked before any nonforce integration; pending is NOT PASS.
 
 **NEXT:** [original #267 comment 6705568177](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267#issuecomment-6705568177), **word 1**. #504 remains OPEN / IN_PROGRESS until all accessible words and delegated #267 coverage are independently reconciled.
+
+
+---
+
+## Issue #504 G1-108 — November 8 UTC, next eight full original #267 comments [skip netlify]
+
+Live development `878d3db4a9beb1c61a2717964f12157af0544df1`, main `bd627d40f7e65321323512b303d2e3f75709af39`, release `2ec10324fcaa4b60d1e48240b44b77b141b9ba54`. Governing AGENTS/AI entrypoint/preflight, current spec/Locked ledger/status, approval coverage/queue/source register, active #504/#267/#455/#33/#96, PRs and exact CI recovered. Temporary PUBLIC November4–30 owner approval in #630 retained; visibility unchanged.
+
+**Direct 1–EOF semantic reading:** original issue #267 comments `6705568177`, `6706186280`, `6706870137`, `6707511658`, `6707545710`, `6708102814`, `6708133233`, `6708967004`, **8 uncredited original records / 2503 words / 29662 UTF-8 bytes**; all eight original REST by-ID bodies matched paginated sources; timestamps, per-ID SHA1, word/line/byte bounds, separate interpretation and dispositions in [G1-108 receipt](../audits/issue504-review-G1-108.json). No #267 code duplicate. **Cumulative:** 7,919 file lines / 60,754 words and **619 GitHub objects / 183,729 original words**.
+
+**Cross-check:** frozen F409 `scripts/audit/isolated-backup-snapshot-regression.sh` blob `b7841bf45f51dbdee7d696e34f88963a1fcfc288` positions **1–3** independently literal-matched all 3 mandatory-dimension T12 receipt records blob `c60c0304f3602ee6076656496f8c18405a72d767`, 3/3; **zero code credit**. Earlier #267 PR1200 repaired symlink scanner flaw; no duplicate repair. Dormant cache, CSS and offline/Auth observations are inconclusive/delegated. Full #267 V2 and GitHub-wide inventory remain unverified.
+
+**Validation:** original body identity 8/8, SHA1 test, Unicode word/byte arithmetic, duplicate-negative, source literals 3/3 PASS. Docs-only; no Node22, live SQL/Auth/GoTrue/provider, browser/mobile/offline, original603, production or Netlify testing/publishing. PR-head/exact merged CI pending, not PASS. No active app fix or safe deletion proved; no queue/Locked/backup/migration/member/history/provider/visibility/main/release modification. #504 OPEN / IN_PROGRESS.
+
+**Next:** original [#267 comment `6709015178`](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267#issuecomment-6709015178) **word 1**.
