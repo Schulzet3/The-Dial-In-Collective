@@ -380,7 +380,11 @@ function normalized(field,value,{allowFlavorProse=false,allowAnonymousProducer=f
   // Do not rewrite regional tuples, multi-country blends or unknown prose.
   const countryAndProcess=s.match(/^100\s*%\s*([\p{L}\p{M}][\p{L}\p{M} .'-]{2,60}?)\s*,\s*(?:fully\s+)?(?:washed|natural|honey|anaerobic)(?:\s+process(?:ed)?)?\.?$/iu);
   const countryAndDecaf=s.match(/^([\p{L}\p{M}][\p{L}\p{M} .'-]{2,60}?)\s*\(\s*(?:Mountain|Swiss)\s+Water(?:\s+Process(?:ed)?)?\s*\)\.?$/iu);
-  const printedCountry=(countryAndProcess?.[1]||countryAndDecaf?.[1]||'').trim();
+  // A bean's explicitly printed "Peaberry" class is not an additional
+  // producing place. Only the exact closed parenthetical on one known
+  // country qualifies; keep the original literal in source review.
+  const countryAndPeaberry=s.match(/^([\p{L}\p{M}][\p{L}\p{M} .'-]{2,60}?)\s*\(\s*Peaberry\s*\)\.?$/iu);
+  const printedCountry=(countryAndProcess?.[1]||countryAndDecaf?.[1]||countryAndPeaberry?.[1]||'').trim();
   if(printedCountry&&ORIGIN_COUNTRIES.has(keyOf(printedCountry)))s=printedCountry;
   // Roaster "Oaxaca Region of Mexico" is not "Oaxaca Region of Mexico, Mexico".
   // Only de-duplicate the SAME country after an explicit Region of phrase;

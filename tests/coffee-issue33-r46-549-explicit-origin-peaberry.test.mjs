@@ -46,7 +46,7 @@ test('R46 multi-country captions or unknown countries must not be reduced to fir
 test('R46 unselected related-product Origin must not supply chosen product geography',()=>{
  const other='<section class="product-recommendations"><h2>Other Coffee</h2>'+
   '<p>Origin: Tanzania (Peaberry)</p></section>';
- const result=extractPublicCoffeeFacts('<html><body><main><h1>Tanzania Peaberry</h1>'+
+ const result=extractPublicCoffeeFacts('<html><body><main><h1>House Blend</h1>'+
   '<p>Roast: Dark</p>'+other+'</main></body></html>',{source_url:url});
  assert.equal(result?.ok,true);
  assert.notEqual(result.fields.origin,'Tanzania');
