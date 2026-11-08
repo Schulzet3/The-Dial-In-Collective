@@ -3191,9 +3191,17 @@
       "confirmed_new_defects": 0,
       "production_writes": false,
       "baseline_complete": false
+    },
+    {
+      "event": "2026-11-08_run106_current_advisor_fk_index_triage_21",
+      "development_parent_sha": "1a54269e8f7d2c1189fd948c959de5e61dab3312",
+      "reviewed_current_lint_objects": 21,
+      "receipt_path": "docs/audits/issue509-provider-fk-index-advisor-triage-2026-11-08-run106.json",
+      "production_writes": false,
+      "baseline_complete": false
     }
   ],
-  "state": "SYSTEM_PG_CLASS_RAW_SAFE_VISIBLE_484_OF_484; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
+  "state": "PROVIDER_ADVISOR_12_FK_AND_9_INDEX_DEFINITION_RUNTIME_TRIAGE_DONE; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
   "application_table_review": {
     "total": 46,
     "current_index": 46,
@@ -14484,5 +14492,38 @@
     "previous_trigger_ddl_and_internal_fk_source_not_recredited": true,
     "baseline_complete": false,
     "next": "Identify uncovered actual provider source-definition families; change-only provider drift; hosted Auth/JWT/PostgREST/API and compiled native internals remain UNVERIFIED."
+  },
+  "provider_fk_index_advisor_run106": {
+    "status": "12_OF_12_UNINDEXED_FOREIGN_KEY_9_OF_9_UNUSED_INDEX_ADVISORIES_RECHECKED_WITH_LIVE_DEFINITIONS_AND_SAFE_ESTIMATED_WORKLOAD_NO_PROVEN_NEW_DEFECT",
+    "git_development_parent": "1a54269e8f7d2c1189fd948c959de5e61dab3312",
+    "main_sha": "a4028e42b0d0316fd539c0563fd07832d509aed0",
+    "release_sha": "92829cb6aff82aaec212eabbd921183e7997f1a7",
+    "receipt_path": "docs/audits/issue509-provider-fk-index-advisor-triage-2026-11-08-run106.json",
+    "counts": {
+      "fk_count": 12,
+      "index_count": 9,
+      "distinct_fk_tables": 8,
+      "max_fk_table_est_rows": 16,
+      "fk_table_size_max_bytes": 8192,
+      "unused_index_total_bytes": 147456,
+      "unused_index_est_rows_max": 26,
+      "bad_fk_confirmed_count": 0,
+      "invalid_or_used_reported_index_count": 0,
+      "source_defect_confirmed": 0,
+      "provider_writes": 0,
+      "stats_reset": "2026-10-02 18:01:15.201525+00",
+      "observed_advisor_counts": {
+        "rls_enabled_no_policy": 6,
+        "authenticated_security_definer_function_executable": 10,
+        "auth_leaked_password_protection": 1,
+        "unindexed_foreign_keys": 12,
+        "unused_index": 9
+      }
+    },
+    "fixes": 0,
+    "provider_writes": false,
+    "source_ci": "UNRUN_UNTIL_EXACT_COMMIT",
+    "baseline_complete": false,
+    "next": "Identify distinct unreviewed nonprivate provider definition/observability surfaces; altered objects only; hosted Auth/JWT/PostgREST/vendor compiled and console-only settings UNVERIFIED."
   }
 }
