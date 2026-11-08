@@ -110,6 +110,11 @@ for(const target of targets){
    if(p?.ok){
     r.current_fields=Object.fromEntries(Object.entries(p.fields||{})
       .filter(([,v])=>v!=null&&typeof v!=='object').map(([k,v])=>[k,clip(v,400)]));
+    // Keep the parser's EXISTING low-confidence SEO provenance and its
+    // actual Add Coffee review note in bounded source diagnostics. A same-
+    // identity SEO note is an unverified fallback, not a direct sensory fact.
+    r.seo_fallback_fields=Array.isArray(p.seo_fallback_fields)?p.seo_fallback_fields.slice(0,16):[];
+    r.metadata_review_notice_rendered=coffeeUrlPreviewMarkup(p).includes('Verify metadata-only suggestions:');
     if(negativeIdentityNumbers.includes(r.number)){
      r.original_product_not_certified=true;
      r.current_identity_exception='CHANGED_SELECTED_PRODUCT_EXPLICIT_NEGATIVE_DO_NOT_TRANSFER_ARCHIVED_FIELDS';
