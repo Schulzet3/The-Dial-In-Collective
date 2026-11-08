@@ -710,8 +710,17 @@ export function isExtreme(s,shot) {
 }
 export function saveShot(s,coffeeId,input,{allowLegacyCustom=false}={}) {
  const errors=validateShot(input,{allowLegacyCustom});if(errors.length)throw new Error(errors.join(' '));
- const c=s.coffees.find(x=>x.id===coffeeId),set=activeSetup(s),v=activeVersion(s),p=ensureCoffeeState(s,coffeeId);
+ const c=s.coffees.find(x=>x.id===coffeeId),set=activeSetup(s),v=activeVersion(s);
  if(!c||!v)throw new Error('Coffee or setup not found.');
+ // An idempotent offline replay retains the ORIGINAL saved basket reference,
+ // even if that basket was archived after the first successful save.
+ if(input.id){const existing=s.shots.find(x=>x.id===input.id);if(existing)return existing;}
+ // A stale/retired or unknown basket may be shown as a fallback in Log Shot,
+ // but saving must never attach that obsolete ID to a NEW measured shot.
+ // Reject before creating preference/audit state; never silently relabel it.
+ if(!v.baskets?.some(b=>b.id===input.basketId&&!b.archived))
+  throw new Error('Select an active basket before saving this shot.');
+ const p=ensureCoffeeState(s,coffeeId);
  const sh={id:input.id||newId('shot'),coffeeId,setupId:set.id,setupVersionId:v.id,calibrationId:v.calibrationId,basketId:input.basketId,style:input.style,timestamp:input.timestamp||now(),doseG:round(input.doseG),yieldG:round(input.yieldG),timeS:round(input.timeS),grindSetting:round(input.grindSetting),tempC:v.advanced.temperature?num(input.tempC):null,feedMode:input.feedMode,notes:String(input.notes||''),tasteScales:{...input.tasteScales},dialedIn:isDialed(input.tasteScales),snapshot:snapshot(s,coffeeId,input.basketId),hidden:false,usedRecommendation:input.usedRecommendation||{},revision:1};
  if(s.shots.some(x=>x.id===sh.id))return s.shots.find(x=>x.id===sh.id); // idempotent save
  sh.outlierReview=isExtreme(s,sh)?'pending':'not_needed';
