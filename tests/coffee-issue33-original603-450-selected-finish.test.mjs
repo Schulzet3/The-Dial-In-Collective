@@ -49,7 +49,8 @@ test('related, SEO, historic, conditional, negated, irrelevant finish and missin
  assert.equal(refine(page(),'Cherry, peach'),'');
 });
 test('distinct current product headings and competing finishes cannot promote an unverified note',()=>{
- assert.equal(refine(page(prose,{extra:'<main><h1>Other Coffee</h1></main>'})),'');
+ const ambiguous=page().replace('<h1>'+title+'</h1>','<h1>'+title+'</h1><h1>Other Selected Coffee</h1>');
+ assert.equal(refine(ambiguous),'');
  assert.equal(refine(page(prose+' Sweet Black Earth, lemon-honey start; smooth, gentle citrus notes with a vanilla finish.')),'');
  const r=extractPublicCoffeeFacts(page(prose,{listed:'Cherry, Peach'}),{source_url:url});
  assert.doesNotMatch(r.fields?.tasting_notes||'',/light chocolate/i);
