@@ -1,0 +1,175 @@
+{
+  "schema_version": "1.0",
+  "issue": 33,
+  "date_utc": "2026-11-08",
+  "kind": "ORIGINAL603_SELECTED_PRODUCT_INDEPENDENT_CURRENT_SOURCE_REVIEW_AND_NARROW_FIX",
+  "source_sha": "18fd599a8a11e33e52a454619bb31971bae8839f",
+  "original_source_csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "source_archive": {
+    "workflow_run_id": 42453921954,
+    "focused_job_id": 128648778843,
+    "artifact_id": 13606807202,
+    "zip_sha256": "e9a8006afedc922e107629d75a155cffd9eec8a6454795575307decc16dc49f5",
+    "zip_provider_sha256_matches": true,
+    "extracted_json_sha256": "cd9a512a0847698be9bed9b78fb2790b35d501bf560746c91d5c289be1754430",
+    "artifact_retention_days": 1,
+    "manually_checked_original_raw_html": true,
+    "original_before_fix": {
+      "source_sha": "c9af6dde08a2f9cf42593a6bb94f6aa800d10574",
+      "run_id": 42453274940,
+      "job_id": 128646829449,
+      "result": "FAILED selected-H1-price identity, 3/3 sources FETCHED/PARSED",
+      "zip_id": 13606372520,
+      "zip_sha256": "ebc443c602e728ac93363c692b436bdba017e8252c3b5ca6357fe7f9eca84831"
+    }
+  },
+  "ci": {
+    "source_intake_pr": 1374,
+    "source_intake_merge_sha": "c9af6dde08a2f9cf42593a6bb94f6aa800d10574",
+    "fix_pr": 1375,
+    "fix_pr_head_sha": "f2c4054d74b345c87557559b452b477b952a16ff",
+    "fix_merge_sha": "18fd599a8a11e33e52a454619bb31971bae8839f",
+    "initial_pr_head_validate": {
+      "run": 42453456042,
+      "state": "FAIL",
+      "tests": 3042,
+      "pass": 3035,
+      "fail": 1,
+      "skipped": 6,
+      "reason": "New test incorrectly accessed undefined optional conflicts; no runtime extraction failure"
+    },
+    "repaired_pr_head_validate": {
+      "run": 42453691930,
+      "state": "SUCCESS",
+      "tests": 3042,
+      "pass": 3036,
+      "fail": 0,
+      "skipped": 6
+    },
+    "repaired_pr_head_other": [
+      "cloud-and-mobile:42453691957 SUCCESS",
+      "sql:42453691781 SUCCESS",
+      "security:42453691998 SUCCESS",
+      "approval:42453691942 SUCCESS",
+      "python:42453691874 SUCCESS",
+      "exact-source-archive:42453691860 SUCCESS"
+    ],
+    "merged_validate": {
+      "run": 42453921923,
+      "state": "SUCCESS",
+      "tests": 3042,
+      "pass": 3036,
+      "fail": 0,
+      "skipped": 6
+    },
+    "merged_other": [
+      "cloud-and-mobile:42453922041 SUCCESS",
+      "python:42453922037 SUCCESS",
+      "approval:42453921940 SUCCESS",
+      "focused-official:42453921954 SUCCESS"
+    ],
+    "original_frozen603": "SKIPPED_NOT_PASS",
+    "actual_signed_member_auth": "NOT_TESTED"
+  },
+  "cohort": {
+    "fetched": 3,
+    "parsed": 3,
+    "selected_heading_match": 3,
+    "add_coffee_rendered": 3,
+    "source_review_rendered": 3,
+    "cases": [
+      {
+        "number": 409,
+        "coffee": "Decaf",
+        "official_url": "https://whiterhinocoffee.com/products/decaf",
+        "html_bytes": 163340,
+        "html_sha256": "8462a33a7a07fc75e90cdea0b55f5fbb536dbdf077cf02c27dfdf65870c29b55",
+        "selected_heading": "Decaf $18.00",
+        "current_identity": "MATCH_WITH_SELECTED_COMMERCE_PRICE_REMOVED",
+        "canonical": {
+          "name": "Decaf",
+          "roaster": "White Rhino Coffee",
+          "origin": "Guatemala",
+          "process": "Washed",
+          "decaffeination_method": "Water Process",
+          "roast_level": "Medium",
+          "elevation_m": "1320 - 1600 meters",
+          "tasting_notes": "Caramel Apple, Black Tea, Raisin"
+        },
+        "conflicts": [],
+        "direct_current_source": "A wonderful Guatemalan coffee sourced, sustainably, by Swiss Water Process to use a chemical-free decaf processing method.",
+        "defect": "PRE_FIX_METHOD_MISSING",
+        "post_fix": "DIRECT_CURRENT_WATER_PROCESS_VERIFIED"
+      },
+      {
+        "number": 410,
+        "coffee": "Ethiopia Kayon Mountain",
+        "official_url": "https://whiterhinocoffee.com/products/ethiopia-kayon-mountain",
+        "html_bytes": 165184,
+        "html_sha256": "b6072bc18f0655fdc05f21205415c6b1a9c36585cac9a9999cc8eec47c48f451",
+        "selected_heading": "Ethiopia Kayon Mountain $22.00",
+        "current_identity": "MATCH_WITH_SELECTED_COMMERCE_PRICE_REMOVED",
+        "canonical": {
+          "name": "Ethiopia Kayon Mountain",
+          "roaster": "White Rhino Coffee",
+          "roast_level": "Light",
+          "origin": "Oromia, Guji, Shakiso, Ethiopia",
+          "process": "Washed",
+          "producer": "Ismael Hassen Aredo",
+          "tasting_notes": "Nectarine, Jasmine, Toffee, Honeysuckle"
+        },
+        "conflicts": [
+          "elevation_m"
+        ],
+        "altitude_current_claims": [
+          "1900-2200 MASL",
+          "1200-2100 meters"
+        ],
+        "elevation": "BLANK_CONFLICT_REVIEW",
+        "flavor_slider_qualifier": "Page also emits Light Dark in a Tasting Notes widget, not a supported sensory description"
+      },
+      {
+        "number": 411,
+        "coffee": "Hidden Eagle (Espresso Blend)",
+        "official_url": "https://whiterhinocoffee.com/products/hidden-eagle-espresso",
+        "html_bytes": 166712,
+        "html_sha256": "4f6c4a216db5ca1508e60315db903e4dc42bd91dca70964ee386944bdb5720d6",
+        "selected_heading": "Hidden Eagle (Espresso Blend) $18.00",
+        "current_identity": "MATCH_WITH_SELECTED_COMMERCE_PRICE_REMOVED",
+        "canonical": {
+          "name": "Hidden Eagle (Espresso Blend)",
+          "roaster": "White Rhino Coffee",
+          "roast_level": "Medium",
+          "origin": "Brazil & Peru",
+          "process": "Other/Unknown",
+          "elevation_m": "900-1800 meters",
+          "tasting_notes": "Cocoa, Nut Butter, Honey, Dried Apricot, Caramel"
+        },
+        "conflicts": [],
+        "mixed_process_current": "Brazil Natural plus Peru Washed; no invented singular process"
+      }
+    ],
+    "manual_certified_603": 0
+  },
+  "preservation": {
+    "original_coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "original_csv_unmodified": true,
+    "original_oracle_scorer_unmodified": true,
+    "release_queue_before": 221,
+    "release_queue_after": 222,
+    "queue_existing_states_preserved": true,
+    "added_ready_item": "DIC-Q-33-original603-409-priced-selected-water-process",
+    "locked_decisions_modified": false,
+    "approval_coverage_modified": false,
+    "netlify_deployment": false,
+    "production_writes": false
+  },
+  "remaining": {
+    "full_individual_603_certification": "INCOMPLETE",
+    "source_unavailable_case": 388,
+    "issue33": "OPEN",
+    "next": "Independently adjudicate next unresolved source-present or context-qualified cases; #410 conflicting altitude and non-sensory widget source-review evidence remain qualified; preserve stale/unavailable original #388. No publication without owner approval."
+  }
+}
