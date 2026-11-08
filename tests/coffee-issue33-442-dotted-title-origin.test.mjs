@@ -68,7 +68,6 @@ test('SEO, old product title, related card and navigation do not supply a locali
  }
 });
 test('unlabeled concatenated or unsupported heading cannot invent a region',()=>{
- const name=cases[1][0];
  for(const text of ['DANCHE ETHIOPIA GEDEB ZONE | BLUEBERRY','DANCHE. ETHIOPIA | BLUEBERRY',
   'DANCHE. ETHIOPIA. NATURAL | BLUEBERRY','DANCHE. ETHIOPIA. GEDEB ZONE / ANOTHER | BLUEBERRY']){
   assert.equal(refine({name:text,origin:'ETHIOPIA',blocks:[{tag:'h1',text}]}),null,text);
