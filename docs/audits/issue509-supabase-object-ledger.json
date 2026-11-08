@@ -8312,5 +8312,56 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "Further distinct unreviewed provider metadata and drift; hosted Auth/JWT/API and compiled native source remain UNVERIFIED"
+  },
+  "provider_pg_toast_table_columns_run79": {
+    "state": "327_OF_327_FULL_VISIBLE_PG_TOAST_TABLE_COLUMN_TUPLES_REVIEWED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "provider_at": "2026-11-08 02:48:40.404412+00",
+    "development_parent_sha": "b9774048e8136aadfc900d5f8bb521fd579f6478",
+    "main_sha": "bd627d40f7e65321323512b303d2e3f75709af39",
+    "release_sha": "2ec10324fcaa4b60d1e48240b44b77b141b9ba54",
+    "reviewed_new": 327,
+    "total": 327,
+    "toast_tables": 109,
+    "expected_column_names": {
+      "chunk_id": 109,
+      "chunk_seq": 109,
+      "chunk_data": 109
+    },
+    "unexpected_attributes": 0,
+    "missing_parent_links": 0,
+    "invalid_or_nonunique_backing_indexes": 0,
+    "unresolved_source_type_bindings": 0,
+    "per_object_source_md5": true,
+    "ordered_source_md5": "16ecad164e84cb9f1bb2f94e1ea093c1",
+    "receipt_paths": [
+      "docs/audits/issue509-provider-pg-toast-table-columns-001-055-20261108-run79.json",
+      "docs/audits/issue509-provider-pg-toast-table-columns-056-110-20261108-run79.json",
+      "docs/audits/issue509-provider-pg-toast-table-columns-111-165-20261108-run79.json",
+      "docs/audits/issue509-provider-pg-toast-table-columns-166-220-20261108-run79.json",
+      "docs/audits/issue509-provider-pg-toast-table-columns-221-275-20261108-run79.json",
+      "docs/audits/issue509-provider-pg-toast-table-columns-276-327-20261108-run79.json"
+    ],
+    "confirmed_new_defects": 0,
+    "source_fixes": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "pg_tablespace descriptors 1/2, then other distinct unreviewed declarations and changed-only drift; native compiled code, hosted Auth/JWT/API and withheld console settings UNVERIFIED"
+  },
+  "provider_pg_database_run79b": {
+    "state": "3_OF_3_COMPLETE_VISIBLE_PG_DATABASE_SHARED_DESCRIPTOR_TUPLES_REVIEWED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_development_parent_sha": "b9774048e8136aadfc900d5f8bb521fd579f6478",
+    "reviewed_new": 3,
+    "total": 3,
+    "templates": 2,
+    "normal_database": 1,
+    "unexpected_client_CREATE_grants": 0,
+    "notable": "CONNECT ACL on template0 exists but datallowconn=false; not a usable login endpoint",
+    "receipt_path": "docs/audits/issue509-provider-pg-database-001-003-20261108-run79b.json",
+    "confirmed_new_defects": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "pg_tablespace complete visible metadata 1/2"
   }
 }
