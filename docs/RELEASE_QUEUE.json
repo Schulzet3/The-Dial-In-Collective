@@ -9072,26 +9072,39 @@
     {
       "id": "DIC-Q-33-original603-456-species-cultivar-separation",
       "issue": 33,
-      "pr": null,
+      "pr": 1413,
       "title": "Treat exact selected Arabica species prefix as taxonomy when a complete printed cultivar list follows",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "c0cf5ddf14d858ef013c899dd71bb1572c10cd76",
       "scope_paths": [
         "src/server/coffee-cultivar-species-prefix.mjs",
         "src/server/coffee-page-metadata.mjs"
       ],
       "tests": [
-        "Live merged #454/#455/#456 official run 42474334734: #456 exact current source prints Varietal Arabica; Castillo, Catimor 129, F6 but parser incorrectly saves species as cultivar. #455 current recycled Rwanda slug correctly selects Papua New Guinea Bunum Wo. #454 official source unavailable; not certified.",
-        "Focused taxonomy helper, actual selected-product parser/Add Coffee/Source Review positive and negative tests; exact-head CI and postmerge independent current source+SHA pending."
+        "Initial exact merged source run42474334734 (PR1412, source 4fb4fb263032ad05853789cbfadbe5d9c9e2dd65): selected #455/#456 fetched/current parser/Add Coffee/Source Review PASS, #454 exact official source UNAVAILABLE -> focused overall FAILURE, not falsely certified. Independently rehashed provider ZIP artifact13615096006 SHA256 fb72977751b62376a00e99254651c62e1da7b600cb9f4216dfa22db627ccb0c6.",
+        "Source #456 exact own Varietal Arabica; Castillo, Catimor 129, F6; pre-fix actual parser incorrectly stored botanical species Arabica in canonical cultivar list. Narrow strictly recognized two-to-eight cultivar list guard plus real parser/UI/review positives and hostile negatives. PR1413 first Node 42474597859 one stale same-field fixture FAILED, corrected in same-commit test/journal while preserving semicolon/negative guards.",
+        "Corrected PR1413 exact head6671274f5be4d77a924562a2d72251e0cb4ee3ba Node/lint/build run42474781561: 3064 PASS, 0 FAIL, six intentional SKIP; 13 focused PASS. Exact archive42474781550, cloud/UX42474781537, isolated SQL42474781575, security42474781576, approval42474781545 SUCCESS. Frozen original603 42474781557 SKIPPED, not certification.",
+        "Safe nonforce PR1413 squash merge readback c0cf5ddf14d858ef013c899dd71bb1572c10cd76; relevant runtime/test Git blob SHAs source-identical to corrected passing head despite disjoint #267 concurrent docs. Exact merged Node/lint/build42475000433 3064 PASS/0 FAIL/6 intentional SKIP; mobile/cloud42475000470 and approval42475000583 SUCCESS.",
+        "Exact merged controlled public HTTPS run42475000471 SUCCESS: #455 and #456 both current selected H1 identity, parser, Add Coffee, Source Review PASS, no conflicts. #456 named variety now precisely Castillo, Catimor 129, F6 (without botanical species), process Anaerobic with literal Natural dry + extended fermentation retained in source. #455 preserved Papua New Guinea BUNUM WO identity, not outdated Rwanda slug.",
+        "Independent raw GitHub artifact13615151729 ZIP sha256 e9b856727667eef8494154e046f593fc3554a08012c3a01f9b34d37bb786c3e2, JSON sha256 b3699ccf32a44cad429fc78c0230329ca997f03fa0c969cebd369e5af4d35850, HTML #455 sha256 41162ddab4565d619b26bb3422d018d6f712c1c94b892e0bdcdba97880121426 and #456 sha256 8d800577f191726a0f6d2b87e97c7a61005afac69aece943dab9ed76b173c303. Raw page direct H1/spec paragraphs manually checked. #454 remains unavailable, NOT_CERTIFIED, no alternative product identity substitutions."
       ],
       "ci_runs": [
-        42474334734
+        42474334734,
+        42474597859,
+        42474781561,
+        42474781550,
+        42474781537,
+        42474781575,
+        42474781576,
+        42474781545,
+        42475000433,
+        42475000470,
+        42475000583,
+        42475000471
       ],
-      "blockers": [
-        "Exact code-head checks, safe nonforce merge/readback, 2-case current official source rerun and independent HTML/artifact SHA-256 certification. #454 separately unavailable, no invented data."
-      ],
+      "blockers": [],
       "owner_source": "Issue #33 development-only original603 direct selected current source acceptance",
-      "notes": "IN_PROGRESS, not deployed; full individual original603 certification incomplete; original frozen corpus and 228 prior queue items preserved."
+      "notes": "Narrow correction READY in DEVELOPMENT ONLY, NOT DEPLOYED. Original603 source #454 inaccessible/unverified, entire 603 individual semantic certification unfinished; original immutable CSV/oracle/scorer and 228 other queue entries/states preserved. See docs/audits/issue33-original603-455-456-species-verified-454-unavailable-20261108.md."
     }
   ],
   "history": [
