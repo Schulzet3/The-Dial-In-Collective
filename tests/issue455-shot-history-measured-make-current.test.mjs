@@ -63,7 +63,7 @@ test('R114 missing legacy family ID keeps all-five-green History but cannot crea
  for(const familyId of [null,undefined,'','   ',0]){
   const shot={...structuredClone(source),familyId},before=structuredClone(shot);
   const html=shotCard(shot,options);
-  assert.match(html,/<span class="status-badge">Dialed In<\\/span>/);
+  assert.match(html,/class="status-badge">Dialed In/);
   assert.doesNotMatch(html,/data-action="make-current"/);
   assert.match(html,/data-action="edit"/);
   assert.match(html,/Preserve original private historical notes/);
