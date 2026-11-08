@@ -22,6 +22,7 @@ import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
 import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,refineSelectedNamedTastingNotes,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
 import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish} from './coffee-selected-description-sensory.mjs';
+import {selectedCoffeeMilkSensoryContext} from './coffee-selected-milk-sensory-context.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
 import {withoutNaturalDecaffeinationModifier,recordCoffeeProcessingClaim,reconcileCoffeeProcessingClaims} from './coffee-processing-evidence.mjs';
@@ -1770,6 +1771,14 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   ...(matchedDescriptions.length?[collectStructuredCoffeeSourceFacts({description:matchedDescriptions.join('\n\n')},{source_url,source_type:'html'})]:[]),
   ...[p,...equivalentProducts.filter(candidate=>candidate!==p)].map(candidate=>collectStructuredCoffeeSourceFacts(candidate,{source_url}))
  );
+ // Conditional flavors of this same selected coffee are review-only context.
+ // Never assert with-milk tasting as unqualified green-bean or shot flavor.
+ const milkContext=selectedCoffeeMilkSensoryContext(canonicalProduct,{name:fields.name,clean});
+ if(milkContext&&source_facts.length<384)source_facts.push({
+  field:'sensory_context',label:'Selected product with-milk sensory description',
+  value:milkContext,source_url,source_type:'html',
+  section:'Exact selected coffee; with milk; context only, not autofill'
+ });
  if(partialProcessReviewNote&&source_facts.length<384)source_facts.push({
   field:'component_process',label:'Incomplete selected blend processing',
   value:partialProcessReviewNote,source_url,source_type:'html',
