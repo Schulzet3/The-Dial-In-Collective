@@ -47,3 +47,39 @@ export function refineSelectedDescriptionSensory(html,{clean,notes}={}){
  const augmented=[...parts,...found.values()].join(', ');
  return normalizeExplicitCoffeeTastingNotes(augmented)||'';
 }
+
+
+// Keep one literal, unconditional flavor finish printed with the already
+// selected coffee's full note list in its own current product paragraph.
+export function refineSelectedCurrentLiteralFinish(html,{clean,notes}={}){
+ if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function'||
+  typeof notes!=='string'||notes.length<8||notes.length>300)return '';
+ const blocks=productCoffeeProse(html,clean);
+ const headings=blocks.filter(b=>b.tag==='h1'&&!b.educational);
+ if(headings.length!==1||!headings[0].text||headings[0].text.length>180)return '';
+ const parts=notes.split(/\s*(?:,|&|[•·;|]|\band\b)\s*/i).map(x=>x.trim()).filter(Boolean);
+ if(parts.length<2||parts.length>8||parts.some(x=>!normalizeExplicitCoffeeTastingNotes(x)))return '';
+ const hits=new Set();
+ for(const block of blocks){
+  if(block.tag!=='p'||block.educational||unavailable.test(block.section)||
+   block.text.length<22||block.text.length>650||unavailable.test(block.text)||
+   NONCURRENT_COFFEE_PROSE.test(block.text))continue;
+  // Every canonical note must occur within this one selected paragraph;
+  // unbound SEO, related products and other coffees cannot supply a finish.
+  const owned=fold(block.text);
+  if(!parts.every(part=>owned.includes(fold(part))))continue;
+  for(const sentence of block.text.split(/(?<=[.!?])\s+/u).slice(0,12)){
+   if(sentence.length>500)continue;
+   const match=sentence.match(/(?:^|;)\s*([^;.!?]{3,105}\bnotes?)\s+with\s+(?:a|an)\s+([\p{L}\p{M}]+(?:[ -][\p{L}\p{M}]+){0,3})\s+finish[.!?]?$/iu);
+   if(!match)continue;
+   const finish=match[2].trim();
+   if(/^(?:clean|smooth|bright|dry|long|short|pleasant|balanced|crisp|lingering|lasting|full|round|complex|delicate|fresh|soft|bold)$/i.test(finish)||
+    /\b(?:body|mouthfeel|acidity|roast|process|brewed|served|milk|creamer|syrup|added|mixed|coffee|beans?)\b/i.test(finish)||
+    parts.some(part=>fold(part)===fold(finish))||
+    !normalizeExplicitCoffeeTastingNotes(finish))continue;
+   hits.add(finish);
+  }
+ }
+ if(hits.size!==1)return '';
+ return normalizeExplicitCoffeeTastingNotes([...parts,...hits].join(', '))||'';
+}
