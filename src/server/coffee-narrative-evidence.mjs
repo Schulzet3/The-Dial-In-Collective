@@ -47,7 +47,7 @@ function collectiveCredit(raw){
  // A source credit ends before cultivation, location or purchasing prose.
  // Keep the literal group/name instead of adding its altitude or method.
  let value=raw.trim().replace(/^(?:the|an?)\s+/i,'')
-  .split(/,\s+(?!\d)|\s+(?:at\s+(?:altitudes?|elevations?)|rooted|located|using|through|throughout|within|near|on the slopes|in the|that|which|who|where)\b/i)[0];
+  .split(/,\s+(?!\d)|\s+(?:at\s+(?:altitudes?|elevations?)|rooted|located|nestled\s+(?:in|near|by)|using|through|throughout|within|near|on the slopes|in the|that|which|who|where)\b/i)[0];
  const unnamed=value.match(/^((?:(?:approximately|around|over|nearly)\s+)?(?:[\d,]+\s+)?(?:(?:small[ -]?holder|small|local|individual|independent|family[- ]owned|family)\s+){1,3}(?:farmers?|growers?|producers?|farms?|farm holders))\b/i);
  if(unnamed)value=unnamed[1];
  if(value.length<3||value.length>155||/\b(?:care|love|passion|dedication|commitment|hand|handpicked|traditional|methods?|process|grown|produced|cultivated|harvested|sourced|collected|comes|is|are|was|were|has|have)\b/i.test(value)||
