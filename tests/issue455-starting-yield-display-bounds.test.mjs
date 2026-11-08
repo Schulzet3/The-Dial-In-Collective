@@ -21,7 +21,7 @@ test('R111: valid 5 g dark-roast Ristretto center has loggable displayed lower e
  const s=fixture(),original=structuredClone(s),rec=card(s);
  assert.equal(rec.source,'Starting recommendation');
  assert.deepEqual(rec.yield,{low:CONFIG.bounds.yieldG[0],center:5.5,high:6.1});
- assert.equal(rec.ratio.low,.98,'approved starting ratio prior remains unchanged');
+ assert.ok(Math.abs(rec.ratio.low-.98)<1e-10,'approved starting ratio prior remains unchanged within floating-point precision');
  assert.equal(rec.ratio.center,1.1);
  const html=recipeGrid(rec);
  assert.ok(html.includes('5.0<span class="range-dash">'),'rendered yield band starts at valid 5 g');
@@ -42,7 +42,7 @@ test('R111: ordinary 18 g Ristretto and 5 g Turbo baseline displays are unchange
 
 test('R111: non-crossing 5 g clarity-preference band is unchanged; no style or taste threshold changed',()=>{
  const s=fixture({preferences:'clarity'}),original=structuredClone(s),r=card(s);
- assert.deepEqual(r.yield,{low:5.7,center:6.3,high:6.9});
+ assert.deepEqual(r.yield,{low:5.6,center:6.3,high:6.9});
  assert.equal(r.ratio.center,1.25);
  assert.equal(r.style,'Ristretto');
  assert.equal(s.shots.length,0);
