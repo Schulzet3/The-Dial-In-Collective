@@ -21,7 +21,8 @@ test('selected price-decorated Decaf heading and SAME-product prose produce Wate
  assert.equal(r.fields.process,'Washed');
  assert.equal(r.fields.origin,'Guatemala');
  assert.equal(r.fields.roast_level,'Medium');
- assert.ok(!r.conflicts.includes('decaffeination_method'),JSON.stringify(r.conflicts));
+ assert.ok(!r.source_facts.some(f=>f.field==='decaffeination_method'&&f.conflicting===true),
+  'direct decaffeination treatment must not conflict with own source evidence');
  assert.ok(r.source_facts.some(f=>f.field==='decaffeination_method'&&/Swiss Water Process/.test(f.value)),
   'member source review retains literal direct current-product method statement');
  assert.ok(coffeeUrlPreviewMarkup(r).includes('<dt>Coffee Name</dt><dd>Decaf</dd>'));
