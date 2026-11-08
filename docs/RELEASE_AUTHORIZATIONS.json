@@ -558,7 +558,7 @@
       "id": "DIC-20261108-READY56-24",
       "tested_source_sha": "34e88fc3ac5277f2daf7c208b9547588e11c9ad0",
       "owner_approved": true,
-      "status": "APPROVED",
+      "status": "SUPERSEDED",
       "production_branch": "release/production",
       "max_publications": 1,
       "approved_at_utc": "2026-11-08T16:37:19.613Z",
@@ -626,7 +626,8 @@
       "owner_private_free_compensating_controls": true,
       "sql_evidence": [
         "Source-isolated candidate 34e88fc3ac5277f2daf7c208b9547588e11c9ad0 five latest exact check statuses SUCCESS: approval run42500539146, validate run42500539259, cloud/mobile run42500539279, sql run42500539154. Candidate versus published tested source contains no supabase/migrations or supabase/functions changes; isolated SQL/JWT success. Sunday 2026-11-08 encrypted archive Actions artifact13620613811 digest sha256:494b9d434c00a763d694bda868a2106c8ac58c6a7d51850694009a13d17d0f3d and matching private Drive file 1Zpi-IJztgNROCpUf0axlrHQLGz4xjzuc (13,718,470 bytes, correct parent) independently read; no additional destructive backup required."
-      ]
+      ],
+      "superseded_reason": "Run 42500877325 DENIED before publication: newer post-READY #33 R39 coffee-page-metadata code unqueued; superseded for fresh source-isolated READY-only candidate and separate unique grant. Netlify/production unchanged."
     }
   ],
   "policy": "New owner publish/deploy instruction grants one selected READY release at the exact combined tested source SHA; source-bound unique grant, max 1 publication, finite expiry, matched CI, backup/security and Netlify readback. Owner exclusively monitors credits; no credit cap/balance/plan proof required. Never buy or upgrade. Prior grants and their old cost fields are preserved historical evidence."
