@@ -20,7 +20,7 @@ Exact development source 7be0869b2305dcce2e35c7db6c1f36c469fa6f55, current `src/
   "actual_live_callsite_line": 343,
   "added_physical_lines": 39,
   "duplicate_original_credit": 0,
-  "notes": "Exactly 39 source lines newly inserted after pinned snapshot independently reviewed from direct numbered live source including 2 blank separators and 5 comment lines (all counted). The corresponding pinned function is ABSENT; original pinned line119 begins function labeledComponents, now current line158. This does NOT replace P126 original review or certify other post-pin drift, #33 active tests, current selected source accuracy or final global audit. No patch justified or deployed.",
+  "notes": "Exactly 39 source lines newly inserted after pinned snapshot independently reviewed from direct numbered live source including 2 blank separators and 8 comment lines (all counted). The corresponding pinned function is ABSENT; original pinned line119 begins function labeledComponents, now current line158. This does NOT replace P126 original review or certify other post-pin drift, #33 active tests, current selected source accuracy or final global audit. No patch justified or deployed.",
   "records": [
     {
       "track": "post_pin_live_delta",
