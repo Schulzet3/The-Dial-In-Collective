@@ -13547,5 +13547,42 @@
       "docs/audits/issue509-provider-pg-proc-raw-2201-2400-2026-11-08-run92b.json"
     ],
     "next": "pg_catalog.pg_proc raw numeric OID ordinal 2401/3319; native implementations and hosted Auth/JWT/API settings UNVERIFIED"
+  },
+  "provider_pg_proc_raw_run93": {
+    "state": "PG_CATALOG_RAW_PG_PROC_2401_2800_ALL_VISIBLE_DECLARATIONS_REVIEWED_NATIVE_IMPL_UNVERIFIED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_development_parent_sha": "a732aa1d40dae0df9dae6de51101901b1d3f2b59",
+    "provider_raw_fingerprint": "f654ffdef49118b4bae1e66296036709",
+    "hash_method": "md5(string_agg(p.oid::text||':'||md5(to_jsonb(p)::text),'|' ORDER BY p.oid))",
+    "reviewed_new": 400,
+    "reviewed_cumulative": 2800,
+    "total": 3319,
+    "next_ordinal": 2801,
+    "first_oid": "3577",
+    "last_oid": "4139",
+    "by_language_kind": {
+      "internal|f": 386,
+      "sql|f": 2,
+      "internal|a": 12
+    },
+    "complete_visible_sql_bodies": 2,
+    "aggregate_refs_validated": 12,
+    "metadata_anomalies": 0,
+    "security_definers": 0,
+    "previous_DDL_review_not_recredited": true,
+    "native_compiled_implementations_unverified": true,
+    "hosted_auth_jwt_postgrest_unverified": true,
+    "privilege_caveat": "PUBLIC function EXECUTE on selected native replication/binary-upgrade declarations is not proof of privileged execution or REST exposure; internal permission gates require separate testing",
+    "new_confirmed_defects": 0,
+    "source_fixes": 0,
+    "production_writes": false,
+    "baseline_complete": false,
+    "receipt_paths": [
+      "docs/audits/issue509-provider-pg-proc-raw-2401-2500-2026-11-08-run93.json",
+      "docs/audits/issue509-provider-pg-proc-raw-2501-2600-2026-11-08-run93.json",
+      "docs/audits/issue509-provider-pg-proc-raw-2601-2700-2026-11-08-run93.json",
+      "docs/audits/issue509-provider-pg-proc-raw-2701-2800-2026-11-08-run93.json"
+    ],
+    "next": "pg_catalog.pg_proc raw OID-ordered ordinal 2801/3319, then non-system raw proc tuples; compiled native, hosted Auth/API and restricted settings remain UNVERIFIED"
   }
 }
