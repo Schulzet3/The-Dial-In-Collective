@@ -926,6 +926,22 @@
       "claims_verified_externally": "Eight Arabica microlots roasted light/medium/dark (24 samples) under a standardized Sanremo Café Racer / Mahlkönig E65s setup, 91 °C, 6 s at 1 bar prewetting and nominal 1:2 mass ratio, rated by six trained tasters. Authors report medium roast often better preserved expected source cupping descriptors under that tested espresso preparation, not a universal objectively optimal roast, recipe, extraction time, temperature or app taste threshold.",
       "source_bytes_sha256": null,
       "source_byte_caveat": "Publisher full HTML directly read in current web retrieval; no byte-hashed PDF, raw replicate data or supplementary spreadsheets. Producer in-origin cupping ratings and experimental espresso expert ratings are different instruments and cannot be equated to DIC sliders."
+    },
+    {
+      "id": "LIT-2024-PANNUSCH-ESPRESSO-KINETIC-CONTROL",
+      "type": "peer_reviewed_original_espresso_solute_kinetic_model_abstract_source",
+      "title": "Model-based kinetic espresso brewing control chart for representative taste components",
+      "authors": "Verena B. Pannusch; Benedikt K. L. Schmieder; Lara Vannieuwenhuyse; Mirjana Minceva; Heiko Briesen",
+      "published": "2024-04 (volume); original author-institution notice 2024-01-19",
+      "journal": "Journal of Food Engineering 367:111887",
+      "doi": "10.1016/j.jfoodeng.2023.111887",
+      "url": "https://doi.org/10.1016/j.jfoodeng.2023.111887",
+      "access": "DIRECT_ORIGINAL_AUTHOR_AFFILIATED_TUM_INSTITUTION_PUBLICATION_ABSTRACT_BIBLIOGRAPHY_20261108; PUBLISHER_DOI_FULL_TEXT_UNAVAILABLE; NO_PDF_BYTES",
+      "review_status": "BOUNDED_DIRECT_PRIMARY_AUTHOR_INSTITUTION_ABSTRACT_AND_LIVE_ORG02_ENGINE_CROSSCHECK; NOT_FULL_TEXT_METHODS_DATA_REVIEW",
+      "evidence_grade": "PEER_REVIEWED_ORIGINAL_PHYSICAL_CHEMICAL_MODEL_AUTHOR_ABSTRACT_ONLY; NO_APP_TASTE_VALIDATION",
+      "claims_verified_externally": "Authors report extension of a two-grain kinetic model for flow-rate and temperature effects, fitting prior espresso extraction data on TDS, caffeine, trigonelline and chlorogenic acid, and checking predictions against experiments involving dynamic temperature and flow. No experimental DIC five-sensory-rating prediction or universal optimum shown in accessible abstract.",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Original full Elsevier article, parameter tables, coefficient errors, supplement, PDF and blinded sensory/member data not accessed or hashed. TUM author-institution abstract is not full-text verification."
     }
   ],
   "evidence_checks": [
@@ -2775,6 +2791,39 @@
       "original_source_sha": "0d624b00d57010bf49c1eba7837071a289aaf9ef",
       "original_report_git_blob_sha": "43912d0dec0969c090d525c853f3a456136a2311",
       "publisher_full_text_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-108-A",
+      "source": "Pannusch et al. 2024 original TUM author-institution publication abstract",
+      "primary_sources": [
+        "https://portal.fis.tum.de/en/publications/model-based-kinetic-espresso-brewing-control-chart-for-representa/",
+        "https://doi.org/10.1016/j.jfoodeng.2023.111887",
+        "https://www.lse.ls.tum.de/en/btd/news/article/new-publication-in-cooperation-with-prof-briesens-group-new-espresso-brewing-control-chart/"
+      ],
+      "claim": "Original abstract documents an extended two-grain mass-transfer extraction model accounting for flow and temperature, calibrated on earlier experimental TDS, caffeine, trigonelline and chlorogenic-acid kinetics and compared against experimental changing flow/temperature. Publisher coefficient details and external generalization are unverified.",
+      "grade": "AUTHOR_INSTITUTION_PRIMARY_ABSTRACT_ONLY_NOT_FULL_PUBLISHER_PAPER",
+      "current_app": "Current engine baseline, recommendation and temperatureGuidance use owner-approved heuristic and measured user history, not live extraction-chemical estimates.",
+      "result": "SUPPORTED_MODEL_SCOPE_NOT_UNIVERSAL_SENSORY_TARGET",
+      "owner_approval": false,
+      "original_source_sha": "643910af20c6709a22a07effc77df990fe224657",
+      "original_report_git_blob_sha": "17ab370d8d479190d867fbe7e4b0f80becb93b9a",
+      "publisher_full_text_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-108-B",
+      "source": "Pannusch et al. author abstract, original ORG-02 physics, live engine/constants",
+      "primary_sources": [
+        "https://portal.fis.tum.de/en/publications/model-based-kinetic-espresso-brewing-control-chart-for-representa/",
+        "https://doi.org/10.1016/j.jfoodeng.2023.111887"
+      ],
+      "claim": "The authors modeled chemical solute concentrations, not randomized consumer preferences, personal five-slider satisfaction, Turbo versus Fast-Flow or one-controllable-change efficacy. Model predictions must not be represented as measured sensory confidence, universally correct grind/time/temperature or a validated app result.",
+      "grade": "REASONED_LIMITATION_FROM_AUTHOR_DECLARED_ENDPOINTS; FULL_JOURNAL_METHODS_AND_SENSORY_DATA_UNVERIFIED",
+      "current_app": "site/lib/constants.js five original sensory inputs and separate styles; engine.js style-specific prior, measured same-coffee and comparable-equipment context; no automatic pressure/flow targets or extra capture.",
+      "result": "RESEARCH_ONLY_NO_LOCKED_RECIPE_OR_RATING_TRANSFER",
+      "owner_approval": false,
+      "original_source_sha": "643910af20c6709a22a07effc77df990fe224657",
+      "original_report_git_blob_sha": "17ab370d8d479190d867fbe7e4b0f80becb93b9a",
+      "publisher_full_text_sha256": null
     }
   ],
   "policy_decisions_pending": [],
@@ -2783,9 +2832,10 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R455-106 original Matter 2024 author-institution source verification; two bounded checks and research-only transfer guard, no runtime/Locked/queue changes"
+    "reason": "R455-108 original author institutional model abstract verification only; no runtime, numeric, Locked or release change."
   },
   "next_actions": [
+    "R455-108: independently inspected original Pannusch 2024 author-affiliated kinetic extraction abstract and live ORG-02/engine; 63 sources, 143 bounded checks, 70 proposals. No universal chemistry-to-taste mapping. Docs-only exact governance pending; full publisher PDF/S019 unavailable.",
     "R455-106: Matter 2024 original coffee electrostatics first-party author institution abstracts verified for two bounded mechanisms; source 61/139 evidence/68 proposals, publisher full manuscript/unhashed and no numeric taste certification. Distinct from iScience RDT study; no app policy change. Next fresh source read for independently verified narrow UX/science gap, S019 unavailable; #267 independent literal review.",
     "R455-104 code PR #1334 merged b9774048e8136aadfc900d5f8bb521fd579f6478; head Node22 3008/0/6, merged Node22 3009/0/6, all applicable UI/mobile/offline/a11y/SQL/security/governance successes; 3 R104 positive/negative tests PASS; queue READY development-only after docs reconciliation, no deployment; 60 source identities/136 bounded checks/66 proposals, S019 inaccessible, #267 no literal credit. Continue distinct safe finding.",
     "R455-103: SAFE Log Shot measured-prefill consistency PR #1326 nonforce merged 531e5fce190a696f52f83326d9c767570c8b3945; exact tested/merged engine, test and same-commit journal blobs identical. Node22 3005 PASS/0 FAIL/6 SKIP both, applicable UX/browser/mobile/approval/SQL/security success, original603 SKIPPED. Queue READY development only on docs reconciliation, NOT DEPLOYED. 60 source identities/135 bounded checks/65 proposals. S019 unreviewed, #267 no literal credit. Next fresh source and distinct finding.",
@@ -2812,30 +2862,29 @@
     "R455-107: primary Wiley full HTML 2021 Vezzulli 8-lot/24-roast/6-expert study directly checked vs ORG-03, ORG-07, engine/constants; no transfer of medium-roast optimum, 91C/1:2 or expert cupping notes to five DIC ratings. 62 curated sources/141 bounded checks/69 proposals; docs CI pending. Primary original binary/supplements and S019 pending; no #267 audit-line credit or product change."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-107",
-    "base_development_sha": "0d624b00d57010bf49c1eba7837071a289aaf9ef",
+    "id": "R455-108",
+    "base_development_sha": "643910af20c6709a22a07effc77df990fe224657",
     "source_ids": [
-      "LIT-2021-VEZZULLI-ROAST-SENSORY-ESPRESSO",
-      "ORG-03",
-      "ORG-07",
-      "site/lib/constants.js",
-      "site/lib/engine.js"
+      "LIT-2024-PANNUSCH-ESPRESSO-KINETIC-CONTROL",
+      "ORG-02",
+      "site/lib/engine.js",
+      "site/lib/constants.js"
     ],
     "claim_ids": [
-      "R455-EV-CIT-107-A",
-      "R455-EV-CIT-107-B"
+      "R455-EV-CIT-108-A",
+      "R455-EV-CIT-108-B"
     ],
-    "number_of_curated_sources": 62,
-    "total_evidence_checks": 141,
-    "number_of_proposals": 69,
-    "review_type": "BOUNDED_DIRECT_PRIMARY_ITALIAN_ESPRESSO_ROAST_EXPERT_SENSORY_METHODS",
+    "number_of_curated_sources": 63,
+    "total_evidence_checks": 143,
+    "number_of_proposals": 70,
+    "review_type": "BOUNDED_PRIMARY_AUTHOR_TUM_INSTITUTION_ABSTRACT_SOLUTE_KINETICS",
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
     "code_or_policy_changed": false,
     "ci_runs": [],
-    "doc_pr_ci": "NOT_EXECUTED_AT_AUTHORING",
+    "doc_pr_ci": "PENDING_AT_AUTHORING",
     "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "Verify exact PR-head docs governance; preserve nonforce integration and merge readback. Next run resume distinct citation or measurable safe UX defect under fresh development SHA."
+    "next_action": "Obtain exact-source docs governance, nonforce merge readback; investigate a distinct source or reproducible safe UX gap. Original Elsevier PDF and S019 remain inaccessible."
   },
   "policy_decisions_resolved": [
     {
@@ -4270,6 +4319,25 @@
       "future_owner_approval_boundary": "YES_IF_LATER_CHANGING_LOCKED_ROAST_STYLE_TEMPERATURE_RATIOS_RATING_MODEL_OR_NEW_FIELDS; NO_OWNER_ACTION_NOW",
       "implementation": "CITATION_EVIDENCE_LEDGER_SCOPED_WORKSTREAM_STATUS_ONLY; NO_RUNTIME_TESTS_SQL_AUTH_CI_CONFIG_OR_RELEASE_ITEM",
       "test_plan": "Direct original full publisher HTML methods/results/conclusion vs byte-preserved original sources and current engine/constants; docs-only exact-source governance CI, no required Node/browser/offline/SQL/Auth tests. PDF/supplementary data and empirical app cup outcomes not evaluated.",
+      "release_queue": "NOT_APPLICABLE_RESEARCH_ONLY",
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-108-ESPRESSO-KINETIC-COMPOSITION-MODEL-BOUNDARY",
+      "finding": "Original author-institution primary abstract for Pannusch 2024 reports a laboratory model for four extraction-composition measurements under changing flow/temperature; it does not demonstrate a scientifically calibrated five-taste DIC recommendation or universal optimum.",
+      "evidence": [
+        "R455-EV-CIT-108-A",
+        "R455-EV-CIT-108-B"
+      ],
+      "severity": "P3_EVIDENCE_STRENGTH_AND_UX_CONFIDENCE_GUARD",
+      "user_benefit": "Preserve transparent individualized advice and explicit uncertainty instead of conflating modeled caffeine/acid chemistry with sweetness, clarity or user preference.",
+      "current_locked": "All five taste inputs, all-green success, one truly controllable next recommendation, private original measured shots/notes, style-specific Turbo/Fast-Flow, personal same-coffee evidence and machine/temperature limits.",
+      "current_app": "development 643910af20c6709a22a07effc77df990fe224657; engine blob 3823b70b0a954a9a4182b45de11d667cfe1c98a4; constants blob 72221331ce4dffabe416eebec1ae2fceced3a095; ORG-02 original blob 17ab370d8d479190d867fbe7e4b0f80becb93b9a lines 60-140.",
+      "proposed_change": "RESEARCH ONLY: do not alter thresholds, style, recipe, confidence, capture or feedback; require accessible full model parameters and independent member sensory validation plus explicit owner approval before any chemistry-to-taste prediction.",
+      "approval_required_for_behavior_change": false,
+      "future_owner_approval_boundary": "YES_FOR_NEW_CONFIDENCE_LABELS_OR_MODEL_NUMERICS_OR_MEASUREMENT_FIELDS; NO_OWNER_ACTION_NOW",
+      "implementation": "DOCUMENTED_IN_EVIDENCE_LEDGER_AND_SCOPED_JOURNAL_ONLY; NO_APP_TEST_CI_SQL_AUTH_QUEUE_CHANGES",
+      "test_plan": "Compare direct TUM original author-institution abstract and team notice against original ORG-02 and pinned live engine/constants; docs-only governance exact-source validation; full article and measured cup results NOT tested.",
       "release_queue": "NOT_APPLICABLE_RESEARCH_ONLY",
       "production_deployed": false
     }
