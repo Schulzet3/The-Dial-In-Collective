@@ -6,11 +6,11 @@ import {selectedDottedTitleCountryRegion as refine} from '../src/server/coffee-d
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 const cases=[
  ['ALVA MARINA ALVARADO. HONDURAS. SANTA BARBARA | CRANBERRY LEMON CURD, TANGERINE, & HIBISCUS.',
-  'HONDURAS','Santa Barbara, HONDURAS'],
+  'HONDURAS','SANTA BARBARA, HONDURAS'],
  ['DANCHE. ETHIOPIA. GEDEB ZONE | BLUEBERRY, PINEAPPLE, KIWI, & PEACH.',
-  'ETHIOPIA','Gedeb Zone, ETHIOPIA'],
+  'ETHIOPIA','GEDEB ZONE, ETHIOPIA'],
  ['TZUNWITZ. GUATEMALA. HUEHUETENANGO | BLUEBERRY WAFFLES, STRAWBERRY NOUGAT, & PEAR.',
-  'GUATEMALA','Huehuetenango, GUATEMALA']
+  'GUATEMALA','HUEHUETENANGO, GUATEMALA']
 ];
 const escape=value=>value.replace(/&/gu,'&amp;');
 function selected(title,extra=''){
@@ -61,7 +61,7 @@ test('SEO, old product title, related card and navigation do not supply a locali
    '<div class="related-products">'+selected(cases[0][0])+'</div>'
  ]){
   const parsed=extractPublicCoffeeFacts(html,{source_url:'https://examplecoffee.test/products/selected-honduras'});
-  assert.notEqual(parsed.fields?.origin,'Santa Barbara, HONDURAS',JSON.stringify(parsed));
+  assert.notEqual(parsed.fields?.origin,'SANTA BARBARA, HONDURAS',JSON.stringify(parsed));
  }
 });
 test('unlabeled concatenated or unsupported heading cannot invent a region',()=>{

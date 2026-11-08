@@ -4,7 +4,7 @@
 // tokens masquerading as geography. No external gazetteer or fallback facts.
 const norm=value=>String(value||'').normalize('NFKD')
  .replace(/\p{M}/gu,'').toLocaleLowerCase().replace(/[^\p{L}\p{N}]+/gu,'');
-const forbidden=/\b(?:blend|flavou?r|tasting|notes?|roast|process|washed|natural|honey|anaerobic|decaf|espresso|variet(?:y|ies)|cultivar|coffee|organic|lot|farm|finca|estate|station|mill|sale|medium|dark|light|limited|grade|single[ -]?origin)\b/iu;
+const forbidden=/\b(?:blend|flavou?r|tasting|notes?|roast|process|washed|natural|honey|anaerobic|decaf|espresso|variet(?:y|ies)|cultivar|chocolate|cocoa|vanilla|caramel|lemon|berry|fruit|floral|citrus|almond|orange|nut|toffee|peach|lime|plum|coffee|organic|lot|farm|finca|estate|station|mill|sale|medium|dark|light|limited|grade|single[ -]?origin)\b/iu;
 const titlePattern=/^([^|.\n]{3,105})\.\s*([\p{Lu}][\p{L}\p{M} ]{2,45})\.\s*([\p{Lu}][\p{Lu}\p{M} -]{2,60})\s+\|\s+([^|\n]{4,110})\.?$/u;
 export function selectedDottedTitleCountryRegion({name='',origin='',blocks=[]}={}){
  if(typeof name!=='string'||name.length<20||name.length>220||
