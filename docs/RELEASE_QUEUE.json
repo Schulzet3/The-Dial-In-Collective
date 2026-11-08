@@ -8614,37 +8614,6 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
       "notes": "Owner Option B development-only SAFE recommendation card correction. All five stored tastes, history, notes, identity, privacy, independent styles/feed, grinder ranges and all Locked numeric policy preserved. NO deployment/production writes; not empirical espresso validation. Code PR #1250 exact head/merge PASS and development READY. Original S019 PDF still inaccessible. Scoped docs reconciliation subject to docs PR exact checks; no deployed publication."
-    },
-    {
-      "id": "DIC-Q-508-postrelease-smoke-built-routes",
-      "issue": 508,
-      "pr": 1333,
-      "title": "Align read-only production postrelease smoke with actual packaged routes",
-      "state": "READY",
-      "merged_source_sha": "43574bed8f80f849d3c586d4f6105a232c9f69c2",
-      "scope_paths": [
-        "scripts/release/production-readonly-smoke.mjs"
-      ],
-      "tests": [
-        "N508-068 source proof: build_cloud.mjs blob e7b64951452601c25cdc2a5e1069d4816e1421c2 publishes site/cloud.html -> dist/index.html and site/admin.html -> dist/admin.html; old smoke mistakenly requested /cloud.html. No actual hosted /cloud.html HTTP status or published artifact byte claim.",
-        "Code PR #1333 exact PR head 790ab5557676f74e3ce92cef0505ba0ba7b30167 Node22/lint 42439805488 SUCCESS: 3,012 tests, 3,006 PASS, 0 FAIL, 6 intentional SKIP; build + compiled graph + public/browser/mobile/offline 42439805497 SUCCESS; approval 42439805479 SUCCESS; isolated SQL 42439805414 SUCCESS with SQL NOT_APPLICABLE; frozen603 42439805358 SKIPPED.",
-        "PR head git tree 502194350ce7b9b4094a248111d0f3a0cbb22fb4 EXACTLY equals nonforce squash merge 43574bed8f80f849d3c586d4f6105a232c9f69c2 git tree. Identical full source bytes and identical reviewed Git blobs: smoke ff1a0e90cf9e78051fae435f72b41522f5723334, regression 8e25a399cad7d543c050f34ba9a7cdbd38303726, journal c4ef23fea7838452a5fb1a548cd2a20aebffdbca.",
-        "Merged-source approval 42439977842 SUCCESS, nonpublishing release rehearsal 42439977731 SUCCESS. Merged CI 42439977728 validate and 42439977714 mobile were CANCELLED due to successor peer push, NOT PASS; reuse passing PR-head jobs based on proven bit-identical Git tree, do not claim the cancelled jobs passed."
-      ],
-      "ci_runs": [
-        42439805488,
-        42439805497,
-        42439805479,
-        42439805414,
-        42439805358,
-        42439977842,
-        42439977731,
-        42439977728,
-        42439977714
-      ],
-      "blockers": [],
-      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/508",
-      "notes": "READY is verified developer-only, NOT published or staged. N508-068 fixes smoke file path to /admin.html; retains public GET-only same-origin content/type/no redirect and /, manifest probes. Source-level mismatch fixed, but public hosted route GET/live dist not independently verified. Actual publisher automatic postrelease trigger gap N508-069 remains PENDING independently. Any release candidate must be owner-approved, source-isolated and pass required exact combined checks; no Netlify/provider/team/Supabase/member or release branch change."
     }
   ],
   "history": [
