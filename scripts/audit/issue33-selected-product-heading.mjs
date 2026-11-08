@@ -27,3 +27,45 @@ export function selectedProductHeadings(markup){
  }
  return headings;
 }
+
+
+// Audit-only alternate-URL identity: a current product page without H1 may
+// put the EXACT purchasable coffee H2 inside its direct purchase form. This
+// cannot certify another coffee or supply missing extraction fields; caller
+// must still match archived name, parsed selected name AND same-host/handle URL.
+import {coffeeHtmlElements} from '../../src/server/coffee-html-structure.mjs';
+import {coffeeHtmlAttributes} from '../../src/server/coffee-product-scope.mjs';
+export function selectedProductFormH2(markup){
+ if(typeof markup!=='string'||markup.length>2_000_000||/<h1\b/iu.test(markup))return [];
+ const tree=coffeeHtmlElements(markup);
+ if(tree.truncated)return [];
+ const nodes=tree.nodes,matched=[];
+ for(let i=0;i<nodes.length;i++){
+  const form=nodes[i],a=coffeeHtmlAttributes(form.attributes);
+  if(form.tag!=='form'||!String(a.class||'').split(/\s+/u).includes('product-form'))continue;
+  const parts=nodes.filter(n=>n.start>=form.headEnd&&n.end<=form.contentEnd);
+  const heads=parts.filter(n=>n.tag==='h2');
+  if(heads.length!==1)continue;
+  const name=decode(markup.slice(heads[0].headEnd,heads[0].contentEnd)
+    .replace(/<[^>]{0,1200}>/gu,' ')).replace(/\s+/gu,' ').trim();
+  if(!name||name.length>220)continue;
+  const ownDesc=parts.some(n=>{
+   if(n.tag!=='h3'||n.contentEnd-n.headEnd>1200)return false;
+   const content=decode(markup.slice(n.headEnd,n.contentEnd)
+     .replace(/<[^>]{0,1200}>/gu,' ')).replace(/\s+/gu,' ').trim();
+   if(content.length<35||content.length>900)return false;
+   let at=n.parent;
+   for(let depth=0;at!==null&&depth<18;depth++){
+    const ancestor=nodes[at];if(!ancestor||ancestor.start<form.start||ancestor.end>form.end)break;
+    if(String(coffeeHtmlAttributes(ancestor.attributes).class||'')
+       .split(/\s+/u).includes('product-form--block--description'))return true;
+    if(at===i)break;
+    at=ancestor.parent;
+   }
+   return false;
+  });
+  if(ownDesc)matched.push(name);
+ }
+ // Multiple distinct selected H2s on one document are not one chosen coffee.
+ return matched.length&&matched.every(x=>x===matched[0])?[matched[0]]:[];
+}
