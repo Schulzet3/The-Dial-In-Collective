@@ -3047,6 +3047,22 @@
       "provider_writes": false,
       "baseline_complete": false,
       "next": "Distinct unreviewed catalog family and changed-only drift"
+    },
+    {
+      "event": "2026-11-08_run78_pg_toast_index_column_tuples_218_of_218",
+      "provider_at": "2026-11-08 01:45:29.527809+00",
+      "development_parent_sha": "b16ea199314c32fbe094f3637138a5f3b0bdf3bf",
+      "reviewed_new": 218,
+      "total": 218,
+      "indexes": 109,
+      "receipt_paths": [
+        "docs/audits/issue509-provider-pg-toast-index-columns-001-073-20261108-run78.json",
+        "docs/audits/issue509-provider-pg-toast-index-columns-074-146-20261108-run78.json",
+        "docs/audits/issue509-provider-pg-toast-index-columns-147-218-20261108-run78.json"
+      ],
+      "confirmed_defects": 0,
+      "provider_writes": false,
+      "next": "Distinct unreviewed catalog source and changed-only drift"
     }
   ],
   "state": "PG_OPCLASS_179_PG_OPFAMILY_148_PG_AM_7_VISIBLE_DECLARATIONS_COMPLETE; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -8240,5 +8256,33 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "Find next distinct unreviewed provider catalog cohort and check changed/new drift; native C, hosted Auth/JWT/PostgREST #96, 63 withheld GUC values and console-only settings remain UNVERIFIED"
+  },
+  "provider_pg_toast_index_columns_run78": {
+    "state": "218_OF_218_DIRECT_VISIBLE_INDEX_ATTRIBUTE_DECLARATIONS_REVIEWED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "provider_at": "2026-11-08 01:45:29.527809+00",
+    "development_parent_sha": "b16ea199314c32fbe094f3637138a5f3b0bdf3bf",
+    "main_sha": "bd627d40f7e65321323512b303d2e3f75709af39",
+    "release_sha": "2ec10324fcaa4b60d1e48240b44b77b141b9ba54",
+    "reviewed_new": 218,
+    "total": 218,
+    "indexes": 109,
+    "oid_chunk_id_keys": 109,
+    "integer_chunk_seq_keys": 109,
+    "internal_indisprimary_expected": true,
+    "ordered_provider_md5": "106952d9c83bf15c9e9f8897ffc6ab32",
+    "anomalies": 0,
+    "invalid_or_unready_indexes": 0,
+    "source_links_unresolved": 0,
+    "receipt_paths": [
+      "docs/audits/issue509-provider-pg-toast-index-columns-001-073-20261108-run78.json",
+      "docs/audits/issue509-provider-pg-toast-index-columns-074-146-20261108-run78.json",
+      "docs/audits/issue509-provider-pg-toast-index-columns-147-218-20261108-run78.json"
+    ],
+    "confirmed_new_defects": 0,
+    "source_fixes": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "Next distinct unreviewed catalog declarations and changed-only drift; native and hosted Auth/JWT/API remain UNVERIFIED"
   }
 }
