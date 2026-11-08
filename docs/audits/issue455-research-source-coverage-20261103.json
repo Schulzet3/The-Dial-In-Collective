@@ -3127,6 +3127,16 @@
       "result": "SINGLE_TASTER_AND_VOC_TO_PREFERENCE_GENERALIZATION_UNSUPPORTED",
       "current_app": "site/lib/constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095 keeps Turbo/Fast-Flow/Traditional separate and all five independent ratings; engine.js d676fa918900504ce0839451760fa6e817edede8 lacks measured fines/EY sensors and uses history not universal 19.5% EY.",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-APP-081-A",
+      "source": "GitHub original development parent 7234fff47cf1e98989a66ddd165e1c2ecccd9fec: site/lib/model.js 0c47c49b9fbc07def0315526cd4d9746c5be35df hasLocalSuccess; site/cloud/main.js 19f81ea840748e9c49b635b3acb34e7f896f5baf Coffee overview; site/lib/engine.js d676fa918900504ce0839451760fa6e817edede8 measuredRecipeShots; tests/issue455-local-success-physical-bounds.test.mjs merged blob 132486d9435888f9ddbb84a4e8bae8d9d6509abb",
+      "claim": "Source discrepancy: overview hasLocalSuccess trusted archived all-green success flag despite dose/yield/time outside existing Log Shot entry limits, while engine discarded the same row as measured recipe evidence. Invalid archived green could display 'Dialed In'/'Your Dialed In Window' and suppress valid non-green feedback on the Coffee overview. Preserve raw green History and notes while excluding physically impossible archives from overview success.",
+      "grade": "DIRECT_REPRODUCIBLE_LIVE_SOURCE_BUG; SYNTHETIC_POSITIVE_AND_NEGATIVE_REAL_MODULE_NODE22_4_OF_4_AND_TOTAL_3097_PASS; SOURCE_SHA_AND_EXACT_HEAD_MERGE_GIT_BLOB_PARITY_VERIFIED; NOT_OBSERVED_REAL_MEMBER_INCIDENT_OR_ESPRESSO_CUP_OUTCOME",
+      "result": "SAFE_LOCKED_COMPATIBLE_OVERVIEW_MEASURED_SUCCESS_FIX_VERIFIED_READY_DEV_ONLY_NOT_DEPLOYED",
+      "current_app": "site/lib/model.js merged blob 1efeeac985b7f2fb68a67e34af1f40c38437666c finite numeric 5-40g dose, 5-200g yield, 1-180s time. Original History green badge and all five ratings/notes/history unchanged. Cloud main uses M.hasLocalSuccess. Engine unchanged.",
+      "owner_approval": false,
+      "test_source": "PR1466 tested head 9d1cef6eddc6eb568408d511294ee8d9d705483e; Node 42506277595 3097 PASS/0 FAIL/6 SKIP, UX+Chromium/mobile/offline42506277639, SQL/JWT42506277587, security42506277657, approval42506277529 all applicable SUCCESS; original frozen60342506277555 SKIPPED not PASS. Exact merged 17e0ea0b74c3e6a92f5631f571d663f4320a19b8 Node42506534296 3097/0/6, UX42506534287, approval42506534478 SUCCESS."
     }
   ],
   "policy_decisions_pending": [],
@@ -3138,6 +3148,7 @@
     "reason": "R455-118 primary PDF methods/figures claim boundary only; exact docs CI pending; no recommendation, numeric or Locked changes."
   },
   "next_actions": [
+    "R455-119 exact code PR1466 nonforce merged 17e0ea0b74c3e6a92f5631f571d663f4320a19b8, 3097 PASS/0 FAIL/6 SKIP Node22 head and merged, applicable Chromium/mobile/offline/SQL/security/governance PASS. Source-verified R119 overview malformed-import guard; queue READY development-only after docs reconciliation; 67 sources/159 checks/81 proposals; S019 inaccessible, #267 receives zero literal credit. No deployment.",
     "R455-108: independently inspected original Pannusch 2024 author-affiliated kinetic extraction abstract and live ORG-02/engine; 63 sources, 143 bounded checks, 70 proposals. No universal chemistry-to-taste mapping. Docs-only exact governance pending; full publisher PDF/S019 unavailable.",
     "R455-106: Matter 2024 original coffee electrostatics first-party author institution abstracts verified for two bounded mechanisms; source 61/139 evidence/68 proposals, publisher full manuscript/unhashed and no numeric taste certification. Distinct from iScience RDT study; no app policy change. Next fresh source read for independently verified narrow UX/science gap, S019 unavailable; #267 independent literal review.",
     "R455-104 code PR #1334 merged b9774048e8136aadfc900d5f8bb521fd579f6478; head Node22 3008/0/6, merged Node22 3009/0/6, all applicable UI/mobile/offline/a11y/SQL/security/governance successes; 3 R104 positive/negative tests PASS; queue READY development-only after docs reconciliation, no deployment; 60 source identities/136 bounded checks/66 proposals, S019 inaccessible, #267 no literal credit. Continue distinct safe finding.",
@@ -3175,29 +3186,40 @@
     "R455-118 source-bound development b66dc4db6207e6a8c4363a43296d0c4b17cb2351: direct primary 2024 Smrke fines PDF experiment, Figs 2-5, VOC and single nonblinded Q-grader limits reviewed; 67 registered sources/158 checks/80 proposals. Docs-only PR and CI pending at commit authoring, no numeric/Locked/queue/code/production changes, no #267 line credit, S019 still missing."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-118",
-    "base_development_sha": "b66dc4db6207e6a8c4363a43296d0c4b17cb2351",
+    "id": "R455-119",
+    "base_development_sha": "7234fff47cf1e98989a66ddd165e1c2ecccd9fec",
+    "merged_development_source_sha": "17e0ea0b74c3e6a92f5631f571d663f4320a19b8",
     "source_ids": [
-      "LIT-2024-ESPRESSO-FINES-SENSORY"
+      "ORG-01",
+      "ORG-02",
+      "ORG-07"
     ],
     "claim_ids": [
-      "R455-EV-CIT-118-A",
-      "R455-EV-CIT-118-B"
+      "R455-EV-APP-081-A"
     ],
     "proposal_ids": [
-      "R455-PROP-118-FINES-VOC-SENSORY-TRANSFER-BOUNDARY"
+      "R455-PROP-119-COFFEE-OVERVIEW-PHYSICALLY-VALID-GREEN-ELIGIBILITY"
     ],
     "number_of_curated_sources": 67,
-    "total_evidence_checks": 158,
-    "number_of_proposals": 80,
-    "review_type": "UPGRADE_REGISTERED_PRIMARY_ESPRESSO_FINES_STUDY_TO_PDF_METHODS_FIGURE_AND_SINGLE_TASTER_EVIDENCE_CROSSWALK",
-    "github267_literal_line_review_credit": 0,
-    "production_deployed": false,
-    "code_or_policy_changed": false,
+    "total_evidence_checks": 159,
+    "number_of_proposals": 81,
+    "review_type": "REPRODUCED_LIVE_COFFEE_OVERVIEW_VS_MEASURED_RECIPE_SUCCESS_DISCREPANCY_AND_LOCKED_SAFE_SOURCE_FIX",
+    "code_or_policy_changed": true,
     "locked_policy_changed": false,
-    "ci_runs": [],
+    "production_deployed": false,
+    "github267_literal_line_review_credit": 0,
+    "ci_runs": [
+      42506277595,
+      42506277639,
+      42506277587,
+      42506277657,
+      42506277529,
+      42506534296,
+      42506534287,
+      42506534478
+    ],
     "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "Verify PR-head docs governance against exact SHA, nonforce merge/readback, Issue #455 checkpoint; resume next nonoverlapping UX/source review."
+    "next_action": "Verify this docs-only PR/governance and nonforce merge; checkpoint Issue #455. Next run recover new exact live branches/CI, inspect new disjoint safe Log Shot to Rate to Recommendation finding or source; do not duplicate #267/#33/#96."
   },
   "policy_decisions_resolved": [
     {
@@ -4844,6 +4866,26 @@
       "test_plan": "Source-bound docs schema/approval/journal continuity CI only; no Node22 runtime or browser/mobile/SQL/auth rerun for unchanged files. App/outcome quality not empirically verified. #267 literal-line credit zero.",
       "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY",
       "original_pdf_sha256": null,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-119-COFFEE-OVERVIEW-PHYSICALLY-VALID-GREEN-ELIGIBILITY",
+      "finding": "Malformed imported all-five-green shot could mark the Coffee overview Dialed In even when the same archive was rejected as measured success by engine recommendation, potentially suppressing feedback. Reproduced using original source and synthetic local fixtures; no real-member incidence claimed.",
+      "evidence": [
+        "R455-EV-APP-081-A",
+        "R455-EV-APP-076-A"
+      ],
+      "severity": "P2_RECOMMENDATION_UX_INTEGRITY_AND_GREEN_STATUS_CONSISTENCY",
+      "user_benefit": "Avoid falsely claiming an impossible archived measurement is a successful logged recipe while retaining all five recorded green taste scores and complete original private History.",
+      "current_locked": "Five actual taste inputs and missing-rated distinction; usable measured evidence; one controllable next change; independent styles/versions; keep original shots, notes, successful families and no speculative numeric scientific claims.",
+      "current_app": "Original model.js 0c47c49b9fbc07def0315526cd4d9746c5be35df did not validate physical dose/yield/time in hasLocalSuccess, unlike engine.js d676fa918900504ce0839451760fa6e817edede8. UI main.js 19f81ea840748e9c49b635b3acb34e7f896f5baf uses result for badge/window and shot feedback.",
+      "proposed_change": "SAFE IMPLEMENTED: gate overview success on existing finite numeric Log Shot dose 5-40 g, yield 5-200 g and time 1-180 s. No new target, rating policy, extra user input, data backfill, History mutation, grinder/feed/style change or production action.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "PR1466_NONFORCE_MERGED_17e0ea0b74c3e6a92f5631f571d663f4320a19b8; TESTED_SOURCE_AND_MERGED_SOURCE_APPLICABLE_CI_SUCCESS",
+      "test_plan": "Synthetic 15 invalid variants, inclusive endpoints, five-rating/flag checks, coffee/version/style scoping, History preserved and cloud UI source route. Exact tested head Node22 3097 pass/0 fail/6 skip, UX/mobile/Chromium/service worker, SQL/Auth, security and governance success. Exact merged Node22 3097/0/6, browser/mobile/offline and governance success. Frozen603 SKIPPED. No real-member, hosted browser auth or physical cup outcome test asserted.",
+      "release_queue_status": "DIC-Q-455-local-success-physical-history-guard READY_IN_DEVELOPMENT_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
       "production_deployed": false
     }
   ],
