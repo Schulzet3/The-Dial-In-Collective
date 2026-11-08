@@ -22,7 +22,7 @@ function chosenPage({regionalSentence='Ki-Saya, our organic gem from Chiapas, bl
  return parsed;
 }
 
-test('original603 #501: selected lot's Tenejapa and directly stated Chiapas both survive',()=>{
+test('original603 #501: selected lot Tenejapa and directly stated Chiapas both survive',()=>{
  const parsed=chosenPage();
  assert.equal(parsed.fields.origin,'Tenejapa, Chiapas',JSON.stringify(parsed.fields));
  assert.match(parsed.fields.tasting_notes||'',/chocolate/i);
