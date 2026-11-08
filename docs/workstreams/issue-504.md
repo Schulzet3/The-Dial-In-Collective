@@ -1399,3 +1399,18 @@ Authoritative live development `ac10d66e42fe3d5e7906e818eef6c3baa0a36330`, main 
 **Safety and reconciliation:** No confirmed new #504 defect, safe deletion, Locked product change or owner decision. Preserve #267/#455/#33/#96 file/journal ownership, 603 oracle, all historical evidence, backups, member/Community/offline, queue READY status, production SQL/Auth/Edge/provider and Netlify. No release/production or main movement by #504. Unfinished GitHub-wide reviews and inaccessible surfaces remain documented; audit **OPEN / IN_PROGRESS**.
 
 **Exact NEXT original:** Issue #267 comment [`6722595335`](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267#issuecomment-6722595335), **word 1**; on next run verify ledger and any concurrent new entries before credit.
+
+
+---
+
+## Issue #504 G1-114 — November 8, 2026 UTC [skip netlify]
+
+Verified development `1d8648c4055e53ddfcdfbf736730035b85b59405`, main `a4028e42b0d0316fd539c0563fd07832d509aed0`, release/production `92829cb6aff82aaec212eabbd921183e7997f1a7`. Checked AGENTS/context/preflight, status, Master Spec and Decision Ledger scoped supersessions, approvals, queue, source register, Issue #504/#267/#455/#33/#96 and concurrent PR state. Repo PUBLIC only under temporary owner-approved #630 Nov4–30; owner-only return to PRIVATE, no visibility mutation.
+
+**Direct whole-original-word batch:** eight [Issue #267 original comments](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267) `6722595335, 6722633143, 6722663647, 6722687921, 6723309053, 6723944855, 6723968166, 6724560584`, each words 1–EOF; **8 records, 2305 original whitespace words, 24246 UTF-8 bytes**; original GitHub by-ID REST/paginated body identity 8/8. Source timestamps, SHA1, inclusive line/word ranges and **8 distinct actual-content semantic interpretations and dispositions** recorded in [G1-114 immutable receipt](../audits/issue504-review-G1-114.json). Prior explicit ID duplicate-negative PASS. Cumulative **7919 original file lines/60754 file words; 667 GitHub records/199610 metadata words**. No new #267 code-line credit.
+
+**Delegated precise independent check:** original F456 `site/cloud/main.js:101–103`, immutable SHA `e25569cdd72d2abd94205ccb0169ccf08963676f`, matched exact 3 source literals/semantic dimensions in [T54 source-bound journal](ops-issue267-t54-f456-101-140-p124-101-130-20261108.md), journal SHA `684cd66f467b5db698fec49ec80bf5a58127f944`. Historic pollingStatus finally lacking owner epoch does not prove current bug: current logic previously hardened, #96 owns runtime. **3/3 bounded, 0 duplicate #504 code credit**. Entire frozen/pinned/live #267 proof still unfinished.
+
+**Disposition:** historic importer intentionally unmounted, old F455 path hint corrected, old owner-agnostic poll behavior corrected. Historic PR1455 closed unmerged due to #33 conflict, replacement PR1456 verified. Small visual text and 32–40px touch targets still need actual device/AT tests; no confirmed active #504 defect, safe deletion, or new owner decision. Original REST/hash/arithmetic/duplicate/3-line independent checks PASS. Actual Node22 runtime, live Auth/SQL, mobile/browser/offline and original603 **NOT RUN** (docs-only). Exact PR-head and merged governance CI must be checked before calling PASS. No app, members, community/history/oracle, provider, Netlify, backups, Locked, queue, main/release, production or repo-visibility change.
+
+**Next original:** [#267 comment `6724605480`](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267#issuecomment-6724605480), word 1. #504 **OPEN / IN_PROGRESS**; full accessible GitHub inventory and delegated source review unfinished.
