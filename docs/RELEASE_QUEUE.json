@@ -8,6 +8,28 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-history-orphan-family-identity-guard",
+      "issue": 455,
+      "pr": 1444,
+      "title": "Prevent nonexistent or wrong-coffee/style archived recipe families from becoming Current",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/cloud/shot_card.js",
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Source parent d1f8c83708640daf7b8306ea1af5a25a5defe676: valid five-green recorded shot with nonempty but orphan/wrong-coffee/style family ID could offer Make Current and create phantom stored favorite; no real-member occurrence asserted.",
+        "Synthetic R116 negative missing/wrong-coffee/wrong-style reference and positive matching identity added alongside existing five-rating, notes/history, bound guard tests. CI not yet verified.",
+        "First PR head 8a91bf4ad200ff7dd6a4c8fe15846a6815067a12 approval intake failed because new changed site/cloud/main.js not yet queued; this same-commit TESTING queue intake repair preserves code unchanged. All other first-run statuses must be reverified; no PASS claimed until applicable exact-source conclusion."
+      ],
+      "ci_runs": [],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "R455-116 TESTING DEVELOPMENT ONLY, NOT DEPLOYED. No Locked policy/science changes, migrations, provider/member data writes, production branch/deploy, purchases or visibility changes. Final READY requires verified exact-source Node22, UX/offline/mobile, SQL/security/approval and nonforce merge readback."
+    },
+    {
       "id": "DIC-Q-455-successful-recipe-time-band-bounds",
       "issue": 455,
       "pr": 1395,
