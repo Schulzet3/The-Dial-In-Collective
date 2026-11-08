@@ -13794,5 +13794,17 @@
       "docs/audits/issue509-provider-nonpg-proc-raw-241-248-2026-11-08-run96c.json"
     ],
     "next": "nonpg pg_proc raw family all 248/248 direct visible declarations complete, but entire provider #509 baseline IN_PROGRESS; resume next unreviewed catalog/definition family from ledger checkpoint/ordering and independently recheck hosted provider Auth/API/native inaccessible surfaces"
+  },
+  "provider_vault_nonce_volatility_run96d": {
+    "status": "CONFIRMED_CATALOG_VOLATILITY_INCONSISTENCY_POTENTIAL_CRYPTOGRAPHIC_NONCE_REUSE_NOT_RUNTIME_REPRODUCED",
+    "source_development_parent_sha": "97c6bab946a9da59865e976ba83b5c7ce24142b2",
+    "receipt_path": "docs/audits/issue509-provider-vault-nonce-volatility-review-20261108-run96d.json",
+    "provider_owned": true,
+    "live_vault_secret_rows": 0,
+    "verified": "IMMUTABLE noncegen catalog declaration AND vault.secrets.nonce DEFAULT invoking it",
+    "uncertain": "Actual native C randomness, planner folding behavior and nonce repetition have not been observed and must not be claimed",
+    "action": "Private vendor review before Vault use, no production writes",
+    "no_new_app_source_fix": true,
+    "baseline_complete": false
   }
 }
