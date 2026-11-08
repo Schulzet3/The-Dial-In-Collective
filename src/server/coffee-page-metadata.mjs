@@ -633,6 +633,13 @@ function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
   conflicts?.add(key);delete fields[key];return;
  }
  let s=normalized(key,value,{allowFlavorProse:key==='tasting_notes'&&rawKey!==key,allowAnonymousProducer:key==='producer'&&literalAnonymousProducer});
+ // The selected Country caption can append a bean style and a marketing
+ // blend title, neither of which is a place. Retain the unmodified source
+ // fact, but autofill only its already-explicit known producing country.
+ if(key==='origin'&&s&&/^(?:country|countryoforigin|pais|paisdeorigen|pays)$/.test(keyOf(rawKey))){
+  const blend=s.match(/^([\p{L}\p{M}][\p{L}\p{M} .'-]{2,50}?)\s+Peaberry\s+(?:[\p{L}\p{M}]+\s+){0,2}Blend$/iu);
+  if(blend&&ORIGIN_COUNTRIES.has(keyOf(blend[1])))s=blend[1].trim();
+ }
  if(key==='tasting_notes'&&isMetricOnlyCoffeeTastingPanel(rawKey,s))return;
  // A named cooperative/farm can be accidentally prefixed to a Region
  // caption. Remove it only with independent, literal role evidence from
