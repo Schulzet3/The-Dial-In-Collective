@@ -11,7 +11,7 @@ function fixture(tastes,serverSuccess,style='Traditional'){
   library_entry_id:'coffee-1',calibration_id:'calibration-1',basket_version_id:'basket-1',
   style,pulled_at:'2026-10-25T10:30:00Z',dose_g:18,yield_g:36,time_s:28,
   grind_setting:3.5,temperature_c:null,feed_mode:'standard',revision:1,
-  is_dialed_in:serverSuccess,...tastes};
+  is_dialed_in:serverSuccess,personal_family_id:'legacy-family',...tastes};
  return {preferences:{active_setup_id:'setup-1'},
   setups:[{id:'setup-1',name:'Original setup',active_version_id:'version-1'}],
   versions:[{id:'version-1',setup_id:'setup-1',label:'Original',grinder_model:'Grinder',burr_set:'Burrs'}],
