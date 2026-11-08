@@ -69,3 +69,32 @@ test('R082 old calibration and nonmatching style/feed/basket do not override val
  assert.equal(next.doseG,18);
  assert.deepEqual(s,before);
 });
+
+test('R103 newest invalid historical yield/time cannot replace older measured dose or grind prefill',()=>{
+ for(const invalid of [{yieldG:201},{yieldG:null},{timeS:181},{timeS:null},{doseG:41},{doseG:null}]){
+  const s=state();s.shots.push(
+   shot('good',older,{doseG:19.5,grindSetting:2.3}),
+   shot('invalid',newest,{doseG:20.5,grindSetting:4.2,...invalid})
+  );
+  const before=structuredClone(s),next=get(s);
+  assert.equal(next.doseG,19.5,JSON.stringify(invalid));
+  assert.equal(next.grindSetting,2.3,JSON.stringify(invalid));
+  assert.deepEqual(s,before,'original historical shots, notes and ratings preserved');
+ }
+});
+
+test('R103 invalid-only history cannot prefill dose/grind; selected basket remains fallback',()=>{
+ const s=state();s.shots.push(shot('bad',newest,{doseG:20,grindSetting:4.5,timeS:0}));
+ const before=structuredClone(s),next=get(s);
+ assert.equal(next.doseG,activeVersion(s).baskets[0].doseG);
+ assert.equal(next.grindSetting,'');
+ assert.deepEqual(next.tasteScales,{extraction:null,body:null,clarity:null,sweetness:null,astringency:null});
+ assert.deepEqual(s,before);
+});
+
+test('R103 inclusive original physical limits remain valid prefill measurements',()=>{
+ for(const [doseG,yieldG,timeS] of [[5,5,1],[40,200,180]]){
+  const s=state();s.shots.push(shot('edge',newest,{doseG,yieldG,timeS,grindSetting:0}));
+  const next=get(s);assert.equal(next.doseG,doseG);assert.equal(next.grindSetting,0);
+ }
+});
