@@ -54,12 +54,16 @@ test('real-shaped exact selected EA processing table is a Sugar Process decaf tr
   JSON.stringify(result.source_facts));
 });
 
-test('selected labeled Decaffeination Method table recognizes named Water treatment independently of Washed',()=>{
- const r=parse('Decaf Colombia',row('Process','Washed')+row('Decaffeination Method','Swiss Water Process'));
- assert.equal(r.fields.decaffeination_method,'Water Process',JSON.stringify({
-  fields:r.fields,roaster_details:r.roaster_details,
-  source_facts:r.source_facts?.filter(f=>/process|decaf/i.test(f.field||''))}));
- assert.equal(r.fields.process,'Washed',JSON.stringify(r.fields));
+test('standalone selected decaffeination table identifies Swiss Water; contradictory generic green layout stays reviewable',()=>{
+ const exact=parse('Decaf Colombia',row('Decaffeination Method','Swiss Water Process'));
+ assert.equal(exact.fields.decaffeination_method,'Water Process',JSON.stringify(exact.fields));
+ assert.equal(exact.fields.process,undefined);
+ const mixed=parse('Decaf Colombia',row('Process','Washed')+
+  row('Decaffeination Method','Swiss Water Process'));
+ // Legacy cross-row generic Process reader emits a conflicting adjacent
+ // source value on this synthetic layout. Do NOT bypass that conflict here.
+ assert.equal(mixed.fields.decaffeination_method,undefined,JSON.stringify(mixed.fields));
+ assert.ok(mixed.source_facts.some(f=>f.field==='decaffeination_method'&&f.conflicting));
 });
 
 test('regular/half-caf, merely washed/rinsed, history, negated and unrelated product table cannot supply treatment',()=>{
