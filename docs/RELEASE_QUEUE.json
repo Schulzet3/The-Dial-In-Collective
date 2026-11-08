@@ -8634,13 +8634,13 @@
       "state": "TESTING",
       "merged_source_sha": null,
       "scope_paths": [
-        "package.json",
-        "tests/ci-optimization.test.mjs"
+        "package.json"
       ],
       "tests": [
         "Three actual PR #1340 full-suite 3021-case attempts in run 42441881237 failed exactly one inherited tests/html-resource-security.test.mjs:36 4-second child process ETIMEDOUT each; 3014 passed/1 failed/6 intentional skipped. The same HTML guard, timeout, malicious inputs and source remained untouched.",
         "PR #1345 caps Node --test --test-concurrency=2 for the existing npm test script only; preserves both original tests/*.test.mjs tests/audit/*.test.mjs globs, same malicious-input subprocess timeout:4000 and exact other tasks. Added static guard in tests/ci-optimization.test.mjs.",
-        "Exact original reviewed PR1345 head 84abed66a35c62af34deda961be3b39537bb6090 Node validate run42442594501, cloud/mobile42442594375, isolated SQL42442594386, security42442594499 SUCCESS; approval 42442594479 failed specifically due to missing queue entry package.json; frozen60342442594348 SKIPPED not PASS. THIS QUEUE COMMIT CORRECTS THE UNTRACKED SOURCE INTake but is NOT YET tested/merged."
+        "Exact original reviewed PR1345 head 84abed66a35c62af34deda961be3b39537bb6090 Node validate run42442594501, cloud/mobile42442594375, isolated SQL42442594386, security42442594499 SUCCESS; approval 42442594479 failed specifically due to missing queue entry package.json; frozen60342442594348 SKIPPED not PASS. THIS QUEUE COMMIT CORRECTS THE UNTRACKED SOURCE INTake but is NOT YET tested/merged.",
+        "Initial queued commit 4792938fdc0b2b0744903a28aab7dd9977398665 approval run42442849712 failed because tests/ci-optimization.test.mjs is a regression test, not an allowed deployable queue scope; this correction scopes package.json only while test remains tracked in same code/test PR."
       ],
       "ci_runs": [
         42441881237,
@@ -8656,7 +8656,6 @@
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "R23 narrow CI reliability correction, TESTING ONLY, not deployable and no new parser semantic claim. Full 603 individual source certification remains incomplete; #267 historical audit and #96 security separate. Preserve original frozen corpus and 4-second adversarial guard. No publication or production writes."
     }
-
   ],
   "history": [
     {
