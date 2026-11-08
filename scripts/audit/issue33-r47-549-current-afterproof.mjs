@@ -42,6 +42,7 @@ check(/Roast[\s\S]{0,160}?Dark/i.test(raw),'selected_direct_dark_roast_absent');
 check(/Tasting notes[\s\S]{0,200}?Earthy/i.test(raw),'selected_direct_tasting_note_absent');
 check(fields.origin==='Tanzania','bean_classification_incorrectly_added_to_geography');
 check(fields.roast_level==='Dark','selected_dark_roast_missing');
+check(!item.conflicts?.includes('roast_level'),'false_selected_roast_conflict_from_other_coffee_or_testimonial');
 const notes=String(fields.tasting_notes||'').toLowerCase();
 check(['earthy','fruity','cacao'].every(t=>notes.includes(t)),
  'actual_selected_sensory_list_missing_or_transplanted');

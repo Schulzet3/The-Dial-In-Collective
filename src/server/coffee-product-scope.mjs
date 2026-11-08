@@ -1,6 +1,6 @@
 import {removeElements,removeComments} from '../../supabase/functions/_shared/html-scan.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
-const OTHER=/^(?:you (?:may|might) also like|related (?:products|coffees|items)|more coffees?|our current (?:coffee )?offerings|keep exploring|customer reviews|\d+\s+reviews?\s+for|recently viewed|shop similar|recommended for you|customers? also (?:bought|viewed)|you may also enjoy)\b/i;
+const OTHER=/^(?:you (?:may|might) also like|related (?:products|coffees|items)|more coffees?|our current (?:coffee )?offerings|keep exploring|customer reviews|\d+\s+reviews?\s+for|recently viewed|shop similar|recommended for you|customers? also (?:bought|viewed)|you may also enjoy|goes with it|frequently bought together)\b/i;
 const PRODUCT_SECTION=/^(?:our story|the story|about this coffee|about the coffee|coffee story|product details|coffee details|brewing|brew it|brew guide|ways to brew|espresso (?:recipe|brewing|guide)|transparency|ingredients?|allergen (?:info(?:rmation)?|details)|directions)\b/i;
 const CONTAINER=new Set(['section','div','ul','ol','article','aside','product-recommendations','recommendations']);
 const DECORATION=new Set(['svg','canvas','audio','button']);
@@ -123,6 +123,17 @@ function withoutRelatedProducts(page,onTruncated){
    (/^(?:tabpanel|region)$/i.test(attrs.role||'')||/(?:^|\s)(?:accordion|collapsible|collapse|tab)[_-]+(?:content|panel|body)(?:$|[\s_-])/i.test(attrs.class||''));
   const ownedPanel=directOwner||nestedPanel;
   if(hidden&&!ownedPanel)ranges.push([node.start,node.end]);
+  // Product pages can present a review/testimonial carousel immediately
+  // after the selected bag. A review about a DIFFERENT roast is not a second
+  // current-roast label. Require a bounded review-card group with explicit
+  // review ratings, never a generic `stars` class or coffee description.
+  if(node.tag==='div'&&String(attrs.class||'').split(/[\\t\\n\\f\\r ]+/).includes('rcards')&&
+     node.contentEnd-node.headEnd<=120000){
+   const body=page.slice(node.headEnd,node.contentEnd);
+   if(/<div\\b[^<>]{0,800}class=["'][^"']*\\brcard\\b/i.test(body)&&
+      /aria-label=["'][0-5]\\s+out\\s+of\\s+5\\s+stars["']/i.test(body))
+    ranges.push([node.start,node.end]);
+  }
   if(node.tag==='aside'&&!isProductCostAside(node,attrs))ranges.push([node.start,node.end]);
   if(isNavigation(node,attrs))ranges.push([node.start,node.end]);
   if(loopCards.has(index))ranges.push([node.start,node.end]);
