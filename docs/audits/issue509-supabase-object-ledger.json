@@ -13732,5 +13732,67 @@
       "docs/audits/issue509-provider-nonpg-proc-raw-187-206-2026-11-08-run96b.json"
     ],
     "next": "raw pg_proc #207 realtime.apply_rls; then realtime/storage/vault 207-248, native and hosted enforcement UNVERIFIED"
+  },
+  "provider_nonpg_proc_raw_run96c": {
+    "state": "NON_PG_CATALOG_ALL_248_VISIBLE_ORIGINAL_PG_PROC_RAW_TUPLES_AND_FUNCTION_DEFINITIONS_REVIEWED_COMPILED_RUNTIME_UNVERIFIED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_development_parent_sha": "11bddb3943e9a383f34eabc398279bc926fb9a01",
+    "source_main_sha": "bd627d40f7e65321323512b303d2e3f75709af39",
+    "source_release_production_sha": "2ec10324fcaa4b60d1e48240b44b77b141b9ba54",
+    "source_snapshot_fingerprint": "39f054f5c2ba196d26d8bdda3507d19c",
+    "fingerprint_algorithm": "MD5(string_agg(oid::text||':'||md5(to_jsonb(pg_proc)::text)||':'||md5(pg_get_functiondef), '|' ORDER BY namespace, numeric oid))",
+    "reviewed_new": 42,
+    "reviewed_cumulative": 248,
+    "total": 248,
+    "range": [
+      207,
+      248
+    ],
+    "next_ordinal": null,
+    "original_visible_sql_definition_complete": true,
+    "language_schema_groups": {
+      "realtime_plpgsql": 11,
+      "realtime_sql": 7,
+      "storage_plpgsql": 15,
+      "storage_sql": 4,
+      "vault_c": 3,
+      "vault_plpgsql": 2
+    },
+    "prior_94_run95_and_112_run96_preserved": true,
+    "source_C_binary_unverified": true,
+    "source_earlier_app_99_functions_not_recredited": true,
+    "verified_aggregate_scopes": {
+      "storage_buckets": 0,
+      "storage_objects": 0,
+      "vault_anon_schema_usage": false,
+      "vault_authenticated_schema_usage": false,
+      "vault_create_anon_exec": false,
+      "vault_create_authenticated_exec": false,
+      "vault_update_anon_exec": false,
+      "vault_update_authenticated_exec": false
+    },
+    "findings": [
+      {
+        "object": "vault.update_secret(uuid,text,text,text,uuid)",
+        "status": "PROVIDER_MANAGED_LOW_PRIORITY_REVIEW_CANDIDATE_NOT_RUNTIME_DEFECT",
+        "evidence": "The complete PL/pgSQL definition initializes local decrypted_secret from vault.decrypted_secrets but never references that local afterward; appears to cause an unnecessary decryption/view read.",
+        "privacy": "No Vault values, secret rows, names, keys or private user data fetched; anon and authenticated have no schema USAGE and no function EXECUTE",
+        "risk_assessment": "No demonstrated leak or application impact; managed provider schema, cannot patch production; retain pending vendor/source confirmation",
+        "action": "Do not alter provider or append development migration; revisit on source/runtime-access evidence."
+      }
+    ],
+    "new_confirmed_application_defects": 0,
+    "new_application_source_fixes": 0,
+    "production_writes": false,
+    "baseline_complete": false,
+    "receipt_paths": [
+      "docs/audits/issue509-provider-nonpg-proc-raw-207-214-2026-11-08-run96c.json",
+      "docs/audits/issue509-provider-nonpg-proc-raw-215-224-2026-11-08-run96c.json",
+      "docs/audits/issue509-provider-nonpg-proc-raw-225-238-2026-11-08-run96c.json",
+      "docs/audits/issue509-provider-nonpg-proc-raw-239-239-2026-11-08-run96c.json",
+      "docs/audits/issue509-provider-nonpg-proc-raw-240-240-2026-11-08-run96c.json",
+      "docs/audits/issue509-provider-nonpg-proc-raw-241-248-2026-11-08-run96c.json"
+    ],
+    "next": "nonpg pg_proc raw family all 248/248 direct visible declarations complete, but entire provider #509 baseline IN_PROGRESS; resume next unreviewed catalog/definition family from ledger checkpoint/ordering and independently recheck hosted provider Auth/API/native inaccessible surfaces"
   }
 }
