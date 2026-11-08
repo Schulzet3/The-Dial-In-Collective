@@ -1,3 +1,19 @@
+## November 8, 2026 UTC — R455-122 SAME-COMMIT archived-basket active recipe protection [skip netlify]
+
+**Bound source:** development parent `1d8648c4055e53ddfcdfbf736730035b85b59405`; main `a4028e42b0d0316fd539c0563fd07832d509aed0`; release/production `92829cb6aff82aaec212eabbd921183e7997f1a7`; recovered AGENTS, context/PREFLIGHT, Master Spec/Decision Ledger/coverage/queue/status/source register, nine originals index and #455/#335/#267/#33/#96. Concurrent issue #33/#267 unchanged; zero #267 literal-line credit. Owner #630 temporary PUBLIC exception preserved.
+
+**Original live-source defect:** `site/lib/engine.js` blob `91e04dc0c61f9a63c835cbed924dc5e33f3c2d95` directly accepted a caller-supplied `options.basketId` in recommendation and prefill even when that internal basket had `archived:true`, whereas `model.selectedBasket` explicitly omits archived baskets. On restored/stale archived pointers this may seed a retired dose and basket context in an active recipe/new Log Shot. Direct deterministic source reproduction, **not verified real-member incidence**.
+
+**SAFE implementation:** Both explicit basket lookups require `!x.archived`; existing selectedBasket fallback handles stale/unknown IDs. Valid unarchived explicit selections retain priority. No source history rewriting, no new member-facing basket version controls, no five-taste/style/Slow Feed/grinder/success target changes, no speculative scientific claims. Original shots, notes, raw snapshots and all private history remain intact.
+
+**Four paths SAME-COMMIT:** `site/lib/engine.js`; `tests/issue455-archived-basket-context.test.mjs` (4 new isolated positive/negative real-module test cases); `docs/RELEASE_QUEUE.json` new `DIC-Q-455-archived-basket-active-recipe-context` **TESTING**; this scoped journal. Tests guard archived explicit, valid active explicit, stale saved preference, unknown basket and immutability. Tests **UNSTARTED pending exact PR-head CI**, not PASS. Source-based original-branch discrepancy was directly reviewed; no real device/member/espresso trial.
+
+**Authority and limits:** #455 owner Option B safe Locked-compatible bugfix only. No production SQL/Auth/Edge/member/provider operation, main/release/Netlify deployment, purchases, force, archive deletion or visibility change.
+
+**Next:** exact PR-head Node22 full/lint, UX/Chromium/mobile/offline, isolated SQL, security/governance as applicable; diagnose and repair failures before nonforce merge; read back actual merge SHA/blobs and final source CI, reconcile ledger/CURRENT_STATUS/queue via docs PR and post Issue #455 receipt. Frozen603 if SKIPPED != PASS; S019 standalone original PDF remains inaccessible, #455 open.
+
+---
+
 ## November 8, 2026 UTC — R455-120 FINAL verified cross-coffee/style recipe-family evidence guard [skip netlify]
 
 **Live source and authority:** original development `dcc9a8852bec0f8202b1dd654e6ace02f241afb2`, main `a4028e42b0d0316fd539c0563fd07832d509aed0`, production `92829cb6aff82aaec212eabbd921183e7997f1a7`. Recovered AGENTS, entrypoint/PREFLIGHT, Locked Master/Decision/approval, queue/status/register, original research source index, #455/#335/#267/#33/#96 and concurrent PRs. Owner #630 time-bounded PUBLIC visibility unaffected. Source-based defect and five negative/positive synthetic fixtures are described in same-commit R120 code journal below; this is NOT a real-member incidence or measured espresso quality result. Zero #267 line review credit.

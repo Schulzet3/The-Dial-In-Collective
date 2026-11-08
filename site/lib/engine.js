@@ -321,7 +321,7 @@ export function personalSimilarCoffeeReference(s,coffee,version,style,feed,baske
 export function recommendation(s,coffeeId,options={}) {
  const c=s.coffees.find(c=>c.id===coffeeId),v=activeVersion(s),p=coffeeState(s,coffeeId);
  if(!c||!v)return null;
- const style=options.style||p.style,basket=v.baskets.find(x=>x.id===options.basketId)||selectedBasket(s,coffeeId),feed=options.feedMode||feedMode(v);
+ const style=options.style||p.style,basket=v.baskets.find(x=>x.id===options.basketId&&!x.archived)||selectedBasket(s,coffeeId),feed=options.feedMode||feedMode(v);
  const rec=baseline(c,style,basket.doseG,s.preferences);
  if(style==='Custom'&&p.custom){rec.ratio={low:p.custom.ratioLow,high:p.custom.ratioHigh,center:(p.custom.ratioLow+p.custom.ratioHigh)/2};rec.time={low:p.custom.timeLow,high:p.custom.timeHigh,center:(p.custom.timeLow+p.custom.timeHigh)/2};rec.reasons=[];}
  // Section 25.2 tier 5: personal success on similar coffees from THIS setup.
@@ -526,7 +526,7 @@ export function recommendation(s,coffeeId,options={}) {
  return rec;
 }
 export function prefill(s,coffeeId,options={}) {
- const v=activeVersion(s),p=coffeeState(s,coffeeId),basket=v.baskets.find(x=>x.id===options.basketId)||selectedBasket(s,coffeeId),style=options.style||p.style,feed=options.feedMode||feedMode(v);
+ const v=activeVersion(s),p=coffeeState(s,coffeeId),basket=v.baskets.find(x=>x.id===options.basketId&&!x.archived)||selectedBasket(s,coffeeId),style=options.style||p.style,feed=options.feedMode||feedMode(v);
  const shots=s.shots.filter(x=>!x.hidden&&x.coffeeId===coffeeId&&x.setupVersionId===v.id&&typeof x.timestamp==='string'&&x.timestamp.trim()&&Number.isFinite(Date.parse(x.timestamp))).sort((a,b)=>Date.parse(b.timestamp)-Date.parse(a.timestamp));
  // Imported archival measurements remain in History but cannot prefill an
  // impossible dose or an out-of-espresso-range grind into a new shot.
