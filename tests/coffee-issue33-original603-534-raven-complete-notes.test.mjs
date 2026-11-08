@@ -57,3 +57,30 @@ test('two incompatible current with-milk profiles remain unasserted',()=>{
   " Raven's brilliance is revealed when layered with milk, showcasing caramel and citrus."});
  assert.equal(contexts(result).length,0);
 });
+
+test('real Nunatak Shopify product-details LI with Product Info label preserves conditional notes only for review',()=>{
+ const html='<html><head><meta property="og:type" content="product">'+
+  '<link rel="canonical" href="'+sourceUrl+'"></head><body><main><article class="product">'+
+  '<h1>Raven Espresso</h1></article><section class="section__product-details">'+
+  '<article><ul class="product-template__details-table mb0"><li class="description rte">'+
+  '<p class="label mb3 h4">Product Info</p>'+straight+' '+milk+
+  '</li></ul></article></section></main></body></html>';
+ const result=extractPublicCoffeeFacts(html,{source_url:sourceUrl});
+ assert.equal(result.ok,true,JSON.stringify(result));
+ assert.equal(result.fields.name,'Raven Espresso');
+ assert.equal(contexts(result).length,1,'Shopify direct LI text must remain selected source-review context');
+ assert.match(contexts(result)[0].value,/when layered with milk/i);
+ assert.match(contexts(result)[0].value,/blueberry preserves/i);
+ assert.doesNotMatch(result.fields.tasting_notes||'',/blueberry preserves|hazelnut liqueur/i);
+});
+test('Shopify Product Info named different coffee cannot supply selected conditional flavors',()=>{
+ const html='<html><head><meta property="og:type" content="product">'+
+  '<link rel="canonical" href="'+sourceUrl+'"></head><body><main><article class="product">'+
+  '<h1>Raven Espresso</h1><ul class="product-template__details-table">'+
+  '<li class="description rte"><p class="label">Product Info</p>'+straight+
+  " Newport's brilliance is revealed when layered with milk, showcasing chocolate and hazelnut liqueur."+
+  '</li></ul></article></main></body></html>';
+ const result=extractPublicCoffeeFacts(html,{source_url:sourceUrl});
+ assert.equal(result.ok,true);
+ assert.equal(contexts(result).length,0);
+});

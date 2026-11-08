@@ -20,7 +20,13 @@ export function selectedCoffeeMilkSensoryContext(html,{name='',clean}={}){
  if(first.length<4||/^(?:coffee|espresso|decaf|blend|medium|dark|light|roast)$/iu.test(first))return '';
  const acceptedSubjects=new Set([selected,first]),found=new Map();
  for(const block of blocks){
-  if(block.tag!=='p'||block.educational||block.text.length>1200||
+  // Shopify product-details can print the selected Product Info description
+  // as direct TEXT in <li>, following a separate <p> label. That direct
+  // selected LI is equally primary evidence, not a generic recommendation.
+  const selectedProductInfoList=block.tag==='li'&&
+   /<p\b[^<>]{0,400}>\s*Product Info\s*<\/p\s*>/iu.test(block.html||'')&&
+   /^\s*Product Info\b/iu.test(block.text);
+  if((block.tag!=='p'&&!selectedProductInfoList)||block.educational||block.text.length>1200||
    /\b(?:related|recommended|other coffees?|you may also like|education|faq)\b/iu.test(block.section||'')||
    HISTORICAL.test(block.text)||NONCURRENT_COFFEE_PROSE.test(block.text))continue;
   for(const sentence of block.text.split(/(?<=[.!?])\s+/u).slice(0,16)){
