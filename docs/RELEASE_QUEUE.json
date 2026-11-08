@@ -8631,8 +8631,8 @@
       "issue": 33,
       "pr": 1345,
       "title": "Bound full Node file worker concurrency while retaining malicious HTML security subprocess 4000ms limit",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "884d140d2fbdc84656b8dcc576fb793adced8a71",
       "scope_paths": [
         "package.json"
       ],
@@ -8640,7 +8640,9 @@
         "Three actual PR #1340 full-suite 3021-case attempts in run 42441881237 failed exactly one inherited tests/html-resource-security.test.mjs:36 4-second child process ETIMEDOUT each; 3014 passed/1 failed/6 intentional skipped. The same HTML guard, timeout, malicious inputs and source remained untouched.",
         "PR #1345 caps Node --test --test-concurrency=2 for the existing npm test script only; preserves both original tests/*.test.mjs tests/audit/*.test.mjs globs, same malicious-input subprocess timeout:4000 and exact other tasks. Added static guard in tests/ci-optimization.test.mjs.",
         "Exact original reviewed PR1345 head 84abed66a35c62af34deda961be3b39537bb6090 Node validate run42442594501, cloud/mobile42442594375, isolated SQL42442594386, security42442594499 SUCCESS; approval 42442594479 failed specifically due to missing queue entry package.json; frozen60342442594348 SKIPPED not PASS. THIS QUEUE COMMIT CORRECTS THE UNTRACKED SOURCE INTake but is NOT YET tested/merged.",
-        "Initial queued commit 4792938fdc0b2b0744903a28aab7dd9977398665 approval run42442849712 failed because tests/ci-optimization.test.mjs is a regression test, not an allowed deployable queue scope; this correction scopes package.json only while test remains tracked in same code/test PR."
+        "Initial queued commit 4792938fdc0b2b0744903a28aab7dd9977398665 approval run42442849712 failed because tests/ci-optimization.test.mjs is a regression test, not an allowed deployable queue scope; this correction scopes package.json only while test remains tracked in same code/test PR.",
+        "PR #1345 final reviewed head a6406476e498e68423e544855fd688370db83bef: full Node 3022 tests, 3016 PASS / 0 FAIL / 6 inherited intentional SKIP, original 4000ms malicious HTML guard unchanged; lint/build, cloud/mobile, SQL/security/approval all SUCCESS. Original missing queue path and nondeployable regression test path approval failures were corrected before merge.",
+        "PR #1345 nonforce squash merged as 884d140d2fbdc84656b8dcc576fb793adced8a71. Exact merged source Node22 run42443069148 job128616209333 PASS: 3022 total, 3016 PASS /0 FAIL /6 intentional SKIP, lint/build successful. Merged cloud/mobile/browser run42443069210 and approval run42443069220 SUCCESS. Separate docs #1340 safely merged as a1d6ce0f6af83488a90662b18fdf950c45920c02, merged governance 42443339411 SUCCESS. Frozen603 still SKIPPED; no original603 full semantic certification."
       ],
       "ci_runs": [
         42441881237,
@@ -8648,13 +8650,19 @@
         42442594375,
         42442594386,
         42442594499,
-        42442594479
+        42442594479,
+        42442888353,
+        42442888385,
+        42442888424,
+        42442888372,
+        42443069148,
+        42443069210,
+        42443069220,
+        42443339411
       ],
-      "blockers": [
-        "Exact revised-head approval CI must execute and succeed, safely merge PR #1345, independently verify exact merged CI; separate docs PR #1340 still TESTING until integration."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "R23 narrow CI reliability correction, TESTING ONLY, not deployable and no new parser semantic claim. Full 603 individual source certification remains incomplete; #267 historical audit and #96 security separate. Preserve original frozen corpus and 4-second adversarial guard. No publication or production writes."
+      "notes": "Verified narrow development-only CI reliability correction READY, not deployed. Full original Node test enrollment unchanged, malicious HTML 4s timeout preserved; no security waiver. Independent original603 #374/#375 Swiss Water extraction separately READY; full 603 source manual adjudication incomplete, #33 OPEN. #267 and #96 independently owned. No release, production writes or member/provider changes."
     },
     {
       "id": "DIC-Q-33-original603-374-375-selected-processing-card-swiss-water",
