@@ -5,6 +5,7 @@ import {normalizeRoastLabel} from './roast-level-evidence.mjs';
 import {inferDecaffeinationMethod,decafOnlyCoffee} from './coffee-decaffeination-method.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {coffeeHtmlAttributes} from './coffee-product-scope.mjs';
+import {selectedCoffeeNameWithoutPrice} from './coffee-product-identity.mjs';
 const fold=v=>String(v||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^\p{L}\d]+/gu,' ').trim();
 // A current decaf's actual product description sometimes states its method in
 // a prose sentence rather than a labeled spec (Leap Coffee's Swiss Water page).
@@ -16,6 +17,13 @@ const CURRENT_DECAF_METHOD=/^(?:(?:this|our)\s+(?:decaf(?:feinated)?\s+)?coffee\
 // a wholly decaffeinated chosen coffee, bounded product prose and a named
 // water treatment. Never derive method from an old lot, site SEO or water
 // merely used for processing equipment.
+// Direct selected-decaf sourcing prose can name its treatment without a
+// "Decaffeination:" caption: "... coffee sourced, sustainably, by Swiss
+// Water Process to use a chemical-free decaf processing method." Require
+// this exact sentence relationship inside the independently selected coffee.
+// The chosen coffee must itself be full decaf; generic green washing, SEO,
+// roaster education and unrelated/negated treatments do not qualify.
+const CURRENT_SELECTED_SOURCED_WATER_DECAF=/^(?:an?|this|our)\s+[^.!?]{0,140}?\bcoffee\s+sourced(?:\s*,\s*[\p{L}\p{M}-]+){0,3}\s*,?\s+by\s+(?:the\s+)?(?:swiss|mountain)[ -]?water\s+process\b[^.!?]{0,150}\bdecaf\s+processing\s+method\.?$/iu;
 const CURRENT_SELECTED_BEANS_WATER_DECAF=/^(?:these|our|this)\s+(?:(?:[\p{L}\p{M}-]+|&)\s+){0,12}beans\s+(?:are|were)\s+(?:naturally\s+)?decaffeinated\s+(?:using|with|via|through|by)\s+(?:the\s+)?['"‘’]?(?:swiss|mountain)[\s-]?water['"‘’]?(?:\s+process)?\b/iu;
 const CURRENT_SELECTED_OUR_WATER_DECAF=/(?:^|[.!?]\s+)using\s+the\s+(?:swiss|mountain)[\s-]?water\s+process,\s+our\s+decaf\s+uses\b(?:[^.!?]|\d\.\d){0,240}\bcaffeine[\s-]?free\b/iu;
 const NONCURRENT_DECAF_METHOD=/\b(?:previous(?:ly)?|formerly|historically|typically|generally|other coffees?|another coffee|last year|prior (?:lot|harvest))\b/iu;
@@ -103,7 +111,7 @@ function selectedProductAccordionDecafMethods(html,name,clean){
  };
  for(let i=0;i<nodes.length;i++){
   const node=nodes[i];if(node.tag!=='h1')continue;
-  if(fold(clean(html.slice(node.headEnd,node.contentEnd),220))!==selected)continue;
+  if(fold(selectedCoffeeNameWithoutPrice(clean(html.slice(node.headEnd,node.contentEnd),220)))!==selected)continue;
   ancestorWalk(i,(idx,parent,attributes)=>{
    if(/\bproduct__info-container\b/iu.test(attributes.class||''))containers.add(idx);
   });
@@ -160,7 +168,7 @@ function selectedCurrentContinuingCultivator(name,line){
 export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html}={}){
  if(typeof html!=='string'||html.length>2_000_000||!name||typeof clean!=='function')return {};
  const blocks=productCoffeeProse(html,clean);
- const headings=blocks.filter(x=>x.tag==='h1').map(x=>fold(x.text));
+ const headings=blocks.filter(x=>x.tag==='h1').map(x=>fold(selectedCoffeeNameWithoutPrice(x.text)));
  // Responsive storefronts can render the same selected product heading in
  // desktop and mobile shells. Accept repeats ONLY when every in-scope H1
  // identifies that same exact coffee; a missing or different H1 still
@@ -336,7 +344,10 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   // Reuse the conservative method classifier; if multiple incompatible
   // methods are printed, the caller withholds autofill and keeps both sources.
   if(decafOnlyCoffee(name)&&line.length<=360&&
-     (CURRENT_DECAF_METHOD.test(line)||CURRENT_SELECTED_BEANS_WATER_DECAF.test(line)||CURRENT_SELECTED_OUR_WATER_DECAF.test(line)||currentNamedDecafMethod(name,line)||selectedNamedSourceDecafProcess(name,line))&&
+     (CURRENT_DECAF_METHOD.test(line)||CURRENT_SELECTED_BEANS_WATER_DECAF.test(line)||CURRENT_SELECTED_OUR_WATER_DECAF.test(line)||
+      (CURRENT_SELECTED_SOURCED_WATER_DECAF.test(line)&&
+       !/\b(?:not|never|without|instead\s+of|rather\s+than|unlike)\b/iu.test(line))||
+      currentNamedDecafMethod(name,line)||selectedNamedSourceDecafProcess(name,line))&&
      !NONCURRENT_DECAF_METHOD.test(line)&&
      inferDecaffeinationMethod({name,selectedMethod:line})&&!decafEvidence.has(line)){
    if(decafEvidence.size<4)decafEvidence.add(line);
@@ -459,7 +470,7 @@ export function selectedCurrentDecafSpecMethodEvidence(productHtml,{name,clean}=
  const empty={candidates:[],complete:false};
  if(!decafOnlyCoffee(name)||typeof clean!=='function'||
     typeof productHtml!=='string'||productHtml.length>2_000_000)return empty;
- const blocks=productCoffeeProse(productHtml,clean),headings=blocks.filter(b=>b.tag==='h1').map(b=>fold(b.text));
+ const blocks=productCoffeeProse(productHtml,clean),headings=blocks.filter(b=>b.tag==='h1').map(b=>fold(selectedCoffeeNameWithoutPrice(b.text)));
  const selected=fold(name);
  // Some product descriptions use H1 for editorial subsections. Allow only
  // these generic selected-product headings after the exact product H1.
