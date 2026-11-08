@@ -9602,22 +9602,33 @@
     {
       "id": "DIC-Q-455-local-success-physical-history-guard",
       "issue": 455,
-      "pr": null,
+      "pr": 1466,
       "title": "Coffee overview success badge must reject impossible archived measured shots while retaining original five-green History",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "17e0ea0b74c3e6a92f5631f571d663f4320a19b8",
       "scope_paths": [
         "site/lib/model.js"
       ],
       "tests": [
-        "R119 synthetic negative/positive tests authored for inclusive entry bounds, invalid archive records, style/coffee/version isolation and original History. No tests or CI executed at authoring.",
-        "PR1466 first approval run42506165125 FAILED valid deployable-path intake because test file was incorrectly included in scope_paths; tests must be listed only in tests/evidence. Corrected scope to runtime site/lib/model.js, keeping test coverage in same commit. Need fresh exact-head CI."
+        "R119 exact source tests/issue455-local-success-physical-bounds.test.mjs: 4/4 specific tests PASS: malformed archived readings, inclusive 5/40g 5/200g 1/180s boundaries, unchanged original green notes/ratings/History and coffee/version/style boundaries; synthetic only, no real-member incident claimed.",
+        "PR1466 repaired exact tested head 9d1cef6eddc6eb568408d511294ee8d9d705483e: Node22 42506277595 3,097 PASS/0 FAIL/6 intentional SKIP; eslint PASS. Applicable Chromium/mobile/390px/real service-worker offline/visual/accessibility 42506277639 SUCCESS; isolated SQL/JWT 42506277587 SUCCESS; security 42506277657 SUCCESS; approval schema/intake 42506277529 SUCCESS.",
+        "Original PR-head approval 42506165125 FAILED deployable scope included test file; corrected queue scope runtime-only in docs commit 9d1cef6eddc6eb568408d511294ee8d9d705483e. Passing subsequent head tests and no code regression; original frozen603 42506277555 SKIPPED NOT PASS; cloud subset NOT_APPLICABLE, not PASS.",
+        "Nonforce squash code merge PR1466 17e0ea0b74c3e6a92f5631f571d663f4320a19b8: all four changed Git blobs exactly match passing PR head. Exact merged Node22/lint 42506534296 3,097 PASS/0 FAIL/6 SKIP; Chromium/mobile/offline/visual/a11y 42506534287 SUCCESS; approval/governance 42506534478 SUCCESS. PR-head isolated SQL/security evidence reused, no live member/provider writes.",
+        "No actual owner-device authenticated browser trial, measured espresso quality trial, original 603 coffee acceptance rerun, production publication or SQL/Auth/Edge/member write claimed."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact PR-head Node22 and applicable UX/offline/security/governance tests, nonforce integration, exact merged-source readback and reconciliation are not yet verified."
+      "ci_runs": [
+        42506277595,
+        42506277639,
+        42506277587,
+        42506277657,
+        42506277529,
+        42506534296,
+        42506534287,
+        42506534478
       ],
-      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455"
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Verified READY in development only; published READY56 baseline remains 92829cb6aff82aaec212eabbd921183e7997f1a7, separate explicit owner publish authorization required. No deploy initiated by R119."
     }
   ],
   "history": [
