@@ -52,3 +52,11 @@ test('CI timing appends success and failure receipts without arguments or enviro
   assert.ok(rows.every(x=>!Object.hasOwn(x,'env')&&!Object.hasOwn(x,'command')));
  }finally{rmSync(dir,{recursive:true,force:true});}
 });
+
+// Issue #33 R23: keep the same full security regression corpus and 4s
+// malicious HTML child budget while preventing GitHub runner worker contention.
+test('full Node suite limits concurrent files without dropping security tests',()=>{
+ const pkg=JSON.parse(file('package.json'));
+ assert.equal(pkg.scripts.test,'node --test --test-concurrency=2 tests/*.test.mjs tests/audit/*.test.mjs');
+ assert.match(file('tests/html-resource-security.test.mjs'),/timeout:4000/);
+});
