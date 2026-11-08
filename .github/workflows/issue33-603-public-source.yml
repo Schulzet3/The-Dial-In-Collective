@@ -38,3 +38,34 @@ jobs:
           path: ${{ runner.temp }}/dic33-603-current/shard-${{ matrix.shard }}/
           if-no-files-found: error
           retention-days: 1
+  # R42 one-shot guarded post-code official-source closure for #510/#514.
+  # Separate from original all-603 shard replay. Do not treat it as universal certification.
+  selected-r42-510-514-official:
+    if: github.event_name == 'push' && contains(github.event.head_commit.message, '[dic-issue33-r42-live]')
+    name: exact-current-original603-510-514
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Fetch selected current official HTTPS, parse and render Add Coffee plus Source Review
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r42-510-514
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '510,514'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Fail closed on mismatched current facts or unhashed actual HTML
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r42-510-514
+        run: node scripts/audit/issue33-r42-510-514-afterproof.mjs
+      - name: Preserve selected official raw HTML, parsed review and checked hashes
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r42-current-510-514-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r42-510-514/
+          if-no-files-found: error
+          retention-days: 1
