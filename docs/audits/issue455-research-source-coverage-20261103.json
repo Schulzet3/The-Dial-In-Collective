@@ -348,10 +348,13 @@
       "published": "2024-03-07",
       "doi": "10.1038/s41598-024-55831-x",
       "url": "https://www.nature.com/articles/s41598-024-55831-x",
-      "access": "PRIMARY_PUBLISHER_ORIGINAL_AUTHOR_METHODS_AND_RESULTS_VIA_SEARCH_TEXT; DIRECT_OPEN_REDIRECT_AUTH_BLOCKED; PUBMED_ABSTRACT_CROSS_CHECKED",
-      "evidence_grade": "PEER_REVIEWED_SINGLE_COSTA_RICA_COFFEE_SINGLE_GRINDER_20G_40G_9BAR_ONE_EXPERIENCED_SENSORY_TASTER",
-      "review_status": "PUBLISHER_EXCERPT_FACT_CHECK_NOT_COMPLETE_DIRECT_FULL_BODY_OR_BYTE_ARCHIVE",
-      "source_bytes_sha256": null
+      "access": "ORIGINAL_SCIENTIFIC_REPORTS_PUBLISHER_PDF_FULL_RELEVANT_METHODS_RESULTS_CONCLUSIONS_PARSABLE_AND_FIGURES_2_3_4_5_SCREENED; DIRECT_PUBLISHER_HTML_AUTH_REDIRECT; PDF_BINARY_NOT_DOWNLOADED_OR_HASHED",
+      "evidence_grade": "PEER_REVIEWED_CONTROLLED_PHYSICAL_HYDRAULIC_3_REPLICATE_SINGLE_COFFEE_SINGLE_GRINDER_20G_40G_9BAR; SINGLE_NONBLINDED_Q_GRADER_SUBJECTIVE_SENSORY; TENTATIVE_VOC_IDENTIFICATIONS",
+      "review_status": "R455-118_SUBSTANTIVE_PRIMARY_PDF_METHODS_PAGES_2_3_RESULTS_3_TO_7_TENTATIVE_PTRMS_AND_SINGLE_TASTER_LIMIT_REVIEWED_SELECTED_ORIGINAL_FIGURES_VISUALLY_INSPECTED; RAW_DATA_SUPPLEMENTS_NOT_REANALYZED",
+      "source_bytes_sha256": null,
+      "pdf_url": "https://www.nature.com/articles/s41598-024-55831-x.pdf",
+      "method_and_figure_provenance": "Original publisher Scientific Reports 14:5612 PDF DOI 10.1038/s41598-024-55831-x, page 2 coffee/grinder/20g:40g/9bar/3 replicate extraction plus one nonblinded Q-grader; pages 3-5 Figs 2-5 PSD/fines/time/EY; page 6 VOC and single-assessor sensory; page 7 Fig 7 and discussion. PDF parsed via web search index plus selected original figure screenshots page-index 3/4/5; screenshot requests for pages 1/6 were blocked by provider auth redirect. Original file binary bytes SHA-256 and raw replicate data not independently accessed.",
+      "claims_verified_externally": "BOUNDED: In one Costa Rican pulped-natural Arabica with Bentwood Vertical63, 20g in/40g out at 9bar and manually added 1/2/4g 120um-sieved fines, extraction time/permeability tracked both PSD fines fraction Q100 and median X50 across 3 replicate extracts. Selected Fig. 3 shows 17-18% EY in <15s but NOT a population taste win; Fig. 7 represents one nonblinded experienced Q-grader's three attribute scores, favorable around 30s/19-20% FOR THAT COFFEE. PTR-MS signal response is nonlinear and molecule IDs tentative; there is no validated universal EY optimum, demonstrated higher Turbo liking or DIC five-score model calibration."
     },
     {
       "id": "LIT-2020-ESPRESSO-GRIND-PEAK",
@@ -3106,15 +3109,33 @@
       "source_url": "https://www.sciencedirect.com/science/article/pii/S0308814624013670",
       "original_binary_sha256": null,
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-118-A",
+      "source": "LIT-2024-ESPRESSO-FINES-SENSORY original Scientific Reports publisher PDF pages 2-5 Figs 2-5; https://www.nature.com/articles/s41598-024-55831-x.pdf; DOI 10.1038/s41598-024-55831-x",
+      "claim": "Under the study's one-coffee and one-Bentwood-grinder design (20g:40g; 9bar; three extraction replicates per preparation), 1/2/4g added sieved fines shifted measured PSD and extraction-time response. Fines fraction below 100um plus particle median were modeled as independent physical predictors, not recorded user controls or validated cross-machine grind dial translations.",
+      "grade": "PRIMARY_PEER_REVIEWED_PDF_METHODS_RESULTS_SELECTED_ORIGINAL_FIGURES_VISUALLY_CHECKED; LIMITED_ONE_COFFEE_ONE_GRINDER_THREE_REPLICATES; MODEL_OUT_OF_SAMPLE_GENERALIZATION_NOT_VERIFIED",
+      "result": "PHYSICAL_CONTEXT_AND_UNMEASURED_USER_PSD_BOUNDARY_CONFIRMED",
+      "current_app": "site/lib/engine.js blob d676fa918900504ce0839451760fa6e817edede8 uses logged user controls/grinder calibration and recorded five tastes, not measured fines fraction or laboratory PSD.",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-118-B",
+      "source": "LIT-2024-ESPRESSO-FINES-SENSORY original Scientific Reports PDF pages 2,6-7, Figs 6-7; https://www.nature.com/articles/s41598-024-55831-x.pdf",
+      "claim": "The sensory result is ONE experienced Q-grader's non-double-blind scores for flavor/balance/tactile, not a controlled panel or member liking study; that person's highest region for this coffee was about 30s/19-20% EY, even though sub-15s physical extracts reached 17-18% EY. Tentative PTR-MS peak identifications and nonlinear headspace behavior cannot establish that Turbo is universally fruitier or that 19.5% is a personal optimal target.",
+      "grade": "PRIMARY_PDF_METHODS_SENSORY_DISCLAIMER_RESULTS_AND_SELECTED_FIGURES_VERIFIED; NO_RAW_DATA_OR_BLIND_PANEL_REPLICATION; PRIMARY_PDF_BINARY_SHA_UNAVAILABLE",
+      "result": "SINGLE_TASTER_AND_VOC_TO_PREFERENCE_GENERALIZATION_UNSUPPORTED",
+      "current_app": "site/lib/constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095 keeps Turbo/Fast-Flow/Traditional separate and all five independent ratings; engine.js d676fa918900504ce0839451760fa6e817edede8 lacks measured fines/EY sensors and uses history not universal 19.5% EY.",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [],
   "change_scope": {
-    "application_code_changed": true,
-    "tests_executed": true,
+    "application_code_changed": false,
+    "tests_executed": false,
     "production_deployed": false,
-    "queue_changed": true,
-    "reason": "R455-116 deterministic LIVE source orphan-family fix, nonforce code merge 5d9f8a385306cd3fde199777615299aa975c800f, direct readback, exact-source Node22/UX/offline/SQL/security/approval positive and negative regressions. Scientific research/Locked rule unchanged."
+    "queue_changed": false,
+    "reason": "R455-118 primary PDF methods/figures claim boundary only; exact docs CI pending; no recommendation, numeric or Locked changes."
   },
   "next_actions": [
     "R455-108: independently inspected original Pannusch 2024 author-affiliated kinetic extraction abstract and live ORG-02/engine; 63 sources, 143 bounded checks, 70 proposals. No universal chemistry-to-taste mapping. Docs-only exact governance pending; full publisher PDF/S019 unavailable.",
@@ -3150,32 +3171,33 @@
     "R455-114 final code PR1425 merged a4010fbda71a6a600371de563096dd0715011a02 source-bound Node22 3066 PASS/0 FAIL/6 SKIP on PR-head and merged; applicable UX/SQL/security/approval SUCCESS. Research source identities unchanged 65, checks 151, proposals 76. READY development only, not deployed. S019 inaccessible; #267 direct-line audit credit zero.",
     "R455-115 source first 0fdad30bb726081c275b182cb0024f6e34b4ca6e: Ribes 2020 five-slide manufacturer experiment original PDF visual/text reviewed and 2026 restatement crosschecked; 66 curated sources/153 evidence checks/77 proposals. Non-peer-reviewed; no universal dose, pressure or EY target; original PDF binary unverified, no sensory panel. Docs PR CI and merge pending. Standalone S019 inaccessible; zero #267 V2 line review credit.",
     "R455-116 exact base d1f8c83708640daf7b8306ea1af5a25a5defe676; orphaned or wrong-coffee/style historical family preference pointer closed by verified nonforce PR1444 merged 5d9f8a385306cd3fde199777615299aa975c800f; exact merged Node22 3077 PASS/0 FAIL/6 intentional SKIP (42491476786) and mobile/UX/offline42491476801 + approval42491476762 success. R116 READY not deployed. 66 curated sources/154 checks/78 proposals; standalone S019 inaccessible, zero #267 line credit. Continue independent bounded source/UX review.",
-    "R455-117 live parent 8421c12087f88978839dc5aff973c478e19e7a1e: Santanatoglia et al. 2024 Food Chemistry original indexed methods/results/conclusion substantially cross-checked; 67 sources / 156 bounded evidence checks / 79 proposals; direct publisher HTML fetch blocked 403, PDF/raw not hashed; no espresso universal pH or sourness rule. Docs-only source-bound PR/CI/merge pending; S019 missing; zero #267 literal-line credit."
+    "R455-117 live parent 8421c12087f88978839dc5aff973c478e19e7a1e: Santanatoglia et al. 2024 Food Chemistry original indexed methods/results/conclusion substantially cross-checked; 67 sources / 156 bounded evidence checks / 79 proposals; direct publisher HTML fetch blocked 403, PDF/raw not hashed; no espresso universal pH or sourness rule. Docs-only source-bound PR/CI/merge pending; S019 missing; zero #267 literal-line credit.",
+    "R455-118 source-bound development b66dc4db6207e6a8c4363a43296d0c4b17cb2351: direct primary 2024 Smrke fines PDF experiment, Figs 2-5, VOC and single nonblinded Q-grader limits reviewed; 67 registered sources/158 checks/80 proposals. Docs-only PR and CI pending at commit authoring, no numeric/Locked/queue/code/production changes, no #267 line credit, S019 still missing."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-117",
-    "base_development_sha": "8421c12087f88978839dc5aff973c478e19e7a1e",
+    "id": "R455-118",
+    "base_development_sha": "b66dc4db6207e6a8c4363a43296d0c4b17cb2351",
     "source_ids": [
-      "LIT-2024-SANTANATOGLIA-FILTER-ACIDITY"
+      "LIT-2024-ESPRESSO-FINES-SENSORY"
     ],
     "claim_ids": [
-      "R455-EV-CIT-117-A",
-      "R455-EV-CIT-117-B"
+      "R455-EV-CIT-118-A",
+      "R455-EV-CIT-118-B"
     ],
     "proposal_ids": [
-      "R455-PROP-117-FILTER-ACIDITY-PROXY-ESPRESSO-TRANSFER-BOUNDARY"
+      "R455-PROP-118-FINES-VOC-SENSORY-TRANSFER-BOUNDARY"
     ],
     "number_of_curated_sources": 67,
-    "total_evidence_checks": 156,
-    "number_of_proposals": 79,
-    "review_type": "PRIMARY_FILTER_COFFEE_ACIDITY_PANEL_CHEMISTRY_ESPRESSO_TRANSFER_LIMIT",
+    "total_evidence_checks": 158,
+    "number_of_proposals": 80,
+    "review_type": "UPGRADE_REGISTERED_PRIMARY_ESPRESSO_FINES_STUDY_TO_PDF_METHODS_FIGURE_AND_SINGLE_TASTER_EVIDENCE_CROSSWALK",
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
     "code_or_policy_changed": false,
     "locked_policy_changed": false,
     "ci_runs": [],
     "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "Verify source-bound docs CI; nonforce merge and read back exact merged source; update Issue #455. Then continue disjoint Log Shot -> Rate -> Recommendation gap."
+    "next_action": "Verify PR-head docs governance against exact SHA, nonforce merge/readback, Issue #455 checkpoint; resume next nonoverlapping UX/source review."
   },
   "policy_decisions_resolved": [
     {
@@ -4802,6 +4824,27 @@
         "https://pubmed.ncbi.nlm.nih.gov/38810441/",
         "https://pubblicazioni.unicam.it/handle/11581/482223"
       ]
+    },
+    {
+      "id": "R455-PROP-118-FINES-VOC-SENSORY-TRANSFER-BOUNDARY",
+      "finding": "Peer-reviewed physical evidence that fines fraction affects shot flow is specific to one grinder/coffee/9bar/20g:40g test. Its sensory optimum and Turbo-fruitiness suggestion rest on a single nonblinded Q-grader and tentative mass-spectral VOC identities, not transferable DIC member preference data.",
+      "evidence": [
+        "R455-EV-CIT-118-A",
+        "R455-EV-CIT-118-B",
+        "R455-EV-CIT-015-C"
+      ],
+      "severity": "P2_EVIDENCE_STRENGTH_AND_MISLEADING_SCIENTIFIC_CONFIDENCE",
+      "user_benefit": "Avoid suggesting scientifically proven universal fines/EY/timing targets or Turbo taste improvement; retain actionable personal five-rating feedback and separate style/grinder evidence.",
+      "current_locked": "Five taste inputs/all-green vs missing, at most one controllable next change, original shots and private notes/history, independent Turbo/Fast-Flow, grinder range/version/slow feed, no new required data capture or universal empirical claims.",
+      "current_app": "Live development engine blob d676fa918900504ce0839451760fa6e817edede8 and constants 72221331ce4dffabe416eebec1ae2fceced3a095 reviewed; no physical fines measurement, numeric %EY feedback, or product code revision warranted.",
+      "proposed_change": "SAFE research provenance correction only; retain engine behavior and existing approved priors. HOLD new mandatory PSD capture, fixed 19.5% EY target, universal Turbo-fruitiness badge or automatic grind/taste policy: require owner approval plus independently replicated same-coffee blind sensory and equipment capability study.",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "R455-118_DOCS_ONLY_PRIMARY_PDF_FACT_BOUNDARY_NOT_APP_CHANGE",
+      "test_plan": "Source-bound docs schema/approval/journal continuity CI only; no Node22 runtime or browser/mobile/SQL/auth rerun for unchanged files. App/outcome quality not empirically verified. #267 literal-line credit zero.",
+      "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY",
+      "original_pdf_sha256": null,
+      "production_deployed": false
     }
   ],
   "changeScope": {
@@ -4809,6 +4852,6 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R455-117 primary source claim boundary only; exact CI pending; no recommendation, numeric or Locked changes."
+    "reason": "R455-118 primary PDF methods/figures claim boundary only; exact docs CI pending; no recommendation, numeric or Locked changes."
   }
 }
