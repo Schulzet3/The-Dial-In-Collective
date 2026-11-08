@@ -5,6 +5,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../site/cloud/coffee-url-autofill.js';
+import {selectedCurrentDecafSpecMethodEvidence} from '../src/server/coffee-direct-product-prose.mjs';
+import {productMarkup} from '../src/server/coffee-product-scope.mjs';
 
 const url='https://tenfoldcoffee.com/products/meseta-de-popayan-decaf-colombia';
 const row=(key,value)=>'<tr><td style="height: 19px;"><span>'+key+'</span></td>'+
@@ -25,7 +27,13 @@ test('real-shaped exact selected EA processing table is a Sugar Process decaf tr
   row('Elevation','1500-2070 masl'));
  assert.equal(result.ok,true,JSON.stringify(result));
  assert.equal(result.fields.name,name);
- assert.equal(result.fields.decaffeination_method,'Sugar Process',JSON.stringify(result.fields));
+ const tableSpec=selectedCurrentDecafSpecMethodEvidence(productMarkup(selected(name,
+  row('Country','Colombia')+row('Producer','65 small holders')+
+  row('Processing Method','Ethyl Acetate Decaffeination')+
+  row('Elevation','1500-2070 masl'))),{name,clean:(v,n=1000)=>String(v||'').replace(/<[^<>]{0,2000}>/g,' ').replace(/\\s+/g,' ').trim().slice(0,n)});
+ assert.equal(result.fields.decaffeination_method,'Sugar Process',JSON.stringify({
+  fields:result.fields,spec:tableSpec,roaster_details:result.roaster_details,
+  source_facts:result.source_facts?.filter(f=>/process|decaf/i.test(f.field||''))}));
  assert.equal(result.fields.process,undefined,JSON.stringify(result.fields));
  assert.match(coffeeUrlPreviewMarkup(result),/Sugar Process/);
  assert.ok(coffeeSourceReviewSnapshot({...result,source_url:url}));
@@ -36,7 +44,9 @@ test('real-shaped exact selected EA processing table is a Sugar Process decaf tr
 
 test('selected labeled Decaffeination Method table recognizes named Water treatment independently of Washed',()=>{
  const r=parse('Decaf Colombia',row('Process','Washed')+row('Decaffeination Method','Swiss Water Process'));
- assert.equal(r.fields.decaffeination_method,'Water Process',JSON.stringify(r.fields));
+ assert.equal(r.fields.decaffeination_method,'Water Process',JSON.stringify({
+  fields:r.fields,roaster_details:r.roaster_details,
+  source_facts:r.source_facts?.filter(f=>/process|decaf/i.test(f.field||''))}));
  assert.equal(r.fields.process,'Washed',JSON.stringify(r.fields));
 });
 
