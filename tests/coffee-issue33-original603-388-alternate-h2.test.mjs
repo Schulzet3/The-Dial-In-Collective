@@ -27,6 +27,6 @@ test('different host, product handle, ambiguous form H2, absent description, unr
   '<main>'+form(title,'short')+'</main>',
   '<main>'+form(title,body).replace('</form>','<h2>Another Coffee</h2></form>')+'</main>',
   '<main><h1>Other Coffee</h1>'+form()+'</main>',
-  '<main><section class="related-products">'+form()+'</section></main>'.replace('class="product-form"','class="related-form"')
+  '<main><section class="related-products">'+form()+'</section></main>'
  ])assert.deepEqual(selectedProductFormH2(html),[],html.slice(0,200));
 });

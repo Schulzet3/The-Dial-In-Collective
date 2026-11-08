@@ -43,6 +43,20 @@ export function selectedProductFormH2(markup){
  for(let i=0;i<nodes.length;i++){
   const form=nodes[i],a=coffeeHtmlAttributes(form.attributes);
   if(form.tag!=='form'||!String(a.class||'').split(/\s+/u).includes('product-form'))continue;
+  // A similarly shaped purchase form in recommendations is NOT selected.
+  let unsafe=false,ancestorIndex=form.parent;
+  for(let depth=0;ancestorIndex!==null&&depth<128;depth++){
+   const ancestor=nodes[ancestorIndex];
+   if(!ancestor)break;
+   const ctx=coffeeHtmlAttributes(ancestor.attributes);
+   const labels=[ctx.class,ctx.id,ctx.role,ctx['aria-label']].join(' ');
+   if(['aside','nav','header','footer'].includes(ancestor.tag)||
+      /\b(?:related[-_ ]?products?|recommendations?|upsell|cross[-_ ]?sell|carousel|recently[-_ ]?viewed|sidebar|faq)\b/iu.test(labels)){
+    unsafe=true;break;
+   }
+   ancestorIndex=ancestor.parent;
+  }
+  if(unsafe)continue;
   const parts=nodes.filter(n=>n.start>=form.headEnd&&n.end<=form.contentEnd);
   const heads=parts.filter(n=>n.tag==='h2');
   if(heads.length!==1)continue;
