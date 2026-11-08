@@ -4,7 +4,8 @@ import {readFileSync} from 'node:fs';
 import {requiredFocusedSourceFailures} from '../scripts/audit/issue33-focused-source-acceptance.mjs';
 
 const good=number=>({number,status:'FETCHED',parser_ok:true,add_coffee_ui_rendered:true,
- source_review_rendered:true,selected_price_badge_accepted:true});
+ source_review_rendered:true,selected_price_badge_accepted:true,
+ selected_h1_present_in_scoped_html:true,selected_heading_identity_verified:true});
 
 test('required exact selected public probe accepts only all fetched, parsed, Add Coffee/source-review rendered',()=>{
  assert.deepEqual(requiredFocusedSourceFailures([19,25],[good(19),good(25)]),[]);
@@ -55,8 +56,13 @@ test('present selected original heading must be exact-product identity, not an u
     selected_h1_present_in_scoped_html:true,selected_heading_identity_verified:value}]);
   assert.ok(failures.some(x=>x.reason==='selected_original_product_heading_identity_unverified'));
  }
- assert.deepEqual(requiredFocusedSourceFailures([247],[{...good(247),
-  selected_h1_present_in_scoped_html:false,selected_heading_identity_verified:null}]),[]);
+ assert.ok(requiredFocusedSourceFailures([247],[{...good(247),
+  selected_h1_present_in_scoped_html:false,selected_heading_identity_verified:null}])
+  .some(x=>x.reason==='selected_original_product_heading_identity_unverified'));
+ assert.deepEqual(requiredFocusedSourceFailures([480],[{...good(480),
+  selected_h1_present_in_scoped_html:false,
+  selected_page_h2:['Strawberry Fields Forever (seasonal release)'],
+  selected_heading_identity_verified:true}]),[]);
 });
 
 
@@ -81,4 +87,13 @@ test('explicit source-bound changed-product NEGATIVE proves current H1, never ce
  assert.ok(requiredFocusedSourceFailures([376],[good(376)],{negativeIdentityNumbers:[362]})
   .some(x=>x.reason==='negative_identity_case_not_requested'));
  assert.deepEqual(requiredFocusedSourceFailures([376,380],[good(376),good(380)]),[]);
+});
+
+test('missing selected H1 and no bound product H2 must fail closed',()=>{
+ for(const v of [null,undefined,false]){
+  const failures=requiredFocusedSourceFailures([480],[{...good(480),
+   selected_h1_present_in_scoped_html:false,selected_h1:[],selected_page_h2:[],
+   selected_form_h2:[],selected_heading_identity_verified:v}]);
+  assert.ok(failures.some(x=>x.reason==='selected_original_product_heading_identity_unverified'));
+ }
 });

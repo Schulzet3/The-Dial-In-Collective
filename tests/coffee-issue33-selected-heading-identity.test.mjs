@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {selectedProductHeadings} from '../scripts/audit/issue33-selected-product-heading.mjs';
+import {selectedProductHeadings,selectedProductPurchaseRootH2} from '../scripts/audit/issue33-selected-product-heading.mjs';
 
 const animated=name=>'<h1 class="blinds-text"><div class="word">'+[...name].map((c,i)=>
  '<span class="char-clip"><span style="--i:'+i*20+'ms">'+c+'</span></span>').join('')+'</div></h1>';
@@ -22,4 +22,23 @@ test('partially animated, oversized or mismatched H1 cannot silently certify ano
  const x=animated('Colombia Finca Anaya Wush Wush');
  assert.deepEqual(selectedProductHeadings(x.replace('class="char-clip"','class="char-clip-missing"')),[]);
  assert.deepEqual(selectedProductHeadings(animated('Different Recycled Product')),['Different Recycled Product']);
+});
+
+const pageH2=(name,extra='')=>'<main><product-root class="product-page--root"><div class="product-page--right-column">'+
+ '<div class="product-page--block"><h2 class="product-page--heading">'+name+'</h2></div>'+
+ '<div class="product-page--block"><form class="product-buy-buttons--form" action="/cart/add"><input name="id"></form></div>'+
+ extra+'</div></product-root></main>';
+
+test('original603 #480 selected current purchase-bound H2 is not generic SEO or related heading',()=>{
+ const name='Strawberry Fields Forever (seasonal release)';
+ assert.deepEqual(selectedProductPurchaseRootH2(pageH2(name)),[name]);
+ assert.deepEqual(selectedProductPurchaseRootH2(pageH2('Different seasonal coffee')),['Different seasonal coffee']);
+ assert.deepEqual(selectedProductPurchaseRootH2('<h2>'+name+'</h2>'),[]);
+ assert.deepEqual(selectedProductPurchaseRootH2(pageH2(name).replace('action="/cart/add"','action="/search"')),[]);
+ assert.deepEqual(selectedProductPurchaseRootH2(pageH2(name).replace('class="product-page--root"','class="related-products"')),[]);
+ assert.deepEqual(selectedProductPurchaseRootH2(pageH2(name)+pageH2(name)),[]);
+ assert.deepEqual(selectedProductPurchaseRootH2(pageH2(name,'<h2 class="product-page--heading">Unrelated</h2>')),[]);
+ assert.deepEqual(selectedProductPurchaseRootH2(pageH2(name,'<h1>Other product H1</h1>')),[]);
+ assert.deepEqual(selectedProductPurchaseRootH2(pageH2(name).replace('class="product-page--heading"','class="related-products--title"')),[]);
+ assert.deepEqual(selectedProductPurchaseRootH2('<div class="related-products">'+pageH2(name)+'</div>'),[]);
 });
