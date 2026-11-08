@@ -2829,22 +2829,24 @@
       "id": "R455-EV-APP-071-A",
       "source": "Live development d6fba0c8388721947dc4dd1542a3f78c5b3e671d; site/lib/engine.js original blob 3823b70b0a954a9a4182b45de11d667cfe1c98a4 lines 481-488; constants.js current blob 72221331ce4dffabe416eebec1ae2fceced3a095, CONFIG.bounds.yieldG=[5,200]; existing tests/issue455-yield-step.test.mjs (verified inclusive next-target check)",
       "claim": "After a valid measured 195 g shot, existing owner-approved meaningful +5 g yield advice can target exactly 200 g, while recommendation() previously built a displayed +/-1 g range with high=201 g. The same invalid high range is possible from an allowed one-change cached next yieldCenter=200. This is a deterministic mismatch with the existing max 200 g Log Shot input, not a claim about optimal coffee taste.",
-      "grade": "DETERMINISTIC_DIRECT_LIVE_MODULE_SOURCE_REPRO_MATH; SYNTHETIC_LOCAL_REGRESSION_TEST_PENDING_EXACT_SOURCE_CI; NO_PHYSICAL_DEVICE_OR_MEMBER_INCIDENT",
+      "grade": "DETERMINISTIC_LIVE_SOURCE_MATH_PLUS_THREE_REAL_MODULE_SYNTHETIC_NEGATIVE_POSITIVE_NODE22_REGRESSION_GROUPS_VERIFIED_AT_TESTED_HEAD_AND_EXACT_MERGED_SHA; NO_PHYSICAL_MEMBER_INCIDENT_OR_CUP_QUALITY",
       "current_app": "Original source built rec.yield.low=Math.max(5,round(nextYield-1)), high=round(nextYield+1) without max bound. Only display range and its derived ratio are affected; actual rec.yield.center remains 200. Source code change constrains display endpoints with existing CONFIG.bounds.yieldG.",
-      "result": "SAFE_BOUNDED_UI_RECIPE_DISPLAY_CORRECTION_PENDING_CI_AND_NONFORCE_INTEGRATION",
+      "result": "SAFE_DISPLAY_BOUNDS_FIX_VERIFIED_EXACT_CODE_HEAD_AND_CODE_MERGED_CI",
       "owner_approval": false,
       "original_source_sha": "d6fba0c8388721947dc4dd1542a3f78c5b3e671d",
       "original_report_git_blob_sha": null,
-      "publisher_full_text_sha256": null
+      "publisher_full_text_sha256": null,
+      "verified_merge_sha": "7300de331f3978cd866654da17f15489520f2722",
+      "verified_test_run": 42460399138
     }
   ],
   "policy_decisions_pending": [],
   "change_scope": {
-    "application_code_changed": true,
-    "tests_executed": false,
+    "application_code_changed": false,
+    "tests_executed": true,
     "production_deployed": false,
     "queue_changed": true,
-    "reason": "R455-109 SAFE existing-limit next recipe display bound with synthetic focused regression and TESTING queue; CI unexecuted at authoring."
+    "reason": "R109 verified code merge 7300de3 and exact head/merged CI, docs-only ready reconciliation."
   },
   "next_actions": [
     "R455-108: independently inspected original Pannusch 2024 author-affiliated kinetic extraction abstract and live ORG-02/engine; 63 sources, 143 bounded checks, 70 proposals. No universal chemistry-to-taste mapping. Docs-only exact governance pending; full publisher PDF/S019 unavailable.",
@@ -2872,11 +2874,12 @@
     "R455-102: independently cross-checked MDPI-indexed primary Choi et al. 2025 methods/results/conclusions (direct HTML 429; full publisher bytes unverified) against original #01 and current Locked rating/recipe code. Experimental 15-17g and 70-90mL cups are protocol standards, not universal DIC dose; expert CATA three-replicate repeatability across variable country brew conditions is not five-slider app validity. Source identity unchanged: 60 sources, 134 bounded checks, 64 proposals; no code/Locked rule/queue changes. Direct original PDF and S019 remain inaccessible, docs-only PR governance pending.",
     "R455-105: SAFE visible feedback physical eligibility fixed via PR1347, merge 3c21a137baf37ed7594937a56ee656e50a4a987f, 3 real-module tests PASS, exact Node22 3019/0/6; research ledger 60 sources/137 checks/67 proposals. Original S019 remains inaccessible; #267 line audit independent.",
     "R455-107: primary Wiley full HTML 2021 Vezzulli 8-lot/24-roast/6-expert study directly checked vs ORG-03, ORG-07, engine/constants; no transfer of medium-roast optimum, 91C/1:2 or expert cupping notes to five DIC ratings. 62 curated sources/141 bounded checks/69 proposals; docs CI pending. Primary original binary/supplements and S019 pending; no #267 audit-line credit or product change.",
-    "R455-109: same-commit SAFE next recipe yield display band clamps endpoints to already approved 5-200 g entry range; one source-derived defect plus 3 synthetic negative/positive test groups; exact CI/merge pending. Original S019 inaccessible, #267 direct-line work independent."
+    "R455-109: same-commit SAFE next recipe yield display band clamps endpoints to already approved 5-200 g entry range; one source-derived defect plus 3 synthetic negative/positive test groups; exact CI/merge pending. Original S019 inaccessible, #267 direct-line work independent.",
+    "R455-109: PR1385 safely merged 7300de331f3978cd866654da17f15489520f2722; exact Node22 3039/0/6 on PR and merge, 3 R109 groups pass, browser/mobile/offline/SQL/security/approval applicable CI succeeded. READY documentation PR pending; no deployment."
   ],
   "latest_review_checkpoint": {
     "id": "R455-109",
-    "base_development_sha": "d6fba0c8388721947dc4dd1542a3f78c5b3e671d",
+    "base_development_sha": "7300de331f3978cd866654da17f15489520f2722",
     "source_ids": [
       "site/lib/engine.js",
       "site/lib/constants.js",
@@ -2889,14 +2892,23 @@
     "number_of_curated_sources": 63,
     "total_evidence_checks": 144,
     "number_of_proposals": 71,
-    "review_type": "DETERMINISTIC_NEXT_RECIPE_DISPLAY_BOUNDARY_CODE_FIX",
+    "review_type": "SAFE_VERIFIED_CODE_MERGE_AND_RELEASE_QUEUE_RECONCILIATION",
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
     "code_or_policy_changed": true,
-    "ci_runs": [],
-    "doc_pr_ci": "NOT_RUN_AT_AUTHORING",
+    "ci_runs": [
+      42460208354,
+      42460208325,
+      42460208324,
+      42460208285,
+      42460208341,
+      42460399138,
+      42460399041,
+      42460398996
+    ],
+    "doc_pr_ci": "PENDING_AT_READY_DOCS_AUTHORING",
     "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "Verify exact R109 branch Node22 and UX/mobile/offline/governance, repair any failures, nonforce PR merge with concurrent preservation, independent exact merged source CI, reconcile queue READY only if verified; no release."
+    "next_action": "Verify exact docs-only reconciliation PR approval/continuity CI, nonforce merge and readback; keep #455 OPEN and no deployment; resume another independent source claim or narrow SAFE UX defect."
   },
   "policy_decisions_resolved": [
     {
@@ -4365,9 +4377,9 @@
       "current_app": "Original engine Git blob 3823b70b0a954a9a4182b45de11d667cfe1c98a4 creates high=round(nextYield+1); R109 bounded code uses CONFIG.bounds.yieldG for both displayed endpoints, while center and actual controlled settings remain unchanged.",
       "proposed_change": "SAFE code/test: clamp only next recipe displayed +/-1g yield band endpoints to existing approved Log Shot [5,200] gram range and recalculate derived range ratios; do not clamp or edit historical raw measurements or change taste-driven targets.",
       "approval_required_for_behavior_change": false,
-      "implementation": "SOURCE_BRANCH_SAME_COMMIT_CODE_TEST_QUEUE_JOURNAL_PENDING_PR_EXACT_SOURCE_CI_AND_NONFORCE_MERGE",
-      "test_plan": "Three direct real-module synthetic Node22 regression groups: measured 195->200 upper edge, valid cached 200 edge, normal 50->55 and lower 6->5 controls, unchanged all five scores, notes and history; applicable Node22/lint/build, UI/mobile/offline and governance checks required on exact source. No real user/device or espresso taste testing.",
-      "release_queue": "DIC-Q-455-next-recipe-yield-band-bounds TESTING_DEVELOPMENT_ONLY",
+      "implementation": "VERIFIED_CODE_PR1385_NONFORCE_SQUASH_MERGED_7300de331f3978cd866654da17f15489520f2722; SAME_COMMIT_JOURNAL_AND_TESTING_QUEUE; DOC_READY_RECONCILIATION_CI_PENDING",
+      "test_plan": "Exact tested PR-head Node22 full 3,039 PASS/0 FAIL/6 SKIP and 3 new R109 direct real-module tests PASS (run42460208354); merged source Node22 full 3,039/0/6 (run42460399138), scoped browser/mobile/offline/visual and approval/cloud SUCCESS on PR head and merged source; isolated SQL and security PR head SUCCESS. Original603 intentionally SKIPPED; no real member, device or espresso taste outcomes tested.",
+      "release_queue": "DIC-Q-455-next-recipe-yield-band-bounds READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
       "production_deployed": false
     }
   ],
