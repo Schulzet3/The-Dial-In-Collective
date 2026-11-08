@@ -942,6 +942,22 @@
       "claims_verified_externally": "Authors report extension of a two-grain kinetic model for flow-rate and temperature effects, fitting prior espresso extraction data on TDS, caffeine, trigonelline and chlorogenic acid, and checking predictions against experiments involving dynamic temperature and flow. No experimental DIC five-sensory-rating prediction or universal optimum shown in accessible abstract.",
       "source_bytes_sha256": null,
       "source_byte_caveat": "Original full Elsevier article, parameter tables, coefficient errors, supplement, PDF and blinded sensory/member data not accessed or hashed. TUM author-institution abstract is not full-text verification."
+    },
+    {
+      "id": "LIT-2023-GUINARD-DRIP-PREFERENCE-BCC",
+      "type": "peer_reviewed_original_drip_brew_sensory_consumer_preference_chart_synthesis",
+      "title": "A new Coffee Brewing Control Chart relating sensory properties and consumer liking to brew strength, extraction yield, and brew ratio",
+      "authors": "Jean-Xavier Guinard; Scott Frost; Mackenzie Batali; Andrew Cotter; Lik X. Lim; William D. Ristenpart",
+      "published": "2023-03-29 online; Journal of Food Science 88(5), 2168-2177",
+      "journal": "Journal of Food Science",
+      "doi": "10.1111/1750-3841.16531",
+      "url": "https://ift.onlinelibrary.wiley.com/doi/10.1111/1750-3841.16531",
+      "access": "DIRECT_PEER_REVIEWED_PUBLISHER_OPEN_ACCESS_FULL_HTML_SECTIONS_1_2_3_4_5_ON_2026-11-08; ORIGINAL_PDF_AND_UNDERLYING_PERSON_LEVEL_DATA_NOT_DOWNLOADED",
+      "review_status": "PRIMARY_PUBLISHER_FULL_HTML_SUBSTANTIVE_METHODS_CONSUMER_57_43_RESULTS_AND_LIMITATIONS_REVIEWED_NOT_PDF_RAW_DATA_REANALYSIS",
+      "evidence_grade": "PEER_REVIEWED_DRIP_BLACK_COFFEE_META_PRESENTATION_OF_3_STUDIES; INDIRECT_ONLY_FOR_ESPRESSO_PERSONAL_RATINGS",
+      "claims_verified_externally": "Combines two trained descriptive drip-coffee experiments (27 roast samples and 27 temperature samples) with consumer liking of 27 drip brews from Cotter 2021. Reported 57%/43% liking segments are specific to primarily young Northern California black-coffee drinkers; averaged one-size-fits-all ideal obscures preference variation. Authors explicitly call for future espresso-specific control charts; no universal DIC recipe, five-slider scoring or empirical improvement established.",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "HTML read from publisher; no original PDF bytes/hash, supplemental tables, underlying individual ratings or reproduction of response-surface regression. Report is a synthesis of earlier study data, not a new independently randomized espresso trial."
     }
   ],
   "evidence_checks": [
@@ -2862,15 +2878,46 @@
       "original_source_sha": "cbd5442bd2db65ed746fa1586b7711ee1ecc66a5",
       "verified_merge_sha": "29ce55dcf0abe87cb5db906a0146faa6c3383c0c",
       "verified_test_run": 42468819576
+    },
+    {
+      "id": "R455-EV-CIT-112-A",
+      "source": "Original Guinard et al. 2023 Wiley/IFT publisher full HTML, Methods 2.1-2.3, Results 3.1-3.3, Discussion 4.2, Conclusion",
+      "primary_sources": [
+        "https://ift.onlinelibrary.wiley.com/doi/10.1111/1750-3841.16531",
+        "https://doi.org/10.1111/1750-3841.16531"
+      ],
+      "claim": "Synthesis uses 27 drip-coffee samples with varied roast and 27 with varied brewing temperature, plus consumer tests of the latter. Consumer liking is not a single universal maximum: paper reports two sample-specific segments (57% dome-like, 43% saddle-like). Authors state sample chiefly young Northern California black-coffee consumers and explicitly reserve espresso-specific charts for future research.",
+      "grade": "DIRECT_PEER_REVIEWED_PUBLISHER_FULL_HTML_METHOD_RESULTS_AND_DISCUSSION; UNDERLYING_RAW_RATINGS_PDF_AND_REPLICATION_UNVERIFIED",
+      "current_app": "Current DIC all-five original taste ratings determine personal success; engine successfully maintains separate recipe families and does not aggregate a universal consumer preference cluster.",
+      "result": "SUPPORTED_DRIP_SAMPLE_HETEROGENEITY_ONLY; NOT_ESPRESSO_OR_DIC_PERSONALIZATION_CALIBRATION",
+      "owner_approval": false,
+      "original_source_sha": "fac2a4ac4f61446ad5e4688fafdc305406c16ff8",
+      "original_report_git_blob_sha": "43912d0dec0969c090d525c853f3a456136a2311",
+      "publisher_full_text_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-112-B",
+      "source": "Guinard 2023 publisher Limitations/Conclusions and live original ORG-07, engine.js, constants.js; no independent machine tasting",
+      "primary_sources": [
+        "https://ift.onlinelibrary.wiley.com/doi/10.1111/1750-3841.16531"
+      ],
+      "claim": "The reported 57% and 43% preference strata cannot establish two espresso user categories, a numeric 18% extraction target, any five-green conversion or preference-weighted DIC recommendation confidence. Study is DRIP black coffee with TDS/percent extraction, unlike DIC's unmeasured physical EY and subjective five sensory ratings; authors specifically identify espresso as an untested future extension.",
+      "grade": "DIRECT_AUTHOR_LIMITATION_PLUS_REPRODUCIBLE_LIVE_CODE_AND_ORIGINAL_REPORT_CROSSWALK; INFERENCE_BOUNDARY_NOT_INDEPENDENT_DIC_OUTCOME",
+      "current_app": "site/lib/engine.js baseline and chooseRecipeFamily use approved transparent heuristics and original measured same-coffee history; constants.js defines five ordinal sensory inputs and distinct Turbo/Fast-Flow. No TDS/EY is captured for routine shot.",
+      "result": "RESEARCH_ONLY_NO_NEW_ESPRESSO_NUMERICS_TASTE_CLASSIFICATION_OR_DATA_CAPTURE",
+      "owner_approval": false,
+      "original_source_sha": "fac2a4ac4f61446ad5e4688fafdc305406c16ff8",
+      "original_report_git_blob_sha": "43912d0dec0969c090d525c853f3a456136a2311",
+      "publisher_full_text_sha256": null
     }
   ],
   "policy_decisions_pending": [],
   "change_scope": {
-    "application_code_changed": true,
-    "tests_executed": true,
+    "application_code_changed": false,
+    "tests_executed": false,
     "production_deployed": false,
-    "queue_changed": true,
-    "reason": "R111 safe code PR1404 merged 29ce55dcf0abe87cb5db906a0146faa6c3383c0c exact PR/merged 3055/0/6; ledger/queue docs reconciliation only, no new science or Locked targets"
+    "queue_changed": false,
+    "reason": "R455-112 direct published drip-coffee sensory preference study research-only; no app policy/algorithm/data capture/queue change"
   },
   "next_actions": [
     "R455-108: independently inspected original Pannusch 2024 author-affiliated kinetic extraction abstract and live ORG-02/engine; 63 sources, 143 bounded checks, 70 proposals. No universal chemistry-to-taste mapping. Docs-only exact governance pending; full publisher PDF/S019 unavailable.",
@@ -2900,39 +2947,32 @@
     "R455-107: primary Wiley full HTML 2021 Vezzulli 8-lot/24-roast/6-expert study directly checked vs ORG-03, ORG-07, engine/constants; no transfer of medium-roast optimum, 91C/1:2 or expert cupping notes to five DIC ratings. 62 curated sources/141 bounded checks/69 proposals; docs CI pending. Primary original binary/supplements and S019 pending; no #267 audit-line credit or product change.",
     "R455-109: same-commit SAFE next recipe yield display band clamps endpoints to already approved 5-200 g entry range; one source-derived defect plus 3 synthetic negative/positive test groups; exact CI/merge pending. Original S019 inaccessible, #267 direct-line work independent.",
     "R455-109: PR1385 safely merged 7300de331f3978cd866654da17f15489520f2722; exact Node22 3039/0/6 on PR and merge, 3 R109 groups pass, browser/mobile/offline/SQL/security/approval applicable CI succeeded. READY documentation PR pending; no deployment.",
-    "R455-111: source-corrected PR1404 nonforce merged 29ce55dcf0abe87cb5db906a0146faa6c3383c0c, exact PR/merged Node 3055/0/6 + applicable UX/mobile/offline/SQL/security/governance PASS. Queue READY docs PR and merged governance pending at authoring; no deployment; S019 missing."
+    "R455-111: source-corrected PR1404 nonforce merged 29ce55dcf0abe87cb5db906a0146faa6c3383c0c, exact PR/merged Node 3055/0/6 + applicable UX/mobile/offline/SQL/security/governance PASS. Queue READY docs PR and merged governance pending at authoring; no deployment; S019 missing.",
+    "R455-112: verified publisher full HTML 2023 Guinard 27+27 drip brew conditions and 57/43 sample-specific liking segments vs ORG-07/engine/constants. No espresso taste calibration or universal target; 64 sources / 148 bounded checks / 74 proposals; exact docs governance/merge pending. No #267 direct-line credit or app changes."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-111",
-    "base_development_sha": "29ce55dcf0abe87cb5db906a0146faa6c3383c0c",
+    "id": "R455-112",
+    "base_development_sha": "fac2a4ac4f61446ad5e4688fafdc305406c16ff8",
     "source_ids": [
+      "LIT-2023-GUINARD-DRIP-PREFERENCE-BCC",
+      "ORG-07",
       "site/lib/engine.js",
-      "site/lib/constants.js",
-      "site/lib/ui.js",
-      "tests/issue455-starting-yield-display-bounds.test.mjs"
+      "site/lib/constants.js"
     ],
     "claim_ids": [
-      "R455-EV-APP-073-A"
+      "R455-EV-CIT-112-A",
+      "R455-EV-CIT-112-B"
     ],
-    "number_of_curated_sources": 63,
-    "total_evidence_checks": 146,
-    "number_of_proposals": 73,
-    "review_type": "SAFE_CODE_TESTS_MERGED_AND_DOCS_READY_RECONCILIATION",
+    "number_of_curated_sources": 64,
+    "total_evidence_checks": 148,
+    "number_of_proposals": 74,
+    "review_type": "PRIMARY_PUBLISHER_FULL_HTML_EVIDENCE_AND_LIVE_LOG_RATE_RECOMMENDATION_CROSSWALK_DOCS_ONLY",
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
-    "code_or_policy_changed": true,
-    "ci_runs": [
-      42468602900,
-      42468602973,
-      42468602824,
-      42468602965,
-      42468602970,
-      42468819576,
-      42468819557,
-      42468819572
-    ],
+    "code_or_policy_changed": false,
+    "ci_runs": [],
     "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "Verify docs-only PR head and merged governance, then continue next nonoverlap high-confidence UX gap or primary citation; original S019 access still missing, #267 literal line audit independent."
+    "next_action": "Run exact-source docs PR governance and nonforce merge, verify merged SHA/checks and checkpoint Issue #455; then continue nonoverlapping espresso-first source checks or safe UX defects. Original S019 bytes unavailable."
   },
   "policy_decisions_resolved": [
     {
@@ -4439,13 +4479,32 @@
       "test_plan": "First PR Node42468365722 failed two new assertion-only expectation errors, repaired without code changes. Final PR Node42468602900 and merged Node42468819576 each 3055 PASS/0 FAIL/6 intentional SKIP, 3 R111 groups pass; PR UX/mobile/offline42468602973, SQL42468602824, security42468602965, approval42468602970 and merged UX/mobile/offline42468819557, approval42468819572 all SUCCESS; frozen603 SKIPPED; no real member or coffee taste results.",
       "release_queue": "DIC-Q-455-starting-yield-display-bounds READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
       "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-112-DRIP-CONSUMER-CLUSTER-TRANSFER-BOUNDARY",
+      "finding": "The original 2023 UC Davis study reports two sample-specific consumer preference surfaces for drip black coffee, not universal ideal brewing or espresso sensory categories. The chart could inform future research design but its cluster percentages, 18% EY location and predicted sensory maps are not transferable to this five-rating espresso app as validated predictions.",
+      "evidence": [
+        "R455-EV-CIT-112-A",
+        "R455-EV-CIT-112-B"
+      ],
+      "severity": "P3_SCIENTIFIC_GENERALIZATION_AND_USER_CONFIDENCE_GUARD",
+      "user_benefit": "Protect individualized same-coffee recommendations, multiple successful families and transparent uncertainty from invented consumer clusters, rigid extraction optima or unsupported calibrated confidence.",
+      "current_locked": "Preserve five taste inputs and all-green success; style-specific reference time/ratio, independent Turbo/Fast-Flow, original notes and history, at most one controllable next-step change; no new required EY/TDS fields.",
+      "current_app": "development fac2a4ac4f61446ad5e4688fafdc305406c16ff8; engine blob 59696aada657fb5b46ef64cf26065e6601f35dff lines 14-30, 85-124 and 313-430; constants blob 72221331ce4dffabe416eebec1ae2fceced3a095 lines 16-21, 32-55 and 65-68; original ORG-07 blob 43912d0dec0969c090d525c853f3a456136a2311 lines 169-170 and 280-286.",
+      "proposed_change": "DOCUMENT EVIDENCE ONLY: no DIC confidence percentages, extracted-TDS proxy, universal 18% EY, two consumer-type assignment or numerical taste target. Any future preference-classifier, intake field or altered rating/recipe behavior needs independently gathered espresso-specific personal outcomes, ethics/privacy review and explicit owner decision.",
+      "approval_required_for_behavior_change": false,
+      "future_owner_approval_boundary": "YES_FOR_NEW_BEHAVIOR_CAPTURE_OR_LOCKED_CONFIDENCE_TARGETS; NONE_REQUIRED_FOR_THIS_RESEARCH_ONLY_NOTE",
+      "implementation": "RESEARCH_LEDGER_PLUS_SCOPED_JOURNAL_STATUS_SOURCE_REGISTER_POINTER_ONLY; NO_APPLICATION_OR_TEST_OR_QUEUE_CHANGE",
+      "test_plan": "Publisher full-HTML methods/results/limitations checked against preserved ORG-07 and live engine/constants Git blobs. Docs-only source-bound governance expected for PR/merge; no Node/browser/SQL/Auth/member/physical A-B run performed.",
+      "release_queue": "NOT_APPLICABLE_RESEARCH_ONLY",
+      "production_deployed": false
     }
   ],
   "changeScope": {
-    "application_code_changed": true,
-    "tests_executed": true,
+    "application_code_changed": false,
+    "tests_executed": false,
     "production_deployed": false,
-    "queue_changed": true,
-    "reason": "R455-103 tested source-bound safe Log Shot prefill code PR #1326 merged 531e5fce190a696f52f83326d9c767570c8b3945, docs-only READY reconciliation pending exact governance; no new science/Locked policy"
+    "queue_changed": false,
+    "reason": "R455-112 direct published drip-coffee sensory preference study research-only; no app policy/algorithm/data capture/queue change"
   }
 }
