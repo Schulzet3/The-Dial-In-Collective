@@ -8405,5 +8405,55 @@
     "production_writes": false,
     "baseline_complete": false,
     "next": "pg_trigger internal ordinal 81/472, anchored ascending OID (last reviewed 17188)"
+  },
+  "provider_internal_fk_trigger_run82": {
+    "state": "472_OF_472_FULL_VISIBLE_INTERNAL_FK_TRIGGER_DECLARATIONS_REVIEWED_NATIVE_UNVERIFIED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "development_parent_sha": "fa2678ed2144913eb6b5b0461dd0c1fbc56d210f",
+    "provider_fingerprint": "05f53eea3e4a513bb33eff95c3b56ecd",
+    "previously_reviewed": 80,
+    "newly_reviewed": 392,
+    "total": 472,
+    "ordinals": [
+      81,
+      472
+    ],
+    "first_oid": 17210,
+    "last_oid": 20211,
+    "unique_foreign_keys": 98,
+    "actions": {
+      "RI_FKey_cascade_del": 47,
+      "RI_FKey_noaction_upd": 98,
+      "RI_FKey_check_ins": 98,
+      "RI_FKey_check_upd": 98,
+      "RI_FKey_noaction_del": 43,
+      "RI_FKey_setnull_del": 8
+    },
+    "schemas": {
+      "auth": 84,
+      "storage": 20,
+      "private": 70,
+      "public": 218
+    },
+    "deferrable_trigger_count": 12,
+    "self_referencing_foreign_keys": [
+      "coffees/coffees_merged_into_id_fkey",
+      "grinder_calibrations/grinder_calibrations_owner_id_setup_id_previous_calibratio_fkey"
+    ],
+    "per_object_source_raw_sql_hash_and_verdict": true,
+    "confirmed_metadata_defects": 0,
+    "source_fixes": 0,
+    "receipt_paths": [
+      "docs/audits/issue509-provider-internal-fk-triggers-081-136-20261108-run82.json",
+      "docs/audits/issue509-provider-internal-fk-triggers-137-192-20261108-run82.json",
+      "docs/audits/issue509-provider-internal-fk-triggers-193-248-20261108-run82.json",
+      "docs/audits/issue509-provider-internal-fk-triggers-249-304-20261108-run82.json",
+      "docs/audits/issue509-provider-internal-fk-triggers-305-360-20261108-run82.json",
+      "docs/audits/issue509-provider-internal-fk-triggers-361-416-20261108-run82.json",
+      "docs/audits/issue509-provider-internal-fk-triggers-417-472-20261108-run82.json"
+    ],
+    "production_writes": false,
+    "baseline_complete": false,
+    "next": "Next distinct unreviewed pg_catalog/provider declarations; drift; native compiled code, hosted JWT/Auth/API #96, withheld settings UNVERIFIED"
   }
 }
