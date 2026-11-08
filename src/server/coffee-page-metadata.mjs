@@ -36,6 +36,7 @@ import {selectedCurrentFarmGrowingLocality} from './coffee-selected-farm-growing
 import {selectedCurrentFarmCountryLocality} from './coffee-selected-farm-country-locality.mjs';
 import {selectedCurrentFarmVolcanoRegion} from './coffee-selected-farm-volcano-region.mjs';
 import {selectedCountryFirstCurrentRegion} from './coffee-country-first-current-region.mjs';
+import {selectedDottedTitleCountryRegion} from './coffee-dotted-title-region.mjs';
 import {selectedProcessingSiteNotFarmOrigin} from './coffee-processing-site-origin-guard.mjs';
 import {selectedCurrentColombianDepartmentOrigin} from './coffee-selected-department-origin.mjs';
 import {selectedCurrentNamedMicroLotSector} from './coffee-selected-microlot-sector-origin.mjs';
@@ -2305,6 +2306,26 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     field:'origin_context',label:'Selected processing facility address (review only)',
     value:site.quote.slice(0,400),source_url,source_type:'html',
     section:'Exact selected product processing description; noncanonical'
+   });
+  }
+ }
+
+ // Exact current selected H1 "COFFEE. COUNTRY. REGION | FLAVORS" carries a
+ // literal regional origin separately from its flavor suffix. Require the
+ // already accepted producing country, a bounded selected H1 matching name
+ // and no competing product title/current origin conflict. Do not use SEO,
+ // URL slugs, related-products headings or historic product prose.
+ if(fields.origin&&!conflicts.has('origin')){
+  const dotted=selectedDottedTitleCountryRegion({
+   name:fields.name,origin:fields.origin,blocks:productCoffeeProse(canonicalProduct,clean)
+  });
+  if(dotted){
+   rememberCoffeeReviewCandidate(fields,'origin',fields.origin,'Broader current selected country');
+   fields.origin=dotted.value;
+   if(source_facts.length<384)source_facts.push({
+    field:'origin',label:'Exact selected dotted title growing region',
+    value:dotted.quote.slice(0,520),source_url,source_type:'html',
+    section:'Exact selected current product H1, country and locality'
    });
   }
  }
