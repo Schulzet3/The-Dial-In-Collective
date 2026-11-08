@@ -26,6 +26,7 @@ import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
 import {withoutNaturalDecaffeinationModifier,recordCoffeeProcessingClaim,reconcileCoffeeProcessingClaims} from './coffee-processing-evidence.mjs';
 import {inferDecaffeinationMethod} from './coffee-decaffeination-method.mjs';
+import {withoutStandaloneCoffeeSpeciesPrefix} from './coffee-cultivar-species-prefix.mjs';
 import {collectCoffeeSourceFacts,collectStructuredCoffeeSourceFacts,collectCoffeePageMetaSourceFacts,collectCoffeePageGuidanceFacts,mergeCoffeeSourceFacts,reconcileSelectedCoffeeReviewActorRoles} from './coffee-source-facts.mjs';
 import {collectSupplementaryCoffeePageFacts} from './coffee-supplementary-source-evidence.mjs';
 import {selectedCurrentCoffeeReleaseBadge,selectedStructuredCoffeeEvidence,selectedPageCoffeeEvidence,explicitlyRotatingCoffeeOrigin} from './coffee-selected-source-evidence.mjs';
@@ -442,6 +443,10 @@ function normalized(field,value,{allowFlavorProse=false,allowAnonymousProducer=f
  if(field==='variety'){
   const marketed=s.match(/^(.{2,140}?),\s+(?:celebrated|renowned|prized|known|regarded|considered)\b/i);
   if(marketed&&explicitCoffeeVarietyList(marketed[1]))s=marketed[1].replace(/^100\s*%\s*/,'').trim();
+  // Exact current #456 lists a *species* followed by three independently
+  // printed cultivars. Exclude only this taxonomy prefix from the cultivar
+  // field; never invent or remove unsupported source varieties.
+  s=withoutStandaloneCoffeeSpeciesPrefix(s);
  }
  // A proved current unnamed cooperative is a literal supplier role. Bare
  // label echoes remain invalid everywhere else.
