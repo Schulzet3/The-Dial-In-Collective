@@ -893,6 +893,23 @@
       "source_bytes_sha256": null,
       "source_byte_caveat": "Original PDF visible in manufacturer-hosted web viewer with page screenshots. Direct HTTP download into research container failed due unavailable DNS/network, so no byte hash or offline full-file archival assertion. Document may change; ref/page provenance pinned. Does not confer S019 or nine author-report citation certification.",
       "claims_verified_externally": "Guide page 20 says pressure programmed Strada gear pump must raise flow to maintain pressure when puck resistance falls, and reduce flow when resistance rises after grind/dose changes. Pages 22-25 chart a 12 bar peak Golden Profile and historical shop examples with lower 6 bar peak for higher-solubility/darker and 9 bar for intermediate coffees; author says one profile is not best for every coffee. These are machine-specific practitioner examples without presented trial n, blinded sensory, uncertainty or general brew-pressure optimum."
+    },
+    {
+      "id": "LIT-2024-MENDEZ-HARPER-MATTER-TRIBO",
+      "type": "peer_reviewed_primary_coffee_grinding_electrostatic_experiment",
+      "title": "Moisture-controlled triboelectrification during coffee grinding",
+      "authors": "Joshua Mendez Harper; Connor S. McDonald; Elias J. Rheingold; Lena C. Wehn; Robin E. Bumbaugh; and coauthors",
+      "published": "2024-01-03",
+      "journal": "Matter 7(1), 266-283",
+      "doi": "10.1016/j.matt.2023.11.005",
+      "url": "https://pure.kaist.ac.kr/en/publications/moisture-controlled-triboelectrification-during-coffee-grinding/",
+      "alternate_first_party_url": "https://pdxscholar.library.pdx.edu/ece_fac/770/",
+      "access": "DIRECT_AUTHOR_INSTITUTION_KAIST_FULL_BIBLIOGRAPHY_AND_ORIGINAL_ABSTRACT_20261108; AUTHOR_INSTITUTION_PORTLAND_STATE_ABSTRACT_AND_RIGHTS; PUBLISHER_FULL_TEXT_UNAVAILABLE_HTTP403",
+      "review_status": "FOCUSED_ORIGINAL_AUTHOR_INSTITUTION_ABSTRACT_ONLY; EXPERIMENTAL_RAW_DATA_FIGURES_EXACT_DOSE_MOISTURE_NUMBERS_FULL_TEXT_AND_BINARY_HASH_UNVERIFIED",
+      "evidence_grade": "PEER_REVIEWED_ORIGINAL_MECHANISTIC_COFFEE_GRINDING_STUDY_FROM_FIRST_PARTY_AUTHOR_UNIVERSITY_SUMMARY; NO_BLINDED_DIC_SENSORY_VALIDATION",
+      "claims_verified_externally": "Authors report roast shade and grind coarseness influence electrical charge, residual bean moisture can change charge magnitude and polarity, and external water reduced charge/clumping and altered espresso flow in studied conditions. They describe a likely taste implication but not independently verified universal taste improvement or grinder-specific adjustment magnitude.",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Primary manuscript and figures not obtained or hashed. The independent 2024 iScience mitigation paper DOI 10.1016/j.isci.2024.110639 is a DISTINCT follow-on experiment already indexed as LIT-2024-RDT-ISCIENCE; do not attribute its >=15% darker-roast espresso beverage-concentration measurement to this Matter abstract."
     }
   ],
   "evidence_checks": [
@@ -2679,17 +2696,51 @@
       ],
       "owner_approval": false,
       "production_deployed": false
+    },
+    {
+      "id": "R455-EV-CIT-106-A",
+      "source": "Original grinder study ORG-09 Git blob 1e1b8bbef0ecb05ed0b20195191bcad26663cf0d lines 212-231; Mendez Harper et al. Matter 2024 DOI 10.1016/j.matt.2023.11.005; original KAIST peer-review record / institution-hosted full abstract",
+      "primary_sources": [
+        "https://pure.kaist.ac.kr/en/publications/moisture-controlled-triboelectrification-during-coffee-grinding/",
+        "https://pdxscholar.library.pdx.edu/ece_fac/770/"
+      ],
+      "claim": "The authors independently report that roast color, grinding coarseness and residual internal coffee moisture affect generated electrostatic charge; moisture can change charge magnitude and polarity. The original report's mechanistic coupling is qualitatively supported in those samples, not a universal static polarity, RPM-to-fines rule, grinder correction or constant.",
+      "grade": "AUTHOR_AFFILIATED_KAIST_FIRST_PARTY_PEER_REVIEWED_ARTICLE_ABSTRACT; FULL_PUBLISHER_METHODS_EFFECT_SIZES_REPLICATIONS_NOT_READ",
+      "current_app": "Current development source 49fdfcb9d8cb830e2a033c935b0defbb7827c270 engine 3823b70b0a954a9a4182b45de11d667cfe1c98a4 / model 0c47c49b9fbc07def0315526cd4d9746c5be35df: feed mode, calibrated grind, actual dose, five tastes recorded separately; no static charge measurement or universal electrical correction.",
+      "result": "RESEARCH_MECHANISM_BOUNDED; NO_PRODUCT_DATA_CAPTURE_OR_GRIND_ADVICE_CHANGE",
+      "owner_approval": false,
+      "original_source_sha": "49fdfcb9d8cb830e2a033c935b0defbb7827c270",
+      "original_report_git_blob_sha": "1e1b8bbef0ecb05ed0b20195191bcad26663cf0d",
+      "publisher_full_text_sha256": null
+    },
+    {
+      "id": "R455-EV-CIT-106-B",
+      "source": "Original grinder report ORG-09 Git blob 1e1b8bbef0ecb05ed0b20195191bcad26663cf0d lines 218-231, author KAIST institutional abstract; compare distinct already-reviewed R455-EV-CIT-039-A/B for separate follow-on iScience charge-mitigation paper",
+      "primary_sources": [
+        "https://pure.kaist.ac.kr/en/publications/moisture-controlled-triboelectrification-during-coffee-grinding/",
+        "https://pdxscholar.library.pdx.edu/ece_fac/770/",
+        "https://doi.org/10.1016/j.isci.2024.110639"
+      ],
+      "claim": "Matter study's abstract says added water suppresses charge/clumping and can produce different espresso flow; it speculates different taste profiles. It does NOT present in accessible abstract any blinded preference trial, cross-grinder calibration or a numeric moisture/slow-feed response correction. The >=15% darker-roast concentration statistic belongs to the separate 2024 iScience mitigation study, NOT a quantitative universal conclusion of the Matter abstract.",
+      "grade": "ORIGINAL_AUTHOR_UNIVERSITY_ABSTRACT_BOUND_ONLY; SENSORY_AND_NUMERIC_TRANSFER_UNVERIFIED; DISTINCT_STUDIES_DISAMBIGUATED",
+      "current_app": "No explicit RDT/water capture or automatic drink-concentration prior. Existing user-selected slow/standard feed and grinder version/dose boundaries remain owner Locked.",
+      "result": "NO_SPECULATIVE_RDT_STATIC_TO_TASTE_OR_SLOW_FEED_AUTOMATIC_RECOMMENDATION",
+      "owner_approval": false,
+      "original_source_sha": "49fdfcb9d8cb830e2a033c935b0defbb7827c270",
+      "original_report_git_blob_sha": "1e1b8bbef0ecb05ed0b20195191bcad26663cf0d",
+      "publisher_full_text_sha256": null
     }
   ],
   "policy_decisions_pending": [],
   "change_scope": {
-    "application_code_changed": true,
-    "tests_executed": true,
+    "application_code_changed": false,
+    "tests_executed": false,
     "production_deployed": false,
-    "queue_changed": true,
-    "reason": "R455-105 SAFE physically measured visible-feedback eligibility PR1347 merged and exact CI; docs-only READY now being reconciled; Locked unchanged."
+    "queue_changed": false,
+    "reason": "R455-106 original Matter 2024 author-institution source verification; two bounded checks and research-only transfer guard, no runtime/Locked/queue changes"
   },
   "next_actions": [
+    "R455-106: Matter 2024 original coffee electrostatics first-party author institution abstracts verified for two bounded mechanisms; source 61/139 evidence/68 proposals, publisher full manuscript/unhashed and no numeric taste certification. Distinct from iScience RDT study; no app policy change. Next fresh source read for independently verified narrow UX/science gap, S019 unavailable; #267 independent literal review.",
     "R455-104 code PR #1334 merged b9774048e8136aadfc900d5f8bb521fd579f6478; head Node22 3008/0/6, merged Node22 3009/0/6, all applicable UI/mobile/offline/a11y/SQL/security/governance successes; 3 R104 positive/negative tests PASS; queue READY development-only after docs reconciliation, no deployment; 60 source identities/136 bounded checks/66 proposals, S019 inaccessible, #267 no literal credit. Continue distinct safe finding.",
     "R455-103: SAFE Log Shot measured-prefill consistency PR #1326 nonforce merged 531e5fce190a696f52f83326d9c767570c8b3945; exact tested/merged engine, test and same-commit journal blobs identical. Node22 3005 PASS/0 FAIL/6 SKIP both, applicable UX/browser/mobile/approval/SQL/security success, original603 SKIPPED. Queue READY development only on docs reconciliation, NOT DEPLOYED. 60 source identities/135 bounded checks/65 proposals. S019 unreviewed, #267 no literal credit. Next fresh source and distinct finding.",
     "R455-097 verified code PR #1276 exact merge 028e2bd2db3e6cbc5931a95b82d9217cab38c439; 2984 PASS/0 FAIL/6 SKIP PR head/merged retry (first merged Node parser stress timed out in unrelated extractor; second attempt full Node and lint PASS), applicable UX/mobile/offline, PR-head SQL/security and governance; archived context mismatch only, legacy missing unchanged, development READY, no deploy. 58 sources/125 evidence checks/59 proposals, S019 inaccessible, no #267 line review.",
@@ -4155,6 +4206,27 @@
       "implementation": "CODE_PR1347_NONFORCE_SQUASH_MERGED_3c21a137baf37ed7594937a56ee656e50a4a987f_SAME_COMMIT_JOURNAL_QUEUE_TESTING_AND_DOCS_READY_RECONCILIATION",
       "test_plan": "Three negative/positive/physical endpoints/context/immutability direct-module tests. Exact PR-head and integrated Node22 3019 PASS, 0 FAIL, 6 SKIP, mobile/browser/offline, isolated SQL/security/governance accepted. No published/member data or actual espresso outcomes. Original603 not run.",
       "release_queue": "DIC-Q-455-feedback-physical-context READY_DEVELOPMENT_ONLY",
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-106-COFFEE-STATIC-MOISTURE-TRANSFER-BOUNDARY",
+      "finding": "A distinct peer-reviewed 2024 Matter mechanistic coffee-grinding study supports moisture/roast/grind-dependent static and changed espresso flow in tested conditions, but does not establish a transferable per-grinder correction, slow-feed equivalence, sensory preference or RDT water dose from accessible original abstract.",
+      "evidence": [
+        "R455-EV-CIT-106-A",
+        "R455-EV-CIT-106-B",
+        "R455-EV-CIT-039-A",
+        "R455-EV-CIT-039-B"
+      ],
+      "severity": "P3_RESEARCH_INFERENCE_AND_PRODUCT_CONFIDENCE_GUARD",
+      "user_benefit": "Keep single-variable next-shot guidance actionable without inventing moisture-based grinder corrections, universal yield changes or unsupported taste confidence.",
+      "current_locked": "All five separate tastes; measured same-coffee/history; independently selected Slow Feed and Standard Feed, grinder calibration/version and espresso range, one controllable change; preserve private history and no new member input without owner approval.",
+      "current_app": "development 49fdfcb9d8cb830e2a033c935b0defbb7827c270 engine 3823b70b0a954a9a4182b45de11d667cfe1c98a4, model 0c47c49b9fbc07def0315526cd4d9746c5be35df; RDT charge/moisture not measured or modelled; separate existing feedMode and grinder calibration",
+      "proposed_change": "RESEARCH ONLY: retain current safe engine and UX unchanged. Do not transform an author abstract's inferred taste consequence or separate iScience dark-roast TDS observation into an app-wide RDT formula, slow-feed effect size, required user-field or evidence/confidence promise. Consider future properly controlled same-grinder/same-coffee trials before policy options.",
+      "approval_required_for_behavior_change": false,
+      "future_owner_approval_boundary": "YES_ONLY_IF_ADDING_NEW_RDT_FIELD_OR_NUMERIC_MOISTURE_CORRECTION_OR_TASTE_MODEL; NO_ACTIONABLE_OWNER_CHOICE_NOW",
+      "implementation": "SOURCE_CLAIM_LEDGER_SCOPED_JOURNAL_AND_STATUS_ONLY; NO_CODE_TEST_SQL_AUTH_CI_CONFIG_OR_RELEASE_QUEUE_CHANGE",
+      "test_plan": "KAIST original institutional abstract and Portland State first-party metadata compared to exact original #09 lines 212-231 and current live feed/calibration model. Docs-only GitHub governance required; Node22/browser/mobile/offline/SQL/real-member and physical cup tests not performed; publisher manuscript and S019 unresolved.",
+      "release_queue": "NOT_APPLICABLE_RESEARCH_ONLY",
       "production_deployed": false
     }
   ],
