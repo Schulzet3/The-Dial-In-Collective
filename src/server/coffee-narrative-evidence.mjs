@@ -395,7 +395,7 @@ function foundGrower(paragraphs,name='',relationshipGroups=[paragraphs],fields={
     const value=namedList[1].trim();found.set(value.normalize('NFKC').toLowerCase(),value);
    }
   }
-  for(const match of sentence.matchAll(/\b(?:grown(?:\s+and\s+(?:fully\s+)?processed)?|produced|cultivated|harvested|sourced|collected)\s+(?:(?:directly|exclusively)\s+)?(?:by|from|through|on|in)\s+(?:the\s+)?([^.!?;]{3,155}?)(?=\s+(?:who|which|that|where|at\s+(?:altitudes?|elevations?)|rooted|located|using|through|throughout|within|near|on|in the|and (?:is|was|has|have|the|a))\b|,\s+(?!\d)|[.!?;]|$)/gi)){
+  for(const match of sentence.matchAll(/\b(?:grown(?:\s+and\s+(?:fully\s+)?processed)?|produced|cultivated|harvested|sourced|collected)\s+(?:(?:directly|exclusively)\s+)?(?:by|from|through|on|in)\s+(?:the\s+)?([^.!?;]{3,155}?)(?=\s+(?:who|which|that|where|at\s+(?:altitudes?|elevations?)|rooted|located|nestled\s+(?:in|near|by)|using|through|throughout|within|near|on|in the|and (?:is|was|has|have|the|a))\b|,\s+(?!\d)|[.!?;]|$)/gi)){
    const candidate=collectiveCredit(match[1]);
    if(candidate)collectives.set(candidate.normalize('NFKC').toLowerCase(),candidate);
   }
