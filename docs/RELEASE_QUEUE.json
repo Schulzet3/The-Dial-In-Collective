@@ -8700,7 +8700,7 @@
       "id": "DIC-Q-455-feedback-physical-context",
       "issue": 455,
       "title": "Exclude physically unloggable archived rows from visible Next Shot feedback source",
-      "state": "TESTING",
+      "state": "READY",
       "scope_paths": [
         "site/lib/ui.js"
       ],
@@ -8708,15 +8708,25 @@
         "R105 source reproduction: newest invalid-dose/yield/time/grind/temp archived row previously selected by lastRecipeContextShot despite engine filtering invalid evidence; synthetic cases only.",
         "SAFE existing entry bounds and espresso range applied to feedback source selector; preserves all original notes/tastes/history and context.",
         "Three positive/negative/context/immutable Node real-module test groups authored; CI and merge UNEXECUTED at authoring. Original603 SKIPPED.",
-        "Initial PR-head approval run 42443725954 FAILED mandatory queue shape: merged_source_sha key omitted. Same-source repair supplies explicit null for unmerged TESTING candidate; original run remains FAILED, retest new head."
+        "Initial PR-head approval run 42443725954 FAILED mandatory queue shape: merged_source_sha key omitted. Same-source repair supplies explicit null for unmerged TESTING candidate; original run remains FAILED, retest new head.",
+        "Initial approval run42443725954 FAILED omitted mandatory merged_source_sha field in TESTING. Fixed exact source with explicit null at head eeb21bb8ca8062ba2a80cba9210875df518afd57, new exact approval42443800118 PASS; original FAIL retained in journal.",
+        "Code PR #1347 tested head eeb21bb8ca8062ba2a80cba9210875df518afd57; Node22/lint/build42443800116 3019 PASS/0 FAIL/6 intentional SKIP (all three R105 tests PASS); mobile/browser/offline/a11y 42443800111, SQL42443800161, security42443800237, governance42443800118 SUCCESS; frozen60342443800159 SKIPPED.",
+        "Non-force squash merge 3c21a137baf37ed7594937a56ee656e50a4a987f readback UI/test/TESTING queue/journal Git blobs exactly match tested source; exact merged Node22/lint/build42444001155 3019/0/6; UX/mobile/browser/offline42444001085 and approval42444001126 SUCCESS. No physical member espresso outcome or hosted Auth/provider writes."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Risk-proportionate exact source CI, nonforce integration and merged verification pending"
+      "ci_runs": [
+        42443800116,
+        42443800111,
+        42443800161,
+        42443800237,
+        42443800118,
+        42444001155,
+        42444001085,
+        42444001126
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Development-only UI correctness; no new scientific/numeric policy or production write.",
-      "merged_source_sha": null
+      "notes": "Development-only UI correctness; no new scientific/numeric policy or production write.\nR455-105 source-bound READY in development only. No release authorization, branch promotion, or deployment. Exact original 603 benchmark SKIPPED.",
+      "merged_source_sha": "3c21a137baf37ed7594937a56ee656e50a4a987f"
     }
   ],
   "history": [

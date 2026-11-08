@@ -2654,6 +2654,31 @@
       ],
       "owner_approval": false,
       "production_deployed": false
+    },
+    {
+      "id": "R455-EV-APP-070-A",
+      "source": "original site/lib/ui.js Git blob 06e1944b4f673c15901e1c411f4963218e775b84; site/cloud/main.js browse/feedback invocation; measured evidence in site/lib/engine.js blob 3823b70b0a954a9a4182b45de11d667cfe1c98a4; fixed site/lib/ui.js blob 60539853a32f63e1c1c21cc0859d0a68be4281d9; test blob 8576b022e37b19cf287de46cbc27888a651978d2",
+      "claim": "Newest same-recipe archived timestamp could drive visible next-shot feedback even if dose/yield/time, grinder or recorded temperature were physically unloggable, contrary to existing recommendation evidence filtering. UI now screens against exactly preexisting physical entry bounds and current espresso range before choosing the latest, leaving all history, notes, five recorded ratings, distinct styles, and single-control logic unchanged.",
+      "grade": "DETERMINISTIC_DIRECT_CURRENT_SOURCE_NEGATIVE_POSITIVE_BOUNDARY_AND_IMMUTABILITY_REGRESSION; NO_REPORTED_REAL_MEMBER_INCIDENT_OR_MEASURED_ESPRESSO_QUALITY",
+      "current_app": "Merged safe UI source uses existing CONFIG.bounds and finite checks for feedback candidate; complete historical records persist; does not adjust any taste or style target.",
+      "source_parent_sha": "ed9a4bdc1a509bcfa944327567df3036b3d833c7",
+      "code_merge_sha": "3c21a137baf37ed7594937a56ee656e50a4a987f",
+      "original_blob_sha": "06e1944b4f673c15901e1c411f4963218e775b84",
+      "corrected_blob_sha": "60539853a32f63e1c1c21cc0859d0a68be4281d9",
+      "result": "SAFE_LOCKED_COMPATIBLE_PR1347_MERGED_READY_IN_DEVELOPMENT_NOT_DEPLOYED",
+      "tests": "Three synthetic real-module regressions R105 pass on exact PR head and merged. Head Node22 3019 PASS/0 FAIL/6 intentional SKIP; merged Node22 3019 PASS/0 FAIL/6 intentional SKIP; head browser/mobile/offline, isolated SQL/security/governance and merged browser/mobile/governance all SUCCESS. Original603 SKIPPED, not PASS. Initial approval 42443725954 failed for missing TESTING queue merged_source_sha field, repaired to explicit null and green exact updated head.",
+      "ci_runs": [
+        42443800116,
+        42443800111,
+        42443800161,
+        42443800237,
+        42443800118,
+        42444001155,
+        42444001085,
+        42444001126
+      ],
+      "owner_approval": false,
+      "production_deployed": false
     }
   ],
   "policy_decisions_pending": [],
@@ -2662,7 +2687,7 @@
     "tests_executed": true,
     "production_deployed": false,
     "queue_changed": true,
-    "reason": "R455-104 SAFE Shot History card fix merged PR1334, no Locked policy/SQL/privacy change; docs-only READY reconciliation."
+    "reason": "R455-105 SAFE physically measured visible-feedback eligibility PR1347 merged and exact CI; docs-only READY now being reconciled; Locked unchanged."
   },
   "next_actions": [
     "R455-104 code PR #1334 merged b9774048e8136aadfc900d5f8bb521fd579f6478; head Node22 3008/0/6, merged Node22 3009/0/6, all applicable UI/mobile/offline/a11y/SQL/security/governance successes; 3 R104 positive/negative tests PASS; queue READY development-only after docs reconciliation, no deployment; 60 source identities/136 bounded checks/66 proposals, S019 inaccessible, #267 no literal credit. Continue distinct safe finding.",
@@ -2685,47 +2710,48 @@
     "R455-099: newly independently source-checked Kuhn 2017 TUM first-party peer-reviewed abstract against preserved original report #08 and already-reviewed Vaca Guerra 2023 dry-bed compression abstract: analyte kinetics vs porosity/permeability are different endpoints; no universal tamp force, recipe adjustment or taste gain established. Added one source, two bounded checks and one research-only proposal. No runtime/test/queue/Locked change; original full text and S019 remain pending.",
     "R455-100: original #09 burr alignment claim checked against Uman 2016 primary NIH full Methods; evidence 100-A/B, research-only proposal 100; 59 sources/130 checks/62 proposals. No quantifiable aligned-vs-misaligned/retention/espresso taste effect or owner-approved new alignment capture. Docs CI/merge pending, S019 inaccessible, #267 audit unchanged.",
     "R455-101: first-party La Marzocco Strada EP rev1.1 original manufacturer PDF visually verified pp20,22-25, not full PDF byte-hashed; source MFR-LA-MARZOCCO-STRADA-EP-GUIDEBOOK-REV11 with checks R455-EV-CIT-101-A/R455-EV-CIT-101-B and proposal R455-PROP-101-STRADA-PRESSURE-FLOW-EVIDENCE-SCOPE. Pressure-programmed pump varies flow with puck resistance and manufacturer 12/9/6-bar examples are exploratory machine-specific, NOT universal taste/style optima. 60 source identities, 132 evidence checks, 63 proposals; no application, Locked policy or release change. Docs-only exact governance and nonforce merge pending. S019 remains inaccessible, #267 gets no line-by-line credit.",
-    "R455-102: independently cross-checked MDPI-indexed primary Choi et al. 2025 methods/results/conclusions (direct HTML 429; full publisher bytes unverified) against original #01 and current Locked rating/recipe code. Experimental 15-17g and 70-90mL cups are protocol standards, not universal DIC dose; expert CATA three-replicate repeatability across variable country brew conditions is not five-slider app validity. Source identity unchanged: 60 sources, 134 bounded checks, 64 proposals; no code/Locked rule/queue changes. Direct original PDF and S019 remain inaccessible, docs-only PR governance pending."
+    "R455-102: independently cross-checked MDPI-indexed primary Choi et al. 2025 methods/results/conclusions (direct HTML 429; full publisher bytes unverified) against original #01 and current Locked rating/recipe code. Experimental 15-17g and 70-90mL cups are protocol standards, not universal DIC dose; expert CATA three-replicate repeatability across variable country brew conditions is not five-slider app validity. Source identity unchanged: 60 sources, 134 bounded checks, 64 proposals; no code/Locked rule/queue changes. Direct original PDF and S019 remain inaccessible, docs-only PR governance pending.",
+    "R455-105: SAFE visible feedback physical eligibility fixed via PR1347, merge 3c21a137baf37ed7594937a56ee656e50a4a987f, 3 real-module tests PASS, exact Node22 3019/0/6; research ledger 60 sources/137 checks/67 proposals. Original S019 remains inaccessible; #267 line audit independent."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-104",
-    "base_development_sha": "130aea562358998354d6dcffdbcd49f00412fa75",
-    "merged_code_sha": "b9774048e8136aadfc900d5f8bb521fd579f6478",
-    "verified_integrated_source_sha": "b9774048e8136aadfc900d5f8bb521fd579f6478",
+    "id": "R455-105",
+    "base_development_sha": "ed9a4bdc1a509bcfa944327567df3036b3d833c7",
+    "merged_code_sha": "3c21a137baf37ed7594937a56ee656e50a4a987f",
+    "verified_integrated_source_sha": "3c21a137baf37ed7594937a56ee656e50a4a987f",
     "source_ids": [
-      "site/cloud/shot_card.js",
+      "site/lib/ui.js",
+      "site/cloud/main.js",
       "site/lib/engine.js",
-      "tests/issue455-shot-history-measured-make-current.test.mjs",
-      "docs/workstreams/issue-455.md"
+      "tests/issue455-feedback-physical-context.test.mjs"
     ],
     "claim_ids": [
-      "R455-EV-APP-069-A"
+      "R455-EV-APP-070-A"
     ],
     "number_of_curated_sources": 60,
-    "total_evidence_checks": 136,
-    "number_of_proposals": 66,
-    "review_type": "BOUNDED_SAFE_HISTORY_CARD_ACTION_VS_ENGINE_MEASURED_ELIGIBILITY",
+    "total_evidence_checks": 137,
+    "number_of_proposals": 67,
+    "review_type": "BOUNDED_SAFE_LOG_SHOT_FEEDBACK_ARCHIVED_PHYSICAL_ELIGIBILITY",
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
     "code_or_policy_changed": true,
     "ci_runs": [
-      42439853513,
-      42439853607,
-      42439853592,
-      42439853599,
-      42439853547,
-      42440045921,
-      42440045915,
-      42440045951
+      42443800116,
+      42443800111,
+      42443800161,
+      42443800237,
+      42443800118,
+      42444001155,
+      42444001085,
+      42444001126
     ],
     "node_tests": {
       "head": {
-        "pass": 3008,
+        "pass": 3019,
         "fail": 0,
         "skip": 6
       },
       "merged": {
-        "pass": 3009,
+        "pass": 3019,
         "fail": 0,
         "skip": 6
       },
@@ -2733,7 +2759,7 @@
     },
     "original603": "SKIPPED_NOT_PASS",
     "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "After docs-only PR merge and governance confirmation, continue distinct primary research paper/source or bounded Log Shot→Rate→Recommendation UX defect; #267 has independent literal audit ownership."
+    "next_action": "Recover next live SHA; direct inspect different recommendation UX gap or primary source; preserve separation from #267/#33/#96."
   },
   "policy_decisions_resolved": [
     {
@@ -4112,6 +4138,23 @@
       "implementation": "VERIFIED_CODE_PR1334_NONFORCE_SQUASH_MERGED_b9774048e8136aadfc900d5f8bb521fd579f6478; SAME_COMMIT_JOURNAL; FOLLOWUP_RELEASE_QUEUE_READY_NOT_DEPLOYED",
       "test_plan": "Head Node22 3008/0/6 and merged Node22 3009/0/6, both exact-source 3 new tests PASS; scoped UX/mobile/offline/a11y/SQL/security/governance SUCCESS; frozen603 SKIPPED; real member and cup outcomes untested.",
       "release_queue": "DIC-Q-455-shot-history-measured-make-current READY_DEVELOPMENT_ONLY",
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-105-FEEDBACK-PHYSICAL-CONTEXT",
+      "finding": "The Latest Shot feedback panel selected an imported unloggable historical shot as freshest same-recipe source even when the recommendation engine excluded that row from measured personal evidence.",
+      "evidence": [
+        "R455-EV-APP-070-A"
+      ],
+      "severity": "P2_SAFE_UI_CORRECTNESS_FEEDBACK_SOURCE",
+      "user_benefit": "Stop visibly presenting next-shot advice about an impossible archived reading, prefer the latest actually loggable same-recipe measurement, without hiding or changing original private history.",
+      "current_locked": "Keep all five taste ratings, green success independent of style-window targets, one controllable adjustment, original shots/notes, Turbo vs Fast-Flow, basket/feed/calibration, espresso grinder version bounds, privacy and offline history.",
+      "current_app": "Original UI blob 06e1944b4f673c15901e1c411f4963218e775b84 had timestamp/context gate only; corrected UI blob 60539853a32f63e1c1c21cc0859d0a68be4281d9 now additionally requires existing physical bounds, finite grinder and optional temperature; exact code merge 3c21a137baf37ed7594937a56ee656e50a4a987f.",
+      "proposed_change": "SAFE IMPLEMENTED: filter physically unloggable imported reference candidates in lastRecipeContextShot with existing CONFIG dose/yield/time/temperature limits and current espresso grinder limits, preserving untouched original history and sensory results.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "CODE_PR1347_NONFORCE_SQUASH_MERGED_3c21a137baf37ed7594937a56ee656e50a4a987f_SAME_COMMIT_JOURNAL_QUEUE_TESTING_AND_DOCS_READY_RECONCILIATION",
+      "test_plan": "Three negative/positive/physical endpoints/context/immutability direct-module tests. Exact PR-head and integrated Node22 3019 PASS, 0 FAIL, 6 SKIP, mobile/browser/offline, isolated SQL/security/governance accepted. No published/member data or actual espresso outcomes. Original603 not run.",
+      "release_queue": "DIC-Q-455-feedback-physical-context READY_DEVELOPMENT_ONLY",
       "production_deployed": false
     }
   ],
