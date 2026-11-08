@@ -1045,6 +1045,23 @@
       "implementation_status": "RESEARCH_ONLY_NO_APP_CODE_OR_POLICY_CHANGE",
       "reviewed_date_utc": "2026-11-08",
       "full_primary_text_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7536440/"
+    },
+    {
+      "id": "LIT-2023-SCHMIEDER-ESPRESSO-EXTRACTION-KINETICS",
+      "type": "peer_reviewed_primary_controlled_espresso_extraction_chemical_kinetics",
+      "title": "Influence of Flow Rate, Particle Size, and Temperature on Espresso Extraction Kinetics",
+      "authors": "Benedikt K. L. Schmieder; Verena B. Pannusch; Lara Vannieuwenhuyse; Heiko Briesen; Mirjana Minceva",
+      "published": "2023-07-28",
+      "journal": "Foods 12(15), article 2871",
+      "doi": "10.3390/foods12152871",
+      "url": "https://www.mdpi.com/2304-8158/12/15/2871/pdf?version=1690540773",
+      "first_party_crosscheck": "https://www.lse.ls.tum.de/btd/news/article/new-publication-on-influence-of-flow-rate-particle-size-and-temperature-on-espresso-extraction-kinetics/",
+      "access": "DIRECT_PRIMARY_MDPI_PUBLISHER_18_PAGE_PDF_EXTRACTED_TEXT_METHODS_TABLE_RESULTS_DISCUSSION_CONCLUSIONS_20261108_AND_TUM_AUTHOR_INSTITUTION_CROSSCHECK; PDF_PAGE_SCREENSHOT_REQUEST_HTTP429",
+      "review_status": "BOUNDED_SUBSTANTIVE_PRIMARY_ORIGINAL_TEXT_PAGES_1_TO_15_SECTIONS_2_2_TO_3_3_5_AND_DISCUSSION_READ; SUPPLEMENTARY_TABLES_S1_S3_AND_RAW_REPLICATES_NOT_REANALYZED; PDF_SCREENSHOT_HTTP429",
+      "evidence_grade": "PEER_REVIEWED_CONTROLLED_SINGLE_COLOMBIA_HUILA_COFFEE_20G_DE1_FLOW_CONTROLLED_HPLC_TDS_STUDY; NOT_HUMAN_SENSORY_TEST_OR_UNIVERSAL_ESPRESSO_TASTE_POLICY",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Publisher original PDF text directly retrieved; actual binary was not downloaded or independently SHA-256 hashed. PDF screenshot attempt failed HTTP429. No claim of raw supplemental-data reanalysis or universally representative coffee/hardware.",
+      "claims_verified_externally": "Same washed Colombian Arabica and 20.00 +/-0.01 g dose, one DE1 Pro/IMS basket and Mahlkoenig E65S grinding at displayed levels 1.4/1.7/2.0; 15 face-centered DoE factor sets, triplicates except six center replicates; measured flow approximately 0.96/1.9/2.8 mL/s and measured water approximately 79.1/88.2/96.5 C. Ten fractions collected, six HPLC/TDS fractions assessed; measured trigonelline, caffeine, 5-CQA and TDS, not human taste. Across the studied domain flow effects interacted with grind and temperature; beverage mass (20/40/60g modeled cup outputs) had larger effects than individual operating settings. No universal five-taste recommendations or optimal espresso temperature established."
     }
   ],
   "evidence_checks": [
@@ -3222,6 +3239,28 @@
       "owner_approval": false,
       "test_source": "Code PR1505 head 50198f949c2c5fdb5ceebe50ffbd5aac366009eb Node22/lint42526881425 3126 PASS/0 FAIL/6 intentional SKIP, all R123 six synthetic tests PASS; mobile/Chromium/cloud/offline42526881473, isolated SQL42526881498, source security42526881439 and approval42526881429 SUCCESS; frozen60342526881435 SKIPPED not PASS. Nonforce squash merged edf2e25666c25cb0fe7e43712d4e285e389ca40c, engine/test/journal blobs identical to tested exact head; merged Node22/lint42527146096 same 3126/0/6, UX/mobile/offline42527146134, approval42527146131 SUCCESS. No member/provider or physical espresso quality tests.",
       "date": "2026-11-08"
+    },
+    {
+      "id": "R455-EV-CIT-124-A",
+      "source": "LIT-2023-SCHMIEDER-ESPRESSO-EXTRACTION-KINETICS, original Foods 2023 primary MDPI PDF pages 3-8, sections 2.2-2.8.3, DOI 10.3390/foods12152871; original TUM research page 2023-08-01 corroboration; PDF text directly inspected 2026-11-08. Original PDF binary not hashed; screenshot HTTP429.",
+      "claim": "Controlled flow/temperature/grind extraction study used one 100% washed Colombian Arabica coffee, 20g shots on one Decent DE1 Pro with IMS basket, Mahlkoenig E65S levels 1.4/1.7/2.0, 15 composite-design settings with 3 repeats except center 6, and analyzed trigonelline/caffeine/5-CQA/TDS from sampled espresso fractions. Reported set and measured flows/temperatures must not be conflated. No DIC consumer taste scores were observed.",
+      "grade": "DIRECT_PEER_REVIEWED_ORIGINAL_PDF_TEXT_METHODS_READ_AND_AUTHOR_INSTITUTION_CROSSCHECK; NOT_RAW_SUPPLEMENT_ANALYSIS_OR_TASTE_TRIAL",
+      "result": "VERIFIED_BOUNDED_STUDY_METHODS_AND_CHEMICAL_ENDPOINTS; NOT_APP_OPTIMUM",
+      "current_app": "Existing engine baseline roast/style temperature priors are owner-Locked heuristics; original user rating sliders and style boundaries are separate from studied HPLC analytes. No new capture/actuator or policy licensed.",
+      "owner_approval": false,
+      "test_source": "Read-only original publication analysis, no app code/test/CI change. PDF screenshot request HTTP429; original binary SHA-256 unavailable.",
+      "date": "2026-11-08"
+    },
+    {
+      "id": "R455-EV-CIT-124-B",
+      "source": "LIT-2023-SCHMIEDER-ESPRESSO-EXTRACTION-KINETICS primary original sections 3.2, 3.3, 3.3.5, Conclusions; Figures 4-7 and Tables 2-3 publisher text/alt figures; original TUM abstract; screenshot attempt 429.",
+      "claim": "In the experimental domain, the extracted component mass response depends jointly on flow rate and grind/temperature, and changes with modeled 20/40/60g beverage mass outweigh the individual flow/grind/temp effects. The study's chemical HPLC/TDS concentration and component-mass endpoints do not establish a universal optimum 89C setting, grinder correction, recipe time or taste preference, and cannot be mapped directly to DIC's five independent sensory ratings. Its 1:1/1:2/1:3 analytical outputs are not approval to merge or alter independent selectable Turbo/Fast-Flow styles.",
+      "grade": "DIRECT_ORIGINAL_PEER_REVIEWED_RESULTS_AND_EXPLICIT_UNCERTAINTY; ONE_COFFEE_ONE_MACHINE_NO_BLIND_TASTING",
+      "result": "RESEARCH_BOUNDARY_PRESERVE_LOCKED_PERSONAL_RECOMMENDATIONS",
+      "current_app": "site/lib/engine.js blob 26d0ffee46ad3bd5fd82ef608575ee0a0d8e0afa uses established baseline/temperatureGuidance and conditional personal same-coffee histories; no new universal numeric 'scientific' confidence or temperature target.",
+      "owner_approval": false,
+      "test_source": "Science-only evidence audit. No physical cup-outcome, app CI, provider test or original603 benchmark claimed.",
+      "date": "2026-11-08"
     }
   ],
   "policy_decisions_pending": [],
@@ -3272,42 +3311,34 @@
     "R455-117 live parent 8421c12087f88978839dc5aff973c478e19e7a1e: Santanatoglia et al. 2024 Food Chemistry original indexed methods/results/conclusion substantially cross-checked; 67 sources / 156 bounded evidence checks / 79 proposals; direct publisher HTML fetch blocked 403, PDF/raw not hashed; no espresso universal pH or sourness rule. Docs-only source-bound PR/CI/merge pending; S019 missing; zero #267 literal-line credit.",
     "R455-118 source-bound development b66dc4db6207e6a8c4363a43296d0c4b17cb2351: direct primary 2024 Smrke fines PDF experiment, Figs 2-5, VOC and single nonblinded Q-grader limits reviewed; 67 registered sources/158 checks/80 proposals. Docs-only PR and CI pending at commit authoring, no numeric/Locked/queue/code/production changes, no #267 line credit, S019 still missing.",
     "R455-120 verified source-bound PR1477 engine familyShots coffee+style identity guard and five isolated synthetic regressions, Node22 3102/0/6 both PR head and merged, applicable CI success, SAFE READY in development only, original S019 inaccessible, #267 literal review separately owned. Next: disjoint fresh research/UX increment.",
-    "R455-121 source-bound development bb71ba857bed91cd6807417b954e48292833a1b7: 2003 espresso original Wiley publisher abstract and University Navarra crosscheck, 2020 controlled drip paper original publisher-indexed methods/results and official 2021 correction, 68 sources/163 evidence checks/83 proposals. Same-commit docs-only PR/CI pending. No unverified 92 C optimum, water salts, app policy or code; no #267 line credit, S019 missing."
+    "R455-121 source-bound development bb71ba857bed91cd6807417b954e48292833a1b7: 2003 espresso original Wiley publisher abstract and University Navarra crosscheck, 2020 controlled drip paper original publisher-indexed methods/results and official 2021 correction, 68 sources/163 evidence checks/83 proposals. Same-commit docs-only PR/CI pending. No unverified 92 C optimum, water salts, app policy or code; no #267 line credit, S019 missing.",
+    "R455-124 base 64cb736981b708e41f5578cbdd2ad6eed8db1db8: Direct MDPI Foods 2023 Schmieder et al. single-coffee flow/grind/temp 15-point factorial HPLC/TDS kinetics PDF text and TUM author page checked. 69 sources/167 evidence checks/86 proposals; screenshot 429, original binary and supplemental raw data unverified. No universal temperature or five-taste transfer, no code/policy/release changes; source-bound docs PR/CI/merge pending. Standalone S019 inaccessible; zero #267 literal-line credit."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-123",
-    "base_development_sha": "55a0c4d80d934f12b91550a848c87c3b06dd4a61",
-    "merged_development_source_sha": "edf2e25666c25cb0fe7e43712d4e285e389ca40c",
+    "id": "R455-124",
+    "base_development_sha": "64cb736981b708e41f5578cbdd2ad6eed8db1db8",
+    "engine_blob_sha": "26d0ffee46ad3bd5fd82ef608575ee0a0d8e0afa",
     "source_ids": [
-      "ORG-08",
-      "DOC-MASTER-SPECIFICATION"
+      "LIT-2023-SCHMIEDER-ESPRESSO-EXTRACTION-KINETICS"
     ],
     "claim_ids": [
-      "R455-EV-APP-085-A"
+      "R455-EV-CIT-124-A",
+      "R455-EV-CIT-124-B"
     ],
     "proposal_ids": [
-      "R455-PROP-123-INVALID-ARCHIVAL-TEMP-GRIND-EVIDENCE"
+      "R455-PROP-124-ESPRESSO-EXTRACTION-FLOW-TEMP-CHEMICAL-TRANSFER-BOUNDARY"
     ],
-    "number_of_curated_sources": 68,
-    "total_evidence_checks": 165,
-    "number_of_proposals": 85,
-    "review_type": "DIRECT_LIVE_SOURCE_INVALID_TEMP_GRIND_EVIDENCE_BUG_AND_SIX_SYNTHETIC_REAL_MODULE_REGRESSIONS",
-    "code_or_policy_changed": true,
+    "number_of_curated_sources": 69,
+    "total_evidence_checks": 167,
+    "number_of_proposals": 86,
+    "review_type": "DIRECT_PRIMARY_2023_18_PAGE_ESPRESSO_CHEMICAL_EXTRACTION_METHOD_RESULTS_AND_TUM_CROSSCHECK; PDF_SCREENSHOT_HTTP429",
+    "code_or_policy_changed": false,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
-    "ci_runs": [
-      42526881425,
-      42526881473,
-      42526881498,
-      42526881439,
-      42526881429,
-      42527146096,
-      42527146134,
-      42527146131
-    ],
+    "ci_runs": [],
     "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "Recover current development and investigate distinct research/UX fact or correction after R123; preserve #33/#267/#96/#335 concurrency, never deploy."
+    "next_action": "Verify exact docs PR governance, nonforce integration and postmerge receipt. Then recover current source and continue nonoverlapping source-backed UX or research work; no deployment."
   },
   "policy_decisions_resolved": [
     {
@@ -5056,6 +5087,27 @@
       "implementation": "PR1505_NONFORCE_SQUASH_MERGED_edf2e25666c25cb0fe7e43712d4e285e389ca40c_ALL_THREE_CODE_TEST_JOURNAL_BLOBS_IDENTICAL_TO_VERIFIED_HEAD_50198f949c2c5fdb5ceebe50ffbd5aac366009eb",
       "test_plan": "R123 six synthetic direct-real-module negative/positive checks for too high/low temp, valid temp, optional null, mixed donor and Slow Feed contamination plus state immutability. PR-head and merged Node22 3126 PASS/0 FAIL/6 SKIP, lint PASS, Chromium/mobile/offline, isolated SQL, security, approval exact checks SUCCESS; frozen603 SKIPPED not PASS.",
       "release_queue_status": "DIC-Q-455-invalid-archival-temperature-grind-evidence READY_IN_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-124-ESPRESSO-EXTRACTION-FLOW-TEMP-CHEMICAL-TRANSFER-BOUNDARY",
+      "finding": "A directly reviewed peer-reviewed 2023 controlled single-coffee espresso HPLC/TDS kinetics experiment shows flow/grind/temperature interactions and dominant influence of beverage mass for studied analytes, but cannot validate universal sensory targets or automatic advice in unrelated machines/beans.",
+      "evidence": [
+        "R455-EV-CIT-124-A",
+        "R455-EV-CIT-124-B"
+      ],
+      "severity": "P3_RESEARCH_TO_PRODUCT_TRANSFER_AND_FALSE_PRECISION_GUARD",
+      "user_benefit": "Maintain honest non-universal explanatory/confidence wording while retaining personalized same-coffee five-taste learning, separate styles and actionable one-variable recommendations.",
+      "current_locked": "All five original sensory inputs, rated-green versus incomplete, one controllable change, separate Traditional/Turbo/Fast-Flow/Ristretto/Lungo, personal successful families and archived Custom, grinder/feed/version/basket, original notes/shots/private history and RLS/Community.",
+      "current_app": "Source-bound 2026-11-08 engine blob 26d0ffee46ad3bd5fd82ef608575ee0a0d8e0afa keeps user-Locked baseline TEMPS/TIMES/RATIOS, measured same-coffee temperature evidence and one-change nextAdvice; no tested new code defect for this publication.",
+      "proposed_change": "NO_APP_CHANGE: keep the original research as narrowly validated chemical/context evidence. Do not impose this experiment's displayed grinder values, flow, pressure, 89C middle point, time or derived chemical ratio as universal member taste/cup targets or add unapproved data capture. Further effect/UX proposals require specific reproducible gaps and/or owner approval.",
+      "evidence_grade": "PEER_REVIEWED_SINGLE_COFFEE_LAB_CHEMICAL_FRACTIONS_VS_UNOBSERVED_HUMAN_DIC_TASTE; PDF_VISUAL_HTTP429",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "RESEARCH_ONLY_SOURCE_AND_CLAIM_CHECKPOINT; NO_CODE_TEST_CI_POLICY_OR_QUEUE_CHANGE",
+      "test_plan": "No application code changed. Validate JSON source/backlog syntax and exact docs-only governance source checks; no empirical taste trial, auth/member test, or frozen603 certification.",
+      "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY_NO_READY_ITEM",
       "github267_literal_review_credit": 0,
       "production_deployed": false
     }
