@@ -3030,6 +3030,31 @@
       "original_source_sha": "0fdad30bb726081c275b182cb0024f6e34b4ca6e",
       "source_url": "https://decentespresso.com/img/f/2020_04_03%20Preinfusion%20flow%20rate%20-%20espresso%20roast.pdf",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-APP-078-A",
+      "source": "GitHub live development parent d1f8c83708640daf7b8306ea1af5a25a5defe676; actual site/cloud/main.js blob a5188bec750a948de9b473c60012f073affaf4fd, site/cloud/shot_card.js blob 1eef3177f882e5dbec91e8218c20b7b3a39b7c6a, site/lib/engine.js blob 3c0fae303be46e21fefd2b2ff4822227c4cf3e05; R116 real-module tests; Issues #455/#335/#267/#33/#96",
+      "claim": "Nonblank orphaned imported shot.familyId, or family ID belonging to wrong coffee/style, could pass History UI eligibility and local makeCurrent, persisting preference pointers to a nonexistent/mismatched successful recipe. No actual member record inspected; synthetic negative and positive tests prove source behavior. Original all-five-green badge, measurements, notes and history must not be rewritten.",
+      "grade": "DETERMINISTIC_CURRENT_SOURCE_AND_SYNTHETIC_POSITIVE_NEGATIVE_REGRESSION; HEAD_AND_MERGED_NODE22_3077_PASS_0_FAIL_6_INTENTIONAL_SKIP; NO_LIVE_MEMBER_DB_OR_PHYSICAL_TASTING_EVIDENCE",
+      "current_app": "History now offers Make Current only for actual matching hydrated family identity; local makeCurrent checks full family/coffee/style existence prior to preference/audit mutation. No numeric priors, taste inputs, stored-shot privacy or admin/cloud SQL changed.",
+      "result": "SAFE_LOCKED_COMPATIBLE_FIX_READY_IN_DEVELOPMENT_NOT_DEPLOYED",
+      "original_source_sha": "d1f8c83708640daf7b8306ea1af5a25a5defe676",
+      "verified_code_head_sha": "7debdc659d2d6825fcd2dbde8489ad706238a0ae",
+      "verified_merge_sha": "5d9f8a385306cd3fde199777615299aa975c800f",
+      "verified_head_runs": [
+        42491266825,
+        42491266847,
+        42491267008,
+        42491266923,
+        42491266873
+      ],
+      "verified_merged_runs": [
+        42491476786,
+        42491476801,
+        42491476762
+      ],
+      "owner_approval": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -3038,7 +3063,7 @@
     "tests_executed": true,
     "production_deployed": false,
     "queue_changed": true,
-    "reason": "R455-114 independently verified SAFE legacy family-id UI/engine guard, same-commit journal, nonforce code merge, Node22/UX/governance CI."
+    "reason": "R455-116 deterministic LIVE source orphan-family fix, nonforce code merge 5d9f8a385306cd3fde199777615299aa975c800f, direct readback, exact-source Node22/UX/offline/SQL/security/approval positive and negative regressions. Scientific research/Locked rule unchanged."
   },
   "next_actions": [
     "R455-108: independently inspected original Pannusch 2024 author-affiliated kinetic extraction abstract and live ORG-02/engine; 63 sources, 143 bounded checks, 70 proposals. No universal chemistry-to-taste mapping. Docs-only exact governance pending; full publisher PDF/S019 unavailable.",
@@ -3072,30 +3097,41 @@
     "R455-112: verified publisher full HTML 2023 Guinard 27+27 drip brew conditions and 57/43 sample-specific liking segments vs ORG-07/engine/constants. No espresso taste calibration or universal target; 64 sources / 148 bounded checks / 74 proposals; exact docs governance/merge pending. No #267 direct-line credit or app changes.",
     "R455-113: direct Springer 2021 3-trial stratified puck original study and patent/industrial conflict checked; 65 curated sources/150 bounded checks/75 proposals; docs-only exact-source PR CI/merge pending; no policy change, no 267 line credit, S019 inaccessible.",
     "R455-114 final code PR1425 merged a4010fbda71a6a600371de563096dd0715011a02 source-bound Node22 3066 PASS/0 FAIL/6 SKIP on PR-head and merged; applicable UX/SQL/security/approval SUCCESS. Research source identities unchanged 65, checks 151, proposals 76. READY development only, not deployed. S019 inaccessible; #267 direct-line audit credit zero.",
-    "R455-115 source first 0fdad30bb726081c275b182cb0024f6e34b4ca6e: Ribes 2020 five-slide manufacturer experiment original PDF visual/text reviewed and 2026 restatement crosschecked; 66 curated sources/153 evidence checks/77 proposals. Non-peer-reviewed; no universal dose, pressure or EY target; original PDF binary unverified, no sensory panel. Docs PR CI and merge pending. Standalone S019 inaccessible; zero #267 V2 line review credit."
+    "R455-115 source first 0fdad30bb726081c275b182cb0024f6e34b4ca6e: Ribes 2020 five-slide manufacturer experiment original PDF visual/text reviewed and 2026 restatement crosschecked; 66 curated sources/153 evidence checks/77 proposals. Non-peer-reviewed; no universal dose, pressure or EY target; original PDF binary unverified, no sensory panel. Docs PR CI and merge pending. Standalone S019 inaccessible; zero #267 V2 line review credit.",
+    "R455-116 exact base d1f8c83708640daf7b8306ea1af5a25a5defe676; orphaned or wrong-coffee/style historical family preference pointer closed by verified nonforce PR1444 merged 5d9f8a385306cd3fde199777615299aa975c800f; exact merged Node22 3077 PASS/0 FAIL/6 intentional SKIP (42491476786) and mobile/UX/offline42491476801 + approval42491476762 success. R116 READY not deployed. 66 curated sources/154 checks/78 proposals; standalone S019 inaccessible, zero #267 line credit. Continue independent bounded source/UX review."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-115",
-    "base_development_sha": "0fdad30bb726081c275b182cb0024f6e34b4ca6e",
-    "verified_development_merge_sha": null,
-    "verified_code_head_sha": null,
-    "source_ids": [
-      "MFR-DECENT-RIBES-2020-PREINFUSION-FLOW"
-    ],
+    "id": "R455-116",
+    "base_development_sha": "d1f8c83708640daf7b8306ea1af5a25a5defe676",
+    "verified_development_merge_sha": "5d9f8a385306cd3fde199777615299aa975c800f",
+    "verified_code_head_sha": "7debdc659d2d6825fcd2dbde8489ad706238a0ae",
+    "source_ids": [],
     "claim_ids": [
-      "R455-EV-CIT-115-A",
-      "R455-EV-CIT-115-B"
+      "R455-EV-APP-078-A"
+    ],
+    "proposal_ids": [
+      "R455-PROP-116-DANGLING-HISTORY-FAMILY-IDENTITY-GUARD"
     ],
     "number_of_curated_sources": 66,
-    "total_evidence_checks": 153,
-    "number_of_proposals": 77,
-    "review_type": "FIRST_PARTY_ORIGINAL_FIVE_SLIDE_PREINFUSION_FLOW_EVIDENCE_TRANSFER_BOUNDARY",
+    "total_evidence_checks": 154,
+    "number_of_proposals": 78,
+    "review_type": "SAME_COFFEE_STYLE_REAL_FAMILY_IDENTITY_UI_AND_PREFERENCE_INTEGRITY",
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
-    "code_or_policy_changed": false,
-    "ci_runs": [],
+    "code_or_policy_changed": true,
+    "locked_policy_changed": false,
+    "ci_runs": [
+      42491266825,
+      42491266847,
+      42491267008,
+      42491266923,
+      42491266873,
+      42491476786,
+      42491476801,
+      42491476762
+    ],
     "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "Verify source-bound docs PR CI, nonforce merge, inspect blob/merged governance; then next nonoverlapping source or reproducible SAFE Log Shot UX issue."
+    "next_action": "Resume ordered nonoverlapping live Log Shot -> Rate -> Recommendations source review; coordinate #335 fact verification, #267 literal-line audit, #33 extractor and #96 privacy; do not duplicate. R116 code READY development only, no deployment or new owner decision."
   },
   "policy_decisions_resolved": [
     {
@@ -4680,6 +4716,24 @@
         "https://decentespresso.com/img/f/2020_04_03%20Preinfusion%20flow%20rate%20-%20espresso%20roast.pdf",
         "https://decentespresso.com/docs/the_impact_of_the_preinfusion_flow_rate_on_espresso_extraction"
       ]
+    },
+    {
+      "id": "R455-PROP-116-DANGLING-HISTORY-FAMILY-IDENTITY-GUARD",
+      "finding": "Nonempty archived success recipe family IDs can be dangling or cross-associated: the visible Make Current button and local preference mutation previously trusted the string without confirming a matching s.families coffee/style record.",
+      "evidence": [
+        "R455-EV-APP-078-A"
+      ],
+      "severity": "P2_DETERMINISTIC_PRIVATE_FAVORITE_RECIPE_INTEGRITY",
+      "user_benefit": "Avoid phantom Current recipes and invalid favorite pointers while retaining all original private historical five-taste ratings, measured shots, notes, and alternate successful families.",
+      "current_locked": "All five independent sensory ratings and genuine all-green success; exact same-coffee and same-style family identity; explicit Make Current favorite; original measurements/history; one controllable recommendation change; no universal science or new capture/policy.",
+      "current_app": "Source parent d1f8c83708640daf7b8306ea1af5a25a5defe676 allowed string-only family identity; PR #1444 head 7debdc659d2d6825fcd2dbde8489ad706238a0ae verified engine/cloud main/shot card correct membership; merged 5d9f8a385306cd3fde199777615299aa975c800f same blobs.",
+      "proposed_change": "SAFE display guard keyed by familyId/coffeeId/style plus direct local engine fail-closed before preference/audit mutation. Synthetic negative absent/mismatched and positive genuine-family cases; no data migration.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "PR1444_NONFORCE_MERGED_5d9f8a385306cd3fde199777615299aa975c800f_SAME_COMMIT_CODE_TEST_JOURNAL_AND_TESTING_INTAKE_CORRECTION",
+      "test_plan": "First code head 8a91bf4ad200ff7dd6a4c8fe15846a6815067a12 governance FAILED unqueued intake; repaired queue on head 7debdc659d2d6825fcd2dbde8489ad706238a0ae and reverified Node22 3077 PASS/0 FAIL/6 SKIP, browser/UX/mobile/offline, isolated SQL, security, approval. Exact merged 5d9f8a385306cd3fde199777615299aa975c800f Node22 same counts, UX/mobile and approval SUCCESS. Frozen603 SKIPPED, live member DB/physical tasting not performed.",
+      "release_queue": "DIC-Q-455-history-orphan-family-identity-guard READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "changeScope": {
@@ -4687,6 +4741,6 @@
     "tests_executed": true,
     "production_deployed": false,
     "queue_changed": true,
-    "reason": "R455-114 independently verified SAFE legacy family-id UI/engine guard, same-commit journal, nonforce code merge, Node22/UX/governance CI."
+    "reason": "R455-116 deterministic LIVE source orphan-family fix, nonforce code merge 5d9f8a385306cd3fde199777615299aa975c800f, direct readback, exact-source Node22/UX/offline/SQL/security/approval positive and negative regressions. Scientific research/Locked rule unchanged."
   }
 }
