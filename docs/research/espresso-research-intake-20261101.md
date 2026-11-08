@@ -1,7 +1,0 @@
-# Espresso research intake — 2026-11-01
-
-**Nine original reports: NOT ACCESSIBLE / NOT VERIFIED** in currently visible Project Files. The prior nested espresso archive contains nine `source-reference.json` stubs rather than the full original reports. Do not claim they have been read or incorporated.
-
-Existing accessible research: DIC_Espresso_Research_Implementation_Pack.zip SHA-256 `7d562a4536cf4f79bfa17898672ff6a2ec30aa6c1147e7a33f3d06017776bf1d`; S019 secondary Espresso Extraction Windows PDF SHA-256 `d4d9cc5b41e3ac25fc6840b65e11cc8df9e3f32759a5831c992c448723bcabb6`. Pack: 21 identified sources, 27 findings, 35 roast-style profiles, 15 diagnostic rules, 10 policies, 48 reference cases. Locally validated schema and ran reference tests 48/48 PASS; this is **not actual app testing**, causal validation or permission to apply experimental numerical priors.
-
-Only narrow existing misclassification of unchanged puck-preparation feedback is being fixed in GitHub Issue #335. Locked all-green success and single-variable advice, separate Turbo/Fast-Flow, personal family history, Community eligibility and privacy are preserved. Do not adopt research-only numeric roast/time/ratio constants or confidence thresholds. Once full originals actually appear, hash and read all, reconcile S001–S021 and S019 including conflicting evidence, and test any authorized new behavior against user outcomes.

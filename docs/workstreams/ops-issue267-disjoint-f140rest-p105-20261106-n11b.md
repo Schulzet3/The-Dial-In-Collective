@@ -1,9 +1,0 @@
-# Issue #267 continuation N11B — November 6 2026
-
-Development observed `b8b1e4ec24bc83eb88c94beecccd51317c74c9c6` tree `bbc8acc96ebf7e6961dcbdc157a34df5ed2eb3a6`; frozen `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9`; pinned `9707553a64f88127826e8f5b2b36cd0651296e83`.
-
-Direct literal semantic review, **67 distinct numbered original lines**: historic #140 `docs/SEVEN_ROAST_TIER_ROLLOUT_2026-10-17.md:21-39` (19, complements independently merged N11 lines1-20; original frozen file #140 now fully represented by these two nonoverlap receipts), and pinned current file #105 `site/cloud/help.js:1-48` (48). Original Git blobs and development matches exact (2/2), source line records 67/67, all mandatory interpretation dimensions. No human certification, prior broad R2/C2 not counted automatically. First frozen workflow strict line1 S2-001 revalidated with zero extra credit. Sparse only: no authoritative ledger increments and no contiguous cursor move amid parallel #267 work.
-
-Read callers `site/cloud/main.js` line16, 347, 403-404, 432, 746; verified four declared first-shot media assets exist in repository tree. The MP4 is 2,320,714 bytes Git blob `81e8c145336f1837bbc8580bf91e2980e019e8b6`, **binary separately classified, not watched or independently SHA256 verified**; no synthetic-only video privacy certification. Existing failure fallback and local caption path seen but not browser-tested. Historical old release sequencing was superseded, not authorization for production edits.
-
-Source and documentation only; no runtime defect proven or fix justified. No code, deployment, credentials, migrations, members, original603, Community or offline mutations. App/SQL/Auth/visual/mobile/browser suites NOT RUN. PR-head and merged-source governance approval PENDING. #267 remains OPEN; next step independently reconcile both new nonoverlap receipts with latest central and concurrent reviews, continue source inventories and real risk-led tests as needed.
