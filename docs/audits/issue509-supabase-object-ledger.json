@@ -8486,5 +8486,54 @@
     "receipt_path": "docs/audits/issue509-provider-pg-attrdef-001-231-20261108-run83.json",
     "baseline_complete": false,
     "next": "pg_index raw catalog tuple declarations (full index DDL previously reviewed; do not double count), then remaining provider family gaps and changed-only drift; native/Auth/JWT/console UNVERIFIED"
+  },
+  "provider_pg_index_tuple_run84": {
+    "state": "472_OF_472_FULL_RAW_PG_INDEX_TUPLES_AND_SQL_DECLARATION_FLAGS_DIRECTLY_REVIEWED",
+    "source_catalog": "pg_catalog.pg_index",
+    "project_ref": "azviqqejypsefzilgonr",
+    "observed_at_utc": "2026-11-08 05:52:58.915805+00",
+    "source_development_parent_sha": "347213e36af194367b39d5e0890562ccca2f796d",
+    "ops_main_sha": "bd627d40f7e65321323512b303d2e3f75709af39",
+    "release_sha": "2ec10324fcaa4b60d1e48240b44b77b141b9ba54",
+    "previous_index_sql_ddl_coverage_not_recredited": true,
+    "reviewed_new_raw_tuple_metadata": 472,
+    "total": 472,
+    "ordered_full_raw_tuple_plus_sql_md5": "557a455326a93d6f1d1b307e0da675a0",
+    "by_index_schema": {
+      "auth": 111,
+      "pg_catalog": 124,
+      "pg_toast": 109,
+      "private": 31,
+      "public": 67,
+      "realtime": 6,
+      "storage": 20,
+      "supabase_migrations": 2,
+      "vault": 2
+    },
+    "semantic_categories": {
+      "primary": 257,
+      "unique_constraint": 78,
+      "unique_index": 27,
+      "partial": 27,
+      "expression": 6,
+      "nonunique": 110,
+      "provider_internal": 233,
+      "nulls_not_distinct": 1,
+      "include_columns": 0
+    },
+    "invalid_or_unready_or_not_live": 0,
+    "wrong_key_count_or_identity": 0,
+    "confirmed_new_defects": 0,
+    "source_fixes": 0,
+    "provider_writes": false,
+    "receipt_paths": [
+      "docs/audits/issue509-provider-pg-index-tuples-001-096-20261108-run84.json",
+      "docs/audits/issue509-provider-pg-index-tuples-097-192-20261108-run84.json",
+      "docs/audits/issue509-provider-pg-index-tuples-193-288-20261108-run84.json",
+      "docs/audits/issue509-provider-pg-index-tuples-289-384-20261108-run84.json",
+      "docs/audits/issue509-provider-pg-index-tuples-385-472-20261108-run84.json"
+    ],
+    "baseline_complete": false,
+    "next": "Next distinct unreviewed provider catalog family and changed/new drift; investigate sources individually if metadata anomaly; hosted Auth/JWT/API, native compiled PostgreSQL internals and restricted settings UNVERIFIED"
   }
 }
