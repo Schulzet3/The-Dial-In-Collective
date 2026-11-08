@@ -9547,28 +9547,35 @@
     {
       "id": "DIC-Q-33-original603-510-country-peaberry-blend",
       "issue": 33,
-      "pr": null,
+      "pr": 1454,
       "title": "Current selected #510 Country caption: separate Tanzania from Peaberry Southern Blend descriptor",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": "c7d2ca62be9dc142fb19450f4d0c567b042e2041",
+      "state": "READY",
+      "merged_source_sha": "942237cc42c6581d8a8918c23a52a7cc17da5e6d",
       "scope_paths": [
         "src/server/coffee-page-metadata.mjs"
       ],
       "tests": [
-        "R39 current #510 source/qualifications and narrow parser correction at merged c7d2ca62be9dc142fb19450f4d0c567b042e2041 documented in docs/workstreams/ops-issue33-r39-510-country-peaberry-source-20261108.md. Correction came after selected READY merge c0cf5ddf14d858ef013c899dd71bb1572c10cd76. Associated new test: tests/coffee-issue33-original603-510-country-peaberry-blend.test.mjs."
+        "R39 current #510 source/qualifications and narrow parser correction at merged c7d2ca62be9dc142fb19450f4d0c567b042e2041 documented in docs/workstreams/ops-issue33-r39-510-country-peaberry-source-20261108.md. Correction came after selected READY merge c0cf5ddf14d858ef013c899dd71bb1572c10cd76. Associated new test: tests/coffee-issue33-original603-510-country-peaberry-blend.test.mjs.",
+        "Verified code R39 PR1454 nonforce merged 942237cc42c6581d8a8918c23a52a7cc17da5e6d, exact merged Node 42499241333 2042/2042 PASS; cloud/mobile 42499241228 and approval 42499241288 PASS; 603 job SKIPPED. Corrected prior queue PR-head SHA to actual merged source SHA.",
+        "R42 official post-code 42508582641 exact 9504ba891017f41d1204d5c60ef1744fbb8ab047: exact current H1 Wobegon Medium Roast (reused Redwall handle), raw 162742-byte HTML SHA256 2cbfb7c5e133d0c030cf4e11ecb45ed5a95f96c269bbb7a349f7e475501f0180, selected Country literal Tanzania Peaberry Southern Blend -> canonical Tanzania; Washed, Medium, Nutty/Cocoa/Spices/Citrus, identity/Add Coffee/Source Review TRUE, conflicts []; rehashed raw HTML, JSON and ZIP c6282a2d7129133cc7f2176c8c3a6cc154b634e7c264b99bf6dee167a5f15383 independently; 2/2 guarded source verdict passed, frozen603 SKIPPED. Receipt docs/audits/issue33-original603-r42-510-514-current-selected-verified-20261108.md."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "R39 #510 same-file newer merged correction and test are not part of frozen owner-approved READY56 batch; independent official selected-source certification, source-bound queue readiness and future owner-scoped publication unresolved. Preserve in development; candidate pin old selected READY blob abe2d2ce84772726c128621ce7dd234a2bc1eb21 and exclude ONLY new R39 test. No readiness claim."
+      "ci_runs": [
+        42499241333,
+        42499241228,
+        42499241288,
+        42508582641,
+        42508582670
       ],
-      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33"
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Narrow source-backed Country-caption correction READY in development, NOT DEPLOYED. Later release requires explicit owner Publish and source-isolated READY candidate; does not certify entire 603. Same literal original Country descriptor remains Source Review evidence."
     },
     {
       "id": "DIC-Q-33-original603-514-bellevue-mountain-water-decaf",
       "issue": 33,
       "pr": 1461,
       "title": "Exact selected current Bellevue named Mountain Water decaf recognized as a decaffeination treatment, separate from green processing",
-      "state": "TESTING",
+      "state": "READY",
       "scope_paths": [
         "src/server/coffee-direct-product-prose.mjs"
       ],
@@ -9577,7 +9584,8 @@
         "R41 generic selected-named current Mountain Water method proof corrected in code+journal commit 3f9b197d596a3ba9d510c671ea94ecfddf6b68f2. Exact PR-head focused Node/lint/build still pending; first approval42503443864 FAILED queue guard for untracked runtime change, requiring this explicit IN_PROGRESS item. Original frozen603 workflow SKIPPED, not PASS.",
         "Exact repaired code unchanged at PR-head 29b3cc721c807ce4a2ffd913ecd64331c860518d: Node/lint/build run42503569914 PASS 2052/2052, zero failed, user-authenticated/live raw source NOT tested. Initial approval42503569925 FAILED only explicit queue schema because missing merged_source_sha key; schema requires null before safe merge. Corrected null in this docs-only intake commit, not synthetic future merge SHA.",
         "PR1461 first test-only Node 42503227017 2051/2052, real selected-source missing method; focused code+queue head 29b3cc721c807ce4a2ffd913ecd64331c860518d Node/lint/build 42503569914 2052/2052 PASS, but approval intake failed missing explicit pre-merge SHA null; corrected explicit null then exact PR head 56d8044124cf2bb0f407ca134b8220a074a9eda4 Node/lint/build 42503809274 2052/2052 PASS, zero failures; cloud UX42503809300 SQL42503809431 security42503809288 official private archive42503809287 approval42503809297 SUCCESS; frozen60342503809266 SKIPPED, not individual 603 certification.",
-        "Safely squash merged PR1461 exact 0f99e0a5d39c8016fd4493b17db62b99664ff92d with independent development HEAD readback. Exact merged runtime blob 46e10a24e4de26719659e282e34b2ad354868ff6 and new 6-case test blob 4772ebec0d3c51fb4cc177821b05309cb3bf7bcc match passing exact PR head. Original frozen603 CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6 unchanged."
+        "Safely squash merged PR1461 exact 0f99e0a5d39c8016fd4493b17db62b99664ff92d with independent development HEAD readback. Exact merged runtime blob 46e10a24e4de26719659e282e34b2ad354868ff6 and new 6-case test blob 4772ebec0d3c51fb4cc177821b05309cb3bf7bcc match passing exact PR head. Original frozen603 CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6 unchanged.",
+        "R42 exact merged official 42508582641 source SHA 9504ba891017f41d1204d5c60ef1744fbb8ab047: Bellevue - Decaf Blend selected H1 and own visible Coffee Info, 341694-byte raw SHA256 d0d5824d7e91f4c44919bbbeb17b14a10e72cf58766f1656ab831bd7cffcfd48, actual Water Process decaffeination, no unsupported green processing, origin Colombia, literal Hulia provenance, notes milk chocolate/cherry/caramel, identity/preview/Source Review TRUE, [] conflicts. Downloaded/rehashed artifact ZIP SHA256 c6282a2d7129133cc7f2176c8c3a6cc154b634e7c264b99bf6dee167a5f15383, JSON/HTML and verdict. Frozen603 SKIPPED; narrow READY only. Receipt docs/audits/issue33-original603-r42-510-514-current-selected-verified-20261108.md."
       ],
       "ci_runs": [
         42503227017,
@@ -9590,13 +9598,13 @@
         42503809288,
         42503809287,
         42503809297,
-        42503809266
+        42503809266,
+        42508582641,
+        42508582670
       ],
-      "blockers": [
-        "Fresh independently captured exact current selected official raw HTML SHA-256, live parser and Add Coffee/Source Review end-to-end behavior are not yet independently verified. Current public page/index with selected product words and source-shaped actual parser tests do not suffice for narrow READY or full original603 individual manual certification."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Merged and regression-verified development correction; TESTING not READY/DEPLOYED. The printed Hulia spelling is preserved rather than inferred to be Huila, and green-bean processing remains blank; actual selected product prose says Mountain Water decaf. All 229 DEPLOYED and 4 pre-existing IN_PROGRESS queue items unchanged. Original603 frozen data, no production or Netlify writes. Source evidence/CI in docs/workstreams/ops-issue33-r41-514-bellevue-current-water-20261108.md.",
+      "notes": "Narrow source-backed selected Mountain Water decaffeination correction READY development, NOT DEPLOYED. Current direct visible selected product Coffee Info (not generic meta/SEO); preserve uncorrected Hulia; leave green process blank. Separate owner Publish required; 603 individual certification incomplete.",
       "merged_source_sha": "0f99e0a5d39c8016fd4493b17db62b99664ff92d"
     },
     {
