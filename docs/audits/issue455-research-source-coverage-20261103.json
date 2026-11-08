@@ -2843,22 +2843,22 @@
       "id": "R455-EV-APP-072-A",
       "source": "development source 49336124215b7e81a13d979eacdeaad7efaa5fa0; engine blob 3b224e8433fb175929b7c427b0962c1004a8a0de, stats() lines 6-12 and comparable family time lines 370-380, CONFIG.bounds.timeS [1,180], UI recipeGrid(), model.validateShot()",
       "claim": "Single successful 180s/1s measured time produces an unloggable displayed reference interval [178,182] or [-1,3]; measurements/history remain valid.",
-      "grade": "DETERMINISTIC_DIRECT_SOURCE_ARITHMETIC_EXECUTABLE_CI_NOT_YET_RUN",
+      "grade": "DETERMINISTIC_LIVE_SOURCE_ARITHMETIC_PLUS_THREE_REAL_MODULE_SYNTHETIC_POSITIVE_NEGATIVE_REGRESSIONS_ON_PR_HEAD_AND_EXACT_MERGED_NODE22; NO_PHYSICAL_ESPRESSO_OR_MEMBER_OUTCOME",
       "current_app": "Before fix stats(single successful time,+/-2s) shows out-of-bounds reference in recipe card. Only interval endpoints are proposed to change.",
-      "result": "SAFE_CODE_AUTHORED_TESTING_PENDING_NOT_READY",
+      "result": "SAFE_SUCCESSFUL_RECIPE_TIME_BOUNDS_VERIFIED_EXACT_HEAD_AND_MERGED_CI",
       "owner_approval": false,
       "original_source_sha": "49336124215b7e81a13d979eacdeaad7efaa5fa0",
-      "verified_merge_sha": null,
-      "verified_test_run": null
+      "verified_merge_sha": "b8c54dc33cd3835caa0036fdca4c3975f9160b62",
+      "verified_test_run": 42464779584
     }
   ],
   "policy_decisions_pending": [],
   "change_scope": {
     "application_code_changed": true,
-    "tests_executed": false,
+    "tests_executed": true,
     "production_deployed": false,
-    "queue_changed": false,
-    "reason": "R110 safe code, synthetic tests and same-commit journal authored; READY contingent on CI"
+    "queue_changed": true,
+    "reason": "R110 code PR1395 exact merged source verified and queue READY docs reconciliation; no new Locked or source-register authority"
   },
   "next_actions": [
     "R455-108: independently inspected original Pannusch 2024 author-affiliated kinetic extraction abstract and live ORG-02/engine; 63 sources, 143 bounded checks, 70 proposals. No universal chemistry-to-taste mapping. Docs-only exact governance pending; full publisher PDF/S019 unavailable.",
@@ -2891,7 +2891,7 @@
   ],
   "latest_review_checkpoint": {
     "id": "R455-110",
-    "base_development_sha": "49336124215b7e81a13d979eacdeaad7efaa5fa0",
+    "base_development_sha": "b8c54dc33cd3835caa0036fdca4c3975f9160b62",
     "source_ids": [
       "site/lib/engine.js",
       "site/lib/constants.js",
@@ -2905,13 +2905,22 @@
     "number_of_curated_sources": 63,
     "total_evidence_checks": 145,
     "number_of_proposals": 72,
-    "review_type": "SAFE_CODE_TEST_AUTHORING_CI_PENDING",
+    "review_type": "SAFE_TESTED_CODE_MERGED_AND_READY_RECONCILIATION",
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
     "code_or_policy_changed": true,
-    "ci_runs": [],
+    "ci_runs": [
+      42464491547,
+      42464491558,
+      42464491607,
+      42464491627,
+      42464491727,
+      42464779584,
+      42464779578,
+      42464779577
+    ],
     "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "Execute exact CI, fix failures, nonforce merge, reconcile queue/STATUS, record Issue #455 checkpoint."
+    "next_action": "Verify exact docs-only governance PR head and merged SHA, then resume next distinct source-backed claim or reproducible SAFE UX gap. Issue #455 remains OPEN."
   },
   "policy_decisions_resolved": [
     {
@@ -4397,9 +4406,9 @@
       "current_app": "Single-observation stats expands time +/-2s; recipeGrid renders endpoints.",
       "proposed_change": "SAFE bound displayed rec.time.low/high only in comparable successful-family time branch using CONFIG.bounds.timeS; do not change center or numeric policy.",
       "approval_required_for_behavior_change": false,
-      "implementation": "AUTHORING_PENDING_EXACT_NODE22_CI_NONFORCE_MERGE",
-      "test_plan": "Three synthetic real-module positive/negative endpoint, ordinary band, UI/immutability cases; exact PR and merged-source applicable checks REQUIRED, not yet run.",
-      "release_queue": "NOT_READY_PENDING_CI",
+      "implementation": "VERIFIED_CODE_PR1395_NONFORCE_SQUASH_MERGED_b8c54dc33cd3835caa0036fdca4c3975f9160b62; EXACT_PR_AND_MERGED_CI_ALL_APPLICABLE_SUCCESS; SAME_COMMIT_JOURNAL_TESTS_AND_LEDGER",
+      "test_plan": "Node22 PR head run42464491547 and exact code-merged run42464779584 each 3047 pass / 0 fail / 6 intended skip, three R110 direct-module cases PASS; PR head UX/mobile/browser/offline/cloud 42464491558, isolated SQL 42464491607, security 42464491627, approval 42464491727 SUCCESS; merged UX/mobile/browser/offline 42464779578 and approval 42464779577 SUCCESS. Frozen original603 SKIPPED, no espresso tasting/member tests.",
+      "release_queue": "DIC-Q-455-successful-recipe-time-band-bounds READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
       "production_deployed": false
     }
   ],

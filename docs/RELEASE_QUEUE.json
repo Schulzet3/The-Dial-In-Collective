@@ -8,6 +8,37 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-successful-recipe-time-band-bounds",
+      "issue": 455,
+      "pr": 1395,
+      "title": "Keep successful one-shot recipe displayed time interval within existing 1-180 second Log Shot limits",
+      "state": "READY",
+      "merged_source_sha": "b8c54dc33cd3835caa0036fdca4c3975f9160b62",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "R110 synthetic direct real-module regression: 180s, 1s, normal 22s, recipeGrid display, original history/notes/five tastes immutable; all three new tests passed on PR head and exact merged source",
+        "Exact PR head Node22 run42464491547: 3,047 passed / 0 failed / 6 intentional skipped; focused R110 cases pass",
+        "Exact PR head UX/browser/mobile/offline 42464491558, SQL 42464491607, security 42464491627, approval 42464491727 SUCCESS",
+        "Exact code-merged Node22 42464779584: 3,047 passed / 0 failed / 6 intentional skipped; mobile/browser/offline cloud 42464779578 and approval 42464779577 SUCCESS; unchanged SQL/security PR-head checks reused",
+        "Frozen original603 deliberately SKIPPED, not PASS. No physical espresso/user taste outcome demonstrated."
+      ],
+      "ci_runs": [
+        42464491547,
+        42464491558,
+        42464491607,
+        42464491627,
+        42464491727,
+        42464779584,
+        42464779578,
+        42464779577
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "READY development only, NOT DEPLOYED. Bounded successful family time range endpoints to existing CONFIG.bounds.timeS=[1,180], leaving measured center/time, original five ratings and private history, alternative recipe families, grinder/feed/style/temperature, Locked decisions and publication safeguards intact. Same-commit journal, direct source proof and exact CI. No production write."
+    },
+    {
       "id": "DIC-Q-455-next-recipe-yield-band-bounds",
       "issue": 455,
       "title": "Bound next recipe displayed +/-1 g yield band to existing 5-200 g Log Shot limits",
