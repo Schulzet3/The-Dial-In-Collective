@@ -9009,22 +9009,34 @@
       "id": "DIC-Q-455-starting-yield-display-bounds",
       "issue": 455,
       "title": "Keep valid starting recipe displayed yield band within existing Log Shot entry limits",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "29ce55dcf0abe87cb5db906a0146faa6c3383c0c",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
         "Current source Dark Ristretto 5 g baseline: valid 5.5 g center displays 4.9 g lower bound, below existing [5,200] g Log Shot limits; synthetic source-level defect, not actual member report.",
         "Three direct real-module tests of invalid vs valid display endpoints, ordinary Ristretto/Turbo unchanged, preferences, HTML and state immutability authored. CI UNEXECUTED at initial commit.",
-        "Required exact PR-head Node22/lint/build and risk-proportionate browser/mobile/offline/accessibility, SQL/security/approval; original603 status separately SKIPPED/NOT RUN. Merge and exact-source post-merge checks pending."
+        "Required exact PR-head Node22/lint/build and risk-proportionate browser/mobile/offline/accessibility, SQL/security/approval; original603 status separately SKIPPED/NOT RUN. Merge and exact-source post-merge checks pending.",
+        "Initial PR1404 head 87288c7eb03ce9f9873fa9a2810d5e70dcc676e4 Node42468365722 FAILED 3053 PASS/2 FAIL/6 SKIP, only two R111 positive test expectations: floating 0.9800000000000001 != 0.98, and baseline round low 5.6 not assumed 5.7. Corrected test assertions and SAME-COMMIT journal; no runtime, Locked or numerical logic changed. Failed run remains FAILED.",
+        "Final exact PR-head f1ab46f323519a46b96e7dfc36cc5e80195c5a5b: Node22/lint/build42468602900 3055 PASS/0 FAIL/6 intentional SKIP, all three R111 direct-module tests passed; compiled UX/browser/mobile/offline/accessibility42468602973, isolated SQL42468602824, security42468602965, approval42468602970 SUCCESS. Original frozen60342468602918 SKIPPED (NOT PASS).",
+        "Nonforce PR1404 squash MERGED 29ce55dcf0abe87cb5db906a0146faa6c3383c0c; exact blob readback engine 59696aada657fb5b46ef64cf26065e6601f35dff, repaired tests d76b9153dd1a8dd4caef931a1518f4409433d9b0, initial TESTING queue 322023c23d11a6acc11b2d54a5fc1082f54e0970 and prior journal 385947debc91c10b8ed2cdaa9670bbe9685b1dad match final head. Exact code-merged Node22/lint/build42468819576 3055 PASS/0 FAIL/6 intentional SKIP, compiled browser/mobile/offline/a11y42468819557 and approval42468819572 SUCCESS. No real-member/espresso taste result or hosted DB/provider mutation."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "PR-head CI, code merge, exact merged-source verification and docs READY reconciliation pending."
+      "ci_runs": [
+        42468602900,
+        42468602973,
+        42468602824,
+        42468602965,
+        42468602970,
+        42468602918,
+        42468819576,
+        42468819557,
+        42468819572
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "R455-111 development-only SAFE display endpoint fix for already loggable center. No new numeric target/science/Locked or data policy. NOT DEPLOYED."
+      "notes": "R455-111 READY DEVELOPMENT ONLY, NOT DEPLOYED. Bound displayed starting yield interval to approved Log Shot [5,200] g only when original calculated center is already loggable. Do not alter the center, ratio priors, five tastes, notes/private history, style/feed, grinder or Locked rules; no physical espresso validation or owner decision.",
+      "pr": 1404
     }
   ],
   "history": [
