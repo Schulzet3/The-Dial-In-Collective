@@ -83,3 +83,40 @@ export function selectedProductFormH2(markup){
  // Multiple distinct selected H2s on one document are not one chosen coffee.
  return matched.length&&matched.every(x=>x===matched[0])?[matched[0]]:[];
 }
+
+
+// A current storefront may place the one selected purchasable coffee title in
+// H2 rather than H1. Never treat a generic H2/menu/SEO/related-coffee as proof.
+// Require a unique own product root, heading and same-column purchase form.
+export function selectedProductPurchaseRootH2(html){
+ if(typeof html!=='string'||html.length>2_000_000)return [];
+ const {nodes,truncated}=coffeeHtmlElements(html);
+ if(truncated)return [];
+ const classes=node=>String(coffeeHtmlAttributes(node.attributes).class||'').split(/\s+/u);
+ const contains=(outer,inner)=>inner.start>=outer.headEnd&&inner.end<=outer.contentEnd;
+ const roots=nodes.filter(n=>n.tag==='product-root'&&classes(n).includes('product-page--root'));
+ if(roots.length!==1)return [];
+ const root=roots[0];
+ const unsafe=node=>{
+  let at=node.parent;
+  for(let depth=0;at!==null&&depth<128;depth++){
+   const ancestor=nodes[at];if(!ancestor)return true;
+   const attrs=coffeeHtmlAttributes(ancestor.attributes);
+   if(['aside','nav','header','footer'].includes(ancestor.tag)||
+    /\b(?:related[-_ ]?products?|recommendations?|upsell|cross[-_ ]?sell|carousel|recently[-_ ]?viewed|sidebar|faq)\b/iu.test(
+     [attrs.class,attrs.id,attrs.role,attrs['aria-label']].join(' ')))return true;
+   at=ancestor.parent;
+  }
+  return false;
+ };
+ if(unsafe(root)||nodes.some(n=>n.tag==='h1'&&contains(root,n)))return [];
+ const cols=nodes.filter(n=>n.tag==='div'&&classes(n).includes('product-page--right-column')&&contains(root,n)&&!unsafe(n));
+ if(cols.length!==1)return [];
+ const column=cols[0];
+ const titles=nodes.filter(n=>n.tag==='h2'&&classes(n).includes('product-page--heading')&&contains(column,n)&&!unsafe(n));
+ const carts=nodes.filter(n=>n.tag==='form'&&classes(n).includes('product-buy-buttons--form')&&contains(column,n)&&!unsafe(n)&&
+  /^\/cart\/add(?:[?#]|$)/i.test(String(coffeeHtmlAttributes(n.attributes).action||'')));
+ if(titles.length!==1||carts.length!==1)return [];
+ const h=titles[0],name=decode(html.slice(h.headEnd,h.contentEnd).replace(/<[^>]{0,1200}>/gu,' ')).replace(/\s+/gu,' ').trim();
+ return name&&name.length<=220?[name]:[];
+}

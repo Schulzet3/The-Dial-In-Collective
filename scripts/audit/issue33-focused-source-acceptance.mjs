@@ -34,7 +34,9 @@ export function requiredFocusedSourceFailures(targetNumbers,records,{negativeIde
       !selectedName || !archivedName || selectedName===archivedName ||
       !liveHeadings.some(h=>String(h).trim().toLocaleLowerCase()===selectedName))
     failures.push({number,reason:'expected_changed_original_identity_not_established'});
-  }else if(r.selected_h1_present_in_scoped_html===true&&r.selected_heading_identity_verified!==true)
+  }else if(r.selected_heading_identity_verified!==true)
+   // No selected H1 is NOT an implicit pass; require the exact selected
+   // coffee H1 or direct current purchase-bound H2 positively verified.
    failures.push({number,reason:'selected_original_product_heading_identity_unverified'});
   if(r.add_coffee_ui_rendered!==true)failures.push({number,reason:'add_coffee_preview_not_rendered'});
   if(r.source_review_rendered!==true)failures.push({number,reason:'source_review_not_rendered'});
