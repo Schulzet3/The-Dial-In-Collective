@@ -136,6 +136,16 @@ for(const target of targets){
       };
       console.log('[DIC33 #336 DIRECT CURRENT GROWER DIAG] '+JSON.stringify(r.selected_336_role_diagnostic));
     }
+    // Preserve a bounded exact selected product's conditional sensory fact even
+    // if dozens of initial source facts occupy the 45-row diagnostic preview.
+    // Review evidence ONLY; never a new coffee autofill field or source claim.
+    r.selected_milk_context_facts=(p.source_facts||[])
+      .filter(f=>f.field==='sensory_context'&&f.label==='Selected product with-milk sensory description')
+      .slice(0,2).map(f=>({
+       label:clip(f.label,110),value:clip(f.value,420),
+       source_url:clip(f.source_url,320),source_type:clip(f.source_type,60),
+       section:clip(f.section,150)
+      }));
     r.source_facts=(p.source_facts||[]).slice(0,45).map(f=>({
       label:clip(f.label,120),field:clip(f.field,80),value:clip(f.value,360),source_url:clip(f.source_url,320),section:clip(f.section,110),
       source_type:clip(f.source_type,55),conflicting:f.conflicting===true}));

@@ -69,3 +69,35 @@ jobs:
           path: ${{ runner.temp }}/dic33-r42-510-514/
           if-no-files-found: error
           retention-days: 1
+
+  # R43 single selected current official original603 #534 with-milk context;
+  # strictly source-review only, not canonical conditional flavor / broad 603 replay.
+  selected-r43-534-official:
+    if: github.event_name == 'push' && contains(github.event.head_commit.message, '[dic-issue33-r43-live]')
+    name: exact-current-original603-534
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Fetch exact chosen current official HTTPS and preserve raw bytes
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r43-534
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '534'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict source/identity/context/Add Coffee/Source Review and SHA256 afterproof
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r43-534
+        run: node scripts/audit/issue33-r43-534-afterproof.mjs
+      - name: Retain one-day official raw HTML and guarded verdict for independent verification
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r43-current-534-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r43-534/
+          if-no-files-found: error
+          retention-days: 1
