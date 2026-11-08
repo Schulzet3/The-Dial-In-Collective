@@ -102,3 +102,34 @@ jobs:
           path: ${{ runner.temp }}/dic33-r43-534/
           if-no-files-found: error
           retention-days: 1
+
+  # R44 bounded current original603 #540/#543; not universal certification.
+  selected-r44-540-543-official:
+    if: github.event_name == 'push' && contains(github.event.head_commit.message, '[dic-issue33-r44-live]')
+    name: exact-current-original603-540-543
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Fetch exactly two chosen current official HTTPS pages
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r44-540-543
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '540,543'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Exact selected identity, current fields, negative evidence, UI, SHA afterproof
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r44-540-543
+        run: node scripts/audit/issue33-r44-540-543-afterproof.mjs
+      - name: Retain official raw HTML, diagnostics and checked verdict one day
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r44-current-540-543-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r44-540-543/
+          if-no-files-found: error
+          retention-days: 1
