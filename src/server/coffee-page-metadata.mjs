@@ -21,7 +21,7 @@ import {equivalentCoffeeProductNames,preferredCoffeeRoasterName,selectedCoffeeNa
 import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
 import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,refineSelectedNamedTastingNotes,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
-import {refineSelectedDescriptionSensory} from './coffee-selected-description-sensory.mjs';
+import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish} from './coffee-selected-description-sensory.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
 import {withoutNaturalDecaffeinationModifier,recordCoffeeProcessingClaim,reconcileCoffeeProcessingClaims} from './coffee-processing-evidence.mjs';
@@ -1901,6 +1901,8 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    // literal notes, never SEO or unrelated roast/preparation narratives.
    const description=refineSelectedDescriptionSensory(currentProduct,{clean,notes:fields.tasting_notes});
    if(description)fields.tasting_notes=description;
+   const finish=refineSelectedCurrentLiteralFinish(currentProduct,{clean,notes:fields.tasting_notes});
+   if(finish)fields.tasting_notes=finish;
   }
   // Flag only direct selected-source disagreements, not unsupported SEO.
   // A higher-priority current description may remain the canonical suggestion
