@@ -9670,10 +9670,10 @@
     {
       "id": "DIC-Q-33-original603-534-selected-milk-sensory-source-review",
       "issue": 33,
-      "pr": 1479,
+      "pr": 1482,
       "title": "Preserve exact current selected coffee milk-qualified sensory context in Source Review, not unqualified autofill",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "e3ef93684180bcf615de284e5e74139ccbb57066",
       "scope_paths": [
         "src/server/coffee-page-metadata.mjs",
         "src/server/coffee-selected-milk-sensory-context.mjs"
@@ -9681,17 +9681,29 @@
       "tests": [
         "R43 pre-code PR1479 head cd191983af8edb7c6aa15dbd82c8abad1c0d3d7b Node42513034525: 2054 PASS /1 FAIL, deliberate canonical with-milk exclusion confirmed; two negative controls PASS.",
         "R43.1 qualified-source-fact-only positive and five hostile negative assertions written; CI pending, original603 SKIPPED not PASS.",
-        "Original603 #534 historical current product shows two distinct source sensory conditions; fresh official current HTML SHA256 not yet captured."
+        "Original603 #534 historical current product shows two distinct source sensory conditions; fresh official current HTML SHA256 not yet captured.",
+        "Test-first PR1479 intentionally failed once (head cd191983, Node42513034525 2054 PASS/1 FAIL) by expecting milk-conditional tasting in unqualified canonical; this was corrected without weakening existing coffee-preparation guard.",
+        "Generic contextual review implementation PR1479 final head f6ab199d: Node42513382577 2058/2058 PASS; approval/cloud/mobile/isolated SQL/security PASS; squash merged 012f2b724e487bff7ece9358c01eec073ed66dfe.",
+        "Dedicated current-selected source guard PR1480 head 6273eed: Node42513619419 3110 PASS/0 FAIL/6 intentional SKIP; merged 95d83093e4235264c60a7c1fb12487daa411c685. First current official source42513896202 correctly FAILED only conditional review fact due to direct LI Product Info body; raw source and failures retained and independently checked.",
+        "Source-shaped generic Shopify Product Info LI correction PR1482 head 7947a922: Node42514026555 3110 PASS/0 FAIL/6 intentional SKIP, cloud/mobile/browser/SQL/security/approval/archive SUCCESS, eight scoped positive/negative tests; nonforce merged e3ef93684180bcf615de284e5e74139ccbb57066, preserving concurrent #267 documentation.",
+        "EXACT merged e3ef93684180bcf615de284e5e74139ccbb57066 Node42514224770 3110 PASS/0 FAIL/6 intentional SKIP; cloud/mobile42514224754, approval42514224732 and exact official selected source42514224820 SUCCESS. Original frozen603 SKIPPED; not a whole-603 certification.",
+        "Current official #534 exact H1/selected identity FETCHED/PARSED, Add Coffee and Source Review true, with-milk selected raw statement retained as qualified HTML/source_url source fact. Unqualified canonical tasting remains straight-shot notes only. Independent one-day artifact #13630118543 ZIP SHA256 c338b0a276f2643d92d6036c10d54325307c5a2b01346f7a998900eac8c4d032; actual HTML SHA256 9dfa34cf4a927c2a5caead23ddf0ab2b26d9e25906f6fbbca2bf8cadb47c9e5d; JSON SHA256 b013fb02521b8b7ae019b898b66a8f0754a3784fae5135f33f7996f15f9d2bfa; verdict SHA256 20314b16f8316950cf5c1f8ab4a252d445d267ec638c2d6fb3ff5c8275b21889, verdict passed true/failures empty.",
+        "Only this narrow source-review correction READY development; no actual signed-in GoTrue/member/device acceptance, original frozen 603-wide replay, deployment or production writes claimed."
       ],
       "ci_runs": [
-        42513034525
+        42513034525,
+        42513382577,
+        42513619419,
+        42513896202,
+        42514026555,
+        42514224770,
+        42514224754,
+        42514224732,
+        42514224820
       ],
-      "blockers": [
-        "New source and exact-head CI pending",
-        "Fresh guarded exact official current selected H1, raw SHA, Add Coffee/Source Review verification pending"
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Development only; conditional milk flavor is source-review context, not green-coffee/unqualified tasting field. No frozen corpus, production or publication changes."
+      "notes": "READY DEVELOPMENT ONLY / NOT DEPLOYED. Original603 #534 selected Raven Espresso direct current Product Info has distinct unqualified straight-shot notes and literal when-layered-with-milk contextual tasting. The latter is preserved only in named Source Review provenance, not canonical tasting_notes. Exact merged source and SHA independently verified; owner #33 OPEN for remaining individual original603 adjudication. No release/production/member/provider writes."
     }
   ],
   "history": [
