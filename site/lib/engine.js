@@ -480,7 +480,12 @@ export function recommendation(s,coffeeId,options={}) {
    rec.grind={value:a.next?.grindSetting??last.grindSetting,
     source:diagnostic?'Last measured grind; no change suggested':'Next setting to try',proven:false};
    const nextYield=a.next?.yieldCenter??last.yieldG;
-   rec.yield={low:Math.max(5,round(nextYield-1)),high:round(nextYield+1),center:round(nextYield)};
+   // An inclusive 200 g next-shot target is loggable, but an unclamped
+   // +/-1 g display band would promise a 201 g upper limit. Apply the same
+   // already-approved input bounds to the displayed band, not to History.
+   const [minYield,maxYield]=CONFIG.bounds.yieldG;
+   rec.yield={low:clamp(round(nextYield-1),minYield,maxYield),
+    high:clamp(round(nextYield+1),minYield,maxYield),center:round(nextYield)};
    rec.ratio={low:rec.yield.low/rec.doseG,high:rec.yield.high/rec.doseG,center:rec.yield.center/rec.doseG};
   }
  }
