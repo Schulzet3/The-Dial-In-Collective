@@ -3211,6 +3211,17 @@
       "owner_approval": false,
       "test_source": "PR1495 corrected head edcdf4e2e37bb218424065c42ef68dce827c4f90 Node22/lint run42521614583 3,117 PASS/0 FAIL/6 intentional SKIP, 4 R122 tests PASS, lint PASS; browser/UX/mobile/offline42521614540 SUCCESS, isolated SQL42521614561 SUCCESS, security42521614558 SUCCESS, approval42521614578 SUCCESS; frozen60342521614538 SKIPPED. Initial head approval42521544184 FAILED queue scope test-path classification, repaired. PR1495 nonforce squash merged 20c2a8048e267aaadac835d801a3737ba5445f89 all four blobs identical to passing head; merged Node22/lint42521910223 3,117 PASS/0 FAIL/6 intentional SKIP, browser/mobile42521910151 SUCCESS and approval42521910207 SUCCESS. No real member, SQL/Auth/Edge/provider write or physical espresso improvement tested.",
       "date": "2026-11-08"
+    },
+    {
+      "id": "R455-EV-APP-085-A",
+      "source": "Exact development parent 55a0c4d80d934f12b91550a848c87c3b06dd4a61 site/lib/engine.js Git blob 996df47748bf9e0b1ae663d3a8fb4f6090313862 grindGuidance, CONFIG.bounds.tempC 70-100 and validRecordedTemperature; current merged engine blob 26d0ffee46ad3bd5fd82ef608575ee0a0d8e0afa, test blob e60bee9fce627813966c8e8a1d2a67c2a0d872ef; Owner Locked Master 50740bea26554015f745e7d2baa9977c658341e0 and Decision 90233639bef05b1671f5325ebbf89fde1031eac6",
+      "claim": "A restored all-five-green shot with valid dose/yield/time but impossible recorded temperature 65 or 145 C was previously admitted as proven same-coffee grinder and Slow Feed paired history, despite already-approved Log Shot temperature bound 70-100 C and other invalid-temperature guards. Correct only grindGuidance measured evidence, retaining null temperature and valid recorded temperatures, original five ratings/raw shots/history, all styles, calibration/Slow Feed separation, and unchanged Locked targets.",
+      "grade": "DIRECT_CURRENT_SOURCE_DISCREPANCY_AND_SIX_SYNTHETIC_REAL_MODULE_POSITIVE_NEGATIVE_TESTS; NO_REAL_USER_OBSERVATION_OR_EMPIRICAL_ESPRESSO_OUTCOME",
+      "result": "SAFE_LOCKED_COMPATIBLE_INVALID_TEMP_MEASURED_GRIND_EVIDENCE_GUARD_VERIFIED_READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+      "current_app": "site/lib/engine.js blob 26d0ffee46ad3bd5fd82ef608575ee0a0d8e0afa, within grindGuidance, filters invalid nonnull recorded temperatures against existing CONFIG.bounds.tempC before computing same-coffee proven grind, nearby donors or paired Slow Feed estimates. Original archived shot records and all taste ratings, notes and family data remain stored unchanged.",
+      "owner_approval": false,
+      "test_source": "Code PR1505 head 50198f949c2c5fdb5ceebe50ffbd5aac366009eb Node22/lint42526881425 3126 PASS/0 FAIL/6 intentional SKIP, all R123 six synthetic tests PASS; mobile/Chromium/cloud/offline42526881473, isolated SQL42526881498, source security42526881439 and approval42526881429 SUCCESS; frozen60342526881435 SKIPPED not PASS. Nonforce squash merged edf2e25666c25cb0fe7e43712d4e285e389ca40c, engine/test/journal blobs identical to tested exact head; merged Node22/lint42527146096 same 3126/0/6, UX/mobile/offline42527146134, approval42527146131 SUCCESS. No member/provider or physical espresso quality tests.",
+      "date": "2026-11-08"
     }
   ],
   "policy_decisions_pending": [],
@@ -3219,9 +3230,10 @@
     "tests_executed": true,
     "production_deployed": false,
     "queue_changed": true,
-    "reason": "R455-122 documented exact safely merged code/test guard and source SHA, four synthetic positive/negative tests and actual CI. No new espresso research source, owner Locked product policy or numeric threshold; development READY only, no deployment."
+    "reason": "R455-123 verified existing Locked 70-100 C recorded-temperature guard prevents invalid imported temp from becoming personal grind evidence; six direct-module tests and exact source CI, no scientific target or deployed change."
   },
   "next_actions": [
+    "R455-123 verified code PR1505 squash merged edf2e25666c25cb0fe7e43712d4e285e389ca40c, exact source six synthetic tests PASS with PR-head and merged Node22 3126 PASS/0 FAIL/6 SKIP and lint; applicable UX/mobile/offline, isolated SQL, security and governance SUCCESS. Queue READY development only; 68 sources, 165 evidence checks, 85 proposals. S019 standalone PDF inaccessible, #267 no literal review credit. Continue another distinct bounded increment.",
     "R455-122 verified code PR1495 nonforce merged 20c2a8048e267aaadac835d801a3737ba5445f89; four source-based archived basket fallback tests PASS both exact PR-head and merged Node22 3117 PASS/0 FAIL/6 SKIP, applicable UX/mobile/offline/SQL/security/governance checks passed, first governance intake failure corrected; 68 sources/164 bounded checks/84 proposals; queue READY only in development, NOT DEPLOYED. No #267 literal line credit, S019 unavailable. Continue distinct source/claim.",
     "R455-119 exact code PR1466 nonforce merged 17e0ea0b74c3e6a92f5631f571d663f4320a19b8, 3097 PASS/0 FAIL/6 SKIP Node22 head and merged, applicable Chromium/mobile/offline/SQL/security/governance PASS. Source-verified R119 overview malformed-import guard; queue READY development-only after docs reconciliation; 67 sources/159 checks/81 proposals; S019 inaccessible, #267 receives zero literal credit. No deployment.",
     "R455-108: independently inspected original Pannusch 2024 author-affiliated kinetic extraction abstract and live ORG-02/engine; 63 sources, 143 bounded checks, 70 proposals. No universal chemistry-to-taste mapping. Docs-only exact governance pending; full publisher PDF/S019 unavailable.",
@@ -3263,39 +3275,39 @@
     "R455-121 source-bound development bb71ba857bed91cd6807417b954e48292833a1b7: 2003 espresso original Wiley publisher abstract and University Navarra crosscheck, 2020 controlled drip paper original publisher-indexed methods/results and official 2021 correction, 68 sources/163 evidence checks/83 proposals. Same-commit docs-only PR/CI pending. No unverified 92 C optimum, water salts, app policy or code; no #267 line credit, S019 missing."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-122",
-    "base_development_sha": "1d8648c4055e53ddfcdfbf736730035b85b59405",
-    "merged_development_source_sha": "20c2a8048e267aaadac835d801a3737ba5445f89",
+    "id": "R455-123",
+    "base_development_sha": "55a0c4d80d934f12b91550a848c87c3b06dd4a61",
+    "merged_development_source_sha": "edf2e25666c25cb0fe7e43712d4e285e389ca40c",
     "source_ids": [
       "ORG-08",
       "DOC-MASTER-SPECIFICATION"
     ],
     "claim_ids": [
-      "R455-EV-APP-084-A"
+      "R455-EV-APP-085-A"
     ],
     "proposal_ids": [
-      "R455-PROP-122-ARCHIVED-BASKET-ACTIVE-RECIPE-CONTEXT"
+      "R455-PROP-123-INVALID-ARCHIVAL-TEMP-GRIND-EVIDENCE"
     ],
     "number_of_curated_sources": 68,
-    "total_evidence_checks": 164,
-    "number_of_proposals": 84,
-    "review_type": "DIRECT_LIVE_SOURCE_BASKET_CONTEXT_BUG_AND_FOUR_SYNTHETIC_REAL_MODULE_REGRESSIONS",
+    "total_evidence_checks": 165,
+    "number_of_proposals": 85,
+    "review_type": "DIRECT_LIVE_SOURCE_INVALID_TEMP_GRIND_EVIDENCE_BUG_AND_SIX_SYNTHETIC_REAL_MODULE_REGRESSIONS",
     "code_or_policy_changed": true,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
     "ci_runs": [
-      42521614583,
-      42521614540,
-      42521614561,
-      42521614558,
-      42521614578,
-      42521910223,
-      42521910151,
-      42521910207
+      42526881425,
+      42526881473,
+      42526881498,
+      42526881439,
+      42526881429,
+      42527146096,
+      42527146134,
+      42527146131
     ],
     "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "Recover live current source and investigate next distinct nonoverlapping high-confidence Log Shot→Rate→Recommendations or primary literature gap; reconcile #335/#33/#267/#96, don't duplicate #267 line review; don't deploy."
+    "next_action": "Recover current development and investigate distinct research/UX fact or correction after R123; preserve #33/#267/#96/#335 concurrency, never deploy."
   },
   "policy_decisions_resolved": [
     {
@@ -5026,6 +5038,26 @@
       "release_queue_status": "DIC-Q-455-archived-basket-active-recipe-context READY_IN_DEVELOPMENT_ONLY_NOT_DEPLOYED",
       "github267_literal_review_credit": 0,
       "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-123-INVALID-ARCHIVAL-TEMP-GRIND-EVIDENCE",
+      "finding": "Source-level discrepancy: archived all-green measured shot with invalid nonnull recorded temperature could masquerade as proven grinder evidence or a paired Slow Feed observation; latest-shot guards already reject invalid temperature. Restored synthetic fixtures reproduce; no observed real user incident.",
+      "evidence": [
+        "R455-EV-APP-085-A"
+      ],
+      "severity": "P2_PERSONAL_GRINDER_EVIDENCE_QUALITY_AND_SLOW_FEED_PROVENANCE",
+      "user_benefit": "Prevent impossible recorded temperature metadata from supplying a misleading proven next-shot grinder setting, while preserving optional temperature and valid historical use.",
+      "current_locked": "Same-coffee/version/basket/feed measured evidence, five taste inputs, optional temperature with already-approved 70-100 C Log Shot bounds, single controllable recommendation, independent styles, original notes and private History retained; archived rows preserved verbatim.",
+      "current_app": "Before engine blob 996df47748bf9e0b1ae663d3a8fb4f6090313862 grindGuidance used measuredRecipeShots without temperature check; after engine blob 26d0ffee46ad3bd5fd82ef608575ee0a0d8e0afa applies optional recorded-temp validity only to grinder-derived evidence, no blanket family or taste policy change.",
+      "proposed_change": "SAFE IMPLEMENTED: exclude invalid nonnull archived temperature from measured personal grinder evidence and paired Slow Feed evidence, without overwriting any stored shot, introducing numeric optima, new fields or cross-coffee/time transfers.",
+      "evidence_grade": "DIRECT_GITHUB_SOURCE_AND_POSITIVE_NEGATIVE_SYNTHETIC_NODE22_REGRESSIONS; NO_REAL_MEMBER_INCIDENCE_OR_TASTE_OUTCOME",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "PR1505_NONFORCE_SQUASH_MERGED_edf2e25666c25cb0fe7e43712d4e285e389ca40c_ALL_THREE_CODE_TEST_JOURNAL_BLOBS_IDENTICAL_TO_VERIFIED_HEAD_50198f949c2c5fdb5ceebe50ffbd5aac366009eb",
+      "test_plan": "R123 six synthetic direct-real-module negative/positive checks for too high/low temp, valid temp, optional null, mixed donor and Slow Feed contamination plus state immutability. PR-head and merged Node22 3126 PASS/0 FAIL/6 SKIP, lint PASS, Chromium/mobile/offline, isolated SQL, security, approval exact checks SUCCESS; frozen603 SKIPPED not PASS.",
+      "release_queue_status": "DIC-Q-455-invalid-archival-temperature-grind-evidence READY_IN_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
     }
   ],
   "changeScope": {
@@ -5033,6 +5065,6 @@
     "tests_executed": true,
     "production_deployed": false,
     "queue_changed": true,
-    "reason": "R455-122 documented exact safely merged code/test guard and source SHA, four synthetic positive/negative tests and actual CI. No new espresso research source, owner Locked product policy or numeric threshold; development READY only, no deployment."
+    "reason": "R455-123 verified existing Locked 70-100 C recorded-temperature guard prevents invalid imported temp from becoming personal grind evidence; six direct-module tests and exact source CI, no scientific target or deployed change."
   }
 }

@@ -8,6 +8,35 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-invalid-archival-temperature-grind-evidence",
+      "issue": 455,
+      "pr": 1505,
+      "title": "Discard impossible archived shot temperature as proven grinder and paired Slow Feed evidence; preserve History",
+      "state": "READY",
+      "merged_source_sha": "edf2e25666c25cb0fe7e43712d4e285e389ca40c",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Original development 55a0c4d80d934f12b91550a848c87c3b06dd4a61 engine blob 996df47748bf9e0b1ae663d3a8fb4f6090313862 used measuredRecipeShots without optional recorded temperature validity within grindGuidance, allowing imported five-green impossible 65/145 C shot as proven grind/paired Slow Feed. Source-discrepancy and synthetic fixtures, no real member incidence.",
+        "Six exact real-module R123 synthetic positive/negative tests for high/low invalid temp, valid 92/93 C, null temp, mixed history and Slow Feed evidence, preserve original state, all five ratings/notes/history. Code PR1505 head 50198f949c2c5fdb5ceebe50ffbd5aac366009eb Node22/lint42526881425 3126 PASS/0 FAIL/6 intentional SKIP; Chromium/mobile/offline/cloud42526881473, isolated SQL42526881498, security42526881439, approval42526881429 SUCCESS; frozen60342526881435 SKIPPED not PASS.",
+        "Nonforce squash PR1505 merged edf2e25666c25cb0fe7e43712d4e285e389ca40c; exact engine 26d0ffee46ad3bd5fd82ef608575ee0a0d8e0afa, test e60bee9fce627813966c8e8a1d2a67c2a0d872ef, same-commit journal de4e5832905f78ae3127730b44da5fbd5eceb473 blobs independently match passing PR HEAD. Exact merged Node22/lint42527146096 3126 PASS/0 FAIL/6 SKIP and lint PASS; UX/mobile/Chromium/offline42527146134 and approval42527146131 SUCCESS. Unchanged PR-head SQL/security evidence reused; no provider writes or real signed-in member validation."
+      ],
+      "ci_runs": [
+        42526881425,
+        42526881473,
+        42526881498,
+        42526881439,
+        42526881429,
+        42527146096,
+        42527146134,
+        42527146131
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "SAFE R455-123 application source only; READY in development, NOT deployed. Temperature optional and existing Log Shot 70-100 C numeric bounds unchanged. Original shot, all five ratings, notes/private History, style/feed/grinder families and RLS/Community untouched. No new product choice or real-world taste outcome; S019 original unavailable, #267 strict line review receives zero credit."
+    },
+    {
       "id": "DIC-Q-455-archived-basket-active-recipe-context",
       "issue": 455,
       "pr": 1495,
