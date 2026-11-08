@@ -515,5 +515,44 @@ export function selectedCurrentDecafSpecMethodEvidence(productHtml,{name,clean}=
    }
   }
  }
+ // A current selected coffee can publish literal spec facts as a two-cell
+ // table, not a Process: sentence. Read only a DIRECT selected product row,
+ // never SEO, a prose match, neighboring products, FAQ or roast history.
+ // The table is an evidence source for the decaf treatment, NOT for green
+ // processing (the general layout parser may call this Process instead).
+ const tree=coffeeHtmlElements(productHtml);
+ if(tree.truncated)return {candidates:[...seen.values()],complete:false};
+ const firstSelectedH1=blocks.find(b=>b.tag==='h1'&&fold(b.text)===selected)?.start??Infinity;
+ const headingsByPosition=blocks.filter(b=>/^h[2-6]$/.test(b.tag));
+ const cellsByRow=new Map();
+ for(const node of tree.nodes)if(node.tag==='td'&&node.parent!==null){
+  const siblings=cellsByRow.get(node.parent)||[];
+  siblings.push(node);cellsByRow.set(node.parent,siblings);
+ }
+ let headingIndex=0,section=null;
+ for(const [index,row] of tree.nodes.entries()){
+  if(row.tag!=='tr'||row.start<=firstSelectedH1||row.start>=faqStart)continue;
+  while(headingIndex<headingsByPosition.length&&headingsByPosition[headingIndex].start<row.start)
+   section=headingsByPosition[headingIndex++];
+  if(section?.educational||/^(?:faq|common questions|frequently asked questions|customer reviews|how to|other coffee|related)/iu.test(section?.text||''))continue;
+  const cells=cellsByRow.get(index)||[];
+  if(cells.length!==2||cells.some(node=>node.contentEnd-node.headEnd>1300))continue;
+  const label=clean(productHtml.slice(cells[0].headEnd,cells[0].contentEnd),100).trim();
+  const value=clean(productHtml.slice(cells[1].headEnd,cells[1].contentEnd),160).trim();
+  if(!/^(?:processing method|decaffeination(?: method| process)?|decaf process)$/iu.test(label)||
+      value.length<8||value.length>110||NONCURRENT_DECAF_METHOD.test(value)||
+      /\b(?:not|never|without|unlike|instead of|rather than)\b/iu.test(value))continue;
+  // "Processing Method: Washed" is GREEN processing. Require an explicit
+  // named caffeine-removal treatment, never water used for ordinary washing.
+  if(/^processing method$/iu.test(label)&&
+      !/\b(?:decaf(?:feination|feinated)?|swiss[ -]?water|mountain[ -]?water|sugar[ -]?cane|ethyl[ -]?acetate|carbon[ -]?dioxide|co[ -]?2)\b/iu.test(value))continue;
+  const method=inferDecaffeinationMethod({name,selectedMethod:value});
+  if(!method)continue;
+  const key=fold(label+' '+value);
+  if(!seen.has(key)){
+   seen.set(key,{label,value,method});
+   if(seen.size>8)return {candidates:[...seen.values()],complete:false};
+  }
+ }
  return {candidates:[...seen.values()],complete:true};
 }
