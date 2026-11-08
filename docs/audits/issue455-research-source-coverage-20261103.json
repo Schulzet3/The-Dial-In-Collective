@@ -3137,6 +3137,16 @@
       "current_app": "site/lib/model.js merged blob 1efeeac985b7f2fb68a67e34af1f40c38437666c finite numeric 5-40g dose, 5-200g yield, 1-180s time. Original History green badge and all five ratings/notes/history unchanged. Cloud main uses M.hasLocalSuccess. Engine unchanged.",
       "owner_approval": false,
       "test_source": "PR1466 tested head 9d1cef6eddc6eb568408d511294ee8d9d705483e; Node 42506277595 3097 PASS/0 FAIL/6 SKIP, UX+Chromium/mobile/offline42506277639, SQL/JWT42506277587, security42506277657, approval42506277529 all applicable SUCCESS; original frozen60342506277555 SKIPPED not PASS. Exact merged 17e0ea0b74c3e6a92f5631f571d663f4320a19b8 Node42506534296 3097/0/6, UX42506534287, approval42506534478 SUCCESS."
+    },
+    {
+      "id": "R455-EV-APP-082-A",
+      "source": "Exact development parent dcc9a8852bec0f8202b1dd654e6ace02f241afb2; original site/lib/engine.js blob d676fa918900504ce0839451760fa6e817edede8 familyShots/familyStats/assignFamily; nine-original archived reports ORG-03 (blob 9a66449c6adfe27bc7e64dae086d3dfcfc647de6) and ORG-05 (be455fe3c2dc8469c67c49bed7e9f539943ea463) for context, not proof of application incidence; fixed engine blob 91e04dc0c61f9a63c835cbed924dc5e33f3c2d95, synthetic test blob 456997a48d5d6fa068be2610c62befe626877d22",
+      "claim": "Malformed imported all-five-green shots with an assigned family ID belonging to another coffee or style were counted by familyShots/familyStats and could distort ratio counts and same-coffee family assignment, despite their original recipe-family identity mismatch. Existing chooseRecipeFamily selected-shot filter was not sufficient for familyStats/assignFamily callers. Preserve all archived raw shots, their five sensory ratings and private notes; require matching family coffee and style only for evidence.",
+      "grade": "REPRODUCIBLE_DIRECT_LIVE_SOURCE_DISCREPANCY_WITH_FIVE_SYNTHETIC_POSITIVE_AND_NEGATIVE_REAL-MODULE_TESTS_PASS; NO_VERIFIED_REAL_MEMBER_INCIDENT_OR_EMPIRICAL_ESPRESSO_CUP_OUTCOME; ARCHIVED_ORIGINAL_RESEARCH_NOT_EXTERNAL_INCIDENCE_PROOF",
+      "result": "SAFE_LOCKED_COMPATIBLE_CROSS_COFFEE_STYLE_FAMILY_EVIDENCE_ISOLATION_VERIFIED_READY_DEVELOPMENT_NOT_DEPLOYED",
+      "current_app": "site/lib/engine.js exact tested head 1320f868a3495fd97fe09623648aeb24c581c303 and nonforce merged 82238ac149ab81c6da5e110ca16b3b3453af11fe independently Git-blob verified: familyShots resolves the stored family object and filters coffeeId+style+five real ideal ratings and visible status; other history untouched. All original five taste ratings, independent style families, grinder/version/feed and private notes retained.",
+      "owner_approval": false,
+      "test_source": "PR1477 head Node22 42511197904 3,102 PASS/0 FAIL/6 intentional SKIP (five R120 tests PASS), eslint PASS; UX/mobile/Chromium/cloud 42511198006 SUCCESS, isolated SQL 42511197915 SUCCESS, security 42511197764 SUCCESS, approval 42511197922 SUCCESS; original603 42511197790 SKIPPED NOT PASS. Exact merged-source Node22 42511432880 3,102 PASS/0 FAIL/6 SKIP and eslint PASS; UX/cloud/mobile/browser 42511432854 SUCCESS; governance 42511432859 SUCCESS. SQL/security head evidence applies to unchanged verified app blob."
     }
   ],
   "policy_decisions_pending": [],
@@ -3183,43 +3193,43 @@
     "R455-115 source first 0fdad30bb726081c275b182cb0024f6e34b4ca6e: Ribes 2020 five-slide manufacturer experiment original PDF visual/text reviewed and 2026 restatement crosschecked; 66 curated sources/153 evidence checks/77 proposals. Non-peer-reviewed; no universal dose, pressure or EY target; original PDF binary unverified, no sensory panel. Docs PR CI and merge pending. Standalone S019 inaccessible; zero #267 V2 line review credit.",
     "R455-116 exact base d1f8c83708640daf7b8306ea1af5a25a5defe676; orphaned or wrong-coffee/style historical family preference pointer closed by verified nonforce PR1444 merged 5d9f8a385306cd3fde199777615299aa975c800f; exact merged Node22 3077 PASS/0 FAIL/6 intentional SKIP (42491476786) and mobile/UX/offline42491476801 + approval42491476762 success. R116 READY not deployed. 66 curated sources/154 checks/78 proposals; standalone S019 inaccessible, zero #267 line credit. Continue independent bounded source/UX review.",
     "R455-117 live parent 8421c12087f88978839dc5aff973c478e19e7a1e: Santanatoglia et al. 2024 Food Chemistry original indexed methods/results/conclusion substantially cross-checked; 67 sources / 156 bounded evidence checks / 79 proposals; direct publisher HTML fetch blocked 403, PDF/raw not hashed; no espresso universal pH or sourness rule. Docs-only source-bound PR/CI/merge pending; S019 missing; zero #267 literal-line credit.",
-    "R455-118 source-bound development b66dc4db6207e6a8c4363a43296d0c4b17cb2351: direct primary 2024 Smrke fines PDF experiment, Figs 2-5, VOC and single nonblinded Q-grader limits reviewed; 67 registered sources/158 checks/80 proposals. Docs-only PR and CI pending at commit authoring, no numeric/Locked/queue/code/production changes, no #267 line credit, S019 still missing."
+    "R455-118 source-bound development b66dc4db6207e6a8c4363a43296d0c4b17cb2351: direct primary 2024 Smrke fines PDF experiment, Figs 2-5, VOC and single nonblinded Q-grader limits reviewed; 67 registered sources/158 checks/80 proposals. Docs-only PR and CI pending at commit authoring, no numeric/Locked/queue/code/production changes, no #267 line credit, S019 still missing.",
+    "R455-120 verified source-bound PR1477 engine familyShots coffee+style identity guard and five isolated synthetic regressions, Node22 3102/0/6 both PR head and merged, applicable CI success, SAFE READY in development only, original S019 inaccessible, #267 literal review separately owned. Next: disjoint fresh research/UX increment."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-119",
-    "base_development_sha": "7234fff47cf1e98989a66ddd165e1c2ecccd9fec",
-    "merged_development_source_sha": "17e0ea0b74c3e6a92f5631f571d663f4320a19b8",
+    "id": "R455-120",
+    "base_development_sha": "dcc9a8852bec0f8202b1dd654e6ace02f241afb2",
+    "merged_development_source_sha": "82238ac149ab81c6da5e110ca16b3b3453af11fe",
     "source_ids": [
-      "ORG-01",
-      "ORG-02",
-      "ORG-07"
+      "ORG-03",
+      "ORG-05"
     ],
     "claim_ids": [
-      "R455-EV-APP-081-A"
+      "R455-EV-APP-082-A"
     ],
     "proposal_ids": [
-      "R455-PROP-119-COFFEE-OVERVIEW-PHYSICALLY-VALID-GREEN-ELIGIBILITY"
+      "R455-PROP-120-CROSS-COFFEE-STYLE-FAMILY-EVIDENCE-ISOLATION"
     ],
     "number_of_curated_sources": 67,
-    "total_evidence_checks": 159,
-    "number_of_proposals": 81,
-    "review_type": "REPRODUCED_LIVE_COFFEE_OVERVIEW_VS_MEASURED_RECIPE_SUCCESS_DISCREPANCY_AND_LOCKED_SAFE_SOURCE_FIX",
+    "total_evidence_checks": 160,
+    "number_of_proposals": 82,
+    "review_type": "REPRODUCED_LIVE_FAMILY_COFFEE_STYLE_IDENTITY_CONTAMINATION_AND_SAFE_GUARD",
     "code_or_policy_changed": true,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
     "ci_runs": [
-      42506277595,
-      42506277639,
-      42506277587,
-      42506277657,
-      42506277529,
-      42506534296,
-      42506534287,
-      42506534478
+      42511197904,
+      42511198006,
+      42511197915,
+      42511197764,
+      42511197922,
+      42511432880,
+      42511432854,
+      42511432859
     ],
     "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "Verify this docs-only PR/governance and nonforce merge; checkpoint Issue #455. Next run recover new exact live branches/CI, inspect new disjoint safe Log Shot to Rate to Recommendation finding or source; do not duplicate #267/#33/#96."
+    "next_action": "After nonforce docs-only reconciliation CI and Issue #455 checkpoint, resume fresh SHA-bound disjoint Log Shot to Rate to Recommendation gap or primary-source claim. Avoid #267 literal audit and #33/#96 provider ownership. Keep nonpublishing READY release and original raw private data."
   },
   "policy_decisions_resolved": [
     {
@@ -4885,6 +4895,26 @@
       "implementation": "PR1466_NONFORCE_MERGED_17e0ea0b74c3e6a92f5631f571d663f4320a19b8; TESTED_SOURCE_AND_MERGED_SOURCE_APPLICABLE_CI_SUCCESS",
       "test_plan": "Synthetic 15 invalid variants, inclusive endpoints, five-rating/flag checks, coffee/version/style scoping, History preserved and cloud UI source route. Exact tested head Node22 3097 pass/0 fail/6 skip, UX/mobile/Chromium/service worker, SQL/Auth, security and governance success. Exact merged Node22 3097/0/6, browser/mobile/offline and governance success. Frozen603 SKIPPED. No real-member, hosted browser auth or physical cup outcome test asserted.",
       "release_queue_status": "DIC-Q-455-local-success-physical-history-guard READY_IN_DEVELOPMENT_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-120-CROSS-COFFEE-STYLE-FAMILY-EVIDENCE-ISOLATION",
+      "finding": "A restored/imported all-green shot may retain a foreign-coffee or foreign-style family ID; previous familyShots used that ID alone without checking stored family identity, permitting contamination of same-coffee family statistics and assignment. Synthetic source reproduction; no real-member incident reported.",
+      "evidence": [
+        "R455-EV-APP-082-A",
+        "R455-EV-APP-078-A"
+      ],
+      "severity": "P2_PRIVATE_RECIPE_EVIDENCE_INTEGRITY_AND_FALSE_FAMILY_CONFIDENCE",
+      "user_benefit": "Prevent foreign-coffee/style history from distorting saved personal ratio windows and future same-coffee family assignment without deleting any historical shot, five ratings or private notes.",
+      "current_locked": "All five individual taste inputs, actual all-green vs incomplete ratings, one controllable advice change, same-coffee evidence, independently selected Turbo versus Fast-Flow and other styles, multiple successful recipe families, original notes/private shot history and no speculative numeric science.",
+      "current_app": "Pre-change engine blob d676fa918900504ce0839451760fa6e817edede8 had foreign-family contamination in familyStats. Fixed exact tested engine blob 91e04dc0c61f9a63c835cbed924dc5e33f3c2d95 filters familyShots by actual existing family.coffeeId and family.style; all original shot objects preserved.",
+      "proposed_change": "SAFE IMPLEMENTED: reject wrong-coffee/style and orphan family IDs from derived family evidence; preserve original archived rows and legitimate same-coffee/style families; do not migrate or rewrite any record, change taste thresholds, add data capture or revise policy.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "PR1477_NONFORCE_SQUASH_MERGED_82238ac149ab81c6da5e110ca16b3b3453af11fe; VERIFIED_EXACT_PR_HEAD_AND_EXACT_MERGED_SOURCE_TESTS_ALL_APPLICABLE_SUCCESS",
+      "test_plan": "New five synthetic original-module positive/negative tests, verify excluded mismatches and orphan, positive same-family and distinct historical-style success, compare source/merge blob parity, full Node22 3102 PASS/0 FAIL/6 SKIP and lint, applicable UX/mobile/offline/SQL/security/governance checks. Frozen603 SKIPPED; no actual production member/browser/espresso taste measurements claimed.",
+      "release_queue_status": "DIC-Q-455-family-cross-identity-evidence READY_IN_DEVELOPMENT_ONLY_NOT_DEPLOYED",
       "github267_literal_review_credit": 0,
       "production_deployed": false
     }
