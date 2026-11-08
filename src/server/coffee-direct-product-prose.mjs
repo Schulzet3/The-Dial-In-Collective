@@ -451,9 +451,21 @@ export function selectedCurrentDecafSpecMethodEvidence(productHtml,{name,clean}=
     headings.some((heading,i)=>i>0&&heading!==selected&&!editorial.test(heading))||
     /^(?:all|shop|catalog|collection)\s+(?:decaf|coffee)/iu.test(String(name)))return empty;
  // FAQ and educational examples are not actual selected-product specs.
- const faqStart=blocks.find(b=>/^h[1-6]$/.test(b.tag)&&fold(b.text)==='frequently asked questions')?.start??Infinity;
+ const faqStart=blocks.find(b=>/^(?:frequently asked questions|common questions)$/u.test(fold(b.text))&&
+  (/^h[1-6]$/.test(b.tag)||b.tag==='span'))?.start??Infinity;
  const seen=new Map();
+ // Only a chosen decaf's explicit PROCESSING DETAILS card may use
+ // a bare Method caption: neighboring flavor, FAQ or brew cards may not.
+ let inSelectedProcessingDetails=false;
  for(const block of blocks){
+  if(block.tag==='span'&&
+     /^(?:origin story|processing details|flavou?r profile|why we love it)$/u.test(fold(block.text))){
+   inSelectedProcessingDetails=fold(block.text)==='processing details';
+   continue;
+  }
+  if(/^h[2-6]$/.test(block.tag)&&
+     /^(?:brewing recommendations?|common questions|frequently asked questions)$/u.test(fold(block.text)))
+   inSelectedProcessingDetails=false;
   if(block.start>=faqStart||block.educational||!['li','p','div','span'].includes(block.tag)||
      block.text.length>300||
      /\b(?:related products?|you may also like|recommended|more coffees?|education|educational|decaf guide|decaf faq)\b/i.test(block.section))continue;
@@ -471,15 +483,20 @@ export function selectedCurrentDecafSpecMethodEvidence(productHtml,{name,clean}=
    // literal value without a colon: <strong>Processing</strong>Washed:
    // Mountain Water Decaf. Require an actual adjacent strong label in a
    // bounded product BR segment, not a freeform prose or FAQ substring.
-   let hit=caption.text.trim().match(/^(Decaffeination(?:\s+(?:Method|Process))?|Decaf\s+Process|Process(?:ing)?(?:\s+Method)?)\s*[:：]\s*(.{3,180})$/iu);
+   let hit=caption.text.trim().match(/^(Decaffeination(?:\s+(?:Method|Process))?|Decaf\s+Process|Process(?:ing)?(?:\s+Method)?|Method)\s*[:：]\s*(.{3,180})$/iu);
    if(!hit){
-    const structured=caption.html.trim().match(/^<strong\b[^>]{0,240}>\s*(Decaffeination(?:\s+(?:Method|Process))?|Decaf\s+Process|Process(?:ing)?(?:\s+Method)?)\s*<\/strong>\s*(.{3,250})$/iu);
-    const splitLabel=caption.splitStrong?caption.html.trim().match(/^(Decaffeination(?:\s+(?:Method|Process))?|Decaf\s+Process|Process(?:ing)?(?:\s+Method)?)\s*<\/strong>\s*(.{3,250})$/iu):null;
+    const structured=caption.html.trim().match(/^<strong\b[^>]{0,240}>\s*(Decaffeination(?:\s+(?:Method|Process))?|Decaf\s+Process|Process(?:ing)?(?:\s+Method)?|Method)\s*<\/strong>\s*(.{3,250})$/iu);
+    const splitLabel=caption.splitStrong?caption.html.trim().match(/^(Decaffeination(?:\s+(?:Method|Process))?|Decaf\s+Process|Process(?:ing)?(?:\s+Method)?|Method)\s*<\/strong>\s*(.{3,250})$/iu):null;
     const selected=structured||splitLabel;
     if(selected)hit=[selected[0],selected[1],clean(selected[2],180)];
    }
    if(!hit)continue;
    const value=hit[2].trim();
+   // A bare Method caption is ambiguous outside selected processing specs.
+   // Require an actual named decaffeination treatment, not brewing methods.
+   if(/^Method$/iu.test(hit[1])&&
+      (!inSelectedProcessingDetails||
+       !inferDecaffeinationMethod({name,selectedMethod:value})))continue;
    // "Decaf Process" is itself an affirmative decaffeination label, but
    // its VALUE must still be a complete named treatment, not generic water
    // rinsing/washing or equipment use. A vague label never licenses a guess.
