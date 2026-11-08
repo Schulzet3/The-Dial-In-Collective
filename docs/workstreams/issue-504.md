@@ -1302,3 +1302,20 @@ One atomic docs-only commit: receipt, append-only coverage ledger and same-commi
 **Safety/tests:** Original REST-body equality, SHA1 vector, arithmetic, duplicate negative, PR287 merged status, and delegated source checks PASS. No Node22, SQL/GoTrue, live Auth, browser/mobile/offline, original603 or provider runs for docs-only work; exact-source CI remains PENDING until actual workflow results. Only #504 receipt, append-only ledger and scoped journal on isolated audit PR branch; no app/code/queue/Locked/history/member/backups/Netlify/production/main/release/visibility changes.
 
 **NEXT exact untouched object:** [Issue #96 original comment `6682759196`](https://github.com/Schulzet3/The-Dial-In-Collective/issues/96#issuecomment-6682759196) **word 1**. Issue #504 stays **OPEN / IN_PROGRESS**.
+
+
+---
+
+## Issue #504 G1-107 — November 8, 2026 UTC: six final original #96 and two new #267 GitHub comments [skip netlify]
+
+Recovered original GitHub development `543bcc0c598571471e72969618e064da1bc11b10`, main `bd627d40f7e65321323512b303d2e3f75709af39`, release/production `2ec10324fcaa4b60d1e48240b44b77b141b9ba54` and G1-106 completed source-bound checkpoint; #267/#455/#33/#96 active source/CI and repository governance consulted. Existing owner-approved temporary PUBLIC #630 Nov4–30 remains untouched; no implicit visibility change.
+
+**Exact direct original review:** Issue #96 comments `6682759196, 6684135423, 6686539247, 6690952062, 6693440066, 6693475494` followed by #267 comments `6704486514, 6705006255`, full original word **1–EOF** each, **8 newly credited original records / 1775 Unicode whitespace words / 17994 original UTF-8 bytes**. Original REST by-ID bodies exactly equal paginated comments 8/8, UTC timestamps, SHA1, exact physical/word/byte bounds and individual semantics saved in immutable [G1-107 receipt](../audits/issue504-review-G1-107.json). First two encountered #267 historical comments were already credited, therefore deliberately not double-counted.
+
+**Cumulative:** 7919 source-file lines / 60754 words, plus **611 GitHub record objects / 181226 record words**. #96 inherited importer credential-key normalization blind spot (production reachability not demonstrated), historical Admin SQL static-test false positive, and ineffective historical schema-scoped default-function REVOKE remain assigned bounded findings. New #267 metadata reports T11/N33 and already merged CSS targeted test fix are evidence, not another source-code batch; V1 and V2 source counts not conflated. No new #504-owned reproducible defect, safe deletion or owner decision established.
+
+**Independent #267 precision:** Frozen F437 `site/admin/records.js:78–80` source blob `142fb26e13b2b... ` (full `142fb26e9bae0fd734412c3b20034791c73333a5`), exact T25 per-line receipt blob `84b0db565059d261b6f8eb30544baa23ef09c1fa`, source literals **3/3 matched**, no duplicate #504 source code credit. Full source V2 and metadata inventory remain incomplete.
+
+**Validation:** Original raw REST equality 8/8; source SHA1 arithmetic, word/byte counts, unique-ID negative test and independent 267 line identity 3/3 PASS. Node22 functional, live GoTrue/SQL/provider, mobile/browser/offline and original603 NOT RUN for docs-only audit, never credited. Receipt, append-only ledger and same-commit scoped journal only; no app/Auth/extractor/backup/queue/Locked/provider/Netlify/production/main/release writes. PR-head CI to be checked before any nonforce integration; pending is NOT PASS.
+
+**NEXT:** [original #267 comment 6705568177](https://github.com/Schulzet3/The-Dial-In-Collective/issues/267#issuecomment-6705568177), **word 1**. #504 remains OPEN / IN_PROGRESS until all accessible words and delegated #267 coverage are independently reconciled.
