@@ -10,24 +10,33 @@
     {
       "id": "DIC-Q-455-new-shot-active-basket-integrity",
       "issue": 455,
-      "pr": null,
+      "pr": 1525,
       "title": "Reject retired/missing basket IDs on NEW shot save while preserving historical offline replay",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "1a54269e8f7d2c1189fd948c959de5e61dab3312",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
-        "R455-125 source parent da4989c83142cfca9e76dcb276b0f172e931a43d, engine original blob 26d0ffee46ad3bd5fd82ef608575ee0a0d8e0afa: recommendation and prefill already exclude archived explicit basket, but saveShot kept input.basketId and snapshot could silently use another basket dose; no observed member incident.",
-        "Four new synthetic real-module negative/positive regression tests in tests/issue455-new-shot-active-basket-integrity.test.mjs. CI UNRUN pending PR, never call skipped checks PASS."
+        "R125 source parent da4989c83142cfca9e76dcb276b0f172e931a43d engine blob 26d0ffee46ad3bd5fd82ef608575ee0a0d8e0afa: stale/retired/unknown basket ID in new save could mismatch active fallback snapshot; source gap only, no observed real-member event.",
+        "R125 four synthetic real-module positive/negative tests: invalid archived/missing/null/unknown basket reject without mutation; valid alternate active basket identity remains consistent with saved shot/snapshot; idempotent offline duplicate retains original history after later archival.",
+        "Exact PR #1525 head 2dc9489b8c8fb5b59039afc4adca2bc246733119: Node22/lint42536695126 3138 PASS/0 FAIL/6 SKIP, cloud/mobile/UX/offline42536695019, SQL42536695078, security42536695084, approval42536695056 SUCCESS; original60342536695290 SKIPPED NOT PASS.",
+        "Exact nonforce squash merged 1a54269e8f7d2c1189fd948c959de5e61dab3312 all four source/test/journal/queue blobs equal passed head; merged Node22/lint42536921751 3138 PASS/0 FAIL/6 SKIP, UX/offline42536921758, governance42536921708 SUCCESS. Head SQL/security unchanged evidence reused."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "PR-head source-bound tests and governance unverified",
-        "Code not merged or release certified"
+      "ci_runs": [
+        42536695126,
+        42536695019,
+        42536695078,
+        42536695084,
+        42536695056,
+        42536695290,
+        42536921751,
+        42536921758,
+        42536921708
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Development-only SAFE Locked-compatible guard; preserves history, idempotent saved shot, five tastes, notes, styles, grinder/feed calibration and RLS. Not deployed or authorized for production."
+      "notes": "SAFE correction READY in development only, NOT deployed; five tastes, notes/private history, idempotent replay, styles, grinder/feed/version, Locked/privacy retained. PR #1524 bad candidate closed unmerged after detecting broad tree deletion before integration; corrected four-path PR #1525 merged."
     },
     {
       "id": "DIC-Q-33-original603-549-explicit-origin-peaberry-class",
