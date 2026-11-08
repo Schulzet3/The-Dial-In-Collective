@@ -3073,9 +3073,29 @@
       "confirmed_new_defects": 0,
       "provider_writes": false,
       "baseline_complete": false
+    },
+    {
+      "event": "2026-11-08_run86_735_non_pg_catalog_view_column_tuple_direct_review",
+      "development_parent_sha": "9589368b7e86f4613ad1b86f4e68b96e1d7d08aa",
+      "provider_fingerprint": "dad2edf47ea9e1e503ad7bc6e22c83b4",
+      "reviewed_new": 735,
+      "total": 735,
+      "views": 68,
+      "receipt_paths": [
+        "docs/audits/issue509-provider-nonpg-view-columns-001-105-20261108-run86.json",
+        "docs/audits/issue509-provider-nonpg-view-columns-106-210-20261108-run86.json",
+        "docs/audits/issue509-provider-nonpg-view-columns-211-315-20261108-run86.json",
+        "docs/audits/issue509-provider-nonpg-view-columns-316-420-20261108-run86.json",
+        "docs/audits/issue509-provider-nonpg-view-columns-421-525-20261108-run86.json",
+        "docs/audits/issue509-provider-nonpg-view-columns-526-630-20261108-run86.json",
+        "docs/audits/issue509-provider-nonpg-view-columns-631-735-20261108-run86.json"
+      ],
+      "confirmed_defects": 0,
+      "production_writes": false,
+      "baseline_complete": false
     }
   ],
-  "state": "PG_OPCLASS_179_PG_OPFAMILY_148_PG_AM_7_VISIBLE_DECLARATIONS_COMPLETE; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
+  "state": "NONPG_VIEW_ATTRIBUTES_735_DIRECT_FULL_TUPLE_FIELD_REVIEW; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
   "application_table_review": {
     "total": 46,
     "current_index": 46,
@@ -13246,5 +13266,39 @@
     "full_516_source_review_coverage_preserved": true,
     "baseline_complete": false,
     "next": "Continue genuinely unreviewed provider metadata with accurate OID normalization; native/JWT/API/console UNVERIFIED"
+  },
+  "provider_nonpg_view_columns_run86": {
+    "state": "735_OF_735_NON_PG_CATALOG_VIEW_COLUMN_RAW_DECLARATIONS_DIRECTLY_RETRIEVED_AND_FIELD_VALIDATED; HOSTED_AND_NATIVE_UNVERIFIED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "provider_snapshot_fingerprint": "dad2edf47ea9e1e503ad7bc6e22c83b4",
+    "source_development_parent_sha": "9589368b7e86f4613ad1b86f4e68b96e1d7d08aa",
+    "reviewed_new": 735,
+    "total": 735,
+    "views": 68,
+    "by_schema": {
+      "extensions": 51,
+      "information_schema": 675,
+      "vault": 9
+    },
+    "prior_view_sql_146_not_recredited": true,
+    "receipt_paths": [
+      "docs/audits/issue509-provider-nonpg-view-columns-001-105-20261108-run86.json",
+      "docs/audits/issue509-provider-nonpg-view-columns-106-210-20261108-run86.json",
+      "docs/audits/issue509-provider-nonpg-view-columns-211-315-20261108-run86.json",
+      "docs/audits/issue509-provider-nonpg-view-columns-316-420-20261108-run86.json",
+      "docs/audits/issue509-provider-nonpg-view-columns-421-525-20261108-run86.json",
+      "docs/audits/issue509-provider-nonpg-view-columns-526-630-20261108-run86.json",
+      "docs/audits/issue509-provider-nonpg-view-columns-631-735-20261108-run86.json"
+    ],
+    "metadata_anomalies": 0,
+    "pg_stat_statements_view_anonymous_metadata_select": true,
+    "pg_read_all_stats_member": false,
+    "pg_read_all_stats_anon": false,
+    "vault_client_schema_and_select": false,
+    "confirmed_new_application_defects": 0,
+    "source_fixes": 0,
+    "production_writes": false,
+    "baseline_complete": false,
+    "next": "Next distinct uncovered pg_proc raw catalog tuple metadata in OID order; then changed provider definitions and hosted Auth/JWT/PostgREST under Issue #96. Compiled native C and 63 withheld values UNVERIFIED"
   }
 }
