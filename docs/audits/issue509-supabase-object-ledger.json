@@ -14293,5 +14293,74 @@
     "production_writes": false,
     "baseline_complete": false,
     "next": "Identify distinct uncovered provider object/source definition families, drift, bounded errors and explicitly inaccessible provider settings; native/hosted API still unverified"
+  },
+  "provider_nonpg_pg_class_raw_run103": {
+    "status": "NON_PG_CATALOG_NON_TOAST_PG_CLASS_RAW_SAFE_VISIBLE_FIELDS_407_OF_407_DIRECT_FIELD_AND_INVARIANT_REVIEW_NATIVE_HOSTED_UNVERIFIED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_development_parent_sha": "20c2a8048e267aaadac835d801a3737ba5445f89",
+    "ops_main_sha": "a4028e42b0d0316fd539c0563fd07832d509aed0",
+    "publication_sha": "92829cb6aff82aaec212eabbd921183e7997f1a7",
+    "catalog_family": "pg_catalog.pg_class WHERE schema NOT IN (pg_catalog,pg_toast), relkind r,p,i,I,v,m,S,f,c,t",
+    "ordering": "schema_name,relation_name,relation_oid",
+    "fingerprint_method": "provider MD5(string_agg(schema_name||'.'||relation_name||':'||oid||':'||MD5(to_jsonb(pg_class)::text), '|' ORDER BY schema_name,relation_name,oid))",
+    "snapshot_fingerprint_before_raw_read": "8a7572729b2e4c401616f13164ea4029",
+    "reviewed_new": 407,
+    "reviewed_cumulative": 407,
+    "total": 407,
+    "next_ordinal": null,
+    "range": [
+      1,
+      407
+    ],
+    "by_schema": {
+      "auth": 139,
+      "extensions": 2,
+      "information_schema": 69,
+      "private": 60,
+      "public": 89,
+      "realtime": 13,
+      "storage": 28,
+      "supabase_migrations": 3,
+      "vault": 4
+    },
+    "invariant_anomalies": 0,
+    "specific_provider_caveat": {
+      "object": "realtime.subscription",
+      "live_rows_bounded_aggregate": 0,
+      "rls_enabled": false,
+      "anon_and_authenticated_schema_usage": true,
+      "anon_and_authenticated_table_and_claims_column_select": true,
+      "classification": "PROVIDER_MANAGED_READ_GRANT_SURFACE_HOSTED_POSTGREST_EXPOSURE_UNVERIFIED_NOT_PROVEN_APPLICATION_VULNERABILITY",
+      "action": "Track privately with #96; do not alter vendor table/grants or retrieve JWT claims/member rows."
+    },
+    "checks": [
+      "raw tuple and provider MD5 per object",
+      "index valid/ready/live flags",
+      "check constraint count versus pg_constraint",
+      "trigger flag versus pg_trigger",
+      "partition parent versus pg_inherits",
+      "46/46 app tables RLS enabled",
+      "replication identity, persistence, options and explicit grant surfaces",
+      "owner role and kind classification"
+    ],
+    "not_credited": [
+      "previous table/index/view SQL DDL direct audits",
+      "#267 code lines",
+      "compiled C/native implementation",
+      "hosted JWT/PostgREST/API/runtime",
+      "secret payload or member data"
+    ],
+    "receipt_paths": [
+      "docs/audits/issue509-provider-pg-class-nonpg-raw-001-100-2026-11-08-run103.json",
+      "docs/audits/issue509-provider-pg-class-nonpg-raw-101-200-2026-11-08-run103.json",
+      "docs/audits/issue509-provider-pg-class-nonpg-raw-201-300-2026-11-08-run103.json",
+      "docs/audits/issue509-provider-pg-class-nonpg-raw-301-400-2026-11-08-run103.json",
+      "docs/audits/issue509-provider-pg-class-nonpg-raw-401-407-2026-11-08-run103.json"
+    ],
+    "provider_mutations": false,
+    "production_deployment": false,
+    "source_fixes": 0,
+    "baseline_complete": false,
+    "next": "Distinct unreviewed provider catalog/definition family after ledger-to-live gap check; changed/new SQL/Edge drift; compiled native/hosted Auth/API and restricted console settings UNVERIFIED."
   }
 }
