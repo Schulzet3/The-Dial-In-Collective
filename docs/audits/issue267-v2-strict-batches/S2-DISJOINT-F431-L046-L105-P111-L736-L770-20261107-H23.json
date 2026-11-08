@@ -1,0 +1,2188 @@
+{
+  "schema_version": 2,
+  "issue": 267,
+  "batch": "S2-DISJOINT-H23",
+  "date_utc": "2026-11-07",
+  "development_parent": "7ab4ecb869ca70af80eb08038ce1c61cf14ecfb1",
+  "frozen_source_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+  "frozen_tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+  "pinned_current_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+  "pinned_tree": "626d241ef5888bddee71b6e94ee30ea0cb8bee1e",
+  "prior_receipt": {
+    "path": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F431-L001-L045-P111-L706-L735-20261107-H22.json",
+    "blob_sha": "5415d06ac69ef6f1d377fedd6f6c1db06ccbac63",
+    "previous_frozen_end": 45,
+    "previous_pinned_end": 735
+  },
+  "first_file_revalidation": {
+    "blob_sha": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+    "lines": 41,
+    "checked_against_S2_001": true,
+    "no_duplicate_credit": true
+  },
+  "frozen": {
+    "inventory_index": 431,
+    "path": "scripts/release/controlled-release-runner.mjs",
+    "blob_sha": "5c21ffbb20d5a61cd132c8098e1244e2f1a02759",
+    "total_lines": 305,
+    "from": 46,
+    "to": 105,
+    "per_line": [
+      {
+        "line": 46,
+        "source_text": "  .trim().slice(0,1600);",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Trims and caps sanitized diagnostic text to 1600 characters",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "1600-char cap may truncate diagnostic category details, but secrets are redacted before truncation",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 46 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 46,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 47,
+        "source_text": "}",
+        "classification": "AI_direct_numbered_structural",
+        "behavior": "Closes transport redaction helper",
+        "quality": "Block/branch scope reviewed with neighboring code",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 47 independently matched",
+        "duplication": "Required code boundary, not redundant executable behavior",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 47,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 48,
+        "source_text": "export function gitFailureDiagnostic(error,{operation='command',secrets=[]}={}){",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Declares Git failure diagnostic with operation and explicit secrets",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 48 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 48,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 49,
+        "source_text": " const stdout=redactTransportText(error?.stdout,secrets),stderr=redactTransportText(error?.stderr,secrets);",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Redacts both stdout and stderr independently before composing failure",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Both streams need redaction; no raw command/env logging",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 49 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 49,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 50,
+        "source_text": " const detail=stdout+'\\n'+stderr;",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Combines sanitized stdout and stderr for error classification",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 50 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 50,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 51,
+        "source_text": " const category=/without.*workflows?.*permission|refusing to allow.*workflow/i.test(detail)?'WORKFLOW_PERMISSION_DENIED':",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Classifies denied workflow-file permission",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Workflow permission failure must remain distinct from transient ref conflict",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 51 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 51,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 52,
+        "source_text": "  /non-fast-forward|fetch first|stale info|cannot lock ref/i.test(detail)?'REF_CONFLICT':",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Classifies rejected nonfastforward, stale or locked ref",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Do not turn stale ref into automatic forced retry",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 52 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 52,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 53,
+        "source_text": "  /authentication failed|permission.*denied|HTTP 403|returned error: 403/i.test(detail)?'AUTHORIZATION_DENIED':",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Classifies authentication and 403 denial",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "HTTP 403 may indicate auth vs permission; classifier is diagnostic only",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 53 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 53,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 54,
+        "source_text": "  /timed out|ETIMEDOUT/.test(String(error?.code||''))?'TRANSPORT_TIMEOUT':'GIT_COMMAND_FAILED';",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Classifies timeout or generic Git failure",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Only error.code timeout; Git subprocess timeout may have different shape but still fails closed",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 54 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 54,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 55,
+        "source_text": " return {operation:/^[a-z-]+$/.test(operation)?operation:'command',",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Sanitizes operation name to a short fixed-format token",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 55 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 55,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 56,
+        "source_text": "  exit_code:Number.isInteger(error?.status)?error.status:null,category,stdout,stderr};",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Returns integer exit code, category and sanitized streams",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 56 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 56,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 57,
+        "source_text": "}",
+        "classification": "AI_direct_numbered_structural",
+        "behavior": "Ends failure diagnostic function",
+        "quality": "Block/branch scope reviewed with neighboring code",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 57 independently matched",
+        "duplication": "Required code boundary, not redundant executable behavior",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 57,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 58,
+        "source_text": "const git=(args,{input,env}={})=>{",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Defines synchronous Git executor with input and environment options",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 58 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 58,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 59,
+        "source_text": " const environment=env||process.env;",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Prefers explicit environment or process environment",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 59 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 59,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 60,
+        "source_text": " try{return execFileSync('git',args,{encoding:'utf8',input,",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Executes git via argument-array execFileSync rather than shell",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "ExecFileSync arg-array and stdio bounds prevent shell interpolation",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 60 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 60,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 61,
+        "source_text": "  stdio:['pipe','pipe','pipe'],env:environment,timeout:60_000,maxBuffer:4*1024*1024}).trim();}",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Bounds timeout and output buffer, returns trimmed text",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No unbounded buffer or indefinite process; `.trim()` modifies trailing text",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 61 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 61,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 62,
+        "source_text": " catch(error){",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Catches Git execution errors",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 62 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 62,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 63,
+        "source_text": "  const secrets=Object.entries(environment).filter(([key])=>/TOKEN|SECRET|PASSWORD|AUTH|CREDENTIAL|DB_URL|PRIVATE_KEY/i.test(key)).map(([,value])=>value);",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Collects environment values by sensitive key-name filter for redaction",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Key-name filter misses sensitive values under unknown env names; pattern redactor remains fallback",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 63 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 63,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 64,
+        "source_text": "  throw Error('Git operation failed: '+JSON.stringify(gitFailureDiagnostic(error,{operation:args[0],secrets})));",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Throws error wrapping sanitised category and output only",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Structured redacted diagnostics may still include unforeseen token formats; do not log whole env",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 64 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 64,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 65,
+        "source_text": " }",
+        "classification": "AI_direct_numbered_structural",
+        "behavior": "Closes catch block",
+        "quality": "Block/branch scope reviewed with neighboring code",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 65 independently matched",
+        "duplication": "Required code boundary, not redundant executable behavior",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 65,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 66,
+        "source_text": "};",
+        "classification": "AI_direct_numbered_structural",
+        "behavior": "Closes Git executor",
+        "quality": "Block/branch scope reviewed with neighboring code",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 66 independently matched",
+        "duplication": "Required code boundary, not redundant executable behavior",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 66,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 67,
+        "source_text": "const json=(s,label)=>{try{return JSON.parse(s);}catch{throw Error(label+' is not valid JSON');}};",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Parses JSON or throws stable label-specific validation error",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 67 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 67,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 68,
+        "source_text": "function sourceGrant(data,id){",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Opens owner source-grant selection helper",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 68 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 68,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 69,
+        "source_text": " if(data?.schema_version!==1||!Array.isArray(data.grants))throw Error('No source-of-truth owner approval list');",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Requires schema v1 and grants list",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Malformed grant list must be rejected",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 69 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 69,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 70,
+        "source_text": " const grants=data.grants.filter(g=>g.id===id);",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Filters grant list by exact requested ID",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Exact ID equality avoids substring authorization",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 70 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 70,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 71,
+        "source_text": " if(grants.length!==1)throw Error('Owner grant absent or duplicate ID: '+id);",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Rejects missing or duplicate grant ID",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Duplicated owner grants must fail closed",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 71 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 71,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 72,
+        "source_text": " return grants[0];",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Returns only unique selected grant",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 72 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 72,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 73,
+        "source_text": "}",
+        "classification": "AI_direct_numbered_structural",
+        "behavior": "Ends source grant helper",
+        "quality": "Block/branch scope reviewed with neighboring code",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 73 independently matched",
+        "duplication": "Required code boundary, not redundant executable behavior",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 73,
+          "exact_text_match": true
+        },
+        "testability": "Node isolated failing git command/permission/ledger/grant regression; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 74,
+        "source_text": "export function selectLatestCiConclusions(checkRuns,sha){",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Exposes latest exact-SHA CI check conclusion collector",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 74 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 74,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 75,
+        "source_text": " const scores=new Map();",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Creates map keyed by check name",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 75 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 75,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 76,
+        "source_text": " for(const check of checkRuns||[]){",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Iterates check runs",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 76 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 76,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 77,
+        "source_text": "  if(check.head_sha!==sha||check.app?.slug!=='github-actions')continue;",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Filters to exact source SHA and github-actions app slug",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Trust GitHub check app slug and exact head_sha; need guard forged API data",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 77 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 77,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 78,
+        "source_text": "  if(!Number.isSafeInteger(check.id)||check.id<=0)throw Error('Invalid GitHub check-run identity');",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Rejects nonpositive/noninteger check run IDs",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Requires safe run ID so latest selection not ambiguous",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 78 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 78,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 79,
+        "source_text": "  const prior=scores.get(check.name);",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Reads previously selected run for check name",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 79 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 79,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 80,
+        "source_text": "  // A newer queued/in-progress run must override an older completed PASS.",
+        "classification": "AI_direct_numbered_comment",
+        "behavior": "Explains newer pending run must override old PASS",
+        "quality": "Directly reviewed documentation rationale and matching executable branch",
+        "risk": "New pending supersedes old PASS",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 80 independently matched",
+        "duplication": "Historical explanatory text retained; no duplication removal justified",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 80,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 81,
+        "source_text": "  // completed_at cannot order attempts because it is null while running.",
+        "classification": "AI_direct_numbered_comment",
+        "behavior": "Notes completed_at null on in-progress attempts",
+        "quality": "Directly reviewed documentation rationale and matching executable branch",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 81 independently matched",
+        "duplication": "Historical explanatory text retained; no duplication removal justified",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 81,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 82,
+        "source_text": "  if(!prior||check.id>prior.id)scores.set(check.name,check);",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Keeps maximal run ID for a given name",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Run IDs likely chronological; API order should not substitute for ID",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 82 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 82,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 83,
+        "source_text": " }",
+        "classification": "AI_direct_numbered_structural",
+        "behavior": "Closes iteration",
+        "quality": "Block/branch scope reviewed with neighboring code",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 83 independently matched",
+        "duplication": "Required code boundary, not redundant executable behavior",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 83,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 84,
+        "source_text": " return Object.fromEntries([...scores].map(([name,check])=>[",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Converts selected run map into named conclusion object",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 84 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 84,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 85,
+        "source_text": "  name,check.status==='completed'?check.conclusion:'pending'",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Maps incomplete check to pending rather than success",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Skipped check conclusion not PASS; pending displayed explicitly",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 85 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 85,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 86,
+        "source_text": " ]));",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Closes result mapping",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 86 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 86,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 87,
+        "source_text": "}",
+        "classification": "AI_direct_numbered_structural",
+        "behavior": "Closes conclusion collector",
+        "quality": "Block/branch scope reviewed with neighboring code",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 87 independently matched",
+        "duplication": "Required code boundary, not redundant executable behavior",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 87,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 88,
+        "source_text": "export function assertCurrentReleaseRefs({developmentHead,releaseHead,actualDevelopmentHead,actualReleaseHead}){",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Opens current development and release ref assertion",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 97 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 97,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 89,
+        "source_text": " if(!SHA.test(actualDevelopmentHead||'')||!SHA.test(actualReleaseHead||'')||",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Requires valid full SHA forms on independently observed refs",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Unverified or malformed SHA must reject",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 98 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 98,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 90,
+        "source_text": "   actualDevelopmentHead!==developmentHead||actualReleaseHead!==releaseHead)",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Compares observed development and release SHAs to approved ones",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Source branch drift must fail closed",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 99 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 99,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 91,
+        "source_text": "  throw Error('Development approval or release HEAD changed during preflight; recover before a new request');",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Throws if either ref drifted",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 100 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 100,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 92,
+        "source_text": " return true;",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Returns success when both exact refs agree",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 101 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 101,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 93,
+        "source_text": "}",
+        "classification": "AI_direct_numbered_structural",
+        "behavior": "Closes current-ref guard",
+        "quality": "Block/branch scope reviewed with neighboring code",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 102 independently matched",
+        "duplication": "Required code boundary, not redundant executable behavior",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 102,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 94,
+        "source_text": "async function ciForSha(sha,token){",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Opens authenticated exact-SHA GitHub CI fetcher",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 103 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 103,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 95,
+        "source_text": " const url='https://api.github.com/repos/'+REPO+'/commits/'+sha+'/check-runs?per_page=100';",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Constructs repository commits/SHA/check-runs API endpoint",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "API per_page=100 with >100 rejected",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 104 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 104,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 96,
+        "source_text": " const response=await fetch(url,{headers:{Authorization:'Bearer '+token,",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Requests check-runs with authenticated bearer",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Bearer token must not reach diagnostics",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 105 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 105,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 97,
+        "source_text": "  Accept:'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28'}});",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Requests GitHub JSON API and pinned REST version",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 106 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 106,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 98,
+        "source_text": " if(!response.ok)throw Error('Cannot independently verify exact-source GitHub CI: HTTP '+response.status);",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Fails closed on non-success API response",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "API failure cannot become CI PASS",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 107 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 107,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 99,
+        "source_text": " const data=await response.json();",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Parses GitHub JSON response",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 108 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 108,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 100,
+        "source_text": " if(data.total_count>100)throw Error('Too many check runs; require explicit pagination review');",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Refuses possible incomplete first page when total_count exceeds 100",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Refusal if >100 checks prevents silently ignoring page2",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 109 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 109,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 101,
+        "source_text": " if(!Array.isArray(data.check_runs))throw Error('GitHub CI response lacks check runs');",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Rejects malformed absence of check_runs array",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 110 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 110,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 102,
+        "source_text": " return selectLatestCiConclusions(data.check_runs,sha);",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Returns filtered latest CI conclusions",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 111 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 111,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 103,
+        "source_text": "}",
+        "classification": "AI_direct_numbered_structural",
+        "behavior": "Closes CI client helper",
+        "quality": "Block/branch scope reviewed with neighboring code",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 112 independently matched",
+        "duplication": "Required code boundary, not redundant executable behavior",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 112,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 104,
+        "source_text": "const setBlob=(path,content,env)=>{",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Opens staging-index blob helper",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No new proven exploit in exact line; release safety requires end-to-end grant/ref/CI proof",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 113 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 113,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 105,
+        "source_text": " const sha=git(['hash-object','-w','--stdin'],{input:content,env});",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Computes Git blob hash-object from in-memory content",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Hash object writing to local Git index needs current isolated workspace",
+        "obsolescence": "Frozen historical line retained; exact current live counterpart line 114 independently matched",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 114,
+          "exact_text_match": true
+        },
+        "testability": "Node synthetic CI-check and release-ref or blob-index tests; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Owner one-use Git publisher #417, risk-based exact-source tests #457, no unapproved deploy",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      }
+    ]
+  },
+  "pinned": {
+    "inventory_index": 111,
+    "path": "site/cloud/main.js",
+    "blob_sha": "280622ce914051da66f96904ca9ab7c3f101b837",
+    "total_lines": 1027,
+    "from": 736,
+    "to": 770,
+    "per_line": [
+      {
+        "line": 736,
+        "source_text": "  // not round-trip and change an otherwise untouched historical measurement.",
+        "classification": "AI_direct_numbered_comment",
+        "behavior": "Completes warning about preserving historic temperature through edits",
+        "quality": "Directly reviewed documentation rationale and matching executable branch",
+        "risk": "No confirmed user-visible defect in exact line; privacy, accessibility and state correctness need targeted acceptance",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "Historical explanatory text retained; no duplication removal justified",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 736,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 737,
+        "source_text": "  if(f.elements.temperature&&f.elements.temperature.value!==String(C.tempDisplay(this.draft.tempC,this.logUnit)))this.draft.tempC=C.tempInput(f.elements.temperature.value,this.logUnit);",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Updates stored temperature only when displayed value actually changes",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Comparing displayed strings avoids unintentional historical temp rounding but requires temp unit tests",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 737,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 738,
+        "source_text": "  if(f.elements.slowFeed)this.draft.feedMode=f.elements.slowFeed.checked?'slow':'standard';}",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Copies Slow Feed form state to draft and closes readDraft",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Slow Feed toggle only persisted when present; edit/off toggle behavior needs tests",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 738,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 739,
+        "source_text": " async click(ev){const target=ev.target.closest('[data-action]');if(!target)return;const a=target.dataset.action,id=target.dataset.id;",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Defines click action dispatcher via closest data-action target",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "closest data-action assumes DOM event target Element; click dispatch must be user-triggered",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 739,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 740,
+        "source_text": "  try{",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Opens shared click handler exception boundary",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No confirmed user-visible defect in exact line; privacy, accessibility and state correctness need targeted acceptance",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 740,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 741,
+        "source_text": "   if(a==='dismiss-dose-advisory'){if(this.draft?.id)this.dismissedDoseAdvisories.add(this.draft.id);const panel=sheet.querySelector?.('#shot-dose-advisory');if(panel)panel.hidden=true;return;}",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Dismisses dose advisory per shot draft and hides panel",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "DismissedDoseAdvisories lifecycle may grow across shots but no measured leak",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 741,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 742,
+        "source_text": "   if(a==='close'){sheet.close();return;}",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Closes modal sheet on close action",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No confirmed user-visible defect in exact line; privacy, accessibility and state correctness need targeted acceptance",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 742,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 743,
+        "source_text": "   if(a==='auth-view'){this.authView=target.dataset.view;this.notice='';if(this.authView!=='check-email')this.confirmationEmail='';this.render();return;}",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Switches Auth view and clears notice/confirmation as appropriate",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Auth view switching must not expose foreign account data",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 743,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 744,
+        "source_text": "   if(a==='settings'){this.settings();return;}",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Opens machine/app settings panel",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No confirmed user-visible defect in exact line; privacy, accessibility and state correctness need targeted acceptance",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 744,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 745,
+        "source_text": "   if(a==='watch-walkthrough'){this.showWalkthrough();return;}",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Shows product walkthrough",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No confirmed user-visible defect in exact line; privacy, accessibility and state correctness need targeted acceptance",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 745,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 746,
+        "source_text": "   if(a==='getting-started-guide'){this.showGettingStarted();return;}",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Shows getting-started guide",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No confirmed user-visible defect in exact line; privacy, accessibility and state correctness need targeted acceptance",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 746,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 747,
+        "source_text": "   if(a==='new-setup'){this.showSetup();return;}",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Opens new setup flow",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No confirmed user-visible defect in exact line; privacy, accessibility and state correctness need targeted acceptance",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 747,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 748,
+        "source_text": "   if(a==='grinder-range-info'||a==='next-shot-info'){",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Routes grinder-range or next-shot explanatory details toggle",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "A11y detail toggle must remain keyboard operable",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 748,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 749,
+        "source_text": "    const description=a==='grinder-range-info'",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Chooses description selector based on action",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No confirmed user-visible defect in exact line; privacy, accessibility and state correctness need targeted acceptance",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 749,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 750,
+        "source_text": "     ?sheet.querySelector('#grinder-range-description')",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Resolves grinder-range description inside active sheet",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No confirmed user-visible defect in exact line; privacy, accessibility and state correctness need targeted acceptance",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 750,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 751,
+        "source_text": "     :document.getElementById(target.getAttribute('aria-controls'));",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Resolves next-shot description by aria-controls ID",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "aria-controls is DOM ID read; containment check later prevents arbitrary toggle",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 751,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 752,
+        "source_text": "    const container=a==='grinder-range-info'?sheet:target.closest('.feedback-panel');",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Chooses containment scope for target description",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Container scoped to feedback panel for next-shot prevents unrelated disclosure",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 752,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 753,
+        "source_text": "    if(description&&container?.contains(description)){",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Ensures selected description exists within expected container",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Good containment guard for selected description",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 753,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 754,
+        "source_text": "     description.hidden=!description.hidden;",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Toggles hidden state of expanded explanatory region",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No confirmed user-visible defect in exact line; privacy, accessibility and state correctness need targeted acceptance",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 754,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 755,
+        "source_text": "     target.setAttribute('aria-expanded',String(!description.hidden));",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Synchronizes aria-expanded with visible state",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "aria-expanded must match hidden state for screen readers",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 755,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 756,
+        "source_text": "    }",
+        "classification": "AI_direct_numbered_structural",
+        "behavior": "Closes valid description branch",
+        "quality": "Block/branch scope reviewed with neighboring code",
+        "risk": "No confirmed user-visible defect in exact line; privacy, accessibility and state correctness need targeted acceptance",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "Required code boundary, not redundant executable behavior",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 756,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 757,
+        "source_text": "    return;",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Returns after recognized info toggle",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No confirmed user-visible defect in exact line; privacy, accessibility and state correctness need targeted acceptance",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 757,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 758,
+        "source_text": "   }",
+        "classification": "AI_direct_numbered_structural",
+        "behavior": "Closes info action handler",
+        "quality": "Block/branch scope reviewed with neighboring code",
+        "risk": "No confirmed user-visible defect in exact line; privacy, accessibility and state correctness need targeted acceptance",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "Required code boundary, not redundant executable behavior",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 758,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 759,
+        "source_text": "",
+        "classification": "AI_direct_numbered_blank",
+        "behavior": "Blank separator before navigation actions",
+        "quality": "Read literal blank separator and neighboring actions",
+        "risk": "No confirmed user-visible defect in exact line; privacy, accessibility and state correctness need targeted acceptance",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 759,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 760,
+        "source_text": "   if(a==='open-admin'){location.assign('/admin.html');return;}",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Navigates to Admin page",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Admin page navigation is not authorization; server guards remain #96-owned",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 760,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 761,
+        "source_text": "   if(a==='rename-setup'){this.showRenameSetup(id);return;}",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Opens rename setup form for action ID",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No confirmed user-visible defect in exact line; privacy, accessibility and state correctness need targeted acceptance",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 761,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 762,
+        "source_text": "   if(a==='add'){this.showAdd();return;}",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Opens Add Coffee flow",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No confirmed user-visible defect in exact line; privacy, accessibility and state correctness need targeted acceptance",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 762,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 763,
+        "source_text": "   if(a==='refresh-saved-coffee'){if(this.busy)return;this.busy=true;try{await this.refreshAddedCoffeeReview();}finally{this.busy=false;}return;}",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Debounces refresh saved coffee and resets busy in finally",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Finally restores busy on errors; inSession failures could propagate to caller",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 763,
+          "exact_text_match": true
+        },
+        "testability": "Mobile/browser Log Shot/Auth/settings/accessible disclosures test; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 764,
+        "source_text": "    if(a==='choose-coffee-roast-variant'){",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Opens choose roast variant handler",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No confirmed user-visible defect in exact line; privacy, accessibility and state correctness need targeted acceptance",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 764,
+          "exact_text_match": true
+        },
+        "testability": "Source-backed Add Coffee variant form and busy-state UI test; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 765,
+        "source_text": "     const form=sheet.querySelector('#new-coffee'),panel=form?.querySelector('#coffee-url-feedback');",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Queries Add Coffee form and URL feedback panel",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No confirmed user-visible defect in exact line; privacy, accessibility and state correctness need targeted acceptance",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 765,
+          "exact_text_match": true
+        },
+        "testability": "Source-backed Add Coffee variant form and busy-state UI test; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 766,
+        "source_text": "     if(!form||!panel||!this.coffeeUrlBasePreview?.roast_variants?.length||",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Verifies form, panel, available variants",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Variant list must be current for source URL",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 766,
+          "exact_text_match": true
+        },
+        "testability": "Source-backed Add Coffee variant form and busy-state UI test; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 767,
+        "source_text": "        this.coffeeUrlPreviewInput!==String(form.elements.source_url.value||'').trim())return;",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Requires source URL input to match preview identity",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Guard avoids stale preview from different input URL",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 767,
+          "exact_text_match": true
+        },
+        "testability": "Source-backed Add Coffee variant form and busy-state UI test; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 768,
+        "source_text": "     const next=coffeeRoastVariantPreview(this.coffeeUrlBasePreview,target.dataset.roastVariant);",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Builds chosen roast variant preview",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Roaster selection provenance must be source-backed #33",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 768,
+          "exact_text_match": true
+        },
+        "testability": "Source-backed Add Coffee variant form and busy-state UI test; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 769,
+        "source_text": "     if(!next?.selected_roast_variant)return;",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Aborts if no valid selected roast variant",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "No confirmed user-visible defect in exact line; privacy, accessibility and state correctness need targeted acceptance",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 769,
+          "exact_text_match": true
+        },
+        "testability": "Source-backed Add Coffee variant form and busy-state UI test; NOT executed",
+        "improvement": "No safe removal or fix justified at this line until further integration tracing",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      },
+      {
+        "line": 770,
+        "source_text": "     applyCoffeeRoastVariant(form,this.coffeeUrlActivePreview||this.coffeeUrlBasePreview,next);",
+        "classification": "AI_direct_numbered_substantive",
+        "behavior": "Applies selected variant values to Add Coffee form",
+        "quality": "Direct source statement and adjacent branch/caller interpreted",
+        "risk": "Form mutation must not fabricate missing fields or lose owner edits",
+        "obsolescence": "Pinned original line retained; identical live line verified in scope; original history protected",
+        "duplication": "No reproduced, caller-traced unused CURRENT implementation proven for safe deletion",
+        "current_counterpart": {
+          "path": "site/cloud/main.js",
+          "blob_sha": "a5188bec750a948de9b473c60012f073affaf4fd",
+          "line": 770,
+          "exact_text_match": true
+        },
+        "testability": "Source-backed Add Coffee variant form and busy-state UI test; NOT executed",
+        "improvement": "Reproduce focused case before changing current code; preserve Locked and historical source",
+        "locked_decision_fit": "Locked Log Shot → Rate → Recommendation, history, privacy, offline, a11y and #33 coffee source precedence",
+        "review_method": "Direct source-line AI semantic inspection, not external human certification"
+      }
+    ]
+  },
+  "live_bounded": {
+    "development_ref": "7ab4ecb869ca70af80eb08038ce1c61cf14ecfb1",
+    "live_release_blob": "735e0ee0ce8702f18c2409cc09a873893a488512",
+    "live_pinned_cloud_blob": "a5188bec750a948de9b473c60012f073affaf4fd",
+    "frozen_original_matching_positions": "46–87 literal matches live same positions; original 88–105 exact live positions 97–114",
+    "live_added_lines_88_96": [
+      {
+        "line": 88,
+        "source_text": "// A genuine non-ancestor is Git exit 1; missing refs/objects or repository",
+        "classification": "read_comment",
+        "behavior": "Explains Git exit1 means nonancestor while other failures are unknown",
+        "quality": "Read live newly inserted source and followed caller at live line249 and isolated regression in tests/controlled-release-runner.test.mjs lines103-111",
+        "risk": "Maintains fail-closed ancestry inference under Locked #417",
+        "obsolescence": "Live source addition after frozen and pinned original; preserved, not retired",
+        "duplication": "No proven redundant helper; caller at line249 uses it",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 88,
+          "exact_text_match": true
+        },
+        "testability": "Existing synthetic release-runner regression source lines103–111 checks success, status1, status128 and timeout; not re-executed in this doc-only batch",
+        "improvement": "No change warranted absent new failing test",
+        "locked_decision_fit": "Owner #417 one publisher; #457 risk-aware CI; no forced ref or publish",
+        "review_method": "Direct nine-line live GitHub source AI interpretation; not human audit"
+      },
+      {
+        "line": 89,
+        "source_text": "// failures must never be silently interpreted as evidence of non-inclusion.",
+        "classification": "read_comment",
+        "behavior": "Warns missing refs/objects must not be treated as noninclusion",
+        "quality": "Read live newly inserted source and followed caller at live line249 and isolated regression in tests/controlled-release-runner.test.mjs lines103-111",
+        "risk": "Maintains fail-closed ancestry inference under Locked #417",
+        "obsolescence": "Live source addition after frozen and pinned original; preserved, not retired",
+        "duplication": "No proven redundant helper; caller at line249 uses it",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 89,
+          "exact_text_match": true
+        },
+        "testability": "Existing synthetic release-runner regression source lines103–111 checks success, status1, status128 and timeout; not re-executed in this doc-only batch",
+        "improvement": "No change warranted absent new failing test",
+        "locked_decision_fit": "Owner #417 one publisher; #457 risk-aware CI; no forced ref or publish",
+        "review_method": "Direct nine-line live GitHub source AI interpretation; not human audit"
+      },
+      {
+        "line": 90,
+        "source_text": "export function verifiedGitAncestry(a,b,{run=execFileSync}={}){",
+        "classification": "read_current_added_executable_or_structural",
+        "behavior": "Declares injectable ancestry verifier",
+        "quality": "Read live newly inserted source and followed caller at live line249 and isolated regression in tests/controlled-release-runner.test.mjs lines103-111",
+        "risk": "Maintains fail-closed ancestry inference under Locked #417",
+        "obsolescence": "Live source addition after frozen and pinned original; preserved, not retired",
+        "duplication": "No proven redundant helper; caller at line249 uses it",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 90,
+          "exact_text_match": true
+        },
+        "testability": "Existing synthetic release-runner regression source lines103–111 checks success, status1, status128 and timeout; not re-executed in this doc-only batch",
+        "improvement": "No change warranted absent new failing test",
+        "locked_decision_fit": "Owner #417 one publisher; #457 risk-aware CI; no forced ref or publish",
+        "review_method": "Direct nine-line live GitHub source AI interpretation; not human audit"
+      },
+      {
+        "line": 91,
+        "source_text": " try{run('git',['merge-base','--is-ancestor',a,b],{stdio:'ignore',timeout:15000});return true;}",
+        "classification": "read_current_added_executable_or_structural",
+        "behavior": "Runs git merge-base --is-ancestor with 15s timeout; returns true on exit0",
+        "quality": "Read live newly inserted source and followed caller at live line249 and isolated regression in tests/controlled-release-runner.test.mjs lines103-111",
+        "risk": "Git missing ref errors must never become a certified nonancestor; only exit1 treated false",
+        "obsolescence": "Live source addition after frozen and pinned original; preserved, not retired",
+        "duplication": "No proven redundant helper; caller at line249 uses it",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 91,
+          "exact_text_match": true
+        },
+        "testability": "Existing synthetic release-runner regression source lines103–111 checks success, status1, status128 and timeout; not re-executed in this doc-only batch",
+        "improvement": "No change warranted absent new failing test",
+        "locked_decision_fit": "Owner #417 one publisher; #457 risk-aware CI; no forced ref or publish",
+        "review_method": "Direct nine-line live GitHub source AI interpretation; not human audit"
+      },
+      {
+        "line": 92,
+        "source_text": " catch(error){",
+        "classification": "read_current_added_executable_or_structural",
+        "behavior": "Begins catch for Git ancestry process failure",
+        "quality": "Read live newly inserted source and followed caller at live line249 and isolated regression in tests/controlled-release-runner.test.mjs lines103-111",
+        "risk": "Maintains fail-closed ancestry inference under Locked #417",
+        "obsolescence": "Live source addition after frozen and pinned original; preserved, not retired",
+        "duplication": "No proven redundant helper; caller at line249 uses it",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 92,
+          "exact_text_match": true
+        },
+        "testability": "Existing synthetic release-runner regression source lines103–111 checks success, status1, status128 and timeout; not re-executed in this doc-only batch",
+        "improvement": "No change warranted absent new failing test",
+        "locked_decision_fit": "Owner #417 one publisher; #457 risk-aware CI; no forced ref or publish",
+        "review_method": "Direct nine-line live GitHub source AI interpretation; not human audit"
+      },
+      {
+        "line": 93,
+        "source_text": "  if(error?.status===1)return false;",
+        "classification": "read_current_added_executable_or_structural",
+        "behavior": "Treats only precise status1 as verified nonancestor",
+        "quality": "Read live newly inserted source and followed caller at live line249 and isolated regression in tests/controlled-release-runner.test.mjs lines103-111",
+        "risk": "Error status1 is established Git nonancestor, not generic failure",
+        "obsolescence": "Live source addition after frozen and pinned original; preserved, not retired",
+        "duplication": "No proven redundant helper; caller at line249 uses it",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 93,
+          "exact_text_match": true
+        },
+        "testability": "Existing synthetic release-runner regression source lines103–111 checks success, status1, status128 and timeout; not re-executed in this doc-only batch",
+        "improvement": "No change warranted absent new failing test",
+        "locked_decision_fit": "Owner #417 one publisher; #457 risk-aware CI; no forced ref or publish",
+        "review_method": "Direct nine-line live GitHub source AI interpretation; not human audit"
+      },
+      {
+        "line": 94,
+        "source_text": "  throw Error('Git ancestry verification unavailable; cannot certify release isolation');",
+        "classification": "read_current_added_executable_or_structural",
+        "behavior": "Throws on all other statuses to fail closed",
+        "quality": "Read live newly inserted source and followed caller at live line249 and isolated regression in tests/controlled-release-runner.test.mjs lines103-111",
+        "risk": "Other status (128/missing data/timeout) must block release",
+        "obsolescence": "Live source addition after frozen and pinned original; preserved, not retired",
+        "duplication": "No proven redundant helper; caller at line249 uses it",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 94,
+          "exact_text_match": true
+        },
+        "testability": "Existing synthetic release-runner regression source lines103–111 checks success, status1, status128 and timeout; not re-executed in this doc-only batch",
+        "improvement": "No change warranted absent new failing test",
+        "locked_decision_fit": "Owner #417 one publisher; #457 risk-aware CI; no forced ref or publish",
+        "review_method": "Direct nine-line live GitHub source AI interpretation; not human audit"
+      },
+      {
+        "line": 95,
+        "source_text": " }",
+        "classification": "read_current_added_executable_or_structural",
+        "behavior": "Closes catch",
+        "quality": "Read live newly inserted source and followed caller at live line249 and isolated regression in tests/controlled-release-runner.test.mjs lines103-111",
+        "risk": "Maintains fail-closed ancestry inference under Locked #417",
+        "obsolescence": "Live source addition after frozen and pinned original; preserved, not retired",
+        "duplication": "No proven redundant helper; caller at line249 uses it",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 95,
+          "exact_text_match": true
+        },
+        "testability": "Existing synthetic release-runner regression source lines103–111 checks success, status1, status128 and timeout; not re-executed in this doc-only batch",
+        "improvement": "No change warranted absent new failing test",
+        "locked_decision_fit": "Owner #417 one publisher; #457 risk-aware CI; no forced ref or publish",
+        "review_method": "Direct nine-line live GitHub source AI interpretation; not human audit"
+      },
+      {
+        "line": 96,
+        "source_text": "}",
+        "classification": "read_current_added_executable_or_structural",
+        "behavior": "Closes ancestry helper",
+        "quality": "Read live newly inserted source and followed caller at live line249 and isolated regression in tests/controlled-release-runner.test.mjs lines103-111",
+        "risk": "Maintains fail-closed ancestry inference under Locked #417",
+        "obsolescence": "Live source addition after frozen and pinned original; preserved, not retired",
+        "duplication": "No proven redundant helper; caller at line249 uses it",
+        "current_counterpart": {
+          "path": "scripts/release/controlled-release-runner.mjs",
+          "blob_sha": "735e0ee0ce8702f18c2409cc09a873893a488512",
+          "line": 96,
+          "exact_text_match": true
+        },
+        "testability": "Existing synthetic release-runner regression source lines103–111 checks success, status1, status128 and timeout; not re-executed in this doc-only batch",
+        "improvement": "No change warranted absent new failing test",
+        "locked_decision_fit": "Owner #417 one publisher; #457 risk-aware CI; no forced ref or publish",
+        "review_method": "Direct nine-line live GitHub source AI interpretation; not human audit"
+      }
+    ],
+    "live_added_caller": {
+      "path": "scripts/release/controlled-release-runner.mjs",
+      "line": 249,
+      "behavior": "isAncestor callback invokes verifiedGitAncestry"
+    },
+    "live_added_test": {
+      "path": "tests/controlled-release-runner.test.mjs",
+      "blob_sha": "6a0175ac4073fbe548dbfa36095d4eac5866e903",
+      "lines": "103–111",
+      "status": "SOURCE INSPECTED ONLY, NOT EXECUTED IN THIS RUN"
+    },
+    "pinned_original_35_live_exact": true,
+    "global_post_pin_drift": "UNFINISHED"
+  },
+  "findings": [
+    {
+      "id": "H23-01",
+      "kind": "review_only",
+      "path": "scripts/release/controlled-release-runner.mjs",
+      "line": 63,
+      "disposition": "Environment variable secret key-name heuristic cannot guarantee every secret variant; existing sanitization mitigates, no observed credential leak, no owner alert."
+    },
+    {
+      "id": "H23-02",
+      "kind": "review_only",
+      "path": "site/cloud/main.js",
+      "line": 737,
+      "disposition": "Historical temperature edit protected by string comparison; actual mobile/temp-unit acceptance not retested, no defect proved."
+    }
+  ],
+  "accounting": {
+    "new_frozen_original_lines": 60,
+    "new_pinned_original_lines": 35,
+    "new_original_unique_positions": 95,
+    "live_added_lines_interpreted": 9,
+    "live_added_distinct_uniqueness_not_claimed": true,
+    "first_file_duplicate_lines": 0,
+    "canonical_strict_ledger_NOT_updated": true,
+    "legacy_v1_or_provisional_r2_c2_not_promoted": true
+  },
+  "tests": {
+    "performed": [
+      "Source literal/line number and SHA validation 95/95",
+      "Prior H22 nonoverlap and frozen workflow S2-001 41/41",
+      "F431 current mapped counterparts 60/60 after 9-line insertion",
+      "Pinned P111 live exact 35/35",
+      "Live added ancestry helper nine lines, caller and existing test source read"
+    ],
+    "not_run": [
+      "Node22 functional/lint/build",
+      "browser/mobile/offline",
+      "isolated SQL/Auth/privacy",
+      "original603 benchmark"
+    ],
+    "required_exact_PR_head_approval": "PENDING",
+    "required_merged_source_approval": "PENDING"
+  },
+  "next": "F431 original line106 and P111 original line771 after latest receipt coordination; full frozen, pinned, new files, live-drift and final owner review incomplete."
+}

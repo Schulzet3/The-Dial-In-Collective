@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "kind": "ISSUE33_ORIGINAL603_CURRENT_SELECTED_OFFICIAL_SOURCE_INDEPENDENT_ARTIFACT_REVIEW",
+  "issue": 33,
+  "date_utc": "2026-11-07",
+  "scope": "DEVELOPMENT_ONLY; three selected-product field/source roles; not 603-individual certification",
+  "source": {
+    "before_sha": "5c6aafafcfa0994cbbda70e66ba3eb1036180f65",
+    "code_pr": 1118,
+    "code_head": "9d0f77057ed2de0bb5143b195ad7e91e6b0b9b2b",
+    "merged_sha": "0a5741e53177077427d6ac61338ab3a8b2d4639c",
+    "merged_tree": "aa6673cc6edb7e79aca461be91f1e9bc394f5d2a",
+    "approval_run": 42316359375,
+    "public_source_run": 42316359401,
+    "focused_job": 128229805393,
+    "focused_job_conclusion": "success",
+    "artifact_id": 13551295909,
+    "artifact_zip_sha256": "be7c784c3a666c370e5e2685ce0e27b79389810cdd5ad31ed035b4bd62df7e7c",
+    "github_artifact_sha256_equal": true,
+    "runner_json_sha256": "5e324f5f1dfb316a62fb3580cb8e0befa3773642dab5c2595d2e6257c957894f",
+    "raw_selected_html_independently_rehashed": true
+  },
+  "ci": {
+    "exact_pr_head": {
+      "approval": 42316119916,
+      "sql": 42316119880,
+      "node_lint_build": 42316119737,
+      "cloud_mobile_browser": 42316119705,
+      "conclusion": "success",
+      "node_total": 2790,
+      "node_pass": 2784,
+      "node_fail": 0,
+      "node_skip": 6
+    },
+    "exact_merged": {
+      "approval": 42316359375,
+      "focused_public": 42316359401,
+      "conclusion": "success",
+      "unrelated_public_jobs": "SKIPPED_NOT_PASS"
+    },
+    "original603": "SKIPPED_NOT_CERTIFIED"
+  },
+  "original_frozen": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "adjudication_csv_git_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "runner_register_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "original_csv_oracle_scorer_captures_modified": false
+  },
+  "counts": {
+    "attempted": 3,
+    "fetched": 3,
+    "parsed": 3,
+    "add_coffee_rendered": 3,
+    "source_review_rendered": 3,
+    "raw_html_verified": 3,
+    "conflicting_fields": 0,
+    "individual_coffees_manually_certified": 0,
+    "new_parser_defects": 0,
+    "new_ready_queue_items": 0
+  },
+  "cases": [
+    {
+      "number": 141,
+      "selected_name": "Guatemala",
+      "url": "https://grindinggearscoffee.com/products/guatemala",
+      "html_bytes": 405018,
+      "html_sha256": "e759fe4666bbb13ab16645ffe37ff2baa7e1a33dd0a9ebdb04c559356cf5b730",
+      "status": "SOURCE_BOUND_FIELD_REVIEW_VERIFIED",
+      "fields": {
+        "name": "Guatemala",
+        "roaster": "Grinding Gears Coffee",
+        "roast_level": "Medium-Dark",
+        "origin": "Huehuetenango, Guatemala",
+        "elevation_m": "1,600 – 2,000 meters",
+        "process": "Washed",
+        "source_process_literal": "Fully Washed",
+        "variety": "Bourbon, Caturra, Catuai",
+        "tasting_notes": "Sweet Pecan, Graham, Chocolate"
+      },
+      "qualification": "Selected technical specifications independently in raw page. Cafe Imports Quetzal Program is sourcing program, not independently identified selected producer/farm. Leave producer blank."
+    },
+    {
+      "number": 142,
+      "selected_name": "Guatemala San Marcos",
+      "url": "https://heinebroscoffee.com/products/guatemala-san-marcos",
+      "html_bytes": 644877,
+      "html_sha256": "cb44b86ab384276c847735e52c8b2f70a3ae50a8e72b23d6e4d50f59acb4e2fb",
+      "status": "SOURCE_BOUND_FIELD_REVIEW_VERIFIED",
+      "fields": {
+        "name": "Guatemala San Marcos",
+        "roaster": "Heine Brothers Coffee",
+        "roast_level": "Light",
+        "origin": "San Marcos, Guatemala",
+        "producer": "APECAFORM cooperative in San Marcos",
+        "tasting_notes": "Milk chocolate, cherry, and hazelnut"
+      },
+      "qualification": "The selected direct description says Light Roast and Medium Body. Medium is not a second roast indication; the named APECAFORM cooperative is not a specifically identified farm/individual producer."
+    },
+    {
+      "number": 143,
+      "selected_name": "Natural Ethiopia Sidama",
+      "url": "https://heinebroscoffee.com/products/natural-ethiopia-sidama",
+      "html_bytes": 645920,
+      "html_sha256": "ecb2bfd09752ac1acf4beb0e8dc1a4cec6e736ce9fd0d77bc1c49d3dc5361ab8",
+      "status": "SOURCE_BOUND_FIELD_REVIEW_WITH_PRODUCER_ROLE_QUALIFICATION",
+      "fields": {
+        "name": "Natural Ethiopia Sidama",
+        "roaster": "Heine Brothers Coffee",
+        "roast_level": "Light",
+        "origin": "Ethiopia",
+        "producer": "Sidama Coffee Farmers Cooperative Union (SCFCU)",
+        "process": "Natural",
+        "tasting_notes": "Berry & salted chocolate"
+      },
+      "qualification": "Natural and Sidama appear in exact selected title (not a separately labeled process/region spec). Canonical origin is only Ethiopia, NOT fully enriched Sidama. Direct wording 'Sourced from SCFCU' names a cooperative union, NOT a specifically identified selected farmer/farm; keep producer-role provenance reviewable. Other constituent cooperative names and farmer count must not be promoted as selected growers. Light is roast; Medium is body."
+    }
+  ],
+  "outcome": "All three current exact source pages fetched/parsed, Add Coffee and Source Review rendered, current artifact bytes independently rehashed; zero demonstrated generic parser defect, no individual whole-coffee certification",
+  "guardrails": [
+    "No Netlify publication or production provider/member writes",
+    "Preserve original frozen603/oracle/scorer and all READY/DEPLOYED queue entries",
+    "Keep Issue #33 OPEN/IN_PROGRESS and #267 V2/#96 independent",
+    "No signed-in GoTrue or physical-device acceptance claimed"
+  ],
+  "next_step": "Continue disjoint individually selected official primary-source cases, seek source-reproduced generic defects and focused positive/negative regressions; adjudicate current identity/lot gaps without inference."
+}

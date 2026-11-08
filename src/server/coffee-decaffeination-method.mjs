@@ -1,15 +1,16 @@
 // A selected, fully decaffeinated coffee can have one decaffeination method.
 // This is independent of green-coffee Processing (Washed/Natural/Honey/etc.).
 export const DECAFFEINATION_METHODS=Object.freeze(['Water Process','Sugar Process','Carbon Dioxide (CO2)']);
-const fold=value=>String(value||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/\u2082/g,'2').toLowerCase().replace(/\s+/g,' ').trim();
+const fold=value=>String(value||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/\u2082/g,'2').replace(/\u2044/g,'/').toLowerCase().replace(/\s+/g,' ').trim();
 const fullyDecaf=value=>/\b(?:decaf(?:feinated|feination)?|caffeine[ -]?free|without caffeine)\b/i.test(fold(value));
-const mixedCaffeine=value=>/\b(?:half[ -]?caf(?:f|feinated)?|semi[ -]?decaf(?:feinated)?|partially[ -]?decaf(?:feinated)?|regular\s*(?:and|\+)\s*decaf|decaf\s*(?:and|\+)\s*regular)\b/i.test(fold(value));
-const exclusions=/\b(?:not|never|without|instead of|rather than|unlike|other than|no)\s+(?:(?:the|a|an)\s+)?(?:swiss[ -]?water|mountain[ -]?water|water[ -]?process|sugar(?:cane|[ -]?cane|[ -]?process)|ethyl[ -]?acetate|e\.?a\.?\s+decaf|co2|carbon[ -]?dioxide)\b/i;
+// A literal fractional decaf/blend is NOT a fully decaffeinated product. NFKD turns ½ into 1⁄2; fold first normalizes its fraction slash.
+const mixedCaffeine=value=>/\b(?:half[ -]?(?:caf(?:f|feinated)?|decaf(?:feinated)?)|(?:1\s*\/\s*2|50\s*%)\s*decaf(?:feinated)?|semi[ -]?decaf(?:feinated)?|partially[ -]?decaf(?:feinated)?|regular\s*(?:and|\+)\s*decaf|decaf\s*(?:and|\+)\s*regular)\b/i.test(fold(value));
+const exclusions=/\b(?:not|never|without|instead of|rather than|unlike|other than|no)\s+(?:(?:the|a|an)\s+)?(?:swiss[ -]?water|mountain[ -]?water|water[ -]?process|sugar(?:cane|[ -]?cane|[ -]?process)|ethyl[ -]?acetate|e\.?a\.?\s+(?:process(?:ed)?(?:\s+decaf)?|decaf)|co2|carbon[ -]?dioxide)\b/i;
 function methodsIn(raw){
  const v=fold(raw);if(!v||exclusions.test(v))return [];
  const results=[];
  if(/\b(?:swiss[ -]?water|mountain[ -]?water|water[ -]?(?:based\s+)?(?:decaf(?:feination|feinated)?|process(?:ed|ing)?(?:\s+decaf)?|method(?:\s+decaf)?)|h2o\s+decaf)\b/.test(v))results.push('Water Process');
- if(/\b(?:sugar[ -]?cane|sugar[ -]?process|ethyl[ -]?acetate|e\.?a\.?\s*(?:decaf(?:feination|feinated)?|process|method)|natural[ -]?ea)\b/.test(v))results.push('Sugar Process');
+ if(/\b(?:sugar[ -]?cane|sugar[ -]?process|ethyl[ -]?acetate|e\.?a\.?\s*(?:decaf(?:feination|feinated)?|process(?:ed)?(?:\s+decaf)?|method)|natural[ -]?ea)\b/.test(v))results.push('Sugar Process');
  if(/\b(?:co\s*[- ]?2|carbon[ -]?dioxide|supercritical\s+co\s*2|liquid\s+co\s*2)\b/.test(v))results.push('Carbon Dioxide (CO2)');
  return results;
 }

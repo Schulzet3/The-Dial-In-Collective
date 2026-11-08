@@ -1,0 +1,112 @@
+{
+  "schema_version": "1.0",
+  "issue": 33,
+  "date_utc": "2026-11-08",
+  "kind": "INDEPENDENT_ORIGINAL603_EXACT_CURRENT_SELECTED_PRODUCT_REVIEW_NO_PARSER_FIX",
+  "source_sha": "19864c3e97fdba9b35e0f297bfe96e22dfa0a8cf",
+  "source_intake_pr": 1381,
+  "source_intake_commit": "af2af7bad33112d1b8180bd3d7cecf40d3b77cdf",
+  "original603_csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "official_source": {
+    "run": 42457188660,
+    "job": 128658623446,
+    "result": "SUCCESS",
+    "merged_approval_run": 42457188472,
+    "cases_attempted": 3,
+    "fetched": 3,
+    "parsed": 3,
+    "selected_identity_verified": 3,
+    "add_coffee_rendered": 3,
+    "source_review_rendered": 3,
+    "artifact_id": 13607888234,
+    "artifact_size_bytes": 218184,
+    "artifact_zip_sha256": "a0e9aee21e1d0a25356fc5e5242350e2326c5dc1d1de8440d47c62e15fbdb9f8",
+    "artifact_json_sha256": "3d4e4648e7b8aee029927a1d2a0fdc0120de2087219ea2efb634a69fbd67121b",
+    "individual_raw_html_independently_sha256_checked": true,
+    "current_raw_capture_independently_read": true,
+    "cases": [
+      {
+        "number": 412,
+        "coffee": "Brown Bear",
+        "url": "https://woodscoffee.com/products/brown-bear",
+        "h1": "Brown Bear",
+        "bytes": 365259,
+        "html_sha256": "ef541c2e88f1f0742d0c4774fcd48579dd82edc60720b4183ef883c9b9c8b5e5",
+        "canonical": {
+          "tasting_notes": "Rich, Earth, Spice",
+          "roast_level": "Dark"
+        },
+        "source_labeled_notes": "Rich | Earth | Spice",
+        "additional_product_prose": "rich full-bodied dark roast with hints of chocolate, vanilla and spice",
+        "adjudication": "Exact selected published Coffee Notes label outranks broader flavor narrative; no false conflict or missing-field defect"
+      },
+      {
+        "number": 414,
+        "coffee": "Woods Blend",
+        "url": "https://woodscoffee.com/products/woods-blend",
+        "h1": "Woods Blend",
+        "bytes": 366294,
+        "html_sha256": "4eed9c2e717907343bcb0b97b80284e616fcc52f2aaf56d5e246cc8637e4eb30",
+        "canonical": {
+          "tasting_notes": "Almonds, Mild Fruit, Cocoa Powder",
+          "roast_level": "Medium"
+        },
+        "source_labeled_notes": "Almonds | Mild Fruit | Cocoa Powder",
+        "additional_product_prose": "delicate sweetness, hints of cinnamon, semi-sweet cocoa",
+        "adjudication": "Current direct selected Coffee Notes are retained, unlike historical expected blank. Other flavor prose is descriptive, not a mandatory second conflicting label."
+      },
+      {
+        "number": 427,
+        "coffee": "El Madron, Decaf - Mexico - 12oz Bag",
+        "url": "https://www.altaroasters.com/products/el-madron-decaf-mexico",
+        "h1": "El Madron, Decaf - Mexico - 12oz Bag",
+        "bytes": 180423,
+        "html_sha256": "11f96a98e486dd253010b0fe75d4902e49e154e4838f0e099a9452dbc5c873d3",
+        "canonical": {
+          "origin": "Chiapas, Mexico",
+          "roast_level": "Medium",
+          "process": "Washed",
+          "decaffeination_method": "Water Process",
+          "elevation_m": "1800m",
+          "variety": "Typica, Caturra",
+          "tasting_notes": "Toffee, Pumpkin Spice, Lime"
+        },
+        "source_direct_process": "Process Method: Washed, Mountain Water Process",
+        "source_direct_prose": "The bean is decaffeinated through a non-evasive process called the Mountain Water Process",
+        "adjudication": "Actual selected product explicitly attributes Water Process to decaffeination and Washed to green processing. Archived oracle missing method does not override current source."
+      }
+    ]
+  },
+  "checks": {
+    "pr_head": [
+      "validate SUCCESS",
+      "cloud-tests SUCCESS",
+      "mobile-browser-qa SUCCESS",
+      "sql SUCCESS",
+      "approval SUCCESS"
+    ],
+    "exact_merged": [
+      "official-run 42457188660 SUCCESS 3/3",
+      "approval-run 42457188472 SUCCESS"
+    ],
+    "frozen603": "NOT_RUN_NOT_CREDITED",
+    "auth": "NOT_TESTED",
+    "manual_certified_counter": "0 (automated runner explicitly not universal semantic certification)"
+  },
+  "outcome": {
+    "parser_defect_reproduced": false,
+    "new_ready_queue_items": 0,
+    "queue_count": 222,
+    "ready": 46,
+    "deployed": 173,
+    "in_progress": 3,
+    "full_603_individual_semantic_certification": "INCOMPLETE",
+    "issue_33": "OPEN",
+    "unchanged_original_csv": true,
+    "unchanged_oracle_scorer": true,
+    "unchanged_queue": true,
+    "production_deployment": false,
+    "provider_member_sql_auth_edge_writes": false
+  },
+  "next": "Continue unique unresolved context-qualified, source-present blank or identity cases. Before any correction, demonstrate a specific real parser defect against exact present source and add focused positive/negative tests. Keep #388 unavailable and #362 changed identity quarantined; coordinate #267 V2/#96."
+}

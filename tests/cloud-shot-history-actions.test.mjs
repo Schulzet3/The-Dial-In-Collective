@@ -8,7 +8,7 @@ const sampleShot={
  id:'9f161ab1-9781-4f69-ac17-12184e090bc4',timestamp:'2026-10-21T19:00:00Z',
  doseG:18,yieldG:36,timeS:28,grindSetting:5.5,tempC:null,style:'Traditional',
  tasteScales:{extraction:3,body:3,clarity:5,sweetness:5,astringency:1},
- notes:'Saved personal note',dialedIn:true,setupVersionId:'version',
+ notes:'Saved personal note',dialedIn:true,setupVersionId:'version',familyId:'family-1',
  snapshot:{setupName:'Personal Setup',basketDoseG:18,tempUnit:'F'},revision:7
 };
 test('Shot History exposes Edit and Make Current, never Hide Shot',()=>{

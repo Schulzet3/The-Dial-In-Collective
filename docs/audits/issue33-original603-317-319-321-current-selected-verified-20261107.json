@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "kind": "ORIGINAL603_SCOPED_INDEPENDENT_CURRENT_SELECTED_EVIDENCE_RECEIPT",
+  "recorded_utc": "2026-11-07T19:15:00Z",
+  "owner_authority": "Issue #33 development-only, separate #267 V2 and #96",
+  "original603_csv_git_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "original603_coffees": 603,
+  "original_roasters": 201,
+  "original_captures": 1197,
+  "original_csv_unchanged": true,
+  "oracle_scorer_unchanged": true,
+  "code_pr": 1268,
+  "earlier_incomplete_code_pr": 1267,
+  "source_intake_pr": 1266,
+  "nonforce_code_merged_sha": "f08bcc9c186671589f928ef3630307a56bb42789",
+  "code_tree_sha": "87f7a7e4825bec192f01421c5735ff68c486109a",
+  "head_node_run": 42405016429,
+  "head_node_tests": {
+    "passed": 1974,
+    "failed": 0,
+    "skipped": 0
+  },
+  "merged_node_run": 42405131496,
+  "merged_node_tests": {
+    "passed": 1974,
+    "failed": 0,
+    "skipped": 0
+  },
+  "merged_lint_build": "SUCCESS",
+  "merged_governance_run": 42405131479,
+  "merged_cloud_ux_run": 42405131480,
+  "selected_source_run": 42405131591,
+  "selected_source_job_id": 128501069671,
+  "selected_source_job_status": "COMPLETED_SUCCESS",
+  "selected_source_artifact_id": 13586683293,
+  "selected_source_artifact_zip_sha256": "17846a8548162f697098c4ddab6c5410008cc15905bdd358c223d774da8d4678",
+  "selected_source_json_sha256": "0cd70cef4835ebcc9565583538120e39b9fef59e7231d70a61676bf1562562f4",
+  "artifact_hash_independently_verified": true,
+  "individual_raw_html_hashes_independently_verified": true,
+  "current_captured_results": {
+    "attempted": 3,
+    "fetched": 3,
+    "parsed": 3,
+    "selected_h1_identity_verified": 3,
+    "add_coffee_rendered": 3,
+    "source_review_rendered": 3,
+    "conflicts_count": 0,
+    "manual_certified": 0
+  },
+  "rows": [
+    {
+      "number": 317,
+      "roaster": "Just Love Coffee Roasters",
+      "exact_official_product_url": "https://shop.justlovecoffee.com/products/kenya-aa-ndaroini-estate",
+      "selected_h1": "Kenya AA - Ndaroini Estate",
+      "html_sha256": "850bd2f56d2d0fed73fe367e8f9e91f5a2e4750387abdb9053c966deabce2796",
+      "actual_origin": "Ndaroini Factory, Nyeri, Kenya",
+      "decision": "CURRENT_SOURCE_MATCHES_PARSER",
+      "qualification": "Ndaroini Factory is site/receiving name, not independently verified grower or estate title; retained credited dedicated farmers."
+    },
+    {
+      "number": 319,
+      "roaster": "O.Henrys Coffee",
+      "exact_official_product_url": "https://shop.ohenryscoffee.com/products/brazil-oberon",
+      "selected_h1": "Brazil Oberon",
+      "html_sha256": "79e0f913da1c03d102197af77d482caf686fd2d317bd2b9cff88dda2990385e5",
+      "actual_origin": "Cerrado, Brazil",
+      "decision": "ALREADY_CORRECT_CURRENT_PARSER",
+      "qualification": "Direct exact selected description states grown in Cerrado; missing unspecified roast stays blank."
+    },
+    {
+      "number": 321,
+      "roaster": "O.Henrys Coffee",
+      "exact_official_product_url": "https://shop.ohenryscoffee.com/products/ethiopia-yirgacheffe",
+      "selected_h1": "Ethiopia Yirgacheffe",
+      "html_sha256": "62f36bb65da5fb1ac3c8c23c43ac60756d663480095f13a3c21014396f79791d",
+      "before_origin": "Ethiopia",
+      "after_origin": "Yirgacheffe, Ethiopia",
+      "decision": "SOURCE_BACKED_GENERIC_COUNTRY_FIRST_SELECTED_CURRENT_REGION_FIX_VERIFIED",
+      "qualification": "Current actual selected inline nested span repeats exact present single-origin coffee; Mamo Kacha is not silently promoted to farm/producer/municipality."
+    }
+  ],
+  "frozen603_workflow": "SKIPPED_NOT_PASS",
+  "general_extraction_workflow": "SKIPPED_NOT_PASS",
+  "full_original603_individual_semantic_certification": "INCOMPLETE",
+  "manual_certified_by_automated_probe": 0,
+  "issue33_status": "OPEN",
+  "tested_real_gotrue": false,
+  "physical_device_tests": "NOT_CLAIMED",
+  "netlify_publication": false,
+  "production_writes": 0,
+  "next": "Review next independent original603 selected official products, prioritize unresolved 153 context/29 missing literal/35 source-present blank and source-identity exceptions. Do not conflate #267 original/V2 line audit with #33 source evidence."
+}

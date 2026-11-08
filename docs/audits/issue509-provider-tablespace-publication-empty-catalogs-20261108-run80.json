@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "80",
+  "date_utc": "2026-11-08",
+  "project_ref": "azviqqejypsefzilgonr",
+  "provider_status": "ACTIVE_HEALTHY",
+  "postgres_version": "17.11",
+  "observed_utc_start": "2026-11-08 03:44:43.988416+00",
+  "observed_utc_finish": "2026-11-08 03:46:04.663001+00",
+  "development_parent_sha": "3c21a137baf37ed7594937a56ee656e50a4a987f",
+  "main_sha": "bd627d40f7e65321323512b303d2e3f75709af39",
+  "release_sha": "2ec10324fcaa4b60d1e48240b44b77b141b9ba54",
+  "scope": "New directly read full visible pg_tablespace and pg_publication descriptors; full per-family empty-catalog inventory. Prior direct object credit not repeated; data/log private values untouched.",
+  "direct_source_records": [
+    {
+      "ordinal": 1,
+      "family": "pg_tablespace",
+      "oid": 1663,
+      "name": "pg_default",
+      "full_catalog": {
+        "oid": "1663",
+        "spcname": "pg_default",
+        "spcowner": "10",
+        "spcacl": null,
+        "spcoptions": null
+      },
+      "source_md5": "de5b05d351db6229a074c5c297502f1f",
+      "owner": "supabase_admin",
+      "pg_tablespace_location": "",
+      "anon_create": false,
+      "authenticated_create": false,
+      "verdict": "EXPECTED_POSTGRES_DEFAULT_TABLESPACE; no client CREATE permission or custom options; standard empty reported location is not evidence of missing storage"
+    },
+    {
+      "ordinal": 2,
+      "family": "pg_tablespace",
+      "oid": 1664,
+      "name": "pg_global",
+      "full_catalog": {
+        "oid": "1664",
+        "spcname": "pg_global",
+        "spcowner": "10",
+        "spcacl": null,
+        "spcoptions": null
+      },
+      "source_md5": "a0d7a14f1c9f816822e8b74028a01945",
+      "owner": "supabase_admin",
+      "pg_tablespace_location": "",
+      "anon_create": false,
+      "authenticated_create": false,
+      "verdict": "EXPECTED_POSTGRES_SHARED_TABLESPACE; no client CREATE permission or custom options; no safe deletion"
+    },
+    {
+      "ordinal": 3,
+      "family": "pg_publication",
+      "oid": 16430,
+      "name": "supabase_realtime",
+      "full_catalog": {
+        "oid": "16430",
+        "pubname": "supabase_realtime",
+        "pubowner": "16388",
+        "puballtables": false,
+        "pubinsert": true,
+        "pubupdate": true,
+        "pubdelete": true,
+        "pubtruncate": true,
+        "pubviaroot": false
+      },
+      "source_md5": "d1810e3cd3efb8fdf918b78cbfc36e3e",
+      "owner": "postgres",
+      "explicit_table_count": 0,
+      "published_namespace_count": 0,
+      "pg_publication_tables_count": 0,
+      "wal_level": "logical",
+      "max_replication_slots": 5,
+      "verdict": "EMPTY_EXPLICIT_PUBLICATION; catalog has no table/namespace membership; does not by itself establish broken Broadcast or channel behavior; hosted Realtime runtime unverified"
+    }
+  ],
+  "reviewed_new": 3,
+  "total_current_new_source_descriptors": 3,
+  "record_ordinals_complete": true,
+  "empty_catalog_families": [
+    {
+      "name": "pg_publication_rel",
+      "count": 0
+    },
+    {
+      "name": "pg_publication_namespace",
+      "count": 0
+    },
+    {
+      "name": "pg_inherits",
+      "count": 0
+    },
+    {
+      "name": "pg_subscription",
+      "count": 0
+    },
+    {
+      "name": "pg_subscription_rel",
+      "count": 0
+    },
+    {
+      "name": "pg_replication_origin",
+      "count": 0
+    },
+    {
+      "name": "pg_foreign_data_wrapper",
+      "count": 0
+    },
+    {
+      "name": "pg_foreign_server",
+      "count": 0
+    },
+    {
+      "name": "pg_foreign_table",
+      "count": 0
+    },
+    {
+      "name": "pg_user_mapping",
+      "count": 0
+    },
+    {
+      "name": "pg_seclabel",
+      "count": 0
+    },
+    {
+      "name": "pg_shseclabel",
+      "count": 0
+    },
+    {
+      "name": "pg_largeobject_metadata",
+      "count": 0
+    },
+    {
+      "name": "pg_prepared_xacts",
+      "count": 0
+    },
+    {
+      "name": "pg_replication_slots",
+      "count": 0
+    },
+    {
+      "name": "pg_transform",
+      "count": 0
+    },
+    {
+      "name": "pg_statistic_ext_data",
+      "count": 0
+    }
+  ],
+  "safe_aggregate_observations": {
+    "log_window": "last 24 hours, tool default",
+    "source_event_counts": {
+      "pgbouncer_logs": 71,
+      "edge_logs": 37,
+      "postgres_logs": 23,
+      "supavisor_logs": 16,
+      "auth_logs": 5,
+      "auth_audit_logs": 4
+    },
+    "raw_log_bodies_read": false,
+    "error_severity_not_determined": true,
+    "pg_stat_database": {
+      "stats_reset": "2026-10-02 18:01:15.201525+00",
+      "temp_bytes": 105952491041,
+      "temp_files": 41545,
+      "xact_rollback": 358,
+      "deadlocks": 0,
+      "conflicts": 0,
+      "active_backends_at_034523": 7,
+      "not_an_incident_or_query_cause_proof": true
+    },
+    "statement_metrics_without_sql_text": {
+      "visible_statement_rows": 3743,
+      "total_calls": 100600,
+      "temp_blocks_read": 7465,
+      "temp_blocks_written": 7466,
+      "max_execution_ms": 2248.511547,
+      "total_execution_ms": 285098,
+      "normalized_history_not_direct_causal_attribution": true
+    },
+    "advisor_state": "Existing six private RLS-without-policy infos, ten signed-in public SECURITY DEFINER alerts, disabled leaked-password protection warning, twelve unindexed FKs, nine unused indexes; health none. Unchanged alerts not individually proven defects; no deletion authorized."
+  },
+  "failed_query_resolution": "Initial probe asked has_tablespace_privilege(..., 'USAGE'); PostgreSQL rejects USAGE because tablespace privileges are CREATE only. Corrected immediately, reran complete pg_tablespace row/ACL inspection successfully. No provider mutation.",
+  "boundaries": {
+    "no_private_auth_or_member_records": true,
+    "no_stored_large_objects": true,
+    "no_secret_values": true,
+    "no_raw_log_contents": true,
+    "no_live_sql_writes": true,
+    "no_releases": true,
+    "no_paid_branches": true
+  },
+  "limitations": [
+    "Native PostgreSQL compiled code unavailable for word-level semantic review",
+    "Hosted JWT/Auth/PostgREST/Realtime runtime security owned by #96 remains unverified",
+    "63 previously withheld GUC values and console-only settings remain unverified",
+    "Cumulative temp growth and log event counts alone do not prove an app bottleneck or incident",
+    "Existing provider advisories not standalone proof of risk or safe deletion"
+  ],
+  "source_fixes": 0,
+  "confirmed_new_defects": 0,
+  "baseline_complete": false,
+  "next_cursor": "catalog-family-to-ledger gap reconciliation, next positive-count unreviewed catalog family 1/N; changed/new definition drift; do not revisit Run80 objects without change"
+}

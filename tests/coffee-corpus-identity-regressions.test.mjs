@@ -178,7 +178,8 @@ test('a same-URL and same-title SEO description still cannot donate a different 
 test('entities and cultivar list semicolons cannot truncate a selected description',()=>{
  for(const variety of ['Caturra &amp; Castillo','Arabica; Castillo, Catimor 129, F6']){
   const result=parse('<p>Variety: '+variety+'</p>',{description:'Variety: '+variety+'; Process: Washed'});
-  assert.equal(result.fields.variety,variety.replace(/&amp;/g,'&'));assert.equal(result.fields.process,'Washed');noConflict(result,'variety');
+  const expected=variety.startsWith('Arabica;')?'Castillo, Catimor 129, F6':variety.replace(/&amp;/g,'&');
+  assert.equal(result.fields.variety,expected);assert.equal(result.fields.process,'Washed');noConflict(result,'variety');
  }
  const conflict=parse('<p>Variety: Caturra &amp; Castillo</p>',{description:'Variety: Geisha'});
  assert.equal(conflict.fields.variety,undefined);assert.ok(conflict.conflicts.includes('variety'));

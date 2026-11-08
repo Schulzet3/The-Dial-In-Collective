@@ -1,0 +1,2290 @@
+{
+  "schema_version": 1,
+  "issue": 267,
+  "batch": "S2-DISJOINT-F706-P392-20261106-N27",
+  "parent_development": "31fd71f66e11b1998cbaf88da7bb367178967326",
+  "tree": "70b639d05819137e4b0707c9cd1068b3076934af",
+  "source_frozen_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+  "pinned_executable_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+  "frozen_original": {
+    "manifest_index": 706,
+    "path": "tests/html-resource-security.test.mjs",
+    "source_blob": "709835ba96326101d256ac8bd3cd6515316d0fed",
+    "physical_range": [
+      1,
+      42
+    ],
+    "per_line": [
+      {
+        "line": 1,
+        "literal_original": "import test from 'node:test';",
+        "classification": "import",
+        "behavior": "Import Node test runner",
+        "quality": "Inspected the exact line and its surrounding test conditions: Import Node test runner.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this import; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 1,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 1,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 2,
+        "literal_original": "import assert from 'node:assert/strict';",
+        "classification": "import",
+        "behavior": "Import strict assertions",
+        "quality": "Inspected the exact line and its surrounding test conditions: Import strict assertions.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this import; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 2,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 2,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 3,
+        "literal_original": "import {spawnSync} from 'node:child_process';",
+        "classification": "import",
+        "behavior": "Import spawnSync to enforce independent bounded subprocesses",
+        "quality": "Inspected the exact line and its surrounding test conditions: Import spawnSync to enforce independent bounded subprocesses.",
+        "bug_security_privacy_performance_risk": "Child subprocess is bounded by wall-time; no cross-product network request required.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 3,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 3,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 4,
+        "literal_original": "import {rawElements,removeElements,removeComments} from '../supabase/functions/_shared/html-scan.mjs';",
+        "classification": "import",
+        "behavior": "Import raw HTML element scanner, remover and comment remover",
+        "quality": "Inspected the exact line and its surrounding test conditions: Import raw HTML element scanner, remover and comment remover.",
+        "bug_security_privacy_performance_risk": "Raw scanner source traced to supabase/functions/_shared/html-scan.mjs; test is pure string processing.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 4,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 4,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 5,
+        "literal_original": "test('raw scanner advances monotonically and handles case, whitespace and unclosed elements',()=>{",
+        "classification": "test-declaration",
+        "behavior": "Define monotonic tokenization and malformed element behavior test",
+        "quality": "Inspected the exact line and its surrounding test conditions: Define monotonic tokenization and malformed element behavior test.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this test-declaration; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 5,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 5,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 6,
+        "literal_original": " const html='A<SCRIPT type=\"application/json\">{\"a\":1}</ScRiPt >B<style>x</style>C<script>unterminated';",
+        "classification": "executable-or-fixture",
+        "behavior": "Supply mixed-case script tag, style, and unterminated script HTML",
+        "quality": "Inspected the exact line and its surrounding test conditions: Supply mixed-case script tag, style, and unterminated script HTML.",
+        "bug_security_privacy_performance_risk": "Malformed/unclosed content tests bounded scanning without infinite regex loops.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 6,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 6,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 7,
+        "literal_original": " const blocks=[...rawElements(html,['script','style'])];assert.equal(blocks.length,3);",
+        "classification": "assertion",
+        "behavior": "Require three raw script/style blocks discovered",
+        "quality": "Inspected the exact line and its surrounding test conditions: Require three raw script/style blocks discovered.",
+        "bug_security_privacy_performance_risk": "Monotonic raw scan must find only 3 target blocks; no real roaster HTML validation.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 7,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 7,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 8,
+        "literal_original": " assert.equal(blocks[0].body,'{\"a\":1}');assert.equal(blocks[2].closed,false);",
+        "classification": "assertion",
+        "behavior": "Assert JSON script body retained and final script marked not closed",
+        "quality": "Inspected the exact line and its surrounding test conditions: Assert JSON script body retained and final script marked not closed.",
+        "bug_security_privacy_performance_risk": "Unclosed script needs closed=false and body content must not leak as ordinary text.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 8,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 8,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 9,
+        "literal_original": " assert.equal(removeElements(html,['script','style']),'A B C ');",
+        "classification": "assertion",
+        "behavior": "Require script/style elements removed with intervening spaces",
+        "quality": "Inspected the exact line and its surrounding test conditions: Require script/style elements removed with intervening spaces.",
+        "bug_security_privacy_performance_risk": "Removing script/style is essential before trusting web coffee metadata.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 9,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 9,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 10,
+        "literal_original": " assert.equal(removeComments('a<!--bad<!--bad'),'a ');",
+        "classification": "assertion",
+        "behavior": "Require malformed nested HTML comments removed safely",
+        "quality": "Inspected the exact line and its surrounding test conditions: Require malformed nested HTML comments removed safely.",
+        "bug_security_privacy_performance_risk": "Nested invalid comments are normalized and must not trigger unbounded parse.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 10,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 10,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 11,
+        "literal_original": "});",
+        "classification": "syntax-boundary",
+        "behavior": "Close scanner negative test",
+        "quality": "Inspected the exact line and its surrounding test conditions: Close scanner negative test.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this syntax-boundary; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Nonfunctional formatting/necessary delimiter; no redundant business behavior.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 11,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 11,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 12,
+        "literal_original": "test('HTML resource probes finish in an isolated process, including nested tags and structured malicious descriptions',()=>{",
+        "classification": "test-declaration",
+        "behavior": "Define isolated stress-test of untrusted HTML and malicious structured descriptions",
+        "quality": "Inspected the exact line and its surrounding test conditions: Define isolated stress-test of untrusted HTML and malicious structured descriptions.",
+        "bug_security_privacy_performance_risk": "Resource-bounded parser/preview tests guard worst-case source HTML; 18s is smoke limit, not strict performance SLA.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 12,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 12,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 13,
+        "literal_original": " const code=`import {extractPublicCoffeeFacts as extract} from './src/server/coffee-page-metadata.mjs';",
+        "classification": "executable-or-fixture",
+        "behavior": "Build child source import for selected current public metadata extractor",
+        "quality": "Inspected the exact line and its surrounding test conditions: Build child source import for selected current public metadata extractor.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this executable-or-fixture; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 13,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 13,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 14,
+        "literal_original": " import {compactCoffeeProductHtml} from './src/server/coffee-product-prep.mjs';",
+        "classification": "executable-or-fixture",
+        "behavior": "Build child source import for compact HTML preparation",
+        "quality": "Inspected the exact line and its surrounding test conditions: Build child source import for compact HTML preparation.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this executable-or-fixture; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 14,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 14,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 15,
+        "literal_original": " import {extractOfficialEvidence} from './supabase/functions/dic-verify-coffee/evidence.mjs';",
+        "classification": "executable-or-fixture",
+        "behavior": "Build child import for official trusted source evidence extraction",
+        "quality": "Inspected the exact line and its surrounding test conditions: Build child import for official trusted source evidence extraction.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this executable-or-fixture; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 15,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 15,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 16,
+        "literal_original": " import {extractProductPreview} from './supabase/functions/dic-preview-coffee/preview.mjs';",
+        "classification": "executable-or-fixture",
+        "behavior": "Build child import for public official URL preview",
+        "quality": "Inspected the exact line and its surrounding test conditions: Build child import for public official URL preview.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this executable-or-fixture; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 16,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 16,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 17,
+        "literal_original": " const samples=[('<meta '+'a'.repeat(1400)+'>').repeat(1200),'<'.repeat(200000),'<script>'.repeat(10000),'<style>'.repeat(10000),'<nav>'.repeat(10000),'<!--'.repeat(20000),'<div '+'a'.repeat(100000)+'>','<script type=\"application/ld+json\">'+JSON.stringify({'@type':'Product',name:'Audit Coffee',description:'<'.repeat(200000)})+'</script>'];",
+        "classification": "executable-or-fixture",
+        "behavior": "Build eight pathological huge or repeated HTML samples including JSON-LD with giant description",
+        "quality": "Inspected the exact line and its surrounding test conditions: Build eight pathological huge or repeated HTML samples including JSON-LD with giant description.",
+        "bug_security_privacy_performance_risk": "Some stress sample strings are hundreds of thousands of characters; subprocess timeout limits hung main suite but not production quotas.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 17,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 17,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 18,
+        "literal_original": " const timings=[];",
+        "classification": "executable-or-fixture",
+        "behavior": "Initialize performance per-fixture timing list",
+        "quality": "Inspected the exact line and its surrounding test conditions: Initialize performance per-fixture timing list.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this executable-or-fixture; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 18,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 18,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 19,
+        "literal_original": " for(const sample of samples){const start=performance.now(),html='<h1>Audit Coffee</h1>'+sample;",
+        "classification": "executable-or-fixture",
+        "behavior": "For each sample include selected product heading and start time",
+        "quality": "Inspected the exact line and its surrounding test conditions: For each sample include selected product heading and start time.",
+        "bug_security_privacy_performance_risk": "No independent roaster claim: synthetic Audit Coffee fixture only.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 19,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 19,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 20,
+        "literal_original": "  extract(compactCoffeeProductHtml(html)||html,{source_url:'https://example.invalid/products/audit'});",
+        "classification": "executable-or-fixture",
+        "behavior": "Pass compacted or fallback HTML through public coffee metadata extraction",
+        "quality": "Inspected the exact line and its surrounding test conditions: Pass compacted or fallback HTML through public coffee metadata extraction.",
+        "bug_security_privacy_performance_risk": "Compact-first fallback may still process large input; test verifies child termination not memory/high percentile.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 20,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 20,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 21,
+        "literal_original": "  extractOfficialEvidence(html,{name:'Audit Coffee',source_url:'https://example.invalid/products/audit'});",
+        "classification": "executable-or-fixture",
+        "behavior": "Pass same sample through trusted evidence extraction",
+        "quality": "Inspected the exact line and its surrounding test conditions: Pass same sample through trusted evidence extraction.",
+        "bug_security_privacy_performance_risk": "Source evidence extraction path belongs #33; test does not prove fresh official domain acceptance.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 21,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 21,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 22,
+        "literal_original": "  extractProductPreview(html,{source_url:'https://example.invalid/products/audit',roaster:'Audit'});",
+        "classification": "executable-or-fixture",
+        "behavior": "Pass same sample through official product preview extraction",
+        "quality": "Inspected the exact line and its surrounding test conditions: Pass same sample through official product preview extraction.",
+        "bug_security_privacy_performance_risk": "Official preview path uses mock static source HTML, no outbound source fetch.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 22,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 22,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 23,
+        "literal_original": "  timings.push(Math.round(performance.now()-start));",
+        "classification": "executable-or-fixture",
+        "behavior": "Record sample elapsed duration",
+        "quality": "Inspected the exact line and its surrounding test conditions: Record sample elapsed duration.",
+        "bug_security_privacy_performance_risk": "Timings collected but no per-sample maximum threshold; successful child exit is bounded only at process-level.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 23,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 23,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 24,
+        "literal_original": " }console.log(JSON.stringify(timings));`;",
+        "classification": "executable-or-fixture",
+        "behavior": "Log exactly serialized eight timings to parent",
+        "quality": "Inspected the exact line and its surrounding test conditions: Log exactly serialized eight timings to parent.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this executable-or-fixture; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 24,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 24,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 25,
+        "literal_original": " const result=spawnSync(process.execPath,['--input-type=module','-e',code],{cwd:new URL('..',import.meta.url),timeout:18000,encoding:'utf8'});",
+        "classification": "executable-or-fixture",
+        "behavior": "Spawn isolated Node ESM process with 18s wall-time timeout",
+        "quality": "Inspected the exact line and its surrounding test conditions: Spawn isolated Node ESM process with 18s wall-time timeout.",
+        "bug_security_privacy_performance_risk": "18s timeout cap in Node subprocess; child cannot hang indefinitely, but memory consumption not separately budgeted here.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 25,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 25,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 26,
+        "literal_original": " assert.equal(result.error,undefined,result.error?.message);assert.equal(result.status,0,result.stderr);",
+        "classification": "assertion",
+        "behavior": "Require child process did not error and exited successfully",
+        "quality": "Inspected the exact line and its surrounding test conditions: Require child process did not error and exited successfully.",
+        "bug_security_privacy_performance_risk": "Checks no exit error; does not constrain each sample latency if total below 18s.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 26,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 26,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 27,
+        "literal_original": " assert.equal(JSON.parse(result.stdout).length,8);",
+        "classification": "assertion",
+        "behavior": "Require one reported timing per eight fixtures",
+        "quality": "Inspected the exact line and its surrounding test conditions: Require one reported timing per eight fixtures.",
+        "bug_security_privacy_performance_risk": "All eight processed, not a meaningful throughput benchmark.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 27,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 27,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 28,
+        "literal_original": "});",
+        "classification": "syntax-boundary",
+        "behavior": "End isolated resource-budget test",
+        "quality": "Inspected the exact line and its surrounding test conditions: End isolated resource-budget test.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this syntax-boundary; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Nonfunctional formatting/necessary delimiter; no redundant business behavior.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 28,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 28,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 29,
+        "literal_original": "",
+        "classification": "blank",
+        "behavior": "Blank readability separator",
+        "quality": "Inspected the exact line and its surrounding test conditions: Blank readability separator.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this blank; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Nonfunctional formatting/necessary delimiter; no redundant business behavior.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 29,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 29,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 30,
+        "literal_original": "test(\"Unicode before tags cannot shift evidence offsets\",()=>{",
+        "classification": "test-declaration",
+        "behavior": "Define Unicode lead-in source offset integrity case",
+        "quality": "Inspected the exact line and its surrounding test conditions: Define Unicode lead-in source offset integrity case.",
+        "bug_security_privacy_performance_risk": "Unicode source offset must use JS string code-unit positions, not normalized Unicode codepoint positions.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 30,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 30,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 31,
+        "literal_original": " const html=\"\\u0130\\u0130<SCRIPT>preserved</SCRIPT>tail\";",
+        "classification": "executable-or-fixture",
+        "behavior": "Prepend two Unicode capital I-with-dot code points before script tag",
+        "quality": "Inspected the exact line and its surrounding test conditions: Prepend two Unicode capital I-with-dot code points before script tag.",
+        "bug_security_privacy_performance_risk": "Two U+0130 BMP characters precede opening tag; expected index two.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 31,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 31,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 32,
+        "literal_original": " const [block]=rawElements(html);assert.equal(block.start,2);assert.equal(block.body,\"preserved\");",
+        "classification": "assertion",
+        "behavior": "Require raw block starts at JS index two and preserves script body",
+        "quality": "Inspected the exact line and its surrounding test conditions: Require raw block starts at JS index two and preserves script body.",
+        "bug_security_privacy_performance_risk": "Exact script body and offset protects source attribution.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 32,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 32,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 33,
+        "literal_original": " assert.equal(removeElements(html,[\"script\"]),\"\\u0130\\u0130 tail\");",
+        "classification": "assertion",
+        "behavior": "Require removing script keeps unicode text with safe separator",
+        "quality": "Inspected the exact line and its surrounding test conditions: Require removing script keeps unicode text with safe separator.",
+        "bug_security_privacy_performance_risk": "Text normalization must preserve Unicode while removing executable script.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 33,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 33,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 34,
+        "literal_original": "});",
+        "classification": "syntax-boundary",
+        "behavior": "Close Unicode offset test",
+        "quality": "Inspected the exact line and its surrounding test conditions: Close Unicode offset test.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this syntax-boundary; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Nonfunctional formatting/necessary delimiter; no redundant business behavior.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 34,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 34,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 35,
+        "literal_original": "",
+        "classification": "blank",
+        "behavior": "Blank readability separator",
+        "quality": "Inspected the exact line and its surrounding test conditions: Blank readability separator.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this blank; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Nonfunctional formatting/necessary delimiter; no redundant business behavior.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 35,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 35,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 36,
+        "literal_original": "test('repeated quoted HTML attributes have bounded work across product layouts',()=>{",
+        "classification": "test-declaration",
+        "behavior": "Define stress test with repeated quoted HTML attributes in various product layouts",
+        "quality": "Inspected the exact line and its surrounding test conditions: Define stress test with repeated quoted HTML attributes in various product layouts.",
+        "bug_security_privacy_performance_risk": "Stress distinct class attribute/product layouts against regex backtracking.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 36,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 36,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 37,
+        "literal_original": " const code=`import {extractPublicCoffeeFacts as extract} from './src/server/coffee-page-metadata.mjs';",
+        "classification": "executable-or-fixture",
+        "behavior": "Build isolated child source import for public metadata extractor",
+        "quality": "Inspected the exact line and its surrounding test conditions: Build isolated child source import for public metadata extractor.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this executable-or-fixture; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 37,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 37,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 38,
+        "literal_original": " const samples=[['<div '+('class=\"a-stat\" ').repeat(15000)+'>','https://www.seycoffee.com/products/audit'],['<p '+('class=\"meta-title\" ').repeat(10000)+'>','https://example.invalid/products/audit'],['<div '+('class=\"meta-info\" ').repeat(10000)+'>','https://example.invalid/products/audit'],['<div class=\"'+('a-stat ').repeat(40000)+'\">','https://www.seycoffee.com/products/audit']];",
+        "classification": "executable-or-fixture",
+        "behavior": "Generate four stress inputs of repeated quoted attributes/long class values and canonical/neutral URLs",
+        "quality": "Inspected the exact line and its surrounding test conditions: Generate four stress inputs of repeated quoted attributes/long class values and canonical/neutral URLs.",
+        "bug_security_privacy_performance_risk": "Repeated 15k attrs and 40k class names may stress parser, bounded by 4s child timeout.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 38,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 38,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 39,
+        "literal_original": " for(const [sample,source_url] of samples)extract('<h1>Audit Coffee</h1>'+sample,{source_url});console.log('bounded');`;",
+        "classification": "executable-or-fixture",
+        "behavior": "Extract each stress sample and emit fixed bounded-result marker",
+        "quality": "Inspected the exact line and its surrounding test conditions: Extract each stress sample and emit fixed bounded-result marker.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this executable-or-fixture; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 39,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 39,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 40,
+        "literal_original": " const result=spawnSync(process.execPath,['--input-type=module','-e',code],{cwd:new URL('..',import.meta.url),timeout:4000,encoding:'utf8'});",
+        "classification": "executable-or-fixture",
+        "behavior": "Spawn Node ESM child with 4s timeout",
+        "quality": "Inspected the exact line and its surrounding test conditions: Spawn Node ESM child with 4s timeout.",
+        "bug_security_privacy_performance_risk": "4s subprocess timeout tests bounded work; synthetic machine speed and environment variable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 40,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 40,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 41,
+        "literal_original": " assert.equal(result.error,undefined,result.error?.message);assert.equal(result.status,0,result.stderr);assert.equal(result.stdout.trim(),'bounded');",
+        "classification": "assertion",
+        "behavior": "Require no child errors, successful exit and only expected bounded marker",
+        "quality": "Inspected the exact line and its surrounding test conditions: Require no child errors, successful exit and only expected bounded marker.",
+        "bug_security_privacy_performance_risk": "No benchmark percentile; verifies success marker only.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 41,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 41,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 42,
+        "literal_original": "});",
+        "classification": "syntax-boundary",
+        "behavior": "Close repeated-attribute stress test",
+        "quality": "Inspected the exact line and its surrounding test conditions: Close repeated-attribute stress test.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this syntax-boundary; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Nonfunctional formatting/necessary delimiter; no redundant business behavior.",
+        "exact_live_counterpart": {
+          "path": "tests/html-resource-security.test.mjs",
+          "line": 42,
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+          "blob_sha": "709835ba96326101d256ac8bd3cd6515316d0fed",
+          "original_physical_line": 42,
+          "index": 706
+        },
+        "testability": "Node22 `node --test tests/html-resource-security.test.mjs`, timed subprocess with 18s/4s caps; changing synthetic fixtures requires focused performance re-test.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "#33 source-specific extraction, no fabricated roaster evidence, bounded source scan, preserve original 603 oracle.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      }
+    ]
+  },
+  "pinned_original": {
+    "index": 392,
+    "path": "tests/notes-preservation-security.test.mjs",
+    "source_blob": "18a69e84d5956a5c70006d658d427a834a959770",
+    "physical_range": [
+      1,
+      40
+    ],
+    "per_line": [
+      {
+        "line": 1,
+        "literal_original": "import test from 'node:test';",
+        "classification": "import",
+        "behavior": "Import Node test runner",
+        "quality": "Inspected the exact line and its surrounding test conditions: Import Node test runner.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this import; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 1,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 1,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 2,
+        "literal_original": "import assert from 'node:assert/strict';",
+        "classification": "import",
+        "behavior": "Import strict assertions",
+        "quality": "Inspected the exact line and its surrounding test conditions: Import strict assertions.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this import; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 2,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 2,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 3,
+        "literal_original": "import {readFileSync} from 'node:fs';",
+        "classification": "import",
+        "behavior": "Import filesystem reader for actual UI privacy copy source",
+        "quality": "Inspected the exact line and its surrounding test conditions: Import filesystem reader for actual UI privacy copy source.",
+        "bug_security_privacy_performance_risk": "Static UI copy text test isn't a real DOM/browser visibility proof; actual template is active at site/cloud/main.js:429.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 3,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 3,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 4,
+        "literal_original": "import {hydrate,shotPayload,applyPending} from '../site/cloud/mapping.js';",
+        "classification": "import",
+        "behavior": "Import state hydrate, cloud shot payload, and local pending overlay",
+        "quality": "Inspected the exact line and its surrounding test conditions: Import state hydrate, cloud shot payload, and local pending overlay.",
+        "bug_security_privacy_performance_risk": "Cloud mapping and pending event overlay are simulated, not live RLS.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 4,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 4,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 5,
+        "literal_original": "import * as E from '../site/lib/engine.js';",
+        "classification": "import",
+        "behavior": "Import espresso engine for saveShot/editShot validation",
+        "quality": "Inspected the exact line and its surrounding test conditions: Import espresso engine for saveShot/editShot validation.",
+        "bug_security_privacy_performance_risk": "Model validation separately checked before mutation, no provider SQL invoked.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 5,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 5,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 6,
+        "literal_original": "import {rawFixture} from './cloud-fixtures/raw.js';",
+        "classification": "import",
+        "behavior": "Import synthetic raw cloud fixture",
+        "quality": "Inspected the exact line and its surrounding test conditions: Import synthetic raw cloud fixture.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this import; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 6,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 6,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 7,
+        "literal_original": "function fixture(notes){",
+        "classification": "executable-or-fixture",
+        "behavior": "Define a shot draft factory parameterized by notes",
+        "quality": "Inspected the exact line and its surrounding test conditions: Define a shot draft factory parameterized by notes.",
+        "bug_security_privacy_performance_risk": "Helper builds local data; no real member notes read.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 7,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 7,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 8,
+        "literal_original": " const state=hydrate(rawFixture());",
+        "classification": "executable-or-fixture",
+        "behavior": "Hydrate test coffee/setup state",
+        "quality": "Inspected the exact line and its surrounding test conditions: Hydrate test coffee/setup state.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this executable-or-fixture; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 8,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 8,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 9,
+        "literal_original": " const draft={...E.prefill(state,'coffee'),id:'long-notes',yieldG:36,timeS:27,grindSetting:1,notes,tasteScales:{extraction:3,body:3,clarity:5,sweetness:5,astringency:1}};",
+        "classification": "executable-or-fixture",
+        "behavior": "Prefill complete 5-green shot with requested note string",
+        "quality": "Inspected the exact line and its surrounding test conditions: Prefill complete 5-green shot with requested note string.",
+        "bug_security_privacy_performance_risk": "Uses valid shot values and five-green scales to isolate notes limit tests.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 9,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 9,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 10,
+        "literal_original": " return {state,draft};",
+        "classification": "executable-or-fixture",
+        "behavior": "Return both unchanged state and proposed shot draft",
+        "quality": "Inspected the exact line and its surrounding test conditions: Return both unchanged state and proposed shot draft.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this executable-or-fixture; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 10,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 10,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 11,
+        "literal_original": "}",
+        "classification": "executable-or-fixture",
+        "behavior": "Close test fixture helper",
+        "quality": "Inspected the exact line and its surrounding test conditions: Close test fixture helper.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this executable-or-fixture; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 11,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 11,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 12,
+        "literal_original": "for(const n of [10001,16000])test('notes retain all '+n+' characters in payload, pending display and local save',()=>{",
+        "classification": "executable-or-fixture",
+        "behavior": "Define 10001 and 16000-character full note retention test loop",
+        "quality": "Inspected the exact line and its surrounding test conditions: Define 10001 and 16000-character full note retention test loop.",
+        "bug_security_privacy_performance_risk": "10,001 and 16,000 test lengths target former regression/truncation and current owner limit.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 12,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 12,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 13,
+        "literal_original": " const notes='x'.repeat(n),{state,draft}=fixture(notes),payload=shotPayload(state,'coffee',draft);",
+        "classification": "executable-or-fixture",
+        "behavior": "Build repeated-string note, draft and serialized cloud payload",
+        "quality": "Inspected the exact line and its surrounding test conditions: Build repeated-string note, draft and serialized cloud payload.",
+        "bug_security_privacy_performance_risk": "Private notes are local synthetic strings, not Community public contribution.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 13,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 13,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 14,
+        "literal_original": " assert.equal(payload.notes,notes);",
+        "classification": "assertion",
+        "behavior": "Require full exact private note in payload",
+        "quality": "Inspected the exact line and its surrounding test conditions: Require full exact private note in payload.",
+        "bug_security_privacy_performance_risk": "Exact equality prevents silent truncation in cloud payload.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 14,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 14,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 15,
+        "literal_original": " const pending=applyPending(state,[{status:'pending',action:'save_shot',payload}]);",
+        "classification": "executable-or-fixture",
+        "behavior": "Overlay synthetic pending save_shot event",
+        "quality": "Inspected the exact line and its surrounding test conditions: Overlay synthetic pending save_shot event.",
+        "bug_security_privacy_performance_risk": "Pending event overlay is local state preview; not evidence of offline IndexedDB disk durability.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 15,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 15,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 16,
+        "literal_original": " assert.equal(pending.shots[0].notes,notes);assert.equal(state.shots.length,0);",
+        "classification": "assertion",
+        "behavior": "Require pending state shows complete note and original server snapshot is unchanged",
+        "quality": "Inspected the exact line and its surrounding test conditions: Require pending state shows complete note and original server snapshot is unchanged.",
+        "bug_security_privacy_performance_risk": "Must show full unsent note while original server snapshot stays immutable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 16,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 16,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 17,
+        "literal_original": " assert.equal(E.saveShot(state,'coffee',draft).notes,notes);",
+        "classification": "assertion",
+        "behavior": "Require immediate local saveShot preserves exact notes",
+        "quality": "Inspected the exact line and its surrounding test conditions: Require immediate local saveShot preserves exact notes.",
+        "bug_security_privacy_performance_risk": "Local saveShot must retain note length, not partial string.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 17,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 17,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 18,
+        "literal_original": "});",
+        "classification": "syntax-boundary",
+        "behavior": "End lengthy note test",
+        "quality": "Inspected the exact line and its surrounding test conditions: End lengthy note test.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this syntax-boundary; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Nonfunctional formatting/necessary delimiter; no redundant business behavior.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 18,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 18,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 19,
+        "literal_original": "test('Unicode notes match the database code-point limit without cutting surrogate pairs',()=>{",
+        "classification": "test-declaration",
+        "behavior": "Define surrogate-pair/Unicode note codepoint-limit preservation test",
+        "quality": "Inspected the exact line and its surrounding test conditions: Define surrogate-pair/Unicode note codepoint-limit preservation test.",
+        "bug_security_privacy_performance_risk": "Database code-point limit is tested indirectly; no direct production DB write.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 19,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 19,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 20,
+        "literal_original": " const notes='\\u{1f600}'.repeat(16000),{state,draft}=fixture(notes);",
+        "classification": "executable-or-fixture",
+        "behavior": "Create 16000 emoji, which occupy more UTF16 units but 16000 Unicode code points",
+        "quality": "Inspected the exact line and its surrounding test conditions: Create 16000 emoji, which occupy more UTF16 units but 16000 Unicode code points.",
+        "bug_security_privacy_performance_risk": "Emoji are surrogate pairs in JS, but 16k Unicode code points must remain allowed.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 20,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 20,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 21,
+        "literal_original": " assert.equal(shotPayload(state,'coffee',draft).notes,notes);assert.equal(E.saveShot(state,'coffee',draft).notes,notes);",
+        "classification": "assertion",
+        "behavior": "Require payload and local save both retain original emoji sequence",
+        "quality": "Inspected the exact line and its surrounding test conditions: Require payload and local save both retain original emoji sequence.",
+        "bug_security_privacy_performance_risk": "Client routines must not truncate, corrupt, or split emoji when saving.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 21,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 21,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 22,
+        "literal_original": "});",
+        "classification": "syntax-boundary",
+        "behavior": "End Unicode test",
+        "quality": "Inspected the exact line and its surrounding test conditions: End Unicode test.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this syntax-boundary; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Nonfunctional formatting/necessary delimiter; no redundant business behavior.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 22,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 22,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 23,
+        "literal_original": "test('over-limit note is rejected before payload/save, with original text and state preserved',()=>{",
+        "classification": "test-declaration",
+        "behavior": "Define failure for over-limit note with unchanged source state",
+        "quality": "Inspected the exact line and its surrounding test conditions: Define failure for over-limit note with unchanged source state.",
+        "bug_security_privacy_performance_risk": "Overlength shot should fail before state mutation/queue write.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 23,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 23,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 24,
+        "literal_original": " const {state,draft}=fixture('x'.repeat(16001)),before=JSON.stringify(state);",
+        "classification": "executable-or-fixture",
+        "behavior": "Construct 16001 notes and stringify state before mutation",
+        "quality": "Inspected the exact line and its surrounding test conditions: Construct 16001 notes and stringify state before mutation.",
+        "bug_security_privacy_performance_risk": "JSON state serialization used as bounded deterministic snapshot for mutation check.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 24,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 24,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 25,
+        "literal_original": " assert.throws(()=>shotPayload(state,'coffee',draft),/16,000/);",
+        "classification": "assertion",
+        "behavior": "Require cloud payload rejects note length >16000",
+        "quality": "Inspected the exact line and its surrounding test conditions: Require cloud payload rejects note length >16000.",
+        "bug_security_privacy_performance_risk": "Reject cloud payload before provider or account state affected.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 25,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 25,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 26,
+        "literal_original": " assert.throws(()=>E.saveShot(state,'coffee',draft),/16,000/);",
+        "classification": "assertion",
+        "behavior": "Require engine local save rejects >16000",
+        "quality": "Inspected the exact line and its surrounding test conditions: Require engine local save rejects >16000.",
+        "bug_security_privacy_performance_risk": "Reject local engine saveShot before inserting shot.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 26,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 26,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 27,
+        "literal_original": " assert.equal(draft.notes.length,16001);assert.equal(JSON.stringify(state),before);",
+        "classification": "assertion",
+        "behavior": "Require note source text and entire original state remain unchanged",
+        "quality": "Inspected the exact line and its surrounding test conditions: Require note source text and entire original state remain unchanged.",
+        "bug_security_privacy_performance_risk": "Both draft text and state remain intact on failure.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 27,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 27,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 28,
+        "literal_original": "});",
+        "classification": "syntax-boundary",
+        "behavior": "End oversize mutation test",
+        "quality": "Inspected the exact line and its surrounding test conditions: End oversize mutation test.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this syntax-boundary; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Nonfunctional formatting/necessary delimiter; no redundant business behavior.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 28,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 28,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 29,
+        "literal_original": "test('editing existing notes preserves text and rejects oversize without changing revision',()=>{",
+        "classification": "test-declaration",
+        "behavior": "Define edit-note limit and revision consistency test",
+        "quality": "Inspected the exact line and its surrounding test conditions: Define edit-note limit and revision consistency test.",
+        "bug_security_privacy_performance_risk": "Edit path must preserve existing shot data and revision across invalid update.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 29,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 29,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 30,
+        "literal_original": " const {state,draft}=fixture('original');const shot=E.saveShot(state,'coffee',draft);",
+        "classification": "executable-or-fixture",
+        "behavior": "Create saved shot from original note",
+        "quality": "Inspected the exact line and its surrounding test conditions: Create saved shot from original note.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this executable-or-fixture; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 30,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 30,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 31,
+        "literal_original": " E.editShot(state,shot.id,{notes:'y'.repeat(16000)});assert.equal(shot.notes.length,16000);",
+        "classification": "assertion",
+        "behavior": "Edit to valid 16000-character note and check retention",
+        "quality": "Inspected the exact line and its surrounding test conditions: Edit to valid 16000-character note and check retention.",
+        "bug_security_privacy_performance_risk": "At limit, note edited successfully with no lost characters.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 31,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 31,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 32,
+        "literal_original": " const revision=shot.revision;assert.throws(()=>E.editShot(state,shot.id,{notes:'z'.repeat(16001)}),/16,000/);",
+        "classification": "assertion",
+        "behavior": "Try invalid 16001-character edit and record original revision",
+        "quality": "Inspected the exact line and its surrounding test conditions: Try invalid 16001-character edit and record original revision.",
+        "bug_security_privacy_performance_risk": "Overlimit edit must reject without changed revision.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 32,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 32,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 33,
+        "literal_original": " assert.equal(shot.revision,revision);assert.equal(shot.notes,'y'.repeat(16000));",
+        "classification": "assertion",
+        "behavior": "Require revision stays unchanged and existing 16000 notes retained",
+        "quality": "Inspected the exact line and its surrounding test conditions: Require revision stays unchanged and existing 16000 notes retained.",
+        "bug_security_privacy_performance_risk": "Checks exact existing note content, not merely revision integer.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 33,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 33,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 34,
+        "literal_original": "});",
+        "classification": "syntax-boundary",
+        "behavior": "End edit atomicity test",
+        "quality": "Inspected the exact line and its surrounding test conditions: End edit atomicity test.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this syntax-boundary; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Nonfunctional formatting/necessary delimiter; no redundant business behavior.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 34,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 34,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 35,
+        "literal_original": "test('current privacy copy discloses the administrator exception without resurrecting Hide or deletion',()=>{",
+        "classification": "test-declaration",
+        "behavior": "Define current privacy copy check including admin exception and retired Hide/deletion language",
+        "quality": "Inspected the exact line and its surrounding test conditions: Define current privacy copy check including admin exception and retired Hide/deletion language.",
+        "bug_security_privacy_performance_risk": "Privacy statement must acknowledge admin exception; this is source-text check, not full UI accessibility proof.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 35,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 35,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 36,
+        "literal_original": " const source=readFileSync(new URL('../site/cloud/main.js',import.meta.url),'utf8');",
+        "classification": "executable-or-fixture",
+        "behavior": "Load actual cloud app template source",
+        "quality": "Inspected the exact line and its surrounding test conditions: Load actual cloud app template source.",
+        "bug_security_privacy_performance_risk": "Reads actual app template source used in settings render.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 36,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 36,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 37,
+        "literal_original": " assert.match(source,/Authorized administrators can review account-linked records and notes/);",
+        "classification": "assertion",
+        "behavior": "Require admin review of account-linked notes disclosed",
+        "quality": "Inspected the exact line and its surrounding test conditions: Require admin review of account-linked notes disclosed.",
+        "bug_security_privacy_performance_risk": "Admin can review account-linked notes; avoiding false promise of absolute privacy.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 37,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 37,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 38,
+        "literal_original": " assert.match(source,/Community does not show private notes/);",
+        "classification": "assertion",
+        "behavior": "Require Community private-note exclusion disclosed",
+        "quality": "Inspected the exact line and its surrounding test conditions: Require Community private-note exclusion disclosed.",
+        "bug_security_privacy_performance_risk": "Community does not show private notes, but this is UI copy, not RLS verification.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 38,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 38,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 39,
+        "literal_original": " assert.doesNotMatch(source,/even if you hide a personal shot or delete your account|personal setup details are never shared/);",
+        "classification": "assertion",
+        "behavior": "Reject contradictory historical Hide/deletion or blanket setup privacy overclaims",
+        "quality": "Inspected the exact line and its surrounding test conditions: Reject contradictory historical Hide/deletion or blanket setup privacy overclaims.",
+        "bug_security_privacy_performance_risk": "Reject old misleading Hide/delete account privacy phrases; no actual data deletion or Hide performed.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Assertions/fixtures target different malicious HTML forms, note sizes or privacy invariants; no safely removable duplicate demonstrated.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 39,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 39,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      },
+      {
+        "line": 40,
+        "literal_original": "});",
+        "classification": "syntax-boundary",
+        "behavior": "Close privacy copy regression test",
+        "quality": "Inspected the exact line and its surrounding test conditions: Close privacy copy regression test.",
+        "bug_security_privacy_performance_risk": "No independently reproduced current defect from this syntax-boundary; synthetic resource/privacy test limitations noted where applicable.",
+        "dead_obsolete": "Source blob exactly matches live development 31fd71f66e11b1998cbaf88da7bb367178967326 at inspection. Test still applicable; no proven obsolete or dead code.",
+        "duplication_redundancy": "Nonfunctional formatting/necessary delimiter; no redundant business behavior.",
+        "exact_live_counterpart": {
+          "path": "tests/notes-preservation-security.test.mjs",
+          "line": 40,
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "source_commit": "31fd71f66e11b1998cbaf88da7bb367178967326",
+          "source_text_equal": true
+        },
+        "source_git_identity": {
+          "original_commit": "9707553a64f88127826e8f5b2b36cd0651296e83",
+          "blob_sha": "18a69e84d5956a5c70006d658d427a834a959770",
+          "original_physical_line": 40,
+          "index": 392
+        },
+        "testability": "Node22 `node --test tests/notes-preservation-security.test.mjs`, then real owner-only Auth/RLS and offline browser acceptance under #96 before privacy claim.",
+        "fix_removal_improvement": "No confirmed active app failure reproduced. Keep existing code and notes intact; future benchmark/browser/auth coverage must be separately source-bound.",
+        "latest_locked_decision_fit": "Member-only notes, exact 16k codepoint preservation, no Hide deletion resurrection, admin exception explicitly disclosed; no private Community note release.",
+        "reviewer_qualification": "Direct AI inspection of original numbered physical line; independent human review NOT claimed."
+      }
+    ]
+  },
+  "current_exact_no_drift": {
+    "tests/html-resource-security.test.mjs": "709835ba96326101d256ac8bd3cd6515316d0fed",
+    "tests/notes-preservation-security.test.mjs": "18a69e84d5956a5c70006d658d427a834a959770"
+  },
+  "first_workflow_revalidation": {
+    "original_blob": "2cf28b22c69547c15c5f300dc4a68ed96a58791e",
+    "S2_001_blob": "ab99db76a883fd8ce1923cfd81c766e15064f38a",
+    "physical_lines_checked": 41,
+    "duplicate_credit": 0
+  },
+  "findings": [
+    {
+      "id": "N27-HTML-BOUNDARY",
+      "status": "TRIAGED_SCOPE_LIMITATION",
+      "path": "tests/html-resource-security.test.mjs",
+      "detail": "18s and 4s child-process timeouts bound stress fixtures, but the eight timings are not asserted separately as performance benchmarks, and actual remote service load is not tested.",
+      "disposition": "No confirmed current resource exhaustion defect; do not change #33-owned parser without reproduction."
+    },
+    {
+      "id": "N27-PRIVACY-BOUNDARY",
+      "status": "NO_ACTIVE_DEFECT_REPRODUCED",
+      "path": "tests/notes-preservation-security.test.mjs",
+      "detail": "Real UI template at site/cloud/main.js:429 contains active admin exception and Community-private-notes copy; static source tests do not substitute for browser or provider RLS.",
+      "disposition": "Preserve #96 live Auth/privacy ownership; no real data modified."
+    }
+  ],
+  "source_traces": [
+    "supabase/functions/_shared/html-scan.mjs",
+    "site/cloud/mapping.js",
+    "site/lib/engine.js",
+    "site/cloud/main.js:429"
+  ],
+  "credit": {
+    "new_original_frozen": 42,
+    "new_original_pinned": 40,
+    "independent_current_change_lines": 0,
+    "extra_line1_credit": 0,
+    "v1_r2c2_promotion": 0,
+    "central_ledger_increment": false
+  },
+  "code_changes": 0,
+  "production_changes": 0,
+  "deploy": false,
+  "completion": "IN_PROGRESS",
+  "next": "Verify PR-head governance and exact merge-source CI, safely integrate docs with no overlap, report Issue #267 checkpoint and continue unfinished inventories."
+}

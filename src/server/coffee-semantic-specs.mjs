@@ -264,7 +264,9 @@ export function extractSemanticCoffeeSpecs(html,{clean}={}){
   // Explicit suffix labels preserve unfamiliar compound cultivar names.
   // A sentence about a cultivar or a generic variety lesson is not a fact.
   const suffix=lines[0].match(/^(.{2,120}?)\s+(variet(?:y|ies|al|als)|cultivars?|variétés?|variedades?|variedade|process(?:ing)?(?: method)?)$/iu);
-  if(suffix){
+  // A complete recognized composite caption (e.g. Origin and process) is
+  // not a free-standing process VALUE. Its own labeled row remains reviewable.
+  if(suffix&&!coffeeFieldKey(lines[0])){
    const kind=coffeeFieldKey(suffix[2]);
    const generic=kind==='variety'&&/^(?:(?:regional|local|mixed|various|native|indigenous)\s*)+$/i.test(suffix[1]);
    // Wet/Dry Process are complete method names, not a bare adjective

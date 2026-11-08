@@ -11,7 +11,26 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 - [GitHub-wide exhaustive word-level records/doc audit: Issue #504](issue-504.md) — nonoverlapping with #267 source-code review
 - [Issue #96 source-transfer and receipt evidence](ops-issue96-receipt.md)
 - [Selected-product extraction completeness: Issue #33](issue-33.md)
+- [Issue #33 R31 original603 #442/#443/#444 current selected dotted regions READY](ops-issue33-r31-442-443-444-region-fix-20261108.md) — independently hashed exact H1/current source, original 603 still OPEN
+- [Issue #33 R16 original603 #322/#325/#330 selected current official source review](ops-issue33-r16-322-325-330-source-intake-20261107.md) — raw HTML/JSON/ZIP hash and Add Coffee/Source Review verified; H2-only #325 identity qualified, no new READY item; original603 OPEN
+- [Issue #33 Quills #273 selected Shopify/H1 Source Review provenance verified](ops-issue33-273-section-provenance-20261107.md) — exact merged Node/lint/build and 3/3 official H1/Add Coffee/Source Review verified; narrow queue READY development, full603 OPEN
+- [Issue #33 original603 #273/#276/#279 guarded selected official source intake](ops-issue33-eightyeighth3.md) — source CI IN TESTING; parent OPEN
+- [Issue #33 original603 #263/#266/#269 independent selected official source intake](ops-issue33-eightyseventh3.md) — actual 3/3 official source/H1/parser/Add Coffee independently SHA verified, qualifications retained; original603 OPEN
+- [Issue #33 original603 #250/#256/#262 current official selected-product review](ops-issue33-eightysixth3.md) — actual 3/3 source hashes and previews VERIFIED; #256 narrow origin conflict correction READY development only, whole603 OPEN
+- [Issue #33 Nov 7 original603 #247/#248/#249 Onyx current exact source intake](ops-issue33-eightyfifth3.md) — actual 3/3 current official source hash verified; native animated H1 identity guard TESTING, full603 OPEN
+- [Issue #33 Nov 7 original603 #223/#224/#225 independently hash-verified exact selected official sources](ops-issue33-eightyfourth3.md) — 3/3 parser/Add Coffee and Source Review executed, same-product role/lot qualifications; whole603 OPEN
+- [Issue #33 Nov 7 original603 #219/#220/#222 independently hashed current official sources](ops-issue33-eightythird3.md) — executed 3/3 selected parser/Add Coffee, #219 roast variants and #220/#222 semantic qualifications; full603 OPEN
+- [Issue #33 Nov 7 original603 #212/#213/#218 verified selected source and #213 Q’Ail/Rio Ocho correction](ops-issue33-eightysecond3.md) — exact current official HTML + independent hashes, code CI/merge READY; full603 OPEN
 - [Issue #33 November 2 targeted official-source probe and adversarial tests](issue-33-tenth3.md)
+- [Issue #33 Nov 7 selected original603 #202/#203/#211 verification and #203 method READY](ops-issue33-seventyninth3.md) — actual guarded official HTML SHA evidence; #203 exact Sugar Process fix verified, #211 geography qualified, entire 603 OPEN
+- [Issue #33 Nov 7 original603 #189/#192/#197 independently hashed selected official sources and #197 Sugar Process fix](ops-issue33-seventyeighth3.md) — narrow verified development READY; full603 certification OPEN
+- [Issue #33 Nov 7 original603 #177/#180/#187 independently verified official selected source](ops-issue33-seventyseventh3.md) — raw HTML + actual extractor/Add Coffee verified; #187 same-selected roast contradiction correctly withheld
+- [Issue #33 Nov 7 original603 #166/#172/#175 selected official source review](ops-issue33-seventysixth3.md) — exact merged source/Add Coffee and 3 raw HTML hashes verified; semantic role qualifications retained
+- [Issue #33 Nov 7 original603 #153/#156/#164 selected official source review](ops-issue33-seventyfifth3.md) — independent raw HTML hashes + actual extractor/Add Coffee verified; semantic qualifications retained, no generic defect
+- [Issue #33 Nov 7 original603 #144/#145/#147 selected official source review](ops-issue33-seventyfourth3.md) — exact merged public parser/Add Coffee and independent raw SHA proof; #144 conflicting roast, #145 multiple selectable roast variants qualified
+- [Issue #33 Nov 6 original603 #141/#142/#143 current selected-source review](ops-issue33-seventythird3.md) — raw HTML artifact independently SHA-verified, field and producer-role qualifications recorded
+- [Issue #33 Nov 6 selected-current original603 #131/#132/#140 bounded review](ops-issue33-seventysecond3.md) — official parser/Add Coffee evidence and independent raw hashes verified; #131 provisional mismatch corrected
+- [Issue #33 Nov 6 selected-current original603 #121/#124/#130 bounded review](ops-issue33-seventyfirst3.md) — source-page field review; real current parser, raw captures and CI pending
 - [Issue #33 Nov 6 selected-current original603 #337/#340/#355 bounded review](ops-issue33-sixtyninth3.md) — in-progress official parser evidence and per-case adjudication
 - [Numeric grinder range and Slow Feed recommendation: Issue #17](issue-17.md)
 - [Owner-retired screenshot extraction and Claude BYOK: Issue #18](issue-18.md)

@@ -1,73 +1,531 @@
 {
   "schema_version": 1,
-  "release_id": "DIC-20261106-READY7-23",
-  "tested_source_sha": "21e8db053a542f53ff38227977e279f6acf0abbf",
-  "previous_release_head_sha": "480aca1b32d7ded0bb83e9a899c4d7d5e6200e89",
-  "claimed_at_utc": "2026-11-06T20:41:21.606Z",
+  "release_id": "DIC-20261108-READY56-25",
+  "tested_source_sha": "ec822f66610c8e36b7b71cc3384e4951def4c275",
+  "previous_release_head_sha": "2ec10324fcaa4b60d1e48240b44b77b141b9ba54",
+  "claimed_at_utc": "2026-11-08T16:46:00.803Z",
   "status": "GIT_CONNECTED_BUILD_PENDING_NETLIFY_PROVIDER_READBACK",
   "granted_single_publication": true,
   "approved_ready_queue_items": [
     {
-      "id": "DIC-Q-455-community-measured-ratio-integrity",
+      "id": "DIC-Q-455-history-orphan-family-identity-guard",
       "issue": 455,
-      "title": "Exclude invalid archived dose/yield ratios from exported local Community evidence",
-      "merged_source_sha": "4bb45401e0ed7b2ca807f9857d39dc85a7948d5b",
+      "title": "Prevent nonexistent or wrong-coffee/style archived recipe families from becoming Current",
+      "merged_source_sha": "5d9f8a385306cd3fde199777615299aa975c800f",
+      "scope_paths": [
+        "site/cloud/main.js",
+        "site/cloud/shot_card.js",
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-successful-recipe-time-band-bounds",
+      "issue": 455,
+      "title": "Keep successful one-shot recipe displayed time interval within existing 1-180 second Log Shot limits",
+      "merged_source_sha": "b8c54dc33cd3835caa0036fdca4c3975f9160b62",
       "scope_paths": [
         "site/lib/engine.js"
       ]
     },
     {
-      "id": "DIC-Q-33-original603-400-413-selected-decaf-water-prose",
+      "id": "DIC-Q-455-next-recipe-yield-band-bounds",
+      "issue": 455,
+      "title": "Bound next recipe displayed +/-1 g yield band to existing 5-200 g Log Shot limits",
+      "merged_source_sha": "7300de331f3978cd866654da17f15489520f2722",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-409-priced-selected-water-process",
       "issue": 33,
-      "title": "Recognize two exact selected-product Mountain/Swiss Water decaf prose forms without inferring from other coffee or generic water",
-      "merged_source_sha": "0c83360a4f9949f0d7feb23b99fd32a69784ad48",
+      "title": "Current exact selected price-decorated White Rhino #409 H1 and own Swiss Water method without rewriting green Washed processing",
+      "merged_source_sha": "18fd599a8a11e33e52a454619bb31971bae8839f",
       "scope_paths": [
         "src/server/coffee-direct-product-prose.mjs"
       ]
     },
     {
-      "id": "DIC-Q-455-community-summary-stale-success-evidence-guard",
+      "id": "DIC-Q-455-shot-history-measured-make-current",
       "issue": 455,
-      "title": "Require actual five-green taste evidence in local contributor-balanced Community summary",
-      "merged_source_sha": "92f955357eef4a9892cc228169b450609b0ff063",
+      "title": "Hide unavailable Make Current Recipe action on unloggable all-green historical shots",
+      "merged_source_sha": "b9774048e8136aadfc900d5f8bb521fd579f6478",
+      "scope_paths": [
+        "site/cloud/shot_card.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-prefill-measured-physical-history",
+      "issue": 455,
+      "title": "Use only physically measured archived shots for next Log Shot dose and grinder prefill",
+      "merged_source_sha": "531e5fce190a696f52f83326d9c767570c8b3945",
       "scope_paths": [
         "site/lib/engine.js"
       ]
     },
     {
-      "id": "DIC-Q-33-original603-485-current-facility-ethyl-acetate-method",
+      "id": "DIC-Q-33-original603-350-source-review-composite-caption-guard",
       "issue": 33,
-      "title": "Recognize source-bound current selected decaf facility and sugarcane EA method without inferring water treatment",
-      "merged_source_sha": "828908d09b6da7b571eb7846e9e1a376960feb03",
-      "scope_paths": [
-        "src/server/coffee-direct-product-prose.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-cross-style-stale-success-evidence-guard",
-      "issue": 455,
-      "title": "Exclude incomplete or nonideal archived five-taste evidence from three cross-style recommendation gates",
-      "merged_source_sha": "264112eb501ac181478e4da6925fc6dbec325205",
-      "scope_paths": [
-        "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-33-original603-346-washing-station-role",
-      "issue": 33,
-      "title": "Retain selected Washing Station as review-only source; do not mistake station/village for canonical producer",
-      "merged_source_sha": "743b344add732766952dc78e59c3025b4f37599b",
+      "title": "Prevent false Source Review process value from a selected compound Origin and process heading",
+      "merged_source_sha": "269974e3a2788d81a3442c08cc3ba3386fb3fe43",
       "scope_paths": [
         "src/server/coffee-semantic-specs.mjs"
       ]
     },
     {
-      "id": "DIC-Q-455-historic-outlier-stale-success-evidence-guard",
+      "id": "DIC-Q-33-original603-336-current-grower-vs-farm",
+      "issue": 33,
+      "title": "Exact selected current named grower vs separately labeled Farm for original603 #336",
+      "merged_source_sha": "01c0358b35cafea75745b65eb04649d0a8fac07b",
+      "scope_paths": [
+        "src/server/coffee-direct-product-prose.mjs",
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-source-facts.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-335-current-ea-processed-decaf",
+      "issue": 33,
+      "title": "Recognize directly selected Decaf Desvelado E.A. Processed Decaf separately from green Washed processing",
+      "merged_source_sha": "d539ca8c119fe3d2686372c525080676f6eead39",
+      "scope_paths": [
+        "src/server/coffee-decaffeination-method.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-prefill-temperature-physical-history",
       "issue": 455,
-      "title": "Exclude unverified archived five-taste success flags from local shot outlier-review baseline",
-      "merged_source_sha": "1b9168f31eed7a1a2d6aa3f748b81cd663f49dde",
+      "title": "Exclude unloggable imported measurements from actual temperature prefill",
+      "merged_source_sha": "f76b3c383980f70db136bfd6690bee78dbf7dc27",
       "scope_paths": [
         "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-outlier-feed-basket-calibration-context",
+      "issue": 455,
+      "title": "Prevent explicit cross-feed/basket/calibration successes from creating false shot outlier prompts",
+      "merged_source_sha": "028e2bd2db3e6cbc5931a95b82d9217cab38c439",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-321-current-country-first-region",
+      "issue": 33,
+      "title": "Refine exact selected current single-origin named region in country-first H1 and source narrative",
+      "merged_source_sha": "f08bcc9c186671589f928ef3630307a56bb42789",
+      "scope_paths": [
+        "src/server/coffee-country-first-current-region.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-cached-next-physical-bounds",
+      "issue": 455,
+      "title": "Recompute physically invalid archived cached next-shot controls before showing measured advice",
+      "merged_source_sha": "e7ef11fdcc510f14b9686b6d5565e77277887809",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-311-selected-farm-volcano-region",
+      "issue": 33,
+      "title": "Refine current selected named producing farm's volcano region without inventing a farm-name municipality",
+      "merged_source_sha": "e9f8f752102f0611d44a0f83bb754de65c4ea347",
+      "scope_paths": [
+        "src/server/coffee-selected-farm-volcano-region.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-302-selected-decaf-process-caption",
+      "issue": 33,
+      "title": "Recognize product-scoped Decaf Process label as a decaffeination method rather than green processing",
+      "merged_source_sha": "f30bc4aab4731a3f6bd85533d6a3d70789f1b582",
+      "scope_paths": [
+        "src/server/coffee-direct-product-prose.mjs",
+        "src/server/coffee-source-facts.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-284-selected-family-farm-town",
+      "issue": 33,
+      "title": "Restore safely corroborated selected producing farm town for original603 #284 (without guessing region spelling)",
+      "merged_source_sha": "da2364fd33a48d8d0db9462bcc042921dba4ca93",
+      "scope_paths": [
+        "src/server/coffee-selected-farm-country-locality.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-make-current-measured-eligibility",
+      "issue": 455,
+      "title": "Require physically valid archived measurements before explicit Make Current favorite selection",
+      "merged_source_sha": "a622e9027b640fd7049c3a6b5b5cabd2bc68f150",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-281-selected-bean-pronoun-water-decaf",
+      "issue": 33,
+      "title": "Restore directly documented Swiss Water decaffeination method when exact selected bean is referenced by same-paragraph pronoun",
+      "merged_source_sha": "65468dbb6666652acd531edd87fc8f6f25fa1558",
+      "scope_paths": [
+        "src/server/coffee-direct-product-prose.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-next-shot-import-measurement-eligibility",
+      "issue": 455,
+      "title": "Keep physically invalid archived last-shot readings out of next recipe adjustment display",
+      "merged_source_sha": "607c53ff7194d39a25cc34bba2574050f209e9bb",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-273-h1-source-section-provenance",
+      "issue": 33,
+      "title": "Do not inherit unrelated testimonial headings in selected coffee Source Review",
+      "merged_source_sha": "75babcb3d9e7d9d1faa521fbb43c48761444cf35",
+      "scope_paths": [
+        "src/server/coffee-source-facts.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-temperature-physical-history-evidence",
+      "issue": 455,
+      "title": "Exclude physically invalid archived five-green measurements from personal temperature evidence",
+      "merged_source_sha": "569e1c8b9b216ea4e3f3a135004a9c8cea14cc8c",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-256-direct-selected-decaf-origin-conflict",
+      "issue": 33,
+      "title": "Withhold incompatible named present-decaf country prose versus exact chosen Origin caption",
+      "merged_source_sha": "84e2648fe5f869b1a41d07c7bf01fc5df7f05821",
+      "scope_paths": [
+        "src/server/coffee-selected-decaf-origin-conflict.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-similar-coffee-measured-history-bounds",
+      "issue": 455,
+      "title": "Exclude malformed historical physical measurements from personal similar-coffee ratio/time prior",
+      "merged_source_sha": "1f251932e77b387cde429d8f064b360f1c59912c",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-family-recipe-history-bounds",
+      "issue": 455,
+      "title": "Exclude malformed archived physical measurements from five-green personal recipe-family evidence",
+      "merged_source_sha": "71e20cf5abfd928c3e6eae1dfc29e24bfcc0dde8",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-213-selected-microlot-sector",
+      "issue": 33,
+      "title": "Conservatively refine exact selected named current micro-lot growing sector",
+      "merged_source_sha": "04712ffa1e6ffd9cb97695b16a301d01ed81dc1b",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-selected-microlot-sector-origin.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-sweetness-history-measured-bounds",
+      "issue": 455,
+      "title": "Exclude out-of-log-bounds archived shot measures from same-coffee sweetness evidence",
+      "merged_source_sha": "5a19e4cb9894ee8be8ae1b90a7d5a98f1af9f492",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-211-current-selected-department",
+      "issue": 33,
+      "title": "Conservatively refine current selected Colombia department",
+      "merged_source_sha": "7088dd1dd45d68ebb00c578f60a10ee430ab9895",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-selected-department-origin.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-controlled-sensitivity-history-integrity",
+      "issue": 455,
+      "title": "Reject invalid archived measurements from same-coffee grind-time response",
+      "merged_source_sha": "c6ddb7b3215b2b597faaec6719dc14a8b71545d4",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-prefill-measured-history-integrity",
+      "issue": 455,
+      "title": "Exclude invalid imported dose and out-of-current-range grind from Log Shot prefill",
+      "merged_source_sha": "2c682733aae06fdb0ac2fe818ee0fe3c941898a3",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-cross-style-measured-ratio-integrity",
+      "issue": 455,
+      "title": "Exclude malformed archived physical measurements from weak cross-style ratio starting prior",
+      "merged_source_sha": "ce20a270cd598a415fc7f959e98d71f53ebbf323",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-sweetness-comparable-measured-yield-integrity",
+      "issue": 455,
+      "title": "Exclude malformed archived measured yields from same-coffee sweetness comparison direction",
+      "merged_source_sha": "0881b3405d870843c98c64b706c320b68d2b8d08",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-family-measurement-integrity",
+      "issue": 455,
+      "title": "Exclude malformed historical measured shots from personal successful family ratio and recipe evidence",
+      "merged_source_sha": "45830c66e16984bfaf759f91268fbae69f15d47f",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-similar-coffee-measured-yield-integrity",
+      "issue": 455,
+      "title": "Ignore malformed archived yield and nonfinite ratios in personal similar-coffee starting reference",
+      "merged_source_sha": "813e3d53b86eebbb15faeec16c9790b3fae19da6",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-outlier-historical-measurement-integrity",
+      "issue": 455,
+      "title": "Exclude invalid archived dose/yield/time measurements from local outlier review baseline",
+      "merged_source_sha": "ef8fac50572dc3205d940e0b6a6cd7446a65d0c8",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-current-grind-range-evidence",
+      "issue": 455,
+      "title": "Exclude out-of-range archived same-calibration grind from proven/paired recommendations",
+      "merged_source_sha": "a6ecfa577a52957dcb58a40fddc1c897bf274134",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-197-selected-direct-ea-caffeine-removal",
+      "issue": 33,
+      "title": "Recognize directly published current selected sugarcane ethyl-acetate decaffeination treatment",
+      "merged_source_sha": "923c8a0ed75966beb4374874117908b1199750db",
+      "scope_paths": [
+        "src/server/coffee-direct-product-prose.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-archived-temperature-evidence-integrity",
+      "issue": 455,
+      "title": "Exclude invalid archived temperatures from Log Shot prefill and personal temperature guidance",
+      "merged_source_sha": "8f767a7e7af17d4358e54a0ef320cdc1f5b11389",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-203-exact-selected-decaffeination-spec-method",
+      "issue": 33,
+      "title": "Extract directly labeled exact selected decaffeination treatment separately from green processing",
+      "merged_source_sha": "728cde03f7c79b33cb9d2683d99de8472ebaba97",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-cross-style-measured-history-bounds",
+      "issue": 455,
+      "title": "Exclude physically invalid archived cross-style and Turbo/Fast-Flow donor measurements",
+      "merged_source_sha": "a41b7c315a7e37b23bdee5902a17007c6dbf25ae",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-outlier-physical-history-bounds",
+      "issue": 455,
+      "title": "Exclude physically out-of-bounds archived measurements from mandatory shot outlier comparisons",
+      "merged_source_sha": "661593cd78ce61420218b05600b83e0f3bdcb1c0",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-grind-physical-history-evidence",
+      "issue": 455,
+      "title": "Exclude physically invalid archived measurements from personal grinder and Slow Feed evidence",
+      "merged_source_sha": "6ed645863fa070b0fba7f06101fd286af11903d7",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-community-physical-ratio-bounds",
+      "issue": 455,
+      "title": "Exclude out-of-entry-bounds archived dose/yield from local Community ratio summary",
+      "merged_source_sha": "0ce97c4080d0285a2e9b25c03b0e1dc7b178514e",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-measured-green-advice-eligibility",
+      "issue": 455,
+      "title": "Unloggable archived five-green history cannot veto valid measured next-shot feedback",
+      "merged_source_sha": "b568337c2d4dc827404d7b57d5277b96d87a0f2a",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-r23-node-security-ci-concurrency",
+      "issue": 33,
+      "title": "Bound full Node file worker concurrency while retaining malicious HTML security subprocess 4000ms limit",
+      "merged_source_sha": "884d140d2fbdc84656b8dcc576fb793adced8a71",
+      "scope_paths": [
+        "package.json"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-374-375-selected-processing-card-swiss-water",
+      "issue": 33,
+      "title": "Recognize exact selected current Processing Details Swiss Water Method independently of Washed/Natural green milling",
+      "merged_source_sha": "547f83925a6769a105ce45678004cda22aa8f591",
+      "scope_paths": [
+        "src/server/coffee-direct-product-prose.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-feedback-physical-context",
+      "issue": 455,
+      "title": "Exclude physically unloggable archived rows from visible Next Shot feedback source",
+      "merged_source_sha": "3c21a137baf37ed7594937a56ee656e50a4a987f",
+      "scope_paths": [
+        "site/lib/ui.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-376-selected-ea-two-cell-decaf-source-review",
+      "issue": 33,
+      "title": "Recover current selected Tenfold Ethyl Acetate decaffeination from literal two-cell Processing Method and preserve correctly classified Source Review",
+      "merged_source_sha": "3cdfd1e4c5e424a7db6c792fd0aed5d64434035b",
+      "scope_paths": [
+        "src/server/coffee-direct-product-prose.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-381-selected-swiss-water-prose",
+      "issue": 33,
+      "title": "Recognize chosen Layover Organic Decaf Swiss Water method in selected description DIV, preserving Washed green processing",
+      "merged_source_sha": "49fdfcb9d8cb830e2a033c935b0defbb7827c270",
+      "scope_paths": [
+        "src/server/coffee-direct-product-prose.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-390-selected-swiss-water-h2",
+      "issue": 33,
+      "title": "Recover exact Santa Ana Swiss Water Decaf method from current purchased product H2 plus same-form direct H3, not unrelated historical EA",
+      "merged_source_sha": "01bf248319e26d2b4d33bfb80169859e8ec863f1",
+      "scope_paths": [
+        "src/server/coffee-direct-product-prose.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-424-441-current-ea-method",
+      "issue": 33,
+      "title": "Current selected own E.A. Process Decaf and current blended-lot Ethyl Acetate Decaffeination from bounded exact product prose",
+      "merged_source_sha": "096d143bd751b7f8c312f8050719c0c484f8c7f9",
+      "scope_paths": [
+        "src/server/coffee-direct-product-prose.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-442-443-444-selected-dotted-region",
+      "issue": 33,
+      "title": "Preserve exact current selected product H1 dotted country-plus-growing-region instead of country-only origin",
+      "merged_source_sha": "7b98319640fbd658a64fa8aee585f784a751b6ca",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs",
+        "src/server/coffee-dotted-title-region.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-starting-yield-display-bounds",
+      "issue": 455,
+      "title": "Keep valid starting recipe displayed yield band within existing Log Shot entry limits",
+      "merged_source_sha": "29ce55dcf0abe87cb5db906a0146faa6c3383c0c",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-450-selected-literal-chocolate-finish",
+      "issue": 33,
+      "title": "Preserve exact selected same-paragraph literal chocolate finish without unrelated source inheritance",
+      "merged_source_sha": "fb7e7c253af094dce12f475edff92b8d82c1a29c",
+      "scope_paths": [
+        "src/server/coffee-selected-description-sensory.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-456-species-cultivar-separation",
+      "issue": 33,
+      "title": "Treat exact selected Arabica species prefix as taxonomy when a complete printed cultivar list follows",
+      "merged_source_sha": "c0cf5ddf14d858ef013c899dd71bb1572c10cd76",
+      "scope_paths": [
+        "src/server/coffee-cultivar-species-prefix.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-history-make-current-family-id-guard",
+      "issue": 455,
+      "title": "Prevent invalid Make Current recipe from imported historical shots without assigned family identity",
+      "merged_source_sha": "a4010fbda71a6a600371de563096dd0715011a02",
+      "scope_paths": [
+        "site/cloud/shot_card.js",
+        "site/lib/engine.js"
+      ]
+    },
+    {
+      "id": "DIC-Q-33-original603-462-fractional-half-decaf-method",
+      "issue": 33,
+      "title": "Withhold whole-coffee decaffeination method for exact selected half-decaf or fractional mixed-caffeine blends",
+      "merged_source_sha": "3d0db4765047a8baa67561a17f458f5e62b354cc",
+      "scope_paths": [
+        "src/server/coffee-decaffeination-method.mjs"
       ]
     }
   ]

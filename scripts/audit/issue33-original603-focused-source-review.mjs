@@ -9,9 +9,11 @@ import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mj
 import {selectedCurrentCoffeeReleaseBadge} from '../../src/server/coffee-selected-source-evidence.mjs';
 import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 import {productCoffeeProse} from '../../src/server/coffee-product-prose.mjs';
+import {selectedDirectProductCredits} from '../../src/server/coffee-direct-product-prose.mjs';
 import {extractCoffeeBlendEvidence} from '../../src/server/coffee-blend-evidence.mjs';
 import {sameHandleCollectionAlternate,identicalCurrentSelectedTitle} from './issue33-selected-public-alternate.mjs';
 import {requiredFocusedSourceFailures} from './issue33-focused-source-acceptance.mjs';
+import {selectedProductHeadings,selectedProductFormH2,selectedProductPurchaseRootH2} from './issue33-selected-product-heading.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../../site/cloud/coffee-url-autofill.js';
 const sha=value=>createHash('sha256').update(value).digest('hex');
 const clip=(v,n=350)=>String(v??'').replace(/\s+/g,' ').trim().slice(0,n);
@@ -23,8 +25,15 @@ if(explicitTargetNumbers!=null &&
  !/^[1-9][0-9]{0,2}(?:,[1-9][0-9]{0,2}){0,19}$/.test(explicitTargetNumbers))
  throw Error('invalid_bounded_original603_case_subset');
 const targetNumbers=explicitTargetNumbers?explicitTargetNumbers.split(',').map(Number):defaultTargetNumbers;
+const negativeIdentityArg=process.env.DIC_ISSUE33_FOCUSED_IDENTITY_NEGATIVE_NUMBERS||'';
+if(negativeIdentityArg&&!/^[1-9][0-9]{0,2}(?:,[1-9][0-9]{0,2}){0,19}$/.test(negativeIdentityArg))
+ throw Error('invalid_bounded_negative_identity_subset');
+const negativeIdentityNumbers=negativeIdentityArg?negativeIdentityArg.split(',').map(Number):[];
 if(targetNumbers.some(n=>n>603)||new Set(targetNumbers).size!==targetNumbers.length)
  throw Error('invalid_duplicate_or_out_of_range_original603_cases');
+if(negativeIdentityNumbers.some(n=>n>603||!targetNumbers.includes(n)) ||
+ new Set(negativeIdentityNumbers).size!==negativeIdentityNumbers.length)
+ throw Error('invalid_negative_identity_case_subset');
 function csv(text){
  const rows=[];let arr=[],s='',quoted=false;
  for(let i=0;i<text.length;i++){const c=text[i];
@@ -72,8 +81,10 @@ for(const target of targets){
    r.status='FETCHED';r.final_url=res.source_url||r.official_url;
    r.html_sha256=sha(res.html);r.html_bytes=Buffer.byteLength(res.html,'utf8');
    const selected=productMarkup(res.html);
-   r.selected_h1=[...selected.matchAll(/<h1\b[^>]{0,500}>([\s\S]{0,1800}?)<\/h1>/gi)]
-     .slice(0,4).map(m=>clip(m[1].replace(/<[^>]+>/g,' '),200));
+   r.selected_h1=selectedProductHeadings(selected);
+   r.selected_form_h2=selectedProductFormH2(selected);
+   r.selected_page_h2=selectedProductPurchaseRootH2(res.html);
+   r.selected_h1_present_in_scoped_html=/<h1\b/i.test(selected);
    // Diagnostic provenance only: an old SEO page title may name a DIFFERENT
    // coffee even while the current selected product H1 and body are correct.
    // Never use this as a canonical identity or field assertion.
@@ -83,14 +94,48 @@ for(const target of targets){
    writeFileSync(join(dest,r.html_artifact),res.html,'utf8');
    const p=extractPublicCoffeeFacts(res.html,{source_url:r.final_url});
    r.parser_ok=p?.ok===true;r.parser_reason=clip(p?.reason,140);
+   r.selected_heading_identity_verified=r.selected_h1_present_in_scoped_html
+     ?r.selected_h1.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p?.fields?.name))
+     :r.selected_form_h2.length
+       ?r.selected_form_h2.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p?.fields?.name))
+       :r.selected_page_h2.length
+         ?r.selected_page_h2.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p?.fields?.name)):null;
    if(r.alternate_url_attempted){
-    r.alternate_identity_match=r.parser_ok&&r.selected_h1.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p.fields?.name));
+    r.alternate_identity_match=r.parser_ok&&(
+     r.selected_h1.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p.fields?.name))||
+     (!r.selected_h1_present_in_scoped_html&&r.selected_form_h2.some(h=>
+       identicalCurrentSelectedTitle(target.Coffee,h,p.fields?.name))));
     if(!r.alternate_identity_match){r.status='IDENTITY_MISMATCH';r.parser_ok=false;r.reason='alternate_selected_identity_unconfirmed';}
    }
    if(p?.ok){
     r.current_fields=Object.fromEntries(Object.entries(p.fields||{})
       .filter(([,v])=>v!=null&&typeof v!=='object').map(([k,v])=>[k,clip(v,400)]));
+    if(negativeIdentityNumbers.includes(r.number)){
+     r.original_product_not_certified=true;
+     r.current_identity_exception='CHANGED_SELECTED_PRODUCT_EXPLICIT_NEGATIVE_DO_NOT_TRANSFER_ARCHIVED_FIELDS';
+    }
     r.conflicts=p.conflicts||[];
+    if(r.number===336){
+      const cleanProbe=(v,n=6001)=>String(v||'').slice(0,n*6)
+       .replace(/<[^<>]{0,1200}>/gu,' ').replace(/&(?:nbsp|amp);/giu,' ')
+       .replace(/\s+/gu,' ').trim().slice(0,n);
+      const prose=productCoffeeProse(selected,cleanProbe);
+      const currentStory=prose.filter(block=>/We first purchased Luis['’]s coffee/u.test(block.text));
+      const direct=selectedDirectProductCredits(selected,{name:p.fields?.name||'',clean:cleanProbe});
+      r.selected_336_role_diagnostic={
+       selected_h1:r.selected_h1,source_sha256:r.html_sha256,
+       scoped_blocks:prose.length,
+       selected_story_blocks:currentStory.slice(0,4).map(block=>({
+        tag:block.tag,educational:block.educational,section:clip(block.section,90),
+        length:block.text.length,quote:clip(block.text,320)
+       })),
+       direct_selected_person:direct.producer||null,
+       direct_named_current_cultivator:direct.named_current_cultivator_producer===true,
+       observed_canonical_producer:p.fields?.producer||null,
+       observed_farm:p.roaster_details?.farm||null
+      };
+      console.log('[DIC33 #336 DIRECT CURRENT GROWER DIAG] '+JSON.stringify(r.selected_336_role_diagnostic));
+    }
     r.source_facts=(p.source_facts||[]).slice(0,45).map(f=>({
       label:clip(f.label,120),field:clip(f.field,80),value:clip(f.value,360),source_url:clip(f.source_url,320),section:clip(f.section,110),
       source_type:clip(f.source_type,55),conflicting:f.conflicting===true}));
@@ -283,6 +328,7 @@ for(const target of targets){
 const summary={schema_version:1,kind:'ORIGINAL603_FOCUSED_CURRENT_SOURCE_NOT_AUTOMATIC_CERTIFICATION',
  source_sha:process.env.GITHUB_SHA||null,utc:new Date().toISOString(),
  original603_register_sha256:sha(bytes),case_numbers:targetNumbers,
+ negative_identity_case_numbers:negativeIdentityNumbers,
  fetched:records.filter(x=>x.status==='FETCHED').length,
  parsed:records.filter(x=>x.parser_ok===true).length,manual_certified:0,
  public_only:true,original_corpus_modified:false,production_operations:0,real_auth:false,
@@ -290,7 +336,7 @@ const summary={schema_version:1,kind:'ORIGINAL603_FOCUSED_CURRENT_SOURCE_NOT_AUT
 writeFileSync(join(dest,'focused-current-evidence.json'),JSON.stringify(summary,null,2)+'\n');
 console.log('[DIC33 FOCUSED SUMMARY] '+JSON.stringify({attempted:records.length,fetched:summary.fetched,
  parsed:summary.parsed,manual_certified:0}));
-const requiredSourceFailures=requiredFocusedSourceFailures(targetNumbers,records);
+const requiredSourceFailures=requiredFocusedSourceFailures(targetNumbers,records,{negativeIdentityNumbers});
 if(requiredSourceFailures.length){
  console.error('[DIC33 FOCUSED REQUIRED CURRENT SOURCE UNVERIFIED] '+JSON.stringify({
   source_sha:summary.source_sha,required_cases:targetNumbers,failures:requiredSourceFailures

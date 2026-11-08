@@ -4,7 +4,7 @@
 import {removeElements,removeComments} from '../../supabase/functions/_shared/html-scan.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {coffeeFieldKey,extractSemanticCoffeeSpecs} from './coffee-semantic-specs.mjs';
-import {coffeeHtmlAttributes} from './coffee-product-scope.mjs';
+import {coffeeHtmlAttributes,productMarkup} from './coffee-product-scope.mjs';
 import {isRecurringCoffeeHarvestWindow,isGenericCoffeeLotLabel} from '../../supabase/functions/_shared/coffee-release-label.mjs';
 import {collectSupplementaryStructuredCoffeeFacts} from './coffee-supplementary-source-evidence.mjs';
 
@@ -678,16 +678,20 @@ function addInlineWooVariations(html,nodes,blocked,result,source_url){
 // *review field attribution* only after those sources have merged: otherwise a
 // second copy of "Farm | ..." can silently re-tag an actor as Producer.
 // Never discard the seller's literal label, URL, value or text evidence.
-export function reconcileSelectedCoffeeReviewActorRoles(facts,{source_url}={}){
+export function reconcileSelectedCoffeeReviewActorRoles(facts,{source_url,selected_producer='',selected_farm=''}={}){
  if(!Array.isArray(facts)||!source_url)return facts;
  const eligible=f=>f?.source_url===source_url&&f.source_type==='html'&&
   !f.conflicting&&!/different coffee|other coffee|previous (?:coffee|lot)|general guidance|educational/i.test(String(f.section||''));
  const normLabel=f=>normalized(String(f?.label||'').replace(/[|:：]\s*$/u,''));
  const labeledGrower=facts.some(f=>eligible(f)&&f.field==='producer'&&/^(?:grower|producer|farmer)$/.test(normLabel(f)));
+ const distinctSelectedFarm=Boolean(selected_producer&&selected_farm&&
+  normalized(selected_producer)!==normalized(selected_farm));
  const methods=facts.filter(f=>eligible(f)&&f.field==='process'&&normLabel(f)==='process').map(f=>normalized(f.value));
  for(const fact of facts){
   if(!eligible(fact))continue;
-  if(labeledGrower&&fact.field==='producer'&&normLabel(fact)==='farm')delete fact.field;
+  // Retain the raw Farm value/label but do not misattribute it as Producer.
+  if(fact.field==='producer'&&normLabel(fact)==='farm'&&
+     (labeledGrower||(distinctSelectedFarm&&normalized(fact.value)===normalized(selected_farm))))delete fact.field;
   if(methods.length&&fact.field==='process'&&normLabel(fact)==='processing'&&
    !methods.includes(normalized(fact.value))&&
    /^[\p{Lu}][\p{L}\p{M}.'’-]*(?:\s+[\p{Lu}][\p{L}\p{M}.'’-]*){0,4}$/u.test(fact.value)&&
@@ -732,6 +736,8 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
  const sections=new Map(),panelSections=new Map(),secondaryPanels=new Set(),primaryExcluded=[],headings=[];
  for(let i=0;i<nodes.length;i++){
   const node=nodes[i],attrs=coffeeHtmlAttributes(node.attributes);
+  // An independent storefront component may precede selected product H1.
+  if(node.tag==='section'&&String(attrs.class||'').split(/\s+/).includes('shopify-section'))headings.length=0;
   const panel=controls.get(attrs.id)||(/\bguide-body\b/.test(attrs.class||'')?controls.get(attrs['data-guide']):'');
   const inherited=panel||panelSections.get(node.parent)||'';
   if(inherited)panelSections.set(i,inherited);
@@ -740,6 +746,9 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
    secondaryPanels.add(i);
    if(!secondaryPanels.has(node.parent))primaryExcluded.push([node.start,node.end]);
   }
+  // H1 establishes a new document/product section. Prior storefront heading
+  // context (including testimonials) cannot label later selected coffee facts.
+  if(node.tag==='h1'&&!blocked.has(i))headings.length=0;
   if(/^h[2-6]$/.test(node.tag)&&!blocked.has(i)){
    const heading=text(i),level=Number(node.tag[1]);
    if(heading&&heading.length<=100){headings.length=level;headings[level]=heading;}
@@ -747,11 +756,6 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
   const heading=inherited||headings.filter(Boolean).join(' / ').slice(0,100);
   sections.set(i,(secondaryPanels.has(i)?'Supplementary page panel / '+heading:heading).slice(0,100));
  }
- const sectionAt=start=>{
-  let low=0,high=nodes.length;
-  while(low<high){const mid=(low+high)>>>1;if(nodes[mid].start<=start)low=mid+1;else high=mid;}
-  return sections.get(low-1)||'';
- };
  // Reserve the selected page's complete prose before iterating its many
  // individual labels. Supplementary dialogs remain available separately.
  if(primaryExcluded.length){
@@ -764,11 +768,55 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
  const fullText=plain(removeElements(html,[...BLOCKED]),MAX_SOURCE_FACT_CHARACTERS+2);
  if(fullText&&normalized(fullText)!==normalized(name))result.add('Published product text',fullText,undefined,primaryExcluded.length?'Complete page scope':undefined);
  const semantic=extractSemanticCoffeeSpecs(html,{clean:plain});
+ // Semantic facts use productMarkup(html) offsets, not original document
+ // offsets. Selected <main> can follow unrelated testimonials; do not label
+ // selected facts from earlier full-document section coordinates.
+ const semanticPage=productMarkup(html),semanticNodes=coffeeHtmlElements(semanticPage).nodes;
+ // Controls and their owned content must use the same section label as the
+ // full-page review ledger. Otherwise identical hidden-panel facts duplicate.
+ const semanticControls=new Map(),semanticPanelSections=new Map();
+ for(let i=0;i<semanticNodes.length&&semanticControls.size<128;i++){
+  const node=semanticNodes[i];if(!['button','a'].includes(node.tag))continue;
+  const attrs=coffeeHtmlAttributes(node.attributes),target=attrs['aria-controls']||attrs['data-guide'];
+  if(!target||target.length>160||node.contentEnd-node.headEnd>1200)continue;
+  const title=plain(semanticPage.slice(node.headEnd,node.contentEnd),100);
+  if(/\b(?:espresso|filter|pour.?over|v60|aeropress|french press|brew|coffee details|specifications)\b/i.test(title))semanticControls.set(target,title);
+ }
+ const semanticBlocked=new Set(),semanticHeadings=[],semanticSections=[];
+ for(let i=0;i<semanticNodes.length;i++){
+  const node=semanticNodes[i];
+  if(BLOCKED.has(node.tag)||semanticBlocked.has(node.parent))semanticBlocked.add(i);
+  if(!semanticBlocked.has(i)&&node.tag==='section'&&
+   String(coffeeHtmlAttributes(node.attributes).class||'').split(/\s+/).includes('shopify-section'))semanticHeadings.length=0;
+  if(!semanticBlocked.has(i)&&node.tag==='h1')semanticHeadings.length=0;
+  if(!semanticBlocked.has(i)&&/^h[2-6]$/.test(node.tag)&&node.contentEnd-node.headEnd<=2000){
+   const heading=plain(semanticPage.slice(node.headEnd,node.contentEnd),101),level=Number(node.tag[1]);
+   if(heading&&heading.length<=100){semanticHeadings.length=level;semanticHeadings[level]=heading;}
+  }
+  const attrs=coffeeHtmlAttributes(node.attributes);
+  const owned=semanticControls.get(attrs.id)||(/\bguide-body\b/.test(attrs.class||'')?semanticControls.get(attrs['data-guide']):'');
+  const inherited=owned||semanticPanelSections.get(node.parent)||'';
+  if(inherited)semanticPanelSections.set(i,inherited);
+  semanticSections.push([node.start,inherited||semanticHeadings.filter(Boolean).join(' / ').slice(0,100)]);
+ }
+ const semanticSectionAt=start=>{
+  let low=0,high=semanticSections.length;
+  while(low<high){const mid=(low+high)>>>1;if(semanticSections[mid][0]<=start)low=mid+1;else high=mid;}
+  return semanticSections[low-1]?.[1]||'';
+ };
  // Review-only roles distinguish named farms/facilities from current selected
  // producers and green methods. Exact source captions/values remain retained.
  const hasLabeledGrower=semantic.facts.some(fact=>fact.kind==='producer'&&/^(?:grower|producer|farmer)$/i.test(fact.label.trim()));
  const selectedProcessMethods=semantic.facts.filter(fact=>fact.kind==='process'&&/^process$/i.test(fact.label.trim())).map(fact=>normalized(fact.value));
- const sourceReviewField=(label,value,field)=>{
+ const sourceReviewField=(label,value,field,section='')=>{
+  // Decaffeination equipment/treatment is not green cherry processing.
+  // The semantic scanner may shorten an exact selected "Decaf Process" caption
+  // to a generic "Process" fact inside the decaf-method section. Preserve the
+  // published text for review, but do NOT falsely attribute it to the green
+  // process field. Do not suppress genuine Washed/Natural/Honey facts.
+  if(field==='process'&&
+   /^(?:swiss|mountain)[ -]?water(?:[ -]?process)?$/iu.test(String(value).trim())&&
+   /\bdecaf(?:feinated|feination)?\b/iu.test(String(section)))return undefined;
   const caption=normalized(label).replace(/\s*[|:：]\s*$/u,'');
   if(field==='producer'&&caption==='farm'&&hasLabeledGrower)return undefined;
   if(field==='process'&&caption==='processing'&&selectedProcessMethods.length&&!selectedProcessMethods.includes(normalized(value))&&
@@ -776,7 +824,10 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
    !/\b(?:washed|natural|honey|anaerobic|wet.?hulled|ferment|carbonic|maceration|dry.?process|wet.?process|decaf)\b/i.test(value))return undefined;
   return field;
  };
- for(const fact of semantic.facts)result.add(fact.label,fact.value,sourceReviewField(fact.label,fact.value,fact.kind),sectionAt(fact.start));
+ for(const fact of semantic.facts){
+  const section=semanticSectionAt(fact.start);
+  result.add(fact.label,fact.value,sourceReviewField(fact.label,fact.value,fact.kind,section),section);
+ }
  // Definition lists and tables preserve unfamiliar labels, units and values.
  for(let i=0;i<nodes.length;i++){
   const node=nodes[i];if(blocked.has(i))continue;
@@ -800,7 +851,7 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
   if(node.tag==='tr'){
    const cells=(children.get(i)||[]).filter(j=>/^(?:th|td)$/.test(nodes[j].tag)&&text(j));
    if(cells.length>=2&&cells.length<=12&&labelLike(text(cells[0])))
-    {const label=text(cells[0]),value=cells.slice(1).map(text).join(' | ');result.add(label,value,sourceReviewField(label,value,coffeeFieldKey(label)),sections.get(i));}
+    {const label=text(cells[0]),value=cells.slice(1).map(text).join(' | ');result.add(label,value,sourceReviewField(label,value,coffeeFieldKey(label),sections.get(i)),sections.get(i));}
   }
   if(node.tag==='dt'){
    const siblings=children.get(node.parent)||[],index=positions.get(i),values=[];
@@ -808,7 +859,7 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
     if(nodes[siblings[j]].tag!=='dd')break;
     if(text(siblings[j]))values.push(text(siblings[j]));
    }
-   if(labelLike(text(i))&&values.length){const label=text(i),value=values.join(', ');result.add(label,value,sourceReviewField(label,value,coffeeFieldKey(label)),sections.get(i));}
+   if(labelLike(text(i))&&values.length){const label=text(i),value=values.join(', ');result.add(label,value,sourceReviewField(label,value,coffeeFieldKey(label),sections.get(i)),sections.get(i));}
   }
   if(!CONTENT.has(node.tag)||!text(i))continue;
   const childList=children.get(i)||[];
@@ -818,7 +869,7 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
   const lines=html.slice(node.headEnd,node.contentEnd).split(/<br\b[^<>]{0,2000}>/gi).slice(0,128).map(line=>plain(line)).filter(Boolean);
   for(const line of lines){
    const pair=line.match(/^([\p{L}\p{N}][\p{L}\p{M}\p{N} /&()_.%+–-]{0,79}?)\s*[:：]\s*(.+)$/u);
-   if(pair&&labelLike(pair[1]))result.add(pair[1],pair[2],sourceReviewField(pair[1],pair[2],coffeeFieldKey(pair[1])),sections.get(i));
+   if(pair&&labelLike(pair[1]))result.add(pair[1],pair[2],sourceReviewField(pair[1],pair[2],coffeeFieldKey(pair[1]),sections.get(i)),sections.get(i));
   }
  }
  // Short heading/value sibling groups include metrics that have no colon.
@@ -830,7 +881,7 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
    if(!/^(?:h[2-6]|strong|b|label|summary)$/.test(nodes[a].tag))continue;
    if(!/^(?:p|div|span|ul|ol|dd)$/.test(nodes[b].tag))continue;
    if(nodes[b].start-nodes[a].end>1500)continue;
-   result.add(label,value,sourceReviewField(label,value,coffeeFieldKey(label)),sections.get(a));
+   result.add(label,value,sourceReviewField(label,value,coffeeFieldKey(label),sections.get(a)),sections.get(a));
   }
  }
  // Retain product prose as evidence as well as classified facts. Paragraphs

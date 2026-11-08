@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "authority_issue": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+  "review_utc": "2026-11-06",
+  "scope": "original603 selected current official #419 #425 #428; source-bound field-level semantic review; no whole-coffee certification",
+  "status": "FIELD_LEVEL_SOURCE_REVIEWED_PARENT_IN_PROGRESS",
+  "source_branch": "development/backend-foundation",
+  "exact_merged_source_sha": "2c36e5a22fad72cb8efe0e4104b6c0b134a75c14",
+  "selector_pr": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/1098",
+  "selector_head_sha": "b88a131866834c6b4fcde98036cf4ccf6115c5aa",
+  "selector_head_ci": {
+    "approval": {
+      "run": 42293355182,
+      "conclusion": "SUCCESS"
+    },
+    "node_lint_build": {
+      "run": 42293355187,
+      "conclusion": "SUCCESS"
+    },
+    "isolated_sql": {
+      "run": 42293355183,
+      "conclusion": "SUCCESS"
+    },
+    "cloud_mobile": {
+      "run": 42293355205,
+      "conclusion": "SUCCESS"
+    }
+  },
+  "merged_ci": {
+    "approval": {
+      "run": 42293628674,
+      "conclusion": "SUCCESS"
+    },
+    "source": {
+      "run": 42293628763,
+      "job": 128153122103,
+      "conclusion": "SUCCESS"
+    },
+    "other_source_jobs": "SKIPPED_NOT_PASS"
+  },
+  "immutable_original603_csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "original_oracle_scorer_csv_modified": false,
+  "private_public_source_artifact": {
+    "id": 13539279944,
+    "zip_sha256": "2b8dc6b76bbe97afa86d49856ec909763a7f493f1b17cce9d51aad40b3f63461",
+    "record_json_sha256": "1484868b44f5d2a565bc92de966a1355e608d7c8d73ab4886160142841e9c60f",
+    "raw_html_sha256": {
+      "419": "6a80f83e95e18e523f890548288a3a2b1f34c8fc0022941ac298bc0640525c87",
+      "425": "119befd3aaaf7709510ce5653782312dd510c228ec9c3d4dbb62afe67d16ca6b",
+      "428": "d7a65ae0d007e7ada6cbf940248e09a885ad74d9ecfd3f96b71d5499d07a2adc"
+    },
+    "hashes_independently_verified_on_actual_downloaded_zip_and_three_html_files": true
+  },
+  "runner_summary": {
+    "attempted": 3,
+    "fetched": 3,
+    "parsed": 3,
+    "add_coffee_rendered": 3,
+    "source_review_rendered": 3,
+    "whole_coffees_certified": 0,
+    "conflict_arrays_nonempty": 0
+  },
+  "cases": [
+    {
+      "number": 419,
+      "coffee": "COLOMBIAN LIGHT ROAST",
+      "official_url": "https://www.ahrre.com/products/colombian-light-roast",
+      "selected_primary_identity": "Selected store product heading and SKU ACR-CLR; HTML <h1> array empty, current selected product identified by correct page body/meta",
+      "fields_supported": {
+        "name": "COLOMBIAN LIGHT ROAST",
+        "roaster": "Ahrre's Coffee Roastery",
+        "origin": "Colombia",
+        "roast_level": "Light"
+      },
+      "adjudication": "Actual published selected beans American Roast two shades lighter than the site's standard Full City; current parser correctly does not transfer unrelated standard roast Medium-Dark to selected coffee. No tasting note list directly certified: generic category prose isn't selected named flavor list.",
+      "exception": "Not exact-H1 anchored; source body, SKU and selected metadata agree; retain source/identity qualification."
+    },
+    {
+      "number": 425,
+      "coffee": "Gracias A Dios",
+      "official_url": "https://www.aldeacoffee.com/products/gracias-a-dios-single-origin-communal-lot",
+      "selected_h1": "Gracias A Dios",
+      "fields_supported": {
+        "name": "Gracias A Dios",
+        "roaster": "Aldea Coffee",
+        "roast_level": "Medium-Dark",
+        "tasting_notes": "VELVETY, DARK CHOCOLATE, STONEFRUIT",
+        "origin": "La Union, Honduras.",
+        "elevation_m": "1300-1500m",
+        "variety": "Lempira, Obata, Catuai, IHCAFE 90"
+      },
+      "adjudication": "Selected headline and overview are direct product sensory/roast evidence; label Origin Cupping Notes from Origin and How to brew are different source roles, so do not overwrite the main selected tasting notes or 1st-party product overview.",
+      "exception": "Same current page How to brew says medium roast while primary selected overview says medium-dark. Preserve as qualified secondary contradiction, not a silently reconciled equal-strength roast fact; source facts and no-conflict parser output do not constitute universal conflict certification."
+    },
+    {
+      "number": 428,
+      "coffee": "Kirima Batian - Othaya, Nyeri, Kenya - 12oz Bag",
+      "official_url": "https://www.altaroasters.com/products/kirima-batian-othaya-nyeri-kenya-12oz-bag",
+      "selected_h1": "Kirima Batian - Othaya, Nyeri, Kenya - 12oz Bag",
+      "fields_supported": {
+        "name": "Kirima Batian - Othaya, Nyeri, Kenya - 12oz Bag",
+        "roaster": "Alta Coffee Roasters",
+        "origin": "Othaya, Nyeri, Kenya",
+        "roast_level": "Light",
+        "tasting_notes": "Cherry, Raisin, Lemon",
+        "variety": "SL28, SL34, Batian",
+        "process": "Washed",
+        "elevation_m": "1,847m",
+        "producer": "Othaya Farmers Cooperative Society"
+      },
+      "adjudication": "Current exact product says Kiaguthu Washing Station supplied the lot and Othaya Farmers Cooperative Society runs that station. Producer classification here is organizational/cooperative, not proof of a named farm/person; do not copy station into producer. Current selected labeled specs all align. No other coffee conflation established.",
+      "exception": "Record operator/cooperative versus direct-farmer attribution boundary; no named farm identity asserted."
+    }
+  ],
+  "source_bound_defect_reproduced": false,
+  "parser_code_changed": false,
+  "new_tests_added": 0,
+  "release_status": "IN_PROGRESS",
+  "issue33_open": true,
+  "privacy_security": "NO_AUTH_NO_PRODUCTION_WRITES_NO_RELEASE_NO_SECRET_USE",
+  "next": "Continue unresolved original603 source cases; only add generic fix and adversarial regression on reproduced current selected defect; preserve other owners #267 and #96."
+}

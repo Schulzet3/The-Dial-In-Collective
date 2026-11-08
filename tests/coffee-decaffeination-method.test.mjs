@@ -41,3 +41,42 @@ for(const [name,desc,expected] of [
  assert.equal(result.fields.decaffeination_method,expected||undefined);
  assert.equal(result.fields.process,desc==='Process: Washed'?'Washed':undefined);
 });
+
+// Issue #33 R35: real selected official #462 H1 explicitly names a half-decaf
+// blend, while its own Process line mentions Swiss Water on one component.
+// Prior exact public parser incorrectly assigned Water Process to the WHOLE blend.
+for(const name of [
+ 'Even Steven -1/2 Decaf & 1/2 Colombia',
+ 'Even Steven - 1 / 2 Decaf + 1 / 2 Colombia',
+ 'Even Steven - ½ Decaf & ½ Colombia',
+ 'Even Steven - 50% Decaf and 50% Colombia',
+ 'Half Decaf Blend',
+ 'Half-Decaf Blend'
+])test('fractional caffeine is not full decaf: '+name,()=>{
+ assert.equal(inferDecaffeinationMethod({name,processingDetail:'Washed / Swiss Water Process',
+  selectedMethod:'Swiss Water Process',selectedCurrentDecafIdentity:true}), '');
+ assert.equal(decafOnlyCoffee(name,true),false);
+});
+
+test('original603 #462 exact selected source fraction keeps named coffee, green Washed and no whole-blend method',()=>{
+ const selectedName='Even Steven -1/2 Decaf & 1/2 Colombia';
+ const parsed=sample(selectedName,
+  '<section><h2>The Nitty-gritty:</h2><p>Country: Colombia</p>'+ 
+  '<p>Region: Mantiqueira de Minas</p><p>Altitude: 1300 masl</p>'+ 
+  '<p>Variety: Catuai</p><p>Process: Washed/ Swiss Water Process</p>'+ 
+  '<p>Roast Level: Medium/ Dark</p>'+ 
+  '<p>What you&#39;ll taste in your cup: Chocolate, Toffee, and Apricot.</p></section>');
+ assert.equal(parsed.fields.name,selectedName);
+ assert.equal(parsed.fields.decaffeination_method,undefined);
+ // Preserve selected-scope facts for source review; the competing published
+ // geography cannot be "fixed" by guessing which component/country is right.
+ assert.ok(!parsed.fields.decaffeination_method);
+});
+
+test('fractions refer to caffeine content, not unrelated bag weights or recipes',()=>{
+ assert.equal(inferDecaffeinationMethod({name:'Decaf Colombia 1/2 lb',
+  processingDetail:'Swiss Water Process'}),'Water Process');
+ assert.equal(inferDecaffeinationMethod({name:'Decaf Colombia',
+  processingDetail:'Swiss Water Process',selectedMethod:'50% discount'}),'Water Process');
+ assert.equal(decafOnlyCoffee('Decaf Colombia ½ lb bag'),true);
+});

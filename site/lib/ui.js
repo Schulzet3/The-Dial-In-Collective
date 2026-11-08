@@ -1,4 +1,4 @@
-import {SCALES,tasteSeverity,tasteLabel,tempDisplay} from './constants.js';
+import {SCALES,tasteSeverity,tasteLabel,tempDisplay,CONFIG,finite} from './constants.js';
 export const e = x => String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const paths={
  signout:'M9 4H4v16h5m5-12 4 4-4 4m-6-4h10',
@@ -113,6 +113,16 @@ export function lastRecipeContextShot(shots,coffeeId,recipe,version){
   // legacy undated/malformed shots without making them current feedback.
   const at=Date.parse(sh.timestamp);
   if(!Number.isFinite(at))continue;
+  // Keep archived ratings/notes intact, but only valid measured controls
+  // can become the visibly selected next-shot feedback reference.
+  if(!['doseG','yieldG','timeS'].every(field=>{
+   const [low,high]=CONFIG.bounds[field];
+   return finite(sh[field])&&sh[field]>=low&&sh[field]<=high;
+  })||!finite(sh.yieldG/sh.doseG)||!finite(sh.grindSetting)||
+   (finite(version.grinderMin)&&sh.grindSetting<version.grinderMin)||
+   (finite(version.grinderMax)&&sh.grindSetting>version.grinderMax)||
+   (sh.tempC!=null&&(!finite(sh.tempC)||
+    sh.tempC<CONFIG.bounds.tempC[0]||sh.tempC>CONFIG.bounds.tempC[1])))continue;
   if(at>latestInstant){latest=sh;latestInstant=at;}
  }
  return latest;

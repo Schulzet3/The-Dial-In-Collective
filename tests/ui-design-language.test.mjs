@@ -2,6 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
+const activeCss=source=>source.replace(/\/\*[\s\S]*?\*\//g,'');
+const legacyShotSummarySelector=/\.shot-summary-actions\s*\{/;
+const globalNoShadowRule=/\*,\*::before,\*::after\{text-shadow:none!important\}/;
 const sources=['site/cloud/main.js','site/cloud/coffee-match-ui.js',
  'site/cloud/import-ui.js','site/cloud/import-preview.js',
  'site/cloud/confirmation.js','site/admin/view.js'];
@@ -36,15 +39,19 @@ test('user-entered shot notes and coffee identity strings are escaped, never rec
  assert.match(shot,/\$\{e\(shot\.notes\)\}/);
 });
 test('button roles are standardized by shared CSS tokens without reskinning original badges',()=>{
- const css=read('site/visual.css');
+ const css=activeCss(read('site/visual.css'));
  for(const name of ['control-height','control-compact-height','control-radius','control-font','control-weight'])
   assert.match(css,new RegExp('--'+name+':'));
  assert.match(css,/\.primary,\.secondary,\.ghost,\.danger\{border-radius:var\(--control-radius\)/);
  assert.match(css,/\.compact\{min-height:var\(--control-compact-height\)/);
- assert.doesNotMatch(css,/\.shot-summary-actions\{/);
+ assert.doesNotMatch(css,legacyShotSummarySelector);
  assert.match(css,/\.taste-chip\{[^}]+font-weight:500/);
  assert.match(css,/\.radar text\{[^}]+font-weight:600/);
- assert.match(css,/\*,\*::before,\*::after\{text-shadow:none!important\}/);
+ assert.match(css,globalNoShadowRule);
+});
+test('CSS policy cannot be satisfied by comments or spacing changes',()=>{
+ assert.doesNotMatch(activeCss('/* *,*::before,*::after{text-shadow:none!important} */'),globalNoShadowRule);
+ assert.match('.shot-summary-actions {',legacyShotSummarySelector);
 });
 test('owner-approved recipe captions keep Basket-based and remove redundant Temperature subcaption',()=>{
  const code=read('site/lib/ui.js');
@@ -54,7 +61,7 @@ test('owner-approved recipe captions keep Basket-based and remove redundant Temp
 });
 
 test('New Coffee full-width fields keep consistent gaps beside the efficient paired metadata grid',()=>{
- const css=read('site/visual.css');
+ const css=activeCss(read('site/visual.css'));
  assert.match(css,/#new-coffee>label\.field\{margin-bottom:13px\}/);
  assert.match(css,/#new-coffee \.coffee-detail-grid\{margin-top:16px;margin-bottom:16px\}/);
 });

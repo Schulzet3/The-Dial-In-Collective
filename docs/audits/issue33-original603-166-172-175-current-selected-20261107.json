@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "kind": "ISSUE33_CURRENT_SELECTED_OFFICIAL_HTML_INDEPENDENT_BYTE_AND_FIELD_REVIEW",
+  "issue": 33,
+  "date_utc": "2026-11-07",
+  "scope": "DEVELOPMENT_ONLY; selected field evidence, not individual whole-coffee certification",
+  "source": {
+    "initial_sha": "ca0ca318800357161f66b361309cfac02b228a8b",
+    "code_pr": 1137,
+    "head_sha": "a1eda11f1d8a9bcd297f5bdb0a7e4d64710ce4a4",
+    "merged_sha": "0ad743d89e0daebf3fd1ca33d280c8f9ebab6e57",
+    "tree": "018ffde6cf73353cdb7dc282f3621a9258ee1407",
+    "head_tree_equal_merged": true,
+    "one_parent": true,
+    "official_run": 42332239936,
+    "focused_job": 128281142511,
+    "focused_job_conclusion": "success",
+    "approval_run": 42332239909,
+    "approval_success": true,
+    "artifact_id": 13557263866,
+    "github_digest_equal": true,
+    "zip_sha256": "256aa1761cbc39762787326295e75bf6300375baa80fd4fe4142c86e811af980",
+    "runner_json_sha256": "9107c98182823965f8051e1f9a182e8afee9e7811128f9469cc6a5c39787b8b8",
+    "runner_source_sha_equal": true
+  },
+  "ci": {
+    "pr_source_sha": "a1eda11f1d8a9bcd297f5bdb0a7e4d64710ce4a4",
+    "checks": [
+      "approval",
+      "validate",
+      "cloud-tests",
+      "mobile-browser-qa",
+      "sql"
+    ],
+    "all_five_pr_checks_success": true,
+    "approval_run": 42332010502,
+    "node_lint_build_run": 42332010472,
+    "cloud_mobile_browser_run": 42332010405,
+    "sql_run": 42332010453,
+    "merged_approval_run": 42332239909,
+    "merged_official_run": 42332239936,
+    "unrelated_jobs": "SKIPPED_NOT_PASS",
+    "original603": "NOT_EXECUTED_NOT_MANUALLY_CERTIFIED"
+  },
+  "frozen": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "unchanged_original_csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "runner_csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "oracle_scorer_captures_changed": false
+  },
+  "counts": {
+    "attempted": 3,
+    "fetched": 3,
+    "parsed": 3,
+    "add_coffee_rendered": 3,
+    "source_review_rendered": 3,
+    "independent_html_sha256": 3,
+    "field_conflicts": 0,
+    "whole_coffee_manual_certified": 0,
+    "parser_fix_commits": 0,
+    "ready_queue_items": 0
+  },
+  "cases": [
+    {
+      "number": 166,
+      "name": "Maragogipe – Washed Process",
+      "url": "https://iwanacoffee.com/product/maragogipe-washed-process",
+      "resolved_url": "https://iwanacoffee.com/product/maragogipe-washed-process/",
+      "bytes": 132960,
+      "sha256": "239c2eda7678c4a4e9b1c7d8f52435e229f63d485f9603b04e9749cdfbc2dad4",
+      "h1": [],
+      "fields": {
+        "name": "Maragogipe – Washed Process",
+        "release_label": "Micro-Lot",
+        "roaster": "Iwana Coffee",
+        "process": "Washed",
+        "tasting_notes": "wildflowers, black tea, apple, green grapes, and spices",
+        "variety": "Maragogipe"
+      },
+      "qualification": "H1 selector empty, but exact product title, selected body, MICRO-LOT and roast notes matched; sibling TABi/Pink Bourbon listings not used; source fact 'Process' includes name prefix, coarse Washed supported.",
+      "status": "FETCHED",
+      "parser_ok": true,
+      "conflicts": [],
+      "add_coffee_rendered": true,
+      "source_review_rendered": true,
+      "whole_coffee_certified": false
+    },
+    {
+      "number": 172,
+      "name": "HELIOS",
+      "url": "https://katicoffee.com/products/helios",
+      "bytes": 668762,
+      "sha256": "cb7422542410664d1d5a5777b19f3e7fbe93a64611d0c9935607e8430ff12c86",
+      "h1": [],
+      "fields": {
+        "name": "HELIOS",
+        "roaster": "Katï Coffee",
+        "roast_level": "Medium",
+        "tasting_notes": "Chocolate, Dried Fruit, and Balanced"
+      },
+      "qualification": "H1 selector empty but exact selected product title and primary labels direct. No selected origin or process independently published; kept blank.",
+      "status": "FETCHED",
+      "parser_ok": true,
+      "conflicts": [],
+      "add_coffee_rendered": true,
+      "source_review_rendered": true,
+      "whole_coffee_certified": false
+    },
+    {
+      "number": 175,
+      "name": "Costa Rica Cafe Sircof",
+      "url": "https://kingspeakcoffee.com/products/costa-rica-cafe-sircof",
+      "bytes": 224388,
+      "sha256": "0ee3efdf6afb6e5a36f7a8e3daa2be191a6b2920d21d03e75de737c10672a6f8",
+      "h1": [
+        "Costa Rica Cafe Sircof"
+      ],
+      "fields": {
+        "name": "Costa Rica Cafe Sircof",
+        "roaster": "Kings Peak Coffee Roasters",
+        "tasting_notes": "Cherries, Raspberries & Chocolate Brownies",
+        "origin": "Costa Rica",
+        "producer": "Oviedo family and the Sircof farm",
+        "process": "Honey"
+      },
+      "qualification": "Direct 'red honey' implies coarse Honey. Producer output repeats selected source phrase but includes farm and family together; role split remains qualified, no sole named farmer inferred.",
+      "status": "FETCHED",
+      "parser_ok": true,
+      "conflicts": [],
+      "add_coffee_rendered": true,
+      "source_review_rendered": true,
+      "whole_coffee_certified": false
+    }
+  ],
+  "judgment": "Actual parser fields corroborated by read-only current raw official selected product text, but #166/#172 H1 empty and #175 producer/farm combined string remain semantic qualifications; no independently proven generic fix. Frozen603 individual certification unfinished, Issue33 stays OPEN.",
+  "next": "Choose disjoint unresolved original603 case, compare raw current selected source against parser and source facts, fix only reproducible generic defect with positive/negative regression, maintain source SHA and queue."
+}

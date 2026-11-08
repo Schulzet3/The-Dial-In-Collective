@@ -21,6 +21,13 @@ function collect(dir){
  return out;
 }
 const active=roots.flatMap(p=>collect(join(root,p)));
+function assertReadFirstIndex(index){
+ const start=index.indexOf('## Read first'),end=index.indexOf('## Current operating records');
+ assert.ok(start>=0&&end>start,'read-first headings exist and are ordered');
+ const nums=[...index.slice(start,end).matchAll(/^(\d+)\. /gm)].map(x=>Number(x[1]));
+ assert.ok(nums.length>0,'read-first section has numbered entries');
+ assert.deepEqual(nums,nums.map((_,i)=>i+1));
+}
 
 test('active JavaScript and TypeScript source imports have no broken relative targets',()=>{
  const missing=[];
@@ -66,7 +73,12 @@ test('current owner decisions, index and visible help copy are synchronized',()=
  assert.match(app,/data-action="next-shot-info"/);
  assert.match(app,/Grinder Espresso Range/);
  assert.doesNotMatch(app,/One adjustment at a time/);
- const list=index.slice(index.indexOf('## Read first'),index.indexOf('## Current operating records'));
- const nums=[...list.matchAll(/^(\d+)\. /gm)].map(x=>Number(x[1]));
- assert.deepEqual(nums,nums.map((_,i)=>i+1));
+  assertReadFirstIndex(index);
+});
+test('read-first index rejects absent headings, empty numbering and skipped positions',()=>{
+ const valid='## Read first\n1. First\n2. Second\n## Current operating records';
+ assert.doesNotThrow(()=>assertReadFirstIndex(valid));
+ assert.throws(()=>assertReadFirstIndex('no headings'),/read-first headings/);
+ assert.throws(()=>assertReadFirstIndex('## Read first\n## Current operating records'),/numbered entries/);
+ assert.throws(()=>assertReadFirstIndex('## Read first\n1. First\n3. Third\n## Current operating records'),/Expected values to be strictly deep-equal/);
 });

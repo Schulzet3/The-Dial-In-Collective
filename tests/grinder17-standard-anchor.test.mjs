@@ -8,6 +8,7 @@ test('standard successful setting 3 produces a cautious slow-feed starting estim
  s.shots.push({id:'past',coffeeId:c.id,style:'Turbo',feedMode:'standard',
   setupVersionId:v.id,calibrationId:v.calibrationId,basketId:v.baskets[0].id,
   hidden:false,dialedIn:true,grindSetting:3,
+  doseG:18,yieldG:36,timeS:15,
   tasteScales:{extraction:3,body:3,clarity:5,sweetness:5,astringency:1},
   timestamp:'2026-11-04T12:00:00.000Z'});
  const estimate=grindGuidance(s,c,'Turbo',v.baskets[0],'slow');

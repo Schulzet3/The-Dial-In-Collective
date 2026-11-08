@@ -9,7 +9,7 @@ function fixture(tasteScales=ideal,dialedIn=true){
   doseG:18,yieldG:45,timeS:18,notes:'Original personal shot notes'};
  return {activeSetupId:'setup',setups:[{id:'setup',activeVersionId:'version',
   versions:[{id:'version'}],workspaces:{version:{coffees:{coffee:{
-   style:'Traditional',currentFamilies:{},favoriteShots:{}}}}}}],shots:[shot],audit:[]};
+   style:'Traditional',currentFamilies:{},favoriteShots:{}}}}}}],shots:[shot],families:[{id:'family',coffeeId:'coffee',style:'Turbo'}],audit:[]};
 }
 test('#455 local Make Current refuses false historical success without mutating private state',()=>{
  const invalid=[

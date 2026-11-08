@@ -1,0 +1,199 @@
+{
+  "schema_version": 1,
+  "kind": "ISSUE33_R23_ORIGINAL603_SELECTED_PROCESSING_CARD_SWISS_WATER_VERIFIED",
+  "date_utc": "2026-11-08",
+  "issue": 33,
+  "repository": "Schulzet3/The-Dial-In-Collective",
+  "development_only": true,
+  "state": "NARROW_FIX_VERIFIED_READY_FULL_603_INCOMPLETE",
+  "source_pull_request": 1337,
+  "source_merge_sha": "121e886f30632e3e4a161be111733835eb81ad5d",
+  "fix_pull_request": 1338,
+  "fix_head_sha": "cc5a1c4a008679aa79157b7c1af6ca93b00a7659",
+  "fix_merged_sha": "547f83925a6769a105ce45678004cda22aa8f591",
+  "frozen_original": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "original_csv_git_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "changed": false,
+    "oracle_changed": false,
+    "scorer_changed": false,
+    "full_manual_semantic_certification": false
+  },
+  "repro": {
+    "run": 42441176732,
+    "job": 128610537602,
+    "conclusion": "SUCCESS",
+    "artifact_id": 13601970662,
+    "zip_sha256": "7e588fb22bafa5d69208735a7acd89a4d62dbb079b767fa2579cf41b4fb4bc3e",
+    "evidence_json_sha256": "3a46415d904e552100f10a0322429cbf4fef9bb474a82b9b541c9913a083b555",
+    "independently_downloaded_and_rehashed": true,
+    "observed": "Both #374 and #375 exact selected current Method: Swiss Water Process (chemical-free) omitted decaffeination_method while keeping distinct Washed/Natural; printed method only unclassified source fact."
+  },
+  "fix": {
+    "changed_parser": "src/server/coffee-direct-product-prose.mjs",
+    "regression": "tests/coffee-issue33-original603-374-375-selected-method-panel.test.mjs",
+    "same_commit_journal": "docs/workstreams/ops-issue33-r23-374-375-current-method-fix-20261108.md",
+    "gate": "Only exact selected H1 current full decaf Processing Details Method caption that explicitly names recognized treatment; exclude FAQ/SEO/related/other section and contradictory treatments; preserve separate green processing and user values."
+  },
+  "ci": {
+    "pr_head": {
+      "node_lint_build": {
+        "run": 42441409903,
+        "status": "SUCCESS"
+      },
+      "cloud_mobile": {
+        "run": 42441409904,
+        "status": "SUCCESS"
+      },
+      "approval": {
+        "run": 42441410197,
+        "status": "SUCCESS"
+      },
+      "isolated_sql": {
+        "run": 42441409923,
+        "status": "SUCCESS"
+      },
+      "security_inventory": {
+        "run": 42441409905,
+        "status": "SUCCESS"
+      },
+      "exact_source_archive": {
+        "run": 42441409908,
+        "status": "SUCCESS"
+      },
+      "frozen603": "SKIPPED_NOT_PASS"
+    },
+    "merged": {
+      "node_lint_build": {
+        "run": 42441564541,
+        "status": "SUCCESS",
+        "node_tests": 1992,
+        "node_pass": 1992,
+        "node_fail": 0,
+        "node_skip": 0,
+        "lint": "PASS",
+        "build": "PASS"
+      },
+      "cloud_mobile": {
+        "run": 42441564703,
+        "status": "SUCCESS"
+      },
+      "approval": {
+        "run": 42441564668,
+        "status": "SUCCESS"
+      },
+      "guarded_current_official": {
+        "run": 42441564655,
+        "job": 128611698754,
+        "status": "SUCCESS",
+        "fetched": 3,
+        "parsed": 3,
+        "add_coffee_rendered": 3,
+        "source_review_rendered": 3,
+        "runner_manual_certified": 0
+      },
+      "other_public_probes": "SKIPPED_NOT_PASS"
+    }
+  },
+  "post_fix_artifact": {
+    "id": 13602260014,
+    "name": "dic33-original603-focused-42441564655",
+    "bytes": 331402,
+    "zip_sha256": "35dcafc8104e2b808bfd3392dcbbcae995f10af905f81364194af213bfba38d2",
+    "evidence_json_sha256": "57f175e1c197fe861159d1d4ef7755f5a7070fd2964fa68c84e5002bcd59caad",
+    "independently_downloaded_rehashed": true,
+    "raw_three_html_rehashed": true
+  },
+  "cases": [
+    {
+      "number": 366,
+      "official_url": "https://sumatocoffee.com/products/the-sender-single-origin-costa-rican",
+      "selected_h1": "The Sender - Single Origin Costa Rican",
+      "pre_html_sha256": "901fe3fdc0434b179d65f680ec37759842e55739ecdde9b5b1fc4e8867a0648b",
+      "post_html_sha256": "7a773c977c5ebf25ad8bb6928e0645bb21bdc92cf0013b1a4789f740a8ed00c0",
+      "identity": "MATCH",
+      "current_fields": {
+        "origin": "Palmichal and Santa Ana Mountains, Costa Rica",
+        "process": "Washed",
+        "tasting_notes": "Lively spice notes, balanced sweetness",
+        "elevation_m": "1200-1600 meters",
+        "producer": "Small-holder farms"
+      },
+      "semantic": "SELECTED_SOURCE_COMPATIBLE_CONTROL_NO_NEW_DEFECT",
+      "add_coffee": true,
+      "source_review": true,
+      "qualification": "Image-alt tangerine/cinnamon not used to override selected flavor; no inference about farm."
+    },
+    {
+      "number": 374,
+      "official_url": "https://talkingcrowcoffeeroasters.com/products/decaf-peru-swiss-water-process",
+      "selected_h1": "Decaf Peru Cajamarca",
+      "pre_html_sha256": "f201441c4d24c8a7a401c23ed2c8a881c12f5f1a85b73d083297c845a80e0fe3",
+      "post_html_sha256": "9b12893bda77dec95672116474ab662d52f535b8efe44b9d9ff4181273f529f2",
+      "identity": "MATCH",
+      "direct_selected_method": "Method: Swiss Water Process (chemical-free)",
+      "direct_green_milling": "Milling: Washed",
+      "before_fields": {
+        "process": "Washed",
+        "decaffeination_method": null
+      },
+      "after_fields": {
+        "process": "Washed",
+        "decaffeination_method": "Water Process",
+        "origin": "Cajamarca, Peru",
+        "roast_level": "Medium",
+        "tasting_notes": "Mango, Orange, Nougat, Cocoa"
+      },
+      "tasting_source_review_conflict": "Chocolate Tropical Citrus Caramel",
+      "semantic": "REAL_SOURCE_OMISSION_CORRECTED",
+      "add_coffee": true,
+      "source_review": true,
+      "method_privacy_conflict": false
+    },
+    {
+      "number": 375,
+      "official_url": "https://talkingcrowcoffeeroasters.com/products/decaf-whiskey-barrel-aged-brazil",
+      "selected_h1": "Decaf Brazil Whiskey Barrel Aged",
+      "pre_html_sha256": "b5427d6bd0ff740d38f334dad0fa1cf031ad5e163562d4ee1c0e278bee752bd4",
+      "post_html_sha256": "6e9369f185a4e24d7bc781bdbb2982235aa0b8038d33fb1c0f7be0569ffe659e",
+      "identity": "MATCH",
+      "direct_selected_method": "Method: Swiss Water Process (chemical-free)",
+      "direct_green_milling": "Milling: Natural process",
+      "before_fields": {
+        "process": "Natural",
+        "decaffeination_method": null
+      },
+      "after_fields": {
+        "process": "Natural",
+        "decaffeination_method": "Water Process",
+        "origin": "Brazil",
+        "roast_level": "Medium",
+        "tasting_notes": "Nutty, Vanilla, Honey, Oak, Spice"
+      },
+      "tasting_source_review_conflict": "Vanilla/Oak Nutty Chocolate",
+      "semantic": "REAL_SOURCE_OMISSION_CORRECTED",
+      "add_coffee": true,
+      "source_review": true,
+      "method_privacy_conflict": false
+    }
+  ],
+  "adjacent_exception": {
+    "number": 362,
+    "historical_name": "ethiopia sidama ayla bombe natural light roast",
+    "current_seen_name": "ethiopia guji hambela buliye natural light roast",
+    "status": "CURRENT_PRODUCT_IDENTITY_CHANGED_UNVERIFIED_DO_NOT_REUSE_HISTORICAL_FIELDS"
+  },
+  "outcome": {
+    "new_verified_source_backed_parser_corrections": 2,
+    "ready_queue_item": "DIC-Q-33-original603-374-375-selected-processing-card-swiss-water",
+    "other_queue_items_unchanged": true,
+    "owner_release_authorization": false,
+    "netlify_publish": false,
+    "provider_writes": 0,
+    "issue33_open": true,
+    "all_603_individually_certified": false
+  },
+  "next": "Continue distinct unresolved original 603 selected products, candidate #367–#369, and independently adjudicate #362 changed URL identity with negative controls, do not borrow old lot fields."
+}
