@@ -9607,11 +9607,11 @@
       "state": "TESTING",
       "merged_source_sha": null,
       "scope_paths": [
-        "site/lib/model.js",
-        "tests/issue455-local-success-physical-bounds.test.mjs"
+        "site/lib/model.js"
       ],
       "tests": [
-        "R119 synthetic negative/positive tests authored for inclusive entry bounds, invalid archive records, style/coffee/version isolation and original History. No tests or CI executed at authoring."
+        "R119 synthetic negative/positive tests authored for inclusive entry bounds, invalid archive records, style/coffee/version isolation and original History. No tests or CI executed at authoring.",
+        "PR1466 first approval run42506165125 FAILED valid deployable-path intake because test file was incorrectly included in scope_paths; tests must be listed only in tests/evidence. Corrected scope to runtime site/lib/model.js, keeping test coverage in same commit. Need fresh exact-head CI."
       ],
       "ci_runs": [],
       "blockers": [
