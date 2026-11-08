@@ -1,3 +1,19 @@
+## Issue #504 G1-105 — November 8 UTC: eight complete historical original #96 comments [skip netlify]
+
+**Live recover:** development `005f2c57f81f0ddd5ee9f30f6ea488abd7e1a248`, main `bd627d40f7e65321323512b303d2e3f75709af39`, release/production `2ec10324fcaa4b60d1e48240b44b77b141b9ba54`. #504/#267/#455/#33/#96 remain OPEN. GitHub is temporarily PUBLIC by owner-approved #630 Nov4–30; no visibility change. Current AGENTS, entrypoint/preflight, status, specification/decisions/approval coverage, queue and source register consulted for authority, not double-credited as direct review.
+
+**Direct semantic source:** all eight original GitHub issue #96 bodies `6498551766`, `6502499491`, `6509635683`, `6514211229`, `6514374141`, `6514505147`, `6514538788`, `6514822129` fully read word 1–EOF: **8 new distinct objects, 2,683 original Unicode-whitespace words, 23,341 UTF-8 bytes**. GitHub by-ID REST and connector body equality 8/8, each SHA1 original hash, UTC timestamps, lines/word bounds and individually assessed contents in [immutable G1-105 receipt](../audits/issue504-review-G1-105.json); duplicate credit negative. Cumulative **7,919 source lines / 60,754 source words; 595 original GitHub objects / 177,551 GitHub words**.
+
+**Semantic dispositions:** #161 full historical semantic audit and #30 5,288-line AST crosswalk were NOT exhaustive source reading, now #267 sole owner. Oct30 provider/security inventories, 404 bot probes and synthetic SQL identities are time-bounded, not live GoTrue/IDOR passes. Owner accepted limited actual non-Admin privacy and disabled/offline lockout, not universal token revocation. PR287's early steps=[] CI start failures later resolved, and PR230/234/270/287/288 merged. Original stale-edit 40001→PT409 correction was READY at time of original comment, but current canonical queue correctly records **DEPLOYED Release13**. No new #504-owned confirmed present defect, safe deletion or owner decision. #96 live assurance stays OPEN.
+
+**Independent delegation check:** frozen #267 F437 `site/admin/records.js:72–74` original blob `142fb26e9bae0fd734412c3b20034791c73333a5` exact 3/3 literals versus per-line T25 semantic receipt `84b0db565059d261b6f8eb30544baa23ef09c1fa`. Zero extra #504 code credit; line74 callback trust remains unproven current XSS, delegated #267. Full 757-file/579,961-line evidence, pinned/current/post-pin and all GitHub branch/tag/Actions/job/PR-reviews/artifact inventory incomplete.
+
+**Safety and testing:** Three scoped audit docs in one isolated commit only; no source/queue/Locked, history, backup, SQL/Auth/member/provider, Netlify, deployment or main/release/visibility write. Node22/SQL/browser/mobile/offline/live GoTrue/frozen603 not run for docs-only; exact CI pending, SKIPPED not PASS.
+
+**Exact NEXT** [Issue #96 comment 6514914324](https://github.com/Schulzet3/The-Dial-In-Collective/issues/96#issuecomment-6514914324), word **1**. Audit OPEN / IN_PROGRESS.
+
+---
+
 ## Issue #504 G1-060 — November 6 UTC: eight complete historical #455 comments directly semantically reviewed [skip netlify]
 
 **Live source before edit:** development at branch pin `990cf8fd8f27b967d99ece87ff7f6b4b3eeeff31` (newer live development `990cf8fd8f27b967d99ece87ff7f6b4b3eeeff31` observed), main `ba5b9d3b89dd7fae1575edf10d8e97e80d4f1b3e`, release/production `6c729b928fad5fd59ae012c63d7c005f180b2b64`. Issue #504 OPEN; separate #267/#455/#33/#96 owner boundaries preserved. Repo PUBLIC only under owner temporary #630 Nov 4-Nov 30 exception; no settings changed.
