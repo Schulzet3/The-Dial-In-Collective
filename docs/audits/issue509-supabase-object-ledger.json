@@ -13451,5 +13451,45 @@
       "docs/audits/issue509-provider-pg-proc-raw-1501-1600-2026-11-08-run90.json"
     ],
     "next": "pg_catalog.pg_proc original raw tuple ordinal 1601/3319 numeric OID order; native implementations, hosted Auth/JWT/API, provider-console-only settings remain UNVERIFIED"
+  },
+  "provider_pg_proc_raw_run91": {
+    "state": "PG_CATALOG_RAW_PG_PROC_1601_2000_ALL_VISIBLE_TUPLES_AND_SQL_REVIEWED_NATIVE_IMPLEMENTATIONS_UNVERIFIED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_development_parent_sha": "29d99dbd3f13ec266ad8e5c4a8b427672c78f108",
+    "provider_raw_fingerprint": "f654ffdef49118b4bae1e66296036709",
+    "hash_method": "md5(string_agg(p.oid::text||':'||md5(to_jsonb(p)::text),'|' ORDER BY p.oid))",
+    "reviewed_new": 400,
+    "reviewed_cumulative": 2000,
+    "total": 3319,
+    "next_ordinal": 2001,
+    "first_oid": "2460",
+    "last_oid": "3049",
+    "by_language_kind": {
+      "internal|f": 350,
+      "internal|a": 43,
+      "sql|f": 7
+    },
+    "sql_bodies_directly_included": true,
+    "aggregate_raw_catalog_included": true,
+    "aggregate_dependency_references_checked": 43,
+    "aggregate_missing_transition_type_or_optional_functions": 0,
+    "restricted_pg_read_file_and_pg_stat_file_anon_and_authenticated_execute": false,
+    "platform_builtin_public_acl_not_hosted_rpc_access_certification": true,
+    "previous_visible_DDL_review_not_recredited": true,
+    "native_compiled_implementations_unverified": true,
+    "hosted_auth_jwt_postgrest_unverified": true,
+    "metadata_anomalies": 0,
+    "security_definers": 0,
+    "new_confirmed_defects": 0,
+    "source_fixes": 0,
+    "production_writes": false,
+    "baseline_complete": false,
+    "receipt_paths": [
+      "docs/audits/issue509-provider-pg-proc-raw-1601-1700-2026-11-08-run91.json",
+      "docs/audits/issue509-provider-pg-proc-raw-1701-1800-2026-11-08-run91.json",
+      "docs/audits/issue509-provider-pg-proc-raw-1801-1900-2026-11-08-run91.json",
+      "docs/audits/issue509-provider-pg-proc-raw-1901-2000-2026-11-08-run91.json"
+    ],
+    "next": "pg_catalog.pg_proc original raw tuple ordinal 2001/3319 in OID order; then non-pg_catalog function raw tuples and changed-only provider drift; hosted Auth/API and native compiled code UNVERIFIED"
   }
 }
