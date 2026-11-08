@@ -53,7 +53,22 @@ for(const [number,name,host] of [
   // Regional "traditional varieties like" does not establish chosen lot variety.
   // Current selected description prints no tasting, process, roast or altitude number.
   check(!fields.variety,'543_regional_varieties_falsely_assigned_to_lot');
-  check(!fields.tasting_notes,'543_prior_lot_or_unpublished_flavors_autofilled');
+  // The CURRENT canonical/OG description names this exact coffee (not a
+  // generic menu or former lot) and includes a note list absent from visible
+  // product description. Locked hierarchy permits this ONLY as last-resort
+  // unverified identity-matched metadata, explicitly flagged for review.
+  const selectedMetaTags=[...raw.matchAll(/<meta\b[^>]{0,3000}>/gi)].map(m=>m[0]);
+  const ownNoteMeta=selectedMetaTags.some(tag=>
+    /\b(?:name|property)=["'](?:description|og:description)["']/i.test(tag)&&
+    /Mexico Chiapas[^"']{0,20}Seasonal Espresso/i.test(tag)&&
+    /tasting notes of red apple, panels, brown sugar/i.test(tag));
+  check(ownNoteMeta,'543_exact_current_selected_identity_meta_not_verified');
+  check(fields.tasting_notes==='red apple, panels, brown sugar',
+    '543_current_selected_meta_note_changed_or_missing');
+  check(item.seo_fallback_fields?.includes('tasting_notes'),
+    '543_metadata_note_misclassified_as_direct_certain_evidence');
+  check(item.metadata_review_notice_rendered===true,
+    '543_metadata_fallback_not_flagged_in_Add_Coffee_for_manual_review');
   check(!fields.process&&!fields.roast_level&&!fields.elevation_m,
     '543_unpublished_green_process_roast_or_elevation_invented');
  }
