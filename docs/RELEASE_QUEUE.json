@@ -8,6 +8,28 @@
   },
   "items": [
     {
+      "id": "DIC-Q-455-new-shot-active-basket-integrity",
+      "issue": 455,
+      "pr": null,
+      "title": "Reject retired/missing basket IDs on NEW shot save while preserving historical offline replay",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "R455-125 source parent da4989c83142cfca9e76dcb276b0f172e931a43d, engine original blob 26d0ffee46ad3bd5fd82ef608575ee0a0d8e0afa: recommendation and prefill already exclude archived explicit basket, but saveShot kept input.basketId and snapshot could silently use another basket dose; no observed member incident.",
+        "Four new synthetic real-module negative/positive regression tests in tests/issue455-new-shot-active-basket-integrity.test.mjs. CI UNRUN pending PR, never call skipped checks PASS."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "PR-head source-bound tests and governance unverified",
+        "Code not merged or release certified"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Development-only SAFE Locked-compatible guard; preserves history, idempotent saved shot, five tastes, notes, styles, grinder/feed calibration and RLS. Not deployed or authorized for production."
+    },
+    {
       "id": "DIC-Q-33-original603-549-explicit-origin-peaberry-class",
       "issue": 33,
       "pr": 1517,
