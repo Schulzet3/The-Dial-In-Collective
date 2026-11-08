@@ -325,6 +325,7 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
      line.length<=650&&decafSubject.length>=5&&
      (selected===decafSubject||selected.startsWith(decafSubject+' '))&&
      currentWaterWitness&&!NONCURRENT_DECAF_METHOD.test(line)&&
+     !/^(?:frequently asked questions|common questions|faq|decaf process education)$/iu.test(String(b.section||'').trim())&&
      !/\b(?:not|never|without|instead of|rather than|formerly|previously)\b/iu.test(currentWaterWitness)&&
      inferDecaffeinationMethod({name,selectedMethod:currentWaterWitness})==='Water Process'&&
      !decafEvidence.has(currentWaterWitness)){

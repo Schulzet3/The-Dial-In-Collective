@@ -39,6 +39,7 @@ test('negation, historical, generic, incomplete, alternate product and FAQ are w
   'Our decaf is delicious. The Swiss Water Decaffeination Process is a chemical-free method yielding a 99.9% caffeine-free product.'
  ];
  for(const c of cases)assert.equal(parse(selectedName,description(c)).fields.decaffeination_method,undefined,c);
- assert.equal(parse(selectedName,description('Unspecified treatment.')+
-  '<h2>Frequently Asked Questions</h2>'+description(claim)).fields.decaffeination_method,undefined);
+ for(const heading of ['Frequently Asked Questions','Common Questions','FAQ'])
+  assert.equal(parse(selectedName,description('Unspecified treatment.')+
+   '<h2>'+heading+'</h2>'+description(claim)).fields.decaffeination_method,undefined,heading);
 });
