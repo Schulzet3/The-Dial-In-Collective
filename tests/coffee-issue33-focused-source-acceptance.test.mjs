@@ -41,7 +41,7 @@ test('expected case missing, duplicate, or surplus cannot pass',()=>{
 
 test('the real focused public script invokes fail-closed predicate and keeps original603 automatic certification zero',()=>{
  const source=readFileSync(new URL('../scripts/audit/issue33-original603-focused-source-review.mjs',import.meta.url),'utf8');
- assert.match(source,/requiredFocusedSourceFailures\(targetNumbers,records\)/);
+ assert.match(source,/requiredFocusedSourceFailures\(targetNumbers,records,\{negativeIdentityNumbers\}\)/);
  assert.match(source,/if\(requiredSourceFailures\.length\)/);
  assert.match(source,/manual_certified:0/);
  assert.doesNotMatch(source,/records\.some\(x=>x\.status==='FETCHED'&&/);
@@ -57,4 +57,28 @@ test('present selected original heading must be exact-product identity, not an u
  }
  assert.deepEqual(requiredFocusedSourceFailures([247],[{...good(247),
   selected_h1_present_in_scoped_html:false,selected_heading_identity_verified:null}]),[]);
+});
+
+
+test('explicit source-bound changed-product NEGATIVE proves current H1, never certifies archived original',()=>{
+ const changed={...good(362),archived_coffee:'ethiopia sidama ayla bombe natural light roast',
+  selected_h1_present_in_scoped_html:true,selected_heading_identity_verified:false,
+  selected_h1:['ethiopia guji hambela natural light roast'],
+  current_fields:{name:'ethiopia guji hambela natural light roast'},original_product_not_certified:true};
+ assert.deepEqual(requiredFocusedSourceFailures([362],[changed],{negativeIdentityNumbers:[362]}),[]);
+ assert.ok(requiredFocusedSourceFailures([362],[changed]).some(x=>
+  x.reason==='selected_original_product_heading_identity_unverified'));
+ for(const modified of [
+  {...changed,selected_heading_identity_verified:true},
+  {...changed,selected_h1:['other product']},
+  {...changed,current_fields:{name:changed.archived_coffee}},
+  {...changed,selected_h1_present_in_scoped_html:false},
+  {...changed,archived_coffee:''},
+  {...changed,status:'ERROR'},
+ ]){
+  assert.ok(requiredFocusedSourceFailures([362],[modified],{negativeIdentityNumbers:[362]}).length>0);
+ }
+ assert.ok(requiredFocusedSourceFailures([376],[good(376)],{negativeIdentityNumbers:[362]})
+  .some(x=>x.reason==='negative_identity_case_not_requested'));
+ assert.deepEqual(requiredFocusedSourceFailures([376,380],[good(376),good(380)]),[]);
 });

@@ -25,8 +25,15 @@ if(explicitTargetNumbers!=null &&
  !/^[1-9][0-9]{0,2}(?:,[1-9][0-9]{0,2}){0,19}$/.test(explicitTargetNumbers))
  throw Error('invalid_bounded_original603_case_subset');
 const targetNumbers=explicitTargetNumbers?explicitTargetNumbers.split(',').map(Number):defaultTargetNumbers;
+const negativeIdentityArg=process.env.DIC_ISSUE33_FOCUSED_IDENTITY_NEGATIVE_NUMBERS||'';
+if(negativeIdentityArg&&!/^[1-9][0-9]{0,2}(?:,[1-9][0-9]{0,2}){0,19}$/.test(negativeIdentityArg))
+ throw Error('invalid_bounded_negative_identity_subset');
+const negativeIdentityNumbers=negativeIdentityArg?negativeIdentityArg.split(',').map(Number):[];
 if(targetNumbers.some(n=>n>603)||new Set(targetNumbers).size!==targetNumbers.length)
  throw Error('invalid_duplicate_or_out_of_range_original603_cases');
+if(negativeIdentityNumbers.some(n=>n>603||!targetNumbers.includes(n)) ||
+ new Set(negativeIdentityNumbers).size!==negativeIdentityNumbers.length)
+ throw Error('invalid_negative_identity_case_subset');
 function csv(text){
  const rows=[];let arr=[],s='',quoted=false;
  for(let i=0;i<text.length;i++){const c=text[i];
@@ -95,6 +102,10 @@ for(const target of targets){
    if(p?.ok){
     r.current_fields=Object.fromEntries(Object.entries(p.fields||{})
       .filter(([,v])=>v!=null&&typeof v!=='object').map(([k,v])=>[k,clip(v,400)]));
+    if(negativeIdentityNumbers.includes(r.number)){
+     r.original_product_not_certified=true;
+     r.current_identity_exception='CHANGED_SELECTED_PRODUCT_EXPLICIT_NEGATIVE_DO_NOT_TRANSFER_ARCHIVED_FIELDS';
+    }
     r.conflicts=p.conflicts||[];
     if(r.number===336){
       const cleanProbe=(v,n=6001)=>String(v||'').slice(0,n*6)
@@ -309,6 +320,7 @@ for(const target of targets){
 const summary={schema_version:1,kind:'ORIGINAL603_FOCUSED_CURRENT_SOURCE_NOT_AUTOMATIC_CERTIFICATION',
  source_sha:process.env.GITHUB_SHA||null,utc:new Date().toISOString(),
  original603_register_sha256:sha(bytes),case_numbers:targetNumbers,
+ negative_identity_case_numbers:negativeIdentityNumbers,
  fetched:records.filter(x=>x.status==='FETCHED').length,
  parsed:records.filter(x=>x.parser_ok===true).length,manual_certified:0,
  public_only:true,original_corpus_modified:false,production_operations:0,real_auth:false,
@@ -316,7 +328,7 @@ const summary={schema_version:1,kind:'ORIGINAL603_FOCUSED_CURRENT_SOURCE_NOT_AUT
 writeFileSync(join(dest,'focused-current-evidence.json'),JSON.stringify(summary,null,2)+'\n');
 console.log('[DIC33 FOCUSED SUMMARY] '+JSON.stringify({attempted:records.length,fetched:summary.fetched,
  parsed:summary.parsed,manual_certified:0}));
-const requiredSourceFailures=requiredFocusedSourceFailures(targetNumbers,records);
+const requiredSourceFailures=requiredFocusedSourceFailures(targetNumbers,records,{negativeIdentityNumbers});
 if(requiredSourceFailures.length){
  console.error('[DIC33 FOCUSED REQUIRED CURRENT SOURCE UNVERIFIED] '+JSON.stringify({
   source_sha:summary.source_sha,required_cases:targetNumbers,failures:requiredSourceFailures
