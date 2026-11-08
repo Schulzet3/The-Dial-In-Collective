@@ -157,7 +157,12 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
  const validSuccess=sh=>sh.dialedIn===true&&isDialed(sh.tasteScales);
  // Retain malformed imported shots in History, but not in measured grinder
  // or paired Slow Feed evidence. Do not change the original measurements.
- const v=activeVersion(s),measured=measuredRecipeShots(s.shots),qual=measured.filter(sh=>!sh.hidden&&validSuccess(sh)&&sh.style===style&&sh.feedMode===feed&&hardwareMatch(sh,v)&&finite(sh.grindSetting));
+ // Invalid legacy temperatures are retained in the original shot History, but
+ // they cannot establish a proven personal grind setting or paired feed-mode effect.
+ // Temperature was optional: null remains eligible, and valid 70-100 C readings
+ // retain their original evidence status under existing Log Shot bounds.
+ const v=activeVersion(s),measured=measuredRecipeShots(s.shots).filter(sh=>
+  sh.tempC==null||validRecordedTemperature(sh.tempC)),qual=measured.filter(sh=>!sh.hidden&&validSuccess(sh)&&sh.style===style&&sh.feedMode===feed&&hardwareMatch(sh,v)&&finite(sh.grindSetting));
  // Current-calibration history outside the entered espresso range remains
   // untouched in History, but is not proven current-scale grind evidence.
   const current=qual.filter(sh=>sh.calibrationId===v.calibrationId&&
