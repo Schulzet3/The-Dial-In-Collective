@@ -35,6 +35,14 @@ test('real-shaped exact selected EA processing table is a Sugar Process decaf tr
   JSON.stringify(tableSpec));
  assert.equal(result.fields.decaffeination_method,'Sugar Process',JSON.stringify(result.fields));
  assert.equal(result.fields.process,undefined,JSON.stringify(result.fields));
+ assert.ok(result.source_facts.some(f=>f.field==='decaffeination_method'&&
+  f.label==='Processing Method'&&f.value==='Ethyl Acetate Decaffeination'&&
+  f.source_type==='html'),JSON.stringify(result.source_facts));
+ assert.ok(!result.source_facts.some(f=>f.field==='process'&&
+  f.label==='Processing Method'&&f.value==='Ethyl Acetate Decaffeination'));
+ const sourceReview=coffeeSourceReviewSnapshot({...result,source_url:url});
+ assert.ok(sourceReview.published_source_information.some(f=>f.field==='decaffeination_method'&&
+  f.label==='Processing Method'&&f.value==='Ethyl Acetate Decaffeination'));
  assert.match(coffeeUrlPreviewMarkup(result),/Sugar Process/);
  assert.ok(coffeeSourceReviewSnapshot({...result,source_url:url}));
  assert.ok(result.source_facts.some(f=>f.field==='decaffeination_method'&&
@@ -74,6 +82,8 @@ test('two contradictory selected decaf method table rows remain unfilled and rev
  const r=parse('Decaf Colombia',
   method+row('Decaffeination Method','Swiss Water Process'));
  assert.equal(r.fields.decaffeination_method,undefined,JSON.stringify(r.fields));
+ assert.ok(!r.source_facts.some(f=>f.field==='decaffeination_method'&&
+  f.label==='Processing Method'&&f.value==='Ethyl Acetate Decaffeination'));
  assert.ok(r.source_facts.some(f=>f.field==='decaffeination_method'&&f.conflicting),
   JSON.stringify(r.source_facts));
 });

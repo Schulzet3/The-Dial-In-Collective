@@ -2034,6 +2034,25 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   conflicting:decafSourceConflict
  }):'';
  if(decaffeination_method)fields.decaffeination_method=decaffeination_method;
+ // A two-cell selected spec may call a decaffeination treatment
+ // "Processing Method". The generic layout reader indexed that raw literal
+ // under GREEN process before the exact current-H1 method was established.
+ // Reclassify only an EXACT same-source, same-label, same-value affirmative
+ // decaffeination witness. Do not assign or rewrite the green process, erase
+ // conflicts, relabel generic green-processing specs, or borrow SEO/FAQ data.
+ if(decaffeination_method&&decafSpec.complete){
+  const treatmentKeys=new Set(decafSpec.candidates
+   .filter(spec=>spec.method===decaffeination_method)
+   .map(spec=>String(spec.label).trim().toLowerCase()+'\\0'+
+    String(spec.value).trim().toLowerCase()));
+  for(const fact of source_facts)if(fact.field==='process'&&
+      fact.source_type==='html'&&fact.source_url===source_url&&
+      /^(?:processing method|decaf process|decaffeination(?: method| process)?)$/iu.test(String(fact.label||'').trim())&&
+      treatmentKeys.has(String(fact.label).trim().toLowerCase()+'\\0'+
+       String(fact.value||'').trim().toLowerCase())){
+   fact.field='decaffeination_method';
+  }
+ }
  // Preserve the literal selected-product method sentence for member review.
  // Contradictory stated methods remain blank, not a guessed winner.
  for(const sentence of selectedDecafStatements){
