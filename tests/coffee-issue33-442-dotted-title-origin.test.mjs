@@ -15,8 +15,11 @@ const cases=[
 const escape=value=>value.replace(/&/gu,'&amp;');
 function selected(title,extra=''){
  const h='<h1>'+escape(title)+'</h1>';
- return '<html><body><main><h1>Coffee and other Goods</h1><article class="product">'+
- h+h+'<p>Selected coffee from the featured farmer.</p></article>'+extra+'</main></body></html>';
+ const country=title.match(/^[^.]+\.\s*([^.]+)\./u)?.[1]||'';
+ return '<html><head><meta property="og:type" content="product"></head><body>'+
+ '<main><article class="product">'+h+'<p>Country: '+country+
+ '</p><div class="product-description"><p>Selected coffee from the featured farmer.</p></div>'+
+ '</article></main>'+extra+'</body></html>';
 }
 test('explicit exact selected dotted country, locality and flavor separator refine country-only origin',()=>{
  for(const [name,origin,want] of cases){
