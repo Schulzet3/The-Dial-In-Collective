@@ -13381,5 +13381,38 @@
     "production_writes": false,
     "baseline_complete": false,
     "next": "pg_catalog.pg_proc raw tuple ordinal 801/3319 by OID; then non-pg_catalog raw tuples and changed-only drift; hosted Auth/API and native compiled definitions UNVERIFIED"
+  },
+  "provider_pg_proc_raw_run89": {
+    "state": "PG_CATALOG_PG_PROC_RAW_TUPLE_801_1200_DIRECT_VISIBLE_SOURCE_REVIEW_NATIVE_UNVERIFIED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_development_parent_sha": "29ce55dcf0abe87cb5db906a0146faa6c3383c0c",
+    "provider_raw_fingerprint": "f654ffdef49118b4bae1e66296036709",
+    "hash_method": "md5(string_agg(p.oid::text||':'||md5(to_jsonb(p)::text),'|' ORDER BY p.oid))",
+    "reviewed_new": 400,
+    "reviewed_cumulative": 1200,
+    "total": 3319,
+    "next_ordinal": 1201,
+    "first_oid": "1375",
+    "last_oid": "1939",
+    "by_language_kind": {
+      "internal|f": 388,
+      "sql|f": 12
+    },
+    "raw_tuple_fields_validated": true,
+    "visible_sql_included": true,
+    "previous_ddl_review_not_recredited": true,
+    "metadata_anomalies": 0,
+    "security_definers": 0,
+    "confirmed_defects": 0,
+    "source_fixes": 0,
+    "production_writes": false,
+    "baseline_complete": false,
+    "receipt_paths": [
+      "docs/audits/issue509-provider-pg-proc-raw-801-900-2026-11-08-run89.json",
+      "docs/audits/issue509-provider-pg-proc-raw-901-1000-2026-11-08-run89.json",
+      "docs/audits/issue509-provider-pg-proc-raw-1001-1100-2026-11-08-run89.json",
+      "docs/audits/issue509-provider-pg-proc-raw-1101-1200-2026-11-08-run89.json"
+    ],
+    "next": "pg_catalog.pg_proc ordinal 1201/3319 by numeric OID; then remaining raw provider families; C native, hosted Auth/API/withheld settings remain UNVERIFIED"
   }
 }
