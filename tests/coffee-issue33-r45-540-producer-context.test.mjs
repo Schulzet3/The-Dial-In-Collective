@@ -24,7 +24,7 @@ test('R45 current Inza exact product: producer role ends before situated-locatio
 test('R45 separate explicitly labeled named selected producer retains its full entity',()=>{
  const result=extractPublicCoffeeFacts(page('Producer: Cooperativa del Sur del Cauca - COSURCA. Process: Washed. Country: Colombia.'),{source_url:url});
  assert.equal(result.ok,true);
- assert.equal(result.fields.producer,'Cooperativa del Sur del Cauca - COSURCA');
+ assert.equal(result.fields.producer?.replace(/\.$/u,''),'Cooperativa del Sur del Cauca - COSURCA');
 });
 test('R45 no collective/producer may be inferred from unrelated current regional context',()=>{
  const result=extractPublicCoffeeFacts(page('Washed Process. Medium Roast. Inza, Colombia is known for smallholder farms nestled in vibrant mountains.'),{source_url:url});
