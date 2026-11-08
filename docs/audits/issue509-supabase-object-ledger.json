@@ -3109,9 +3109,24 @@
       "confirmed_defects": 0,
       "provider_writes": false,
       "baseline_complete": false
+    },
+    {
+      "event": "2026-11-08_run97_pg_attribute_raw_001_200",
+      "development_parent_sha": "488c8b51f4d79203ce06c669da963813073b5071",
+      "provider_fingerprint": "b396221ee55db01a5df947642550599f",
+      "reviewed_new": 200,
+      "reviewed_total": 200,
+      "population": 4030,
+      "receipt_paths": [
+        "docs/audits/issue509-provider-pg-attribute-raw-001-100-2026-11-08-run97.json",
+        "docs/audits/issue509-provider-pg-attribute-raw-101-200-2026-11-08-run97.json"
+      ],
+      "confirmed_new_defects": 0,
+      "provider_writes": false,
+      "baseline_complete": false
     }
   ],
-  "state": "NONPG_VIEW_ATTRIBUTES_735_DIRECT_FULL_TUPLE_FIELD_REVIEW; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
+  "state": "PG_ATTRIBUTE_RAW_VISIBLE_TUPLES_200_OF_4030; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
   "application_table_review": {
     "total": 46,
     "current_index": 46,
@@ -13623,8 +13638,7 @@
       "docs/audits/issue509-provider-pg-proc-raw-3201-3319-2026-11-08-run94.json"
     ],
     "next": "pg_catalog.pg_proc visible original raw tuple family covered 3319/3319; next raw pg_proc family non-pg_catalog schemas ordered namespace/OID; native C/runtime and hosted Auth/API UNVERIFIED"
-  }
-,
+  },
   "provider_nonpg_proc_raw_run95": {
     "state": "NON_PG_CATALOG_PG_PROC_RAW_1_TO_94_DIRECT_FULL_VISIBLE_DECLARATIONS_REVIEWED_NATIVE_COMPILED_UNVERIFIED",
     "project_ref": "azviqqejypsefzilgonr",
@@ -13805,6 +13819,50 @@
     "uncertain": "Actual native C randomness, planner folding behavior and nonce repetition have not been observed and must not be claimed",
     "action": "Private vendor review before Vault use, no production writes",
     "no_new_app_source_fix": true,
+    "baseline_complete": false
+  },
+  "provider_pg_attribute_raw_run97": {
+    "status": "200_OF_4030_DISTINCT_PG_ATTRIBUTE_CURRENT_POSITIVE_NON_DROPPED_RAW_TUPLES_VISIBLE_METADATA_DIRECT_FIELD_CHECK; NATIVE_IMPLEMENTATION_AND_SENSITIVE_MISSING_VALUES_UNVERIFIED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_development_parent_sha": "488c8b51f4d79203ce06c669da963813073b5071",
+    "source_main_sha": "a4028e42b0d0316fd539c0563fd07832d509aed0",
+    "source_release_sha": "92829cb6aff82aaec212eabbd921183e7997f1a7",
+    "inventory_md5": "b396221ee55db01a5df947642550599f",
+    "total": 4030,
+    "reviewed": 200,
+    "new_reviewed": 200,
+    "range": "1-200",
+    "sort": "schema_name, relation_name, relation_oid, attnum",
+    "last_object": "auth.one_time_tokens.token_type",
+    "next": "pg_attribute original raw tuple ordinal 201/4030 (same ordering and fingerprint; recompute if changed)",
+    "receipt_paths": [
+      "docs/audits/issue509-provider-pg-attribute-raw-001-100-2026-11-08-run97.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-101-200-2026-11-08-run97.json"
+    ],
+    "metadata_cross_checks": [
+      "att_type_oid",
+      "collation_oid",
+      "has_default_vs_pg_attrdef",
+      "has_missingval_presence",
+      "storage_compression_identity_generation_flags",
+      "not_dropped_positive_attnum"
+    ],
+    "flag_counts": {
+      "types": 0,
+      "collations": 0,
+      "defaults": 28,
+      "missing": 4,
+      "identities": 0,
+      "generated": 1,
+      "acls": 0,
+      "options": 0,
+      "foreign_options": 0
+    },
+    "anomalies": 0,
+    "confirmed_new_issues": 0,
+    "previous_column_ddl_semantic_review_credit": "NOT_DUPLICATED",
+    "withheld": "attmissingval payload, raw FDW options, private table data, compiled storage code, hosted Auth/JWT/API/config",
+    "provider_writes": false,
     "baseline_complete": false
   }
 }
