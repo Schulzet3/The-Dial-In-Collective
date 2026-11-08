@@ -3180,6 +3180,17 @@
       "confirmed_new_defects": 0,
       "provider_writes": false,
       "baseline_complete": false
+    },
+    {
+      "event": "2026-11-08_run105_pg_trigger_noninternal_raw_33",
+      "development_parent_sha": "64cb736981b708e41f5578cbdd2ad6eed8db1db8",
+      "reviewed_new": 33,
+      "total": 33,
+      "inventory_md5": "2d01c422a2abaa77d0fe408eec3a7561",
+      "receipt_path": "docs/audits/issue509-provider-noninternal-trigger-raw-001-033-2026-11-08-run105.json",
+      "confirmed_new_defects": 0,
+      "production_writes": false,
+      "baseline_complete": false
     }
   ],
   "state": "SYSTEM_PG_CLASS_RAW_SAFE_VISIBLE_484_OF_484; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -14442,5 +14453,36 @@
     "production_deployment": false,
     "baseline_complete": false,
     "next": "Reconcile remaining distinct uncovered positive-count provider catalog and deployment definition families; continue drift and provider-advisor readbacks. Hosted Auth/JWT/PostgREST/native implementation/restricted console settings UNVERIFIED."
+  },
+  "provider_noninternal_pg_trigger_raw_run105": {
+    "state": "DIRECT_COMPLETE_SAFE_RAW_NONINTERNAL_PG_TRIGGER_33_OF_33",
+    "project_ref": "azviqqejypsefzilgonr",
+    "observed_at_utc": "2026-11-08T22:44:27.105Z",
+    "development_parent_sha": "64cb736981b708e41f5578cbdd2ad6eed8db1db8",
+    "main_sha": "a4028e42b0d0316fd539c0563fd07832d509aed0",
+    "release_sha": "92829cb6aff82aaec212eabbd921183e7997f1a7",
+    "total": 33,
+    "reviewed_new": 33,
+    "reviewed_cumulative": 33,
+    "source_md5": "2d01c422a2abaa77d0fe408eec3a7561",
+    "by_schema": {
+      "auth": 1,
+      "private": 1,
+      "public": 23,
+      "realtime": 1,
+      "storage": 7
+    },
+    "security_definer": 8,
+    "secdef_without_explicit_search_path": 0,
+    "disabled_or_unexpected_mode": 0,
+    "invalid_column": 0,
+    "invalid_return_type": 0,
+    "anon_vendor_trigger_function_grant": 8,
+    "source_code_fixes": 0,
+    "production_writes": false,
+    "receipt_path": "docs/audits/issue509-provider-noninternal-trigger-raw-001-033-2026-11-08-run105.json",
+    "previous_trigger_ddl_and_internal_fk_source_not_recredited": true,
+    "baseline_complete": false,
+    "next": "Identify uncovered actual provider source-definition families; change-only provider drift; hosted Auth/JWT/PostgREST/API and compiled native internals remain UNVERIFIED."
   }
 }
