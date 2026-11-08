@@ -11,6 +11,7 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 - [GitHub-wide exhaustive word-level records/doc audit: Issue #504](issue-504.md) — nonoverlapping with #267 source-code review
 - [Issue #96 source-transfer and receipt evidence](ops-issue96-receipt.md)
 - [Selected-product extraction completeness: Issue #33](issue-33.md)
+- [Issue #33 R31 original603 #442/#443/#444 current selected dotted regions READY](ops-issue33-r31-442-443-444-region-fix-20261108.md) — independently hashed exact H1/current source, original 603 still OPEN
 - [Issue #33 R16 original603 #322/#325/#330 selected current official source review](ops-issue33-r16-322-325-330-source-intake-20261107.md) — raw HTML/JSON/ZIP hash and Add Coffee/Source Review verified; H2-only #325 identity qualified, no new READY item; original603 OPEN
 - [Issue #33 Quills #273 selected Shopify/H1 Source Review provenance verified](ops-issue33-273-section-provenance-20261107.md) — exact merged Node/lint/build and 3/3 official H1/Add Coffee/Source Review verified; narrow queue READY development, full603 OPEN
 - [Issue #33 original603 #273/#276/#279 guarded selected official source intake](ops-issue33-eightyeighth3.md) — source CI IN TESTING; parent OPEN
