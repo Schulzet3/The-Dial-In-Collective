@@ -13224,5 +13224,27 @@
     "source_fixes": 0,
     "baseline_complete": false,
     "next": "Reconcile remaining pg_attribute and other direct catalog tuple gaps and changed-only provider drift; native compiled C/hosted Auth/JWT/console settings UNVERIFIED"
+  },
+  "provider_pg_constraint_run85b_correction": {
+    "state": "RUN85_FALSE_POSITIVE_PARTITION_PARENT_FLAGS_ALL_516_CORRECTED",
+    "source_run85_receipts_preserved": true,
+    "correction_receipt": "docs/audits/issue509-provider-pg-constraint-run85b-type-normalization-correction-20261108.json",
+    "reason": "OID typed pg_constraint.conparentid is returned as JSON string \"0\" rather than JS numeric 0. The Run85 JS strict-inequality validator falsely flagged every object as having a nonzero partition-parent constraint.",
+    "project_ref": "azviqqejypsefzilgonr",
+    "provider_fingerprint": "2fb69215811d026e13ab7ee6e7847ec9",
+    "validated_against_live_at_utc": "2026-11-08 06:49:29.633693+00",
+    "corrected_parent_violations": 0,
+    "metadata_violations": [],
+    "not_valid_realtime_managed_constraint": [
+      {
+        "oid": 17527,
+        "identity": "realtime.messages_payload_exclusive",
+        "full_sql": "CHECK (payload IS NULL OR binary_payload IS NULL) NOT VALID",
+        "verdict": "NOT_VALID_PROVIDER_MANAGED_NO_CONFIRMED_DEFECT"
+      }
+    ],
+    "full_516_source_review_coverage_preserved": true,
+    "baseline_complete": false,
+    "next": "Continue genuinely unreviewed provider metadata with accurate OID normalization; native/JWT/API/console UNVERIFIED"
   }
 }
