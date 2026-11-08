@@ -750,6 +750,10 @@ export function makeCurrent(s,shotId) {
  // Do not store a phantom currentFamilies/favoriteShots key for malformed
  // imported all-green rows missing their historical recipe-family identity.
  if(typeof sh.familyId!=='string'||!sh.familyId.trim())throw new Error('Choose a shot with an assigned recipe family. The original history remains unchanged.');
+ // A restored shot may refer to a missing family or one from another coffee/style.
+ // Never create a phantom Current preference from a dangling identity.
+ if(!s.families?.some(f=>f.id===sh.familyId&&f.coffeeId===sh.coffeeId&&f.style===sh.style))
+  throw new Error('Choose a shot with a matching recorded recipe family. The original history remains unchanged.');
  const p=ensureCoffeeState(s,sh.coffeeId);p.currentFamilies[sh.style]=sh.familyId;p.favoriteShots[sh.familyId]=sh.id;p.style=sh.style;
  logAudit(s,'recipe.preferred',{coffeeId:sh.coffeeId,familyId:sh.familyId,shotId});
 }

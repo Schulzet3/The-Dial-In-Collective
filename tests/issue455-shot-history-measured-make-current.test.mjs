@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {shotCard} from '../site/cloud/shot_card.js';
 import {makeCurrent} from '../site/lib/engine.js';
 
@@ -82,4 +83,36 @@ test('R114 explicitly assigned family remains selectable with exact prior prefer
  assert.equal(p.favoriteShots.family,shot.id);
  assert.equal(Object.keys(p.favoriteShots).length,1);
  assert.deepEqual(shot,before);
+});
+
+test('R116 dangling or mismatched archived family cannot become phantom Current',()=>{
+ for(const families of [
+  [],[{id:'elsewhere',coffeeId:'coffee',style:'Turbo'}],
+  [{id:'family',coffeeId:'different-coffee',style:'Turbo'}],
+  [{id:'family',coffeeId:'coffee',style:'Traditional'}]
+ ]){
+  const shot=structuredClone(source),original=structuredClone(shot);
+  const html=shotCard(shot,{...options,familyRecorded:false});
+  assert.match(html,/class="status-badge">Dialed In/);
+  assert.doesNotMatch(html,/data-action="make-current"/);
+  assert.match(html,/Preserve original private historical notes/);
+  const s=state(shot);s.families=structuredClone(families);
+  const before=structuredClone(s);
+  assert.throws(()=>makeCurrent(s,shot.id),/matching recorded recipe family/);
+  assert.deepEqual(s,before,'refused dangling family cannot modify preference or audit');
+  assert.deepEqual(shot,original,'keep historical measurements and all five ratings');
+ }
+});
+test('R116 valid matching family remains explicitly selectable',()=>{
+ const shot=structuredClone(source),s=state(shot);
+ assert.match(shotCard(shot,{...options,familyRecorded:true}),/data-action="make-current"/);
+ makeCurrent(s,shot.id);
+ const p=s.setups[0].workspaces.version.coffees.coffee;
+ assert.equal(p.currentFamilies.Turbo,'family');
+ assert.equal(p.favoriteShots.family,shot.id);
+});
+test('R116 cloud History computes family existence from actual coffee and style',()=>{
+ const sourceFile=readFileSync(new URL('../site/cloud/main.js',import.meta.url),'utf8');
+ assert.match(sourceFile,/const familyLookup=new Set\(s\.families\.map/);
+ assert.match(sourceFile,/familyRecorded:familyLookup\.has\(\[sh\.familyId,sh\.coffeeId,sh\.style\]/);
 });
