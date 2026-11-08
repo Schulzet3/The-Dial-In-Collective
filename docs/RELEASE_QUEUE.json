@@ -9598,6 +9598,26 @@
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "Merged and regression-verified development correction; TESTING not READY/DEPLOYED. The printed Hulia spelling is preserved rather than inferred to be Huila, and green-bean processing remains blank; actual selected product prose says Mountain Water decaf. All 229 DEPLOYED and 4 pre-existing IN_PROGRESS queue items unchanged. Original603 frozen data, no production or Netlify writes. Source evidence/CI in docs/workstreams/ops-issue33-r41-514-bellevue-current-water-20261108.md.",
       "merged_source_sha": "0f99e0a5d39c8016fd4493b17db62b99664ff92d"
+    },
+    {
+      "id": "DIC-Q-455-local-success-physical-history-guard",
+      "issue": 455,
+      "pr": null,
+      "title": "Coffee overview success badge must reject impossible archived measured shots while retaining original five-green History",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/model.js"
+      ],
+      "tests": [
+        "R119 synthetic negative/positive tests authored for inclusive entry bounds, invalid archive records, style/coffee/version isolation and original History. No tests or CI executed at authoring.",
+        "PR1466 first approval run42506165125 FAILED valid deployable-path intake because test file was incorrectly included in scope_paths; tests must be listed only in tests/evidence. Corrected scope to runtime site/lib/model.js, keeping test coverage in same commit. Need fresh exact-head CI."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact PR-head Node22 and applicable UX/offline/security/governance tests, nonforce integration, exact merged-source readback and reconciliation are not yet verified."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455"
     }
   ],
   "history": [
