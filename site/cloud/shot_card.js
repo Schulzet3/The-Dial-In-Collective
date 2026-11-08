@@ -13,7 +13,7 @@ const isMeasuredRecipeShot=shot=>['doseG','yieldG','timeS'].every(field=>{
 // Equipment context is preserved at the bottom of expanded details.
 export const feedLabel=mode=>mode==='slow'?'Slow Feed':mode==='standard'?'Standard Feed':'Feed Not Recorded';
 
-export function shotCard(shot,{expanded=false,activeVersionId=null,unit='F'}={}){
+export function shotCard(shot,{expanded=false,activeVersionId=null,unit='F',familyRecorded=true}={}){
  const recordUnit=shot.snapshot?.tempUnit||unit;
  const context=[
   ['Setup',shot.snapshot?.setupName],
@@ -29,7 +29,7 @@ export function shotCard(shot,{expanded=false,activeVersionId=null,unit='F'}={})
  // A legacy all-green record without a real family identity cannot be a
  // selectable Current recipe. Preserve its original success badge and history.
  const hasFamily=typeof shot.familyId==='string'&&!!shot.familyId.trim();
- const canChoose=canEdit&&genuineSuccess&&isMeasuredRecipeShot(shot)&&hasFamily&&shot.setupVersionId===activeVersionId;
+ const canChoose=canEdit&&genuineSuccess&&isMeasuredRecipeShot(shot)&&hasFamily&&familyRecorded&&shot.setupVersionId===activeVersionId;
  return `<section class="shot">
   <button class="shot-toggle" data-action="shot-expand" data-id="${e(shot.id)}" aria-expanded="${expanded}" aria-label="Toggle details for shot on ${e(displayDate)}">
    <div class="shot-overview">
