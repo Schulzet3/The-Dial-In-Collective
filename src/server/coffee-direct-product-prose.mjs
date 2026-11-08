@@ -51,6 +51,18 @@ const CURRENT_SELECTED_DECAF_WAY=/^(?:[\p{L}\p{M}]{3,24}['’]d|(?:this|our)\s+c
 // "this coffee is decaffeinated" syntax. Require a whole current product prose
 // paragraph, literal EA and sugarcane in one affirmative contiguous claim.
 // No general page/roaster education, other products, former lots or vague EA.
+// Current selected decaf intros can name their own treatment as
+// "this [flavor] E.A. Process Decaf"; the process is decaffeination, not
+// green-coffee processing. Require a direct bounded product paragraph,
+// exact selected H1 and a whole-decaf identity, not SEO or an educational FAQ.
+const CURRENT_SELECTED_SELF_EA_DECAF=/\bthis\s+(?:[\p{L}\p{M}'’-]+\s+){0,9}e\.?a\.?\s+process\s+decaf\b/iu;
+// For a current decaf made by blending differently processed green lots,
+// credit the treatment only if THAT blended lot is explicitly sent to a
+// decaffeination facility and named Ethyl Acetate Decaffeination there.
+// Do not mistake CO2 injected during co-fermentation for CO2 decaffeination,
+// or a component's Washed processing for the selected entire blend.
+const CURRENT_SELECTED_BLENDED_EA_DECAF=/\b(?:that|this|the)\s+blended\s+lot\s+was\s+(?:then\s+)?sent\s+to\s+the\s+decaffeination\s+facility\s*,?\s+where\s+it\s+underwent\b[^.!?]{0,170}?\bknown\s+as\s+ethyl\s+acetate\s+decaffeination\b/iu;
+const CURRENT_SELECTED_BLEND_ANTECEDENT=/\b(?:original|this|our)\s+[^.!?]{0,190}\bcoffee\s+was\s+blended\s+with\s+a\s+[^.!?]{0,60}\blot\b/iu;
 const CURRENT_SELECTED_DIRECT_EA_REMOVAL=/^(?:(?:then|next)\s+the\s+sugar[ -]?cane\s+(?:part|step)\.\s+)?(?:the|its)\s+caffeine\s+is\s+removed\s+(?:with|using|via|through|by)\s+ethyl\s+acetate\b[^.!?]{0,220}\b(?:fermented\s+)?(?:[\p{L}\p{M}-]+\s+){0,3}sugar[ -]?cane\b/iu;
 const CURRENT_SELECTED_FACILITY_EA=/^(?:the|this|our)\s+coffee\s+is\s+(?:then\s+)?decaffeinated\s+at\s+[\p{Lu}][\p{L}\p{M}\d'’-]{2,70}(?:\s+[\p{Lu}][\p{L}\p{M}\d'’-]{2,70}){0,3},\s+[^.!?]{6,160}\.\s+(?:the|this)\s+(?:plant|facility)\s+relies\b[^.!?]{0,310}\bnatural\s+ethyl\s+acetate\s+from\s+sugar\s+cane\b/iu;
 // A selected current decaf may identify its treatment as a roaster-translated
@@ -306,6 +318,33 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
      inferDecaffeinationMethod({name,selectedMethod:line})&&
      !decafEvidence.has(line)){
    if(decafEvidence.size<4)decafEvidence.add(line);
+   else decafEvidenceOverflow=true;
+  }
+  // #424 current own E.A. Process Decaf identity is printed in the
+  // first selected paragraph, while the next paragraph explains EA to the
+  // visitor. The first paragraph itself must make the attribution.
+  const ownEa=line.match(CURRENT_SELECTED_SELF_EA_DECAF)?.[0]||'';
+  if(decafOnlyCoffee(name)&&b.tag==='p'&&!b.educational&&line.length<=520&&
+     ownEa&&!NONCURRENT_DECAF_METHOD.test(line)&&
+     !/\b(?:not|never|without|instead of|rather than|another coffee|other coffee)\b/iu.test(ownEa)&&
+     !/^(?:faq|frequently asked questions|decaf process education)$/iu.test(String(b.section||'').trim())&&
+     inferDecaffeinationMethod({name,selectedMethod:ownEa})==='Sugar Process'&&
+     !decafEvidence.has(ownEa)){
+   if(decafEvidence.size<4)decafEvidence.add(ownEa);
+   else decafEvidenceOverflow=true;
+  }
+  // #441 current own blend: two different GREEN lots become a single decaf
+  // only after the resulting blended lot explicitly receives EA treatment.
+  // Require both lot antecedent and direct current treatment in ONE paragraph.
+  const blendedEa=line.match(CURRENT_SELECTED_BLENDED_EA_DECAF)?.[0]||'';
+  if(decafOnlyCoffee(name)&&b.tag==='p'&&!b.educational&&line.length<=950&&
+     blendedEa&&CURRENT_SELECTED_BLEND_ANTECEDENT.test(line)&&
+     !NONCURRENT_DECAF_METHOD.test(line)&&
+     !/^(?:faq|frequently asked questions|decaf process education)$/iu.test(String(b.section||'').trim())&&
+     !/\b(?:not|never|without|instead of|rather than|hypothetical)\b/iu.test(blendedEa)&&
+     inferDecaffeinationMethod({name,selectedMethod:blendedEa})==='Sugar Process'&&
+     !decafEvidence.has(blendedEa)){
+   if(decafEvidence.size<4)decafEvidence.add(blendedEa);
    else decafEvidenceOverflow=true;
   }
   // Exactly selected current decaf: direct EA caffeine-removal prose with
