@@ -422,7 +422,14 @@ export function recommendation(s,coffeeId,options={}) {
  rec.grind=grindGuidance(s,c,style,basket,feed,rec.familyId);
  rec.tempC=temperatureGuidance(s,c,style,v,rec.tempC,rec.familyId);
  rec.style=style;rec.basketId=basket.id;rec.feedMode=feed;
- rec.yield={low:round(rec.ratio.low*rec.doseG),high:round(rec.ratio.high*rec.doseG),center:round(rec.ratio.center*rec.doseG)};
+ // A physically loggable starting center must not display a yield interval
+ // outside the EXISTING 5-200 g Log Shot entry range. This changes display
+ // endpoints only, not approved ratio priors or underlying measured records.
+ const startingYield={low:round(rec.ratio.low*rec.doseG),high:round(rec.ratio.high*rec.doseG),center:round(rec.ratio.center*rec.doseG)};
+ const [minStartingYield,maxStartingYield]=CONFIG.bounds.yieldG;
+ rec.yield=startingYield.center>=minStartingYield&&startingYield.center<=maxStartingYield?
+  {...startingYield,low:clamp(startingYield.low,minStartingYield,maxStartingYield),high:clamp(startingYield.high,minStartingYield,maxStartingYield)}:
+  startingYield;
  // Successful shot families are chosen independently of any retired Experiment workflow.
  // An unloggable archived shot must never replace a usable fresh recommendation
   // with a cached adjustment or diagnostic based on impossible measured controls.
