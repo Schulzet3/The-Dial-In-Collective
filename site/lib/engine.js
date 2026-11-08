@@ -377,7 +377,14 @@ export function recommendation(s,coffeeId,options={}) {
   const ratioEvidence=basketFeed.length?basketFeed:feedLocal.length?feedLocal:local.length?local:all;
   rec.ratio=stats(ratioEvidence.map(x=>x.yieldG/x.doseG),{singleWidth:CONFIG.singleYieldHalfWidth/basket.doseG});
   // Time from another setup, basket or feed must not masquerade as local proof.
-  if(comparable.length)rec.time=stats(comparable.map(x=>x.timeS),{singleWidth:CONFIG.singleTimeHalfWidth});
+  if(comparable.length){
+   const time=stats(comparable.map(x=>x.timeS),{singleWidth:CONFIG.singleTimeHalfWidth});
+   // The estimated single-success interval must not exceed existing Log Shot
+   // time bounds. Preserve the measured center, five ratings and shot History.
+   const [minTime,maxTime]=CONFIG.bounds.timeS;
+   rec.time={...time,low:clamp(time.low,minTime,maxTime),
+    high:clamp(time.high,minTime,maxTime)};
+  }
   rec.familyId=chosen.id;rec.observations=ratioEvidence.length;rec.established=local.length>0;
   rec.source=local.length?'Your dialed in window':'Starting reference from your other setup';
   rec.familySelection={basis:familyChoice.basis,candidates:familiesFor(s,coffeeId,style).length,
