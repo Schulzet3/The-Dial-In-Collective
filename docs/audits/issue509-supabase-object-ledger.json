@@ -14201,5 +14201,97 @@
     "source_fixes": 0,
     "production_writes": false,
     "baseline_complete": false
+  },
+  "provider_pg_attribute_raw_run102": {
+    "status": "VISIBLE_ORIGINAL_SAFE_PG_ATTRIBUTE_RAW_4030_OF_4030",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_development_parent_sha": "76a4c02e5006dc045dcb9064b410a0815b774125",
+    "source_main_sha": "a4028e42b0d0316fd539c0563fd07832d509aed0",
+    "source_release_sha": "92829cb6aff82aaec212eabbd921183e7997f1a7",
+    "reviewed_new": 830,
+    "reviewed_cumulative": 4030,
+    "total": 4030,
+    "range": [
+      3201,
+      4030
+    ],
+    "anchor": [
+      {
+        "ordinal": 3200,
+        "column_name": "chunk_data",
+        "schema_name": "pg_toast",
+        "relation_oid": "4147",
+        "relation_name": "pg_toast_3079"
+      },
+      {
+        "ordinal": 3201,
+        "column_name": "chunk_id",
+        "schema_name": "pg_toast",
+        "relation_oid": "4148",
+        "relation_name": "pg_toast_3079_index"
+      },
+      {
+        "ordinal": 4029,
+        "column_name": "name",
+        "schema_name": "vault",
+        "relation_oid": "16624",
+        "relation_name": "secrets_name_idx"
+      },
+      {
+        "ordinal": 4030,
+        "column_name": "id",
+        "schema_name": "vault",
+        "relation_oid": "16622",
+        "relation_name": "secrets_pkey"
+      }
+    ],
+    "schemas": {
+      "pg_toast": 82,
+      "private": 182,
+      "public": 386,
+      "realtime": 50,
+      "storage": 103,
+      "supabase_migrations": 8,
+      "vault": 19
+    },
+    "kinds": {
+      "i": 263,
+      "t": 48,
+      "r": 464,
+      "S": 18,
+      "p": 10,
+      "I": 4,
+      "c": 14,
+      "v": 9
+    },
+    "flags": {
+      "not_null": 353,
+      "has_default": 174,
+      "has_missing_value": 6,
+      "identity": 6,
+      "generated": 5,
+      "column_acl_present": 0,
+      "column_options_present": 0,
+      "fdw_options_present": 0
+    },
+    "confirmed_metadata_anomalies": 0,
+    "receipt_paths": [
+      "docs/audits/issue509-provider-pg-attribute-raw-3201-3300-2026-11-08-run102.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-3301-3400-2026-11-08-run102.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-3401-3500-2026-11-08-run102.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-3501-3600-2026-11-08-run102.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-3601-3700-2026-11-08-run102.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-3701-3800-2026-11-08-run102.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-3801-3900-2026-11-08-run102.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-3901-4000-2026-11-08-run102.json",
+      "docs/audits/issue509-provider-pg-attribute-raw-4001-4030-2026-11-08-run102.json"
+    ],
+    "next_ordinal": null,
+    "prior_ddl_review_not_recredited": true,
+    "compiled_native_and_hosted": "UNVERIFIED",
+    "source_fixes": 0,
+    "production_writes": false,
+    "baseline_complete": false,
+    "next": "Identify distinct uncovered provider object/source definition families, drift, bounded errors and explicitly inaccessible provider settings; native/hosted API still unverified"
   }
 }
