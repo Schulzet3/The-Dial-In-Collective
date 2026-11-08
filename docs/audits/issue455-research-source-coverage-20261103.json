@@ -2606,6 +2606,29 @@
       "original_source_sha": "1f4a986a0b0e5b8b66a627b07adab5b169a19cab",
       "original_report_git_blob_sha": "4a52b0f938d533ff8c0d69fc09951bf51abc8d69",
       "publisher_pdf_sha256": null
+    },
+    {
+      "id": "R455-EV-APP-068-A",
+      "source": "site/lib/engine.js pre-fix blob f255d217cac4d909aa4ea6fb921e5e6e9da5d23b prefill lines504-516, tested corrected blob 3823b70b0a954a9a4182b45de11d667cfe1c98a4; exact PR1326 merged 531e5fce190a696f52f83326d9c767570c8b3945",
+      "claim": "A newer archived shot with an out-of-entry-bounds yield or time but individually valid dose and grind previously overwrote older physically measured prefill values. Applying existing measuredRecipeShots physical eligibility to dose, grind AND temperature blocks that source-derived inconsistency while retaining all original history/notes, five tastes and independent espresso range/style/feed/calibration filters.",
+      "grade": "DETERMINISTIC_REAL_SOURCE_REPRODUCTION_WITH_SYNTHETIC_POSITIVE_NEGATIVE_NODE22_TESTS; NO_MEMBER_INCIDENT_OR_EMPIRICAL_CUP_EFFICACY_CLAIM",
+      "result": "SAFE_LOCKED_COMPATIBLE_IMPLEMENTED_PR1326_MERGED_READY_NOT_DEPLOYED",
+      "source_parent_sha": "b16ea199314c32fbe094f3637138a5f3b0bdf3bf",
+      "source_blob_sha": "f255d217cac4d909aa4ea6fb921e5e6e9da5d23b",
+      "corrected_blob_sha": "3823b70b0a954a9a4182b45de11d667cfe1c98a4",
+      "tests": "Three R103 real-module source-bound Node regression groups; exact PR-head and merged Node22 3,005 PASS/0 FAIL/6 SKIP; approval, UX/browser/mobile, isolated SQL and security PASS in applicable scoped workflows; original603 SKIPPED",
+      "ci_runs": [
+        42435565232,
+        42435565274,
+        42435565259,
+        42435565249,
+        42435565193,
+        42435760941,
+        42435760901,
+        42435760884
+      ],
+      "owner_approval": false,
+      "production_deployed": false
     }
   ],
   "policy_decisions_pending": [],
@@ -2617,6 +2640,7 @@
     "reason": "R455-097 verified nonforce code PR1276, no Locked policy/SQL/privacy change, docs-only READY reconciliation."
   },
   "next_actions": [
+    "R455-103: SAFE Log Shot measured-prefill consistency PR #1326 nonforce merged 531e5fce190a696f52f83326d9c767570c8b3945; exact tested/merged engine, test and same-commit journal blobs identical. Node22 3005 PASS/0 FAIL/6 SKIP both, applicable UX/browser/mobile/approval/SQL/security success, original603 SKIPPED. Queue READY development only on docs reconciliation, NOT DEPLOYED. 60 source identities/135 bounded checks/65 proposals. S019 unreviewed, #267 no literal credit. Next fresh source and distinct finding.",
     "R455-097 verified code PR #1276 exact merge 028e2bd2db3e6cbc5931a95b82d9217cab38c439; 2984 PASS/0 FAIL/6 SKIP PR head/merged retry (first merged Node parser stress timed out in unrelated extractor; second attempt full Node and lint PASS), applicable UX/mobile/offline, PR-head SQL/security and governance; archived context mismatch only, legacy missing unchanged, development READY, no deploy. 58 sources/125 evidence checks/59 proposals, S019 inaccessible, no #267 line review.",
     "R455-096 code PR #1264 merged e7ef11fdcc510f14b9686b6d5565e77277887809; exact head and merged 2972/0/6 Node22 and browser/mobile/offline/SQL/security/governance evidence; docs-only READY reconciliation underway. Next substantive nonoverlap research claim review, S019 inaccessible, #267 line credit zero.",
     "R455-095 VERIFIED code PR #1250 nonforce merged b568337c2d4dc827404d7b57d5277b96d87a0f2a; 2952/0/6 exact Node22 and applicable mobile/browser/offline/SQL/security/governance passed. Docs reconciliation READY development NOT deployed. Next disjoint workflow/source evidence.",
@@ -2638,37 +2662,44 @@
     "R455-102: independently cross-checked MDPI-indexed primary Choi et al. 2025 methods/results/conclusions (direct HTML 429; full publisher bytes unverified) against original #01 and current Locked rating/recipe code. Experimental 15-17g and 70-90mL cups are protocol standards, not universal DIC dose; expert CATA three-replicate repeatability across variable country brew conditions is not five-slider app validity. Source identity unchanged: 60 sources, 134 bounded checks, 64 proposals; no code/Locked rule/queue changes. Direct original PDF and S019 remain inaccessible, docs-only PR governance pending."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-102",
-    "base_development_sha": "1f4a986a0b0e5b8b66a627b07adab5b169a19cab",
-    "merged_code_sha": null,
-    "verified_integrated_source_sha": null,
+    "id": "R455-103",
+    "base_development_sha": "b16ea199314c32fbe094f3637138a5f3b0bdf3bf",
+    "merged_code_sha": "531e5fce190a696f52f83326d9c767570c8b3945",
+    "verified_integrated_source_sha": "531e5fce190a696f52f83326d9c767570c8b3945",
     "source_ids": [
-      "ORG-01",
-      "LIT-2025-CHOI-TEP-REPEATABILITY",
-      "site/lib/constants.js",
-      "site/lib/engine.js"
+      "site/lib/engine.js",
+      "tests/issue455-prefill-measurement-integrity.test.mjs",
+      "docs/workstreams/issue-455.md"
     ],
     "claim_ids": [
-      "R455-EV-CIT-102-A",
-      "R455-EV-CIT-102-B"
+      "R455-EV-APP-068-A"
     ],
     "number_of_curated_sources": 60,
-    "total_evidence_checks": 134,
-    "number_of_proposals": 64,
-    "review_type": "BOUNDED_PEER_REVIEWED_PRIMARY_PUBLISHER_INDEXED_EXPERT_TEP_METHODS_RESULTS_AND_LIMITATIONS_RESEARCH_ONLY",
+    "total_evidence_checks": 135,
+    "number_of_proposals": 65,
+    "review_type": "BOUNDED_REPRODUCED_SAFE_LOG_SHOT_PREFILL_PHYSICAL_MEASUREMENT_CONSISTENCY",
     "github267_literal_line_review_credit": 0,
     "production_deployed": false,
-    "code_or_policy_changed": false,
-    "ci_runs": [],
+    "code_or_policy_changed": true,
+    "ci_runs": [
+      42435565232,
+      42435565274,
+      42435565259,
+      42435565249,
+      42435565193,
+      42435760941,
+      42435760901,
+      42435760884
+    ],
     "node_tests": {
-      "status": "NOT_RUN_DOCS_ONLY",
-      "pass": null,
-      "fail": null,
-      "skip": null
+      "status": "PR_HEAD_AND_EXACT_MERGED_DEVELOPMENT_PASS",
+      "pass": 3005,
+      "fail": 0,
+      "skip": 6
     },
-    "original603": "NOT_RUN_NOT_PASS",
+    "original603": "SKIPPED_NOT_PASS",
     "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "Create docs-only PR, verify exact source-bound approvals/governance, nonforce merge/readback; continue distinct app or original evidence gap, no duplicate #267 line credit."
+    "next_action": "R455-103 code and source-bound tests merged/read back; finish docs-only reconciliation PR governance and continue next nonoverlapping safe UX defect or primary research claim at newer development SHA; #267 audit independent."
   },
   "policy_decisions_resolved": [
     {
@@ -4014,6 +4045,23 @@
       "test_plan": "Primary publisher indexed specific Methods/Results/Conclusions versus preserved original report and live constants/engine; docs-only GitHub governance required. Full original PDF/panel data, app member outcomes, and S019 still pending.",
       "release_queue": "NOT_APPLICABLE_NO_APP_SCOPE_OR_READY_STATUS",
       "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-103-PREFILL-MEASURED-HISTORY-CONSISTENCY",
+      "finding": "Log Shot numeric dose/grind prefills admitted newer archived rows with invalid yield/time even though actual temperature prefills and recommendation evidence already excluded those physically unloggable records.",
+      "evidence": [
+        "R455-EV-APP-068-A"
+      ],
+      "severity": "P2_DETERMINISTIC_LOG_SHOT_PREFILL_CORRECTNESS",
+      "user_benefit": "Reduce misleading carryover when opening Log Shot after imported/corrupt history, choosing older valid actual measurements or honest blank/basket fallback without changing saved shot records.",
+      "current_locked": "Keep five taste inputs, original History/notes, existing shot-entry physical bounds and espresso-range filtering, independent styles including Turbo vs Fast-Flow, feed/calibration context, single controllable change, private/offline data and no deployment.",
+      "current_app": "Source b16ea199314c32fbe094f3637138a5f3b0bdf3bf engine blob f255d217cac4d909aa4ea6fb921e5e6e9da5d23b used shots for dose/grind prefill but measuredRecipeShots for temperature. Corrected merged 531e5fce190a696f52f83326d9c767570c8b3945 engine blob 3823b70b0a954a9a4182b45de11d667cfe1c98a4 uses one measured eligibility source for all three, retaining original per-control context constraints.",
+      "proposed_change": "SAFE implemented: screen candidate historical numeric prefill rows with the already approved measuredRecipeShots physical dose/yield/time bounds before choosing candidate dose/grind/temperature; do not mutate history or introduce policy/science constants.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "VERIFIED_CODE_PR1326_NONFORCE_SQUASH_MERGED_531e5fce190a696f52f83326d9c767570c8b3945; SAME_COMMIT_JOURNAL; FOLLOWUP_RELEASE_QUEUE_READY_NOT_DEPLOYED",
+      "test_plan": "Node22 3,005 PASS 0 FAIL 6 SKIP both tested PR head and exact merged development, three R103 regressions pass; browser/mobile/offline and approval pass, isolated SQL/security PR head pass; frozen603 intentionally SKIPPED; no hosted Auth/consumer tests or measured coffee quality claim.",
+      "release_queue": "DIC-Q-455-prefill-measured-physical-history READY_DEVELOPMENT_ONLY",
+      "production_deployed": false
     }
   ],
   "changeScope": {
@@ -4021,6 +4069,6 @@
     "tests_executed": true,
     "production_deployed": false,
     "queue_changed": true,
-    "reason": "R455-098 nonforce PR1285 code merged f76b3c383980f70db136bfd6690bee78dbf7dc27 with exact Node/mobile/offline/governance success; docs-only reconciliation READY, no Locked change."
+    "reason": "R455-103 tested source-bound safe Log Shot prefill code PR #1326 merged 531e5fce190a696f52f83326d9c767570c8b3945, docs-only READY reconciliation pending exact governance; no new science/Locked policy"
   }
 }
