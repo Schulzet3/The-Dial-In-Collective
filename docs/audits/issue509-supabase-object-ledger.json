@@ -3093,6 +3093,22 @@
       "confirmed_defects": 0,
       "production_writes": false,
       "baseline_complete": false
+    },
+    {
+      "event": "2026-11-08_run87_pg_catalog_pg_proc_raw_001_400",
+      "source_development_parent_sha": "d6fba0c8388721947dc4dd1542a3f78c5b3e671d",
+      "provider_fingerprint": "bf8b8cbd2cd5d6757b3eff35a1e17550",
+      "reviewed_new": 400,
+      "total": 3319,
+      "receipt_paths": [
+        "docs/audits/issue509-provider-pg-proc-raw-001-100-20261108-run87.json",
+        "docs/audits/issue509-provider-pg-proc-raw-101-200-20261108-run87.json",
+        "docs/audits/issue509-provider-pg-proc-raw-201-300-20261108-run87.json",
+        "docs/audits/issue509-provider-pg-proc-raw-301-400-20261108-run87.json"
+      ],
+      "confirmed_defects": 0,
+      "provider_writes": false,
+      "baseline_complete": false
     }
   ],
   "state": "NONPG_VIEW_ATTRIBUTES_735_DIRECT_FULL_TUPLE_FIELD_REVIEW; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -13300,5 +13316,37 @@
     "production_writes": false,
     "baseline_complete": false,
     "next": "Next distinct uncovered pg_proc raw catalog tuple metadata in OID order; then changed provider definitions and hosted Auth/JWT/PostgREST under Issue #96. Compiled native C and 63 withheld values UNVERIFIED"
+  },
+  "provider_pg_proc_raw_run87": {
+    "state": "PG_CATALOG_RAW_PG_PROC_DESCRIPTORS_400_OF_3319_DIRECT_TUPLE_FIELD_VALIDATED; NATIVE_C_UNVERIFIED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "provider_source_md5": "bf8b8cbd2cd5d6757b3eff35a1e17550",
+    "source_development_parent_sha": "d6fba0c8388721947dc4dd1542a3f78c5b3e671d",
+    "reviewed_new": 400,
+    "reviewed_cumulative": 400,
+    "total": 3319,
+    "next_ordinal": 401,
+    "first_oid": "3",
+    "last_oid": "714",
+    "languages": {
+      "internal": 400
+    },
+    "kinds": {
+      "f": 400
+    },
+    "explicit_acl_records": 0,
+    "default_arg_expression_records": 0,
+    "receipt_paths": [
+      "docs/audits/issue509-provider-pg-proc-raw-001-100-20261108-run87.json",
+      "docs/audits/issue509-provider-pg-proc-raw-101-200-20261108-run87.json",
+      "docs/audits/issue509-provider-pg-proc-raw-201-300-20261108-run87.json",
+      "docs/audits/issue509-provider-pg-proc-raw-301-400-20261108-run87.json"
+    ],
+    "previous_all_visible_DDL_not_recredited": true,
+    "confirmed_defects": 0,
+    "source_fixes": 0,
+    "production_writes": false,
+    "baseline_complete": false,
+    "next": "pg_catalog.pg_proc raw tuples ordinal 401/3319 ordered ascending OID; then non-pg_catalog raw pg_proc tuples; hosted JWT/API, C implementations and withheld GUC settings unverified"
   }
 }
