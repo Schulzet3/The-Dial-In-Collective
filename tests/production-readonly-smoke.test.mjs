@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {smoke,smokePaths} from '../scripts/release/production-readonly-smoke.mjs';
 const response=(status=200,type='text/html',body='<html>ok</html>')=>({
  ok:status>=200&&status<300,status,headers:{get:()=>type},text:async()=>body
@@ -24,4 +25,13 @@ test('smoke fails closed on unexpected origin, path, status or content',async()=
 test('smoke rejects HTML fallback at manifest and JSON at HTML routes',async()=>{
  await assert.rejects(smoke({fetchImpl:async()=>response(200,'text/html','<html>SPA fallback</html>')}),/manifest.webmanifest/);
  await assert.rejects(smoke({fetchImpl:async()=>response(200,'application/json','{}')}),/failed \/ status/);
+});
+
+test('smoke routes are actually packaged by the public cloud build',()=>{
+ const build=readFileSync(new URL('../build_cloud.mjs',import.meta.url),'utf8');
+ assert.deepEqual(smokePaths,['/','/admin.html','/manifest.webmanifest']);
+ assert.match(build,/copyFile\(path\.join\(root,'site\/cloud\.html'\),path\.join\(root,'dist\/index\.html'\)\)/);
+ assert.match(build,/copyFile\(path\.join\(root,'site\/admin\.html'\),path\.join\(root,'dist\/admin\.html'\)\)/);
+ assert.match(build,/'manifest\.webmanifest'/);
+ assert.doesNotMatch(build,/path\.join\(root,'dist\/cloud\.html'\)/);
 });

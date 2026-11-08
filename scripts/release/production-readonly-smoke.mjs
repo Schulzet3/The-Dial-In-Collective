@@ -1,7 +1,9 @@
 // Read-only hosted smoke. Never signs in, creates members, or writes production data.
 // Netlify deployment SHA/readiness must be verified separately against provider receipts.
 const allowedOrigin='https://app.dialincollective.com';
-export const smokePaths=['/','/cloud.html','/manifest.webmanifest'];
+// build_cloud.mjs publishes site/cloud.html as dist/index.html, not dist/cloud.html.
+// Probe only actual packaged public HTML routes plus the installable manifest.
+export const smokePaths=['/','/admin.html','/manifest.webmanifest'];
 export async function smoke({origin=allowedOrigin,fetchImpl=fetch,paths=smokePaths}={}){
  if(origin!==allowedOrigin)throw Error('Unapproved production origin');
  const results=[];
