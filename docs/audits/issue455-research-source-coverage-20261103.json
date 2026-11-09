@@ -1065,6 +1065,25 @@
       "source_bytes_sha256": null,
       "source_byte_caveat": "Publisher original PDF text directly retrieved; actual binary was not downloaded or independently SHA-256 hashed. PDF screenshot attempt failed HTTP429. No claim of raw supplemental-data reanalysis or universally representative coffee/hardware.",
       "claims_verified_externally": "Same washed Colombian Arabica and 20.00 +/-0.01 g dose, one DE1 Pro/IMS basket and Mahlkoenig E65S grinding at displayed levels 1.4/1.7/2.0; 15 face-centered DoE factor sets, triplicates except six center replicates; measured flow approximately 0.96/1.9/2.8 mL/s and measured water approximately 79.1/88.2/96.5 C. Ten fractions collected, six HPLC/TDS fractions assessed; measured trigonelline, caffeine, 5-CQA and TDS, not human taste. Across the studied domain flow effects interacted with grind and temperature; beverage mass (20/40/60g modeled cup outputs) had larger effects than individual operating settings. No universal five-taste recommendations or optimal espresso temperature established."
+    },
+    {
+      "id": "LIT-2025-KHONGPHINITBUNJONG-GRIND-PSD",
+      "type": "peer_reviewed_primary_coffee_grind_particle_size_model",
+      "title": "Particle Size Distribution Model for Optimizing Coffee Grind Consistency",
+      "authors": "Kitiphong Khongphinitbunjong; Sirirung Wongsakul; Theeradech Mookum",
+      "published": "2025-05-08",
+      "journal": "Journal of Food Process Engineering 48(5):e70129",
+      "doi": "10.1111/jfpe.70129",
+      "url": "https://onlinelibrary.wiley.com/doi/abs/10.1111/jfpe.70129",
+      "access": "DIRECT_FIRST_PARTY_WILEY_ORIGINAL_ABSTRACT_METADATA_CONFLICT_FUNDING_DATA_AVAILABILITY; FULL_TEXT_LINK_REDIRECTS_TO_ABSTRACT",
+      "review_status": "ORIGINAL_PRIMARY_PUBLISHER_ABSTRACT_DESIGN_METHOD_SUMMARY_RESULT_LIMITATIONS_READ; FULL_METHODS_TABLES_RESULTS_PDF_AND_RAW_DATA_NOT_ACCESSED",
+      "evidence_grade": "PEER_REVIEWED_ORIGINAL_ABSTRACT_ONLY_NOT_ESPRESSO_TASTE_OR_OPTIMAL_GRIND_VALIDATION",
+      "claims_verified_externally": "Publisher reports Arabica light/medium/dark roasting, twelve grind levels, laser diffraction, Rosin-Rammler PSD modeled by quasi-Newton and Levenberg-Marquardt, uniformity/dispersion statistics; middle grind was most uniform in tested conditions and Kruskal-Wallis found no statistically significant roast consistency difference. Neither result establishes universal espresso optimal grind/taste, grinder setting number, roast invariance, or individual sensory confidence.",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Only publisher HTML abstract accessed: full-text link redirects to abstract. No article PDF bytes, exact p-values/grinder specifications/raw PSD or espresso sensory tests verified; underlying data available upon reasonable corresponding-author request. Publisher declares no conflicts, Mae Fah Luang University grant 681B01002.",
+      "current_app_crosswalk": "Engine blob 21d6e822599e21db95b9f30ce3178db3542a6eb6 uses observed within-range grinder calibration and personal same-coffee successes; no modeled PSD middle-grind prior. Preserve original five tastes, styles, recipe families, Slow Feed and private history.",
+      "reviewed_date_utc": "2026-11-09",
+      "implementation_status": "RESEARCH_ONLY_NO_APP_OR_LOCKED_POLICY_CHANGE"
     }
   ],
   "evidence_checks": [
@@ -3297,6 +3316,28 @@
       "owner_approval": false,
       "test_source": "Original primary publisher reprint text and author institution metadata; no code changes or scientific/physical validation of app; PDF screenshot tried and blocked 429.",
       "date": "2026-11-09"
+    },
+    {
+      "id": "R455-EV-CIT-127-A",
+      "source": "Khongphinitbunjong et al. (2025), original Wiley publisher abstract, DOI 10.1111/jfpe.70129, first-party HTML lines 93-134 (2026-11-09)",
+      "claim": "Lab PSD study compared three Arabica roast categories and twelve grind settings with laser diffraction and Rosin-Rammler QN/LM optimization. Publisher abstract says study middle grind produced highest uniformity; Kruskal-Wallis found no statistically significant roast consistency difference in this tested setting. Exact raw results and confound controls not accessible.",
+      "grade": "DIRECT_PRIMARY_PEER_REVIEWED_PUBLISHER_ABSTRACT_NOT_FULL_ORIGINAL_METHODS",
+      "result": "BOUNDED_DESCRIPTIVE_PSD_STUDY_NOT_ESPRESSO_TASTE_OPTIMUM",
+      "current_app": "No PSD measurement or universal middle-grind prior; personalized versioned grind history governs.",
+      "owner_approval": false,
+      "test_source": "Wiley original HTML only; original full PDF, raw data, user espresso test and CI not yet reviewed.",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "R455-EV-CIT-127-B",
+      "source": "Wiley original abstract/data availability; Master Specification Locked grinder and one-controllable-change; current engine and constants blobs",
+      "claim": "Measured PSD uniformity at one study's middle grind cannot justify automatic espresso grind recommendations, confidence percentages, taste target changes or universal roast corrections. Non-significance in one studied PSD comparison is not equivalent to roast independence.",
+      "grade": "DIRECT_PUBLISHER_ABSTRACT_AND_LIVE_ENGINE_RULE_CROSSWALK_WITH_STRICT_SENSORY_TRANSFER_LIMIT",
+      "result": "RESEARCH_ONLY_PRESERVE_LOCKED_GRINDER_RANGE_AND_USER_HISTORY",
+      "current_app": "Retain five sensory inputs, own-coffee successes, grinder range/direction/version, one intentional next-shot change, Turbo vs Fast-Flow, notes/private history.",
+      "owner_approval": false,
+      "test_source": "Read-only direct source review; no Node22/browser/offline/SQL/member or actual espresso tests.",
+      "date": "2026-11-09"
     }
   ],
   "policy_decisions_pending": [],
@@ -3351,43 +3392,33 @@
     "R455-124 base 64cb736981b708e41f5578cbdd2ad6eed8db1db8: Direct MDPI Foods 2023 Schmieder et al. single-coffee flow/grind/temp 15-point factorial HPLC/TDS kinetics PDF text and TUM author page checked. 69 sources/167 evidence checks/86 proposals; screenshot 429, original binary and supplemental raw data unverified. No universal temperature or five-taste transfer, no code/policy/release changes; source-bound docs PR/CI/merge pending. Standalone S019 inaccessible; zero #267 literal-line credit.",
     "R455-124 FINAL: PR1514 tested head 0e552b5ccc434f5044a2581ad904426b74041a1a 5/5 exact PR checks SUCCESS (approval42531684784, Node validate42531684895, SQL42531684914, browser/mobile/cloud42531684960); nonforce squash merged c0d997f646d6053f0a2cd99813770376e4469d31 with all three source Git blobs identical. Exact merged approval42531952023 SUCCESS. 69 curated sources/167 bounded checks/86 proposals; no new READY or deployment; screenshot HTTP429 and standalone S019 still unverified.",
     "R455-126 primary original Pannusch 2024 model article in TUM first-author thesis appendix B3 directly reviewed: eight validation profiles, four compound chemical errors, important roast-batch uncertainty, explicit no human sensory or cross-roast transfer. 69 sources/170 checks/88 proposals, research-only, docs CI/PR pending. Standalone S019 missing; no #267 direct-line audit credit.",
-    "R455-126 original Pannusch 2024 original full-text author thesis reprint 69/170/88 verified research-only, PR1533 nonforce squash merged 427631ec535b61e6ac47227d9038e88ad792db2c, original ledger/journal blobs match exact 5/5 PR-head checks SUCCESS and merged governance42542208887 SUCCESS. Reconciliation docs PR pending; no app deployment or code, S019 missing, no #267 credit."
+    "R455-126 original Pannusch 2024 original full-text author thesis reprint 69/170/88 verified research-only, PR1533 nonforce squash merged 427631ec535b61e6ac47227d9038e88ad792db2c, original ledger/journal blobs match exact 5/5 PR-head checks SUCCESS and merged governance42542208887 SUCCESS. Reconciliation docs PR pending; no app deployment or code, S019 missing, no #267 credit.",
+    "R455-127: new Wiley 2025 original publisher PSD abstract research-only, 70 curated sources, 172 checks, 89 proposals; no app policy, CI pending, S019 inaccessible and #267 direct audit distinct."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-126",
-    "base_development_sha": "e45c29e5e5bf42b5ddae30adb2663ec4cd81b12e",
+    "id": "R455-127",
+    "base_development_sha": "6cb57635c269c8fee1b7c32e35af108ec0bfb4ed",
     "source_ids": [
-      "LIT-2024-PANNUSCH-ESPRESSO-KINETIC-CONTROL"
+      "LIT-2025-KHONGPHINITBUNJONG-GRIND-PSD"
     ],
     "claim_ids": [
-      "R455-EV-CIT-126-A",
-      "R455-EV-CIT-126-B"
+      "R455-EV-CIT-127-A",
+      "R455-EV-CIT-127-B"
     ],
     "proposal_ids": [
-      "R455-PROP-126-MODELED-ESPRESSO-CONTROL-CHART-SENSORY-TRANSFER-BOUNDARY"
+      "R455-PROP-127-NO-UNIVERSAL-PSD-MIDDLE-GRIND-TRANSFER"
     ],
-    "number_of_curated_sources": 69,
-    "total_evidence_checks": 170,
-    "number_of_proposals": 88,
-    "review_type": "DIRECT_FULL_PRIMARY_ORIGINAL_REPRINT_TEXT_SCOPE_CHEMICAL_MODEL_STATISTICAL_ERRORS_RESEARCH_ONLY",
+    "number_of_curated_sources": 70,
+    "total_evidence_checks": 172,
+    "number_of_proposals": 89,
+    "review_type": "BOUNDED_FIRST_PARTY_PUBLISHER_ABSTRACT_PSD_MODEL_RESEARCH_ONLY",
     "code_or_policy_changed": false,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
-    "ci_runs": [
-      42541955762,
-      42541955714,
-      42541955760,
-      42541955828,
-      42542208887
-    ],
-    "status": "SOURCE_BOUND_DOCS_MERGED_EXACT_CI_SUCCESS_NO_APP_OR_DEPLOY",
+    "status": "NEW_SOURCE_DOCUMENTATION_PR_PENDING_TESTS",
     "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "Continue distinct source/claim and UX review after source-first recovery. S019 inaccessible, #267 literal audit separate.",
-    "merged_development_sha": "427631ec535b61e6ac47227d9038e88ad792db2c",
-    "github_pr": 1533,
-    "review_status": "SOURCE_BOUND_RESEARCH_ONLY_CODE_UNCHANGED_EXACT_PR_HEAD_AND_CODE_MERGED_GOVERNANCE_SUCCESS",
-    "final_development_source_sha": "427631ec535b61e6ac47227d9038e88ad792db2c"
+    "next_action": "Check exact PR-head governance, merge nonforce, compare merged-source blobs, add Issue #455 durable comment; then choose next disjoint original or safe bug."
   },
   "policy_decisions_resolved": [
     {
@@ -5198,6 +5229,27 @@
       "implementation": "RESEARCH_ONLY_UPDATED_PRIMARY_SOURCE_EVIDENCE_AND_JOURNAL_IN_PR1533_NONFORCE_SQUASH_MERGED_427631ec535b61e6ac47227d9038e88ad792db2c_WITH_EXACT_FIVE_PR_HEAD_CHECK_SUCCESS_AND_MERGED_GOVERNANCE_SUCCESS; NO_APP_CODE_OR_POLICY_CHANGED",
       "test_plan": "PR-head five named GitHub checks SUCCESS: approval42541955760, Node validate42541955828, SQL42541955714, cloud+mobile42541955762 (conditional steps may be SKIPPED not PASS). Exact merged-source approval42542208887 SUCCESS. No app behavior change, raw simulation replication, human taste, member/provider, or original603 acceptance; original PDF screenshot HTTP429.",
       "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY_NO_READY_ITEM",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-127-NO-UNIVERSAL-PSD-MIDDLE-GRIND-TRANSFER",
+      "finding": "New original 2025 PSD-model study reports bounded middle-grind distribution uniformity rather than espresso sensory optimality.",
+      "evidence": [
+        "R455-EV-CIT-127-A",
+        "R455-EV-CIT-127-B"
+      ],
+      "severity": "P3_FALSE_NUMERIC_SCIENCE_CONFIDENCE",
+      "user_benefit": "Prevent vendor/grinder-specific scale or personal coffee preferences being overridden by a generic lab grain-distribution score.",
+      "current_locked": "Five tastes; complete vs unrated; one controllable change; same-coffee observed shots; versioned espresso range; independent styles including Turbo/Fast-Flow; Slow Feed/equipment; privacy and original history.",
+      "current_app": "Live engine blob 21d6e822599e21db95b9f30ce3178db3542a6eb6 translateGrind/grindGuidance retains measured and calibration bounds; no PSD prior.",
+      "proposed_change": "NO_APPLICATION_CHANGE. Keep lab result as research-only; would require specific owner approval plus genuine espresso/grinder/sensory evidence before new universal numeric policy.",
+      "evidence_grade": "DIRECT_PEER_REVIEWED_PUBLISHER_ABSTRACT_ONLY_FULL_TEXT_UNAVAILABLE",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "RESEARCH_ONLY_SOURCE_BOUND_DOCUMENTATION_PR_PENDING_CI",
+      "test_plan": "Docs-only governance/approval and exact merged Git SHA verification; no app tests asserted PASS.",
+      "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY",
       "github267_literal_review_credit": 0,
       "production_deployed": false
     }
