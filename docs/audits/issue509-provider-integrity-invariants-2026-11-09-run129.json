@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "run129",
+  "date_utc": "2026-11-09",
+  "project_ref": "azviqqejypsefzilgonr",
+  "github": {
+    "development_parent_sha": "b788a97b45dbc26633f9bc32ef00272e2227d165",
+    "main_sha": "55c2bebcdcabda40e890ac25dcb9880ec789b5a4",
+    "release_production_sha": "2d0bed35e67f6a745a21cbd80616ad4c9a98ed41"
+  },
+  "provider": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003"
+  },
+  "methods": "Direct live read-only aggregate SELECT and catalog SQL, no personal identifiers/notes/shot rows/credentials/log text, no write/DDL/EXPLAIN ANALYZE; explicit per-invariant review and source comparison. Previously completed word-level receipts NOT newly credited.",
+  "reviewed_live_function_sources": [
+    {
+      "identity": "private.capture_equipment_snapshot()",
+      "definition_md5": "90c66b59638b48d360e9fd949db63707",
+      "chars": 1166,
+      "scope": "complete visible trigger source re-read: strict version/owner/setup/basket/calibration match, builds seven-field immutable equipment_snapshot"
+    },
+    {
+      "identity": "private.dic_capture_recommendation_context()",
+      "definition_md5": "962e12faeac2a7b5a671bd837c6c5c41",
+      "chars": 1760,
+      "scope": "complete visible trigger source re-read: context only set from bounded session setting when valid selected starting reference, optional otherwise"
+    },
+    {
+      "identity": "public.dic_apply_client_change(expected_owner uuid, mutation_id uuid, action text, payload jsonb)",
+      "definition_md5": "da434f17a21539d72ebb8fc04c13f214",
+      "chars": 1286,
+      "scope": "complete visible wrapper source re-read: save_shot injects recommendation context setting only when payload supplies it, direct owner binding"
+    }
+  ],
+  "source_review_credit": "TARGETED_REVIEW_OF_THREE_PREVIOUSLY_CREDITED_LIVE_SOURCES_NO_ADDITIONAL_WORD_COUNT",
+  "checks": [
+    {
+      "id": "personal_shot_ratio",
+      "evaluated": 26,
+      "mismatched_gt_0_05": 0,
+      "query_scope": "all nonnull public.shots rows; dose_g > 0",
+      "verdict": "NO_OBSERVED_MISMATCH"
+    },
+    {
+      "id": "community_shot_ratio",
+      "evaluated": 12,
+      "mismatched_gt_0_05": 0,
+      "query_scope": "all nonnull public.community_shots rows",
+      "verdict": "NO_OBSERVED_MISMATCH"
+    },
+    {
+      "id": "personal_family_cross_coffee_style",
+      "linked": 0,
+      "mismatched": 0,
+      "verdict": "VACUOUS_ZERO_LINKED_ROWS_NOT_EFFECTIVE_RUNTIME_PROOF"
+    },
+    {
+      "id": "contributor_shot_ownership",
+      "linked_owned": 12,
+      "mismatched": 0,
+      "verdict": "NO_OBSERVED_MISMATCH"
+    },
+    {
+      "id": "coffee_first_entry_submission_canonical",
+      "linked": 8,
+      "mismatched": 0,
+      "verdict": "NO_OBSERVED_MISMATCH"
+    },
+    {
+      "id": "shot_snapshot_presence",
+      "nonlegacy": 12,
+      "absent_snapshot": 0,
+      "absent_recommendation_context": 12,
+      "verdict": "SNAPSHOT_PRESENT; RECOMMENDATION_CONTEXT_OPTIONAL_BY_TRIGGER_SOURCE; NO_DEFECT_ESTABLISHED"
+    },
+    {
+      "id": "application_constraints",
+      "constraints": 266,
+      "unvalidated": 0,
+      "verdict": "ALL_VALIDATED_AT_OBSERVATION; DRIFT_CHECK_NOT_NEW_DDL_WORD_CREDIT"
+    },
+    {
+      "id": "application_custom_triggers",
+      "triggers": 24,
+      "disabled": 0,
+      "verdict": "ALL_ENABLED_AT_OBSERVATION; DRIFT_CHECK_NOT_NEW_DDL_WORD_CREDIT"
+    },
+    {
+      "id": "nonlegacy_snapshot_vs_immutable_equipment_versions",
+      "evaluated": 12,
+      "missing_version": 0,
+      "machine_mismatch": 0,
+      "grinder_mismatch": 0,
+      "burr_mismatch": 0,
+      "basket_mismatch": 0,
+      "basket_dose_mismatch": 0,
+      "finest_mismatch": 0,
+      "coarsest_mismatch": 0,
+      "calibration_mismatch": 0,
+      "verdict": "NO_OBSERVED_MISMATCH"
+    },
+    {
+      "id": "coffee_merge_graph",
+      "roots_with_cycles": 0,
+      "roots_over_depth_cap": 0,
+      "max_depth": 25,
+      "verdict": "NO_OBSERVED_CYCLE; BOUNDED_25_LINKS"
+    },
+    {
+      "id": "community_contribution_integrity",
+      "community_shots": 12,
+      "without_private_link": 0,
+      "orphan_shot": 0,
+      "source_revision_ahead": 0,
+      "verdict": "NO_OBSERVED_INCONSISTENCY"
+    },
+    {
+      "id": "library_entries_on_merged_coffees",
+      "linked": 0,
+      "verdict": "NO_OBSERVED_STALE_MERGED_REFERENCE"
+    }
+  ],
+  "queries_executed": [
+    "Read-only pg_class/pg_attribute/pg_constraint column and constraint mapping for 46 live app tables; first probe failed SQLSTATE 42725 due uncast contype char concatenation, corrected by contype::text; no application data effects.",
+    "Read-only pg_get_constraintdef for 11 relevant application tables to establish composite ownership, immutable equipment, family/coffee and Community foreign-key semantics.",
+    "Read-only aggregate SELECT comparing public.shots and public.community_shots ratio to yield/dose within 0.05; comparing private contributor ownership and first-entry canonical IDs; checking nonlegacy snapshot presence, 266 convalidated application constraints, 24 enabled custom application triggers.",
+    "Read-only seven-field JSONB equipment_snapshot equality aggregate over 12 nonlegacy shots joined to owner-scoped setup_versions, basket_versions and grinder_calibrations, including missing versions and grinder calibration mismatch.",
+    "Bounded depth-25 recursive public.coffees merge graph cycle aggregate; Community private contribution source_revision, missing links and orphan shot aggregate; library entries on merged coffee aggregate.",
+    "Read-only pg_stat_user_tables estimate of 12 selected small app relations for query scope; estimates not actual row counts.",
+    "Read-only complete targeted pg_get_functiondef for three function identities and MD5/length fingerprint; source is already credited in previous ledger.",
+    "Provider get_advisors(security/performance/health), list_edge_functions, list_migrations and get_project; unchanged known advisor classes not treated as reproduced defects."
+  ],
+  "verdict": "NO_NEW_CONFIRMED_DEFECT_OR_SAFE_REMOVAL; DATA_INTEGRITY_AGGREGATES_PASS_FOR_OBSERVED_ROWS; ALL_OTHER_PROVIDER_BASELINE_SCOPES_REMAIN_IN_PROGRESS",
+  "limitations": [
+    "Count-only snapshots reflect observation, not authenticated client behavior, production query performance or proof of every row in future.",
+    "Personal recipe family source mapping vacuously passed because 0 linked families.",
+    "Missing recommendation_context on 12 nonlegacy shots is not a defect; capture trigger only populates explicit member-selected starting reference. No verification of client selection rate.",
+    "All 3 function SQL texts already credited by earlier source receipts; no new full-provider word-level coverage is asserted.",
+    "Hosted JWT/PostgREST/Auth console and compiled native implementation remain UNVERIFIED; #96 owns real signed-in acceptance.",
+    "No raw private record, Auth user, personal note, secret or sensitive log returned or persisted."
+  ],
+  "source_changes": 0,
+  "provider_writes": false,
+  "production_deployment": false,
+  "baseline_complete": false,
+  "issue_state": "IN_PROGRESS",
+  "ci": "PENDING_EXACT_SOURCE_DOCUMENTATION_GOVERNANCE; Node22 and isolated PostgreSQL tests not invoked for no-code document-only evidence",
+  "next": "Continue first genuinely unreviewed/new changed provider definition or safe runtime proof beyond previously reviewed catalogs; extend bounded invariants if new source/data warrants; preserve #96/#267/#33 ownership."
+}
