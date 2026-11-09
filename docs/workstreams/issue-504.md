@@ -1725,3 +1725,27 @@ PR661 #33 narrow EA Sugar decaf selected parser already correct; PR662–665 #26
 **Safety:** Three audit document paths only; no app/source test edits, release queue status change, Locked change, source archive/oracle/backup deletion, main/release movement, SQL/Auth/Edge/member/provider write, forced Git, visibility, Netlify or publication. Node22/603/browser/mobile/offline/Auth/SQL **NOT_RUN_DOCS_ONLY**, exact PR-head and merged-source governance CI **PENDING, not PASS**. Status **IN_PROGRESS**; issue stays OPEN.
 
 **NEXT original:** [PR #677](https://github.com/Schulzet3/The-Dial-In-Collective/pull/677), title word **1**, then full description.
+
+
+---
+
+## Issue #504 G1-140 — November 9 UTC: original historical PR #677–684 direct-word review [skip netlify]
+
+Source: development at review `0194635164351eac1b1fbe1505adf02a0210042c`, actual commit parent `0194635164351eac1b1fbe1505adf02a0210042c`; main `adb9c6f27bf26da9cd944c51765dfd922893db0d`, release/production `2d0bed35e67f6a745a21cbd80616ad4c9a98ed41`. Issue #504, #267, #455, #33 and #96 OPEN. Current AGENTS.md, AI preflight/entrypoint, status, Master Spec, Decision Ledger, approval coverage, release queue, source register and this #504 journal consulted for authority, not credited as new audit. Repository PUBLIC during owner-approved #630 Nov4–30 temporary exception; no visibility mutation.
+
+Directly reviewed all returned title and body words 1–EOF from historical merged PR #677–684, **8 unique records / 937 original whitespace words / 8013 UTF-8 bytes**. Source original full title/body, GitHub object IDs, source times/head/merge SHA, SHA1-UTF8, inclusive word/physical line ranges, semantic findings and dispositions recorded in [G1-140 receipt](../audits/issue504-review-G1-140.json). All eight checked against prior ledger: no duplicate metadata credit; historical G1-117 -15 records/-4012 words correction retained. PR diffs, reviews, comments, already-counted original queue files and #267 code uncredited.
+
+PR #677 — 71 words: Historical #455 source-time READY reconciliation following the #676 undated-sweetness guard; 2466 Node passes were reported, original603 SKIPPED. Does not establish current publication.
+PR #678 — 109 words: Historical #33 selected Radial #538 on reused Colombia-named URL, current Guatemala Pablo and Eva evidence; guarded capture selector and tests only, not full original603 certification.
+PR #679 — 122 words: Historical #33 bounded selected Radial #538 source artifact hash and actual parser field adjudication, 1/1 source and 2470 Node passed; original603 workflow SKIPPED, not globally verified.
+PR #680 — 103 words: Historical #267 strict review of 60 frozen Decision Ledger lines and 60 pinned Python lines; source credit stays solely with #267.
+PR #681 — 80 words: Historical #267 next 50 frozen+50 pinned source lines. Strict receipt exists; no duplicate review credit and post-pin changes remain open.
+PR #682 — 193 words: Historical #455 Wadsworth paper confirms 22 scanned ground-coffee packs and air-analogue creeping flow, not validated sensory optimum; source-time PDF binary SHA unavailable.
+PR #683 — 171 words: Historical #504 queue original source lines 4399–4736 already credited in G1-022; PR title/body is separate GitHub object, not additional queue line review.
+PR #684 — 88 words: Historical #33 conditional roast #251 and sugarcane-decaf-method #361 guarded probes; source-time TESTING, not READY or current publication.
+
+Delegated independent verification: #267 frozen manifest F481 `src/server/coffee-identity-evidence.mjs`, blob `1cd583ad62de99b31123e637c3fc48751349e0d8`, original lines **4–6** matched 3/3 literal and all per-line semantic fields to strict N15 receipt blob `22b7ada15201d5d02e2fc9fbbd812f8f6132bc96`. Zero #504 code credit; full #267 V2 historical/current/post-pin incomplete.
+
+Cumulative corrected unique #504: 7919 original file lines/60754 words plus 860 GitHub metadata records/249435 words. No independently confirmed active #504 defect, removable current content, new Locked-policy decision or publication. Full GitHub-wide inventory, PR reviews/diffs, Actions/jobs/logs, branches/tags/commits/releases and new drift remain incomplete.
+
+Only three scoped audit docs in proposed atomic commit (new receipt, append-only ledger, journal), no app, tests, CI, product Locked, queue, backups/oracle, Auth/SQL/Edge/member/provider, main/release, visibility or Netlify edits. Actual runtime Node22/SQL/GoTrue/browser/mobile/offline/603 tests NOT_RUN_DOCS_ONLY; exact PR-head and merged-source governance CI must be observed, SKIPPED/queued not PASS. #504 remains OPEN/IN_PROGRESS. **NEXT** PR #685 title word 1 and full body.
