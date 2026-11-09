@@ -5,7 +5,7 @@ import {readFileSync,writeFileSync} from 'node:fs';
 import {join,resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
-import {R56_SELECTED,r56IdentityFailures,r56DryMillProvenance} from './issue33-r56-603-mill-origin-contract.mjs';
+import {r56IdentityFailures,r56DryMillProvenance} from './issue33-r56-603-mill-origin-contract.mjs';
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const root=process.env.DIC_ISSUE33_FOCUSED_PUBLIC_DIR;
 if(!root)throw Error('focused_artifact_dir_required');
