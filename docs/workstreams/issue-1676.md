@@ -51,3 +51,7 @@ Added owner-operator-only `pending_deletions` to the existing access overview, s
 ## Operator recovery button
 
 Admin Access renders the requesting admin's private unfinished operation receipts and an explicit Retry Completion control, even when the deleted Auth account is absent from member listings. It sends only the original immutable operation ID through the gated Edge function. Added JS recovery test. No new member deletion scope or production operations. Source CI after this change pending.
+
+## Prevent Restore Access during pending permanent deletion
+
+After `prepare`, the member's admission is revoked. The existing Admin Remove/Restore Access path now explicitly rejects changes for an account with an unfinished hard-delete operation; service retry additionally rejects any unexpectedly restored admission. This preserves the preview/Community snapshot while the GoTrue delete runs, without changing the reversible access behavior for other accounts. Disposable SQL regression added; no provider/member changes.

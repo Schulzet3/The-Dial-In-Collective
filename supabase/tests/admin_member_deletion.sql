@@ -100,6 +100,15 @@ DECLARE
  THEN RAISE EXCEPTION 'Keep operation not prepared'; END IF;
  IF (SELECT enabled FROM private.beta_members WHERE owner_id=keep_user)
  THEN RAISE EXCEPTION 'Prepared account retained member access'; END IF;
+ EXECUTE 'RESET ROLE';
+ PERFORM set_config('request.jwt.claim.sub',admin::text,true);
+ EXECUTE 'SET LOCAL ROLE authenticated';
+ blocked:=false;
+ BEGIN PERFORM public.dic_admin_set_member_access(keep_user,true);
+ EXCEPTION WHEN check_violation THEN blocked:=true; END;
+ IF NOT blocked THEN RAISE EXCEPTION 'Restore Access re-enabled a member mid-deletion'; END IF;
+ EXECUTE 'RESET ROLE';
+
  blocked:=false;
  BEGIN PERFORM public.dic_admin_account_delete_finish(op_keep,admin);
  EXCEPTION WHEN check_violation THEN blocked:=true; END;

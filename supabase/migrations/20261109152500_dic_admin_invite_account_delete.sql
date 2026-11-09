@@ -484,6 +484,11 @@ begin
      where id=op.id;
   op.phase:='prepared';op.contributor_ids:=ids;
  end if;
+ if op.phase='prepared' and exists(
+  select 1 from private.beta_members where owner_id=op.target_id and enabled
+ ) then
+  raise exception using errcode='23514',message='Admission unexpectedly restored while deleting.';
+ end if;
  return jsonb_build_object('ok',true,'target_id',op.target_id,'mode',op.community_mode,'phase',op.phase);
 end $fn$;
 revoke all on function private.dic_admin_account_delete_prepare(uuid,uuid) from public,anon,authenticated;
@@ -541,3 +546,44 @@ returns jsonb language sql volatile security invoker set search_path='' as $fn$
 $fn$;
 revoke all on function public.dic_admin_account_delete_finish(uuid,uuid) from public,anon,authenticated;
 grant execute on function public.dic_admin_account_delete_finish(uuid,uuid) to service_role;
+
+-- Same existing Admin-only admission function, with narrow pending-delete safeguard.
+create or replace function private.dic_admin_set_member_access(p_member_id uuid,p_enabled boolean)
+returns jsonb language plpgsql volatile security definer set search_path='' as $$
+declare actor uuid:=auth.uid();m private.beta_members;found_member uuid;
+begin
+ if actor is null or not private.is_admin() then
+  raise exception using errcode='42501',message='Administrator access required.';
+ end if;
+ if p_member_id is null or p_enabled is null then
+  raise exception using errcode='22023',message='Member and desired access are required.';
+ end if;
+ -- Never allow an administrator to revoke themself OR ANY administrator.
+ -- The underlying permanent admin role has no expiration.
+ if p_member_id=actor or exists(select 1 from private.app_admins where owner_id=p_member_id) then
+  raise exception using errcode='42501',message='Administrator accounts cannot be removed here.';
+ end if;
+ -- Permanently deleting a member supersedes reversible Restore/Remove.
+ if exists(select 1 from private.dic_admin_account_delete_operations
+   where target_id=p_member_id and phase<>'completed') then
+  raise exception using errcode='23514',message='Permanent deletion is underway; finish it before changing access.';
+ end if;
+ select * into m from private.beta_members where owner_id=p_member_id for update;
+ if not found or m.admitted_at is null then
+  raise exception using errcode='22023',message='Only previously admitted members can be changed.';
+ end if;
+ if p_enabled and not exists(select 1 from auth.users where id=p_member_id and email_confirmed_at is not null) then
+  raise exception using errcode='42501',message='Verified email required.';
+ end if;
+ if m.enabled=p_enabled then
+  return jsonb_build_object('ok',true,'enabled',p_enabled,'unchanged',true);
+ end if;
+ update private.beta_members set enabled=p_enabled
+ where owner_id=p_member_id returning owner_id into found_member;
+ insert into private.admin_access_events(actor_id,action,member_id)
+ values(actor,case when p_enabled then 'restore_access' else 'remove_access' end,found_member);
+ -- No auth.users deletion, note deletion, contribution identity reidentification,
+ -- historical mutation, or implicit sign-out of already issued Supabase tokens.
+ -- All member RPCs and RLS must recheck private.is_member().
+ return jsonb_build_object('ok',true,'enabled',p_enabled);
+end $$;
