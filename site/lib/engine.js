@@ -454,8 +454,12 @@ export function recommendation(s,coffeeId,options={}) {
  // Imported all-green taste scores remain preserved, but an unloggable
  // physical record cannot veto advice from a valid measured non-green shot.
  // Style-specific time/ratio *guidelines* are not validity constraints.
+ // A success on another basket, feed mode or grinder calibration is still
+ // valid history, but cannot veto feedback for this exact measured recipe
+ // context. Preserve successful families and all five original taste scores.
  const measuredLocalSuccess=measuredRecipeShots(s.shots).some(sh=>
   !sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&
+  sh.basketId===basket.id&&sh.feedMode===feed&&sh.calibrationId===v.calibrationId&&
   sh.dialedIn===true&&isDialed(sh.tasteScales));
  if(!options.ignoreAdvice&&last&&!measuredLocalSuccess){
   // Keep the recipe card consistent with fresh taste feedback, even before a
