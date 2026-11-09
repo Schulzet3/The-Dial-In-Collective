@@ -55,3 +55,7 @@ Admin Access renders the requesting admin's private unfinished operation receipt
 ## Prevent Restore Access during pending permanent deletion
 
 After `prepare`, the member's admission is revoked. The existing Admin Remove/Restore Access path now explicitly rejects changes for an account with an unfinished hard-delete operation; service retry additionally rejects any unexpectedly restored admission. This preserves the preview/Community snapshot while the GoTrue delete runs, without changing the reversible access behavior for other accounts. Disposable SQL regression added; no provider/member changes.
+
+## Actual SQL CI fixture failure diagnosed and fixed
+
+PR-head SQL run 42692499171 (job 129415617298) applied all migrations and passed earlier suites, then failed ONLY in the newly added recovery test: the assertion for an *unfinished* operation was mistakenly placed after `dic_admin_account_delete_finish` had already transitioned it to `completed`, so it correctly disappeared from pending overview. Moved the assertion to the exact post-GoTrue/pre-finalization interval, preserving runtime code and all existing safety assertions. Failed run remains FAILED, new exact-source CI pending. No production action.
