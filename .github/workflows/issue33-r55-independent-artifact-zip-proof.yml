@@ -1,0 +1,57 @@
+name: DIC Issue33 independently rehash R54/R55 selected raw ZIPs
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r55-independent-artifact-zip-proof.yml
+permissions:
+  actions: read
+  contents: read
+jobs:
+  independent-zip-source-proof:
+    name: independent-original603-597-r54-r55-zip
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - name: Download separately and rehash immutable original official-source artifacts
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          verify() {
+            local id="$1" digest="$2" bytecount="$3" html_digest="$4" source_sha="$5" expected_variety="$6"
+            local archive="${RUNNER_TEMP}/dic33-${id}.zip"
+            curl --fail --silent --show-error --location --retry 2 \
+              --header "Authorization: Bearer ${GH_TOKEN}" \
+              --header "Accept: application/vnd.github+json" \
+              --header "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/${id}/zip" -o "$archive"
+            test "$(stat -c '%s' "$archive")" = "$bytecount"
+            test "$(sha256sum "$archive" | cut -d ' ' -f1)" = "$digest"
+            unzip -tqq "$archive"
+            test "$(unzip -p "$archive" case-597.html | sha256sum | cut -d ' ' -f1)" = "$html_digest"
+            unzip -p "$archive" r54-594-597-600-afterproof.json | jq -e \
+              --arg src "$source_sha" --arg expected "$expected_variety" '
+              .source_sha==$src and .passed==true and .failures==[] and
+              .manual_certified==0 and .production_operations==0 and
+              ([.checks[]|select(.number==597)]|length)==1 and
+              (any(.checks[];
+                .number==597 and .original_identity_confirmed==true and
+                .raw_sha256_verified==true and .source_review==true and .add_coffee==true and
+                .fields.origin=="Meru, Kenya" and
+                (if $expected=="present" then
+                  .fields.variety=="SL28 and Ruiru 11" and
+                  .fields.elevation_m=="1400 meters above sea level" and
+                  .direct_variety==true and .direct_elevation==true
+                 else (.fields.variety==null and .fields.elevation_m==null) end)
+              ))' >/dev/null
+            printf 'VERIFIED ZIP artifact=%s bytes=%s SHA256=%s raw597_SHA256=%s source=%s variety=%s\n' \
+              "$id" "$bytecount" "$digest" "$html_digest" "$source_sha" "$expected_variety"
+          }
+          verify 13653437085 b58d3e416af091c85349fbbe36ce3e07f0e662b4f5d9637707fd954a2012c4d2 169005 \
+            ec3bdc78c5e41e7dfc1a76eb72949e83eb5b2c84f225515f13f236bc7d5e4c3a \
+            ce3bb4e1331ef811f5904633130e9f25e6c5e226 absent
+          verify 13656176118 8eed5b4dffd7bd128fdbe343c3318ef96976b61ffc7c08cb96df79b2b7ca9d25 169028 \
+            06a5da262e2c06567c4f6ddd2f45068c5231b8b541b530283db5754df2a22e52 \
+            94d72da6cde4b7d32176f6806c40c980825f49ac present
