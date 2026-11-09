@@ -14550,8 +14550,7 @@
     "source_fixes": 0,
     "baseline_complete": false,
     "next": "Distinct uncovered provider family/changed drift; never claim hosted RLS/JWT runtime or compiled native."
-  }
-,
+  },
   "provider_pg_authid_safe_roles_and_statement_numeric_run108": {
     "status": "SAFE_RAW_PG_AUTHID_30_OF_30_AND_NUMERIC_PG_STAT_STATEMENTS_001_TO_300_SNAPSHOT_ONLY",
     "project_ref": "azviqqejypsefzilgonr",
@@ -14593,5 +14592,41 @@
     "production_writes": false,
     "baseline_complete": false,
     "next": "Safe numeric statement metrics ordinal 301 after count and anchor recheck; compiled/hosted Auth/JWT/API and credential fields UNVERIFIED"
+  },
+  "provider_pg_stat_statements_numeric_run109": {
+    "status": "LIVE_PG_STAT_STATEMENTS_NUMERIC_301_TO_800_VOLATILE_FINGERPRINT_SNAPSHOT",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_development_parent": "371c8c9bbc17645fd48b7d5f70d3e2ac1e9964fc",
+    "source_main": "a4028e42b0d0316fd539c0563fd07832d509aed0",
+    "source_release": "92829cb6aff82aaec212eabbd921183e7997f1a7",
+    "reviewed_new": 500,
+    "reviewed_cumulative": 800,
+    "latest_total": 3956,
+    "counts_per_batch": [
+      3955,
+      3956,
+      3956,
+      3956,
+      3956
+    ],
+    "stats_reset": "2026-10-09 11:11:31.487298+00",
+    "previous_300_anchor": "-7780004331954541576",
+    "last_800_fingerprint": "-5518947567820046448",
+    "next_ordinal": 801,
+    "observations": {
+      "max_ge_5000ms": 0,
+      "max_ge_1000ms": 0,
+      "temp_io": 1,
+      "confirmed_bottleneck": 0
+    },
+    "receipt": "docs/audits/issue509-provider-pg-stat-statements-numeric-301-800-2026-11-09-run109.json",
+    "not_reviewed": [
+      "SQL text/plan",
+      "runtime Auth/JWT",
+      "native implementations"
+    ],
+    "no_production_writes": true,
+    "source_fixes": 0,
+    "baseline_complete": false
   }
 }
