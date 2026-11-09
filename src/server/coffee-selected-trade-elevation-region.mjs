@@ -1,8 +1,9 @@
-// Source-bound direct current product trade/elevation locality; not a gazetteer.
+// Source-bound selected Fair/Direct Trade + Organic, measured elevation,
+// at most two explicit locale segments; never a region guess or a gazetteer.
 const key=v=>String(v??'').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase().replace(/[^\p{L}\p{N}]/gu,'');
 const stale=/\b(?:previous(?:ly| lot| harvest| crop)?|formerly|historically|old lot|other coffees?|another coffee|different coffee|prior harvest|last year|for example|hypothetical|could be|may be|not from|no longer|used to|unlike)\b/iu;
 const other=/\b(?:related|recommendations?|you may also like|other coffees?|customer reviews?|testimonials?|education|past releases?|you might like)\b/iu;
-const caption=/(?:Fair\s+Trade\s*\/\s*Organic|Organic\s*\/\s*Fair\s+Trade)\s*[•·]\s*([\p{Lu}][\p{L}\p{M}'’ -]{2,55}?)\s*[•·]\s*(\d{3,4}\s*[-–]\s*\d{3,4}|\d{3,4})\s*(?:meters?|metres?|masl)\b/giu;
+const caption=/(?:(?:Fair|Direct)\s+Trade\s*\/\s*Organic|Organic\s*\/\s*(?:Fair|Direct)\s+Trade)\s*[•·]\s*([\p{Lu}][\p{L}\p{M}'’ -]{2,55}?(?:,\s*[\p{Lu}][\p{L}\p{M}'’ -]{2,40})?)\s*[•·]\s*(\d{3,4}\s*[-–]\s*\d{3,4}|\d{3,4})\s*(?:meters?|metres?|masl)\b/giu;
 export function selectedCurrentTradeElevationRegion({name='',origin='',blocks=[]}={}){
  if(typeof name!=='string'||name.length<13||name.length>180||
   typeof origin!=='string'||origin.length<4||origin.length>55||
