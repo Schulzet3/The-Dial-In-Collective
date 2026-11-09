@@ -1,3 +1,17 @@
+## Issue #504 G1-141 — 2026-11-09 UTC, eight complete original PR title/body metadata semantic reviews [skip netlify]
+
+**Source snapshot:** development `7a64821e9e95afa3e2984879a23a842dc41e7a89`, main `adb9c6f27bf26da9cd944c51765dfd922893db0d`, release/production `2d0bed35e67f6a745a21cbd80616ad4c9a98ed41`. GitHub temporarily PUBLIC only under owner #630 Nov4–30, no settings change. Current operating entrypoint/preflight, status, Master Spec, Decision Ledger, approval matrix, queue/source register, active #504/#267/#455/#33/#96 and live PR/workflow state consulted as authority, not semantic credit.
+
+**Direct source-bound review:** Every returned original title and full description word 1–EOF of historical merged PRs **#685–#692**: **8 previously uncredited GitHub metadata objects / 1043 Unicode-whitespace words / 9064 UTF-8 bytes**. Per-ID title and body exact text, SHA1, timestamps, original PR source/merge SHA, line/word bounds and historical/current disposition recorded in [immutable receipt](../audits/issue504-review-G1-141.json); original PR diff/reviews/comments and previously reviewed frozen queue lines not credited. Prior G1-117 -15/-4012 duplicate correction retained. Corrected cumulative **7,919 original file lines / 60,754 file words plus 868 GitHub metadata records / 250478 words**.
+
+**Semantics:** #685/#686 selected #361 sugarcane-method #33 TESTING followed by narrowly certified READY, not universal 603 pass or publication; #687–690 #267 frozen/pinned line receipts historical only; #691 prior missing index-pointer defect already repaired without new line credit; #692 previous #504 original queue evidence and release status, original source lines not reread or recredited. No newly independently demonstrated present #504-owned bug, safe deletion, privacy incident or owner-policy decision. #267/#455/#33/#96 workstreams untouched. Independently checked #267 frozen F481 `src/server/coffee-identity-evidence.mjs:7–9` original blob `1cd583ad62de99b31123e637c3fc48751349e0d8` against exact per-line N15 receipt blob `22b7ada15201d5d02e2fc9fbbd812f8f6132bc96`, **3/3 literal and semantic fields**, zero #504 code credit. Broad review still incomplete.
+
+**Change/tests:** Proposed three docs-only paths in same commit: new receipt, append-only ledger, scoped journal. Node22 app, hosted SQL/Auth, browser/mobile/offline/original603 **NOT_RUN_DOCS_ONLY**; applicable exact-source governance CI pending until observable. No code/test/queue/release/main/production/provider/member/oracle/backup/Locked/visibility changes, no deployment.
+
+**NEXT** original [PR #693](https://github.com/Schulzet3/The-Dial-In-Collective/pull/693), **title word 1** and entire body. Issue #504 OPEN / IN_PROGRESS, global source inventory/direct coverage incomplete.
+
+---
+
 ## Issue #504 G1-105 — November 8 UTC: eight complete historical original #96 comments [skip netlify]
 
 **Live recover:** development `005f2c57f81f0ddd5ee9f30f6ea488abd7e1a248`, main `bd627d40f7e65321323512b303d2e3f75709af39`, release/production `2ec10324fcaa4b60d1e48240b44b77b141b9ba54`. #504/#267/#455/#33/#96 remain OPEN. GitHub is temporarily PUBLIC by owner-approved #630 Nov4–30; no visibility change. Current AGENTS, entrypoint/preflight, status, specification/decisions/approval coverage, queue and source register consulted for authority, not double-credited as direct review.
