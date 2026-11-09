@@ -25,6 +25,6 @@ export function selectedCurrentAdjacentHeroRegion(html,{name='',origin=''}={}){
  const prefix=visible.slice(0,matches[0].index||0);
  if(/\b(?:last year|previous(?:ly)?|formerly|historic(?:al)?|another|other coffee|related|recommended|no longer|not from|different coffee|old lot)\b/iu.test(prefix))return null;
  const [,part1,part2]=matches[0];
- if(/\b(?:coffee|roast|flavou?r|notes|process|blend|farmers?|beans?|origin|region|unknown|decaf|honey|natural|washed)\b/iu.test(part1+' '+part2)||norm(part1)===norm(part2))return null;
+ if(/\b(?:coffee|roast|flavou?r|notes|process|blend|farmers?|beans?|origin|region|unknown|decaf|honey|natural|washed|chocolate|cherry|caramel|vanilla|cocoa|orange|lemon|lime|grapefruit|peach|plum|berry|berries|nutmeg|citrus|floral|fruit|sweet|syrup|almond|praline|hazelnut)\b/iu.test(part1+' '+part2)||norm(part1)===norm(part2))return null;
  return {value:[part1.trim(),part2.trim(),origin].join(', '),quote:matches[0][0].trim()};
 }
