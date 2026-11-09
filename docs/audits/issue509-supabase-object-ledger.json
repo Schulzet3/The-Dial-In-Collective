@@ -3251,6 +3251,19 @@
       "production_writes": false,
       "baseline_complete": false,
       "next": "New provider-definition family or changed-object drift"
+    },
+    {
+      "run": "2026-11-09 #509 Run116b pg_cast 229 direct catalog semantic review",
+      "provider_ref": "azviqqejypsefzilgonr",
+      "development_parent_sha": "4eb0b3160fff45b5248e1b37ade8aff50629ef78",
+      "reviewed": 229,
+      "scope": "Full cast source/target, coercion context, execution method, function signatures and per-object catalog identity; no native binary source",
+      "evidence_path": "docs/audits/issue509-provider-pg-cast-001-229-2026-11-09-run116b.json",
+      "verified_new_defects": 0,
+      "source_fixes": 0,
+      "production_writes": false,
+      "baseline_complete": false,
+      "next": "Provider pg_conversion 128 definitions or pg_collation identities"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -15030,5 +15043,31 @@
     "production_writes": false,
     "baseline_complete": false,
     "next": "Review distinct uncovered pg_cast/pg_conversion source definitions or changed-object drift"
+  },
+  "provider_pg_cast_run116b": {
+    "status": "DIRECT_FULL_VISIBLE_CATALOG_CAST_DEFINITION_SEMANTICS",
+    "source_development_parent_sha": "4eb0b3160fff45b5248e1b37ade8aff50629ef78",
+    "observed_at": "2026-11-09 10:01:57.847186+00",
+    "reviewed": 229,
+    "total": 229,
+    "non_pg_catalog": 0,
+    "by_method": {
+      "f": 160,
+      "b": 64,
+      "i": 5
+    },
+    "by_context": {
+      "a": 77,
+      "i": 117,
+      "e": 35
+    },
+    "invalid_binding": 0,
+    "receipt_path": "docs/audits/issue509-provider-pg-cast-001-229-2026-11-09-run116b.json",
+    "compiled_native_implementations": "UNVERIFIED",
+    "confirmed_new_defects": 0,
+    "source_fixes": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "Review distinct unreviewed pg_conversion/pg_collation, no duplicate prior DDL source credit"
   }
 }
