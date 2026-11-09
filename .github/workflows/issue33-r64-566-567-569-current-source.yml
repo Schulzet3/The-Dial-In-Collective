@@ -1,0 +1,45 @@
+name: DIC Issue33 R64 original603 566 567 569 current selected source
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r64-566-567-569-current-source.yml
+      - scripts/audit/issue33-r64-566-567-569-source-contract.mjs
+      - scripts/audit/issue33-r64-566-567-569-afterproof.mjs
+      - tests/coffee-issue33-r64-566-567-569-source-contract.test.mjs
+      - src/server/coffee-page-metadata.mjs
+      - src/server/coffee-product-scope.mjs
+permissions:
+  contents: read
+jobs:
+  selected-r64:
+    name: original603-566-567-569-current-selected-review
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Focused selected identity and hostile regression tests
+        run: node --test tests/coffee-issue33-r64-566-567-569-source-contract.test.mjs
+      - name: Guarded exact selected public HTTPS and actual Add Coffee
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r64-566-567-569
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '566,567,569'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Exact fresh selected source hash and identity afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r64-566-567-569
+        run: node scripts/audit/issue33-r64-566-567-569-afterproof.mjs
+      - name: Retain one-day source HTML JSON and verdict
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r64-566-567-569-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r64-566-567-569/
+          if-no-files-found: error
+          retention-days: 1
