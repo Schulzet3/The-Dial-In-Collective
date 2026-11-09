@@ -1,0 +1,54 @@
+name: DIC Issue33 R56 independent selected 603 ZIP artifact source proof
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r56-independent-603-zip-proof.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  independent-source-byte-rehash:
+    name: original603-603-independent-zip-sha256
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - name: Independently download and rehash exact R56 official-source ZIP and selected HTML
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          archive="${RUNNER_TEMP}/dic33-r56-603.zip"
+          curl --fail --silent --show-error --location --retry 2 \
+            --header "Authorization: Bearer ${GH_TOKEN}" \
+            --header "Accept: application/vnd.github+json" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/13658658145/zip" -o "$archive"
+          test "$(stat -c '%s' "$archive")" = '43176'
+          test "$(sha256sum "$archive" | cut -d ' ' -f1)" = 'a767c8b7307a37ec6919110dada40eb439e47444ef9b06154fc1e323985c9bfc'
+          unzip -tqq "$archive"
+          test "$(unzip -p "$archive" case-603.html | sha256sum | cut -d ' ' -f1)" = '4534600a8554d9b5cf662f3edeeb7cae31cd85befdec1bd734aa46c1f0f91d15'
+          proof_sha="$(unzip -p "$archive" focused-current-evidence.json | sha256sum | cut -d ' ' -f1)"
+          unzip -p "$archive" focused-current-evidence.json | jq -e \
+            '.source_sha=="6a0c0551005bdd8fa4c6439cb801cc0193e25539" and .manual_certified==0 and
+             .production_operations==0 and .real_auth==false and .original_corpus_modified==false and
+             .case_numbers==[603] and (.records|length)==1 and
+             .records[0].status=="FETCHED" and .records[0].selected_heading_identity_verified==true and
+             .records[0].current_fields.name=="Nicaragua Segovia, 1 lb (16 oz)" and
+             .records[0].current_fields.origin=="Nicaragua" and
+             .records[0].add_coffee_ui_rendered==true and
+             .records[0].source_review_rendered==true and
+             .records[0].html_sha256=="4534600a8554d9b5cf662f3edeeb7cae31cd85befdec1bd734aa46c1f0f91d15"' >/dev/null
+          unzip -p "$archive" r56-603-mill-origin-afterproof.json | jq -e \
+            --arg evidence "$proof_sha" \
+            '.source_sha=="6a0c0551005bdd8fa4c6439cb801cc0193e25539" and
+             .evidence_sha256==$evidence and .passed==true and .failures==[] and
+             .manual_certified==0 and .production_operations==0 and
+             .observed.selected_source_mill_provenance.selectedDryMillTown==true and
+             .observed.selected_source_mill_provenance.expresslyGrownInThatTown==false and
+             .observed.actual_origin=="Nicaragua" and .observed.actual_process==null and
+             .observed.add_coffee==true and .observed.source_review==true and
+             .observed.raw_html_verified==true' >/dev/null
+          echo 'VERIFIED original603 #603 ZIP artifact 13658658145 SHA256 a767c8b7307a37ec6919110dada40eb439e47444ef9b06154fc1e323985c9bfc'
+          echo 'VERIFIED original603 #603 exact raw HTML 184856 bytes SHA256 4534600a8554d9b5cf662f3edeeb7cae31cd85befdec1bd734aa46c1f0f91d15'
