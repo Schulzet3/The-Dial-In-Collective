@@ -1,0 +1,273 @@
+{
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "source_branch": "development/backend-foundation",
+  "source_parent_sha": "37bbd371d818c5bfb17ddc4026f95207d222092e",
+  "scope": "Current visible complete SQL + five authorization/quality helpers; NEW cross-function privilege/guard assessment of existing source, NOT new baseline function-source word credit",
+  "provider_version": "PostgreSQL 17.11.0.003",
+  "review_date_utc": "2026-11-09",
+  "reviewed_rpc_count": 10,
+  "reviewed_helper_count": 5,
+  "security_advisory": "authenticated_security_definer_function_executable; 10 WARN entries; source and grants examined, warning alone is not proof of exploit",
+  "safe_sql_proof": {
+    "sql": "SELECT (NOT NULL::boolean AND TRUE) IS TRUE AS null_enforces_limit, (NOT FALSE AND TRUE) IS TRUE AS false_enforces_limit",
+    "observed": {
+      "null_enforces_limit": false,
+      "false_enforces_limit": true
+    },
+    "known_not_new": true
+  },
+  "canonical_source_caller_check": "supabase/migrations/20261022220200_dic_preview_two_phase_cache.sql; supabase/tests/preview_two_phase_cache.sql; currently ACTIVE deployed dic-preview-coffee v4 uses separate trusted dic_url_preview_claim service-role path, not p_cached",
+  "functions": [
+    {
+      "object": "public.dic_browse_community_shots(p_limit integer, p_offset integer)",
+      "definition_md5": "edcc2c6a9fb24b3455a446d964a2ed2d",
+      "complete_source_chars": 3222,
+      "complete_source_lines": 66,
+      "complete_ddl_read": true,
+      "auth_execute": true,
+      "anon_execute": false,
+      "anon_schema_usage": true,
+      "security_definer": true,
+      "security_search_path": [
+        "search_path=\"\""
+      ],
+      "verdict": "INTENTIONAL_MEMBER_GUARDED_RPC_NO_NEW_CONFIRMED_ACCESS_VIOLATION",
+      "cross_function_semantic_check": "private.require_member() must pass; page 1-40 and offset <=2000; returns eligible verified Community shots and aggregate counts without member identifiers; no direct source-member record returned.",
+      "source_body_preserved_in_provider": "pg_get_functiondef_at_2026_11_09",
+      "original_source_word_review_recredited": false,
+      "actual_hosted_authenticated_api_test": "NOT_RUN"
+    },
+    {
+      "object": "public.dic_claim_universal_preview()",
+      "definition_md5": "8f4bc6ecd8687594ff7200cda26104b5",
+      "complete_source_chars": 618,
+      "complete_source_lines": 20,
+      "complete_ddl_read": true,
+      "auth_execute": true,
+      "anon_execute": false,
+      "anon_schema_usage": true,
+      "security_definer": true,
+      "security_search_path": [
+        "search_path=\"\""
+      ],
+      "verdict": "INTENTIONAL_MEMBER_GUARDED_RPC_NO_NEW_CONFIRMED_ACCESS_VIOLATION",
+      "cross_function_semantic_check": "auth.uid/role, private.is_member() and confirmed-email check precede private.dic_shared_preview_claim; quota is server-enforced on this path.",
+      "source_body_preserved_in_provider": "pg_get_functiondef_at_2026_11_09",
+      "original_source_word_review_recredited": false,
+      "actual_hosted_authenticated_api_test": "NOT_RUN"
+    },
+    {
+      "object": "public.dic_community_evidence_counts(p_coffee_id uuid, p_style text)",
+      "definition_md5": "1bddea7e3160c0282bea1d6e74d1fbaf",
+      "complete_source_chars": 694,
+      "complete_source_lines": 18,
+      "complete_ddl_read": true,
+      "auth_execute": true,
+      "anon_execute": false,
+      "anon_schema_usage": true,
+      "security_definer": true,
+      "security_search_path": [
+        "search_path=\"\""
+      ],
+      "verdict": "INTENTIONAL_MEMBER_GUARDED_RPC_NO_NEW_CONFIRMED_ACCESS_VIOLATION",
+      "cross_function_semantic_check": "private.require_member() precedes counting eligible/verified community contributions; returns only aggregate shot/contributor counts.",
+      "source_body_preserved_in_provider": "pg_get_functiondef_at_2026_11_09",
+      "original_source_word_review_recredited": false,
+      "actual_hosted_authenticated_api_test": "NOT_RUN"
+    },
+    {
+      "object": "public.dic_community_recommendation_evidence(p_library_entry_id uuid, p_style text)",
+      "definition_md5": "085f92a3814dce624e5b9a3759e893ef",
+      "complete_source_chars": 6171,
+      "complete_source_lines": 112,
+      "complete_ddl_read": true,
+      "auth_execute": true,
+      "anon_execute": false,
+      "anon_schema_usage": true,
+      "security_definer": true,
+      "security_search_path": [
+        "search_path=\"\""
+      ],
+      "verdict": "INTENTIONAL_MEMBER_GUARDED_RPC_NO_NEW_CONFIRMED_ACCESS_VIOLATION",
+      "cross_function_semantic_check": "private.require_member() and library_entries.owner_id=me guard target; rejects unapproved style; excludes calling member from independent contributor aggregation; projected result excludes identity.",
+      "source_body_preserved_in_provider": "pg_get_functiondef_at_2026_11_09",
+      "original_source_word_review_recredited": false,
+      "actual_hosted_authenticated_api_test": "NOT_RUN"
+    },
+    {
+      "object": "public.dic_confirm_community_outlier(p_shot_id uuid, p_expected_revision bigint)",
+      "definition_md5": "0657114255a0375b7f3fc502f780aa54",
+      "complete_source_chars": 1432,
+      "complete_source_lines": 33,
+      "complete_ddl_read": true,
+      "auth_execute": true,
+      "anon_execute": false,
+      "anon_schema_usage": true,
+      "security_definer": true,
+      "security_search_path": [
+        "search_path=\"\""
+      ],
+      "verdict": "INTENTIONAL_MEMBER_GUARDED_RPC_NO_NEW_CONFIRMED_ACCESS_VIOLATION",
+      "cross_function_semantic_check": "private.require_member(); selected shot must have caller owner_id and expected revision, matching linked held Community record and extreme_outlier reason; only then runs server-side quality re-review.",
+      "source_body_preserved_in_provider": "pg_get_functiondef_at_2026_11_09",
+      "original_source_word_review_recredited": false,
+      "actual_hosted_authenticated_api_test": "NOT_RUN"
+    },
+    {
+      "object": "public.dic_my_community_outliers()",
+      "definition_md5": "312b59594de640adacb12ab0aa0d18e4",
+      "complete_source_chars": 1318,
+      "complete_source_lines": 35,
+      "complete_ddl_read": true,
+      "auth_execute": true,
+      "anon_execute": false,
+      "anon_schema_usage": true,
+      "security_definer": true,
+      "security_search_path": [
+        "search_path=\"\""
+      ],
+      "verdict": "INTENTIONAL_MEMBER_GUARDED_RPC_NO_NEW_CONFIRMED_ACCESS_VIOLATION",
+      "cross_function_semantic_check": "private.require_member(); query filters s.owner_id=member_id, hidden_at null, dialed-in and held extreme-outlier state; returns only own shot/revision details.",
+      "source_body_preserved_in_provider": "pg_get_functiondef_at_2026_11_09",
+      "original_source_word_review_recredited": false,
+      "actual_hosted_authenticated_api_test": "NOT_RUN"
+    },
+    {
+      "object": "public.dic_preview_cached_verified(p_source_url text)",
+      "definition_md5": "86a08b5ae97f89c13b8c727ebdd0c50f",
+      "complete_source_chars": 1658,
+      "complete_source_lines": 32,
+      "complete_ddl_read": true,
+      "auth_execute": true,
+      "anon_execute": false,
+      "anon_schema_usage": true,
+      "security_definer": true,
+      "security_search_path": [
+        "search_path=\"\""
+      ],
+      "verdict": "INTENTIONAL_MEMBER_GUARDED_RPC_NO_NEW_CONFIRMED_ACCESS_VIOLATION",
+      "cross_function_semantic_check": "auth.uid/role/admitted member/email guard; verified unmerged public catalog exact unique source match; no owner/private user data returned.",
+      "source_body_preserved_in_provider": "pg_get_functiondef_at_2026_11_09",
+      "original_source_word_review_recredited": false,
+      "actual_hosted_authenticated_api_test": "NOT_RUN"
+    },
+    {
+      "object": "public.dic_preview_complete(p_ticket uuid)",
+      "definition_md5": "abc5f79b029d51593f29fe4774488d0b",
+      "complete_source_chars": 1145,
+      "complete_source_lines": 23,
+      "complete_ddl_read": true,
+      "auth_execute": true,
+      "anon_execute": false,
+      "anon_schema_usage": true,
+      "security_definer": true,
+      "security_search_path": [
+        "search_path=\"\""
+      ],
+      "verdict": "INTENTIONAL_MEMBER_GUARDED_RPC_NO_NEW_CONFIRMED_ACCESS_VIOLATION",
+      "cross_function_semantic_check": "auth.uid/role/admitted-member guard, owner-scoped row lock, 25-second ticket match, capped attempts and single-use ticket invalidation; email is enforced upstream at ticket issue, not independently here.",
+      "source_body_preserved_in_provider": "pg_get_functiondef_at_2026_11_09",
+      "original_source_word_review_recredited": false,
+      "actual_hosted_authenticated_api_test": "NOT_RUN"
+    },
+    {
+      "object": "public.dic_preview_preflight(p_cached boolean)",
+      "definition_md5": "a437026d8c1b75f0db24c0ef840cae24",
+      "complete_source_chars": 1967,
+      "complete_source_lines": 41,
+      "complete_ddl_read": true,
+      "auth_execute": true,
+      "anon_execute": false,
+      "anon_schema_usage": true,
+      "security_definer": true,
+      "security_search_path": [
+        "search_path=\"\""
+      ],
+      "verdict": "INTENTIONAL_MEMBER_GUARDED_RPC_NO_NEW_CONFIRMED_ACCESS_VIOLATION",
+      "cross_function_semantic_check": "auth.uid/role/admitted-member/email checks, owner-scoped lock and 30-second cooldown; cached branch avoids daily claim. PRIOR KNOWN OBSERVATION: explicit NULL p_cached suppresses preflight daily-cap IF and issues ticket; completion separately enforces cap. No demonstrated payable/production quota bypass.",
+      "source_body_preserved_in_provider": "pg_get_functiondef_at_2026_11_09",
+      "original_source_word_review_recredited": false,
+      "actual_hosted_authenticated_api_test": "NOT_RUN"
+    },
+    {
+      "object": "public.dic_search_community_shots(p_query text, p_style text, p_limit integer, p_offset integer)",
+      "definition_md5": "1124d2bbfec7f47d38d06ceb2e049fe4",
+      "complete_source_chars": 3949,
+      "complete_source_lines": 74,
+      "complete_ddl_read": true,
+      "auth_execute": true,
+      "anon_execute": false,
+      "anon_schema_usage": true,
+      "security_definer": true,
+      "security_search_path": [
+        "search_path=\"\""
+      ],
+      "verdict": "INTENTIONAL_MEMBER_GUARDED_RPC_NO_NEW_CONFIRMED_ACCESS_VIOLATION",
+      "cross_function_semantic_check": "private.require_member(); bounds search <=80 chars, style <=40, page 1-40, offset <=2000; only eligible/verified records, aggregate contributor counts, no member identities.",
+      "source_body_preserved_in_provider": "pg_get_functiondef_at_2026_11_09",
+      "original_source_word_review_recredited": false,
+      "actual_hosted_authenticated_api_test": "NOT_RUN"
+    }
+  ],
+  "helpers": [
+    {
+      "object": "private.dic_community_fingerprint",
+      "definition_md5": "06eaeadaef87a445b99d431ae67dd409",
+      "chars": 478,
+      "reviewed_current_full_body": true,
+      "dependent_role": "AUTHORIZATION_OR_QUALITY_HELPER",
+      "source_line_review_new_credit": false
+    },
+    {
+      "object": "private.dic_review_community_shot",
+      "definition_md5": "c5aea4d32aa8027a39d80341feade406",
+      "chars": 7734,
+      "reviewed_current_full_body": true,
+      "dependent_role": "AUTHORIZATION_OR_QUALITY_HELPER",
+      "source_line_review_new_credit": false
+    },
+    {
+      "object": "private.dic_shared_preview_claim",
+      "definition_md5": "b99b6cbd392562af334c68e056ce33d8",
+      "chars": 1380,
+      "reviewed_current_full_body": true,
+      "dependent_role": "AUTHORIZATION_OR_QUALITY_HELPER",
+      "source_line_review_new_credit": false
+    },
+    {
+      "object": "private.is_member",
+      "definition_md5": "dbc163d07f45e8b5831f6a6394a70ab8",
+      "chars": 257,
+      "reviewed_current_full_body": true,
+      "dependent_role": "AUTHORIZATION_OR_QUALITY_HELPER",
+      "source_line_review_new_credit": false
+    },
+    {
+      "object": "private.require_member",
+      "definition_md5": "27ff3a2a7fcf231171778a2d584b1851",
+      "chars": 347,
+      "reviewed_current_full_body": true,
+      "dependent_role": "AUTHORIZATION_OR_QUALITY_HELPER",
+      "source_line_review_new_credit": false
+    }
+  ],
+  "findings": {
+    "new_confirmed_defects": 0,
+    "new_repairs": 0,
+    "unverified": [
+      "PostgREST effective schema/API configuration and hosted signed-in requests",
+      "Compiled native/provider code and third-party SDK runtime behavior",
+      "Proof that forged NULL p_cached can yield any additional successful paid/fetched preview: not established"
+    ]
+  },
+  "boundary": {
+    "production_writes": false,
+    "member_record_access": false,
+    "auth_identity_access": false,
+    "credentials_read": false,
+    "edge_deploy": false,
+    "app_code_changed": false
+  },
+  "next": "Next distinct current provider definition family or changed-object drift; do not repeat these 10 source word-level inspections without a new hash change"
+}

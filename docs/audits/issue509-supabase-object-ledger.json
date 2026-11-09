@@ -3312,6 +3312,16 @@
       "confirmed_new_defects": 0,
       "provider_writes": false,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-09 #509 Run123 public RPC definer member/owner/preview cross-function security guards",
+      "source_parent_sha": "37bbd371d818c5bfb17ddc4026f95207d222092e",
+      "receipt_path": "docs/audits/issue509-provider-public-rpc-definer-guards-2026-11-09-run123.json",
+      "reviewed_exposed_rpcs": 10,
+      "reviewed_private_helpers": 5,
+      "confirmed_new_defects": 0,
+      "provider_writes": false,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -15314,5 +15324,19 @@
     "visible_opclass_family": "COMPLETE_179_179",
     "compiled_native": "UNVERIFIED",
     "next_cursor": "New distinct unreviewed provider definition family or changed object; SQL statement queries, hosted JWT/Auth/API and compiled native still UNVERIFIED"
+  },
+  "provider_public_rpc_guard_run123": {
+    "source_parent_sha": "37bbd371d818c5bfb17ddc4026f95207d222092e",
+    "receipt_path": "docs/audits/issue509-provider-public-rpc-definer-guards-2026-11-09-run123.json",
+    "source_rpc_count": 10,
+    "helper_count": 5,
+    "current_auth_executable": 10,
+    "anon_executable": 0,
+    "confirmed_new_defects": 0,
+    "repairs": 0,
+    "prior_nullable_preflight_observation_revalidated": true,
+    "production_mutation": false,
+    "baseline_complete": false,
+    "scope": "Cross-function authorization guard semantic analysis; re-read source words not double-credited to baseline"
   }
 }
