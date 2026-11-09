@@ -10692,24 +10692,35 @@
     {
       "id": "DIC-Q-455-offline-idempotent-existing-shot-replay",
       "issue": 455,
-      "pr": null,
+      "pr": 1731,
       "title": "Keep existing saved offline shots idempotent across retired style and partial historical rating validation",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "f8d3d2727abe4d6d61d486522f506ef1777c0a7d",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
         "R146 exact source old engine blob c91656d7cef5fd0621d883d433f0c0b519359dbe validated new-shot style/rating inputs before checking an existing shot ID: a once-saved historical Custom shot or partial legacy rating cannot be idempotently returned on replay even though no new shot is being created.",
         "Focused synthetic Node22 regressions: existing historical Custom return preserves notes and five original values; partial legacy rating never invented green; reused ID for a different coffee throws without mutation; fresh Custom/incomplete ratings still rejected; valid new Turbo shot remains saved once. Exact-source CI PENDING.",
-        "PR1731 original approval run 42705719614 FAILED genuine queue schema validation: scope_paths included a test file even though queue only admits deployable source paths. Fixed intake metadata only, preserved engine and test blob bytes; retesting exact corrected PR HEAD required."
+        "PR1731 original approval run 42705719614 FAILED genuine queue schema validation: scope_paths included a test file even though queue only admits deployable source paths. Fixed intake metadata only, preserved engine and test blob bytes; retesting exact corrected PR HEAD required.",
+        "Initial PR-head approval run42705719614 FAILED genuine scope_paths queue validation (test file incorrectly marked deployable), docs-only correction PR1731 head1fa72738; current final PR head e4d3c8c6... governance run42706044312 SUCCESS, old failure retained for traceability.",
+        "Final PR1731 exact tested head e4d3c8c6e1d9107a8a6310954a6ec06ea6598c21: Node22/lint run42706044474 SUCCESS 3281 total/3275 pass/0 fail/6 intentional skip, including five distinct R146 cases; mobile/browser and cloud run42706044615 SUCCESS; isolated SQL42706044327, source security42706044626, approval42706044312 SUCCESS; frozen60342706044320 SKIPPED not PASS.",
+        "Nonforce source merge f8d3d2727abe4d6d61d486522f506ef1777c0a7d exactly 4 changed file paths, engine d262f7343ef2556effc7572b86e7ecc026449288, R146 tests 65423e8edf87627105e48c298b10ab272ddec819, queue 6021bac448aa375ce9a567f1d422d0a86affd1bc and journal 891821d218a9eef1e7adf799a4d007f82e691b3c blobs identical to tested head. Exact merged Node22/lint run42706560371 SUCCESS 3275 pass/0 fail/6 skip, mobile/browser/cloud42706560148 and governance42706560241 SUCCESS. Merged isolated SQL/security not triggered, not claimed PASS at merge; code unchanged from PR head where those succeeded. No real member/provider write or physical espresso validation."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "PENDING_PR_HEAD_CI_AND_SOURCE_MERGE"
+      "ci_runs": [
+        42705719614,
+        42706044474,
+        42706044615,
+        42706044327,
+        42706044626,
+        42706044312,
+        42706560371,
+        42706560148,
+        42706560241
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Owner-authorized SAFE Locked-compatible data-integrity and offline repeat-save guard; no new product behavior, tastes, targets or data collection. TESTING only, never READY until exact merged-source CI and Git-blob/queue verification. Development-only; no deployment or production/provider/member writes."
+      "notes": "READY on development only, NOT deployed. Restores immutable saved same-coffee historical/retired Custom or incomplete-rating offline idempotent replay, keeping new-shot five taste/active style validation and foreign-coffee ID rejection. Applicable exact PR-head and merged-source Node22/UX/SQL/security/governance supported; frozen603 not run. Initial governance scope failure corrected, preserved as FAILURE in receipts. No Locked change, deployment or production provider/member data mutation."
     }
   ],
   "history": [
