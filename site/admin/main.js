@@ -361,6 +361,19 @@ async function start(){
       actionMessage('Invitation deleted and revoked. Existing accounts were not affected.');
      });return;
    }
+   if(action==='retry-account-delete'){
+     if(!globalThis.confirm?.('Retry the previous authorized account deletion? This may complete its existing Keep/Remove Community choice.'))return;
+     guarded(async()=>{
+      const {data,error}=await sdk.functions.invoke('dic-delete-member-account',{
+       body:{operation_id:id}
+      });
+      if(invalidated)return;
+      if(error||!data?.ok||!data?.completed)
+       throw new Error('Deletion remains incomplete. Review the issue and retry this operation.');
+      await refresh();
+      actionMessage('Previous account deletion has completed.');
+     });return;
+   }
    if(action==='delete-account'){
      guarded(async()=>{
       const impact=await adminRpc('dic_admin_account_delete_preview',{p_member_id:id});

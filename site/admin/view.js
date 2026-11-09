@@ -128,6 +128,14 @@ export function renderAdminAccessPanel(access={},issued=null,accountPage=null,in
    ${admin?'<span class="admin-protected">Protected</span>':`<div class="admin-member-actions"><button type="button" class="ghost compact" data-action="${enabled?'remove-member':'restore-member'}" data-id="${e(String(row.id||''))}">${enabled?'Remove Access':'Restore Access'}</button><button type="button" class="ghost compact admin-delete-action" data-action="delete-account" data-id="${e(String(row.id||''))}">Delete Account</button></div>`}
   </li>`;
  }).join('');
+ const unfinished=Array.isArray(access?.pending_deletions)?access.pending_deletions:[];
+ const unfinishedHtml=unfinished.length?`<h3>Unfinished account deletions</h3>
+  <p class="helper">The Auth account may already be gone. Retry to finish the original Community choice without starting a new deletion.</p>
+  <ul class="admin-member-list">${unfinished.map(op=>`<li class="admin-member-row">
+   <div class="admin-member-main"><strong>${e(String(op.email||'Account no longer available'))}</strong>
+   <p class="helper">Pending ${e(String(op.phase||'unknown'))} · ${op.community_mode==='remove'?'Remove Community':'Keep Community'}</p></div>
+   <button type="button" class="ghost compact" data-action="retry-account-delete" data-id="${e(String(op.id||''))}">Retry Completion</button>
+  </li>`).join('')}</ul>`:'';
  const secret=issued?.invite_code?`<div class="admin-new-code" role="status" aria-live="polite">
    <strong>New Invitation Code</strong><p class="helper">Copy it now. The code cannot be recovered after you leave or refresh this page.</p>
    <code id="admin-new-code">${e(issued.invite_code)}</code>
@@ -154,6 +162,7 @@ export function renderAdminAccessPanel(access={},issued=null,accountPage=null,in
   <p class="helper">No automatic account expiration. Remove or restore access without deleting saved shots and notes. Administrator accounts cannot be removed here.</p>
   <ul class="admin-member-list">${memberRows||'<li class="helper">No admitted members yet.</li>'}</ul>
   ${fallbackNotice}
+  ${unfinishedHtml}
   ${hasAccountPage&&(offset>0||offset+members.length<total)?`<div class="admin-pagination"><span class="helper">${e(accountRange)}</span><button type="button" class="ghost compact" data-action="record-page" data-kind="accounts" data-offset="${Math.max(0,offset-50)}" ${offset===0?'disabled':''}>Previous</button><button type="button" class="ghost compact" data-action="record-page" data-kind="accounts" data-offset="${offset+50}" ${offset+members.length>=total?'disabled':''}>Next</button></div>`:''}
  </section>`;
 }

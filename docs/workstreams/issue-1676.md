@@ -47,3 +47,7 @@ Added Node VM simulation for Edge endpoint: origin/method/auth/admin denial befo
 ## Interrupted Auth deletion recovery SQL
 
 Added owner-operator-only `pending_deletions` to the existing access overview, sourced from private operation receipts only for `actor_id=auth.uid()` and not containing any token or member private notes. This remains listable even after Auth delete removes the member row. Disposable SQL checks visibility after Auth deletion and before finalization. UI recovery button still being wired. No hosted changes.
+
+## Operator recovery button
+
+Admin Access renders the requesting admin's private unfinished operation receipts and an explicit Retry Completion control, even when the deleted Auth account is absent from member listings. It sends only the original immutable operation ID through the gated Edge function. Added JS recovery test. No new member deletion scope or production operations. Source CI after this change pending.

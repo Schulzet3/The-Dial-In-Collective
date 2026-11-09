@@ -268,3 +268,21 @@ test('Keep Community is conveyed unchanged and administrators remain protected',
  assert.doesNotMatch(html,/data-action="delete-account" data-id="10000000-0000-4000-8000-000000000001"/);
  assert.match(html,/Administrator · Permanent access/);
 });
+
+test('unfinished Auth deletion remains visible and can resume only its existing operation ID',async()=>{
+ const html=renderAdminAccessPanel({...state,pending_deletions:[{
+  id:'40000000-0000-4000-8000-000000000001',
+  email:'deleted@fixture.invalid',phase:'prepared',community_mode:'remove'
+ }]});
+ assert.match(html,/Unfinished account deletions/);
+ assert.match(html,/Retry Completion/);
+ assert.match(html,/Remove Community/);
+ const b=boot();await b.done;
+ b.events.click({target:{closest(){return {dataset:{
+  action:'retry-account-delete',id:'40000000-0000-4000-8000-000000000001'
+ }};}}});
+ await flush();
+ assert.equal(b.invocations.length,1);
+ assert.equal(b.invocations[0].name,'dic-delete-member-account');
+ assert.equal(b.invocations[0].args.body.operation_id,'40000000-0000-4000-8000-000000000001');
+});
