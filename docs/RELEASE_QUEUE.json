@@ -11,23 +11,40 @@
       "id": "DIC-Q-33-original603-597-current-selected-inline-compound-region",
       "issue": 33,
       "title": "Recover directly published unique selected Region from compound current coffee specs",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "TESTING",
+      "merged_source_sha": "ce3bb4e1331ef811f5904633130e9f25e6c5e226",
       "scope_paths": [
         "src/server/coffee-selected-inline-region.mjs",
         "src/server/coffee-page-metadata.mjs"
       ],
       "tests": [
-        "Exact real official R54 #597 selected run42571253036 failed selected_meru_kenya_not_retained_597, actual country only Kenya despite direct Region: Meru. New generic fix, regression, full CI and fresh official source pending."
+        "Source BEFORE PR1601: exact merged official R54 run42571253036 3/3 source fetched/parsed, strict FAIL selected_meru_kenya_not_retained_597; actual #597 origin only Kenya, direct selected merchant Region Meru.",
+        "PR1601 head 8b0e293513174d0ae2a42ee95eef37d14ad8794a all applicable GitHub CI SUCCESS: Node/lint/build42571635459, cloud/mobile42571635506, approval42571635483, isolated SQL42571635375, security42571635311, source archive42571635464. Frozen original60342571635530 SKIPPED, not PASS.",
+        "PR1601 nonforce merged ce3bb4e1331ef811f5904633130e9f25e6c5e226. All 6 code/test/workflow/queue/journal Git blobs verified byte-identical to passing PR head; no excluded published runtime bytes touched.",
+        "Exact merged Node/lint42571947621 SUCCESS: 3187 PASS / 0 FAIL / 6 intentional SKIP; exact merged approval42571947554 and cloud/mobile42571947412 SUCCESS. Earlier PR-head SQL and security reusable for unchanged applicable bytes.",
+        "Exact merged selected-source official42571947591 SUCCESS 3/3 real selected exact URLs, current H1/identity, actual parser, Add Coffee, Source Review, strict source afterproof; #597 origin Meru, Kenya, no conflict; #594 Sumatra selected with Swiss Water not Timor, #600 Medium/Washed/direct notes unaffected.",
+        "Exact merged selected current raw #597 420517-byte HTML SHA256 ec3bdc78c5e41e7dfc1a76eb72949e83eb5b2c84f225515f13f236bc7d5e4c3a; raw#594 SHA256 64a280608cf69a85fc58d1bd8de800f54d743ee22db5c475db5af90108ed209f; raw#600 SHA256 3cc30d4c635adcce1e34ec24df84abda1ab71b2226fb6b639e302ccca4a04d8d. Separate official afterproof independently rehashed each raw HTML against capture manifest; JSON report SHA256 c04940718f04ba00e958af7b8f0a786f51e5f7d6cca11ab7ed18e5eeb43272b0.",
+        "Provider artifact13653437085 169005-byte ZIP sha256 b58d3e416af091c85349fbbe36ce3e07f0e662b4f5d9637707fd954a2012c4d2; separate assistant-side downloaded ZIP byte hash could not be computed because container and Python execution unavailable. Explicitly not claimed as independently rehashed ZIP."
       ],
       "ci_runs": [
-        42571253036
+        42571253036,
+        42571635459,
+        42571635506,
+        42571635483,
+        42571635375,
+        42571635311,
+        42571635464,
+        42571947621,
+        42571947554,
+        42571947412,
+        42571947591
       ],
       "blockers": [
-        "Exact code-head and merged CI plus fresh selected public source and independent artifact verification pending"
+        "External independent byte SHA256 verification of downloaded 1-day GitHub artifact13653437085 not completed in current runtime; until independently checked hold TESTING, not READY."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Development only, NOT READY or DEPLOYED. Original 603/201/1197 frozen CSV/oracle/scorer unchanged, no related/SEO/older lot leakage, Issue33 OPEN, other existing states preserved."
+      "notes": "TESTING, development-only, NOT READY/DEPLOYED. Narrow generic direct #597 selected Region: Meru now returned Meru, Kenya under exact source afterproof and all applicable CI. Source guard requires same selected H1 and direct unique compound spec, no unrelated/SEO/historical leakage. #594 is currently exact original Sumatra despite Timor URL slug, future identity drift reviewable. #597 selected Variety and Elevation still not captured, separate pending source-backed gaps. Original 603/201/1197 original immutable CSV/oracle/scorer and all other existing queue states unchanged; #33 OPEN, no production writes/release.",
+      "pr": 1601
     },
     {
       "id": "DIC-Q-1591-first-shot-style-until-logged",
