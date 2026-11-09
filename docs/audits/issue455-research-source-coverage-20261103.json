@@ -1144,6 +1144,26 @@
       "current_app_crosswalk": "engine@177b76962a6ddb19fdc884eab71d09b902a35850 and constants@72221331ce4dffabe416eebec1ae2fceced3a095 keep five individual member-rated taste inputs, measured shots and single controllable recommendation; no standardized population roast/emotion preference substituted.",
       "reviewed_date_utc": "2026-11-09",
       "implementation_status": "RESEARCH_ONLY_NO_APP_OR_LOCKED_POLICY_CHANGE"
+    },
+    {
+      "id": "LIT-2025-HUANG-TAGUCHI-GRINDER-QC",
+      "type": "peer_reviewed_original_multicriterion_coffee_grinder_engineering",
+      "title": "Optimization of Coffee Grinder Quality Characteristics under a Sensor-driven Framework: An Experimental Study Based on the Taguchi Method",
+      "authors": "Mei-Ching Huang; Wei-Shan Su; Wen-Ying Hsieh; Cheng-Fu Yang",
+      "published": "2025-10-30",
+      "journal": "Sensors and Materials 37(10):4677–4689",
+      "doi": "10.18494/SAM5901",
+      "url": "https://sensors.myu-group.co.jp/sm_pdf/SM4206.pdf",
+      "publisher_url": "https://sensors.myu-group.co.jp/article.php?ss=5901",
+      "access": "DIRECT_PUBLISHER_13_PAGE_ORIGINAL_PDF_PARSED_TEXT_SECTIONS_METHODS_L18_TABLES_1_TO_11_CONCLUSIONS; WEB_SCREENSHOT_ATTEMPT_FAILED; ORIGINAL_BINARY_NOT_SAVED",
+      "review_status": "COMPLETE_ORIGINAL_PDF_TEXT_SUBSTANTIVELY_READ_INCLUDING_18_TRIPLICATE_TRIALS_OPTIMIZATION_AND_CONTRADICTORY_CONCLUSIONS; GRAPH_PIXELS_AND_RAW_INDEPENDENT_MEASUREMENT_NOT_VERIFIED",
+      "evidence_grade": "ORIGINAL_PEER_REVIEWED_SINGLE_STUDY_ENGINEERING_MULTIOBJECTIVE_TAGUCHI_AHP_NOT_ESPRESSO_TASTE_OR_USER_OUTCOMES; INCONSISTENT_OPTIMAL_SETTINGS",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Publisher-hosted original PDF text available to web, but original binary download unsuccessful and web screenshot calls failed; PDF page pixels, attached raw measurements and independent replication not verified. The source's abstract/Tables 8-9 and conclusion disagree on recommended grinder settings. Do not silently choose one.",
+      "claims_verified_externally": "Publisher PDF pp.4677-4689: L18 orthogonal array across cooling fan, burr gap (0.5/0.75/1.0mm), motor speed (800/1000/1200 rpm), input amount (10/15/20g) and grinding time (10/20/30s); 18 conditions each tested three times, laser PSD, thermal and mass measures; AHP expert-weighted engineering objective. Abstract and Tables 8-9 select fan OFF/1.0mm/1000rpm/10g/30s; §4 Conclusion p.4688 instead says fan ON/0.5mm/1200rpm/10g/10s. Table 7 factor labels also differ from Tables 1/8; Q1 uniformity defined as standard deviation early and D90-D10 later. 'Optimal' is study-weighted engineering tradeoff, not taste-optimal espresso, general grinder rule or a reliably transferable numeric prescription.",
+      "current_app_crosswalk": "Current development engine blob 177b76962a6ddb19fdc884eab71d09b902a35850, model blob 1efeeac985b7f2fb68a67e34af1f40c38437666c, original ORG-09 blob 1e1b8bbef0ecb05ed0b20195191bcad26663cf0d. Keep calibrated grinder bounds/version, feed context, actual same-coffee successful shots, independent Turbo and Fast-Flow, five required taste ratings, one truly controllable next action, original private notes/History and Community/RLS.",
+      "reviewed_date_utc": "2026-11-09",
+      "implementation_status": "RESEARCH_ONLY_EVIDENCE_CONFLICT_FLAGGED_NO_APP_OR_LOCKED_POLICY_CHANGE"
     }
   ],
   "evidence_checks": [
@@ -3475,6 +3495,28 @@
       "owner_approval": false,
       "test_source": "Read-only live current recommendation, nextAdvice, prefill, engine saveShot, model/constant taste structure; no application tests or personal taste outcomes run.",
       "date": "2026-11-09"
+    },
+    {
+      "id": "R455-EV-CIT-132-A",
+      "source": "Original publisher PDF https://sensors.myu-group.co.jp/sm_pdf/SM4206.pdf pp.4677–4687: abstract, Methods §§2–3, Tables 1–10, Fig. 1/2 captions and original tabulated trial repetitions",
+      "claim": "The L18 Taguchi/AHP engineering experiment varied five control factors and reported five sensor-derived grinder metrics; 18 conditions times three measurements plus one three-repeat validation. It did not test drink extraction, blind consumer sensory preference, DIC five-input ratings, universal slow-feed correction or optimal espresso shots.",
+      "grade": "DIRECT_PRIMARY_PUBLISHER_PDF_TEXT_METHODS_TABLES; ORIGINAL_BINARY_HASH_AND_FIGURE_PIXELS_UNVERIFIED",
+      "result": "ENGINEERING_PSD_THERMAL_AND_THROUGHPUT_MODEL_ONLY_NO_ESPRESSO_SENSORY_TARGET",
+      "current_app": "No universal numeric grinder, feed, burr gap or temperature rule may be derived; current calibrated per-version grinder range, same-coffee and feed-specific evidence remain authoritative.",
+      "owner_approval": false,
+      "test_source": "Publisher primary PDF https://sensors.myu-group.co.jp/sm_pdf/SM4206.pdf pages 4677–4687 (web text; screenshot rendering failed, raw data independent reanalysis not performed).",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "R455-EV-CIT-132-B",
+      "source": "Same primary publisher PDF https://sensors.myu-group.co.jp/sm_pdf/SM4206.pdf abstract, Tables 1/7/8/9, §4 conclusion and current engine@177b76962a6ddb19fdc884eab71d09b902a35850",
+      "claim": "The paper's abstract and Tables 8/9 recommend fan OFF/1.0mm/1000rpm/10g/30s, while its final Conclusions instead recommend fan ON/0.5mm/1200rpm/10g/10s. Table 7 factor column names differ from Table 1/8 and Q1 definitions vary; unresolved internal contradictions preclude treating either set as independently validated transferable controls.",
+      "grade": "DIRECT_WITHIN_SOURCE_CONTRADICTION_IN_PEER_REVIEWED_ORIGINAL_PDF_TEXT; NOT_INDEPENDENT_REPLICATION",
+      "result": "DO_NOT_PROMOTE_SPECULATIVE_OR_CONFLICTING_GRINDER_OPTIMAL_NUMBERS_TO_LOCKED_RECOMMENDATIONS",
+      "current_app": "Retain five member taste inputs, real measured shots, one controllable change, setup/grinder calibration and version, independent feed/style, preservation of History/RLS.",
+      "owner_approval": false,
+      "test_source": "Publisher source PDF §§Abstract, Method 2, Tables 1,7,8,9, Conclusions §4; PDF screenshots unavailable.",
+      "date": "2026-11-09"
     }
   ],
   "policy_decisions_pending": [],
@@ -3537,29 +3579,29 @@
     "R455-130 source 817a7574fd09eb08251dec9da3a19629db62e7fe: Springer+Camerino 2022 two-basket 4–7mm disc extraction chemistry, not taste optimum. 72 curated sources/177 checks/92 proposals; docs-only PR/CI pending at authoring; original S019 unreviewed."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-131",
-    "base_development_sha": "94e1292f572f16c527c748e44168e386f2a7a438",
+    "id": "R455-132",
+    "base_development_sha": "6b4b553a9677381aaa98d37adda2ae8a5c6f4b7e",
     "source_ids": [
-      "LIT-2022-PINSUWAN-THAI-DRIP-ACCEPTANCE"
+      "LIT-2025-HUANG-TAGUCHI-GRINDER-QC"
     ],
     "claim_ids": [
-      "R455-EV-CIT-131-A",
-      "R455-EV-CIT-131-B"
+      "R455-EV-CIT-132-A",
+      "R455-EV-CIT-132-B"
     ],
     "proposal_ids": [
-      "R455-PROP-131-DRIP-CONSUMER-LIKING-NOT-ESPRESSO-TASTE-TARGET"
+      "R455-PROP-132-TAGUCHI-GRINDER-NUMERIC-CONFLICT-BOUNDARY"
     ],
-    "number_of_curated_sources": 73,
-    "total_evidence_checks": 179,
-    "number_of_proposals": 93,
-    "review_type": "COMPLETE_PRIMARY_PMC_FULL_HTML_DRIP_SENSORY_CONSUMER_PREFERENCE_TRANSFER_LIMIT",
+    "number_of_curated_sources": 74,
+    "total_evidence_checks": 181,
+    "number_of_proposals": 94,
+    "review_type": "FULL_PUBLISHER_PRIMARY_PDF_TEXT_MULTICRITERIA_GRINDER_ENGINEERING_CONTRADICTION_WITH_APP_BOUNDARY",
     "code_or_policy_changed": false,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
-    "status": "DOCS_COMMIT_ONLY_CI_AND_MERGE_PENDING_AT_AUTHORING",
+    "status": "AUTHORING_COMMIT_DOCS_ONLY_CI_UNVERIFIED",
     "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "Verify exact three-path PR/CI and nonforce merge; resume independent source/UX review."
+    "next_action": "Verify three-path PR-head CI, nonforce integrate/read back exact original blobs and merged-source governance, then resume next disjoint UX or primary claim."
   },
   "policy_decisions_resolved": [
     {
@@ -5476,6 +5518,27 @@
       "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY",
       "github267_literal_review_credit": 0,
       "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-132-TAGUCHI-GRINDER-NUMERIC-CONFLICT-BOUNDARY",
+      "finding": "A 2025 original multiobjective grinder optimization study presents incompatible 'optimal' settings in its abstract/tabulated validation versus final Conclusions and did not measure member espresso taste; another unresolved factor-label inconsistency prevents safe uncritical automation.",
+      "evidence": [
+        "R455-EV-CIT-132-A",
+        "R455-EV-CIT-132-B"
+      ],
+      "severity": "P2_RESEARCH_INTEGRITY_CONFLICT_NOT_APP_INCIDENT",
+      "user_benefit": "Avoid misleading fixed burr-gap, RPM, 10g feed, grind-time or cooling guidance and prevent mechanical engineering optimization from superseding personal espresso ratings; preserve controllability and calibrated setup data.",
+      "current_locked": "Owner Locked five active taste ratings, only fully all-green success, one truly controllable suggested change, original measured shot/notes/History, family/style/feed/grinder calibration, temperature capability and privacy/RLS.",
+      "current_app": "engine@177b76962a6ddb19fdc884eab71d09b902a35850 and model@1efeeac985b7f2fb68a67e34af1f40c38437666c already use per-setup grinder range/version, measured shot history, compatible basket/feed/style instead of universal machine-number transfers.",
+      "proposed_change": "RESEARCH-ONLY: document original primary-source internal contradiction and retain existing Locked member-specific logic; do not implement any fixed grinder speed, cooling fan, feed, gap or time. Only a new user-facing capture/product policy would require separate explicit owner approval and independent espresso member outcome data.",
+      "evidence_grade": "PEER_REVIEWED_2025_ORIGINAL_PUBLISHER_PDF_TEXT_COMPLETE_BUT_INTERNAL_CONFLICT_AND_NO_ESPRESSO_TASTE_TEST; SCREENSHOT_AND_BYTES_UNVERIFIED",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "LEDGER_JOURNAL_CURRENT_STATUS_SAME_COMMIT_R132_RESEARCH_ONLY; PR_HEAD_CI_AND_MERGE_UNVERIFIED_AT_AUTHORING",
+      "test_plan": "Check exact only three documentation paths, no runtime code/SQL differences, PR-head source-bound governance and continuity; nonforce squash and read back changed blobs and merged-source governance; Node/browser/SQL tests not needed for unchanged code per owner #457.",
+      "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
     }
   ],
   "changeScope": {
@@ -5483,6 +5546,6 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R131 full-text primary drip consumer preference evidence and transfer limits; no app behavior or Locked policy change."
+    "reason": "R132 directly inspected primary 2025 coffee grinder engineering optimization paper with internally conflicting optimal settings; no defensible personalized espresso taste policy or safe app bug fix follows."
   }
 }
