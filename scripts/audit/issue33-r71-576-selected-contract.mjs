@@ -2,6 +2,7 @@
 const clean=markup=>String(markup||'')
  .replace(/<!--[\s\S]*?-->/gu,' ')
  .replace(/<(?:script|style|template|noscript)\b[^>]*>[\s\S]*?<\/(?:script|style|template|noscript)>/giu,' ')
+ .replace(/<(?:aside|nav|footer)\b[^>]*>[\s\S]*?<\/(?:aside|nav|footer)>/giu,' ')
  .replace(/<[^>]{0,2000}>/gu,' ')
  .replace(/&(?:nbsp|amp|quot|apos|#39|#x27);/giu,' ')
  .replace(/\s+/gu,' ').trim();

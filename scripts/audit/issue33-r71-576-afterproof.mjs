@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Strict R71 original603 #576 selected source proof; no 603-wide certification.
-import {readFileSync,writeFileSync} from 'node:fs';
+import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 import {join,resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
@@ -10,6 +10,7 @@ const digest=value=>createHash('sha256').update(value).digest('hex');
 const dir=process.env.DIC_ISSUE33_FOCUSED_PUBLIC_DIR;
 if(!dir)throw Error('public_source_dir_required');
 const root=resolve(dir),failures=[],check=(v,label)=>{if(!v)failures.push(label);};
+mkdirSync(root,{recursive:true});
 let reportBytes=null,report={},rec={},htmlBytes=null,html='';
 try{reportBytes=readFileSync(join(root,'focused-current-evidence.json'));report=JSON.parse(reportBytes.toString('utf8'));}catch{}
 check(Boolean(reportBytes),'focused_json_missing');
