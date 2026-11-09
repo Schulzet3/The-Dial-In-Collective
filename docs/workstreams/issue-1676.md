@@ -11,3 +11,7 @@ Before any CI/release, reviewed delete-finalization ordering: capture target Com
 ## Source idempotency fix
 
 Reused the historical `dic_admin_access_overview` definition as `CREATE OR REPLACE` (not conflicting CREATE) so the forward-only migration can apply after the existing Admin API. No production operations; isolated SQL remains to be run.
+
+## Admin view and light/dark responsive controls
+
+Added per-code Delete Code action including used/revoked codes; added nonadmin Delete Account button alongside reversible access toggle; added two-option permanently destructive dialog with server-provided impact counts and accessible Light/Dark contrast. Backend wiring, tests and verification remain pending; no hosted SQL or member/account action.
