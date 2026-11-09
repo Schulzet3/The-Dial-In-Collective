@@ -34,7 +34,7 @@ const CURRENT_SELECTED_OUR_WATER_DECAF=/(?:^|[.!?]\s+)using\s+the\s+(?:swiss|mou
 const NONCURRENT_DECAF_METHOD=/\b(?:previous(?:ly)?|formerly|historically|typically|generally|other coffees?|another coffee|last year|prior (?:lot|harvest))\b/iu;
 // An exact chosen full-decaf SW title can be abbreviated while the own
 // selected product paragraph spells out Swiss Water Process Decaf.
-const CURRENT_SOURCED_NAMED_WATER_DECAF=/^([^.?!]{15,200}?\b(?:Swiss|Mountain)[ -]?Water\s+Process\s+Decaf(?:feinated)?)\s+is\s+sourced\s+from\b/iu;
+const CURRENT_SOURCED_NAMED_WATER_DECAF=/^([^.?!]{15,200}?\bSwiss[ -]?Water\s+Process\s+Decaf(?:feinated)?)\s+is\s+sourced\s+from\b/iu;
 const UNSPECIFIC_DECAF_IDENTITY_WORDS=new Set(['decaf','decaffeinated','swiss','water','process','natural','honey','washed','arabica','organic','fair','trade','single','origin','coffee','roast','light','medium','dark','blend','beans','whole','supernatural']);
 function currentSelectedSourcedNamedWaterDecaf(name,line){
  if(!decafOnlyCoffee(name)||!/\b(?:SW|Swiss[ -]?Water)\b\s*$/iu.test(String(name)))return '';
