@@ -14,6 +14,17 @@ test('all five required CI job checks run on EVERY private branch pull request',
   assert.doesNotMatch(pr,/\n\s*paths:/,p+' blocks docs-only PR required CI');
  }
 });
+test('SQL-only push revisions run required validate rather than silently omitting fifth check',()=>{
+ const src=file('.github/workflows/cloud-beta-ci.yml');
+ const push=src.split('\n  push:')[1]?.split('\n  pull_request:')[0]||'';
+ assert.match(push,/branches:\s*\n\s*- development\/backend-foundation/);
+ for(const path of ['supabase/migrations/**','supabase/tests/**']){
+  assert.ok(push.includes("      - '"+path+"'"),'Missing validate push trigger for '+path);
+ }
+ assert.equal((push.match(/supabase\/migrations\/\*\*/g)||[]).length,1);
+ assert.equal((push.match(/supabase\/tests\/\*\*/g)||[]).length,1);
+});
+
 test('per-commit continuity checks head SHA, not synthetic PR merge SHA',()=>{
  const src=file('.github/workflows/approval-continuity.yml');
  assert.match(src,/DIC_HEAD_SHA: \$\{\{ github.event.pull_request.head.sha \|\| github.sha \}\}/);
