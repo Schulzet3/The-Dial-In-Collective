@@ -1,0 +1,45 @@
+name: DIC Issue33 R63 original603 570 current selected source
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r63-570-current-source.yml
+      - scripts/audit/issue33-r63-570-source-contract.mjs
+      - scripts/audit/issue33-r63-570-afterproof.mjs
+      - tests/coffee-issue33-r63-570-source-contract.test.mjs
+      - src/server/coffee-page-metadata.mjs
+      - src/server/coffee-product-scope.mjs
+permissions:
+  contents: read
+jobs:
+  selected-r63:
+    name: original603-570-direct-current-lodoza
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Focused original current product and hostile negative controls
+        run: node --test tests/coffee-issue33-r63-570-source-contract.test.mjs
+      - name: Guarded read-only exact current selected HTTPS and actual preview
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r63-570
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '570'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Exact selected source and raw byte hash afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r63-570
+        run: node scripts/audit/issue33-r63-570-afterproof.mjs
+      - name: Retain one-day source HTML JSON and verdict
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r63-570-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r63-570/
+          if-no-files-found: error
+          retention-days: 1
