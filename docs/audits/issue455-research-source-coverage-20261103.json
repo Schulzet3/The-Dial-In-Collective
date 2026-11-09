@@ -3338,6 +3338,17 @@
       "owner_approval": false,
       "test_source": "Read-only direct source review; no Node22/browser/offline/SQL/member or actual espresso tests.",
       "date": "2026-11-09"
+    },
+    {
+      "id": "R455-EV-APP-090-A",
+      "source": "Live site/lib/engine.js original blob 21d6e822599e21db95b9f30ce3178db3542a6eb6, merged blob 177b76962a6ddb19fdc884eab71d09b902a35850; synthetic regression tests Git blob 4464e85553613e31afbfd7cdda250ecb6934b644; PR #1560.",
+      "claim": "Prior saveShot returned an existing idempotent shot by shot ID without confirming that existing.coffeeId matched requested coffeeId. A cross-coffee stale offline replay could return the wrong existing shot as if saved; no real user occurrence known. New code rejects mismatched IDs before mutating state while preserving archived-basket same-coffee replay.",
+      "grade": "DIRECT_SOURCE_DETERMINISTIC_LOGIC_NEGATIVE_POSITIVE_NODE22_EXACT_CI_NOT_EMPIRICAL_MEMBER_INCIDENT",
+      "result": "SAFE_LOCKED_COMPATIBLE_BUG_REPRODUCED_TESTED_AND_MERGED",
+      "current_app": "Merged engine SHA 177b76962a6ddb19fdc884eab71d09b902a35850 on e4a94d1b39e51f1e0cf71208d97add8c187c270e; active original notes, measurements, taste ratings and recipe families retained.",
+      "owner_approval": false,
+      "test_source": "3 new synthetic focused tests checked in; PR-head full Node 3157 pass/0 fail/6 skip 42552590204; isolated SQL42552590151, security42552590171, UX42552590145, governance42552590241 SUCCESS; exact merged Node42552793400 3157/0/6, UX42552793410 and approval42552793411 SUCCESS; frozen603 SKIPPED. No live provider/member tests.",
+      "date": "2026-11-09"
     }
   ],
   "policy_decisions_pending": [],
@@ -3394,46 +3405,54 @@
     "R455-126 primary original Pannusch 2024 model article in TUM first-author thesis appendix B3 directly reviewed: eight validation profiles, four compound chemical errors, important roast-batch uncertainty, explicit no human sensory or cross-roast transfer. 69 sources/170 checks/88 proposals, research-only, docs CI/PR pending. Standalone S019 missing; no #267 direct-line audit credit.",
     "R455-126 original Pannusch 2024 original full-text author thesis reprint 69/170/88 verified research-only, PR1533 nonforce squash merged 427631ec535b61e6ac47227d9038e88ad792db2c, original ledger/journal blobs match exact 5/5 PR-head checks SUCCESS and merged governance42542208887 SUCCESS. Reconciliation docs PR pending; no app deployment or code, S019 missing, no #267 credit.",
     "R455-127: new Wiley 2025 original publisher PSD abstract research-only, 70 curated sources, 172 checks, 89 proposals; no app policy, CI pending, S019 inaccessible and #267 direct audit distinct.",
-    "R455-127 VERIFIED: PR1544 5/5 named head checks SUCCESS, nonforce squash ed621cc2b766609235b0835f0c27563fc5d5a6ec, 3 whitelisted doc blobs match tested head, exact merged approval42547720934 SUCCESS; research only 70/172/89, no application/Locked change. Reconciliation PR pending at receipt authoring."
+    "R455-127 VERIFIED: PR1544 5/5 named head checks SUCCESS, nonforce squash ed621cc2b766609235b0835f0c27563fc5d5a6ec, 3 whitelisted doc blobs match tested head, exact merged approval42547720934 SUCCESS; research only 70/172/89, no application/Locked change. Reconciliation PR pending at receipt authoring.",
+    "R455-128: source e4a94d1b39e51f1e0cf71208d97add8c187c270e safe replay coffee-ID integrity; 3 tests and exact merged Node3157/0/6, UX and governance SUCCESS; 70 sources/173 checks/90 proposals; standalone S019 missing; continue distinct #455 work."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-127",
-    "base_development_sha": "6cb57635c269c8fee1b7c32e35af108ec0bfb4ed",
+    "id": "R455-128",
+    "base_development_sha": "371c8c9bbc17645fd48b7d5f70d3e2ac1e9964fc",
+    "merged_source_sha": "e4a94d1b39e51f1e0cf71208d97add8c187c270e",
     "source_ids": [
-      "LIT-2025-KHONGPHINITBUNJONG-GRIND-PSD"
+      "site/lib/engine.js@21d6e822599e21db95b9f30ce3178db3542a6eb6",
+      "site/lib/engine.js@177b76962a6ddb19fdc884eab71d09b902a35850"
     ],
     "claim_ids": [
-      "R455-EV-CIT-127-A",
-      "R455-EV-CIT-127-B"
+      "R455-EV-APP-090-A"
     ],
     "proposal_ids": [
-      "R455-PROP-127-NO-UNIVERSAL-PSD-MIDDLE-GRIND-TRANSFER"
+      "R455-PROP-128-OFFLINE-REPLAY-COFFEE-IDENTITY"
     ],
     "number_of_curated_sources": 70,
-    "total_evidence_checks": 172,
-    "number_of_proposals": 89,
-    "review_type": "BOUNDED_FIRST_PARTY_PUBLISHER_ABSTRACT_PSD_MODEL_RESEARCH_ONLY",
-    "code_or_policy_changed": false,
+    "total_evidence_checks": 173,
+    "number_of_proposals": 90,
+    "review_type": "DIRECT_LIVE_SOURCE_LOCKED_SAFE_OFFLINE_REPLAY_IDENTITY_BUG_AND_THREE_NEGATIVE_POSITIVE_REGRESSIONS",
+    "code_or_policy_changed": true,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
-    "status": "PRIMARY_PUBLISHER_ABSTRACT_BOUNDED_RESEARCH_REVIEW_INTEGRATED_WITH_5_OF_5_PR_HEAD_AND_EXACT_MERGED_GOVERNANCE_SUCCESS",
+    "status": "PR_HEAD_AND_MERGED_SOURCE_APPLICABLE_CI_SUCCESS_CODE_NONFORCE_MERGED_DOCS_RECONCILIATION_PENDING",
     "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "Continue distinct bounded primary original source claims and reproducible UX defects from latest development SHA; no approved grinder target change. Full Wiley paper/raw data and standalone S019 inaccessible; no #267 manual-line credit.",
-    "research_pr": 1544,
-    "research_pr_head_sha": "46c3ce8880dd0e3f9916bc34865a28dc5524518e",
-    "research_merge_sha": "ed621cc2b766609235b0835f0c27563fc5d5a6ec",
+    "next_action": "Continue nonoverlapping source/evidence/UX fixes on exact new dev SHA; #267 historical literal audit separate; standalone S019 not reviewed.",
+    "code_pr": 1560,
+    "code_pr_head_sha": "904fe26cefa1d1dcf1dbc932ab94c24e9f733f8d",
+    "code_merge_sha": "e4a94d1b39e51f1e0cf71208d97add8c187c270e",
     "exact_pr_head_runs": [
-      42547437711,
-      42547437642,
-      42547437586,
-      42547437600
+      42552590204,
+      42552590145,
+      42552590151,
+      42552590171,
+      42552590241
     ],
-    "exact_merged_governance_run": 42547720934,
+    "exact_merged_runs": [
+      42552793400,
+      42552793410,
+      42552793411
+    ],
     "merged_blobs": {
-      "ledger": "3c276db0b125bc4246fcf205fe05bba4865e1f3e",
-      "journal": "9429dae926923c4b3e7e6ae6000b9412aa98a720",
-      "current_status": "c62c1e46fdf72468245ae610c39816c7455fdc06"
+      "engine": "177b76962a6ddb19fdc884eab71d09b902a35850",
+      "test": "4464e85553613e31afbfd7cdda250ecb6934b644",
+      "queue": "d599908fd6d5c1a5f578af43fa037e905d7c93b3",
+      "journal": "66dad43aa58825a50756767355ee310223ddd8a2"
     }
   },
   "policy_decisions_resolved": [
@@ -5268,6 +5287,26 @@
       "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY",
       "github267_literal_review_credit": 0,
       "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-128-OFFLINE-REPLAY-COFFEE-IDENTITY",
+      "finding": "Cross-coffee stale/offline reuse of shot ID returned unrelated coffee's original shot as successful idempotent replay.",
+      "evidence": [
+        "R455-EV-APP-090-A"
+      ],
+      "severity": "P2_PERSONAL_SHOT_LOGGING_IDENTITY_INTEGRITY",
+      "user_benefit": "Reject misleading cross-coffee offline save without overwriting or relabeling historical shots; keep same-coffee idempotent replay reliable.",
+      "current_locked": "Five sensory inputs, immutable original measured shots/notes, same-coffee recipe history, correct coffee identity, offline idempotent persistence; no Locked science/numeric changes.",
+      "current_app": "Old engine 21d6e822599e21db95b9f30ce3178db3542a6eb6 returned existing matching ID regardless of coffee; merged 177b76962a6ddb19fdc884eab71d09b902a35850 requires existing.coffeeId===coffeeId.",
+      "proposed_change": "SAFE implemented: reject cross-coffee shot ID collision with explicit error before any mutation, preserve same-coffee replay and fresh independent IDs.",
+      "evidence_grade": "DIRECT_CURRENT_SOURCE_WITH_SYNTHETIC_NEGATIVE_POSITIVE_REGRESSIONS_AND_EXACT_SOURCE_CI",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "PR1560 EXACT_HEAD_904fe26cefa1d1dcf1dbc932ab94c24e9f733f8d NONFORCE_SQUASH_MERGED_e4a94d1b39e51f1e0cf71208d97add8c187c270e; FOUR_BLOBS_HEAD_EQUAL_MERGED; HEAD_CI_5_NAMED_SUCCESS; MERGED_NODE_UX_GOVERNANCE_SUCCESS; NO_PRODUCTION",
+      "test_plan": "3 focused real-module synthetic tests; Node22 3157 PASS/0 FAIL/6 SKIP on head and merged; isolated SQL Auth/security workflows PASS; cloud targeted inner steps SKIP distinct from whole UX/mobile PASS; original603 SKIP.",
+      "release_queue_status": "DIC-Q-455-offline-shot-replay-coffee-identity READY_DEV_ONLY_NOT_PUBLISHED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
     }
   ],
   "changeScope": {
@@ -5275,6 +5314,6 @@
     "tests_executed": true,
     "production_deployed": false,
     "queue_changed": true,
-    "reason": "R125 safe basket identity fix, four synthetic positives/negatives and passing exact source CI."
+    "reason": "R128 same-coffee offline replay preserved and cross-coffee ID collision rejected on source e4a94d1; exact PR/merged CI passed; queued READY not deployed."
   }
 }

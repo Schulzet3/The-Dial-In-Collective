@@ -10,22 +10,34 @@
     {
       "id": "DIC-Q-455-offline-shot-replay-coffee-identity",
       "issue": 455,
-      "pr": null,
+      "pr": 1560,
       "title": "Reject cross-coffee shot ID collision during offline idempotent Log Shot replay without changing saved shot",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "e4a94d1b39e51f1e0cf71208d97add8c187c270e",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
-        "R128 three synthetic source-level negative/positive cases included; Node22 and impacted cloud/mobile/offline/SQL/security/governance CI PENDING, NOT PASS."
+        "R128 negative cross-coffee offline id collision rejects before mutation; same-coffee archived-basket replay preserves original shot; independent new IDs save for both coffees. Three checked-in synthetic Node22 regressions (no real member occurrence).",
+        "PR-head Node22/lint 42552590204 SUCCESS: 3,157 PASS, 0 FAIL, 6 intentional SKIP; applicable build/lint passes.",
+        "PR-head cloud UX/browser/mobile/offline workflow 42552590145 SUCCESS: packaged browser checks exercised; cloud-tests targeted inner steps SKIPPED, not falsely called PASS.",
+        "PR-head isolated SQL/PostgreSQL 42552590151, security 42552590171, governance 42552590241 all SUCCESS; frozen 603 workflow 42552590142 SKIPPED, not PASS.",
+        "Source merge #1560 nonforce squash e4a94d1b39e51f1e0cf71208d97add8c187c270e; compared against actual advanced parent e4ed71cf5be1ff0f217537184fccb8eeed6576b4: ONLY four scoped paths; all code/test/queue/journal Git blobs identical to PR-head.",
+        "Exact merged source Node22/lint/build 42552793400 SUCCESS: 3,157 PASS, 0 FAIL, 6 intentional SKIP; cloud UX/mobile 42552793410 and approval 42552793411 SUCCESS; no member/device or cup-quality study."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact-source PR-head CI, nonforce merge, merged-source verification and READY reconciliation pending."
+      "ci_runs": [
+        42552590204,
+        42552590145,
+        42552590151,
+        42552590171,
+        42552590241,
+        42552793400,
+        42552793410,
+        42552793411
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Owner Option B SAFE non-Locked bug fix. Same ID in another coffee must not masquerade as successful replay; same-coffee replay after retired basket remains valid. No production member/provider writes."
+      "notes": "R128 SAFE source-bound implementation, independent negative/positive tests, exact merged CI, NOT DEPLOYED. Source cross-coffee ID collision was synthetic; no real-member occurrence; original taste/history preserved. Community, RLS, equipment and Locked rules unchanged."
     },
     {
       "id": "DIC-Q-33-original603-555-selected-literal-raw-sugar-finish",
