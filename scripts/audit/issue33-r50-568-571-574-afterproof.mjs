@@ -3,6 +3,7 @@
 import {readFileSync,writeFileSync} from 'node:fs';
 import {join,resolve} from 'node:path';
 import {createHash} from 'node:crypto';
+import {selectedCurrentVisibleLabeledFact} from './issue33-r50-visible-label-proof.mjs';
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const dir=process.env.DIC_ISSUE33_FOCUSED_PUBLIC_DIR;
 if(!dir)throw Error('explicit_source_evidence_directory_required');
@@ -45,7 +46,16 @@ for(const x of specs){
   require(['jasmine mochi','blueberry pie','brown butter'].every(n=>notes.includes(n)),
    'selected_farm_literal_tasting_notes_omitted');
   require(/farm is managed by the alvarez family/i.test(txt),'direct_selected_farm_manager_evidence_not_found');
-  require(/farm:\s*finca la esperanza/i.test(txt)&&/processing:\s*natural/i.test(txt),
+  const facts=r.source_facts||[];
+  const direct=(field,label,literal)=>facts.some(f=>
+   f.field===field&&String(f.label||'').toLowerCase()===label.toLowerCase()&&
+   f.source_url===r.final_url&&
+   String(f.value||'').replace(/^\s*:\s*/,'').split('✹')[0].trim().toLowerCase()===
+    literal.toLowerCase());
+  require(selectedCurrentVisibleLabeledFact(txt,'Farm','Finca La Esperanza')&&
+   selectedCurrentVisibleLabeledFact(txt,'Processing','Natural')&&
+   direct('producer','Farm','Finca La Esperanza')&&
+   direct('process','Processing','Natural'),
    'direct_selected_farm_process_evidence_not_found');
   require(!notes.includes('pop rocks'),'other_coffee_flavor_leakage');
  }
