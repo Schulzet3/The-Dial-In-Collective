@@ -39,6 +39,7 @@ import {selectedCurrentFarmCountryLocality} from './coffee-selected-farm-country
 import {selectedCurrentFarmVolcanoRegion} from './coffee-selected-farm-volcano-region.mjs';
 import {selectedCountryFirstCurrentRegion} from './coffee-country-first-current-region.mjs';
 import {selectedCurrentInlineCompoundRegion} from './coffee-selected-inline-region.mjs';
+import {selectedCurrentTypedRoastLevel} from './coffee-selected-typed-roast-level.mjs';
 import {selectedCurrentTradeElevationRegion} from './coffee-selected-trade-elevation-region.mjs';
 import {selectedCurrentAdjacentHeroRegion} from './coffee-selected-adjacent-hero-region.mjs';
 import {selectedDottedTitleCountryRegion} from './coffee-dotted-title-region.mjs';
@@ -1638,6 +1639,16 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    roast_evidence.value=null;
   }else if(!fields.roast_level)fields.roast_level=roast_evidence.value;
  }
+ // An exact selected compound spec with one literal "Roast: medium level"
+ // may supply Medium when its Country, Region, Farm, Grower and Process are
+ // same-paragraph product evidence. Never infer from generic SEO/old coffees.
+ const directTypedRoast=!fields.roast_level&&!conflicts.has('roast_level')
+  ?selectedCurrentTypedRoastLevel({
+   name:fields.name,origin:fields.origin,
+   blocks:productCoffeeProse(canonicalProduct,clean)
+  }):null;
+ if(directTypedRoast&&roast_evidence.confidence!=='conflict')
+  addField(fields,'Roast Level',directTypedRoast.value);
  // A genuine, product-bound GROUND Agtron reading with a declared scale
  // is a measured roast standard, stronger than descriptive roast wording.
  // Unknown scale/sample stays provisional and cannot veto a roaster label.
@@ -1778,6 +1789,12 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   ...(matchedDescriptions.length?[collectStructuredCoffeeSourceFacts({description:matchedDescriptions.join('\n\n')},{source_url,source_type:'html'})]:[]),
   ...[p,...equivalentProducts.filter(candidate=>candidate!==p)].map(candidate=>collectStructuredCoffeeSourceFacts(candidate,{source_url}))
  );
+ // Keep literal direct selected roast provenance visible in Source Review,
+ // without elevating a fallback, unsupported area, or conflicting roast.
+ if(directTypedRoast&&fields.roast_level===directTypedRoast.value&&source_facts.length<384)
+  source_facts.push({field:'roast_level',label:'Roast',
+   value:'Roast: '+directTypedRoast.literal,source_type:'html',source_url,
+   section:'Exact selected current Country/Region/Farm/Grower/Process paragraph'});
  // Conditional flavors of this same selected coffee are review-only context.
  // Never assert with-milk tasting as unqualified green-bean or shot flavor.
  const milkContext=selectedCoffeeMilkSensoryContext(canonicalProduct,{name:fields.name,clean});
