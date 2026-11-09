@@ -10096,8 +10096,8 @@
       "issue": 1596,
       "pr": 1597,
       "title": "First admitted no-setup welcome with self-hosted walkthrough, guide and accessible Settings reminder",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "27601ff6a427709b9012dde4946c43f730466b37",
       "scope_paths": [
         "site/cloud/help.js",
         "site/cloud/main.js",
@@ -10106,7 +10106,10 @@
       "tests": [
         "Approved owner preview and exact Settings reminder; user requested READY preparation on November 8, 2026 Denver.",
         "First PR #1597 head 30373e503975d1a4f339f733db8c9ba70619c275 includes scoped onboarding, legacy help test plus four focused tests. Exact CI initial approval workflow 42568664121 failed because queue intake record was missing; this TESTING entry repairs intake. All other applicable CI not yet certified.",
-        "Corrected PR #1597 exact head b3707375754dffe48f9f09824e129c4b60b0d580: Node full suite and lint SUCCESS run42569148301; one compiled-app browser build/real-browser/contrast/responsive/accessibility SUCCESS run42569148227; approval/intake42569148201, isolated SQL42569148225, security42569148228 SUCCESS; frozen60342569148206 SKIPPED, not PASS."
+        "Corrected PR #1597 exact head b3707375754dffe48f9f09824e129c4b60b0d580: Node full suite and lint SUCCESS run42569148301; one compiled-app browser build/real-browser/contrast/responsive/accessibility SUCCESS run42569148227; approval/intake42569148201, isolated SQL42569148225, security42569148228 SUCCESS; frozen60342569148206 SKIPPED, not PASS.",
+        "PR #1597 nonforce two-parent integration into development source 27601ff6a427709b9012dde4946c43f730466b37; parent #1 acd5fcdcb164ae15def1939bf7db9e2e6273d557 preserves all concurrent development; parent #2 b3707375754dffe48f9f09824e129c4b60b0d580 preserves tested reviewed change. Exact changed-file inventory limited to 11 scoped app/test/docs paths.",
+        "EXACT merged SHA 27601ff6a427709b9012dde4946c43f730466b37: Node22 full 3,186 tests / 3,180 PASS / 0 FAIL / 6 intentional SKIP, lint PASS, run 42569710729. One shipped app build, compiled browser/390px and Light/Dark visual/contrast/accessibility, mobile and offline privacy checks PASS 42569710706. Exact merged approval/queue intake 42569710700 SUCCESS.",
+        "Applicable PR-head exact source security 42569148228 SUCCESS and isolated SQL 42569148225 SUCCESS (no SQL/Auth/backend files touched by feature). PR-head frozen603 42569148206 SKIPPED, not PASS; merged frozen603 not applicable. No production or member-data/provider write; no physical-device acceptance claimed."
       ],
       "ci_runs": [
         42568664121,
@@ -10115,13 +10118,14 @@
         42569148201,
         42569148225,
         42569148228,
-        42569148206
+        42569148206,
+        42569710729,
+        42569710706,
+        42569710700
       ],
-      "blockers": [
-        "Merged development source exact-source CI and final queue reconciliation still pending."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1596",
-      "notes": "No deploy; existing #37 video/guide, Settings links, signup/invite/permission gates, stored setups, offline shots, Community and recommendations unchanged. All three changed deployable paths tracked as TESTING until evidence passes."
+      "notes": "Verified feature-level READY on development SHA 27601ff6a427709b9012dde4946c43f730466b37; same main.js source file as independent READY #1591, so any later publication must use the separately approved single READY-only batch/source-isolation preflight. Original #37 video/guide and Settings links retained, only admitted members with no setup see this new screen; no accounts/notes/offline shots/Community/ratings/engine changes, no deployment. No release staging/one-use grant before owner Publish."
     }
   ],
   "history": [
