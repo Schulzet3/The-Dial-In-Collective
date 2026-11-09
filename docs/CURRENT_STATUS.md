@@ -1,3 +1,10 @@
+## November 9, 2026 UTC — Issue #455 R138 full original immersion sensory study transfer boundary (research only) [skip netlify]
+
+- Primary full [Liang et al. *Scientific Reports* 2024](https://pmc.ncbi.nlm.nih.gov/articles/PMC11335879/) Methods/Results/Discussion inspected: 2 roast x 3 water temp x 5 time full-immersion conditions, 14 trained panelists, twofold dilution and cold service; negative sweetness/TDS association and roast/temperature/time effects are NOT pressure-espresso personal taste or causal shot recommendations. Original 27 vs 28 attributes Methods/Results discrepancy unresolved; supplement/Dryad/raw/PDF SHA not checked. No Locked numeric/temperature/yield rule changed. Evidence ledger 77 curated sources/193 claim checks/100 proposals, scoped journal `docs/workstreams/ops-issue455-r138-immersion-sensory-20261109.md`; S019 PDF remains inaccessible, #267 line credit zero.
+- Source `8f05ee28893e2dff8ae2c1a8daeb22152d32af93` (engine `b84782d...`, model `5ea7123...`), main `55c2beb...`, release/production `2d0bed3...`; separate owner READY26 publication already occurred, no release authorized here. No app/test/queue/provider/SQL/Auth/member writes. At authoring docs-only PR and exact CI **PENDING**, not PASS. #455 remains OPEN.
+
+---
+
 ## November 9, 2026 UTC — owner-authorized READY26 production release VERIFIED DEPLOYED [skip netlify]
 
 - Owner command: "Publish the queue" Nov 9 (Denver), single frozen 26 READY item batch. Source 4ed77f1bd73af0d641a13718c5eeb07eac708ad6 on release-candidates/ready26-20261109-r1; five exact-source GitHub checks SUCCESS: approval [42626237812](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42626237812), validate [42626237923](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42626237923), cloud/mobile [42626237860](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42626237860), SQL [42626238105](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42626238105). CI NOT_APPLICABLE/SKIPPED is not falsely called PASS.
