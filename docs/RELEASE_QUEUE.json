@@ -10697,12 +10697,12 @@
       "state": "TESTING",
       "merged_source_sha": null,
       "scope_paths": [
-        "site/lib/engine.js",
-        "tests/issue455-offline-legacy-shot-replay.test.mjs"
+        "site/lib/engine.js"
       ],
       "tests": [
         "R146 exact source old engine blob c91656d7cef5fd0621d883d433f0c0b519359dbe validated new-shot style/rating inputs before checking an existing shot ID: a once-saved historical Custom shot or partial legacy rating cannot be idempotently returned on replay even though no new shot is being created.",
-        "Focused synthetic Node22 regressions: existing historical Custom return preserves notes and five original values; partial legacy rating never invented green; reused ID for a different coffee throws without mutation; fresh Custom/incomplete ratings still rejected; valid new Turbo shot remains saved once. Exact-source CI PENDING."
+        "Focused synthetic Node22 regressions: existing historical Custom return preserves notes and five original values; partial legacy rating never invented green; reused ID for a different coffee throws without mutation; fresh Custom/incomplete ratings still rejected; valid new Turbo shot remains saved once. Exact-source CI PENDING.",
+        "PR1731 original approval run 42705719614 FAILED genuine queue schema validation: scope_paths included a test file even though queue only admits deployable source paths. Fixed intake metadata only, preserved engine and test blob bytes; retesting exact corrected PR HEAD required."
       ],
       "ci_runs": [],
       "blockers": [
