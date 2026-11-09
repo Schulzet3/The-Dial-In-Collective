@@ -10654,6 +10654,31 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
       "notes": "Development-only; no deployment or new Locked policy. Includes three existing PR #1702 synthetic cases, same-context positive and mismatched-context negatives, hidden/missing/invalid exclusions, immutable private shot history. Never infer empirical cup improvement. READY source only, not published. No change to Locked taste rules, numeric targets, member/SQL/Auth/provider data."
+    },
+    {
+      "id": "DIC-Q-1676-admin-code-account-delete",
+      "issue": 1676,
+      "pr": null,
+      "title": "Admin Delete Code (automatic revoke) and permanent member deletion with Keep/Remove Community",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/admin/main.js",
+        "site/admin/view.js",
+        "site/admin/styles.css",
+        "supabase/migrations/20261109152500_dic_admin_invite_account_delete.sql",
+        "supabase/functions/dic-delete-member-account/index.ts"
+      ],
+      "tests": [
+        "Disposable SQL and Admin JS fixtures committed, no passing CI claimed yet."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "High-risk Auth/SQL/Edge and privacy regression CI not yet verified on exact source.",
+        "Source not nonforce merged with development; production publication not authorized."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1676",
+      "notes": "Source work-in-progress; operator-only, two-stage destructive Auth deletion and private audit/Community choice. No hosted SQL/Edge or account/code data changes."
     }
   ],
   "history": [

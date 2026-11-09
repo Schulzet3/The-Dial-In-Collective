@@ -35,3 +35,7 @@ Added `supabase/tests/admin_member_deletion.sql` to the existing ONE isolated SQ
 ## Admin JS tests
 
 Updated the retired no-hard-delete assertion, preserving administrator protection. Added fixture tests for escaped Keep/Remove Community choices, no forged direct confirmation, confirmed exact member and choice, server-only operation UUID to Edge, and Delete Code RPC. No production writes. CI verdict pending.
+
+## Release queue IN_PROGRESS tracking
+
+Added only `DIC-Q-1676-admin-code-account-delete` with exact runtime/SQL/Edge scope; status IN_PROGRESS, no CI PASS, no merged SHA and no production authorization. Existing 260 queue entries and released receipts retained unmodified. READY only after applicable exact-source CI, safe integration and migration/Edge release compatibility proof.
