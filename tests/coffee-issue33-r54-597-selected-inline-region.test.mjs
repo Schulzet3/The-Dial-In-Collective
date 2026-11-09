@@ -15,6 +15,8 @@ test('direct current selected compound Product process/variety/farm/producer/reg
  assert.match(got.quote,/Region: Meru/);
  const q=parse();assert.equal(q.ok,true,JSON.stringify(q));
  assert.equal(q.fields.origin,'Meru, Kenya',JSON.stringify(q));
+ assert.equal(q.fields.variety,'SL28 and Ruiru 11',JSON.stringify(q));
+ assert.equal(q.fields.elevation_m,'1400 meters above sea level',JSON.stringify(q));
  assert.ok(!q.conflicts?.includes('origin'),JSON.stringify(q.conflicts));
  assert.match(coffeeUrlPreviewMarkup(q),/Meru, Kenya/);
  assert.ok(coffeeSourceReviewSnapshot({...q,source_url}));
@@ -42,4 +44,28 @@ test('other products, education and unrelated paragraphs cannot donate a selecte
  assert.equal(refine({name,country:'Kenya',origin:'Kenya',blocks:[{tag:'h1',text:name},{tag:'p',text:specs,educational:true}]}),null);
  const q=parse('A wonderful cup.',{related:'<aside class="related-products"><h2>Other Products</h2><p>'+specs+'</p></aside>'});
  assert.notEqual(q.fields.origin,'Meru, Kenya');
+});
+
+test('direct typed cultivar and elevation fail closed on ambiguous/nonbotanical or nonmetric evidence',()=>{
+ const cases=[
+  specs.replace('Variety: SL28 and Ruiru 11 (which are exclusive varieties to Kenya).','Variety: unknown breed.'),
+  specs.replace('Variety: SL28 and Ruiru 11 (which are exclusive varieties to Kenya).','Variety: Bourbon. Variety: Caturra.'),
+  specs.replace('Elevation; 1400 meters above sea level.','Elevation; 1400 grams.'),
+  specs.replace('Elevation; 1400 meters above sea level.','Elevation; 1400 meters. Elevation: 1700 meters.')
+ ];
+ for(const [i,story] of cases.entries()){
+  const q=parse(story);
+  assert.equal(q.ok,true,JSON.stringify(q));
+  if(i<2)assert.equal(q.fields.variety,undefined,'unqualified cultivar: '+JSON.stringify(q.fields));
+  else assert.equal(q.fields.elevation_m,undefined,'unqualified elevation: '+JSON.stringify(q.fields));
+ }
+});
+test('unrelated related-product and mismatched H1 cannot donate compound cultivar/elevation',()=>{
+ const other='<aside class="related-products"><h2>Related products</h2><p>'+specs+'</p></aside>';
+ const q=parse('A balanced coffee.',{related:other});
+ assert.equal(q.fields.variety,undefined,JSON.stringify(q.fields));
+ assert.equal(q.fields.elevation_m,undefined,JSON.stringify(q.fields));
+ const wrong=parse(specs,{title:'Kenya Another Coffee'});
+ assert.equal(wrong.fields.variety,undefined,JSON.stringify(wrong.fields));
+ assert.equal(wrong.fields.elevation_m,undefined,JSON.stringify(wrong.fields));
 });

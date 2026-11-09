@@ -52,6 +52,14 @@ for(const spec of R54_CASES){
   if(observed.direct_washed)check(rec.current_fields?.process==='Washed','selected_washed_missing_597');
   if(observed.direct_meru)check(/Meru/iu.test(rec.current_fields?.origin||'')&&/Kenya/iu.test(rec.current_fields?.origin||''),
    'selected_meru_kenya_not_retained_597');
+  observed.direct_variety=/\bVariety:\s*SL\s*28\s+and\s+Ruiru\s*11\b/iu.test(current);
+  observed.direct_elevation=/\bElevation\s*[;:]\s*1400\s+meters?\s+above\s+sea\s+level\b/iu.test(current);
+  check(observed.direct_variety&&observed.direct_elevation,'selected_cultivar_height_source_changed_597');
+  if(observed.direct_variety)check(rec.current_fields?.variety==='SL28 and Ruiru 11',
+   'selected_labeled_cultivar_omitted_597');
+  if(observed.direct_elevation)check(
+   /^1400\s+(?:m(?:eters?|etres?)|masl)\b/iu.test(rec.current_fields?.elevation_m||''),
+   'selected_labeled_elevation_omitted_597');
  } else if(spec.number===600){
   observed.direct_medium=/\bMedium Roast\b/iu.test(current);
   observed.direct_washed=/\bProcess\s+Washed and Sun Dried\b/iu.test(current);

@@ -2158,6 +2158,40 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   if(inline){
    rememberCoffeeReviewCandidate(fields,'origin',fields.origin,'Prior broad selected country');
    fields.origin=inline.value;
+   // The same single H1/current-lot paragraph already passed the direct
+   // Process/Variety/Farm/Producer/unique Region gate. Recover only its
+   // individually printed botanical list and physical height; never use
+   // an unrelated page, old lot, regional education or SEO as a donor.
+   // A repeated/ambiguous label cannot supply either canonical field.
+   const selectedText=inline.quote;
+   const varietyLabels=[...selectedText.matchAll(/\bVariet(?:y|ies)\s*:/giu)];
+   const varietyCaptures=[...selectedText.matchAll(/\bVariet(?:y|ies)\s*:\s*([^.]{3,150})\.\s*(?=Farm\s*:)/giu)];
+   if(!fields.variety&&!conflicts.has('variety')&&
+    varietyLabels.length===1&&varietyCaptures.length===1){
+    const value=varietyCaptures[0][1].replace(/\s*\([^()]{3,140}\)\s*$/u,'').trim();
+    if(explicitCoffeeVarietyList(value)){
+     addField(fields,'variety',value);
+     if(fields.variety&&source_facts.length<384)source_facts.push({
+      field:'variety',label:'Current selected compound-spec Variety',
+      value:varietyCaptures[0][0],source_url,source_type:'html',
+      section:'Exact selected Process/Variety/Farm/Producer/Region paragraph'
+     });
+    }
+   }
+   const elevationLabels=[...selectedText.matchAll(/\bElevation\s*[;:]/giu)];
+   const elevationCaptures=[...selectedText.matchAll(/\bElevation\s*[;:]\s*(\d{3,4}(?:\s*[-–]\s*\d{3,4})?\s*(?:meters?|metres?|masl|m)(?:\s+above\s+sea\s+level)?)(?=[.!?;,]|$)/giu)];
+   if(!fields.elevation_m&&!conflicts.has('elevation_m')&&
+    elevationLabels.length===1&&elevationCaptures.length===1){
+    const measured=parseCoffeeElevation(elevationCaptures[0][1],{allowBare:false});
+    if(measured&&!measured.conflicting){
+     addField(fields,'elevation_m',measured.display);
+     if(fields.elevation_m&&source_facts.length<384)source_facts.push({
+      field:'elevation_m',label:'Current selected compound-spec Elevation',
+      value:elevationCaptures[0][0],source_url,source_type:'html',
+      section:'Exact selected Process/Variety/Farm/Producer/Region paragraph'
+     });
+    }
+   }
    if(source_facts.length<384)source_facts.push({
     field:'origin',label:'Direct selected compound-spec Region',
     value:inline.quote,source_url,source_type:'html',
