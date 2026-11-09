@@ -2325,7 +2325,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  if(fields.origin&&!conflicts.has('origin')&&geographyParts(fields.origin).length===1&&
   ORIGIN_COUNTRIES.has(keyOf(fields.origin))){
   const adjacent=selectedCurrentAdjacentHeroRegion(canonicalProduct,{
-   name:fields.name,origin:fields.origin
+   name:fields.name,origin:fields.origin,producer:fields.producer
   });
   if(adjacent){
    rememberCoffeeReviewCandidate(fields,'origin',fields.origin,

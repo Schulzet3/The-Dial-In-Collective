@@ -13,7 +13,7 @@ const selected=({h1=name,subtitle='Bensa, Sidama Ethiopia',pre='',post='',origin
  '<p>We hear: Plum, Lemonade, Wildflower Honey</p></div>'+post+'</article></main></html>';
 test('R59 original603 #581 selected hero gives current Bensa Sidama origin and UI',()=>{
  const html=selected();
- assert.equal(refine(html,{name,origin:'Ethiopia'})?.value,'Bensa, Sidama, Ethiopia');
+ assert.equal(refine(html,{name,origin:'Ethiopia',producer:'Smallholder Farmers'})?.value,'Bensa, Sidama, Ethiopia');
  const out=extractPublicCoffeeFacts(html,{source_url:url});
  assert.equal(out.ok,true,JSON.stringify(out));
  assert.equal(out.fields.origin,'Bensa, Sidama, Ethiopia',JSON.stringify(out));
@@ -23,21 +23,22 @@ test('R59 original603 #581 selected hero gives current Bensa Sidama origin and U
 test('R59 generic distinct selected #580 hero geography and existing fine origins',()=>{
  const otherName='Faver Ninco - Colombia';
  const html=selected({h1:otherName,subtitle:'Santa Maria, Huila Colombia',origin:'Colombia'});
- assert.equal(refine(html,{name:otherName,origin:'Colombia'})?.value,'Santa Maria, Huila, Colombia');
- assert.equal(refine(html,{name:otherName,origin:'Huila, Colombia'}),null);
+ assert.equal(refine(html,{name:otherName,origin:'Colombia',producer:'Smallholder Farmers'})?.value,'Santa Maria, Huila, Colombia');
+ assert.equal(refine(html,{name:otherName,origin:'Colombia',producer:'Faver Ninco'}),null);
+ assert.equal(refine(html,{name:otherName,origin:'Huila, Colombia',producer:'Smallholder Farmers'}),null);
 });
 test('R59 reject changed H1, historic/related/SEO, wrong country, misleading sensory, ambiguous hero',()=>{
  for(const [html,props] of [
-  [selected({h1:'Hamasho Borena - Ethiopia'}),{name,origin:'Ethiopia'}],
-  [selected({subtitle:'Other coffee',post:'<h2>Related products</h2><p>Bensa, Sidama Ethiopia</p>'}),{name,origin:'Ethiopia'}],
-  [selected({subtitle:'Other coffee',pre:'<meta content="Bensa, Sidama Ethiopia">'}),{name,origin:'Ethiopia'}],
-  [selected({subtitle:'Last year Bensa, Sidama Ethiopia'}),{name,origin:'Ethiopia'}],
-  [selected({subtitle:'Bensa, Sidama Kenya'}),{name,origin:'Ethiopia'}],
-  [selected(),{name,origin:'Kenya'}],
-  [selected(),{name,origin:'Sidama, Ethiopia'}],
-  [selected({subtitle:'Chocolate, Cherry Ethiopia'}),{name,origin:'Ethiopia'}],
-  [selected({post:'<h1>Other coffee</h1>'}),{name,origin:'Ethiopia'}],
-  [selected({subtitle:'Bensa, Sidama Ethiopia; Bura, Sidama Ethiopia'}),{name,origin:'Ethiopia'}]
+  [selected({h1:'Hamasho Borena - Ethiopia'}),{name,origin:'Ethiopia',producer:'Smallholder Farmers'}],
+  [selected({subtitle:'Other coffee',post:'<h2>Related products</h2><p>Bensa, Sidama Ethiopia</p>'}),{name,origin:'Ethiopia',producer:'Smallholder Farmers'}],
+  [selected({subtitle:'Other coffee',pre:'<meta content="Bensa, Sidama Ethiopia">'}),{name,origin:'Ethiopia',producer:'Smallholder Farmers'}],
+  [selected({subtitle:'Last year Bensa, Sidama Ethiopia'}),{name,origin:'Ethiopia',producer:'Smallholder Farmers'}],
+  [selected({subtitle:'Bensa, Sidama Kenya'}),{name,origin:'Ethiopia',producer:'Smallholder Farmers'}],
+  [selected(),{name,origin:'Kenya',producer:'Smallholder Farmers'}],
+  [selected(),{name,origin:'Sidama, Ethiopia',producer:'Smallholder Farmers'}],
+  [selected({subtitle:'Chocolate, Cherry Ethiopia'}),{name,origin:'Ethiopia',producer:'Smallholder Farmers'}],
+  [selected({post:'<h1>Other coffee</h1>'}),{name,origin:'Ethiopia',producer:'Smallholder Farmers'}],
+  [selected({subtitle:'Bensa, Sidama Ethiopia; Bura, Sidama Ethiopia'}),{name,origin:'Ethiopia',producer:'Smallholder Farmers'}]
  ])assert.equal(refine(html,props),null,JSON.stringify({html,props}).slice(0,480));
 });
 test('R59 contradictory present origin cannot be overwritten by the hero',()=>{
