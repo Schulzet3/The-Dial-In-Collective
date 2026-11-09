@@ -15,3 +15,7 @@ Reused the historical `dic_admin_access_overview` definition as `CREATE OR REPLA
 ## Admin view and light/dark responsive controls
 
 Added per-code Delete Code action including used/revoked codes; added nonadmin Delete Account button alongside reversible access toggle; added two-option permanently destructive dialog with server-provided impact counts and accessible Light/Dark contrast. Backend wiring, tests and verification remain pending; no hosted SQL or member/account action.
+
+## Service-role only GoTrue deletion bridge
+
+New Edge source `supabase/functions/dic-delete-member-account/index.ts` validates origin, authenticated identity, current admitted/admin role, exact operation UUID and server-side request budget. The *only* service-role client prepares SQL, deletes GoTrue user, checks ambiguous failures and finalizes only after the DB independently verifies the Auth row is gone. On partial failures returns retryable status, never false completed; no deployed function yet. Supabase JS admin.deleteUser API checked against official documentation. No production writes.
