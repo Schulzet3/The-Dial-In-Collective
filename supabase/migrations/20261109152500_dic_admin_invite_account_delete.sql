@@ -42,7 +42,7 @@ grant execute on function public.dic_admin_delete_invite(uuid) to authenticated;
 
 -- Hide deleted codes from dashboard, complete pages and filtered totals without
 -- deleting prior redemption rows, raw hashes or non-secret audit history.
-create function private.dic_admin_access_overview()
+create or replace function private.dic_admin_access_overview()
 returns jsonb language plpgsql stable security definer set search_path='' as $$
 begin
  if auth.uid() is null or not private.is_admin() then

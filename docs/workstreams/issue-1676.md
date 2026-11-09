@@ -7,3 +7,7 @@ This source-stage change introduces admin-only invitation deletion with private 
 ## Backend SQL safety refinement
 
 Before any CI/release, reviewed delete-finalization ordering: capture target Community IDs from the frozen contributor IDs **before** unlinking, detach reviews, remove only those projections, and count removed rows atomically. Fail-closed on missing Auth deletion; no provider or member-data writes. Full test/Edge integration still pending.
+
+## Source idempotency fix
+
+Reused the historical `dic_admin_access_overview` definition as `CREATE OR REPLACE` (not conflicting CREATE) so the forward-only migration can apply after the existing Admin API. No production operations; isolated SQL remains to be run.
