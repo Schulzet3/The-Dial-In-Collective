@@ -69,6 +69,8 @@ test('R60 directly selected compound medium level is parsed and displayed in rea
  const p=extractPublicCoffeeFacts(html,{source_url:R60_CASES[1].url});
  assert.equal(p.ok,true,JSON.stringify(p).slice(0,1600));
  assert.equal(p.fields.roast_level,'Medium',JSON.stringify(p).slice(0,2000));
+ assert.ok(p.source_facts?.some(f=>f.field==='roast_level'&&
+  f.source_type==='html'&&f.value==='Roast: medium level'),JSON.stringify(p).slice(0,3000));
  assert.ok(coffeeUrlPreviewMarkup(p).includes('coffee-url-preview'));
  assert.ok(coffeeSourceReviewSnapshot({...p,source_url:R60_CASES[1].url}));
 });

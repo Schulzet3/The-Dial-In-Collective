@@ -69,7 +69,6 @@ for(const spec of R60_CASES){
   check(fields.process==='Washed','selected_washed_missing_596');
   check(/Concepción Villatoro/iu.test(String(fields.producer||'')),
    'direct_selected_grower_missing_596');
-  check(!fields.roast_level,'ambiguous_medium_or_medium_light_falsely_selected_596');
  }
  observations.push({number:spec.number,official_url:rec.official_url||null,
   selected_h1:rec.selected_h1||[],status:rec.status||'NOT_FETCHED',

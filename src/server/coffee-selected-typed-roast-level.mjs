@@ -25,5 +25,6 @@ export function selectedCurrentTypedRoastLevel({name='',origin='',blocks=[]}={})
   !/\b(?:Grower|Producer)\s*:\s*[\p{L}\p{M}][^,;.!?]{2,120}/iu.test(block.text)||
   !/\bProcess\s*:\s*(?:washed|natural|honey|anaerobic)\b/iu.test(block.text))return null;
  const value=labels[0].raw.match(tier)[1].toLowerCase();
- return {value:value[0].toUpperCase()+value.slice(1),quote:block.text.slice(0,500)};
+ return {value:value[0].toUpperCase()+value.slice(1),literal:labels[0].raw,
+  quote:block.text.slice(0,500)};
 }

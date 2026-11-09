@@ -1789,6 +1789,12 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   ...(matchedDescriptions.length?[collectStructuredCoffeeSourceFacts({description:matchedDescriptions.join('\n\n')},{source_url,source_type:'html'})]:[]),
   ...[p,...equivalentProducts.filter(candidate=>candidate!==p)].map(candidate=>collectStructuredCoffeeSourceFacts(candidate,{source_url}))
  );
+ // Keep literal direct selected roast provenance visible in Source Review,
+ // without elevating a fallback, unsupported area, or conflicting roast.
+ if(directTypedRoast&&fields.roast_level===directTypedRoast.value&&source_facts.length<384)
+  source_facts.push({field:'roast_level',label:'Roast',
+   value:'Roast: '+directTypedRoast.literal,source_type:'html',source_url,
+   section:'Exact selected current Country/Region/Farm/Grower/Process paragraph'});
  // Conditional flavors of this same selected coffee are review-only context.
  // Never assert with-milk tasting as unqualified green-bean or shot flavor.
  const milkContext=selectedCoffeeMilkSensoryContext(canonicalProduct,{name:fields.name,clean});
