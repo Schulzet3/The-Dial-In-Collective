@@ -27,3 +27,7 @@ New Edge source `supabase/functions/dic-delete-member-account/index.ts` validate
 ## Exact-preview concurrency guard
 
 Refactored the single source of server-authoritative impact counts into private `dic_admin_account_delete_impact`, denied to clients. Both admin-facing preview/request and service-only prepare now call it, with an actual equality check before admission revocation. This closes an account-data race between displayed preview and external GoTrue deletion. No production write or inferred test PASS.
+
+## Disposable SQL implementation acceptance fixture
+
+Added `supabase/tests/admin_member_deletion.sql` to the existing ONE isolated SQL regression loop. Exercises admin/ordinary/anonymous privileges, a deleted code's immediate revocation and invisibility across search/overview/pages, private receipt and idempotence, exact account preview rejection, confirmed request, server-only preparation, prohibition on pre-Auth finalization, disposable simulated Auth cascade, retention of private contributor identity for Community weighting, removal of only the selected user's Community rows, and an untouched second member. The suite has a hard `current_database()='dic_ci'` guard and wraps all inserts/DELETES in BEGIN/ROLLBACK. Actual CI verdict PENDING; no hosted operations.
