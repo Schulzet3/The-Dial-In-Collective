@@ -1633,3 +1633,18 @@ Original G1-123/G1-125/G1-126 interim queued/testing reports preserved as histor
 Exactly three scoped #504 audit documentation paths committed together: receipt, append-only ledger and same-commit journal; no code/queue/Locked changes. SHA1-abc self-test, original-by-ID parity, record uniqueness and count arithmetic PASS. Actual Node22 app, live SQL/Auth, browser/mobile/offline and original603 functional checks **NOT_RUN_DOCS_ONLY**. Applicable PR and exact-merged-source governance CI **NOT YET OBSERVED; not PASS**. No deployment, Netlify, release/main movement, production/member/Auth/Edge/SQL/provider, original oracle/history, backup, forced Git or visibility changes.
 
 **NEXT exact unreviewed original:** [Issue #504 comment 6736954436](https://github.com/Schulzet3/The-Dial-In-Collective/issues/504#issuecomment-6736954436), word 1. Issue OPEN / IN_PROGRESS; no global completion claim.
+
+
+---
+
+## Issue #504 G1-133 — November 9 UTC: eight #504 original historical GitHub comments [skip netlify]
+
+**Live SHAs before source-bound commit:** development `91b431a5bcfc5fcc05a26b89cece73dd98de93ee`, main `55c2bebcdcabda40e890ac25dcb9880ec789b5a4`, release/production `2d0bed35e67f6a745a21cbd80616ad4c9a98ed41`; original ledger blob `fbb3f22869cb6dc49b233d5f72a74dcea5943b7a`, journal blob `49d847470d87b5c33f4d9636ae2a6cf3aa96d22c`. #504/#267/#455/#33/#96 remain OPEN. AGENTS authorizes owner-only temporary public #630 Nov4–30; no visibility change. Source register, entrypoint/preflight, status, Locked specification/decisions, approval and queue consulted as policy, not newly credited words.
+
+**Direct complete semantic review:** Original Issue #504 comment IDs `6736954436, 6736975032, 6738075363, 6738116660, 6739240476, 6739257316, 6740336579, 6742383603`, every original word 1–EOF, **8 unique previous-uncredited records / 2823 Unicode-whitespace words / 32095 UTF-8 bytes**, complete 237-comment snapshot and raw REST-by-ID parity 8/8. Individual timestamp, SHA1, physical lines/word ranges and dated interim-versus-FINAL dispositions in [immutable G1-133 receipt](../audits/issue504-review-G1-133.json). Earlier G1-117 -15/-4,012 duplicate correction retained. Corrected cumulative 7,919 file lines / 60,754 words + 804 GitHub objects / 242,008 words.
+
+**History/current reconciliation:** Original G1-127/128/129 interim queued/testing statuses superseded by FINAL original texts; PRs #1634/#1645/#1652/#1663/#1674 currently MERGED independently checked. Delegated strict #267 F473 `src/server/coffee-delimited-specs.mjs:10–12` original/live blob `923d8a1b2a7e52a046df8cb2b14e308daaebf582` and line-level semantic journal `542a8b68c3ba41a8869b84e15e84a2df9f906eb2` independently matched 3/3; **zero duplicated #267 source credit**. No present #504-owned defect reproduced or safe deletion proven; preserve #33/#455/#96 ownership. Whole inventory/word review remains incomplete.
+
+**Safety/tests:** This receipt, ledger and same-commit journal only; PR-head and merged-source exact CI NOT_YET_OBSERVED, **not PASS**. SHA1 abc vector, 8/8 original REST parity, negative 8/8 duplicate checks and sum arithmetic PASS. Node22 app, real SQL/Auth, browser/mobile/offline and original603 functional tests NOT_RUN_DOCS_ONLY. No deployment, Netlify, production/provider/Auth/SQL/member, main/release, backup, original603, queue, Locked, force Git or visibility mutation.
+
+**Exact NEXT unreviewed original:** [Issue #504 interim checkpoint 6744227291](https://github.com/Schulzet3/The-Dial-In-Collective/issues/504#issuecomment-6744227291), word 1. Issue OPEN / IN_PROGRESS.
