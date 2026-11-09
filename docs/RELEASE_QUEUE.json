@@ -12,21 +12,31 @@
       "issue": 1591,
       "pr": 1594,
       "title": "Show Starting Shot Style until a member logs their first shot for the coffee",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "6dee3abcc85ca8604a15ade572bd10d7cbe19b95",
       "scope_paths": [
         "site/cloud/main.js"
       ],
       "tests": [
-        "Dedicated tests/cloud-first-style-on-expand.test.mjs covers no Add Coffee prompt, repeated open/collapse/reopen/reload, legacy claim bypass, selected style, existing and hidden shot suppression. Added tests staged in candidate; execution and exact CI pending.",
-        "Expected offline behavior: applyPending merges a queued save_shot into effective owner state, so first-shot prompt is suppressed before server sync; targeted offline/UX checks pending."
+        "PR #1594 exact tested head 4dee378e338517158d3be401e81da50fb4a76a30: Node22 3,176 PASS / 0 FAIL / 6 intentional SKIP, lint and single build SUCCESS; run 42568501276.",
+        "Exact PR-head cloud-tests and real Chromium visual/accessibility/mobile/offline acceptance SUCCESS run 42568501233; approval run 42568501399, isolated SQL run 42568501226, security run 42568501347 SUCCESS. Frozen603 intentionally SKIPPED, not a pass.",
+        "PR #1594 nonforce squash merged 6dee3abcc85ca8604a15ade572bd10d7cbe19b95 on development; all 14 changed code/test/governance Git blobs byte-identical to tested head. Unrelated prior development Issue #267 journal was preserved; no overwrite/force.",
+        "Exact merged SHA 6dee3abcc85ca8604a15ade572bd10d7cbe19b95 Node22 3,176 PASS / 0 FAIL / 6 intentional SKIP, lint/build SUCCESS run 42568705424; merged cloud and browser/mobile/offline run 42568705497 SUCCESS; approval/continuity run 42568705606 SUCCESS. PR-head SQL/security evidence reusable as corresponding deployable bytes unchanged.",
+        "Verified in-app: no-shot Starting Shot Style guidance persists across reopen/reload; chosen style guides first shot; saving or locally queued first shot suppresses panel; historical hidden shot suppresses repeat; normal later Starting Recommendation/Log A Shot restored. No physical owner-device acceptance asserted."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact PR-head and nonforce merged-source applicable CI not yet verified; not READY, not published."
+      "ci_runs": [
+        42568501276,
+        42568501233,
+        42568501399,
+        42568501226,
+        42568501347,
+        42568705424,
+        42568705497,
+        42568705606
       ],
+      "blockers": [],
       "owner_source": "Owner direct chat November 8, 2026; Locked decision UX-FIRST-SHOT-STYLE-UNTIL-LOGGED-20261108; GitHub Issue #1591",
-      "notes": "Source-only UI behavior; preserve Auth/privacy, full shot history, legacy claim records, existing five styles/shot flow. No SQL/RPC/IndexedDB schema change, Netlify/production/member writes or owner-device certification."
+      "notes": "READY in merged development only; NOT DEPLOYED. Locked Nov 8 UX owner supersession recorded in both Master Spec/Decision Ledger; Add Coffee remains unchanged, claim SQL/IndexedDB retained for compatibility, Auth/privacy/offline/historical data preserved. No production publication, SQL/Auth/member/provider writes or physical-device claim. Separate owner Publish command required."
     },
     {
       "id": "DIC-Q-455-offline-shot-replay-coffee-identity",
