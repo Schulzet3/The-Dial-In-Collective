@@ -27,7 +27,24 @@ for(const spec of R60_CASES){
   html=b.toString('utf8');len=b.length;
   rawVerified=len===rec.html_bytes&&sha(b)===rec.html_sha256;}catch{}
  check(rawVerified,'current_raw_html_sha256_or_size_mismatch_'+spec.number);
- const claims=r60DirectSelectedClaims(spec.name,productMarkup(html));
+ const scoped=productMarkup(html);
+ const claims=r60DirectSelectedClaims(spec.name,scoped);
+ const simplify=s=>String(s||'').replace(/<[^<>]{0,2000}>/gu,' ')
+  .replace(/&(?:nbsp|amp);/giu,' ').replace(/\s+/gu,' ').trim();
+ const diagnostic=(value)=>{
+  const clean=simplify(value),markers=[
+   'What’s in it','Region:','Gera, Limmu','Natural Process',
+   'The Full Story','Finca Los Dos Socios is located',
+   'La Libertad','Roast: Medium','Sulladjah'];
+  return {length:clean.length,markers:markers.map(label=>{
+   const at=clean.toLowerCase().indexOf(label.toLowerCase());
+   return {label,at,fragment:at<0?null:clean.slice(Math.max(0,at-75),at+210)};
+  })};
+ };
+ const visibleScopeDiagnostic={raw:diagnostic(html),scoped:diagnostic(scoped)};
+ console.log('[DIC33 R60 CURRENT RAW VS SELECTED PRODUCT SCOPE] '+JSON.stringify({
+  number:spec.number,...visibleScopeDiagnostic
+ }));
  const fields=rec.current_fields||{},origin=String(fields.origin||''),notes=String(fields.tasting_notes||'');
  if(spec.number===595){
   check(claims.labeled_region&&claims.explicitly_not_sulladjah_only&&
@@ -58,7 +75,7 @@ for(const spec of R60_CASES){
   selected_h1:rec.selected_h1||[],status:rec.status||'NOT_FETCHED',
   exact_current_html_bytes:len,raw_html_sha256:rec.html_sha256||null,
   raw_html_sha256_verified:rawVerified,
-  direct_current_claims:claims,actual_fields:fields,
+  direct_current_claims:claims,selected_product_scope_diagnostic:visibleScopeDiagnostic,actual_fields:fields,
   conflicts:rec.conflicts||[],add_coffee:rec.add_coffee_ui_rendered===true,
   source_review:rec.source_review_rendered===true});
 }
