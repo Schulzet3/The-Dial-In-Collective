@@ -34,6 +34,16 @@ for(const spec of R52_EXACT_SOURCE_CASES) {
   selected_mentions_grapos:text.includes('grapos'),
   selected_mentions_chiroso:text.includes('chiroso')
  };
+ if(spec.number===586&&observations.selected_mentions_alma_negra_natural&&observations.selected_mentions_honey_processed){
+  // Real current selected product explicitly prints incompatible Natural
+  // and Honey methods. The canonical process MUST remain blank and reviewable.
+  check(!Object.hasOwn(rec.current_fields||{},'process')&&(rec.conflicts||[]).includes('process'),
+   'selected_586_genuine_current_process_conflict_must_be_blank_and_reviewable');
+  // "An Extraordinary Process" is the product's editorial section heading,
+  // never a third typed process method in the review evidence.
+  check(!(rec.source_facts||[]).some(f=>f.field==='process'&&/^An Extraordinary$/i.test(String(f.value||''))),
+   'selected_586_editorial_heading_mislabelled_as_process');
+ }
  cases.push({number:spec.number,identity_verified:rec.selected_heading_identity_verified===true,
   source_status:rec.status||'MISSING',source_url:rec.final_url||rec.official_url||null,
   selected_h1:rec.selected_h1||[],parser_ok:rec.parser_ok===true,

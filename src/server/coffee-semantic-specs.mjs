@@ -272,7 +272,14 @@ export function extractSemanticCoffeeSpecs(html,{clean}={}){
    // Wet/Dry Process are complete method names, not a bare adjective
    // followed by a removable caption. Keep the published phrase intact.
    const method=kind==='process'&&/\b(?:wet|dry)\s*$/i.test(suffix[1]);
-   if(kind==='variety'||kind==='process')add(kind,generic||method?lines[0]:suffix[1],node.start,node.end,suffix[2],{suffix:true});
+   // A standalone marketing heading, e.g. "An Extraordinary Process", is
+   // not itself a processing method. Retain its literal headline in the page,
+   // but never turn its editorial adjective into a typed process source fact.
+   // An actual method explicitly named after a determiner remains eligible.
+   const editorial=kind==='process'&&/^(?:an?|the|our|this|your)\s+/iu.test(suffix[1])&&
+    !/\b(?:washed|natural|honey|anaerob(?:ic|ico|ica)|wet|dry|pulped|ferment(?:ation|ed|ing)?|carbonic|maceration|giling|swiss|mountain|ethyl|sugar[ -]?cane)\b/iu.test(suffix[1]);
+   if((kind==='variety'||kind==='process')&&!editorial)
+    add(kind,generic||method?lines[0]:suffix[1],node.start,node.end,suffix[2],{suffix:true});
   }
  }
  // Pair direct siblings only. Transparent one-child formatting wrappers can
