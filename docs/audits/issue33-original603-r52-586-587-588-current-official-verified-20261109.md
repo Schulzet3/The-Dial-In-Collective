@@ -22,7 +22,7 @@ Generic fix [PR #1577](https://github.com/Schulzet3/The-Dial-In-Collective/pull/
 - #586: 244882 bytes, `bf5c55a904d1cad796e7312ad58ea687208314289310bf0504fe5491c7f77f61`.
 - #587: 229575 bytes, `b337e59ff22fca2353d459c2cb2a9bf121322deb12371a3bd5d70fac8cb8f04e`.
 - #588: 225180 bytes, `a9bd5ed0c10f6ecb34c48e73fae34359d1ca3ca0b4894e7c7c2eb24c238667da`.
-Hashes agree all report manifest and ZIP files. Run-specific HTML SHA differences attributable to page output (no unsupported product-lot change asserted). Actual exact #586 retained source facts after fix include only `process Alma Negra Natural` and `process Honey Processed`, both conflicting, not `An Extraordinary` typed. Neutral original visible heading and story text preserved.
+Hashes agree all report manifest and ZIP files. Raw HTML differed between the two bounded fresh captures; the first differing bytes in each case were the storefront's dynamic `__st.reqid` field. No selected product/lot identity changed in the independently checked parser and H1; do not assume the remaining raw-byte differences prove a specific source update. Actual exact #586 retained source facts after fix include only `process Alma Negra Natural` and `process Honey Processed`, both conflicting, not `An Extraordinary` typed. Neutral original visible heading and story text preserved.
 
 ## Exact merged applicable CI, scope and remaining acceptance
 - Source repair PR head Node22 `87ab520...`: **3168 PASS / 0 FAIL / 6 intended SKIP**, lint PASS. Applicable approval, security inventory, mobile/browser, SQL isolated, Python, source/archive and cloud checks SUCCESS.
