@@ -1508,3 +1508,16 @@ Recovered app `aca5aa4a3c079303fd75f3d79c8e948f0a588253` (tree `52544fc7a8a60f78
 **Corrected cumulative:** **7,919 file lines / 60,754 file words; 708 unique GitHub records / 211,802 original GitHub words** after prior G1-117 -15 objects/-4,012 words duplicate correction. No executable/test/queue/Locked/provider/member/Auth/backup/production/main/release/visibility files changed; three audit documentation paths. Rest parity, original SHA1/bytes/words, nonoverlap, historical PR merge and delegated literal checks PASS. Actual Node22, hosted SQL/Auth, browser/mobile/offline and original603 functional tests NOT RUN docs-only; CI must be verified separately and SKIPPED is not PASS.
 
 **Exact NEXT:** [#504 comment 6705158205](https://github.com/Schulzet3/The-Dial-In-Collective/issues/504#issuecomment-6705158205), word 1. #504 OPEN / IN_PROGRESS, not all-word complete.
+
+
+## November 9, 2026 UTC — Issue #504 G1-122 source-bound historical comments [skip netlify]
+
+Live development `817a7574fd09eb08251dec9da3a19629db62e7fe` tree `1c71a86e2c8d5b786c9c656068ce4c59e2e1c345`, main `a4028e42b0d0316fd539c0563fd07832d509aed0`, release/production `92829cb6aff82aaec212eabbd921183e7997f1a7`, source register, governing docs and concurrent #267/#455/#33/#96/#630 recovered. Owner-approved temporary PUBLIC Nov4–30 unchanged; no exposure clearance inferred. Issue #504 complete pagination observed 218 original comments. Other GitHub surface inventories remain incomplete.
+
+**Full semantic source review:** Eight previously uncredited original #504 comments `6705158205, 6705686076, 6705694524, 6706428896, 6706444615, 6707062709, 6707068966, 6707698448` all words 1–EOF, **8 original objects / 2,713 UTF-whitespace words / 31,159 UTF-8 bytes**. Original REST-by-ID/paginated body parity 8/8; source timestamps, SHA1, physical line and inclusive word ranges plus individual dated findings recorded in immutable [G1-122 receipt](../audits/issue504-review-G1-122.json). No IDs duplicated from previous 121 batches; preserve G1-117 -15 objects/-4,012 words duplicate correction. Historical G1-079–083 interim/final PR CI states remain source-time evidence. Historical PRs #1189/#1195/#1203/#1210/#1219 separately checked MERGED; no current #504-owned reproducible defect or safe deletion.
+
+**Independent #267:** frozen original F456 `site/cloud/main.js:691–693` blob `e25569cdd72d2abd94205ccb0169ccf08963676f`, strict T78 per-line receipt `b33aaa38238c0444fce1326dd0c4757e0bb2a89a`: 3/3 original literals and individual semantic fields matched, ZERO extra #504 code credit. #267 full frozen/current/post-pin and #96 hosted Auth/privacy not certified here.
+
+**Corrected cumulative:** **7,919 file lines / 60,754 words; 716 unique GitHub original records / 214,515 original words**. Only three #504 audit docs files changed, never app/queue/oracle/production/main/release/provider/member/backup or visibility. Docs-only original parity/PR status PASS; actual Node22, hosted SQL/Auth, browser/mobile/offline/original603 functional suites NOT RUN; exact PR-head/merged CI separately pending.
+
+**Next:** [#504 comment 6708319644](https://github.com/Schulzet3/The-Dial-In-Collective/issues/504#issuecomment-6708319644) word 1, after duplicate/drift check. Issue OPEN / IN_PROGRESS; universal inventory and delegated #267 source semantics incomplete.
