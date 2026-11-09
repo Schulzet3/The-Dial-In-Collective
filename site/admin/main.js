@@ -3,7 +3,7 @@ import {secureOrigin,isAccessDenied} from '../cloud/client.js';
 import {e} from '../lib/ui.js';
 import {applyAppearance,readAppearance} from '../cloud/appearance.js';
 applyAppearance(readAppearance(),{remember:false});
-import {renderAdminDashboard,renderAdminDenied} from './view.js';
+import {renderAdminDashboard,renderAdminDenied,renderAdminDeleteAccountPrompt} from './view.js';
 
 const root=document.querySelector('#admin-root');
 const RECORD_KINDS=['pending','conflicts','approved','shots','accounts','invites'];
@@ -12,6 +12,7 @@ const notice=message=>`<header class="admin-top"><span class="admin-brand">The D
 async function start(){
  let invalidated=false;
  let issued=null; // generated code exists only in live tab memory
+ let pendingAccountDelete=null;
  let busy=false;
  let pendingSectionRefresh=false;
  let mergeChoices=Object.create(null);
@@ -23,7 +24,7 @@ async function start(){
  const openSections=new Set();
  const openCoffeeGroups=new Set();
  const invalidate=message=>{
-  issued=null;mergeChoices=Object.create(null);comparisons=Object.create(null);records={};access=null;pendingSectionRefresh=false;invalidated=true;root.innerHTML=renderAdminDenied(message);
+  issued=null;pendingAccountDelete=null;mergeChoices=Object.create(null);comparisons=Object.create(null);records={};access=null;pendingSectionRefresh=false;invalidated=true;root.innerHTML=renderAdminDenied(message);
  };
  try {
   secureOrigin();
@@ -286,6 +287,8 @@ async function start(){
     return;
    }
    if(action==='refresh'){
+    pendingAccountDelete=null;
+    root.querySelector('#admin-account-delete-modal')?.remove?.();
     issued=null; // Never retrieve plaintext from an overview endpoint.
     guarded(()=>refresh());return;
    }
@@ -347,6 +350,60 @@ async function start(){
      delete mergeChoices[id];issued=null;await refresh();
      actionMessage('Coffee reviewed successfully.');
     });return;
+   }
+   if(action==='delete-invite'){
+     if(!globalThis.confirm?.('Delete this invitation code from Admin? This automatically revokes any unused code. Previously admitted accounts are unaffected; private audit history is retained.'))return;
+     guarded(async()=>{
+      issued=null;
+      const result=await adminRpc('dic_admin_delete_invite',{p_invite_id:id});
+      if(result?.deleted!==true)throw new Error('Invitation was not deleted.');
+      await refresh();
+      actionMessage('Invitation deleted and revoked. Existing accounts were not affected.');
+     });return;
+   }
+   if(action==='delete-account'){
+     guarded(async()=>{
+      const impact=await adminRpc('dic_admin_account_delete_preview',{p_member_id:id});
+      if(impact?.member_id!==id)throw new Error('Account identity changed. Refresh before deleting.');
+      pendingAccountDelete={id,impact};
+      root.querySelector('#admin-account-delete-modal')?.remove?.();
+      root.insertAdjacentHTML('beforeend',renderAdminDeleteAccountPrompt(impact));
+      root.querySelector('#admin-account-delete-modal .admin-delete-dialog')?.focus?.();
+     });return;
+   }
+   if(action==='cancel-delete-account'){
+     pendingAccountDelete=null;
+     root.querySelector('#admin-account-delete-modal')?.remove?.();
+     return;
+   }
+   if(action==='confirm-delete-account'){
+     guarded(async()=>{
+      const pending=pendingAccountDelete,mode=button.dataset.mode;
+      if(!pending||pending.id!==id||!['keep','remove'].includes(mode))
+       throw new Error('Review the member impact before deleting.');
+      const email=pending.impact.email||'this member';
+      const count=Number(pending.impact.community_shots||0);
+      const message='Permanently delete '+email+' and all private history?\n\n'
+        +(mode==='keep'?'KEEP '+count+' anonymous Community contributions.':
+          'REMOVE '+count+' Community contributions and their recommendation evidence.')
+        +'\n\nThis cannot be undone from Admin. Confirm permanent deletion?';
+      if(!globalThis.confirm?.(message))return;
+      const requested=await adminRpc('dic_admin_account_delete_request',{
+       p_member_id:id,p_community_mode:mode,p_expected_impact:pending.impact
+      });
+      if(!requested?.operation_id)throw new Error('Account deletion request was not recorded.');
+      // The browser never receives a service key; the Edge function checks admin again.
+      const {data,error}=await sdk.functions.invoke('dic-delete-member-account',{
+       body:{operation_id:requested.operation_id}
+      });
+      if(invalidated)return;
+      if(error||!data?.ok||!data?.completed)
+       throw new Error('Deletion is incomplete. The account may be disabled; retry the SAME Community choice. Completion was not claimed.');
+      pendingAccountDelete=null;
+      root.querySelector('#admin-account-delete-modal')?.remove?.();
+      await refresh();
+      actionMessage('Account deleted. Community '+(mode==='keep'?'contributions retained.':'contributions removed.'));
+     });return;
    }
    if(action==='revoke-invite'){
     if(!globalThis.confirm?.('Revoke this invitation code? Existing accounts keep access.'))return;

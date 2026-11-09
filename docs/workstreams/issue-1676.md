@@ -19,3 +19,7 @@ Added per-code Delete Code action including used/revoked codes; added nonadmin D
 ## Service-role only GoTrue deletion bridge
 
 New Edge source `supabase/functions/dic-delete-member-account/index.ts` validates origin, authenticated identity, current admitted/admin role, exact operation UUID and server-side request budget. The *only* service-role client prepares SQL, deletes GoTrue user, checks ambiguous failures and finalizes only after the DB independently verifies the Auth row is gone. On partial failures returns retryable status, never false completed; no deployed function yet. Supabase JS admin.deleteUser API checked against official documentation. No production writes.
+
+## Bound client Admin actions
+
+`site/admin/main.js` now uses administrator-only RPC `dic_admin_delete_invite` for confirmed code deletion (automatic revocation + listing removal), and a two-choice account impact dialog invoking preview, request and `dic-delete-member-account` Edge only after a second explicit confirmation. Retry reuses the same mode/ledger; a failed RPC/Edge call is not success. Secret remains exclusively server-side; no production changes or live member deletion. Source tests/CI still pending.
