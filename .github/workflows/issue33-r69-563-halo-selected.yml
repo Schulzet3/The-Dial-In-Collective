@@ -1,0 +1,54 @@
+name: DIC Issue33 R69 original603 563 source intake
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r69-563-halo-selected.yml
+      - docs/workstreams/ops-issue33-r69-563-halo-selected-20261109.md
+      - scripts/audit/issue33-r69-563-afterproof.mjs
+      - scripts/audit/issue33-r69-563-halo-contract.mjs
+      - tests/coffee-issue33-r69-563-halo-contract.test.mjs
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r69-563-halo-selected.yml
+      - scripts/audit/issue33-r69-563-afterproof.mjs
+      - scripts/audit/issue33-r69-563-halo-contract.mjs
+      - tests/coffee-issue33-r69-563-halo-contract.test.mjs
+permissions:
+  contents: read
+jobs:
+  original-563-selected:
+    name: original603-563-current-halo-official-source
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Guarded official exact original URL and real parser Add Coffee
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '563'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r69-563
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict selected-source afterproof (only once present)
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r69-563
+        run: |
+          if test -f scripts/audit/issue33-r69-563-afterproof.mjs; then
+            node scripts/audit/issue33-r69-563-afterproof.mjs
+          else
+            echo "INTAKE ONLY: strict afterproof NOT RUN, NOT PASS"
+          fi
+      - name: Preserve bounded current public source raw HTML and report (one day)
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r69-563-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r69-563/
+          if-no-files-found: warn
+          retention-days: 1
