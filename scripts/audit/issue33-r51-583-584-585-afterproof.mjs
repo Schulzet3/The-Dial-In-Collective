@@ -24,7 +24,7 @@ for(const spec of R51_EXACT_SOURCE_CASES) {
  }catch{must(false,'raw_official_html_missing_'+spec.number);}
  if(spec.number===585){
   must(f.roast_level==='Light','selected_American_roast_defined_as_light_missing');
-  must(/<label\\b[^<>]{0,400}class=["'][^"']*\\bvariant__label\\b[^"']*["'][^<>]{0,500}>\\s*American Roast\\s*[-–—]\\s*1\\s*lb\\s*<\\/label>/i.test(bytes?.toString('utf8')||''),
+  must(/<label\b[^<>]{0,400}class=["'][^"']*\bvariant__label\b[^"']*["'][^<>]{0,500}>\s*American Roast\s*[-–—]\s*1\s*lb\s*<\/label>/i.test(bytes?.toString('utf8')||''),
    'selected_American_purchase_variant_missing');
  }
  cases.push({number:spec.number,coffee:spec.name,url:r.final_url||r.official_url||null,
