@@ -45,6 +45,7 @@ for(const s of locationSpecs){
  check(verified,'raw_selected_html_hash_or_bytes_mismatch_'+prefix);
  const directHero=selectedTandemHeroLocation(productMarkup(html||''),s.name,s.hero);
  check(directHero,'current_selected_direct_hero_location_missing_'+prefix);
+ check(r.current_fields?.origin===s.expectedOrigin,'selected_direct_hero_region_not_canonical_'+prefix);
  const origin=String(r.current_fields?.origin||'');
  const originGap=directHero&&origin!==s.expectedOrigin;
  observations.push({number:s.number,official_url:r.official_url,selected_h1:r.selected_h1||[],

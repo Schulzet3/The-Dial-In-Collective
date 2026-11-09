@@ -40,6 +40,7 @@ import {selectedCurrentFarmVolcanoRegion} from './coffee-selected-farm-volcano-r
 import {selectedCountryFirstCurrentRegion} from './coffee-country-first-current-region.mjs';
 import {selectedCurrentInlineCompoundRegion} from './coffee-selected-inline-region.mjs';
 import {selectedCurrentTradeElevationRegion} from './coffee-selected-trade-elevation-region.mjs';
+import {selectedCurrentAdjacentHeroRegion} from './coffee-selected-adjacent-hero-region.mjs';
 import {selectedDottedTitleCountryRegion} from './coffee-dotted-title-region.mjs';
 import {selectedProcessingSiteNotFarmOrigin} from './coffee-processing-site-origin-guard.mjs';
 import {selectedCurrentColombianDepartmentOrigin} from './coffee-selected-department-origin.mjs';
@@ -2314,6 +2315,26 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     field:'origin',label:'Exact selected named-farm growing region',
     value:region.quote.slice(0,430),source_url,source_type:'html',
     section:'Selected current farm-and-producer narrative'
+   });
+  }
+ }
+
+ // Directly selected current H1's independently accepted country plus an
+ // immediately adjacent current hero location can refine a broad country
+ // to two literally printed localities. Never infer from slug/SEO/other beans.
+ if(fields.origin&&!conflicts.has('origin')&&geographyParts(fields.origin).length===1&&
+  ORIGIN_COUNTRIES.has(keyOf(fields.origin))){
+  const adjacent=selectedCurrentAdjacentHeroRegion(canonicalProduct,{
+   name:fields.name,origin:fields.origin
+  });
+  if(adjacent){
+   rememberCoffeeReviewCandidate(fields,'origin',fields.origin,
+    'Broader current selected country');
+   fields.origin=adjacent.value;
+   if(source_facts.length<384)source_facts.push({
+    field:'origin',label:'Exact selected adjacent hero locality',
+    value:adjacent.quote.slice(0,260),source_url,source_type:'html',
+    section:'Selected H1 and its own immediately adjacent locality'
    });
   }
  }
