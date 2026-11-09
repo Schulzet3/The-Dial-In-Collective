@@ -1,0 +1,55 @@
+name: DIC Issue33 R57 independent selected 584 artifact source proof
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r57-independent-584-zip-proof.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  independent-selected-584-zip:
+    name: original603-584-independent-zip-sha256
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - name: Independently download and verify R57 official source artifact
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          archive="${RUNNER_TEMP}/dic33-r57-584.zip"
+          curl --fail --silent --show-error --location --retry 2 \
+            --header "Authorization: Bearer ${GH_TOKEN}" \
+            --header "Accept: application/vnd.github+json" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/13662051216/zip" -o "$archive"
+          test "$(stat -c '%s' "$archive")" = '72356'
+          test "$(sha256sum "$archive" | cut -d ' ' -f1)" = '6c1aa5e4a34f2544122b289725a9582d327aca316b9ed8651adfeb138fd7bf2c'
+          unzip -tqq "$archive"
+          test "$(unzip -p "$archive" case-584.html | sha256sum | cut -d ' ' -f1)" = 'a681aa6ab2d79b452dcc34c94e96c4340ab5581ce7d341d4b479b2bbcbe483b2'
+          test "$(unzip -p "$archive" focused-current-evidence.json | sha256sum | cut -d ' ' -f1)" = '54d092ee137622c1937841ca1c8adf35c4ba907853811ed217e85d9c73521db6'
+          unzip -p "$archive" focused-current-evidence.json | jq -e \
+            '.source_sha=="d3ef37034868afb34d6937aff437aebd4ef2cd21" and
+             .manual_certified==0 and .production_operations==0 and
+             .real_auth==false and .original_corpus_modified==false and
+             .case_numbers==[584] and (.records|length)==1 and
+             .records[0].status=="FETCHED" and .records[0].selected_heading_identity_verified==true and
+             .records[0].current_fields.name=="Honduras Comsa – Washed, Espresso" and
+             .records[0].current_fields.origin=="La Paz, Honduras" and
+             .records[0].current_fields.process=="Washed" and
+             .records[0].current_fields.roast_level=="Dark" and
+             .records[0].html_sha256=="a681aa6ab2d79b452dcc34c94e96c4340ab5581ce7d341d4b479b2bbcbe483b2" and
+             .records[0].add_coffee_ui_rendered==true and
+             .records[0].source_review_rendered==true' >/dev/null
+          unzip -p "$archive" r57-584-afterproof.json | jq -e \
+            '.source_sha=="d3ef37034868afb34d6937aff437aebd4ef2cd21" and
+             .passed==true and .failures==[] and
+             .evidence_sha256=="54d092ee137622c1937841ca1c8adf35c4ba907853811ed217e85d9c73521db6" and
+             .manual_certified==0 and .production_operations==0 and
+             .observed.origin=="La Paz, Honduras" and
+             .observed.direct_selected_caption==true and
+             .observed.raw_html_verified==true and
+             .observed.add_coffee==true and .observed.source_review==true' >/dev/null
+          echo 'VERIFIED original603 #584 ZIP 13662051216 and selected current source SHA256, independent GitHub runner'
