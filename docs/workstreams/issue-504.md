@@ -1470,3 +1470,16 @@ Recovered app `94807a571f43414fad49c76c6459e156dfd11cc0`, tree `b968494c9aa0f939
 **Corrected cumulative:** 684 unique GitHub records / 204658 words (676+8, 202409+2249); 7,919 file lines / 60,754 file words unchanged. Historical 15-record/4,012-word double-credit adjustment G1-117 preserved. Source hashes/parity, arithmetic and historical PR metadata PASS. Documentation-only actual Node22, hosted SQL/Auth, mobile/browser/offline and original603 **NOT RUN**. Exact new PR-head/merged CI must be checked separately; no queued/skipped=PASS. No application, queue, original oracle, member, Auth, provider, backups, Netlify, publication, main or release changes.
 
 **Exact NEXT:** [#504 comment 6693661117](https://github.com/Schulzet3/The-Dial-In-Collective/issues/504#issuecomment-6693661117), original word 1 after fresh drift/nonduplication check. Issue #504 OPEN / IN_PROGRESS, full GitHub metadata and delegated #267 semantic coverage incomplete.
+
+
+## November 9, 2026 UTC — #504 G1-119 original issue-comment review [skip netlify]
+
+Live app source `547f110034767e1a4e8ec1becc054fe0eafde1c5`, main `a4028e42b0d0316fd539c0563fd07832d509aed0`, release/production `92829cb6aff82aaec212eabbd921183e7997f1a7`. Current context/preflight, AGENTS, current status, Master/Decision/approval/queue/source register, #504/#267/#455/#33/#96 and concurrent PRs checked. Owner #630 public Nov4–30 exception unchanged.
+
+**Direct review:** Eight complete original Issue #504 comment bodies `6693661117`, `6693682542`, `6694985942`, `6695009767`, `6696241701`, `6696271394`, `6697484418`, `6697496554`, words 1–EOF; **8 original nonduplicate objects / 2229 Unicode-whitespace words / 26268 UTF-8 bytes**. Exact REST-by-ID and paginated original body parity 8/8; original creation/update timestamp, SHA1, physical line and word ranges and distinct historic/current semantic findings in [G1-119 receipt](../audits/issue504-review-G1-119.json). Interim G1-065–068 CI queued was historical, final same-source merges PR1085/1096/1102/1109 verified MERGED. Prior UX fixes separately deployed. No current #504-owned bug/removal or owner decision evidenced.
+
+**Coverage:** now **7,919 file lines / 60,754 file words** and **692 unique GitHub objects / 206,887 original words** after preserving G1-117's 15-object/4012-word duplicate correction. #267 T78 frozen F456 `site/cloud/main.js:682–684` original SHA `e25569cdd72d2abd94205ccb0169ccf08963676f` semantically/literally compared to T78 journal `b33aaa38238c0444fce1326dd0c4757e0bb2a89a`: 3/3 individual literal/behavior/Locked fields matched; zero #504 delegated code credit. All-GitHub and #267 global proof incomplete.
+
+**Checks:** original-body REST parity, SHA1/byte/word counts, PR historic merge metadata and ledger arithmetic verified; docs-only actual Node22/app, SQL/Auth, browser/mobile/offline and original603 functional work **NOT RUN**. New PR CI/merge require exact readback; queued/skipped is NOT PASS. No app/queue/oracle/backup/Locked/member/provider/production/Netlify/main/release/visibility change.
+
+**Exact NEXT original:** [#504 comment `6698631500`](https://github.com/Schulzet3/The-Dial-In-Collective/issues/504#issuecomment-6698631500), word 1 after fresh duplicate/drift check. Issue #504 OPEN / IN_PROGRESS.
