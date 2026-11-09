@@ -416,7 +416,7 @@ grant execute on function public.dic_admin_account_delete_request(uuid,text,json
 -- current server-side admitted/admin membership before invoking this RPC.
 create or replace function private.dic_admin_account_delete_prepare(p_operation_id uuid,p_actor_id uuid)
 returns jsonb language plpgsql volatile security definer set search_path='' as $fn$
-declare op private.dic_admin_account_delete_operations; ids uuid[]; actual jsonb;
+declare op private.dic_admin_account_delete_operations; ids uuid[]; actual jsonb; storage_blocked boolean:=false;
 begin
  select * into op from private.dic_admin_account_delete_operations
  where id=p_operation_id for update;
@@ -445,6 +445,15 @@ begin
   end if;
   select coalesce(array_agg(c.id order by c.id),'{}'::uuid[]) into ids
   from private.contributors c where c.owner_id=op.target_id;
+  -- Supabase Auth deletion refuses users who own Storage objects. Fail before
+  -- changing admission when the live provider exposes that table.
+  if to_regclass('storage.objects') is not null then
+   execute 'select exists(select 1 from storage.objects where owner=$1 or owner_id=$1::text)'
+     into storage_blocked using op.target_id;
+   if storage_blocked then
+    raise exception using errcode='23514',message='Member has Storage-owned objects; review before deletion.';
+   end if;
+  end if;
   -- Prevent deletion of prior actor audit evidence if a formerly privileged user
   -- was subsequently demoted. Do not silently erase immutable admin audits.
   if exists(select 1 from private.admin_content_edits where actor_id=op.target_id) then
