@@ -1,0 +1,41 @@
+name: DIC Issue33 R53 selected original603 590 591 official source
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r53-590-591-official.yml
+      - scripts/audit/issue33-r53-selected-vail-contract.mjs
+      - scripts/audit/issue33-r53-590-591-afterproof.mjs
+      - tests/coffee-issue33-r53-selected-vail-contract.test.mjs
+permissions:
+  contents: read
+jobs:
+  selected-r53:
+    name: original603-590-591-selected-current
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Fresh bounded selected official HTTPS and actual Add Coffee parser
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r53-source
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '590,591'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict current selected identity/source hash/field afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r53-source
+        run: node scripts/audit/issue33-r53-590-591-afterproof.mjs
+      - name: Preserve source-bound raw HTML and verdict for independent verification
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r53-590-591-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r53-source/
+          if-no-files-found: error
+          retention-days: 1
