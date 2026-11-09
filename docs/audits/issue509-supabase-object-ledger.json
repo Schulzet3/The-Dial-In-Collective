@@ -3201,7 +3201,7 @@
       "baseline_complete": false
     }
   ],
-  "state": "PROVIDER_ADVISOR_12_FK_AND_9_INDEX_DEFINITION_RUNTIME_TRIAGE_DONE; FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
+  "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
   "application_table_review": {
     "total": 46,
     "current_index": 46,
@@ -14628,5 +14628,54 @@
     "no_production_writes": true,
     "source_fixes": 0,
     "baseline_complete": false
+  },
+  "provider_pg_stat_statements_numeric_run110": {
+    "status": "800_DISTINCT_NEW_NUMERIC_KEYSET_RECORDS_801_TO_1600_WITHOUT_SQL_TEXT",
+    "project_ref": "azviqqejypsefzilgonr",
+    "development_parent": "ffbe662b0463e8dfad3fe38ec6d44658afb8bc79",
+    "main_sha": "a4028e42b0d0316fd539c0563fd07832d509aed0",
+    "release_sha": "92829cb6aff82aaec212eabbd921183e7997f1a7",
+    "receipts": [
+      "docs/audits/issue509-provider-pg-stat-statements-numeric-801-1200-2026-11-09-run110.json",
+      "docs/audits/issue509-provider-pg-stat-statements-numeric-1201-1600-2026-11-09-run110.json"
+    ],
+    "receipt_blobs": [
+      "b75ab2d1845fbb780a5a198e7cff8dc8bf65cf52",
+      "b49882487f13d5caca4417adb6c350c75a332e02"
+    ],
+    "reviewed_this_run": 800,
+    "logical_cumulative": 1600,
+    "original_800_key": [
+      "-5518947567820046448",
+      "5",
+      "16388",
+      true
+    ],
+    "end_1200_key": [
+      "-3385002830371029437",
+      "5",
+      "16388",
+      true
+    ],
+    "end_1600_key": [
+      "-1528305424146920662",
+      "5",
+      "16388",
+      true
+    ],
+    "stats_reset": "2026-10-09 11:11:31.487298+00",
+    "counts": [
+      3963,
+      3964,
+      3965,
+      3966
+    ],
+    "max_ge_1000ms": 2,
+    "temp_io": 7,
+    "verified_source_defects": 0,
+    "query_text": "NOT_SELECTED",
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "1601 after composite anchor and reset check; additionally inspect newly inserted keys below cursor and remaining provider definition families"
   }
 }
