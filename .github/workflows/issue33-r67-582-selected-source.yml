@@ -1,0 +1,52 @@
+name: DIC Issue33 R67 original603 582 selected Oneska official proof
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r67-582-selected-source.yml
+      - scripts/audit/issue33-r67-582-source-contract.mjs
+      - scripts/audit/issue33-r67-582-afterproof.mjs
+      - tests/coffee-issue33-r67-582-source-contract.test.mjs
+      - src/server/coffee-page-metadata.mjs
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r67-582-selected-source.yml
+      - scripts/audit/issue33-r67-582-source-contract.mjs
+      - scripts/audit/issue33-r67-582-afterproof.mjs
+      - tests/coffee-issue33-r67-582-source-contract.test.mjs
+      - src/server/coffee-page-metadata.mjs
+permissions:
+  contents: read
+jobs:
+  original-selected:
+    name: original603-582-direct-current-embu
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Positive and hostile chosen-coffee scope controls
+        run: node --test tests/coffee-issue33-r67-582-source-contract.test.mjs
+      - name: Bounded read-only current original exact selected URL and parser/Add Coffee
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r67-582
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '582'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Independent selected identity, farm role, raw SHA and origin afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r67-582
+        run: node scripts/audit/issue33-r67-582-afterproof.mjs
+      - name: Preserve strict current official source proof for one day
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r67-582-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r67-582/
+          if-no-files-found: warn
+          retention-days: 1
