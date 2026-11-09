@@ -23,6 +23,36 @@ export function walkthroughMarkup(){
 "</details></section>",
  ].join('');
 }
+
+/* Public, fixed markup; admission is handled by CloudApp before this route. */
+export function firstSetupWelcomeMarkup(){
+ return [
+  '<section class="welcome onboarding-welcome" aria-labelledby="onboarding-title">',
+  '<ol class="onboarding-progress" aria-label="Onboarding progress">',
+  '<li class="onboarding-step onboarding-complete"><span class="onboarding-step-number" aria-hidden="true">✓</span>Account</li>',
+  '<li class="onboarding-step onboarding-current" aria-current="step"><span class="onboarding-step-number" aria-hidden="true">2</span>Welcome</li>',
+  '<li class="onboarding-step"><span class="onboarding-step-number" aria-hidden="true">3</span>Setup</li>',
+  '</ol>',
+  '<p class="onboarding-eyebrow">Getting Started</p>',
+  '<h2 id="onboarding-title">Welcome to The Dial In Collective.</h2>',
+  '<p class="onboarding-lead">Before setting up your equipment, watch a quick walkthrough or explore our written guide. Both will help you get started with your first shot.</p>',
+  '<figure class="onboarding-video-card">',
+  '<video data-onboarding-player controls playsinline preload="metadata" width="1600" height="900" aria-label="First Shot Walkthrough" poster="'+WALKTHROUGH_POSTER+'">',
+  '<source src="'+WALKTHROUGH_VIDEO+'" type="video/mp4">',
+  '<track kind="captions" srclang="en" label="English captions" src="'+WALKTHROUGH_CAPTIONS+'" default>',
+  'Your browser does not support video playback. Use the written guide below.',
+  '</video>',
+  '<figcaption class="onboarding-video-caption"><span class="onboarding-media-icon" aria-hidden="true">▶</span><span><strong>First Shot Walkthrough</strong><small>2 min 16 sec · English captions</small></span></figcaption>',
+  '</figure>',
+  '<p class="onboarding-video-error" data-onboarding-error role="status" hidden>Video unavailable. Check your connection or use the written guide below.</p>',
+  '<a class="onboarding-transcript" href="/media/first-shot-transcript.txt" download>Download video transcript</a>',
+  '<button type="button" class="onboarding-guide-button" data-action="getting-started-guide"><span class="onboarding-media-icon" aria-hidden="true">▤</span><span class="onboarding-guide-copy"><strong>Read Getting Started Guide</strong><small>Six steps, from setup to recommendation</small></span><span class="onboarding-chevron" aria-hidden="true">›</span></button>',
+  '<div class="onboarding-return-note"><span class="onboarding-info-icon" aria-hidden="true">i</span><p>Tap the <strong>Settings</strong> gear icon in the top-right corner of the app to reference these again</p></div>',
+  '<div class="onboarding-next"><button type="button" class="primary full onboarding-setup-button" data-action="new-setup">Set Up My Workspace <span aria-hidden="true">→</span></button></div>',
+  '</section>'
+ ].join('');
+}
+
 export function gettingStartedMarkup(){
  return [
 "<section class=\"help-guide\" aria-label=\"Getting started with espresso\">",
