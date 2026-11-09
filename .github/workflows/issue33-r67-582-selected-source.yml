@@ -8,6 +8,8 @@ on:
       - scripts/audit/issue33-r67-582-afterproof.mjs
       - tests/coffee-issue33-r67-582-source-contract.test.mjs
       - src/server/coffee-page-metadata.mjs
+      - src/server/coffee-selected-current-estate-county.mjs
+      - tests/coffee-issue33-r67-582-named-estate-county.test.mjs
   push:
     branches: [development/backend-foundation]
     paths:
@@ -16,6 +18,8 @@ on:
       - scripts/audit/issue33-r67-582-afterproof.mjs
       - tests/coffee-issue33-r67-582-source-contract.test.mjs
       - src/server/coffee-page-metadata.mjs
+      - src/server/coffee-selected-current-estate-county.mjs
+      - tests/coffee-issue33-r67-582-named-estate-county.test.mjs
 permissions:
   contents: read
 jobs:
@@ -31,7 +35,7 @@ jobs:
         with:
           node-version: '22'
       - name: Positive and hostile chosen-coffee scope controls
-        run: node --test tests/coffee-issue33-r67-582-source-contract.test.mjs
+        run: node --test tests/coffee-issue33-r67-582-source-contract.test.mjs tests/coffee-issue33-r67-582-named-estate-county.test.mjs
       - name: Bounded read-only current original exact selected URL and parser/Add Coffee
         env:
           DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r67-582
