@@ -318,18 +318,10 @@ alter table private.dic_admin_account_delete_operations enable row level securit
 revoke all on private.dic_admin_account_delete_operations from public,anon,authenticated;
 grant all on private.dic_admin_account_delete_operations to service_role;
 
-create or replace function private.dic_admin_account_delete_preview(p_member_id uuid)
+create or replace function private.dic_admin_account_delete_impact(p_member_id uuid)
 returns jsonb language plpgsql stable security definer set search_path='' as $fn$
-declare actor uuid:=auth.uid(); member_email text;
+declare member_email text;
 begin
- perform private.require_member();
- if actor is null or not private.is_admin() then
-  raise exception using errcode='42501',message='Administrator required.';
- end if;
- if p_member_id is null or p_member_id=actor or
-    exists(select 1 from private.app_admins where owner_id=p_member_id) then
-  raise exception using errcode='42501',message='Administrator accounts are protected.';
- end if;
  select u.email into member_email from auth.users u
  join private.beta_members m on m.owner_id=u.id and m.admitted_at is not null
  where u.id=p_member_id;
@@ -350,6 +342,22 @@ begin
     where c.owner_id=p_member_id and cs.quality_state='eligible'),
   'contributors',(select count(*) from private.contributors where owner_id=p_member_id)
  );
+end $fn$;
+revoke all on function private.dic_admin_account_delete_impact(uuid) from public,anon,authenticated;
+
+create or replace function private.dic_admin_account_delete_preview(p_member_id uuid)
+returns jsonb language plpgsql stable security definer set search_path='' as $fn$
+declare actor uuid:=auth.uid();
+begin
+ perform private.require_member();
+ if actor is null or not private.is_admin() then
+  raise exception using errcode='42501',message='Administrator required.';
+ end if;
+ if p_member_id is null or p_member_id=actor or
+    exists(select 1 from private.app_admins where owner_id=p_member_id) then
+  raise exception using errcode='42501',message='Administrator accounts are protected.';
+ end if;
+ return private.dic_admin_account_delete_impact(p_member_id);
 end $fn$;
 revoke all on function private.dic_admin_account_delete_preview(uuid) from public,anon,authenticated;
 grant execute on function private.dic_admin_account_delete_preview(uuid) to authenticated;
@@ -429,8 +437,12 @@ begin
   if not exists(select 1 from auth.users where id=op.target_id) then
    raise exception using errcode='23514',message='Target account is missing before preparation.';
   end if;
-  -- Recheck the exact preview immediately before revocation.
-  -- This is a service-role RPC; run source counts without impersonating an end user.
+  -- Recheck the same preview under the service-side record lock.
+  -- No JWT actor impersonation or unsafe service-role bypass of an admin check.
+  actual:=private.dic_admin_account_delete_impact(op.target_id);
+  if actual is distinct from op.expected_impact then
+   raise exception using errcode='PT409',message='Account changed after confirmation.';
+  end if;
   select coalesce(array_agg(c.id order by c.id),'{}'::uuid[]) into ids
   from private.contributors c where c.owner_id=op.target_id;
   -- Prevent deletion of prior actor audit evidence if a formerly privileged user

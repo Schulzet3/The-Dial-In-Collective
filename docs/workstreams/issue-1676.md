@@ -23,3 +23,7 @@ New Edge source `supabase/functions/dic-delete-member-account/index.ts` validate
 ## Bound client Admin actions
 
 `site/admin/main.js` now uses administrator-only RPC `dic_admin_delete_invite` for confirmed code deletion (automatic revocation + listing removal), and a two-choice account impact dialog invoking preview, request and `dic-delete-member-account` Edge only after a second explicit confirmation. Retry reuses the same mode/ledger; a failed RPC/Edge call is not success. Secret remains exclusively server-side; no production changes or live member deletion. Source tests/CI still pending.
+
+## Exact-preview concurrency guard
+
+Refactored the single source of server-authoritative impact counts into private `dic_admin_account_delete_impact`, denied to clients. Both admin-facing preview/request and service-only prepare now call it, with an actual equality check before admission revocation. This closes an account-data race between displayed preview and external GoTrue deletion. No production write or inferred test PASS.
