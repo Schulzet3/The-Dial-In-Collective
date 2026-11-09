@@ -10688,6 +10688,28 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1676",
       "notes": "VERIFIED SOURCE READY, NOT DEPLOYED. Primary feature PR1719 and privacy follow-up PR1723 are nonforce merged; CI trigger fix PR1725 merged. New SQL migration and JWT-required dic-delete-member-account Edge function are release dependencies and must be applied/verified under a future owner publish command before site UI goes live. Keep mode preserves anonymous contributor-balanced evidence; Remove deletes only selected member contributions. Completion receipts scrub email/member ID/contributor link. Existing administrator and other member data preserved. Actual hosted/real-account destructive acceptance not performed, never claim it. No production SQL/Edge/Netlify/account/code deletion, no candidate staged or publication."
+    },
+    {
+      "id": "DIC-Q-455-offline-idempotent-existing-shot-replay",
+      "issue": 455,
+      "pr": null,
+      "title": "Keep existing saved offline shots idempotent across retired style and partial historical rating validation",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js",
+        "tests/issue455-offline-legacy-shot-replay.test.mjs"
+      ],
+      "tests": [
+        "R146 exact source old engine blob c91656d7cef5fd0621d883d433f0c0b519359dbe validated new-shot style/rating inputs before checking an existing shot ID: a once-saved historical Custom shot or partial legacy rating cannot be idempotently returned on replay even though no new shot is being created.",
+        "Focused synthetic Node22 regressions: existing historical Custom return preserves notes and five original values; partial legacy rating never invented green; reused ID for a different coffee throws without mutation; fresh Custom/incomplete ratings still rejected; valid new Turbo shot remains saved once. Exact-source CI PENDING."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "PENDING_PR_HEAD_CI_AND_SOURCE_MERGE"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Owner-authorized SAFE Locked-compatible data-integrity and offline repeat-save guard; no new product behavior, tastes, targets or data collection. TESTING only, never READY until exact merged-source CI and Git-blob/queue verification. Development-only; no deployment or production/provider/member writes."
     }
   ],
   "history": [
