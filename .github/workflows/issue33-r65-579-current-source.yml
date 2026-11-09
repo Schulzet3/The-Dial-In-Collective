@@ -1,14 +1,6 @@
 name: DIC Issue33 R65 original603 579 exact selected source
 on:
-  push:
-    branches: [development/backend-foundation]
-    paths:
-      - .github/workflows/issue33-r65-579-current-source.yml
-      - scripts/audit/issue33-r65-579-source-contract.mjs
-      - scripts/audit/issue33-r65-579-afterproof.mjs
-      - tests/coffee-issue33-r65-579-source-contract.test.mjs
-      - src/server/coffee-page-metadata.mjs
-      - src/server/coffee-product-scope.mjs
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
