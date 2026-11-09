@@ -30,6 +30,13 @@ const clean=scoped.replace(/<[^>]*>/gu,' ').replace(/&nbsp;|&#160;/giu,' ')
  .replace(/\s+/gu,' ').trim();
 const regionEvidence=[...clean.matchAll(/.{0,145}\b(?:Jarabacoa|Cibao)\b.{0,195}/giu)]
  .slice(0,7).map(m=>m[0].slice(0,390));
+const directRegion=/Direct\s+Trade\s*\/\s*Organic\s*[•·]\s*Jarabacoa\s*,\s*Cibao\s*[•·]\s*1300\s*(?:meters?|metres?|masl)\b/iu.test(clean);
+require(directRegion,'current_exact_selected_trade_locality_absent_or_changed');
+require(record.current_fields?.origin==='Jarabacoa, Cibao, Dominican Republic',
+ 'selected_current_Jarabacoa_Cibao_canonical_origin_omitted');
+require(record.current_fields?.roast_level==='Medium-Dark','current_selected_vienna_roast_regression');
+require(!record.conflicts?.includes('origin'),'current_selected_origin_conflict');
+require((record.seo_fallback_fields||[]).length===0,'unrelated_metadata_fallback');
 const evidence={
  kind:'ISSUE33_R58_SELECTED_583_SOURCE_DIAGNOSTIC_NOT_603_CERTIFICATION',
  source_sha:report.source_sha,evidence_sha256:sha(bytes),
@@ -44,6 +51,7 @@ const evidence={
   raw_html_verified:rawVerified,html_bytes:record.html_bytes,
   html_sha256:record.html_sha256},
  region_source_mentions:regionEvidence,region_source_mentions_count:regionEvidence.length,
+ direct_selected_trade_region_verified:directRegion,
  note:'Diagnostic only: printed locality may describe farm growing site, processing site, general education or stale lot; review full primary context before filling canonically.'
 };
 writeFileSync(join(root,'r58-583-source-diagnostic.json'),JSON.stringify(evidence,null,2)+'\n');
