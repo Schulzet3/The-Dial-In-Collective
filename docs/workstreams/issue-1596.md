@@ -16,3 +16,7 @@ Owner approved the reviewed welcome-screen prototype, exact concise Settings rec
 - **PENDING:** exact PR-head CI, source build, browser/mobile checks, merge readback and exact merged-source checks. No unrun tests claimed PASS.
 - **Next:** open PR, diagnose/fix actual failures, nonforce integrate, independently read back exact SHA, then add a READY queue record only with passing applicable evidence.
 - No release candidate staging/certification, provider/Netlify writes or deployment without new owner Publish.
+
+## First exact PR-head CI correction — November 9, 2026 UTC
+
+PR #1597 first reviewed head `30373e503975d1a4f339f733db8c9ba70619c275`: owner decision/approval coverage step passed, but `release-queue.mjs --enforce-intake` correctly failed (run 42568664121) because three app files lacked an IN_PROGRESS/TESTING/READY record. Not an authorization or runtime issue. Added scoped `DIC-Q-1596-first-setup-welcome-guide-video` as **TESTING** with all three deployable paths, preserves existing queue items. Recheck exact new PR head and merged source before READY; earlier failed check remains documented. Frozen603 SKIPPED is NOT PASS. No publication.
