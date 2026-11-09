@@ -10241,6 +10241,37 @@
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "NARROW VERIFIED READY IN DEVELOPMENT ONLY, NOT DEPLOYED. Original603 #584 selected current exact product prints Fair Trade / Organic • La Paz • 1200-1750 meters; previous exact parser retained only Honduras, fixed generically without unrelated source or unsupported fields. Independently hashed exact merged official HTML/ZIP and successful actual Add Coffee/Source Review; preserves original603 CSV/oracle/scorer, members, offline/Community, privacy and all prior queue rows. Full 603 per-coffee individual semantic certification INCOMPLETE, parent #33 OPEN; no Netlify publication or production writes.",
       "pr": 1625
+    },
+    {
+      "id": "DIC-Q-455-empty-grind-input-integrity",
+      "issue": 455,
+      "pr": 1628,
+      "title": "Reject empty and non-scalar grinder readings before personal shot logging/offline persistence while preserving real grinder zero",
+      "state": "READY",
+      "merged_source_sha": "72ea10adbf99f313c996cecfbae8deefa314adbc",
+      "scope_paths": [
+        "site/lib/model.js"
+      ],
+      "tests": [
+        "R133 four synthetic negative/positive checked-in Node tests: whitespace and nonscalar grind rejected by validateShot, shotPayload and saveShot before personal state mutation; authentic 0 and numeric strings persist with all five ratings and original notes.",
+        "Exact PR HEAD 89ffc382eee4285038724db146024a4ab3300f1a Node22/lint/build 42593131090 SUCCESS: 3199 PASS/0 FAIL/6 intentional SKIP.",
+        "Exact PR HEAD cloud UX/mobile/browser/offline 42593131275, SQL/HMAC signed JWT 42593131240, security inventory 42593131153, approval/governance 42593131005 all SUCCESS; cloud-tests job success but affected inner tests SKIPPED, NOT PASS; frozen603 42593131060 SKIPPED.",
+        "PR #1628 nonforce squash merge 72ea10adbf99f313c996cecfbae8deefa314adbc from actual advanced parent fe2e7b2510b9743480e10b3d9e28c374f6a70255: EXACTLY four changed paths, all four Git blob SHAs byte-identical to passing PR head, preserving concurrent #33/#267.",
+        "Exact merged source Node22/lint/build 42593549875 SUCCESS: 3199 PASS/0 FAIL/6 SKIP; mobile/browser/cloud workflow 42593549741 and approval/continuity 42593549789 SUCCESS. No production/real-member or cup validation."
+      ],
+      "ci_runs": [
+        42593131090,
+        42593131275,
+        42593131240,
+        42593131153,
+        42593131005,
+        42593549875,
+        42593549741,
+        42593549789
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "SAFE Locked-compatible measurement-integrity fix; real member incident not asserted. Preserve genuine zero, original private history, grinder/calibration, 5 sensory inputs, independent styles/feed, one controllable next-shot change and RLS/Community. No deployment or production SQL/Auth/Edge/member/provider writes."
     }
   ],
   "history": [
