@@ -23,14 +23,14 @@ for(const spec of R52_EXACT_SOURCE_CASES) {
   const bytes=readFileSync(join(root,'case-'+spec.number+'.html'));
   rawDigestMatch=hash(bytes)===rec.html_sha256&&bytes.length===rec.html_bytes;
   rawBytes=bytes.length;
-  selected=productMarkup(bytes.toString('utf8')).replace(/<[^>]+>/g,' ').replace(/\\s+/g,' ').slice(0,18000);
+  selected=productMarkup(bytes.toString('utf8')).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').slice(0,18000);
  }catch{}
  check(rawDigestMatch,'raw_selected_official_html_integrity_'+spec.number);
  const text=selected.toLowerCase();
  const observations={
   selected_mentions_alma_negra_natural:text.includes('alma negra')&&text.includes('natural'),
-  selected_mentions_honey_processed:/honey\\s+process(?:ed)?/.test(text),
-  selected_mentions_washed:/\\bwashed\\b/.test(text),
+  selected_mentions_honey_processed:/honey\s+process(?:ed)?/.test(text),
+  selected_mentions_washed:/\bwashed\b/.test(text),
   selected_mentions_grapos:text.includes('grapos'),
   selected_mentions_chiroso:text.includes('chiroso')
  };
@@ -48,6 +48,6 @@ const verdict={kind:'ISSUE33_R52_SELECTED_UNLOCKED_COFFEE_INTAKE_NOT_603_CERTIFI
  original603_register_sha256:evidence.original603_register_sha256,
  manual_certified:0,production_operations:0,
  passed:failures.length===0,failures,cases};
-writeFileSync(join(root,'r52-586-587-588-verdict.json'),JSON.stringify(verdict,null,2)+'\\n');
+writeFileSync(join(root,'r52-586-587-588-verdict.json'),JSON.stringify(verdict,null,2)+'\n');
 console.log('[DIC33 R52 ACTUAL OFFICIAL SOURCE] '+JSON.stringify(verdict));
 if(failures.length)process.exitCode=1;

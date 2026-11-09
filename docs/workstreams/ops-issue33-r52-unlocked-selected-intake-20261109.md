@@ -16,3 +16,6 @@ Add isolated R52 push-triggered official HTTPS workflow, strict afterproof, iden
 
 ## Failure handling and next executable action
 Initial GitHub PR-head tests and exact merged official source evidence **NOT YET RUN** as of this commit; any SKIPPED job is not PASS. Review exact PR-head CI and merge safely nonforce only after passing applicable checks. Then capture and independently verify source artifact; inspect #586 direct contradictory processing/variety/locality and #587/#588 actual parser fields, reproduce any defect, make narrow positive/hostile generic regression correction with same-commit journal, retest, and reconcile current status/queue only with real acceptance. Keep Issue #33 OPEN; no publication/Netlify, production SQL/Edge/Auth/provider/member writes, paid service, new account, secrets or forced Git.
+
+## Follow-up correction in same commit as script change
+Exact source script scan after initial tree creation found overescaped JavaScript regular-expression characters in *audit-only* observations and an escaped JSON newline. Repair these before PR CI. This does not change application runtime, selected product parsing, current identity, or any assertions about 603 completeness. The prior preliminary commit was not merged and had no successful tests. Next: exact PR head CI, safe merge and raw selected verification.
