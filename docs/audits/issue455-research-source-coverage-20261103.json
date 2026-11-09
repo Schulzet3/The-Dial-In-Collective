@@ -3517,6 +3517,26 @@
       "owner_approval": false,
       "test_source": "Publisher source PDF §§Abstract, Method 2, Tables 1,7,8,9, Conclusions §4; PDF screenshots unavailable.",
       "date": "2026-11-09"
+    },
+    {
+      "id": "R455-EV-APP-133-A",
+      "source": "dev d3ef37034868afb34d6937aff437aebd4ef2cd21 model@1efeeac985b7f2fb68a67e34af1f40c38437666c, site/cloud/main.js readDraft/submit and site/cloud/mapping.js shotPayload",
+      "claim": "Whitespace-only or empty-array grind coerced to Number 0 via num and passed validateShot because actual grinder zero is permitted; offline/cloud may treat a missing measurement as zero.",
+      "grade": "DIRECT_CURRENT_SOURCE_DETERMINISTIC_REPRODUCTION; NO_ACTUAL_MEMBER_INCIDENT_ASSERTED",
+      "result": "SAFE_INPUT_GUARD_REQUIRED",
+      "owner_approval": false,
+      "test_source": "tests/issue455-shot-blank-grind-integrity.test.mjs",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "R455-EV-APP-133-B",
+      "source": "tests/issue455-shot-blank-grind-integrity.test.mjs",
+      "claim": "Four regression tests distinguish missing/whitespace/non-scalar from genuine zero, preserve numeric strings, private notes and all five taste inputs, and reject invalid entry before state mutation.",
+      "grade": "SYNTHETIC_TESTS_CHECKED_IN_CI_PENDING",
+      "result": "TESTS_AUTHORED_NOT_YET_EXECUTED",
+      "owner_approval": false,
+      "test_source": "tests/issue455-shot-blank-grind-integrity.test.mjs",
+      "date": "2026-11-09"
     }
   ],
   "policy_decisions_pending": [],
@@ -3576,32 +3596,30 @@
     "R455-127 VERIFIED: PR1544 5/5 named head checks SUCCESS, nonforce squash ed621cc2b766609235b0835f0c27563fc5d5a6ec, 3 whitelisted doc blobs match tested head, exact merged approval42547720934 SUCCESS; research only 70/172/89, no application/Locked change. Reconciliation PR pending at receipt authoring.",
     "R455-128: source e4a94d1b39e51f1e0cf71208d97add8c187c270e safe replay coffee-ID integrity; 3 tests and exact merged Node3157/0/6, UX and governance SUCCESS; 70 sources/173 checks/90 proposals; standalone S019 missing; continue distinct #455 work.",
     "R455-129 source-first original publisher abstract + University of Padua record: no general 19-bar/crema optimality or new taste control; 71 curated/175 checks/91 proposals. Docs only pending PR CI; standalone S019 remains unreviewed.",
-    "R455-130 source 817a7574fd09eb08251dec9da3a19629db62e7fe: Springer+Camerino 2022 two-basket 4–7mm disc extraction chemistry, not taste optimum. 72 curated sources/177 checks/92 proposals; docs-only PR/CI pending at authoring; original S019 unreviewed."
+    "R455-130 source 817a7574fd09eb08251dec9da3a19629db62e7fe: Springer+Camerino 2022 two-basket 4–7mm disc extraction chemistry, not taste optimum. 72 curated sources/177 checks/92 proposals; docs-only PR/CI pending at authoring; original S019 unreviewed.",
+    "R455-133 @d3ef37034868afb34d6937aff437aebd4ef2cd21: whitespace/non-scalar grinder input erroneously became measured 0; local model guard with four regression tests. 74 curated sources, 183 evidence checks, 95 proposals. CI/queue/merge verification pending."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-132",
-    "base_development_sha": "6b4b553a9677381aaa98d37adda2ae8a5c6f4b7e",
-    "source_ids": [
-      "LIT-2025-HUANG-TAGUCHI-GRINDER-QC"
-    ],
+    "id": "R455-133",
+    "base_development_sha": "d3ef37034868afb34d6937aff437aebd4ef2cd21",
+    "source_ids": [],
     "claim_ids": [
-      "R455-EV-CIT-132-A",
-      "R455-EV-CIT-132-B"
+      "R455-EV-APP-133-A",
+      "R455-EV-APP-133-B"
     ],
     "proposal_ids": [
-      "R455-PROP-132-TAGUCHI-GRINDER-NUMERIC-CONFLICT-BOUNDARY"
+      "R455-PROP-133-EMPTY-GRIND-IS-NOT-MEASURED-ZERO"
     ],
     "number_of_curated_sources": 74,
-    "total_evidence_checks": 181,
-    "number_of_proposals": 94,
-    "review_type": "FULL_PUBLISHER_PRIMARY_PDF_TEXT_MULTICRITERIA_GRINDER_ENGINEERING_CONTRADICTION_WITH_APP_BOUNDARY",
-    "code_or_policy_changed": false,
+    "total_evidence_checks": 183,
+    "number_of_proposals": 95,
+    "review_type": "SOURCE_DERIVED_LOG_SHOT_GRIND_VALIDATION_FIX_WITH_SYNTHETIC_TESTS",
+    "code_or_policy_changed": true,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
-    "status": "AUTHORING_COMMIT_DOCS_ONLY_CI_UNVERIFIED",
-    "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "Verify three-path PR-head CI, nonforce integrate/read back exact original blobs and merged-source governance, then resume next disjoint UX or primary claim."
+    "status": "AUTHORING_COMMIT_PR_CI_UNVERIFIED",
+    "next_action": "Verify PR HEAD CI, nonforce merge and exact merged-code checks; reconcile queue and CURRENT_STATUS."
   },
   "policy_decisions_resolved": [
     {
@@ -5537,6 +5555,27 @@
       "implementation": "LEDGER_JOURNAL_CURRENT_STATUS_SAME_COMMIT_R132_RESEARCH_ONLY; PR_HEAD_CI_AND_MERGE_UNVERIFIED_AT_AUTHORING",
       "test_plan": "Check exact only three documentation paths, no runtime code/SQL differences, PR-head source-bound governance and continuity; nonforce squash and read back changed blobs and merged-source governance; Node/browser/SQL tests not needed for unchanged code per owner #457.",
       "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-133-EMPTY-GRIND-IS-NOT-MEASURED-ZERO",
+      "finding": "Invalid grinder input was converted to measured zero, potentially polluting recorded shot and personal learning.",
+      "evidence": [
+        "R455-EV-APP-133-A",
+        "R455-EV-APP-133-B"
+      ],
+      "severity": "P2_MEASUREMENT_INTEGRITY",
+      "user_benefit": "Preserve true measurements, prevent false zero, retain offline input integrity.",
+      "current_locked": "Real grinder zero valid; all five taste ratings, one next controllable change, calibrated equipment, measured History/notes, styles/feed, privacy/RLS preserved.",
+      "current_app": "validateShot model@1efeeac985b7f2fb68a67e34af1f40c38437666c accepts whitespace/array as zero",
+      "proposed_change": "SAFE: reject non-scalar/blank grinder input locally without modifying global num parser, member data, taste thresholds, or Locked product decisions.",
+      "evidence_grade": "DETERMINISTIC_SOURCE_LOGIC_AND_FOCUSED_SYNTHETIC_REGRESSIONS",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "CODE_AND_TEST_WITH_SAME_COMMIT_JOURNAL_PENDING_PR_CI_MERGE",
+      "test_plan": "Four positive/negative Node22 tests, app/cloud/offline validation, risk-proportionate CI, nonforce source merge/readback.",
+      "release_queue_status": "PENDING_VERIFIED_CI",
       "github267_literal_review_credit": 0,
       "production_deployed": false
     }
