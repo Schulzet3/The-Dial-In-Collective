@@ -1,0 +1,52 @@
+name: DIC Issue33 R70 original603 562 source intake
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r70-562-sey-selected.yml
+      - docs/workstreams/ops-issue33-r70-562-sey-selected-20261109.md
+      - scripts/audit/issue33-r70-562-afterproof.mjs
+      - scripts/audit/issue33-r70-562-sey-contract.mjs
+      - tests/coffee-issue33-r70-562-sey-contract.test.mjs
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r70-562-sey-selected.yml
+      - scripts/audit/issue33-r70-562-afterproof.mjs
+      - scripts/audit/issue33-r70-562-sey-contract.mjs
+      - tests/coffee-issue33-r70-562-sey-contract.test.mjs
+permissions:
+  contents: read
+jobs:
+  original-562-selected:
+    name: original603-562-current-sey-official-source
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Positive and hostile exact current selected lot tests
+        run: node --test tests/coffee-issue33-r70-562-sey-contract.test.mjs
+      - name: Guarded official exact original URL and real parser Add Coffee
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '562'
+          DIC_ISSUE33_FOCUSED_CURRENT_ALTERNATE_URL: 'https://www.seycoffee.com/collections/archived-coffees/products/2026-daniel-caro-lopez-el-tambo-end-of-season-colombia'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r70-562
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Fail-closed selected current official source and parser afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r70-562
+        run: node scripts/audit/issue33-r70-562-afterproof.mjs
+      - name: Preserve bounded current public source raw HTML and report (one day)
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r70-562-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r70-562/
+          if-no-files-found: warn
+          retention-days: 1
