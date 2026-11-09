@@ -3277,6 +3277,19 @@
       "production_writes": false,
       "baseline_complete": false,
       "next": "Distinct pg_collation catalog or provider drift"
+    },
+    {
+      "run": "2026-11-09 #509 Run116d direct pg_collation 861 provider-catalog metadata+version review",
+      "project_ref": "azviqqejypsefzilgonr",
+      "parent_sha": "18bcd358d24f52a56f1ba24337d6127d5add7da0",
+      "reviewed": 861,
+      "scope": "Complete visible collation metadata/declared and runtime versions, no native algorithm/source credit",
+      "receipt_path": "docs/audits/issue509-provider-pg-collation-001-861-2026-11-09-run116d.json",
+      "confirmed_defects": 0,
+      "source_fixes": 0,
+      "production_writes": false,
+      "baseline_complete": false,
+      "next": "New distinct provider object source family or drift"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -15099,5 +15112,30 @@
     "production_writes": false,
     "baseline_complete": false,
     "next": "pg_collation or additional uncovered definitions"
+  },
+  "provider_pg_collation_run116d": {
+    "status": "DIRECT_COMPLETE_VISIBLE_CATALOG_METADATA_AND_VERSION_REVIEW",
+    "observed_at": "2026-11-09 10:04:25.045776+00",
+    "source_parent": "18bcd358d24f52a56f1ba24337d6127d5add7da0",
+    "total": 861,
+    "reviewed": 861,
+    "provider_counts": {
+      "d": 1,
+      "b": 2,
+      "c": 5,
+      "i": 853
+    },
+    "versioned": 857,
+    "version_mismatches": 0,
+    "non_catalog_nondeterministic": 0,
+    "icu_rules": 0,
+    "app_explicit_nondefault_collation_columns": 0,
+    "receipt_path": "docs/audits/issue509-provider-pg-collation-001-861-2026-11-09-run116d.json",
+    "compiled_native": "UNVERIFIED",
+    "verified_new_defects": 0,
+    "source_fixes": 0,
+    "production_mutations": false,
+    "baseline_complete": false,
+    "next": "Uninspected full provider definitions/drift"
   }
 }
