@@ -38,6 +38,7 @@ import {selectedCurrentFarmGrowingLocality} from './coffee-selected-farm-growing
 import {selectedCurrentFarmCountryLocality} from './coffee-selected-farm-country-locality.mjs';
 import {selectedCurrentFarmVolcanoRegion} from './coffee-selected-farm-volcano-region.mjs';
 import {selectedCountryFirstCurrentRegion} from './coffee-country-first-current-region.mjs';
+import {selectedCurrentLotContrastedRegion} from './coffee-selected-current-lot-region.mjs';
 import {selectedCurrentInlineCompoundRegion} from './coffee-selected-inline-region.mjs';
 import {selectedCurrentTypedRoastLevel} from './coffee-selected-typed-roast-level.mjs';
 import {selectedCurrentTradeElevationRegion} from './coffee-selected-trade-elevation-region.mjs';
@@ -2388,6 +2389,25 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     field:'origin',label:'Current selected single-origin named growing region',
     value:currentRegion.quote.slice(0,500),
     source_url,source_type:'html',section:'Exact selected current product description'
+   });
+  }
+ }
+
+ // A current selected coffee can contrast its own lot against a PREVIOUS
+ // named lot: only "This time from X region" is present growing-location proof.
+ // A prior-lot sentence/other product/educational district cannot refine origin.
+ if(fields.origin&&!conflicts.has('origin')){
+  const currentLotRegion=selectedCurrentLotContrastedRegion({
+   name:fields.name,origin:fields.origin,blocks:productCoffeeProse(canonicalProduct,clean)
+  });
+  if(currentLotRegion){
+   rememberCoffeeReviewCandidate(fields,'origin',fields.origin,
+    'Broader current selected country');
+   fields.origin=currentLotRegion.value;
+   if(source_facts.length<384)source_facts.push({
+    field:'origin',label:'Exact selected this-lot growing region',
+    value:currentLotRegion.quote.slice(0,450),source_url,source_type:'html',
+    section:'Exact selected current versus previous lot description'
    });
   }
  }
