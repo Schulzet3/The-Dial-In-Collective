@@ -48,3 +48,14 @@ test('R49 a script or hidden unrelated H1 is not substituted for a selected visi
  const x=fixture({first:'<h1>Another Coffee</h1>'+hero('Mobile')});
  assert.equal(verify(x.html,{source_url:url,expected_name:name,parsed_name:x.parsed}),null);
 });
+
+test('R49 selected mobile hero nested inside a real commerce page wrapper still proves current product identity',()=>{
+ const x=fixture({first:'<div class="productPage_outer"><section><div class="hero">'+
+  hero('Mobile')+'</div></section></div>',second:hero('Desktop')});
+ assert.equal(verify(x.html,{source_url:url,expected_name:name,parsed_name:x.parsed})?.selected_title,name);
+});
+test('R49 an unrelated nested recommendations class with fake coffee hero cannot fill missing current hero',()=>{
+ const x=fixture({first:'<div class="related">Read another coffee '+hero('Mobile')+'</div>',
+  second:''});
+ assert.equal(verify(x.html,{source_url:url,expected_name:name,parsed_name:x.parsed}),null);
+});
