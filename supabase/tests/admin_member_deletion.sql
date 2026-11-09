@@ -11,6 +11,7 @@ DECLARE
  community_keep uuid; community_remove uuid; community_peer uuid;
  impact jsonb; request jsonb; prepared jsonb; finished jsonb; invite jsonb;
  op_keep uuid; op_remove uuid; code_id uuid; source_submission uuid;
+ pending_member_submission uuid; pending_member_library_entry uuid;
  blocked boolean;
  BEGIN
  IF current_database()<>'dic_ci' THEN RAISE EXCEPTION 'Only disposable dic_ci allowed'; END IF;
@@ -61,6 +62,17 @@ DECLARE
  VALUES(community_keep,null,ckeep,1),(community_remove,null,cremove,1),(community_peer,null,cpeer,1);
  IF (SELECT count(*) FROM public.community_shots WHERE coffee_id=coffee AND quality_state='eligible')<>3
  THEN RAISE EXCEPTION 'Community fixture missing'; END IF;
+ -- #509 Run131: member-owned pending submission plus linked personal library item.
+ -- This independently exercises concurrent auth -> submission and auth -> library
+ -- cascades against the composite owner/submission NO ACTION foreign key.
+ INSERT INTO public.coffee_submissions(owner_id,proposed_data,status)
+ VALUES(keep_user,'{"name":"Pending member review","roaster":"Synthetic Roaster"}'::jsonb,'pending')
+ RETURNING id INTO pending_member_submission;
+ INSERT INTO public.library_entries(owner_id,submission_id)
+ VALUES(keep_user,pending_member_submission)
+ RETURNING id INTO pending_member_library_entry;
+ IF pending_member_library_entry IS NULL
+ THEN RAISE EXCEPTION 'Missing member-owned library submission fixture'; END IF;
  -- An admitted ordinary member cannot preview, stage, hide invites or call service operations.
  PERFORM set_config('request.jwt.claim.sub',peer_user::text,true);
  PERFORM set_config('request.jwt.claim.role','authenticated',true);
@@ -132,6 +144,9 @@ DECLARE
  IF NOT blocked THEN RAISE EXCEPTION 'Finalization accepted existing Auth user'; END IF;
  EXECUTE 'RESET ROLE';
  DELETE FROM auth.users WHERE id=keep_user; -- disposable simulation of GoTrue admin.deleteUser
+ IF EXISTS(SELECT 1 FROM public.coffee_submissions WHERE id=pending_member_submission)
+ OR EXISTS(SELECT 1 FROM public.library_entries WHERE id=pending_member_library_entry)
+ THEN RAISE EXCEPTION 'Pending personal submission/library not deleted'; END IF;
  IF EXISTS(SELECT 1 FROM public.coffee_submissions WHERE id=source_submission)
  THEN RAISE EXCEPTION 'Deleted user still has private submission'; END IF;
  IF NOT EXISTS(SELECT 1 FROM private.dic_coffee_first_entry

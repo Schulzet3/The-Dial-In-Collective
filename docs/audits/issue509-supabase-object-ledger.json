@@ -3346,6 +3346,17 @@
       "confirmed_new_defects": 0,
       "production_writes": false,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-09 #509 Run131 composite pending submission cascade",
+      "source_parent_sha": "95a09edc2123d84fae66d972feca522d9c01f4a4",
+      "receipt_path": "docs/audits/issue509-provider-account-delete-cascade-2026-11-09-run131.json",
+      "reviewed_fk_action_definitions": 8,
+      "observed_library_submission_links": 0,
+      "source_words_recredited": 0,
+      "ci": "PENDING",
+      "production_writes": false,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -15545,5 +15556,18 @@
     "baseline_complete": false,
     "next": "Owner-controlled rebuilt #1676 + #509 source-isolated candidate; verify all five exact-candidate CI and independently signed offsite encrypted recovery before publish, then continue provider baseline audit.",
     "source_fix_commit": "7416c155cac9be2ea84daba23ca6fe4cdfe94788"
+  },
+  "provider_account_delete_cascade_run131": {
+    "status": "TEST_ONLY_SOURCE_COMMIT_CI_PENDING",
+    "source_development_parent_sha": "95a09edc2123d84fae66d972feca522d9c01f4a4",
+    "receipt_path": "docs/audits/issue509-provider-account-delete-cascade-2026-11-09-run131.json",
+    "reviewed_fk_action_definitions": 8,
+    "observed_library_submission_links": 0,
+    "source_words_recredited": 0,
+    "verified_new_defect": false,
+    "source_path": "supabase/tests/admin_member_deletion.sql",
+    "production_writes": false,
+    "baseline_complete": false,
+    "next": "Read exact-source isolated PostgreSQL CI for synthetic owned pending submission cascade"
   }
 }
