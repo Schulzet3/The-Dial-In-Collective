@@ -47,12 +47,11 @@ for(const x of specs){
    'selected_farm_literal_tasting_notes_omitted');
   require(/farm is managed by the alvarez family/i.test(txt),'direct_selected_farm_manager_evidence_not_found');
   const facts=r.source_facts||[];
-  const direct=(field,label,literal)=>facts.some(f=>f.field===field&&
-   String(f.label||'').toLowerCase()===label.toLowerCase()&&
+  const direct=(field,label,literal)=>facts.some(f=>
+   f.field===field&&String(f.label||'').toLowerCase()===label.toLowerCase()&&
    f.source_url===r.final_url&&
-   new RegExp('^:\\s*'+literal.replace(/[-/\\^$*+?.()|[\]{}]/g,'\\require(/farm:\s*finca la esperanza/i.test(txt)&&/processing:\s*natural/i.test(txt),
-   'direct_selected_farm_process_evidence_not_found');')+'(?=\\s|✹|$)','i')
-    .test(String(f.value||'')));
+   String(f.value||'').replace(/^\s*:\s*/,'').split('✹')[0].trim().toLowerCase()===
+    literal.toLowerCase());
   require(selectedCurrentVisibleLabeledFact(txt,'Farm','Finca La Esperanza')&&
    selectedCurrentVisibleLabeledFact(txt,'Processing','Natural')&&
    direct('producer','Farm','Finca La Esperanza')&&
