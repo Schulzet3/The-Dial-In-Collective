@@ -4781,7 +4781,7 @@
   },
   "current_owner_admin_account_invite_delete_20261109": {
     "decision_id": "ADMIN-DELETE-CODE-ACCOUNT-COMMUNITY-CHOICE-20261109",
-    "status": "OWNER APPROVED FOR DEVELOPMENT; IMPLEMENTATION/TESTS/CI NOT YET VERIFIED; NOT DEPLOYED",
+    "status": "OWNER LOCKED; IMPLEMENTED AND SOURCE-VERIFIED READY; NOT DEPLOYED",
     "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1676",
     "scope": "Admin-only Delete Code immediately revokes and hides the code, retaining non-secret history; existing admitted member not affected. Admin-only permanent Delete Account for nonadmins with explicit Keep Community vs Remove Community selection, exact impact preview and confirmation.",
     "supersedes": [
@@ -4807,6 +4807,15 @@
       "never claim success until Auth deletion and database finalization independently confirmed",
       "real member-data deletion only on separate authorized operator action"
     ],
-    "publication_permission": "NOT GRANTED"
+    "publication_permission": "NOT GRANTED",
+    "implementation": {
+      "primary_pr": 1719,
+      "privacy_fix_pr": 1723,
+      "ci_trigger_pr": 1725,
+      "final_merged_source_sha": "ed95dd067bd1d75925dd56e88300297f9f28c033",
+      "release_queue_id": "DIC-Q-1676-admin-code-account-delete",
+      "verified": "Scoped merged-source PR exact checks + unchanged SQL source blob reused; NOT hosted Auth execution",
+      "publication": "SEPARATE OWNER COMMAND REQUIRED"
+    }
   }
 }
