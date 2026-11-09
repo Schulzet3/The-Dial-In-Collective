@@ -535,7 +535,8 @@ begin
       select 1 from private.contribution_links cl where cl.contributor_id=c.id);
  end if;
  update private.dic_admin_account_delete_operations
-  set phase='completed',community_removed=removed,completed_at=now() where id=op.id;
+  set phase='completed',community_removed=removed,completed_at=now(),
+      expected_impact=expected_impact-'email'-'member_id' where id=op.id;
  return jsonb_build_object('ok',true,'completed',true,'community_removed',removed);
 end $fn$;
 revoke all on function private.dic_admin_account_delete_finish(uuid,uuid) from public,anon,authenticated;

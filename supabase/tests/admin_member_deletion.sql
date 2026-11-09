@@ -127,6 +127,9 @@ DECLARE
  THEN RAISE EXCEPTION 'Keep mode did not complete'; END IF;
  IF (public.dic_admin_account_delete_finish(op_keep,admin)->>'retry')<>'true'
  THEN RAISE EXCEPTION 'Completed Keep operation not idempotent'; END IF;
+ IF EXISTS(SELECT 1 FROM private.dic_admin_account_delete_operations o
+  WHERE o.id=op_keep AND (o.expected_impact ? 'email' OR o.expected_impact ? 'member_id'))
+ THEN RAISE EXCEPTION 'Completed deletion receipt retained identifying email/member ID'; END IF;
  EXECUTE 'RESET ROLE';
  IF NOT EXISTS(SELECT 1 FROM public.community_shots WHERE id=community_keep AND quality_state='eligible')
  OR NOT EXISTS(SELECT 1 FROM private.contribution_links l
