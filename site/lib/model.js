@@ -171,7 +171,13 @@ export function validateShot(d,{allowLegacyCustom=false}={}) {
  // Reject excess before enqueue/save; never silently discard a member's text.
  if(Array.from(String(d.notes||'')).length>16000)errors.push('Notes must be 16,000 characters or fewer. Your text has not been saved or shortened.');
  for(const field of ['doseG','yieldG','timeS']){const n=num(d[field]),[lo,hi]=CONFIG.bounds[field];if(n==null||n<lo||n>hi)errors.push(`${{doseG:'Dose',yieldG:'Yield',timeS:'Time'}[field]} must be between ${lo} and ${hi}${field==='timeS'?' s':' g'}.`);}
- if(num(d.grindSetting)==null||num(d.grindSetting)<0)errors.push('Enter the actual grind setting (0 or higher).');
+ // A whitespace-only or non-scalar value is not an actual grinder zero.
+ // Preserve genuinely measured 0 and valid numeric strings without global parsing changes.
+ const grind=d.grindSetting;
+ if((typeof grind!=='number'&&typeof grind!=='string')||
+    (typeof grind==='string'&&!grind.trim())||
+    num(grind)==null||num(grind)<0)
+  errors.push('Enter the actual grind setting (0 or higher).');
  if(d.tempC!==''&&d.tempC!=null){const n=num(d.tempC);if(n==null||n<70||n>100)errors.push('Check temperature (70-100 degrees C).');}
  if(!d.tasteScales||!Object.entries({extraction:3,body:3,clarity:5,sweetness:5,astringency:1}).every(([k])=>Number.isInteger(d.tasteScales[k])&&d.tasteScales[k]>=1&&d.tasteScales[k]<=5))errors.push('Rate all five taste scales.');
  if(!STYLES.includes(d.style)&&!(allowLegacyCustom&&d.style==='Custom'))errors.push('Choose an available shot style.');
