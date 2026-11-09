@@ -1,0 +1,557 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 124,
+  "provider_project": "azviqqejypsefzilgonr",
+  "date_utc": "2026-11-09",
+  "git": {
+    "development_parent": "64d4b5d629d4aba6b750e1c7878463829ed1bb42",
+    "main": "55c2bebcdcabda40e890ac25dcb9880ec789b5a4",
+    "release_production": "2d0bed35e67f6a745a21cbd80616ad4c9a98ed41"
+  },
+  "source_scope": "Exact byte comparison of all 11 live Edge bundle file instances with identical development and release/production source blobs; current 54 migration provider version/name rows vs pinned Git SQL filenames; safe aggregate replication/publication catalog; bounded rolling-24h metadata-only SQLSTATE classes; zero saved notebook inventory. No duplicate source-line credit.",
+  "edge": {
+    "deployed": [
+      {
+        "slug": "dic-verify-coffee",
+        "version": 8,
+        "verify_jwt": true,
+        "ezbr_sha256": "d59e9da29335f2d626a2779238b4f1176148f5f8f3d54539bf831ff20aa6a77e"
+      },
+      {
+        "slug": "dic-preview-coffee",
+        "version": 4,
+        "verify_jwt": true,
+        "ezbr_sha256": "ac928ceb4898414555fbcc96afb30b0963f7c819c5d7e211abd5b3893090648c"
+      }
+    ],
+    "file_instances_total": 11,
+    "exact_source_instances": 8,
+    "previously_documented_drift_instances": 3,
+    "source_files": [
+      {
+        "slug": "dic-verify-coffee",
+        "version": 8,
+        "path": "dic-verify-coffee/index.ts",
+        "live_chars": 6909,
+        "github_blob_sha": "2aa8d133a86aba8513d91f1557cdea230e24fa0e",
+        "exact_content_match": true,
+        "semantic_status": "EXACT"
+      },
+      {
+        "slug": "dic-verify-coffee",
+        "version": 8,
+        "path": "_shared/request-budget.mjs",
+        "live_chars": 2455,
+        "github_blob_sha": "d8b70824cb71d4dc4a747a8f20e23b429abb3094",
+        "exact_content_match": true,
+        "semantic_status": "EXACT"
+      },
+      {
+        "slug": "dic-verify-coffee",
+        "version": 8,
+        "path": "dic-verify-coffee/evidence.mjs",
+        "live_chars": 11492,
+        "github_blob_sha": "3cfb7a1b0a8c2064168ca41314085c48a0f768d1",
+        "exact_content_match": true,
+        "semantic_status": "EXACT"
+      },
+      {
+        "slug": "dic-verify-coffee",
+        "version": 8,
+        "path": "_shared/html-scan.mjs",
+        "live_chars": 1723,
+        "github_blob_sha": "c731e22fc2a05b1559b4619cd05e0deb24ddbcc5",
+        "exact_content_match": false,
+        "semantic_status": "KNOWN_RUN47_DRIFT_NO_NEW_RUNTIME_INCIDENT_PROVEN"
+      },
+      {
+        "slug": "dic-verify-coffee",
+        "version": 8,
+        "path": "_shared/coffee-release-label.mjs",
+        "live_chars": 2250,
+        "github_blob_sha": "2a3c0f10ea4d808accc05223c99d1afdcffa3761",
+        "exact_content_match": true,
+        "semantic_status": "EXACT"
+      },
+      {
+        "slug": "dic-preview-coffee",
+        "version": 4,
+        "path": "dic-preview-coffee/index.ts",
+        "live_chars": 5864,
+        "github_blob_sha": "e85b700d2d735b1c16b5ce719a50aa7560b45ac3",
+        "exact_content_match": true,
+        "semantic_status": "EXACT"
+      },
+      {
+        "slug": "dic-preview-coffee",
+        "version": 4,
+        "path": "_shared/request-budget.mjs",
+        "live_chars": 2455,
+        "github_blob_sha": "d8b70824cb71d4dc4a747a8f20e23b429abb3094",
+        "exact_content_match": true,
+        "semantic_status": "EXACT"
+      },
+      {
+        "slug": "dic-preview-coffee",
+        "version": 4,
+        "path": "dic-preview-coffee/preview.mjs",
+        "live_chars": 7799,
+        "github_blob_sha": "14b6b982ce4e78a354bf98d912c19d6ed32cad0c",
+        "exact_content_match": true,
+        "semantic_status": "EXACT"
+      },
+      {
+        "slug": "dic-preview-coffee",
+        "version": 4,
+        "path": "_shared/html-scan.mjs",
+        "live_chars": 1723,
+        "github_blob_sha": "c731e22fc2a05b1559b4619cd05e0deb24ddbcc5",
+        "exact_content_match": false,
+        "semantic_status": "KNOWN_RUN47_DRIFT_NO_NEW_RUNTIME_INCIDENT_PROVEN"
+      },
+      {
+        "slug": "dic-preview-coffee",
+        "version": 4,
+        "path": "dic-verify-coffee/evidence.mjs",
+        "live_chars": 10032,
+        "github_blob_sha": "3cfb7a1b0a8c2064168ca41314085c48a0f768d1",
+        "exact_content_match": false,
+        "semantic_status": "KNOWN_RUN47_DRIFT_NO_NEW_RUNTIME_INCIDENT_PROVEN"
+      },
+      {
+        "slug": "dic-preview-coffee",
+        "version": 4,
+        "path": "dic-preview-coffee/agtron-roast.mjs",
+        "live_chars": 4209,
+        "github_blob_sha": "1c6d74452aefc9a35455816178ae4845a057a7f3",
+        "exact_content_match": true,
+        "semantic_status": "EXACT"
+      }
+    ],
+    "known_drift": "Both Edge bundles carry older html-scan implementation (not quote-aware); preview bundle additionally has older evidence helper, imported normalizeWords previously verified unchanged. Current Git files include quoted > fix. This existed in Run47; no new confirmed incident or publish authorization."
+  },
+  "migrations": {
+    "live_applied": 54,
+    "git_sql_files": 53,
+    "version_exact": 31,
+    "version_different": 23,
+    "logical_names_matched": 54,
+    "duplicate_logical_names": [
+      "dic_admin_shot_coffee_group_identity"
+    ],
+    "records": [
+      {
+        "version": "20261009190246",
+        "name": "dic_identity_foundation",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261009192735",
+        "name": "dic_coffee_catalog",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261012015417",
+        "name": "dic_equipment_workspaces",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261012015600",
+        "name": "dic_shots_recipes_community",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261012015655",
+        "name": "dic_internal_function_access",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261012021522",
+        "name": "dic_beta_session_api",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261012022200",
+        "name": "dic_authenticated_core_api",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261012023227",
+        "name": "dic_hidden_shot_family_integrity",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261012030019",
+        "name": "dic_owner_workspace_actions",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261012030729",
+        "name": "dic_remember_feed_condition",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261012030924",
+        "name": "dic_bound_client_mutations",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261012183642",
+        "name": "dic_native_import_review",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261012183845",
+        "name": "dic_import_qualified_validation",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261014152014",
+        "name": "dic_owner_only_import_exception",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261014200634",
+        "name": "dic_setup_rename_feed_memory",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261014212829",
+        "name": "dic_admin_read_only_dashboard",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261014215731",
+        "name": "dic_roaster_identity_matching",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261014221324",
+        "name": "dic_coffee_auto_catalog",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261014222202",
+        "name": "dic_source_worker_target",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261014222802",
+        "name": "dic_unified_coffee_rpc_compat",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261016154252",
+        "name": "dic_url_first_and_autofill_preview",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261017005739",
+        "name": "dic_universal_coffee_preview_shared_30s",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261017015639",
+        "name": "dic_universal_preview_jwt_role_compat",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261017050220",
+        "name": "dic_preview_daily_budget_12",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261017053258",
+        "name": "dic_seven_roast_tier_compatibility",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261018035732",
+        "name": "dic_seven_roast_owner_data",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261018054140",
+        "name": "dic_community_quality_integrity",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261018064703",
+        "name": "dic_contextual_quality_community_ui",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261019041437",
+        "name": "dic_community_release_context",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261019041452",
+        "name": "dic_admin_beta_invitation_controls",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261021165214",
+        "name": "dic_admin_coffee_review",
+        "git_exact_timestamp_name": false,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261021165302",
+        "name": "dic_duplicate_first_auto_approval",
+        "git_exact_timestamp_name": false,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261022013337",
+        "name": "dic_source_worker_auth_and_admission",
+        "git_exact_timestamp_name": false,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261022013349",
+        "name": "dic_admin_content_review",
+        "git_exact_timestamp_name": false,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261022041530",
+        "name": "dic_retire_hide_shot_action",
+        "git_exact_timestamp_name": true,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261022162910",
+        "name": "dic_admin_shot_coffee_group_identity",
+        "git_exact_timestamp_name": false,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261022162954",
+        "name": "dic_admin_fast_review_and_identity_edits",
+        "git_exact_timestamp_name": false,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261022163029",
+        "name": "dic_first_coffee_style_prompt",
+        "git_exact_timestamp_name": false,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261022163126",
+        "name": "dic_fast_flow_hybrid_style",
+        "git_exact_timestamp_name": false,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261022165047",
+        "name": "dic_admin_shot_coffee_group_identity",
+        "git_exact_timestamp_name": false,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261023014707",
+        "name": "dic_admin_server_search",
+        "git_exact_timestamp_name": false,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261023014715",
+        "name": "dic_community_server_search",
+        "git_exact_timestamp_name": false,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261023014720",
+        "name": "dic_preview_two_phase_cache",
+        "git_exact_timestamp_name": false,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261024030533",
+        "name": "dic_admin_safe_delete",
+        "git_exact_timestamp_name": false,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261024030536",
+        "name": "dic_source_target_producer",
+        "git_exact_timestamp_name": false,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261024030539",
+        "name": "dic_personal_family_lifecycle_integrity",
+        "git_exact_timestamp_name": false,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261024052303",
+        "name": "dic_pending_retry_http_conflict",
+        "git_exact_timestamp_name": false,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261024052411",
+        "name": "dic_community_recommendation_evidence",
+        "git_exact_timestamp_name": false,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261024052419",
+        "name": "dic_recommendation_use_provenance",
+        "git_exact_timestamp_name": false,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261027192911",
+        "name": "dic_retire_experiments",
+        "git_exact_timestamp_name": false,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261028230056",
+        "name": "dic_decaf_only_method",
+        "git_exact_timestamp_name": false,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261029202242",
+        "name": "dic_admin_review_candidates_grant",
+        "git_exact_timestamp_name": false,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261030044752",
+        "name": "dic_admin_edit_stale_http_conflict",
+        "git_exact_timestamp_name": false,
+        "git_logical_name": true
+      },
+      {
+        "version": "20261104171057",
+        "name": "dic_admin_invite_expiry_search",
+        "git_exact_timestamp_name": false,
+        "git_logical_name": true
+      }
+    ],
+    "scope_limit": "Current version/name metadata lineage only; prior full stored historical SQL 54/54 reused, not a new SQL source review or runtime DDL proof."
+  },
+  "replication": {
+    "source_sql": "read-only aggregate pg_replication_slots, pg_stat_wal_receiver, pg_stat_replication, pg_publication and pg_publication_rel, pg_subscription, pg_replication_origin; no row identities",
+    "wal_level": "logical",
+    "max_replication_slots": 5,
+    "visible_slots": 0,
+    "visible_senders": 0,
+    "visible_receivers": 0,
+    "visible_subscriptions": 0,
+    "visible_origins": 0,
+    "publication": [
+      {
+        "name": "supabase_realtime",
+        "insert": true,
+        "update": true,
+        "delete": true,
+        "truncate": true,
+        "all_tables": false,
+        "linked_relations": 0,
+        "rls_disabled_linked_relations": 0,
+        "replica_identity_full_linked_relations": 0
+      }
+    ],
+    "limits": "No conclusion about external managed Realtime, replication or backup activity."
+  },
+  "provider_notebooks": {
+    "listed": 0,
+    "console_only_settings": "UNVERIFIED"
+  },
+  "advisor": {
+    "security": [
+      [
+        "rls_enabled_no_policy",
+        6
+      ],
+      [
+        "authenticated_security_definer_function_executable",
+        10
+      ],
+      [
+        "auth_leaked_password_protection",
+        1
+      ]
+    ],
+    "performance": [
+      [
+        "unindexed_foreign_keys",
+        12
+      ],
+      [
+        "unused_index",
+        9
+      ]
+    ],
+    "health_lints": 0,
+    "prior_known": true
+  },
+  "sqlstate": {
+    "method": "Two provider ClickHouse read-only grouped log metadata analyses; keys inventoried (35 PostgreSQL log events in first source window) and rolling-24-hour error class grouped; raw query/log content not returned",
+    "error_count": 13,
+    "states": {
+      "22023": 1,
+      "42703": 5,
+      "42704": 2,
+      "42725": 1,
+      "42883": 1,
+      "42P01": 2
+    },
+    "commands": [
+      "SELECT"
+    ],
+    "backend_class": "client backend",
+    "app_class": "other_client",
+    "catalog_query_class_count": 4,
+    "causality": "UNVERIFIED",
+    "no_personal_log_data": true
+  },
+  "disposition": {
+    "new_confirmed_defect": 0,
+    "source_fix": 0,
+    "provider_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "node22_tests": "NOT_RUN_DOCS_ONLY",
+    "isolated_postgres_tests": "NOT_RUN_DOCS_ONLY",
+    "signed_in_api_tests": "NOT_RUN",
+    "next": "Genuinely unreviewed or changed definition / privacy-safe SQLSTATE attribution; native implementations, query bodies/plans and hosted Auth/JWT/PostgREST UNVERIFIED"
+  }
+}
