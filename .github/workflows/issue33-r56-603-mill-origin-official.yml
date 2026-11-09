@@ -1,0 +1,43 @@
+name: DIC Issue33 R56 original603 603 current selected processing mill origin
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r56-603-mill-origin-official.yml
+      - scripts/audit/issue33-r56-603-mill-origin-contract.mjs
+      - scripts/audit/issue33-r56-603-mill-origin-afterproof.mjs
+      - tests/coffee-issue33-r56-603-mill-origin-contract.test.mjs
+      - src/server/coffee-page-metadata.mjs
+      - src/server/coffee-product-scope.mjs
+permissions:
+  contents: read
+jobs:
+  selected-r56:
+    name: original603-603-current-selected-mill-provenance
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Bounded read-only current official HTTPS and actual preview
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r56-603
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '603'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict source hash identity and dry-mill-versus-growing-locality afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r56-603
+        run: node scripts/audit/issue33-r56-603-mill-origin-afterproof.mjs
+      - name: Store one-day private raw HTML and verdict
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r56-603-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r56-603/
+          if-no-files-found: error
+          retention-days: 1
