@@ -3335,6 +3335,17 @@
       "verified_new_defects": 0,
       "production_writes": false,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-09 #509 Run129 data-integrity aggregate crosschecks",
+      "source_parent_sha": "b788a97b45dbc26633f9bc32ef00272e2227d165",
+      "receipt_path": "docs/audits/issue509-provider-integrity-invariants-2026-11-09-run129.json",
+      "reviewed_distinct_invariant_groups": 12,
+      "reviewed_live_function_source_duplicates": 3,
+      "new_credited_source_words": 0,
+      "confirmed_new_defects": 0,
+      "production_writes": false,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -15493,5 +15504,25 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "Direct new/changed provider source or safely accessible settings; hosted JWT/API/native UNVERIFIED"
+  },
+  "provider_app_integrity_invariants_run129": {
+    "status": "BOUNDED_DIRECT_AGGREGATE_CROSS_TABLE_INTEGRITY_CHECKS_NO_NEW_SOURCE_WORD_CREDIT",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_development_parent_sha": "b788a97b45dbc26633f9bc32ef00272e2227d165",
+    "source_main_sha": "55c2bebcdcabda40e890ac25dcb9880ec789b5a4",
+    "source_release_sha": "2d0bed35e67f6a745a21cbd80616ad4c9a98ed41",
+    "receipt_path": "docs/audits/issue509-provider-integrity-invariants-2026-11-09-run129.json",
+    "aggregate_invariants": 12,
+    "nonlegacy_snapshot_evaluated": 12,
+    "personal_shot_ratios_evaluated": 26,
+    "community_shot_ratios_evaluated": 12,
+    "validated_constraints": 266,
+    "enabled_custom_triggers": 24,
+    "new_confirmed_defects": 0,
+    "app_source_changes": 0,
+    "production_writes": false,
+    "baseline_complete": false,
+    "ci": "PENDING_EXACT_SOURCE_DOCS_GOVERNANCE",
+    "next": "Genuinely unreviewed/new/changed provider object and hosted Auth/JWT/API/native gaps; maintain separate #96 ownership"
   }
 }
