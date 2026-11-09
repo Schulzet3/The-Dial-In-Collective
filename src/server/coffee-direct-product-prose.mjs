@@ -294,12 +294,12 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   const line=b.text.replace(/\s+/g,' ').trim();
   // Exact selected H1 and two distinctive chosen-coffee identity roots bind
   // one own sourced water-decaf sentence. SW alone/education never qualifies.
-  const namedWater=b.tag==='p'&&!b.educational&&line.length<=550&&
+  const selfSourcedWater=b.tag==='p'&&!b.educational&&line.length<=550&&
    !/^(?:faq|frequently asked questions|common questions|decaf process education)$/iu.test(String(b.section||'').trim())
    ?currentSelectedSourcedNamedWaterDecaf(name,line):'';
-  if(namedWater&&inferDecaffeinationMethod({name,selectedMethod:namedWater})==='Water Process'&&
-     !decafEvidence.has(namedWater)){
-   if(decafEvidence.size<4)decafEvidence.add(namedWater);
+  if(selfSourcedWater&&inferDecaffeinationMethod({name,selectedMethod:selfSourcedWater})==='Water Process'&&
+     !decafEvidence.has(selfSourcedWater)){
+   if(decafEvidence.size<4)decafEvidence.add(selfSourcedWater);
    else decafEvidenceOverflow=true;
   }
   if(b.tag==='p'){
