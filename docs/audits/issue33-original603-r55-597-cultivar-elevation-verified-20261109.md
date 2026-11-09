@@ -1,0 +1,26 @@
+# Issue #33 R55 — original603 #597 selected cultivar and elevation verified
+
+**November 9, 2026 UTC. NARROW READY IN DEVELOPMENT ONLY, NOT DEPLOYED. Parent Issue #33 OPEN.**
+
+## Authority, frozen evidence and concurrency
+Owner Issue33 development authorization, Locked Master Specification/Decision Ledger/approval; preserve 603 original coffees/201 roasters/1197 frozen captures, original scorer/oracle and CSV blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6` unchanged. Separate #267 V2 and #96 Auth. Unrelated open #1453 R38 #487–489 not overwritten. No SQL/Edge/Auth/Netlify/member/provider writes, accounts, payments or force.
+
+## Independently source-reproduced original #597 error
+Exact selected public [Wrecking Ball Kenya Nkumari, P1 C](https://www.wreckingballcoffee.com/products/kenya-estate). Pre-fix real parser in [official 42571947591](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42571947591) emitted name/origin Meru Kenya, Washed, grower, notes, but omitted **both `variety` and `elevation_m`** despite visible selected `What’s in it:` printed `Variety: SL28 and Ruiru 11 (which are exclusive varieties to Kenya). Farm: Nkumari. Producer: Naman Meme. Region: Meru. Elevation; 1400 meters above sea level.`. Original direct HTML captured (420517 bytes, pre-fix sha256 `ec3bdc78c5e41e7dfc1a76eb72949e83eb5b2c84f225515f13f236bc7d5e4c3a`), actual matched H1, no sibling/SEO assumptions.
+
+## Corrective implementation and exact integrated tests
+[PR #1611](https://github.com/Schulzet3/The-Dial-In-Collective/pull/1611) safely nonforce merged `94d72da6cde4b7d32176f6806c40c980825f49ac`. Only the already strict same-selected Product compound Process/Variety/Farm/Producer/Region proof can supplement a literal, individually valid botanically named cultivar and finite meter measurement. Ambiguous duplicate labels, junk varieties/heights, unrelated products, contradictory earlier fields or different H1 fail closed. Test and afterproof sources are in the SAME-COMMIT scoped journal.
+
+Initial PR-head approval FAILED queue intake (incorrect non-deployable scope paths), repaired; later Node FAILED **one invalid negative fixture** (different selected H1 was valid for its own description), fixed without loosening runtime; final exact PR-head `50dd92e4920ff0ede42ebac5e80e8b2183fef829` [Node/lint42577364499](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42577364499) **3189 pass /0 fail /6 named intentional skips**, cloud/mobile42577364567, SQL42577364693, security42577365419, Python42577364639, archive42577364451, approval42577364614 SUCCESS. Exact merged [Node/lint42577711130](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42577711130) **3189/0/6**; cloud/mobile42577711141, Python42577711098 and approval42577711169 SUCCESS. Broad original frozen603 and irrelevant probes were SKIPPED (not PASS).
+
+Exact merged fresh [official current42577711126](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42577711126) **SUCCESS 3/3** exact current identity/current selected HTML/actual parser/Add Coffee/Source Review; zero afterproof failures, `manual_certified:0`, `production_operations:0`. #597 now `variety: SL28 and Ruiru 11`, `elevation_m: 1400 meters above sea level`, `origin: Meru, Kenya`, Process Washed, no conflict. Current #594 selected Sumatra Swiss Water despite recycled Timor URL and #600 Vietnam Lam Dong no regressions.
+
+## Separate genuinely independent ZIP verification
+[PR #1612](https://github.com/Schulzet3/The-Dial-In-Collective/pull/1612) nonforce merged `1a85b51f73b092bfce804671444f32a0bae3e8db`. A different read-only GitHub Actions runner [42578195677](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42578195677) downloaded **both archived ZIP bytes independently** (no checkout, actions:read, no mutation) and verified:
+- Older #13653437085 original source `ce3bb4e1331ef811f5904633130e9f25e6c5e226` 169005-byte ZIP sha256 `b58d3e416af091c85349fbbe36ce3e07f0e662b4f5d9637707fd954a2012c4d2`, raw #597 sha256 `ec3bdc78c5e41e7dfc1a76eb72949e83eb5b2c84f225515f13f236bc7d5e4c3a`, actual original source verdict/no cultivar/elev as captured.
+- New #13656176118 original source `94d72da6cde4b7d32176f6806c40c980825f49ac` 169028-byte ZIP sha256 `8eed5b4dffd7bd128fdbe343c3318ef96976b61ffc7c08cb96df79b2b7ca9d25`, raw #597 sha256 `06a5da262e2c06567c4f6ddd2f45068c5231b8b541b530283db5754df2a22e52`; parsed afterproof JSON exact source, current literal variety/elev and direct Add Coffee/Source Review PASS.
+
+These are **separate runner byte rehashes**, not claimed assistant-container rehash. Both narrow #597 region and cultivar/elevation queue items can advance TESTING to READY only on the basis of verified CI, exact merged/current official and independent ZIP; no earlier queue entry changed.
+
+## Remaining
+Original 603 independent full semantic field-by-field certification remains UNVERIFIED, 153 context-qualified/29 missing-literal-qualified cases and 35 historic source-present-blank indications and inaccessible/rotating URLs remain to adjudicate; parent #33 stays OPEN. Distinct historical #267 V2 / #96 Auth scope unaffected. No production release, 603 full replay assertion, signed-in GoTrue/device claim or change to owner-entered values.
