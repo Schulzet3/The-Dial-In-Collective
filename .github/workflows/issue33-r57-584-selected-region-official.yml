@@ -1,0 +1,42 @@
+name: DIC Issue33 R57 original603 584 selected region source
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r57-584-selected-region-official.yml
+      - scripts/audit/issue33-r57-584-selected-region-afterproof.mjs
+      - src/server/coffee-page-metadata.mjs
+      - src/server/coffee-selected-trade-elevation-region.mjs
+      - tests/coffee-issue33-r57-selected-trade-elevation-region.test.mjs
+permissions:
+  contents: read
+jobs:
+  selected-r57:
+    name: original603-584-selected-trade-elevation
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Guarded current official HTTPS parser Add Coffee review
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r57-584
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '584'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Exact selected product and source bytes afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r57-584
+        run: node scripts/audit/issue33-r57-584-selected-region-afterproof.mjs
+      - name: One-day private original HTML and strict verdict
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r57-584-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r57-584/
+          retention-days: 1
+          if-no-files-found: error

@@ -39,6 +39,7 @@ import {selectedCurrentFarmCountryLocality} from './coffee-selected-farm-country
 import {selectedCurrentFarmVolcanoRegion} from './coffee-selected-farm-volcano-region.mjs';
 import {selectedCountryFirstCurrentRegion} from './coffee-country-first-current-region.mjs';
 import {selectedCurrentInlineCompoundRegion} from './coffee-selected-inline-region.mjs';
+import {selectedCurrentTradeElevationRegion} from './coffee-selected-trade-elevation-region.mjs';
 import {selectedDottedTitleCountryRegion} from './coffee-dotted-title-region.mjs';
 import {selectedProcessingSiteNotFarmOrigin} from './coffee-processing-site-origin-guard.mjs';
 import {selectedCurrentColombianDepartmentOrigin} from './coffee-selected-department-origin.mjs';
@@ -2313,6 +2314,24 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     field:'origin',label:'Exact selected named-farm growing region',
     value:region.quote.slice(0,430),source_url,source_type:'html',
     section:'Selected current farm-and-producer narrative'
+   });
+  }
+ }
+
+ // Selected trade/certification, literal locality and measured growing
+ // elevation can corroborate one region inside the chosen product only.
+ if(fields.origin&&!conflicts.has('origin')){
+  const currentTradeRegion=selectedCurrentTradeElevationRegion({
+   name:fields.name,origin:fields.origin,
+   blocks:productCoffeeProse(canonicalProduct,clean)
+  });
+  if(currentTradeRegion){
+   rememberCoffeeReviewCandidate(fields,'origin',fields.origin,'Broader selected country');
+   fields.origin=currentTradeRegion.value;
+   if(source_facts.length<384)source_facts.push({
+    field:'origin',label:'Current selected trade/elevation region',
+    value:currentTradeRegion.quote.slice(0,420),source_url,source_type:'html',
+    section:'Exact selected product trade/elevation description'
    });
   }
  }
