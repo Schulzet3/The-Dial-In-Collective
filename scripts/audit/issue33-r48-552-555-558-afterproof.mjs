@@ -45,7 +45,7 @@ for(const spec of specs){
   bytes=readFileSync(join(root,'case-'+spec.number+'.html'));raw=bytes.toString('utf8');
   check(digest(bytes)===item.html_sha256,'raw_HTML_sha256_mismatch_'+spec.number);
   check(bytes.length===item.html_bytes,'raw_HTML_length_mismatch_'+spec.number);
- }catch(e){check(false,'missing_current_official_raw_HTML_'+spec.number);}
+ }catch{check(false,'missing_current_official_raw_HTML_'+spec.number);}
  check(raw.toLowerCase().includes(spec.title.toLowerCase()),
   'exact_selected_name_missing_in_saved_HTML_'+spec.number);
  const note=String(fields.tasting_notes||'').toLowerCase();
