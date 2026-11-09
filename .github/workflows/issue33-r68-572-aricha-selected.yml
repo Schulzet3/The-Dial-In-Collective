@@ -1,0 +1,50 @@
+name: DIC Issue33 R68 original603 572 selected Aricha source proof
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r68-572-aricha-selected.yml
+      - scripts/audit/issue33-r68-572-aricha-contract.mjs
+      - scripts/audit/issue33-r68-572-afterproof.mjs
+      - tests/coffee-issue33-r68-572-aricha-contract.test.mjs
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r68-572-aricha-selected.yml
+      - scripts/audit/issue33-r68-572-aricha-contract.mjs
+      - scripts/audit/issue33-r68-572-afterproof.mjs
+      - tests/coffee-issue33-r68-572-aricha-contract.test.mjs
+permissions:
+  contents: read
+jobs:
+  selected-original:
+    name: original603-572-current-aricha-direct
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Positive and hostile selected source identity/role contracts
+        run: node --test tests/coffee-issue33-r68-572-aricha-contract.test.mjs
+      - name: Guarded current original selected URL, actual parser and Add Coffee
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r68-572
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '572'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Fail-closed direct source and parser strict afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r68-572
+        run: node scripts/audit/issue33-r68-572-afterproof.mjs
+      - name: Preserve original selected raw HTML, JSON and afterproof (one day)
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r68-572-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r68-572/
+          if-no-files-found: warn
+          retention-days: 1
