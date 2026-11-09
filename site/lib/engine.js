@@ -714,7 +714,12 @@ export function saveShot(s,coffeeId,input,{allowLegacyCustom=false}={}) {
  if(!c||!v)throw new Error('Coffee or setup not found.');
  // An idempotent offline replay retains the ORIGINAL saved basket reference,
  // even if that basket was archived after the first successful save.
- if(input.id){const existing=s.shots.find(x=>x.id===input.id);if(existing)return existing;}
+ if(input.id){const existing=s.shots.find(x=>x.id===input.id);if(existing){
+  // Offline replay may return only the SAME coffee's immutable saved shot.
+  // A reused ID from a different coffee must not masquerade as this save.
+  if(existing.coffeeId!==coffeeId)throw new Error('This shot ID already belongs to a different coffee.');
+  return existing;
+ }}
  // A stale/retired or unknown basket may be shown as a fallback in Log Shot,
  // but saving must never attach that obsolete ID to a NEW measured shot.
  // Reject before creating preference/audit state; never silently relabel it.
