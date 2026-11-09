@@ -5,6 +5,11 @@ on:
     paths:
       - .github/workflows/issue33-603-public-source.yml
       - scripts/audit/issue33-original603-live-source-probe.mjs
+      - scripts/audit/issue33-original603-focused-source-review.mjs
+      - scripts/audit/issue33-r44-540-543-afterproof.mjs
+      - scripts/audit/issue33-r45-540-producer-afterproof.mjs
+      - src/server/coffee-narrative-evidence.mjs
+      - src/server/coffee-selected-milk-sensory-context.mjs
   workflow_dispatch:
 permissions:
   contents: read
@@ -36,5 +41,131 @@ jobs:
         with:
           name: dic33-current603-shard-${{ matrix.shard }}-${{ github.run_id }}
           path: ${{ runner.temp }}/dic33-603-current/shard-${{ matrix.shard }}/
+          if-no-files-found: error
+          retention-days: 1
+  # R42 one-shot guarded post-code official-source closure for #510/#514.
+  # Separate from original all-603 shard replay. Do not treat it as universal certification.
+  selected-r42-510-514-official:
+    if: github.event_name == 'push' && contains(github.event.head_commit.message, '[dic-issue33-r42-live]')
+    name: exact-current-original603-510-514
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Fetch selected current official HTTPS, parse and render Add Coffee plus Source Review
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r42-510-514
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '510,514'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Fail closed on mismatched current facts or unhashed actual HTML
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r42-510-514
+        run: node scripts/audit/issue33-r42-510-514-afterproof.mjs
+      - name: Preserve selected official raw HTML, parsed review and checked hashes
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r42-current-510-514-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r42-510-514/
+          if-no-files-found: error
+          retention-days: 1
+
+  # R43 single selected current official original603 #534 with-milk context;
+  # strictly source-review only, not canonical conditional flavor / broad 603 replay.
+  selected-r43-534-official:
+    if: github.event_name == 'push' && contains(github.event.head_commit.message, '[dic-issue33-r43-live]')
+    name: exact-current-original603-534
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Fetch exact chosen current official HTTPS and preserve raw bytes
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r43-534
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '534'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict source/identity/context/Add Coffee/Source Review and SHA256 afterproof
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r43-534
+        run: node scripts/audit/issue33-r43-534-afterproof.mjs
+      - name: Retain one-day official raw HTML and guarded verdict for independent verification
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r43-current-534-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r43-534/
+          if-no-files-found: error
+          retention-days: 1
+
+  # R44 bounded current original603 #540/#543; not universal certification.
+  selected-r44-540-543-official:
+    if: github.event_name == 'push' && contains(github.event.head_commit.message, '[dic-issue33-r44-live]')
+    name: exact-current-original603-540-543
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Fetch exactly two chosen current official HTTPS pages
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r44-540-543
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '540,543'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Exact selected identity, current fields, negative evidence, UI, SHA afterproof
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r44-540-543
+        run: node scripts/audit/issue33-r44-540-543-afterproof.mjs
+      - name: Retain official raw HTML, diagnostics and checked verdict one day
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r44-current-540-543-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r44-540-543/
+          if-no-files-found: error
+          retention-days: 1
+
+  # R45 source-based current #540 anonymous grower modifier correction.
+  # One selected exact coffee only; original 603 remains NOT certified.
+  selected-r45-540-official:
+    if: github.event_name == 'push' && contains(github.event.head_commit.message, '[dic-issue33-r45-live]')
+    name: exact-current-original603-540-producer
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Fetch exact selected current official HTTPS and actual parser and Add Coffee review
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r45-540
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '540'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Current exact source, selected identity, clipped supplier and raw SHA afterproof
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r45-540
+        run: node scripts/audit/issue33-r45-540-producer-afterproof.mjs
+      - name: One-day current official raw HTML, parser diagnostic and checked verdict
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r45-current-540-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r45-540/
           if-no-files-found: error
           retention-days: 1

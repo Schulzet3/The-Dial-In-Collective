@@ -1,0 +1,5747 @@
+{
+  "version": 1,
+  "issue": 509,
+  "project": "azviqqejypsefzilgonr",
+  "observed_at": "2026-11-09 08:08:52.276205+00",
+  "stats_reset": "2026-10-02 18:01:15.201525+00",
+  "source_development_parent": "92a343c4e87b7b9db67da58c88bbe1ed028483e3",
+  "main_sha": "a4028e42b0d0316fd539c0563fd07832d509aed0",
+  "release_sha": "92829cb6aff82aaec212eabbd921183e7997f1a7",
+  "scope": "pg_stat_all_tables 150/150 non-TOAST/non-temporary table relations",
+  "query": "SELECT n.nspname AS schema_name, c.relname AS relation_name, c.oid::bigint AS relation_oid,\ns.seq_scan::bigint, s.seq_tup_read::bigint, s.idx_scan::bigint, s.idx_tup_fetch::bigint,\ns.n_tup_ins::bigint, s.n_tup_upd::bigint, s.n_tup_del::bigint, s.n_tup_hot_upd::bigint,\ns.n_live_tup::bigint, s.n_dead_tup::bigint, s.n_mod_since_analyze::bigint,\ns.n_ins_since_vacuum::bigint, s.vacuum_count::bigint, s.autovacuum_count::bigint,\ns.analyze_count::bigint, s.autoanalyze_count::bigint, s.last_autovacuum::text,\ns.last_autoanalyze::text, pg_total_relation_size(c.oid)::bigint AS total_bytes,\nc.reltuples::bigint AS planner_estimate\nFROM pg_stat_all_tables s JOIN pg_class c ON c.oid=s.relid\nJOIN pg_namespace n ON n.oid=c.relnamespace\nWHERE n.nspname NOT LIKE 'pg_toast%' AND n.nspname NOT LIKE 'pg_temp%'\nAND n.nspname <> 'information_schema' ORDER BY n.nspname,c.relname",
+  "privacy": "catalog and aggregated statistics only; no private rows or SQL parameters",
+  "schema_counts": {
+    "auth": 27,
+    "pg_catalog": 64,
+    "private": 24,
+    "public": 22,
+    "realtime": 3,
+    "storage": 8,
+    "supabase_migrations": 1,
+    "vault": 1
+  },
+  "review_flags": {
+    "zero_index_scans": 37,
+    "dead_estimate_gt_live_estimate": 42,
+    "high_seq_small_table": 28,
+    "over_10mb": 0
+  },
+  "reviewed": 150,
+  "unverified": [
+    "Exact SQL query/plan interpretation",
+    "Hosted JWT/Auth/PostgREST enforcement",
+    "Provider-only settings and compiled native code"
+  ],
+  "conclusion": "NOT_PROOF_OF_RELATION_USAGE_SAFETY_OR_ANY_FULL_SOURCE_REVIEW",
+  "records": [
+    {
+      "ordinal": 1,
+      "identity": {
+        "schema": "auth",
+        "relation": "audit_log_entries",
+        "oid": 16529
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "audit_log_entries",
+        "relation_oid": 16529,
+        "seq_scan": 85,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 24576,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 2,
+      "identity": {
+        "schema": "auth",
+        "relation": "custom_oauth_providers",
+        "oid": 17084
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "custom_oauth_providers",
+        "relation_oid": 17084,
+        "seq_scan": 90,
+        "seq_tup_read": 0,
+        "idx_scan": 2,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 57344,
+        "planner_estimate": -1
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 3,
+      "identity": {
+        "schema": "auth",
+        "relation": "flow_state",
+        "oid": 16889
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "flow_state",
+        "relation_oid": 16889,
+        "seq_scan": 89,
+        "seq_tup_read": 326,
+        "idx_scan": 16,
+        "idx_tup_fetch": 16,
+        "n_tup_ins": 8,
+        "n_tup_upd": 6,
+        "n_tup_del": 2,
+        "n_tup_hot_upd": 6,
+        "n_live_tup": 6,
+        "n_dead_tup": 8,
+        "n_mod_since_analyze": 16,
+        "n_ins_since_vacuum": 8,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 81920,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 4,
+      "identity": {
+        "schema": "auth",
+        "relation": "identities",
+        "oid": 16686
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "identities",
+        "relation_oid": 16686,
+        "seq_scan": 149,
+        "seq_tup_read": 533,
+        "idx_scan": 782,
+        "idx_tup_fetch": 755,
+        "n_tup_ins": 13,
+        "n_tup_upd": 6,
+        "n_tup_del": 2,
+        "n_tup_hot_upd": 6,
+        "n_live_tup": 11,
+        "n_dead_tup": 8,
+        "n_mod_since_analyze": 21,
+        "n_ins_since_vacuum": 13,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 81920,
+        "planner_estimate": -1
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 5,
+      "identity": {
+        "schema": "auth",
+        "relation": "instances",
+        "oid": 16522
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "instances",
+        "relation_oid": 16522,
+        "seq_scan": 84,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 16384,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 6,
+      "identity": {
+        "schema": "auth",
+        "relation": "mfa_amr_claims",
+        "oid": 16776
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "mfa_amr_claims",
+        "relation_oid": 16776,
+        "seq_scan": 286,
+        "seq_tup_read": 6701,
+        "idx_scan": 753,
+        "idx_tup_fetch": 710,
+        "n_tup_ins": 43,
+        "n_tup_upd": 0,
+        "n_tup_del": 15,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 28,
+        "n_dead_tup": 15,
+        "n_mod_since_analyze": 7,
+        "n_ins_since_vacuum": 43,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 1,
+        "last_autovacuum": null,
+        "last_autoanalyze": "2026-10-28 20:57:45.612351+00",
+        "total_bytes": 49152,
+        "planner_estimate": 27
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 7,
+      "identity": {
+        "schema": "auth",
+        "relation": "mfa_challenges",
+        "oid": 16764
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "mfa_challenges",
+        "relation_oid": 16764,
+        "seq_scan": 86,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 24576,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 8,
+      "identity": {
+        "schema": "auth",
+        "relation": "mfa_factors",
+        "oid": 16751
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "mfa_factors",
+        "relation_oid": 16751,
+        "seq_scan": 92,
+        "seq_tup_read": 0,
+        "idx_scan": 712,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 57344,
+        "planner_estimate": -1
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 9,
+      "identity": {
+        "schema": "auth",
+        "relation": "mfa_recovery_code_sets",
+        "oid": 17219
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "mfa_recovery_code_sets",
+        "relation_oid": 17219,
+        "seq_scan": 87,
+        "seq_tup_read": 0,
+        "idx_scan": 3,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 24576,
+        "planner_estimate": -1
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 10,
+      "identity": {
+        "schema": "auth",
+        "relation": "mfa_recovery_codes",
+        "oid": 17242
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "mfa_recovery_codes",
+        "relation_oid": 17242,
+        "seq_scan": 86,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 24576,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 11,
+      "identity": {
+        "schema": "auth",
+        "relation": "oauth_authorizations",
+        "oid": 17001
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "oauth_authorizations",
+        "relation_oid": 17001,
+        "seq_scan": 92,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 40960,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 12,
+      "identity": {
+        "schema": "auth",
+        "relation": "oauth_client_states",
+        "oid": 17074
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "oauth_client_states",
+        "relation_oid": 17074,
+        "seq_scan": 86,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 24576,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 13,
+      "identity": {
+        "schema": "auth",
+        "relation": "oauth_clients",
+        "oid": 16971
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "oauth_clients",
+        "relation_oid": 16971,
+        "seq_scan": 91,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 24576,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 14,
+      "identity": {
+        "schema": "auth",
+        "relation": "oauth_consents",
+        "oid": 17034
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "oauth_consents",
+        "relation_oid": 17034,
+        "seq_scan": 89,
+        "seq_tup_read": 0,
+        "idx_scan": 3,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 49152,
+        "planner_estimate": -1
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 15,
+      "identity": {
+        "schema": "auth",
+        "relation": "one_time_tokens",
+        "oid": 16939
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "one_time_tokens",
+        "relation_oid": 16939,
+        "seq_scan": 89,
+        "seq_tup_read": 162,
+        "idx_scan": 32,
+        "idx_tup_fetch": 13,
+        "n_tup_ins": 14,
+        "n_tup_upd": 0,
+        "n_tup_del": 7,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 7,
+        "n_dead_tup": 7,
+        "n_mod_since_analyze": 21,
+        "n_ins_since_vacuum": 14,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 114688,
+        "planner_estimate": -1
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 16,
+      "identity": {
+        "schema": "auth",
+        "relation": "refresh_tokens",
+        "oid": 16511
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "refresh_tokens",
+        "relation_oid": 16511,
+        "seq_scan": 308,
+        "seq_tup_read": 10594,
+        "idx_scan": 578,
+        "idx_tup_fetch": 597,
+        "n_tup_ins": 236,
+        "n_tup_upd": 194,
+        "n_tup_del": 51,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 185,
+        "n_dead_tup": 68,
+        "n_mod_since_analyze": 4,
+        "n_ins_since_vacuum": 73,
+        "vacuum_count": 0,
+        "autovacuum_count": 3,
+        "analyze_count": 0,
+        "autoanalyze_count": 8,
+        "last_autovacuum": "2026-10-24 03:31:03.69921+00",
+        "last_autoanalyze": "2026-11-08 22:11:56.654753+00",
+        "total_bytes": 188416,
+        "planner_estimate": 183
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 17,
+      "identity": {
+        "schema": "auth",
+        "relation": "saml_providers",
+        "oid": 16818
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "saml_providers",
+        "relation_oid": 16818,
+        "seq_scan": 87,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 32768,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 18,
+      "identity": {
+        "schema": "auth",
+        "relation": "saml_relay_states",
+        "oid": 16836
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "saml_relay_states",
+        "relation_oid": 16836,
+        "seq_scan": 91,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 40960,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 19,
+      "identity": {
+        "schema": "auth",
+        "relation": "schema_migrations",
+        "oid": 16537
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "schema_migrations",
+        "relation_oid": 16537,
+        "seq_scan": 86,
+        "seq_tup_read": 6977,
+        "idx_scan": 150,
+        "idx_tup_fetch": 75,
+        "n_tup_ins": 75,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 82,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 75,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 1,
+        "last_autovacuum": null,
+        "last_autoanalyze": "2026-10-09 11:13:36.416993+00",
+        "total_bytes": 24576,
+        "planner_estimate": 82
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 20,
+      "identity": {
+        "schema": "auth",
+        "relation": "scim_tokens",
+        "oid": 17198
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "scim_tokens",
+        "relation_oid": 17198,
+        "seq_scan": 89,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 49152,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 21,
+      "identity": {
+        "schema": "auth",
+        "relation": "scim_users",
+        "oid": 17167
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "scim_users",
+        "relation_oid": 17167,
+        "seq_scan": 94,
+        "seq_tup_read": 0,
+        "idx_scan": 3,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 90112,
+        "planner_estimate": -1
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 22,
+      "identity": {
+        "schema": "auth",
+        "relation": "sessions",
+        "oid": 16716
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "sessions",
+        "relation_oid": 16716,
+        "seq_scan": 1371,
+        "seq_tup_read": 21536,
+        "idx_scan": 303,
+        "idx_tup_fetch": 301,
+        "n_tup_ins": 43,
+        "n_tup_upd": 194,
+        "n_tup_del": 15,
+        "n_tup_hot_upd": 194,
+        "n_live_tup": 28,
+        "n_dead_tup": 20,
+        "n_mod_since_analyze": 42,
+        "n_ins_since_vacuum": 43,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 4,
+        "last_autovacuum": null,
+        "last_autoanalyze": "2026-10-28 20:59:45.643517+00",
+        "total_bytes": 98304,
+        "planner_estimate": 27
+      },
+      "review": [
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 23,
+      "identity": {
+        "schema": "auth",
+        "relation": "sso_domains",
+        "oid": 16803
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "sso_domains",
+        "relation_oid": 16803,
+        "seq_scan": 87,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 32768,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 24,
+      "identity": {
+        "schema": "auth",
+        "relation": "sso_providers",
+        "oid": 16794
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "sso_providers",
+        "relation_oid": 16794,
+        "seq_scan": 87,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 32768,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 25,
+      "identity": {
+        "schema": "auth",
+        "relation": "users",
+        "oid": 16499
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "users",
+        "relation_oid": 16499,
+        "seq_scan": 3549,
+        "seq_tup_read": 12896,
+        "idx_scan": 1719,
+        "idx_tup_fetch": 1711,
+        "n_tup_ins": 57,
+        "n_tup_upd": 313,
+        "n_tup_del": 3,
+        "n_tup_hot_upd": 225,
+        "n_live_tup": 11,
+        "n_dead_tup": 46,
+        "n_mod_since_analyze": 11,
+        "n_ins_since_vacuum": 7,
+        "vacuum_count": 0,
+        "autovacuum_count": 2,
+        "analyze_count": 0,
+        "autoanalyze_count": 6,
+        "last_autovacuum": "2026-10-20 19:53:22.0805+00",
+        "last_autoanalyze": "2026-11-05 00:04:16.794369+00",
+        "total_bytes": 262144,
+        "planner_estimate": 11
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT",
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 26,
+      "identity": {
+        "schema": "auth",
+        "relation": "webauthn_challenges",
+        "oid": 17149
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "webauthn_challenges",
+        "relation_oid": 17149,
+        "seq_scan": 87,
+        "seq_tup_read": 0,
+        "idx_scan": 3,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 32768,
+        "planner_estimate": -1
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 27,
+      "identity": {
+        "schema": "auth",
+        "relation": "webauthn_credentials",
+        "oid": 17126
+      },
+      "complete_numeric_stats": {
+        "schema_name": "auth",
+        "relation_name": "webauthn_credentials",
+        "relation_oid": 17126,
+        "seq_scan": 87,
+        "seq_tup_read": 0,
+        "idx_scan": 3,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 32768,
+        "planner_estimate": -1
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 28,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_aggregate",
+        "oid": 2600
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_aggregate",
+        "relation_oid": 2600,
+        "seq_scan": 35,
+        "seq_tup_read": 5495,
+        "idx_scan": 33932,
+        "idx_tup_fetch": 33508,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 73728,
+        "planner_estimate": 157
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 29,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_am",
+        "oid": 2601
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_am",
+        "relation_oid": 2601,
+        "seq_scan": 306001,
+        "seq_tup_read": 310195,
+        "idx_scan": 797,
+        "idx_tup_fetch": 146,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 73728,
+        "planner_estimate": 7
+      },
+      "review": [
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 30,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_amop",
+        "oid": 2602
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_amop",
+        "relation_oid": 2602,
+        "seq_scan": 66,
+        "seq_tup_read": 63624,
+        "idx_scan": 245497,
+        "idx_tup_fetch": 539578,
+        "n_tup_ins": 76,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 19,
+        "n_dead_tup": 57,
+        "n_mod_since_analyze": 19,
+        "n_ins_since_vacuum": 76,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 237568,
+        "planner_estimate": 945
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 31,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_amproc",
+        "oid": 2603
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_amproc",
+        "relation_oid": 2603,
+        "seq_scan": 70,
+        "seq_tup_read": 24266,
+        "idx_scan": 404842,
+        "idx_tup_fetch": 1155074,
+        "n_tup_ins": 56,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 14,
+        "n_dead_tup": 42,
+        "n_mod_since_analyze": 14,
+        "n_ins_since_vacuum": 56,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 147456,
+        "planner_estimate": 696
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 32,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_attrdef",
+        "oid": 2604
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_attrdef",
+        "relation_oid": 2604,
+        "seq_scan": 193,
+        "seq_tup_read": 43727,
+        "idx_scan": 150344,
+        "idx_tup_fetch": 480729,
+        "n_tup_ins": 281,
+        "n_tup_upd": 0,
+        "n_tup_del": 11,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 231,
+        "n_dead_tup": 56,
+        "n_mod_since_analyze": 33,
+        "n_ins_since_vacuum": 281,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 3,
+        "last_autovacuum": null,
+        "last_autoanalyze": "2026-10-12 01:56:21.793126+00",
+        "total_bytes": 139264,
+        "planner_estimate": 208
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 33,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_attribute",
+        "oid": 1249
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_attribute",
+        "relation_oid": 1249,
+        "seq_scan": 747,
+        "seq_tup_read": 2874036,
+        "idx_scan": 4845731,
+        "idx_tup_fetch": 13987206,
+        "n_tup_ins": 3568,
+        "n_tup_upd": 350,
+        "n_tup_del": 321,
+        "n_tup_hot_upd": 283,
+        "n_live_tup": 5653,
+        "n_dead_tup": 1049,
+        "n_mod_since_analyze": 324,
+        "n_ins_since_vacuum": 1315,
+        "vacuum_count": 0,
+        "autovacuum_count": 1,
+        "analyze_count": 0,
+        "autoanalyze_count": 4,
+        "last_autovacuum": "2026-10-12 01:56:21.766188+00",
+        "last_autoanalyze": "2026-10-14 21:58:22.030482+00",
+        "total_bytes": 1417216,
+        "planner_estimate": 5457
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 34,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_auth_members",
+        "oid": 1261
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_auth_members",
+        "relation_oid": 1261,
+        "seq_scan": 134,
+        "seq_tup_read": 3114,
+        "idx_scan": 28501,
+        "idx_tup_fetch": 22666,
+        "n_tup_ins": 30,
+        "n_tup_upd": 7,
+        "n_tup_del": 6,
+        "n_tup_hot_upd": 7,
+        "n_live_tup": 27,
+        "n_dead_tup": 13,
+        "n_mod_since_analyze": 43,
+        "n_ins_since_vacuum": 30,
+        "vacuum_count": 1,
+        "autovacuum_count": 0,
+        "analyze_count": 1,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 106496,
+        "planner_estimate": 3
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 35,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_authid",
+        "oid": 1260
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_authid",
+        "relation_oid": 1260,
+        "seq_scan": 109266,
+        "seq_tup_read": 3259570,
+        "idx_scan": 595678,
+        "idx_tup_fetch": 539589,
+        "n_tup_ins": 30,
+        "n_tup_upd": 21,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 21,
+        "n_live_tup": 30,
+        "n_dead_tup": 2,
+        "n_mod_since_analyze": 35,
+        "n_ins_since_vacuum": 14,
+        "vacuum_count": 1,
+        "autovacuum_count": 0,
+        "analyze_count": 1,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 81920,
+        "planner_estimate": 16
+      },
+      "review": [
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 36,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_cast",
+        "oid": 2605
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_cast",
+        "relation_oid": 2605,
+        "seq_scan": 104,
+        "seq_tup_read": 23816,
+        "idx_scan": 929025,
+        "idx_tup_fetch": 112768,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 81920,
+        "planner_estimate": 229
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 37,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_class",
+        "oid": 1259
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_class",
+        "relation_oid": 1259,
+        "seq_scan": 143123,
+        "seq_tup_read": 90603738,
+        "idx_scan": 2143738,
+        "idx_tup_fetch": 2313287,
+        "n_tup_ins": 649,
+        "n_tup_upd": 871,
+        "n_tup_del": 50,
+        "n_tup_hot_upd": 718,
+        "n_live_tup": 891,
+        "n_dead_tup": 51,
+        "n_mod_since_analyze": 78,
+        "n_ins_since_vacuum": 23,
+        "vacuum_count": 0,
+        "autovacuum_count": 2,
+        "analyze_count": 0,
+        "autoanalyze_count": 5,
+        "last_autovacuum": "2026-10-14 22:22:22.415195+00",
+        "last_autoanalyze": "2026-10-18 05:42:31.833055+00",
+        "total_bytes": 425984,
+        "planner_estimate": 883
+      },
+      "review": [
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 38,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_collation",
+        "oid": 3456
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_collation",
+        "relation_oid": 3456,
+        "seq_scan": 141,
+        "seq_tup_read": 121401,
+        "idx_scan": 73542,
+        "idx_tup_fetch": 68554,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 262144,
+        "planner_estimate": 861
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 39,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_constraint",
+        "oid": 2606
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_constraint",
+        "relation_oid": 2606,
+        "seq_scan": 2216,
+        "seq_tup_read": 1111613,
+        "idx_scan": 287985,
+        "idx_tup_fetch": 1238579,
+        "n_tup_ins": 582,
+        "n_tup_upd": 4,
+        "n_tup_del": 35,
+        "n_tup_hot_upd": 4,
+        "n_live_tup": 516,
+        "n_dead_tup": 36,
+        "n_mod_since_analyze": 2,
+        "n_ins_since_vacuum": 69,
+        "vacuum_count": 0,
+        "autovacuum_count": 1,
+        "analyze_count": 0,
+        "autoanalyze_count": 4,
+        "last_autovacuum": "2026-10-14 22:13:22.219895+00",
+        "last_autoanalyze": "2026-10-27 19:29:14.371911+00",
+        "total_bytes": 491520,
+        "planner_estimate": 514
+      },
+      "review": [
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 40,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_conversion",
+        "oid": 2607
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_conversion",
+        "relation_oid": 2607,
+        "seq_scan": 112,
+        "seq_tup_read": 14336,
+        "idx_scan": 1408,
+        "idx_tup_fetch": 1408,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 98304,
+        "planner_estimate": 128
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 41,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_database",
+        "oid": 1262
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_database",
+        "relation_oid": 1262,
+        "seq_scan": 200086,
+        "seq_tup_read": 600142,
+        "idx_scan": 1284882,
+        "idx_tup_fetch": 1284878,
+        "n_tup_ins": 3,
+        "n_tup_upd": 9,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 9,
+        "n_live_tup": 4,
+        "n_dead_tup": 9,
+        "n_mod_since_analyze": 11,
+        "n_ins_since_vacuum": 2,
+        "vacuum_count": 2,
+        "autovacuum_count": 0,
+        "analyze_count": 1,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 81920,
+        "planner_estimate": 2
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT",
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 42,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_db_role_setting",
+        "oid": 2964
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_db_role_setting",
+        "relation_oid": 2964,
+        "seq_scan": 73,
+        "seq_tup_read": 720,
+        "idx_scan": 1365537,
+        "idx_tup_fetch": 637642,
+        "n_tup_ins": 10,
+        "n_tup_upd": 73,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 73,
+        "n_live_tup": 10,
+        "n_dead_tup": 29,
+        "n_mod_since_analyze": 32,
+        "n_ins_since_vacuum": 10,
+        "vacuum_count": 1,
+        "autovacuum_count": 0,
+        "analyze_count": 1,
+        "autoanalyze_count": 1,
+        "last_autovacuum": null,
+        "last_autoanalyze": "2026-10-24 05:24:05.629889+00",
+        "total_bytes": 32768,
+        "planner_estimate": 10
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 43,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_default_acl",
+        "oid": 826
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_default_acl",
+        "relation_oid": 826,
+        "seq_scan": 95,
+        "seq_tup_read": 2280,
+        "idx_scan": 3359,
+        "idx_tup_fetch": 3062,
+        "n_tup_ins": 0,
+        "n_tup_upd": 8,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 8,
+        "n_live_tup": 0,
+        "n_dead_tup": 8,
+        "n_mod_since_analyze": 8,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 49152,
+        "planner_estimate": 0
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 44,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_depend",
+        "oid": 2608
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_depend",
+        "relation_oid": 2608,
+        "seq_scan": 393,
+        "seq_tup_read": 1982581,
+        "idx_scan": 66994,
+        "idx_tup_fetch": 422468,
+        "n_tup_ins": 5503,
+        "n_tup_upd": 0,
+        "n_tup_del": 516,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 5186,
+        "n_dead_tup": 112,
+        "n_mod_since_analyze": 33,
+        "n_ins_since_vacuum": 129,
+        "vacuum_count": 0,
+        "autovacuum_count": 3,
+        "analyze_count": 0,
+        "autoanalyze_count": 7,
+        "last_autovacuum": "2026-10-27 19:29:14.415966+00",
+        "last_autoanalyze": "2026-10-27 19:29:14.425379+00",
+        "total_bytes": 876544,
+        "planner_estimate": 5169
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 45,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_description",
+        "oid": 2609
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_description",
+        "relation_oid": 2609,
+        "seq_scan": 192,
+        "seq_tup_read": 1022929,
+        "idx_scan": 34436,
+        "idx_tup_fetch": 7338,
+        "n_tup_ins": 68,
+        "n_tup_upd": 11,
+        "n_tup_del": 1,
+        "n_tup_hot_upd": 11,
+        "n_live_tup": 56,
+        "n_dead_tup": 12,
+        "n_mod_since_analyze": 69,
+        "n_ins_since_vacuum": 68,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 647168,
+        "planner_estimate": 5268
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 46,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_enum",
+        "oid": 3501
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_enum",
+        "relation_oid": 3501,
+        "seq_scan": 37131,
+        "seq_tup_read": 1745138,
+        "idx_scan": 1341,
+        "idx_tup_fetch": 1254,
+        "n_tup_ins": 47,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 47,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 47,
+        "n_ins_since_vacuum": 47,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 57344,
+        "planner_estimate": 0
+      },
+      "review": [
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 47,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_event_trigger",
+        "oid": 3466
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_event_trigger",
+        "relation_oid": 3466,
+        "seq_scan": 142,
+        "seq_tup_read": 994,
+        "idx_scan": 504,
+        "idx_tup_fetch": 1507,
+        "n_tup_ins": 1,
+        "n_tup_upd": 1,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 1,
+        "n_live_tup": 1,
+        "n_dead_tup": 1,
+        "n_mod_since_analyze": 2,
+        "n_ins_since_vacuum": 1,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 49152,
+        "planner_estimate": 0
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 48,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_extension",
+        "oid": 3079
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_extension",
+        "relation_oid": 3079,
+        "seq_scan": 2608,
+        "seq_tup_read": 15435,
+        "idx_scan": 104823,
+        "idx_tup_fetch": 3507,
+        "n_tup_ins": 8,
+        "n_tup_upd": 12,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 12,
+        "n_live_tup": 2,
+        "n_dead_tup": 18,
+        "n_mod_since_analyze": 5,
+        "n_ins_since_vacuum": 8,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 81920,
+        "planner_estimate": 1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT",
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 49,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_foreign_data_wrapper",
+        "oid": 2328
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_foreign_data_wrapper",
+        "relation_oid": 2328,
+        "seq_scan": 129,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 24576,
+        "planner_estimate": 0
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 50,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_foreign_server",
+        "oid": 1417
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_foreign_server",
+        "relation_oid": 1417,
+        "seq_scan": 126,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 24576,
+        "planner_estimate": 0
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 51,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_foreign_table",
+        "oid": 3118
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_foreign_table",
+        "relation_oid": 3118,
+        "seq_scan": 11,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 16384,
+        "planner_estimate": 0
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 52,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_index",
+        "oid": 2610
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_index",
+        "relation_oid": 2610,
+        "seq_scan": 531,
+        "seq_tup_read": 189877,
+        "idx_scan": 1217479,
+        "idx_tup_fetch": 1528778,
+        "n_tup_ins": 390,
+        "n_tup_upd": 20,
+        "n_tup_del": 29,
+        "n_tup_hot_upd": 20,
+        "n_live_tup": 472,
+        "n_dead_tup": 101,
+        "n_mod_since_analyze": 29,
+        "n_ins_since_vacuum": 390,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 3,
+        "last_autovacuum": null,
+        "last_autoanalyze": "2026-10-14 18:38:17.372073+00",
+        "total_bytes": 212992,
+        "planner_estimate": 457
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 53,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_inherits",
+        "oid": 2611
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_inherits",
+        "relation_oid": 2611,
+        "seq_scan": 4496,
+        "seq_tup_read": 0,
+        "idx_scan": 50,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 16384,
+        "planner_estimate": 0
+      },
+      "review": [
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 54,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_init_privs",
+        "oid": 3394
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_init_privs",
+        "relation_oid": 3394,
+        "seq_scan": 202,
+        "seq_tup_read": 47066,
+        "idx_scan": 975,
+        "idx_tup_fetch": 802,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 90112,
+        "planner_estimate": 223
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 55,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_language",
+        "oid": 2612
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_language",
+        "relation_oid": 2612,
+        "seq_scan": 20418,
+        "seq_tup_read": 60059,
+        "idx_scan": 10742,
+        "idx_tup_fetch": 7685,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 81920,
+        "planner_estimate": 4
+      },
+      "review": [
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 56,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_largeobject",
+        "oid": 2613
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_largeobject",
+        "relation_oid": 2613,
+        "seq_scan": 0,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 8192,
+        "planner_estimate": 0
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 57,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_largeobject_metadata",
+        "oid": 2995
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_largeobject_metadata",
+        "relation_oid": 2995,
+        "seq_scan": 93,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 8192,
+        "planner_estimate": 0
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 58,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_namespace",
+        "oid": 2615
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_namespace",
+        "relation_oid": 2615,
+        "seq_scan": 34938,
+        "seq_tup_read": 878843,
+        "idx_scan": 552732,
+        "idx_tup_fetch": 494405,
+        "n_tup_ins": 98,
+        "n_tup_upd": 8,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 8,
+        "n_live_tup": 36,
+        "n_dead_tup": 18,
+        "n_mod_since_analyze": 32,
+        "n_ins_since_vacuum": 18,
+        "vacuum_count": 0,
+        "autovacuum_count": 1,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": "2026-10-30 01:13:50.282702+00",
+        "last_autoanalyze": null,
+        "total_bytes": 81920,
+        "planner_estimate": 36
+      },
+      "review": [
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 59,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_opclass",
+        "oid": 2616
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_opclass",
+        "relation_oid": 2616,
+        "seq_scan": 1695,
+        "seq_tup_read": 296935,
+        "idx_scan": 582941,
+        "idx_tup_fetch": 7824670,
+        "n_tup_ins": 8,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 2,
+        "n_dead_tup": 6,
+        "n_mod_since_analyze": 2,
+        "n_ins_since_vacuum": 8,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 90112,
+        "planner_estimate": 177
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT",
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 60,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_operator",
+        "oid": 2617
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_operator",
+        "relation_oid": 2617,
+        "seq_scan": 212,
+        "seq_tup_read": 171238,
+        "idx_scan": 234579,
+        "idx_tup_fetch": 479960,
+        "n_tup_ins": 40,
+        "n_tup_upd": 60,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 56,
+        "n_live_tup": 10,
+        "n_dead_tup": 64,
+        "n_mod_since_analyze": 25,
+        "n_ins_since_vacuum": 40,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 245760,
+        "planner_estimate": 799
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 61,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_opfamily",
+        "oid": 2753
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_opfamily",
+        "relation_oid": 2753,
+        "seq_scan": 207,
+        "seq_tup_read": 30590,
+        "idx_scan": 461,
+        "idx_tup_fetch": 274,
+        "n_tup_ins": 8,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 2,
+        "n_dead_tup": 6,
+        "n_mod_since_analyze": 2,
+        "n_ins_since_vacuum": 8,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 90112,
+        "planner_estimate": 146
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 62,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_parameter_acl",
+        "oid": 6243
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_parameter_acl",
+        "relation_oid": 6243,
+        "seq_scan": 7,
+        "seq_tup_read": 5,
+        "idx_scan": 24850,
+        "idx_tup_fetch": 96,
+        "n_tup_ins": 1,
+        "n_tup_upd": 1,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 1,
+        "n_live_tup": 1,
+        "n_dead_tup": 1,
+        "n_mod_since_analyze": 2,
+        "n_ins_since_vacuum": 1,
+        "vacuum_count": 1,
+        "autovacuum_count": 0,
+        "analyze_count": 1,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 49152,
+        "planner_estimate": 0
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 63,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_partitioned_table",
+        "oid": 3350
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_partitioned_table",
+        "relation_oid": 3350,
+        "seq_scan": 152,
+        "seq_tup_read": 152,
+        "idx_scan": 91,
+        "idx_tup_fetch": 89,
+        "n_tup_ins": 1,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 1,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 1,
+        "n_ins_since_vacuum": 1,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 32768,
+        "planner_estimate": 0
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 64,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_policy",
+        "oid": 3256
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_policy",
+        "relation_oid": 3256,
+        "seq_scan": 1129,
+        "seq_tup_read": 39590,
+        "idx_scan": 147519,
+        "idx_tup_fetch": 141010,
+        "n_tup_ins": 49,
+        "n_tup_upd": 0,
+        "n_tup_del": 1,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 42,
+        "n_dead_tup": 7,
+        "n_mod_since_analyze": 44,
+        "n_ins_since_vacuum": 49,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 114688,
+        "planner_estimate": 0
+      },
+      "review": [
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 65,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_proc",
+        "oid": 1255
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_proc",
+        "relation_oid": 1255,
+        "seq_scan": 1656,
+        "seq_tup_read": 5849445,
+        "idx_scan": 1723971,
+        "idx_tup_fetch": 2754256,
+        "n_tup_ins": 492,
+        "n_tup_upd": 511,
+        "n_tup_del": 19,
+        "n_tup_hot_upd": 397,
+        "n_live_tup": 3567,
+        "n_dead_tup": 654,
+        "n_mod_since_analyze": 169,
+        "n_ins_since_vacuum": 492,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 1,
+        "last_autovacuum": null,
+        "last_autoanalyze": "2026-10-18 05:42:31.821801+00",
+        "total_bytes": 2015232,
+        "planner_estimate": 3527
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 66,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_publication",
+        "oid": 6104
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_publication",
+        "relation_oid": 6104,
+        "seq_scan": 1383,
+        "seq_tup_read": 123,
+        "idx_scan": 27,
+        "idx_tup_fetch": 27,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 40960,
+        "planner_estimate": 0
+      },
+      "review": [
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 67,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_publication_namespace",
+        "oid": 6237
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_publication_namespace",
+        "relation_oid": 6237,
+        "seq_scan": 96,
+        "seq_tup_read": 0,
+        "idx_scan": 476,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 16384,
+        "planner_estimate": 0
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 68,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_publication_rel",
+        "oid": 6106
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_publication_rel",
+        "relation_oid": 6106,
+        "seq_scan": 102,
+        "seq_tup_read": 0,
+        "idx_scan": 1270,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 32768,
+        "planner_estimate": 0
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 69,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_range",
+        "oid": 3541
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_range",
+        "relation_oid": 3541,
+        "seq_scan": 324,
+        "seq_tup_read": 1884,
+        "idx_scan": 5255,
+        "idx_tup_fetch": 12,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 73728,
+        "planner_estimate": 6
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 70,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_replication_origin",
+        "oid": 6000
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_replication_origin",
+        "relation_oid": 6000,
+        "seq_scan": 5,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 1,
+        "autovacuum_count": 0,
+        "analyze_count": 1,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 24576,
+        "planner_estimate": 0
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 71,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_rewrite",
+        "oid": 2618
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_rewrite",
+        "relation_oid": 2618,
+        "seq_scan": 11,
+        "seq_tup_read": 1628,
+        "idx_scan": 117527,
+        "idx_tup_fetch": 124967,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 761856,
+        "planner_estimate": 145
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 72,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_seclabel",
+        "oid": 3596
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_seclabel",
+        "relation_oid": 3596,
+        "seq_scan": 799,
+        "seq_tup_read": 0,
+        "idx_scan": 173,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 16384,
+        "planner_estimate": 0
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 73,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_sequence",
+        "oid": 2224
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_sequence",
+        "relation_oid": 2224,
+        "seq_scan": 426,
+        "seq_tup_read": 2356,
+        "idx_scan": 499,
+        "idx_tup_fetch": 359,
+        "n_tup_ins": 14,
+        "n_tup_upd": 14,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 14,
+        "n_live_tup": 6,
+        "n_dead_tup": 22,
+        "n_mod_since_analyze": 12,
+        "n_ins_since_vacuum": 14,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 24576,
+        "planner_estimate": 0
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 74,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_shdepend",
+        "oid": 1214
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_shdepend",
+        "relation_oid": 1214,
+        "seq_scan": 9,
+        "seq_tup_read": 6594,
+        "idx_scan": 549,
+        "idx_tup_fetch": 13869,
+        "n_tup_ins": 1560,
+        "n_tup_upd": 9,
+        "n_tup_del": 285,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 942,
+        "n_dead_tup": 40,
+        "n_mod_since_analyze": 75,
+        "n_ins_since_vacuum": 205,
+        "vacuum_count": 1,
+        "autovacuum_count": 3,
+        "analyze_count": 1,
+        "autoanalyze_count": 7,
+        "last_autovacuum": "2026-10-14 22:13:22.230594+00",
+        "last_autoanalyze": "2026-10-21 16:52:19.052384+00",
+        "total_bytes": 172032,
+        "planner_estimate": 879
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 75,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_shdescription",
+        "oid": 2396
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_shdescription",
+        "relation_oid": 2396,
+        "seq_scan": 92,
+        "seq_tup_read": 274,
+        "idx_scan": 2,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 3,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 3,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 2,
+        "n_ins_since_vacuum": 2,
+        "vacuum_count": 1,
+        "autovacuum_count": 0,
+        "analyze_count": 1,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 65536,
+        "planner_estimate": 1
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 76,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_shseclabel",
+        "oid": 3592
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_shseclabel",
+        "relation_oid": 3592,
+        "seq_scan": 431,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 1,
+        "autovacuum_count": 0,
+        "analyze_count": 1,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 16384,
+        "planner_estimate": 0
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 77,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_statistic",
+        "oid": 2619
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_statistic",
+        "relation_oid": 2619,
+        "seq_scan": 221,
+        "seq_tup_read": 117178,
+        "idx_scan": 1333420,
+        "idx_tup_fetch": 452017,
+        "n_tup_ins": 156,
+        "n_tup_upd": 940,
+        "n_tup_del": 1,
+        "n_tup_hot_upd": 463,
+        "n_live_tup": 565,
+        "n_dead_tup": 50,
+        "n_mod_since_analyze": 1097,
+        "n_ins_since_vacuum": 14,
+        "vacuum_count": 0,
+        "autovacuum_count": 3,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": "2026-10-23 19:45:55.335759+00",
+        "last_autoanalyze": null,
+        "total_bytes": 622592,
+        "planner_estimate": 552
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 78,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_statistic_ext",
+        "oid": 3381
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_statistic_ext",
+        "relation_oid": 3381,
+        "seq_scan": 100,
+        "seq_tup_read": 0,
+        "idx_scan": 147936,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 32768,
+        "planner_estimate": 0
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 79,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_statistic_ext_data",
+        "oid": 3429
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_statistic_ext_data",
+        "relation_oid": 3429,
+        "seq_scan": 6,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 16384,
+        "planner_estimate": 0
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 80,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_subscription",
+        "oid": 6100
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_subscription",
+        "relation_oid": 6100,
+        "seq_scan": 118,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 1,
+        "autovacuum_count": 0,
+        "analyze_count": 1,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 24576,
+        "planner_estimate": 0
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 81,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_subscription_rel",
+        "oid": 6102
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_subscription_rel",
+        "relation_oid": 6102,
+        "seq_scan": 26,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 8192,
+        "planner_estimate": 0
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 82,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_tablespace",
+        "oid": 1213
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_tablespace",
+        "relation_oid": 1213,
+        "seq_scan": 20238,
+        "seq_tup_read": 40475,
+        "idx_scan": 56316,
+        "idx_tup_fetch": 55980,
+        "n_tup_ins": 2,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 2,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 1,
+        "autovacuum_count": 0,
+        "analyze_count": 1,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 81920,
+        "planner_estimate": 2
+      },
+      "review": [
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 83,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_transform",
+        "oid": 3576
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_transform",
+        "relation_oid": 3576,
+        "seq_scan": 265708,
+        "seq_tup_read": 0,
+        "idx_scan": 431,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 16384,
+        "planner_estimate": 0
+      },
+      "review": [
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 84,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_trigger",
+        "oid": 2620
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_trigger",
+        "relation_oid": 2620,
+        "seq_scan": 245,
+        "seq_tup_read": 120430,
+        "idx_scan": 187623,
+        "idx_tup_fetch": 1417818,
+        "n_tup_ins": 725,
+        "n_tup_upd": 0,
+        "n_tup_del": 32,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 505,
+        "n_dead_tup": 44,
+        "n_mod_since_analyze": 22,
+        "n_ins_since_vacuum": 97,
+        "vacuum_count": 0,
+        "autovacuum_count": 1,
+        "analyze_count": 0,
+        "autoanalyze_count": 5,
+        "last_autovacuum": "2026-10-14 22:13:22.22698+00",
+        "last_autoanalyze": "2026-10-22 16:31:19.495544+00",
+        "total_bytes": 253952,
+        "planner_estimate": 523
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 85,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_ts_config",
+        "oid": 3602
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_ts_config",
+        "relation_oid": 3602,
+        "seq_scan": 110,
+        "seq_tup_read": 3190,
+        "idx_scan": 1391,
+        "idx_tup_fetch": 1378,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 73728,
+        "planner_estimate": 29
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 86,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_ts_config_map",
+        "oid": 3603
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_ts_config_map",
+        "relation_oid": 3603,
+        "seq_scan": 9,
+        "seq_tup_read": 4959,
+        "idx_scan": 806,
+        "idx_tup_fetch": 12502,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 90112,
+        "planner_estimate": 551
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 87,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_ts_dict",
+        "oid": 3600
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_ts_dict",
+        "relation_oid": 3600,
+        "seq_scan": 128,
+        "seq_tup_read": 3817,
+        "idx_scan": 1621,
+        "idx_tup_fetch": 1605,
+        "n_tup_ins": 4,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 1,
+        "n_dead_tup": 3,
+        "n_mod_since_analyze": 1,
+        "n_ins_since_vacuum": 4,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 81920,
+        "planner_estimate": 29
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 88,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_ts_parser",
+        "oid": 3601
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_ts_parser",
+        "relation_oid": 3601,
+        "seq_scan": 111,
+        "seq_tup_read": 111,
+        "idx_scan": 12,
+        "idx_tup_fetch": 12,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 73728,
+        "planner_estimate": 1
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 89,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_ts_template",
+        "oid": 3764
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_ts_template",
+        "relation_oid": 3764,
+        "seq_scan": 104,
+        "seq_tup_read": 601,
+        "idx_scan": 189,
+        "idx_tup_fetch": 169,
+        "n_tup_ins": 4,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 1,
+        "n_dead_tup": 3,
+        "n_mod_since_analyze": 1,
+        "n_ins_since_vacuum": 4,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 73728,
+        "planner_estimate": 5
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 90,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_type",
+        "oid": 1247
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_type",
+        "relation_oid": 1247,
+        "seq_scan": 1583,
+        "seq_tup_read": 1288057,
+        "idx_scan": 1050333,
+        "idx_tup_fetch": 813473,
+        "n_tup_ins": 300,
+        "n_tup_upd": 18,
+        "n_tup_del": 22,
+        "n_tup_hot_upd": 18,
+        "n_live_tup": 827,
+        "n_dead_tup": 122,
+        "n_mod_since_analyze": 105,
+        "n_ins_since_vacuum": 300,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 1,
+        "last_autovacuum": null,
+        "last_autoanalyze": "2026-10-09 11:14:23.86397+00",
+        "total_bytes": 319488,
+        "planner_estimate": 731
+      },
+      "review": [
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 91,
+      "identity": {
+        "schema": "pg_catalog",
+        "relation": "pg_user_mapping",
+        "oid": 1418
+      },
+      "complete_numeric_stats": {
+        "schema_name": "pg_catalog",
+        "relation_name": "pg_user_mapping",
+        "relation_oid": 1418,
+        "seq_scan": 10,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 24576,
+        "planner_estimate": 0
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 92,
+      "identity": {
+        "schema": "private",
+        "relation": "admin_access_events",
+        "oid": 20064
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "admin_access_events",
+        "relation_oid": 20064,
+        "seq_scan": 74,
+        "seq_tup_read": 597,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 12,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 12,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 12,
+        "n_ins_since_vacuum": 12,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 32768,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 93,
+      "identity": {
+        "schema": "private",
+        "relation": "admin_content_edits",
+        "oid": 20158
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "admin_content_edits",
+        "relation_oid": 20158,
+        "seq_scan": 73,
+        "seq_tup_read": 46,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 2,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 2,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 2,
+        "n_ins_since_vacuum": 2,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 49152,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 94,
+      "identity": {
+        "schema": "private",
+        "relation": "app_admins",
+        "oid": 17628
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "app_admins",
+        "relation_oid": 17628,
+        "seq_scan": 229,
+        "seq_tup_read": 178,
+        "idx_scan": 2125,
+        "idx_tup_fetch": 1405,
+        "n_tup_ins": 5,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 1,
+        "n_dead_tup": 4,
+        "n_mod_since_analyze": 1,
+        "n_ins_since_vacuum": 5,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 24576,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 95,
+      "identity": {
+        "schema": "private",
+        "relation": "backup_runs",
+        "oid": 17682
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "backup_runs",
+        "relation_oid": 17682,
+        "seq_scan": 135,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 16384,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 96,
+      "identity": {
+        "schema": "private",
+        "relation": "beta_invites",
+        "oid": 17653
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "beta_invites",
+        "relation_oid": 17653,
+        "seq_scan": 324,
+        "seq_tup_read": 2079,
+        "idx_scan": 59,
+        "idx_tup_fetch": 53,
+        "n_tup_ins": 18,
+        "n_tup_upd": 15,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 15,
+        "n_live_tup": 16,
+        "n_dead_tup": 17,
+        "n_mod_since_analyze": 29,
+        "n_ins_since_vacuum": 18,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 49152,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 97,
+      "identity": {
+        "schema": "private",
+        "relation": "beta_members",
+        "oid": 17616
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "beta_members",
+        "relation_oid": 17616,
+        "seq_scan": 11321,
+        "seq_tup_read": 21969,
+        "idx_scan": 602,
+        "idx_tup_fetch": 629,
+        "n_tup_ins": 57,
+        "n_tup_upd": 60,
+        "n_tup_del": 3,
+        "n_tup_hot_upd": 60,
+        "n_live_tup": 11,
+        "n_dead_tup": 4,
+        "n_mod_since_analyze": 34,
+        "n_ins_since_vacuum": 2,
+        "vacuum_count": 0,
+        "autovacuum_count": 2,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": "2026-10-28 20:55:45.578627+00",
+        "last_autoanalyze": null,
+        "total_bytes": 57344,
+        "planner_estimate": 9
+      },
+      "review": [
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 98,
+      "identity": {
+        "schema": "private",
+        "relation": "community_quality_checks",
+        "oid": 20004
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "community_quality_checks",
+        "relation_oid": 20004,
+        "seq_scan": 95,
+        "seq_tup_read": 382,
+        "idx_scan": 185,
+        "idx_tup_fetch": 157,
+        "n_tup_ins": 14,
+        "n_tup_upd": 18,
+        "n_tup_del": 2,
+        "n_tup_hot_upd": 18,
+        "n_live_tup": 12,
+        "n_dead_tup": 20,
+        "n_mod_since_analyze": 34,
+        "n_ins_since_vacuum": 14,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 32768,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 99,
+      "identity": {
+        "schema": "private",
+        "relation": "contribution_links",
+        "oid": 18430
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "contribution_links",
+        "relation_oid": 18430,
+        "seq_scan": 171,
+        "seq_tup_read": 398,
+        "idx_scan": 9683,
+        "idx_tup_fetch": 2660,
+        "n_tup_ins": 16,
+        "n_tup_upd": 26,
+        "n_tup_del": 2,
+        "n_tup_hot_upd": 25,
+        "n_live_tup": 12,
+        "n_dead_tup": 30,
+        "n_mod_since_analyze": 35,
+        "n_ins_since_vacuum": 16,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 57344,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 100,
+      "identity": {
+        "schema": "private",
+        "relation": "contributors",
+        "oid": 17639
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "contributors",
+        "relation_oid": 17639,
+        "seq_scan": 128,
+        "seq_tup_read": 672,
+        "idx_scan": 394,
+        "idx_tup_fetch": 397,
+        "n_tup_ins": 57,
+        "n_tup_upd": 3,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 13,
+        "n_dead_tup": 47,
+        "n_mod_since_analyze": 15,
+        "n_ins_since_vacuum": 57,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 40960,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 101,
+      "identity": {
+        "schema": "private",
+        "relation": "dic_admin_delete_receipts",
+        "oid": 20249
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "dic_admin_delete_receipts",
+        "relation_oid": 20249,
+        "seq_scan": 54,
+        "seq_tup_read": 32,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 1,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 1,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 1,
+        "n_ins_since_vacuum": 1,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 32768,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 102,
+      "identity": {
+        "schema": "private",
+        "relation": "dic_coffee_aliases",
+        "oid": 19777
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "dic_coffee_aliases",
+        "relation_oid": 19777,
+        "seq_scan": 85,
+        "seq_tup_read": 0,
+        "idx_scan": 6,
+        "idx_tup_fetch": 2,
+        "n_tup_ins": 4,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 4,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 4,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 32768,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 103,
+      "identity": {
+        "schema": "private",
+        "relation": "dic_coffee_audit",
+        "oid": 19812
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "dic_coffee_audit",
+        "relation_oid": 19812,
+        "seq_scan": 116,
+        "seq_tup_read": 1011,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 20,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 12,
+        "n_dead_tup": 8,
+        "n_mod_since_analyze": 12,
+        "n_ins_since_vacuum": 20,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 32768,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 104,
+      "identity": {
+        "schema": "private",
+        "relation": "dic_coffee_first_entry",
+        "oid": 19793
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "dic_coffee_first_entry",
+        "relation_oid": 19793,
+        "seq_scan": 88,
+        "seq_tup_read": 523,
+        "idx_scan": 166,
+        "idx_tup_fetch": 165,
+        "n_tup_ins": 13,
+        "n_tup_upd": 2,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 2,
+        "n_live_tup": 8,
+        "n_dead_tup": 7,
+        "n_mod_since_analyze": 8,
+        "n_ins_since_vacuum": 13,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 32768,
+        "planner_estimate": -1
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 105,
+      "identity": {
+        "schema": "private",
+        "relation": "dic_first_style_prompt_seen",
+        "oid": 20196
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "dic_first_style_prompt_seen",
+        "relation_oid": 20196,
+        "seq_scan": 41,
+        "seq_tup_read": 38,
+        "idx_scan": 7,
+        "idx_tup_fetch": 4,
+        "n_tup_ins": 2,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 2,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 2,
+        "n_ins_since_vacuum": 2,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 24576,
+        "planner_estimate": -1
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 106,
+      "identity": {
+        "schema": "private",
+        "relation": "dic_roaster_aliases",
+        "oid": 19250
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "dic_roaster_aliases",
+        "relation_oid": 19250,
+        "seq_scan": 86,
+        "seq_tup_read": 340,
+        "idx_scan": 258,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 36,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 4,
+        "n_dead_tup": 32,
+        "n_mod_since_analyze": 4,
+        "n_ins_since_vacuum": 36,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 32768,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 107,
+      "identity": {
+        "schema": "private",
+        "relation": "dic_roaster_directory",
+        "oid": 19234
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "dic_roaster_directory",
+        "relation_oid": 19234,
+        "seq_scan": 98,
+        "seq_tup_read": 381,
+        "idx_scan": 2168,
+        "idx_tup_fetch": 1897,
+        "n_tup_ins": 28,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 4,
+        "n_dead_tup": 24,
+        "n_mod_since_analyze": 4,
+        "n_ins_since_vacuum": 28,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 49152,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 108,
+      "identity": {
+        "schema": "private",
+        "relation": "dic_source_attempts",
+        "oid": 19908
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "dic_source_attempts",
+        "relation_oid": 19908,
+        "seq_scan": 89,
+        "seq_tup_read": 0,
+        "idx_scan": 14,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 8192,
+        "planner_estimate": -1
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 109,
+      "identity": {
+        "schema": "private",
+        "relation": "dic_url_preview_attempts",
+        "oid": 19949
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "dic_url_preview_attempts",
+        "relation_oid": 19949,
+        "seq_scan": 95,
+        "seq_tup_read": 207,
+        "idx_scan": 97,
+        "idx_tup_fetch": 87,
+        "n_tup_ins": 8,
+        "n_tup_upd": 33,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 33,
+        "n_live_tup": 3,
+        "n_dead_tup": 38,
+        "n_mod_since_analyze": 25,
+        "n_ins_since_vacuum": 8,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 24576,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 110,
+      "identity": {
+        "schema": "private",
+        "relation": "import_batches",
+        "oid": 18605
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "import_batches",
+        "relation_oid": 18605,
+        "seq_scan": 162,
+        "seq_tup_read": 115,
+        "idx_scan": 65,
+        "idx_tup_fetch": 15,
+        "n_tup_ins": 8,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 1,
+        "n_dead_tup": 7,
+        "n_mod_since_analyze": 1,
+        "n_ins_since_vacuum": 8,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 98304,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 111,
+      "identity": {
+        "schema": "private",
+        "relation": "import_control",
+        "oid": 18596
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "import_control",
+        "relation_oid": 18596,
+        "seq_scan": 210,
+        "seq_tup_read": 209,
+        "idx_scan": 88,
+        "idx_tup_fetch": 88,
+        "n_tup_ins": 1,
+        "n_tup_upd": 8,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 8,
+        "n_live_tup": 1,
+        "n_dead_tup": 8,
+        "n_mod_since_analyze": 3,
+        "n_ins_since_vacuum": 1,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 24576,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 112,
+      "identity": {
+        "schema": "private",
+        "relation": "invite_attempts",
+        "oid": 18525
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "invite_attempts",
+        "relation_oid": 18525,
+        "seq_scan": 122,
+        "seq_tup_read": 477,
+        "idx_scan": 26,
+        "idx_tup_fetch": 8,
+        "n_tup_ins": 15,
+        "n_tup_upd": 8,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 8,
+        "n_live_tup": 11,
+        "n_dead_tup": 12,
+        "n_mod_since_analyze": 18,
+        "n_ins_since_vacuum": 15,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 24576,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 113,
+      "identity": {
+        "schema": "private",
+        "relation": "invite_redemptions",
+        "oid": 18537
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "invite_redemptions",
+        "relation_oid": 18537,
+        "seq_scan": 125,
+        "seq_tup_read": 479,
+        "idx_scan": 5,
+        "idx_tup_fetch": 1,
+        "n_tup_ins": 13,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 11,
+        "n_dead_tup": 2,
+        "n_mod_since_analyze": 11,
+        "n_ins_since_vacuum": 13,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 40960,
+        "planner_estimate": -1
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 114,
+      "identity": {
+        "schema": "private",
+        "relation": "mutation_receipts",
+        "oid": 17669
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "mutation_receipts",
+        "relation_oid": 17669,
+        "seq_scan": 215,
+        "seq_tup_read": 7623,
+        "idx_scan": 163,
+        "idx_tup_fetch": 223,
+        "n_tup_ins": 111,
+        "n_tup_upd": 10,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 10,
+        "n_live_tup": 69,
+        "n_dead_tup": 48,
+        "n_mod_since_analyze": 26,
+        "n_ins_since_vacuum": 111,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 1,
+        "last_autovacuum": null,
+        "last_autoanalyze": "2026-10-21 14:48:46.381308+00",
+        "total_bytes": 139264,
+        "planner_estimate": 43
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 115,
+      "identity": {
+        "schema": "private",
+        "relation": "shot_audit",
+        "oid": 18455
+      },
+      "complete_numeric_stats": {
+        "schema_name": "private",
+        "relation_name": "shot_audit",
+        "relation_oid": 18455,
+        "seq_scan": 147,
+        "seq_tup_read": 4617,
+        "idx_scan": 69,
+        "idx_tup_fetch": 300,
+        "n_tup_ins": 205,
+        "n_tup_upd": 12,
+        "n_tup_del": 7,
+        "n_tup_hot_upd": 12,
+        "n_live_tup": 59,
+        "n_dead_tup": 38,
+        "n_mod_since_analyze": 13,
+        "n_ins_since_vacuum": 93,
+        "vacuum_count": 0,
+        "autovacuum_count": 2,
+        "analyze_count": 0,
+        "autoanalyze_count": 1,
+        "last_autovacuum": "2026-10-14 15:23:13.290619+00",
+        "last_autoanalyze": "2026-10-21 05:14:34.600659+00",
+        "total_bytes": 319488,
+        "planner_estimate": 46
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 116,
+      "identity": {
+        "schema": "public",
+        "relation": "account_preferences",
+        "oid": 17702
+      },
+      "complete_numeric_stats": {
+        "schema_name": "public",
+        "relation_name": "account_preferences",
+        "relation_oid": 17702,
+        "seq_scan": 4782,
+        "seq_tup_read": 14994,
+        "idx_scan": 316,
+        "idx_tup_fetch": 319,
+        "n_tup_ins": 57,
+        "n_tup_upd": 51,
+        "n_tup_del": 3,
+        "n_tup_hot_upd": 22,
+        "n_live_tup": 11,
+        "n_dead_tup": 46,
+        "n_mod_since_analyze": 41,
+        "n_ins_since_vacuum": 30,
+        "vacuum_count": 0,
+        "autovacuum_count": 1,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": "2026-10-14 15:23:13.260131+00",
+        "last_autoanalyze": null,
+        "total_bytes": 81920,
+        "planner_estimate": 1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT",
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 117,
+      "identity": {
+        "schema": "public",
+        "relation": "admin_reviews",
+        "oid": 18469
+      },
+      "complete_numeric_stats": {
+        "schema_name": "public",
+        "relation_name": "admin_reviews",
+        "relation_oid": 18469,
+        "seq_scan": 137,
+        "seq_tup_read": 144,
+        "idx_scan": 19,
+        "idx_tup_fetch": 3,
+        "n_tup_ins": 4,
+        "n_tup_upd": 1,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 3,
+        "n_dead_tup": 2,
+        "n_mod_since_analyze": 3,
+        "n_ins_since_vacuum": 4,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 81920,
+        "planner_estimate": -1
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 118,
+      "identity": {
+        "schema": "public",
+        "relation": "bags",
+        "oid": 18047
+      },
+      "complete_numeric_stats": {
+        "schema_name": "public",
+        "relation_name": "bags",
+        "relation_oid": 18047,
+        "seq_scan": 156,
+        "seq_tup_read": 488,
+        "idx_scan": 127,
+        "idx_tup_fetch": 124,
+        "n_tup_ins": 58,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 4,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 4,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 1,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": "2026-10-14 18:10:16.811324+00",
+        "last_autoanalyze": null,
+        "total_bytes": 90112,
+        "planner_estimate": 4
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 119,
+      "identity": {
+        "schema": "public",
+        "relation": "basket_versions",
+        "oid": 17984
+      },
+      "complete_numeric_stats": {
+        "schema_name": "public",
+        "relation_name": "basket_versions",
+        "relation_oid": 17984,
+        "seq_scan": 124,
+        "seq_tup_read": 311,
+        "idx_scan": 5169,
+        "idx_tup_fetch": 4502,
+        "n_tup_ins": 38,
+        "n_tup_upd": 0,
+        "n_tup_del": 2,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 6,
+        "n_dead_tup": 32,
+        "n_mod_since_analyze": 6,
+        "n_ins_since_vacuum": 38,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 65536,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 120,
+      "identity": {
+        "schema": "public",
+        "relation": "baskets",
+        "oid": 17959
+      },
+      "complete_numeric_stats": {
+        "schema_name": "public",
+        "relation_name": "baskets",
+        "relation_oid": 17959,
+        "seq_scan": 125,
+        "seq_tup_read": 319,
+        "idx_scan": 4803,
+        "idx_tup_fetch": 4141,
+        "n_tup_ins": 37,
+        "n_tup_upd": 0,
+        "n_tup_del": 2,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 6,
+        "n_dead_tup": 31,
+        "n_mod_since_analyze": 6,
+        "n_ins_since_vacuum": 37,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 49152,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 121,
+      "identity": {
+        "schema": "public",
+        "relation": "coffee_groups",
+        "oid": 17731
+      },
+      "complete_numeric_stats": {
+        "schema_name": "public",
+        "relation_name": "coffee_groups",
+        "relation_oid": 17731,
+        "seq_scan": 122,
+        "seq_tup_read": 0,
+        "idx_scan": 4,
+        "idx_tup_fetch": 4,
+        "n_tup_ins": 2,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 2,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 2,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 32768,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 122,
+      "identity": {
+        "schema": "public",
+        "relation": "coffee_sources",
+        "oid": 17775
+      },
+      "complete_numeric_stats": {
+        "schema_name": "public",
+        "relation_name": "coffee_sources",
+        "relation_oid": 17775,
+        "seq_scan": 153,
+        "seq_tup_read": 970,
+        "idx_scan": 446,
+        "idx_tup_fetch": 579,
+        "n_tup_ins": 28,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 10,
+        "n_dead_tup": 18,
+        "n_mod_since_analyze": 10,
+        "n_ins_since_vacuum": 28,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 49152,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 123,
+      "identity": {
+        "schema": "public",
+        "relation": "coffee_submissions",
+        "oid": 17795
+      },
+      "complete_numeric_stats": {
+        "schema_name": "public",
+        "relation_name": "coffee_submissions",
+        "relation_oid": 17795,
+        "seq_scan": 6316,
+        "seq_tup_read": 37307,
+        "idx_scan": 504,
+        "idx_tup_fetch": 236,
+        "n_tup_ins": 90,
+        "n_tup_upd": 27,
+        "n_tup_del": 2,
+        "n_tup_hot_upd": 1,
+        "n_live_tup": 8,
+        "n_dead_tup": 5,
+        "n_mod_since_analyze": 19,
+        "n_ins_since_vacuum": 4,
+        "vacuum_count": 0,
+        "autovacuum_count": 2,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": "2026-10-18 03:58:29.54732+00",
+        "last_autoanalyze": null,
+        "total_bytes": 98304,
+        "planner_estimate": 5
+      },
+      "review": [
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 124,
+      "identity": {
+        "schema": "public",
+        "relation": "coffees",
+        "oid": 17741
+      },
+      "complete_numeric_stats": {
+        "schema_name": "public",
+        "relation_name": "coffees",
+        "relation_oid": 17741,
+        "seq_scan": 1203,
+        "seq_tup_read": 6988,
+        "idx_scan": 12575,
+        "idx_tup_fetch": 14128,
+        "n_tup_ins": 40,
+        "n_tup_upd": 12,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 12,
+        "n_live_tup": 8,
+        "n_dead_tup": 37,
+        "n_mod_since_analyze": 14,
+        "n_ins_since_vacuum": 40,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 65536,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT",
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 125,
+      "identity": {
+        "schema": "public",
+        "relation": "community_shots",
+        "oid": 18394
+      },
+      "complete_numeric_stats": {
+        "schema_name": "public",
+        "relation_name": "community_shots",
+        "relation_oid": 18394,
+        "seq_scan": 333,
+        "seq_tup_read": 943,
+        "idx_scan": 3946,
+        "idx_tup_fetch": 3620,
+        "n_tup_ins": 16,
+        "n_tup_upd": 36,
+        "n_tup_del": 2,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 12,
+        "n_dead_tup": 40,
+        "n_mod_since_analyze": 43,
+        "n_ins_since_vacuum": 16,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 65536,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 126,
+      "identity": {
+        "schema": "public",
+        "relation": "grinder_calibrations",
+        "oid": 17929
+      },
+      "complete_numeric_stats": {
+        "schema_name": "public",
+        "relation_name": "grinder_calibrations",
+        "relation_oid": 17929,
+        "seq_scan": 124,
+        "seq_tup_read": 311,
+        "idx_scan": 5141,
+        "idx_tup_fetch": 4474,
+        "n_tup_ins": 38,
+        "n_tup_upd": 0,
+        "n_tup_del": 3,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 6,
+        "n_dead_tup": 32,
+        "n_mod_since_analyze": 6,
+        "n_ins_since_vacuum": 38,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 65536,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 127,
+      "identity": {
+        "schema": "public",
+        "relation": "library_entries",
+        "oid": 17826
+      },
+      "complete_numeric_stats": {
+        "schema_name": "public",
+        "relation_name": "library_entries",
+        "relation_oid": 17826,
+        "seq_scan": 9849,
+        "seq_tup_read": 53257,
+        "idx_scan": 1092,
+        "idx_tup_fetch": 566,
+        "n_tup_ins": 93,
+        "n_tup_upd": 26,
+        "n_tup_del": 2,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 11,
+        "n_dead_tup": 3,
+        "n_mod_since_analyze": 21,
+        "n_ins_since_vacuum": 5,
+        "vacuum_count": 0,
+        "autovacuum_count": 2,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": "2026-10-22 02:05:30.64001+00",
+        "last_autoanalyze": null,
+        "total_bytes": 122880,
+        "planner_estimate": 7
+      },
+      "review": [
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 128,
+      "identity": {
+        "schema": "public",
+        "relation": "personal_recipe_families",
+        "oid": 18178
+      },
+      "complete_numeric_stats": {
+        "schema_name": "public",
+        "relation_name": "personal_recipe_families",
+        "relation_oid": 18178,
+        "seq_scan": 1286,
+        "seq_tup_read": 5131,
+        "idx_scan": 3858,
+        "idx_tup_fetch": 7242,
+        "n_tup_ins": 43,
+        "n_tup_upd": 58,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 58,
+        "n_live_tup": 6,
+        "n_dead_tup": 6,
+        "n_mod_since_analyze": 28,
+        "n_ins_since_vacuum": 2,
+        "vacuum_count": 0,
+        "autovacuum_count": 1,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": "2026-10-21 05:02:34.296687+00",
+        "last_autoanalyze": null,
+        "total_bytes": 98304,
+        "planner_estimate": 4
+      },
+      "review": [
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 129,
+      "identity": {
+        "schema": "public",
+        "relation": "recipe_families",
+        "oid": 18156
+      },
+      "complete_numeric_stats": {
+        "schema_name": "public",
+        "relation_name": "recipe_families",
+        "relation_oid": 18156,
+        "seq_scan": 125,
+        "seq_tup_read": 0,
+        "idx_scan": 3,
+        "idx_tup_fetch": 2,
+        "n_tup_ins": 2,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 2,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 2,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 49152,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 130,
+      "identity": {
+        "schema": "public",
+        "relation": "recipe_preferences",
+        "oid": 18210
+      },
+      "complete_numeric_stats": {
+        "schema_name": "public",
+        "relation_name": "recipe_preferences",
+        "relation_oid": 18210,
+        "seq_scan": 143,
+        "seq_tup_read": 432,
+        "idx_scan": 4844,
+        "idx_tup_fetch": 11186,
+        "n_tup_ins": 38,
+        "n_tup_upd": 19,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 16,
+        "n_live_tup": 4,
+        "n_dead_tup": 45,
+        "n_mod_since_analyze": 21,
+        "n_ins_since_vacuum": 38,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 81920,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 131,
+      "identity": {
+        "schema": "public",
+        "relation": "setup_preferences",
+        "oid": 18007
+      },
+      "complete_numeric_stats": {
+        "schema_name": "public",
+        "relation_name": "setup_preferences",
+        "relation_oid": 18007,
+        "seq_scan": 130,
+        "seq_tup_read": 323,
+        "idx_scan": 4814,
+        "idx_tup_fetch": 4145,
+        "n_tup_ins": 35,
+        "n_tup_upd": 17,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 17,
+        "n_live_tup": 6,
+        "n_dead_tup": 29,
+        "n_mod_since_analyze": 16,
+        "n_ins_since_vacuum": 35,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 65536,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 132,
+      "identity": {
+        "schema": "public",
+        "relation": "setup_versions",
+        "oid": 17895
+      },
+      "complete_numeric_stats": {
+        "schema_name": "public",
+        "relation_name": "setup_versions",
+        "relation_oid": 17895,
+        "seq_scan": 124,
+        "seq_tup_read": 312,
+        "idx_scan": 5273,
+        "idx_tup_fetch": 4610,
+        "n_tup_ins": 37,
+        "n_tup_upd": 0,
+        "n_tup_del": 2,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 6,
+        "n_dead_tup": 31,
+        "n_mod_since_analyze": 6,
+        "n_ins_since_vacuum": 37,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 49152,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 133,
+      "identity": {
+        "schema": "public",
+        "relation": "setups",
+        "oid": 17875
+      },
+      "complete_numeric_stats": {
+        "schema_name": "public",
+        "relation_name": "setups",
+        "relation_oid": 17875,
+        "seq_scan": 4730,
+        "seq_tup_read": 11552,
+        "idx_scan": 451,
+        "idx_tup_fetch": 156,
+        "n_tup_ins": 38,
+        "n_tup_upd": 37,
+        "n_tup_del": 2,
+        "n_tup_hot_upd": 3,
+        "n_live_tup": 6,
+        "n_dead_tup": 16,
+        "n_mod_since_analyze": 14,
+        "n_ins_since_vacuum": 10,
+        "vacuum_count": 0,
+        "autovacuum_count": 1,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": "2026-10-14 15:23:13.273341+00",
+        "last_autoanalyze": null,
+        "total_bytes": 81920,
+        "planner_estimate": 0
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT",
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 134,
+      "identity": {
+        "schema": "public",
+        "relation": "shot_notes",
+        "oid": 18375
+      },
+      "complete_numeric_stats": {
+        "schema_name": "public",
+        "relation_name": "shot_notes",
+        "relation_oid": 18375,
+        "seq_scan": 5012,
+        "seq_tup_read": 84386,
+        "idx_scan": 207,
+        "idx_tup_fetch": 104,
+        "n_tup_ins": 144,
+        "n_tup_upd": 9,
+        "n_tup_del": 5,
+        "n_tup_hot_upd": 9,
+        "n_live_tup": 26,
+        "n_dead_tup": 11,
+        "n_mod_since_analyze": 40,
+        "n_ins_since_vacuum": 15,
+        "vacuum_count": 0,
+        "autovacuum_count": 2,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": "2026-10-14 18:10:16.812675+00",
+        "last_autoanalyze": null,
+        "total_bytes": 65536,
+        "planner_estimate": 14
+      },
+      "review": [
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 135,
+      "identity": {
+        "schema": "public",
+        "relation": "shots",
+        "oid": 18287
+      },
+      "complete_numeric_stats": {
+        "schema_name": "public",
+        "relation_name": "shots",
+        "relation_oid": 18287,
+        "seq_scan": 2448,
+        "seq_tup_read": 43076,
+        "idx_scan": 6102,
+        "idx_tup_fetch": 45329,
+        "n_tup_ins": 151,
+        "n_tup_upd": 54,
+        "n_tup_del": 7,
+        "n_tup_hot_upd": 22,
+        "n_live_tup": 26,
+        "n_dead_tup": 52,
+        "n_mod_since_analyze": 11,
+        "n_ins_since_vacuum": 48,
+        "vacuum_count": 0,
+        "autovacuum_count": 2,
+        "analyze_count": 0,
+        "autoanalyze_count": 1,
+        "last_autovacuum": "2026-10-14 15:23:13.281384+00",
+        "last_autoanalyze": "2026-10-21 14:47:46.431209+00",
+        "total_bytes": 212992,
+        "planner_estimate": 20
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT",
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 136,
+      "identity": {
+        "schema": "public",
+        "relation": "workspace_coffees",
+        "oid": 18100
+      },
+      "complete_numeric_stats": {
+        "schema_name": "public",
+        "relation_name": "workspace_coffees",
+        "relation_oid": 18100,
+        "seq_scan": 4635,
+        "seq_tup_read": 20905,
+        "idx_scan": 317,
+        "idx_tup_fetch": 38,
+        "n_tup_ins": 56,
+        "n_tup_upd": 21,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 5,
+        "n_live_tup": 6,
+        "n_dead_tup": 19,
+        "n_mod_since_analyze": 24,
+        "n_ins_since_vacuum": 2,
+        "vacuum_count": 0,
+        "autovacuum_count": 1,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": "2026-10-14 18:10:16.812123+00",
+        "last_autoanalyze": null,
+        "total_bytes": 114688,
+        "planner_estimate": 4
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT",
+        "MANY_CUMULATIVE_SEQUENTIAL_SCANS_ON_SMALL_TABLE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 137,
+      "identity": {
+        "schema": "public",
+        "relation": "workspace_state",
+        "oid": 18071
+      },
+      "complete_numeric_stats": {
+        "schema_name": "public",
+        "relation_name": "workspace_state",
+        "relation_oid": 18071,
+        "seq_scan": 132,
+        "seq_tup_read": 335,
+        "idx_scan": 4799,
+        "idx_tup_fetch": 4131,
+        "n_tup_ins": 33,
+        "n_tup_upd": 18,
+        "n_tup_del": 1,
+        "n_tup_hot_upd": 9,
+        "n_live_tup": 6,
+        "n_dead_tup": 45,
+        "n_mod_since_analyze": 21,
+        "n_ins_since_vacuum": 33,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 49152,
+        "planner_estimate": -1
+      },
+      "review": [
+        "DEAD_ESTIMATE_GT_LIVE_ESTIMATE_NOT_MEASURED_BLOAT"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 138,
+      "identity": {
+        "schema": "realtime",
+        "relation": "messages",
+        "oid": 17505
+      },
+      "complete_numeric_stats": {
+        "schema_name": "realtime",
+        "relation_name": "messages",
+        "relation_oid": 17505,
+        "seq_scan": 0,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 0,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 139,
+      "identity": {
+        "schema": "realtime",
+        "relation": "schema_migrations",
+        "oid": 17513
+      },
+      "complete_numeric_stats": {
+        "schema_name": "realtime",
+        "relation_name": "schema_migrations",
+        "relation_oid": 17513,
+        "seq_scan": 89,
+        "seq_tup_read": 7917,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 91,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 91,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 2,
+        "n_ins_since_vacuum": 91,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 1,
+        "last_autovacuum": null,
+        "last_autoanalyze": "2026-10-09 11:14:23.924232+00",
+        "total_bytes": 24576,
+        "planner_estimate": 89
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 140,
+      "identity": {
+        "schema": "realtime",
+        "relation": "subscription",
+        "oid": 17516
+      },
+      "complete_numeric_stats": {
+        "schema_name": "realtime",
+        "relation_name": "subscription",
+        "relation_oid": 17516,
+        "seq_scan": 96,
+        "seq_tup_read": 0,
+        "idx_scan": 27655,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 32768,
+        "planner_estimate": -1
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 141,
+      "identity": {
+        "schema": "storage",
+        "relation": "buckets",
+        "oid": 17270
+      },
+      "complete_numeric_stats": {
+        "schema_name": "storage",
+        "relation_name": "buckets",
+        "relation_oid": 17270,
+        "seq_scan": 139,
+        "seq_tup_read": 0,
+        "idx_scan": 444,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 24576,
+        "planner_estimate": -1
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 142,
+      "identity": {
+        "schema": "storage",
+        "relation": "buckets_analytics",
+        "oid": 17390
+      },
+      "complete_numeric_stats": {
+        "schema_name": "storage",
+        "relation_name": "buckets_analytics",
+        "relation_oid": 17390,
+        "seq_scan": 88,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 24576,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 143,
+      "identity": {
+        "schema": "storage",
+        "relation": "buckets_vectors",
+        "oid": 17404
+      },
+      "complete_numeric_stats": {
+        "schema_name": "storage",
+        "relation_name": "buckets_vectors",
+        "relation_oid": 17404,
+        "seq_scan": 85,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 16384,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 144,
+      "identity": {
+        "schema": "storage",
+        "relation": "migrations",
+        "oid": 17262
+      },
+      "complete_numeric_stats": {
+        "schema_name": "storage",
+        "relation_name": "migrations",
+        "relation_oid": 17262,
+        "seq_scan": 87,
+        "seq_tup_read": 6289,
+        "idx_scan": 1,
+        "idx_tup_fetch": 1,
+        "n_tup_ins": 74,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 74,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 1,
+        "n_ins_since_vacuum": 74,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 1,
+        "last_autovacuum": null,
+        "last_autoanalyze": "2026-10-09 11:14:23.919885+00",
+        "total_bytes": 73728,
+        "planner_estimate": 73
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 145,
+      "identity": {
+        "schema": "storage",
+        "relation": "objects",
+        "oid": 17280
+      },
+      "complete_numeric_stats": {
+        "schema_name": "storage",
+        "relation_name": "objects",
+        "relation_oid": 17280,
+        "seq_scan": 212,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 73728,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 146,
+      "identity": {
+        "schema": "storage",
+        "relation": "s3_multipart_uploads",
+        "oid": 17329
+      },
+      "complete_numeric_stats": {
+        "schema_name": "storage",
+        "relation_name": "s3_multipart_uploads",
+        "relation_oid": 17329,
+        "seq_scan": 89,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 24576,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 147,
+      "identity": {
+        "schema": "storage",
+        "relation": "s3_multipart_uploads_parts",
+        "oid": 17343
+      },
+      "complete_numeric_stats": {
+        "schema_name": "storage",
+        "relation_name": "s3_multipart_uploads_parts",
+        "relation_oid": 17343,
+        "seq_scan": 87,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 16384,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 148,
+      "identity": {
+        "schema": "storage",
+        "relation": "vector_indexes",
+        "oid": 17417
+      },
+      "complete_numeric_stats": {
+        "schema_name": "storage",
+        "relation_name": "vector_indexes",
+        "relation_oid": 17417,
+        "seq_scan": 86,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 24576,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 149,
+      "identity": {
+        "schema": "supabase_migrations",
+        "relation": "schema_migrations",
+        "oid": 17606
+      },
+      "complete_numeric_stats": {
+        "schema_name": "supabase_migrations",
+        "relation_name": "schema_migrations",
+        "relation_oid": 17606,
+        "seq_scan": 214,
+        "seq_tup_read": 8373,
+        "idx_scan": 426,
+        "idx_tup_fetch": 8406,
+        "n_tup_ins": 54,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 54,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 3,
+        "n_ins_since_vacuum": 54,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 1,
+        "last_autovacuum": null,
+        "last_autoanalyze": "2026-10-28 23:01:48.203898+00",
+        "total_bytes": 311296,
+        "planner_estimate": 51
+      },
+      "review": [
+        "NO_INDEPENDENTLY_CONFIRMED_MAINTENANCE_ANOMALY"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    },
+    {
+      "ordinal": 150,
+      "identity": {
+        "schema": "vault",
+        "relation": "secrets",
+        "oid": 16612
+      },
+      "complete_numeric_stats": {
+        "schema_name": "vault",
+        "relation_name": "secrets",
+        "relation_oid": 16612,
+        "seq_scan": 116,
+        "seq_tup_read": 0,
+        "idx_scan": 0,
+        "idx_tup_fetch": 0,
+        "n_tup_ins": 0,
+        "n_tup_upd": 0,
+        "n_tup_del": 0,
+        "n_tup_hot_upd": 0,
+        "n_live_tup": 0,
+        "n_dead_tup": 0,
+        "n_mod_since_analyze": 0,
+        "n_ins_since_vacuum": 0,
+        "vacuum_count": 0,
+        "autovacuum_count": 0,
+        "analyze_count": 0,
+        "autoanalyze_count": 0,
+        "last_autovacuum": null,
+        "last_autoanalyze": null,
+        "total_bytes": 24576,
+        "planner_estimate": -1
+      },
+      "review": [
+        "ZERO_INDEX_SCANS_NOT_INDEX_DISUSE"
+      ],
+      "verdict": "NO_REPRODUCED_DEFECT_FROM_AGGREGATE_TELEMETRY",
+      "definition_review": "PRIOR_SOURCE_EVIDENCE_REUSED_NO_NEW_WORD_CREDIT"
+    }
+  ]
+}

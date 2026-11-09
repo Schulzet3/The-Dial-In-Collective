@@ -1,0 +1,170 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "scope": "RUN118_SAFE_BOUNDED_LOG_CLASSES_AND_LOCK_METRICS_NO_RAW_LOGS",
+  "observed_date_utc": "2026-11-09",
+  "window_utc": {
+    "start": "2026-11-08T12:00:00Z",
+    "end": "2026-11-09T11:40:00Z",
+    "minutes": 1420
+  },
+  "sources": {
+    "edge_logs": 155,
+    "pgbouncer_logs": 72,
+    "postgres_logs": 40,
+    "supavisor_logs": 30,
+    "auth_logs": 15,
+    "auth_audit_logs": 8
+  },
+  "events_aggregated": 320,
+  "edge_http_statuses": [
+    {
+      "code": 200,
+      "count": 155,
+      "mean_upstream_ms": 61.41,
+      "max_upstream_ms": 646
+    }
+  ],
+  "edge_safe_route_classes": [
+    {
+      "class": "rest_api",
+      "count": 144,
+      "http_non2xx": 0,
+      "upstream_p50_ms": 15,
+      "upstream_p95_ms": 224,
+      "upstream_max_ms": 646
+    },
+    {
+      "class": "auth_api",
+      "count": 11,
+      "http_non2xx": 0,
+      "upstream_p50_ms": 106,
+      "upstream_p95_ms": 380,
+      "upstream_max_ms": 380
+    }
+  ],
+  "postgres_severity": {
+    "LOG": 25,
+    "ERROR": 15,
+    "FATAL": 0,
+    "PANIC": 0
+  },
+  "postgres_sqlstate_groups": [
+    {
+      "code": "00000",
+      "level": "LOG",
+      "count": 24
+    },
+    {
+      "code": "08006",
+      "level": "LOG",
+      "count": 1
+    },
+    {
+      "code": "42703",
+      "level": "ERROR",
+      "count": 5
+    },
+    {
+      "code": "42702",
+      "level": "ERROR",
+      "count": 3
+    },
+    {
+      "code": "42704",
+      "level": "ERROR",
+      "count": 2
+    },
+    {
+      "code": "42P01",
+      "level": "ERROR",
+      "count": 2
+    },
+    {
+      "code": "42883",
+      "level": "ERROR",
+      "count": 1
+    },
+    {
+      "code": "22023",
+      "level": "ERROR",
+      "count": 1
+    },
+    {
+      "code": "42725",
+      "level": "ERROR",
+      "count": 1
+    }
+  ],
+  "postgres_errors_named_app_safe_bucket": "other_named_app_for_all_15_without_exposing_app_name",
+  "auth_log_groups": [
+    {
+      "status": "200",
+      "level": "info",
+      "count": 11
+    },
+    {
+      "status": "NO_STATUS",
+      "level": "info",
+      "count": 4
+    }
+  ],
+  "supavisor_groups": [
+    {
+      "level": "info",
+      "state": "NO_STATE",
+      "count": 12
+    },
+    {
+      "level": "info",
+      "state": "auth_scram_final_wait",
+      "count": 9
+    },
+    {
+      "level": "info",
+      "state": "idle",
+      "count": 6
+    },
+    {
+      "level": "info",
+      "state": "busy",
+      "count": 3
+    }
+  ],
+  "lock_health": {
+    "backend_type": "client backend",
+    "lock_entries": 3,
+    "waiting_entries": 0,
+    "sessions_with_locks": 1,
+    "oldest_xact_seconds": 0
+  },
+  "review_method": "DIRECT_GROUPED_PROVIDER_CLICKHOUSE_LOG_ATTRIBUTES_AND_AGGREGATE_PG_LOCKS_PG_STAT_ACTIVITY_SQL",
+  "verdict": "NO_NEW_REPRODUCED_DEFECT_15_SQL_ERRORS_SOURCE_UNVERIFIED",
+  "notes": "SQLSTATE events show undefined/ambiguous objects/functions/columns and invalid parameter; actual cause/application endpoint not attributable without safely corroborated source. Single connection-exception LOG is not proof of a current outage. No current lock wait.",
+  "restricted_fields_not_selected": [
+    "raw event_message/msg",
+    "parsed.query",
+    "request.path/url/search",
+    "headers/tokens",
+    "Auth actor IDs/username",
+    "member, coffee, shot or note rows",
+    "client IPs",
+    "individual user identifiers"
+  ],
+  "limitations": [
+    "Only a 23h40m bounded log window; not exhaustive historic log bodies.",
+    "No raw messages/SQL query text, so causal attribution and application impact of 15 errors remain UNVERIFIED.",
+    "No compiled-native implementation, hosted Auth/JWT/PostgREST or provider-console-only settings covered.",
+    "No proof of complete provider word-level audit."
+  ],
+  "source_fix": "NONE_UNJUSTIFIED_BY_AGGREGATE_DATA",
+  "tests": "NOT_RUN_DOCS_ONLY",
+  "provider_writes": false,
+  "next": "Inspect distinct changed/new provider definitions or safe SQLSTATE correlation; preserve Native/hosted/query-body UNVERIFIED.",
+  "source_heads": {
+    "development_parent": "bf61a5e4ea013e23f676c93050d75b9175cfbc56",
+    "main": "a4028e42b0d0316fd539c0563fd07832d509aed0",
+    "release_production": "92829cb6aff82aaec212eabbd921183e7997f1a7"
+  }
+}

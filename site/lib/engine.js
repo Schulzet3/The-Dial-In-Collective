@@ -31,7 +31,15 @@ export function baseline(coffee,style,dose,preferences='') {
 }
 // Never promote an archived/imported `dialedIn` marker into personal recipe
 // evidence without verifying its five original recorded ideal ratings.
-export function familyShots(s,id) {return s.shots.filter(x=>!x.hidden&&x.dialedIn===true&&isDialed(x.tasteScales)&&x.familyId===id);}
+// A restored shot may carry a stale family ID from a different coffee or
+// espresso style. Only the recorded family identity can anchor same-coffee
+// recipe evidence. Preserve the original archived row without modifying it.
+export function familyShots(s,id) {
+ const family=s.families?.find(f=>f.id===id);
+ if(!family)return [];
+ return s.shots.filter(x=>!x.hidden&&x.dialedIn===true&&isDialed(x.tasteScales)&&
+  x.familyId===id&&x.coffeeId===family.coffeeId&&x.style===family.style);
+}
 // Five green ratings do not validate malformed imported physical measurements.
 // Preserve all originals in History; only measured rows inform recipe evidence.
 function measuredRecipeShots(shots) {
@@ -149,7 +157,12 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
  const validSuccess=sh=>sh.dialedIn===true&&isDialed(sh.tasteScales);
  // Retain malformed imported shots in History, but not in measured grinder
  // or paired Slow Feed evidence. Do not change the original measurements.
- const v=activeVersion(s),measured=measuredRecipeShots(s.shots),qual=measured.filter(sh=>!sh.hidden&&validSuccess(sh)&&sh.style===style&&sh.feedMode===feed&&hardwareMatch(sh,v)&&finite(sh.grindSetting));
+ // Invalid legacy temperatures are retained in the original shot History, but
+ // they cannot establish a proven personal grind setting or paired feed-mode effect.
+ // Temperature was optional: null remains eligible, and valid 70-100 C readings
+ // retain their original evidence status under existing Log Shot bounds.
+ const v=activeVersion(s),measured=measuredRecipeShots(s.shots).filter(sh=>
+  sh.tempC==null||validRecordedTemperature(sh.tempC)),qual=measured.filter(sh=>!sh.hidden&&validSuccess(sh)&&sh.style===style&&sh.feedMode===feed&&hardwareMatch(sh,v)&&finite(sh.grindSetting));
  // Current-calibration history outside the entered espresso range remains
   // untouched in History, but is not proven current-scale grind evidence.
   const current=qual.filter(sh=>sh.calibrationId===v.calibrationId&&
@@ -313,7 +326,7 @@ export function personalSimilarCoffeeReference(s,coffee,version,style,feed,baske
 export function recommendation(s,coffeeId,options={}) {
  const c=s.coffees.find(c=>c.id===coffeeId),v=activeVersion(s),p=coffeeState(s,coffeeId);
  if(!c||!v)return null;
- const style=options.style||p.style,basket=v.baskets.find(x=>x.id===options.basketId)||selectedBasket(s,coffeeId),feed=options.feedMode||feedMode(v);
+ const style=options.style||p.style,basket=v.baskets.find(x=>x.id===options.basketId&&!x.archived)||selectedBasket(s,coffeeId),feed=options.feedMode||feedMode(v);
  const rec=baseline(c,style,basket.doseG,s.preferences);
  if(style==='Custom'&&p.custom){rec.ratio={low:p.custom.ratioLow,high:p.custom.ratioHigh,center:(p.custom.ratioLow+p.custom.ratioHigh)/2};rec.time={low:p.custom.timeLow,high:p.custom.timeHigh,center:(p.custom.timeLow+p.custom.timeHigh)/2};rec.reasons=[];}
  // Section 25.2 tier 5: personal success on similar coffees from THIS setup.
@@ -518,7 +531,7 @@ export function recommendation(s,coffeeId,options={}) {
  return rec;
 }
 export function prefill(s,coffeeId,options={}) {
- const v=activeVersion(s),p=coffeeState(s,coffeeId),basket=v.baskets.find(x=>x.id===options.basketId)||selectedBasket(s,coffeeId),style=options.style||p.style,feed=options.feedMode||feedMode(v);
+ const v=activeVersion(s),p=coffeeState(s,coffeeId),basket=v.baskets.find(x=>x.id===options.basketId&&!x.archived)||selectedBasket(s,coffeeId),style=options.style||p.style,feed=options.feedMode||feedMode(v);
  const shots=s.shots.filter(x=>!x.hidden&&x.coffeeId===coffeeId&&x.setupVersionId===v.id&&typeof x.timestamp==='string'&&x.timestamp.trim()&&Number.isFinite(Date.parse(x.timestamp))).sort((a,b)=>Date.parse(b.timestamp)-Date.parse(a.timestamp));
  // Imported archival measurements remain in History but cannot prefill an
  // impossible dose or an out-of-espresso-range grind into a new shot.
@@ -697,8 +710,22 @@ export function isExtreme(s,shot) {
 }
 export function saveShot(s,coffeeId,input,{allowLegacyCustom=false}={}) {
  const errors=validateShot(input,{allowLegacyCustom});if(errors.length)throw new Error(errors.join(' '));
- const c=s.coffees.find(x=>x.id===coffeeId),set=activeSetup(s),v=activeVersion(s),p=ensureCoffeeState(s,coffeeId);
+ const c=s.coffees.find(x=>x.id===coffeeId),set=activeSetup(s),v=activeVersion(s);
  if(!c||!v)throw new Error('Coffee or setup not found.');
+ // An idempotent offline replay retains the ORIGINAL saved basket reference,
+ // even if that basket was archived after the first successful save.
+ if(input.id){const existing=s.shots.find(x=>x.id===input.id);if(existing){
+  // Offline replay may return only the SAME coffee's immutable saved shot.
+  // A reused ID from a different coffee must not masquerade as this save.
+  if(existing.coffeeId!==coffeeId)throw new Error('This shot ID already belongs to a different coffee.');
+  return existing;
+ }}
+ // A stale/retired or unknown basket may be shown as a fallback in Log Shot,
+ // but saving must never attach that obsolete ID to a NEW measured shot.
+ // Reject before creating preference/audit state; never silently relabel it.
+ if(!v.baskets?.some(b=>b.id===input.basketId&&!b.archived))
+  throw new Error('Select an active basket before saving this shot.');
+ const p=ensureCoffeeState(s,coffeeId);
  const sh={id:input.id||newId('shot'),coffeeId,setupId:set.id,setupVersionId:v.id,calibrationId:v.calibrationId,basketId:input.basketId,style:input.style,timestamp:input.timestamp||now(),doseG:round(input.doseG),yieldG:round(input.yieldG),timeS:round(input.timeS),grindSetting:round(input.grindSetting),tempC:v.advanced.temperature?num(input.tempC):null,feedMode:input.feedMode,notes:String(input.notes||''),tasteScales:{...input.tasteScales},dialedIn:isDialed(input.tasteScales),snapshot:snapshot(s,coffeeId,input.basketId),hidden:false,usedRecommendation:input.usedRecommendation||{},revision:1};
  if(s.shots.some(x=>x.id===sh.id))return s.shots.find(x=>x.id===sh.id); // idempotent save
  sh.outlierReview=isExtreme(s,sh)?'pending':'not_needed';
@@ -724,7 +751,10 @@ export function editShot(s,id,input) {
  // A deliberate Make Current choice follows the SAME corrected successful shot,
  // rather than silently becoming an automatic preference for another family.
  // If that shot is no longer successful, release the invalid manual favorite.
- for(const set of s.setups)for(const w of Object.values(set.workspaces))for(const p of Object.values(w.coffees)){
+ // Editing a shot must not rewrite another coffee's independent Current/favorite,
+ // even when a restored workspace carries a stale cross-coffee family/shot ID.
+ for(const set of s.setups)for(const w of Object.values(set.workspaces))for(const [coffeeId,p] of Object.entries(w.coffees)){
+  if(coffeeId!==old.coffeeId)continue;
   for(const [style,fid] of Object.entries(p.currentFamilies)){
    if(fid!==previousFamily||style!==old.style)continue;
    if(p.favoriteShots?.[fid]===id){

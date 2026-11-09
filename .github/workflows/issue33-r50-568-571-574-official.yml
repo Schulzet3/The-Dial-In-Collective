@@ -1,0 +1,40 @@
+name: DIC Issue33 R50 selected original603 568 571 574 official source
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r50-568-571-574-official.yml
+      - scripts/audit/issue33-r50-568-571-574-afterproof.mjs
+      - scripts/audit/issue33-r50-visible-label-proof.mjs
+      - tests/coffee-issue33-r50-visible-label-proof.test.mjs
+permissions:
+  contents: read
+jobs:
+  selected-r50:
+    name: original603-568-571-574-selected-current
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Read-only guarded selected official HTTPS, actual parser and Add Coffee Source Review
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r50-source
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '568,571,574'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Verify exact selected product identity, fields, provenance and raw hashes
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r50-source
+        run: node scripts/audit/issue33-r50-568-571-574-afterproof.mjs
+      - name: Preserve one-day raw public source and strict verdict for independent review
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r50-568-571-574-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r50-source/
+          if-no-files-found: error
+          retention-days: 1

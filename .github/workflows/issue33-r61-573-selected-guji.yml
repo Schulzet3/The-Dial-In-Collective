@@ -1,0 +1,45 @@
+name: DIC Issue33 R61 original603 573 current selected Guji source
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r61-573-selected-guji.yml
+      - scripts/audit/issue33-r61-573-selected-guji-contract.mjs
+      - scripts/audit/issue33-r61-573-selected-guji-afterproof.mjs
+      - tests/coffee-issue33-r61-573-selected-guji.test.mjs
+      - src/server/coffee-page-metadata.mjs
+      - src/server/coffee-product-scope.mjs
+permissions:
+  contents: read
+jobs:
+  selected-r61:
+    name: original603-573-current-selected-guji
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Focused current-product and hostile identity tests
+        run: node --test tests/coffee-issue33-r61-573-selected-guji.test.mjs
+      - name: Bounded read-only current official HTTPS and actual preview
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r61-573
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '573'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict current selected source and Guji growing locality proof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r61-573
+        run: node scripts/audit/issue33-r61-573-selected-guji-afterproof.mjs
+      - name: Store one-day exact raw HTML and verdict
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r61-573-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r61-573/
+          if-no-files-found: error
+          retention-days: 1

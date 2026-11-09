@@ -156,10 +156,14 @@ export function snapshot(s,coffeeId,basketId) {
  return {setupId:set.id,setupName:set.name,versionId:v.id,machine:v.machine,grinder:v.grinder,burrs:v.burrs,grinderMin:v.grinderMin,grinderMax:v.grinderMax,calibrationId:v.calibrationId,basketId:b.id,basketName:b.name,basketDoseG:b.doseG,tempUnit:v.tempUnit};
 }
 export function hasLocalSuccess(s,coffeeId,style) {
- // A legacy local backup can carry an obsolete success flag while one of
- // its five original sensory ratings is missing or invalid. Trust neither
- // truthy archival flags nor fabricated green scores as personal evidence.
- const v=activeVersion(s);return !!v&&s.shots.some(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.dialedIn===true&&isDialed(sh.tasteScales));
+ // A historical success is usable for the Coffee overview only when its
+ // five original ratings AND actual measurements meet existing Log Shot bounds.
+ // Keep unloggable imported originals and their green History badge untouched.
+ const physical=sh=>['doseG','yieldG','timeS'].every(field=>{
+  const [lo,hi]=CONFIG.bounds[field],value=sh[field];
+  return typeof value==='number'&&Number.isFinite(value)&&value>=lo&&value<=hi;
+ });
+ const v=activeVersion(s);return !!v&&s.shots.some(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&physical(sh));
 }
 export function validateShot(d,{allowLegacyCustom=false}={}) {
  const errors=[];
@@ -167,7 +171,13 @@ export function validateShot(d,{allowLegacyCustom=false}={}) {
  // Reject excess before enqueue/save; never silently discard a member's text.
  if(Array.from(String(d.notes||'')).length>16000)errors.push('Notes must be 16,000 characters or fewer. Your text has not been saved or shortened.');
  for(const field of ['doseG','yieldG','timeS']){const n=num(d[field]),[lo,hi]=CONFIG.bounds[field];if(n==null||n<lo||n>hi)errors.push(`${{doseG:'Dose',yieldG:'Yield',timeS:'Time'}[field]} must be between ${lo} and ${hi}${field==='timeS'?' s':' g'}.`);}
- if(num(d.grindSetting)==null||num(d.grindSetting)<0)errors.push('Enter the actual grind setting (0 or higher).');
+ // A whitespace-only or non-scalar value is not an actual grinder zero.
+ // Preserve genuinely measured 0 and valid numeric strings without global parsing changes.
+ const grind=d.grindSetting;
+ if((typeof grind!=='number'&&typeof grind!=='string')||
+    (typeof grind==='string'&&!grind.trim())||
+    num(grind)==null||num(grind)<0)
+  errors.push('Enter the actual grind setting (0 or higher).');
  if(d.tempC!==''&&d.tempC!=null){const n=num(d.tempC);if(n==null||n<70||n>100)errors.push('Check temperature (70-100 degrees C).');}
  if(!d.tasteScales||!Object.entries({extraction:3,body:3,clarity:5,sweetness:5,astringency:1}).every(([k])=>Number.isInteger(d.tasteScales[k])&&d.tasteScales[k]>=1&&d.tasteScales[k]<=5))errors.push('Rate all five taste scales.');
  if(!STYLES.includes(d.style)&&!(allowLegacyCustom&&d.style==='Custom'))errors.push('Choose an available shot style.');

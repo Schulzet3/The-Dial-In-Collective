@@ -47,7 +47,7 @@ function collectiveCredit(raw){
  // A source credit ends before cultivation, location or purchasing prose.
  // Keep the literal group/name instead of adding its altitude or method.
  let value=raw.trim().replace(/^(?:the|an?)\s+/i,'')
-  .split(/,\s+(?!\d)|\s+(?:at\s+(?:altitudes?|elevations?)|rooted|located|using|through|throughout|within|near|on the slopes|in the|that|which|who|where)\b/i)[0];
+  .split(/,\s+(?!\d)|\s+(?:at\s+(?:altitudes?|elevations?)|rooted|located|nestled\s+(?:in|near|by)|using|through|throughout|within|near|on the slopes|in the|that|which|who|where)\b/i)[0];
  const unnamed=value.match(/^((?:(?:approximately|around|over|nearly)\s+)?(?:[\d,]+\s+)?(?:(?:small[ -]?holder|small|local|individual|independent|family[- ]owned|family)\s+){1,3}(?:farmers?|growers?|producers?|farms?|farm holders))\b/i);
  if(unnamed)value=unnamed[1];
  if(value.length<3||value.length>155||/\b(?:care|love|passion|dedication|commitment|hand|handpicked|traditional|methods?|process|grown|produced|cultivated|harvested|sourced|collected|comes|is|are|was|were|has|have)\b/i.test(value)||
@@ -192,6 +192,74 @@ function selectedStewardshipFarmCredits(paragraphs,name,fields){
  }
  return [...result];
 }
+// Credit an unnamed harvesting group only when its receiving station is
+// also named in this selected H1. Never infer from a regional story or old lot.
+function selectedHarvestSmallholderCredits(paragraphs,name,fields){
+ // A component's growers are not automatically producers of a whole blend.
+ if(/\b(?:blends?|blended|components?)\b/i.test(name+' '+paragraphs.join(' ')))return [];
+ const fold=value=>String(value||'').normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{M}\d]+/gu,' ').trim();
+ const selected=fold(name),credits=new Set();
+ const direct=/\b(?:the|this|our)\s+(?:meticulous\s+)?(?:process\s+of\s+)?harvesting\s+(?:involves|includes)\s+[^.!?]{0,160}\b(?:coffee\s+)?cherries\s+across\s+((?:approximately|around|over|nearly)\s+\d{1,5}\s+smallholder\s+farms)\.\s+These\s+cherries\s+(?:are|were)\s+then\s+delivered\s+to\s+(?:the\s+)?([A-Z][\p{L}\p{M}'’-]+(?:\s+[A-Z][\p{L}\p{M}'’-]+){0,4})\s+Station\b/iu;
+ for(const paragraph of paragraphs){
+  const match=paragraph.match(direct);
+  if(!match)continue;
+  // A prior/hypothetical introduction must not be lost by matching only
+  // the subsequent harvesting sentence within the same product paragraph.
+  const lead=paragraph.slice(Math.max(0,match.index-140),match.index);
+  if(/\b(?:previously|formerly|historically|hypothetically|hypothetical|imagine|suppose|prior|last year)\b/i.test(lead))continue;
+  const [harvest,delivery]=producerSentences(match[0]),station=fold(match[2]);
+  if(!station||!selected.includes(station)||!currentProducerSentence(harvest)||
+     !currentProducerSentence(delivery)||!producerCountriesAgree(match[0],name,fields))continue;
+  credits.add(match[1]);
+ }
+ return [...credits];
+}
+
+// Credit literal growers when a selected current lot and a delivery-credit
+// sentence independently identify the same receiving washing station.
+function selectedStationPremiumGrowerCredits(paragraphs,name,fields){
+ if(/\b(?:blends?|blended|components?)\b/i.test(name+' '+paragraphs.join(' ')))return [];
+ const fold=value=>String(value||'').normalize('NFKC').toLowerCase().replace(/[^\p{L}\p{M}\d]+/gu,' ').trim();
+ const lot=/\b(?:our|this|the)\s+(?:(?:latest|current|newest)\s+)?(?:(?:natural|washed|honey|anaerobic)\s+)?(?:coffee|lot|offering)\s+from\s+(?:the\s+)?(?:renowned\s+)?([A-Z][\p{L}\p{M}'’-]+(?:\s+[A-Z][\p{L}\p{M}'’-]+){0,4})\s+Washing Station\b/iu;
+ const selected=new Set();
+ for(const paragraph of paragraphs)for(const sentence of producerSentences(paragraph)){
+  const match=sentence.match(lot);
+  if(match&&currentProducerSentence(sentence)&&producerCountriesAgree(sentence,name,fields))
+   selected.add(fold(match[1]));
+ }
+ if(selected.size!==1)return [];
+ const station=[...selected][0],credits=new Set();
+ const premium=/\b(?:the\s+)?([A-Z][\p{L}\p{M}'’-]+(?:\s+[A-Z][\p{L}\p{M}'’-]+){0,4})\s+Washing Station\b[^.!?]{0,180}?\b(?:paying|pays?|offers?)\s+(?:\w+\s+){0,2}premiums?\s+to\s+((?:smallholder|local|independent)\s+farmers)\b[^.!?]{0,120}?\b(?:delivering|supplying|growing|harvesting)\b[^.!?]{0,90}?\b(?:coffee\s+)?cherries\b/iu;
+ for(const paragraph of paragraphs)for(const sentence of producerSentences(paragraph)){
+  const match=sentence.match(premium);
+  if(match&&fold(match[1])===station&&currentProducerSentence(sentence)&&
+     producerCountriesAgree(sentence,name,fields))credits.add(match[2]);
+ }
+ return [...credits];
+}
+
+// Credit the literal smallholder group only when this selected coffee's
+// traceable county-supply sentence directly precedes its co-op farmer credit.
+// Generic regional history, previous lots and blends are not producer facts.
+function selectedCooperativeSupplyCredits(paragraphs,name,fields){
+ if(/\b(?:blends?|blended|components?)\b/i.test(name+' '+paragraphs.join(' ')))return [];
+ const credits=new Set();
+ const selected=/\bThis coffee,\s*crafted from fully traceable sources of supply in [^.!?]{5,140}\bcounties\b[^.!?]{0,130}[.!?]/i;
+ const group=/\b(Smallholder farmers),\s+each with (?:around|about|approximately) \d{1,4} trees,\s+work together in co-ops\b/i;
+ for(const paragraph of paragraphs){
+  if(paragraph.length>1800)continue;
+  const match=paragraph.match(selected);if(!match)continue;
+  const before=paragraph.slice(Math.max(0,match.index-100),match.index);
+  if(/\b(?:previously|formerly|historically|hypothetically|prior|last year|other coffee)\b/i.test(before))continue;
+  const after=paragraph.slice(match.index+match[0].length,match.index+match[0].length+230);
+  if(/\b(?:other|another|different|previous|historical)\s+(?:coffee|lot)\b/i.test(after))continue;
+  const growers=after.match(group);
+  if(growers&&currentProducerSentence(match[0])&&currentProducerSentence(growers[0])&&
+     producerCountriesAgree(paragraph,name,fields))credits.add(growers[1]);
+ }
+ return [...credits];
+}
+
 function explicitAnonymousProducerCredits(paragraphs,name,fields){
  const result=new Set();
  for(const paragraph of paragraphs)for(const line of producerSentences(paragraph)){
@@ -216,6 +284,12 @@ function foundGrower(paragraphs,name='',relationshipGroups=[paragraphs],fields={
   for(const group of relationshipGroups)for(const credit of [...selectedStewardshipFarmCredits(group,name,fields),...explicitAnonymousProducerCredits(group,name,fields)])
    collectives.set(credit.normalize('NFKC').toLowerCase(),credit);
  }
+ for(const credit of selectedHarvestSmallholderCredits(paragraphs,name,fields))
+  collectives.set(credit.normalize('NFKC').toLowerCase(),credit);
+ for(const credit of selectedStationPremiumGrowerCredits(paragraphs,name,fields))
+  collectives.set(credit.normalize('NFKC').toLowerCase(),credit);
+ for(const credit of selectedCooperativeSupplyCredits(paragraphs,name,fields))
+  collectives.set(credit.normalize('NFKC').toLowerCase(),credit);
  for(const alias of cooperativeAliasCredits(paragraphs))collectives.set(alias.normalize('NFKC').toLowerCase(),alias);
  for(const paragraph of paragraphs){
   for(const list of explicitFarmList(paragraph))
@@ -321,7 +395,7 @@ function foundGrower(paragraphs,name='',relationshipGroups=[paragraphs],fields={
     const value=namedList[1].trim();found.set(value.normalize('NFKC').toLowerCase(),value);
    }
   }
-  for(const match of sentence.matchAll(/\b(?:grown(?:\s+and\s+(?:fully\s+)?processed)?|produced|cultivated|harvested|sourced|collected)\s+(?:(?:directly|exclusively)\s+)?(?:by|from|through|on|in)\s+(?:the\s+)?([^.!?;]{3,155}?)(?=\s+(?:who|which|that|where|at\s+(?:altitudes?|elevations?)|rooted|located|using|through|throughout|within|near|on|in the|and (?:is|was|has|have|the|a))\b|,\s+(?!\d)|[.!?;]|$)/gi)){
+  for(const match of sentence.matchAll(/\b(?:grown(?:\s+and\s+(?:fully\s+)?processed)?|produced|cultivated|harvested|sourced|collected)\s+(?:(?:directly|exclusively)\s+)?(?:by|from|through|on|in)\s+(?:the\s+)?([^.!?;]{3,155}?)(?=\s+(?:who|which|that|where|at\s+(?:altitudes?|elevations?)|rooted|located|nestled\s+(?:in|near|by)|using|through|throughout|within|near|on|in the|and (?:is|was|has|have|the|a))\b|,\s+(?!\d)|[.!?;]|$)/gi)){
    const candidate=collectiveCredit(match[1]);
    if(candidate)collectives.set(candidate.normalize('NFKC').toLowerCase(),candidate);
   }

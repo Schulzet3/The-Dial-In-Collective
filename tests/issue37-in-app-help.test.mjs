@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createHash} from 'node:crypto';
-import {walkthroughMarkup,gettingStartedMarkup,WALKTHROUGH_SHA256} from '../site/cloud/help.js';
+import {walkthroughMarkup,gettingStartedMarkup,firstSetupWelcomeMarkup,WALKTHROUGH_SHA256} from '../site/cloud/help.js';
 import {fileAllowlist} from '../scripts/audit/site-integrity.mjs';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const containsActiveHelpVideoFit=css=>/\.help-video-frame\s+video\s*\{[^}]*\bobject-fit\s*:\s*contain(?:\s*[;}])/.test(css.replace(/\/\*[\s\S]*?\*\//g,''));
@@ -10,7 +10,8 @@ test('first-use and Settings offer keyboard-operable help routes',()=>{
  const app=read('site/cloud/main.js');
  assert.match(app,/Help &amp; Getting Started/);
  for(const a of ['watch-walkthrough','getting-started-guide'])assert.ok(app.includes("if(a==='"+a+"')"),a);
- assert.match(app,/if\(!setup\)return[^\n]+Watch Walkthrough/);
+ assert.match(app,/if\(!setup\)return firstSetupWelcomeMarkup\(\)/);
+ assert.match(firstSetupWelcomeMarkup(),/data-action="getting-started-guide"/);
  const guide=gettingStartedMarkup();
  for(const x of ['Log A Shot','Save Shot &amp; Get Suggestion','Shot History','Astringency','support@dialincollective.com'])assert.ok(guide.includes(x),x);
  assert.doesNotMatch(guide,/<script|onclick=|onerror=/i);

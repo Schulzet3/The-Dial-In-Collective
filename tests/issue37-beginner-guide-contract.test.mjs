@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {STYLES, SCALES, tasteSeverity, tasteLabel, isDialed} from '../site/lib/constants.js';
+import {firstSetupWelcomeMarkup} from '../site/cloud/help.js';
 
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const guide=read('docs/guides/BEGINNER_QUICKSTART_DRAFT.md');
@@ -25,7 +26,8 @@ test('Readable guide has six separately headed, ordered source-backed first-shot
   'Save Shot & Get Suggestion','Next Shot Recommendation','Shot Feedback',
   'Shot History','Advanced Setup Options','Track Slow Feeding','Track Brew Temperature',
   'Save Advanced Options','Cloud Sync Details'];
- for(const label of labels){assert.ok(app.includes(label),'App lacks '+label);assert.ok(guide.includes(label),'Guide lacks '+label);}
+ const appSurface=app+firstSetupWelcomeMarkup();
+ for(const label of labels){assert.ok(appSurface.includes(label),'App lacks '+label);assert.ok(guide.includes(label),'Guide lacks '+label);}
  assert.ok(shotCard.includes('Make Current Recipe'));
  assert.ok(guide.includes('Make Current Recipe'));
  assert.match(ui,/How did it taste\?/);

@@ -1,0 +1,5209 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "117",
+  "project_ref": "azviqqejypsefzilgonr",
+  "provider_observed_at_utc": "2026-11-09 10:50:45.663091+00",
+  "scope": "DIRECT_REVIEW_ALL_VISIBLE_TEXT_SEARCH_CATALOG_DEFINITIONS_NOT_NATIVE_C_CODE",
+  "source_note": "Read-only pg_catalog metadata and complete current mapping rows; no member data, Auth identities, secrets, SQL statement bodies or log payloads read.",
+  "counts": {
+    "configurations": 29,
+    "mapping_rows": 551,
+    "dictionaries": 30,
+    "templates": 6,
+    "parsers": 1,
+    "parser_token_classes": 23
+  },
+  "cross_checks": {
+    "all_configurations_have_19_unique_mapped_classes": true,
+    "unmapped_token_ids": [
+      12,
+      13,
+      14,
+      23
+    ],
+    "all_mapping_sequences_one": true,
+    "all_references_resolved": true,
+    "duplicate_config_oids": 0,
+    "unbound_dictionary_or_template": 0
+  },
+  "configurations": [
+    {
+      "ordinal": 1,
+      "oid": 13210,
+      "schema_name": "pg_catalog",
+      "cfgname": "arabic",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for arabic language",
+      "mappings": [
+        {
+          "opt": "language = 'arabic'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.arabic_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'arabic'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.arabic_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'arabic'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.arabic_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'arabic'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.arabic_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'arabic'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.arabic_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'arabic'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.arabic_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "78384f6c5a9a1b0facc6ebbfe84c6d91",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 2,
+      "oid": 13212,
+      "schema_name": "pg_catalog",
+      "cfgname": "armenian",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for armenian language",
+      "mappings": [
+        {
+          "opt": "language = 'armenian'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.armenian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'armenian'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.armenian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'armenian'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.armenian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'armenian'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.armenian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'armenian'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.armenian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'armenian'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.armenian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "cd2e9628b1a96c709e35152811bb25ef",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 3,
+      "oid": 13214,
+      "schema_name": "pg_catalog",
+      "cfgname": "basque",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for basque language",
+      "mappings": [
+        {
+          "opt": "language = 'basque'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.basque_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'basque'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.basque_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'basque'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.basque_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'basque'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.basque_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'basque'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.basque_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'basque'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.basque_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "bda29f493a5c5c0d0d8c2e014531ac19",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 4,
+      "oid": 13216,
+      "schema_name": "pg_catalog",
+      "cfgname": "catalan",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for catalan language",
+      "mappings": [
+        {
+          "opt": "language = 'catalan'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.catalan_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'catalan'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.catalan_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'catalan'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.catalan_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'catalan'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.catalan_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'catalan'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.catalan_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'catalan'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.catalan_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "6363d47d2c1824202d203691cc346c34",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 5,
+      "oid": 13218,
+      "schema_name": "pg_catalog",
+      "cfgname": "danish",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for danish language",
+      "mappings": [
+        {
+          "opt": "language = 'danish', stopwords = 'danish'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.danish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'danish', stopwords = 'danish'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.danish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'danish', stopwords = 'danish'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.danish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'danish', stopwords = 'danish'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.danish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'danish', stopwords = 'danish'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.danish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'danish', stopwords = 'danish'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.danish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "e04802cac849506096f1566f883aff49",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 6,
+      "oid": 13220,
+      "schema_name": "pg_catalog",
+      "cfgname": "dutch",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for dutch language",
+      "mappings": [
+        {
+          "opt": "language = 'dutch', stopwords = 'dutch'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.dutch_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'dutch', stopwords = 'dutch'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.dutch_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'dutch', stopwords = 'dutch'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.dutch_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'dutch', stopwords = 'dutch'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.dutch_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'dutch', stopwords = 'dutch'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.dutch_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'dutch', stopwords = 'dutch'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.dutch_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "d0193372a6352590226a47811ac5367a",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 7,
+      "oid": 13222,
+      "schema_name": "pg_catalog",
+      "cfgname": "english",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for english language",
+      "mappings": [
+        {
+          "opt": "language = 'english', stopwords = 'english'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.english_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'english', stopwords = 'english'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.english_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'english', stopwords = 'english'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.english_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'english', stopwords = 'english'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.english_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'english', stopwords = 'english'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.english_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'english', stopwords = 'english'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.english_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "10a698f5cf4089db51a0a3b2a7bb25e5",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 8,
+      "oid": 13224,
+      "schema_name": "pg_catalog",
+      "cfgname": "finnish",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for finnish language",
+      "mappings": [
+        {
+          "opt": "language = 'finnish', stopwords = 'finnish'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.finnish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'finnish', stopwords = 'finnish'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.finnish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'finnish', stopwords = 'finnish'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.finnish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'finnish', stopwords = 'finnish'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.finnish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'finnish', stopwords = 'finnish'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.finnish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'finnish', stopwords = 'finnish'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.finnish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "36fdc4c31a0128c98646c42e1186dff6",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 9,
+      "oid": 13226,
+      "schema_name": "pg_catalog",
+      "cfgname": "french",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for french language",
+      "mappings": [
+        {
+          "opt": "language = 'french', stopwords = 'french'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.french_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'french', stopwords = 'french'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.french_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'french', stopwords = 'french'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.french_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'french', stopwords = 'french'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.french_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'french', stopwords = 'french'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.french_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'french', stopwords = 'french'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.french_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "3537c4ca887befc8cf07fb0ed88a8287",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 10,
+      "oid": 13228,
+      "schema_name": "pg_catalog",
+      "cfgname": "german",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for german language",
+      "mappings": [
+        {
+          "opt": "language = 'german', stopwords = 'german'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.german_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'german', stopwords = 'german'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.german_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'german', stopwords = 'german'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.german_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'german', stopwords = 'german'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.german_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'german', stopwords = 'german'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.german_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'german', stopwords = 'german'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.german_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "f49da84605e3952117821f4fd40a87b7",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 11,
+      "oid": 13230,
+      "schema_name": "pg_catalog",
+      "cfgname": "greek",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for greek language",
+      "mappings": [
+        {
+          "opt": "language = 'greek'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.greek_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'greek'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.greek_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'greek'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.greek_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'greek'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.greek_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'greek'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.greek_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'greek'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.greek_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "fef4708426c32b253f8e256f269865d6",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 12,
+      "oid": 13232,
+      "schema_name": "pg_catalog",
+      "cfgname": "hindi",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for hindi language",
+      "mappings": [
+        {
+          "opt": "language = 'english', stopwords = 'english'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.english_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'hindi'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.hindi_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'hindi'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.hindi_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'english', stopwords = 'english'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.english_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'english', stopwords = 'english'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.english_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'hindi'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.hindi_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "1df19f8860f019b69cc0a4b28dfa25fc",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "Language-specific letter tokens map to local stemmer while ASCII tokens map to English; default parser mixed-language routing. This is not a verified defect.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 13,
+      "oid": 13234,
+      "schema_name": "pg_catalog",
+      "cfgname": "hungarian",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for hungarian language",
+      "mappings": [
+        {
+          "opt": "language = 'hungarian', stopwords = 'hungarian'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.hungarian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'hungarian', stopwords = 'hungarian'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.hungarian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'hungarian', stopwords = 'hungarian'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.hungarian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'hungarian', stopwords = 'hungarian'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.hungarian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'hungarian', stopwords = 'hungarian'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.hungarian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'hungarian', stopwords = 'hungarian'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.hungarian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "dbfe8ff5356bc53bf4019ebf828db313",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 14,
+      "oid": 13236,
+      "schema_name": "pg_catalog",
+      "cfgname": "indonesian",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for indonesian language",
+      "mappings": [
+        {
+          "opt": "language = 'indonesian'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.indonesian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'indonesian'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.indonesian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'indonesian'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.indonesian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'indonesian'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.indonesian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'indonesian'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.indonesian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'indonesian'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.indonesian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "1506d4e6446a633455c97273f6767011",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 15,
+      "oid": 13238,
+      "schema_name": "pg_catalog",
+      "cfgname": "irish",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for irish language",
+      "mappings": [
+        {
+          "opt": "language = 'irish'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.irish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'irish'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.irish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'irish'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.irish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'irish'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.irish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'irish'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.irish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'irish'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.irish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "54ea54c31c8748a78a1be15a3c3ea9b7",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 16,
+      "oid": 13240,
+      "schema_name": "pg_catalog",
+      "cfgname": "italian",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for italian language",
+      "mappings": [
+        {
+          "opt": "language = 'italian', stopwords = 'italian'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.italian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'italian', stopwords = 'italian'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.italian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'italian', stopwords = 'italian'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.italian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'italian', stopwords = 'italian'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.italian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'italian', stopwords = 'italian'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.italian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'italian', stopwords = 'italian'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.italian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "79d52b36af02ec6f1951b784af560f08",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 17,
+      "oid": 13242,
+      "schema_name": "pg_catalog",
+      "cfgname": "lithuanian",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for lithuanian language",
+      "mappings": [
+        {
+          "opt": "language = 'lithuanian'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.lithuanian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'lithuanian'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.lithuanian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'lithuanian'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.lithuanian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'lithuanian'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.lithuanian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'lithuanian'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.lithuanian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'lithuanian'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.lithuanian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "05018b5acc6d7866e56f0e9eac92fc80",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 18,
+      "oid": 13244,
+      "schema_name": "pg_catalog",
+      "cfgname": "nepali",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for nepali language",
+      "mappings": [
+        {
+          "opt": "language = 'nepali', stopwords = 'nepali'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.nepali_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'nepali', stopwords = 'nepali'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.nepali_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'nepali', stopwords = 'nepali'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.nepali_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'nepali', stopwords = 'nepali'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.nepali_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'nepali', stopwords = 'nepali'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.nepali_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'nepali', stopwords = 'nepali'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.nepali_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "e06f8cfa7c6339acda6306051d4ccf30",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 19,
+      "oid": 13246,
+      "schema_name": "pg_catalog",
+      "cfgname": "norwegian",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for norwegian language",
+      "mappings": [
+        {
+          "opt": "language = 'norwegian', stopwords = 'norwegian'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.norwegian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'norwegian', stopwords = 'norwegian'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.norwegian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'norwegian', stopwords = 'norwegian'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.norwegian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'norwegian', stopwords = 'norwegian'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.norwegian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'norwegian', stopwords = 'norwegian'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.norwegian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'norwegian', stopwords = 'norwegian'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.norwegian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "c300f3456d0689439cd0c8a81188fbd2",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 20,
+      "oid": 13248,
+      "schema_name": "pg_catalog",
+      "cfgname": "portuguese",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for portuguese language",
+      "mappings": [
+        {
+          "opt": "language = 'portuguese', stopwords = 'portuguese'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.portuguese_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'portuguese', stopwords = 'portuguese'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.portuguese_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'portuguese', stopwords = 'portuguese'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.portuguese_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'portuguese', stopwords = 'portuguese'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.portuguese_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'portuguese', stopwords = 'portuguese'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.portuguese_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'portuguese', stopwords = 'portuguese'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.portuguese_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "5e1c691331ae85f6cf491e62533fa286",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 21,
+      "oid": 13250,
+      "schema_name": "pg_catalog",
+      "cfgname": "romanian",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for romanian language",
+      "mappings": [
+        {
+          "opt": "language = 'romanian'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.romanian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'romanian'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.romanian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'romanian'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.romanian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'romanian'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.romanian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'romanian'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.romanian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'romanian'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.romanian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "f9e68e256c9928f105999a043a963045",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 22,
+      "oid": 13252,
+      "schema_name": "pg_catalog",
+      "cfgname": "russian",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for russian language",
+      "mappings": [
+        {
+          "opt": "language = 'english', stopwords = 'english'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.english_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'russian', stopwords = 'russian'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.russian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'russian', stopwords = 'russian'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.russian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'english', stopwords = 'english'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.english_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'english', stopwords = 'english'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.english_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'russian', stopwords = 'russian'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.russian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "e381fc00a455c68a16dd95ddd1c7a0ee",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "Language-specific letter tokens map to local stemmer while ASCII tokens map to English; default parser mixed-language routing. This is not a verified defect.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 23,
+      "oid": 13254,
+      "schema_name": "pg_catalog",
+      "cfgname": "serbian",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for serbian language",
+      "mappings": [
+        {
+          "opt": "language = 'serbian'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.serbian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'serbian'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.serbian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'serbian'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.serbian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'serbian'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.serbian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'serbian'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.serbian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'serbian'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.serbian_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "ca9989ba04104a50c29a7b8623cc1444",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 24,
+      "oid": 3748,
+      "schema_name": "pg_catalog",
+      "cfgname": "simple",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "simple configuration",
+      "mappings": [
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "1ca7ae49d652903e021fc5fde04c65ce",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 25,
+      "oid": 13256,
+      "schema_name": "pg_catalog",
+      "cfgname": "spanish",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for spanish language",
+      "mappings": [
+        {
+          "opt": "language = 'spanish', stopwords = 'spanish'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.spanish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'spanish', stopwords = 'spanish'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.spanish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'spanish', stopwords = 'spanish'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.spanish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'spanish', stopwords = 'spanish'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.spanish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'spanish', stopwords = 'spanish'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.spanish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'spanish', stopwords = 'spanish'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.spanish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "833f9c959c222bf4c399b52a26c180a5",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 26,
+      "oid": 13258,
+      "schema_name": "pg_catalog",
+      "cfgname": "swedish",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for swedish language",
+      "mappings": [
+        {
+          "opt": "language = 'swedish', stopwords = 'swedish'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.swedish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'swedish', stopwords = 'swedish'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.swedish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'swedish', stopwords = 'swedish'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.swedish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'swedish', stopwords = 'swedish'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.swedish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'swedish', stopwords = 'swedish'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.swedish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'swedish', stopwords = 'swedish'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.swedish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "2be3a32c0e1f8e0d73e5f74bec7b5ef3",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 27,
+      "oid": 13260,
+      "schema_name": "pg_catalog",
+      "cfgname": "tamil",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for tamil language",
+      "mappings": [
+        {
+          "opt": "language = 'tamil'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.tamil_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'tamil'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.tamil_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'tamil'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.tamil_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'tamil'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.tamil_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'tamil'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.tamil_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'tamil'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.tamil_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "1808d08bb0d2fe517d79fede807c863b",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 28,
+      "oid": 13262,
+      "schema_name": "pg_catalog",
+      "cfgname": "turkish",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for turkish language",
+      "mappings": [
+        {
+          "opt": "language = 'turkish', stopwords = 'turkish'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.turkish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'turkish', stopwords = 'turkish'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.turkish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'turkish', stopwords = 'turkish'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.turkish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'turkish', stopwords = 'turkish'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.turkish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'turkish', stopwords = 'turkish'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.turkish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'turkish', stopwords = 'turkish'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.turkish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "55c601eedfc0f63e128e64f437c6c740",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    },
+    {
+      "ordinal": 29,
+      "oid": 13264,
+      "schema_name": "pg_catalog",
+      "cfgname": "yiddish",
+      "parser_schema": "pg_catalog",
+      "prsname": "default",
+      "description": "configuration for yiddish language",
+      "mappings": [
+        {
+          "opt": "language = 'yiddish'",
+          "seq": 1,
+          "tok": 1,
+          "dict": "pg_catalog.yiddish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'yiddish'",
+          "seq": 1,
+          "tok": 2,
+          "dict": "pg_catalog.yiddish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 3,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 4,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 5,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 6,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 7,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 8,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 9,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'yiddish'",
+          "seq": 1,
+          "tok": 10,
+          "dict": "pg_catalog.yiddish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'yiddish'",
+          "seq": 1,
+          "tok": 11,
+          "dict": "pg_catalog.yiddish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 15,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": "language = 'yiddish'",
+          "seq": 1,
+          "tok": 16,
+          "dict": "pg_catalog.yiddish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": "language = 'yiddish'",
+          "seq": 1,
+          "tok": 17,
+          "dict": "pg_catalog.yiddish_stem",
+          "template": "pg_catalog.snowball"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 18,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 19,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 20,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 21,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        },
+        {
+          "opt": null,
+          "seq": 1,
+          "tok": 22,
+          "dict": "pg_catalog.simple",
+          "template": "pg_catalog.simple"
+        }
+      ],
+      "definition_md5": "de07f1ed89774ad1bf30668d3cb3bfe1",
+      "semantic_review": {
+        "disposition": "VISIBLE_MAPPING_SEMANTICS_REVIEWED_STANDARD_POSTGRES_CONFIGURATION",
+        "notes": "19 mapped token types, standard parser; word tokens stemmed except simple configuration; punctuation/blank/protocol/tag/entity classes intentionally unmapped.",
+        "compiled_parser_implementation": "UNVERIFIED"
+      }
+    }
+  ],
+  "dictionaries": [
+    {
+      "ordinal": 1,
+      "oid": 19150,
+      "schema_name": "extensions",
+      "dictname": "unaccent",
+      "dictinitoption": "rules = 'unaccent'",
+      "description": null,
+      "template_schema": "extensions",
+      "tmplname": "unaccent",
+      "init_handler": "unaccent_init(internal)",
+      "lexize_handler": "unaccent_lexize(internal,internal,internal,internal)",
+      "mapping_references": 0,
+      "definition_md5": "f25316129e334ea10d036a1fe1930e3a",
+      "semantic_review": {
+        "disposition": "EXTENSION_DICTIONARY_DECLARATION_REVIEWED_NOT_DELETION_CANDIDATE",
+        "notes": "Unaccent dictionary has zero pg_ts_config_map references, but direct unaccent() invocation or extension dependencies are not excluded; absence of mapping is not proof of disuse.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 2,
+      "oid": 13209,
+      "schema_name": "pg_catalog",
+      "dictname": "arabic_stem",
+      "dictinitoption": "language = 'arabic'",
+      "description": "snowball stemmer for arabic language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "165144bed9698a9f01a241858711c17a",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 3,
+      "oid": 13211,
+      "schema_name": "pg_catalog",
+      "dictname": "armenian_stem",
+      "dictinitoption": "language = 'armenian'",
+      "description": "snowball stemmer for armenian language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "495e3e3b545ca248b8c9615f99603ffa",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 4,
+      "oid": 13213,
+      "schema_name": "pg_catalog",
+      "dictname": "basque_stem",
+      "dictinitoption": "language = 'basque'",
+      "description": "snowball stemmer for basque language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "f374c16903d47bc6f506a96c67e39f51",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 5,
+      "oid": 13215,
+      "schema_name": "pg_catalog",
+      "dictname": "catalan_stem",
+      "dictinitoption": "language = 'catalan'",
+      "description": "snowball stemmer for catalan language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "c5c74f8bdfac62d8c866983f5ae36155",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 6,
+      "oid": 13217,
+      "schema_name": "pg_catalog",
+      "dictname": "danish_stem",
+      "dictinitoption": "language = 'danish', stopwords = 'danish'",
+      "description": "snowball stemmer for danish language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "1806caa8cb5215faea7c55f278dfe09a",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 7,
+      "oid": 13219,
+      "schema_name": "pg_catalog",
+      "dictname": "dutch_stem",
+      "dictinitoption": "language = 'dutch', stopwords = 'dutch'",
+      "description": "snowball stemmer for dutch language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "97fa06203d3088a24b4e3d18c06dda65",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 8,
+      "oid": 13221,
+      "schema_name": "pg_catalog",
+      "dictname": "english_stem",
+      "dictinitoption": "language = 'english', stopwords = 'english'",
+      "description": "snowball stemmer for english language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 12,
+      "definition_md5": "cd86ec4a0d4125b295d68e3eb3529c1e",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 9,
+      "oid": 13223,
+      "schema_name": "pg_catalog",
+      "dictname": "finnish_stem",
+      "dictinitoption": "language = 'finnish', stopwords = 'finnish'",
+      "description": "snowball stemmer for finnish language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "f7a4e070b23e7e4f7ff9aee3265cd316",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 10,
+      "oid": 13225,
+      "schema_name": "pg_catalog",
+      "dictname": "french_stem",
+      "dictinitoption": "language = 'french', stopwords = 'french'",
+      "description": "snowball stemmer for french language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "9dc4f0edcf6444dd8e50ed04d05b326b",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 11,
+      "oid": 13227,
+      "schema_name": "pg_catalog",
+      "dictname": "german_stem",
+      "dictinitoption": "language = 'german', stopwords = 'german'",
+      "description": "snowball stemmer for german language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "12bd056ebd2e1157e2cd38ad031646c8",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 12,
+      "oid": 13229,
+      "schema_name": "pg_catalog",
+      "dictname": "greek_stem",
+      "dictinitoption": "language = 'greek'",
+      "description": "snowball stemmer for greek language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "fdd9aabb77c3a409c580eb056699347d",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 13,
+      "oid": 13231,
+      "schema_name": "pg_catalog",
+      "dictname": "hindi_stem",
+      "dictinitoption": "language = 'hindi'",
+      "description": "snowball stemmer for hindi language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 3,
+      "definition_md5": "c5a484b49c3ed54fdaee03d884a8253a",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 14,
+      "oid": 13233,
+      "schema_name": "pg_catalog",
+      "dictname": "hungarian_stem",
+      "dictinitoption": "language = 'hungarian', stopwords = 'hungarian'",
+      "description": "snowball stemmer for hungarian language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "1219b989e470c6273ed5bf20a38f761c",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 15,
+      "oid": 13235,
+      "schema_name": "pg_catalog",
+      "dictname": "indonesian_stem",
+      "dictinitoption": "language = 'indonesian'",
+      "description": "snowball stemmer for indonesian language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "d471f90a8b990e9f8b25851308503673",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 16,
+      "oid": 13237,
+      "schema_name": "pg_catalog",
+      "dictname": "irish_stem",
+      "dictinitoption": "language = 'irish'",
+      "description": "snowball stemmer for irish language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "7d979d4f67c978c8c9d1963de1c1e872",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 17,
+      "oid": 13239,
+      "schema_name": "pg_catalog",
+      "dictname": "italian_stem",
+      "dictinitoption": "language = 'italian', stopwords = 'italian'",
+      "description": "snowball stemmer for italian language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "6d60833e1cbc1065d74e74975a14a236",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 18,
+      "oid": 13241,
+      "schema_name": "pg_catalog",
+      "dictname": "lithuanian_stem",
+      "dictinitoption": "language = 'lithuanian'",
+      "description": "snowball stemmer for lithuanian language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "e78389dab4a69941f6e4140e010ff767",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 19,
+      "oid": 13243,
+      "schema_name": "pg_catalog",
+      "dictname": "nepali_stem",
+      "dictinitoption": "language = 'nepali', stopwords = 'nepali'",
+      "description": "snowball stemmer for nepali language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "5344ccabc66803ac289961a5510851de",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 20,
+      "oid": 13245,
+      "schema_name": "pg_catalog",
+      "dictname": "norwegian_stem",
+      "dictinitoption": "language = 'norwegian', stopwords = 'norwegian'",
+      "description": "snowball stemmer for norwegian language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "baa43f5124467251a0eeda784f20759f",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 21,
+      "oid": 13247,
+      "schema_name": "pg_catalog",
+      "dictname": "portuguese_stem",
+      "dictinitoption": "language = 'portuguese', stopwords = 'portuguese'",
+      "description": "snowball stemmer for portuguese language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "cd297b0abaf222661508b23b40ca3b93",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 22,
+      "oid": 13249,
+      "schema_name": "pg_catalog",
+      "dictname": "romanian_stem",
+      "dictinitoption": "language = 'romanian'",
+      "description": "snowball stemmer for romanian language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "4b74ea0214bb8ce5070e18d071cb54a6",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 23,
+      "oid": 13251,
+      "schema_name": "pg_catalog",
+      "dictname": "russian_stem",
+      "dictinitoption": "language = 'russian', stopwords = 'russian'",
+      "description": "snowball stemmer for russian language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 3,
+      "definition_md5": "030030b5076a8ea47f28f34d61ff56a3",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 24,
+      "oid": 13253,
+      "schema_name": "pg_catalog",
+      "dictname": "serbian_stem",
+      "dictinitoption": "language = 'serbian'",
+      "description": "snowball stemmer for serbian language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "9743bdf3a297c58ee9e09e5c77ddb721",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 25,
+      "oid": 3765,
+      "schema_name": "pg_catalog",
+      "dictname": "simple",
+      "dictinitoption": null,
+      "description": "simple dictionary: just lower case and check for stopword",
+      "template_schema": "pg_catalog",
+      "tmplname": "simple",
+      "init_handler": "dsimple_init(internal)",
+      "lexize_handler": "dsimple_lexize(internal,internal,internal,internal)",
+      "mapping_references": 383,
+      "definition_md5": "892bcb4c87612204178803c48e6fe0f2",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Lowercase and optional stopword filtering; standard numeric/identifier token fallback.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 26,
+      "oid": 13255,
+      "schema_name": "pg_catalog",
+      "dictname": "spanish_stem",
+      "dictinitoption": "language = 'spanish', stopwords = 'spanish'",
+      "description": "snowball stemmer for spanish language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "b634a8421531abc2290f8df15cb1b84c",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 27,
+      "oid": 13257,
+      "schema_name": "pg_catalog",
+      "dictname": "swedish_stem",
+      "dictinitoption": "language = 'swedish', stopwords = 'swedish'",
+      "description": "snowball stemmer for swedish language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "d7e484a9454400777f291643ae4cfcf2",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 28,
+      "oid": 13259,
+      "schema_name": "pg_catalog",
+      "dictname": "tamil_stem",
+      "dictinitoption": "language = 'tamil'",
+      "description": "snowball stemmer for tamil language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "789f557f992188b69f86c9050a9eecd1",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 29,
+      "oid": 13261,
+      "schema_name": "pg_catalog",
+      "dictname": "turkish_stem",
+      "dictinitoption": "language = 'turkish', stopwords = 'turkish'",
+      "description": "snowball stemmer for turkish language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "2eaff0beecf10f004f2a088809009035",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 30,
+      "oid": 13263,
+      "schema_name": "pg_catalog",
+      "dictname": "yiddish_stem",
+      "dictinitoption": "language = 'yiddish'",
+      "description": "snowball stemmer for yiddish language",
+      "template_schema": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "mapping_references": 6,
+      "definition_md5": "58e3ac53f30e05bd5fd79957a1453d74",
+      "semantic_review": {
+        "disposition": "POSTGRES_NATIVE_DICTIONARY_DECLARATION_REVIEWED",
+        "notes": "Native Snowball language and optional stopword options reviewed; mappings align with configurations.",
+        "native_lexize_code": "NOT_ACCESSIBLE"
+      }
+    }
+  ],
+  "templates": [
+    {
+      "ordinal": 1,
+      "oid": 19149,
+      "schema_name": "extensions",
+      "tmplname": "unaccent",
+      "init_handler": "unaccent_init(internal)",
+      "lexize_handler": "unaccent_lexize(internal,internal,internal,internal)",
+      "description": null,
+      "dictionary_references": 1,
+      "definition_md5": "1d36425abcb05134a973dab9c50f6f8a",
+      "semantic_review": {
+        "disposition": "VISIBLE_TEMPLATE_HANDLER_BINDINGS_REVIEWED",
+        "notes": "Native template and lexizer bound to existing dictionaries.",
+        "native_function_body": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 2,
+      "oid": 3733,
+      "schema_name": "pg_catalog",
+      "tmplname": "ispell",
+      "init_handler": "dispell_init(internal)",
+      "lexize_handler": "dispell_lexize(internal,internal,internal,internal)",
+      "description": "ispell dictionary",
+      "dictionary_references": 0,
+      "definition_md5": "491a2f812374ee56724eae17d0ce88fb",
+      "semantic_review": {
+        "disposition": "VISIBLE_TEMPLATE_HANDLER_BINDINGS_REVIEWED",
+        "notes": "Built-in template has no currently instantiated dictionary; not evidence of safe removal.",
+        "native_function_body": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 3,
+      "oid": 3727,
+      "schema_name": "pg_catalog",
+      "tmplname": "simple",
+      "init_handler": "dsimple_init(internal)",
+      "lexize_handler": "dsimple_lexize(internal,internal,internal,internal)",
+      "description": "simple dictionary: just lower case and check for stopword",
+      "dictionary_references": 1,
+      "definition_md5": "b128f359af8cdb99f919c0ebe211d4e5",
+      "semantic_review": {
+        "disposition": "VISIBLE_TEMPLATE_HANDLER_BINDINGS_REVIEWED",
+        "notes": "Native template and lexizer bound to existing dictionaries.",
+        "native_function_body": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 4,
+      "oid": 13208,
+      "schema_name": "pg_catalog",
+      "tmplname": "snowball",
+      "init_handler": "dsnowball_init(internal)",
+      "lexize_handler": "dsnowball_lexize(internal,internal,internal,internal)",
+      "description": "snowball stemmer",
+      "dictionary_references": 28,
+      "definition_md5": "258cf6db0c92fe176121486537da838b",
+      "semantic_review": {
+        "disposition": "VISIBLE_TEMPLATE_HANDLER_BINDINGS_REVIEWED",
+        "notes": "Native template and lexizer bound to existing dictionaries.",
+        "native_function_body": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 5,
+      "oid": 3730,
+      "schema_name": "pg_catalog",
+      "tmplname": "synonym",
+      "init_handler": "dsynonym_init(internal)",
+      "lexize_handler": "dsynonym_lexize(internal,internal,internal,internal)",
+      "description": "synonym dictionary: replace word by its synonym",
+      "dictionary_references": 0,
+      "definition_md5": "6483e772e8cbe9ff85edbf65f1dff660",
+      "semantic_review": {
+        "disposition": "VISIBLE_TEMPLATE_HANDLER_BINDINGS_REVIEWED",
+        "notes": "Built-in template has no currently instantiated dictionary; not evidence of safe removal.",
+        "native_function_body": "NOT_ACCESSIBLE"
+      }
+    },
+    {
+      "ordinal": 6,
+      "oid": 3742,
+      "schema_name": "pg_catalog",
+      "tmplname": "thesaurus",
+      "init_handler": "thesaurus_init(internal)",
+      "lexize_handler": "thesaurus_lexize(internal,internal,internal,internal)",
+      "description": "thesaurus dictionary: phrase by phrase substitution",
+      "dictionary_references": 0,
+      "definition_md5": "452f523a77f3661de070cf4d83ca1070",
+      "semantic_review": {
+        "disposition": "VISIBLE_TEMPLATE_HANDLER_BINDINGS_REVIEWED",
+        "notes": "Built-in template has no currently instantiated dictionary; not evidence of safe removal.",
+        "native_function_body": "NOT_ACCESSIBLE"
+      }
+    }
+  ],
+  "parsers": [
+    {
+      "ordinal": 1,
+      "oid": 3722,
+      "schema_name": "pg_catalog",
+      "prsname": "default",
+      "start_handler": "prsd_start(internal,integer)",
+      "token_handler": "prsd_nexttoken(internal,internal,internal)",
+      "end_handler": "prsd_end(internal)",
+      "headline_handler": "prsd_headline(internal,internal,tsquery)",
+      "lextype_handler": "prsd_lextype(internal)",
+      "description": "default word parser",
+      "config_references": 29,
+      "definition_md5": "a75689d115e42139c8b6204b3eb29bdb",
+      "semantic_review": {
+        "disposition": "VISIBLE_PARSER_HANDLER_BINDINGS_REVIEWED",
+        "notes": "Native default parser has 23 token classes, 29 bound configurations; current full C/native implementation is not accessible.",
+        "native_function_body": "NOT_ACCESSIBLE"
+      }
+    }
+  ],
+  "parser_token_types": [
+    {
+      "tokid": 1,
+      "alias": "asciiword",
+      "description": "Word, all ASCII"
+    },
+    {
+      "tokid": 2,
+      "alias": "word",
+      "description": "Word, all letters"
+    },
+    {
+      "tokid": 3,
+      "alias": "numword",
+      "description": "Word, letters and digits"
+    },
+    {
+      "tokid": 4,
+      "alias": "email",
+      "description": "Email address"
+    },
+    {
+      "tokid": 5,
+      "alias": "url",
+      "description": "URL"
+    },
+    {
+      "tokid": 6,
+      "alias": "host",
+      "description": "Host"
+    },
+    {
+      "tokid": 7,
+      "alias": "sfloat",
+      "description": "Scientific notation"
+    },
+    {
+      "tokid": 8,
+      "alias": "version",
+      "description": "Version number"
+    },
+    {
+      "tokid": 9,
+      "alias": "hword_numpart",
+      "description": "Hyphenated word part, letters and digits"
+    },
+    {
+      "tokid": 10,
+      "alias": "hword_part",
+      "description": "Hyphenated word part, all letters"
+    },
+    {
+      "tokid": 11,
+      "alias": "hword_asciipart",
+      "description": "Hyphenated word part, all ASCII"
+    },
+    {
+      "tokid": 12,
+      "alias": "blank",
+      "description": "Space symbols"
+    },
+    {
+      "tokid": 13,
+      "alias": "tag",
+      "description": "XML tag"
+    },
+    {
+      "tokid": 14,
+      "alias": "protocol",
+      "description": "Protocol head"
+    },
+    {
+      "tokid": 15,
+      "alias": "numhword",
+      "description": "Hyphenated word, letters and digits"
+    },
+    {
+      "tokid": 16,
+      "alias": "asciihword",
+      "description": "Hyphenated word, all ASCII"
+    },
+    {
+      "tokid": 17,
+      "alias": "hword",
+      "description": "Hyphenated word, all letters"
+    },
+    {
+      "tokid": 18,
+      "alias": "url_path",
+      "description": "URL path"
+    },
+    {
+      "tokid": 19,
+      "alias": "file",
+      "description": "File or path name"
+    },
+    {
+      "tokid": 20,
+      "alias": "float",
+      "description": "Decimal notation"
+    },
+    {
+      "tokid": 21,
+      "alias": "int",
+      "description": "Signed integer"
+    },
+    {
+      "tokid": 22,
+      "alias": "uint",
+      "description": "Unsigned integer"
+    },
+    {
+      "tokid": 23,
+      "alias": "entity",
+      "description": "XML entity"
+    }
+  ],
+  "findings": [
+    {
+      "topic": "extensions.unaccent",
+      "verdict": "ZERO_CONFIGURATION_MAPPING_REFERENCES_NOT_EVIDENCE_OF_UNUSED_EXTENSION_OR_SAFE_DELETION"
+    },
+    {
+      "topic": "pg_catalog.hindi / pg_catalog.russian",
+      "verdict": "MIXED_LANGUAGE_ASCII_VS_NONASCII_STEMMING_IS_NATIVE_PARSER_CONFIGURATION_NOT_A_CONFIRMED_DEFECT"
+    },
+    {
+      "topic": "compiled native implementations",
+      "verdict": "UNVERIFIED_SOURCE_NOT_EXPOSED_BY_PG_CATALOG"
+    }
+  ],
+  "confirmed_new_defects": 0,
+  "source_fixes": 0,
+  "production_writes": false,
+  "word_level_baseline_complete": false,
+  "next": "Distinct provider catalog definition family (pg_operator/pg_opclass etc) or changed-object drift, after fresh inventory; native implementations, SQL query text/plans, hosted Auth/JWT/API settings remain UNVERIFIED."
+}

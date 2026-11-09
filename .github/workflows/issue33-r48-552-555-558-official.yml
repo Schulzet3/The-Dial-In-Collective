@@ -1,0 +1,40 @@
+name: DIC Issue33 R48 current selected #552/#555/#558 official source
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r48-552-555-558-official.yml
+      - scripts/audit/issue33-r48-552-555-558-afterproof.mjs
+      - src/server/coffee-selected-description-sensory.mjs
+      - tests/coffee-issue33-r48-current-selected-finish.test.mjs
+permissions:
+  contents: read
+jobs:
+  selected-r48:
+    name: current-original603-552-555-558-source
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Guarded read-only current official HTTPS extraction, selected identity and Add Coffee
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r48-552-555-558
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '552,555,558'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Exact selected identity, direct tasting and raw artifact SHA verification
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r48-552-555-558
+        run: node scripts/audit/issue33-r48-552-555-558-afterproof.mjs
+      - name: One-day current public raw HTML and actual source review evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r48-selected-552-555-558-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r48-552-555-558/
+          if-no-files-found: error
+          retention-days: 1

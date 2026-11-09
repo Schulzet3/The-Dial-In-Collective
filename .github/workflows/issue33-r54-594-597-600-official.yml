@@ -1,0 +1,44 @@
+name: DIC Issue33 R54 selected original603 594 597 600 current official source
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r54-594-597-600-official.yml
+      - scripts/audit/issue33-r54-selected-current-contract.mjs
+      - scripts/audit/issue33-r54-594-597-600-afterproof.mjs
+      - tests/coffee-issue33-r54-selected-current-contract.test.mjs
+      - tests/coffee-issue33-r54-597-selected-inline-region.test.mjs
+      - src/server/coffee-selected-inline-region.mjs
+      - src/server/coffee-page-metadata.mjs
+permissions:
+  contents: read
+jobs:
+  selected-r54:
+    name: original603-594-597-600-selected-current
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Fresh bounded public HTTPS selected products and actual Add Coffee parser
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r54-source
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '594,597,600'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict current identity and source-bound field verification
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r54-source
+        run: node scripts/audit/issue33-r54-594-597-600-afterproof.mjs
+      - name: Preserve 1-day private raw HTML and verdict for independent SHA256
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r54-594-597-600-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r54-source/
+          if-no-files-found: error
+          retention-days: 1

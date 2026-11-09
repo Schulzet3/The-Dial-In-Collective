@@ -169,10 +169,12 @@ with sync_playwright() as p:
     a.expanded.clear();a.expanded.add(c.id);
     a.render();
   }""")
-  check(page.locator('.coffee-card.is-open .recipe-label').inner_text()=='Starting Recommendation',mode+': unproven coffee has a starting recipe')
-  check('similar' in page.locator('.coffee-card.is-open .recipe-reason').inner_text().lower(),mode+': starting recipe cites personal similar-coffee evidence')
-  check('–' in page.locator('.coffee-card.is-open .metric').filter(has=page.locator('.metric-label',has_text='Grind')).locator('.metric-value').inner_text(),mode+': unproven Grind has a narrow range')
-  shot(page,'09b-starting-recommendation-'+mode,'.coffee-card.is-open')
+  check(page.locator('.coffee-card.is-open .first-shot-style').count()==1,mode+': no-shot coffee shows Starting Shot Style guidance')
+  check('Recommended for you:' in page.locator('.coffee-card.is-open .first-shot-style').inner_text(),mode+': first-shot style has a recommendation')
+  check(page.locator('.coffee-card.is-open .first-shot-style [name=first_style]').count()==1,mode+': starting shot style remains selectable')
+  check(page.locator('.coffee-card.is-open [data-action=first-shot-log]').count()==1,mode+': no-shot coffee offers Log First Shot')
+  check('similar' in page.locator('.coffee-card.is-open .recipe-reason').inner_text().lower(),mode+': source-backed similar-coffee reason remains visible')
+  shot(page,'09b-first-shot-style-'+mode,'.coffee-card.is-open')
   page.evaluate("""()=>{
     const a=window.__app,s=a.state,c=s.coffees.find(x=>x.id==='coffee-two');
     const example={...s.shots[0],id:'review-undialed',coffeeId:c.id,style:'Turbo',
@@ -181,6 +183,9 @@ with sync_playwright() as p:
       tasteScales:{extraction:2,body:2,clarity:3,sweetness:2,astringency:1}};
     s.shots.push(example);a.render();
   }""")
+  check(page.locator('.coffee-card.is-open .first-shot-style').count()==0,mode+': saved first shot ends Starting Shot Style guidance')
+  check(page.locator('.coffee-card.is-open .recipe-label').inner_text()=='Starting Recommendation',mode+': post-first-shot coffee uses normal starting recipe')
+  check(page.locator('.coffee-card.is-open [data-action=log]').count()==1,mode+': post-first-shot coffee offers Log A Shot')
   check(page.locator('.coffee-card.is-open .feedback-panel').count()==1,mode+': non-green shot generates next-shot guidance')
   check('Try grind' in page.locator('.coffee-card.is-open .feedback-panel').inner_text(),mode+': non-green shot has specific grinder recommendation')
   check('–' not in page.locator('.coffee-card.is-open .metric').filter(has=page.locator('.metric-label',has_text='Grind')).locator('.metric-value').inner_text(),mode+': explicit next-shot Grind is a specific setting')

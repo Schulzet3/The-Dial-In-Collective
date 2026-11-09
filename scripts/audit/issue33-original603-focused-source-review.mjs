@@ -13,6 +13,7 @@ import {selectedDirectProductCredits} from '../../src/server/coffee-direct-produ
 import {extractCoffeeBlendEvidence} from '../../src/server/coffee-blend-evidence.mjs';
 import {sameHandleCollectionAlternate,identicalCurrentSelectedTitle} from './issue33-selected-public-alternate.mjs';
 import {requiredFocusedSourceFailures} from './issue33-focused-source-acceptance.mjs';
+import {selectedShopifyCurrentVisibleIdentity} from './issue33-shopify-current-visible-identity.mjs';
 import {selectedProductHeadings,selectedProductFormH2,selectedProductPurchaseRootH2} from './issue33-selected-product-heading.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../../site/cloud/coffee-url-autofill.js';
 const sha=value=>createHash('sha256').update(value).digest('hex');
@@ -94,12 +95,20 @@ for(const target of targets){
    writeFileSync(join(dest,r.html_artifact),res.html,'utf8');
    const p=extractPublicCoffeeFacts(res.html,{source_url:r.final_url});
    r.parser_ok=p?.ok===true;r.parser_reason=clip(p?.reason,140);
+   // H1-free Shopify archive pages can have an actual exact-current product
+   // tracking ID AND an identical two-pane visible hero; SEO/slug alone do not qualify.
+   // Store positive selected proof only for the current exact source, not as a parser field.
+   r.selected_embedded_product_identity=(!r.selected_h1_present_in_scoped_html&&
+     !r.selected_form_h2.length&&!r.selected_page_h2.length)
+     ?selectedShopifyCurrentVisibleIdentity(res.html,{
+       source_url:r.final_url,expected_name:target.Coffee,parsed_name:p?.fields?.name}):null;
    r.selected_heading_identity_verified=r.selected_h1_present_in_scoped_html
      ?r.selected_h1.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p?.fields?.name))
      :r.selected_form_h2.length
        ?r.selected_form_h2.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p?.fields?.name))
        :r.selected_page_h2.length
-         ?r.selected_page_h2.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p?.fields?.name)):null;
+         ?r.selected_page_h2.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p?.fields?.name))
+         :Boolean(r.selected_embedded_product_identity);
    if(r.alternate_url_attempted){
     r.alternate_identity_match=r.parser_ok&&(
      r.selected_h1.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p.fields?.name))||
@@ -110,6 +119,11 @@ for(const target of targets){
    if(p?.ok){
     r.current_fields=Object.fromEntries(Object.entries(p.fields||{})
       .filter(([,v])=>v!=null&&typeof v!=='object').map(([k,v])=>[k,clip(v,400)]));
+    // Keep the parser's EXISTING low-confidence SEO provenance and its
+    // actual Add Coffee review note in bounded source diagnostics. A same-
+    // identity SEO note is an unverified fallback, not a direct sensory fact.
+    r.seo_fallback_fields=Array.isArray(p.seo_fallback_fields)?p.seo_fallback_fields.slice(0,16):[];
+    r.metadata_review_notice_rendered=coffeeUrlPreviewMarkup(p).includes('Verify metadata-only suggestions:');
     if(negativeIdentityNumbers.includes(r.number)){
      r.original_product_not_certified=true;
      r.current_identity_exception='CHANGED_SELECTED_PRODUCT_EXPLICIT_NEGATIVE_DO_NOT_TRANSFER_ARCHIVED_FIELDS';
@@ -136,6 +150,16 @@ for(const target of targets){
       };
       console.log('[DIC33 #336 DIRECT CURRENT GROWER DIAG] '+JSON.stringify(r.selected_336_role_diagnostic));
     }
+    // Preserve a bounded exact selected product's conditional sensory fact even
+    // if dozens of initial source facts occupy the 45-row diagnostic preview.
+    // Review evidence ONLY; never a new coffee autofill field or source claim.
+    r.selected_milk_context_facts=(p.source_facts||[])
+      .filter(f=>f.field==='sensory_context'&&f.label==='Selected product with-milk sensory description')
+      .slice(0,2).map(f=>({
+       label:clip(f.label,110),value:clip(f.value,420),
+       source_url:clip(f.source_url,320),source_type:clip(f.source_type,60),
+       section:clip(f.section,150)
+      }));
     r.source_facts=(p.source_facts||[]).slice(0,45).map(f=>({
       label:clip(f.label,120),field:clip(f.field,80),value:clip(f.value,360),source_url:clip(f.source_url,320),section:clip(f.section,110),
       source_type:clip(f.source_type,55),conflicting:f.conflicting===true}));

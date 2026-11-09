@@ -1,0 +1,41 @@
+name: DIC Issue33 R49 selected #561/#564/#565 official source
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r49-561-564-565-official.yml
+      - scripts/audit/issue33-r49-561-564-565-afterproof.mjs
+      - scripts/audit/issue33-shopify-current-visible-identity.mjs
+      - scripts/audit/issue33-original603-focused-source-review.mjs
+      - tests/coffee-issue33-r49-selected-shopify-identity.test.mjs
+permissions:
+  contents: read
+jobs:
+  selected-r49:
+    name: original603-561-564-565-current-selected
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Guarded read-only public current official source and actual parser, Add Coffee and Source Review
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r49-selected
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '561,564,565'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Check source hash, exact chosen identity and distinct direct fields
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r49-selected
+        run: node scripts/audit/issue33-r49-561-564-565-afterproof.mjs
+      - name: Preserve one-day public HTML and evidence for independent review
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r49-selected-561-564-565-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r49-selected/
+          if-no-files-found: error
+          retention-days: 1

@@ -327,3 +327,35 @@ textarea{line-height:1.5}.form-grid{gap:18px 14px}
 
 /* Issue #37 accessible help and native video. */
 .help-walkthrough,.help-guide{max-width:100%;min-width:0;overflow-wrap:anywhere}.help-lead{font-size:14px;margin:0 0 16px}.help-video-frame{margin:0 0 14px}.help-video-frame video{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;border:1px solid var(--line-strong);border-radius:10px;background:#171009}.help-video-frame figcaption{margin-top:9px}.help-actions{display:grid;gap:12px;margin:16px 0}.help-transcript-link{text-align:center;color:var(--accent-text);font-size:14px;padding:8px}.help-transcript,.help-more{padding:12px 0;margin:15px 0;border-top:1px solid var(--line)}.help-transcript summary,.help-more summary{cursor:pointer;min-height:42px;font-weight:600}.help-transcript ol{padding-left:22px;font-size:14px;line-height:1.6}.help-steps{padding-left:22px;display:grid;gap:18px}.help-steps li{padding-left:2px}.help-steps h3,.help-dialed h3{font-size:16px;margin:0 0 8px}.help-steps p,.help-dialed p,.help-more p{font-size:14px;line-height:1.65;margin:0}.help-dialed{margin:20px 0;padding:15px;background:var(--well);border:1px solid var(--line);border-radius:10px}.help-support{margin:20px 0 0;font-size:14px;overflow-wrap:anywhere}.help-support a{color:var(--accent-text)}@media(max-width:480px){.help-steps{padding-left:19px}.help-video-frame video{border-radius:6px}}
+
+
+/* Issue #1596 owner-approved first setup welcome. Uses existing Light/Dark tokens. */
+.onboarding-welcome{max-width:640px;margin:0 auto;padding-top:26px;text-align:left}
+.onboarding-progress{padding:0;margin:0 0 28px;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.onboarding-step{display:flex;align-items:center;gap:7px;white-space:nowrap;font-size:12px;font-weight:500;color:var(--muted);min-width:0}
+.onboarding-step:not(:last-child)::after{content:"";display:block;flex:1;width:24px;min-width:8px;height:1px;background:var(--line);margin-left:6px}
+.onboarding-step-number{width:24px;height:24px;flex:none;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;font-size:11px}
+.onboarding-complete .onboarding-step-number{background:#427e3b;border-color:#427e3b;color:#fff}
+.onboarding-current{color:var(--ink);font-weight:700}
+.onboarding-current .onboarding-step-number{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.onboarding-eyebrow{margin:0 0 10px;color:var(--accent-text);font-size:11px;line-height:1.4;letter-spacing:.09em;text-transform:uppercase;font-weight:700}
+.onboarding-welcome h2{font-size:32px;line-height:1.15;letter-spacing:-.025em;margin:0 0 13px}
+.onboarding-lead{font-size:14px;line-height:1.65;color:var(--muted);margin:0 0 22px}
+.onboarding-video-card{padding:0;margin:0;background:var(--surface);border:1px solid var(--line);border-radius:11px;overflow:hidden}
+.onboarding-video-card video{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;background:#171009}
+.onboarding-video-caption{padding:14px 16px;display:flex;align-items:center;gap:11px}
+.onboarding-media-icon{width:39px;height:39px;display:grid;place-items:center;flex:none;border-radius:9px;background:var(--well);color:var(--accent-text);font-size:19px}
+.onboarding-video-caption strong,.onboarding-guide-button strong{display:block;color:var(--ink);font-size:14px;line-height:1.45}
+.onboarding-video-caption small,.onboarding-guide-button small{display:block;color:var(--muted);font-size:12px;line-height:1.5;margin-top:3px}
+.onboarding-video-error{font-size:13px;line-height:1.6;color:var(--ink);margin:9px 0}
+.onboarding-transcript{display:inline-block;color:var(--accent-text);font-size:12px;padding:8px 0;min-height:36px}
+.onboarding-guide-button{display:flex;align-items:center;gap:12px;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:11px;text-align:left;color:var(--ink);padding:15px;margin-top:5px;min-height:69px}
+.onboarding-guide-button:hover{border-color:var(--accent);background:var(--well)}
+.onboarding-guide-copy{flex:1;min-width:0}.onboarding-chevron{color:var(--accent-text);font-size:22px}
+.onboarding-return-note{display:flex;align-items:flex-start;gap:11px;margin-top:19px;padding:16px;border:1px solid var(--line);border-radius:10px;background:var(--well);color:var(--ink)}
+.onboarding-info-icon{display:grid;place-items:center;width:20px;height:20px;flex:none;border:2px solid var(--accent-text);border-radius:50%;font-size:12px;font-weight:700;color:var(--accent-text)}
+.onboarding-return-note p,.onboarding-return-note strong{color:var(--ink);opacity:1}
+.onboarding-return-note p{font-size:13px;line-height:1.65;font-weight:500;margin:0}.onboarding-return-note strong{font-weight:750}
+.onboarding-next{margin-top:23px;padding-top:21px;border-top:1px solid var(--line)}
+.onboarding-setup-button{min-height:50px;gap:9px}
+@media(max-width:480px){.onboarding-welcome{padding-top:23px}.onboarding-progress{gap:5px;margin-bottom:26px}.onboarding-step{font-size:11px;gap:5px}.onboarding-step:not(:last-child)::after{width:10px;min-width:5px;margin-left:3px}.onboarding-welcome h2{font-size:28px}.onboarding-video-caption{padding:13px}.onboarding-guide-button{padding:13px}.onboarding-return-note{padding:14px}}

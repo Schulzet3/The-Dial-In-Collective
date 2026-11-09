@@ -22,6 +22,7 @@ import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
 import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,refineSelectedNamedTastingNotes,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
 import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish} from './coffee-selected-description-sensory.mjs';
+import {selectedCoffeeMilkSensoryContext} from './coffee-selected-milk-sensory-context.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
 import {withoutNaturalDecaffeinationModifier,recordCoffeeProcessingClaim,reconcileCoffeeProcessingClaims} from './coffee-processing-evidence.mjs';
@@ -37,6 +38,11 @@ import {selectedCurrentFarmGrowingLocality} from './coffee-selected-farm-growing
 import {selectedCurrentFarmCountryLocality} from './coffee-selected-farm-country-locality.mjs';
 import {selectedCurrentFarmVolcanoRegion} from './coffee-selected-farm-volcano-region.mjs';
 import {selectedCountryFirstCurrentRegion} from './coffee-country-first-current-region.mjs';
+import {selectedCurrentLotContrastedRegion} from './coffee-selected-current-lot-region.mjs';
+import {selectedCurrentInlineCompoundRegion} from './coffee-selected-inline-region.mjs';
+import {selectedCurrentTypedRoastLevel} from './coffee-selected-typed-roast-level.mjs';
+import {selectedCurrentTradeElevationRegion} from './coffee-selected-trade-elevation-region.mjs';
+import {selectedCurrentAdjacentHeroRegion} from './coffee-selected-adjacent-hero-region.mjs';
 import {selectedDottedTitleCountryRegion} from './coffee-dotted-title-region.mjs';
 import {selectedProcessingSiteNotFarmOrigin} from './coffee-processing-site-origin-guard.mjs';
 import {selectedCurrentColombianDepartmentOrigin} from './coffee-selected-department-origin.mjs';
@@ -379,7 +385,11 @@ function normalized(field,value,{allowFlavorProse=false,allowAnonymousProducer=f
   // Do not rewrite regional tuples, multi-country blends or unknown prose.
   const countryAndProcess=s.match(/^100\s*%\s*([\p{L}\p{M}][\p{L}\p{M} .'-]{2,60}?)\s*,\s*(?:fully\s+)?(?:washed|natural|honey|anaerobic)(?:\s+process(?:ed)?)?\.?$/iu);
   const countryAndDecaf=s.match(/^([\p{L}\p{M}][\p{L}\p{M} .'-]{2,60}?)\s*\(\s*(?:Mountain|Swiss)\s+Water(?:\s+Process(?:ed)?)?\s*\)\.?$/iu);
-  const printedCountry=(countryAndProcess?.[1]||countryAndDecaf?.[1]||'').trim();
+  // A bean's explicitly printed "Peaberry" class is not an additional
+  // producing place. Only the exact closed parenthetical on one known
+  // country qualifies; keep the original literal in source review.
+  const countryAndPeaberry=s.match(/^([\p{L}\p{M}][\p{L}\p{M} .'-]{2,60}?)\s*\(\s*Peaberry\s*\)\.?$/iu);
+  const printedCountry=(countryAndProcess?.[1]||countryAndDecaf?.[1]||countryAndPeaberry?.[1]||'').trim();
   if(printedCountry&&ORIGIN_COUNTRIES.has(keyOf(printedCountry)))s=printedCountry;
   // Roaster "Oaxaca Region of Mexico" is not "Oaxaca Region of Mexico, Mexico".
   // Only de-duplicate the SAME country after an explicit Region of phrase;
@@ -633,6 +643,13 @@ function addField(fields,rawKey,value,{literalAnonymousProducer=false}={}){
   conflicts?.add(key);delete fields[key];return;
  }
  let s=normalized(key,value,{allowFlavorProse:key==='tasting_notes'&&rawKey!==key,allowAnonymousProducer:key==='producer'&&literalAnonymousProducer});
+ // The selected Country caption can append a bean style and a marketing
+ // blend title, neither of which is a place. Retain the unmodified source
+ // fact, but autofill only its already-explicit known producing country.
+ if(key==='origin'&&s&&/^(?:country|countryoforigin|pais|paisdeorigen|pays)$/.test(keyOf(rawKey))){
+  const blend=s.match(/^([\p{L}\p{M}][\p{L}\p{M} .'-]{2,50}?)\s+Peaberry\s+(?:[\p{L}\p{M}]+\s+){0,2}Blend$/iu);
+  if(blend&&ORIGIN_COUNTRIES.has(keyOf(blend[1])))s=blend[1].trim();
+ }
  if(key==='tasting_notes'&&isMetricOnlyCoffeeTastingPanel(rawKey,s))return;
  // A named cooperative/farm can be accidentally prefixed to a Region
  // caption. Remove it only with independent, literal role evidence from
@@ -1623,6 +1640,16 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    roast_evidence.value=null;
   }else if(!fields.roast_level)fields.roast_level=roast_evidence.value;
  }
+ // An exact selected compound spec with one literal "Roast: medium level"
+ // may supply Medium when its Country, Region, Farm, Grower and Process are
+ // same-paragraph product evidence. Never infer from generic SEO/old coffees.
+ const directTypedRoast=!fields.roast_level&&!conflicts.has('roast_level')
+  ?selectedCurrentTypedRoastLevel({
+   name:fields.name,origin:fields.origin,
+   blocks:productCoffeeProse(canonicalProduct,clean)
+  }):null;
+ if(directTypedRoast&&roast_evidence.confidence!=='conflict')
+  addField(fields,'Roast Level',directTypedRoast.value);
  // A genuine, product-bound GROUND Agtron reading with a declared scale
  // is a measured roast standard, stronger than descriptive roast wording.
  // Unknown scale/sample stays provisional and cannot veto a roaster label.
@@ -1763,6 +1790,20 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   ...(matchedDescriptions.length?[collectStructuredCoffeeSourceFacts({description:matchedDescriptions.join('\n\n')},{source_url,source_type:'html'})]:[]),
   ...[p,...equivalentProducts.filter(candidate=>candidate!==p)].map(candidate=>collectStructuredCoffeeSourceFacts(candidate,{source_url}))
  );
+ // Keep literal direct selected roast provenance visible in Source Review,
+ // without elevating a fallback, unsupported area, or conflicting roast.
+ if(directTypedRoast&&fields.roast_level===directTypedRoast.value&&source_facts.length<384)
+  source_facts.push({field:'roast_level',label:'Roast',
+   value:'Roast: '+directTypedRoast.literal,source_type:'html',source_url,
+   section:'Exact selected current Country/Region/Farm/Grower/Process paragraph'});
+ // Conditional flavors of this same selected coffee are review-only context.
+ // Never assert with-milk tasting as unqualified green-bean or shot flavor.
+ const milkContext=selectedCoffeeMilkSensoryContext(canonicalProduct,{name:fields.name,clean});
+ if(milkContext&&source_facts.length<384)source_facts.push({
+  field:'sensory_context',label:'Selected product with-milk sensory description',
+  value:milkContext,source_url,source_type:'html',
+  section:'Exact selected coffee; with milk; context only, not autofill'
+ });
  if(partialProcessReviewNote&&source_facts.length<384)source_facts.push({
   field:'component_process',label:'Incomplete selected blend processing',
   value:partialProcessReviewNote,source_url,source_type:'html',
@@ -2125,6 +2166,59 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   }
   delete fields.origin;conflicts.add('origin');
  }
+ // Current selected compound product specifications can publish Region
+ // inline after Process, Variety, Farm and Producer. Only a direct, uniquely
+ // evidenced, same-selected-product region may refine its broad country.
+ if(fields.origin&&!conflicts.has('origin')&&geographyParts(fields.origin).length===1&&
+  ORIGIN_COUNTRIES.has(keyOf(fields.origin))){
+  const inline=selectedCurrentInlineCompoundRegion({
+   name:fields.name,country:fields.origin,origin:fields.origin,
+   blocks:productCoffeeProse(canonicalProduct,clean)
+  });
+  if(inline){
+   rememberCoffeeReviewCandidate(fields,'origin',fields.origin,'Prior broad selected country');
+   fields.origin=inline.value;
+   // The same single H1/current-lot paragraph already passed the direct
+   // Process/Variety/Farm/Producer/unique Region gate. Recover only its
+   // individually printed botanical list and physical height; never use
+   // an unrelated page, old lot, regional education or SEO as a donor.
+   // A repeated/ambiguous label cannot supply either canonical field.
+   const selectedText=inline.quote;
+   const varietyLabels=[...selectedText.matchAll(/\bVariet(?:y|ies)\s*:/giu)];
+   const varietyCaptures=[...selectedText.matchAll(/\bVariet(?:y|ies)\s*:\s*([^.]{3,150})\.\s*(?=Farm\s*:)/giu)];
+   if(!fields.variety&&!conflicts.has('variety')&&
+    varietyLabels.length===1&&varietyCaptures.length===1){
+    const value=varietyCaptures[0][1].replace(/\s*\([^()]{3,140}\)\s*$/u,'').trim();
+    if(explicitCoffeeVarietyList(value)){
+     addField(fields,'variety',value);
+     if(fields.variety&&source_facts.length<384)source_facts.push({
+      field:'variety',label:'Current selected compound-spec Variety',
+      value:varietyCaptures[0][0],source_url,source_type:'html',
+      section:'Exact selected Process/Variety/Farm/Producer/Region paragraph'
+     });
+    }
+   }
+   const elevationLabels=[...selectedText.matchAll(/\bElevation\s*[;:]/giu)];
+   const elevationCaptures=[...selectedText.matchAll(/\bElevation\s*[;:]\s*(\d{3,4}(?:\s*[-–]\s*\d{3,4})?\s*(?:meters?|metres?|masl|m)(?:\s+above\s+sea\s+level)?)(?=[.!?;,]|$)/giu)];
+   if(!fields.elevation_m&&!conflicts.has('elevation_m')&&
+    elevationLabels.length===1&&elevationCaptures.length===1){
+    const measured=parseCoffeeElevation(elevationCaptures[0][1],{allowBare:false});
+    if(measured&&!measured.conflicting){
+     addField(fields,'elevation_m',measured.display);
+     if(fields.elevation_m&&source_facts.length<384)source_facts.push({
+      field:'elevation_m',label:'Current selected compound-spec Elevation',
+      value:elevationCaptures[0][0],source_url,source_type:'html',
+      section:'Exact selected Process/Variety/Farm/Producer/Region paragraph'
+     });
+    }
+   }
+   if(source_facts.length<384)source_facts.push({
+    field:'origin',label:'Direct selected compound-spec Region',
+    value:inline.quote,source_url,source_type:'html',
+    section:'Exact selected Product Process/Variety/Farm/Producer/Region'
+   });
+  }
+ }
  // Direct present selected department beats irrelevant continental context.
  if(fields.origin&&!conflicts.has('origin')){
   const selectedDepartment=selectedCurrentColombianDepartmentOrigin({
@@ -2243,6 +2337,44 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   }
  }
 
+ // Directly selected current H1's independently accepted country plus an
+ // immediately adjacent current hero location can refine a broad country
+ // to two literally printed localities. Never infer from slug/SEO/other beans.
+ if(fields.origin&&!conflicts.has('origin')&&geographyParts(fields.origin).length===1&&
+  ORIGIN_COUNTRIES.has(keyOf(fields.origin))){
+  const adjacent=selectedCurrentAdjacentHeroRegion(canonicalProduct,{
+   name:fields.name,origin:fields.origin,producer:fields.producer
+  });
+  if(adjacent){
+   rememberCoffeeReviewCandidate(fields,'origin',fields.origin,
+    'Broader current selected country');
+   fields.origin=adjacent.value;
+   if(source_facts.length<384)source_facts.push({
+    field:'origin',label:'Exact selected adjacent hero locality',
+    value:adjacent.quote.slice(0,260),source_url,source_type:'html',
+    section:'Selected H1 and its own immediately adjacent locality'
+   });
+  }
+ }
+
+ // Selected trade/certification, literal locality and measured growing
+ // elevation can corroborate one region inside the chosen product only.
+ if(fields.origin&&!conflicts.has('origin')){
+  const currentTradeRegion=selectedCurrentTradeElevationRegion({
+   name:fields.name,origin:fields.origin,
+   blocks:productCoffeeProse(canonicalProduct,clean)
+  });
+  if(currentTradeRegion){
+   rememberCoffeeReviewCandidate(fields,'origin',fields.origin,'Broader selected country');
+   fields.origin=currentTradeRegion.value;
+   if(source_facts.length<384)source_facts.push({
+    field:'origin',label:'Current selected trade/elevation region',
+    value:currentTradeRegion.quote.slice(0,420),source_url,source_type:'html',
+    section:'Exact selected product trade/elevation description'
+   });
+  }
+ }
+
  // A current exact country-first H1 plus its own present single-origin
  // source sentence may corroborate a known geographic region. This never
  // uses URL/SEO, a cultivar/grade, a recycled SKU, or historical commentary.
@@ -2257,6 +2389,25 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     field:'origin',label:'Current selected single-origin named growing region',
     value:currentRegion.quote.slice(0,500),
     source_url,source_type:'html',section:'Exact selected current product description'
+   });
+  }
+ }
+
+ // A current selected coffee can contrast its own lot against a PREVIOUS
+ // named lot: only "This time from X region" is present growing-location proof.
+ // A prior-lot sentence/other product/educational district cannot refine origin.
+ if(fields.origin&&!conflicts.has('origin')){
+  const currentLotRegion=selectedCurrentLotContrastedRegion({
+   name:fields.name,origin:fields.origin,blocks:productCoffeeProse(canonicalProduct,clean)
+  });
+  if(currentLotRegion){
+   rememberCoffeeReviewCandidate(fields,'origin',fields.origin,
+    'Broader current selected country');
+   fields.origin=currentLotRegion.value;
+   if(source_facts.length<384)source_facts.push({
+    field:'origin',label:'Exact selected this-lot growing region',
+    value:currentLotRegion.quote.slice(0,450),source_url,source_type:'html',
+    section:'Exact selected current versus previous lot description'
    });
   }
  }

@@ -71,8 +71,13 @@ export function refineSelectedCurrentLiteralFinish(html,{clean,notes}={}){
   for(const sentence of block.text.split(/(?<=[.!?])\s+/u).slice(0,12)){
    if(sentence.length>500)continue;
    const match=sentence.match(/(?:^|;)\s*([^;.!?]{3,105}\bnotes?)\s+with\s+(?:a|an)\s+([\p{L}\p{M}]+(?:[ -][\p{L}\p{M}]+){0,3})\s+finish[.!?]?$/iu);
-   if(!match)continue;
-   const finish=match[2].trim();
+   // Only one exact selected paragraph/sentence may supply a direct flavor finish.
+   // Unrelated roast, prior lot, meta, and conditional milk remain excluded.
+   const literalFinish=match?.[2]||(
+    parts.every(part=>fold(sentence).includes(fold(part)))?
+     sentence.match(/\b(?:balanced|rounded)\s+by\s+a\s+(?:(?:smooth|clean|bright|sweet|long|lingering|delicate)\s+)?finish\s+of\s+([\p{L}\p{M}]+(?:[ -][\p{L}\p{M}]+){0,3})(?=[.!?]|$)/iu)?.[1]:'');
+   if(!literalFinish)continue;
+   const finish=literalFinish.trim();
    if(/^(?:clean|smooth|bright|dry|long|short|pleasant|balanced|crisp|lingering|lasting|full|round|complex|delicate|fresh|soft|bold)$/i.test(finish)||
     /\b(?:body|mouthfeel|acidity|roast|process|brewed|served|milk|creamer|syrup|added|mixed|coffee|beans?)\b/i.test(finish)||
     parts.some(part=>fold(part)===fold(finish))||

@@ -1,5 +1,7 @@
 # Scoped GitHub Work Journals
 
+- [Issue #1591: first-shot starting-style guidance until shot is saved](issue-1591.md) — owner-Nov-8 Locked supersession, merged tests and queue READY; not deployed
+
 The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md) remains the recovery entrypoint. For each code/test/CI commit, update either that central checkpoint or one of the named workstream journals in the same commit. Preserve tested SHA, affected paths, decision source, failures, privacy/release constraints and next action. Reconcile issue, CURRENT_STATUS, release queue and central checkpoint at READY and handoff. Never infer production publication.
 
 - [Espresso research-to-UX decision audit: Issue #455](issue-455.md)
@@ -51,6 +53,7 @@ The central [active work checkpoint](../ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEA
 
 - [Issue #30 recovered private historical-source inventory](issue-30.md)
 - [Issue #37 deployed beginner guide/video — owner accepted](issue-37.md)
+- [Issue #1596 first-setup welcome screen (READY preparation)](issue-1596.md)
 
 - [Issue #50 real-release controller-stage timing evidence](issue-50.md)
 - [Issue #133 completed conductor setup and residual ownership](issue-133.md)

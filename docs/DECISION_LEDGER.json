@@ -2356,6 +2356,18 @@
       "supersedes": "Earlier unscheduled onboarding concept's undecided combined format and placement only. No supersession of actual live-user/device/accessibility acceptance evidence; user did not authorize Netlify publication, subscriptions or privacy changes.",
       "delivery": "DEPLOYED_RELEASE13_OWNER_ACCEPTED_20261103",
       "merged_source_sha": "00fbb23a4dabea4d2e85309e1dd3405ff981f9d7"
+    },
+    {
+      "id": "UX-FIRST-SETUP-WELCOME-20261108",
+      "status": "Locked",
+      "date": "2026-11-08",
+      "issue": 1596,
+      "title": "First-setup welcome video and guide placement",
+      "approval": "Owner reviewed interactive preview, corrected concise Settings recall text and Light contrast, and explicitly authorized preparation to READY without deployment.",
+      "decision": "After admitted sign-in and before first equipment setup show Account → Welcome → Setup screen with existing self-hosted 135.56s optional video, native controls, captions and transcript, existing guide action and Set Up My Workspace form. Members with a setup bypass onboarding. Exact reminder: Tap the Settings gear icon in the top-right corner of the app to reference these again; readable in both Light and Dark. Preserve existing Settings help links.",
+      "scope": "Only no-setup frontend markup and responsive theme CSS plus tests and queue readiness; no new auth gate, member state, forced video viewing, SQL, provider or publication.",
+      "supersedes": "Previous no-setup placeholder/links layout of Issue #37 only; the original guide/video delivery remains deployed and unchanged.",
+      "delivery": "SOURCE_READY_NOT_DEPLOYED"
     }
   ],
   "current_owner_meaningful_yield_20261104": {
@@ -4141,6 +4153,24 @@
       "real_device_acceptance": "PENDING"
     }
   },
+  "current_owner_first_shot_style_until_logged_20261108": {
+    "decision_id": "UX-FIRST-SHOT-STYLE-UNTIL-LOGGED-20261108",
+    "status": "Locked",
+    "date": "2026-11-08 America/Denver",
+    "owner_source": "Direct owner instruction in chat: 'Change it to display until the user logs the first shot please.'",
+    "scope": "For a member coffee with zero logged shots, show Recommended for you style, one-line reason, editable Starting Shot Style and Log First Shot on every expansion/reopen/reload/device, online or offline. Stop after a saved or queued first shot. Count historical hidden shots as logged. No one-use claim gates UI.",
+    "supersedes_only": [
+      "UX-FIRST-EXPANSION-STYLE-20261021 once-only consumption/repeat suppression across reloads or devices"
+    ],
+    "preserves": [
+      "Add Coffee contains no Starting Shot Style and does not auto-expand/make Current",
+      "Owner-selected supported starting style drives first-shot draft, save and private setup, not canonical shared coffee data",
+      "Shot history including hidden shots, privacy, offline pending saves, legacy claim SQL/IndexedDB compatibility",
+      "No hosted SQL/Auth/Netlify/provider writes or publication without separate owner command"
+    ],
+    "issue": 1591,
+    "implementation_status": "READY_IN_DEVELOPMENT_NOT_PUBLISHED; PR #1594 merged 6dee3abcc85ca8604a15ade572bd10d7cbe19b95, exact PR-head six applicable SUCCESS and merged Node/browser/cloud/approval SUCCESS with unchanged 14 Git blobs; no physical-device acceptance or new production publication."
+  },
   "current_owner_defer_private_hide_shot_retirement_20261021": {
     "decision_id": "UX-DEFER-PRIVATE-HIDE-SHOT-RETIREMENT-20261021",
     "status": "Locked",
@@ -4734,5 +4764,19 @@
       "Mandatory applicable Auth, SQL/RLS, privacy, offline/recommendation, recovery and member-data safety"
     ],
     "approval": "Development and documented workflow implementation only; queued #335 is not authorized to publish"
+  },
+  "UX-FIRST-SETUP-WELCOME-20261108": {
+    "id": "UX-FIRST-SETUP-WELCOME-20261108",
+    "status": "Locked",
+    "date": "2026-11-08",
+    "issue": 1596,
+    "title": "First-setup welcome video and guide placement",
+    "approval": "Owner reviewed interactive preview, corrected concise Settings recall text and Light contrast, and explicitly authorized preparation to READY without deployment.",
+    "decision": "After admitted sign-in and before first equipment setup show Account → Welcome → Setup screen with existing self-hosted 135.56s optional video, native controls, captions and transcript, existing guide action and Set Up My Workspace form. Members with a setup bypass onboarding. Exact reminder: Tap the Settings gear icon in the top-right corner of the app to reference these again; readable in both Light and Dark. Preserve existing Settings help links.",
+    "scope": "Only no-setup frontend markup and responsive theme CSS plus tests and queue readiness; no new auth gate, member state, forced video viewing, SQL, provider or publication.",
+    "supersedes": "Previous no-setup placeholder/links layout of Issue #37 only; the original guide/video delivery remains deployed and unchanged.",
+    "delivery": "SOURCE_READY_NOT_DEPLOYED",
+    "owner_source": "Owner reviewed interactive preview, corrected concise Settings recall text and Light contrast, and explicitly authorized preparation to READY without deployment.",
+    "release": "SOURCE_READY_NOT_DEPLOYED"
   }
 }

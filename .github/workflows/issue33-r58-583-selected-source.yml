@@ -1,0 +1,41 @@
+name: DIC Issue33 R58 exact current original603 583 source diagnostic
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r58-583-selected-source.yml
+      - scripts/audit/issue33-r58-583-selected-source-diagnostic.mjs
+      - src/server/coffee-selected-trade-elevation-region.mjs
+      - tests/coffee-issue33-r58-direct-trade-multiple-region.test.mjs
+permissions:
+  contents: read
+jobs:
+  exact-current-selected-583:
+    name: original603-583-source-identity-and-locality
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Bounded public HTTPS exact selected parser and UI acceptance
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r58-583
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '583'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Verify current selected primary HTML and record locality context
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r58-583
+        run: node scripts/audit/issue33-r58-583-selected-source-diagnostic.mjs
+      - name: Short-lived selected raw HTML, provenance, and diagnostic
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r58-583-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r58-583/
+          retention-days: 1
+          if-no-files-found: error

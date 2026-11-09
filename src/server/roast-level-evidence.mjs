@@ -255,6 +255,32 @@ function explicitProseRoasts(html){
  }
  return [...new Set(found)];
 }
+
+// A roaster-owned American label is NOT a universal Light synonym. Only
+// an exact selected product, selected purchase choice and coherent merchant
+// glossary together justify the current source's supported tier.
+function selectedRoasterDefinedAmericanRoast(page) {
+ const nodes=coffeeHtmlElements(page).nodes;
+ const titles=nodes.filter(n=>n.tag==='h1'&&n.contentEnd-n.headEnd<=220);
+ if(titles.length!==1)return null;
+ const title=plain(page.slice(titles[0].headEnd,titles[0].contentEnd));
+ if(!/[,;:|–—]\s*American$/i.test(title))return null;
+ const variants=nodes.filter(n=>n.tag==='label'&&
+  String(attrs(n.attributes).class||'').split(/\s+/).includes('variant__label'))
+  .map(n=>plain(page.slice(n.headEnd,n.contentEnd)));
+ if(!variants.some(v=>/^American Roast\s*[-–—]\s*1\s*lb$/i.test(v)))return null;
+ const defined=(name,expected)=>{
+  const label=new RegExp('<strong\\b[^<>]{0,250}>\\s*'+name+
+   '\\s*:\\s*<\\/strong>\\s*([^<]{15,240})<\\/p>','gi');
+  const values=[...page.matchAll(label)].map(m=>m[1].replace(/&(?:nbsp|#160);/gi,' ').replace(/\s+/g,' ').trim());
+  return values.length===1&&expected.test(values[0]);
+ };
+ if(!defined('American Roast',/^Our lightest roast,\s*characterized by a dry surface,\s*leading to a light body\b/i))return null;
+ if(!defined('Full City Roast',/^A medium\/light roast,\s*slightly darker than our American\b/i))return null;
+ if(!defined('Vienna Roast',/^A medium\/dark roast\b/i))return null;
+ return {value:'Light',source:'selected_roaster_defined_american_roast'};
+}
+
 function selectedScaleAnchors(page,nodes){
  // These two explicit DOM layouts print endpoint/center labels and mark
  // one discrete position. Read only a marked position coinciding with a
@@ -471,6 +497,8 @@ export function extractRoastVisualEvidence(html){
   if((marker||inline)&&/\blight\b/i.test(snippet)&&/\bmedium\b/i.test(snippet))
    hints.push('Roast graphic uses a Light–Medium scale'+(marker!==null?' with a published marker at '+marker+'%':'')+'; verify its marker before selecting a level.');
  }
+ const merchantNamed=selectedRoasterDefinedAmericanRoast(page);
+ if(merchantNamed)found.push({...merchantNamed,confidence:'explicit'});
  const selectedScales=selectedScaleAnchors(page,pageNodes);
  for(const scale of selectedScales)if(scale.value)
   found.push({value:scale.value,source:'selected_roast_anchor',confidence:'explicit'});
