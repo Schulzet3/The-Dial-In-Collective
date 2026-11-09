@@ -1674,3 +1674,18 @@ Exactly three scoped #504 audit documentation paths committed together: receipt,
 **Findings/impact:** No independently reproducible NEW active #504-owned defect, no verified unused current content to delete, no current owner decision. Three #504 audit documentation paths only. No source, app/test, production SQL/Auth/Edge/provider/member, historical/oracle/backup, Locked, queue READY, Netlify, release/production/main, forced Git or visibility write. Node22 app, live SQL/Auth, browser/mobile/offline, original603 **NOT_RUN_DOCS_ONLY**. PR-head and exact merged-source CI **NOT_YET_OBSERVED**, never count skipped/unstarted as PASS.
 
 **Exact next unreviewed original:** [PR #645](https://github.com/Schulzet3/The-Dial-In-Collective/pull/645), title word 1, then entire body. Issue remains **OPEN / IN_PROGRESS**, not COMPLETE; new comments are additional unreviewed drift.
+
+
+---
+
+## Issue #504 G1-136 — November 9, 2026 UTC; eight historical PR original titles/bodies [skip netlify]
+
+**Original direct reading:** Complete title word 1–EOF and body word 1–EOF of PRs **#645–#652**: **8 disjoint previously uncredited original metadata records / 929 Unicode-whitespace words / 8328 UTF-8 bytes**, individually identified by PR ID, head/merge SHA, timestamps, title/body/combined SHA1, physical/word bounds in [G1-136 immutable receipt](../audits/issue504-review-G1-136.json). All 8 CLOSED/MERGED. Negative prior credit 8/8; G1-117 −15/−4012 duplicate correction retained. Corrected cumulative **7919 file lines /60754 file words +828 GitHub metadata records /245683 words**. PR patches/reviews and #267 code not credited.
+
+**Semantic current/history:** #645/#646 and #650/#651 describe narrow #33 source fixes then READY, not full original603 certification or publication. #648/#649 #455 undated calibration guard then READY. #647 original #504 G1-018 queue file contents already separately credited; no duplicate. #652 #267 original public-visibility conflict read with explicit owner #630 Nov4–30 temporary PUBLIC exception in AGENTS; no visibility mutation. #33/#455/#96/#267 boundaries respected. No independently proven NEW #504 current defect or safe obsolete deletion.
+
+**Delegated #267 verification:** frozen F473 `src/server/coffee-delimited-specs.mjs:19–21` blob `923d8a1b2a7e52a046df8cb2b14e308daaebf582` versus line-by-line journal blob `542a8b68c3ba41a8869b84e15e84a2df9f906eb2`: 3/3 exact literals and semantic fields independently matched, **zero new #504 code credit**; full global #267 incomplete.
+
+**Live source before isolated commit:** development `a7c551d97213d338740710512970890e4ceaf6f1`, main `55c2bebcdcabda40e890ac25dcb9880ec789b5a4`, release/production `2d0bed35e67f6a745a21cbd80616ad4c9a98ed41`. Exactly 3 #504 audit documentation paths changed in one commit. Functional Node22/real SQL/Auth/browser/mobile/offline/original603 **NOT_RUN_DOCS_ONLY**; PR/head and merged-source CI pending, never call SKIPPED PASS. No publication, provider/member, queue/Locked, source/history/backups, force Git or visibility write.
+
+**NEXT:** [PR #653](https://github.com/Schulzet3/The-Dial-In-Collective/pull/653), title word **1**, then body. Newly generated audit comments remain unreviewed drift. OPEN / IN_PROGRESS; all-repo and #267 acceptance incomplete.
