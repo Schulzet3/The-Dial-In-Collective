@@ -3290,6 +3290,17 @@
       "production_writes": false,
       "baseline_complete": false,
       "next": "New distinct provider object source family or drift"
+    },
+    {
+      "run": "2026-11-09 #509 Run118 safe bounded HTTP/SQLSTATE latency and lock telemetry",
+      "project_ref": "azviqqejypsefzilgonr",
+      "parent_sha": "bf61a5e4ea013e23f676c93050d75b9175cfbc56",
+      "receipt_path": "docs/audits/issue509-provider-log-classes-and-lock-health-2026-11-09-run118.json",
+      "log_events_aggregated": 320,
+      "unattributed_postgres_sqlstate_errors": 15,
+      "app_defects_confirmed": 0,
+      "production_writes": false,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -15161,5 +15172,39 @@
     "CI": "PENDING_EXACT_SOURCE_GOVERNANCE",
     "baseline_complete": false,
     "next": "New uncovered provider catalog definitions or drift; provider-hosted Auth/JWT/compiled-native and statement SQL/plans UNVERIFIED"
+  },
+  "provider_bounded_logs_and_lock_health_run118": {
+    "status": "DIRECT_BOUNDED_SAFE_LOG_AND_LOCK_AGGREGATE_REVIEW_ONLY_FULL_PROVIDER_BASELINE_IN_PROGRESS",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_development_parent": "bf61a5e4ea013e23f676c93050d75b9175cfbc56",
+    "source_main": "a4028e42b0d0316fd539c0563fd07832d509aed0",
+    "source_release": "92829cb6aff82aaec212eabbd921183e7997f1a7",
+    "receipt_path": "docs/audits/issue509-provider-log-classes-and-lock-health-2026-11-09-run118.json",
+    "window_utc": {
+      "start": "2026-11-08T12:00:00Z",
+      "end": "2026-11-09T11:40:00Z",
+      "minutes": 1420
+    },
+    "log_events_aggregated": 320,
+    "source_event_counts": {
+      "edge_logs": 155,
+      "pgbouncer_logs": 72,
+      "postgres_logs": 40,
+      "supavisor_logs": 30,
+      "auth_logs": 15,
+      "auth_audit_logs": 8
+    },
+    "http_status_200": 155,
+    "http_4xx_5xx": 0,
+    "postgres_error_sqlstates": 15,
+    "sqlstate_causal_attribution": "UNVERIFIED",
+    "postgres_log_connection_exception": 1,
+    "lock_wait_entries": 0,
+    "new_confirmed_application_defects": 0,
+    "source_fixes": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "ci": "PENDING_EXACT_SOURCE_DOCS_ONLY_GOVERNANCE",
+    "next": "Distinct new/changed provider definitions or safe query-source causality review; native/hosted and SQL query body gaps remain."
   }
 }
