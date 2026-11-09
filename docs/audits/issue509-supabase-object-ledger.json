@@ -3264,6 +3264,19 @@
       "production_writes": false,
       "baseline_complete": false,
       "next": "Provider pg_conversion 128 definitions or pg_collation identities"
+    },
+    {
+      "run": "2026-11-09 #509 Run116c pg_conversion 128 direct conversion catalog semantic review",
+      "project_ref": "azviqqejypsefzilgonr",
+      "parent_sha": "6996e75f6b0962277f47b87d880476b2a1daa1d2",
+      "reviewed": 128,
+      "scope": "Full visible encoding/name/function/default conversion definitions and owner/comments, compiled function binary unverified",
+      "evidence_path": "docs/audits/issue509-provider-pg-conversion-001-128-2026-11-09-run116c.json",
+      "confirmed_new_defects": 0,
+      "source_fixes": 0,
+      "production_writes": false,
+      "baseline_complete": false,
+      "next": "Distinct pg_collation catalog or provider drift"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -15069,5 +15082,22 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "Review distinct unreviewed pg_conversion/pg_collation, no duplicate prior DDL source credit"
+  },
+  "provider_pg_conversion_run116c": {
+    "reviewed": 128,
+    "total": 128,
+    "evidence": "docs/audits/issue509-provider-pg-conversion-001-128-2026-11-09-run116c.json",
+    "source_parent": "6996e75f6b0962277f47b87d880476b2a1daa1d2",
+    "observed_at": "2026-11-09 10:03:05.015333+00",
+    "database_encoding": "UTF8",
+    "defaults": 128,
+    "duplicate_defaults": 0,
+    "invalid_bindings": 0,
+    "non_catalog": 0,
+    "confirmed_defects": 0,
+    "source_fixes": 0,
+    "production_writes": false,
+    "baseline_complete": false,
+    "next": "pg_collation or additional uncovered definitions"
   }
 }
