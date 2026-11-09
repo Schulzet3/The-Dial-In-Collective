@@ -21,6 +21,9 @@ export function selectedCurrentAdjacentHeroRegion(html,{name='',origin=''}={}){
  const regex=new RegExp('(?:^|\\s)('+word+')\\s*,\\s*('+word+')\\s+'+origin+'(?=\\s|[.,;:!?]|$)','gu');
  const matches=[...visible.matchAll(regex)].filter(m=>(m.index||0)<=80);
  if(matches.length!==1)return null;
+ // A current hero locality is not a historical, related or negated claim.
+ const prefix=visible.slice(0,matches[0].index||0);
+ if(/\b(?:last year|previous(?:ly)?|formerly|historic(?:al)?|another|other coffee|related|recommended|no longer|not from|different coffee|old lot)\b/iu.test(prefix))return null;
  const [,part1,part2]=matches[0];
  if(/\b(?:coffee|roast|flavou?r|notes|process|blend|farmers?|beans?|origin|region|unknown|decaf|honey|natural|washed)\b/iu.test(part1+' '+part2)||norm(part1)===norm(part2))return null;
  return {value:[part1.trim(),part2.trim(),origin].join(', '),quote:matches[0][0].trim()};
