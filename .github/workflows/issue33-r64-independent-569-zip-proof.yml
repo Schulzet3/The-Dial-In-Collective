@@ -40,8 +40,10 @@ jobs:
             .case_numbers==[566,567,569] and (.records|length)==3 and
             .manual_certified==0 and .production_operations==0 and
             .real_auth==false and .original_corpus_modified==false and
-            ([.records[]|select(.number==566 or .number==567)|.original_unavailable_reason]==["invalid_source","invalid_source"]) and
             ([.records[]|select(.number==566 or .number==567)|.status]==["UNAVAILABLE","UNAVAILABLE"]) and
+            ([.records[]|select(.number==566 or .number==567)|(.current_fields // {})]==[{},{}]) and
+            ([.records[]|select(.number==566 or .number==567)|(.selected_h1 // [])]==[[],[]]) and
+            ([.records[]|select(.number==566 or .number==567)|.html_sha256]==[null,null]) and
             ([.records[]|select(.number==569)]|length)==1 and
             ([.records[]|select(.number==569)][0] |
                .status=="FETCHED" and .parser_ok==true and
