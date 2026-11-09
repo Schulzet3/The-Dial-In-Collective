@@ -8,6 +8,27 @@
   },
   "items": [
     {
+      "id": "DIC-Q-1591-first-shot-style-until-logged",
+      "issue": 1591,
+      "pr": 1594,
+      "title": "Show Starting Shot Style until a member logs their first shot for the coffee",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "tests": [
+        "Dedicated tests/cloud-first-style-on-expand.test.mjs covers no Add Coffee prompt, repeated open/collapse/reopen/reload, legacy claim bypass, selected style, existing and hidden shot suppression. Added tests staged in candidate; execution and exact CI pending.",
+        "Expected offline behavior: applyPending merges a queued save_shot into effective owner state, so first-shot prompt is suppressed before server sync; targeted offline/UX checks pending."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact PR-head and nonforce merged-source applicable CI not yet verified; not READY, not published."
+      ],
+      "owner_source": "Owner direct chat November 8, 2026; Locked decision UX-FIRST-SHOT-STYLE-UNTIL-LOGGED-20261108; GitHub Issue #1591",
+      "notes": "Source-only UI behavior; preserve Auth/privacy, full shot history, legacy claim records, existing five styles/shot flow. No SQL/RPC/IndexedDB schema change, Netlify/production/member writes or owner-device certification."
+    },
+    {
       "id": "DIC-Q-455-offline-shot-replay-coffee-identity",
       "issue": 455,
       "pr": 1560,

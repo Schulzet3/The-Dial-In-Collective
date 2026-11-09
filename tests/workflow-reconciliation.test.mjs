@@ -20,18 +20,25 @@ test('reconciliation retains every classified owner key and source assertion',()
  for(const key of old.owner_decision_key_inventory)assert.ok(matrix.owner_decision_key_inventory.includes(key),'missing historical owner decision '+key);
  assert.deepEqual(matrix.owner_decision_key_inventory,[...matrix.owner_decision_key_inventory].sort(),'current inventory remains sorted');
  assert.ok(uniqueOwnerKeys(matrix.owner_decision_key_inventory),'current inventory must not duplicate owner decision keys');
- // Historical contracts remain exact. Later approved implementations may
- // add coverage; approval-coverage separately validates every current item.
- const originalIds=new Set(old.contracts.map(item=>item.id));
+ // Preserve unchanged archived contracts. The owner superseded only the
+ // old first-expansion once-only UI gate, retaining its historical snapshot.
+ const retiredId='first_coffee_expansion_one_time_style';
+ const originalIds=new Set(old.contracts.map(item=>item.id).filter(id=>id!==retiredId));
  const historical={contracts:matrix.contracts.filter(item=>originalIds.has(item.id))};
- const original=projection(old).map(row=>row.id==='fast_flow_sixth_style_hybrid'?{
+ const original=projection(old).filter(row=>row.id!==retiredId).map(row=>row.id==='fast_flow_sixth_style_hybrid'?{
   ...row,assertions:row.assertions.map(a=>a.path==='site/cloud/main.js'&&a.contains==="C.STYLES.filter(style=>style!=='Custom')"?
    {...a,contains:'C.STYLES,suggestion.style'}:a)
  }:row);
  assert.deepEqual(projection(historical),original);
  for(const key of ['locked_count','open_count','fnv1a32'])assert.equal(matrix.original_baseline[key],old.original_baseline[key]);
- assert.equal(historical.contracts.length,15);
- assert.equal(historical.contracts.reduce((sum,item)=>sum+item.assertions.length,0),66);
+ assert.equal(historical.contracts.length,14);
+ assert.equal(historical.contracts.reduce((sum,item)=>sum+item.assertions.length,0),59);
+ const next=matrix.contracts.find(item=>item.id==='first_coffee_expansion_until_first_shot');
+ assert.equal(next.decision_key,'current_owner_first_shot_style_until_logged_20261108');
+ assert.ok(next.assertions.some(a=>a.path==='site/cloud/main.js'&&a.contains?.includes('const firstStyle=!s.shots.some(')));
+ assert.equal(old.contracts.find(item=>item.id===retiredId).hosted_sql_applied,false,
+  'immutable archive records then-unapplied SQL without rewriting historical status');
+ assert.equal(next.hosted_sql_applied,true,'active contract preserves later hosted SQL state');
 });
 test('owner decision key duplicate negative control',()=>{
  const keys=matrix.owner_decision_key_inventory;
@@ -43,7 +50,8 @@ test('production evidence survives compact current view without a new release gr
  assert.equal(matrix.production.pending_release.claim_consumed_once,true);
  assert.equal(matrix.deployment_approval_policy.new_release_status,'NO_NEW_RELEASE_AUTHORIZED');
  assert.equal(matrix.contracts.find(x=>x.id==='fast_flow_sixth_style_hybrid').production_migration_version,'20261022163126');
- assert.equal(matrix.contracts.find(x=>x.id==='first_coffee_expansion_one_time_style').hosted_sql_applied,true);
+ assert.equal(matrix.contracts.find(x=>x.id==='first_coffee_expansion_until_first_shot').hosted_sql_applied,true);
+ assert.equal(matrix.contracts.find(x=>x.id==='first_coffee_expansion_until_first_shot').site_published,false);
 });
 test('current metadata cannot revive retired credit, device, dose or notification-evidence gates',()=>{
  assert.equal(matrix.netlify_credit_owner_only.assistant_balance_check_required,false);

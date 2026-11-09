@@ -19,7 +19,7 @@ test('new account cloud sync bypasses stalled prior read and discards its privat
  const client={async read(){reads++;if(reads===1){started.resolve();await blocked.promise;return oldRaw;}return newRaw;},
   async listCommunityReviews(){return[];}};
  const app=new CloudApp(client,store);app.identity={id:OWNER};app.status={admitted:true};
- app.queue.flush=async()=>({state:'synced'});app.syncFirstStylePrompts=async()=>{};app.render=()=>{};
+ app.queue.flush=async()=>({state:'synced'});app.render=()=>{};
  const old=app.sync();await started.promise;app.resetAccount();
  app.identity={id:'b1111111-1111-4111-8111-111111111111'};app.status={admitted:true};
  let timer;
@@ -63,7 +63,7 @@ test('late failed RPC from previous same-member login cannot override the new lo
  assert.equal(app.syncState,'pending','stale offline callback must not overwrite new login');
  assert.equal(store.events.length,2,'both writes remain durable for retry');
 });
-test('late coffee expansion cannot claim the prior account coffee for a new member',async()=>{
+test('late coffee expansion cannot reopen a prior account coffee for a new member',async()=>{
  const paused=deferred(),started=deferred(),claims=[];
  const store={async claimFirstStylePrompt(owner,id){claims.push([owner,id]);return true;}};
  const client={async claimFirstStylePrompt(){throw Error('Must never call server for previous owner');}};
@@ -76,5 +76,5 @@ test('late coffee expansion cannot claim the prior account coffee for a new memb
  app.state.coffees=[{id:'new-member-coffee'}];
  paused.resolve();await oldExpansion;
  assert.deepEqual(claims,[],'old expansion must not create foreign-coffee local claim');
- assert.equal(app.firstStylePromptId,null);
+ assert.equal(app.expanded.size,0,'old expansion must not restore prior coffee disclosure after owner switch');
 });
