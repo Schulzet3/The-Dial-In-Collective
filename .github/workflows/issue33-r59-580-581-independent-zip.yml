@@ -1,0 +1,63 @@
+name: DIC Issue33 R59 independently rehash merged selected Tandem source artifact
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r59-580-581-independent-zip.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  independent-selected-source:
+    name: original603-580-581-independent-source-zip
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - name: Download provider artifact without checkout and independently verify bytes and source identity
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          archive="${RUNNER_TEMP}/dic33-r59-tandem.zip"
+          curl --fail --silent --show-error --location --retry 2 \
+            --header "Authorization: Bearer ${GH_TOKEN}" \
+            --header "Accept: application/vnd.github+json" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/13669465989/zip" -o "$archive"
+          test "$(stat -c "%s" "$archive")" = "111799"
+          test "$(sha256sum "$archive" | cut -d " " -f1)" = "e223652ccf7d55cbbd8a2c43730e77323017b5193b05f75565f8757fcbdccc31"
+          unzip -tqq "$archive"
+          test "$(unzip -p "$archive" case-580.html | sha256sum | cut -d " " -f1)" = "1e40f43e8b7eb80811ee237e6d5fe4b87606621604af0fcefae777733c93fa84"
+          test "$(unzip -p "$archive" case-581.html | sha256sum | cut -d " " -f1)" = "6003a2be200b3b315566d49885b9894ac7bd004c53c3d8d22d3c8d321ef8fefc"
+          test "$(unzip -p "$archive" focused-current-evidence.json | sha256sum | cut -d " " -f1)" = "88055da54220cb2188c8b81afd269f62570d9304e721ba99d81e7efdc120dcec"
+          unzip -p "$archive" focused-current-evidence.json | jq -e '
+            .source_sha=="68033debcd8c67a0c00b15c26e278b218eb65110" and
+            .case_numbers==[580,581] and .manual_certified==0 and .production_operations==0 and
+            .real_auth==false and .original_corpus_modified==false and (.records|length)==2 and
+            .records[0].official_url=="https://www.tandemcoffee.com/products/faver-ninco-santa-maria-huila-colombia" and
+            .records[0].selected_h1==["Faver Ninco - Colombia"] and
+            .records[0].status=="FETCHED" and .records[0].parser_ok==true and
+            .records[0].current_fields.origin=="Santa Maria, Huila, Colombia" and
+            .records[0].html_bytes==269943 and
+            .records[0].html_sha256=="1e40f43e8b7eb80811ee237e6d5fe4b87606621604af0fcefae777733c93fa84" and
+            .records[0].add_coffee_ui_rendered==true and .records[0].source_review_rendered==true and
+            .records[1].official_url=="https://www.tandemcoffee.com/products/heri-agena-ethiopia" and
+            .records[1].selected_h1==["Heri Agena - Ethiopia"] and
+            .records[1].status=="FETCHED" and .records[1].parser_ok==true and
+            .records[1].current_fields.origin=="Bensa, Sidama, Ethiopia" and
+            .records[1].current_fields.producer=="Smallholder Farmers" and
+            .records[1].html_bytes==268278 and
+            .records[1].html_sha256=="6003a2be200b3b315566d49885b9894ac7bd004c53c3d8d22d3c8d321ef8fefc" and
+            .records[1].add_coffee_ui_rendered==true and .records[1].source_review_rendered==true
+          ' >/dev/null
+          unzip -p "$archive" r59-580-581-selected-source-verdict.json | jq -e '
+            .source_sha=="68033debcd8c67a0c00b15c26e278b218eb65110" and
+            .evidence_sha256=="88055da54220cb2188c8b81afd269f62570d9304e721ba99d81e7efdc120dcec" and
+            .manual_certified==0 and .production_operations==0 and
+            .passed==true and .failures==[] and .source_bound_origin_gaps==[] and
+            (.observations|length)==2 and
+            .observations[0].raw_html_verified==true and
+            .observations[1].raw_html_verified==true
+          ' >/dev/null
+          echo 'VERIFIED independently downloaded merged-source R59 original603 #580/#581 artifact and current-selected parser evidence'
