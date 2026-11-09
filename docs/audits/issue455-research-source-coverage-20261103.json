@@ -3619,6 +3619,28 @@
       "owner_approval": false,
       "test_source": "https://onlinelibrary.wiley.com/doi/full/10.1111/joss.70076",
       "date": "2026-11-09"
+    },
+    {
+      "id": "R455-EV-APP-136-A",
+      "source": "site/lib/engine.js blob 177b76962a6ddb19fdc884eab71d09b902a35850 at development ac4f6fb9bd6fde65eddd0f6d21d71ea3ce834465 lines 741-770 and tests/recipe-family-selection.test.mjs blob 39ceca42b6f01415a63092202ae5f71850b4d1bc",
+      "claim": "editShot() traversed every setup workspace coffee preference without checking its coffee key; a restored foreign coffee referencing the corrected shot's old family/favorite ID could have its own Current/favorite rewritten or removed. This is a deterministic client/local state integrity defect, not proof of a production member incident.",
+      "grade": "DIRECT_LIVE_EXECUTABLE_SOURCE_DETERMINISTIC_CROSS_COFFEE_POINTER_CONTROL; REAL_MEMBER_DATA_UNTESTED",
+      "result": "SAFE_SCOPE_GUARD_RESTRICT_SAME_COFFEE_PREFERENCE_EDITS_ONLY",
+      "current_app": "Keep original shot notes/five rated tastes and same-coffee Current updates across historical equipment workspaces, preserve all foreign coffee preferences unchanged.",
+      "owner_approval": false,
+      "test_source": "https://github.com/Schulzet3/The-Dial-In-Collective/blob/ac4f6fb9bd6fde65eddd0f6d21d71ea3ce834465/site/lib/engine.js",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "R455-EV-APP-136-B",
+      "source": "tests/issue455-edit-foreign-coffee-preference-integrity.test.mjs; same-commit direct-module positive/negative synthetic fixture",
+      "claim": "Negative controls: a foreign coffee with stale reference to edited family's ID or favorite shot must not be modified by all-green family migration or non-green favorite invalidation. Positive control: legitimate same-coffee favorites across equipment workspaces must still follow the corrected favorite. Private shots and five ratings remain unchanged except the deliberately edited shot.",
+      "grade": "SOURCE_BOUND_NEW_SYNTHETIC_REGRESSIONS_AUTHORED_NODE22_AND_CI_NOT_YET_EXECUTED",
+      "result": "TESTING_PENDING_SOURCE_BOUND_NODE22_AND_RISK_APPLICABLE_CI",
+      "current_app": "One-identity guard in editShot; no new sensory science, numeric rules or user capture.",
+      "owner_approval": false,
+      "test_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "date": "2026-11-09"
     }
   ],
   "policy_decisions_pending": [],
@@ -3630,6 +3652,7 @@
     "reason": "R455-123 verified existing Locked 70-100 C recorded-temperature guard prevents invalid imported temp from becoming personal grind evidence; six direct-module tests and exact source CI, no scientific target or deployed change."
   },
   "next_actions": [
+    "R455-136 code correction authoring at ac4f6fb9bd6fde65eddd0f6d21d71ea3ce834465: old editShot could overwrite unrelated coffee Current/favorite in malformed historical pointer; scope to same coffee with 3 synthetic negative/positive cases. Source-bound Node22/CI, nonforce merge, exact merged readback and queue status PENDING; 76 sources /189 evidence checks /98 proposals, S019 inaccessible, #267 literal review credit zero.",
     "R455-123 verified code PR1505 squash merged edf2e25666c25cb0fe7e43712d4e285e389ca40c, exact source six synthetic tests PASS with PR-head and merged Node22 3126 PASS/0 FAIL/6 SKIP and lint; applicable UX/mobile/offline, isolated SQL, security and governance SUCCESS. Queue READY development only; 68 sources, 165 evidence checks, 85 proposals. S019 standalone PDF inaccessible, #267 no literal review credit. Continue another distinct bounded increment.",
     "R455-122 verified code PR1495 nonforce merged 20c2a8048e267aaadac835d801a3737ba5445f89; four source-based archived basket fallback tests PASS both exact PR-head and merged Node22 3117 PASS/0 FAIL/6 SKIP, applicable UX/mobile/offline/SQL/security/governance checks passed, first governance intake failure corrected; 68 sources/164 bounded checks/84 proposals; queue READY only in development, NOT DEPLOYED. No #267 literal line credit, S019 unavailable. Continue distinct source/claim.",
     "R455-119 exact code PR1466 nonforce merged 17e0ea0b74c3e6a92f5631f571d663f4320a19b8, 3097 PASS/0 FAIL/6 SKIP Node22 head and merged, applicable Chromium/mobile/offline/SQL/security/governance PASS. Source-verified R119 overview malformed-import guard; queue READY development-only after docs reconciliation; 67 sources/159 checks/81 proposals; S019 inaccessible, #267 receives zero literal credit. No deployment.",
@@ -3686,29 +3709,26 @@
     "R455-135 PR #1644 verified: five exact PR-head checks (validate, SQL, mobile browser, cloud tests, approval) SUCCESS at 724d6a8f0986c86cc18de2d9ac5ef8fea358d8c8. Non-force merge ec097354c2df5fe2816a60bc50d64f443f2cb7b3, all three intended documentation blobs equal PR head. Exact merged governance/approval SUCCESS (42603502853), main and release/production unchanged. Reconciliation authoring pending."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-135",
-    "base_development_sha": "5af635a7b7a2db6bfa51b82e5d25e005c7288d2d",
-    "source_ids": [
-      "LIT-2025-COSTA-TDS-TRAINED-CONSUMER-ROAST"
-    ],
+    "id": "R455-136",
+    "base_development_sha": "ac4f6fb9bd6fde65eddd0f6d21d71ea3ce834465",
+    "source_ids": [],
     "claim_ids": [
-      "R455-EV-CIT-135-A",
-      "R455-EV-CIT-135-B"
+      "R455-EV-APP-136-A",
+      "R455-EV-APP-136-B"
     ],
     "proposal_ids": [
-      "R455-PROP-135-TDS-SENSORY-PERCEPTION-NOT-PERSONAL-ESPRESSO-RATING"
+      "R455-PROP-136-EDIT-PREFERENCE-COFFEE-ID-ISOLATION"
     ],
     "number_of_curated_sources": 76,
-    "total_evidence_checks": 187,
-    "number_of_proposals": 97,
-    "review_type": "FULL_ORIGINAL_PEER_REVIEWED_PUBLISHER_HTML_TEMPORAL_SENSORY_PANEL_LIMITS",
-    "code_or_policy_changed": false,
+    "total_evidence_checks": 189,
+    "number_of_proposals": 98,
+    "review_type": "DIRECT_REAL_MODULE_CROSS_COFFEE_EDIT_PREFERENCE_IDENTITY_INTEGRITY",
+    "code_or_policy_changed": true,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
-    "status": "RESEARCH_ONLY_MERGED_EXACT_HEAD_ALL_FIVE_PASS_AND_MERGED_APPROVAL_PASS_NO_APP_QUEUE_ITEM",
-    "next_action": "Research-only R135 done; verify docs reconciliation PR checks and nonforce merge. Next substantive increment prioritize source-reproduced Log Shot -> Rate -> Recommendations bug or new distinct primary claim (e.g. 2015 original espresso TDS paper), preserving Locked choices; S019 inaccessible and #267 separate.",
-    "exact_source_ci": "PR #1644 head 724d6a8f0986c86cc18de2d9ac5ef8fea358d8c8: validate/sql/mobile-browser-qa/cloud-tests/approval ALL 5 completed SUCCESS; source non-force squash merged ec097354c2df5fe2816a60bc50d64f443f2cb7b3, exact 3 Git blobs identical to PR head; merged approval check SUCCESS at Actions 42603502853. Reconciliation docs PR later checks required."
+    "status": "SAFE_CODE_TEST_JOURNAL_AUTHORED_PR_CI_UNRUN_NOT_READY",
+    "next_action": "Read back exact branch/source, run positive and negative source-bound Node22 plus applicable UX/offline/SQL/security/governance CI, nonforce merge, verify exact merged code/test blob and CI, reconcile queue to READY only with full acceptance, update Issue #455; independent S019 still unavailable."
   },
   "policy_decisions_resolved": [
     {
@@ -5713,13 +5733,34 @@
       "release_queue_status": "NO_RUNTIME_CHANGE_NO_QUEUE_ITEM",
       "github267_literal_review_credit": 0,
       "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-136-EDIT-PREFERENCE-COFFEE-ID-ISOLATION",
+      "finding": "Correcting a shot could mutate an unrelated coffee's Current/favorite recipe preference if restored workspaces contain stale cross-coffee family/shot pointers.",
+      "evidence": [
+        "R455-EV-APP-136-A",
+        "R455-EV-APP-136-B"
+      ],
+      "severity": "P2_PERSONALIZATION_HISTORY_INTEGRITY",
+      "user_benefit": "Do not let one coffee's shot correction corrupt another coffee's selected successful recipe; preserve legitimate same-coffee favorite migration across setup history.",
+      "current_locked": "All five original taste inputs and true all-green versus incomplete success, one controllable next action, original private shots/notes/History, independent coffee identity, equipment/grinder calibration, basket/Slow Feed/Turbo/Fast-Flow families and RLS.",
+      "current_app": "site/lib/engine.js blob 177b76962a6ddb19fdc884eab71d09b902a35850 at development ac4f6fb9bd6fde65eddd0f6d21d71ea3ce834465 editShot favorite migration lacked coffeeId scope",
+      "proposed_change": "SAFE deterministic existing-identity guard: iterate (coffeeId,p) and skip coffeeId !== old.coffeeId. Do not change numeric tastes/thresholds, prior data, cloud SQL, style/feed policy, external research or Locked decisions.",
+      "evidence_grade": "DIRECT_SOURCE_REPRODUCIBLE_SYNTHETIC_NO_PRODUCTION_INCIDENT",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "SAME_COMMIT_ENGINE_3_REGRESSIONS_JOURNAL_LEDGER; EXACT PR CI AND MERGE NOT YET EXECUTED",
+      "test_plan": "Node22 focused 3 real-module synthetic negative/positive tests; risk-proportionate functional/mobile/offline/SQL/security and governance exact PR-head and merged-source CI; source blob/diff readback; nonforce PR merge before READY reconciliation.",
+      "release_queue_status": "TESTING_NOT_READY_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
     }
   ],
   "changeScope": {
-    "application_code_changed": false,
+    "application_code_changed": true,
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R135 directly read novel full peer-reviewed original drip TDS sensory study; no safe app defect nor independently validated espresso-specific personalized rating or controllable control law derived."
+    "reason": "R136 corrects source-reproduced cross-coffee edited favorite preference mutation, with synthetic focused regression authored but CI unexecuted; no numeric or Locked behavior change."
   }
 }

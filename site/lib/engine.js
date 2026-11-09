@@ -751,7 +751,10 @@ export function editShot(s,id,input) {
  // A deliberate Make Current choice follows the SAME corrected successful shot,
  // rather than silently becoming an automatic preference for another family.
  // If that shot is no longer successful, release the invalid manual favorite.
- for(const set of s.setups)for(const w of Object.values(set.workspaces))for(const p of Object.values(w.coffees)){
+ // Editing a shot must not rewrite another coffee's independent Current/favorite,
+ // even when a restored workspace carries a stale cross-coffee family/shot ID.
+ for(const set of s.setups)for(const w of Object.values(set.workspaces))for(const [coffeeId,p] of Object.entries(w.coffees)){
+  if(coffeeId!==old.coffeeId)continue;
   for(const [style,fid] of Object.entries(p.currentFamilies)){
    if(fid!==previousFamily||style!==old.style)continue;
    if(p.favoriteShots?.[fid]===id){
