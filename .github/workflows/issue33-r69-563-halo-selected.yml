@@ -29,21 +29,18 @@ jobs:
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: '22'
+      - name: Positive and hostile exact current selected lot tests
+        run: node --test tests/coffee-issue33-r69-563-halo-contract.test.mjs
       - name: Guarded official exact original URL and real parser Add Coffee
         env:
           DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '563'
           DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r69-563
         run: node scripts/audit/issue33-original603-focused-source-review.mjs
-      - name: Strict selected-source afterproof (only once present)
+      - name: Fail-closed selected current official source and parser afterproof
         if: always()
         env:
           DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r69-563
-        run: |
-          if test -f scripts/audit/issue33-r69-563-afterproof.mjs; then
-            node scripts/audit/issue33-r69-563-afterproof.mjs
-          else
-            echo "INTAKE ONLY: strict afterproof NOT RUN, NOT PASS"
-          fi
+        run: node scripts/audit/issue33-r69-563-afterproof.mjs
       - name: Preserve bounded current public source raw HTML and report (one day)
         if: always()
         uses: actions/upload-artifact@v7
