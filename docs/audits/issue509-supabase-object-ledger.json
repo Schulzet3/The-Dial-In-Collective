@@ -3238,6 +3238,19 @@
       "provider_writes": 0,
       "baseline_complete": false,
       "next": "Current index/role/schema/definition drift after this numeric telemetry snapshot, remaining hidden provider full-source boundaries"
+    },
+    {
+      "run": "2026-11-09 #509 Run116 pg_settings 480 direct metadata and safe-value review",
+      "provider_ref": "azviqqejypsefzilgonr",
+      "development_parent_sha": "e29fcb88c35a5c9ceafb4caf6e7f0a73d022dcf6",
+      "reviewed": 480,
+      "scope": "full description and metadata with non-sensitive scalar values; withheld sensitive and string effective settings",
+      "evidence_path": "docs/audits/issue509-provider-pg-settings-001-480-2026-11-09-run116.json",
+      "verified_new_defects": 0,
+      "source_fixes": 0,
+      "production_writes": false,
+      "baseline_complete": false,
+      "next": "New provider-definition family or changed-object drift"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -14990,5 +15003,32 @@
     "production_mutations": false,
     "baseline_complete": false,
     "next": "New provider definition family or changed-object drift; cautiously investigate temp workload only with allowable privacy-preserving aggregate/plan evidence; no automatic tuning or deletion."
+  },
+  "provider_pg_settings_run116": {
+    "status": "DIRECT_METADATA_AND_SAFE_SCALAR_SEMANTIC_REVIEW_COMPLETED_REDACTED_VALUES_UNVERIFIED",
+    "observed_at": "2026-11-09 10:00:17.830248+00",
+    "source_development_parent_sha": "e29fcb88c35a5c9ceafb4caf6e7f0a73d022dcf6",
+    "total": 480,
+    "reviewed": 480,
+    "withheld_effective_values": 120,
+    "non_sensitive_scalar_observed": 360,
+    "pending_restart": 0,
+    "receipt_path": "docs/audits/issue509-provider-pg-settings-001-480-2026-11-09-run116.json",
+    "privacy_exception": "Redacted strings/sensitive values not reviewed or stored",
+    "cross_checks": [
+      "fsync on",
+      "full_page_writes on",
+      "row_security on",
+      "ssl on",
+      "ssl_min_protocol_version TLSv1.2",
+      "log_statement ddl",
+      "work_mem 2184 kB",
+      "log_temp_files -1"
+    ],
+    "confirmed_new_defects": 0,
+    "app_source_fixes": 0,
+    "production_writes": false,
+    "baseline_complete": false,
+    "next": "Review distinct uncovered pg_cast/pg_conversion source definitions or changed-object drift"
   }
 }
