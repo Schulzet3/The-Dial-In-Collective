@@ -1,0 +1,13 @@
+# Issue #1591 — Keep first-shot starting-style guidance visible until first logged shot
+
+**Owner authority:** Explicit November 8, 2026 chat command: "Change it to display until the user logs the first shot please." The older once-only restriction under UX-FIRST-EXPANSION-STYLE-20261021 is narrowly superseded as recorded in BOTH Master Specification and Decision Ledger. Prior #19 remains closed; #1591 tracks this new UX scope.
+
+**Source pinned:** development/backend-foundation intake `c4b4eea63f61d8ef7b3f38a5a59794fac051bdef`. Existing release/production `92829cb6aff82aaec212eabbd921183e7997f1a7` remains published; no release movement or Netlify action authorized.
+
+**Source changes staged in SAME commit as this journal:** `site/cloud/main.js` blob `6633a340c0d74da855e66b3cfb7fd7f7c9b649f1` makes the expanded-card Starting Shot Style based on whether any shot is present (including hidden and effective local pending shots), not a consumed local/server first-view claim. First shot Save and subsequent normal recommendation still work; opening, closing, reloading or changing devices without a shot no longer removes guidance. No Add Coffee style UI or automatic coffee creation/Current switch. Old server RPC/SQL/IndexedDB objects are deliberately retained for historical compatibility but no longer called to gate current guidance. No changes to cloud identity, private data, SQL or offline replay structure.
+
+**Regression tests staged:** `tests/cloud-first-style-on-expand.test.mjs` blob `eb82c399b928af636579bd8023f2f581019260a0`: Add Coffee absence; no active once-claim; old data compatibility; owner style to actual draft; collapse/reopen/reload; suppression after first saved or historically hidden shot. Related cloud and offline suites and one build required per risk-based #457.
+
+**Governing docs:** `docs/MASTER_SPECIFICATION.md`, `docs/DECISION_LEDGER.json`, `docs/APPROVAL_COVERAGE_MATRIX.json`, `docs/RELEASE_QUEUE.json`, `docs/CURRENT_STATUS.md`; journal indexed by `docs/workstreams/README.md`. Preserve old locked claims as historical superseded text.
+
+**Checkpoint at initial authoring:** Changes staged as Git objects, full application tests and PR-head/merged-source CI not yet executed. Queue item `DIC-Q-1591-first-shot-style-until-logged` is **TESTING**, not READY or DEPLOYED. Next: verify one-parent same-commit tree, PR exact-source risk-based CI and focused cloud behavior; repair failures; nonforce merge, read back exact source/checks, then reconcile queue to READY if fully supported. No production publication, member/provider/SQL/Auth writes, extra backups, purchases, forced Git or claim of real device acceptance. [skip netlify]

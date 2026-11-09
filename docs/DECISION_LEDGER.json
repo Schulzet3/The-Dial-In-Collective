@@ -4141,6 +4141,24 @@
       "real_device_acceptance": "PENDING"
     }
   },
+  "current_owner_first_shot_style_until_logged_20261108": {
+    "decision_id": "UX-FIRST-SHOT-STYLE-UNTIL-LOGGED-20261108",
+    "status": "Locked",
+    "date": "2026-11-08 America/Denver",
+    "owner_source": "Direct owner instruction in chat: 'Change it to display until the user logs the first shot please.'",
+    "scope": "For a member coffee with zero logged shots, show Recommended for you style, one-line reason, editable Starting Shot Style and Log First Shot on every expansion/reopen/reload/device, online or offline. Stop after a saved or queued first shot. Count historical hidden shots as logged. No one-use claim gates UI.",
+    "supersedes_only": [
+      "UX-FIRST-EXPANSION-STYLE-20261021 once-only consumption/repeat suppression across reloads or devices"
+    ],
+    "preserves": [
+      "Add Coffee contains no Starting Shot Style and does not auto-expand/make Current",
+      "Owner-selected supported starting style drives first-shot draft, save and private setup, not canonical shared coffee data",
+      "Shot history including hidden shots, privacy, offline pending saves, legacy claim SQL/IndexedDB compatibility",
+      "No hosted SQL/Auth/Netlify/provider writes or publication without separate owner command"
+    ],
+    "issue": 1591,
+    "implementation_status": "TESTING_IN_DEVELOPMENT_NOT_PUBLISHED; exact PR-head and merged-source CI needed before READY"
+  },
   "current_owner_defer_private_hide_shot_retirement_20261021": {
     "decision_id": "UX-DEFER-PRIVATE-HIDE-SHOT-RETIREMENT-20261021",
     "status": "Locked",
