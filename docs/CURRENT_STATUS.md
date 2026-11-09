@@ -1,3 +1,10 @@
+## November 9, 2026 UTC — Issue #455 R147 primary post-roast maturity discrimination: research-only, Locked Roast Date remains retired [skip netlify]
+
+- Primary [2025 Springer Zimmermann et al. paper](https://link.springer.com/article/10.1007/s00217-025-04873-0) directly read in publisher HTML: one 1-day vs 145-day roast-age comparison, 60 untrained coffee-event participants; 42/60 discriminate, only 42 provide forced relative preference (22 mature/20 fresh, p=.875). Brew was **15g/140mL cafe-creme**, not personal pressure espresso. No optimal rest-day window, equivalence or five-taste DIC control inference. Publisher PDF/participant raw bytes not rehashed/reanalyzed.
+- Owner October 26 Locked Bag Management retirement explicitly excludes Roast Date, Frozen and bag-age advice; no new field, numeric prior, product change, release queue item or production action justified. Fresh source-bound science journal [R147](workstreams/ops-issue455-r147-postroast-sensory-20261109.md), ledger **78 sources / 209 checks / 108 proposals**. Source original S019 PDF not accessible; #267 V2 direct-line audit zero credit. **This documentation commit is pending PR/CI/merge verification at authorship.**
+
+---
+
 ## November 9, 2026 UTC — Issue #33 R70 original603 #562 SEY 2026 El Tambo independent selected-source VERIFIED; NO parser defect [skip netlify]
 
 - [PR #1733](https://github.com/Schulzet3/The-Dial-In-Collective/pull/1733) safely nonforce merged source `824ec1f06316519b3f8bd5260e81be198e5e21fd` (five new scoped workflow/test/proof/journal blobs match reviewed PR). Exact current official #562 SEY **2026** El Tambo End of Season source chosen Shopify product ID `15399943471358`, visible paired heroes, **July 2026, lychee/oolong/mango, six-day underwater fermentation**. Separate **2025** same-producer lot (**January 2025, tamarind/rose, 80 hours**) rejected; direct source and actual parser/Source Review/Add Coffee agree. Seven adversarial source tests PASS. No generic parser defect, no READY/queue change, no production operations.
