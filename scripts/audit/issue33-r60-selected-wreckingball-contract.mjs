@@ -26,7 +26,8 @@ export function r60DirectSelectedClaims(name,html){
    named_farm_growing_location:/\bFinca Los Dos Socios is located in the highlands of La Libertad,\s*Huehuetenango\b/iu.test(t),
    named_grower:/\bGrower:\s*Concepción Villatoro\b/iu.test(t),
    literal_washed:/\bProcess:\s*Washed,\s*42 hour fermentation\b/iu.test(t),
-   ambiguous_roast:/\bRoast:\s*Medium\/Medium-Light\b/iu.test(t)};
+   ambiguous_roast:/\bRoast:\s*Medium\/Medium-Light\b/iu.test(t),
+   direct_medium_level:/\bRoast:\s*medium level\b/iu.test(t)};
  }
  return {selected:false};
 }

@@ -47,11 +47,10 @@ for(const spec of R60_CASES){
  }));
  const fields=rec.current_fields||{},origin=String(fields.origin||''),notes=String(fields.tasting_notes||'');
  if(spec.number===595){
-  check(claims.labeled_region&&claims.explicitly_not_sulladjah_only&&
-    claims.literal_process&&claims.selected_sensory,
-    'selected_gera_direct_source_changed_or_missing_595');
-  check(/\bGera\b/iu.test(origin)&&/\bLimmu\b/iu.test(origin)&&/\bEthiopia\b/iu.test(origin),
-    'selected_gera_limmu_origin_missing_595');
+  check(!claims.labeled_region&&claims.explicitly_not_sulladjah_only&&
+    !claims.literal_process&&claims.selected_sensory,
+    'selected_gera_source_absence_must_be_rechecked_595');
+  check(origin==='Ethiopia','unpublished_gera_limmu_region_inferred_595');
   check(!/\bSulladjah\b/iu.test(origin),'not_only_sulladjah_farm_but_origin_falsely_selected_595');
   check(fields.process==='Natural','selected_natural_processing_missing_595');
   check(['caramel','milk chocolate','berry'].every(x=>notes.toLowerCase().includes(x)),
@@ -59,13 +58,14 @@ for(const spec of R60_CASES){
   check(!/\bblueberries\b/iu.test(notes),'generic_natural_process_blueberry_contamination_595');
  }else{
   check(claims.labeled_country&&claims.labeled_region_typo&&claims.current_2026_lot&&
-   claims.named_farm_growing_location&&claims.named_grower&&
-   claims.literal_washed&&claims.ambiguous_roast,
-   'selected_2026_guatemala_direct_source_changed_or_missing_596');
-  // An exact CURRENT same-farm description locates the farm in
-  // La Libertad, Huehuetenango; old history or URL slug never supplies it.
-  check(/\bLa Libertad\b/iu.test(origin)&&/\bHuehuetenango\b/iu.test(origin)&&
-   /\bGuatemala\b/iu.test(origin),'selected_2026_same_farm_la_libertad_missing_596');
+   !claims.named_farm_growing_location&&claims.named_grower&&
+   claims.literal_washed&&!claims.ambiguous_roast&&claims.direct_medium_level,
+   'selected_2026_guatemala_current_direct_claims_changed_596');
+  // Seller currently prints Huehuetenago, never La Libertad on this selected
+  // raw page; the different historical lot cannot supply missing geography.
+  check(origin==='Huehuetenago, Guatemala','current_region_literal_not_preserved_596');
+  check(!/\bLa Libertad\b/iu.test(origin),'old_lot_la_libertad_falsely_promoted_596');
+  check(fields.roast_level==='Medium','direct_current_medium_level_roast_missing_596');
   check(fields.process==='Washed','selected_washed_missing_596');
   check(/Concepción Villatoro/iu.test(String(fields.producer||'')),
    'direct_selected_grower_missing_596');
