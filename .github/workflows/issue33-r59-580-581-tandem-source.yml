@@ -1,0 +1,56 @@
+name: DIC Issue33 R59 original603 580-581 direct selected Tandem source
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r59-580-581-tandem-source.yml
+      - scripts/audit/issue33-r59-selected-tandem-contract.mjs
+      - scripts/audit/issue33-r59-580-581-afterproof.mjs
+      - src/server/coffee-page-metadata.mjs
+      - src/server/coffee-selected-adjacent-hero-region.mjs
+      - tests/coffee-issue33-r59-adjacent-hero-region.test.mjs
+      - tests/coffee-issue33-r59-selected-tandem-contract.test.mjs
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r59-580-581-tandem-source.yml
+      - scripts/audit/issue33-r59-selected-tandem-contract.mjs
+      - scripts/audit/issue33-r59-580-581-afterproof.mjs
+      - src/server/coffee-page-metadata.mjs
+      - src/server/coffee-selected-adjacent-hero-region.mjs
+      - tests/coffee-issue33-r59-adjacent-hero-region.test.mjs
+      - tests/coffee-issue33-r59-selected-tandem-contract.test.mjs
+permissions:
+  contents: read
+jobs:
+  current-selected:
+    name: original603-580-581-exact-current-source
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Focused selected-hero source-scope positive and hostile tests
+        run: node --test tests/coffee-issue33-r59-selected-tandem-contract.test.mjs tests/coffee-issue33-r59-adjacent-hero-region.test.mjs
+      - name: Bounded official public HTTPS current selected parser and UI
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r59-tandem
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '580,581'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Verify exact selected primary-source raw hashes and record field gaps
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r59-tandem
+        run: node scripts/audit/issue33-r59-580-581-afterproof.mjs
+      - name: One-day original selected raw public evidence and diagnostic
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r59-tandem-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r59-tandem/
+          retention-days: 1
+          if-no-files-found: warn
