@@ -1,0 +1,51 @@
+name: DIC Issue33 R71 original603 576 selected source
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r71-576-stumptown.yml
+      - docs/workstreams/ops-issue33-r71-576-stumptown-20261109.md
+      - scripts/audit/issue33-r71-576-selected-contract.mjs
+      - scripts/audit/issue33-r71-576-afterproof.mjs
+      - tests/coffee-issue33-r71-576-selected-contract.test.mjs
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r71-576-stumptown.yml
+      - scripts/audit/issue33-r71-576-selected-contract.mjs
+      - scripts/audit/issue33-r71-576-afterproof.mjs
+      - tests/coffee-issue33-r71-576-selected-contract.test.mjs
+permissions:
+  contents: read
+jobs:
+  original-576-selected:
+    name: original603-576-current-stumptown-source
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Selected factory-vs-farm positive and adversarial tests
+        run: node --test tests/coffee-issue33-r71-576-selected-contract.test.mjs
+      - name: Guarded official original URL current parser Add Coffee and Source Review
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '576'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r71-576
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Fail-closed current selected source and role afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r71-576
+        run: node scripts/audit/issue33-r71-576-afterproof.mjs
+      - name: Preserve bounded public source HTML and verdict
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r71-576-current
+          path: /tmp/dic33-r71-576/
+          if-no-files-found: warn
+          retention-days: 1
