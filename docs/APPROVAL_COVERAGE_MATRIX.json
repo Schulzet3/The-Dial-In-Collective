@@ -538,15 +538,15 @@
       ]
     },
     {
-      "id": "first_coffee_expansion_one_time_style",
-      "decision_key": "current_owner_first_expansion_starting_style_20261021",
-      "scope": "First intentional expansion before any shot, never Add Coffee; historical dose-confirmation details superseded by current >2 g new-shot advisory",
-      "implementation": "published_source",
+      "id": "first_coffee_expansion_until_first_shot",
+      "decision_key": "current_owner_first_shot_style_until_logged_20261108",
+      "scope": "On any intentional expanded owner coffee card without a saved or locally pending shot, show editable Recommended for you / Starting Shot Style / Log First Shot again after collapse, reopen or reload; hide after first shot, including historical hidden shots. Never on Add Coffee; do not touch Current. Narrowly supersedes original once-only UI gate, preserves historical first-view RPC/SQL/local records and other owner decisions.",
+      "implementation": "source_testing_not_published",
       "device_acceptance": "RETIRED_NOT_REQUIRED; no new physical-device test asserted",
-      "issue": 19,
+      "issue": 1591,
       "hosted_sql_applied": true,
       "production_migration_version": "20261022163029",
-      "site_published": true,
+      "site_published": false,
       "assertions": [
         {
           "path": "site/cloud/main.js",
@@ -555,6 +555,18 @@
         {
           "path": "site/cloud/main.js",
           "contains": "Recommended for you:"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "const firstStyle=!s.shots.some(sh=>sh.coffeeId===c.id);"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "absent": "this.firstStylePromptId"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "absent": "claimFirstStylePrompt("
         },
         {
           "path": "site/cloud/main.js",
@@ -574,7 +586,11 @@
         },
         {
           "path": "tests/cloud-first-style-on-expand.test.mjs",
-          "contains": "once across reloads"
+          "contains": "zero-shot guidance remains on reopen and reload"
+        },
+        {
+          "path": "tests/cloud-first-style-on-expand.test.mjs",
+          "contains": "logged shot replaces guidance with normal controls"
         }
       ]
     },
