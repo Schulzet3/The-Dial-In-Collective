@@ -28,7 +28,6 @@ for(const s of R64_SELECTED){
  check(markers.ownProduct===true,prefix+'selected_current_product_body_not_verified');
  const fields=rec.current_fields||{},conflicts=rec.conflicts||[];
  check(new RegExp('\\b'+s.country+'\\b','iu').test(fields.origin||''),prefix+'selected_country_missing');
- const otherFields={};
  if(s.number===566){
   if(markers.washedMention)check(fields.process==='Washed',prefix+'direct_selected_washed_omission');
   check(fields.roast_level==='Light',prefix+'literal_selected_light_roast_omission');
