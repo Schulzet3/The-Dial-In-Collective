@@ -936,19 +936,22 @@
     },
     {
       "id": "LIT-2024-PANNUSCH-ESPRESSO-KINETIC-CONTROL",
-      "type": "peer_reviewed_original_espresso_solute_kinetic_model_abstract_source",
+      "type": "peer_reviewed_original_espresso_mechanistic_two_grain_kinetic_model_primary_full_text",
       "title": "Model-based kinetic espresso brewing control chart for representative taste components",
       "authors": "Verena B. Pannusch; Benedikt K. L. Schmieder; Lara Vannieuwenhuyse; Mirjana Minceva; Heiko Briesen",
       "published": "2024-04 (volume); original author-institution notice 2024-01-19",
       "journal": "Journal of Food Engineering 367:111887",
       "doi": "10.1016/j.jfoodeng.2023.111887",
       "url": "https://doi.org/10.1016/j.jfoodeng.2023.111887",
-      "access": "DIRECT_ORIGINAL_AUTHOR_AFFILIATED_TUM_INSTITUTION_PUBLICATION_ABSTRACT_BIBLIOGRAPHY_20261108; PUBLISHER_DOI_FULL_TEXT_UNAVAILABLE; NO_PDF_BYTES",
-      "review_status": "BOUNDED_DIRECT_PRIMARY_AUTHOR_INSTITUTION_ABSTRACT_AND_LIVE_ORG02_ENGINE_CROSSCHECK; NOT_FULL_TEXT_METHODS_DATA_REVIEW",
-      "evidence_grade": "PEER_REVIEWED_ORIGINAL_PHYSICAL_CHEMICAL_MODEL_AUTHOR_ABSTRACT_ONLY; NO_APP_TASTE_VALIDATION",
-      "claims_verified_externally": "Authors report extension of a two-grain kinetic model for flow-rate and temperature effects, fitting prior espresso extraction data on TDS, caffeine, trigonelline and chlorogenic acid, and checking predictions against experiments involving dynamic temperature and flow. No experimental DIC five-sensory-rating prediction or universal optimum shown in accessible abstract.",
+      "access": "DIRECT_ORIGINAL_J_FOOD_ENG_2024_ARTICLE_AS_REPRINTED_VERBATIM_IN_TUM_AUTHOR_2024_DISSERTATION_APPENDIX_B3_HTTPS://MEDIATUM.UB.TUM.DE/DOC/1734154/1734154.PDF_PAPER_PAGES_1_TO_8_PARSED_WEB_TEXT_20261109; TUM_RESEARCH_PORTAL_AND_2024_01_19_AUTHOR_INSTITUTION_ANNOUNCEMENT_CROSSCHECKED; PDF_SCREENSHOT_HTTP429; BINARY_HASH_NOT_OBTAINED",
+      "review_status": "DIRECT_SUBSTANTIVE_ORIGINAL_ARTICLE_EMBEDDED_REPRINT_INTRO_MODEL_ASSUMPTIONS_DESIGN_8_VALIDATION_SCENARIOS_RESULTS_FIGURES_2_TO_6_LIMITATIONS_AND_CONCLUSION_PAGES_1_TO_8_TEXT_READ; VISUAL_SCREENSHOT_429; SUPPLEMENTARY_MATLAB_DATA_MENDELEY_DOI_INACCESSIBLE_NOT_REANALYZED",
+      "evidence_grade": "PEER_REVIEWED_ESPRESSO_MECHANISTIC_MODEL_FIT_ON_SCHMIEDER_2023_ONE_COFFEE_HPLC_TDS_WITH_EIGHT_NEW_WITHIN_DOMAIN_VALIDATION_PROFILES; NO_HUMAN_TASTE_PANEL_OR_CROSS_COFFEE_CUP_VALIDATION",
+      "claims_verified_externally": "Original 2024 article, incorporated in author TUM doctoral thesis Appendix B.3, extends a two-grain mass-transfer model to flow/temperature, fits prior coffee chemical fractions, and evaluates eight constant/gradient flow/temp profiles (Table 1). Existing-fit average MAPE: TDS 6.07%, caffeine 4.59%, trigonelline 7.85%, chlorogenic 4.98%. New validation chemical chlorogenic MAPE 16.86% temperature and 18.23% flow conditions, attributed possibly to different roasted batch, not a verified sole cause. Within held-out tested conditions, cup-concentration temperature differences not statistically significant; one flow comparison of chlorogenic p=0.025 was considered potentially an experiment error by authors. Fig 6 model contour chart represents specific compound yields and a single studied coffee/water; user human taste, alternate coffee/water/roast/hardware and DIC five ratings were NOT validated. Original app interpolates precalculated simulations; not on-device real shot measurement.",
       "source_bytes_sha256": null,
-      "source_byte_caveat": "Original full Elsevier article, parameter tables, coefficient errors, supplement, PDF and blinded sensory/member data not accessed or hashed. TUM author-institution abstract is not full-text verification."
+      "source_byte_caveat": "Full original article text read through TUM author thesis public PDF extraction; attempted required PDF page screenshots both HTTP429. Original binary cannot be downloaded/hashed here. Supplementary data/code DOI 10.17632/y2tz67f6ry.1 inaccessible, simulations not reproduced; figure pixels not inspected. No unobserved human taste data or cross-setup claim.",
+      "primary_fulltext_institutional": "https://mediatum.ub.tum.de/doc/1734154/1734154.pdf (doctoral thesis by first author, Appendix B3 reprints original article, pp. 115-123)",
+      "author_institution_crosscheck": "https://portal.fis.tum.de/en/publications/model-based-kinetic-espresso-brewing-control-chart-for-representa/",
+      "underlying_data_doi": "10.17632/y2tz67f6ry.1 (not accessed)"
     },
     {
       "id": "LIT-2023-GUINARD-DRIP-PREFERENCE-BCC",
@@ -3272,6 +3275,28 @@
       "owner_approval": false,
       "test_source": "PR-head Node22 42536695126 3138/0/6; SQL42536695078 security42536695084 UX42536695019 approval42536695056 SUCCESS; merged Node42536921751 3138/0/6 UX42536921758 approval42536921708 SUCCESS. Frozen60342536695290 SKIPPED. Initial malformed candidate PR1524 closed unmerged.",
       "date": "2026-11-08"
+    },
+    {
+      "id": "R455-EV-CIT-126-A",
+      "source": "LIT-2024-PANNUSCH-ESPRESSO-KINETIC-CONTROL; original journal article reproduced in Pannusch 2024 TUM doctoral thesis Appendix B3 pp. 115-123; original methods Table 1/model and §4.1 directly inspected via extracted PDF text 2026-11-09; TUM research record/author notice crosscheck; PDF screenshots 429.",
+      "claim": "Original mechanistic two-grain model was fit to prior one-coffee experimental TDS/caffeine/trigonelline/chlorogenic acid extraction fractions and checked against eight within-domain constant/gradient flow/temperature scenarios. Published fit MAPEs are 6.07/4.59/7.85/4.98% respectively, not calibrated confidence intervals for sensory ratings or prospective member cup quality. Validation chlorogenic average MAPE rose to 16.86% across temperature and 18.23% across flow profiles, potentially influenced by different roast batch; authors did not prove a sole cause.",
+      "grade": "ORIGINAL_PEER_REVIEWED_FULL_TEXT_EMBEDDED_REPRINT_BOUNDED_DIRECT_METHODS_AND_RESULTS_WITH_QUANTIFIED_ERRORS; SUPPLEMENTARY_NOT_REANALYZED_PDF_VISUAL_HTTP429",
+      "result": "VERIFIED_CHEMICAL_MODEL_WITHIN_DOMAIN_ONLY_NOT_PERSONAL_TASTE_CALIBRATION",
+      "current_app": "Current site/lib/engine.js does not implement this paper's model or track analyte concentrations; existing owner-approved roast/style baseline and same-coffee successful shots remain separately governed.",
+      "owner_approval": false,
+      "test_source": "Read only paper text, DOI and engine/constants/ORG02 crosswalk; no app code/Node/browser/SQL/member or physical espresso tests; repository original PDF bytes not hashed.",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "R455-EV-CIT-126-B",
+      "source": "Pannusch et al. 2024 original article Appendix B3 §4.2/4.3/Conclusion and Fig 6 captions within author dissertation; DOI 10.1016/j.jfoodeng.2023.111887; primary TUM manuscript pp. 6-8.",
+      "claim": "Model's dynamic chart (20 g dry coffee / 30 mL beverage example) shows small predicted analyte-yield response to flow and temperature under studied conditions, including a modeled stronger extraction with lower flow, but human sensory preference was explicitly excluded. Independent constant/gradient temperature cup analytes had no detected statistical difference in studied setup. The chart authors explicitly rule out general transfer to other coffee varieties, roasts or water; paper's publicly shared GUI interpolates precomputed simulations, not calibrated personalized taste. No universal optimum, new advice threshold, five-taste confidence percentage or Turbo/Fast-Flow reconciliation follows.",
+      "grade": "DIRECT_PEER_REVIEWED_ORIGINAL_TEXT_INSTITUTIONAL_REPRINT_EXPLICIT_SCOPE_STATISTICS_AND_AUTHOR_LIMITS; PDF_PIXEL_ORIGINAL_HASH_RAW_CODE_UNVERIFIED",
+      "result": "RESEARCH_ONLY_SCOPE_BOUNDARY_NO_CHANGE_TO_LOCKED_FIVE_TASTE_OR_RECOMMENDATION_LOGIC",
+      "current_app": "Live source engine blob 21d6e822599e21db95b9f30ce3178db3542a6eb6 baseline/temperatureGuidance/nextAdvice and constants blob 72221331ce4dffabe416eebec1ae2fceced3a095 retain owner-Locked heuristic baselines, same-coffee measured history, one truly controllable change, independently selectable styles and all five ratings.",
+      "owner_approval": false,
+      "test_source": "Original primary publisher reprint text and author institution metadata; no code changes or scientific/physical validation of app; PDF screenshot tried and blocked 429.",
+      "date": "2026-11-09"
     }
   ],
   "policy_decisions_pending": [],
@@ -3324,45 +3349,34 @@
     "R455-120 verified source-bound PR1477 engine familyShots coffee+style identity guard and five isolated synthetic regressions, Node22 3102/0/6 both PR head and merged, applicable CI success, SAFE READY in development only, original S019 inaccessible, #267 literal review separately owned. Next: disjoint fresh research/UX increment.",
     "R455-121 source-bound development bb71ba857bed91cd6807417b954e48292833a1b7: 2003 espresso original Wiley publisher abstract and University Navarra crosscheck, 2020 controlled drip paper original publisher-indexed methods/results and official 2021 correction, 68 sources/163 evidence checks/83 proposals. Same-commit docs-only PR/CI pending. No unverified 92 C optimum, water salts, app policy or code; no #267 line credit, S019 missing.",
     "R455-124 base 64cb736981b708e41f5578cbdd2ad6eed8db1db8: Direct MDPI Foods 2023 Schmieder et al. single-coffee flow/grind/temp 15-point factorial HPLC/TDS kinetics PDF text and TUM author page checked. 69 sources/167 evidence checks/86 proposals; screenshot 429, original binary and supplemental raw data unverified. No universal temperature or five-taste transfer, no code/policy/release changes; source-bound docs PR/CI/merge pending. Standalone S019 inaccessible; zero #267 literal-line credit.",
-    "R455-124 FINAL: PR1514 tested head 0e552b5ccc434f5044a2581ad904426b74041a1a 5/5 exact PR checks SUCCESS (approval42531684784, Node validate42531684895, SQL42531684914, browser/mobile/cloud42531684960); nonforce squash merged c0d997f646d6053f0a2cd99813770376e4469d31 with all three source Git blobs identical. Exact merged approval42531952023 SUCCESS. 69 curated sources/167 bounded checks/86 proposals; no new READY or deployment; screenshot HTTP429 and standalone S019 still unverified."
+    "R455-124 FINAL: PR1514 tested head 0e552b5ccc434f5044a2581ad904426b74041a1a 5/5 exact PR checks SUCCESS (approval42531684784, Node validate42531684895, SQL42531684914, browser/mobile/cloud42531684960); nonforce squash merged c0d997f646d6053f0a2cd99813770376e4469d31 with all three source Git blobs identical. Exact merged approval42531952023 SUCCESS. 69 curated sources/167 bounded checks/86 proposals; no new READY or deployment; screenshot HTTP429 and standalone S019 still unverified.",
+    "R455-126 primary original Pannusch 2024 model article in TUM first-author thesis appendix B3 directly reviewed: eight validation profiles, four compound chemical errors, important roast-batch uncertainty, explicit no human sensory or cross-roast transfer. 69 sources/170 checks/88 proposals, research-only, docs CI/PR pending. Standalone S019 missing; no #267 direct-line audit credit."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-125",
-    "base_development_sha": "da4989c83142cfca9e76dcb276b0f172e931a43d",
-    "merged_development_source_sha": "1a54269e8f7d2c1189fd948c959de5e61dab3312",
-    "engine_blob_sha": "21d6e822599e21db95b9f30ce3178db3542a6eb6",
+    "id": "R455-126",
+    "base_development_sha": "e45c29e5e5bf42b5ddae30adb2663ec4cd81b12e",
     "source_ids": [
-      "LIVE_CODE_SAVE_SHOT_BASKET_ID"
+      "LIT-2024-PANNUSCH-ESPRESSO-KINETIC-CONTROL"
     ],
     "claim_ids": [
-      "R455-EV-APP-087-A"
+      "R455-EV-CIT-126-A",
+      "R455-EV-CIT-126-B"
     ],
     "proposal_ids": [
-      "R455-PROP-125-NEW-SHOT-ACTIVE-BASKET-IDENTITY"
+      "R455-PROP-126-MODELED-ESPRESSO-CONTROL-CHART-SENSORY-TRANSFER-BOUNDARY"
     ],
     "number_of_curated_sources": 69,
-    "total_evidence_checks": 168,
-    "number_of_proposals": 87,
-    "review_type": "DIRECT_SOURCE_REAL_MODULE_SYNTHETIC_AND_EXACT_MERGED_NODE22_UX_SQL_SECURITY",
-    "code_or_policy_changed": true,
+    "total_evidence_checks": 170,
+    "number_of_proposals": 88,
+    "review_type": "DIRECT_FULL_PRIMARY_ORIGINAL_REPRINT_TEXT_SCOPE_CHEMICAL_MODEL_STATISTICAL_ERRORS_RESEARCH_ONLY",
+    "code_or_policy_changed": false,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
-    "ci_runs": [
-      42536695126,
-      42536695019,
-      42536695078,
-      42536695084,
-      42536695056,
-      42536695290,
-      42536921751,
-      42536921758,
-      42536921708
-    ],
+    "ci_runs": [],
+    "status": "PENDING_EXACT_SOURCE_DOCS_CI_AND_NONFORCE_INTEGRATION",
     "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "Recover latest refs and continue separate source/claim-level research and UX review; no deploy.",
-    "github_pr": 1525,
-    "review_status": "SOURCE_BOUND_SAFE_CODE_MERGED_VERIFIED_READY_NOT_DEPLOYED"
+    "next_action": "Verify exact source-bound docs PR-head CI, nonforce merge, reread SHA/blobs, reconcile Current Status and issue. No deployment."
   },
   "policy_decisions_resolved": [
     {
@@ -5152,6 +5166,27 @@
       "implementation": "PR1525_NONFORCE_SQUASH_MERGED_1a54269e8f7d2c1189fd948c959de5e61dab3312_ALL_FOUR_BLOBS_IDENTICAL_TO_TESTED_HEAD",
       "test_plan": "Four synthetic real-module positives/negatives, Node22 3138 PASS/0 FAIL/6 SKIP head and merge, head SQL/security/UX/approval and merged UX/approval PASS; frozen603 SKIPPED not PASS.",
       "release_queue_status": "DIC-Q-455-new-shot-active-basket-integrity READY_DEV_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-126-MODELED-ESPRESSO-CONTROL-CHART-SENSORY-TRANSFER-BOUNDARY",
+      "finding": "Recovered the author's full original peer-reviewed 2024 two-grain espresso kinetic model reprint, upgrading the registered abstract-only source; analyte-kinetic fit and within-coffee validation do not provide general taste response or DIC personal recommendation calibration.",
+      "evidence": [
+        "R455-EV-CIT-126-A",
+        "R455-EV-CIT-126-B"
+      ],
+      "severity": "P3_RESEARCH_CORRECTNESS_AND_FALSE_SCIENTIFIC_CONFIDENCE_GUARD",
+      "user_benefit": "Prevent borrowed mathematical model curves from being mislabeled as individual taste confidence or used to overwrite personal same-coffee evidence, while preserving independent styles and one-variable advice.",
+      "current_locked": "Five sensory inputs and all-green vs incomplete ratings, at most one controllable next-shot change, independent Turbo/Fast-Flow and other style boundaries, original recorded history/notes, personal multiple families, grinder/feed calibration/equipment capability and privacy/Community.",
+      "current_app": "2026-11-09 directly inspected live engine baseline/temperatureGuidance/nextAdvice and constants; app uses explicitly heuristic roast/style defaults plus eligible same-coffee measured successes, not this model.",
+      "proposed_change": "NO_APPLICATION_CHANGE. Keep paper's model and public GUI as bounded one-coffee chemical prediction evidence, not as simulated user taste or universal espresso targets. A future model-driven UX/numeric target feature would require owner approval and independent sensory/cross-coffee/device validation.",
+      "evidence_grade": "ORIGINAL_PEER_REVIEWED_ARTICLE_FULL_TEXT_AUTHOR_THESIS_REPRINT_WITH_SIX_AND_EIGHT_PROFILE_METHODS; RAW_SUPPLEMENT_AND_PDF_PIXELS_NOT_VERIFIED",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "RESEARCH_ONLY_SOURCE_UPGRADE_AND_CLAIM_CHECKPOINT_NO_APP_CODE_TEST_SQL_CI_OR_POLICY_CHANGE",
+      "test_plan": "Validate canonical ledger JSON and docs-only exact-source approval/governance CI; no implied Node test runs or empirical espresso improvement.",
+      "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY_NO_READY_ITEM",
       "github267_literal_review_credit": 0,
       "production_deployed": false
     }
