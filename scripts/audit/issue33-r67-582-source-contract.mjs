@@ -18,7 +18,8 @@ export function selectedOneskaEmbuEvidence(scoped){
  const prefix=index<0?'':heroText.slice(0,index);
  const hero=index>=0&&index<=100&&!/\b(?:last year|previous(?:ly)?|formerly|historic(?:al)?|other coffee|different coffee|related|recommended|no longer|not from|old lot)\b/iu.test(prefix);
  if(!hero)return {hero:false,currentEstate:false,producer:false,process:false};
- const own=after.split(/<section\b[^>]*class=["'][^"']*(?:related|recommend)|<h1\b/iu)[0].slice(0,30000);
+ // Stop before other-coffee panels even when they use an ordinary heading or aside rather than a 'related' section class.
+ const own=after.split(/<section\b[^>]*class=["'][^"']*(?:related|recommend)|<h[2-6]\b[^>]*>\s*(?:related(?:\s+products?|\s+coffees?)?|you\s+may\s+also\s+like|recommended(?:\s+products?)?)\s*<\/h[2-6]>|<aside\b|<h1\b/iu)[0].slice(0,30000);
  const prose=plain(own);
  const currentEstate=/\bOneska is the small estate farm of Onesmus Njagi\b.{0,320}?\bon the slopes of Mount Kenya in Embu County\b/iu.test(prose);
  const producer=/\bProducer\s+Onesmus and Karen Njagi\b/iu.test(prose);

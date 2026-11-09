@@ -28,3 +28,14 @@ test('country-like menu or SEO cannot replace the actual chosen product primary 
  assert.equal(evidence(html).hero,false);
  assert.equal(evidence('<meta content="Embu Kenya"><h1>Other coffee</h1>'+story).hero,false);
 });
+
+test('related heading and aside cannot launder farm, producer or processing into current coffee',()=>{
+ const related='<p>'+story+'</p><dl><dt>Producer</dt><dd>Onesmus and Karen Njagi</dd><dt>Processing</dt><dd>Washed</dd></dl>';
+ const unproven={prose:'Current selected product has no named estate here.',producer:'Another producer',processing:'Natural'};
+ for(const tail of ['<h2>Related products</h2>'+related,'<aside>'+related+'</aside>']){
+  assert.deepEqual(evidence(doc({...unproven,tail})),
+   {hero:true,currentEstate:false,producer:false,process:false});
+  assert.deepEqual(evidence(doc({tail})),
+   {hero:true,currentEstate:true,producer:true,process:true});
+ }
+});
