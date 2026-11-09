@@ -14551,4 +14551,47 @@
     "baseline_complete": false,
     "next": "Distinct uncovered provider family/changed drift; never claim hosted RLS/JWT runtime or compiled native."
   }
+,
+  "provider_pg_authid_safe_roles_and_statement_numeric_run108": {
+    "status": "SAFE_RAW_PG_AUTHID_30_OF_30_AND_NUMERIC_PG_STAT_STATEMENTS_001_TO_300_SNAPSHOT_ONLY",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_development_parent_sha": "ed621cc2b766609235b0835f0c27563fc5d5a6ec",
+    "source_main_sha": "a4028e42b0d0316fd539c0563fd07832d509aed0",
+    "source_release_sha": "92829cb6aff82aaec212eabbd921183e7997f1a7",
+    "observed_at": "2026-11-09 01:53:40.225351+00",
+    "receipt": "docs/audits/issue509-provider-pg-authid-safe-role-and-statement-numeric-2026-11-09-run108.json",
+    "pg_authid_safe_fields": 30,
+    "pg_authid_total": 30,
+    "rolpassword": "NEVER_RETRIEVED",
+    "public_client_role_privilege_anomalies": 0,
+    "privileged_memberships": [
+      {
+        "client_role": "anon",
+        "privileged_roles_tested": 9,
+        "privileged_memberships": 0,
+        "matching_roles": ""
+      },
+      {
+        "client_role": "authenticated",
+        "privileged_roles_tested": 9,
+        "privileged_memberships": 0,
+        "matching_roles": ""
+      },
+      {
+        "client_role": "authenticator",
+        "privileged_roles_tested": 9,
+        "privileged_memberships": 1,
+        "matching_roles": "service_role"
+      }
+    ],
+    "pg_stat_statements_numeric_reviewed": 300,
+    "pg_stat_statements_snapshot_total": 3949,
+    "pg_stat_statements_stats_reset": "2026-10-09 11:11:31.487298+00",
+    "query_sql_text": "WITHHELD",
+    "numeric_telemetry_volatile": true,
+    "source_fixes": 0,
+    "production_writes": false,
+    "baseline_complete": false,
+    "next": "Safe numeric statement metrics ordinal 301 after count and anchor recheck; compiled/hosted Auth/JWT/API and credential fields UNVERIFIED"
+  }
 }
