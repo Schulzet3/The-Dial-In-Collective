@@ -1,3 +1,7 @@
+## November 9, 2026 UTC — #455 R131 consumer drip liking/espresso personal-taste transfer boundary [skip netlify]
+
+- Original [Pinsuwan et al. (2022) *Foods* 11(2):180](https://pmc.ncbi.nlm.nih.gov/articles/PMC8774372/) full primary PMC article HTML substantively checked: 8 roasted Arabicas, medium-grind drip 55 g/L, 8 trained panelists, 100 Thai consumers. Group sensory liking and emotion associations **cannot establish personal espresso five-rating targets, dark-roast preference or any next-shot adjustment**. Original publisher PDF binary/hash and raw consumer observations unverified. No app/Locked change; curated evidence now **73 sources / 179 checks / 93 proposals**. [#455 journal](workstreams/issue-455.md); PR/CI/merge pending at authoring, not a READY feature. S019 still inaccessible; #267 manual-line credit zero. Main/production unchanged.
+
 ## November 9, 2026 UTC — Issue #1591 first-shot style until logged READY, NOT DEPLOYED [skip netlify]
 
 - **Owner Locked:** First-shot Starting Shot Style remains visible on each intentional expansion, reopen and reload until the coffee's first saved or offline-queued shot; after any logged shot (including historical hidden), normal shot/recommendation controls return. No Add Coffee style picker, Current change, claim-gated visibility, new SQL, or private data migration. Authority in Master Specification + Decision Ledger.
