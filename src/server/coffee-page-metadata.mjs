@@ -38,6 +38,7 @@ import {selectedCurrentFarmGrowingLocality} from './coffee-selected-farm-growing
 import {selectedCurrentFarmCountryLocality} from './coffee-selected-farm-country-locality.mjs';
 import {selectedCurrentFarmVolcanoRegion} from './coffee-selected-farm-volcano-region.mjs';
 import {selectedCountryFirstCurrentRegion} from './coffee-country-first-current-region.mjs';
+import {selectedCurrentInlineCompoundRegion} from './coffee-selected-inline-region.mjs';
 import {selectedDottedTitleCountryRegion} from './coffee-dotted-title-region.mjs';
 import {selectedProcessingSiteNotFarmOrigin} from './coffee-processing-site-origin-guard.mjs';
 import {selectedCurrentColombianDepartmentOrigin} from './coffee-selected-department-origin.mjs';
@@ -2144,6 +2145,25 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    });
   }
   delete fields.origin;conflicts.add('origin');
+ }
+ // Current selected compound product specifications can publish Region
+ // inline after Process, Variety, Farm and Producer. Only a direct, uniquely
+ // evidenced, same-selected-product region may refine its broad country.
+ if(fields.origin&&!conflicts.has('origin')&&geographyParts(fields.origin).length===1&&
+  ORIGIN_COUNTRIES.has(keyOf(fields.origin))){
+  const inline=selectedCurrentInlineCompoundRegion({
+   name:fields.name,country:fields.origin,origin:fields.origin,
+   blocks:productCoffeeProse(canonicalProduct,clean)
+  });
+  if(inline){
+   rememberCoffeeReviewCandidate(fields,'origin',fields.origin,'Prior broad selected country');
+   fields.origin=inline.value;
+   if(source_facts.length<384)source_facts.push({
+    field:'origin',label:'Direct selected compound-spec Region',
+    value:inline.quote,source_url,source_type:'html',
+    section:'Exact selected Product Process/Variety/Farm/Producer/Region'
+   });
+  }
  }
  // Direct present selected department beats irrelevant continental context.
  if(fields.origin&&!conflicts.has('origin')){
