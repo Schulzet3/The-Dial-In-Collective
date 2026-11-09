@@ -1,0 +1,41 @@
+name: DIC Issue33 R51 selected original603 583 584 585 official source
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r51-583-584-585-official.yml
+      - scripts/audit/issue33-r51-583-584-585-afterproof.mjs
+      - scripts/audit/issue33-r51-selected-product-contract.mjs
+      - tests/coffee-issue33-r51-selected-product-contract.test.mjs
+permissions:
+  contents: read
+jobs:
+  selected-r51:
+    name: original603-583-584-585-selected-current
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Guarded exact original selected official HTTPS and real parser Add Coffee
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r51-source
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '583,584,585'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Fail closed on changed selected identity, unproved process and raw HTML integrity
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: ${{ runner.temp }}/dic33-r51-source
+        run: node scripts/audit/issue33-r51-583-584-585-afterproof.mjs
+      - name: Preserve public raw source and strict verdict for independent checks (one day)
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r51-583-584-585-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic33-r51-source/
+          if-no-files-found: error
+          retention-days: 1
