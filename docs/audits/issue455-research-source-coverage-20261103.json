@@ -1084,6 +1084,26 @@
       "current_app_crosswalk": "Engine blob 21d6e822599e21db95b9f30ce3178db3542a6eb6 uses observed within-range grinder calibration and personal same-coffee successes; no modeled PSD middle-grind prior. Preserve original five tastes, styles, recipe families, Slow Feed and private history.",
       "reviewed_date_utc": "2026-11-09",
       "implementation_status": "RESEARCH_ONLY_NO_APP_OR_LOCKED_POLICY_CHANGE"
+    },
+    {
+      "id": "LIT-2022-LOMOLINO-CAPSULE-CREMA-SENSORY",
+      "type": "peer_reviewed_primary_espresso_capsule_and_moka_foam_sensory_comparison",
+      "title": "Foam Characteristics and Sensory Analysis of Arabica Coffee, Extracted by Espresso Capsule and Moka Methods",
+      "authors": "Giovanna Lomolino; Valentina Dal Zotto; Stefania Zannoni; Alberto De Iseppi",
+      "published": "2022-05-05",
+      "journal": "Beverages 8(2), article 28",
+      "doi": "10.3390/beverages8020028",
+      "url": "https://doi.org/10.3390/beverages8020028",
+      "first_party_crosscheck": "https://research.unipd.it/handle/11577/3445065",
+      "access": "PUBLISHER_SEARCH_INDEX_ORIGINAL_ARTICLE_ABSTRACT_AND_AUTHOR_UNIVERSITY_PRIMARY_REPOSITORY_ABSTRACT_METADATA_READ; FULL_PUBLISHER_HTML_429_AND_FULL_PDF_NOT_READ",
+      "review_status": "BOUNDED_SUBSTANTIVE_PRIMARY_ABSTRACT_AND_AUTHOR_INSTITUTION_RECORD_REVIEW; METHODS_RESULTS_TABLES_SENSORY_PANEL_N_AND_ACTUAL_PUCK_PRESSURE_NOT_VERIFIED",
+      "evidence_grade": "PEER_REVIEWED_TWO_ARABICA_ORIGINS_CAPSULE_VS_MOKA_ORIGINAL_ABSTRACT_ONLY; SENSORY_DESCRIPTIVE_AND_CREMA_MORPHOLOGY_WITH_CONFOUNDED_MACHINE_CAPSULE_AND_METHOD; NO_GENERAL_ESPRESSO_CONTROL_TARGET",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "No verified article binary/hash, complete experimental protocol, sampling/variance tables, actual puck pressure traces, panel selection/blinding, or reproducible sensory data. Publisher direct HTML returned HTTP 429 on Nov 9; original abstract/search index plus University of Padua article record independently matched bibliographic claims.",
+      "claims_verified_externally": "Publisher original abstract and Padua author's institutional record describe two Arabica varieties (Brazil, Guatemala) and three brewing comparisons: capsule systems labeled 19 and 15 bar and moka. Reported capsule foam bubble size/stability and sensory descriptive profiles differed across these conditions; 19-bar system reported finer more stable crema than 15-bar setup. This is a comparison of devices/methods, NOT independently isolated brew-pressure dose-response; reported rated-system pressures must not be treated as verified puck-pressure curves, and crema appearance is not automatically beverage preference.",
+      "current_app_crosswalk": "Live engine@177b76962a6ddb19fdc884eab71d09b902a35850 and constants@72221331ce4dffabe416eebec1ae2fceced3a095 preserve personal measured dose/yield/time, five sensory ratings, equipment control, styles, same-coffee families and single controllable next-shot change; no crema-driven 15/19-bar optimum or inferred sensory grading.",
+      "reviewed_date_utc": "2026-11-09",
+      "implementation_status": "RESEARCH_ONLY_NO_APP_OR_LOCKED_POLICY_CHANGE"
     }
   ],
   "evidence_checks": [
@@ -3349,6 +3369,28 @@
       "owner_approval": false,
       "test_source": "3 new synthetic focused tests checked in; PR-head full Node 3157 pass/0 fail/6 skip 42552590204; isolated SQL42552590151, security42552590171, UX42552590145, governance42552590241 SUCCESS; exact merged Node42552793400 3157/0/6, UX42552793410 and approval42552793411 SUCCESS; frozen603 SKIPPED. No live provider/member tests.",
       "date": "2026-11-09"
+    },
+    {
+      "id": "R455-EV-CIT-129-A",
+      "source": "Lomolino et al. 2022 Beverages 8(2):28 original publisher abstract/search index (DOI 10.3390/beverages8020028) + University of Padua repository author record",
+      "claim": "Study compared two Arabica coffees and capsule systems described as 15 versus 19 bar plus moka; reported crema structure/stability and sensory descriptor differences across these systems.",
+      "grade": "PUBLISHER_ABSTRACT_AND_FIRST_PARTY_AUTHOR_INSTITUTION_CROSSCHECK_NOT_FULL_METHODS_OR_RAW_DATA",
+      "result": "SUPPORTED_AS_REPORTED_BOUNDED_COMPARISON_NOT_INDEPENDENT_PRESSURE_CONTROL_OR_BEVERAGE_PREFERENCE",
+      "current_app": "No crema input in current Log Shot five-taste model; no proposed addition.",
+      "owner_approval": false,
+      "test_source": "Direct first-party accessible abstract/metadata review only; no code, original espresso brew, device or real-member tests.",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "R455-EV-CIT-129-B",
+      "source": "Same original publisher abstract/Padua institutional record; Master Specification and Decision Ledger Locked product rules; current engine/constants blobs",
+      "claim": "The capsule and moka comparison does not establish a general 19-bar extraction preference, personal sensory confidence, crema-based success, puck pressure optimum, automatic grind/temperature correction or causally isolated pressure effect.",
+      "grade": "TRANSFER_LIMIT_DIRECT_ABSTRACT_PLUS_CURRENT_CODE_AUTHORITY_CROSSWALK_WITH_FULL_TEXT_UNAVAILABLE",
+      "result": "RESEARCH_ONLY_NO_UNIVERSAL_NUMERIC_PRESSURE_OR_CREAMINESS_RECOMMENDATION",
+      "current_app": "Preserve five original tastes, full-green vs incomplete, one actual controllable change, machine capability, original shot history/notes, independent styles and private data.",
+      "owner_approval": false,
+      "test_source": "Source-bound read-only analysis; no app/Node22/SQL/CI tests executed for a docs-only claim.",
+      "date": "2026-11-09"
     }
   ],
   "policy_decisions_pending": [],
@@ -3406,54 +3448,33 @@
     "R455-126 original Pannusch 2024 original full-text author thesis reprint 69/170/88 verified research-only, PR1533 nonforce squash merged 427631ec535b61e6ac47227d9038e88ad792db2c, original ledger/journal blobs match exact 5/5 PR-head checks SUCCESS and merged governance42542208887 SUCCESS. Reconciliation docs PR pending; no app deployment or code, S019 missing, no #267 credit.",
     "R455-127: new Wiley 2025 original publisher PSD abstract research-only, 70 curated sources, 172 checks, 89 proposals; no app policy, CI pending, S019 inaccessible and #267 direct audit distinct.",
     "R455-127 VERIFIED: PR1544 5/5 named head checks SUCCESS, nonforce squash ed621cc2b766609235b0835f0c27563fc5d5a6ec, 3 whitelisted doc blobs match tested head, exact merged approval42547720934 SUCCESS; research only 70/172/89, no application/Locked change. Reconciliation PR pending at receipt authoring.",
-    "R455-128: source e4a94d1b39e51f1e0cf71208d97add8c187c270e safe replay coffee-ID integrity; 3 tests and exact merged Node3157/0/6, UX and governance SUCCESS; 70 sources/173 checks/90 proposals; standalone S019 missing; continue distinct #455 work."
+    "R455-128: source e4a94d1b39e51f1e0cf71208d97add8c187c270e safe replay coffee-ID integrity; 3 tests and exact merged Node3157/0/6, UX and governance SUCCESS; 70 sources/173 checks/90 proposals; standalone S019 missing; continue distinct #455 work.",
+    "R455-129 source-first original publisher abstract + University of Padua record: no general 19-bar/crema optimality or new taste control; 71 curated/175 checks/91 proposals. Docs only pending PR CI; standalone S019 remains unreviewed."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-128",
-    "base_development_sha": "371c8c9bbc17645fd48b7d5f70d3e2ac1e9964fc",
-    "merged_source_sha": "e4a94d1b39e51f1e0cf71208d97add8c187c270e",
+    "id": "R455-129",
+    "base_development_sha": "52ab87129f611226581b2c75da5cdd90797bc293",
     "source_ids": [
-      "site/lib/engine.js@21d6e822599e21db95b9f30ce3178db3542a6eb6",
-      "site/lib/engine.js@177b76962a6ddb19fdc884eab71d09b902a35850"
+      "LIT-2022-LOMOLINO-CAPSULE-CREMA-SENSORY"
     ],
     "claim_ids": [
-      "R455-EV-APP-090-A"
+      "R455-EV-CIT-129-A",
+      "R455-EV-CIT-129-B"
     ],
     "proposal_ids": [
-      "R455-PROP-128-OFFLINE-REPLAY-COFFEE-IDENTITY"
+      "R455-PROP-129-CAPSULE-CREMA-NOT-ESPRESSO-PRESSURE-OPTIMUM"
     ],
-    "number_of_curated_sources": 70,
-    "total_evidence_checks": 173,
-    "number_of_proposals": 90,
-    "review_type": "DIRECT_LIVE_SOURCE_LOCKED_SAFE_OFFLINE_REPLAY_IDENTITY_BUG_AND_THREE_NEGATIVE_POSITIVE_REGRESSIONS",
-    "code_or_policy_changed": true,
+    "number_of_curated_sources": 71,
+    "total_evidence_checks": 175,
+    "number_of_proposals": 91,
+    "review_type": "ORIGINAL_PUBLISHER_ABSTRACT_AUTHOR_UNIVERSITY_CROSSCHECK_CREMA_CAPSULE_SENSORY_TRANSFER_BOUNDS",
+    "code_or_policy_changed": false,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
-    "status": "PR_HEAD_AND_MERGED_SOURCE_APPLICABLE_CI_SUCCESS_CODE_NONFORCE_MERGED_DOCS_RECONCILIATION_PENDING",
+    "status": "DOCS_PR_UNTESTED_NOT_MERGED_AT_SAME_COMMIT_AUTHORING",
     "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "Continue nonoverlapping source/evidence/UX fixes on exact new dev SHA; #267 historical literal audit separate; standalone S019 not reviewed.",
-    "code_pr": 1560,
-    "code_pr_head_sha": "904fe26cefa1d1dcf1dbc932ab94c24e9f733f8d",
-    "code_merge_sha": "e4a94d1b39e51f1e0cf71208d97add8c187c270e",
-    "exact_pr_head_runs": [
-      42552590204,
-      42552590145,
-      42552590151,
-      42552590171,
-      42552590241
-    ],
-    "exact_merged_runs": [
-      42552793400,
-      42552793410,
-      42552793411
-    ],
-    "merged_blobs": {
-      "engine": "177b76962a6ddb19fdc884eab71d09b902a35850",
-      "test": "4464e85553613e31afbfd7cdda250ecb6934b644",
-      "queue": "d599908fd6d5c1a5f578af43fa037e905d7c93b3",
-      "journal": "66dad43aa58825a50756767355ee310223ddd8a2"
-    }
+    "next_action": "Verify exact PR-head documentation-only CI then nonforce integrate and source-bound readback; resume separate new evidence/UX issue without copying #267 source-line work."
   },
   "policy_decisions_resolved": [
     {
@@ -5305,6 +5326,27 @@
       "implementation": "PR1560 EXACT_HEAD_904fe26cefa1d1dcf1dbc932ab94c24e9f733f8d NONFORCE_SQUASH_MERGED_e4a94d1b39e51f1e0cf71208d97add8c187c270e; FOUR_BLOBS_HEAD_EQUAL_MERGED; HEAD_CI_5_NAMED_SUCCESS; MERGED_NODE_UX_GOVERNANCE_SUCCESS; NO_PRODUCTION",
       "test_plan": "3 focused real-module synthetic tests; Node22 3157 PASS/0 FAIL/6 SKIP on head and merged; isolated SQL Auth/security workflows PASS; cloud targeted inner steps SKIP distinct from whole UX/mobile PASS; original603 SKIP.",
       "release_queue_status": "DIC-Q-455-offline-shot-replay-coffee-identity READY_DEV_ONLY_NOT_PUBLISHED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-129-CAPSULE-CREMA-NOT-ESPRESSO-PRESSURE-OPTIMUM",
+      "finding": "2022 primary study reports different crema and sensory descriptors between two capsule systems and moka, without accessible original full methods establishing a pressure-only cause or espresso taste optimum.",
+      "evidence": [
+        "R455-EV-CIT-129-A",
+        "R455-EV-CIT-129-B"
+      ],
+      "severity": "P3_UNSUPPORTED_PRESSURE_OR_CREMA_UNIVERSALIZATION",
+      "user_benefit": "Avoid a misleading crema/19-bar objective or taste score; maintain private personal five-sense feedback and equipment-aware, single-step recommendations.",
+      "current_locked": "All five existing sensory inputs, recorded actual shot/equipment, distinct styles, personal same-coffee evidence, only one controllable advice change, privacy and no unapproved new controls.",
+      "current_app": "Current engine@177b76962a6ddb19fdc884eab71d09b902a35850 uses measured user history and versioned grinder, not crema scores/target brew pressure.",
+      "proposed_change": "NO_APPLICATION_CHANGE. Research-only caution that reported capsule-machine nominal bar comparisons and crema morphology are not evidence for universal pressure settings, success badges or product taste changes.",
+      "evidence_grade": "DIRECT_PUBLISHER_ABSTRACT_PLUS_FIRST_PARTY_INSTITUTION_METADATA_ONLY; FULL_METHODS_AND_PRESSURE_TRACES_UNVERIFIED",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "RESEARCH_ONLY_LEDGER_AND_WORKSTREAM_CHECKPOINT_R455_129; NO_RUNTIME_OR_POLICY_CHANGE",
+      "test_plan": "Docs-only scoped PR exact source/Git blob + applicable governance/continuity CI verification after merge; no runtime/empirical taste tests claimed.",
+      "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY",
       "github267_literal_review_credit": 0,
       "production_deployed": false
     }
