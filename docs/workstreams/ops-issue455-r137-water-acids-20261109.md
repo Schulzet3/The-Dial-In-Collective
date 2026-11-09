@@ -1,0 +1,22 @@
+# Issue #455 — R455-137 independent water-mineral acid evidence upgrade (2026-11-09 UTC)
+
+Source-first: development `6106fda5200de6e8031e0efd3b540f467e8998c7`; main `a4028e42b0d0316fd539c0563fd07832d509aed0`; release/production `92829cb6aff82aaec212eabbd921183e7997f1a7`. Read current AGENTS, AI preflight, CURRENT_STATUS, Master Specification and Decision Ledger, approval matrix, release queue, source register, #455 comments, #335/#267/#33/#96 and open PRs. Owner #630 authorized TEMPORARY PUBLIC visibility through November 30; did not alter it. Separate #33/#267/#96 ownership preserved.
+
+## Direct original article audit; not just title/abstract
+
+Bratthäll, Figueira & Nording (2024), *Heliyon* 10(5), e26625, DOI 10.1016/j.heliyon.2024.e26625; [full peer-reviewed primary HTML](https://pmc.ncbi.nlm.nih.gov/articles/PMC10907646/) (PMID 38434259; [Umeå/SciLifeLab corroboration](https://publications.scilifelab.se/publication/6434d6a31f294efd8f6657193ce83227)). Directly read full original Methods 2.1–2.4, experimental design and Fig. 1 caption, four-acid instrument methods, Results §§3.1–3.4 and Fig. 2–4 captions, authors' limitations and Conclusion. Previous ledger was abstract-only. Original HTML/PDF byte SHA-256, raw replicate values, figure pixels, supplementary figures and external reproduction **not verified**; original source text/bytes were not modified.
+
+- **Exact design:** one dark 100%-Arabica commercial blend, French-press coarse grind, 11 g/200 mL, water 93°C, 5-minute immersion and paper filtration. Control + eight CaCl2/MgCl2 chloride-SALT conditions: 100 and 1000 ppm added before or after brew; five analytical replicates/group. These ppm quantities are **salts**, not directly equivalent to Ca²⁺/Mg²⁺ ion mass concentrations. No espresso or direct taste panel.
+- **Bounded outcome:** low 100 ppm salt levels show little/no measured four-organic-acid difference; most pre/post comparisons similar. At 1000 ppm, GC-MS and NMR diverge markedly, and the authors investigate signal/complexation artifacts. Study explicitly excludes carbonate/bicarbonate and notes other coffees/brewing methods may behave differently. This does NOT establish universal water/espresso mineral optima, lack of all sensory effects, a flavor confidence score, or a causal one-step acidity fix.
+
+## Actual application and Locked crosswalk
+
+Read current `site/lib/engine.js` blob `b84782d216f12d845b768c174e03b9b3ca53da30` (807 lines), `site/lib/model.js` blob `5ea712305d9ba0f948ef3aa2d576dd27aa51b31c`, `site/lib/constants.js` blob `72221331ce4dffabe416eebec1ae2fceced3a095`. Existing engine uses five rated taste inputs, measured personal same-coffee evidence, independent styles/grinder/feed and optionally controllable temperature; no water hardness/mineral-input action or correction exists. No reproducible app bug follows from this chemistry experiment. SAFE action is evidence annotation **only**, NOT engineering new capture, targets or speculative Locked science.
+
+Ledger: source `LIT-2024-WATER-ACIDS` upgraded without duplicate identity; checks `R455-EV-CIT-137-A/B`, research-only backlog `R455-PROP-137-MINERAL-ORGANIC-ACID-FRENCH-PRESS-TRANSFER-BOUNDARY`. Totals **76 distinct sources / 191 evidence checks / 99 proposals**. Standalone S019 PDF still not independently accessible; searched connected Drive for DIC/Espresso/S019/Slow Feeding and Library exact names; Library slow-feeding PDF is separate. #267 exhaustive source-line review remains independent, **zero credit**. October 29 48 reference cases remain RESEARCH-ONLY.
+
+## Write, risk and tests
+
+This is a documentation-only, additive source upgrade with `docs/audits/issue455-research-source-coverage-20261103.json`, this unique scoped journal and `docs/CURRENT_STATUS.md`. No app/tests/SQL/Auth/cloud/provider/member/Netlify or production release changes; no software/taste/real-user tests claimed. Use [skip netlify], source SHA-bound Git PR, relevant approval/continuity CI, and nonforce merge/readback before calling integrated. No new owner approval now; future mineral-input, numeric water target, or sensory policy requires explicit owner choice and espresso-specific validation.
+
+**At authoring:** PR CI/merge **PENDING**, not PASS or READY. Next: verify exact PR-head governance/continuity, nonforce merge, confirm changed paths/blob SHAs and merged-source approval; if concurrent commits advance, reconcile only nonoverlapping documents. Then resume another distinct source or narrow SAFE UX defect without duplicating #267/#33/#96.
