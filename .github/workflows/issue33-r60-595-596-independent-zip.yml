@@ -1,0 +1,67 @@
+name: DIC Issue33 R60 independent original603 595-596 selected source ZIP proof
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r60-595-596-independent-zip.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  independently-verify-r60:
+    name: original603-595-596-independent-raw-html-and-source-zip
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Independently download exact merged-source current public official artifact
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          archive="$RUNNER_TEMP/dic33-r60-595-596.zip"
+          curl --fail --silent --show-error --location --retry 2 \
+            --header "Authorization: Bearer $GH_TOKEN" \
+            --header "Accept: application/vnd.github+json" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/artifacts/13671405614/zip" -o "$archive"
+          test "$(stat -c '%s' "$archive")" = "145926"
+          test "$(sha256sum "$archive" | cut -d ' ' -f1)" = "ca697f7a21d6d487e28e818ebe2205ea49eb1307b085f006916309c21faae0f4"
+          unzip -tqq "$archive"
+          test "$(unzip -p "$archive" case-595.html | sha256sum | cut -d ' ' -f1)" = "6ad3eb08b8fc1172c85858bb7aa4dc2385c28bc9d2a191e30d7befee6944e6d4"
+          test "$(unzip -p "$archive" case-596.html | sha256sum | cut -d ' ' -f1)" = "123b12f0f5d9e316d62995532d1b918d2cf31db9f1de744408a80002b9d54999"
+          test "$(unzip -p "$archive" focused-current-evidence.json | sha256sum | cut -d ' ' -f1)" = "e0b2fe6fdeeb940c15db26b2aa434c71efb5ea3769ca6e47f3e58e664164b735"
+          unzip -p "$archive" focused-current-evidence.json | jq -e '
+            .source_sha=="20458ce3d3f10e2674031d4f8c4d8fb756ba222b" and
+            .manual_certified==0 and .production_operations==0 and
+            .real_auth==false and .original_corpus_modified==false and
+            .case_numbers==[595,596] and (.records|length)==2 and
+            .records[0].selected_heading_identity_verified==true and
+            .records[0].status=="FETCHED" and .records[0].parser_ok==true and
+            .records[0].current_fields.name=="Ethiopia Gera, Natural Process, Gr. 1" and
+            .records[0].current_fields.origin=="Ethiopia" and
+            .records[0].current_fields.process=="Natural" and
+            .records[0].html_sha256=="6ad3eb08b8fc1172c85858bb7aa4dc2385c28bc9d2a191e30d7befee6944e6d4" and
+            .records[0].add_coffee_ui_rendered==true and .records[0].source_review_rendered==true and
+            .records[1].selected_heading_identity_verified==true and
+            .records[1].status=="FETCHED" and .records[1].parser_ok==true and
+            .records[1].current_fields.name=="Guatemala Huehuetenango Los Dos Socios" and
+            .records[1].current_fields.origin=="Huehuetenago, Guatemala" and
+            .records[1].current_fields.process=="Washed" and
+            .records[1].current_fields.roast_level=="Medium" and
+            .records[1].html_sha256=="123b12f0f5d9e316d62995532d1b918d2cf31db9f1de744408a80002b9d54999" and
+            .records[1].add_coffee_ui_rendered==true and .records[1].source_review_rendered==true
+          ' >/dev/null
+          unzip -p "$archive" r60-595-596-selected-afterproof.json | jq -e '
+            .source_sha=="20458ce3d3f10e2674031d4f8c4d8fb756ba222b" and
+            .evidence_sha256=="e0b2fe6fdeeb940c15db26b2aa434c71efb5ea3769ca6e47f3e58e664164b735" and
+            .manual_certified==0 and .production_operations==0 and
+            .passed==true and .failures==[] and (.observations|length)==2 and
+            .observations[0].raw_html_sha256_verified==true and
+            .observations[1].raw_html_sha256_verified==true and
+            .observations[1].actual_fields.roast_level=="Medium" and
+            .observations[1].direct_current_claims.direct_medium_level==true and
+            .observations[1].direct_current_claims.named_farm_growing_location==false and
+            .observations[0].direct_current_claims.labeled_region==false
+          ' >/dev/null
+          echo "VERIFIED independent original603 #595/#596 exact merged 20458ce3 artifact ZIP, both raw HTML SHA256, source JSON and strict afterproof; manual_certified=0"
