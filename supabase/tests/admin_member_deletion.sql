@@ -113,6 +113,12 @@ DECLARE
  IF (public.dic_admin_account_delete_finish(op_keep,admin)->>'retry')<>'true'
  THEN RAISE EXCEPTION 'Completed Keep operation not idempotent'; END IF;
  EXECUTE 'RESET ROLE';
+ PERFORM set_config('request.jwt.claim.sub',admin::text,true);
+ EXECUTE 'SET LOCAL ROLE authenticated';
+ IF NOT (public.dic_admin_access_overview()->'pending_deletions') @>
+  jsonb_build_array(jsonb_build_object('id',op_keep,'community_mode','keep'))
+ THEN RAISE EXCEPTION 'Interrupted operation not visible after Auth deletion'; END IF;
+ EXECUTE 'RESET ROLE';
  IF NOT EXISTS(SELECT 1 FROM public.community_shots WHERE id=community_keep AND quality_state='eligible')
  OR NOT EXISTS(SELECT 1 FROM private.contribution_links l
      WHERE l.community_shot_id=community_keep AND l.contributor_id=ckeep AND l.shot_id IS NULL)

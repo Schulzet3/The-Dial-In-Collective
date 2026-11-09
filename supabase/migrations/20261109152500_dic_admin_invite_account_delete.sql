@@ -64,6 +64,16 @@ begin
     from (select id,label,created_at,expires_at,revoked_at,uses,max_uses
      from private.beta_invites where deleted_at is null order by created_at desc,id desc limit 50) i
    ),'[]'::jsonb),
+  'pending_deletions',coalesce((
+    select jsonb_agg(jsonb_build_object(
+     'id',op.id,'target_id',op.target_id,
+     'email',op.expected_impact->>'email',
+     'community_mode',op.community_mode,'phase',op.phase,
+     'requested_at',op.requested_at
+    ) order by op.requested_at desc,op.id desc)
+    from private.dic_admin_account_delete_operations op
+    where op.actor_id=auth.uid() and op.phase<>'completed'
+   ),'[]'::jsonb),
   'members_total',(select count(*) from private.beta_members where admitted_at is not null),
   'members',coalesce((
     select jsonb_agg(jsonb_build_object(

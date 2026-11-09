@@ -43,3 +43,7 @@ Added only `DIC-Q-1676-admin-code-account-delete` with exact runtime/SQL/Edge sc
 ## Service endpoint simulation and Storage safety guard
 
 Added Node VM simulation for Edge endpoint: origin/method/auth/admin denial before privileged client; target/mode strictly from prepared SQL ledger (not injected browser body), Auth deletion before DB finalization, no false success after failed GoTrue deletion, recovery when Auth user vanished on prior attempt, and completed-op idempotence. Added provider Storage-owned-object preflight guard before admission revocation (conditional dynamic SQL because isolated dic_ci has no Storage schema). Live project read-only check found 0 Storage objects and 0 buckets. Exact-source CI pending after this change.
+
+## Interrupted Auth deletion recovery SQL
+
+Added owner-operator-only `pending_deletions` to the existing access overview, sourced from private operation receipts only for `actor_id=auth.uid()` and not containing any token or member private notes. This remains listable even after Auth delete removes the member row. Disposable SQL checks visibility after Auth deletion and before finalization. UI recovery button still being wired. No hosted changes.
