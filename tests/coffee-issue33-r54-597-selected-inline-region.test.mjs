@@ -65,7 +65,9 @@ test('unrelated related-product and mismatched H1 cannot donate compound cultiva
  const q=parse('A balanced coffee.',{related:other});
  assert.equal(q.fields.variety,undefined,JSON.stringify(q.fields));
  assert.equal(q.fields.elevation_m,undefined,JSON.stringify(q.fields));
- const wrong=parse(specs,{title:'Kenya Another Coffee'});
- assert.equal(wrong.fields.variety,undefined,JSON.stringify(wrong.fields));
- assert.equal(wrong.fields.elevation_m,undefined,JSON.stringify(wrong.fields));
+ // A legitimate selected description can accompany a different selected H1.
+ // The actual negative is a proof whose expected name and visible H1 disagree.
+ const mismatched=refine({name,country:'Kenya',origin:'Kenya',
+  blocks:blocks(specs,'Kenya Another Coffee')});
+ assert.equal(mismatched,null);
 });
