@@ -10361,6 +10361,37 @@
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "NARROW TESTING IN DEVELOPMENT ONLY, NOT DEPLOYED. Source-specific #596 now returns Medium from current literal typed Roast: medium level, not the historic ambiguous archived label. Original #595 Gera/Limmu and #596 La Libertad current raw absence intentionally withheld; preserve seller's exact Huehuetenago spelling as qualified source for review. Immutable frozen original603/201/1197 CSV/oracle/scorer and all preexisting queue entries unchanged. No owner decision, production/SQL/Edge/Auth/provider/member writes, releases or new charges."
+    },
+    {
+      "id": "DIC-Q-455-edit-shot-foreign-coffee-preference-integrity",
+      "issue": 455,
+      "pr": 1653,
+      "title": "Prevent editing one coffee's shot from rewriting another coffee's saved Current/favorite recipe family",
+      "state": "READY",
+      "merged_source_sha": "529ad288b5962c2f69879daf6d6adb114320009b",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "R136 original engine 177b76962a6ddb19fdc884eab71d09b902a35850: editShot scanned every workspace coffee preference without coffeeId identity check; a restored foreign coffee with stale family/favorite ID could be silently changed. Three synthetic positive/negative real-module tests verify foreign preference invariance and valid same-coffee cross-version favorite migration; no real member incident asserted.",
+        "PR #1653 exact HEAD 941512ff2d2c92005fe7415fa490a5abc559511f Node22/lint 42611978699 SUCCESS, 3220 tests / 3214 PASS / 0 FAIL / 6 intentional SKIP; all 3 new R136 tests explicitly PASS.",
+        "PR-head mobile/Chromium/offline/visual/accessibility workflow 42611978926 SUCCESS, isolated SQL 42611978684 SUCCESS, source-security inventory 42611978719 SUCCESS, approval/governance 42611978662 SUCCESS. Cloud-tests step NOT_APPLICABLE (job 42611978926 SUCCESS but affected cloud tests SKIPPED); frozen603 42611979153 SKIPPED, not PASS.",
+        "PR #1653 source commit 941512ff nonforce squash merged 529ad288b5962c2f69879daf6d6adb114320009b onto actual concurrent parent 20458ce3d3f10e2674031d4f8c4d8fb756ba222b, exactly 4 intended paths, each source code/test/journal/ledger Git blob byte-identical with passing PR head; prior #33 updates preserved.",
+        "Exact merged-source Node22/lint 42612401269 SUCCESS: 3225 tests / 3219 PASS / 0 FAIL / 6 intentional SKIP, all three R136 cases PASS. Exact merged mobile/browser/offline 42612401314 SUCCESS and approval/governance 42612401335 SUCCESS. Cloud inner steps NOT_APPLICABLE. No separate merged SQL/security assertion; applicable PR-head checks already SUCCESS."
+      ],
+      "ci_runs": [
+        42611978699,
+        42611978926,
+        42611978684,
+        42611978719,
+        42611978662,
+        42612401269,
+        42612401314,
+        42612401335
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "DEVELOPMENT-ONLY READY, NOT DEPLOYED. No altered 5 taste ratings, numeric policy, single-controllable next advice, original shot measurement/notes/history, styles/feed/grinder/baskets, Community/RLS; only same-coffee Current/favorite reconciliation is permitted. Original 603 corpus unrun. No live SQL/Auth/Edge/member/provider/Netlify writes or empirical espresso quality claim."
     }
   ],
   "history": [
