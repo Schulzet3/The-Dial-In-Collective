@@ -466,7 +466,7 @@ grant execute on function public.dic_admin_account_delete_prepare(uuid,uuid) to 
 
 create or replace function private.dic_admin_account_delete_finish(p_operation_id uuid,p_actor_id uuid)
 returns jsonb language plpgsql volatile security definer set search_path='' as $fn$
-declare op private.dic_admin_account_delete_operations; removed integer:=0;
+declare op private.dic_admin_account_delete_operations; removed integer:=0; community_ids uuid[]:='{}'::uuid[];
 begin
  select * into op from private.dic_admin_account_delete_operations where id=p_operation_id for update;
  if not found or op.actor_id is distinct from p_actor_id then
@@ -481,19 +481,22 @@ begin
   raise exception using errcode='23514',message='Auth account still exists.';
  end if;
  if op.community_mode='remove' then
-  -- preserve unrelated review rows as private audit while dropping removed references.
+  -- Capture IDs BEFORE removing their private association; only this member's
+  -- immutable contributor IDs may be selected, including detached old shots.
+  select coalesce(array_agg(cl.community_shot_id order by cl.community_shot_id),'{}'::uuid[])
+    into community_ids from private.contribution_links cl
+    where cl.contributor_id=any(op.contributor_ids);
+  -- Keep private review audit records but remove public references to purged shots.
   update public.admin_reviews set community_shot_id=null
-    where community_shot_id in (select community_shot_id from private.contribution_links
-      where contributor_id=any(op.contributor_ids));
-  delete from private.contribution_links where contributor_id=any(op.contributor_ids);
-  delete from public.community_shots cs where not exists(
-     select 1 from private.contribution_links cl where cl.community_shot_id=cs.id
-   ) and cs.id in (
-     select q.community_shot_id from private.community_quality_checks q
-     where false
-   );
-  -- Contributions are removed by matching the frozen contributor identifiers
-  -- through an operation-scoped snapshot populated in prepare.
+    where community_shot_id=any(community_ids);
+  delete from private.contribution_links where community_shot_id=any(community_ids)
+    and contributor_id=any(op.contributor_ids);
+  delete from public.community_shots where id=any(community_ids);
+  get diagnostics removed=row_count;
+  -- Contributor tokens for removed data have no future weighting role.
+  delete from private.contributors c where c.id=any(op.contributor_ids)
+    and c.owner_id is null and not exists(
+      select 1 from private.contribution_links cl where cl.contributor_id=c.id);
  end if;
  update private.dic_admin_account_delete_operations
   set phase='completed',community_removed=removed,completed_at=now() where id=op.id;
