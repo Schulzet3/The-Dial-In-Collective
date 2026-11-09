@@ -10623,28 +10623,37 @@
     {
       "id": "DIC-Q-455-success-veto-current-recipe-context",
       "issue": 455,
-      "pr": null,
+      "pr": 1715,
       "title": "Keep all-green personal success veto within current basket, feed mode and calibration context",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "d9ed395a24c70f3ed8b132d2e4be6ee9c631cedc",
       "scope_paths": [
         "site/lib/engine.js"
       ],
       "tests": [
         "R141 deterministic current module source bug: newest non-green feedback is same coffee/setup/style/basket/feed/calibration, but the original all-green success veto ignored basket/feed/calibration. Unrelated successful settings suppressed a valid current shot adjustment. Original historical shots and all five tastes remain preserved.",
-        "PR #1702 exact head 260c605cd552811d1efb62f6194c720eb8d0f185: Node22 validate run42669095534, cloud/mobile/browser run42669095359, SQL run42669095309, security run42669095492 SUCCESS; original603 run42669095202 SKIPPED. Governance run42669095298 genuinely FAILED at release-queue intake because site/lib/engine.js had no new TESTING item. Salvage branch rebases same exact engine/test Git blobs on later development and adds this source-bound queue item; retest all applicable exact-source checks before merging."
+        "PR #1702 exact head 260c605cd552811d1efb62f6194c720eb8d0f185: Node22 validate run42669095534, cloud/mobile/browser run42669095359, SQL run42669095309, security run42669095492 SUCCESS; original603 run42669095202 SKIPPED. Governance run42669095298 genuinely FAILED at release-queue intake because site/lib/engine.js had no new TESTING item. Salvage branch rebases same exact engine/test Git blobs on later development and adds this source-bound queue item; retest all applicable exact-source checks before merging.",
+        "Old PR1702 real governance FAIL run42669095298 untracked engine.js; salvage PR1715 exact head a0b15ec637c3f332f2531606153844b4342af12d adds SAME SOURCE TESTING queue and journal while reusing identical engine/test blobs. Three focused synthetic positive/negative regressions preserve all five tastes, notes and private shot history.",
+        "Exact PR1715 head Node22/lint42686624242 SUCCESS (3250 total / 3244 pass / 0 fail / 6 intentional skip), cloud/mobile/browser42686624853, SQL42686624314, security42686624306 and approval/intake42686623779 SUCCESS; frozen60342686624343 SKIPPED not PASS.",
+        "PR1715 nonforce squash MERGED d9ed395a24c70f3ed8b132d2e4be6ee9c631cedc onto 09df3820a08809382dab8bf81b00249c0557488d, exactly four paths, all head/merge Git blobs identical: engine c91656d7cef5fd0621d883d433f0c0b519359dbe, tests ce88688a6b40773932bb3f9d8f8bedfa84f47df7, original TESTING queue ae8aca771c57ef9640d634bca6d4f957a5867e41, original journal a9fd1200ad587b26c0379756a1c5a59d81124833. Merged Node22/lint42687145966 SUCCESS 3244/0/6, cloud/mobile42687146220 SUCCESS, approval/queue42687146321 SUCCESS. Production not deployed; no empirical cup results."
       ],
       "ci_runs": [
         42669095534,
         42669095359,
         42669095309,
-        42669095492
+        42669095492,
+        42686624242,
+        42686624853,
+        42686624314,
+        42686624306,
+        42686623779,
+        42687145966,
+        42687146220,
+        42687146321
       ],
-      "blockers": [
-        "New combined source-head approval/queue intake and source-bound tests not yet checked; merge/readback and release READY require separate verified reconciliation."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Development-only; no deployment or new Locked policy. Includes three existing PR #1702 synthetic cases, same-context positive and mismatched-context negatives, hidden/missing/invalid exclusions, immutable private shot history. Never infer empirical cup improvement."
+      "notes": "Development-only; no deployment or new Locked policy. Includes three existing PR #1702 synthetic cases, same-context positive and mismatched-context negatives, hidden/missing/invalid exclusions, immutable private shot history. Never infer empirical cup improvement. READY source only, not published. No change to Locked taste rules, numeric targets, member/SQL/Auth/provider data."
     }
   ],
   "history": [
