@@ -14776,5 +14776,57 @@
     "source_fixes": 0,
     "baseline_complete": false,
     "next": "2401 strictly after (2073026618239130057,5,16388,true) if old anchor and stats_reset still valid; separately audit fingerprints inserted below cursor and never claim full SQL review"
+  },
+  "provider_pg_stat_statements_numeric_run112": {
+    "status": "CURRENT_UPPER_BOUND_EXHAUSTED_NUMERIC_ONLY_VOLATILE_NOT_QUERY_SQL_OR_WORD_LEVEL",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_development_parent": "94e1292f572f16c527c748e44168e386f2a7a438",
+    "main_sha": "a4028e42b0d0316fd539c0563fd07832d509aed0",
+    "release_sha": "92829cb6aff82aaec212eabbd921183e7997f1a7",
+    "receipts": [
+      "docs/audits/issue509-provider-pg-stat-statements-numeric-2401-2800-2026-11-09-run112.json",
+      "docs/audits/issue509-provider-pg-stat-statements-numeric-2801-3200-2026-11-09-run112.json",
+      "docs/audits/issue509-provider-pg-stat-statements-numeric-3201-3600-2026-11-09-run112.json",
+      "docs/audits/issue509-provider-pg-stat-statements-numeric-3601-3971-2026-11-09-run112.json"
+    ],
+    "receipt_blobs": [
+      "adcc449a59e3b51753f7c0ac1282951f0ea56f44",
+      "59d74d31b8a4a46c7b3fc7c6e475259f92e63702",
+      "28ff96c9a6367615680e8c7fffcf7424b74525eb",
+      "dd7df3fc86cfb0a563f4c2d81457c44795e9a3e5"
+    ],
+    "reviewed_this_run": 1571,
+    "logical_cumulative": 3971,
+    "current_snapshot_total": 3983,
+    "counts": [
+      3983,
+      3983,
+      3983,
+      3983
+    ],
+    "stats_reset": "2026-10-09 11:11:31.487298+00",
+    "previous_end_key": [
+      "2073026618239130057",
+      "5",
+      "16388",
+      true
+    ],
+    "ending_key": [
+      "9213900031551115261",
+      "5",
+      "16388",
+      true
+    ],
+    "typed_numeric_keyset": true,
+    "verified_last_page_count": 371,
+    "slow_numeric_candidates_over_1s": 1,
+    "temp_io_numeric_candidates": 17,
+    "confirmed_defects": 0,
+    "query_SQL_text": "NOT_SELECTED",
+    "provider_writes": false,
+    "source_fixes": 0,
+    "CI": "PENDING_EXACT_SOURCE_GOVERNANCE",
+    "baseline_complete": false,
+    "next": "Reconcile new lower-ordinal fingerprints since 3983 > 3971 historical numeric count, and distinct untouched full provider definitions; hosted JWT/Auth/native/console settings UNVERIFIED"
   }
 }
