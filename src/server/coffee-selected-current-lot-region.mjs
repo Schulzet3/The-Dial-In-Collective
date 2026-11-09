@@ -6,6 +6,7 @@ const norm=v=>String(v||'').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase(
  .replace(/[^\p{L}\p{N}]+/gu,' ').trim();
 const forbidden=/\b(?:chocolate|cherry|caramel|cocoa|orange|berry|plum|floral|honey|natural|washed|roast|process|coffee|beans?|grade|flavou?r|aroma|tasting|producer|brew|unknown|different|another)\b/iu;
 const outOfScope=/\b(?:other coffees?|related products?|recommended|you may also like|customer reviews?|testimonials?|education|brew guide|past releases?|previous harvest)\b/iu;
+const crossProductLead=/\b(?:another|different|other)\s+coffee\b/iu;
 const stale=/\b(?:previously|former(?:ly)?|historical(?:ly)?|prior(?: lot)?|last year|different coffee|another coffee|other coffee|old lot|no longer|hypothetical|for example|not from|might be|could be)\b/iu;
 const direct=/^This\s+time\s+from\s+(?:the\s+)?([\p{Lu}][\p{L}\p{M}'’.-]{2,35}(?:\s+[\p{Lu}][\p{L}\p{M}'’.-]{2,35})?)\s+region\b/u;
 export function selectedCurrentLotContrastedRegion({name='',origin='',blocks=[]}={}){
@@ -20,7 +21,8 @@ export function selectedCurrentLotContrastedRegion({name='',origin='',blocks=[]}
  for(const b of blocks){
   if(!b||!['p','span','div','li'].includes(b.tag)||
    b.educational||typeof b.text!=='string'||b.text.length>1300||
-   outOfScope.test(b.section||''))continue;
+   outOfScope.test(b.section||'')||
+   crossProductLead.test(b.text.slice(0,180)))continue;
   for(const sentence of b.text.split(/(?<=[.!?])\s+/u)){
    const text=sentence.trim(); if(text.length<27||text.length>850||stale.test(text)||
     outOfScope.test(text.slice(0,90)))continue;
