@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
-import {renderAdminAccessPanel,renderAdminDashboard,renderAdminDenied} from '../site/admin/view.js';
+import {renderAdminAccessPanel,renderAdminDashboard,renderAdminDenied,renderAdminDeleteAccountPrompt} from '../site/admin/view.js';
 import {e} from '../site/lib/ui.js';
 import {isAccessDenied} from '../site/cloud/client.js';
 
@@ -54,7 +54,9 @@ test('removed member retains identity and restore access control, admin stays pr
  assert.match(html,/data-action="restore-member"/);
  assert.match(html,/Access removed · Personal history retained/);
  assert.match(html,/Administrator · Permanent access/);
- assert.doesNotMatch(html,/Delete Account|Delete Data/);
+ assert.match(html,/data-action="delete-account"/);
+ assert.match(html,/Delete Account/);
+ assert.doesNotMatch(html,/data-action="delete-account" data-id="10000000-0000-4000-8000-000000000001"/);
 });
 test('no direct client-side table insert, privileged access only via member-gated RPC',()=>{
  const js=readFileSync(new URL('../site/admin/main.js',import.meta.url),'utf8');
@@ -87,6 +89,7 @@ function boot(){
  const root={
   innerHTML:'',
   contains(){return true;},
+  insertAdjacentHTML(_position,html){this.innerHTML+=html;},
   addEventListener(name,fn){events[name]=fn;},
   querySelector(sel){
    if(sel==='#admin-action-notice'&&this.innerHTML.includes('id="admin-action-notice"'))
@@ -94,7 +97,9 @@ function boot(){
    return null;
   }
  };
+ const invocations=[];
  const sdk={
+  functions:{async invoke(name,args){invocations.push({name,args});return {data:{ok:true,completed:true,community_removed:1}};}},
   auth:{
    onAuthStateChange(fn){authChange=fn;return {data:{subscription:{unsubscribe(){}}}};},
    async getUser(){return {data:{user:{id:ADMIN}}};}
@@ -112,6 +117,9 @@ function boot(){
    if(name==='dic_admin_issue_invite')return {data:{ok:true,id:INVITE,invite_code:SECRET}};
    if(name==='dic_admin_revoke_invite')return {data:{ok:true,revoked:true}};
    if(name==='dic_admin_set_member_access')return {data:{ok:true,enabled:args.p_enabled}};
+   if(name==='dic_admin_delete_invite')return {data:{ok:true,deleted:true,revoked:true}};
+   if(name==='dic_admin_account_delete_preview')return {data:{member_id:MEMBER,email:'member@fixture.invalid',enabled:true,shots:2,notes:1,library_entries:1,community_shots:1,eligible_community_shots:1}};
+   if(name==='dic_admin_account_delete_request')return {data:{ok:true,operation_id:'40000000-0000-4000-8000-000000000001'}};
    throw Error('Unexpected RPC '+name);
   }
  };
@@ -121,12 +129,12 @@ function boot(){
   supabase:{createClient:()=>sdk},
   CLOUD_CONFIG:{enabled:true},
   secureOrigin(){},applyAppearance(){},readAppearance(){return 'system';},
-  renderAdminDashboard,renderAdminDenied,e,isAccessDenied,
+  renderAdminDashboard,renderAdminDenied,renderAdminDeleteAccountPrompt,e,isAccessDenied,
   navigator:{clipboard:{async writeText(s){clipboard.push(s);}}},
   confirm:()=>true
  });
  vm.runInContext(source,context);
- return {root,calls,events,clipboard,done:context.started,
+ return {root,calls,events,clipboard,invocations,done:context.started,
   openAccounts(){events.toggle({target:{matches:selector=>selector==='details[data-admin-section]',open:true,dataset:{adminSection:'accounts'}}});},
   openSection(kind){events.toggle({target:{matches:selector=>selector==='details[data-admin-section]',open:true,dataset:{adminSection:kind}}});},
   stallDashboard(){pauseDashboard=true;},
@@ -206,4 +214,75 @@ test('admin cannot open portal without both server admin and admission status',a
  vm.runInContext(source,context);await context.started;
  assert.match(root.innerHTML,/Admin Access Unavailable/);
  assert.doesNotMatch(root.innerHTML,/Beta Invitations/);
+});
+
+test('Community deletion dialog shows distinct choices and escapes hostile email',()=>{
+ const html=renderAdminDeleteAccountPrompt({
+  member_id:MEMBER,email:'<img src=x onerror=alert(1)>',
+  shots:12,notes:4,library_entries:2,community_shots:5,eligible_community_shots:3
+ });
+ assert.match(html,/Delete Account · Keep Community/);
+ assert.match(html,/Delete Account \+ Community Contributions/);
+ assert.match(html,/12 private shots/);
+ assert.match(html,/5 Community contributions \(3 eligible\)/);
+ assert.match(html,/aria-modal="true"/);
+ assert.match(html,/&lt;img/);
+ assert.doesNotMatch(html,/<img/);
+});
+test('Delete Code confirms via server RPC instead of direct table deletion',async()=>{
+ const b=boot();await b.done;b.openAccounts();await flush();
+ assert.match(b.root.innerHTML,/data-action="delete-invite"/);
+ b.events.click({target:{closest(){return {dataset:{action:'delete-invite',id:INVITE}};}}});
+ await flush();
+ assert.equal(b.calls.find(x=>x.name==='dic_admin_delete_invite')?.args?.p_invite_id,INVITE);
+ assert.doesNotMatch(b.root.innerHTML,new RegExp(SECRET));
+});
+test('Delete Account requires preview and chooses exact Community removal mode',async()=>{
+ const b=boot();await b.done;b.openAccounts();await flush();
+ b.events.click({target:{closest(){return {dataset:{action:'confirm-delete-account',id:MEMBER,mode:'keep'}};}}});
+ await flush();
+ assert.equal(b.calls.filter(x=>x.name==='dic_admin_account_delete_request').length,0);
+ b.events.click({target:{closest(){return {dataset:{action:'delete-account',id:MEMBER}};}}});
+ await flush();
+ assert.equal(b.calls.find(x=>x.name==='dic_admin_account_delete_preview')?.args?.p_member_id,MEMBER);
+ assert.match(b.root.innerHTML,/Delete Account · Keep Community/);
+ b.events.click({target:{closest(){return {dataset:{action:'confirm-delete-account',id:MEMBER,mode:'remove'}};}}});
+ await flush();
+ const staged=b.calls.find(x=>x.name==='dic_admin_account_delete_request');
+ assert.equal(staged?.args?.p_member_id,MEMBER);
+ assert.equal(staged?.args?.p_community_mode,'remove');
+ assert.equal(staged?.args?.p_expected_impact?.community_shots,1);
+ assert.equal(b.invocations.length,1);
+ assert.equal(b.invocations[0].name,'dic-delete-member-account');
+ assert.deepEqual(JSON.parse(JSON.stringify(b.invocations[0].args)),
+  {body:{operation_id:'40000000-0000-4000-8000-000000000001'}});
+});
+test('Keep Community is conveyed unchanged and administrators remain protected',async()=>{
+ const b=boot();await b.done;b.openAccounts();await flush();
+ b.events.click({target:{closest(){return {dataset:{action:'delete-account',id:MEMBER}};}}});
+ await flush();
+ b.events.click({target:{closest(){return {dataset:{action:'confirm-delete-account',id:MEMBER,mode:'keep'}};}}});
+ await flush();
+ assert.equal(b.calls.find(x=>x.name==='dic_admin_account_delete_request').args.p_community_mode,'keep');
+ const html=renderAdminAccessPanel(state);
+ assert.doesNotMatch(html,/data-action="delete-account" data-id="10000000-0000-4000-8000-000000000001"/);
+ assert.match(html,/Administrator · Permanent access/);
+});
+
+test('unfinished Auth deletion remains visible and can resume only its existing operation ID',async()=>{
+ const html=renderAdminAccessPanel({...state,pending_deletions:[{
+  id:'40000000-0000-4000-8000-000000000001',
+  email:'deleted@fixture.invalid',phase:'prepared',community_mode:'remove'
+ }]});
+ assert.match(html,/Unfinished account deletions/);
+ assert.match(html,/Retry Completion/);
+ assert.match(html,/Remove Community/);
+ const b=boot();await b.done;
+ b.events.click({target:{closest(){return {dataset:{
+  action:'retry-account-delete',id:'40000000-0000-4000-8000-000000000001'
+ }};}}});
+ await flush();
+ assert.equal(b.invocations.length,1);
+ assert.equal(b.invocations[0].name,'dic-delete-member-account');
+ assert.equal(b.invocations[0].args.body.operation_id,'40000000-0000-4000-8000-000000000001');
 });

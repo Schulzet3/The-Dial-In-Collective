@@ -117,6 +117,7 @@ export function renderAdminAccessPanel(access={},issued=null,accountPage=null,in
     <span class="admin-state">${e(state)}</span>
     <p class="helper">${e(count)} uses · ${e(expires)} · Created ${e(String(row.created_at||'').slice(0,10))}</p></div>
    ${state==='active'?`<button type="button" class="ghost compact" data-action="revoke-invite" data-id="${e(String(row.id||''))}">Revoke Code</button>`:''}
+    <button type="button" class="ghost compact admin-delete-action" data-action="delete-invite" data-id="${e(String(row.id||''))}">Delete Code</button>
   </li>`;
  }).join('');
  const memberRows=members.map(row=>{
@@ -124,9 +125,17 @@ export function renderAdminAccessPanel(access={},issued=null,accountPage=null,in
   return `<li class="admin-member-row">
    <div class="admin-member-main"><strong>${e(String(row.email||'Account email unavailable'))}</strong>
     <p class="helper">${admin?'Administrator · Permanent access':enabled?'Active · No automatic expiration':'Access removed · Personal history retained'}</p></div>
-   ${admin?'<span class="admin-protected">Protected</span>':`<button type="button" class="ghost compact" data-action="${enabled?'remove-member':'restore-member'}" data-id="${e(String(row.id||''))}">${enabled?'Remove Access':'Restore Access'}</button>`}
+   ${admin?'<span class="admin-protected">Protected</span>':`<div class="admin-member-actions"><button type="button" class="ghost compact" data-action="${enabled?'remove-member':'restore-member'}" data-id="${e(String(row.id||''))}">${enabled?'Remove Access':'Restore Access'}</button><button type="button" class="ghost compact admin-delete-action" data-action="delete-account" data-id="${e(String(row.id||''))}">Delete Account</button></div>`}
   </li>`;
  }).join('');
+ const unfinished=Array.isArray(access?.pending_deletions)?access.pending_deletions:[];
+ const unfinishedHtml=unfinished.length?`<h3>Unfinished account deletions</h3>
+  <p class="helper">The Auth account may already be gone. Retry to finish the original Community choice without starting a new deletion.</p>
+  <ul class="admin-member-list">${unfinished.map(op=>`<li class="admin-member-row">
+   <div class="admin-member-main"><strong>${e(String(op.email||'Account no longer available'))}</strong>
+   <p class="helper">Pending ${e(String(op.phase||'unknown'))} · ${op.community_mode==='remove'?'Remove Community':'Keep Community'}</p></div>
+   <button type="button" class="ghost compact" data-action="retry-account-delete" data-id="${e(String(op.id||''))}">Retry Completion</button>
+  </li>`).join('')}</ul>`:'';
  const secret=issued?.invite_code?`<div class="admin-new-code" role="status" aria-live="polite">
    <strong>New Invitation Code</strong><p class="helper">Copy it now. The code cannot be recovered after you leave or refresh this page.</p>
    <code id="admin-new-code">${e(issued.invite_code)}</code>
@@ -153,6 +162,29 @@ export function renderAdminAccessPanel(access={},issued=null,accountPage=null,in
   <p class="helper">No automatic account expiration. Remove or restore access without deleting saved shots and notes. Administrator accounts cannot be removed here.</p>
   <ul class="admin-member-list">${memberRows||'<li class="helper">No admitted members yet.</li>'}</ul>
   ${fallbackNotice}
+  ${unfinishedHtml}
   ${hasAccountPage&&(offset>0||offset+members.length<total)?`<div class="admin-pagination"><span class="helper">${e(accountRange)}</span><button type="button" class="ghost compact" data-action="record-page" data-kind="accounts" data-offset="${Math.max(0,offset-50)}" ${offset===0?'disabled':''}>Previous</button><button type="button" class="ghost compact" data-action="record-page" data-kind="accounts" data-offset="${offset+50}" ${offset+members.length>=total?'disabled':''}>Next</button></div>`:''}
  </section>`;
+}
+
+// The confirmation is operator-only: no client secret, account IDs or email ever enter Community.
+export function renderAdminDeleteAccountPrompt(impact={}){
+ const count=key=>Number.isSafeInteger(Number(impact[key]))&&Number(impact[key])>=0?Number(impact[key]):0;
+ const email=e(String(impact.email||'Member account'));
+ const id=e(String(impact.member_id||''));
+ return `<div class="admin-delete-overlay" id="admin-account-delete-modal">
+  <section class="admin-delete-dialog" role="dialog" aria-modal="true" aria-labelledby="admin-delete-title" aria-describedby="admin-delete-details" tabindex="-1">
+   <h2 id="admin-delete-title">Permanently Delete Account?</h2>
+   <p><strong>${email}</strong></p>
+   <p id="admin-delete-details">Deleting this account removes its Auth credentials, ${count('shots')} private shots,
+   ${count('notes')} private notes, ${count('library_entries')} saved coffee entries and related private data.
+   ${count('community_shots')} Community contributions (${count('eligible_community_shots')} eligible) belong to this member.</p>
+   <p>Choose what happens to these Community contributions. This cannot be undone from Admin. Historical encrypted backups follow the existing retention policy.</p>
+   <div class="admin-delete-choices">
+    <button type="button" class="ghost" data-action="confirm-delete-account" data-mode="keep" data-id="${id}">Delete Account · Keep Community</button>
+    <button type="button" class="ghost admin-delete-action" data-action="confirm-delete-account" data-mode="remove" data-id="${id}">Delete Account + Community Contributions</button>
+   </div>
+   <button type="button" class="ghost" data-action="cancel-delete-account" data-id="${id}">Cancel</button>
+  </section>
+ </div>`;
 }
