@@ -10658,10 +10658,10 @@
     {
       "id": "DIC-Q-1676-admin-code-account-delete",
       "issue": 1676,
-      "pr": null,
+      "pr": 1719,
       "title": "Admin Delete Code (automatic revoke) and permanent member deletion with Keep/Remove Community",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "ed95dd067bd1d75925dd56e88300297f9f28c033",
       "scope_paths": [
         "site/admin/main.js",
         "site/admin/view.js",
@@ -10670,15 +10670,24 @@
         "supabase/functions/dic-delete-member-account/index.ts"
       ],
       "tests": [
-        "Disposable SQL and Admin JS fixtures committed, no passing CI claimed yet."
+        "PR #1719 complete Admin UI + private SQL/Edge and high-risk five PR-head source checks PASS; nonforce squash merged source 3af32ae6483e7627ef4e1a8e51268dbb0e53765c, and exact merged five checks SUCCESS, with original frozen603 N/A.",
+        "PR #1723 fixed internal contributor unlink/retention privacy. Disposable Postgres Keep/Remove test and signed JWT ownership PASS; source merged ef4af9d5aff89cf7dc786990fdb7c50f0915dba2, SQL run 42694493560 SUCCESS. SQL migration blob bd80a9f6a17b4535f52caf77548eaa568d9b0b25 unchanged at final source ed95dd067bd1d75925dd56e88300297f9f28c033.",
+        "PR #1725 fixed missing push validate on SQL-only changes; five PR checks PASS and nonforce merged ed95dd067bd1d75925dd56e88300297f9f28c033. Final merged applicable check runs approval 42695272216 SUCCESS, validate Node/lint/build 42695272222 SUCCESS, cloud + mobile/browser 42695273315 SUCCESS. No SQL job triggered for that CI-workflow/test-only final push: NOT_APPLICABLE at this SHA, not falsely PASS; source-identical SQL previously passed as above.",
+        "Admin UI and Edge isolated fixture tests verify exact preview/confirmation, single-use invite revocation, nonadmin/admin protection, explicit Keep/Remove Community, idempotent retry after uncertain Auth delete, private links removed from completed receipts, Storage owner safeguards and unrelated member integrity. No hosted GoTrue deletion or real member/production mutation tested or performed."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "High-risk Auth/SQL/Edge and privacy regression CI not yet verified on exact source.",
-        "Source not nonforce merged with development; production publication not authorized."
+      "ci_runs": [
+        42694493560,
+        42695272216,
+        42695272222,
+        42695273315,
+        42693923028,
+        42693923218,
+        42693923896,
+        42693924043
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1676",
-      "notes": "Source work-in-progress; operator-only, two-stage destructive Auth deletion and private audit/Community choice. No hosted SQL/Edge or account/code data changes."
+      "notes": "VERIFIED SOURCE READY, NOT DEPLOYED. Primary feature PR1719 and privacy follow-up PR1723 are nonforce merged; CI trigger fix PR1725 merged. New SQL migration and JWT-required dic-delete-member-account Edge function are release dependencies and must be applied/verified under a future owner publish command before site UI goes live. Keep mode preserves anonymous contributor-balanced evidence; Remove deletes only selected member contributions. Completion receipts scrub email/member ID/contributor link. Existing administrator and other member data preserved. Actual hosted/real-account destructive acceptance not performed, never claim it. No production SQL/Edge/Netlify/account/code deletion, no candidate staged or publication."
     }
   ],
   "history": [
