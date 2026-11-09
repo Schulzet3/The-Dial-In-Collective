@@ -3357,6 +3357,19 @@
       "ci": "PENDING",
       "production_writes": false,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-09 #509 Run131b 39 Auth cascading relations and 31 restrictive or setnull FK definitions",
+      "source_parent_sha": "07900d43164a09ffda19878ce292bd726e221625",
+      "receipt_path": "docs/audits/issue509-provider-auth-delete-full-fk-graph-2026-11-09-run131b.json",
+      "cascade_reachable_relations": 39,
+      "reviewed_fk_action_definitions": 31,
+      "source_words_recredited": 0,
+      "ci_sql": "success",
+      "ci_governance": "success",
+      "ci_cloud": "in_progress",
+      "production_writes": false,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -15558,7 +15571,7 @@
     "source_fix_commit": "7416c155cac9be2ea84daba23ca6fe4cdfe94788"
   },
   "provider_account_delete_cascade_run131": {
-    "status": "TEST_ONLY_SOURCE_COMMIT_CI_PENDING",
+    "status": "ISOLATED_PG_SQL_AND_GOVERNANCE_SUCCESS",
     "source_development_parent_sha": "95a09edc2123d84fae66d972feca522d9c01f4a4",
     "receipt_path": "docs/audits/issue509-provider-account-delete-cascade-2026-11-09-run131.json",
     "reviewed_fk_action_definitions": 8,
@@ -15568,6 +15581,28 @@
     "source_path": "supabase/tests/admin_member_deletion.sql",
     "production_writes": false,
     "baseline_complete": false,
-    "next": "Read exact-source isolated PostgreSQL CI for synthetic owned pending submission cascade"
+    "next": "Read exact-source isolated PostgreSQL CI for synthetic owned pending submission cascade",
+    "ci_sql": 42723217996,
+    "ci_governance": 42723218009,
+    "ci_cloud": "in_progress"
+  },
+  "provider_account_delete_full_transitive_graph_run131b": {
+    "status": "COMPLETE_DIRECT_FK_ACTION_GRAPH_NOT_COMPLETE_HOSTED_AUTH_PROOF",
+    "source_development_parent_sha": "07900d43164a09ffda19878ce292bd726e221625",
+    "receipt_path": "docs/audits/issue509-provider-auth-delete-full-fk-graph-2026-11-09-run131b.json",
+    "cascade_reachable_relations": 39,
+    "inspected_non_cascade_fk_action_definitions": 31,
+    "no_action": 23,
+    "set_null": 8,
+    "external_restrictive": 7,
+    "internal_restrictive": 16,
+    "CI_pg": "PASS_42723217996",
+    "CI_governance": "PASS_42723218009",
+    "CI_cloud": "in_progress",
+    "recredited_prior_source_words": 0,
+    "new_app_source_repair": false,
+    "production_writes": false,
+    "baseline_complete": false,
+    "next": "Isolated full personal shot/equipment cascade checks; source-bound cloud CI readback"
   }
 }
