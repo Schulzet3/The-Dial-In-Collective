@@ -10,3 +10,6 @@
 
 ### R51.2 premerge static audit correction
 A direct readback of PR #1566 revealed doubled regexp escapes in the newly strict afterproof purchase-label guard, including an invalid escaped closing slash. Corrected the JavaScript regexp literal before merge; no runtime extraction policy changed. Treat original draft PR-head jobs as unverified until this corrected commit's exact checks pass and the merged live official proof exercises the guard.
+
+### R51.2 mandatory intake queue correction
+Initial PR #1566 head `a42ce0e` approval run [42555176131](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42555176131) and revised head `1b66d9d` approval [42555239670](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42555239670) failed `release-queue.mjs --enforce-intake`: changed runtime path `src/server/roast-level-evidence.mjs` lacked a scoped queue row. New single `DIC-Q-33-original603-585-selected-american-roast-definition` **IN_PROGRESS** with PR#1566/real source SHA evidence; previously existing 244 entries preserved byte-level semantics (serialization only). This queue repair does NOT certify or publish the correction. Re-run exact updated-head approval and all applicable CI before merge.
