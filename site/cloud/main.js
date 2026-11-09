@@ -13,7 +13,7 @@ import {applyAppearance,readAppearance} from './appearance.js';
 import {nextCoffeeAction,proposalWithRecognizedRoaster,matchReviewMarkup} from './coffee-match-ui.js';
 import {coffeeUrlPreviewMarkup,applyCoffeeUrlFields,coffeeSourceReviewSnapshot,downloadCoffeeSourceReview,coffeeSourceDifferences,coffeeConflictReviewOptions,autofillFields,coffeeRoastVariantPreview,applyCoffeeRoastVariant,coffeeUrlRequestIsCurrent} from './coffee-url-autofill.js';
 import {communityReviewBanner,communityPage} from './community.js';
-import {walkthroughMarkup,gettingStartedMarkup} from './help.js';
+import {walkthroughMarkup,gettingStartedMarkup,firstSetupWelcomeMarkup} from './help.js';
 const {e,button,icon,field,select,checkbox,recipeGrid,styleBadge,chips,radar,scales,nextShotGuidance,nextShotTitle}=U;
 function decafOptions(name='',isDecaf=false,method=''){
  const decaf=!C.isHalfCaffName(name)&&(isDecaf===true||C.isFullyDecafName(name));
@@ -323,6 +323,8 @@ class CloudApp {
   const openDetails=[...root.querySelectorAll('details[data-retain][open]')].map(x=>x.dataset.retain);
   this.theme();const connected=this.identity&&(this.status?.admitted||(this.localOfflineOwner===this.identity.id&&globalThis.navigator?.onLine===false))&&!this.recovery;
   root.innerHTML=`<header class=app-header><div class=header-inner><div class=brand>${icon('coffee',27)}<div><h1>The Dial In Collective</h1><div class=tagline>Better espresso through shared experience.</div></div></div>${connected?button(icon('settings',20),'settings','aria-label="Settings"','icon-button'):''}</div></header><main class=shell>${connected?this.coffees():this.auth()}${this.notice?`<p class="helper space-top" role=status>${e(this.notice)}</p>`:''}<footer class=footer>Private Beta <span aria-hidden=true>·</span> Better espresso, one shot at a time.</footer></main>`;
+  const welcomeVideo=root.querySelector('[data-onboarding-player]');
+  welcomeVideo?.addEventListener('error',()=>{const message=root.querySelector('[data-onboarding-error]');if(message)message.hidden=false;},{once:true});
   for(const details of root.querySelectorAll('details[data-retain]'))if(openDetails.includes(details.dataset.retain))details.open=true;
   if(restoreFocus){
    const matching=[...root.querySelectorAll('[data-action]')].find(el=>
@@ -344,7 +346,7 @@ class CloudApp {
  }
  coffees(){
   const s=this.state,setup=M.activeSetup(s),w=M.workspace(s);
-  if(!setup)return `<section class="welcome text-center"><h2>A better next shot.</h2><p class=helper>Add your equipment setup to start logging shots and dialing in.</p>${button('Set Up My Workspace','new-setup','','primary')}${button('Watch Walkthrough','watch-walkthrough','','ghost full space-top')}${button('Read Getting Started Guide','getting-started-guide','','text-button space-top')}</section>`;
+  if(!setup)return firstSetupWelcomeMarkup();
   if(this.view==='community')return this.communityScreen();
   const list=M.visibleCoffees(s,this.sort,this.search,this.tempCoffee);
   // A saved family identity must belong to the same coffee and style before
