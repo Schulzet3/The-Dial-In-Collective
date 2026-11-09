@@ -713,17 +713,17 @@ export function isExtreme(s,shot) {
  return Math.abs(shot.yieldG/shot.doseG-quantile(prior.map(x=>x.yieldG/x.doseG),.5))>1.25||Math.abs(shot.timeS-quantile(prior.map(x=>x.timeS),.5))>25;
 }
 export function saveShot(s,coffeeId,input,{allowLegacyCustom=false}={}) {
- const errors=validateShot(input,{allowLegacyCustom});if(errors.length)throw new Error(errors.join(' '));
  const c=s.coffees.find(x=>x.id===coffeeId),set=activeSetup(s),v=activeVersion(s);
  if(!c||!v)throw new Error('Coffee or setup not found.');
- // An idempotent offline replay retains the ORIGINAL saved basket reference,
- // even if that basket was archived after the first successful save.
+ // An already-saved shot is immutable on offline replay. Check ownership
+ // before validating incoming NEW-shot fields: historical Custom styles,
+ // retired baskets and partial legacy ratings may no longer be accepted for
+ // new shots, but must not prevent a same-coffee idempotent readback.
  if(input.id){const existing=s.shots.find(x=>x.id===input.id);if(existing){
-  // Offline replay may return only the SAME coffee's immutable saved shot.
-  // A reused ID from a different coffee must not masquerade as this save.
   if(existing.coffeeId!==coffeeId)throw new Error('This shot ID already belongs to a different coffee.');
   return existing;
  }}
+ const errors=validateShot(input,{allowLegacyCustom});if(errors.length)throw new Error(errors.join(' '));
  // A stale/retired or unknown basket may be shown as a fallback in Log Shot,
  // but saving must never attach that obsolete ID to a NEW measured shot.
  // Reject before creating preference/audit state; never silently relabel it.
