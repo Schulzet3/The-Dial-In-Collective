@@ -3322,6 +3322,19 @@
       "confirmed_new_defects": 0,
       "provider_writes": false,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-09 #509 Run125 98 direct app index DDL/constraint+equivalence",
+      "project_ref": "azviqqejypsefzilgonr",
+      "source_development_parent_sha": "9f24e98597be6d9b0dc28496ac5f1d21e02b1f66",
+      "reviewed": 98,
+      "total": 98,
+      "receipt_path": "docs/audits/issue509-provider-app-index-cross-equivalence-2026-11-09-run125.json",
+      "duplicate_signature_groups": 0,
+      "prefix_candidates": 3,
+      "verified_new_defects": 0,
+      "production_writes": false,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -15362,5 +15375,55 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "Provider new/changed object, safe error origin; Auth/JWT/native/SQL texts UNVERIFIED"
+  },
+  "provider_index_structural_equivalence_run125": {
+    "status": "DIRECT_FULL_VISIBLE_APP_INDEX_EQUIVALENCE_REVIEW",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_development_parent_sha": "9f24e98597be6d9b0dc28496ac5f1d21e02b1f66",
+    "receipt_path": "docs/audits/issue509-provider-app-index-cross-equivalence-2026-11-09-run125.json",
+    "reviewed": 98,
+    "total": 98,
+    "stats": {
+      "total": 98,
+      "private": 31,
+      "public": 67,
+      "valid_ready_live": 98,
+      "distinct_signatures": 98,
+      "identical_signature_groups": 0,
+      "constraint_backed": 62,
+      "uniqueness_nonconstraint": 4,
+      "zero_scan": 22,
+      "zero_scan_bytes": 352256,
+      "prefix_candidates": 3,
+      "proven_safe_deletions": 0
+    },
+    "prefix_candidates": [
+      {
+        "table": "public.account_preferences",
+        "shorter": "account_preferences_pkey",
+        "longer": "account_active_setup_idx",
+        "shorter_scans": 0,
+        "longer_scans": 316
+      },
+      {
+        "table": "public.recipe_preferences",
+        "shorter": "recipe_preferences_pkey",
+        "longer": "preferred_example_idx",
+        "shorter_scans": 21,
+        "longer_scans": 4783
+      },
+      {
+        "table": "public.setups",
+        "shorter": "setups_owner_id_id_key",
+        "longer": "setup_active_version_idx",
+        "shorter_scans": 1,
+        "longer_scans": 428
+      }
+    ],
+    "confirmed_new_defects": 0,
+    "source_fixes": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "New/changed provider definitions; hosted Auth/JWT/native and safe query-plan attribution gaps"
   }
 }
