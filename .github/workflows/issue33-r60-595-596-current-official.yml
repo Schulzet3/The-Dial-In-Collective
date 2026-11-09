@@ -1,0 +1,50 @@
+name: DIC Issue33 R60 original603 595-596 exact current selected Wrecking Ball source
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r60-595-596-current-official.yml
+      - scripts/audit/issue33-r60-selected-wreckingball-contract.mjs
+      - scripts/audit/issue33-r60-595-596-afterproof.mjs
+      - tests/coffee-issue33-r60-wreckingball-source-contract.test.mjs
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r60-595-596-current-official.yml
+      - scripts/audit/issue33-r60-selected-wreckingball-contract.mjs
+      - scripts/audit/issue33-r60-595-596-afterproof.mjs
+      - tests/coffee-issue33-r60-wreckingball-source-contract.test.mjs
+permissions:
+  contents: read
+jobs:
+  selected-r60:
+    name: original603-595-596-selected-current
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Exact selected 2026 lot and related-coffee negative tests
+        run: node --test tests/coffee-issue33-r60-wreckingball-source-contract.test.mjs
+      - name: Fresh bounded public HTTPS and actual Add Coffee/Source Review
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r60-595-596
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '595,596'
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict selected current identity, locality, process, and raw HTML afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r60-595-596
+        run: node scripts/audit/issue33-r60-595-596-afterproof.mjs
+      - name: Preserve one-day private raw current HTML plus verified evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r60-595-596-selected
+          path: /tmp/dic33-r60-595-596/
+          if-no-files-found: error
+          retention-days: 1
