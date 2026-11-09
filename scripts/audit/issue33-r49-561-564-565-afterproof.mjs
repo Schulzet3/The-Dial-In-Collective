@@ -29,6 +29,14 @@ for(const spec of specs){
  check(item.number===spec.number,'missing_original_case_'+spec.number);
  check(item.status==='FETCHED'&&item.parser_ok===true,'current_official_or_parser_unavailable_'+spec.number);
  check(item.selected_heading_identity_verified===true,'selected_current_identity_unconfirmed_'+spec.number);
+ if(spec.number===564){
+  check(item.selected_embedded_product_identity?.method===
+   'shopify_product_tracker_and_matching_visible_mobile_desktop_hero'&&
+   item.selected_embedded_product_identity?.selected_title==='2026 Yaye Arbegona - Ethiopia'&&
+   item.selected_embedded_product_identity?.visible_producer==='Yaye Arbegona'&&
+   item.selected_embedded_product_identity?.visible_country==='Ethiopia',
+   '2026_Yaye_exact_Shopify_ID_and_current_visible_title_not_verified');
+ }
  check(String(fields.name||'').toLowerCase().includes(spec.name.toLowerCase()),
   'selected_coffee_name_changed_'+spec.number);
  check(item.add_coffee_ui_rendered===true&&item.source_review_rendered===true,

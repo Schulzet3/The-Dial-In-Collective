@@ -13,6 +13,7 @@ import {selectedDirectProductCredits} from '../../src/server/coffee-direct-produ
 import {extractCoffeeBlendEvidence} from '../../src/server/coffee-blend-evidence.mjs';
 import {sameHandleCollectionAlternate,identicalCurrentSelectedTitle} from './issue33-selected-public-alternate.mjs';
 import {requiredFocusedSourceFailures} from './issue33-focused-source-acceptance.mjs';
+import {selectedShopifyCurrentVisibleIdentity} from './issue33-shopify-current-visible-identity.mjs';
 import {selectedProductHeadings,selectedProductFormH2,selectedProductPurchaseRootH2} from './issue33-selected-product-heading.mjs';
 import {coffeeUrlPreviewMarkup,coffeeSourceReviewSnapshot} from '../../site/cloud/coffee-url-autofill.js';
 const sha=value=>createHash('sha256').update(value).digest('hex');
@@ -94,12 +95,20 @@ for(const target of targets){
    writeFileSync(join(dest,r.html_artifact),res.html,'utf8');
    const p=extractPublicCoffeeFacts(res.html,{source_url:r.final_url});
    r.parser_ok=p?.ok===true;r.parser_reason=clip(p?.reason,140);
+   // H1-free Shopify archive pages can have an actual exact-current product
+   // tracking ID AND an identical two-pane visible hero; SEO/slug alone do not qualify.
+   // Store positive selected proof only for the current exact source, not as a parser field.
+   r.selected_embedded_product_identity=(!r.selected_h1_present_in_scoped_html&&
+     !r.selected_form_h2.length&&!r.selected_page_h2.length)
+     ?selectedShopifyCurrentVisibleIdentity(res.html,{
+       source_url:r.final_url,expected_name:target.Coffee,parsed_name:p?.fields?.name}):null;
    r.selected_heading_identity_verified=r.selected_h1_present_in_scoped_html
      ?r.selected_h1.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p?.fields?.name))
      :r.selected_form_h2.length
        ?r.selected_form_h2.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p?.fields?.name))
        :r.selected_page_h2.length
-         ?r.selected_page_h2.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p?.fields?.name)):null;
+         ?r.selected_page_h2.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p?.fields?.name))
+         :Boolean(r.selected_embedded_product_identity);
    if(r.alternate_url_attempted){
     r.alternate_identity_match=r.parser_ok&&(
      r.selected_h1.some(h=>identicalCurrentSelectedTitle(target.Coffee,h,p.fields?.name))||
