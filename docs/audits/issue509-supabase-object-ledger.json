@@ -3301,6 +3301,17 @@
       "app_defects_confirmed": 0,
       "production_writes": false,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-09 #509 Run119 application function/RLS/security and SQLSTATE drift",
+      "source_parent_sha": "df7b4c583d052c7f2ff9261af7fe63d62b669d7f",
+      "receipt_path": "docs/audits/issue509-provider-security-drift-2026-11-09-run119.json",
+      "reviewed_function_hash_records": 99,
+      "reviewed_relation_rls_records": 46,
+      "sqlstate_events": 15,
+      "confirmed_new_defects": 0,
+      "provider_writes": false,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -15206,5 +15217,30 @@
     "baseline_complete": false,
     "ci": "PENDING_EXACT_SOURCE_DOCS_ONLY_GOVERNANCE",
     "next": "Distinct new/changed provider definitions or safe query-source causality review; native/hosted and SQL query body gaps remain."
+  },
+  "provider_application_security_drift_run119": {
+    "reviewed_function_hash_records": 99,
+    "unchanged_original": 98,
+    "known_prior_migration_delta": 1,
+    "unreviewed_function_drift": 0,
+    "reviewed_app_table_acl_records": 46,
+    "rls_disabled": 0,
+    "policy_count": 42,
+    "private_anon_select": 0,
+    "private_anon_schema_usage": false,
+    "anon_private_definer_raw_execute": 2,
+    "definers_without_search_path": 0,
+    "catalog_families_examined": 14,
+    "empty_catalog_families": 13,
+    "historic_error_events_time_bucketed": 15,
+    "all_sqlstate_error_tagged_select": true,
+    "confirmed_new_defect": 0,
+    "source_code_repairs": 0,
+    "production_writes": false,
+    "baseline_complete": false,
+    "receipt_path": "docs/audits/issue509-provider-security-drift-2026-11-09-run119.json",
+    "source_parent_sha": "df7b4c583d052c7f2ff9261af7fe63d62b669d7f",
+    "status": "COMPLETE_BOUNDED_DRIFT_CHECK_NO_NEW_SOURCE_WORD_CREDIT",
+    "next": "Distinct unreviewed provider source definitions or newly changed object; privacy-safe SQLSTATE causality, hosted JWT/API continue unverified"
   }
 }
