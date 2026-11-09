@@ -5,6 +5,6 @@ export function selectedCurrentVisibleLabeledFact(visibleText,label,literal) {
  const key=String(label||'').trim(), value=String(literal||'').trim();
  if(!/^[A-Za-z][A-Za-z ]{1,40}$/.test(key)||!value||value.length>120)return false;
  const escape=s=>s.replace(/[-/\\^$*+?.()|[\]{}]/g,'\\$&');
- return new RegExp('(?:^|[^a-z0-9])'+escape(key)+'\\s*:\\s*'+escape(value)+
-   '(?=$|[^a-z0-9])','i').test(text);
+ return new RegExp('(?:^|✹)\\s*'+escape(key)+'\\s*:\\s*'+escape(value)+
+   '(?=\\s*(?:✹|$))','i').test(text);
 }
