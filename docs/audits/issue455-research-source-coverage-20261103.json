@@ -1104,6 +1104,26 @@
       "current_app_crosswalk": "Live engine@177b76962a6ddb19fdc884eab71d09b902a35850 and constants@72221331ce4dffabe416eebec1ae2fceced3a095 preserve personal measured dose/yield/time, five sensory ratings, equipment control, styles, same-coffee families and single controllable next-shot change; no crema-driven 15/19-bar optimum or inferred sensory grading.",
       "reviewed_date_utc": "2026-11-09",
       "implementation_status": "RESEARCH_ONLY_NO_APP_OR_LOCKED_POLICY_CHANGE"
+    },
+    {
+      "id": "LIT-2022-KHAMITOVA-BASKET-DISC-CARBS",
+      "type": "peer_reviewed_primary_espresso_hardware_carbohydrate_comparison",
+      "title": "Effect of perforated disc height and filter basket on espresso coffee carbohydrates content and composition",
+      "authors": "Gulzhan Khamitova; Claudia P. Passos; Guido R. Lopes; Manuel A. Coimbra; Ahmed M. Mustafa; Sauro Vittori; Giovanni Caprioli",
+      "published": "2022-01-12",
+      "journal": "European Food Research and Technology 248:1217–1226",
+      "doi": "10.1007/s00217-022-03960-w",
+      "url": "https://link.springer.com/article/10.1007/s00217-022-03960-w",
+      "first_party_crosscheck": "https://pubblicazioni.unicam.it/handle/11581/456172",
+      "access": "DIRECT_ORIGINAL_SPRINGER_PUBLISHER_ABSTRACT_PLUS_AUTHOR_UNIVERSITY_OF_CAMERINO_REPOSITORY_ABSTRACT; FULL_TEXT_SUBSCRIPTION_LOCKED",
+      "review_status": "BOUNDED_SUBSTANTIVE_FIRST_PARTY_PUBLISHER_AND_AUTHOR_INSTITUTION_ABSTRACT_REVIEW_NOT_COMPLETE_PAPER",
+      "evidence_grade": "PEER_REVIEWED_PRIMARY_ABSTRACT_ONLY_SPECIFIC_CHEMICAL_RESPONSE_NOT_VALIDATED_CONSUMER_TASTE",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Full PDF restricted, no article binary/hash, original methods, tables, figures, numerical effect sizes, uncertainty, hardware calibration, raw data or personal sensory ratings independently obtained.",
+      "claims_verified_externally": "Original Springer publisher abstract and matching university author repository report two baskets, perforated-disc heights 4–7 mm, Arabica and Robusta, 12/14 g doses, 40 mL output split into cups. They measured total solids, high-molecular-weight material, galactomannans (GM) and arabinogalactans (AG), and report lower GM/AG extraction at increased tested disc height. These comparisons do NOT show a universal optimal basket, shower-disc height or dose, nor individual five-rating taste outcomes.",
+      "current_app_crosswalk": "Current engine blob 177b76962a6ddb19fdc884eab71d09b902a35850 and model blob 1efeeac985b7f2fb68a67e34af1f40c38437666c already track basket/setup version and original measured shots, personal same-coffee recipe family and five ratings. No perforated disc height field or carbohydrate-based target.",
+      "reviewed_date_utc": "2026-11-09",
+      "implementation_status": "RESEARCH_ONLY_NO_APP_OR_LOCKED_POLICY_CHANGE"
     }
   ],
   "evidence_checks": [
@@ -3391,6 +3411,28 @@
       "owner_approval": false,
       "test_source": "Source-bound read-only analysis; no app/Node22/SQL/CI tests executed for a docs-only claim.",
       "date": "2026-11-09"
+    },
+    {
+      "id": "R455-EV-CIT-130-A",
+      "source": "Khamitova et al. 2022 original Springer publisher abstract DOI 10.1007/s00217-022-03960-w + first-party University of Camerino https://pubblicazioni.unicam.it/handle/11581/456172",
+      "claim": "Publisher reports comparison of four perforated disc heights (4–7 mm), two baskets, two coffee species and 12/14 g doses to a 40 mL drink, with decreasing extracted galactomannans and arabinogalactans with increased test disc height.",
+      "grade": "PUBLISHER_ORIGINAL_ABSTRACT_PLUS_AUTHOR_INSTITUTION_CROSSCHECK_ONLY",
+      "result": "BOUNDED_REPORTED_EXPERIMENT_SUPPORTED_NO_VERIFIED_MAGNITUDES_OR_CONSUMER_TASTE",
+      "current_app": "Already records selected basket and measured dose; does not measure shower-disc geometry or polysaccharides.",
+      "owner_approval": false,
+      "test_source": "Read original publisher accessible preview and matching author University publication abstract only; not full paper/physical experiment.",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "R455-EV-CIT-130-B",
+      "source": "Same primary source; Locked Master/Decision; current engine@177b76962a6ddb19fdc884eab71d09b902a35850,model@1efeeac985b7f2fb68a67e34af1f40c38437666c",
+      "claim": "An observed carbohydrate composition effect under narrow Italian-style brew conditions cannot establish a universal target disc height/basket/dose or predict individual five sensory ratings.",
+      "grade": "TRANSFER_LIMIT_DIRECT_PRIMARY_ABSTRACT_CURRENT_CODE_CROSSWALK_FULL_ARTICLE_UNVERIFIED",
+      "result": "NO_NEW_HARDWARE_OR_NUMERIC_PRODUCT_POLICY_VALIDATED",
+      "current_app": "Preserve distinct setup/baskets and histories, five tastes, green-vs-missing, one controllable next-step and equipment capabilities.",
+      "owner_approval": false,
+      "test_source": "Read-only current engine/model review and primary abstract, no new Node/browser/SQL/empirical espresso test.",
+      "date": "2026-11-09"
     }
   ],
   "policy_decisions_pending": [],
@@ -3449,32 +3491,33 @@
     "R455-127: new Wiley 2025 original publisher PSD abstract research-only, 70 curated sources, 172 checks, 89 proposals; no app policy, CI pending, S019 inaccessible and #267 direct audit distinct.",
     "R455-127 VERIFIED: PR1544 5/5 named head checks SUCCESS, nonforce squash ed621cc2b766609235b0835f0c27563fc5d5a6ec, 3 whitelisted doc blobs match tested head, exact merged approval42547720934 SUCCESS; research only 70/172/89, no application/Locked change. Reconciliation PR pending at receipt authoring.",
     "R455-128: source e4a94d1b39e51f1e0cf71208d97add8c187c270e safe replay coffee-ID integrity; 3 tests and exact merged Node3157/0/6, UX and governance SUCCESS; 70 sources/173 checks/90 proposals; standalone S019 missing; continue distinct #455 work.",
-    "R455-129 source-first original publisher abstract + University of Padua record: no general 19-bar/crema optimality or new taste control; 71 curated/175 checks/91 proposals. Docs only pending PR CI; standalone S019 remains unreviewed."
+    "R455-129 source-first original publisher abstract + University of Padua record: no general 19-bar/crema optimality or new taste control; 71 curated/175 checks/91 proposals. Docs only pending PR CI; standalone S019 remains unreviewed.",
+    "R455-130 source 817a7574fd09eb08251dec9da3a19629db62e7fe: Springer+Camerino 2022 two-basket 4–7mm disc extraction chemistry, not taste optimum. 72 curated sources/177 checks/92 proposals; docs-only PR/CI pending at authoring; original S019 unreviewed."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-129",
-    "base_development_sha": "52ab87129f611226581b2c75da5cdd90797bc293",
+    "id": "R455-130",
+    "base_development_sha": "817a7574fd09eb08251dec9da3a19629db62e7fe",
     "source_ids": [
-      "LIT-2022-LOMOLINO-CAPSULE-CREMA-SENSORY"
+      "LIT-2022-KHAMITOVA-BASKET-DISC-CARBS"
     ],
     "claim_ids": [
-      "R455-EV-CIT-129-A",
-      "R455-EV-CIT-129-B"
+      "R455-EV-CIT-130-A",
+      "R455-EV-CIT-130-B"
     ],
     "proposal_ids": [
-      "R455-PROP-129-CAPSULE-CREMA-NOT-ESPRESSO-PRESSURE-OPTIMUM"
+      "R455-PROP-130-BASKET-DISC-CARB-TRANSFER-BOUNDARY"
     ],
-    "number_of_curated_sources": 71,
-    "total_evidence_checks": 175,
-    "number_of_proposals": 91,
-    "review_type": "ORIGINAL_PUBLISHER_ABSTRACT_AUTHOR_UNIVERSITY_CROSSCHECK_CREMA_CAPSULE_SENSORY_TRANSFER_BOUNDS",
+    "number_of_curated_sources": 72,
+    "total_evidence_checks": 177,
+    "number_of_proposals": 92,
+    "review_type": "SPRINGER_PRIMARY_ABSTRACT_CROSSCHECKED_FIRST_PARTY_AUTHOR_UNIVERSITY_HARDWARE_CHEMISTRY_TRANSFER_LIMIT",
     "code_or_policy_changed": false,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
-    "status": "DOCS_PR_UNTESTED_NOT_MERGED_AT_SAME_COMMIT_AUTHORING",
+    "status": "DOCS_COMMIT_ONLY_CI_AND_MERGE_PENDING_AT_AUTHORING",
     "s019": "INACCESSIBLE_UNREVIEWED",
-    "next_action": "Verify exact PR-head documentation-only CI then nonforce integrate and source-bound readback; resume separate new evidence/UX issue without copying #267 source-line work."
+    "next_action": "Verify three-path non-destructive PR, exact applicable PR-head CI then nonforce merge and source-bound merged governance; continue separate Log Shot → Rate → Recommendation inspection."
   },
   "policy_decisions_resolved": [
     {
@@ -5346,6 +5389,27 @@
       "owner_approval_now_required": false,
       "implementation": "RESEARCH_ONLY_LEDGER_AND_WORKSTREAM_CHECKPOINT_R455_129; NO_RUNTIME_OR_POLICY_CHANGE",
       "test_plan": "Docs-only scoped PR exact source/Git blob + applicable governance/continuity CI verification after merge; no runtime/empirical taste tests claimed.",
+      "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-130-BASKET-DISC-CARB-TRANSFER-BOUNDARY",
+      "finding": "2022 controlled espresso comparison reports carbohydrate fractions varying with shower disc height and basket; no accessible full primary tables nor directly transferable sensory result.",
+      "evidence": [
+        "R455-EV-CIT-130-A",
+        "R455-EV-CIT-130-B"
+      ],
+      "severity": "P3_UNVALIDATED_HARDWARE_OPTIMUM_OR_NUMERIC_DOSE_GENERALIZATION",
+      "user_benefit": "Avoid misleading universal shower/disc/basket/dose instructions; keep personalized original hardware and taste outcomes.",
+      "current_locked": "All five taste inputs, complete-green success vs missing, one truly controllable change, logged original measurements, notes/private history, independent styles/slow-feed, versioned grinder and baskets, privacy/RLS.",
+      "current_app": "Current engine@177b76962a6ddb19fdc884eab71d09b902a35850 and model@1efeeac985b7f2fb68a67e34af1f40c38437666c capture actual selected basket and compatibility without disc-height optimization.",
+      "proposed_change": "RESEARCH-ONLY; do not introduce disc-height capture, universal optimal basket geometry, or dose adjustment. Any future policy/capture requires separate explicit owner approval and actual within-app outcome validation.",
+      "evidence_grade": "DIRECT_PUBLISHER_ABSTRACT_AUTHOR_UNIVERSITY_RECORD_ONLY; FULL_METHODS_TASTES_NUMBERS_UNVERIFIED",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "LEDGER_AND_SAME_COMMIT_SCOPED_JOURNAL_PLUS_CURRENT_STATUS_R130_RESEARCH_ONLY; PR_CI_PENDING_AT_AUTHORING",
+      "test_plan": "Three docs-only diff, source bound PR-head governance/continuity CI, exact merge readback; no app/espresso tests claimed.",
       "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY",
       "github267_literal_review_credit": 0,
       "production_deployed": false
