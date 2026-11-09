@@ -3226,6 +3226,18 @@
       "confirmed_new_source_defects": 0,
       "production_writes": false,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-09T06:44Z #509 run113 per-index statistics direct review",
+      "provider_ref": "azviqqejypsefzilgonr",
+      "development_parent_sha": "6b4b553a9677381aaa98d37adda2ae8a5c6f4b7e",
+      "records": 361,
+      "source": "docs/audits/issue509-provider-index-telemetry-001-361-2026-11-09-run113.json",
+      "findings_verified": 0,
+      "source_fixes": 0,
+      "provider_writes": 0,
+      "baseline_complete": false,
+      "next": "Current index/role/schema/definition drift after this numeric telemetry snapshot, remaining hidden provider full-source boundaries"
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -14846,5 +14858,48 @@
     "SQL_text": "NOT_SELECTED",
     "provider_baseline_complete": false,
     "next": "Watch further newly appearing fingerprint identities; prioritize direct full SQL/provider object definition sources still not reviewed"
+  },
+  "provider_per_index_runtime_telemetry_run113": {
+    "status": "361_OF_361_NONTOAST_INDEXES_DIRECT_AGGREGATE_USAGE_RECORDS_REVIEWED_NOT_STATEMENT_PLANS",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_development_parent": "6b4b553a9677381aaa98d37adda2ae8a5c6f4b7e",
+    "source_main_sha": "a4028e42b0d0316fd539c0563fd07832d509aed0",
+    "source_release_sha": "92829cb6aff82aaec212eabbd921183e7997f1a7",
+    "provider_observed_at_utc": "2026-11-09T06:44Z",
+    "stats_reset": "2026-10-02 18:01:15.201525+00",
+    "receipt_path": "docs/audits/issue509-provider-index-telemetry-001-361-2026-11-09-run113.json",
+    "receipt_blob_sha": "20fc4e8d37bc6c20f580f9b6e7cbbdaaf3bd85b5",
+    "reviewed": 361,
+    "total": 361,
+    "active_scan_indexes": 202,
+    "zero_scan_indexes": 159,
+    "invalid_unready_indexes": 0,
+    "index_bytes_by_schema": {
+      "auth": 1253376,
+      "pg_catalog": 3948544,
+      "private": 491520,
+      "public": 1097728,
+      "realtime": 40960,
+      "storage": 180224,
+      "supabase_migrations": 32768,
+      "vault": 16384
+    },
+    "per_schema_counts": {
+      "auth": 111,
+      "pg_catalog": 124,
+      "private": 31,
+      "public": 67,
+      "realtime": 4,
+      "storage": 20,
+      "supabase_migrations": 2,
+      "vault": 2
+    },
+    "prior_DDL_reused_no_new_word_level_index_review": true,
+    "raw_private_data_or_query_text_selected": false,
+    "confirmed_bottlenecks": 0,
+    "confirmed_safe_index_deletions": 0,
+    "live_provider_writes": false,
+    "baseline_complete": false,
+    "next": "Distinct uncovered provider observability/definition classes and incremental changed-object drift; restricted native compiled/hosted JWT/Auth/PostgREST and console settings remain UNVERIFIED."
   }
 }
