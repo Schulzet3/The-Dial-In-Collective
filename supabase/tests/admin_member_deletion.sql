@@ -130,6 +130,9 @@ DECLARE
  IF EXISTS(SELECT 1 FROM private.dic_admin_account_delete_operations o
   WHERE o.id=op_keep AND (o.expected_impact ? 'email' OR o.expected_impact ? 'member_id'))
  THEN RAISE EXCEPTION 'Completed deletion receipt retained identifying email/member ID'; END IF;
+ IF EXISTS(SELECT 1 FROM private.dic_admin_account_delete_operations o
+  WHERE o.id=op_keep AND cardinality(o.contributor_ids)<>0)
+ THEN RAISE EXCEPTION 'Keep-mode receipt retained a contributor-to-deleted-user link'; END IF;
  EXECUTE 'RESET ROLE';
  IF NOT EXISTS(SELECT 1 FROM public.community_shots WHERE id=community_keep AND quality_state='eligible')
  OR NOT EXISTS(SELECT 1 FROM private.contribution_links l
@@ -152,6 +155,10 @@ DECLARE
  finished:=public.dic_admin_account_delete_finish(op_remove,admin);
  IF (finished->>'completed')<>'true' OR (finished->>'community_removed')::integer<>1
  THEN RAISE EXCEPTION 'Remove Community result inaccurate'; END IF;
+ IF EXISTS(SELECT 1 FROM private.dic_admin_account_delete_operations o
+  WHERE o.id=op_remove AND (cardinality(o.contributor_ids)<>0
+   OR o.expected_impact ? 'email' OR o.expected_impact ? 'member_id'))
+ THEN RAISE EXCEPTION 'Remove-mode completed receipt retained identifying linkage'; END IF;
  EXECUTE 'RESET ROLE';
  IF EXISTS(SELECT 1 FROM public.community_shots WHERE id=community_remove)
  OR EXISTS(SELECT 1 FROM private.contribution_links WHERE community_shot_id=community_remove)

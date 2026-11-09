@@ -63,3 +63,7 @@ PR-head SQL run 42692499171 (job 129415617298) applied all migrations and passed
 ## Completed-receipt privacy hardening
 
 Verified that the private request impact contains email and original member UUID for confirmation/retry, but neither needs retention after a successful Auth deletion and Community cleanup. The finishing SQL transaction now drops those two identifying JSON keys from the completed operation receipt, while keeping limited operation audit metadata, source counts and actor scope. Added disposable SQL regression. No real account or provider changes; new exact-source CI required.
+
+## November 9 — completion receipt contributor de-link (source patch)
+
+After exact merged-source inspection, found the completed private deletion receipt kept the frozen `contributor_ids` array next to the original deleted Auth user ID, which would allow subsequent internal re-association of otherwise anonymous durable Community data. Narrow forward-only migration refinement now clears `contributor_ids` in the same finalization transaction as completion and prior removal of the email/member ID from `expected_impact`. The frozen contributor list remains available in `requested/prepared` phases only for recovery/selected removal, never after completion. Added disposable Keep and Remove tests verifying zero retained contributor IDs. No change to existing Community row identities/weighting, member records or provider; no deployment. This is part of owner Issue #1676 and must obtain exact-source CI before READY.
