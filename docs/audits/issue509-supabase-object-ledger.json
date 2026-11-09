@@ -15524,5 +15524,25 @@
     "baseline_complete": false,
     "ci": "PENDING_EXACT_SOURCE_DOCS_GOVERNANCE",
     "next": "Genuinely unreviewed/new/changed provider object and hosted Auth/JWT/API/native gaps; maintain separate #96 ownership"
+  },
+  "provider_account_delete_provenance_run130": {
+    "status": "VERIFIED_LIVE_PRE_RELEASE_FK_BLOCKER_DEV_SOURCE_FIX_CI_PENDING",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_development_parent_sha": "f00e9b080022903475c5dee37fe1557a5ea643d2",
+    "receipt_path": "docs/audits/issue509-provider-account-delete-provenance-2026-11-09-run130.json",
+    "references_nonadmin_canonical_first_entry": 3,
+    "references_nonadmin_private_coffee_audit": 4,
+    "direct_source_definition_review": "FK complete definitions and nullability; #1676 staged migration + test semantic crosscheck, not #267 line-credit",
+    "app_fix_paths": [
+      "supabase/migrations/20261109231500_dic_account_delete_coffee_provenance_fk.sql",
+      "supabase/tests/admin_member_deletion.sql"
+    ],
+    "owner_hold_comment": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1676#issuecomment-6753621464",
+    "queue": "DIC-Q-509-account-delete-coffee-fk",
+    "state": "IN_PROGRESS",
+    "ci": "PENDING_EXACT_SOURCE",
+    "production_writes": false,
+    "baseline_complete": false,
+    "next": "Exact-source isolated SQL/CI; if PASS coordinate corrected source-isolated #1676 release; independently retain offsite recovery HOLD"
   }
 }

@@ -10,7 +10,7 @@ DECLARE
  ckeep uuid; cremove uuid; cpeer uuid;
  community_keep uuid; community_remove uuid; community_peer uuid;
  impact jsonb; request jsonb; prepared jsonb; finished jsonb; invite jsonb;
- op_keep uuid; op_remove uuid; code_id uuid;
+ op_keep uuid; op_remove uuid; code_id uuid; source_submission uuid;
  blocked boolean;
  BEGIN
  IF current_database()<>'dic_ci' THEN RAISE EXCEPTION 'Only disposable dic_ci allowed'; END IF;
@@ -28,6 +28,23 @@ DECLARE
  IF cpeer IS NULL THEN INSERT INTO private.contributors(owner_id) VALUES(peer_user) RETURNING id INTO cpeer; END IF;
  INSERT INTO public.coffees(name,roaster,origin,verification_state)
  VALUES('Member deletion CI coffee','Synthetic Roaster','Brazil','verified') RETURNING id INTO coffee;
+ -- A real non-admin author may have supplied the canonical first coffee entry.
+ -- These retained audit/provenance FKs originally had NO ACTION and would block
+ -- GoTrue hard deletion even though coffee_submissions cascades from auth.users.
+ INSERT INTO public.coffee_submissions(owner_id,proposed_data,canonical_coffee_id,status)
+ VALUES(keep_user,'{"name":"Member deletion CI coffee","roaster":"Synthetic Roaster"}'::jsonb,coffee,'approved')
+ RETURNING id INTO source_submission;
+ INSERT INTO private.dic_coffee_first_entry(coffee_id,first_seen_at,first_submission_id,primary_name)
+ VALUES(coffee,now(),source_submission,'Member deletion CI coffee');
+ INSERT INTO private.dic_coffee_audit(coffee_id,submission_id,event_kind,evidence)
+ VALUES(coffee,source_submission,'admin_approved','{}'::jsonb);
+ IF NOT EXISTS (
+  SELECT 1 FROM pg_constraint WHERE conname='dic_coffee_first_entry_first_submission_id_fkey'
+   AND conrelid='private.dic_coffee_first_entry'::regclass AND confdeltype='n'
+ ) OR NOT EXISTS (
+  SELECT 1 FROM pg_constraint WHERE conname='dic_coffee_audit_submission_id_fkey'
+   AND conrelid='private.dic_coffee_audit'::regclass AND confdeltype='n'
+ ) THEN RAISE EXCEPTION 'Account deletion provenance FKs are not SET NULL'; END IF;
  INSERT INTO public.community_shots(coffee_id,style,dose_g,yield_g,time_s,
   extraction,body,clarity,sweetness,astringency,feed_mode,observed_on,quality_state)
  VALUES(coffee,'Traditional',18,36,27,3,3,5,5,1,'standard',current_date,'eligible')
@@ -115,6 +132,16 @@ DECLARE
  IF NOT blocked THEN RAISE EXCEPTION 'Finalization accepted existing Auth user'; END IF;
  EXECUTE 'RESET ROLE';
  DELETE FROM auth.users WHERE id=keep_user; -- disposable simulation of GoTrue admin.deleteUser
+ IF EXISTS(SELECT 1 FROM public.coffee_submissions WHERE id=source_submission)
+ THEN RAISE EXCEPTION 'Deleted user still has private submission'; END IF;
+ IF NOT EXISTS(SELECT 1 FROM private.dic_coffee_first_entry
+   WHERE coffee_id=coffee AND first_submission_id IS NULL AND primary_name='Member deletion CI coffee')
+ THEN RAISE EXCEPTION 'Canonical first-entry provenance lost or retains deleted submission'; END IF;
+ IF NOT EXISTS(SELECT 1 FROM private.dic_coffee_audit
+   WHERE coffee_id=coffee AND submission_id IS NULL AND event_kind='admin_approved')
+ THEN RAISE EXCEPTION 'Review audit lost or retains deleted submission'; END IF;
+ IF NOT EXISTS(SELECT 1 FROM public.coffees WHERE id=coffee AND verification_state='verified')
+ THEN RAISE EXCEPTION 'Canonical approved coffee was deleted with member'; END IF;
  PERFORM set_config('request.jwt.claim.sub',admin::text,true);
  EXECUTE 'SET LOCAL ROLE authenticated';
  IF NOT (public.dic_admin_access_overview()->'pending_deletions') @>
