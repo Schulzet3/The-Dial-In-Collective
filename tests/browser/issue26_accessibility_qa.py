@@ -70,12 +70,13 @@ with sync_playwright() as p:
     coffee=page.locator('[data-action=expand]').first
     coffee.focus()
     coffee.press('Enter')
-    page.get_by_role('button',name='Log A Shot',exact=False).wait_for()
+    page.get_by_role('button',name='Log First Shot',exact=True).wait_for()
+    check(page.locator('.first-shot-style [name=first_style]').count()==1,'Before first shot, style choice is keyboard accessible')
     check(page.evaluate("document.activeElement?.dataset?.action==='expand'"),'Coffee expansion preserves focus and remains keyboard reversible')
     check(page.locator('[data-action=expand]').first.get_attribute('aria-expanded')=='true','Expanded coffee exposes live aria-expanded=true')
 
     # Focused Log Shot sheet, native dialog semantics and keyboard navigation.
-    log=page.locator('[data-action=log]').first
+    log=page.locator('[data-action=first-shot-log]').first
     log.focus()
     log.press('Enter')
     page.locator('#shot [name=yieldG]').wait_for()
@@ -158,6 +159,7 @@ with sync_playwright() as p:
     page.get_by_role('button',name='Save Shot & Get Suggestion').click()
     page.wait_for_function("!document.querySelector('#sheet').open")
     check(page.locator('.feedback-panel').count()==1,'Rating and saving generates one visible recommendation')
+    check(page.locator('.first-shot-style').count()==0 and page.locator('[data-action=log]').count()==1,'After first shot, regular Log A Shot replaces first-shot guidance')
     check(page.evaluate('window.__raw.shots.length===1'),'One submission creates exactly one synthetic shot')
     check(page.locator('.current-mark').count()==1,'Completed shot retains a single current coffee')
     # History controls also redraw the root: keyboard focus must survive both directions.
