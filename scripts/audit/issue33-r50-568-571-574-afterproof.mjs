@@ -38,14 +38,14 @@ for(const x of specs){
   require(sha(bytes)===r.html_sha256&&bytes.length===r.html_bytes,
     'official_raw_HTML_digest_or_bytes_changed_'+x.number);
  }catch{require(false,'official_raw_HTML_missing_'+x.number)}
- const txt=html.replace(/<script\\b[\\s\\S]*?<\\/script>/gi,' ').replace(/<style\\b[\\s\\S]*?<\\/style>/gi,' ')
-  .replace(/<[^>]{0,3000}>/g,' ').replace(/&(?:amp|nbsp);/gi,' ').replace(/\\s+/g,' ');
+ const txt=html.replace(/<script\b[\s\S]*?<\/script>/gi,' ').replace(/<style\b[\s\S]*?<\/style>/gi,' ')
+  .replace(/<[^>]{0,3000}>/g,' ').replace(/&(?:amp|nbsp);/gi,' ').replace(/\s+/g,' ');
  const notes=String(f.tasting_notes||'').toLowerCase();
  if(x.number===568){
   require(['jasmine mochi','blueberry pie','brown butter'].every(n=>notes.includes(n)),
    'selected_farm_literal_tasting_notes_omitted');
   require(/farm is managed by the alvarez family/i.test(txt),'direct_selected_farm_manager_evidence_not_found');
-  require(/farm:\\s*finca la esperanza/i.test(txt)&&/processing:\\s*natural/i.test(txt),
+  require(/farm:\s*finca la esperanza/i.test(txt)&&/processing:\s*natural/i.test(txt),
    'direct_selected_farm_process_evidence_not_found');
   require(!notes.includes('pop rocks'),'other_coffee_flavor_leakage');
  }
@@ -75,6 +75,6 @@ const verdict={kind:'ISSUE33_R50_BOUNDED_CURRENT_SELECTED_NOT_603_CERTIFIED',
  original603_csv_sha256:evidence.original603_register_sha256,
  fetched:evidence.fetched,parsed:evidence.parsed,manual_certified:0,production_operations:0,
  passed:failures.length===0,failures,cases};
-writeFileSync(join(root,'r50-568-571-574-verdict.json'),JSON.stringify(verdict,null,2)+'\\n');
+writeFileSync(join(root,'r50-568-571-574-verdict.json'),JSON.stringify(verdict,null,2)+'\n');
 console.log('[DIC33 R50 FOCUSED CURRENT] '+JSON.stringify(verdict));
 if(failures.length)process.exitCode=1;
