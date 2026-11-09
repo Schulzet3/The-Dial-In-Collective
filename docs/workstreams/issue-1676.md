@@ -31,3 +31,7 @@ Refactored the single source of server-authoritative impact counts into private 
 ## Disposable SQL implementation acceptance fixture
 
 Added `supabase/tests/admin_member_deletion.sql` to the existing ONE isolated SQL regression loop. Exercises admin/ordinary/anonymous privileges, a deleted code's immediate revocation and invisibility across search/overview/pages, private receipt and idempotence, exact account preview rejection, confirmed request, server-only preparation, prohibition on pre-Auth finalization, disposable simulated Auth cascade, retention of private contributor identity for Community weighting, removal of only the selected user's Community rows, and an untouched second member. The suite has a hard `current_database()='dic_ci'` guard and wraps all inserts/DELETES in BEGIN/ROLLBACK. Actual CI verdict PENDING; no hosted operations.
+
+## Admin JS tests
+
+Updated the retired no-hard-delete assertion, preserving administrator protection. Added fixture tests for escaped Keep/Remove Community choices, no forged direct confirmation, confirmed exact member and choice, server-only operation UUID to Edge, and Delete Code RPC. No production writes. CI verdict pending.
