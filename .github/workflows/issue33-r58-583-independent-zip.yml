@@ -1,0 +1,61 @@
+name: DIC Issue33 R58 independent selected 583 artifact source proof
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r58-583-independent-zip.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  independent-583:
+    name: original603-583-independent-zip-and-source
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - name: Independently download and verify current R58 selected source bytes
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          archive="${RUNNER_TEMP}/dic33-r58-583.zip"
+          curl --fail --silent --show-error --location --retry 2 \
+            --header "Authorization: Bearer ${GH_TOKEN}" \
+            --header "Accept: application/vnd.github+json" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/13665157443/zip" -o "$archive"
+          test "$(stat -c '%s' "$archive")" = '72093'
+          test "$(sha256sum "$archive" | cut -d ' ' -f1)" = '399395cabddd798c1e009a90e8541a7329a0d2eee025d6967384d275c612539d'
+          unzip -tqq "$archive"
+          test "$(unzip -p "$archive" case-583.html | sha256sum | cut -d ' ' -f1)" = '75d06d7daeab0e5b44a1f1a4f2c13a9d6a184b6da966e34ad186decc3b7f88a9'
+          test "$(unzip -p "$archive" focused-current-evidence.json | sha256sum | cut -d ' ' -f1)" = 'fd9fa6cc1e58a1803de40cb084e22a4c8b3faac8d2e726a87debc51e36feb91f'
+          unzip -p "$archive" focused-current-evidence.json | jq -e \
+            '.source_sha=="f3e710406422c703b097db79ba4d1650fa9996f2" and
+             .manual_certified==0 and .production_operations==0 and
+             .real_auth==false and .original_corpus_modified==false and
+             .case_numbers==[583] and (.records|length)==1 and
+             .records[0].status=="FETCHED" and .records[0].parser_ok==true and
+             .records[0].selected_heading_identity_verified==true and
+             .records[0].official_url=="https://www.thecoffeeexchange.com/products/dominican-republic-red-honey-process-vienna-roast-limited-offering" and
+             .records[0].current_fields.name=="Dominican Republic – Red Honey, Vienna" and
+             .records[0].current_fields.origin=="Jarabacoa, Cibao, Dominican Republic" and
+             .records[0].current_fields.process=="Honey" and
+             .records[0].current_fields.roast_level=="Medium-Dark" and
+             .records[0].html_bytes==519763 and
+             .records[0].html_sha256=="75d06d7daeab0e5b44a1f1a4f2c13a9d6a184b6da966e34ad186decc3b7f88a9" and
+             .records[0].add_coffee_ui_rendered==true and
+             .records[0].source_review_rendered==true' >/dev/null
+          unzip -p "$archive" r58-583-source-diagnostic.json | jq -e \
+            '.source_sha=="f3e710406422c703b097db79ba4d1650fa9996f2" and
+             .evidence_sha256=="fd9fa6cc1e58a1803de40cb084e22a4c8b3faac8d2e726a87debc51e36feb91f" and
+             .manual_certified==0 and .production_operations==0 and
+             .passed==true and .failures==[] and
+             .selected.origin=="Jarabacoa, Cibao, Dominican Republic" and
+             .selected.process=="Honey" and .selected.roast=="Medium-Dark" and
+             .selected.raw_html_verified==true and
+             .selected.add_coffee==true and .selected.source_review==true and
+             .direct_selected_trade_region_verified==true and
+             .region_source_mentions_count>=1 and
+             (.region_source_mentions|any(.[]; contains("Jarabacoa, Cibao")))' >/dev/null
+          echo 'VERIFIED independent R58 artifact 13665157443 and current original603 #583 source/field/provenance bytes'
