@@ -48,6 +48,10 @@ for(const spec of R53_EXACT_CASES){
   check(observed.selected_swiss_water,'missing_current_selected_swiss_water_decaf_591');
   if(observed.selected_natural_label)check(r.current_fields?.process==='Natural','selected_natural_processing_not_retained_591');
   if(observed.selected_light_roast)check(r.current_fields?.roast_level==='Light','selected_light_roast_not_retained_591');
+  const ownNamedWater=/Ethiopia FTO Natural Yirgacheffe Swiss Water Process Decaf is sourced from\b/iu.test(selected);
+  check(ownNamedWater,'missing_current_selected_named_sw_decaf_591');
+  if(ownNamedWater)check(r.current_fields?.decaffeination_method==='Water Process'&&
+   !(r.conflicts||[]).includes('decaffeination_method'),'selected_water_decaf_method_not_retained_591');
  }
  checks.push({number:spec.number,...observed});
 }
