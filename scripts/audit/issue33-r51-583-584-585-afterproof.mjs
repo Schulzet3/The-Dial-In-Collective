@@ -22,6 +22,12 @@ for(const spec of R51_EXACT_SOURCE_CASES) {
   bytes=readFileSync(join(root,'case-'+spec.number+'.html'));
   must(sha(bytes)===r.html_sha256&&bytes.length===r.html_bytes,'current_raw_html_hash_or_length_mismatch_'+spec.number);
  }catch{must(false,'raw_official_html_missing_'+spec.number);}
+ const f=r.current_fields||{};
+ if(spec.number===585){
+  must(f.roast_level==='Light','selected_American_roast_defined_as_light_missing');
+  must(/<label\b[^<>]{0,400}class=["'][^"']*\bvariant__label\b[^"']*["'][^<>]{0,500}>\s*American Roast\s*[-–—]\s*1\s*lb\s*<\/label>/i.test(bytes?.toString('utf8')||''),
+   'selected_American_purchase_variant_missing');
+ }
  cases.push({number:spec.number,coffee:spec.name,url:r.final_url||r.official_url||null,
   identity_verified:r.selected_heading_identity_verified===true,
   headings:{h1:r.selected_h1||[],form_h2:r.selected_form_h2||[],purchase_h2:r.selected_page_h2||[]},
