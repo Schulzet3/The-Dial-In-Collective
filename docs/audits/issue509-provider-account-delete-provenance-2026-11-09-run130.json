@@ -28,13 +28,48 @@
   "development_only_fix": {
     "migration_path": "supabase/migrations/20261109231500_dic_account_delete_coffee_provenance_fk.sql",
     "sql_fixture": "supabase/tests/admin_member_deletion.sql",
-    "status": "IN_PROGRESS_PENDING_EXACT_SOURCE_SQL_AUTH_AND_GOVERNANCE_CI"
+    "status": "READY_DEV_SOURCE_EXACT_SOURCE_CI_SUCCESS_NO_DEPLOYMENT",
+    "verified_ci": [
+      {
+        "id": 42715874936,
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "7416c155cac9be2ea84daba23ca6fe4cdfe94788",
+        "html_url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42715874936",
+        "name": "DIC isolated SQL release regression"
+      },
+      {
+        "id": 42715875062,
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "7416c155cac9be2ea84daba23ca6fe4cdfe94788",
+        "html_url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42715875062",
+        "name": "DIC cloud app build and tests"
+      },
+      {
+        "id": 42715874670,
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "7416c155cac9be2ea84daba23ca6fe4cdfe94788",
+        "html_url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42715874670",
+        "name": "DIC cloud UX regression checks"
+      },
+      {
+        "id": 42715874679,
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "7416c155cac9be2ea84daba23ca6fe4cdfe94788",
+        "html_url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42715874679",
+        "name": "DIC approval, implementation and continuity contract"
+      }
+    ]
   },
   "outstanding": [
     "No live GoTrue deletion has been tested or performed",
     "New migration must be part of newly source-isolated candidate, not silently credited to frozen READY3",
     "Potential additional user deletion dependencies and provider Auth behavior remain unverified",
-    "Any further privacy audit of private.dic_coffee_audit actor/evidence must not export user identifiers"
+    "Any further privacy audit of private.dic_coffee_audit actor/evidence must not export user identifiers",
+    "Exact-source CI passed, but prior frozen READY3 candidate remains excluded; require separately authorized release batch with #1676 and new migration."
   ],
   "owner_and_coordination": "GitHub #1676 issue comment 6753621464 records newly discovered release blocker; existing offsite encrypted backup HOLD remains independently binding",
   "no_production_writes": true,

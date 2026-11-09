@@ -10727,22 +10727,25 @@
       "issue": 509,
       "pr": null,
       "title": "Preserve approved coffee provenance and private audit on owner-approved permanent account deletion",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "7416c155cac9be2ea84daba23ca6fe4cdfe94788",
       "scope_paths": [
         "supabase/migrations/20261109231500_dic_account_delete_coffee_provenance_fk.sql"
       ],
       "tests": [
         "2026-11-09 read-only live PostgreSQL FK and aggregate verified 3 nonadmin first-entry and 4 nonadmin audit references can block account deletion; existing #1676 synthetic deletion fixture did not exercise them.",
-        "Development-only new FK migration and exact synthetic approved-submission/first-entry/audit Keep Community deletion fixture staged. Isolated SQL, signed JWT, Node22 and exact-source governance PENDING; do not mark READY or DEPLOYED."
+        "Development-only new FK migration and exact synthetic approved-submission/first-entry/audit Keep Community deletion fixture staged. Isolated SQL, signed JWT, Node22 and exact-source governance PENDING; do not mark READY or DEPLOYED.",
+        "Exact source 7416c155cac9be2ea84daba23ca6fe4cdfe94788 isolated PostgreSQL all migrations and expanded admin_member_deletion synthetic canonical-coffee FK/Keep/Remove fixture, signed JWT ownership and backup: run42715874936 SUCCESS; Node22/lint/build 42715875062 SUCCESS; cloud/mobile 42715874670 SUCCESS; governance/approval 42715874679 SUCCESS. Previously passed #1676 checks cannot substitute a new frozen candidate source run."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact-source isolated PostgreSQL security/integration CI must pass",
-        "New source-isolated corrected release candidate and owner publication gates including independently verified private offsite encrypted recovery remain REQUIRED"
+      "ci_runs": [
+        42715874936,
+        42715875062,
+        42715874670,
+        42715874679
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
-      "notes": "New pre-publish FK blocker coordinated to #1676 in issue comment 6753621464. No production edits, no code source credit to #267. Frozen READY3 candidate does NOT contain this fix; do not publish as corrected. Source-only proposed migration after #1676; further hosted tests UNVERIFIED."
+      "notes": "New pre-publish FK blocker coordinated to #1676 in issue comment 6753621464. No production edits, no code source credit to #267. Frozen READY3 candidate does NOT contain this fix; do not publish as corrected. Source-only proposed migration after #1676; further hosted tests UNVERIFIED.\nSOURCE READY only at exact GitHub source 7416c155; pairing with READY #1676 is a STRICT release dependency. The old frozen READY3 release-candidate SHA 9179d4b24c5002eb4896d383de76fb8a9759155c has neither this migration nor updated acceptance and MUST NOT be published as a safe delete path. Build a new source-isolated candidate including #1676 and this fix, repeat all five exact-candidate CI checks, satisfy fresh exact private offsite ciphertext backup and owner one-use publication authority. No production deployment or hosted GoTrue deletion verified."
     }
   ],
   "history": [
