@@ -42,7 +42,7 @@ export function selectedShopifyCurrentVisibleIdentity(html,{source_url,expected_
  if(parsed!==selected&&!recognizedBrandPrefix)return null;
  // The chosen product is rendered visibly as a paired mobile/desktop hero.
  // Repeated identical producer+country can be one selected product; incompatible panels fail closed.
- const panes=[...html.matchAll(/<div\b[^>]{0,400}\bclass=(['"])([^'"]{1,180})\1[^>]{0,250}>([\s\S]{0,1600}?)<\/div>/gi)]
+ const panes=[...html.matchAll(/<div\b[^>]{0,400}\bclass=(['"])([^'"]{0,100}\bcoffee_title\b[^'"]{0,100})\1[^>]{0,250}>([\s\S]{0,1600}?)<\/div>/gi)]
   .filter(m=>/\bcoffee_title\b/.test(m[2])&&/\bcoffee_title(?:Mobile|Desktop)\b/.test(m[2]));
  if(panes.length!==2)return null;
  const observations=panes.map(m=>{
