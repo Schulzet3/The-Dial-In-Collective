@@ -3199,6 +3199,33 @@
       "receipt_path": "docs/audits/issue509-provider-fk-index-advisor-triage-2026-11-08-run106.json",
       "production_writes": false,
       "baseline_complete": false
+    },
+    {
+      "event": "2026-11-09_run111_statement_numeric_1601_2400",
+      "development_parent_sha": "51e9fb0263fc83438f39bf9ed4a16001c7bd7b40",
+      "reviewed_new": 800,
+      "logical_cumulative": 2400,
+      "starting_anchor": [
+        "-1528305424146920662",
+        "5",
+        "16388",
+        true
+      ],
+      "ending_key": [
+        "2073026618239130057",
+        "5",
+        "16388",
+        true
+      ],
+      "receipt_paths": [
+        "docs/audits/issue509-provider-pg-stat-statements-numeric-1601-2000-2026-11-09-run111.json",
+        "docs/audits/issue509-provider-pg-stat-statements-numeric-2001-2400-2026-11-09-run111.json"
+      ],
+      "slow_numeric_candidates": 2,
+      "temp_io_candidates": 11,
+      "confirmed_new_source_defects": 0,
+      "production_writes": false,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -14677,5 +14704,77 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "1601 after composite anchor and reset check; additionally inspect newly inserted keys below cursor and remaining provider definition families"
+  },
+  "provider_pg_stat_statements_numeric_run111": {
+    "status": "800_DISTINCT_NEW_NUMERIC_KEYSET_RECORDS_1601_TO_2400_NO_QUERY_SQL",
+    "project_ref": "azviqqejypsefzilgonr",
+    "development_parent": "51e9fb0263fc83438f39bf9ed4a16001c7bd7b40",
+    "main_sha": "a4028e42b0d0316fd539c0563fd07832d509aed0",
+    "release_sha": "92829cb6aff82aaec212eabbd921183e7997f1a7",
+    "receipts": [
+      "docs/audits/issue509-provider-pg-stat-statements-numeric-1601-2000-2026-11-09-run111.json",
+      "docs/audits/issue509-provider-pg-stat-statements-numeric-2001-2400-2026-11-09-run111.json"
+    ],
+    "receipt_blobs": [
+      "9b20db481d0e43f20ac6a7191b6ed1977d05eb1e",
+      "1a84db90937b0c038663369b4b31f6383bffcbed"
+    ],
+    "reviewed_this_run": 800,
+    "logical_cumulative": 2400,
+    "original_1600_key": [
+      "-1528305424146920662",
+      "5",
+      "16388",
+      true
+    ],
+    "end_2000_key": [
+      "207097387378852811",
+      "5",
+      "16388",
+      true
+    ],
+    "end_2400_key": [
+      "2073026618239130057",
+      "5",
+      "16388",
+      true
+    ],
+    "stats_reset": "2026-10-09 11:11:31.487298+00",
+    "counts": [
+      3971,
+      3971,
+      3971,
+      3971,
+      3971,
+      3971,
+      3971,
+      3971
+    ],
+    "max_ge_1000ms": 2,
+    "temp_io": 11,
+    "numeric_candidates": [
+      {
+        "ordinal": 2281,
+        "key": "1554751528326282872",
+        "role": "supabase_read_only_user",
+        "calls": 27,
+        "mean_ms": 557.622,
+        "max_ms": 1240.053
+      },
+      {
+        "ordinal": 2325,
+        "key": "1725044562985116050",
+        "role": "authenticated",
+        "calls": 4716,
+        "mean_ms": 14.816,
+        "max_ms": 1566.38
+      }
+    ],
+    "verified_source_defects": 0,
+    "query_text": "NOT_SELECTED",
+    "provider_writes": false,
+    "source_fixes": 0,
+    "baseline_complete": false,
+    "next": "2401 strictly after (2073026618239130057,5,16388,true) if old anchor and stats_reset still valid; separately audit fingerprints inserted below cursor and never claim full SQL review"
   }
 }
