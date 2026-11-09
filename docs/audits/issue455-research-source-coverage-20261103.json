@@ -3849,6 +3849,26 @@
       "result": "CONDITIONAL_CHEMICAL_CLAIM_RECORDED_STRONGER_THAN_ABSTRACT_ONLY_BUT_NOT_PRODUCT_AUTHORITY",
       "owner_approval": false,
       "date": "2026-11-09"
+    },
+    {
+      "id": "R455-EV-APP-146-A",
+      "source": "site/lib/engine.js original Git blob c91656d7cef5fd0621d883d433f0c0b519359dbe; site/lib/model.js blob 5ea712305d9ba0f948ef3aa2d576dd27aa51b31c",
+      "claim": "Original saveShot line 716 validated all newly required taste ratings and currently selectable style before checking an already-persisted same-coffee shot ID. This incorrectly rejected idempotent replay of preserved retired historical Custom shots or partial legacy tastes; no current production member incident demonstrated.",
+      "grade": "DIRECT_SOURCE_REPRODUCIBLE_CONTROL_FLOW_NEGATIVE_CASE_NOT_LIVE_MEMBER_REPLAY",
+      "current_app": "After owner SAFE fix engine Git blob d262f7343ef2556effc7572b86e7ecc026449288, same-coffee ID return happens before new-shot validation; foreign coffee ID remains rejected; genuine new Custom/incomplete ratings remain invalid.",
+      "result": "SAFE_LOCKED_COMPATIBLE_SOURCE_FIX_VALIDATED_BOUNDED_SYNTHETIC_REGRESSIONS",
+      "owner_approval": false,
+      "date": "2026-11-09"
+    },
+    {
+      "id": "R455-EV-APP-146-B",
+      "source": "PR1731 head e4d3c8c6e1d9107a8a6310954a6ec06ea6598c21; merged commit f8d3d2727abe4d6d61d486522f506ef1777c0a7d; engine d262f7343ef2556effc7572b86e7ecc026449288; five-case test blob 65423e8edf87627105e48c298b10ab272ddec819",
+      "claim": "Five synthetic direct-module cases passed on exact PR-head and exact merged-source Node22: historical Custom immutable replay, partial rating immutable replay, foreign-coffee ID denial, fresh Custom/unrated denial, valid new Turbo idempotency. PR head and merged Node22 each 3,275 PASS/0 FAIL/6 intentional SKIP; PR head approval, SQL, security, mobile/browser/cloud SUCCESS; merged approval and mobile/browser/cloud SUCCESS; frozen603 SKIPPED (not PASS). Initial queue-intake governance failure was identified/repaired with exact corrected head and retested.",
+      "grade": "DIRECT_EXACT_GIT_BLOB_HEAD_AND_MERGED_SOURCE_AND_SYNTHETIC_TESTS; NO_REAL_MEMBER_OR_ESPRESSO_OUTCOME",
+      "current_app": "No change to original five recorded tastes, private notes/history, new-shot valid controls, coffee isolation, family selection, Community/RLS or science heuristics.",
+      "result": "VERIFIED_SAFE_DEVELOPMENT_FIX; READY_RECONCILIATION_DOCS_PR_PENDING_AT_AUTHORING_NOT_DEPLOYED",
+      "owner_approval": false,
+      "date": "2026-11-09"
     }
   ],
   "policy_decisions_pending": [],
@@ -3922,34 +3942,34 @@
     "R455-142 @e209891c276d1ace8b9f8206092ac3f00929d343: primary indexed Lomolino et al 2022 Methods 2.1-2.5, Table1, Results and conclusion read, 14 trained descriptive testers, two beans x 3 CONFOUNDED capsule machine/moka methods; avoid translating 19/15-bar machine ratings to controllable espresso puck pressure. Existing 77 curated sources/199 checks/103 proposals; direct HTML 429/full PDF/raw data not verified. Original standalone S019 remains inaccessible. #267 literal-line review credit ZERO.",
     "R455-143 @c0bc748fa811e15b5746fe8611ca7aa91c1146f9: upgraded existing Vaca Guerra et al. 2023 compression/PSD record from abstract to full S. Heinrich author-uploaded original manuscript Methods 2.4-2.7, Results 3.1-3.7 and Conclusions with TUHH first-party publication crosscheck. Single dark-roast Arabica and conditional dry compression/permeability coefficients DO NOT establish universal taste, grinder, tamp or time optima. 77 sources/201 bounded checks/104 proposals; publisher-final binary/figures/raw data unverified; standalone S019 inaccessible, #267 V2 literal credit zero. Docs-only exact PR/CI and nonforce merge pending.",
     "R455-144 @d9ed395a24c70f3ed8b132d2e4be6ee9c631cedc: current basket/feed/calibration all-green veto correction PR1715 exact head/merged CI success after original PR1702 queue intake FAIL corrected; 77 curated sources/203 checks/105 proposals, development READY docs reconciliation pending; original S019 inaccessible; #267 V2 0 semantic lines credited, production untouched.",
-    "R455-145 @ed95dd067bd1d75925dd56e88300297f9f28c033: accepted-manuscript third-party Scribd original text Methods/Results/Conclusion read, TUM author institution publisher identity crosschecked; one 14g Caturra experimental setup, 1 vs 30kg tamp effects not detected on two chemical analytes; no taste optimum. 77 sources/205 checks/106 proposals. Docs-only CI/merge pending; S019 unavailable, #267 0 direct-line credit; no runtime or Locked changes."
+    "R455-145 @ed95dd067bd1d75925dd56e88300297f9f28c033: accepted-manuscript third-party Scribd original text Methods/Results/Conclusion read, TUM author institution publisher identity crosschecked; one 14g Caturra experimental setup, 1 vs 30kg tamp effects not detected on two chemical analytes; no taste optimum. 77 sources/205 checks/106 proposals. Docs-only CI/merge pending; S019 unavailable, #267 0 direct-line credit; no runtime or Locked changes.",
+    "R455-146 @f8d3d2727abe4d6d61d486522f506ef1777c0a7d: source repro historical saved-shot idempotency bug fixed nonforce PR1731, exact engine/test blobs d262f7343ef2556effc7572b86e7ecc026449288/65423e8edf87627105e48c298b10ab272ddec819; head and merged 3275 PASS/0 FAIL/6 SKIP, UX/cloud/SQL/security/approval applicable successes. Initial approval 42705719614 genuine failure repaired; DIC-Q-455-offline-idempotent-existing-shot-replay READY docs reconciliation pending, no deployment. Evidence 77 curated research sources/207 checks/107 proposals, S019 still inaccessible, #267 0 literal line credit. Next distinct owner-Locked-compatible UX/evidence gap."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-145",
-    "base_development_sha": "ed95dd067bd1d75925dd56e88300297f9f28c033",
+    "id": "R455-146",
+    "base_development_sha": "b788a97b45dbc26633f9bc32ef00272e2227d165",
     "source_ids": [
-      "LIT-2017-KUHN-TAMP-ANALYTES",
       "site/lib/engine.js",
       "site/lib/model.js",
-      "site/lib/constants.js"
+      "tests/issue455-offline-legacy-shot-replay.test.mjs"
     ],
     "claim_ids": [
-      "R455-EV-CIT-145-A",
-      "R455-EV-CIT-145-B"
+      "R455-EV-APP-146-A",
+      "R455-EV-APP-146-B"
     ],
     "proposal_ids": [
-      "R455-PROP-145-TAMP-COMPOSITION-NOT-SENSORY"
+      "R455-PROP-146-OFFLINE-SAVED-LEGACY-IDEMPOTENCE"
     ],
     "number_of_curated_sources": 77,
-    "total_evidence_checks": 205,
-    "number_of_proposals": 106,
-    "review_type": "SUBSTANTIVE_ACCEPTED_MANUSCRIPT_TEXT_THIRD_PARTY_PROVENANCE_CROSSCHECK_AND_LIVE_APP_SCOPE",
-    "code_or_policy_changed": false,
+    "total_evidence_checks": 207,
+    "number_of_proposals": 107,
+    "review_type": "SOURCE_REPRODUCED_OFFLINE_IDEMPOTENCE_SAFE_LOCKED_COMPATIBLE_APP_FIX_AND_EXACT_HEAD_MERGE_CI",
+    "code_or_policy_changed": true,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
-    "status": "DOCS_ONLY_PR_CI_AND_MERGE_PENDING_AT_AUTHORING",
-    "next_action": "Nonforce integrate docs and verify exact GitHub CI; retain prior S019 inaccessible; next disjoint live UX and research source claim. No member/production writes."
+    "status": "SAFE_CODE_NONFORCE_MERGED_AND_EXACT_SOURCE_APP_CI_VERIFIED; READY_DOCS_RECONCILIATION_CI_PENDING",
+    "next_action": "Nonforce integrate source-specific docs/queue READY with exact governance checks, then inspect next disjoint source-reproducible UX/research gap; S019 original inaccessible, no provider/member writes."
   },
   "policy_decisions_resolved": [
     {
@@ -6150,6 +6170,27 @@
       "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY",
       "github267_literal_review_credit": 0,
       "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-146-OFFLINE-SAVED-LEGACY-IDEMPOTENCE",
+      "finding": "Source-reproduced saveShot offline retry of an already saved historical Custom or partially rated row failed new-shot validation before existing same-coffee ID readback.",
+      "evidence": [
+        "R455-EV-APP-146-A",
+        "R455-EV-APP-146-B"
+      ],
+      "severity": "P2_OFFLINE_SAVED_SHOT_HISTORY_IDEMPOTENCE",
+      "user_benefit": "Keep already persisted private measured shot/notes and original five tastes stable on retry while rejecting foreign-coffee duplicate IDs and invalid fresh entries.",
+      "current_locked": "Preserve original saved shots and private History; all five required taste ratings for new shots; retired Custom readable but cannot be newly selected; coffee isolation; no more than one recommendation adjustment; no numeric/Locked changes.",
+      "current_app": "Original engine c91656d7cef5fd0621d883d433f0c0b519359dbe validates before duplicate return; corrected engine d262f7343ef2556effc7572b86e7ecc026449288 returns preexisting ID only for same coffee before validating genuinely new shots.",
+      "proposed_change": "SAFE completed: move immutable same-coffee existing-ID check ahead of fresh-input validation; keep coffee/setup existence and foreign coffee denial; five direct synthetic positive/negative tests and existing queue governance.",
+      "evidence_grade": "DIRECT_SOURCE_EXECUTION_REGRESSIONS_EXACT_HEAD_AND_MERGED_NODE22_UX_SQL_SECURITY_APPROVAL; NO_REAL_MEMBER_OR_CUP_EVIDENCE",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "PR1731 head e4d3c8c6e1d9107a8a6310954a6ec06ea6598c21 Node22 3275 PASS/0 FAIL/6 SKIP, PR-head mobile/cloud, SQL, security and approval SUCCESS; nonforce squash f8d3d2727abe4d6d61d486522f506ef1777c0a7d four paths exact source/blob identity preserved.",
+      "test_plan": "Five R146 positive/negative cases, exact-source Node22/lint; PR and merged mobile/browser/offline/cloud, isolated PR-head SQL/security, approval/queue. Frozen603 SKIPPED/N/A, no live member/provider or physical espresso test.",
+      "release_queue_status": "DIC-Q-455-offline-idempotent-existing-shot-replay_READY_DEVELOPMENT_ONLY_PENDING_DOCS_RECONCILIATION_CI_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
     }
   ],
   "changeScope": {
@@ -6157,6 +6198,6 @@
     "tests_executed": true,
     "production_deployed": false,
     "queue_changed": true,
-    "reason": "Issue455 R144 fixed R141 context veto and real original #1702 governance failure with #1715 same-source queue, Node22/UX/SQL/security/approval verified; READY source development not deployed."
+    "reason": "R455-146 PR1731 source f8d3d2727abe4d6d61d486522f506ef1777c0a7d fixes existing legacy Custom/partial shot replay validation order; five direct regressions, PR head and merged 3275 PASS/0 FAIL/6 SKIP with mobile/cloud/governance and PR-head SQL/security; READY docs reconciliation not deployed."
   }
 }
