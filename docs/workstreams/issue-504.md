@@ -1689,3 +1689,16 @@ Exactly three scoped #504 audit documentation paths committed together: receipt,
 **Live source before isolated commit:** development `a7c551d97213d338740710512970890e4ceaf6f1`, main `55c2bebcdcabda40e890ac25dcb9880ec789b5a4`, release/production `2d0bed35e67f6a745a21cbd80616ad4c9a98ed41`. Exactly 3 #504 audit documentation paths changed in one commit. Functional Node22/real SQL/Auth/browser/mobile/offline/original603 **NOT_RUN_DOCS_ONLY**; PR/head and merged-source CI pending, never call SKIPPED PASS. No publication, provider/member, queue/Locked, source/history/backups, force Git or visibility write.
 
 **NEXT:** [PR #653](https://github.com/Schulzet3/The-Dial-In-Collective/pull/653), title word **1**, then body. Newly generated audit comments remain unreviewed drift. OPEN / IN_PROGRESS; all-repo and #267 acceptance incomplete.
+
+
+---
+
+## Issue #504 G1-137 — November 9, 2026 UTC; eight historical original PR metadata objects [skip netlify]
+
+**Direct full-word reading:** PR **#653–#660** title word 1–EOF and description word 1–EOF: **8 newly credited original GitHub objects / 1110 Unicode-whitespace words / 9218 UTF-8 bytes**; all historically merged, none previously credited. Each full original source/word bounds, individual title/body/combined SHA1, GitHub PR head/merge SHA, status and semantic disposition preserved in [immutable G1-137 receipt](../audits/issue504-review-G1-137.json). G1-117 −15/−4012 duplicate correction retained. **Proposed corrected total: 7,919 original file lines / 60,754 file words + 836 GitHub metadata objects / 246,793 words**. No PR patch/review or repeated source-code/queue credit.
+
+**Findings:** #653/#654/#656 #267 source-audit only, #655 original bounded nonfinite JSON bug repair, #657 already-audited G1-019 queue records, #658 #455 undated coffee sorting fix and #659 later READY (not DEPLOYED), #660 #33 selected original603 coffee source probe TESTING in original description. All historical context, no NEW confirmed active #504-owned bug, safe deletion or owner decision. Delegated #267 frozen F473 `src/server/coffee-delimited-specs.mjs:22–24` original blob `923d8a1b2a7e52a046df8cb2b14e308daaebf582` and exact per-line semantic journal blob `542a8b68c3ba41a8869b84e15e84a2df9f906eb2` independently match **3/3, zero #504 code credit**; remainder uncovered.
+
+**Authority snapshot:** development `21c9d14e867fc63e9d2f803a47d37896d53a6a1a`, main `55c2bebcdcabda40e890ac25dcb9880ec789b5a4`, release/production `2d0bed35e67f6a745a21cbd80616ad4c9a98ed41`; #504 comments 242 at intake. Live AGENTS/context/preflight/CURRENT_STATUS/MASTER_SPECIFICATION/DECISION_LEDGER/approval and source register inspected; oversized release queue connector response empty and NOT credited. Repository PUBLIC under explicit owner #630 November4–30 exception; unchanged. Exactly three #504 audit docs intended; application/Node22/SQL/Auth/browser/mobile/offline/603 **NOT_RUN_DOCS_ONLY**; exact PR-head/merged source CI PENDING and not called PASS. No deployment, production/member/provider data, source/oracle/backups/history/Locked/queue status or force Git changes.
+
+**Next:** [PR #661](https://github.com/Schulzet3/The-Dial-In-Collective/pull/661), title word 1 then full body. Issue #504 OPEN / IN_PROGRESS; newly generated issue comments and broader inventory/delegated #267 remain unreviewed.
