@@ -3804,6 +3804,28 @@
       "owner_approval": false,
       "test_source": "https://tore.tuhh.de/entities/publication/b536e437-44bf-4be5-880f-8bf28c44d1f4",
       "date": "2026-11-09"
+    },
+    {
+      "id": "R455-EV-APP-144-A",
+      "source": "site/lib/engine.js original Git blob b84782d216f12d845b768c174e03b9b3ca53da30; PR1715 merged blob c91656d7cef5fd0621d883d433f0c0b519359dbe",
+      "claim": "Before correction, latest eligible measured rating feedback required same coffee/setup/style/basket/feed/calibration but an all-green success veto only matched coffee/setup/style; a valid success in another basket, Slow Feed mode or old grinder calibration suppressed current context feedback. Exact same-context success still overrides feedback; historical successful recipe families and five original taste scores stay intact.",
+      "grade": "DIRECT_LIVE_SOURCE_DETERMINISTIC_BUG; REAL_MEMBER_INCIDENT_UNVERIFIED",
+      "result": "SAFE_CONTEXT_SCOPED_SUCCESS_VETO_IMPLEMENTED_LOCKED_COMPATIBLE",
+      "current_app": "Merged engine d9ed395a24c70f3ed8b132d2e4be6ee9c631cedc adds only basket/feed/calibration equality for existing measuredLocalSuccess. Personal history, one controllable next step, five rated tastes and Community unchanged.",
+      "owner_approval": false,
+      "test_source": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/1715",
+      "date": "2026-11-09"
+    },
+    {
+      "id": "R455-EV-APP-144-B",
+      "source": "tests/issue455-successful-recipe-context-boundary.test.mjs blob ce88688a6b40773932bb3f9d8f8bedfa84f47df7; PR #1715 head/merge Node22/UX/SQL/security/governance",
+      "claim": "3 synthetic direct-module tests positive same-context green success, negative cross-basket/feed/calibration and hidden/incomplete/physically invalid greens. Assert all five tastes and original notes/state unchanged. Previous PR1702 governance run42669095298 FAILED untracked engine.js; repaired successor approval gate and exact merged-source CI passed. Head/merge Node22 both 3250 total/3244 PASS/0 FAIL/6 SKIP.",
+      "grade": "FOCUSED_DETERMINISTIC_SOURCE_AND_EXACT_CI_SUCCESS; NO_PRODUCTION_TASTING_OR_REAL_MEMBER_TEST",
+      "result": "VERIFIED_SYNTHETIC_FIX_AND_REAL_QUEUE_FAILURE_CORRECTION_READY_DEV_NOT_DEPLOYED",
+      "current_app": "All 4 code/queue/journal Git blobs match original reviewed PR1715 head and nonforce squash merged d9ed395a24c70f3ed8b132d2e4be6ee9c631cedc",
+      "owner_approval": false,
+      "test_source": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/1715",
+      "date": "2026-11-09"
     }
   ],
   "policy_decisions_pending": [],
@@ -3875,32 +3897,35 @@
     "R455-138 @8f05ee28893e2dff8ae2c1a8daeb22152d32af93: full original NIH PMC Liang et al. 2024 immersion 2 roast x 3 temp x 5 time methods, 14 trained panelists; original Results vs Methods 28/27 attribute discrepancy unresolved, Dryad raw and supplement not inspected. 77 sources / 193 evidence checks / 100 proposals, research only, no app/Locked/queue change. PR and exact CI pending; S019 still inaccessible; #267 literal-line credit ZERO.",
     "R455-140 @aea5c5fcc79392a1dd8fe2a6634f1bbf8ebb9bf9: Mo et al. 2023 primary indexed main methods/results/limitations microCT+static SPH flow subvolumes and 2 post-extraction capsules; 77 existing sources/197 evidence checks/102 proposals; no app/Locked/queue change, original S019 unavailable, #267 literal credit zero. Docs-only PR source CI and nonforce merge pending.",
     "R455-142 @e209891c276d1ace8b9f8206092ac3f00929d343: primary indexed Lomolino et al 2022 Methods 2.1-2.5, Table1, Results and conclusion read, 14 trained descriptive testers, two beans x 3 CONFOUNDED capsule machine/moka methods; avoid translating 19/15-bar machine ratings to controllable espresso puck pressure. Existing 77 curated sources/199 checks/103 proposals; direct HTML 429/full PDF/raw data not verified. Original standalone S019 remains inaccessible. #267 literal-line review credit ZERO.",
-    "R455-143 @c0bc748fa811e15b5746fe8611ca7aa91c1146f9: upgraded existing Vaca Guerra et al. 2023 compression/PSD record from abstract to full S. Heinrich author-uploaded original manuscript Methods 2.4-2.7, Results 3.1-3.7 and Conclusions with TUHH first-party publication crosscheck. Single dark-roast Arabica and conditional dry compression/permeability coefficients DO NOT establish universal taste, grinder, tamp or time optima. 77 sources/201 bounded checks/104 proposals; publisher-final binary/figures/raw data unverified; standalone S019 inaccessible, #267 V2 literal credit zero. Docs-only exact PR/CI and nonforce merge pending."
+    "R455-143 @c0bc748fa811e15b5746fe8611ca7aa91c1146f9: upgraded existing Vaca Guerra et al. 2023 compression/PSD record from abstract to full S. Heinrich author-uploaded original manuscript Methods 2.4-2.7, Results 3.1-3.7 and Conclusions with TUHH first-party publication crosscheck. Single dark-roast Arabica and conditional dry compression/permeability coefficients DO NOT establish universal taste, grinder, tamp or time optima. 77 sources/201 bounded checks/104 proposals; publisher-final binary/figures/raw data unverified; standalone S019 inaccessible, #267 V2 literal credit zero. Docs-only exact PR/CI and nonforce merge pending.",
+    "R455-144 @d9ed395a24c70f3ed8b132d2e4be6ee9c631cedc: current basket/feed/calibration all-green veto correction PR1715 exact head/merged CI success after original PR1702 queue intake FAIL corrected; 77 curated sources/203 checks/105 proposals, development READY docs reconciliation pending; original S019 inaccessible; #267 V2 0 semantic lines credited, production untouched."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-143",
-    "base_development_sha": "c0bc748fa811e15b5746fe8611ca7aa91c1146f9",
+    "id": "R455-144",
+    "base_development_sha": "d9ed395a24c70f3ed8b132d2e4be6ee9c631cedc",
     "source_ids": [
-      "LIT-2023-ESPRESSO-PSD-COMPRESSION"
+      "site/lib/engine.js",
+      "tests/issue455-successful-recipe-context-boundary.test.mjs",
+      "docs/RELEASE_QUEUE.json"
     ],
     "claim_ids": [
-      "R455-EV-CIT-143-A",
-      "R455-EV-CIT-143-B"
+      "R455-EV-APP-144-A",
+      "R455-EV-APP-144-B"
     ],
     "proposal_ids": [
-      "R455-PROP-143-PSD-PACKING-FLOW-NOT-UNIVERSAL-TASTE"
+      "R455-PROP-144-GREEN-SUCCESS-VETO-CONTEXT"
     ],
     "number_of_curated_sources": 77,
-    "total_evidence_checks": 201,
-    "number_of_proposals": 104,
-    "review_type": "UPGRADE_EXISTING_2023_ESPRESSO_PSD_COMPRESSION_FROM_ABSTRACT_TO_FULL_AUTHOR_MANUSCRIPT_METHODS_RESULTS_LIMITATIONS",
-    "code_or_policy_changed": false,
+    "total_evidence_checks": 203,
+    "number_of_proposals": 105,
+    "review_type": "REPRODUCED_CURRENT_LOG_SHOT_RATE_RECOMMENDATION_CONTEXT_BUG_AND_REAL_QUEUE_CI_FAILURE_CORRECTED",
+    "code_or_policy_changed": true,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
-    "status": "DOCS_ONLY_PR_AND_CI_PENDING",
-    "next_action": "Verify exact PR head docs-governance and merge-source readback then resume next nonoverlapping Log Shot -> Rate -> Recommendations evidence-backed defect. Preserve open #1702 source ownership and standalone inaccessible S019.",
-    "exact_source_ci": "NOT_RUN_AT_AUTHORING"
+    "status": "CODE_EXACT_HEAD_AND_MERGED_SUCCESS; READY_DOCS_ONLY_PR_CI_PENDING",
+    "next_action": "Verify docs-only reconciliation PR and merged governance, readback actual SHAs, checkpoint #455. Resume disjoint research and UX with original S019 still inaccessible.",
+    "exact_source_ci": "Head Node22/UX/mobile/SQL/security/approval success 42686624242 42686624853 42686624314 42686624306 42686623779; merged Node22/UX/mobile/approval success 42687145966 42687146220 42687146321; frozen603 skipped"
   },
   "policy_decisions_resolved": [
     {
@@ -6058,6 +6083,27 @@
       "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY",
       "github267_literal_review_credit": 0,
       "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-144-GREEN-SUCCESS-VETO-CONTEXT",
+      "finding": "All-green success from different basket, Slow Feed or grinder calibration incorrectly prevented recommendations from the latest measured non-green shot in current exact context.",
+      "evidence": [
+        "R455-EV-APP-144-A",
+        "R455-EV-APP-144-B"
+      ],
+      "severity": "P2_RECOMMENDATION_CONTEXT_INTEGRITY",
+      "user_benefit": "Show feedback for actually selected current shot context without discarding independent successful historical recipe families.",
+      "current_locked": "Five explicit taste inputs, true rated all-green versus missing ratings, one adjustable change, preserved measured shot and private notes/History, same-coffee successful families, distinct Turbo/Fast-Flow/Slow Feed, equipment baskets/calibrations and Community/RLS.",
+      "current_app": "Before engine b84782d216f12d845b768c174e03b9b3ca53da30 had broad veto; after source blob c91656d7cef5fd0621d883d433f0c0b519359dbe matches basket/feed/calibration to already scoped latest feedback.",
+      "proposed_change": "SAFE completed: align green success veto with already existing measured recipe context and add direct-module synthetic positive/negative regressions. No Locked numeric taste changes, user capture or data mutation.",
+      "evidence_grade": "DIRECT_CURRENT_SOURCE_PLUS_THREE_SYNTHETIC_REGRESSIONS_WITH_EXACT_HEAD_AND_MERGED_NODE22_MOBILE_BROWSER_SQL_SECURITY_GOVERNANCE; NO_PHYSICAL_ESPRESSO_VALIDATION",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "PR1715 HEAD_a0b15ec637c3f332f2531606153844b4342af12d PASS; NONFORCE_MERGE_d9ed395a24c70f3ed8b132d2e4be6ee9c631cedc_SINGLE_PARENT_4_BLOBS_EQUAL; HEAD_AND_MERGED_3244_PASS_0_FAIL_6_SKIP; head SQL/security approval and merged app/UX/approval success; old PR1702 CLOSED_UNMERGED",
+      "test_plan": "Positive same-basket/feed/calibration green precedent; cross-context green/no-veto negatives, missing/hidden/invalid green; history immutable; exact-source Node22/UX/mobile/offline/SQL/security/queue governance. Original603 SKIPPED, no live member experiment.",
+      "release_queue_status": "DIC-Q-455-success-veto-current-recipe-context_READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
     }
   ],
   "changeScope": {
@@ -6065,6 +6111,6 @@
     "tests_executed": true,
     "production_deployed": false,
     "queue_changed": true,
-    "reason": "R136 deterministic identity fix merged with exact PR-head and merged Node22/UX/approval SUCCESS; new queue READY in development only. No production deployment."
+    "reason": "Issue455 R144 fixed R141 context veto and real original #1702 governance failure with #1715 same-source queue, Node22/UX/SQL/security/approval verified; READY source development not deployed."
   }
 }
