@@ -1,0 +1,50 @@
+name: DIC Issue33 R85 original603 400 VT Artisan selected source
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r85-vtartisan-400.yml
+      - scripts/audit/issue33-r85-vtartisan-400-check.mjs
+      - tests/coffee-issue33-r85-vtartisan-400.test.mjs
+      - docs/workstreams/ops-issue33-r85-vtartisan-20261110.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r85-vtartisan-400.yml
+      - scripts/audit/issue33-r85-vtartisan-400-check.mjs
+      - tests/coffee-issue33-r85-vtartisan-400.test.mjs
+permissions:
+  contents: read
+jobs:
+  selected-vtartisan:
+    name: original603-400-current-official
+    runs-on: ubuntu-24.04
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Focused positive and adversarial source tests
+        run: node --test tests/coffee-issue33-r85-vtartisan-400.test.mjs
+      - name: Exact official guarded HTTPS and actual extractor
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '400'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r85-vtartisan
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict source and parser afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r85-vtartisan
+          DIC_ISSUE33_R85_VERIFY: '1'
+        run: node scripts/audit/issue33-r85-vtartisan-400-check.mjs
+      - name: One-day raw-source and hash artifact
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r85-vtartisan-400
+          path: /tmp/dic33-r85-vtartisan/
+          retention-days: 1
+          if-no-files-found: warn
