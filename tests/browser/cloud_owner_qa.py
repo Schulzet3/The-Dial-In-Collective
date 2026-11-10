@@ -137,6 +137,26 @@ with sync_playwright() as p:
  page.evaluate('window.__admitted=true')
  page.get_by_role('button',name='Check Approval Status').click()
  page.get_by_role('button',name='Settings',exact=True).wait_for()
+ # #1756: compact actionable count is visible before opening the Admin portal.
+ page.evaluate("""async () => {
+  const app=window.__app;app.status.admin=true;
+  window.__client.adminAttentionCounts=async()=>({pending_accounts:12,pending_verified_accounts:2,pending_coffees:1,conflicts:0,unfinished_account_deletions:0});
+  await app.refreshAdminAttention();app.render();
+ }""")
+ page.locator('.settings-attention-trigger .admin-action-badge').wait_for()
+ assert page.locator('.settings-attention-trigger .admin-action-badge').inner_text()=='3'
+ assert '3 administrator items require attention' in page.locator('[data-action="settings"]').get_attribute('aria-label')
+ page.screenshot(path=str(OUT/'issue1756_admin_badge_mobile_light.png'),full_page=True)
+ page.evaluate("document.documentElement.setAttribute('data-theme','dark')")
+ assert page.locator('.settings-attention-trigger .admin-action-badge').is_visible()
+ page.screenshot(path=str(OUT/'issue1756_admin_badge_mobile_dark.png'),full_page=True)
+ page.evaluate("document.documentElement.setAttribute('data-theme','light')")
+ page.locator('[data-action="settings"]').click()
+ assert page.locator('#sheet [data-action="open-admin"] .admin-action-badge').inner_text()=='3'
+ page.get_by_role('button',name='Close',exact=True).click()
+ page.evaluate("window.__app.status.admin=false;window.__app.adminAttentionCount=null;window.__app.render()")
+ assert page.locator('.admin-action-badge').count()==0
+ checks.append('Verified-only Admin Settings badge on 390px light/dark; nonadmin redaction')
  checks.append('Server-admitted account hydrates the unchanged cloud workspace after status refresh')
  assert page.locator('.current-mark').count()==0;checks.append('No pin before first logged shot')
  page.get_by_role('button',name='Settings',exact=True).click()
