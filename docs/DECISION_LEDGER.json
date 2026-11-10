@@ -2368,6 +2368,18 @@
       "scope": "Only no-setup frontend markup and responsive theme CSS plus tests and queue readiness; no new auth gate, member state, forced video viewing, SQL, provider or publication.",
       "supersedes": "Previous no-setup placeholder/links layout of Issue #37 only; the original guide/video delivery remains deployed and unchanged.",
       "delivery": "SOURCE_READY_NOT_DEPLOYED"
+    },
+    {
+      "id": "ACCESS-ADMIN-SIGNUP-APPROVAL-NO-INVITES-20261109",
+      "status": "Locked",
+      "date": "2026-11-09",
+      "issue": 1756,
+      "title": "Replace every invitation code with explicit Admin signup approval and actionable notifications",
+      "approval": "Owner explicitly requested eliminating invitation codes entirely, replacing the code-check screen with Admin approve/reject for new registrations, deleting used/unused old codes, preserving existing accounts, cleaning old code/data, and notifications for any actionable Admin tasks.",
+      "decision": "All future Auth email/password signups enter pending non-admitted state, require email verification and explicit server-authorized admin Approve or Reject. Preserve already admitted users and their Auth/personal/Community data. Entire old invite-code issuance/redemption/UI and used/unused token history must be removed only in future authorized provider migration. Admin has an attention queue/badge and optional permissioned browser notifications while open; off-app delivery requires separate actual verification.",
+      "scope": "Issue #1756 Auth/signup/DB migration, Admin review/notifications, invitation-code cleanup, tests and READY only; no publication or production mutation by this build instruction.",
+      "supersedes": "Invitation-only beta signup/legacy code issuance/redemption/deletion parts of ACCESS-PERMANENT-20261018-01, ACCESS-SINGLE-USE-20261018 and PILOT-INVITE-ONLY-TECHNICAL-20261018; preserves owner/admin account permanence and all other locked features.",
+      "delivery": "IN_PROGRESS_NOT_DEPLOYED"
     }
   ],
   "current_owner_meaningful_yield_20261104": {
@@ -4817,5 +4829,17 @@
       "verified": "Scoped merged-source PR exact checks + unchanged SQL source blob reused; NOT hosted Auth execution",
       "publication": "SEPARATE OWNER COMMAND REQUIRED"
     }
+  },
+  "current_owner_signup_admin_approval_20261109": {
+    "id": "ACCESS-ADMIN-SIGNUP-APPROVAL-NO-INVITES-20261109",
+    "status": "Locked",
+    "date": "2026-11-09",
+    "issue": 1756,
+    "title": "Replace every invitation code with explicit Admin signup approval and actionable notifications",
+    "approval": "Owner explicitly requested eliminating invitation codes entirely, replacing the code-check screen with Admin approve/reject for new registrations, deleting used/unused old codes, preserving existing accounts, cleaning old code/data, and notifications for any actionable Admin tasks.",
+    "decision": "All future Auth email/password signups enter pending non-admitted state, require email verification and explicit server-authorized admin Approve or Reject. Preserve already admitted users and their Auth/personal/Community data. Entire old invite-code issuance/redemption/UI and used/unused token history must be removed only in future authorized provider migration. Admin has an attention queue/badge and optional permissioned browser notifications while open; off-app delivery requires separate actual verification.",
+    "scope": "Issue #1756 Auth/signup/DB migration, Admin review/notifications, invitation-code cleanup, tests and READY only; no publication or production mutation by this build instruction.",
+    "supersedes": "Invitation-only beta signup/legacy code issuance/redemption/deletion parts of ACCESS-PERMANENT-20261018-01, ACCESS-SINGLE-USE-20261018 and PILOT-INVITE-ONLY-TECHNICAL-20261018; preserves owner/admin account permanence and all other locked features.",
+    "delivery": "IN_PROGRESS_NOT_DEPLOYED"
   }
 }
