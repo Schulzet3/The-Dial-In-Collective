@@ -2645,7 +2645,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   }
   if(!conflicts.has('tasting_notes')&&
    !seoFallbackByFields.get(fields)?.has('tasting_notes')&&
-   coffeeTastingNotesSubset(fields.tasting_notes||'',lead.tasting_notes)){
+   coffeeTastingNotesSubset(String(fields.tasting_notes||'').replace(/[.!?]+\s*$/u,'').trim(),lead.tasting_notes)){
    fields.tasting_notes=lead.tasting_notes;
    if(source_facts.length<384)source_facts.push({
     field:'tasting_notes',label:'Full literal selected lead tasting notes',

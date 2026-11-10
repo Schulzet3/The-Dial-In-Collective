@@ -3,6 +3,7 @@
 // a single bounded direct current product block, and compatible existing fields.
 import {productCoffeeProse,NONCURRENT_COFFEE_PROSE} from './coffee-product-prose.mjs';
 import {normalizeExplicitCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
+const safeNotes=x=>String(x??'').replace(/[.!?]+\s*$/u,'').trim();
 const fold=x=>String(x??'').normalize('NFKD').replace(/\p{M}/gu,'')
  .toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim();
 const key=x=>fold(x).replace(/\s+/gu,'');
@@ -64,7 +65,7 @@ export function selectedCurrentLeadRoastNotes(html,{name='',clean,notes=''}={}){
  if(candidates.size!==1)return null;
  const one=[...candidates.values()][0];
  if(typeof notes!=='string'||!notes||
-  !(coffeeTastingNotesSubset(notes,one.tasting_notes)||
+  !(coffeeTastingNotesSubset(safeNotes(notes),one.tasting_notes)||
     key(notes)===key(one.tasting_notes)))return null;
  return one;
 }
