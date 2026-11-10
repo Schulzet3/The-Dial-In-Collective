@@ -44,7 +44,7 @@ window.__sdk={auth:{
 async rpc(name,args){
  window.__calls.push({name,args});
  if(name==='dic_session_status')return {data:{authenticated:true,admitted:true,admin:true}};
- if(name==='dic_admin_dashboard')return {data:{counts:{active_accounts:2,pending_accounts:window.__pending.length,pending_coffees:1,conflicts:1,unfinished_account_deletions:0,verified_coffees:1,shot_records:2},queue:[],queue_total:0}};
+ if(name==='dic_admin_dashboard')return {data:{counts:{active_accounts:2,pending_accounts:window.__pending.length,pending_verified_accounts:window.__pending.filter(x=>x.email_verified).length,pending_coffees:1,conflicts:1,unfinished_account_deletions:0,verified_coffees:1,shot_records:2},queue:[],queue_total:0}};
  if(name==='dic_admin_signup_requests')return {data:{items:structuredClone(window.__pending),total:window.__pending.length,offset:args.p_offset}};
  if(name==='dic_admin_access_overview')return {data:{members:structuredClone(window.__members),members_total:2,pending_deletions:[]}};
  if(name==='dic_admin_records'||name==='dic_admin_search_records'){
@@ -80,7 +80,7 @@ with sync_playwright() as p:
  page.add_script_tag(content=mock+"\n"+client+"\n"+records+"\n"+view+"\n"+main)
  page.get_by_role("heading",name="New Account Requests").wait_for()
  assert page.get_by_role("heading",name="Requires Your Attention").count()==1
- assert page.locator(".admin-attention-count").inner_text()=="4"
+ assert page.locator(".admin-attention-count").inner_text()=="3"
  assert page.get_by_text("new@synthetic.invalid").count()==1
  assert page.get_by_text("unverified@synthetic.invalid").count()==1
  assert page.locator('[data-action="approve-signup"][data-id="30000000-0000-4000-8000-000000000002"]').is_disabled()

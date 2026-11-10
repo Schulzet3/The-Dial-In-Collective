@@ -21,15 +21,15 @@ const signups=[
 ];
 
 test('new-account approval and attention panel expose no invitation-code UI',()=>{
- const html=renderAdminDashboard({counts:{pending_accounts:2,pending_coffees:1,conflicts:2,unfinished_account_deletions:1,active_accounts:2},queue:[]},null,null,{}, {},{signupRequests:{items:signups,total:2,offset:0}});
+ const html=renderAdminDashboard({counts:{pending_accounts:2,pending_verified_accounts:1,pending_coffees:1,conflicts:2,unfinished_account_deletions:1,active_accounts:2},queue:[]},null,null,{}, {},{signupRequests:{items:signups,total:2,offset:0}});
  assert.match(html,/Requires Your Attention/);
  assert.match(html,/New Account Requests/);
- assert.match(html,/pending accounts|New accounts/i);
+ assert.match(html,/Ready account approvals/i);
  assert.match(html,/new@fixture\.invalid/);
  assert.match(html,/Email verified/);
  assert.match(html,/data-action="approve-signup"/);
  assert.match(html,/data-action="reject-signup"/);
- assert.match(html,/admin-attention-count[^>]*>6<\/span>/);
+ assert.match(html,/admin-attention-count[^>]*>5<\/span>/);
  assert.doesNotMatch(html,/Beta Invitations|Generate Code|Existing Codes|Invitation Code|admin-invite-form|Copy Code/);
 });
 test('unverified accounts cannot be approved in UI; hostile emails are escaped',()=>{
@@ -106,7 +106,7 @@ function boot(){
   async rpc(name,args){
    calls.push({name,args});
    if(name==='dic_session_status')return {data:role};
-   if(name==='dic_admin_dashboard')return {data:{counts:{pending_accounts:liveSignups.length,active_accounts:2,pending_coffees:1,conflicts:0,unfinished_account_deletions:0},queue:[],queue_total:0}};
+   if(name==='dic_admin_dashboard')return {data:{counts:{pending_accounts:liveSignups.length,pending_verified_accounts:liveSignups.filter(s=>s.email_verified).length,active_accounts:2,pending_coffees:1,conflicts:0,unfinished_account_deletions:0},queue:[],queue_total:0}};
    if(name==='dic_admin_signup_requests')return {data:{items:structuredClone(liveSignups),total:liveSignups.length,offset:args.p_offset}};
    if(name==='dic_admin_access_overview')return {data:{members,members_total:2,pending_deletions:[]}};
    if(name==='dic_admin_records')return {data:{items:args.p_kind==='accounts'?members:[],total:args.p_kind==='accounts'?2:0,offset:args.p_offset}};

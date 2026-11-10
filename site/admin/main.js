@@ -93,7 +93,7 @@ async function start(){
     access=loadAccess?nextAccess:null;
      signupRequests=nextSignups;
      const stats=dashboard?.counts||{};
-     lastAttentionCount=['pending_accounts','pending_coffees','conflicts','unfinished_account_deletions'].reduce((total,key)=>total+(Number.isSafeInteger(Number(stats[key]))?Number(stats[key]):0),0);
+     lastAttentionCount=['pending_verified_accounts','pending_coffees','conflicts','unfinished_account_deletions'].reduce((total,key)=>total+(Number.isSafeInteger(Number(stats[key]))?Number(stats[key]):0),0);
     // Keep the comparison scoped to a bounded, admin-authorized server search.
     // The first visible pending records are prefetched for the expanded queue;
     // others can request their own comparison without loading the entire catalog.
@@ -143,7 +143,7 @@ async function start(){
     const summary=await adminRpc('dic_admin_dashboard');
     if(invalidated)return;
     const stats=summary?.counts||{};
-     const attention=['pending_accounts','pending_coffees','conflicts','unfinished_account_deletions']
+     const attention=['pending_verified_accounts','pending_coffees','conflicts','unfinished_account_deletions']
       .reduce((total,key)=>total+(Number.isSafeInteger(Number(stats[key]))?Number(stats[key]):0),0);
      for(const node of root.querySelectorAll('.admin-attention-count'))node.textContent=String(attention);
      if(lastAttentionCount!==null&&attention>lastAttentionCount&&globalThis.Notification?.permission==='granted'){
