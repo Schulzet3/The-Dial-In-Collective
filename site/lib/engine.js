@@ -298,7 +298,14 @@ export function personalSimilarCoffeeReference(s,coffee,version,style,feed,baske
      sh.setupVersionId!==version.id||sh.style!==style||sh.feedMode!==feed||
      // Reuse current Log Shot physical bounds for historical *evidence* only.
      // Imported originals remain untouched in private shot History.
-     !measuredRecipeShots([sh]).length)continue;
+     !measuredRecipeShots([sh]).length||
+     // Historical optional controls may be absent, but explicitly impossible
+     // values cannot certify a comparable five-green other-coffee donor.
+     (sh.grindSetting!=null&&(
+      !finite(sh.grindSetting)||sh.grindSetting<0||
+      (finite(version.grinderMin)&&sh.grindSetting<version.grinderMin)||
+      (finite(version.grinderMax)&&sh.grindSetting>version.grinderMax)))||
+     (sh.tempC!=null&&!validRecordedTemperature(sh.tempC)))continue;
   const other=byId.get(sh.coffeeId);
   const rank=roastIndex(other?.roastLevel);
   if(rank<0)continue;
