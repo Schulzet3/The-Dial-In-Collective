@@ -1,0 +1,19 @@
+# Issue #33 — R95 selected current Black Hills #436/#438 verified (2026-11-10 UTC)
+
+Status: **NARROW CURRENT SOURCE VERIFIED / DEVELOPMENT ONLY**. Parent #33 OPEN; all603 manual semantic certification incomplete.
+
+## Source and authority
+- Original frozen603 selected rows #436 House Blend and #438 Washington's Breakfast Blend (`QUALIFIED_CONTEXT_OR_SEMANTIC_REVIEW_REQUIRED`), original CSV Git blob `3e0d3036ea727de091f304f538c6de2dfcaa10d6`, SHA256 `2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353`; original 603/201/1197, oracle and scorer unchanged.
+- Direct current official #436: https://www.blackhillscoffee.com/products/house-blend — H1 House Blend, Central & South American coffees, two differently roasted **blend components** City and Full City; no explicit one-tier whole-blend roast, no specific country/producer/variety/process/elevation/decaf. Medium grind choice and Medium body are not roast grades.
+- Direct current official #438: https://www.blackhillscoffee.com/products/washingtons-breakfast-blend — H1 Washington's Breakfast Blend, South/Central American beans and explicit roast **Light (city roast)**; Medium is grind, not grade; other absent facts blank.
+- Original #437 Jefferson's Blend reviewed independently in prior #946; not duplicated.
+
+## Failure diagnosis and verified correction
+- Initial PR-head [42865842068](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42865842068) FAIL: unescaped apostrophe in newly added test name, public HTTPS SKIPPED and strict afterproof fail-closed; not a parser failure. Corrected test and same-commit journal in PR-head `546bf0194027d2b830dd6dcdbe028b677b62e565`, no runtime change.
+- Reviewed PR [#1874](https://github.com/Schulzet3/The-Dial-In-Collective/pull/1874) nonforce squash merged source **`f39a4789abd67fd00eb56e1cbdd66b1dbee2722e`**; all 4/4 final reviewed/merged Git blobs identical.
+- Exact merged guarded source workflow [42866776019](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42866776019) SUCCESS, 7/7 focused positive/adversarial tests, actual parser + Add Coffee + Source Review, exact source SHA, unique current H1, direct own description, no conflicts or unsupported facts. Afterproof `passed:true;failures:[];manual_certified:0;production_operations:0`.
+- Independently downloaded merged GitHub [artifact #13787986543](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42866776019/artifacts/13787986543), ZIP **93043 B**, SHA256 `16dce3fd5fd637718cd3c63c5e26589e7644f707af162e81cf9c72b1316c2556`; GitHub digest matches. Source JSON SHA256 `d454a74bdb39828cb4ea2f2317a68a5f1fdd36e8f3fb2b0a6de69a876c9d5e06` matches recomputed afterproof. Current raw official #436 200592 B SHA256 `2deba83714aba5a158e5f639c83c133d2f164fa5a5a3f3e8376627e4dfd62328`; #438 200232 B SHA256 `4c1885cf343bfbf2c56eba05553889330e99894f1134016bf2aefa426444be58`; independent SHA256 exact raw bytes agree both record and afterproof.
+- Exact merged [Node/lint/build42866775833](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42866775833) SUCCESS **3565 PASS, 0 FAIL, 6 intentional SKIP**; cloud/mobile42866775850, Python42866775707, approval42866775798 SUCCESS. PR-head SQL42866209303 SUCCESS. Original frozen603 PR-head SKIPPED; broad merged probe42866775834 SKIPPED, not PASS.
+
+## Disposition and next step
+No current parser defect found, no app/runtime code modified; no new scoped READY queue item. R95 narrowly verified source/test guard merged, Issue #33 remains OPEN until every original603 selected case and inaccessible/changed exceptions independently adjudicated. Preserve #267 V2, #96 security scope, original oracle, member/history/offline/Community and other READY/DEPLOYED queue states. No Netlify/production/SQL/Auth/Edge/provider/member writes, secrets, costs, account setup or force history. Continue another distinct original603 source candidate after recovering latest live head.
