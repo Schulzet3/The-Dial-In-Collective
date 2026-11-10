@@ -1,0 +1,11 @@
+# Issue #267 — A23 strict semantic-source receipt (November 10, 2026)
+
+**Input:** development `be1453e40d53878bb0233ed43ded5fcd5b08e3f6`; frozen `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9` tree `c54ade64eca30946df8858297578a172f5cf6fa8`; pinned executable `9707553a64f88127826e8f5b2b36cd0651296e83` tree `626d241ef5888bddee71b6e94ee30ea0cb8bee1e`.
+
+**Direct AI semantic inspection** of all original physical positions frozen F154 `docs/archive/2026-10-23-reconciliation/ACTIVE_WORK.previous.md:1251–1274` (0583d24466c1fca349e0d9caab7ce3d57a0d908b, 24 lines) and pinned executable P432 `tests/universal-coffee-preview.test.mjs:561–608` (838f683080912445240f3f321a8473fb236372de, 48 lines), 72 total, with per-line behavior, quality, risks, obsolescence, duplication, present literal counterpart, testability, safe opportunity, Locked fit, and dispositions in [immutable receipt](../audits/issue267-v2-strict-batches/S2-DISJOINT-F154-1251-1274-P432-561-608-20261110-A23.json). Both exact original blobs match current development and each source literal was read. 0 live-only credit. A22C predecessor ends F154:1250/P432:560 with 120 prior positions; first frozen F001:1–41 revalidated separately at zero duplicate credit.
+
+Archived October 21 release and member-backup reports are historical, never a present release grant or live provider assertion. The Shopify/Woo tests check strict URLs, source fields, credential-free requests and script-rejection via mocks; a mock servername assertion is not real TLS verification. Low test-evidence limitation only, **no reproduced active bug**, and #33 owns any source-specific change. No deletion/fix warranted from this bounded range. Never certify grouped old V2/V1 from inventory.
+
+**Tests:** exact PR-head and merged governance CI pending. Node22/lint/build, actual browser/mobile/offline, live Auth/SQL, seller, Netlify/provider checks NOT RUN for docs-only work; cannot imply PASS. All user/member/offline/Community/corpus/backup/SQL/Edge/Auth data remain unmodified. No deploy, READY queue or publication.
+
+**Next:** F154 line 1275, P432 line 609, independent post-pin current drift; check active branches/receipts first. Audit remains OPEN; direct AI audit not independent-human-certified.
