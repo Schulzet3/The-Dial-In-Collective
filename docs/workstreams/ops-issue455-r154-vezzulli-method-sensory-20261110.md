@@ -1,0 +1,21 @@
+# Issue #455 — R455-154 primary sensory/metabolomics study, research-only [skip netlify]
+
+**2026-11-10 UTC; owner Option B, development only; source parent `5c6b71a6eb01d433aa9ec04024fccdf26ae8643c`.** Distinct bounded original-paper review; no app code, taste/Locked rule, provider, SQL/Auth/Edge/member or release queue modification. This does not count any #267 literal code review lines.
+
+## Provenance and substantive source examination
+
+Publisher primary full HTML: [Vezzulli et al., *Foods* 2022, 11(6), 807](https://www.mdpi.com/2304-8158/11/6/807), DOI [10.3390/foods11060807](https://doi.org/10.3390/foods11060807), PMID 35327231. Original publisher sections directly read: abstract lines 145–179; Methods §§2.1–2.6 lines 195–227; Results/Discussion §§3.1–3.3 lines 228–301; conclusion lines 303–306; disclosure lines 313–334. No PDF binary or supplementary file downloaded/hashed; figure images/panel raw responses and independent replication not certified.
+
+Two commercial roasted blends, Brazil 100% Arabica and India 100% Robusta, one per species, were compared using espresso, Moka, Neapolitan, and filter. The **tested** espresso procedure was Cimbali M100, 92°C, 6 s preinfusion, ~16 g double basket, beverage ratio 1:2. Six trained sensory panelists rated 0–9 attributes, one duplicated sample per session for repeatability (±1 criterion). Chemical analysis comprised 44 beverage samples (20 espresso, eight from each other method); 228 putatively annotated metabolites, 94 with extra QC identity support. Espresso was chemically distinct among these methods, but the experiment changed both brewing method and its recipe and cannot separate personal recipe control effects. Crucially **Filter had more detected caffeine signal while Espresso had higher perceived bitterness**, so a chemical marker is not a deterministic taste-rating scale.
+
+Paper declares no external funding, no conflict; acknowledges support for metabolomics facility and doctoral work. Six expert assessments of these fixed preparations do not establish user-specific sweetness, extraction, body, clarity, astringency thresholds, universal 16 g/1:2/92°C/6 s espresso prescriptions, or efficacy of DIC recommendations. Chemical annotation is not a measurement of each home member's cup preference. [Original methods/results](https://www.mdpi.com/2304-8158/11/6/807) retain full research provenance.
+
+## Source-exact app/UX crosswalk and authority
+
+Read current development `5c6b71a6eb01d433aa9ec04024fccdf26ae8643c`: `site/lib/engine.js` blob `74ef8567741c0c2ebaa08ea60c274af4e1810665` (measured success, all-green, nextAdvice, save/edit shot), `site/lib/model.js` `5ea712305d9ba0f948ef3aa2d576dd27aa51b31c` (all five taste field validation), `site/lib/constants.js` `72221331ce4dffabe416eebec1ae2fceced3a095`, `site/cloud/main.js` `cef43de79da7920097915cd050534cd1d6d0fbb4` (Log Shot→Rate→save). Locked current five ratings, alternative successes, notes, style/basket/feed/calibration and privacy unaffected; no reproducible independent new SAFE behavior defect identified. **Proposal is documentation-only; owner decision required if behavioral targets or capture are proposed.**
+
+## Receipt and verification limits
+
+Same revision records one new source `LIT-2022-VEZZULLI-ESPRESSO-SENSORY-METABOLOMICS`, two checks `R455-EV-CIT-154-A`, `R455-EV-CIT-154-B`, one research-only proposal `R455-PROP-154-EXTRACTION-METHOD-NOT-PERSONAL-OPTIMUM`; ledger **83 curated sources / 224 bounded evidence checks / 115 proposals**, all unique JSON IDs. Explicit connected Google Drive search for S019/espresso found no original S019; only Roast Color spreadsheet in espresso search. Space page search found no relevant project page. Separate standalone S019 remains INACCESSIBLE/UNREVIEWED; slow-feed material is not a substitute. #33/#335/#267/#96 source/ownership is separate.
+
+At initial authoring: no CI/build/browser/Node22/SQL/Auth or real-cup tests executed for these docs-only changes. No new READY queue entry or deployment. **Next:** exact PR-head governance, nonforce merge preserving concurrent work, readback merged Git blobs and applicable merged-source checks, durable Issue #455 receipt; continue next disjoint source-backed UX/physics gap. Keep issue open.

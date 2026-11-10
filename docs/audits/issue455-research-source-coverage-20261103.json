@@ -1340,6 +1340,27 @@
       "current_app_crosswalk": "Development 3f35ab598c89602cf29ada531bfbfaf1f5ffa1f5; site/lib/engine.js Git blob d262f7343ef2556effc7572b86e7ecc026449288, model.js 5ea712305d9ba0f948ef3aa2d576dd27aa51b31c, constants.js 72221331ce4dffabe416eebec1ae2fceced3a095, cloud/main.js 1852c188e59ea9452ce1749e1b8252d80b2d3ee7. Independently inspected recommendation, prefill, nextAdviceRaw, measured RecipeShots, five-ratings validation, offline save and application UI. Current code preserves actual measured dose/yield/time, calibrated grinder/basket/feed/style, private history and one user-controllable next change. No shower-disc-height variable, biochemical measurement, automatic dose economy rule or derived 5-taste validation. No new safe runtime defect reproduced from the bounded research.",
       "reviewed_date_utc": "2026-11-10",
       "implementation_status": "RESEARCH_ONLY_NO_APPLICATION_OR_POLICY_CHANGE"
+    },
+    {
+      "id": "LIT-2022-VEZZULLI-ESPRESSO-SENSORY-METABOLOMICS",
+      "type": "peer_reviewed_original_article_full_publisher_html_bounded_primary_methods_results_review",
+      "title": "Metabolomics Combined with Sensory Analysis Reveals the Impact of Different Extraction Methods on Coffee Beverages from Coffea arabica and Coffea canephora var. Robusta",
+      "authors": "Fosca Vezzulli; Gabriele Rocchetti; Milena Lambri; Luigi Lucini",
+      "published": "2022-03-11",
+      "journal": "Foods 11(6):807",
+      "doi": "10.3390/foods11060807",
+      "url": "https://www.mdpi.com/2304-8158/11/6/807",
+      "original_source_url": "https://www.mdpi.com/2304-8158/11/6/807",
+      "access": "PUBLISHER_ORIGINAL_FULL_HTML_DIRECT_READ_METHODS_RESULTS_DISCUSSION_CONCLUSIONS_FUNDING; PDF_BINARY_FIGURES_SUPPLEMENT_UNDOWNLOADED",
+      "review_status": "DIRECT_SUBSTANTIVE_PRIMARY_HTML_REVIEW_2026-11-10; original PDF binary/hash, supplementary file/figures, independent replication and raw member-level panel data UNVERIFIED",
+      "direct_review_provenance": "Publisher's article original HTML source lines 145-179 (identity/abstract), 195-227 (full methods: 2 commercial roasted blends, four brewing methods, panel, replicates, analysis), 228-270 (metabolomics), 277-305 (panel and results), 313-334 (funding/conflicts). Independent first-party indexed paper metadata PubMed PMID 35327231 and DOI 10.3390/foods11060807. Original publisher HTML text not byte-downloaded; source bytes SHA-256 unavailable.",
+      "evidence_grade": "DIRECT_PEER_REVIEWED_PRIMARY_HTML_METHODS_RESULTS_CONDITIONAL_OBSERVATIONAL_CROSS_METHOD; SMALL_TRAINED_SIX_PANEL_WITH_SINGLE_ARABICA_AND_ROBUSTA_BLEND_EACH; NO_PERSONAL_DIAL_IN_EXPERIMENT",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Primary publisher full article HTML read through web extraction, not locally byte-hashed/version-frozen. Exact original 17-page PDF, figure pixels and supplementary analyte dataset unreviewed. Do not claim article yields causal home espresso recipe optimization.",
+      "claims_verified_externally": "Two commercial natural-process blends (Brazil 100% Arabica, India 100% Robusta), fixed machine/roast preparation; espresso Cimbali M100 at 92°C, six-second pre-infusion, ~16g double basket and 1:2 coffee:beverage ratio. Six trained panelists in two sessions rated 0-9 sensory intensities, duplicated one sample per session with ±1 criterion; metabolomics 44 beverage samples (20 espresso, eight each of three other methods), with 228 putative compounds/94 strengthened by QC. Paper reports extraction method stronger than species grouping in this limited design, and Filter higher caffeine feature despite Espresso stronger perceived bitterness. Authors declare no external funding and no conflicts, acknowledge facility support. This neither validates DIC's five individual preference ratings nor optimizes ratio/time/grind.",
+      "current_app_crosswalk": "Development 5c6b71a6eb01d433aa9ec04024fccdf26ae8643c; engine.js blob 74ef8567741c0c2ebaa08ea60c274af4e1810665; model.js 5ea712305d9ba0f948ef3aa2d576dd27aa51b31c; constants.js 72221331ce4dffabe416eebec1ae2fceced3a095; cloud/main.js cef43de79da7920097915cd050534cd1d6d0fbb4. Direct read recommendation, nextAdvice, saveShot/editShot, validateShot, Log Shot five sliders/Save cloud and offline surface. Nothing in the article establishes a new SAFE correctness bug or approved new target; existing five-taste rating, independent styles, equipment, privacy/notes, own measured recipe remain unchanged.",
+      "reviewed_date_utc": "2026-11-10",
+      "implementation_status": "RESEARCH_ONLY_NO_APPLICATION_OR_POLICY_CHANGE"
     }
   ],
   "evidence_checks": [
@@ -4123,6 +4144,26 @@
       "result": "SAFE_FIX_MERGED_AND_SOURCE_READY_NOT_DEPLOYED; CANCELLED_MERGED_JOBS_NOT_PASS",
       "owner_approval": false,
       "date": "2026-11-10"
+    },
+    {
+      "id": "R455-EV-CIT-154-A",
+      "source": "LIT-2022-VEZZULLI-ESPRESSO-SENSORY-METABOLOMICS original publisher DOI 10.3390/foods11060807; publisher HTML §2.1-2.6 lines 195-227 and §3.1-3.3 lines 228-301",
+      "claim": "Fixed methods and two blends, six trained panelists with duplicate-sample repeatability, separate 44 biochemical aliquot samples; 1:2/92°C espresso is one tested method rather than proven personal sensory optimum. Higher filter caffeine marker and higher perceived espresso bitterness caution against mapping one molecule to a preference scale.",
+      "grade": "DIRECT_ORIGINAL_PUBLISHER_FULL_HTML_METHODS_RESULTS_AND_PANEL; NOT_REPLICATION_OR_MEMBER_EXPRESSO_QUALITY",
+      "current_app": "DIC five original member taste ratings/immutable measurements, no chemical sensing or cross-method preference equation; paper not same-coffee controlled personalized intervention.",
+      "result": "VERIFY_BOUNDED_PUBLISHED_DESIGN_AND_CONDITIONAL_FINDINGS; NO_UNIVERSAL_SENSORY_OPTIMUM",
+      "owner_approval": false,
+      "date": "2026-11-10"
+    },
+    {
+      "id": "R455-EV-CIT-154-B",
+      "source": "LIT-2022-VEZZULLI-ESPRESSO-SENSORY-METABOLOMICS publisher HTML funding/conflicts lines 313-334; current development source 5c6b71a6eb01d433aa9ec04024fccdf26ae8643c",
+      "claim": "Paper declares no external funding/no conflicts while acknowledging lab/facility support; figures/supplement/full PDF bytes not independently obtained. Existing app save/rate/nextAdvice and cloud Log Shot code inspected without identifying a reproducible safe defect from this study.",
+      "grade": "PRIMARY_ARTICLE_DISCLOSURE_WITH_DIRECT_RELEVANT_APP_MODULE_REVIEW; FIGURE_SUPPLEMENT_BINARY_UNVERIFIED",
+      "current_app": "Engine 74ef8567, model 5ea71230, cloud cef43de7; five taste ratings, history, style and user notes preserved.",
+      "result": "NO_VERIFIED_RUNTIME_FIX_OR_LOCKED_POLICY_CHANGE; BOUNDED_SOURCE_CLAIMS_ONLY",
+      "owner_approval": false,
+      "date": "2026-11-10"
     }
   ],
   "policy_decisions_pending": [],
@@ -4207,32 +4248,37 @@
       "action": "Reproduce next disjoint Log Shot to Rate to Recommendation real UX/correctness issue before changing application source; keep five tastes and all historical records; continue independent primary sources, avoid #267 #33 #335 #96 overlap.",
       "status": "PENDING"
     },
-    "R455-152 @3f35ab598c89602cf29ada531bfbfaf1f5ffa1f5: original University Camerino 2020 thesis Ch3 §3.6-3.7/Table3.6 and Ch8 §8.1, independent author 2020 Food Chemistry abstract identity, distinct 2022 Springer paper. Two source identities, two bounded evidence checks and one research-only proposal; 82/219/113. No new verified runtime bug; original PDF visual/byte hash blocked HTTP403, no S019 original, no #267 line credit, no deployment. Verify exact source CI and nonforce merge."
+    "R455-152 @3f35ab598c89602cf29ada531bfbfaf1f5ffa1f5: original University Camerino 2020 thesis Ch3 §3.6-3.7/Table3.6 and Ch8 §8.1, independent author 2020 Food Chemistry abstract identity, distinct 2022 Springer paper. Two source identities, two bounded evidence checks and one research-only proposal; 82/219/113. No new verified runtime bug; original PDF visual/byte hash blocked HTTP403, no S019 original, no #267 line credit, no deployment. Verify exact source CI and nonforce merge.",
+    {
+      "id": "R455-154-NEXT",
+      "source_sha": "5c6b71a6eb01d433aa9ec04024fccdf26ae8643c",
+      "action": "Verify intended documentation PR-head governance and exact merged blobs; do not claim any skipped app suite. Then continue distinct high-confidence Log Shot/Rate UX bugs and substantive original source review. Standalone S019 PDF not available.",
+      "status": "PENDING"
+    }
   ],
   "latest_review_checkpoint": {
-    "id": "R455-153",
-    "base_development_sha": "bb219a3f2b8e4f1580e48f6420f60334349c1ba5",
-    "source_ids": [],
+    "id": "R455-154",
+    "base_development_sha": "5c6b71a6eb01d433aa9ec04024fccdf26ae8643c",
+    "source_ids": [
+      "LIT-2022-VEZZULLI-ESPRESSO-SENSORY-METABOLOMICS"
+    ],
     "claim_ids": [
-      "R455-EV-APP-153-A",
-      "R455-EV-APP-153-B"
+      "R455-EV-CIT-154-A",
+      "R455-EV-CIT-154-B"
     ],
     "proposal_ids": [
-      "R455-PROP-153-NEW-SHOT-TIMESTAMP-VALIDATION"
+      "R455-PROP-154-EXTRACTION-METHOD-NOT-PERSONAL-OPTIMUM"
     ],
-    "number_of_curated_sources": 82,
-    "total_evidence_checks": 222,
-    "number_of_proposals": 114,
-    "review_type": "DIRECT_LIVE_LOG_SHOT_LOCAL_OFFLINE_TIMESTAMP_RECENCY_BUG_REPRODUCER_WITH_FOCUSED_TESTS",
-    "code_or_policy_changed": true,
+    "number_of_curated_sources": 83,
+    "total_evidence_checks": 224,
+    "number_of_proposals": 115,
+    "review_type": "ORIGINAL_PEER_REVIEWED_PUBLISHER_HTML_METHODS_AND_CHEMICAL_VS_SENSORY_CROSSWALK",
+    "code_or_policy_changed": false,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
-    "status": "SOURCE_READY_IN_DEVELOPMENT_NONFORCE_MERGED_NOT_DEPLOYED; MERGED_NODE_BROWSER_CANCELLED_AND_NOT_PASS",
-    "next_action": "Continue ordered new research and source-bound UX review in #455; first available S019 original still inaccessible; maintain #335/#33/#267/#96 separation; production release requires separate explicit owner Publish READY.",
-    "merged_source_sha": "774402b32e4a5909a4aba95d398fd930b24a42fa",
-    "pr_number": 1775,
-    "tested_head_sha": "cc82dcaea6893e3d4ff0047543775c762cfeaa7b"
+    "status": "RESEARCH_DOCUMENTATION_PR_CI_PENDING",
+    "next_action": "Exact docs-only PR checks, nonforce merge and readback; next distinct reproducible mobile/UX gap and primary source review; S019 original missing."
   },
   "policy_decisions_resolved": [
     {
@@ -6608,6 +6654,28 @@
       "implementation": "MERGED_NONFORCE_PR1775_SOURCE_774402b32e4a5909a4aba95d398fd930b24a42fa_ENGINE_TEST_BLOB_IDENTICAL_TO_CI_PASSED_HEAD_cc82dcaea6893e3d4ff0047543775c762cfeaa7b",
       "test_plan": "Four new focused Node22 regressions; applicable exact PR-head validate/cloud/mobile/offline, SQL route and approval; require exact merged-source checks and correct queue/approval reconciliation before READY.",
       "release_queue_status": "READY_IN_DEVELOPMENT_NOT_DEPLOYED_REUSE_EXACT_TESTED_APP_SOURCE",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-154-EXTRACTION-METHOD-NOT-PERSONAL-OPTIMUM",
+      "finding": "A fixed-method six-expert panel and biochemical comparisons can distinguish these prepared beverages; measured caffeine accumulation is not synonymous with perceived bitterness and no fixed dose/yield/temperature/pressure from the experiment is a proven user taste target.",
+      "evidence": [
+        "LIT-2022-VEZZULLI-ESPRESSO-SENSORY-METABOLOMICS",
+        "R455-EV-CIT-154-A",
+        "R455-EV-CIT-154-B"
+      ],
+      "severity": "P3_EVIDENCE_RESEARCH_TO_UX_TRANSFER_BOUNDARY_NOT_RUNTIME_FAILURE",
+      "user_benefit": "Prevent unsupported science-confidence language, confusing single chemical markers with five subjective personal scales, and additional unapproved Log Shot inputs.",
+      "current_locked": "All five sensory inputs, all-green vs unrated, one controllable adjustment, preserved measured shot/notes/history, style/basket/feed/grinder calibration, optional equipment temperature and private data.",
+      "current_app": "At 5c6b71a6... engine 74ef8567, model 5ea71230, constants 72221331, cloud/main cef43de7: source-dependent conservative recommendations and explicit ratings; no metabolomics or chemical markers.",
+      "proposed_change": "DOCUMENT AND CROSSWALK ONLY. Do not hardcode 16g, 1:2, 92°C or six-second preinfusion as universal targets. Preserve member's current choices. Any new sensory descriptor capture, chemical-to-rating mapping or science-confidence scoring requires separate owner Locked supersession and real independent same-coffee espresso evaluation.",
+      "evidence_grade": "PRIMARY_PEER_REVIEWED_FULL_HTML_SMALL_FIXED_DESIGN_PANEL; FIGURES_SUPPLEMENT_NOT_VERIFIED",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "DOCS_LEDGER_SCOPED_JOURNAL_ONLY; PR_HEAD_AND_MERGED_GOVERNANCE_NOT_YET_EXECUTED_AT_AUTHORING",
+      "test_plan": "Parse and uniqueness of ledger; identical intended docs-only blob readback; applicable PR governance; no unrelated app/browser/SQL/frozen603 tests or measured espresso outcomes certified.",
+      "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY",
       "github267_literal_review_credit": 0,
       "production_deployed": false
     }
