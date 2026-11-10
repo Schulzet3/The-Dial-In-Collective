@@ -95,7 +95,7 @@ test('R102 DEBUG isolate direct helper, scoped product twice, and parser field p
  const {productCoffeeProse}=await import('../src/server/coffee-product-prose.mjs');
  const blocks=productCoffeeProse(html,clean).filter(x=>x.tag==='h1'||x.tag==='p');
  console.log('R102_BLOCK_DIAGNOSTIC '+JSON.stringify(blocks.map(x=>({tag:x.tag,text:x.text,section:x.section,educational:x.educational}))));
- console.log('R102_SOURCE_DIAGNOSTIC +JSON.stringify({
+ console.log('R102_SOURCE_DIAGNOSTIC '+JSON.stringify({
   first:a,second:b,seo_fallback_fields:p.seo_fallback_fields,
   conflicts:p.conflicts,actual:p.fields.tasting_notes,
   factnotes:(p.source_facts||[]).filter(x=>x.field==='tasting_notes').map(x=>({label:x.label,source_type:x.source_type,value:x.value})).slice(0,10)
