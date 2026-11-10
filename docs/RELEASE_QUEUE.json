@@ -10780,10 +10780,10 @@
     {
       "id": "DIC-Q-1756-admin-signup-approval-retire-invites",
       "issue": 1756,
-      "pr": 1757,
+      "pr": 1776,
       "title": "Remove beta invitation codes and require verified administrator approval for new accounts with attention notifications",
-      "state": "TESTING",
-      "merged_source_sha": "e6d5daca85617903cef93c67628c19e3de049bb2",
+      "state": "READY",
+      "merged_source_sha": "1fa8ddc9d886025e404f936b75a106864916793b",
       "scope_paths": [
         "site/cloud/client.js",
         "site/cloud/main.js",
@@ -10799,7 +10799,10 @@
         "PR1757 first CI failed because old invitation-era SQL/Node/browser fixtures and coverage inventory; source-only migration applied in isolated dic_ci but auth.session_status() authenticated permission was missing. Repairs, full exact CI and user acceptance pending.",
         "Current live in-app guide onboarding retires invitation instruction; Node regression asserts verified Admin pending, code-free UX. Exact CI pending.",
         "Owner-Locked #1756 exact PR head fccb68149921a3f26254588e0749f9b456117c8c all five independently verified SUCCESS: source security 42743938846, approval/coverage 42743938892, isolated PostgreSQL+signed JWT/RLS/Auth 42743938579, browser/mobile/offline/UX 42743938970, 3,000+ Node/lint/build 42743938607. Frozen603 irrelevant and SKIPPED, not PASS.",
-        "Nonforce merged e6d5daca85617903cef93c67628c19e3de049bb2 with 15 relevant source/test/Locked/queue blobs byte-for-byte identical to reviewed PR head; exact merged approval/security inventory 42744216234, isolated SQL/JWT 42744216192, browser/mobile/offline 42744216264 and Node/lint/build 42744216155 SUCCESS. Separate merged security workflow was not triggered: retain successful PR-head security check, no fabricated merged PASS."
+        "Nonforce merged e6d5daca85617903cef93c67628c19e3de049bb2 with 15 relevant source/test/Locked/queue blobs byte-for-byte identical to reviewed PR head; exact merged approval/security inventory 42744216234, isolated SQL/JWT 42744216192, browser/mobile/offline 42744216264 and Node/lint/build 42744216155 SUCCESS. Separate merged security workflow was not triggered: retain successful PR-head security check, no fabricated merged PASS.",
+        "PR1776 final HEAD 5692ed2def92c097b5b07ace25d6673c3d7d3ee9 exact six applicable CI checks SUCCESS: approval 42758411632, security 42758411688, isolated SQL/Auth 42758411873, Node/lint/build 42758411831, cloud/mobile 42758411542. Frozen603 SKIPPED/N/A, not PASS.",
+        "Nonforce merged 1fa8ddc9d886025e404f936b75a106864916793b; nine runtime/test blobs equal tested head. Exact merged approval 42758790255 SUCCESS, cloud-tests 42758789992 SUCCESS. First merged validate/mobile jobs CANCELLED (not PASS). Targeted selective reruns on identical SHA returned attempt2 SUCCESS: validate 42758790069 and mobile browser 42758789992. Security and SQL merged checks not triggered, reused byte-identical PR-head evidence.",
+        "5 new node role/offline/verified-actionable/unknown/stale tests, isolated 390px Light/Dark mobile main Settings gear/Admin Dashboard entry and in-portal attention browser checks PASS, old code UX retired, preserving offline Log Shot -> Rate -> Recommendation and previous accounts."
       ],
       "ci_runs": [
         42740108000,
@@ -10818,13 +10821,19 @@
         42744216234,
         42744216192,
         42744216264,
-        42744216155
+        42744216155,
+        42758411632,
+        42758411688,
+        42758411873,
+        42758411831,
+        42758411542,
+        42758790255,
+        42758790069,
+        42758789992
       ],
-      "blockers": [
-        "Outstanding owner-acceptance corrections verified-only actionable signup count + Settings Admin badge (#1756 comments 6757223502/6757257449). Source implemented on feature/issue1756-actionable-main-admin-badge-20261110; needs full applicable exact-source CI, signed-in/nonadmin/offline/security/mobile/browser acceptance, and safe nonforce merge before READY. Production publication not authorized."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1756",
-      "notes": "Owner explicit Locked supersession recorded in BOTH docs/MASTER_SPECIFICATION.md and DECISION_LEDGER.json. Development-only source, not deployed. Existing members, Auth identities and all history protected; every legacy invitation token/code still present in production pending future authorized SQL migration. No off-app email/push promise; in-portal attention badge and optional browser alerts while Admin open. | #1756 SOURCE READY 2026-11-10 UTC, NOT DEPLOYED. Existing hosted Auth11/admitted11/shots26/notes26/Community12 and 17 used/unused invitation code records unchanged. New source migration must only purge historical codes on a separately explicitly owner-authorized production Publish and after verifying fresh encrypted backups, preserving Auth/member/Community history. In-app Admin attention mandatory, browser notifications only with permission while Admin open, no external email/push provider claim. #96/#267/#509 preserved. | 2026-11-10: original READY was incomplete for out-of-portal alerts and email-verified actionable counts. Temporarily TESTING pending scoped source/CI. No Supabase/Netlify writes."
+      "notes": "Owner explicit Locked supersession recorded in BOTH docs/MASTER_SPECIFICATION.md and DECISION_LEDGER.json. Development-only source, not deployed. Existing members, Auth identities and all history protected; every legacy invitation token/code still present in production pending future authorized SQL migration. No off-app email/push promise; in-portal attention badge and optional browser alerts while Admin open. | #1756 SOURCE READY 2026-11-10 UTC, NOT DEPLOYED. Existing hosted Auth11/admitted11/shots26/notes26/Community12 and 17 used/unused invitation code records unchanged. New source migration must only purge historical codes on a separately explicitly owner-authorized production Publish and after verifying fresh encrypted backups, preserving Auth/member/Community history. In-app Admin attention mandatory, browser notifications only with permission while Admin open, no external email/push provider claim. #96/#267/#509 preserved. | 2026-11-10: original READY was incomplete for out-of-portal alerts and email-verified actionable counts. Temporarily TESTING pending scoped source/CI. No Supabase/Netlify writes. | 2026-11-10 #1756 development SOURCE READY only, NOT DEPLOYED. Verified-only new signups + coffee/conflicts/unfinished account deletion attention shown in in-Admin center and main app Settings gear/Admin Dashboard; optional browser permission only, no off-app push or email. Existing Auth/member/shot/Community data unaffected; all legacy used/unused invite code records still live in hosted production until fresh owner Publish with independently verified encrypted Drive archive and recovery."
     },
     {
       "id": "DIC-Q-509-account-delete-null-actor-retry-guard",
