@@ -4093,6 +4093,26 @@
       "result": "RESEARCH_ONLY_NO_UNIVERSAL_BASKET_DISC_DOSE_OR_CONFIDENCE_POLICY",
       "owner_approval": false,
       "date": "2026-11-10"
+    },
+    {
+      "id": "R455-EV-APP-153-A",
+      "source": "live site/lib/engine.js blob d262f7343ef2556effc7572b86e7ecc026449288 at bb219a3f2b8e4f1580e48f6420f60334349c1ba5, saveShot()/recommendation()/prefill()",
+      "claim": "Before the patch, saveShot accepted any truthy input.timestamp without parsing, then persisted it. recommendation and prefill explicitly require parseable timestamps, so malformed newly supplied time may be saved yet excluded as last measured feedback. Existing-ID idempotent replay remains a prior acceptance and must be preserved.",
+      "grade": "DIRECT_SOURCE_LOGICAL_REPRODUCER; AUTOMATED_NEGATIVE_AND_POSITIVE_TESTS_PENDING_CI",
+      "current_app": "Existing parser exclusion is intentional for archival uncertainty; new malformed timestamp acceptance is the narrow preventable gap. No existing historical rows are rewritten.",
+      "result": "Proposed non-policy validation before all new-shot mutation; preserve offline idempotent readback and absent timestamp fallback.",
+      "owner_approval": false,
+      "date": "2026-11-10"
+    },
+    {
+      "id": "R455-EV-APP-153-B",
+      "source": "live site/cloud/mapping.js blob a02aee80e2e6447aa855982b500318932a1e8b40 at bb219a3f2b8e4f1580e48f6420f60334349c1ba5, applyPending() and shotPayload()",
+      "claim": "Cloud UI creates UTC timestamps in shotPayload and offline applyPending calls local E.saveShot using pulled_at. A well-formed explicit offset timestamp must still save, preserve private notes/five taste ratings, and support fresh same-context advice; a historical replay with an existing same-coffee ID must return without revalidation.",
+      "grade": "DIRECT_OFFLINE_CALLER_INSPECTION; SYNTHETIC_NODE22_REGRESSION_AND_CLOUD_OFFLINE_CI_PENDING",
+      "current_app": "No server RPC/Auth/RLS change; no production/member/Edge/SQL execution.",
+      "result": "Focused four-test negative/positive/idempotency coverage added to issue455 test module; pending independent CI execution.",
+      "owner_approval": false,
+      "date": "2026-11-10"
     }
   ],
   "policy_decisions_pending": [],
@@ -4180,29 +4200,26 @@
     "R455-152 @3f35ab598c89602cf29ada531bfbfaf1f5ffa1f5: original University Camerino 2020 thesis Ch3 §3.6-3.7/Table3.6 and Ch8 §8.1, independent author 2020 Food Chemistry abstract identity, distinct 2022 Springer paper. Two source identities, two bounded evidence checks and one research-only proposal; 82/219/113. No new verified runtime bug; original PDF visual/byte hash blocked HTTP403, no S019 original, no #267 line credit, no deployment. Verify exact source CI and nonforce merge."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-152",
-    "base_development_sha": "3f35ab598c89602cf29ada531bfbfaf1f5ffa1f5",
-    "source_ids": [
-      "LIT-2020-KHAMITOVA-UNICAM-DISSERTATION-DISC-DOSE",
-      "LIT-2020-KHAMITOVA-FOODCHEM-PARTICLE-BASKET"
-    ],
+    "id": "R455-153",
+    "base_development_sha": "bb219a3f2b8e4f1580e48f6420f60334349c1ba5",
+    "source_ids": [],
     "claim_ids": [
-      "R455-EV-CIT-152-A",
-      "R455-EV-CIT-152-B"
+      "R455-EV-APP-153-A",
+      "R455-EV-APP-153-B"
     ],
     "proposal_ids": [
-      "R455-PROP-152-KHAMITOVA-DOSE-DISC-CHEMISTRY-NOT-UNIVERSAL-TASTE"
+      "R455-PROP-153-NEW-SHOT-TIMESTAMP-VALIDATION"
     ],
     "number_of_curated_sources": 82,
-    "total_evidence_checks": 219,
-    "number_of_proposals": 113,
-    "review_type": "FIRST_PARTY_2020_KHAMITOVA_DISSERTATION_BOUNDED_CHAPTER_3_EXPERIMENT_TABLE_AND_CHAPTER_8_PLUS_ORIGINAL_2020_FOODCHEM_ABSTRACT",
-    "code_or_policy_changed": false,
+    "total_evidence_checks": 221,
+    "number_of_proposals": 114,
+    "review_type": "DIRECT_LIVE_LOG_SHOT_LOCAL_OFFLINE_TIMESTAMP_RECENCY_BUG_REPRODUCER_WITH_FOCUSED_TESTS",
+    "code_or_policy_changed": true,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
-    "status": "RESEARCH_DOCUMENTATION_SAME_COMMIT_PENDING_EXACT_GOVERNANCE_AND_INTEGRATION",
-    "next_action": "Verify PR-head named checks and safe nonforce integration with three exact merged Git blobs; continue disjoint source and Log Shot UX review; separate 2022 carbohydrate paper still full-text restricted, S019 original standalone inaccessible."
+    "status": "SAME_COMMIT_SOURCE_TEST_JOURNAL_PENDING_EXACT_PR_HEAD_CI_AND_MERGE",
+    "next_action": "Run exact-source Node22 targeted and risk-classified cloud/offline/mobile/approval; repair failures; nonforce merge, verify blobs and merged CI; then reconcile CURRENT_STATUS/approval/READY release queue."
   },
   "policy_decisions_resolved": [
     {
@@ -6556,6 +6573,27 @@
       "implementation": "SOURCE_LEDGER_AND_SCOPED_JOURNAL_ONLY_PENDING_EXACT_CI_AND_NONFORCE_INTEGRATION",
       "test_plan": "JSON parse & unique IDs 82/219/113; exactly three documentation paths; PR-head applicable exact-source governance and merged source recheck. SKIPPED app/browser/SQL steps are NOT PASS; no Node/customer espresso result claimed.",
       "release_queue_status": "NOT_APPLICABLE_NO_RUNTIME_CHANGE",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-153-NEW-SHOT-TIMESTAMP-VALIDATION",
+      "finding": "New saveShot accepted explicit malformed timestamps although downstream last-shot selection and prefill require valid chronological instants.",
+      "evidence": [
+        "R455-EV-APP-153-A",
+        "R455-EV-APP-153-B"
+      ],
+      "severity": "P2_DETERMINISTIC_SHOT_FEEDBACK_RECENCY_INTEGRITY",
+      "user_benefit": "Prevent silent loss of newly logged shot's recency evidence and keep original private data, note and ratings consistent.",
+      "current_locked": "Original measured shots/notes/history, all five taste inputs, one controllable recommendation change, offline/idempotent replay and privacy preserved; no new fields or numeric targets.",
+      "current_app": "Source bb219a3f2b8e4f1580e48f6420f60334349c1ba5: engine blob d262f7343ef2556effc7572b86e7ecc026449288; mapping blob a02aee80e2e6447aa855982b500318932a1e8b40; malformed explicit time accepted for new local/offline save, then ignored by recency consumers.",
+      "proposed_change": "Only reject explicitly malformed nonempty new-shot timestamp before any mutation; keep absent -> current time and existing-ID historical replay unchanged. No UI capture change, no alteration of past data.",
+      "evidence_grade": "DIRECT_CODE_GAP_WITH_PENDING_NODE_AND_CLOUD_VERIFICATION",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "ISOLATED_SAME_COMMIT_SOURCE_TEST_JOURNAL_PENDING_PR_CI_AND_NONFORCE_MERGE",
+      "test_plan": "Four new focused Node22 regressions; applicable exact PR-head validate/cloud/mobile/offline, SQL route and approval; require exact merged-source checks and correct queue/approval reconciliation before READY.",
+      "release_queue_status": "IN_PROGRESS_NOT_READY",
       "github267_literal_review_credit": 0,
       "production_deployed": false
     }
