@@ -1,0 +1,51 @@
+name: DIC Issue33 R73 original603 601-603 selected source
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r73-601-603-zekes.yml
+      - scripts/audit/issue33-r73-zekes-selected-contract.mjs
+      - scripts/audit/issue33-r73-601-603-afterproof.mjs
+      - tests/coffee-issue33-r73-601-603-selected-contract.test.mjs
+      - docs/workstreams/ops-issue33-r73-601-603-zekes-20261109.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r73-601-603-zekes.yml
+      - scripts/audit/issue33-r73-zekes-selected-contract.mjs
+      - scripts/audit/issue33-r73-601-603-afterproof.mjs
+      - tests/coffee-issue33-r73-601-603-selected-contract.test.mjs
+permissions:
+  contents: read
+jobs:
+  selected-zekes:
+    name: original603-601-603-selected-zekes-evidence
+    runs-on: ubuntu-24.04
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Selected source positives and adversarial negatives
+        run: node --test tests/coffee-issue33-r73-601-603-selected-contract.test.mjs
+      - name: Guarded exact original URLs, actual parser and UI evidence
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '601,602,603'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r73-601-603
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Fail-closed source hash, selected original identity and parser afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r73-601-603
+        run: node scripts/audit/issue33-r73-601-603-afterproof.mjs
+      - name: Short-retention public-only selected HTML and verdict
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r73-zekes-601-603
+          path: /tmp/dic33-r73-601-603/
+          if-no-files-found: warn
+          retention-days: 1
