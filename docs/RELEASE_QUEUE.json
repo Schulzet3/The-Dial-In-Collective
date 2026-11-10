@@ -11557,17 +11557,14 @@
       "merged_source_sha": null,
       "scope_paths": [
         "src/server/coffee-selected-current-panel.mjs",
-        "src/server/coffee-page-metadata.mjs",
-        "scripts/audit/issue33-r101-513-516-528-check.mjs",
-        "tests/coffee-issue33-r101-513-516-528.test.mjs",
-        ".github/workflows/issue33-r101-513-516-528.yml",
-        "docs/workstreams/ops-issue33-r101-513-516-528-20261110.md"
+        "src/server/coffee-page-metadata.mjs"
       ],
       "tests": [
         "R101 initial synthetic FAIL [42920114784] due first H1 negative expectation; corrected same-commit journal.",
         "R101 second exact-head [42920216817] 7/7 synthetics PASS, real 3/3 official selected HTTPS PASS; afterproof correctly FAILED on source-backed #516 region and #528 roast/malt omissions.",
         "R101 first parser correction [42920814484] 11/12 synthetics PASS, malt still missing due terminal punctuation in shorter list, real HTTPS SKIPPED; focused correction underway.",
-        "Fresh PR-head exact selected HTTP/afterproof, Node22/lint/build/cloud/mobile/privacy/approval CI PENDING."
+        "Fresh PR-head exact selected HTTP/afterproof, Node22/lint/build/cloud/mobile/privacy/approval CI PENDING.",
+        "Failed queue intake [42921065538]: scope_paths included nondeployable scripts/tests/workflow/journal. Corrected to only two deployable runtime source paths. Scope's nondeployable test/docs tracked by same-commit journal."
       ],
       "ci_runs": [
         42920114784,
