@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {cases,ownSelectedProof} from '../scripts/audit/issue33-r97-buona-448-450-check.mjs';
+import {selectedCurrentNamedGrowingValley} from '../src/server/coffee-selected-growing-valley-origin.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {productMarkup} from '../src/server/coffee-product-scope.mjs';
 import {selectedProductHeadings} from '../scripts/audit/issue33-selected-product-heading.mjs';
@@ -51,4 +52,35 @@ test('Buona #450 Dark selected identity does not borrow adjacent coffee processi
  assert.equal(p.fields.name,entry.name);
  assert.equal(p.fields.roast_level,'Dark',JSON.stringify(p.fields));
  assert.doesNotMatch(JSON.stringify(p.fields),/Ethiopia|blueberry|washed/);
+});
+
+test('selected own current Huehuetenango valley refines only proven Guatemala country',()=>{
+ const e=c(448),p=parse(e,e.own.join('. ')+' This is located in one of most impresive valleys of Huehuetenango, surrounded by tall mountains and a unique landscape. The farm was established in 1966.');
+ assert.equal(p.ok,true,JSON.stringify(p));
+ assert.equal(p.fields.origin,'Huehuetenango, Guatemala',JSON.stringify(p.fields));
+ assert.ok(!p.fields.variety||(p.conflicts||[]).includes('variety'));
+ assert.ok(coffeeUrlPreviewMarkup(p).includes('coffee-url-preview'));
+ assert.ok(coffeeSourceReviewSnapshot({...p,source_url:'https://www.buonacaffe.com'+e.path}));
+});
+test('standalone current valley only when exact H1 and accepted country match direct own claim',()=>{
+ const e=c(448),quote='This is located in one of most impresive valleys of Huehuetenango, surrounded by tall mountains and a unique landscape';
+ const blocks=[{tag:'h1',text:e.name},{tag:'p',text:quote,educational:false,section:''}];
+ assert.equal(selectedCurrentNamedGrowingValley({name:e.name,origin:'Guatemala',blocks})?.value,'Huehuetenango, Guatemala');
+ for(const args of [
+  {name:e.name,origin:'Honduras',blocks},
+  {name:e.name,origin:'Guatemala',blocks:[{tag:'h1',text:'Different Coffee'},blocks[1]]},
+  {name:e.name,origin:'Guatemala',blocks:[blocks[0],{...blocks[1],text:'Previously '+quote}]},
+  {name:e.name,origin:'Guatemala',blocks:[blocks[0],{...blocks[1],section:'Related coffees'}]},
+  {name:e.name,origin:'Guatemala',blocks:[blocks[0],{...blocks[1],text:'We once enjoyed the valleys of Huehuetenango'}]},
+  {name:e.name,origin:'Guatemala',blocks:[blocks[0],{...blocks[1],text:'This is located in valleys of Xela'}]},
+ ])assert.equal(selectedCurrentNamedGrowingValley(args),null,JSON.stringify(args));
+});
+test('competing current growing-valley claims cannot fabricate single origin',()=>{
+ const e=c(448),b=[{tag:'h1',text:e.name}, {tag:'p',text:'This is located in valleys of Huehuetenango. This is located in valleys of Atitlan.'}];
+ assert.equal(selectedCurrentNamedGrowingValley({name:e.name,origin:'Guatemala',blocks:b}),null);
+});
+test('other coffee selected full claim in aside is never a valley origin for this product',()=>{
+ const e=c(448),p=parse(e,'Organic washed Guatemala, country only.','<aside>This is located in valleys of Huehuetenango.</aside>');
+ assert.ok(p.ok);
+ assert.notEqual(p.fields.origin,'Huehuetenango, Guatemala');
 });

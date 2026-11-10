@@ -74,7 +74,7 @@ if(process.env.DIC_ISSUE33_R97_VERIFY==='1'){
   require(r.add_coffee_ui_rendered===true&&r.source_review_rendered===true,'add_coffee_source_review_'+entry.number);
   require(!/Ethiopia|Colombia|Kenya|Rwanda|Blue Jazz|Chromatic/i.test(JSON.stringify(f)),'unrelated_coffee_fields_'+entry.number);
   if(entry.number===448){
-   require(/Guatemala/i.test(f.origin||''),'direct_selected_country_448');
+   require(f.origin==='Huehuetenango, Guatemala','direct_current_selected_valley_refinement_448');
    require((f.process||'')==='Washed','direct_selected_fully_washed_448');
    // Different printed cultivar lists are *not* permission to invent one definitive lot variety.
    // A nonempty canonical variety is only acceptable if explicitly flagged conflicting.
