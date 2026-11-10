@@ -19,5 +19,5 @@ test('related navigation, footer, other coffee cannot supply missing selected fa
 });
 test('shop checkout or variant controls do not establish origin or flavor',()=>{
  const d=current('<main><h1>'+name+'</h1>Single Origin</main><form><select><option>'+fruit+flavor+washed+conditional+'</option></select></form>',[name]);
- assert.equal(d.directWashed,false);assert.equal(d.directFruitClause,false);assert.equal(d.directDetailedFlavor,false);
+ assert.equal(d.selectedWashed,false);assert.equal(d.directFruitClause,false);assert.equal(d.directDetailedFlavor,false);
 });
