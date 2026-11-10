@@ -11225,23 +11225,32 @@
     {
       "id": "DIC-Q-509-preview-preflight-null-cached-guard",
       "issue": 509,
-      "pr": null,
+      "pr": 1869,
       "title": "Reject explicit NULL cached flag before issuing stale two-phase URL preview tickets",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "1237de47741b785a356347106aea058478e81956",
       "scope_paths": [
         "supabase/migrations/20261110164500_dic_preview_preflight_null_flag_guard.sql"
       ],
       "tests": [
         "Production read-only pg_get_functiondef full function and pure-expression NULL-at-cap truth table confirmed malformed flag can yield allowed ticket, despite complete() deny",
-        "Focused disposable PostgreSQL 17.11 rollback-only preview_two_phase_cache.sql tests for NULL, false, true, existing ticket and exhausted quota: PENDING"
+        "Run149 PR-head CI exact source e18a70a: SQL/JWT 42859036281, Node22 42859036232, cloud/mobile 42859036238, governance 42859036239 all completed success.",
+        "Run149 merged-source CI 1237de4: isolated PostgreSQL/synthetic signed JWT 42859566468, Node22 42859566023 (3548 pass, 0 fail, 6 skip, lint/build pass), cloud/browser 42859565950, approval continuity 42859566196 all completed success.",
+        "Identical 6/6 PR-head vs merged Git object blobs, no production deployment, regression in supabase/tests/preview_two_phase_cache.sql executes only in disposable dic_ci."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact-source isolated PostgreSQL, signed JWT and governance checks not yet verified; PR not merged"
+      "ci_runs": [
+        42859036281,
+        42859036232,
+        42859036238,
+        42859036239,
+        42859566468,
+        42859566023,
+        42859565950,
+        42859566196
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
-      "notes": "Run149 development-only hardening of older authenticated SQL RPC; no proven current Edge extraction bypass, no live change, not production READY. Preserve fixed behavior for true/false/default and existing clients."
+      "notes": "Run149 development-only hardening of older authenticated SQL RPC; no proven current Edge extraction bypass, no live change, not production READY. Preserve fixed behavior for true/false/default and existing clients.\nRun149 exact-source CI READY development-only; evidence docs/audits/issue509-run149-exact-source-ci-closure-2026-11-10.json; owner publication separate."
     }
   ],
   "history": [
