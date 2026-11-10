@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import {createHmac,randomUUID} from 'node:crypto';
 import {execFileSync} from 'node:child_process';
 import {readFileSync} from 'node:fs';
-import {invitationSecurityAcceptance} from './issue27-invitation-acceptance.mjs';
+import {signupApprovalSecurityAcceptance} from './issue1756-signup-approval-acceptance.mjs';
 
 const url=process.env.DIC_CI_HTTP_URL;
 const secret=process.env.DIC_CI_JWT_SECRET;
@@ -226,19 +226,14 @@ for(let offset=0;offset<250;offset+=50){
 assert.ok(adminEditListed,'Signed Admin records must include edited cross-owner note in scoped fixture');
 pass('Admin-only paginated HTTP record projection displays audited private-note correction');
 
-const invitesBefore=scalar('(select count(*) from private.beta_invites)');
 const eventsBefore=scalar('(select count(*) from private.admin_access_events)');
-await denied('Ordinary member cannot issue an administrator invitation',
- '/rpc/dic_admin_issue_invite',tokens.member,{p_label:'FORBIDDEN_CI'});
-await denied('Forged metadata cannot issue an administrator invitation',
- '/rpc/dic_admin_issue_invite',tokens.forged,{p_label:'FORBIDDEN_CI'});
 await denied('Ordinary member cannot enable a disabled account',
  '/rpc/dic_admin_set_member_access',tokens.member,
  {p_member_id:disabled,p_enabled:true});
-assert.equal(scalar('(select count(*) from private.beta_invites)'),invitesBefore);
 assert.equal(scalar('(select count(*) from private.admin_access_events)'),eventsBefore);
 assert.equal(scalar("(select enabled from private.beta_members where owner_id='"+disabled+"')"),'f');
-pass('Forbidden administrator writes left invitations, membership and audits unchanged');
+assert.equal(scalar("(select to_regclass('private.beta_invites') is null)"),'t');
+pass('Forbidden administrator writes left membership/audit unchanged and historical code table absent');
 
 r=await rpc('dic_my_community_outliers',tokens.member);
 assert.equal(r.status,200);assert.deepEqual(r.data,[]);
@@ -435,6 +430,6 @@ assert.ok(!r.data?.shots?.some(x=>x.id===attributedShot));
 pass('Another signed member never receives private recommendation source context');
 
 
-await invitationSecurityAcceptance({rpc,sql,scalar,sign,pass,denied,adminToken:tokens.admin,pg});
+await signupApprovalSecurityAcceptance({rpc,sql,scalar,sign,pass,denied,adminToken:tokens.admin,memberToken:familyToken,pg});
 
 console.log('RESULT: '+passed+' isolated genuine-HMAC-signed PostgREST HTTP/quality assertions PASS; NO GoTrue or production sessions tested.');
