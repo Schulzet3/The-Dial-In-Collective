@@ -61,7 +61,7 @@ BEGIN
   'source_records',source_count,'other_references',linked_count,'merged_coffees',merged_count,
   'blocked',CASE WHEN p_kind='approved' THEN community_count>0 OR merged_count>0 OR linked_count>0
                  WHEN p_kind='submission' THEN linked_count>0 ELSE false END);
-END $function$
+END $function$;
 
 
 CREATE OR REPLACE FUNCTION private.dic_admin_delete_record(p_kind text, p_record_id uuid, p_expected_revision bigint, p_expected_impact jsonb)
@@ -133,5 +133,5 @@ BEGIN
  INSERT INTO private.dic_admin_delete_receipts(actor_id,record_kind,record_id,impact)
   VALUES(actor,p_kind,p_record_id,actual);
  RETURN jsonb_build_object('ok',true,'deleted_kind',p_kind,'impact',actual);
-END $function$
+END $function$;
 

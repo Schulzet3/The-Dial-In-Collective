@@ -3631,6 +3631,13 @@
       "dev_fix": "NEW_ADDITIVE_MIGRATION_TESTING",
       "provider_writes": 0,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 UTC run152 pre-CI migration SQL termination correction",
+      "source_sha": "ad57e9291cf6c87f110216fcb36d77e3d6e6b9d1",
+      "evidence": "supabase/migrations/20261110194500_dic_admin_delete_null_kind_guard.sql",
+      "provider_writes": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -16437,6 +16444,7 @@
     "new_first_time_words": 0,
     "tests": "PENDING",
     "next": "Source-bound PR CI and safe integration only after verified exact-source checks",
-    "provider_writes": 0
+    "provider_writes": 0,
+    "syntax_correction": "Both SQL function CREATE OR REPLACE definitions explicitly terminated; source-bound CI still pending."
   }
 }
