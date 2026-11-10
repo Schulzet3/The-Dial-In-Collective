@@ -3517,6 +3517,18 @@
       "queue_state": "READY_NOT_DEPLOYED",
       "production_writes": false,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 #509 Run138 direct FULL 3 newly deployed SQL migrations post READY4",
+      "source_development_parent_sha": "1ceb353e0327e4f6d83323f1a8e347f23c9a8218",
+      "receipt_path": "docs/audits/issue509-provider-ready4-three-migrations-2026-11-10-run138.json",
+      "new_sql_direct_full": 3,
+      "current_migrations_reviewed": 59,
+      "current_live_migrations": 59,
+      "source_exact": true,
+      "provider_writes": false,
+      "new_confirmed_defects": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -15958,5 +15970,31 @@
     "new_code_word_coverage": 0,
     "baseline_complete": false,
     "next": "Changed/new provider object or access gap; native+hosted Auth private settings unverified"
+  },
+  "provider_ready4_three_migrations_run138": {
+    "status": "CHANGED_DEPLOYED_MIGRATION_SOURCES_DIRECTLY_REVIEWED_EXACT_RELEASE_IDENTITY_NO_NEW_CONFIRMED_DEFECT",
+    "receipt_path": "docs/audits/issue509-provider-ready4-three-migrations-2026-11-10-run138.json",
+    "development_parent_sha": "1ceb353e0327e4f6d83323f1a8e347f23c9a8218",
+    "main_sha": "33445fcc782fc99c8473f6c93f31ad2d0d73444d",
+    "release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+    "live_migration_total": 59,
+    "prior_reviewed": 56,
+    "new_direct_reviewed": 3,
+    "current_reviewed": 59,
+    "new_characters": 29282,
+    "new_words": 2416,
+    "full_sql_exact_git_match": true,
+    "signup_member_count": 11,
+    "obsolete_invite_artifacts": 0,
+    "destructive_public_execute_count": 0,
+    "verified_fix_live": {
+      "nullable_actor": true,
+      "private_delete_acl": true
+    },
+    "new_confirmed_defects": 0,
+    "source_changes": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "Continue next genuinely unreviewed provider definition or changed live schema/role/Edge bundle, reconcile drift, bounded logs, and provider-console-only inaccessible setting inventory; do not double-credit stored 59/59 migration words."
   }
 }
