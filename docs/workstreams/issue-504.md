@@ -1,3 +1,15 @@
+## Issue #504 G1-160 — November 10, 2026 UTC — original PR #837–844 full title/body review [skip netlify]
+
+Preflight source development `699ca614be2572f84eaa9b3720b300969afece96` (tree `e3f6e5129833cec0b34d8aff3027bff38d87c27c`), main `11e1e8c7c36dad488519476d8a969bb682915d31`, release `a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0`. Read AGENTS, AI entrypoint/preflight, current status, Master Spec/Decision Ledger scoped supremacy, approval matrix, source register and scoped journal, live Issue #504/#267/#455/#33/#96 and PR objects. Temporarily PUBLIC by #630 owner exception Nov4–30, no visibility change.
+
+**New exact direct review:** PR #837–844 original titles and bodies, 8 distinct GitHub records / **991 Unicode-whitespace words** / **8127 UTF-8 bytes**, complete word1–EOF, source SHAs/timestamps, full verbatim originals/per-field SHA1 and per-record semantic disposition in [G1-160 immutable receipt](../audits/issue504-review-G1-160.json). #838/#844 unmerged historical failures; #841/#843 open unmerged #267 drafts; #839/#842 undated history fix belongs to #455; #837 belongs to #33. No independently confirmed new current defect/removal/owner decision. No historical evidence deleted.
+
+Independently checked #267 strict N15 original P149 `src/server/coffee-selected-product-hero.mjs` blob `2be7a62aac93808cc0399f4f825b57dd2ad17539` **lines 40–44 exactly 5/5 physical literals and required semantic fields**, receipt blob `22b7ada15201d5d02e2fc9fbbd812f8f6132bc96`. **No duplicate #504 code credit**. Other #267 lines not certified.
+
+Cumulative corrected #504 direct coverage **7,919 original file lines/60,754 words + 1020 original GitHub metadata objects/267309 words**; 160/160 contiguous batches. Retain G1-117 -15/-4,012 duplicate correction and partial original RELEASE_QUEUE `ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6` lines1–4736/5377. Three audit-doc-only paths one commit with journal; Node22/SQL/Auth/browser/mobile/offline/603 NOT_RUN_DOCS_ONLY; head and exact merged-source CI PENDING (SKIPPED != PASS). No production/Netlify/queue/Locked/SQL/Auth/member/backup/main/release/visibility changes.
+
+**OPEN / IN_PROGRESS; next original PR #845 title word1, then body.** PR reviews/diffs/comments, branches/commits/tags/releases, Actions logs/artifacts, binary/unsupported surfaces and unfinished #267 remain excluded from this bounded review.
+
 ## Issue #504 G1-159 — November 10, 2026 UTC — direct historical PR #829–836 title/body review [skip netlify]
 
 Recovered development parent `ef199065e3cb428f49a882eab9e13a1b7f45cbb1` / Git tree `dffca89b5a985caac4510913e09b69338867c6e4`; main `11e1e8c7c36dad488519476d8a969bb682915d31`; release/production `a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0`. Current GitHub issue #504/#267/#455/#33/#96 OPEN. Current temporary PUBLIC exception #630 Nov 4–30 unchanged, no visibility action. Inspected current AGENTS, AI entry/preflight, master decisions/status/approval/source register, exact PR originals, strict #267 N15 evidence, repo metadata and applicable CI. No source/other-document semantic credit inferred from context reads or tree inventory.
