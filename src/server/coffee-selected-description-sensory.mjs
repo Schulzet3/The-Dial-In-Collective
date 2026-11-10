@@ -133,12 +133,18 @@ export function refineSelectedCurrentFlavorBase(html,{clean,notes}={}){
  const blocks=productCoffeeProse(html,clean);
  const headings=blocks.filter(x=>x.tag==='h1'&&!x.educational);
  if(headings.length!==1||!headings[0].text||headings[0].text.length>180)return '';
+ const selectedSection=fold(headings[0].text);
+ const allowedProductSection=/^(?:product info|product information|product description|description|coffee description|about the coffee|about this coffee|about coffee|coffee details|details|coffee notes|tasting notes|flavor notes|flavour notes|flavor profile|flavour profile|coffee profile|the coffee|specifications|overview|coffee information)$/u;
  const parts=notes.split(/\s*(?:,|&|[•·;|]|\band\b)\s*/iu).map(s=>s.trim()).filter(Boolean);
  if(parts.length<2||parts.length>7||parts.some(s=>!normalizeExplicitCoffeeTastingNotes(s)))return '';
  const candidates=new Set();
  for(const block of blocks){
   if(block.tag!=='p'||block.educational||block.text.length<45||block.text.length>900||
      unavailable.test(block.section)||NONCURRENT_COFFEE_PROSE.test(block.section))continue;
+  // Do not read a similarly worded sibling product paragraph after its own
+  // product heading. Empty, selected H1 or bounded generic details are eligible.
+  const section=fold(block.section);
+  if(section&&section!==selectedSection&&!allowedProductSection.test(section))continue;
   for(const sentence of block.text.split(/(?<=[.!?])\s+/u).slice(0,14)){
    if(sentence.length>450||NONCURRENT_COFFEE_PROSE.test(sentence)||
       /\b(?:served|prepared|brewed|mixed|added|with milk\b|with cream\b|if|when|only when|depending|alternatively|hypothetical|previously|formerly|historically|different|another|other coffees?)\b/iu.test(sentence))continue;

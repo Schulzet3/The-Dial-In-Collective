@@ -105,3 +105,12 @@ test('a related non-selected section cannot supply the missing flavor base',asyn
    '<section><h2>Different Coffee</h2><p>Its milk chocolate base is complemented with notes of stone fruit and honey.</p></section>');
  assert.equal(refineSelectedCurrentFlavorBase(html,{clean,notes:'stone fruit and honey'}),'');
 });
+
+
+test('named neighboring product H2 with same coordinated notes is not selected',async()=>{
+ const {refineSelectedCurrentFlavorBase}=await import('../src/server/coffee-selected-description-sensory.mjs');
+ const e=cases[1],clean=value=>String(value).replace(/<[^<>]{0,2000}>/g,' ').replace(/\s+/g,' ').trim();
+ const html=markup(e,'Notes of stone fruit and honey.',
+   '<section><h2>Guatemala — Pablo & Eva Del Cid</h2><p>Its milk chocolate base is complemented with notes of stone fruit and honey.</p></section>');
+ assert.equal(refineSelectedCurrentFlavorBase(html,{clean,notes:'stone fruit and honey'}),'');
+});
