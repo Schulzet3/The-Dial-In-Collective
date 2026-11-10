@@ -91,6 +91,23 @@ begin
  rejected:=false;begin perform public.dic_preview_import(b,bad);exception when invalid_parameter_value then rejected:=true;end;
  if not rejected then raise exception 'Secret accepted';end if;
  checks:=array_append(checks,'Credential-bearing backup rejected');
+
+ bad:=doc||jsonb_build_object('api-key','synthetic-placeholder-not-a-credential');
+ rejected:=false;begin perform public.dic_preview_import(b,bad);exception when invalid_parameter_value then rejected:=true;end;
+ if not rejected then raise exception 'Hyphenated API key escaped import credential guard';end if;
+ checks:=array_append(checks,'Hyphenated API key rejected');
+ bad:=jsonb_set(doc,'{data,legacyEnrichment,credentialExample}','{"access token":"synthetic-placeholder"}'::jsonb,true);
+ rejected:=false;begin perform public.dic_preview_import(b,bad);exception when invalid_parameter_value then rejected:=true;end;
+ if not rejected then raise exception 'Nested spaced access token escaped credential guard';end if;
+ checks:=array_append(checks,'Nested spaced access-token key rejected');
+ bad:=doc||jsonb_build_object('refresh.token','synthetic-placeholder');
+ rejected:=false;begin perform public.dic_preview_import(b,bad);exception when invalid_parameter_value then rejected:=true;end;
+ if not rejected then raise exception 'Punctuated refresh token escaped credential guard';end if;
+ checks:=array_append(checks,'Punctuated refresh-token key rejected');
+ bad:=doc||jsonb_build_object('coffee-name','synthetic-name-metadata');
+ p:=public.dic_preview_import(b,bad);
+ if (p->>'shots')::integer<>3 then raise exception 'Benign hyphenated coffee key incorrectly blocked';end if;
+ checks:=array_append(checks,'Benign hyphenated metadata remains importable');
  -- Restore drill from stored source into a second isolated test identity.
  p:=public.dic_preview_import(b,archived);r:=public.dic_commit_import(b,archived,p->>'reviewHash',true);
  if (r->>'shots')::int<>3 then raise exception 'Source replay failed';end if;
