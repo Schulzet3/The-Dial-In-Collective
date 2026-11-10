@@ -1511,6 +1511,26 @@
       "claims_verified_externally": "Author reports synthetic 100% three-class coarse/optimal/fine grind classification, inverse temperature R2 0.9978, surrogate chemistry R2 .9908-.9990, fixed 9-bar pressure; all from simulator/interpolation domain, not real grinder-unit translations, user sensory tests or adjustable-pressure causal response. §5 calls experimental validation against real extractions future work; earlier qualitative sensorial-session mention not a controlled individual five-input result.",
       "current_app_crosswalk": "Current dev 404f7111dc31316f1d814a1331b39e38fedbfe6a, engine Git blob 9b0071f2bdd89b931662fe3232d4659524ad2e67, model 00c027c5f10d938fa2cc050572286eb9570817de, constants 72221331ce4dffabe416eebec1ae2fceced3a095; personal measured five-rating engine with no chemistry inverse model.",
       "factual_status": "PAPER_INTERNAL_SIMULATED_PERFORMANCE_ONLY_NOT_REAL_CUP_PERSONALIZATION_OR_ESPRESSO_QUALITY_VALIDATION"
+    },
+    {
+      "id": "LIT-2013-GLOESS-NINE-EXTRACTIONS",
+      "type": "peer_reviewed_original_espresso_and_lungo_instrumental_consensus_sensory_comparison",
+      "title": "Comparison of nine common coffee extraction methods: instrumental and sensory analysis",
+      "authors": "Alexia N. Gloess; Barbara Schönbächler; Babette Klopprogge; Lucio D'Ambrosio; Karin Chatelain; Annette Bongartz; André Strittmatter; Markus Rast; Chahan Yeretzian",
+      "published": "2013-01-30 online (2013-04 print)",
+      "journal": "European Food Research and Technology 236:607-627",
+      "doi": "10.1007/s00217-013-1917-x",
+      "url": "https://link.springer.com/article/10.1007/s00217-013-1917-x",
+      "access": "ORIGINAL_OPEN_ACCESS_SPRINGER_PUBLISHER_INDEXED_FULL_TEXT_SECTIONS_METHODS_TABLE1_DESCRIPTIVE_SENSORY_RESULTS_ANALYTICAL_CORRELATIONS_DISCUSSION_CONCLUSION_READ_20261110; DIRECT_BROWSER_OPEN_SPRINGER_REDIRECT_FAILED_HTTP500; ORIGINAL_BINARY_PDF_AND_SUPPLEMENT_NOT_ACQUIRED",
+      "review_status": "SUBSTANTIVE_PRIMARY_PUBLISHER_INDEXED_METHODS_RESULTS_SENSORY_DESIGN_REVIEW_WITH_BOUNDED_CORRELATION_LIMITS; NOT_COMPLETE_BINARY_FIGURE_SUPPLEMENT_OR_RAW_REPLICATE_AUDIT",
+      "evidence_grade": "PEER_REVIEWED_NINE_EXTRACTION_METHOD_NONFACTORIAL_CROSS_METHOD_COMPARISON_7_TRAINED_CONSENSUS_PANELISTS_18_ATTRIBUTES; NO_INDIVIDUAL_ESPRESSO_OPTIMUM_OR_FIVE_DIC_RATING_PREDICTION",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Publisher indexed original full-text retrieved by web source search with multiple focused queries; directly opening Springer URL redirected/fetch failed HTTP 500. Publisher binary page/PDF, 5.75MB supplementary DOCX, individual figure pixels, raw measurements/replicates not obtained or SHA256 verified. These are limitations, not claims of inaccessible PDF review.",
+      "claims_verified_externally": "Original publication compares 4 espresso and 5 lungo/preparation outputs, nine methods, analytical total solids/pH/titration/headspace/caffeine/chlorogenic acids and 18 trained panel sensory attributes on 0-5 scales. Seven trained panelists used DIN10967-2 consensus profiling; each method assessed in duplicate. Chemistry: three separately prepared sample pools per extraction type, each analyzed in triplicate, most across two days; semi-automatic espresso sample combined five double shots. Nonfactorial extraction method, roast/bean and serving temperature vary by preparation; NE capsule used different bean. Authors report r2(total solids, body)=0.69 and r2(headspace, aroma)=0.73, several bitterness/astringency correlations with caffeine/chlorogenic acids, at one-sided alpha 0.1; they explicitly did NOT find a correlation between measured pH/titratable acidity and perceived acidity. Correlations across these nine methods are not validated across DIC personal same-coffee recipe changes. Authors say no single best extraction method.",
+      "current_app_crosswalk": "At dev d8c25686c343aa13ce37f2a81204a004dbb835f1 engine blob 66a2f42419451a83d0f4c3153a6e4e436ff5f6ff, model 00c027c5f10d938fa2cc050572286eb9570817de, constants 72221331ce4dffabe416eebec1ae2fceced3a095, community 74c93c7ff7814337752e0ef9052412eaf55890e3. DIC has five subjective ratings with all-green vs missing handling, personal same-coffee per-style learning and one-controllable-setting advice; does not infer pH/TDS/caffeine from sensory sliders.",
+      "factual_status": "SOURCE_INTERNAL_NONCAUSAL_ASSOCIATIONS_AND_CONSENSUS_ATTRIBUTE_SCORES_ONLY; NOT_PERSONAL_PREFERENCE_OR_ESPRESSO_RECIPE_QUALITY_PREDICTION",
+      "reviewed_date_utc": "2026-11-10",
+      "implementation_status": "RESEARCH_ONLY_NO_APP_OR_LOCKED_POLICY_CHANGE"
     }
   ],
   "evidence_checks": [
@@ -4512,6 +4532,24 @@
       "current_app": "New test tests/issue455-outlier-explicit-controls.test.mjs checks exclusions, inclusive controls, no mutation and saveShot integration.",
       "result": "FOCUSED_SYNTHETIC_POSITIVE_AND_NEGATIVE_NODE22_HEAD_AND_MERGED_SUCCESS",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-165-A",
+      "source": "LIT-2013-GLOESS-NINE-EXTRACTIONS",
+      "claim": "Publisher original's methodological detail: nine preparation types, chemistry pools and triplicate lab measurements vs seven-panelist 18-attribute consensus sensory profiles evaluated twice; mixed beans/roasts/equipment/serving temperatures confound causal isolation.",
+      "grade": "PEER_REVIEWED_ORIGINAL_PUBLISHER_INDEXED_METHODS_AND_TABLE1; WEAK_TO_NONEXISTENT_CROSS_METHOD_CAUSAL_ISOLATION_OR_INDIVIDUAL_USER_PREFERENCES",
+      "current_app": "DIC site/lib/engine.js rated shot and personal same-coffee history do not use lab analytical chemistry; maintain user ratings and style, grinder/basket/feed/version identity.",
+      "result": "RESEARCH_SOURCE_VERIFIED_LIMITED_METHOD_COMPARISON_NOT_APP_BEHAVIOR_AUTHORITY",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-165-B",
+      "source": "LIT-2013-GLOESS-NINE-EXTRACTIONS",
+      "claim": "Cross-method r2 0.69 for total solids/body, 0.73 for headspace/aroma, and no measured pH/titratable-acidity versus perceived-acidity correlation; study explicitly finds no universal best brew. Correlation threshold alpha 0.1 one-sided and consensus profiles do not measure per-user optimum.",
+      "grade": "ORIGINAL_OBSERVED_CORRELATIONS_ACROSS_NINE_MIXED_METHODS_NOT_VALIDATED_AS_CAUSAL_NUMERIC_DIC_ESPRESSO_PERSONALIZATION",
+      "current_app": "Five owner-Locked subjective ratings; no invented pH/TDS or universally optimal ratio/time/grind model in recommendation logic.",
+      "result": "NO_NEW_NUMERIC_TARGET_CONFIDENCE_LABEL_OR_POLICY_APPROVED",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [],
@@ -4523,6 +4561,7 @@
     "reason": "R455-123 verified existing Locked 70-100 C recorded-temperature guard prevents invalid imported temp from becoming personal grind evidence; six direct-module tests and exact source CI, no scientific target or deployed change."
   },
   "next_actions": [
+    "R455-165 doc research primary Gloess 2013 indexed Springer original methods/sensory/correlations review at dev d8c25686c343aa13ce37f2a81204a004dbb835f1; new source and bounded evidence checks/RESEARCH-ONLY proposal. Await docs PR-head and merged-source applicable governance; do not reclassify unrun tests or PDF figure/supplement access. No DIC behavioral correction proven, no owner approval needed, S019 original remains missing.",
     "R455-159 authoring at 3283bb3ceffc20aa6589e3f7a586b71cf82758d8: original Gantner et al. 2024 primary publisher HTML methods and results read; one new source/two independent bounded evidence checks/one research-only proposal. Need docs-only PR-head CI, nonforce merge and merged-source receipt. No revised age/rest/storage numeric recommendations, no reopened Roast Date/Bag UI, no #267 literal credit; S019 original remains inaccessible.",
     "R455-156 authoring at development 68a778b5: primary J-STAGE original 2024 Imamura water/sodium/clean taste full HTML Methods + tables/results checked; added source, two bounded checks, research-only proposal. No espresso water optimum, no DIC 5-rating validation, no code/queue/Locked/production changes or #267 literal credit. PR-head/merged CI pending; standalone S019 inaccessible.",
     "R455-151 authored at 2bbb4f9598668538c8d27b5bdcf6e3f7758db040: independently upgraded Cameron et al. Matter 2020 from focused model claim to substantive original publisher-indexed model/experimental/cafe-cost sections, evidence CIT-151 A/B and science-boundary proposal; 80 sources, 217 checks, 112 proposals. No new safe runtime bug demonstrated, no Locked/queue/production change, no #267 literal credit. PR exact-source CI and nonforce integration pending; S019 standalone PDF inaccessible.",
@@ -4617,17 +4656,16 @@
     "R455-164 FINAL verified code PR #1857 head 9f8d713... nonforce merged c26a9a9... four exact blobs and 3529 Node22 PASS/0 FAIL/6 SKIP both head/merged, browser/mobile/offline/SQL/security/approval applicable PASS. New queue DIC-Q-455-outlier-explicit-controls READY in development only; no deployment. Continue separate claim-level source inventory and narrow SAFE UX review under live SHA; original standalone S019 still inaccessible; no #267 credit."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-164",
-    "source_sha": "c26a9a9c5f44cb77dc9e3a92429da5a10d9980ce",
+    "run_id": "R455-165",
+    "source_sha": "d8c25686c343aa13ce37f2a81204a004dbb835f1",
     "issue": 455,
-    "pr": 1857,
-    "phase": "SAFE_OUTLIER_CODE_AND_TEST_NONFORCE_MERGED_HEAD_AND_MERGED_APPLICABLE_CI_SUCCESS",
+    "phase": "RESEARCH_ONLY_GLOESS_2013_ORIGINAL_SOURCE_INDEXED_REVIEW_DOCS_PR_CI_PENDING",
     "source_counts": {
-      "sources": 91,
-      "evidence_checks": 244,
-      "proposals": 125
+      "sources": 92,
+      "evidence_checks": 246,
+      "proposals": 126
     },
-    "release_state": "READY_IN_DEVELOPMENT_NOT_DEPLOYED",
+    "release_state": "NO_APP_CHANGE_NO_READY_OR_DEPLOY",
     "original_s019": "UNAVAILABLE_NOT_REVIEWED",
     "github267_literal_review_credit": 0
   },
@@ -7255,6 +7293,28 @@
       "production_deployed": false,
       "pr_number": 1857,
       "merge_sha": "c26a9a9c5f44cb77dc9e3a92429da5a10d9980ce"
+    },
+    {
+      "id": "R455-PROP-165-SENSORY-CORRELATION-IS-NOT-CAUSAL-RECIPE",
+      "finding": "Peer-reviewed sensory/chemistry comparisons are cross-method associations from heterogeneous brewing contexts, not intervention data for a personal, same-coffee five-rating espresso feedback loop; no reproducible present app bug from this study.",
+      "evidence": [
+        "LIT-2013-GLOESS-NINE-EXTRACTIONS",
+        "R455-EV-CIT-165-A",
+        "R455-EV-CIT-165-B"
+      ],
+      "severity": "P3_RESEARCH_TO_APP_EVIDENCE_OVERCLAIM_PREVENTION",
+      "user_benefit": "Avoid erroneous measured-chemistry flavor certainty, rigid acidity/pH rules or espresso-optimum claims while retaining low-friction Log Shot→Rate→Recommendation.",
+      "current_locked": "Owner Master and Decision Ledger: all five taste ratings, all-green success distinct from missing, same-coffee measured private history, one intentional controllable change, style-specific Turbo vs Fast-Flow, slow feed, equipment version/range and no unverified numerical tastes.",
+      "current_app": "Read at dev d8c25686c343aa13ce37f2a81204a004dbb835f1, engine/model/constants/community source blobs pinned in linked source; no paper-derived chemistry predictor; no new implementation defect reproduced.",
+      "proposed_change": "RESEARCH-ONLY guard. Do not add pH/TDS/CGAs inferred from user sliders or derive an optimal espresso recipe from study correlations. Future chemical sensing/user-preference collection or model confidence changes require separately approved Locked design and repeated controlled physical same-coffee results.",
+      "evidence_grade": "ORIGINAL_PEER_REVIEWED_CROSS_METHOD_MIXED_BREW_ASSOCIATIONS_NOT_CONTROLLABLE_PERSONAL_ESPRESSO_EXPERIMENT",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "DOCS_ONLY_SOURCE_LEDGER_JOURNAL_CURRENT_STATUS; NO_CODE_TEST_SQL_UI_OR_LOCKED_CHANGE",
+      "test_plan": "Validate structured ledger JSON + IDs/counts and source-bound merged files; docs-only GitHub CI as applicable. Node22/browser/mobile/offline/SQL/Auth and physical coffee tasting NOT_RUN on this docs-only change; no PASS claim.",
+      "release_queue_status": "NOT_APPLICABLE",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
     }
   ],
   "changeScope": {
