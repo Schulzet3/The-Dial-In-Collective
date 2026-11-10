@@ -4494,6 +4494,24 @@
       "current_app": "Preserve actual five original ratings and same-coffee personal evidence, no scientific confidence based on simulator metrics.",
       "result": "NO_VERIFIED_USER_TASTE_OR_RECOMMENDATION_BENEFIT",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CODE-164-A",
+      "source": "LIVE-20261110-ISSUE455-ENGINE-OUTLIER-PREDICATE",
+      "claim": "Direct source-bound isExtreme previously counted four all-five-green physical dose/yield/time donors regardless of an explicitly recorded invalid negative/nonfinite/typed grinder or out-of-bound optional temperature, enabling a mandatory spurious outlier prompt.",
+      "grade": "DIRECT_LIVE_SOURCE_STATIC_NEGATIVE_REPRO_EXPECTED; CI_REGRESSION_PENDING",
+      "current_app": "site/lib/engine.js Git blob 9b0071f2bdd89b931662fe3232d4659524ad2e67 at parent eeec5a9bb88f73c69ab4eccaab46e8f14462d534",
+      "result": "SAFE_NARROW_EVIDENCE_FILTER_STAGED",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CODE-164-B",
+      "source": "LIVE-20261110-ISSUE455-ENGINE-OUTLIER-PREDICATE",
+      "claim": "Preserve previously unrecorded legacy controls, positive/negative measured cases, 4-donor count, ratio deviation >1.25 and time deviation >25, exact coffee/style/setup/feed/basket/calibration, and original notes/ratings; reject explicitly impossible prior controls and current same-version out-of-espresso-range grinder values.",
+      "grade": "LOCKED_COMPATIBILITY_SYNTHETIC_TEST_CASES_SOURCE_BOUND_CI_PENDING",
+      "current_app": "New test tests/issue455-outlier-explicit-controls.test.mjs checks exclusions, inclusive controls, no mutation and saveShot integration.",
+      "result": "FOCUSED_POSITIVE_NEGATIVE_REGRESSION_STAGED_NOT_CI_PASSED",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [],
@@ -4594,7 +4612,8 @@
     "R455-158 FINAL @befc282154c5ddc15a123fc2d5ee37e87b2112f6: PR1809 nonforce merged, five source/testing blobs exact head, 5/5 new regression groups PASS, Node22 head/merge 3402/0/6, approval/browser/SQL/security appropriate SUCCESS; queue READY dev-only. 87 sources / 232 bounded checks / 119 proposals; original603 SKIPPED, #267 literal zero, S019 original unavailable, no publish.",
     "R455-160 @f2d7d0146ad3920d89f9d728d388fa00482a7752: original 2026 Cusielo espresso/decaffeinated sweetener QDA 13 selected vs abstract 18 discrepancy and Table 4 body p>0.05 vs prose; 89 sources / 236 bounded checks / 121 proposals; no unsweetened/personal taste rule, no runtime/Locked/release change; docs CI/merge pending; S019 standalone inaccessible; #267 literal credit zero.",
     "R455-161 @d535a5bb04b402209d04897f8b9d46b3e407f87b: direct Library 10pp PDF page 8-9 hypothesis that slow-feed mode changes alone create a recipe family DISALLOWED by later Locked Master ('Slow Feed remains a grinder condition, does not itself create a family or Experiment'); current engine assignment ratio/coffee/style and grinder feed conditioning crosschecked. 89 sources / 238 checks / 122 proposals; no new code/Locked/queue/production change, no owner decision. Original PDF already inventoried, different registered archive hash, S019 inaccessible. Git PR/CI/merge pending; #267 literal credit zero.",
-    "R455-162 @9743126ad5f920f5cd56f9d5f654fb643312801f: independently reviewed original 2026 Lo Vecchio et al. 3-brewer coffee study (DOI 10.3390/separations13060166): single blend, non-equivalent dose/yield/apparatus, pooled composite chemistry, 10-person duplicate sensory panel, manufacturer-provided test device and consultancy disclosed; neither 10s/nominal15bar nor sweetness panel is universal DIC espresso advice. 90 sources / 240 bounded checks / 123 proposals; no safe runtime bug, Locked/queue/main/release/Netlify/provider change or #267 literal-line credit; original publisher PDF/raw data and standalone S019 PDF not accessed; Git PR/CI/merge to verify."
+    "R455-162 @9743126ad5f920f5cd56f9d5f654fb643312801f: independently reviewed original 2026 Lo Vecchio et al. 3-brewer coffee study (DOI 10.3390/separations13060166): single blend, non-equivalent dose/yield/apparatus, pooled composite chemistry, 10-person duplicate sensory panel, manufacturer-provided test device and consultancy disclosed; neither 10s/nominal15bar nor sweetness panel is universal DIC espresso advice. 90 sources / 240 bounded checks / 123 proposals; no safe runtime bug, Locked/queue/main/release/Netlify/provider change or #267 literal-line credit; original publisher PDF/raw data and standalone S019 PDF not accessed; Git PR/CI/merge to verify.",
+    "R455-164 @eeec5a9bb88f73c69ab4eccaab46e8f14462d534: source repro showed four historical explicit invalid grinder/temp records can falsely count for mandatory outlier prompt. Same-commit engine/test/source-ledger/journal staged; run exact PR-head Node22 and applicable governance, repair failures, nonforce merge, readback merged CI, reconcile queue/status and Issue #455. No numeric/Locked/product/production change. #267 line credit 0; S019 original inaccessible."
   ],
   "latest_review_checkpoint": {
     "id": "R455-163",
@@ -4619,8 +4638,11 @@
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
-    "status": "AUTHORED_DOC_ONLY_CI_AND_MERGE_PENDING",
-    "next_action": "Verify exact PR-head checks and safe nonforce merge, merged Git blob equivalence and applicable CI; next disjoint UX/source review; S019 still inaccessible."
+    "status": "STAGED_PR_HEAD_CI_PENDING",
+    "next_action": "Verify exact PR-head checks and safe nonforce merge, merged Git blob equivalence and applicable CI; next disjoint UX/source review; S019 still inaccessible.",
+    "run_id": "R455-164",
+    "source_sha": "eeec5a9bb88f73c69ab4eccaab46e8f14462d534",
+    "scope": "isExtreme explicit invalid controls"
   },
   "policy_decisions_resolved": [
     {
@@ -7221,6 +7243,27 @@
       "implementation": "DOCS_ONLY_LEDGER_JOURNAL_CURRENT_STATUS; NO_CODE_UI_SQL_LOCKED_CHANGE",
       "test_plan": "Parse JSON unique 91/242/124; docs-only applicable PR CI; nonforce merge and exact merged blobs. No Node/browser/offline/SQL/physical espresso testing in this source-only step.",
       "release_queue_status": "NOT_APPLICABLE",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-164-OUTLIER-EXPLICIT-CONTROLS",
+      "finding": "Four historical all-five-green rows can trigger an unjustified mandatory outlier-review prompt even when their explicitly recorded grinder settings or optional temperature could not have been entered and cannot serve as comparable recipe evidence.",
+      "evidence": [
+        "R455-EV-CODE-164-A",
+        "R455-EV-CODE-164-B"
+      ],
+      "severity": "P2_LOG_RATE_MANDATORY_REVIEW_FALSE_POSITIVE_RISK_SYNTHETIC_NOT_OBSERVED_MEMBER_INCIDENT",
+      "user_benefit": "Keep mandatory outlier review tied to usable measured historical shots, preserve measured originals and every one of five ratings.",
+      "current_locked": "Same-coffee, same-style/setup and comparable feed/basket/calibration, 4 recorded all-green successes, strict >1.25 ratio or >25s threshold; preserve offline legacy records and member-private notes.",
+      "current_app": "Exact source eeec5a9bb88f73c69ab4eccaab46e8f14462d534 engine blob 9b0071f2bdd89b931662fe3232d4659524ad2e67 excludes invalid dose/yield/time but did not reject explicitly unusable grinder or optional temperature in isExtreme; separate overview/recommendation predicates already reject invalid recorded controls.",
+      "proposed_change": "SAFE only: exclude explicit nonfinite, negative or same-version out-of-range prior grinder, invalid optional temperature from outlier reference pool. Keep missing legacy controls eligible and never mutate archived rows, numeric policies, recs or product form.",
+      "evidence_grade": "DIRECT_CURRENT_CODE_STATIC_REPRO_AND_FOCUSED_SYNTHETIC_REGRESSIONS; REAL_MEMBER_IMPACT_UNVERIFIED",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "SAME_COMMIT_ENGINE_TEST_LEDGER_JOURNAL_STAGED_PR_HEAD_CI_PENDING",
+      "test_plan": "Node22 tests/issue455-outlier-explicit-controls.test.mjs five scenario groups; exact-source selected Node/UX/offline/source governance and browser/cloud routes as CI applies; read PR merge source and queue before READY; no fresh production SQL/Auth/Edge tests or real espresso outcome claims.",
+      "release_queue_status": "IN_PROGRESS_NOT_READY_NOT_DEPLOYED",
       "github267_literal_review_credit": 0,
       "production_deployed": false
     }
