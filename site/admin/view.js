@@ -94,7 +94,6 @@ export function renderAdminDashboard(data={},access=null,_legacySlot=null,candid
  ${stat('Approved Coffees',count('approved',stats.verified_coffees),'approved')}${stat('Logged Shots',count('shots',stats.shot_records),'shots')}
  ${stat('New Accounts',stats.pending_accounts,'new-members')}${stat('Admitted Accounts',count('accounts',stats.active_accounts),'accounts')}
  </section>
- <section class="admin-panel admin-record-section" id="admin-new-members" tabindex="-1">${renderPendingSignups(options.signupRequests,stats.pending_accounts)}</section>
  <section class="admin-panel admin-record-section" id="admin-pending" tabindex="-1">
  ${adminDisclosure('Pending Coffee Review','pending',count('pending',stats.pending_coffees),reviewSection('pending','No pending coffee submissions.'),{expanded:options.openSections?.has('pending')})}
  </section>
@@ -103,6 +102,7 @@ export function renderAdminDashboard(data={},access=null,_legacySlot=null,candid
  </section>
  ${renderAdminRecordCollection('approved',records.approved||(options.openSections?.has('approved')?{loading:true}:{total:stats.verified_coffees}),{expanded:options.openSections?.has('approved')})}
  ${renderAdminRecordCollection('shots',records.shots||(options.openSections?.has('shots')?{loading:true}:{total:stats.shot_records}),{expanded:options.openSections?.has('shots'),openCoffeeGroups:options.openCoffeeGroups})}
+ <section class="admin-panel admin-record-section" id="admin-new-members" tabindex="-1">${renderPendingSignups(options.signupRequests,stats.pending_accounts)}</section>
  <section class="admin-panel admin-record-section" id="admin-accounts" tabindex="-1">${adminDisclosure('Accounts','accounts',count('accounts',stats.active_accounts),access?renderAdminAccessPanel(access,records.accounts):'<p class="helper" role="status">'+(options.openSections?.has('accounts')?'Loading account records…':'Open to load account records.')+'</p>',{expanded:options.openSections?.has('accounts')})}</section>
  <section class="admin-panel admin-health" id="admin-infrastructure" tabindex="-1">${adminDisclosure('Infrastructure','infrastructure',null,'<p>Database status and access are checked on refresh. Verified backup freshness is managed separately in GitHub and private Google Drive; it is not reported as healthy without evidence.</p><p class="helper">Manual coffee review is administrator-only. A manually approved coffee is not mislabeled as independently source-verified. Account approval is administrator-only.</p>',{expanded:options.openSections?.has('infrastructure')})}</section>`;
 }

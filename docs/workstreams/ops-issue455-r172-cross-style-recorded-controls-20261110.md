@@ -18,3 +18,7 @@
 5. docs/workstreams/ops-issue455-r172-cross-style-recorded-controls-20261110.md
 
 At authoring: **TESTS NOT RUN / PR NOT MERGED / IN_PROGRESS NOT READY**. Require exact PR-head Node22 functional/lint, relevant browser/mobile/offline and governance/security checks, then nonforce merge respecting concurrent work, matching reviewed blobs and merged-source CI. Only a separate verified reconciliation may mark queue READY. Original 603 benchmark not inferred passed from SKIPPED; research-pack 48 reference cases are RESEARCH-ONLY. Source register has no new source; approval matrix has no new owner decision. #455 remains OPEN. No deployment, move of main/release, live SQL/Auth/Edge/member/provider write, secrets, force Git, price or visibility operation.
+
+## Concurrent queue collision resolution (same feature branch, subsequent nonforce merge)
+
+While exact source CI ran, independent #1935, #33 and #509 workers modified `docs/RELEASE_QUEUE.json` repeatedly. Previously authored feature history included an IN_PROGRESS item, but its competing queue blob is **NOT proposed for integration in final code PR**. Rebuild from latest development tree with unchanged engine and six tests, preserving live queue byte-for-byte. **Queue intake and eventual READY must be added by a separate source-bound documentation reconciliation after code merge**. This amendment does not certify test pass or real-user behavior; exact new PR-head CI remains required. Earlier branch history and CI receipts preserved, not force rewritten.
