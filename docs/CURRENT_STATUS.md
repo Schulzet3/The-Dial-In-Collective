@@ -4,6 +4,13 @@
 
 ---
 
+## November 10, 2026 UTC — Issue #455 R150 original expert sensory method applicability review [skip netlify]
+
+- Directly reviewed original [Guinard et al. 2026](https://www.mdpi.com/2304-8158/15/4/678) Methods, Tables and Results. 56 professional experts, 12 diverse coffees, heterogeneous preferred brew methods, conventional scoring always before the Coffee Cuality JAR/CATA method; 18 qualitative focus-group respondents. No validation of DIC's personal espresso five-taste scales, feedback algorithm or cup-quality improvement. Published prose says upper score 82.71 while Table 2 reports C6 at **84.62**; discrepancy recorded, not silently resolved.
+- [Source/claim ledger](audits/issue455-research-source-coverage-20261103.json) now **80 sources / 215 checks / 111 proposals**; [scoped journal](workstreams/ops-issue455-r150-cuality-primary-sensory-20261110.md). Research-only, exact docs PR/CI pending at authoring; no app, schema, Locked, release queue, production or provider changes. S019 standalone original still unavailable/unreviewed; no #267 direct-line credit.
+
+---
+
 ## November 9, 2026 MST / November 10 UTC — Issue #33 R73 Zeke's original603 #601–603 selected source VERIFIED [skip netlify]
 
 - Independently verified fresh guarded official selected HTML and actual extractor for **#601 Colombia Huila** (reused Sierra Nevada URL slug), **#602 The Garcias Marcala Lenca** (Medium-Light; no invented green process/notes), **#603 PRODECOOP Nicaragua Segovia** (Palacaguina **mill**, not growing origin). Zero parser conflicts; Add Coffee/Source Review both rendered; no new runtime defect or READY item.
