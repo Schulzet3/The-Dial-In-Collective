@@ -36,3 +36,26 @@ test('regular and half-caf cannot inherit complete decaffeination method',()=>{
   assert.equal(r.fields.decaffeination_method,undefined,JSON.stringify(r.fields));
  }
 });
+
+
+import {selectedLiteralBroadBlendRegions} from '../src/server/coffee-selected-broad-blend-regions.mjs';
+test('both explicitly named selected broad regions survive, not a fabricated country',()=>{
+ const direct=[{text:'These Central American & African beans are naturally decaffeinated.',section:'Dark Decaf'}];
+ assert.deepEqual(selectedLiteralBroadBlendRegions(direct,{origin:'Central America'}),
+  {value:'Central America, Africa',quote:'These Central American & African beans'});
+});
+test('nonselected, educational, contradictory and precise-country sources cannot be enriched',()=>{
+ const own={text:'These Central American & African beans.',section:'Dark Decaf'};
+ for(const [blocks,origin] of [
+  [[{text:'These Central American beans. Our African coffee is different.'}],'Central America'],
+  [[own],'Guatemala'],[[{...own,educational:true}],'Central America'],
+  [[{...own,section:'Related Products'}],'Central America'],
+  [[{text:'Another coffee uses these Central American & African beans.'}],'Central America']
+ ])assert.equal(selectedLiteralBroadBlendRegions(blocks,{origin}),null);
+});
+test('real selected direct mixed broad regions extend one-region parser evidence',()=>{
+ const r=extractPublicCoffeeFacts(page(),{source_url:url});
+ assert.equal(r.ok,true,JSON.stringify(r));
+ assert.equal(r.fields.origin,'Central America, Africa',JSON.stringify(r.fields));
+ assert.equal(r.fields.process,undefined);
+});

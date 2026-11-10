@@ -46,6 +46,7 @@ if(process.env.DIC_ISSUE33_R85_VERIFY==='1'){
  check(!f.tasting_notes||!norm(f.tasting_notes).includes('farm direct'),'farm_direct_not_flavor');
  check(!['producer','variety','elevation_m'].some(k=>f[k]),'no_unpublished_farm');
  check(!/\b(?:guatemala|ethiopia|colombia|honduras|kenya|mexico)\b/i.test(f.origin||''),'no_invented_countries');
+ check(norm(f.origin)==='central america africa','both_selected_broad_regions');
  check(!(r.conflicts||[]).length,'no_conflict');
  check(r.add_coffee_ui_rendered===true&&r.source_review_rendered===true,'real_add_coffee_review');
  const verdict={source_sha:report?.source_sha,case_numbers:[400],raw_html_sha256:html?sha(html):null,
