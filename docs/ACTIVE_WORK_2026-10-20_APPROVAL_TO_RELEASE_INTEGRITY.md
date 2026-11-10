@@ -466,3 +466,6 @@ Owner-authorized release DIC-20261106-READY7-23 independently verified DEPLOYED:
 
 ## November 10, 2026 — #1756 CI repairs: secure session rights and queue classification [skip netlify]
 - Source PR1757 governance inventory now explicitly covers new owner approval. Queue source acceptance required an IN_PROGRESS row owning seven intended Auth/SQL/Admin paths; added DIC-Q-1756-admin-signup-approval-retire-invites without disturbing any deployed/READY/other rows. Isolated SQL revealed private.session_status() EXECUTE denied to authenticated after rewrite; restore authenticated permission exactly as currently used in production, keep anon denied. Auth/admin role and pending admission checks unchanged; no live production migration/data/Netlify changes. Subsequent exact CI and code-era fixture replacement still must pass before READY.
+
+## November 10, 2026 — #1756 isolated SQL tests now respect private RLS [skip netlify]
+- Second exact PR SQL 42740943437 completed failed in synthetic test, not migration: test queried private.beta_members/auth.users as role authenticated after legitimate admin RPC. Corrected test to assess only RPC outcomes under authenticated and inspect backend tables after RESET ROLE in disposable dic_ci. This strengthens rather than weakens private RLS. No live SQL/records/Netlify changed, exact new CI required.

@@ -61,25 +61,28 @@ begin
  if decision->>'code'<>'verify_email_first' then
   raise exception 'Unverified email was approved';end if;
  decision:=public.dic_admin_review_signup(pending_id,'approve','pending');
- if decision->>'decision'<>'approve' or not (select enabled from private.beta_members where owner_id=pending_id) then
+ if decision->>'decision'<>'approve' then
   raise exception 'Verified account could not be approved';end if;
  decision:=public.dic_admin_review_signup(pending_id,'reject','pending');
  if decision->>'code'<>'stale_review' then
   raise exception 'Repeated review was not rejected';end if;
  decision:=public.dic_admin_review_signup(unverified_id,'reject','pending');
- if decision->>'decision'<>'reject' or
-  (select signup_review_state from private.beta_members where owner_id=unverified_id)<>'rejected' then
+ if decision->>'decision'<>'reject' then
   raise exception 'Reject did not preserve Auth while withholding admission';end if;
- if (select count(*) from auth.users where id in(member_id,pending_id,unverified_id))<>3 then
-  raise exception 'Review deleted real Auth identity';end if;
- if (select count(*) from private.dic_signup_review_events
-    where member_id in(pending_id,unverified_id))<>2 then
-  raise exception 'Signup review audit count mismatch';end if;
  denied:=false;
  begin perform public.dic_admin_review_signup(admin_id,'reject','pending');
  exception when insufficient_privilege or invalid_parameter_value then denied:=true;end;
  if not denied then raise exception 'Admin self-account not protected';end if;
  execute 'reset role';
+ -- Only the disposable privileged harness can inspect protected private rows.
+ if (select enabled from private.beta_members where owner_id=pending_id) is distinct from true then
+  raise exception 'Approved signup was not admitted';end if;
+ if (select signup_review_state from private.beta_members where owner_id=unverified_id)<>'rejected' then
+  raise exception 'Rejected signup was admitted';end if;
+ if (select count(*) from auth.users where id in(member_id,pending_id,unverified_id))<>3 then
+  raise exception 'Review deleted an Auth identity';end if;
+ if (select count(*) from private.dic_signup_review_events where member_id in(pending_id,unverified_id))<>2 then
+  raise exception 'Signup review audit missing';end if;
  if has_function_privilege('anon','public.dic_admin_signup_requests(integer,integer)','EXECUTE')
     or has_function_privilege('anon','public.dic_admin_review_signup(uuid,text,text)','EXECUTE') then
   raise exception 'Anonymous role can enumerate/review new accounts';end if;
