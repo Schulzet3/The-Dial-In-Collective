@@ -84,7 +84,7 @@ test('helper rejects duplicated identity, altered selected notes and milk-as-ing
 });
 
 
-test('R102 DEBUG isolate direct helper, scoped product twice, and parser field provenance',async()=>{
+test('selected original product paragraph with nonflavor trailing comma still adds exact intrinsic base',async()=>{
  const {refineSelectedCurrentFlavorBase}=await import('../src/server/coffee-selected-description-sensory.mjs');
  const e=cases[1],prose='Washed Process. Medium Light Roast. Its milk chocolate base is complemented with notes of stone fruit and honey, culminating in a refreshing, sweet acidity.';
  const html=markup(e,prose);
@@ -92,14 +92,16 @@ test('R102 DEBUG isolate direct helper, scoped product twice, and parser field p
  const a=refineSelectedCurrentFlavorBase(html,{clean,notes:'stone fruit and honey'});
  const b=refineSelectedCurrentFlavorBase(productMarkup(html),{clean,notes:'stone fruit and honey'});
  const p=extractPublicCoffeeFacts(html,{source_url:'https://'+e.host+e.path});
- const {productCoffeeProse}=await import('../src/server/coffee-product-prose.mjs');
- const blocks=productCoffeeProse(html,clean).filter(x=>x.tag==='h1'||x.tag==='p');
- console.log('R102_BLOCK_DIAGNOSTIC '+JSON.stringify(blocks.map(x=>({tag:x.tag,text:x.text,section:x.section,educational:x.educational}))));
- console.log('R102_SOURCE_DIAGNOSTIC '+JSON.stringify({
-  first:a,second:b,seo_fallback_fields:p.seo_fallback_fields,
-  conflicts:p.conflicts,actual:p.fields.tasting_notes,
-  factnotes:(p.source_facts||[]).filter(x=>x.field==='tasting_notes').map(x=>({label:x.label,source_type:x.source_type,value:x.value})).slice(0,10)
- }));
+ assert.match(p.fields.tasting_notes||'',/milk chocolate/i,JSON.stringify(p.fields));
  assert.match(a,/milk chocolate/i);
  assert.match(b,/milk chocolate/i);
+});
+
+
+test('a related non-selected section cannot supply the missing flavor base',async()=>{
+ const {refineSelectedCurrentFlavorBase}=await import('../src/server/coffee-selected-description-sensory.mjs');
+ const e=cases[1],clean=value=>String(value).replace(/<[^<>]{0,2000}>/g,' ').replace(/\s+/g,' ').trim();
+ const html=markup(e,'Notes of stone fruit and honey.',
+   '<section><h2>Different Coffee</h2><p>Its milk chocolate base is complemented with notes of stone fruit and honey.</p></section>');
+ assert.equal(refineSelectedCurrentFlavorBase(html,{clean,notes:'stone fruit and honey'}),'');
 });

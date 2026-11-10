@@ -149,7 +149,7 @@ export function refineSelectedCurrentFlavorBase(html,{clean,notes}={}){
    // mouthfeel, texture, milk service, generic "sweetness", or provenance.
    if(!/\b(?:chocolate|cocoa|cacao|caramel|toffee|hazelnut|almond|nougat|praline|vanilla|berry|cherry|fruit)\b/iu.test(base)||
       /\b(?:body|acidity|mouthfeel|finish|roast|brewing|brewed|served|with milk|coffee|beans?|texture|milk foam|creaminess|sweetness|processing)\b/iu.test(base))continue;
-   const tail=match[2].replace(/,\s*(?:culminating|ending|resulting|leading)\b[^,]*$/iu,'').trim();
+   const tail=match[2].replace(/,\s*(?:culminating|ending|resulting|leading)\b.*$/iu,'').trim();
    const printed=tail.split(/\s*(?:,|&|[•·;|]|\band\b)\s*/iu).map(s=>s.trim()).filter(Boolean);
    if(printed.length!==parts.length||printed.some(p=>!normalizeExplicitCoffeeTastingNotes(p))||
       !parts.every(p=>printed.some(t=>fold(t)===fold(p))))continue;
