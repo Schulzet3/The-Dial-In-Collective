@@ -62,8 +62,18 @@ export function selectedCurrentLeadRoastNotes(html,{name='',clean,notes=''}={}){
   candidates.set(key(canonical)+'|'+key(complete),{roast_level:canonical,
    tasting_notes:complete,quote:b.text});
  }
- // A competing directly printed roast/notes list cannot be silently resolved.
+ // Independent direct selected Roast: or Roast Level: paragraphs are
+ // material contradictions, not a coarse graphical Light-to-Dark axis.
+ // Fail closed if any differs from the product's immediate printed lead.
  if(candidates.size!==1)return null;
+ const chosen=[...candidates.values()][0];
+ const typed=selectedBlocks(html,{name,clean,maxDistance:80000})
+  .filter(b=>['p','li','dd'].includes(b.tag)&&b.text.length<=90)
+  .map(b=>b.text.match(/^Roast(?:\s+(?:Level|Profile|Degree))?\s*[:：]\s*(Ultra[ -]Light|Very[ -]Light|Medium[ -]Light|Light[ -]Medium|Medium[ -]Dark|Light|Medium|Dark)[.!?]?\s*$/iu)?.[1])
+  .filter(Boolean).map(s=>s.replace(/\s+/gu,'-').replace(/\b\p{L}/gu,c=>c.toUpperCase()))
+  .map(s=>s==='Light-Medium'?'Medium-Light':s);
+ if(typed.some(level=>level!==chosen.roast_level))return null;
+
  const one=[...candidates.values()][0];
  if(typeof notes!=='string'||!notes||
   !(coffeeTastingNotesSubset(safeNotes(notes),one.tasting_notes)||

@@ -103,3 +103,24 @@ test('direct standalone selected lead helper accepts a short note-list punctuati
  assert.equal(got.roast_level,'Medium-Dark');
  assert.match(got.tasting_notes,/malt/i);
 });
+
+test('a separately labeled conflicting direct roast must not be overridden by the lead',()=>{
+ const e=cases[2],markup=page(e,
+ '<p>Medium-dark roast with notes of dark chocolate and malt, dark cherry and wild honey.</p>'+
+ '<p>Roast: Light</p><p>Tasting Notes: Dark Chocolate, Dark Cherry, Wild Honey.</p>');
+ const c=(s,n)=>String(s||'').replace(/<[^>]{0,1800}>/gu,' ').replace(/\s+/gu,' ').trim().slice(0,n);
+ assert.equal(selectedCurrentLeadRoastNotes(markup,{name:e.name,clean:c,notes:'Dark Chocolate, Dark Cherry, Wild Honey.'}),null);
+ const extracted=extractPublicCoffeeFacts(markup,{source_url:'https://'+e.host+e.path});
+ assert.equal(extracted.ok,true,JSON.stringify(extracted));
+ assert.notEqual(extracted.fields.roast_level,'Medium-Dark',JSON.stringify(extracted));
+});
+test('Light-to-Dark roast graphic endpoints are not a second selected Roast: value',()=>{
+ const e=cases[2],markup=page(e,
+ '<p>Medium-dark roast with notes of dark chocolate and malt, dark cherry and wild honey.</p>'+
+ '<h4>Roast Level</h4><p>Light Roast Dark Roast</p>'+
+ '<p>Tasting Notes: Dark Chocolate, Dark Cherry, Wild Honey.</p>');
+ const extracted=extractPublicCoffeeFacts(markup,{source_url:'https://'+e.host+e.path});
+ assert.equal(extracted.ok,true,JSON.stringify(extracted));
+ assert.equal(extracted.fields.roast_level,'Medium-Dark',JSON.stringify(extracted));
+ assert.match(extracted.fields.tasting_notes||'',/malt/i);
+});

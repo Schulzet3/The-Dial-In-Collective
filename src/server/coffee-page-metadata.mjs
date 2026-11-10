@@ -2635,8 +2635,30 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   name:fields.name,clean,notes:fields.tasting_notes||''
  });
  if(lead){
-  if(!fields.roast_level&&!conflicts.has('roast_level')){
+  // A generic roast-visual comparison can mistake Light/Dark scale
+  // endpoints or untyped page prose for actual present bag alternatives.
+  // Only a unique exact-H1 immediately adjacent printed roast+notes lead,
+  // with no second direct typed selected roast or incompatible source fact,
+  // can resolve that unqualified visual conflict. Never suppress an actual
+  // independently labeled contradictory selected roast.
+  const contraryDirect=source_facts.some(f=>f.field==='roast_level'&&
+   ['html','product_json'].includes(f.source_type)&&
+   normalizeRoastLabel(String(f.value||''))&&
+   normalizeRoastLabel(String(f.value||''))!==lead.roast_level);
+  const priorUnqualifiedConflict=conflicts.has('roast_level')&&
+   roast_evidence.confidence==='conflict'&&!contraryDirect;
+  if(!fields.roast_level&&
+   (!conflicts.has('roast_level')||priorUnqualifiedConflict)){
    fields.roast_level=lead.roast_level;
+   if(priorUnqualifiedConflict){
+    conflicts.delete('roast_level');
+    const alternatives=(roast_evidence.conflicting_roast_values||[]).join(', ');
+    if(alternatives&&source_facts.length<384)source_facts.push({
+     field:'roast_context',label:'Unqualified roast visual alternatives (review only)',
+     value:alternatives.slice(0,250),source_url,source_type:'html',
+     section:'Generic graphic/context; not exact current selected roast caption'
+    });
+   }
    if(source_facts.length<384)source_facts.push({
     field:'roast_level',label:'Direct selected lead roast with own notes',
     value:lead.roast_level,source_url,source_type:'html',
