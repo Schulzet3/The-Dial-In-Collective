@@ -4591,18 +4591,18 @@
       "id": "R455-EV-APP-168-A",
       "source": "site/lib/community-evidence.js Git blob 74c93c7ff7814337752e0ef9052412eaf55890e3 at development 2cdfa50691d48e4d1dad0fc1e9b659c302a897d5",
       "claim": "selectCommunityPrior accepted Boolean true as measured ratio=1 and time_s=1; singleton numeric arrays were also silently converted. High-contributor malformed candidates can outrank usable aggregate evidence.",
-      "grade": "DIRECT_ORIGINAL_GIT_BLOB_SHA_MATCHED_IN_LOCAL_NODE22_REPRODUCTION_NOT_OBSERVED_MEMBER_INCIDENT",
+      "grade": "DIRECT_SOURCE_GIT_BLOB_AND_SYNTHETIC_NODE22_REPRO_WITH_EXACT_PR_HEAD_MERGE_CI_VERIFIED_NOT_REAL_MEMBER_INCIDENT",
       "current_app": "Weak unproven Community starting prior; existing 0.5<ratio<8 and 1<=time<=180, verified source and noncalibrated controls; no evidence of actual corrupted server aggregates.",
-      "result": "REPRODUCED_NEGATIVE_USING_ORIGINAL_BLOB; FOUR_LOCAL_POST_FIX_REGRESSION_GROUPS_PASS; REMOTE_CI_NOT_YET_EXECUTED",
+      "result": "FINAL_PR_HEAD_42887964674_AND_EXACT_MERGE_42888613274_3600_PASS_0_FAIL_6_INTENTIONAL_SKIP_EACH; R168_FOUR_GROUPS_PASS",
       "owner_approval": false
     },
     {
       "id": "R455-EV-APP-168-B",
       "source": "tests/issue455-community-aggregate-numeric-types.test.mjs and site/lib/community-evidence.js",
       "claim": "Reject nonprimitive booleans, array/object coercions and empty string readings; preserve genuine numeric readings and legacy decimal strings, existing time/ratio boundaries, independent contributor ranking and source immutability.",
-      "grade": "FOUR_DIRECT_SYNTHETIC_POSITIVE_NEGATIVE_NODE22_LOCAL_PASS_REMOTE_CI_PENDING",
+      "grade": "FOUR_DIRECT_SYNTHETIC_NEGATIVE_POSITIVE_GROUPS_EXACT_PR_AND_MERGE_PASS",
       "current_app": "Only eligibility of malformed numeric types in Community aggregates; does not alter original member/private data or stored Community records.",
-      "result": "LOCAL_NODE22_4_PASS_0_FAIL; PR_HEAD_AND_MERGE_CI_NOT_YET_RUN",
+      "result": "FOUR_GROUPS_PASS_IN_LOCAL_NODE22_PR_HEAD_AND_EXACT_MERGE; BROWSER_OFFLINE_SQL_SECURITY_APPROVAL_HEAD_SUCCESS; MERGED_BROWSER_AND_APPROVAL_SUCCESS; FROZEN603_SKIPPED",
       "owner_approval": false
     }
   ],
@@ -4615,6 +4615,7 @@
     "reason": "R455-123 verified existing Locked 70-100 C recorded-temperature guard prevents invalid imported temp from becoming personal grind evidence; six direct-module tests and exact source CI, no scientific target or deployed change."
   },
   "next_actions": [
+    "R455-168 FINAL: PR1901 exact reviewed head 3b65c3... nonforce merged 767e12c8e763959f0b6677f4de7ad7e69ce80cf3 all five blobs identical. Node22/lint 3600 PASS/0 FAIL/6 SKIP head 42887964674 and merge 42888613274; mobile/browser/offline, head SQL/security and approval, merged governance all SUCCESS; original603 SKIPPED. Queue READY development-only, not published. S019 unavailable, #267 separate V2 literal review uncredited.",
     "R455-168 source 2cdfa50691d48e4d1dad0fc1e9b659c302a897d5: exact old Community prior Git blob 74c93c7ff7814337752e0ef9052412eaf55890e3 reproduced coercion Boolean true -> ratio 1 or time 1; 4/4 local Node22 positive/negative PASS with guarded numeric primitives. NEXT: open PR, verify head Node22/browser/offline/SQL/security/governance; nonforce merge, verify exact merged source CI and READY queue reconciliation. S019 unavailable, #267 no literal credit.",
     "R455-166 FINAL code PR #1878 head fc4f48... merged nonforce f7f9eb97fb864f255a90bccbcacaa9d52b2e35a4 exact all five Git blobs; head 3571/0/6 and merged 3571/0/6 all six R166 PASS, browser/offline/mobile and governance merged PASS, head SQL/security PASS. Scoped queue READY DEV ONLY and docs reconciliation PR CI pending. S019 unverified, #267 literal audit credit zero.",
     "R455-166 exact original development 56eeeda0a47d9cc95d75521f559f0d4d95344290: coded similar-coffee explicit grinder/temperature evidence guard, six new direct synthetic groups; exact PR-head CI, nonforce merge, merged source and READY reconciliation PENDING; S019 inaccessible, zero #267 literal review credit.",
@@ -4714,15 +4715,15 @@
   ],
   "latest_review_checkpoint": {
     "run_id": "R455-168",
-    "source_sha": "2cdfa50691d48e4d1dad0fc1e9b659c302a897d5",
+    "source_sha": "767e12c8e763959f0b6677f4de7ad7e69ce80cf3",
     "issue": 455,
-    "phase": "SAFE_COMMUNITY_NUMERIC_TYPE_GUARD_BRANCH_COMMITTED_REMOTE_CI_NOT_YET_VERIFIED",
+    "phase": "SAFE_COMMUNITY_TYPE_GUARD_NONFORCE_MERGED_EXACT_HEAD_AND_MERGED_CI_VERIFIED_READY_DOCS_RECONCILIATION",
     "source_counts": {
       "sources": 92,
       "evidence_checks": 252,
       "proposals": 129
     },
-    "release_state": "IN_PROGRESS_NOT_READY_NOT_DEPLOYED",
+    "release_state": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
     "original_s019": "UNAVAILABLE_NOT_REVIEWED",
     "github267_literal_review_credit": 0
   },
@@ -7435,18 +7436,20 @@
       "evidence_grade": "DIRECT_CURRENT_SOURCE_REPRO_LOCAL_NODE22_SYNTHETIC_NOT_REAL_MEMBER_QUALITY_EVIDENCE",
       "approval_required_for_behavior_change": false,
       "owner_approval_now_required": false,
-      "implementation": "CODE_TEST_LEDGER_SAME_COMMIT_BRANCH_AWAITING_GITHUB_PR_HEAD_CI_AND_NONFORCE_MERGE",
-      "test_plan": "Local Node22 4/4 passing; PR-head full applicable Node22/lint/build, browser/mobile/offline/a11y, isolated SQL/security/governance; nonforce merge; exact merged Git blobs and CI; frozen603 not applicable unless triggered.",
-      "release_queue_status": "IN_PROGRESS_NOT_READY_NOT_DEPLOYED",
+      "implementation": "PR1901_HEAD_3b65c3cb47b0a31d65f92e461ccd438b944ac541_NONFORCE_SQUASH_MERGED_767e12c8e763959f0b6677f4de7ad7e69ce80cf3_ALL_FIVE_BLOBS_IDENTICAL_3600_PASS_0_FAIL_6_SKIP_PR_AND_MERGE",
+      "test_plan": "Local 4/4 pass; original governance 42887528841 + 42887791722 FAIL corrected by queue IN_PROGRESS and explicit null source; reviewed PR-head Node22/lint/build 42887964674 3600/0/6 with all four R168 pass, mobile/browser/offline 42887964682, SQL 42887964407, source security 42887965516, approval 42887964596 all SUCCESS. Exact merge Node22/lint/build 42888613274 3600/0/6 R168 four pass, mobile/browser/offline 42888613128, governance 42888613001 all SUCCESS. Frozen603 42887965178 SKIPPED, no real members or sensory quality trial.",
+      "release_queue_status": "DIC-Q-455-community-aggregate-numeric-type-integrity_READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
       "github267_literal_review_credit": 0,
-      "production_deployed": false
+      "production_deployed": false,
+      "merge_sha": "767e12c8e763959f0b6677f4de7ad7e69ce80cf3",
+      "pr_number": 1901
     }
   ],
   "changeScope": {
     "application_code_changed": true,
     "tests_executed": true,
     "production_deployed": false,
-    "queue_changed": false,
-    "reason": "R168 local Node22 direct 4/4 PASS; GitHub PR-head/merged CI PENDING; no READY/deploy."
+    "queue_changed": true,
+    "reason": "R168 safely corrected Community numeric primitive eligibility, PR/head and exact merge 3600/0/6 Node22, browser/offline, SQL/security/approval verified; scoped READY development only."
   }
 }
