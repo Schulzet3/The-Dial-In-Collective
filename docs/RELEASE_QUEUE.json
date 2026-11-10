@@ -11052,12 +11052,12 @@
       "state": "IN_PROGRESS",
       "merged_source_sha": null,
       "scope_paths": [
-        "site/lib/model.js",
-        "tests/issue455-local-success-grind-temperature-eligibility.test.mjs"
+        "site/lib/model.js"
       ],
       "tests": [
         "R455-157 bounded source inspection reproduces model.hasLocalSuccess invalid-grind/temp green overview discrepancy; safe code+5 focused synthetic regressions committed with journal at b7c46ac56947936f2701d8268fb690718d704159. Unexecuted at intake.",
-        "Exact source Node22, applicable browser/mobile/offline, isolated SQL/auth and PR governance NOT YET VERIFIED."
+        "Exact source Node22, applicable browser/mobile/offline, isolated SQL/auth and PR governance NOT YET VERIFIED.",
+        "Initial PR-head approval/governance run42785313945 FAILED queue intake because tests/*.mjs was incorrectly included in deployable scope_paths; exact corrective queue-only intake removes test path while retaining regression test evidence and preserving failure receipt. Retest required."
       ],
       "ci_runs": [],
       "blockers": [

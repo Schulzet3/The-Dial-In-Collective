@@ -9,3 +9,7 @@ SAME-COMMIT files: site/lib/model.js, tests/issue455-local-success-grind-tempera
 Synthetic regression tests: invalid grinder missing/NaN/string/negative/out-of-range; invalid optional temperature including nonfinite/string; inclusive endpoints and optional absent temperature; unrelated style and coffee; valid older success amid invalid newer imported row; never mutate archived shot/notes. Original negative behavior previously passed model::hasLocalSuccess erroneously (source directly inspected); positive invariants retained. No local Node executable/source checkout, all CI PENDING at writing; do not count unrun tests as PASS.
 
 Next: scoped queue IN_PROGRESS intake and ledger evidence; exact PR-head Node22 + appropriate checks, nonforce merge, merged-source readback. READY only if independently verified. Standalone S019 original remains inaccessible; Issue #455 OPEN.
+
+## Post-commit governance correction
+
+Initial PR-head approval [42785313945](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42785313945) **FAILED** its release-queue intake because a test file was erroneously listed as a deployable queue scope path. Corrected queue scope to only site/lib/model.js (deployable) while preserving focused test evidence separately. This is a docs-only following commit; earlier failure is retained, no unrun PASS. Exact new head CI required.
