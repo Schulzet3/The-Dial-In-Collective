@@ -23,6 +23,18 @@ begin
     to_regprocedure('public.dic_redeem_invite(text)') is not null or
     to_regprocedure('public.dic_admin_issue_invite(text)') is not null then
   raise exception 'Old invitation tokens or RPCs remain';end if;
+ -- #509 R139: deliberately stage one inconsistent flag in disposable dic_ci
+ -- and prove that enabled=true without admitted_at NEVER grants member access.
+ -- This is a synthetic negative control, never a production account mutation.
+ update private.beta_members set enabled=true where owner_id=unverified_id;
+ perform set_config('request.jwt.claim.sub',unverified_id::text,true);
+ perform set_config('request.jwt.claims',jsonb_build_object('sub',unverified_id,'role','authenticated')::text,true);
+ execute 'set local role authenticated';
+ if private.is_member() or (public.dic_session_status()->>'admitted') is distinct from 'false' then
+  raise exception 'Enabled-but-unadmitted synthetic signup passed the member gate';
+ end if;
+ execute 'reset role';
+ update private.beta_members set enabled=false where owner_id=unverified_id;
  -- A confirmed new user has identity but no authorization or admin data.
  perform set_config('request.jwt.claim.sub',pending_id::text,true);
  perform set_config('request.jwt.claims',jsonb_build_object('sub',pending_id,'role','authenticated')::text,true);

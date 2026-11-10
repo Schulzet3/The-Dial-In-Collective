@@ -15996,5 +15996,25 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "Continue next genuinely unreviewed provider definition or changed live schema/role/Edge bundle, reconcile drift, bounded logs, and provider-console-only inaccessible setting inventory; do not double-credit stored 59/59 migration words."
+  },
+  "provider_member_admission_gate_run139": {
+    "status": "DEVELOPMENT_GUARD_AND_SYNTHETIC_TEST_STAGED_CI_PENDING",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_parent_sha": "b8fe6729ca2014831b4713d2c3ae2c334bb381a4",
+    "receipt_path": "docs/audits/issue509-provider-member-admission-gate-2026-11-10-run139.json",
+    "full_postrelease_changed_definitions_read": 5,
+    "dependent_gate_definitions_read": 2,
+    "read_source_characters": 18543,
+    "new_live_misstates": 0,
+    "locked_invariant": "membership requires both enabled and admitted_at",
+    "confirmed_conditional_defect": true,
+    "currently_affected_members": 0,
+    "source_migration": "supabase/migrations/20261110065000_dic_admitted_member_gate.sql",
+    "source_test": "supabase/tests/admin_invitation_controls.sql",
+    "tests": "PENDING_SOURCE_BOUND_CI",
+    "source_code_state": "TESTING",
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "Complete exact-source CI, then next unreviewed/changed provider object. No user records/identity logs."
   }
 }

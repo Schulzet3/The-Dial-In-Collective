@@ -10986,6 +10986,29 @@
       "delivered_tested_source_sha": "925c957a84d3f3e83cd15f062b7f78189adfc4cb",
       "delivered_release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
       "delivered_netlify_deploy_id": "6af2ad72c2aa765f588abc75"
+    },
+    {
+      "id": "DIC-Q-509-admitted-member-gate",
+      "issue": 509,
+      "pr": null,
+      "title": "Require admitted_at before enabled beta member may access private RPC/RLS state",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261110065000_dic_admitted_member_gate.sql"
+      ],
+      "tests": [
+        "Run139 live SQL/constraint/aggregate: private.is_member previously used enabled only; 0 live enabled-without-admission rows.",
+        "Disposable PostgreSQL admin_invitation_controls.sql new intentionally misflagged pending account negative + existing admin approved/rejected and member tests: CI PENDING.",
+        "Isolated signed JWT/Node/cloud and exact-source governance: PENDING; no passing claim."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source isolated PostgreSQL signup tests and signed JWT must pass",
+        "Source-bound Node/cloud and governance must pass before READY"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
+      "notes": "Development-only conditional fail-closed admitted member gate; no observed live bad admission, production change, or completed CI."
     }
   ],
   "history": [

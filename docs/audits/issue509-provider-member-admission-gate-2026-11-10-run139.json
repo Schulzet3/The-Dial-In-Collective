@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 139,
+  "project_ref": "azviqqejypsefzilgonr",
+  "branch_parent_sha": "b8fe6729ca2014831b4713d2c3ae2c334bb381a4",
+  "inspected_at_utc": "2026-11-10T06:45:00Z",
+  "scope": "Post-READY4 changed application Admin functions and explicit member admission gate; no previous word credit duplicated",
+  "sql_provider_status": "ACTIVE_HEALTHY_POSTGRES_17_11",
+  "current_app_function_count": 106,
+  "stored_migrations_count": 59,
+  "direct_complete_sources": [
+    {
+      "identity": "private.dic_admin_access_overview()",
+      "provider_source_md5": "e377ac910af0115040ad8f881cb01bfc",
+      "definition_chars": 1432,
+      "reviewed_char_range": [
+        1,
+        1432
+      ],
+      "full_definition": "CREATE OR REPLACE FUNCTION private.dic_admin_access_overview()\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n perform private.require_member();\n if auth.uid() is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator access required.';\n end if;\n return jsonb_build_object(\n  'members_total',(select count(*) from private.beta_members where admitted_at is not null),\n  'members',coalesce((\n   select jsonb_agg(jsonb_build_object(\n    'id',m.owner_id,'email',u.email,'enabled',m.enabled,\n    'admin',a.owner_id is not null,'admitted_at',m.admitted_at\n   ) order by (a.owner_id is not null) desc,m.admitted_at desc,m.owner_id)\n   from (select owner_id,enabled,admitted_at from private.beta_members\n     where admitted_at is not null order by admitted_at desc,owner_id limit 50) m\n   join auth.users u on u.id=m.owner_id\n   left join private.app_admins a on a.owner_id=m.owner_id\n  ),'[]'::jsonb),\n  'pending_deletions',coalesce((\n   select jsonb_agg(jsonb_build_object(\n    'id',op.id,'target_id',op.target_id,\n    'email',op.expected_impact->>'email',\n    'community_mode',op.community_mode,'phase',op.phase,'requested_at',op.requested_at\n   ) order by op.requested_at desc,op.id desc)\n   from private.dic_admin_account_delete_operations op\n   where op.actor_id=auth.uid() and op.phase<>'completed'\n  ),'[]'::jsonb)\n );\nend $function$\n",
+      "verdict": "COMPLETE_SOURCE_REVIEW_NO_ADDITIONAL_CONFIRMED_DEFECT"
+    },
+    {
+      "identity": "private.dic_admin_dashboard_read()",
+      "provider_source_md5": "5fa33bbe05e8408c1c2fe1b82d73a8ee",
+      "definition_chars": 2901,
+      "reviewed_char_range": [
+        1,
+        2901
+      ],
+      "full_definition": "CREATE OR REPLACE FUNCTION private.dic_admin_dashboard_read()\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n  if (select auth.uid()) is null or not private.is_admin() then\n    raise exception using errcode='42501', message='Administrator access required.';\n  end if;\n  return jsonb_build_object(\n    'review_only', true,\n    'generated_at', now(),\n    'counts', jsonb_build_object(\n      'pending_coffees', (select count(*) from public.coffee_submissions where status='pending'),\n      'conflicts', (select count(*) from public.coffee_submissions where status='conflict'),\n      'pending_canonical', (select count(*) from public.coffees where verification_state='pending'),\n      'verified_coffees', (select count(*) from public.coffees where verification_state='verified'),\n      'active_accounts', (select count(*) from private.beta_members where enabled),\n      'pending_accounts', (select count(*) from private.beta_members m where m.admitted_at is null and m.signup_review_state='pending'),\n      'pending_verified_accounts', (select count(*) from private.beta_members m join auth.users u on u.id=m.owner_id where m.admitted_at is null and m.signup_review_state='pending' and u.email_confirmed_at is not null),\n      'unfinished_account_deletions', (select count(*) from private.dic_admin_account_delete_operations where phase<>'completed'),\n      'shot_records', (select count(*) from public.shots where hidden_at is null)\n    ),\n    'queue_total', (select count(*) from public.coffee_submissions where status in ('pending','conflict')),\n    'queue', coalesce((\n      select jsonb_agg(item.data order by item.created_at, item.id)\n      from (\n        select id, created_at,\n          jsonb_build_object(\n            'id', id,\n            'created_at', created_at,\n            'status', status,\n            'revision', revision,\n            'canonical_coffee_id', canonical_coffee_id,\n            'base_coffee_revision', base_coffee_revision,\n            'source_url', source_url,\n            'name', left(coalesce(proposed_data->>'name',''),200),\n            'roaster', left(coalesce(proposed_data->>'roaster',''),200),\n            'release_label', left(coalesce(proposed_data->>'release_label',''),200),\n            'origin', left(coalesce(proposed_data->>'origin',''),300),\n            'process', left(coalesce(proposed_data->>'process',''),300),\n            'roast_level', left(coalesce(proposed_data->>'roast_level',''),100)\n          ) as data\n        from public.coffee_submissions\n        where status in ('pending','conflict')\n        order by created_at, id\n        limit 50\n      ) item\n    ),'[]'::jsonb),\n    'backups', jsonb_build_object(\n      'status', 'external_not_connected',\n      'explanation', 'Backup results are verified in GitHub/Drive; this SQL endpoint does not assert backup freshness.'\n    )\n  );\nend $function$\n",
+      "verdict": "COMPLETE_SOURCE_REVIEW_NO_ADDITIONAL_CONFIRMED_DEFECT"
+    },
+    {
+      "identity": "private.dic_admin_records(p_kind text, p_offset integer, p_limit integer)",
+      "provider_source_md5": "6976e717b7c5cbb34d8e3c41bc2aeba2",
+      "definition_chars": 5386,
+      "reviewed_char_range": [
+        1,
+        5386
+      ],
+      "full_definition": "CREATE OR REPLACE FUNCTION private.dic_admin_records(p_kind text, p_offset integer DEFAULT 0, p_limit integer DEFAULT 50)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare n bigint; listing jsonb:='[]'::jsonb;\nbegin\n perform private.require_member();\n if auth.uid() is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator required.';\n end if;\n if p_kind is null or p_kind not in ('pending','conflicts','approved','shots','accounts')\n   or p_offset is null or p_offset<0 or p_offset>1000000\n   or p_limit is null or p_limit<1 or p_limit>50 then\n  raise exception using errcode='22023',message='Invalid listing parameters.';\n end if;\n if p_kind in ('pending','conflicts') then\n  select count(*) into n from public.coffee_submissions s\n   where s.status=case when p_kind='pending' then 'pending' else 'conflict' end;\n  select coalesce(jsonb_agg(v.row_data order by v.created_at,v.id),'[]'::jsonb) into listing\n  from (select s.id,s.created_at,jsonb_build_object(\n   'id',s.id,'revision',s.revision,'status',s.status,'created_at',s.created_at,\n   'creator_id',s.owner_id,'creator_email',u.email,'name',s.proposed_data->>'name',\n   'roaster',s.proposed_data->>'roaster','release_label',s.proposed_data->>'release_label',\n   'origin',s.proposed_data->>'origin','process',s.proposed_data->>'process',\n   'roast_level',s.proposed_data->>'roast_level','variety',s.proposed_data->>'variety',\n   'producer',s.proposed_data->>'producer','elevation_m',s.proposed_data->>'elevation_m',\n   'tasting_notes',s.proposed_data->>'tasting_notes','summary',s.proposed_data->>'summary',\n   'espressoNotes',s.proposed_data->>'espressoNotes','source_url',s.source_url\n  ) row_data from public.coffee_submissions s\n  left join auth.users u on u.id=s.owner_id\n  where s.status=case when p_kind='pending' then 'pending' else 'conflict' end\n  order by s.created_at,s.id limit p_limit offset p_offset) v;\n elsif p_kind='approved' then\n  select count(*) into n from public.coffees where verification_state='verified' and merged_into_id is null;\n  select coalesce(jsonb_agg(v.row_data order by v.created_at,v.id),'[]'::jsonb) into listing\n  from (select c.id,c.created_at,jsonb_build_object(\n   'id',c.id,'revision',c.revision,'created_at',c.created_at,\n   'creator_id',s.owner_id,'creator_email',u.email,\n   'name',c.name,'roaster',c.roaster,'release_label',c.release_label,\n   'origin',c.origin,'process',c.process,'roast_level',c.roast_level,\n   'variety',c.variety,'producer',c.producer,'elevation_m',c.elevation_m,\n   'tasting_notes',c.tasting_notes,'summary',c.summary,'espressoNotes',c.espresso_notes,\n   'source_url',(select x.source_url from public.coffee_sources x\n    where x.coffee_id=c.id order by x.checked_at desc,x.id desc limit 1)\n  ) row_data from public.coffees c\n  left join private.dic_coffee_first_entry f on f.coffee_id=c.id\n  left join public.coffee_submissions s on s.id=f.first_submission_id\n  left join auth.users u on u.id=s.owner_id\n  where c.verification_state='verified' and c.merged_into_id is null\n  order by c.created_at,c.id limit p_limit offset p_offset) v;\n elsif p_kind='shots' then\n  select count(*) into n from public.shots;\n  select coalesce(jsonb_agg(v.row_data order by v.pulled_at desc,v.id desc),'[]'::jsonb) into listing\n  from (select s.id,s.pulled_at,jsonb_build_object(\n   'id',s.id,'revision',s.revision,'created_at',s.created_at,'pulled_at',s.pulled_at,\n   'creator_id',s.owner_id,'creator_email',u.email,'hidden',s.hidden_at is not null,\n   'coffee_name',coalesce(c.name,p.proposed_data->>'name','Coffee unavailable'),\n   'library_entry_id',l.id,'coffee_id',l.coffee_id,'submission_id',l.submission_id,\n   'coffee_roaster',coalesce(c.roaster,p.proposed_data->>'roaster',''),\n   'style',s.style,'dose_g',s.dose_g,'yield_g',s.yield_g,'time_s',s.time_s,\n   'grind_setting',s.grind_setting,'temperature_c',s.temperature_c,\n   'extraction',s.extraction,'body',s.body,'clarity',s.clarity,\n   'sweetness',s.sweetness,'astringency',s.astringency,'notes',notes.notes,\n   'is_dialed_in',s.is_dialed_in\n  ) row_data from public.shots s\n  left join public.library_entries l on l.id=s.library_entry_id and l.owner_id=s.owner_id\n  left join public.coffees c on c.id=l.coffee_id\n  left join public.coffee_submissions p on p.id=l.submission_id\n  left join public.shot_notes notes on notes.owner_id=s.owner_id and notes.shot_id=s.id\n  left join auth.users u on u.id=s.owner_id\n  order by s.pulled_at desc,s.id desc limit p_limit offset p_offset) v;\n else\n  select count(*) into n from private.beta_members where admitted_at is not null;\n  select coalesce(jsonb_agg(v.row_data order by v.admitted_at desc,v.id),'[]'::jsonb) into listing\n  from (select m.owner_id id,m.admitted_at,jsonb_build_object(\n   'id',m.owner_id,'email',u.email,'created_at',m.created_at,'admitted_at',m.admitted_at,\n   'creator_id',m.owner_id,'creator_email',u.email,'enabled',m.enabled,\n   'admin',a.owner_id is not null\n  ) row_data from private.beta_members m\n  left join auth.users u on u.id=m.owner_id\n  left join private.app_admins a on a.owner_id=m.owner_id\n  where m.admitted_at is not null\n  order by m.admitted_at desc,m.owner_id limit p_limit offset p_offset) v;\n end if;\n return jsonb_build_object('kind',p_kind,'total',n,'offset',p_offset,\n   'items',coalesce(listing,'[]'::jsonb));\nend $function$\n",
+      "verdict": "COMPLETE_SOURCE_REVIEW_NO_ADDITIONAL_CONFIRMED_DEFECT"
+    },
+    {
+      "identity": "private.dic_admin_search_records(p_kind text, p_query text, p_offset integer, p_limit integer)",
+      "provider_source_md5": "253a3fe2fe1e1e65f61b5a71a2063fdd",
+      "definition_chars": 7574,
+      "reviewed_char_range": [
+        1,
+        7574
+      ],
+      "full_definition": "CREATE OR REPLACE FUNCTION private.dic_admin_search_records(p_kind text, p_query text, p_offset integer DEFAULT 0, p_limit integer DEFAULT 50)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare n bigint; listing jsonb:='[]'::jsonb; q text;\nbegin\n perform private.require_member();\n if auth.uid() is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator required.';\n end if;\n if p_kind is null or p_kind not in ('pending','conflicts','approved','shots','accounts')\n   or p_offset is null or p_offset<0 or p_offset>1000000\n   or p_limit is null or p_limit<1 or p_limit>50 then\n  raise exception using errcode='22023',message='Invalid listing parameters.';\n end if;\n if p_query is null or length(p_query)>80 then\n  raise exception using errcode='22023',message='Invalid search query.';\n end if;\n q:=lower(btrim(p_query));\n if p_kind in ('pending','conflicts') then\n  select count(*) into n from public.coffee_submissions s\n   left join auth.users u on u.id=s.owner_id\n   where s.status=case when p_kind='pending' then 'pending' else 'conflict' end and (q='' or strpos(lower(concat_ws(' ',s.proposed_data->>'name',s.proposed_data->>'roaster',s.proposed_data->>'release_label',s.proposed_data->>'origin',s.proposed_data->>'process',s.proposed_data->>'tasting_notes',s.source_url,u.email)),q)>0);\n  select coalesce(jsonb_agg(v.row_data order by v.created_at,v.id),'[]'::jsonb) into listing\n  from (select s.id,s.created_at,jsonb_build_object(\n   'id',s.id,'revision',s.revision,'status',s.status,'created_at',s.created_at,\n   'creator_id',s.owner_id,'creator_email',u.email,'name',s.proposed_data->>'name',\n   'roaster',s.proposed_data->>'roaster','release_label',s.proposed_data->>'release_label',\n   'origin',s.proposed_data->>'origin','process',s.proposed_data->>'process',\n   'roast_level',s.proposed_data->>'roast_level','variety',s.proposed_data->>'variety',\n   'producer',s.proposed_data->>'producer','elevation_m',s.proposed_data->>'elevation_m',\n   'tasting_notes',s.proposed_data->>'tasting_notes','summary',s.proposed_data->>'summary',\n   'espressoNotes',s.proposed_data->>'espressoNotes','source_url',s.source_url\n  ) row_data from public.coffee_submissions s\n  left join auth.users u on u.id=s.owner_id\n  where s.status=case when p_kind='pending' then 'pending' else 'conflict' end and (q='' or strpos(lower(concat_ws(' ',s.proposed_data->>'name',s.proposed_data->>'roaster',s.proposed_data->>'release_label',s.proposed_data->>'origin',s.proposed_data->>'process',s.proposed_data->>'tasting_notes',s.source_url,u.email)),q)>0)\n  order by s.created_at,s.id limit p_limit offset p_offset) v;\n elsif p_kind='approved' then\n  select count(*) into n from public.coffees c\n  left join private.dic_coffee_first_entry f on f.coffee_id=c.id\n  left join public.coffee_submissions s on s.id=f.first_submission_id\n  left join auth.users u on u.id=s.owner_id\n  where c.verification_state='verified' and c.merged_into_id is null and (q='' or strpos(lower(concat_ws(' ',c.name,c.roaster,c.release_label,c.origin,c.process,c.producer,c.variety,c.tasting_notes,u.email)),q)>0);\n  select coalesce(jsonb_agg(v.row_data order by v.created_at,v.id),'[]'::jsonb) into listing\n  from (select c.id,c.created_at,jsonb_build_object(\n   'id',c.id,'revision',c.revision,'created_at',c.created_at,\n   'creator_id',s.owner_id,'creator_email',u.email,\n   'name',c.name,'roaster',c.roaster,'release_label',c.release_label,\n   'origin',c.origin,'process',c.process,'roast_level',c.roast_level,\n   'variety',c.variety,'producer',c.producer,'elevation_m',c.elevation_m,\n   'tasting_notes',c.tasting_notes,'summary',c.summary,'espressoNotes',c.espresso_notes,\n   'source_url',(select x.source_url from public.coffee_sources x\n    where x.coffee_id=c.id order by x.checked_at desc,x.id desc limit 1)\n  ) row_data from public.coffees c\n  left join private.dic_coffee_first_entry f on f.coffee_id=c.id\n  left join public.coffee_submissions s on s.id=f.first_submission_id\n  left join auth.users u on u.id=s.owner_id\n  where c.verification_state='verified' and c.merged_into_id is null and (q='' or strpos(lower(concat_ws(' ',c.name,c.roaster,c.release_label,c.origin,c.process,c.producer,c.variety,c.tasting_notes,u.email)),q)>0)\n  order by c.created_at,c.id limit p_limit offset p_offset) v;\n elsif p_kind='shots' then\n  select count(*) into n from public.shots s\n  left join public.library_entries l on l.id=s.library_entry_id and l.owner_id=s.owner_id\n  left join public.coffees c on c.id=l.coffee_id\n  left join public.coffee_submissions p on p.id=l.submission_id\n  left join public.shot_notes notes on notes.owner_id=s.owner_id and notes.shot_id=s.id\n  left join auth.users u on u.id=s.owner_id\n  where (q='' or strpos(lower(concat_ws(' ',coalesce(c.name,p.proposed_data->>'name',''),coalesce(c.roaster,p.proposed_data->>'roaster',''),s.style,notes.notes,u.email)),q)>0);\n  select coalesce(jsonb_agg(v.row_data order by v.pulled_at desc,v.id desc),'[]'::jsonb) into listing\n  from (select s.id,s.pulled_at,jsonb_build_object(\n   'id',s.id,'revision',s.revision,'created_at',s.created_at,'pulled_at',s.pulled_at,\n   'creator_id',s.owner_id,'creator_email',u.email,'hidden',s.hidden_at is not null,\n   'coffee_name',coalesce(c.name,p.proposed_data->>'name','Coffee unavailable'),\n   'library_entry_id',l.id,'coffee_id',l.coffee_id,'submission_id',l.submission_id,\n   'coffee_roaster',coalesce(c.roaster,p.proposed_data->>'roaster',''),\n   'style',s.style,'dose_g',s.dose_g,'yield_g',s.yield_g,'time_s',s.time_s,\n   'grind_setting',s.grind_setting,'temperature_c',s.temperature_c,\n   'extraction',s.extraction,'body',s.body,'clarity',s.clarity,\n   'sweetness',s.sweetness,'astringency',s.astringency,'notes',notes.notes,\n   'is_dialed_in',s.is_dialed_in\n  ) row_data from public.shots s\n  left join public.library_entries l on l.id=s.library_entry_id and l.owner_id=s.owner_id\n  left join public.coffees c on c.id=l.coffee_id\n  left join public.coffee_submissions p on p.id=l.submission_id\n  left join public.shot_notes notes on notes.owner_id=s.owner_id and notes.shot_id=s.id\n  left join auth.users u on u.id=s.owner_id\n  where (q='' or strpos(lower(concat_ws(' ',coalesce(c.name,p.proposed_data->>'name',''),coalesce(c.roaster,p.proposed_data->>'roaster',''),s.style,notes.notes,u.email)),q)>0)\n  order by s.pulled_at desc,s.id desc limit p_limit offset p_offset) v;\n else\n  select count(*) into n from private.beta_members m\n  left join auth.users u on u.id=m.owner_id\n  where m.admitted_at is not null and (q='' or strpos(lower(concat_ws(' ',u.email,m.owner_id::text,case when m.enabled then 'active' else 'removed' end)),q)>0);\n  select coalesce(jsonb_agg(v.row_data order by v.admitted_at desc,v.id),'[]'::jsonb) into listing\n  from (select m.owner_id id,m.admitted_at,jsonb_build_object(\n   'id',m.owner_id,'email',u.email,'created_at',m.created_at,'admitted_at',m.admitted_at,\n   'creator_id',m.owner_id,'creator_email',u.email,'enabled',m.enabled,\n   'admin',a.owner_id is not null\n  ) row_data from private.beta_members m\n  left join auth.users u on u.id=m.owner_id\n  left join private.app_admins a on a.owner_id=m.owner_id\n  where m.admitted_at is not null and (q='' or strpos(lower(concat_ws(' ',u.email,m.owner_id::text,case when m.enabled then 'active' else 'removed' end)),q)>0)\n  order by m.admitted_at desc,m.owner_id limit p_limit offset p_offset) v;\n end if;\n return jsonb_build_object('kind',p_kind,'total',n,'offset',p_offset,\n   'items',coalesce(listing,'[]'::jsonb));\nend $function$\n",
+      "verdict": "COMPLETE_SOURCE_REVIEW_NO_ADDITIONAL_CONFIRMED_DEFECT"
+    },
+    {
+      "identity": "private.is_admin()",
+      "provider_source_md5": "396d3e8e29dbd4550ec7ac26b7589a63",
+      "definition_chars": 264,
+      "reviewed_char_range": [
+        1,
+        264
+      ],
+      "full_definition": "CREATE OR REPLACE FUNCTION private.is_admin()\n RETURNS boolean\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\n  select private.is_member() and exists(select 1 from private.app_admins a where a.owner_id=(select auth.uid()));\n$function$\n",
+      "verdict": "MEMBER_GATE_DEPENDENT_ADMIN_CHECK"
+    },
+    {
+      "identity": "private.is_member()",
+      "provider_source_md5": "dbc163d07f45e8b5831f6a6394a70ab8",
+      "definition_chars": 257,
+      "reviewed_char_range": [
+        1,
+        257
+      ],
+      "full_definition": "CREATE OR REPLACE FUNCTION private.is_member()\n RETURNS boolean\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\n  select exists(select 1 from private.beta_members m where m.owner_id=(select auth.uid()) and m.enabled);\n$function$\n",
+      "verdict": "CONFIRMED_CONDITIONAL_ENABLED_ONLY_GATE_INCONSISTENCY"
+    },
+    {
+      "identity": "private.session_status()",
+      "provider_source_md5": "0aa8e57bb4846aac7dd8e3b6c0cf690c",
+      "definition_chars": 729,
+      "reviewed_char_range": [
+        1,
+        729
+      ],
+      "full_definition": "CREATE OR REPLACE FUNCTION private.session_status()\n RETURNS jsonb\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nselect jsonb_build_object(\n 'authenticated',auth.uid() is not null,\n 'admitted',private.is_member(),\n 'admin',private.is_admin(),\n 'emailVerified',exists(select 1 from auth.users u where u.id=auth.uid() and u.email_confirmed_at is not null),\n 'approvalState',coalesce((\n   select case when m.admitted_at is not null and m.enabled then 'approved'\n     when m.admitted_at is not null then 'revoked'\n     else m.signup_review_state end\n   from private.beta_members m where m.owner_id=auth.uid()),'pending'),\n 'backupConfigured',false,'communityLive',false,'mode','owner-test');\n$function$\n",
+      "verdict": "COMPLETE_SOURCE_REVIEW_NO_ADDITIONAL_CONFIRMED_DEFECT"
+    }
+  ],
+  "evidence": {
+    "live_beta_member_columns": "enabled boolean DEFAULT false; admitted_at timestamptz NULL; signup_review_state text DEFAULT pending",
+    "live_beta_member_constraints": [
+      "beta_members_pkey",
+      "beta_members_owner_id_fkey ON DELETE CASCADE",
+      "beta_members_signup_review_state_check"
+    ],
+    "missing_invariant_constraint": "No CHECK prevents enabled=true with admitted_at NULL",
+    "safe_aggregate_counts": {
+      "enabled_unadmitted": 0,
+      "enabled_admitted": 5,
+      "admitted_disabled": 6,
+      "approved_without_admission": 0
+    },
+    "authenticated_is_member_execute": true,
+    "authenticated_private_schema_usage": true,
+    "known_trusted_paths": "handle_new_auth_user defaults false; admin review sets enabled and admitted simultaneously; access restore requires admitted; no current violated row",
+    "static_counterexample": "For an enabled=true, admitted_at=NULL row, prior private.is_member() returned true; new guarded definition returns false",
+    "impact": "LATENT_FAIL_OPEN_ONLY_IF_TRUSTED_OR_DRIFTED_STATE_WRITES_INCONSISTENT_ENABLED_ROW; NO_OBSERVED_LIVE_ACCOUNT_INCIDENT",
+    "source_migration": "supabase/migrations/20261110065000_dic_admitted_member_gate.sql",
+    "source_test": "supabase/tests/admin_invitation_controls.sql",
+    "production_writes": false,
+    "private_data_retrieved": false
+  },
+  "disposition": "DEVELOPMENT_SOURCE_REPAIR_STAGED; CI_UNVERIFIED; NO_DEPLOYMENT",
+  "blocks": [
+    "source-bound isolated PostgreSQL signup negative test",
+    "signed JWT and Node22/CI readback",
+    "governance exact source and same commit checks"
+  ],
+  "next": "Verify exact-source CI and synthetic admission negative test, repair any failures, then continue new provider definitions and console-only UNVERIFIED inventory"
+}
