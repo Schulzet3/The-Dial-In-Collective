@@ -11561,20 +11561,31 @@
       "id": "DIC-Q-1935-verified-auth-startup-no-false-pending",
       "issue": 1935,
       "title": "Do not display approval pending while signed-in admission is still being checked",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "5cac3799fd7b8e3a901532c92c1779f0ccc7eb5b",
       "scope_paths": [
         "site/cloud/main.js"
       ],
       "tests": [
-        "New deterministic tests/cloud-auth-startup-verification.test.mjs covers initial signed-in admitted, pending email, rejected/revoked, network error and account-switch scenarios; exact PR-head/merged CI pending"
+        "5 new deterministic startup regression cases PASS: initial INITIAL_SESSION admitted user never briefly sees pending; server-confirmed unverified pending receives correct review gate; rejected/revoked accuracy retained; network failure shows neutral retry; account switch removes stale admission. No private workspace read before admission. Source: tests/cloud-auth-startup-verification.test.mjs.",
+        "Exact PR-head Node22 validate 42924465733 SUCCESS: 3634 total tests/3628 PASS/0 FAIL/6 intentional SKIP, lint PASS, build PASS; high Auth classified. First PR-head 42924063295 had passing Node tests but lint FAILED on missing test-only import; corrected in same-commit journal; no false pass.",
+        "Exact PR-head SQL/signed JWT/RLS 42924465657, security inventory 42924465651, approval governance 42924465862, 390px browser/mobile/offline 42924465771 all SUCCESS. Frozen603 SKIPPED and cloud-tests NOT_APPLICABLE, not counted PASS.",
+        "PR #1936 nonforce squash merged 5cac3799fd7b8e3a901532c92c1779f0ccc7eb5b; deployed app source and test Git blobs byte-identical to tested PR head 17408c3e63473a30b709860634d30d83b471657a. Exact merged-source validate 42924809128, browser/mobile/offline 42924809372 and governance 42924809270 SUCCESS; SQL/security reused exact unchanged head source evidence."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Awaiting PR-head exact-source CI, nonforce integration and source readback"
+      "ci_runs": [
+        42924465733,
+        42924465657,
+        42924465651,
+        42924465862,
+        42924465771,
+        42924809128,
+        42924809372,
+        42924809270
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1935",
-      "notes": "Owner-reported brief Account Approval Pending flash on iPhone app reopening. Initial SDK auth callback can render identity with null server admission; use neutral verification state until authenticated admission response. Existing server gate, offline denial, pending requests and privacy unchanged. DEVELOPMENT ONLY; no production publication."
+      "notes": "Root cause: browser SDK INITIAL_SESSION surfaced authenticated identity before dic_session_status read, so auth() falsely rendered pending state. Unknown status now neutral until server verifies; explicit failed-network state is retryable. Existing actual pending/rejected/revoked and admitted/offline privacy unaffected. Owner request Nov 10; #1756 remains correctly deployed. READY DEVELOPMENT ONLY; NOT DEPLOYED and NO publication authorized. Source evidence at merged SHA 5cac3799fd7b8e3a901532c92c1779f0ccc7eb5b.",
+      "pr": 1936
     },
     {
       "id": "DIC-Q-1937-admin-signup-order",
@@ -11587,13 +11598,12 @@
         "site/admin/view.js"
       ],
       "tests": [
-        "Rendered section order regression in tests/admin-count-refresh.test.mjs; exact head CI pending; do not mark READY before verified green source.",
-        "CI intake corrected: queue scope lists deployable site/admin/view.js only; test file retained in same source PR but not release scope."
+        "Rendered ordered section regression tests/admin-count-refresh.test.mjs; exact-source CI still required."
       ],
       "ci_runs": [],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1937",
-      "notes": "Low risk UI-only change. All signup approval, account access and other Admin controls unchanged. No publication authorization."
+      "notes": "Owner Nov 10 request; UI-only and no deployment authority."
     }
   ],
   "history": [
