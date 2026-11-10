@@ -11604,6 +11604,34 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1937",
       "notes": "Owner Nov 10 request; UI-only and no deployment authority."
+    },
+    {
+      "id": "DIC-Q-1938-admin-closed-app-push",
+      "issue": 1938,
+      "pr": null,
+      "title": "Opt-in privacy-minimized administrator Web Push with Home Screen background delivery",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/admin/view.js",
+        "site/admin/main.js",
+        "site/admin/push.js",
+        "scripts/pwa/service-worker.template.txt",
+        "src/server/admin-push.mjs",
+        "netlify/functions/dic-admin-push.mjs",
+        "netlify/functions/dic-admin-push-poll.mjs",
+        "supabase/migrations/20261110235000_dic_admin_web_push.sql"
+      ],
+      "tests": [
+        "Synthetic VAPID ECDSA JWT, strict Apple endpoint allowlist, private-body absence, role verification, subscription baseline and opt-out, sender dedupe/role removal, PWA worker click and SQL ACL tests in tests/admin-push*.test.mjs.",
+        "Exact merged CI pending; live iPhone/APNs and production Netlify secrets NOT tested or provided."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Unverified role/auth server end-to-end CI and Netlify VAPID/service-role credentials; no owner Publish command."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1938",
+      "notes": "Do not call READY until exact-source CI and runtime configuration plan are verified. No production/Netlify/Supabase changes; preserve original mobile app and all private data."
     }
   ],
   "history": [

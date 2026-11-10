@@ -14,3 +14,5 @@
 - **Source checkpoint:** iOS Home Screen client opt-in/opt-out with direct gesture permission, authenticated subscription API, VAPID key selection, logout/device stale handling; Admin attention UI offers push enable/disable; existing public-shell service worker handles content-free push/click without touching cached shots, record fetches, or app drafts. Required browser/privacy/role/SQL tests and CI remain pending.
 
 - **Source checkpoint:** Added synthetic Node22 API authorization/permission tests (no admin read for nonadmins, backend-only service credentials, owner-scoped delete/upsert, unsafe endpoint denial), sender stale/duplicate/no-private-body tests, and service-worker click without discarding open drafts; no real Apple delivery or provider keys claimed. Execute exact CI before READY.
+
+- **Nov 10 governance/intake:** Recorded scoped owner decision in BOTH canonical spec and decision ledger and approval coverage; TESTING queue includes eight exact deployable paths (not tests). Pending frontend/Netlify/server/SQL tests, CI, safe integration, deployment secrets and physical-device proof. No provider writes or deployment.
