@@ -28,7 +28,7 @@ export function renderPendingSignups(page={},fallback=null){
   +(loaded?'<ul class="admin-member-list">'+(rows||'<li class="helper">No pending account requests.</li>')+'</ul>'+paging:'<p class="helper" role="status">Signup requests could not be loaded. Retry; no empty state is assumed.</p>');
 }
 
-export function renderAdminDashboard(data={},access=null,issued=null,candidatesBySubmission={},records={},options={}){
+export function renderAdminDashboard(data={},access=null,_legacySlot=null,candidatesBySubmission={},records={},options={}){
  const stats=data?.counts||{};
  const searchText=String(options.searchText||'');
  const queue=Array.isArray(data?.queue)?data.queue:[];

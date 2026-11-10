@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
-import {renderAdminAccessPanel,renderAdminDashboard,renderAdminDenied,renderAdminDeleteAccountPrompt,renderPendingSignups,renderAdminAttention} from '../site/admin/view.js';
+import {renderAdminAccessPanel,renderAdminDashboard,renderAdminDenied,renderAdminDeleteAccountPrompt,renderPendingSignups} from '../site/admin/view.js';
 import {gettingStartedMarkup,walkthroughMarkup} from '../site/cloud/help.js';
 import {e} from '../site/lib/ui.js';
 import {isAccessDenied} from '../site/cloud/client.js';
