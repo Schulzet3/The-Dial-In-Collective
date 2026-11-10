@@ -11159,23 +11159,37 @@
       "issue": 33,
       "pr": 1838,
       "title": "Keep selected Notes: Farm-Direct as sourcing evidence, not false tasting-note Source Review fact",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "0b65f88305b11d3c9412e8d0057440c5b7427301",
       "scope_paths": [
         "src/server/coffee-source-facts.mjs"
       ],
       "tests": [
         "Initial R86 exact current guarded official run 42821858501 SUCCESS 12/12 and actual parser, but source_facts independently showed false typed tasting_notes value Farm Direct despite proper canonical selected tasting; reproduced after passing tests.",
-        "SAME-COMMIT targeted generic source-review type correction and three new positive/hostile tests; corrected live source and exact-source CI PENDING, not PASS."
+        "SAME-COMMIT targeted generic source-review type correction and three new positive/hostile tests; corrected live source and exact-source CI PENDING, not PASS.",
+        "Final PR-head 153a7b02ba96dc8d56d091e8f6e579195f874747 focused official42822657637 15 PASS/0 FAIL, direct exact #402 selected H1/HTML/parser, Source Review preserves Farm Direct raw untyped; official PR-head HTML SHA256 1a96a733add138a1600738b3e88c993c8b7ec25ec2843254223c4ed5e5ac26ea.",
+        "PR-head Node/lint/build42822657342 SUCCESS 3477 PASS/0 FAIL/6 intentional SKIP, cloud/mobile42822657518, isolated SQL42822657460, Python42822657383, security42822657541, approval42822657561 SUCCESS; original frozen603 SKIPPED not PASS.",
+        "PR #1838 nonforce squash merged exact source 0b65f88305b11d3c9412e8d0057440c5b7427301; 6/6 original reviewed Git blobs independently byte-identical. Exact official merged42823210303 15 focused PASS/0 FAIL, approved unchanged current selected fields, raw source exact 270593 bytes SHA256 345f6c4e584468809b71d610f1038f0bd647ce4830a93cbc4092d3ae979d4170, source review Notes Farm Direct field untyped, all 7 selected direct proofs true, no conflicts, Add Coffee and Source Review, failures []. Artifact 13766374245 ZIP SHA256 031ce248cbf5f3100c85a41d1ca6f140ece4bb8e645efea6f032c486085bd3ca matching GitHub digest, independently rehashed; evidence JSON 27d0ac080c7b61d0fcc1b3935a289ea687e89cdd9cdbf2fd7f47227dd60fc5f6; afterproof SHA256 d7cf9b29d3302c3f5cdfcf2a2f713881d9ec5099994bc05852b38f1335ce7ca0.",
+        "Exact merged Node/lint/build42823210249 SUCCESS 3477 PASS/0 FAIL/6 intentional SKIP, cloud/mobile42823210284, Python42823210255, approval42823210364 SUCCESS. Original frozen603 and broad probes SKIPPED, not PASS. Dev only no publication/prod writes. Individual full 603 semantic certification remains UNVERIFIED."
       ],
       "ci_runs": [
-        42821858501
+        42821858501,
+        42822657637,
+        42822657342,
+        42822657518,
+        42822657460,
+        42822657383,
+        42822657541,
+        42822657561,
+        42823210303,
+        42823210249,
+        42823210284,
+        42823210255,
+        42823210364
       ],
-      "blockers": [
-        "Await corrected source-specific and applicable exact-source CI, independent source review, safe nonforce merged source verification."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "DEVELOPMENT ONLY; raw Farm Direct label/value remains reviewable, typed tasting removed only for direct sourcing. Unchanged canonical coffee fields, frozen 603/201/1197 original and auth/security/member/privacy/release."
+      "notes": "NARROW ORIGINAL #402 SOURCE REVIEW CORRECTION independently VERIFIED, READY in development only; Farm Direct remains a sourced fact with untyped role, no spurious tasting notes. Exact selected Gayo official origin/process/sensory and frozen original CSV preserved. Complete 603 individual semantic audit unfinished, #33 remains OPEN. No production release."
     }
   ],
   "history": [
