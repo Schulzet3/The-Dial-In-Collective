@@ -3665,6 +3665,14 @@
       "scope": "SQL 42899103968 FAILED historical test phase before new migration; governance 42899105276 FAILED missing queue intake. Move new test to full-schema suite, restore historical immutable-phase test, queue IN_PROGRESS.",
       "provider_writes": 0,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 UTC Run153 source-bound SQL terminator correction",
+      "source_sha": "a85789e20d4bf7c521f5781336c7e50fef3c9179",
+      "evidence": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42899495806",
+      "scope": "Isolated SQL failed due pg_get_functiondef missing terminal semicolon; corrected only guarded reconstructed CREATE FUNCTION EXECUTE; no production mutation.",
+      "provider_writes": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -16556,6 +16564,12 @@
     "repair": "Revert historical test to parent blob; new final-schema synthetic import_credential_key_separators.sql invoked after all migrations; tracked queue row IN_PROGRESS, with only migration as deployable scope",
     "no_provider_writes": true,
     "baseline_complete": false,
-    "next": "Verify exact PR-head 4 relevant CI runs, repair tests, merge nonforce only after PASS"
+    "next": "Verify exact PR-head 4 relevant CI runs, repair tests, merge nonforce only after PASS",
+    "pg_get_functiondef_termination_correction": {
+      "failed_ci": 42899495806,
+      "diagnosis": "pg_get_functiondef produced CREATE FUNCTION lacking terminal semicolon; dynamic EXECUTE parsed final SQL incorrectly at JSON literal",
+      "repair": "Append semicolon after reconstructed CREATE FUNCTION expression before EXECUTE",
+      "status": "CI_PENDING"
+    }
   }
 }

@@ -15,6 +15,7 @@ BEGIN
      OR length(definition)-length(replace(definition,old_expr,'')) <> length(old_expr) THEN
     RAISE EXCEPTION 'Unexpected import credential validator source; manual review required';
   END IF;
-  EXECUTE replace(definition,old_expr,new_expr);
+  -- pg_get_functiondef omits its terminating semicolon, required for dynamic execution.
+  EXECUTE replace(definition,old_expr,new_expr) || ';';
 END
 $dic_import_credential_guard$;
