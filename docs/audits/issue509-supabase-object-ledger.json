@@ -3543,6 +3543,19 @@
       "new_confirmed_app_defects": 0,
       "provider_writes": false,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 #509 Run142 19 current app SQL bodies reconciled",
+      "source_parent_sha": "8dcedae3179945a036aa774f45c21e4dc920c39b",
+      "receipt_path": "docs/audits/issue509-provider-current-app-function-reconciliation-2026-11-10-run142.json",
+      "complete_sql_bodies_read": 19,
+      "current_functions": 106,
+      "retired_invite_functions": 6,
+      "new_confirmed_defects": 0,
+      "new_original_word_credit": 0,
+      "provider_writes": false,
+      "baseline_complete": false,
+      "next": "Trace session_status consumers; next actual unreviewed provider source."
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -16104,5 +16117,19 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "Check post-READY4 source and current 106 application function digests against later provider receipts; Auth private console/REST exposed schema and compiled native implementations remain UNVERIFIED."
+  },
+  "provider_current_app_source_reconciliation_run142": {
+    "receipt_path": "docs/audits/issue509-provider-current-app-function-reconciliation-2026-11-10-run142.json",
+    "completed": 19,
+    "total_changed_new": 19,
+    "current_total": 106,
+    "old_modified": 6,
+    "new": 13,
+    "retired": 6,
+    "original_unchanged": 87,
+    "first_time_original_word_credit": 0,
+    "provider_write": false,
+    "provider_baseline_complete": false,
+    "next": "Caller check session_status placeholder values and next provider gap."
   }
 }
