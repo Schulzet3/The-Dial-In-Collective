@@ -40,6 +40,9 @@ if(process.env.DIC_ISSUE33_R86_VERIFY==='1'){
  check(r.status==='FETCHED'&&r.parser_ok===true&&r.selected_heading_identity_verified===true,'actual_parser_and_selected_identity');
  check(html&&r.html_sha256===sha(html)&&r.html_bytes===html.length,'raw_html_hash_and_length');
  for(const [k,v]of Object.entries(facts))check(v,'selected_direct_'+k);
+ const sourceFacts=r.source_facts||[];
+ check(!sourceFacts.some(f=>f.field==='tasting_notes'&&/^farm[ -]?direct$/i.test(f.value||'')),'farm_direct_not_typed_tasting_review');
+ check(sourceFacts.some(f=>!f.field&&/^farm[ -]?direct$/i.test(f.value||'')),'farm_direct_raw_source_retained');
  const f=r.current_fields||{};
  check(norm(f.name)==='sumatra gayo'&&norm(f.roaster).includes('vt artisan'),'exact_product_and_roaster');
  check(norm(f.roast_level)==='medium','own_medium_spec');

@@ -37,3 +37,18 @@ test('no other current selected Chiroso lot contaminates source',()=>{
  assert.equal(r.ok,true,JSON.stringify(r));
  assert.ok(!/wilton|benitez|chiroso/i.test(JSON.stringify(r.fields)),JSON.stringify(r.fields));
 });
+
+test('direct sourcing printed as Notes: Farm Direct remains reviewable without a tasting-note type',()=>{
+ const r=extractPublicCoffeeFacts(page(),{source_url:url});
+ assert.equal(r.ok,true,JSON.stringify(r));
+ assert.ok((r.source_facts||[]).some(f=>/^farm[ -]?direct$/i.test(f.value||'')&&!f.field),JSON.stringify(r.source_facts));
+ assert.ok(!(r.source_facts||[]).some(f=>f.field==='tasting_notes'&&/^farm[ -]?direct$/i.test(f.value||'')),JSON.stringify(r.source_facts));
+});
+test('hyphenated sourcing Notes: Farm-Direct cannot become tasting typed evidence',()=>{
+ const r=extractPublicCoffeeFacts(page('Sumatra Gayo',story,'<p>Notes: Farm-Direct</p><p>Roast: Medium</p>'),{source_url:url});
+ assert.ok(!(r.source_facts||[]).some(f=>f.field==='tasting_notes'&&/^farm[ -]?direct$/i.test(f.value||'')),JSON.stringify(r.source_facts));
+});
+test('actual genuine labeled selected tasting notes are still typed, not hidden by sourcing guard',()=>{
+ const r=extractPublicCoffeeFacts(page('Sumatra Gayo',story,'<p>Notes: Cocoa, Blueberry</p><p>Roast: Medium</p>'),{source_url:url});
+ assert.ok((r.source_facts||[]).some(f=>f.field==='tasting_notes'&&/Cocoa, Blueberry/i.test(f.value||'')),JSON.stringify(r.source_facts));
+});
