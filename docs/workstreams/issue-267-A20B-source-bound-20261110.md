@@ -1,0 +1,11 @@
+# Issue #267 A20B — source-bound disjoint semantic review, 2026-11-10
+
+Parent development `43eb5b6d45790c041498b50acec6ed6336a563d1`; frozen `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9` tree `c54ade64eca30946df8858297578a172f5cf6fa8`, pinned current `9707553a64f88127826e8f5b2b36cd0651296e83` tree `626d241ef5888bddee71b6e94ee30ea0cb8bee1e`.
+
+Direct original numbered AI semantic read: F154 `docs/archive/2026-10-23-reconciliation/ACTIVE_WORK.previous.md:971–990` blob `0583d24466c1fca349e0d9caab7ce3d57a0d908b` (20); P428 `tests/sql/issue-5-10-signed-http-fixture.sql:1–66/66` blob `935e2ada779043b8511c7865c182c8c018f23429` (66). Source literal, path, blob SHA, 1-based number, classification, behavior, quality, risk, obsolete/duplicate, current counterpart, testability, fix/removal opportunity and Locked fit for all 86 unique positions in `docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F154-971-990-P428-001-066-20261110-A20B.json`. Same pinned/live SHA => 0 post-pin-only credit. No old V1/R2/C2 promotion, no separate human audit claim. Other concurrent #267 PR #1907 A20 nonoverlapping F154:951–970 and P427:1–34; no duplicate credit.
+
+Review conclusions: dated October held/outlier QA records real owner modal/server evidence, not proof Safari blocked request or Confirm success; never repeat synthetic member operations, purge, provider writes or claim current hosted acceptance. P428 synthetic fixture grants a disposable authenticator service_role, constructs dummy member/equipment/four shots and requires exactly two personal recipe families; valuable isolated scenario but **not** actual GoTrue/JWT, member privacy, real coffee source or RLS verification. No confirmed current executable defect or safe unused removal.
+
+Risk-based tests: DOCS ONLY; app Node22/lint/build, browser/mobile/offline/SQL/Auth/provider NOT RUN. Actual PR-head and merged governance CI must be checked; PENDING, never PASS by assumption. No Netlify, production, Auth/Edge/SQL/member/provider, original603, release queue or deployment changes. #267 remains OPEN.
+
+Next strict uncredited frozen F154:991 and pinned P429 first line, plus independent post-pin live drift. Before continued work reconcile concurrent receipts and actual branch state.
