@@ -12,6 +12,9 @@ DECLARE
  impact jsonb; request jsonb; prepared jsonb; finished jsonb; invite jsonb;
  op_keep uuid; op_remove uuid; code_id uuid; source_submission uuid;
  pending_member_submission uuid; pending_member_library_entry uuid;
+ delete_setup uuid; delete_setup_version uuid; delete_basket uuid;
+ delete_basket_version uuid; delete_calibration_a uuid; delete_calibration_b uuid;
+ delete_library uuid; delete_family uuid; delete_shot uuid;
  blocked boolean;
  BEGIN
  IF current_database()<>'dic_ci' THEN RAISE EXCEPTION 'Only disposable dic_ci allowed'; END IF;
@@ -73,6 +76,51 @@ DECLARE
  RETURNING id INTO pending_member_library_entry;
  IF pending_member_library_entry IS NULL
  THEN RAISE EXCEPTION 'Missing member-owned library submission fixture'; END IF;
+ -- #509 Run133: a nonlegacy, non-dialed shot and its complete owner-scoped
+ -- equipment/version/preference graph exercise immediate and deferred FKs when
+ -- the same Auth owner cascades. All values synthetic; disposable dic_ci only.
+ INSERT INTO public.setups(owner_id,name)
+ VALUES(keep_user,'CI composite deletion equipment')
+ RETURNING id INTO delete_setup;
+ INSERT INTO public.setup_versions(owner_id,setup_id,label,machine_model,grinder_model,burr_set)
+ VALUES(keep_user,delete_setup,'CI original','CI machine','CI grinder','CI burrs')
+ RETURNING id INTO delete_setup_version;
+ UPDATE public.setups SET active_version_id=delete_setup_version WHERE id=delete_setup;
+ INSERT INTO public.baskets(owner_id,setup_id,name)
+ VALUES(keep_user,delete_setup,'CI basket') RETURNING id INTO delete_basket;
+ INSERT INTO public.basket_versions(owner_id,setup_id,basket_id,basket_dose_g,model)
+ VALUES(keep_user,delete_setup,delete_basket,18,'CI precision basket')
+ RETURNING id INTO delete_basket_version;
+ INSERT INTO public.grinder_calibrations(owner_id,setup_id,grinder_model,burr_set,finest_setting,coarsest_setting)
+ VALUES(keep_user,delete_setup,'CI grinder','CI burrs',1,10)
+ RETURNING id INTO delete_calibration_a;
+ INSERT INTO public.grinder_calibrations(owner_id,setup_id,grinder_model,burr_set,finest_setting,coarsest_setting,previous_calibration_id)
+ VALUES(keep_user,delete_setup,'CI grinder','CI burrs',1,10,delete_calibration_a)
+ RETURNING id INTO delete_calibration_b;
+ INSERT INTO public.setup_preferences(owner_id,setup_id,setup_version_id,calibration_id,default_basket_version_id)
+ VALUES(keep_user,delete_setup,delete_setup_version,delete_calibration_b,delete_basket_version);
+ INSERT INTO public.library_entries(owner_id,coffee_id)
+ VALUES(keep_user,coffee) RETURNING id INTO delete_library;
+ INSERT INTO public.workspace_coffees(owner_id,setup_id,setup_version_id,library_entry_id,basket_version_id)
+ VALUES(keep_user,delete_setup,delete_setup_version,delete_library,delete_basket_version);
+ INSERT INTO public.personal_recipe_families(owner_id,library_entry_id,style,estimator_version)
+ VALUES(keep_user,delete_library,'Traditional','ci-account-delete')
+ RETURNING id INTO delete_family;
+ INSERT INTO public.shots(owner_id,library_entry_id,setup_id,setup_version_id,basket_version_id,calibration_id,
+   personal_family_id,style,pulled_at,dose_g,yield_g,time_s,grind_setting,
+   extraction,body,clarity,sweetness,astringency,equipment_snapshot)
+ VALUES(keep_user,delete_library,delete_setup,delete_setup_version,delete_basket_version,delete_calibration_b,
+   delete_family,'Traditional',now(),18,36,27,5,2,3,3,3,2,'{}'::jsonb)
+ RETURNING id INTO delete_shot;
+ INSERT INTO public.recipe_preferences(owner_id,setup_id,setup_version_id,library_entry_id,style,
+   current_family_id,reference_family_id,favorite_shot_id)
+ VALUES(keep_user,delete_setup,delete_setup_version,delete_library,'Traditional',
+   delete_family,delete_family,delete_shot);
+ INSERT INTO public.account_preferences(owner_id,active_setup_id)
+ VALUES(keep_user,delete_setup)
+ ON CONFLICT(owner_id) DO UPDATE SET active_setup_id=excluded.active_setup_id;
+ IF (SELECT equipment_snapshot->>'grinder_model' FROM public.shots WHERE id=delete_shot)<>'CI grinder'
+ THEN RAISE EXCEPTION 'Composite deletion fixture did not capture real equipment snapshot'; END IF;
  -- An admitted ordinary member cannot preview, stage, hide invites or call service operations.
  PERFORM set_config('request.jwt.claim.sub',peer_user::text,true);
  PERFORM set_config('request.jwt.claim.role','authenticated',true);
@@ -149,6 +197,21 @@ DECLARE
  THEN RAISE EXCEPTION 'Pending personal submission/library not deleted'; END IF;
  IF EXISTS(SELECT 1 FROM public.coffee_submissions WHERE id=source_submission)
  THEN RAISE EXCEPTION 'Deleted user still has private submission'; END IF;
+ -- Verify all owner-scoped records disappear atomically, despite the circular
+ -- deferred setup version and favorite shot FKs and immediate composite FKs.
+ IF EXISTS(SELECT 1 FROM public.setups WHERE id=delete_setup)
+ OR EXISTS(SELECT 1 FROM public.setup_versions WHERE id=delete_setup_version)
+ OR EXISTS(SELECT 1 FROM public.baskets WHERE id=delete_basket)
+ OR EXISTS(SELECT 1 FROM public.basket_versions WHERE id=delete_basket_version)
+ OR EXISTS(SELECT 1 FROM public.grinder_calibrations WHERE id IN (delete_calibration_a,delete_calibration_b))
+ OR EXISTS(SELECT 1 FROM public.library_entries WHERE id=delete_library)
+ OR EXISTS(SELECT 1 FROM public.personal_recipe_families WHERE id=delete_family)
+ OR EXISTS(SELECT 1 FROM public.shots WHERE id=delete_shot)
+ OR EXISTS(SELECT 1 FROM public.setup_preferences WHERE owner_id=keep_user)
+ OR EXISTS(SELECT 1 FROM public.recipe_preferences WHERE owner_id=keep_user)
+ OR EXISTS(SELECT 1 FROM public.workspace_coffees WHERE owner_id=keep_user)
+ OR EXISTS(SELECT 1 FROM public.account_preferences WHERE owner_id=keep_user)
+ THEN RAISE EXCEPTION 'Auth cascade retained composite personal shot/equipment/preference records'; END IF;
  IF NOT EXISTS(SELECT 1 FROM private.dic_coffee_first_entry
    WHERE coffee_id=coffee AND first_submission_id IS NULL AND primary_name='Member deletion CI coffee')
  THEN RAISE EXCEPTION 'Canonical first-entry provenance lost or retains deleted submission'; END IF;

@@ -3385,6 +3385,15 @@
       "confirmed_app_defects": 0,
       "provider_writes": false,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 #509 Run133 new synthetic personal shot and equipment Auth cascade coverage",
+      "source_parent_sha": "6e7a733e9509f8b7fd249c7e1ea8b70c5f355a51",
+      "receipt_path": "docs/audits/issue509-provider-account-delete-shot-equipment-fixture-2026-11-10-run133.json",
+      "fixture_sql_updated": true,
+      "ci": "PENDING",
+      "production_writes": false,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -15640,5 +15649,19 @@
     "baseline_complete": false,
     "hosted_config": "UNVERIFIED",
     "next": "Continue from next unreviewed/changed provider definition; test internal composite Auth cascade paths in isolated disposable PostgreSQL (not production). Exact hosted SSO/SCIM configurations remain UNVERIFIED."
+  },
+  "provider_account_delete_composite_fixture_run133": {
+    "status": "TEST_ADDED_UNVERIFIED_CI",
+    "source_parent_sha": "6e7a733e9509f8b7fd249c7e1ea8b70c5f355a51",
+    "receipt_path": "docs/audits/issue509-provider-account-delete-shot-equipment-fixture-2026-11-10-run133.json",
+    "scope": "SYNTHETIC_OWNER_SHOT_EQUIPMENT_VERSION_AND_PREFERENCES_CASCADE",
+    "new_sql_migrations": 0,
+    "production_writes": false,
+    "confirmed_new_defects": 0,
+    "CI_postgresql": "PENDING",
+    "CI_signed_jwt": "PENDING",
+    "CI_governance": "PENDING",
+    "baseline_complete": false,
+    "next": "Read exact merged-source SQL CI logs, repair any failure in development only; no schema/production changes without independent owner publish command."
   }
 }
