@@ -11558,6 +11558,107 @@
       "notes": "SAFE Locked-compatible Make Current eligibility correction; legacy missing optionals, all five ratings, notes/history, family alternatives and privacy preserved. Source PR #1928 nonforce squash merged on development; direct current source CI verified. READY DEVELOPMENT-ONLY, not a publish/release permission. No main/release/provider/Netlify/live SQL/Auth/Edge/member mutation. R171 final journal docs/workstreams/ops-issue455-r171-final-verification-20261110.md."
     },
     {
+      "id": "DIC-Q-1935-verified-auth-startup-no-false-pending",
+      "issue": 1935,
+      "title": "Do not display approval pending while signed-in admission is still being checked",
+      "state": "READY",
+      "merged_source_sha": "5cac3799fd7b8e3a901532c92c1779f0ccc7eb5b",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "tests": [
+        "5 new deterministic startup regression cases PASS: initial INITIAL_SESSION admitted user never briefly sees pending; server-confirmed unverified pending receives correct review gate; rejected/revoked accuracy retained; network failure shows neutral retry; account switch removes stale admission. No private workspace read before admission. Source: tests/cloud-auth-startup-verification.test.mjs.",
+        "Exact PR-head Node22 validate 42924465733 SUCCESS: 3634 total tests/3628 PASS/0 FAIL/6 intentional SKIP, lint PASS, build PASS; high Auth classified. First PR-head 42924063295 had passing Node tests but lint FAILED on missing test-only import; corrected in same-commit journal; no false pass.",
+        "Exact PR-head SQL/signed JWT/RLS 42924465657, security inventory 42924465651, approval governance 42924465862, 390px browser/mobile/offline 42924465771 all SUCCESS. Frozen603 SKIPPED and cloud-tests NOT_APPLICABLE, not counted PASS.",
+        "PR #1936 nonforce squash merged 5cac3799fd7b8e3a901532c92c1779f0ccc7eb5b; deployed app source and test Git blobs byte-identical to tested PR head 17408c3e63473a30b709860634d30d83b471657a. Exact merged-source validate 42924809128, browser/mobile/offline 42924809372 and governance 42924809270 SUCCESS; SQL/security reused exact unchanged head source evidence."
+      ],
+      "ci_runs": [
+        42924465733,
+        42924465657,
+        42924465651,
+        42924465862,
+        42924465771,
+        42924809128,
+        42924809372,
+        42924809270
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1935",
+      "notes": "Root cause: browser SDK INITIAL_SESSION surfaced authenticated identity before dic_session_status read, so auth() falsely rendered pending state. Unknown status now neutral until server verifies; explicit failed-network state is retryable. Existing actual pending/rejected/revoked and admitted/offline privacy unaffected. Owner request Nov 10; #1756 remains correctly deployed. READY DEVELOPMENT ONLY; NOT DEPLOYED and NO publication authorized. Source evidence at merged SHA 5cac3799fd7b8e3a901532c92c1779f0ccc7eb5b.",
+      "pr": 1936
+    },
+    {
+      "id": "DIC-Q-33-r102-selected-current-flavor-base",
+      "issue": 33,
+      "pr": 1934,
+      "title": "Preserve source-bound intrinsic tasting base coordinated with already selected coffee notes",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-selected-description-sensory.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "PR-head official 42923853462: 6/6 focused tests PASS, guarded real #533/#539 official 2/2 FETCHED; strict afterproof FAILED direct_full_three_sensory_notes_539, confirmed actual source omission.",
+        "R102 next source+adversarial regression and exact-head CI PENDING; no READY/merge/publish authorization.",
+        "Initial new helper run 42924226207: 7/9 focused synthetics PASS, 2 FAIL (overconservative integration and malformed nested-p test); guarded official SKIPPED and afterproof FAILED. Corrected and exact source CI PENDING.",
+        "PR-head 42924358142: 8/9 synthetics PASS; standalone source helper PASS but actual parser integration FAIL; source HTTP SKIPPED, afterproof FAIL. Changed helper caller to scoped original product after geography identity filtering removed paragraph. Actual source CI pending.",
+        "R102 root cause 42924781304: direct selected paragraph valid; helper's trailing culminating clause with an internal comma caused safe reject; corrected strict suffix trim and regressions, fresh source pending.",
+        "Exact PR head bf9a1dcd244a7d7c6034b7520ace52d22f6ee911: R102 guarded official HTML and strict selected 12/12 focused PASS 42925264473; independently downloaded/hashed ZIP 60a0121dd976a846bcb4dafa55553c8fbf99dc083681583ef675f8b0200ee002, raw selected 533 4bccee87f407d0b8928448f25f1a19737706adb08dfc7b026142e87681e78c11 and 539 6bc7641c721301296f33e08f5c1a1abe53da27bddb9fe70dd57dc3d101dbb7d0. Node22 3640 PASS/0 FAIL/6 SKIP+lint PASS 42925264730; cloud UX 42925264482, isolated SQL 42925264485, approval 42925264503, privacy 42925264505, Python 42925264550 and source-security 42925264475 all SUCCESS. Frozen603 global workflow SKIPPED, not independently certified. Merge/merged CI PENDING."
+      ],
+      "ci_runs": [
+        42923853462,
+        42924226207,
+        42924358142,
+        42924492358,
+        42924608231,
+        42924705980,
+        42924781304,
+        42925264473,
+        42925264730,
+        42925264482,
+        42925264485,
+        42925264503,
+        42925264505,
+        42925264550,
+        42925264475
+      ],
+      "blockers": [
+        "Fresh corrected exact PR-head and merged-source verification pending"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Development-only generic selected-current intrinsic base refinement; fully preserved original603 frozen oracle/scorer/CSV and all other queues, #96/#267 separation, no Netlify/production/member/provider writes."
+    },
+    {
+      "id": "DIC-Q-1937-admin-signup-order",
+      "issue": 1937,
+      "pr": 1939,
+      "title": "Move New Account Requests directly above Accounts in Admin dashboard",
+      "state": "READY",
+      "merged_source_sha": "2286aa9fdb2c442ec9701d2fdb47d4668585a92e",
+      "scope_paths": [
+        "site/admin/view.js"
+      ],
+      "tests": [
+        "PR-head exact source node/build 42925456599, cloud/browser 42925456377, SQL 42925456433, security 42925456247, approval 42925456297 SUCCESS. Frozen corpus 42925456242 SKIPPED (not applicable). Merged-source CI pending.",
+        "Original PR 1939 exact reviewed head 603e9eb: Node22 build tests run42925456599, cloud browser42925456377, isolated SQL42925456433, security42925456247, approval42925456297 all SUCCESS; original corpus skipped NOT_APPLICABLE.",
+        "Nonforce merge 2286aa9 into development, source blob site/admin/view.js 6b6ba4ba verified identical. Descendant development 56361886 retained that exact UI blob, applicable Node/build42926681033, browser42926681043, approval42926680993 SUCCESS. No Netlify publication."
+      ],
+      "ci_runs": [
+        42925456599,
+        42925456377,
+        42925456433,
+        42925456247,
+        42925456297,
+        42926681033,
+        42926681043,
+        42926680993
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1937",
+      "notes": "Low-risk UI-only record order, no behavior/data/provider/publication change. Merged source CI needed before READY.\n2026-11-10 Verified READY after merged-source byte-equal UI and exact descendant app Node/build/browser/approval CI. Owner publish command still required."
+    },
+    {
       "id": "DIC-Q-33-r101-current-panel-region-roast-notes",
       "issue": 33,
       "pr": 1929,
