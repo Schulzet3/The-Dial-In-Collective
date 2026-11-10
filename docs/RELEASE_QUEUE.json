@@ -10831,19 +10831,20 @@
       "state": "TESTING",
       "merged_source_sha": "b4ed15a1515013dad43ba04dc4ff4a91db53a577",
       "scope_paths": [
-        "supabase/migrations/20261110035000_dic_account_delete_orphaned_actor_retry_guard.sql",
-        "supabase/tests/admin_member_deletion.sql"
+        "supabase/migrations/20261110035000_dic_account_delete_orphaned_actor_retry_guard.sql"
       ],
       "tests": [
         "Provider pg_get_functiondef 1933 chars MD5 75abc037bcc45abd5e9dd021b2f702d7: nullable actor_id SET NULL, plain <> yields unknown and permits another admin same-mode retry. Live open delete operations 0.",
         "Development commit b4ed15a1515013dad43ba04dc4ff4a91db53a577 adds separate migration and disposable dic_ci NULL actor SQLSTATE 23514 regression; all application/provider deployments remain unchanged.",
-        "Exact-source initial approval governance run 42752080227 FAILED intake because this migration was untracked in queue; this TESTING row corrects the omission. Isolated PostgreSQL 42752080329 and Node 42752080197 were pending when recorded."
+        "Exact-source initial approval governance run 42752080227 FAILED intake because this migration was untracked in queue; this TESTING row corrects the omission. Isolated PostgreSQL 42752080329 and Node 42752080197 were pending when recorded.",
+        "Governance source f6fe1d53aa4010db246d016b35669f34c9963ab8 run 42752184634 FAILED because deployable scope_paths incorrectly included a nondeployable SQL test; corrected scope_paths to migration only, regression remains tracked under tests."
       ],
       "ci_runs": [
         42752080227,
         42752080329,
         42752080197,
-        42752080471
+        42752080471,
+        42752184634
       ],
       "blockers": [
         "Exact post-queue source-bound isolated PostgreSQL, Node22 and governance checks must finish successfully before independent READY assessment."

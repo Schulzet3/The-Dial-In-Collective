@@ -3455,6 +3455,18 @@
       "source_ci_status": "PENDING_CORRECTED_SOURCE",
       "provider_writes": false,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 #509 Run136c queue schema correction",
+      "source_parent_sha": "f6fe1d53aa4010db246d016b35669f34c9963ab8",
+      "receipt_path": "docs/audits/issue509-provider-null-actor-retry-semantic-2026-11-10-run136.json",
+      "reviewed": 0,
+      "queue_item": "DIC-Q-509-account-delete-null-actor-retry-guard",
+      "source_ci_status": "PENDING_NEW_GOVERNANCE",
+      "prior_governance_run": 42752184634,
+      "prior_governance_result": "FAIL_NON_DEPLOYABLE_TEST_PATH_IN_SCOPE",
+      "provider_writes": false,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -15816,6 +15828,7 @@
     "provider_writes": false,
     "next": "Read exact-source PG/Node/governance CI and update queue only on evidence",
     "queue_item": "DIC-Q-509-account-delete-null-actor-retry-guard",
-    "first_governance_failure": "EXPECTED_NO_QUEUE_ITEM_FIXED_NEXT_COMMIT"
+    "first_governance_failure": "EXPECTED_NO_QUEUE_ITEM_FIXED_NEXT_COMMIT",
+    "second_governance_failure": "NON_DEPLOYABLE_TEST_PATH_IN_SCOPE_CORRECTED_NEXT_COMMIT"
   }
 }
