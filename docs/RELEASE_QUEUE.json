@@ -11453,6 +11453,27 @@
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
       "notes": "SAFE development-only source type integrity; numeric scalar and decimal strings retained, no change to thresholds, source verification, Community RLS, five ratings/Locked recommendations, no member/provider write, no deployment.",
       "merged_source_sha": null
+    },
+    {
+      "id": "DIC-Q-509-admin-delete-null-kind-guard",
+      "issue": 509,
+      "pr": null,
+      "title": "Reject NULL Admin deletion kind before canonical coffee routing and impact-block bypass",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261110194500_dic_admin_delete_null_kind_guard.sql"
+      ],
+      "tests": [
+        "Read-only live full SQL/MD5 and constant-expression NULL behavior confirmed; isolated disposable PostgreSQL synthetic admin_safe_delete.sql pending.",
+        "Source-bound SQL/JWT/Node22/approval CI PENDING; no claims of success or deployment."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source CI and safe integration not yet complete"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
+      "notes": "Admin-only malformed NULL input fall-through; not a demonstrated live deletion. Source-only additive migration and disposable synthetic regression; do not deploy absent owner one-use publish approval."
     }
   ],
   "history": [

@@ -66,6 +66,27 @@ BEGIN
   (impact->>'library_entries')::int<>1 OR (impact->>'blocked')::boolean THEN
   RAISE EXCEPTION 'Incorrect admin impact preview %',impact;
  END IF;
+ -- #509 Run152: NULL kind must not silently route to canonical deletion;
+ -- both public (RPC) and private definer surfaces reject before any DML.
+ blocked:=false;
+ BEGIN PERFORM public.dic_admin_delete_preview(NULL::text,coffee);
+ EXCEPTION WHEN invalid_parameter_value THEN blocked:=true; END;
+ IF NOT blocked THEN RAISE EXCEPTION 'NULL delete kind accepted by preview'; END IF;
+ blocked:=false;
+ BEGIN PERFORM private.dic_admin_delete_preview(NULL::text,coffee);
+ EXCEPTION WHEN invalid_parameter_value THEN blocked:=true; END;
+ IF NOT blocked THEN RAISE EXCEPTION 'NULL private delete preview accepted'; END IF;
+ blocked:=false;
+ BEGIN PERFORM public.dic_admin_delete_record(NULL::text,coffee,rev,impact);
+ EXCEPTION WHEN invalid_parameter_value THEN blocked:=true; END;
+ IF NOT blocked THEN RAISE EXCEPTION 'NULL confirmed delete kind accepted'; END IF;
+ blocked:=false;
+ BEGIN PERFORM private.dic_admin_delete_record(NULL::text,coffee,rev,impact);
+ EXCEPTION WHEN invalid_parameter_value THEN blocked:=true; END;
+ IF NOT blocked THEN RAISE EXCEPTION 'NULL private delete kind accepted'; END IF;
+ IF NOT EXISTS (SELECT 1 FROM public.coffees WHERE id=coffee)
+ THEN RAISE EXCEPTION 'NULL delete probe removed synthetic coffee'; END IF;
+ -- Named, originally approved preview and deletion continue below.
  -- No deletion without the exact source revision and unchanged impact.
  blocked:=false;
  BEGIN
