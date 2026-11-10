@@ -2,9 +2,9 @@
   "schema_version": 1,
   "authority": "OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022",
   "published_base": {
-    "tested_source_sha": "2cb38e3020a2ab7dc0d7d0c62b5db79f14b64c88",
-    "release_sha": "bf3a82484ab2443a5d8b4dc78075ca5a4d875532",
-    "netlify_deploy_id": "6af27603a5fade7d94df9e99"
+    "tested_source_sha": "925c957a84d3f3e83cd15f062b7f78189adfc4cb",
+    "release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+    "netlify_deploy_id": "6af2ad72c2aa765f588abc75"
   },
   "items": [
     {
@@ -10782,7 +10782,7 @@
       "issue": 1756,
       "pr": 1776,
       "title": "Remove beta invitation codes and require verified administrator approval for new accounts with attention notifications",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "1fa8ddc9d886025e404f936b75a106864916793b",
       "scope_paths": [
         "site/cloud/client.js",
@@ -10833,14 +10833,20 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1756",
-      "notes": "Owner explicit Locked supersession recorded in BOTH docs/MASTER_SPECIFICATION.md and DECISION_LEDGER.json. Development-only source, not deployed. Existing members, Auth identities and all history protected; every legacy invitation token/code still present in production pending future authorized SQL migration. No off-app email/push promise; in-portal attention badge and optional browser alerts while Admin open. | #1756 SOURCE READY 2026-11-10 UTC, NOT DEPLOYED. Existing hosted Auth11/admitted11/shots26/notes26/Community12 and 17 used/unused invitation code records unchanged. New source migration must only purge historical codes on a separately explicitly owner-authorized production Publish and after verifying fresh encrypted backups, preserving Auth/member/Community history. In-app Admin attention mandatory, browser notifications only with permission while Admin open, no external email/push provider claim. #96/#267/#509 preserved. | 2026-11-10: original READY was incomplete for out-of-portal alerts and email-verified actionable counts. Temporarily TESTING pending scoped source/CI. No Supabase/Netlify writes. | 2026-11-10 #1756 development SOURCE READY only, NOT DEPLOYED. Verified-only new signups + coffee/conflicts/unfinished account deletion attention shown in in-Admin center and main app Settings gear/Admin Dashboard; optional browser permission only, no off-app push or email. Existing Auth/member/shot/Community data unaffected; all legacy used/unused invite code records still live in hosted production until fresh owner Publish with independently verified encrypted Drive archive and recovery."
+      "notes": "Owner explicit Locked supersession recorded in BOTH docs/MASTER_SPECIFICATION.md and DECISION_LEDGER.json. Development-only source, not deployed. Existing members, Auth identities and all history protected; every legacy invitation token/code still present in production pending future authorized SQL migration. No off-app email/push promise; in-portal attention badge and optional browser alerts while Admin open. | #1756 SOURCE READY 2026-11-10 UTC, NOT DEPLOYED. Existing hosted Auth11/admitted11/shots26/notes26/Community12 and 17 used/unused invitation code records unchanged. New source migration must only purge historical codes on a separately explicitly owner-authorized production Publish and after verifying fresh encrypted backups, preserving Auth/member/Community history. In-app Admin attention mandatory, browser notifications only with permission while Admin open, no external email/push provider claim. #96/#267/#509 preserved. | 2026-11-10: original READY was incomplete for out-of-portal alerts and email-verified actionable counts. Temporarily TESTING pending scoped source/CI. No Supabase/Netlify writes. | 2026-11-10 #1756 development SOURCE READY only, NOT DEPLOYED. Verified-only new signups + coffee/conflicts/unfinished account deletion attention shown in in-Admin center and main app Settings gear/Admin Dashboard; optional browser permission only, no off-app push or email. Existing Auth/member/shot/Community data unaffected; all legacy used/unused invite code records still live in hosted production until fresh owner Publish with independently verified encrypted Drive archive and recovery.",
+      "delivered_release_id": "DIC-20261110-READY4-28",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-10T05:37:05.508Z",
+      "delivered_tested_source_sha": "925c957a84d3f3e83cd15f062b7f78189adfc4cb",
+      "delivered_release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+      "delivered_netlify_deploy_id": "6af2ad72c2aa765f588abc75"
     },
     {
       "id": "DIC-Q-509-account-delete-null-actor-retry-guard",
       "issue": 509,
       "pr": null,
       "title": "Reject orphaned administrator retry tokens during member account deletion",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "b4ed15a1515013dad43ba04dc4ff4a91db53a577",
       "scope_paths": [
         "supabase/migrations/20261110035000_dic_account_delete_orphaned_actor_retry_guard.sql"
@@ -10865,14 +10871,20 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
-      "notes": "Development-only fail-closed conditional NULL-actor control-flow fix. No current affected live rows. No actor takeover, real account deletion, provider mutation, release approval or deployment. This is not READY or DEPLOYED; release after independent exact candidate testing and owner publish authority.\nNovember 10 Run136d: independently source-bound PostgreSQL/signed-JWT, Node22, cloud/browser, and corrected governance CI all SUCCESS. Actual source b4ed and docs-only head 584 verified; READY for separate candidate assembly, not published/deployed. No owner action requested under #509 routine-fix notification policy."
+      "notes": "Development-only fail-closed conditional NULL-actor control-flow fix. No current affected live rows. No actor takeover, real account deletion, provider mutation, release approval or deployment. This is not READY or DEPLOYED; release after independent exact candidate testing and owner publish authority.\nNovember 10 Run136d: independently source-bound PostgreSQL/signed-JWT, Node22, cloud/browser, and corrected governance CI all SUCCESS. Actual source b4ed and docs-only head 584 verified; READY for separate candidate assembly, not published/deployed. No owner action requested under #509 routine-fix notification policy.",
+      "delivered_release_id": "DIC-20261110-READY4-28",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-10T05:37:05.508Z",
+      "delivered_tested_source_sha": "925c957a84d3f3e83cd15f062b7f78189adfc4cb",
+      "delivered_release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+      "delivered_netlify_deploy_id": "6af2ad72c2aa765f588abc75"
     },
     {
       "id": "DIC-Q-509-private-delete-definer-execute-acl",
       "issue": 509,
       "pr": null,
       "title": "Tighten PUBLIC EXECUTE on two private admin deletion SECURITY DEFINER functions",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "5964553fcdb3ba58db91584645f1e2b2a99ebbb2",
       "scope_paths": [
         "supabase/migrations/20261110045500_dic_admin_private_delete_acl_hardening.sql"
@@ -10891,14 +10903,20 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
-      "notes": "Defense-in-depth least-privilege normalization only, no verified current privacy incident, no production deploy or member deletion. Do not publish without separate one-use owner command.\nRun137b: exact code source 5964553fcdb3ba58db91584645f1e2b2a99ebbb2 all four applicable CI COMPLETED SUCCESS; READY development-only after individual 68-function ACL coverage. Production still has the original grants, no owner release consent."
+      "notes": "Defense-in-depth least-privilege normalization only, no verified current privacy incident, no production deploy or member deletion. Do not publish without separate one-use owner command.\nRun137b: exact code source 5964553fcdb3ba58db91584645f1e2b2a99ebbb2 all four applicable CI COMPLETED SUCCESS; READY development-only after individual 68-function ACL coverage. Production still has the original grants, no owner release consent.",
+      "delivered_release_id": "DIC-20261110-READY4-28",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-10T05:37:05.508Z",
+      "delivered_tested_source_sha": "925c957a84d3f3e83cd15f062b7f78189adfc4cb",
+      "delivered_release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+      "delivered_netlify_deploy_id": "6af2ad72c2aa765f588abc75"
     },
     {
       "id": "DIC-Q-455-new-shot-timestamp-replay-recency",
       "issue": 455,
       "pr": 1775,
       "title": "Reject malformed explicitly supplied new-shot instants before saving, while preserving offline existing-ID historical replay",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "774402b32e4a5909a4aba95d398fd930b24a42fa",
       "scope_paths": [
         "site/lib/engine.js"
@@ -10923,7 +10941,13 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "READY only for source-isolated #455 R153 safety guard on development, NOT deployed. Approval is Option B SAFE Locked-compatible correctness, no new timestamp UI capture, roast/numeric science/Locked target, five sensory change, history/notes mutation, production member/SQL/Auth/Edge/provider write, or Netlify release. Canceled merged workflow jobs distinguished from reusable passing exact PR-head code/test/SQL receipts. Concurrent #509/#1756 preserve isolation and separate READY publication. #630 temporary public visibility unchanged."
+      "notes": "READY only for source-isolated #455 R153 safety guard on development, NOT deployed. Approval is Option B SAFE Locked-compatible correctness, no new timestamp UI capture, roast/numeric science/Locked target, five sensory change, history/notes mutation, production member/SQL/Auth/Edge/provider write, or Netlify release. Canceled merged workflow jobs distinguished from reusable passing exact PR-head code/test/SQL receipts. Concurrent #509/#1756 preserve isolation and separate READY publication. #630 temporary public visibility unchanged.",
+      "delivered_release_id": "DIC-20261110-READY4-28",
+      "delivered_provider": "Netlify production Git-connected",
+      "delivered_at_utc": "2026-11-10T05:37:05.508Z",
+      "delivered_tested_source_sha": "925c957a84d3f3e83cd15f062b7f78189adfc4cb",
+      "delivered_release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+      "delivered_netlify_deploy_id": "6af2ad72c2aa765f588abc75"
     }
   ],
   "history": [
@@ -12110,6 +12134,21 @@
         "DIC-Q-509-account-delete-coffee-fk"
       ],
       "receipt": "docs/releases/2026-11-10_READY5_DEPLOYED_VERIFIED.md"
+    },
+    {
+      "id": "DIC-20261110-READY4-28",
+      "state": "DEPLOYED",
+      "tested_source_sha": "925c957a84d3f3e83cd15f062b7f78189adfc4cb",
+      "release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+      "netlify_deploy_id": "6af2ad72c2aa765f588abc75",
+      "deployed_at_utc": "2026-11-10T05:37:05.508Z",
+      "item_ids": [
+        "DIC-Q-1756-admin-signup-approval-retire-invites",
+        "DIC-Q-455-new-shot-timestamp-replay-recency",
+        "DIC-Q-509-account-delete-null-actor-retry-guard",
+        "DIC-Q-509-private-delete-definer-execute-acl"
+      ],
+      "receipt": "docs/releases/2026-11-10_READY4_DEPLOYED_VERIFIED.md"
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
