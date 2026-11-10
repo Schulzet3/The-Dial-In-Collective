@@ -4586,6 +4586,24 @@
       "current_app": "Original archived notes, measured shots and five ratings preserved.",
       "result": "FIVE_GROUP_TESTS_PASS_EXACT_HEAD_42879075862_AND_MERGE_42879850975_NODE22_3586_PASS_0_FAIL_6_SKIP; HEAD_BROWSER_SQL_SECURITY_APPROVAL_SUCCESS; MERGED_BROWSER_SUCCESS; MERGED_APPROVAL_CANCELLED_NOT_PASS",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-APP-168-A",
+      "source": "site/lib/community-evidence.js Git blob 74c93c7ff7814337752e0ef9052412eaf55890e3 at development 2cdfa50691d48e4d1dad0fc1e9b659c302a897d5",
+      "claim": "selectCommunityPrior accepted Boolean true as measured ratio=1 and time_s=1; singleton numeric arrays were also silently converted. High-contributor malformed candidates can outrank usable aggregate evidence.",
+      "grade": "DIRECT_ORIGINAL_GIT_BLOB_SHA_MATCHED_IN_LOCAL_NODE22_REPRODUCTION_NOT_OBSERVED_MEMBER_INCIDENT",
+      "current_app": "Weak unproven Community starting prior; existing 0.5<ratio<8 and 1<=time<=180, verified source and noncalibrated controls; no evidence of actual corrupted server aggregates.",
+      "result": "REPRODUCED_NEGATIVE_USING_ORIGINAL_BLOB; FOUR_LOCAL_POST_FIX_REGRESSION_GROUPS_PASS; REMOTE_CI_NOT_YET_EXECUTED",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-APP-168-B",
+      "source": "tests/issue455-community-aggregate-numeric-types.test.mjs and site/lib/community-evidence.js",
+      "claim": "Reject nonprimitive booleans, array/object coercions and empty string readings; preserve genuine numeric readings and legacy decimal strings, existing time/ratio boundaries, independent contributor ranking and source immutability.",
+      "grade": "FOUR_DIRECT_SYNTHETIC_POSITIVE_NEGATIVE_NODE22_LOCAL_PASS_REMOTE_CI_PENDING",
+      "current_app": "Only eligibility of malformed numeric types in Community aggregates; does not alter original member/private data or stored Community records.",
+      "result": "LOCAL_NODE22_4_PASS_0_FAIL; PR_HEAD_AND_MERGE_CI_NOT_YET_RUN",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [],
@@ -4597,6 +4615,7 @@
     "reason": "R455-123 verified existing Locked 70-100 C recorded-temperature guard prevents invalid imported temp from becoming personal grind evidence; six direct-module tests and exact source CI, no scientific target or deployed change."
   },
   "next_actions": [
+    "R455-168 source 2cdfa50691d48e4d1dad0fc1e9b659c302a897d5: exact old Community prior Git blob 74c93c7ff7814337752e0ef9052412eaf55890e3 reproduced coercion Boolean true -> ratio 1 or time 1; 4/4 local Node22 positive/negative PASS with guarded numeric primitives. NEXT: open PR, verify head Node22/browser/offline/SQL/security/governance; nonforce merge, verify exact merged source CI and READY queue reconciliation. S019 unavailable, #267 no literal credit.",
     "R455-166 FINAL code PR #1878 head fc4f48... merged nonforce f7f9eb97fb864f255a90bccbcacaa9d52b2e35a4 exact all five Git blobs; head 3571/0/6 and merged 3571/0/6 all six R166 PASS, browser/offline/mobile and governance merged PASS, head SQL/security PASS. Scoped queue READY DEV ONLY and docs reconciliation PR CI pending. S019 unverified, #267 literal audit credit zero.",
     "R455-166 exact original development 56eeeda0a47d9cc95d75521f559f0d4d95344290: coded similar-coffee explicit grinder/temperature evidence guard, six new direct synthetic groups; exact PR-head CI, nonforce merge, merged source and READY reconciliation PENDING; S019 inaccessible, zero #267 literal review credit.",
     "R455-165 doc research primary Gloess 2013 indexed Springer original methods/sensory/correlations review at dev d8c25686c343aa13ce37f2a81204a004dbb835f1; new source and bounded evidence checks/RESEARCH-ONLY proposal. Await docs PR-head and merged-source applicable governance; do not reclassify unrun tests or PDF figure/supplement access. No DIC behavioral correction proven, no owner approval needed, S019 original remains missing.",
@@ -4694,16 +4713,16 @@
     "R455-164 FINAL verified code PR #1857 head 9f8d713... nonforce merged c26a9a9... four exact blobs and 3529 Node22 PASS/0 FAIL/6 SKIP both head/merged, browser/mobile/offline/SQL/security/approval applicable PASS. New queue DIC-Q-455-outlier-explicit-controls READY in development only; no deployment. Continue separate claim-level source inventory and narrow SAFE UX review under live SHA; original standalone S019 still inaccessible; no #267 credit."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-167",
-    "source_sha": "11e2735ebbbd19d9ceb0fc9afab0b8252b334dbe",
+    "run_id": "R455-168",
+    "source_sha": "2cdfa50691d48e4d1dad0fc1e9b659c302a897d5",
     "issue": 455,
-    "phase": "SAFE_PREFILL_FIX_MERGED_TESTED_HEAD_AND_MERGED_NODE_BROWSER_VERIFIED_DOCS_GOVERNANCE_PENDING",
+    "phase": "SAFE_COMMUNITY_NUMERIC_TYPE_GUARD_BRANCH_COMMITTED_REMOTE_CI_NOT_YET_VERIFIED",
     "source_counts": {
       "sources": 92,
-      "evidence_checks": 250,
-      "proposals": 128
+      "evidence_checks": 252,
+      "proposals": 129
     },
-    "release_state": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED_DOCS_CHECK_PENDING",
+    "release_state": "IN_PROGRESS_NOT_READY_NOT_DEPLOYED",
     "original_s019": "UNAVAILABLE_NOT_REVIEWED",
     "github267_literal_review_credit": 0
   },
@@ -7399,13 +7418,35 @@
       "production_deployed": false,
       "merge_sha": "11e2735ebbbd19d9ceb0fc9afab0b8252b334dbe",
       "pr_number": 1889
+    },
+    {
+      "id": "R455-PROP-168-COMMUNITY-AGGREGATE-NUMERIC-TYPES",
+      "finding": "Malformed verified-community aggregate ratios/times containing Boolean true or singleton arrays pass JavaScript Number coercion and can become unproven advice, even outranking properly measured candidates on contributor ranking.",
+      "evidence": [
+        "R455-EV-APP-168-A",
+        "R455-EV-APP-168-B"
+      ],
+      "severity": "P2_SYNTHETIC_WEAK_COMMUNITY_PRIOR_PHYSICAL_MEASUREMENT_INTEGRITY",
+      "user_benefit": "Avoid 1:1 ratios and 1s shot times manufactured from false types while retaining valid numeric and decimal-string contributor aggregate evidence.",
+      "source_provenance": "Exact source blob 74c93c7ff7814337752e0ef9052412eaf55890e3 at 2cdfa50691d48e4d1dad0fc1e9b659c302a897d5; reproduced against local byte-identical Git source; no real member incident.",
+      "current_locked": "Community aggregate remains weak/unproven, verified contributor count, style-matched, no calibrated grind or claimed owned family, all five ratings, same coffee/one controllable recommendation, privacy.",
+      "current_app": "selectCommunityPrior used Number(c.ratio/time_s) for any JSON type; Boolean true=>1, singleton arrays=>plausible numeric values.",
+      "proposed_change": "SAFE narrowly gate numeric primitive/decimal string types before existing bounds; four direct regression groups; preserve content and number boundaries.",
+      "evidence_grade": "DIRECT_CURRENT_SOURCE_REPRO_LOCAL_NODE22_SYNTHETIC_NOT_REAL_MEMBER_QUALITY_EVIDENCE",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "CODE_TEST_LEDGER_SAME_COMMIT_BRANCH_AWAITING_GITHUB_PR_HEAD_CI_AND_NONFORCE_MERGE",
+      "test_plan": "Local Node22 4/4 passing; PR-head full applicable Node22/lint/build, browser/mobile/offline/a11y, isolated SQL/security/governance; nonforce merge; exact merged Git blobs and CI; frozen603 not applicable unless triggered.",
+      "release_queue_status": "IN_PROGRESS_NOT_READY_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
     }
   ],
   "changeScope": {
     "application_code_changed": true,
     "tests_executed": true,
     "production_deployed": false,
-    "queue_changed": true,
-    "reason": "R166 exact head and merged Node22 3571/0/6 incl six focused regression; browser/offline/a11y, isolated SQL, security and governance verified; source merged nonforce, READY dev only."
+    "queue_changed": false,
+    "reason": "R168 local Node22 direct 4/4 PASS; GitHub PR-head/merged CI PENDING; no READY/deploy."
   }
 }
