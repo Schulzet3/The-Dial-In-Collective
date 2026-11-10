@@ -1,0 +1,51 @@
+name: DIC Issue33 R72 original603 599 selected source
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r72-599-yellowstone.yml
+      - docs/workstreams/ops-issue33-r72-599-yellowstone-20261109.md
+      - scripts/audit/issue33-r72-599-selected-contract.mjs
+      - scripts/audit/issue33-r72-599-afterproof.mjs
+      - tests/coffee-issue33-r72-599-selected-contract.test.mjs
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r72-599-yellowstone.yml
+      - scripts/audit/issue33-r72-599-selected-contract.mjs
+      - scripts/audit/issue33-r72-599-afterproof.mjs
+      - tests/coffee-issue33-r72-599-selected-contract.test.mjs
+permissions:
+  contents: read
+jobs:
+  original-599-selected:
+    name: original603-599-current-yellowstone-source
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Selected Huila and co-op positive and negative tests
+        run: node --test tests/coffee-issue33-r72-599-selected-contract.test.mjs
+      - name: Guarded original official URL, current parser, Add Coffee and Source Review
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '599'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r72-599
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict selected original row and source/parser afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r72-599
+        run: node scripts/audit/issue33-r72-599-afterproof.mjs
+      - name: Bounded public HTML and source verdict artifact
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r72-599-current
+          path: /tmp/dic33-r72-599/
+          if-no-files-found: warn
+          retention-days: 1
