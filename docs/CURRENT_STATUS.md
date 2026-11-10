@@ -1,3 +1,10 @@
+## November 10, 2026 UTC — Issue #455 R152 primary espresso hardware thesis verification [skip netlify]
+
+- Directly reviewed bounded original University of Camerino [Khamitova 2020 thesis](https://pubblicazioni.unicam.it/handle/11581/480144) Ch. 3 shower-disc/basket/dose experiment, Table 3.6 and Ch. 8 conclusions; independently checked [same-author *Food Chemistry* 2020 original abstract](https://pubmed.ncbi.nlm.nih.gov/31982858/). Conditional 12/14 g, 4–7 mm and fixed-time/fixed-volume comparisons measure chemistry/total solids, **not** transferable espresso taste or a universal hardware target; sources overlap, not independent replication. Author's Simonelli equipment/funding acknowledged. Thesis PDF screenshot HTTP403 and bytes/visual figures/unreviewed chapters **unverified**; later 2022 carbohydrate article remains abstract-only.
+- [Scoped R152 journal](docs/workstreams/ops-issue455-r152-khamitova-hardware-thesis-20261110.md), [source/evidence/decision trace ledger](docs/audits/issue455-research-source-coverage-20261103.json): **82 curated sources / 219 checks / 113 proposals**, docs-only authoring; PR and exact-source CI pending at writing. No new reproduced SAFE application defect, Locked/policy or release queue change, Node/SQL/browser/real espresso PASS claim, #267 literal-line credit, production/provider write or deployment. Separate original S019 PDF remains unavailable; Issue #455 stays OPEN.
+
+---
+
 ## November 10, 2026 UTC — Issue #33 R75 original603 #598 selected official Bolivia VERIFIED [skip netlify]
 
 - Direct exact current official URL #598 BOLIVIA LA PAZ - ORGANIC: typed La Paz Bolivia / Washed and Sun Dried / named Alto Sajama cooperative; hero Dark and Cherry/Jam/Allspice. Actual parser fields and Add Coffee/Source Review verified, zero conflicts, 10 focused adversarial/positive tests; **no new parser defect or READY scope**.
