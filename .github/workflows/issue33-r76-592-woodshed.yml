@@ -1,0 +1,51 @@
+name: DIC Issue33 R76 original603 592 Woodshed selected source
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r76-592-woodshed.yml
+      - scripts/audit/issue33-r76-592-selected-contract.mjs
+      - scripts/audit/issue33-r76-592-afterproof.mjs
+      - tests/coffee-issue33-r76-592-selected-contract.test.mjs
+      - docs/workstreams/ops-issue33-r76-592-woodshed-20261110.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r76-592-woodshed.yml
+      - scripts/audit/issue33-r76-592-selected-contract.mjs
+      - scripts/audit/issue33-r76-592-afterproof.mjs
+      - tests/coffee-issue33-r76-592-selected-contract.test.mjs
+permissions:
+  contents: read
+jobs:
+  selected-honduran-decaf:
+    name: original603-592-current-official-honduran-decaf
+    runs-on: ubuntu-24.04
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Current selected source contract positive and hostile tests
+        run: node --test tests/coffee-issue33-r76-592-selected-contract.test.mjs
+      - name: Guarded original exact URL and actual parser, Add Coffee and Source Review
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '592'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r76-592
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Fail-closed selected source and parser hash afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r76-592
+        run: node scripts/audit/issue33-r76-592-afterproof.mjs
+      - name: One-day exact selected-source and verdict artifact
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r76-woodshed-592
+          path: /tmp/dic33-r76-592/
+          if-no-files-found: warn
+          retention-days: 1
