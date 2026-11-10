@@ -10854,6 +10854,30 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
       "notes": "Development-only fail-closed conditional NULL-actor control-flow fix. No current affected live rows. No actor takeover, real account deletion, provider mutation, release approval or deployment. This is not READY or DEPLOYED; release after independent exact candidate testing and owner publish authority.\nNovember 10 Run136d: independently source-bound PostgreSQL/signed-JWT, Node22, cloud/browser, and corrected governance CI all SUCCESS. Actual source b4ed and docs-only head 584 verified; READY for separate candidate assembly, not published/deployed. No owner action requested under #509 routine-fix notification policy."
+    },
+    {
+      "id": "DIC-Q-455-new-shot-timestamp-replay-recency",
+      "issue": 455,
+      "pr": 1775,
+      "title": "Reject malformed explicitly supplied new-shot instants before saving, while preserving offline existing-ID historical replay",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "R455-153 four new synthetic Node22 negative/positive test cases in tests/issue455-shot-timestamp-integrity.test.mjs; actual validate CI and test outcomes PENDING.",
+        "PR1775 first approval/governance run42757813470 FAILED because code engine.js lacked required release queue intake row. This TESTING entry repairs that specific governance failure; retest on a new exact PR head.",
+        "Existing-ID saved historical Custom/incomplete/invalid timestamp remains immutable on same-coffee replay; invalid new timestamps rejected before mutating shot/preferences/audit; real member/provider evidence NOT claimed."
+      ],
+      "ci_runs": [
+        42757813470
+      ],
+      "blockers": [
+        "PR-head exact Node22 and risk-classified offline/cloud/mobile/SQL/security/approval checks, nonforce merged readback and verification pending."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "SAFE nonpublishing correctness fix; no new product/taste target/data-capture rule. Preserve all five original sensory values, notes/private history, versioned grinder/basket/feed/style, Community and idempotent offline saves. Frozen603 SKIPPED not pass. Owner #630 public window unchanged; no publication/provider/member/SQL writes."
     }
   ],
   "history": [
