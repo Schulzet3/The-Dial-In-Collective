@@ -11251,6 +11251,35 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
       "notes": "Run149 development-only hardening of older authenticated SQL RPC; no proven current Edge extraction bypass, no live change, not production READY. Preserve fixed behavior for true/false/default and existing clients.\nRun149 exact-source CI READY development-only; evidence docs/audits/issue509-run149-exact-source-ci-closure-2026-11-10.json; owner publication separate."
+    },
+    {
+      "id": "DIC-Q-33-original603-433-435-blackcoffee-current-selected",
+      "issue": 33,
+      "pr": 1871,
+      "title": "Correct current selected Black Coffee AM tasting list and unsupported roast SEO/customer-review contamination; verify Red Room and The Dark",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-product-scope.mjs",
+        "src/server/coffee-flavor-evidence.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "R94 original603 selected #433-435 independent current official selected-H1/identity, 3 bounded guarded HTTPS captures; frozen 603/201/1197 raw CSV and immutable oracle untouched.",
+        "Initial PR f229dd2 first strict source afterproof workflow 42860634982 FAILED: selected AM expected Graham cracker/cashew/hibiscus/lemon and unsupported Lighter, current parser returned only lemon and sunrise plus incorrectly inferred Medium from stale Yoast SEO.",
+        "Same-commit parser fix 43e5234825052a4d47c928ac4c7e74608a749877, generic WooCommerce reviews exclusion, direct selected literal opening tasting, lower-ranked SEO roast blocked by unsupported direct comparative label; 10 focused positive/adversarial tests.",
+        "Exact PR synthetic merged SHA f9821dfc0188cb462841f6fa124751f9274cac6e official current workflow 42862060021 SUCCESS: 3 current guarded official pages FETCHED, exact unique product H1 and URL, raw HTML hashes, actual parser/Add Coffee/Source Review PASS; #433 now keeps 4 named literal flavors and no unsupported roast, #434/#435 remain correct.",
+        "PR-head approval workflow 42862060255 FAILED exclusively because scoped source paths absent from release queue intake. This queue row fixes intake, rerun required; no acceptance/READY yet."
+      ],
+      "ci_runs": [
+        42862060021,
+        42862060255
+      ],
+      "blockers": [
+        "PR head with queue intake amendment must pass exact changed-surface CI; then review and nonforce merge; verify exact merged-source CI and evidence hashes"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Development-only source-bound R94; avoid owner notification unless attention needed. No Netlify, production, SQL/Edge/Auth/provider/member writes; preserve original603 immutable and separate #267 V2/#96."
     }
   ],
   "history": [

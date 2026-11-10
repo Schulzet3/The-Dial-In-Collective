@@ -216,6 +216,24 @@ function selectedWooCommerceShortDescriptionNotes(page,nodes,clean){
  return flavor&&SENSORY_ROLE.test(flavor)?flavor:'';
 }
 
+// A unique selected WooCommerce short-description opening may be a complete
+// literal sensory list, before generic marketing. No SEO, comments or other
+// product may supply this source-bound higher-priority fact.
+function selectedWooOpeningTasting(page,nodes,clean){
+ if(nodes.filter(n=>n.tag==='h1'&&n.contentEnd-n.headEnd<=220).length!==1)return '';
+ const panels=nodes.map((n,i)=>({n,i})).filter(({n})=>n.tag==='div'&&
+  hasClass(attributesOf(n,page),'woocommerce-product-details__short-description'));
+ if(panels.length!==1||panels[0].n.contentEnd-panels[0].n.headEnd>4000)return '';
+ const first=nodes.find(n=>n.parent===panels[0].i&&n.tag==='p'&&n.contentEnd-n.headEnd<=1800);
+ if(!first)return '';
+ const text=clean(page.slice(first.headEnd,first.contentEnd),1800);
+ const sentence=text.split(/(?<=[.!?])\s+/u)[0]?.trim()||'';
+ const m=sentence.match(/^((?:[\p{L}\p{M}][\p{L}\p{M}'’ -]{1,45},\s*){3,5})with\s+a\s+hint\s+of\s+([\p{L}\p{M}][\p{L}\p{M}'’ -]{1,75})[.!]?$/iu);
+ if(!m)return '';
+ const firstNotes=m[1].split(',').map(s=>s.trim()).filter(Boolean);
+ if(firstNotes.length<3||firstNotes.length>5||!SENSORY_ROLE.test(m[2]))return '';
+ return shortFlavorList(firstNotes.join(', ')+', '+m[2].replace(/[.!?]+$/u,''),clean)||'';
+}
 function detailsFlavorContainer(page,nodes,children,index,clean){
  const node=nodes[index];if(node.tag!=='details'||node.contentEnd-node.headEnd>12000)return '';
  const summaries=(children.get(index)||[]).filter(at=>nodes[at].tag==='summary');
@@ -877,6 +895,8 @@ export function extractProductFlavorProfileEvidence(html,{clean}={}){
  for(const row of iconLabeledFlavorRows(page,nodes,children,clean,covered))found.push({value:row.value,kind:row.kind});
  const selectedShortNotes=selectedWooCommerceShortDescriptionNotes(page,nodes,clean);
  if(selectedShortNotes)found.push({value:selectedShortNotes,kind:'explicit_label'});
+ const openingNotes=selectedWooOpeningTasting(page,nodes,clean);
+ if(openingNotes)found.push({value:openingNotes,kind:'selected_direct_description'});
  for(const value of flavorProse(page,clean).explicit)found.push({value,kind:'explicit_label'});
  extendSelectedFlavorWithCorroboratedNamedNote(page,clean,found);
  if(!found.length)found.push(...productHeroFlavorProfiles(page,nodes,clean));
