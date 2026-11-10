@@ -74,10 +74,10 @@ test('successful account pages preserve exact totals and handle a concurrently e
  assert.match(finalPage,/Showing 51–51 of 51/);
  assert.match(finalPage,/data-offset="100" disabled>Next/);
  assert.doesNotMatch(finalPage,/old@fixture.invalid/);
- const empty=renderAdminAccessPanel(access,null,{items:[],total:49,offset:50});
+ const empty=renderAdminAccessPanel(access,{items:[],total:49,offset:50});
  assert.match(empty,/No accounts on this page · 49 total/);
  assert.doesNotMatch(empty,/Showing 51–50/);
- const noAccounts=renderAdminAccessPanel(access,null,{items:[],total:0,offset:0});
+ const noAccounts=renderAdminAccessPanel(access,{items:[],total:0,offset:0});
  assert.match(noAccounts,/Member Access <span class="helper">0<\/span>/);
  assert.doesNotMatch(noAccounts,/data-kind="accounts"|old@fixture.invalid/);
 });

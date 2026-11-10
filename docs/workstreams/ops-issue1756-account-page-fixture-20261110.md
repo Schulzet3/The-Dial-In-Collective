@@ -1,0 +1,3 @@
+# Issue #1756 — final existing account pagination fixture alignment
+
+After the first #1756 contract reconciliation, two *remaining* test calls in `tests/admin-records.test.mjs` still passed the obsolete four-argument invitation-era `renderAdminAccessPanel(access,null,accounts)` signature. This caused the true account pagination argument to be ignored, concealing page 2 and empty-page regression paths. Updated both to the current `renderAdminAccessPanel(access,accounts)` signature without altering any production rendering logic. Both tests must execute and pass on exact source; no CI or release PASS asserted pre-run. Same source-only boundaries and owner permission as #1756; preserve all Auth/member/Community data and current production.
