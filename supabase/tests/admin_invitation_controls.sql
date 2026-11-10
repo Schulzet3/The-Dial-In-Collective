@@ -81,7 +81,7 @@ begin
   raise exception 'Rejected signup was admitted';end if;
  if (select count(*) from auth.users where id in(member_id,pending_id,unverified_id))<>3 then
   raise exception 'Review deleted an Auth identity';end if;
- if (select count(*) from private.dic_signup_review_events where member_id in(pending_id,unverified_id))<>2 then
+ if (select count(*) from private.dic_signup_review_events ev where ev.member_id in(pending_id,unverified_id))<>2 then
   raise exception 'Signup review audit missing';end if;
  if has_function_privilege('anon','public.dic_admin_signup_requests(integer,integer)','EXECUTE')
     or has_function_privilege('anon','public.dic_admin_review_signup(uuid,text,text)','EXECUTE') then
