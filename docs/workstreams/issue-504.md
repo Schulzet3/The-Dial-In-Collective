@@ -1,3 +1,24 @@
+## Issue #504 G1-154 — November 10, 2026 UTC; original historical PR titles/bodies #789–796 [skip netlify]
+
+Recovered live development parent `865c3db290bf2e71bc317318b4c5d07a7049ac28`, main `11e1e8c7c36dad488519476d8a969bb682915d31`, release/production `a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0`; owner-approved temporary PUBLIC November 4–30 exception #630; no visibility change. Issue #504 and #267/#455/#33/#96 remain OPEN. Source original metadata: all eight PR titles and bodies directly read, original word 1–EOF, **8 distinct GitHub records / 1030 whitespace words / 8303 UTF-8 bytes**. Exact per-PR title/body word and physical line ranges, full unaltered original source, UTF-8 SHA1, timestamps, source head/merged SHA, individual semantic dispositions in [G1-154 immutable receipt](../audits/issue504-review-G1-154.json).
+
+- PR #789 (173 words): #267 source-owned confirmed historical MIME false-green smoke bug (HTML for manifest gave PASS), bounded fix and 3 local Node test passes; does not independently reproduce a current defect here.
+- PR #790 (117 words): #33 source-owned selected original603 official proof intent for #298/#430/#186; original PR required fresh merged source and field-conflict review, not full corpus.
+- PR #791 (118 words): #267 post-pin 41 numbered script/test lines, source-bound; do not double-count as #504 code or claim live provider verification.
+- PR #792 (115 words): #33 selected #298 Sugar Process READY with retained origin conflict and #430/#186 roast conflicts; bounded history, not all-603 proof or DEPLOYED.
+- PR #793 (83 words): #504 G1-035 earlier direct six comment bodies already credited; this is only a DISTINCT PR description object.
+- PR #794 (181 words): #455 research correction: Gagné original 0.08 mm² area is not 0.08 mm linear size, and fines conclusions depend on burr setting/redial; no new numeric Locked heuristic approved.
+- PR #795 (119 words): #33 selected #526/#589/#195 original603 source evidence, #589 reused yirgacheff URL slug for current Guji Buku Sayasa; source-time official probe pending.
+- PR #796 (124 words): #33 original603 #589 exact same official host+handle fallback after original 404 and selected H1 identity guard; does not imply global oracle certification or runtime change.
+
+#267 strict N15 `22b7ada15201d5d02e2fc9fbbd812f8f6132bc96`: frozen F481 blob `1cd583ad62de99b31123e637c3fc48751349e0d8` line 46, pinned P149 blob `2be7a62aac93808cc0399f4f825b57dd2ad17539` lines 42–44; **4/4 original literals exact, 11 semantic fields each, 0 #504 code credit**. All further #267 frozen/pinned/post-pin positions need #267 original strict evidence; no duplicate review counted.
+
+Corrected cumulative **7,919 file lines / 60,754 words + 972 distinct original GitHub objects / 262392 words**; G1-117 −15/-4012 correction and previous incomplete queue pointer preserved; 154/154 disjoint indexed batches. No new reproduced current #504 defect or verified safe active deletion. History preserved. Only three scoped audit documentation files in one atomic commit; no code/tests/queue/Locked/original603/SQL/Auth/Edge/member/provider/main/release/publication or visibility changes. Functional tests **NOT_RUN_DOCS_ONLY**, do not interpret skipped CI as functional PASS. Exact-head CI and postmerge governance **PENDING/NOT_PASS** until verified.
+
+**Status OPEN / IN_PROGRESS. NEXT original [PR #797](https://github.com/Schulzet3/The-Dial-In-Collective/pull/797), title word 1**, followed by complete body. PR diffs/reviews/comments, issues/comments, Actions jobs/logs/artifacts, commits/tags/releases, branch/tree/binary drift and unverified delegated #267 remain outstanding.
+
+---
+
 ## Issue #504 G1-144 — November 10, 2026 UTC; historical PR #709–716 direct title/body semantic review [skip netlify]
 
 Live development parent `e6d5daca85617903cef93c67628c19e3de049bb2`, main `9b0cd38f8cdfe2b0291d432ca01d61ae53450028`, release `bf3a82484ab2443a5d8b4dc78075ca5a4d875532`; #504 and concurrent #267/#455/#33/#96 OPEN. Public visibility is temporary owner-approved exception #630 Nov4–30; no visibility change. Read AGENTS, AI entrypoint/preflight, authority-document metadata, current status summary, last strict ledger/receipt and full original title/body for source objects. Large canon/queue entire contents not credited by this batch.
