@@ -82,3 +82,21 @@ test('helper rejects duplicated identity, altered selected notes and milk-as-ing
  assert.equal(refineSelectedCurrentFlavorBase(single,{clean,notes:'orange and honey'}),'');
  assert.equal(refineSelectedCurrentFlavorBase(markup(e,'When served with milk, Its milk chocolate base is complemented with notes of stone fruit and honey.'),{clean,notes:'stone fruit and honey'}),'');
 });
+
+
+test('R102 DEBUG isolate direct helper, scoped product twice, and parser field provenance',async()=>{
+ const {refineSelectedCurrentFlavorBase}=await import('../src/server/coffee-selected-description-sensory.mjs');
+ const e=cases[1],prose='Washed Process. Medium Light Roast. Its milk chocolate base is complemented with notes of stone fruit and honey, culminating in a refreshing, sweet acidity.';
+ const html=markup(e,prose);
+ const clean=value=>String(value).replace(/<[^<>]{0,2000}>/g,' ').replace(/\s+/g,' ').trim();
+ const a=refineSelectedCurrentFlavorBase(html,{clean,notes:'stone fruit and honey'});
+ const b=refineSelectedCurrentFlavorBase(productMarkup(html),{clean,notes:'stone fruit and honey'});
+ const p=extractPublicCoffeeFacts(html,{source_url:'https://'+e.host+e.path});
+ console.log('R102_SOURCE_DIAGNOSTIC '+JSON.stringify({
+  first:a,second:b,seo_fallback_fields:p.seo_fallback_fields,
+  conflicts:p.conflicts,actual:p.fields.tasting_notes,
+  factnotes:(p.source_facts||[]).filter(x=>x.field==='tasting_notes').map(x=>({label:x.label,source_type:x.source_type,value:x.value})).slice(0,10)
+ }));
+ assert.match(a,/milk chocolate/i);
+ assert.match(b,/milk chocolate/i);
+});
