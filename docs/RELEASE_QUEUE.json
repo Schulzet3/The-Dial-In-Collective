@@ -8,6 +8,33 @@
   },
   "items": [
     {
+      "id": "DIC-Q-33-original603-26-selected-unlabeled-flavor-review-context",
+      "issue": 33,
+      "pr": 1785,
+      "title": "Preserve additional literal current selected coffee flavor sentence as source-review context without merging into canonical labeled notes",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-selected-description-sensory.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "R78 original selected #26 fresh official run 42765699519: raw selected H1/HTTPS and 8 focused tests PASS, actual parser five labeled flavor notes but additional tangerine/citrus/wine/berry direct sentence not in canonical. Initial fail-closed four canonical expectations genuinely FAILED, source SHA 990dca2bc35a8b7a70c215913108ee9015c006a2b3b53db91bc51f8a88d20447.",
+        "R78 review-only generic correction preliminary PR-head official 42766090498 PASS: 12/12 focused tests; raw current selected source SHA256 c8a8462091bf4484dc58a3db55a0c29be4cd696114aa124459a46ffa3083af50. True parser keeps five explicit Flavor notes, distinct additional sensory_context source fact 'tangerine, citrus, wine, berry', Washed, no roast inferred, Add Coffee and Source Review rendered; source SHA in PR CI is synthetic merge b6578e30e0920716d35012be4990bb3ec2da2100.",
+        "PR-head approval run42766090163 genuinely FAILED: source scope_paths absent from release-queue intake. Adding IN_PROGRESS queue item without altering 267 preexisting items and states. Exact rerun and nonforce merge pending."
+      ],
+      "ci_runs": [
+        42765699519,
+        42766090498,
+        42766090163
+      ],
+      "blockers": [
+        "Applicable PR-head approval and Node/cloud/SQL/security checks and exact reviewed merge remain pending. No universal original603 certification."
+      ],
+      "owner_source": "Issue #33 original603 independent official selected product semantic review; latest owner Nov6 notification and dev-only no publish instructions.",
+      "notes": "Bounded currently selected #26 only. Unlabeled current same-product flavor context is NOT a second canonical tasting list; no invented roast or producer. This TESTING/IN_PROGRESS scope does not authorize Netlify, provider/production writes, member changes, a release or the full 603 claim."
+    },
+    {
       "id": "DIC-Q-33-original603-597-current-selected-inline-compound-region",
       "issue": 33,
       "title": "Recover directly published unique selected Region from compound current coffee specs",

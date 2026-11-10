@@ -21,7 +21,7 @@ import {equivalentCoffeeProductNames,preferredCoffeeRoasterName,selectedCoffeeNa
 import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
 import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,refineSelectedNamedTastingNotes,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
-import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish} from './coffee-selected-description-sensory.mjs';
+import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,selectedCoffeeSupplementalTastingProse} from './coffee-selected-description-sensory.mjs';
 import {selectedCoffeeMilkSensoryContext} from './coffee-selected-milk-sensory-context.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
@@ -1950,6 +1950,16 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    if(description)fields.tasting_notes=description;
    const finish=refineSelectedCurrentLiteralFinish(currentProduct,{clean,notes:fields.tasting_notes});
    if(finish)fields.tasting_notes=finish;
+  }
+  // A distinct current selected flavor sentence is review evidence, not a
+  // license to concatenate notes or override a stronger literal Flavor label.
+  if(fields.tasting_notes&&!seoFallbackByFields.get(fields)?.has('tasting_notes')){
+   const additional=selectedCoffeeSupplementalTastingProse(currentProduct,{clean,notes:fields.tasting_notes});
+   if(additional&&source_facts.length<384&&!source_facts.some(f=>f.field==='sensory_context'&&
+     f.label==='Selected current coffee additional flavor prose'))
+    source_facts.push({field:'sensory_context',
+     label:'Selected current coffee additional flavor prose',value:additional,source_url,
+     source_type:'html',section:'Exact selected product unlabeled tasting description'});
   }
   // Flag only direct selected-source disagreements, not unsupported SEO.
   // A higher-priority current description may remain the canonical suggestion
