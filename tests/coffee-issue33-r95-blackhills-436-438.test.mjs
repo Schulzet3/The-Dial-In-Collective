@@ -40,7 +40,7 @@ test('House Blend component City + Full City cannot be converted to one roast ti
  assert.ok(coffeeUrlPreviewMarkup(p).includes('coffee-url-preview'));
  assert.ok(coffeeSourceReviewSnapshot({...p,source_url:'https://www.blackhillscoffee.com'+e.path}));
 });
-test('Washington's exact selected light roast outranks Medium grind selection',()=>{
+test("Washington's exact selected light roast outranks Medium grind selection",()=>{
  const e=c(438),p=parse(e,e.own.join(' '),'<aside><label>Grind</label><option>Medium</option></aside>');
  assert.equal(p.ok,true,JSON.stringify(p));
  assert.equal(p.fields.name,e.name);
