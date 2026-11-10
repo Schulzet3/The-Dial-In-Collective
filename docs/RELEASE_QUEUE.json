@@ -12,8 +12,8 @@
       "issue": 33,
       "pr": 1785,
       "title": "Preserve additional literal current selected coffee flavor sentence as source-review context without merging into canonical labeled notes",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "6aceea0de6ab61a15123e62551ea1b9f4a2c8fbd",
       "scope_paths": [
         "src/server/coffee-selected-description-sensory.mjs",
         "src/server/coffee-page-metadata.mjs"
@@ -21,18 +21,29 @@
       "tests": [
         "R78 original selected #26 fresh official run 42765699519: raw selected H1/HTTPS and 8 focused tests PASS, actual parser five labeled flavor notes but additional tangerine/citrus/wine/berry direct sentence not in canonical. Initial fail-closed four canonical expectations genuinely FAILED, source SHA 990dca2bc35a8b7a70c215913108ee9015c006a2b3b53db91bc51f8a88d20447.",
         "R78 review-only generic correction preliminary PR-head official 42766090498 PASS: 12/12 focused tests; raw current selected source SHA256 c8a8462091bf4484dc58a3db55a0c29be4cd696114aa124459a46ffa3083af50. True parser keeps five explicit Flavor notes, distinct additional sensory_context source fact 'tangerine, citrus, wine, berry', Washed, no roast inferred, Add Coffee and Source Review rendered; source SHA in PR CI is synthetic merge b6578e30e0920716d35012be4990bb3ec2da2100.",
-        "PR-head approval run42766090163 genuinely FAILED: source scope_paths absent from release-queue intake. Adding IN_PROGRESS queue item without altering 267 preexisting items and states. Exact rerun and nonforce merge pending."
+        "PR-head approval run42766090163 genuinely FAILED: source scope_paths absent from release-queue intake. Adding IN_PROGRESS queue item without altering 267 preexisting items and states. Exact rerun and nonforce merge pending.",
+        "PR #1785 reviewed and non-force squash merged 6aceea0de6ab61a15123e62551ea1b9f4a2c8fbd; all seven reviewed src/test/workflow/queue/scoped-journal Git blobs byte-identical to merged sources; explicit [skip netlify] title, no prod.",
+        "Final PR-head after queue intake correction: Node/lint/build42766245333 SUCCESS 3365 total/3359 PASS/0 FAIL/6 intentional SKIP; cloud/mobile42766245290, SQL42766245218, approval42766245247, security42766245273, Python42766245478, private source42766245490, source-selected R78 42766245449 SUCCESS; frozen60342766245397 SKIPPED, not PASS.",
+        "Exact MERGED Node/lint/build42766562569 SUCCESS 3365/3359 PASS/0 FAIL/6 SKIP, cloud/mobile42766563079, approval42766562819, Python42766562731 SUCCESS, selected official actual parser/Add Coffee/Source Review 42766562935 SUCCESS. Four extra selected literal fruit notes strictly SOURCE REVIEW ONLY, stronger direct Flavor five remain canonical; roast conditional not promoted.",
+        "Independently downloaded exact MERGED artifact 13738969798 ZIP 50,114B SHA256 b2ac2ae368a9179b40422ac213c9aeb9fe4f47d7ec99ab06d7c4761fbce2e5f5 matches provider; raw current official selected HTML SHA256 3ad7676fccfb58f286b5c13dc3330d0ed5cc6d8cd5d3a76106631f0c6965e393, source JSON c80dd3aef624157b625859629e539e2d4978a69dba15c5eb9a8425c1050dbffc, afterproof e102608f7d2f853f480a7b9dcbb58fcdf6858d02373f345454e8f30da916fc45. Exact source SHA bound, failures [], manual_certified=0, no production operations."
       ],
       "ci_runs": [
         42765699519,
         42766090498,
-        42766090163
+        42766090163,
+        42766245333,
+        42766245290,
+        42766245218,
+        42766245247,
+        42766245449,
+        42766562569,
+        42766563079,
+        42766562819,
+        42766562935
       ],
-      "blockers": [
-        "Applicable PR-head approval and Node/cloud/SQL/security checks and exact reviewed merge remain pending. No universal original603 certification."
-      ],
+      "blockers": [],
       "owner_source": "Issue #33 original603 independent official selected product semantic review; latest owner Nov6 notification and dev-only no publish instructions.",
-      "notes": "Bounded currently selected #26 only. Unlabeled current same-product flavor context is NOT a second canonical tasting list; no invented roast or producer. This TESTING/IN_PROGRESS scope does not authorize Netlify, provider/production writes, member changes, a release or the full 603 claim."
+      "notes": "NARROW verified READY DEVELOPMENT ONLY. Current original #26 selected direct named Flavor canonical five, separate direct unlabeled fruit four available only as source fact, not autofill. Full 603/201/1197 semantic certification remains IN_PROGRESS; no release or production authorization."
     },
     {
       "id": "DIC-Q-33-original603-597-current-selected-inline-compound-region",
