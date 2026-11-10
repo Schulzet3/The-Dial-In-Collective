@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "137",
+  "date_utc": "2026-11-10",
+  "project_ref": "azviqqejypsefzilgonr",
+  "provider_status": "ACTIVE_HEALTHY",
+  "pg_version": "17.11.0.003",
+  "source_parent_sha": "bb219a3f2b8e4f1580e48f6420f60334349c1ba5",
+  "main_sha": "9b0cd38f8cdfe2b0291d432ca01d61ae53450028",
+  "production_sha": "bf3a82484ab2443a5d8b4dc78075ca5a4d875532",
+  "scope": "DIRECT_LIVE_APPLICATION_SECURITY_DEFINER_EXECUTE_GRANT_DISCREPANCY_AND_FULL_4_FUNCTION_CALL_PATH_REVIEW",
+  "function_definer_acl_records_direct_reviewed": 68,
+  "private_definer_functions": 53,
+  "public_definer_functions": 15,
+  "public_execute_outliers": [
+    {
+      "signature": "private.dic_admin_delete_preview(text,uuid)",
+      "oid": 20257,
+      "source_md5": "733e337473ef8f190e3a78ebf5ebfad1",
+      "grant": "PUBLIC EXECUTE",
+      "auth_schema_usage": true,
+      "anon_schema_usage": false,
+      "admin_guard": "private.require_member plus auth.uid and private.is_admin"
+    },
+    {
+      "signature": "private.dic_admin_delete_record(text,uuid,bigint,jsonb)",
+      "oid": 20259,
+      "source_md5": "71d4703233388fb04e263767caa5b57b",
+      "grant": "PUBLIC EXECUTE",
+      "auth_schema_usage": true,
+      "anon_schema_usage": false,
+      "admin_guard": "private.require_member plus private.is_admin; revision and impact checks"
+    }
+  ],
+  "public_invoker_wrappers": [
+    {
+      "signature": "public.dic_admin_delete_preview(text,uuid)",
+      "source_md5": "102b8d2797413ed02a943d093cc60427"
+    },
+    {
+      "signature": "public.dic_admin_delete_record(text,uuid,bigint,jsonb)",
+      "source_md5": "54ad38cc86048b526c158f4f34867398"
+    }
+  ],
+  "new_direct_source_word_credit": 0,
+  "previous_sql_bodies_reread": "All four complete deployed SQL bodies directly examined and semantically assessed against callable role graph; baseline SQL words not recredited.",
+  "other_account_delete_functions_effective_acl_records_reviewed": 12,
+  "source_and_safety_findings": [
+    "Only two of 68 current app SECURITY DEFINER functions have PUBLIC EXECUTE. Authenticated browser users have private USAGE; anon lacks private schema USAGE.",
+    "Both guarded functions reject nonadmin callers. This is a least-privilege hardening opportunity, not verified anonymous exploit or current data exposure.",
+    "Existing public wrappers are SECURITY INVOKER and require authenticated or service_role; existing private two functions are used through those wrappers.",
+    "Revoking PUBLIC and explicitly granting authenticated plus service_role preserves normal role authorization, while removing default privilege for anon and nonclient authenticator. Internal postgres owner execution unchanged.",
+    "Verified admin deletion guard and impact/revision checks remain unaltered; no actual member deletion performed."
+  ],
+  "development_fix": {
+    "migration": "supabase/migrations/20261110045500_dic_admin_private_delete_acl_hardening.sql",
+    "sql_test": "supabase/tests/admin_safe_delete.sql",
+    "expected": "PUBLIC execute absent, anon cannot execute, authenticated/service_role can; nonadmin private call denied; existing synthetic delete succeeds",
+    "status": "PENDING_ISOLATED_PG_AND_SOURCE_BOUND_CI"
+  },
+  "advisory_drift": "Existing 8 no-policy notices, 10 authenticated-definer notices, leaked-password owner exception; 15 unindexed FK, 9 unused-index signals, health 0. None is deletion authority.",
+  "limits": [
+    "No hosted Auth/JWT/API dashboard configuration or compiled native implementations accessed",
+    "No live role-switch/delete test or production DDL/DML",
+    "No currently evidenced exploitable path, no private Auth/member rows or sensitive logs accessed"
+  ],
+  "next": "Verify exact-source disposable PostgreSQL admin_safe_delete SQL and source-bound governance/Node. If pass, classify independently READY; otherwise keep TESTING and correct. Resume new/changed provider definitions and drift.",
+  "baseline": "IN_PROGRESS",
+  "production_writes": false,
+  "deploys": false
+}

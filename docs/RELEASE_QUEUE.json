@@ -10854,6 +10854,27 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
       "notes": "Development-only fail-closed conditional NULL-actor control-flow fix. No current affected live rows. No actor takeover, real account deletion, provider mutation, release approval or deployment. This is not READY or DEPLOYED; release after independent exact candidate testing and owner publish authority.\nNovember 10 Run136d: independently source-bound PostgreSQL/signed-JWT, Node22, cloud/browser, and corrected governance CI all SUCCESS. Actual source b4ed and docs-only head 584 verified; READY for separate candidate assembly, not published/deployed. No owner action requested under #509 routine-fix notification policy."
+    },
+    {
+      "id": "DIC-Q-509-private-delete-definer-execute-acl",
+      "issue": 509,
+      "pr": null,
+      "title": "Tighten PUBLIC EXECUTE on two private admin deletion SECURITY DEFINER functions",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261110045500_dic_admin_private_delete_acl_hardening.sql"
+      ],
+      "tests": [
+        "Live 68 SECURITY DEFINER ACL records: only 2 old private admin destructive functions had PUBLIC EXECUTE; both full SQL bodies and public wrappers assessed; no demonstrated unauthorized execution due member/admin guards and anon lacking private schema USAGE.",
+        "Development additive migration revokes PUBLIC, explicitly retains authenticated and service_role, with disposable SQL security + authorized admin workflow regression; source-bound CI must be read back before READY."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Await actual exact-source isolated PostgreSQL/Node/security/governance checks of migration and synthetic admin_safe_delete SQL. No provider/test-account write authorized."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
+      "notes": "Defense-in-depth least-privilege normalization only, no verified current privacy incident, no production deploy or member deletion. Do not publish without separate one-use owner command."
     }
   ],
   "history": [
