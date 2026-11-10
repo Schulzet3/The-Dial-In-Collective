@@ -460,6 +460,13 @@ export function recommendation(s,coffeeId,options={}) {
  const measuredLocalSuccess=measuredRecipeShots(s.shots).some(sh=>
   !sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&
   sh.basketId===basket.id&&sh.feedMode===feed&&sh.calibrationId===v.calibrationId&&
+  // An archived green label cannot veto actual latest feedback if its
+  // recorded grind/temperature could not have been entered for this setup.
+  // Preserve original ratings, measurements and private History unchanged.
+  finite(sh.grindSetting)&&sh.grindSetting>=0&&
+  (!finite(v.grinderMin)||sh.grindSetting>=v.grinderMin)&&
+  (!finite(v.grinderMax)||sh.grindSetting<=v.grinderMax)&&
+  (sh.tempC==null||validRecordedTemperature(sh.tempC))&&
   sh.dialedIn===true&&isDialed(sh.tasteScales));
  if(!options.ignoreAdvice&&last&&!measuredLocalSuccess){
   // Keep the recipe card consistent with fresh taste feedback, even before a
