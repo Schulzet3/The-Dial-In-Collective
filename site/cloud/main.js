@@ -350,7 +350,7 @@ class CloudApp {
     const reason=state==='rejected'?'Your request was not approved. Contact the administrator if you believe this was a mistake.':
       state==='revoked'?'This account no longer has member access. Contact the administrator.':
       !this.status?.emailVerified?'Verify your email using the link you received. Your request is queued for administrator review.':
-      'Your email is verified. The administrator will review your account. No invitation code is needed.';
+      'Your email is verified. The administrator will review your account before access starts.';
     return `<section class="welcome cloud-auth" aria-labelledby="approval-wait-title"><h2 id="approval-wait-title">${e(title)}</h2>
      <p class="helper">${e(this.identity.email)}</p><p class="helper" role="status">${e(reason)}</p>
      ${button('Check Approval Status','check-approval','','primary full space-top')}

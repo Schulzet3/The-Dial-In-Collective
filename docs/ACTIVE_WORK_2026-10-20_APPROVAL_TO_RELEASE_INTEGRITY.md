@@ -469,3 +469,6 @@ Owner-authorized release DIC-20261106-READY7-23 independently verified DEPLOYED:
 
 ## November 10, 2026 — #1756 isolated SQL tests now respect private RLS [skip netlify]
 - Second exact PR SQL 42740943437 completed failed in synthetic test, not migration: test queried private.beta_members/auth.users as role authenticated after legitimate admin RPC. Corrected test to assess only RPC outcomes under authenticated and inspect backend tables after RESET ROLE in disposable dic_ci. This strengthens rather than weakens private RLS. No live SQL/records/Netlify changed, exact new CI required.
+
+## November 10, 2026 — #1756 visual QA fixture and obsolete code-specific CSS [skip netlify]
+- Updated isolated visual_review.py to model administrator new signup RPC, pending-action badge, six metrics and no invitation list. Removed obsolete `.admin-invite-*` and `.admin-new-code` CSS selectors while preserving member styles, cleaned obsolete code comments and copy. Reuse existing authorized UI/role tests; no live account/code deletion, migration or Netlify publication.

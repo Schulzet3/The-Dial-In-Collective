@@ -107,8 +107,7 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
  <section class="admin-panel admin-health" id="admin-infrastructure" tabindex="-1">${adminDisclosure('Infrastructure','infrastructure',null,'<p>Database status and access are checked on refresh. Verified backup freshness is managed separately in GitHub and private Google Drive; it is not reported as healthy without evidence.</p><p class="helper">Manual coffee review is administrator-only. A manually approved coffee is not mislabeled as independently source-verified. Account approval is administrator-only.</p>',{expanded:options.openSections?.has('infrastructure')})}</section>`;
 }
 
-/** Strictly administrator-only UI projection. The list never contains a
- * plaintext token: freshly generated secrets appear once per browser tab. */
+/** Strictly administrator-only member access projection. */
 export function renderAdminAccessPanel(access={},accountPage=null){
  const hasAccountPage=Array.isArray(accountPage?.items)&&!accountPage?.error;
  const members=hasAccountPage?accountPage.items:Array.isArray(access?.members)?access.members:[];

@@ -70,7 +70,7 @@ async function start(){
    const trigger=root.querySelector('#admin-refresh');if(trigger)trigger.disabled=true;
    try{
     // The summary is always current; private listings are loaded only for
-    // operator-expanded sections. Accounts/Invites share one disclosure.
+    // operator-expanded sections. Accounts share one disclosure; signup requests have their own review panel.
     const kinds=[...new Set([...openSections].flatMap(kindsForSection))];
     const loadAccess=openSections.has('accounts');
     const [dashboard,nextAccess,nextSignups,...pages]=await Promise.all([
