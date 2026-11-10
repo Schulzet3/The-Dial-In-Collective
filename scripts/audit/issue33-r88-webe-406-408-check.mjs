@@ -63,7 +63,7 @@ if(process.env.DIC_ISSUE33_R88_VERIFY==='1'){
    check(!/colombia|quindio/i.test(f.origin||''),number+'_no_neighbor_origin');
    check(!/strawberry|tangerine/i.test(f.tasting_notes||''),number+'_no_neighbor_limited_release_notes');
   }else{
-   check(/colombia/i.test(f.origin||'')&&/quindio/i.test(f.origin||''),number+'_own_lot_location');
+   check(/colombia/i.test(f.origin||'')&&norm(f.origin).includes('quindio'),number+'_own_lot_location');
    check(/jairo arcila/i.test(f.producer||'')&&/santa monica/i.test(norm(f.producer)),number+'_own_named_producer');
    check(/castillo/i.test(f.variety||''),number+'_own_variety');
    check(f.process==='Anaerobic',number+'_coferment_primary_process');
