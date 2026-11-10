@@ -1,0 +1,50 @@
+name: DIC Issue33 R95 original603 Black Hills 436-438 current selected
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r95-blackhills-436-438.yml
+      - scripts/audit/issue33-r95-blackhills-436-438-check.mjs
+      - tests/coffee-issue33-r95-blackhills-436-438.test.mjs
+      - docs/workstreams/ops-issue33-r95-blackhills-20261110.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r95-blackhills-436-438.yml
+      - scripts/audit/issue33-r95-blackhills-436-438-check.mjs
+      - tests/coffee-issue33-r95-blackhills-436-438.test.mjs
+permissions:
+  contents: read
+jobs:
+  blackhills-current:
+    name: original603-436-438-current-official
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Selected Black Hills source and focused adversarial regressions
+        run: node --test tests/coffee-issue33-r95-blackhills-436-438.test.mjs
+      - name: Fresh bounded guarded public official HTTPS and actual parser/Add Coffee/Source Review
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '436,438'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r95-blackhills
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict current source, immutable CSV and no unsupported roast inference
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r95-blackhills
+          DIC_ISSUE33_R95_VERIFY: '1'
+        run: node scripts/audit/issue33-r95-blackhills-436-438-check.mjs
+      - name: One-day bounded raw source and afterproof
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r95-blackhills-436-438
+          path: /tmp/dic33-r95-blackhills/
+          retention-days: 1
+          if-no-files-found: warn
