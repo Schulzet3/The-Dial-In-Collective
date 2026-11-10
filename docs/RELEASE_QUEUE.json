@@ -11433,7 +11433,7 @@
       "issue": 455,
       "pr": 1901,
       "title": "Exclude Boolean/array-coerced ratio and shot duration from unproven Community starting evidence",
-      "state": "IN_PROGRESS",
+      "state": "READY",
       "scope_paths": [
         "site/lib/community-evidence.js"
       ],
@@ -11441,18 +11441,28 @@
         "Original Git blob 74c93c7ff7814337752e0ef9052412eaf55890e3 verified byte-identical locally; before code, true ratio => 1, true duration => 1, arrays coerced to plausible readings; synthetic only.",
         "R455-168 four direct positive/negative local Node22 test groups PASS after safe type guard; GitHub PR-head/merged source Node/browser/offline/SQL/security/governance NOT YET VERIFIED.",
         "Initial PR-head approval workflow 42887528841 genuinely FAILED because site/lib/community-evidence.js lacked a trackable queue item; adding this IN_PROGRESS source-only scope item, not certifying READY.",
-        "Second exact PR-head approval 42887791722 FAILED because schema requires explicitly null (not absent) merged_source_sha for an unmerged IN_PROGRESS item. Read scripts/release/release-queue.mjs and corrected null sentinel without certifying merge or changing code."
+        "Second exact PR-head approval 42887791722 FAILED because schema requires explicitly null (not absent) merged_source_sha for an unmerged IN_PROGRESS item. Read scripts/release/release-queue.mjs and corrected null sentinel without certifying merge or changing code.",
+        "PR #1901 exact final reviewed head 3b65c3cb47b0a31d65f92e461ccd438b944ac541 Node22 42887964674 SUCCESS 3600 PASS/0 FAIL/6 intentional SKIP, four new positive/negative synthetic numeric-type tests PASS; lint/build SUCCESS.",
+        "PR-head mobile/Chromium/offline/a11y 42887964682, isolated SQL 42887964407, source-security 42887965516 and approval/release-intake 42887964596 all SUCCESS. Original frozen603 42887965178 SKIPPED NOT PASS. Earlier governance 42887528841 and 42887791722 FAILED for missing queue item and missing null merged_source_sha sentinel, corrected without altering code/tests/ledger bytes.",
+        "Nonforce squash merge 767e12c8e763959f0b6677f4de7ad7e69ce80cf3 at exact dev parent 2cdfa50691d48e4d1dad0fc1e9b659c302a897d5. All five PR-head/merged Git blobs match byte-for-byte. Exact merged Node22 42888613274 SUCCESS 3600 PASS/0 FAIL/6 SKIP, including all 4 new tests and lint/build; mobile/browser/offline 42888613128 SUCCESS; merged governance 42888613001 SUCCESS. No live member/provider/production changes."
       ],
       "ci_runs": [
         42887528841,
-        42887791722
+        42887791722,
+        42887964596,
+        42887964674,
+        42887964682,
+        42887964407,
+        42887965516,
+        42887965178,
+        42888613274,
+        42888613128,
+        42888613001
       ],
-      "blockers": [
-        "Actual PR-head Node22/cloud/mobile/SQL/security/approval and merged-source checks not yet all verified; do not mark READY or deploy."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "SAFE development-only source type integrity; numeric scalar and decimal strings retained, no change to thresholds, source verification, Community RLS, five ratings/Locked recommendations, no member/provider write, no deployment.",
-      "merged_source_sha": null
+      "notes": "R455-168 READY development ONLY after all final exact-source CI, no deployment or publication. Type-only filter rejects Boolean/array/object numeric coercions from weak Community aggregate; preserved decimal strings, original numeric limits, all five sensory ratings, private shot history, Community privacy and Locked rules. Synthetic test only, no actual member/espresso quality outcome.",
+      "merged_source_sha": "767e12c8e763959f0b6677f4de7ad7e69ce80cf3"
     },
     {
       "id": "DIC-Q-509-admin-delete-null-kind-guard",
