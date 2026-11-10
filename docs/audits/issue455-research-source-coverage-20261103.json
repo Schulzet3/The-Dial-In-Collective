@@ -1531,6 +1531,26 @@
       "factual_status": "SOURCE_INTERNAL_NONCAUSAL_ASSOCIATIONS_AND_CONSENSUS_ATTRIBUTE_SCORES_ONLY; NOT_PERSONAL_PREFERENCE_OR_ESPRESSO_RECIPE_QUALITY_PREDICTION",
       "reviewed_date_utc": "2026-11-10",
       "implementation_status": "RESEARCH_ONLY_NO_APP_OR_LOCKED_POLICY_CHANGE"
+    },
+    {
+      "id": "LIT-2022-BATALI-FULLIMMERSION-TEMPERATURE-SENSORY",
+      "type": "peer_reviewed_primary_full_immersion_factorial_coffee_sensory",
+      "title": "Sensory Analysis of Full Immersion Coffee: Cold Brew Is More Floral, and Less Bitter, Sour, and Rubbery Than Hot Brew",
+      "authors": "Mackenzie E. Batali; Lik Xian Lim; Jiexin Liang; Sara E. Yeager; Ashley N. Thompson; Juliet Han; William D. Ristenpart; Jean-Xavier Guinard",
+      "published": "2022-08-13",
+      "journal": "Foods 2022, 11(16), 2440",
+      "doi": "10.3390/foods11162440",
+      "url": "https://www.mdpi.com/2304-8158/11/16/2440",
+      "access": "FULL_PUBLISHER_ORIGINAL_HTML_ABSTRACT_METHODS_RESULTS_DISCUSSION_CONCLUSIONS_FUNDING_DIRECTLY_READ_20261110; ORIGINAL_PDF_FIGURE_PIXELS_SUPPLEMENT_RAW_PANEL_DATA_NOT_OBTAINED",
+      "review_status": "PRIMARY_PUBLISHER_FULL_TEXT_SECTIONS_AND_METHODS_READ; NUMERIC_SOURCE_DESIGN_REVIEW_BOUNDED_NOT_PDF_FIGURE_OR_REPLICATE_AUDIT",
+      "evidence_grade": "PEER_REVIEWED_3_ORIGINS_X_3_ROASTS_X_3_FULL_IMMERSION_BREW_TEMPS_27_CONDITIONS_TRIPLICATE; 10_RETAINED_TRAINED_DESCRIPTIVE_PANELISTS_UNSTRUCTURED_0_100_SCALES; NOT_PRESSURIZED_ESPRESSO_OR_DIC_TASTE_CAUSAL_VALIDATION",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Publisher HTML read directly but its binary SHA256, publisher PDF, supplementary PCA figure pixels and underlying judge data were not downloaded/reanalyzed. Source authors state dataset on request, not directly accessed.",
+      "claims_verified_externally": "Original Methods §§2.1-2.6: 27 3x3x3 factorial samples (one Ethiopian washed, one El Salvador honey, one Sumatra wet-hulled coffee, each light/medium/dark, immersion at 4/22/92 C) prepared in triplicate. All 27 brewed to extraction equilibrium for hours, had different starting extraction percentages, then diluted to exactly 2% TDS and uniformly chilled and served at 4 C. COVID home descriptive panel training began with 20, 17 entered formal evaluation, 14 completed and four excluded for inconsistent replicate scoring, leaving 10 retained panelists. Scores were 0-100 for 27 trained terms, not five DIC sliders. Across tested roasts/origins, authors report hot immersion samples more bitter, sour and rubbery, cold more floral, with roast/origin interaction. Temperature altered pH more consistently than titratable acidity, which did not systematically change with brewing temperature. Discussion explicitly notes no compound-level chemistry, residual percentage-extraction differences, long hot-steeping aroma loss and uncontrolled consumption lighting. Funded by Coffee Science Foundation underwritten by Toddy LLC cold brewing equipment supplier; no conflicts declared.",
+      "current_app_crosswalk": "Live development 040dc3458f422e2e7b665ac1532a12f486ca781b current constants/model/engine retain five rated personal sensory inputs and user-adjustable optional espresso brewing temperature with 70-100 C recorded input bounds, style-specific recipe timing and one intentional next change. This full-immersion, all-4C-served, 2%-TDS standardized study cannot establish the effect of raising espresso machine brew temperature, sour/bitter adjustment direction or optimal DIC personal ratings. No source-derived current app defect found; no production change.",
+      "factual_status": "CONTROLLED_FULL_IMMERSION_SENSORY_DESCRIPTIVE_ASSOCIATIONS_NOT_PRESSURIZED_ESPRESSO_CAUSAL_CONTROL_PRIORS_OR_PERSONAL_SWEETNESS_RATING_VALIDATION",
+      "reviewed_date_utc": "2026-11-10",
+      "implementation_status": "RESEARCH_ONLY_NO_APP_LOCKED_POLICY_OR_RELEASE_CHANGE"
     }
   ],
   "evidence_checks": [
@@ -4604,6 +4624,24 @@
       "current_app": "Only eligibility of malformed numeric types in Community aggregates; does not alter original member/private data or stored Community records.",
       "result": "FOUR_GROUPS_PASS_IN_LOCAL_NODE22_PR_HEAD_AND_EXACT_MERGE; BROWSER_OFFLINE_SQL_SECURITY_APPROVAL_HEAD_SUCCESS; MERGED_BROWSER_AND_APPROVAL_SUCCESS; FROZEN603_SKIPPED",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-169-A",
+      "source": "LIT-2022-BATALI-FULLIMMERSION-TEMPERATURE-SENSORY",
+      "claim": "Direct original 2022 Foods Methods/Results: 3 coffee origins x 3 roast levels x 3 full-immersion temperatures (4,22,92 C), 27 conditions brewed in triplicate; 100g/500g Toddy immersion to equilibrium, diluted to 2% TDS and served at common 4 C. Four sensory descriptors differ by temperature across observed conditions; hot brews reported more bitter/sour/rubber-like and cold more floral.",
+      "grade": "DIRECT_ORIGINAL_PUBLISHER_METHODS_AND_RESULTS_CONTROLLED_FACTORIAL_FULL_IMMERSION_NOT_ESPRESSO",
+      "current_app": "Existing DIC espresso machine temperatures and roast/style priors must not inherit full immersion temperature direction.",
+      "result": "SOURCE_INTERNAL_CONTROLLED_IMMERSION_FINDING_VERIFIED_NARROWLY; NO_DIC_ESPRESSO_OPTIMUM_RECOMMENDATION_OR_TEST",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-169-B",
+      "source": "LIT-2022-BATALI-FULLIMMERSION-TEMPERATURE-SENSORY",
+      "claim": "Original panel had 10 retained trained judges after dropouts/exclusions, 27 sensory 0-100 dimensions, and single green coffee per origin/process combination; percent extraction differed despite equalized TDS, all coffee tasted chilled, long hot immersion may lose volatiles, colored samples were not viewed under controlled lighting. pH, titratable acidity and perceived sourness did not coincide as a single measured proxy.",
+      "grade": "DIRECT_ORIGINAL_METHODS_DISCUSSION_CONCLUSIONS_AND_FUNDING; CHEMICAL_MECHANISMS_SPECULATIVE",
+      "current_app": "DIC's five self-ratings are not pH readouts or objective chemical confidence; no scientific authorization to advise universal brew temperature change.",
+      "result": "BOUND_TRANSFER_TO_IMMERSION_DESCRIPTIVE_CONTEXT; NO_USER_FACING_BEHAVIOR_OR_LOCKED_SUPERSESSION",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [],
@@ -4711,19 +4749,20 @@
     "R455-161 @d535a5bb04b402209d04897f8b9d46b3e407f87b: direct Library 10pp PDF page 8-9 hypothesis that slow-feed mode changes alone create a recipe family DISALLOWED by later Locked Master ('Slow Feed remains a grinder condition, does not itself create a family or Experiment'); current engine assignment ratio/coffee/style and grinder feed conditioning crosschecked. 89 sources / 238 checks / 122 proposals; no new code/Locked/queue/production change, no owner decision. Original PDF already inventoried, different registered archive hash, S019 inaccessible. Git PR/CI/merge pending; #267 literal credit zero.",
     "R455-162 @9743126ad5f920f5cd56f9d5f654fb643312801f: independently reviewed original 2026 Lo Vecchio et al. 3-brewer coffee study (DOI 10.3390/separations13060166): single blend, non-equivalent dose/yield/apparatus, pooled composite chemistry, 10-person duplicate sensory panel, manufacturer-provided test device and consultancy disclosed; neither 10s/nominal15bar nor sweetness panel is universal DIC espresso advice. 90 sources / 240 bounded checks / 123 proposals; no safe runtime bug, Locked/queue/main/release/Netlify/provider change or #267 literal-line credit; original publisher PDF/raw data and standalone S019 PDF not accessed; Git PR/CI/merge to verify.",
     "R455-164 @eeec5a9bb88f73c69ab4eccaab46e8f14462d534: source repro showed four historical explicit invalid grinder/temp records can falsely count for mandatory outlier prompt. Same-commit engine/test/source-ledger/journal staged; run exact PR-head Node22 and applicable governance, repair failures, nonforce merge, readback merged CI, reconcile queue/status and Issue #455. No numeric/Locked/product/production change. #267 line credit 0; S019 original inaccessible.",
-    "R455-164 FINAL verified code PR #1857 head 9f8d713... nonforce merged c26a9a9... four exact blobs and 3529 Node22 PASS/0 FAIL/6 SKIP both head/merged, browser/mobile/offline/SQL/security/approval applicable PASS. New queue DIC-Q-455-outlier-explicit-controls READY in development only; no deployment. Continue separate claim-level source inventory and narrow SAFE UX review under live SHA; original standalone S019 still inaccessible; no #267 credit."
+    "R455-164 FINAL verified code PR #1857 head 9f8d713... nonforce merged c26a9a9... four exact blobs and 3529 Node22 PASS/0 FAIL/6 SKIP both head/merged, browser/mobile/offline/SQL/security/approval applicable PASS. New queue DIC-Q-455-outlier-explicit-controls READY in development only; no deployment. Continue separate claim-level source inventory and narrow SAFE UX review under live SHA; original standalone S019 still inaccessible; no #267 credit.",
+    "R455-169 starting at current dev 040dc3458f422e2e7b665ac1532a12f486ca781b: direct original Batali et al Foods 2022 DOI 10.3390/foods11162440 primary HTML review of 27 cold/full immersion conditions and 10 trained judges, NOT pressure espresso or app five ratings. 93 sources/254 evidence checks/130 proposals. No code/Locked/product/production change. Docs PR/head/merged CI not yet verified; S019 standalone inaccessible; #267 zero credit."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-168",
-    "source_sha": "767e12c8e763959f0b6677f4de7ad7e69ce80cf3",
+    "run_id": "R455-169",
+    "source_sha": "040dc3458f422e2e7b665ac1532a12f486ca781b",
     "issue": 455,
-    "phase": "SAFE_COMMUNITY_TYPE_GUARD_NONFORCE_MERGED_EXACT_HEAD_AND_MERGED_CI_VERIFIED_READY_DOCS_RECONCILIATION",
+    "phase": "2022_COLD_FULL_IMMERSION_PRIMARY_SOURCE_BOUND_DOCS_PR_CI_UNVERIFIED",
     "source_counts": {
-      "sources": 92,
-      "evidence_checks": 252,
-      "proposals": 129
+      "sources": 93,
+      "evidence_checks": 254,
+      "proposals": 130
     },
-    "release_state": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+    "release_state": "NO_DEPLOYABLE_DELIVERABLE",
     "original_s019": "UNAVAILABLE_NOT_REVIEWED",
     "github267_literal_review_credit": 0
   },
@@ -7443,6 +7482,28 @@
       "production_deployed": false,
       "merge_sha": "767e12c8e763959f0b6677f4de7ad7e69ce80cf3",
       "pr_number": 1901
+    },
+    {
+      "id": "R455-PROP-169-IMMERSION-TEMP-NOT-ESPRESSO-TASTE-ACTUATOR",
+      "finding": "At equal cold serving temperature and equal TDS, original full-immersion experiment found different descriptive sour/bitter/floral attributes with brew temperature. However origin is confounded with process, percent extraction still differed, long steep affected volatile loss and study is not pressure espresso or DIC five personal ratings; converting findings to 'sour espresso -> lower machine temp' would be scientifically unsupported.",
+      "evidence": [
+        "R455-EV-CIT-169-A",
+        "R455-EV-CIT-169-B"
+      ],
+      "severity": "P3_SCIENTIFIC_CAUSAL_TRANSFER_GUARD_NO_PROVEN_CODE_BUG",
+      "user_benefit": "Avoid unproven automatic machine temperature changes, fictitious sourness/pH attribution, and inflated recommendation confidence; preserve simple five taste controls and notes.",
+      "source_provenance": "Batali et al Foods 2022 DOI 10.3390/foods11162440 original peer-reviewed open-access HTML directly reviewed 2026-11-10; PDF/figures/raw data not acquired.",
+      "current_locked": "Preserve all five taste ratings and one actually controllable recommendation change, numeric style priors and optional temperature capability, original history and personal learning.",
+      "current_app": "Existing site/lib/engine.js and constants.js keep temperature optional and separate user taste feedback; no directly reproducible UX or correctness defect shown by this study.",
+      "proposed_change": "RESEARCH ONLY: retain current behavior, mark external cold-immersion associations nontransferrable. Future experimental espresso temperature direction or adding taste-scale definitions would require owner approval and source-backed physical trials.",
+      "evidence_grade": "ORIGINAL_FACTORED_FULL_IMMERSION_3X3X3_WITH_10_RETAINED_TRAINED_PANEL; NOT_REAL_APP_ESPRESSO_OUTCOME",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "DOCUMENTATION_ONLY_NO_RUNTIME_FIX",
+      "test_plan": "Read primary Methods/Results/Discussion/Conclusions; source-bound constants/engine/model crosswalk. No runtime code changed; no Node, device, provider or actual physical tasting trials claimed.",
+      "release_queue_status": "NO_DEPLOYABLE_DELIVERABLE",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
     }
   ],
   "changeScope": {
