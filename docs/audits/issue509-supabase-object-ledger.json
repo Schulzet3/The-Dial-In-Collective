@@ -3556,6 +3556,20 @@
       "provider_writes": false,
       "baseline_complete": false,
       "next": "Trace session_status consumers; next actual unreviewed provider source."
+    },
+    {
+      "run": "2026-11-10 #509 Run143 targeted session-status and Realtime ACL confirmation",
+      "source_parent_sha": "3283bb3ceffc20aa6589e3f7a586b71cf82758d8",
+      "receipt_path": "docs/audits/issue509-provider-session-contract-realtime-access-2026-11-10-run143.json",
+      "live_sql_definitions_revalidated": 2,
+      "client_modules_traced": 3,
+      "realtime_definition_components": 15,
+      "live_realtime_subscriptions": 0,
+      "hosted_api_exposure": "UNVERIFIED",
+      "new_original_word_credit": 0,
+      "new_confirmed_defects": 0,
+      "provider_writes": false,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -16131,5 +16145,26 @@
     "provider_write": false,
     "provider_baseline_complete": false,
     "next": "Caller check session_status placeholder values and next provider gap."
+  },
+  "provider_session_contract_realtime_acl_run143": {
+    "status": "COMPLETE_TARGETED_LIVE_SQL_CONTRACT_AND_REALTIME_ROLE_ACL_RECHECK_NOT_ALL_PROVIDER_BASELINE",
+    "receipt_path": "docs/audits/issue509-provider-session-contract-realtime-access-2026-11-10-run143.json",
+    "source_development_parent_sha": "3283bb3ceffc20aa6589e3f7a586b71cf82758d8",
+    "app_rpc_functions_exact_full_source_revalidated": 2,
+    "source_revalidated_chars": 894,
+    "current_client_source_files_traced": 3,
+    "realtime_table_columns": 9,
+    "realtime_constraints": 2,
+    "realtime_indexes": 3,
+    "realtime_triggers": 1,
+    "subscription_rows_aggregate": 0,
+    "anon_and_authenticated_select_without_rls": true,
+    "hosted_api_exposure": "UNVERIFIED",
+    "legacy_client_consumption": "UNVERIFIED",
+    "new_original_source_word_credit": 0,
+    "new_confirmed_defects": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "Continue new/unreviewed provider source/drift, no destructive platform action without proof."
   }
 }
