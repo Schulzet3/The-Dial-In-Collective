@@ -1,0 +1,50 @@
+name: DIC Issue33 R100 original603 selected 501 and 504
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r100-501-504.yml
+      - scripts/audit/issue33-r100-501-504-check.mjs
+      - tests/coffee-issue33-r100-501-504.test.mjs
+      - docs/workstreams/ops-issue33-r100-501-504-20261110.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r100-501-504.yml
+      - scripts/audit/issue33-r100-501-504-check.mjs
+      - tests/coffee-issue33-r100-501-504.test.mjs
+permissions:
+  contents: read
+jobs:
+  selected-current:
+    name: original603-501-504-current-official
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Selected and hostile current-source regressions
+        run: node --test tests/coffee-issue33-r100-501-504.test.mjs
+      - name: Guarded exact selected official HTTPS and actual parser Add Coffee Source Review
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '501,504'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r100
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict source-bound original 603 unchanged and selected facts afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r100
+          DIC_ISSUE33_R100_VERIFY: '1'
+        run: node scripts/audit/issue33-r100-501-504-check.mjs
+      - name: Preserve bounded raw selected evidence for one day
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r100-501-504-selected
+          path: /tmp/dic33-r100/
+          retention-days: 1
+          if-no-files-found: warn
