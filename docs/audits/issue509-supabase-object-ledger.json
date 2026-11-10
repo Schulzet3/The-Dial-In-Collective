@@ -3638,6 +3638,16 @@
       "evidence": "supabase/migrations/20261110194500_dic_admin_delete_null_kind_guard.sql",
       "provider_writes": 0,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 UTC run152 exact-source CI closure",
+      "source_sha": "a823c3439f77073919718b31161d792b2fd46b87",
+      "evidence": "docs/audits/issue509-run152-exact-source-ci-closure-2026-11-10.json",
+      "scope": "PR1902 merged 6 same blobs; exact PR and merged SQL/JWT/Node/browser/governance CI 8/8 success",
+      "new_findings": 0,
+      "new_migration": "READY_DEVELOPMENT_ONLY",
+      "provider_writes": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -16426,7 +16436,7 @@
     "next": "First changed/new provider object definition after exact SHA comparison; confirm external JWT/API boundary with #96 if safe access becomes available, otherwise bounded telemetry and complete re-audit."
   },
   "provider_admin_delete_null_kind_run152": {
-    "status": "CONFIRMED_DEVELOPMENT_FIX_TESTING",
+    "status": "READY_GITHUB_DEVELOPMENT_NOT_DEPLOYED",
     "source_parent_sha": "767e12c8e763959f0b6677f4de7ad7e69ce80cf3",
     "receipt": "docs/audits/issue509-provider-admin-delete-null-kind-2026-11-10-run152.json",
     "provider_live_hashes": [
@@ -16442,9 +16452,21 @@
       }
     ],
     "new_first_time_words": 0,
-    "tests": "PENDING",
-    "next": "Source-bound PR CI and safe integration only after verified exact-source checks",
+    "tests": "8_OF_8_SOURCE_BOUND_PR_AND_MERGED_COMPLETED_SUCCESS",
+    "next": "Continue provider drift and first unseen/changed object, coordinate hosted settings with #96",
     "provider_writes": 0,
-    "syntax_correction": "Both SQL function CREATE OR REPLACE definitions explicitly terminated; source-bound CI still pending."
+    "syntax_correction": "Both SQL function CREATE OR REPLACE definitions explicitly terminated; source-bound CI still pending.",
+    "merged_sha": "a823c3439f77073919718b31161d792b2fd46b87",
+    "exact_source_ci_runs": [
+      42888999868,
+      42888999866,
+      42889000364,
+      42889000057,
+      42889504318,
+      42889504349,
+      42889504478,
+      42889504431
+    ],
+    "closure_receipt": "docs/audits/issue509-run152-exact-source-ci-closure-2026-11-10.json"
   }
 }

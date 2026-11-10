@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 152,
+  "repo": "Schulzet3/The-Dial-In-Collective",
+  "project_ref": "azviqqejypsefzilgonr",
+  "authority": "GITHUB_DEVELOPMENT_ONLY",
+  "pr_number": 1902,
+  "pr_url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/1902",
+  "pr_head_sha": "a713beaac2b4acba4d4fbb7b474af3eb3a7eda22",
+  "merged_development_source_sha": "a823c3439f77073919718b31161d792b2fd46b87",
+  "merged_method": "NONFORCE_SQUASH",
+  "same_source_blobs_verified": 6,
+  "total_changed_source_paths": 6,
+  "ci_pr_head": [
+    {
+      "run": 42888999868,
+      "scope": "SQL+synthetic Postgres+94 signed JWT",
+      "conclusion": "SUCCESS"
+    },
+    {
+      "run": 42888999866,
+      "scope": "Node22 3600 pass, 0 fail, 6 intentional skip + lint",
+      "conclusion": "SUCCESS"
+    },
+    {
+      "run": 42889000364,
+      "scope": "browser/cloud UX (cloud-tests N/A)",
+      "conclusion": "SUCCESS"
+    },
+    {
+      "run": 42889000057,
+      "scope": "governance queue and same commit continuity",
+      "conclusion": "SUCCESS"
+    }
+  ],
+  "ci_merged": [
+    {
+      "run": 42889504318,
+      "scope": "SQL+isolated admin_safe_delete+94 signed JWT",
+      "conclusion": "SUCCESS"
+    },
+    {
+      "run": 42889504349,
+      "scope": "Node22 3600 pass, 0 fail, 6 skip+lint",
+      "conclusion": "SUCCESS"
+    },
+    {
+      "run": 42889504478,
+      "scope": "browser/mobile Chromium; cloud-tests N/A",
+      "conclusion": "SUCCESS"
+    },
+    {
+      "run": 42889504431,
+      "scope": "governance/approval",
+      "conclusion": "SUCCESS"
+    }
+  ],
+  "known_initial_failure": {
+    "run": 42888872639,
+    "source_sha": "ad57e9291cf6c87f110216fcb36d77e3d6e6b9d1",
+    "failure": "Additive migration initially missed SQL statement terminators; corrected in subsequent commit a713b before merge; no unresolved failure."
+  },
+  "queue_item_id": "DIC-Q-509-admin-delete-null-kind-guard",
+  "queue_state": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+  "live_migration_version": "20261110194500",
+  "live_applied": false,
+  "live_provider_writes": 0,
+  "live_user_deletions": 0,
+  "actual_browser_go_true_sessions_tested": false,
+  "full_provider_baseline_complete": false,
+  "notes": "Read-only SQL truth table demonstrated NULL kind fallthrough. Real-world integrity consequences not shown; live referenced coffee FK NO ACTION limits actual potential loss. No provider writes/production release. Hosted settings remain unverified.",
+  "next": "Continue live changed/new provider definition audit, held API/#96 boundary, and hourly drift checks."
+}

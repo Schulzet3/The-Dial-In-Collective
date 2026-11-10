@@ -11457,23 +11457,32 @@
     {
       "id": "DIC-Q-509-admin-delete-null-kind-guard",
       "issue": 509,
-      "pr": null,
+      "pr": 1902,
       "title": "Reject NULL Admin deletion kind before canonical coffee routing and impact-block bypass",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "a823c3439f77073919718b31161d792b2fd46b87",
       "scope_paths": [
         "supabase/migrations/20261110194500_dic_admin_delete_null_kind_guard.sql"
       ],
       "tests": [
         "Read-only live full SQL/MD5 and constant-expression NULL behavior confirmed; isolated disposable PostgreSQL synthetic admin_safe_delete.sql pending.",
-        "Source-bound SQL/JWT/Node22/approval CI PENDING; no claims of success or deployment."
+        "Source-bound SQL/JWT/Node22/approval CI PENDING; no claims of success or deployment.",
+        "PR head a713beaac2b4acba4d4fbb7b474af3eb3a7eda22 all four source-bound checks SUCCESS: isolated PostgreSQL+94 signed JWT assertions 42888999868, Node22 3600 pass/0 fail/6 skip 42888999866, compiled Chromium/browser 42889000364, approval governance 42889000057.",
+        "Exact nonforce squash-merged app source a823c3439f77073919718b31161d792b2fd46b87 all four checks SUCCESS: applied new migration and admin_safe_delete in disposable dic_ci, signed JWT 94/94 42889504318, Node22 3600 pass/0 fail/6 skip+lint 42889504349, browser/cloud 42889504478, governance 42889504431."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact-source CI and safe integration not yet complete"
+      "ci_runs": [
+        42888999868,
+        42888999866,
+        42889000364,
+        42889000057,
+        42889504318,
+        42889504349,
+        42889504478,
+        42889504431
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
-      "notes": "Admin-only malformed NULL input fall-through; not a demonstrated live deletion. Source-only additive migration and disposable synthetic regression; do not deploy absent owner one-use publish approval."
+      "notes": "Admin-only malformed NULL input fall-through; not a demonstrated live deletion. Source-only additive migration and disposable synthetic regression; do not deploy absent owner one-use publish approval.\nRun152: Only source READY after independently verifying 8/8 applicable PR-head and merged SHA-bound CI successes and matching all six changed source Git blobs; no production migration, member delete, or actual hosted Auth sessions. Initial pre-correction SQL attempt 42888872639 failed (missing statement delimiters), corrected at PR head a713b, all final checks success. FKs NO ACTION separately protect referential integrity for canonical Community/merged data; no proven production loss."
     }
   ],
   "history": [
