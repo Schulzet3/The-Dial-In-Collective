@@ -55,7 +55,7 @@ test('Buona #450 Dark selected identity does not borrow adjacent coffee processi
 });
 
 test('selected own current Huehuetenango valley refines only proven Guatemala country',()=>{
- const e=c(448),p=parse(e,e.own.join('. ')+' This is located in one of most impresive valleys of Huehuetenango, surrounded by tall mountains and a unique landscape. The farm was established in 1966.');
+ const e=c(448),p=parse(e,'Guatemala Huehuetenango Los Laureles Variety: Bourbon, Caturra, Processing: Fully washed, Altitudes: 1350-1550m, Grade: SHB, Variety: Caturra, Pache, Maragogype, others. This is located in one of most impresive valleys of Huehuetenango, surrounded by tall mountains and a unique landscape. The farm was established in 1966.');
  assert.equal(p.ok,true,JSON.stringify(p));
  assert.equal(p.fields.origin,'Huehuetenango, Guatemala',JSON.stringify(p.fields));
  assert.ok(!p.fields.variety||(p.conflicts||[]).includes('variety'));
