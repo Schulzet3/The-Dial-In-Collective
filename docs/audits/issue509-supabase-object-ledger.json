@@ -3611,6 +3611,16 @@
       "ready_queue": "DIC-Q-509-preview-preflight-null-cached-guard",
       "provider_writes": false,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10T17:48Z run150",
+      "source_sha": "f7f9eb97fb864f255a90bccbcacaa9d52b2e35a4",
+      "evidence": "docs/audits/issue509-provider-function-execution-boundary-2026-11-10-run150.json",
+      "scope": "106 live function execution/volatility/grant fingerprints, 11 complete SQL semantic reviews",
+      "new_findings": 0,
+      "provider_writes": 0,
+      "baseline_complete": false,
+      "next": "First truly changed/new provider definition/identity from this 106-function manifest, then #96-hosted API/Auth exposure evidence."
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -16355,5 +16365,24 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "Changed/new live provider catalog source and hosted #96 Auth/API exposure"
+  },
+  "provider_function_execution_boundary_run150": {
+    "status": "106 CURRENT_FUNCTION_METADATA + 11 EXACT_FULL_SOURCE_SEMANTIC_READBACK_NOT_COMPLETE_PROVIDER_BASELINE",
+    "receipt_path": "docs/audits/issue509-provider-function-execution-boundary-2026-11-10-run150.json",
+    "development_parent_sha": "f7f9eb97fb864f255a90bccbcacaa9d52b2e35a4",
+    "main_sha": "11e1e8c7c36dad488519476d8a969bb682915d31",
+    "release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+    "metadata_reviewed": 106,
+    "complete_sql_sources_read": 11,
+    "security_definers": 66,
+    "private_authenticated_executable_functions": 29,
+    "anon_executable": 0,
+    "unfixed_search_paths": 0,
+    "confirmed_new_defects": 0,
+    "new_first_time_words": 0,
+    "issue267_line_credit": 0,
+    "production_writes": false,
+    "baseline_complete": false,
+    "next": "First truly changed/new provider definition/identity from this 106-function manifest, then #96-hosted API/Auth exposure evidence."
   }
 }
