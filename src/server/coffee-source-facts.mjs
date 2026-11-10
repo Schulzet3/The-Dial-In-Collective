@@ -809,6 +809,9 @@ export function collectCoffeeSourceFacts(html,{name='',source_url}={}){
  const hasLabeledGrower=semantic.facts.some(fact=>fact.kind==='producer'&&/^(?:grower|producer|farmer)$/i.test(fact.label.trim()));
  const selectedProcessMethods=semantic.facts.filter(fact=>fact.kind==='process'&&/^process$/i.test(fact.label.trim())).map(fact=>normalized(fact.value));
  const sourceReviewField=(label,value,field,section='')=>{
+  // A merchant's Notes: Farm-Direct is a sourcing relationship, not a flavor.
+  // Keep its exact label/value in member Source Review but never type as tasting.
+  if(field==='tasting_notes'&&/^farm[ -]?direct$/iu.test(String(value||'').trim()))return undefined;
   // Decaffeination equipment/treatment is not green cherry processing.
   // The semantic scanner may shorten an exact selected "Decaf Process" caption
   // to a generic "Process" fact inside the decaf-method section. Preserve the
