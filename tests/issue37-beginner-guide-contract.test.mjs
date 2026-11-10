@@ -70,7 +70,8 @@ test('The source-verified support address is the last troubleshooting contact',(
 });
 
 test('Owner-accepted deployed guide retains exact release evidence and distinguishes historical storyboard',()=>{
- assert.match(guide,/DEPLOYED — owner confirmed live/);
+ assert.match(guide,/Historical deployment:.*Release 13.*October 30, 2026.*November 3, 2026/);
+ assert.match(guide,/updated signup section is \*\*source-only for Issue #1756\*\* and not yet released/);
  assert.match(register,/COMPLETED \/ DEPLOYED \/ OWNER-ACCEPTED/);
  assert.match(register,/6ae421f5de038d292bd66407/);
  assert.match(register,/Format: APPROVED — written guide \+ accompanying short video/);
