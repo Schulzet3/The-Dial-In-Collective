@@ -1471,6 +1471,27 @@
       "current_app_crosswalk": "At dev f2d7d0146ad3920d89f9d728d388fa00482a7752 engine.js blob 9b0071f2bdd89b931662fe3232d4659524ad2e67, model.js blob 00c027c5f10d938fa2cc050572286eb9570817de, constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095: 5 original taste ratings and measured actual dose/yield/time/grind/optional temp; no sugar/decaf-based correction or chemical proxies. Same-coffee, grinder calibration, basket/feed and distinct styles stay approved.",
       "reviewed_date_utc": "2026-11-10",
       "implementation_status": "RESEARCH_ONLY_NO_NEW_NUMERIC_PRODUCT_RULE_NO_RUNTIME_CHANGE_OR_RELEASE"
+    },
+    {
+      "id": "LIT-2026-LOVECCHIO-MOKA-ESPRESSO-KAMIRA-SENSORY",
+      "type": "peer_reviewed_primary_publisher_full_html_methods_results_tables_disclosures_bounded",
+      "title": "Chemical and Sensory Differences Among Coffee Beverages Brewed by Traditional Moka, Espresso, and Kamira, a Novel Italian Brewing Device",
+      "authors": "Giovanna Lo Vecchio; Rosaria Costa; Rossella Vadala; Laura De Maria; Rita De Pasquale; Giuseppe Tardiolo; Nicola Cicero",
+      "journal": "Separations 13(6):166 (2026)",
+      "published": "2026-06-01",
+      "doi": "10.3390/separations13060166",
+      "url": "https://www.mdpi.com/2297-8739/13/6/166",
+      "original_source_url": "https://www.mdpi.com/2297-8739/13/6/166",
+      "access": "ORIGINAL_PUBLISHER_FULL_HTML_METHODS_RESULT_TABLES_2_4_5_LIMITATIONS_AND_DISCLOSURES; 22_PAGE_ORIGINAL_PDF_BINARY_RAW_ASSAY_AND_PANEL_RECORDS_NOT_ACCESSED",
+      "review_status": "R455-162_DIRECT_PRIMARY_PUBLISHER_HTML_METHODS_2_1_RESULTS_3_1_TO_3_8_TABLES_2_4_5_DISCUSSION_4_AND_FUNDING_COI; PDF_RAW_UNVERIFIED",
+      "direct_review_provenance": "Publisher original full HTML, independently opened 2026-11-10: article identity/date/DOI lines 142-183, Methods coffee/brew/preparation/pooling lines 203-213, Table 2 total-solids, Table 4 beverage-normalized caffeine/chlorogenic acids, Table 5 sensory Friedman and Holm comparisons, Results statistical-method caveat, Discussion limitations, Funding/Conflict-of-Interest. Research is cross-device descriptive; the original PDF/figure pixels and underlying participant/individual-brew data were not cryptographically downloaded or reviewed.",
+      "evidence_grade": "PRIMARY_PEER_REVIEWED_DESCRIPTIVE_SINGLE_BLEND_THREE_NONEQUIVALENT_BREW_METHODS_POOLED_CHEMICAL_ASSAYS_10_PANELISTS_DUPLICATE_SCORES; LOW_PERSONAL_ESPRESSO_TRANSFER",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Web publisher HTML independently read, not frozen/hashed source bytes. 22-page publisher PDF, supplementary figures, raw individual brews and participant sensory data not verified. Do not claim three independent chemical/brewing replicates from analytical triplicates of pooled composites.",
+      "claims_verified_externally": "One commercial roasted ground Arabica/Robusta blend (Lavazza Crema e Gusto) and one water: moka ~12g to ~90mL, DeLonghi Dedica nominal 15-bar pump (NOT measured puck pressure) ~7g to ~25mL in ~10s, Kamira ~8g to ~20mL. Both dose and beverage yield, equipment, contact behavior and crema differ, so a brew-method contrast is not a controlled espresso setting change. Multiple brews were pooled per device to approximately 400mL before chemical analysis; triplicates are analytical repetitions, not independent between-brew comparisons. Table 2 per 100g total solids moka 2.34±0.08, espresso 2.61±0.11, Kamira 2.02±0.09g; Table 4 beverage caffeine 41.7±2.9,55.3±4.1,39.8±2.7mg/100g respectively. Ten familiarized sensory assessors scored the methods twice using 13 descriptors, not DIC personal five-slider preferences; Table 5 Friedman's sweetness p=.032258 (pairwise Holm moka/espresso=.039, moka/Kamira=.048), while acidity p=.973684, bitterness p=.696902, body p=.214381, clean cup p=.189724 and aroma intensity p=.606531 are not significant at .05. Three averaged composite chemistries cannot establish causal chemistry-to-preference correlations. No external funding stated; Kamira manufacturer supplied the device and technical guidance; author Nicola Cicero reports Science4life consultancy. Original raw results available on request, not obtained.",
+      "current_app_crosswalk": "At development 9743126ad5f920f5cd56f9d5f654fb643312801f, engine.js blob 9b0071f2bdd89b931662fe3232d4659524ad2e67: baseline styles/ratios are existing Locked starts; recommendation(s,coffeeId) uses individually rated same-coffee five-input history and bounded one-control nextAdvice; model.js and constants.js preserve original measured dose/yield/time/grind/temperature, Turbo vs Fast-Flow, slow feed, grinder calibration, notes and private data. No moka/Kamira controlled mode, pressure-target chemistry conversion or universal sensory-score correction in inspected app. No bug identified from cross-device comparison.",
+      "factual_status": "SOURCE_DESCRIPTIVE_BOUNDED_CONFOUNDED_METHOD_COMPARISON_NO_DIC_ESPRESSO_CAUSAL_INTERVENTION_OR_USER_OUTCOME_VALIDATION",
+      "review_notes": "Do not treat 10-second espresso preparation or nominal pump 15 bar as target time/pressure; not a user-visible espresso recommendation. Distinguish 3 analytical repeat measurements on pooled samples from independent espresso extraction repeats."
     }
   ],
   "evidence_checks": [
@@ -4414,6 +4435,26 @@
       "result": "HISTORICAL_RESEARCH_PROPOSAL_SUPERSEDED_BY_EXPLICIT_LOCKED_PRODUCT_RULE; CURRENT_INSPECTED_ENGINE_APPEARS_CONSISTENT; NO_SAFE_BUG_REPRODUCED",
       "owner_approval": false,
       "date": "2026-11-10"
+    },
+    {
+      "id": "R455-EV-CIT-162-A",
+      "source": "LIT-2026-LOVECCHIO-MOKA-ESPRESSO-KAMIRA-SENSORY",
+      "claim": "Original Methods used the same commercial ground Arabica/Robusta blend and water, but substantially different dose/yield/machine: moka 12g/90mL, espresso 7g/25mL in approximately 10s with nominal (not measured puck) 15-bar pump, Kamira 8g/20mL. Chemical analytes measured in triplicate on pooled approximately 400mL per-device composites, so independent between-brew variability and espresso-setting causality cannot be inferred.",
+      "grade": "ORIGINAL_PRIMARY_PUBLISHER_FULL_HTML_METHODS_DIRECT_2_1; STRONG_FOR_DESCRIPTIVE_APPARATUS_LIMITATION_WEAK_FOR_CAUSAL_ESPRESSO_TARGET",
+      "current_app": "Current engine 9b0071f2bdd89b931662fe3232d4659524ad2e67 preserves recipe-specific time, original measurements and individual five-taste ratings, no cross-machine brewing template or pump-pressure optimum.",
+      "result": "CONFIRMED_METHOD_CONFUNDING_AND_POOLED_REPLICATES; DO_NOT_ADOPT_10S_OR_15BAR_UNIVERSAL_TARGET",
+      "owner_approval": false,
+      "date": "2026-11-10"
+    },
+    {
+      "id": "R455-EV-CIT-162-B",
+      "source": "LIT-2026-LOVECCHIO-MOKA-ESPRESSO-KAMIRA-SENSORY",
+      "claim": "Original primary Table 5 ten-person duplicate-rated sensory results show pooled-method sweetness overall Friedman p=.032258 but no significant between-method acidity (p=.973684), bitterness (.696902), body (.214381) or aroma intensity (.606531); Table 2 and Table 4 chemical summaries cannot predict DIC personal ratings from 3 composite points. No external funding declared, test Kamira supplied by manufacturer, author consultancy disclosed; unverified raw panel records and publisher PDF.",
+      "grade": "DIRECT_ORIGINAL_PUBLISHER_HTML_TABLES_2_4_5_DISCUSSION_DISCLOSURES; EXPLORATORY_SMALL_PANEL_NONINDEPENDENT_CHEMICAL_COMPOSITES",
+      "current_app": "Do not turn averaged cross-brewer chemistry/sensory or pressure/caffeine into five-rating preference corrections; preserve exactly the approved single-variable personal next-shot model.",
+      "result": "BOUNDED_DESCRIPTIVE_DIFFERENCES_ONLY; NO_GENERAL_PERSONAL_TASTE_OR_SINGLE_CONTROL_CAUSAL_PROOF",
+      "owner_approval": false,
+      "date": "2026-11-10"
     }
   ],
   "policy_decisions_pending": [],
@@ -4513,33 +4554,34 @@
     "R455-158 @8dcedae3179945a036aa774f45c21e4dc920c39b: direct engine/model/UI mismatch; stage one-predicate SAFE change and five synthetic groups, 87 sources / 232 bounded checks / 119 proposals. Tests/CI/merge UNVERIFIED at authoring. No #267 line credit or production action.",
     "R455-158 FINAL @befc282154c5ddc15a123fc2d5ee37e87b2112f6: PR1809 nonforce merged, five source/testing blobs exact head, 5/5 new regression groups PASS, Node22 head/merge 3402/0/6, approval/browser/SQL/security appropriate SUCCESS; queue READY dev-only. 87 sources / 232 bounded checks / 119 proposals; original603 SKIPPED, #267 literal zero, S019 original unavailable, no publish.",
     "R455-160 @f2d7d0146ad3920d89f9d728d388fa00482a7752: original 2026 Cusielo espresso/decaffeinated sweetener QDA 13 selected vs abstract 18 discrepancy and Table 4 body p>0.05 vs prose; 89 sources / 236 bounded checks / 121 proposals; no unsweetened/personal taste rule, no runtime/Locked/release change; docs CI/merge pending; S019 standalone inaccessible; #267 literal credit zero.",
-    "R455-161 @d535a5bb04b402209d04897f8b9d46b3e407f87b: direct Library 10pp PDF page 8-9 hypothesis that slow-feed mode changes alone create a recipe family DISALLOWED by later Locked Master ('Slow Feed remains a grinder condition, does not itself create a family or Experiment'); current engine assignment ratio/coffee/style and grinder feed conditioning crosschecked. 89 sources / 238 checks / 122 proposals; no new code/Locked/queue/production change, no owner decision. Original PDF already inventoried, different registered archive hash, S019 inaccessible. Git PR/CI/merge pending; #267 literal credit zero."
+    "R455-161 @d535a5bb04b402209d04897f8b9d46b3e407f87b: direct Library 10pp PDF page 8-9 hypothesis that slow-feed mode changes alone create a recipe family DISALLOWED by later Locked Master ('Slow Feed remains a grinder condition, does not itself create a family or Experiment'); current engine assignment ratio/coffee/style and grinder feed conditioning crosschecked. 89 sources / 238 checks / 122 proposals; no new code/Locked/queue/production change, no owner decision. Original PDF already inventoried, different registered archive hash, S019 inaccessible. Git PR/CI/merge pending; #267 literal credit zero.",
+    "R455-162 @9743126ad5f920f5cd56f9d5f654fb643312801f: independently reviewed original 2026 Lo Vecchio et al. 3-brewer coffee study (DOI 10.3390/separations13060166): single blend, non-equivalent dose/yield/apparatus, pooled composite chemistry, 10-person duplicate sensory panel, manufacturer-provided test device and consultancy disclosed; neither 10s/nominal15bar nor sweetness panel is universal DIC espresso advice. 90 sources / 240 bounded checks / 123 proposals; no safe runtime bug, Locked/queue/main/release/Netlify/provider change or #267 literal-line credit; original publisher PDF/raw data and standalone S019 PDF not accessed; Git PR/CI/merge to verify."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-161",
-    "base_development_sha": "d535a5bb04b402209d04897f8b9d46b3e407f87b",
+    "id": "R455-162",
+    "base_development_sha": "9743126ad5f920f5cd56f9d5f654fb643312801f",
     "main_sha": "11e1e8c7c36dad488519476d8a969bb682915d31",
     "release_production_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
     "source_ids": [
-      "PDF-SLOW-FEED-LIBRARY-20261101"
+      "LIT-2026-LOVECCHIO-MOKA-ESPRESSO-KAMIRA-SENSORY"
     ],
     "claim_ids": [
-      "R455-EV-CROSS-161-A",
-      "R455-EV-CROSS-161-B"
+      "R455-EV-CIT-162-A",
+      "R455-EV-CIT-162-B"
     ],
     "proposal_ids": [
-      "R455-PROP-161-LEGACY-SLOWFEED-RECIPE-FAMILY-CONFLICT"
+      "R455-PROP-162-MULTIBREWER-SENSORY-NOT-PERSONAL-ESPRESSO-TARGET"
     ],
-    "number_of_curated_sources": 89,
-    "total_evidence_checks": 238,
-    "number_of_proposals": 122,
-    "review_type": "EXACT_OWNER_REPORT_PAGES_8_9_VS_LATER_LOCKED_RECIPE_FAMILY_2026_11_10",
+    "number_of_curated_sources": 90,
+    "total_evidence_checks": 240,
+    "number_of_proposals": 123,
+    "review_type": "ORIGINAL_2026_MOKA_ESPRESSO_KAMIRA_PUBLISHER_HTML_MULTI_METHOD_CONFOUNDING_AND_TEN_PERSON_SENSORY",
     "code_or_policy_changed": false,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
-    "status": "AUTHORING_COMPLETE_DOCS_ONLY_CI_MERGE_PENDING",
-    "next_action": "Verify PR-head scope and exact CI, nonforce merge and three-blob readback; then new disjoint Log Shot Rate Recommendation audit. S019 remains inaccessible."
+    "status": "AUTHORING_COMPLETE_DOCS_ONLY_PR_HEAD_CI_MERGE_PENDING",
+    "next_action": "Run exact GitHub PR-head checks, nonforce merge only after success, verify merged Git blobs; then continue disjoint actual UX defect search or next unreviewed source. S019 original PDF remains inaccessible."
   },
   "policy_decisions_resolved": [
     {
@@ -7098,6 +7140,28 @@
       "release_queue_status": "NOT_APPLICABLE_NO_DEPLOYABLE_BEHAVIOR_CHANGE",
       "github267_literal_review_credit": 0,
       "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-162-MULTIBREWER-SENSORY-NOT-PERSONAL-ESPRESSO-TARGET",
+      "finding": "New original 2026 moka/espresso/Kamira comparison can be mistaken for proof that 10-second shots, nominal 15-bar pump pressure, device-specific chemistry or ten-person sweetness ratings prescribe a single ideal DIC recipe or predict its five individual subjective taste scores. This is not supported by the methods; no reproducible current app defect arose.",
+      "evidence": [
+        "LIT-2026-LOVECCHIO-MOKA-ESPRESSO-KAMIRA-SENSORY",
+        "R455-EV-CIT-162-A",
+        "R455-EV-CIT-162-B"
+      ],
+      "severity": "P3_RESEARCH_TRANSFER_BOUNDARY_NO_REPRODUCED_RUNTIME_DEFECT",
+      "user_benefit": "Avoid false recipe/pressure/time optima and synthetic confidence; retain personal single-change learning, five original taste ratings, original shots/notes, distinct shot styles, same-coffee equipment-specific history and privacy.",
+      "current_locked": "Existing Master/Decision supersessions: five sensory ratings and all-green vs unrated; original measured history and 1 controllable change, independent Turbo/Fast-Flow, style-specific time, slow-feed condition, grinder scale/calibration, optional temperature, private RLS and Community; research-only data cannot introduce new mode/target.",
+      "current_app": "Development 9743126ad5f920f5cd56f9d5f654fb643312801f engine.js blob 9b0071f2bdd89b931662fe3232d4659524ad2e67 baseline/recommendation/nextAdviceRaw/shot save directly inspected; no mechanism promoting this study's figures into a recipe.",
+      "proposed_change": "DOCUMENT ONLY; do not change numeric targets, pressure, required equipment controls, taste weighting, user capture or Community confidence. Any future added cross-brewer mode or technology-based advice needs separate owner Locked decision, controlled same-coffee espresso tests and privacy/UX review.",
+      "evidence_grade": "PRIMARY_PUBLISHER_SENSORY_10_PERSON_PANEL_AND_POOLED_ANALYTICAL_3_DEVICE_NOT_INDEPENDENT_ESPRESSO_INTERVENTION",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "SOURCE_LEDGER+R162_SCOPED_JOURNAL+CURRENT_STATUS_ONLY; NO_APP_FIX_BECAUSE_NO_LIVE_DEFECT_REPRODUCED; PR_HEAD_CI_AND_NONFORCE_MERGE_PENDING_AT_AUTHORING",
+      "test_plan": "Validate JSON parser, IDs uniqueness, three intended doc-only Git blobs, GitHub PR-head applicable governance checks, nonforce squash merge and exact merged blob readback. No functional Node22/browser/offline/SQL/Auth or physical tasting test legitimately credited for unchanged source.",
+      "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
     }
   ],
   "changeScope": {
@@ -7105,6 +7169,6 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R455-161 owner report p8-9 historical proposed family split is superseded by current Locked Master; current engine reviewed and no new runtime bug reproduced; source ledger/journal/status only, Git docs CI pending."
+    "reason": "R455-162 source-bound original full publisher HTML sensory comparison guard; docs-only evidence, no proven app bug or owner approval now; PR CI/merge pending."
   }
 }
