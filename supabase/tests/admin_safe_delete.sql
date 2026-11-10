@@ -7,6 +7,21 @@ DECLARE owner uuid:='10000000-0000-4000-8000-000000000001'; member uuid:=gen_ran
  calibration uuid:=gen_random_uuid(); impact jsonb; response jsonb; rev bigint; blocked boolean;
 BEGIN
  IF current_database()<>'dic_ci' THEN RAISE EXCEPTION 'Only disposable database'; END IF;
+ -- #509 Run137: privileged private delete functions must not inherit PUBLIC
+ -- EXECUTE. The invoker public wrappers and service role must retain access.
+ PERFORM 1 FROM pg_proc p, LATERAL aclexplode(coalesce(p.proacl,acldefault('f',p.proowner))) acl
+ WHERE p.oid = ANY(ARRAY[
+  'private.dic_admin_delete_preview(text,uuid)'::regprocedure,
+  'private.dic_admin_delete_record(text,uuid,bigint,jsonb)'::regprocedure
+ ]) AND acl.grantee=0 AND acl.privilege_type='EXECUTE';
+ IF FOUND THEN RAISE EXCEPTION 'Private destructive SECURITY DEFINER has PUBLIC EXECUTE'; END IF;
+ IF has_function_privilege('anon','private.dic_admin_delete_preview(text,uuid)','EXECUTE')
+ OR has_function_privilege('anon','private.dic_admin_delete_record(text,uuid,bigint,jsonb)','EXECUTE')
+ OR NOT has_function_privilege('authenticated','private.dic_admin_delete_preview(text,uuid)','EXECUTE')
+ OR NOT has_function_privilege('authenticated','private.dic_admin_delete_record(text,uuid,bigint,jsonb)','EXECUTE')
+ OR NOT has_function_privilege('service_role','private.dic_admin_delete_preview(text,uuid)','EXECUTE')
+ OR NOT has_function_privilege('service_role','private.dic_admin_delete_record(text,uuid,bigint,jsonb)','EXECUTE')
+ THEN RAISE EXCEPTION 'Private delete execute privilege boundary regressed'; END IF;
  INSERT INTO auth.users(id,aud,role,email) VALUES(member,'authenticated','authenticated',member::text||'@fixture.invalid');
  INSERT INTO private.beta_members(owner_id,enabled,admitted_at) VALUES(member,true,now()) ON CONFLICT (owner_id) DO UPDATE SET enabled=true,admitted_at=now();
  INSERT INTO public.coffees(name,roaster,verification_state,origin)
@@ -38,6 +53,11 @@ BEGIN
  EXCEPTION WHEN insufficient_privilege THEN blocked:=true;
  END;
  IF NOT blocked THEN RAISE EXCEPTION 'Member obtained destructive impact details'; END IF;
+ -- A direct authenticated call to the private definer must also reject a member.
+ blocked:=false;
+ BEGIN PERFORM private.dic_admin_delete_record('approved',coffee,rev,'{}'::jsonb);
+ EXCEPTION WHEN insufficient_privilege THEN blocked:=true; END;
+ IF NOT blocked THEN RAISE EXCEPTION 'Ordinary member bypassed private admin delete guard'; END IF;
  EXECUTE 'RESET ROLE';
  PERFORM set_config('request.jwt.claim.sub',owner::text,true);
  EXECUTE 'SET LOCAL ROLE authenticated';

@@ -3486,6 +3486,19 @@
       "queue_state": "READY_NOT_DEPLOYED",
       "provider_writes": false,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 #509 Run137 private destructive RPC EXECUTE least-privilege",
+      "source_parent_sha": "bb219a3f2b8e4f1580e48f6420f60334349c1ba5",
+      "receipt_path": "docs/audits/issue509-provider-private-delete-definer-execute-2026-11-10-run137.json",
+      "reviewed_security_definer_acl_records": 68,
+      "verified_outlier_count": 2,
+      "source_fix": "supabase/migrations/20261110045500_dic_admin_private_delete_acl_hardening.sql",
+      "sql_test": "supabase/tests/admin_safe_delete.sql",
+      "queue_state": "TESTING",
+      "ci": "PENDING",
+      "provider_writes": false,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -15884,5 +15897,26 @@
       }
     ],
     "queue_state": "READY"
+  },
+  "provider_admin_delete_definer_acl_run137": {
+    "status": "DIRECT_LIVE_68_DEFINER_ACL_OUTLIERS_2_DEV_ONLY_LEAST_PRIVILEGE_TESTING",
+    "source_parent_sha": "bb219a3f2b8e4f1580e48f6420f60334349c1ba5",
+    "provider_68_definers": 68,
+    "private_53": 53,
+    "public_15": 15,
+    "public_execute_exceptions": 2,
+    "admin_delete_functions_acl_records": 16,
+    "complete_function_bodies_reread": 4,
+    "new_original_word_coverage": 0,
+    "receipt_path": "docs/audits/issue509-provider-private-delete-definer-execute-2026-11-10-run137.json",
+    "migration": "supabase/migrations/20261110045500_dic_admin_private_delete_acl_hardening.sql",
+    "sql_regression": "supabase/tests/admin_safe_delete.sql",
+    "source_fix_pending": true,
+    "queue": "DIC-Q-509-private-delete-definer-execute-acl",
+    "queue_state": "TESTING",
+    "provider_writes": false,
+    "baseline_complete": false,
+    "ci": "PENDING",
+    "next": "Read back source-bound isolated PostgreSQL + Node + governance CI; harden/correct failures; otherwise continue new provider source."
   }
 }
