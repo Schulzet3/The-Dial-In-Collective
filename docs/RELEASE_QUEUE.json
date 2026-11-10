@@ -11440,16 +11440,19 @@
       "tests": [
         "Original Git blob 74c93c7ff7814337752e0ef9052412eaf55890e3 verified byte-identical locally; before code, true ratio => 1, true duration => 1, arrays coerced to plausible readings; synthetic only.",
         "R455-168 four direct positive/negative local Node22 test groups PASS after safe type guard; GitHub PR-head/merged source Node/browser/offline/SQL/security/governance NOT YET VERIFIED.",
-        "Initial PR-head approval workflow 42887528841 genuinely FAILED because site/lib/community-evidence.js lacked a trackable queue item; adding this IN_PROGRESS source-only scope item, not certifying READY."
+        "Initial PR-head approval workflow 42887528841 genuinely FAILED because site/lib/community-evidence.js lacked a trackable queue item; adding this IN_PROGRESS source-only scope item, not certifying READY.",
+        "Second exact PR-head approval 42887791722 FAILED because schema requires explicitly null (not absent) merged_source_sha for an unmerged IN_PROGRESS item. Read scripts/release/release-queue.mjs and corrected null sentinel without certifying merge or changing code."
       ],
       "ci_runs": [
-        42887528841
+        42887528841,
+        42887791722
       ],
       "blockers": [
         "Actual PR-head Node22/cloud/mobile/SQL/security/approval and merged-source checks not yet all verified; do not mark READY or deploy."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "SAFE development-only source type integrity; numeric scalar and decimal strings retained, no change to thresholds, source verification, Community RLS, five ratings/Locked recommendations, no member/provider write, no deployment."
+      "notes": "SAFE development-only source type integrity; numeric scalar and decimal strings retained, no change to thresholds, source verification, Community RLS, five ratings/Locked recommendations, no member/provider write, no deployment.",
+      "merged_source_sha": null
     }
   ],
   "history": [
