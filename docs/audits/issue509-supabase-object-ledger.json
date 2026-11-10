@@ -3621,6 +3621,16 @@
       "provider_writes": 0,
       "baseline_complete": false,
       "next": "First truly changed/new provider definition/identity from this 106-function manifest, then #96-hosted API/Auth exposure evidence."
+    },
+    {
+      "run": "2026-11-10 UTC run152",
+      "source_sha": "767e12c8e763959f0b6677f4de7ad7e69ce80cf3",
+      "evidence": "docs/audits/issue509-provider-admin-delete-null-kind-2026-11-10-run152.json",
+      "scope": "Direct full admin-delete preview/record private sources plus public wrappers, read-only NULL three-valued confirmation",
+      "new_findings": 1,
+      "dev_fix": "NEW_ADDITIVE_MIGRATION_TESTING",
+      "provider_writes": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -16407,5 +16417,26 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "First changed/new provider object definition after exact SHA comparison; confirm external JWT/API boundary with #96 if safe access becomes available, otherwise bounded telemetry and complete re-audit."
+  },
+  "provider_admin_delete_null_kind_run152": {
+    "status": "CONFIRMED_DEVELOPMENT_FIX_TESTING",
+    "source_parent_sha": "767e12c8e763959f0b6677f4de7ad7e69ce80cf3",
+    "receipt": "docs/audits/issue509-provider-admin-delete-null-kind-2026-11-10-run152.json",
+    "provider_live_hashes": [
+      {
+        "name": "dic_admin_delete_preview",
+        "md5": "733e337473ef8f190e3a78ebf5ebfad1",
+        "chars": 4060
+      },
+      {
+        "name": "dic_admin_delete_record",
+        "md5": "71d4703233388fb04e263767caa5b57b",
+        "chars": 4091
+      }
+    ],
+    "new_first_time_words": 0,
+    "tests": "PENDING",
+    "next": "Source-bound PR CI and safe integration only after verified exact-source checks",
+    "provider_writes": 0
   }
 }
