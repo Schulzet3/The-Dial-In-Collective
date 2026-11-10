@@ -4568,6 +4568,24 @@
       "current_app": "Existing owner Lock prohibits uncontrolled equipment evidence, invented taste targets, altered historical shots or new capture.",
       "result": "SIX_TESTS_ACTUALLY_PASS_AT_EXACT_PR_HEAD_AND_MERGE; 3571_PASS_0_FAIL_6_SKIPPED_EACH",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-APP-167-A",
+      "source": "site/lib/engine.js Git blob f8028270254d15a1b6e9494aa431a8eca4f33c15 at development af1a56d57b8472d7a8686b6336fe11c048f76538",
+      "claim": "Prefill used archived dose/yield/time alone when an explicitly unloggable grinder or temperature could still seed new-shot dose, grind or temperature.",
+      "grade": "DIRECT_CURRENT_CODE_ANALYSIS_NO_REAL_MEMBER_INCIDENT",
+      "current_app": "measuredRecipeShots excluded only invalid dose/yield/time; doses/grinds/temps independently filtered.",
+      "result": "SYNTHETIC_REGRESSIONS_AUTHORED_EXACT_SOURCE_CI_PENDING",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-APP-167-B",
+      "source": "tests/issue455-prefill-archived-controls.test.mjs",
+      "claim": "Filter invalid recorded optional controls only for Log Shot prefill; keep missing optional legacy readings and inclusive boundary/shots with their own historical espresso range.",
+      "grade": "FIVE_SYNTHETIC_NEGATIVE_POSITIVE_NODE22_TEST_GROUPS_CI_PENDING",
+      "current_app": "Original archived notes, measured shots and five ratings preserved.",
+      "result": "AUTHORED_NOT_EXECUTED",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [],
@@ -4676,16 +4694,16 @@
     "R455-164 FINAL verified code PR #1857 head 9f8d713... nonforce merged c26a9a9... four exact blobs and 3529 Node22 PASS/0 FAIL/6 SKIP both head/merged, browser/mobile/offline/SQL/security/approval applicable PASS. New queue DIC-Q-455-outlier-explicit-controls READY in development only; no deployment. Continue separate claim-level source inventory and narrow SAFE UX review under live SHA; original standalone S019 still inaccessible; no #267 credit."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-166",
-    "source_sha": "f7f9eb97fb864f255a90bccbcacaa9d52b2e35a4",
+    "run_id": "R455-167",
+    "source_sha": "af1a56d57b8472d7a8686b6336fe11c048f76538",
     "issue": 455,
-    "phase": "SAFE_SIMILAR_COFFEE_EXPLICIT_CONTROLS_MERGED_SOURCE_VERIFIED_READY_DOCS_RECONCILIATION_PENDING",
+    "phase": "SAFE_PREFILL_FIX_AUTHORED_EXACT_PR_CI_PENDING",
     "source_counts": {
       "sources": 92,
-      "evidence_checks": 248,
-      "proposals": 127
+      "evidence_checks": 250,
+      "proposals": 128
     },
-    "release_state": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+    "release_state": "IN_PROGRESS_NOT_DEPLOYED",
     "original_s019": "UNAVAILABLE_NOT_REVIEWED",
     "github267_literal_review_credit": 0
   },
@@ -7355,6 +7373,28 @@
       "implementation": "SAFE_CODE_AND_SIX_TESTS_PR1878_NONFORCE_MERGED_f7f9eb97fb864f255a90bccbcacaa9d52b2e35a4_EXACT_SOURCE_NODE_BROWSER_SQL_SECURITY_APPROVAL_SUCCESS; READY_DEV_ONLY_DOCS_RECONCILIATION",
       "test_plan": "PR #1878 head Node22 42868381707 and merge 42868950685 both 3571 PASS, 0 FAIL, 6 SKIP including all six R166 direct positive/negative tests. PR-head browser 42868381690, SQL 42868381734, security 42868381641, approval 42868381713 SUCCESS; merged browser 42868951122, governance 42868950443 SUCCESS. Exact 5 head/merge blobs equal; frozen 603 SKIPPED. Docs-only READY reconciliation CI separately pending.",
       "release_queue_status": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-167-PREFILL-ARCHIVED-CONTROLS",
+      "finding": "Newer imported otherwise measured shot with explicit invalid grind or recorded temp could seed Log Shot prefills despite unloggable historical controls.",
+      "evidence": [
+        "R455-EV-APP-167-A",
+        "R455-EV-APP-167-B"
+      ],
+      "severity": "P2_LOG_SHOT_PREFILL_INPUT_INTEGRITY_SYNTHETIC_RISK",
+      "user_benefit": "Prevent unusable historical settings contaminating next shot; preserve valid historical same-coffee measurements and private notes.",
+      "source_provenance": "Exact development af1a56d57b8472d7a8686b6336fe11c048f76538, engine Git blob f8028270254d15a1b6e9494aa431a8eca4f33c15",
+      "current_locked": "Existing Log Shot numeric limits and grinder espresso ranges; no new taste/scientific thresholds, keep five original ratings, original history and styles.",
+      "current_app": "Prefill filter did not exclude corrupted recorded optional controls from dose/grind/temp candidates.",
+      "proposed_change": "SAFE prefill-only filter rejects explicitly invalid grinder/temp, uses historical range where present, allows missing legacy optionals; never changes original data.",
+      "evidence_grade": "DIRECT_SOURCE_BOUNDED_SYNTHETIC_REGRESSION_NOT_REAL_MEMBER_INCIDENT",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "BRANCH_AUTHORING_EXACT_PR_HEAD_CI_AND_MERGE_PENDING",
+      "test_plan": "Five focused Node22 synthetic tests; applicable browser/mobile/offline/accessibility/SQL/privacy/governance; no production test users.",
+      "release_queue_status": "IN_PROGRESS_NOT_READY",
       "github267_literal_review_credit": 0,
       "production_deployed": false
     }

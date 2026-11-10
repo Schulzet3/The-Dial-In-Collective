@@ -557,7 +557,22 @@ export function prefill(s,coffeeId,options={}) {
  // Only a physically measured, loggable historical shot may seed numeric
  // Log Shot prefills. Keep incomplete/invalid imports and private notes in
  // History unchanged; they do not outrank an older valid measurement.
- const measured=measuredRecipeShots(shots);
+ // An archived shot with a corrupted explicit grinder or recorded temperature
+ // must not supply a new shot's dose, grind or temperature. Original History
+ // stays untouched; missing optional controls retain legacy compatibility.
+ // Prefer the older shot's own espresso range, never silently translate grind.
+ const admissible=sh=>{
+  if(sh.grindSetting!=null){
+   const min=finite(sh.snapshot?.grinderMin)?sh.snapshot.grinderMin:v.grinderMin;
+   const max=finite(sh.snapshot?.grinderMax)?sh.snapshot.grinderMax:v.grinderMax;
+   if(!finite(sh.grindSetting)||sh.grindSetting<0||
+      (finite(min)&&sh.grindSetting<min)||
+      (finite(max)&&sh.grindSetting>max)||
+      (finite(min)&&finite(max)&&max<=min))return false;
+  }
+  return sh.tempC==null||validRecordedTemperature(sh.tempC);
+ };
+ const measured=measuredRecipeShots(shots).filter(admissible);
  const doses=measured.filter(x=>x.basketId===basket.id&&finite(x.doseG)&&x.doseG>=minDose&&x.doseG<=maxDose),
   grinds=measured.filter(x=>x.basketId===basket.id&&x.style===style&&x.feedMode===feed&&x.calibrationId===v.calibrationId&&
    finite(x.grindSetting)&&x.grindSetting>=v.grinderMin&&x.grindSetting<=v.grinderMax);
