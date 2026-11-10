@@ -16672,5 +16672,34 @@
     "no_live_writes": true,
     "baseline_complete": false,
     "next": "Genuinely changed/new provider object; hosted JWT/PostgREST boundaries; native internals UNVERIFIED"
+  },
+  "provider_temp_fingerprint_drift_run156": {
+    "status": "71_NUMERIC_TEMP_FINGERPRINTS_VS_64_RUN127_NEW_CHANGED_AND_EXACT_SOURCE_DRIFT",
+    "observed_at_utc": "2026-11-10 23:46:08.223822+00",
+    "source_dev_parent": "2809506ddcb9e2820322758d44237947deace7c4",
+    "receipt_path": "docs/audits/issue509-provider-temp-fingerprint-delta-2026-11-10-run156.json",
+    "numeric_fingerprints_current": 72,
+    "numeric_fingerprints_prior": 64,
+    "numeric_new": 8,
+    "numeric_changed": 3,
+    "sql_definitions_unchanged": 106,
+    "index_definitions_unchanged": 96,
+    "live_temp_bytes_delta_since_run155": 486060705,
+    "live_temp_files_delta_since_run155": 121,
+    "new_confirmed_defects": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "ci": "PENDING_DOCS_ONLY_GOVERNANCE",
+    "next": "First genuinely unreviewed/changed live provider definition; hosted GoTrue/JWT/PostgREST and native remain UNVERIFIED"
+  },
+  "provider_temp_fingerprint_drift_run156_ci_closure": {
+    "status": "SOURCE_BOUND_DOCS_ONLY_GOVERNANCE_COMPLETED_SUCCESS",
+    "source_commit": "3c4d035476972e8eade7967c785c2b342b54accc",
+    "governance_run_id": 42926068971,
+    "governance_conclusion": "success",
+    "receipt_path": "docs/audits/issue509-run156-exact-source-ci-closure-2026-11-10.json",
+    "production_writes": false,
+    "baseline_complete": false,
+    "next": "Continue hourly genuinely new/unreviewed provider source and hosted #96 JWT/PostgREST boundary; do not repeat prior audit-owned temp-heavy query."
   }
 }
