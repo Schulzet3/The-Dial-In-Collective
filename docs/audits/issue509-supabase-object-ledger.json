@@ -3442,6 +3442,19 @@
       "source_ci_status": "PENDING",
       "provider_writes": false,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 #509 Run136b release queue intake recovery",
+      "source_parent_sha": "b4ed15a1515013dad43ba04dc4ff4a91db53a577",
+      "receipt_path": "docs/audits/issue509-provider-null-actor-retry-semantic-2026-11-10-run136.json",
+      "reviewed": 0,
+      "queue_item": "DIC-Q-509-account-delete-null-actor-retry-guard",
+      "state": "TESTING",
+      "original_governance_run": 42752080227,
+      "original_governance_result": "FAIL_QUEUE_INTAKE_NO_ITEM",
+      "source_ci_status": "PENDING_CORRECTED_SOURCE",
+      "provider_writes": false,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -15796,11 +15809,13 @@
     "next": "New/changed provider source; isolated nullable prior actor branch proof under #1676; hosted native/config unverified"
   },
   "provider_null_actor_retry_run136": {
-    "status": "DEVELOPMENT_FIX_AND_DISPOSABLE_TEST_PROPOSED_CI_PENDING",
+    "status": "SOURCE_FIX_COMMITTED_AND_QUEUE_TESTING_CI_PENDING",
     "source_parent_sha": "5f164450cf286f4b4fb59ea6d176f9d467047a31",
     "receipt_path": "docs/audits/issue509-provider-null-actor-retry-semantic-2026-11-10-run136.json",
     "live_op_count": 0,
     "provider_writes": false,
-    "next": "Read exact-source PG/Node/governance CI and update queue only on evidence"
+    "next": "Read exact-source PG/Node/governance CI and update queue only on evidence",
+    "queue_item": "DIC-Q-509-account-delete-null-actor-retry-guard",
+    "first_governance_failure": "EXPECTED_NO_QUEUE_ITEM_FIXED_NEXT_COMMIT"
   }
 }

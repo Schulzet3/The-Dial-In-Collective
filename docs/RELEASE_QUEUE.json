@@ -10822,6 +10822,34 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1756",
       "notes": "Owner explicit Locked supersession recorded in BOTH docs/MASTER_SPECIFICATION.md and DECISION_LEDGER.json. Development-only source, not deployed. Existing members, Auth identities and all history protected; every legacy invitation token/code still present in production pending future authorized SQL migration. No off-app email/push promise; in-portal attention badge and optional browser alerts while Admin open. | #1756 SOURCE READY 2026-11-10 UTC, NOT DEPLOYED. Existing hosted Auth11/admitted11/shots26/notes26/Community12 and 17 used/unused invitation code records unchanged. New source migration must only purge historical codes on a separately explicitly owner-authorized production Publish and after verifying fresh encrypted backups, preserving Auth/member/Community history. In-app Admin attention mandatory, browser notifications only with permission while Admin open, no external email/push provider claim. #96/#267/#509 preserved."
+    },
+    {
+      "id": "DIC-Q-509-account-delete-null-actor-retry-guard",
+      "issue": 509,
+      "pr": null,
+      "title": "Reject orphaned administrator retry tokens during member account deletion",
+      "state": "TESTING",
+      "merged_source_sha": "b4ed15a1515013dad43ba04dc4ff4a91db53a577",
+      "scope_paths": [
+        "supabase/migrations/20261110035000_dic_account_delete_orphaned_actor_retry_guard.sql",
+        "supabase/tests/admin_member_deletion.sql"
+      ],
+      "tests": [
+        "Provider pg_get_functiondef 1933 chars MD5 75abc037bcc45abd5e9dd021b2f702d7: nullable actor_id SET NULL, plain <> yields unknown and permits another admin same-mode retry. Live open delete operations 0.",
+        "Development commit b4ed15a1515013dad43ba04dc4ff4a91db53a577 adds separate migration and disposable dic_ci NULL actor SQLSTATE 23514 regression; all application/provider deployments remain unchanged.",
+        "Exact-source initial approval governance run 42752080227 FAILED intake because this migration was untracked in queue; this TESTING row corrects the omission. Isolated PostgreSQL 42752080329 and Node 42752080197 were pending when recorded."
+      ],
+      "ci_runs": [
+        42752080227,
+        42752080329,
+        42752080197,
+        42752080471
+      ],
+      "blockers": [
+        "Exact post-queue source-bound isolated PostgreSQL, Node22 and governance checks must finish successfully before independent READY assessment."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
+      "notes": "Development-only fail-closed conditional NULL-actor control-flow fix. No current affected live rows. No actor takeover, real account deletion, provider mutation, release approval or deployment. This is not READY or DEPLOYED; release after independent exact candidate testing and owner publish authority."
     }
   ],
   "history": [
