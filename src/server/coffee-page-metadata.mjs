@@ -5,7 +5,7 @@ import {rawElements,removeElements,removeComments} from '../../supabase/function
 import {isRecurringCoffeeHarvestWindow,isGenericCoffeeLotLabel} from '../../supabase/functions/_shared/coffee-release-label.mjs';
 // Best-effort facts from arbitrary PUBLIC coffee pages. This is NOT official
 // roaster verification and never promotes a canonical record.
-import {extractRoastVisualEvidence,normalizeRoastLabel} from './roast-level-evidence.mjs';
+import {extractRoastVisualEvidence,normalizeRoastLabel,roastLabelHint} from './roast-level-evidence.mjs';
 import {extractLayoutEvidence,coffeeLayoutDetailConflicts} from './coffee-product-layouts.mjs';
 import {extractNarrativeCoffeeEvidence} from './coffee-narrative-evidence.mjs';
 import {extractCoffeeBlendEvidence,extractSelectedBlendCommunityCredit,extractSelectedRegionalBlendElevation,selectedPartialBlendProcess,withoutCoffeeBlendComponentSpecs} from './coffee-blend-evidence.mjs';
@@ -1620,6 +1620,19 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  narrativeFlavorStoriesByFields.delete(fields);
  if(!fields.tasting_notes&&narrativeNotes.length===1)addField(fields,'tasting_notes',narrativeNotes[0]);
  const roast_evidence=extractRoastVisualEvidence(currentProduct);
+ // A direct unsupported comparative Roast Level is higher-authority than
+ // stale SEO/social roast metadata. Never map "Lighter" to Medium or Light.
+ const roastLabels=productCoffeeProse(canonicalProduct,clean)
+  .filter(b=>b.tag==='p'&&!b.educational&&b.text.length<=140)
+  .map(b=>b.text.match(/^roast(?:\s+(?:level|profile|type))?\s*[:：]\s*(.{2,75}?)\s*$/iu)?.[1]).filter(Boolean);
+ const unsupported=roastLabels.length===1&&!normalizeRoastLabel(roastLabels[0])&&
+  roastLabelHint(roastLabels[0])?roastLabels[0]:null;
+ if(unsupported&&!roast_evidence.value&&seoFallbackByFields.get(fields)?.has('roast_level')){
+  delete fields.roast_level;seoFallbackByFields.get(fields).delete('roast_level');
+  const hint=roastLabelHint(unsupported);
+  if(!roast_evidence.hint?.includes(hint))
+   roast_evidence.hint=[roast_evidence.hint,hint].filter(Boolean).join(' ');
+ }
  if(roast_evidence.value&&seoFallbackByFields.get(fields)?.has('roast_level')){
   delete fields.roast_level;seoFallbackByFields.get(fields).delete('roast_level');
  }
