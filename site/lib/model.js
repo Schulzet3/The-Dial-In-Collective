@@ -159,11 +159,27 @@ export function hasLocalSuccess(s,coffeeId,style) {
  // A historical success is usable for the Coffee overview only when its
  // five original ratings AND actual measurements meet existing Log Shot bounds.
  // Keep unloggable imported originals and their green History badge untouched.
- const physical=sh=>['doseG','yieldG','timeS'].every(field=>{
-  const [lo,hi]=CONFIG.bounds[field],value=sh[field];
-  return typeof value==='number'&&Number.isFinite(value)&&value>=lo&&value<=hi;
- });
- const v=activeVersion(s);return !!v&&s.shots.some(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&physical(sh));
+ const v=activeVersion(s);
+ const physical=sh=>{
+  const measured=['doseG','yieldG','timeS'].every(field=>{
+   const [lo,hi]=CONFIG.bounds[field],value=sh[field];
+   return typeof value==='number'&&Number.isFinite(value)&&value>=lo&&value<=hi;
+  });
+  if(!measured||typeof sh.grindSetting!=='number'||!Number.isFinite(sh.grindSetting)||
+     sh.grindSetting<0)return false;
+  // Use the version's recorded espresso range, never a universal grind range.
+  if((Number.isFinite(v?.grinderMin)&&sh.grindSetting<v.grinderMin)||
+     (Number.isFinite(v?.grinderMax)&&sh.grindSetting>v.grinderMax))return false;
+  // An absent optional temperature is allowed; invalid recorded values
+  // remain visible in original private History but cannot prove a recipe.
+  if(sh.tempC!=null){
+   const [lo,hi]=CONFIG.bounds.tempC;
+   if(typeof sh.tempC!=='number'||!Number.isFinite(sh.tempC)||
+      sh.tempC<lo||sh.tempC>hi)return false;
+  }
+  return true;
+ };
+ return !!v&&s.shots.some(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&physical(sh));
 }
 export function validateShot(d,{allowLegacyCustom=false}={}) {
  const errors=[];
