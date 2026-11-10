@@ -1,0 +1,15 @@
+{
+  "issue": 267,
+  "correction_of": "docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F154-991-1010-P429-P430-20261110-A20C.json",
+  "original_commit": "b684e309e3ff62bc07b922391e7d2d8ea89610e8",
+  "original_receipt_blob_sha": "c4f944d2b6d9880d790fe0040493b948587d6e9b",
+  "correction": "Original A20C next object accidentally reused JS property `line`, serializing frozen next as `line:1` instead of `line:1011`. Every literal per-line record and all credit remain unchanged. Corrected the *premerge candidate* receipt next pointer with distinct `next.frozen.line=1011` and `next.pinned.line=1`. This correction is zero-credit and preserves source history.",
+  "review_line_delta": 0,
+  "review_credit_delta": 0,
+  "source_originals_unchanged": true,
+  "authoritative_next": {
+    "frozen": "F154:1011",
+    "pinned": "P431:1 tests/ui-design-language.test.mjs"
+  },
+  "status": "DEVELOPMENT_ONLY_NO_DEPLOY"
+}
