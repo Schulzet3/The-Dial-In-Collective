@@ -34,6 +34,13 @@ check(Boolean(htmlBytes)&&htmlBytes.length===r.html_bytes&&sha(htmlBytes)===r.ht
 const html=htmlBytes?.toString('utf8')||'',selected=productMarkup(html);
 const headings=selectedProductHeadings(selected), direct=selectedNkumariR74DirectEvidence(selected,headings);
 for (const [k,v] of Object.entries(direct)) check(v,'selected_direct_'+k+'_not_currently_verifiable');
+// Bounded read-only current official public selected evidence diagnostic for source drift.
+const rawPublicSelected=selected.replace(/<(?:script|style|template|noscript|nav|aside|footer)\b[^>]*>[\s\S]*?<\/(?:script|style|template|noscript|nav|aside|footer)>/giu,' ')
+ .replace(/<[^<>]{0,2000}>/gu,' ').replace(/&(?:nbsp|#160);/giu,' ')
+ .replace(/&amp;/giu,'&').replace(/\s+/gu,' ').trim();
+const k=rawPublicSelected.toLowerCase().indexOf('tastes like:');
+if(k>=0)console.log('[DIC33 R74 EXACT PUBLIC SELECTED CONTENT DIAGNOSTIC] '+
+ rawPublicSelected.slice(k,k+3000));
 const fields=r.current_fields||{},notes=String(fields.tasting_notes||'').toLowerCase();
 check(String(fields.name||'').trim()==='Kenya Nkumari, P1 C','actual_parser_selected_name_wrong');
 check(/Meru/i.test(fields.origin||'')&&/Kenya/i.test(fields.origin||'') &&
