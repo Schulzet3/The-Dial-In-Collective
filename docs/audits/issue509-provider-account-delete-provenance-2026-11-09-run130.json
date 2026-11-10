@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 130,
+  "date_utc": "2026-11-09",
+  "project_ref": "azviqqejypsefzilgonr",
+  "source": {
+    "development_parent_sha": "f00e9b080022903475c5dee37fe1557a5ea643d2",
+    "main_sha": "adb9c6f27bf26da9cd944c51765dfd922893db0d",
+    "release_sha": "2d0bed35e67f6a745a21cbd80616ad4c9a98ed41"
+  },
+  "audit_scope": "Direct live ON DELETE cascade-to-reference semantic review cross-checked with #1676 unshipped migration; pure catalog SELECT and aggregate counts only",
+  "provider_live_evidence": {
+    "auth.users_to_public.coffee_submissions": "ON DELETE CASCADE",
+    "private.dic_coffee_first_entry.first_submission_id": "NOT NULL; FK to public.coffee_submissions.id NO ACTION",
+    "private.dic_coffee_audit.submission_id": "nullable; FK to public.coffee_submissions.id NO ACTION",
+    "nonadmin_first_entry_fk_references": 3,
+    "nonadmin_coffee_audit_fk_references": 4,
+    "all_first_entry_fk_references": 8,
+    "all_coffee_audit_fk_references": 9,
+    "source_attempts_live_rows": 0,
+    "admin_content_edits_live_rows": 2,
+    "import_control_member_reference_count": 0,
+    "member_identity_or_shot_row_exported": false
+  },
+  "verified_risk": "Owner-approved but unshipped #1676 hard-delete can fail PostgreSQL FK checks for nonadmin owners with retained canonical first entry/audit references. #1676 existing synthetic fixture has no such submission fixture. This is a deterministic relational-blocker finding, not a destructive production test.",
+  "semantic_disposition": "Preserve canonical public coffee and first_seen_at/primary_name plus private audit event/evidence; detach only deleted submission references at FK cascade time, not during prepare stage; allow first_submission_id null post deletion.",
+  "development_only_fix": {
+    "migration_path": "supabase/migrations/20261109231500_dic_account_delete_coffee_provenance_fk.sql",
+    "sql_fixture": "supabase/tests/admin_member_deletion.sql",
+    "status": "READY_DEV_SOURCE_EXACT_SOURCE_CI_SUCCESS_NO_DEPLOYMENT",
+    "verified_ci": [
+      {
+        "id": 42715874936,
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "7416c155cac9be2ea84daba23ca6fe4cdfe94788",
+        "html_url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42715874936",
+        "name": "DIC isolated SQL release regression"
+      },
+      {
+        "id": 42715875062,
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "7416c155cac9be2ea84daba23ca6fe4cdfe94788",
+        "html_url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42715875062",
+        "name": "DIC cloud app build and tests"
+      },
+      {
+        "id": 42715874670,
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "7416c155cac9be2ea84daba23ca6fe4cdfe94788",
+        "html_url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42715874670",
+        "name": "DIC cloud UX regression checks"
+      },
+      {
+        "id": 42715874679,
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "7416c155cac9be2ea84daba23ca6fe4cdfe94788",
+        "html_url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42715874679",
+        "name": "DIC approval, implementation and continuity contract"
+      }
+    ]
+  },
+  "outstanding": [
+    "No live GoTrue deletion has been tested or performed",
+    "New migration must be part of newly source-isolated candidate, not silently credited to frozen READY3",
+    "Potential additional user deletion dependencies and provider Auth behavior remain unverified",
+    "Any further privacy audit of private.dic_coffee_audit actor/evidence must not export user identifiers",
+    "Exact-source CI passed, but prior frozen READY3 candidate remains excluded; require separately authorized release batch with #1676 and new migration."
+  ],
+  "owner_and_coordination": "GitHub #1676 issue comment 6753621464 records newly discovered release blocker; existing offsite encrypted backup HOLD remains independently binding",
+  "no_production_writes": true,
+  "baseline_complete": false
+}

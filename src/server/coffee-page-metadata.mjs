@@ -37,6 +37,7 @@ import {selectedFarmStoryRegionMismatch} from './coffee-title-region-evidence.mj
 import {selectedCurrentFarmGrowingLocality} from './coffee-selected-farm-growing-locality.mjs';
 import {selectedCurrentFarmCountryLocality} from './coffee-selected-farm-country-locality.mjs';
 import {selectedCurrentFarmVolcanoRegion} from './coffee-selected-farm-volcano-region.mjs';
+import {selectedCurrentNamedEstateCountyOrigin} from './coffee-selected-current-estate-county.mjs';
 import {selectedCountryFirstCurrentRegion} from './coffee-country-first-current-region.mjs';
 import {selectedCurrentLotContrastedRegion} from './coffee-selected-current-lot-region.mjs';
 import {selectedCurrentInlineCompoundRegion} from './coffee-selected-inline-region.mjs';
@@ -2353,6 +2354,25 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     field:'origin',label:'Exact selected adjacent hero locality',
     value:adjacent.quote.slice(0,260),source_url,source_type:'html',
     section:'Selected H1 and its own immediately adjacent locality'
+   });
+  }
+ }
+
+ // Require matched selected H1, immediate current locality hero, a named
+ // estate's own growing-county prose and typed producer/process before
+ // refining a broad current mountain+country origin. Never infer by gazetteer.
+ if(fields.origin&&!conflicts.has('origin')){
+  const estateCounty=selectedCurrentNamedEstateCountyOrigin(canonicalProduct,{
+   name:fields.name,origin:fields.origin,producer:fields.producer,process:fields.process
+  });
+  if(estateCounty){
+   rememberCoffeeReviewCandidate(fields,'origin',fields.origin,
+    'Broader selected mountain (not the named estate county)');
+   fields.origin=estateCounty.value;
+   if(source_facts.length<384)source_facts.push({
+    field:'origin',label:'Exact selected named estate growing county',
+    value:estateCounty.quote.slice(0,500),source_url,source_type:'html',
+    section:'Exact current selected estate and adjacent hero'
    });
   }
  }

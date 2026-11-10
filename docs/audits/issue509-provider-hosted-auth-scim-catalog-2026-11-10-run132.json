@@ -1,0 +1,515 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "132",
+  "date_utc": "2026-11-10",
+  "source_parent_sha": "05c631a5019629e1b13f7fd80d12bda1c845bdf1",
+  "project_ref": "azviqqejypsefzilgonr",
+  "type": "DIRECT_COMPLETE_HOSTED_AUTH_SCIM_CATALOG_AND_EFFECTIVE_ACL_REVIEW",
+  "prior_checkpoint": "Run131b recorded 31 non-CASCADE child FK actions from auth.users cascade graph; new current graph query showed additional auth.scim_users.user_id ON DELETE SET NULL. This is observed inventory delta, NOT proven table-creation time or app regression.",
+  "provider_query": "WITH targets AS (SELECT oid,relname,relowner,relrowsecurity,relforcerowsecurity,relkind FROM pg_class WHERE oid IN ('auth.scim_users'::regclass,'auth.scim_tokens'::regclass)),\n t AS (SELECT t.oid,t.relname, t.relowner::regrole::text AS owner,t.relrowsecurity,t.relforcerowsecurity,t.relkind,s.n_live_tup,s.seq_scan,s.idx_scan,pg_total_relation_size(t.oid) AS bytes FROM targets t LEFT JOIN pg_stat_user_tables s ON s.relid=t.oid),\n a AS (SELECT x.relname AS relation,a.attnum,a.attname,format_type(a.atttypid,a.atttypmod) AS datatype,a.attnotnull,pg_get_expr(d.adbin,d.adrelid) AS default_expr FROM targets x JOIN pg_attribute a ON a.attrelid=x.oid AND a.attnum>0 AND NOT a.attisdropped LEFT JOIN pg_attrdef d ON d.adrelid=x.oid AND d.adnum=a.attnum),\n k AS (SELECT x.relname AS relation,c.conname AS name,pg_get_constraintdef(c.oid,true) AS definition,md5(pg_get_constraintdef(c.oid,true)) AS md5 FROM targets x JOIN pg_constraint c ON c.conrelid=x.oid),\n i AS (SELECT x.relname AS relation,z.indexrelid::regclass::text AS name,pg_get_indexdef(z.indexrelid) AS definition,md5(pg_get_indexdef(z.indexrelid)) AS md5 FROM targets x JOIN pg_index z ON z.indrelid=x.oid),\n tr AS (SELECT x.relname AS relation,g.tgname AS name,pg_get_triggerdef(g.oid,true) AS definition,md5(pg_get_triggerdef(g.oid,true)) AS md5 FROM targets x JOIN pg_trigger g ON g.tgrelid=x.oid),\n po AS (SELECT x.relname AS relation,p.polname AS name,coalesce(pg_get_expr(p.polqual,p.polrelid),'') AS qualifier,coalesce(pg_get_expr(p.polwithcheck,p.polrelid),'') AS with_check FROM targets x JOIN pg_policy p ON p.polrelid=x.oid),\n grants AS (SELECT x.relname AS relation,r.rolname AS role,has_schema_privilege(r.oid,'auth','USAGE') AS schema_usage,has_table_privilege(r.oid,x.oid,'SELECT') AS can_select,has_table_privilege(r.oid,x.oid,'INSERT') AS can_insert,has_table_privilege(r.oid,x.oid,'UPDATE') AS can_update,has_table_privilege(r.oid,x.oid,'DELETE') AS can_delete FROM targets x CROSS JOIN pg_roles r WHERE r.rolname IN ('anon','authenticated','authenticator','service_role','supabase_auth_admin','postgres'))\nSELECT jsonb_build_object('observed_utc',now(),'tables',(SELECT jsonb_agg(to_jsonb(t) ORDER BY relname) FROM t),'columns',(SELECT jsonb_agg(to_jsonb(a) ORDER BY relation,attnum) FROM a),'constraints',(SELECT jsonb_agg(to_jsonb(k) ORDER BY relation,name) FROM k),'indexes',(SELECT jsonb_agg(to_jsonb(i) ORDER BY relation,name) FROM i),'triggers',(SELECT jsonb_agg(to_jsonb(tr) ORDER BY relation,name) FROM tr),'policies',(SELECT coalesce(jsonb_agg(to_jsonb(po)),'[]'::jsonb) FROM po),'grants',(SELECT jsonb_agg(to_jsonb(grants) ORDER BY relation,role) FROM grants)) AS evidence;",
+  "counts": {
+    "tables": 2,
+    "columns": 18,
+    "constraints": 8,
+    "indexes": 15,
+    "triggers": 6,
+    "policies": 0,
+    "grants": 12
+  },
+  "review_method": "Full accessible live pg_catalog text for each selected SCIM column/default, constraint, index, trigger, policy plus role effective ACL; provider internal compiled implementations not accessible.",
+  "tables": [
+    {
+      "oid": "17198",
+      "bytes": 49152,
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relname": "scim_tokens",
+      "idx_scan": 0,
+      "seq_scan": 91,
+      "n_live_tup": 0,
+      "relrowsecurity": false,
+      "relforcerowsecurity": false
+    },
+    {
+      "oid": "17167",
+      "bytes": 90112,
+      "owner": "supabase_auth_admin",
+      "relkind": "r",
+      "relname": "scim_users",
+      "idx_scan": 3,
+      "seq_scan": 96,
+      "n_live_tup": 0,
+      "relrowsecurity": false,
+      "relforcerowsecurity": false
+    }
+  ],
+  "columns": [
+    {
+      "attnum": 1,
+      "attname": "id",
+      "datatype": "uuid",
+      "relation": "scim_tokens",
+      "attnotnull": true,
+      "default_expr": null
+    },
+    {
+      "attnum": 2,
+      "attname": "sso_provider_id",
+      "datatype": "uuid",
+      "relation": "scim_tokens",
+      "attnotnull": true,
+      "default_expr": null
+    },
+    {
+      "attnum": 3,
+      "attname": "token_hash",
+      "datatype": "text",
+      "relation": "scim_tokens",
+      "attnotnull": true,
+      "default_expr": null
+    },
+    {
+      "attnum": 4,
+      "attname": "prefix",
+      "datatype": "text",
+      "relation": "scim_tokens",
+      "attnotnull": true,
+      "default_expr": null
+    },
+    {
+      "attnum": 5,
+      "attname": "created_at",
+      "datatype": "timestamp with time zone",
+      "relation": "scim_tokens",
+      "attnotnull": true,
+      "default_expr": "now()"
+    },
+    {
+      "attnum": 6,
+      "attname": "expires_at",
+      "datatype": "timestamp with time zone",
+      "relation": "scim_tokens",
+      "attnotnull": false,
+      "default_expr": null
+    },
+    {
+      "attnum": 7,
+      "attname": "revoked_at",
+      "datatype": "timestamp with time zone",
+      "relation": "scim_tokens",
+      "attnotnull": false,
+      "default_expr": null
+    },
+    {
+      "attnum": 8,
+      "attname": "last_used_at",
+      "datatype": "timestamp with time zone",
+      "relation": "scim_tokens",
+      "attnotnull": false,
+      "default_expr": null
+    },
+    {
+      "attnum": 1,
+      "attname": "id",
+      "datatype": "uuid",
+      "relation": "scim_users",
+      "attnotnull": true,
+      "default_expr": null
+    },
+    {
+      "attnum": 2,
+      "attname": "sso_provider_id",
+      "datatype": "uuid",
+      "relation": "scim_users",
+      "attnotnull": true,
+      "default_expr": null
+    },
+    {
+      "attnum": 3,
+      "attname": "user_id",
+      "datatype": "uuid",
+      "relation": "scim_users",
+      "attnotnull": false,
+      "default_expr": null
+    },
+    {
+      "attnum": 4,
+      "attname": "resource",
+      "datatype": "jsonb",
+      "relation": "scim_users",
+      "attnotnull": true,
+      "default_expr": null
+    },
+    {
+      "attnum": 5,
+      "attname": "user_name",
+      "datatype": "text",
+      "relation": "scim_users",
+      "attnotnull": true,
+      "default_expr": "lower((resource ->> 'userName'::text))"
+    },
+    {
+      "attnum": 6,
+      "attname": "external_id",
+      "datatype": "text",
+      "relation": "scim_users",
+      "attnotnull": false,
+      "default_expr": "(resource ->> 'externalId'::text)"
+    },
+    {
+      "attnum": 7,
+      "attname": "active",
+      "datatype": "boolean",
+      "relation": "scim_users",
+      "attnotnull": true,
+      "default_expr": "COALESCE(((resource ->> 'active'::text))::boolean, true)"
+    },
+    {
+      "attnum": 8,
+      "attname": "created_at",
+      "datatype": "timestamp with time zone",
+      "relation": "scim_users",
+      "attnotnull": true,
+      "default_expr": "now()"
+    },
+    {
+      "attnum": 9,
+      "attname": "updated_at",
+      "datatype": "timestamp with time zone",
+      "relation": "scim_users",
+      "attnotnull": true,
+      "default_expr": "now()"
+    },
+    {
+      "attnum": 10,
+      "attname": "deleted_at",
+      "datatype": "timestamp with time zone",
+      "relation": "scim_users",
+      "attnotnull": false,
+      "default_expr": null
+    }
+  ],
+  "constraints": [
+    {
+      "md5": "036c572995e748218f48b2467db6ae43",
+      "name": "scim_tokens_expires_at_future",
+      "relation": "scim_tokens",
+      "definition": "CHECK (expires_at IS NULL OR expires_at > created_at)"
+    },
+    {
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "name": "scim_tokens_pkey",
+      "relation": "scim_tokens",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "md5": "75b9ff2d15056f1bf07f513fbfb71daf",
+      "name": "scim_tokens_revoked_after_created",
+      "relation": "scim_tokens",
+      "definition": "CHECK (revoked_at IS NULL OR revoked_at >= created_at)"
+    },
+    {
+      "md5": "5742cb7347fd7d5e17b7c6d76cb72f4d",
+      "name": "scim_tokens_sso_provider_id_fkey",
+      "relation": "scim_tokens",
+      "definition": "FOREIGN KEY (sso_provider_id) REFERENCES auth.sso_providers(id) ON DELETE CASCADE"
+    },
+    {
+      "md5": "2cd370f690c6c16880e02917eeaf0230",
+      "name": "scim_tokens_token_hash_check",
+      "relation": "scim_tokens",
+      "definition": "CHECK (token_hash ~ '^[0-9a-f]{64}$'::text)"
+    },
+    {
+      "md5": "4c6419b3704337bbfe50f018842a9ad3",
+      "name": "scim_users_pkey",
+      "relation": "scim_users",
+      "definition": "PRIMARY KEY (id)"
+    },
+    {
+      "md5": "5742cb7347fd7d5e17b7c6d76cb72f4d",
+      "name": "scim_users_sso_provider_id_fkey",
+      "relation": "scim_users",
+      "definition": "FOREIGN KEY (sso_provider_id) REFERENCES auth.sso_providers(id) ON DELETE CASCADE"
+    },
+    {
+      "md5": "c3025b918f5d330db0d4b19482474b87",
+      "name": "scim_users_user_id_fkey",
+      "relation": "scim_users",
+      "definition": "FOREIGN KEY (user_id) REFERENCES auth.users(id) ON DELETE SET NULL"
+    }
+  ],
+  "indexes": [
+    {
+      "md5": "21a8599521b42bc691ff742cde8d36ee",
+      "name": "auth.scim_tokens_expires_at_idx",
+      "relation": "scim_tokens",
+      "definition": "CREATE INDEX scim_tokens_expires_at_idx ON auth.scim_tokens USING btree (expires_at)"
+    },
+    {
+      "md5": "9f0a7f34bc22a555d7b3d853aa4c176a",
+      "name": "auth.scim_tokens_pkey",
+      "relation": "scim_tokens",
+      "definition": "CREATE UNIQUE INDEX scim_tokens_pkey ON auth.scim_tokens USING btree (id)"
+    },
+    {
+      "md5": "f1c322992aeb5c865ec2cfcffc8d9562",
+      "name": "auth.scim_tokens_revoked_at_idx",
+      "relation": "scim_tokens",
+      "definition": "CREATE INDEX scim_tokens_revoked_at_idx ON auth.scim_tokens USING btree (revoked_at)"
+    },
+    {
+      "md5": "5be0e7862268c9ca2a02c4140c1b2974",
+      "name": "auth.scim_tokens_sso_provider_id_idx",
+      "relation": "scim_tokens",
+      "definition": "CREATE INDEX scim_tokens_sso_provider_id_idx ON auth.scim_tokens USING btree (sso_provider_id)"
+    },
+    {
+      "md5": "71830e11faec68f6316d3f72b97d43a7",
+      "name": "auth.scim_tokens_token_hash_key",
+      "relation": "scim_tokens",
+      "definition": "CREATE UNIQUE INDEX scim_tokens_token_hash_key ON auth.scim_tokens USING btree (token_hash)"
+    },
+    {
+      "md5": "1b4860754db063b6a265cf6ab20ec635",
+      "name": "auth.scim_users_created_at_idx",
+      "relation": "scim_users",
+      "definition": "CREATE INDEX scim_users_created_at_idx ON auth.scim_users USING btree (sso_provider_id, created_at, id) WHERE (deleted_at IS NULL)"
+    },
+    {
+      "md5": "56bb3568fe00da3a1bc3a131ca5a8046",
+      "name": "auth.scim_users_deleted_at_idx",
+      "relation": "scim_users",
+      "definition": "CREATE INDEX scim_users_deleted_at_idx ON auth.scim_users USING btree (deleted_at)"
+    },
+    {
+      "md5": "1e263cd9b16430143783b49ff7ee969c",
+      "name": "auth.scim_users_external_id_key",
+      "relation": "scim_users",
+      "definition": "CREATE UNIQUE INDEX scim_users_external_id_key ON auth.scim_users USING btree (sso_provider_id, external_id) WHERE ((external_id IS NOT NULL) AND (deleted_at IS NULL))"
+    },
+    {
+      "md5": "664b80ea3b228da8306b8c94df58f327",
+      "name": "auth.scim_users_id_idx",
+      "relation": "scim_users",
+      "definition": "CREATE INDEX scim_users_id_idx ON auth.scim_users USING btree (sso_provider_id, id) WHERE (deleted_at IS NULL)"
+    },
+    {
+      "md5": "b8a6aa1774a1b2eca39d513a04bd9e4c",
+      "name": "auth.scim_users_pkey",
+      "relation": "scim_users",
+      "definition": "CREATE UNIQUE INDEX scim_users_pkey ON auth.scim_users USING btree (id)"
+    },
+    {
+      "md5": "87efc42d7e080075dd2b06babb338a47",
+      "name": "auth.scim_users_sso_provider_id_idx",
+      "relation": "scim_users",
+      "definition": "CREATE INDEX scim_users_sso_provider_id_idx ON auth.scim_users USING btree (sso_provider_id)"
+    },
+    {
+      "md5": "eb29e1f5c24368ec61394c0440c4148d",
+      "name": "auth.scim_users_updated_at_idx",
+      "relation": "scim_users",
+      "definition": "CREATE INDEX scim_users_updated_at_idx ON auth.scim_users USING btree (sso_provider_id, updated_at, id) WHERE (deleted_at IS NULL)"
+    },
+    {
+      "md5": "012903d5697873e0b338c358dfcfccb6",
+      "name": "auth.scim_users_user_id_idx",
+      "relation": "scim_users",
+      "definition": "CREATE INDEX scim_users_user_id_idx ON auth.scim_users USING btree (user_id)"
+    },
+    {
+      "md5": "7cce381939b5731174bbfeee7f0925e0",
+      "name": "auth.scim_users_user_name_idx",
+      "relation": "scim_users",
+      "definition": "CREATE INDEX scim_users_user_name_idx ON auth.scim_users USING btree (sso_provider_id, user_name COLLATE \"C\", id) WHERE (deleted_at IS NULL)"
+    },
+    {
+      "md5": "91cc26d8d5b0483006a2ed5da3525482",
+      "name": "auth.scim_users_user_name_key",
+      "relation": "scim_users",
+      "definition": "CREATE UNIQUE INDEX scim_users_user_name_key ON auth.scim_users USING btree (sso_provider_id, user_name) WHERE (deleted_at IS NULL)"
+    }
+  ],
+  "triggers": [
+    {
+      "md5": "0573adf337bcf358f8685fd3c94b4e56",
+      "name": "RI_ConstraintTrigger_c_17212",
+      "relation": "scim_tokens",
+      "definition": "CREATE CONSTRAINT TRIGGER \"RI_ConstraintTrigger_c_17212\" AFTER INSERT ON auth.scim_tokens FROM auth.sso_providers NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE FUNCTION \"RI_FKey_check_ins\"()"
+    },
+    {
+      "md5": "1b2651224b850f1c5dea09a7e2acc3a8",
+      "name": "RI_ConstraintTrigger_c_17213",
+      "relation": "scim_tokens",
+      "definition": "CREATE CONSTRAINT TRIGGER \"RI_ConstraintTrigger_c_17213\" AFTER UPDATE ON auth.scim_tokens FROM auth.sso_providers NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE FUNCTION \"RI_FKey_check_upd\"()"
+    },
+    {
+      "md5": "cc9d81a1924b0bdc34e60cd6418f2387",
+      "name": "RI_ConstraintTrigger_c_17182",
+      "relation": "scim_users",
+      "definition": "CREATE CONSTRAINT TRIGGER \"RI_ConstraintTrigger_c_17182\" AFTER INSERT ON auth.scim_users FROM auth.sso_providers NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE FUNCTION \"RI_FKey_check_ins\"()"
+    },
+    {
+      "md5": "b7b657b7e4a7054163229f79280be9fb",
+      "name": "RI_ConstraintTrigger_c_17183",
+      "relation": "scim_users",
+      "definition": "CREATE CONSTRAINT TRIGGER \"RI_ConstraintTrigger_c_17183\" AFTER UPDATE ON auth.scim_users FROM auth.sso_providers NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE FUNCTION \"RI_FKey_check_upd\"()"
+    },
+    {
+      "md5": "1df518656e7de6318190b22cab63c549",
+      "name": "RI_ConstraintTrigger_c_17187",
+      "relation": "scim_users",
+      "definition": "CREATE CONSTRAINT TRIGGER \"RI_ConstraintTrigger_c_17187\" AFTER INSERT ON auth.scim_users FROM auth.users NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE FUNCTION \"RI_FKey_check_ins\"()"
+    },
+    {
+      "md5": "61832bf17b72b9397cae2e45fb8e88e7",
+      "name": "RI_ConstraintTrigger_c_17188",
+      "relation": "scim_users",
+      "definition": "CREATE CONSTRAINT TRIGGER \"RI_ConstraintTrigger_c_17188\" AFTER UPDATE ON auth.scim_users FROM auth.users NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE FUNCTION \"RI_FKey_check_upd\"()"
+    }
+  ],
+  "policies": [],
+  "grants": [
+    {
+      "role": "anon",
+      "relation": "scim_tokens",
+      "can_delete": false,
+      "can_insert": false,
+      "can_select": false,
+      "can_update": false,
+      "schema_usage": true
+    },
+    {
+      "role": "authenticated",
+      "relation": "scim_tokens",
+      "can_delete": false,
+      "can_insert": false,
+      "can_select": false,
+      "can_update": false,
+      "schema_usage": true
+    },
+    {
+      "role": "authenticator",
+      "relation": "scim_tokens",
+      "can_delete": false,
+      "can_insert": false,
+      "can_select": false,
+      "can_update": false,
+      "schema_usage": false
+    },
+    {
+      "role": "postgres",
+      "relation": "scim_tokens",
+      "can_delete": true,
+      "can_insert": true,
+      "can_select": true,
+      "can_update": true,
+      "schema_usage": true
+    },
+    {
+      "role": "service_role",
+      "relation": "scim_tokens",
+      "can_delete": false,
+      "can_insert": false,
+      "can_select": false,
+      "can_update": false,
+      "schema_usage": true
+    },
+    {
+      "role": "supabase_auth_admin",
+      "relation": "scim_tokens",
+      "can_delete": true,
+      "can_insert": true,
+      "can_select": true,
+      "can_update": true,
+      "schema_usage": true
+    },
+    {
+      "role": "anon",
+      "relation": "scim_users",
+      "can_delete": false,
+      "can_insert": false,
+      "can_select": false,
+      "can_update": false,
+      "schema_usage": true
+    },
+    {
+      "role": "authenticated",
+      "relation": "scim_users",
+      "can_delete": false,
+      "can_insert": false,
+      "can_select": false,
+      "can_update": false,
+      "schema_usage": true
+    },
+    {
+      "role": "authenticator",
+      "relation": "scim_users",
+      "can_delete": false,
+      "can_insert": false,
+      "can_select": false,
+      "can_update": false,
+      "schema_usage": false
+    },
+    {
+      "role": "postgres",
+      "relation": "scim_users",
+      "can_delete": true,
+      "can_insert": true,
+      "can_select": true,
+      "can_update": true,
+      "schema_usage": true
+    },
+    {
+      "role": "service_role",
+      "relation": "scim_users",
+      "can_delete": false,
+      "can_insert": false,
+      "can_select": false,
+      "can_update": false,
+      "schema_usage": true
+    },
+    {
+      "role": "supabase_auth_admin",
+      "relation": "scim_users",
+      "can_delete": true,
+      "can_insert": true,
+      "can_select": true,
+      "can_update": true,
+      "schema_usage": true
+    }
+  ],
+  "per_relation_verdicts": [
+    {
+      "relation": "auth.scim_tokens",
+      "owner": "supabase_auth_admin",
+      "rls_enabled": false,
+      "comment": "Hosted GoTrue-managed relation; security based on effective ACL, not implied RLS policy.",
+      "verdict": "HOSTED_AUTH_SCIM_TOKEN_METADATA; 64-char hexadecimal token_hash validation, provider-owned resource, hashed token value NOT ACCESSED; NO browser/service_role table grants; expiry/revocation structural checks present. Private provider internals and live token states UNVERIFIED."
+    },
+    {
+      "relation": "auth.scim_users",
+      "owner": "supabase_auth_admin",
+      "rls_enabled": false,
+      "comment": "Hosted GoTrue-managed relation; security based on effective ACL, not implied RLS policy.",
+      "verdict": "HOSTED_AUTH_SCIM_USER_PROVISIONING; nullable user_id intentionally SET NULL on Auth user deletion; provider-managed retained provisioning record and metadata no authenticated/anon/service_role table access; generated user_name/external_id/active require no direct app mutation."
+    }
+  ],
+  "classification": {
+    "observed_additional_fk": "auth.scim_users_user_id_fkey",
+    "delete_action": "SET NULL",
+    "nullable_user_id": true,
+    "prior_non_cascade_fk_count": 31,
+    "current_count_expected": 32,
+    "confirmed_app_defect": false,
+    "safe_deletion": false,
+    "provider_writes": false,
+    "zero_approx_rows_is_not_proof_of_disuse": true,
+    "hosted_scim_settings": "UNVERIFIED_PROVIDER_CONSOLE",
+    "hosted_native_implementation": "UNVERIFIED",
+    "note": "No user or token records, secrets, hashes or raw user data were fetched."
+  },
+  "next": "Continue from next unreviewed/changed provider definition; test internal composite Auth cascade paths in isolated disposable PostgreSQL (not production). Exact hosted SSO/SCIM configurations remain UNVERIFIED."
+}

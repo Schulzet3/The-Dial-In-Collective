@@ -1,0 +1,60 @@
+name: DIC Issue33 R63 independent original603 #570 source proof
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r63-independent-570-zip-proof.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  proof:
+    name: original603-570-independent-zip-sha256
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - name: Download and independently rehash exact selected public source
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          archive="${RUNNER_TEMP}/dic33-r63-570.zip"
+          curl --fail --silent --show-error --location --retry 2 \
+            --header "Authorization: Bearer ${GH_TOKEN}" \
+            --header "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/13682402433/zip" -o "${archive}"
+          test "$(stat -c '%s' "${archive}")" = '55609'
+          test "$(sha256sum "${archive}" | cut -d ' ' -f1)" = 'ef149eb72f645f40aa98f52cf5d7338925257392225d052b428a809f2c6b0bc4'
+          unzip -tqq "${archive}"
+          test "$(unzip -p "${archive}" case-570.html | wc -c | tr -d ' ')" = '321329'
+          test "$(unzip -p "${archive}" case-570.html | sha256sum | cut -d ' ' -f1)" = '02f2885d3dc2c7d9d9ac29ebad92d071d286eb11ea115718ba29e813f65c1e85'
+          proof_sha="$(unzip -p "${archive}" focused-current-evidence.json | sha256sum | cut -d ' ' -f1)"
+          test "${proof_sha}" = 'b1f5e59564306fe3e96099de79cb77aeb0a937d2f23853228e85b6d524440fcf'
+          unzip -p "${archive}" focused-current-evidence.json | jq -e \
+            '.source_sha=="9eaa382a92a0de8773fdcd192bef970dd4ee683b" and
+             .case_numbers==[570] and (.records|length)==1 and
+             .manual_certified==0 and .production_operations==0 and
+             .real_auth==false and .original_corpus_modified==false and
+             .records[0].status=="FETCHED" and .records[0].parser_ok==true and
+             .records[0].selected_heading_identity_verified==true and
+             .records[0].selected_h1==["Honduras - Expreso Paraiseño"] and
+             .records[0].current_fields.name=="Honduras - Expreso Paraiseño" and
+             .records[0].current_fields.origin=="La Lodoza, El Paraíso, Honduras" and
+             .records[0].current_fields.process=="Washed" and
+             .records[0].current_fields.variety=="Parainema" and
+             (.records[0].conflicts|length)==0 and
+             .records[0].add_coffee_ui_rendered==true and
+             .records[0].source_review_rendered==true and
+             .records[0].html_bytes==321329 and
+             .records[0].html_sha256=="02f2885d3dc2c7d9d9ac29ebad92d071d286eb11ea115718ba29e813f65c1e85"' >/dev/null
+          unzip -p "${archive}" r63-570-selected-afterproof.json | jq -e \
+            --arg proof "${proof_sha}" \
+            '.source_sha=="9eaa382a92a0de8773fdcd192bef970dd4ee683b" and
+             .evidence_sha256==$proof and .passed==true and .failures==[] and
+             .manual_certified==0 and .production_operations==0 and
+             .observed.direct_current_evidence.selectedGrowingLocality==true and
+             .observed.raw_html_verified==true and
+             .observed.current_fields.origin=="La Lodoza, El Paraíso, Honduras" and
+             .observed.add_coffee==true and .observed.source_review==true' >/dev/null
+          echo 'VERIFIED #570 archive/HTML/report SHA and exact current parser; no 603-wide claim'

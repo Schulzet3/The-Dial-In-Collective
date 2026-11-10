@@ -1,0 +1,79 @@
+name: DIC Issue33 R64 independent selected #569 source bytes
+on:
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r64-independent-569-zip-proof.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  independent:
+    name: original603-569-independent-archive-verified
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - name: Independently download current official source ZIP and verify exact #569 subset
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          archive="${RUNNER_TEMP}/dic33-r64-566-567-569-source.zip"
+          curl --fail --silent --show-error --location --retry 2 \
+            --header "Authorization: Bearer ${GH_TOKEN}" \
+            --header "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/artifacts/13685678322/zip" -o "${archive}"
+          test "$(stat -c '%s' "${archive}")" = '56186'
+          test "$(sha256sum "${archive}" | cut -d ' ' -f1)" = 'c2cbb12756c73ecfe0548f9066a951490334dc6441afa0f1e517bf40c1e3ae6a'
+          echo 'R64 ZIP hash matched GitHub provider digest'
+          unzip -tqq "${archive}"
+          test "$(unzip -p "${archive}" case-569.html | wc -c | tr -d ' ')" = '320818'
+          test "$(unzip -p "${archive}" case-569.html | sha256sum | cut -d ' ' -f1)" = '53cc7d2642933e6d146c59722b99c8577a7b4ed898fd792542191ba589152280'
+          echo 'R64 current exact #569 HTML byte/hash verified'
+          source_sha="$(unzip -p "${archive}" focused-current-evidence.json | sha256sum | cut -d ' ' -f1)"
+          test "${source_sha}" = '69a4b4bd5dd75397a68a6eacea750f5b247ee610d9200dabf9765f4be38b94ca'
+          echo 'R64 report JSON byte/hash verified'
+          unzip -p "${archive}" focused-current-evidence.json | jq -c '{source_sha,case_numbers,manual_certified,production_operations,real_auth,original_corpus_modified,records:[.records[]|{number,status,reason:.original_unavailable_reason,parser_ok,selected_h1,selected_heading_identity_verified,html_bytes,html_sha256,origin:.current_fields.origin,process:.current_fields.process,producer:.current_fields.producer,notes:.current_fields.tasting_notes,add_coffee_ui_rendered,source_review_rendered,conflict_count:(.conflicts|length)}]}'
+          unzip -p "${archive}" focused-current-evidence.json | jq -e '
+            .source_sha=="261193bca70922192de517964400a8aeaa970728" and
+            .case_numbers==[566,567,569] and (.records|length)==3 and
+            .manual_certified==0 and .production_operations==0 and
+            .real_auth==false and .original_corpus_modified==false and
+            ([.records[]|select(.number==566 or .number==567)|.status]==["UNAVAILABLE","UNAVAILABLE"]) and
+            ([.records[]|select(.number==566 or .number==567)|(.current_fields // {})]==[{},{}]) and
+            ([.records[]|select(.number==566 or .number==567)|(.selected_h1 // [])]==[[],[]]) and
+            ([.records[]|select(.number==566 or .number==567)|.html_sha256]==[null,null]) and
+            ([.records[]|select(.number==569)]|length)==1 and
+            ([.records[]|select(.number==569)][0] |
+               .status=="FETCHED" and .parser_ok==true and
+               .selected_heading_identity_verified==true and
+               .selected_h1==["Guatemala - Finca La Bendicion"] and
+               .current_fields.name=="Guatemala - Finca La Bendicion" and
+               .current_fields.origin=="Sierra De Las Minas, Guatemala" and
+               .current_fields.process=="Washed" and
+               .current_fields.producer=="Finca La Bendicion" and
+               (.current_fields.tasting_notes|contains("Marionberry")) and
+               (.conflicts|length)==0 and
+               .add_coffee_ui_rendered==true and .source_review_rendered==true and
+               .html_bytes==320818 and
+               .html_sha256=="53cc7d2642933e6d146c59722b99c8577a7b4ed898fd792542191ba589152280")' >/dev/null
+          echo 'R64 source JSON semantic guard passed'
+          unzip -p "${archive}" r64-566-567-569-afterproof.json | jq -c '{source_sha,focused_json_sha256,passed,failures,manual_certified,production_operations,selected:[.observed[]|select(.number==569)|{raw_verified,direct_selected_markers,origin:.current_fields.origin,process:.current_fields.process,add_coffee,source_review}]}'
+          unzip -p "${archive}" r64-566-567-569-afterproof.json | jq -e \
+            --arg source "${source_sha}" '
+            .source_sha=="261193bca70922192de517964400a8aeaa970728" and
+            .focused_json_sha256==$source and .passed==false and
+            .manual_certified==0 and .production_operations==0 and
+            ([.failures[]|select(startswith("569:"))]|length)==0 and
+            ([.observed[]|select(.number==569)]|length)==1 and
+            ([.observed[]|select(.number==569)][0] |
+              .raw_verified==true and
+              .direct_selected_markers.ownProduct==true and
+              .direct_selected_markers.typedWashed==true and
+              .direct_selected_markers.ownTasting==true and
+              .current_fields.origin=="Sierra De Las Minas, Guatemala" and
+              .current_fields.process=="Washed" and
+              .add_coffee==true and .source_review==true)' >/dev/null
+          echo 'R64 afterproof semantic guard passed'
+          echo 'VERIFIED #569 selected official ZIP/raw HTML/JSON/parser; #566/#567 UNAVAILABLE and NOT certified'

@@ -1,0 +1,81 @@
+# Issue #1676 — Admin invitation and account deletion
+
+Owner instruction Nov 9, 2026: build Delete Code (revoke immediately and remove from operator listing), and Delete Account with explicit KEEP or REMOVE qualifying anonymous Community contributions. Narrow new owner approval replaces only previous beta no-hard-delete and blanket retention defaults, not unrelated Auth, privacy, member, offline, backup, or publication decisions. No real user/account/code/shot deletion authorized by build request.
+
+This source-stage change introduces admin-only invitation deletion with private receipts and a new two-phase member deletion ledger. Account deletion requires a server-only Edge orchestrator to verify GoTrue admin admission and execute Auth admin.deleteUser; SQL alone never deletes Auth users. Pending integration: Edge handler, Admin option selector, scoped SQL/JS tests and provider-independent verification. A failed Auth/finalization step must remain incomplete and retryable; never report completed on partial effects. The staged SQL originally drafted below must be audited before merging/READY. No hosted SQL or publication.
+
+## Backend SQL safety refinement
+
+Before any CI/release, reviewed delete-finalization ordering: capture target Community IDs from the frozen contributor IDs **before** unlinking, detach reviews, remove only those projections, and count removed rows atomically. Fail-closed on missing Auth deletion; no provider or member-data writes. Full test/Edge integration still pending.
+
+## Source idempotency fix
+
+Reused the historical `dic_admin_access_overview` definition as `CREATE OR REPLACE` (not conflicting CREATE) so the forward-only migration can apply after the existing Admin API. No production operations; isolated SQL remains to be run.
+
+## Admin view and light/dark responsive controls
+
+Added per-code Delete Code action including used/revoked codes; added nonadmin Delete Account button alongside reversible access toggle; added two-option permanently destructive dialog with server-provided impact counts and accessible Light/Dark contrast. Backend wiring, tests and verification remain pending; no hosted SQL or member/account action.
+
+## Service-role only GoTrue deletion bridge
+
+New Edge source `supabase/functions/dic-delete-member-account/index.ts` validates origin, authenticated identity, current admitted/admin role, exact operation UUID and server-side request budget. The *only* service-role client prepares SQL, deletes GoTrue user, checks ambiguous failures and finalizes only after the DB independently verifies the Auth row is gone. On partial failures returns retryable status, never false completed; no deployed function yet. Supabase JS admin.deleteUser API checked against official documentation. No production writes.
+
+## Bound client Admin actions
+
+`site/admin/main.js` now uses administrator-only RPC `dic_admin_delete_invite` for confirmed code deletion (automatic revocation + listing removal), and a two-choice account impact dialog invoking preview, request and `dic-delete-member-account` Edge only after a second explicit confirmation. Retry reuses the same mode/ledger; a failed RPC/Edge call is not success. Secret remains exclusively server-side; no production changes or live member deletion. Source tests/CI still pending.
+
+## Exact-preview concurrency guard
+
+Refactored the single source of server-authoritative impact counts into private `dic_admin_account_delete_impact`, denied to clients. Both admin-facing preview/request and service-only prepare now call it, with an actual equality check before admission revocation. This closes an account-data race between displayed preview and external GoTrue deletion. No production write or inferred test PASS.
+
+## Disposable SQL implementation acceptance fixture
+
+Added `supabase/tests/admin_member_deletion.sql` to the existing ONE isolated SQL regression loop. Exercises admin/ordinary/anonymous privileges, a deleted code's immediate revocation and invisibility across search/overview/pages, private receipt and idempotence, exact account preview rejection, confirmed request, server-only preparation, prohibition on pre-Auth finalization, disposable simulated Auth cascade, retention of private contributor identity for Community weighting, removal of only the selected user's Community rows, and an untouched second member. The suite has a hard `current_database()='dic_ci'` guard and wraps all inserts/DELETES in BEGIN/ROLLBACK. Actual CI verdict PENDING; no hosted operations.
+
+## Admin JS tests
+
+Updated the retired no-hard-delete assertion, preserving administrator protection. Added fixture tests for escaped Keep/Remove Community choices, no forged direct confirmation, confirmed exact member and choice, server-only operation UUID to Edge, and Delete Code RPC. No production writes. CI verdict pending.
+
+## Release queue IN_PROGRESS tracking
+
+Added only `DIC-Q-1676-admin-code-account-delete` with exact runtime/SQL/Edge scope; status IN_PROGRESS, no CI PASS, no merged SHA and no production authorization. Existing 260 queue entries and released receipts retained unmodified. READY only after applicable exact-source CI, safe integration and migration/Edge release compatibility proof.
+
+## Service endpoint simulation and Storage safety guard
+
+Added Node VM simulation for Edge endpoint: origin/method/auth/admin denial before privileged client; target/mode strictly from prepared SQL ledger (not injected browser body), Auth deletion before DB finalization, no false success after failed GoTrue deletion, recovery when Auth user vanished on prior attempt, and completed-op idempotence. Added provider Storage-owned-object preflight guard before admission revocation (conditional dynamic SQL because isolated dic_ci has no Storage schema). Live project read-only check found 0 Storage objects and 0 buckets. Exact-source CI pending after this change.
+
+## Interrupted Auth deletion recovery SQL
+
+Added owner-operator-only `pending_deletions` to the existing access overview, sourced from private operation receipts only for `actor_id=auth.uid()` and not containing any token or member private notes. This remains listable even after Auth delete removes the member row. Disposable SQL checks visibility after Auth deletion and before finalization. UI recovery button still being wired. No hosted changes.
+
+## Operator recovery button
+
+Admin Access renders the requesting admin's private unfinished operation receipts and an explicit Retry Completion control, even when the deleted Auth account is absent from member listings. It sends only the original immutable operation ID through the gated Edge function. Added JS recovery test. No new member deletion scope or production operations. Source CI after this change pending.
+
+## Prevent Restore Access during pending permanent deletion
+
+After `prepare`, the member's admission is revoked. The existing Admin Remove/Restore Access path now explicitly rejects changes for an account with an unfinished hard-delete operation; service retry additionally rejects any unexpectedly restored admission. This preserves the preview/Community snapshot while the GoTrue delete runs, without changing the reversible access behavior for other accounts. Disposable SQL regression added; no provider/member changes.
+
+## Actual SQL CI fixture failure diagnosed and fixed
+
+PR-head SQL run 42692499171 (job 129415617298) applied all migrations and passed earlier suites, then failed ONLY in the newly added recovery test: the assertion for an *unfinished* operation was mistakenly placed after `dic_admin_account_delete_finish` had already transitioned it to `completed`, so it correctly disappeared from pending overview. Moved the assertion to the exact post-GoTrue/pre-finalization interval, preserving runtime code and all existing safety assertions. Failed run remains FAILED, new exact-source CI pending. No production action.
+
+## Completed-receipt privacy hardening
+
+Verified that the private request impact contains email and original member UUID for confirmation/retry, but neither needs retention after a successful Auth deletion and Community cleanup. The finishing SQL transaction now drops those two identifying JSON keys from the completed operation receipt, while keeping limited operation audit metadata, source counts and actor scope. Added disposable SQL regression. No real account or provider changes; new exact-source CI required.
+
+## November 9 — completion receipt contributor de-link (source patch)
+
+After exact merged-source inspection, found the completed private deletion receipt kept the frozen `contributor_ids` array next to the original deleted Auth user ID, which would allow subsequent internal re-association of otherwise anonymous durable Community data. Narrow forward-only migration refinement now clears `contributor_ids` in the same finalization transaction as completion and prior removal of the email/member ID from `expected_impact`. The frozen contributor list remains available in `requested/prepared` phases only for recovery/selected removal, never after completion. Added disposable Keep and Remove tests verifying zero retained contributor IDs. No change to existing Community row identities/weighting, member records or provider; no deployment. This is part of owner Issue #1676 and must obtain exact-source CI before READY.
+
+## Required exact-source validate workflow trigger repair (#1676 / #457)
+
+Postmerge source `ef4af9d5aff89cf7dc786990fdb7c50f0915dba2` had 4 visible source-bound CI job statuses but no `validate`: the push path allowlist in `.github/workflows/cloud-beta-ci.yml` omitted `supabase/migrations/**` and `supabase/tests/**`. The PR had five green checks because PR path-ignore allows SQL, but a *SQL-only push* silently omitted validate. This is a real reproducible five-check trigger gap, not a failing/waived check. Scoped fix adds exactly the two SQL paths to the existing single validate workflow, preserving one build and all risk classification; one Node guard test asserts both triggers are present exactly once for future SQL-only commits. No new tests or workflow publisher introduced. This is source-only, not production, and requires passing exact-source PR and merged CI before marking READY.
+
+## Final integrated source-only READY receipt — November 9, 2026
+
+Authority: explicit owner build instruction, Issue #1676; no publication or real member-data destruction. PR #1719 nonforce merged `3af32ae6483e7627ef4e1a8e51268dbb0e53765c`; privacy unlink PR #1723 nonforce merged `ef4af9d5aff89cf7dc786990fdb7c50f0915dba2`; missing SQL-only validate trigger PR #1725 nonforce merged final development SHA `ed95dd067bd1d75925dd56e88300297f9f28c033`. Change scope: admin main/view/styles, new server-only Edge, forward-only SQL, isolated SQL + Node/Edge tests and existing CI path trigger; original Community identity model and personal data unchanged.
+
+Verification: five required PR-head checks SUCCESS for each scoped change; SQL merged run 42694493560 SUCCESS with anonymous/ordinary-user/administrator isolation, exact server impact, invite immediate revocation and invisibility, idempotent Keep/Remove, Auth cascade simulation within disposable dic_ci transaction, another member unchanged, unlinked contributor balancing intact, finished audit identity de-link, and signed HTTP. Migration Git blob bd80a9f6a17b4535f52caf77548eaa568d9b0b25 matches final source exactly. Final merged push applicable approval 42695272216, Node/lint/build 42695272222, cloud and browser 42695273315 all SUCCESS. No SQL job was scheduled by the CI-workflow-only final push: not applicable on that push, do not call PASS; reusable byte-identical SQL run above. Original frozen603 manual corpus intentionally SKIPPED/N/A, not PASS. Previous failed draft SQL test was diagnosed and repaired; no remaining test failure.
+
+State: READY `DIC-Q-1676-admin-code-account-delete`, zero source blockers, NOT DEPLOYED. Live Supabase read-only evidence: Edge `dic-delete-member-account` not installed, current Storage buckets and objects both zero (point-in-time, future recheck required). No hosted Auth/account, invite, Community, Netlify, SQL/Edge, paid, or encrypted-backup action. Production feature and irreversible behavior remain absent; publication and any deliberate live deletion require separate owner action. Future release dependency order: apply/verify named migration, deploy/verify JWT-required Edge with service secret server-only, deploy exact isolated approved UI once via existing one-use publisher, then read-only source and privacy verification. Do not auto-stage/freeze or pre-authorize a release.

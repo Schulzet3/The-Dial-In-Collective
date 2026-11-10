@@ -1,0 +1,2405 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 128,
+  "project_ref": "azviqqejypsefzilgonr",
+  "verified_development_parent_sha": "331e9a0ef5d18c835f02d605bcd28860d629ed21",
+  "ops_main_sha": "55c2bebcdcabda40e890ac25dcb9880ec789b5a4",
+  "publication_sha": "2d0bed35e67f6a745a21cbd80616ad4c9a98ed41",
+  "observed_at_utc": "2026-11-09 20:52:49.677392+00",
+  "scope": "DIRECT_VISIBLE_CURRENT_POLICY_AND_TRIGGER_TEXT_PLUS_MD5_ONLY_FUNCTION_DRIFT; DO_NOT_CREDIT_FRESH_FULL_FUNCTION_BODY_OR_COMPILED_NATIVE_WORDS",
+  "queries": {
+    "func": "SELECT n.nspname schema_name,p.proname function_name,pg_get_function_identity_arguments(p.oid) args,md5(pg_get_functiondef(p.oid)) definition_md5,length(pg_get_functiondef(p.oid)) source_chars,(length(pg_get_functiondef(p.oid))-length(replace(pg_get_functiondef(p.oid),E'\\n',''))) source_newlines,p.prosecdef security_definer,coalesce(array_to_string(p.proconfig,','),'') config FROM pg_catalog.pg_proc p JOIN pg_catalog.pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname IN ('private','public') ORDER BY 1,2,3,p.oid",
+    "pol": "SELECT n.nspname schema_name,c.relname table_name,p.polname policy_name,p.polcmd command,p.polpermissive permissive,coalesce((SELECT string_agg(r.rolname,',' ORDER BY r.rolname) FROM pg_catalog.pg_roles r WHERE r.oid=ANY(p.polroles)),'PUBLIC') roles,coalesce(pg_get_expr(p.polqual,p.polrelid,true),'') using_expr,coalesce(pg_get_expr(p.polwithcheck,p.polrelid,true),'') check_expr FROM pg_catalog.pg_policy p JOIN pg_catalog.pg_class c ON c.oid=p.polrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname IN ('private','public') ORDER BY 1,2,3",
+    "trg": "SELECT n.nspname schema_name,c.relname table_name,t.tgname trigger_name,pg_get_triggerdef(t.oid,true) ddl,md5(pg_get_triggerdef(t.oid,true)) ddl_md5,t.tgenabled enabled FROM pg_catalog.pg_trigger t JOIN pg_catalog.pg_class c ON c.oid=t.tgrelid JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE NOT t.tgisinternal AND n.nspname IN ('private','public') ORDER BY 1,2,3",
+    "rel": "SELECT n.nspname schema_name,c.relname table_name,c.relkind::text kind,c.relrowsecurity rls,c.relforcerowsecurity force_rls,pg_get_userbyid(c.relowner) owner,(c.relacl IS NOT NULL) explicit_acl FROM pg_catalog.pg_class c JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname IN ('private','public') AND c.relkind IN ('r','p') ORDER BY 1,2",
+    "tls": "SELECT s.ssl,coalesce(a.backend_type,'unknown') backend_type,CASE WHEN a.client_addr IS NULL THEN 'local_socket_or_internal' WHEN a.client_addr <<= inet '127.0.0.0/8' OR a.client_addr <<= inet '::1/128' THEN 'loopback' WHEN a.client_addr <<= inet '10.0.0.0/8' OR a.client_addr <<= inet '172.16.0.0/12' OR a.client_addr <<= inet '192.168.0.0/16' OR a.client_addr <<= inet 'fc00::/7' THEN 'private_network' ELSE 'other_network' END peer_network_class,CASE WHEN a.usename IN ('postgres','supabase_admin','supabase_auth_admin','supabase_storage_admin','supabase_realtime_admin') THEN 'system_role' WHEN a.usename IN ('authenticated','anon','authenticator','service_role') THEN 'app_role' ELSE 'other_role' END role_class,count(*) connections FROM pg_catalog.pg_stat_ssl s LEFT JOIN pg_catalog.pg_stat_activity a ON a.pid=s.pid GROUP BY 1,2,3,4 ORDER BY 1,3,4",
+    "settings": "SELECT name,setting,source,pending_restart FROM pg_catalog.pg_settings WHERE name IN ('ssl','password_encryption','row_security','log_connections','log_disconnections','log_min_error_statement','log_min_duration_statement','statement_timeout','idle_in_transaction_session_timeout','max_connections','shared_preload_libraries') ORDER BY name",
+    "health": "SELECT now()::text captured_at,current_setting('server_version') postgres_version,(SELECT count(*) FROM pg_catalog.pg_stat_activity WHERE wait_event_type='Lock') lock_waiters,(SELECT count(*) FROM pg_catalog.pg_stat_activity WHERE state='idle in transaction') idle_in_transaction_count"
+  },
+  "previous_source_bound_function_manifest": "docs/audits/issue509-supabase-object-ledger.json#/function_manifest/manifest",
+  "previous_known_admin_search_fix_receipt": "docs/audits/issue509-function-source-drift-and-statistics-20261106-run48.json",
+  "function_baseline_matches": 98,
+  "known_already_source_aligned_function_delta": [
+    {
+      "identity": "private.dic_admin_search_records(p_kind text, p_query text, p_offset integer, p_limit integer)",
+      "baseline_md5": "fa84ffd4d121ba5b9aa4dc6ec3b98642",
+      "current_md5": "4e094f4f47bc30cbf63a7bfaf0c1100b",
+      "known_prior_fix": true
+    }
+  ],
+  "unreviewed_new_function_drift": [],
+  "full_function_source_hash_and_identity_revalidation": [
+    {
+      "schema_name": "private",
+      "function_name": "apply_prototype_import",
+      "args": "u uuid, doc jsonb",
+      "definition_md5": "479cc03d9ea9862176b0c663d99369b0",
+      "source_chars": 16423,
+      "source_newlines": 192,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "bump_revision",
+      "args": "",
+      "definition_md5": "651239ce95a684d072c16fdb895ead7d",
+      "source_chars": 261,
+      "source_newlines": 11,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "capture_equipment_snapshot",
+      "args": "",
+      "definition_md5": "90c66b59638b48d360e9fd949db63707",
+      "source_chars": 1166,
+      "source_newlines": 18,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "classify_personal_shot",
+      "args": "shotid uuid",
+      "definition_md5": "5183deb46474c10468638cef08d2bd05",
+      "source_chars": 3219,
+      "source_newlines": 62,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_admin_access_overview",
+      "args": "",
+      "definition_md5": "640a5fd16a194578228963d73d079810",
+      "source_chars": 1743,
+      "source_newlines": 41,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_admin_coffee_candidates",
+      "args": "p_submission_id uuid",
+      "definition_md5": "cb3cc3677b37f577643d248db1060a43",
+      "source_chars": 2032,
+      "source_newlines": 36,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_admin_dashboard_read",
+      "args": "",
+      "definition_md5": "e9f2b19f77b1365c57fe74e35c71d023",
+      "source_chars": 2413,
+      "source_newlines": 53,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_admin_delete_preview",
+      "args": "p_kind text, p_record_id uuid",
+      "definition_md5": "733e337473ef8f190e3a78ebf5ebfad1",
+      "source_chars": 4060,
+      "source_newlines": 60,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_admin_delete_record",
+      "args": "p_kind text, p_record_id uuid, p_expected_revision bigint, p_expected_impact jsonb",
+      "definition_md5": "71d4703233388fb04e263767caa5b57b",
+      "source_chars": 4091,
+      "source_newlines": 70,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_admin_edit_record",
+      "args": "p_record_id uuid, p_expected_revision bigint, p_details jsonb, p_reason text, p_kind text",
+      "definition_md5": "290b98b6bb6f99a1afb73b13ff315b12",
+      "source_chars": 13186,
+      "source_newlines": 182,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_admin_issue_invite",
+      "args": "p_label text",
+      "definition_md5": "98f1ee7c95ab2ff1f49269cb9db65180",
+      "source_chars": 1946,
+      "source_newlines": 41,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_admin_records",
+      "args": "p_kind text, p_offset integer, p_limit integer",
+      "definition_md5": "3c4086808ee07058a867a1af9e8270bd",
+      "source_chars": 6190,
+      "source_newlines": 103,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_admin_review_candidates",
+      "args": "p_submission_id uuid",
+      "definition_md5": "952b9cd2a21463f1073494a4d05b468f",
+      "source_chars": 2362,
+      "source_newlines": 44,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_admin_review_coffee",
+      "args": "p_submission_id uuid, p_expected_revision bigint, p_action text, p_reason text, p_canonical_id uuid",
+      "definition_md5": "cb5c264aceb9699a498177f3f6861783",
+      "source_chars": 4526,
+      "source_newlines": 71,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_admin_revoke_invite",
+      "args": "p_invite_id uuid",
+      "definition_md5": "db081b0e313f47a78c50789879e590cb",
+      "source_chars": 1027,
+      "source_newlines": 26,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_admin_search_records",
+      "args": "p_kind text, p_query text, p_offset integer, p_limit integer",
+      "definition_md5": "4e094f4f47bc30cbf63a7bfaf0c1100b",
+      "source_chars": 8921,
+      "source_newlines": 122,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "PREVIOUSLY_VERIFIED_MIGRATION_ALIGNED_DELTA"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_admin_set_member_access",
+      "args": "p_member_id uuid, p_enabled boolean",
+      "definition_md5": "19e71a0286d222f03f59604aae1c2ab8",
+      "source_chars": 2027,
+      "source_newlines": 38,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_backfill_library_contributions",
+      "args": "p_owner uuid, p_entry uuid, p_canonical uuid",
+      "definition_md5": "424a5c87c53165a918f7094bf67d25bb",
+      "source_chars": 2360,
+      "source_newlines": 50,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_canonical_roaster_key",
+      "args": "value text",
+      "definition_md5": "55aeb461080be1221e82d8a86a9d270d",
+      "source_chars": 573,
+      "source_newlines": 15,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_capture_first_decaf_method",
+      "args": "",
+      "definition_md5": "9a47ec8959cf43d08f1d326e4b0bce4f",
+      "source_chars": 1211,
+      "source_newlines": 25,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_capture_recommendation_context",
+      "args": "",
+      "definition_md5": "962e12faeac2a7b5a671bd837c6c5c41",
+      "source_chars": 1760,
+      "source_newlines": 35,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_claim_first_style_prompt_impl",
+      "args": "p_library_entry_id uuid",
+      "definition_md5": "31f06eec62a745bf998b749af71816db",
+      "source_chars": 940,
+      "source_newlines": 19,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_coffee_key",
+      "args": "value text",
+      "definition_md5": "8f6840ddd7e530e311c096591c01ce15",
+      "source_chars": 251,
+      "source_newlines": 8,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_community_fingerprint",
+      "args": "c community_shots",
+      "definition_md5": "06eaeadaef87a445b99d431ae67dd409",
+      "source_chars": 478,
+      "source_newlines": 13,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_confirm_coffee_existing",
+      "args": "mid uuid, p jsonb",
+      "definition_md5": "0fcc44bb8a05f46e87694d3474eb7c23",
+      "source_chars": 3239,
+      "source_newlines": 52,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_edit_my_coffee",
+      "args": "p_library_entry uuid, p_expected_revision bigint, p_details jsonb, p_source_url text",
+      "definition_md5": "5a52eee42d3427ccbad8b7272ff8df90",
+      "source_chars": 7162,
+      "source_newlines": 136,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_find_coffee_matches",
+      "args": "p jsonb",
+      "definition_md5": "0ba424a2a66e99dc98629a89d485680b",
+      "source_chars": 6024,
+      "source_newlines": 115,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_link_pending_coffee",
+      "args": "sid uuid, canonical uuid, event_name text, evidence jsonb",
+      "definition_md5": "140c211a4bfef175b041c037561a1e37",
+      "source_chars": 3954,
+      "source_newlines": 57,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_member_retry_pending_approval",
+      "args": "p_submission_id uuid, p_expected_revision bigint",
+      "definition_md5": "5ebb55ad50529a080b3c2332a29d3309",
+      "source_chars": 2166,
+      "source_newlines": 39,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_on_community_coffee_verification",
+      "args": "",
+      "definition_md5": "cefee7b991e40185eadbacde89def3aa",
+      "source_chars": 1065,
+      "source_newlines": 26,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_on_library_coffee_change",
+      "args": "",
+      "definition_md5": "b6cbc45072b0e9f8ebb511b2eca3895f",
+      "source_chars": 347,
+      "source_newlines": 13,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_promote_pending_coffee",
+      "args": "sid uuid, method text, evidence jsonb, distinct_confirmed boolean",
+      "definition_md5": "f9c37ac804b3b2c425cd86284020b581",
+      "source_chars": 11956,
+      "source_newlines": 194,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_recheck_after_link",
+      "args": "",
+      "definition_md5": "9fc3b44ef631cb87bc0b40e689c123b8",
+      "source_chars": 251,
+      "source_newlines": 10,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_review_community_shot",
+      "args": "p_id uuid",
+      "definition_md5": "c5aea4d32aa8027a39d80341feade406",
+      "source_chars": 7734,
+      "source_newlines": 164,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_review_pending_community",
+      "args": "p_limit integer",
+      "definition_md5": "ff876442da558f60f7eccb36bd6dbe62",
+      "source_chars": 944,
+      "source_newlines": 23,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_roaster_key",
+      "args": "value text",
+      "definition_md5": "e553ae6c1cf99c3784f5d14a4f05d355",
+      "source_chars": 388,
+      "source_newlines": 12,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_shared_preview_claim",
+      "args": "account_id uuid",
+      "definition_md5": "b99b6cbd392562af334c68e056ce33d8",
+      "source_chars": 1380,
+      "source_newlines": 31,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_source_key",
+      "args": "value text",
+      "definition_md5": "07e0ef286246fdae29b9151018296f79",
+      "source_chars": 981,
+      "source_newlines": 26,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "dic_submit_coffee_auto",
+      "args": "mid uuid, p jsonb",
+      "definition_md5": "e2b11c83a686a5a9949699cd23b52e13",
+      "source_chars": 3771,
+      "source_newlines": 65,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "handle_new_auth_user",
+      "args": "",
+      "definition_md5": "ba4f31790060a75e074148034f26dfbe",
+      "source_chars": 372,
+      "source_newlines": 12,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "import_id",
+      "args": "u uuid, kind text, source_id text",
+      "definition_md5": "d8dacedebb77db30037b10ee1bac97aa",
+      "source_chars": 436,
+      "source_newlines": 12,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "import_operation",
+      "args": "expected_owner uuid, doc jsonb, save boolean, review_hash text, recovery_saved boolean",
+      "definition_md5": "b684a6af862302d9d4bb7c212208f5e0",
+      "source_chars": 3124,
+      "source_newlines": 46,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "is_admin",
+      "args": "",
+      "definition_md5": "396d3e8e29dbd4550ec7ac26b7589a63",
+      "source_chars": 264,
+      "source_newlines": 8,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "is_member",
+      "args": "",
+      "definition_md5": "dbc163d07f45e8b5831f6a6394a70ab8",
+      "source_chars": 257,
+      "source_newlines": 8,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "mutate",
+      "args": "mid uuid, action text, p jsonb",
+      "definition_md5": "d1050c2ee3b2896c6fbd8b90bdba9052",
+      "source_chars": 10881,
+      "source_newlines": 123,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "mutate_workspace",
+      "args": "mid uuid, action text, p jsonb",
+      "definition_md5": "f3eb1b5086e4396625f3efa38f4c9165",
+      "source_chars": 6384,
+      "source_newlines": 64,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "project_shot",
+      "args": "",
+      "definition_md5": "79e6fd0668fa4502c8785b3e92a14a61",
+      "source_chars": 3045,
+      "source_newlines": 40,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "protect_shot_provenance",
+      "args": "",
+      "definition_md5": "9700d82ba097c7eba83b76135acbdac1",
+      "source_chars": 683,
+      "source_newlines": 12,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "read_personal_state",
+      "args": "",
+      "definition_md5": "037d248b67cc3e8490c1689d3200990f",
+      "source_chars": 2339,
+      "source_newlines": 29,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "redeem_beta_invite",
+      "args": "token text",
+      "definition_md5": "e942168297d4fe96b4639d5a9f9eeaa9",
+      "source_chars": 2102,
+      "source_newlines": 27,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "refresh_personal_family",
+      "args": "fid uuid",
+      "definition_md5": "e6a15e6de21f56345479574cc575cf95",
+      "source_chars": 2134,
+      "source_newlines": 45,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "reject_version_update",
+      "args": "",
+      "definition_md5": "1679d0091bcc8e9608d9af0914955864",
+      "source_chars": 270,
+      "source_newlines": 8,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "remember_feed_condition",
+      "args": "",
+      "definition_md5": "417b99a5145e27b5941b504d1d7509c1",
+      "source_chars": 702,
+      "source_newlines": 16,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "rename_setup",
+      "args": "mid uuid, p jsonb",
+      "definition_md5": "d5efbc70d20f75d6e3aeea4b64ab078b",
+      "source_chars": 1792,
+      "source_newlines": 37,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "require_member",
+      "args": "",
+      "definition_md5": "27ff3a2a7fcf231171778a2d584b1851",
+      "source_chars": 347,
+      "source_newlines": 11,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "required_revision",
+      "args": "p jsonb",
+      "definition_md5": "d14d1f80af2c73f953a37818f8488ca0",
+      "source_chars": 382,
+      "source_newlines": 10,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "private",
+      "function_name": "session_status",
+      "args": "",
+      "definition_md5": "f69fcc8be4b6f4dd2bdfe12679137519",
+      "source_chars": 455,
+      "source_newlines": 10,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_admin_access_overview",
+      "args": "",
+      "definition_md5": "15ea6e60d84362b6fa32f9f40f567df8",
+      "source_chars": 192,
+      "source_newlines": 8,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_admin_approve_own_coffee",
+      "args": "submission_id uuid",
+      "definition_md5": "dad5489e9916e30aef63110f7b666954",
+      "source_chars": 380,
+      "source_newlines": 9,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_admin_coffee_candidates",
+      "args": "p_submission_id uuid",
+      "definition_md5": "cb857122b118c9c3b3e7190bae52168a",
+      "source_chars": 231,
+      "source_newlines": 8,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_admin_dashboard",
+      "args": "",
+      "definition_md5": "10cb975d77d22778ebd72d59dba6e934",
+      "source_chars": 186,
+      "source_newlines": 8,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_admin_delete_preview",
+      "args": "p_kind text, p_record_id uuid",
+      "definition_md5": "102b8d2797413ed02a943d093cc60427",
+      "source_chars": 237,
+      "source_newlines": 8,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_admin_delete_record",
+      "args": "p_kind text, p_record_id uuid, p_expected_revision bigint, p_expected_impact jsonb",
+      "definition_md5": "54ad38cc86048b526c158f4f34867398",
+      "source_chars": 318,
+      "source_newlines": 7,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_admin_edit_coffee",
+      "args": "p_record_id uuid, p_expected_revision bigint, p_details jsonb, p_reason text, p_kind text",
+      "definition_md5": "24e3081d08de58a97f7eeaa65cb568bc",
+      "source_chars": 550,
+      "source_newlines": 14,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_admin_edit_shot",
+      "args": "p_record_id uuid, p_expected_revision bigint, p_details jsonb, p_reason text, p_kind text",
+      "definition_md5": "b4e2f07488e5ebc93d1569ca46ad0fbd",
+      "source_chars": 548,
+      "source_newlines": 14,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_admin_issue_invite",
+      "args": "p_label text",
+      "definition_md5": "bcbb34a87e9354a83f8114d7e61ea07d",
+      "source_chars": 214,
+      "source_newlines": 7,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_admin_records",
+      "args": "p_kind text, p_offset integer, p_limit integer",
+      "definition_md5": "bfdf280c85fdf95c72bd2f7f545659b1",
+      "source_chars": 266,
+      "source_newlines": 8,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_admin_review_candidates",
+      "args": "p_submission_id uuid",
+      "definition_md5": "a03f0e34a59684c9b0810ce8b1f79b96",
+      "source_chars": 231,
+      "source_newlines": 8,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_admin_review_coffee",
+      "args": "p_submission_id uuid, p_expected_revision bigint, p_action text, p_reason text, p_canonical_id uuid",
+      "definition_md5": "249b84c409201e14f1b75235f9ae3ffa",
+      "source_chars": 366,
+      "source_newlines": 7,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_admin_revoke_invite",
+      "args": "p_invite_id uuid",
+      "definition_md5": "4b1c53645b52aacfa4fbbbbbdf035e5e",
+      "source_chars": 207,
+      "source_newlines": 7,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_admin_search_records",
+      "args": "p_kind text, p_query text, p_offset integer, p_limit integer",
+      "definition_md5": "de9c08308b98e3de0d7d1db084dae375",
+      "source_chars": 302,
+      "source_newlines": 8,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_admin_set_member_access",
+      "args": "p_member_id uuid, p_enabled boolean",
+      "definition_md5": "67ea2ae8b4603b266e910bc8f6ff7240",
+      "source_chars": 244,
+      "source_newlines": 7,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_apply_client_change",
+      "args": "expected_owner uuid, mutation_id uuid, action text, payload jsonb",
+      "definition_md5": "da434f17a21539d72ebb8fc04c13f214",
+      "source_chars": 1286,
+      "source_newlines": 31,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_browse_community_shots",
+      "args": "p_limit integer, p_offset integer",
+      "definition_md5": "edcc2c6a9fb24b3455a446d964a2ed2d",
+      "source_chars": 3222,
+      "source_newlines": 65,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_claim_first_style_prompt",
+      "args": "p_library_entry_id uuid",
+      "definition_md5": "5f652895cd7e0775e9fecd39f36fc34e",
+      "source_chars": 236,
+      "source_newlines": 7,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_claim_universal_preview",
+      "args": "",
+      "definition_md5": "8f4bc6ecd8687594ff7200cda26104b5",
+      "source_chars": 618,
+      "source_newlines": 19,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_commit_import",
+      "args": "expected_owner uuid, backup jsonb, review_hash text, recovery_saved boolean",
+      "definition_md5": "13e59d7da1efb928dc307f90a2e08dca",
+      "source_chars": 295,
+      "source_newlines": 7,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_community_evidence_counts",
+      "args": "p_coffee_id uuid, p_style text",
+      "definition_md5": "1bddea7e3160c0282bea1d6e74d1fbaf",
+      "source_chars": 694,
+      "source_newlines": 17,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_community_recommendation_evidence",
+      "args": "p_library_entry_id uuid, p_style text",
+      "definition_md5": "085f92a3814dce624e5b9a3759e893ef",
+      "source_chars": 6171,
+      "source_newlines": 111,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_confirm_community_outlier",
+      "args": "p_shot_id uuid, p_expected_revision bigint",
+      "definition_md5": "0657114255a0375b7f3fc502f780aa54",
+      "source_chars": 1432,
+      "source_newlines": 32,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_edit_my_coffee",
+      "args": "p_library_entry uuid, p_expected_revision bigint, p_details jsonb, p_source_url text",
+      "definition_md5": "fa2193422c742ae9f42e2239c166f245",
+      "source_chars": 331,
+      "source_newlines": 7,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_find_coffee_matches",
+      "args": "payload jsonb",
+      "definition_md5": "b3e36084c168cabe7a11a6d176e8951f",
+      "source_chars": 208,
+      "source_newlines": 8,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_member_retry_pending_approval",
+      "args": "p_submission_id uuid, p_expected_revision bigint",
+      "definition_md5": "3d8aa15468f134fc78f79357ec783a60",
+      "source_chars": 283,
+      "source_newlines": 7,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_mutate",
+      "args": "mutation_id uuid, action text, payload jsonb",
+      "definition_md5": "86cd376e257d80b09b1e228236a87dff",
+      "source_chars": 256,
+      "source_newlines": 7,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_my_community_outliers",
+      "args": "",
+      "definition_md5": "312b59594de640adacb12ab0aa0d18e4",
+      "source_chars": 1318,
+      "source_newlines": 34,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_preview_cached_verified",
+      "args": "p_source_url text",
+      "definition_md5": "86a08b5ae97f89c13b8c727ebdd0c50f",
+      "source_chars": 1658,
+      "source_newlines": 31,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_preview_complete",
+      "args": "p_ticket uuid",
+      "definition_md5": "abc5f79b029d51593f29fe4774488d0b",
+      "source_chars": 1145,
+      "source_newlines": 22,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_preview_import",
+      "args": "expected_owner uuid, backup jsonb",
+      "definition_md5": "001e3dd5b495ca6d1fd096bf35a473dd",
+      "source_chars": 239,
+      "source_newlines": 7,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_preview_preflight",
+      "args": "p_cached boolean",
+      "definition_md5": "a437026d8c1b75f0db24c0ef840cae24",
+      "source_chars": 1967,
+      "source_newlines": 40,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_read_personal_state",
+      "args": "",
+      "definition_md5": "811aee397f3505117fcc38715e09af94",
+      "source_chars": 175,
+      "source_newlines": 5,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_redeem_invite",
+      "args": "token text",
+      "definition_md5": "bd904728300c973e60486deb2634b736",
+      "source_chars": 183,
+      "source_newlines": 5,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_roaster_preview_target",
+      "args": "host text",
+      "definition_md5": "d264ace83ea27e01b12f789b2e2b4542",
+      "source_chars": 852,
+      "source_newlines": 19,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_search_community_shots",
+      "args": "p_query text, p_style text, p_limit integer, p_offset integer",
+      "definition_md5": "1124d2bbfec7f47d38d06ceb2e049fe4",
+      "source_chars": 3949,
+      "source_newlines": 73,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_session_status",
+      "args": "",
+      "definition_md5": "742e5bd0fc8544807886b514d95d6688",
+      "source_chars": 165,
+      "source_newlines": 5,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_source_check_target",
+      "args": "submission_id uuid",
+      "definition_md5": "6af6fa312bed8eb0ed26b31dc94da3b6",
+      "source_chars": 1401,
+      "source_newlines": 27,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_source_claim",
+      "args": "submission_id uuid",
+      "definition_md5": "68bc86486e485565d4273daf3655e0d3",
+      "source_chars": 2348,
+      "source_newlines": 39,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_trusted_source_verify",
+      "args": "submission_id uuid, evidence jsonb",
+      "definition_md5": "59dfb6ecc6a2b8324fa9ba8512fdaaa3",
+      "source_chars": 557,
+      "source_newlines": 12,
+      "security_definer": false,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "dic_url_preview_claim",
+      "args": "account_id uuid",
+      "definition_md5": "25b95f9449aeb73cc1937f880358c22f",
+      "source_chars": 413,
+      "source_newlines": 12,
+      "security_definer": true,
+      "config": "search_path=\"\"",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    },
+    {
+      "schema_name": "public",
+      "function_name": "rls_auto_enable",
+      "args": "",
+      "definition_md5": "846ec2fbff751d24b890656d63c3a9bf",
+      "source_chars": 1223,
+      "source_newlines": 31,
+      "security_definer": true,
+      "config": "search_path=pg_catalog",
+      "receipt_verdict": "EXACT_BASELINE_HASH_MATCH__NO_NEW_SOURCE_WORD_CREDIT"
+    }
+  ],
+  "policy_guard_direct_definitions": [
+    {
+      "schema_name": "private",
+      "table_name": "admin_access_events",
+      "policy_name": "no_client_access",
+      "command": "*",
+      "permissive": true,
+      "roles": "anon,authenticated",
+      "using_expr": "false",
+      "check_expr": "false",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "admin_content_edits",
+      "policy_name": "no_direct_user_content_edits",
+      "command": "*",
+      "permissive": true,
+      "roles": "anon,authenticated",
+      "using_expr": "false",
+      "check_expr": "false",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "app_admins",
+      "policy_name": "no_client_access",
+      "command": "*",
+      "permissive": true,
+      "roles": "anon,authenticated",
+      "using_expr": "false",
+      "check_expr": "false",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "backup_runs",
+      "policy_name": "no_client_access",
+      "command": "*",
+      "permissive": true,
+      "roles": "anon,authenticated",
+      "using_expr": "false",
+      "check_expr": "false",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "beta_invites",
+      "policy_name": "no_client_access",
+      "command": "*",
+      "permissive": true,
+      "roles": "anon,authenticated",
+      "using_expr": "false",
+      "check_expr": "false",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "beta_members",
+      "policy_name": "no_client_access",
+      "command": "*",
+      "permissive": true,
+      "roles": "anon,authenticated",
+      "using_expr": "false",
+      "check_expr": "false",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "community_quality_checks",
+      "policy_name": "no_client_access",
+      "command": "*",
+      "permissive": true,
+      "roles": "anon,authenticated",
+      "using_expr": "false",
+      "check_expr": "false",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "contribution_links",
+      "policy_name": "no_client_access",
+      "command": "*",
+      "permissive": true,
+      "roles": "anon,authenticated",
+      "using_expr": "false",
+      "check_expr": "false",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "contributors",
+      "policy_name": "no_client_access",
+      "command": "*",
+      "permissive": true,
+      "roles": "anon,authenticated",
+      "using_expr": "false",
+      "check_expr": "false",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_roaster_aliases",
+      "policy_name": "no_client_access",
+      "command": "*",
+      "permissive": true,
+      "roles": "anon,authenticated",
+      "using_expr": "false",
+      "check_expr": "false",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_roaster_directory",
+      "policy_name": "no_client_access",
+      "command": "*",
+      "permissive": true,
+      "roles": "anon,authenticated",
+      "using_expr": "false",
+      "check_expr": "false",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_url_preview_attempts",
+      "policy_name": "no_client_access",
+      "command": "*",
+      "permissive": true,
+      "roles": "anon,authenticated",
+      "using_expr": "false",
+      "check_expr": "false",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "import_batches",
+      "policy_name": "no_client_access",
+      "command": "*",
+      "permissive": true,
+      "roles": "anon,authenticated",
+      "using_expr": "false",
+      "check_expr": "false",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "import_control",
+      "policy_name": "no_client_access",
+      "command": "*",
+      "permissive": true,
+      "roles": "anon,authenticated",
+      "using_expr": "false",
+      "check_expr": "false",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "invite_attempts",
+      "policy_name": "no_client_access",
+      "command": "*",
+      "permissive": true,
+      "roles": "anon,authenticated",
+      "using_expr": "false",
+      "check_expr": "false",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "invite_redemptions",
+      "policy_name": "no_client_access",
+      "command": "*",
+      "permissive": true,
+      "roles": "anon,authenticated",
+      "using_expr": "false",
+      "check_expr": "false",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "mutation_receipts",
+      "policy_name": "no_client_access",
+      "command": "*",
+      "permissive": true,
+      "roles": "anon,authenticated",
+      "using_expr": "false",
+      "check_expr": "false",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "shot_audit",
+      "policy_name": "no_client_access",
+      "command": "*",
+      "permissive": true,
+      "roles": "anon,authenticated",
+      "using_expr": "false",
+      "check_expr": "false",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "account_preferences",
+      "policy_name": "owner_read",
+      "command": "r",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "( SELECT private.is_member() AS is_member) AND owner_id = (( SELECT auth.uid() AS uid))",
+      "check_expr": "",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "account_preferences",
+      "policy_name": "owner_update",
+      "command": "w",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "( SELECT private.is_member() AS is_member) AND owner_id = (( SELECT auth.uid() AS uid))",
+      "check_expr": "( SELECT private.is_member() AS is_member) AND owner_id = (( SELECT auth.uid() AS uid))",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "admin_reviews",
+      "policy_name": "review_read",
+      "command": "r",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "( SELECT private.is_admin() AS is_admin)",
+      "check_expr": "",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "bags",
+      "policy_name": "owner_read",
+      "command": "r",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "( SELECT private.is_member() AS is_member) AND owner_id = (( SELECT auth.uid() AS uid))",
+      "check_expr": "",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "basket_versions",
+      "policy_name": "owner_read",
+      "command": "r",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "( SELECT private.is_member() AS is_member) AND owner_id = (( SELECT auth.uid() AS uid))",
+      "check_expr": "",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "baskets",
+      "policy_name": "owner_read",
+      "command": "r",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "( SELECT private.is_member() AS is_member) AND owner_id = (( SELECT auth.uid() AS uid))",
+      "check_expr": "",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "coffee_groups",
+      "policy_name": "group_read",
+      "command": "r",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "( SELECT private.is_member() AS is_member) AND (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE c.group_id = coffee_groups.id AND c.verification_state = 'verified'::text))",
+      "check_expr": "",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "coffee_sources",
+      "policy_name": "source_read",
+      "command": "r",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "( SELECT private.is_member() AS is_member) AND (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE c.id = coffee_sources.coffee_id AND c.verification_state = 'verified'::text))",
+      "check_expr": "",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "coffee_submissions",
+      "policy_name": "submission_insert",
+      "command": "a",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "",
+      "check_expr": "( SELECT private.is_member() AS is_member) AND owner_id = (( SELECT auth.uid() AS uid)) AND (canonical_coffee_id IS NULL OR (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE c.id = coffee_submissions.canonical_coffee_id AND c.verification_state = 'verified'::text)))",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "coffee_submissions",
+      "policy_name": "submission_read",
+      "command": "r",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "( SELECT private.is_member() AS is_member) AND (owner_id = (( SELECT auth.uid() AS uid)) OR ( SELECT private.is_admin() AS is_admin))",
+      "check_expr": "",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "coffees",
+      "policy_name": "coffee_read",
+      "command": "r",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "( SELECT private.is_member() AS is_member) AND (verification_state = 'verified'::text OR ( SELECT private.is_admin() AS is_admin))",
+      "check_expr": "",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "community_shots",
+      "policy_name": "community_read",
+      "command": "r",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "( SELECT private.is_member() AS is_member) AND quality_state = 'eligible'::text AND (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE c.id = community_shots.coffee_id AND c.verification_state = 'verified'::text))",
+      "check_expr": "",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "grinder_calibrations",
+      "policy_name": "owner_read",
+      "command": "r",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "( SELECT private.is_member() AS is_member) AND owner_id = (( SELECT auth.uid() AS uid))",
+      "check_expr": "",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "library_entries",
+      "policy_name": "library_read",
+      "command": "r",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "( SELECT private.is_member() AS is_member) AND owner_id = (( SELECT auth.uid() AS uid))",
+      "check_expr": "",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "personal_recipe_families",
+      "policy_name": "owner_read",
+      "command": "r",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "( SELECT private.is_member() AS is_member) AND owner_id = (( SELECT auth.uid() AS uid))",
+      "check_expr": "",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "recipe_families",
+      "policy_name": "family_read",
+      "command": "r",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "( SELECT private.is_member() AS is_member) AND (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE c.id = recipe_families.coffee_id AND c.verification_state = 'verified'::text))",
+      "check_expr": "",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "recipe_preferences",
+      "policy_name": "owner_read",
+      "command": "r",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "( SELECT private.is_member() AS is_member) AND owner_id = (( SELECT auth.uid() AS uid))",
+      "check_expr": "",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "setup_preferences",
+      "policy_name": "owner_read",
+      "command": "r",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "( SELECT private.is_member() AS is_member) AND owner_id = (( SELECT auth.uid() AS uid))",
+      "check_expr": "",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "setup_versions",
+      "policy_name": "owner_read",
+      "command": "r",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "( SELECT private.is_member() AS is_member) AND owner_id = (( SELECT auth.uid() AS uid))",
+      "check_expr": "",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "setups",
+      "policy_name": "owner_read",
+      "command": "r",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "( SELECT private.is_member() AS is_member) AND owner_id = (( SELECT auth.uid() AS uid))",
+      "check_expr": "",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "shot_notes",
+      "policy_name": "owner_read",
+      "command": "r",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "( SELECT private.is_member() AS is_member) AND owner_id = (( SELECT auth.uid() AS uid))",
+      "check_expr": "",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "shots",
+      "policy_name": "owner_read",
+      "command": "r",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "( SELECT private.is_member() AS is_member) AND owner_id = (( SELECT auth.uid() AS uid))",
+      "check_expr": "",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "workspace_coffees",
+      "policy_name": "owner_read",
+      "command": "r",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "( SELECT private.is_member() AS is_member) AND owner_id = (( SELECT auth.uid() AS uid))",
+      "check_expr": "",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "workspace_state",
+      "policy_name": "owner_read",
+      "command": "r",
+      "permissive": true,
+      "roles": "authenticated",
+      "using_expr": "( SELECT private.is_member() AS is_member) AND owner_id = (( SELECT auth.uid() AS uid))",
+      "check_expr": "",
+      "review": "DIRECT_VISIBLE_USING_AND_CHECK__AUTHENTICATED_PUBLIC_ROLE_OR_EXPLICIT_PRIVATE_FALSE_GUARD__LIVE_API_NOT_TESTED"
+    }
+  ],
+  "trigger_ddl_definitions": [
+    {
+      "schema_name": "private",
+      "table_name": "contribution_links",
+      "trigger_name": "dic_recheck_after_link",
+      "ddl": "CREATE TRIGGER dic_recheck_after_link AFTER INSERT OR UPDATE OF shot_id, source_revision ON private.contribution_links FOR EACH ROW EXECUTE FUNCTION private.dic_recheck_after_link()",
+      "ddl_md5": "f64dfbb01e72a941b9759e5022ee418b",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "account_preferences",
+      "trigger_name": "bump_revision",
+      "ddl": "CREATE TRIGGER bump_revision BEFORE UPDATE ON account_preferences FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "ddl_md5": "a374e5b8e4c33454888bc9d8dcce7e0f",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "bags",
+      "trigger_name": "bump_revision",
+      "ddl": "CREATE TRIGGER bump_revision BEFORE UPDATE ON bags FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "ddl_md5": "e148fb18bd48630230e4d98e28945efe",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "basket_versions",
+      "trigger_name": "immutable_version",
+      "ddl": "CREATE TRIGGER immutable_version BEFORE UPDATE ON basket_versions FOR EACH ROW EXECUTE FUNCTION private.reject_version_update()",
+      "ddl_md5": "14d90dc4b099a4c24e5a43b1f77f4e60",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "baskets",
+      "trigger_name": "bump_revision",
+      "ddl": "CREATE TRIGGER bump_revision BEFORE UPDATE ON baskets FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "ddl_md5": "6765d8ddf713350b9c54dccb3d46b558",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "coffee_submissions",
+      "trigger_name": "bump_revision",
+      "ddl": "CREATE TRIGGER bump_revision BEFORE UPDATE ON coffee_submissions FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "ddl_md5": "c553cba05a513a4866f5eb339eb689ff",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "coffee_submissions",
+      "trigger_name": "dic_capture_first_decaf_method",
+      "ddl": "CREATE TRIGGER dic_capture_first_decaf_method AFTER UPDATE OF status, canonical_coffee_id ON coffee_submissions FOR EACH ROW WHEN (new.status = 'approved'::text AND new.canonical_coffee_id IS NOT NULL) EXECUTE FUNCTION private.dic_capture_first_decaf_method()",
+      "ddl_md5": "4f521162116a79500dfa65a7017a226d",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "coffees",
+      "trigger_name": "bump_revision",
+      "ddl": "CREATE TRIGGER bump_revision BEFORE UPDATE ON coffees FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "ddl_md5": "4c4f88a69c1539fec6c6b50cbc378f31",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "coffees",
+      "trigger_name": "dic_on_community_coffee_verification",
+      "ddl": "CREATE TRIGGER dic_on_community_coffee_verification AFTER UPDATE OF verification_state, merged_into_id ON coffees FOR EACH ROW EXECUTE FUNCTION private.dic_on_community_coffee_verification()",
+      "ddl_md5": "94d28933513a93592e6d0baf82229887",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "grinder_calibrations",
+      "trigger_name": "immutable_version",
+      "ddl": "CREATE TRIGGER immutable_version BEFORE UPDATE ON grinder_calibrations FOR EACH ROW EXECUTE FUNCTION private.reject_version_update()",
+      "ddl_md5": "30b114b69bce80c91ab061bafa4ab7fb",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "library_entries",
+      "trigger_name": "bump_revision",
+      "ddl": "CREATE TRIGGER bump_revision BEFORE UPDATE ON library_entries FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "ddl_md5": "ee3f03b6dc5c5369686e7fd7871da110",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "library_entries",
+      "trigger_name": "dic_on_library_coffee_change",
+      "ddl": "CREATE TRIGGER dic_on_library_coffee_change AFTER UPDATE OF coffee_id ON library_entries FOR EACH ROW EXECUTE FUNCTION private.dic_on_library_coffee_change()",
+      "ddl_md5": "b3d7c46d58ca71f146262d6536e494b8",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "recipe_preferences",
+      "trigger_name": "bump_revision",
+      "ddl": "CREATE TRIGGER bump_revision BEFORE UPDATE ON recipe_preferences FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "ddl_md5": "adccc6522750cf008388d4dce5ae94a5",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "setup_preferences",
+      "trigger_name": "bump_revision",
+      "ddl": "CREATE TRIGGER bump_revision BEFORE UPDATE ON setup_preferences FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "ddl_md5": "9aaf596ec477a0e2919d3c1e673e9389",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "setup_versions",
+      "trigger_name": "immutable_version",
+      "ddl": "CREATE TRIGGER immutable_version BEFORE UPDATE ON setup_versions FOR EACH ROW EXECUTE FUNCTION private.reject_version_update()",
+      "ddl_md5": "80d5023c2a392e9657c0f2846df1416f",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "setups",
+      "trigger_name": "bump_revision",
+      "ddl": "CREATE TRIGGER bump_revision BEFORE UPDATE ON setups FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "ddl_md5": "8d7349731e21f37311aa5433f1f7b2b2",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "shots",
+      "trigger_name": "bump_revision",
+      "ddl": "CREATE TRIGGER bump_revision BEFORE UPDATE ON shots FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "ddl_md5": "75d14347c148551cbbcc52f50bf0f76c",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "shots",
+      "trigger_name": "capture_equipment_snapshot",
+      "ddl": "CREATE TRIGGER capture_equipment_snapshot BEFORE INSERT ON shots FOR EACH ROW EXECUTE FUNCTION private.capture_equipment_snapshot()",
+      "ddl_md5": "cf6a0608c442590e34a931a6bff576f6",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "shots",
+      "trigger_name": "dic_capture_recommendation_context",
+      "ddl": "CREATE TRIGGER dic_capture_recommendation_context BEFORE INSERT ON shots FOR EACH ROW EXECUTE FUNCTION private.dic_capture_recommendation_context()",
+      "ddl_md5": "4bb48538bd382376da63717879413b80",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "shots",
+      "trigger_name": "project_shot",
+      "ddl": "CREATE TRIGGER project_shot AFTER INSERT OR UPDATE ON shots FOR EACH ROW EXECUTE FUNCTION private.project_shot()",
+      "ddl_md5": "e0fd8beba7a8c8bcdc00acdf6274e179",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "shots",
+      "trigger_name": "protect_shot_provenance",
+      "ddl": "CREATE TRIGGER protect_shot_provenance BEFORE UPDATE ON shots FOR EACH ROW EXECUTE FUNCTION private.protect_shot_provenance()",
+      "ddl_md5": "3d2c11af188a0e02b94f3983db8a6b71",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "shots",
+      "trigger_name": "remember_feed_condition",
+      "ddl": "CREATE TRIGGER remember_feed_condition AFTER INSERT ON shots FOR EACH ROW EXECUTE FUNCTION private.remember_feed_condition()",
+      "ddl_md5": "8637c64eec5b1e8ee727a039c851f765",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "workspace_coffees",
+      "trigger_name": "bump_revision",
+      "ddl": "CREATE TRIGGER bump_revision BEFORE UPDATE ON workspace_coffees FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "ddl_md5": "2d20e35e6293e6bef2026fb1b2b95ed6",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "workspace_state",
+      "trigger_name": "bump_revision",
+      "ddl": "CREATE TRIGGER bump_revision BEFORE UPDATE ON workspace_state FOR EACH ROW EXECUTE FUNCTION private.bump_revision()",
+      "ddl_md5": "380c322c3d90508f8c62bdbe15244e1d",
+      "enabled": "O",
+      "review": "DIRECT_CURRENT_EVENT_AND_TARGET_FUNCTION_DDL__RUNTIME_NOT_TESTED"
+    }
+  ],
+  "table_rls_and_owner_flags": [
+    {
+      "schema_name": "private",
+      "table_name": "admin_access_events",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "admin_content_edits",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "app_admins",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "backup_runs",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "beta_invites",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "beta_members",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "community_quality_checks",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "contribution_links",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "contributors",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_admin_delete_receipts",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_coffee_aliases",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_coffee_audit",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_coffee_first_entry",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_first_style_prompt_seen",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_roaster_aliases",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_roaster_directory",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_source_attempts",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_url_preview_attempts",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "import_batches",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "import_control",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "invite_attempts",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "invite_redemptions",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "mutation_receipts",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "shot_audit",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "account_preferences",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "admin_reviews",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "bags",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "basket_versions",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "baskets",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "coffee_groups",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "coffee_sources",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "coffee_submissions",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "coffees",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "community_shots",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "grinder_calibrations",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "library_entries",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "personal_recipe_families",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "recipe_families",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "recipe_preferences",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "setup_preferences",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "setup_versions",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "setups",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "shot_notes",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "shots",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "workspace_coffees",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "workspace_state",
+      "kind": "r",
+      "rls": true,
+      "force_rls": false,
+      "owner": "postgres",
+      "explicit_acl": true,
+      "review": "RLS_ENABLED__EFFECTIVE_JWT_API_UNVERIFIED"
+    }
+  ],
+  "transport_observations_privacy_safe": [
+    {
+      "ssl": false,
+      "backend_type": "client backend",
+      "peer_network_class": "loopback",
+      "role_class": "system_role",
+      "connections": 1
+    },
+    {
+      "ssl": true,
+      "backend_type": "client backend",
+      "peer_network_class": "loopback",
+      "role_class": "app_role",
+      "connections": 1
+    },
+    {
+      "ssl": true,
+      "backend_type": "client backend",
+      "peer_network_class": "loopback",
+      "role_class": "other_role",
+      "connections": 1
+    },
+    {
+      "ssl": true,
+      "backend_type": "client backend",
+      "peer_network_class": "loopback",
+      "role_class": "system_role",
+      "connections": 1
+    },
+    {
+      "ssl": true,
+      "backend_type": "client backend",
+      "peer_network_class": "other_network",
+      "role_class": "system_role",
+      "connections": 1
+    }
+  ],
+  "selected_security_configuration": [
+    {
+      "name": "idle_in_transaction_session_timeout",
+      "setting": "0",
+      "source": "default",
+      "pending_restart": false
+    },
+    {
+      "name": "log_connections",
+      "setting": "off",
+      "source": "configuration file",
+      "pending_restart": false
+    },
+    {
+      "name": "log_disconnections",
+      "setting": "off",
+      "source": "default",
+      "pending_restart": false
+    },
+    {
+      "name": "log_min_duration_statement",
+      "setting": "-1",
+      "source": "default",
+      "pending_restart": false
+    },
+    {
+      "name": "log_min_error_statement",
+      "setting": "error",
+      "source": "default",
+      "pending_restart": false
+    },
+    {
+      "name": "max_connections",
+      "setting": "60",
+      "source": "configuration file",
+      "pending_restart": false
+    },
+    {
+      "name": "password_encryption",
+      "setting": "scram-sha-256",
+      "source": "configuration file",
+      "pending_restart": false
+    },
+    {
+      "name": "row_security",
+      "setting": "on",
+      "source": "configuration file",
+      "pending_restart": false
+    },
+    {
+      "name": "shared_preload_libraries",
+      "setting": "pg_stat_statements, pgaudit, plpgsql, plpgsql_check, pg_cron, pg_net, pgsodium, auto_explain, pg_tle, plan_filter, supabase_vault",
+      "source": "configuration file",
+      "pending_restart": false
+    },
+    {
+      "name": "ssl",
+      "setting": "on",
+      "source": "configuration file",
+      "pending_restart": false
+    },
+    {
+      "name": "statement_timeout",
+      "setting": "120000",
+      "source": "configuration file",
+      "pending_restart": false
+    }
+  ],
+  "health_no_member_activity_text": [
+    {
+      "captured_at": "2026-11-09 20:52:49.677392+00",
+      "postgres_version": "17.11",
+      "lock_waiters": 0,
+      "idle_in_transaction_count": 0
+    }
+  ],
+  "connection_verdict": "Non-TLS loopback system-role only; the observed other-network connection uses TLSv1.3; no evidence of plaintext external client access",
+  "provider_console_access_blocked": [
+    {
+      "source": "pg_hba_file_rules",
+      "status": "42501 permission denied for function pg_hba_file_rules"
+    },
+    {
+      "source": "pg_file_settings",
+      "status": "42501 permission denied for function pg_show_all_file_settings"
+    },
+    {
+      "source": "hosted Auth/JWT/PostgREST provider configuration",
+      "status": "NOT_RETURNED_BY_CONNECTED_TOOLS"
+    },
+    {
+      "source": "compiled C/internal implementations",
+      "status": "NO_FULL_SOURCE_FROM_SQL_CATALOG"
+    }
+  ],
+  "status": "COMPLETE_BOUNDED_CROSS_SURFACE_RECHECK; NOT_FULL_PROVIDER_BASELINE",
+  "confirmed_new_defects": 0,
+  "authorized_source_fixes": 0,
+  "provider_writes": false,
+  "baseline_complete": false,
+  "next": "First genuinely new/unreviewed provider definition or metadata change; hosted JWT/API/native bodies and console HBA remain UNVERIFIED"
+}

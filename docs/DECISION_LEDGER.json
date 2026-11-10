@@ -4778,5 +4778,44 @@
     "delivery": "SOURCE_READY_NOT_DEPLOYED",
     "owner_source": "Owner reviewed interactive preview, corrected concise Settings recall text and Light contrast, and explicitly authorized preparation to READY without deployment.",
     "release": "SOURCE_READY_NOT_DEPLOYED"
+  },
+  "current_owner_admin_account_invite_delete_20261109": {
+    "decision_id": "ADMIN-DELETE-CODE-ACCOUNT-COMMUNITY-CHOICE-20261109",
+    "status": "OWNER LOCKED; IMPLEMENTED AND SOURCE-VERIFIED READY; NOT DEPLOYED",
+    "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1676",
+    "scope": "Admin-only Delete Code immediately revokes and hides the code, retaining non-secret history; existing admitted member not affected. Admin-only permanent Delete Account for nonadmins with explicit Keep Community vs Remove Community selection, exact impact preview and confirmation.",
+    "supersedes": [
+      "ACCESS-REVERSIBLE-REMOVE-ONLY-20261018-01 (only beta hard-delete prohibition)",
+      "general durable anonymous Community contributions (only explicit admin removal option)"
+    ],
+    "preserve": [
+      "Remove/Restore Access",
+      "administrator protection",
+      "single-use invite controls",
+      "separate private/account and public Community data",
+      "contributor-balanced anonymous evidence in keep mode",
+      "all other members",
+      "private security audit",
+      "recovery backups",
+      "one owner-controlled future production publication"
+    ],
+    "implementation_requirements": [
+      "Only backend/service_role calls GoTrue deleteUser",
+      "server-bound actor and admission/role revalidation",
+      "impact+revision race rejection",
+      "idempotent request/prepare/finalize receipt",
+      "never claim success until Auth deletion and database finalization independently confirmed",
+      "real member-data deletion only on separate authorized operator action"
+    ],
+    "publication_permission": "NOT GRANTED",
+    "implementation": {
+      "primary_pr": 1719,
+      "privacy_fix_pr": 1723,
+      "ci_trigger_pr": 1725,
+      "final_merged_source_sha": "ed95dd067bd1d75925dd56e88300297f9f28c033",
+      "release_queue_id": "DIC-Q-1676-admin-code-account-delete",
+      "verified": "Scoped merged-source PR exact checks + unchanged SQL source blob reused; NOT hosted Auth execution",
+      "publication": "SEPARATE OWNER COMMAND REQUIRED"
+    }
   }
 }

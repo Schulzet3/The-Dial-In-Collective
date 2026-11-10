@@ -114,3 +114,16 @@
 @media(max-width:760px){.admin-review-comparison{grid-template-columns:1fr}}
 
 .admin-delete-action{border-color:#b45f55;color:#ffb0a4;margin-left:10px}
+
+
+/* Irreversible account confirmation: accessible in both light and dark themes. */
+.admin-member-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.admin-delete-action{border-color:#b45f55;color:var(--ink)}
+.admin-delete-overlay{position:fixed;z-index:1000;inset:0;display:grid;place-items:center;padding:20px;background:rgba(0,0,0,.7);overflow:auto}
+.admin-delete-dialog{width:min(100%,550px);max-height:calc(100vh - 40px);overflow:auto;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:16px;padding:23px;box-shadow:0 18px 65px rgba(0,0,0,.32)}
+.admin-delete-dialog h2{margin:0 0 12px;color:var(--ink)}
+.admin-delete-dialog p{font-size:13px;line-height:1.6;overflow-wrap:anywhere}
+.admin-delete-choices{display:grid;gap:10px;margin:18px 0}
+.admin-delete-choices button{white-space:normal;min-height:48px;text-align:left;padding:12px}
+.admin-delete-dialog button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+@media(max-width:520px){.admin-member-actions{justify-content:start}.admin-delete-dialog{padding:16px}}

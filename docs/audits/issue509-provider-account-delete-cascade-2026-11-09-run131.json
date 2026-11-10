@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "date_utc": "2026-11-09",
+  "run": 131,
+  "source_development_parent_sha": "95a09edc2123d84fae66d972feca522d9c01f4a4",
+  "source_test_blob_sha": "1ff0d1a8df4db9ddf14ce4d43de011cab32e5359",
+  "source_journal_blob_sha": "b718c09a08362ef1ef56246df8d5f7860a247216",
+  "source_ledger_blob_sha": "d66ca43134004959b5e97f06a1295d3f0ed02145",
+  "scope": "Direct semantic cross-object analysis of eight production NO ACTION FKs and internal PG cascade triggers; not repeat credit for existing per-object ledger",
+  "provider_live_read_only": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres": "17.11.0.003",
+    "auth_users_restrictive_fk": [
+      "private.admin_content_edits(actor_id) NO ACTION: #1676 prepare rejects demoted former admin actor",
+      "private.admin_content_edits(subject_owner_id) NO ACTION: #1676 prepare nulls and scrubs subject",
+      "private.dic_source_attempts(owner_id) NO ACTION: #1676 prepare deletes owned rows",
+      "private.import_control(owner_only_exception_owner_id) NO ACTION: #1676 prepare clears exception"
+    ],
+    "coffee_submissions_restrictive_fk": [
+      "public.library_entries(owner_id,submission_id) NO ACTION: owned library/submission pair must jointly cascade on auth-user deletion",
+      "private.dic_coffee_first_entry(first_submission_id) NO ACTION: #509 additive unshipped migration makes SET NULL",
+      "private.dic_coffee_audit(submission_id) NO ACTION: #509 additive unshipped migration makes SET NULL",
+      "private.dic_source_attempts(submission_id) NO ACTION: #1676 prepare deletes owned rows"
+    ],
+    "postgres_internal_trigger_ddl_inspected": [
+      "auth.users RI_ConstraintTrigger_a_17816 -> coffee_submissions cascade",
+      "auth.users RI_ConstraintTrigger_a_17841 -> library_entries cascade",
+      "coffee_submissions RI_ConstraintTrigger_a_17851 -> library_entries NO ACTION"
+    ],
+    "constraint_library_entries": "CHECK(coffee_id IS NOT NULL OR submission_id IS NOT NULL); auth owner_id ON DELETE CASCADE; submission composite owner_id,submission_id NO ACTION",
+    "privacy_safe_aggregate_counts": {
+      "pending_or_approved_owner_submission_library_links": 0,
+      "total_library_submission_links": 0,
+      "first_entry_submission_links": 8,
+      "coffee_audit_submission_links": 9,
+      "admin_content_subject_links": 2,
+      "owned_source_attempts": 0
+    },
+    "interpretation": "No current production-linked library submission record. Future member-owned pending review path may be affected by multiple cascades; trigger order is NOT sufficient to confirm failure or safety. Test it in disposable PostgreSQL only."
+  },
+  "change": {
+    "kind": "SOURCE_TEST_ONLY",
+    "path": "supabase/tests/admin_member_deletion.sql",
+    "added": "synthetic pending submission plus own library entry; assert both removed after simulated Auth deletion, alongside canonical coffee and Community retention checks",
+    "test_state": "PENDING_SOURCE_BOUND_CI",
+    "no_schema_fix_without_repro": true
+  },
+  "privacy": "No member/Auth rows, credentials, notes, raw logs or private records retrieved",
+  "production_writes": false,
+  "owner_publish_approval": false,
+  "source_words_recredited": 0,
+  "provider_baseline_complete": false,
+  "next": "Read exact-source CI SQL and governance. If regression reproducibly fails, repair in new narrowly scoped dev migration and retest; otherwise record verified distinct cascade path. Hosted GoTrue remains unverified."
+}

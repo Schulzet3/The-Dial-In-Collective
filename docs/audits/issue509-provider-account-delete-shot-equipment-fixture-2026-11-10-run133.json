@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "133",
+  "date_utc": "2026-11-10",
+  "project_ref": "azviqqejypsefzilgonr",
+  "source_development_parent_sha": "6e7a733e9509f8b7fd249c7e1ea8b70c5f355a51",
+  "type": "ISOLATED_CI_ONLY_SYNTHETIC_TEST_ADDITION_PRODUCTION_READ_ONLY",
+  "source_path": "supabase/tests/admin_member_deletion.sql",
+  "existing_source_git_blob_sha": "7299c5a26d3d60e940836fb1dbd8c45dd4903693",
+  "provider_basis": "Run131b 16 internal NO ACTION FK edges; Run133 fresh full pg_constraint and pg_attribute definitions for setups, setup_versions, baskets, basket_versions, grinder_calibrations, library_entries, personal_recipe_families, shots, setup_preferences, workspace_coffees, recipe_preferences, account_preferences, and triggers.",
+  "synthetic_scenario": "One synthetic keep-mode beta member with setup active_version circular deferred link; two linked calibration versions; basket and basket_version; coffee library, workspace coffee, personal recipe family; non-dialed personal shot with complete trigger-captured nonlegacy snapshot; recipe preferences current/reference family plus favorite shot (deferred FK); setup preferences and account active setup. Delete only synthetic auth.users in disposable dic_ci; assert all owner records vanish and canonical coffee/Community history remains preserved.",
+  "tests": "NOT_RUN_IN_THIS_COMMIT; CI REQUIRED. Reuse existing ci Postgres and signed JWT workflow; never execute on live provider.",
+  "reviewed_provider_dependencies": [
+    "setups.active_version_id -> setup_versions (DEFERRABLE)",
+    "account_preferences.active_setup_id -> setups (DEFERRABLE)",
+    "recipe_preferences.favorite_shot_id -> shots (DEFERRABLE)",
+    "grinder_calibrations.previous_calibration_id -> grinder_calibrations (NO ACTION)",
+    "setup_preferences.calibration_id/default_basket_version_id -> grinder_calibrations/basket_versions",
+    "shots.setup_version_id/basket_version_id/calibration_id/personal_family_id -> owner-scoped versions and family",
+    "workspace_coffees.basket_version_id -> basket_versions"
+  ],
+  "new_confirmed_defect": false,
+  "source_fix": false,
+  "provider_writes": false,
+  "baseline_complete": false,
+  "release_state": "TESTING_PENDING_EXACT_SOURCE_CI",
+  "next": "Read exact merged-source SQL CI logs, repair any failure in development only; no schema/production changes without independent owner publish command."
+}
