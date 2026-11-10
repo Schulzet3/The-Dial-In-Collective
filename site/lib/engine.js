@@ -330,6 +330,21 @@ export function personalSimilarCoffeeReference(s,coffee,version,style,feed,baske
   coffees:new Set(eligible.map(x=>x.sh.coffeeId)).size,
   closeness:highest,nearby:!matches.length};
 }
+// Cross-style ratios are deliberately weak STARTING hints, not a way for a
+// malformed imported five-green record to suppress a better same-style prior.
+// Honor the shot's actual grinder calibration, never transplant a raw dial from
+// another version. Missing historical optional readings remain admissible.
+function crossStyleControlsUsable(sh,version){
+ if(sh.grindSetting!=null){
+  if(!finite(sh.grindSetting)||sh.grindSetting<0)return false;
+  const same=sh.setupVersionId===version.id;
+  const lo=same?version.grinderMin:sh.snapshot?.grinderMin;
+  const hi=same?version.grinderMax:sh.snapshot?.grinderMax;
+  if((finite(lo)&&sh.grindSetting<lo)||(finite(hi)&&sh.grindSetting>hi)||
+     (finite(lo)&&finite(hi)&&hi<=lo))return false;
+ }
+ return sh.tempC==null||validRecordedTemperature(sh.tempC);
+}
 export function recommendation(s,coffeeId,options={}) {
  const c=s.coffees.find(c=>c.id===coffeeId),v=activeVersion(s),p=coffeeState(s,coffeeId);
  if(!c||!v)return null;
@@ -342,7 +357,8 @@ export function recommendation(s,coffeeId,options={}) {
  // Imported success markers cannot suppress or transfer style evidence without all five original ideal scores.
  // Archived five-green rows are not physical evidence unless dose/yield/time
  // meet existing Log Shot bounds; original History remains untouched.
- const exactOther=measuredRecipeShots(s.shots).some(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style!==style&&sh.style!=='Custom');
+ const exactOther=measuredRecipeShots(s.shots).some(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style!==style&&sh.style!=='Custom'&&
+  crossStyleControlsUsable(sh,v));
  // For Fast-Flow, comparable same-style successes outrank a Turbo cross-style fallback.
  const provisional=style==='Custom'||(exactOther&&style!=='Fast-Flow')?null:personalSimilarCoffeeReference(s,c,v,style,feed,basket.id);
  const familyChoice=chooseRecipeFamily(s,coffeeId,style,v,basket,feed,p);
@@ -418,7 +434,7 @@ export function recommendation(s,coffeeId,options={}) {
   // Never import its measured time, grind, family, confirmation or shot count.
   const turbo=measuredRecipeShots(s.shots).filter(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&sh.style==='Turbo'&&
    sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.basketId===basket.id&&
-   sh.feedMode===feed&&sh.timeS>=8&&sh.timeS<=20&&
+   sh.feedMode===feed&&crossStyleControlsUsable(sh,v)&&sh.timeS>=8&&sh.timeS<=20&&
    sh.yieldG/sh.doseG>=1.8&&sh.yieldG/sh.doseG<=3.2);
   if(turbo.length){
    const r=roastIndex(c.roastLevel)<0?roastIndex('Medium'):roastIndex(c.roastLevel);
@@ -436,7 +452,7 @@ export function recommendation(s,coffeeId,options={}) {
   // style's starting ratio; no cross-style time or grind transfer.
   const other=measuredRecipeShots(s.shots).filter(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&
    sh.coffeeId===coffeeId&&sh.style!==style&&sh.style!=='Fast-Flow'&&
-   sh.style!=='Custom'&&RATIOS[sh.style]);
+   sh.style!=='Custom'&&RATIOS[sh.style]&&crossStyleControlsUsable(sh,v));
   if(other.length){const r=roastIndex(c.roastLevel)<0?roastIndex('Medium'):roastIndex(c.roastLevel);const residual=mean(other.map(sh=>sh.yieldG/sh.doseG-RATIOS[sh.style][r]));const bias=clamp(residual*.2,-.15,.15);for(const k of ['low','high','center'])rec.ratio[k]+=bias;rec.reasons.push('Small ratio adjustment informed by your other styles; time and grind stay style-specific.');}
  }
  rec.grind=grindGuidance(s,c,style,basket,feed,rec.familyId);
