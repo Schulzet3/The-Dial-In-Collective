@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import {renderAdminAccessPanel,renderAdminDashboard,renderAdminDenied,renderAdminDeleteAccountPrompt,renderPendingSignups,renderAdminAttention} from '../site/admin/view.js';
+import {gettingStartedMarkup,walkthroughMarkup} from '../site/cloud/help.js';
 import {e} from '../site/lib/ui.js';
 import {isAccessDenied} from '../site/cloud/client.js';
 
@@ -52,6 +53,16 @@ test('Admin member access, deletion choice and unfinished operations remain prot
  assert.match(dialog,/Delete Account \+ Community Contributions/);
  assert.match(dialog,/&lt;svg/);
  assert.doesNotMatch(dialog,/<svg/);
+});
+test('published-in-future written onboarding has no active invitation instructions',()=>{
+ const guide=gettingStartedMarkup();
+ assert.match(guide,/Account Approval Pending/);
+ assert.match(guide,/Check Approval Status/);
+ assert.match(guide,/administrator.s approval/i);
+ assert.doesNotMatch(guide,/Your Invitation|invitation code|Use Invitation|Never send passwords or invitation codes/i);
+ const accessible=walkthroughMarkup();
+ assert.match(accessible,/administrator-approved account/);
+ assert.doesNotMatch(accessible,/Sign in to your invited account/);
 });
 test('retired source interfaces are absent and server approval code is present',()=>{
  const view=readFileSync(new URL('../site/admin/view.js',import.meta.url),'utf8');
