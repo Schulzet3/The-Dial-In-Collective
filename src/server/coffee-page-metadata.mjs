@@ -1969,7 +1969,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    // The chosen current paragraph's literal base and identical already
    // accepted note suffix are a higher-authority direct description, even
    // when an inferred notes caption has been indexed as a printed profile.
-   const flavorBase=refineSelectedCurrentFlavorBase(currentProduct,{clean,notes:fields.tasting_notes});
+   const flavorBase=refineSelectedCurrentFlavorBase(product,{clean,notes:fields.tasting_notes});
    if(flavorBase)fields.tasting_notes=flavorBase;
   }
   // A distinct current selected flavor sentence is review evidence, not a
