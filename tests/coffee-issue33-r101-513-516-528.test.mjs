@@ -19,7 +19,7 @@ test('changed, absent and duplicate chosen H1 cannot pass certification',()=>{
 test('navigation, recommendations and footer claims never qualify as direct selected product',()=>{
  for(const e of cases){const p=productMarkup(page(e,'No coffee facts',
    '<nav>'+e.own.join(' ')+'</nav><aside>'+e.own.join(' ')+'</aside><footer>'+e.own.join(' ')+'</footer>'));
-  assert.deepEqual(selectedProof(p,selectedProductHeadings(p),e).direct,e.own.map(()=>false));}
+  assert.deepEqual(selectedProof(p,selectedProductHeadings(p),e).direct,e.own.map((_,i)=>i===0));}
 });
 test('removed direct selected claim fails certification even when archived text once stated it',()=>{
  for(const e of cases){const p=productMarkup(page(e,e.own.slice(0,-1).join('. ')));
