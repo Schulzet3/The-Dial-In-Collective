@@ -120,3 +120,49 @@ export function selectedCoffeeSupplementalTastingProse(html,{clean,notes}={}){
  // Two nonidentical extra descriptions are not one unambiguous context list.
  return candidates.length===1?candidates[0]:'';
 }
+
+
+// A chosen current product can state a distinct, intrinsic flavor base
+// coordinated with its ALREADY accepted two-or-more selected notes.
+// "Milk chocolate" is a chocolate tasting note, not "coffee with milk".
+// Require a single selected H1, one literal current paragraph, identical
+// already accepted suffix notes, and no alternate/related/conditional source.
+export function refineSelectedCurrentFlavorBase(html,{clean,notes}={}){
+ if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function'||
+    typeof notes!=='string'||notes.length<8||notes.length>300)return '';
+ const blocks=productCoffeeProse(html,clean);
+ const headings=blocks.filter(x=>x.tag==='h1'&&!x.educational);
+ if(headings.length!==1||!headings[0].text||headings[0].text.length>180)return '';
+ const selectedSection=fold(headings[0].text);
+ const allowedProductSection=/^(?:product info|product information|product description|description|coffee description|about the coffee|about this coffee|about coffee|coffee details|details|coffee notes|tasting notes|flavor notes|flavour notes|flavor profile|flavour profile|coffee profile|the coffee|specifications|overview|coffee information)$/u;
+ const parts=notes.split(/\s*(?:,|&|[•·;|]|\band\b)\s*/iu).map(s=>s.trim()).filter(Boolean);
+ if(parts.length<2||parts.length>7||parts.some(s=>!normalizeExplicitCoffeeTastingNotes(s)))return '';
+ const candidates=new Set();
+ for(const block of blocks){
+  if(block.tag!=='p'||block.educational||block.text.length<45||block.text.length>900||
+     unavailable.test(block.section)||NONCURRENT_COFFEE_PROSE.test(block.section))continue;
+  // Do not read a similarly worded sibling product paragraph after its own
+  // product heading. Empty, selected H1 or bounded generic details are eligible.
+  const section=fold(block.section);
+  if(section&&section!==selectedSection&&!allowedProductSection.test(section))continue;
+  for(const sentence of block.text.split(/(?<=[.!?])\s+/u).slice(0,14)){
+   if(sentence.length>450||NONCURRENT_COFFEE_PROSE.test(sentence)||
+      /\b(?:served|prepared|brewed|mixed|added|with milk\b|with cream\b|if|when|only when|depending|alternatively|hypothetical|previously|formerly|historically|different|another|other coffees?)\b/iu.test(sentence))continue;
+   const match=sentence.match(/^(?:Its|This coffee['’]s)\s+([\p{L}\p{M}][\p{L}\p{M} -]{2,52}?)\s+base\s+is\s+complemented\s+with\s+notes\s+of\s+([^.!?;]{5,175})[.!?]?$/iu);
+   if(!match)continue;
+   const base=match[1].trim();
+   // A sensory base requires a named literal flavor substance, not a roast,
+   // mouthfeel, texture, milk service, generic "sweetness", or provenance.
+   if(!/\b(?:chocolate|cocoa|cacao|caramel|toffee|hazelnut|almond|nougat|praline|vanilla|berry|cherry|fruit)\b/iu.test(base)||
+      /\b(?:body|acidity|mouthfeel|finish|roast|brewing|brewed|served|with milk|coffee|beans?|texture|milk foam|creaminess|sweetness|processing)\b/iu.test(base))continue;
+   const tail=match[2].replace(/,\s*(?:culminating|ending|resulting|leading)\b.*$/iu,'').trim();
+   const printed=tail.split(/\s*(?:,|&|[•·;|]|\band\b)\s*/iu).map(s=>s.trim()).filter(Boolean);
+   if(printed.length!==parts.length||printed.some(p=>!normalizeExplicitCoffeeTastingNotes(p))||
+      !parts.every(p=>printed.some(t=>fold(t)===fold(p))))continue;
+   if(parts.some(p=>fold(p)===fold(base)))continue;
+   const complete=normalizeExplicitCoffeeTastingNotes([base,...parts].join(', '));
+   if(complete)candidates.add(complete);
+  }
+ }
+ return candidates.size===1?[...candidates][0]:'';
+}
