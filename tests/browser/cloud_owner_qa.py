@@ -30,7 +30,7 @@ window.__client={
  onAuthChange(fn){window.__authEvent=fn;return ()=>{};},async identity(){return window.__who;},
  async signIn(email){window.__who={id:OWNER,email};return {};},async signUp(){return {};},
  async requestReset(){return 'If that address has an account, a recovery email has been requested.';},async setPassword(){return {};},
- async signOut(){window.__who=null;},async redeemInvite(){window.__admitted=true;return {ok:true};},
+ async signOut(){window.__who=null;},
  async listCommunityReviews(){return window.__reviews||[];},async confirmCommunityOutlier(){window.__reviews=[];return {ok:true,state:'eligible'};},
  async browseCommunityShots(){return {shots:window.__communityShots||[],total:(window.__communityShots||[]).length};},
  async searchCommunityShots({query='',style='all',limit=20,offset=0}={}){
@@ -68,7 +68,7 @@ window.__client={
   return {ok:true,kind:'correction_requested'};
  },
 
- async status(){return {admitted:window.__admitted,admin:false};},async findCoffeeMatches(){return window.__matchResponse||{classification:'new_pending',roaster:{recognized:false}};},async previewCoffeeUrl(){return {ok:false,reason:'unrecognized_official_roaster'};},async verifyCoffeeSource(){return {ok:false,status:'pending',reason:'no_verified_roaster_source'};},async read(){if(window.__offline)throw Error('offline');return structuredClone(window.__raw);},
+ async status(){return {authenticated:!!window.__who,admitted:window.__admitted,admin:false,approvalState:window.__admitted?'approved':'pending',emailVerified:true};},async findCoffeeMatches(){return window.__matchResponse||{classification:'new_pending',roaster:{recognized:false}};},async previewCoffeeUrl(){return {ok:false,reason:'unrecognized_official_roaster'};},async verifyCoffeeSource(){return {ok:false,status:'pending',reason:'no_verified_roaster_source'};},async read(){if(window.__offline)throw Error('offline');return structuredClone(window.__raw);},
  async mutate(e){if(window.__offline)throw Error('offline');window.__calls.push(structuredClone(e));const d=e.payload,r=window.__raw;
  if(e.action==='submit_coffee'){
   const submission='11111111-1111-4111-8111-000000000099';
@@ -128,8 +128,16 @@ with sync_playwright() as p:
   print('BUNDLE START:',bundle()[:1000])
   raise
  checks.append('Sign-in view loads without local app state')
- page.locator('[name=email]').fill('owner@example.invalid');page.locator('[name=password]').fill('synthetic-password');page.get_by_role('button',name='Sign In',exact=True).click();page.get_by_role('button',name='Use Invitation').wait_for();checks.append('Pending account remains outside workspace')
- page.locator('[name=token]').fill('synthetic-not-real-token');page.get_by_role('button',name='Use Invitation').click();page.get_by_role('button',name='Settings',exact=True).wait_for();checks.append('Admitted account hydrates cloud workspace')
+ page.locator('[name=email]').fill('owner@example.invalid');page.locator('[name=password]').fill('synthetic-password');page.get_by_role('button',name='Sign In',exact=True).click()
+ page.get_by_role('heading',name='Account Approval Pending').wait_for()
+ assert page.get_by_role('button',name='Check Approval Status').is_visible()
+ assert page.locator('[name=token], [data-action=redeem-invite], .current-mark').count()==0
+ checks.append('Unadmitted verified signup is approval-pending, cannot open workspace or enter codes')
+ # Simulate only server-side Admin approval; the browser has no local admission override.
+ page.evaluate('window.__admitted=true')
+ page.get_by_role('button',name='Check Approval Status').click()
+ page.get_by_role('button',name='Settings',exact=True).wait_for()
+ checks.append('Server-admitted account hydrates the unchanged cloud workspace after status refresh')
  assert page.locator('.current-mark').count()==0;checks.append('No pin before first logged shot')
  page.get_by_role('button',name='Settings',exact=True).click()
  assert page.locator('.recovery-options').count()==0;checks.append('Routine Recovery section removed as approved')
