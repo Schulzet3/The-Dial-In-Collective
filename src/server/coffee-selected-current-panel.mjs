@@ -8,7 +8,7 @@ const fold=x=>String(x??'').normalize('NFKD').replace(/\p{M}/gu,'')
  .toLowerCase().replace(/[^\p{L}\p{N}]+/gu,' ').trim();
 const key=x=>fold(x).replace(/\s+/gu,'');
 const excluded=/\b(?:related|recommended|other products?|another coffee|customer reviews?|testimonials?|past releases?|education|brew guide|historical|previous|former|last year|old lot|hypothetical|unlike|instead of|not from|no longer|used to)\b/iu;
-function selectedBlocks(html,{name,clean}={}){
+function selectedBlocks(html,{name,clean,maxDistance=18000}={}){
  if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function'||
   typeof name!=='string'||name.length<6||name.length>180)return [];
  const blocks=productCoffeeProse(html,clean);
@@ -17,7 +17,7 @@ function selectedBlocks(html,{name,clean}={}){
  const h1=headings[0];
  return blocks.filter(b=>['p','div','span','li','dd'].includes(b.tag)&&
   !b.educational&&!excluded.test(b.section||'')&&
-  b.start>h1.start&&b.start-h1.end<18000&&
+  b.start>h1.start&&b.start-h1.end<maxDistance&&
   typeof b.text==='string'&&b.text.length<1100&&
   !NONCURRENT_COFFEE_PROSE.test(b.text));
 }
@@ -26,7 +26,7 @@ function selectedBlocks(html,{name,clean}={}){
 export function selectedCurrentCoffeeLabeledRegion(html,{name='',origin='',clean}={}){
  if(typeof origin!=='string'||origin.length<4||origin.length>60||origin.includes(',')||
   !/^[\p{Lu}][\p{L}\p{M}'’ -]{2,58}$/u.test(origin))return null;
- const blocks=selectedBlocks(html,{name,clean}),found=new Map();
+ const blocks=selectedBlocks(html,{name,clean,maxDistance:80000}),found=new Map();
  // Country and current region must be in one actual product's labeled claim;
  // a general regional-story sentence or identity-mismatched fallbacks fail.
  for(const b of blocks){
@@ -45,7 +45,7 @@ export function selectedCurrentCoffeeLabeledRegion(html,{name='',origin='',clean
 // Direct chosen-coffee lead such as "Medium-dark roast with notes of ..."
 // outranks a shorter icon list, but never SEO, score reviews or roast range axes.
 export function selectedCurrentLeadRoastNotes(html,{name='',clean,notes=''}={}){
- const blocks=selectedBlocks(html,{name,clean}),candidates=new Map();
+ const blocks=selectedBlocks(html,{name,clean,maxDistance:1800}),candidates=new Map();
  for(const b of blocks){
   if(!['p','div','span'].includes(b.tag)||b.text.length<45||b.text.length>300)continue;
   const m=b.text.match(/^(Ultra[ -]Light|Very[ -]Light|Medium[ -]Light|Light[ -]Medium|Medium[ -]Dark|Light|Medium|Dark)\s+roast\s+with\s+notes?\s+of\s+([^.!?;]{12,170})[.!?]?\s*$/iu);

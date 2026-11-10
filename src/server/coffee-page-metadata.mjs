@@ -2614,7 +2614,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // direct label, unique H1 and all existing conflict guards agree.
  if(fields.origin&&!conflicts.has('origin')&&
   geographyParts(fields.origin).length===1&&ORIGIN_COUNTRIES.has(keyOf(fields.origin))){
-  const labeled=selectedCurrentCoffeeLabeledRegion(canonicalProduct,{
+  const labeled=selectedCurrentCoffeeLabeledRegion(product,{
    name:fields.name,origin:fields.origin,clean
   });
   if(labeled){
@@ -2631,7 +2631,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  // A short current product lead can expressly publish a single roast and a
  // full literal sensory list. A shorter icon list may omit one printed note;
  // augment only when it is a strict subset, never replace contradictory lists.
- const lead=selectedCurrentLeadRoastNotes(canonicalProduct,{
+ const lead=selectedCurrentLeadRoastNotes(product,{
   name:fields.name,clean,notes:fields.tasting_notes||''
  });
  if(lead){
