@@ -61,6 +61,7 @@
     "current_owner_risk_based_queue_owner_publishes_only_20261103",
     "current_owner_scoped_confirmation_retry_release_20261018",
     "current_owner_scoped_pwa_release_20261018",
+    "current_owner_signup_admin_approval_20261109",
     "current_owner_single_instruction_development_and_publication_20261022",
     "current_owner_single_use_beta_invites_20261018",
     "current_owner_sitewide_low_friction_correction_20261021",
@@ -895,6 +896,56 @@
         {
           "path": "docs/audits/extractor-issue33-owner-rules-603-20261027.json",
           "contains": "\"new_exact\": 3090"
+        }
+      ]
+    },
+    {
+      "id": "owner_signup_admin_approval_no_invites_20261109",
+      "decision_key": "current_owner_signup_admin_approval_20261109",
+      "issue": 1756,
+      "scope": "Source-only new Auth pending approval, administrator review and notification UI; remove obsolete invitations without altering any existing member accounts, private shots, Community or password validation; production deletion awaits explicit owner Publish and verified fresh offsite backup.",
+      "implementation": "IN_PROGRESS_SOURCE_NOT_DEPLOYED",
+      "device_acceptance": "RETIRED_NOT_REQUIRED: physical-device owner acceptance stays retired; isolated SQL/Node/Chromium high-risk checks required before READY, no real destructive test, no off-app push claim.",
+      "assertions": [
+        {
+          "path": "site/cloud/main.js",
+          "contains": "Account Approval Pending"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "absent": "id=auth-invite"
+        },
+        {
+          "path": "site/cloud/client.js",
+          "absent": "async redeemInvite("
+        },
+        {
+          "path": "site/admin/main.js",
+          "contains": "dic_admin_review_signup"
+        },
+        {
+          "path": "site/admin/view.js",
+          "contains": "New Account Requests"
+        },
+        {
+          "path": "site/admin/view.js",
+          "absent": "admin-invite-form"
+        },
+        {
+          "path": "supabase/migrations/20261110020500_dic_admin_signup_approval_retire_invites.sql",
+          "contains": "drop table if exists private.beta_invites;"
+        },
+        {
+          "path": "supabase/migrations/20261110020500_dic_admin_signup_approval_retire_invites.sql",
+          "contains": "signup_review_state"
+        },
+        {
+          "path": "supabase/tests/admin_invitation_controls.sql",
+          "contains": "PASS: admin-verified signup admission"
+        },
+        {
+          "path": "tests/admin-invitation-controls.test.mjs",
+          "contains": "new-account approval and attention"
         }
       ]
     }
@@ -2162,5 +2213,15 @@
     "scope": "Admin-only Delete Code immediately revokes and hides the code, retaining non-secret history; existing admitted member not affected. Admin-only permanent Delete Account for nonadmins with explicit Keep Community vs Remove Community selection, exact impact preview and confirmation.",
     "merged_source_sha": "ed95dd067bd1d75925dd56e88300297f9f28c033",
     "queue_item": "DIC-Q-1676-admin-code-account-delete"
+  },
+  "current_owner_signup_admin_approval_20261109": {
+    "decision_id": "ACCESS-ADMIN-SIGNUP-APPROVAL-NO-INVITES-20261109",
+    "state": "IN_PROGRESS_SOURCE_NOT_DEPLOYED",
+    "issue": 1756,
+    "scope": "New verified signups require explicit admin approval; remove all invite-code UI/RPC and historical tokens at future authorized production release, preserve all existing admitted accounts, display in-app actionable alerts; optional browser permission only.",
+    "release": "NOT_AUTHORIZED",
+    "source_branch": "feature/issue1756-admin-approval-no-invites",
+    "source_head": "ba75fb4d0f6f25f9dfeed8ce822c3ead5ae41ebe",
+    "real_device_acceptance": "NOT_PERFORMED"
   }
 }

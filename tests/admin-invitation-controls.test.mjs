@@ -2,287 +2,185 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
-import {renderAdminAccessPanel,renderAdminDashboard,renderAdminDenied,renderAdminDeleteAccountPrompt} from '../site/admin/view.js';
+import {renderAdminAccessPanel,renderAdminDashboard,renderAdminDenied,renderAdminDeleteAccountPrompt,renderPendingSignups} from '../site/admin/view.js';
+import {gettingStartedMarkup,walkthroughMarkup} from '../site/cloud/help.js';
 import {e} from '../site/lib/ui.js';
 import {isAccessDenied} from '../site/cloud/client.js';
 
 const ADMIN='10000000-0000-4000-8000-000000000001';
 const MEMBER='20000000-0000-4000-8000-000000000001';
-const INVITE='30000000-0000-4000-8000-000000000001';
-const SECRET='dic-'+('a'.repeat(64));
-const state={
- invites:[{id:INVITE,label:'First Group',status:'active',created_at:'2026-10-18',uses:0,max_uses:1,expires_at:null}],
- invites_total:1,
- members:[{id:ADMIN,email:'admin@fixture.invalid',admin:true,enabled:true},
-  {id:MEMBER,email:'member@fixture.invalid',admin:false,enabled:true}],
- members_total:2
-};
-test('admin code issue list is metadata-only and existing admin cannot be disabled from UI',()=>{
- const html=renderAdminAccessPanel(state);
- assert.match(html,/Beta Invitations/);
- assert.match(html,/Never expires/);
- assert.match(html,/One code admits one verified account, once/);
- assert.doesNotMatch(html,/id="admin-invite-uses"|Up to 5 people|Reusable until revoked/);
- assert.match(html,/Administrator · Permanent access/);
- assert.match(html,/Protected/);
- assert.match(html,/data-action="remove-member"/);
- assert.doesNotMatch(html,/data-id="10000000-0000-4000-8000-000000000001"/);
- assert.doesNotMatch(html,/dic-[a-f0-9]{64}/,'Plaintext invite may not be in admin listing');
- assert.doesNotMatch(html,/type="password"/);
-});
-test('secret appears only when freshly returned by issuance, not upon subsequent overview',()=>{
- const issued={id:INVITE,invite_code:SECRET};
- const html=renderAdminDashboard({counts:{},queue:[]},state,issued);
- assert.match(html,/New Invitation Code/);
- assert.match(html,new RegExp(SECRET));
- assert.match(html,/cannot be recovered/);
- const later=renderAdminDashboard({counts:{},queue:[]},state,null);
- assert.doesNotMatch(later,new RegExp(SECRET));
- assert.match(later,/Existing Codes/);
-});
-test('every operator-controlled label/email is escaped, not executable markup',()=>{
- const hostile={...state,
-  invites:[{...state.invites[0],label:'<img src=x onerror=alert(1)>'}],
-  members:[{...state.members[1],email:'<svg/onload=alert(2)>'}]};
- const html=renderAdminAccessPanel(hostile,{invite_code:'<script>alert(3)</script>'});
- assert.doesNotMatch(html,/<img|<script>|<svg/);
- assert.match(html,/&lt;img/);assert.match(html,/&lt;svg/);assert.match(html,/&lt;script/);
-});
-test('removed member retains identity and restore access control, admin stays protected',()=>{
- const html=renderAdminAccessPanel({...state,members:[
-  state.members[0],{...state.members[1],enabled:false}]});
- assert.match(html,/data-action="restore-member"/);
- assert.match(html,/Access removed · Personal history retained/);
- assert.match(html,/Administrator · Permanent access/);
- assert.match(html,/data-action="delete-account"/);
- assert.match(html,/Delete Account/);
- assert.doesNotMatch(html,/data-action="delete-account" data-id="10000000-0000-4000-8000-000000000001"/);
-});
-test('no direct client-side table insert, privileged access only via member-gated RPC',()=>{
- const js=readFileSync(new URL('../site/admin/main.js',import.meta.url),'utf8');
- const sql=readFileSync(new URL('../supabase/migrations/20261019041452_dic_admin_beta_invitation_controls.sql',import.meta.url),'utf8');
- assert.match(js,/sdk\.auth\.getUser\(\)/);
- assert.match(js,/dic_session_status/);
- assert.match(js,/dic_admin_issue_invite/);
- assert.match(js,/dic_admin_revoke_invite/);
- assert.match(js,/dic_admin_set_member_access/);
- assert.doesNotMatch(js,/localStorage\.setItem|sessionStorage\.setItem|\.from\('beta_invites'\)/);
- assert.match(sql,/private\.is_admin\(\)/);
- assert.match(sql,/public\.dic_admin_issue_invite/);
- assert.match(sql,/revoke all on function/);
- assert.match(sql,/to authenticated/);
- assert.match(sql,/expires_at,max_uses/);
- assert.match(sql,/clean_label,actor,null,1\)/);
- assert.doesNotMatch(sql,/dic_admin_issue_invite\(text,integer\)|p_max_uses/);
- assert.match(sql,/Administrator accounts cannot be removed here/);
- assert.doesNotMatch(sql,/delete from auth\.users|drop table|drop policy/);
-});
+const PENDING='30000000-0000-4000-8000-000000000001';
+const UNVERIFIED='30000000-0000-4000-8000-000000000002';
+const members=[
+ {id:ADMIN,email:'admin@fixture.invalid',admin:true,enabled:true},
+ {id:MEMBER,email:'member@fixture.invalid',admin:false,enabled:true}
+];
+const signups=[
+ {id:PENDING,email:'new@fixture.invalid',created_at:'2026-11-09T17:00Z',email_verified:true,review_state:'pending'},
+ {id:UNVERIFIED,email:'unverified@fixture.invalid',created_at:'2026-11-09T17:03Z',email_verified:false,review_state:'pending'}
+];
 
+test('new-account approval and attention panel expose no invitation-code UI',()=>{
+ const html=renderAdminDashboard({counts:{pending_accounts:2,pending_coffees:1,conflicts:2,unfinished_account_deletions:1,active_accounts:2},queue:[]},null,null,{}, {},{signupRequests:{items:signups,total:2,offset:0}});
+ assert.match(html,/Requires Your Attention/);
+ assert.match(html,/New Account Requests/);
+ assert.match(html,/pending accounts|New accounts/i);
+ assert.match(html,/new@fixture\.invalid/);
+ assert.match(html,/Email verified/);
+ assert.match(html,/data-action="approve-signup"/);
+ assert.match(html,/data-action="reject-signup"/);
+ assert.match(html,/admin-attention-count[^>]*>6<\/span>/);
+ assert.doesNotMatch(html,/Beta Invitations|Generate Code|Existing Codes|Invitation Code|admin-invite-form|Copy Code/);
+});
+test('unverified accounts cannot be approved in UI; hostile emails are escaped',()=>{
+ const html=renderPendingSignups({items:[{...signups[1],email:'<img src=x onerror=alert(1)>'}],total:1,offset:0});
+ assert.match(html,/Approve<\/button>/);
+ assert.match(html,/disabled title="Email verification required"/);
+ assert.match(html,/&lt;img/);
+ assert.doesNotMatch(html,/<img/);
+});
+test('Admin member access, deletion choice and unfinished operations remain protected',()=>{
+ const state={members,members_total:2,pending_deletions:[{id:'40000000-0000-4000-8000-000000000001',email:'deleted@fixture.invalid',phase:'prepared',community_mode:'keep'}]};
+ const html=renderAdminAccessPanel(state);
+ assert.match(html,/Administrator · Permanent access/);
+ assert.match(html,/Member Access/);
+ assert.match(html,/data-action="remove-member"/);
+ assert.match(html,/data-action="delete-account"/);
+ assert.match(html,/Retry Completion/);
+ assert.doesNotMatch(html,/data-action="delete-account" data-id="'+ADMIN+'/);
+ const dialog=renderAdminDeleteAccountPrompt({member_id:MEMBER,email:'<svg/onload=alert(1)>',shots:12,notes:4,library_entries:2,community_shots:5,eligible_community_shots:3});
+ assert.match(dialog,/Delete Account · Keep Community/);
+ assert.match(dialog,/Delete Account \+ Community Contributions/);
+ assert.match(dialog,/&lt;svg/);
+ assert.doesNotMatch(dialog,/<svg/);
+});
+test('published-in-future written onboarding has no active invitation instructions',()=>{
+ const guide=gettingStartedMarkup();
+ assert.match(guide,/Account Approval Pending/);
+ assert.match(guide,/Check Approval Status/);
+ assert.match(guide,/administrator.s approval/i);
+ assert.doesNotMatch(guide,/Your Invitation|invitation code|Use Invitation|Never send passwords or invitation codes/i);
+ const accessible=walkthroughMarkup();
+ assert.match(accessible,/administrator-approved account/);
+ assert.doesNotMatch(accessible,/Sign in to your invited account/);
+});
+test('retired source interfaces are absent and server approval code is present',()=>{
+ const view=readFileSync(new URL('../site/admin/view.js',import.meta.url),'utf8');
+ const main=readFileSync(new URL('../site/admin/main.js',import.meta.url),'utf8');
+ const cloud=readFileSync(new URL('../site/cloud/main.js',import.meta.url),'utf8');
+ const client=readFileSync(new URL('../site/cloud/client.js',import.meta.url),'utf8');
+ const sql=readFileSync(new URL('../supabase/migrations/20261110020500_dic_admin_signup_approval_retire_invites.sql',import.meta.url),'utf8');
+ assert.doesNotMatch(view,/Beta Invitations|Generate Code|Existing Codes|admin-invite-form/);
+ assert.doesNotMatch(main,/dic_admin_issue_invite|dic_admin_revoke_invite|dic_admin_delete_invite|copy-invite|admin-invite-form/);
+ assert.doesNotMatch(cloud,/auth-invite|Your Invitation/);
+ assert.doesNotMatch(client,/async redeemInvite\(/);
+ assert.match(main,/dic_admin_review_signup/);
+ assert.match(cloud,/Account Approval Pending/);
+ assert.match(sql,/drop table if exists private\.beta_invites;/);
+ assert.match(sql,/p_action not in \('approve','reject'\)/);
+ assert.match(sql,/email_confirmed_at is not null/);
+ assert.match(sql,/signup_review_state/);
+});
 const source=readFileSync(new URL('../site/admin/main.js',import.meta.url),'utf8')
- .replace(/^import .*?;\n/gm,'')
- .replace(/start\(\);\s*$/,'globalThis.started=start();');
-async function flush(){for(let i=0;i<32;i++)await Promise.resolve();}
+ .replace(/^import .*?;\n/gm,'').replace(/start\(\);\s*$/,'globalThis.started=start();');
+async function flush(){for(let i=0;i<60;i++)await Promise.resolve();}
 function boot(){
- const calls=[],events={};
+ const calls=[],events={},responses=[];
  let authChange,role={authenticated:true,admitted:true,admin:true};
- let pauseDashboard=false,resumeDashboard=null;
+ let liveSignups=signups.map(x=>({...x}));
  const root={
-  innerHTML:'',
-  contains(){return true;},
-  insertAdjacentHTML(_position,html){this.innerHTML+=html;},
+  innerHTML:'',lastActionMessage:'',contains(){return true;},
+  insertAdjacentHTML(_where,html){this.innerHTML+=html;},
   addEventListener(name,fn){events[name]=fn;},
-  querySelector(sel){
-   if(sel==='#admin-action-notice'&&this.innerHTML.includes('id="admin-action-notice"'))
-    return {set textContent(message){root.lastActionMessage=message;}};
+  querySelector(selector){
+   if(selector==='#admin-action-notice'&&this.innerHTML.includes('id="admin-action-notice"'))
+    return {set textContent(v){root.lastActionMessage=v;}};
    return null;
   }
  };
- const invocations=[];
  const sdk={
-  functions:{async invoke(name,args){invocations.push({name,args});return {data:{ok:true,completed:true,community_removed:1}};}},
-  auth:{
-   onAuthStateChange(fn){authChange=fn;return {data:{subscription:{unsubscribe(){}}}};},
-   async getUser(){return {data:{user:{id:ADMIN}}};}
-  },
+  functions:{async invoke(name,args){responses.push({name,args});return {data:{ok:true,completed:true,community_removed:0}};}},
+  auth:{onAuthStateChange(fn){authChange=fn;return {data:{subscription:{unsubscribe(){}}}};},
+   async getUser(){return {data:{user:{id:ADMIN}}};}},
   from(){return {select:()=>({eq:()=>({async maybeSingle(){return {data:{theme:'system'}};}})})};},
   async rpc(name,args){
    calls.push({name,args});
    if(name==='dic_session_status')return {data:role};
-   if(name==='dic_admin_dashboard'){
-    if(pauseDashboard){pauseDashboard=false;await new Promise(resolve=>{resumeDashboard=resolve;});}
-    return {data:{counts:{active_accounts:2},queue:[],queue_total:0}};
+   if(name==='dic_admin_dashboard')return {data:{counts:{pending_accounts:liveSignups.length,active_accounts:2,pending_coffees:1,conflicts:0,unfinished_account_deletions:0},queue:[],queue_total:0}};
+   if(name==='dic_admin_signup_requests')return {data:{items:structuredClone(liveSignups),total:liveSignups.length,offset:args.p_offset}};
+   if(name==='dic_admin_access_overview')return {data:{members,members_total:2,pending_deletions:[]}};
+   if(name==='dic_admin_records')return {data:{items:args.p_kind==='accounts'?members:[],total:args.p_kind==='accounts'?2:0,offset:args.p_offset}};
+   if(name==='dic_admin_review_signup'){
+    const row=liveSignups.find(s=>s.id===args.p_member_id);
+    if(!row||row.review_state!=='pending')return {data:{ok:false,code:'stale_review'}};
+    if(args.p_action==='approve'&&!row.email_verified)return {data:{ok:false,code:'verify_email_first'}};
+    row.review_state=args.p_action==='approve'?'approved':'rejected';
+    liveSignups=liveSignups.filter(x=>x.id!==row.id);
+    return {data:{ok:true,decision:args.p_action}};
    }
-   if(name==='dic_admin_access_overview')return {data:structuredClone(state)};
-   if(name==='dic_admin_records')return {error:{code:'PGRST202',message:'Detailed record RPC is not yet deployed'}};
-   if(name==='dic_admin_issue_invite')return {data:{ok:true,id:INVITE,invite_code:SECRET}};
-   if(name==='dic_admin_revoke_invite')return {data:{ok:true,revoked:true}};
    if(name==='dic_admin_set_member_access')return {data:{ok:true,enabled:args.p_enabled}};
-   if(name==='dic_admin_delete_invite')return {data:{ok:true,deleted:true,revoked:true}};
    if(name==='dic_admin_account_delete_preview')return {data:{member_id:MEMBER,email:'member@fixture.invalid',enabled:true,shots:2,notes:1,library_entries:1,community_shots:1,eligible_community_shots:1}};
    if(name==='dic_admin_account_delete_request')return {data:{ok:true,operation_id:'40000000-0000-4000-8000-000000000001'}};
-   throw Error('Unexpected RPC '+name);
+   throw new Error('Unexpected RPC '+name);
   }
  };
- const clipboard=[];
  const context=vm.createContext({
-  document:{querySelector:s=>s==='#admin-root'?root:null},
-  supabase:{createClient:()=>sdk},
-  CLOUD_CONFIG:{enabled:true},
+  document:{querySelector:x=>x==='#admin-root'?root:null},
+  supabase:{createClient:()=>sdk},CLOUD_CONFIG:{enabled:true},
   secureOrigin(){},applyAppearance(){},readAppearance(){return 'system';},
   renderAdminDashboard,renderAdminDenied,renderAdminDeleteAccountPrompt,e,isAccessDenied,
-  navigator:{clipboard:{async writeText(s){clipboard.push(s);}}},
   confirm:()=>true
  });
  vm.runInContext(source,context);
- return {root,calls,events,clipboard,invocations,done:context.started,
-  openAccounts(){events.toggle({target:{matches:selector=>selector==='details[data-admin-section]',open:true,dataset:{adminSection:'accounts'}}});},
-  openSection(kind){events.toggle({target:{matches:selector=>selector==='details[data-admin-section]',open:true,dataset:{adminSection:kind}}});},
-  stallDashboard(){pauseDashboard=true;},
-  resumeDashboard(){if(!resumeDashboard)throw Error('No request paused');resumeDashboard();resumeDashboard=null;},
-  signOut(){authChange('SIGNED_OUT',null);},
-  switchAccount(){authChange('SIGNED_IN',{user:{id:MEMBER}});},
-  setRole(value){role=value;}
- };
+ return {root,calls,events,responses,done:context.started,
+  openAccounts(){events.toggle({target:{matches:sel=>sel==='details[data-admin-section]',open:true,dataset:{adminSection:'accounts'}}});},
+  click(action,id){events.click({target:{closest(){return {dataset:{action,id}};}}});},
+  signOut(){authChange('SIGNED_OUT',null);},setRole(x){role=x;},
+  get pending(){return liveSignups}};
 }
-test('rapidly expanding a second Admin section cannot drop its record fetch',async()=>{
+test('Admin approves only verified signup, rejected users retain identity, and badge follows live count',async()=>{
  const b=boot();await b.done;
- b.stallDashboard();b.openAccounts();await flush();
- b.openSection('approved');
- b.resumeDashboard();await flush();
- const loaded=b.calls.filter(x=>x.name==='dic_admin_records').map(x=>x.args.p_kind);
- assert.ok(loaded.includes('accounts')&&loaded.includes('invites'));
- assert.ok(loaded.includes('approved'),'Second expanded section must load even while first refresh is in flight');
+ assert.match(b.root.innerHTML,/New Account Requests/);
+ assert.match(b.root.innerHTML,/new@fixture.invalid/);
+ b.click('approve-signup',PENDING);await flush();
+ const approved=b.calls.find(x=>x.name==='dic_admin_review_signup'&&x.args.p_action==='approve');
+ assert.equal(approved?.args.p_member_id,PENDING);
+ assert.equal(approved?.args.p_expected_state,'pending');
+ assert.equal(b.pending.length,1);
+ b.click('approve-signup',UNVERIFIED);await flush();
+ assert.equal(b.calls.filter(x=>x.name==='dic_admin_review_signup'&&x.args.p_member_id===UNVERIFIED).length,0);
+ b.click('reject-signup',UNVERIFIED);await flush();
+ assert.equal(b.calls.filter(x=>x.name==='dic_admin_review_signup').length,2);
+ assert.equal(b.pending.length,0);
+ assert.match(b.root.innerHTML,/No pending account requests/);
+ assert.doesNotMatch(b.root.innerHTML,/Invitation Code/);
 });
-test('admin can issue and copy a code once, refreshing clears it; no code in list',async()=>{
- const b=boot();await b.done;
- assert.doesNotMatch(b.root.innerHTML,/Beta Invitations/,'Collapsed accounts should not load a private listing');
- assert.equal(b.calls.filter(x=>['dic_admin_records','dic_admin_access_overview'].includes(x.name)).length,0);
- b.openAccounts();await flush();
- assert.match(b.root.innerHTML,/Beta Invitations/);
- assert.match(b.root.innerHTML,/Administrator · Permanent access/);
- const form={
-  id:'admin-invite-form',
-  elements:{namedItem(name){return {value:name==='label'?'First tester':''};}}
- };
- b.events.submit({target:form,preventDefault(){}});
- await flush();
- assert.match(b.root.innerHTML,new RegExp(SECRET));
- assert.deepEqual(JSON.parse(JSON.stringify(b.calls.find(x=>x.name==='dic_admin_issue_invite').args)),{p_label:'First tester'});
- assert.doesNotMatch(b.root.innerHTML,/id="admin-invite-uses"/);
- b.events.click({target:{closest(){return {dataset:{action:'copy-invite'}};}}});
- await flush();
- assert.deepEqual(b.clipboard,[SECRET]);
- b.events.click({target:{closest(){return {dataset:{},id:'admin-refresh'};}}});
- await flush();
- assert.doesNotMatch(b.root.innerHTML,new RegExp(SECRET));
- assert.match(b.root.innerHTML,/Existing Codes/);
-});
-test('member removal/restoration and invitation revocation require RPC, then refresh',async()=>{
- const b=boot();await b.done;
- b.openAccounts();await flush();
- b.events.click({target:{closest(){return {dataset:{action:'remove-member',id:MEMBER}};}}});
- await flush();
- const removed=b.calls.find(x=>x.name==='dic_admin_set_member_access').args;
- assert.equal(removed.p_member_id,MEMBER);
- assert.equal(removed.p_enabled,false);
- b.events.click({target:{closest(){return {dataset:{action:'restore-member',id:MEMBER}};}}});
- await flush();
- assert.equal(b.calls.filter(x=>x.name==='dic_admin_set_member_access').at(-1).args.p_enabled,true);
- b.events.click({target:{closest(){return {dataset:{action:'revoke-invite',id:INVITE}};}}});
- await flush();
- assert.equal(b.calls.find(x=>x.name==='dic_admin_revoke_invite').args.p_invite_id,INVITE);
-});
-test('cross-tab account change immediately removes one-time invitation and denies stale render',async()=>{
- const b=boot();await b.done;
- b.openAccounts();await flush();
- b.events.submit({target:{id:'admin-invite-form',elements:{namedItem(name){return {value:name==='label'?'Single tester':''};}}},preventDefault(){}});
- await flush();assert.match(b.root.innerHTML,new RegExp(SECRET));
+test('existing members can still be removed and restored; stale signed-out Admin data is redacted',async()=>{
+ const b=boot();await b.done;b.openAccounts();await flush();
+ b.click('remove-member',MEMBER);await flush();
+ b.click('restore-member',MEMBER);await flush();
+ assert.deepEqual(b.calls.filter(x=>x.name==='dic_admin_set_member_access').map(x=>x.args.p_enabled),[false,true]);
  b.signOut();
  assert.match(b.root.innerHTML,/Admin Access Unavailable/);
- assert.doesNotMatch(b.root.innerHTML,new RegExp(SECRET));
+ assert.doesNotMatch(b.root.innerHTML,/new@fixture.invalid/);
 });
-test('admin cannot open portal without both server admin and admission status',async()=>{
- const status={authenticated:true,admitted:false,admin:false};
- const root={innerHTML:'',querySelector(){return null;},addEventListener(){}};
- const sdk={auth:{onAuthStateChange(){},async getUser(){return {data:{user:{id:MEMBER}}};}},
-  async rpc(name){assert.equal(name,'dic_session_status');return {data:status};}};
- const context=vm.createContext({
-  document:{querySelector:()=>root},supabase:{createClient:()=>sdk},CLOUD_CONFIG:{enabled:true},
-  secureOrigin(){},applyAppearance(){},readAppearance(){return 'system';},
-  renderAdminDashboard,renderAdminDenied,e,isAccessDenied
- });
- vm.runInContext(source,context);await context.started;
- assert.match(root.innerHTML,/Admin Access Unavailable/);
- assert.doesNotMatch(root.innerHTML,/Beta Invitations/);
-});
-
-test('Community deletion dialog shows distinct choices and escapes hostile email',()=>{
- const html=renderAdminDeleteAccountPrompt({
-  member_id:MEMBER,email:'<img src=x onerror=alert(1)>',
-  shots:12,notes:4,library_entries:2,community_shots:5,eligible_community_shots:3
- });
- assert.match(html,/Delete Account · Keep Community/);
- assert.match(html,/Delete Account \+ Community Contributions/);
- assert.match(html,/12 private shots/);
- assert.match(html,/5 Community contributions \(3 eligible\)/);
- assert.match(html,/aria-modal="true"/);
- assert.match(html,/&lt;img/);
- assert.doesNotMatch(html,/<img/);
-});
-test('Delete Code confirms via server RPC instead of direct table deletion',async()=>{
+test('account deletion retains exact Community choice and authorized Edge flow',async()=>{
  const b=boot();await b.done;b.openAccounts();await flush();
- assert.match(b.root.innerHTML,/data-action="delete-invite"/);
- b.events.click({target:{closest(){return {dataset:{action:'delete-invite',id:INVITE}};}}});
- await flush();
- assert.equal(b.calls.find(x=>x.name==='dic_admin_delete_invite')?.args?.p_invite_id,INVITE);
- assert.doesNotMatch(b.root.innerHTML,new RegExp(SECRET));
-});
-test('Delete Account requires preview and chooses exact Community removal mode',async()=>{
- const b=boot();await b.done;b.openAccounts();await flush();
- b.events.click({target:{closest(){return {dataset:{action:'confirm-delete-account',id:MEMBER,mode:'keep'}};}}});
- await flush();
- assert.equal(b.calls.filter(x=>x.name==='dic_admin_account_delete_request').length,0);
- b.events.click({target:{closest(){return {dataset:{action:'delete-account',id:MEMBER}};}}});
- await flush();
- assert.equal(b.calls.find(x=>x.name==='dic_admin_account_delete_preview')?.args?.p_member_id,MEMBER);
+ b.click('delete-account',MEMBER);await flush();
  assert.match(b.root.innerHTML,/Delete Account · Keep Community/);
  b.events.click({target:{closest(){return {dataset:{action:'confirm-delete-account',id:MEMBER,mode:'remove'}};}}});
  await flush();
- const staged=b.calls.find(x=>x.name==='dic_admin_account_delete_request');
- assert.equal(staged?.args?.p_member_id,MEMBER);
- assert.equal(staged?.args?.p_community_mode,'remove');
- assert.equal(staged?.args?.p_expected_impact?.community_shots,1);
- assert.equal(b.invocations.length,1);
- assert.equal(b.invocations[0].name,'dic-delete-member-account');
- assert.deepEqual(JSON.parse(JSON.stringify(b.invocations[0].args)),
-  {body:{operation_id:'40000000-0000-4000-8000-000000000001'}});
+ const a=b.calls.find(x=>x.name==='dic_admin_account_delete_request');
+ assert.equal(a?.args?.p_community_mode,'remove');
+ assert.equal(b.responses[0]?.name,'dic-delete-member-account');
 });
-test('Keep Community is conveyed unchanged and administrators remain protected',async()=>{
- const b=boot();await b.done;b.openAccounts();await flush();
- b.events.click({target:{closest(){return {dataset:{action:'delete-account',id:MEMBER}};}}});
- await flush();
- b.events.click({target:{closest(){return {dataset:{action:'confirm-delete-account',id:MEMBER,mode:'keep'}};}}});
- await flush();
- assert.equal(b.calls.find(x=>x.name==='dic_admin_account_delete_request').args.p_community_mode,'keep');
- const html=renderAdminAccessPanel(state);
- assert.doesNotMatch(html,/data-action="delete-account" data-id="10000000-0000-4000-8000-000000000001"/);
- assert.match(html,/Administrator · Permanent access/);
-});
-
-test('unfinished Auth deletion remains visible and can resume only its existing operation ID',async()=>{
- const html=renderAdminAccessPanel({...state,pending_deletions:[{
-  id:'40000000-0000-4000-8000-000000000001',
-  email:'deleted@fixture.invalid',phase:'prepared',community_mode:'remove'
- }]});
- assert.match(html,/Unfinished account deletions/);
- assert.match(html,/Retry Completion/);
- assert.match(html,/Remove Community/);
- const b=boot();await b.done;
- b.events.click({target:{closest(){return {dataset:{
-  action:'retry-account-delete',id:'40000000-0000-4000-8000-000000000001'
- }};}}});
- await flush();
- assert.equal(b.invocations.length,1);
- assert.equal(b.invocations[0].name,'dic-delete-member-account');
- assert.equal(b.invocations[0].args.body.operation_id,'40000000-0000-4000-8000-000000000001');
+test('non-admin portal identity is denied without pulling private requests',async()=>{
+ const root={innerHTML:'',querySelector(){return null;},addEventListener(){}};
+ const calls=[];
+ const sdk={auth:{onAuthStateChange(){},async getUser(){return {data:{user:{id:MEMBER}}};}},
+  async rpc(name){calls.push(name);if(name!=='dic_session_status')throw Error('Unexpected Admin fetch');return {data:{authenticated:true,admitted:false,admin:false}};}};
+ const context=vm.createContext({document:{querySelector:()=>root},supabase:{createClient:()=>sdk},CLOUD_CONFIG:{enabled:true},secureOrigin(){},applyAppearance(){},readAppearance(){return 'system';},renderAdminDashboard,renderAdminDenied,e,isAccessDenied});
+ vm.runInContext(source,context);await context.started;
+ assert.match(root.innerHTML,/Admin Access Unavailable/);
+ assert.deepEqual(calls,['dic_session_status']);
 });

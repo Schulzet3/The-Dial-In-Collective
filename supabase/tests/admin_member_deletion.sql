@@ -9,8 +9,8 @@ DECLARE
  coffee uuid;
  ckeep uuid; cremove uuid; cpeer uuid;
  community_keep uuid; community_remove uuid; community_peer uuid;
- impact jsonb; request jsonb; prepared jsonb; finished jsonb; invite jsonb;
- op_keep uuid; op_remove uuid; code_id uuid; source_submission uuid;
+ impact jsonb; request jsonb; prepared jsonb; finished jsonb;
+ op_keep uuid; op_remove uuid; source_submission uuid;
  pending_member_submission uuid; pending_member_library_entry uuid;
  delete_setup uuid; delete_setup_version uuid; delete_basket uuid;
  delete_basket_version uuid; delete_calibration_a uuid; delete_calibration_b uuid;
@@ -121,7 +121,7 @@ DECLARE
  ON CONFLICT(owner_id) DO UPDATE SET active_setup_id=excluded.active_setup_id;
  IF (SELECT equipment_snapshot->>'grinder_model' FROM public.shots WHERE id=delete_shot)<>'CI grinder'
  THEN RAISE EXCEPTION 'Composite deletion fixture did not capture real equipment snapshot'; END IF;
- -- An admitted ordinary member cannot preview, stage, hide invites or call service operations.
+ -- An admitted ordinary member cannot preview, stage or call service deletion operations.
  PERFORM set_config('request.jwt.claim.sub',peer_user::text,true);
  PERFORM set_config('request.jwt.claim.role','authenticated',true);
  EXECUTE 'SET LOCAL ROLE authenticated';
@@ -147,18 +147,11 @@ DECLARE
  BEGIN PERFORM public.dic_admin_account_delete_preview(admin);
  EXCEPTION WHEN insufficient_privilege THEN blocked:=true; END;
  IF NOT blocked THEN RAISE EXCEPTION 'Protected admin account exposed to deletion'; END IF;
- invite:=public.dic_admin_issue_invite('One-time delete control');
- code_id:=(invite->>'id')::uuid;
- IF (public.dic_admin_delete_invite(code_id)->>'deleted')<>'true'
- THEN RAISE EXCEPTION 'Delete Code refused'; END IF;
- IF (public.dic_admin_delete_invite(code_id)->>'already_deleted')<>'true'
- THEN RAISE EXCEPTION 'Delete Code not idempotent'; END IF;
- IF (public.dic_admin_records('invites',0,50)->'items') @> jsonb_build_array(jsonb_build_object('id',code_id))
- THEN RAISE EXCEPTION 'Deleted invite still listed'; END IF;
- IF (public.dic_admin_access_overview()->'invites') @> jsonb_build_array(jsonb_build_object('id',code_id))
- THEN RAISE EXCEPTION 'Deleted invite still in overview'; END IF;
- IF (public.dic_admin_search_records('invites','One-time delete control',0,50)->>'total')::integer<>0
- THEN RAISE EXCEPTION 'Deleted invite appears in search'; END IF;
+ -- Invitation-specific controls are retired; do not recreate or call them.
+ IF to_regclass('private.beta_invites') IS NOT NULL
+    OR to_regprocedure('public.dic_admin_issue_invite(text)') IS NOT NULL
+    OR to_regprocedure('public.dic_admin_delete_invite(uuid)') IS NOT NULL
+ THEN RAISE EXCEPTION 'Retired invitation APIs still exist'; END IF;
  impact:=public.dic_admin_account_delete_preview(keep_user);
  IF (impact->>'community_shots')::integer<>1 OR (impact->>'eligible_community_shots')::integer<>1
  THEN RAISE EXCEPTION 'Wrong Keep Community preview'; END IF;
@@ -273,10 +266,7 @@ DECLARE
  OR NOT EXISTS(SELECT 1 FROM public.community_shots WHERE id=community_peer)
  OR NOT EXISTS(SELECT 1 FROM private.contribution_links WHERE community_shot_id=community_peer)
  THEN RAISE EXCEPTION 'Another member/community contribution was changed'; END IF;
- IF NOT EXISTS(SELECT 1 FROM private.beta_invites
-   WHERE id=code_id AND deleted_at IS NOT NULL AND revoked_at IS NOT NULL)
- OR (SELECT count(*) FROM private.dic_admin_invite_delete_receipts WHERE invite_id=code_id)<>1
- THEN RAISE EXCEPTION 'Invite was not revoked and audited before hiding'; END IF;
+
 END $test$;
-SELECT 'PASS: Admin Delete Code revokes/hides with audit; auth/admin guards, stale impact, retry, Keep/Remove Community, unrelated member integrity' AS result;
+SELECT 'PASS: account delete auth/admin guards, stale impact, retry, Keep/Remove Community, unrelated member integrity, no legacy invitation paths' AS result;
 ROLLBACK;

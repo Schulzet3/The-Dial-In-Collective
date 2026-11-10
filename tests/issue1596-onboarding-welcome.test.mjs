@@ -9,8 +9,9 @@ test('only admitted no-setup members reach welcome, without changing Auth or set
  assert.match(main,/connected\?this\.coffees\(\):this\.auth\(\)/);
  assert.match(main,/if\(!setup\)return firstSetupWelcomeMarkup\(\)/);
  assert.ok(main.indexOf('if(!setup)return firstSetupWelcomeMarkup()')<main.indexOf("if(this.view==='community')return this.communityScreen()"));
- assert.match(main,/if\(this\.identity\)return/);
- assert.match(main,/Your Invitation/);
+ assert.match(main,/if\(this\.identity\)\s*\{/);
+ assert.match(main,/Account Approval Pending/);
+ assert.match(main,/Check Approval Status/);
  assert.match(main,/if\(this\.authView==='check-email'\)return emailConfirmationView/);
  assert.match(html,/aria-current="step"/);
  for(const label of ['Account','Welcome','Setup','Getting Started'])assert.ok(html.includes(label));

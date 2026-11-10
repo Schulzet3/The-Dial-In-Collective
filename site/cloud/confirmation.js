@@ -11,7 +11,7 @@ export function emailConfirmationView(address){
   <p class="confirmation-address">${safeAddress}</p>
   <div class="confirmation-instructions">
    <strong>Open the email and follow the verification link.</strong>
-   <p>Once your address is confirmed, return here and sign in. If the email is missing, check your spam or junk folder.</p>
+   <p>Once your address is confirmed, return here and sign in. An administrator will review your account before access begins. If the email is missing, check your spam or junk folder.</p>
   </div>
   <div class="confirmation-buttons">
    ${button('I Verified My Email · Sign In','auth-view','data-view="signin"','primary full')}

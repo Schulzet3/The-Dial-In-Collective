@@ -71,7 +71,7 @@ begin
  denied:=false;
  begin perform public.dic_admin_records('invites',0,50);
  exception when insufficient_privilege then denied:=true;end;
- if not denied then raise exception 'Non-admin enumerated invitation metadata';end if;
+ if not denied then raise exception 'Non-admin enumerated obsolete invitation metadata';end if;
  denied:=false;
  begin perform public.dic_admin_edit_coffee(pending_id,rev,
    '{"name":"Tampered","roaster":"Test Roaster"}'::jsonb,'Member attempted edit','submission');
@@ -105,15 +105,11 @@ begin
   raise exception 'Administrator shot projection lost original notes or owner';end if;
  if jsonb_typeof((public.dic_admin_records('accounts',0,50))->'items')<>'array' then
   raise exception 'Account page unavailable';end if;
- data:=public.dic_admin_records('invites',0,50);
- if data->>'kind'<>'invites' or jsonb_typeof(data->'items')<>'array'
-  or (data->>'total')::integer<0 then
-  raise exception 'Admin invitation history unavailable';end if;
- if data::text like '%token_hash%' or data::text like '%invite_code%'
-  or data::text like '%secret%' then
-  raise exception 'Invitation listing leaked secret material';end if;
- if jsonb_array_length((public.dic_admin_records('invites',0,1))->'items')>1 then
-  raise exception 'Invitation page limit bypassed';end if;
+ -- Retirement must reject even an administrator's obsolete invite listing.
+ denied:=false;
+ begin perform public.dic_admin_records('invites',0,50);
+ exception when invalid_parameter_value then denied:=true;end;
+ if not denied then raise exception 'Retired invitation list is still reachable';end if;
  denied:=false;
  begin perform public.dic_admin_records('pending',0,100);
  exception when invalid_parameter_value then denied:=true;end;

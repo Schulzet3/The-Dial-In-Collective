@@ -235,7 +235,7 @@ const fixtureRows={
    notes:'Synthetic retained note on a hidden shot.'}],
  accounts:[{id:fixtureId('1',1),email:'operator@synthetic.invalid',admin:true,enabled:true},
   {id:fixtureId('2',1),email:'tester@synthetic.invalid',admin:false,enabled:false}],
- invites:[{id:fixtureId('7',1),label:'Synthetic Used Invitation',status:'used',uses:1,max_uses:1,created_at:fixtureTime}]
+ signup:[{id:fixtureId('7',1),email:'waiting@synthetic.invalid',email_verified:true,review_state:'pending',created_at:fixtureTime}]
 };
 const sdk={
  auth:{onAuthStateChange:()=>({data:{subscription:{unsubscribe(){}}}}),
@@ -247,10 +247,12 @@ const sdk={
   if(name==='dic_admin_dashboard')return {data:{
    // Legacy aggregates exclude the hidden shot and removed member and include
    // one merged coffee. Successful detail pages supply their own exact totals.
-   counts:{pending_coffees:1,conflicts:1,verified_coffees:3,active_accounts:1,shot_records:1},
+   counts:{pending_coffees:1,conflicts:1,pending_accounts:1,unfinished_account_deletions:0,verified_coffees:3,active_accounts:1,shot_records:1},
    queue_total:2,queue:structuredClone([...fixtureRows.pending,...fixtureRows.conflicts])}};
-  if(name==='dic_admin_access_overview')return {data:{invites:[],invites_total:0,
-   members:structuredClone(fixtureRows.accounts),members_total:fixtureRows.accounts.length}};
+  if(name==='dic_admin_access_overview')return {data:{members:structuredClone(fixtureRows.accounts),
+    members_total:fixtureRows.accounts.length,pending_deletions:[]}};
+  if(name==='dic_admin_signup_requests')return {data:{items:structuredClone(fixtureRows.signup),
+    total:fixtureRows.signup.length,offset:args.p_offset}};
   if(name==='dic_admin_records'){
    const rows=fixtureRows[args.p_kind];
    if(!rows)throw Error('Unknown synthetic record kind');
@@ -269,14 +271,14 @@ globalThis.supabase={createClient:()=>sdk};
   page.wait_for_function("document.querySelector('#admin-refresh')?.disabled===false")
   check(page.locator('details.admin-disclosure:not([open])').count()==6,mode+': all admin sections collapsed initially')
   check(page.evaluate("requests.filter(x=>x==='dic_admin_records'||x==='dic_admin_access_overview').length")==0,mode+': collapsed records are not fetched')
-  check(page.locator('.admin-stats a strong').all_text_contents()==['1','1','3','1','1'],mode+': closed metrics use dashboard overview counts')
+  check(page.locator('.admin-stats a strong').all_text_contents()==['1','1','3','1','1','1'],mode+': closed metrics use dashboard overview counts')
   for kind,total in [('pending',1),('conflicts',1),('approved',2),('shots',2)]:
    page.locator('#admin-'+kind+' summary.admin-disclosure-summary').click()
    page.wait_for_function(f"document.querySelectorAll('#admin-{kind} .admin-record').length==={total}")
   page.locator('#admin-accounts summary.admin-disclosure-summary').click()
-  page.wait_for_function("document.querySelectorAll('#admin-accounts .admin-member-row').length===2 && document.querySelectorAll('#admin-accounts .admin-invite-row').length===1")
+  page.wait_for_function("document.querySelectorAll('#admin-accounts .admin-member-row').length===2")
   page.locator('#admin-infrastructure summary.admin-disclosure-summary').click()
-  check(page.locator('.admin-stats a strong').all_text_contents()==['1','1','2','2','2'],mode+': expanded Admin cards use paged record totals')
+  check(page.locator('.admin-stats a strong').all_text_contents()==['1','1','2','2','1','2'],mode+': expanded Admin cards use paged record totals')
   for group in page.locator('#admin-shots details.admin-coffee-group').all():
    group.locator('summary').click()
   for kind,total in [('pending',1),('conflicts',1),('approved',2),('shots',2)]:
@@ -285,9 +287,9 @@ globalThis.supabase={createClient:()=>sdk};
   check(page.locator('#admin-pending > section, #admin-conflicts > section').count()==0,mode+': review records have no duplicate nested panel')
   check(page.locator('#admin-approved .admin-queue-title strong').first.inner_text()=='tester@synthetic.invalid',mode+': record creator attribution is visible')
   check(page.locator('#admin-shots .admin-record-note').first.inner_text()=='Notes: Synthetic private note: sweet berry finish.',mode+': synthetic private shot notes are visible')
-  check(page.locator('.admin-member-row').count()==2 and page.get_by_role('button',name='Restore Access',exact=True).count()==1,mode+': complete accounts include the removed synthetic member')
-  check(page.locator('#admin-invites .admin-invite-row').count()==1 and page.get_by_text('Synthetic Used Invitation').count()==1,mode+': complete historical invitation listing renders without secret retrieval')
-  check(page.locator('#admin-invites').get_by_text('Complete invitation history is temporarily unavailable').count()==0,mode+': invitation fixture exercises successful server listing, not fallback')
+  check(page.locator('#admin-accounts .admin-member-row').count()==2 and page.get_by_role('button',name='Restore Access',exact=True).count()==1,mode+': complete accounts include the removed synthetic member')
+  check(page.locator('#admin-new-members .admin-member-row').count()==1 and page.get_by_text('waiting@synthetic.invalid').count()==1,mode+': pending signup request visible instead of codes')
+  check(page.locator('#admin-invites').count()==0 and page.locator('.admin-attention-count').count()==1,mode+': invitation removed and attention badge present')
   check(page.locator('.admin-pagination').count()==0,mode+': complete short lists do not show misleading pagination')
   review=page.locator('#admin-pending .admin-record')
   check(all(review.locator('[data-action="'+action+'"]').is_visible() for action in ['review-approve','review-merge-prepare']),mode+': each paginated coffee has review actions')
@@ -309,7 +311,7 @@ globalThis.supabase={createClient:()=>sdk};
   check(shot_editor.locator('[name="notes"]').input_value()=='Synthetic private note: sweet berry finish.' and shot_editor.locator('[name="notes"]').is_editable(),mode+': shot editor retains the original synthetic private note')
   check(page.evaluate('document.documentElement.scrollWidth<=innerWidth'),mode+': populated mobile editors fit the viewport')
   shot(page,'14-admin-editors-mobile-'+mode)
-  check(all(name in ['dic_session_status','dic_admin_dashboard','dic_admin_access_overview','dic_admin_records','dic_admin_review_candidates'] for name in page.evaluate('requests')),mode+': visual editor inspection makes no mutation RPC')
+  check(all(name in ['dic_session_status','dic_admin_dashboard','dic_admin_access_overview','dic_admin_records','dic_admin_review_candidates','dic_admin_signup_requests'] for name in page.evaluate('requests')),mode+': visual editor inspection makes no mutation RPC')
   page.close()
  for width in [320,375,390,768,1280]:
   page=boot(browser,'dark',width,1100)
