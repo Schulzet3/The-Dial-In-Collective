@@ -92,10 +92,12 @@ begin
   raise exception using errcode='42501',message='Administrator protected.';
  end if;
  select * into member from private.beta_members where owner_id=p_member_id for update;
- if not found or member.admitted_at is not null or member.enabled then
-  raise exception using errcode='22023',message='Account not pending review.';
+ if not found then
+  raise exception using errcode='22023',message='Account unavailable.';
  end if;
- if member.signup_review_state <> p_expected_state then
+ -- A repeat click or concurrent reviewer must be safely rejected as stale.
+ if member.signup_review_state <> p_expected_state or
+    member.admitted_at is not null or member.enabled then
   return jsonb_build_object('ok',false,'code','stale_review');
  end if;
  select u.email_confirmed_at is not null into verified

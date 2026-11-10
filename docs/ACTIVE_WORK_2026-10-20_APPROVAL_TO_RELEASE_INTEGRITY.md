@@ -472,3 +472,6 @@ Owner-authorized release DIC-20261106-READY7-23 independently verified DEPLOYED:
 
 ## November 10, 2026 — #1756 visual QA fixture and obsolete code-specific CSS [skip netlify]
 - Updated isolated visual_review.py to model administrator new signup RPC, pending-action badge, six metrics and no invitation list. Removed obsolete `.admin-invite-*` and `.admin-new-code` CSS selectors while preserving member styles, cleaned obsolete code comments and copy. Reuse existing authorized UI/role tests; no live account/code deletion, migration or Netlify publication.
+
+## November 10, 2026 — #1756 SQL review retry contract corrected [skip netlify]
+- Exact disposable SQL run42741411375 exposed real double-review behavior: an approved account was rejected with SQL22023 before the pending-state stale response. Moved guarded stale state check ahead of non-pending guard, returning `ok:false,code:stale_review` after existing admin/actor check, preserving previous approval. This makes repeat clicks and concurrent reviewers deterministic and non-mutating, without weakening gate. Fresh CI needed, no provider writes.
