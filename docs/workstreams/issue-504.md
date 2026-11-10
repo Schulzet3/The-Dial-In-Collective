@@ -1867,3 +1867,27 @@ Independent delegated #267 check frozen **F481** `src/server/coffee-identity-evi
 Cumulative distinct direct review **7,919 file lines / 60,754 source words + 916 GitHub metadata objects / 256028 words**, retaining G1-117 −15 objects / −4,012 words duplicate correction; **147/147** batch indices. Original direct word review/hashes and per-record arithmetic pass. Source-only docs and receipts, no app/test/SQL/Auth/Edge/member/provider/backup/original603/queue/Locked/main/release/Netlify/production changes. Functional Node22, SQL/Auth, mobile/browser/offline and 603 **NOT RUN** for metadata-only docs. PR-head and merged-source CI **not claimed until inspected**.
 
 **Next:** [PR #741](https://github.com/Schulzet3/The-Dial-In-Collective/pull/741) title **word 1**, then complete body. PR reviews/diffs/comments, issues, Actions logs/manifests, full trees/history/tags/releases/binaries/drift and #267 gaps remain; #504 **OPEN / IN_PROGRESS**.
+
+
+### 2026-11-10 UTC — Issue #504 G1-148 original PR #741–748 metadata [skip netlify]
+
+Live baseline development `a8fe99a42af939acf99beb94280600dae5083fd2`, main `11e1e8c7c36dad488519476d8a969bb682915d31`, release/production `a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0`; #504, #267, #455, #33, #96 OPEN. Repository PUBLIC under owner-approved temporary #630 November 4–30 exception, not changed. Consulted AGENTS, AI entrypoint/preflight, Current Status, Master Specification, owner-scoped Decision Ledger supersessions, approval matrix, source register, prior issue ledger, journals and active PRs. Current huge Release Queue text was not successfully returned in this run; no direct new queue-word credit.
+
+Directly read all original title and body words 1–EOF for **eight distinct historical merged GitHub PRs #741–748: 902 Unicode-whitespace words / 7,321 UTF-8 bytes**. Full original text, ID, source timestamps, original head/merged SHAs, title/body/combined SHA1, exact inclusive word/line boundaries and individual disposition stored in immutable [G1-148 receipt](../audits/issue504-review-G1-148.json), Git blob `e9469ee5f2e70f643b29bcce2ac5de13375a4cd5`.
+
+- PR #741 (73 words): #33 independent archived Onyx #248 selected-source rehash and queue READY claim is source-time scoped; no proof full 603 or deployment.
+- PR #742 (133 words): #267 S2-130 18 frozen and 20 pinned strict original lines; this PR metadata is not separate original code-line review.
+- PR #743 (118 words): #267 S2-131 pin/owner clauses move: frozen and later owner-modified live text differ. Do not infer an active documentation bug.
+- PR #744 (114 words): #267 S2-132 historical 60 URL/day and six roast-tier Open entries versus later Locked quota and tier authority; do not revive superseded requirements.
+- PR #745 (161 words): #455 distinct Slayer factory calibration, branded field advice and peer-reviewed sensory evidence; research-only, not validated universal tastes.
+- PR #746 (133 words): #504 G1-031 six old comments already credited as different objects; PR #746 title/body separately credited once, not the comments again.
+- PR #747 (97 words): #33 current selected #410 H1 commerce-price sanitizer source-time TESTING, later merged; do not assume complete original603 or publication from description.
+- PR #748 (73 words): #267 S2-133 30 frozen and 30 pinned lines exclusively source-owner #267; preserve boundary and no #504 code credit.
+
+A **confirmed present governance ledger pointer defect** was corrected: `last_completely_reviewed_document` incorrectly remained PR #700 even though G1-143 through G1-147 receipts fully covered PRs #701–740. Pointed to genuinely completed PR #748 with G1-148 immutable source evidence; history preserved, zero extra review words. Prior G1-117 duplicate correction −15 objects / −4,012 words stays intact.
+
+Independent #267 N15 frozen F481 `src/server/coffee-identity-evidence.mjs:28–30` blob `1cd583ad62de99b31123e637c3fc48751349e0d8` matched strict receipt `22b7ada15201d5d02e2fc9fbbd812f8f6132bc96`: **3/3 original literal lines and eleven semantic/source dimensions per line**, zero #504 source-code credit. Full #267 historical/pinned/post-pin remains incomplete.
+
+Cumulative distinct #504 direct coverage **7,919 file lines / 60,754 file words + 924 original GitHub metadata objects / 256,930 words**; 148/148 indexed batches, no PR diff/review/comment or previously credited comments/queue/code duplicate. No new current app bug, deletable current material, privacy incident or owner-only decision independently reproduced from this historical metadata batch. Only audit docs; Node22/SQL/Auth/browser/mobile/offline/original603 not run (DOCS_ONLY), PR-head/merged-source governance not presumed PASS before observed. No app, original603, member, provider, Auth/Edge/SQL, Locked, queue, main/release, Netlify or production changes.
+
+**NEXT:** [historical PR #749](https://github.com/Schulzet3/The-Dial-In-Collective/pull/749), title word **1**, then complete description. GitHub PR comments/reviews/diffs, remaining issue comments, Actions logs/artifacts, full tags/history/tree/binary drift and delegated #267 gaps remain unreviewed. Issue #504 **OPEN / IN_PROGRESS**.
