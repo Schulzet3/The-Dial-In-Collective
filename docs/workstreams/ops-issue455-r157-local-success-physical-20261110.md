@@ -13,3 +13,7 @@ Next: scoped queue IN_PROGRESS intake and ledger evidence; exact PR-head Node22 
 ## Post-commit governance correction
 
 Initial PR-head approval [42785313945](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42785313945) **FAILED** its release-queue intake because a test file was erroneously listed as a deployable queue scope path. Corrected queue scope to only site/lib/model.js (deployable) while preserving focused test evidence separately. This is a docs-only following commit; earlier failure is retained, no unrun PASS. Exact new head CI required.
+
+## R157 FINAL merged-source CI receipt (following docs-only reconciliation)
+
+Initial PR approval failure 42785313945 was corrected by limiting queue deployable scope to site/lib/model.js; full focused tests remain evidence-only. Exact PR-head 1a5fb02bcc453fca310272c0d935d5ed3715ff6e Node22 42785553513 3,385 PASS/0 FAIL/6 SKIP, all five R157 PASS, lint PASS, approval 42785553860, security 42785553845, isolated SQL 42785553520, cloud/browser 42785553935 SUCCESS (applicable browser steps genuinely executed). Original frozen603 SKIPPED. PR #1802 nonforce squash merged 1df0a4dae38fcc2937bab18d8428b10a383aea42 onto development; exact six original merged Git blob hashes identical to tested head; merged Node22 42786065900 3,385 PASS/0 FAIL/6 SKIP, merged approval 42786065890, browser 42786066030 SUCCESS. Queued READY in DEVELOPMENT only, with no publication or production writes. Next disjoint source/UX review; Issue #455 remains OPEN.

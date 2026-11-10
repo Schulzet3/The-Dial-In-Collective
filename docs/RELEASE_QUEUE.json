@@ -11047,24 +11047,35 @@
     {
       "id": "DIC-Q-455-local-success-grind-temp-eligibility",
       "issue": 455,
-      "pr": null,
+      "pr": 1802,
       "title": "Exclude historical invalid grind and recorded temperature from measured all-green Coffee overview",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "1df0a4dae38fcc2937bab18d8428b10a383aea42",
       "scope_paths": [
         "site/lib/model.js"
       ],
       "tests": [
         "R455-157 bounded source inspection reproduces model.hasLocalSuccess invalid-grind/temp green overview discrepancy; safe code+5 focused synthetic regressions committed with journal at b7c46ac56947936f2701d8268fb690718d704159. Unexecuted at intake.",
         "Exact source Node22, applicable browser/mobile/offline, isolated SQL/auth and PR governance NOT YET VERIFIED.",
-        "Initial PR-head approval/governance run42785313945 FAILED queue intake because tests/*.mjs was incorrectly included in deployable scope_paths; exact corrective queue-only intake removes test path while retaining regression test evidence and preserving failure receipt. Retest required."
+        "Initial PR-head approval/governance run42785313945 FAILED queue intake because tests/*.mjs was incorrectly included in deployable scope_paths; exact corrective queue-only intake removes test path while retaining regression test evidence and preserving failure receipt. Retest required.",
+        "Final exact PR-head 1a5fb02bcc453fca310272c0d935d5ed3715ff6e: Node22/lint/build 42785553513 SUCCESS 3,385 PASS/0 FAIL/6 intentional SKIP, all five R157 tests PASS; approval 42785553860 SUCCESS after initial 42785313945 queue-scope failure fixed, security 42785553845 SUCCESS, SQL/signed-JWT 42785553520 SUCCESS, cloud/mobile/browser 42785553935 SUCCESS (targeted cloud tests NOT_APPLICABLE). Frozen original603 job SKIPPED, not passed.",
+        "PR #1802 nonforce SQUASH MERGED into development 1df0a4dae38fcc2937bab18d8428b10a383aea42 over original development e951531567825ca688c9772628a4d8f09736487f; all six merged Git blobs byte-identical to passing head, no unrelated paths. Original code model Git blob 5ea712305d9ba0f948ef3aa2d576dd27aa51b31c -> merged 00c027c5f10d938fa2cc050572286eb9570817de.",
+        "Exact merged-source Node22/lint 42786065900 SUCCESS: 3,385 pass, 0 fail, 6 intentional skip, all five R157 tests PASS; merged approval 42786065890 SUCCESS and browser/mobile 42786066030 SUCCESS. PR-head isolated SQL tests not repeated on merge because no SQL changed; source code/test blobs identical. No live SQL/Auth/Edge/member/provider writes, publication, Netlify or policy change."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact PR-head CI and merged-source verified checks pending. No READY designation until successful checks and nonforce integration."
+      "ci_runs": [
+        42785313945,
+        42785553513,
+        42785553860,
+        42785553845,
+        42785553520,
+        42785553935,
+        42786065900,
+        42786065890,
+        42786066030
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Locked-compatible source-only guard, preserves History/all five original taste ratings, no live providers, data migration, product redesign, release or publication. R455-157."
+      "notes": "Locked-compatible source-only guard, preserves History/all five original taste ratings, no live providers, data migration, product redesign, release or publication. R455-157.\nR157 FINAL: development-only READY at exact merged 1df0a4dae38fcc2937bab18d8428b10a383aea42; no approval to deploy; initial intake failure preserved and fixed. R157 final reconciliation separate docs-only PR."
     }
   ],
   "history": [
