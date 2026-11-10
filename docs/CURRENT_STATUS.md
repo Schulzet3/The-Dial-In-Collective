@@ -1,3 +1,6 @@
+## November 10, 2026 — #1756 source notification fixes VERIFIED, NOT DEPLOYED [skip netlify]
+- PR1776 merged 1fa8ddc9d886025e404f936b75a106864916793b; exact head 5692ed2def92c097b5b07ace25d6673c3d7d3ee9 six CI pass, postmerge selective retries Node/browser pass. Signed-in Admin Settings gear/row and portal show email-verified signup approvals plus coffee review/conflicts and unfinished deletions; role/privacy/offline/390px Light/Dark tested synthetically. Existing accounts retained, old production invitation tokens still live until separately authorized Publish with verified encrypted backup/recovery; #1756 issue remains open.
+
 ## November 10, 2026 UTC — #455 R455-153 SAFE Log Shot timestamp recency correction READY, not deployed [skip netlify]
 
 - Verified deterministic local/offline integrity gap: newly supplied nonparseable timestamps were saved but excluded from latest measured recommendation/prefill. New `saveShot` guard rejects explicitly malformed new timestamps before any state mutation; omitted timestamp still defaults to now. Existing saved same-coffee ID retains immutable historical replay even with malformed legacy dates; original notes/five taste scores/history unchanged.

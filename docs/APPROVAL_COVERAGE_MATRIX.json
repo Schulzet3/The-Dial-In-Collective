@@ -2,7 +2,7 @@
   "schema_version": 1,
   "authority": "docs/MASTER_SPECIFICATION.md + docs/DECISION_LEDGER.json; explicit later owner supersessions govern",
   "coverage_policy": "New current_owner_ keys require deliberate inventory classification. Source assertions are not proof of every runtime or device behavior. Preserve all historical evidence in the exact archived matrix.",
-  "reconciled_at_utc": "2026-11-03",
+  "reconciled_at_utc": "2026-11-10",
   "historical_snapshot": "docs/archive/2026-10-23-reconciliation/APPROVAL_COVERAGE_MATRIX.previous.json",
   "historical_snapshot_blob_sha": "a0c0aa74b70152b4a8fc42393aa7b266a3290202",
   "owner_decision_key_inventory": [
@@ -904,8 +904,8 @@
       "decision_key": "current_owner_signup_admin_approval_20261109",
       "issue": 1756,
       "scope": "Source-only new Auth pending approval, administrator review and notification UI; remove obsolete invitations without altering any existing member accounts, private shots, Community or password validation; production deletion awaits explicit owner Publish and verified fresh offsite backup.",
-      "implementation": "SOURCE_READY_NOT_DEPLOYED",
-      "device_acceptance": "RETIRED_NOT_REQUIRED: physical-device owner acceptance stays retired; isolated SQL/Node/Chromium high-risk checks required before READY, no real destructive test, no off-app push claim.",
+      "implementation": "SOURCE_READY_NOT_DEPLOYED_AT_1fa8ddc9d886025e404f936b75a106864916793b",
+      "device_acceptance": "Synthetic 390px Chromium Light/Dark Settings/Admin badge and role, offline, stale session tests PASS. Real device and live production NOT TESTED. Exact PR head six relevant CI, postmerge selective cancelled-job rerun PASS; frozen603 N/A.",
       "assertions": [
         {
           "path": "site/cloud/main.js",
@@ -946,6 +946,38 @@
         {
           "path": "tests/admin-invitation-controls.test.mjs",
           "contains": "new-account approval and attention"
+        },
+        {
+          "path": "site/cloud/client.js",
+          "contains": "async adminAttentionCounts()"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "this.adminAttentionBadge()"
+        },
+        {
+          "path": "site/cloud/main.js",
+          "contains": "'pending_verified_accounts'"
+        },
+        {
+          "path": "site/admin/view.js",
+          "contains": "count('pending_verified_accounts')"
+        },
+        {
+          "path": "site/admin/main.js",
+          "contains": "'pending_verified_accounts'"
+        },
+        {
+          "path": "site/styles.css",
+          "contains": ".settings-attention-trigger"
+        },
+        {
+          "path": "tests/cloud-admin-attention.test.mjs",
+          "contains": "Nonadmins, unadmitted accounts and offline views cannot request Admin counts"
+        },
+        {
+          "path": "tests/browser/cloud_owner_qa.py",
+          "contains": "issue1756_admin_badge_mobile_dark.png"
         }
       ]
     }
@@ -2216,12 +2248,24 @@
   },
   "current_owner_signup_admin_approval_20261109": {
     "decision_id": "ACCESS-ADMIN-SIGNUP-APPROVAL-NO-INVITES-20261109",
-    "state": "IN_PROGRESS_SOURCE_NOT_DEPLOYED",
+    "state": "SOURCE_READY_NOT_DEPLOYED",
     "issue": 1756,
-    "scope": "New verified signups require explicit admin approval; remove all invite-code UI/RPC and historical tokens at future authorized production release, preserve all existing admitted accounts, display in-app actionable alerts; optional browser permission only.",
+    "scope": "Admin-only signup approval and verified-only task alerts on main Settings/Admin entry; old invite codes retired only on future authorized Publish with encrypted recovery.",
     "release": "NOT_AUTHORIZED",
     "source_branch": "feature/issue1756-admin-approval-no-invites",
-    "source_head": "ba75fb4d0f6f25f9dfeed8ce822c3ead5ae41ebe",
-    "real_device_acceptance": "NOT_PERFORMED"
+    "source_head": "1fa8ddc9d886025e404f936b75a106864916793b",
+    "real_device_acceptance": "NOT_PERFORMED",
+    "tested_head": "5692ed2def92c097b5b07ace25d6673c3d7d3ee9",
+    "pr": 1776,
+    "ci_runs": [
+      42758411632,
+      42758411688,
+      42758411873,
+      42758411831,
+      42758411542,
+      42758790255,
+      42758790069,
+      42758789992
+    ]
   }
 }
