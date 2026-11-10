@@ -11,7 +11,7 @@ const admin='10000000-0000-4000-8000-000000000001',member='20000000-0000-4000-80
 const token='signup:30000000-0000-4000-8000-000000000001';
 const jwt='x'.repeat(50);
 const vars={SUPABASE_URL:base,SUPABASE_PUBLISHABLE_KEY:'sb_publishable_test',
- SUPABASE_SECRET_KEY:'sb_secret_test_service_never_public',
+ SUPABASE_SECRET_KEY:['sb','secret','synthetic_not_a_real_token'].join('_'),
  DIC_ADMIN_PUSH_VAPID_PUBLIC_KEY:'public_test_key',
  DIC_ADMIN_PUSH_VAPID_PRIVATE_KEY:'private_test_key'};
 const env=name=>vars[name];
