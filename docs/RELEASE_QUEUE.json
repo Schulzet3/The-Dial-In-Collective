@@ -11493,6 +11493,30 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
       "notes": "Admin-only malformed NULL input fall-through; not a demonstrated live deletion. Source-only additive migration and disposable synthetic regression; do not deploy absent owner one-use publish approval.\nRun152: Only source READY after independently verifying 8/8 applicable PR-head and merged SHA-bound CI successes and matching all six changed source Git blobs; no production migration, member delete, or actual hosted Auth sessions. Initial pre-correction SQL attempt 42888872639 failed (missing statement delimiters), corrected at PR head a713b, all final checks success. FKs NO ACTION separately protect referential integrity for canonical Community/merged data; no proven production loss."
+    },
+    {
+      "id": "DIC-Q-509-import-credential-field-separator-guard",
+      "issue": 509,
+      "pr": 1911,
+      "title": "Reject separator-spelled credential keys in native backup import before archiving private source JSON",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261110205500_dic_import_credential_field_separator_guard.sql"
+      ],
+      "tests": [
+        "Run153 live SQL semantics / read-only truth table: api-key, access-token, refresh.token and secret.key currently bypass underscore-only key normalization; one private stored import batch counted without inspecting source or claiming an incident.",
+        "New final-schema synthetic `supabase/tests/import_credential_key_separators.sql` tests seven credential spellings, nested token key, benign coffee-name false-positive; exact-source isolated PostgreSQL/JWT, Node22, browser, governance CI PENDING."
+      ],
+      "ci_runs": [
+        42899103968,
+        42899105276
+      ],
+      "blockers": [
+        "Initial PR-head SQL failed because historical native_import.sql runs before latest migrations; relocated tests to final-schema regression. Initial governance failed untracked app migration; this queue item repairs intake. New source-bound CI PENDING."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
+      "notes": "Development-only guarded pg_get_functiondef substitution; no private imported JSON inspected, no live production SQL/data/Auth/Storage/Edge changes or publication. Preserve immutable migrations, backups and Locked privacy rules. Queue remains IN_PROGRESS pending exact PR/merged CI."
     }
   ],
   "history": [

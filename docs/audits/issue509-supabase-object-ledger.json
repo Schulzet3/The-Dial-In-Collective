@@ -3648,6 +3648,39 @@
       "new_migration": "READY_DEVELOPMENT_ONLY",
       "provider_writes": 0,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 UTC run153 provider import credential key separator hardening staged",
+      "source_sha": "040dc3458f422e2e7b665ac1532a12f486ca781b",
+      "evidence": "docs/audits/issue509-provider-import-credential-field-guard-2026-11-10-run153.json",
+      "scope": "7 complete SQL bodies; null-free credential key name truth table; additive development-only import validator migration & synthetic tests; CI PENDING",
+      "new_findings": 1,
+      "provider_writes": 0,
+      "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 UTC Run153 CI diagnostic + source-bound repair",
+      "source_sha": "5bb63bcdd18abc2f66a67d61b56937cf5bb0deed",
+      "evidence": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/1911",
+      "scope": "SQL 42899103968 FAILED historical test phase before new migration; governance 42899105276 FAILED missing queue intake. Move new test to full-schema suite, restore historical immutable-phase test, queue IN_PROGRESS.",
+      "provider_writes": 0,
+      "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 UTC Run153 source-bound SQL terminator correction",
+      "source_sha": "a85789e20d4bf7c521f5781336c7e50fef3c9179",
+      "evidence": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42899495806",
+      "scope": "Isolated SQL failed due pg_get_functiondef missing terminal semicolon; corrected only guarded reconstructed CREATE FUNCTION EXECUTE; no production mutation.",
+      "provider_writes": 0,
+      "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 UTC Run153 regex empty replacement SQL escaping correction",
+      "source_sha": "8375fcae908cb204eff05732ea6adc03f0f40f0a",
+      "evidence": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42899736777",
+      "scope": "Fix malformed generated SQL literal in guarded migration; exact SQL logging diagnosis and correction",
+      "provider_writes": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -16468,5 +16501,90 @@
       42889504431
     ],
     "closure_receipt": "docs/audits/issue509-run152-exact-source-ci-closure-2026-11-10.json"
+  },
+  "provider_import_credential_key_run153": {
+    "status": "GITHUB_DEVELOPMENT_ONLY_STAGED_CI_PENDING",
+    "source_development_parent_sha": "040dc3458f422e2e7b665ac1532a12f486ca781b",
+    "receipt_path": "docs/audits/issue509-provider-import-credential-field-guard-2026-11-10-run153.json",
+    "source_objects_reviewed": 7,
+    "source_chars": 31455,
+    "source_records": [
+      {
+        "signature": "private.apply_prototype_import(u uuid, doc jsonb)",
+        "md5": "479cc03d9ea9862176b0c663d99369b0",
+        "characters": 16423,
+        "semantic_verdict": "CONFIRMED_SEPARATOR_VARIANT_CREDENTIAL_FIELD_GAP; FIX_TARGET_WITH_SYNTHETIC_REGRESSION"
+      },
+      {
+        "signature": "private.dic_claim_first_style_prompt_impl(p_library_entry_id uuid)",
+        "md5": "31f06eec62a745bf998b749af71816db",
+        "characters": 940,
+        "semantic_verdict": "MEMBER_OWNERSHIP_FIRST_UNLOGGED_PROMPT_ATOMIC_ON_CONFLICT; NO_NEW_DEFECT"
+      },
+      {
+        "signature": "private.dic_confirm_coffee_existing(mid uuid, p jsonb)",
+        "md5": "0fcc44bb8a05f46e87694d3474eb7c23",
+        "characters": 3239,
+        "semantic_verdict": "ADMITTED_MEMBER_AND_IDEMPOTENT_RECEIPT; OWNER_AND_CANONICAL_COFFEE_CROSSCHECK; NO_NEW_DEFECT"
+      },
+      {
+        "signature": "private.dic_member_retry_pending_approval(p_submission_id uuid, p_expected_revision bigint)",
+        "md5": "5ebb55ad50529a080b3c2332a29d3309",
+        "characters": 2166,
+        "semantic_verdict": "OWNER_REVISION_BOUND_PENDING_CONFLICT_RETRY; NO_NEW_DEFECT"
+      },
+      {
+        "signature": "private.dic_submit_coffee_auto(mid uuid, p jsonb)",
+        "md5": "e2b11c83a686a5a9949699cd23b52e13",
+        "characters": 3771,
+        "semantic_verdict": "OWNER_SCOPE_IDEMPOTENT_COFFER_SUBMIT_AND_DUPLICATE_BRANCHES; NO_NEW_DEFECT"
+      },
+      {
+        "signature": "private.import_operation(expected_owner uuid, doc jsonb, save boolean, review_hash text, recovery_saved boolean)",
+        "md5": "b684a6af862302d9d4bb7c212208f5e0",
+        "characters": 3124,
+        "semantic_verdict": "AUTHORIZED_MEMBER_AND_SOURCE_HASH_GATE; ARCHIVES_WHOLE_BACKUP_AFTER_APPLY; IMMUTABLE_OLD_RECORDS"
+      },
+      {
+        "signature": "private.rename_setup(mid uuid, p jsonb)",
+        "md5": "d5efbc70d20f75d6e3aeea4b64ab078b",
+        "characters": 1792,
+        "semantic_verdict": "OWNER_REVISION_BOUND_RENAME_WITH_IDEMPOTENT_RECEIPT; NO_NEW_DEFECT"
+      }
+    ],
+    "confirmed_new_defects": 1,
+    "source_changes": [
+      "supabase/migrations/20261110205500_dic_import_credential_field_separator_guard.sql",
+      "supabase/tests/native_import.sql"
+    ],
+    "production_writes": false,
+    "new_first_time_words": 0,
+    "baseline_complete": false,
+    "next": "Run exact isolated native_import.sql and full applicable security/Node22/browser/governance CI at PR head; repair failures, safely merge and verify merged SHA/CI, then separate READY queue closure. No production deploy."
+  },
+  "provider_import_credential_key_run153_ci_repair": {
+    "status": "PR_HEAD_REPAIRED_CI_PENDING",
+    "source_pr_head": "5bb63bcdd18abc2f66a67d61b56937cf5bb0deed",
+    "pr": 1911,
+    "initial_failure_sql_run": 42899103968,
+    "initial_failure_governance_run": 42899105276,
+    "diagnosis": "historical native_import.sql executes immediately after 20261012183845 before new 20261110 migration; queue requires IN_PROGRESS item for deployable migration",
+    "repair": "Revert historical test to parent blob; new final-schema synthetic import_credential_key_separators.sql invoked after all migrations; tracked queue row IN_PROGRESS, with only migration as deployable scope",
+    "no_provider_writes": true,
+    "baseline_complete": false,
+    "next": "Verify exact PR-head 4 relevant CI runs, repair tests, merge nonforce only after PASS",
+    "pg_get_functiondef_termination_correction": {
+      "failed_ci": 42899495806,
+      "diagnosis": "pg_get_functiondef produced CREATE FUNCTION lacking terminal semicolon; dynamic EXECUTE parsed final SQL incorrectly at JSON literal",
+      "repair": "Append semicolon after reconstructed CREATE FUNCTION expression before EXECUTE",
+      "status": "CI_PENDING"
+    },
+    "empty_regex_replacement_quoting": {
+      "failed_ci": 42899736777,
+      "observed_rendered_sql": "regexp_replace(nodes.k,'[^[:alnum:]]',','g')",
+      "corrected_expected_sql": "lower(regexp_replace(nodes.k,'[^[:alnum:]]','','g'))",
+      "status": "CI_PENDING",
+      "provider_writes": 0
+    }
   }
 }
