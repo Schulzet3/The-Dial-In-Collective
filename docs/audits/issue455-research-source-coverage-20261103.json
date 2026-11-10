@@ -1551,6 +1551,27 @@
       "factual_status": "CONTROLLED_FULL_IMMERSION_SENSORY_DESCRIPTIVE_ASSOCIATIONS_NOT_PRESSURIZED_ESPRESSO_CAUSAL_CONTROL_PRIORS_OR_PERSONAL_SWEETNESS_RATING_VALIDATION",
       "reviewed_date_utc": "2026-11-10",
       "implementation_status": "RESEARCH_ONLY_NO_APP_LOCKED_POLICY_OR_RELEASE_CHANGE"
+    },
+    {
+      "id": "LIT-2023-LAPCIKOVA-MULTIMETHOD-ESPRESSO-SENSORY",
+      "type": "peer_reviewed_primary_multimethod_coffee_sensory_analytical_comparison_not_espresso_controlled_personal_dial_in",
+      "title": "Effect of Extraction Methods on Aroma Profile, Antioxidant Activity and Sensory Acceptability of Specialty Coffee Brews",
+      "authors": "Barbora Lapcíková; Lubomír Lapcík; Petr Barták; Tomás Valenta; Katerina Dokládalová",
+      "published": "2023-11-14",
+      "journal": "Foods 2023, 12(22), 4125",
+      "doi": "10.3390/foods12224125",
+      "url": "https://www.mdpi.com/2304-8158/12/22/4125",
+      "access": "DIRECT_ORIGINAL_PUBLISHER_FULL_HTML_ABSTRACT_METHODS_RESULTS_CONCLUSIONS_FUNDING_READ_20261110; PDF_BINARY_HASH_FIGURE_PIXELS_SUPPLEMENT_SPREADSHEETS_RAW_PANEL_RESPONSES_NOT_VERIFIED",
+      "review_status": "SUBSTANTIVE_DIRECT_PRIMARY_FULL_PUBLISHER_SECTION_REVIEW; CAUSAL_ESPRESSO_NUMERIC_POLICY_UNSUPPORTED",
+      "evidence_grade": "PEER_REVIEWED_FIVE_COFFEE_FOUR_METHOD_COMPARISON_N7_SENSORY; SEVERELY_CONFOUNDED_METHOD_RECIPE_AND_ROAST_GRIND; NOT_PERSONAL_DIC_VALIDATION",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Original publisher HTML read directly in browser; full HTML bytes/PDF, supplemental tables, figure pixels and raw sensory entries not rehashed or independently audited.",
+      "claims_verified_externally": "Methods 2.3/2.5 espresso 7g to 25mL KRUPS 15 bar 90C 30s, method-specific grind/roast. Seven-person panel SCA categories not five app scales. Panel preference for selected espresso/cold brew; Colombia CB 91.86+/-1.82. Abstract and Results use 86.31+/-0.70 umol/100mL TEAC; Conclusion uses mmol/100mL (1000x unit discrepancy). Does not identify isolated mechanical causal effect or member-specific preference.",
+      "current_app_crosswalk": "Direct pinned current site/lib/constants.js five scales, Turbo and Fast-Flow, prototype priors; engine.js single-context recipe guidance and model.js measured history. No evidence for universal science-derived dose/yield/temp/grind target or a confidence value.",
+      "claims_pending": "Recheck original PDF tables and figure pixels, statistical derivation, supplementary chromatograms/GC-MS datasets, panel raw responses and authors' TEAC unit correction.",
+      "provenance_review_receipt": "docs/workstreams/ops-issue455-r170-multimethod-coffee-sensory-20261110.md",
+      "reviewed_against_development_sha": "364a4b6b45974ba0f02e7d7c0ee4c272306740ba",
+      "github267_literal_review_credit": 0
     }
   ],
   "evidence_checks": [
@@ -4642,6 +4663,24 @@
       "current_app": "DIC's five self-ratings are not pH readouts or objective chemical confidence; no scientific authorization to advise universal brew temperature change.",
       "result": "BOUND_TRANSFER_TO_IMMERSION_DESCRIPTIVE_CONTEXT; NO_USER_FACING_BEHAVIOR_OR_LOCKED_SUPERSESSION",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-170-A",
+      "source": "LIT-2023-LAPCIKOVA-MULTIMETHOD-ESPRESSO-SENSORY",
+      "claim": "Five Arabica coffees tested in four method-specific roast/grind/time/dose/water protocols; espresso KRUPS 7g->25mL 15bar 90C 30s; no isolated randomized espresso dial-in actuator or universal optimum.",
+      "grade": "DIRECT_PRIMARY_ORIGINAL_METHODS_SECTIONS_2_1_2_3_2_5; CONFOUNDED_RECIPE_COMPARISON",
+      "current_app": "Existing Locked ratio/style priors and controllability remain unchanged.",
+      "result": "FACT_OF_REPORTED_METHODS_VERIFIED_NOT_CAUSAL_ESPRESSO_ADVICE",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-170-B",
+      "source": "LIT-2023-LAPCIKOVA-MULTIMETHOD-ESPRESSO-SENSORY",
+      "claim": "Seven SCA-style tasters, not DIC five personal taste dimensions; coffee/method-specific preferences. Publisher abstract/Results express 86.31+/-0.70 umol/100mL antioxidant TEAC while Conclusions say mmol/100mL (1000-fold unit mismatch). Cannot use chemistry as model taste-confidence or health claim.",
+      "grade": "DIRECT_PRIMARY_2_10_2_11_3_1_3_5_4_TEXT_INTERNAL_UNIT_INCONSISTENCY_VERIFIED; FIGURES_RAW_DATA_UNVERIFIED",
+      "current_app": "Personal five-taste inputs and evidence limitation retained.",
+      "result": "RESEARCH_ONLY_UNIT_CAUTION; NO_POLICY_OR_RUNTIME_CHANGE",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [],
@@ -4750,17 +4789,18 @@
     "R455-162 @9743126ad5f920f5cd56f9d5f654fb643312801f: independently reviewed original 2026 Lo Vecchio et al. 3-brewer coffee study (DOI 10.3390/separations13060166): single blend, non-equivalent dose/yield/apparatus, pooled composite chemistry, 10-person duplicate sensory panel, manufacturer-provided test device and consultancy disclosed; neither 10s/nominal15bar nor sweetness panel is universal DIC espresso advice. 90 sources / 240 bounded checks / 123 proposals; no safe runtime bug, Locked/queue/main/release/Netlify/provider change or #267 literal-line credit; original publisher PDF/raw data and standalone S019 PDF not accessed; Git PR/CI/merge to verify.",
     "R455-164 @eeec5a9bb88f73c69ab4eccaab46e8f14462d534: source repro showed four historical explicit invalid grinder/temp records can falsely count for mandatory outlier prompt. Same-commit engine/test/source-ledger/journal staged; run exact PR-head Node22 and applicable governance, repair failures, nonforce merge, readback merged CI, reconcile queue/status and Issue #455. No numeric/Locked/product/production change. #267 line credit 0; S019 original inaccessible.",
     "R455-164 FINAL verified code PR #1857 head 9f8d713... nonforce merged c26a9a9... four exact blobs and 3529 Node22 PASS/0 FAIL/6 SKIP both head/merged, browser/mobile/offline/SQL/security/approval applicable PASS. New queue DIC-Q-455-outlier-explicit-controls READY in development only; no deployment. Continue separate claim-level source inventory and narrow SAFE UX review under live SHA; original standalone S019 still inaccessible; no #267 credit.",
-    "R455-169 starting at current dev 040dc3458f422e2e7b665ac1532a12f486ca781b: direct original Batali et al Foods 2022 DOI 10.3390/foods11162440 primary HTML review of 27 cold/full immersion conditions and 10 trained judges, NOT pressure espresso or app five ratings. 93 sources/254 evidence checks/130 proposals. No code/Locked/product/production change. Docs PR/head/merged CI not yet verified; S019 standalone inaccessible; #267 zero credit."
+    "R455-169 starting at current dev 040dc3458f422e2e7b665ac1532a12f486ca781b: direct original Batali et al Foods 2022 DOI 10.3390/foods11162440 primary HTML review of 27 cold/full immersion conditions and 10 trained judges, NOT pressure espresso or app five ratings. 93 sources/254 evidence checks/130 proposals. No code/Locked/product/production change. Docs PR/head/merged CI not yet verified; S019 standalone inaccessible; #267 zero credit.",
+    "R455-170 pinned development 364a4b6b45974ba0f02e7d7c0ee4c272306740ba: direct original Lapcikova et al Foods 2023 Methods/Results/Conclusions reviewed. Report uses 7g/25mL/15bar/90C/30s method-specific espresso, seven sensory raters and compound assays; 1000x TEAC umol vs mmol mismatch between abstract/results and conclusion. No universal app five-scale or espresso actuator rule; ledger 94/256/131. Docs branch review and exact CI/merge pending, no app changes, S019 unavailable, #267 zero line credit."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-169",
-    "source_sha": "040dc3458f422e2e7b665ac1532a12f486ca781b",
+    "run_id": "R455-170",
+    "source_sha": "364a4b6b45974ba0f02e7d7c0ee4c272306740ba",
     "issue": 455,
-    "phase": "2022_COLD_FULL_IMMERSION_PRIMARY_SOURCE_BOUND_DOCS_PR_CI_UNVERIFIED",
+    "phase": "PRIMARY_MULTIMETHOD_ESPRESSO_SENSORY_DIRECT_REVIEW_DOCS_BRANCH_PR_CI_NOT_YET_VERIFIED",
     "source_counts": {
-      "sources": 93,
-      "evidence_checks": 254,
-      "proposals": 130
+      "sources": 94,
+      "evidence_checks": 256,
+      "proposals": 131
     },
     "release_state": "NO_DEPLOYABLE_DELIVERABLE",
     "original_s019": "UNAVAILABLE_NOT_REVIEWED",
@@ -7501,6 +7541,28 @@
       "owner_approval_now_required": false,
       "implementation": "DOCUMENTATION_ONLY_NO_RUNTIME_FIX",
       "test_plan": "Read primary Methods/Results/Discussion/Conclusions; source-bound constants/engine/model crosswalk. No runtime code changed; no Node, device, provider or actual physical tasting trials claimed.",
+      "release_queue_status": "NO_DEPLOYABLE_DELIVERABLE",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-170-MULTIMETHOD-CHEMISTRY-NOT-DIC-TASTE-OPTIMUM",
+      "finding": "Method-specific grind/roast/dose/time and n=7 SCA-style sensory panel cannot define a universal DIC per-shot optimum. Source contains an apparent TEAC mmol vs umol unit inconsistency.",
+      "evidence": [
+        "R455-EV-CIT-170-A",
+        "R455-EV-CIT-170-B"
+      ],
+      "severity": "P3_SCIENTIFIC_TRANSFER_AND_SOURCE_INTERNAL_UNIT_WARNING_NO_PROVEN_APP_BUG",
+      "user_benefit": "Avoid false universal grind/temperature/ratio corrections, 1000x chemistry reporting error and inflated science-confidence badges.",
+      "source_provenance": "Lapcikova et al Foods 2023 DOI 10.3390/foods12224125; direct original publisher article Methods/Results/Conclusions, full text not byte hashed.",
+      "current_locked": "All five taste inputs, original personal history, independent espresso styles Turbo/Fast-Flow, one controllable change, no universal numeric science targets.",
+      "current_app": "Direct current code crosswalk to site/lib/constants.js, site/lib/model.js, site/lib/engine.js; no reproducible bug from this paper.",
+      "proposed_change": "RESEARCH ONLY. Do not change app. If future owner requests numerical science-derived advice, require isolated real espresso sensory trials and explicit Locked-policy approval; resolve source unit discrepancy before any mention of numerical TEAC.",
+      "evidence_grade": "PEER_REVIEWED_ORIGINAL_REPORT_BUT_N7_SENSORY_AND_RECIPE_CONFOUNDING; REPORTED_UNIT_INCONSISTENCY",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "DOCUMENTATION_ONLY_NO_RUNTIME_CHANGE",
+      "test_plan": "Direct publisher Methods/Results/Conclusions and current live source crosswalk; no app tests or physical trials performed. Required PR/merged governance pending.",
       "release_queue_status": "NO_DEPLOYABLE_DELIVERABLE",
       "github267_literal_review_credit": 0,
       "production_deployed": false
