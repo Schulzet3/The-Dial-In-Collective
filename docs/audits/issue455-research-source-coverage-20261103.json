@@ -4575,7 +4575,7 @@
       "claim": "Prefill used archived dose/yield/time alone when an explicitly unloggable grinder or temperature could still seed new-shot dose, grind or temperature.",
       "grade": "DIRECT_CURRENT_CODE_ANALYSIS_NO_REAL_MEMBER_INCIDENT",
       "current_app": "measuredRecipeShots excluded only invalid dose/yield/time; doses/grinds/temps independently filtered.",
-      "result": "SYNTHETIC_REGRESSIONS_AUTHORED_EXACT_SOURCE_CI_PENDING",
+      "result": "FIVE_GROUP_TESTS_PASS_EXACT_HEAD_42879075862_AND_MERGE_42879850975_NODE22_3586_PASS_0_FAIL_6_SKIP; HEAD_BROWSER_SQL_SECURITY_APPROVAL_SUCCESS; MERGED_BROWSER_SUCCESS; MERGED_APPROVAL_CANCELLED_NOT_PASS",
       "owner_approval": false
     },
     {
@@ -4584,7 +4584,7 @@
       "claim": "Filter invalid recorded optional controls only for Log Shot prefill; keep missing optional legacy readings and inclusive boundary/shots with their own historical espresso range.",
       "grade": "FIVE_SYNTHETIC_NEGATIVE_POSITIVE_NODE22_TEST_GROUPS_CI_PENDING",
       "current_app": "Original archived notes, measured shots and five ratings preserved.",
-      "result": "AUTHORED_NOT_EXECUTED",
+      "result": "FIVE_GROUP_TESTS_PASS_EXACT_HEAD_42879075862_AND_MERGE_42879850975_NODE22_3586_PASS_0_FAIL_6_SKIP; HEAD_BROWSER_SQL_SECURITY_APPROVAL_SUCCESS; MERGED_BROWSER_SUCCESS; MERGED_APPROVAL_CANCELLED_NOT_PASS",
       "owner_approval": false
     }
   ],
@@ -4695,15 +4695,15 @@
   ],
   "latest_review_checkpoint": {
     "run_id": "R455-167",
-    "source_sha": "af1a56d57b8472d7a8686b6336fe11c048f76538",
+    "source_sha": "11e2735ebbbd19d9ceb0fc9afab0b8252b334dbe",
     "issue": 455,
-    "phase": "SAFE_PREFILL_FIX_AUTHORED_EXACT_PR_CI_PENDING",
+    "phase": "SAFE_PREFILL_FIX_MERGED_TESTED_HEAD_AND_MERGED_NODE_BROWSER_VERIFIED_DOCS_GOVERNANCE_PENDING",
     "source_counts": {
       "sources": 92,
       "evidence_checks": 250,
       "proposals": 128
     },
-    "release_state": "IN_PROGRESS_NOT_DEPLOYED",
+    "release_state": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED_DOCS_CHECK_PENDING",
     "original_s019": "UNAVAILABLE_NOT_REVIEWED",
     "github267_literal_review_credit": 0
   },
@@ -7392,11 +7392,13 @@
       "evidence_grade": "DIRECT_SOURCE_BOUNDED_SYNTHETIC_REGRESSION_NOT_REAL_MEMBER_INCIDENT",
       "approval_required_for_behavior_change": false,
       "owner_approval_now_required": false,
-      "implementation": "BRANCH_AUTHORING_EXACT_PR_HEAD_CI_AND_MERGE_PENDING",
-      "test_plan": "Five focused Node22 synthetic tests; applicable browser/mobile/offline/accessibility/SQL/privacy/governance; no production test users.",
-      "release_queue_status": "IN_PROGRESS_NOT_READY",
+      "implementation": "PR1889_TESTED_HEAD_4d7f8add0fbc1d6d7ca08f1a3dd3682b5c9e924a_NONFORCE_SQUASH_MERGED_11e2735ebbbd19d9ceb0fc9afab0b8252b334dbe_EXACT_FOUR_BLOBS_IDENTICAL_HEAD_AND_MERGE",
+      "test_plan": "Five direct positive/negative Node22 groups PASS on exact PR-head 42879075862 and merged 42879850975: 3586 PASS, 0 FAIL, 6 intentional SKIP each. PR-head browser/offline 42879075745, isolated SQL 42879075957, source security 42879075919, approval 42879075822 SUCCESS. Exact merge mobile/browser 42879850988 SUCCESS. Merged approval 42879850983 CANCELLED, NOT PASS; docs-only reconciliation governance pending. Frozen original603 42879075737 SKIPPED.",
+      "release_queue_status": "DIC-Q-455-prefill-archived-control-integrity_READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
       "github267_literal_review_credit": 0,
-      "production_deployed": false
+      "production_deployed": false,
+      "merge_sha": "11e2735ebbbd19d9ceb0fc9afab0b8252b334dbe",
+      "pr_number": 1889
     }
   ],
   "changeScope": {
