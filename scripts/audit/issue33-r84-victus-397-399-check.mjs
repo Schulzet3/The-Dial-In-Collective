@@ -25,7 +25,8 @@ const originals={
 };
 export function selectedVictus(markup,headings,number){
   const c=originals[number];if(!c)throw Error('unknown_original603');
-  const t=norm(cleaned(markup)),includes=v=>t.includes(norm(v));
+  const sourceWithoutTitle=String(markup||'').replace(/<h1\b[^>]*>[\s\S]*?<\/h1>/giu,' ');
+  const t=norm(cleaned(sourceWithoutTitle)),includes=v=>t.includes(norm(v));
   const names=Array.isArray(headings)?headings:[];
   return {uniqueSelected:names.length===1&&norm(names[0])===norm(c.name),
     selectedNarrative:includes(c.narrative),selectedSensory:includes(c.sensory),
