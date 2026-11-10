@@ -11528,25 +11528,34 @@
     {
       "id": "DIC-Q-455-make-current-explicit-control-integrity",
       "issue": 455,
-      "pr": null,
+      "pr": 1928,
       "title": "Keep explicitly invalid recorded grinder or optional temperature out of local Current and History Make Current",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "8df0ad57565377b4e8d61035f938eda4e9f0a350",
       "scope_paths": [
         "site/lib/engine.js",
         "site/cloud/shot_card.js",
         "site/cloud/main.js"
       ],
       "tests": [
-        "Original source-level discrepancy documented; five new direct positive/negative Node22 groups authored but NOT YET RUN.",
-        "Applicable exact PR-head and merged Node22/lint/build, mobile/Chromium/offline/a11y, isolated SQL/security/approval checks PENDING."
+        "Source-bound PR-head and merged-source Node22 3629 tests: 3623 PASS, 0 FAIL, 6 intentional SKIP (R171 five new positive/negative cases PASS); PR-head validate 42918987481 and merged validate 42919460283 SUCCESS.",
+        "Source-bound PR-head mobile/browser/offline/UX 42918987597, isolated SQL 42918987603, approval 42918987447 and security 42918987446 completed SUCCESS. Exact merged-source UX 42919463996 and governance 42919460291 completed SUCCESS.",
+        "Reviewed seven code/test/journal/ledger/queue Git blobs identical at PR head 741fe2cae4e9c39a1e114de317bedd3e2b2cd796 and squash merge 8df0ad57565377b4e8d61035f938eda4e9f0a350. Frozen603 42918987527 SKIPPED, NOT PASS.",
+        "Synthetic guarded five-rating, invalid grinder, optional temperature, calibration version, missing historical optional values and inclusive control behavior; no physical tasting, production signed-in workflow or measured quality asserted."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact PR-head CI, nonforce merge and merged-source validation not yet verified"
+      "ci_runs": [
+        42918987481,
+        42918987597,
+        42918987603,
+        42918987447,
+        42918987446,
+        42919460283,
+        42919463996,
+        42919460291
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Existing Locked numeric ranges only; legacy null optional controls, five original tastes, raw shot history/notes, family alternatives, Community and privacy preserved. Development only. No deployment or live provider/member/SQL writes."
+      "notes": "SAFE Locked-compatible Make Current eligibility correction; legacy missing optionals, all five ratings, notes/history, family alternatives and privacy preserved. Source PR #1928 nonforce squash merged on development; direct current source CI verified. READY DEVELOPMENT-ONLY, not a publish/release permission. No main/release/provider/Netlify/live SQL/Auth/Edge/member mutation. R171 final journal docs/workstreams/ops-issue455-r171-final-verification-20261110.md."
     }
   ],
   "history": [
