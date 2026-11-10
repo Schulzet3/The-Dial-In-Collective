@@ -22,3 +22,5 @@
 - **Source compatibility fix (2026-11-10):** Official Supabase API-key guidance specifies modern `sb_secret_` credentials on `apikey` only, never `Authorization: Bearer`. Corrected registration and scheduled sender to use `SUPABASE_SECRET_KEY` (optional legacy JWT `SUPABASE_SERVICE_ROLE_KEY` fallback) and tested that modern server secrets are not emitted as bearer tokens or returned to browser. Requires new exact CI; old runs not reused for corrected source.
 
 - **Failure/fix:** Exact source 906eed2e security/approval runs42927082124/42927082030 FAIL because a clearly synthetic `sb_secret_` fixture resembled a live credential in security inventory (tests/admin-push-service.test.mjs line 14). Retained the synthetic runtime prefix but constructed it from harmless segments in test source; no key or credential was ever present. Re-run exact CI; no scanner weakening or key exposure.
+
+- **Synthetic test repair:** Test fake for successful Supabase REST 204 DELETE returned a non-null empty string, which Node Fetch rejects for status 204. Changed only fake response body to null, matching real HTTP semantics; no backend behavior changed. Exact CI on final SHA required.

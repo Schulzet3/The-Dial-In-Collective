@@ -87,7 +87,7 @@ test('Scheduled sender sends no push for already-seen tasks and removes deauthor
   gone.push({url,options});
   if(url.includes('/rpc/dic_admin_push_snapshot'))return Response.json({admin_ids:[],tokens:[token]});
   if(url.includes('/dic_admin_push_subscriptions?select='))return Response.json([subscription]);
-  if(options.method==='DELETE')return new Response('',{status:204});
+  if(options.method==='DELETE')return new Response(null,{status:204});
   throw Error('Unexpected: '+url);
  }});
  const result=await revoked();assert.equal(result.status,200);
