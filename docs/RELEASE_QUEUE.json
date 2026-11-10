@@ -18,16 +18,20 @@
       ],
       "tests": [
         "R87 initial PR-head official 42831269140: 16/16 positive/adversarial PASS, all three selected 403-405 exact official URLs fetched, 405 Water Process missing; strict afterproof FAIL 405_named_mountain_water_decaf.",
-        "R87 same-commit generic exact-H1/direct-own-sentence repair plus 3 focused adversarial regressions; corrected PR-head CI/official SHA and merged-source acceptance PENDING, not PASS."
+        "R87 same-commit generic exact-H1/direct-own-sentence repair plus 3 focused adversarial regressions; corrected PR-head CI/official SHA and merged-source acceptance PENDING, not PASS.",
+        "First repair head official 42832275736 FAILED: literal backslash-n in test file caused SyntaxError before public probe; approval42832275918 FAILED missing merged_source_sha key. Same-commit targeted correction, both pending rerun."
       ],
       "ci_runs": [
-        42831269140
+        42831269140,
+        42832275736,
+        42832275918
       ],
       "blockers": [
         "Source repair has not passed exact-head CI or been merged and verified."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "DEVELOPMENT ONLY; original603 full manual semantic certification incomplete, frozen original CSV/oracle/scorer untouched. No production publication or provider writes."
+      "notes": "DEVELOPMENT ONLY; original603 full manual semantic certification incomplete, frozen original CSV/oracle/scorer untouched. No production publication or provider writes.",
+      "merged_source_sha": null
     },
     {
       "id": "DIC-Q-33-original603-26-selected-unlabeled-flavor-review-context",

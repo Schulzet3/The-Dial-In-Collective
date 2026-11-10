@@ -47,7 +47,8 @@ test('neighboring Bromo blend cannot contaminate Ambler origin',()=>{
  assert.equal(r.ok,true,JSON.stringify(r));
  assert.ok(!/indonesia/i.test(r.fields.origin||''),JSON.stringify(r.fields));
 });
-\n// R87 live failure: current exact H1 + its direct decaffeination paragraph
+
+// R87 live failure: current exact H1 + its direct decaffeination paragraph
 // were overlooked; bare titles, other beans and conflicting methods stay blank.
 test('named water decaf current H1 plus its OWN chemical-free treatment sentence supports Water Process',()=>{
  const r=extractPublicCoffeeFacts(markup(405),{source_url:urls[405]});
