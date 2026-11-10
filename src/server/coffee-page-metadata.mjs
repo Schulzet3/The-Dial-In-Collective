@@ -52,6 +52,7 @@ import {selectedCurrentColombianDepartmentOrigin} from './coffee-selected-depart
 import {selectedCurrentNamedMicroLotSector} from './coffee-selected-microlot-sector-origin.mjs';
 import {selectedCurrentNamedGrowingValley} from './coffee-selected-growing-valley-origin.mjs';
 import {conflictingCurrentSelectedDecafSource} from './coffee-selected-decaf-origin-conflict.mjs';
+import {selectedCurrentCoffeeLabeledRegion,selectedCurrentLeadRoastNotes} from './coffee-selected-current-panel.mjs';
 
 // A chosen current selected coffee description can be more authoritative than
 // another labeled tasting list printed in the same selected product detail
@@ -2604,6 +2605,53 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    if(source_facts.length<384)source_facts.push({field:'processing_context',
     label:'Unselected processing alternatives',value:alternateProcess.text.slice(0,300),
     source_url,source_type:'html',section:'Current selected coffee description (review only)'});
+  }
+ }
+
+ // Exact current selected-product "Current Coffee: Country Region" is a
+ // present-lot origin label, not a category or historical product slug.
+ // Only refine an already accepted broad single country when the selected
+ // direct label, unique H1 and all existing conflict guards agree.
+ if(fields.origin&&!conflicts.has('origin')&&
+  geographyParts(fields.origin).length===1&&ORIGIN_COUNTRIES.has(keyOf(fields.origin))){
+  const labeled=selectedCurrentCoffeeLabeledRegion(canonicalProduct,{
+   name:fields.name,origin:fields.origin,clean
+  });
+  if(labeled){
+   rememberCoffeeReviewCandidate(fields,'origin',fields.origin,'Broader selected country');
+   fields.origin=labeled.value;
+   if(source_facts.length<384)source_facts.push({
+    field:'origin',label:'Selected current-coffee labeled growing region',
+    value:labeled.quote,source_url,source_type:'html',
+    section:'Current selected product primary coffee details'
+   });
+  }
+ }
+
+ // A short current product lead can expressly publish a single roast and a
+ // full literal sensory list. A shorter icon list may omit one printed note;
+ // augment only when it is a strict subset, never replace contradictory lists.
+ const lead=selectedCurrentLeadRoastNotes(canonicalProduct,{
+  name:fields.name,clean,notes:fields.tasting_notes||''
+ });
+ if(lead){
+  if(!fields.roast_level&&!conflicts.has('roast_level')){
+   fields.roast_level=lead.roast_level;
+   if(source_facts.length<384)source_facts.push({
+    field:'roast_level',label:'Direct selected lead roast with own notes',
+    value:lead.roast_level,source_url,source_type:'html',
+    section:'Exact current product lead (not roast scale)'
+   });
+  }
+  if(!conflicts.has('tasting_notes')&&
+   !seoFallbackByFields.get(fields)?.has('tasting_notes')&&
+   coffeeTastingNotesSubset(fields.tasting_notes||'',lead.tasting_notes)){
+   fields.tasting_notes=lead.tasting_notes;
+   if(source_facts.length<384)source_facts.push({
+    field:'tasting_notes',label:'Full literal selected lead tasting notes',
+    value:lead.tasting_notes,source_url,source_type:'html',
+    section:'Direct current product summary, not external review'
+   });
   }
  }
 

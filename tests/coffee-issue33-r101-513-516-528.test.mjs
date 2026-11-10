@@ -50,3 +50,44 @@ test('Thanksgiving selected own malt must not be borrowed from other product des
  assert.equal(p.ok,true,JSON.stringify(p));assert.equal(p.fields.name,e.name);
  assert.doesNotMatch(JSON.stringify(p.fields),/Ethiopia|Alice|2000|strawberry/i);
 });
+
+test('country-only Current Coffee selected label refines its actual current region',()=>{
+ const e=cases[1],p=extractPublicCoffeeFacts(page(e,
+ '<p>Current Coffee: Guatemala Huehuetenango</p><p>This seasonal single-origin from Guatemala is smooth with notes of fruit over a rich chocolate base.</p>'),
+ {source_url:'https://'+e.host+e.path});
+ assert.equal(p.ok,true,JSON.stringify(p));assert.equal(p.fields.origin,'Huehuetenango, Guatemala',JSON.stringify(p));
+});
+test('stale or related coffee Current Coffee origins cannot replace current country',()=>{
+ const e=cases[1],p=extractPublicCoffeeFacts(page(e,
+ '<p>Our current single origin from Guatemala gives fruit over a rich chocolate base.</p>',
+ '<aside>Current Coffee: Guatemala Huehuetenango</aside>'),
+ {source_url:'https://'+e.host+e.path});
+ assert.equal(p.ok,true,JSON.stringify(p));assert.notEqual(p.fields.origin,'Huehuetenango, Guatemala');
+});
+test('direct selected summary roast and complete notes recover malt without unrelated Coffee Review',()=>{
+ const e=cases[2],p=extractPublicCoffeeFacts(page(e,
+ '<p>Medium-dark roast with notes of dark chocolate and malt, dark cherry and wild honey.</p>'+
+ '<p>Tasting Notes: Dark Chocolate, Dark Cherry, Wild Honey.</p>'),
+ {source_url:'https://'+e.host+e.path});
+ assert.equal(p.ok,true,JSON.stringify(p));
+ assert.equal(p.fields.roast_level,'Medium-Dark',JSON.stringify(p));
+ assert.match(p.fields.tasting_notes||'',/malt/i,JSON.stringify(p));
+});
+test('related summary cannot supply a roast or missing malt to this selected coffee',()=>{
+ const e=cases[2],p=extractPublicCoffeeFacts(page(e,
+ '<p>Tasting Notes: Dark Chocolate, Dark Cherry, Wild Honey.</p>',
+ '<aside>Related product: Medium-dark roast with notes of dark chocolate and malt, dark cherry and wild honey.</aside>'),
+ {source_url:'https://'+e.host+e.path});
+ assert.equal(p.ok,true,JSON.stringify(p));
+ assert.ok(!p.fields.roast_level,JSON.stringify(p));
+ assert.doesNotMatch(p.fields.tasting_notes||'',/malt/i,JSON.stringify(p));
+});
+test('conflicting current lead roast claims cannot make a canonical roast',()=>{
+ const e=cases[2],p=extractPublicCoffeeFacts(page(e,
+ '<p>Medium-dark roast with notes of dark chocolate and malt, dark cherry and wild honey.</p>'+
+ '<p>Light roast with notes of dark chocolate and malt, dark cherry and wild honey.</p>'+
+ '<p>Tasting Notes: Dark Chocolate, Dark Cherry, Wild Honey.</p>'),
+ {source_url:'https://'+e.host+e.path});
+ assert.equal(p.ok,true,JSON.stringify(p));
+ assert.ok(!p.fields.roast_level,JSON.stringify(p));
+});
