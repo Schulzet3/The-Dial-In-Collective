@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Issue #33 R91 current independently selected original603 cases, NOT a whole-corpus certification.
+// Issue #33 R91 only #424 current verified; #418/#421 unverified heading identities, NOT whole-corpus certification.
 import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 import {resolve,join} from 'node:path';
 import {createHash} from 'node:crypto';
@@ -27,12 +27,12 @@ if(process.env.DIC_ISSUE33_R91_VERIFY==='1'){
  const dir=resolve(process.env.DIC_ISSUE33_FOCUSED_PUBLIC_DIR||'.');mkdirSync(dir,{recursive:true});
  const errors=[],check=(ok,k)=>{if(!ok)errors.push(k)};
  let report,raw;try{raw=readFileSync(join(dir,'focused-current-evidence.json'));report=JSON.parse(raw.toString('utf8'))}catch{}
- check(JSON.stringify(report?.case_numbers)==='[418,421,424]'&&report?.records?.length===3,'selected_original603_subset');
+ check(JSON.stringify(report?.case_numbers)==='[424]'&&report?.records?.length===1,'selected_original603_subset');
  check(report?.source_sha===process.env.GITHUB_SHA,'exact_source_sha');
  check(report?.original603_register_sha256==='2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353','frozen_csv_hash');
  check(report?.original_corpus_modified===false&&report?.manual_certified===0&&report?.production_operations===0,'scope_boundaries');
  const detail=[];
- for(const n of [418,421,424]){
+ for(const n of [424]){
   const def=cases[n],row=report?.records?.find(r=>r.number===n)||{},f=row.current_fields||{};
   let html;try{html=readFileSync(join(dir,'case-'+n+'.html'))}catch{}
   const selected=productMarkup(html?.toString('utf8')||''),evidence=selectedCaseEvidence(n,selected);
@@ -69,7 +69,7 @@ if(process.env.DIC_ISSUE33_R91_VERIFY==='1'){
    selected_h1:row.selected_h1,selected_h2:row.selected_form_h2,selected_identity:row.selected_heading_identity_verified,
    evidence,fields:f,conflicts:row.conflicts||[]});
  }
- const proof={source_sha:report?.source_sha,case_numbers:[418,421,424],evidence_sha256:raw?sha(raw):null,
+ const proof={source_sha:report?.source_sha,case_numbers:[424],identity_unverified:[418,421],evidence_sha256:raw?sha(raw):null,
   detail,passed:errors.length===0,failures:errors,manual_certified:0,production_operations:0};
  writeFileSync(join(dir,'r91-418-421-424-afterproof.json'),JSON.stringify(proof,null,2)+'\n');
  console.log('[DIC33 R91 official selected afterproof] '+JSON.stringify(proof));
