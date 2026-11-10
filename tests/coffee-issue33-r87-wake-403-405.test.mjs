@@ -1,5 +1,3 @@
-import {selectedNamedCurrentDecafEvidence} from '../src/server/coffee-direct-product-prose.mjs';
-import {productCoffeeProse} from '../src/server/coffee-product-prose.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {selectedWakeChecks} from '../scripts/audit/issue33-r87-wake-403-405-check.mjs';
@@ -7,7 +5,7 @@ import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 const own={
  403:'Celebrating the heart and soul of Ambler. Crafted with Latin-American beans, Ambler offers a light-bodied, spirited coffee experience.',
  404:'The Keasbey and Mattison company inspired Bromo. Our espresso blend crafted from select Central American and Indonesian beans delivers a robust caramel flavor.',
- 405:'Mountain Water Decaf undergoes a 100% chemical-free decaffeination process. Tasting notes: herbal, dark chocolate, medium body. Latin American, Indonesian and African Blend.'
+ 405:'Our Mountain Water Decaf Beans undergo a 100% chemical-free decaffeination process. Tasting notes: herbal, dark chocolate, medium body. Latin American, Indonesian and African Blend.'
 };
 const names={403:'Ambler Blend',404:'Bromo',405:'Mountain Water Decaf'};
 const urls={403:'https://wakecoffee.com/products/ambler-blend',404:'https://wakecoffee.com/products/bromo-blend',405:'https://wakecoffee.com/products/decaf'};
@@ -53,11 +51,7 @@ test('neighboring Bromo blend cannot contaminate Ambler origin',()=>{
 // R87 live failure: current exact H1 + its direct decaffeination paragraph
 // were overlooked; bare titles, other beans and conflicting methods stay blank.
 test('named water decaf current H1 plus its OWN chemical-free treatment sentence supports Water Process',()=>{
- const html=markup(405);
- const clean=h=>String(h||'').replace(/<[^>]*>/gu,' ').replace(/\\s+/gu,' ').trim();
- const direct=selectedNamedCurrentDecafEvidence(html,{name:names[405],clean});
- const blocks=productCoffeeProse(html,clean).map(b=>({tag:b.tag,section:b.section,text:b.text.slice(0,350),educational:b.educational}));
- console.log('[R87 MOUNTAIN CURRENT SELECTED DIAG] '+JSON.stringify({direct,blocks}));
+
  const r=extractPublicCoffeeFacts(markup(405),{source_url:urls[405]});
  assert.equal(r.ok,true,JSON.stringify(r));
  assert.equal(r.fields.decaffeination_method,'Water Process',JSON.stringify(r.fields));
