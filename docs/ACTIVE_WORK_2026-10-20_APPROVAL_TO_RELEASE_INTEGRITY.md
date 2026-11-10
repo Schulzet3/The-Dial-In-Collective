@@ -475,3 +475,6 @@ Owner-authorized release DIC-20261106-READY7-23 independently verified DEPLOYED:
 
 ## November 10, 2026 — #1756 SQL review retry contract corrected [skip netlify]
 - Exact disposable SQL run42741411375 exposed real double-review behavior: an approved account was rejected with SQL22023 before the pending-state stale response. Moved guarded stale state check ahead of non-pending guard, returning `ok:false,code:stale_review` after existing admin/actor check, preserving previous approval. This makes repeat clicks and concurrent reviewers deterministic and non-mutating, without weakening gate. Fresh CI needed, no provider writes.
+
+## November 10, 2026 — #1756 preserve complete account-delete SQL regression, remove retired invite assertions [skip netlify]
+- SQL run42741707718 isolated suite reached existing `admin_member_deletion.sql`, which still issued/deleted codes through now correctly retired RPCs. Replaced only obsolete invite create/delete assertions with explicit absence checks and preserved every admin-only Keep/Remove Community, GoTrue-cascade, unrelated member and private shot-history regression; no application or production data change. Source CI remains required.
