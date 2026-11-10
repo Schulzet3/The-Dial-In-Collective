@@ -311,7 +311,7 @@ globalThis.supabase={createClient:()=>sdk};
   check(shot_editor.locator('[name="notes"]').input_value()=='Synthetic private note: sweet berry finish.' and shot_editor.locator('[name="notes"]').is_editable(),mode+': shot editor retains the original synthetic private note')
   check(page.evaluate('document.documentElement.scrollWidth<=innerWidth'),mode+': populated mobile editors fit the viewport')
   shot(page,'14-admin-editors-mobile-'+mode)
-  check(all(name in ['dic_session_status','dic_admin_dashboard','dic_admin_access_overview','dic_admin_records','dic_admin_review_candidates'] for name in page.evaluate('requests')),mode+': visual editor inspection makes no mutation RPC')
+  check(all(name in ['dic_session_status','dic_admin_dashboard','dic_admin_access_overview','dic_admin_records','dic_admin_review_candidates','dic_admin_signup_requests'] for name in page.evaluate('requests')),mode+': visual editor inspection makes no mutation RPC')
   page.close()
  for width in [320,375,390,768,1280]:
   page=boot(browser,'dark',width,1100)
