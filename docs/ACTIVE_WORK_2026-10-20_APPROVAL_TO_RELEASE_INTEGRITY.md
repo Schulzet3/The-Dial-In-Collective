@@ -454,3 +454,6 @@ Owner-authorized release DIC-20261106-READY7-23 independently verified DEPLOYED:
 
 ## November 9, 2026 — #1756 Admin view source implementation checkpoint [skip netlify]
 - Pure escaped Admin attention badge and pending signup Approve/Reject rows added (verified email prerequisite, paging); legacy code management UI fully removed; existing Member Access, Remove/Restore and Delete Account retained. Theme-aware responsive styles added. Requires controller actions, tests, exact CI and development merge before READY; no provider writes or deploy.
+
+## November 9, 2026 — #1756 Admin role-gated signup review and attention controller [skip netlify]
+- Admin client now retrieves server-owned pending signup records and calls role-restricted Approve/Reject with expected pending state, preserving existing admin account access/delete and coffee review. All issue/copy/revoke/delete invite actions removed; no code secret in Admin. Attention header updates every 45s with generic browser alert only if permission granted while portal is open. UI/SQL source still needs comprehensive CI and eventual release, no production writes.
