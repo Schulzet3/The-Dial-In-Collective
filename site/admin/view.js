@@ -11,10 +11,10 @@ export function renderAdminDenied(message='Administrator access required.'){
 
 export function renderAdminAttention(stats={}){
  const count=key=>Number.isSafeInteger(Number(stats[key]))&&Number(stats[key])>=0?Number(stats[key]):0;
- const a=count('pending_accounts'),b=count('pending_coffees'),c=count('conflicts'),d=count('unfinished_account_deletions');
+ const a=count('pending_verified_accounts'),b=count('pending_coffees'),c=count('conflicts'),d=count('unfinished_account_deletions');
  return '<section class="admin-panel admin-attention" aria-labelledby="admin-attention-heading">'
   +'<div class="admin-attention-header"><h2 id="admin-attention-heading">Requires Your Attention</h2><span class="admin-attention-count" role="status" aria-live="polite" aria-label="Items requiring attention">'+formatCount(a+b+c+d)+'</span></div>'
-  +'<p class="helper">New accounts '+formatCount(a)+' · Coffee reviews '+formatCount(b)+' · Conflicts '+formatCount(c)+' · Unfinished deletions '+formatCount(d)+'</p>'
+  +'<p class="helper">Ready account approvals '+formatCount(a)+' · Coffee reviews '+formatCount(b)+' · Conflicts '+formatCount(c)+' · Unfinished deletions '+formatCount(d)+'</p>'
   +'<button type="button" class="ghost compact" data-action="enable-admin-notifications">Enable browser alerts while Admin is open</button></section>';
 }
 export function renderPendingSignups(page={},fallback=null){

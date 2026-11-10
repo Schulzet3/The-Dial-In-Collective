@@ -40,6 +40,8 @@ export function createCloudClient(sdk,{redirectUrl,assertSecure=secureOrigin,pre
   async setPassword(password){assertSecure();return unwrap(await sdk.auth.updateUser({password}));},
   async signOut(){assertSecure();unwrap(await sdk.auth.signOut({scope:'local'}));cached=null;},
   async status(){assertSecure();return unwrap(await sdk.rpc('dic_session_status'));},
+  // Role-restricted read: only aggregate counts reach the main app.
+  async adminAttentionCounts(){assertSecure();const data=unwrap(await sdk.rpc('dic_admin_dashboard'));return data?.counts||null;},
   async read(){assertSecure();return unwrap(await sdk.rpc('dic_read_personal_state'));},
    async claimFirstStylePrompt(libraryEntryId){assertSecure();return unwrap(await sdk.rpc('dic_claim_first_style_prompt',{p_library_entry_id:libraryEntryId}));},
    async findCoffeeMatches(payload){assertSecure();return unwrap(await sdk.rpc('dic_find_coffee_matches',{payload}));},
