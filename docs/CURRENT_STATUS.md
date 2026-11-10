@@ -1,3 +1,9 @@
+## November 10, 2026 UTC — READY5 published and provider verified [skip netlify]
+
+- Release `DIC-20261110-READY5-27`: exactly five READY items VERIFIED DEPLOYED, source `2cb38e3020a2ab7dc0d7d0c62b5db79f14b64c88`, nonforce release `bf3a82484ab2443a5d8b4dc78075ca5a4d875532`, Netlify deploy `6af27603a5fade7d94df9e99` READY/current matching release Git commit and one Git-connected build. Controller 42737385980 and five candidate exact-SHA checks SUCCESS. Production SQL migrations 20261109152500/20261109231500 applied in order, protected `dic-delete-member-account` Edge JWT true and byte-matched; approved encrypted archive13727625712 and private Drive file1mf0BPRT99diEQSvWmn396IaTB_qExRDd exact SHA/bytes verified. Postflight Auth11 shots26 notes26 Community12, account deletes0. Queue 260 DEPLOYED / 0 READY / 3 IN_PROGRESS, unapproved work untouched. No hosted genuine-member deletion tested. Detailed receipt: [2026-11-10 READY5](releases/2026-11-10_READY5_DEPLOYED_VERIFIED.md).
+
+---
+
 ## November 10, 2026 UTC — Issue #455 R150 original expert sensory method applicability review [skip netlify]
 
 - Directly reviewed original [Guinard et al. 2026](https://www.mdpi.com/2304-8158/15/4/678) Methods, Tables and Results. 56 professional experts, 12 diverse coffees, heterogeneous preferred brew methods, conventional scoring always before the Coffee Cuality JAR/CATA method; 18 qualitative focus-group respondents. No validation of DIC's personal espresso five-taste scales, feedback algorithm or cup-quality improvement. Published prose says upper score 82.71 while Table 2 reports C6 at **84.62**; discrepancy recorded, not silently resolved.
