@@ -16,3 +16,5 @@
 - **Source checkpoint:** Added synthetic Node22 API authorization/permission tests (no admin read for nonadmins, backend-only service credentials, owner-scoped delete/upsert, unsafe endpoint denial), sender stale/duplicate/no-private-body tests, and service-worker click without discarding open drafts; no real Apple delivery or provider keys claimed. Execute exact CI before READY.
 
 - **Nov 10 governance/intake:** Recorded scoped owner decision in BOTH canonical spec and decision ledger and approval coverage; TESTING queue includes eight exact deployable paths (not tests). Pending frontend/Netlify/server/SQL tests, CI, safe integration, deployment secrets and physical-device proof. No provider writes or deployment.
+
+- **Failure/fix:** PR head 96f39aa28ab0 cloud/mobile browser build 42926604188 failed: site graph reported missing shipped asset admin/main.js -> admin/push.js. Corrected explicit build_cloud.mjs source copy allowlist and queue scope; same source-only commit; re-run complete applicable CI, not yet PASS. No release or hosted changes.

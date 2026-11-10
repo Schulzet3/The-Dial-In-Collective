@@ -11668,11 +11668,13 @@
         "src/server/admin-push.mjs",
         "netlify/functions/dic-admin-push.mjs",
         "netlify/functions/dic-admin-push-poll.mjs",
-        "supabase/migrations/20261110235000_dic_admin_web_push.sql"
+        "supabase/migrations/20261110235000_dic_admin_web_push.sql",
+        "build_cloud.mjs"
       ],
       "tests": [
         "Synthetic VAPID ECDSA JWT, strict Apple endpoint allowlist, private-body absence, role verification, subscription baseline and opt-out, sender dedupe/role removal, PWA worker click and SQL ACL tests in tests/admin-push*.test.mjs.",
-        "Exact merged CI pending; live iPhone/APNs and production Netlify secrets NOT tested or provided."
+        "Exact merged CI pending; live iPhone/APNs and production Netlify secrets NOT tested or provided.",
+        "CI discovered site graph omitted admin/push.js: corrected explicit build_cloud.mjs allowlist; retest build/browser before READY."
       ],
       "ci_runs": [],
       "blockers": [
