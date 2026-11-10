@@ -500,3 +500,10 @@ Owner-authorized release DIC-20261106-READY7-23 independently verified DEPLOYED:
 
 ## November 10, 2026 — #1756 READY queue item reconciled [skip netlify]
 - The just-prepared same-branch source Locked/approval/current status receipt is complete. Queue DIC-Q-1756-admin-signup-approval-retire-invites upgraded TESTING to READY with all 9 exact deployable scope paths (including site/styles.css) and newest verified merged source 1fa8ddc9d886025e404f936b75a106864916793b. Reviewed PR1776 source 5692ed2def92c097b5b07ace25d6673c3d7d3ee9 six applicable high-risk CI SUCCESS, byte-identical merge, postmerge approval/cloud and selectively rerun canceled Node/mobile attempt2 exact-source SUCCESS. No remaining SOURCE blockers. This is NOT publication; live SQL migration and deletion of any invitation records still require new owner Publish, independently verified fresh encrypted private Drive backup and isolated recovery. Issue remains OPEN for live acceptance. No future release grant or Netlify claim.
+
+## READY-only source candidate (not published)
+- Development parent: 574ba3a51a62e733c3a0215f5119c2271d8b94eb
+- Published baseline: 2cb38e3020a2ab7dc0d7d0c62b5db79f14b64c88
+- Selected READY IDs: DIC-Q-1756-admin-signup-approval-retire-invites, DIC-Q-455-new-shot-timestamp-replay-recency, DIC-Q-509-account-delete-null-actor-retry-guard, DIC-Q-509-private-delete-definer-execute-acl
+- Restored unfinished paths: scripts/netlify/should-ignore-build.mjs
+- Exact candidate CI and separate owner publication authorization required. No production claim.
