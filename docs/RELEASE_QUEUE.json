@@ -11558,6 +11558,25 @@
       "notes": "SAFE Locked-compatible Make Current eligibility correction; legacy missing optionals, all five ratings, notes/history, family alternatives and privacy preserved. Source PR #1928 nonforce squash merged on development; direct current source CI verified. READY DEVELOPMENT-ONLY, not a publish/release permission. No main/release/provider/Netlify/live SQL/Auth/Edge/member mutation. R171 final journal docs/workstreams/ops-issue455-r171-final-verification-20261110.md."
     },
     {
+      "id": "DIC-Q-1935-verified-auth-startup-no-false-pending",
+      "issue": 1935,
+      "title": "Do not display approval pending while signed-in admission is still being checked",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "tests": [
+        "New deterministic tests/cloud-auth-startup-verification.test.mjs covers initial signed-in admitted, pending email, rejected/revoked, network error and account-switch scenarios; exact PR-head/merged CI pending"
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Awaiting PR-head exact-source CI, nonforce integration and source readback"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1935",
+      "notes": "Owner-reported brief Account Approval Pending flash on iPhone app reopening. Initial SDK auth callback can render identity with null server admission; use neutral verification state until authenticated admission response. Existing server gate, offline denial, pending requests and privacy unchanged. DEVELOPMENT ONLY; no production publication."
+    },
+    {
       "id": "DIC-Q-1937-admin-signup-order",
       "issue": 1937,
       "pr": 1939,
