@@ -71,6 +71,7 @@ class CloudApp {
    this.deniedOfflineOwners=new Set();
   this.dismissedDoseAdvisories=new Set();
   this.lastHeavySyncAt=0;this.pollingStatus=null;this.pollingOwner=null;this.pollingEpoch=null;
+  this.adminAttentionCount=null;this.adminAttentionTask=null;this.adminAttentionOwner=null;this.adminAttentionEpoch=null;
   this.queue=new Outbox({store,remote:client,identity:()=>this.identity?{...this.identity,sessionEpoch:this.epoch}:null,notify:r=>{
     // A prior login's remote work may finish after the same member signs back in.
     // Match the session epoch as well as owner before displaying its sync status.
@@ -90,7 +91,7 @@ class CloudApp {
   this.epoch++;this.status=null;this.localOfflineOwner=null;this.raw=null;this.state=M.blankState();this.pending=[];
   this.expanded.clear();this.shotExpanded.clear();this.search='';this.searchOpen=false;
   this.dismissedDoseAdvisories.clear();this.recommendationEvidence={};this.recommendationEvidenceRequests.clear();this.recommendationEvidenceAttemptedAt.clear();
-  this.lastHeavySyncAt=0;
+  this.lastHeavySyncAt=0;this.adminAttentionCount=null;this.adminAttentionTask=null;this.adminAttentionOwner=null;this.adminAttentionEpoch=null;
   this.tempCoffee=null;this.justSavedId=null;this.notice='';this.recovery=false;
   this.draft=null;this.editing=null;this.logCoffee=null;this.addCoffeeDraft=null;
   this.addCoffeeMatches=null;this.pendingMergeSubmissionId=null;
@@ -108,6 +109,51 @@ class CloudApp {
   if(changed||event==='SIGNED_OUT'||event==='PASSWORD_RECOVERY')this.render();
   if(user&&event!=='TOKEN_REFRESHED')this.connect().catch(err=>this.error(err));
  }
+ // Only verified server-backed aggregates; never cache an Admin session or member records.
+ adminAttentionBadge(){
+  const n=this.adminAttentionCount;
+  if(!this.status?.admin||!this.status?.admitted||globalThis.navigator?.onLine===false||!Number.isSafeInteger(n)||n<1)return '';
+  return `<span class="admin-action-badge" aria-label="${n} administrator item${n===1?'':'s'} require attention">${n>99?'99+':n}</span>`;
+ }
+ updateAdminAttentionBadges(){
+  const markup=this.adminAttentionBadge(),count=this.adminAttentionCount;
+  for(const [surface,selector] of [[root,'[data-action="settings"]'],[sheet,'[data-action="open-admin"]']]){
+   const button=surface?.querySelector?.(selector);if(!button)continue;
+   const existing=button.querySelector?.('.admin-action-badge');
+   if(!markup)existing?.remove?.();
+   else if(existing){
+    existing.textContent=count>99?'99+':String(count);
+    existing.setAttribute?.('aria-label',count+' administrator item'+(count===1?'':'s')+' require attention');
+   }else button.insertAdjacentHTML?.('beforeend',markup);
+   if(selector==='[data-action="settings"]')
+    button.setAttribute?.('aria-label',markup?'Settings, '+count+' administrator items require attention':'Settings');
+  }
+ }
+ async refreshAdminAttention(){
+  const owner=this.identity?.id,epoch=this.epoch;
+  if(!owner||this.status?.admitted!==true||this.status?.admin!==true||globalThis.navigator?.onLine===false){
+   this.adminAttentionCount=null;this.updateAdminAttentionBadges();return;
+  }
+  if(this.adminAttentionTask&&this.adminAttentionOwner===owner&&this.adminAttentionEpoch===epoch)return this.adminAttentionTask;
+  this.adminAttentionOwner=owner;this.adminAttentionEpoch=epoch;
+  const task=(async()=>{
+   try{
+    const counts=await this.client.adminAttentionCounts();
+    if(epoch!==this.epoch||owner!==this.identity?.id||this.status?.admin!==true||globalThis.navigator?.onLine===false)return;
+    const keys=['pending_verified_accounts','pending_coffees','conflicts','unfinished_account_deletions'];
+    if(!counts||keys.some(k=>!Number.isSafeInteger(counts[k])||counts[k]<0))throw new Error('Admin counts unavailable');
+    const total=keys.reduce((v,k)=>v+counts[k],0);
+    if(!Number.isSafeInteger(total))throw new Error('Admin total invalid');
+    this.adminAttentionCount=total;this.updateAdminAttentionBadges();
+   }catch{
+    if(epoch!==this.epoch||owner!==this.identity?.id)return;
+    // Fail closed: unknown count is not zero and stale data cannot authorize an alert.
+    this.adminAttentionCount=null;this.updateAdminAttentionBadges();
+   }
+  })();
+  const active=task.finally(()=>{if(this.adminAttentionTask===active){this.adminAttentionTask=null;this.adminAttentionOwner=null;this.adminAttentionEpoch=null;}});
+  this.adminAttentionTask=active;return active;
+ }
  async init(){
   document.addEventListener('click',ev=>this.click(ev));document.addEventListener('submit',ev=>this.submit(ev));
   document.addEventListener('input',ev=>this.input(ev));document.addEventListener('change',ev=>this.change(ev));
@@ -120,7 +166,7 @@ class CloudApp {
   if(this.identity)await this.connect();else this.render();
   // A returning connection must recheck beta admission before flushing locally queued shots.
    addEventListener('online',()=>this.connect().catch(err=>this.error(err)));
-   addEventListener('offline',()=>{if(!this.identity)return;this.syncState='offline';if(this.view==='community')this.view='coffees';this.render();});
+   addEventListener('offline',()=>{if(!this.identity)return;this.syncState='offline';this.adminAttentionCount=null;if(this.view==='community')this.view='coffees';this.render();});
   document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&this.identity)this.connect().catch(err=>this.error(err));});
   // Preserve the former 30-second admission/revocation check while reducing
   // unnecessary 17-dataset reads and Community review requests during idle use.
@@ -143,6 +189,8 @@ class CloudApp {
     if(!this.status?.admitted){await this.connect();return;}
     this.status=status;
     if(this.pending.some(x=>x.status==='pending')||Date.now()-this.lastHeavySyncAt>=180000)await this.sync();
+    if(status.admin===true)this.refreshAdminAttention().catch(()=>{});
+    else{this.adminAttentionCount=null;this.updateAdminAttentionBadges();}
    }catch(err){
     if(epoch!==this.epoch||user.id!==this.identity?.id)return;
     if(isAccessDenied(err))await this.denyAccess(user,epoch);
@@ -211,6 +259,7 @@ class CloudApp {
    clearOfflineDenial(user.id);
    const cache=await this.inSession(()=>this.store.readCache(user.id));if(cache)this.raw=cache.snapshot;
    await this.sync();
+   if(this.status?.admin===true)this.refreshAdminAttention().catch(()=>{});
   }catch(err){if(epoch===this.epoch&&user.id===this.identity?.id){if(isAccessDenied(err)){await this.denyAccess(user,epoch);return;}this.notice=err.message;this.syncState='offline';this.render();}}
  }
  async sync(){
@@ -327,7 +376,7 @@ class CloudApp {
   const restoreFocus=['search-toggle','expand','shot-expand','shot-toggle-all'].includes(focusAction);
   const openDetails=[...root.querySelectorAll('details[data-retain][open]')].map(x=>x.dataset.retain);
   this.theme();const connected=this.identity&&(this.status?.admitted||(this.localOfflineOwner===this.identity.id&&globalThis.navigator?.onLine===false))&&!this.recovery;
-  root.innerHTML=`<header class=app-header><div class=header-inner><div class=brand>${icon('coffee',27)}<div><h1>The Dial In Collective</h1><div class=tagline>Better espresso through shared experience.</div></div></div>${connected?button(icon('settings',20),'settings','aria-label="Settings"','icon-button'):''}</div></header><main class=shell>${connected?this.coffees():this.auth()}${this.notice?`<p class="helper space-top" role=status>${e(this.notice)}</p>`:''}<footer class=footer>Private Beta <span aria-hidden=true>·</span> Better espresso, one shot at a time.</footer></main>`;
+  root.innerHTML=`<header class=app-header><div class=header-inner><div class=brand>${icon('coffee',27)}<div><h1>The Dial In Collective</h1><div class=tagline>Better espresso through shared experience.</div></div></div>${connected?button(icon('settings',20)+this.adminAttentionBadge(),'settings','aria-label="Settings'+(this.adminAttentionBadge()?', '+this.adminAttentionCount+' administrator items require attention':'')+'"','icon-button settings-attention-trigger'):''}</div></header><main class=shell>${connected?this.coffees():this.auth()}${this.notice?`<p class="helper space-top" role=status>${e(this.notice)}</p>`:''}<footer class=footer>Private Beta <span aria-hidden=true>·</span> Better espresso, one shot at a time.</footer></main>`;
   const welcomeVideo=root.querySelector('[data-onboarding-player]');
   welcomeVideo?.addEventListener('error',()=>{const message=root.querySelector('[data-onboarding-error]');if(message)message.hidden=false;},{once:true});
   for(const details of root.querySelectorAll('details[data-retain]'))if(openDetails.includes(details.dataset.retain))details.open=true;
@@ -446,7 +495,7 @@ class CloudApp {
      ${checkbox('track_slow_feed','Track Slow Feeding',v.advanced.slowFeed)}
      <button class="primary full">Save Advanced Options</button></form></details>`:''}
    </section>
-   ${this.status?.admin?`<section class="settings-section settings-admin" aria-label="Administration"><h3 class="settings-heading">Administration</h3>${button(`${icon('shield',18)}<span>Admin Dashboard</span>${icon('chevron',16)}`,'open-admin','','settings-row')}</section>`:''}
+   ${this.status?.admin?`<section class="settings-section settings-admin" aria-label="Administration"><h3 class="settings-heading">Administration</h3>${button(`${icon('shield',18)}<span>Admin Dashboard</span>${this.adminAttentionBadge()}${icon('chevron',16)}`,'open-admin','','settings-row')}</section>`:''}
    <section class="settings-section" aria-label="Community and privacy">
     <details class="advanced settings-advanced">
      <summary>Community &amp; Privacy</summary>
@@ -459,6 +508,7 @@ class CloudApp {
    </section>
    <div class="settings-signout">${button(`${icon('signout',18)}<span>Sign Out On This Device</span>`,'signout','','settings-row signout-row')}</div>`);
   const sp=this.raw?.setupPreferences.find(p=>p.setup_version_id===v?.id);this.setupPrefRevision=sp?.revision;
+  if(this.status?.admin===true)this.refreshAdminAttention().catch(()=>{});
  }
  showSetup(){
   this.show('New Setup',`<form id=new-setup>
