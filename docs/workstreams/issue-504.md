@@ -1,3 +1,24 @@
+## Issue #504 G1-144 — November 10, 2026 UTC; historical PR #709–716 direct title/body semantic review [skip netlify]
+
+Live development parent `e6d5daca85617903cef93c67628c19e3de049bb2`, main `9b0cd38f8cdfe2b0291d432ca01d61ae53450028`, release `bf3a82484ab2443a5d8b4dc78075ca5a4d875532`; #504 and concurrent #267/#455/#33/#96 OPEN. Public visibility is temporary owner-approved exception #630 Nov4–30; no visibility change. Read AGENTS, AI entrypoint/preflight, authority-document metadata, current status summary, last strict ledger/receipt and full original title/body for source objects. Large canon/queue entire contents not credited by this batch.
+
+**Eight distinct original PR title/body objects #709–716**, every word 1–EOF: **892 Unicode-whitespace words / 7306 UTF-8 bytes**. Complete original texts, SHA1, exact title/body inclusive word+line ranges, timestamps, merged source commits and individual decisions are in immutable [G1-144 receipt](../audits/issue504-review-G1-144.json).
+
+PR #709: 81 words; #267 S2-116 strict 50 frozen + 50 pinned reviews; historical proposed totals, no #504 code credit.
+PR #710: 75 words; #267 pinned/live Git drift inventory with 446 added and 67 modified paths, explicitly machine-only and dated, no semantic credit.
+PR #711: 85 words; #267 S2-117 strict 91 frozen + 91 pinned reviews; pinned file #50 complete at source time, not global coverage.
+PR #712: 222 words; Earlier #504 G1-028 101 original queue lines/849 words already credited; distinct PR metadata only, no source-file duplicate.
+PR #713: 76 words; #267 D2-001 new post-pin 39 source lines: exclusive #267 review, no #504 code credit.
+PR #714: 87 words; #267 source-time CI-scope bug+allowlist regression fix; historic fix not a newly reproduced current #504 defect.
+PR #715: 141 words; #455 bounded Decent basket manufacturer source and exploratory 52mm/58mm anecdote; not universal sensory proof, remains research-only.
+PR #716: 125 words; #267 S2-118 strict 40 frozen + 60 pinned reviews; source-time counters, not current global completion.
+
+Independent #267 N15 source confirmation: original F481 blob `1cd583ad62de99b31123e637c3fc48751349e0d8` lines **16–18** match exactly 3/3 original literals and 11 per-line semantic fields in strict receipt blob `22b7ada15201d5d02e2fc9fbbd812f8f6132bc96`. Zero additional #504 code credit; #267 full V2 incomplete. Previous G1-117 -15/-4012 correction retained.
+
+Corrected cumulative direct #504: 7,919 file lines/60,754 words; **892 GitHub records/253550 words**. Historical source-time provenance not current deploy evidence. No newly reproduced current defect, verified safe deletion, approval change, or owner-only decision; all PR history preserved. Remaining issue comments, PR reviews/patches, Actions/logs, tag/release/commit/tree, binary and delegated gaps remain unreviewed.
+
+**Only three audit documentation files in same proposed commit**: new receipt, append-only ledger, scoped journal. No current code/test/queue/Locked/original603/backup/Auth/SQL/Edge/member/provider/main/release/publication/Netlify changes. Node22, original603, SQL, GoTrue, browser/mobile/offline NOT_RUN_DOCS_ONLY. Exact-source governance tests not presumed PASS until observed. Issue OPEN / IN_PROGRESS. **NEXT:** PR #717 title word 1, then entire body.
+
 ## Issue #504 G1-143 — November 10, 2026 UTC; historical PR 701–708 complete direct title/body semantic review [skip netlify]
 
 **Authority/recovery:** Development parent `e1340b7495d5b6e7c6f400cf908a844c3cac9440`, main `1730d406b7a1596bec21edd7391d3491de60541b`, release/production `2d0bed35e67f6a745a21cbd80616ad4c9a98ed41`, temporary PUBLIC by explicit owner #630 November 4–30. Issue #504 OPEN (252 comments), concurrent #267/#455/#33/#96 OPEN. Read AGENTS, AI entrypoint/preflight, current status, Master Specification, Decision Ledger, approval matrix, source register, #267 original strict receipt, coverage ledger and scoped journal; queue full content was not returned by file connector (size/read limitation), so NO new queue word credit. No repo visibility mutation.
