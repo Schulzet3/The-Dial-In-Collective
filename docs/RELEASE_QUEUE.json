@@ -10791,10 +10791,12 @@
         "site/admin/main.js",
         "site/admin/view.js",
         "site/admin/styles.css",
-        "supabase/migrations/20261110020500_dic_admin_signup_approval_retire_invites.sql"
+        "supabase/migrations/20261110020500_dic_admin_signup_approval_retire_invites.sql",
+        "site/cloud/help.js"
       ],
       "tests": [
-        "PR1757 first CI failed because old invitation-era SQL/Node/browser fixtures and coverage inventory; source-only migration applied in isolated dic_ci but auth.session_status() authenticated permission was missing. Repairs, full exact CI and user acceptance pending."
+        "PR1757 first CI failed because old invitation-era SQL/Node/browser fixtures and coverage inventory; source-only migration applied in isolated dic_ci but auth.session_status() authenticated permission was missing. Repairs, full exact CI and user acceptance pending.",
+        "Current live in-app guide onboarding retires invitation instruction; Node regression asserts verified Admin pending, code-free UX. Exact CI pending."
       ],
       "ci_runs": [
         42740108000,
