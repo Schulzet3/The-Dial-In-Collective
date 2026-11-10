@@ -17,10 +17,10 @@ export const cases=Object.freeze([
 ]);
 export function selectedProof(html,headings,entry){
  const selected=productMarkup(String(html||''));
- const body=selected.replace(/<!--[\\s\\S]*?-->/gu,' ')
-   .replace(/<(script|style|noscript|template|nav|aside|footer|header|form|select)\\b[^>]*>[\\s\\S]*?<\\/\\1>/giu,' ')
+ const body=selected.replace(/<!--[\s\S]*?-->/gu,' ')
+   .replace(/<(script|style|noscript|template|nav|aside|footer|header|form|select)\b[^>]*>[\s\S]*?<\/\1>/giu,' ')
    .replace(/<[^>]{0,2000}>/gu,' ').replace(/&(?:nbsp|amp);/giu,' ')
-   .replace(/&#(?:39|x27);/giu,"'").replace(/\\s+/gu,' ');
+   .replace(/&#(?:39|x27);/giu,"'").replace(/\s+/gu,' ');
  const own=fold(body);
  return {uniqueH1:Array.isArray(headings)&&headings.length===1&&fold(headings[0])===fold(entry.name),
   direct:entry.own.map(s=>own.includes(fold(s)))};
