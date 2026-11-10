@@ -1403,6 +1403,19 @@
       "current_app_crosswalk": "Exact development 68a778b5285f14624db21bec2ad590bf3420af0d; engine.js Git blob 74ef8567741c0c2ebaa08ea60c274af4e1810665; model.js 5ea712305d9ba0f948ef3aa2d576dd27aa51b31c; constants.js 72221331ce4dffabe416eebec1ae2fceced3a095; cloud/main.js cef43de79da7920097915cd050534cd1d6d0fbb4. Reviewed measuredRecipeShots, recommendation (line 326), nextAdviceRaw (line 644), nextAdvice (691), saveShot (715), validateShot (model line 168) and cloud Log Shot imports. Current workflow captures five independent subjective taste ratings, actual recipe and history; no sodium-water causal calibration. No reproducible distinct SAFE runtime defect follows from this drip-brew study.",
       "reviewed_date_utc": "2026-11-10",
       "implementation_status": "RESEARCH_ONLY_NO_APPLICATION_OR_POLICY_CHANGE"
+    },
+    {
+      "id": "LIVE-20261110-OVERVIEW-MEASURED-GRIND-TEMP",
+      "type": "live_repository_application_source_direct_bounded_review",
+      "path": "site/lib/model.js",
+      "blob_sha_before": "5ea712305d9ba0f948ef3aa2d576dd27aa51b31c",
+      "review_status": "DIRECT_BOUNDED_SEMANTIC_REVIEW_MODEL_LINES_158_167_CROSSWALK_ENGINE_UI_NOT_ISSUE267_LINE_AUDIT",
+      "access": "ORIGINAL_GITHUB_SOURCE_AT_DEVELOPMENT_e951531567825ca688c9772628a4d8f09736487f",
+      "provenance": "Existing repository code and Locked five-taste/measured-recipe requirements; no external paper supports new numeric target.",
+      "evidence_grade": "DIRECT_SOURCE_REPRODUCIBLE_CONTRACT_INCONSISTENCY; SYNTHETIC_TESTS_STAGED_NOT_YET_RUN",
+      "source_bytes_sha256": null,
+      "claim": "Coffee overview considered recorded five-green archived result successful without validating numeric grind and optional recorded temperature, despite engine/UI measured-recipe eligibility.",
+      "implementation_status": "SAFE_CODE_AND_REGRESSION_COMMITTED_b7c46ac56947936f2701d8268fb690718d704159_PR_CI_PENDING"
     }
   ],
   "evidence_checks": [
@@ -4246,6 +4259,26 @@
       "result": "CONDITIONAL_WATER_SODIUM_SENSOR_DESCRIPTIVE_BOUNDS_ONLY",
       "owner_approval": false,
       "date": "2026-11-10"
+    },
+    {
+      "id": "R455-EV-CODE-157-A",
+      "source": "LIVE-20261110-OVERVIEW-MEASURED-GRIND-TEMP",
+      "claim": "At source model.js blob 5ea71230 hasLocalSuccess checks dose/yield/time and all-five-green but not physical grind/temp; an imported five-green 18g/36g/17s shot with grind 11.5 when active grinder espresso range is 0..10 appears as Dialed In Window, while engine.js recommendation refuses out-of-range grind. Same error when archived optional temp is 101 C.",
+      "grade": "REPRODUCIBLE_DIRECT_SOURCE_BRANCH_CONTRACT_BUG_NO_HOSTED_DATA",
+      "current_app": "Source e951531567825ca688c9772628a4d8f09736487f model.js lines 158-167, engine.js lines 450-463 and ui.js 103-128; no member/production data used.",
+      "result": "SAFE_FIX_AUTHORIZED_R157_NEW_SYNTHETIC_TESTS_STAGED_UNEXECUTED",
+      "owner_approval": false,
+      "date": "2026-11-10"
+    },
+    {
+      "id": "R455-EV-CODE-157-B",
+      "source": "LIVE-20261110-OVERVIEW-MEASURED-GRIND-TEMP",
+      "claim": "Original measured dose/yield/time and five taste ideals must remain, recorded optional temperature within existing 70-100 C, grinder setting numeric and inclusive actual setup espresso bounds only. Missing optional temp and missing archival range stay supported, original greens/notes remain on private History and Turbo vs Fast-Flow stay independent.",
+      "grade": "EXISTING_APPROVED_MODEL_ENGINE_UI_BOUNDS_AND_SYNTHETIC_POSITIVE_NEGATIVE_PLAN",
+      "current_app": "Committed source-only correction b7c46ac56947936f2701d8268fb690718d704159, no alternative taste target or member data capture, test execution pending.",
+      "result": "REGRESSION_NEGATIVE_AND_POSITIVE_COVERAGE_STAGED_NOT_VERIFIED_CI",
+      "owner_approval": false,
+      "date": "2026-11-10"
     }
   ],
   "policy_decisions_pending": [],
@@ -4338,31 +4371,33 @@
       "action": "Verify intended documentation PR-head governance and exact merged blobs; do not claim any skipped app suite. Then continue distinct high-confidence Log Shot/Rate UX bugs and substantive original source review. Standalone S019 PDF not available.",
       "status": "PENDING"
     },
-    "R455-155 @b8fe6729ca2014831b4713d2c3ae2c334bb381a4: publisher original Habara/Horiguchi 2024 16 full immersion electronic tongue conditions, funding/manufacturer caveat; 84 sources / 226 evidence checks / 116 proposals; docs only, no #267 semantic credit or product policy; confirm PR CI/merge; standalone S019 original missing."
+    "R455-155 @b8fe6729ca2014831b4713d2c3ae2c334bb381a4: publisher original Habara/Horiguchi 2024 16 full immersion electronic tongue conditions, funding/manufacturer caveat; 84 sources / 226 evidence checks / 116 proposals; docs only, no #267 semantic credit or product policy; confirm PR CI/merge; standalone S019 original missing.",
+    "R455-157 @e951531567825ca688c9772628a4d8f09736487f: real model/UI/engine inconsistency corrected in code commit b7c46ac56947936f2701d8268fb690718d704159; 86 sources / 230 checks / 118 proposals; exact source PR-head and merged checks pending. No #267 line credit, no publish."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-156",
-    "base_development_sha": "68a778b5285f14624db21bec2ad590bf3420af0d",
+    "id": "R455-157",
+    "base_development_sha": "e951531567825ca688c9772628a4d8f09736487f",
     "source_ids": [
-      "LIT-2024-IMAMURA-JSTAGE-SODIUM-WATER-DRIP"
+      "LIVE-20261110-OVERVIEW-MEASURED-GRIND-TEMP"
     ],
     "claim_ids": [
-      "R455-EV-CIT-156-A",
-      "R455-EV-CIT-156-B"
+      "R455-EV-CODE-157-A",
+      "R455-EV-CODE-157-B"
     ],
     "proposal_ids": [
-      "R455-PROP-156-WATER-CLARITY-NOT-ESPRESSO-TASTE-TARGET"
+      "R455-PROP-157-OVERVIEW-MEASURED-ELIGIBILITY"
     ],
-    "number_of_curated_sources": 85,
-    "total_evidence_checks": 228,
-    "number_of_proposals": 117,
-    "review_type": "ORIGINAL_JSTAGE_FULL_PUBLISHER_DRIP_WATER_SODIUM_AND_CLEAN_SENSORY_BOUNDARY",
-    "code_or_policy_changed": false,
+    "number_of_curated_sources": 86,
+    "total_evidence_checks": 230,
+    "number_of_proposals": 118,
+    "review_type": "SAFE_REPRODUCED_MEASURED_SUCCESS_OVERVIEW_RECIPE_SOURCE_FIX",
+    "code_or_policy_changed": true,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
-    "status": "RESEARCH_DOCS_PR_CI_PENDING",
-    "next_action": "Check exact PR-head checks, nonforce merge and merged-source governance; continue distinct current Log Shot UX bug review. S019 remains unavailable; no evidence of universal espresso-water targets."
+    "status": "SOURCE_FIX_CODE_AND_SYNTHETIC_TESTS_COMMITTED_CI_PENDING",
+    "source_commit_sha": "b7c46ac56947936f2701d8268fb690718d704159",
+    "next_action": "Run exact PR-head Node22 and applicable CI. Nonforce merge only after success, independently verify merged code/tests/queue/ledger and READY. S019 remains inaccessible."
   },
   "policy_decisions_resolved": [
     {
@@ -6804,6 +6839,28 @@
       "implementation": "DOCUMENTATION_ONLY_PENDING_APPLICABLE_PR_CI_AND_MERGE",
       "test_plan": "JSON parse and unique IDs, source SHA-bound docs-only PR-head/merged Git checks, no new Node22 or physical espresso/hosted SQL claim.",
       "release_queue_status": "NOT_APPLICABLE_NO_DEPLOYABLE_CHANGE",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-157-OVERVIEW-MEASURED-ELIGIBILITY",
+      "finding": "Coffee overview mistakenly asserted measured Dialed In state for historical all-five-green shots whose grind or optional temperature cannot be used by current recommendation recipe evidence.",
+      "evidence": [
+        "LIVE-20261110-OVERVIEW-MEASURED-GRIND-TEMP",
+        "R455-EV-CODE-157-A",
+        "R455-EV-CODE-157-B"
+      ],
+      "severity": "P2_CONFUSING_SUCCESS_STATE_MEASURED_EVIDENCE_DISAGREEMENT",
+      "user_benefit": "Consistent Log Shot to Rate to Recommendation and Coffee overview, preserve authentic History without falsely asserting a usable successful current recipe.",
+      "current_locked": "All five taste ratings, complete green vs missing, true actual measured recipe eligibility, one controllable suggestion, real grinder espresso range, independent styles, historical private shot/notes and all-grind-version preservation.",
+      "current_app": "Source e951531567825ca688c9772628a4d8f09736487f model.js original blob 5ea712305d9ba0f948ef3aa2d576dd27aa51b31c omitted grind/temp eligibility; engine.js 74ef8567741c0c2ebaa08ea60c274af4e1810665 and ui.js already guard those controls.",
+      "proposed_change": "SAFE implementation ONLY: measured local-success predicate checks finite numeric nonnegative grinder setting, within recorded active range if present, optional recorded temperature in approved Log Shot bounds, preserving original data/green History. No policy supersession.",
+      "evidence_grade": "DIRECT_CURRENT_SOURCE_REPRODUCIBLE_BUG_WITH_POSITIVE_NEGATIVE_SYNTHETIC_REGRESSION_STAGED",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "CODE_TEST_AND_SAME_COMMIT_JOURNAL_b7c46ac56947936f2701d8268fb690718d704159_IN_PROGRESS_PENDING_GITHUB_CI",
+      "test_plan": "Five focused synthetic Node22 tests, full changed-code Node22/lint as CI applicable, browser/cloud/SQL applicability guard, source SHA check, nonforce PR merge, exact merged CI/readback. Unrun is not PASS.",
+      "release_queue_status": "IN_PROGRESS_DIC-Q-455-local-success-grind-temp-eligibility",
       "github267_literal_review_credit": 0,
       "production_deployed": false
     }
