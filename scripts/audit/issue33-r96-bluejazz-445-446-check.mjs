@@ -56,6 +56,19 @@ if(process.env.DIC_ISSUE33_R96_VERIFY==='1'){
     require(fold(f.name)===fold(e.name)&&/blue jazz coffee/i.test(f.roaster||''),'actual_parser_selected_identity_'+e.number);
     require(r.add_coffee_ui_rendered===true&&r.source_review_rendered===true,'member_preview_and_review_'+e.number);
     require(/guatemala/i.test(f.origin||''),'source_qualified_country_'+e.number);
+    if(e.number===445){
+      require(/Lake Atitlan/i.test(f.origin||'')&&/HueHuetenengo/i.test(f.origin||''),
+        'two_published_selected_regional_lots_445');
+      require(!f.elevation_m,'two_elevations_not_one_blend_elevation_445');
+      require(/stone fruit/i.test(f.tasting_notes||'')&&/lemon/i.test(f.tasting_notes||''),
+        'both_direct_sensory_components_445');
+    }else{
+      require(/Lake Atitlan/i.test(f.origin||'')&&f.roast_level==='Medium-Light',
+        'exact_current_region_and_roast_446');
+      require(/Caturra/i.test(f.variety||'')&&/Bourbon/i.test(f.variety||'')&&
+        /cherry cola/i.test(f.tasting_notes||'')&&/molasses/i.test(f.tasting_notes||''),
+        'direct_current_variety_and_flavors_446');
+    }
     require(!f.producer&&!f.farm&&!f.decaffeination_method,'no_invented_farm_person_decaf_'+e.number);
     require(!r.conflicts?.length,'no_unexplained_selected_conflicts_'+e.number);
     details.push({number:e.number,final_url:r.final_url,html_sha256:r.html_sha256,html_bytes:r.html_bytes,

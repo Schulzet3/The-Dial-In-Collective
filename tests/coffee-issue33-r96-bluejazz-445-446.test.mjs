@@ -49,3 +49,28 @@ test('unrelated Dark roast and Ethiopian coffee in aside do not override selecte
   assert.equal(p.ok,true,JSON.stringify(p));
   assert.ok(!/ethiopia|blueberr|kenya|gesha/i.test(JSON.stringify(p.fields)));
 });
+
+test('same-country regional blend recovers BOTH literal components with no invented blend elevation',()=>{
+ const e=c(445),p=parse(e,e.own.join('. '));
+ assert.equal(p.ok,true,JSON.stringify(p));
+ assert.match(p.fields.origin||'',/Lake Atitlan/i);
+ assert.match(p.fields.origin||'',/HueHuetenengo/i);
+ assert.match(p.fields.origin||'',/Guatemala/i);
+ assert.ok(!p.fields.elevation_m);
+ assert.ok(!p.fields.producer&&!p.fields.decaffeination_method);
+});
+test('historical composition statement and unrelated sidebar must not refine current country',()=>{
+ const e=c(445),old=e.own.join('. ').replace('combined them to make a single origin blend','previously combined them to make a single origin blend');
+ const p=parse(e,old);
+ assert.equal(p.ok,true,JSON.stringify(p));
+ assert.ok(!/HueHuetenengo/i.test(p.fields.origin||''),JSON.stringify(p.fields));
+ const q=parse(e,'Current selected coffee has no regional detail.','<aside>'+e.own.join('. ')+'</aside>');
+ assert.equal(q.ok,true,JSON.stringify(q));
+ assert.ok(!/HueHuetenengo|Atitlan/i.test(q.fields.origin||''));
+});
+test('unrelated recommended origins never mix with two selected regional components',()=>{
+ const e=c(445),p=parse(e,e.own.join('. '),'<aside><h2>Other coffee</h2>Kenya Natural 2600 MASL blueberry</aside>');
+ assert.equal(p.ok,true,JSON.stringify(p));
+ assert.match(p.fields.origin||'',/Lake Atitlan/);
+ assert.ok(!/Kenya|blueberry/i.test(JSON.stringify(p.fields)));
+});
