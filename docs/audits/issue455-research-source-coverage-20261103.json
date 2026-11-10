@@ -4499,18 +4499,18 @@
       "id": "R455-EV-CODE-164-A",
       "source": "LIVE-20261110-ISSUE455-ENGINE-OUTLIER-PREDICATE",
       "claim": "Direct source-bound isExtreme previously counted four all-five-green physical dose/yield/time donors regardless of an explicitly recorded invalid negative/nonfinite/typed grinder or out-of-bound optional temperature, enabling a mandatory spurious outlier prompt.",
-      "grade": "DIRECT_LIVE_SOURCE_STATIC_NEGATIVE_REPRO_EXPECTED; CI_REGRESSION_PENDING",
+      "grade": "DIRECT_LIVE_SOURCE_STATIC_NEGATIVE_REPRO_EXPECTED; FOCUSED_EXACT_SOURCE_NODE22_HEAD_AND_MERGE_SUCCESS",
       "current_app": "site/lib/engine.js Git blob 9b0071f2bdd89b931662fe3232d4659524ad2e67 at parent eeec5a9bb88f73c69ab4eccaab46e8f14462d534",
-      "result": "SAFE_NARROW_EVIDENCE_FILTER_STAGED",
+      "result": "EXACT_SOURCE_REPRO_AND_SAFE_FIX_MERGED_FULL_REGRESSION_SUCCESS",
       "owner_approval": false
     },
     {
       "id": "R455-EV-CODE-164-B",
       "source": "LIVE-20261110-ISSUE455-ENGINE-OUTLIER-PREDICATE",
       "claim": "Preserve previously unrecorded legacy controls, positive/negative measured cases, 4-donor count, ratio deviation >1.25 and time deviation >25, exact coffee/style/setup/feed/basket/calibration, and original notes/ratings; reject explicitly impossible prior controls and current same-version out-of-espresso-range grinder values.",
-      "grade": "LOCKED_COMPATIBILITY_SYNTHETIC_TEST_CASES_SOURCE_BOUND_CI_PENDING",
+      "grade": "LOCKED_COMPATIBILITY_SYNTHETIC_TEST_CASES_SOURCE_BOUND_CI_SUCCESS",
       "current_app": "New test tests/issue455-outlier-explicit-controls.test.mjs checks exclusions, inclusive controls, no mutation and saveShot integration.",
-      "result": "FOCUSED_POSITIVE_NEGATIVE_REGRESSION_STAGED_NOT_CI_PASSED",
+      "result": "FOCUSED_SYNTHETIC_POSITIVE_AND_NEGATIVE_NODE22_HEAD_AND_MERGED_SUCCESS",
       "owner_approval": false
     }
   ],
@@ -4613,36 +4613,23 @@
     "R455-160 @f2d7d0146ad3920d89f9d728d388fa00482a7752: original 2026 Cusielo espresso/decaffeinated sweetener QDA 13 selected vs abstract 18 discrepancy and Table 4 body p>0.05 vs prose; 89 sources / 236 bounded checks / 121 proposals; no unsweetened/personal taste rule, no runtime/Locked/release change; docs CI/merge pending; S019 standalone inaccessible; #267 literal credit zero.",
     "R455-161 @d535a5bb04b402209d04897f8b9d46b3e407f87b: direct Library 10pp PDF page 8-9 hypothesis that slow-feed mode changes alone create a recipe family DISALLOWED by later Locked Master ('Slow Feed remains a grinder condition, does not itself create a family or Experiment'); current engine assignment ratio/coffee/style and grinder feed conditioning crosschecked. 89 sources / 238 checks / 122 proposals; no new code/Locked/queue/production change, no owner decision. Original PDF already inventoried, different registered archive hash, S019 inaccessible. Git PR/CI/merge pending; #267 literal credit zero.",
     "R455-162 @9743126ad5f920f5cd56f9d5f654fb643312801f: independently reviewed original 2026 Lo Vecchio et al. 3-brewer coffee study (DOI 10.3390/separations13060166): single blend, non-equivalent dose/yield/apparatus, pooled composite chemistry, 10-person duplicate sensory panel, manufacturer-provided test device and consultancy disclosed; neither 10s/nominal15bar nor sweetness panel is universal DIC espresso advice. 90 sources / 240 bounded checks / 123 proposals; no safe runtime bug, Locked/queue/main/release/Netlify/provider change or #267 literal-line credit; original publisher PDF/raw data and standalone S019 PDF not accessed; Git PR/CI/merge to verify.",
-    "R455-164 @eeec5a9bb88f73c69ab4eccaab46e8f14462d534: source repro showed four historical explicit invalid grinder/temp records can falsely count for mandatory outlier prompt. Same-commit engine/test/source-ledger/journal staged; run exact PR-head Node22 and applicable governance, repair failures, nonforce merge, readback merged CI, reconcile queue/status and Issue #455. No numeric/Locked/product/production change. #267 line credit 0; S019 original inaccessible."
+    "R455-164 @eeec5a9bb88f73c69ab4eccaab46e8f14462d534: source repro showed four historical explicit invalid grinder/temp records can falsely count for mandatory outlier prompt. Same-commit engine/test/source-ledger/journal staged; run exact PR-head Node22 and applicable governance, repair failures, nonforce merge, readback merged CI, reconcile queue/status and Issue #455. No numeric/Locked/product/production change. #267 line credit 0; S019 original inaccessible.",
+    "R455-164 FINAL verified code PR #1857 head 9f8d713... nonforce merged c26a9a9... four exact blobs and 3529 Node22 PASS/0 FAIL/6 SKIP both head/merged, browser/mobile/offline/SQL/security/approval applicable PASS. New queue DIC-Q-455-outlier-explicit-controls READY in development only; no deployment. Continue separate claim-level source inventory and narrow SAFE UX review under live SHA; original standalone S019 still inaccessible; no #267 credit."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-163",
-    "base_development_sha": "404f7111dc31316f1d814a1331b39e38fedbfe6a",
-    "main_sha": "11e1e8c7c36dad488519476d8a969bb682915d31",
-    "release_production_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
-    "source_ids": [
-      "LIT-2025-BARLETTA-INVERSE-SIMULATION-ARXIV"
-    ],
-    "claim_ids": [
-      "R455-EV-CIT-163-A",
-      "R455-EV-CIT-163-B"
-    ],
-    "proposal_ids": [
-      "R455-PROP-163-INVERSE-SIMULATION-NOT-PERSONAL-TASTE"
-    ],
-    "number_of_curated_sources": 91,
-    "total_evidence_checks": 242,
-    "number_of_proposals": 124,
-    "review_type": "NEW_PRIMARY_FULL_HTML_COMPUTATIONAL_INVERSE_ESPRESSO_SIMULATION_SCOPE",
-    "code_or_policy_changed": false,
-    "locked_policy_changed": false,
-    "production_deployed": false,
-    "github267_literal_line_review_credit": 0,
-    "status": "STAGED_PR_HEAD_CI_PENDING",
-    "next_action": "Verify exact PR-head checks and safe nonforce merge, merged Git blob equivalence and applicable CI; next disjoint UX/source review; S019 still inaccessible.",
     "run_id": "R455-164",
-    "source_sha": "eeec5a9bb88f73c69ab4eccaab46e8f14462d534",
-    "scope": "isExtreme explicit invalid controls"
+    "source_sha": "c26a9a9c5f44cb77dc9e3a92429da5a10d9980ce",
+    "issue": 455,
+    "pr": 1857,
+    "phase": "SAFE_OUTLIER_CODE_AND_TEST_NONFORCE_MERGED_HEAD_AND_MERGED_APPLICABLE_CI_SUCCESS",
+    "source_counts": {
+      "sources": 91,
+      "evidence_checks": 244,
+      "proposals": 125
+    },
+    "release_state": "READY_IN_DEVELOPMENT_NOT_DEPLOYED",
+    "original_s019": "UNAVAILABLE_NOT_REVIEWED",
+    "github267_literal_review_credit": 0
   },
   "policy_decisions_resolved": [
     {
@@ -7261,11 +7248,13 @@
       "evidence_grade": "DIRECT_CURRENT_CODE_STATIC_REPRO_AND_FOCUSED_SYNTHETIC_REGRESSIONS; REAL_MEMBER_IMPACT_UNVERIFIED",
       "approval_required_for_behavior_change": false,
       "owner_approval_now_required": false,
-      "implementation": "SAME_COMMIT_ENGINE_TEST_LEDGER_JOURNAL_STAGED_PR_HEAD_CI_PENDING",
-      "test_plan": "Node22 tests/issue455-outlier-explicit-controls.test.mjs five scenario groups; exact-source selected Node/UX/offline/source governance and browser/cloud routes as CI applies; read PR merge source and queue before READY; no fresh production SQL/Auth/Edge tests or real espresso outcome claims.",
-      "release_queue_status": "IN_PROGRESS_NOT_READY_NOT_DEPLOYED",
+      "implementation": "PR1857_EXACT_TESTED_HEAD_9f8d713a63cf596b589b0fecd565b62be43f74b0_NONFORCE_SQUASH_MERGED_c26a9a9c5f44cb77dc9e3a92429da5a10d9980ce_FOUR_BLOBS_IDENTICAL_PR_HEAD_AND_MERGE_APPLICABLE_EXACT_CI_SUCCESS",
+      "test_plan": "5 new positive/negative synthetic test groups in tests/issue455-outlier-explicit-controls.test.mjs. PR-head 42848265754 Node22 3529 PASS/0 FAIL/6 intentional SKIP, lint and build SUCCESS; cloud UX 42848265650, isolated SQL 42848265687, source security 42848265636, approval 42848265878 all SUCCESS. Exact merged-source Node22 42848800485 same 3529/0/6 + lint/build SUCCESS, cloud/mobile/browser/offline 42848800567 SUCCESS, approval 42848800532 SUCCESS. Original 603 run 42848265924 SKIPPED, not PASS; no live Auth/member or espresso-quality measurements.",
+      "release_queue_status": "DIC-Q-455-outlier-explicit-controls_READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
       "github267_literal_review_credit": 0,
-      "production_deployed": false
+      "production_deployed": false,
+      "pr_number": 1857,
+      "merge_sha": "c26a9a9c5f44cb77dc9e3a92429da5a10d9980ce"
     }
   ],
   "changeScope": {
