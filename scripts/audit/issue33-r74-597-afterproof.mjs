@@ -50,7 +50,8 @@ check(/Washed/i.test(fields.process||''),'actual_parser_washed_process_missing')
 check(/SL\s*-?\s*28/i.test(fields.variety||'') && /Ruiru\s*-?\s*11/i.test(fields.variety||'') &&
  !/screen|grade|14\b/i.test(fields.variety||''),'actual_parser_variety_or_screen_grade_contaminated');
 check(/1400/.test(String(fields.elevation_m||'')),'actual_parser_current_elevation_missing');
-check(['floral','grapefruit','caramel'].every(x=>notes.includes(x)),'actual_parser_selected_sensory_notes_missing');
+check(['floral','grapefruit','citrus','caramel'].every(x=>notes.includes(x)),'actual_parser_current_selected_sensory_notes_missing');
+check(!fields.roast_level,'unsupported_absolute_roast_inferred_from_relative_menu_claim');
 check(r.add_coffee_ui_rendered===true&&r.source_review_rendered===true,'actual_add_coffee_or_source_review_missing');
 check(!(r.conflicts||[]).some(x=>/name|origin|producer|variety|elevation|process|tasting_notes/i.test(String(x))),
  'current_selected_parser_field_conflicts');
