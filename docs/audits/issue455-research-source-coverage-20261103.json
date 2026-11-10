@@ -4550,6 +4550,24 @@
       "current_app": "Five owner-Locked subjective ratings; no invented pH/TDS or universally optimal ratio/time/grind model in recommendation logic.",
       "result": "NO_NEW_NUMERIC_TARGET_CONFIDENCE_LABEL_OR_POLICY_APPROVED",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-APP-166-A",
+      "source": "site/lib/engine.js original blob 66a2f42419451a83d0f4c3153a6e4e436ff5f6ff, development 56eeeda0a47d9cc95d75521f559f0d4d95344290",
+      "claim": "personalSimilarCoffeeReference excluded nonloggable dose/yield/time but accepted explicitly nonfinite, string, negative or out-of-current-espresso-range grinder and invalid optional temperature for other-coffee five-green success.",
+      "grade": "DIRECT_CODE_SYNTHETIC_REPRODUCTION_EXPECTED; NO_MEMBER_OR_PHYSICAL_CUP_EVIDENCE",
+      "current_app": "Original line 297-301 compared five ratings and three physical measures but not historical grinder/temperature; overview and outlier evidence guards already screened them.",
+      "result": "SAFE_FIX_AUTHORED_EXACT_SOURCE_CI_PENDING",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-APP-166-B",
+      "source": "tests/issue455-similar-coffee-explicit-controls.test.mjs and engine version source 56eeeda0a47d9cc95d75521f559f0d4d95344290",
+      "claim": "Reject only recorded impossible controls, retain missing optional legacy controls, valid endpoints, style/feed/physical/five-rating constraints, notes and original history.",
+      "grade": "SIX_DIRECT_SYNTHETIC_POSITIVE_NEGATIVE_REGRESSION_GROUPS_AUTHORED_NOT_EXECUTED_AT_INTAKE",
+      "current_app": "Existing owner Lock prohibits uncontrolled equipment evidence, invented taste targets, altered historical shots or new capture.",
+      "result": "PR_HEAD_AND_MERGED_CI_NOT_VERIFIED_AT_AUTHORING",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [],
@@ -4561,6 +4579,7 @@
     "reason": "R455-123 verified existing Locked 70-100 C recorded-temperature guard prevents invalid imported temp from becoming personal grind evidence; six direct-module tests and exact source CI, no scientific target or deployed change."
   },
   "next_actions": [
+    "R455-166 exact original development 56eeeda0a47d9cc95d75521f559f0d4d95344290: coded similar-coffee explicit grinder/temperature evidence guard, six new direct synthetic groups; exact PR-head CI, nonforce merge, merged source and READY reconciliation PENDING; S019 inaccessible, zero #267 literal review credit.",
     "R455-165 doc research primary Gloess 2013 indexed Springer original methods/sensory/correlations review at dev d8c25686c343aa13ce37f2a81204a004dbb835f1; new source and bounded evidence checks/RESEARCH-ONLY proposal. Await docs PR-head and merged-source applicable governance; do not reclassify unrun tests or PDF figure/supplement access. No DIC behavioral correction proven, no owner approval needed, S019 original remains missing.",
     "R455-159 authoring at 3283bb3ceffc20aa6589e3f7a586b71cf82758d8: original Gantner et al. 2024 primary publisher HTML methods and results read; one new source/two independent bounded evidence checks/one research-only proposal. Need docs-only PR-head CI, nonforce merge and merged-source receipt. No revised age/rest/storage numeric recommendations, no reopened Roast Date/Bag UI, no #267 literal credit; S019 original remains inaccessible.",
     "R455-156 authoring at development 68a778b5: primary J-STAGE original 2024 Imamura water/sodium/clean taste full HTML Methods + tables/results checked; added source, two bounded checks, research-only proposal. No espresso water optimum, no DIC 5-rating validation, no code/queue/Locked/production changes or #267 literal credit. PR-head/merged CI pending; standalone S019 inaccessible.",
@@ -4656,16 +4675,16 @@
     "R455-164 FINAL verified code PR #1857 head 9f8d713... nonforce merged c26a9a9... four exact blobs and 3529 Node22 PASS/0 FAIL/6 SKIP both head/merged, browser/mobile/offline/SQL/security/approval applicable PASS. New queue DIC-Q-455-outlier-explicit-controls READY in development only; no deployment. Continue separate claim-level source inventory and narrow SAFE UX review under live SHA; original standalone S019 still inaccessible; no #267 credit."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-165",
-    "source_sha": "d8c25686c343aa13ce37f2a81204a004dbb835f1",
+    "run_id": "R455-166",
+    "source_sha": "56eeeda0a47d9cc95d75521f559f0d4d95344290",
     "issue": 455,
-    "phase": "RESEARCH_ONLY_GLOESS_2013_ORIGINAL_SOURCE_INDEXED_REVIEW_DOCS_PR_CI_PENDING",
+    "phase": "SAFE_SIMILAR_COFFEE_CONTROL_GUARD_CODE_CI_PENDING",
     "source_counts": {
       "sources": 92,
-      "evidence_checks": 246,
-      "proposals": 126
+      "evidence_checks": 248,
+      "proposals": 127
     },
-    "release_state": "NO_APP_CHANGE_NO_READY_OR_DEPLOY",
+    "release_state": "IN_PROGRESS_NOT_READY_NOT_DEPLOYED",
     "original_s019": "UNAVAILABLE_NOT_REVIEWED",
     "github267_literal_review_credit": 0
   },
@@ -7315,13 +7334,35 @@
       "release_queue_status": "NOT_APPLICABLE",
       "github267_literal_review_credit": 0,
       "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-166-SIMILAR-COFFEE-EXPLICIT-CONTROLS",
+      "finding": "Archived five-green other-coffee donor with explicitly impossible grinder or recorded temperature can skew unproven personal similar-coffee starting ratio/time, unlike current measured success and outlier rules.",
+      "evidence": [
+        "R455-EV-APP-166-A",
+        "R455-EV-APP-166-B"
+      ],
+      "severity": "P2_SYNTHETIC_REFERENCE_INTEGRITY_NO_OBSERVED_MEMBER_INCIDENT",
+      "user_benefit": "Preserve actionable plausible Log Shot recipe reference without treating unloggable equipment readings as demonstrated evidence; keep original five ratings, notes, private history and legacy optional values.",
+      "source_provenance": "Original engine Git blob 66a2f42419451a83d0f4c3153a6e4e436ff5f6ff at 56eeeda0a47d9cc95d75521f559f0d4d95344290 and prior related R455-079/087/157/164 regressions inspected; no new external science claim.",
+      "current_locked": "Five ratings and all-green vs missing; original measured notes/shot history, true version-specific espresso grind range, optional recorded 70-100 C, independent style/feed, one controllable change, privacy/Community.",
+      "current_app": "Original personalSimilarCoffeeReference filtered measured dose/yield/time with no explicit grinder/temp eligibility.",
+      "proposed_change": "SAFE minimal conditional reject explicitly recorded invalid grinder/temperature, respect existing version/input bounds and allow absent optional legacy values; six focused positive/negative direct-module tests.",
+      "evidence_grade": "DETERMINISTIC_SOURCE_DISCREPANCY_AND_SYNTHETIC_TEST_EXPECTATIONS_NOT_ESPRESSO_QUALITY_VALIDATION",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "CANDIDATE_SAME_COMMIT_SOURCE_TEST_LEDGER_QUEUE_JOURNAL; CI_PENDING_NOT_READY",
+      "test_plan": "Exact Node22, CI governance, browser/mobile/offline, SQL/Auth, security as applicable; nonforce PR and verified merged-source CI before READY. Frozen 603 not affected and SKIPPED is not PASS.",
+      "release_queue_status": "IN_PROGRESS_DEV_ONLY",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
     }
   ],
   "changeScope": {
-    "application_code_changed": false,
+    "application_code_changed": true,
     "tests_executed": false,
+    "queue_changed": true,
     "production_deployed": false,
-    "queue_changed": false,
-    "reason": "R455-162 source-bound original full publisher HTML sensory comparison guard; docs-only evidence, no proven app bug or owner approval now; PR CI/merge pending."
+    "reason": "R166 deterministic similar-coffee historical control eligibility; test authored only, no CI claim as of commit."
   }
 }
