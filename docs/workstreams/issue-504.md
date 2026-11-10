@@ -1943,3 +1943,16 @@ Status **IN_PROGRESS / CI PENDING**. **NEXT original [PR #773](https://github.co
 
 
 **G1-151 premerge negative diff verification:** Original immutable ledger `last_partially_reviewed_document` source-bound RELEASE_QUEUE.json partial coverage pointer was accidentally set null in first proposed commit. Before merge, restored the exact prior pointer (blob `ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6`, original 1–4736/5377 lines), preserved its original credit receipts, and added an explicit reconciliation entry. No source credit changed or queue file modified. This correction is included in this same nonforce documentation-only follow-up commit; CI and exact source readback still required.
+
+
+## Issue #504 G1-152 — November 10, 2026 UTC, original PR #773–780 title/body word-level semantic review [skip netlify]
+
+Live source development parent `791db1c640dd6d071c9f9e80a06353a145688a18`, main `11e1e8c7c36dad488519476d8a969bb682915d31`, release/production `a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0`, tree `ed2a0cec71e6ac1bfc0e3ccabe2378c3ec41f28b`; owner-authorized temporary PUBLIC #630 Nov 4–30 preserved, no visibility action. Reviewed #504 prior receipts/ledger, scoped journals, AGENTS, context entrypoint/PREFLIGHT, canonical authority and current concurrent #267/#455/#33/#96 OPEN status (not credited as new source semantic review).
+
+**Original complete historic PR #773–780 metadata: 8 original GitHub objects / 942 Unicode-whitespace words / 8114 UTF-8 bytes**, every title/body word 1–EOF. Immutable [G1-152 source receipt](../audits/issue504-review-G1-152.json) preserves original complete words, exact SHA1 per field, status, source SHAs, timestamps, inclusive word/body-line ranges, individual historic/current semantic disposition. #779 is CLOSED UNMERGED following failing ancestry gate, #780 safely replaced. #773 research not universal taste proof; #774/#775 legacy publisher/ZIP risks delegated #267, active usage UNVERIFIED; #776–778 source-specific #33 evidence not global deployment certification. No new confirmed current #504-owned code/docs defect or safe current deletion.
+
+Independent delegated #267 F481 immutable `src/server/coffee-identity-evidence.mjs:40–42`, source blob `1cd583ad62de99b31123e637c3fc48751349e0d8`, strict N15 receipt blob `22b7ada15201d5d02e2fc9fbbd812f8f6132bc96`: **3/3 literal positions and 11 semantic fields per line matched**, no #504 code credit; #267 still unfinished.
+
+Ledger **152/152 contiguous**; preserve G1-117 -15/-4012 duplicate correction, exact prior partial RELEASE_QUEUE.json pointer `ab61b0113d7b3eb1b5924eb2e215f1bb7cc9dbb6` lines 1–4736/5377, all prior receipts. Cumulative **7,919 file lines / 60,754 words + 956 original GitHub records / 260392 words**. Proposed 3-path docs-only commit (receipt + ledger + same-commit scoped journal), functional Node22/SQL/Auth/browser/mobile/offline/original603 **NOT_RUN_DOCS_ONLY**, PR/exact merged-source CI **PENDING**. No code/queue/Locked/oracle/main/release/production/member/SQL/Edge/Netlify/provider/visibility action. Issue #504 stays OPEN / IN_PROGRESS.
+
+**Next original [PR #781](https://github.com/Schulzet3/The-Dial-In-Collective/pull/781), title word 1**, then body. PR diffs/reviews/comments, Actions/job logs/artifacts, issues/commit/tag/release/tree/binary/drift, #267 unfinished scope remain.
