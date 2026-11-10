@@ -831,7 +831,17 @@ export function makeCurrent(s,shotId) {
  // An old five-green marker does not certify unloggable imported measurements.
  // Keep original History/notes; a chosen Current must qualify as recipe evidence.
  if(!measuredRecipeShots([sh]).length)throw new Error('Choose a shot with valid recorded dose, yield and time.');
- if(sh.setupVersionId!==activeVersion(s).id)throw new Error('This is a reference from another setup. Log a successful shot here first.');
+ const version=activeVersion(s);
+ if(sh.setupVersionId!==version?.id)throw new Error('This is a reference from another setup. Log a successful shot here first.');
+ // Keep original all-green imported history even if an explicitly recorded
+ // grinder or temperature could not be entered today. Such a shot cannot
+ // become the chosen Current recipe; missing legacy optionals remain eligible.
+ if(sh.grindSetting!=null&&(!finite(sh.grindSetting)||sh.grindSetting<0||
+    (finite(version.grinderMin)&&sh.grindSetting<version.grinderMin)||
+    (finite(version.grinderMax)&&sh.grindSetting>version.grinderMax)))
+  throw new Error('Choose a shot with a valid recorded grinder setting for this setup.');
+ if(sh.tempC!=null&&!validRecordedTemperature(sh.tempC))
+  throw new Error('Choose a shot with a valid recorded temperature.');
  // Do not store a phantom currentFamilies/favoriteShots key for malformed
  // imported all-green rows missing their historical recipe-family identity.
  if(typeof sh.familyId!=='string'||!sh.familyId.trim())throw new Error('Choose a shot with an assigned recipe family. The original history remains unchanged.');

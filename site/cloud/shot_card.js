@@ -9,11 +9,24 @@ const isMeasuredRecipeShot=shot=>['doseG','yieldG','timeS'].every(field=>{
  return finite(shot[field])&&shot[field]>=low&&shot[field]<=high;
 })&&finite(shot.yieldG/shot.doseG);
 
+// An all-green historical row with an impossible explicitly recorded control
+// remains visible in private History, but cannot be offered as Current.
+// Use the active calibration when provided; legacy missing optionals stay valid.
+const recordedControlsUsable=(shot,grinderMin=null,grinderMax=null)=>{
+ const low=finite(grinderMin)?grinderMin:shot.snapshot?.grinderMin;
+ const high=finite(grinderMax)?grinderMax:shot.snapshot?.grinderMax;
+ const grind=shot.grindSetting;
+ if(grind!=null&&(!finite(grind)||grind<0||
+    (finite(low)&&grind<low)||(finite(high)&&grind>high)))return false;
+ const temp=shot.tempC;
+ return temp==null||(finite(temp)&&temp>=CONFIG.bounds.tempC[0]&&temp<=CONFIG.bounds.tempC[1]);
+};
+
 // One-line shot summary on wide screens, like the original JSX.
 // Equipment context is preserved at the bottom of expanded details.
 export const feedLabel=mode=>mode==='slow'?'Slow Feed':mode==='standard'?'Standard Feed':'Feed Not Recorded';
 
-export function shotCard(shot,{expanded=false,activeVersionId=null,unit='F',familyRecorded=true}={}){
+export function shotCard(shot,{expanded=false,activeVersionId=null,unit='F',familyRecorded=true,grinderMin=null,grinderMax=null}={}){
  const recordUnit=shot.snapshot?.tempUnit||unit;
  const context=[
   ['Setup',shot.snapshot?.setupName],
@@ -29,7 +42,8 @@ export function shotCard(shot,{expanded=false,activeVersionId=null,unit='F',fami
  // A legacy all-green record without a real family identity cannot be a
  // selectable Current recipe. Preserve its original success badge and history.
  const hasFamily=typeof shot.familyId==='string'&&!!shot.familyId.trim();
- const canChoose=canEdit&&genuineSuccess&&isMeasuredRecipeShot(shot)&&hasFamily&&familyRecorded&&shot.setupVersionId===activeVersionId;
+ const canChoose=canEdit&&genuineSuccess&&isMeasuredRecipeShot(shot)&&
+  recordedControlsUsable(shot,grinderMin,grinderMax)&&hasFamily&&familyRecorded&&shot.setupVersionId===activeVersionId;
  return `<section class="shot">
   <button class="shot-toggle" data-action="shot-expand" data-id="${e(shot.id)}" aria-expanded="${expanded}" aria-label="Toggle details for shot on ${e(displayDate)}">
    <div class="shot-overview">
