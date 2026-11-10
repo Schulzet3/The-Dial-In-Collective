@@ -1,0 +1,8 @@
+# Issue #1938 — off-screen administrator push alerts
+
+- **Authority:** Owner November 10, 2026 requests actionable iPhone Home Screen push alerts even when Admin isn't open. Existing #1756 source-only in-app badge remains preserved.
+- **Base:** branch from feature #1937 reviewed source `603e9eb1cccd2b1713c6ec71665103ba9354eb0d` to avoid overwriting concurrent Admin view changes.
+- **Acceptance:** Opt-in/opt-out, installed iOS Home Screen, notifications from background service without private email/shot/coffee text; verified pending signup, pending/conflict coffees, and unfinished deletion actions; nonadmin denial; duplicate/stale suppression, unauthorized endpoints denied, no server private key in browser; source tests, exact CI, and separate owner-controlled publish.
+- **This checkpoint:** Created strict fixed-provider HTTPS endpoint validation, token allowlist and one-hour VAPID signing for contentless Web Push. Remaining API/SQL/worker/client/scheduler/tests/CI are IN_PROGRESS; no working off-screen delivery claimed.
+- **Secrets/runtime blockers:** VAPID public/private and service role environment secrets must be installed only as part of an explicitly authorized, recovery-verified production publication; iPhone opt-in and live APNs delivery cannot be tested from source-only work. No provider, production DB, member, Netlify or billing mutations authorized in this chat.
+- **Next:** Implement subscribed-admin server flow and scheduled sender, test RBAC/SQL/VAPID/dedupe and service worker, reconcile governance and queue, merge nonforce with exact CI, then report source readiness separate from deployed status.
