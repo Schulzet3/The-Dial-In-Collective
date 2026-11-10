@@ -1382,6 +1382,27 @@
       "current_app_crosswalk": "At exact development b8fe6729ca2014831b4713d2c3ae2c334bb381a4: engine.js blob 74ef8567741c0c2ebaa08ea60c274af4e1810665, model.js 5ea712305d9ba0f948ef3aa2d576dd27aa51b31c, constants.js 72221331ce4dffabe416eebec1ae2fceced3a095 and cloud/main.js cef43de79da7920097915cd050534cd1d6d0fbb4. Direct review of baseline, familyShots/measuredRecipeShots, recommendation, nextAdviceRaw, five-rating validation, Log Shot UI. User's five rated tastes and actual shot data; no electronic-tongue sensor or TDS/E personal calibration. No independently reproduced new SAFE app bug from this source.",
       "reviewed_date_utc": "2026-11-10",
       "implementation_status": "RESEARCH_ONLY_NO_RUNTIME_OR_POLICY_CHANGE"
+    },
+    {
+      "id": "LIT-2024-IMAMURA-JSTAGE-SODIUM-WATER-DRIP",
+      "type": "peer_reviewed_original_publisher_full_html_direct_non_espresso_water_and_sensory_study",
+      "title": "The clean taste of coffee depends on the sodium content of its extraction water",
+      "authors": "Koji Imamura",
+      "journal": "Food Science and Technology Research 30(2):213-221",
+      "published": "Released 2024-03-19; advance published 2024-01-26",
+      "doi": "10.3136/fstr.FSTR-D-23-00129",
+      "url": "https://www.jstage.jst.go.jp/article/fstr/30/2/30_FSTR-D-23-00129/_html/-char/en",
+      "original_source_url": "https://www.jstage.jst.go.jp/article/fstr/30/2/30_FSTR-D-23-00129/_html/-char/en",
+      "access": "JSTAGE_ORIGINAL_FULL_ENGLISH_HTML_METHODS_TABLES_RESULTS_CONCLUSION_DIRECT_READ_PDF_BINARY_NOT_DOWNLOADED",
+      "review_status": "R455-156_DIRECT_ORIGINAL_PUBLISHER_FULL_HTML_SECTIONS_1_TO_5_TABLES_2_3_4_AND_ACKNOWLEDGMENTS; FIGURE_PIXELS_AND_ORIGINAL_PDF_BINARY_UNVERIFIED",
+      "direct_review_provenance": "Original J-STAGE article lines 12-39 identity; 72-87 abstract/introduction; 88-121 methods; 122-170 water/sensory/sensor results; 171-204 measured compounds/sodium experiment; 213-239 Table 4/conclusion; 240 acknowledgments. Original publisher release 2024-03-19 and DOI, not copy from secondary reports.",
+      "evidence_grade": "PEER_REVIEWED_ONE_DRIP_BREW_BLEND_SIX_TRAINED_JCQA_PANELISTS_AND_INSTRUMENTAL_COMPARISONS; NO_ESPRESSO_OR_PERSONAL_RECOMMENDATION_EFFICACY",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "One mocha Arabica blend; 28 g grounds/515 mL, coffee maker extraction at 78 C, NOT espresso. Six trained volunteers in blind ratings; JCQA check-count positive/negative items, not validated DIC five 1-5 scales. Sensors TS-5000Z averaged three stabilized readings, HPLC/cation/anion testing. Comparisons span source water and chlorine as well as sodium; sodium citrate manipulation cannot isolate every potential taste effect; small panel, no same-person espresso outcome or repeatability study. Author is affiliated with an ice manufacturer; acknowledging industry context is not proof of research misconduct. Journal HTML full body directly read; original PDF binary/figure pixels/raw replicates not independently inspected or byte-hashed. Main narrative calls four water types while listing five including ultrapure, so enumerate actual treatments carefully.",
+      "claims_verified_externally": "Ground Brazil/Ethiopia blend 28g/515mL at 78 C via drip machine. Melted-ice water (<0.1 ppm Na) gave six of six positive clean evaluations vs one for ground water and three for tap, and high combined JCQA score (Table 3), but check-counts are not independent continuous taste magnitudes. Across studied brewed coffees, sodium (0.49/7.02/2.06/0.86 ppm) differed with water, while caffeine and chlorogenic acid differences were reported nonsignificant. Sodium-citrate added at 0.75 ppm to melted-ice water reduced six-person clean positive count 4 to 2 in a later table (Table 4); TS-5000Z sensor saltiness response significant, other seven sensor outputs not significant in this manipulation. Do not infer optimal espresso minerals, machine-safe water, DIC clarity scale, universal sodium thresholds, or chemical-to-subjective-score causality.",
+      "current_app_crosswalk": "Exact development 68a778b5285f14624db21bec2ad590bf3420af0d; engine.js Git blob 74ef8567741c0c2ebaa08ea60c274af4e1810665; model.js 5ea712305d9ba0f948ef3aa2d576dd27aa51b31c; constants.js 72221331ce4dffabe416eebec1ae2fceced3a095; cloud/main.js cef43de79da7920097915cd050534cd1d6d0fbb4. Reviewed measuredRecipeShots, recommendation (line 326), nextAdviceRaw (line 644), nextAdvice (691), saveShot (715), validateShot (model line 168) and cloud Log Shot imports. Current workflow captures five independent subjective taste ratings, actual recipe and history; no sodium-water causal calibration. No reproducible distinct SAFE runtime defect follows from this drip-brew study.",
+      "reviewed_date_utc": "2026-11-10",
+      "implementation_status": "RESEARCH_ONLY_NO_APPLICATION_OR_POLICY_CHANGE"
     }
   ],
   "evidence_checks": [
@@ -4205,6 +4226,26 @@
       "result": "SCIENCE_CONFIDENCE_NOT_ELIGIBLE_FOR_PROMOTION; NO_POLICY_OR_CODE_CHANGE",
       "owner_approval": false,
       "date": "2026-11-10"
+    },
+    {
+      "id": "R455-EV-CIT-156-A",
+      "source": "LIT-2024-IMAMURA-JSTAGE-SODIUM-WATER-DRIP original J-STAGE Methods lines 88-109 and Results Table 2-3 lines 122-160",
+      "claim": "One commercial drip-brew Arabica blend, 28g/515mL/78 C, blind six-volunteer JCQA categorical clean evaluations across melted-ice/ground/tap/chlorinated/ultrapure water; qualitative difference does not establish espresso sensory targets, or uniform water optima. The article says four waters in text while listing five actual treatment categories.",
+      "grade": "ORIGINAL_PUBLISHER_FULL_HTML_METHOD_TABLE_DIRECT_SIX_VOLUNTEERS_SINGLE_BLEND_NON_ESPRESSO",
+      "current_app": "Exact development 68a778b5285f14624db21bec2ad590bf3420af0d; engine.js Git blob 74ef8567741c0c2ebaa08ea60c274af4e1810665; model.js 5ea712305d9ba0f948ef3aa2d576dd27aa51b31c; constants.js 72221331ce4dffabe416eebec1ae2fceced3a095; cloud/main.js cef43de79da7920097915cd050534cd1d6d0fbb4. Reviewed measuredRecipeShots, recommendation (line 326), nextAdviceRaw (line 644), nextAdvice (691), saveShot (715), validateShot (model line 168) and cloud Log Shot imports. Current workflow captures five independent subjective taste ratings, actual recipe and history; no sodium-water causal calibration. No reproducible distinct SAFE runtime defect follows from this drip-brew study.",
+      "result": "ORIGINAL_NARROW_WATER_TASTE_COMPARISON_VERIFIED_ONLY_WITHIN_TESTED_DRIP_DESIGN",
+      "owner_approval": false,
+      "date": "2026-11-10"
+    },
+    {
+      "id": "R455-EV-CIT-156-B",
+      "source": "LIT-2024-IMAMURA-JSTAGE-SODIUM-WATER-DRIP original J-STAGE analyte/ion/sodium citrate results lines 171-239, disclosures/acknowledgments line 240",
+      "claim": "Sodium in brewed coffee changed across sampled waters while caffeinated/chlorogenic acid concentrations were reported not significantly different; 0.75 ppm sodium citrate experimental manipulation changed 6-person positive clean count from 4 to 2 and sensor saltiness but not other reported sensor categories. Sodium-citrate and water-source comparisons are conditional, small-panel, non-espresso and not unique sodium-causality proof; the source neither validates DIC five taste numbers nor recommends universal mineral targets. Original PDF/figure/raw replicates not reviewed.",
+      "grade": "PRIMARY_HTML_ORIGINAL_HPLC_CATION_SENSORY_COMPARISONS_SMALL_N; NO_REAL_PERSONAL_ESPRESSO_A_B",
+      "current_app": "Exact development 68a778b5285f14624db21bec2ad590bf3420af0d; engine.js Git blob 74ef8567741c0c2ebaa08ea60c274af4e1810665; model.js 5ea712305d9ba0f948ef3aa2d576dd27aa51b31c; constants.js 72221331ce4dffabe416eebec1ae2fceced3a095; cloud/main.js cef43de79da7920097915cd050534cd1d6d0fbb4. Reviewed measuredRecipeShots, recommendation (line 326), nextAdviceRaw (line 644), nextAdvice (691), saveShot (715), validateShot (model line 168) and cloud Log Shot imports. Current workflow captures five independent subjective taste ratings, actual recipe and history; no sodium-water causal calibration. No reproducible distinct SAFE runtime defect follows from this drip-brew study.",
+      "result": "CONDITIONAL_WATER_SODIUM_SENSOR_DESCRIPTIVE_BOUNDS_ONLY",
+      "owner_approval": false,
+      "date": "2026-11-10"
     }
   ],
   "policy_decisions_pending": [],
@@ -4216,6 +4257,7 @@
     "reason": "R455-123 verified existing Locked 70-100 C recorded-temperature guard prevents invalid imported temp from becoming personal grind evidence; six direct-module tests and exact source CI, no scientific target or deployed change."
   },
   "next_actions": [
+    "R455-156 authoring at development 68a778b5: primary J-STAGE original 2024 Imamura water/sodium/clean taste full HTML Methods + tables/results checked; added source, two bounded checks, research-only proposal. No espresso water optimum, no DIC 5-rating validation, no code/queue/Locked/production changes or #267 literal credit. PR-head/merged CI pending; standalone S019 inaccessible.",
     "R455-151 authored at 2bbb4f9598668538c8d27b5bdcf6e3f7758db040: independently upgraded Cameron et al. Matter 2020 from focused model claim to substantive original publisher-indexed model/experimental/cafe-cost sections, evidence CIT-151 A/B and science-boundary proposal; 80 sources, 217 checks, 112 proposals. No new safe runtime bug demonstrated, no Locked/queue/production change, no #267 literal credit. PR exact-source CI and nonforce integration pending; S019 standalone PDF inaccessible.",
     "R455-136 final: PR1653 exact code merged 529ad288b5962c2f69879daf6d6adb114320009b and all four Git blobs match reviewed head; Node22 3214/0/6 head and 3219/0/6 merged, all 3 new synthetic tests PASS, applicable Chromium/SQL/security/governance SUCCESS. READY queue development only, S019 missing, no #267 credit. Docs reconciliation CI/readback pending.",
     "R455-136 code correction authoring at ac4f6fb9bd6fde65eddd0f6d21d71ea3ce834465: old editShot could overwrite unrelated coffee Current/favorite in malformed historical pointer; scope to same coffee with 3 synthetic negative/positive cases. Source-bound Node22/CI, nonforce merge, exact merged readback and queue status PENDING; 76 sources /189 evidence checks /98 proposals, S019 inaccessible, #267 literal review credit zero.",
@@ -4299,28 +4341,28 @@
     "R455-155 @b8fe6729ca2014831b4713d2c3ae2c334bb381a4: publisher original Habara/Horiguchi 2024 16 full immersion electronic tongue conditions, funding/manufacturer caveat; 84 sources / 226 evidence checks / 116 proposals; docs only, no #267 semantic credit or product policy; confirm PR CI/merge; standalone S019 original missing."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-155",
-    "base_development_sha": "b8fe6729ca2014831b4713d2c3ae2c334bb381a4",
+    "id": "R455-156",
+    "base_development_sha": "68a778b5285f14624db21bec2ad590bf3420af0d",
     "source_ids": [
-      "LIT-2024-HABARA-HORIGUCHI-ETONGUE-IMMERSION"
+      "LIT-2024-IMAMURA-JSTAGE-SODIUM-WATER-DRIP"
     ],
     "claim_ids": [
-      "R455-EV-CIT-155-A",
-      "R455-EV-CIT-155-B"
+      "R455-EV-CIT-156-A",
+      "R455-EV-CIT-156-B"
     ],
     "proposal_ids": [
-      "R455-PROP-155-ETONGUE-NOT-PERSONAL-ESPRESSO-RATING"
+      "R455-PROP-156-WATER-CLARITY-NOT-ESPRESSO-TASTE-TARGET"
     ],
-    "number_of_curated_sources": 84,
-    "total_evidence_checks": 226,
-    "number_of_proposals": 116,
-    "review_type": "NEW_PRIMARY_PUBLISHER_INSTRUMENTAL_VS_HUMAN_ESPRESSO_TASTE_VALIDITY_BOUNDARY",
+    "number_of_curated_sources": 85,
+    "total_evidence_checks": 228,
+    "number_of_proposals": 117,
+    "review_type": "ORIGINAL_JSTAGE_FULL_PUBLISHER_DRIP_WATER_SODIUM_AND_CLEAN_SENSORY_BOUNDARY",
     "code_or_policy_changed": false,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
     "status": "RESEARCH_DOCS_PR_CI_PENDING",
-    "next_action": "Read exact PR-head checks, nonforce merge after current-branch conflict check, exact three merged blobs and merged governance; resume new UX/logic defect review; S019 original inaccessible."
+    "next_action": "Check exact PR-head checks, nonforce merge and merged-source governance; continue distinct current Log Shot UX bug review. S019 remains unavailable; no evidence of universal espresso-water targets."
   },
   "policy_decisions_resolved": [
     {
@@ -6739,6 +6781,28 @@
       "owner_approval_now_required": false,
       "implementation": "DOCUMENTATION_ONLY_PENDING_APPLICABLE_CI_AND_MERGE",
       "test_plan": "JSON parse and unique IDs, exact three Git blobs, source-bound PR-head governance and merged approval. No Node22/browser/SQL/Auth/frozen603/cup certification from docs-only route.",
+      "release_queue_status": "NOT_APPLICABLE_NO_DEPLOYABLE_CHANGE",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-156-WATER-CLARITY-NOT-ESPRESSO-TASTE-TARGET",
+      "finding": "A six-person drip-brew clean-score study cannot substitute for DIC espresso clarity/sweetness/astringency feedback or justify one fixed sodium/mineral recipe; note water chemistry as potential unmeasured context only.",
+      "evidence": [
+        "LIT-2024-IMAMURA-JSTAGE-SODIUM-WATER-DRIP",
+        "R455-EV-CIT-156-A",
+        "R455-EV-CIT-156-B"
+      ],
+      "severity": "P3_SCIENTIFIC_TRANSFER_BOUNDARY_NOT_REPRODUCED_RUNTIME_DEFECT",
+      "user_benefit": "Protect subjective rating integrity and avoid unwarranted water-mineral prescriptions or invented recommendation confidence.",
+      "current_locked": "All five original taste inputs, rated all-green vs missing, one genuinely controllable next change, actual recorded dose/yield/time, coffee identity, versioned setup, personal notes/recipes, independent espresso styles/slow feed, privacy.",
+      "current_app": "Exact development 68a778b5285f14624db21bec2ad590bf3420af0d; engine.js Git blob 74ef8567741c0c2ebaa08ea60c274af4e1810665; model.js 5ea712305d9ba0f948ef3aa2d576dd27aa51b31c; constants.js 72221331ce4dffabe416eebec1ae2fceced3a095; cloud/main.js cef43de79da7920097915cd050534cd1d6d0fbb4. Reviewed measuredRecipeShots, recommendation (line 326), nextAdviceRaw (line 644), nextAdvice (691), saveShot (715), validateShot (model line 168) and cloud Log Shot imports. Current workflow captures five independent subjective taste ratings, actual recipe and history; no sodium-water causal calibration. No reproducible distinct SAFE runtime defect follows from this drip-brew study.",
+      "proposed_change": "DOCUMENT_ONLY. Do not equate the source JCQA clean checkmark with DIC clarity, prescribe ultra-pure melted-ice water or sodium ppm, or add a chemistry-based flavor correction. Optional water data capture/recipe adjustment or numeric setpoint would require explicit owner approval and equipment-safety/human espresso evidence.",
+      "evidence_grade": "JSTAGE_FULL_PRIMARY_HTML_ONE_DRIP_BLEND_SIX_PANELISTS_NO_PERSONAL_ESPRESSO_TRIAL",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "DOCUMENTATION_ONLY_PENDING_APPLICABLE_PR_CI_AND_MERGE",
+      "test_plan": "JSON parse and unique IDs, source SHA-bound docs-only PR-head/merged Git checks, no new Node22 or physical espresso/hosted SQL claim.",
       "release_queue_status": "NOT_APPLICABLE_NO_DEPLOYABLE_CHANGE",
       "github267_literal_review_credit": 0,
       "production_deployed": false
