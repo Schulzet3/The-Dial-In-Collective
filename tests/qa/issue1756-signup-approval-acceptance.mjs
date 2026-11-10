@@ -67,6 +67,19 @@ export async function signupApprovalSecurityAcceptance({rpc,sql,scalar,sign,pass
  assert.equal(r.data?.code,'stale_review');
  assert.equal(countEvents(),auditedAfterApprove);
  pass('Repeated Admin approval never creates an extra event or changes membership');
+ // NULL is not an optional wildcard for the expected-state CAS. An admin
+ // must never resurrect a rejected account by passing NULL as expected state.
+ const rejectedAuditBefore=countEvents();
+ r=await rpc('dic_admin_review_signup',adminToken,
+  {p_member_id:unverified,p_action:'approve',p_expected_state:null});
+ assert.ok(r.status>=400||r.data?.ok!==true);
+ assert.equal(scalar("(select signup_review_state from private.beta_members where owner_id='"+unverified+"')"),'pending');
+ assert.equal(countEvents(),rejectedAuditBefore);
+ r=await rpc('dic_admin_review_signup',adminToken,
+  {p_member_id:unverified,p_action:null,p_expected_state:'pending'});
+ assert.ok(r.status>=400||r.data?.ok!==true);
+ assert.equal(countEvents(),rejectedAuditBefore);
+ pass('NULL expected state or action cannot bypass mandatory pending compare-and-set');
  r=await rpc('dic_admin_review_signup',adminToken,{p_member_id:rejected,p_action:'reject',p_expected_state:'pending'});
  assert.equal(r.status,200);
  assert.equal(r.data?.decision,'reject');

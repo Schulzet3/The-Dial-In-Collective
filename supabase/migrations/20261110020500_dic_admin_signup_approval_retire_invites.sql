@@ -84,8 +84,8 @@ begin
  if actor is null or not private.is_admin() then
   raise exception using errcode='42501',message='Administrator required.';
  end if;
- if p_member_id is null or p_member_id=actor or p_action not in ('approve','reject')
-  or p_expected_state<>'pending' then
+ if p_member_id is null or p_member_id=actor or p_action is null or p_action not in ('approve','reject')
+  or p_expected_state is distinct from 'pending' then
   raise exception using errcode='22023',message='Invalid signup review.';
  end if;
  if exists(select 1 from private.app_admins where owner_id=p_member_id) then
