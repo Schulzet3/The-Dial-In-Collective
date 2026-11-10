@@ -3591,6 +3591,17 @@
       "development_parent_sha": "e7b912440bb9823d55050ed361008d40e6ea1766",
       "provider_writes": false,
       "source_word_credit": 0
+    },
+    {
+      "run": "2026-11-10 Issue #509 Run149",
+      "source_parent_sha": "4e18ef7c209472133b41cfcd9e1f780854f05134",
+      "receipt_path": "docs/audits/issue509-provider-authenticated-definer-rpc-2026-11-10-run149.json",
+      "provider_full_functions_semantically_reviewed": 10,
+      "confirmed_branch_logic_gap": 1,
+      "new_word_credit": 0,
+      "provider_writes": false,
+      "ci": "NOT_YET_VERIFIED",
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -16294,5 +16305,22 @@
     "hosted_api_boundary": "UNVERIFIED",
     "baseline_complete": false,
     "next": "New/changed provider object; #96 hosted JWT/PostgREST boundary if accessible"
+  },
+  "provider_authenticated_definer_rpc_run149": {
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_parent_sha": "4e18ef7c209472133b41cfcd9e1f780854f05134",
+    "receipt_path": "docs/audits/issue509-provider-authenticated-definer-rpc-2026-11-10-run149.json",
+    "authenticated_definer_functions_reviewed": 10,
+    "source_chars": 22174,
+    "source_words": 1709,
+    "first_time_words_credited": 0,
+    "confirmed_sql_logic_defects": 1,
+    "proven_quota_exploitation": false,
+    "proposed_migration": "supabase/migrations/20261110164500_dic_preview_preflight_null_flag_guard.sql",
+    "proposed_test": "supabase/tests/preview_two_phase_cache.sql",
+    "development_status": "IN_PROGRESS_SOURCE_ONLY_CI_PENDING",
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "Read exact-source SQL, signed JWT and governance CI; revalidate owner-sensitive quota and source branch before merge"
   }
 }
