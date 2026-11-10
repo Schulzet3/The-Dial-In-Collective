@@ -4,6 +4,7 @@ import {cases,selectedProof} from '../scripts/audit/issue33-r101-513-516-528-che
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 import {productMarkup} from '../src/server/coffee-product-scope.mjs';
 import {selectedProductHeadings} from '../scripts/audit/issue33-selected-product-heading.mjs';
+import {selectedCurrentLeadRoastNotes} from '../src/server/coffee-selected-current-panel.mjs';
 const page=(e,desc,neighbor='')=>'<html><head><meta property="og:type" content="product"></head><body><main>'+
  '<article class="product"><h1>'+e.name+'</h1><div class="product__description">'+desc+
  '</div></article>'+neighbor+'</main></body></html>';
@@ -90,4 +91,15 @@ test('conflicting current lead roast claims cannot make a canonical roast',()=>{
  {source_url:'https://'+e.host+e.path});
  assert.equal(p.ok,true,JSON.stringify(p));
  assert.ok(!p.fields.roast_level,JSON.stringify(p));
+});
+
+test('direct standalone selected lead helper accepts a short note-list punctuation variation',()=>{
+ const e=cases[2],html=page(e,
+ '<p>Medium-dark roast with notes of dark chocolate and malt, dark cherry and wild honey.</p>'+
+ '<p>Tasting Notes: Dark Chocolate, Dark Cherry, Wild Honey.</p>');
+ const clean=(value,max)=>String(value||'').replace(/<[^>]{0,1500}>/gu,' ').replace(/\s+/gu,' ').trim().slice(0,max);
+ const got=selectedCurrentLeadRoastNotes(html,{name:e.name,clean,notes:'Dark Chocolate, Dark Cherry, Wild Honey.'});
+ assert.ok(got,JSON.stringify({name:e.name,html}));
+ assert.equal(got.roast_level,'Medium-Dark');
+ assert.match(got.tasting_notes,/malt/i);
 });
