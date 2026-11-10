@@ -3673,6 +3673,14 @@
       "scope": "Isolated SQL failed due pg_get_functiondef missing terminal semicolon; corrected only guarded reconstructed CREATE FUNCTION EXECUTE; no production mutation.",
       "provider_writes": 0,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 UTC Run153 regex empty replacement SQL escaping correction",
+      "source_sha": "8375fcae908cb204eff05732ea6adc03f0f40f0a",
+      "evidence": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42899736777",
+      "scope": "Fix malformed generated SQL literal in guarded migration; exact SQL logging diagnosis and correction",
+      "provider_writes": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -16570,6 +16578,13 @@
       "diagnosis": "pg_get_functiondef produced CREATE FUNCTION lacking terminal semicolon; dynamic EXECUTE parsed final SQL incorrectly at JSON literal",
       "repair": "Append semicolon after reconstructed CREATE FUNCTION expression before EXECUTE",
       "status": "CI_PENDING"
+    },
+    "empty_regex_replacement_quoting": {
+      "failed_ci": 42899736777,
+      "observed_rendered_sql": "regexp_replace(nodes.k,'[^[:alnum:]]',','g')",
+      "corrected_expected_sql": "lower(regexp_replace(nodes.k,'[^[:alnum:]]','','g'))",
+      "status": "CI_PENDING",
+      "provider_writes": 0
     }
   }
 }

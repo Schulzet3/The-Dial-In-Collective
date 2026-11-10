@@ -6,7 +6,7 @@ DO $dic_import_credential_guard$
 DECLARE
   definition text;
   old_expr constant text := 'lower(replace(nodes.k,''_'',''''))';
-  new_expr constant text := 'lower(regexp_replace(nodes.k,''[^[:alnum:]]'','',''g''))';
+  new_expr constant text := 'lower(regexp_replace(nodes.k,''[^[:alnum:]]'','''',''g''))';
 BEGIN
   SELECT pg_get_functiondef('private.apply_prototype_import(uuid,jsonb)'::regprocedure)
   INTO definition;
