@@ -1,0 +1,50 @@
+name: DIC Issue33 R77 original603 591 Vail selected source
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r77-591-vail.yml
+      - scripts/audit/issue33-r77-591-check.mjs
+      - tests/coffee-issue33-r77-591-selected-contract.test.mjs
+      - docs/workstreams/ops-issue33-r77-591-vail-20261110.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r77-591-vail.yml
+      - scripts/audit/issue33-r77-591-check.mjs
+      - tests/coffee-issue33-r77-591-selected-contract.test.mjs
+permissions:
+  contents: read
+jobs:
+  selected-vail-591:
+    name: original603-591-current-official
+    runs-on: ubuntu-24.04
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Nine current selected source positive and negative contracts
+        run: node --test tests/coffee-issue33-r77-591-selected-contract.test.mjs
+      - name: Guarded exact official selected URL and actual extractor, UI, review
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '591'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r77-591
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Fail-closed raw SHA and exact actual-parser afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r77-591
+          DIC_ISSUE33_R77_VERIFY: '1'
+        run: node scripts/audit/issue33-r77-591-check.mjs
+      - name: Preserve public selected evidence for one day
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r77-vail-591
+          path: /tmp/dic33-r77-591/
+          if-no-files-found: warn
+          retention-days: 1

@@ -29,24 +29,15 @@
 
 /* The operator-only enrollment controls are never shown in the coffee workflow. */
 .admin-access h3{font-size:14px;margin:13px 0 8px}
-.admin-invite-form{display:flex;gap:10px;align-items:end;flex-wrap:wrap;margin:14px 0 9px}
-.admin-invite-form label{display:flex;flex-direction:column;gap:6px;font-size:12px;font-weight:650;flex:1 1 165px}
-.admin-invite-form input,.admin-invite-form select{background:var(--bg);border:1px solid var(--line);border-radius:10px;color:var(--ink);font:inherit;font-weight:400;min-height:40px;padding:9px;width:100%}
-.admin-invite-form button{min-height:40px;flex:0 0 auto}
-.admin-invite-footnote{font-size:12px;line-height:1.55;margin-bottom:12px}
-.admin-new-code{background:var(--bg);border:1px solid var(--accent);border-radius:12px;margin:12px 0;padding:16px}
-.admin-new-code p{font-size:12px;line-height:1.5;margin:8px 0 12px}
-.admin-new-code code{display:block;overflow-wrap:anywhere;user-select:all;background:var(--surface);border-radius:8px;padding:12px;font-size:13px;line-height:1.55;margin:0 0 12px}
 .admin-action-notice:not(:empty){font-size:13px;margin:12px 0;padding:6px 0}
-.admin-invite-list,.admin-member-list{list-style:none;margin:0;padding:0}
-.admin-invite-row,.admin-member-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 0;border-top:1px solid var(--line)}
-.admin-invite-main,.admin-member-main{min-width:0}
-.admin-invite-main strong,.admin-member-main strong{font-size:13px;overflow-wrap:anywhere}
-.admin-invite-main .admin-state{margin-left:10px}
-.admin-invite-main p,.admin-member-main p{font-size:11px;line-height:1.5;margin:6px 0 0;color:var(--muted)}
-.admin-invite-row button,.admin-member-row button{flex:0 0 auto;white-space:nowrap}
+.admin-member-list{list-style:none;margin:0;padding:0}
+.admin-member-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 0;border-top:1px solid var(--line)}
+.admin-member-main{min-width:0}
+.admin-member-main strong{font-size:13px;overflow-wrap:anywhere}
+.admin-member-main p{font-size:11px;line-height:1.5;margin:6px 0 0;color:var(--muted)}
+.admin-member-row button{flex:0 0 auto;white-space:nowrap}
 .admin-protected{color:var(--muted);font-size:11px;font-weight:700}
-@media(max-width:520px){.admin-invite-form{display:grid;grid-template-columns:1fr}.admin-invite-form button{width:100%}.admin-invite-row,.admin-member-row{align-items:flex-start;flex-direction:column}}
+@media(max-width:520px){.admin-member-row{align-items:flex-start;flex-direction:column}}
 
 /* Scoped pending-coffee review; never shown on the logging screen. */
 .admin-review-actions{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
@@ -127,3 +118,11 @@
 .admin-delete-choices button{white-space:normal;min-height:48px;text-align:left;padding:12px}
 .admin-delete-dialog button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 @media(max-width:520px){.admin-member-actions{justify-content:start}.admin-delete-dialog{padding:16px}}
+
+/* #1756: accessible Admin attention and signup queue. */
+.admin-attention-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.admin-attention-count{min-width:2rem;display:inline-block;padding:5px 9px;border:1px solid var(--line);border-radius:999px;background:var(--bg);color:var(--ink);font-weight:750;font-variant-numeric:tabular-nums}
+.admin-attention .helper{margin:7px 0 13px}
+#admin-new-members .admin-member-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#admin-new-members button:disabled{opacity:.58;cursor:not-allowed}
+@media(max-width:540px){#admin-new-members .admin-member-row{display:flex;flex-direction:column;align-items:stretch;gap:10px}}

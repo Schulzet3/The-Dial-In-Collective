@@ -8,7 +8,27 @@ export function renderAdminDenied(message='Administrator access required.'){
  return `<header class="admin-top"><span class="admin-brand">The Dial In Collective</span><a href="/">Back To App</a></header>
  <section class="admin-panel admin-empty"><h1>Admin Access Unavailable</h1><p>${e(message)}</p><p class="helper">Access is controlled by your account's server-side administrator role.</p></section>`;
 }
-export function renderAdminDashboard(data={},access=null,issued=null,candidatesBySubmission={},records={},options={}){
+
+export function renderAdminAttention(stats={}){
+ const count=key=>Number.isSafeInteger(Number(stats[key]))&&Number(stats[key])>=0?Number(stats[key]):0;
+ const a=count('pending_verified_accounts'),b=count('pending_coffees'),c=count('conflicts'),d=count('unfinished_account_deletions');
+ return '<section class="admin-panel admin-attention" aria-labelledby="admin-attention-heading">'
+  +'<div class="admin-attention-header"><h2 id="admin-attention-heading">Requires Your Attention</h2><span class="admin-attention-count" role="status" aria-live="polite" aria-label="Items requiring attention">'+formatCount(a+b+c+d)+'</span></div>'
+  +'<p class="helper">Ready account approvals '+formatCount(a)+' · Coffee reviews '+formatCount(b)+' · Conflicts '+formatCount(c)+' · Unfinished deletions '+formatCount(d)+'</p>'
+  +'<button type="button" class="ghost compact" data-action="enable-admin-notifications">Enable browser alerts while Admin is open</button></section>';
+}
+export function renderPendingSignups(page={},fallback=null){
+ const loaded=Array.isArray(page?.items)&&!page.error,items=loaded?page.items:[],total=loaded?page.total:fallback;
+ const rows=items.map(item=>'<li class="admin-member-row"><div class="admin-member-main"><strong>'+e(String(item.email||'Email unavailable'))+'</strong><p class="helper">'+e(item.email_verified?'Email verified':'Awaiting email verification')+' · Registered '+e(String(item.created_at||'').slice(0,16))+'</p></div><div class="admin-member-actions">'
+  +'<button type="button" class="ghost compact" data-action="approve-signup" data-id="'+e(String(item.id||''))+'" '+(item.email_verified?'':'disabled title="Email verification required"')+'>Approve</button>'
+  +'<button type="button" class="ghost compact admin-delete-action" data-action="reject-signup" data-id="'+e(String(item.id||''))+'">Reject</button></div></li>').join('');
+ const offset=Number(page?.offset)||0;
+ const paging=loaded&&(offset>0||offset+items.length<page.total)?'<div class="admin-pagination"><button type="button" class="ghost compact" data-action="signup-page" data-offset="'+String(Math.max(0,offset-50))+'" '+(offset===0?'disabled':'')+'>Previous</button><button type="button" class="ghost compact" data-action="signup-page" data-offset="'+String(offset+50)+'" '+(offset+items.length>=page.total?'disabled':'')+'>Next</button></div>':'';
+ return '<div class="admin-section-header"><h2>New Account Requests <span class="helper">'+formatCount(total)+'</span></h2><p class="helper">New accounts are locked until approved. Verify email before approval; rejection does not delete Auth accounts.</p></div>'
+  +(loaded?'<ul class="admin-member-list">'+(rows||'<li class="helper">No pending account requests.</li>')+'</ul>'+paging:'<p class="helper" role="status">Signup requests could not be loaded. Retry; no empty state is assumed.</p>');
+}
+
+export function renderAdminDashboard(data={},access=null,_legacySlot=null,candidatesBySubmission={},records={},options={}){
  const stats=data?.counts||{};
  const searchText=String(options.searchText||'');
  const queue=Array.isArray(data?.queue)?data.queue:[];
@@ -61,6 +81,7 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
  <section class="admin-intro"><span class="admin-eyebrow">Private Operator Dashboard</span><h1>Review Queue</h1>
  <p>Unique coffees are approved automatically. Only unresolved identity or possible duplicate conflicts require review.</p></section>
  <p id="admin-action-notice" class="helper" role="status" aria-live="polite" aria-atomic="true"></p>
+ ${renderAdminAttention(stats)}
  <form id="admin-search-form" class="admin-search-form" role="search" autocomplete="off">
    <label for="admin-search-query">Search records</label>
    <input id="admin-search-query" name="query" maxlength="80" value="${e(searchText)}" placeholder="Coffee, roaster, member email, shot notes…" aria-label="Search all Admin records">
@@ -71,8 +92,9 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
   <section class="admin-stats" aria-label="Application status">
  ${stat('Pending Coffees',count('pending',stats.pending_coffees),'pending')}${stat('Conflicts',count('conflicts',stats.conflicts),'conflicts')}
  ${stat('Approved Coffees',count('approved',stats.verified_coffees),'approved')}${stat('Logged Shots',count('shots',stats.shot_records),'shots')}
- ${stat('Admitted Accounts',count('accounts',stats.active_accounts),'accounts')}
+ ${stat('New Accounts',stats.pending_accounts,'new-members')}${stat('Admitted Accounts',count('accounts',stats.active_accounts),'accounts')}
  </section>
+ <section class="admin-panel admin-record-section" id="admin-new-members" tabindex="-1">${renderPendingSignups(options.signupRequests,stats.pending_accounts)}</section>
  <section class="admin-panel admin-record-section" id="admin-pending" tabindex="-1">
  ${adminDisclosure('Pending Coffee Review','pending',count('pending',stats.pending_coffees),reviewSection('pending','No pending coffee submissions.'),{expanded:options.openSections?.has('pending')})}
  </section>
@@ -81,22 +103,12 @@ export function renderAdminDashboard(data={},access=null,issued=null,candidatesB
  </section>
  ${renderAdminRecordCollection('approved',records.approved||(options.openSections?.has('approved')?{loading:true}:{total:stats.verified_coffees}),{expanded:options.openSections?.has('approved')})}
  ${renderAdminRecordCollection('shots',records.shots||(options.openSections?.has('shots')?{loading:true}:{total:stats.shot_records}),{expanded:options.openSections?.has('shots'),openCoffeeGroups:options.openCoffeeGroups})}
- <section class="admin-panel admin-record-section" id="admin-accounts" tabindex="-1">${adminDisclosure('Accounts','accounts',count('accounts',stats.active_accounts),access?renderAdminAccessPanel(access,issued,records.accounts,records.invites):'<p class="helper" role="status">'+(options.openSections?.has('accounts')?'Loading account records…':'Open to load account records.')+'</p>',{expanded:options.openSections?.has('accounts')})}</section>
- <section class="admin-panel admin-health" id="admin-infrastructure" tabindex="-1">${adminDisclosure('Infrastructure','infrastructure',null,'<p>Database status and access are checked on refresh. Verified backup freshness is managed separately in GitHub and private Google Drive; it is not reported as healthy without evidence.</p><p class="helper">Manual coffee review is administrator-only. A manually approved coffee is not mislabeled as independently source-verified. Invitation management is administrator-only.</p>',{expanded:options.openSections?.has('infrastructure')})}</section>`;
+ <section class="admin-panel admin-record-section" id="admin-accounts" tabindex="-1">${adminDisclosure('Accounts','accounts',count('accounts',stats.active_accounts),access?renderAdminAccessPanel(access,records.accounts):'<p class="helper" role="status">'+(options.openSections?.has('accounts')?'Loading account records…':'Open to load account records.')+'</p>',{expanded:options.openSections?.has('accounts')})}</section>
+ <section class="admin-panel admin-health" id="admin-infrastructure" tabindex="-1">${adminDisclosure('Infrastructure','infrastructure',null,'<p>Database status and access are checked on refresh. Verified backup freshness is managed separately in GitHub and private Google Drive; it is not reported as healthy without evidence.</p><p class="helper">Manual coffee review is administrator-only. A manually approved coffee is not mislabeled as independently source-verified. Account approval is administrator-only.</p>',{expanded:options.openSections?.has('infrastructure')})}</section>`;
 }
 
-/** Strictly administrator-only UI projection. The list never contains a
- * plaintext token: freshly generated secrets appear once per browser tab. */
-export function renderAdminAccessPanel(access={},issued=null,accountPage=null,invitePage=null){
- const hasInvitePage=Array.isArray(invitePage?.items)&&!invitePage?.error;
- const invites=hasInvitePage?invitePage.items:Array.isArray(access?.invites)?access.invites:[];
- const inviteOffset=hasInvitePage&&Number.isSafeInteger(invitePage.offset)&&invitePage.offset>=0?invitePage.offset:0;
- const invitesTotal=hasInvitePage?invitePage.total:access.invites_total;
- const inviteTotal=Number.isSafeInteger(Number(invitesTotal))&&Number(invitesTotal)>=0?Number(invitesTotal):0;
- const inviteRange=invites.length?'Showing '+String(inviteOffset+1)+'–'+String(inviteOffset+invites.length)+' of '+String(inviteTotal):
-  'No invitations on this page · '+String(inviteTotal)+' total';
- const inviteFallback=!hasInvitePage&&(invitePage?.error||inviteTotal>invites.length)
-  ?'<p class="helper" role="status">Complete invitation history is temporarily unavailable. Showing '+e(String(invites.length))+' most recent codes.</p>':'';
+/** Strictly administrator-only member access projection. */
+export function renderAdminAccessPanel(access={},accountPage=null){
  const hasAccountPage=Array.isArray(accountPage?.items)&&!accountPage?.error;
  const members=hasAccountPage?accountPage.items:Array.isArray(access?.members)?access.members:[];
  const offset=hasAccountPage&&Number.isSafeInteger(accountPage.offset)&&accountPage.offset>=0?accountPage.offset:0;
@@ -108,18 +120,6 @@ export function renderAdminAccessPanel(access={},issued=null,accountPage=null,in
  // paged endpoint failed, because it would repeat those same account rows.
  const fallbackNotice=!hasAccountPage&&(accountPage?.error||total>members.length)
   ?'<p class="helper" role="status">Complete account listing is temporarily unavailable. Showing '+e(String(members.length))+' most recent accounts.</p>':'';
- const inviteRows=invites.map(row=>{
-  const state=['active','revoked','used','expired'].includes(row.status)?row.status:'unknown';
-  const count=formatCount(row.uses)+' / '+(row.max_uses==null?'Unlimited':formatCount(row.max_uses));
-  const expires=row.expires_at?'Expires '+String(row.expires_at).slice(0,10):'Never expires';
-  return `<li class="admin-invite-row">
-   <div class="admin-invite-main"><strong>${e(row.label||'Beta Invitation')}</strong>
-    <span class="admin-state">${e(state)}</span>
-    <p class="helper">${e(count)} uses · ${e(expires)} · Created ${e(String(row.created_at||'').slice(0,10))}</p></div>
-   ${state==='active'?`<button type="button" class="ghost compact" data-action="revoke-invite" data-id="${e(String(row.id||''))}">Revoke Code</button>`:''}
-    <button type="button" class="ghost compact admin-delete-action" data-action="delete-invite" data-id="${e(String(row.id||''))}">Delete Code</button>
-  </li>`;
- }).join('');
  const memberRows=members.map(row=>{
   const admin=row.admin===true,enabled=row.enabled===true;
   return `<li class="admin-member-row">
@@ -136,28 +136,7 @@ export function renderAdminAccessPanel(access={},issued=null,accountPage=null,in
    <p class="helper">Pending ${e(String(op.phase||'unknown'))} · ${op.community_mode==='remove'?'Remove Community':'Keep Community'}</p></div>
    <button type="button" class="ghost compact" data-action="retry-account-delete" data-id="${e(String(op.id||''))}">Retry Completion</button>
   </li>`).join('')}</ul>`:'';
- const secret=issued?.invite_code?`<div class="admin-new-code" role="status" aria-live="polite">
-   <strong>New Invitation Code</strong><p class="helper">Copy it now. The code cannot be recovered after you leave or refresh this page.</p>
-   <code id="admin-new-code">${e(issued.invite_code)}</code>
-   <button type="button" class="ghost compact" data-action="copy-invite">Copy Code</button>
-  </div>`:'';
- return `<section class="admin-panel admin-access" id="admin-invites" tabindex="-1" aria-labelledby="admin-access-heading">
-  <div class="admin-section-header"><h2 id="admin-access-heading">Beta Invitations</h2>
-  <p class="helper">Create and revoke private invitations. Codes never expire automatically; already admitted accounts stay permanent.</p></div>
-  <form id="admin-invite-form" class="admin-invite-form" autocomplete="off">
-   <label for="admin-invite-label">Label (optional)<input id="admin-invite-label" name="label" maxlength="80" placeholder="e.g., Testing friends"></label>
-   <p class="admin-invite-rule helper">One code admits one verified account, once. No automatic expiry.</p>
-   <button type="submit">Generate Code</button>
-  </form>
-  <p class="admin-invite-footnote helper">Unused codes never expire by date and can be revoked at any time. After one account uses a code, it cannot be used again. Already admitted accounts stay active until you remove their access.</p>
-  ${secret}
-
-  <h3>Existing Codes <span class="helper">${formatCount(invitesTotal)}</span></h3>
-  <ul class="admin-invite-list">${inviteRows||'<li class="helper">No codes created yet.</li>'}</ul>
-  ${inviteFallback}
-  ${hasInvitePage&&(inviteOffset>0||inviteOffset+invites.length<inviteTotal)?`<div class="admin-pagination"><span class="helper">${e(inviteRange)}</span><button type="button" class="ghost compact" data-action="record-page" data-kind="invites" data-offset="${Math.max(0,inviteOffset-50)}" ${inviteOffset===0?'disabled':''}>Previous</button><button type="button" class="ghost compact" data-action="record-page" data-kind="invites" data-offset="${inviteOffset+50}" ${inviteOffset+invites.length>=inviteTotal?'disabled':''}>Next</button></div>`:''}
- </section>
- <section class="admin-panel admin-access" aria-labelledby="admin-members-heading">
+ return `<section class="admin-panel admin-access" aria-labelledby="admin-members-heading">
   <h2 id="admin-members-heading">Member Access <span class="helper">${formatCount(totalValue)}</span></h2>
   <p class="helper">No automatic account expiration. Remove or restore access without deleting saved shots and notes. Administrator accounts cannot be removed here.</p>
   <ul class="admin-member-list">${memberRows||'<li class="helper">No admitted members yet.</li>'}</ul>

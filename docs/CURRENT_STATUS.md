@@ -1,3 +1,62 @@
+## November 10, 2026 — #1756 source notification fixes VERIFIED, NOT DEPLOYED [skip netlify]
+- PR1776 merged 1fa8ddc9d886025e404f936b75a106864916793b; exact head 5692ed2def92c097b5b07ace25d6673c3d7d3ee9 six CI pass, postmerge selective retries Node/browser pass. Signed-in Admin Settings gear/row and portal show email-verified signup approvals plus coffee review/conflicts and unfinished deletions; role/privacy/offline/390px Light/Dark tested synthetically. Existing accounts retained, old production invitation tokens still live until separately authorized Publish with verified encrypted backup/recovery; #1756 issue remains open.
+
+## November 10, 2026 UTC — #455 R455-153 SAFE Log Shot timestamp recency correction READY, not deployed [skip netlify]
+
+- Verified deterministic local/offline integrity gap: newly supplied nonparseable timestamps were saved but excluded from latest measured recommendation/prefill. New `saveShot` guard rejects explicitly malformed new timestamps before any state mutation; omitted timestamp still defaults to now. Existing saved same-coffee ID retains immutable historical replay even with malformed legacy dates; original notes/five taste scores/history unchanged.
+- [PR #1775](https://github.com/Schulzet3/The-Dial-In-Collective/pull/1775) nonforce two-parent merged `774402b32e4a5909a4aba95d398fd930b24a42fa` onto concurrent #509 work without overwriting queue/code; R153 code blob `74ef8567741c0c2ebaa08ea60c274af4e1810665`, test blob `dc5c9b5b44a1c9cac4d813732bcd6b7f825057d8`, identical to tested head `cc82dcaea6893e3d4ff0047543775c762cfeaa7b`. [Node22 run42758240718](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42758240718) 3333 PASS/0 FAIL/6 SKIP; all four new cases explicit PASS. Browser/mobile/offline/cloud run42758241104, SQL42758240668, security42758240672, approval42758240793 SUCCESS; frozen603 SKIPPED.
+- Initial approval CI42757813470 genuinely FAILED intake and was corrected with TESTING queue row. Exact merged governance42758650127 and cloud42758649898 succeeded; merged Node42758649832 and mobile42758649898 were **CANCELLED**, including selective retry due concurrent development and **are not counted PASS**. Compared tested source head->merge: only five docs/queue paths differ; app/tests/SQL blobs unchanged. Passing source-equivalent PR-head tests reused without redundant full-suite assertions. Queue `DIC-Q-455-new-shot-timestamp-replay-recency` READY for separate publication authorization only; no production/member/provider writes, no deployment or Locked change. Ledger 82 curated sources, 222 bounded evidence checks, 114 proposals; #267 literal-review credit zero, #455 remains OPEN; standalone S019 original PDF still unavailable.
+
+## November 10, 2026 UTC — Issue #33 R76 original603 #592 current Woodshed Honduran Decaf VERIFIED [skip netlify]
+
+- Selected original exact Woodshed Honduran Decaf official URL currently remains the Honduran product, NOT the separate #594 Timor/recycled-Sumatra identity. Own H1, Copan valley context, citrus/fruity sweetness and Swiss Water decaffeination (not cherry Washed process) agree with actual parser; unselected Roast Level, no named farm/producer, no inferred cultivar or cherry process. Zero conflicts; Add Coffee and Source Review rendered. 10 strict positive/adversarial tests pass. No runtime defect, new READY item, or whole-corpus certification.
+- [PR #1770](https://github.com/Schulzet3/The-Dial-In-Collective/pull/1770) safely nonforce squash merged `c167029b041528cfd3c76c9652b25ee786296f44`, 5 reviewed/merged Git blobs identical. Exact merged [official selected run 42753838927](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42753838927) SUCCESS, [Node/lint/build 42753838550](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42753838550) 3,329 PASS/0 FAIL/6 intentional SKIP; cloud/mobile/browser 42753838559, Python 42753838256, approval 42753838269 SUCCESS; PR-head isolated SQL SUCCESS. Frozen603 and generic source probe SKIPPED, not passed.
+- Independent merged artifact ZIP/raw official HTML/source JSON/afterproof SHA-256 rehash verified, strict verdict `passed:true`, source SHA exact merge; [R76 source receipt](docs/audits/issue33-original603-r76-592-current-official-verified-20261110.md). Immutable 603-row CSV/oracle/scorer, other approval/queue statuses, member/offline/Community, #267 V2/#96 and production remain unmodified by this work. Issue #33 OPEN; further individual original603 cases and separately adjudicated unavailable sources remain.
+
+---
+
+## November 10, 2026 UTC — Issue #455 R152 primary espresso hardware thesis verification [skip netlify]
+
+- Directly reviewed bounded original University of Camerino [Khamitova 2020 thesis](https://pubblicazioni.unicam.it/handle/11581/480144) Ch. 3 shower-disc/basket/dose experiment, Table 3.6 and Ch. 8 conclusions; independently checked [same-author *Food Chemistry* 2020 original abstract](https://pubmed.ncbi.nlm.nih.gov/31982858/). Conditional 12/14 g, 4–7 mm and fixed-time/fixed-volume comparisons measure chemistry/total solids, **not** transferable espresso taste or a universal hardware target; sources overlap, not independent replication. Author's Simonelli equipment/funding acknowledged. Thesis PDF screenshot HTTP403 and bytes/visual figures/unreviewed chapters **unverified**; later 2022 carbohydrate article remains abstract-only.
+- [Scoped R152 journal](docs/workstreams/ops-issue455-r152-khamitova-hardware-thesis-20261110.md), [source/evidence/decision trace ledger](docs/audits/issue455-research-source-coverage-20261103.json): **82 curated sources / 219 checks / 113 proposals**, docs-only authoring; PR and exact-source CI pending at writing. No new reproduced SAFE application defect, Locked/policy or release queue change, Node/SQL/browser/real espresso PASS claim, #267 literal-line credit, production/provider write or deployment. Separate original S019 PDF remains unavailable; Issue #455 stays OPEN.
+
+---
+
+## November 10, 2026 UTC — Issue #33 R75 original603 #598 selected official Bolivia VERIFIED [skip netlify]
+
+- Direct exact current official URL #598 BOLIVIA LA PAZ - ORGANIC: typed La Paz Bolivia / Washed and Sun Dried / named Alto Sajama cooperative; hero Dark and Cherry/Jam/Allspice. Actual parser fields and Add Coffee/Source Review verified, zero conflicts, 10 focused adversarial/positive tests; **no new parser defect or READY scope**.
+- [PR #1764](https://github.com/Schulzet3/The-Dial-In-Collective/pull/1764) safe nonforce merge `79de6bf1131dcade5af2ec9b33cec238fb682b84`, 5 identical reviewed/merged code/test/workflow/journal blobs. Exact merged official [42746921357](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42746921357) SUCCESS; merged Node/lint [42746921119](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42746921119) **3319 pass/0 fail/6 skip**, cloud/mobile, Python, approval SUCCESS; original frozen603 and generic probes SKIPPED/NOT_APPLICABLE, not full certification.
+- Independent exact merged ZIP/raw source/JSON/afterproof SHA256 rehash verified against GitHub artifact #13731104698; strict verdict passed at exact merge SHA. Frozen CSV/scorer/oracle, approval, queue, #267 V2, #96, production, Netlify, all member/Community/offline data unchanged. [Durable source receipt](docs/audits/issue33-original603-r75-598-current-official-verified-20261110.md). Issue #33 OPEN; next selected original #592.
+
+---
+
+## November 10, 2026 UTC — Issue #455 R151 primary 2020 espresso extraction-model evidence [skip netlify]
+
+- Substantively reviewed Cameron et al. [*Matter* 2020 original indexed main-text sections](https://doi.org/10.1016/j.matt.2019.12.019): under homogeneous-flow assumptions finer grind increases EY, but measured 6-bar cafe shots show a peaked EY vs grind and very-fine extraction inconsistency; 20→15 g cafe down-dosing/14 s is an operational cost/reproducibility illustration, **not** proven optimal five-taste espresso or cross-grinder guidance. Direct source DOI open 403; original PDF/supplement/raw observations not byte-verified. [Scoped R151 journal](docs/workstreams/ops-issue455-r151-cameron-espresso-model-20261110.md), [source/claim ledger](docs/audits/issue455-research-source-coverage-20261103.json); **80 sources / 217 evidence checks / 112 proposals**. Locked ratings/one-variable advice and current code untouched.
+- Research-only docs branch/PR/source-governance **pending at authoring**. No new runtime defect proven, no READY/release, no provider/production or #267 literal-line change. S019 original standalone PDF remains inaccessible and unreviewed; #455 OPEN.
+
+---
+
+## November 10, 2026 UTC — Issue #33 R74 original603 #597 current exact source VERIFIED [skip netlify]
+
+- Wrecking Ball Kenya Nkumari P1 C fresh direct selected source and actual parser verified: Meru Kenya, Naman Meme, washed, SL28/Ruiru11, 1400 m and current floral/grapefruit/citrus/caramel notes, zero conflicts, Add Coffee/Source Review. Stale alternative notes rejected; relational menu roast did not become invented absolute grade. No parser defect/READY change.
+- [PR #1758](https://github.com/Schulzet3/The-Dial-In-Collective/pull/1758) safely merged `7d67b8a92fc141868395218688a1f34a87b20231`, five identical source blobs; [official merged 42741601298](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42741601298) 10/10; [Node/lint 42741601274](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42741601274) 3315 PASS/0 FAIL/6 SKIP; cloud/mobile, Python and approval SUCCESS. Exact merged ZIP/raw official HTML/JSON/afterproof SHA256 independently rehashed. Frozen603 SKIPPED, not a whole-603 certification. [R74 full receipt](audits/issue33-original603-r74-597-current-official-verified-20261110.md); #33 OPEN, original/queue/approval preserved, no deployment or production writes.
+
+---
+
+## November 10, 2026 UTC — READY5 published and provider verified [skip netlify]
+
+- Release `DIC-20261110-READY5-27`: exactly five READY items VERIFIED DEPLOYED, source `2cb38e3020a2ab7dc0d7d0c62b5db79f14b64c88`, nonforce release `bf3a82484ab2443a5d8b4dc78075ca5a4d875532`, Netlify deploy `6af27603a5fade7d94df9e99` READY/current matching release Git commit and one Git-connected build. Controller 42737385980 and five candidate exact-SHA checks SUCCESS. Production SQL migrations 20261109152500/20261109231500 applied in order, protected `dic-delete-member-account` Edge JWT true and byte-matched; approved encrypted archive13727625712 and private Drive file1mf0BPRT99diEQSvWmn396IaTB_qExRDd exact SHA/bytes verified. Postflight Auth11 shots26 notes26 Community12, account deletes0. Queue 260 DEPLOYED / 0 READY / 3 IN_PROGRESS, unapproved work untouched. No hosted genuine-member deletion tested. Detailed receipt: [2026-11-10 READY5](releases/2026-11-10_READY5_DEPLOYED_VERIFIED.md).
+
+---
+
+## November 10, 2026 UTC — Issue #455 R150 original expert sensory method applicability review [skip netlify]
+
+- Directly reviewed original [Guinard et al. 2026](https://www.mdpi.com/2304-8158/15/4/678) Methods, Tables and Results. 56 professional experts, 12 diverse coffees, heterogeneous preferred brew methods, conventional scoring always before the Coffee Cuality JAR/CATA method; 18 qualitative focus-group respondents. No validation of DIC's personal espresso five-taste scales, feedback algorithm or cup-quality improvement. Published prose says upper score 82.71 while Table 2 reports C6 at **84.62**; discrepancy recorded, not silently resolved.
+- [Source/claim ledger](audits/issue455-research-source-coverage-20261103.json) now **80 sources / 215 checks / 111 proposals**; [scoped journal](workstreams/ops-issue455-r150-cuality-primary-sensory-20261110.md). Research-only, exact docs PR/CI pending at authoring; no app, schema, Locked, release queue, production or provider changes. S019 standalone original still unavailable/unreviewed; no #267 direct-line credit.
+
+---
+
 ## November 9, 2026 MST / November 10 UTC — Issue #33 R73 Zeke's original603 #601–603 selected source VERIFIED [skip netlify]
 
 - Independently verified fresh guarded official selected HTML and actual extractor for **#601 Colombia Huila** (reused Sierra Nevada URL slug), **#602 The Garcias Marcala Lenca** (Medium-Light; no invented green process/notes), **#603 PRODECOOP Nicaragua Segovia** (Palacaguina **mill**, not growing origin). Zero parser conflicts; Add Coffee/Source Review both rendered; no new runtime defect or READY item.

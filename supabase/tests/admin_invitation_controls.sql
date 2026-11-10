@@ -1,194 +1,93 @@
--- Synthetic accounts, strictly single-use forever-unexpired tokens, authorization, existing account
--- permanence. All inserted data is in a transaction rolled back after tests.
+-- Issue #1756: migration contract, permanent existing account, new signup
+-- email verified and admin-only admission. Synthetic identities, full rollback.
 begin;
 do $test$
 declare
  admin_id uuid:='10000000-0000-4000-8000-000000000001';
- member_id uuid:='20000000-0000-4000-8000-000000000001';
- outsider_id uuid:='20000000-0000-4000-8000-000000000002';
- third_id uuid:='20000000-0000-4000-8000-000000000003';
- fourth_id uuid:='20000000-0000-4000-8000-000000000004';
- token text;
- second_token text;
- issued jsonb;
- listing jsonb;
- id_single uuid;
- id_second uuid;
- denied boolean;
- result jsonb;
+ member_id uuid:=gen_random_uuid(); pending_id uuid:=gen_random_uuid();
+ unverified_id uuid:=gen_random_uuid(); decision jsonb; queue jsonb; denied boolean; state jsonb;
 begin
- if current_database()<>'dic_ci' then
-  raise exception 'Invitation regressions must run in disposable dic_ci only';
- end if;
+ if current_database()<>'dic_ci' then raise exception 'Disposable dic_ci only';end if;
  insert into auth.users(id,aud,role,email,email_confirmed_at)
- values
-  (member_id,'authenticated','authenticated','member-invite@ci.example.invalid',now()),
-  (outsider_id,'authenticated','authenticated','outsider-invite@ci.example.invalid',now()),
-  (third_id,'authenticated','authenticated','third-invite@ci.example.invalid',now()),
-  (fourth_id,'authenticated','authenticated','fourth-invite@ci.example.invalid',now());
- update private.beta_members set enabled=true,admitted_at=now() where owner_id=member_id;
- if (select count(*) from private.beta_members where enabled and admitted_at is not null)<2 then
-  raise exception 'Real admittance model not seeded';
- end if;
-
- -- An admitted ordinary member is forbidden from listing or issuing codes.
+ values(member_id,'authenticated','authenticated','admitted@ci.example.invalid',now()),
+       (pending_id,'authenticated','authenticated','pending@ci.example.invalid',now()),
+       (unverified_id,'authenticated','authenticated','unverified@ci.example.invalid',null);
+ update private.beta_members set enabled=true,admitted_at=now(),signup_review_state='approved' where owner_id=member_id;
+ if (select enabled from private.beta_members where owner_id=member_id) is distinct from true
+   or not exists (select 1 from private.app_admins where owner_id=admin_id) then
+  raise exception 'Existing admissions or owner protection changed';end if;
+ if exists(select 1 from private.beta_members where owner_id in(pending_id,unverified_id)
+   and (enabled or admitted_at is not null or signup_review_state<>'pending')) then
+  raise exception 'Auth trigger auto-admitted new signup';end if;
+ if to_regclass('private.beta_invites') is not null or
+    to_regprocedure('public.dic_redeem_invite(text)') is not null or
+    to_regprocedure('public.dic_admin_issue_invite(text)') is not null then
+  raise exception 'Old invitation tokens or RPCs remain';end if;
+ -- A confirmed new user has identity but no authorization or admin data.
+ perform set_config('request.jwt.claim.sub',pending_id::text,true);
+ perform set_config('request.jwt.claims',jsonb_build_object('sub',pending_id,'role','authenticated')::text,true);
+ execute 'set local role authenticated';
+ state:=public.dic_session_status();
+ if state->>'approvalState'<>'pending' or state->>'admitted'<>'false' then
+  raise exception 'Pending user was able to enter before approval';end if;
+ denied:=false;
+ begin perform public.dic_admin_signup_requests(0,50);
+ exception when insufficient_privilege then denied:=true;end;
+ if not denied then raise exception 'Pending user read Admin signup queue';end if;
+ denied:=false;
+ begin perform public.dic_admin_review_signup(unverified_id,'approve','pending');
+ exception when insufficient_privilege then denied:=true;end;
+ if not denied then raise exception 'Pending user approved another account';end if;
+ execute 'reset role';
+ -- Admitted ordinary member cannot approve either.
  perform set_config('request.jwt.claim.sub',member_id::text,true);
  perform set_config('request.jwt.claims',jsonb_build_object('sub',member_id,'role','authenticated')::text,true);
  execute 'set local role authenticated';
  denied:=false;
- begin perform public.dic_admin_access_overview();
- exception when insufficient_privilege then denied:=true;
- end;
- if not denied then raise exception 'Nonadmin read invitation metadata'; end if;
- denied:=false;
- begin perform public.dic_admin_issue_invite('unapproved');
- exception when insufficient_privilege then denied:=true;
- end;
- if not denied then raise exception 'Nonadmin generated invite'; end if;
- denied:=false;
- begin perform public.dic_admin_set_member_access(outsider_id,true);
- exception when insufficient_privilege then denied:=true;
- end;
- if not denied then raise exception 'Nonadmin granted access'; end if;
+ begin perform public.dic_admin_review_signup(pending_id,'approve','pending');
+ exception when insufficient_privilege then denied:=true;end;
+ if not denied then raise exception 'Ordinary member approved pending signup';end if;
  execute 'reset role';
-
- -- Owner stays admitted admin, no re-invite required and no expiry column.
+ -- Operator may read only scoped new-account listing.
  perform set_config('request.jwt.claim.sub',admin_id::text,true);
  perform set_config('request.jwt.claims',jsonb_build_object('sub',admin_id,'role','authenticated')::text,true);
  execute 'set local role authenticated';
- if not private.is_admin() then raise exception 'Admin role not persistent'; end if;
- issued:=public.dic_admin_issue_invite('First tester');
- token:=issued->>'invite_code';
- id_single:=(issued->>'id')::uuid;
- if token !~ '^dic-[a-f0-9]{64}$' or (issued->>'max_uses')::int<>1 then
-  raise exception 'One-use admin invitation not high-entropy';
- end if;
- issued:=public.dic_admin_issue_invite('Second tester');
- second_token:=issued->>'invite_code';
- id_second:=(issued->>'id')::uuid;
- if second_token !~ '^dic-[a-f0-9]{64}$' or (issued->>'max_uses')::integer<>1 then
-  raise exception 'Second invitation not single use';
- end if;
- if to_regprocedure('public.dic_admin_issue_invite(text,integer)') is not null
-    or to_regprocedure('private.dic_admin_issue_invite(text,integer)') is not null then
-  raise exception 'Multi-use invitation overload still accessible';
- end if;
- listing:=public.dic_admin_access_overview();
- if jsonb_array_length(listing->'invites')<2 or jsonb_array_length(listing->'members')<2 then
-  raise exception 'Admin overview incomplete';
- end if;
- if listing::text like '%'||token||'%' or listing::text like '%'||second_token||'%' then
-  raise exception 'Plaintext invitation leaked in overview';
- end if;
- if not exists(select 1 from jsonb_array_elements(listing->'members') x
-   where x->>'email'='owner@ci.example.invalid' and x->>'admin'='true') then
-  raise exception 'Administrator not marked protected';
- end if;
+ queue:=public.dic_admin_signup_requests(0,50);
+ if (queue->>'total')::integer<2 or not exists(
+  select 1 from jsonb_array_elements(queue->'items') row where row->>'id'=pending_id::text
+   and row->>'email_verified'='true') then
+  raise exception 'Admin verified pending signup not listed';end if;
+ decision:=public.dic_admin_review_signup(unverified_id,'approve','pending');
+ if decision->>'code'<>'verify_email_first' then
+  raise exception 'Unverified email was approved';end if;
+ decision:=public.dic_admin_review_signup(pending_id,'approve','pending');
+ if decision->>'decision'<>'approve' then
+  raise exception 'Verified account could not be approved';end if;
+ decision:=public.dic_admin_review_signup(pending_id,'reject','pending');
+ if decision->>'code'<>'stale_review' then
+  raise exception 'Repeated review was not rejected';end if;
+ decision:=public.dic_admin_review_signup(unverified_id,'reject','pending');
+ if decision->>'decision'<>'reject' then
+  raise exception 'Reject did not preserve Auth while withholding admission';end if;
  denied:=false;
- begin perform public.dic_admin_set_member_access(admin_id,false);
- exception when insufficient_privilege then denied:=true;
- end;
- if not denied or not private.is_admin() then
-  raise exception 'Owner administrator could be disabled';
- end if;
+ begin perform public.dic_admin_review_signup(admin_id,'reject','pending');
+ exception when insufficient_privilege or invalid_parameter_value then denied:=true;end;
+ if not denied then raise exception 'Admin self-account not protected';end if;
  execute 'reset role';
-
- -- Storage contains ONLY hash, no plaintext. Both codes have no calendar expiry before redemption.
- if exists(select 1 from private.beta_invites where id in (id_single,id_second)
- and (expires_at is not null or token_hash !~ '^[a-f0-9]{64}$')) then
-  raise exception 'Invite stores expiration or invalid token hash';
- end if;
- if (select token_hash from private.beta_invites where id=id_single)
-  <>encode(sha256(convert_to(token,'UTF8')),'hex') then
-  raise exception 'Admin invite did not store SHA256 of returned token';
- end if;
- if (select count(*) from private.admin_access_events where action='issue_invite')<2 then
-  raise exception 'Issued invitation has no secret-free audit receipt';
- end if;
-
- -- One-use invite admits the first confirmed outsider exactly once.
- perform set_config('request.jwt.claim.sub',outsider_id::text,true);
- perform set_config('request.jwt.claims',jsonb_build_object('sub',outsider_id,'role','authenticated')::text,true);
- execute 'set local role authenticated';
- result:=public.dic_redeem_invite(token);
- if result->>'ok'<>'true' or not private.is_member() then raise exception 'Single token admission failed'; end if;
- if (public.dic_redeem_invite(token)->>'ok')<>'true' then
-  raise exception 'Already-admitted account prompted to re-invite';
- end if;
- execute 'reset role';
- if (select uses from private.beta_invites where id=id_single)<>1 then
-  raise exception 'Token reuse unexpectedly consumed uses';
- end if;
- perform set_config('request.jwt.claim.sub',third_id::text,true);
- perform set_config('request.jwt.claims',jsonb_build_object('sub',third_id,'role','authenticated')::text,true);
- execute 'set local role authenticated';
- if (public.dic_redeem_invite(token)->>'ok')<>'false' then
-  raise exception 'Spent one-use token admitted another user';
- end if;
- result:=public.dic_redeem_invite(second_token);
- if result->>'ok'<>'true' then raise exception 'Second one-use code did not admit third account'; end if;
- execute 'reset role';
-
- -- A spent code must refuse every additional account, even without calendar expiry.
- perform set_config('request.jwt.claim.sub',fourth_id::text,true);
- perform set_config('request.jwt.claims',jsonb_build_object('sub',fourth_id,'role','authenticated')::text,true);
- execute 'set local role authenticated';
- result:=public.dic_redeem_invite(second_token);
- if result->>'ok'<>'false' then raise exception 'Second used code admitted fourth member'; end if;
- execute 'reset role';
-
- -- After revocation: permanently admitted accounts remain admitted.
- perform set_config('request.jwt.claim.sub',admin_id::text,true);
- perform set_config('request.jwt.claims',jsonb_build_object('sub',admin_id,'role','authenticated')::text,true);
- execute 'set local role authenticated';
- result:=public.dic_admin_revoke_invite(id_second);
- if result->>'ok'<>'true' then raise exception 'Revoke code failed'; end if;
- if (public.dic_admin_revoke_invite(id_second)->>'already_revoked')<>'true' then
-  raise exception 'Revoke not idempotent';
- end if;
- result:=public.dic_admin_set_member_access(outsider_id,false);
- if result->>'enabled'<>'false' then raise exception 'Member removal not applied'; end if;
- result:=public.dic_admin_set_member_access(outsider_id,true);
- if result->>'enabled'<>'true' then raise exception 'Member restore failed'; end if;
- if not private.is_admin() then raise exception 'Admin lost permanent access'; end if;
- execute 'reset role';
- if (select uses from private.beta_invites where id=id_second)<>1 then
-  raise exception 'Spent second code incorrectly reused';
- end if;
- if (select count(*) from private.beta_members
-  where owner_id in (outsider_id,third_id) and enabled and admitted_at is not null)<>2 then
-  raise exception 'Redemption/restore lost lifetime member accounts';
- end if;
- if (select count(*) from private.admin_access_events
-  where action in ('revoke_invite','remove_access','restore_access'))<>3 then
-  raise exception 'Admin access actions not audited';
- end if;
-
- -- Nonadmin cannot read even historical revocation states, nor disable another member.
- perform set_config('request.jwt.claim.sub',member_id::text,true);
- perform set_config('request.jwt.claims',jsonb_build_object('sub',member_id,'role','authenticated')::text,true);
- execute 'set local role authenticated';
- denied:=false;
- begin perform public.dic_admin_revoke_invite(id_single);
- exception when insufficient_privilege then denied:=true;
- end;
- if not denied then raise exception 'Nonadmin revoked another invite'; end if;
- execute 'reset role';
-
- execute 'set local role anon';
- denied:=false;
- begin perform public.dic_admin_access_overview();
- exception when insufficient_privilege then denied:=true;
- end;
- if not denied then raise exception 'Anonymous saw admin access list'; end if;
- execute 'reset role';
-
- if has_function_privilege('anon','public.dic_admin_issue_invite(text)','execute')
- or has_function_privilege('anon','public.dic_admin_access_overview()','execute')
- or has_function_privilege('anon','public.dic_admin_revoke_invite(uuid)','execute')
- or has_function_privilege('anon','public.dic_admin_set_member_access(uuid,boolean)','execute') then
-  raise exception 'Anon received privileged admin RPC';
- end if;
+ -- Only the disposable privileged harness can inspect protected private rows.
+ if (select enabled from private.beta_members where owner_id=pending_id) is distinct from true then
+  raise exception 'Approved signup was not admitted';end if;
+ if (select signup_review_state from private.beta_members where owner_id=unverified_id)<>'rejected' then
+  raise exception 'Rejected signup was admitted';end if;
+ if (select count(*) from auth.users where id in(member_id,pending_id,unverified_id))<>3 then
+  raise exception 'Review deleted an Auth identity';end if;
+ if (select count(*) from private.dic_signup_review_events ev where ev.member_id in(pending_id,unverified_id))<>2 then
+  raise exception 'Signup review audit missing';end if;
+ if has_function_privilege('anon','public.dic_admin_signup_requests(integer,integer)','EXECUTE')
+    or has_function_privilege('anon','public.dic_admin_review_signup(uuid,text,text)','EXECUTE') then
+  raise exception 'Anonymous role can enumerate/review new accounts';end if;
+ if exists(select 1 from private.beta_members where owner_id=member_id and not enabled) then
+  raise exception 'Existing member was disabled';end if;
 end $test$;
-select 'PASS: administrator permanent, nonadmin/anon denied, strictly single-use never-expiring invites, revoke and nonadmin removal/restore; transaction rolled back' AS result;
+select 'PASS: admin-verified signup admission, rejection, admin security, legacy code retirement, existing accounts preserved; rollback' as result;
 rollback;

@@ -1,3 +1,49 @@
+## Issue #504 G1-144 — November 10, 2026 UTC; historical PR #709–716 direct title/body semantic review [skip netlify]
+
+Live development parent `e6d5daca85617903cef93c67628c19e3de049bb2`, main `9b0cd38f8cdfe2b0291d432ca01d61ae53450028`, release `bf3a82484ab2443a5d8b4dc78075ca5a4d875532`; #504 and concurrent #267/#455/#33/#96 OPEN. Public visibility is temporary owner-approved exception #630 Nov4–30; no visibility change. Read AGENTS, AI entrypoint/preflight, authority-document metadata, current status summary, last strict ledger/receipt and full original title/body for source objects. Large canon/queue entire contents not credited by this batch.
+
+**Eight distinct original PR title/body objects #709–716**, every word 1–EOF: **892 Unicode-whitespace words / 7306 UTF-8 bytes**. Complete original texts, SHA1, exact title/body inclusive word+line ranges, timestamps, merged source commits and individual decisions are in immutable [G1-144 receipt](../audits/issue504-review-G1-144.json).
+
+PR #709: 81 words; #267 S2-116 strict 50 frozen + 50 pinned reviews; historical proposed totals, no #504 code credit.
+PR #710: 75 words; #267 pinned/live Git drift inventory with 446 added and 67 modified paths, explicitly machine-only and dated, no semantic credit.
+PR #711: 85 words; #267 S2-117 strict 91 frozen + 91 pinned reviews; pinned file #50 complete at source time, not global coverage.
+PR #712: 222 words; Earlier #504 G1-028 101 original queue lines/849 words already credited; distinct PR metadata only, no source-file duplicate.
+PR #713: 76 words; #267 D2-001 new post-pin 39 source lines: exclusive #267 review, no #504 code credit.
+PR #714: 87 words; #267 source-time CI-scope bug+allowlist regression fix; historic fix not a newly reproduced current #504 defect.
+PR #715: 141 words; #455 bounded Decent basket manufacturer source and exploratory 52mm/58mm anecdote; not universal sensory proof, remains research-only.
+PR #716: 125 words; #267 S2-118 strict 40 frozen + 60 pinned reviews; source-time counters, not current global completion.
+
+Independent #267 N15 source confirmation: original F481 blob `1cd583ad62de99b31123e637c3fc48751349e0d8` lines **16–18** match exactly 3/3 original literals and 11 per-line semantic fields in strict receipt blob `22b7ada15201d5d02e2fc9fbbd812f8f6132bc96`. Zero additional #504 code credit; #267 full V2 incomplete. Previous G1-117 -15/-4012 correction retained.
+
+Corrected cumulative direct #504: 7,919 file lines/60,754 words; **892 GitHub records/253550 words**. Historical source-time provenance not current deploy evidence. No newly reproduced current defect, verified safe deletion, approval change, or owner-only decision; all PR history preserved. Remaining issue comments, PR reviews/patches, Actions/logs, tag/release/commit/tree, binary and delegated gaps remain unreviewed.
+
+**Only three audit documentation files in same proposed commit**: new receipt, append-only ledger, scoped journal. No current code/test/queue/Locked/original603/backup/Auth/SQL/Edge/member/provider/main/release/publication/Netlify changes. Node22, original603, SQL, GoTrue, browser/mobile/offline NOT_RUN_DOCS_ONLY. Exact-source governance tests not presumed PASS until observed. Issue OPEN / IN_PROGRESS. **NEXT:** PR #717 title word 1, then entire body.
+
+## Issue #504 G1-143 — November 10, 2026 UTC; historical PR 701–708 complete direct title/body semantic review [skip netlify]
+
+**Authority/recovery:** Development parent `e1340b7495d5b6e7c6f400cf908a844c3cac9440`, main `1730d406b7a1596bec21edd7391d3491de60541b`, release/production `2d0bed35e67f6a745a21cbd80616ad4c9a98ed41`, temporary PUBLIC by explicit owner #630 November 4–30. Issue #504 OPEN (252 comments), concurrent #267/#455/#33/#96 OPEN. Read AGENTS, AI entrypoint/preflight, current status, Master Specification, Decision Ledger, approval matrix, source register, #267 original strict receipt, coverage ledger and scoped journal; queue full content was not returned by file connector (size/read limitation), so NO new queue word credit. No repo visibility mutation.
+
+**Actual direct original source review:** Entire GitHub-returned original title/body word 1–EOF for **8 distinct merged PR metadata objects #701–708, 1250 Unicode-whitespace words / 10609 UTF-8 bytes**, individual SHA1, source created/updated/merged timestamps, head/merged SHAs and exact word/line ranges held in [G1-143 immutable receipt](../audits/issue504-review-G1-143.json). All eight IDs absent from earlier PR metadata batches. Original queue lines and earlier #504 receipts NOT double credited; G1-117 correction -15 objects/-4012 words retained.
+
+PR #701 (240 words): Prior G1-025 seven new queue records; earlier direct original queue words already credited; historical PR's source-time Release17/18 proof is bounded, not current deployment
+PR #702 (300 words): Earlier G1-026 three queue records and two release-history records; confirms source-time specific queue bounds, not all GitHub/queue drift certified
+PR #703 (107 words): #455 chronological sweetness-date runtime correction of offset/malformed date eligibility; historic merged fix, currently owned by #455; no independent current reproduction or additional code edit
+PR #704 (346 words): Earlier G1-027 19 modified queue statuses/provenance; source-only 840 changed words previously accounted; preserved Release17 evidence, no repeat review of queue words
+PR #705 (65 words): #455 original timezone/sweetness chronological bug READY reconciliation after verified PR703; historical READY not current production deployment
+PR #706 (74 words): #33 original603 three-coffee current-source diagnostic incl selected #46 Sidamo origin; historical probe not an entire corpus review
+PR #707 (53 words): #33 original603 #46 selected Sidamo source origin recovery and adversarial fixtures; historic TESTING source, no automatic global certification or publication
+PR #708 (65 words): #33 exact selected #46 source recheck after PR707; independent historical READY evidence, not proof of all 603 or hosted deployment
+
+**Independent delegated #267:** Frozen F481 `src/server/coffee-identity-evidence.mjs:13–15` blob `1cd583ad62de99b31123e637c3fc48751349e0d8` checked against strict N15 source-bound per-line receipt blob `22b7ada15201d5d02e2fc9fbbd812f8f6132bc96`: **3/3 exact original literal/source IDs and full required semantic fields**; zero #504 code credit. #267 original/current/post-pin is incomplete and separately owned.
+
+**Corrected totals:** 7919 original file lines / 60754 original file words + 884 distinct GitHub metadata records / 252658 original words. No newly reproduced current #504-owned bug, independently proven safe current removal, or Locked-policy decision. Historic #455 fix is not reimplemented and historic #33 issue remains with its owner. Entire GitHub PR diff/review/comment, Actions/log, tree/commit/tags, binary and #267 unverified gaps remain.
+
+**Change scope and negative checks:** EXACTLY 3 audit-only documentation paths (G1-143 receipt, append-only ledger, this journal), one atomic development PR proposed from parent `e1340b7495d5b6e7c6f400cf908a844c3cac9440`; preserve all histories, oracle, original603, member/offline/Community, Locked, queue states, backup assets. App/Node22, original603, browser/mobile/offline, SQL/Auth/Edge/provider and deployment tests **NOT_RUN_DOCS_ONLY**. New exact-head CI and exact merged-source governance **PENDING/NOT_PASS** at receipt creation, check after PR creation. No release/production, main, Netlify publication, provider/member, secret, visibility, history/force or destructive write.
+
+**Status: IN_PROGRESS**; #504 stays OPEN. **NEXT untouched original:** [PR #709](https://github.com/Schulzet3/The-Dial-In-Collective/pull/709), title word 1 then full description. Drift created by this PR/comment not credited and must be tracked later.
+
+---
+
 ## Issue #504 G1-142 — November 10, 2026 UTC, eight exact historical PR title/body semantic reviews [skip netlify]
 
 **Live source:** development `1f6c2a2828c1b1ee09ebd51871097332c840bd57`, main `adb9c6f27bf26da9cd944c51765dfd922893db0d`, release/production `2d0bed35e67f6a745a21cbd80616ad4c9a98ed41`. Temporarily PUBLIC only by owner exception #630 November 4–30; no visibility mutation. Entry point, preflight, current status, Master Specification, Decision Ledger, approval coverage, source register, queue, concurrent workstreams and open issues/PRs consulted for authority, not new coverage credit.
@@ -1775,3 +1821,36 @@ Delegated independent verification: #267 frozen manifest F481 `src/server/coffee
 Cumulative corrected unique #504: 7919 original file lines/60754 words plus 860 GitHub metadata records/249435 words. No independently confirmed active #504 defect, removable current content, new Locked-policy decision or publication. Full GitHub-wide inventory, PR reviews/diffs, Actions/jobs/logs, branches/tags/commits/releases and new drift remain incomplete.
 
 Only three scoped audit docs in proposed atomic commit (new receipt, append-only ledger, journal), no app, tests, CI, product Locked, queue, backups/oracle, Auth/SQL/Edge/member/provider, main/release, visibility or Netlify edits. Actual runtime Node22/SQL/GoTrue/browser/mobile/offline/603 tests NOT_RUN_DOCS_ONLY; exact PR-head and merged-source governance CI must be observed, SKIPPED/queued not PASS. #504 remains OPEN/IN_PROGRESS. **NEXT** PR #685 title word 1 and full body.
+
+
+---
+
+## Issue #504 G1-145 — November 10 UTC, historic original PR #717–724 word-level review [skip netlify]
+
+**Live recovery:** development source parent \`3f35ab598c89602cf29ada531bfbfaf1f5ffa1f5\`, main \`9b0cd38f8cdfe2b0291d432ca01d61ae53450028\`, release/production \`bf3a82484ab2443a5d8b4dc78075ca5a4d875532\`. #504, #267, #455, #33 and #96 OPEN. Current AGENTS, context entrypoint/preflight, CURRENT_STATUS, Master Spec, Decision Ledger later scoped supersessions, approval coverage, release queue, source register and scoped journal checked as governing context, **not directly credited here**. Repo PUBLIC solely under existing owner #630 November 4–30 exception; no visibility change.
+
+**Direct original semantic scope:** entire returned historical original title + body, original word 1–EOF, of PR **#717–724**, **8 distinct previously uncredited GitHub metadata records / 760 Unicode-whitespace words / 6,487 UTF-8 bytes**. Original text, GitHub object ID, individual SHA1, head/merge SHA, timestamps, source boundaries, per-record historical/current semantic findings and dispositions in immutable [G1-145 receipt](../audits/issue504-review-G1-145.json). #717 #33 diagnostic; #719 original source-confirmed #358 country omission and narrow parser fix; #722 later selected #358 source-verified READY, **NOT DEPLOYED** or global 603 certificate. #718/#720/#721/#723/#724 strict historic direct-line receipts exclusively #267-owned. No independently confirmed **new current** #504-owned bug, removable live content, breach, or policy decision from these historical descriptions. PR patches, reviews/comments and previously credited release-queue content **not** re-reviewed or counted.
+
+**#267 independent exact-source evidence:** original F481 \`src/server/coffee-identity-evidence.mjs:19–21\` blob \`1cd583ad62de99b31123e637c3fc48751349e0d8\` compared literal 3/3 against strict N15 receipt blob \`22b7ada15201d5d02e2fc9fbbd812f8f6132bc96\`; all 11 source-bound semantic fields 3/3. **0 additional #504 source/code credit**; #267 frozen/pinned/current/post-pin still incomplete.
+
+**Cumulative corrected:** 7,919 originally reviewed file lines / 60,754 file words plus **900 distinct historical GitHub metadata objects / 254,310 original words**. Original G1-117 duplicate adjustment −15/−4,012 retained; ledger reconciled and exact next point moved to **PR #725 title word 1**, then entire body. Complete PR comment/diff/review, issue, Actions/jobs/logs, branch/tag/commit/release and binary inventories, drift, #267 remaining evidence **INCOMPLETE**. Issue #504 **OPEN / IN_PROGRESS**.
+
+**Safety/verification:** exactly three #504 docs-only blobs (receipt, ledger and this same-commit journal) intended; no app/test/runtime/CI workflow/oracle/queue/Locked/backup/production/provider/SQL/Auth/Edge/member/main/release/visibility/publishing modifications. Receipt+ledger count, unique IDs and byte arithmetic CHECKED. Node22 app, SQL, GoTrue, mobile/browser/offline and original603 functional tests **NOT_RUN_DOCS_ONLY**; exact PR-head and merged-source checks **PENDING, NOT PASS** at receipt creation. No owner action needed.
+
+**NEXT** [historical PR #725](https://github.com/Schulzet3/The-Dial-In-Collective/pull/725), title word **1**, then complete description.
+
+---
+
+## Issue #504 G1-146 — November 10 UTC, PR #725–732 original title/body word-level review [skip netlify]
+
+**Live source anchor:** development parent `7cb9ff4adc4a2291f2371c3a126d72e8c69b788a`, main `9b0cd38f8cdfe2b0291d432ca01d61ae53450028`, release/production `bf3a82484ab2443a5d8b4dc78075ca5a4d875532`. Existing owner-authorized #630 temporary PUBLIC November 4–30 exception continues without visibility change; private Free compatibility preserved. #504, #267, #455, #33, #96 remain OPEN. AGENTS/context/preflight, Current Status, Master Specification, Decision Ledger/later scoped supersessions, approval coverage, source register, issue/PR and scoped workstreams were consulted as operating context, not given fresh full-document review credit; oversized Release Queue contents returned empty and were not credited.
+
+**Direct original semantic batch:** Fully read and reconciled complete original GitHub title and description **word 1–EOF** for historical merged PR **#725–732**: **8 unique objects / 889 Unicode-whitespace words / 7,254 UTF-8 bytes**. Each original complete title/body, source/merge SHA and timestamps, GitHub object ID, field/combined UTF-8 SHA1, inclusive title/body word and body physical-line ranges and exact historic/current semantic dispositions preserved in [immutable G1-146 receipt](../audits/issue504-review-G1-146.json) Git blob `4319480dec8b29f36fa59fbd8dc6d236bb41f09f`. Diffs, review threads/comments, title-mentioned code or separately reviewed queue source NOT counted. #725/#728/#731 historical #33 narrow selected-coffee fixes/READY documentation not proof of full original603 or deployment; #726/#727/#732 strict #267-only source; #729 prior #504 G1-029 queue evidence, not new source credit; #730 #455 RDT primary study evaluation without sensory-preference inference.
+
+**Evidence correction:** Prior `G1-145` full immutable receipt and `g1145_reconciliation_20261110` accurately credited 8 historical PR objects / 760 words in totals, but `batches[]` mistakenly omitted its index entry. Appended the existing G1-145 receipt reference **without extra credit** before this G1-146 index. All **146 batch index entries**, source-file counts, GitHub original source-word sum and historic G1-117 **−15 object / −4,012 word** duplicate adjustment now reconcile exactly. Cumulative unique reviewed **7,919 original file lines / 60,754 words + 908 GitHub original metadata objects / 255,199 words**; no blanket full-GitHub certification.
+
+**#267 nonoverlap independent verification:** Frozen manifest F481 `src/server/coffee-identity-evidence.mjs:22–24`, source blob `1cd583ad62de99b31123e637c3fc48751349e0d8`, exact three text literals and 11 individually populated semantic/source fields per line matched original strict N15 receipt blob `22b7ada15201d5d02e2fc9fbbd812f8f6132bc96` (3/3, 0 #504 code lines credited). Full #267 frozen/pinned/current/post-pin still open.
+
+**Safety, tests and next:** No independently reproduced *present* #504-owned app defect, deletion candidate, privacy incident or Locked-policy change proven from historical PR descriptions. Three audit-document blobs only (receipt/append-only coverage ledger/same-commit journal), no runtime/test/SQL/Auth/Edge/provider/member/offline/original603/backup/queue/production/main/release/Netlify changes. Scoped arithmetic, source hashing, strict literal fields VERIFIED. Actual functional Node22, SQL/Auth, browser/mobile/offline and 603 NOT_RUN_DOCS_ONLY; applicable exact PR-head and merged-source governance must be separately observed, not assumed PASS.
+
+**Exact NEXT** [PR #733](https://github.com/Schulzet3/The-Dial-In-Collective/pull/733), original title word **1**, then entire description. PR reviews/diffs/comments, issues, Actions/jobs/logs/artifact manifests, all trees/commits/tags/releases/binaries/drift and remaining delegated #267 coverage are unreviewed. Issue #504 stays **OPEN / IN_PROGRESS**.

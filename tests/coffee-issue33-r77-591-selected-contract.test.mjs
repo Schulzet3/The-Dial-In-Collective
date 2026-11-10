@@ -1,0 +1,17 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {selectedVail591Facts as direct} from '../scripts/audit/issue33-r77-591-check.mjs';
+const name='Decaf Ethiopian Yirgacheffe SW';
+const intro='LIGHT ROAST Decaf version of prized Ethiopian Yirgacheffe—smooth, sweet & Fair Trade Organic.';
+const specs='Grower: Oromia Coffee Farmers Cooperative Variety: Indigenous heirloom Region: Oromia Region, Ethiopia Profile: Sweet Dark Berries, Jasmine, Hint of Cocoa Altitude: 1550- 2200 masl Process: Full natural & dried on raised beds';
+const decaf='Ethiopia FTO Natural Yirgacheffe Swiss Water Process Decaf is sourced from one of the most prized coffee origins. The Swiss Water Process is an environmentally friendly, chemical-free way to produce coffee.';
+const page=(a=intro,b=specs,c=decaf,h=name)=>'<main><h1>'+h+'</h1><p>'+a+'</p><section>'+b+'</section><p>'+c+'</p></main>';
+test('current exact chosen product source bears separate green process and decaf facts',()=>assert.deepEqual(Object.values(direct(page(),[name])),Array(9).fill(true)));
+test('wrong or duplicate current identity fails',()=>{for(const h of [[],['Half Caf'],[name,name]])assert.equal(direct(page(),h).exactIdentity,false);});
+test('producer not inferred from a different cooperative',()=>assert.equal(direct(page(intro,specs.replace('Oromia Coffee Farmers Cooperative','Other Co-op')),[name]).selectedGrower,false));
+test('geography changed from current selected country fails',()=>assert.equal(direct(page(intro,specs.replace('Oromia Region, Ethiopia','La Paz, Bolivia')),[name]).selectedRegion,false));
+test('flavor list changed from current selected product fails',()=>assert.equal(direct(page(intro,specs.replace('Jasmine','Orange')),[name]).selectedProfile,false));
+test('washed is not equivalent to full natural cherry processing',()=>assert.equal(direct(page(intro,specs.replace('Full natural','Washed')),[name]).selectedNatural,false));
+test('generic decaf marketing does not prove chosen Swiss Water method',()=>assert.equal(direct(page(intro,specs,'Shop our Swiss Water Decaf range.'),[name]).selectedDecaf,false));
+test('other coffee navigation, sidebar and footer cannot fill absent own details',()=>{const p='<main><h1>'+name+'</h1><p>'+intro+'</p><nav>'+specs+'</nav><aside>'+specs+'</aside><footer>'+decaf+'</footer></main>';const d=direct(p,[name]);for(const k of ['selectedGrower','selectedRegion','selectedVariety','selectedProfile','selectedElevation','selectedNatural','selectedDecaf'])assert.equal(d[k],false,k);});
+test('unselected roast dropdown cannot prove source roast',()=>assert.equal(direct(page('',specs,decaf)+'<form><select><option>LIGHT ROAST</option></select></form>',[name]).selectedRoast,false));

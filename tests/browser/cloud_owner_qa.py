@@ -30,7 +30,7 @@ window.__client={
  onAuthChange(fn){window.__authEvent=fn;return ()=>{};},async identity(){return window.__who;},
  async signIn(email){window.__who={id:OWNER,email};return {};},async signUp(){return {};},
  async requestReset(){return 'If that address has an account, a recovery email has been requested.';},async setPassword(){return {};},
- async signOut(){window.__who=null;},async redeemInvite(){window.__admitted=true;return {ok:true};},
+ async signOut(){window.__who=null;},
  async listCommunityReviews(){return window.__reviews||[];},async confirmCommunityOutlier(){window.__reviews=[];return {ok:true,state:'eligible'};},
  async browseCommunityShots(){return {shots:window.__communityShots||[],total:(window.__communityShots||[]).length};},
  async searchCommunityShots({query='',style='all',limit=20,offset=0}={}){
@@ -68,7 +68,7 @@ window.__client={
   return {ok:true,kind:'correction_requested'};
  },
 
- async status(){return {admitted:window.__admitted,admin:false};},async findCoffeeMatches(){return window.__matchResponse||{classification:'new_pending',roaster:{recognized:false}};},async previewCoffeeUrl(){return {ok:false,reason:'unrecognized_official_roaster'};},async verifyCoffeeSource(){return {ok:false,status:'pending',reason:'no_verified_roaster_source'};},async read(){if(window.__offline)throw Error('offline');return structuredClone(window.__raw);},
+ async status(){return {authenticated:!!window.__who,admitted:window.__admitted,admin:false,approvalState:window.__admitted?'approved':'pending',emailVerified:true};},async findCoffeeMatches(){return window.__matchResponse||{classification:'new_pending',roaster:{recognized:false}};},async previewCoffeeUrl(){return {ok:false,reason:'unrecognized_official_roaster'};},async verifyCoffeeSource(){return {ok:false,status:'pending',reason:'no_verified_roaster_source'};},async read(){if(window.__offline)throw Error('offline');return structuredClone(window.__raw);},
  async mutate(e){if(window.__offline)throw Error('offline');window.__calls.push(structuredClone(e));const d=e.payload,r=window.__raw;
  if(e.action==='submit_coffee'){
   const submission='11111111-1111-4111-8111-000000000099';
@@ -128,8 +128,36 @@ with sync_playwright() as p:
   print('BUNDLE START:',bundle()[:1000])
   raise
  checks.append('Sign-in view loads without local app state')
- page.locator('[name=email]').fill('owner@example.invalid');page.locator('[name=password]').fill('synthetic-password');page.get_by_role('button',name='Sign In',exact=True).click();page.get_by_role('button',name='Use Invitation').wait_for();checks.append('Pending account remains outside workspace')
- page.locator('[name=token]').fill('synthetic-not-real-token');page.get_by_role('button',name='Use Invitation').click();page.get_by_role('button',name='Settings',exact=True).wait_for();checks.append('Admitted account hydrates cloud workspace')
+ page.locator('[name=email]').fill('owner@example.invalid');page.locator('[name=password]').fill('synthetic-password');page.get_by_role('button',name='Sign In',exact=True).click()
+ page.get_by_role('heading',name='Account Approval Pending').wait_for()
+ assert page.get_by_role('button',name='Check Approval Status').is_visible()
+ assert page.locator('[name=token], [data-action=redeem-invite], .current-mark').count()==0
+ checks.append('Unadmitted verified signup is approval-pending, cannot open workspace or enter codes')
+ # Simulate only server-side Admin approval; the browser has no local admission override.
+ page.evaluate('window.__admitted=true')
+ page.get_by_role('button',name='Check Approval Status').click()
+ page.get_by_role('button',name='Settings',exact=True).wait_for()
+ # #1756: compact actionable count is visible before opening the Admin portal.
+ page.evaluate("""async () => {
+  const app=window.__app;app.status.admin=true;
+  window.__client.adminAttentionCounts=async()=>({pending_accounts:12,pending_verified_accounts:2,pending_coffees:1,conflicts:0,unfinished_account_deletions:0});
+  await app.refreshAdminAttention();app.render();
+ }""")
+ page.locator('.settings-attention-trigger .admin-action-badge').wait_for()
+ assert page.locator('.settings-attention-trigger .admin-action-badge').inner_text()=='3'
+ assert '3 administrator items require attention' in page.locator('[data-action="settings"]').get_attribute('aria-label')
+ page.screenshot(path=str(OUT/'issue1756_admin_badge_mobile_light.png'),full_page=True)
+ page.evaluate("document.documentElement.setAttribute('data-theme','dark')")
+ assert page.locator('.settings-attention-trigger .admin-action-badge').is_visible()
+ page.screenshot(path=str(OUT/'issue1756_admin_badge_mobile_dark.png'),full_page=True)
+ page.evaluate("document.documentElement.setAttribute('data-theme','light')")
+ page.locator('[data-action="settings"]').click()
+ assert page.locator('#sheet [data-action="open-admin"] .admin-action-badge').inner_text()=='3'
+ page.get_by_role('button',name='Close',exact=True).click()
+ page.evaluate("window.__app.status.admin=false;window.__app.adminAttentionCount=null;window.__app.updateAdminAttentionBadges();window.__app.render()")
+ assert page.locator('.admin-action-badge').count()==0
+ checks.append('Verified-only Admin Settings badge on 390px light/dark; nonadmin redaction')
+ checks.append('Server-admitted account hydrates the unchanged cloud workspace after status refresh')
  assert page.locator('.current-mark').count()==0;checks.append('No pin before first logged shot')
  page.get_by_role('button',name='Settings',exact=True).click()
  assert page.locator('.recovery-options').count()==0;checks.append('Routine Recovery section removed as approved')

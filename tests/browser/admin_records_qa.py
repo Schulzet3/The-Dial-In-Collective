@@ -48,7 +48,7 @@ window.__data={
   temperature_c:93,notes:'PRIVATE SYNTHETIC NOTE '+(i+1),
   pulled_at:'2026-10-29T00:00:00Z'
  })),
- pending:[],conflicts:[],accounts:[],invites:[]
+ pending:[],conflicts:[],accounts:[]
 };
 window.__sdk={
  auth:{
@@ -62,9 +62,10 @@ window.__sdk={
   if(!window.__allowed)return {data:null,error:{message:'Administrator access revoked',code:'42501'}};
   if(name==='dic_admin_dashboard')return {data:{
    counts:{pending_coffees:0,conflicts:0,verified_coffees:window.__data.approved.length,
-    shot_records:window.__data.shots.length,active_accounts:0},queue:[],queue_total:0
+    shot_records:window.__data.shots.length,active_accounts:0,pending_accounts:0,pending_verified_accounts:0,unfinished_account_deletions:0},queue:[],queue_total:0
   }};
-  if(name==='dic_admin_access_overview')return {data:{members:[],members_total:0,invites:[],invites_total:0}};
+  if(name==='dic_admin_access_overview')return {data:{members:[],members_total:0,pending_deletions:[]}};
+  if(name==='dic_admin_signup_requests')return {data:{items:[],total:0,offset:Number(args?.p_offset||0)}};
   if(name==='dic_admin_records'||name==='dic_admin_search_records'){
    const source=window.__data[args.p_kind]||[];
    const term=String(args.p_query||'').toLowerCase();
@@ -118,7 +119,12 @@ with sync_playwright() as p:
     errors=[]
     page.on("pageerror",lambda err: errors.append(str(err)))
     boot(page)
-    page.locator('#admin-refresh').wait_for()
+    try:
+        page.locator('#admin-refresh').wait_for()
+    except Exception:
+        print('ADMIN RECORDS FIXTURE ERRORS:',repr(errors),'BODY:',page.locator('body').inner_text()[:1200],flush=True)
+        raise
+    assert page.locator('.admin-attention').count()==1
     assert page.locator('details.admin-disclosure:not([open])').count()==6
     assert page.evaluate("window.__calls.filter(c=>c.name==='dic_admin_records').length")==0, "Collapsed records loaded unexpectedly"
 

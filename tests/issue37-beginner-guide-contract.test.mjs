@@ -17,7 +17,7 @@ test('Readable guide has six separately headed, ordered source-backed first-shot
  const actual=guide.match(/^### Step [1-6] — [^\n]+/gm)||[];
  assert.equal(actual.length,6);
  for(let i=0;i<6;i++)assert.match(actual[i],new RegExp('^### Step '+(i+1)+' — '));
- const labels=['Sign In','Create An Account','Your Invitation','Invitation Code','Use Invitation',
+ const labels=['Sign In','Create An Account','Account Approval Pending','Check Approval Status',
   'Set Up My Workspace','Setup Name','Basket Dose (g)','Grinder Espresso Range',
   'Finest Espresso Setting','Coarsest Espresso Setting','Create Setup','Equipment Details (Optional)',
   'Roaster Page URL','Autofill From URL','Add Coffee','Starting Shot Style',
@@ -65,12 +65,13 @@ test('The source-verified support address is the last troubleshooting contact',(
  const section=guide.split('## If You Get Stuck\n')[1]?.split('\n## ')[0];
  assert.ok(section&&section.includes('mailto:'+address),'support link belongs in troubleshooting');
  assert.match(section,/\*\*Still need help\? Email/);
- assert.match(section,/Never include a password or invitation code/);
- assert.ok(section.trim().endsWith('Never include a password or invitation code.'));
+ assert.match(section,/Never include a password or authentication link/);
+ assert.ok(section.trim().endsWith('Never include a password or authentication link.'));
 });
 
 test('Owner-accepted deployed guide retains exact release evidence and distinguishes historical storyboard',()=>{
- assert.match(guide,/DEPLOYED — owner confirmed live/);
+ assert.match(guide,/Historical deployment:.*Release 13.*October 30, 2026.*November 3, 2026/);
+ assert.match(guide,/updated signup section is \*\*source-only for Issue #1756\*\* and not yet released/);
  assert.match(register,/COMPLETED \/ DEPLOYED \/ OWNER-ACCEPTED/);
  assert.match(register,/6ae421f5de038d292bd66407/);
  assert.match(register,/Format: APPROVED — written guide \+ accompanying short video/);

@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "review_type": "DIRECT_LIVE_FUNCTION_DEFINITION_AND_NULLABLE_FK_SEMANTIC_REPRODUCTION_PLAN",
+  "date_utc": "2026-11-10",
+  "source_parent_sha": "5f164450cf286f4b4fb59ea6d176f9d467047a31",
+  "prod_release_sha": "bf3a82484ab2443a5d8b4dc78075ca5a4d875532",
+  "live_function": "private.dic_admin_account_delete_request(uuid,text,jsonb)",
+  "live_pg_get_functiondef_md5": "75abc037bcc45abd5e9dd021b2f702d7",
+  "live_definition_chars": 1933,
+  "semantic_evidence": [
+    "Complete effective function pg_get_functiondef read; 1933 visible characters, full expression and prior row lock interpreted.",
+    "actor_id is nullable, with FK to auth.users ON DELETE SET NULL and no default. Both retrieved from live pg_catalog.",
+    "PostgreSQL 17.11 read-only scalar proof: NULL::uuid <> known uuid yields SQL NULL whereas NULL::uuid IS DISTINCT FROM known uuid yields true.",
+    "Existing private function compared prior.actor_id<>actor OR prior.community_mode<>mode; an orphaned actor with equal mode allows retry of another administrator's operation instead of rejecting conflict.",
+    "Live safe aggregates: open_total=0; open_null_actor=0; completed_total=0; thus no current affected records, and no actual hosted member deletion performed."
+  ],
+  "impact": "CONDITIONAL_REPRODUCIBLE_SQL_NULL_LOGIC_MISCLASSIFICATION; NO_CURRENT_LIVE_AFFECTED_OPS",
+  "development_only_fix": {
+    "migration": "supabase/migrations/20261110035000_dic_account_delete_orphaned_actor_retry_guard.sql",
+    "source_expression_before": "prior.actor_id<>actor",
+    "source_expression_after": "prior.actor_id is distinct from actor",
+    "regression": "supabase/tests/admin_member_deletion.sql",
+    "scenario": "synthetic null actor open operation for unrelated admin in disposable dic_ci; expected SQLSTATE 23514 and conflict message"
+  },
+  "safety": "Does not auto-takeover or delete an orphaned operation. Restrictive behavior preserved. No live SQL/data/Auth/Edge/Storage writes.",
+  "test_status": "PENDING_SOURCE_BOUND_ISOLATED_PG_AND_NODE_CI",
+  "queue_state": "TESTING_NOT_READY",
+  "provider_baseline": "IN_PROGRESS",
+  "unverified": [
+    "real hosted admin deletion after external actor deletion",
+    "hosted GoTrue/Auth settings",
+    "native/compiled PostgreSQL implementations"
+  ],
+  "next": "Read back commit and exact-source SQL/Node/governance CI. If passing, classify as source-verified fix, reconcile release queue under source isolation, and continue genuinely unreviewed provider definitions."
+}

@@ -6,13 +6,12 @@ applyAppearance(readAppearance(),{remember:false});
 import {renderAdminDashboard,renderAdminDenied,renderAdminDeleteAccountPrompt} from './view.js';
 
 const root=document.querySelector('#admin-root');
-const RECORD_KINDS=['pending','conflicts','approved','shots','accounts','invites'];
-const kindsForSection=kind=>kind==='accounts'?['accounts','invites']:RECORD_KINDS.includes(kind)?[kind]:[];
+const RECORD_KINDS=['pending','conflicts','approved','shots','accounts'];
+const kindsForSection=kind=>RECORD_KINDS.includes(kind)?[kind]:[];
 const notice=message=>`<header class="admin-top"><span class="admin-brand">The Dial In Collective</span><a href="/">Back To App</a></header><section class="admin-panel admin-empty"><h1>Admin Dashboard Unavailable</h1><p>${e(message)}</p></section>`;
 async function start(){
  let invalidated=false;
- let issued=null; // generated code exists only in live tab memory
- let pendingAccountDelete=null;
+  let pendingAccountDelete=null;
  let busy=false;
  let pendingSectionRefresh=false;
  let mergeChoices=Object.create(null);
@@ -21,10 +20,11 @@ async function start(){
  let searchText='';
  let records={};
  let access=null;
+ let signupRequests=null,signupOffset=0,lastAttentionCount=null;
  const openSections=new Set();
  const openCoffeeGroups=new Set();
  const invalidate=message=>{
-  issued=null;pendingAccountDelete=null;mergeChoices=Object.create(null);comparisons=Object.create(null);records={};access=null;pendingSectionRefresh=false;invalidated=true;root.innerHTML=renderAdminDenied(message);
+  pendingAccountDelete=null;mergeChoices=Object.create(null);comparisons=Object.create(null);records={};access=null;pendingSectionRefresh=false;invalidated=true;root.innerHTML=renderAdminDenied(message);
  };
  try {
   secureOrigin();
@@ -70,12 +70,13 @@ async function start(){
    const trigger=root.querySelector('#admin-refresh');if(trigger)trigger.disabled=true;
    try{
     // The summary is always current; private listings are loaded only for
-    // operator-expanded sections. Accounts/Invites share one disclosure.
+    // operator-expanded sections. Accounts share one disclosure; signup requests have their own review panel.
     const kinds=[...new Set([...openSections].flatMap(kindsForSection))];
     const loadAccess=openSections.has('accounts');
-    const [dashboard,nextAccess,...pages]=await Promise.all([
+    const [dashboard,nextAccess,nextSignups,...pages]=await Promise.all([
      adminRpc('dic_admin_dashboard'),
-     loadAccess?(searchText?Promise.resolve({members:[],invites:[],members_total:0,invites_total:0}):adminRpc('dic_admin_access_overview')):Promise.resolve(null),
+     loadAccess?(searchText?Promise.resolve({members:[],members_total:0}):adminRpc('dic_admin_access_overview')):Promise.resolve(null),
+      adminRpc('dic_admin_signup_requests',{p_offset:signupOffset,p_limit:50}),
      ...kinds.map(async kind=>{
       try{
        const args={p_kind:kind,p_offset:recordPages[kind],p_limit:50};
@@ -90,6 +91,9 @@ async function start(){
     // No stale hidden-page totals override the fresh dashboard count.
     records=Object.fromEntries(kinds.map((kind,i)=>[kind,pages[i]]));
     access=loadAccess?nextAccess:null;
+     signupRequests=nextSignups;
+     const stats=dashboard?.counts||{};
+     lastAttentionCount=['pending_verified_accounts','pending_coffees','conflicts','unfinished_account_deletions'].reduce((total,key)=>total+(Number.isSafeInteger(Number(stats[key]))?Number(stats[key]):0),0);
     // Keep the comparison scoped to a bounded, admin-authorized server search.
     // The first visible pending records are prefetched for the expanded queue;
     // others can request their own comparison without loading the entire catalog.
@@ -104,7 +108,7 @@ async function start(){
     }));
     if(invalidated)return;
 
-    root.innerHTML=renderAdminDashboard(dashboard,access,issued,mergeChoices,records,{openSections,openCoffeeGroups,searchText,comparisons});
+    root.innerHTML=renderAdminDashboard(dashboard,access,null,mergeChoices,records,{openSections,openCoffeeGroups,searchText,comparisons,signupRequests});
    }finally{if(trigger)trigger.disabled=false;}
   }
   function actionMessage(message){
@@ -130,7 +134,7 @@ async function start(){
   let countRefreshRunning=false;
   const countKeys={
    pending:'pending_coffees',conflicts:'conflicts',approved:'verified_coffees',
-   shots:'shot_records',accounts:'active_accounts'
+   shots:'shot_records',accounts:'active_accounts','new-members':'pending_accounts'
   };
   async function refreshVisibleCounts(){
    if(invalidated||busy||countRefreshRunning||document.hidden)return;
@@ -138,7 +142,15 @@ async function start(){
    try{
     const summary=await adminRpc('dic_admin_dashboard');
     if(invalidated)return;
-    for(const [kind,key] of Object.entries(countKeys)){
+    const stats=summary?.counts||{};
+     const attention=['pending_verified_accounts','pending_coffees','conflicts','unfinished_account_deletions']
+      .reduce((total,key)=>total+(Number.isSafeInteger(Number(stats[key]))?Number(stats[key]):0),0);
+     for(const node of root.querySelectorAll('.admin-attention-count'))node.textContent=String(attention);
+     if(lastAttentionCount!==null&&attention>lastAttentionCount&&globalThis.Notification?.permission==='granted'){
+      try{new globalThis.Notification('The Dial In Collective Admin',{body:'New items require administrator review.',tag:'dic-admin-attention'});}catch{/* In-app attention remains available. */}
+     }
+     lastAttentionCount=attention;
+     for(const [kind,key] of Object.entries(countKeys)){
      const count=summary?.counts?.[key];
      if(count==null||!Number.isSafeInteger(Number(count))||Number(count)<0)continue;
      for(const node of root.querySelectorAll('.admin-stat[href="#admin-'+kind+'"] strong, details[data-admin-section="'+kind+'"] .admin-count')){
@@ -213,17 +225,7 @@ async function start(){
     });return;
    }
    
-   if(event.target?.id!=='admin-invite-form')return;
-   event.preventDefault();
-   guarded(async()=>{
-    const form=event.target;
-    const label=String(form.elements.namedItem('label')?.value||'').trim();
-    // A code is always single-use; no client-selectable or server-accepted capacity.
-    const data=await adminRpc('dic_admin_issue_invite',{p_label:label});
-    if(!data?.invite_code)throw new Error('No code returned. Review invitations before retrying.');
-    issued=data; // displayed once only; never stored to disk or GitHub.
-    await refresh();
-   });
+   // No invite-code forms: signup approval actions are server authorized.
   });
   root.addEventListener?.('click',event=>{
    const card=event.target?.closest?.('a.admin-stat[href^="#admin-"]');
@@ -249,7 +251,7 @@ async function start(){
    if(action==='record-page'){
     const kind=button.dataset.kind,offset=Number(button.dataset.offset);
     if(!RECORD_KINDS.includes(kind)||!Number.isSafeInteger(offset)||offset<0)return;
-    guarded(async()=>{recordPages[kind]=offset;const target=['accounts','invites'].includes(kind)?'accounts':kind;openSections.add(target);await refresh();root.querySelector('#admin-'+target)?.scrollIntoView?.({block:'start'});});return;
+    guarded(async()=>{recordPages[kind]=offset;const target=kind;openSections.add(target);await refresh();root.querySelector('#admin-'+target)?.scrollIntoView?.({block:'start'});});return;
    }
    if(action==='edit-toggle'){
     const form=Array.from(root.querySelectorAll('[data-record-form]')).find(f=>f.dataset.id===button.dataset.id);
@@ -277,22 +279,25 @@ async function start(){
     });return;
    }
    
-   if(action==='copy-invite'){
-    guarded(async()=>{
-     if(!issued?.invite_code)throw new Error('There is no recent invitation code to copy.');
-     if(!globalThis.navigator?.clipboard?.writeText)throw new Error('Clipboard unavailable. Select the displayed code to copy manually.');
-     await globalThis.navigator.clipboard.writeText(issued.invite_code);
-     actionMessage('Code copied. Share it privately with your tester.');
-    });
-    return;
-   }
    if(action==='refresh'){
     pendingAccountDelete=null;
     root.querySelector('#admin-account-delete-modal')?.remove?.();
-    issued=null; // Never retrieve plaintext from an overview endpoint.
+     // Never retrieve plaintext from an overview endpoint.
     guarded(()=>refresh());return;
    }
-   const id=button.dataset.id||'';
+   if(action==='enable-admin-notifications'){
+     guarded(async()=>{
+      if(typeof globalThis.Notification?.requestPermission!=='function')throw new Error('Browser notifications unavailable; in-app attention remains available.');
+      const permission=await globalThis.Notification.requestPermission();
+      actionMessage(permission==='granted'?'Browser alerts enabled while Admin is open.':'Browser alerts not enabled; in-app alerts remain available.');
+     });return;
+    }
+    if(action==='signup-page'){
+     const offset=Number(button.dataset.offset);
+     if(!Number.isSafeInteger(offset)||offset<0)return;
+     guarded(async()=>{signupOffset=offset;await refresh();root.querySelector('#admin-new-members')?.scrollIntoView?.({block:'start'});});return;
+    }
+    const id=button.dataset.id||'';
    if(!/^[0-9a-f]{8}-[0-9a-f-]{27,}$/.test(id))return;
    if(action==='admin-delete-record'){
     guarded(async()=>{
@@ -347,19 +352,9 @@ async function start(){
       p_reason:reason,p_canonical_id:selected||null
      });
      if(!result?.ok)throw new Error('The review did not complete. Refresh before retrying.');
-     delete mergeChoices[id];issued=null;await refresh();
+     delete mergeChoices[id];await refresh();
      actionMessage('Coffee reviewed successfully.');
     });return;
-   }
-   if(action==='delete-invite'){
-     if(!globalThis.confirm?.('Delete this invitation code from Admin? This automatically revokes any unused code. Previously admitted accounts are unaffected; private audit history is retained.'))return;
-     guarded(async()=>{
-      issued=null;
-      const result=await adminRpc('dic_admin_delete_invite',{p_invite_id:id});
-      if(result?.deleted!==true)throw new Error('Invitation was not deleted.');
-      await refresh();
-      actionMessage('Invitation deleted and revoked. Existing accounts were not affected.');
-     });return;
    }
    if(action==='retry-account-delete'){
      if(!globalThis.confirm?.('Retry the previous authorized account deletion? This may complete its existing Keep/Remove Community choice.'))return;
@@ -418,19 +413,23 @@ async function start(){
       actionMessage('Account deleted. Community '+(mode==='keep'?'contributions retained.':'contributions removed.'));
      });return;
    }
-   if(action==='revoke-invite'){
-    if(!globalThis.confirm?.('Revoke this invitation code? Existing accounts keep access.'))return;
-    guarded(async()=>{
-     issued=null;
-     await adminRpc('dic_admin_revoke_invite',{p_invite_id:id});
-     await refresh();
-     actionMessage('Invitation revoked. Existing accounts were not affected.');
-    });
-   }else if(action==='remove-member'||action==='restore-member'){
+   if(action==='approve-signup'||action==='reject-signup'){
+     const decision=action==='approve-signup'?'approve':'reject';
+     const row=signupRequests?.items?.find(item=>item.id===id);
+     if(!row||row.review_state!=='pending'){actionMessage('Refresh this account request before reviewing.');return;}
+     if(decision==='approve'&&!row.email_verified){actionMessage('The account must verify email first.');return;}
+     if(!globalThis.confirm?.((decision==='approve'?'Approve ':'Reject ')+row.email+'? This controls app access without deleting the Auth account.'))return;
+     guarded(async()=>{
+      const result=await adminRpc('dic_admin_review_signup',{p_member_id:id,p_action:decision,p_expected_state:'pending'});
+      if(!result?.ok)throw new Error(result?.code==='stale_review'?'The request changed; refresh.':'Review rejected; refresh and retry.');
+      await refresh();actionMessage(decision==='approve'?'Account approved.':'Account rejected. Its Auth account remains intact.');
+     });return;
+    }
+    if(action==='remove-member'||action==='restore-member'){
     const enabled=action==='restore-member';
     if(!globalThis.confirm?.(enabled?'Restore access for this member?':'Remove this member’s access? Their shots and notes will remain saved.'))return;
     guarded(async()=>{
-     issued=null;
+     
      await adminRpc('dic_admin_set_member_access',{p_member_id:id,p_enabled:enabled});
      await refresh();
      actionMessage(enabled?'Member access restored.':'Member access removed. Their saved history was preserved.');

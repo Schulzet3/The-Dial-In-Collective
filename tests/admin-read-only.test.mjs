@@ -42,7 +42,7 @@ test('invalid and missing aggregates cannot display misleading numbers',()=>{
  const html=renderAdminDashboard();
  assert.match(html,/No pending coffee submissions/);assert.match(html,/No coffee conflicts/);
  assert.doesNotMatch(html,/NaN|Infinity/);
- assert.equal((html.match(/<strong>—<\/strong>/g)||[]).length,5);
+ assert.equal((html.match(/<strong>—<\/strong>/g)||[]).length,6);
 });
 test('administrator denial never renders protected queue',()=>{
  const html=renderAdminDenied('<script>bad</script>');

@@ -3417,6 +3417,106 @@
       "conclusion": "SUCCESS",
       "production_writes": false,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 #509 Run135 complete live stored SQL of 2 newly released migrations",
+      "source_parent_sha": "4192d271d832bb93f4c9758bbc3cd3078610278a",
+      "receipt_path": "docs/audits/issue509-provider-new-migration-full-sql-2026-11-10-run135.json",
+      "reviewed": 2,
+      "total_current_stored_migrations": 56,
+      "source_exact_release_match": true,
+      "provider_writes": false,
+      "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 #509 Run136 orphaned account-deletion actor SQL NULL retry guard",
+      "source_parent_sha": "5f164450cf286f4b4fb59ea6d176f9d467047a31",
+      "receipt_path": "docs/audits/issue509-provider-null-actor-retry-semantic-2026-11-10-run136.json",
+      "reviewed": 1,
+      "source_full_chars": 1933,
+      "source_md5": "75abc037bcc45abd5e9dd021b2f702d7",
+      "finding": "CONDITIONAL_NULL_ACTOR_RETRY_MISCLASSIFICATION",
+      "current_live_affected_operations": 0,
+      "new_migration": "supabase/migrations/20261110035000_dic_account_delete_orphaned_actor_retry_guard.sql",
+      "test_added": "supabase/tests/admin_member_deletion.sql",
+      "source_ci_status": "PENDING",
+      "provider_writes": false,
+      "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 #509 Run136b release queue intake recovery",
+      "source_parent_sha": "b4ed15a1515013dad43ba04dc4ff4a91db53a577",
+      "receipt_path": "docs/audits/issue509-provider-null-actor-retry-semantic-2026-11-10-run136.json",
+      "reviewed": 0,
+      "queue_item": "DIC-Q-509-account-delete-null-actor-retry-guard",
+      "state": "TESTING",
+      "original_governance_run": 42752080227,
+      "original_governance_result": "FAIL_QUEUE_INTAKE_NO_ITEM",
+      "source_ci_status": "PENDING_CORRECTED_SOURCE",
+      "provider_writes": false,
+      "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 #509 Run136c queue schema correction",
+      "source_parent_sha": "f6fe1d53aa4010db246d016b35669f34c9963ab8",
+      "receipt_path": "docs/audits/issue509-provider-null-actor-retry-semantic-2026-11-10-run136.json",
+      "reviewed": 0,
+      "queue_item": "DIC-Q-509-account-delete-null-actor-retry-guard",
+      "source_ci_status": "PENDING_NEW_GOVERNANCE",
+      "prior_governance_run": 42752184634,
+      "prior_governance_result": "FAIL_NON_DEPLOYABLE_TEST_PATH_IN_SCOPE",
+      "provider_writes": false,
+      "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 #509 Run136d safe null actor source-bound READY verification",
+      "source_parent_sha": "584679dde5866753cb1a929af403fb1aeadc577e",
+      "receipt_path": "docs/audits/issue509-provider-null-actor-retry-semantic-2026-11-10-run136.json",
+      "reviewed": 0,
+      "source_code_sha": "b4ed15a1515013dad43ba04dc4ff4a91db53a577",
+      "governance_docs_sha": "584679dde5866753cb1a929af403fb1aeadc577e",
+      "ci_runs": [
+        42752080329,
+        42752080197,
+        42752080471,
+        42752264988
+      ],
+      "ci_conclusions": "ALL_FOUR_COMPLETED_SUCCESS",
+      "queue_item": "DIC-Q-509-account-delete-null-actor-retry-guard",
+      "queue_state": "READY_NOT_DEPLOYED",
+      "provider_writes": false,
+      "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 #509 Run137 private destructive RPC EXECUTE least-privilege",
+      "source_parent_sha": "bb219a3f2b8e4f1580e48f6420f60334349c1ba5",
+      "receipt_path": "docs/audits/issue509-provider-private-delete-definer-execute-2026-11-10-run137.json",
+      "reviewed_security_definer_acl_records": 68,
+      "verified_outlier_count": 2,
+      "source_fix": "supabase/migrations/20261110045500_dic_admin_private_delete_acl_hardening.sql",
+      "sql_test": "supabase/tests/admin_safe_delete.sql",
+      "queue_state": "TESTING",
+      "ci": "PENDING",
+      "provider_writes": false,
+      "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 #509 Run137b itemized all 68 function ACLs and exact-source dev READY",
+      "source_sha": "5964553fcdb3ba58db91584645f1e2b2a99ebbb2",
+      "receipt_path": "docs/audits/issue509-provider-security-definer-acl-68-itemized-2026-11-10-run137b.json",
+      "reviewed_visible_acl_records": 68,
+      "total_visible_acl_records": 68,
+      "public_execute_outliers": 2,
+      "ci_runs": [
+        42757946574,
+        42757946361,
+        42757946343,
+        42757946470
+      ],
+      "ci_conclusions": "SUCCESS_ALL_FOUR",
+      "queue_state": "READY_NOT_DEPLOYED",
+      "production_writes": false,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -15731,5 +15831,132 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "First genuinely unreviewed/changed provider definition, hosted Auth/JWT/API/native UNVERIFIED; continue independent release/backup HOLD."
+  },
+  "provider_ready5_postrelease_run134": {
+    "status": "POST_RELEASE_CHANGED_PROVIDER_FULL_DEFINITION_REVIEW_NO_NEW_CONFIRMED_ISSUE",
+    "receipt_path": "docs/audits/issue509-provider-ready5-postrelease-2026-11-10-run134.json",
+    "actual_production_sha": "bf3a82484ab2443a5d8b4dc78075ca5a4d875532",
+    "read_head": "7ac3c7ed81aa515598584ea00037f48d41ccc9b9",
+    "live_migrations_total": 56,
+    "newly_deployed_versions": [
+      "20261109152500",
+      "20261109231500"
+    ],
+    "full_sql_function_sources_direct_reviewed": 11,
+    "repaired_fk_definitions": 2,
+    "new_private_table_columns": 15,
+    "new_constraints": 7,
+    "new_index_definitions": 3,
+    "new_trigger_definitions": 6,
+    "table_acl_rows": 10,
+    "deployed_edge_file_bodies_exact_match": 2,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "First genuinely unreviewed or changed catalog source, bounded logs, hosted settings where available."
+  },
+  "provider_new_migration_sql_run135": {
+    "status": "NEW_MIGRATIONS_COMPLETE_DIRECT_STORED_SQL_REVIEW_EXACT_RELEASE_IDENTITY",
+    "development_parent_sha": "4192d271d832bb93f4c9758bbc3cd3078610278a",
+    "receipt_path": "docs/audits/issue509-provider-new-migration-full-sql-2026-11-10-run135.json",
+    "prior_stored_sql_reviewed": 54,
+    "current_stored_sql_reviewed": 56,
+    "current_stored_sql_total": 56,
+    "reviewed_new": 2,
+    "new_source_characters": 38256,
+    "new_source_words": 3247,
+    "provider_writes": false,
+    "confirmed_new_defect": 0,
+    "code_change": false,
+    "baseline_complete": false,
+    "next": "New/changed provider source; isolated nullable prior actor branch proof under #1676; hosted native/config unverified"
+  },
+  "provider_null_actor_retry_run136": {
+    "status": "SOURCE_FIX_VERIFIED_READY_NOT_DEPLOYED",
+    "source_parent_sha": "5f164450cf286f4b4fb59ea6d176f9d467047a31",
+    "receipt_path": "docs/audits/issue509-provider-null-actor-retry-semantic-2026-11-10-run136.json",
+    "live_op_count": 0,
+    "provider_writes": false,
+    "next": "Continue new/changed provider semantic source only; separately owner-authorized publish if explicitly requested.",
+    "queue_item": "DIC-Q-509-account-delete-null-actor-retry-guard",
+    "first_governance_failure": "EXPECTED_NO_QUEUE_ITEM_FIXED_NEXT_COMMIT",
+    "second_governance_failure": "NON_DEPLOYABLE_TEST_PATH_IN_SCOPE_CORRECTED_NEXT_COMMIT",
+    "ci": [
+      {
+        "id": 42752080329,
+        "name": "DIC isolated SQL release regression",
+        "sha": "b4ed15a1515013dad43ba04dc4ff4a91db53a577",
+        "actual_sha": "b4ed15a1515013dad43ba04dc4ff4a91db53a577",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 42752080197,
+        "name": "DIC cloud app build and tests",
+        "sha": "b4ed15a1515013dad43ba04dc4ff4a91db53a577",
+        "actual_sha": "b4ed15a1515013dad43ba04dc4ff4a91db53a577",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 42752080471,
+        "name": "DIC cloud UX regression checks",
+        "sha": "b4ed15a1515013dad43ba04dc4ff4a91db53a577",
+        "actual_sha": "b4ed15a1515013dad43ba04dc4ff4a91db53a577",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 42752264988,
+        "name": "DIC approval, implementation and continuity contract",
+        "sha": "584679dde5866753cb1a929af403fb1aeadc577e",
+        "actual_sha": "584679dde5866753cb1a929af403fb1aeadc577e",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "queue_state": "READY"
+  },
+  "provider_admin_delete_definer_acl_run137": {
+    "status": "DIRECT_LIVE_68_DEFINER_ACL_OUTLIERS_2_DEV_ONLY_LEAST_PRIVILEGE_TESTING",
+    "source_parent_sha": "bb219a3f2b8e4f1580e48f6420f60334349c1ba5",
+    "provider_68_definers": 68,
+    "private_53": 53,
+    "public_15": 15,
+    "public_execute_exceptions": 2,
+    "admin_delete_functions_acl_records": 16,
+    "complete_function_bodies_reread": 4,
+    "new_original_word_coverage": 0,
+    "receipt_path": "docs/audits/issue509-provider-private-delete-definer-execute-2026-11-10-run137.json",
+    "migration": "supabase/migrations/20261110045500_dic_admin_private_delete_acl_hardening.sql",
+    "sql_regression": "supabase/tests/admin_safe_delete.sql",
+    "source_fix_pending": true,
+    "queue": "DIC-Q-509-private-delete-definer-execute-acl",
+    "queue_state": "TESTING",
+    "provider_writes": false,
+    "baseline_complete": false,
+    "ci": "PENDING",
+    "next": "Read back source-bound isolated PostgreSQL + Node + governance CI; harden/correct failures; otherwise continue new provider source."
+  },
+  "provider_admin_delete_definer_acl_run137b": {
+    "status": "ITEMIZED_68_OF_68_LIVE_DEFINER_ACL_RECORDS_AND_EXACT_SOURCE_4_CI_PASS_READY_DEV_ONLY",
+    "source_code_sha": "5964553fcdb3ba58db91584645f1e2b2a99ebbb2",
+    "receipt_path": "docs/audits/issue509-provider-security-definer-acl-68-itemized-2026-11-10-run137b.json",
+    "total": 68,
+    "reviewed": 68,
+    "live_public_execute_exceptions": 2,
+    "ci_runs": [
+      42757946574,
+      42757946361,
+      42757946343,
+      42757946470
+    ],
+    "ci_conclusions": "ALL_FOUR_COMPLETED_SUCCESS",
+    "queue_item": "DIC-Q-509-private-delete-definer-execute-acl",
+    "queue_state": "READY_NOT_DEPLOYED",
+    "source_fixes": 1,
+    "provider_writes": false,
+    "new_code_word_coverage": 0,
+    "baseline_complete": false,
+    "next": "Changed/new provider object or access gap; native+hosted Auth private settings unverified"
   }
 }

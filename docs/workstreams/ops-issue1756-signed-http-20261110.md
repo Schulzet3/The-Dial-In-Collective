@@ -1,0 +1,7 @@
+# Issue #1756 — real signed HTTP regression retirement and replacement (November 10, 2026 UTC)
+
+Parent source `6d037a145ab5ad263786d3e666ec4cd7edfdb44d` still had an executable, post-migration Issue #27 invitation-issued/redeemed acceptance block in `tests/qa/signed-http-acceptance.mjs`. [Exact-source SQL CI #42741970788](https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42741970788) failed after 38 signed JWT HTTP passes attempting `private.beta_invites`, correctly absent under this owner's source migration.
+
+Replaced obsolete invitation issuance/redemption code with isolated HMAC-signed PostgREST #1756 verification in `tests/qa/issue1756-signup-approval-acceptance.mjs`. This exercises four triggered new Auth records, pending default/role isolation, email verified/unverified, admin read/approve/reject, stale replay, parallel conflicting reviews, rejected cannot Restore Access, legacy RPC/table absence and no original shot/note change. The removed Issue27 helper was executable-only and superseded; immutable historic SQL migrations, past receipts and all real Auth/Community data remain unchanged. No hosted traffic; disposable `dic_ci` only. **These new tests require actual exact-source CI; no PASS claimed before observed.**
+
+Coordinate #96 authenticated privacy, #267 source history, #509 provider drift; leave PR DRAFT and queue IN_PROGRESS until all five checks and clean nonforce source integration. Production code erasure requires separate owner-authorized release and fresh encrypted recovery. No provider/Netlify/production writes.

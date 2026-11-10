@@ -1,60 +1,54 @@
 {
   "schema_version": 1,
-  "release_id": "DIC-20261110-READY5-27",
-  "tested_source_sha": "2cb38e3020a2ab7dc0d7d0c62b5db79f14b64c88",
-  "previous_release_head_sha": "2d0bed35e67f6a745a21cbd80616ad4c9a98ed41",
-  "claimed_at_utc": "2026-11-10T01:40:12.907Z",
+  "release_id": "DIC-20261110-READY4-28",
+  "tested_source_sha": "925c957a84d3f3e83cd15f062b7f78189adfc4cb",
+  "previous_release_head_sha": "bf3a82484ab2443a5d8b4dc78075ca5a4d875532",
+  "claimed_at_utc": "2026-11-10T05:36:43.621Z",
   "status": "GIT_CONNECTED_BUILD_PENDING_NETLIFY_PROVIDER_READBACK",
   "granted_single_publication": true,
   "approved_ready_queue_items": [
     {
-      "id": "DIC-Q-33-original603-582-current-named-estate-embu",
-      "issue": 33,
-      "title": "Restore exact selected current named estate growing county over mountain-landform origin",
-      "merged_source_sha": "cab29f01f3889783b6396f9b3726b8641e9b1899",
+      "id": "DIC-Q-1756-admin-signup-approval-retire-invites",
+      "issue": 1756,
+      "title": "Remove beta invitation codes and require verified administrator approval for new accounts with attention notifications",
+      "merged_source_sha": "1fa8ddc9d886025e404f936b75a106864916793b",
       "scope_paths": [
-        "src/server/coffee-page-metadata.mjs",
-        "src/server/coffee-selected-current-estate-county.mjs"
-      ]
-    },
-    {
-      "id": "DIC-Q-455-success-veto-current-recipe-context",
-      "issue": 455,
-      "title": "Keep all-green personal success veto within current basket, feed mode and calibration context",
-      "merged_source_sha": "d9ed395a24c70f3ed8b132d2e4be6ee9c631cedc",
-      "scope_paths": [
-        "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-1676-admin-code-account-delete",
-      "issue": 1676,
-      "title": "Admin Delete Code (automatic revoke) and permanent member deletion with Keep/Remove Community",
-      "merged_source_sha": "ed95dd067bd1d75925dd56e88300297f9f28c033",
-      "scope_paths": [
+        "site/cloud/client.js",
+        "site/cloud/main.js",
+        "site/cloud/confirmation.js",
         "site/admin/main.js",
         "site/admin/view.js",
         "site/admin/styles.css",
-        "supabase/migrations/20261109152500_dic_admin_invite_account_delete.sql",
-        "supabase/functions/dic-delete-member-account/index.ts"
+        "supabase/migrations/20261110020500_dic_admin_signup_approval_retire_invites.sql",
+        "site/cloud/help.js",
+        "site/styles.css"
       ]
     },
     {
-      "id": "DIC-Q-455-offline-idempotent-existing-shot-replay",
+      "id": "DIC-Q-509-account-delete-null-actor-retry-guard",
+      "issue": 509,
+      "title": "Reject orphaned administrator retry tokens during member account deletion",
+      "merged_source_sha": "b4ed15a1515013dad43ba04dc4ff4a91db53a577",
+      "scope_paths": [
+        "supabase/migrations/20261110035000_dic_account_delete_orphaned_actor_retry_guard.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-509-private-delete-definer-execute-acl",
+      "issue": 509,
+      "title": "Tighten PUBLIC EXECUTE on two private admin deletion SECURITY DEFINER functions",
+      "merged_source_sha": "5964553fcdb3ba58db91584645f1e2b2a99ebbb2",
+      "scope_paths": [
+        "supabase/migrations/20261110045500_dic_admin_private_delete_acl_hardening.sql"
+      ]
+    },
+    {
+      "id": "DIC-Q-455-new-shot-timestamp-replay-recency",
       "issue": 455,
-      "title": "Keep existing saved offline shots idempotent across retired style and partial historical rating validation",
-      "merged_source_sha": "f8d3d2727abe4d6d61d486522f506ef1777c0a7d",
+      "title": "Reject malformed explicitly supplied new-shot instants before saving, while preserving offline existing-ID historical replay",
+      "merged_source_sha": "774402b32e4a5909a4aba95d398fd930b24a42fa",
       "scope_paths": [
         "site/lib/engine.js"
-      ]
-    },
-    {
-      "id": "DIC-Q-509-account-delete-coffee-fk",
-      "issue": 509,
-      "title": "Preserve approved coffee provenance and private audit on owner-approved permanent account deletion",
-      "merged_source_sha": "7416c155cac9be2ea84daba23ca6fe4cdfe94788",
-      "scope_paths": [
-        "supabase/migrations/20261109231500_dic_account_delete_coffee_provenance_fk.sql"
       ]
     }
   ]

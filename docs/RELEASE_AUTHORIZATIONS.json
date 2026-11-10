@@ -772,6 +772,30 @@
         "Fresh pre-destructive backup run42736371453 SUCCESS, artifact13727625712 GitHub SHA256 7f7f0b9c3eb6c0f9866fa094683aeacdeec8c3a3a65093390944354dadcaabfc; matching owner-private Drive file1mf0BPRT99diEQSvWmn396IaTB_qExRDd, 22,076,552 bytes in exact parent1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf, verified raw downloaded bytes Nov10 01:37:48Z; snapshot started Nov10 01:32:16Z, encrypted complete 01:32:34Z; latest observed user write Nov9 23:06:29.685367Z.",
         "SQL #1676 blob bd80a9f6a17b4535f52caf77548eaa568d9b0b25 and #509 blob e7ad661db67c574b6135f70c7581b265aeba9e9a both applied, schema_migrations versions reconciled to exact filename order; no user rows deleted. Live first-entry/audit constraints SET NULL, permissions admin gated. Edge dic-delete-member-account ACTIVE, verify_jwt true and both source files exact bytes. Stored recovery key matches original recipient; prior archived restore and weekly fresh restore accepted; newest archive was independently ciphertext-verified but no isolated restore this exact ZIP."
       ]
+    },
+    {
+      "id": "DIC-20261110-READY4-28",
+      "tested_source_sha": "925c957a84d3f3e83cd15f062b7f78189adfc4cb",
+      "owner_approved": true,
+      "status": "APPROVED",
+      "production_branch": "release/production",
+      "max_publications": 1,
+      "approved_at_utc": "2026-11-10T05:34:38.397Z",
+      "expires_at_utc": "2026-11-10T09:34:38.397Z",
+      "approval_source": "Owner November 9, 2026 (America/Chicago), current chat: 'Publish everything in the queue' and follow-up 'Continue doing what you need to do and publish the queue' (four READY items).",
+      "scope": "Exactly four READY IDs: #1756 Admin signup approval and complete 17 used/unused invite-code retirement, #509 account-delete retry and private ACL hardening, #455 shot timestamp recency integrity. One pinned READY-only 12-deployable-file source; #368 unready build guard restored to published blob 22b4cd101006130513b45c6c5e932b5543ca8141. All 5 exact-source CI SUCCESS. Approved three SQL migrations applied only after encrypted recovery and live data protection checks. All 11 existing Auth/member records, shots26, notes26, Community12 and other protected hashes retained; no real account deletion. GitHub encrypted archive 13738153192, matched private Drive 1OZmZvheHS4lIgbWU0HvpFvOaEdxg6tTM and original age recipient, 22,785,910 bytes SHA256 3706587b760beb129a5f8e728babd1040ce9aaf40b452ed3693e5b6dc34fcc14; snapshot 2026-11-10T05:29:18Z after last sampled data write 05:16:19.79668Z. Prior saved-archive isolated recovery accepted. Only ONE guarded Git-connected release, no force, direct publisher, account deletion or further release.",
+      "approved_ready_item_ids": [
+        "DIC-Q-1756-admin-signup-approval-retire-invites",
+        "DIC-Q-455-new-shot-timestamp-replay-recency",
+        "DIC-Q-509-account-delete-null-actor-retry-guard",
+        "DIC-Q-509-private-delete-definer-execute-acl"
+      ],
+      "owner_private_free_compensating_controls": true,
+      "sql_evidence": [
+        "Exact source 925c957a84d3f3e83cd15f062b7f78189adfc4cb five completed SUCCESS GitHub checks approval42761381221; validate42761381166; cloud-tests/mobile-browser-qa42761381309; sql42761381145. No unchanged test re-runs.",
+        "Fresh encrypted backup run42762409155 SUCCESS, artifact13738153192 ZIP SHA256 3706587b760beb129a5f8e728babd1040ce9aaf40b452ed3693e5b6dc34fcc14, single backup.age entry, 22,785,910 bytes; raw matching Drive ZIP owner-private direct child1OZmZvheHS4lIgbWU0HvpFvOaEdxg6tTM folder 1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf. Snapshot 2026-11-10T05:29:18Z; encrypted 05:29:48Z, last observed user write 05:16:19.79668Z. Original age recipient confirmed; earlier isolated archived restore valid, not claiming restore of this exact ZIP.",
+        "Production Supabase SQL source 20261110020500 blob fea285d31190b996160d7672c1d90887f3d0c647; 20261110035000 blob557ca8181421aa09f5dffdcfb3ccd6b258e40edc; 20261110045500 blob0ea32f93848b16b96f2b6cd8e75d9b3b4e9fa4c5 applied in order, three tool migration aliases normalized by exact SQL source lengths/md5 checks. Invites 17 and dedicated code-only APIs/logs removed; Auth11 members11 admitted11 admin1, shots26 notes26 Community12, coffees8 submissions8 receipts69 protected row digests unchanged. Anon private delete ACL denied; auth/service-role preserved; NULL actor guard present."
+      ]
     }
   ],
   "policy": "New owner publish/deploy instruction grants one selected READY release at the exact combined tested source SHA; source-bound unique grant, max 1 publication, finite expiry, matched CI, backup/security and Netlify readback. Owner exclusively monitors credits; no credit cap/balance/plan proof required. Never buy or upgrade. Prior grants and their old cost fields are preserved historical evidence."

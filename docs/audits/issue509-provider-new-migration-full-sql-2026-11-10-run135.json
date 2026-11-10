@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "run": "2026-11-10-run135",
+  "review_type": "DIRECT_COMPLETE_STORED_SQL_NEWLY_APPLIED_MIGRATIONS_AND_BOUNDED_POST_RELEASE_LOG_REVIEW",
+  "development_parent_sha": "4192d271d832bb93f4c9758bbc3cd3078610278a",
+  "release_sha": "bf3a82484ab2443a5d8b4dc78075ca5a4d875532",
+  "main_sha": "9b0cd38f8cdfe2b0291d432ca01d61ae53450028",
+  "database_version": "17.11.0.003",
+  "live_migration_count": 56,
+  "prior_full_reviewed_historical_migrations": 54,
+  "migrations": [
+    {
+      "version": "20261109152500",
+      "name": "dic_admin_invite_account_delete",
+      "provider_sql_md5": "175cf76c96d9ed1594df299d82c103cc",
+      "release_git_blob_sha": "bd80a9f6a17b4535f52caf77548eaa568d9b0b25",
+      "stored_statements_count": 1,
+      "source_chars": 37131,
+      "source_lines": 592,
+      "source_whitespace_words": 3136,
+      "exact_stored_sql_equals_release_git_utf8": true,
+      "full_range_reviewed": "characters 1-37131",
+      "source_scope": "Applied migration stored SQL and release Git text only; not proof all native provider internals or live auth tests",
+      "verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "provider_writes": false
+    },
+    {
+      "version": "20261109231500",
+      "name": "dic_account_delete_coffee_provenance_fk",
+      "provider_sql_md5": "0d981a65e7fb913839d3c10f9bfe174f",
+      "release_git_blob_sha": "e7ad661db67c574b6135f70c7581b265aeba9e9a",
+      "stored_statements_count": 1,
+      "source_chars": 1125,
+      "source_lines": 20,
+      "source_whitespace_words": 111,
+      "exact_stored_sql_equals_release_git_utf8": true,
+      "full_range_reviewed": "characters 1-1125",
+      "source_scope": "Applied migration stored SQL and release Git text only; not proof all native provider internals or live auth tests",
+      "verdict": "NO_NEW_CONFIRMED_DEFECT",
+      "provider_writes": false
+    }
+  ],
+  "semantic_assessment": [
+    "20261109152500: complete stored SQL read including DDL, invite soft-delete receipts, private/RPC admin list/search replacements, deletion preview/request/prepare/finish and service-only privileges; 15 CREATE OR REPLACE function declarations across 592 lines. Identity/admin admission and phase/retry checks are present; no production account deletion attempted.",
+    "20261109231500: complete stored SQL read including nullable first_submission_id and ON DELETE SET NULL FK for canonical coffee first entry and audit submission, preserving parent coffee/audit when private submission cascades.",
+    "Both post-release stored SQL strings are byte-identical to the exact release/production Git files. No new lexical migration drift in these 2 new releases. Direct 11 live function effective bodies already reviewed under Run134; no duplicate literal-source credit.",
+    "Candidate future isolated regression: nullable actor_id from ON DELETE SET NULL and request-side prior.actor_id <> actor use 3-valued SQL logic. Potential wrong retry classification if prior admin account removed outside this protected flow; not reproduced, not classified as a confirmed app defect."
+  ],
+  "bounded_logs": {
+    "window_start_utc": "2026-11-10T01:47:00Z",
+    "window_end_utc": "2026-11-10T02:42:00Z",
+    "edge_http_200": 51,
+    "edge_other_http_statuses": 0,
+    "edge_mean_upstream_ms": 14.43,
+    "edge_max_upstream_ms": 234,
+    "auth_http_200": 1,
+    "postgres_severity_LOG_sqlstate_00000": 2,
+    "pgbouncer_events_unclassified": 3,
+    "raw_payloads_identities_and_tokens_retrieved": false
+  },
+  "database_runtime_snapshot": {
+    "deadlocks_since_2026_10_02_reset": 0,
+    "lock_waits_current": 0,
+    "idle_in_transaction_current": 0,
+    "temp_bytes_cumulative_since_reset": 124868487773,
+    "causal_app_attribution": "UNVERIFIED"
+  },
+  "edge_metadata_snapshot": [
+    "dic-verify-coffee v8 ACTIVE JWT true",
+    "dic-preview-coffee v4 ACTIVE JWT true",
+    "dic-delete-member-account v1 ACTIVE JWT true"
+  ],
+  "prior_governance_run134": {
+    "id": 42738646219,
+    "head_sha": "57551f2d07946f9287af042a2799256d33b4e0fc",
+    "conclusion": "success"
+  },
+  "code_change": false,
+  "new_safe_fix": false,
+  "source_ci_status": "NOT_RUN_DOCS_ONLY_AT_THIS_COMMIT; applicable governance pending",
+  "production_mutations": false,
+  "provider_baseline": "IN_PROGRESS",
+  "unverified": [
+    "hosted Auth/JWT/PostgREST console-only settings",
+    "compiled native bodies",
+    "live admin deletion under real authenticated account"
+  ],
+  "next": "Continue first genuinely new or changed provider source, investigate nullable prior actor SQL NULL branch in isolated PostgreSQL under #1676 ownership if safe; repeat no passing full suites."
+}
