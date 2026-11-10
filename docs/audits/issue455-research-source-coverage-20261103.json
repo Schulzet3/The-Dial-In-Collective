@@ -373,11 +373,15 @@
       "published": "2020-03-04",
       "doi": "10.1016/j.matt.2019.12.019",
       "url": "https://www.cell.com/matter/fulltext/S2590-2385(19)30410-2",
-      "access": "ORIGINAL_PUBLISHER_SEARCH_INDEXED_METHODS_RESULTS_TEXT_AND_AUTHOR_INSTITUTION_ABSTRACT; DIRECT_OPEN_403; NOT_FULL_PDF_READ_OR_HASHED",
-      "evidence_grade": "PEER_REVIEWED_MODEL_PLUS_BOUNDED_CAFE_GRIND_PRESSURE_DOSE_EXPERIMENT_NOT_POPULATION_SENSORY_PREFERENCE",
-      "review_status": "FOCUSED_PRIMARY_CLAIM_CHECK_MODEL_VERSUS_EXPERIMENT_LIMITS; COMPLETE_MANUSCRIPT_NOT_REVIEWED",
+      "access": "ORIGINAL_PUBLISHER_MAIN_ARTICLE_TEXT_SUBSTANTIVELY_REVIEWED_VIA_INDEXED_FULL_TEXT_RESULT; DIRECT_DOI_OPEN_403; ORIGINAL_PDF_AND_SUPPLEMENT_NOT_FETCHED_OR_HASHED",
+      "evidence_grade": "PEER_REVIEWED_ORIGINAL_2020_ESPRESSO_MATHEMATICAL_MODEL_AND_6_BAR_CAFE_GRIND_EXPERIMENT; NO_BLIND_FIVE_TASTE_PERSONAL_PREFERENCE_VALIDATION",
+      "review_status": "SUBSTANTIVE_ORIGINAL_PUBLISHER_INDEXED_INTRO_MODEL_BREWING_RESULTS_EXPERIMENT_CAFE_IMPLEMENTATION_DISCUSSION_READ_20261110; DIRECT_FULL_HTML_AND_SUPPLEMENTAL_MATERIALS_INACCESSIBLE_UNVERIFIED",
       "source_bytes_sha256": null,
-      "source_byte_caveat": "2026-11-04 primary DOI landing text retrievable via web search; direct open returned 403; university author abstract independently crosschecked."
+      "source_byte_caveat": "Original Matter Vol 2 issue 3 pp 631-648, DOI 10.1016/j.matt.2019.12.019. Original Cell/Matter search-indexed article text substantively read 2026-11-10 with Introduction, Development of Rational Model, Effect of Brew Ratio and Pressure, Brewing Espresso, Systematically Improving Espresso, Implementation and Outlook. Direct DOI open returned 403; original contiguous HTML, accepted-manuscript PDF byte hash, figure pixels, supplemental equations/raw replicate measurements and consumer ratings NOT independently verified. Crosschecked title, authors, DOI and March 4 2020 issue date with McMaster experts and University of Huddersfield author-institution records (Huddersfield early online Jan 22 2020). PNNL 2023 catalog entry is institutional indexing date, not original publication.",
+      "claims_verified_externally": "Original author's homogeneous-flow mathematical model predicts greater EY with finer grind, while the cafe experiment under 6 bar (lowered from 9 bar because of fine-grind clogging) observes a peaked EY-versus-grind relationship with lower EY/greater variation at very fine settings. Within tested setup, automated 98 N tamp had no appreciable observed shot time/EY variation; the authors explicitly did not quantify observed flavor changes. A 20g-to-15g dose reduction/coarser-grind cafe protocol, shorter ~14s shots and sales-based coffee-cost case illustrate operational efficiency, NOT randomized preferred espresso flavor or personal five-input DIC outcomes. EY/TDS, time, taste and economic success are different measured outcomes, and neither fine-grind 'critical point' nor a brew-time target transfers universally across grinders, burrs, coffees, feeds, pressure and baskets.",
+      "current_app_crosswalk": "Current development source 2bbb4f9598668538c8d27b5bdcf6e3f7758db040; engine.js blob d262f7343ef2556effc7572b86e7ecc026449288, model.js blob 5ea712305d9ba0f948ef3aa2d576dd27aa51b31c, constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095, Community evidence blob 74c93c7ff7814337752e0ef9052412eaf55890e3. Existing nextAdviceRaw/recommendation/hasLocalSuccess/validateShot treat full five taste ratings, measured actual shot and same-coffee matching as evidence; nominal recipe timing is starting guidance, not a universal pass/fail rule. No EY meter, flow sensor, blind taste/causal confidence estimate or universally calibrated grinder setting in app.",
+      "reviewed_date_utc": "2026-11-10",
+      "implementation_status": "RESEARCH_ONLY_NO_REPRODUCED_SAFE_APP_BUG_NO_LOCKED_CHANGE_OR_DEPLOYMENT"
     },
     {
       "id": "LIT-2023-GAGNE-GRINDER-PSD-24",
@@ -4009,6 +4013,26 @@
       "result": "DOCUMENT_ONLY_NOT_A_SCIENCE_CONFIDENCE_UPDATE",
       "owner_approval": false,
       "date": "2026-11-10"
+    },
+    {
+      "id": "R455-EV-CIT-151-A",
+      "source": "LIT-2020-ESPRESSO-GRIND-PEAK; original Matter publisher-indexed paper introduction, mathematical homogeneous-flow model, Brewing Espresso and Figure 4 discussion",
+      "claim": "Homogeneous-flow model expects monotonic EY with finer grind; 6-bar cafe extraction instead has a peaked EY-versus-grind response, with clogging at 9 bar for the finest settings and inconsistent fine-grind extraction. 98 N tamp standardized after no appreciable time/EY effect in tested range. This is conditional evidence against universal 'always grind finer' advice, not proof of a specific DIC sensory correction.",
+      "grade": "ORIGINAL_PEER_REVIEWED_INDEXED_PRIMARY_MODEL_AND_BOUNDED_GRIND_TEST; NO_ORIGINAL_BINARY_HASH_OR_RAW_DATA",
+      "current_app": "Current development source 2bbb4f9598668538c8d27b5bdcf6e3f7758db040; engine.js blob d262f7343ef2556effc7572b86e7ecc026449288, model.js blob 5ea712305d9ba0f948ef3aa2d576dd27aa51b31c, constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095, Community evidence blob 74c93c7ff7814337752e0ef9052412eaf55890e3. Existing nextAdviceRaw/recommendation/hasLocalSuccess/validateShot treat full five taste ratings, measured actual shot and same-coffee matching as evidence; nominal recipe timing is starting guidance, not a universal pass/fail rule. No EY meter, flow sensor, blind taste/causal confidence estimate or universally calibrated grinder setting in app.",
+      "result": "SUPPORT_CONDITIONAL_SAME_COFFEE_CONTEXT_AND_AVOID_UNIVERSAL_GRIND_RULE; NO_NUMERIC_POLICY_CHANGE",
+      "owner_approval": false,
+      "date": "2026-11-10"
+    },
+    {
+      "id": "R455-EV-CIT-151-B",
+      "source": "LIT-2020-ESPRESSO-GRIND-PEAK; original Matter publisher-indexed Systematically Improving Espresso and Implementation/Outlook; institutional bibliography corroboration",
+      "claim": "The reported coarser/low-dose cafe implementation (20 g to 15 g, ~14 s and calculated coffee costs for 27,850 beverages) is an operational throughput/cost illustration, not randomized sensory preference or validation of a fixed espresso taste optimum. Authors state EY does not directly establish quality and note flavor changes were unquantified; no DIC five ratings, grinder/version transfer or direct cup-quality outcomes were tested.",
+      "grade": "PRIMARY_ORIGINAL_MATHEMATICAL_CAFE_CASE_NO_BLIND_SENSORY_PANEL_OR_DIC_MEMBER_TEST",
+      "current_app": "Current development source 2bbb4f9598668538c8d27b5bdcf6e3f7758db040; engine.js blob d262f7343ef2556effc7572b86e7ecc026449288, model.js blob 5ea712305d9ba0f948ef3aa2d576dd27aa51b31c, constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095, Community evidence blob 74c93c7ff7814337752e0ef9052412eaf55890e3. Existing nextAdviceRaw/recommendation/hasLocalSuccess/validateShot treat full five taste ratings, measured actual shot and same-coffee matching as evidence; nominal recipe timing is starting guidance, not a universal pass/fail rule. No EY meter, flow sensor, blind taste/causal confidence estimate or universally calibrated grinder setting in app.",
+      "result": "RESEARCH_TRANSFER_BOUNDARY_ONLY_NO_CONFIDENCE_OR_DOSING_TARGET_FROM_CAFE_ECONOMICS",
+      "owner_approval": false,
+      "date": "2026-11-10"
     }
   ],
   "policy_decisions_pending": [],
@@ -4020,6 +4044,7 @@
     "reason": "R455-123 verified existing Locked 70-100 C recorded-temperature guard prevents invalid imported temp from becoming personal grind evidence; six direct-module tests and exact source CI, no scientific target or deployed change."
   },
   "next_actions": [
+    "R455-151 authored at 2bbb4f9598668538c8d27b5bdcf6e3f7758db040: independently upgraded Cameron et al. Matter 2020 from focused model claim to substantive original publisher-indexed model/experimental/cafe-cost sections, evidence CIT-151 A/B and science-boundary proposal; 80 sources, 217 checks, 112 proposals. No new safe runtime bug demonstrated, no Locked/queue/production change, no #267 literal credit. PR exact-source CI and nonforce integration pending; S019 standalone PDF inaccessible.",
     "R455-136 final: PR1653 exact code merged 529ad288b5962c2f69879daf6d6adb114320009b and all four Git blobs match reviewed head; Node22 3214/0/6 head and 3219/0/6 merged, all 3 new synthetic tests PASS, applicable Chromium/SQL/security/governance SUCCESS. READY queue development only, S019 missing, no #267 credit. Docs reconciliation CI/readback pending.",
     "R455-136 code correction authoring at ac4f6fb9bd6fde65eddd0f6d21d71ea3ce834465: old editShot could overwrite unrelated coffee Current/favorite in malformed historical pointer; scope to same coffee with 3 synthetic negative/positive cases. Source-bound Node22/CI, nonforce merge, exact merged readback and queue status PENDING; 76 sources /189 evidence checks /98 proposals, S019 inaccessible, #267 literal review credit zero.",
     "R455-123 verified code PR1505 squash merged edf2e25666c25cb0fe7e43712d4e285e389ca40c, exact source six synthetic tests PASS with PR-head and merged Node22 3126 PASS/0 FAIL/6 SKIP and lint; applicable UX/mobile/offline, isolated SQL, security and governance SUCCESS. Queue READY development only; 68 sources, 165 evidence checks, 85 proposals. S019 standalone PDF inaccessible, #267 no literal review credit. Continue another distinct bounded increment.",
@@ -4094,33 +4119,34 @@
     }
   ],
   "latest_review_checkpoint": {
-    "id": "R455-150",
-    "base_development_sha": "59b7f4c84c0365abead9e39314428cce4c2c82b5",
+    "id": "R455-151",
+    "base_development_sha": "2bbb4f9598668538c8d27b5bdcf6e3f7758db040",
     "source_ids": [
-      "LIT-2026-GUINARD-COFFEE-CUALITY-EXPERT",
+      "LIT-2020-ESPRESSO-GRIND-PEAK",
       "docs/MASTER_SPECIFICATION.md",
       "docs/DECISION_LEDGER.json",
       "site/lib/engine.js",
       "site/lib/model.js",
-      "site/lib/constants.js"
+      "site/lib/constants.js",
+      "site/lib/community-evidence.js"
     ],
     "claim_ids": [
-      "R455-EV-CIT-150-A",
-      "R455-EV-CIT-150-B"
+      "R455-EV-CIT-151-A",
+      "R455-EV-CIT-151-B"
     ],
     "proposal_ids": [
-      "R455-PROP-150-EXPERT-RATING-NOT-DIC-PERSONAL-TASTE"
+      "R455-PROP-151-ESPRESSO-MODEL-EY-IS-NOT-FIVE-TASTE-OPTIMUM"
     ],
     "number_of_curated_sources": 80,
-    "total_evidence_checks": 215,
-    "number_of_proposals": 111,
-    "review_type": "DIRECT_2026_PUBLISHER_PRIMARY_EXPERT_SENSORY_METHOD_AND_APP_UX_TRANSFER_BOUNDARY",
+    "total_evidence_checks": 217,
+    "number_of_proposals": 112,
+    "review_type": "SUBSTANTIVE_2020_PRIMARY_PUBLISHER_INDEXED_ORIGINAL_ESPRESSO_MODEL_VERSUS_EXPERIMENT_AND_APP_UX_CROSSWALK",
     "code_or_policy_changed": false,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
-    "status": "SUBSTANTIVE_DOCS_COMPLETED_PR_EXACT_CI_PENDING_AT_AUTHORING",
-    "next_action": "Validate exact-source PR checks and nonforce merge, verify merged SHA and three Git blobs, checkpoint Issue 455. Resume distinct UX bug evidence; standalone S019 PDF inaccessible."
+    "status": "SUBSTANTIVE_DOCS_COMPLETED_HEAD_CI_AND_MERGE_PENDING",
+    "next_action": "Verify exact-source checks and merge nonforce; confirm exact three merged blobs and source-bound governance; continue disjoint Log Shot UX review and S019 availability investigation."
   },
   "policy_decisions_resolved": [
     {
@@ -6430,6 +6456,28 @@
       "dependency": "Coordinate #335 primary scientific fact audit, #267 separate exhaustive source, #33 extractor, #96 security. S019 standalone PDF missing.",
       "release_queue": "NOT_APPLICABLE_NO_DEPLOYABLE_RUNTIME_CHANGE",
       "status": "RESEARCH_ONLY",
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-151-ESPRESSO-MODEL-EY-IS-NOT-FIVE-TASTE-OPTIMUM",
+      "finding": "2020 primary espresso grind study finds conditional peaked extraction yield under one 6-bar experimental setup, while its cafe implementation prioritizes reproducibility and dry-coffee cost, not five sensory tastes. The study cannot validate a universal finer/coarser correction or numeric optimal time/EY/dose for DIC.",
+      "evidence": [
+        "LIT-2020-ESPRESSO-GRIND-PEAK",
+        "R455-EV-CIT-151-A",
+        "R455-EV-CIT-151-B"
+      ],
+      "severity": "P3_SCIENTIFIC_TRANSFER_BOUNDARY_NO_REPRODUCED_NEW_SAFE_APP_DEFECT",
+      "user_benefit": "Protect members against universal grind/time instructions, unwarranted confidence and misleading waste/cost goals; retain measured personal taste and actionable one-setting advice.",
+      "current_locked": "All five scored inputs, all-green only if actually rated, one truly controllable change, same-coffee/equipment-calibration/feed/basket/style context, independent Turbo and Fast-Flow, preserved original notes/private history and successful families; no automatic new targets or capture.",
+      "current_app": "Current development source 2bbb4f9598668538c8d27b5bdcf6e3f7758db040; engine.js blob d262f7343ef2556effc7572b86e7ecc026449288, model.js blob 5ea712305d9ba0f948ef3aa2d576dd27aa51b31c, constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095, Community evidence blob 74c93c7ff7814337752e0ef9052412eaf55890e3. Existing nextAdviceRaw/recommendation/hasLocalSuccess/validateShot treat full five taste ratings, measured actual shot and same-coffee matching as evidence; nominal recipe timing is starting guidance, not a universal pass/fail rule. No EY meter, flow sensor, blind taste/causal confidence estimate or universally calibrated grinder setting in app.",
+      "proposed_change": "DOCUMENT primary publisher-indexed experiment and limits; NO product change. Do not install universal EY-optimal grind/dose/time/pressure guidance, economized down-dosing policy or unmeasured 'science confidence'. A future separate owner choice would need practical same-coffee taste trials with setup controls and an explicit feature scope.",
+      "evidence_grade": "PRIMARY_PEER_REVIEWED_6_BAR_ESPRESSO_EXPERIMENT_AND_CAFE_COST_MODEL; ORIGINAL_PDF_SUPPLEMENT_AND_SENSORY_TEST_UNVERIFIED",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "SOURCE_LEDGER_CURRENT_STATUS_AND_SCOPED_JOURNAL_ONLY_PENDING_EXACT_HEAD_CI_NONFORCE_MERGE",
+      "test_plan": "Reparse 80-source/217-evidence/112-proposal ledger with unique IDs; verify all three docs paths and Git blob SHAs against final PR/merged source; run applicable source-bound governance and check selectively routed named workflows; no new runtime/SQL/UX/real-member/espresso tasting PASS claimed for unchanged code.",
+      "release_queue_status": "NOT_APPLICABLE_NO_DEPLOYABLE_RUNTIME_CHANGE",
+      "github267_literal_review_credit": 0,
       "production_deployed": false
     }
   ],
