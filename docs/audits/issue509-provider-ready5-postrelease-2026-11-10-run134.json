@@ -1,0 +1,272 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "date_utc": "2026-11-10",
+  "parent_dev_sha_at_read": "7ac3c7ed81aa515598584ea00037f48d41ccc9b9",
+  "production_sha": "bf3a82484ab2443a5d8b4dc78075ca5a4d875532",
+  "ops_main_sha": "9b0cd38f8cdfe2b0291d432ca01d61ae53450028",
+  "candidate_sha": "2cb38e3020a2ab7dc0d7d0c62b5db79f14b64c88",
+  "live_migrations": 56,
+  "newly_deployed_versions": [
+    "20261109152500",
+    "20261109231500"
+  ],
+  "scope": "FIRST_POST_RELEASE_CHANGED_PROVIDER_DIRECT_FULL_DEFINITION_SEMANTIC_AUDIT",
+  "full_sql_function_sources": [
+    {
+      "schema": "private",
+      "name": "dic_admin_account_delete_finish",
+      "args": "p_operation_id uuid, p_actor_id uuid",
+      "full_source": "CREATE OR REPLACE FUNCTION private.dic_admin_account_delete_finish(p_operation_id uuid, p_actor_id uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare op private.dic_admin_account_delete_operations; removed integer:=0; community_ids uuid[]:='{}'::uuid[];\nbegin\n select * into op from private.dic_admin_account_delete_operations where id=p_operation_id for update;\n if not found or op.actor_id is distinct from p_actor_id then\n  raise exception using errcode='42501',message='Deletion operation unavailable.';\n end if;\n if op.phase='completed' then\n  return jsonb_build_object('ok',true,'completed',true,'community_removed',op.community_removed,'retry',true);\n end if;\n if op.phase<>'prepared' then raise exception using errcode='23514',message='Deletion was not prepared.'; end if;\n -- Never trust an edge-reported success alone. The DB verifies Auth is gone.\n if exists(select 1 from auth.users where id=op.target_id) then\n  raise exception using errcode='23514',message='Auth account still exists.';\n end if;\n if op.community_mode='remove' then\n  -- Capture IDs BEFORE removing their private association; only this member's\n  -- immutable contributor IDs may be selected, including detached old shots.\n  select coalesce(array_agg(cl.community_shot_id order by cl.community_shot_id),'{}'::uuid[])\n    into community_ids from private.contribution_links cl\n    where cl.contributor_id=any(op.contributor_ids);\n  -- Keep private review audit records but remove public references to purged shots.\n  update public.admin_reviews set community_shot_id=null\n    where community_shot_id=any(community_ids);\n  delete from private.contribution_links where community_shot_id=any(community_ids)\n    and contributor_id=any(op.contributor_ids);\n  delete from public.community_shots where id=any(community_ids);\n  get diagnostics removed=row_count;\n  -- Contributor tokens for removed data have no future weighting role.\n  delete from private.contributors c where c.id=any(op.contributor_ids)\n    and c.owner_id is null and not exists(\n      select 1 from private.contribution_links cl where cl.contributor_id=c.id);\n end if;\n update private.dic_admin_account_delete_operations\n  set phase='completed',community_removed=removed,completed_at=now(),\n      expected_impact=expected_impact-'email'-'member_id',\n      contributor_ids='{}'::uuid[] where id=op.id;\n return jsonb_build_object('ok',true,'completed',true,'community_removed',removed);\nend $function$\n",
+      "md5": "51cd64deed985a9ddf622926b8784a84",
+      "definer": true,
+      "config": [
+        "search_path=\"\""
+      ],
+      "anon": false,
+      "authenticated": false,
+      "service": true,
+      "lines": 45,
+      "verdict": "DIRECTLY_REVIEWED_FULL_SOURCE_NO_NEW_CONFIRMED_DEFECT"
+    },
+    {
+      "schema": "private",
+      "name": "dic_admin_account_delete_impact",
+      "args": "p_member_id uuid",
+      "full_source": "CREATE OR REPLACE FUNCTION private.dic_admin_account_delete_impact(p_member_id uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare member_email text;\nbegin\n select u.email into member_email from auth.users u\n join private.beta_members m on m.owner_id=u.id and m.admitted_at is not null\n where u.id=p_member_id;\n if not found then raise exception using errcode='22023',message='Admitted account unavailable.'; end if;\n return jsonb_build_object(\n  'member_id',p_member_id,'email',member_email,\n  'enabled',(select enabled from private.beta_members where owner_id=p_member_id),\n  'shots',(select count(*) from public.shots where owner_id=p_member_id),\n  'notes',(select count(*) from public.shot_notes where owner_id=p_member_id),\n  'library_entries',(select count(*) from public.library_entries where owner_id=p_member_id),\n  'submissions',(select count(*) from public.coffee_submissions where owner_id=p_member_id),\n  'setups',(select count(*) from public.setups where owner_id=p_member_id),\n  'community_shots',(select count(*) from private.contribution_links cl\n    join private.contributors c on c.id=cl.contributor_id where c.owner_id=p_member_id),\n  'eligible_community_shots',(select count(*) from private.contribution_links cl\n    join private.contributors c on c.id=cl.contributor_id\n    join public.community_shots cs on cs.id=cl.community_shot_id\n    where c.owner_id=p_member_id and cs.quality_state='eligible'),\n  'contributors',(select count(*) from private.contributors where owner_id=p_member_id)\n );\nend $function$\n",
+      "md5": "a20e399d6c87c60be0661c80a17728d4",
+      "definer": true,
+      "config": [
+        "search_path=\"\""
+      ],
+      "anon": false,
+      "authenticated": false,
+      "service": false,
+      "lines": 30,
+      "verdict": "DIRECTLY_REVIEWED_FULL_SOURCE_NO_NEW_CONFIRMED_DEFECT"
+    },
+    {
+      "schema": "private",
+      "name": "dic_admin_account_delete_prepare",
+      "args": "p_operation_id uuid, p_actor_id uuid",
+      "full_source": "CREATE OR REPLACE FUNCTION private.dic_admin_account_delete_prepare(p_operation_id uuid, p_actor_id uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare op private.dic_admin_account_delete_operations; ids uuid[]; actual jsonb; storage_blocked boolean:=false;\nbegin\n select * into op from private.dic_admin_account_delete_operations\n where id=p_operation_id for update;\n if not found or op.actor_id is distinct from p_actor_id then\n  raise exception using errcode='42501',message='Deletion operation unavailable.';\n end if;\n if op.phase='completed' then return jsonb_build_object('ok',true,'completed',true); end if;\n if not exists(select 1 from private.app_admins where owner_id=p_actor_id)\n    or not exists(select 1 from private.beta_members\n       where owner_id=p_actor_id and enabled and admitted_at is not null) then\n  raise exception using errcode='42501',message='Administrator no longer admitted.';\n end if;\n if exists(select 1 from private.app_admins where owner_id=op.target_id)\n    or op.target_id=p_actor_id then\n  raise exception using errcode='42501',message='Administrator accounts are protected.';\n end if;\n if op.phase='requested' then\n  if not exists(select 1 from auth.users where id=op.target_id) then\n   raise exception using errcode='23514',message='Target account is missing before preparation.';\n  end if;\n  -- Recheck the same preview under the service-side record lock.\n  -- No JWT actor impersonation or unsafe service-role bypass of an admin check.\n  actual:=private.dic_admin_account_delete_impact(op.target_id);\n  if actual is distinct from op.expected_impact then\n   raise exception using errcode='PT409',message='Account changed after confirmation.';\n  end if;\n  select coalesce(array_agg(c.id order by c.id),'{}'::uuid[]) into ids\n  from private.contributors c where c.owner_id=op.target_id;\n  -- Supabase Auth deletion refuses users who own Storage objects. Fail before\n  -- changing admission when the live provider exposes that table.\n  if to_regclass('storage.objects') is not null then\n   execute 'select exists(select 1 from storage.objects where owner=$1 or owner_id=$1::text)'\n     into storage_blocked using op.target_id;\n   if storage_blocked then\n    raise exception using errcode='23514',message='Member has Storage-owned objects; review before deletion.';\n   end if;\n  end if;\n  -- Prevent deletion of prior actor audit evidence if a formerly privileged user\n  -- was subsequently demoted. Do not silently erase immutable admin audits.\n  if exists(select 1 from private.admin_content_edits where actor_id=op.target_id) then\n   raise exception using errcode='23514',message='Historical administrative actor audit requires separate review.';\n  end if;\n  update private.beta_members set enabled=false where owner_id=op.target_id;\n  -- Eliminate restrictive user references; retain minimum action/timestamp audit.\n  update private.admin_content_edits\n     set subject_owner_id=null,before_values='{}'::jsonb,after_values='{}'::jsonb\n     where subject_owner_id=op.target_id;\n  delete from private.dic_source_attempts where owner_id=op.target_id;\n  update private.import_control\n     set owner_only_exception_owner_id=null,owner_only_exception_approved_at=null,\n         owner_only_exception_expires_at=null\n     where owner_only_exception_owner_id=op.target_id;\n  update private.dic_admin_account_delete_operations\n     set phase='prepared',contributor_ids=ids,prepared_at=now()\n     where id=op.id;\n  op.phase:='prepared';op.contributor_ids:=ids;\n end if;\n if op.phase='prepared' and exists(\n  select 1 from private.beta_members where owner_id=op.target_id and enabled\n ) then\n  raise exception using errcode='23514',message='Admission unexpectedly restored while deleting.';\n end if;\n return jsonb_build_object('ok',true,'target_id',op.target_id,'mode',op.community_mode,'phase',op.phase);\nend $function$\n",
+      "md5": "6e7e0589cbda1bc5023771724ce8b77f",
+      "definer": true,
+      "config": [
+        "search_path=\"\""
+      ],
+      "anon": false,
+      "authenticated": false,
+      "service": true,
+      "lines": 72,
+      "verdict": "DIRECTLY_REVIEWED_FULL_SOURCE_NO_NEW_CONFIRMED_DEFECT"
+    },
+    {
+      "schema": "private",
+      "name": "dic_admin_account_delete_preview",
+      "args": "p_member_id uuid",
+      "full_source": "CREATE OR REPLACE FUNCTION private.dic_admin_account_delete_preview(p_member_id uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare actor uuid:=auth.uid();\nbegin\n perform private.require_member();\n if actor is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator required.';\n end if;\n if p_member_id is null or p_member_id=actor or\n    exists(select 1 from private.app_admins where owner_id=p_member_id) then\n  raise exception using errcode='42501',message='Administrator accounts are protected.';\n end if;\n return private.dic_admin_account_delete_impact(p_member_id);\nend $function$\n",
+      "md5": "55ad6325a6a3b8eb97d830bd4a5acc26",
+      "definer": true,
+      "config": [
+        "search_path=\"\""
+      ],
+      "anon": false,
+      "authenticated": true,
+      "service": false,
+      "lines": 19,
+      "verdict": "DIRECTLY_REVIEWED_FULL_SOURCE_NO_NEW_CONFIRMED_DEFECT"
+    },
+    {
+      "schema": "private",
+      "name": "dic_admin_account_delete_request",
+      "args": "p_member_id uuid, p_community_mode text, p_expected_impact jsonb",
+      "full_source": "CREATE OR REPLACE FUNCTION private.dic_admin_account_delete_request(p_member_id uuid, p_community_mode text, p_expected_impact jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare actor uuid:=auth.uid(); actual jsonb; prior private.dic_admin_account_delete_operations; opid uuid;\nbegin\n perform private.require_member();\n if actor is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator required.';\n end if;\n if p_community_mode not in ('keep','remove') or p_community_mode is null\n    or p_expected_impact is null or p_member_id is null then\n  raise exception using errcode='22023',message='Invalid account deletion confirmation.';\n end if;\n if p_member_id=actor or exists(select 1 from private.app_admins where owner_id=p_member_id) then\n  raise exception using errcode='42501',message='Administrator accounts are protected.';\n end if;\n select * into prior from private.dic_admin_account_delete_operations\n where target_id=p_member_id and phase<>'completed' for update;\n if found then\n  if prior.actor_id<>actor or prior.community_mode<>p_community_mode then\n   raise exception using errcode='23514',message='Another deletion is already in progress.';\n  end if;\n  return jsonb_build_object('ok',true,'operation_id',prior.id,'phase',prior.phase,'retry',true);\n end if;\n perform 1 from auth.users where id=p_member_id for update;\n actual:=private.dic_admin_account_delete_preview(p_member_id);\n if actual is distinct from p_expected_impact then\n  raise exception using errcode='PT409',message='Account records changed. Review deletion impact again.';\n end if;\n insert into private.dic_admin_account_delete_operations(actor_id,target_id,community_mode,expected_impact)\n values(actor,p_member_id,p_community_mode,actual) returning id into opid;\n return jsonb_build_object('ok',true,'operation_id',opid,'phase','requested');\nend $function$\n",
+      "md5": "75abc037bcc45abd5e9dd021b2f702d7",
+      "definer": true,
+      "config": [
+        "search_path=\"\""
+      ],
+      "anon": false,
+      "authenticated": true,
+      "service": false,
+      "lines": 37,
+      "verdict": "DIRECTLY_REVIEWED_FULL_SOURCE_NO_NEW_CONFIRMED_DEFECT"
+    },
+    {
+      "schema": "private",
+      "name": "dic_admin_delete_invite",
+      "args": "p_invite_id uuid",
+      "full_source": "CREATE OR REPLACE FUNCTION private.dic_admin_delete_invite(p_invite_id uuid)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare actor uuid:=auth.uid(); item private.beta_invites;\nbegin\n perform private.require_member();\n if actor is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator required.';\n end if;\n if p_invite_id is null then raise exception using errcode='22023',message='Invite ID required.'; end if;\n select * into item from private.beta_invites where id=p_invite_id for update;\n if not found then raise exception using errcode='22023',message='Invitation unavailable.'; end if;\n if item.deleted_at is not null then\n  return jsonb_build_object('ok',true,'deleted',true,'already_deleted',true);\n end if;\n update private.beta_invites\n set revoked_at=coalesce(revoked_at,now()),deleted_at=now() where id=p_invite_id;\n insert into private.dic_admin_invite_delete_receipts(invite_id,actor_id) values(p_invite_id,actor);\n return jsonb_build_object('ok',true,'deleted',true,'revoked',true);\nend $function$\n",
+      "md5": "adc1ab92d61d08f0bc89c3250e3a416c",
+      "definer": true,
+      "config": [
+        "search_path=\"\""
+      ],
+      "anon": false,
+      "authenticated": true,
+      "service": false,
+      "lines": 24,
+      "verdict": "DIRECTLY_REVIEWED_FULL_SOURCE_NO_NEW_CONFIRMED_DEFECT"
+    },
+    {
+      "schema": "public",
+      "name": "dic_admin_account_delete_finish",
+      "args": "p_operation_id uuid, p_actor_id uuid",
+      "full_source": "CREATE OR REPLACE FUNCTION public.dic_admin_account_delete_finish(p_operation_id uuid, p_actor_id uuid)\n RETURNS jsonb\n LANGUAGE sql\n SET search_path TO ''\nAS $function$\n select private.dic_admin_account_delete_finish(p_operation_id,p_actor_id);\n$function$\n",
+      "md5": "2fc16586443318c1594d1939544920dd",
+      "definer": false,
+      "config": [
+        "search_path=\"\""
+      ],
+      "anon": false,
+      "authenticated": false,
+      "service": true,
+      "lines": 8,
+      "verdict": "DIRECTLY_REVIEWED_FULL_SOURCE_NO_NEW_CONFIRMED_DEFECT"
+    },
+    {
+      "schema": "public",
+      "name": "dic_admin_account_delete_prepare",
+      "args": "p_operation_id uuid, p_actor_id uuid",
+      "full_source": "CREATE OR REPLACE FUNCTION public.dic_admin_account_delete_prepare(p_operation_id uuid, p_actor_id uuid)\n RETURNS jsonb\n LANGUAGE sql\n SET search_path TO ''\nAS $function$\n select private.dic_admin_account_delete_prepare(p_operation_id,p_actor_id);\n$function$\n",
+      "md5": "a0c67fbfbbfd122a8e16596c79333092",
+      "definer": false,
+      "config": [
+        "search_path=\"\""
+      ],
+      "anon": false,
+      "authenticated": false,
+      "service": true,
+      "lines": 8,
+      "verdict": "DIRECTLY_REVIEWED_FULL_SOURCE_NO_NEW_CONFIRMED_DEFECT"
+    },
+    {
+      "schema": "public",
+      "name": "dic_admin_account_delete_preview",
+      "args": "p_member_id uuid",
+      "full_source": "CREATE OR REPLACE FUNCTION public.dic_admin_account_delete_preview(p_member_id uuid)\n RETURNS jsonb\n LANGUAGE sql\n STABLE\n SET search_path TO ''\nAS $function$\n select private.dic_admin_account_delete_preview(p_member_id);\n$function$\n",
+      "md5": "b8f41cc6faf702f27c678a45127d0723",
+      "definer": false,
+      "config": [
+        "search_path=\"\""
+      ],
+      "anon": false,
+      "authenticated": true,
+      "service": true,
+      "lines": 9,
+      "verdict": "DIRECTLY_REVIEWED_FULL_SOURCE_NO_NEW_CONFIRMED_DEFECT"
+    },
+    {
+      "schema": "public",
+      "name": "dic_admin_account_delete_request",
+      "args": "p_member_id uuid, p_community_mode text, p_expected_impact jsonb",
+      "full_source": "CREATE OR REPLACE FUNCTION public.dic_admin_account_delete_request(p_member_id uuid, p_community_mode text, p_expected_impact jsonb)\n RETURNS jsonb\n LANGUAGE sql\n SET search_path TO ''\nAS $function$\n select private.dic_admin_account_delete_request(p_member_id,p_community_mode,p_expected_impact);\n$function$\n",
+      "md5": "779f19212d19ebbfb88f2a859fd92c21",
+      "definer": false,
+      "config": [
+        "search_path=\"\""
+      ],
+      "anon": false,
+      "authenticated": true,
+      "service": true,
+      "lines": 8,
+      "verdict": "DIRECTLY_REVIEWED_FULL_SOURCE_NO_NEW_CONFIRMED_DEFECT"
+    },
+    {
+      "schema": "public",
+      "name": "dic_admin_delete_invite",
+      "args": "p_invite_id uuid",
+      "full_source": "CREATE OR REPLACE FUNCTION public.dic_admin_delete_invite(p_invite_id uuid)\n RETURNS jsonb\n LANGUAGE sql\n SET search_path TO ''\nAS $function$\n select private.dic_admin_delete_invite(p_invite_id);\n$function$\n",
+      "md5": "777e083bedd73429839bf4f1a3be6ba2",
+      "definer": false,
+      "config": [
+        "search_path=\"\""
+      ],
+      "anon": false,
+      "authenticated": true,
+      "service": true,
+      "lines": 8,
+      "verdict": "DIRECTLY_REVIEWED_FULL_SOURCE_NO_NEW_CONFIRMED_DEFECT"
+    }
+  ],
+  "confirmed_live_fk_sources": [
+    {
+      "relname": "dic_coffee_audit",
+      "conname": "dic_coffee_audit_submission_id_fkey",
+      "definition": "FOREIGN KEY (submission_id) REFERENCES coffee_submissions(id) ON DELETE SET NULL",
+      "convalidated": true,
+      "attnotnull": false,
+      "md5": "d1950d6c8ce68798b3129eeffd56a0e2"
+    },
+    {
+      "relname": "dic_coffee_first_entry",
+      "conname": "dic_coffee_first_entry_first_submission_id_fkey",
+      "definition": "FOREIGN KEY (first_submission_id) REFERENCES coffee_submissions(id) ON DELETE SET NULL",
+      "convalidated": true,
+      "attnotnull": false,
+      "md5": "ff175bc832cc8f821ab0335db323706a"
+    }
+  ],
+  "edge": {
+    "slug": "dic-delete-member-account",
+    "version": 1,
+    "status": "ACTIVE",
+    "verify_jwt": true,
+    "bundle_sha256": "a2418951c7c4457723cd7b5e7e8d39f4cb1b3a02f76c6099573a9d576f32bf18",
+    "file_comparisons": [
+      {
+        "name": "dic-delete-member-account/index.ts",
+        "live_chars": 4392,
+        "git_blob_sha": "51f332cf57eb753957bff6566324253faa81df3f",
+        "byte_identical": true
+      },
+      {
+        "name": "_shared/request-budget.mjs",
+        "live_chars": 2455,
+        "git_blob_sha": "d8b70824cb71d4dc4a747a8f20e23b429abb3094",
+        "byte_identical": true
+      }
+    ]
+  },
+  "reviewed_new_table_objects": {
+    "tables": 2,
+    "columns": 15,
+    "constraints": 7,
+    "indexes": 3,
+    "internal_triggers": 6,
+    "role_acl_rows": 10,
+    "explicit_rls_policies": 0,
+    "rls_enabled_both": true,
+    "anon_authenticated_authenticator_crud": false,
+    "service_role_crud": true
+  },
+  "advisor_counts": {
+    "rls_enabled_no_policy": 8,
+    "authenticated_security_definer_function_executable": 10,
+    "auth_leaked_password_protection": 1,
+    "unindexed_foreign_keys": 15,
+    "unused_index": 9
+  },
+  "storage_guard_types": {
+    "owner": "uuid",
+    "owner_id": "text",
+    "read_only_explain": "SUCCEEDED"
+  },
+  "assessment": [
+    "Two live canonical-coffee provenance FKs valid, nullable and ON DELETE SET NULL; exactly as intended in #509 migration.",
+    "Direct inspection of every word in 11 new account-delete/invite function bodies: actor and admin gates, phase and Auth-deletion checks, service-only prepare/finish, empty SECURITY DEFINER search_path. No new confirmed defect.",
+    "Two new private tables enforce RLS deny-all for anon and authenticated with no CRUD grants; service role has CRUD.",
+    "Both live Edge source files match production Git source byte for byte; function ACTIVE and verify_jwt true.",
+    "Advisor no-policy and unindexed FK warnings are not independently proven defects; existing password warning is a known owner beta exception.",
+    "No private users/shot data, token values, secrets or sensitive log records fetched; zero production writes."
+  ],
+  "unverified": [
+    "Actual hosted member deletion and associated GoTrue operation",
+    "Provider console-only Auth/JWT/API and compiled native implementations",
+    "Remaining baseline objects outside this incremental changed-release review"
+  ],
+  "status": "PARTIAL_BASELINE_IN_PROGRESS",
+  "next": "Inspect next previously unreviewed live provider definition, changes and bounded logs; no reset or duplicate #267 review."
+}
