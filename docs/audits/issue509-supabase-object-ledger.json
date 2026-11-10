@@ -3582,6 +3582,15 @@
       "new_confirmed_defects": 0,
       "provider_writes": false,
       "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-10",
+      "run": 147,
+      "event": "Full current 39 RLS policy source/role/expression and 3 security helper definition recheck plus 87 FK inventory and 13 advisory FK source/stat/index analyses",
+      "receipt_path": "docs/audits/issue509-provider-complete-policy-fk-advisor-2026-11-10-run147.json",
+      "development_parent_sha": "e7b912440bb9823d55050ed361008d40e6ea1766",
+      "provider_writes": false,
+      "source_word_credit": 0
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -16236,5 +16245,24 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "Fresh new/changed provider definitions first; coordinate #33 targeted stale parser behavior and separately authorized publication. Hosted PostgREST/JWT/Auth and native compiled implementation UNVERIFIED."
+  },
+  "provider_policy_fk_advisor_run147": {
+    "status": "COMPLETE_TARGETED_CURRENT_POLICY_AND_ADVISOR_FK_SOURCE_RECHECK_NOT_PROVIDER_BASELINE",
+    "receipt_path": "docs/audits/issue509-provider-complete-policy-fk-advisor-2026-11-10-run147.json",
+    "source_development_parent_sha": "e7b912440bb9823d55050ed361008d40e6ea1766",
+    "current_policies_read": 39,
+    "private_deny_policies": 15,
+    "public_policies": 24,
+    "supporting_full_function_sources": 3,
+    "foreign_keys_examined": 87,
+    "missing_unconditional_prefix": 14,
+    "current_advisor_fks_checked": 13,
+    "partial_index_exception": "public.library_entries/library_submission_once_idx",
+    "confirmed_new_defects": 0,
+    "fixes": 0,
+    "first_time_source_word_credit": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "Check genuinely changed/new provider source, hosted JWT/API UNVERIFIED"
   }
 }
