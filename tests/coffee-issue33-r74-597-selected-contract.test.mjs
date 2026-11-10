@@ -34,7 +34,7 @@ test('changed farm or Meru estate origin fails selected current provenance', () 
 });
 test('missing washed/raised-bed process or exact selected notes fails closed', () => {
   assert.equal(proof(wrap(direct.replace('Washed Process.', 'Natural Process.')), [name]).directlyWashedAndRaisedBed, false);
-  assert.equal(proof(wrap(direct.replace('caramel low balance', 'winey low balance')), [name]).selectedTasting, false);
+  assert.equal(proof(wrap(direct.replace('complex flavors of citrus and caramel', 'winey low balance')), [name]).selectedTasting, false);
 });
 test('prior cached sensory notes do not replace the fresh chosen source', () => {
   assert.equal(proof(wrap(direct.replace('Round, complex flavors of citrus and caramel', 'Round, almost savory, caramel low balance')), [name]).selectedTasting, false);
