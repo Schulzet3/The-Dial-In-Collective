@@ -3394,6 +3394,15 @@
       "ci": "PENDING",
       "production_writes": false,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 #509 Run132b correction: SCIM FK already in Run131b",
+      "source_parent_sha": "18cd6276efebd0b50dde4bdc02c8701e2104f558",
+      "receipt_path": "docs/audits/issue509-provider-scim-fk-baseline-correction-2026-11-10-run132b.json",
+      "revalidated_fks": 31,
+      "previously_credited": true,
+      "production_writes": false,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -15663,5 +15672,23 @@
     "CI_governance": "PENDING",
     "baseline_complete": false,
     "next": "Read exact merged-source SQL CI logs, repair any failure in development only; no schema/production changes without independent owner publish command."
+  },
+  "provider_scim_fk_count_correction_run132b": {
+    "status": "PRIOR_31_FK_BASELINE_RECONFIRMED_SCIM_ALREADY_CREDITED",
+    "source_parent_sha": "18cd6276efebd0b50dde4bdc02c8701e2104f558",
+    "receipt_path": "docs/audits/issue509-provider-scim-fk-baseline-correction-2026-11-10-run132b.json",
+    "prior_scim_already_in_run131b": true,
+    "non_cascade": 31,
+    "set_null": 8,
+    "no_action": 23,
+    "nonnullable_set_null_targets": 0,
+    "scim_counts": {
+      "users": 0,
+      "tokens": 0,
+      "sso_providers": 0
+    },
+    "new_edges": 0,
+    "production_writes": false,
+    "baseline_complete": false
   }
 }

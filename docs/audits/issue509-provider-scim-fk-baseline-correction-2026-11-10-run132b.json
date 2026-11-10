@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "132b",
+  "project_ref": "azviqqejypsefzilgonr",
+  "source_parent_sha": "18cd6276efebd0b50dde4bdc02c8701e2104f558",
+  "type": "DIRECT_CATALOG_RECOUNT_AND_APPEND_ONLY_CORRECTION",
+  "superseded_claim": "Run132 incorrectly characterized SCIM user SET NULL FK as additional to Run131b.",
+  "proof": "Parsed complete immutable Run131b receipt: 31 non-cascade FK definitions including auth.scim_users.scim_users_user_id_fkey, 8 ON DELETE SET NULL, 23 NO ACTION.",
+  "live_recount": {
+    "total_non_cascade": 31,
+    "set_null": 8,
+    "no_action": 23,
+    "all_set_null_targets_nullable": true,
+    "all_set_null_constraints_validated": true
+  },
+  "live_generated_columns": {
+    "table": "auth.scim_users",
+    "stored_generated": [
+      "user_name",
+      "external_id",
+      "active"
+    ],
+    "original_receipt_column_default_expr_is_pg_get_expr_not_actual_default": true
+  },
+  "exact_aggregate_row_counts": {
+    "scim_users": 0,
+    "scim_tokens": 0,
+    "sso_providers": 0
+  },
+  "secrets_or_member_data_extracted": false,
+  "source_bound_test": {
+    "source_sha": "18cd6276efebd0b50dde4bdc02c8701e2104f558",
+    "sql_signed_jwt": "SUCCESS_42730888245",
+    "governance": "SUCCESS_42730888238",
+    "node_cloud": "IN_PROGRESS_42730888607"
+  },
+  "provider_writes": false,
+  "app_defects_confirmed": 0,
+  "baseline_complete": false,
+  "next": "Check source-bound cloud CI then continue first unreviewed/changed provider definition."
+}
