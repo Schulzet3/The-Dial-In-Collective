@@ -23,7 +23,7 @@ import {equivalentCoffeeProductNames,preferredCoffeeRoasterName,selectedCoffeeNa
 import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
 import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,refineSelectedNamedTastingNotes,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
-import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,selectedCoffeeSupplementalTastingProse} from './coffee-selected-description-sensory.mjs';
+import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentFlavorBase,selectedCoffeeSupplementalTastingProse} from './coffee-selected-description-sensory.mjs';
 import {selectedCoffeeMilkSensoryContext} from './coffee-selected-milk-sensory-context.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
@@ -1966,6 +1966,12 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    if(description)fields.tasting_notes=description;
    const finish=refineSelectedCurrentLiteralFinish(currentProduct,{clean,notes:fields.tasting_notes});
    if(finish)fields.tasting_notes=finish;
+   // Only unlabelled current selected prose may add an intrinsic flavor base
+   // when its directly coordinated suffix exactly repeats the accepted notes.
+   if(!printedNotes.length){
+    const flavorBase=refineSelectedCurrentFlavorBase(currentProduct,{clean,notes:fields.tasting_notes});
+    if(flavorBase)fields.tasting_notes=flavorBase;
+   }
   }
   // A distinct current selected flavor sentence is review evidence, not a
   // license to concatenate notes or override a stronger literal Flavor label.

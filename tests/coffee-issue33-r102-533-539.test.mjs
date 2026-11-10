@@ -47,3 +47,38 @@ test('Cosa Nueva chosen medium-light washed notes cannot borrow related specialt
  assert.equal(p.fields.name,e.name);
  assert.doesNotMatch(JSON.stringify(p.fields),/Pablo Eva|Geisha|strawberry|jasmine|1900 masl/i);
 });
+
+
+test('direct chosen flavor base recovers milk chocolate without treating milk as preparation',()=>{
+ const e=cases[1],quote='Its milk chocolate base is complemented with notes of stone fruit and honey, culminating in a refreshing, sweet acidity.';
+ const p=extractPublicCoffeeFacts(markup(e,'Washed Process. Medium Light Roast. '+quote),
+  {source_url:'https://'+e.host+e.path});
+ assert.equal(p.ok,true,JSON.stringify(p));
+ assert.match(p.fields.tasting_notes||'',/milk chocolate/i,JSON.stringify(p.fields));
+ assert.match(p.fields.tasting_notes||'',/stone fruit/i,JSON.stringify(p.fields));
+ assert.match(p.fields.tasting_notes||'',/honey/i,JSON.stringify(p.fields));
+ assert.equal(p.fields.name,e.name);
+});
+test('selected flavor base cannot come from unrelated coffee, historical lot or conditional milk service',()=>{
+ const e=cases[1],base='Its milk chocolate base is complemented with notes of stone fruit and honey.';
+ for(const variation of [
+  {own:'Washed Process. Medium Light Roast. Notes of stone fruit and honey.',neighbor:'<aside>'+base+'</aside>'},
+  {own:'Washed Process. Medium Light Roast. Notes of stone fruit and honey. Previously, '+base,neighbor:''},
+  {own:'Washed Process. Medium Light Roast. Notes of stone fruit and honey. When prepared with milk, '+base,neighbor:''},
+  {own:'Washed Process. Medium Light Roast. Notes of stone fruit and honey. Its milk chocolate base is complemented with notes of blueberry and honey.',neighbor:''}
+ ]){
+  const p=extractPublicCoffeeFacts(markup(e,variation.own,variation.neighbor),{source_url:'https://'+e.host+e.path});
+  assert.equal(p.ok,true,JSON.stringify(p));
+  assert.doesNotMatch(p.fields.tasting_notes||'',/milk chocolate/i,variation.own);
+ }
+});
+test('helper rejects duplicated identity, altered selected notes and milk-as-ingredient',async()=>{
+ const {refineSelectedCurrentFlavorBase}=await import('../src/server/coffee-selected-description-sensory.mjs');
+ const e=cases[1],body='<p>Its milk chocolate base is complemented with notes of stone fruit and honey.</p>';
+ const clean=html=>String(html).replace(/<[^<>]{0,2000}>/g,' ').replace(/\s+/g,' ').trim();
+ const single=markup(e,body),duplicate=single.replace('<h1>'+e.name+'</h1>','<h1>'+e.name+'</h1><h1>Different product</h1>');
+ assert.match(refineSelectedCurrentFlavorBase(single,{clean,notes:'stone fruit and honey'}),/milk chocolate/i);
+ assert.equal(refineSelectedCurrentFlavorBase(duplicate,{clean,notes:'stone fruit and honey'}),'');
+ assert.equal(refineSelectedCurrentFlavorBase(single,{clean,notes:'orange and honey'}),'');
+ assert.equal(refineSelectedCurrentFlavorBase(markup(e,'<p>When served with milk, '+body+'</p>'),{clean,notes:'stone fruit and honey'}),'');
+});
