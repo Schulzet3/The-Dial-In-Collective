@@ -16016,5 +16016,22 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "Complete exact-source CI, then next unreviewed/changed provider object. No user records/identity logs."
+  },
+  "provider_member_admission_gate_run139b_ci": {
+    "status": "FOUR_APPLICABLE_EXACT_SOURCE_CI_SUCCESS_NARROW_MIGRATION_READY",
+    "source_sha": "69fa32bcc272173954db6a98e3d142dda747f461",
+    "read_head": "1b7c00a601b4ce66a8d33a9141b6b562671cf901",
+    "queue_item": "DIC-Q-509-admitted-member-gate",
+    "sql_and_signed_jwt": 42771181975,
+    "node22": 42771182102,
+    "browser_cloud": 42771181853,
+    "governance": 42771182097,
+    "sql_log": "Applied 20261110065000 migration and admin_invitation_controls test PASS in dic_ci",
+    "source_receipt": "docs/audits/issue509-provider-admission-dependent-source-gates-2026-11-10-run139b.json",
+    "three_service_source_gate_findings": "REVIEW_PENDING",
+    "live_inconsistent_member_rows": 0,
+    "production_writes": false,
+    "baseline_complete": false,
+    "next": "Follow up enabled-only service gates with DB constraint or targeted source fix after coordinated source and isolated tests; continue unreviewed provider definitions."
   }
 }

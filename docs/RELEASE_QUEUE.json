@@ -10992,23 +10992,28 @@
       "issue": 509,
       "pr": null,
       "title": "Require admitted_at before enabled beta member may access private RPC/RLS state",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "69fa32bcc272173954db6a98e3d142dda747f461",
       "scope_paths": [
         "supabase/migrations/20261110065000_dic_admitted_member_gate.sql"
       ],
       "tests": [
         "Run139 live SQL/constraint/aggregate: private.is_member previously used enabled only; 0 live enabled-without-admission rows.",
         "Disposable PostgreSQL admin_invitation_controls.sql new intentionally misflagged pending account negative + existing admin approved/rejected and member tests: CI PENDING.",
-        "Isolated signed JWT/Node/cloud and exact-source governance: PENDING; no passing claim."
+        "Isolated signed JWT/Node/cloud and exact-source governance: PENDING; no passing claim.",
+        "Exact-source isolated PostgreSQL + 94 genuine HMAC-signed synthetic PostgREST HTTP assertions run42771181975 SUCCESS; decoded SQL log applied 20261110065000 migration and explicitly ran admin_invitation_controls.sql PASS. No live PostgreSQL or GoTrue.",
+        "Exact-source Node22/build run42771182102 COMPLETED SUCCESS; browser/mobile and cloud applicability run42771181853 COMPLETED SUCCESS; exact governance run42771182097 COMPLETED SUCCESS with queue intake PASS and same-commit journal continuity PASS.",
+        "Source-bound narrower runtime gate READY; additional direct enabled-only checks on SERVICE_ROLE source-worker functions separately tracked as follow-up; full provider baseline IN_PROGRESS."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact-source isolated PostgreSQL signup tests and signed JWT must pass",
-        "Source-bound Node/cloud and governance must pass before READY"
+      "ci_runs": [
+        42771181975,
+        42771182102,
+        42771181853,
+        42771182097
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
-      "notes": "Development-only conditional fail-closed admitted member gate; no observed live bad admission, production change, or completed CI."
+      "notes": "Development-only conditional fail-closed admitted member gate; no observed live bad admission, production change, or completed CI.\nRun139b: exact-source isolated SQL, signed JWT, Node22, browser, governance COMPLETED SUCCESS (4/4 workflows), synthetic pending flag regression PASS. READY development source ONLY. No production authorization. Separate service-role source worker may gate inconsistent enabled-without-admission until provider-level constraint verified; follow-up tracked as REVIEW_PENDING, zero current live inconsistent rows."
     }
   ],
   "history": [
