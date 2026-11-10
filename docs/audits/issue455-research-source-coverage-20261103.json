@@ -1416,6 +1416,19 @@
       "source_bytes_sha256": null,
       "claim": "Coffee overview considered recorded five-green archived result successful without validating numeric grind and optional recorded temperature, despite engine/UI measured-recipe eligibility.",
       "implementation_status": "SAFE_MODEL_REGRESSION_PR1802_NONFORCE_MERGED_1df0a4dae38fcc2937bab18d8428b10a383aea42_PR_AND_MERGED_CI_VERIFIED_READY_NOT_DEPLOYED"
+    },
+    {
+      "id": "LIVE-20261110-ENGINE-INVALID-GREEN-ADVICE-VETO",
+      "type": "live_repository_application_source_direct_bounded_review",
+      "path": "site/lib/engine.js",
+      "git_blob_sha": "74ef8567741c0c2ebaa08ea60c274af4e1810665",
+      "source_commit_sha": "8dcedae3179945a036aa774f45c21e4dc920c39b",
+      "access": "ORIGINAL_LIVE_GITHUB_SOURCE",
+      "review_status": "DIRECT_SOURCE_READ_445_466_CROSSWALK_MODEL_HASLOCALSUCCESS_UI_LAST_RECIPE_CONTEXT; NOT_ISSUE267_LINE_AUDIT",
+      "provenance": "Existing owner Locked measured-shot, five-taste and one-adjustment contract; no external paper or new numeric science",
+      "evidence_grade": "DIRECT_REPRODUCIBLE_SOURCE_CONTRACT_INCONSISTENCY_SYNTHETIC_REGRESSIONS_STAGED_UNRUN",
+      "claim": "At source 8dcedae3179945a036aa774f45c21e4dc920c39b engine.js blob 74ef8567, measuredLocalSuccess accepted five-green archived rows with impossible grind or optional recorded temperature because it filtered only dose/yield/time and taste, while latest-feedback selection and Coffee overview rejected those rows. A newer valid non-green same-recipe shot could therefore be left without next adjustment. The original history stays immutable.",
+      "implementation_status": "SAFE_CODE_TEST_SAME_COMMIT_PR_CI_PENDING_NO_DEPLOY"
     }
   ],
   "evidence_checks": [
@@ -4279,6 +4292,26 @@
       "result": "REGRESSION_NEGATIVE_AND_POSITIVE_COVERAGE_STAGED_NOT_VERIFIED_CI",
       "owner_approval": false,
       "date": "2026-11-10"
+    },
+    {
+      "id": "R455-EV-CODE-158-A",
+      "source": "LIVE-20261110-ENGINE-INVALID-GREEN-ADVICE-VETO",
+      "claim": "At source 8dcedae3179945a036aa774f45c21e4dc920c39b engine.js blob 74ef8567, measuredLocalSuccess accepted five-green archived rows with impossible grind or optional recorded temperature because it filtered only dose/yield/time and taste, while latest-feedback selection and Coffee overview rejected those rows. A newer valid non-green same-recipe shot could therefore be left without next adjustment. The original history stays immutable.",
+      "grade": "DIRECT_LIVE_GITHUB_CODE_BOUNDED_REPRO_NOT_MEMBER_INCIDENT",
+      "current_app": "engine.js source 74ef8567 lines 450-466; model.js blob 00c027c5 hasLocalSuccess physical guards; ui.js blob 60539853 lastRecipeContextShot physical guards; same current setup and style, older invalid five-green + newer valid non-green",
+      "result": "NARROW_FIX_STAGED_PR_TESTS_UNRUN",
+      "owner_approval": false,
+      "date": "2026-11-10"
+    },
+    {
+      "id": "R455-EV-CODE-158-B",
+      "source": "LIVE-20261110-ENGINE-INVALID-GREEN-ADVICE-VETO",
+      "claim": "Preserve legal all-five-green measured success (grind finite/nonnegative and inclusive setup espresso min/max; temperature optional or 70-100 C), preserve mismatched style/feed/basket/calibration isolation, original archived notes and private History. A bad green record cannot suppress fresh actual non-green feedback.",
+      "grade": "EXISTING_OWNER_LOCKED_ENGINE_MODEL_UI_CONTRACT_SYNTHETIC_POSITIVE_NEGATIVE_PLAN",
+      "current_app": "Only measuredLocalSuccess physical eligibility predicate amended; no ratings, shots, recipe family, style, numeric taste targets, privacy or data writes",
+      "result": "FIVE_FOCUSED_NODE22_TESTS_STAGED_UNRUN",
+      "owner_approval": false,
+      "date": "2026-11-10"
     }
   ],
   "policy_decisions_pending": [],
@@ -4373,46 +4406,32 @@
     },
     "R455-155 @b8fe6729ca2014831b4713d2c3ae2c334bb381a4: publisher original Habara/Horiguchi 2024 16 full immersion electronic tongue conditions, funding/manufacturer caveat; 84 sources / 226 evidence checks / 116 proposals; docs only, no #267 semantic credit or product policy; confirm PR CI/merge; standalone S019 original missing.",
     "R455-157 @e951531567825ca688c9772628a4d8f09736487f: real model/UI/engine inconsistency corrected in code commit b7c46ac56947936f2701d8268fb690718d704159; 86 sources / 230 checks / 118 proposals; exact source PR-head and merged checks pending. No #267 line credit, no publish.",
-    "R455-157 FINAL @1df0a4dae38fcc2937bab18d8428b10a383aea42: PR1802 nonforce merged and exact all six blobs verified; Node22 3385 PASS/0 FAIL/6 intentional SKIP, R157 5/5, merged approval/browser SUCCESS; queue READY development only, no release."
+    "R455-157 FINAL @1df0a4dae38fcc2937bab18d8428b10a383aea42: PR1802 nonforce merged and exact all six blobs verified; Node22 3385 PASS/0 FAIL/6 intentional SKIP, R157 5/5, merged approval/browser SUCCESS; queue READY development only, no release.",
+    "R455-158 @8dcedae3179945a036aa774f45c21e4dc920c39b: direct engine/model/UI mismatch; stage one-predicate SAFE change and five synthetic groups, 87 sources / 232 bounded checks / 119 proposals. Tests/CI/merge UNVERIFIED at authoring. No #267 line credit or production action."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-157",
-    "base_development_sha": "e951531567825ca688c9772628a4d8f09736487f",
+    "id": "R455-158",
+    "base_development_sha": "8dcedae3179945a036aa774f45c21e4dc920c39b",
     "source_ids": [
-      "LIVE-20261110-OVERVIEW-MEASURED-GRIND-TEMP"
+      "LIVE-20261110-ENGINE-INVALID-GREEN-ADVICE-VETO"
     ],
     "claim_ids": [
-      "R455-EV-CODE-157-A",
-      "R455-EV-CODE-157-B"
+      "R455-EV-CODE-158-A",
+      "R455-EV-CODE-158-B"
     ],
     "proposal_ids": [
-      "R455-PROP-157-OVERVIEW-MEASURED-ELIGIBILITY"
+      "R455-PROP-158-INVALID-GREEN-ADVICE-VETO"
     ],
-    "number_of_curated_sources": 86,
-    "total_evidence_checks": 230,
-    "number_of_proposals": 118,
-    "review_type": "SAFE_REPRODUCED_MEASURED_SUCCESS_OVERVIEW_RECIPE_SOURCE_FIX",
+    "number_of_curated_sources": 87,
+    "total_evidence_checks": 232,
+    "number_of_proposals": 119,
+    "review_type": "SAFE_ENGINE_REPRODUCED_INVALID_ARCHIVED_GREEN_ADVICE_VETO_FIX",
     "code_or_policy_changed": true,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
-    "status": "NONFORCE_MERGED_EXACT_SOURCE_CI_VERIFIED_READY_DEVELOPMENT_ONLY",
-    "source_commit_sha": "b7c46ac56947936f2701d8268fb690718d704159",
-    "next_action": "Next separate distinct source or UX probe; never publish absent owner explicit release, S019 remains unavailable, Issue #455 OPEN.",
-    "merge_sha": "1df0a4dae38fcc2937bab18d8428b10a383aea42",
-    "pr_number": 1802,
-    "policy_changed": false,
-    "test_receipts": {
-      "pr_head": "1a5fb02bcc453fca310272c0d935d5ed3715ff6e",
-      "node": "42785553513",
-      "merged_node": "42786065900",
-      "merged_approval": "42786065890",
-      "merged_browser": "42786066030",
-      "tests_pass": 3385,
-      "tests_fail": 0,
-      "tests_skip": 6,
-      "original603": "SKIPPED"
-    }
+    "status": "SAME_COMMIT_AUTHORED_PR_HEAD_AND_CI_NOT_YET_VERIFIED",
+    "next_action": "Create nonforce PR, run exact source Node22 and risk-proportionate CI, merge only if passed and safe, reconcile queue/status via disjoint docs-only PR; Issue #455 remains open and S019 remains unverified."
   },
   "policy_decisions_resolved": [
     {
@@ -6876,6 +6895,28 @@
       "implementation": "PR1802_MERGED_1df0a4dae38fcc2937bab18d8428b10a383aea42_ALL_APPLICABLE_CI_SUCCESS_RELEASE_QUEUE_READY",
       "test_plan": "Five focused synthetic Node22 tests, full changed-code Node22/lint as CI applicable, browser/cloud/SQL applicability guard, source SHA check, nonforce PR merge, exact merged CI/readback. Unrun is not PASS. VERIFIED: exact PR-head 3385 PASS/0 FAIL/6 SKIP; exact merged same 3385/0/6; five R157 tests PASS, approval/mobile/browser/SQL applicability successes as documented in queue; original603 SKIPPED and not credited.",
       "release_queue_status": "READY_DEVELOPMENT_ONLY_DIC-Q-455-local-success-grind-temp-eligibility",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-158-INVALID-GREEN-ADVICE-VETO",
+      "finding": "Archived impossible grinder/temperature on all-green records vetoes actionable feedback in recommendation although Coffee overview and last recipe already reject that record.",
+      "evidence": [
+        "LIVE-20261110-ENGINE-INVALID-GREEN-ADVICE-VETO",
+        "R455-EV-CODE-158-A",
+        "R455-EV-CODE-158-B"
+      ],
+      "severity": "P2_REPRODUCIBLE_LOG_RATE_RECOMMENDATION_CONTRACT_MISMATCH",
+      "user_benefit": "Keep latest valid taste feedback actionable without treating an impossible archived green label as measured recipe evidence.",
+      "current_locked": "All five original taste inputs, actual measured shot/notes/private History, true measured five-green vs missing, one genuinely controllable next change, independent Turbo/Fast-Flow and feed/basket/calibration, same coffee evidence, no numerical policy alterations.",
+      "current_app": "Live dev 8dcedae3179945a036aa774f45c21e4dc920c39b engine.js 74ef8567741c0c2ebaa08ea60c274af4e1810665 measuredLocalSuccess lines 460-463 rejects no invalid grind/temp unlike last-recipe filtering and model.js hasLocalSuccess.",
+      "proposed_change": "SAFE: filter exact-context success veto for finite nonnegative grind within the active recorded espresso range and optional recorded temperature within existing 70-100 C; preserve all source records and all other advice behavior.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "evidence_grade": "DIRECT_CODE_REPRODUCIBLE_WITH_SYNTHETIC_NEGATIVE_AND_POSITIVE_TESTS_NO_REAL_CUP_CLAIM",
+      "implementation": "SAME_COMMIT_CODE_AND_FIVE_TESTS_STAGED_PR_AND_CI_NOT_YET_VERIFIED",
+      "test_plan": "Five synthetic Node22 regression groups: invalid grind, invalid temp, valid green including bounds/no temp, context isolation, newest green; source-bound Node22/lint, browser/mobile/offline, relevant governance; frozen603 and live Auth not claimed.",
+      "release_queue_status": "IN_PROGRESS_NOT_READY_NOT_DEPLOYED",
       "github267_literal_review_credit": 0,
       "production_deployed": false
     }
