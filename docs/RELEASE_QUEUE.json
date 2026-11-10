@@ -11014,6 +11014,26 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
       "notes": "Development-only conditional fail-closed admitted member gate; no observed live bad admission, production change, or completed CI.\nRun139b: exact-source isolated SQL, signed JWT, Node22, browser, governance COMPLETED SUCCESS (4/4 workflows), synthetic pending flag regression PASS. READY development source ONLY. No production authorization. Separate service-role source worker may gate inconsistent enabled-without-admission until provider-level constraint verified; follow-up tracked as REVIEW_PENDING, zero current live inconsistent rows."
+    },
+    {
+      "id": "DIC-Q-509-enabled-requires-admission-constraint",
+      "issue": 509,
+      "pr": null,
+      "title": "Ensure trusted service source-verification never processes enabled-but-unadmitted accounts",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261110073500_dic_enabled_requires_admission_check.sql"
+      ],
+      "tests": [
+        "Source-only additive CHECK and synthetic isolated negative tests in admin_invitation_controls.sql, source_worker_auth_and_admission.sql; exact-source CI PENDING."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source isolated PostgreSQL, signed JWT, Node22/cloud applicability and governance CI PENDING"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
+      "notes": "Run140 provider read-only 11 admitted records/0 inconsistent states; source-only constraint closes enabled-only service-role latent admission gap. No live changes. Coordinate Issue #33, no source worker code edited; owner one-use release authorization remains necessary."
     }
   ],
   "history": [

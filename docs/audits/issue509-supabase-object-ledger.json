@@ -16033,5 +16033,24 @@
     "production_writes": false,
     "baseline_complete": false,
     "next": "Follow up enabled-only service gates with DB constraint or targeted source fix after coordinated source and isolated tests; continue unreviewed provider definitions."
+  },
+  "provider_enabled_requires_admission_constraint_run140": {
+    "status": "ADDITIVE_SOURCE_FIX_TESTING_CI_PENDING",
+    "provider_status": "ACTIVE_HEALTHY",
+    "live_migrations": 59,
+    "live_inconsistent_rows": 0,
+    "source_parent_sha": "6ba0d6911d62e409a36beb802f0d592442c63bb8",
+    "source_receipt": "docs/audits/issue509-provider-admission-invariant-2026-11-10-run140.json",
+    "migration": "supabase/migrations/20261110073500_dic_enabled_requires_admission_check.sql",
+    "regressions": [
+      "supabase/tests/admin_invitation_controls.sql",
+      "supabase/tests/source_worker_auth_and_admission.sql"
+    ],
+    "queue_item": "DIC-Q-509-enabled-requires-admission-constraint",
+    "queue_state": "TESTING",
+    "source_word_credit": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "Exact-source CI readback; no READY until passing all relevant checks. Continue next unreviewed object."
   }
 }

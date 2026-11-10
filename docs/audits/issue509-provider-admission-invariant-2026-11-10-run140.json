@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "140",
+  "project_ref": "azviqqejypsefzilgonr",
+  "development_parent_sha": "6ba0d6911d62e409a36beb802f0d592442c63bb8",
+  "release_production_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+  "source_scope": "Three previously reviewed enabled-only service-role source gate definitions; no double source word credit. New independent read of all beta_members schema/constraints/trigger metadata, four direct writing function catalog signatures, and aggregate states.",
+  "provider_status": "ACTIVE_HEALTHY_POSTGRES_17_11",
+  "provider_migrations": 59,
+  "beta_members_columns": [
+    "owner_id uuid NOT NULL PK",
+    "enabled boolean NOT NULL DEFAULT false",
+    "admitted_at timestamptz NULL",
+    "created_at timestamptz NOT NULL DEFAULT now()",
+    "signup_review_state text NOT NULL DEFAULT pending"
+  ],
+  "live_constraints": [
+    "beta_members_pkey",
+    "beta_members_owner_id_fkey ON DELETE CASCADE",
+    "beta_members_signup_review_state_check"
+  ],
+  "live_custom_triggers": 0,
+  "aggregate_only": {
+    "total": 11,
+    "enabled_admitted": 5,
+    "disabled_admitted": 6,
+    "enabled_unadmitted": 0,
+    "disabled_unadmitted": 0
+  },
+  "directly_verified_writer_signatures": [
+    "private.handle_new_auth_user() INSERT defaults disabled",
+    "private.dic_admin_review_signup(uuid,text,text) sets enabled and admitted_at together",
+    "private.dic_admin_set_member_access(uuid,boolean) reenable requires admitted",
+    "private.dic_admin_account_delete_prepare(uuid,uuid) revokes enabled"
+  ],
+  "previous_full_source_receipt": "docs/audits/issue509-provider-admission-dependent-source-gates-2026-11-10-run139b.json",
+  "finding": "ISSUE509-ENABLED-ONLY-SERVICE-GATES",
+  "verdict": "PROPOSED_ADDITIVE_TABLE_INVARIANT_COVERS_THREE_SOURCE_VERIFIER_ENABLED_CHECKS_WITHOUT_CHANGING_WORKER_FUNCTION_BODIES",
+  "scope_paths": [
+    "supabase/migrations/20261110073500_dic_enabled_requires_admission_check.sql"
+  ],
+  "regression_paths": [
+    "supabase/tests/admin_invitation_controls.sql",
+    "supabase/tests/source_worker_auth_and_admission.sql"
+  ],
+  "exact_source_ci": "PENDING",
+  "queue_state": "TESTING",
+  "production_writes": false,
+  "private_rows_read": false,
+  "limitations": [
+    "No published SQL alteration or actual GoTrue-account deletion",
+    "Compiled/native Supabase implementations and hosted private Auth/JWT/API settings still UNVERIFIED",
+    "Only live aggregate, metadata and catalog sources reviewed; baseline overall IN_PROGRESS"
+  ],
+  "next": "Run isolated PostgreSQL entire migration stack with synthetic negative CHECK and service-worker pending-signup tests; read exact source-bound signed-JWT/Node22/cloud/governance CI; repair before READY; resume next unreviewed provider source."
+}
