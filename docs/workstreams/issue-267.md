@@ -1,3 +1,7 @@
+## November 10, 2026 — #267 A23B strict 63 source lines, pending exact CI
+
+[Per-line A23B receipt](../audits/issue267-v2-strict-batches/S2-DISJOINT-F154-1275-1294-P432-609-651-20261110-A23B.json) and [same-commit journal](issue-267-A23B-source-bound-20261110.md): frozen F154:1275–1294 (20) and pinned P432:609–651 (43), original and current exact Git blobs identical. Predecessor A23 ends F154:1274/P432:608, no duplicate credit. Oct21 offsite failure later resolved within archive; Woo Auth/quota synthetic not hosted proof. No active bug or remediation established. Approval PR/merged CI pending, app/browser/SQL/Auth NOT_RUN. Development only, no READY/deploy/production. Next F154:1295 and P432:652, live drift unreconciled; OPEN.
+
 ## November 10, 2026 — A23 source-bound 72 strict lines, governance CI pending
 
 Per-line [receipt](../audits/issue267-v2-strict-batches/S2-DISJOINT-F154-1251-1274-P432-561-608-20261110-A23.json) and [same-commit journal](issue-267-A23-source-bound-20261110.md) cover frozen F154:1251–1274 (24) and pinned P432:561–608 (48). Both source blobs and development counterparts matched at `be1453e40d53878bb0233ed43ded5fcd5b08e3f6`; F001 first 41 and A22C predecessor boundary checked, zero duplicate credit. Historical release/SQL/shot-count claims not current consent; Shopify mock TLS assertion cannot prove real handshake, not active defect. Docs-only PR-head/merged CI pending; app/browser/Auth/SQL/provider NOT_RUN. No deploy/production/READY; OPEN. Next F154:1275, P432:609, plus post-pin drift.
