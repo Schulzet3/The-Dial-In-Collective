@@ -3370,6 +3370,21 @@
       "ci_cloud": "in_progress",
       "production_writes": false,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 #509 Run132 hosted SCIM SQL definitions and ACL review",
+      "source_parent_sha": "05c631a5019629e1b13f7fd80d12bda1c845bdf1",
+      "receipt_path": "docs/audits/issue509-provider-hosted-auth-scim-catalog-2026-11-10-run132.json",
+      "reviewed_tables": 2,
+      "reviewed_columns": 18,
+      "reviewed_constraints": 8,
+      "reviewed_indexes": 15,
+      "reviewed_trigger_definitions": 6,
+      "effective_role_grant_records": 12,
+      "sql_word_credit_to_app_functions": 0,
+      "confirmed_app_defects": 0,
+      "provider_writes": false,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -15604,5 +15619,26 @@
     "production_writes": false,
     "baseline_complete": false,
     "next": "Isolated full personal shot/equipment cascade checks; source-bound cloud CI readback"
+  },
+  "provider_hosted_auth_scim_run132": {
+    "status": "DIRECT_REVIEW_OF_2_CURRENT_HOSTED_SCIM_RELATIONS",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_parent_sha": "05c631a5019629e1b13f7fd80d12bda1c845bdf1",
+    "receipt_path": "docs/audits/issue509-provider-hosted-auth-scim-catalog-2026-11-10-run132.json",
+    "tables": 2,
+    "columns": 18,
+    "constraints": 8,
+    "indexes": 15,
+    "triggers": 6,
+    "policies": 0,
+    "grants": 12,
+    "additional_visible_auth_fk": "auth.scim_users_user_id_fkey",
+    "addtl_fk_action": "ON DELETE SET NULL",
+    "new_confirmed_app_defects": 0,
+    "source_fixes": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "hosted_config": "UNVERIFIED",
+    "next": "Continue from next unreviewed/changed provider definition; test internal composite Auth cascade paths in isolated disposable PostgreSQL (not production). Exact hosted SSO/SCIM configurations remain UNVERIFIED."
   }
 }
