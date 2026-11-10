@@ -9,14 +9,14 @@ const response=(body,status=200)=>new Response(JSON.stringify(body),{status,head
 }});
 const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const urlAllowed=url=>/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(String(url||''));
-function config(env){
+function readPushConfig(env){
  return {url:env('SUPABASE_URL'),publishable:env('SUPABASE_PUBLISHABLE_KEY'),
   service:env('SUPABASE_SECRET_KEY')||env('SUPABASE_SERVICE_ROLE_KEY'),publicKey:env('DIC_ADMIN_PUSH_VAPID_PUBLIC_KEY')};
 }
 export function createAdminPushHandler({fetcher=fetch,env=envDefault}={}){
  return async request=>{
   try{
-   const cfg=config(env);
+   const cfg=readPushConfig(env);
    if(!urlAllowed(cfg.url)||!cfg.publishable||!cfg.service||!cfg.publicKey)
     return response({ok:false,reason:'push_not_configured'},503);
    if(!['GET','POST','DELETE'].includes(request.method))return response({ok:false},405);
