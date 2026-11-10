@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {setImmediate} from 'node:timers';
 
 const root={innerHTML:'',querySelector(){return null;}};
 const sheet={open:false,innerHTML:'',close(){this.open=false;},querySelector(){return null;}};

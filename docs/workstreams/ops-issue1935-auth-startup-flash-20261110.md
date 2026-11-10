@@ -9,3 +9,7 @@
 - **Release queue:** `DIC-Q-1935-verified-auth-startup-no-false-pending` TESTING; app scope only `site/cloud/main.js`. No SQL, RPC, Auth provider, member-data, Netlify or production change.
 - **Verification at authoring:** source-path/anchor checks only. Local Node/browser checks NOT RUN; applicable GitHub CI NOT YET observed. Do not mark READY from authorship.
 - **Next:** run exact PR-head applicable Node/lint/build, browser/mobile/offline, SQL/Auth/security/governance checks as classified; fix failures, review source and nonforce merge; verify merge SHA and passing applicable source CI; then update scoped receipt/status and queue to READY (never publish without owner instruction).
+
+## PR #1936 first exact-head CI diagnosis and corrective action
+- Reviewed exact first PR head `15e9f6bee24f6f5edbdfa9b95fb28b471fb66c9e`: all **3,631 Node tests PASS, 0 FAIL, 6 intentionally SKIPPED** including five new startup cases; `approval`, isolated `sql`, `security-inventory`, full browser/mobile/offline SUCCESS; `cloud-tests` marked NOT_APPLICABLE (not a suite PASS); frozen603 SKIPPED.
+- `validate` run 42924063295 **FAILED** despite passing Node tests: ESLint `no-undef` for unimported `setImmediate` in the new test at line 12. Root cause is the test helper, not app runtime. Same-commit fix imports it from `node:timers` as elsewhere in repository tests. Do not reuse failing lint as PASS. New exact source CI and merge verification still pending.
