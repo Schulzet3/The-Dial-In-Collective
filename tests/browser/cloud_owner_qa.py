@@ -154,7 +154,7 @@ with sync_playwright() as p:
  page.locator('[data-action="settings"]').click()
  assert page.locator('#sheet [data-action="open-admin"] .admin-action-badge').inner_text()=='3'
  page.get_by_role('button',name='Close',exact=True).click()
- page.evaluate("window.__app.status.admin=false;window.__app.adminAttentionCount=null;window.__app.render()")
+ page.evaluate("window.__app.status.admin=false;window.__app.adminAttentionCount=null;window.__app.updateAdminAttentionBadges();window.__app.render()")
  assert page.locator('.admin-action-badge').count()==0
  checks.append('Verified-only Admin Settings badge on 390px light/dark; nonadmin redaction')
  checks.append('Server-admitted account hydrates the unchanged cloud workspace after status refresh')

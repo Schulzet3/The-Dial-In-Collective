@@ -113,7 +113,7 @@ class CloudApp {
  adminAttentionBadge(){
   const n=this.adminAttentionCount;
   if(!this.status?.admin||!this.status?.admitted||globalThis.navigator?.onLine===false||!Number.isSafeInteger(n)||n<1)return '';
-  return `<span class="admin-action-badge" aria-label="${n} administrator item${n===1?'':'s'} require attention">${n>99?'99+':n}</span>`;
+  return `<span class="admin-action-badge" aria-label="${n} administrator item${n===1?' requires':'s require'} attention">${n>99?'99+':n}</span>`;
  }
  updateAdminAttentionBadges(){
   const markup=this.adminAttentionBadge(),count=this.adminAttentionCount;
@@ -123,7 +123,7 @@ class CloudApp {
    if(!markup)existing?.remove?.();
    else if(existing){
     existing.textContent=count>99?'99+':String(count);
-    existing.setAttribute?.('aria-label',count+' administrator item'+(count===1?'':'s')+' require attention');
+    existing.setAttribute?.('aria-label',count+' administrator item'+(count===1?' requires':'s require')+' attention');
    }else button.insertAdjacentHTML?.('beforeend',markup);
    if(selector==='[data-action="settings"]')
     button.setAttribute?.('aria-label',markup?'Settings, '+count+' administrator items require attention':'Settings');
@@ -260,6 +260,7 @@ class CloudApp {
    const cache=await this.inSession(()=>this.store.readCache(user.id));if(cache)this.raw=cache.snapshot;
    await this.sync();
    if(this.status?.admin===true)this.refreshAdminAttention().catch(()=>{});
+   else{this.adminAttentionCount=null;this.updateAdminAttentionBadges();}
   }catch(err){if(epoch===this.epoch&&user.id===this.identity?.id){if(isAccessDenied(err)){await this.denyAccess(user,epoch);return;}this.notice=err.message;this.syncState='offline';this.render();}}
  }
  async sync(){
