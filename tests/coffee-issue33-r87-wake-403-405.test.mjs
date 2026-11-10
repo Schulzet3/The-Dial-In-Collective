@@ -47,3 +47,24 @@ test('neighboring Bromo blend cannot contaminate Ambler origin',()=>{
  assert.equal(r.ok,true,JSON.stringify(r));
  assert.ok(!/indonesia/i.test(r.fields.origin||''),JSON.stringify(r.fields));
 });
+\n// R87 live failure: current exact H1 + its direct decaffeination paragraph
+// were overlooked; bare titles, other beans and conflicting methods stay blank.
+test('named water decaf current H1 plus its OWN chemical-free treatment sentence supports Water Process',()=>{
+ const r=extractPublicCoffeeFacts(markup(405),{source_url:urls[405]});
+ assert.equal(r.ok,true,JSON.stringify(r));
+ assert.equal(r.fields.decaffeination_method,'Water Process',JSON.stringify(r.fields));
+});
+test('named water decaf H1 alone or generic unrelated decaf copy is not treatment proof',()=>{
+ for(const story of ['Tasting notes: herbal and chocolate.',
+   'Our ordinary coffee beans undergo a 100% chemical-free decaffeination process.']){
+  const r=extractPublicCoffeeFacts(markup(405,story),{source_url:urls[405]});
+  assert.equal(r.ok,true,JSON.stringify(r));
+  assert.ok(!r.fields.decaffeination_method,JSON.stringify(r.fields));
+ }
+});
+test('named water decaf page with incompatible selected sugarcane treatment cannot choose Water Process',()=>{
+ const story=own[405]+' Our Mountain Water Decaf Beans undergo sugarcane decaffeination process.';
+ const r=extractPublicCoffeeFacts(markup(405,story),{source_url:urls[405]});
+ assert.equal(r.ok,true,JSON.stringify(r));
+ assert.notEqual(r.fields.decaffeination_method,'Water Process',JSON.stringify(r.fields));
+});
