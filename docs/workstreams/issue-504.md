@@ -1,3 +1,17 @@
+## Issue #504 G1-158 — November 10, 2026 UTC; complete original historic PR #821–828 titles/bodies [skip netlify]
+
+Recovered development parent `d8c25686c343aa13ce37f2a81204a004dbb835f1` / tree `f5dc9b7982c27494dd34d3fe5cecb8e23f996a91`, main `11e1e8c7c36dad488519476d8a969bb682915d31`, release/production `a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0`. #504/#267/#455/#33/#96 open. Temporary PUBLIC November4–30 owner #630 exception preserved, no visibility action. AGENTS, AI entry/preflight, current authority, source register/status/approval/queue, ledger and previous issue checkpoint consulted without extra word-review credit.
+
+**Eight original distinct complete PR title/body records #821–828** directly read word1–EOF, **830 Unicode-whitespace words / 6818 UTF-8 bytes**, with each verbatim literal, GitHub original source dates/head/merge SHA, title/body SHA1, inclusive title/body word and physical body-line spans, per-object semantic finding in [immutable G1-158 receipt](../audits/issue504-review-G1-158.json). #821 earlier #267 issue/comments never recredited; #822/#823/#828 remain #267; #824/#825 belong #455; #826/#827 belong #33. No new current #504-confirmed bug or safe active-content deletion, and no product decision. Historical evidence preserved.
+
+Independent #267 N15 frozen/current boundary: pinned P149 `src/server/coffee-selected-product-hero.mjs:40–44` SHA `2be7a62aac93808cc0399f4f825b57dd2ad17539`, strict receipt `22b7ada15201d5d02e2fc9fbbd812f8f6132bc96`: **5/5 exact literals and 11 mandatory semantic/source fields**; **0 new #504 code credit**. Other V2 gaps remain open.
+
+Cumulative corrected credit **7,919 original file lines / 60,754 file words + 1004 original GitHub metadata objects / 265698 original words**, **158/158** contiguous batch indices. G1-117 −15/−4012 correction and original RELEASE_QUEUE partial SHA lines1–4736/5377 preserved. Only 3 audit documentation files proposed, code, tests, queue, original603 oracle, Locked, Auth/SQL/Edge/member/provider, backup, main/release, Netlify, production, repo visibility unchanged. Node22/SQL/Auth/browser/mobile/offline/original603 functional NOT_RUN_DOCS_ONLY; PR-head and merged governance PENDING (SKIPPED not PASS).
+
+**#504 OPEN / IN_PROGRESS; EXACT NEXT PR #829 title word 1 then entire body.** GitHub-wide historic reviews/diffs/comments, issues/comments, Actions/jobs/logs/artifacts, commits/tags/releases, trees/binaries/branch drift and #267 remaining unreviewed.
+
+---
+
 ## Issue #504 G1-157 — November 10 2026 UTC, original historic PR title/body #813–820 [skip netlify]
 
 Recovered dev `dcf99c05ed8c644298866efbe1cf59e1ee678c3b`; main `11e1e8c7c36dad488519476d8a969bb682915d31`; release `a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0`. Issues #504/#267/#455/#33/#96 OPEN; owner #630 approved PUBLIC Nov4–30, no visibility action. Actual AGENTS/AI preflight, governance/supersession/source register, current status, previous ledger/receipts read for context, no unearned semantic credit.
