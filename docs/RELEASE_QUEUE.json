@@ -11257,8 +11257,8 @@
       "issue": 33,
       "pr": 1871,
       "title": "Correct current selected Black Coffee AM tasting list and unsupported roast SEO/customer-review contamination; verify Red Room and The Dark",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "40d80267f5a21b4a67a79d334fa8ed500dfcf411",
       "scope_paths": [
         "src/server/coffee-product-scope.mjs",
         "src/server/coffee-flavor-evidence.mjs",
@@ -11269,17 +11269,30 @@
         "Initial PR f229dd2 first strict source afterproof workflow 42860634982 FAILED: selected AM expected Graham cracker/cashew/hibiscus/lemon and unsupported Lighter, current parser returned only lemon and sunrise plus incorrectly inferred Medium from stale Yoast SEO.",
         "Same-commit parser fix 43e5234825052a4d47c928ac4c7e74608a749877, generic WooCommerce reviews exclusion, direct selected literal opening tasting, lower-ranked SEO roast blocked by unsupported direct comparative label; 10 focused positive/adversarial tests.",
         "Exact PR synthetic merged SHA f9821dfc0188cb462841f6fa124751f9274cac6e official current workflow 42862060021 SUCCESS: 3 current guarded official pages FETCHED, exact unique product H1 and URL, raw HTML hashes, actual parser/Add Coffee/Source Review PASS; #433 now keeps 4 named literal flavors and no unsupported roast, #434/#435 remain correct.",
-        "PR-head approval workflow 42862060255 FAILED exclusively because scoped source paths absent from release queue intake. This queue row fixes intake, rerun required; no acceptance/READY yet."
+        "PR-head approval workflow 42862060255 FAILED exclusively because scoped source paths absent from release queue intake. This queue row fixes intake, rerun required; no acceptance/READY yet.",
+        "PR #1871 nonforce squash merged 40d80267f5a21b4a67a79d334fa8ed500dfcf411. All 8 original reviewed code/test/workflow/queue/scoped journal Git blob SHAs byte-identical to exact development merged tree; no Netlify publish.",
+        "PR latest clean two-parent head 5d41e7e669bfbaceb16c2f883cd4e529fb45660f after preserving #509 READY; exact PR CI selected source 42862831431, Node 42862831457 3558 pass/0 fail/6 skip (3564), cloud/mobile 42862831436, approval 42862831550, Python 42862831583, isolated SQL 42862831643 and security all SUCCESS; original full frozen603 SKIPPED.",
+        "Exact MERGED source official real selected source 42863470442 SUCCESS: case 433 AM full direct flavors and roast blank (unsupported Lighter); case434 Red Room three flavors/Dark; case435 The Dark direct Dark and no review chocolate. Exact independent merged artifact #13786347181 ZIP 145724 bytes SHA256 8ee8eeb548c0042c2259155ceacd4cdf57f4f23b333623109ccabfe7cf2e9f0e; source JSON SHA256 791f4b681ad8e2d872aab99ead1a148b8dac1ccb294cc224adf0e6771ea5550e; three individual raw HTML SHA256 independently recomputed; zero source afterproof failures and 0 production operations.",
+        "Exact merged Node 42863470590 SUCCESS 3558 PASS / 0 FAIL / 6 SKIP; cloud/mobile 42863471007, approval 42863470522, Python 42863470821 SUCCESS. Unchanged independent #33 R64 42863470883 and R54 42863470762 FAIL-CLOSED because original #566/#567 and #594 official links remain inaccessible; no new scope regression, no claims that the full 603 set is certified."
       ],
       "ci_runs": [
         42862060021,
-        42862060255
+        42862060255,
+        42862831431,
+        42862831457,
+        42862831436,
+        42862831550,
+        42862831583,
+        42862831643,
+        42863470442,
+        42863470590,
+        42863471007,
+        42863470522,
+        42863470821
       ],
-      "blockers": [
-        "PR head with queue intake amendment must pass exact changed-surface CI; then review and nonforce merge; verify exact merged-source CI and evidence hashes"
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Development-only source-bound R94; avoid owner notification unless attention needed. No Netlify, production, SQL/Edge/Auth/provider/member writes; preserve original603 immutable and separate #267 V2/#96."
+      "notes": "Development-only source-bound R94; avoid owner notification unless attention needed. No Netlify, production, SQL/Edge/Auth/provider/member writes; preserve original603 immutable and separate #267 V2/#96. Narrow source package READY only for DEVELOPMENT; parent #33 remains OPEN until independently completed original603 adjudication. Known #566/#567/#594 source access remains blocked; no deployment authorization."
     }
   ],
   "history": [
