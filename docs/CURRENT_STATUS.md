@@ -1,3 +1,10 @@
+## November 10, 2026 UTC — Issue #455 R151 primary 2020 espresso extraction-model evidence [skip netlify]
+
+- Substantively reviewed Cameron et al. [*Matter* 2020 original indexed main-text sections](https://doi.org/10.1016/j.matt.2019.12.019): under homogeneous-flow assumptions finer grind increases EY, but measured 6-bar cafe shots show a peaked EY vs grind and very-fine extraction inconsistency; 20→15 g cafe down-dosing/14 s is an operational cost/reproducibility illustration, **not** proven optimal five-taste espresso or cross-grinder guidance. Direct source DOI open 403; original PDF/supplement/raw observations not byte-verified. [Scoped R151 journal](docs/workstreams/ops-issue455-r151-cameron-espresso-model-20261110.md), [source/claim ledger](docs/audits/issue455-research-source-coverage-20261103.json); **80 sources / 217 evidence checks / 112 proposals**. Locked ratings/one-variable advice and current code untouched.
+- Research-only docs branch/PR/source-governance **pending at authoring**. No new runtime defect proven, no READY/release, no provider/production or #267 literal-line change. S019 original standalone PDF remains inaccessible and unreviewed; #455 OPEN.
+
+---
+
 ## November 10, 2026 UTC — Issue #33 R74 original603 #597 current exact source VERIFIED [skip netlify]
 
 - Wrecking Ball Kenya Nkumari P1 C fresh direct selected source and actual parser verified: Meru Kenya, Naman Meme, washed, SL28/Ruiru11, 1400 m and current floral/grapefruit/citrus/caramel notes, zero conflicts, Add Coffee/Source Review. Stale alternative notes rejected; relational menu roast did not become invented absolute grade. No parser defect/READY change.
