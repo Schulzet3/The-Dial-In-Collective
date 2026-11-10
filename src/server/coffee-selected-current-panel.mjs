@@ -53,7 +53,8 @@ export function selectedCurrentLeadRoastNotes(html,{name='',clean,notes=''}={}){
   const flavorParts=m[2].split(/\s*,\s*|\s+and\s+/iu).map(x=>x.trim()).filter(Boolean);
   if(flavorParts.length<3||flavorParts.length>8||flavorParts.some(x=>
    x.length>45||x.split(/\s+/u).length>4||
-   /\b(?:brew|roast|farm|process|variet(?:y|ies)|producer|medium|light|dark|coffee|milk|syrup)\b/iu.test(x)))continue;
+   /\b(?:brew|roast|farm|process|variet(?:y|ies)|producer|medium|light|coffee|milk|syrup)\b/iu.test(x)||
+   (/\bdark\b/iu.test(x)&&!/^(?:dark (?:chocolate|cocoa|cacao|cherr(?:y|ies)|berr(?:y|ies)|plum))$/iu.test(x))))continue;
   const complete=normalizeExplicitCoffeeTastingNotes(flavorParts.join(', '));
   if(!complete)continue;
   const level=m[1].replace(/\s+/gu,'-').replace(/\b\p{L}/gu,c=>c.toUpperCase());
