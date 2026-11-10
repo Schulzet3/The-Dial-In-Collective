@@ -128,14 +128,19 @@ class CloudApp {
  }
  async pollOnce(){
   const user=this.identity,epoch=this.epoch;
-  if(!user||!this.status?.admitted||this.busy||globalThis.navigator?.onLine===false)return;
+  if(!user||this.busy||globalThis.navigator?.onLine===false)return;
   if(this.pollingStatus&&this.pollingOwner===user.id&&this.pollingEpoch===epoch)return this.pollingStatus;
   this.pollingOwner=user.id;this.pollingEpoch=epoch;
   const task=(async()=>{
    try{
     const status=await this.client.status();
     if(epoch!==this.epoch||user.id!==this.identity?.id)return;
-    if(!status?.admitted){await this.denyAccess(user,epoch,status);return;}
+    if(!status?.admitted){
+     if(this.status?.admitted)await this.denyAccess(user,epoch,status);
+     else if(this.status?.approvalState!==status?.approvalState||this.status?.emailVerified!==status?.emailVerified){this.status=status;this.render();}
+     return;
+    }
+    if(!this.status?.admitted){await this.connect();return;}
     this.status=status;
     if(this.pending.some(x=>x.status==='pending')||Date.now()-this.lastHeavySyncAt>=180000)await this.sync();
    }catch(err){
@@ -339,7 +344,18 @@ class CloudApp {
   const password=(fresh=false)=>field(fresh?'New Password':'Password','password','',{type:'password',required:true,extra:`autocomplete="${fresh?'new-password':'current-password'}" ${fresh?'minlength="8" aria-describedby="password-requirements"':''}`});
   if(this.recovery)return `<section class=welcome><h2>Choose A New Password</h2><form id=auth-password>${password(true)}${freshHint}<button class="primary full space-top">Save Password</button></form></section>`;
   if(this.identity&&globalThis.navigator?.onLine===false)return `<section class=welcome><h2>Reconnect To Continue</h2><p class=helper>Your saved workspace is unavailable offline until a previously admitted account and local session can be confirmed.</p></section>`;
-  if(this.identity)return `<section class=welcome><h2>Your Invitation</h2><p class=helper>${e(this.identity.email)}</p><p class=helper>${this.status?.emailVerified?'Use the beta invitation supplied for your account.':'Verify your email before requesting beta access.'}</p><form id=auth-invite>${field('Invitation Code','token','',{required:true})}<button class="primary full space-top">Use Invitation</button></form>${button('Sign Out','signout','','text-button')}</section>`;
+   if(this.identity){
+    const state=this.status?.approvalState;
+    const title=state==='rejected'?'Account Request Declined':state==='revoked'?'Account Access Removed':'Account Approval Pending';
+    const reason=state==='rejected'?'Your request was not approved. Contact the administrator if you believe this was a mistake.':
+      state==='revoked'?'This account no longer has member access. Contact the administrator.':
+      !this.status?.emailVerified?'Verify your email using the link you received. Your request is queued for administrator review.':
+      'Your email is verified. The administrator will review your account. No invitation code is needed.';
+    return `<section class="welcome cloud-auth" aria-labelledby="approval-wait-title"><h2 id="approval-wait-title">${e(title)}</h2>
+     <p class="helper">${e(this.identity.email)}</p><p class="helper" role="status">${e(reason)}</p>
+     ${button('Check Approval Status','check-approval','','primary full space-top')}
+     ${button('Sign Out','signout','','text-button')}</section>`;
+   }
   if(this.authView==='check-email')return emailConfirmationView(this.confirmationEmail);
   const reset=this.authView==='reset',signup=this.authView==='signup';
   return `<section class="welcome cloud-auth"><h2>${reset?'Reset Your Password':signup?'Create Your Account':'Welcome Back'}</h2><p class=helper>Your coffee, wherever you brew.</p><form id="auth-${this.authView}">${email()}${reset?'':password(signup)}${signup?freshHint:''}<button class="primary full space-top">${reset?'Send Recovery Email':signup?'Create Account':'Sign In'}</button></form><div class=row-actions>${button(signup||reset?'Back To Sign In':'Create An Account','auth-view',`data-view="${signup||reset?'signin':'signup'}"`,'text-button')}${!reset?button('Forgot Password?','auth-view','data-view="reset"','text-button'):''}</div></section>`;
@@ -909,6 +925,7 @@ class CloudApp {
     this.notice='Unusual extraction confirmed. Your qualifying anonymous Community observation is saved.';
     this.render();return;
    }
+   if(a==='check-approval'){await this.connect();return;}
    if(a==='sync'){const events=await this.inSession(()=>this.queue.pending());this.show('Cloud Sync Details',`<h3>${e(({synced:'Synced',offline:'Offline',syncing:'Syncing',connecting:'Connecting',conflict:'Needs Attention',pending:'Pending'})[this.syncState]||'Needs Attention')}</h3><p class=helper>${events.length} changes waiting. Conflicts are retained rather than overwritten.</p>${events.map(x=>`<div class=preview-card><strong>${e(x.action)}</strong><p class=helper>${e(x.status)} ${e(x.error?.message||'')}</p></div>`).join('')}${button('Try Syncing Now','sync-now','','primary full')}${events.length?button('Save Pending Changes','export','','ghost full'):''}${events.length?'<p class="helper space-top">This download preserves pending changes on this device; it is not a complete account backup.</p>':''}`);return;}
    if(a==='sync-now'){await this.inSession(()=>this.sync());this.notice='Sync checked. Pending conflicts require review; nothing was discarded.';this.render();return;}
    if(a==='export'){exportFile(await this.inSession(()=>this.store.export(this.identity.id)));return;}
@@ -928,7 +945,7 @@ class CloudApp {
     else if(id==='auth-signup'){await this.client.signUp(d.email,d.password);this.confirmationEmail=d.email.trim();this.authView='check-email';this.notice='';this.render();root.querySelector('#confirmation-title')?.focus();}
    else if(id==='auth-reset'){this.notice=await this.client.requestReset(d.email);this.render();}
    else if(id==='auth-password'){await this.inSession(()=>this.client.setPassword(d.password));this.recovery=false;this.notice='Password updated.';await this.connect();}
-   else if(id==='auth-invite'){await this.inSession(()=>this.client.redeemInvite(d.token));await this.connect();}
+
    else if(id==='new-setup'){await this.mutate('create_setup',{...d,id:uuid(),basket_dose_g:Number(d.basket_dose_g),finest_setting:Number(d.finest_setting),coarsest_setting:Number(d.coarsest_setting)},{onlineOnly:true});sheet.close();}
    else if(id==='rename-setup'){
     await this.mutate('rename_setup',{setup_id:this.renameSetupId,name:d.name,expected_revision:this.renameSetupRevision},{onlineOnly:true});
