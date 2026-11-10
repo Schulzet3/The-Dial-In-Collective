@@ -16051,6 +16051,14 @@
     "source_word_credit": 0,
     "provider_writes": false,
     "baseline_complete": false,
-    "next": "Exact-source CI readback; no READY until passing all relevant checks. Continue next unreviewed object."
+    "next": "Exact-source CI readback; no READY until passing all relevant checks. Continue next unreviewed object.",
+    "first_ci": {
+      "source_sha": "ef63953922cadbd08d15ac5ae7e0874690b0f916",
+      "sql_run": 42778586115,
+      "conclusion": "failure",
+      "failure_kind": "SQL_SYNTHETIC_LEGACY_FIXTURE_NOT_SETTING_ADMITTED_AT",
+      "fix": "Update url_preview_release.sql to stage admitted_at atomically",
+      "new_ci": "PENDING"
+    }
   }
 }

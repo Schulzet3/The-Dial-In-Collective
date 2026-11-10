@@ -8,7 +8,7 @@ declare
 begin
  select owner_id into strict actor from private.app_admins;
  insert into auth.users(id,email) values(second_user,second_user::text||'@example.invalid');
- update private.beta_members set enabled=true where owner_id=second_user;
+ update private.beta_members set enabled=true,admitted_at=now() where owner_id=second_user;
  perform set_config('request.jwt.claim.sub',actor::text,true);
  perform set_config('request.jwt.claim.role','authenticated',true);
  execute 'set local role authenticated';

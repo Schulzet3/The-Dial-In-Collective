@@ -11026,9 +11026,13 @@
         "supabase/migrations/20261110073500_dic_enabled_requires_admission_check.sql"
       ],
       "tests": [
-        "Source-only additive CHECK and synthetic isolated negative tests in admin_invitation_controls.sql, source_worker_auth_and_admission.sql; exact-source CI PENDING."
+        "Source-only additive CHECK and synthetic isolated negative tests in admin_invitation_controls.sql, source_worker_auth_and_admission.sql; exact-source CI PENDING.",
+        "Initial exact-source ef639539 SQL run42778586115 FAILED during url_preview_release.sql, because older synthetic admitted fixture enabled a new member without admitted_at. This is a fixture compatibility failure after the new CHECK, not a live defect; migration applied and admin_invitation_controls PASS. Run140b source test repair stages both values atomically; new CI required."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        42778586115,
+        42778586116
+      ],
       "blockers": [
         "Exact-source isolated PostgreSQL, signed JWT, Node22/cloud applicability and governance CI PENDING"
       ],

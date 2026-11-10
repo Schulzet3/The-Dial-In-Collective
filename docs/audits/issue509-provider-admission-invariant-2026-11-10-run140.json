@@ -53,5 +53,15 @@
     "Compiled/native Supabase implementations and hosted private Auth/JWT/API settings still UNVERIFIED",
     "Only live aggregate, metadata and catalog sources reviewed; baseline overall IN_PROGRESS"
   ],
-  "next": "Run isolated PostgreSQL entire migration stack with synthetic negative CHECK and service-worker pending-signup tests; read exact source-bound signed-JWT/Node22/cloud/governance CI; repair before READY; resume next unreviewed provider source."
+  "next": "Run isolated PostgreSQL entire migration stack with synthetic negative CHECK and service-worker pending-signup tests; read exact source-bound signed-JWT/Node22/cloud/governance CI; repair before READY; resume next unreviewed provider source.",
+  "ci_first_attempt": {
+    "source_sha": "ef63953922cadbd08d15ac5ae7e0874690b0f916",
+    "sql_run": 42778586115,
+    "sql_conclusion": "failure",
+    "cause": "url_preview_release.sql CI fixture enabled synthetic second_user without admitted_at; CHECK correctly rejected it",
+    "governance_run": 42778586116,
+    "governance_conclusion": "success",
+    "fixed_test": "supabase/tests/url_preview_release.sql",
+    "new_ci": "PENDING"
+  }
 }
