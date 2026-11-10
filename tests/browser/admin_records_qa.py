@@ -124,7 +124,7 @@ with sync_playwright() as p:
     except Exception:
         print('ADMIN RECORDS FIXTURE ERRORS:',repr(errors),'BODY:',page.locator('body').inner_text()[:1200],flush=True)
         raise
-    assert page.locator('#admin-attention').count()==1
+    assert page.locator('.admin-attention').count()==1
     assert page.locator('details.admin-disclosure:not([open])').count()==6
     assert page.evaluate("window.__calls.filter(c=>c.name==='dic_admin_records').length")==0, "Collapsed records loaded unexpectedly"
 
