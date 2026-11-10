@@ -723,6 +723,14 @@ export function saveShot(s,coffeeId,input,{allowLegacyCustom=false}={}) {
   if(existing.coffeeId!==coffeeId)throw new Error('This shot ID already belongs to a different coffee.');
   return existing;
  }}
+ // A malformed explicit timestamp must not create a shot that History keeps
+ // but recommendation/prefill cannot identify as the most recent measurement.
+ // Missing timestamps still receive now(); existing-ID offline replays above
+ // remain idempotent, even for immutable historical malformed records.
+ if(input.timestamp != null && input.timestamp !== '' &&
+    (typeof input.timestamp !== 'string' || !input.timestamp.trim() ||
+     !Number.isFinite(Date.parse(input.timestamp))))
+  throw new Error('Enter a valid shot date/time. The shot was not saved.');
  const errors=validateShot(input,{allowLegacyCustom});if(errors.length)throw new Error(errors.join(' '));
  // A stale/retired or unknown basket may be shown as a fallback in Log Shot,
  // but saving must never attach that obsolete ID to a NEW measured shot.
