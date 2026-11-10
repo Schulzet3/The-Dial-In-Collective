@@ -1,4 +1,5 @@
 import {selectedLiteralBroadBlendRegions} from './coffee-selected-broad-blend-regions.mjs';
+import {selectedCurrentTwoRegionSingleCountryBlend} from './coffee-selected-two-region-blend.mjs';
 import {selectedCoffeeContextRoles} from './coffee-selected-context-roles.mjs';
 import {selectedDirectProductCredits,selectedNamedCurrentDecafEvidence,selectedCurrentDecafSpecMethodEvidence,selectedFormTitleWaterDecafEvidence} from './coffee-direct-product-prose.mjs';
 import {rawElements,removeElements,removeComments} from '../../supabase/functions/_shared/html-scan.mjs';
@@ -2543,6 +2544,23 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   if(source_facts.length<384)source_facts.push({
    field:'origin',label:'Exact selected two-region bean blend',value:broadBlend.quote,
    source_url,source_type:'html',section:'Current selected product description'
+  });
+ }
+
+ // A chosen same-country blend has two DIFFERENT explicitly named growing
+ // regions; only present exact selected two-lot prose can refine this country.
+ // Different per-component elevations must never become whole-blend elevation.
+ const twoRegionBlend=!conflicts.has('origin')?
+  selectedCurrentTwoRegionSingleCountryBlend({
+   name:fields.name,origin:fields.origin,blocks:productCoffeeProse(canonicalProduct,clean)
+  }):null;
+ if(twoRegionBlend){
+  rememberCoffeeReviewCandidate(fields,'origin',fields.origin,'Broader current selected country');
+  fields.origin=twoRegionBlend.value;
+  if(source_facts.length<384)source_facts.push({
+   field:'origin',label:'Current selected two-lot growing regions',
+   value:twoRegionBlend.quote,source_url,source_type:'html',
+   section:'Current exact selected same-country blend composition'
   });
  }
 
