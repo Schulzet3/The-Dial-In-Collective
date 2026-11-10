@@ -59,7 +59,7 @@ if(process.env.DIC_ISSUE33_R92_VERIFY==='1'){
    check(f.roast_level==='Light'&&f.process==='Washed'&&!f.decaffeination_method,n+'_light_washed_not_decaf');
    check(/SL28/i.test(f.variety||'')&&/Batian/i.test(f.variety||''),n+'_own_varieties');
    check(/cherry/i.test(f.tasting_notes||'')&&/raisin/i.test(f.tasting_notes||'')&&/lemon/i.test(f.tasting_notes||''),n+'_own_notes');
-   check(/1847/.test(norm(f.elevation_m)),n+'_own_elevation');
+   check(/1847/.test(String(f.elevation_m||'').replace(/[^0-9]/g,'')),n+'_own_elevation');
    check(!/passiflora|santos lopez|estate/i.test(f.producer||''),n+'_no_invented_farm');
   }
   detail.push({number:n,final_url:row.final_url,headings,direct,html_sha256:html?sha(html):null,
