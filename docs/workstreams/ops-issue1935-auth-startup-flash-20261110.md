@@ -1,0 +1,11 @@
+# Issue #1935 — prevent false approval flash on app reopening (2026-11-10)
+
+- **Owner request:** An already signed-in app briefly displays *Account Approval Pending* each time it reopens. Scope: eliminate transient false card without bypassing the real admin approval gate, account switch or offline privacy.
+- **Authority:** owner 2026-11-10 request; #1756 owner-Locked admission remains unchanged, already DEPLOYED. No new publication approval.
+- **Recovered base:** `development/backend-foundation` 57d74beb1a6cf95fe92fc6a9f6f4419b7f71b782; production `release/production` a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0; original app blob `site/cloud/main.js` abab52395eabb29239a667bb93d13f954f0c013e.
+- **Root cause (source-verified):** SDK `INITIAL_SESSION` calls `authChanged`, which renders authenticated identity with `status=null`. `auth()` interpreted that unverified status as `Account Approval Pending` until `dic_session_status` returned the already-admitted status.
+- **Change:** `site/cloud/main.js` neutral `Checking Account Access` only while server status is unknown; a failed status request shows `Connection Needed` with `Try Again` and `Sign Out` rather than asserting an admin decision. Reset status also resets startup connection state. Existing server-confirmed pending/rejected/revoked views, admitted workspace and offline/revocation protections remain gated as before.
+- **Regression:** `tests/cloud-auth-startup-verification.test.mjs` five deterministic test cases: initial admitted no false card/no premature workspace, server-confirmed unverified pending, real reject/revoke, failed-network retry, prior-account state cleared on switch.
+- **Release queue:** `DIC-Q-1935-verified-auth-startup-no-false-pending` TESTING; app scope only `site/cloud/main.js`. No SQL, RPC, Auth provider, member-data, Netlify or production change.
+- **Verification at authoring:** source-path/anchor checks only. Local Node/browser checks NOT RUN; applicable GitHub CI NOT YET observed. Do not mark READY from authorship.
+- **Next:** run exact PR-head applicable Node/lint/build, browser/mobile/offline, SQL/Auth/security/governance checks as classified; fix failures, review source and nonforce merge; verify merge SHA and passing applicable source CI; then update scoped receipt/status and queue to READY (never publish without owner instruction).
