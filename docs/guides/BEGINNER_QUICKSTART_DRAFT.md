@@ -4,7 +4,7 @@
 
 New to the app? Follow these **six simple steps** to set up your equipment, save your first espresso shot, and see what to try next.
 
-> **DEPLOYED — owner confirmed live:** The in-app Getting Started guide and captioned first-shot video were published in Release 13 (October 30, 2026). The owner confirmed both display and the video plays in the live app on November 3, 2026. This Markdown file retains its historical `_DRAFT` filename; the in-app guide is implemented in `site/cloud/help.js`.
+> **Historical deployment:** The in-app Getting Started guide and captioned first-shot video were published in Release 13 (October 30, 2026); the owner confirmed both on November 3, 2026. This guide's updated signup section is **source-only for Issue #1756** and not yet released. The prior live invitation flow remains until a separately owner-authorized production release. The in-app guide is implemented in `site/cloud/help.js`.
 
 ## Start Here: Your First Shot
 
@@ -12,9 +12,10 @@ New to the app? Follow these **six simple steps** to set up your equipment, save
 
 - **Already have an account?** Choose **Sign In**.
 - **New here?** Select **Create An Account**, verify your email, then sign in.
-- If you see **Your Invitation**, enter the one-use **Invitation Code** you received from the beta administrator and choose **Use Invitation**.
+- After verifying your email, new accounts show **Account Approval Pending** until an administrator approves the request. Choose **Check Approval Status** to refresh your access.
+- **Account Request Declined** means the administrator rejected the signup; the original Auth identity is retained. Contact support if you believe this is a mistake.
 
-Keep your password and invitation code private. Already-admitted members don't need another invitation for normal sign-in.
+Keep your password private. Once released, new registration does not require an invitation code; existing admitted members keep their same accounts and history.
 
 ### Step 2 — Set up your equipment
 
@@ -130,10 +131,10 @@ Open **Coffee Details**. Don't guess missing or conflicting facts. If the coffee
 - **Can't find Log A Shot?** Open the coffee card first.
 - **Can't add a coffee?** Reconnect to the internet. Adding a new coffee requires a connection.
 - **Shot won't save?** Check your dose, yield, time, grind setting, and all five taste ratings.
-- **Access denied?** Reconnect and sign in with your admitted beta account. If you don't have an invitation, contact the beta administrator.
+- **Access denied?** Reconnect and sign in. New accounts must verify their email and receive an administrator's explicit approval; existing admitted accounts remain unchanged.
 - **Something didn't sync?** Open **Cloud Sync Details** and check for **Pending** changes before trying again.
 
-**Still need help? Email [support@dialincollective.com](mailto:support@dialincollective.com).** Tell us what you were trying to do and what happened. Never include a password or invitation code.
+**Still need help? Email [support@dialincollective.com](mailto:support@dialincollective.com).** Tell us what you were trying to do and what happened. Never include a password or authentication link.
 
 ## Privacy and Accessibility
 
