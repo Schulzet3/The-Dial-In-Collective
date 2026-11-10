@@ -1492,6 +1492,25 @@
       "current_app_crosswalk": "At development 9743126ad5f920f5cd56f9d5f654fb643312801f, engine.js blob 9b0071f2bdd89b931662fe3232d4659524ad2e67: baseline styles/ratios are existing Locked starts; recommendation(s,coffeeId) uses individually rated same-coffee five-input history and bounded one-control nextAdvice; model.js and constants.js preserve original measured dose/yield/time/grind/temperature, Turbo vs Fast-Flow, slow feed, grinder calibration, notes and private data. No moka/Kamira controlled mode, pressure-target chemistry conversion or universal sensory-score correction in inspected app. No bug identified from cross-device comparison.",
       "factual_status": "SOURCE_DESCRIPTIVE_BOUNDED_CONFOUNDED_METHOD_COMPARISON_NO_DIC_ESPRESSO_CAUSAL_INTERVENTION_OR_USER_OUTCOME_VALIDATION",
       "review_notes": "Do not treat 10-second espresso preparation or nominal pump 15 bar as target time/pressure; not a user-visible espresso recommendation. Distinguish 3 analytical repeat measurements on pooled samples from independent espresso extraction repeats."
+    },
+    {
+      "id": "LIT-2025-BARLETTA-INVERSE-SIMULATION-ARXIV",
+      "type": "primary_author_arxiv_preprint_numerical_simulation",
+      "title": "Inverse modeling of porous flow through deep neural networks: the case of coffee percolation",
+      "authors": "Antoniorenee Barletta; Salvatore Cuomo; Nadaniela Egidi; Josephin Giacomini; Pierluigi Maponi",
+      "published": "2025-11-14",
+      "version": "Rendered manuscript dated 2026-03-22",
+      "url": "https://arxiv.org/abs/2511.11194",
+      "original_source_url": "https://arxiv.org/abs/2511.11194",
+      "access": "FULL_PRIMARY_ARXIV_RENDERED_HTML_1_TO_5_AND_TABLES_1_TO_3; PDF_BINARY_FIGURES_CODE_DATA_UNVERIFIED",
+      "review_status": "R455-163_DIRECT_FULL_HTML_METHODS_GRID_OFFGRID_AUGMENTATION_METRICS_CONCLUSION",
+      "direct_review_provenance": "2026-11-10 author arXiv primary text §1-3 mathematical simulator, §4.1 1759 simulated grid samples, §4.2 153 off-grid simulated samples, §4.3 3000 mixture interpolation and 3000 temperature interpolation = 7759 expanded training points, §4.4 model, §4.5 Tables 1-3, §5 future physical experimental validation; first posted 2025-11-14, displayed paper dated 2026-03-22.",
+      "evidence_grade": "UNVERIFIED_PEER_REVIEW_NUMERICAL_SIMULATOR_INTERPOLATED_DATA_STRONG_ONLY_ON_SIMULATOR_DOMAIN_LOW_REAL_ESPRESSO_SENSORY_TRANSFER",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "PDF/figures/raw data and binary source SHA-256 not acquired; HTML text reviewed, no archived primary paper bytes.",
+      "claims_verified_externally": "Author reports synthetic 100% three-class coarse/optimal/fine grind classification, inverse temperature R2 0.9978, surrogate chemistry R2 .9908-.9990, fixed 9-bar pressure; all from simulator/interpolation domain, not real grinder-unit translations, user sensory tests or adjustable-pressure causal response. §5 calls experimental validation against real extractions future work; earlier qualitative sensorial-session mention not a controlled individual five-input result.",
+      "current_app_crosswalk": "Current dev 404f7111dc31316f1d814a1331b39e38fedbfe6a, engine Git blob 9b0071f2bdd89b931662fe3232d4659524ad2e67, model 00c027c5f10d938fa2cc050572286eb9570817de, constants 72221331ce4dffabe416eebec1ae2fceced3a095; personal measured five-rating engine with no chemistry inverse model.",
+      "factual_status": "PAPER_INTERNAL_SIMULATED_PERFORMANCE_ONLY_NOT_REAL_CUP_PERSONALIZATION_OR_ESPRESSO_QUALITY_VALIDATION"
     }
   ],
   "evidence_checks": [
@@ -4455,6 +4474,26 @@
       "result": "BOUNDED_DESCRIPTIVE_DIFFERENCES_ONLY; NO_GENERAL_PERSONAL_TASTE_OR_SINGLE_CONTROL_CAUSAL_PROOF",
       "owner_approval": false,
       "date": "2026-11-10"
+    },
+    {
+      "id": "R455-EV-CIT-163-A",
+      "source": "LIT-2025-BARLETTA-INVERSE-SIMULATION-ARXIV",
+      "date": "2026-11-10",
+      "claim": "All numerical chemistry data are simulated; 1759 grid and 153 off-grid cases, 6000 interpolation rows; constant 9 bar, grind only three discrete classes.",
+      "grade": "PRIMARY_FULL_ARXIV_HTML_SECTIONS_4_1_TO_4_3_VERIFIED_STRONG_FOR_METHODS_WEAK_FOR_HARDWARE_GENERALIZATION",
+      "current_app": "Actual measured user espresso grind/version/feed and optional temperature cannot derive from three abstract synthetic categorical labels.",
+      "result": "NO_PHYSICAL_PRESSURE_TEMPERATURE_GRIND_OPTIMUM_OR_REAL_APP_PREDICTION_PROOF",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-163-B",
+      "source": "LIT-2025-BARLETTA-INVERSE-SIMULATION-ARXIV",
+      "date": "2026-11-10",
+      "claim": "Tables 1-3 report simulated 100% grind-class classification (1164 test cases), surrogate R2 >.99 for eight chemicals, inverse temperature R2 .9978; §5 still places real extraction validation in future.",
+      "grade": "DIRECT_AUTHOR_TABLES_AND_CONCLUSIONS; INTERNAL_SIMULATOR_NOT_SENSORY_TRIAL",
+      "current_app": "Preserve actual five original ratings and same-coffee personal evidence, no scientific confidence based on simulator metrics.",
+      "result": "NO_VERIFIED_USER_TASTE_OR_RECOMMENDATION_BENEFIT",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [],
@@ -4558,30 +4597,30 @@
     "R455-162 @9743126ad5f920f5cd56f9d5f654fb643312801f: independently reviewed original 2026 Lo Vecchio et al. 3-brewer coffee study (DOI 10.3390/separations13060166): single blend, non-equivalent dose/yield/apparatus, pooled composite chemistry, 10-person duplicate sensory panel, manufacturer-provided test device and consultancy disclosed; neither 10s/nominal15bar nor sweetness panel is universal DIC espresso advice. 90 sources / 240 bounded checks / 123 proposals; no safe runtime bug, Locked/queue/main/release/Netlify/provider change or #267 literal-line credit; original publisher PDF/raw data and standalone S019 PDF not accessed; Git PR/CI/merge to verify."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-162",
-    "base_development_sha": "9743126ad5f920f5cd56f9d5f654fb643312801f",
+    "id": "R455-163",
+    "base_development_sha": "404f7111dc31316f1d814a1331b39e38fedbfe6a",
     "main_sha": "11e1e8c7c36dad488519476d8a969bb682915d31",
     "release_production_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
     "source_ids": [
-      "LIT-2026-LOVECCHIO-MOKA-ESPRESSO-KAMIRA-SENSORY"
+      "LIT-2025-BARLETTA-INVERSE-SIMULATION-ARXIV"
     ],
     "claim_ids": [
-      "R455-EV-CIT-162-A",
-      "R455-EV-CIT-162-B"
+      "R455-EV-CIT-163-A",
+      "R455-EV-CIT-163-B"
     ],
     "proposal_ids": [
-      "R455-PROP-162-MULTIBREWER-SENSORY-NOT-PERSONAL-ESPRESSO-TARGET"
+      "R455-PROP-163-INVERSE-SIMULATION-NOT-PERSONAL-TASTE"
     ],
-    "number_of_curated_sources": 90,
-    "total_evidence_checks": 240,
-    "number_of_proposals": 123,
-    "review_type": "ORIGINAL_2026_MOKA_ESPRESSO_KAMIRA_PUBLISHER_HTML_MULTI_METHOD_CONFOUNDING_AND_TEN_PERSON_SENSORY",
+    "number_of_curated_sources": 91,
+    "total_evidence_checks": 242,
+    "number_of_proposals": 124,
+    "review_type": "NEW_PRIMARY_FULL_HTML_COMPUTATIONAL_INVERSE_ESPRESSO_SIMULATION_SCOPE",
     "code_or_policy_changed": false,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
-    "status": "AUTHORING_COMPLETE_DOCS_ONLY_PR_HEAD_CI_MERGE_PENDING",
-    "next_action": "Run exact GitHub PR-head checks, nonforce merge only after success, verify merged Git blobs; then continue disjoint actual UX defect search or next unreviewed source. S019 original PDF remains inaccessible."
+    "status": "AUTHORED_DOC_ONLY_CI_AND_MERGE_PENDING",
+    "next_action": "Verify exact PR-head checks and safe nonforce merge, merged Git blob equivalence and applicable CI; next disjoint UX/source review; S019 still inaccessible."
   },
   "policy_decisions_resolved": [
     {
@@ -7160,6 +7199,28 @@
       "implementation": "SOURCE_LEDGER+R162_SCOPED_JOURNAL+CURRENT_STATUS_ONLY; NO_APP_FIX_BECAUSE_NO_LIVE_DEFECT_REPRODUCED; PR_HEAD_CI_AND_NONFORCE_MERGE_PENDING_AT_AUTHORING",
       "test_plan": "Validate JSON parser, IDs uniqueness, three intended doc-only Git blobs, GitHub PR-head applicable governance checks, nonforce squash merge and exact merged blob readback. No functional Node22/browser/offline/SQL/Auth or physical tasting test legitimately credited for unchanged source.",
       "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-163-INVERSE-SIMULATION-NOT-PERSONAL-TASTE",
+      "finding": "Numerical espresso inverse learning paper reports near-perfect in-domain synthetic metrics, but no measured same-coffee real five-rating outcomes or calibrated hardware correction; no reproduced current runtime defect.",
+      "evidence": [
+        "LIT-2025-BARLETTA-INVERSE-SIMULATION-ARXIV",
+        "R455-EV-CIT-163-A",
+        "R455-EV-CIT-163-B"
+      ],
+      "severity": "P3_UNVERIFIED_SIMULATION_TO_REAL_USER_TRANSFER",
+      "user_benefit": "Avoid false confidence, universal temperature/grind/pressure precision while protecting fast five-rating, same-coffee, one-controllable-step workflow.",
+      "current_locked": "Master/Decision: five rating inputs, all green vs unrated, at most one intentional controllable recommendation change, original measurements/notes, same-coffee history, distinct Turbo and Fast-Flow, feed, grinder versions and temperature adjustability, privacy.",
+      "current_app": "Dev 404f7111dc31316f1d814a1331b39e38fedbfe6a engine 9b0071f2bdd89b931662fe3232d4659524ad2e67 and current model/constants; no paper-derived recommendation mechanism.",
+      "proposed_change": "Research-only guard. Any future new model, data capture, cross-hardware numerical correction or confidence rule needs separate owner policy approval and controlled physical espresso/user outcome evidence.",
+      "evidence_grade": "SOURCE_VERIFIED_PREPRINT_SIMULATED_WITH_INTERPOLATION_NOT_REAL_PERSONAL_SENSORY_TRIAL",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "DOCS_ONLY_LEDGER_JOURNAL_CURRENT_STATUS; NO_CODE_UI_SQL_LOCKED_CHANGE",
+      "test_plan": "Parse JSON unique 91/242/124; docs-only applicable PR CI; nonforce merge and exact merged blobs. No Node/browser/offline/SQL/physical espresso testing in this source-only step.",
+      "release_queue_status": "NOT_APPLICABLE",
       "github267_literal_review_credit": 0,
       "production_deployed": false
     }
