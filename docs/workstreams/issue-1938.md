@@ -8,3 +8,5 @@
 - **Next:** Implement subscribed-admin server flow and scheduled sender, test RBAC/SQL/VAPID/dedupe and service worker, reconcile governance and queue, merge nonforce with exact CI, then report source readiness separate from deployed status.
 
 - **2026-11-10 source checkpoint:** Added additive service-only RLS subscription table, role-filtered redacted actionable snapshot, and `tests/admin-push.test.mjs` endpoint/real ES256 signature/contentless send/ACL regression. No migration executed on hosted Supabase and no service secret configured. API, scheduled sender, UI/worker still pending.
+
+- **Source checkpoint:** Added Netlify API (revalidated Supabase Auth + admitted admin RPC, read-only VAPID public key, service-only idempotent subscription register/opt-out, seed existing action tokens) and five-minute production-only sender (role recheck, content-free VAPID, stale endpoint removal and dedupe). Requires specific env variables and tested provider readback before any real push claim. No provider or production changes.
