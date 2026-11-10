@@ -451,3 +451,6 @@ Owner-authorized release DIC-20261106-READY7-23 independently verified DEPLOYED:
 
 ## November 9, 2026 — #1756 signup frontend replaced invitation flow [skip netlify]
 - Removed browser redemption client/form, replaced signed-in nonadmitted screen with Pending/Rejected/Revoked server statuses, manual Check Approval Status and admission poll recheck; preserved existing offline cached-data revocation and user account boundary. Email verification confirmation now explains admin review. Frontend changes source-only, no provider mutation, queue not READY; continue Admin portal + tests/CI.
+
+## November 9, 2026 — #1756 Admin view source implementation checkpoint [skip netlify]
+- Pure escaped Admin attention badge and pending signup Approve/Reject rows added (verified email prerequisite, paging); legacy code management UI fully removed; existing Member Access, Remove/Restore and Delete Account retained. Theme-aware responsive styles added. Requires controller actions, tests, exact CI and development merge before READY; no provider writes or deploy.
