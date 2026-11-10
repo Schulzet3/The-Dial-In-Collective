@@ -3529,6 +3529,20 @@
       "provider_writes": false,
       "new_confirmed_defects": 0,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 #509 Run141 exact provider function hash/ACL/statement aggregate telemetry",
+      "source_development_parent_sha": "1df0a4dae38fcc2937bab18d8428b10a383aea42",
+      "receipt_path": "docs/audits/issue509-provider-runtime-drift-telemetry-2026-11-10-run141.json",
+      "platform_full_sql_fingerprints_reconciled": 42,
+      "app_function_fingerprints": 106,
+      "pg_stat_statements_fingerprints": 25,
+      "relation_aggregates": 25,
+      "provider_table_acl_posture": 12,
+      "new_full_sql_word_credit": 0,
+      "new_confirmed_app_defects": 0,
+      "provider_writes": false,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -16073,5 +16087,22 @@
       "private.dic_admin_set_member_access(uuid,boolean)": "d7a339f277e9da0d8393d5efcdbc0e89",
       "private.handle_new_auth_user()": "ba4f31790060a75e074148034f26dfbe"
     }
+  },
+  "provider_runtime_drift_telemetry_run141": {
+    "status": "COMPLETE_BOUNDED_PLATFORM_FUNCTION_HASH_AND_SANITIZED_PERFORMANCE_ACL_LOG_RECHECK",
+    "receipt_path": "docs/audits/issue509-provider-runtime-drift-telemetry-2026-11-10-run141.json",
+    "source_development_parent_sha": "1df0a4dae38fcc2937bab18d8428b10a383aea42",
+    "direct_source_prior_receipt_hashes_reconciled": 42,
+    "prior_full_sql_total": 42,
+    "new_provider_sql_word_credit": 0,
+    "sql_numeric_statement_fingerprints": 25,
+    "app_relation_aggregates": 25,
+    "provider_relation_acl_rls": 12,
+    "current_app_function_signature_md5_snapshots": 106,
+    "app_source_hashes_different_from_original_99_manifest": 19,
+    "new_confirmed_app_defects": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "Check post-READY4 source and current 106 application function digests against later provider receipts; Auth private console/REST exposed schema and compiled native implementations remain UNVERIFIED."
   }
 }
