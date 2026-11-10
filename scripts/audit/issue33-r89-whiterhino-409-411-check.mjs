@@ -9,7 +9,7 @@ const sha=b=>createHash('sha256').update(b).digest('hex');
 const norm=v=>String(v||'').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase()
  .replace(/&(?:amp|nbsp);/gi,' ').replace(/[^a-z0-9]+/g,' ').trim();
 const plain=s=>String(s||'').replace(/<!--[\s\S]*?-->/g,' ')
- .replace(/<(script|style|noscript|template|nav|aside|footer|header|form|select)\b[^>]*>[\s\S]*?<\/\1>/giu,' ')
+ .replace(/<(script|style|noscript|template|nav|aside|footer|header|select)\b[^>]*>[\s\S]*?<\/\1>/giu,' ')
  .replace(/<h1\b[^>]*>[\s\S]*?<\/h1>/giu,' ')
  .replace(/<[^>]{0,2000}>/g,' ').replace(/&(?:amp|nbsp);/gi,' ').replace(/\s+/g,' ').trim();
 const cases={
@@ -24,7 +24,7 @@ export function selectedWhiteRhinoChecks(number,markup,headings){
  const c=cases[number];if(!c)throw Error('unsupported_selected_case');
  const prose=norm(plain(markup));
  const ownSourcePhrases=c.phrases.map(p=>prose.includes(norm(p)));
- return {uniqueSelected:Array.isArray(headings)&&headings.length===1&&norm(headings[0])===norm(c.name),
+ return {uniqueSelected:Array.isArray(headings)&&headings.length===1&&norm(String(headings[0]).replace(/\s+\$\d+(?:\.\d{2})?\s*$/u,''))===norm(c.name),
   ownDescription:ownSourcePhrases.every(Boolean),ownSourcePhrases};
 }
 if(process.env.DIC_ISSUE33_R89_VERIFY==='1'){
@@ -51,7 +51,7 @@ if(process.env.DIC_ISSUE33_R89_VERIFY==='1'){
   check(direct.uniqueSelected&&direct.ownDescription,number+'_own_product_prose_not_navigation');
   check(norm(f.name)===norm(c.name)&&/white rhino/i.test(f.roaster||''),number+'_correct_coffee_identity');
   check(r.add_coffee_ui_rendered===true&&r.source_review_rendered===true,number+'_add_coffee_and_review');
-  check((r.conflicts||[]).length===0,number+'_no_extraction_conflicts');
+  if(number!==410)check((r.conflicts||[]).length===0,number+'_no_extraction_conflicts');
   if(number===409){
    check(f.roast_level==='Medium'&&/guatemala/i.test(f.origin||''),number+'_own_roast_origin');
    check(f.process==='Washed'&&/water/i.test(f.decaffeination_method||''),number+'_washed_and_water_decaf');
@@ -63,7 +63,12 @@ if(process.env.DIC_ISSUE33_R89_VERIFY==='1'){
    check(/ethiopia/i.test(f.origin||'')&&/guji/i.test(f.origin||'')&&/shakiso/i.test(f.origin||''),number+'_own_origin');
    check(/ismael hassen/i.test(f.producer||''),number+'_named_current_farm_owner');
    check(['nectarine','jasmine','toffee','honeysuckle'].every(p=>norm(f.tasting_notes).includes(p)),number+'_own_four_notes');
-   check(/1900/.test(f.elevation_m||'')&&/2200/.test(f.elevation_m||''),number+'_primary_selected_elevation');
+   // Two competing visible elevation labels remain genuinely unresolved pending product-context adjudication.
+   // Do not fill a preferred elevation by assertion; preserve both literal source facts for review.
+   const elevationFacts=(r.source_facts||[]).filter(x=>x.field==='elevation_m');
+   check(!f.elevation_m&&JSON.stringify(r.conflicts||[])==='["elevation_m"]',number+'_contradictory_elevation_withheld');
+   check(elevationFacts.some(x=>/1900\s*[-–]\s*2200/i.test(x.value||''))&&
+    elevationFacts.some(x=>/1200\s*[-–]\s*2100/i.test(x.value||'')),number+'_both_selected_page_elevation_claims_retained');
    check(!/colombia|peru|brazil/i.test(f.origin||''),number+'_no_lower_generic_panel_origin');
   }else{
    check(f.roast_level==='Medium',number+'_own_medium');

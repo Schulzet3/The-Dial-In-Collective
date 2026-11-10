@@ -11,6 +11,11 @@ const cases={
   story:'A medium roasted espresso made of Natural Brazil and Washed Peru coffees. Roast: Medium. Origin: Brazil & Peru. Process: Natural & Washed. Growing Altitude: 900-1800 meters. Tasting Notes: Cocoa, Nut Butter, Honey, Dried Apricot, Caramel.'}
 };
 const page=(c,story=c.story,extra='')=>'<main><article class="product"><h1>'+c.name+'</h1><div class="product__description">'+story+'</div></article></main>'+extra;
+test('White Rhino exact product H1 may include a separate trailing price only',()=>{
+ const c=cases[410];
+ assert.equal(selectedWhiteRhinoChecks(410,page(c),[c.name+' $22.00']).uniqueSelected,true);
+ assert.equal(selectedWhiteRhinoChecks(410,page(c),[c.name+' Bundle $22.00']).uniqueSelected,false);
+});
 for(const n of [409,410,411]){
  const c=cases[n];
  test('#'+n+' exact current H1 and same-product literal specs',()=>{
