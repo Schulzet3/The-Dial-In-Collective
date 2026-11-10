@@ -11221,6 +11221,27 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
       "notes": "SAFE bounded evidence-eligibility fix only, no changed Locked product policy, numeric espresso targets or added capture. Development READY only; NOT DEPLOYED. No actual user/member risk occurrence or espresso quality improvement claimed. #267 literal audit credit zero; standalone original S019 inaccessible; Issue #455 remains open."
+    },
+    {
+      "id": "DIC-Q-509-preview-preflight-null-cached-guard",
+      "issue": 509,
+      "pr": null,
+      "title": "Reject explicit NULL cached flag before issuing stale two-phase URL preview tickets",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "supabase/migrations/20261110164500_dic_preview_preflight_null_flag_guard.sql"
+      ],
+      "tests": [
+        "Production read-only pg_get_functiondef full function and pure-expression NULL-at-cap truth table confirmed malformed flag can yield allowed ticket, despite complete() deny",
+        "Focused disposable PostgreSQL 17.11 rollback-only preview_two_phase_cache.sql tests for NULL, false, true, existing ticket and exhausted quota: PENDING"
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source isolated PostgreSQL, signed JWT and governance checks not yet verified; PR not merged"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
+      "notes": "Run149 development-only hardening of older authenticated SQL RPC; no proven current Edge extraction bypass, no live change, not production READY. Preserve fixed behavior for true/false/default and existing clients."
     }
   ],
   "history": [
