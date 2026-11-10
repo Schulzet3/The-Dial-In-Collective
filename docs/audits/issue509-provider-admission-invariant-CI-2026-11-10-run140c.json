@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": "140c",
+  "project_ref": "azviqqejypsefzilgonr",
+  "result": "SOURCE_FIX_READY_DEVELOPMENT_ONLY_NO_PRODUCTION_CHANGES",
+  "issue509_finding": "ISSUE509-ENABLED-ONLY-SERVICE-GATES",
+  "source_commit_sha": "2f1427fcfc63eee0d3b682e5eafbf130cf7a1213",
+  "source_migration": "supabase/migrations/20261110073500_dic_enabled_requires_admission_check.sql",
+  "source_only_scope": true,
+  "production_writes": false,
+  "prior_source_receipts": [
+    "docs/audits/issue509-provider-admission-dependent-source-gates-2026-11-10-run139b.json",
+    "docs/audits/issue509-provider-admission-invariant-2026-11-10-run140.json"
+  ],
+  "verified_exact_source_ci": [
+    {
+      "id": 42778797903,
+      "name": "DIC isolated SQL release regression",
+      "head_sha": "2f1427fcfc63eee0d3b682e5eafbf130cf7a1213",
+      "status": "completed",
+      "conclusion": "success",
+      "evidence": "All migrations, worker and signup negative SQL, 94 signed-JWT HTTP assertions and backup checks passed"
+    },
+    {
+      "id": 42778797849,
+      "name": "DIC cloud app build and tests",
+      "head_sha": "2f1427fcfc63eee0d3b682e5eafbf130cf7a1213",
+      "status": "completed",
+      "conclusion": "success",
+      "evidence": "3376 Node tests, 3370 pass, 6 intentional skips; lint and build passed"
+    },
+    {
+      "id": 42778797822,
+      "name": "DIC approval, implementation and continuity contract",
+      "head_sha": "2f1427fcfc63eee0d3b682e5eafbf130cf7a1213",
+      "status": "completed",
+      "conclusion": "success",
+      "evidence": "Approval matrix, queue intake and 5-path same-commit continuity PASS"
+    },
+    {
+      "id": 42778586122,
+      "name": "DIC cloud UX regression checks",
+      "head_sha": "ef63953922cadbd08d15ac5ae7e0874690b0f916",
+      "status": "completed",
+      "conclusion": "success",
+      "evidence": "App and migration source unchanged since this CI; subsequent commit test fixture/docs only"
+    }
+  ],
+  "historical_failure": {
+    "id": 42778586115,
+    "head_sha": "ef63953922cadbd08d15ac5ae7e0874690b0f916",
+    "conclusion": "failure",
+    "cause": "Synthetic legacy url_preview_release.sql enabled a pending account without admission",
+    "correction": "2f1427... stages admitted_at and enabled together in disposable fixture; repeated SQL passed"
+  },
+  "live_provider": {
+    "state": "ACTIVE_HEALTHY",
+    "postgres": "17.11",
+    "migrations": 59,
+    "beta_members_total": 11,
+    "enabled_and_admitted": 5,
+    "disabled_and_admitted": 6,
+    "enabled_unadmitted": 0
+  },
+  "directly_reviewed_full_writer_definitions": [
+    {
+      "identity": "private.dic_admin_account_delete_prepare(uuid,uuid)",
+      "md5": "6e7e0589cbda1bc5023771724ce8b77f",
+      "characters": 3899,
+      "verdict": "MUTATES_ENABLED_FALSE_ONLY"
+    },
+    {
+      "identity": "private.dic_admin_review_signup(uuid,text,text)",
+      "md5": "7e0d3bf10542694b60177fcfa9c6f7be",
+      "characters": 2073,
+      "verdict": "APPROVAL_ATOMIC_BOTH_ENABLED_AND_ADMITTED"
+    },
+    {
+      "identity": "private.dic_admin_set_member_access(uuid,boolean)",
+      "md5": "d7a339f277e9da0d8393d5efcdbc0e89",
+      "characters": 2354,
+      "verdict": "REQUIRES_EXISTING_ADMISSION_FOR_REENABLE"
+    },
+    {
+      "identity": "private.handle_new_auth_user()",
+      "md5": "ba4f31790060a75e074148034f26dfbe",
+      "characters": 372,
+      "verdict": "NEW_PENDING_USER_DISABLED_DEFAULT"
+    }
+  ],
+  "word_credit": "Previously read app source and migration definitions not double credited; current writer definitions directly reread for constraint impact",
+  "downstream": "Issue #33 service-role worker unaffected; Issue #96 owns real signed-in Auth acceptance",
+  "limitations": [
+    "No real GoTrue/account deletion test",
+    "No hosted private settings/native compiled implementation inspection",
+    "No production deployment or data mutation"
+  ],
+  "baseline_complete": false,
+  "next": "Continue next genuinely unreviewed definition/provider change; release requires independent owner source-bound authorization."
+}

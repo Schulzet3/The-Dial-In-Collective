@@ -16035,7 +16035,7 @@
     "next": "Follow up enabled-only service gates with DB constraint or targeted source fix after coordinated source and isolated tests; continue unreviewed provider definitions."
   },
   "provider_enabled_requires_admission_constraint_run140": {
-    "status": "ADDITIVE_SOURCE_FIX_TESTING_CI_PENDING",
+    "status": "COMPLETE_NARROW_SOURCE_FIX_SOURCE_BOUND_PASS_READY_DEV_ONLY",
     "provider_status": "ACTIVE_HEALTHY",
     "live_migrations": 59,
     "live_inconsistent_rows": 0,
@@ -16047,11 +16047,11 @@
       "supabase/tests/source_worker_auth_and_admission.sql"
     ],
     "queue_item": "DIC-Q-509-enabled-requires-admission-constraint",
-    "queue_state": "TESTING",
+    "queue_state": "READY_NOT_DEPLOYED",
     "source_word_credit": 0,
     "provider_writes": false,
     "baseline_complete": false,
-    "next": "Exact-source CI readback; no READY until passing all relevant checks. Continue next unreviewed object.",
+    "next": "Resume exact next unreviewed provider object/definition or changed drift; separate owner release required; full baseline IN_PROGRESS.",
     "first_ci": {
       "source_sha": "ef63953922cadbd08d15ac5ae7e0874690b0f916",
       "sql_run": 42778586115,
@@ -16059,6 +16059,19 @@
       "failure_kind": "SQL_SYNTHETIC_LEGACY_FIXTURE_NOT_SETTING_ADMITTED_AT",
       "fix": "Update url_preview_release.sql to stage admitted_at atomically",
       "new_ci": "PENDING"
+    },
+    "code_and_test_sha": "2f1427fcfc63eee0d3b682e5eafbf130cf7a1213",
+    "source_fixes": 1,
+    "signed_jwt_and_sql_run": 42778797903,
+    "node22_lint_build_run": 42778797849,
+    "governance_run": 42778797822,
+    "cloud_ux_unchanged_code_run": 42778586122,
+    "exact_source_ci_status": "COMPLETED_SUCCESS_ALL_APPLICABLE; historical 42778586115 failure corrected via synthetic fixture",
+    "provider_direct_writer_full_body_md5": {
+      "private.dic_admin_account_delete_prepare(uuid,uuid)": "6e7e0589cbda1bc5023771724ce8b77f",
+      "private.dic_admin_review_signup(uuid,text,text)": "7e0d3bf10542694b60177fcfa9c6f7be",
+      "private.dic_admin_set_member_access(uuid,boolean)": "d7a339f277e9da0d8393d5efcdbc0e89",
+      "private.handle_new_auth_user()": "ba4f31790060a75e074148034f26dfbe"
     }
   }
 }

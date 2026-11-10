@@ -11020,24 +11020,29 @@
       "issue": 509,
       "pr": null,
       "title": "Ensure trusted service source-verification never processes enabled-but-unadmitted accounts",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "2f1427fcfc63eee0d3b682e5eafbf130cf7a1213",
       "scope_paths": [
         "supabase/migrations/20261110073500_dic_enabled_requires_admission_check.sql"
       ],
       "tests": [
         "Source-only additive CHECK and synthetic isolated negative tests in admin_invitation_controls.sql, source_worker_auth_and_admission.sql; exact-source CI PENDING.",
-        "Initial exact-source ef639539 SQL run42778586115 FAILED during url_preview_release.sql, because older synthetic admitted fixture enabled a new member without admitted_at. This is a fixture compatibility failure after the new CHECK, not a live defect; migration applied and admin_invitation_controls PASS. Run140b source test repair stages both values atomically; new CI required."
+        "Initial exact-source ef639539 SQL run42778586115 FAILED during url_preview_release.sql, because older synthetic admitted fixture enabled a new member without admitted_at. This is a fixture compatibility failure after the new CHECK, not a live defect; migration applied and admin_invitation_controls PASS. Run140b source test repair stages both values atomically; new CI required.",
+        "Corrected exact-source 2f1427fcfc63eee0d3b682e5eafbf130cf7a1213 isolated PostgreSQL all-migrations, full source_worker_auth_and_admission, admin_invitation_controls, url_preview_release, and backup recovery run42778797903 COMPLETED SUCCESS; raw log 94/94 synthetic HMAC-signed PostgREST assertions PASS; no hosted GoTrue or production sessions tested.",
+        "Corrected exact-source 2f1427fcfc63eee0d3b682e5eafbf130cf7a1213 Node22/lint/build run42778797849 COMPLETED SUCCESS: 3370 pass, 6 intentional skips, 0 failures; governance run42778797822 COMPLETED SUCCESS, approval coverage PASS, queue intake PASS, same-commit continuity PASS.",
+        "Unchanged initial app/migration source ef639539 cloud UX run42778586122 COMPLETED SUCCESS; later 2f142 only corrected synthetic test and scoped docs; no app/worker/migration source change."
       ],
       "ci_runs": [
         42778586115,
-        42778586116
+        42778586116,
+        42778586122,
+        42778797822,
+        42778797903,
+        42778797849
       ],
-      "blockers": [
-        "Exact-source isolated PostgreSQL, signed JWT, Node22/cloud applicability and governance CI PENDING"
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
-      "notes": "Run140 provider read-only 11 admitted records/0 inconsistent states; source-only constraint closes enabled-only service-role latent admission gap. No live changes. Coordinate Issue #33, no source worker code edited; owner one-use release authorization remains necessary."
+      "notes": "Run140 provider read-only 11 admitted records/0 inconsistent states; source-only constraint closes enabled-only service-role latent admission gap. No live changes. Coordinate Issue #33, no source worker code edited; owner one-use release authorization remains necessary.\nRun140c: corrected synthetic fixture at 2f1427fcfc63eee0d3b682e5eafbf130cf7a1213 with independently verified exact-source SQL/JWT 42778797903, Node22 42778797849, approval/governance 42778797822 all COMPLETED SUCCESS. First 42778586115 SQL fixture failure preserved as historical, not unresolved. Prior cloud UX evidence source ef639539 applies because no product/worker code changed thereafter. READY development migration only; NOT deployed. Full hosted provider baseline IN_PROGRESS. No live SQL/Edge/Auth/data writes or deployment. Separate owner single-use publishing, exact candidate CI and private recovery are mandatory."
     }
   ],
   "history": [
