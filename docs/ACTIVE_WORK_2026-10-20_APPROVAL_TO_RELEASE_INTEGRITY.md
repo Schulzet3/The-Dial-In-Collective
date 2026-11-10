@@ -457,3 +457,6 @@ Owner-authorized release DIC-20261106-READY7-23 independently verified DEPLOYED:
 
 ## November 9, 2026 — #1756 Admin role-gated signup review and attention controller [skip netlify]
 - Admin client now retrieves server-owned pending signup records and calls role-restricted Approve/Reject with expected pending state, preserving existing admin account access/delete and coffee review. All issue/copy/revoke/delete invite actions removed; no code secret in Admin. Attention header updates every 45s with generic browser alert only if permission granted while portal is open. UI/SQL source still needs comprehensive CI and eventual release, no production writes.
+
+## November 10, 2026 — #1756 approval coverage and isolated SQL fixture modernization [skip netlify]
+- Reclassified new owner Locked approval in coverage matrix inventory and explicit source/test contract. Replaced old invite-code generation/redemption isolated tests with signup default pending, verified-mail admin approval, rejection preserving Auth, nonadmin and anon denial, protected administrator, idempotent review receipt and no old RPC/tables. Existing content/search SQL fixture now rejects retired invite enumeration rather than assuming old records. No production SQL/data writes. Source remains IN_PROGRESS pending exact CI and browser suite repairs.
