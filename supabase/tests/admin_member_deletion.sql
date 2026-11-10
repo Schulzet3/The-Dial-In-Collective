@@ -267,6 +267,29 @@ DECLARE
  OR NOT EXISTS(SELECT 1 FROM private.contribution_links WHERE community_shot_id=community_peer)
  THEN RAISE EXCEPTION 'Another member/community contribution was changed'; END IF;
 
+ -- #509: a previously authorized admin may be deleted out-of-band while
+ -- the deletion request remains open (actor_id FK ON DELETE SET NULL).
+ -- Another admin must receive a conflict, never a misleading retry token.
+ INSERT INTO private.dic_admin_account_delete_operations
+   (actor_id,target_id,community_mode,expected_impact,phase)
+ VALUES (NULL,peer_user,'keep','{}'::jsonb,'requested');
+ PERFORM set_config('request.jwt.claim.sub',admin::text,true);
+ EXECUTE 'SET LOCAL ROLE authenticated';
+ blocked:=false;
+ BEGIN
+  PERFORM public.dic_admin_account_delete_request(peer_user,'keep','{}'::jsonb);
+ EXCEPTION WHEN check_violation THEN
+  IF SQLERRM='Another deletion is already in progress.' THEN
+   blocked:=true;
+  ELSE
+   RAISE;
+  END IF;
+ END;
+ EXECUTE 'RESET ROLE';
+ IF NOT blocked THEN
+  RAISE EXCEPTION 'Orphan actor returned retry token to unrelated admin';
+ END IF;
+
 END $test$;
 SELECT 'PASS: account delete auth/admin guards, stale impact, retry, Keep/Remove Community, unrelated member integrity, no legacy invitation paths' AS result;
 ROLLBACK;
