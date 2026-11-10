@@ -563,14 +563,14 @@ export function selectedNamedCurrentDecafEvidence(productHtml,{name,clean}={}){
  const method=title[1];
  const own=new RegExp('^our\\s+'+method+'[ -]?water\\s+decaf(?:feinated)?\\s+beans?\\s+undergo\\s+a\\s+100\\s*%\\s+chemical[ -]?free\\s+decaffeination\\s+process\\b','iu');
  const selectedText=blocks.filter(b=>!b.educational&&['p','div'].includes(b.tag)&&
-  b.text.length<=950&&!/\\b(?:faq|related products?|other coffees?|customer reviews?|educational|previous lots?)\\b/iu.test(b.section))
-  .flatMap(b=>String(b.text).split(/(?<=[.!?])\\s+/u).map(s=>s.trim()));
+  b.text.length<=950&&!/\b(?:faq|related products?|other coffees?|customer reviews?|educational|previous lots?)\b/iu.test(b.section))
+  .flatMap(b=>String(b.text).split(/(?<=[.!?])\s+/u).map(s=>s.trim()));
  // Do not choose between incompatible treatments printed in this same
  // selected product description even if the title itself says Water.
- const opposite=/\\b(?:sugar[ -]?cane|ethyl[ -]?acetate|carbon[ -]?dioxide|co\\s*[- ]?2)\\b/iu;
- if(selectedText.some(x=>opposite.test(x)&&/\\bdecaf(?:feinat(?:ed|ion|ing))?|process\\b/iu.test(x)))return evidence;
+ const opposite=/\b(?:sugar[ -]?cane|ethyl[ -]?acetate|carbon[ -]?dioxide|co\s*[- ]?2)\b/iu;
+ if(selectedText.some(x=>opposite.test(x)&&/\b(?:decaf(?:feinat(?:ed|ion|ing))?|process)\b/iu.test(x)))return evidence;
  const directStatement=selectedText.find(s=>own.test(s)&&
-   !/\\b(?:not|never|formerly|previously|historically|rather than|instead of|other coffee)\\b/iu.test(s));
+   !/\b(?:not|never|formerly|previously|historically|rather than|instead of|other coffee)\b/iu.test(s));
  if(directStatement)evidence.push(directStatement);
  return [...new Set(evidence)];
 }
