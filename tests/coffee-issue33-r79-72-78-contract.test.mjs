@@ -15,3 +15,5 @@ test('related product nav/footer cannot fill selected #72 specs',()=>{const d=se
 test('natural notes caption and Vietnamese style must not assert cherry processing or origin',()=>{const d=selected78(page(b,specB),[b]);assert.equal(d.naturalNotesCaption,true);assert.equal(d.namedBlend,true);});
 test('other roast has a different selected product, cannot be source of #78 details',()=>{const d=selected78(page(b,'')+'<nav>'+specB+'</nav><aside>'+specB+'</aside>',[b]);assert.equal(d.namedBlend,false);assert.equal(d.directNotes,false);assert.equal(d.naturalNotesCaption,false)});
 test('unrelated Indonesian or Ethiopian origins do not establish Vietnamese coffee origin',()=>assert.equal(selected78(page(b,specB.replace('Vietnamese-style','Indonesian-style')),[b]).namedBlend,false));
+
+test('literal selected 72 note apostrophe is HTML-entity safe',()=>assert.equal(selected72(page(a,specA.replace("Baker's",'Baker&#39;s')),[a]).explicitNotes,true));

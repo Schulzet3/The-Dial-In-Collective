@@ -10,7 +10,7 @@ const fold=x=>String(x||'').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase(
 const text=html=>String(html||'').replace(/<!--[\s\S]*?-->/gu,' ')
  .replace(/<(script|style|template|noscript|nav|aside|footer|header|form|select)\b[^>]*>[\s\S]*?<\/\1>/giu,' ')
  .replace(/<[^>]{0,2000}>/gu,' ').replace(/&(?:nbsp|#160);/giu,' ')
- .replace(/&amp;/giu,'&').replace(/\s+/gu,' ').trim();
+ .replace(/&amp;/giu,'&').replace(/&(?:#39|#x27|apos|rsquo);/giu,"'").replace(/\s+/gu,' ').trim();
 export function selected72(markup,headings){
  const t=text(markup);
  return {
@@ -70,7 +70,7 @@ if(process.env.DIC_ISSUE33_R79_VERIFY==='1'){
    // Vietnamese-style roast is not country of origin; Natural Notes is a flavor caption.
    check(!f.origin,'vietnamese_style_not_country_'+n);
    check(!f.process,'natural_notes_not_process_'+n);
-   check(!f.roast_level,'roast_style_not_numeric_grade_'+n);
+   check(String(f.roast_level||'').toLowerCase()==='medium'&&/"handle":"vietnamese-roast"[\s\S]{0,4500}"tags":\["Coffee","Medium Roast"\]/u.test(raw?.toString('utf8')||''),'identity_bound_selected_medium_shopify_tag_'+n);
   }
   check(r.add_coffee_ui_rendered===true&&r.source_review_rendered===true,'add_coffee_review_'+n);
   check(!(r.conflicts||[]).some(c=>/name|origin|process|roast|tasting/iu.test(JSON.stringify(c))),'current_conflicts_'+n);
