@@ -1158,7 +1158,14 @@
     "platform_objects": "DIRECT_PROVIDER_CATALOG_TABLES_AUTH27_STORAGE8_REALTIME3_SUPABASE_MIGRATIONS1_VAULT1=40_TABLES; DIRECT_VIEWS_VAULT1_EXTENSIONS2=3; DIRECT_PROVIDER_SQL_FUNCTION_BODIES_42_OF_42_AUTH4_GRAPHQL1_STORAGE19_REALTIME18",
     "edge_function_sources_reviewed": 9,
     "table_definition_components_reviewed": 46,
-    "total_application_tables": 46
+    "total_application_tables": 46,
+    "information_schema": {
+      "views": "65/65 DIRECT COMPLETE",
+      "functions": "11/11 DIRECT COMPLETE",
+      "metadata_tables": "4/4 DIRECT CATALOG",
+      "domains": "5/5 DIRECT DECLARATION",
+      "receipt": "docs/audits/issue509-information-schema-full-direct-review-2026-11-10-run154.json"
+    }
   },
   "reviews": [
     {
@@ -3687,6 +3694,14 @@
       "source_sha": "62a1eac89f4653545a7bffe91e4dace3a2740da4",
       "evidence": "docs/audits/issue509-run153-exact-source-ci-closure-2026-11-10.json",
       "scope": "PR1911 source 4/4 and merged 4/4 applicable CI success; 7 credential+nest+benign synthetic final-schema checks, Node22 3606 pass, byte identity verified; no production write",
+      "provider_writes": 0,
+      "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 UTC Run154 first-time complete information_schema",
+      "source_sha": "23c88e7384881f6396736a1c96f383e2837512a0",
+      "evidence": "docs/audits/issue509-information-schema-full-direct-review-2026-11-10-run154.json",
+      "scope": "85 new provider objects; 65/65 full view SQL; 11/11 full SQL helper; 4/4 standard metadata table full catalog; 5/5 domain definitions; no bug; no #267 code credit",
       "provider_writes": 0,
       "baseline_complete": false
     }
@@ -16616,5 +16631,25 @@
     "queue_item": "DIC-Q-509-import-credential-field-separator-guard",
     "production_writes": 0,
     "baseline_complete": false
+  },
+  "provider_information_schema_run154": {
+    "status": "FIRST_TIME_ALL_INFORMATION_SCHEMA_NATIVE_TEXT_FULLY_DIRECTLY_REVIEWED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "development_parent_sha": "23c88e7384881f6396736a1c96f383e2837512a0",
+    "main_sha": "11e1e8c7c36dad488519476d8a969bb682915d31",
+    "release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+    "receipt_path": "docs/audits/issue509-information-schema-full-direct-review-2026-11-10-run154.json",
+    "view_count": 65,
+    "view_chars": 102636,
+    "function_count": 11,
+    "function_chars": 3898,
+    "static_tables": 4,
+    "static_columns": 21,
+    "domains": 5,
+    "new_provider_object_reviews": 85,
+    "confirmed_new_defects": 0,
+    "production_writes": 0,
+    "provider_baseline_complete": false,
+    "next": "First genuinely changed/new/unreviewed provider object outside information_schema; hosted API/native compiled implementations UNVERIFIED"
   }
 }
