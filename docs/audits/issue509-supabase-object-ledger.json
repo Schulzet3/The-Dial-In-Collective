@@ -3467,6 +3467,25 @@
       "prior_governance_result": "FAIL_NON_DEPLOYABLE_TEST_PATH_IN_SCOPE",
       "provider_writes": false,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 #509 Run136d safe null actor source-bound READY verification",
+      "source_parent_sha": "584679dde5866753cb1a929af403fb1aeadc577e",
+      "receipt_path": "docs/audits/issue509-provider-null-actor-retry-semantic-2026-11-10-run136.json",
+      "reviewed": 0,
+      "source_code_sha": "b4ed15a1515013dad43ba04dc4ff4a91db53a577",
+      "governance_docs_sha": "584679dde5866753cb1a929af403fb1aeadc577e",
+      "ci_runs": [
+        42752080329,
+        42752080197,
+        42752080471,
+        42752264988
+      ],
+      "ci_conclusions": "ALL_FOUR_COMPLETED_SUCCESS",
+      "queue_item": "DIC-Q-509-account-delete-null-actor-retry-guard",
+      "queue_state": "READY_NOT_DEPLOYED",
+      "provider_writes": false,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -15821,14 +15840,49 @@
     "next": "New/changed provider source; isolated nullable prior actor branch proof under #1676; hosted native/config unverified"
   },
   "provider_null_actor_retry_run136": {
-    "status": "SOURCE_FIX_COMMITTED_AND_QUEUE_TESTING_CI_PENDING",
+    "status": "SOURCE_FIX_VERIFIED_READY_NOT_DEPLOYED",
     "source_parent_sha": "5f164450cf286f4b4fb59ea6d176f9d467047a31",
     "receipt_path": "docs/audits/issue509-provider-null-actor-retry-semantic-2026-11-10-run136.json",
     "live_op_count": 0,
     "provider_writes": false,
-    "next": "Read exact-source PG/Node/governance CI and update queue only on evidence",
+    "next": "Continue new/changed provider semantic source only; separately owner-authorized publish if explicitly requested.",
     "queue_item": "DIC-Q-509-account-delete-null-actor-retry-guard",
     "first_governance_failure": "EXPECTED_NO_QUEUE_ITEM_FIXED_NEXT_COMMIT",
-    "second_governance_failure": "NON_DEPLOYABLE_TEST_PATH_IN_SCOPE_CORRECTED_NEXT_COMMIT"
+    "second_governance_failure": "NON_DEPLOYABLE_TEST_PATH_IN_SCOPE_CORRECTED_NEXT_COMMIT",
+    "ci": [
+      {
+        "id": 42752080329,
+        "name": "DIC isolated SQL release regression",
+        "sha": "b4ed15a1515013dad43ba04dc4ff4a91db53a577",
+        "actual_sha": "b4ed15a1515013dad43ba04dc4ff4a91db53a577",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 42752080197,
+        "name": "DIC cloud app build and tests",
+        "sha": "b4ed15a1515013dad43ba04dc4ff4a91db53a577",
+        "actual_sha": "b4ed15a1515013dad43ba04dc4ff4a91db53a577",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 42752080471,
+        "name": "DIC cloud UX regression checks",
+        "sha": "b4ed15a1515013dad43ba04dc4ff4a91db53a577",
+        "actual_sha": "b4ed15a1515013dad43ba04dc4ff4a91db53a577",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 42752264988,
+        "name": "DIC approval, implementation and continuity contract",
+        "sha": "584679dde5866753cb1a929af403fb1aeadc577e",
+        "actual_sha": "584679dde5866753cb1a929af403fb1aeadc577e",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ],
+    "queue_state": "READY"
   }
 }

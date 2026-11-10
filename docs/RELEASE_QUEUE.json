@@ -10828,7 +10828,7 @@
       "issue": 509,
       "pr": null,
       "title": "Reject orphaned administrator retry tokens during member account deletion",
-      "state": "TESTING",
+      "state": "READY",
       "merged_source_sha": "b4ed15a1515013dad43ba04dc4ff4a91db53a577",
       "scope_paths": [
         "supabase/migrations/20261110035000_dic_account_delete_orphaned_actor_retry_guard.sql"
@@ -10837,20 +10837,23 @@
         "Provider pg_get_functiondef 1933 chars MD5 75abc037bcc45abd5e9dd021b2f702d7: nullable actor_id SET NULL, plain <> yields unknown and permits another admin same-mode retry. Live open delete operations 0.",
         "Development commit b4ed15a1515013dad43ba04dc4ff4a91db53a577 adds separate migration and disposable dic_ci NULL actor SQLSTATE 23514 regression; all application/provider deployments remain unchanged.",
         "Exact-source initial approval governance run 42752080227 FAILED intake because this migration was untracked in queue; this TESTING row corrects the omission. Isolated PostgreSQL 42752080329 and Node 42752080197 were pending when recorded.",
-        "Governance source f6fe1d53aa4010db246d016b35669f34c9963ab8 run 42752184634 FAILED because deployable scope_paths incorrectly included a nondeployable SQL test; corrected scope_paths to migration only, regression remains tracked under tests."
+        "Governance source f6fe1d53aa4010db246d016b35669f34c9963ab8 run 42752184634 FAILED because deployable scope_paths incorrectly included a nondeployable SQL test; corrected scope_paths to migration only, regression remains tracked under tests.",
+        "Exact code/test integration b4ed15a1515013dad43ba04dc4ff4a91db53a577 SQL+signed JWT source-bound isolated PostgreSQL run42752080329 COMPLETED SUCCESS; decoded job log proves admin_member_deletion executed and PASS with synthetic null-actor conflict, no hosted deletion.",
+        "Exact code/test source b4ed15a1515013dad43ba04dc4ff4a91db53a577 Node22/test/build run42752080197 COMPLETED SUCCESS and cloud/mobile/browser run42752080471 COMPLETED SUCCESS.",
+        "Docs-only queue repair 584679dde5866753cb1a929af403fb1aeadc577e governance run42752264988 COMPLETED SUCCESS, literal log queue intake PASS (10 deployable paths) and same-commit continuity PASS. GitHub compare confirms all 2 commits after b4ed edit ONLY docs/RELEASE_QUEUE.json, #509 ledger and journal; code/migration/test bytes unchanged.",
+        "READY solely for source-isolated migration path. No Supabase production apply or real user deletion. Publication remains independent source-bound candidate+fresh backup+owner one-use publish authorization."
       ],
       "ci_runs": [
         42752080227,
         42752080329,
         42752080197,
         42752080471,
-        42752184634
+        42752184634,
+        42752264988
       ],
-      "blockers": [
-        "Exact post-queue source-bound isolated PostgreSQL, Node22 and governance checks must finish successfully before independent READY assessment."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
-      "notes": "Development-only fail-closed conditional NULL-actor control-flow fix. No current affected live rows. No actor takeover, real account deletion, provider mutation, release approval or deployment. This is not READY or DEPLOYED; release after independent exact candidate testing and owner publish authority."
+      "notes": "Development-only fail-closed conditional NULL-actor control-flow fix. No current affected live rows. No actor takeover, real account deletion, provider mutation, release approval or deployment. This is not READY or DEPLOYED; release after independent exact candidate testing and owner publish authority.\nNovember 10 Run136d: independently source-bound PostgreSQL/signed-JWT, Node22, cloud/browser, and corrected governance CI all SUCCESS. Actual source b4ed and docs-only head 584 verified; READY for separate candidate assembly, not published/deployed. No owner action requested under #509 routine-fix notification policy."
     }
   ],
   "history": [
