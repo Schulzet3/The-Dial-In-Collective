@@ -1,0 +1,50 @@
+name: DIC Issue33 R93 original603 Aveley 432 selected conflicting elevation
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r93-aveley-432.yml
+      - scripts/audit/issue33-r93-aveley-432-check.mjs
+      - tests/coffee-issue33-r93-aveley-432.test.mjs
+      - docs/workstreams/ops-issue33-r93-aveley-20261110.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r93-aveley-432.yml
+      - scripts/audit/issue33-r93-aveley-432-check.mjs
+      - tests/coffee-issue33-r93-aveley-432.test.mjs
+permissions:
+  contents: read
+jobs:
+  current-selected-aveley:
+    name: original603-432-current-official
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Focused current selected positive and negative source checks
+        run: node --test tests/coffee-issue33-r93-aveley-432.test.mjs
+      - name: Guarded real public HTTPS and actual parser plus member review
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '432'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r93-aveley
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict exact selected identity and conflicting elevation proof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r93-aveley
+          DIC_ISSUE33_R93_VERIFY: '1'
+        run: node scripts/audit/issue33-r93-aveley-432-check.mjs
+      - name: Short-lived public HTML and proof receipt
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r93-aveley-432
+          path: /tmp/dic33-r93-aveley/
+          retention-days: 1
+          if-no-files-found: warn
