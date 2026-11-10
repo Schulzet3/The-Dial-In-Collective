@@ -1,0 +1,11 @@
+# #267 A20 — strict literal review (November 10, 2026)
+
+Development parent `43eb5b6d45790c041498b50acec6ed6336a563d1`; frozen tree `c54ade64eca30946df8858297578a172f5cf6fa8`, pin `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9`; executable tree `626d241ef5888bddee71b6e94ee30ea0cb8bee1e`, pin `9707553a64f88127826e8f5b2b36cd0651296e83`.
+
+Direct numbered AI semantic review (not independent human attestation): frozen F154 `docs/archive/2026-10-23-reconciliation/ACTIVE_WORK.previous.md:951–970` (20, Git blob `0583d24466c1fca349e0d9caab7ce3d57a0d908b`); pinned P427 `tests/sql/bootstrap.sql:1–34/34` (34, Git blob `805b2202f55f800e443cd134358d4dec24ec8f41`). All 54 lines include literal, 1-based number, blob, classification, behavior, quality, security/privacy/performance, obsolete/duplicate, exact current counterpart, testability, improvement and Locked fit in `docs/audits/issue267-v2-strict-batches/S2-DISJOINT-F154-951-970-P427-001-034-20261110-A20.json`. P427 current blob is identical, no live-only credit. Previous A19B F154:901–950 and P426:1–71 nonoverlapping. First frozen F001:1–41 independently revalidated earlier under S2-001, no duplicate new credit. Do not credit provisional V1/R2/C2 summary lines.
+
+Findings: F154 contains October #9/#34 owner-directed test-shot approval and detailed cleanup boundary, now dated archive; it does NOT permit agent SQL/data actions. P427 uses a guard on disposable `dic_ci` plus synthetic Auth/claims/RLS roles; it does NOT certify real signed GoTrue/Admin/member hosted Auth (#96 ownership). No reproduced present executable bug or proven dead code in these ranges. Latest #1756 signup-admission supersession preserved. All original member, shot, Community, 603 oracle, migrations, credentials, backups unchanged.
+
+Risk/testing: no application code/test/CI changes, so Node22/lint/build/browser/mobile/offline/SQL/Auth/provider tests NOT RUN, not claimed PASS. PR-head and merged-source governance CI PENDING before independent checks. No release READY, no production/provider writes or Netlify deployment.
+
+Continue exact **F154 line971** and **P428 tests/sql/issue-5-10-signed-http-fixture.sql line1**, plus separate live/post-pin source changes; first check other #267 PRs for overlapping ranges. Issue remains OPEN/NOT COMPLETE.
