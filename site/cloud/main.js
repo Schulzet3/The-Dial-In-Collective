@@ -92,7 +92,7 @@ class CloudApp {
   this.expanded.clear();this.shotExpanded.clear();this.search='';this.searchOpen=false;
   this.dismissedDoseAdvisories.clear();this.recommendationEvidence={};this.recommendationEvidenceRequests.clear();this.recommendationEvidenceAttemptedAt.clear();
   this.lastHeavySyncAt=0;this.adminAttentionCount=null;this.adminAttentionTask=null;this.adminAttentionOwner=null;this.adminAttentionEpoch=null;
-  this.tempCoffee=null;this.justSavedId=null;this.notice='';this.recovery=false;
+  this.tempCoffee=null;this.justSavedId=null;this.notice='';this.recovery=false;this.syncState='connecting';
   this.draft=null;this.editing=null;this.logCoffee=null;this.addCoffeeDraft=null;
   this.addCoffeeMatches=null;this.pendingMergeSubmissionId=null;
   this.coffeeUrlSourceReview=null;this.pendingCoffeeReview=null;
@@ -394,6 +394,14 @@ class CloudApp {
   const password=(fresh=false)=>field(fresh?'New Password':'Password','password','',{type:'password',required:true,extra:`autocomplete="${fresh?'new-password':'current-password'}" ${fresh?'minlength="8" aria-describedby="password-requirements"':''}`});
   if(this.recovery)return `<section class=welcome><h2>Choose A New Password</h2><form id=auth-password>${password(true)}${freshHint}<button class="primary full space-top">Save Password</button></form></section>`;
   if(this.identity&&globalThis.navigator?.onLine===false)return `<section class=welcome><h2>Reconnect To Continue</h2><p class=helper>Your saved workspace is unavailable offline until a previously admitted account and local session can be confirmed.</p></section>`;
+  // Auth INITIAL_SESSION can identify a member before the server verifies admission.
+  // Unknown access is never a pending-approval decision; keep private data gated.
+  if(this.identity&&!this.status){
+   const verifying=this.syncState!=='offline';
+   return `<section class="welcome cloud-auth" aria-live="polite"><h2>${verifying?'Checking Account Access':'Connection Needed'}</h2>
+    <p class="helper">${verifying?'Verifying your account before opening your workspace.':'Unable to verify account access. Check your connection and try again.'}</p>
+    ${verifying?'':button('Try Again','check-approval','','primary full space-top')+button('Sign Out','signout','','text-button')}</section>`;
+  }
    if(this.identity){
     const state=this.status?.approvalState;
     const title=state==='rejected'?'Account Request Declined':state==='revoked'?'Account Access Removed':'Account Approval Pending';
