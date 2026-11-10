@@ -3499,6 +3499,24 @@
       "ci": "PENDING",
       "provider_writes": false,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 #509 Run137b itemized all 68 function ACLs and exact-source dev READY",
+      "source_sha": "5964553fcdb3ba58db91584645f1e2b2a99ebbb2",
+      "receipt_path": "docs/audits/issue509-provider-security-definer-acl-68-itemized-2026-11-10-run137b.json",
+      "reviewed_visible_acl_records": 68,
+      "total_visible_acl_records": 68,
+      "public_execute_outliers": 2,
+      "ci_runs": [
+        42757946574,
+        42757946361,
+        42757946343,
+        42757946470
+      ],
+      "ci_conclusions": "SUCCESS_ALL_FOUR",
+      "queue_state": "READY_NOT_DEPLOYED",
+      "production_writes": false,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -15918,5 +15936,27 @@
     "baseline_complete": false,
     "ci": "PENDING",
     "next": "Read back source-bound isolated PostgreSQL + Node + governance CI; harden/correct failures; otherwise continue new provider source."
+  },
+  "provider_admin_delete_definer_acl_run137b": {
+    "status": "ITEMIZED_68_OF_68_LIVE_DEFINER_ACL_RECORDS_AND_EXACT_SOURCE_4_CI_PASS_READY_DEV_ONLY",
+    "source_code_sha": "5964553fcdb3ba58db91584645f1e2b2a99ebbb2",
+    "receipt_path": "docs/audits/issue509-provider-security-definer-acl-68-itemized-2026-11-10-run137b.json",
+    "total": 68,
+    "reviewed": 68,
+    "live_public_execute_exceptions": 2,
+    "ci_runs": [
+      42757946574,
+      42757946361,
+      42757946343,
+      42757946470
+    ],
+    "ci_conclusions": "ALL_FOUR_COMPLETED_SUCCESS",
+    "queue_item": "DIC-Q-509-private-delete-definer-execute-acl",
+    "queue_state": "READY_NOT_DEPLOYED",
+    "source_fixes": 1,
+    "provider_writes": false,
+    "new_code_word_coverage": 0,
+    "baseline_complete": false,
+    "next": "Changed/new provider object or access gap; native+hosted Auth private settings unverified"
   }
 }
