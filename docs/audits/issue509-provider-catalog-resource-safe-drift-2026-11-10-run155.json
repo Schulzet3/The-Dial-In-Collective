@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 155,
+  "project_ref": "azviqqejypsefzilgonr",
+  "observed_utc": "2026-11-10T22:47:26.857067Z",
+  "authority": "PROVIDER_READ_ONLY; GITHUB_DEVELOPMENT_DOCS_ONLY; NO_PRODUCTION_WRITES",
+  "development_parent_sha": "97a1bd5ec811e798230b8e454c6e74ab0f8c94e7",
+  "main_sha": "11e1e8c7c36dad488519476d8a969bb682915d31",
+  "release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+  "provider_health": "ACTIVE_HEALTHY",
+  "postgres_version": "17.11.0.003",
+  "substantive_work": "Independently diagnosed and corrected a provider catalog inventory resource-exhaustion query; executed safe equivalent with 14 schema rows, full 106-function and 96-index stable-hash drift reconciliation to Run150/Run151, bounded aggregate lock/error/temp statistics, three advisor categories, live migration/Edge/RLS validation.",
+  "operational_failure": {
+    "sqlstate": "53100",
+    "source": "Original run155 schema inventory query erroneously joined pg_namespace to pg_class, pg_proc and pg_type simultaneously with COUNT(DISTINCT ...) then GROUP BY; PostgreSQL returned could not write pgsql_tmp: No space left on device.",
+    "attribution": "New audit query, not a demonstrated application or member workload failure",
+    "original_query": "SELECT n.nspname, count(DISTINCT c.oid),count(DISTINCT x.oid),count(DISTINCT t.oid) FROM pg_namespace n LEFT JOIN pg_class c ON c.relnamespace=n.oid LEFT JOIN pg_proc x ON x.pronamespace=n.oid LEFT JOIN pg_type t ON t.typnamespace=n.oid GROUP BY n.nspname",
+    "read_only_explain_without_analyze": {
+      "estimated_intermediate_rows": 2243944,
+      "estimated_root_cost": 382724.85
+    },
+    "corrected_query_path": "docs/audits/issue509-run155-safe-schema-shape.sql",
+    "corrected_read_only_explain_without_analyze": {
+      "estimated_root_rows": 36,
+      "estimated_root_cost": 8792.01
+    },
+    "corrected_execution": "SUCCESS; 14 non-temporary schemas inventoried without combined one-to-many joins",
+    "postgres_log_24h_aggregate": {
+      "postgres_events": 54,
+      "sqlstate_53100_mentions": 1,
+      "disk_error_text_mentions": 0
+    },
+    "persistent_exhaustion": "NOT_DEMONSTRATED; subsequent safe SQL succeeded and project health ACTIVE_HEALTHY",
+    "mitigation": "Use isolated per-namespace correlated counts, no cross-product joins or ANALYZE; do not repeat the failing query."
+  },
+  "current_safe_provider_counts": {
+    "schema_relations": {
+      "auth": 27,
+      "extensions": 2,
+      "graphql": 0,
+      "graphql_public": 0,
+      "information_schema": 69,
+      "pg_catalog": 142,
+      "pg_toast": 0,
+      "pgbouncer": 0,
+      "private": 23,
+      "public": 22,
+      "realtime": 3,
+      "storage": 8,
+      "supabase_migrations": 1,
+      "vault": 2
+    },
+    "app_tables": 45,
+    "app_tables_rls_enabled": 45,
+    "app_functions": 106,
+    "app_security_definers": 66,
+    "app_indexes": 96,
+    "invalid_or_unready_app_indexes": 0,
+    "live_migrations": 59,
+    "active_jwt_required_edge_functions": 3,
+    "function_hashes_compared_to_run150": 106,
+    "function_hash_mismatch": 0,
+    "index_hashes_compared_to_run151": 96,
+    "index_hash_mismatch": 0
+  },
+  "resource_numeric_at_observation": {
+    "database_bytes": 16823987,
+    "cumulative_temp_files_since_stats_reset": 49252,
+    "cumulative_temp_bytes_since_stats_reset": 135551165700,
+    "stats_reset": "2026-10-02T18:01:15Z",
+    "deadlocks_since_reset": 0,
+    "waiting_locks_snapshot": 0,
+    "sql_statement_temp_block_metrics_reviewed": 12
+  },
+  "advisories": {
+    "security": "8 private RLS/no-policy INFO; 10 signed-in callable SECURITY DEFINER WARN (previously reviewed, not an automatically demonstrated defect); 1 owner-accepted leaked-password protection WARN",
+    "performance": "13 unindexed FK INFO; 8 zero-scan indexes INFO; no removal justified",
+    "health": 0
+  },
+  "zero_private_data_access": true,
+  "new_first_time_provider_source_word_credit": 0,
+  "issue267_source_line_credit": 0,
+  "new_confirmed_application_defects": 0,
+  "code_fixes": 0,
+  "provider_mutations": 0,
+  "release_queue_changes": 0,
+  "baseline_complete": false,
+  "unverified": [
+    "Hosted GoTrue/JWT/PostgREST exposed-schema controls and real-account session boundary",
+    "Compiled/native provider implementations",
+    "True storage capacity/free-space from provider console"
+  ],
+  "next": "Continue first changed/new/unreviewed provider definition after Run154; resume hosted API/Auth evidence in coordination with #96; retain hourly drift, treat catalog resource error as audit query failure mitigated rather than project outage."
+}

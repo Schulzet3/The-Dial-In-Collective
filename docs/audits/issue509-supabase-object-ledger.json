@@ -3704,6 +3704,15 @@
       "scope": "85 new provider objects; 65/65 full view SQL; 11/11 full SQL helper; 4/4 standard metadata table full catalog; 5/5 domain definitions; no bug; no #267 code credit",
       "provider_writes": 0,
       "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-10",
+      "event": "RUN155_CATALOG_RESOURCE_EXHAUSTION_QUERY_MITIGATED_106_FUNCTION_96_INDEX_HASH_MATCH",
+      "development_parent_sha": "97a1bd5ec811e798230b8e454c6e74ab0f8c94e7",
+      "evidence_path": "docs/audits/issue509-provider-catalog-resource-safe-drift-2026-11-10-run155.json",
+      "no_live_writes": true,
+      "first_time_provider_source_words": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -16651,5 +16660,17 @@
     "production_writes": 0,
     "provider_baseline_complete": false,
     "next": "First genuinely changed/new/unreviewed provider object outside information_schema; hosted API/native compiled implementations UNVERIFIED"
+  },
+  "provider_catalog_resource_safe_drift_run155": {
+    "state": "SAFE_CORRECTED_SCHEMA_INVENTORY_AND_PROVIDER_HASH_DRIFT_NO_NEW_APP_DEFECT",
+    "development_parent_sha": "97a1bd5ec811e798230b8e454c6e74ab0f8c94e7",
+    "receipt_path": "docs/audits/issue509-provider-catalog-resource-safe-drift-2026-11-10-run155.json",
+    "safe_query_path": "docs/audits/issue509-run155-safe-schema-shape.sql",
+    "app_function_comparison": "106_OF_106_FULL_DEFINITION_MD5_MATCH",
+    "app_index_comparison": "96_OF_96_DDL_MD5_MATCH",
+    "catalog_error": "53100_SQL_AUDIT_CARTESIAN_RESOURCE_ERROR_OWNED_AND_CORRECTED",
+    "no_live_writes": true,
+    "baseline_complete": false,
+    "next": "Genuinely changed/new provider object; hosted JWT/PostgREST boundaries; native internals UNVERIFIED"
   }
 }
