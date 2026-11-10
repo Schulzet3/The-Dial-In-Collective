@@ -11,7 +11,7 @@ const admin='10000000-0000-4000-8000-000000000001',member='20000000-0000-4000-80
 const token='signup:30000000-0000-4000-8000-000000000001';
 const jwt='x'.repeat(50);
 const vars={SUPABASE_URL:base,SUPABASE_PUBLISHABLE_KEY:'sb_publishable_test',
- SUPABASE_SERVICE_ROLE_KEY:'test_service_role_never_public',
+ SUPABASE_SECRET_KEY:'sb_secret_test_service_never_public',
  DIC_ADMIN_PUSH_VAPID_PUBLIC_KEY:'public_test_key',
  DIC_ADMIN_PUSH_VAPID_PRIVATE_KEY:'private_test_key'};
 const env=name=>vars[name];
@@ -43,7 +43,7 @@ test('Admin can read only public push key; service credentials never enter respo
  const response=await h.handler(authRequest());
  assert.equal(response.status,200);
  const data=await response.json();assert.deepEqual(data,{ok:true,publicKey:'public_test_key'});
- assert.equal(JSON.stringify(data).includes(vars.SUPABASE_SERVICE_ROLE_KEY),false);
+ assert.equal(JSON.stringify(data).includes(vars.SUPABASE_SECRET_KEY),false);
 });
 test('Register seeds existing action tokens and scopes owner to verified auth identity',async()=>{
  const h=apiHarness();
@@ -53,6 +53,8 @@ test('Register seeds existing action tokens and scopes owner to verified auth id
  assert.ok(insertion);const body=JSON.parse(insertion.options.body);
  assert.equal(body.owner_id,admin);assert.equal(body.endpoint_hash,endpointFingerprint(endpoint));
  assert.deepEqual(body.seen_tokens,[token]);assert.equal(body.email,undefined);
+ assert.equal(insertion.options.headers.apikey,vars.SUPABASE_SECRET_KEY);
+ assert.equal(insertion.options.headers.Authorization,undefined,'Modern secret key is API-only, never Bearer');
 });
 test('Rejects forged endpoint and unlisted service hosts before service-role writes',async()=>{
  const h=apiHarness();

@@ -18,3 +18,5 @@
 - **Nov 10 governance/intake:** Recorded scoped owner decision in BOTH canonical spec and decision ledger and approval coverage; TESTING queue includes eight exact deployable paths (not tests). Pending frontend/Netlify/server/SQL tests, CI, safe integration, deployment secrets and physical-device proof. No provider writes or deployment.
 
 - **Failure/fix:** PR head 96f39aa28ab0 cloud/mobile browser build 42926604188 failed: site graph reported missing shipped asset admin/main.js -> admin/push.js. Corrected explicit build_cloud.mjs source copy allowlist and queue scope; same source-only commit; re-run complete applicable CI, not yet PASS. No release or hosted changes.
+
+- **Source compatibility fix (2026-11-10):** Official Supabase API-key guidance specifies modern `sb_secret_` credentials on `apikey` only, never `Authorization: Bearer`. Corrected registration and scheduled sender to use `SUPABASE_SECRET_KEY` (optional legacy JWT `SUPABASE_SERVICE_ROLE_KEY` fallback) and tested that modern server secrets are not emitted as bearer tokens or returned to browser. Requires new exact CI; old runs not reused for corrected source.

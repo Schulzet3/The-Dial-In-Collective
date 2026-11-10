@@ -11,7 +11,7 @@ const uuid=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const urlAllowed=url=>/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(String(url||''));
 function config(env){
  return {url:env('SUPABASE_URL'),publishable:env('SUPABASE_PUBLISHABLE_KEY'),
-  service:env('SUPABASE_SERVICE_ROLE_KEY'),publicKey:env('DIC_ADMIN_PUSH_VAPID_PUBLIC_KEY')};
+  service:env('SUPABASE_SECRET_KEY')||env('SUPABASE_SERVICE_ROLE_KEY'),publicKey:env('DIC_ADMIN_PUSH_VAPID_PUBLIC_KEY')};
 }
 export function createAdminPushHandler({fetcher=fetch,env=envDefault}={}){
  return async request=>{
@@ -42,7 +42,8 @@ export function createAdminPushHandler({fetcher=fetch,env=envDefault}={}){
    try{data=JSON.parse(raw);}catch{return response({ok:false,reason:'invalid_subscription'},400);}
    const endpoint=safePushEndpoint(data?.endpoint);
    if(!endpoint)return response({ok:false,reason:'invalid_subscription'},400);
-   const serviceHeaders={apikey:cfg.service,Authorization:'Bearer '+cfg.service,'Content-Type':'application/json'};
+   const serviceHeaders={apikey:cfg.service,'Content-Type':'application/json',
+    ...(cfg.service.startsWith('sb_secret_')?{}:{Authorization:'Bearer '+cfg.service})};
    const rest=async(path,options={})=>{
     const result=await fetcher(cfg.url+'/rest/v1/'+path,{redirect:'error',cache:'no-store',
      headers:{...serviceHeaders,...(options.prefer?{Prefer:options.prefer}:{})},
