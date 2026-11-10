@@ -1,3 +1,4 @@
+import {selectedLiteralBroadBlendRegions} from './coffee-selected-broad-blend-regions.mjs';
 import {selectedCoffeeContextRoles} from './coffee-selected-context-roles.mjs';
 import {selectedDirectProductCredits,selectedNamedCurrentDecafEvidence,selectedCurrentDecafSpecMethodEvidence,selectedFormTitleWaterDecafEvidence} from './coffee-direct-product-prose.mjs';
 import {rawElements,removeElements,removeComments} from '../../supabase/functions/_shared/html-scan.mjs';
@@ -2516,6 +2517,20 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
     section:'Exact selected current product H1, country and locality'
    });
   }
+ }
+
+ // Recover the second explicitly named broad bean region only when a
+ // weaker first-region fallback matches the exact selected product sentence.
+ // Never override specific countries or any already-conflicting origin.
+ const broadBlend=!conflicts.has('origin')?
+  selectedLiteralBroadBlendRegions(productCoffeeProse(canonicalProduct,clean),{origin:fields.origin}):null;
+ if(broadBlend){
+  rememberCoffeeReviewCandidate(fields,'origin',fields.origin,'Earlier partial broad origin');
+  fields.origin=broadBlend.value;
+  if(source_facts.length<384)source_facts.push({
+   field:'origin',label:'Exact selected two-region bean blend',value:broadBlend.quote,
+   source_url,source_type:'html',section:'Current selected product description'
+  });
  }
 
  // Conditional descriptions like "Whether washed or natural process" are
