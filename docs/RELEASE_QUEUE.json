@@ -10776,6 +10776,41 @@
       "delivered_tested_source_sha": "2cb38e3020a2ab7dc0d7d0c62b5db79f14b64c88",
       "delivered_release_sha": "bf3a82484ab2443a5d8b4dc78075ca5a4d875532",
       "delivered_netlify_deploy_id": "6af27603a5fade7d94df9e99"
+    },
+    {
+      "id": "DIC-Q-1756-admin-signup-approval-retire-invites",
+      "issue": 1756,
+      "pr": 1757,
+      "title": "Remove beta invitation codes and require verified administrator approval for new accounts with attention notifications",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/cloud/client.js",
+        "site/cloud/main.js",
+        "site/cloud/confirmation.js",
+        "site/admin/main.js",
+        "site/admin/view.js",
+        "site/admin/styles.css",
+        "supabase/migrations/20261110020500_dic_admin_signup_approval_retire_invites.sql"
+      ],
+      "tests": [
+        "PR1757 first CI failed because old invitation-era SQL/Node/browser fixtures and coverage inventory; source-only migration applied in isolated dic_ci but auth.session_status() authenticated permission was missing. Repairs, full exact CI and user acceptance pending."
+      ],
+      "ci_runs": [
+        42740108000,
+        42740107975,
+        42740107909,
+        42740107838,
+        42740707411,
+        42740707393,
+        42740707571,
+        42740707453
+      ],
+      "blockers": [
+        "Auth/SQL/role/cross-account/UI regression and full exact-source CI must pass; production legacy code removal only under new explicit Publish command and verified encrypted recovery."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1756",
+      "notes": "Owner explicit Locked supersession recorded in BOTH docs/MASTER_SPECIFICATION.md and DECISION_LEDGER.json. Development-only source, not deployed. Existing members, Auth identities and all history protected; every legacy invitation token/code still present in production pending future authorized SQL migration. No off-app email/push promise; in-portal attention badge and optional browser alerts while Admin open."
     }
   ],
   "history": [

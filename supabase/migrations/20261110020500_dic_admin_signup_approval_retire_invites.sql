@@ -38,6 +38,8 @@ select jsonb_build_object(
  'backupConfigured',false,'communityLive',false,'mode','owner-test');
 $fn$;
 revoke all on function private.session_status() from public,anon,authenticated;
+-- Maintain existing authenticated public.dic_session_status() wrapper rights.
+grant execute on function private.session_status() to authenticated;
 
 create or replace function private.dic_admin_signup_requests(p_offset integer default 0,p_limit integer default 50)
 returns jsonb language plpgsql stable security definer set search_path='' as $fn$
