@@ -50,6 +50,7 @@ import {selectedDottedTitleCountryRegion} from './coffee-dotted-title-region.mjs
 import {selectedProcessingSiteNotFarmOrigin} from './coffee-processing-site-origin-guard.mjs';
 import {selectedCurrentColombianDepartmentOrigin} from './coffee-selected-department-origin.mjs';
 import {selectedCurrentNamedMicroLotSector} from './coffee-selected-microlot-sector-origin.mjs';
+import {selectedCurrentNamedGrowingValley} from './coffee-selected-growing-valley-origin.mjs';
 import {conflictingCurrentSelectedDecafSource} from './coffee-selected-decaf-origin-conflict.mjs';
 
 // A chosen current selected coffee description can be more authoritative than
@@ -2245,6 +2246,24 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    });
   }
  }
+ // Exact selected product's own present-growing valley and matching H1
+ // refine only its independently accepted current country, not SEO or
+ // title geography alone. Competing or historical claims fail closed.
+ if(fields.origin&&!conflicts.has('origin')&&
+  geographyParts(fields.origin).length===1&&ORIGIN_COUNTRIES.has(keyOf(fields.origin))){
+  const valley=selectedCurrentNamedGrowingValley({
+   name:fields.name,origin:fields.origin,blocks:productCoffeeProse(canonicalProduct,clean)
+  });
+  if(valley){
+   rememberCoffeeReviewCandidate(fields,'origin',fields.origin,'Broader selected country');
+   fields.origin=valley.value;
+   if(source_facts.length<384)source_facts.push({
+    field:'origin',label:'Current selected growing valley',value:valley.quote,
+    source_url,source_type:'html',section:'Exact selected own valley and H1'
+   });
+  }
+ }
+
  // Direct present selected department beats irrelevant continental context.
  if(fields.origin&&!conflicts.has('origin')){
   const selectedDepartment=selectedCurrentColombianDepartmentOrigin({
