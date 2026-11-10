@@ -10782,8 +10782,8 @@
       "issue": 1756,
       "pr": 1757,
       "title": "Remove beta invitation codes and require verified administrator approval for new accounts with attention notifications",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "e6d5daca85617903cef93c67628c19e3de049bb2",
       "scope_paths": [
         "site/cloud/client.js",
         "site/cloud/main.js",
@@ -10796,7 +10796,9 @@
       ],
       "tests": [
         "PR1757 first CI failed because old invitation-era SQL/Node/browser fixtures and coverage inventory; source-only migration applied in isolated dic_ci but auth.session_status() authenticated permission was missing. Repairs, full exact CI and user acceptance pending.",
-        "Current live in-app guide onboarding retires invitation instruction; Node regression asserts verified Admin pending, code-free UX. Exact CI pending."
+        "Current live in-app guide onboarding retires invitation instruction; Node regression asserts verified Admin pending, code-free UX. Exact CI pending.",
+        "Owner-Locked #1756 exact PR head fccb68149921a3f26254588e0749f9b456117c8c all five independently verified SUCCESS: source security 42743938846, approval/coverage 42743938892, isolated PostgreSQL+signed JWT/RLS/Auth 42743938579, browser/mobile/offline/UX 42743938970, 3,000+ Node/lint/build 42743938607. Frozen603 irrelevant and SKIPPED, not PASS.",
+        "Nonforce merged e6d5daca85617903cef93c67628c19e3de049bb2 with 15 relevant source/test/Locked/queue blobs byte-for-byte identical to reviewed PR head; exact merged approval/security inventory 42744216234, isolated SQL/JWT 42744216192, browser/mobile/offline 42744216264 and Node/lint/build 42744216155 SUCCESS. Separate merged security workflow was not triggered: retain successful PR-head security check, no fabricated merged PASS."
       ],
       "ci_runs": [
         42740108000,
@@ -10806,13 +10808,20 @@
         42740707411,
         42740707393,
         42740707571,
-        42740707453
+        42740707453,
+        42743938846,
+        42743938892,
+        42743938579,
+        42743938970,
+        42743938607,
+        42744216234,
+        42744216192,
+        42744216264,
+        42744216155
       ],
-      "blockers": [
-        "Auth/SQL/role/cross-account/UI regression and full exact-source CI must pass; production legacy code removal only under new explicit Publish command and verified encrypted recovery."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1756",
-      "notes": "Owner explicit Locked supersession recorded in BOTH docs/MASTER_SPECIFICATION.md and DECISION_LEDGER.json. Development-only source, not deployed. Existing members, Auth identities and all history protected; every legacy invitation token/code still present in production pending future authorized SQL migration. No off-app email/push promise; in-portal attention badge and optional browser alerts while Admin open."
+      "notes": "Owner explicit Locked supersession recorded in BOTH docs/MASTER_SPECIFICATION.md and DECISION_LEDGER.json. Development-only source, not deployed. Existing members, Auth identities and all history protected; every legacy invitation token/code still present in production pending future authorized SQL migration. No off-app email/push promise; in-portal attention badge and optional browser alerts while Admin open. | #1756 SOURCE READY 2026-11-10 UTC, NOT DEPLOYED. Existing hosted Auth11/admitted11/shots26/notes26/Community12 and 17 used/unused invitation code records unchanged. New source migration must only purge historical codes on a separately explicitly owner-authorized production Publish and after verifying fresh encrypted backups, preserving Auth/member/Community history. In-app Admin attention mandatory, browser notifications only with permission while Admin open, no external email/push provider claim. #96/#267/#509 preserved."
     }
   ],
   "history": [
