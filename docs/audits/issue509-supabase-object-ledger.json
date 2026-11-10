@@ -3417,6 +3417,16 @@
       "conclusion": "SUCCESS",
       "production_writes": false,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 #509 Run135 complete live stored SQL of 2 newly released migrations",
+      "source_parent_sha": "4192d271d832bb93f4c9758bbc3cd3078610278a",
+      "receipt_path": "docs/audits/issue509-provider-new-migration-full-sql-2026-11-10-run135.json",
+      "reviewed": 2,
+      "total_current_stored_migrations": 56,
+      "source_exact_release_match": true,
+      "provider_writes": false,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -15753,5 +15763,21 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "First genuinely unreviewed or changed catalog source, bounded logs, hosted settings where available."
+  },
+  "provider_new_migration_sql_run135": {
+    "status": "NEW_MIGRATIONS_COMPLETE_DIRECT_STORED_SQL_REVIEW_EXACT_RELEASE_IDENTITY",
+    "development_parent_sha": "4192d271d832bb93f4c9758bbc3cd3078610278a",
+    "receipt_path": "docs/audits/issue509-provider-new-migration-full-sql-2026-11-10-run135.json",
+    "prior_stored_sql_reviewed": 54,
+    "current_stored_sql_reviewed": 56,
+    "current_stored_sql_total": 56,
+    "reviewed_new": 2,
+    "new_source_characters": 38256,
+    "new_source_words": 3247,
+    "provider_writes": false,
+    "confirmed_new_defect": 0,
+    "code_change": false,
+    "baseline_complete": false,
+    "next": "New/changed provider source; isolated nullable prior actor branch proof under #1676; hosted native/config unverified"
   }
 }
