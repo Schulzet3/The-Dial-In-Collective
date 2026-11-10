@@ -1966,12 +1966,11 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    if(description)fields.tasting_notes=description;
    const finish=refineSelectedCurrentLiteralFinish(currentProduct,{clean,notes:fields.tasting_notes});
    if(finish)fields.tasting_notes=finish;
-   // Only unlabelled current selected prose may add an intrinsic flavor base
-   // when its directly coordinated suffix exactly repeats the accepted notes.
-   if(!printedNotes.length){
-    const flavorBase=refineSelectedCurrentFlavorBase(currentProduct,{clean,notes:fields.tasting_notes});
-    if(flavorBase)fields.tasting_notes=flavorBase;
-   }
+   // The chosen current paragraph's literal base and identical already
+   // accepted note suffix are a higher-authority direct description, even
+   // when an inferred notes caption has been indexed as a printed profile.
+   const flavorBase=refineSelectedCurrentFlavorBase(currentProduct,{clean,notes:fields.tasting_notes});
+   if(flavorBase)fields.tasting_notes=flavorBase;
   }
   // A distinct current selected flavor sentence is review evidence, not a
   // license to concatenate notes or override a stronger literal Flavor label.

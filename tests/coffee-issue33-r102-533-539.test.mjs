@@ -80,5 +80,5 @@ test('helper rejects duplicated identity, altered selected notes and milk-as-ing
  assert.match(refineSelectedCurrentFlavorBase(single,{clean,notes:'stone fruit and honey'}),/milk chocolate/i);
  assert.equal(refineSelectedCurrentFlavorBase(duplicate,{clean,notes:'stone fruit and honey'}),'');
  assert.equal(refineSelectedCurrentFlavorBase(single,{clean,notes:'orange and honey'}),'');
- assert.equal(refineSelectedCurrentFlavorBase(markup(e,'<p>When served with milk, '+body+'</p>'),{clean,notes:'stone fruit and honey'}),'');
+ assert.equal(refineSelectedCurrentFlavorBase(markup(e,'When served with milk, Its milk chocolate base is complemented with notes of stone fruit and honey.'),{clean,notes:'stone fruit and honey'}),'');
 });
