@@ -26,7 +26,7 @@ for(const n of [409,410,411]){
   assert.equal(selectedWhiteRhinoChecks(n,page(c,'',aside),[c.name]).ownDescription,false);
  });
  test('#'+n+' selected source removal is an explicit failure',()=>{
-  const removed=c.story.replace(n===409?'Swiss Water Process':n===410?'Ismael Hassen':'Washed Peru','RETRACTED');
+  const removed=c.story.replaceAll(n===409?'Swiss Water Process':n===410?'Ismael Hassen':'Washed Peru','RETRACTED');
   assert.equal(selectedWhiteRhinoChecks(n,page(c,removed),[c.name]).ownDescription,false);
  });
  test('#'+n+' actual parser retains source-selected identity with hostile other-coffee aside',()=>{
