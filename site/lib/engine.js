@@ -707,7 +707,21 @@ export function isExtreme(s,shot) {
  // An imported positive but out-of-entry-bounds measurement is not a
  // qualifying reference for the mandatory four-shot outlier baseline.
  // Keep the original archived row and all five original ratings untouched.
+ // Older offline/archived rows can omit optional equipment readings;
+ // keep that compatibility. But explicitly recorded impossible controls
+ // cannot supply the four measured all-green outlier references. Same-version
+ // espresso limits are the existing setup's bounds, not new taste targets.
+ const version=s.setups?.flatMap(set=>set.versions||[])
+  .find(v=>v.id===shot.setupVersionId);
+ const eligibleControls=x=>{
+  if(x.grindSetting!=null&&(
+   !finite(x.grindSetting)||x.grindSetting<0||
+   (finite(version?.grinderMin)&&x.grindSetting<version.grinderMin)||
+   (finite(version?.grinderMax)&&x.grindSetting>version.grinderMax)))return false;
+  return x.tempC==null||validRecordedTemperature(x.tempC);
+ };
  const prior=measuredRecipeShots(s.shots).filter(x=>!x.hidden&&x.dialedIn===true&&isDialed(x.tasteScales)&&
+  eligibleControls(x)&&
   x.coffeeId===shot.coffeeId&&x.style===shot.style&&
   x.setupVersionId===shot.setupVersionId&&x.id!==shot.id&&
   // Do not let *explicitly different* feed, basket, or grind-calibration
