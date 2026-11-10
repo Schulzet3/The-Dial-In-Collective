@@ -1,3 +1,11 @@
+## November 10, 2026 UTC — Issue #33 R77 original603 #591 Vail Yirgacheffe selected source VERIFIED [skip netlify]
+
+- Exact selected official original #591 Vail `Decaf Ethiopian Yirgacheffe SW`, own LIGHT roast, Oromia grower/region, heirloom, berries/Jasmine/Cocoa, natural cherry processing and separate Swiss Water decaf independently agree with actual source parser; Add Coffee and Source Review render, zero relevant conflicts. Nine focused tests PASS; no parser runtime fix or new READY.
+- [PR #1779](https://github.com/Schulzet3/The-Dial-In-Collective/pull/1779) safely nonforce merged `574ba3a51a62e733c3a0215f5119c2271d8b94eb` after first genuine Node/metadata failure (old #1756 device acceptance prefix) was repaired preserving all test/device/no-publish qualifiers. All five reviewed/merged blobs identical. Exact merged official source 42760986210, Node/lint 42760986460 (**3347 PASS / 0 FAIL / 6 SKIP**), cloud/browser 42760986364, Python 42760986284, approval 42760986387 SUCCESS. Original frozen603 and generic probe SKIPPED, not PASS; PR-head SQL SUCCESS.
+- Source ZIP/raw HTML/source/afterproof independently SHA256 verified against merged SHA, [permanent R77 receipt](docs/audits/issue33-original603-r77-591-current-official-verified-20261110.md). Frozen603 CSV/oracle/scorer untouched; issue #33 OPEN, whole 603 semantic certification incomplete, #267 V2/#96 separate. No Netlify or production/SQL/Auth/Edge/member writes.
+
+---
+
 ## November 10, 2026 — #1756 source notification fixes VERIFIED, NOT DEPLOYED [skip netlify]
 - PR1776 merged 1fa8ddc9d886025e404f936b75a106864916793b; exact head 5692ed2def92c097b5b07ace25d6673c3d7d3ee9 six CI pass, postmerge selective retries Node/browser pass. Signed-in Admin Settings gear/row and portal show email-verified signup approvals plus coffee review/conflicts and unfinished deletions; role/privacy/offline/390px Light/Dark tested synthetically. Existing accounts retained, old production invitation tokens still live until separately authorized Publish with verified encrypted backup/recovery; #1756 issue remains open.
 
