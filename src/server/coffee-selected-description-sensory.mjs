@@ -88,3 +88,35 @@ export function refineSelectedCurrentLiteralFinish(html,{clean,notes}={}){
  if(hits.size!==1)return '';
  return normalizeExplicitCoffeeTastingNotes([...parts,...hits].join(', '))||'';
 }
+
+
+// Exact selected-product additional literal prose: review context, NOT a
+// replacement for an independent, stronger printed Flavor/Notes label.
+export function selectedCoffeeSupplementalTastingProse(html,{clean,notes}={}){
+ if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function'||
+  typeof notes!=='string'||notes.length<8||notes.length>300)return '';
+ const blocks=productCoffeeProse(html,clean);
+ const h1=blocks.filter(x=>x.tag==='h1'&&!x.educational);
+ if(h1.length!==1||!h1[0].text||h1[0].text.length>180)return '';
+ const canonical=notes.split(/\s*(?:,|&|[•·;|]|\band\b)\s*/iu).map(x=>x.trim()).filter(Boolean);
+ if(canonical.length<2||canonical.length>8)return '';
+ const candidates=[];
+ for(const block of blocks){
+  if(block.tag!=='p'||block.educational||block.text.length<25||block.text.length>1100||
+   unavailable.test(block.section)||NONCURRENT_COFFEE_PROSE.test(block.text))continue;
+  for(const sentence of block.text.split(/(?<=[.!?])\s+/u).slice(0,14)){
+   if(sentence.length>350||unavailable.test(sentence)||NONCURRENT_COFFEE_PROSE.test(sentence))continue;
+   const hit=sentence.match(/\b(?:the|its|this coffee['’]s?)\s+taste\s+(?:has|offers|features|shows)\s+(?:a\s+)?(?:tones?|notes?)\s+of\s+([^.!?;]{8,140})/iu);
+   if(!hit)continue;
+   const raw=hit[1].trim().replace(/\s+(?:tones?|notes?)$/iu,'');
+   const terms=raw.split(/\s+along\s+with\s+|,\s*|\s+and\s+/iu).map(s=>s.trim()).filter(Boolean);
+   if(terms.length<2||terms.length>6||terms.some(s=>s.length>36||s.split(/\s+/u).length>3||
+    /\b(?:body|acidity|finish|roast|process|producer|farm|coffee|tea|milk|syrup|flavor|sweetness|mouthfeel)\b/iu.test(s)))continue;
+   const value=normalizeExplicitCoffeeTastingNotes(terms.join(', '));
+   if(!value||terms.some(s=>canonical.some(c=>fold(s)===fold(c))))continue;
+   candidates.push(value);
+  }
+ }
+ // Two nonidentical extra descriptions are not one unambiguous context list.
+ return candidates.length===1?candidates[0]:'';
+}

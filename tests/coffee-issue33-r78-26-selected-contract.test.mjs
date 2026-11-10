@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {selectedBleu26Facts as current} from '../scripts/audit/issue33-r78-26-check.mjs';
+import {selectedCoffeeSupplementalTastingProse as context} from '../src/server/coffee-selected-description-sensory.mjs';
 const name='Ethiopia Yirgacheffe';
 const washed='Tied for second-highest rating. Processed by the washed method (fruit removed before drying). A washed Ethiopia cup gives a clean coffee.';
 const fruit='The taste has a tones of tangerine and citrus along with wine and berry tones.';
@@ -20,4 +21,25 @@ test('related navigation, footer, other coffee cannot supply missing selected fa
 test('shop checkout or variant controls do not establish origin or flavor',()=>{
  const d=current('<main><h1>'+name+'</h1>Single Origin</main><form><select><option>'+fruit+flavor+washed+conditional+'</option></select></form>',[name]);
  assert.equal(d.selectedWashed,false);assert.equal(d.directFruitClause,false);assert.equal(d.directDetailedFlavor,false);
+});
+
+const clean=html=>String(html||'').replace(/<[^>]{0,2000}>/gu,' ').replace(/\s+/gu,' ').trim();
+const canonical='Dark chocolate, gardenia, gently scorched cedar, red plum, hazelnut';
+const extra='The bright acidity and sweet flavor of these premium coffee beans are partly a result of wet processing. The taste has a tones of tangerine and citrus along with wine and berry tones.';
+test('distinct same-selected paragraph contributes review-only source context',()=>
+ assert.equal(context(page(washed,extra,flavor,conditional),{clean,notes:canonical}),'tangerine, citrus, wine, berry'));
+test('other selected heading or menu cannot contribute source context',()=>{
+ for(const html of ['<p>'+extra+'</p>',page(washed,'',flavor,conditional)+'<h1>Other Coffee</h1>',
+ '<main><h1>'+name+'</h1><nav><p>'+extra+'</p></nav></main>'])
+ assert.equal(context(html,{clean,notes:canonical}),'');
+});
+test('conditional, unrelated and generic prose are not qualifying supplemental notes',()=>{
+ for(const x of ['When brewed with milk, the taste has tones of tangerine and citrus along with berry tones.',
+ 'The taste of another coffee has tones of tangerine and citrus.',
+ 'The taste has tones of bright acidity and medium body.',
+ 'The taste has tones of tangerine and citrus when given a Dark Roast.'])
+ assert.equal(context(page(washed,x,flavor,conditional),{clean,notes:canonical}),'');
+});
+test('two incompatible additional clauses remain uncertified',()=>{
+ assert.equal(context(page(washed,extra+' The taste has notes of kiwi and papaya along with melon and stone fruit tones.',flavor,conditional),{clean,notes:canonical}),'');
 });

@@ -5,6 +5,7 @@ import {join,resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 import {selectedProductHeadings} from './issue33-selected-product-heading.mjs';
+import {extractPublicCoffeeFacts} from '../../src/server/coffee-page-metadata.mjs';
 const sha=x=>createHash('sha256').update(x).digest('hex');
 const clean=x=>String(x||'').replace(/<!--[\s\S]*?-->/gu,' ')
  .replace(/<(script|style|template|noscript|nav|aside|footer|header|form|select)\b[^>]*>[\s\S]*?<\/\1>/giu,' ')
@@ -44,8 +45,18 @@ if(process.env.DIC_ISSUE33_R78_VERIFY==='1'){
  const facts=selectedBleu26Facts(selected,headings);
  for(const [key,val] of Object.entries(facts))test(val,'current_direct_'+key);
  const notes=String(f.tasting_notes||'').toLowerCase();
- for(const token of ['dark chocolate','gardenia','scorched cedar','red plum','hazelnut','tangerine','citrus','wine','berry'])
-  test(notes.includes(token),'source_backed_tasting_'+token.replace(/\s+/gu,'_'));
+ for(const token of ['dark chocolate','gardenia','scorched cedar','red plum','hazelnut'])
+  test(notes.includes(token),'labeled_canonical_tasting_'+token.replace(/\s+/gu,'_'));
+ // Independently parse full untruncated source_facts, not the 45-row preview.
+ const full=raw?extractPublicCoffeeFacts(raw.toString('utf8'),{source_url:rec.final_url}):null;
+ const extras=(full?.source_facts||[]).filter(x=>x.field==='sensory_context'&&
+  x.label==='Selected current coffee additional flavor prose'&&x.source_type==='html');
+ const context=extras.map(x=>String(x.value||'').toLowerCase()).join(' ');
+ test(extras.length===1,'selected_review_context_exactly_once');
+ for(const token of ['tangerine','citrus','wine','berry']){
+  test(context.includes(token),'selected_review_flavor_'+token);
+  test(!notes.includes(token),'unlabeled_prose_not_canonical_'+token);
+ }
  test(f.name==='Ethiopia Yirgacheffe','current_parser_name');
  test(/\bwashed\b/iu.test(String(f.process||'')),'current_selected_washed');
  test(!f.roast_level,'conditional_roast_not_canonical');
@@ -54,6 +65,7 @@ if(process.env.DIC_ISSUE33_R78_VERIFY==='1'){
  test(!(rec.conflicts||[]).some(x=>/tasting|process|roast|name/iu.test(JSON.stringify(x))),'no_selected_field_conflict');
  const verdict={source_sha:report?.source_sha,case:26,source_json_sha256:reportBytes?sha(reportBytes):null,
   html_sha256:raw?sha(raw):null,headings,direct_facts:facts,parser_fields:f,
+  additional_review_facts:extras,
   conflicts:rec.conflicts||[],manual_certified:0,production_operations:0,
   passed:failures.length===0,failures};
  writeFileSync(join(dir,'r78-26-afterproof.json'),JSON.stringify(verdict,null,2)+'\n');
