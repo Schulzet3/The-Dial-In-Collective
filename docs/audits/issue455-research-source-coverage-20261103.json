@@ -1450,6 +1450,27 @@
       "current_app_crosswalk": "Exact development 3283bb3ceffc20aa6589e3f7a586b71cf82758d8: inspected site/lib/engine.js Git blob 9b0071f2bdd89b931662fe3232d4659524ad2e67 (baseline, measuredRecipeShots, grindGuidance, existing success veto, recommendation) and site/lib/constants.js style/taste bounds. Approved UI retains five independent 1-5 personal taste inputs and same-coffee measured shot history; Roast Date entry and Bag Management retired under prior owner decision. No storage-temperature or post-open month correction, storage data capture, or chemistry-to-taste causal calibration is authorized. Source alone does not reproduce a distinct SAFE Log Shot/Rate runtime defect.",
       "reviewed_date_utc": "2026-11-10",
       "implementation_status": "RESEARCH_ONLY_NO_APPLICATION_POLICY_QUEUE_OR_RELEASE_CHANGE"
+    },
+    {
+      "id": "LIT-2026-CUSIELO-ESPRESSO-SWEETENER-DECAF-QDA",
+      "type": "peer_reviewed_original_publisher_full_html_direct_bounded_methods_tables_results",
+      "title": "Between Bitterness and Sweetness: How Decaffeination and Sweeteners Shape the Sensory Experience of Espresso Coffee",
+      "authors": "Kalinca Vitoria Cardoso Cusielo; Alessandra Cazelatto de Medeiros; Erika Yumi Hiramatsu; Helena Maria André Bolini",
+      "journal": "Journal of Food Science 91(6):e71157",
+      "published": "2026-06-18",
+      "doi": "10.1111/1750-3841.71157",
+      "url": "https://ift.onlinelibrary.wiley.com/doi/10.1111/1750-3841.71157",
+      "original_source_url": "https://ift.onlinelibrary.wiley.com/doi/10.1111/1750-3841.71157",
+      "access": "PUBLISHER_FULL_HTML_ABSTRACT_METHODS_RESULTS_TABLE_1_2_3_4_DISCLOSURES; ORIGINAL_PDF_BINARY_FIGURE_PIXELS_RAW_RECORDS_SHA256_UNVERIFIED",
+      "review_status": "R455-160_DIRECT_SUBSTANTIVE_PUBLISHER_HTML_METHODS_2_1_TO_2_6_RESULTS_3_TABLES_2_TO_4_CONCLUSION_COI; PDF_NOT_INSPECTED",
+      "direct_review_provenance": "Publisher web text November 10 2026: lines 152-156 abstract, ~275-333 materials/7g-to-50mL automatic Jura 10 formulations/13 selected QDA 19 descriptors 4 repeats/120 consumers, ~339-455 Tables 2-4 actual cells + results, 475-484 acknowledgments/COI; original 2026-06-18 publication. Not full signed bytes, no source SHA256.",
+      "evidence_grade": "PEER_REVIEWED_SINGLE_COMMERCIAL_COFFEE_REGULAR_VS_DECAF_10_ADDED_SWEETENER_CONDITIONS_13_TRAINED_QDA_120_CONSUMER_SINGLE_SITE_DESCRIPTIVE_NOT_UNSWEETENED_PERSONAL_ESPRESSO_OPTIMIZATION",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Publisher HTML via web extraction, NOT locally byte-frozen; original PDF, full figure pixels, raw panel data/ANOVA design, statistical reanalysis and separate replication unverified.",
+      "claims_verified_externally": "Ten 2x5 sweetened formulations, none unsweetened; 7g/50mL fixed Jura automatic with pump rated 15bar, not actual measured puck pressure. 13 selected trained panel x4 repeats for 19 attributes; 120 separate consumer liking panel. Abstract cites 18 trained panelists while Methods says 13 selected and actually tested. Table 4 body ANOVA p(coffee)=0.1946, p(sweetener)=0.0874, interaction=0.9609, all >0.05, despite adjacent prose describing significant body variation. Table 3 pairwise letters not equivalent to significant whole-factor result. Table 4 coffee-flavor coffee-factor p=.0262 vs narrative saying coffee flavor no differences. Sweetener contributions directly affect sweetness/soluble solids, so no unsweetened-shot or personal five-scale causality. Authors declare no conflicts; funding CAPES and donations of sweeteners from Clariant / Stevia Farma.",
+      "current_app_crosswalk": "At dev f2d7d0146ad3920d89f9d728d388fa00482a7752 engine.js blob 9b0071f2bdd89b931662fe3232d4659524ad2e67, model.js blob 00c027c5f10d938fa2cc050572286eb9570817de, constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095: 5 original taste ratings and measured actual dose/yield/time/grind/optional temp; no sugar/decaf-based correction or chemical proxies. Same-coffee, grinder calibration, basket/feed and distinct styles stay approved.",
+      "reviewed_date_utc": "2026-11-10",
+      "implementation_status": "RESEARCH_ONLY_NO_NEW_NUMERIC_PRODUCT_RULE_NO_RUNTIME_CHANGE_OR_RELEASE"
     }
   ],
   "evidence_checks": [
@@ -4353,6 +4374,26 @@
       "result": "RESEARCH_BOUNDARY_PRESERVED; NO_SAFE_CORRECTNESS_DEFECT_DEMONSTRATED",
       "owner_approval": false,
       "date": "2026-11-10"
+    },
+    {
+      "id": "R455-EV-CIT-160-A",
+      "source": "LIT-2026-CUSIELO-ESPRESSO-SWEETENER-DECAF-QDA",
+      "claim": "Direct publisher Methods: 10 sweetened 2x5 regular/decaf formulations, no unsweetened arm, Jura programmed 7g/50mL; 13 QDA panelists selected despite abstract saying 18, four repeats; distinct 120-consumer hedonic test. No controlled DIC 1:2 extraction or same-coffee grind/yield optimization.",
+      "grade": "PRIMARY_FULL_HTML_REPRODUCIBLE_DESIGN_AND_INTERNAL_SAMPLE_COUNT_DISCREPANCY",
+      "current_app": "At dev f2d7d0146ad3920d89f9d728d388fa00482a7752 engine.js blob 9b0071f2bdd89b931662fe3232d4659524ad2e67, model.js blob 00c027c5f10d938fa2cc050572286eb9570817de, constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095: 5 original taste ratings and measured actual dose/yield/time/grind/optional temp; no sugar/decaf-based correction or chemical proxies. Same-coffee, grinder calibration, basket/feed and distinct styles stay approved.",
+      "result": "VERIFY_ORIGINAL_FORMULATION_AND_SAMPLE_COUNTS; NO_UNSWEETENED_CAUSAL_PERSONAL_TASTE_TARGET_SUPPORTED",
+      "owner_approval": false,
+      "date": "2026-11-10"
+    },
+    {
+      "id": "R455-EV-CIT-160-B",
+      "source": "LIT-2026-CUSIELO-ESPRESSO-SWEETENER-DECAF-QDA",
+      "claim": "Read Table 4 factor ANOVA body BDY coffee .1946, sweetener .0874, interaction .9609 (> .05) despite adjacent significant-body prose; Table 4 coffee-flavor coffee-factor .0262 while prose says no coffee flavor differences. Table 3 pairwise superscripts are a different contrast. CAPES funding/ingredient donations reported, declared no COI.",
+      "grade": "DIRECT_PUBLISHER_TABLE_VALUES_CHECKED_TEXT_AND_NARRATIVE_DISCREPANCIES; ORIGINAL_RAW_DATA_AND_PDF_UNVERIFIED",
+      "current_app": "At dev f2d7d0146ad3920d89f9d728d388fa00482a7752 engine.js blob 9b0071f2bdd89b931662fe3232d4659524ad2e67, model.js blob 00c027c5f10d938fa2cc050572286eb9570817de, constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095: 5 original taste ratings and measured actual dose/yield/time/grind/optional temp; no sugar/decaf-based correction or chemical proxies. Same-coffee, grinder calibration, basket/feed and distinct styles stay approved.",
+      "result": "FLAG_INTERNAL_NARRATIVE_TABLE_INCONSISTENCIES_WITHOUT_UNJUSTIFIED_STATISTICAL_CORRECTION_OR_ESPRESSO_TASTE_INFERENCE",
+      "owner_approval": false,
+      "date": "2026-11-10"
     }
   ],
   "policy_decisions_pending": [],
@@ -4450,33 +4491,34 @@
     "R455-157 @e951531567825ca688c9772628a4d8f09736487f: real model/UI/engine inconsistency corrected in code commit b7c46ac56947936f2701d8268fb690718d704159; 86 sources / 230 checks / 118 proposals; exact source PR-head and merged checks pending. No #267 line credit, no publish.",
     "R455-157 FINAL @1df0a4dae38fcc2937bab18d8428b10a383aea42: PR1802 nonforce merged and exact all six blobs verified; Node22 3385 PASS/0 FAIL/6 intentional SKIP, R157 5/5, merged approval/browser SUCCESS; queue READY development only, no release.",
     "R455-158 @8dcedae3179945a036aa774f45c21e4dc920c39b: direct engine/model/UI mismatch; stage one-predicate SAFE change and five synthetic groups, 87 sources / 232 bounded checks / 119 proposals. Tests/CI/merge UNVERIFIED at authoring. No #267 line credit or production action.",
-    "R455-158 FINAL @befc282154c5ddc15a123fc2d5ee37e87b2112f6: PR1809 nonforce merged, five source/testing blobs exact head, 5/5 new regression groups PASS, Node22 head/merge 3402/0/6, approval/browser/SQL/security appropriate SUCCESS; queue READY dev-only. 87 sources / 232 bounded checks / 119 proposals; original603 SKIPPED, #267 literal zero, S019 original unavailable, no publish."
+    "R455-158 FINAL @befc282154c5ddc15a123fc2d5ee37e87b2112f6: PR1809 nonforce merged, five source/testing blobs exact head, 5/5 new regression groups PASS, Node22 head/merge 3402/0/6, approval/browser/SQL/security appropriate SUCCESS; queue READY dev-only. 87 sources / 232 bounded checks / 119 proposals; original603 SKIPPED, #267 literal zero, S019 original unavailable, no publish.",
+    "R455-160 @f2d7d0146ad3920d89f9d728d388fa00482a7752: original 2026 Cusielo espresso/decaffeinated sweetener QDA 13 selected vs abstract 18 discrepancy and Table 4 body p>0.05 vs prose; 89 sources / 236 bounded checks / 121 proposals; no unsweetened/personal taste rule, no runtime/Locked/release change; docs CI/merge pending; S019 standalone inaccessible; #267 literal credit zero."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-159",
-    "base_development_sha": "3283bb3ceffc20aa6589e3f7a586b71cf82758d8",
+    "id": "R455-160",
+    "base_development_sha": "f2d7d0146ad3920d89f9d728d388fa00482a7752",
     "main_sha": "11e1e8c7c36dad488519476d8a969bb682915d31",
     "release_production_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
     "source_ids": [
-      "LIT-2024-GANTNER-SECONDARY-STORAGE-ESPRESSO-SENSORY"
+      "LIT-2026-CUSIELO-ESPRESSO-SWEETENER-DECAF-QDA"
     ],
     "claim_ids": [
-      "R455-EV-CIT-159-A",
-      "R455-EV-CIT-159-B"
+      "R455-EV-CIT-160-A",
+      "R455-EV-CIT-160-B"
     ],
     "proposal_ids": [
-      "R455-PROP-159-POSTOPEN-STORAGE-NOT-ESPRESSO-REST-TARGET"
+      "R455-PROP-160-SWEETENED-ESPRESSO-NOT-UNSWEETENED-TASTE"
     ],
-    "number_of_curated_sources": 88,
-    "total_evidence_checks": 234,
-    "number_of_proposals": 120,
-    "review_type": "DIRECT_PRIMARY_PUBLISHER_ESPRESSO_SENSORY_SECONDARY_STORAGE_POLICY_BOUNDARY",
+    "number_of_curated_sources": 89,
+    "total_evidence_checks": 236,
+    "number_of_proposals": 121,
+    "review_type": "DIRECT_PUBLISHER_ESPRESSO_DECAF_SWEETENER_QDA_SAMPLE_COUNT_AND_ANOVA_CONFLICT_AUDIT",
     "code_or_policy_changed": false,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
-    "status": "AUTHORING_COMPLETE_GIT_PR_HEAD_AND_MERGE_CI_PENDING",
-    "next_action": "Verify 4-file docs-only PR head, applicable documentation/governance checks, nonforce merge and exact readback; continue separate high-value UX defects and inaccessible S019 source without inventing approvals."
+    "status": "AUTHORING_COMPLETE_DOCS_ONLY_PR_HEAD_MERGE_CI_PENDING",
+    "next_action": "Source bound PR governance and nonforce merge; independently verify merged three docs, preserve S019 inaccessible and continue disjoint app UX correctness."
   },
   "policy_decisions_resolved": [
     {
@@ -6988,6 +7030,28 @@
       "release_queue_status": "NOT_APPLICABLE_NO_DEPLOYABLE_BEHAVIOR_CHANGE",
       "github267_literal_review_credit": 0,
       "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-160-SWEETENED-ESPRESSO-NOT-UNSWEETENED-TASTE",
+      "finding": "Sweetened automatic espresso/decaf sensory panel evidence cannot be promoted into DIC's unsweetened personal shot recommendation, sweetness/bitterness correction, added data fields or numeric extraction target; the original article has panel-count and body ANOVA/prose discrepancies.",
+      "evidence": [
+        "LIT-2026-CUSIELO-ESPRESSO-SWEETENER-DECAF-QDA",
+        "R455-EV-CIT-160-A",
+        "R455-EV-CIT-160-B"
+      ],
+      "severity": "P3_RESEARCH_TRANSFER_BOUNDARY_NO_REPRODUCED_RUNTIME_BUG",
+      "user_benefit": "Retain integrity of original five ratings, prevent sugar/decaf formulation preference from masquerading as unsweetened grind/yield advice or overstated scientific confidence.",
+      "current_locked": "All five personal 1–5 taste ratings and strict all-green vs missing, one truly controllable variable, original measured shot/notes/private history, coffee identity, alternative recipe families, distinct Turbo vs Fast-Flow and slow-feed, grinder calibration/version and optional temperature, RLS/Community.",
+      "current_app": "At dev f2d7d0146ad3920d89f9d728d388fa00482a7752 engine.js blob 9b0071f2bdd89b931662fe3232d4659524ad2e67, model.js blob 00c027c5f10d938fa2cc050572286eb9570817de, constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095: 5 original taste ratings and measured actual dose/yield/time/grind/optional temp; no sugar/decaf-based correction or chemical proxies. Same-coffee, grinder calibration, basket/feed and distinct styles stay approved.",
+      "proposed_change": "DOCUMENT ONLY. No sweetener controls, automatic decaf correction, altered taste target, lab panel-to-user mapping or universal grind step. If owner ever considers a sweetener/added-ingredient mode, require separate explicit choice, privacy/data/UX impact and actual same-coffee blinded espresso validation.",
+      "evidence_grade": "PRIMARY_PEER_REVIEWED_10_SWEETENED_FIXED_MACHINE_CONDITIONS_WITH_INTERNAL_N_AND_ANOVA_NARRATIVE_CONFLICTS; NO_UNSWEETENED_CONTROLS",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "RESEARCH_LEDGER_SCOPED_JOURNAL_CURRENT_STATUS_ONLY; CI_AND_MERGE_TO_VERIFY",
+      "test_plan": "JSON schema/ID uniqueness, intended three Git paths, applicable docs-only PR-head CI and nonforce merge + exact blob readback. No Node22 functional/browser/SQL/Auth or physical espresso quality trial for unchanged software.",
+      "release_queue_status": "NOT_APPLICABLE_RESEARCH_ONLY",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
     }
   ],
   "changeScope": {
@@ -6995,6 +7059,6 @@
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R455-159 original primary HTML bounded storage/espresso sensory evidence review; documentation-only journal/status/ledger, CI not yet executed."
+    "reason": "R455-160 original 2026 publisher full HTML sweetened/decaf espresso study with sample-size and results-prose discrepancies; research ledger/status/journal only, CI not yet run."
   }
 }
