@@ -3403,6 +3403,20 @@
       "previously_credited": true,
       "production_writes": false,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 #509 Run133b exact-source 3/3 SQL/Node/governance and docs correction governance PASS",
+      "source_parent_sha": "299745cea8217311fbe2b22a623ce8fa1fae683c",
+      "source_test_commit_sha": "18cd6276efebd0b50dde4bdc02c8701e2104f558",
+      "ci_runs": [
+        42730888245,
+        42730888607,
+        42730888238,
+        42731336323
+      ],
+      "conclusion": "SUCCESS",
+      "production_writes": false,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -15690,5 +15704,32 @@
     "new_edges": 0,
     "production_writes": false,
     "baseline_complete": false
+  },
+  "provider_account_delete_composite_fixture_ci_closeout_run133b": {
+    "status": "ALL_APPLICABLE_EXACT_SOURCE_CI_SUCCESS",
+    "source_test_commit_sha": "18cd6276efebd0b50dde4bdc02c8701e2104f558",
+    "postgresql_sql_and_signed_jwt": {
+      "run_id": 42730888245,
+      "conclusion": "success",
+      "job_log_admin_member_deletion": "PASS"
+    },
+    "node_cloud": {
+      "run_id": 42730888607,
+      "conclusion": "success",
+      "job": "validate"
+    },
+    "governance": {
+      "run_id": 42730888238,
+      "conclusion": "success"
+    },
+    "docs_correction_commit_sha": "299745cea8217311fbe2b22a623ce8fa1fae683c",
+    "docs_correction_governance": {
+      "run_id": 42731336323,
+      "conclusion": "success"
+    },
+    "source_fix": "TEST_ONLY_NO_SQL_MIGRATION_OR_RUNTIME_APP_CODE",
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "First genuinely unreviewed/changed provider definition, hosted Auth/JWT/API/native UNVERIFIED; continue independent release/backup HOLD."
   }
 }
