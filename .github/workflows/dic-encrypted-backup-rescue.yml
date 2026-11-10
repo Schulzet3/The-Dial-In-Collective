@@ -1,0 +1,66 @@
+name: DIC one-time owner-approved encrypted recovery fallback
+on:
+  push:
+    branches: [main]
+    paths: ['docs/RELEASE_BACKUP_RESCUE_REQUEST.json']
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: dic-release-backup-rescue-20261110
+  cancel-in-progress: false
+jobs:
+  backup:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 16
+    env:
+      SUPABASE_PROJECT_REF: azviqqejypsefzilgonr
+      SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+      BACKUP_AGE_RECIPIENT: ${{ vars.BACKUP_AGE_RECIPIENT }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v7
+        with:
+          ref: bf3a82484ab2443a5d8b4dc78075ca5a4d875532
+          path: backup-app-source
+          persist-credentials: false
+      - name: Install age with bounded retries (never publish plaintext)
+        run: |
+          set -Eeuo pipefail
+          if ! command -v age >/dev/null 2>&1; then
+            timeout 120s sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=10 install -y age || {
+              timeout 60s sudo apt-get -o Acquire::Retries=0 -o Acquire::http::Timeout=10 update -qq
+              timeout 120s sudo apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=10 install -y age
+            }
+          fi
+          age --version
+      - name: Preserve original recipient and optional matching recovery identity
+        env:
+          DIC_ARCHIVE_AGE_IDENTITY: ${{ secrets.DIC_ARCHIVE_AGE_IDENTITY }}
+        run: |
+          set -Eeuo pipefail
+          if [[ -n "${DIC_ARCHIVE_AGE_IDENTITY:-}" ]]; then
+            umask 077
+            identity_file="$RUNNER_TEMP/dic-automation-age-identity"
+            trap 'rm -f -- "$identity_file"' EXIT
+            printf '%s\n' "$DIC_ARCHIVE_AGE_IDENTITY" > "$identity_file"
+            recipient="$(bash scripts/backups/derive-recovery-recipient.sh "$identity_file")"
+            if [[ "$recipient" == "$BACKUP_AGE_RECIPIENT" ]]; then
+              echo 'Configured original recipient verified; no duplicate stanza.'
+            else
+              echo "BACKUP_AGE_SECOND_RECIPIENT=$recipient" >> "$GITHUB_ENV"
+              echo 'Additional matching recovery recipient configured; original preserved.'
+            fi
+          fi
+      - name: PostgreSQL 17 consistent snapshot; age encryption, ciphertext only
+        run: bash scripts/backups/create-nightly-encrypted-dump.sh
+      - name: Upload ciphertext archive only
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic-encrypted-nightly-${{ github.run_id }}
+          path: ${{ runner.temp }}/dic-nightly-${{ github.run_id }}/encrypted/backup.age
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0
