@@ -3657,6 +3657,14 @@
       "new_findings": 1,
       "provider_writes": 0,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 UTC Run153 CI diagnostic + source-bound repair",
+      "source_sha": "5bb63bcdd18abc2f66a67d61b56937cf5bb0deed",
+      "evidence": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/1911",
+      "scope": "SQL 42899103968 FAILED historical test phase before new migration; governance 42899105276 FAILED missing queue intake. Move new test to full-schema suite, restore historical immutable-phase test, queue IN_PROGRESS.",
+      "provider_writes": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -16537,5 +16545,17 @@
     "new_first_time_words": 0,
     "baseline_complete": false,
     "next": "Run exact isolated native_import.sql and full applicable security/Node22/browser/governance CI at PR head; repair failures, safely merge and verify merged SHA/CI, then separate READY queue closure. No production deploy."
+  },
+  "provider_import_credential_key_run153_ci_repair": {
+    "status": "PR_HEAD_REPAIRED_CI_PENDING",
+    "source_pr_head": "5bb63bcdd18abc2f66a67d61b56937cf5bb0deed",
+    "pr": 1911,
+    "initial_failure_sql_run": 42899103968,
+    "initial_failure_governance_run": 42899105276,
+    "diagnosis": "historical native_import.sql executes immediately after 20261012183845 before new 20261110 migration; queue requires IN_PROGRESS item for deployable migration",
+    "repair": "Revert historical test to parent blob; new final-schema synthetic import_credential_key_separators.sql invoked after all migrations; tracked queue row IN_PROGRESS, with only migration as deployable scope",
+    "no_provider_writes": true,
+    "baseline_complete": false,
+    "next": "Verify exact PR-head 4 relevant CI runs, repair tests, merge nonforce only after PASS"
   }
 }
