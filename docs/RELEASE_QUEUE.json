@@ -11499,24 +11499,31 @@
       "issue": 509,
       "pr": 1911,
       "title": "Reject separator-spelled credential keys in native backup import before archiving private source JSON",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "62a1eac89f4653545a7bffe91e4dace3a2740da4",
       "scope_paths": [
         "supabase/migrations/20261110205500_dic_import_credential_field_separator_guard.sql"
       ],
       "tests": [
-        "Run153 live SQL semantics / read-only truth table: api-key, access-token, refresh.token and secret.key currently bypass underscore-only key normalization; one private stored import batch counted without inspecting source or claiming an incident.",
-        "New final-schema synthetic `supabase/tests/import_credential_key_separators.sql` tests seven credential spellings, nested token key, benign coffee-name false-positive; exact-source isolated PostgreSQL/JWT, Node22, browser, governance CI PENDING."
+        "Verified current private.apply_prototype_import whole-source MD5 479cc03d9ea9862176b0c663d99369b0 and read-only SQL shows hyphen/space/period credential names bypass old underscore-only normalization. One stored import batch; its contents intentionally not inspected and no incident claimed.",
+        "Exact PR-head 4/4 PASS: isolated SQL/JWT 42899962093, Node22 42899962642, browser/UX 42899961948, governance 42899962433. Synthetic final-schema test directly rejects seven forbidden key spellings and nested synthetic access-token while allowing benign metadata.",
+        "Exact nonforce-squash merged development 62a1eac89f4653545a7bffe91e4dace3a2740da4; migration, synthetic SQL test, SQL CI driver and provider receipt blobs match PR head.",
+        "Exact merged-source 4/4 PASS: isolated PostgreSQL/JWT 42900390547; Node22 42900390810 (3606 pass/0 fail/6 intentional skip); browser/UX 42900391060; governance 42900390549. Original corpus run skipped, not certified.",
+        "Read-only provider postmerge still has prior import function MD5 and zero application of new additive migration; no live SQL/Auth/Storage/Edge/data changes. No owner one-command publish permission."
       ],
       "ci_runs": [
-        42899103968,
-        42899105276
+        42899962093,
+        42899962642,
+        42899961948,
+        42899962433,
+        42900390547,
+        42900390810,
+        42900391060,
+        42900390549
       ],
-      "blockers": [
-        "Initial PR-head SQL failed because historical native_import.sql runs before latest migrations; relocated tests to final-schema regression. Initial governance failed untracked app migration; this queue item repairs intake. New source-bound CI PENDING."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
-      "notes": "Development-only guarded pg_get_functiondef substitution; no private imported JSON inspected, no live production SQL/data/Auth/Storage/Edge changes or publication. Preserve immutable migrations, backups and Locked privacy rules. Queue remains IN_PROGRESS pending exact PR/merged CI."
+      "notes": "Development-only guarded pg_get_functiondef substitution; no private imported JSON inspected, no live production SQL/data/Auth/Storage/Edge changes or publication. Preserve immutable migrations, backups and Locked privacy rules. Queue remains IN_PROGRESS pending exact PR/merged CI.\n2026-11-10 Run153 CI closure: Exact PR head d374b9fe and merged development 62a1eac8 8/8 applicable workflows COMPLETED SUCCESS after fixing historical-boundary synthetic-test placement, queue intake, and dynamic pg_get_functiondef SQL quoting. Source-only READY; no production deployment. Previous CI failures preserved in receipt docs/audits/issue509-run153-exact-source-ci-closure-2026-11-10.json."
     }
   ],
   "history": [
@@ -12718,6 +12725,15 @@
         "DIC-Q-509-private-delete-definer-execute-acl"
       ],
       "receipt": "docs/releases/2026-11-10_READY4_DEPLOYED_VERIFIED.md"
+    },
+    {
+      "date": "2026-11-10",
+      "issue": 509,
+      "item_id": "DIC-Q-509-import-credential-field-separator-guard",
+      "state": "READY",
+      "source_sha": "62a1eac89f4653545a7bffe91e4dace3a2740da4",
+      "evidence": "docs/audits/issue509-run153-exact-source-ci-closure-2026-11-10.json",
+      "production_deployed": false
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"

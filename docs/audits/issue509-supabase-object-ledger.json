@@ -3681,6 +3681,14 @@
       "scope": "Fix malformed generated SQL literal in guarded migration; exact SQL logging diagnosis and correction",
       "provider_writes": 0,
       "baseline_complete": false
+    },
+    {
+      "run": "2026-11-10 UTC Run153 exact-source CI closeout READY development only",
+      "source_sha": "62a1eac89f4653545a7bffe91e4dace3a2740da4",
+      "evidence": "docs/audits/issue509-run153-exact-source-ci-closure-2026-11-10.json",
+      "scope": "PR1911 source 4/4 and merged 4/4 applicable CI success; 7 credential+nest+benign synthetic final-schema checks, Node22 3606 pass, byte identity verified; no production write",
+      "provider_writes": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -16503,7 +16511,7 @@
     "closure_receipt": "docs/audits/issue509-run152-exact-source-ci-closure-2026-11-10.json"
   },
   "provider_import_credential_key_run153": {
-    "status": "GITHUB_DEVELOPMENT_ONLY_STAGED_CI_PENDING",
+    "status": "MERGED_SOURCE_BOUND_READY_NOT_DEPLOYED",
     "source_development_parent_sha": "040dc3458f422e2e7b665ac1532a12f486ca781b",
     "receipt_path": "docs/audits/issue509-provider-import-credential-field-guard-2026-11-10-run153.json",
     "source_objects_reviewed": 7,
@@ -16560,7 +16568,19 @@
     "production_writes": false,
     "new_first_time_words": 0,
     "baseline_complete": false,
-    "next": "Run exact isolated native_import.sql and full applicable security/Node22/browser/governance CI at PR head; repair failures, safely merge and verify merged SHA/CI, then separate READY queue closure. No production deploy."
+    "next": "New/changed provider definitions and #96 hosted Auth/API; separate owner publish authority; all provider baseline still IN_PROGRESS",
+    "merged_sha": "62a1eac89f4653545a7bffe91e4dace3a2740da4",
+    "exact_source_ci_runs": [
+      42899962093,
+      42899962642,
+      42899961948,
+      42899962433,
+      42900390547,
+      42900390810,
+      42900391060,
+      42900390549
+    ],
+    "ci_closure_receipt": "docs/audits/issue509-run153-exact-source-ci-closure-2026-11-10.json"
   },
   "provider_import_credential_key_run153_ci_repair": {
     "status": "PR_HEAD_REPAIRED_CI_PENDING",
@@ -16586,5 +16606,15 @@
       "status": "CI_PENDING",
       "provider_writes": 0
     }
+  },
+  "provider_import_credential_key_run153_ci_closure": {
+    "status": "8_OF_8_EXACT_SOURCE_CI_SUCCESS_READY_DEVELOPMENT_ONLY",
+    "pr": 1911,
+    "pr_head_sha": "d374b9fe0bebc5528f035563d50a1d9a4d2f024c",
+    "merged_sha": "62a1eac89f4653545a7bffe91e4dace3a2740da4",
+    "ci_receipt": "docs/audits/issue509-run153-exact-source-ci-closure-2026-11-10.json",
+    "queue_item": "DIC-Q-509-import-credential-field-separator-guard",
+    "production_writes": 0,
+    "baseline_complete": false
   }
 }
