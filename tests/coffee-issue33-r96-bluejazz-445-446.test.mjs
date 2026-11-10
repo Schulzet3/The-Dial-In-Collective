@@ -1,3 +1,4 @@
+import {selectedCurrentTwoRegionSingleCountryBlend} from '../src/server/coffee-selected-two-region-blend.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {cases,selectedProof} from '../scripts/audit/issue33-r96-bluejazz-445-446-check.mjs';
@@ -73,4 +74,15 @@ test('unrelated recommended origins never mix with two selected regional compone
  assert.equal(p.ok,true,JSON.stringify(p));
  assert.match(p.fields.origin||'',/Lake Atitlan/);
  assert.ok(!/Kenya|blueberry/i.test(JSON.stringify(p.fields)));
+});
+
+test('two-lot helper accepts one already-proven region but rejects a mismatched competing place',()=>{
+ const own=c(445).own;
+ const blocks=[{tag:'h1',text:'Guatemala'},
+  {tag:'p',text:own[0]+'. In fact, we found two regional lots we love and combined them to make a single origin blend!'},
+  {tag:'p',text:own[2]+'. The other is a washed HueHuetenengo grown at 1500-1700 MASL.'}];
+ const compatible=selectedCurrentTwoRegionSingleCountryBlend({name:'Guatemala',origin:'Lake Atitlan, Guatemala',blocks});
+ assert.match(compatible?.value||'',/HueHuetenengo/);
+ const unrelated=selectedCurrentTwoRegionSingleCountryBlend({name:'Guatemala',origin:'Petén, Guatemala',blocks});
+ assert.equal(unrelated,null);
 });
