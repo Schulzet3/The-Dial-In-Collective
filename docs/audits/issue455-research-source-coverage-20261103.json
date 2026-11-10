@@ -1429,6 +1429,27 @@
       "evidence_grade": "DIRECT_LIVE_SOURCE_SYNTHETIC_POSITIVE_NEGATIVE_5_GROUPS_NODE22_HEAD_AND_MERGED_PASS_NO_MEMBER_CUP_CLAIM",
       "claim": "At source 8dcedae3179945a036aa774f45c21e4dc920c39b engine.js blob 74ef8567, measuredLocalSuccess accepted five-green archived rows with impossible grind or optional recorded temperature because it filtered only dose/yield/time and taste, while latest-feedback selection and Coffee overview rejected those rows. A newer valid non-green same-recipe shot could therefore be left without next adjustment. The original history stays immutable.",
       "implementation_status": "SAFE_CODE_PR1809_NONFORCE_MERGED_BEFC282_EXACT_SOURCE_3402_PASS_READY_DEV_ONLY_NOT_DEPLOYED"
+    },
+    {
+      "id": "LIT-2024-GANTNER-SECONDARY-STORAGE-ESPRESSO-SENSORY",
+      "type": "peer_reviewed_original_publisher_full_html_bounded_direct_methods_results",
+      "title": "Effect of Temperature and Storage on Coffee’s Volatile Compound Profile and Sensory Characteristics",
+      "authors": "Magdalena Gantner; Eliza Kostyra; Elżbieta Górska-Horczyczak; Anna Piotrowska",
+      "journal": "Foods 13(24):3995 (2024)",
+      "published": "2024-12-11",
+      "doi": "10.3390/foods13243995",
+      "url": "https://www.mdpi.com/2304-8158/13/24/3995",
+      "original_source_url": "https://www.mdpi.com/2304-8158/13/24/3995",
+      "access": "ORIGINAL_PUBLISHER_FULL_HTML_METHODS_RESULTS_DISCUSSION_CONCLUSION_FUNDING; PDF_BINARY_FIGURE_PIXELS_TABLE_CELLS_RAW_RECORDS_UNVERIFIED",
+      "review_status": "R455-159_DIRECT_PRIMARY_PUBLISHER_HTML_TEXT_METHODS_2_1_TO_2_3_RESULTS_3_1_TO_3_3_CONCLUSIONS_FUNDING; PDF_BINARY_AND_RAW_DATA_NOT_REVIEWED",
+      "direct_review_provenance": "Publisher HTML (2026-11-10 retrieval): lines 143-180 identity/abstract, 197-229 original Methods, 230-276 Results/figures and table captions, 290-334 Discussion/Conclusions, 335-355 Funding/COI. Tables 1-4 actual cells and figure pixels were NOT independently read. Cross-checked current live source and active Locked supersessions, not a new owner policy. No local publisher HTML/PDF byte download or cryptographic SHA256.",
+      "evidence_grade": "PEER_REVIEWED_PRIMARY_3_FIXED_COMMERCIAL_COFFEES_0_OR_1_MONTH_POST_OPEN_STORAGE_5C_VS_20C_9_REPLICATED_QDA_SAMPLE_CONDITIONS_NONCAUSAL_PERSONAL_ESPRESSO_ADVICE",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Source publisher HTML read via web extraction, not byte frozen; original 21-page PDF, actual Table 1-4 numeric cells, Figure 1-3 pixels, original GC peak integrations, participants' individual sensory records and independent replication NOT inspected. Do not infer universal post-roast resting time, shelf life, ideal 5 C household storage, zero fridge-moisture risk, or a DIC recommendation effect.",
+      "claims_verified_externally": "Commercial 100% Arabica, 100% Robusta and 80:20 blend; roaster did not provide specific origins/roasting profiles. Bags were first opened one month after roasting; then compared fresh-opened with one additional month sealed in foil at 5±1 C or 20±1 C. Espresso made in a DeLonghi automatic with stated 20 g for 2x40 mL and manufacturer dial 1, not a controlled 1:2 personal espresso workflow; cold brew was different 300 g/1200 mL, 24h at 5 C. Espresso served 60±2 C, cold brew 5±2 C. QDA used 30 trained-panel descriptors on anchored 0-10 cm scales, duplicate sample analysis with an average 18 evaluations; neither 18 individuals nor DIC's five independent preferences should be inferred. Authors report espresso differences in coffee aroma/flavor, chocolate odor, sour/sweet taste and body across sample combinations (Table 3 named p-values), but also state post-open espresso brews at BOTH storage temperatures differed from fresh and were similar to one another; reduced storage-temperature alteration is clearer in volatile signals and cold brew. Text §3.2 unexpectedly says stored at 7 C, inconsistent with Methods' 5±1 C; the methods are the stated condition, not grounds for inventing a third group. This study does not compare different resting dates immediately after roast or assess the same person's DIC shot recommendations.",
+      "current_app_crosswalk": "Exact development 3283bb3ceffc20aa6589e3f7a586b71cf82758d8: inspected site/lib/engine.js Git blob 9b0071f2bdd89b931662fe3232d4659524ad2e67 (baseline, measuredRecipeShots, grindGuidance, existing success veto, recommendation) and site/lib/constants.js style/taste bounds. Approved UI retains five independent 1-5 personal taste inputs and same-coffee measured shot history; Roast Date entry and Bag Management retired under prior owner decision. No storage-temperature or post-open month correction, storage data capture, or chemistry-to-taste causal calibration is authorized. Source alone does not reproduce a distinct SAFE Log Shot/Rate runtime defect.",
+      "reviewed_date_utc": "2026-11-10",
+      "implementation_status": "RESEARCH_ONLY_NO_APPLICATION_POLICY_QUEUE_OR_RELEASE_CHANGE"
     }
   ],
   "evidence_checks": [
@@ -4312,6 +4333,26 @@
       "result": "SAFE_FIX_VERIFIED_PR1809_MERGED_5_SYNTHETIC_GROUPS_PASS_NODE22_3402_0_6_READY_NOT_DEPLOYED",
       "owner_approval": false,
       "date": "2026-11-10"
+    },
+    {
+      "id": "R455-EV-CIT-159-A",
+      "source": "LIT-2024-GANTNER-SECONDARY-STORAGE-ESPRESSO-SENSORY",
+      "claim": "Direct Methods §2.1-2.3: three commercial beans/mixture of unknown roast profiles, opened at about one month post-roast, then day 0 or one-month storage after opening at 5±1 C/20±1 C; 20 g automatic espresso 2x40 mL, and distinct 24 h cold brew. QDA thirty 0-10 cm descriptors and 18 mean replicate evaluations, not 18 proven unique assessors or DIC's 1-5 subjective scales.",
+      "grade": "DIRECT_PRIMARY_PUBLISHER_HTML_METHODS_EXPERIMENT_SPECIFIC",
+      "current_app": "Exact development 3283bb3ceffc20aa6589e3f7a586b71cf82758d8: inspected site/lib/engine.js Git blob 9b0071f2bdd89b931662fe3232d4659524ad2e67 (baseline, measuredRecipeShots, grindGuidance, existing success veto, recommendation) and site/lib/constants.js style/taste bounds. Approved UI retains five independent 1-5 personal taste inputs and same-coffee measured shot history; Roast Date entry and Bag Management retired under prior owner decision. No storage-temperature or post-open month correction, storage data capture, or chemistry-to-taste causal calibration is authorized. Source alone does not reproduce a distinct SAFE Log Shot/Rate runtime defect.",
+      "result": "SOURCE_CONDITION_VERIFIED_TEXT_ONLY; UNIVERSAL_REST_OR_FRIDGE_RULE_NOT_SUPPORTED",
+      "owner_approval": false,
+      "date": "2026-11-10"
+    },
+    {
+      "id": "R455-EV-CIT-159-B",
+      "source": "LIT-2024-GANTNER-SECONDARY-STORAGE-ESPRESSO-SENSORY",
+      "claim": "Original Results/Conclusions state post-open espresso sensory patterns at both storage temperatures remained similar and differed from fresh, even though some chemical volatile signals and cold-brew sensory profiles differed with storage temperature. §3.2 text says 7 C once while Methods/Table captions specify 5 C. Results span 3 beans, brewing/serving temperature differences and trained panel observations, not a causal same-coffee home recommendation experiment.",
+      "grade": "DIRECT_PRIMARY_PUBLISHER_HTML_RESULTS_CONCLUSION_FUNDING; TABLE_NUMERIC_CELLS_UNVERIFIED",
+      "current_app": "Exact development 3283bb3ceffc20aa6589e3f7a586b71cf82758d8: inspected site/lib/engine.js Git blob 9b0071f2bdd89b931662fe3232d4659524ad2e67 (baseline, measuredRecipeShots, grindGuidance, existing success veto, recommendation) and site/lib/constants.js style/taste bounds. Approved UI retains five independent 1-5 personal taste inputs and same-coffee measured shot history; Roast Date entry and Bag Management retired under prior owner decision. No storage-temperature or post-open month correction, storage data capture, or chemistry-to-taste causal calibration is authorized. Source alone does not reproduce a distinct SAFE Log Shot/Rate runtime defect.",
+      "result": "RESEARCH_BOUNDARY_PRESERVED; NO_SAFE_CORRECTNESS_DEFECT_DEMONSTRATED",
+      "owner_approval": false,
+      "date": "2026-11-10"
     }
   ],
   "policy_decisions_pending": [],
@@ -4323,6 +4364,7 @@
     "reason": "R455-123 verified existing Locked 70-100 C recorded-temperature guard prevents invalid imported temp from becoming personal grind evidence; six direct-module tests and exact source CI, no scientific target or deployed change."
   },
   "next_actions": [
+    "R455-159 authoring at 3283bb3ceffc20aa6589e3f7a586b71cf82758d8: original Gantner et al. 2024 primary publisher HTML methods and results read; one new source/two independent bounded evidence checks/one research-only proposal. Need docs-only PR-head CI, nonforce merge and merged-source receipt. No revised age/rest/storage numeric recommendations, no reopened Roast Date/Bag UI, no #267 literal credit; S019 original remains inaccessible.",
     "R455-156 authoring at development 68a778b5: primary J-STAGE original 2024 Imamura water/sodium/clean taste full HTML Methods + tables/results checked; added source, two bounded checks, research-only proposal. No espresso water optimum, no DIC 5-rating validation, no code/queue/Locked/production changes or #267 literal credit. PR-head/merged CI pending; standalone S019 inaccessible.",
     "R455-151 authored at 2bbb4f9598668538c8d27b5bdcf6e3f7758db040: independently upgraded Cameron et al. Matter 2020 from focused model claim to substantive original publisher-indexed model/experimental/cafe-cost sections, evidence CIT-151 A/B and science-boundary proposal; 80 sources, 217 checks, 112 proposals. No new safe runtime bug demonstrated, no Locked/queue/production change, no #267 literal credit. PR exact-source CI and nonforce integration pending; S019 standalone PDF inaccessible.",
     "R455-136 final: PR1653 exact code merged 529ad288b5962c2f69879daf6d6adb114320009b and all four Git blobs match reviewed head; Node22 3214/0/6 head and 3219/0/6 merged, all 3 new synthetic tests PASS, applicable Chromium/SQL/security/governance SUCCESS. READY queue development only, S019 missing, no #267 credit. Docs reconciliation CI/readback pending.",
@@ -4411,46 +4453,30 @@
     "R455-158 FINAL @befc282154c5ddc15a123fc2d5ee37e87b2112f6: PR1809 nonforce merged, five source/testing blobs exact head, 5/5 new regression groups PASS, Node22 head/merge 3402/0/6, approval/browser/SQL/security appropriate SUCCESS; queue READY dev-only. 87 sources / 232 bounded checks / 119 proposals; original603 SKIPPED, #267 literal zero, S019 original unavailable, no publish."
   ],
   "latest_review_checkpoint": {
-    "id": "R455-158",
-    "base_development_sha": "8dcedae3179945a036aa774f45c21e4dc920c39b",
+    "id": "R455-159",
+    "base_development_sha": "3283bb3ceffc20aa6589e3f7a586b71cf82758d8",
+    "main_sha": "11e1e8c7c36dad488519476d8a969bb682915d31",
+    "release_production_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
     "source_ids": [
-      "LIVE-20261110-ENGINE-INVALID-GREEN-ADVICE-VETO"
+      "LIT-2024-GANTNER-SECONDARY-STORAGE-ESPRESSO-SENSORY"
     ],
     "claim_ids": [
-      "R455-EV-CODE-158-A",
-      "R455-EV-CODE-158-B"
+      "R455-EV-CIT-159-A",
+      "R455-EV-CIT-159-B"
     ],
     "proposal_ids": [
-      "R455-PROP-158-INVALID-GREEN-ADVICE-VETO"
+      "R455-PROP-159-POSTOPEN-STORAGE-NOT-ESPRESSO-REST-TARGET"
     ],
-    "number_of_curated_sources": 87,
-    "total_evidence_checks": 232,
-    "number_of_proposals": 119,
-    "review_type": "SAFE_ENGINE_INVALID_ARCHIVED_GREEN_ADVICE_VETO_CORRECTNESS_FIX",
-    "code_or_policy_changed": true,
+    "number_of_curated_sources": 88,
+    "total_evidence_checks": 234,
+    "number_of_proposals": 120,
+    "review_type": "DIRECT_PRIMARY_PUBLISHER_ESPRESSO_SENSORY_SECONDARY_STORAGE_POLICY_BOUNDARY",
+    "code_or_policy_changed": false,
     "locked_policy_changed": false,
     "production_deployed": false,
     "github267_literal_line_review_credit": 0,
-    "status": "NONFORCE_MERGED_EXACT_HEAD_AND_MERGED_CI_PASS_READY_DEVELOPMENT_ONLY",
-    "source_commit_sha": "695a98e5a8f09962b2ab5d7ce5f74a310ac265ff",
-    "merge_sha": "befc282154c5ddc15a123fc2d5ee37e87b2112f6",
-    "pr_number": 1809,
-    "test_receipts": {
-      "pr_head": "695a98e5a8f09962b2ab5d7ce5f74a310ac265ff",
-      "pr_node": 42794221112,
-      "pr_governance": 42794220738,
-      "pr_security": 42794221038,
-      "pr_sql": 42794220735,
-      "pr_mobile_browser": 42794221169,
-      "merged_node": 42794766623,
-      "merged_governance": 42794766933,
-      "merged_mobile_browser": 42794766605,
-      "tests_pass": 3402,
-      "tests_fail": 0,
-      "tests_skip": 6,
-      "original603": "SKIPPED"
-    },
-    "next_action": "Continue next nonoverlapping #455 source/evidence or Log Shot -> Rate -> Recommendation UX defect; S019 original still inaccessible. No release authorization and no #267 literal audit credit."
+    "status": "AUTHORING_COMPLETE_GIT_PR_HEAD_AND_MERGE_CI_PENDING",
+    "next_action": "Verify 4-file docs-only PR head, applicable documentation/governance checks, nonforce merge and exact readback; continue separate high-value UX defects and inaccessible S019 source without inventing approvals."
   },
   "policy_decisions_resolved": [
     {
@@ -6940,13 +6966,35 @@
       "production_deployed": false,
       "pr_number": 1809,
       "merge_sha": "befc282154c5ddc15a123fc2d5ee37e87b2112f6"
+    },
+    {
+      "id": "R455-PROP-159-POSTOPEN-STORAGE-NOT-ESPRESSO-REST-TARGET",
+      "finding": "Small original post-opening storage study distinguishes beans' VOC changes and some trained-panel descriptors but does not establish personal espresso rest days, refrigeration setpoints, coffee-derived taste corrections, or recovery of retired Roast Date/Bag capture.",
+      "evidence": [
+        "LIT-2024-GANTNER-SECONDARY-STORAGE-ESPRESSO-SENSORY",
+        "R455-EV-CIT-159-A",
+        "R455-EV-CIT-159-B"
+      ],
+      "severity": "P3_SCIENTIFIC_TRANSFER_GUARD_NO_REPRODUCED_APP_DEFECT",
+      "user_benefit": "Avoid new date/storage burden, unsupported numeric timing advice, and false confidence while preserving five subjective ratings, one controllable change, same-coffee history and existing source uncertainty.",
+      "current_locked": "Log Shot -> Rate -> Recommendation retains five taste inputs, true five-green vs missing, single controllable next change, measured shot and private notes/history, versioned equipment and independent styles/feeds; retired Roast Date/Bag Management is not reopened by research.",
+      "current_app": "Exact development 3283bb3ceffc20aa6589e3f7a586b71cf82758d8: inspected site/lib/engine.js Git blob 9b0071f2bdd89b931662fe3232d4659524ad2e67 (baseline, measuredRecipeShots, grindGuidance, existing success veto, recommendation) and site/lib/constants.js style/taste bounds. Approved UI retains five independent 1-5 personal taste inputs and same-coffee measured shot history; Roast Date entry and Bag Management retired under prior owner decision. No storage-temperature or post-open month correction, storage data capture, or chemistry-to-taste causal calibration is authorized. Source alone does not reproduce a distinct SAFE Log Shot/Rate runtime defect.",
+      "proposed_change": "DOCUMENT ONLY: preserve study as bounded contextual evidence; do not invent resting day count, fridge storage requirement, retrospective age-aware correction, data field, UI control or science-based confidence. Any revival of Roast Date or changing numeric targets, collecting storage data or surfacing a new recommendation must be explicitly owner-approved with human espresso and privacy/device evidence.",
+      "evidence_grade": "PEER_REVIEWED_ORIGINAL_PUBLISHER_METHODS_RESULTS_TEXT_WITH_UNCHECKED_TABLE_CELLS; NO_USER_TASTE_VALIDATION",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "RESEARCH_ONLY_DOCUMENTATION_COMMIT_SOURCE_BOUND_CHECKS_AND_NONFORCE_PR_PENDING",
+      "test_plan": "Validate parsed ledger, uniqueness of three new IDs and increment counts, scoped 4-file docs-only diff, Git PR-head checks and merged governance as actually executed. No Node/app/browser/SQL/physical espresso performance claims.",
+      "release_queue_status": "NOT_APPLICABLE_NO_DEPLOYABLE_BEHAVIOR_CHANGE",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
     }
   ],
   "changeScope": {
-    "application_code_changed": true,
-    "tests_executed": true,
+    "application_code_changed": false,
+    "tests_executed": false,
     "production_deployed": false,
-    "queue_changed": true,
-    "reason": "R455-153 new-shot invalid explicit timestamp guard and 4 synthetic regressions. PR1775 exact head Node22/UX/cloud/SQL/security/governance PASS, source blobs identical after nonforce merge. Merged approval/cloud success, merged Node/browser canceled and NOT PASS; reuse source-exact passing head evidence. Source READY, no publication."
+    "queue_changed": false,
+    "reason": "R455-159 original primary HTML bounded storage/espresso sensory evidence review; documentation-only journal/status/ledger, CI not yet executed."
   }
 }
