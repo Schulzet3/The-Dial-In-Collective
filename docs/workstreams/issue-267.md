@@ -1,3 +1,7 @@
+## November 10, 2026 — #267 A23C direct 20 new live-only source lines, exact CI pending
+
+[A23C receipt](../audits/issue267-v2-strict-batches/S2-POSTPIN-LIVE-POSTRELEASE-SOURCEPIN-001-020-20261110-A23C.json) and [journal](issue-267-A23C-source-bound-20261110.md) inspect newly added `tests/postrelease-smoke-source-pin.test.mjs` lines1–20 (20 new live-only), no pinned counterpart nor prior D2 duplicate. Machine comparison candidate inventory at exact source SHA: 104 changed pinned paths, 1 missing, 420 code-like additions, **zero machine semantic credit**. Static release test no active bug proved; no app/provider/production writes. Docs-only governance pending, all functional suites NOT_RUN. Next frozen F154:1295, pinned P432:652, remaining live drift; OPEN.
+
 ## November 10, 2026 — #267 A23B strict 63 source lines, pending exact CI
 
 [Per-line A23B receipt](../audits/issue267-v2-strict-batches/S2-DISJOINT-F154-1275-1294-P432-609-651-20261110-A23B.json) and [same-commit journal](issue-267-A23B-source-bound-20261110.md): frozen F154:1275–1294 (20) and pinned P432:609–651 (43), original and current exact Git blobs identical. Predecessor A23 ends F154:1274/P432:608, no duplicate credit. Oct21 offsite failure later resolved within archive; Woo Auth/quota synthetic not hosted proof. No active bug or remediation established. Approval PR/merged CI pending, app/browser/SQL/Auth NOT_RUN. Development only, no READY/deploy/production. Next F154:1295 and P432:652, live drift unreconciled; OPEN.
