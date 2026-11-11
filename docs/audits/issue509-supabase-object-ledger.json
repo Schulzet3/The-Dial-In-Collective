@@ -3820,6 +3820,14 @@
       "governance_run_id": 43015452034,
       "baseline_complete": false,
       "provider_writes": 0
+    },
+    {
+      "date_utc": "2026-11-11",
+      "event": "RUN171_DIRECT_FULL_ROLE_GRAPH_TRANSITIVE_AND_SAFE_CONFIG",
+      "source_parent_sha": "e6f19e265cd09a5de0f755d94f69b37a7b168c34",
+      "receipt_path": "docs/audits/issue509-provider-role-reachability-runtime-security-2026-11-11-run171.json",
+      "provider_writes": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -17317,5 +17325,53 @@
     "baseline_complete": false,
     "closure_governance": "MUST_CHECK_SEPARATELY",
     "next": "#60 if new or changed/unreviewed provider definition; hosted API/Auth #96."
+  },
+  "provider_role_reachability_runtime_security_run171": {
+    "project_ref": "azviqqejypsefzilgonr",
+    "observed_at_utc": "2026-11-11T14:54:36.135Z",
+    "provider_status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003",
+    "live_migrations": 59,
+    "edge_functions": [
+      {
+        "slug": "dic-verify-coffee",
+        "version": 8,
+        "status": "ACTIVE",
+        "verify_jwt": true,
+        "sha256": "d59e9da29335f2d626a2779238b4f1176148f5f8f3d54539bf831ff20aa6a77e"
+      },
+      {
+        "slug": "dic-preview-coffee",
+        "version": 4,
+        "status": "ACTIVE",
+        "verify_jwt": true,
+        "sha256": "ac928ceb4898414555fbcc96afb30b0963f7c819c5d7e211abd5b3893090648c"
+      },
+      {
+        "slug": "dic-delete-member-account",
+        "version": 1,
+        "status": "ACTIVE",
+        "verify_jwt": true,
+        "sha256": "a2418951c7c4457723cd7b5e7e8d39f4cb1b3a02f76c6099573a9d576f32bf18"
+      }
+    ],
+    "role_count": 30,
+    "grant_count": 24,
+    "full_transitive_path_count": 120,
+    "schema_rights_count": 32,
+    "allowlisted_guc_count": 21,
+    "prev_run27_role_hashes_identical": 30,
+    "prev_run27_grant_hashes_identical": 24,
+    "prev_run27_membership_manifest_identical": true,
+    "member_manifest_md5": "3f57a9a65dc17b254f45b992a0d68152",
+    "proven_client_elevated_paths": 0,
+    "first_time_provider_word_credit": 0,
+    "issue267_code_lines": 0,
+    "new_confirmed_defects": 0,
+    "development_source_fixes": 0,
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "receipt_path": "docs/audits/issue509-provider-role-reachability-runtime-security-2026-11-11-run171.json",
+    "next": "Migration #60 if new else changed/new provider definition or hosted Auth API"
   }
 }
