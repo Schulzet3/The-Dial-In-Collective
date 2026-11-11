@@ -12224,6 +12224,39 @@
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
       "notes": "Owner-approved Option B; established calibration evidence eligibility across same-roast similar-coffee source donors. Keeps all Locked tastes/targets, one-control recommendations and style/feed distinctions; production publication separately authorized.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-make-current-original-calibration",
+      "issue": 455,
+      "pr": 2044,
+      "title": "Reject archived all-green Make Current recipes with impossible original grinder calibration while preserving private history and valid favorites",
+      "state": "READY",
+      "merged_source_sha": "2a2249923ffcd2cf052b4bd2769c9d46446352ba",
+      "scope_paths": [
+        "site/lib/engine.js",
+        "site/cloud/shot_card.js"
+      ],
+      "tests": [
+        "PR #2044 head 398e9bf7be688d3c0795bafd6b044b484a9b4ed0 Node22/lint #43013683394 SUCCESS: 3834 PASS/0 FAIL/6 intentional SKIP, all 7 R185 synthetic real-module cases PASS.",
+        "PR-head Chromium/mobile/offline #43013683144, isolated SQL/privacy #43013683139, security #43013683199, approval/continuity #43013683161 all SUCCESS; original frozen603 #43013683118 SKIPPED NOT PASS; cloud-tests in UX marked NOT_APPLICABLE, not exercised.",
+        "Safe nonforce PR #2044 merge 2a2249923ffcd2cf052b4bd2769c9d46446352ba; engine, History card, new tests and SAME-COMMIT journal Git blobs identical with tested head, 4 files only and no deletions.",
+        "Exact merged-source Node22/lint #43014164927 SUCCESS: 3834 PASS/0 FAIL/6 SKIP, all seven R185 regressions PASS; merged Chromium/mobile/offline #43014164921 and governance #43014164975 SUCCESS; no fresh merged SQL/security claimed, prior identical head evidence reused.",
+        "Original shots/notes/taste scales, favorite alternatives, style/feed/version/calibration/Locked ranges and private History preserved. This is a deterministic synthetic source-level gap, not an observed member incident or empirical espresso quality outcome."
+      ],
+      "ci_runs": [
+        43013683394,
+        43013683144,
+        43013683139,
+        43013683199,
+        43013683161,
+        43014164927,
+        43014164921,
+        43014164975
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Owner Option B safe original grinder calibration integrity for the existing Make Current UX and local engine; no new numerical taste rules or data capture. Development only, publication separate.",
+      "production_deployed": false
     }
   ],
   "history": [
@@ -13541,6 +13574,15 @@
       "state": "READY",
       "source_sha": "d936f59cb31c7399fab8e779ac5c8517a939c2c7",
       "evidence": "docs/workstreams/ops-issue455-r184-final-verification-20261111.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-make-current-original-calibration",
+      "state": "READY",
+      "source_sha": "2a2249923ffcd2cf052b4bd2769c9d46446352ba",
+      "evidence": "docs/workstreams/ops-issue455-r185-final-verification-20261111.md",
       "production_deployed": false
     }
   ],
