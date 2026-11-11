@@ -9,3 +9,7 @@ Frozen F160 is historical Oct19 release/invite/backup evidence only. One-time pr
 **Tests:** direct numbered Git reads, known source blob checks and local nonoverlap validation performed. Node22, lint/build, original603, browser/mobile/offline, SQL/Auth, real provider and Netlify NOT_RUN for documentation-only evidence. PR-head/merged governance CI PENDING at creation. No app/test/CI runtime modification, code removal, main/release/production, Supabase, Netlify, READY or deploy action.
 
 **Next** F160 line52, pinned P129 line31, unreconciled post-pin live module changes and all source drift; independently validate historical V2 segments and global coverage before marking completion. Issue remains OPEN.
+
+## Pre-PR A53 source-semantic QA correction
+
+After source/receipt readback, detected nine *descriptive* misalignments in the original newly written live P129:25–33 records (comment-vs-regex off-by-one). Corrected the per-line meanings with the original Git source literal and physical positions unchanged; original first commit is preserved in branch history and both the correction receipt and this journal entry are updated in this follow-up SAME-COMMIT. No previous range, provenance or source credit changed. The correction is an internal evidence-quality repair, **not** a new runtime defect or user notification.
