@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "issue": 504,
-  "status": "IN_PROGRESS",
+  "status": "IN_PROGRESS_TESTING",
   "review_pass": "W1_WORD_BY_WORD",
-  "source_anchor": "e275a93e466a7d894bc944e360f9558f04bd6a90",
+  "source_anchor": "ee538d0b2a105bfed3f35a0adc97bb18725deda1",
   "batches": [
     {
       "id": "G1-001",
@@ -3707,13 +3707,32 @@
         1020
       ],
       "confirmed_safe_fixes": 0
+    },
+    {
+      "id": "G1-183",
+      "receipt": "docs/audits/issue504-review-G1-183.json",
+      "reviewed_file_lines": 0,
+      "reviewed_file_words": 0,
+      "reviewed_github_objects": 8,
+      "reviewed_github_words": 976,
+      "reviewed_pr_ids": [
+        1021,
+        1022,
+        1023,
+        1024,
+        1025,
+        1026,
+        1027,
+        1028
+      ],
+      "confirmed_safe_fixes": 0
     }
   ],
   "totals": {
     "source_file_lines": 7919,
     "source_file_words": 60754,
-    "github_objects": 1196,
-    "github_words": 288302
+    "github_objects": 1204,
+    "github_words": 289278
   },
   "delegated_267_no_double_count": true,
   "source_manifests": [
@@ -3729,12 +3748,12 @@
   },
   "next": {
     "kind": "github_pull_request_title_and_description",
-    "pr_number": 1021,
+    "pr_number": 1029,
     "first_unreviewed_word": 1,
-    "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/1021"
+    "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/1029"
   },
   "uncovered": "Entire GitHub-wide direct review and #267 frozen/current/post-pin incomplete; new audit records are drift-unreviewed.",
-  "latest_review_source_anchor": "e646c6c5584ae586c3d4ce7ae076ce50e0e982db",
+  "latest_review_source_anchor": "ee538d0b2a105bfed3f35a0adc97bb18725deda1",
   "inventory_metadata_only": {
     "github_issue_rest": 523,
     "github_pr_rest": 454,
@@ -8945,7 +8964,7 @@
     "status": "IN_PROGRESS",
     "complete": false
   },
-  "latest_source_anchor": "30ff8d10f41cc32f6ddedf6f59fe3289efedc66e",
+  "latest_source_anchor": "ee538d0b2a105bfed3f35a0adc97bb18725deda1",
   "g1151_reconciliation_20261110": {
     "source_development_parent": "f033a3b41ce42b7f4365ed268f4093d2f683c686",
     "source_main": "11e1e8c7c36dad488519476d8a969bb682915d31",
@@ -10023,6 +10042,43 @@
     "merged_source_governance": "NOT_STARTED",
     "exact_next_unreviewed_pr": 1021,
     "batch_index_invariant": "182/182 contiguous",
+    "prior_duplicate_correction": "G1-117 -15/-4012 preserved",
+    "prior_partial_queue_pointer": "Original RELEASE_QUEUE 1-4736/5377 preserved"
+  },
+  "g1183_reconciliation_20261111": {
+    "status": "IN_PROGRESS_TESTING",
+    "source_development_parent": "ee538d0b2a105bfed3f35a0adc97bb18725deda1",
+    "source_main": "11e1e8c7c36dad488519476d8a969bb682915d31",
+    "source_release_production": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+    "source_ledger_blob_sha": "652f99476c9c54e135935200ff1a9102fc55e238",
+    "source_journal_blob_sha": "7fe1ca773b3db66f7ffde56264d0039f7a6e445f",
+    "reviewed_original_pr_ids": [
+      1021,
+      1022,
+      1023,
+      1024,
+      1025,
+      1026,
+      1027,
+      1028
+    ],
+    "reviewed_original_words": 976,
+    "reviewed_original_utf8_bytes": 8910,
+    "delegated_267_strict_receipt_sha": "9e4ec0edc5b185562d055142718219fe83fa4143",
+    "delegated_pinned_source_sha": "a944f4c45c75d429a60a07aad6411683f2536ccd",
+    "strict_validation_lines": [
+      13,
+      15
+    ],
+    "strict_literal_match": 3,
+    "strict_semantic_source_fields_per_line_min": 11,
+    "new_267_source_credit": 0,
+    "owner_public_exception": "#630 Nov4-30",
+    "confirmed_current_fixes": 0,
+    "pr_head_governance": "NOT_STARTED",
+    "merged_source_governance": "NOT_STARTED",
+    "exact_next_unreviewed_pr": 1029,
+    "batch_index_invariant": "183/183 contiguous",
     "prior_duplicate_correction": "G1-117 -15/-4012 preserved",
     "prior_partial_queue_pointer": "Original RELEASE_QUEUE 1-4736/5377 preserved"
   }
