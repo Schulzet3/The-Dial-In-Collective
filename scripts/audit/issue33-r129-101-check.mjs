@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// #33 R129: immutable original603 #101 exact selected Disciples Nicaragua only.
-// Strict direct-source evidence; do not infer absent process, variety or producer.
+// #33 R129: immutable original603 #101 exact selected Disciples Honduras only.
+// Strict current direct-source evidence; do not infer unlisted variety or decaffeination method.
 import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 import {join,resolve} from 'node:path';
 import {createHash} from 'node:crypto';
