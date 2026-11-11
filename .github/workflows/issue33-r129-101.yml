@@ -1,0 +1,49 @@
+name: DIC Issue33 R129 original selected 101
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r129-101.yml
+      - scripts/audit/issue33-r129-101-check.mjs
+      - tests/coffee-issue33-r129-101.test.mjs
+      - docs/workstreams/ops-issue33-r129-101-20261111.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r129-101.yml
+      - scripts/audit/issue33-r129-101-check.mjs
+      - tests/coffee-issue33-r129-101.test.mjs
+permissions:
+  contents: read
+jobs:
+  selected-current:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Positive and adversarial current chosen-source regressions
+        run: node --test tests/coffee-issue33-r129-101.test.mjs
+      - name: Guarded public HTTPS and real extractor, Add Coffee, Source Review
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '101'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r129
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict current selected identity, immutable corpus and actual-field afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r129
+          DIC_ISSUE33_R129_VERIFY: '1'
+        run: node scripts/audit/issue33-r129-101-check.mjs
+      - name: Retain official raw HTML, evidence, afterproof for independent hashing
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r129-101-evidence
+          path: /tmp/dic33-r129/
+          retention-days: 1
+          if-no-files-found: warn
