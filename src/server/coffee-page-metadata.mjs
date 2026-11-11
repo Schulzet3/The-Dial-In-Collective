@@ -1571,10 +1571,29 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   equivalentCoffeeProductNames(name,meta['og:title'],{brands:[fields.roaster,meta['og:site_name']]}));
  if(!fields.tasting_notes&&matchedDescriptionTitle&&usableMatchedDescriptions.length){
   const escape=value=>String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  // A current selected lot with its own substantive growing/processing story
+  // outranks flavor notes in identity-matched but potentially stale SEO metadata.
+  // Do not erase SEO evidence: it stays visible in page-metadata source facts
+  // and is retained for human review, never auto-added as direct tasting notes.
+  // Pages WITHOUT a substantive selected narrative keep their existing
+  // identity-matched metadata fallback; directly printed notes still prevail.
+  const currentSelectedStory=productCoffeeProse(canonicalProduct,clean)
+   .filter(block=>block.tag==='p'&&!block.educational&&block.text.length>=120&&
+    keyOf(block.text).includes(keyOf(fields.name))&&
+    /\\bcoffee\\b/iu.test(block.text)&&
+    /\\b(?:washed|natural|honey|anaerobic|region|producer|farms?|farmers?|grown|processed)\\b/iu.test(block.text))
+   .map(block=>block.text).join(' ');
+  const directlyPrinted=keyOf(currentSelectedStory);
   for(const description of usableMatchedDescriptions){
    const story=canonicalIdentityScope(fields,'<main><h1>'+escape(fields.name)+'</h1><p>'+escape(description)+'</p></main>');
    const notes=extractProductFlavorEvidence(story,{clean,origin:fields.origin,originConflict:conflicts.has('origin')});
-   if(notes)addSeoFallbackField(fields,'Tasting Notes',notes);
+   if(!notes)continue;
+   const literalNotes=notes.split(/\\s*,\\s*/u).map(keyOf).filter(Boolean);
+   if(directlyPrinted&&literalNotes.length&&
+      !literalNotes.every(note=>directlyPrinted.includes(note))){
+    rememberCoffeeReviewCandidate(fields,'tasting_notes',notes,
+     'Current selected story does not corroborate page SEO tasting metadata');
+   }else addSeoFallbackField(fields,'Tasting Notes',notes);
   }
  }
  if(!fields.roast_level&&!conflicts.has('roast_level')&&matchedDescriptionTitle&&descriptionIdentity&&samePage(descriptionIdentity,source_url)){

@@ -36,3 +36,23 @@ test('real extractor does not invent historical flavor from literal current sele
  assert.equal(p.ok,true,JSON.stringify(p));assert.equal(p.fields.name,chosen.name);
  assert.doesNotMatch(String(p.fields.tasting_notes||''),/jasmine|lime|berry candy/i);
 });
+
+const metaPage=(body,seoNotes='jasmine, lime, berry candy')=>
+ '<html><head><meta property="og:type" content="product">'+
+ '<meta property="og:url" content="https://www.rallycoffee.co/products/ethiopia-refisa">'+
+ '<meta property="og:title" content="Ethiopia Refisa">'+
+ '<meta property="og:description" content="Ethiopia Refisa tasting notes of '+seoNotes+'"></head>'+
+ '<body><main><article class="product"><h1>Ethiopia Refisa</h1>'+
+ '<div class="product__description"><p>'+body+'</p></div></article></main></body></html>';
+test('SEO notes remain reviewable but cannot autofill when current selected lot has different substantive story',()=>{
+ const p=extractPublicCoffeeFacts(metaPage(own),{source_url:'https://'+chosen.host+chosen.path});
+ assert.equal(p.ok,true,JSON.stringify(p));
+ assert.equal(p.fields.name,chosen.name);
+ assert.equal(p.fields.tasting_notes,undefined,JSON.stringify(p));
+ assert.ok((p.source_facts||[]).some(f=>/published page metadata/i.test(f.section||'')&&/jasmine, lime, berry candy/i.test(f.value||'')));
+});
+test('when selected lot directly prints its listed notes, SEO agrees without displacing direct evidence',()=>{
+ const p=extractPublicCoffeeFacts(metaPage(own+' Tasting Notes: jasmine, lime, berry candy.'),{source_url:'https://'+chosen.host+chosen.path});
+ assert.equal(p.ok,true,JSON.stringify(p));
+ assert.match(String(p.fields.tasting_notes||''),/jasmine/i);
+});

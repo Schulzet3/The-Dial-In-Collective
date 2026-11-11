@@ -52,6 +52,7 @@ if(process.env.DIC_ISSUE33_R104_VERIFY==='1'){
  check(fold(f.process)==='washed','current_printed_washed');
  check(fold(f.origin).includes('west arsi')&&fold(f.origin).includes('ethiopia'),'current_printed_west_arsi_ethiopia');
  check(!f.tasting_notes,'historical_flavor_without_current_selected_corroboration_must_be_blank');
+ check(!(r.seo_fallback_fields||[]).includes('tasting_notes'),'stale_seo_not_canonical_fallback');
  check(!f.roast_level&&!f.variety&&!f.elevation_m&&!f.decaffeination_method,'unpublished_specs_unfilled');
  check(!f.producer||/smallholder|farmer/i.test(f.producer),'smallholder_farmer_not_washing_station_operator');
  const result={source_sha:report?.source_sha,case_number:542,final_url:r.final_url||null,
