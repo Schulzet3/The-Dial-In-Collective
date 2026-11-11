@@ -3837,6 +3837,18 @@
       "receipt_path": "docs/audits/issue509-run171-exact-source-ci-closure-2026-11-11.json",
       "production_writes": 0,
       "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-11",
+      "event": "RUN175_FULL_CURRENT_HIGH_MEAN_AND_TEMP_WRITER_NUMERIC_AND_TABLE_MAINTENANCE",
+      "source_parent_sha": "a028c7556439efae5acd7af2bbf1a1e29328b705",
+      "receipt_path": "docs/audits/issue509-provider-high-mean-pgss-autovacuum-2026-11-11-run175.json",
+      "high_mean_count": 133,
+      "temp_writer_count": 100,
+      "app_table_count": 45,
+      "new_confirmed_defects": 0,
+      "provider_writes": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -17569,5 +17581,73 @@
     "provider_writes": 0,
     "baseline_complete": false,
     "closure_own_ci": "VERIFY_SEPARATELY"
+  },
+  "provider_high_mean_pgss_autovacuum_run175": {
+    "status": "DIRECT_ALL_CURRENT_HIGH_MEAN_QUERY_NUMERIC_PLUS_ALL_TEMP_WRITERS_AND_APP_TABLE_MAINTENANCE_REVIEW",
+    "development_parent_sha": "a028c7556439efae5acd7af2bbf1a1e29328b705",
+    "observed_at_utc": "2026-11-11 18:51:56.828504+00",
+    "receipt_path": "docs/audits/issue509-provider-high-mean-pgss-autovacuum-2026-11-11-run175.json",
+    "high_mean_fingerprints": 133,
+    "temp_writing_fingerprints": 100,
+    "application_tables": 45,
+    "high_mean_by_role": {
+      "authenticated": {
+        "fingerprints": 1,
+        "calls": 4,
+        "cumulative_ms": 667.41,
+        "over_300ms_means": 0,
+        "with_temp_writes": 0
+      },
+      "authenticator": {
+        "fingerprints": 1,
+        "calls": 94,
+        "cumulative_ms": 15390.826,
+        "over_300ms_means": 0,
+        "with_temp_writes": 0
+      },
+      "postgres": {
+        "fingerprints": 119,
+        "calls": 181,
+        "cumulative_ms": 45988.12,
+        "over_300ms_means": 9,
+        "with_temp_writes": 5
+      },
+      "supabase_admin": {
+        "fingerprints": 1,
+        "calls": 34,
+        "cumulative_ms": 7720.072,
+        "over_300ms_means": 0,
+        "with_temp_writes": 0
+      },
+      "supabase_read_only_user": {
+        "fingerprints": 10,
+        "calls": 76,
+        "cumulative_ms": 34073.04,
+        "over_300ms_means": 8,
+        "with_temp_writes": 0
+      },
+      "supabase_storage_admin": {
+        "fingerprints": 1,
+        "calls": 1,
+        "cumulative_ms": 259.362,
+        "over_300ms_means": 0,
+        "with_temp_writes": 0
+      }
+    },
+    "temp_roles": {
+      "postgres": {
+        "fingerprints": 100,
+        "temporary_written_blocks": 179928,
+        "calls": 175
+      }
+    },
+    "cumulative_database_temp_bytes": "145046209555",
+    "detected_new_confirmed_defects": 0,
+    "confirmed_safe_deletions": 0,
+    "first_time_provider_sql_words": 0,
+    "issue267_lines": 0,
+    "production_writes": 0,
+    "baseline_complete": false,
+    "next": "New migration #60 or newly changed/unreviewed direct provider definition; hosted API/Auth settings remain UNVERIFIED"
   }
 }
