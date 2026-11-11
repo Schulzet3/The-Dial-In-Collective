@@ -3920,6 +3920,16 @@
       "receipt_path": "docs/audits/issue509-run178-exact-source-ci-closure-2026-11-11.json",
       "provider_writes": 0,
       "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-11",
+      "event": "RUN179_COLUMN_ACL_GATEWAY",
+      "source_parent_sha": "e6c7b538fff018301e48124d7c394dcbbbe795b9",
+      "provider_read_sha": "e6c7b538fff018301e48124d7c394dcbbbe795b9",
+      "receipt_path": "docs/audits/issue509-provider-column-acl-and-gateway-status-2026-11-11-run179.json",
+      "column_permission_records": 750,
+      "production_writes": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -17805,5 +17815,77 @@
     "receipt_path": "docs/audits/issue509-run178-exact-source-ci-closure-2026-11-11.json",
     "provider_writes": 0,
     "baseline_complete": false
+  },
+  "provider_column_acl_gateway_run179": {
+    "status": "CURRENT_DIRECT_ALL_VISIBLE_COLUMN_PERMISSION_SEMANTIC",
+    "project_ref": "azviqqejypsefzilgonr",
+    "provider_read_source_parent_sha": "e6c7b538fff018301e48124d7c394dcbbbe795b9",
+    "development_integration_parent_sha": "e6c7b538fff018301e48124d7c394dcbbbe795b9",
+    "receipt_path": "docs/audits/issue509-provider-column-acl-and-gateway-status-2026-11-11-run179.json",
+    "reviewed_columns": 750,
+    "count_by_schema": {
+      "auth": {
+        "columns": 271,
+        "table_entities": 27,
+        "explicit_column_acl": 0,
+        "anon_select": 0,
+        "authenticated_select": 0
+      },
+      "private": {
+        "columns": 133,
+        "table_entities": 23,
+        "explicit_column_acl": 0,
+        "anon_select": 0,
+        "authenticated_select": 0
+      },
+      "public": {
+        "columns": 235,
+        "table_entities": 22,
+        "explicit_column_acl": 0,
+        "anon_select": 0,
+        "authenticated_select": 211
+      },
+      "realtime": {
+        "columns": 21,
+        "table_entities": 3,
+        "explicit_column_acl": 0,
+        "anon_select": 19,
+        "authenticated_select": 19
+      },
+      "storage": {
+        "columns": 73,
+        "table_entities": 8,
+        "explicit_column_acl": 0,
+        "anon_select": 69,
+        "authenticated_select": 69
+      },
+      "vault": {
+        "columns": 17,
+        "table_entities": 2,
+        "explicit_column_acl": 0,
+        "anon_select": 0,
+        "authenticated_select": 0
+      }
+    },
+    "explicit_column_acl": 0,
+    "edge_gateway_24h": {
+      "requests": 45,
+      "status_200": 45,
+      "post": 39,
+      "get": 6
+    },
+    "auth_log_24h": {
+      "info": 6,
+      "audit_info": 2
+    },
+    "postgrest_events_status_unverified": 35,
+    "stored_migrations": 64,
+    "edge_function_active": 3,
+    "new_confirmed_defects": 0,
+    "code_fixes": 0,
+    "provider_writes": 0,
+    "issue267_lines": 0,
+    "baseline_complete": false,
+    "next": "Migration #65 if new; else first new/changed/unreviewed definition or hosted Auth/PostgREST config with #96."
   }
 }
