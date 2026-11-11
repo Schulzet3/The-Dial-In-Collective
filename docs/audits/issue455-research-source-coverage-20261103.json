@@ -4830,15 +4830,33 @@
       "current_app": "site/lib/constants.js SCALES includes Astringency / Dryness key with lower dryness better, and site/lib/ui.js displays independent rating controls.",
       "result": "NO_REPRODUCIBLE_CURRENT_UX_OR_CORRECTNESS_DEFECT_FROM_THIS_PAPER; HOLD_NUMERIC_OR_BEHAVIORAL_POLICY",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-APP-178-A",
+      "source": "model.js blob 00c027c5f10d938fa2cc050572286eb9570817de; development d97110baee03fba4707860610181e61d24824602",
+      "claim": "Current-range-only Coffee overview success accepted archived impossible original grinder snapshots.",
+      "grade": "DIRECT_SOURCE_LOGIC_WITH_SEVEN_SYNTHETIC_REGRESSIONS_AUTHORED_NOT_YET_RUN",
+      "current_app": "Current physical Log Shot bounds and five green preserved but original snapshot ignored in overview green indicator.",
+      "result": "NARROW_SAFE_ORIGINAL_CALIBRATION_GUARD_AUTHORED_CI_PENDING",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-APP-178-B",
+      "source": "engine.js blob 57acd7ee227280b2856de70739c3431199f86be5; familyEvidenceShots helper; development d97110baee03fba4707860610181e61d24824602",
+      "claim": "An archived five-green but originally impossible grinder snapshot could veto newest non-green recipe advice.",
+      "grade": "DIRECT_SOURCE_LOGIC_CROSSCHECK_PREEXISTING_HISTORICAL_EVIDENCE_HELPER_CI_PENDING",
+      "current_app": "measuredLocalSuccess filtered current scale, not original snapshot/calibration.",
+      "result": "SAFE_EXISTING_HISTORICAL_FILTER_REUSED_CI_PENDING",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [],
   "change_scope": {
-    "application_code_changed": false,
+    "application_code_changed": true,
     "tests_executed": false,
     "production_deployed": false,
     "queue_changed": false,
-    "reason": "R455-177 peer-reviewed drip coffee astringency isolate study reviewed; no verified app defect or approval to change Locked sensory rule; documentation only."
+    "reason": "R178 narrow original grinder snapshot eligibility source fix and seven regressions authored, CI pending."
   },
   "next_actions": [
     "R455-168 FINAL: PR1901 exact reviewed head 3b65c3... nonforce merged 767e12c8e763959f0b6677f4de7ad7e69ce80cf3 all five blobs identical. Node22/lint 3600 PASS/0 FAIL/6 SKIP head 42887964674 and merge 42888613274; mobile/browser/offline, head SQL/security and approval, merged governance all SUCCESS; original603 SKIPPED. Queue READY development-only, not published. S019 unavailable, #267 separate V2 literal review uncredited.",
@@ -4950,19 +4968,20 @@
     "R455-175 PR1960 exact head c208f4e4 nonforce merged 4b19def81913686c09e7ece03133bbc20e6de199; all four blobs identical; six synthetic regressions PASS in head 42941881818 and merge 42942228875, Node22 3698/0/6; head browser/SQL/security/approval and merged browser/approval SUCCESS; original603 SKIPPED. Queue READY docs separate PR CI/merge pending. No publish or S019 certification.",
     "R455-176 parent 03abedb8d855f4e55dc459f2a272073596969a39; engine 547de9f94677066b2f36825fe41f1e6161bbd4d8. Five synthetic scenarios drafted for imported invalid/missing dated green record vetoing newest non-green rated feedback. Atomic engine/test/ledger/journal; PR exact-source CI, merge and READY queue NOT VERIFIED at authoring. Standalone S019 unreviewed, #267 separate.",
     "R455-176 PR1968 head b1fd7a4b nonforce squash merged ef669d3d after five synthetic Node22 cases PASS. Exact head Node22 3711/0/6, UX/SQL/security/governance success; merged Node22 3711/0/6 and UX/governance SUCCESS. READY docs queue/status/ledger/journal follow-up PR must pass applicable exact-source CI and merge; not deployed. S019 not reviewed, #267 separate.",
-    "R455-177 peer-reviewed Linne 2025 original RSC HTML directly reviewed; trace astringency tactile perception, n4/n5/n9 and repeated ratings, unverified supplements/PDF; no numeric espresso correction. Verify documentation PR exact-head CI and nonforce merge, exact source readback, then continue other distinct source/UX priority. S019 unavailable and #267 scope separate."
+    "R455-177 peer-reviewed Linne 2025 original RSC HTML directly reviewed; trace astringency tactile perception, n4/n5/n9 and repeated ratings, unverified supplements/PDF; no numeric espresso correction. Verify documentation PR exact-head CI and nonforce merge, exact source readback, then continue other distinct source/UX priority. S019 unavailable and #267 scope separate.",
+    "R455-178 original grinder snapshot overview and five-green veto source defect: code/test/ledger/journal authored from d97110baee03fba4707860610181e61d24824602; tests, exact PR/merge CI and READY queue reconciliation pending. No production or member tests. S019 still unavailable."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-177",
-    "source_sha": "b48bc1e249ca2d05049769343af17ce108ab04ff",
+    "run_id": "R455-178",
+    "source_sha": "d97110baee03fba4707860610181e61d24824602",
     "issue": 455,
-    "phase": "DIRECT_PRIMARY_ASTRINGENCY_RESEARCH_REVIEW_RECORDED_DOCS_PR_PENDING_VERIFICATION",
+    "phase": "SOURCE_FIX_AND_TESTS_AUTHORED_CI_NOT_YET_EXECUTED",
     "source_counts": {
       "sources": 95,
-      "evidence_checks": 270,
-      "proposals": 138
+      "evidence_checks": 272,
+      "proposals": 139
     },
-    "release_state": "RESEARCH_ONLY_NO_RUNTIME_CHANGE_NO_READY_ITEM_NO_DEPLOY",
+    "release_state": "NOT_READY_NOT_DEPLOYED",
     "original_s019": "UNAVAILABLE_NOT_REVIEWED",
     "github267_literal_review_credit": 0
   },
@@ -7880,6 +7899,26 @@
       "release_queue_status": "RESEARCH_ONLY_NO_READY_ITEM_NO_DEPLOY",
       "github267_literal_review_credit": 0,
       "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-178-ORIGINAL-GRIND-SNAPSHOT-SUCCESS-ELIGIBILITY",
+      "finding": "Archived green original grinder snapshot impossible in original espresso range nonetheless influences current green status and recommendation veto.",
+      "evidence": [
+        "R455-EV-APP-178-A",
+        "R455-EV-APP-178-B"
+      ],
+      "severity": "P2_SYNTHETIC_REPRODUCIBLE_UI_AND_RECOMMENDATION_INTEGRITY",
+      "user_benefit": "Prevent false dialed-in feedback and missed actionable latest-shot advice from corrupted historical calibration.",
+      "source_provenance": "Exact original model/engine Git blobs at development d97110baee03fba4707860610181e61d24824602; existing Locked old-calibration evidence safeguard",
+      "current_locked": "Five sensory inputs; all-green only from eligible measures; original shot/notes immutable; independent styles/feed and versioned grinder scale; one controllable change.",
+      "current_app": "Existing status/veto selectors did not check original grinder snapshot.",
+      "proposed_change": "Validate original calibration bounds for green success, using legacy fallback for absent optionals; reuse existing engine helper.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "SAFE_CODE_TEST_JOURNAL_SAME_COMMIT_AUTHORED_CI_PENDING",
+      "test_plan": "Seven real-module synthetic negatives/positives then source-bound Node22, UX/mobile/offline/SQL/security/governance; unchanged suites reused, original603 not asserted.",
+      "release_queue_status": "NOT_READY_PENDING_TESTS_MERGE",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "changeScope": {

@@ -507,7 +507,9 @@ export function recommendation(s,coffeeId,options={}) {
  // A success on another basket, feed mode or grinder calibration is still
  // valid history, but cannot veto feedback for this exact measured recipe
  // context. Preserve successful families and all five original taste scores.
- const measuredLocalSuccess=measuredRecipeShots(s.shots).some(sh=>
+ // Reuse the existing original-calibration evidence gate for archived
+ // green success; today's espresso range cannot prove a past dial possible.
+ const measuredLocalSuccess=familyEvidenceShots(s,measuredRecipeShots(s.shots)).some(sh=>
   !sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&
   sh.basketId===basket.id&&sh.feedMode===feed&&sh.calibrationId===v.calibrationId&&
   // Imported green history without a trustworthy chronological measurement
