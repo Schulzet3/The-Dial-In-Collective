@@ -11826,6 +11826,37 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
       "notes": "Owner Option B SAFE existing measured-history grinder bounds; reuses R173 historical calibration guard for recorded personal temperature. Preserve all five original taste ratings, raw history, private notes, missing legacy grinder readings, independent styles, current calibration and owner Locked numeric taste policy. DEV READY ONLY, no Netlify, main/release/production or live SQL/Auth/Edge/member/provider write, no owner product approval."
+    },
+    {
+      "id": "DIC-Q-455-edited-five-taste-feedback-cache-refresh",
+      "issue": 455,
+      "pr": 1960,
+      "title": "Refresh actionable latest-shot recommendation from corrected five sensory ratings without altering private shot history",
+      "state": "READY",
+      "merged_source_sha": "4b19def81913686c09e7ece03133bbc20e6de199",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Six R175 direct synthetic real-module positive/negative regressions 3003-3008 all PASS at exact PR-head Node22/lint/build 42941881818: 3698 PASS / 0 FAIL / 6 intentional SKIP.",
+        "Exact head cloud UX/mobile/browser/offline 42941881811, isolated SQL 42941881815, source security 42941881833 and approval 42941881781 SUCCESS. Original frozen603 42941881798 SKIPPED, NOT PASS. Do not infer inner unrelated skipped suites.",
+        "All four reviewed source engine/test/ledger/same-commit journal Git blobs match nonforce squash merge 4b19def81913686c09e7ece03133bbc20e6de199; no unrelated deletion or overwritten concurrent work.",
+        "Exact MERGED source Node22/lint/build 42942228875 SUCCESS: 3698 PASS / 0 FAIL / 6 intentional SKIP and six new groups PASS; merged cloud UX/mobile/browser/offline 42942228783 and approval governance 42942228760 SUCCESS.",
+        "No signed-in production member testing, physical espresso trial, new numeric policy or production publication claimed."
+      ],
+      "ci_runs": [
+        42941881818,
+        42941881811,
+        42941881815,
+        42941881833,
+        42941881781,
+        42942228875,
+        42942228783,
+        42942228760
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Approved Option B narrow SAFE error correction: corrected complete non-green tastes no longer suppressed by cached actionless edit placeholder. Preserves original five ratings, one variable, notes, raw History, multiple recipe families, style/feed and grinder calibration, existing bounds, and privacy. Development READY ONLY, no publish/Netlify, main/release/provider/SQL/Auth/member write or owner-Locked change."
     }
   ],
   "history": [
@@ -13052,6 +13083,15 @@
       "item_id": "DIC-Q-455-temperature-recorded-grinder-evidence-guard",
       "state": "READY",
       "source_sha": "7086f5990e330ebaf08ecde54404a631e722a9c6",
+      "evidence": "docs/workstreams/issue-455.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-edited-five-taste-feedback-cache-refresh",
+      "state": "READY",
+      "source_sha": "4b19def81913686c09e7ece03133bbc20e6de199",
       "evidence": "docs/workstreams/issue-455.md",
       "production_deployed": false
     }
