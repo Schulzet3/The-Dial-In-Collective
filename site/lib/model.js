@@ -170,6 +170,17 @@ export function hasLocalSuccess(s,coffeeId,style) {
   // Use the version's recorded espresso range, never a universal grind range.
   if((Number.isFinite(v?.grinderMin)&&sh.grindSetting<v.grinderMin)||
      (Number.isFinite(v?.grinderMax)&&sh.grindSetting>v.grinderMax))return false;
+  // An imported original grinder reading must fit its own recorded scale,
+  // not merely today's active range. Preserve invalid shots in private History.
+  const old=sh.snapshot;
+  const calibration=v?.calibrations?.find(c=>c.id===sh.calibrationId);
+  const oldMin=Number.isFinite(old?.grinderMin)?old.grinderMin:
+   Number.isFinite(calibration?.min)?calibration.min:null;
+  const oldMax=Number.isFinite(old?.grinderMax)?old.grinderMax:
+   Number.isFinite(calibration?.max)?calibration.max:null;
+  if((oldMin!=null&&oldMax!=null&&oldMax<=oldMin)||
+     (oldMin!=null&&sh.grindSetting<oldMin)||
+     (oldMax!=null&&sh.grindSetting>oldMax))return false;
   // An absent optional temperature is allowed; invalid recorded values
   // remain visible in original private History but cannot prove a recipe.
   if(sh.tempC!=null){
