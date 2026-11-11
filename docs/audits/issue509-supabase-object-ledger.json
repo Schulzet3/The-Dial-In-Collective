@@ -17392,5 +17392,103 @@
     "provider_writes": 0,
     "baseline_complete": false,
     "closure_governance": "VERIFY_SEPARATELY"
+  },
+  "provider_five_family_definition_drift_run172": {
+    "status": "CURRENT_535_DEFINITION_HASH_AND_POLICY_EXPRESSION_PARITY",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_parent_sha": "6264a42cf60682cd0d1e6fe6a13e8295dfba6fd8",
+    "observed_at_utc": "2026-11-11T15:47:39.897154+00",
+    "receipt_path": "docs/audits/issue509-provider-five-family-definition-drift-and-runtime-2026-11-11-run172.json",
+    "definitions_checked": 535,
+    "unchanged": 535,
+    "new": 0,
+    "changed": 0,
+    "missing": 0,
+    "counts": {
+      "functions": 106,
+      "constraints": 261,
+      "indexes": 96,
+      "policies": 39,
+      "noninternal_triggers": 33
+    },
+    "stored_migrations": 59,
+    "edge_functions": 3,
+    "resource_cumulative_temp_bytes": "143416522965",
+    "resource_database_bytes": 16823987,
+    "advisors": {
+      "security": [
+        {
+          "name": "rls_enabled_no_policy",
+          "count": 8
+        },
+        {
+          "name": "authenticated_security_definer_function_executable",
+          "count": 10
+        },
+        {
+          "name": "auth_leaked_password_protection",
+          "count": 1
+        }
+      ],
+      "performance": [
+        {
+          "name": "unindexed_foreign_keys",
+          "count": 13
+        },
+        {
+          "name": "unused_index",
+          "count": 8
+        }
+      ],
+      "health": []
+    },
+    "new_confirmed_defects": 0,
+    "first_time_provider_words": 0,
+    "issue267_lines": 0,
+    "source_fixes": 0,
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "next": "Migration #60 if added, else first changed/new/unreviewed provider definition/hosted Auth API boundary"
+  },
+  "provider_run172_exact_ci_closure": {
+    "audit_sha": "464e6f61c385e61255cab24b48e639075bbb95d2",
+    "ci_run_id": 43053712732,
+    "ci_head_sha": "464e6f61c385e61255cab24b48e639075bbb95d2",
+    "conclusion": "COMPLETED_SUCCESS",
+    "job_id": 130637453379,
+    "receipt_path": "docs/audits/issue509-run172-exact-source-ci-closure-2026-11-11.json",
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "closure_own_ci": "CHECK_AT_EXACT_CLOSURE_SHA",
+    "next": "Migration #60 or newly changed/unreviewed provider definition/available hosted API Auth configuration"
+  },
+  "provider_pgss_temp_role_run173": {
+    "status": "DIRECT_NUMERIC_ROLE_ATTRIBUTION_REVIEW",
+    "source_parent_sha": "5aa746631a1fbd956cad4138c344187aa49a0c79",
+    "receipt_path": "docs/audits/issue509-provider-query-temp-role-attribution-2026-11-11-run173.json",
+    "migrations": 59,
+    "pgss_fingerprints": 4802,
+    "temp_writing_queryids": 88,
+    "roles_with_temp_writes": [
+      "postgres"
+    ],
+    "pg_database_temp_bytes": "143970856146",
+    "pg_stat_statements_reset": "2026-10-09 11:11:31.487298+00",
+    "no_new_confirmed_defect": true,
+    "first_time_provider_words": 0,
+    "production_writes": 0,
+    "baseline_complete": false,
+    "next": "Check migration ordinal #60 if new; else first changed/new/unreviewed provider definition or accessible hosted Auth/API and true provider disk/free-headroom settings, coordinate #96."
+  },
+  "provider_run173_exact_ci_closure": {
+    "source_sha": "e7aa18c5089439cc76f55fb6805874552f70adf9",
+    "workflow_id": 43062579791,
+    "workflow_conclusion": "COMPLETED_SUCCESS",
+    "job_id": 130668813967,
+    "all_steps_passed": true,
+    "receipt_path": "docs/audits/issue509-run173-exact-source-ci-closure-2026-11-11.json",
+    "closure_commit_ci": "VERIFY_SEPARATELY",
+    "baseline_complete": false,
+    "provider_writes": 0
   }
 }
