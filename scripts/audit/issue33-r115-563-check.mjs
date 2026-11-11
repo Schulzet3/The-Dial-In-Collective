@@ -4,7 +4,7 @@ import {readFileSync,writeFileSync,mkdirSync} from 'node:fs';
 import {join,resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
-import {selectedProductHeadings} from './issue33-selected-product-heading.mjs';
+import {selectedProductHeadings,selectedProductFormH2,selectedProductPurchaseRootH2} from './issue33-selected-product-heading.mjs';
 const sha=b=>createHash('sha256').update(b).digest('hex');
 const fold=s=>String(s||'').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase().replace(/[^a-z0-9]+/gu,' ').trim();
 export const selected115=Object.freeze({
@@ -18,13 +18,16 @@ export const selected115=Object.freeze({
 });
 export function direct115(html){
  const selected=productMarkup(String(html||''));
- const headings=selectedProductHeadings(selected);
- const body=fold(selected.replace(/<!--[\s\S]*?-->/gu,' ')
+ const h1=selectedProductHeadings(selected);
+ const form=h1.length?[]:selectedProductFormH2(selected);
+ const purchase=(!h1.length&&!form.length)?selectedProductPurchaseRootH2(String(html||'')):[];
+ const headings=h1.length?h1:form.length?form:purchase;
+ const body=fold(selected.replace(/<h[12]\b[^>]*>[\s\S]*?<\/h[12]>/giu,' ').replace(/<!--[\s\S]*?-->/gu,' ')
   .replace(/<(?:script|style|noscript|template|nav|aside|footer|header|form|select)\b[^>]*>[\s\S]*?<\/(?:script|style|noscript|template|nav|aside|footer|header|form|select)>/giu,' ')
   .split(/<h[23][^>]*>\s*(?:Customer Reviews|You may also like|Related coffees)/i)[0]
   .replace(/<[^>]{0,2000}>/gu,' ').replace(/&(?:nbsp|amp);/giu,' ').replace(/\s+/gu,' '));
- const unique= headings.length===1 && /halo hartume/.test(fold(headings[0])) && /2nd selection/.test(fold(headings[0])) && /ethiopia/.test(fold(headings[0]));
- return {headings,unique,required:selected115.own.map(literal=>({literal,matched:body.includes(fold(literal))}))};
+ const unique=headings.length===1 && /halo hartume/.test(fold(headings[0])) && /2nd selection/.test(fold(headings[0])) && /ethiopia/.test(fold(headings[0]));
+ return {headings,h1_count:h1.length,identity_source:h1.length?'selected_h1':form.length?'selected_product_form_h2':purchase.length?'selected_purchase_root_h2':'unverified',unique,required:selected115.own.map(literal=>({literal,matched:body.includes(fold(literal))}))};
 }
 export function fields115Ok(fields){
  if(!fields||typeof fields!=='object')return false;
