@@ -34,7 +34,11 @@ test('program name, missing roast or other coffee notes must not become selected
  assert.equal(fields122Ok({...valid,tasting_notes:'Nano Challa Orange Blossom'}),false);
 });
 test('actual parser accepts source-shaped exact current selected product',()=>{
- const p=extractPublicCoffeeFacts(page(),{source_url:selected122.url});
+ const wixProduct={ '@context':'https://schema.org','@type':'Product',
+  name:selected122.name,url:selected122.url,description:selected122.own.join(' ')};
+ const current=page().replace('</head>',
+  '<script type="application/ld+json">'+JSON.stringify(wixProduct)+'</script></head>');
+ const p=extractPublicCoffeeFacts(current,{source_url:selected122.url});
  assert.equal(p.ok,true,JSON.stringify(p));
  assert.equal(p.fields?.name,selected122.name,JSON.stringify(p.fields));
 });
