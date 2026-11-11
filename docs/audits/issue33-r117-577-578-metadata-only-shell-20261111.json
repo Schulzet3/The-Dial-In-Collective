@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "run": "R117",
+  "scope": "DEVELOPMENT_ONLY",
+  "status": "NARROW_RUNTIME_PARSER_CORRECTION_MERGED_TESTING_BROWSER_INFRASTRUCTURE_PENDING",
+  "recovered_development_parent": "1e2430b745c5d2f749f347aa26340fdec7fb039f",
+  "source_pr": 2063,
+  "reviewed_head": "83ac621042cea7ab7cb4ca83ecdd4c770cdfd604",
+  "nonforce_merged_sha": "2e2a1df1bb7fa9854637cf7eb5960138ce1eafc2",
+  "changed_blobs": {
+    "parser": "fcab79c5f1545e330f9c7ad0034a869025db8bc3",
+    "regressions": "76044f72d31fe6f3342f6c017dd6178db0e452d",
+    "workflow": "8d932c7988660f9cc9e754ea4cb5259422f4ba9a",
+    "scoped_journal": "40a267492de2e5c4e46e68e385d8d05038469049"
+  },
+  "original": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "full_manual_semantic_certification": "UNVERIFIED",
+    "full_frozen_workflow": "SKIPPED_NOT_PASS"
+  },
+  "observed_selected": [
+    {
+      "number": 577,
+      "name": "Guatemala Ella Todos Santos MEDIUM ROAST",
+      "url": "https://www.swroasting.coffee/product/guatemala-ella-todos-santos-medium-roast/25NBJDMXCAYX4YC5XJZAYZDG",
+      "bytes": 55670,
+      "sha256": "68078557b7b66069f9de5476cda72c0f6616aed1aef05306edeb6da31579203b",
+      "current_identity": "UNVERIFIED_CLIENT_ONLY_NO_H1_OR_SELECTED_PRODUCT",
+      "postfix_parser": {
+        "ok": false,
+        "reason": "ambiguous_or_missing_product",
+        "canonical_fields": {}
+      }
+    },
+    {
+      "number": 578,
+      "name": "Colombia Camacho Rosado Extralight",
+      "url": "https://www.swroasting.coffee/product/colombia-camacho-rosado-extralight/3JUGSMBHQMZS4BR5I5N2SDEA",
+      "bytes": 56296,
+      "sha256": "be412e041ed195d6d883ebca56edbf575ce691729517c3305c9aeecfc7ce837e",
+      "current_identity": "UNVERIFIED_CLIENT_ONLY_NO_H1_OR_SELECTED_PRODUCT",
+      "postfix_parser": {
+        "ok": false,
+        "reason": "ambiguous_or_missing_product",
+        "canonical_fields": {}
+      }
+    }
+  ],
+  "source_proof": {
+    "run": 43037174682,
+    "artifact_id": 13863481659,
+    "zip_sha256": "30b6964e03faea527e5d07097e5723fc6b99fa1c6005bfbe892e7ae1cf9e47e7",
+    "evidence_sha256": "101531432e9a4a88f684a8310df53fca04c7c401b669ecd385025c0cfc7cf43f",
+    "afterproof_sha256": "1482f2bc66c84e709548ff501468b1be2167e7fc21d3783b88aa4617815022fc",
+    "strict_afterproof": {
+      "passed": true,
+      "failures": []
+    },
+    "independent_zip_and_files_rehashed": true
+  },
+  "ci": {
+    "pr_focused": 43035762444,
+    "pr_node_lint": 43035762460,
+    "merged_focused": 43037174682,
+    "merged_node_lint": 43037174927,
+    "node_pass": 3876,
+    "node_fail": 0,
+    "node_skipped": 6,
+    "lint": "PASS",
+    "pr_security_sql_approval": "PASS",
+    "merged_cloud": "PASS",
+    "mobile_browser": "PENDING_INFRASTRUCTURE_DNS_FAILURE_43035762332_AND_MERGED_43037174655"
+  },
+  "queue": {
+    "id": "DIC-Q-33-r117-meta-only-unrendered-shell-rejection",
+    "state": "TESTING",
+    "other_state_values_preserved": true
+  },
+  "preservation": {
+    "original_csv_oracle_scorer_modified": false,
+    "approval_modified": false,
+    "production_deployed": false,
+    "netlify_publish": false,
+    "sql_edge_auth_provider_member_writes": false,
+    "forced_git": false
+  },
+  "next": "Review browser retry and merged Chromium status, advance only narrow code correction to READY if relevant CI verified and no blockers. Current #577/#578 selected primary source unavailable in raw HTML; preserve as unverified, not original603 certified. Continue disjoint source cases."
+}
