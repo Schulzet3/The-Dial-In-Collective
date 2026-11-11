@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 161,
+  "review_type": "DIRECT_COMPLETE_REALTIME_PROVIDER_SQL_SEMANTIC_CROSS_LAYER_WITH_CURRENT_ROLE_ACL_AND_PUBLICATION",
+  "project_ref": "azviqqejypsefzilgonr",
+  "observed_at_utc": "2026-11-11T04:47:35.340640Z",
+  "branches_at_audit": {
+    "development_parent_sha": "d97110baee03fba4707860610181e61d24824602",
+    "main_sha": "11e1e8c7c36dad488519476d8a969bb682915d31",
+    "release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0"
+  },
+  "live_project": {
+    "status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11",
+    "region": "us-east-2"
+  },
+  "authoritative_sources_checked": [
+    "AGENTS.md",
+    "docs/ai/CONTEXT_ENTRYPOINT.md",
+    "docs/ai/PREFLIGHT.md",
+    "docs/CURRENT_STATUS.md",
+    "docs/MASTER_SPECIFICATION.md",
+    "docs/DECISION_LEDGER.json",
+    "docs/APPROVAL_COVERAGE_MATRIX.json",
+    "docs/RELEASE_QUEUE.json (scoped search/index only; full queue body not retrievable)",
+    "docs/ai/SOURCE_REGISTER.json",
+    "docs/workstreams/issue-509.md",
+    "docs/audits/issue509-supabase-object-ledger.json",
+    "GitHub Issue #509 and latest 4 comments"
+  ],
+  "provider_queries": {
+    "type": "READ_ONLY_CATALOG_AND_BOUNDED_AGGREGATES_ONLY",
+    "realtime_relation_grants": "pg_class + pg_namespace + has_table_privilege + has_schema_privilege; column-by-column pg_attribute and has_column_privilege",
+    "roles": "pg_roles flags and pg_has_role SET option; no user identities",
+    "functions": "pg_get_functiondef of all 7 listed routines, pg_get_function_identity_arguments, per-object md5 and full source characters; source read 1-END",
+    "publication": "pg_publication, pg_publication_tables, pg_replication_slots, realtime.subscription COUNT(*) only",
+    "triggers": "pg_get_triggerdef for realtime.subscription",
+    "indexes": "pg_get_indexdef for all 6 realtime indexes",
+    "logs": "7 sources, numeric event totals only, last 24h; no raw log data",
+    "advisors": "security/performance/health provider notices rechecked"
+  },
+  "complete_routine_source_rechecks": [
+    {
+      "object": "realtime.authorize(role_name text, topic_name text, claims text, sub text, headers text, read_extensions text[], write_extensions text[])",
+      "md5": "3f406642afec1126e2ddb86b33ff8177",
+      "source_characters": 2364,
+      "verdict": "INVOKER_PROBE_INSERT_AND_ROLE_SWITCH_ROLLED_BACK_BY_EXCEPTION; NO_PRIVILEGE_ESCALATION_DEMONSTRATED"
+    },
+    {
+      "object": "realtime.subscription_check_filters()",
+      "md5": "ff71dc5fe6923e2a5b8b9f79f5ccbf0d",
+      "source_characters": 5465,
+      "verdict": "TRIGGER_CHECKS_SELECTABLE_FILTER_COLUMNS_OPERATOR_TYPE_IN_LIMIT_100_REGEX_AND_NORMALIZES_FILTER_ORDER"
+    },
+    {
+      "object": "realtime.list_changes(publication name, slot_name name, max_changes integer, max_record_bytes integer)",
+      "md5": "d2cd4e1195236fa92705bdba784719ae",
+      "source_characters": 2220,
+      "verdict": "INVOKER_WAL_READER_DEPENDS_ON_PUBLICATION_SLOT_AND_REPLICATION_PRIVILEGE; NEVER_EXECUTED"
+    },
+    {
+      "object": "realtime.list_changes_sync(publication name, slot_name name, max_changes integer, max_record_bytes integer)",
+      "md5": "fcbc1eeaa0bd65e2d79fa397fb6f5834",
+      "source_characters": 2226,
+      "verdict": "INVOKER_SYNC_WAL_READER_SAME_PUBLICATION_SLOT_AND_REPLICATION_GATE; NEVER_EXECUTED"
+    },
+    {
+      "object": "realtime.broadcast_changes(topic_name text,event_name text,operation text,table_name text,table_schema text,new record,old record,level text)",
+      "md5": "ed087c81e8e1cf26699bc89b9352dd97",
+      "source_characters": 1046,
+      "verdict": "ROW_ONLY_TRIGGER_BROADCAST_HELPER_SENDS_OLD_NEW_RECORD_THROUGH_REALTIME_SEND; NO_APP_TRIGGER_OBSERVED"
+    },
+    {
+      "object": "realtime.send(payload jsonb,event text,topic text,private boolean)",
+      "md5": "77afe4a67a0330f080cb562cec0898bd",
+      "source_characters": 866,
+      "verdict": "INVOKER_BROADCAST_INSERT_INTO_MESSAGES; CATCH_ALL_LOGS_WARNING_NOT_SUCCESS_PROOF"
+    },
+    {
+      "object": "realtime.send_binary(payload bytea,event text,topic text,private boolean)",
+      "md5": "ccdcf82b70a4df521737be16ff40daee",
+      "source_characters": 588,
+      "verdict": "BINARY_BROADCAST_INSERT_INTO_MESSAGES; WARNING_HANDLER_MAY_SUPPRESS_OPERATIONAL_ERROR"
+    }
+  ],
+  "reviewed_source_characters": 14775,
+  "first_time_source_characters_credited": 0,
+  "issue267_source_lines_credited": 0,
+  "catalog_current": {
+    "realtime.messages": {
+      "relkind": "p",
+      "rls_enabled": true,
+      "policy_count": 0,
+      "anon_schema_usage": true,
+      "anon_table_select_insert_update_granted": true,
+      "authenticated_select_insert_update_granted": true,
+      "known_risk": "RLS with zero policies denies ordinary client rows despite underlying grants; no broadcast persistence tested",
+      "partition_children": 0
+    },
+    "realtime.subscription": {
+      "rls_enabled": false,
+      "policy_count": 0,
+      "anon_schema_usage": true,
+      "authenticated_schema_usage": true,
+      "anon_select_granted": true,
+      "authenticated_select_granted": true,
+      "columns": [
+        "id",
+        "subscription_id",
+        "entity",
+        "filters",
+        "claims",
+        "claims_role",
+        "created_at",
+        "action_filter",
+        "selected_columns"
+      ],
+      "current_count": 0,
+      "known_risk": "Claims JSONB could be sensitive if future rows are created and a SQL-level route is available. Previously documented Run148; hosted PostgREST exposure NOT verified."
+    },
+    "realtime.schema_migrations": {
+      "rls_enabled": false,
+      "anon_select_granted": false,
+      "authenticated_select_granted": false
+    },
+    "publication": {
+      "name": "supabase_realtime",
+      "all_tables": false,
+      "published_tables": 0,
+      "replication_slots": 0,
+      "subscription_rows": 0
+    },
+    "roles": {
+      "anon": {
+        "superuser": false,
+        "replication": false,
+        "bypassrls": false,
+        "can_set_realtime_admin": false,
+        "can_set_postgres": false
+      },
+      "authenticated": {
+        "superuser": false,
+        "replication": false,
+        "bypassrls": false,
+        "can_set_realtime_admin": false,
+        "can_set_postgres": false
+      },
+      "service_role": {
+        "bypassrls": true,
+        "replication": false,
+        "can_set_realtime_admin": false
+      }
+    },
+    "index_count": 6,
+    "index_status": "ALL_6_VALID_AND_READY; COMPLETE_DDL_READ"
+  },
+  "live_aggregate_counts": {
+    "application_tables": 45,
+    "application_functions": 106,
+    "application_indexes": 96,
+    "application_policies": 39,
+    "stored_migrations": 59,
+    "storage_buckets": 0,
+    "realtime_subscriptions": 0,
+    "waiting_lockers": 0
+  },
+  "log_counts_last_24h": {
+    "pgbouncer_logs": 72,
+    "edge_logs": 52,
+    "postgres_logs": 46,
+    "supavisor_logs": 28,
+    "postgrest_logs": 14,
+    "auth_logs": 9,
+    "auth_audit_logs": 4
+  },
+  "advisor_summary": {
+    "security": "8 RLS-enabled-no-policy INFO; 10 intended signed-in DEFINER WARN; existing breached-password-protection-disabled WARN",
+    "performance": "13 informational unindexed foreign keys; 8 informational zero-scan indexes",
+    "health": "no current health lints",
+    "new_defect_confirmed": false
+  },
+  "previous_run160_closure_ci": {
+    "head_sha": "ab46d93d356478f7d8f9f3eb821a496d0045853b",
+    "run_id": 42955006538,
+    "status": "completed",
+    "conclusion": "success",
+    "verified_with_github_live_actions_api": true
+  },
+  "semantic_findings": [
+    "All seven routine bodies independently read in full with hashes, roles, publication and schema-level dependency cross-check; no new demonstrated app defect.",
+    "Direct anon/auth SELECT on realtime.subscription without RLS and with a claims JSONB column exists but was already documented by Run148; zero subscription rows, no logical slots/published tables. No actual data exposure demonstrated; hosted SQL API schema exposure and #96 signed-in routes are UNVERIFIED.",
+    "Realtime list_changes and sync functions were only read as source, never executed: they consume replication slots and execution would violate the live-read-only audit boundary.",
+    "realtime.send and send_binary trap errors and warn; do not treat an invocation as a successful delivery. Not established as an application regression.",
+    "Client roles lack replication/superuser/BYPASSRLS/SET-ROLE-to-admin privileges. Schema USAGE and SQL grants are not proof that provider PostgREST exposes the schema.",
+    "Provider-managed native objects and zero-scan indexes left unchanged; no production data, Auth, Edge, Storage, SQL or configuration write."
+  ],
+  "unverified": [
+    "hosted PostgREST exposed schemas and access paths",
+    "GoTrue/JWT runtime secrets/config and real signed-in #96 acceptance",
+    "provider disk free space",
+    "compiled native provider internals",
+    "ability to access future Realtime claims via externally exposed route"
+  ],
+  "new_confirmed_defects": 0,
+  "source_fixes": 0,
+  "code_or_test_commits": 0,
+  "release_queue_changes": 0,
+  "production_writes": 0,
+  "baseline_complete": false,
+  "next_cursor": "New stored migration ordinal #60 (currently 59/59 reviewed), else first newly changed or unreviewed provider object; if Realtime subscriptions become nonzero reassess claims SELECT at current grants and coordinate with #96 on actual hosted SQL API boundary. Never credit repeated full source as first-time review."
+}
