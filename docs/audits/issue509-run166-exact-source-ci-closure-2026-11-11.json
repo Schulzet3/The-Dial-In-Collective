@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 166,
+  "scope": "Documentation-only current RLS policy, app ACL and admission linked definition re-review; source code and migrations unchanged.",
+  "audit_commit_sha": "b8215f0e11b110eb5ec825d293027d8bec907725",
+  "source_file_blob_sha": "821a0723c1768d048ffa69840cd94d963afd5ae6",
+  "receipt_path": "docs/audits/issue509-provider-rls-policy-acl-admission-boundary-2026-11-11-run166.json",
+  "review_count": {
+    "policies": 39,
+    "application_table_privilege_rows": 45,
+    "schema_principal_acl_rows": 28,
+    "linked_full_gate_sql": 5
+  },
+  "exact_source_workflow": {
+    "id": 42998584092,
+    "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42998584092",
+    "head_sha": "b8215f0e11b110eb5ec825d293027d8bec907725",
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "approval",
+        "status": "completed",
+        "conclusion": "success",
+        "id": 130448744629
+      }
+    ]
+  },
+  "claims": "Only docs-only governance job passed. No Node22/SQL/Edge/browser suites rerun, no production writes, no provider source/deploy changes. Baseline remains IN_PROGRESS.",
+  "next_cursor": "Migration #60 if new or first new/changed/unreviewed provider definition/hosted Auth/API configuration if accessible."
+}
