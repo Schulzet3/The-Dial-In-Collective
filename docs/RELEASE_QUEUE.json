@@ -11687,6 +11687,35 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
       "notes": "Owner Option B SAFE source guard. Original five ratings, raw shots/notes/private history, valid legacy optional controls, calibrated range, separate Turbo/Fast-Flow, single controllable advice and community privacy preserved. Development READY only; no one-use publish authority, no production deploy or live SQL/Auth/Edge/member/provider changes. Active queue changes from #1935/#33/#1937 preserved in same-source docs reconciliation."
+    },
+    {
+      "id": "DIC-Q-33-r101-current-panel-region-roast-notes",
+      "issue": 33,
+      "pr": 1929,
+      "title": "Preserve current selected coffee labeled origin region and direct roast/complete sensory list",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "src/server/coffee-selected-current-panel.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "R101 initial synthetic FAIL [42920114784] due first H1 negative expectation; corrected same-commit journal.",
+        "R101 second exact-head [42920216817] 7/7 synthetics PASS, real 3/3 official selected HTTPS PASS; afterproof correctly FAILED on source-backed #516 region and #528 roast/malt omissions.",
+        "R101 first parser correction [42920814484] 11/12 synthetics PASS, malt still missing due terminal punctuation in shorter list, real HTTPS SKIPPED; focused correction underway.",
+        "Fresh PR-head exact selected HTTP/afterproof, Node22/lint/build/cloud/mobile/privacy/approval CI PENDING.",
+        "Failed queue intake [42921065538]: scope_paths included nondeployable scripts/tests/workflow/journal. Corrected to only two deployable runtime source paths. Scope's nondeployable test/docs tracked by same-commit journal."
+      ],
+      "ci_runs": [
+        42920114784,
+        42920216817,
+        42920814484
+      ],
+      "blockers": [
+        "Last new code/source exact-PR-head CI not yet verified; no merge/READY or release"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Current selected exact H1 and quoted present coffee country/region, strong literal roast and full same-selected tasting notes, non-contradictory subset only. Original frozen 603/201/1197 untouched; no actual member/GoTrue/production-provider/Netlify writes; separate #267/#96 owners. No owner action required; source-only development until verified."
     }
   ],
   "history": [
