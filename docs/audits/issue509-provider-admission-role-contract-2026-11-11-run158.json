@@ -1,0 +1,351 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "project_ref": "azviqqejypsefzilgonr",
+  "provider_observed_utc": "2026-11-11 01:47:46.397274+00",
+  "source_revision": {
+    "development_head_before_commit": "163a6a9910ea085ef50749a80e320ac8fb293da9",
+    "main": "11e1e8c7c36dad488519476d8a969bb682915d31",
+    "release": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0"
+  },
+  "category": "CURRENT_PRODUCTION_ADMISSION_ROLE_CHAIN_DIRECT_SEMANTIC_CROSS_REVIEW_AND_POSTRELEASE_DRIFT",
+  "direct_definitions": [
+    {
+      "schema_name": "private",
+      "routine": "dic_admin_access_overview",
+      "args": "",
+      "definition": "CREATE OR REPLACE FUNCTION private.dic_admin_access_overview()\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n perform private.require_member();\n if auth.uid() is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator access required.';\n end if;\n return jsonb_build_object(\n  'members_total',(select count(*) from private.beta_members where admitted_at is not null),\n  'members',coalesce((\n   select jsonb_agg(jsonb_build_object(\n    'id',m.owner_id,'email',u.email,'enabled',m.enabled,\n    'admin',a.owner_id is not null,'admitted_at',m.admitted_at\n   ) order by (a.owner_id is not null) desc,m.admitted_at desc,m.owner_id)\n   from (select owner_id,enabled,admitted_at from private.beta_members\n     where admitted_at is not null order by admitted_at desc,owner_id limit 50) m\n   join auth.users u on u.id=m.owner_id\n   left join private.app_admins a on a.owner_id=m.owner_id\n  ),'[]'::jsonb),\n  'pending_deletions',coalesce((\n   select jsonb_agg(jsonb_build_object(\n    'id',op.id,'target_id',op.target_id,\n    'email',op.expected_impact->>'email',\n    'community_mode',op.community_mode,'phase',op.phase,'requested_at',op.requested_at\n   ) order by op.requested_at desc,op.id desc)\n   from private.dic_admin_account_delete_operations op\n   where op.actor_id=auth.uid() and op.phase<>'completed'\n  ),'[]'::jsonb)\n );\nend $function$\n",
+      "md5": "e377ac910af0115040ad8f881cb01bfc",
+      "source_chars": 1432,
+      "source_lines": 35,
+      "range": "line 1 to 35, complete",
+      "semantic_verdict": "Admitted admin gate; enumerates at most 50 admitted members' identity/roles for admin-only use, pending deletions limited by actor; no anonymous EXECUTE."
+    },
+    {
+      "schema_name": "private",
+      "routine": "dic_admin_dashboard_read",
+      "args": "",
+      "definition": "CREATE OR REPLACE FUNCTION private.dic_admin_dashboard_read()\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n  if (select auth.uid()) is null or not private.is_admin() then\n    raise exception using errcode='42501', message='Administrator access required.';\n  end if;\n  return jsonb_build_object(\n    'review_only', true,\n    'generated_at', now(),\n    'counts', jsonb_build_object(\n      'pending_coffees', (select count(*) from public.coffee_submissions where status='pending'),\n      'conflicts', (select count(*) from public.coffee_submissions where status='conflict'),\n      'pending_canonical', (select count(*) from public.coffees where verification_state='pending'),\n      'verified_coffees', (select count(*) from public.coffees where verification_state='verified'),\n      'active_accounts', (select count(*) from private.beta_members where enabled),\n      'pending_accounts', (select count(*) from private.beta_members m where m.admitted_at is null and m.signup_review_state='pending'),\n      'pending_verified_accounts', (select count(*) from private.beta_members m join auth.users u on u.id=m.owner_id where m.admitted_at is null and m.signup_review_state='pending' and u.email_confirmed_at is not null),\n      'unfinished_account_deletions', (select count(*) from private.dic_admin_account_delete_operations where phase<>'completed'),\n      'shot_records', (select count(*) from public.shots where hidden_at is null)\n    ),\n    'queue_total', (select count(*) from public.coffee_submissions where status in ('pending','conflict')),\n    'queue', coalesce((\n      select jsonb_agg(item.data order by item.created_at, item.id)\n      from (\n        select id, created_at,\n          jsonb_build_object(\n            'id', id,\n            'created_at', created_at,\n            'status', status,\n            'revision', revision,\n            'canonical_coffee_id', canonical_coffee_id,\n            'base_coffee_revision', base_coffee_revision,\n            'source_url', source_url,\n            'name', left(coalesce(proposed_data->>'name',''),200),\n            'roaster', left(coalesce(proposed_data->>'roaster',''),200),\n            'release_label', left(coalesce(proposed_data->>'release_label',''),200),\n            'origin', left(coalesce(proposed_data->>'origin',''),300),\n            'process', left(coalesce(proposed_data->>'process',''),300),\n            'roast_level', left(coalesce(proposed_data->>'roast_level',''),100)\n          ) as data\n        from public.coffee_submissions\n        where status in ('pending','conflict')\n        order by created_at, id\n        limit 50\n      ) item\n    ),'[]'::jsonb),\n    'backups', jsonb_build_object(\n      'status', 'external_not_connected',\n      'explanation', 'Backup results are verified in GitHub/Drive; this SQL endpoint does not assert backup freshness.'\n    )\n  );\nend $function$\n",
+      "md5": "5fa33bbe05e8408c1c2fe1b82d73a8ee",
+      "source_chars": 2901,
+      "source_lines": 57,
+      "range": "line 1 to 57, complete",
+      "semantic_verdict": "Direct admin gate, returns aggregates and coffee review queue bounded at 50; pending_verified_accounts explicitly checks confirmed email, no general member identities returned."
+    },
+    {
+      "schema_name": "private",
+      "routine": "dic_admin_review_signup",
+      "args": "p_member_id uuid, p_action text, p_expected_state text",
+      "definition": "CREATE OR REPLACE FUNCTION private.dic_admin_review_signup(p_member_id uuid, p_action text, p_expected_state text DEFAULT 'pending'::text)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare actor uuid:=auth.uid(); member private.beta_members; verified boolean;\nbegin\n perform private.require_member();\n if actor is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator required.';\n end if;\n if p_member_id is null or p_member_id=actor or p_action is null or p_action not in ('approve','reject')\n  or p_expected_state is distinct from 'pending' then\n  raise exception using errcode='22023',message='Invalid signup review.';\n end if;\n if exists(select 1 from private.app_admins where owner_id=p_member_id) then\n  raise exception using errcode='42501',message='Administrator protected.';\n end if;\n select * into member from private.beta_members where owner_id=p_member_id for update;\n if not found then\n  raise exception using errcode='22023',message='Account unavailable.';\n end if;\n -- A repeat click or concurrent reviewer must be safely rejected as stale.\n if member.signup_review_state <> p_expected_state or\n    member.admitted_at is not null or member.enabled then\n  return jsonb_build_object('ok',false,'code','stale_review');\n end if;\n select u.email_confirmed_at is not null into verified\n from auth.users u where u.id=p_member_id;\n if p_action='approve' and verified is distinct from true then\n  return jsonb_build_object('ok',false,'code','verify_email_first');\n end if;\n update private.beta_members set\n   signup_review_state=case when p_action='approve' then 'approved' else 'rejected' end,\n   enabled=(p_action='approve'),\n   admitted_at=case when p_action='approve' then now() else null end\n where owner_id=p_member_id;\n insert into private.dic_signup_review_events(member_id,actor_id,action,previous_state)\n values(p_member_id,actor,p_action,member.signup_review_state);\n return jsonb_build_object('ok',true,'decision',p_action,'member_id',p_member_id);\nend $function$\n",
+      "md5": "7e0d3bf10542694b60177fcfa9c6f7be",
+      "source_chars": 2073,
+      "source_lines": 43,
+      "range": "line 1 to 43, complete",
+      "semantic_verdict": "Admin+member role gate, reject self/other admins, locked target row, pending optimistic guard, verified email required for approve, atomic enabled/admitted_at/state update and audit event; NOT NULL signup state avoids null-comparison bypass."
+    },
+    {
+      "schema_name": "private",
+      "routine": "dic_admin_set_member_access",
+      "args": "p_member_id uuid, p_enabled boolean",
+      "definition": "CREATE OR REPLACE FUNCTION private.dic_admin_set_member_access(p_member_id uuid, p_enabled boolean)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare actor uuid:=auth.uid();m private.beta_members;found_member uuid;\nbegin\n if actor is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator access required.';\n end if;\n if p_member_id is null or p_enabled is null then\n  raise exception using errcode='22023',message='Member and desired access are required.';\n end if;\n -- Never allow an administrator to revoke themself OR ANY administrator.\n -- The underlying permanent admin role has no expiration.\n if p_member_id=actor or exists(select 1 from private.app_admins where owner_id=p_member_id) then\n  raise exception using errcode='42501',message='Administrator accounts cannot be removed here.';\n end if;\n -- Permanently deleting a member supersedes reversible Restore/Remove.\n if exists(select 1 from private.dic_admin_account_delete_operations\n   where target_id=p_member_id and phase<>'completed') then\n  raise exception using errcode='23514',message='Permanent deletion is underway; finish it before changing access.';\n end if;\n select * into m from private.beta_members where owner_id=p_member_id for update;\n if not found or m.admitted_at is null then\n  raise exception using errcode='22023',message='Only previously admitted members can be changed.';\n end if;\n if p_enabled and not exists(select 1 from auth.users where id=p_member_id and email_confirmed_at is not null) then\n  raise exception using errcode='42501',message='Verified email required.';\n end if;\n if m.enabled=p_enabled then\n  return jsonb_build_object('ok',true,'enabled',p_enabled,'unchanged',true);\n end if;\n update private.beta_members set enabled=p_enabled\n where owner_id=p_member_id returning owner_id into found_member;\n insert into private.admin_access_events(actor_id,action,member_id)\n values(actor,case when p_enabled then 'restore_access' else 'remove_access' end,found_member);\n -- No auth.users deletion, note deletion, contribution identity reidentification,\n -- historical mutation, or implicit sign-out of already issued Supabase tokens.\n -- All member RPCs and RLS must recheck private.is_member().\n return jsonb_build_object('ok',true,'enabled',p_enabled);\nend $function$\n",
+      "md5": "d7a339f277e9da0d8393d5efcdbc0e89",
+      "source_chars": 2354,
+      "source_lines": 44,
+      "range": "line 1 to 44, complete",
+      "semantic_verdict": "Protects every admin and pending deletion, only previously admitted member, verified email for restore; no auth.users deletion or cross-member row access."
+    },
+    {
+      "schema_name": "private",
+      "routine": "dic_admin_signup_requests",
+      "args": "p_offset integer, p_limit integer",
+      "definition": "CREATE OR REPLACE FUNCTION private.dic_admin_signup_requests(p_offset integer DEFAULT 0, p_limit integer DEFAULT 50)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare total bigint; listing jsonb;\nbegin\n perform private.require_member();\n if auth.uid() is null or not private.is_admin() then\n  raise exception using errcode='42501', message='Administrator required.';\n end if;\n if p_offset is null or p_offset<0 or p_offset>1000000\n    or p_limit is null or p_limit<1 or p_limit>50 then\n  raise exception using errcode='22023',message='Invalid paging.';\n end if;\n select count(*) into total from private.beta_members m\n where m.admitted_at is null and m.signup_review_state='pending';\n select coalesce(jsonb_agg(v.record order by v.created_at,v.id),'[]'::jsonb) into listing\n from (select m.owner_id as id,u.created_at,\n   jsonb_build_object(\n    'id',m.owner_id,'email',left(coalesce(u.email,''),254),\n    'created_at',u.created_at,'email_verified',u.email_confirmed_at is not null,\n    'review_state',m.signup_review_state\n   ) as record\n   from private.beta_members m join auth.users u on u.id=m.owner_id\n   where m.admitted_at is null and m.signup_review_state='pending'\n   order by u.created_at,m.owner_id limit p_limit offset p_offset) v;\n return jsonb_build_object('total',total,'offset',p_offset,'items',coalesce(listing,'[]'::jsonb));\nend $function$\n",
+      "md5": "663c13571f70bb29b6a4351e8e6a45eb",
+      "source_chars": 1411,
+      "source_lines": 31,
+      "range": "line 1 to 31, complete",
+      "semantic_verdict": "Admitted admin gate, valid bounded paging (limit 1..50), selects pending state and excludes admitted; private user email returned to verified admin only."
+    },
+    {
+      "schema_name": "private",
+      "routine": "is_admin",
+      "args": "",
+      "definition": "CREATE OR REPLACE FUNCTION private.is_admin()\n RETURNS boolean\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\n  select private.is_member() and exists(select 1 from private.app_admins a where a.owner_id=(select auth.uid()));\n$function$\n",
+      "md5": "396d3e8e29dbd4550ec7ac26b7589a63",
+      "source_chars": 264,
+      "source_lines": 9,
+      "range": "line 1 to 9, complete",
+      "semantic_verdict": "Delegates to is_member and private.app_admins lookup; prevents disabled admin; inherits known admitted_at invariant dependence."
+    },
+    {
+      "schema_name": "private",
+      "routine": "is_member",
+      "args": "",
+      "definition": "CREATE OR REPLACE FUNCTION private.is_member()\n RETURNS boolean\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\n  select exists(select 1 from private.beta_members m where m.owner_id=(select auth.uid()) and m.enabled);\n$function$\n",
+      "md5": "dbc163d07f45e8b5831f6a6394a70ab8",
+      "source_chars": 257,
+      "source_lines": 9,
+      "range": "line 1 to 9, complete",
+      "semantic_verdict": "Directly tests enabled state and auth.uid; does not itself test admitted_at. Known preexisting conditional gap already addressed by source-only READY migrations #509 Run139/140; live 0 enabled-unadmitted. Do not redeploy or duplicate fix."
+    },
+    {
+      "schema_name": "private",
+      "routine": "require_member",
+      "args": "",
+      "definition": "CREATE OR REPLACE FUNCTION private.require_member()\n RETURNS uuid\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare u uuid:=auth.uid();\nbegin\n if u is null or not private.is_member() then raise exception using errcode='42501',message='An admitted beta account is required.'; end if;\n return u;\nend $function$\n",
+      "md5": "27ff3a2a7fcf231171778a2d584b1851",
+      "source_chars": 347,
+      "source_lines": 12,
+      "range": "line 1 to 12, complete",
+      "semantic_verdict": "Rejects null caller and nonmember with 42501; delegates to is_member."
+    },
+    {
+      "schema_name": "public",
+      "routine": "dic_admin_review_signup",
+      "args": "p_member_id uuid, p_action text, p_expected_state text",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_admin_review_signup(p_member_id uuid, p_action text, p_expected_state text DEFAULT 'pending'::text)\n RETURNS jsonb\n LANGUAGE sql\n SET search_path TO ''\nAS $function$\n select private.dic_admin_review_signup(p_member_id,p_action,p_expected_state);\n$function$\n",
+      "md5": "ebfec67f4da9cf3adc0d3e3431f2a295",
+      "source_chars": 295,
+      "source_lines": 8,
+      "range": "line 1 to 8, complete",
+      "semantic_verdict": "SECURITY INVOKER wrapper delegates to guarded private review, authentication-only EXECUTE; null identity cannot pass inner guard."
+    },
+    {
+      "schema_name": "public",
+      "routine": "dic_admin_signup_requests",
+      "args": "p_offset integer, p_limit integer",
+      "definition": "CREATE OR REPLACE FUNCTION public.dic_admin_signup_requests(p_offset integer DEFAULT 0, p_limit integer DEFAULT 50)\n RETURNS jsonb\n LANGUAGE sql\n STABLE\n SET search_path TO ''\nAS $function$\n select private.dic_admin_signup_requests(p_offset,p_limit);\n$function$\n",
+      "md5": "ab3a82cfe5d926fa485c39b153aa701e",
+      "source_chars": 262,
+      "source_lines": 9,
+      "range": "line 1 to 9, complete",
+      "semantic_verdict": "SECURITY INVOKER wrapper delegates to guarded private pending listing, authentication-only EXECUTE."
+    }
+  ],
+  "all_definition_chars": 11596,
+  "full_definitions_reviewed": 10,
+  "first_time_provider_word_credit": 0,
+  "code_line_credit_issue267": 0,
+  "effective_execute_acl": [
+    {
+      "schema_name": "private",
+      "proname": "dic_admin_access_overview",
+      "args": "",
+      "prosecdef": true,
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "anon_schema_usage": false
+    },
+    {
+      "schema_name": "private",
+      "proname": "dic_admin_dashboard_read",
+      "args": "",
+      "prosecdef": true,
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "anon_schema_usage": false
+    },
+    {
+      "schema_name": "private",
+      "proname": "dic_admin_review_signup",
+      "args": "p_member_id uuid, p_action text, p_expected_state text",
+      "prosecdef": true,
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "anon_schema_usage": false
+    },
+    {
+      "schema_name": "private",
+      "proname": "dic_admin_set_member_access",
+      "args": "p_member_id uuid, p_enabled boolean",
+      "prosecdef": true,
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "anon_schema_usage": false
+    },
+    {
+      "schema_name": "private",
+      "proname": "dic_admin_signup_requests",
+      "args": "p_offset integer, p_limit integer",
+      "prosecdef": true,
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "anon_schema_usage": false
+    },
+    {
+      "schema_name": "private",
+      "proname": "is_admin",
+      "args": "",
+      "prosecdef": true,
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "anon_schema_usage": false
+    },
+    {
+      "schema_name": "private",
+      "proname": "is_member",
+      "args": "",
+      "prosecdef": true,
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "anon_schema_usage": false
+    },
+    {
+      "schema_name": "private",
+      "proname": "require_member",
+      "args": "",
+      "prosecdef": true,
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "anon_schema_usage": false
+    },
+    {
+      "schema_name": "public",
+      "proname": "dic_admin_review_signup",
+      "args": "p_member_id uuid, p_action text, p_expected_state text",
+      "prosecdef": false,
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "anon_schema_usage": true
+    },
+    {
+      "schema_name": "public",
+      "proname": "dic_admin_signup_requests",
+      "args": "p_offset integer, p_limit integer",
+      "prosecdef": false,
+      "anon_execute": false,
+      "authenticated_execute": true,
+      "anon_schema_usage": true
+    }
+  ],
+  "rls_tables": [
+    {
+      "schema_name": "private",
+      "table_name": "app_admins",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "rls_policies": [
+        {
+          "name": "no_client_access",
+          "check": "false",
+          "using": "false"
+        }
+      ]
+    },
+    {
+      "schema_name": "private",
+      "table_name": "beta_members",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "rls_policies": [
+        {
+          "name": "no_client_access",
+          "check": "false",
+          "using": "false"
+        }
+      ]
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_signup_review_events",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "rls_policies": []
+    },
+    {
+      "schema_name": "public",
+      "table_name": "account_preferences",
+      "relrowsecurity": true,
+      "relforcerowsecurity": false,
+      "rls_policies": [
+        {
+          "name": "owner_read",
+          "check": null,
+          "using": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))"
+        },
+        {
+          "name": "owner_update",
+          "check": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+          "using": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))"
+        }
+      ]
+    }
+  ],
+  "beta_member_columns": [
+    {
+      "attname": "owner_id",
+      "attnotnull": true,
+      "default_expr": null
+    },
+    {
+      "attname": "enabled",
+      "attnotnull": true,
+      "default_expr": "false"
+    },
+    {
+      "attname": "admitted_at",
+      "attnotnull": false,
+      "default_expr": null
+    },
+    {
+      "attname": "created_at",
+      "attnotnull": true,
+      "default_expr": "now()"
+    },
+    {
+      "attname": "signup_review_state",
+      "attnotnull": true,
+      "default_expr": "'pending'::text"
+    }
+  ],
+  "beta_member_constraints": [
+    {
+      "conname": "beta_members_owner_id_fkey",
+      "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+    },
+    {
+      "conname": "beta_members_pkey",
+      "definition": "PRIMARY KEY (owner_id)"
+    },
+    {
+      "conname": "beta_members_signup_review_state_check",
+      "definition": "CHECK (signup_review_state = ANY (ARRAY['pending'::text, 'approved'::text, 'rejected'::text]))"
+    }
+  ],
+  "aggregate_integrity": [
+    {
+      "total": 11,
+      "enabled_without_admission": 0,
+      "pending_unadmitted": 0,
+      "null_state": 0
+    }
+  ],
+  "provider_counts": {
+    "observed_at": "2026-11-11 01:47:46.397274+00",
+    "app_functions": 106,
+    "app_policies": 39,
+    "migrations": 59,
+    "buckets": 0,
+    "subscriptions": 0,
+    "lock_waiters": 0
+  },
+  "independently_confirmed": {
+    "anon_executable_admission_routines": 0,
+    "nullable_signup_state": false,
+    "enabled_without_admission": 0,
+    "no_live_provider_writes": true
+  },
+  "existing_not_deployed_approved_guards": [
+    "supabase/migrations/20261110065000_dic_admitted_member_gate.sql (DIC-Q-509-admitted-member-gate, per pinned Run139b)",
+    "supabase/migrations/20261110073500_dic_enabled_requires_admission_check.sql (DIC-Q-509-enabled-requires-admission-constraint, READY source only per Run140)"
+  ],
+  "verdict": "No new confirmed defect. Existing live is_member only checks enabled; protected by observed zero inconsistent rows and by source-only READY gated migrations not yet deployed. This known previously recorded risk is not duplicated as new alert. Hosted JWT/API and real account behavior remain unverified by this catalog readback.",
+  "limits": [
+    "No Auth identities, member rows, shot/note contents, secret values or raw log text accessed",
+    "No signed-in HTTP/GoTrue browser request or external provider console config read",
+    "Direct source review of these ten functions was previously credited; this run is cross-function postrelease revalidation, not first-time coverage",
+    "PostgreSQL native compiled internals, hosted disk-free capacity and hosted API schema config remain unverified"
+  ],
+  "next_cursor": "After first source drift from current 106 SQL functions / 96 indexes / 59 stored migrations, inspect first changed/new object's complete body. Otherwise continue an unused provider-native or hosted API config slice when accessible; coordinate genuine Auth boundary with #96. No reset of prior receipts.",
+  "baseline_complete": false,
+  "production_writes": false
+}

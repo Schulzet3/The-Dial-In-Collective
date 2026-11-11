@@ -3732,6 +3732,17 @@
       "receipt_path": "docs/audits/issue509-run157-exact-source-ci-closure-2026-11-11.json",
       "production_writes": 0,
       "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-11",
+      "event": "RUN158_COMPLETE_POSTRELEASE_ADMISSION_CROSS_OBJECT_ROLE_RECHECK_NO_NEW_DEFECT",
+      "development_parent_sha": "163a6a9910ea085ef50749a80e320ac8fb293da9",
+      "evidence_path": "docs/audits/issue509-provider-admission-role-contract-2026-11-11-run158.json",
+      "full_current_function_bodies_rechecked": 10,
+      "source_chars": 11596,
+      "first_time_provider_word_credit": 0,
+      "provider_writes": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -16745,5 +16756,20 @@
     "production_writes": 0,
     "provider_baseline_complete": false,
     "next": "Stored migration #60 if appears, otherwise new/changed/unreviewed provider definition and #96 hosted API boundary"
+  },
+  "provider_admission_role_contract_run158": {
+    "status": "CROSS_OBJECT_10_FUNCTION_COMPLETE_CURRENT_ROLE_CONTRACT_RECHECK_NO_NEW_FIRST_TIME_WORD_CREDIT",
+    "source_development_parent_sha": "163a6a9910ea085ef50749a80e320ac8fb293da9",
+    "receipt_path": "docs/audits/issue509-provider-admission-role-contract-2026-11-11-run158.json",
+    "reviewed_complete_current_routines": 10,
+    "total_chars": 11596,
+    "rls_tables": 4,
+    "role_acls": 10,
+    "enabled_unadmitted": 0,
+    "existing_known_gap_already_source_ready": true,
+    "new_confirmed_defects": 0,
+    "provider_writes": false,
+    "baseline_complete": false,
+    "next": "After first source drift from current 106 SQL functions / 96 indexes / 59 stored migrations, inspect first changed/new object's complete body. Otherwise continue an unused provider-native or hosted API config slice when accessible; coordinate genuine Auth boundary with #96. No reset of prior receipts."
   }
 }
