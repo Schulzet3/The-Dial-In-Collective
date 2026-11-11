@@ -11634,24 +11634,29 @@
       "issue": 1937,
       "pr": 1939,
       "title": "Move New Account Requests directly above Accounts in Admin dashboard",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "2286aa9fdb2c442ec9701d2fdb47d4668585a92e",
       "scope_paths": [
         "site/admin/view.js"
       ],
       "tests": [
-        "PR-head exact source node/build 42925456599, cloud/browser 42925456377, SQL 42925456433, security 42925456247, approval 42925456297 SUCCESS. Frozen corpus 42925456242 SKIPPED (not applicable). Merged-source CI pending."
+        "PR-head exact source node/build 42925456599, cloud/browser 42925456377, SQL 42925456433, security 42925456247, approval 42925456297 SUCCESS. Frozen corpus 42925456242 SKIPPED (not applicable). Merged-source CI pending.",
+        "Original PR 1939 exact reviewed head 603e9eb: Node22 build tests run42925456599, cloud browser42925456377, isolated SQL42925456433, security42925456247, approval42925456297 all SUCCESS; original corpus skipped NOT_APPLICABLE.",
+        "Nonforce merge 2286aa9 into development, source blob site/admin/view.js 6b6ba4ba verified identical. Descendant development 56361886 retained that exact UI blob, applicable Node/build42926681033, browser42926681043, approval42926680993 SUCCESS. No Netlify publication."
       ],
       "ci_runs": [
         42925456599,
         42925456377,
         42925456433,
         42925456247,
-        42925456297
+        42925456297,
+        42926681033,
+        42926681043,
+        42926680993
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1937",
-      "notes": "Low-risk UI-only record order, no behavior/data/provider/publication change. Merged source CI needed before READY."
+      "notes": "Low-risk UI-only record order, no behavior/data/provider/publication change. Merged source CI needed before READY.\n2026-11-10 Verified READY after merged-source byte-equal UI and exact descendant app Node/build/browser/approval CI. Owner publish command still required."
     },
     {
       "id": "DIC-Q-1938-admin-closed-app-push",
