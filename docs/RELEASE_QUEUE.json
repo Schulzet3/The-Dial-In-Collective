@@ -12462,6 +12462,36 @@
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
       "notes": "Preexisting optional controls default OFF for missing legacy imported backup; modern cloud hydrate always normalizes optional fields. Private shot history/tastes/notes, independent espresso styles, optional Slow Feed and Locked numerical policy unchanged. Development-only READY, NOT PUBLISHED. Owner Publish separately required and release-source isolation mandatory.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r195-temperature-prefill-provenance",
+      "issue": 455,
+      "pr": 2124,
+      "title": "Log Shot shows when an optional temperature prefill came from a different espresso style",
+      "state": "READY",
+      "merged_source_sha": "e6c7b538fff018301e48124d7c394dcbbbe795b9",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "tests": [
+        "Five R195 synthetic positive/negative CloudApp form regressions PASS both exact PR head and merged source: cross-style provenance, same-style label absence, optional temperature OFF, invalid historical temperature exclusion, escaped untrusted legacy style source; original private History and all five unrated input defaults preserved.",
+        "Exact PR-head and merged-source Node22/lint each SUCCESS: 3987 PASS, 0 FAIL, 6 intentional SKIP (3993 total); exact merged Chromium/390px/browser/offline and governance SUCCESS; head isolated SQL/JWT/privacy and source security SUCCESS.",
+        "Original frozen603 PR-head run 43113680334 SKIPPED, not PASS. No empirical espresso taste-quality outcome, hosted member incident or production write claimed."
+      ],
+      "ci_runs": [
+        43113680150,
+        43113680153,
+        43113680162,
+        43113680175,
+        43113680313,
+        43114158890,
+        43114158876,
+        43114158939
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Display existing measured other-style temperature origin in an escaped helper next to the optional Log Shot field. Does not alter prefill value or algorithm, product choices, five taste inputs, records, privacy, style policy, Slow Feed, temperature controls or Locked numerical targets. Development-only READY; not published. Separate owner Publish grant and source-isolated release required.",
+      "production_deployed": false
     }
   ],
   "history": [
@@ -13833,6 +13863,15 @@
       "state": "READY",
       "source_sha": "a958dd8ac160a8e41d765b806e137df50f7b7821",
       "evidence": "docs/workstreams/ops-issue455-r194-final-verification-20261111.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r195-temperature-prefill-provenance",
+      "state": "READY",
+      "source_sha": "e6c7b538fff018301e48124d7c394dcbbbe795b9",
+      "evidence": "docs/workstreams/ops-issue455-r195-final-verification-20261111.md",
       "production_deployed": false
     }
   ],
