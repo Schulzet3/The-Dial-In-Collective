@@ -1,7 +1,7 @@
 // Issue #1676: only this server-side endpoint invokes the GoTrue admin delete.
 // Never return success until both Auth user removal and DB finalization are verified.
 import {createClient} from 'npm:@supabase/supabase-js@2.117.3';
-import {readBoundedJson} from '../_shared/request-budget.mjs';
+import {readBoundedJson,RequestBodyError} from '../_shared/request-budget.mjs';
 
 const allowed=new Set(['https://app.dialincollective.com','https://the-dial-in-collective.netlify.app',
  'http://localhost:5173','http://localhost:8888']);
@@ -63,7 +63,8 @@ Deno.serve(async request=>{
   });
   if(finalError||final?.completed!==true)return reply({ok:false,code:'finalize_failed',retryable:true},503,origin);
   return reply({ok:true,completed:true,community_removed:final.community_removed||0},200,origin);
- }catch {
+ }catch (error) {
+  if(error instanceof RequestBodyError)return reply({ok:false,code:error.code},error.status,origin);
   return reply({ok:false,code:'operation_failed',retryable:true},503,origin);
  }
 });
