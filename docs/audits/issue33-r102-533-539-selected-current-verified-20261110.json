@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "scope": "R102 selected original603 #533 and #539 only",
+  "decision": "READY_DEVELOPMENT_ONLY",
+  "verified_date_utc": "2026-11-10",
+  "source_pr": 1934,
+  "source_merged_sha": "2809506ddcb9e2820322758d44237947deace7c4",
+  "source_tree_sha": "fd706dc10b5df925e55ffd11ac5487cc040fe4ef",
+  "source_sha256_corpus_frozen": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+  "frozen_original603_csv_git_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+  "unchanged_original": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "oracle": true,
+    "scorer": true
+  },
+  "current_selected": [
+    {
+      "number": 533,
+      "coffee": "Early Bird",
+      "official_url": "https://www.nunatakcoffee.com/products/early-bird",
+      "unique_h1": true,
+      "direct_current_fields": {
+        "origin": "Central America, South America",
+        "tasting_notes": "orange, brown sugar and medjool dates"
+      },
+      "intentionally_blank": [
+        "roast_level",
+        "process",
+        "producer",
+        "variety",
+        "elevation_m"
+      ],
+      "raw_html_sha256": "ae80f4dd835eb9bb4bb46c7cf3017ba9cf96fee032deae678d1152fa79d26236"
+    },
+    {
+      "number": 539,
+      "coffee": "Cosa Nueva — Flagship Blend",
+      "official_url": "https://www.radialcoffee.com/products/cosa-nueva-flagship-blend",
+      "unique_h1": true,
+      "direct_current_fields": {
+        "process": "Washed",
+        "roast_level": "Medium-Light",
+        "tasting_notes": "milk chocolate, stone fruit, honey"
+      },
+      "intentionally_blank": [
+        "origin",
+        "producer",
+        "variety",
+        "elevation_m"
+      ],
+      "raw_html_sha256": "2507883f5ae30a3904663db4a047a71ec9cebc2f4b290d3f93cbebb21552032d"
+    }
+  ],
+  "initial_defect": "Exact selected #539 direct flavor base 'milk chocolate' missing; previous actual parser only returned 'stone fruit and honey'.",
+  "fix": "Bounded selected own paragraph allows intrinsically named literal sensory base plus identical existing sourced notes; strip secondary nonflavor trailing 'culminating in a refreshing, sweet acidity' even with internal comma; reject milk preparation, other coffee headings, SEO, historical text, mismatched suffix and stronger conflicting fields.",
+  "exact_merged_source_ci": {
+    "run": 42925864707,
+    "status": "COMPLETED_SUCCESS",
+    "tests": 12,
+    "failures": 0,
+    "current_official_https_cases": [
+      533,
+      539
+    ],
+    "strict_afterproof": true,
+    "afterproof_failures": [],
+    "actual_add_coffee_source_review": true
+  },
+  "source_evidence_artifact": {
+    "id": 13813159263,
+    "zip_sha256": "8bdc96e2280b7ca8c054c0c227bf0e485c96dba4af4277ac46b875a8f3694d2f",
+    "official_json_sha256": "e43b816813003e27c5b1b341cab9d6dc2cfbe020c34f8defe4493f7dbbeee689",
+    "afterproof_json_sha256": "f9a3654c6bf77a1f6a99975767d2f7cf52ef942970e32a5b8aad4fbeb795b699"
+  },
+  "exact_merged_node_lint": {
+    "run": 42925864736,
+    "overall_conclusion": "CANCELLED_AFTER_SUCCESSFUL_TEST_AND_LINT_STAGES_DUE_CONCURRENCY",
+    "attempt_one": {
+      "full_tests": {
+        "total": 3646,
+        "passed": 3640,
+        "failed": 0,
+        "skipped": 6,
+        "exit_code": 0,
+        "stage_outcome": "PASS"
+      },
+      "lint": {
+        "exit_code": 0,
+        "stage_outcome": "PASS"
+      }
+    },
+    "attempt_two": "CANCELLED",
+    "metrics_artifact": {
+      "id": 13813712261,
+      "zip_sha256": "5aa074a7f885540d4e129655598fc41b6ed008886ec918999bc581e12677fe6b"
+    },
+    "whole_workflow_success_claimed": false,
+    "build": "NOT_APPLICABLE"
+  },
+  "other_merged_ci": {
+    "cloud_mobile": {
+      "run": 42925864735,
+      "conclusion": "SUCCESS"
+    },
+    "approval": {
+      "run": 42925864969,
+      "conclusion": "SUCCESS"
+    },
+    "python": {
+      "run": 42925864910,
+      "conclusion": "SUCCESS"
+    }
+  },
+  "pr_head_complete_ci": {
+    "node_and_lint": 42925264730,
+    "selected_public_https_and_afterproof": 42925264473,
+    "cloud_mobile": 42925264482,
+    "isolated_sql": 42925264485,
+    "approval": 42925264503
+  },
+  "global_frozen603_workflow": "SKIPPED_NOT_CERTIFIED",
+  "all_603_individually_certified": false,
+  "original_issue33_closed": false,
+  "no_netlify_publication": true,
+  "no_production_provider_auth_sql_member_writes": true,
+  "next_case": "Original #540 Colombia — Inza Decaf has reused /products/guatemala slug; require exact selected H1/current description and bounded adversarial source review; avoid R101 concurrent #513/#516/#528."
+}
