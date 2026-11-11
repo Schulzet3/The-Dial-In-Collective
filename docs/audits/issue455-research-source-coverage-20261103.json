@@ -5187,6 +5187,33 @@
       "result": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
       "owner_approval": false,
       "date": "2026-11-11"
+    },
+    {
+      "id": "R455-EV-CIT-193-A",
+      "source": "ORG-06 git 9128527d3208379c723d561eee6ffbe09d174f55, original archive SHA256 e36835579fadf24cd2fdb7738d597b93f8bd23908c52206e48ccfe9e69904a80, lines 17-29 and 419-428; LIT-2023-SCHMIEDER-ESPRESSO-EXTRACTION-KINETICS publisher 2023-07-28 DOI 10.3390/foods12152871",
+      "claim": "At fixed dry dose and collected beverage mass, flow-controlled experimental settings also determine contact duration: in Schmieder et al.'s specific DE1 Pro/IMS/E65S, single Colombian washed coffee, 20g protocol, achieved mean rates ~0.96/1.9/2.8mL/s under three 1/2/3mL/s setpoints. Researchers measured successive fractions' trigonelline, caffeine, 5-CQA and TDS and computed fixed 20/40/60g beverage outputs. Flow and temperature interactions exist in that tested domain. Time is not separately randomized independent of flow and beverage mass; chemistry measurements are NOT five-taste sensory validation or universal 'best time' evidence.",
+      "grade": "PEER_REVIEWED_PRIMARY_ESPRESSO_CONTROLLED_FLOW_FRACTIONAL_CHEMICAL_METHODS_DIRECT_HTML_BOUNDED_NOT_SENSORY_OR_RAW_SUPPLEMENT_REANALYSIS",
+      "primary_sources": [
+        "https://www.mdpi.com/2304-8158/12/15/2871"
+      ],
+      "original_report_lines": "ORG-06 17-29,419-428; primary full HTML Methods 2.4-2.8, Results 3.1 and 3.3.2, Conclusion 4; publisher HTML source only, binary/raw not rehashed",
+      "source_sha": "fd7aa589f3692dbf8502a154f725ce7c8572e829",
+      "current_app": "site/lib/engine.js nextAdviceRaw(): measured time compared to style-specific starting interval only with a person's rated extraction and available same-calibration data, no time-only green invalidation. constants.js TIMES are heuristics and 1-180 seconds is only general physical input eligibility.",
+      "result": "SUPPORTED_CONDITIONAL_CAUSAL_MEDIATION_NOT_UNIVERSAL_RECIPE_TIME_OR_TASTE_POLICY",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-193-B",
+      "source": "Primary Schmieder (2023) Results 3.3.6 and Conclusions, https://www.mdpi.com/2304-8158/12/15/2871; owner originals ORG-06 lines 23-29; current engine blob 0252db33598abb7c7bf6d11feac36793c5b14ec9; constants blob 72221331ce4dffabe416eebec1ae2fceced3a095; exact live development fd7aa589f3692dbf8502a154f725ce7c8572e829",
+      "claim": "Primary authors provide a specific response-surface example: moving from 2.0 to 1.0mL/s at a modeled 20g-dose, 40g-output brew changed predicted 5-CQA concentration from 2.99 to 3.11mg/g; collecting 38g rather than 40g at the same nominal settings gave a comparable modeled concentration difference, about one second different shot time. This does not make a 1s time target, prove equivalent sensory preference, or justify changing current per-style time windows, fixed taste sliders, personal success, yield steps or grinder adjustments.",
+      "grade": "PUBLISHER_FULL_HTML_MODEL_FIT_EXAMPLE_BOUNDED_WITHIN_SINGLE_COFFEE_FLOW_DESIGN_NOT_REPLICATED_PER_MEMBER_AND_UNVERIFIED_RAW_SUPPLEMENT",
+      "primary_sources": [
+        "https://www.mdpi.com/2304-8158/12/15/2871"
+      ],
+      "source_sha": "fd7aa589f3692dbf8502a154f725ce7c8572e829",
+      "current_app": "DIC retains measured dose, yield, time and original all-five taste ratings; recipe-specific time guidelines are adjustable observational context. No empirical personal cup-improvement claims.",
+      "result": "NO_CHANGE_EXISTING_LOCKED_HEURISTICS_PRESERVED; NUMERIC_AUTOMATION_NOT_AUTHORIZED",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [],
@@ -5320,18 +5347,19 @@
     "R455-185 PR #2044 nonforce merged 2a2249923ffcd2cf052b4bd2769c9d46446352ba with four exact blobs, seven positive/negative synthetic tests, head/merge Node22/lint 3834 PASS/0 FAIL/6 SKIP and applicable head/merge UX + governance success; SQL/security head SUCCESS, frozen603 SKIPPED NOT PASS. One distinct dev-only READY queue item reconciled; no deploy. Next source-backed disjoint Log Shot/Rate/Recommendation UX gap or primary research claim. S019 inaccessible, #267 independent full audit zero credit.",
     "R455-186 PR #2052 exact code head 0abc9417 nonforce merged 6e355b3f; three code/test/same-commit journal blobs identical; head/merged Node22/lint 3848 PASS/0 FAIL/6 SKIP, all 7 new cases PASS, head+merged mobile/browser/offline and governance, head isolated SQL/security SUCCESS. One dev-only READY item; original S019 inaccessible, #267 literal review ZERO; continue distinct source-bound research/UX gap.",
     "R455-188 independent Oct22 PDG secondary slow-feed full-text review and 2025 Kaffeemacher table/method crosscheck; no universal correction, no code or queue change, new source 97/evidence 289/proposals 148. R187 separately code merged but merged-browser CI pending; do not certify READY until actual success.",
-    "R455-191 R188 docs-only #2072 verified merged 2bbc431b7a938187a578146a0c024dfed085dcfe, R187 #2062 original valid historic prefill and R189 #2079 cross-style ratio-only code verified merged with exact full post-recovery Node/browser, development READY reconciliation pending docs PR CI. Source ledger 97/293/150, queue 309/54, no deployment, S019 unavailable, #267 no literal credit."
+    "R455-191 R188 docs-only #2072 verified merged 2bbc431b7a938187a578146a0c024dfed085dcfe, R187 #2062 original valid historic prefill and R189 #2079 cross-style ratio-only code verified merged with exact full post-recovery Node/browser, development READY reconciliation pending docs PR CI. Source ledger 97/293/150, queue 309/54, no deployment, S019 unavailable, #267 no literal credit.",
+    "R455-193: Source SHA fd7aa589f3692dbf8502a154f725ce7c8572e829: ORG-06 flow/time causal note independently crosschecked against Schmieder 2023 original publisher; no universal time target or new code; continuing original citation audit; standalone S019 inaccessible; #267 zero literal review credit."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-192",
-    "source_sha": "4302d0d1e86b874903d450262190ba4e2847d5cd",
-    "phase": "SAFE_MODEL_FIX_EXACT_HEAD_AND_MERGED_CI_SUCCESS_READY_RECONCILIATION",
+    "run_id": "R455-193",
+    "source_sha": "fd7aa589f3692dbf8502a154f725ce7c8572e829",
+    "phase": "RESEARCH_TIME_MEDIATOR_PRIMARY_SOURCE_CROSSWALK_PR_UNMERGED_PENDING_CI",
     "source_counts": {
       "research_project_sources": 98,
-      "bounded_evidence_checks": 295,
-      "proposals": 151
+      "bounded_evidence_checks": 297,
+      "proposals": 152
     },
-    "release_state": "ONE_NEW_READY_DEVELOPMENT_ONLY",
+    "release_state": "NO_NEW_READY_OR_DEPLOYMENT",
     "original_s019": "INACCESSIBLE_UNREVIEWED",
     "github267_literal_review_credit": 0
   },
@@ -8660,6 +8688,26 @@
         "governance_merge": 43077479096,
         "original603": "SKIPPED_NOT_PASS"
       }
+    },
+    {
+      "id": "R455-PROP-193-TIME-MEDIATOR-NO-UNIVERSAL-TARGET",
+      "finding": "ORG-06's causal synthesis and Schmieder's single-coffee controlled-flow experiments can be misread as authority to enforce a universal brew-time optimum or infer success/failed extraction from seconds alone; experimental controls imply time and flow/yield are causally coupled, not independently optimized sensory variables.",
+      "evidence": [
+        "R455-EV-CIT-193-A",
+        "R455-EV-CIT-193-B"
+      ],
+      "severity": "P3_RESEARCH_CAUSAL_INTERPRETATION_NO_REPRODUCIBLE_NEW_APP_DEFECT",
+      "user_benefit": "Keep Log Shot's five actually rated sensory outcomes and measured yield/ratio primary; retain style-specific time as contextual range rather than an unsupported taste success gate.",
+      "source_provenance": "ORG-06 git 9128527d3208379c723d561eee6ffbe09d174f55 archived SHA-256 e36835579fadf24cd2fdb7738d597b93f8bd23908c52206e48ccfe9e69904a80; primary peer-reviewed publisher DOI 10.3390/foods12152871 directly read Method/Result/Conclusions HTML (2026-11-11), not rehashed binary or raw supplemental replicates; current code blobs 0252db33598abb7c7bf6d11feac36793c5b14ec9, 72221331ce4dffabe416eebec1ae2fceced3a095; source SHA fd7aa589f3692dbf8502a154f725ce7c8572e829.",
+      "current_locked": "Five independent sensory ratings and rated green success, one truly controllable change, recipe-specific style time ranges Turbo vs Fast-Flow independent, measured shots/notes/private history, no universal science-based optima or new numeric taste policy without owner approval.",
+      "current_app": "Engine only uses time in conjunction with personal tastes/recipe context; only general Log Shot 1-180s physical validation. Existing starting time windows per style are documented heuristics, not independently clinically/scientifically validated optima.",
+      "proposed_change": "No app change. Record bounded causal boundary and preserve existing code, distinct styles, all five taste inputs and time-as-observation. If ever considering new universal timing rules or new displayed explanatory claims, require owner decision plus multi-coffee, multi-device sensory evidence and regressions.",
+      "approval_required_for_behavior_change": true,
+      "implementation": "RESEARCH_ONLY_SOURCE_BOUND_REVIEW_NO_APP_CHANGE",
+      "test_plan": "Direct GitHub source/body review and peer-reviewed publisher HTML crosscheck; no new code/SQL/CI test claims; docs-only PR must pass its own governance and applicable source-bound workflows before integration.",
+      "release_queue_status": "NO_NEW_READY_ITEM; PRODUCT_POLICY_UNCHANGED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
     }
   ],
   "changeScope": {
