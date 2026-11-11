@@ -671,7 +671,7 @@ export function prefill(s,coffeeId,options={}) {
   // with impossible dose/yield/time is not a reliable prior actual shot.
   // Reuse existing Log Shot bounds; do not invent temperature thresholds.
   const temps=measured.filter(x=>validRecordedTemperature(x.tempC)),same=temps.find(x=>x.style===style),temp=same||temps[0];
- return {doseG:doses[0]?.doseG??basket.doseG,yieldG:'',timeS:'',grindSetting:grinds[0]?.grindSetting??'',tempC:v.advanced.temperature?(temp?.tempC??null):null,tempSource:temp&&temp.style!==style?`Last used on ${temp.style}`:'',style,basketId:basket.id,feedMode:feed,tasteScales:{extraction:null,body:null,clarity:null,sweetness:null,astringency:null},notes:''};
+ return {doseG:doses[0]?.doseG??basket.doseG,yieldG:'',timeS:'',grindSetting:grinds[0]?.grindSetting??'',tempC:v.advanced?.temperature?(temp?.tempC??null):null,tempSource:temp&&temp.style!==style?`Last used on ${temp.style}`:'',style,basketId:basket.id,feedMode:feed,tasteScales:{extraction:null,body:null,clarity:null,sweetness:null,astringency:null},notes:''};
 }
 
  // Owner-approved measured-yield exploration (2026-11-04, #455).
@@ -800,7 +800,7 @@ function nextAdviceRaw(s,shot,rec) {
    text:'Keep dose and grind steady; aim around '+center.toFixed(1)+' g out. Let taste decide.',
    next:{grindSetting:shot.grindSetting,yieldCenter:center}};
  }
- if(t.astringency>1&&v.advanced.temperature&&finite(shot.tempC)&&shot.tempC>70){const temp=clamp(shot.tempC-1,70,100);return {title:'Try a small temperature change',text:'Try about 1 degree C (2 degrees F) cooler while keeping the other variables steady.',next:{grindSetting:shot.grindSetting,yieldCenter:shot.yieldG,tempC:temp}};}
+ if(t.astringency>1&&v.advanced?.temperature&&finite(shot.tempC)&&shot.tempC>70){const temp=clamp(shot.tempC-1,70,100);return {title:'Try a small temperature change',text:'Try about 1 degree C (2 degrees F) cooler while keeping the other variables steady.',next:{grindSetting:shot.grindSetting,yieldCenter:shot.yieldG,tempC:temp}};}
  if(t.extraction===3&&t.body===3&&t.clarity===5&&t.astringency===1&&t.sweetness<5)
   return sweetnessOnlyYieldAdvice(s,shot);
  const center=yieldTarget(shot,1);
@@ -879,7 +879,7 @@ export function saveShot(s,coffeeId,input,{allowLegacyCustom=false}={}) {
  if(!v.baskets?.some(b=>b.id===input.basketId&&!b.archived))
   throw new Error('Select an active basket before saving this shot.');
  const p=ensureCoffeeState(s,coffeeId);
- const sh={id:input.id||newId('shot'),coffeeId,setupId:set.id,setupVersionId:v.id,calibrationId:v.calibrationId,basketId:input.basketId,style:input.style,timestamp:input.timestamp||now(),doseG:round(input.doseG),yieldG:round(input.yieldG),timeS:round(input.timeS),grindSetting:round(input.grindSetting),tempC:v.advanced.temperature?num(input.tempC):null,feedMode:input.feedMode,notes:String(input.notes||''),tasteScales:{...input.tasteScales},dialedIn:isDialed(input.tasteScales),snapshot:snapshot(s,coffeeId,input.basketId),hidden:false,usedRecommendation:input.usedRecommendation||{},revision:1};
+ const sh={id:input.id||newId('shot'),coffeeId,setupId:set.id,setupVersionId:v.id,calibrationId:v.calibrationId,basketId:input.basketId,style:input.style,timestamp:input.timestamp||now(),doseG:round(input.doseG),yieldG:round(input.yieldG),timeS:round(input.timeS),grindSetting:round(input.grindSetting),tempC:v.advanced?.temperature?num(input.tempC):null,feedMode:input.feedMode,notes:String(input.notes||''),tasteScales:{...input.tasteScales},dialedIn:isDialed(input.tasteScales),snapshot:snapshot(s,coffeeId,input.basketId),hidden:false,usedRecommendation:input.usedRecommendation||{},revision:1};
  if(s.shots.some(x=>x.id===sh.id))return s.shots.find(x=>x.id===sh.id); // idempotent save
  sh.outlierReview=isExtreme(s,sh)?'pending':'not_needed';
  sh.suggestion=nextAdvice(s,sh,recommendation(s,coffeeId,{style:input.style,basketId:input.basketId,feedMode:input.feedMode}));
@@ -887,7 +887,7 @@ export function saveShot(s,coffeeId,input,{allowLegacyCustom=false}={}) {
  s.shots.push(sh);
  if(sh.dialedIn&&!p.currentFamilies[sh.style])p.currentFamilies[sh.style]=sh.familyId;
  p.style=sh.style;p.basketId=sh.basketId;
- if(v.advanced.slowFeed)v.slowFeed=sh.feedMode==='slow';
+ if(v.advanced?.slowFeed)v.slowFeed=sh.feedMode==='slow';
  const w=workspace(s);w.currentCoffeeId=coffeeId;w.recent[coffeeId]=now();
  logAudit(s,'shot.saved',{shotId:sh.id});return sh;
 }
