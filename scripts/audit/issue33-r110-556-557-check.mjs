@@ -37,7 +37,7 @@ export function selected110FieldsOk(n,fields){
   !f('tasting_notes')&&!f('process');
  if(n===557)return f('name')===fold(selected110[557].name)&&
   f('origin').includes('papua new guinea')&&f('origin').includes('waghi')&&
-  f('roast_level')==='medium light'&&/1500/.test(f('elevation_m'))&&
+  f('roast_level')==='medium light'&&['1500','1600'].every(part=>f('elevation_m').replace(/\s+/g,'').includes(part))&&
   /typica/.test(f('variety'))&&['chocolate','raisin','earthy'].every(t=>f('tasting_notes').includes(t));
  return false;
 }
