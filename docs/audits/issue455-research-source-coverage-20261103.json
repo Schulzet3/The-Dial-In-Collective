@@ -4927,6 +4927,38 @@
       "current_app": "Five independent recorded tastes remain; no health advice.",
       "result": "RESEARCH_ONLY_NO_APP_CHANGE",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-APP-182-A",
+      "source": "Live site/lib/engine.js Git blob 37eb9a64b1de64969054df1f2dc6dc3114e5469b at base bdca2c98d07737c04246e79d4de7a6d8716372ed; original-calibration familyEvidenceShots source; R455-182 same-commit journal",
+      "claim": "An archived four-shot outlier quorum could include an invalid five-green fourth shot with measured grind=2 while its recorded original grinder snapshot required [4,5]. Existing isExtreme reference gate only checked today's range, allowing a spurious >25-second outlier review.",
+      "grade": "DIRECT_LIVE_SOURCE_SYNTHETIC_REPRODUCIBLE_GAP_NOT_REAL_MEMBER_INCIDENT",
+      "current_app": "R182 SAFE fix reuses familyEvidenceShots original-snapshot and historical calibration eligibility, preserving current-range controls and immutable private archived measurements, notes and all five ratings.",
+      "result": "SAFE_SOURCE_TESTED_NONFORCE_MERGED_PR2017",
+      "owner_approval": false,
+      "exact_source_parent": "bdca2c98d07737c04246e79d4de7a6d8716372ed",
+      "exact_code_merge": "d565bd905dd536d3fed57f371597350cd5d8871c",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-APP-182-B",
+      "source": "tests/issue455-outlier-original-calibration.test.mjs Git blob 4b23c1c755320b47f57fccb432cc7c3dc81347f7; site/lib/engine.js Git blob f079ebfe4a44b6e57158a41e0fe72515025a59e0",
+      "claim": "Seven synthetic negative/positive regressions verify impossible original snapshots, historical calibration without snapshot, reversed bounds, inclusive valid endpoints, missing legacy options, unchanged >25s/>1.25 thresholds, and saved-shot History immutability.",
+      "grade": "EXACT_PR_HEAD_AND_MERGED_NODE22_REAL_MODULE_7_OF_7_PASS_CI",
+      "current_app": "Source PR #2017 exactly 3 reviewed paths, identical head-versus-merge blobs. Full Node22 head/merge: 3791 PASS /0 FAIL /6 intentional SKIP; applicable browser/mobile/Chromium/offline, SQL, source security and governance verified.",
+      "result": "DEVELOPMENT_READY_NOT_DEPLOYED",
+      "owner_approval": false,
+      "test_evidence": {
+        "node_head": 42989443813,
+        "node_merge": 42989925896,
+        "ux_head": 42989443789,
+        "ux_merge": 42989925908,
+        "sql_head": 42989443887,
+        "security_head": 42989443917,
+        "governance_head": 42989443884,
+        "governance_merge": 42989925885,
+        "original603": "SKIPPED_NOT_PASS"
+      }
     }
   ],
   "policy_decisions_pending": [],
@@ -5053,18 +5085,19 @@
     "R455-179 narrow original-calibration sweetness-comparison evidence safe code/test authored at exact development 49663d6cf5a26755eb86adad92ed079252a1371d; need actual PR CI, nonforce merge and exact merged-source tests, then reconcile READY queue/docs. No deployment, original S019 still inaccessible; #267 literal line credit zero.",
     "R455-179 PR1991 code merged 6d386d4e41d09c12ec0487dc7e222e74f5e277de; PR/merged head Node22 3751 PASS 0 FAIL 6 SKIP and five new tests PASS; UX/offline, SQL/security/governance exact checks passed. Docs-only READY update staged pending its PR governance; No deploy; continue distinct next source gap.",
     "R455-180 source-verified historical latest-rated feedback original-calibration guard PR2001 safely merged cbf95b0baf00d80d0f7c90ee4045122e19785ca9 exact head/merged Node22 3767/0/6, six new synthetic cases and applicable UX/SQL/security/governance PASS; one READY development queue row reconciled in docs PR pending final governance. Reverified Library standalone slow-feed PDF SHA256 a068e5e3...; original S019 inaccessible; next distinct Log Shot/Rate/Recommendation gap only, coordinate with #33/#267/#96. No production change.",
-    "R455-181 2025 Fitri paper direct primary CATA/ratio units check documented; 96/278/142, docs CI pending; no app change. Next distinct verified UX defect or primary citation."
+    "R455-181 2025 Fitri paper direct primary CATA/ratio units check documented; 96/278/142, docs CI pending; no app change. Next distinct verified UX defect or primary citation.",
+    "R455-182 PR #2017 safely merged d565bd905dd536d3fed57f371597350cd5d8871c after six applicable PR-head successful jobs; merged Node22 3791/0/6 and all seven new regressions, merged UX/mobile/offline and governance SUCCESS. One source-bound development READY queue row reconciled via docs-only PR pending CI/merge. No production data, deployed state, new science policy or #267 line credit. Next distinct Log Shot/Rate/Recommendation or verified primary science gap."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-181",
-    "source_sha": "4d4e8f16a670ed85ead229aa896d67267d618ce5",
-    "phase": "PRIMARY_PUBLISHER_REVIEW_DOCS_CI_PENDING",
+    "run_id": "R455-182",
+    "source_sha": "d565bd905dd536d3fed57f371597350cd5d8871c",
+    "phase": "SAFE_CODE_EXACT_HEAD_MERGED_TESTED_DEVELOPMENT_READY",
     "source_counts": {
       "research_project_sources": 96,
-      "bounded_evidence_checks": 278,
-      "proposals": 142
+      "bounded_evidence_checks": 280,
+      "proposals": 143
     },
-    "release_state": "RESEARCH_ONLY_NOT_DEPLOYED",
+    "release_state": "DEVELOPMENT_READY_NOT_DEPLOYED",
     "original_s019": "INACCESSIBLE_UNREVIEWED",
     "github267_literal_review_credit": 0
   },
@@ -8110,6 +8143,43 @@
       "release_queue_status": "NO_READY_ROW",
       "production_deployed": false,
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-PROP-182-OUTLIER-ORIGINAL-CALIBRATION",
+      "finding": "A historical five-green shot with an impossible recorded original grinder calibration could supply a fourth success to the mandatory new-shot outlier quorum and create a false review warning.",
+      "evidence": [
+        "R455-EV-APP-182-A",
+        "R455-EV-APP-182-B"
+      ],
+      "severity": "P2_SYNTHETIC_REPRODUCIBLE_LOG_SHOT_FEEDBACK_INTEGRITY",
+      "user_benefit": "Avoid a false outlier alert when archived evidence could not have been logged under its own grinder calibration. Preserve valid four-shot checks.",
+      "source_provenance": "Exact source parent bdca2c98d07737c04246e79d4de7a6d8716372ed, original engine Git blob 37eb9a64b1de64969054df1f2dc6dc3114e5469b; existing familyEvidenceShots authority; independent synthetic CI; not a measured member incident or cup outcome.",
+      "current_locked": "Four comparable all-five-green references, unchanged >25-second and >1.25 ratio outlier limits, original History and notes, grinder version/calibration, dose/yield/time, independent styles/feed and privacy remain preserved.",
+      "current_app": "Prior isExtreme used measuredRecipeShots plus active grinder/temperature validity but ignored the archived original range for each reference.",
+      "proposed_change": "Reuse already proven familyEvidenceShots on historical outlier references; retain previous eligibleControls and four-shot/magnitude thresholds; do not touch historic records or numeric taste policy.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "SAFE_CODE_TEST_SAME_COMMIT_JOURNAL_PR2017_VERIFIED_MERGED",
+      "test_plan": "Seven real-module synthetic tests, exact PR-head/merged Node22/lint, mobile/Chromium/offline, isolated SQL/privacy, security and governance; original frozen603 intentionally SKIPPED and not claimed PASS.",
+      "release_queue_status": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false,
+      "exact_source": {
+        "head": "0e99e775f71d976ec3d778e59f054e9b71206dba",
+        "merge": "d565bd905dd536d3fed57f371597350cd5d8871c",
+        "node_head": 42989443813,
+        "node_merge": 42989925896,
+        "ux_head": 42989443789,
+        "ux_merge": 42989925908,
+        "sql_head": 42989443887,
+        "security_head": 42989443917,
+        "governance_head": 42989443884,
+        "governance_merge": 42989925885,
+        "new_cases_passed": 7,
+        "passed": 3791,
+        "failed": 0,
+        "skipped": 6,
+        "original603": "SKIPPED_NOT_PASS"
+      }
     }
   ],
   "changeScope": {
