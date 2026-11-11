@@ -322,7 +322,11 @@ export function personalSimilarCoffeeReference(s,coffee,version,style,feed,baske
  if(targetRank<0)return null;
  const byId=new Map(s.coffees.map(c=>[c.id,c]));
  const matches=[],nearby=[];
+ // A donor shot must be possible on its ORIGINAL grinder calibration, not
+ // just today's active range. Preserve invalid imported shots in History.
+ const originalCalibrationEligible=new Set(familyEvidenceShots(s,s.shots));
  for(const sh of s.shots){
+  if(!originalCalibrationEligible.has(sh))continue;
   if(sh.hidden||sh.dialedIn!==true||!isDialed(sh.tasteScales)||sh.coffeeId===coffee.id||
      sh.setupVersionId!==version.id||sh.style!==style||sh.feedMode!==feed||
      // Reuse current Log Shot physical bounds for historical *evidence* only.
