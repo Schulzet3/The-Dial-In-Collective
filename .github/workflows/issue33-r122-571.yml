@@ -1,0 +1,49 @@
+name: DIC Issue33 R122 original selected 571
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r122-571.yml
+      - scripts/audit/issue33-r122-571-check.mjs
+      - tests/coffee-issue33-r122-571.test.mjs
+      - docs/workstreams/ops-issue33-r122-571-20261111.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r122-571.yml
+      - scripts/audit/issue33-r122-571-check.mjs
+      - tests/coffee-issue33-r122-571.test.mjs
+permissions:
+  contents: read
+jobs:
+  selected-current:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Selected product positives and hostile negatives
+        run: node --test tests/coffee-issue33-r122-571.test.mjs
+      - name: Guarded official selected HTTPS, actual parser and Add Coffee review
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '571'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r122
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict current source/hash/identity/semantic afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r122
+          DIC_ISSUE33_R122_VERIFY: '1'
+        run: node scripts/audit/issue33-r122-571-check.mjs
+      - name: Preserve short-lived public evidence for independent hash verification
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r122-selected-571
+          path: /tmp/dic33-r122/
+          retention-days: 1
+          if-no-files-found: warn
