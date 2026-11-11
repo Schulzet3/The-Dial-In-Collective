@@ -636,7 +636,9 @@ export function prefill(s,coffeeId,options={}) {
   }
   return sh.tempC==null||validRecordedTemperature(sh.tempC);
  };
- const measured=measuredRecipeShots(shots).filter(admissible);
+ // Original saved grinder calibration, not today's range, must qualify
+ // archived measurements before they prefill a fresh Log Shot.
+ const measured=familyEvidenceShots(s,shots).filter(admissible);
  const doses=measured.filter(x=>x.basketId===basket.id&&finite(x.doseG)&&x.doseG>=minDose&&x.doseG<=maxDose),
   grinds=measured.filter(x=>x.basketId===basket.id&&x.style===style&&x.feedMode===feed&&x.calibrationId===v.calibrationId&&
    finite(x.grindSetting)&&x.grindSetting>=v.grinderMin&&x.grindSetting<=v.grinderMax);

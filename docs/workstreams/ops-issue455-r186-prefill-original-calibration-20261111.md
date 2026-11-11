@@ -1,0 +1,15 @@
+# Issue #455 R455-186 — historical original-grinder Log Shot prefill guard (2026-11-11 UTC)
+
+## Authority and direct source reproduction
+
+Owner-approved Option B SAFE Locked-compatible repair, development only. Source branch `development/backend-foundation` exact parent `7330cb7b0706ad6369d355dc3beb039506d8008a`; reviewed real `site/lib/engine.js` Git blob `fab7de1a3284d5dba7d6f4f2d58530acfb5868e0`, `prefill()` lines 615–647 and prior `familyEvidenceShots()` lines 64–82, plus prior R167/R185 positive/negative fixture tests. Reviewed current AGENTS, context/preflight, Master Specification, Decision Ledger/supersessions, CURRENT_STATUS, source/approval/release register, Issue #455/#335/#267/#33/#96 and active PR ownership. Independent Google Drive S019/espresso/slow feeding searches returned no source; owner Library separate slow-feed PDF already previously reviewed (SHA-256 a068e5e3...), not the inaccessible S019.
+
+**Exact negative source trace before change:** archived shot with `snapshot:null`, older known `calibrationId:historical-range` original [3,5], grind 2.5 (impossible on that calibration), but current active range [0,5]. In `prefill()`, `admissible` fell back to today's bounds and mistakenly let its 25g dose/99C temperature displace an older valid measured 18g/93C shot. `familyEvidenceShots()` elsewhere already correctly rejects that original-calibration record. Deterministic synthetic archive scenario, not observed member incident or measured espresso outcome.
+
+## SAME-COMMIT safe change and expected verification
+
+- `site/lib/engine.js`: apply existing `familyEvidenceShots(s,shots)` original-calibration eligibility before unchanged prefill admissibility, dose, grind and temperature selection. Narrow defensive reuse: original physical readings/history/notes/taste ratings remain unmodified. No new science, targets, extraction style/feed families, owner-Locked semantics or user capture.
+- `tests/issue455-prefill-original-calibration.test.mjs`: **7** independent real-module Node22 synthetic tests covering invalid/sole invalid/reversed historical calibration, accepted endpoints, missing legacy snapshot/calibration, non-green physically valid measurement, other feed mode; assert original History unchanged.
+- Scoped journal in SAME COMMIT binds authoring source and exact paths. At authoring CI **UNRUN / NOT PASS**; no local source checkout possible because GitHub DNS inaccessible to container.
+
+**Next:** inspect exact PR-head applicable Node22/lint, real browser/offline/mobile, isolated SQL/privacy, security and governance CI; fix failures; nonforce merge only verified source; read back exact merge source/blobs/CI; reconcile research ledger/CURRENT_STATUS/development release queue and Issue #455. Frozen603 skipped is not pass. S019 original remains inaccessible, #267 literal audit credited ZERO. No production provider/member/SQL/Auth/Edge writes, Netlify/deploy, main/release movement, paid service, force Git, visibility or Locked decision changes.
