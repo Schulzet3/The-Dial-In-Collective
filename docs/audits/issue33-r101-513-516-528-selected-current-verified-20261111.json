@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "scope": "R101 original603 exact selected source #513/#516/#528",
+  "status": "VERIFIED_SCOPED_READY_DEVELOPMENT_ONLY",
+  "tested_and_merged_source_sha": "3e60b5acdc069fdc315d910a77dcf06a3590cd1d",
+  "merged_tree_sha": "6c62fde8db97a5a6fd81152d3cfcec92ec69ee3f",
+  "source_pr": 1929,
+  "url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/1929",
+  "source_original603": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_path": "docs/audits/issue33-original603-source-level-adjudication-20261029.csv",
+    "csv_git_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "oracle_modified": false,
+    "scorer_modified": false,
+    "manual_certified": 0,
+    "full_corpus_workflow": "SKIPPED_OR_NOT_RECERTIFIED"
+  },
+  "cases": [
+    {
+      "number": 513,
+      "selected_official_url": "https://www.koffeekult.com/products/tanzania-peaberry",
+      "selected_h1": "Tanzania Peaberry: Kilimanjaro (Single-Bean Reserve)",
+      "source_html_sha256": "49527669037bb28ad78b2f668968426cd48440f40d4d2799663a65e21d1d7ddd",
+      "review": "Medium, fully Washed, Mbeya/Tanzania and literal 4 notes retained; unpublished producer/variety remain blank"
+    },
+    {
+      "number": 516,
+      "selected_official_url": "https://www.lilrhodycoffee.com/products/what-cheer-medium-blend",
+      "selected_h1": "What Cheer - Medium Roast",
+      "source_html_sha256": "b9f1160e7f79c0074a1691fdc5316edec83852ee8d486e84a530e08acfcc3d",
+      "review": "Selected current Coffee Info accordion publishes Guatemala Huehuetenango; preserve region, not stale URL identity"
+    },
+    {
+      "number": 528,
+      "selected_official_url": "https://www.mysticmonkcoffee.com/products/thanksgiving-blend",
+      "selected_h1": "Thanksgiving Blend",
+      "source_html_sha256": "c83f497b82019fafeab18cecad50bbe0c47e2094a1eea77b0783581fc5258eb1",
+      "review": "Direct selected adjacent product description prints Medium-Dark and dark chocolate/malt/dark cherry/wild honey; no generic visual-axis roast or unrelated source promotion"
+    }
+  ],
+  "ci": {
+    "official": {
+      "run": 42928447910,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42928447910",
+      "focus_tests": 15,
+      "focus_failures": 0,
+      "official_selected_products": 3,
+      "source_sha": "3e60b5acdc069fdc315d910a77dcf06a3590cd1d",
+      "artifact_id": 13815740343,
+      "zip_sha256": "1ba374819614f6fad6a67b0a8ef88fb3e9a3d4d0fbe1ca0e851969e94e9b38fc",
+      "evidence_sha256": "cf9c93263344cee610a688bf6ffc79f87b6d5f1cbb42218af44235fd145c95f9",
+      "afterproof_sha256": "46bec5862f2c70e9d39128be921762cae1b9f9316a03e1a006835719cd5bf4f1",
+      "afterproof_passed": true,
+      "afterproof_failures": []
+    },
+    "node": {
+      "run": 42928447957,
+      "url": "https://github.com/Schulzet3/The-Dial-In-Collective/actions/runs/42928447957",
+      "tests_total": 3668,
+      "passed": 3662,
+      "failed": 0,
+      "skipped": 6,
+      "lint": "PASS"
+    },
+    "cloud_ux_mobile": {
+      "run": 42928447846,
+      "conclusion": "SUCCESS"
+    },
+    "python": {
+      "run": 42928447768,
+      "conclusion": "SUCCESS"
+    },
+    "approval": {
+      "run": 42928447799,
+      "conclusion": "SUCCESS"
+    },
+    "unchanged_development_other_source_failures": [
+      {
+        "run": 42928448072,
+        "cases": [
+          594
+        ],
+        "reason": "previously documented current official source unavailable; outside R101 acceptance"
+      },
+      {
+        "run": 42928447985,
+        "cases": [
+          566,
+          567
+        ],
+        "reason": "previously documented current official sources unavailable; outside R101 acceptance"
+      }
+    ],
+    "frozen603": "SKIPPED (not PASS)",
+    "broad_public_probe": "SKIPPED (not PASS)"
+  },
+  "scope_paths": [
+    "src/server/coffee-page-metadata.mjs",
+    "src/server/coffee-selected-current-panel.mjs"
+  ],
+  "production_operations": 0,
+  "deployed": false,
+  "owner_action_required": false,
+  "issue33_parent": "OPEN: independent complete 603-coffee semantic certification unverified",
+  "boundary": "No Netlify/publication, production SQL/Edge/Auth/provider/member writes, member device/GoTrue claim, forced Git or paid work"
+}

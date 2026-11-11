@@ -11693,8 +11693,8 @@
       "issue": 33,
       "pr": 1929,
       "title": "Preserve current selected coffee labeled origin region and direct roast/complete sensory list",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "3e60b5acdc069fdc315d910a77dcf06a3590cd1d",
       "scope_paths": [
         "src/server/coffee-selected-current-panel.mjs",
         "src/server/coffee-page-metadata.mjs"
@@ -11704,18 +11704,29 @@
         "R101 second exact-head [42920216817] 7/7 synthetics PASS, real 3/3 official selected HTTPS PASS; afterproof correctly FAILED on source-backed #516 region and #528 roast/malt omissions.",
         "R101 first parser correction [42920814484] 11/12 synthetics PASS, malt still missing due terminal punctuation in shorter list, real HTTPS SKIPPED; focused correction underway.",
         "Fresh PR-head exact selected HTTP/afterproof, Node22/lint/build/cloud/mobile/privacy/approval CI PENDING.",
-        "Failed queue intake [42921065538]: scope_paths included nondeployable scripts/tests/workflow/journal. Corrected to only two deployable runtime source paths. Scope's nondeployable test/docs tracked by same-commit journal."
+        "Failed queue intake [42921065538]: scope_paths included nondeployable scripts/tests/workflow/journal. Corrected to only two deployable runtime source paths. Scope's nondeployable test/docs tracked by same-commit journal.",
+        "R101 exact merged official current selected #513/#516/#528 [42928447910]: 15/15 focused positive/negative PASS; 3/3 guarded fresh HTTPS selected H1/direct body + actual parser/Add Coffee/Source Review strict afterproof PASS; raw ZIP SHA256 1ba374819614f6fad6a67b0a8ef88fb3e9a3d4d0fbe1ca0e851969e94e9b38fc.",
+        "Exact merged Node/lint 42928447957 SUCCESS, 3662 PASS/0 FAIL/6 intentional SKIP, lint exit0; cloud/mobile 42928447846, Python 42928447768, approval 42928447799 SUCCESS; frozen603 SKIPPED.",
+        "R54/R64 official source failures on same development SHA are previously documented inaccessible #594/#566/#567; not introduced by R101, tracked separately."
       ],
       "ci_runs": [
         42920114784,
         42920216817,
-        42920814484
+        42920814484,
+        42927820984,
+        42927821042,
+        42927821268,
+        42928337935,
+        42928338040,
+        42928447910,
+        42928447957,
+        42928447846,
+        42928447768,
+        42928447799
       ],
-      "blockers": [
-        "Last new code/source exact-PR-head CI not yet verified; no merge/READY or release"
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Current selected exact H1 and quoted present coffee country/region, strong literal roast and full same-selected tasting notes, non-contradictory subset only. Original frozen 603/201/1197 untouched; no actual member/GoTrue/production-provider/Netlify writes; separate #267/#96 owners. No owner action required; source-only development until verified."
+      "notes": "Current selected exact H1 and quoted present coffee country/region, strong literal roast and full same-selected tasting notes, non-contradictory subset only. Original frozen 603/201/1197 untouched; no actual member/GoTrue/production-provider/Netlify writes; separate #267/#96 owners. No owner action required; source-only development until verified. R101 code safely nonforce integrated via PR1929 merged SHA 3e60b5acdc069fdc315d910a77dcf06a3590cd1d; 15 focused/3 direct live cases and applicable exact merged CI success; scoped READY development only, parent #33 open and all other items unchanged."
     },
     {
       "id": "DIC-Q-1938-admin-closed-app-push",
