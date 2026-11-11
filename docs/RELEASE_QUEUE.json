@@ -12193,6 +12193,37 @@
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
       "notes": "Owner-approved Option B, Locked compatible: existing original calibrated grinder-history evidence gate now shared across personal grind and Slow Feed history. No universal correction, numeric change, new controls or data capture; development only, deployment separately authorized.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-similar-coffee-original-calibration",
+      "issue": 455,
+      "pr": 2035,
+      "title": "Exclude historical similar-coffee successful donors impossible on their original grinder calibration from unproven personal starting ratios/time",
+      "state": "READY",
+      "merged_source_sha": "d936f59cb31c7399fab8e779ac5c8517a939c2c7",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Exact PR head 36a05ee88238db7f852fa676de5a1f66cd4baae2 Node22/lint #43005758143 SUCCESS 3820 PASS/0 FAIL/6 intentional SKIP, all seven R184 real-module synthetic cases #3346–3352 PASS; head Chromium/mobile/offline #43005758145, SQL/privacy #43005758184, security #43005758077 and governance #43005758160 SUCCESS. Frozen603 #43005758173 SKIPPED NOT PASS.",
+        "Nonforce PR #2035 squash merged d936f59cb31c7399fab8e779ac5c8517a939c2c7; engine, test and same-commit journal blobs match head readback exactly, single-parent, no removed source paths.",
+        "Exact merged Node22/lint #43006219038 SUCCESS same 3820 PASS/0 FAIL/6 SKIP, all seven R184 PASS, lint PASS; merged Chromium/mobile/offline #43006219240 and governance #43006219048 SUCCESS. SQL/security head reused due identical source; no fresh merged SQL/security claimed.",
+        "Historical original five sensory ratings, measured source shots, notes, grinder snapshots and private history unchanged; synthetic source-level integrity issue, not proven real member impact or espresso result."
+      ],
+      "ci_runs": [
+        43005758143,
+        43005758145,
+        43005758184,
+        43005758077,
+        43005758160,
+        43006219038,
+        43006219240,
+        43006219048
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Owner-approved Option B; established calibration evidence eligibility across same-roast similar-coffee source donors. Keeps all Locked tastes/targets, one-control recommendations and style/feed distinctions; production publication separately authorized.",
+      "production_deployed": false
     }
   ],
   "history": [
@@ -13501,6 +13532,15 @@
       "state": "READY",
       "source_sha": "be6ad8df744305c3cb95488f1d2ca8b79dc9dd06",
       "evidence": "docs/workstreams/ops-issue455-r183-final-verification-20261111.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-similar-coffee-original-calibration",
+      "state": "READY",
+      "source_sha": "d936f59cb31c7399fab8e779ac5c8517a939c2c7",
+      "evidence": "docs/workstreams/ops-issue455-r184-final-verification-20261111.md",
       "production_deployed": false
     }
   ],
