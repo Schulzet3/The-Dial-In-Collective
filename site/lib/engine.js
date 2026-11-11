@@ -659,7 +659,12 @@ function comparableSweetnessYields(s,shot){
  // not by lexical text; an invalid legacy date cannot establish chronology.
  const shotAt=typeof shot.timestamp==='string'?Date.parse(shot.timestamp):NaN;
  if(keys.some(key=>shot[key]==null)||!Number.isFinite(shotAt))return [];
+ // Only original-calibration-valid measured history can infer a same-coffee
+ // sweetness direction. Retain impossible archived readings in History but
+ // never let their apparent yield difference steer the next shot.
+ const measured=new Set(familyEvidenceShots(s,s.shots));
  return s.shots.filter(prior=>{
+  if(!measured.has(prior))return false;
   if(prior.id===shot.id||prior.hidden||keys.some(key=>prior[key]!==shot[key]))return false;
   const priorAt=typeof prior.timestamp==='string'?Date.parse(prior.timestamp):NaN;
   if(!Number.isFinite(priorAt)||priorAt>=shotAt)return false;

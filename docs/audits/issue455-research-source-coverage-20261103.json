@@ -4850,6 +4850,26 @@
       "result": "SAFE_EXISTING_HISTORICAL_FILTER_REUSED_CI_AND_MERGED_CODE_VERIFIED",
       "owner_approval": false,
       "test_evidence": "Head Node22 42961355297 and merged Node22 42961757243 both 3738 PASS / 0 FAIL /6 SKIP, all seven R178 assertions passed; merged UX 42961757173 and governance 42961757208 SUCCESS. Synthetic, no real member evidence."
+    },
+    {
+      "id": "R455-EV-APP-179-A",
+      "source": "site/lib/engine.js Git blob e91f84a1ce02c3e103e57257b042954d8c51aeae; live development 49663d6cf5a26755eb86adad92ed079252a1371d; existing familyEvidenceShots original grinder snapshot/calibration evidence helper",
+      "claim": "The comparableSweetnessYields selector trusted valid-looking dose/yield/time, grind and temperature but did not require the prior shot to fit its own recorded original espresso calibration; an impossible historical reading could falsely establish or contradict the next single-variable sweetness direction.",
+      "grade": "DIRECT_SOURCE_STATIC_LOGIC_AND_FIVE_SYNTHETIC_POSITIVE_NEGATIVE_REGRESSIONS_AUTHORED_NOT_YET_RUN",
+      "current_app": "Same-coffee earlier measured flavor comparisons were date/physical-bounds checked but unlike green-success recipe evidence ignored original dial snapshot/calibration.",
+      "result": "SAFE_EXISTING_CALIBRATION_EVIDENCE_REUSE_AUTHORED_CI_PENDING",
+      "owner_approval": false,
+      "test_evidence": "tests/issue455-sweetness-original-calibration-comparison.test.mjs; Node22/PR and merged CI unrun at authoring."
+    },
+    {
+      "id": "R455-EV-APP-179-B",
+      "source": "Existing site/lib/engine.js familyEvidenceShots and original-calibration integrity guard at 49663d6cf5a26755eb86adad92ed079252a1371d; owner Option B issue #455",
+      "claim": "An imported original grinder snapshot outside its stored range must remain fully visible with original notes and all five scores but not change measured sweetness-direction evidence. A valid inclusive endpoint, legacy missing optionals, and genuine compatible observed comparison remain eligible.",
+      "grade": "LOCKED_COMPATIBLE_SOURCE_GUARDRAIL_WITH_SYNTHETIC_TESTS_PENDING_CI",
+      "current_app": "Latest shot and prior actual measured yield advice uses one controllable yield step, no universal scientific prescription.",
+      "result": "NO_NUMERIC_TASTE_TARGET_OR_SOURCE_HISTORY_CHANGE_CODE_AUTHORED",
+      "owner_approval": false,
+      "test_evidence": "New tests cover invalid snapshot, inclusive endpoint, inverted original range, legacy missing snapshot and contradictory invalid counterpart; UNRUN."
     }
   ],
   "policy_decisions_pending": [],
@@ -4972,20 +4992,21 @@
     "R455-176 PR1968 head b1fd7a4b nonforce squash merged ef669d3d after five synthetic Node22 cases PASS. Exact head Node22 3711/0/6, UX/SQL/security/governance success; merged Node22 3711/0/6 and UX/governance SUCCESS. READY docs queue/status/ledger/journal follow-up PR must pass applicable exact-source CI and merge; not deployed. S019 not reviewed, #267 separate.",
     "R455-177 peer-reviewed Linne 2025 original RSC HTML directly reviewed; trace astringency tactile perception, n4/n5/n9 and repeated ratings, unverified supplements/PDF; no numeric espresso correction. Verify documentation PR exact-head CI and nonforce merge, exact source readback, then continue other distinct source/UX priority. S019 unavailable and #267 scope separate.",
     "R455-178 original grinder snapshot overview and five-green veto source defect: code/test/ledger/journal authored from d97110baee03fba4707860610181e61d24824602; tests, exact PR/merge CI and READY queue reconciliation pending. No production or member tests. S019 still unavailable.",
-    "R455-178 source fix PR1984 merged 62fd66e9121dece04e244590aa7341d58fb7341b with exact head/merged Node22 3738 PASS 0 FAIL 6 SKIP and R178 seven groups passing; head browser/SQL/security/governance + merged UX/governance success. Docs-only follow-up queue/status/ledger/journal authoring and CI pending. S019 unreviewed; #267 literal lines zero; development-only not deployed."
+    "R455-178 source fix PR1984 merged 62fd66e9121dece04e244590aa7341d58fb7341b with exact head/merged Node22 3738 PASS 0 FAIL 6 SKIP and R178 seven groups passing; head browser/SQL/security/governance + merged UX/governance success. Docs-only follow-up queue/status/ledger/journal authoring and CI pending. S019 unreviewed; #267 literal lines zero; development-only not deployed.",
+    "R455-179 narrow original-calibration sweetness-comparison evidence safe code/test authored at exact development 49663d6cf5a26755eb86adad92ed079252a1371d; need actual PR CI, nonforce merge and exact merged-source tests, then reconcile READY queue/docs. No deployment, original S019 still inaccessible; #267 literal line credit zero."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-178",
+    "run_id": "R455-179",
     "issue": 455,
-    "source_sha": "62fd66e9121dece04e244590aa7341d58fb7341b",
-    "phase": "CODE_MERGED_VERIFIED_QUEUE_DOCUMENTATION_FOLLOWUP_AT_AUTHORING",
+    "source_sha": "49663d6cf5a26755eb86adad92ed079252a1371d",
+    "phase": "SAFE_CODE_AND_TEST_AUTHORED_NOT_YET_CI",
     "source_counts": {
-      "sources": 95,
-      "evidence_checks": 272,
-      "proposals": 139
+      "research_project_sources": 95,
+      "bounded_evidence_checks": 274,
+      "proposals": 140
     },
-    "release_state": "DEVELOPMENT_READY_PENDING_DOCS_PR_CI_NOT_DEPLOYED",
-    "original_s019": "UNAVAILABLE_NOT_REVIEWED",
+    "release_state": "TESTING_NOT_READY_NOT_DEPLOYED",
+    "original_s019": "INACCESSIBLE_UNREVIEWED",
     "github267_literal_review_credit": 0
   },
   "policy_decisions_resolved": [
@@ -7937,6 +7958,26 @@
         "skipped": 6,
         "original603": "SKIPPED_NOT_PASS"
       }
+    },
+    {
+      "id": "R455-PROP-179-SWEETNESS-ORIGINAL-CALIBRATION-COMPARISON",
+      "finding": "Corrupt original grinder range can manufacture an observed same-coffee sweetness/yield direction or conflict despite physically impossible prior dial.",
+      "evidence": [
+        "R455-EV-APP-179-A",
+        "R455-EV-APP-179-B"
+      ],
+      "severity": "P2_SYNTHETIC_REPRODUCIBLE_RECOMMENDATION_EVIDENCE_INTEGRITY",
+      "user_benefit": "Do not misrepresent corrupted History as measured evidence for an otherwise exploratory one-control yield adjustment.",
+      "source_provenance": "Exact source Git blob e91f84a1ce02c3e103e57257b042954d8c51aeae at development 49663d6cf5a26755eb86adad92ed079252a1371d; already-approved existing familyEvidenceShots calibration guard; no new experimental espresso outcome asserted",
+      "current_locked": "Preserve all five taste inputs, unchanged prior original measured shots/notes/private History, one truly controllable step, equipment/version/style/feed context and owner-approved sweetness exploration rule.",
+      "current_app": "Before fix, comparableSweetnessYields only validated stored grind finite and equal to latest; did not check original grinder snapshot bounds.",
+      "proposed_change": "Reuse existing familyEvidenceShots eligibility as Set membership for historical comparison; do not mutate/translate old shot or change prescribed numerical step.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "SAFE_CODE_AND_TEST_SAME_COMMIT_PENDING_PR_CI",
+      "test_plan": "Five positive/negative synthetic real-module Node22 tests plus full applicable Node22/lint/mobile/offline/SQL/security/governance on exact source; prior tests reused only when unchanged. Frozen603 SKIPPED is NOT PASS.",
+      "release_queue_status": "TESTING_NOT_READY_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
     }
   ],
   "changeScope": {
