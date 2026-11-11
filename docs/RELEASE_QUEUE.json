@@ -12161,6 +12161,38 @@
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
       "notes": "Owner Option B: reuse existing familyEvidenceShots original recorded calibration integrity for four-shot outlier reference eligibility. Preserve private shot history, five tastes, one-control advice, independent recipe style/feed and numeric Locked outlier thresholds. Development only; deployment separately requires owner approval.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-original-calibration-grinder-guidance",
+      "issue": 455,
+      "pr": 2028,
+      "title": "Exclude archived successful grinder settings impossible on the original grinder calibration from personal grind and paired Slow Feed advice",
+      "state": "READY",
+      "merged_source_sha": "be6ad8df744305c3cb95488f1d2ca8b79dc9dd06",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Exact PR-head 0e1f6bed900020b29b652eb6e699101599d7194f Node22/lint #42997570825 SUCCESS: 3806 PASS, zero FAIL, six intentional SKIP, all seven R183 synthetic real-module tests #3129-3135 PASS.",
+        "PR-head Chromium/mobile/offline #42997570902, isolated SQL/privacy #42997570789, security #42997570785 and approval #42997570973 all SUCCESS; frozen603 #42997570979 SKIPPED, NOT PASS.",
+        "PR #2028 nonforce squash merge be6ad8df744305c3cb95488f1d2ca8b79dc9dd06; engine/test/SAME-COMMIT journal Git blobs match reviewed PR head exactly; no removed source paths.",
+        "Exact merged-source Node22/lint #42997995912 SUCCESS 3806 PASS/0 FAIL/6 SKIP, all seven R183 PASS; merged Chromium/mobile/offline #42997995965 and approval/governance #42997996106 SUCCESS; no fresh merged SQL/security claimed.",
+        "Member original five taste ratings, measured shots, notes, calibration snapshots and private History are untouched. This is a synthetic reproducible source-level gap, not a documented affected member or empirical espresso cup-quality result."
+      ],
+      "ci_runs": [
+        42997570825,
+        42997570902,
+        42997570789,
+        42997570785,
+        42997570973,
+        42997995912,
+        42997995965,
+        42997996106
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Owner-approved Option B, Locked compatible: existing original calibrated grinder-history evidence gate now shared across personal grind and Slow Feed history. No universal correction, numeric change, new controls or data capture; development only, deployment separately authorized.",
+      "production_deployed": false
     }
   ],
   "history": [
@@ -13460,6 +13492,15 @@
       "state": "READY",
       "source_sha": "d565bd905dd536d3fed57f371597350cd5d8871c",
       "evidence": "docs/workstreams/ops-issue455-r182-outlier-calibration-20261111.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-original-calibration-grinder-guidance",
+      "state": "READY",
+      "source_sha": "be6ad8df744305c3cb95488f1d2ca8b79dc9dd06",
+      "evidence": "docs/workstreams/ops-issue455-r183-final-verification-20261111.md",
       "production_deployed": false
     }
   ],

@@ -4959,6 +4959,37 @@
         "governance_merge": 42989925885,
         "original603": "SKIPPED_NOT_PASS"
       }
+    },
+    {
+      "id": "R455-EV-APP-183-A",
+      "source": "Original site/lib/engine.js Git blob f079ebfe4a44b6e57158a41e0fe72515025a59e0 at parent bcc4553938c1acc6ab033ab36496156e5b4e5117; reused familyEvidenceShots original calibration guard",
+      "claim": "Archived five-green grinder=2.5 within today's espresso range can wrongly seed proven personal grind and paired Slow Feed offset despite its own recorded source bounds [3,5], because grindGuidance used measuredRecipeShots rather than familyEvidenceShots.",
+      "grade": "DIRECT_LIVE_SOURCE_SYNTHETIC_REPRODUCIBLE_DEFECT_NOT_REAL_MEMBER_INCIDENT",
+      "current_app": "SAFE merged code now validates original grinder snapshot/calibration for all personal grinder success, similar-coffee and paired feed-mode references without modifying any original shot.",
+      "result": "SAFE_SOURCE_TESTED_NONFORCE_MERGED_PR2028",
+      "owner_approval": false,
+      "exact_code_merge": "be6ad8df744305c3cb95488f1d2ca8b79dc9dd06",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-APP-183-B",
+      "source": "tests/issue455-grind-original-calibration-evidence.test.mjs Git blob 249eb645ff3c96e2f05d51bc744e0ba80a3eded2; merged engine blob e86937561c73f4209250054545a932a046285173",
+      "claim": "Seven real-module synthetic regressions prove impossible/reversed original calibration is excluded, inclusive endpoints and absent legacy snapshot remain accepted, median and Slow Feed history are source-valid, and original private History/notes stay unchanged.",
+      "grade": "EXACT_PR_HEAD_AND_MERGED_NODE22_REAL_MODULE_7_OF_7_PASS_CI",
+      "current_app": "PR #2028 nonforce squash merge after five applicable head workflows success, 3806 Node pass/0 fail/6 intentional skip on both source head and exact merge, merged UX/mobile/Chromium/offline and governance success.",
+      "result": "DEVELOPMENT_READY_NOT_DEPLOYED",
+      "owner_approval": false,
+      "test_evidence": {
+        "node_head": 42997570825,
+        "node_merge": 42997995912,
+        "ux_head": 42997570902,
+        "ux_merge": 42997995965,
+        "sql_head": 42997570789,
+        "security_head": 42997570785,
+        "governance_head": 42997570973,
+        "governance_merge": 42997996106,
+        "original603": "SKIPPED_NOT_PASS"
+      }
     }
   ],
   "policy_decisions_pending": [],
@@ -5086,16 +5117,17 @@
     "R455-179 PR1991 code merged 6d386d4e41d09c12ec0487dc7e222e74f5e277de; PR/merged head Node22 3751 PASS 0 FAIL 6 SKIP and five new tests PASS; UX/offline, SQL/security/governance exact checks passed. Docs-only READY update staged pending its PR governance; No deploy; continue distinct next source gap.",
     "R455-180 source-verified historical latest-rated feedback original-calibration guard PR2001 safely merged cbf95b0baf00d80d0f7c90ee4045122e19785ca9 exact head/merged Node22 3767/0/6, six new synthetic cases and applicable UX/SQL/security/governance PASS; one READY development queue row reconciled in docs PR pending final governance. Reverified Library standalone slow-feed PDF SHA256 a068e5e3...; original S019 inaccessible; next distinct Log Shot/Rate/Recommendation gap only, coordinate with #33/#267/#96. No production change.",
     "R455-181 2025 Fitri paper direct primary CATA/ratio units check documented; 96/278/142, docs CI pending; no app change. Next distinct verified UX defect or primary citation.",
-    "R455-182 PR #2017 safely merged d565bd905dd536d3fed57f371597350cd5d8871c after six applicable PR-head successful jobs; merged Node22 3791/0/6 and all seven new regressions, merged UX/mobile/offline and governance SUCCESS. One source-bound development READY queue row reconciled via docs-only PR pending CI/merge. No production data, deployed state, new science policy or #267 line credit. Next distinct Log Shot/Rate/Recommendation or verified primary science gap."
+    "R455-182 PR #2017 safely merged d565bd905dd536d3fed57f371597350cd5d8871c after six applicable PR-head successful jobs; merged Node22 3791/0/6 and all seven new regressions, merged UX/mobile/offline and governance SUCCESS. One source-bound development READY queue row reconciled via docs-only PR pending CI/merge. No production data, deployed state, new science policy or #267 line credit. Next distinct Log Shot/Rate/Recommendation or verified primary science gap.",
+    "R455-183 original-snapshot-calibration personal grinder/Slow Feed guard nonforce merged PR #2028 be6ad8df744305c3cb95488f1d2ca8b79dc9dd06, three blob identities equal head; Node22 head and merged each 3806 PASS/0 FAIL/6 SKIP including seven new cases; head/merged Chromium/offline and governance SUCCESS; SQL/security head SUCCESS, frozen603 SKIPPED. One distinct development-only READY queue item now reconciled; retain S019 access gap and #267 separate line task. Next independently inspect remaining UX/history source gap."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-182",
-    "source_sha": "d565bd905dd536d3fed57f371597350cd5d8871c",
+    "run_id": "R455-183",
+    "source_sha": "be6ad8df744305c3cb95488f1d2ca8b79dc9dd06",
     "phase": "SAFE_CODE_EXACT_HEAD_MERGED_TESTED_DEVELOPMENT_READY",
     "source_counts": {
       "research_project_sources": 96,
-      "bounded_evidence_checks": 280,
-      "proposals": 143
+      "bounded_evidence_checks": 282,
+      "proposals": 144
     },
     "release_state": "DEVELOPMENT_READY_NOT_DEPLOYED",
     "original_s019": "INACCESSIBLE_UNREVIEWED",
@@ -8180,6 +8212,43 @@
         "skipped": 6,
         "original603": "SKIPPED_NOT_PASS"
       }
+    },
+    {
+      "id": "R455-PROP-183-ORIGINAL-CALIBRATION-PERSONAL-GRIND",
+      "finding": "Proven personal grinder guidance and slow-feed paired offsets could be derived from imported five-green original grinder readings impossible on their own recorded dial scale.",
+      "evidence": [
+        "R455-EV-APP-183-A",
+        "R455-EV-APP-183-B"
+      ],
+      "severity": "P2_SYNTHETIC_REPRODUCIBLE_PERSONAL_RECOMMENDATION_EVIDENCE_INTEGRITY",
+      "user_benefit": "Prevent false personally successful grind dial or unjustified measured feed-mode adjustment while preserving actual logged evidence and valid older references.",
+      "source_provenance": "Original pinned engine blob f079ebfe4a44b6e57158a41e0fe72515025a59e0; existing familyEvidenceShots original grinder calibration policy; exact GitHub Node22 test receipts, not demonstrated actual member incident.",
+      "current_locked": "Five actual tastes and genuine green vs incomplete, at most one controllable change, original private shot/notes/history, no universal feed correction, separate Turbo/Fast-Flow/family/grinder calibration/version preserved.",
+      "current_app": "Old grindGuidance used measurement bounds and today's range, not the original archived source grinder scale.",
+      "proposed_change": "Reuse established familyEvidenceShots(s,s.shots) for all grinder success and measured paired feed-mode eligibility. No new numerical targets or data fields.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "SAFE_CODE_TEST_SAME_COMMIT_JOURNAL_PR2028_VERIFIED_MERGED",
+      "test_plan": "Seven real-module synthetic positive/negative regressions; exact-source PR-head + merged Node22/lint 3806 PASS/0 FAIL/6 SKIP; head and merged Chromium/mobile/offline, head SQL/security/governance and merged governance SUCCESS; original603 SKIPPED.",
+      "release_queue_status": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false,
+      "exact_source": {
+        "head": "0e1f6bed900020b29b652eb6e699101599d7194f",
+        "merge": "be6ad8df744305c3cb95488f1d2ca8b79dc9dd06",
+        "node_head": 42997570825,
+        "node_merge": 42997995912,
+        "ux_head": 42997570902,
+        "ux_merge": 42997995965,
+        "sql_head": 42997570789,
+        "security_head": 42997570785,
+        "governance_head": 42997570973,
+        "governance_merge": 42997996106,
+        "new_cases_passed": 7,
+        "passed": 3806,
+        "failed": 0,
+        "skipped": 6,
+        "original603": "SKIPPED_NOT_PASS"
+      }
     }
   ],
   "changeScope": {
@@ -8187,6 +8256,6 @@
     "tests_executed": true,
     "production_deployed": false,
     "queue_changed": true,
-    "reason": "R455-175 code fully verified in exact source PR-head and merged CI; queue READY docs reconciliation PR being authored, NOT yet merged/deployed."
+    "reason": "R455-183 verified exact source head/merged code CI, docs-only READY reconciliation; no deployment"
   }
 }
