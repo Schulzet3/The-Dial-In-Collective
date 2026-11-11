@@ -1597,6 +1597,23 @@
         "site/lib/constants.js": "72221331ce4dffabe416eebec1ae2fceced3a095",
         "site/lib/ui.js": "60539853a32f63e1c1c21cc0859d0a68be4281d9"
       }
+    },
+    {
+      "id": "LIT-2025-FITRI-ORIGIN-ESPRESSO-CATA",
+      "title": "Chemical composition, antioxidant activity, and sensory profile of espresso-based Arabica coffee from different bean origins",
+      "authors": "Nadia Fitri et al.",
+      "published": "2025-03-28",
+      "doi": "10.48130/bpr-0024-0040",
+      "url": "https://www.maxapress.com/article/doi/10.48130/bpr-0024-0040",
+      "access": "ORIGINAL_PUBLISHER_HTML_DIRECT_READ_METHODS_TABLES_1_4_CATA_DISCUSSION",
+      "review_status": "R455-181_DIRECT_SUBSTANTIVE_REVIEW_NOT_PDF_OR_RAW_DATA",
+      "source_bytes_sha256": null,
+      "evidence_grade": "PEER_REVIEWED_3_ORIGIN_4_BEVERAGE_FIXED_FORMULATION_30_CONSUMER_CATA_NOT_CONTROLLED_PERSONAL_ESPRESSO",
+      "claims_verified_externally": "18g coffee to 36mL espresso described as 1:2 despite noncomparable mass/volume units; single HeyCafe setting 2.0; 30 consumer CATA participants and 21 descriptors; three origins, four drinks including added milk/palm sugar; 36 treatment units; Table 3 sugar/fat only Gayo.",
+      "source_byte_caveat": "Publisher web HTML not SHA256 preserved; PDF, PCA pixels, supplements and raw sensory data unverified.",
+      "current_app_crosswalk": "Dev 4d4e8f16: engine.js 37eb9a64, model.js 542831b9, constants.js 72221331; five separate ratings, measured gram dose/yield, original same-coffee evidence; no volume/sugar CATA conversion.",
+      "factual_status": "DESCRIPTIVE_NOT_CAUSAL_TARGET_OR_MEDICAL_VALIDATION",
+      "implementation_status": "RESEARCH_ONLY_NO_POLICY_CODE_OR_READY_CHANGE"
     }
   ],
   "evidence_checks": [
@@ -4892,6 +4909,24 @@
       "result": "SAFE_CODE_TEST_JOURNAL_NONFORCE_MERGED_EXACT_CI_VERIFIED",
       "owner_approval": false,
       "test_evidence": "Exact six R180 tests #3133-3138 PASS both head 42973918046 and merged 42974204108; original private fixture state deep-equal before/after."
+    },
+    {
+      "id": "R455-EV-181-VOLUME-MASS",
+      "source": "LIT-2025-FITRI-ORIGIN-ESPRESSO-CATA",
+      "claim": "18g dose and 36mL espresso is not measured 1:2 gram yield; fixed grinder 2.0 not transferable.",
+      "grade": "DIRECT_PRIMARY_METHODS_AND_LIVE_CODE_UNITS",
+      "current_app": "Logs actual grams, retains grinder calibration.",
+      "result": "NO_NUMERIC_TARGET_CHANGE",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-181-CATA-LIMIT",
+      "source": "LIT-2025-FITRI-ORIGIN-ESPRESSO-CATA",
+      "claim": "Thirty-consumer 21-descriptor CATA across different beans and milk/sugar formulations cannot model individual five-slider same-coffee one-knob taste response or clinical benefit.",
+      "grade": "DIRECT_PRIMARY_METHODS_TABLES_AND_LIVE_CODE",
+      "current_app": "Five independent recorded tastes remain; no health advice.",
+      "result": "RESEARCH_ONLY_NO_APP_CHANGE",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [],
@@ -5017,19 +5052,19 @@
     "R455-178 source fix PR1984 merged 62fd66e9121dece04e244590aa7341d58fb7341b with exact head/merged Node22 3738 PASS 0 FAIL 6 SKIP and R178 seven groups passing; head browser/SQL/security/governance + merged UX/governance success. Docs-only follow-up queue/status/ledger/journal authoring and CI pending. S019 unreviewed; #267 literal lines zero; development-only not deployed.",
     "R455-179 narrow original-calibration sweetness-comparison evidence safe code/test authored at exact development 49663d6cf5a26755eb86adad92ed079252a1371d; need actual PR CI, nonforce merge and exact merged-source tests, then reconcile READY queue/docs. No deployment, original S019 still inaccessible; #267 literal line credit zero.",
     "R455-179 PR1991 code merged 6d386d4e41d09c12ec0487dc7e222e74f5e277de; PR/merged head Node22 3751 PASS 0 FAIL 6 SKIP and five new tests PASS; UX/offline, SQL/security/governance exact checks passed. Docs-only READY update staged pending its PR governance; No deploy; continue distinct next source gap.",
-    "R455-180 source-verified historical latest-rated feedback original-calibration guard PR2001 safely merged cbf95b0baf00d80d0f7c90ee4045122e19785ca9 exact head/merged Node22 3767/0/6, six new synthetic cases and applicable UX/SQL/security/governance PASS; one READY development queue row reconciled in docs PR pending final governance. Reverified Library standalone slow-feed PDF SHA256 a068e5e3...; original S019 inaccessible; next distinct Log Shot/Rate/Recommendation gap only, coordinate with #33/#267/#96. No production change."
+    "R455-180 source-verified historical latest-rated feedback original-calibration guard PR2001 safely merged cbf95b0baf00d80d0f7c90ee4045122e19785ca9 exact head/merged Node22 3767/0/6, six new synthetic cases and applicable UX/SQL/security/governance PASS; one READY development queue row reconciled in docs PR pending final governance. Reverified Library standalone slow-feed PDF SHA256 a068e5e3...; original S019 inaccessible; next distinct Log Shot/Rate/Recommendation gap only, coordinate with #33/#267/#96. No production change.",
+    "R455-181 2025 Fitri paper direct primary CATA/ratio units check documented; 96/278/142, docs CI pending; no app change. Next distinct verified UX defect or primary citation."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-180",
-    "issue": 455,
-    "source_sha": "cbf95b0baf00d80d0f7c90ee4045122e19785ca9",
-    "phase": "MERGED_CODE_EXACT_HEAD_AND_MERGED_CI_PASSED_DOCS_ONLY_READY_RECONCILIATION_PENDING",
+    "run_id": "R455-181",
+    "source_sha": "4d4e8f16a670ed85ead229aa896d67267d618ce5",
+    "phase": "PRIMARY_PUBLISHER_REVIEW_DOCS_CI_PENDING",
     "source_counts": {
-      "research_project_sources": 95,
-      "bounded_evidence_checks": 276,
-      "proposals": 141
+      "research_project_sources": 96,
+      "bounded_evidence_checks": 278,
+      "proposals": 142
     },
-    "release_state": "CODE_VERIFIED_DEVELOPMENT_ONLY_DOCS_READY_GOVERNANCE_PENDING_NOT_DEPLOYED",
+    "release_state": "RESEARCH_ONLY_NOT_DEPLOYED",
     "original_s019": "INACCESSIBLE_UNREVIEWED",
     "github267_literal_review_credit": 0
   },
@@ -8056,6 +8091,25 @@
         "skipped": 6,
         "original603": "SKIPPED_NOT_PASS"
       }
+    },
+    {
+      "id": "R455-PROP-181-FITRI-BOUNDARY",
+      "finding": "Primary espresso beverage paper is descriptive and mass/volume ratio is not verified mass/mass.",
+      "evidence": [
+        "R455-EV-181-VOLUME-MASS",
+        "R455-EV-181-CATA-LIMIT"
+      ],
+      "severity": "P3_RESEARCH_SOURCE_PROVENANCE",
+      "user_benefit": "Avoid spurious precision and sensory inference.",
+      "current_locked": "Five taste ratings, measured grams, same-coffee evidence and one controllable recommendation.",
+      "current_app": "No bug demonstrated.",
+      "proposed_change": "Keep existing model; do not port study ratio, grinder setting, CATA ratings or caffeine claims.",
+      "approval_required_for_behavior_change": true,
+      "implementation": "RESEARCH_ONLY_NO_CODE",
+      "test_plan": "Docs-only CI; no runtime tests",
+      "release_queue_status": "NO_READY_ROW",
+      "production_deployed": false,
+      "github267_literal_review_credit": 0
     }
   ],
   "changeScope": {
