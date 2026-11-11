@@ -47,3 +47,21 @@ test('literal selected current tasting notes may populate if independently print
  const p=extractPublicCoffeeFacts(markup(chosen.name,direct+' Tasting Notes: red apple, panela, brown sugar.','',meta),{source_url:url});
  assert.equal(p.ok,true,JSON.stringify(p));assert.match(String(p.fields.tasting_notes||''),/red apple/i);
 });
+
+test('generic company marketing without deictic present-lot language must not count as selected current story',()=>{
+ const generic='Our coffee region team supports farmers with growing, processing, region sourcing and quality control for many different origins; these coffees are featured across our seasonal catalog, alongside other coffees and producers throughout the year.';
+ const meta='<meta property="og:description" content="Mexico Chiapas Seasonal Espresso tastes of red apple, panela, brown sugar">';
+ const p=extractPublicCoffeeFacts(markup(chosen.name,generic,'',meta),{source_url:url});
+ assert.equal(p.ok,true,JSON.stringify(p));
+ // No competing direct chosen-lot growing narrative: preserve existing low-confidence fallback.
+ assert.match(String(p.fields.tasting_notes||''),/red apple/i);
+ assert.ok((p.seo_fallback_fields||[]).includes('tasting_notes'));
+});
+test('unrelated product panel cannot authenticate the selected coffee direct source',()=>{
+ const meta='<meta property="og:description" content="Mexico Chiapas Seasonal Espresso tastes of red apple, panela, brown sugar">';
+ const p=extractPublicCoffeeFacts(markup(chosen.name,'Only a price is published.','<aside>'+direct+'</aside>',meta),{source_url:url});
+ assert.equal(p.ok,true,JSON.stringify(p));
+ // If there is no current selected narrative, the old clearly marked metadata fallback may remain.
+ assert.ok(!p.fields.origin||!String(p.fields.origin).includes('Chiapas')||
+   (p.seo_fallback_fields||[]).includes('origin'),JSON.stringify(p));
+});
