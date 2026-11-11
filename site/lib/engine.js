@@ -625,10 +625,21 @@ export function prefill(s,coffeeId,options={}) {
  // must not supply a new shot's dose, grind or temperature. Original History
  // stays untouched; missing optional controls retain legacy compatibility.
  // Prefer the older shot's own espresso range, never silently translate grind.
+ // A historical calibration may be disjoint from today's active espresso range.
+ // The shared familyEvidenceShots gate already verifies original physical
+ // eligibility; use the recorded scale for prefills, not today's scale.
+ // Unknown legacy calibration still falls back to the active range.
+ const versionsById=new Map((s.setups||[]).flatMap(set=>set.versions||[]).map(x=>[x.id,x]));
  const admissible=sh=>{
   if(sh.grindSetting!=null){
-   const min=finite(sh.snapshot?.grinderMin)?sh.snapshot.grinderMin:v.grinderMin;
-   const max=finite(sh.snapshot?.grinderMax)?sh.snapshot.grinderMax:v.grinderMax;
+   const originalVersion=versionsById.get(sh.setupVersionId);
+   const originalCalibration=originalVersion?.calibrations?.find(c=>c.id===sh.calibrationId);
+   const min=finite(sh.snapshot?.grinderMin)?sh.snapshot.grinderMin:
+    finite(originalCalibration?.min)?originalCalibration.min:
+    sh.calibrationId===originalVersion?.calibrationId?originalVersion?.grinderMin:v.grinderMin;
+   const max=finite(sh.snapshot?.grinderMax)?sh.snapshot.grinderMax:
+    finite(originalCalibration?.max)?originalCalibration.max:
+    sh.calibrationId===originalVersion?.calibrationId?originalVersion?.grinderMax:v.grinderMax;
    if(!finite(sh.grindSetting)||sh.grindSetting<0||
       (finite(min)&&sh.grindSetting<min)||
       (finite(max)&&sh.grindSetting>max)||
