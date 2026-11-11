@@ -23,7 +23,7 @@ import {equivalentCoffeeProductNames,preferredCoffeeRoasterName,selectedCoffeeNa
 import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
 import {extractProductImageTextEvidence,extractProductFlavorEvidence,extractProductFlavorProfileEvidence,refineSelectedNamedTastingNotes,normalizeExplicitCoffeeTastingNotes,equivalentCoffeeTastingNotes,coffeeTastingNotesSubset} from './coffee-flavor-evidence.mjs';
-import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentFlavorBase,selectedCoffeeSupplementalTastingProse} from './coffee-selected-description-sensory.mjs';
+import {refineSelectedDescriptionSensory,refineSelectedCurrentLiteralFinish,refineSelectedCurrentTrailingFlavorNote,refineSelectedCurrentFlavorBase,selectedCoffeeSupplementalTastingProse} from './coffee-selected-description-sensory.mjs';
 import {selectedCoffeeMilkSensoryContext} from './coffee-selected-milk-sensory-context.mjs';
 import {coffeeHtmlElements} from './coffee-html-structure.mjs';
 import {parseCoffeeElevation,equivalentCoffeeElevations,compatibleCoffeeElevations,extractCoffeeElevationEvidence} from './coffee-elevation-evidence.mjs';
@@ -2006,6 +2006,10 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
    if(description)fields.tasting_notes=description;
    const finish=refineSelectedCurrentLiteralFinish(currentProduct,{clean,notes:fields.tasting_notes});
    if(finish)fields.tasting_notes=finish;
+   // The selected current first-person cup statement can explicitly add
+   // one final flavor note after its complete already accepted prefix.
+   const trailing=refineSelectedCurrentTrailingFlavorNote(currentProduct,{clean,notes:fields.tasting_notes});
+   if(trailing)fields.tasting_notes=trailing;
    // The chosen current paragraph's literal base and identical already
    // accepted note suffix are a higher-authority direct description, even
    // when an inferred notes caption has been indexed as a printed profile.

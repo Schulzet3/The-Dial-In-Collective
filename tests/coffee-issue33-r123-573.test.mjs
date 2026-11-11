@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {selected123,direct123,fields123Ok} from '../scripts/audit/issue33-r123-573-check.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
+import {refineSelectedCurrentTrailingFlavorNote} from '../src/server/coffee-selected-description-sensory.mjs';
 const prose='<p>Another beautiful washed Ethiopian coffee from Negusse Debla, same producer of our previous Worka Sakaro lot.</p>'+
  '<p>This time from the Guji region and a Grade 1 meaning hardly any defects and top notch sorting/harvesting.</p>'+
  '<p>In this coffee we are tasting fresh plum and florals with an orange bitters note that holds through the entire sip.</p>'+
@@ -45,4 +46,40 @@ test('actual parser uses current product rather than stale Wix slug when exact s
  const p=extractPublicCoffeeFacts(html,{source_url:selected123.url});
  assert.equal(p.ok,true,JSON.stringify(p));
  assert.equal(p.fields?.name,selected123.name,JSON.stringify(p.fields));
+});
+
+
+const readable=raw=>String(raw).replace(/<[^>]{0,2000}>/g,' ').replace(/\s+/g,' ').trim();
+const two='fresh plum and florals';
+const refine=html=>refineSelectedCurrentTrailingFlavorNote(html,{clean:readable,notes:two});
+test('direct selected current cup statement restores literal orange bitters after accepted two-note prefix',()=>{
+ assert.equal(refine(page()), 'fresh plum, florals, orange bitters');
+});
+test('unselected recommendations, navigation, metadata and missing H1 cannot supply trailing flavor',()=>{
+ assert.equal(refine(page('<p>We taste fresh plum and florals.</p>',selected123.name,
+  '<aside>'+prose+'</aside><nav>'+prose+'</nav><footer>'+prose+'</footer>')),'');
+ assert.equal(refine(page(prose,'Former coffee Wate')),'');
+ assert.equal(refine(page().replace('</h1>','</h1><h1>Another coffee</h1>')),'');
+});
+test('conditional serving, earlier harvest and mismatched canonical prefix reject current trailing notes',()=>{
+ const only='<p>In this coffee we are tasting fresh plum and florals with an orange bitters note that holds through the entire sip.</p>';
+ assert.equal(refine(page(only.replace('In this coffee','When served with milk, in this coffee'))),'');
+ assert.equal(refine(page(only.replace('In this coffee','Previously, in this coffee'))),'');
+ assert.equal(refine(page(only.replace('fresh plum and florals','bright melon and florals'))),'');
+});
+test('generic texture, ambiguous extra notes and split across paragraphs cannot be promoted as flavor',()=>{
+ assert.equal(refine(page('<p>In this coffee we are tasting fresh plum and florals with a smooth note.</p>')),'');
+ assert.equal(refine(page('<p>In this coffee we are tasting fresh plum and florals with an orange bitters note.</p>'+
+                          '<p>In this coffee we are tasting fresh plum and florals with a cherry note.</p>')),'');
+ assert.equal(refine(page('<p>In this coffee we are tasting fresh plum and florals.</p><p>An orange bitters note.</p>')),'');
+});
+test('selected current parser includes three literal flavor notes without accepting historical URL name',()=>{
+ const product={'@context':'https://schema.org','@type':'Product',name:selected123.name,url:selected123.url,
+  description:'Washed, Guji Ethiopia, Dega and Kurume.'};
+ const html=page().replace('</head>','<script type="application/ld+json">'+JSON.stringify(product)+'</script></head>');
+ const p=extractPublicCoffeeFacts(html,{source_url:selected123.url});
+ assert.equal(p.ok,true,JSON.stringify(p));
+ assert.equal(p.fields?.name,selected123.name,JSON.stringify(p.fields));
+ const n=String(p.fields?.tasting_notes||'').toLowerCase();
+ assert.ok(n.includes('fresh plum')&&n.includes('florals')&&n.includes('orange bitters'),JSON.stringify(p.fields));
 });

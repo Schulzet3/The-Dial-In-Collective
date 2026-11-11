@@ -166,3 +166,43 @@ export function refineSelectedCurrentFlavorBase(html,{clean,notes}={}){
  }
  return candidates.size===1?[...candidates][0]:'';
 }
+
+
+// A present selected product sometimes says "we are tasting A and B with a C
+// note" rather than "notes of A, B, C". The lower-ranked narrative extractor
+// conservatively stops at "with a/an", dropping a literal third descriptor.
+// Add one exact printed descriptor only when the same unqualified selected
+// paragraph repeats ALL already accepted notes and there is one H1. No
+// roaster-specific exceptions, meta, sibling products or guessed profiles.
+export function refineSelectedCurrentTrailingFlavorNote(html,{clean,notes}={}){
+ if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function'||
+    typeof notes!=='string'||notes.length<8||notes.length>300)return '';
+ const blocks=productCoffeeProse(html,clean);
+ const headings=blocks.filter(b=>b.tag==='h1'&&!b.educational);
+ if(headings.length!==1||!headings[0].text||headings[0].text.length>180)return '';
+ const selected=fold(headings[0].text);
+ const allowed=/^(?:product info|product information|product description|description|coffee description|about the coffee|about this coffee|coffee details|details|coffee notes|tasting notes|flavor notes|flavour notes|coffee profile|overview)$/u;
+ const parts=notes.split(/\s*(?:,|&|[•·;|]|\band\b)\s*/iu).map(s=>s.trim()).filter(Boolean);
+ if(parts.length<2||parts.length>6||parts.some(p=>!normalizeExplicitCoffeeTastingNotes(p)))return '';
+ const found=new Set();
+ for(const block of blocks){
+  if(block.tag!=='p'||block.educational||block.text.length<32||block.text.length>650||
+     unavailable.test(block.section)||NONCURRENT_COFFEE_PROSE.test(block.text))continue;
+  const section=fold(block.section);
+  if(section&&section!==selected&&!allowed.test(section))continue;
+  for(const sentence of block.text.split(/(?<=[.!?])\s+/u).slice(0,12)){
+   if(sentence.length>450||unavailable.test(sentence)||NONCURRENT_COFFEE_PROSE.test(sentence))continue;
+   const match=sentence.match(/^(?:In this (?:coffee|cup)\s+)?we(?:['’]re| are)\s+tasting\s+(.{5,155}?)\s+with\s+(?:a|an)\s+([\p{L}\p{M}][\p{L}\p{M} -]{2,55}?)\s+(?:tasting\s+|flavou?r\s+)?note(?:\s+that\s+[^.!?]{1,110})?[.!?]?$/iu);
+   if(!match||fold(match[1])!==fold(parts.join(' and ')))continue;
+   const extra=match[2].trim();
+   if(extra.split(/\s+/u).length>3||
+      /\b(?:body|mouthfeel|acidity|finish|flavou?r|roast|process|coffee|beans?|prepared|brew|milk|cream|clean|smooth|pleasant|delicate|lingering|bright|sweet)\b/iu.test(extra)||
+      !/\b(?:bitters?|chocolate|cocoa|cacao|caramel|toffee|hazelnut|almond|vanilla|plum|cherry|orange|citrus|lemon|lime|apple|peach|pear|berry|berries|jasmine|floral|florals|grape|honey|nutmeg|clove|cinnamon|mango|melon|fruit|praline|nougat)\b/iu.test(extra)||
+      parts.some(p=>fold(p)===fold(extra))||
+      !normalizeExplicitCoffeeTastingNotes(extra))continue;
+   const augmented=normalizeExplicitCoffeeTastingNotes([...parts,extra].join(', '));
+   if(augmented)found.add(augmented);
+  }
+ }
+ return found.size===1?[...found][0]:'';
+}
