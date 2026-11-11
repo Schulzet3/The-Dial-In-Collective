@@ -4771,6 +4771,24 @@
       "current_app": "A stored correction message has no next action, but the current engine already has a bounded nextAdvice calculation from the corrected measurements.",
       "result": "REUSED_APPROVED_NEXTADVICE_NO_NEW_POLICY_MERGED_AND_TESTED",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-APP-176-A",
+      "source": "site/lib/engine.js blob 547de9f94677066b2f36825fe41f1e6161bbd4d8, development 03abedb8d855f4e55dc459f2a272073596969a39, recommendation latest measured last versus measuredLocalSuccess lines 500-525",
+      "claim": "A historical five-green row with absent/invalid timestamp but otherwise plausible numeric controls could suppress the latest valid-date non-green rated shot advice, because last-shot selection checks chronology but measuredLocalSuccess did not.",
+      "grade": "DIRECT_LIVE_SOURCE_POSITIVE_NEGATIVE_SYNTHETIC_REGRESSIONS_AUTHORED_EXACT_SOURCE_GITHUB_CI_NOT_YET_VERIFIED; NOT_REAL_MEMBER_OR_CUP_EVIDENCE",
+      "current_app": "Malformed historic all-green record can veto current rated-shot adjustment despite no valid chronological evidence.",
+      "result": "SAFE_CHRONOLOGICAL_EVIDENCE_ELIGIBILITY_AUTHORED_NOT_YET_MERGED",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-APP-176-B",
+      "source": "Master Specification and Decision Ledger current Locked source; site/lib/engine.js blob 547de9f94677066b2f36825fe41f1e6161bbd4d8, existing last-shot timestamp gate; tests/issue455-green-timestamp-advice-veto.test.mjs",
+      "claim": "Reusing the already-existing latest-shot timestamp eligibility predicate for a green veto preserves valid timestamped five-green success, all five recorded tastes, raw history/notes and unchanged numeric recommendation policy.",
+      "grade": "DIRECT_APPROVED_CONTEXT_READ_SAME_REAL_MODULE_POSITIVE_AND_NEGATIVE_TESTS_STAGED_NOT_YET_RUN",
+      "current_app": "The two same-context evidence selectors had inconsistent recorded timestamp qualification.",
+      "result": "NARROW_CHRONOLOGY_PARITY_GUARD_PENDING_CI",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [],
@@ -4888,19 +4906,20 @@
     "R455-174 5f480a3d8aa3a0fc040df503f334b52d9a50266f: source-level historical grinder temperature evidence fix and six synthetic cases authored. Need exact-source PR-head CI, diagnose/repair any failures, nonforce merge and merged-source verification before READY documentation and release queue. S019 not accessible; #267 line-credit zero.",
     "R455-174 source PR #1952 final head f1773f44 and nonforce merged 7086f599; all four code/test/ledger/journal blobs identical; head Node22 3687/0/6 and merged 3687/0/6, six synthetic tests PASS; mobile/browser/offline SQL security governance passed as applicable, original603 SKIPPED. Queue READY development only; S019 not accessible; next disjoint R175 source review, no #267 line credit.",
     "R455-175 pinned 163a6a9910ea085ef50749a80e320ac8fb293da9 engine 5bd76395c37bbd63e7fc3a8d560ef871c4920e9f: corrected non-green shot's cached no-next 'Shot corrected' suppresses refreshed latest measured advice. Four source paths authored atomic; PR, Node22/browser/offline/SQL/security/approval checks, exact merge and release queue NOT YET VERIFIED. No #267 line-credit or S019 original verification.",
-    "R455-175 PR1960 exact head c208f4e4 nonforce merged 4b19def81913686c09e7ece03133bbc20e6de199; all four blobs identical; six synthetic regressions PASS in head 42941881818 and merge 42942228875, Node22 3698/0/6; head browser/SQL/security/approval and merged browser/approval SUCCESS; original603 SKIPPED. Queue READY docs separate PR CI/merge pending. No publish or S019 certification."
+    "R455-175 PR1960 exact head c208f4e4 nonforce merged 4b19def81913686c09e7ece03133bbc20e6de199; all four blobs identical; six synthetic regressions PASS in head 42941881818 and merge 42942228875, Node22 3698/0/6; head browser/SQL/security/approval and merged browser/approval SUCCESS; original603 SKIPPED. Queue READY docs separate PR CI/merge pending. No publish or S019 certification.",
+    "R455-176 parent 03abedb8d855f4e55dc459f2a272073596969a39; engine 547de9f94677066b2f36825fe41f1e6161bbd4d8. Five synthetic scenarios drafted for imported invalid/missing dated green record vetoing newest non-green rated feedback. Atomic engine/test/ledger/journal; PR exact-source CI, merge and READY queue NOT VERIFIED at authoring. Standalone S019 unreviewed, #267 separate."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-175",
-    "source_sha": "4b19def81913686c09e7ece03133bbc20e6de199",
+    "run_id": "R455-176",
+    "source_sha": "03abedb8d855f4e55dc459f2a272073596969a39",
     "issue": 455,
-    "phase": "SAFE_CODE_MERGED_EXACT_SOURCE_CI_SUCCESS_DOCS_READY_PR_NOT_YET_TESTED",
+    "phase": "SAFE_CODE_TEST_LEDGER_JOURNAL_AUTHORED_PR_AND_CI_NOT_YET_VERIFIED",
     "source_counts": {
       "sources": 94,
-      "evidence_checks": 266,
-      "proposals": 136
+      "evidence_checks": 268,
+      "proposals": 137
     },
-    "release_state": "READY_DEVELOPMENT_ONLY_PENDING_DOCS_INTEGRATION_NOT_DEPLOYED",
+    "release_state": "IN_PROGRESS_NOT_READY_NOT_DEPLOYED",
     "original_s019": "UNAVAILABLE_NOT_REVIEWED",
     "github267_literal_review_credit": 0
   },
@@ -7772,6 +7791,28 @@
       "implementation": "SAFE_ENGINE_TEST_LEDGER_JOURNAL_SAME_COMMIT_PR1960_HEAD_C208F4E4_NONFORCE_MERGED_4b19def81913686c09e7ece03133bbc20e6de199; ALL_FOUR_BLOBS_IDENTICAL; HEAD_NODE22_3698_PASS_0_FAIL_6_INTENTIONAL_SKIP; MERGED_NODE22_3698_PASS_0_FAIL_6_SKIP; MOBILE_BROWSER_OFFLINE_SQL_SECURITY_GOVERNANCE_SUCCESS; NO_DEPLOYMENT",
       "test_plan": "Six positive/negative real-module synthetic groups: edited sour and bitter actions, diagnostic-only dryness, unchanged original valid cache, out-of-bounds refusal, restored all-green success; risk-scoped exact Node22/lint/build, UX mobile/browser/offline, SQL/privacy/governance and exact merged receipts. No SKIP-as-PASS. VERIFIED: head and merged source 6/6 R175 PASS; original603 SKIPPED, not PASS; external real espresso not tested.",
       "release_queue_status": "DIC-Q-455-edited-five-taste-feedback-cache-refresh_READY_DEVELOPMENT_ONLY_NOT_DEPLOYED_PENDING_DOCS_PR_INTEGRATION",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-176-MALFORMED-GREEN-TIMESTAMP-VETO",
+      "finding": "A five-green imported record missing usable timestamp can suppress feedback from the latest valid measured, non-green shot.",
+      "evidence": [
+        "R455-EV-APP-176-A",
+        "R455-EV-APP-176-B"
+      ],
+      "severity": "P2_SYNTHETIC_LOG_RATE_RECOMMENDATION_CORRECTNESS",
+      "user_benefit": "Most recent valid timestamped rated shot remains actionable without discarding older green ratings or historical source data.",
+      "source_provenance": "development 03abedb8d855f4e55dc459f2a272073596969a39, engine blob 547de9f94677066b2f36825fe41f1e6161bbd4d8; direct latest-vs-green-veto live source review; standalone S019 PDF unavailable",
+      "current_locked": "All five taste scales, complete all-green versus incomplete, one controllable change, original measured shot, private notes and History, independent styles and calibration, approved numeric thresholds.",
+      "current_app": "latest-shot selector required parseable timestamp while historical green-veto eligibility did not.",
+      "proposed_change": "Require the existing valid-timestamp predicate only for historical green evidence veto; no archive mutation.",
+      "evidence_grade": "DIRECT_SOURCE_AND_FIVE_POSITIVE_NEGATIVE_SYNTHETIC_TESTS_AUTHORED; EXACT_CI_UNVERIFIED",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "ATOMIC_SAME_COMMIT_ENGINE_TEST_LEDGER_JOURNAL_AUTHORED_PRE_CI",
+      "test_plan": "Five synthetic real engine/mapping fixture groups, exact PR-head Node22/lint/build, relevant browser/offline SQL/security/governance, nonforce integration and exact merged-source CI. SKIPPED is not PASS.",
+      "release_queue_status": "NOT_READY_NO_QUEUE_CHANGE",
       "github267_literal_review_credit": 0,
       "production_deployed": false
     }
