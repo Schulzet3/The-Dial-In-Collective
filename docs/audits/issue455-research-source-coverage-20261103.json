@@ -1572,6 +1572,29 @@
       "provenance_review_receipt": "docs/workstreams/ops-issue455-r170-multimethod-coffee-sensory-20261110.md",
       "reviewed_against_development_sha": "364a4b6b45974ba0f02e7d7c0ee4c272306740ba",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "LIT-2025-LINNE-COFFEE-MELANOIDIN-ASTRINGENCY",
+      "type": "peer_reviewed_primary_coffee_drip_isolate_sensory_chemistry_not_espresso_dial_in",
+      "title": "Chemical characterization and sensory evaluation of a phenolic-rich melanoidin isolate contributing to coffee astringency",
+      "authors": "Brianne M. Linne; Edisson Tello; Christopher T. Simons; Devin G. Peterson",
+      "published": "2025-03-11 first online (publisher); PubMed bibliographic date 2025-03-31",
+      "journal": "Food & Function 16 (2025), 2870-2880",
+      "doi": "10.1039/d4fo04934a",
+      "url": "https://pubs.rsc.org/en/content/articlehtml/2025/fo/d4fo04934a",
+      "access": "DIRECT_PRIMARY_PUBLISHER_FULL_HTML_METHODS_SENSORY_RESULTS_RECOMBINATION_DISCUSSION_CONCLUSIONS_READ_20261111; publisher landing and PubMed cross-check; supplementary PDF and raw panel files not downloaded or independently hashed",
+      "review_status": "SUBSTANTIVE_DIRECT_SOURCE_CHEMICAL_AND_DESCRIPTIVE_SENSORY_EVIDENCE; NO_ESPRESSO_MEMBER_INTERVENTION_VALIDATION",
+      "evidence_grade": "PEER_REVIEWED_SMALL_TRAINED_PANEL_DRIP_COFFEE_FRACTION_RECOMBINATION; DETECTABILITY_IN_TESTED_MATRICES_NOT_CAUSAL_GRIND_OR_YIELD_RULE",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "HTML publisher full text directly reviewed; exact HTML/PDF byte digest, supplementary tables, figure pixels and independent sensory replication not verified",
+      "source_details": "Two preportioned commercial drip coffees described as high/low body by four Q-graders; Keurig K475 brew; sensory-guided fractionation four-person panel for UF/SPE (duplicate), five trained panelists for LC fractions (duplicate), nine trained panelists for coffee/water recombination (three evaluations each, not 27 independent people). F9.6.4 was a chemically complex phenolic/melanoidin-associated isolate, not identified as a single causal molecule. Coffee recombination from 7.8 to 15.7 mg/L gave discriminability R-index 69.5% against lower-body coffee control (reported p <= 0.01), with drying/astringent descriptions; 27 evaluations per condition reflect repeated assessments of nine people. Sensory reference and test conditions were intentionally controlled; result is not automatically transferable to espresso extraction or private 1-to-5 ratings.",
+      "science_limits": "No espresso comparison, no dose/grind/feed/temperature intervention, no same-coffee longitudinal sensory ratings, no machine- or roast-specific threshold, and no personal preference or universal drinkability finding. Detecting an added isolate does not prove that an astringent espresso is overextracted or justify an automatic grind/yield correction.",
+      "relevance": "DIC's independent Astringency / Dryness input is semantically compatible with oral roughness/drying/puckering; currently captured by site/lib/constants.js and site/lib/ui.js. Paper supports distinguishing this tactile perception from bitterness but cannot set app heuristics or change a Locked sensory metric.",
+      "github_context_sha": "b48bc1e249ca2d05049769343af17ce108ab04ff",
+      "code_blob_shas": {
+        "site/lib/constants.js": "72221331ce4dffabe416eebec1ae2fceced3a095",
+        "site/lib/ui.js": "60539853a32f63e1c1c21cc0859d0a68be4281d9"
+      }
     }
   ],
   "evidence_checks": [
@@ -4789,15 +4812,33 @@
       "current_app": "The two same-context evidence selectors had inconsistent recorded timestamp qualification.",
       "result": "EXISTING_TIMESTAMP_EVIDENCE_PARITY_VERIFIED_NO_NEW_SCIENCE_POLICY_OR_HISTORY_CHANGE",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-CIT-177-A",
+      "source": "LIT-2025-LINNE-COFFEE-MELANOIDIN-ASTRINGENCY; Royal Society of Chemistry publisher full HTML DOI 10.1039/d4fo04934a Methods/Sensory Validation/Results/Conclusions; PubMed PMID 40114640",
+      "claim": "A phenolic-rich, chemically heterogeneous coffee isolate contributed to perceived astringency in the tested water and drip-coffee recombinations; nine trained participants gave three evaluations each, not 27 independent panelists. Coffee R-index 69.5% (reported p<=0.01).",
+      "grade": "DIRECT_PUBLISHED_PRIMARY_METHODS_RESULTS_REVIEW_SMALL_PANEL_CONTROLLED_RECOMBINATION; SUPPLEMENT_RAW_AND_FIGURES_NOT_VERIFIED",
+      "current_app": "DIC captures astringency/dryness as its own rated tactile attribute.",
+      "result": "DESCRIPTIVE_MECHANISM_SUPPORTED_WITHIN_TESTED_DRIP_ISOLATE_CONDITIONS; ESPRESSO_INTERVENTION_NOT_SUPPORTED",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-APP-177-B",
+      "source": "site/lib/constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095; site/lib/ui.js blob 60539853a32f63e1c1c21cc0859d0a68be4281d9; Locked Master/Decision at development b48bc1e249ca2d05049769343af17ce108ab04ff; LIT-2025-LINNE-COFFEE-MELANOIDIN-ASTRINGENCY",
+      "claim": "The existing Astringency / Dryness rating explicitly describes drying, papery or puckering and is preserved as one of five independent inputs; small trained-panel drip-coffee compound detection cannot validate DIC's 1–5 cutoffs or recommend automatic grind/time/yield/temperature corrections.",
+      "grade": "DIRECT_CURRENT_CODE_AND_LOCKED_AUTHORITY_CROSSWALK; NO_PRODUCTION_OR_REAL_MEMBER_SENSORY_VALIDATION",
+      "current_app": "site/lib/constants.js SCALES includes Astringency / Dryness key with lower dryness better, and site/lib/ui.js displays independent rating controls.",
+      "result": "NO_REPRODUCIBLE_CURRENT_UX_OR_CORRECTNESS_DEFECT_FROM_THIS_PAPER; HOLD_NUMERIC_OR_BEHAVIORAL_POLICY",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [],
   "change_scope": {
-    "application_code_changed": true,
-    "tests_executed": true,
+    "application_code_changed": false,
+    "tests_executed": false,
     "production_deployed": false,
-    "queue_changed": true,
-    "reason": "R455-174 SAFE code and six synthetic tests verified head and merged source; scoped READY docs-only reconciliation, no production release."
+    "queue_changed": false,
+    "reason": "R455-177 peer-reviewed drip coffee astringency isolate study reviewed; no verified app defect or approval to change Locked sensory rule; documentation only."
   },
   "next_actions": [
     "R455-168 FINAL: PR1901 exact reviewed head 3b65c3... nonforce merged 767e12c8e763959f0b6677f4de7ad7e69ce80cf3 all five blobs identical. Node22/lint 3600 PASS/0 FAIL/6 SKIP head 42887964674 and merge 42888613274; mobile/browser/offline, head SQL/security and approval, merged governance all SUCCESS; original603 SKIPPED. Queue READY development-only, not published. S019 unavailable, #267 separate V2 literal review uncredited.",
@@ -4908,19 +4949,20 @@
     "R455-175 pinned 163a6a9910ea085ef50749a80e320ac8fb293da9 engine 5bd76395c37bbd63e7fc3a8d560ef871c4920e9f: corrected non-green shot's cached no-next 'Shot corrected' suppresses refreshed latest measured advice. Four source paths authored atomic; PR, Node22/browser/offline/SQL/security/approval checks, exact merge and release queue NOT YET VERIFIED. No #267 line-credit or S019 original verification.",
     "R455-175 PR1960 exact head c208f4e4 nonforce merged 4b19def81913686c09e7ece03133bbc20e6de199; all four blobs identical; six synthetic regressions PASS in head 42941881818 and merge 42942228875, Node22 3698/0/6; head browser/SQL/security/approval and merged browser/approval SUCCESS; original603 SKIPPED. Queue READY docs separate PR CI/merge pending. No publish or S019 certification.",
     "R455-176 parent 03abedb8d855f4e55dc459f2a272073596969a39; engine 547de9f94677066b2f36825fe41f1e6161bbd4d8. Five synthetic scenarios drafted for imported invalid/missing dated green record vetoing newest non-green rated feedback. Atomic engine/test/ledger/journal; PR exact-source CI, merge and READY queue NOT VERIFIED at authoring. Standalone S019 unreviewed, #267 separate.",
-    "R455-176 PR1968 head b1fd7a4b nonforce squash merged ef669d3d after five synthetic Node22 cases PASS. Exact head Node22 3711/0/6, UX/SQL/security/governance success; merged Node22 3711/0/6 and UX/governance SUCCESS. READY docs queue/status/ledger/journal follow-up PR must pass applicable exact-source CI and merge; not deployed. S019 not reviewed, #267 separate."
+    "R455-176 PR1968 head b1fd7a4b nonforce squash merged ef669d3d after five synthetic Node22 cases PASS. Exact head Node22 3711/0/6, UX/SQL/security/governance success; merged Node22 3711/0/6 and UX/governance SUCCESS. READY docs queue/status/ledger/journal follow-up PR must pass applicable exact-source CI and merge; not deployed. S019 not reviewed, #267 separate.",
+    "R455-177 peer-reviewed Linne 2025 original RSC HTML directly reviewed; trace astringency tactile perception, n4/n5/n9 and repeated ratings, unverified supplements/PDF; no numeric espresso correction. Verify documentation PR exact-head CI and nonforce merge, exact source readback, then continue other distinct source/UX priority. S019 unavailable and #267 scope separate."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-176",
-    "source_sha": "ef669d3dd6203e206421e4f5858678da3eeab706",
+    "run_id": "R455-177",
+    "source_sha": "b48bc1e249ca2d05049769343af17ce108ab04ff",
     "issue": 455,
-    "phase": "SAFE_CODE_MERGED_EXACT_SOURCE_CI_SUCCESS_READY_DOCS_PR_PENDING_INTEGRATION",
+    "phase": "DIRECT_PRIMARY_ASTRINGENCY_RESEARCH_REVIEW_RECORDED_DOCS_PR_PENDING_VERIFICATION",
     "source_counts": {
-      "sources": 94,
-      "evidence_checks": 268,
-      "proposals": 137
+      "sources": 95,
+      "evidence_checks": 270,
+      "proposals": 138
     },
-    "release_state": "DEVELOPMENT_ONLY_READY_DOCS_PENDING_NOT_DEPLOYED",
+    "release_state": "RESEARCH_ONLY_NO_RUNTIME_CHANGE_NO_READY_ITEM_NO_DEPLOY",
     "original_s019": "UNAVAILABLE_NOT_REVIEWED",
     "github267_literal_review_credit": 0
   },
@@ -7814,6 +7856,28 @@
       "implementation": "SAME_COMMIT_ENGINE_TEST_LEDGER_JOURNAL_PR1968_HEAD_B1FD7A4B_NONFORCE_MERGED_EF669D3D; EXACT_FOUR_BLOBS_MATCH; HEAD_NODE22_3711_PASS_0_FAIL_6_SKIP; MERGED_NODE22_SAME; FIVE_R176_GROUPS_PASS; APPLICABLE_BROWSER_OFFLINE_SQL_SECURITY_GOVERNANCE_SUCCESS; NO_DEPLOY",
       "test_plan": "Five synthetic real engine/mapping fixture groups, exact PR-head Node22/lint/build, relevant browser/offline SQL/security/governance, nonforce integration and exact merged-source CI. SKIPPED is not PASS. ACTUAL VERIFIED: head 42948148001 Node22 3711/0/6, five R176 PASS; head UX42948148190 SQL42948148069 security42948148029 governance42948148012 SUCCESS; merged Node42948528889, UX42948528837, governance42948528998 SUCCESS; frozen603 SKIPPED.",
       "release_queue_status": "DIC-Q-455-green-timestamp-evidence-veto_READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-177-MELANOIDIN-ASTRINGENCY-DOES-NOT-DEFINE-ESPRESSO-CORRECTION",
+      "finding": "The literature identifies an additional tested chemical fraction contributing to coffee's drying tactile percept but does not isolate a universal espresso grind/yield/time cause.",
+      "evidence": [
+        "R455-EV-CIT-177-A",
+        "R455-EV-APP-177-B"
+      ],
+      "severity": "RESEARCH_ONLY_NO_VERIFIED_PRODUCT_DEFECT",
+      "user_benefit": "Avoid explaining personal astringency as inevitable bitterness or a universal overextraction symptom; retain transparent sensory language without creating unsupported one-size-fits-all controls.",
+      "source_provenance": "Royal Society of Chemistry original HTML 2025 DOI 10.1039/d4fo04934a; current development b48bc1e249ca2d05049769343af17ce108ab04ff; constants 72221331c, UI 60539853a; supplemental PDF and panel raw unavailable/unverified",
+      "current_locked": "Exactly five independent sensory inputs, all-green versus unrated distinct, one truly controllable change, original measured shot/notes/private History, independent recipes/style/feed/grinder-calibration and no scientifically invented numerical optima.",
+      "current_app": "Separate Astringency / Dryness field already says 'A drying, papery or puckering finish. Less is better'; no mislabeling or missing control reproduced.",
+      "proposed_change": "No runtime change. Preserve original UX. Future optional descriptive sensory education would need a specific justified UX need and owner review if it changes a Locked experience; do not infer numeric intervention from this drip-isolate study.",
+      "evidence_grade": "PRIMARY_SMALL_CONTROLLED_DRIP_SENSORY_RECOMBINATION_NOT_ESPRESSO_DECISION_VALIDATION",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "RESEARCH_LEDGER_AND_SAME_COMMIT_JOURNAL_ONLY; NO_CODE_TEST_RUNTIME_POLICY_OR_PROVIDER_EDIT",
+      "test_plan": "Documentation-only: source identity/claim cross-check and Git blob checks; exact PR-head documentation governance and nonforce merged-source governance when available. Do not re-run unrelated application suites. No empirical espresso validation.",
+      "release_queue_status": "RESEARCH_ONLY_NO_READY_ITEM_NO_DEPLOY",
       "github267_literal_review_credit": 0,
       "production_deployed": false
     }
