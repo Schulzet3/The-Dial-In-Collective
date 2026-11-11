@@ -3858,6 +3858,24 @@
       "receipt_path": "docs/audits/issue509-run175-exact-source-ci-closure-2026-11-11.json",
       "provider_writes": 0,
       "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-11",
+      "event": "RUN176_FIVE_NEW_LIVE_STORED_MIGRATIONS_FULL_SQL_DIRECT_SEMANTIC_PARITY",
+      "source_parent_sha": "634e7ddb706e9e8de5eb72f583f58ea7f0e3a88b",
+      "receipt_path": "docs/audits/issue509-five-new-live-migrations-direct-2026-11-11-run176.json",
+      "versions": [
+        "20261111191707",
+        "20261111191728",
+        "20261111191748",
+        "20261111191749",
+        "20261111191751"
+      ],
+      "live_statement_chars": 13553,
+      "full_parity": 5,
+      "postconditions_verified": true,
+      "provider_writes": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -17670,5 +17688,27 @@
     "provider_writes": 0,
     "baseline_complete": false,
     "closure_own_ci": "CHECK_AT_EXACT_CLOSURE_SHA"
+  },
+  "provider_new_live_migration_reconcile_run176": {
+    "receipt_path": "docs/audits/issue509-five-new-live-migrations-direct-2026-11-11-run176.json",
+    "source_parent_sha": "634e7ddb706e9e8de5eb72f583f58ea7f0e3a88b",
+    "provider_versions": [
+      "20261111191707",
+      "20261111191728",
+      "20261111191748",
+      "20261111191749",
+      "20261111191751"
+    ],
+    "new_count": 5,
+    "full_statement_parity_count": 5,
+    "full_source_chars": 13553,
+    "full_source_tokens": 1267,
+    "app_constraints": 262,
+    "admission_inconsistent_count": 0,
+    "postconditions_verified": true,
+    "provider_writes": 0,
+    "new_confirmed_defects": 0,
+    "baseline_complete": false,
+    "next": "Stored migration #65 if appended; otherwise first changed/new/unreviewed provider definition or newly accessible hosted Auth/API setting with #96. Recheck current live migrated object hashes and release path at next increment."
   }
 }
