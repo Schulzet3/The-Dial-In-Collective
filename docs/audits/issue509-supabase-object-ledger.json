@@ -3792,6 +3792,15 @@
       "new_verified_defects": 0,
       "live_writes": 0,
       "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-11",
+      "event": "RUN167_EXACT_SOURCE_DOCS_GOVERNANCE_COMPLETED_SUCCESS",
+      "source_sha": "acb4b324556a2d2af7f8a2e33fc108b893c1f9d4",
+      "workflow_run_id": 43006917513,
+      "receipt_path": "docs/audits/issue509-run167-exact-source-ci-closure-2026-11-11.json",
+      "live_writes": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -17154,5 +17163,20 @@
     "baseline_complete": false,
     "ci": "DOCS_ONLY_SOURCE_GOVERNANCE_PENDING",
     "next": "Stored SQL migration ordinal #60 if added; otherwise first newly changed/unreviewed complete provider definition, prioritizing newly observable hosted Auth/API security boundary. Keep explicit unresolved provider-only surfaces UNVERIFIED."
+  },
+  "provider_application_constraint_cross_review_run167_ci_closure": {
+    "status": "COMPLETED_SUCCESS",
+    "source_audit_sha": "acb4b324556a2d2af7f8a2e33fc108b893c1f9d4",
+    "workflow_run_id": 43006917513,
+    "workflow_head_sha": "acb4b324556a2d2af7f8a2e33fc108b893c1f9d4",
+    "job_id": 130476578572,
+    "job": "approval",
+    "job_status": "completed",
+    "job_conclusion": "success",
+    "scope": "DOCS_ONLY_APPROVAL_GOVERNANCE",
+    "receipt_path": "docs/audits/issue509-run167-exact-source-ci-closure-2026-11-11.json",
+    "production_writes": 0,
+    "baseline_complete": false,
+    "next": "migration #60 if introduced, otherwise first changed/new/unreviewed provider definition or hosted Auth setting"
   }
 }
