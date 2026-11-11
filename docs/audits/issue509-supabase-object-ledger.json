@@ -3950,6 +3950,16 @@
       "hash_matches_prior": 39,
       "provider_writes": 0,
       "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-11",
+      "event": "RUN180_PREVIOUS_SOURCE_INDEX_RECONCILIATION",
+      "original_audit_sha": "0f971449c938eb964c4807476cf680fedc18275d",
+      "receipt_path": "docs/audits/issue509-run180-nine-storage-prior-source-hash-reconciliation-2026-11-11.json",
+      "source_hashes_verified_unchanged": 48,
+      "source_index_omitted_existing_receipts": 9,
+      "provider_writes": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -17977,5 +17987,19 @@
     "provider_writes": 0,
     "baseline_complete": false,
     "next": "First newly applied stored migration #65 or changed source if any; otherwise vendor function ordinal #33 storage.get_common_prefix, then #34-48 full-source progressive re-audit."
+  },
+  "provider_run180_prior_source_reconciliation": {
+    "status": "CORRECTED_48_OF_48_CURRENT_PLATFORM_FUNCTION_HASHES_EQUAL_PRIOR_COMPLETE_SOURCE",
+    "source_original_audit_sha": "0f971449c938eb964c4807476cf680fedc18275d",
+    "receipt_path": "docs/audits/issue509-run180-nine-storage-prior-source-hash-reconciliation-2026-11-11.json",
+    "prior_partial_index_match": 39,
+    "additional_existing_full_source_receipt_matches": 9,
+    "confirmed_changed_current_functions": 0,
+    "run180_direct_current_full_source_reviewed": 32,
+    "hash_only_current_source_checked": 16,
+    "source_fixes": 0,
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "next": "migration #65 if introduced; else ordinal #33 storage.get_common_prefix onward for current source full re-audit; hosted API/Auth and disk remain unverified."
   }
 }
