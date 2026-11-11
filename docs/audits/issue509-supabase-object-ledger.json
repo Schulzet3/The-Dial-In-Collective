@@ -17490,5 +17490,71 @@
     "closure_commit_ci": "VERIFY_SEPARATELY",
     "baseline_complete": false,
     "provider_writes": 0
+  },
+  "provider_client_role_numeric_fingerprint_run174": {
+    "status": "COMPLETE_CURRENT_105_CLIENT_ROLE_NUMERIC_QUERY_FINGERPRINT_REVIEW",
+    "source_parent_sha": "9c335bacb2d7aa7455d63a1e153532c5fdb754fc",
+    "receipt_path": "docs/audits/issue509-provider-client-role-numeric-fingerprints-2026-11-11-run174.json",
+    "role_coverage": {
+      "anon": {
+        "fingerprints": 5,
+        "calls": 46,
+        "total_ms": 12.066,
+        "highest_mean_ms": 1.386,
+        "high_mean_count": 0,
+        "positive_temp_writes": 0
+      },
+      "authenticated": {
+        "fingerprints": 77,
+        "calls": 23685,
+        "total_ms": 107599.062,
+        "highest_mean_ms": 166.853,
+        "high_mean_count": 1,
+        "positive_temp_writes": 0
+      },
+      "authenticator": {
+        "fingerprints": 19,
+        "calls": 16812,
+        "total_ms": 26402.825,
+        "highest_mean_ms": 163.732,
+        "high_mean_count": 1,
+        "positive_temp_writes": 0
+      },
+      "service_role": {
+        "fingerprints": 4,
+        "calls": 13,
+        "total_ms": 29.331,
+        "highest_mean_ms": 24.879,
+        "high_mean_count": 0,
+        "positive_temp_writes": 0
+      }
+    },
+    "client_role_fingerprint_count": 105,
+    "performance_candidates": [
+      {
+        "role": "authenticated",
+        "queryid": "7554365780706109820",
+        "calls": 4,
+        "mean_ms": "166.853",
+        "max_ms": "362.804",
+        "total_ms": "667.410",
+        "classification": "OBSERVATIONAL_ONLY_NOT_REPRODUCED_APP_BOTTLENECK"
+      },
+      {
+        "role": "authenticator",
+        "queryid": "-7726440967385220442",
+        "calls": 94,
+        "mean_ms": "163.732",
+        "max_ms": "307.761",
+        "total_ms": "15390.826",
+        "classification": "OBSERVATIONAL_ONLY_NOT_REPRODUCED_APP_BOTTLENECK"
+      }
+    ],
+    "verified_new_defects": 0,
+    "source_definition_words_credited": 0,
+    "issue267_lines_credited": 0,
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "next": "Migration #60 if new; else changed/new/unreviewed provider definition or accessible hosted Auth API settings"
   }
 }
