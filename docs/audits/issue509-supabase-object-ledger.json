@@ -3743,6 +3743,16 @@
       "first_time_provider_word_credit": 0,
       "provider_writes": 0,
       "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-11",
+      "event": "RUN159_ALL_APP_OBJECT_POLICY_DEFINITION_DRIFT_AND_DEPLOYED_EDGE_PARITY",
+      "integration_parent_sha": "ef669d3dd6203e206421e4f5858678da3eeab706",
+      "receipt_path": "docs/audits/issue509-provider-cross-layer-drift-2026-11-11-run159.json",
+      "application_sql_changed": 0,
+      "edge_known_prior_differences": 3,
+      "live_writes": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -16771,5 +16781,27 @@
     "provider_writes": false,
     "baseline_complete": false,
     "next": "After first source drift from current 106 SQL functions / 96 indexes / 59 stored migrations, inspect first changed/new object's complete body. Otherwise continue an unused provider-native or hosted API config slice when accessible; coordinate genuine Auth boundary with #96. No reset of prior receipts."
+  },
+  "provider_cross_layer_drift_run159": {
+    "status": "CURRENT_106_FUNCTION_96_INDEX_39_POLICY_DIRECT_PER_OBJECT_HASH_AND_13_EDGE_FILE_PARITY_REVALIDATED",
+    "project_ref": "azviqqejypsefzilgonr",
+    "audit_start_dev_sha": "ef669d3dd6203e206421e4f5858678da3eeab706",
+    "integration_parent_sha": "ef669d3dd6203e206421e4f5858678da3eeab706",
+    "main_sha": "11e1e8c7c36dad488519476d8a969bb682915d31",
+    "release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+    "receipt_path": "docs/audits/issue509-provider-cross-layer-drift-2026-11-11-run159.json",
+    "app_functions_unchanged": 106,
+    "app_indexes_unchanged": 96,
+    "app_policy_expressions_unchanged": 39,
+    "deployed_edge_file_occurrences_compared": 13,
+    "edge_exact_release_dev": 10,
+    "edge_known_prior_mismatches": 3,
+    "new_source_word_credit": 0,
+    "issue267_line_credit": 0,
+    "new_confirmed_defects": 0,
+    "hosted_jwt_postgrest_settings": "UNVERIFIED",
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "next": "New migration #60 or first changed/new provider definition, otherwise supported hosted Auth/API surface coordinated #96"
   }
 }
