@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "kind": "ISSUE33_R123_ORIGINAL603_573_CURRENT_SELECTED_FIX_VERIFIED",
+  "utc_date": "2026-11-11",
+  "issue": 33,
+  "repository": "Schulzet3/The-Dial-In-Collective",
+  "development_only": true,
+  "publication_authorized": false,
+  "production_operations": 0,
+  "input_basis": "Original immutable frozen603 selected coffee #573; no mass inventory-to-certification promotion",
+  "original_603": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "modified": false,
+    "manual_certified_total_not_asserted": true
+  },
+  "selected_case": {
+    "number": 573,
+    "archived_name": "Ethiopia Wate Gogogu",
+    "exact_official_url": "https://www.stageline.coffee/product-page/ethiopia-worasa-daniel-mijane",
+    "selected_h1": "Ethiopia Wate Gogogu",
+    "stale_url_identity": "Worasa/Daniel Mijane",
+    "current_official_details": {
+      "origin": "Guji, Ethiopia",
+      "producer": "Negusse Debla",
+      "process": "Washed",
+      "variety": "Dega, Kurume",
+      "elevation_m": "2280 MASL",
+      "tasting_notes": "fresh plum, florals, orange bitters"
+    },
+    "unpublished_or_not_proven": [
+      "roast_level",
+      "decaffeination_method",
+      "release_label"
+    ],
+    "source_facts_only": true,
+    "not_alternative_or_seo": true
+  },
+  "reproduced_defect": {
+    "pr": 2100,
+    "first_head": "bc81dfefa25329c8a1ddd7ef7dc358fb36b04313",
+    "failing_run": 43083502192,
+    "original_actual_tasting_notes": "fresh plum and florals",
+    "omitted_direct_literal": "orange bitters",
+    "real_defect": true,
+    "intermediate_negative_run": 43084267389,
+    "intermediate_test_fixture_run": 43084433785,
+    "resolution": "Bounded generic selected direct first-person trailing-note refinement, exclusions for nav/aside/footer/script and historical/conditional/other-product; no roaster exception"
+  },
+  "integrated": {
+    "pr": 2100,
+    "sha": "64a864285bf0614cf165d2c2a0ac32f7961478e0",
+    "parent": "a932f088496ea4afb50d62cfd4f1233ea1dd1907",
+    "tree": "f1ccfec0afabf4b643636405609190b782372fef",
+    "runtime_blobs": {
+      "src/server/coffee-selected-description-sensory.mjs": "0470051d441f967b15f7ac21857e04e2cc3a8395",
+      "src/server/coffee-page-metadata.mjs": "ead1c178a02f5af5029fe873344f0e2f47ae050a"
+    },
+    "tests_sha": "5b066867097dc985dbca5e88b9927041559a61b9",
+    "nonforce_merge": true
+  },
+  "merged_ci": {
+    "current_selected": {
+      "run": 43085325959,
+      "conclusion": "SUCCESS",
+      "focused_tests": 12,
+      "focused_failures": 0,
+      "guarded_official_https": "SUCCESS",
+      "parser_actual": "SUCCESS",
+      "afterproof": "PASS"
+    },
+    "full_node_and_lint": {
+      "run": 43085325539,
+      "conclusion": "SUCCESS",
+      "node_tests": "PASS",
+      "lint": "PASS",
+      "node_test_count_not_recorded": true,
+      "build": "SKIPPED_NOT_APPLICABLE"
+    },
+    "cloud_mobile": {
+      "run": 43085326068,
+      "conclusion": "SUCCESS",
+      "physical_device": "NOT_TESTED"
+    },
+    "python": {
+      "run": 43085325985,
+      "conclusion": "SUCCESS"
+    },
+    "approvals": {
+      "run": 43085326047,
+      "conclusion": "SUCCESS"
+    },
+    "sql_unchanged_surface": {
+      "pr_head_run": 43084639502,
+      "conclusion": "SUCCESS",
+      "merged_sql_run": "NOT_TRIGGERED"
+    },
+    "frozen603": {
+      "conclusion": "SKIPPED_NOT_ACCEPTANCE"
+    },
+    "other_current_source_exceptions": {
+      "run_r54": 43085325972,
+      "state": "FAILED_KNOWN_566_567_UNAVAILABLE",
+      "run_r64": 43085325975,
+      "not_attributable_to_new_flavor_parser": true
+    }
+  },
+  "independent_artifacts": {
+    "merged_workflow_artifact_id": 13886471149,
+    "archive_sha256": "2cb0d325d2d025f595163a19550e49a24dedeb231de1f69d0616ea4138bd57f0",
+    "current_official_html_sha256": "4835488802f3eb7427de3abb62ae616dabfae9fd3ae610c8251679b85a540391",
+    "current_official_html_bytes": 1523824,
+    "evidence_json_sha256": "f4ddc617ec94b3604bb93e1c7c0d720c3685fd1fcfa957054e0b182958bea81c",
+    "afterproof_json_sha256": "1d567eeaaf4eb42d6209ac0e8b9aae63ea4e155f7380b850f6e88b260c15e3fa",
+    "independently_rehashed_in_container": true,
+    "artifact_afterproof_passed": true,
+    "artifact_afterproof_failures": []
+  },
+  "acceptance_scope": {
+    "case_573_current_selected_semantic": "VERIFIED",
+    "global_603": "UNVERIFIED",
+    "issue33": "OPEN_IN_PROGRESS",
+    "queue_issue33": "IN_PROGRESS_OR_TESTING_NO_PROMOTION",
+    "owner_action_required": false,
+    "next": "Continue distinct unresolved original603 selected-source manual semantic cases, especially remaining source-available context/blank exceptions; keep #267 V2 and #96 scopes separate."
+  }
+}
