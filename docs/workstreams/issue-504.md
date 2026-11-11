@@ -1,3 +1,15 @@
+## Issue #504 G1-179 — 2026-11-11 UTC — original historical PRs #989–996 [skip netlify]
+
+Live development parent `ecd9a65919d85e016991ff71760829b28a23325b` tree `71b7658ceb39f3427ed9ea085518c5bd39d226d1`, main `11e1e8c7c36dad488519476d8a969bb682915d31`, release/production `a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0`; source ledger blob `f2e7e4df1a5cd998ea87051ff2439dedc84026e4`, source journal blob `0c5107c1faadd8567fc5b5faac86ba0411ce0c4a`. Owner temporary PUBLIC exception #630, November 4–30, unchanged; no privacy change authorized here.
+
+**Direct source-bound word review:** Eight distinct original historic PR title/body objects #989–996, **880 whitespace words / 8241 UTF-8 bytes**, exact per-field SHA1/word/body line bounds, full original source and individual semantic dispositions in [immutable G1-179 receipt](../audits/issue504-review-G1-179.json). #989/#995 owned by #33, #996 by #455, #991–994 by #267; #990 describes a prior #504 comment review and does not recredit the comment bodies. PR #991 closed UNMERGED and superseded by merged #992; PR #994 remains OPEN and is not rebased or independently modified. No reproducible current #504-owned defect or safe current deletion established.
+
+**Delegated #267 noncredit validation:** exact #267 disjoint P73-P75 receipt `9e4ec0edc5b185562d055142718219fe83fa4143` vs pinned migration baseline script blob `a944f4c45c75d429a60a07aad6411683f2536ccd`, physical lines **1–3** literal 3/3 and all 10 selected source/semantic fields. Zero #504 code credit; full frozen, current and drift #267 dedup/coverage still NOT GLOBALLY VERIFIED.
+
+**Cumulative:** 7919 file lines / 60754 words plus **1172 original GitHub metadata objects / 285405 words**, 179 contiguous bounded batches. Prior G1-117 −15/−4,012 adjustment and pinned RELEASE_QUEUE partial lines1–4736/5377 preserved; inventories are NOT direct semantic coverage. Exact NEXT [PR #997](https://github.com/Schulzet3/The-Dial-In-Collective/pull/997) original **title word1**, then complete body. PR reviews, inline comments, historical diffs, unrelated issues, Actions/jobs/logs/artifacts, commit/tag/release/trees/binaries, new source drift and global #267 remain open.
+
+**No runtime edits or current bug remediation:** only new immutable receipt + append-only ledger and same-commit scoped journal. Node22/app/build, SQL/Auth/JWT, browser/mobile/offline, original603 functional **NOT_RUN_DOCS_ONLY**; applicable PR-head and merged-source governance **PENDING_NOT_PASS** until verified. Issue stays **OPEN/IN_PROGRESS (TESTING)**; no deployment, Netlify, live provider, SQL/Auth/Edge/member, release queue, backups, Locked decisions, repo visibility or main/release movement.
+
 ## Issue #504 G1-178 — 2026-11-11 UTC — directly reviewed original PRs #981–988 [skip netlify]
 
 Original live development parent `10e0afda7cc3b7a59289e4829ff267163fd352d4`; main `11e1e8c7c36dad488519476d8a969bb682915d31`; release/production `a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0`; previous ledger `ce2ff9166ae6c9b4f824a8e93a1c74a88ff00c9d`, previous journal `428a3fdd5cd6caf2e5cb72f7d614a42d66789df2`. Owner-authorized PUBLIC #630 Nov4–30 unchanged.
