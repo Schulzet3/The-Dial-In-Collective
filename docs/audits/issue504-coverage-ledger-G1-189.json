@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "issue": 504,
+  "kind": "append_only_independent_coverage_shard",
+  "batch": "G1-189",
+  "date_utc": "2026-11-11",
+  "rationale": "Pending G1-187 central ledger/journal PR #2112 and G1-188 shard PR #2117 must be integrated without concurrent document overwrite; this isolated new-file-only shard is conditional and never double-credit.",
+  "source_development_sha": "d54d6b49c528a08496f3eb3c1ea74767710d50d6",
+  "source_main_sha": "f2673889d71b3f440bfd0fcfe5e8e294574509bb",
+  "source_release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+  "previous_merged_ledger_blob": "454ed62e1a891adc8969786d1694943b64acda38",
+  "pending_prior_prs": [
+    2112,
+    2117
+  ],
+  "current_receipt_blob": "9f7f3dc10e3604f085d37b2ed262c883d25340fe",
+  "direct_PR_numbers": [
+    1071,
+    1072,
+    1073,
+    1074,
+    1075,
+    1076,
+    1077,
+    1078
+  ],
+  "direct_original_PR_title_body_objects": 8,
+  "direct_whitespace_words": 1014,
+  "direct_original_utf8_bytes": 8662,
+  "delegated_267_source_lines_independently_matched": [
+    31,
+    33
+  ],
+  "delegated_267_new_credit": 0,
+  "expected_after_all_shards_merge_once": {
+    "batches": 189,
+    "file_lines": 7919,
+    "file_words": 60754,
+    "github_objects": 1252,
+    "github_words": 295211
+  },
+  "credit_status": "CONDITIONAL_PENDING_G1187_G1188_G1189_INTEGRATION",
+  "original_corrections_preserved": "G1-117 -15/-4012; historical RELEASE_QUEUE original lines 1-4736/5377",
+  "next_original_PR": 1079,
+  "next_title_word": 1,
+  "status": "OPEN_IN_PROGRESS_TESTING"
+}
