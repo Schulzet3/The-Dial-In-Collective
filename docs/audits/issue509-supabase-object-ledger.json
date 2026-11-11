@@ -3899,6 +3899,18 @@
       "provider_writes": 0,
       "new_defects": 0,
       "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-11",
+      "event": "RUN178_POST_MIGRATION_536_OBJECT_DRIFT",
+      "source_parent_sha": "a958dd8ac160a8e41d765b806e137df50f7b7821",
+      "receipt_path": "docs/audits/issue509-post-migration-five-family-direct-drift-2026-11-11-run178.json",
+      "object_hashes_checked": 536,
+      "unchanged": 530,
+      "expected_changes": 5,
+      "added_validated_constraints": 1,
+      "provider_writes": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -17760,5 +17772,21 @@
     "new_defects": 0,
     "baseline_complete": false,
     "next": "Migration #65 if added; otherwise changed or newly accessible Auth/API provider definition."
+  },
+  "provider_post_migration_five_family_run178": {
+    "status": "536_CURRENT_SOURCE_IDENTITIES_CHECKED_EXPECTED_POST_MIGRATION_DELTA_ONLY",
+    "project_ref": "azviqqejypsefzilgonr",
+    "development_parent_sha": "a958dd8ac160a8e41d765b806e137df50f7b7821",
+    "receipt": "docs/audits/issue509-post-migration-five-family-direct-drift-2026-11-11-run178.json",
+    "comparison_prior_count": 535,
+    "current_count": 536,
+    "unchanged": 530,
+    "changed_five_expected": 5,
+    "new_validated_constraint": 1,
+    "unexplained": 0,
+    "stored_migrations": 64,
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "next": "Stored migration #65 if applied, otherwise first new/changed/unreviewed provider definition or accessible hosted GoTrue/JWT/PostgREST config (#96)"
   }
 }
