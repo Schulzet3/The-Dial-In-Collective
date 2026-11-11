@@ -16,7 +16,7 @@ export function selectedBasket(s,coffeeId,version=activeVersion(s)) {
  const b=coffeeState(s,coffeeId).basketId;
  return version.baskets.find(x=>x.id===b&&!x.archived)||version.baskets.find(x=>x.id===version.defaultBasketId&&!x.archived)||version.baskets.find(x=>!x.archived);
 }
-export function feedMode(v) {return v?.advanced.slowFeed ? (v.slowFeed?'slow':'standard') : 'standard';}
+export function feedMode(v) {return v?.advanced?.slowFeed ? (v.slowFeed?'slow':'standard') : 'standard';}
 export function logAudit(s,action,detail) {s.audit.push({id:newId('audit'),at:now(),action,detail});}
 export function createSetup(s,input) {
  const dose=num(input.basketDoseG), lo=num(input.grinderMin), hi=num(input.grinderMax);
@@ -48,6 +48,8 @@ export function reviseSetup(s,input) {
  setup.name=input.name.trim();
  for(const k of ['machine','grinder','burrs'])v[k]=input[k]?.trim()||'';
  v.tempUnit=input.tempUnit||'F';
+ // Missing optional legacy controls default off until a member explicitly enables them.
+ v.advanced ||= {temperature:false,slowFeed:false,baskets:false};
  for(const k of ['temperature','slowFeed','baskets']) {
   const enabled=!!input[k];
   if(k==='slowFeed' && enabled!==v.advanced[k])v.slowFeed=false;
@@ -70,7 +72,7 @@ export function addBasket(s,input) {
  const v=activeVersion(s);const dose=num(input.doseG);
  if(dose==null||dose<5||dose>40)throw new Error('Enter a Basket Dose between 5 and 40 g.');
  const b={id:newId('basket'),name:input.name?.trim()||`${dose} g basket`,doseG:dose,archived:false,createdAt:now()};
- v.baskets.push(b);v.advanced.baskets=true;return b;
+ v.baskets.push(b);v.advanced ||= {temperature:false,slowFeed:false,baskets:false};v.advanced.baskets=true;return b;
 }
 export function correctBasketDose(s,id,value) {
  const v=activeVersion(s),b=v.baskets.find(x=>x.id===id),dose=num(value);
