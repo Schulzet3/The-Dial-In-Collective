@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "run": "R115",
+  "scope": "DEVELOPMENT_ONLY",
+  "verified_utc": "2026-11-11",
+  "status": "CURRENT_SELECTED_ORIGINAL_563_VERIFIED_NO_RUNTIME_PARSER_CHANGE_NO_RELEASE",
+  "source_code": {
+    "pr": 2054,
+    "reviewed_head_sha": "243c40ba2057b5ebae52be60f63d99a0c96a2dfe",
+    "merged_sha": "c1b895b9cb098cc995c0449f19cc8e2d86ba94f4",
+    "nonforce_squash": true,
+    "blob_verified": {
+      ".github/workflows/issue33-r115-563.yml": "4c01c638948a67f1f356e45e9b015c5f2864dc77",
+      "scripts/audit/issue33-r115-563-check.mjs": "3ef4b3088e20a59e5165dc20e7b03f240bc45bb9",
+      "tests/coffee-issue33-r115-563.test.mjs": "d84759d9b870c945ecc2b37428a0532145344426",
+      "docs/workstreams/ops-issue33-r115-563-20261111.md": "6134192c7e00969b943b62f30ccf96cd12e7a086"
+    },
+    "runtime_parser_changed": false
+  },
+  "original_frozen": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "source_csv_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "source_csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "modified": false,
+    "oracle_scorer_modified": false,
+    "full_frozen603": "SKIPPED_NOT_PASS",
+    "all603_individual_semantic_certification": "UNVERIFIED"
+  },
+  "current_selected": {
+    "number": 563,
+    "archived_selected_name": "2026 Halo Hartume; 2nd Selection - Ethiopia",
+    "url": "https://www.seycoffee.com/products/2026-halo-hartume-2nd-selection-ethiopia",
+    "source_identity": "selected_shopify_tracker_and_matching_visible_mobile_desktop_hero",
+    "source_selected_product_id": "15445945843966",
+    "h1_present": false,
+    "shopify_product_tracker_and_item_and_visible_hero_match": true,
+    "current_listing_availability": "NO LONGER AVAILABLE",
+    "actual_fields": {
+      "name": "SEY - 2026 Halo Hartume; 2nd Selection - Ethiopia",
+      "roaster": "SEY",
+      "producer": "Halo Hartume",
+      "origin": "Gedeb, Yirgacheffe, Ethiopia",
+      "process": "Washed",
+      "variety": "Ethiopian Landrace",
+      "elevation_m": "1,900 - 2,210 masl",
+      "release_label": "January 2026",
+      "tasting_notes": "melon, plum, and lemon verbena"
+    },
+    "direct_source_literals": [
+      "Halo Hartume has become an integral part of our work in Gedeb",
+      "In the cup we find melon, plum, and lemon verbena",
+      "Ethiopian Landrace",
+      "Gedeb, Yirgacheffe",
+      "1,900 - 2,210 masl",
+      "January 2026",
+      "De-pulped and cleaned"
+    ],
+    "qualifications": [
+      "Halo Hartume is the current named washing station/product identity; the parser producer label must not be read as proof of the individually identified cherry growers.",
+      "January 2026 is a seller's historical lot harvest label, not proof of the presently harvested crop or current availability.",
+      "This exact selected identity is not the 2025 or first-selection release or another SEY product."
+    ],
+    "conflicts": [],
+    "seo_fallback_fields": [],
+    "add_coffee_source_review_rendered": true,
+    "source_html_bytes": 138042,
+    "source_html_sha256": "4c168566f25941d303bd4690d2e7d8d0460127f0106494533397fe45389b06c1",
+    "source_json_sha256": "5711f68eab5aec310ad707e7987801f85db7286fd466438ab6dfe08ca29f8505",
+    "afterproof_sha256": "4a4a7317109988b7ff67e1a82288514dc1541de26f9bf469f34a5f453e399a9c",
+    "artifact_zip_sha256": "35749480ca6e082003be457eda449703d0ba4166c46992fcca52ca626dc8fa9c",
+    "artifact_id": 13857494060,
+    "independently_rehashed": true
+  },
+  "ci": {
+    "initial_focused_failed": [
+      {
+        "run": 43026286282,
+        "focused_pass": 5,
+        "focused_fail": 2,
+        "strict_source": "FAILED",
+        "cause": "wrong H1-only identity assumption and test direct variety title contamination"
+      },
+      {
+        "run": 43026600668,
+        "focused_pass": 6,
+        "focused_fail": 1,
+        "strict_source": "FAILED",
+        "cause": "substring country matching and failure to use exact selected Shopify tracker/hero"
+      }
+    ],
+    "final_pr_head": {
+      "selected_public": 43026810450,
+      "focused_pass": 7,
+      "focused_fail": 0,
+      "strict_afterproof_pass": true,
+      "source_sha": "e559756f70a504bf285f7801af39c6a1be1dd396",
+      "private_source": 43026810746,
+      "python": 43026810446,
+      "approval": 43026810401,
+      "isolated_sql": 43026810546,
+      "cloud_mobile": 43026810354,
+      "node_lint": 43026810377,
+      "node_first_attempt": "FAILED_ONE_4_SECOND_SPAWN_TIMEOUT",
+      "node_rerun": "SUCCESS_3855_PASS_0_FAIL_6_INTENTIONAL_SKIP_AND_LINT_PASS"
+    },
+    "merged_exact_source": {
+      "selected_public": 43028083787,
+      "selected_source_sha": "c1b895b9cb098cc995c0449f19cc8e2d86ba94f4",
+      "strict_afterproof_pass": true,
+      "focused_pass": 7,
+      "focused_fail": 0,
+      "node_lint": 43028083652,
+      "node_pass": 3855,
+      "node_fail": 0,
+      "intentional_skips": 6,
+      "lint": "PASS",
+      "mobile": 43028083711,
+      "python": 43028083704,
+      "approval": 43028083645,
+      "other_public_probe": 43028083932,
+      "other_public_probe_status": "SKIPPED_NOT_PASS"
+    }
+  },
+  "release_queue": {
+    "blob_preserved": "2d95392795885edb67348ba28612fb7f7b5d7bec",
+    "new_deployable_item": false,
+    "ready_or_deployed_rows_untouched": true
+  },
+  "approval_coverage_blob_preserved": "3cdbcbc21376a9fec7a8c9a8b10a1fbddc8137e9",
+  "boundaries": {
+    "issue33": "OPEN",
+    "inaccessible_existing": [
+      566,
+      567,
+      594
+    ],
+    "separate_owners": [
+      267,
+      96
+    ],
+    "netlify_published": false,
+    "production_sql_edge_auth_provider_member_writes": false,
+    "forced_git": false,
+    "purchases": false,
+    "physical_device_certification": false
+  },
+  "next": "Continue independent selected-product source review of unverified original603 #562 or #564 without borrowing other SEY lot data; all603 certification still incomplete."
+}
