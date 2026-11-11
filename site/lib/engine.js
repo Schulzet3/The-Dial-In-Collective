@@ -553,7 +553,12 @@ export function recommendation(s,coffeeId,options={}) {
     cachedNext.grindSetting!=null&&cachedNext.grindSetting!==last.grindSetting,
     cachedNext.tempC!=null&&cachedNext.tempC!==last.tempC]
     .filter(Boolean).length>1);
-  const a=(oldNoOp||oldSmallYield||unsafeCachedNext)?nextAdvice(s,last,rec):cached||nextAdvice(s,last,rec);
+  // A saved correction has no cached next step. Recalculate from the EDITED
+  // five ratings rather than silently showing an unrelated starting recipe.
+  // A legitimate no-action/bounds result remains a no-action result; the
+  // original stored suggestion, notes and measured history are not rewritten.
+  const missingActionCache=!!cached&&!cached.next&&cached.kind!=='diagnostic';
+  const a=(oldNoOp||oldSmallYield||unsafeCachedNext||missingActionCache)?nextAdvice(s,last,rec):cached||nextAdvice(s,last,rec);
   if(a.next||a.kind==='diagnostic'){
    // An applied next-shot adjustment keeps every other measured control
    // steady. Do not silently reset dose/temperature to starting defaults.

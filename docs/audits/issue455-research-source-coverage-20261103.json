@@ -4753,6 +4753,24 @@
       "current_app": "Adjacent successful-family eligibility safely excludes invalid explicit archived grinder whereas temperature guidance did not.",
       "result": "SAFE_RECORDED_CONTROL_EVIDENCE_ELIGIBILITY_NONFORCE_MERGED_7086F599_EXACT_SOURCE_CI_SUCCESS_NOT_DEPLOYED",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-APP-175-A",
+      "source": "site/lib/engine.js blob 5bd76395c37bbd63e7fc3a8d560ef871c4920e9f at development 163a6a9910ea085ef50749a80e320ac8fb293da9, recommendation lines ~550-558, editShot lines ~839-861",
+      "claim": "An edited, fully rated non-green shot receives a cached 'Shot corrected' suggestion with next:null, and recommendation prefers the non-actionable cached object over recomputing from the corrected five tastes; latest-shot feedback can disappear.",
+      "grade": "DIRECT_CURRENT_SOURCE_REPRODUCIBLE_CONTRACT_WITH_SIX_SYNTHETIC_TEST_GROUPS_AUTHORED_NOT_YET_EXECUTED_NO_REAL_MEMBER_INCIDENT",
+      "current_app": "Log Shot -> Edit Rating -> Recommendation can fall back to starting recipe instead of the updated shot's actionable taste advice.",
+      "result": "SAFE_NONACTIONABLE_CACHE_REEVALUATION_AUTHORED_CI_PENDING",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-APP-175-B",
+      "source": "site/lib/engine.js blob 5bd76395c37bbd63e7fc3a8d560ef871c4920e9f; nextAdviceRaw, editShot and recommendation existing code; owner Locked current Master/Decision Ledger",
+      "claim": "Recomputing a completed edited shot's missing-action cache through existing nextAdvice preserves one controllable change, existing physical-entry bounds, five tastes, diagnostic-only outcomes and immutable original notes/history without introducing a research-derived threshold.",
+      "grade": "SOURCE_APPROVED_CONTRACT_AND_SYNTHETIC_NEGATIVE_POSITIVE_TESTS_AUTHORED_CI_NOT_RUN",
+      "current_app": "A stored correction message has no next action, but the current engine already has a bounded nextAdvice calculation from the corrected measurements.",
+      "result": "NARROW_EXISTING_ADVICE_REUSE_NO_NEW_NUMERIC_POLICY",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [],
@@ -4868,19 +4886,20 @@
     "R455-172 conflict recovery: repo's concurrent extractor/Auth/Supabase workers were modifying release queue during PR-head CI. To preserve their writes, final source PR excludes RELEASE_QUEUE.json; R172 item still must be added by a later disjoint docs reconciliation after source merge. Prior authored PR-head queue blobs not merged.",
     "R455-172 PR #1940 source head dd8a272 exact six applicable jobs all SUCCESS except frozen603 explicitly SKIPPED; nonforce squash code merge 56361886, four source blobs identical; postmerge Node22/cloud/browser/governance SUCCESS. Separate docs queue item READY DEVELOPMENT ONLY (not deployed); original S019 inaccessible and #267 literal audit credit 0.",
     "R455-174 5f480a3d8aa3a0fc040df503f334b52d9a50266f: source-level historical grinder temperature evidence fix and six synthetic cases authored. Need exact-source PR-head CI, diagnose/repair any failures, nonforce merge and merged-source verification before READY documentation and release queue. S019 not accessible; #267 line-credit zero.",
-    "R455-174 source PR #1952 final head f1773f44 and nonforce merged 7086f599; all four code/test/ledger/journal blobs identical; head Node22 3687/0/6 and merged 3687/0/6, six synthetic tests PASS; mobile/browser/offline SQL security governance passed as applicable, original603 SKIPPED. Queue READY development only; S019 not accessible; next disjoint R175 source review, no #267 line credit."
+    "R455-174 source PR #1952 final head f1773f44 and nonforce merged 7086f599; all four code/test/ledger/journal blobs identical; head Node22 3687/0/6 and merged 3687/0/6, six synthetic tests PASS; mobile/browser/offline SQL security governance passed as applicable, original603 SKIPPED. Queue READY development only; S019 not accessible; next disjoint R175 source review, no #267 line credit.",
+    "R455-175 pinned 163a6a9910ea085ef50749a80e320ac8fb293da9 engine 5bd76395c37bbd63e7fc3a8d560ef871c4920e9f: corrected non-green shot's cached no-next 'Shot corrected' suppresses refreshed latest measured advice. Four source paths authored atomic; PR, Node22/browser/offline/SQL/security/approval checks, exact merge and release queue NOT YET VERIFIED. No #267 line-credit or S019 original verification."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-174",
-    "source_sha": "7086f5990e330ebaf08ecde54404a631e722a9c6",
+    "run_id": "R455-175",
+    "source_sha": "163a6a9910ea085ef50749a80e320ac8fb293da9",
     "issue": 455,
-    "phase": "SAFE_CODE_MERGED_EXACT_SOURCE_CI_SUCCESS_READY_DOCS_RECONCILIATION",
+    "phase": "SAFE_CODE_TEST_LEDGER_JOURNAL_SAME_COMMIT_AUTHORED_CI_NOT_RUN_NOT_MERGED",
     "source_counts": {
       "sources": 94,
-      "evidence_checks": 264,
-      "proposals": 135
+      "evidence_checks": 266,
+      "proposals": 136
     },
-    "release_state": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+    "release_state": "TESTING_NOT_READY_NOT_DEPLOYED",
     "original_s019": "UNAVAILABLE_NOT_REVIEWED",
     "github267_literal_review_credit": 0
   },
@@ -7732,13 +7751,35 @@
       "release_queue_status": "DIC-Q-455-temperature-recorded-grinder-evidence-guard_READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
       "github267_literal_review_credit": 0,
       "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-175-EDITED-RATING-RECOMMENDATION-CACHE",
+      "finding": "After correcting complete shot taste ratings, latest-shot recommendation may suppress actionable feedback because editShot stores an actionless cache placeholder.",
+      "evidence": [
+        "R455-EV-APP-175-A",
+        "R455-EV-APP-175-B"
+      ],
+      "severity": "P2_DIRECT_LOG_RATE_RECOMMENDATION_UX_CORRECTNESS",
+      "user_benefit": "Reflect corrected sour/bitter/dryness ratings immediately in the latest recommendation without rewriting saved history or suggesting more than one controllable change.",
+      "source_provenance": "development 163a6a9910ea085ef50749a80e320ac8fb293da9; engine Git blob 5bd76395c37bbd63e7fc3a8d560ef871c4920e9f; direct source and existing Locked behavior; original S019 PDF unavailable/not read",
+      "current_locked": "All five taste scales, full-green versus incomplete, one controllable next shot, protected notes and source measurements, separate styles/feed/calibration, no new universal targets.",
+      "current_app": "editShot writes a no-next 'Shot corrected' placeholder; recommendation cached||nextAdvice selects placeholder unless a narrow existing invalid-cache guard applies.",
+      "proposed_change": "Reevaluate an existing non-diagnostic no-next cache for the latest valid non-green measured shot using already-approved nextAdvice; leave saved suggestion/shot and original taste ratings intact.",
+      "evidence_grade": "DIRECT_LIVE_SOURCE_SIX_SYNTHETIC_GROUPS_AUTHORED_NOT_RUN_NO_REAL_MEMBER_OR_CUP_VALIDATION",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "CODE_TEST_LEDGER_SAME_COMMIT_AUTHORING_PENDING_PR_CI_MERGE_NO_DEPLOYMENT",
+      "test_plan": "Six positive/negative real-module synthetic groups: edited sour and bitter actions, diagnostic-only dryness, unchanged original valid cache, out-of-bounds refusal, restored all-green success; risk-scoped exact Node22/lint/build, UX mobile/browser/offline, SQL/privacy/governance and exact merged receipts. No SKIP-as-PASS.",
+      "release_queue_status": "NOT_READY_CI_NOT_RUN_NO_RELEASE_QUEUE_ITEM_YET",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
     }
   ],
   "changeScope": {
     "application_code_changed": true,
-    "tests_executed": true,
+    "tests_executed": false,
     "production_deployed": false,
-    "queue_changed": true,
-    "reason": "R455-174 SAFE code and six synthetic tests verified head and merged source; scoped READY docs-only reconciliation, no production release."
+    "queue_changed": false,
+    "reason": "R455-175 source-authoring only; six focused tests and nonforce PR/CI still outstanding; never deploy."
   }
 }
