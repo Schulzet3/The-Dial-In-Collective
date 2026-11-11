@@ -17392,5 +17392,62 @@
     "provider_writes": 0,
     "baseline_complete": false,
     "closure_governance": "VERIFY_SEPARATELY"
+  },
+  "provider_five_family_definition_drift_run172": {
+    "status": "CURRENT_535_DEFINITION_HASH_AND_POLICY_EXPRESSION_PARITY",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_parent_sha": "6264a42cf60682cd0d1e6fe6a13e8295dfba6fd8",
+    "observed_at_utc": "2026-11-11T15:47:39.897154+00",
+    "receipt_path": "docs/audits/issue509-provider-five-family-definition-drift-and-runtime-2026-11-11-run172.json",
+    "definitions_checked": 535,
+    "unchanged": 535,
+    "new": 0,
+    "changed": 0,
+    "missing": 0,
+    "counts": {
+      "functions": 106,
+      "constraints": 261,
+      "indexes": 96,
+      "policies": 39,
+      "noninternal_triggers": 33
+    },
+    "stored_migrations": 59,
+    "edge_functions": 3,
+    "resource_cumulative_temp_bytes": "143416522965",
+    "resource_database_bytes": 16823987,
+    "advisors": {
+      "security": [
+        {
+          "name": "rls_enabled_no_policy",
+          "count": 8
+        },
+        {
+          "name": "authenticated_security_definer_function_executable",
+          "count": 10
+        },
+        {
+          "name": "auth_leaked_password_protection",
+          "count": 1
+        }
+      ],
+      "performance": [
+        {
+          "name": "unindexed_foreign_keys",
+          "count": 13
+        },
+        {
+          "name": "unused_index",
+          "count": 8
+        }
+      ],
+      "health": []
+    },
+    "new_confirmed_defects": 0,
+    "first_time_provider_words": 0,
+    "issue267_lines": 0,
+    "source_fixes": 0,
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "next": "Migration #60 if added, else first changed/new/unreviewed provider definition/hosted Auth API boundary"
   }
 }
