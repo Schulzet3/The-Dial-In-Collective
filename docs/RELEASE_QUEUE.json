@@ -12289,6 +12289,41 @@
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
       "notes": "Owner Option B safe original-calibration evidence reuse for Log Shot prefill; development only. No production publishing authorization.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-33-r117-meta-only-unrendered-shell-rejection",
+      "issue": 33,
+      "pr": 2063,
+      "title": "Reject canonical Add Coffee autofill for unrendered storefront shells whose only product assertions are OG/SEO metadata",
+      "state": "TESTING",
+      "merged_source_sha": "2e2a1df1bb7fa9854637cf7eb5960138ce1eafc2",
+      "scope_paths": [
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "tests": [
+        "Initial exact public #577/#578 captured selected identity failure, original two HTML artifacts independently SHA256-rehashed; no selected product heading/embedded object, yet old parser incorrectly accepted metadata.",
+        "Fixed PR-head R117 focused #43035762444 SUCCESS 7/7 synthetic positive/negative plus guarded selected #577/#578 expected fail-closed identity, strict afterproof passed true/failures empty; verified source ZIP artifact #13861709359 SHA256 ee48c1a54fff73c02233943611b8509a5a4112df76805858ed44a9c3e4f06391.",
+        "Exact nonforce squash merge PR #2063 at 2e2a1df1bb7fa9854637cf7eb5960138ce1eafc2; reviewed test/parser/workflow/journal blobs equal merged.",
+        "Exact merged #43037174682 SUCCESS 7/7; both current official original URLs fetched, actual parser now returns ambiguous_or_missing_product and no canonical fields/automatic Add Coffee; source SHA/CSV unchanged. Independent merged ZIP artifact #13863481659 SHA256 30b6964e03faea527e5d07097e5723fc6b99fa1c6005bfbe892e7ae1cf9e47e7.",
+        "PR-head #43035762460 and exact merged Node22/lint #43037174927 SUCCESS: 3876 PASS/0 FAIL/6 intentional SKIP, lint PASS. PR-head source security, SQL/privacy, approval and cloud-tests PASS; merged cloud-tests completed PASS. Original frozen603 workflow SKIPPED, NOT PASS."
+      ],
+      "ci_runs": [
+        43034579653,
+        43035306161,
+        43035306339,
+        43035762444,
+        43035762460,
+        43035762332,
+        43037174682,
+        43037174927,
+        43037174655
+      ],
+      "blockers": [
+        "Browser/mobile runner dependency installation on PR-head #43035762332 failed Ubuntu package mirror DNS, not a parser test failure; isolated retry and exact merged browser/mobile #43037174655 pending/UNVERIFIED. Preserve TESTING pending suitable evidence."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
+      "notes": "Narrow extractor safety fix only, NOT individual #577/#578 current selected-field certification: both official URLs serve OG/SEO metadata and empty app hydration body, no selected H1/product row. Keep corresponding source identity cases reviewable and fields blank; all603 individual certification OPEN, #267/#96 independently owned. No deploy/production writes or Ready promotion while browser CI unresolved.",
+      "production_deployed": false
     }
   ],
   "history": [
