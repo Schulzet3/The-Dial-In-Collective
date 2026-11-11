@@ -3801,6 +3801,17 @@
       "receipt_path": "docs/audits/issue509-run167-exact-source-ci-closure-2026-11-11.json",
       "live_writes": 0,
       "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-11",
+      "event": "RUN168_PROVIDER_106_FUNCTION_EXECUTION_ACL_PLUS_COMPLETE_ADMIN_EDGE_HANDLER_RECHECK",
+      "development_parent_sha": "87e857038f566e221b37fadf8b3937beeb54b063",
+      "receipt_path": "docs/audits/issue509-function-execute-acl-and-deployed-admin-edge-2026-11-11-run168.json",
+      "source_hash_matches": 106,
+      "edge_files_rechecked": 2,
+      "new_confirmed_defects": 0,
+      "provider_writes": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -17178,5 +17189,29 @@
     "production_writes": 0,
     "baseline_complete": false,
     "next": "migration #60 if introduced, otherwise first changed/new/unreviewed provider definition or hosted Auth setting"
+  },
+  "provider_function_execute_acl_admin_edge_run168": {
+    "status": "COMPLETE_CURRENT_106_FUNCTION_EFFECTIVE_EXECUTE_SOURCE_MD5_REVIEW_AND_FULL_2_DEPLOYED_ADMIN_EDGE_FILES",
+    "project_ref": "azviqqejypsefzilgonr",
+    "development_parent_sha": "87e857038f566e221b37fadf8b3937beeb54b063",
+    "receipt_path": "docs/audits/issue509-function-execute-acl-and-deployed-admin-edge-2026-11-11-run168.json",
+    "app_functions": 106,
+    "unchanged_prior_run159_definition_md5": 106,
+    "security_definer": 66,
+    "authenticated_executable_definer": 39,
+    "public_executable_definer": 10,
+    "private_executable_definer": 29,
+    "anon_executable": 0,
+    "unpinned_definer_paths": 0,
+    "deployed_admin_edge_files_read_complete": 2,
+    "deployed_admin_edge_characters": 6847,
+    "existing_http_error_source_only_fix_undeployed": true,
+    "previous_source_original_word_credit": 0,
+    "issue267_line_credit": 0,
+    "confirmed_new_defects": 0,
+    "app_source_fixes": 0,
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "next": "Migration #60 if new; otherwise first changed/new/unreviewed provider definition or newly accessible hosted Auth/API control."
   }
 }
