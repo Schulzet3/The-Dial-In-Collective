@@ -12037,24 +12037,33 @@
     {
       "id": "DIC-Q-509-admin-delete-edge-request-status",
       "issue": 509,
-      "pr": null,
+      "pr": 1992,
       "title": "Return bounded invalid request status codes from JWT-required administrator account-deletion Edge rather than retryable HTTP 503",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "0bc7f0ac30434e28c5951d33bd1fe914b56c3037",
       "scope_paths": [
         "supabase/functions/dic-delete-member-account/index.ts"
       ],
       "tests": [
-        "Complete deployed Edge v1 index/helper source matches GitHub development and release; malformed/large/mistyped/time-out parser errors currently swallowed by generic catch.",
-        "Node22 synthetic typed parser status/SDK-boundary regression and source-bound CI PENDING. No live accounts or Edge invocation."
+        "Original frozen603 workflow 42968207941 SKIPPED, not PASS; outside modified Edge scope.",
+        "Exact PR head 32c4bff455a65f76161b0c9845e355cf5482ad64: Node22/lint/build 42968207909 SUCCESS (3753 passed, 0 failed, 6 skipped), approval 42968207920 SUCCESS, source security 42968207930 SUCCESS, isolated SQL/JWT 42968207932 SUCCESS, cloud UX/browser 42968207935 SUCCESS.",
+        "Six of six PR-head paths match merged blob SHA exactly at 0bc7f0ac30434e28c5951d33bd1fe914b56c3037; no conflicting source changes.",
+        "Exact merged source 0bc7f0ac30434e28c5951d33bd1fe914b56c3037: approval 42968529340 SUCCESS; cloud/browser 42968529302 SUCCESS; Node22/lint/build 42968529400 SUCCESS (3753 passed, 0 failed, 6 intentional skips). Isolated SQL/security PR-head checks reused against identical unchanged source blobs; no claim of new merged rerun.",
+        "Live readback remains Edge v1 JWT-required with prior bundle sha256 a2418951c7c4457723cd7b5e7e8d39f4cb1b3a02f76c6099573a9d576f32bf18; source-only READY, not deployed."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "PR-head Node22, governance and applicable exact-source checks unverified; no READY",
-        "No separate owner authorization to publish production Edge update"
+      "ci_runs": [
+        42968207909,
+        42968207920,
+        42968207930,
+        42968207932,
+        42968207935,
+        42968529340,
+        42968529302,
+        42968529400
       ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
-      "notes": "Development-only Admin-delete error classification. Preserves JWT, admitted admin, preparation/finalization, recovery, privacy and Locked decisions; no provider writes.",
+      "notes": "Development-only Admin-delete error classification. Preserves JWT, admitted admin, preparation/finalization, recovery, privacy and Locked decisions; no provider writes.\nRun162 exact PR-head 5/5 applicable, merged 3/3 applicable completed success, all six changed source blobs identical. Queue READY DEVELOPMENT ONLY, separate owner publish command mandatory. No live request/error reproduction or affected member claimed.",
       "production_deployed": false
     }
   ],
