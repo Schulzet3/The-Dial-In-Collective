@@ -5113,15 +5113,51 @@
       "current_app": "Feed mode kept separate; same-coffee and grinder-version evidence remain segregated; no automatic slow-feed numerical correction introduced. Original shot, five tastes, no universal thresholds unaffected.",
       "result": "SOURCE_VALIDATION_ONLY_NO_BEHAVIOR_CHANGE_NO_NEW_READY",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-APP-187-A",
+      "source": "Source PR #2062 old 72f745d7fc41a09de409f3149fb9e6b0388e6279, merged 1e2430b745c5d2f749f347aa26340fdec7fb039f; code blob 638b5ca3fa521d7a8d7baa63d409189cafbeb586",
+      "claim": "Historically legitimate archived shot dial 9 on known original [8,10] had been rejected from Log Shot dose/temp prefill against today's [0,5] grinder range despite admissible original measurement. Deterministic synthetic defect; no observed member incident or quality outcome.",
+      "grade": "DIRECT_LIVE_SOURCE_SYNTHETIC_BEHAVIOR",
+      "current_app": "Fix keeps original shot evidence and prefill without reusing obsolete grind",
+      "result": "SAFE_FIX_MERGED",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-APP-187-B",
+      "source": "Source 1e2430b745c5d2f749f347aa26340fdec7fb039f; engine 638b5ca3fa521d7a8d7baa63d409189cafbeb586, 7-case test 4ea42867adeb15650ca47ffee10c33924b2f023c, journal eba7d09296f1e21bf54bb746bf922d5fdba4e590; R190 strict browser-recovery merged 036e2f4b2719404621f77b8aa9b1cd175f75ece3",
+      "claim": "Seven exact-module regressions passed on head/merge Node22 43032374382/43033641348. Original merged browser 43033641054 failed before assertions from Ubuntu Azure DNS, never counted PASS. Full later merged browser 43063308304 actually PASSED with exact unchanged engine and tests. Exact merged source 9c335bacb2d7aa7455d63a1e153532c5fdb754fc; Node22/lint 43071900985 SUCCESS 3915 PASS/0 FAIL/6 intentional SKIP; full Chromium/390px/offline/accessibility 43071900992 and governance 43071901060 SUCCESS. Frozen603 SKIPPED, not PASS. No hosted member tests, production operations or taste efficacy trial.",
+      "grade": "ACTUAL_RECOVERED_MERGED_BROWSER_AND_EXACT_STABLE_SOURCE_NODE",
+      "current_app": "R187 measured historical prefill guard survives later reviewed R189 changes",
+      "result": "READY_DEVELOPMENT_NOT_DEPLOYED",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-APP-189-A",
+      "source": "Live prepatch engine 638b5ca3fa521d7a8d7baa63d409189cafbeb586; crossStyleControlsUsable; original code PR #2079",
+      "claim": "Cross-style ratio-only donor gate used present grinder scale rather than the shot's recorded original calibration, rejecting valid historic [8,10]/dial9 outside current [0,5] and potentially accepting invalid-original donor. Synthetic code-path reproduction, no affected real member or measured taste outcome.",
+      "grade": "DIRECT_SOURCE_REPRODUCIBLE_SYNTHETIC_BUG",
+      "current_app": "Now original calibration bounds constrain ratio-only donor evidence; never transfer historic grind/time/family",
+      "result": "SAFE_FIX_MERGED",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-APP-189-B",
+      "source": "Code PR #2079 merged 9c335bacb2d7aa7455d63a1e153532c5fdb754fc, reviewed head 53fecb0d67ce13f131a56fa538e382bd6ef38b0d; engine 0252db33598abb7c7bf6d11feac36793c5b14ec9, eight-case test c7245d8fa84a069cef2e9531e02f06ce618c2cba, same-commit journal ac9b27b3ca4d450b3eeeaee1ed4dcb86d51ea9c9",
+      "claim": "All eight negative/positive real-module R189 regressions PASS exact PR head 43071075537 and merged 43071900985, 3915 PASS/0 FAIL/6 SKIP; head Chromium 43071075255, SQL 43071075437, security 43071075262, governance 43071075846, merged Chromium/offline 43071900992 and governance 43071901060 SUCCESS. Original 603 SKIPPED not PASS. Preserves five tastes, private shots/notes, separate Turbo/Fast-Flow and slow feed.",
+      "grade": "EXACT_HEAD_MERGED_NODE_8_OF_8_REAL_MODULE_BROWSER_SQL_SECURITY_GOVERNANCE",
+      "current_app": "Original-calibration-valid history only informs weak cross-style ratio hints, no new numeric product policy",
+      "result": "READY_DEVELOPMENT_NOT_DEPLOYED",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [],
   "change_scope": {
     "application_code_changed": false,
-    "tests_executed": false,
+    "tests_executed": true,
     "production_deployed": false,
-    "queue_changed": false,
-    "reason": "R188 secondary research method/table crosswalk only; R187 runtime CI remains pending"
+    "queue_changed": true,
+    "reason": "Documentation-only final exact-source evidence reconciliation of previously merged safe R187/R189 plus R188 research"
   },
   "next_actions": [
     "R455-168 FINAL: PR1901 exact reviewed head 3b65c3... nonforce merged 767e12c8e763959f0b6677f4de7ad7e69ce80cf3 all five blobs identical. Node22/lint 3600 PASS/0 FAIL/6 SKIP head 42887964674 and merge 42888613274; mobile/browser/offline, head SQL/security and approval, merged governance all SUCCESS; original603 SKIPPED. Queue READY development-only, not published. S019 unavailable, #267 separate V2 literal review uncredited.",
@@ -5245,18 +5281,19 @@
     "R455-184 PR #2035 safely nonforce merged d936f59cb31c7399fab8e779ac5c8517a939c2c7, original historical calibration excluded from similar-coffee donors; 7 positive/negative real-module tests PASS exact head/merge, Node22 3820 PASS/0 FAIL/6 SKIP, UX/offline and governance merged SUCCESS; SQL/security head SUCCESS. New unique development READY queue item reconciled in docs-only PR pending its own CI. No policy/production change, original S019 unavailable, #267 separate line task. Next distinct source-bound research or UX evidence gap.",
     "R455-185 PR #2044 nonforce merged 2a2249923ffcd2cf052b4bd2769c9d46446352ba with four exact blobs, seven positive/negative synthetic tests, head/merge Node22/lint 3834 PASS/0 FAIL/6 SKIP and applicable head/merge UX + governance success; SQL/security head SUCCESS, frozen603 SKIPPED NOT PASS. One distinct dev-only READY queue item reconciled; no deploy. Next source-backed disjoint Log Shot/Rate/Recommendation UX gap or primary research claim. S019 inaccessible, #267 independent full audit zero credit.",
     "R455-186 PR #2052 exact code head 0abc9417 nonforce merged 6e355b3f; three code/test/same-commit journal blobs identical; head/merged Node22/lint 3848 PASS/0 FAIL/6 SKIP, all 7 new cases PASS, head+merged mobile/browser/offline and governance, head isolated SQL/security SUCCESS. One dev-only READY item; original S019 inaccessible, #267 literal review ZERO; continue distinct source-bound research/UX gap.",
-    "R455-188 independent Oct22 PDG secondary slow-feed full-text review and 2025 Kaffeemacher table/method crosscheck; no universal correction, no code or queue change, new source 97/evidence 289/proposals 148. R187 separately code merged but merged-browser CI pending; do not certify READY until actual success."
+    "R455-188 independent Oct22 PDG secondary slow-feed full-text review and 2025 Kaffeemacher table/method crosscheck; no universal correction, no code or queue change, new source 97/evidence 289/proposals 148. R187 separately code merged but merged-browser CI pending; do not certify READY until actual success.",
+    "R455-191 R188 docs-only #2072 verified merged 2bbc431b7a938187a578146a0c024dfed085dcfe, R187 #2062 original valid historic prefill and R189 #2079 cross-style ratio-only code verified merged with exact full post-recovery Node/browser, development READY reconciliation pending docs PR CI. Source ledger 97/293/150, queue 309/54, no deployment, S019 unavailable, #267 no literal credit."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-188",
-    "source_sha": "e6f19e265cd09a5de0f755d94f69b37a7b168c34",
-    "phase": "RESEARCH_ONLY_SECONDARY_SOURCE_CROSSCHECK_NO_CODE_RELEASE",
+    "run_id": "R455-191",
+    "source_sha": "26502c8933833150a4b2abdb0b05e22319c17485",
+    "phase": "R188_RESEARCH_MERGED_R187_R189_SAFE_CODE_VERIFIED_READY_RECONCILIATION",
     "source_counts": {
       "research_project_sources": 97,
-      "bounded_evidence_checks": 289,
-      "proposals": 148
+      "bounded_evidence_checks": 293,
+      "proposals": 150
     },
-    "release_state": "NO_NEW_READY_R187_CI_PENDING",
+    "release_state": "TWO_NEW_READY_DEVELOPMENT_ONLY",
     "original_s019": "INACCESSIBLE_UNREVIEWED",
     "github267_literal_review_credit": 0
   },
@@ -8506,13 +8543,65 @@
       "release_queue_status": "NO_NEW_ITEM_EXISTING_R187_NOT_READY",
       "github267_literal_review_credit": 0,
       "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-187-PREFILL-VALID-HISTORICAL-RANGE",
+      "finding": "Valid original historical grinder dial beyond today's range suppressed useful same-coffee dose/temperature prefills.",
+      "evidence": [
+        "R455-EV-APP-187-A",
+        "R455-EV-APP-187-B"
+      ],
+      "severity": "P2_SYNTHETIC_PREFILL_INTEGRITY",
+      "user_benefit": "Improve Log Shot → Rate → Recommendation integrity using valid original measured grinder calibration without changing member records, any five sensory inputs, styles, historical dial or taste targets.",
+      "source_provenance": "Source/hash bound before/after direct live code; focused synthetic positive/negative real-module tests and GitHub exact-source CI. No observed member or empirical espresso quality effect.",
+      "current_locked": "Five taste ratings, original measured shot/private notes/history, calibration/version/range, distinct styles/feed, one intentional controllable change and no universal numeric science targets.",
+      "current_app": "Reuse original physically-valid eligibility before prefill fallback without copying old grind.",
+      "proposed_change": "Reuse original physically-valid eligibility before prefill fallback without copying old grind.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "SAFE_CODE_TEST_SAME_COMMIT_JOURNAL_NONFORCE_MERGED_1e2430b745c5d2f749f347aa26340fdec7fb039f",
+      "test_plan": "Exact merged source 9c335bacb2d7aa7455d63a1e153532c5fdb754fc; Node22/lint 43071900985 SUCCESS 3915 PASS/0 FAIL/6 intentional SKIP; full Chromium/390px/offline/accessibility 43071900992 and governance 43071901060 SUCCESS. Frozen603 SKIPPED, not PASS. No hosted member tests, production operations or taste efficacy trial. R187 has seven and R189 has eight separately tested negative/positive cases.",
+      "release_queue_status": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false,
+      "exact_source": {
+        "source_merge": "1e2430b745c5d2f749f347aa26340fdec7fb039f",
+        "node_merge": 43071900985,
+        "ux_merge": 43071900992,
+        "original603": "SKIPPED_NOT_PASS"
+      }
+    },
+    {
+      "id": "R455-PROP-189-CROSSSTYLE-ORIGINAL-CALIBRATION",
+      "finding": "Cautious cross-style ratio-only reference discarded valid original historical evidence or admitted impossible original grinder readings.",
+      "evidence": [
+        "R455-EV-APP-189-A",
+        "R455-EV-APP-189-B"
+      ],
+      "severity": "P2_SYNTHETIC_RATIO_DONOR_INTEGRITY",
+      "user_benefit": "Improve Log Shot → Rate → Recommendation integrity using valid original measured grinder calibration without changing member records, any five sensory inputs, styles, historical dial or taste targets.",
+      "source_provenance": "Source/hash bound before/after direct live code; focused synthetic positive/negative real-module tests and GitHub exact-source CI. No observed member or empirical espresso quality effect.",
+      "current_locked": "Five taste ratings, original measured shot/private notes/history, calibration/version/range, distinct styles/feed, one intentional controllable change and no universal numeric science targets.",
+      "current_app": "Reuse original calibration evidence gate only for weak same-coffee cross-style ratio eligibility, never transfer grinder/time/family.",
+      "proposed_change": "Reuse original calibration evidence gate only for weak same-coffee cross-style ratio eligibility, never transfer grinder/time/family.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "SAFE_CODE_TEST_SAME_COMMIT_JOURNAL_NONFORCE_MERGED_9c335bacb2d7aa7455d63a1e153532c5fdb754fc",
+      "test_plan": "Exact merged source 9c335bacb2d7aa7455d63a1e153532c5fdb754fc; Node22/lint 43071900985 SUCCESS 3915 PASS/0 FAIL/6 intentional SKIP; full Chromium/390px/offline/accessibility 43071900992 and governance 43071901060 SUCCESS. Frozen603 SKIPPED, not PASS. No hosted member tests, production operations or taste efficacy trial. R187 has seven and R189 has eight separately tested negative/positive cases.",
+      "release_queue_status": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false,
+      "exact_source": {
+        "source_merge": "9c335bacb2d7aa7455d63a1e153532c5fdb754fc",
+        "node_merge": 43071900985,
+        "ux_merge": 43071900992,
+        "original603": "SKIPPED_NOT_PASS"
+      }
     }
   ],
   "changeScope": {
     "application_code_changed": false,
-    "tests_executed": false,
+    "tests_executed": true,
     "production_deployed": false,
-    "queue_changed": false,
-    "reason": "R188 secondary research method/table crosswalk only; R187 runtime CI remains pending"
+    "queue_changed": true,
+    "reason": "Documentation-only final exact-source evidence reconciliation of previously merged safe R187/R189 plus R188 research"
   }
 }
