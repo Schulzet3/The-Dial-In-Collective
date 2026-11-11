@@ -1,0 +1,49 @@
+name: DIC Issue33 R120 original selected 568
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r120-568.yml
+      - scripts/audit/issue33-r120-568-check.mjs
+      - tests/coffee-issue33-r120-568.test.mjs
+      - docs/workstreams/ops-issue33-r120-568-20261111.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r120-568.yml
+      - scripts/audit/issue33-r120-568-check.mjs
+      - tests/coffee-issue33-r120-568.test.mjs
+permissions:
+  contents: read
+jobs:
+  selected-current:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Positive and adversarial selected-product parser regressions
+        run: node --test tests/coffee-issue33-r120-568.test.mjs
+      - name: Guarded public official HTTPS, parser and selected Add Coffee review
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '568'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r120
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Exact source identity, current selected facts, hashes and afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r120
+          DIC_ISSUE33_R120_VERIFY: '1'
+        run: node scripts/audit/issue33-r120-568-check.mjs
+      - name: Save bounded public official source and exact afterproof
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r120-original568
+          path: /tmp/dic33-r120/
+          retention-days: 1
+          if-no-files-found: warn
