@@ -947,7 +947,7 @@ class CloudApp {
        temperatureInput.value=C.tempDisplay(r.tempC,this.logUnit);
        // Explicitly using the recommended value replaces the historical
        // prefill; its cross-style provenance no longer describes this value.
-       temperatureInput.closest('.field')?.querySelector('small')?.remove();
+       temperatureInput.closest?.('.field')?.querySelector?.('small')?.remove?.();
       }
       this.draft.tempSource='';
      }

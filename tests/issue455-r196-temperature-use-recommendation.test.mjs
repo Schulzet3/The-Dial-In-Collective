@@ -37,7 +37,7 @@ test('R196 applying temperature recommendation clears now-false historical sourc
  const r=recommendation(f.app.state,'coffee',{style:'Turbo',
   basketId:f.app.draft.basketId,feedMode:f.app.draft.feedMode});
  await f.click('use-temp');
- assert.equal(f.temperature.value,String(tempDisplay(r.tempC,f.app.logUnit)));
+ assert.equal(Number(f.temperature.value),tempDisplay(r.tempC,f.app.logUnit));
  assert.equal(f.app.draft.tempC,r.tempC);
  assert.equal(f.app.draft.tempSource,'');
  assert.equal(f.helper.removed,true);
