@@ -29,6 +29,7 @@ jobs:
       - name: Focused actual parser positive and adversarial test
         run: node --test tests/coffee-issue33-r110-556-557.test.mjs
       - name: Guarded official HTTPS selected product parser / Add Coffee and Source Review
+        if: always()
         env:
           DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '556,557'
           DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r110

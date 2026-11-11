@@ -2,9 +2,9 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {selected110,currentDirect110,selected110FieldsOk} from '../scripts/audit/issue33-r110-556-557-check.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
-const brazil='About Seibt Family Farm\'s Coffee. Roast level: Medium-Dark. Origin: Seibt Family Farm, Cerrado Mineiro Region, Brazil. Elevation: 900 masl / 3000 ft. Caroline Seibt grew up a second-generation farmer in Minas Gerais, southeastern Brazil.';
-const png='Kula Peaberry at a glance. Tasting notes: Sweet aroma, chocolate & raisin/dried fruit notes, earthy, med-heavy body, syrupy mouthfeel. Roast color: Light-Medium. Country: Papua New Guinea. Region: Waghi Valley. Farm: Sigri Estate. Tree variety: Predominantly Typica. Elevation: 1,500-1,600 masl (5,000-5,200 ft).';
-const page=(n,story,noise='')=>'<html><head><title>'+selected110[n].name+'</title><meta property="og:type" content="product"><meta property="og:url" content="'+selected110[n].url+'"></head><body><main><article class="product"><h1>'+selected110[n].name+'</h1><div class="product__description"><p>'+story+'</p></div></article>'+noise+'</main></body></html>';
+const brazil=`<h3>About Seibt Family Farm's Coffee</h3><ul><li>Roast level: Medium-Dark</li><li>Origin: Seibt Family Farm, Cerrado Mineiro Region, Brazil</li><li>Elevation: 900 masl / 3000 ft</li></ul><p>Caroline Seibt grew up a second-generation farmer in Minas Gerais, southeastern Brazil.</p>`;
+const png=`<h3>Kula Peaberry at a glance</h3><ul><li>Tasting notes: Sweet aroma, chocolate & raisin/dried fruit notes, earthy, med-heavy body, syrupy mouthfeel</li><li>Roast color: Light-Medium</li><li>Country: Papua New Guinea</li><li>Region: Waghi Valley</li><li>Farm: Sigri Estate</li><li>Tree variety: Predominantly Typica</li><li>Elevation: 1,500-1,600 masl (5,000-5,200 ft)</li></ul>`;
+const page=(n,story,noise='')=>'<html><head><title>'+selected110[n].name+'</title><meta property="og:type" content="product"><meta property="og:url" content="'+selected110[n].url+'"></head><body><main><article class="product"><h1>'+selected110[n].name+'</h1><div class="product__description">'+story+'</div></article>'+noise+'</main></body></html>';
 test('556 selected Brazil direct own specs have one exact H1',()=>{
  const x=currentDirect110(page(556,brazil),556);assert.equal(x.uniqueH1,true);assert.ok(x.direct.every(y=>y.matched),JSON.stringify(x));
 });
