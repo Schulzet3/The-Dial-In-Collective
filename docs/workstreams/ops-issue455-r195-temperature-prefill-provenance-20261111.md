@@ -1,0 +1,13 @@
+# Issue #455 R455-195 — Log Shot temperature prefill provenance (same-commit receipt)
+
+**Date:** November 11, 2026 UTC. **Authority:** owner Option B, SAFE Locked-compatible UX transparency; development only. **Exact starting development source:** `d54d6b49c528a08496f3eb3c1ea74767710d50d6`; cloud UI original blob `29dfa4ae6924ed568d95d0fde819c05da91c5c53`.
+
+**Reproduced direct-source gap:** `site/lib/engine.js::prefill` already distinguishes a measured same-style temperature from its cross-style fallback with `tempSource = "Last used on <style>"` (see established R098 tests). However `site/cloud/main.js::showLog` renders the temperature value without displaying that existing provenance. Members may unknowingly see a last-used *different style* temperature on a new Log Shot. This is source-identified UX risk, not an observed member incident or a scientifically validated target.
+
+**Narrow SAFE fix:** Pass the *existing*, escaped `tempSource` as field help only for an unedited Log Shot with a measured optional temperature. No temperature calculation, storage, recommendation targets, taste rules, prior ranking, calibration translation, style policy, data capture or member permissions change. The `field()` utility escapes help text and includes it in the input's associated label. Preserve all five unrated tastes and original shots/notes/private History.
+
+**Changed paths in this SAME COMMIT:** `site/cloud/main.js`; `tests/issue455-temperature-prefill-provenance.test.mjs`; this journal. Five synthetic positive/negative direct `CloudApp.showLog` regressions: measured other-style provenance visible; same-style no misleading source; tracking OFF hides field; invalid historical temperature excluded; malformed legacy style escaped and history preserved.
+
+**At authoring:** Code/test change prepared, not yet run in provider CI; Node22/lint/build, Chromium/mobile/offline/accessibility, isolated SQL/privacy/security and governance **NOT PASS until independently observed**. Original 603 oracle is not part of this UX change; SKIPPED/UNRUN is not PASS. No real taste experiment or product-authority supersession. #335, #33, #267 and #96 retain independent ownership; #267 literal-line audit credit zero.
+
+**Next:** review exact source-bound PR head and CI; repair failing tests; nonforce merge only upon applicable success; inspect merge SHA and changed Git blobs, then reconcile evidence ledger, scoped workstream, CURRENT_STATUS and development-only release queue if fully verified. No deployment, live SQL/Auth/Edge/member/provider writes, main/release movement, forced Git, purchase or visibility mutation.
