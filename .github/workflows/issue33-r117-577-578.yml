@@ -6,7 +6,7 @@ on:
       - .github/workflows/issue33-r117-577-578.yml
       - scripts/audit/issue33-original603-focused-source-review.mjs
       - src/server/coffee-page-metadata.mjs
-      - tests/coffee-issue33-r117-metadata-only.test.mjs
+      - tests/coffee-issue33-r117-metadata-only-pending.test.mjs
       - docs/workstreams/ops-issue33-r117-577-578-20261111.md
   push:
     branches: [development/backend-foundation]
@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: '22'
       - name: Focused actual-parser positive and negative client-shell cases
-        run: node --test tests/coffee-issue33-r117-metadata-only.test.mjs
+        run: node --test tests/coffee-issue33-r117-metadata-only-pending.test.mjs
       - name: Guarded original URLs, with expected identity rejection captured honestly
         env:
           DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '577,578'
