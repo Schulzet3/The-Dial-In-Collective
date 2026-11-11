@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "run": "R111",
+  "scope": "DEVELOPMENT_ONLY",
+  "verified_utc": "2026-11-11",
+  "status": "CURRENT_ORIGINAL_SELECTED_561_VERIFIED_WITH_SOURCE_BOUND_ROAST_TAXONOMY_QUALIFICATION_NO_RUNTIME_PARSER_CHANGE",
+  "source_code_merge": {
+    "pr": 2019,
+    "reviewed_head": "5152309b15f9a1553708530d60204d819b088319",
+    "merged_sha": "61e1e84b70384179bf12faeb708d52b293d02a23",
+    "nonforce_squash": true,
+    "reviewed_merged_blobs_identical": {
+      ".github/workflows/issue33-r111-561.yml": "8088d2232a2fe4deb2b2605e1c69b6ed9d82c725",
+      "scripts/audit/issue33-r111-561-check.mjs": "a893fc02853db45f3b481fea21fc20fc3afc44b5",
+      "tests/coffee-issue33-r111-561.test.mjs": "444061790a539ee3a0b860dd44f518ace51f5df8",
+      "docs/workstreams/ops-issue33-r111-561-20261111.md": "c8f10734c3dde70c18efdefd33544b51928f593a"
+    },
+    "runtime_parser_changed": false
+  },
+  "frozen_corpus": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "modified": false,
+    "oracle_scorer_modified": false,
+    "all603_individual_manual_certification": "UNVERIFIED",
+    "all603_workflow": "SKIPPED_NOT_PASS"
+  },
+  "selected_current": {
+    "number": 561,
+    "name": "Peru Churupampa, City (mild) Roast, Fair Trade-Organic",
+    "official_url": "https://www.rustydogcoffee.com/products/peru",
+    "unique_current_h1": true,
+    "direct_product_literals": [
+      "Cupping notes: Lime/Grape/Brown Sugar",
+      "Grower: Finca Churupampa",
+      "Region: Chirinos, Cajamarca",
+      "Altitude: 1,600-1,900m",
+      "Process: Washed",
+      "Eber Tocto and his brothers"
+    ],
+    "selected_product_json_tags": [
+      "coffee",
+      "FTO",
+      "light roast",
+      "mild roast",
+      "single origin"
+    ],
+    "roast_qualification": "Current canonical Light is supported by exact selected Shopify product-owned light roast tag, NOT by generic Light Roasts navigation and NOT by universally translating unsupported City (mild) prose. Keep lower-priority tag provenance distinguishable from direct product spec; the paired mild roast tag is not an accepted canonical tier.",
+    "canonical_current_parser": {
+      "name": "Peru Churupampa, City (mild) Roast, Fair Trade-Organic",
+      "roaster": "Rusty Dog Coffee",
+      "tasting_notes": "Lime/Grape/Brown Sugar",
+      "producer": "Finca Churupampa",
+      "origin": "Chirinos, Cajamarca, Peru",
+      "elevation_m": "1,600-1,900m",
+      "process": "Washed",
+      "roast_level": "Light"
+    },
+    "unpublished_fields_not_fabricated": [
+      "variety",
+      "lot_harvest_year",
+      "decaffeination_method"
+    ],
+    "source_html_sha256": "6ce3606af004bd7a3e903575d34de143aa593c34668234c7d6cb84da9ea6ae29",
+    "source_html_bytes": 284980,
+    "source_json_sha256": "a94eac851000266d98660c81a49317ce2fd4ed0e5771e3b3b5a751e46038cdc9",
+    "afterproof_json_sha256": "365fe05783546c58e8a3cd0584097c458a731496277a46af9079dd36f55197af",
+    "source_artifact_zip_sha256": "f6b64a96a85a9eff6e601d1075626d5fd64307016a65f539c856b52f05760e61",
+    "source_artifact_independently_rehashed": true,
+    "current_source_ci_run": 42992431158,
+    "source_ci_result": "SUCCESS",
+    "focused_tests": {
+      "pass": 8,
+      "fail": 0
+    },
+    "strict_afterproof": {
+      "source_sha": "61e1e84b70384179bf12faeb708d52b293d02a23",
+      "passed": true,
+      "failures": []
+    },
+    "selected_actual_parser": true,
+    "add_coffee_and_source_review": true,
+    "source_metadata_only": false
+  },
+  "pr_head_ci": {
+    "source": 42991972706,
+    "node_lint": 42991972587,
+    "cloud_mobile": 42991972579,
+    "sql": 42991972555,
+    "python": 42991972604,
+    "approval": 42991972702,
+    "status": "SUCCESS_EXCEPT_ORIGINAL_FROZEN603_SKIPPED",
+    "node_pass": 3799,
+    "node_fail": 0,
+    "intentional_skips": 6
+  },
+  "merged_ci": {
+    "official": 42992431158,
+    "official_result": "SUCCESS",
+    "node_lint": 42992431266,
+    "node_lint_result": "PENDING_AT_DOCS_PREPARATION",
+    "cloud_mobile": 42992431120,
+    "cloud_mobile_result": "PENDING_AT_DOCS_PREPARATION",
+    "python": 42992431440,
+    "python_result": "SUCCESS",
+    "approval": 42992431300,
+    "approval_result": "SUCCESS",
+    "broader_public_probe": "SKIPPED_NOT_PASS"
+  },
+  "queue_changes": 0,
+  "other_ready_deployed_preserved": true,
+  "issue33": "OPEN",
+  "known_unavailable_current_official_cases": [
+    566,
+    567,
+    594
+  ],
+  "owned_separately": [
+    267,
+    96
+  ],
+  "no_deployment": true,
+  "no_production_operations": true,
+  "owner_decision_required": false,
+  "next": "Verify merged Node/lint and mobile CI completion, update this receipt/journal as needed, merge docs nonforce, read back, and record Issue33 closeout; then continue different unresolved exact source, not universal 603 certification"
+}
