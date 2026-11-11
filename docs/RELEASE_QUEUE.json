@@ -12035,24 +12035,26 @@
       "production_deployed": false
     },
     {
-      "id": "DIC-Q-455-sweetness-original-calibration-comparison",
-      "issue": 455,
+      "id": "DIC-Q-509-admin-delete-edge-request-status",
+      "issue": 509,
       "pr": null,
-      "title": "Reject physically impossible original grinder-calibration records as measured sweetness/yield comparison evidence",
-      "state": "TESTING",
+      "title": "Return bounded invalid request status codes from JWT-required administrator account-deletion Edge rather than retryable HTTP 503",
+      "state": "IN_PROGRESS",
       "merged_source_sha": null,
       "scope_paths": [
-        "site/lib/engine.js"
+        "supabase/functions/dic-delete-member-account/index.ts"
       ],
       "tests": [
-        "New R179 five synthetic positive/negative regressions authored; Node22, browser/mobile/offline, SQL/privacy and governance CI NOT YET RUN. No success claims."
+        "Complete deployed Edge v1 index/helper source matches GitHub development and release; malformed/large/mistyped/time-out parser errors currently swallowed by generic catch.",
+        "Node22 synthetic typed parser status/SDK-boundary regression and source-bound CI PENDING. No live accounts or Edge invocation."
       ],
       "ci_runs": [],
       "blockers": [
-        "Exact PR-head and merged-source test/CI not yet completed; not READY."
+        "PR-head Node22, governance and applicable exact-source checks unverified; no READY",
+        "No separate owner authorization to publish production Edge update"
       ],
-      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "Owner Option B safe reuse of prior snapshot/calibration integrity guard for sweetness/yield History comparison; original shots/notes/five ratings and existing one-yield-step policy preserved. Development only, not deployed.",
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/509",
+      "notes": "Development-only Admin-delete error classification. Preserves JWT, admitted admin, preparation/finalization, recovery, privacy and Locked decisions; no provider writes.",
       "production_deployed": false
     }
   ],

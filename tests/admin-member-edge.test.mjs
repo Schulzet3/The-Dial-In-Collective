@@ -101,3 +101,59 @@ test('previously completed ledger operation is idempotent with zero extra Auth c
  assert.equal(v.body.completed,true);
  assert.equal(x.calls.includes('getUserById'),false);
 });
+
+test('malformed/oversized/content-type/timeout requests return their bounded client statuses before SDK access',async()=>{
+ const {readBoundedJson,RequestBodyError}=await import('../supabase/functions/_shared/request-budget.mjs');
+ const script=readFileSync(new URL('../supabase/functions/dic-delete-member-account/index.ts',import.meta.url),'utf8').replace(/^import .*?;\n/gm,'');
+ let sdkCalls=0,handler;
+ vm.runInNewContext(script,{
+  Request,Response,RequestBodyError,
+  readBoundedJson:r=>readBoundedJson(r,{timeoutMs:25}),
+  createClient(){sdkCalls++;throw Error('Invalid input must not create an SDK client');},
+  Deno:{env:{get:key=>({SUPABASE_URL:'https://fixture.invalid',SUPABASE_ANON_KEY:'fixture-anon',
+   SUPABASE_SERVICE_ROLE_KEY:'fixture-service'})[key]},serve:fn=>{handler=fn;}}
+ });
+ const send=async(body,extraHeaders={})=>{
+  const request=new Request('https://fixture.invalid/functions/v1/dic-delete-member-account',{
+   method:'POST',duplex:'half',headers:{origin:'https://app.dialincollective.com',
+    authorization:'Bearer dummy-fixture','content-type':'application/json',...extraHeaders},body});
+  const response=await handler(request);
+  return {status:response.status,body:await response.json()};
+ };
+ for(const [body,headers,status,code] of [
+  ['{',{},400,'invalid_json'],
+  ['x'.repeat(4300),{},413,'request_too_large'],
+  ['{}',{'content-type':'text/plain'},415,'invalid_content_type']
+ ]){
+  const result=await send(body,headers);
+  assert.equal(result.status,status);
+  assert.equal(result.body.code,code);
+  assert.equal(result.body.retryable,undefined);
+ }
+ const stream=new ReadableStream({pull(){return new Promise(()=>{});}});
+ const timed=await send(stream);
+ assert.equal(timed.status,408);
+ assert.equal(timed.body.code,'request_timeout');
+ assert.equal(sdkCalls,0);
+});
+test('unexpected admin-delete parser failures remain generic 503 without disclosure or privileged calls',async()=>{
+ const {RequestBodyError}=await import('../supabase/functions/_shared/request-budget.mjs');
+ const code=readFileSync(new URL('../supabase/functions/dic-delete-member-account/index.ts',import.meta.url),'utf8').replace(/^import .*?;\n/gm,'');
+ let handler,serviceCalls=0;
+ vm.runInNewContext(code,{
+  Request,Response,RequestBodyError,
+  async readBoundedJson(){throw new Error('internal fixture should not leak');},
+  createClient(){serviceCalls++;throw new Error('no SDK calls expected');},
+  Deno:{env:{get:key=>({SUPABASE_URL:'https://fixture.invalid',SUPABASE_ANON_KEY:'fixture-anon',
+   SUPABASE_SERVICE_ROLE_KEY:'fixture-service'})[key]},serve:fn=>{handler=fn;}}
+ });
+ const request=new Request('https://fixture.invalid/functions/v1/dic-delete-member-account',{
+  method:'POST',headers:{authorization:'Bearer dummy-fixture','content-type':'application/json'},body:'{}'
+ });
+ const response=await handler(request);const body=await response.json();
+ assert.equal(response.status,503);
+ assert.equal(body.code,'operation_failed');
+ assert.equal(body.retryable,true);
+ assert.equal(JSON.stringify(body).includes('internal fixture'),false);
+ assert.equal(serviceCalls,0);
+});

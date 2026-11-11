@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 162,
+  "project_ref": "azviqqejypsefzilgonr",
+  "status": "DEVELOPMENT_ONLY_FIX_PR_HEAD_CI_PENDING",
+  "development_parent_sha": "6d386d4e41d09c12ec0487dc7e222e74f5e277de",
+  "main_sha": "11e1e8c7c36dad488519476d8a969bb682915d31",
+  "release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0",
+  "provider_edge": {
+    "slug": "dic-delete-member-account",
+    "version": 1,
+    "status": "ACTIVE",
+    "verify_jwt": true,
+    "ezbr_sha256": "a2418951c7c4457723cd7b5e7e8d39f4cb1b3a02f76c6099573a9d576f32bf18",
+    "files": [
+      {
+        "path": "dic-delete-member-account/index.ts",
+        "full_source_review": "1-EOF",
+        "source_chars": 4392,
+        "exact_git_blob_sha": "51f332cf57eb753957bff6566324253faa81df3f",
+        "exact_matches_live": true
+      },
+      {
+        "path": "_shared/request-budget.mjs",
+        "full_source_review": "1-EOF",
+        "source_chars": 2455,
+        "exact_git_blob_sha": "d8b70824cb71d4dc4a747a8f20e23b429abb3094",
+        "exact_matches_live": true
+      }
+    ]
+  },
+  "provider_sql_source_cross_layer": [
+    {
+      "signature": "private.dic_admin_account_delete_prepare(uuid,uuid)",
+      "source_chars": 3899,
+      "md5": "6e7e0589cbda1bc5023771724ce8b77f",
+      "acl": "anon=false authenticated=false"
+    },
+    {
+      "signature": "private.dic_admin_account_delete_finish(uuid,uuid)",
+      "source_chars": 2492,
+      "md5": "51cd64deed985a9ddf622926b8784a84",
+      "acl": "anon=false authenticated=false"
+    },
+    {
+      "signature": "public.dic_session_status()",
+      "source_chars": 165,
+      "md5": "742e5bd0fc8544807886b514d95d6688",
+      "acl": "anon=false authenticated=true"
+    },
+    {
+      "signature": "private.dic_admin_account_delete_request(uuid,text,jsonb)",
+      "source_chars": 1949,
+      "md5": "b91e425cd94b4c749b28adf8fd0b96a1"
+    }
+  ],
+  "live_safe_aggregate": {
+    "delete_operation_total": 0,
+    "requested": 0,
+    "prepared": 0,
+    "completed": 0,
+    "enabled_after_prepare": 0,
+    "private_deletion_tables_client_select": false
+  },
+  "finding": {
+    "name": "bounded RequestBodyError statuses swallowed by generic Edge catch",
+    "source_proof": "Shared readBoundedJson throws RequestBodyError invalid_json 400/request_too_large 413/invalid_content_type 415/request_timeout 408, but deployed handler caught all errors and returned 503 operation_failed retryable",
+    "security_boundary": "still checks origin, method, JWT and admin before service account actions; no demonstrated privilege bypass or live member impact",
+    "change": "Use RequestBodyError class as in existing preview Edge and preserve exact original generic 503 fallback. No SQL/Auth/deployment edits.",
+    "runtime_repro": "SOURCE_CONTROL_REGRESSION_PENDING_EXACT_GITHUB_NODE22_CI"
+  },
+  "coverage": {
+    "read_complete_current_edge_files": 2,
+    "source_chars": 6847,
+    "first_time_provider_words": 0,
+    "issue267_code_lines": 0,
+    "baseline_complete": false
+  },
+  "blocked": [
+    "Exact PR-head and merged source-bound CI not yet checked",
+    "Production deployment requires separate owner one-use authorization",
+    "Genuine signed-in provider HTTP negative test unverified"
+  ],
+  "next": "Verify PR-head Node22/edge negative tests, governance and other applicable CI, then nonforce integrate and record exact-source closure. Recheck migration ordinal 60 and new/changed provider objects."
+}
