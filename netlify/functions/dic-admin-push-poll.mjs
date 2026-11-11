@@ -4,6 +4,9 @@ import {cleanPushTokens,addedPushTokens,sendEmptyAdminPush,endpointFingerprint,s
 const envDefault=name=>globalThis.Netlify?.env?.get?.(name)??process.env[name];
 const response=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:{
  'Content-Type':'application/json','Cache-Control':'no-store'}});
+const PAGE_SIZE=50;
+// Immutable endpoint hashes are a stable keyset cursor even when rows are edited or retired.
+const SUBSCRIPTIONS_PATH='dic_admin_push_subscriptions?select=owner_id,endpoint,endpoint_hash,seen_tokens,expires_at&order=endpoint_hash.asc&limit='+PAGE_SIZE;
 export function createAdminPushPoller({fetcher=fetch,env=envDefault,now=()=>Date.now()}={}){
  return async()=>{
   const base=env('SUPABASE_URL'),service=env('SUPABASE_SECRET_KEY')||env('SUPABASE_SERVICE_ROLE_KEY');
@@ -22,12 +25,12 @@ export function createAdminPushPoller({fetcher=fetch,env=envDefault,now=()=>Date
   try{
    const [snapshotResponse,subscriptionsResponse]=await Promise.all([
     rest('rpc/dic_admin_push_snapshot',{method:'POST',body:{}}),
-    rest('dic_admin_push_subscriptions?select=owner_id,endpoint,endpoint_hash,seen_tokens,expires_at&order=updated_at.asc&limit=50')
+    rest(SUBSCRIPTIONS_PATH)
    ]);
-   const snapshot=await snapshotResponse.json(),rows=await subscriptionsResponse.json();
-   if(!Array.isArray(rows)||!Array.isArray(snapshot?.admin_ids))throw Error('No authenticated push snapshot');
+   const snapshot=await snapshotResponse.json();
+   if(!Array.isArray(snapshot?.admin_ids))throw Error('No authenticated push snapshot');
    const tokens=cleanPushTokens(snapshot.tokens),admins=new Set(snapshot.admin_ids);
-   let delivered=0,retired=0,failed=0;
+   let delivered=0,retired=0,failed=0,checked=0,cursor='';
    const process=async row=>{
     const hash=String(row?.endpoint_hash||'');
     if(!/^[0-9a-f]{64}$/.test(hash))return;
@@ -52,9 +55,20 @@ export function createAdminPushPoller({fetcher=fetch,env=envDefault,now=()=>Date
       body:{seen_tokens:tokens,updated_at:new Date(now()).toISOString(),
        ...(added.length?{last_sent_at:new Date(now()).toISOString()}:{})}});
    };
-   const results=await Promise.allSettled(rows.map(process));
-   failed+=results.filter(x=>x.status==='rejected').length;
-   return response({ok:failed===0,checked:rows.length,delivered,retired,failed},failed?503:200);
+   let rows=await subscriptionsResponse.json();
+   while(true){
+    if(!Array.isArray(rows)||rows.length>PAGE_SIZE)throw Error('Invalid protected push page');
+    if(rows.length===0)break;
+    const lastHash=String(rows.at(-1)?.endpoint_hash||'');
+    if(!/^[0-9a-f]{64}$/.test(lastHash)||(cursor&&lastHash<=cursor))throw Error('Invalid push page cursor');
+    const results=await Promise.allSettled(rows.map(process));
+    checked+=rows.length;
+    failed+=results.filter(x=>x.status==='rejected').length;
+    if(rows.length<PAGE_SIZE)break;
+    cursor=lastHash;
+    rows=await (await rest(SUBSCRIPTIONS_PATH+'&endpoint_hash=gt.'+cursor)).json();
+   }
+   return response({ok:failed===0,checked,delivered,retired,failed},failed?503:200);
   }catch{return response({ok:false,reason:'push_poll_failed'},503);}
  };
 }
