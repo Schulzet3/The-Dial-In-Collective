@@ -1,0 +1,126 @@
+{
+  "kind": "ISSUE33_R122_ORIGINAL603_571_EXACT_CURRENT_SELECTED_SOURCE_REVIEW_DEVELOPMENT_ONLY",
+  "date_utc": "2026-11-11",
+  "authority": "Owner active Issue #33 original 603 current selected-product source certification; no publication",
+  "original_corpus": {
+    "count": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "path": "docs/audits/issue33-original603-source-level-adjudication-20261029.csv",
+    "git_blob_sha": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "modified": false,
+    "oracle_and_scorer_unchanged": true
+  },
+  "selected": {
+    "number": 571,
+    "name": "Brazil Capricornio Dulce Signature",
+    "official_url": "https://www.stageline.coffee/product-page/brazil-capricornio-dulce-signature",
+    "exact_selected_h1": true,
+    "source_scope": "Selected visible product detail, not SEO, related cards or generic brand history",
+    "direct_source": [
+      "50% naturally processed Yellow Catuai cherries",
+      "50% honey processed Mondo Novo cherries",
+      "Dulce is part of their signature series"
+    ],
+    "observed_parser": {
+      "name": "Brazil Capricornio Dulce Signature",
+      "origin": "Brazil",
+      "roaster": "Stage Line Coffee Roasters",
+      "variety": "yellow catuai, mondo novo",
+      "process": "Other/Unknown",
+      "producer": null,
+      "roast_level": null,
+      "tasting_notes": null,
+      "decaffeination_method": null
+    },
+    "reasoning": "Two component cherry-processing methods do not establish a single whole-product Natural or Honey process. Capricornio signature program is not a verified individual grower. No absent roast/flavor borrowed.",
+    "conflicts": [],
+    "seo_fallback_fields": [],
+    "selected_add_coffee_and_source_review": true
+  },
+  "initial_failure": {
+    "pr_head": "fabf0445e3056dba934ef1675d013e43fc422b1e",
+    "focused_ci_run": 43073848423,
+    "result": "FAILED 6/7 fixture-only",
+    "cause": "synthetic Wix /product-page fixture omitted real URL-bound Product JSON-LD and correctly triggered fail-closed ambiguous_or_missing_product",
+    "guarded_official_https": "SKIPPED",
+    "afterproof": "FAILED because source artifact was absent, not a merchant regression",
+    "fix": "exact product URL-bound schema.org Product object in the synthetic positive fixture; same-commit journal updated"
+  },
+  "reviewed_source": {
+    "pr": 2093,
+    "pr_url": "https://github.com/Schulzet3/The-Dial-In-Collective/pull/2093",
+    "corrected_head": "d04dfd7b1267672bbf20a0f0390518d7bf4b889e",
+    "merged_sha": "143c245a7ca621abdfc4db2500cba719916d7093",
+    "merged_tree_sha": "ed29eec06fae5edfdb6df74987335198b3e321db",
+    "merge_parent_sha": "6fb0381df7035bdbb2f6d2bcddfab6fe4bd3bb04",
+    "nonforce_single_parent": true,
+    "reviewed_merged_blob_identical": true,
+    "files": {
+      "scripts/audit/issue33-r122-571-check.mjs": "94ed52f59724e2a701ff598fa6c619a0ff1b9d96",
+      "tests/coffee-issue33-r122-571.test.mjs": "2e77a133f95f209b58e5235a4c049c942b0e2333",
+      ".github/workflows/issue33-r122-571.yml": "e6d731ff5f8ffb4e99bd8bfefb3e5390f3bffb55",
+      "docs/workstreams/ops-issue33-r122-571-20261111.md": "b28516b156532a071889dd6f83197a08e6158ae1"
+    }
+  },
+  "pr_head_verification": {
+    "focused": 43074076456,
+    "focused_result": "SUCCESS 7/7 exact selected current and actual parser",
+    "node_lint": 43074076618,
+    "node_lint_result": "SUCCESS",
+    "cloud_mobile": 43074076744,
+    "cloud_result": "SUCCESS",
+    "python": 43074076573,
+    "python_result": "SUCCESS",
+    "sql": 43074076424,
+    "sql_result": "SUCCESS",
+    "approval": 43074076719,
+    "approval_result": "SUCCESS",
+    "private_source": 43074076746,
+    "private_source_result": "SUCCESS",
+    "original_frozen603": 43074076766,
+    "original_frozen603_result": "SKIPPED_NOT_PASS"
+  },
+  "exact_merged_verification": {
+    "official_run": 43074806138,
+    "official_result": "SUCCESS 7/7 focused and guarded official selected HTTPS; afterproof true and failures empty; source_sha exact merge",
+    "artifact_id": 13880042655,
+    "artifact_zip_sha256": "f50b888bd210dac09e3435227ca84708f12f858abb35781cc1c074b4cd45c542",
+    "official_html_bytes": 1521152,
+    "official_html_sha256": "ab10de68f719ff86c4715dd800fa445d16553d2ecc26d12c941f6e0e32ca9ed4",
+    "focused_json_sha256": "15daf19a5e9bca879831d2bec22ff59fdc6589cd3cd1a55b44cedadf1b233808",
+    "afterproof_json_sha256": "720fc36bac2c2cfceeeaf8b13803ec63d2c8a59a21ba3048f156703a4e1af128",
+    "hashes_independently_verified": true,
+    "approval_run": 43074806182,
+    "approval_status": "SUCCESS",
+    "python_run": 43074806076,
+    "python_status": "SUCCESS",
+    "cloud_mobile_run": 43074806035,
+    "cloud_mobile_status": "SUCCESS",
+    "node_lint_run": 43074806086,
+    "node_lint_status_at_receipt": "IN_PROGRESS_UNVERIFIED",
+    "broad_public_run": 43074806139,
+    "broad_public_status": "SKIPPED_NOT_PASS",
+    "frozen603_full_suite": "NOT_PERFORMED"
+  },
+  "scope": {
+    "runtime_parser_changed": false,
+    "test_and_ci_guards_changed": true,
+    "release_queue_item_promotion": false,
+    "queue_sha_at_source_merge": "e00770924e2a2cb531847a6957d250b02c246e14",
+    "approval_matrix_sha": "3cdbcbc21376a9fec7a8c9a8b10a1fbddc8137e9",
+    "production_operations": 0,
+    "netlify_deployment": false,
+    "manual_all603_certified": false,
+    "issue33_stays_open": true,
+    "remaining_exceptions": [
+      566,
+      567,
+      594,
+      577,
+      578
+    ]
+  },
+  "next": "Verify exact merged Node/lint run final status and reconcile comment. Continue disjoint original selected source cases, adjudicate exceptions separately; preserve original corpus and all unrelated queue rows."
+}
