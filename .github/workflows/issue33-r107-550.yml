@@ -1,0 +1,50 @@
+name: DIC Issue33 R107 original603 selected 550
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r107-550.yml
+      - scripts/audit/issue33-r107-550-check.mjs
+      - tests/coffee-issue33-r107-550.test.mjs
+      - docs/workstreams/ops-issue33-r107-550-20261111.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r107-550.yml
+      - scripts/audit/issue33-r107-550-check.mjs
+      - tests/coffee-issue33-r107-550.test.mjs
+permissions:
+  contents: read
+jobs:
+  current-selected:
+    name: original603-550-current-official
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Focused positive and hostile selected-product tests
+        run: node --test tests/coffee-issue33-r107-550.test.mjs
+      - name: Guarded current public HTTPS product and actual parser / Add Coffee / Source Review
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '550'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r107
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict original-source current identity and provenance afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r107
+          DIC_ISSUE33_R107_VERIFY: '1'
+        run: node scripts/audit/issue33-r107-550-check.mjs
+      - name: Retain public selected source for one day without member data
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r107-550
+          path: /tmp/dic33-r107/
+          retention-days: 1
+          if-no-files-found: warn

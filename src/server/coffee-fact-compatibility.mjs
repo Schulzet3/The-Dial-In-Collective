@@ -102,6 +102,33 @@ export function compatibleCoffeeOrigins(first,second){
  * Never use a gazetteer to add a missing country, join a blend, or resolve
  * competing claims. Source facts retain the exact published text.
  */
+
+/**
+ * A complete source-printed locality/country can be followed by shorter
+ * duplicate place fragments collected from the same selected page.
+ * Remove only suffixes whose WHOLE names already occur in the first
+ * published locality. Preserve other regions, country disagreements,
+ * blended origins, first-source wording and conflict evidence.
+ */
+export function withoutRepeatedCoffeeOriginSuffix(value){
+ if(typeof value!=='string'||value.length>220)return value;
+ const parts=value.split(/\s*,\s*/u).map(p=>p.trim());
+ if(parts.length<3||parts.length>7||parts.some(p=>!p))return value;
+ const countries=parts.map((p,i)=>knownCountries.has(coffeeOriginParts(p)[0])&&coffeeOriginParts(p).length===1?i:-1)
+  .filter(i=>i>=0);
+ if(countries.length!==1)return value;
+ const at=countries[0];
+ if(at!==1||parts.length-at-1>3)return value;
+ const locality=parts[0].normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase();
+ const trailing=parts.slice(at+1);
+ if(!trailing.length||trailing.some(p=>{
+  if(!/^[\p{L}\p{M}'’-]{4,60}$/u.test(p))return true;
+  const target=p.normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase();
+  return !locality.split(/[^\p{L}\p{N}]+/u).includes(target);
+ }))return value;
+ return parts.slice(0,at+1).join(', ');
+}
+
 export function orderExplicitCoffeeOriginTuple(value){
  if(typeof value!=='string'||value.length>220)return value;
  const match=/^([\p{L}][\p{L}\s'-]{1,60})\s*·\s*([^·]{3,130})$/u.exec(value.trim());

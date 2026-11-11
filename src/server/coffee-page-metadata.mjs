@@ -18,7 +18,7 @@ import {interpretAgtron,agtronExplanation} from './agtron-roast.mjs';
 import {extractSelectedNextCoffeeProduct} from './coffee-next-selected-product.mjs';
 import {selectedCoffeeHeroFacts,selectedCurrentOriginCaption,hasIncompatibleCurrentTastingList} from './coffee-selected-product-hero.mjs';
 import {COFFEE_FIELD_ALIASES,extractSemanticCoffeeSpecs,withoutEducationalCoffeeGeography} from './coffee-semantic-specs.mjs';
-import {equivalentCoffeeVarieties,compatibleGenericCoffeeVarieties,explicitCoffeeVarietyRefinement,coffeeOriginParts,compatibleCoffeeOrigins,isCoffeeBroadOrigin,orderExplicitCoffeeOriginTuple} from './coffee-fact-compatibility.mjs';
+import {equivalentCoffeeVarieties,compatibleGenericCoffeeVarieties,explicitCoffeeVarietyRefinement,coffeeOriginParts,compatibleCoffeeOrigins,isCoffeeBroadOrigin,orderExplicitCoffeeOriginTuple,withoutRepeatedCoffeeOriginSuffix} from './coffee-fact-compatibility.mjs';
 import {equivalentCoffeeProductNames,preferredCoffeeRoasterName,selectedCoffeeNameWithoutPrice} from './coffee-product-identity.mjs';
 import {isolateCoffeeIdentityCohorts} from './coffee-source-identity-scope.mjs';
 import {extractCoffeeGeographyEntityRoles,cleanCoffeeGeographyEntityPrefix} from './coffee-geography-entity-roles.mjs';
@@ -2024,7 +2024,7 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
  }
  // Literal country-first middle-dot captions are equivalent when they have
  // one explicit country and a bounded named locality. Keep original source facts.
- if(fields.origin&&!conflicts.has('origin'))fields.origin=orderExplicitCoffeeOriginTuple(fields.origin);
+ if(fields.origin&&!conflicts.has('origin'))fields.origin=withoutRepeatedCoffeeOriginSuffix(orderExplicitCoffeeOriginTuple(fields.origin));
  // Dated cooperative histories (e.g. a transition to washed coffee in
  // 2010) are not a statement of the currently selected lot's process.
  // Preserve the source record but do not promote old history to the field.
