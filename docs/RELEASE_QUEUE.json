@@ -12409,6 +12409,28 @@
       ],
       "notes": "Release42 candidate must pin src/server/coffee-page-metadata.mjs to exact READY #33 R107 blob 0210df1b1381da01acb3b7a0f7ba56a2b7955f2e. Preserve current R117 work and its tests in development; exclude issue-scoped tests/coffee-issue33-r117-metadata-only.test.mjs from isolated release candidate only. No source rollback, database/provider writes, or R117 READY promotion.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-33-r123-573-trailing-flavor-unready",
+      "issue": 33,
+      "pr": null,
+      "title": "Current selected coffee #573 trailing-flavor source parser correction (R123), independently pending READY and excluded from frozen READY42",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": "64a864285bf0614cf165d2c2a0ac32f7961478e0",
+      "scope_paths": [
+        "src/server/coffee-selected-description-sensory.mjs",
+        "src/server/coffee-page-metadata.mjs"
+      ],
+      "owner_source": "Issue #33 R123 exact current-source selected #573, merged after READY42 staging source; still not in owner-approved 42 READY batch.",
+      "tests": [
+        "R123 12 synthetic positive and hostile tests in tests/coffee-issue33-r123-573.test.mjs and guarded official workflow, same-commit journal. Merged source 64a864285bf0614cf165d2c2a0ac32f7961478e0, CI and original evidence separately owned."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Source not included in owner-frozen 42 READY selection; current source merges after staging and must not be shipped in READY42."
+      ],
+      "notes": "Concurrent post-candidate development drift added src/server/coffee-selected-description-sensory.mjs. One-use release controller denied request DIC-20261111-READY42-29 before claim at run 43086223913 due missing explicit IN_PROGRESS path owner. Register source accurately; retain code and tests on development. The staged candidate source is immutable and retains only previously selected READY merge blobs; no deployment/publication from this record. Prior grant remains unused after independent release and Netlify readback.",
+      "production_deployed": false
     }
   ],
   "history": [
