@@ -3939,6 +3939,17 @@
       "receipt_path": "docs/audits/issue509-run179-exact-source-ci-closure-2026-11-11.json",
       "production_writes": 0,
       "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-11",
+      "event": "RUN180_CURRENT_PLATFORM_FULL_SOURCE_AND_EFFECTIVE_ROLE_ACL",
+      "source_parent_sha": "8143f6f59ca92c4468ba88579f187f03a2b91c44",
+      "receipt_path": "docs/audits/issue509-platform-function-current-source-acl-2026-11-11-run180.json",
+      "provider_functions_current": 48,
+      "direct_full_sql_reaudited": 32,
+      "hash_matches_prior": 39,
+      "provider_writes": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -17908,5 +17919,63 @@
     "production_writes": 0,
     "baseline_complete": false,
     "closure_own_ci": "RECHECK_SEPARATELY"
+  },
+  "provider_platform_function_acl_reaudit_run180": {
+    "status": "CURRENT_PLATFORM_FUNCTION_SOURCE_ROLE_REAUDIT_32_OF_48",
+    "development_parent_sha": "8143f6f59ca92c4468ba88579f187f03a2b91c44",
+    "receipt_path": "docs/audits/issue509-platform-function-current-source-acl-2026-11-11-run180.json",
+    "total": 48,
+    "direct_source_this_run": 32,
+    "source_chars": 48326,
+    "source_whitespace_words": 4780,
+    "hash_match_prior": 39,
+    "hash_mismatch": 9,
+    "per_schema": {
+      "auth": {
+        "total": 4,
+        "source_reaudited": 4,
+        "anon_schema_and_exec": 4,
+        "authenticated_schema_and_exec": 4
+      },
+      "graphql_public": {
+        "total": 1,
+        "source_reaudited": 1,
+        "anon_schema_and_exec": 1,
+        "authenticated_schema_and_exec": 1
+      },
+      "pgbouncer": {
+        "total": 1,
+        "source_reaudited": 1,
+        "anon_schema_and_exec": 0,
+        "authenticated_schema_and_exec": 0
+      },
+      "realtime": {
+        "total": 18,
+        "source_reaudited": 18,
+        "anon_schema_and_exec": 18,
+        "authenticated_schema_and_exec": 18
+      },
+      "storage": {
+        "total": 19,
+        "source_reaudited": 8,
+        "anon_schema_and_exec": 19,
+        "authenticated_schema_and_exec": 19
+      },
+      "vault": {
+        "total": 5,
+        "source_reaudited": 0,
+        "anon_schema_and_exec": 0,
+        "authenticated_schema_and_exec": 0
+      }
+    },
+    "stored_migrations": 64,
+    "edge_active": 3,
+    "new_first_time_source_words": 0,
+    "issue267_lines": 0,
+    "new_verified_defects": 0,
+    "code_fixes": 0,
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "next": "First newly applied stored migration #65 or changed source if any; otherwise vendor function ordinal #33 storage.get_common_prefix, then #34-48 full-source progressive re-audit."
   }
 }
