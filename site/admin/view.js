@@ -15,7 +15,7 @@ export function renderAdminAttention(stats={}){
  return '<section class="admin-panel admin-attention" aria-labelledby="admin-attention-heading">'
   +'<div class="admin-attention-header"><h2 id="admin-attention-heading">Requires Your Attention</h2><span class="admin-attention-count" role="status" aria-live="polite" aria-label="Items requiring attention">'+formatCount(a+b+c+d)+'</span></div>'
   +'<p class="helper">Ready account approvals '+formatCount(a)+' · Coffee reviews '+formatCount(b)+' · Conflicts '+formatCount(c)+' · Unfinished deletions '+formatCount(d)+'</p>'
-  +'<button type="button" class="ghost compact" data-action="enable-admin-notifications">Enable browser alerts while Admin is open</button></section>';
+  +'<div class="admin-member-actions"><button type="button" class="ghost compact" data-action="enable-admin-push">Enable Push Alerts</button><button type="button" class="ghost compact" data-action="disable-admin-push">Disable Push Alerts</button></div><p class="helper">On iPhone, open the Home Screen app and allow notifications once. Alerts can arrive when Admin is closed.</p></section>';
 }
 export function renderPendingSignups(page={},fallback=null){
  const loaded=Array.isArray(page?.items)&&!page.error,items=loaded?page.items:[],total=loaded?page.total:fallback;
