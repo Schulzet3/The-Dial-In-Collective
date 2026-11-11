@@ -56,12 +56,36 @@ function validRecordedTemperature(value){
  const [low,high]=CONFIG.bounds.tempC;
  return finite(value)&&value>=low&&value<=high;
 }
+// Recovered all-green History remains immutable. A recipe family's measured
+// ratios/times cannot be established by explicitly impossible recorded
+// grinder/temperature controls. Prefer the shot's original calibration snapshot
+// over today's active dial range; old calibrated ranges are not interchangeable.
+// Missing optional legacy controls remain eligible for their measured ratio.
+function familyEvidenceShots(s,shots) {
+ const byVersion=new Map((s.setups||[]).flatMap(set=>set.versions||[]).map(v=>[v.id,v]));
+ return measuredRecipeShots(shots).filter(sh=>{
+  if(sh.tempC!=null&&!validRecordedTemperature(sh.tempC))return false;
+  if(sh.grindSetting==null)return true;
+  if(!finite(sh.grindSetting)||sh.grindSetting<0)return false;
+  const version=byVersion.get(sh.setupVersionId);
+  const calibration=version?.calibrations?.find(c=>c.id===sh.calibrationId);
+  const fromSnapshot=sh.snapshot;
+  const low=finite(fromSnapshot?.grinderMin)?fromSnapshot.grinderMin:
+   finite(calibration?.min)?calibration.min:
+   sh.calibrationId===version?.calibrationId?version?.grinderMin:null;
+  const high=finite(fromSnapshot?.grinderMax)?fromSnapshot.grinderMax:
+   finite(calibration?.max)?calibration.max:
+   sh.calibrationId===version?.calibrationId?version?.grinderMax:null;
+  if(finite(low)&&finite(high)&&high<=low)return false;
+  return (!finite(low)||sh.grindSetting>=low)&&(!finite(high)||sh.grindSetting<=high);
+ });
+}
 export function familyStats(s,id) {
  const historical=familyShots(s,id);if(!historical.length)return null;
- const shots=measuredRecipeShots(historical);
+ const shots=familyEvidenceShots(s,historical);
  return {ratio:stats(shots.map(x=>x.yieldG/x.doseG),{singleWidth:1/(mean(shots.map(x=>x.doseG))||18)}),time:stats(shots.map(x=>x.timeS),{singleWidth:2}),count:shots.length,confirmed:shots.length>=2};
 }
-export function familiesFor(s,coffeeId,style) {return s.families.filter(f=>f.coffeeId===coffeeId&&f.style===style&&measuredRecipeShots(familyShots(s,f.id)).length);}
+export function familiesFor(s,coffeeId,style) {return s.families.filter(f=>f.coffeeId===coffeeId&&f.style===style&&familyEvidenceShots(s,familyShots(s,f.id)).length);}
 export function assignFamily(s,shot) {
  const ratio=shot.yieldG/shot.doseG;
  let best=null,dist=Infinity;
@@ -92,7 +116,7 @@ function recipeHardwareTier(sh,version,basket,feed){
 }
 export function chooseRecipeFamily(s,coffeeId,style,version,basket,feed,p=coffeeState(s,coffeeId)){
  const options=familiesFor(s,coffeeId,style).map(f=>{
-  const shots=measuredRecipeShots(familyShots(s,f.id).filter(sh=>sh.coffeeId===coffeeId&&sh.style===style));
+  const shots=familyEvidenceShots(s,familyShots(s,f.id).filter(sh=>sh.coffeeId===coffeeId&&sh.style===style));
   if(!shots.length)return null;
   const tier=Math.max(...shots.map(sh=>recipeHardwareTier(sh,version,basket,feed)));
   const matched=shots.filter(sh=>recipeHardwareTier(sh,version,basket,feed)===tier);
