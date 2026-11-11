@@ -913,6 +913,11 @@ export function makeCurrent(s,shotId) {
   throw new Error('Choose a shot with a valid recorded grinder setting for this setup.');
  if(sh.tempC!=null&&!validRecordedTemperature(sh.tempC))
   throw new Error('Choose a shot with a valid recorded temperature.');
+ // A historical all-green row must be physically possible on its ORIGINAL
+ // grinder calibration, not only within today's active espresso range.
+ // Preserve the original shot/notes even when it cannot become Current.
+ if(!familyEvidenceShots(s,[sh]).length)
+  throw new Error('Choose a shot with a valid recorded original grinder calibration.');
  // Do not store a phantom currentFamilies/favoriteShots key for malformed
  // imported all-green rows missing their historical recipe-family identity.
  if(typeof sh.familyId!=='string'||!sh.familyId.trim())throw new Error('Choose a shot with an assigned recipe family. The original history remains unchanged.');

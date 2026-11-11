@@ -13,11 +13,17 @@ const isMeasuredRecipeShot=shot=>['doseG','yieldG','timeS'].every(field=>{
 // remains visible in private History, but cannot be offered as Current.
 // Use the active calibration when provided; legacy missing optionals stay valid.
 const recordedControlsUsable=(shot,grinderMin=null,grinderMax=null)=>{
- const low=finite(grinderMin)?grinderMin:shot.snapshot?.grinderMin;
- const high=finite(grinderMax)?grinderMax:shot.snapshot?.grinderMax;
+ const originalLow=shot.snapshot?.grinderMin,originalHigh=shot.snapshot?.grinderMax;
+ const low=finite(grinderMin)?grinderMin:originalLow;
+ const high=finite(grinderMax)?grinderMax:originalHigh;
  const grind=shot.grindSetting;
+ // The active dial bounds do not certify an archived shot's original scale.
+ // Preserve legacy rows with no saved optional original limits.
  if(grind!=null&&(!finite(grind)||grind<0||
-    (finite(low)&&grind<low)||(finite(high)&&grind>high)))return false;
+    (finite(low)&&grind<low)||(finite(high)&&grind>high)||
+    (finite(originalLow)&&grind<originalLow)||
+    (finite(originalHigh)&&grind>originalHigh)||
+    (finite(originalLow)&&finite(originalHigh)&&originalHigh<=originalLow)))return false;
  const temp=shot.tempC;
  return temp==null||(finite(temp)&&temp>=CONFIG.bounds.tempC[0]&&temp<=CONFIG.bounds.tempC[1]);
 };
