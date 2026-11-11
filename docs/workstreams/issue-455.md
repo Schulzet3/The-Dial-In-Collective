@@ -1,3 +1,9 @@
+## 2026-11-11 UTC - R455-181 primary origin/CATA evidence review [skip netlify]
+
+Original publisher Fitri et al. (2025) DOI 10.48130/bpr-0024-0040 directly reviewed: 18g grounds to 36mL beverage is not a measured 1:2 mass ratio, and 30 consumer/21 descriptor CATA across three origins and milk/sugar formulas cannot set DIC five personal taste scores or a one-variable espresso correction. Current development 4d4e8f16 engine/model/constants code crosschecked. Ledgers now 96 source identities / 278 checks / 142 proposals. Boundaries and missing PDF/raw data detailed in ops-issue455-r181-fitri-espresso-cata-20261111.md. No app bug evidenced, no tests run, release queue unchanged, no Locked/production changes; original S019 inaccessible and #267 literal line credit zero. Documentation PR CI and nonforce merge pending.
+
+---
+
 ## November 11, 2026 UTC — #455 R455-180 docs-only READY reconciliation [skip netlify]
 
 Base development `cbf95b0baf00d80d0f7c90ee4045122e19785ca9` after source/test PR #2001 code merge `cbf95b0baf00d80d0f7c90ee4045122e19785ca9`. Verified exact head Node22/lint 42973918046 and merged Node22/lint 42974204108 **3767 PASS / 0 FAIL / six intentional SKIP**, all six new R180 negative/positive tests PASS. Head UX/mobile/offline 42973917853, isolated SQL/security 42973917961/42973917921, governance 42973918139 and merged UX 42974204074 / governance 42974204066 SUCCESS. Frozen603 42973918022 SKIPPED (not pass). Engine/test/first same-commit journal original and merged Git blobs identical. No observed real member impact claimed.
