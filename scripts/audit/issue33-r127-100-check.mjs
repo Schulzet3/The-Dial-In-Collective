@@ -25,7 +25,7 @@ export function selected127CurrentSource(html){
    chosenOrigin:has('Guatemala coffee from Joyabaj, Quiché'),
    honeyProcessing:has('honey-processed')&&has('depulped and dried with fruit mucilage'),
    elevation:has('1,300 and 2,000 meters'),
-   tastes:['cherry','malt','anise','cinnamon'].every(s=>has(s)),
+   tastes:has('tasting notes of cherry, malt, anise, and cinnamon'),
    explicitlyLight:has('Light roast and Honey Process')
   },selectedSourceHash:sha(Buffer.from(html||''))};
 }
@@ -47,7 +47,7 @@ if(process.env.DIC_ISSUE33_R127_VERIFY==='1'){
  check(r.status==='FETCHED'&&r.parser_ok===true,'real_guarded_official_source_and_parser');
  check(r.official_url===selected127.url&&r.final_url===selected127.url&&r.archived_coffee===selected127.name,
   'exact_original_chosen_url_and_identity');
- check(html&&sha(html)===r.html_sha256&&html.length===r.html_bytes,'raw_official_html_bound_sha');
+ check(html&&sha(html)===r.html_sha256&&Buffer.byteLength(html)===r.html_bytes,'raw_official_html_bound_sha');
  check(d.exactSelectedHeading&&r.selected_heading_identity_verified===true,'visible_selected_product_h1');
  check(Object.values(d.direct).every(Boolean),'selected_direct_origin_process_elevation_flavors_roast');
  check(r.add_coffee_ui_rendered===true&&r.source_review_rendered===true,
