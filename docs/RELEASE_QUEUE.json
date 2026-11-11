@@ -11889,6 +11889,38 @@
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "Narrow development READY only; no deployment. Full original 603 review incomplete, #566/#567/#594 source failures known unchanged; #267 V2/#96 separate; CSV/oracle/scorer and production/member/SQL/Auth/Edge/provider data untouched.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-green-timestamp-evidence-veto",
+      "issue": 455,
+      "pr": 1968,
+      "title": "Do not let undated or malformed imported five-green history suppress feedback from the most recent valid rated shot",
+      "state": "READY",
+      "merged_source_sha": "ef669d3dd6203e206421e4f5858678da3eeab706",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Exact R176 head Node22/lint/build 42948148001 SUCCESS: 3,711 PASS / 0 FAIL / 6 intentional SKIP; all five new synthetic positive/negative groups 3061–3065 PASS.",
+        "Head UX/mobile/Chromium/offline/cloud 42948148190, isolated SQL 42948148069, security 42948148029 and owner/continuity governance 42948148012 SUCCESS. Frozen603 42948148154 SKIPPED, never PASS.",
+        "PR #1968 exact head b1fd7a4bb95c1d57b7cfbdf001cba57b75fe61aa safely nonforce squash merged ef669d3dd6203e206421e4f5858678da3eeab706; four tested/head and merged Git source blobs independently identical, no removed/foreign paths.",
+        "Exact merged Node22/lint/build 42948528889 SUCCESS, 3,711 PASS / 0 FAIL / 6 intentional SKIP and all five R176 groups PASS; merged UX/mobile/browser/offline 42948528837 and governance 42948528998 SUCCESS.",
+        "No production member browser evidence or observed cup-quality efficacy; no new numeric rule, historical-row mutation, or owner policy choice."
+      ],
+      "ci_runs": [
+        42948148001,
+        42948148190,
+        42948148069,
+        42948148029,
+        42948148012,
+        42948528889,
+        42948528837,
+        42948528998
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Owner Option B SAFE parity of existing valid chronological evidence eligibility for green veto vs latest measured rated shot. Five taste inputs, valid all-green status, one controllable recommendation, private shot/history/notes, separate styles/feed/grinder calibration and no new source-driven science preserved. Development READY only; no deploy, main/release move, live provider/SQL/Auth/Edge/member writes, forced Git or repo visibility change.",
+      "production_deployed": false
     }
   ],
   "history": [
@@ -13134,6 +13166,15 @@
       "state": "READY",
       "source_sha": "44768f845009a47f6e088790cb19dcde8a3fdf87",
       "evidence": "docs/audits/issue33-r104-542-selected-current-verified-20261111.json",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-green-timestamp-evidence-veto",
+      "state": "READY",
+      "source_sha": "ef669d3dd6203e206421e4f5858678da3eeab706",
+      "evidence": "docs/workstreams/issue-455.md",
       "production_deployed": false
     }
   ],
