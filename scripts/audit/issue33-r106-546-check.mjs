@@ -34,6 +34,30 @@ export function selectedProof(html,headings=selectedProductHeadings(productMarku
  return {uniqueH1:headings.length===1&&fold(headings[0])===fold(chosen.name),
   direct:chosen.direct.map(x=>own.includes(fold(x)))};
 }
+
+// Real pages interleave merchant text among markup and responsive UI. Assert
+// actual selected-product HTML source facts with exact field labels/sections,
+// never rely on one concatenated regex over arbitrary template markup.
+export function selectedCurrentHtmlFactProof(facts,sourceUrl){
+ const own=Array.isArray(facts)?facts.filter(f=>f.source_type==='html'&&f.source_url===sourceUrl&&f.conflicting!==true):[];
+ const literal=(label,section,term)=>own.some(f=>f.label===label&&f.section===section&&fold(f.value).includes(fold(term)));
+ const prose=own.filter(f=>f.label==='Published product text'&&f.section==='').map(f=>f.value).join(' ');
+ const direct=[
+  fold(prose).includes(fold('Sourced from Finca Berlin')),
+  fold(prose).includes(fold('producer Alfredo Rojas')),
+  fold(prose).includes(fold('anaerobic honey')),
+  literal('Tasting Notes','Tasting Notes','Fresh Coffee Cherry'),
+  literal('Tasting Notes','Tasting Notes','Dried Cascara'),
+  literal('Tasting Notes','Tasting Notes','Mellow Cocoa'),
+  literal('Tasting Notes','Tasting Notes','Warm Spice'),
+  literal('Region','Origin Details','Junín Municipality, Táchira State'),
+  literal('Elevation','Origin Details','1100 MASL'),
+  literal('Variety','Origin Details','Monte Claro'),
+  literal('Process','Origin Details','Anaerobic Honey'),
+  literal('Roast Level','Roast Level','Medium Roast')
+ ];
+ return {direct,uniqueLiteralCount:direct.filter(Boolean).length,sectionBound:true};
+}
 if(process.env.DIC_ISSUE33_R106_VERIFY==='1'){
  const dir=resolve(process.env.DIC_ISSUE33_FOCUSED_PUBLIC_DIR||'.');
  mkdirSync(dir,{recursive:true});
@@ -52,7 +76,8 @@ if(process.env.DIC_ISSUE33_R106_VERIFY==='1'){
  check(r.status==='FETCHED'&&r.parser_ok===true&&r.selected_heading_identity_verified===true,'real_bounded_guarded_HTTPS_parser_H1_identity');
  check(Boolean(raw)&&r.html_bytes===raw?.length&&r.html_sha256===sha(raw),'raw_selected_HTML_byte_hash');
  const proof=selectedProof(raw?.toString('utf8')||'');
- check(proof.uniqueH1&&proof.direct.every(Boolean),'exact_current_H1_and_printed_selected_facts');
+ const factProof=selectedCurrentHtmlFactProof(r.source_facts,'https://'+chosen.host+chosen.path);
+ check(proof.uniqueH1&&factProof.direct.every(Boolean),'current_H1_and_exact_section_bound_selected_HTML_facts');
  check(fold(f.name)===fold(chosen.name),'original_coffee_name_retained');
  check(r.add_coffee_ui_rendered===true&&r.source_review_rendered===true,'actual_Add_Coffee_and_Source_Review');
  check(fold(f.origin).includes('tachira')&&fold(f.origin).includes('venezuela'),'exact_provenance_country_region');
@@ -67,7 +92,7 @@ if(process.env.DIC_ISSUE33_R106_VERIFY==='1'){
  const out={source_sha:report?.source_sha,case:546,passed:failures.length===0,failures,
   current_html_sha256:r.html_sha256||null,source_evidence_sha256:bytes?sha(bytes):null,
   url:r.final_url||null,current_selected_h1:r.selected_h1||[],
-  selected_proof:proof,fields:f,conflicts:r.conflicts||[],
+  selected_proof:proof,selected_html_fact_proof:factProof,fields:f,conflicts:r.conflicts||[],
   source_facts:(r.source_facts||[]).slice(0,25),manual_certified:0,production_operations:0};
  writeFileSync(join(dir,'r106-546-afterproof.json'),JSON.stringify(out,null,2)+'\n');
  console.log('[DIC33 R106 EXACT CURRENT ORIGINAL546] '+JSON.stringify(out));

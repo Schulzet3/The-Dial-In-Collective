@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {chosen,selectedProof} from '../scripts/audit/issue33-r106-546-check.mjs';
+import {chosen,selectedProof,selectedCurrentHtmlFactProof} from '../scripts/audit/issue33-r106-546-check.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
 const url='https://'+chosen.host+chosen.path;
 const current='Sourced from Finca Berlin in the mountains of Táchira State, this exceptional microlot from producer Alfredo Rojas showcases the innovation and resurgence of Venezuelan specialty coffee. Processed using an anaerobic honey method. In the cup, vibrant notes of fresh coffee cherry and dried cascara lead the way, layered with mellow cocoa and warm spice.';
@@ -37,4 +37,37 @@ test('current selected four explicit notes are retained and recurring harvest ca
  assert.equal(p.ok,true,JSON.stringify(p));assert.equal(p.fields.name,chosen.name);
  assert.ok(['fresh coffee cherry','dried cascara','mellow cocoa','warm spice'].every(t=>String(p.fields.tasting_notes||'').toLowerCase().includes(t)),JSON.stringify(p.fields));
  assert.doesNotMatch(String(p.fields.release_label||''),/September.*January/i);
+});
+
+
+test('merchant fact proof requires exact current source URL, labeled product sections and literal seller claims',()=>{
+ const make=(label,section,value)=>({label,section,value,source_type:'html',source_url:url,conflicting:false});
+ const facts=[
+  make('Published product text','','Sourced from Finca Berlin in the mountains of Táchira State, this exceptional microlot from producer Alfredo Rojas is Processed using an anaerobic honey method.'),
+  make('Tasting Notes','Tasting Notes','Fresh Coffee Cherry, Dried Cascara, Mellow Cocoa, Warm Spice'),
+  make('Region','Origin Details','Junín Municipality, Táchira State'),
+  make('Elevation','Origin Details','~1100 MASL'),
+  make('Variety','Origin Details','Monte Claro'),
+  make('Process','Origin Details','Anaerobic Honey'),
+  make('Roast Level','Roast Level','Medium Roast')
+ ];
+ const good=selectedCurrentHtmlFactProof(facts,url);
+ assert.equal(good.uniqueLiteralCount,12,JSON.stringify(good));
+ for(const altered of [
+  facts.map(f=>({...f,source_url:'https://other.example/products/other-coffee'})),
+  facts.map(f=>({...f,source_type:'meta'})),
+  facts.map(f=>({...f,section:f.section==='Tasting Notes'?'Recommended products':f.section})),
+  facts.map(f=>({...f,value:f.value.replaceAll('Alfredo Rojas','Other grower').replaceAll('Mellow Cocoa','Roasted Fruit')}))
+ ]){
+  assert.ok(selectedCurrentHtmlFactProof(altered,url).uniqueLiteralCount<12);
+ }
+});
+test('selected named flavor list outranks secondary merchant category even when both remain visible as review facts',()=>{
+ const facts=[
+  {label:'Flavors',section:'Brewing Recommendations',value:'Chocolate, Spice, Roasted Fruit',source_type:'html',source_url:url},
+  {label:'Tasting Notes',section:'Tasting Notes',value:'Fresh Coffee Cherry, Dried Cascara, Mellow Cocoa, Warm Spice',source_type:'html',source_url:url}
+ ];
+ const p=selectedCurrentHtmlFactProof(facts,url);
+ assert.equal(p.direct.slice(3,7).filter(Boolean).length,4);
+ assert.equal(p.uniqueLiteralCount,4);
 });
