@@ -5,6 +5,8 @@ on:
     paths:
       - .github/workflows/issue33-r117-577-578.yml
       - scripts/audit/issue33-original603-focused-source-review.mjs
+      - src/server/coffee-page-metadata.mjs
+      - tests/coffee-issue33-r117-metadata-only.test.mjs
       - docs/workstreams/ops-issue33-r117-577-578-20261111.md
   push:
     branches: [development/backend-foundation]
@@ -23,11 +25,18 @@ jobs:
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: '22'
-      - name: Bounded selected original 577 and 578 current official HTTPS and actual parser
+      - name: Focused actual-parser positive and negative client-shell cases
+        run: node --test tests/coffee-issue33-r117-metadata-only.test.mjs
+      - name: Guarded original URLs, with expected identity rejection captured honestly
         env:
           DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '577,578'
           DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r117
-        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+        run: |
+          set +e
+          node scripts/audit/issue33-original603-focused-source-review.mjs
+          status=$?
+          printf 'DIC_ISSUE33_R117_REVIEWER_STATUS=%s\n' "$status" >> "$GITHUB_ENV"
+          exit 0
       - name: Fail closed on unverified identity while preserving complete evidence
         if: always()
         env:
@@ -35,6 +44,8 @@ jobs:
         run: |
           node --input-type=module <<'NODE'
           import {readFileSync,writeFileSync} from 'node:fs';
+          import {createHash} from 'node:crypto';
+          const sha=b=>createHash('sha256').update(b).digest('hex');
           import {join} from 'node:path';
           const dir=process.env.DIC_ISSUE33_FOCUSED_PUBLIC_DIR;
           const failures=[];let report=null;
@@ -44,21 +55,24 @@ jobs:
             if(report.original603_register_sha256!=='2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353')failures.push('original_register_modified');
             if(JSON.stringify(report.case_numbers)!=='[577,578]'||report.records?.length!==2)failures.push('wrong_original_cases');
             if(report.original_corpus_modified!==false||report.manual_certified!==0||report.production_operations!==0)failures.push('false_certification_or_mutation');
+            if(process.env.DIC_ISSUE33_R117_REVIEWER_STATUS!=='1')failures.push('expected_raw_source_identity_rejection_missing');
             for(const r of report.records||[]){
               const prefix=String(r.number);
               if(r.status!=='FETCHED')failures.push(prefix+'_not_currently_reachable');
-              if(r.parser_ok!==true)failures.push(prefix+'_parser_unavailable');
-              if(r.selected_heading_identity_verified!==true)failures.push(prefix+'_selected_identity_unverified');
+              if(r.parser_ok!==false||r.parser_reason!=='ambiguous_or_missing_product')failures.push(prefix+'_metadata_only_not_rejected');
+              if(r.selected_heading_identity_verified!==false)failures.push(prefix+'_missing_selected_heading_not_preserved');
               if(r.final_url!==r.official_url)failures.push(prefix+'_exact_original_url_mismatch');
-              if(r.add_coffee_ui_rendered!==true||r.source_review_rendered!==true)failures.push(prefix+'_review_missing');
+              if(r.add_coffee_ui_rendered===true||r.source_review_rendered===true||Object.keys(r.current_fields||{}).length)failures.push(prefix+'_unverified_fields_or_ui_exposed');
+              try{if(sha(readFileSync(join(dir,'case-'+r.number+'.html')))!==r.html_sha256)failures.push(prefix+'_raw_html_hash_mismatch');}
+              catch{failures.push(prefix+'_html_artifact_missing');}
             }
           }
-          const result={source_sha:process.env.GITHUB_SHA,kind:'R117_INTAKE_ONLY_NOT_SEMANTIC_CERTIFICATION',
+          const result={source_sha:process.env.GITHUB_SHA,kind:'R117_METADATA_ONLY_SAFELY_REJECTED_NOT_SELECTED_CERTIFIED',
             passed:failures.length===0,failures,
             records:(report?.records||[]).map(r=>({number:r.number,name:r.archived_coffee,
               url:r.official_url,status:r.status,final_url:r.final_url||null,
               h1:r.selected_h1||[],form_h2:r.selected_form_h2||[],page_h2:r.selected_page_h2||[],
-              embedded:r.selected_embedded_product_identity||null,identity_ok:r.selected_heading_identity_verified===true,
+              embedded:r.selected_embedded_product_identity||null,identity_ok:r.selected_heading_identity_verified===true,parser_reason:r.parser_reason||null,
               html_sha256:r.html_sha256||null,html_bytes:r.html_bytes||null,
               actual_fields:r.current_fields||{},conflicts:r.conflicts||[],seo_fallback_fields:r.seo_fallback_fields||[],
               source_facts:(r.source_facts||[]).slice(0,25)}))};
