@@ -1577,9 +1577,18 @@ export function extractPublicCoffeeFacts(html,{source_url}={}){
   // and is retained for human review, never auto-added as direct tasting notes.
   // Pages WITHOUT a substantive selected narrative keep their existing
   // identity-matched metadata fallback; directly printed notes still prevail.
-  const currentSelectedStory=productCoffeeProse(canonicalProduct,clean)
+  const currentSelectedProse=productCoffeeProse(canonicalProduct,clean);
+  // Selected H1 identifies its immediately scoped product description even
+  // when the roaster writes "This coffee comes from ..." instead of repeating
+  // the product name in each paragraph. Never infer that a generic roaster
+  // story or a different related-product card describes the chosen lot.
+  const currentHeadings=currentSelectedProse.filter(block=>block.tag==='h1')
+   .map(block=>keyOf(block.text));
+  const exactSelectedHeading=currentHeadings.length===1&&currentHeadings[0]===keyOf(fields.name);
+  const currentSelectedStory=currentSelectedProse
    .filter(block=>block.tag==='p'&&!block.educational&&block.text.length>=120&&
-    keyOf(block.text).includes(keyOf(fields.name))&&
+    (keyOf(block.text).includes(keyOf(fields.name))||
+     (exactSelectedHeading&&/\bthis\s+(?:coffee|lot)\b/iu.test(block.text)))&&
     /\bcoffee\b/iu.test(block.text)&&
     /\b(?:washed|natural|honey|anaerobic|region|producer|farms?|farmers?|grown|processed)\b/iu.test(block.text))
    .map(block=>block.text).join(' ');
