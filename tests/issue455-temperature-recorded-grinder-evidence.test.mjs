@@ -24,7 +24,7 @@ function context(){
  return {s,v,make,rec};
 }
 test('R174 invalid explicit archived grinder cannot seed personal temperature',()=>{
- for(const invalid of [-1,Infinity,'2',0,999]){
+ for(const invalid of [-1,Infinity,NaN,'2',999]){
   const f=context();f.s.shots.push(f.make('invalid',{grindSetting:invalid}));
   const before=structuredClone(f.s),r=f.rec();
   assert.equal(r.tempC,95,String(invalid));

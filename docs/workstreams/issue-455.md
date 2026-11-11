@@ -1,3 +1,7 @@
+### R455-174 pre-CI fixture correction — same source PR [skip netlify]
+
+Directly inspected `tests/cloud-fixtures/raw.js` on authored PR HEAD `fced2eca4967e4c3e9699cb0b6c3d9900eac2245`: its valid finest grinder is **0** and coarsest is 5. The initial negative test mistakenly listed zero as impossible. Replaced that invalid scenario with explicit NaN, preserving the separate inclusive-endpoint positive regression; **this is a test-only correction before any test success is claimed**. Original R174 engine/ledger unchanged. New exact test CI and PR-head readback required; no production, database, Locked, visibility or deployment action.
+
 ## November 10–11, 2026 UTC — #455 R455-174 historical explicit-grinder temperature evidence [skip netlify]
 
 **AUTHORING RECEIPT; PR / CI / MERGE UNVERIFIED.** Original development SHA `5f480a3d8aa3a0fc040df503f334b52d9a50266f`, engine blob `b69c8698137a615e29a3affe80d1605fd31d2e6a`, research ledger blob `1d7f0ebead9c49aa8e0bd2aebe8f127008d4d267`, scoped journal blob `d656cba271a5a8b35c54aa801a73038a3e4169a2`. Main `11e1e8c7c36dad488519476d8a969bb682915d31`; release/production `a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0`. Current AGENTS, ai entrypoint/PREFLIGHT, Master/Decision owner Locked supersessions, current status/approval/queue/register, #455/#335/#267/#33/#96 and concurrent PRs read. Owner-authorized temporary PUBLIC repository #630 unchanged. Drive, Space and Library searches do not recover standalone S019; separate slow-feed PDF is NOT equivalent; no #267 line-audit credit.
