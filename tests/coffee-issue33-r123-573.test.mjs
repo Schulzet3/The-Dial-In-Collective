@@ -58,7 +58,9 @@ test('direct selected current cup statement restores literal orange bitters afte
 test('unselected recommendations, navigation, metadata and missing H1 cannot supply trailing flavor',()=>{
  assert.equal(refine(page('<p>We taste fresh plum and florals.</p>',selected123.name,
   '<aside>'+prose+'</aside><nav>'+prose+'</nav><footer>'+prose+'</footer>')),'');
- assert.equal(refine(page(prose,'Former coffee Wate')),'');
+ // Product-identity verification belongs to the outer selected-product guard;
+ // this generic helper must remain valid for other coffees with their own H1.
+ assert.equal(direct123(page(prose,'Former coffee Wate')).uniqueH1,false);
  assert.equal(refine(page().replace('</h1>','</h1><h1>Another coffee</h1>')),'');
 });
 test('conditional serving, earlier harvest and mismatched canonical prefix reject current trailing notes',()=>{
