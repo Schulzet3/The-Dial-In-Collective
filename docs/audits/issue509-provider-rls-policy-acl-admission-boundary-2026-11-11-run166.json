@@ -1,0 +1,1202 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 166,
+  "project_ref": "azviqqejypsefzilgonr",
+  "observed_at_utc": "2026-11-11 09:50:11.163406+00",
+  "previous_direct_source": "docs/audits/issue509-provider-cross-layer-drift-2026-11-11-run159.json",
+  "scope": "Direct complete 39 policy texts plus 45 table ACL, 28 schema principal rights, five full gate SQL sources; zero first-time provider words credited",
+  "count": {
+    "policies": 39,
+    "policy_matches": 39,
+    "application_tables": 45,
+    "rls_enabled": 45,
+    "anonymous_app_select": 0,
+    "authenticated_app_select": 21,
+    "authenticated_app_mutation_tables": 0,
+    "authenticated_private_table_select": 0,
+    "schema_role_privilege_entries": 28,
+    "linked_full_gate_sql_functions": 5,
+    "linked_full_sql_chars": 4734,
+    "linked_sql_hash_matches": 5
+  },
+  "admission_aggregate": {
+    "accounts": 11,
+    "enabled_unadmitted": 0,
+    "enabled_nonapproved": 0
+  },
+  "beta_member_constraint_declarations": [
+    {
+      "name": "beta_members_owner_id_fkey",
+      "definition": "FOREIGN KEY (owner_id) REFERENCES auth.users(id) ON DELETE CASCADE"
+    },
+    {
+      "name": "beta_members_pkey",
+      "definition": "PRIMARY KEY (owner_id)"
+    },
+    {
+      "name": "beta_members_signup_review_state_check",
+      "definition": "CHECK (signup_review_state = ANY (ARRAY['pending'::text, 'approved'::text, 'rejected'::text]))"
+    }
+  ],
+  "per_policy_full_text": [
+    {
+      "schema_name": "private",
+      "table_name": "admin_access_events",
+      "policy_name": "no_client_access",
+      "command_code": "*",
+      "permissive": true,
+      "policy_roles": "{anon,authenticated}",
+      "using_expression": "false",
+      "check_expression": "false"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "admin_content_edits",
+      "policy_name": "no_direct_user_content_edits",
+      "command_code": "*",
+      "permissive": true,
+      "policy_roles": "{anon,authenticated}",
+      "using_expression": "false",
+      "check_expression": "false"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "app_admins",
+      "policy_name": "no_client_access",
+      "command_code": "*",
+      "permissive": true,
+      "policy_roles": "{anon,authenticated}",
+      "using_expression": "false",
+      "check_expression": "false"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "backup_runs",
+      "policy_name": "no_client_access",
+      "command_code": "*",
+      "permissive": true,
+      "policy_roles": "{anon,authenticated}",
+      "using_expression": "false",
+      "check_expression": "false"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "beta_members",
+      "policy_name": "no_client_access",
+      "command_code": "*",
+      "permissive": true,
+      "policy_roles": "{anon,authenticated}",
+      "using_expression": "false",
+      "check_expression": "false"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "community_quality_checks",
+      "policy_name": "no_client_access",
+      "command_code": "*",
+      "permissive": true,
+      "policy_roles": "{anon,authenticated}",
+      "using_expression": "false",
+      "check_expression": "false"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "contribution_links",
+      "policy_name": "no_client_access",
+      "command_code": "*",
+      "permissive": true,
+      "policy_roles": "{anon,authenticated}",
+      "using_expression": "false",
+      "check_expression": "false"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "contributors",
+      "policy_name": "no_client_access",
+      "command_code": "*",
+      "permissive": true,
+      "policy_roles": "{anon,authenticated}",
+      "using_expression": "false",
+      "check_expression": "false"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_roaster_aliases",
+      "policy_name": "no_client_access",
+      "command_code": "*",
+      "permissive": true,
+      "policy_roles": "{anon,authenticated}",
+      "using_expression": "false",
+      "check_expression": "false"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_roaster_directory",
+      "policy_name": "no_client_access",
+      "command_code": "*",
+      "permissive": true,
+      "policy_roles": "{anon,authenticated}",
+      "using_expression": "false",
+      "check_expression": "false"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_url_preview_attempts",
+      "policy_name": "no_client_access",
+      "command_code": "*",
+      "permissive": true,
+      "policy_roles": "{anon,authenticated}",
+      "using_expression": "false",
+      "check_expression": "false"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "import_batches",
+      "policy_name": "no_client_access",
+      "command_code": "*",
+      "permissive": true,
+      "policy_roles": "{anon,authenticated}",
+      "using_expression": "false",
+      "check_expression": "false"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "import_control",
+      "policy_name": "no_client_access",
+      "command_code": "*",
+      "permissive": true,
+      "policy_roles": "{anon,authenticated}",
+      "using_expression": "false",
+      "check_expression": "false"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "mutation_receipts",
+      "policy_name": "no_client_access",
+      "command_code": "*",
+      "permissive": true,
+      "policy_roles": "{anon,authenticated}",
+      "using_expression": "false",
+      "check_expression": "false"
+    },
+    {
+      "schema_name": "private",
+      "table_name": "shot_audit",
+      "policy_name": "no_client_access",
+      "command_code": "*",
+      "permissive": true,
+      "policy_roles": "{anon,authenticated}",
+      "using_expression": "false",
+      "check_expression": "false"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "account_preferences",
+      "policy_name": "owner_read",
+      "command_code": "r",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "check_expression": ""
+    },
+    {
+      "schema_name": "public",
+      "table_name": "account_preferences",
+      "policy_name": "owner_update",
+      "command_code": "w",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "check_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "admin_reviews",
+      "policy_name": "review_read",
+      "command_code": "r",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "( SELECT private.is_admin() AS is_admin)",
+      "check_expression": ""
+    },
+    {
+      "schema_name": "public",
+      "table_name": "bags",
+      "policy_name": "owner_read",
+      "command_code": "r",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "check_expression": ""
+    },
+    {
+      "schema_name": "public",
+      "table_name": "basket_versions",
+      "policy_name": "owner_read",
+      "command_code": "r",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "check_expression": ""
+    },
+    {
+      "schema_name": "public",
+      "table_name": "baskets",
+      "policy_name": "owner_read",
+      "command_code": "r",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "check_expression": ""
+    },
+    {
+      "schema_name": "public",
+      "table_name": "coffee_groups",
+      "policy_name": "group_read",
+      "command_code": "r",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "(( SELECT private.is_member() AS is_member) AND (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE ((c.group_id = coffee_groups.id) AND (c.verification_state = 'verified'::text)))))",
+      "check_expression": ""
+    },
+    {
+      "schema_name": "public",
+      "table_name": "coffee_sources",
+      "policy_name": "source_read",
+      "command_code": "r",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "(( SELECT private.is_member() AS is_member) AND (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE ((c.id = coffee_sources.coffee_id) AND (c.verification_state = 'verified'::text)))))",
+      "check_expression": ""
+    },
+    {
+      "schema_name": "public",
+      "table_name": "coffee_submissions",
+      "policy_name": "submission_insert",
+      "command_code": "a",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "",
+      "check_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)) AND ((canonical_coffee_id IS NULL) OR (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE ((c.id = coffee_submissions.canonical_coffee_id) AND (c.verification_state = 'verified'::text))))))"
+    },
+    {
+      "schema_name": "public",
+      "table_name": "coffee_submissions",
+      "policy_name": "submission_read",
+      "command_code": "r",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "(( SELECT private.is_member() AS is_member) AND ((owner_id = ( SELECT auth.uid() AS uid)) OR ( SELECT private.is_admin() AS is_admin)))",
+      "check_expression": ""
+    },
+    {
+      "schema_name": "public",
+      "table_name": "coffees",
+      "policy_name": "coffee_read",
+      "command_code": "r",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "(( SELECT private.is_member() AS is_member) AND ((verification_state = 'verified'::text) OR ( SELECT private.is_admin() AS is_admin)))",
+      "check_expression": ""
+    },
+    {
+      "schema_name": "public",
+      "table_name": "community_shots",
+      "policy_name": "community_read",
+      "command_code": "r",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "(( SELECT private.is_member() AS is_member) AND (quality_state = 'eligible'::text) AND (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE ((c.id = community_shots.coffee_id) AND (c.verification_state = 'verified'::text)))))",
+      "check_expression": ""
+    },
+    {
+      "schema_name": "public",
+      "table_name": "grinder_calibrations",
+      "policy_name": "owner_read",
+      "command_code": "r",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "check_expression": ""
+    },
+    {
+      "schema_name": "public",
+      "table_name": "library_entries",
+      "policy_name": "library_read",
+      "command_code": "r",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "check_expression": ""
+    },
+    {
+      "schema_name": "public",
+      "table_name": "personal_recipe_families",
+      "policy_name": "owner_read",
+      "command_code": "r",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "check_expression": ""
+    },
+    {
+      "schema_name": "public",
+      "table_name": "recipe_families",
+      "policy_name": "family_read",
+      "command_code": "r",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "(( SELECT private.is_member() AS is_member) AND (EXISTS ( SELECT 1\n   FROM coffees c\n  WHERE ((c.id = recipe_families.coffee_id) AND (c.verification_state = 'verified'::text)))))",
+      "check_expression": ""
+    },
+    {
+      "schema_name": "public",
+      "table_name": "recipe_preferences",
+      "policy_name": "owner_read",
+      "command_code": "r",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "check_expression": ""
+    },
+    {
+      "schema_name": "public",
+      "table_name": "setup_preferences",
+      "policy_name": "owner_read",
+      "command_code": "r",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "check_expression": ""
+    },
+    {
+      "schema_name": "public",
+      "table_name": "setup_versions",
+      "policy_name": "owner_read",
+      "command_code": "r",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "check_expression": ""
+    },
+    {
+      "schema_name": "public",
+      "table_name": "setups",
+      "policy_name": "owner_read",
+      "command_code": "r",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "check_expression": ""
+    },
+    {
+      "schema_name": "public",
+      "table_name": "shot_notes",
+      "policy_name": "owner_read",
+      "command_code": "r",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "check_expression": ""
+    },
+    {
+      "schema_name": "public",
+      "table_name": "shots",
+      "policy_name": "owner_read",
+      "command_code": "r",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "check_expression": ""
+    },
+    {
+      "schema_name": "public",
+      "table_name": "workspace_coffees",
+      "policy_name": "owner_read",
+      "command_code": "r",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "check_expression": ""
+    },
+    {
+      "schema_name": "public",
+      "table_name": "workspace_state",
+      "policy_name": "owner_read",
+      "command_code": "r",
+      "permissive": true,
+      "policy_roles": "{authenticated}",
+      "using_expression": "(( SELECT private.is_member() AS is_member) AND (owner_id = ( SELECT auth.uid() AS uid)))",
+      "check_expression": ""
+    }
+  ],
+  "per_application_table_effective_grants": [
+    {
+      "schema_name": "private",
+      "table_name": "admin_access_events",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "private",
+      "table_name": "admin_content_edits",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "private",
+      "table_name": "app_admins",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "private",
+      "table_name": "backup_runs",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "private",
+      "table_name": "beta_members",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "private",
+      "table_name": "community_quality_checks",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "private",
+      "table_name": "contribution_links",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "private",
+      "table_name": "contributors",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_admin_account_delete_operations",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_admin_delete_receipts",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_coffee_aliases",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_coffee_audit",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_coffee_first_entry",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_first_style_prompt_seen",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_roaster_aliases",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_roaster_directory",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_signup_review_events",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_source_attempts",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "private",
+      "table_name": "dic_url_preview_attempts",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "private",
+      "table_name": "import_batches",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "private",
+      "table_name": "import_control",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "private",
+      "table_name": "mutation_receipts",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "private",
+      "table_name": "shot_audit",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "account_preferences",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "admin_reviews",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "bags",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "basket_versions",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "baskets",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "coffee_groups",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "coffee_sources",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "coffee_submissions",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "coffees",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "community_shots",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": false,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "grinder_calibrations",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "library_entries",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "personal_recipe_families",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "recipe_families",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "recipe_preferences",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "setup_preferences",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "setup_versions",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "setups",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "shot_notes",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "shots",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "workspace_coffees",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    },
+    {
+      "schema_name": "public",
+      "table_name": "workspace_state",
+      "rls": true,
+      "force_rls": false,
+      "anon_select": false,
+      "auth_select": true,
+      "auth_insert": false,
+      "auth_update": false,
+      "auth_delete": false
+    }
+  ],
+  "per_schema_role_effective_grants": [
+    {
+      "schema_name": "auth",
+      "principal": "anon",
+      "schema_usage": true,
+      "schema_create": false,
+      "selectable_tables": 0,
+      "callable_functions": 4
+    },
+    {
+      "schema_name": "auth",
+      "principal": "authenticated",
+      "schema_usage": true,
+      "schema_create": false,
+      "selectable_tables": 0,
+      "callable_functions": 4
+    },
+    {
+      "schema_name": "auth",
+      "principal": "authenticator",
+      "schema_usage": false,
+      "schema_create": false,
+      "selectable_tables": 0,
+      "callable_functions": 4
+    },
+    {
+      "schema_name": "auth",
+      "principal": "service_role",
+      "schema_usage": true,
+      "schema_create": false,
+      "selectable_tables": 0,
+      "callable_functions": 4
+    },
+    {
+      "schema_name": "extensions",
+      "principal": "anon",
+      "schema_usage": true,
+      "schema_create": false,
+      "selectable_tables": 0,
+      "callable_functions": 89
+    },
+    {
+      "schema_name": "extensions",
+      "principal": "authenticated",
+      "schema_usage": true,
+      "schema_create": false,
+      "selectable_tables": 0,
+      "callable_functions": 89
+    },
+    {
+      "schema_name": "extensions",
+      "principal": "authenticator",
+      "schema_usage": false,
+      "schema_create": false,
+      "selectable_tables": 0,
+      "callable_functions": 89
+    },
+    {
+      "schema_name": "extensions",
+      "principal": "service_role",
+      "schema_usage": true,
+      "schema_create": false,
+      "selectable_tables": 0,
+      "callable_functions": 89
+    },
+    {
+      "schema_name": "private",
+      "principal": "anon",
+      "schema_usage": false,
+      "schema_create": false,
+      "selectable_tables": 0,
+      "callable_functions": 0
+    },
+    {
+      "schema_name": "private",
+      "principal": "authenticated",
+      "schema_usage": true,
+      "schema_create": false,
+      "selectable_tables": 0,
+      "callable_functions": 29
+    },
+    {
+      "schema_name": "private",
+      "principal": "authenticator",
+      "schema_usage": false,
+      "schema_create": false,
+      "selectable_tables": 0,
+      "callable_functions": 0
+    },
+    {
+      "schema_name": "private",
+      "principal": "service_role",
+      "schema_usage": true,
+      "schema_create": false,
+      "selectable_tables": 22,
+      "callable_functions": 9
+    },
+    {
+      "schema_name": "public",
+      "principal": "anon",
+      "schema_usage": true,
+      "schema_create": false,
+      "selectable_tables": 0,
+      "callable_functions": 0
+    },
+    {
+      "schema_name": "public",
+      "principal": "authenticated",
+      "schema_usage": true,
+      "schema_create": false,
+      "selectable_tables": 21,
+      "callable_functions": 37
+    },
+    {
+      "schema_name": "public",
+      "principal": "authenticator",
+      "schema_usage": true,
+      "schema_create": false,
+      "selectable_tables": 0,
+      "callable_functions": 0
+    },
+    {
+      "schema_name": "public",
+      "principal": "service_role",
+      "schema_usage": true,
+      "schema_create": false,
+      "selectable_tables": 22,
+      "callable_functions": 45
+    },
+    {
+      "schema_name": "realtime",
+      "principal": "anon",
+      "schema_usage": true,
+      "schema_create": false,
+      "selectable_tables": 2,
+      "callable_functions": 18
+    },
+    {
+      "schema_name": "realtime",
+      "principal": "authenticated",
+      "schema_usage": true,
+      "schema_create": false,
+      "selectable_tables": 2,
+      "callable_functions": 18
+    },
+    {
+      "schema_name": "realtime",
+      "principal": "authenticator",
+      "schema_usage": false,
+      "schema_create": false,
+      "selectable_tables": 0,
+      "callable_functions": 18
+    },
+    {
+      "schema_name": "realtime",
+      "principal": "service_role",
+      "schema_usage": true,
+      "schema_create": false,
+      "selectable_tables": 2,
+      "callable_functions": 18
+    },
+    {
+      "schema_name": "storage",
+      "principal": "anon",
+      "schema_usage": true,
+      "schema_create": false,
+      "selectable_tables": 7,
+      "callable_functions": 19
+    },
+    {
+      "schema_name": "storage",
+      "principal": "authenticated",
+      "schema_usage": true,
+      "schema_create": false,
+      "selectable_tables": 7,
+      "callable_functions": 19
+    },
+    {
+      "schema_name": "storage",
+      "principal": "authenticator",
+      "schema_usage": false,
+      "schema_create": false,
+      "selectable_tables": 0,
+      "callable_functions": 19
+    },
+    {
+      "schema_name": "storage",
+      "principal": "service_role",
+      "schema_usage": true,
+      "schema_create": false,
+      "selectable_tables": 7,
+      "callable_functions": 19
+    },
+    {
+      "schema_name": "vault",
+      "principal": "anon",
+      "schema_usage": false,
+      "schema_create": false,
+      "selectable_tables": 0,
+      "callable_functions": 0
+    },
+    {
+      "schema_name": "vault",
+      "principal": "authenticated",
+      "schema_usage": false,
+      "schema_create": false,
+      "selectable_tables": 0,
+      "callable_functions": 0
+    },
+    {
+      "schema_name": "vault",
+      "principal": "authenticator",
+      "schema_usage": false,
+      "schema_create": false,
+      "selectable_tables": 0,
+      "callable_functions": 0
+    },
+    {
+      "schema_name": "vault",
+      "principal": "service_role",
+      "schema_usage": true,
+      "schema_create": false,
+      "selectable_tables": 1,
+      "callable_functions": 3
+    }
+  ],
+  "per_linked_gate_full_sql": [
+    {
+      "signature": "private.dic_admin_review_signup",
+      "args": "p_member_id uuid, p_action text, p_expected_state text",
+      "sql_source": "CREATE OR REPLACE FUNCTION private.dic_admin_review_signup(p_member_id uuid, p_action text, p_expected_state text DEFAULT 'pending'::text)\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare actor uuid:=auth.uid(); member private.beta_members; verified boolean;\nbegin\n perform private.require_member();\n if actor is null or not private.is_admin() then\n  raise exception using errcode='42501',message='Administrator required.';\n end if;\n if p_member_id is null or p_member_id=actor or p_action is null or p_action not in ('approve','reject')\n  or p_expected_state is distinct from 'pending' then\n  raise exception using errcode='22023',message='Invalid signup review.';\n end if;\n if exists(select 1 from private.app_admins where owner_id=p_member_id) then\n  raise exception using errcode='42501',message='Administrator protected.';\n end if;\n select * into member from private.beta_members where owner_id=p_member_id for update;\n if not found then\n  raise exception using errcode='22023',message='Account unavailable.';\n end if;\n -- A repeat click or concurrent reviewer must be safely rejected as stale.\n if member.signup_review_state <> p_expected_state or\n    member.admitted_at is not null or member.enabled then\n  return jsonb_build_object('ok',false,'code','stale_review');\n end if;\n select u.email_confirmed_at is not null into verified\n from auth.users u where u.id=p_member_id;\n if p_action='approve' and verified is distinct from true then\n  return jsonb_build_object('ok',false,'code','verify_email_first');\n end if;\n update private.beta_members set\n   signup_review_state=case when p_action='approve' then 'approved' else 'rejected' end,\n   enabled=(p_action='approve'),\n   admitted_at=case when p_action='approve' then now() else null end\n where owner_id=p_member_id;\n insert into private.dic_signup_review_events(member_id,actor_id,action,previous_state)\n values(p_member_id,actor,p_action,member.signup_review_state);\n return jsonb_build_object('ok',true,'decision',p_action,'member_id',p_member_id);\nend $function$\n",
+      "source_md5": "7e0d3bf10542694b60177fcfa9c6f7be"
+    },
+    {
+      "signature": "private.dic_admin_signup_requests",
+      "args": "p_offset integer, p_limit integer",
+      "sql_source": "CREATE OR REPLACE FUNCTION private.dic_admin_signup_requests(p_offset integer DEFAULT 0, p_limit integer DEFAULT 50)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare total bigint; listing jsonb;\nbegin\n perform private.require_member();\n if auth.uid() is null or not private.is_admin() then\n  raise exception using errcode='42501', message='Administrator required.';\n end if;\n if p_offset is null or p_offset<0 or p_offset>1000000\n    or p_limit is null or p_limit<1 or p_limit>50 then\n  raise exception using errcode='22023',message='Invalid paging.';\n end if;\n select count(*) into total from private.beta_members m\n where m.admitted_at is null and m.signup_review_state='pending';\n select coalesce(jsonb_agg(v.record order by v.created_at,v.id),'[]'::jsonb) into listing\n from (select m.owner_id as id,u.created_at,\n   jsonb_build_object(\n    'id',m.owner_id,'email',left(coalesce(u.email,''),254),\n    'created_at',u.created_at,'email_verified',u.email_confirmed_at is not null,\n    'review_state',m.signup_review_state\n   ) as record\n   from private.beta_members m join auth.users u on u.id=m.owner_id\n   where m.admitted_at is null and m.signup_review_state='pending'\n   order by u.created_at,m.owner_id limit p_limit offset p_offset) v;\n return jsonb_build_object('total',total,'offset',p_offset,'items',coalesce(listing,'[]'::jsonb));\nend $function$\n",
+      "source_md5": "663c13571f70bb29b6a4351e8e6a45eb"
+    },
+    {
+      "signature": "private.is_admin",
+      "args": "",
+      "sql_source": "CREATE OR REPLACE FUNCTION private.is_admin()\n RETURNS boolean\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\n  select private.is_member() and exists(select 1 from private.app_admins a where a.owner_id=(select auth.uid()));\n$function$\n",
+      "source_md5": "396d3e8e29dbd4550ec7ac26b7589a63"
+    },
+    {
+      "signature": "private.is_member",
+      "args": "",
+      "sql_source": "CREATE OR REPLACE FUNCTION private.is_member()\n RETURNS boolean\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\n  select exists(select 1 from private.beta_members m where m.owner_id=(select auth.uid()) and m.enabled);\n$function$\n",
+      "source_md5": "dbc163d07f45e8b5831f6a6394a70ab8"
+    },
+    {
+      "signature": "private.session_status",
+      "args": "",
+      "sql_source": "CREATE OR REPLACE FUNCTION private.session_status()\n RETURNS jsonb\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nselect jsonb_build_object(\n 'authenticated',auth.uid() is not null,\n 'admitted',private.is_member(),\n 'admin',private.is_admin(),\n 'emailVerified',exists(select 1 from auth.users u where u.id=auth.uid() and u.email_confirmed_at is not null),\n 'approvalState',coalesce((\n   select case when m.admitted_at is not null and m.enabled then 'approved'\n     when m.admitted_at is not null then 'revoked'\n     else m.signup_review_state end\n   from private.beta_members m where m.owner_id=auth.uid()),'pending'),\n 'backupConfigured',false,'communityLive',false,'mode','owner-test');\n$function$\n",
+      "source_md5": "0aa8e57bb4846aac7dd8e3b6c0cf690c"
+    }
+  ],
+  "verdict": "NO NEW CONFIRMED SOURCE DRIFT OR DEFECT IN REVIEWED BOUNDARY; 39/39 policy and five gate SQL sources unchanged; 0 authenticated app direct writes; 0 anonymous app SELECT; known undeployed admission-invariant guard remains #509 run139/140 source READY",
+  "privacy": "No identity, member record, shot, note, secret or raw log read; aggregate count only",
+  "limitations": [
+    "Actual PostgREST exposed schemas/JWT and GoTrue hosted config UNVERIFIED (#96)",
+    "Native code and disk headroom UNVERIFIED",
+    "Private schema USAGE and 29 callable private SQL functions for authenticated role require runtime source-bound assessment, not equivalent to API exposure"
+  ],
+  "first_time_source_words": 0,
+  "issue267_lines": 0,
+  "live_writes": 0,
+  "source_fixes": 0,
+  "baseline_complete": false,
+  "next": "Migration #60 if created or first new/changed/unreviewed provider definition/accessible hosted boundary"
+}
