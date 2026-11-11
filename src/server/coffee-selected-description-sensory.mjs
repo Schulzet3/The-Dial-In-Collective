@@ -1,6 +1,7 @@
 // Exact selected-product description notes supplement a shorter printed profile.
 // Never use meta/SEO, related products, alternatives, preparation or guessed notes.
 import {productCoffeeProse,NONCURRENT_COFFEE_PROSE} from './coffee-product-prose.mjs';
+import {removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
 import {normalizeExplicitCoffeeTastingNotes} from './coffee-flavor-evidence.mjs';
 const fold=s=>String(s||'').normalize('NFKD').replace(/[\u0300-\u036f]/g,'').toLowerCase()
  .replace(/[^a-z0-9]+/g,' ').trim();
@@ -177,7 +178,10 @@ export function refineSelectedCurrentFlavorBase(html,{clean,notes}={}){
 export function refineSelectedCurrentTrailingFlavorNote(html,{clean,notes}={}){
  if(typeof html!=='string'||html.length>2_000_000||typeof clean!=='function'||
     typeof notes!=='string'||notes.length<8||notes.length>300)return '';
- const blocks=productCoffeeProse(html,clean);
+ // The shared product scope can still contain sibling <aside> and recommendation
+ // furniture; remove those areas BEFORE collecting any current-note paragraph.
+ const current=removeElements(html,['script','style','noscript','template','nav','aside','footer']);
+ const blocks=productCoffeeProse(current,clean);
  const headings=blocks.filter(b=>b.tag==='h1'&&!b.educational);
  if(headings.length!==1||!headings[0].text||headings[0].text.length>180)return '';
  const selected=fold(headings[0].text);
