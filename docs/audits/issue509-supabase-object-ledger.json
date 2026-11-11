@@ -3781,6 +3781,17 @@
       "receipt_path": "docs/audits/issue509-run165-exact-source-ci-closure-2026-11-11.json",
       "live_writes": 0,
       "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-11",
+      "event": "RUN167_ALL_261_COMPLETE_APPLICATION_CONSTRAINT_SQL_CROSS_OBJECT_SEMANTIC_REVIEW",
+      "source_development_parent_sha": "d936f59cb31c7399fab8e779ac5c8517a939c2c7",
+      "receipt_path": "docs/audits/issue509-application-constraint-integrity-semantics-2026-11-11-run167.json",
+      "object_count": 261,
+      "source_characters": 16481,
+      "new_verified_defects": 0,
+      "live_writes": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -17120,5 +17131,28 @@
     "code_changes": 0,
     "baseline_complete": false,
     "next": "Migration #60 if new or first new/changed/unreviewed provider definition/hosted Auth/API configuration if accessible."
+  },
+  "provider_application_constraint_cross_review_run167": {
+    "status": "CURRENT_261_COMPLETE_CONSTRAINT_SQL_DIRECT_REVIEW",
+    "project_ref": "azviqqejypsefzilgonr",
+    "source_development_parent_sha": "d936f59cb31c7399fab8e779ac5c8517a939c2c7",
+    "receipt_path": "docs/audits/issue509-application-constraint-integrity-semantics-2026-11-11-run167.json",
+    "total_application_constraints": 261,
+    "complete_sql_chars": 16481,
+    "check": 114,
+    "fk": 87,
+    "primary": 45,
+    "unique": 15,
+    "all_validated": true,
+    "key_backing_indexes_valid_and_ready": true,
+    "deferrable_fk": 3,
+    "first_time_provider_words": 0,
+    "issue267_lines": 0,
+    "new_verified_defects": 0,
+    "source_code_fixes": 0,
+    "provider_writes": 0,
+    "baseline_complete": false,
+    "ci": "DOCS_ONLY_SOURCE_GOVERNANCE_PENDING",
+    "next": "Stored SQL migration ordinal #60 if added; otherwise first newly changed/unreviewed complete provider definition, prioritizing newly observable hosted Auth/API security boundary. Keep explicit unresolved provider-only surfaces UNVERIFIED."
   }
 }
