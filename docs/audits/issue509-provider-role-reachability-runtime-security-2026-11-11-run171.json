@@ -1,0 +1,2302 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 171,
+  "scope": "Read-only complete safe role attribute and grant declarations, newly explicit 4×30 role reachability including all false rows, schema rights, allowlisted GUCs, bounded connection health; no private Auth/member/shot/credential/log body reads",
+  "meta": {
+    "project_ref": "azviqqejypsefzilgonr",
+    "observed_at_utc": "2026-11-11T14:54:36.135Z",
+    "provider_status": "ACTIVE_HEALTHY",
+    "postgres_version": "17.11.0.003",
+    "live_migrations": 59,
+    "edge_functions": [
+      {
+        "slug": "dic-verify-coffee",
+        "version": 8,
+        "status": "ACTIVE",
+        "verify_jwt": true,
+        "sha256": "d59e9da29335f2d626a2779238b4f1176148f5f8f3d54539bf831ff20aa6a77e"
+      },
+      {
+        "slug": "dic-preview-coffee",
+        "version": 4,
+        "status": "ACTIVE",
+        "verify_jwt": true,
+        "sha256": "ac928ceb4898414555fbcc96afb30b0963f7c819c5d7e211abd5b3893090648c"
+      },
+      {
+        "slug": "dic-delete-member-account",
+        "version": 1,
+        "status": "ACTIVE",
+        "verify_jwt": true,
+        "sha256": "a2418951c7c4457723cd7b5e7e8d39f4cb1b3a02f76c6099573a9d576f32bf18"
+      }
+    ],
+    "role_count": 30,
+    "grant_count": 24,
+    "full_transitive_path_count": 120,
+    "schema_rights_count": 32,
+    "allowlisted_guc_count": 21,
+    "prev_run27_role_hashes_identical": 30,
+    "prev_run27_grant_hashes_identical": 24,
+    "prev_run27_membership_manifest_identical": true,
+    "member_manifest_md5": "3f57a9a65dc17b254f45b992a0d68152",
+    "proven_client_elevated_paths": 0,
+    "first_time_provider_word_credit": 0,
+    "issue267_code_lines": 0,
+    "new_confirmed_defects": 0,
+    "development_source_fixes": 0,
+    "provider_writes": 0,
+    "baseline_complete": false
+  },
+  "query_authority": "pg_roles, pg_auth_members, pg_has_role MEMBER/USAGE/SET, has_schema_privilege, pg_settings whitelist, aggregate pg_stat_activity. Role row MD5 uses same Run27 formula.",
+  "roles": [
+    {
+      "ordinal": 1,
+      "rolname": "anon",
+      "row_md5": "d439c22ec8c40f676a3c4e476028217b",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": false,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "CLIENT_NOLOGIN_NO_BYPASSRLS"
+    },
+    {
+      "ordinal": 2,
+      "rolname": "authenticated",
+      "row_md5": "08c69271ef042a79bc704b519e6b625b",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": false,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "CLIENT_NOLOGIN_NO_BYPASSRLS"
+    },
+    {
+      "ordinal": 3,
+      "rolname": "authenticator",
+      "row_md5": "625b64a7116ff8139763b12375e03e78",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": false,
+      "rolcanlogin": true,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PLATFORM_ROLE_METADATA"
+    },
+    {
+      "ordinal": 4,
+      "rolname": "dashboard_user",
+      "row_md5": "5d09063ae3edc99f5d4cac378c545546",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": false,
+      "rolcreatedb": true,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": true,
+      "rolreplication": true,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PLATFORM_ROLE_METADATA"
+    },
+    {
+      "ordinal": 5,
+      "rolname": "pg_checkpoint",
+      "row_md5": "9351785378ad209dc56739421eebd027",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": false,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PLATFORM_ROLE_METADATA"
+    },
+    {
+      "ordinal": 6,
+      "rolname": "pg_create_subscription",
+      "row_md5": "8bb4cbd615f1a6bbdb5d251c3e01881f",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": false,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PLATFORM_ROLE_METADATA"
+    },
+    {
+      "ordinal": 7,
+      "rolname": "pg_database_owner",
+      "row_md5": "3d9568502d3b7d0b582c574d9ebe21f1",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": false,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PLATFORM_ROLE_METADATA"
+    },
+    {
+      "ordinal": 8,
+      "rolname": "pg_execute_server_program",
+      "row_md5": "8f07e679e93f44a46a06e747126714ab",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": false,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PLATFORM_ROLE_METADATA"
+    },
+    {
+      "ordinal": 9,
+      "rolname": "pg_maintain",
+      "row_md5": "97ab1a93471495aaf89d6d569a26cd9b",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": false,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PLATFORM_ROLE_METADATA"
+    },
+    {
+      "ordinal": 10,
+      "rolname": "pg_monitor",
+      "row_md5": "996831ef3b73fe1f566f05e9500cd5ad",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": false,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PLATFORM_ROLE_METADATA"
+    },
+    {
+      "ordinal": 11,
+      "rolname": "pg_read_all_data",
+      "row_md5": "3996ab997912ec4c2479b2ef3d02328f",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": false,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PLATFORM_ROLE_METADATA"
+    },
+    {
+      "ordinal": 12,
+      "rolname": "pg_read_all_settings",
+      "row_md5": "f3cabb974fea995e41849136fdd7b495",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": false,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PLATFORM_ROLE_METADATA"
+    },
+    {
+      "ordinal": 13,
+      "rolname": "pg_read_all_stats",
+      "row_md5": "2381fa81a93918cd526d8e27753f010e",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": false,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PLATFORM_ROLE_METADATA"
+    },
+    {
+      "ordinal": 14,
+      "rolname": "pg_read_server_files",
+      "row_md5": "4ce8f9982d788bc4991876a9bff43b7d",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": false,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PLATFORM_ROLE_METADATA"
+    },
+    {
+      "ordinal": 15,
+      "rolname": "pg_signal_backend",
+      "row_md5": "b9a7e5438ff86921537dbdd92a72ac6d",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": false,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PLATFORM_ROLE_METADATA"
+    },
+    {
+      "ordinal": 16,
+      "rolname": "pg_stat_scan_tables",
+      "row_md5": "01f6de7006d943f2de0d137e78117217",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": false,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PLATFORM_ROLE_METADATA"
+    },
+    {
+      "ordinal": 17,
+      "rolname": "pg_use_reserved_connections",
+      "row_md5": "059ba369fe5a93f858654cd9da4d1e98",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": false,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PLATFORM_ROLE_METADATA"
+    },
+    {
+      "ordinal": 18,
+      "rolname": "pg_write_all_data",
+      "row_md5": "d60ae0def52e52ec784083aec25ae3d7",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": false,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PLATFORM_ROLE_METADATA"
+    },
+    {
+      "ordinal": 19,
+      "rolname": "pg_write_server_files",
+      "row_md5": "cfa9dbffdbc5645569e6dfe73531045c",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": false,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PLATFORM_ROLE_METADATA"
+    },
+    {
+      "ordinal": 20,
+      "rolname": "pgbouncer",
+      "row_md5": "caeb29471d75311075024a2554e6895b",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": true,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PLATFORM_ROLE_METADATA"
+    },
+    {
+      "ordinal": 21,
+      "rolname": "postgres",
+      "row_md5": "5d67fafb72ba7fe1b4655388c3da41aa",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": true,
+      "rolcreatedb": true,
+      "rolbypassrls": true,
+      "rolconnlimit": -1,
+      "rolcreaterole": true,
+      "rolreplication": true,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PROVIDER_PRIVILEGED_NOT_CLIENT"
+    },
+    {
+      "ordinal": 22,
+      "rolname": "service_role",
+      "row_md5": "7213206e9774da41956fc8f38017cb01",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": false,
+      "rolcreatedb": false,
+      "rolbypassrls": true,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PROVIDER_PRIVILEGED_NOT_CLIENT"
+    },
+    {
+      "ordinal": 23,
+      "rolname": "supabase_admin",
+      "row_md5": "acddf28f860e8326265ba8b118c860de",
+      "rolsuper": true,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": true,
+      "rolcreatedb": true,
+      "rolbypassrls": true,
+      "rolconnlimit": -1,
+      "rolcreaterole": true,
+      "rolreplication": true,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PROVIDER_PRIVILEGED_NOT_CLIENT"
+    },
+    {
+      "ordinal": 24,
+      "rolname": "supabase_auth_admin",
+      "row_md5": "c7106cde8b08f8f6d394f47373f951ad",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": false,
+      "rolcanlogin": true,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": true,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PLATFORM_ROLE_METADATA"
+    },
+    {
+      "ordinal": 25,
+      "rolname": "supabase_etl_admin",
+      "row_md5": "308f1213336ba27eb57c4c07db134f68",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": true,
+      "rolcreatedb": false,
+      "rolbypassrls": true,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": true,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PROVIDER_PRIVILEGED_NOT_CLIENT"
+    },
+    {
+      "ordinal": 26,
+      "rolname": "supabase_privileged_role",
+      "row_md5": "a0ed2b374b2380809e8387e71e87b1c2",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": false,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PLATFORM_ROLE_METADATA"
+    },
+    {
+      "ordinal": 27,
+      "rolname": "supabase_read_only_user",
+      "row_md5": "dc951a7794d358faf6e982b5c171dbfd",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": true,
+      "rolcreatedb": false,
+      "rolbypassrls": true,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PROVIDER_PRIVILEGED_NOT_CLIENT"
+    },
+    {
+      "ordinal": 28,
+      "rolname": "supabase_realtime_admin",
+      "row_md5": "7ff723735379217c81e27f9864e0ddb5",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": false,
+      "rolcanlogin": false,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PLATFORM_ROLE_METADATA"
+    },
+    {
+      "ordinal": 29,
+      "rolname": "supabase_replication_admin",
+      "row_md5": "a6172bb1a48f02d216e7bba20e972400",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": true,
+      "rolcanlogin": true,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": false,
+      "rolreplication": true,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PLATFORM_ROLE_METADATA"
+    },
+    {
+      "ordinal": 30,
+      "rolname": "supabase_storage_admin",
+      "row_md5": "3fda148be598b96b6ff7fa3dd0eda659",
+      "rolsuper": false,
+      "no_expiry": true,
+      "rolinherit": false,
+      "rolcanlogin": true,
+      "rolcreatedb": false,
+      "rolbypassrls": false,
+      "rolconnlimit": -1,
+      "rolcreaterole": true,
+      "rolreplication": false,
+      "source_range": "1/1 role catalog declaration",
+      "verdict": "PLATFORM_ROLE_METADATA"
+    }
+  ],
+  "memberships": [
+    {
+      "ordinal": 1,
+      "row_md5": "6a7166763c875e72c81cdca87669bdd5",
+      "set_option": true,
+      "member_role": "authenticator",
+      "admin_option": false,
+      "granted_role": "anon",
+      "grantor_role": "supabase_admin",
+      "inherit_option": false,
+      "source_range": "1/1 grant definition",
+      "verdict": "PREVIOUSLY_REVIEWED_PROVIDER_ROLE_EDGE_UNCHANGED"
+    },
+    {
+      "ordinal": 2,
+      "row_md5": "3cb57753c28454817050ec22d7d3ef0b",
+      "set_option": true,
+      "member_role": "postgres",
+      "admin_option": true,
+      "granted_role": "anon",
+      "grantor_role": "supabase_admin",
+      "inherit_option": true,
+      "source_range": "1/1 grant definition",
+      "verdict": "PREVIOUSLY_REVIEWED_PROVIDER_ROLE_EDGE_UNCHANGED"
+    },
+    {
+      "ordinal": 3,
+      "row_md5": "06d2c665af4845a35eeaf7ee0b83e21b",
+      "set_option": true,
+      "member_role": "supabase_realtime_admin",
+      "admin_option": false,
+      "granted_role": "anon",
+      "grantor_role": "supabase_admin",
+      "inherit_option": false,
+      "source_range": "1/1 grant definition",
+      "verdict": "PREVIOUSLY_REVIEWED_PROVIDER_ROLE_EDGE_UNCHANGED"
+    },
+    {
+      "ordinal": 4,
+      "row_md5": "2320df0c8ba9ff587347beadb5caab35",
+      "set_option": true,
+      "member_role": "authenticator",
+      "admin_option": false,
+      "granted_role": "authenticated",
+      "grantor_role": "supabase_admin",
+      "inherit_option": false,
+      "source_range": "1/1 grant definition",
+      "verdict": "PREVIOUSLY_REVIEWED_PROVIDER_ROLE_EDGE_UNCHANGED"
+    },
+    {
+      "ordinal": 5,
+      "row_md5": "4e517d6def6f9c85b794b2a5b88cb8a3",
+      "set_option": true,
+      "member_role": "postgres",
+      "admin_option": true,
+      "granted_role": "authenticated",
+      "grantor_role": "supabase_admin",
+      "inherit_option": true,
+      "source_range": "1/1 grant definition",
+      "verdict": "PREVIOUSLY_REVIEWED_PROVIDER_ROLE_EDGE_UNCHANGED"
+    },
+    {
+      "ordinal": 6,
+      "row_md5": "bd5019c1f584b1dfe0aeb469c3047433",
+      "set_option": true,
+      "member_role": "supabase_realtime_admin",
+      "admin_option": false,
+      "granted_role": "authenticated",
+      "grantor_role": "supabase_admin",
+      "inherit_option": false,
+      "source_range": "1/1 grant definition",
+      "verdict": "PREVIOUSLY_REVIEWED_PROVIDER_ROLE_EDGE_UNCHANGED"
+    },
+    {
+      "ordinal": 7,
+      "row_md5": "e437dbcdd3119c8c6d530e2fb5505b2a",
+      "set_option": true,
+      "member_role": "postgres",
+      "admin_option": true,
+      "granted_role": "authenticator",
+      "grantor_role": "supabase_admin",
+      "inherit_option": true,
+      "source_range": "1/1 grant definition",
+      "verdict": "PREVIOUSLY_REVIEWED_PROVIDER_ROLE_EDGE_UNCHANGED"
+    },
+    {
+      "ordinal": 8,
+      "row_md5": "ec8936cef138163077be5bfe7a256113",
+      "set_option": true,
+      "member_role": "supabase_storage_admin",
+      "admin_option": false,
+      "granted_role": "authenticator",
+      "grantor_role": "supabase_admin",
+      "inherit_option": false,
+      "source_range": "1/1 grant definition",
+      "verdict": "PREVIOUSLY_REVIEWED_PROVIDER_ROLE_EDGE_UNCHANGED"
+    },
+    {
+      "ordinal": 9,
+      "row_md5": "fa3a58be2ab2a0145b79676117bcb635",
+      "set_option": true,
+      "member_role": "postgres",
+      "admin_option": true,
+      "granted_role": "pg_create_subscription",
+      "grantor_role": "supabase_admin",
+      "inherit_option": true,
+      "source_range": "1/1 grant definition",
+      "verdict": "PREVIOUSLY_REVIEWED_PROVIDER_ROLE_EDGE_UNCHANGED"
+    },
+    {
+      "ordinal": 10,
+      "row_md5": "2d5082dcbf476cd94b8d420fa17e3bad",
+      "set_option": true,
+      "member_role": "postgres",
+      "admin_option": true,
+      "granted_role": "pg_monitor",
+      "grantor_role": "supabase_admin",
+      "inherit_option": true,
+      "source_range": "1/1 grant definition",
+      "verdict": "PREVIOUSLY_REVIEWED_PROVIDER_ROLE_EDGE_UNCHANGED"
+    },
+    {
+      "ordinal": 11,
+      "row_md5": "e513c9f7e5c0f5766019fef714cba32b",
+      "set_option": true,
+      "member_role": "supabase_etl_admin",
+      "admin_option": false,
+      "granted_role": "pg_monitor",
+      "grantor_role": "supabase_admin",
+      "inherit_option": true,
+      "source_range": "1/1 grant definition",
+      "verdict": "PREVIOUSLY_REVIEWED_PROVIDER_ROLE_EDGE_UNCHANGED"
+    },
+    {
+      "ordinal": 12,
+      "row_md5": "15c6ad91dd26e4649f44aa4b23195c0c",
+      "set_option": true,
+      "member_role": "supabase_read_only_user",
+      "admin_option": false,
+      "granted_role": "pg_monitor",
+      "grantor_role": "supabase_admin",
+      "inherit_option": true,
+      "source_range": "1/1 grant definition",
+      "verdict": "PREVIOUSLY_REVIEWED_PROVIDER_ROLE_EDGE_UNCHANGED"
+    },
+    {
+      "ordinal": 13,
+      "row_md5": "60e0bb23cc105a3ec79c15e2c40db9ea",
+      "set_option": true,
+      "member_role": "postgres",
+      "admin_option": true,
+      "granted_role": "pg_read_all_data",
+      "grantor_role": "supabase_admin",
+      "inherit_option": true,
+      "source_range": "1/1 grant definition",
+      "verdict": "PREVIOUSLY_REVIEWED_PROVIDER_ROLE_EDGE_UNCHANGED"
+    },
+    {
+      "ordinal": 14,
+      "row_md5": "9c63d7ddc234759491030f1fdfdd7d19",
+      "set_option": true,
+      "member_role": "supabase_etl_admin",
+      "admin_option": false,
+      "granted_role": "pg_read_all_data",
+      "grantor_role": "supabase_admin",
+      "inherit_option": true,
+      "source_range": "1/1 grant definition",
+      "verdict": "PREVIOUSLY_REVIEWED_PROVIDER_ROLE_EDGE_UNCHANGED"
+    },
+    {
+      "ordinal": 15,
+      "row_md5": "9958c978b474c1e471e142191f4e76f8",
+      "set_option": true,
+      "member_role": "supabase_read_only_user",
+      "admin_option": false,
+      "granted_role": "pg_read_all_data",
+      "grantor_role": "supabase_admin",
+      "inherit_option": true,
+      "source_range": "1/1 grant definition",
+      "verdict": "PREVIOUSLY_REVIEWED_PROVIDER_ROLE_EDGE_UNCHANGED"
+    },
+    {
+      "ordinal": 16,
+      "row_md5": "019b0cd8d728fdf139f5cf52f873e3f8",
+      "set_option": true,
+      "member_role": "pg_monitor",
+      "admin_option": false,
+      "granted_role": "pg_read_all_settings",
+      "grantor_role": "supabase_admin",
+      "inherit_option": true,
+      "source_range": "1/1 grant definition",
+      "verdict": "PREVIOUSLY_REVIEWED_PROVIDER_ROLE_EDGE_UNCHANGED"
+    },
+    {
+      "ordinal": 17,
+      "row_md5": "631ec2b99b3233293a8fcbd6ebf77b4c",
+      "set_option": true,
+      "member_role": "pg_monitor",
+      "admin_option": false,
+      "granted_role": "pg_read_all_stats",
+      "grantor_role": "supabase_admin",
+      "inherit_option": true,
+      "source_range": "1/1 grant definition",
+      "verdict": "PREVIOUSLY_REVIEWED_PROVIDER_ROLE_EDGE_UNCHANGED"
+    },
+    {
+      "ordinal": 18,
+      "row_md5": "f1e78553de52977e674a357553d3f7b7",
+      "set_option": true,
+      "member_role": "postgres",
+      "admin_option": true,
+      "granted_role": "pg_signal_backend",
+      "grantor_role": "supabase_admin",
+      "inherit_option": true,
+      "source_range": "1/1 grant definition",
+      "verdict": "PREVIOUSLY_REVIEWED_PROVIDER_ROLE_EDGE_UNCHANGED"
+    },
+    {
+      "ordinal": 19,
+      "row_md5": "daa5bf00caa7d2ea9938409cb10de6bc",
+      "set_option": true,
+      "member_role": "pg_monitor",
+      "admin_option": false,
+      "granted_role": "pg_stat_scan_tables",
+      "grantor_role": "supabase_admin",
+      "inherit_option": true,
+      "source_range": "1/1 grant definition",
+      "verdict": "PREVIOUSLY_REVIEWED_PROVIDER_ROLE_EDGE_UNCHANGED"
+    },
+    {
+      "ordinal": 20,
+      "row_md5": "530e0b716907ad48b00b0a47ac2eedb6",
+      "set_option": true,
+      "member_role": "authenticator",
+      "admin_option": false,
+      "granted_role": "service_role",
+      "grantor_role": "supabase_admin",
+      "inherit_option": false,
+      "source_range": "1/1 grant definition",
+      "verdict": "GATEWAY_SET_SERVICE_ROLE_NOT_INHERITED"
+    },
+    {
+      "ordinal": 21,
+      "row_md5": "eca7b4e87d330878c961af97a5822030",
+      "set_option": true,
+      "member_role": "postgres",
+      "admin_option": true,
+      "granted_role": "service_role",
+      "grantor_role": "supabase_admin",
+      "inherit_option": true,
+      "source_range": "1/1 grant definition",
+      "verdict": "PREVIOUSLY_REVIEWED_PROVIDER_ROLE_EDGE_UNCHANGED"
+    },
+    {
+      "ordinal": 22,
+      "row_md5": "4382a770befe8bb66ac051a804d29c68",
+      "set_option": true,
+      "member_role": "supabase_realtime_admin",
+      "admin_option": false,
+      "granted_role": "service_role",
+      "grantor_role": "supabase_admin",
+      "inherit_option": false,
+      "source_range": "1/1 grant definition",
+      "verdict": "PREVIOUSLY_REVIEWED_PROVIDER_ROLE_EDGE_UNCHANGED"
+    },
+    {
+      "ordinal": 23,
+      "row_md5": "c818acbdc32edc58dcc4ef4baa5e403f",
+      "set_option": true,
+      "member_role": "postgres",
+      "admin_option": false,
+      "granted_role": "supabase_privileged_role",
+      "grantor_role": "supabase_admin",
+      "inherit_option": true,
+      "source_range": "1/1 grant definition",
+      "verdict": "PREVIOUSLY_REVIEWED_PROVIDER_ROLE_EDGE_UNCHANGED"
+    },
+    {
+      "ordinal": 24,
+      "row_md5": "22414b5eaa84a2948deab94155559d87",
+      "set_option": true,
+      "member_role": "supabase_etl_admin",
+      "admin_option": false,
+      "granted_role": "supabase_privileged_role",
+      "grantor_role": "supabase_admin",
+      "inherit_option": true,
+      "source_range": "1/1 grant definition",
+      "verdict": "PREVIOUSLY_REVIEWED_PROVIDER_ROLE_EDGE_UNCHANGED"
+    }
+  ],
+  "role_reachability": [
+    {
+      "candidate": "anon",
+      "is_member": true,
+      "principal": "anon",
+      "can_set_role": true,
+      "effective_usage": true,
+      "source_range": "complete 3-mode path",
+      "verdict": "SELF_ROLE"
+    },
+    {
+      "candidate": "authenticated",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "authenticator",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "dashboard_user",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_checkpoint",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_create_subscription",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_database_owner",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_execute_server_program",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "pg_maintain",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_monitor",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "pg_read_all_data",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "pg_read_all_settings",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_read_all_stats",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "pg_read_server_files",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "pg_signal_backend",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_stat_scan_tables",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_use_reserved_connections",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_write_all_data",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "pg_write_server_files",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "pgbouncer",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "postgres",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "service_role",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "supabase_admin",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "supabase_auth_admin",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "supabase_etl_admin",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "supabase_privileged_role",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "supabase_read_only_user",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "supabase_realtime_admin",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "supabase_replication_admin",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "supabase_storage_admin",
+      "is_member": false,
+      "principal": "anon",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "anon",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "authenticated",
+      "is_member": true,
+      "principal": "authenticated",
+      "can_set_role": true,
+      "effective_usage": true,
+      "source_range": "complete 3-mode path",
+      "verdict": "SELF_ROLE"
+    },
+    {
+      "candidate": "authenticator",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "dashboard_user",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_checkpoint",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_create_subscription",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_database_owner",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_execute_server_program",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "pg_maintain",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_monitor",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "pg_read_all_data",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "pg_read_all_settings",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_read_all_stats",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "pg_read_server_files",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "pg_signal_backend",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_stat_scan_tables",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_use_reserved_connections",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_write_all_data",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "pg_write_server_files",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "pgbouncer",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "postgres",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "service_role",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "supabase_admin",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "supabase_auth_admin",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "supabase_etl_admin",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "supabase_privileged_role",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "supabase_read_only_user",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "supabase_realtime_admin",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "supabase_replication_admin",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "supabase_storage_admin",
+      "is_member": false,
+      "principal": "authenticated",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_ADMIN_ROLE_PATH"
+    },
+    {
+      "candidate": "anon",
+      "is_member": true,
+      "principal": "authenticator",
+      "can_set_role": true,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "PROVIDER_ROLE_PATH"
+    },
+    {
+      "candidate": "authenticated",
+      "is_member": true,
+      "principal": "authenticator",
+      "can_set_role": true,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "PROVIDER_ROLE_PATH"
+    },
+    {
+      "candidate": "authenticator",
+      "is_member": true,
+      "principal": "authenticator",
+      "can_set_role": true,
+      "effective_usage": true,
+      "source_range": "complete 3-mode path",
+      "verdict": "SELF_ROLE"
+    },
+    {
+      "candidate": "dashboard_user",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_checkpoint",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_create_subscription",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_database_owner",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_execute_server_program",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_maintain",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_monitor",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_read_all_data",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_read_all_settings",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_read_all_stats",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_read_server_files",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_signal_backend",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_stat_scan_tables",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_use_reserved_connections",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_write_all_data",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_write_server_files",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pgbouncer",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "postgres",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "service_role",
+      "is_member": true,
+      "principal": "authenticator",
+      "can_set_role": true,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "PROVIDER_AUTHENTICATOR_CAN_SET_ROLE_INTENDED_PLATFORM_BOUNDARY"
+    },
+    {
+      "candidate": "supabase_admin",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "supabase_auth_admin",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "supabase_etl_admin",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "supabase_privileged_role",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "supabase_read_only_user",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "supabase_realtime_admin",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "supabase_replication_admin",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "supabase_storage_admin",
+      "is_member": false,
+      "principal": "authenticator",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "anon",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "authenticated",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "authenticator",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "dashboard_user",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_checkpoint",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_create_subscription",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_database_owner",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_execute_server_program",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_maintain",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_monitor",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_read_all_data",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_read_all_settings",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_read_all_stats",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_read_server_files",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_signal_backend",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_stat_scan_tables",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_use_reserved_connections",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_write_all_data",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pg_write_server_files",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "pgbouncer",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "postgres",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "service_role",
+      "is_member": true,
+      "principal": "service_role",
+      "can_set_role": true,
+      "effective_usage": true,
+      "source_range": "complete 3-mode path",
+      "verdict": "SELF_ROLE"
+    },
+    {
+      "candidate": "supabase_admin",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "supabase_auth_admin",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "supabase_etl_admin",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "supabase_privileged_role",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "supabase_read_only_user",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "supabase_realtime_admin",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "supabase_replication_admin",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    },
+    {
+      "candidate": "supabase_storage_admin",
+      "is_member": false,
+      "principal": "service_role",
+      "can_set_role": false,
+      "effective_usage": false,
+      "source_range": "complete 3-mode path",
+      "verdict": "NO_PATH"
+    }
+  ],
+  "schema_grants": [
+    {
+      "can_use": true,
+      "principal": "anon",
+      "can_create": false,
+      "schema_name": "auth",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": true,
+      "principal": "authenticated",
+      "can_create": false,
+      "schema_name": "auth",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": false,
+      "principal": "authenticator",
+      "can_create": false,
+      "schema_name": "auth",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": true,
+      "principal": "service_role",
+      "can_create": false,
+      "schema_name": "auth",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": true,
+      "principal": "anon",
+      "can_create": false,
+      "schema_name": "extensions",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": true,
+      "principal": "authenticated",
+      "can_create": false,
+      "schema_name": "extensions",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": false,
+      "principal": "authenticator",
+      "can_create": false,
+      "schema_name": "extensions",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": true,
+      "principal": "service_role",
+      "can_create": false,
+      "schema_name": "extensions",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": false,
+      "principal": "anon",
+      "can_create": false,
+      "schema_name": "private",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": true,
+      "principal": "authenticated",
+      "can_create": false,
+      "schema_name": "private",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": false,
+      "principal": "authenticator",
+      "can_create": false,
+      "schema_name": "private",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": true,
+      "principal": "service_role",
+      "can_create": false,
+      "schema_name": "private",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": true,
+      "principal": "anon",
+      "can_create": false,
+      "schema_name": "public",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": true,
+      "principal": "authenticated",
+      "can_create": false,
+      "schema_name": "public",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": true,
+      "principal": "authenticator",
+      "can_create": false,
+      "schema_name": "public",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": true,
+      "principal": "service_role",
+      "can_create": false,
+      "schema_name": "public",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": true,
+      "principal": "anon",
+      "can_create": false,
+      "schema_name": "realtime",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": true,
+      "principal": "authenticated",
+      "can_create": false,
+      "schema_name": "realtime",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": false,
+      "principal": "authenticator",
+      "can_create": false,
+      "schema_name": "realtime",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": true,
+      "principal": "service_role",
+      "can_create": false,
+      "schema_name": "realtime",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": true,
+      "principal": "anon",
+      "can_create": false,
+      "schema_name": "storage",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": true,
+      "principal": "authenticated",
+      "can_create": false,
+      "schema_name": "storage",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": false,
+      "principal": "authenticator",
+      "can_create": false,
+      "schema_name": "storage",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": true,
+      "principal": "service_role",
+      "can_create": false,
+      "schema_name": "storage",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": false,
+      "principal": "anon",
+      "can_create": false,
+      "schema_name": "supabase_migrations",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": false,
+      "principal": "authenticated",
+      "can_create": false,
+      "schema_name": "supabase_migrations",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": false,
+      "principal": "authenticator",
+      "can_create": false,
+      "schema_name": "supabase_migrations",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": false,
+      "principal": "service_role",
+      "can_create": false,
+      "schema_name": "supabase_migrations",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": false,
+      "principal": "anon",
+      "can_create": false,
+      "schema_name": "vault",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": false,
+      "principal": "authenticated",
+      "can_create": false,
+      "schema_name": "vault",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": false,
+      "principal": "authenticator",
+      "can_create": false,
+      "schema_name": "vault",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    },
+    {
+      "can_use": true,
+      "principal": "service_role",
+      "can_create": false,
+      "schema_name": "vault",
+      "verdict": "NO_SCHEMA_DDL_PERMISSION"
+    }
+  ],
+  "whitelisted_pg_settings": [
+    {
+      "name": "default_transaction_read_only",
+      "unit": null,
+      "source": "default",
+      "setting": "off",
+      "verdict": "RUNTIME_CONFIGURATION_READ_ONLY_OBSERVED"
+    },
+    {
+      "name": "idle_in_transaction_session_timeout",
+      "unit": "ms",
+      "source": "default",
+      "setting": "0",
+      "verdict": "OPERATIONAL_TELEMETRY_TUNING_NOT_CONFIRMED_DEFECT"
+    },
+    {
+      "name": "lock_timeout",
+      "unit": "ms",
+      "source": "default",
+      "setting": "0",
+      "verdict": "RUNTIME_CONFIGURATION_READ_ONLY_OBSERVED"
+    },
+    {
+      "name": "log_connections",
+      "unit": null,
+      "source": "configuration file",
+      "setting": "off",
+      "verdict": "RUNTIME_CONFIGURATION_READ_ONLY_OBSERVED"
+    },
+    {
+      "name": "log_disconnections",
+      "unit": null,
+      "source": "default",
+      "setting": "off",
+      "verdict": "RUNTIME_CONFIGURATION_READ_ONLY_OBSERVED"
+    },
+    {
+      "name": "log_min_duration_statement",
+      "unit": "ms",
+      "source": "default",
+      "setting": "-1",
+      "verdict": "OPERATIONAL_TELEMETRY_TUNING_NOT_CONFIRMED_DEFECT"
+    },
+    {
+      "name": "log_statement",
+      "unit": null,
+      "source": "configuration file",
+      "setting": "ddl",
+      "verdict": "RUNTIME_CONFIGURATION_READ_ONLY_OBSERVED"
+    },
+    {
+      "name": "max_connections",
+      "unit": null,
+      "source": "configuration file",
+      "setting": "60",
+      "verdict": "RUNTIME_CONFIGURATION_READ_ONLY_OBSERVED"
+    },
+    {
+      "name": "max_slot_wal_keep_size",
+      "unit": "MB",
+      "source": "configuration file",
+      "setting": "512",
+      "verdict": "RUNTIME_CONFIGURATION_READ_ONLY_OBSERVED"
+    },
+    {
+      "name": "password_encryption",
+      "unit": null,
+      "source": "configuration file",
+      "setting": "scram-sha-256",
+      "verdict": "RUNTIME_CONFIGURATION_READ_ONLY_OBSERVED"
+    },
+    {
+      "name": "row_security",
+      "unit": null,
+      "source": "configuration file",
+      "setting": "on",
+      "verdict": "RUNTIME_CONFIGURATION_READ_ONLY_OBSERVED"
+    },
+    {
+      "name": "search_path",
+      "unit": null,
+      "source": "user",
+      "setting": "\"\\$user\", public, extensions",
+      "verdict": "RUNTIME_CONFIGURATION_READ_ONLY_OBSERVED"
+    },
+    {
+      "name": "shared_preload_libraries",
+      "unit": null,
+      "source": "configuration file",
+      "setting": "pg_stat_statements, pgaudit, plpgsql, plpgsql_check, pg_cron, pg_net, pgsodium, auto_explain, pg_tle, plan_filter, supabase_vault",
+      "verdict": "RUNTIME_CONFIGURATION_READ_ONLY_OBSERVED"
+    },
+    {
+      "name": "ssl",
+      "unit": null,
+      "source": "configuration file",
+      "setting": "on",
+      "verdict": "RUNTIME_CONFIGURATION_READ_ONLY_OBSERVED"
+    },
+    {
+      "name": "statement_timeout",
+      "unit": "ms",
+      "source": "configuration file",
+      "setting": "120000",
+      "verdict": "RUNTIME_CONFIGURATION_READ_ONLY_OBSERVED"
+    },
+    {
+      "name": "superuser_reserved_connections",
+      "unit": null,
+      "source": "default",
+      "setting": "3",
+      "verdict": "RUNTIME_CONFIGURATION_READ_ONLY_OBSERVED"
+    },
+    {
+      "name": "track_activities",
+      "unit": null,
+      "source": "default",
+      "setting": "on",
+      "verdict": "RUNTIME_CONFIGURATION_READ_ONLY_OBSERVED"
+    },
+    {
+      "name": "track_counts",
+      "unit": null,
+      "source": "default",
+      "setting": "on",
+      "verdict": "RUNTIME_CONFIGURATION_READ_ONLY_OBSERVED"
+    },
+    {
+      "name": "track_io_timing",
+      "unit": null,
+      "source": "default",
+      "setting": "off",
+      "verdict": "OPERATIONAL_TELEMETRY_TUNING_NOT_CONFIRMED_DEFECT"
+    },
+    {
+      "name": "track_wal_io_timing",
+      "unit": null,
+      "source": "default",
+      "setting": "off",
+      "verdict": "RUNTIME_CONFIGURATION_READ_ONLY_OBSERVED"
+    },
+    {
+      "name": "wal_level",
+      "unit": null,
+      "source": "configuration file",
+      "setting": "logical",
+      "verdict": "RUNTIME_CONFIGURATION_READ_ONLY_OBSERVED"
+    }
+  ],
+  "session_aggregates": {
+    "total": 6,
+    "active": 1,
+    "lock_waiters": 0,
+    "over_5_min_xacts": 0
+  },
+  "findings": [
+    "Direct effective MEMBER/USAGE/SET role graph: no anonymous or authenticated path to high privilege roles including service_role or bulk data roles, 0 of 120 path rows indicative of novel client escalation.",
+    "authenticator has SET-only role-switch capability to service_role, anon and authenticated by provider design; real hosted JWT verification and exposed schema boundary not tested and remain #96 UNVERIFIED.",
+    "All 24 membership grant signatures and 30 role attribute signatures match immutable Run27 receipt exactly; no drift.",
+    "SSL, row_security on; scram-sha-256 password encryption; 120000ms statement_timeout. Idle transaction timeout 0, log_min_duration_statement -1 and track_io_timing off are possible monitoring/tuning improvements, not proven app failures.",
+    "Known realtime.subscription no-RLS + SELECT exposure remains prior issue; hosted API routing must be verified before asserting a leak or modifying provider settings."
+  ],
+  "limits": [
+    "No privileged role was actually SET or used in a session. Catalog privilege is not end-to-end proof of hosted authentication.",
+    "No provider credentials/config secrets or personal Auth user records read; disk free headroom and compiled internals inaccessible.",
+    "No Node/SQL/browser app tests repeated; this is read-only catalog and metadata analysis."
+  ],
+  "status": "BASELINE_IN_PROGRESS",
+  "next_cursor": "Migration #60 if introduced; else first genuinely changed/new/unreviewed provider object or newly accessible hosted Auth/JWT/PostgREST controls under Issue96."
+}
