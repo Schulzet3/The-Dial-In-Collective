@@ -1,0 +1,49 @@
+name: DIC Issue33 R124 original selected 584 La Paz evidence
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r124-584.yml
+      - scripts/audit/issue33-r124-584-check.mjs
+      - tests/coffee-issue33-r124-584.test.mjs
+      - docs/workstreams/ops-issue33-r124-584-20261111.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r124-584.yml
+      - scripts/audit/issue33-r124-584-check.mjs
+      - tests/coffee-issue33-r124-584.test.mjs
+permissions:
+  contents: read
+jobs:
+  selected-current:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Selected current positives and adversarial negatives
+        run: node --test tests/coffee-issue33-r124-584.test.mjs
+      - name: Guarded exact selected HTTPS and real parser Add Coffee
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '584'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r124
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Strict selected provenance and semantic afterproof
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r124
+          DIC_ISSUE33_R124_VERIFY: '1'
+        run: node scripts/audit/issue33-r124-584-check.mjs
+      - name: Short-lived raw public source for independent hash verification
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r124-selected-584
+          path: /tmp/dic33-r124/
+          retention-days: 1
+          if-no-files-found: warn
