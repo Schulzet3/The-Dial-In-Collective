@@ -510,6 +510,11 @@ export function recommendation(s,coffeeId,options={}) {
  const measuredLocalSuccess=measuredRecipeShots(s.shots).some(sh=>
   !sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&
   sh.basketId===basket.id&&sh.feedMode===feed&&sh.calibrationId===v.calibrationId&&
+  // Imported green history without a trustworthy chronological measurement
+  // cannot veto feedback from the latest valid, timestamped rated shot.
+  // Leave the original five ratings, notes and archived record untouched.
+  typeof sh.timestamp==='string'&&sh.timestamp.trim()&&
+  Number.isFinite(Date.parse(sh.timestamp))&&
   // An archived green label cannot veto actual latest feedback if its
   // recorded grind/temperature could not have been entered for this setup.
   // Preserve original ratings, measurements and private History unchanged.
