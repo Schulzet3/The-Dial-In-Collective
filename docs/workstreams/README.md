@@ -1,5 +1,7 @@
 # Scoped GitHub Work Journals
 
+- [Issue #33 R101 selected original603 #513/#516/#528 live source correction IN_PROGRESS](ops-issue33-r101-513-516-528-20261110.md) — current primary country/region and complete roast/flavor evidence; exact CI pending, #33 OPEN
+
 - [Issue #33 R100 original603 Ki-Saya #501 and AMCOS #504 selected-source TESTING](ops-issue33-r100-501-504-20261110.md) — exact guarded official source and parser CI pending, parent OPEN
 
 - [Issue #1591: first-shot starting-style guidance until shot is saved](issue-1591.md) — owner-Nov-8 Locked supersession, merged tests and queue READY; not deployed
