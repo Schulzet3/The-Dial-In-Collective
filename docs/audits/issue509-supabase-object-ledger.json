@@ -3885,6 +3885,20 @@
       "receipt_path": "docs/audits/issue509-run176-exact-source-ci-closure-2026-11-11.json",
       "provider_writes": 0,
       "baseline_complete": false
+    },
+    {
+      "date_utc": "2026-11-11",
+      "event": "RUN177_POST_MIGRATION_ADMISSION_END_TO_END",
+      "source_parent_sha": "0074e99e8778a642daebefcdeb46fc11fcdff3de",
+      "receipt_path": "docs/audits/issue509-post-migration-admission-end-to-end-2026-11-11-run177.json",
+      "functions_full": 11,
+      "rls_policies_full": 39,
+      "auth_trigger_full": 1,
+      "role_acl_rows": 8,
+      "postconditions": true,
+      "provider_writes": 0,
+      "new_defects": 0,
+      "baseline_complete": false
     }
   ],
   "state": "FULL_SUPABASE_PROVIDER_BASELINE_IN_PROGRESS",
@@ -17731,5 +17745,20 @@
     "provider_writes": 0,
     "baseline_complete": false,
     "closure_own_ci": "CHECK_AT_EXACT_CLOSURE_SHA"
+  },
+  "provider_admission_end_to_end_run177": {
+    "receipt_path": "docs/audits/issue509-post-migration-admission-end-to-end-2026-11-11-run177.json",
+    "source_parent_sha": "0074e99e8778a642daebefcdeb46fc11fcdff3de",
+    "functions_full_source": 11,
+    "auth_trigger_full": 1,
+    "rls_policy_full_expression": 39,
+    "role_schema_acl_rows": 8,
+    "current_stored_migrations": 64,
+    "validated_admission_check": true,
+    "privacy_safe_aggregate_zero_inconsistencies": true,
+    "provider_writes": 0,
+    "new_defects": 0,
+    "baseline_complete": false,
+    "next": "Migration #65 if added; otherwise changed or newly accessible Auth/API provider definition."
   }
 }
