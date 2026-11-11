@@ -1,0 +1,50 @@
+name: DIC Issue33 R114 original selected 559
+on:
+  pull_request:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r114-559.yml
+      - scripts/audit/issue33-r114-559-check.mjs
+      - tests/coffee-issue33-r114-559.test.mjs
+      - docs/workstreams/ops-issue33-r114-559-20261111.md
+  push:
+    branches: [development/backend-foundation]
+    paths:
+      - .github/workflows/issue33-r114-559.yml
+      - scripts/audit/issue33-r114-559-check.mjs
+      - tests/coffee-issue33-r114-559.test.mjs
+permissions:
+  contents: read
+jobs:
+  selected-current:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Source-bound current product positive/negative tests
+        run: node --test tests/coffee-issue33-r114-559.test.mjs
+      - name: Guarded bounded official HTTPS selected coffee / parser / UI
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_NUMBERS: '559'
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r114
+        run: node scripts/audit/issue33-original603-focused-source-review.mjs
+      - name: Verify exact current source identity and source hash
+        if: always()
+        env:
+          DIC_ISSUE33_FOCUSED_PUBLIC_DIR: /tmp/dic33-r114
+          DIC_ISSUE33_R114_VERIFY: '1'
+        run: node scripts/audit/issue33-r114-559-check.mjs
+      - name: Preserve bounded public selected evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dic33-r114-559
+          path: /tmp/dic33-r114/
+          retention-days: 1
+          if-no-files-found: warn
