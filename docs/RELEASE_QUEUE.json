@@ -12097,6 +12097,38 @@
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
       "notes": "Owner Option B safe reuse of prior snapshot/calibration integrity guard for sweetness/yield History comparison; original shots/notes/five ratings and existing one-yield-step policy preserved. Development only, not deployed. Exact merged source checked and fully app-governed READY for development only; no Netlify deployment or live production data/provider changes.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-last-rated-original-calibration",
+      "issue": 455,
+      "pr": 2001,
+      "title": "Do not let a corrupted imported newer non-green original grinder snapshot override the last valid measured rated shot recommendation",
+      "state": "READY",
+      "merged_source_sha": "cbf95b0baf00d80d0f7c90ee4045122e19785ca9",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "tests": [
+        "Same-commit code PR #2001, exact head 15c599374addec1fb955eed0dbd994318fb59f6f, six real-module synthetic negative/positive R180 cases including immutable original History. Exact PR-head Node22/lint 42973918046 SUCCESS: 3767 PASS, 0 FAIL, 6 intentional SKIP; all six new cases #3133-3138 PASS.",
+        "PR-head cloud UX/mobile/Chromium/offline 42973917853, isolated SQL 42973917961, source security 42973917921, approval/continuity 42973918139 all SUCCESS; frozen603 42973918022 SKIPPED NOT PASS.",
+        "PR #2001 nonforce squash merged cbf95b0baf00d80d0f7c90ee4045122e19785ca9; all three Git blobs for engine, six regressions and same-commit journal identical to reviewed head, no unrelated changes or removals.",
+        "Exact merged-source Node22/lint 42974204108 SUCCESS, 3767 PASS/0 FAIL/6 intentional SKIP, all six R180 regressions PASS. Merged cloud UX/mobile/Chromium/offline 42974204074 and governance 42974204066 SUCCESS. Unchanged SQL/security source head evidence reused, not labeled rerun.",
+        "No actual member incident or empirical espresso cup outcome; original historical shots, notes and five taste scales untouched. Research-only 48/48 pack reference cases are not application CI."
+      ],
+      "ci_runs": [
+        42973918046,
+        42973917853,
+        42973917961,
+        42973917921,
+        42973918139,
+        42974204108,
+        42974204074,
+        42974204066
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Owner Option B safe reuse of existing historical grinder snapshot/calibration guard for latest rated feedback. Preserve five tastes, original private History, single intentional change, style/feed/grinder versions and Locked priors. Development ONLY, not deployed, no production/provider writes.",
+      "production_deployed": false
     }
   ],
   "history": [
@@ -13378,6 +13410,15 @@
       "state": "READY",
       "source_sha": "6d386d4e41d09c12ec0487dc7e222e74f5e277de",
       "evidence": "docs/workstreams/issue-455.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-11",
+      "issue": 455,
+      "item_id": "DIC-Q-455-last-rated-original-calibration",
+      "state": "READY",
+      "source_sha": "cbf95b0baf00d80d0f7c90ee4045122e19785ca9",
+      "evidence": "docs/workstreams/ops-issue455-r180-last-rated-original-calibration-20261111.md",
       "production_deployed": false
     }
   ],
