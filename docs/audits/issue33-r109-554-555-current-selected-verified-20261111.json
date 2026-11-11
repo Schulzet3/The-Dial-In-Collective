@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "run": "R109",
+  "scope": "DEVELOPMENT_ONLY",
+  "status": "TWO_SELECTED_CASES_SOURCE_AND_ACTUAL_PARSER_VERIFIED_NO_RUNTIME_CHANGE",
+  "source_code_merge": {
+    "pr": 2003,
+    "reviewed_head": "7a3d391fe071e0d3c1e3df7b8cefba8fb1ca66cd",
+    "base_parent": "36b8561bab7706ca09ed8480b7a22bc8ced99d93",
+    "merged_sha": "6cd47f20daa693b3d0277141d1a6f0e9f2d4cf4e",
+    "tree": "cd7aba2d6d862d9d1250a51c8fc0bf649471883d",
+    "reviewed_and_merged_blobs_identical": true,
+    "paths": {
+      "scripts/audit/issue33-r109-554-555-check.mjs": "72070facaced531cc75848c7ff24429fff8c7d29",
+      "tests/coffee-issue33-r109-554-555.test.mjs": "c9030340af81a9dd69919f3895a337be1a49522f",
+      ".github/workflows/issue33-r109-554-555.yml": "a6cd97ca7d25ece776bd4cc840ae92f2e63310f7",
+      "docs/workstreams/ops-issue33-r109-554-555-20261111.md": "01285d9774c49934d4c397fd8ff260a6892d4ddc"
+    }
+  },
+  "original_corpus": {
+    "csv_path": "docs/audits/issue33-original603-source-level-adjudication-20261029.csv",
+    "git_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "modified": false,
+    "oracle_or_scorer_modified": false,
+    "full_frozen_workflow": {
+      "run_id": 42976674315,
+      "conclusion": "SKIPPED_NOT_PASS"
+    }
+  },
+  "official_selected_current_source": [
+    {
+      "number": 554,
+      "coffee": "Organic Mexican",
+      "url": "https://www.roc2.com/products/organic-mexican",
+      "h1": "Organic Mexican",
+      "literal": "A well-balanced lighter roast with molasses, caramel, and lemongrass tasting notes. Sourced from organic Mexican farms",
+      "source_priority": "CURRENT_SELECTED_DIRECT_DESCRIPTION",
+      "parsed_fields": {
+        "name": "Organic Mexican",
+        "roaster": "ROC²",
+        "origin": "Mexico",
+        "tasting_notes": "molasses, caramel, and lemongrass"
+      },
+      "not_promoted": {
+        "roast_level": "Historical expectation Light and current SEO Light, but selected direct prose says only relative 'lighter roast'; leave category blank",
+        "process": "not directly published",
+        "variety": "not directly published",
+        "elevation_m": "not directly published"
+      },
+      "html_bytes": 311777,
+      "html_sha256": "37ea5611af1e8273c5e4b59f2af576f286ad3f2a174470b54030911557b7d3a0",
+      "review": "SOURCE_QUALIFIED_MISSING_VALUE_REVIEWED_NO_CURRENT_PARSER_DEFECT"
+    },
+    {
+      "number": 555,
+      "coffee": "Organic Timor",
+      "url": "https://www.roc2.com/products/organic-timor",
+      "h1": "Organic Timor",
+      "literal": "single-origin medium roast; pineapple and fresh orange juice; smooth finish of raw sugar",
+      "source_priority": "CURRENT_SELECTED_DIRECT_DESCRIPTION",
+      "parsed_fields": {
+        "name": "Organic Timor",
+        "roaster": "ROC²",
+        "origin": "Timor",
+        "roast_level": "Medium",
+        "tasting_notes": "pineapple, fresh orange juice, raw sugar"
+      },
+      "not_promoted": {
+        "process": "'natural sweetness' describes sensory taste, not Natural green processing",
+        "elevation_m": "not published",
+        "producer": "not published"
+      },
+      "html_bytes": 311546,
+      "html_sha256": "0240c032c72ccb01328193953014481edb61a2c2e8dc11c3506897c46e74aede",
+      "review": "PREVIOUSLY_MISSING_RAW_SUGAR_NOW_PRESENT_IN_CURRENT_PARSER_NO_DEFECT"
+    }
+  ],
+  "acceptance": {
+    "pr_head": {
+      "guarded_selected_run": 42976674489,
+      "focused_tests_pass": 8,
+      "fail": 0,
+      "afterproof_pass": true,
+      "node_lint_run": 42976674322,
+      "node_pass": 3775,
+      "node_fail": 0,
+      "node_skips": 6,
+      "node_lint": "SUCCESS",
+      "mobile_browser_run": 42976674310,
+      "python_run": 42976674431,
+      "governance_run": 42976674307,
+      "private_source_run": 42976674347,
+      "sql_run": 42976674473,
+      "conclusion": "ALL_APPLICABLE_SUCCESS"
+    },
+    "exact_merged": {
+      "source_sha": "6cd47f20daa693b3d0277141d1a6f0e9f2d4cf4e",
+      "guarded_selected_run": 42977145369,
+      "focused_tests_pass": 8,
+      "fail": 0,
+      "afterproof_pass": true,
+      "node_lint_run": 42977145475,
+      "node_pass": 3775,
+      "node_fail": 0,
+      "node_skips": 6,
+      "node_lint": "SUCCESS",
+      "mobile_browser_run": 42977145396,
+      "python_run": 42977145366,
+      "governance_run": 42977145538,
+      "conclusion": "ALL_APPLICABLE_SUCCESS"
+    },
+    "independent_exact_merged_artifact": {
+      "artifact_id": 13835064823,
+      "bytes": 154577,
+      "zip_sha256": "5290521637b2bc23b79f1594ae0f70bbcd6412f2c058125d969423a9fe6b8020",
+      "matches_github_digest": true,
+      "html_554_sha256": "37ea5611af1e8273c5e4b59f2af576f286ad3f2a174470b54030911557b7d3a0",
+      "html_555_sha256": "0240c032c72ccb01328193953014481edb61a2c2e8dc11c3506897c46e74aede",
+      "report_sha256": "7bd659e3c6d25ebc3edd6477b3fac3052d6ebc9fd8d2727f9d146f5391e04324",
+      "afterproof_sha256": "e5792cdbb26799befdbe4be75d5b8e93edd6ad982c68993c6bbc525954c72841",
+      "afterproof_source_sha": "6cd47f20daa693b3d0277141d1a6f0e9f2d4cf4e",
+      "passed": true,
+      "failures": []
+    }
+  },
+  "results": {
+    "actual_parser_reproduced_defects": 0,
+    "runtime_code_changes": 0,
+    "new_release_queue_ready_items": 0,
+    "production_operations": 0,
+    "manual_certified": 0,
+    "source_retrieval_failures": 0
+  },
+  "boundaries": {
+    "issue33": "OPEN_603_SEMANTIC_CERTIFICATION_UNFINISHED",
+    "exceptions_unresolved": [
+      566,
+      567,
+      594
+    ],
+    "separate_owners": [
+      "#267 V2",
+      "#96 security"
+    ],
+    "release": "NOT_AUTHORIZED_NOT_DEPLOYED",
+    "next": "Distinct high confidence unresolved original #556 or another nonoverlapping product; verify actual selected source and parser, fix only independently demonstrated defect"
+  }
+}
