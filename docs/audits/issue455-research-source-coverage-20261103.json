@@ -5053,6 +5053,40 @@
         "new_regressions_passed": 7,
         "original603_status": "SKIPPED_NOT_PASS"
       }
+    },
+    {
+      "id": "R455-EV-APP-186-A",
+      "source": "Original engine blob fab7de1a3284d5dba7d6f4f2d58530acfb5868e0 @ exact development 7330cb7b0706ad6369d355dc3beb039506d8008a; prefill() 615-647; existing familyEvidenceShots() 64-82; R167 earlier tests",
+      "claim": "A newer no-snapshot archived shot whose original known calibration was [3,5] with recorded grinder dial 2.5 passed current [0,5] prefill gate and displaced older valid 18g/93C dose and temperature with impossible 25g/99C. This did not affect the separately guarded original recipe evidence or source History.",
+      "grade": "DIRECT_LIVE_CODE_DETERMINISTIC_SYNTHETIC_CONTROL_FLOW_NOT_OBSERVED_MEMBER_OR_TASTE",
+      "current_app": "Prior prefill measuredRecipeShots plus admissible only checked snapshot else today's grinder bounds, ignoring known historical calibration. Original source notes, shot and ratings retained.",
+      "result": "SAFE_LOCKED_COMPATIBLE_PREFILL_HISTORY_ELIGIBILITY_CORRECTION_MERGED",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-APP-186-B",
+      "source": "Exact merged site/lib/engine.js Git blob 7ef0a465d6b98483a604d17b3247560d98de736b; tests/issue455-prefill-original-calibration.test.mjs blob b403f52a06527cbefb01c0a15a15df75c7b2687b; SAME-COMMIT journal blob 428efb81b50a3428f032e479c8a38d996bbde397; code PR #2052 head 0abc94177e95ab2ffe552be1e15f05a24179c693 and nonforce squash merge 6e355b3f1f4b2133def9d0074caa6520d543a5a2",
+      "claim": "Seven targeted real-module synthetic positive/negative cases verify rejection of invalid/reversed original calibration, original valid endpoints, compatible missing legacy snapshots, non-green valid measured history and feed separation, without source History mutation. Head and merge Node22 both 3848 PASS, zero FAIL, six intentional SKIP; applicable head/merged UX and governance SUCCESS, head isolated SQL/security SUCCESS.",
+      "grade": "EXACT_SOURCE_HEAD_AND_MERGED_NODE22_REAL_MODULE_7_OF_7_PASS_CI",
+      "current_app": "Reuse original-calibration-aware familyEvidenceShots(s,shots) before prefill selection; original shot, five taste ratings, notes and private History unchanged. No numeric tastes/heuristics or speculative science.",
+      "result": "DEVELOPMENT_READY_NOT_DEPLOYED",
+      "owner_approval": false,
+      "test_evidence": {
+        "node_head": 43023024746,
+        "node_merge": 43023522596,
+        "ux_head": 43023024778,
+        "ux_merge": 43023522736,
+        "sql_head": 43023025005,
+        "security_head": 43023024833,
+        "governance_head": 43023024861,
+        "governance_merge": 43023523069,
+        "original603_head": 43023024800,
+        "original603": "SKIPPED_NOT_PASS",
+        "passed": 3848,
+        "failed": 0,
+        "skipped": 6,
+        "new_regressions_passed": 7
+      }
     }
   ],
   "policy_decisions_pending": [],
@@ -5061,7 +5095,7 @@
     "tests_executed": true,
     "production_deployed": false,
     "queue_changed": true,
-    "reason": "R180 safe code PR #2001 merged and exact code source/CI passed; docs-only READY reconciliation has independent PR-head and merged-governance still pending"
+    "reason": "R186 original-grinder-calibration prefill guard merged source PR #2052; PR-head and exact merged Node22/UX/governance verified; development READY queue reconciliation"
   },
   "next_actions": [
     "R455-168 FINAL: PR1901 exact reviewed head 3b65c3... nonforce merged 767e12c8e763959f0b6677f4de7ad7e69ce80cf3 all five blobs identical. Node22/lint 3600 PASS/0 FAIL/6 SKIP head 42887964674 and merge 42888613274; mobile/browser/offline, head SQL/security and approval, merged governance all SUCCESS; original603 SKIPPED. Queue READY development-only, not published. S019 unavailable, #267 separate V2 literal review uncredited.",
@@ -5183,16 +5217,17 @@
     "R455-182 PR #2017 safely merged d565bd905dd536d3fed57f371597350cd5d8871c after six applicable PR-head successful jobs; merged Node22 3791/0/6 and all seven new regressions, merged UX/mobile/offline and governance SUCCESS. One source-bound development READY queue row reconciled via docs-only PR pending CI/merge. No production data, deployed state, new science policy or #267 line credit. Next distinct Log Shot/Rate/Recommendation or verified primary science gap.",
     "R455-183 original-snapshot-calibration personal grinder/Slow Feed guard nonforce merged PR #2028 be6ad8df744305c3cb95488f1d2ca8b79dc9dd06, three blob identities equal head; Node22 head and merged each 3806 PASS/0 FAIL/6 SKIP including seven new cases; head/merged Chromium/offline and governance SUCCESS; SQL/security head SUCCESS, frozen603 SKIPPED. One distinct development-only READY queue item now reconciled; retain S019 access gap and #267 separate line task. Next independently inspect remaining UX/history source gap.",
     "R455-184 PR #2035 safely nonforce merged d936f59cb31c7399fab8e779ac5c8517a939c2c7, original historical calibration excluded from similar-coffee donors; 7 positive/negative real-module tests PASS exact head/merge, Node22 3820 PASS/0 FAIL/6 SKIP, UX/offline and governance merged SUCCESS; SQL/security head SUCCESS. New unique development READY queue item reconciled in docs-only PR pending its own CI. No policy/production change, original S019 unavailable, #267 separate line task. Next distinct source-bound research or UX evidence gap.",
-    "R455-185 PR #2044 nonforce merged 2a2249923ffcd2cf052b4bd2769c9d46446352ba with four exact blobs, seven positive/negative synthetic tests, head/merge Node22/lint 3834 PASS/0 FAIL/6 SKIP and applicable head/merge UX + governance success; SQL/security head SUCCESS, frozen603 SKIPPED NOT PASS. One distinct dev-only READY queue item reconciled; no deploy. Next source-backed disjoint Log Shot/Rate/Recommendation UX gap or primary research claim. S019 inaccessible, #267 independent full audit zero credit."
+    "R455-185 PR #2044 nonforce merged 2a2249923ffcd2cf052b4bd2769c9d46446352ba with four exact blobs, seven positive/negative synthetic tests, head/merge Node22/lint 3834 PASS/0 FAIL/6 SKIP and applicable head/merge UX + governance success; SQL/security head SUCCESS, frozen603 SKIPPED NOT PASS. One distinct dev-only READY queue item reconciled; no deploy. Next source-backed disjoint Log Shot/Rate/Recommendation UX gap or primary research claim. S019 inaccessible, #267 independent full audit zero credit.",
+    "R455-186 PR #2052 exact code head 0abc9417 nonforce merged 6e355b3f; three code/test/same-commit journal blobs identical; head/merged Node22/lint 3848 PASS/0 FAIL/6 SKIP, all 7 new cases PASS, head+merged mobile/browser/offline and governance, head isolated SQL/security SUCCESS. One dev-only READY item; original S019 inaccessible, #267 literal review ZERO; continue distinct source-bound research/UX gap."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-185",
-    "source_sha": "2a2249923ffcd2cf052b4bd2769c9d46446352ba",
+    "run_id": "R455-186",
+    "source_sha": "6e355b3f1f4b2133def9d0074caa6520d543a5a2",
     "phase": "SAFE_CODE_EXACT_HEAD_MERGED_TESTED_DEVELOPMENT_READY",
     "source_counts": {
       "research_project_sources": 96,
-      "bounded_evidence_checks": 286,
-      "proposals": 146
+      "bounded_evidence_checks": 288,
+      "proposals": 147
     },
     "release_state": "DEVELOPMENT_READY_NOT_DEPLOYED",
     "original_s019": "INACCESSIBLE_UNREVIEWED",
@@ -8388,6 +8423,43 @@
         "skipped": 6,
         "original603": "SKIPPED_NOT_PASS"
       }
+    },
+    {
+      "id": "R455-PROP-186-PREFILL-ORIGINAL-CALIBRATION",
+      "finding": "A no-snapshot archived shot impossible on its original known grinder calibration could supply false new-shot dose and temperature prefills, despite valid earlier physical history.",
+      "evidence": [
+        "R455-EV-APP-186-A",
+        "R455-EV-APP-186-B"
+      ],
+      "severity": "P2_SYNTHETIC_REPRODUCIBLE_LOG_SHOT_PREFILL_HISTORY_INTEGRITY",
+      "user_benefit": "Prefill only actual physically admissible historical dose and temperature, without deleting or changing original records or using another calibration's grinder setting.",
+      "source_provenance": "Source prechange engine fab7de1a3284d5dba7d6f4f2d58530acfb5868e0, exact head/merged CI and Git blobs; previously inventoried separate slow-feed PDF not new claim. Not empirical espresso quality or known member incident.",
+      "current_locked": "All five taste inputs, recorded original shot/notes/private History, no unapproved new numerical targets, independent style/feed and grinder-calibration versions, existing measured shot bounds and single-change advice.",
+      "current_app": "Before source fix, prefill missing-snapshot fallback used current grinder range to accept known impossible older calibration; other engine evidence already had valid familyEvidenceShots guard.",
+      "proposed_change": "Narrow reuse existing familyEvidenceShots before unchanged prefill checks, without changing member data, configuration, styles/feed, science priors or user inputs.",
+      "approval_required_for_behavior_change": false,
+      "implementation": "SAFE_CODE_TEST_SAME_COMMIT_JOURNAL_PR2052_VERIFIED_NONFORCE_MERGED",
+      "test_plan": "7 real-module positive/negative synthetic Node22 head/merged PASS, 3848 PASS/0 FAIL/6 SKIP each; exact merged UX/mobile/offline and governance SUCCESS, head SQL/privacy/security SUCCESS; frozen603 SKIPPED.",
+      "release_queue_status": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false,
+      "exact_source": {
+        "head": "0abc94177e95ab2ffe552be1e15f05a24179c693",
+        "merge": "6e355b3f1f4b2133def9d0074caa6520d543a5a2",
+        "node_head": 43023024746,
+        "node_merge": 43023522596,
+        "ux_head": 43023024778,
+        "ux_merge": 43023522736,
+        "sql_head": 43023025005,
+        "security_head": 43023024833,
+        "governance_head": 43023024861,
+        "governance_merge": 43023523069,
+        "new_cases_passed": 7,
+        "passed": 3848,
+        "failed": 0,
+        "skipped": 6,
+        "original603": "SKIPPED_NOT_PASS"
+      }
     }
   ],
   "changeScope": {
@@ -8395,6 +8467,6 @@
     "tests_executed": true,
     "production_deployed": false,
     "queue_changed": true,
-    "reason": "R455-184 exact source head/merged code CI independently verified and development READY documentation reconciliation; no deployment"
+    "reason": "R186 original-grinder-calibration prefill guard merged source PR #2052; PR-head and exact merged Node22/UX/governance verified; development READY queue reconciliation"
   }
 }
