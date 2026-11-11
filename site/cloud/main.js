@@ -940,7 +940,17 @@ class CloudApp {
     const r=E.recommendation(this.state,this.logCoffee,{style:this.draft.style,basketId:this.draft.basketId,feedMode:this.draft.feedMode});
     const control=a==='use-grind'?'grind':'temperature';
     if(control==='grind')sheet.querySelector('[name=grindSetting]').value=r.grind.value;
-    else{this.draft.tempC=r.tempC;sheet.querySelector('[name=temperature]').value=C.tempDisplay(r.tempC,this.logUnit);}
+    else{
+      this.draft.tempC=r.tempC;
+      const temperatureInput=sheet.querySelector('[name=temperature]');
+      if(temperatureInput){
+       temperatureInput.value=C.tempDisplay(r.tempC,this.logUnit);
+       // Explicitly using the recommended value replaces the historical
+       // prefill; its cross-style provenance no longer describes this value.
+       temperatureInput.closest?.('.field')?.querySelector?.('small')?.remove?.();
+      }
+      this.draft.tempSource='';
+     }
     this.draft.recommendationContext={
       source_label:String(r.source||'Starting recommendation').slice(0,90),
       used_controls:[...new Set([...(this.draft.recommendationContext?.used_controls||[]),control])],
