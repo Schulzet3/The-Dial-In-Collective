@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "run": 105,
+  "date_utc": "2026-11-11",
+  "status": "VERIFIED_SCOPED_READY_DEVELOPMENT_ONLY",
+  "source_pr": 1970,
+  "source_merged_sha": "508982265555ac1d2a35d923987b67e83b688491",
+  "source_git_blobs": {
+    "src/server/coffee-page-metadata.mjs": "1056d5503dfe5177289719b6f926329f5edc615c",
+    "tests/coffee-issue33-r105-543.test.mjs": "59847d3db8863503092aa1a398ed317bfb223a9f",
+    ".github/workflows/issue33-r105-543.yml": "9d835209d2dc65bf8ec16e0726c630be32f59b70",
+    "scripts/audit/issue33-r105-543-check.mjs": "c154586b6a5dbb4ef2ef6dba2bdd7b87e8a81617"
+  },
+  "selected": {
+    "number": 543,
+    "official_url": "https://www.rallycoffee.co/products/mexico-chiapas-seasonal-espresso",
+    "h1": "Mexico Chiapas Seasonal Espresso",
+    "direct_fields": {
+      "origin": "Chiapas, Mexico",
+      "producer": "Comon Yaj Noptic cooperative"
+    },
+    "seo_only_flavor": "red apple, panels, brown sugar",
+    "canonical_notes": null,
+    "unpublished": [
+      "roast_level",
+      "process",
+      "lot_variety",
+      "numeric_elevation"
+    ],
+    "source_review_metadata_preserved": true
+  },
+  "initial_failed": {
+    "run": 42950199889,
+    "focused_pass": 8,
+    "focused_fail": 1,
+    "reason": "deictic current selected product story under H1 did not repeat exact product name; old SEO tasting notes auto-filled",
+    "guarded_public_https_skipped": true
+  },
+  "fix": "Generic unique exact-H1 and substantive own 'This coffee' or 'This lot' story rank guard; preserve direct selected notes and identity-matched metadata fallback without current story; no lot-specific branch",
+  "immutable_original_csv": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "oracle_scorer_modified": false
+  },
+  "pr_head": {
+    "focused_run": 42950363977,
+    "focused_pass": 11,
+    "focused_fail": 0,
+    "node_lint_run": 42950364436,
+    "node_pass": 3722,
+    "node_fail": 0,
+    "node_skip": 6
+  },
+  "exact_merged": {
+    "source_sha": "508982265555ac1d2a35d923987b67e83b688491",
+    "focused_run": 42950669704,
+    "source_zip_artifact_id": 13825176229,
+    "source_zip_bytes": 42164,
+    "source_zip_sha256": "9ea3e0ca3d79390670e35d2f2b7c6e07563b16ee73daaeb5438eb98d15ea94af",
+    "official_html_bytes": 129038,
+    "official_html_sha256": "e6a9aaaa9b49605e85b97f00110a5919aee09711cf4b418431314dd2ef8bbb5d",
+    "source_json_sha256": "463091db22e2ff7974032b3194472cd1545c2ee78e24e8eb1232f9eda4f32316",
+    "afterproof_json_sha256": "958aaa0654d8d77da575b15ed2428a88842dff0c415802c5999c14bf2d2626fc",
+    "strict_afterproof_passed": true,
+    "failures": [],
+    "manual_certified": 0,
+    "production_operations": 0,
+    "actual_parser_add_coffee_source_review": true,
+    "node_lint_run": 42950669488,
+    "node_pass": 3722,
+    "node_fail": 0,
+    "node_skip": 6,
+    "cloud_mobile": 42950669640,
+    "approval": 42950669427,
+    "python": 42950669429
+  },
+  "separate_existing_unavailable_sources": [
+    {
+      "cases": [
+        566,
+        567
+      ],
+      "failed_current_source_run": 42950669366
+    },
+    {
+      "cases": [
+        594
+      ],
+      "failed_current_source_run": 42950669572
+    }
+  ],
+  "scope_queue_id": "DIC-Q-33-original603-543-selected-current-this-coffee-seo-flavor-guard",
+  "full603_semantic_certification": false,
+  "frozen_full_workflow_skipped": true,
+  "issue33_remains_open": true,
+  "production_deployed": false,
+  "other_scope_owners": [
+    267,
+    96
+  ]
+}
