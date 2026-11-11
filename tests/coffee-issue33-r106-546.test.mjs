@@ -18,7 +18,7 @@ test('navigation, sidebar or SEO facts cannot substitute for missing selected pr
  const x=selectedProof(empty);assert.equal(x.uniqueH1,true);assert.ok(x.direct.every(v=>v===false));
 });
 test('a revised current lot or omitted spec fails literal source proof',()=>{
- const changed=html(current.replace('Alfredo Rojas','Different producer')).replace('Variety: Monte Claro','Variety: Caturra');
+ const changed=html().replaceAll('Alfredo Rojas','Different producer').replace('Variety: Monte Claro','Variety: Caturra');
  const x=selectedProof(changed);
  assert.equal(x.direct[1],false);assert.equal(x.direct[10],false);
 });
