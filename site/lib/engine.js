@@ -497,7 +497,10 @@ export function recommendation(s,coffeeId,options={}) {
  // An unloggable archived shot must never replace a usable fresh recommendation
   // with a cached adjustment or diagnostic based on impossible measured controls.
   // Preserve that shot, its original notes/ratings and its saved suggestion in History.
-  const last=measuredRecipeShots(s.shots).filter(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.basketId===basket.id&&sh.feedMode===feed&&sh.calibrationId===v.calibrationId&&
+  // Imported non-green feedback must also be valid on its ORIGINAL recorded
+  // grinder calibration. A corrupted newer snapshot stays in private History,
+  // but cannot replace an older valid measured shot's next-shot advice.
+  const last=familyEvidenceShots(s,measuredRecipeShots(s.shots)).filter(sh=>!sh.hidden&&sh.coffeeId===coffeeId&&sh.setupVersionId===v.id&&sh.style===style&&sh.basketId===basket.id&&sh.feedMode===feed&&sh.calibrationId===v.calibrationId&&
    finite(sh.grindSetting)&&sh.grindSetting>=v.grinderMin&&sh.grindSetting<=v.grinderMax&&
    (sh.tempC==null||validRecordedTemperature(sh.tempC))&&
    typeof sh.timestamp==='string'&&sh.timestamp.trim()&&Number.isFinite(Date.parse(sh.timestamp))).sort((a,b)=>Date.parse(b.timestamp)-Date.parse(a.timestamp))[0];
