@@ -4883,5 +4883,19 @@
       "release_receipt": "docs/releases/2026-11-10_READY4_DEPLOYED_VERIFIED.md",
       "real_device_acceptance": "NOT_PERFORMED"
     }
+  },
+  "current_owner_admin_web_push_20261110": {
+    "id": "ACCESS-ADMIN-HOMESCREEN-WEB-PUSH-20261110",
+    "status": "Locked",
+    "date": "2026-11-10",
+    "issue": 1938,
+    "title": "Permissioned off-screen push for actionable administrator tasks",
+    "owner_source": "Owner explicitly requested push notifications even outside the Admin screen on Nov 10, 2026.",
+    "decision": "Notify opted-in admitted administrators on iOS Home Screen when new email-verified signup approvals, pending/conflicting coffees or unfinished account deletions require action. Preserve in-app badges. Deliver generic, content-free Web Push without member identity, notes or shot data; administrator Auth revalidated for registration, live admin role rechecked for every scheduled delivery, no alerts for unverified signups. Offer device opt-out and remove stale subscriptions.",
+    "scope": "Source-only Netlify scheduled sender, verified Admin subscription API, strict VAPID endpoint validation, service-only Supabase SQL table/aggregate, PWA worker/client, tests and queue; separate owner Publish and verified runtime secrets required for delivery.",
+    "supersedes": "Only the previous absence of off-app delivery in #1756; preserves all signup approval, Auth, admin isolation, offline/Community, source-isolation and publication gates.",
+    "source_status": "TESTING",
+    "production_status": "NOT_DEPLOYED",
+    "provider_limit": "Runtime Netlify SUPABASE_SERVICE_ROLE_KEY and newly generated DIC_ADMIN_PUSH_VAPID_PUBLIC_KEY/PRIVATE_KEY must be securely configured at authorized release, then live phone permission and Apple delivery verified. No credentials in GitHub source or chat."
   }
 }

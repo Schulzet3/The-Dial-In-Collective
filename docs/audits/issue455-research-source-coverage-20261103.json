@@ -4717,6 +4717,24 @@
       "current_app": "Invalid historical control could bias an unproven cross-style starting ratio, while actual measured history remains private and preserved.",
       "result": "SAFE_OTHER_STYLE_RATIO_EVIDENCE_GUARD_NONFORCE_MERGED_HEAD_MERGED_CI_PASS",
       "owner_approval": false
+    },
+    {
+      "id": "R455-EV-APP-173-A",
+      "source": "site/lib/engine.js blob 336d9e1b4dbda27474bc9948701031993b60ee23 at development 3e60b5acdc069fdc315d910a77dcf06a3590cd1d lines 32-105",
+      "claim": "familyStats/familiesFor/chooseRecipeFamily used measuredRecipeShots (dose/yield/time only), so a five-green archived shot with explicitly invalid grinder or temperature could anchor same-style family ratio/time and be presented as personal successful evidence.",
+      "grade": "DIRECT_CURRENT_SOURCE_INSPECTION_SYNTHETIC_REGRESSIONS_AUTHORED_CI_PENDING_NOT_REAL_MEMBER",
+      "current_app": "Invalid-control family selection could outrank valid starting reference or alternative families.",
+      "result": "SAFE_GUARD_AUTHORED_NOT_YET_TESTED",
+      "owner_approval": false
+    },
+    {
+      "id": "R455-EV-APP-173-B",
+      "source": "site/lib/model.js blob 00c027c5f10d938fa2cc050572286eb9570817de; site/lib/engine.js 336d9e1b4dbda27474bc9948701031993b60ee23",
+      "claim": "Actual recorded original grinder snapshot and prior calibration bounds, not today's arbitrary dial position, define admissibility; missing optional historical controls remain eligible.",
+      "grade": "DIRECT_RECORDED_MODEL_SNAPSHOT_AND_VERSION_STRUCTURES; SYNTHETIC_TESTS_PENDING",
+      "current_app": "Family evidence omitted historic-control validity check while independent same-coffee and cross-style guards already checked it.",
+      "result": "SNAPSHOT_FIRST_FAMILY_EVIDENCE_GUARD_AUTHORED",
+      "owner_approval": false
     }
   ],
   "policy_decisions_pending": [],
@@ -4833,16 +4851,16 @@
     "R455-172 PR #1940 source head dd8a272 exact six applicable jobs all SUCCESS except frozen603 explicitly SKIPPED; nonforce squash code merge 56361886, four source blobs identical; postmerge Node22/cloud/browser/governance SUCCESS. Separate docs queue item READY DEVELOPMENT ONLY (not deployed); original S019 inaccessible and #267 literal audit credit 0."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-172",
-    "source_sha": "56361886c96c0230a2cc547b1437c7fcfb907066",
+    "run_id": "R455-173",
+    "source_sha": "3e60b5acdc069fdc315d910a77dcf06a3590cd1d",
     "issue": 455,
-    "phase": "SAFE_CODE_MERGED_EXACT_SOURCE_CI_VERIFIED_READY_DOCS_RECONCILIATION",
+    "phase": "SAFE_FAMILY_EVIDENCE_FIX_AUTHORED_PR_CI_UNVERIFIED",
     "source_counts": {
       "sources": 94,
-      "evidence_checks": 260,
-      "proposals": 133
+      "evidence_checks": 262,
+      "proposals": 134
     },
-    "release_state": "READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+    "release_state": "IN_PROGRESS_NOT_READY_NOT_DEPLOYED",
     "original_s019": "UNAVAILABLE_NOT_REVIEWED",
     "github267_literal_review_credit": 0
   },
@@ -7648,6 +7666,28 @@
       "implementation": "SAFE_ENGINE_AND_SIX_SYNTHETIC_TEST_GROUPS_NONFORCE_MERGED_56361886; VERIFIED_HEAD_AND_MERGED_SOURCE_NODE22_BROWSER_SQL_SECURITY_GOVERNANCE; NOT_DEPLOYED",
       "test_plan": "Six R172 groups actual PASS; Node22 head/merge 3647 PASS 0 FAIL 6 intentional SKIP, browser/offline/SQL/security/approval passed; frozen603 SKIPPED and no real-member or espresso efficacy claimed.",
       "release_queue_status": "DIC-Q-455-cross-style-recorded-control-evidence-guard_READY_DEVELOPMENT_ONLY_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
+    },
+    {
+      "id": "R455-PROP-173-FAMILY-MEASURED-CONTROLS",
+      "finding": "Same-style successful recipe family ratio/time windows could be established by a five-green historical record whose expressly recorded grinder or optional temperature was impossible, despite recent SAFE eligibility corrections elsewhere.",
+      "evidence": [
+        "R455-EV-APP-173-A",
+        "R455-EV-APP-173-B"
+      ],
+      "severity": "P2_SYNTHETIC_SAME_STYLE_FAMILY_EVIDENCE_INTEGRITY",
+      "user_benefit": "Keep invalid archived controls from being advertised as measured successful recipes or suppressing valid family alternatives; preserve all original ratings, notes and History.",
+      "source_provenance": "Live development 3e60b5acdc069fdc315d910a77dcf06a3590cd1d; original engine blob 336d9e1b4dbda27474bc9948701031993b60ee23; model 00c027c5f10d938fa2cc050572286eb9570817de; distinct from R171 chosen Current and R172 cross-style paths; #267 line review credit zero.",
+      "current_locked": "All five original sensory ratings, real all-green vs missing, one intentional controllable recommendation, multiple successful recipe families, calibration/versions, historical raw private notes and measurements, existing Log Shot physical entry bounds.",
+      "current_app": "Before patch familyStats, familiesFor and chooseRecipeFamily filtered measured dose/yield/time but not explicitly invalid archived grind/optional temperature; familyShots intentionally remains raw green history.",
+      "proposed_change": "SAFE uniform family measured-evidence guard using recorded snapshot or calibration registry, existing temperature and nonnegative grind bounds, missing optional legacy values retained. Do not modify familyShots or any stored member record.",
+      "evidence_grade": "DIRECT_LIVE_SOURCE_REPRODUCIBLE_SYNTHETIC_TESTS_AUTHORED_CI_PENDING_NO_CUP_OR_REAL_MEMBER_OUTCOME",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "CODE_TEST_LEDGER_SAME_COMMIT_AUTHORED; EXACT_SOURCE_CI_PENDING",
+      "test_plan": "Six direct positive/negative groups; run exact source Node22/lint/build, cloud/mobile/offline/a11y, SQL/security/governance by applicability; original603 SKIPPED unless actually exercised.",
+      "release_queue_status": "NOT_READY_PENDING_EXACT_SOURCE_TEST_MERGE_AND_QUEUE_RECONCILIATION",
       "github267_literal_review_credit": 0,
       "production_deployed": false
     }

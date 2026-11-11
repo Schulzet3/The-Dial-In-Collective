@@ -11727,6 +11727,36 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
       "notes": "Current selected exact H1 and quoted present coffee country/region, strong literal roast and full same-selected tasting notes, non-contradictory subset only. Original frozen 603/201/1197 untouched; no actual member/GoTrue/production-provider/Netlify writes; separate #267/#96 owners. No owner action required; source-only development until verified. R101 code safely nonforce integrated via PR1929 merged SHA 3e60b5acdc069fdc315d910a77dcf06a3590cd1d; 15 focused/3 direct live cases and applicable exact merged CI success; scoped READY development only, parent #33 open and all other items unchanged."
+    },
+    {
+      "id": "DIC-Q-1938-admin-closed-app-push",
+      "issue": 1938,
+      "pr": 1943,
+      "title": "Opt-in privacy-minimized administrator Web Push with Home Screen background delivery",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/admin/view.js",
+        "site/admin/main.js",
+        "site/admin/push.js",
+        "scripts/pwa/service-worker.template.txt",
+        "src/server/admin-push.mjs",
+        "netlify/functions/dic-admin-push.mjs",
+        "netlify/functions/dic-admin-push-poll.mjs",
+        "supabase/migrations/20261110235000_dic_admin_web_push.sql",
+        "build_cloud.mjs"
+      ],
+      "tests": [
+        "Synthetic VAPID ECDSA JWT, strict Apple endpoint allowlist, private-body absence, role verification, subscription baseline and opt-out, sender dedupe/role removal, PWA worker click and SQL ACL tests in tests/admin-push*.test.mjs.",
+        "Exact merged CI pending; live iPhone/APNs and production Netlify secrets NOT tested or provided.",
+        "CI discovered site graph omitted admin/push.js: corrected explicit build_cloud.mjs allowlist; retest build/browser before READY."
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Unverified role/auth server end-to-end CI and Netlify VAPID/service-role credentials; no owner Publish command."
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1938",
+      "notes": "Do not call READY until exact-source CI and runtime configuration plan are verified. No production/Netlify/Supabase changes; preserve original mobile app and all private data."
     }
   ],
   "history": [
