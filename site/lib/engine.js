@@ -185,7 +185,9 @@ export function grindGuidance(s,c,style,basket,feed,familyId=null) {
  // they cannot establish a proven personal grind setting or paired feed-mode effect.
  // Temperature was optional: null remains eligible, and valid 70-100 C readings
  // retain their original evidence status under existing Log Shot bounds.
- const v=activeVersion(s),measured=measuredRecipeShots(s.shots).filter(sh=>
+ // Preserve source shots in History; only original-calibration-valid measurements
+ // may establish a personal grinder dial or measured Standard/Slow Feed offset.
+ const v=activeVersion(s),measured=familyEvidenceShots(s,s.shots).filter(sh=>
   sh.tempC==null||validRecordedTemperature(sh.tempC)),qual=measured.filter(sh=>!sh.hidden&&validSuccess(sh)&&sh.style===style&&sh.feedMode===feed&&hardwareMatch(sh,v)&&finite(sh.grindSetting));
  // Current-calibration history outside the entered espresso range remains
   // untouched in History, but is not proven current-scale grind evidence.
