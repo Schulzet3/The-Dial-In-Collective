@@ -2,11 +2,17 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {selected120,direct120,fields120Ok} from '../scripts/audit/issue33-r120-568-check.mjs';
 import {extractPublicCoffeeFacts} from '../src/server/coffee-page-metadata.mjs';
-const story='Tasting notes: Jasmine Mochi, Blueberry Pie, Brown Butter. La Esperanza farm is managed by the Alvarez family. Farm: Finca La Esperanza. Region: La Libertad. Varietals: Bourbon. Processing: Natural. Altitude: 1,000-1,450 meters.';
+const story='<h3>Tasting notes: Jasmine Mochi, Blueberry Pie, Brown Butter</h3>'+
+ '<p>La Esperanza farm is managed by the Alvarez family.</p>'+
+ '<p>✹ Farm: Finca La Esperanza</p>'+
+ '<p>✹ Region: La Libertad</p>'+
+ '<p>✹ Varietals: Bourbon</p>'+
+ '<p>✹ Processing: Natural</p>'+
+ '<p>✹ Altitude: 1,000-1,450 meters</p>';
 const neighboring='Honduras - Expreso Paraiseño. Owner: Gerardo Peñalva. Processing: Fully washed. Milk Chocolate, Brown Sugar, Almond.';
 const page=(body=story,extra='',heading=selected120.name)=>
  '<html><head><title>Slow Burn Coffee</title><meta property="og:site_name" content="Slow Burn Coffee"></head><body><main>'+
- '<article class="product"><h1>'+heading+'</h1><div class="product__description"><p>'+body+'</p></div></article>'+
+ '<article class="product"><h1>'+heading+'</h1><div class="product__description">'+body+'</div></article>'+
  extra+'</main></body></html>';
 test('568 own exact selected H1, farm facts and tasting notes are present',()=>{
  const x=direct120(page());assert.equal(x.uniqueH1,true,JSON.stringify(x));
