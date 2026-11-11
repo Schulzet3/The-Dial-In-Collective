@@ -805,7 +805,9 @@ export function isExtreme(s,shot) {
    (finite(version?.grinderMax)&&x.grindSetting>version.grinderMax)))return false;
   return x.tempC==null||validRecordedTemperature(x.tempC);
  };
- const prior=measuredRecipeShots(s.shots).filter(x=>!x.hidden&&x.dialedIn===true&&isDialed(x.tasteScales)&&
+ // Imported all-green outlier references must also be possible on their
+ // own recorded grinder calibration, not only today's dial range.
+ const prior=familyEvidenceShots(s,s.shots).filter(x=>!x.hidden&&x.dialedIn===true&&isDialed(x.tasteScales)&&
   eligibleControls(x)&&
   x.coffeeId===shot.coffeeId&&x.style===shot.style&&
   x.setupVersionId===shot.setupVersionId&&x.id!==shot.id&&
