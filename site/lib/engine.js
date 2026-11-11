@@ -299,7 +299,10 @@ export function learnSensitivity(shots,version=null) {
 // Five green ratings and an in-range temperature are insufficient when the
 // imported shot's dose/yield/time are physically invalid. Preserve History.
 function temperatureGuidance(s,c,style,v,defaultC,familyId=null) {
- const sh=measuredRecipeShots(s.shots).filter(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&
+ // Archived five-green temperatures cannot establish personal equipment guidance
+ // when an explicitly recorded grinder setting was impossible in its original
+ // espresso calibration. Preserve original History and missing legacy optionals.
+ const sh=familyEvidenceShots(s,s.shots).filter(sh=>!sh.hidden&&sh.dialedIn===true&&isDialed(sh.tasteScales)&&
   sh.coffeeId===c.id&&validRecordedTemperature(sh.tempC)&&
   (sh.setupVersionId===v.id||(norm(v.machine)&&norm(sh.snapshot?.machine)===norm(v.machine))));
  if(familyId){
