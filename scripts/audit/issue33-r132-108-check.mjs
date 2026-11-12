@@ -21,7 +21,7 @@ export function selected108Source(html){
  return {headings,exactH1:headings.length===1&&norm(headings[0])===norm(chosen108.name),
   direct:{dark:has('Dark Roast'),notes:chosen108.notes.every(has),
    currentMilling:has('wet-milled')},
-  explicitNamedGreenProcess:/\b(?:processing|process)\s*[:–-]\s*(?:washed|wet hulled|natural|honey)\b/iu.test(visible),
+  explicitNamedGreenProcess:/\b(?:processing|process)\s+(?:washed|wet hulled|natural|honey)\b/iu.test(visible),
   source_sha256:sha(Buffer.from(html||'')),selected_visible_length:visible.length};
 }
 if(process.env.DIC_ISSUE33_R132_VERIFY==='1'){
