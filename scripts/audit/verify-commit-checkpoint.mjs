@@ -3,6 +3,7 @@
 import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
+import {auditPreflightReceipt} from './preflight-receipt.mjs';
 
 const work='docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md';
 // Explicit scoped READY and 2026-11-02 queue-preparation journals; arbitrary release names remain excluded.
@@ -72,8 +73,15 @@ export function verifyLatestCommit(){
   }catch(error){throw Error('Cannot inspect commit '+hash+': '+String(error.message));}
  }
  const errors=auditCommitRange(entries);
+ let verifiedReceipts=0;
+ for(const entry of entries){
+  const parent=run(['log','-1','--format=%P',entry.sha]).split(/\s+/)[0];
+  const evidence=auditPreflightReceipt({sha:entry.sha,parent,paths:entry.paths,run});
+  verifiedReceipts+=evidence.validated;
+  for(const error of evidence.errors)errors.push(entry.sha+': Preflight: '+error);
+ }
  if(errors.length)throw Error('Continuity checkpoint failed:\n'+errors.map(s=>' - '+s).join('\n'));
- return {commitCount:entries.length,lastCommit:entries.at(-1)?.sha,checkedPaths:entries.reduce((n,e)=>n+e.paths.length,0)};
+ return {commitCount:entries.length,lastCommit:entries.at(-1)?.sha,checkedPaths:entries.reduce((n,e)=>n+e.paths.length,0),verifiedPreflightReceipts:verifiedReceipts};
 }
 if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
  try{console.log('[DIC same-commit continuity] PASS '+JSON.stringify(verifyLatestCommit()));}
