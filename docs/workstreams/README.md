@@ -1,5 +1,7 @@
 # Scoped GitHub Work Journals
 
+- [#2169 source-drift release gate: exact CI and nonforce reconciliation](ops-issue2169-ready-drift-integration-20261112.md) — preserve later unfinished changes without erasing independent READY evidence or bypassing candidate isolation
+
 - [Issue #33 R101 #513/#516/#528 verified exact current official source READY development only](ops-issue33-r101-513-516-528-20261110.md) — merged-source source/CI and permanent receipt; #33 full603 OPEN
 
 - [Issue #33 R100 original603 Ki-Saya #501 and AMCOS #504 selected-source TESTING](ops-issue33-r100-501-504-20261110.md) — exact guarded official source and parser CI pending, parent OPEN

@@ -83,18 +83,23 @@ export async function verifyReadyItems({queue,items,loadRun,loadChecks,sourceObj
     failures=audit.failures;
    }
    if(!chosen)throw Error('no single cited, successful five-check source with identical merged code/tests: '+failures.join('; '));
+   // A later, separately unready change may legitimately share a READY file.
+   // Preserve the frozen item's exact tested evidence, but report source drift;
+   // only an owner-frozen candidate can isolate the selected merged blob.
+   const sourceDriftPaths=[];
    if(currentSourceSha){
     if(!SHA.test(currentSourceSha))throw Error('current development SHA not verified');
     for(const path of item.scope_paths||[]){
      const mergedBlob=sourceObjectAt(item.merged_source_sha,path);
-     if(!mergedBlob||sourceObjectAt(currentSourceSha,path)!==mergedBlob)
-      throw Error('current development source differs from READY merge: '+path);
+     if(!mergedBlob)throw Error('READY merge missing scoped source: '+path);
+     if(sourceObjectAt(currentSourceSha,path)!==mergedBlob)sourceDriftPaths.push(path);
     }
    }
    checksByItem[item.id]=chosen.recorded;
    ciSourceByItem[item.id]=chosen.sha;
    verified.push({id:item.id,merged_sha:item.merged_source_sha,
-    ci_source_sha:chosen.sha,risk_tier:chosen.risk.tier,checks:PRODUCTION_CHECKS});
+    ci_source_sha:chosen.sha,risk_tier:chosen.risk.tier,checks:PRODUCTION_CHECKS,
+    source_drift_paths:sourceDriftPaths});
   }catch(e){errors.push(prefix+String(e.message||e));}
  }
  if(candidateChangedPaths!==undefined){
@@ -158,7 +163,9 @@ if(process.argv[1]&&resolve(process.argv[1])===fileURLToPath(import.meta.url)){
   const report=await verifyReadyItems({queue,items,...readers,...git,
    currentSourceSha:git.currentSourceSha()});
   if(!report.ready)throw Error(report.errors.join(' | ').slice(0,4000));
+  const drifted=report.verified.filter(x=>x.source_drift_paths.length);
   console.log('[READY evidence] VERIFIED '+report.verified.length+
-   ' queue items; cited exact CI, code/test Git parity, source scope and current blobs. No candidate staged.');
+   ' source-certified queue items; '+drifted.length+
+   ' share newer development drift and REQUIRE owner-frozen candidate isolation. No build or staging.');
  })().catch(e=>{console.error('[READY evidence] HOLD: '+String(e.message));process.exitCode=2;});
 }

@@ -32,9 +32,11 @@ test('missing, skipped, uncited or superseded checks fail closed',async()=>{
  assert.equal(checkRunReceiptId('https://evil.example/actions/runs/11/job/1'),null);
  assert.equal(exactRecordedChecks(checks,B,[11,12,13]).length,5);
 });
-test('source drift, changed test blob, unowned source and failed run deny READY',async()=>{
- assert.equal((await verifyReadyItems({...deps,sourceObjectAt:(sha,p)=>
-  sha===C&&p==='site/admin/push.js'?'100644:drift':'100644:match'})).ready,false);
+test('source drift is reported without false READY downgrade; bad evidence still denies',async()=>{
+ const laterDrift=await verifyReadyItems({...deps,sourceObjectAt:(sha,p)=>
+  sha===C&&p==='site/admin/push.js'?'100644:drift':'100644:match'});
+ assert.equal(laterDrift.ready,true,'later unready same-file work cannot erase independently READY evidence');
+ assert.deepEqual(laterDrift.verified[0].source_drift_paths,['site/admin/push.js']);
  assert.equal((await verifyReadyItems({...deps,sourceObjectAt:(sha,p)=>
   sha===B&&p.startsWith('tests/')?'100644:drift':'100644:match'})).ready,false);
  assert.equal((await verifyReadyItems({...deps,mergeChangedPaths:()=>
