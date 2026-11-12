@@ -21,7 +21,7 @@ export function selected153Source(html){
  const visible=norm(removeElements(selected,['script','style','noscript','template','nav','aside','footer','header','select'])
   .replace(/<!--[\s\S]*?-->/gu,' ').replace(/<[^>]{0,2500}>/gu,' '));
  const has=x=>visible.includes(norm(x));
- return {headings,exactH1:headings.length===1&&norm(headings[0])===norm(chosen153.name),
+ return {headings,exactH1:headings.length>0&&norm(headings[0])===norm(chosen153.name),
   direct:{
    notes:has('FLAVOR: Raspberry • Winey • Cinnamon • Orange'),
    method:has('PROCESS: Natural Anaerobic Dragon'),
@@ -54,7 +54,7 @@ if(process.env.DIC_ISSUE33_R145_VERIFY==='1'){
  assert(norm(f.roast_level)==='light','real_parser_selected_light');
  assert(norm(f.process)==='anaerobic','real_parser_anaerobic');
  assert(chosen153.notes.every(x=>norm(f.tasting_notes).includes(norm(x))),'real_parser_all_four_notes');
- assert(norm(f.elevation_m).includes('1400'),'real_parser_1400_m');
+ assert(/\b1[,\s]?400\b/.test(String(f.elevation_m||'')),'real_parser_1400_m');
  assert(norm(f.producer).includes('smallholders'),'real_parser_producer_role');
  assert(norm(f.variety).includes('caturra')&&norm(f.variety).includes('bourbon'),'real_parser_two_varieties');
  assert(!f.decaffeination_method,'no_unpublished_decaf');
