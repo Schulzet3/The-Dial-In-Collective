@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {classifyReleaseRisk,assessReadyEvidence,validateReleaseTriggerReceipt,preflightReadyBatch} from '../scripts/release/release-reliability.mjs';
 const S='a'.repeat(40),B='b'.repeat(40);
-const item={id:'DIC-Q-1938-test',state:'READY',merged_source_sha:S,scope_paths:['site/admin/push.js'],tests:['focused PASS'],ci_runs:[123],blockers:[]};
+const item={id:'DIC-Q-1938-test',issue:1938,title:'Push status',owner_source:'Owner approved',state:'READY',merged_source_sha:S,scope_paths:['site/admin/push.js'],tests:['focused PASS'],ci_runs:[123],blockers:[]};
 const names=['approval','security','sql','cloud-browser','build-test'];
 const checks=names.map(name=>({name,sha:S,conclusion:'success'}));
 test('risk tiers keep one build and required security gates',()=>{
