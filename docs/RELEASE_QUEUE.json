@@ -11779,11 +11779,12 @@
         43084114309
       ],
       "blockers": [
-        "Netlify site 153277f2-e19e-4862-b9a6-f2e18ccde271 still has NO Functions-scoped SUPABASE_SECRET_KEY (or approved legacy service-role credential), DIC_ADMIN_PUSH_VAPID_PUBLIC_KEY or DIC_ADMIN_PUSH_VAPID_PRIVATE_KEY. Two attempted production VAPID key upserts were rejected by Netlify API HTTP 403; credentials not stored. Team env likewise absent. Need proper authorized site-level env access or owner secure-dashboard installation; never send credentials in GitHub/chat.",
-        "Live Netlify push API/scheduled sender and real iPhone Home Screen push delivery remain UNVERIFIED until protected configuration and a combined one-use release; owner requires shipping #1938 with READY queue, so do NOT publish READY-only separately."
+        "Supabase Vault-only P-256 secret custody migration and Edge function must pass source/CI, apply safely, and be verified on live Supabase without adding credentials to Netlify.",
+        "Owner-approved single batch must include #1938 plus ALL frozen READY IDs, with five exact-source CI, fresh unconsumed grant and one successful Git-connected Netlify publication.",
+        "Real iPhone Home Screen closed-app APNs delivery remains UNVERIFIED until opt-in and acceptance; no synthetic production member/device records."
       ],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1938",
-      "notes": "Do not call READY until exact-source CI and runtime configuration plan are verified. No production/Netlify/Supabase changes; preserve original mobile app and all private data.\n2026-11-11 source code PASS with identical runtime blobs across merged/current development, but BLOCKED for live delivery. No deploy, production writes or secret changes.\n2026-11-11 owner explicitly approved publishing #1938 WITH all READY items. 2026-11-12 Supabase push schema migration independently applied/verified (v20261112010044) without modifying existing member/shot/coffee records. Netlify env write HTTP403 and missing server/VAPID credentials remain the external blocker. Keep BLOCKED; hold the READY46 queue instead of issuing a partial release. Newly encrypted backup GitHub artifact13905387023 verified, owner-private Drive copy not yet confirmed, so do not certify it for potentially destructive recovery. Release staging candidate READY45 r2 93d4852... passed five statuses but excludes push and one concurrent newer READY item, so it is NOT approved for this owner-required all-items-with-push combined publication.\n2026-11-12 recovery closure: GitHub run 43130883406 artifact13905387023 ZIP 23,040,726 bytes SHA256 2bd4cce694a04bf8448ae67859e9d716e188c7e89ee51c23b763cd0e8afd2af9, containing exactly one encrypted backup.age; delivered without plaintext to owner-private direct Drive folder 1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf as file1591RhOQg-UEAXL2OHIDjCNrP9CngWezr. Independently downloaded Drive ZIP matched same byte size and SHA, owner-only permissions, no duplicate title at readback. Backup snapshot began 2026-11-12T00:56:01Z. Latest observed DB-write instant must still be checked before a potentially destructive release; this proof does not authorize release."
+      "notes": "Do not call READY until exact-source CI and runtime configuration plan are verified. No production/Netlify/Supabase changes; preserve original mobile app and all private data.\n2026-11-11 source code PASS with identical runtime blobs across merged/current development, but BLOCKED for live delivery. No deploy, production writes or secret changes.\n2026-11-11 owner explicitly approved publishing #1938 WITH all READY items. 2026-11-12 Supabase push schema migration independently applied/verified (v20261112010044) without modifying existing member/shot/coffee records. Netlify env write HTTP403 and missing server/VAPID credentials remain the external blocker. Keep BLOCKED; hold the READY46 queue instead of issuing a partial release. Newly encrypted backup GitHub artifact13905387023 verified, owner-private Drive copy not yet confirmed, so do not certify it for potentially destructive recovery. Release staging candidate READY45 r2 93d4852... passed five statuses but excludes push and one concurrent newer READY item, so it is NOT approved for this owner-required all-items-with-push combined publication.\n2026-11-12 recovery closure: GitHub run 43130883406 artifact13905387023 ZIP 23,040,726 bytes SHA256 2bd4cce694a04bf8448ae67859e9d716e188c7e89ee51c23b763cd0e8afd2af9, containing exactly one encrypted backup.age; delivered without plaintext to owner-private direct Drive folder 1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf as file1591RhOQg-UEAXL2OHIDjCNrP9CngWezr. Independently downloaded Drive ZIP matched same byte size and SHA, owner-only permissions, no duplicate title at readback. Backup snapshot began 2026-11-12T00:56:01Z. Latest observed DB-write instant must still be checked before a potentially destructive release; this proof does not authorize release.\nNov12: Supabase-only encrypted Vault + service-only Edge pathway replaces impossible Netlify Functions-only secret scopes; Netlify keeps generic scheduled trigger and Admin API; no Netlify private key. Owner explicitly prioritizes #1938 shipping with entire queue. PR #2143 exact source security/SQL/Node/browser/approval PASS (head e83c903a6129fc07ffb1b0e3303733be7be1104b; Node 4029 PASS/0 FAIL/6 SKIP); production host migration/Edge deployment still pending."
     },
     {
       "id": "DIC-Q-455-family-recorded-control-evidence-guard",
@@ -12560,6 +12561,49 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
       "notes": "Display-only provenance correctness for manual Log Shot optional-temperature edit, no recommendation/taste/equipment/Slow Feed, stored shot/notes, Auth, RLS or Locked numeric policy changes. Development-only READY; not deployed or published; separate owner release grant required.",
+      "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-33-r131-99-selected-unnamed-full-decaf",
+      "issue": 33,
+      "pr": 2141,
+      "title": "Preserve explicit Swiss Water decaffeination from an exact selected unnamed full-decaf product introduction and its own method accordion",
+      "state": "READY",
+      "merged_source_sha": "52a88e73ae700cd674370a3d726b53185501fad9",
+      "scope_paths": [
+        "src/server/coffee-direct-product-prose.mjs"
+      ],
+      "tests": [
+        "R131 original603 #99 current exact DEKAF Guatemala Finca Santa Isabel selected H1, medium, origin, three notes and own Swiss Water accordion verified; PR-head initial strict actual source FAILED sole missing decaffeination_method, no SEO/cross-coffee inference.",
+        "R131 generic source fix for affirmative 'this decaf single origin gem' selected paragraph, strict current H1, own method accordion, mixed-caf exclusion; full original603 not certified.",
+        "PR-head after narrow mixed-caf guard exact chosen current official+actual parser run 43131626018 SUCCESS: 12 focused source/negative tests, all direct current fields including Water Process, Add Coffee+Source Review and strict SHA afterproof PASS; raw chosen HTML 746313 bytes SHA256 3e437cf166bb417c08b9886ebf0f0f9731661c60c095b219c4471a8254493872; artifact 13905098187 independent ZIP SHA256 0d936bff042929d2f6f95a44b52032b08436ff2afe2eb50ec36eb03135ebb4e8.",
+        "Other applicable exact PR-head CI and exact post-merge CI still pending; no release authority, no READY until source and governance completed.",
+        "Exact NONFORCE merged development SHA 52a88e73ae700cd674370a3d726b53185501fad9 read back, selected runtime blob 60b0d902e0ff0f2fc9a5763c5877ebcbc725a39c, original immutable CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6 unchanged. All 317 other/current item statuses preserved at merge; concurrent #455 R197 READY and #1938 BLOCKED retained.",
+        "Exact merged official current #99 source/Add Coffee/Source Review run43132378071 SUCCESS 12 focused positive and adversarial tests; real chosen H1/medium/Guatemala/Keller and all 3 notes + separate Water Process, zero conflicts/SEO, no guessed green processing. Strict afterproof source_sha exactly merged commit, failures [], original603 manual_certified=0.",
+        "Independently downloaded exact MERGED artifact13905314548: ZIP 113348 bytes SHA256 56697b20d2a3a76f227315658c147d5225ac23e10fd2f99edf68fd9fe1c9ebeb matching provider. Raw exact official selected HTML 746315 bytes SHA256 07738886080d035e28da0509fea717de298fb630f1d247e3119378d94963cdc6; source JSON SHA256 6e03f3e45a8055f7f10265e0039fd24234be49ca1eb41b8f3a9c1e90c5a7909f; afterproof SHA256 87806196d32cd9c38049cc42d6ca825d002fcfa038c6b38d9f7ab1cbea6307b4.",
+        "Exact MERGED Node/lint run43132377915 SUCCESS 4030 tests / 4024 PASS / 0 FAIL / 6 intentional SKIP, lint PASS. Cloud/mobile43132377988, approval43132378241, Python43132377982 SUCCESS; PR-head isolated SQL43131788998 SUCCESS and official private source43131789002 SUCCESS. Merged public roaster probe43132377952 and source acceptance43132378027 SKIPPED (not PASS); frozen603 replay likewise SKIPPED. No separate signed-in GoTrue/device claim."
+      ],
+      "ci_runs": [
+        43131324048,
+        43131556461,
+        43131626018,
+        43131626280,
+        43131789093,
+        43131789343,
+        43131788983,
+        43131789133,
+        43131788998,
+        43131789030,
+        43131789002,
+        43132378071,
+        43132378241,
+        43132377915,
+        43132377988,
+        43132377982
+      ],
+      "blockers": [],
+      "owner_source": "Issue #33 owner-authorized original603 exact selected source correction; no deployment/production/provider writes permitted.",
+      "notes": "NARROW VERIFIED READY DEVELOPMENT ONLY for newly repaired exact selected unnamed full-decaf witness; NOT part of previously frozen READY42 batch or any authorized Netlify publication. Separate future owner release approval required. Original603-wide individual semantic certification remains IN_PROGRESS and Issue #33 stays OPEN. No production/provider/SQL/Edge/Auth/member data write.",
       "production_deployed": false
     }
   ],
