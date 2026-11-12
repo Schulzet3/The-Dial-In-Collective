@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {planReadyOnlyCandidate,validateReadyOnlyCandidate,CANDIDATE_KIND,
  CANDIDATE_RECEIPT_PATH,CANDIDATE_JOURNAL_PATH,REVIEWED_WORKFLOW_TEST,discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,assertCandidateRelativeImports} from '../scripts/release/ready-only-candidate.mjs';
+import {classifyReleaseRisk} from '../scripts/release/release-reliability.mjs';
 const A='a'.repeat(40),B='b'.repeat(40),C='c'.repeat(40),D='d'.repeat(40);
 const one={id:'DIC-Q-100',issue:100,title:'READY card',state:'READY',
  owner_source:'https://github.com/example/repo/issues/100',merged_source_sha:D,
@@ -17,7 +18,8 @@ const opts={publishedSourceSha:A,developmentSourceSha:B,selectedIds:[one.id],
  developmentChangedPaths:['site/card.js','src/server/extractor.mjs'],isAncestor:ancestor};
 const manifest={schema_version:1,kind:CANDIDATE_KIND,published_source_sha:A,
  development_source_sha:B,candidate_branch:'release-candidates/dic-100',
- selected_ready_item_ids:[one.id],restored_to_published_paths:['src/server/extractor.mjs']};
+ selected_ready_item_ids:[one.id],risk_classification:classifyReleaseRisk(['site/card.js']),
+ restored_to_published_paths:['src/server/extractor.mjs']};
 const validate={manifest,publishedSourceSha:A,developmentHead:B,candidateSha:C,
  actualParents:[C,B],developmentChangedPaths:opts.developmentChangedPaths,
  candidateChangedPaths:['site/card.js'],
@@ -381,4 +383,16 @@ test('#2169 recorded candidate risk cannot differ from its selected app diff',()
  const risk={tier:'high',checks:['approval'],builds:2,not_applicable:[]};
  assert.throws(()=>validateReadyOnlyCandidate(q,{...validate,
   manifest:{...manifest,risk_classification:risk}}),/candidate risk-tier/);
+});
+
+test('#2169 missing or falsified risk receipt cannot bypass five-source-check classification',()=>{
+ assert.equal(validateReadyOnlyCandidate(q,validate).ready,true);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...validate,
+  manifest:{...manifest,risk_classification:undefined}}),/risk-tier\/one-build/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...validate,
+  manifest:{...manifest,risk_classification:null}}),/risk-tier\/one-build/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...validate,
+  manifest:{...manifest,risk_classification:{...manifest.risk_classification,builds:0}}}),/risk-tier\/one-build/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...validate,
+  manifest:{...manifest,risk_classification:{...manifest.risk_classification,checks:['approval']}}}),/risk-tier\/one-build/);
 });
