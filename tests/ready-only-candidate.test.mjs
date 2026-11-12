@@ -299,3 +299,37 @@ test('production candidate restores every development-only Actions workflow with
   /staging commit changes unrelated paths/);
 });
 
+test('byte-pinned workflow-only browser-install test is excluded solely when its workflow is restored',()=>{
+ const path='tests/issue455-browser-dependency-install-fallback.test.mjs';
+ const workflow='.github/workflows/cloud-regression.yml';
+ const testSha='100644:eab5e9f267d7b7451a56db005a8980727c4ce1f6';
+ const objectAt=(ref,p)=>{
+  if(p===path)return ref===A||ref===C?null:testSha;
+  if(p===workflow)return ref===A||ref===C?'100644:published-workflow':'100644:new-workflow';
+  return validate.sourceObjectAt(ref,p);
+ };
+ const inputs={...validate,
+  manifest:{...manifest,restored_unpublished_workflow_paths:[workflow],
+   excluded_unpublished_workflow_test_paths:[path]},
+  sourceObjectAt:objectAt,
+  developmentChangedPaths:[...validate.developmentChangedPaths,workflow],
+  candidateChangedPaths:[...validate.candidateChangedPaths],
+  stagedCommitChangedPaths:[...validate.stagedCommitChangedPaths,workflow,path]};
+ assert.equal(validateReadyOnlyCandidate(q,inputs).ready,true);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...inputs,
+  sourceObjectAt:(ref,p)=>ref===B&&p===path?'100644:changed-unreviewed-test':objectAt(ref,p)}),
+  /Only one byte-pinned, reviewed workflow-only test/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...inputs,
+  sourceObjectAt:(ref,p)=>ref===C&&p===path?testSha:objectAt(ref,p)}),
+  /Workflow-only test exclusion source\/blob\/absence mismatch/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...inputs,
+  sourceObjectAt:(ref,p)=>ref===D+'^'&&p===path?null:objectAt(ref,p)}),
+  /Selected READY merge introduced or modified a workflow-only test/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...inputs,
+  manifest:{...inputs.manifest,restored_unpublished_workflow_paths:[]}}),
+  /restore every changed GitHub Actions workflow/);
+ assert.throws(()=>validateReadyOnlyCandidate(q,{...inputs,
+  manifest:{...inputs.manifest,excluded_unpublished_workflow_test_paths:['tests/issue999-arbitrary.test.mjs']}}),
+  /Only one byte-pinned, reviewed workflow-only test/);
+});
+
