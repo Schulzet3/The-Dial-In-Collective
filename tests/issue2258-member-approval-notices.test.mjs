@@ -4,6 +4,7 @@ import {generateKeyPairSync,createHash} from 'node:crypto';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 import {createMemberApprovalBroker} from '../supabase/functions/dic-member-approval-broker/core.mjs';
+import {createMemberApprovalPoll} from '../netlify/functions/dic-member-approval-poll.mjs';
 
 const PROJECT='https://azviqqejypsefzilgonr.supabase.co';
 const MEMBER='30000000-0000-4000-8000-000000000001';
@@ -172,4 +173,29 @@ test('dedicated service worker never replaces Admin notifications or embeds acco
  assert.equal(notified.options.data.path,'/');
  assert.equal(notified.options.tag,'dic-member-account-approved');
  return completed;
+});
+
+test('scheduled notification poll works through the explicitly configured no-JWT Edge gateway',async()=>{
+ const config=readFileSync(new URL('../supabase/config.toml',import.meta.url),'utf8');
+ assert.match(config,/\[functions\.dic-member-approval-broker\]\s*verify_jwt\s*=\s*false/);
+ assert.match(config,/\[functions\.dic-admin-push-broker\]\s*verify_jwt\s*=\s*false/);
+ assert.doesNotMatch(config,/\[functions\.(?:dic-verify-coffee|dic-preview-coffee|dic-delete-member-account)\][\s\S]*?verify_jwt\s*=\s*false/);
+ const hits=[];
+ const scheduled=createMemberApprovalPoll({
+  env:key=>key==='SUPABASE_URL'?PROJECT:undefined,
+  fetcher:async(url,options)=>{
+   hits.push({url,options});return Response.json({ok:true,handled:2});
+  }
+ });
+ const response=await scheduled();
+ assert.equal(response.status,200);
+ assert.deepEqual(await response.json(),{ok:true,handled:2});
+ assert.equal(hits.length,1);
+ assert.equal(hits[0].url,PROJECT+'/functions/v1/dic-member-approval-broker');
+ assert.deepEqual(JSON.parse(hits[0].options.body),{op:'poll'});
+ assert.equal(hits[0].options.headers.Authorization,undefined);
+ assert.equal(hits[0].options.headers.apikey,undefined);
+ const noJwtMember=fixture();
+ assert.equal((await noJwtMember.broker(request('subscribe',{endpoint:ENDPOINT},false))).status,403,
+  'disabling only the Edge gateway does not bypass the broker member Auth checks');
 });
