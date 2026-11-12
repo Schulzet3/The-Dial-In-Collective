@@ -13274,27 +13274,33 @@
       "issue": 33,
       "pr": 2342,
       "title": "Do not infer Medium from a chosen coffee's light-to-medium narrative range; preserve explicit selected Light roast",
-      "state": "TESTING",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "7f024fabcf9f0c7f5ae9c90134cf617833badd07",
       "scope_paths": [
         "src/server/roast-level-evidence.mjs"
       ],
       "tests": [
         "First exact PR-head R158 43316896760 FAILED 8/9 adversarial tests: removing selected Light Roast label exposed parser assigning Medium from narrative light-to-medium; live source step SKIPPED and missing-input afterproof FAILED; retained historical failure.",
         "SAME-COMMIT general range guard corrected in src/server/roast-level-evidence.mjs, explicitly preserving selected true Medium-Light label and rejecting light-to-medium, light–to–medium, light—to—medium as a categorical singular roast.",
-        "PR-head 43317225541 SUCCESS 12/12 focused positive/hostile, 1/1 guarded HTTPS selected #187 raw 658062-byte HTML SHA256 aba3479913955f055445560fa271ff665b56aa1e0ecac2a828907e9c8f840008; current parsed Bolivia / Larry's / Light / Washed / all three notes / AIPEP / region/elevation, Add Coffee and Source Review true, conflicts [], SEO fallbacks [], strict afterproof passed:true failures:[]; synthetic GitHub PR test source SHA 6f900d7246ca6467af673bef8c5212bf54624e43."
+        "PR-head 43317225541 SUCCESS 12/12 focused positive/hostile, 1/1 guarded HTTPS selected #187 raw 658062-byte HTML SHA256 aba3479913955f055445560fa271ff665b56aa1e0ecac2a828907e9c8f840008; current parsed Bolivia / Larry's / Light / Washed / all three notes / AIPEP / region/elevation, Add Coffee and Source Review true, conflicts [], SEO fallbacks [], strict afterproof passed:true failures:[]; synthetic GitHub PR test source SHA 6f900d7246ca6467af673bef8c5212bf54624e43.",
+        "PR #2342 source after intake, exact head be48f712079b20d1e0af9b5ceba54822592b2233 applicable official 43317536378, Node/lint/build 43317536329 (4393 pass / 0 fail / 6 intentional skip), approval 43317536266, cloud/mobile 43317536354, Python 43317536411, private source 43317536546, isolated SQL 43317536255, security 43317536653 all SUCCESS; original full frozen603 43317536406 SKIPPED, NOT PASS.",
+        "PR #2342 nonforce squash merged 7f024fabcf9f0c7f5ae9c90134cf617833badd07; all six source/test/workflow/queue/scoped journal changed blobs identical to reviewed approved PR head; original 603 frozen CSV blob 3e0d3036ea727de091f304f538c6de2dfcaa10d6 unchanged, no production and no publication.",
+        "Exact MERGED #187 official current actual parser run43318265821 SUCCESS 12/12 focused tests, 1/1 guarded HTTPS fetched and parsed selected H1 Bolivia, Light, Washed, AIPEP, Yungas/Caranavi/Pumiri, Nougat/Milk Chocolate/Golden Raisin, 1097-1494m; SEO fallbacks/conflicts [], Add Coffee/Source Review true, strict afterproof true/failures[]. Original #187 individually certified bounded; full 603 still incomplete.",
+        "Independent external download exact MERGED artifact 13988348777: ZIP 101005 bytes SHA256 6183b6e991b2cfa342fc9c0a8217433f48c12940988c9a892197dd2b3ab64f68; raw selected HTML 658255 bytes SHA256 617b624f4b668f2e130cb0bc57d19087202fca337bc24c5bf76c35faac8ca1e5; JSON evidence SHA256 364775028e1cd05950380b0f4fec65f474eb634e36b5e3b5ad54eca0568ca582; afterproof SHA256 ed539a83e94d57657b6eb5016140d13a02ce1fffecd8d3404d16c8ea2a5d8827. Checked SHA-256 over actual downloaded bytes, not metadata claim.",
+        "Exact MERGED Node/lint run 43318265858 SUCCESS: 4393 passed, zero failures, six intentional skips, lint exit code zero. Exact merged cloud/browser/mobile 43318266061, approval 43318265856 and Python 43318265896 SUCCESS; reuse unchanged PR-head SQL 43317536255 and security 43317536653 SUCCESS. Frozen603 603-row replay and controlled public source acceptance SKIPPED, not PASS."
       ],
       "ci_runs": [
-        43317225541,
-        43317225751,
-        43317225600
+        43318265821,
+        43318265858,
+        43318266061,
+        43318265856,
+        43318265896,
+        43317536255,
+        43317536653
       ],
-      "blockers": [
-        "PR-head full Node/lint/cloud/SQL/approval CI and safe nonforce merge of generic fix pending; exact merged-source official/live/parser and other applicable tests still required before READY.",
-        "Original 603/201/1,197 individual manual certification incomplete; Issue #33 remains OPEN."
-      ],
+      "blockers": [],
       "owner_source": "Issue #33; original603 #187 direct current official selected Larry's Bolivia https://larryscoffee.com/products/bolivia-single-origin-light-roast-organic-coffee; owner source-first and developer-only instructions.",
-      "notes": "New app path registered as TESTING for CI intake. First PR-head approval 43317225409 genuinely FAILED because this new source path was not yet on queue; this same-commit fix addresses intake only, no false prior PASS. Real reviewed official R158 artifact #13987704523 independent ZIP SHA256 1e196b79bad3104bc70a699f0671e7848b6ea54126ea1cde65f745a285f7eb68, HTML ABA347... and focused evidence SHA256 0a2f2a8d4aeb04b7530ab7a22a79658d71c593d213cd0eff8dc81b705f728902, strict afterproof SHA256 0312cb2ad64ce01f83d69f707efa2f46526af0321ff67dbe5d5aa994a61becb7; all independently rehashed from downloaded raw source ZIP. Frozen CSV, historical captures/oracle/scorer untouched. No publication, production/provider/member writes, secrets, purchases, forced history.",
+      "notes": "New app path registered as TESTING for CI intake. First PR-head approval 43317225409 genuinely FAILED because this new source path was not yet on queue; this same-commit fix addresses intake only, no false prior PASS. Real reviewed official R158 artifact #13987704523 independent ZIP SHA256 1e196b79bad3104bc70a699f0671e7848b6ea54126ea1cde65f745a285f7eb68, HTML ABA347... and focused evidence SHA256 0a2f2a8d4aeb04b7530ab7a22a79658d71c593d213cd0eff8dc81b705f728902, strict afterproof SHA256 0312cb2ad64ce01f83d69f707efa2f46526af0321ff67dbe5d5aa994a61becb7; all independently rehashed from downloaded raw source ZIP. Frozen CSV, historical captures/oracle/scorer untouched. No publication, production/provider/member writes, secrets, purchases, forced history.\n2026-11-12 narrow selected #187 generic range fix READY DEVELOPMENT ONLY after nonforce merge source SHA 7f024fabcf9f0c7f5ae9c90134cf617833badd07, exact merged selected official HTML+parser, Add Coffee and Source Review, exact merged Node/lint/cloud/approval/Python SUCCESS; PR-head unchanged SQL and security SUCCESS. 603-coffee global semantic certification NOT complete, Issue #33 OPEN. No Netlify release or production operations.",
       "production_deployed": false
     }
   ],
