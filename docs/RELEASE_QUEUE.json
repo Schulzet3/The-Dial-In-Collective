@@ -12616,7 +12616,7 @@
     {
       "id": "DIC-Q-455-r198-original-range-outlier-eligibility",
       "issue": 455,
-      "pr": null,
+      "pr": 2150,
       "title": "R198 preserve original calibration range for archived outlier controls",
       "state": "IN_PROGRESS",
       "merged_source_sha": "654723176d289a458f843493ccdeb4fff5cfa7cb",
@@ -12625,13 +12625,24 @@
       ],
       "owner_source": "Issue #455 owner-authorized safe autonomous improvement R198, source commit 654723176d289a458f843493ccdeb4fff5cfa7cb merged after frozen 48-item release candidate. Not approved for the frozen READY48 batch.",
       "tests": [
-        "Exact merged R198 source tests/issue455-r198-outlier-original-range.test.mjs plus approval/cloud/browser/Node, preliminary GitHub statuses SUCCESS. Separate R198 release qualification and queue governance remain outstanding."
+        "R198 original-valid old calibration eligible outside current active dial, impossible/reversed original scale excluded, explicitly different calibration excluded, incomplete green ratings excluded, and saved new outlier prompts while original archived notes unchanged: 6/6 new synthetic tests PASS on PR head and merge.",
+        "Exact PR-head [43136517358] and merged [43136815409] Node22/lint 4035 PASS, 0 FAIL, six intentional SKIP; PR-head and merged Chromium/mobile/offline/governance SUCCESS, isolated PR-head SQL/privacy and source security SUCCESS. Frozen603 SKIPPED, not PASS.",
+        "Release intake still IN_PROGRESS by concurrent owner-frozen READY48 selection. This subsequent R198 source change is intentionally excluded from frozen candidate; no separate release or publication authorized."
       ],
-      "ci_runs": [],
+      "ci_runs": [
+        43136517358,
+        43136517253,
+        43136517242,
+        43136517248,
+        43136517293,
+        43136815409,
+        43136815429,
+        43136815449
+      ],
       "blockers": [
         "R198 is newer development-only app source (engine.js) added AFTER owner READY48 source freeze. Its code is excluded from the already tested 48-item + #1938 candidate. Do not promote to READY or ship it with that frozen batch without a separate owner authorization and completed independent release intake."
       ],
-      "notes": "The r3 candidate is a direct child of frozen source c8e38d8b2d9efc281e35ebad8201f0bcf5d65a41; its `site/lib/engine.js` Git object remains the older proven READY48 version. This explicitly tracks post-staging development drift without reverting R198 or laundering it into the release. Preserve all original shot/rating/Community behavior and the newer tested R198 development code.",
+      "notes": "The r3 candidate is a direct child of frozen source c8e38d8b2d9efc281e35ebad8201f0bcf5d65a41; its `site/lib/engine.js` Git object remains the older proven READY48 version. This explicitly tracks post-staging development drift without reverting R198 or laundering it into the release. Preserve all original shot/rating/Community behavior and the newer tested R198 development code.\nR198 code and exact-source CI independently verified in PR #2150 and merged SHA 654723176d289a458f843493ccdeb4fff5cfa7cb; release queue remains IN_PROGRESS with preexisting freeze blocker. No new deployment, no automatic READY promotion, no change to owner-frozen READY48 candidate.",
       "production_deployed": false
     }
   ],
