@@ -680,3 +680,9 @@ Independently verified Git release/production b386a977a7c43bf190f6315105894334d9
 - Owner requested operational, not inert, full READY verification and allowed deployment only if necessary. GitHub controller update needs no production release. Main parent 6312346c76d783925be8686a57bfc7363e1709f3. Dev feature audit PR #2187.
 - Source gate shared identically with development approval, requires verified GitHub Actions run IDs, five named successful check jobs on ONE exact CI SHA, full first-parent changed code/test blob parity with merged SHA, no selected source drift, and published-to-candidate ownership/overlap check. The controller invokes the gate after verifying source/one-use approvals but BEFORE any grant claim/ref update. Missing, pending, skipped, failed, stale or uncited receipts HOLD. No redundant app build or suite.
 - Tests: copied source-bound negative audit tests from development; add to existing main acceptance suite in same scoped work; main workflow CI must verify exact merged SHA. No candidate stage, grant, Netlify, production release or private member write.
+
+
+## 2026-11-12 — #2169 actual GitHub main push event observation [skip netlify]
+- Authority: owner requires operational GitHub event status and post-controller classification. Parent 742cbae336843206bebb0b7652bfbc4cae77136e. Canonical read-only Actions runs?head_sha observer added with independently verified main SHA and explicit completed workflow run identity; no generic PR-only commit-run lookup.
+- Deny absent/stale/duplicate/failed/mismatched events and unknown statuses; a running controller is not a publication, and even successful controller requires independent Netlify postflight. Other main commits NOT_APPLICABLE. Tests include realistic synthetic official API readback and adversarial statuses.
+- Next: wire into existing main acceptance workflow without another app build, verify exact CI, reconcile issue; no candidate, grant, provider or DB write.
