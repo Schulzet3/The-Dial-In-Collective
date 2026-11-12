@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "case_number": 185,
+  "original_selected_coffee": "Humble Mule, Natural Decaf",
+  "roaster": "La Mulita Coffee",
+  "official_url": "https://lamulitacoffee.com/products/humble-mule-decaf-coffee",
+  "checked_date_utc": "2026-11-12",
+  "classification": "ONE_CURRENT_SELECTED_COFFEE_VERIFIED_DEVELOPMENT_ONLY",
+  "preflight": {
+    "live_development_sha": "fcb30e1ad3fe2ff531469bc86737184cefbd6d7a",
+    "preflight_file_blob": "2fb236bbfa6bac48513eeb3bd157b260853af06d"
+  },
+  "source": {
+    "merged_sha": "53e3a85218fc6a3c4219328c7872d35a1913a4fe",
+    "pr": 2335,
+    "pr_head": "f52069acdee08a392bccff9c24836e38c7b0b71b",
+    "all_six_changed_blobs_verified_identical": true,
+    "official_html_bytes": 395225,
+    "official_html_sha256": "c0d21ebfc082ee08a314492cc070a390ed8851da629861a3f424dfc6c87ea256",
+    "official_url_actual": "https://lamulitacoffee.com/products/humble-mule-decaf-coffee",
+    "source_artifact_id": 13983529968,
+    "source_artifact_zip_sha256": "46d327a9352f947794ad8fc2dd0e3f659b972c3bc516587180e8418ffc194290",
+    "focused_json_sha256": "d0c12e2c7f4e10e5e053103ec876428e945b8f986c68450f171fd4f612d5ef1d",
+    "afterproof_sha256": "dea2a79d71f7ce1878c412978e7e505c0a1281f7a91acc6125c750f65d185aad"
+  },
+  "extractor": {
+    "selected_h1": "Humble Mule, Natural Decaf",
+    "name": "Humble Mule, Natural Decaf",
+    "roaster": "La Mulita Coffee",
+    "roast_level": "Medium",
+    "origin": "Popayan, Cauca",
+    "producer": "Smallholders in rural areas of Popayan, Cauca",
+    "variety": "Castillo, Catimor Typica, and Caturra",
+    "process": "Washed",
+    "decaffeination_method": "Sugar Process",
+    "elevation_m": "1,500 - 2,070 MASL",
+    "tasting_notes": "Caramel, Chocolate, and Vanilla",
+    "release_label": null,
+    "espresso_recipe": null,
+    "seo_fallback_fields": [],
+    "conflicts": [],
+    "selected_identity_verified": true,
+    "add_coffee_ui_rendered": true,
+    "source_review_rendered": true
+  },
+  "fix": "Exact current chosen product direct self-decaffeination sugar-cane-and-water paragraph previously failed to populate canonical Sugar Process; narrow generic selected-only parser fix; do not confuse Natural Decaf name with green Washed Process, and do not infer ethyl acetate solvent.",
+  "checks": {
+    "focused_adversarial_tests": {
+      "passed": 16,
+      "failed": 0,
+      "run": 43308726996
+    },
+    "guarded_official": {
+      "attempted": 1,
+      "fetched": 1,
+      "parsed": 1,
+      "strict_afterproof_passed": true,
+      "run": 43308726996
+    },
+    "merged_node": {
+      "passed": 4380,
+      "failed": 0,
+      "intentional_skips": 6,
+      "lint": "PASS",
+      "run": 43308726941
+    },
+    "cloud_mobile_browser": {
+      "result": "SUCCESS",
+      "run": 43308726959
+    },
+    "approval": {
+      "result": "SUCCESS",
+      "run": 43308726854
+    },
+    "python_audit": {
+      "result": "SUCCESS",
+      "run": 43308726901
+    },
+    "isolated_sql": {
+      "result": "SUCCESS",
+      "pr_head_run": 43308205303
+    },
+    "security": {
+      "result": "SUCCESS",
+      "pr_head_run": 43308205512
+    },
+    "original_wide_frozen603": "SKIPPED_NOT_PASS"
+  },
+  "frozen_original": {
+    "coffees": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "csv_git_blob": "3e0d3036ea727de091f304f538c6de2dfcaa10d6",
+    "original_register_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "corpus_modified": false,
+    "oracle_modified": false,
+    "whole_corpus_semantic_certification": false
+  },
+  "issue_33_remains_open": true,
+  "release_authorized": false,
+  "deployed": false,
+  "production_mutations": 0,
+  "other_cases_unresolved": true
+}
