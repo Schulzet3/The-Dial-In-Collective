@@ -445,7 +445,8 @@ export function selectedDirectProductCredits(html,{name='',clean,optionHtml=html
   // Explicit directly named selected coffee methods may sit inside
   // a longer paragraph. Inspect bounded sentences of that scoped P only;
   // retain exact chosen identity, nonhistorical and method conflict guards.
-  if(decafOnlyCoffee(name)&&b.tag==='p'&&!b.educational&&line.length<=1200&&
+  if(decafOnlyCoffee(name)&&b.tag==='p'&&!b.educational&&
+     line.length>360&&line.length<=1200&&
      !NONCURRENT_DECAF_METHOD.test(line)&&
      !/^(?:faq|frequently asked questions|common questions|decaf process education)$/iu.test(String(b.section||'').trim()))
    for(const sentence of line.split(/(?<=[.!?])\s+/u).slice(0,8)){
