@@ -46,7 +46,8 @@ test('operational READY audit stays mandatory on development; candidates retain 
  const path='.github/workflows/approval-continuity.yml';
  const src=file(path);
  const ref=process.env.GITHUB_REF||'';
- if(/^refs\\/heads\\/release-candidates\\/[a-z0-9][a-z0-9-]{2,80}$/.test(ref)){
+ if(ref.startsWith('refs/heads/release-candidates/')&&
+    /^[a-z0-9][a-z0-9-]{2,80}$/.test(ref.slice('refs/heads/release-candidates/'.length))){
   const manifest=JSON.parse(file('docs/RELEASE_CANDIDATE.json'));
   assert.equal(manifest.kind,'DIC-READY-ONLY-SOURCE-1');
   assert.equal(manifest.publication_authorized,false);
@@ -59,7 +60,8 @@ test('operational READY audit stays mandatory on development; candidates retain 
   assert.equal(src,actualPublished,'candidate workflow must match exact published Git blob');
   return;
  }
- assert.match(src,/run: node scripts\\/release\\/ready-evidence-gate\\.mjs/);
+ assert.ok(src.includes('run: node scripts/release/ready-evidence-gate.mjs'),
+  'development READY audit must be operational');
  assert.match(src,/actions: read/);
  assert.match(src,/checks: read/);
 });
