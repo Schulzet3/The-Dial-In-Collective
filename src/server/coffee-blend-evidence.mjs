@@ -215,7 +215,7 @@ function enumeratedComponents(page){
    // names are already recognized by source-place evidence elsewhere.
    // Require it at the BEGINNING of the current component, followed by an
    // actual named-lot separator; "Sumatra-style" marketing is not an origin.
-   const namedRegion=/^(Sumatra|Bali|Timor|Kona|Hawaii)\s*[-–—]\s*[\p{L}]/iu.exec(match[1]);
+   const namedRegion=/^(Sumatra|Bali|Timor|Kona|Hawaii)\s*[-–—]\s*(?!(?:style|flavou?r(?:ed|ing)?|themed|roast(?:ed|ing)?)\b)[\p{L}]/iu.exec(match[1]);
    const literalRegion=countries.length===0&&namedRegion&&
      literalCoffeeSourcePlaces(match[1]).some(place=>key(place)===key(namedRegion[1]));
    const place=countries.length===1&&countries[0].index===0

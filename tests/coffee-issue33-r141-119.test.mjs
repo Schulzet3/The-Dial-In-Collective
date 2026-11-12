@@ -94,3 +94,9 @@ test('selected region-only list not borrowed from unrelated carousel',()=>{
  const p=extractPublicCoffeeFacts(incomplete,{source_url:chosen119.url});
  assert.ok(!String(p.fields?.origin||'').includes('Sumatra'),JSON.stringify(p.fields));
 });
+
+test('island marketing label with separated style is not a coffee origin',()=>{
+ const fake=html().replace(composition,composition.replace('Sumatra - Gayo Triple Picked','Sumatra - Style Roast'));
+ const blend=extractCoffeeBlendEvidence(fake,{name:'radiate'});
+ assert.ok(!blend?.origin?.includes('Sumatra'),JSON.stringify(blend));
+});
