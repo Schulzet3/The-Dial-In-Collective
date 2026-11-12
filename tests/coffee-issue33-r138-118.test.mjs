@@ -58,3 +58,18 @@ test('#118 actual parser retains selected espresso identity over old SEO',()=>{
  assert.equal(p.ok,true);
  assert.equal(p.fields?.name?.toLowerCase(),chosen118.name);
 });
+
+test('#118 stale same-SKU data-sheets hidden attributes cannot transfer old Brazil or Colombia components',()=>{
+ const stale='Brazil Carmo de Minas (Natural Process), Guatemala Ayarza (Natural Process), and Colombia Monteblanco (Natural Process)';
+ const staleTaste='milk chocolate, roasted almonds and caramel';
+ const wrapped='<span data-sheets-value="'+JSON.stringify({1:2,2:stale}).replace(/"/g,'&quot;')+'">'+components+
+  '</span><p><span data-sheets-value="'+JSON.stringify({1:2,2:staleTaste}).replace(/"/g,'&quot;')+'">'+
+  'Medium Roast: The flavors of milk chocolate, roasted almonds and dried fruits come out more clearly!</span></p>';
+ const p=extractPublicCoffeeFacts(page(wrapped),{source_url:chosen118.url});
+ assert.equal(p.ok,true);
+ assert.ok(String(p.fields?.origin||'').includes('Guatemala'),JSON.stringify(p.fields));
+ assert.ok(String(p.fields?.origin||'').includes('Ethiopia'),JSON.stringify(p.fields));
+ assert.ok(!/\b(?:Brazil|Colombia)\b/i.test(String(p.fields?.origin||'')),JSON.stringify(p.fields));
+ assert.equal(p.fields?.process,'Other/Unknown');
+ assert.ok(!/\bcaramel\b/i.test(String(p.fields?.tasting_notes||'')),JSON.stringify(p.fields));
+});
