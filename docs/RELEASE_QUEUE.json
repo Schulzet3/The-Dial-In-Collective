@@ -13169,23 +13169,33 @@
     {
       "id": "DIC-Q-455-r217-invalid-restored-rating-empty-label",
       "issue": 455,
-      "pr": null,
+      "pr": 2333,
       "title": "Keep five rating controls usable and explicitly unrated when editing legacy missing/invalid taste records",
-      "state": "IN_PROGRESS",
-      "merged_source_sha": null,
+      "state": "READY",
+      "merged_source_sha": "886fc5d6fb960bf1bc9c46d657894756c9d3f7b9",
       "scope_paths": [
         "site/lib/constants.js",
         "site/lib/ui.js"
       ],
       "owner_source": "Owner #455 Option B safe Locked-compatible UX repair; immutable preflight 3a47f4e05c94773b41424c3b3bbf0a296fe414eb Git blob 2fb236bbfa6bac48513eeb3bd157b260853af06d",
       "tests": [
-        "New focused tests/cloud-shot-rating-focus.test.mjs negative/positive scenarios authored; exact Node22/Chromium/mobile/offline CI NOT EXECUTED; no PASS claim."
+        "New direct Node22 test: all five taste scales for missing/null/string/zero/out-of-range/fraction/NaN/Infinity must render Tap to rate and remain unselected; valid 3/3/5/5/1 stays selected and untouched. Test case ok 203 in both PR-head and exact merged logs; original measured shot/notes/history not modified.",
+        "Exact PR head d8ba687055bd18b647f3538a6a8b7d8079820789: Node22/lint 43303671919 SUCCESS 4,364 PASS/0 FAIL/6 intentional SKIP, 43303671481 compiled browser/390px/offline/accessibility SUCCESS (cloud-tests explicitly NOT_APPLICABLE), isolated SQL/privacy 43303671538 SUCCESS, security 43303671660 SUCCESS, approval 43303672196 SUCCESS. Frozen original603 43303671597 SKIPPED (NOT PASS).",
+        "Exact nonforce squash merge 886fc5d6fb960bf1bc9c46d657894756c9d3f7b9: 6 reviewed paths identical to head Git blobs, one merge parent b11f3c36c53f6644b38d2bd0a66655319afae108; full Node22+lint 43304152780 SUCCESS 4,364 PASS/0 FAIL/6 SKIP with focused test ok 203; compiled browser/mobile/offline 43304152705 SUCCESS. Merge push approval 43304153073 CANCELLED due concurrent #509 docs; following current source c9c567821ad00432b772573dfcab2751cb88a91d approval 43304230640 SUCCESS and compare confirms only two unrelated #509 docs after R217 merge. NOT a claim cancelled test passed.",
+        "No real signed-in member event, physical espresso taste improvement, original603 broad audit or unexecuted test claimed PASS. Production publication not authorized."
       ],
-      "ci_runs": [],
-      "blockers": [
-        "Exact source-bound PR and applicable checks, merge/blob readback, and queue READY qualification pending."
+      "ci_runs": [
+        43303671919,
+        43303671481,
+        43303671538,
+        43303671660,
+        43303672196,
+        43304152780,
+        43304152705,
+        43304230640
       ],
-      "notes": "Unpublished code-only edit-rendering integrity: restored null or invalid taste data must not throw or show blank label; five originals remain mandatory; no fabricated ratings or retained shot mutation. No new scientific claim, data capture, Locked changes, SQL/Auth/Edge/provider/member production writes, or deployment. #267/#33/#96 separate.",
+      "blockers": [],
+      "notes": "Unpublished code-only edit-rendering integrity: restored null or invalid taste data must not throw or show blank label; five originals remain mandatory; no fabricated ratings or retained shot mutation. No new scientific claim, data capture, Locked changes, SQL/Auth/Edge/provider/member production writes, or deployment. #267/#33/#96 separate.\nR217 source VERIFIED/READY in DEVELOPMENT ONLY: exact merged code/test bytes and PR/merge CI success with concurrent governance continuation documented; no new Netlify/provider writes, no production deployment. Source merge push approval cancelled and not counted as PASS; subsequent unchanged app source governance SUCCESS. Owner approval not required for safe existing five-scale UI integrity; release only upon separate owner Publish.",
       "production_deployed": false
     }
   ],
