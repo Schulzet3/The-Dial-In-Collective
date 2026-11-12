@@ -1,21 +1,31 @@
-# Mandatory topic-relevant context preflight
+# Mandatory starting point for EVERY DIC task
 
-**Before every substantive DIC request:** apply the automatically supplied ChatGPT Project Instructions; check live `development/backend-foundation` (or `main` for backup operations), read [CONTEXT_ENTRYPOINT](CONTEXT_ENTRYPOINT.md), and follow the topic route. This is an operating requirement, not a technical guarantee the connector will always be available.
+**Single task entrypoint:** [docs/ai/PREFLIGHT.md](PREFLIGHT.md) on the live `development/backend-foundation` branch of `Schulzet3/The-Dial-In-Collective`. This is the first **document** to retrieve for every DIC request (questions, audits, development, automation, backup and publication). The link is a route, not independent product authority.
 
-## Scope-based levels
-- **Question / brainstorming:** read the short entrypoint and relevant existing decisions, research, or history as needed; do not mutate GitHub or providers merely to answer.
-- **Build/fix/update:** also read `AGENTS.md`, active checkpoint and scoped journal, current status, Master Spec, Decision Ledger, approval coverage, release queue, issues/PRs, actual current source SHA and applicable CI; then test and integrate per existing policy.
-- **Sensitive/irreversible work:** independently verify production state, permissions, encrypted recovery, explicit scope and one-use release authority where applicable. A development-only prompt does not authorize deployment.
-- **Audit/intake:** verify source byte hash, provenance, metadata vs direct semantic reading, privacy restrictions and separate historical/current source ledgers.
+## 0. Retrieve and bind live authority FIRST
 
-## Procedure
-1. Recover the exact relevant branch SHA, identify concurrent/interrupted work and avoid trusting old chats.
-2. Inspect entrypoint and choose links for the topic; retrieve only necessary live authoritative evidence.
-3. Apply [AUTHORITY_RULES](AUTHORITY_RULES.md) and exact scoped supersessions; distinguish historical state and research from approval.
-4. Assess scope, privacy, missing access, safety and testing requirements. If retrieval fails, disclose the limitation; safe discussion may continue but unsafe changes must fail closed.
-5. Perform task, verify source/CI/provider evidence for claims, and report **completed**, **READY**, actually **DEPLOYED**, **blocked**, or **unverified** precisely.
-6. Update [Source Register](SOURCE_REGISTER.json), journals and canonical authority only for newly verified lasting changes, per [MAINTENANCE](MAINTENANCE.md).
+1. Resolve the current `development/backend-foundation` Git commit SHA using the live GitHub ref. Retrieve **this PREFLIGHT.md at that exact SHA**, not the default `main` branch, an old chat, a memory summary, or a cached Project attachment. For operations/release work, additionally resolve the live `main` and/or `release/production` refs. Recheck relevant refs before an uncertain write.
+2. **Fail closed:** if the current preflight bytes or required branch SHA cannot be retrieved and verified, record `BLOCKED: PREFLIGHT_UNAVAILABLE`; perform **no GitHub/provider writes** and make no fresh VERIFIED, READY or DEPLOYED assertions. A safe general explanation may continue, explicitly marked unverified. Do not invent a fallback procedure or assume GitHub access.
+3. Apply the provided ChatGPT Project Instructions if accessible, then this task route. They do not themselves prove that live GitHub was fetched; the full `AGENTS.md` and Locked authority remain controlling for their scope.
 
-**Prohibitions:** No full code re-read per prompt; Issue #267 owns its separate line audit. No inference that a file exists merely from an index. No automatic or guaranteed connector retrieval, background monitoring, memory import, source factual certification, or publication from a documentation change.
+## 1. Select the shortest topic route
 
-**Minimal final audit line for substantial work:** source branch/SHA checked; authoritative topic sources checked; relevant missing evidence; actual test/provider readback; state of work.
+Read [CONTEXT_ENTRYPOINT.md](CONTEXT_ENTRYPOINT.md) **after this preflight** for relevant paths. Do not start there or treat its historical pointers as current live state. Select only task-specific authority:
+
+- **Any substantive development:** current `AGENTS.md`, relevant scoped GitHub journal and issue/PR, `docs/CURRENT_STATUS.md`, `docs/MASTER_SPECIFICATION.md`, `docs/DECISION_LEDGER.json`, `docs/APPROVAL_COVERAGE_MATRIX.json`, `docs/RELEASE_QUEUE.json`, actual branch SHA and exact applicable CI. Inspect concurrent/incomplete work first.
+- **Questions/status/brainstorming:** use only necessary live topic evidence and owner decisions; answer without unauthorized edits or a full repository reread.
+- **Backup/recovery:** use `main` and #28 recovery/Drive evidence, preserving encrypted archives, key privacy and verified restore prerequisites.
+- **Publication (only on NEW owner `Publish`):** read the live queue, #417/#457/#2169 runbook, Nov 6 incident, current Git refs, five exact-source CI checks, grant, main push-controller and Netlify READY/current. No preparation, staging, grant or production write from a development-only request.
+- **Audits/research:** follow scoped #33/#267/#455/#504/#508/#509 ledgers, provenance and privacy boundaries; metadata inventory is not semantic proof.
+
+## 2. Approve the actual action, not a guessed process
+
+Identify explicit owner scope and current Locked decisions (Master Spec **and** Decision Ledger), applicable supersessions, data/privacy impact, and required recovery. No research or brainstorming automatically approves a product change. Use the existing #457 risk-tier test matrix: **one applicable build**, no duplicate test suite, reuse matching exact-source PASS evidence. SKIPPED, pending, NOT_APPLICABLE and PR-only status are not PASS. Respect `development/backend-foundation` = app, `main` = operations, `release/production` = publication. No invented release steps, manual owner GitHub triggers or unapproved releases.
+
+## 3. Execute, verify and close the loop
+
+For an authorized change: specify verifiable acceptance criteria; make safe nonforce source changes; include SAME-COMMIT scoped journal with `[skip netlify]` for code/test/CI; run focused and applicable hosted exact-source checks; repair failures and verify merged SHA/files. Reconcile the existing issue, journal, CURRENT_STATUS and queue without changing READY unless source, test evidence and approval justify it. For provider effects, read back actual provider state. Do not report success from a PR, a scheduled workflow, or a failed/pending check.
+
+**Mandatory evidence report for substantial tasks:** `PREFLIGHT [VERIFIED|BLOCKED] (Git branch SHA + preflight blob SHA); authority/owner scope; changes and merged SHA; exact tests/CI; provider readback or NOT_APPLICABLE; remaining blockers/next action; state VERIFIED, READY, BLOCKED or DEPLOYED.`
+
+**Enforcement limit:** CI can reject missing or weakened repository preflight documentation and verify same-commit journals; it cannot prove a ChatGPT conversation retrieved a document or prevent privileged direct GitHub writes on Free/private. Never claim universal 100% enforcement. GitHub does not automatically update ChatGPT Project Settings; only the owner can paste the current full instructions there.

@@ -32,6 +32,8 @@ jobs:
           node-version: '22'
       - name: Reject accidentally tracked private keys, credential files and high-confidence tokens
         run: node scripts/audit/security-inventory.mjs
+      - name: Protect the single mandatory live preflight entrypoint
+        run: node scripts/audit/preflight-contract.mjs
       - name: Fail on missing owner decisions or approved UI/source tests
         run: node scripts/audit/approval-coverage.mjs
       - name: Validate queue schema and intake in one nonpublishing check
