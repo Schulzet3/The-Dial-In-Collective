@@ -2,9 +2,9 @@
   "schema_version": 1,
   "authority": "OPS-AUTONOMOUS-BUILD-TEST-QUEUE-20261022",
   "published_base": {
-    "tested_source_sha": "ad457f648bc72c2d79c24406766a64abd3acd835",
-    "release_sha": "d0bc07df641af6411435daac74ee3cb16d1bdb61",
-    "netlify_deploy_id": "6af51c834f09e4e2c0f203ea"
+    "tested_source_sha": "046418955abca382ba1bda16d345127b477dd392",
+    "release_sha": "72ef825aad9fbb5252825e7ab71b4650a496b66c",
+    "netlify_deploy_id": "6af5d3463f9e2eab6338b0c3"
   },
   "items": [
     {
@@ -12933,7 +12933,7 @@
       "issue": 455,
       "pr": 2150,
       "title": "R198 original-range outlier eligibility with R201 zero-width integrity guard",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "a5dd027d7f20e4eb6b108cf5b8acdaf432ca006c",
       "scope_paths": [
         "site/lib/engine.js"
@@ -12961,15 +12961,15 @@
         43156218947
       ],
       "blockers": [],
-      "notes": "The r3 candidate is a direct child of frozen source c8e38d8b2d9efc281e35ebad8201f0bcf5d65a41; its `site/lib/engine.js` Git object remains the older proven READY48 version. This explicitly tracks post-staging development drift without reverting R198 or laundering it into the release. Preserve all original shot/rating/Community behavior and the newer tested R198 development code.\nR198 code and exact-source CI independently verified in PR #2150 and merged SHA 654723176d289a458f843493ccdeb4fff5cfa7cb; release queue remains IN_PROGRESS with preexisting freeze blocker. No new deployment, no automatic READY promotion, no change to owner-frozen READY48 candidate.\n2026-11-12 #2169: Earlier R198 source/blob, ownership, exact CI and zero-scoped blockers independently verified after published READY48. New concurrent R201 same-file integrity fix #2188 invalidated the prior current-blob assertion; independently tested the combined R198+R201 behavior on exact R201 PR head and verified its code/test objects match R201 merged source and current development. The READY receipt now binds the combined source merge a5dd027d7f20e4eb6b108cf5b8acdaf432ca006c. No candidate, grant or production; optional taste/device acceptance not claimed.",
-      "production_deployed": false
+      "notes": "The r3 candidate is a direct child of frozen source c8e38d8b2d9efc281e35ebad8201f0bcf5d65a41; its `site/lib/engine.js` Git object remains the older proven READY48 version. This explicitly tracks post-staging development drift without reverting R198 or laundering it into the release. Preserve all original shot/rating/Community behavior and the newer tested R198 development code.\nR198 code and exact-source CI independently verified in PR #2150 and merged SHA 654723176d289a458f843493ccdeb4fff5cfa7cb; release queue remains IN_PROGRESS with preexisting freeze blocker. No new deployment, no automatic READY promotion, no change to owner-frozen READY48 candidate.\n2026-11-12 #2169: Earlier R198 source/blob, ownership, exact CI and zero-scoped blockers independently verified after published READY48. New concurrent R201 same-file integrity fix #2188 invalidated the prior current-blob assertion; independently tested the combined R198+R201 behavior on exact R201 PR head and verified its code/test objects match R201 merged source and current development. The READY receipt now binds the combined source merge a5dd027d7f20e4eb6b108cf5b8acdaf432ca006c. No candidate, grant or production; optional taste/device acceptance not claimed.\nVERIFIED deployed source-only Nov 12 READY4E2E-34: frozen published tested candidate 046418955abca382ba1bda16d345127b477dd392, five exact candidate-source CI checks SUCCESS (43236906855 validate, 43236906932 cloud/browser, 43236907128 SQL, 43236906945 approval), Git release 72ef825aad9fbb5252825e7ab71b4650a496b66c, Netlify READY/current 6af5d3463f9e2eab6338b0c3. Every scoped deployable Git blob byte-identical candidate vs published release. Actual physical device push and end-user UI visual acceptance are NOT asserted. No new #2258 transactional email/member push included.",
+      "production_deployed": true
     },
     {
       "id": "DIC-Q-1938-push-toggle-device-state",
       "issue": 1938,
       "pr": 2161,
       "title": "Show one device-authoritative administrator push toggle across refreshes",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "5d64b2803574c090d9608cb5729a8e266fc63639",
       "scope_paths": [
         "site/admin/view.js",
@@ -12989,7 +12989,8 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1938",
-      "notes": "READY development only, not deployed. Source PR #2161 squash merged nonforce 5d64b280; tested head 16d2f72 five applicable CI SUCCESS and exact runtime/test blob readback identical after merge. No merged-SHA Actions run observed at this checkpoint; no device APNs acceptance claim. Future publication requires new owner Publish."
+      "notes": "READY development only, not deployed. Source PR #2161 squash merged nonforce 5d64b280; tested head 16d2f72 five applicable CI SUCCESS and exact runtime/test blob readback identical after merge. No merged-SHA Actions run observed at this checkpoint; no device APNs acceptance claim. Future publication requires new owner Publish.\nVERIFIED deployed source-only Nov 12 READY4E2E-34: frozen published tested candidate 046418955abca382ba1bda16d345127b477dd392, five exact candidate-source CI checks SUCCESS (43236906855 validate, 43236906932 cloud/browser, 43236907128 SQL, 43236906945 approval), Git release 72ef825aad9fbb5252825e7ab71b4650a496b66c, Netlify READY/current 6af5d3463f9e2eab6338b0c3. Every scoped deployable Git blob byte-identical candidate vs published release. Actual physical device push and end-user UI visual acceptance are NOT asserted. No new #2258 transactional email/member push included.",
+      "production_deployed": true
     },
     {
       "id": "DIC-Q-33-r141-119-radiate-literal-island-blend-origin",
@@ -13025,7 +13026,7 @@
       "issue": 33,
       "pr": 2251,
       "title": "Preserve direct selected EA sugarcane decaffeination when product name moves Decaf from H1 prefix to current description suffix",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "dac36e7589c2ca071dc047e71701480739873d66",
       "scope_paths": [
         "src/server/coffee-direct-product-prose.mjs"
@@ -13054,15 +13055,15 @@
       ],
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/33",
-      "notes": "Development-only narrow parser correction VERIFIED source READY after exact merged guarded current chosen URL and independent binary artifact rehash. Existing 320 queue entries and all historical READY/DEPLOYED records preserved; no deployment. Parent issue33 remains OPEN for other 603 cases including #115/#152. Approval decisions unchanged.",
-      "production_deployed": false
+      "notes": "Development-only narrow parser correction VERIFIED source READY after exact merged guarded current chosen URL and independent binary artifact rehash. Existing 320 queue entries and all historical READY/DEPLOYED records preserved; no deployment. Parent issue33 remains OPEN for other 603 cases including #115/#152. Approval decisions unchanged.\nVERIFIED deployed source-only Nov 12 READY4E2E-34: frozen published tested candidate 046418955abca382ba1bda16d345127b477dd392, five exact candidate-source CI checks SUCCESS (43236906855 validate, 43236906932 cloud/browser, 43236907128 SQL, 43236906945 approval), Git release 72ef825aad9fbb5252825e7ab71b4650a496b66c, Netlify READY/current 6af5d3463f9e2eab6338b0c3. Every scoped deployable Git blob byte-identical candidate vs published release. Actual physical device push and end-user UI visual acceptance are NOT asserted. No new #2258 transactional email/member push included.",
+      "production_deployed": true
     },
     {
       "id": "DIC-Q-2258-user-account-approval-confirmation",
       "issue": 2258,
       "pr": 2260,
       "title": "Server-confirmed in-app notification when a pending member's account is approved",
-      "state": "READY",
+      "state": "DEPLOYED",
       "merged_source_sha": "9beb10f04d0db227abacb553a50832caa4ba65dc",
       "scope_paths": [
         "site/cloud/main.js",
@@ -13085,8 +13086,8 @@
         43228346616
       ],
       "blockers": [],
-      "notes": "No Auth/provider/SQL/production writes. #1938 off-screen administrator push is distinct. Boolean pending flag is per account, not admission authority. User sees an accessible dismissible approval banner after server admits them. Future publish requires new owner command. Source-only READY after exact test+merge evidence. This READY item covers ONLY in-app user notice; closed-app member push and transactional approval email remain unbuilt, unverified, and outside this scope. Issue #2258 remains OPEN for any explicitly required external delivery. No automatic staging/publication.",
-      "production_deployed": false
+      "notes": "No Auth/provider/SQL/production writes. #1938 off-screen administrator push is distinct. Boolean pending flag is per account, not admission authority. User sees an accessible dismissible approval banner after server admits them. Future publish requires new owner command. Source-only READY after exact test+merge evidence. This READY item covers ONLY in-app user notice; closed-app member push and transactional approval email remain unbuilt, unverified, and outside this scope. Issue #2258 remains OPEN for any explicitly required external delivery. No automatic staging/publication.\nVERIFIED deployed source-only Nov 12 READY4E2E-34: frozen published tested candidate 046418955abca382ba1bda16d345127b477dd392, five exact candidate-source CI checks SUCCESS (43236906855 validate, 43236906932 cloud/browser, 43236907128 SQL, 43236906945 approval), Git release 72ef825aad9fbb5252825e7ab71b4650a496b66c, Netlify READY/current 6af5d3463f9e2eab6338b0c3. Every scoped deployable Git blob byte-identical candidate vs published release. Actual physical device push and end-user UI visual acceptance are NOT asserted. No new #2258 transactional email/member push included.",
+      "production_deployed": true
     },
     {
       "id": "DIC-Q-2258-approval-email-and-member-push",
@@ -15118,6 +15119,42 @@
       "source_sha": "60279ea802e7d986adb6bd2580f35645a8c621c0",
       "evidence": "Owner-confirmed separate Resend restricted sending key and sender saved in Supabase Edge secrets; current Resend support/Auth service already working. All five exact PR-head checks SUCCESS, nonforce merged code/test parity, later security-path test merged, unchanged current runtime. Real email/API acceptance, member push device receipt, Supabase migration/Edge and Netlify scheduled poll are post-Publish verification; no production write, actual secret readback or delivery claimed. Pending fresh owner Publish.",
       "production_deployed": false
+    },
+    {
+      "date": "2026-11-12",
+      "issue": 1938,
+      "item_id": "DIC-Q-1938-push-toggle-device-state",
+      "state": "DEPLOYED",
+      "source_sha": "5d64b2803574c090d9608cb5729a8e266fc63639",
+      "evidence": "Owner-approved READY4E2E-34 release: frozen candidate 046418955abca382ba1bda16d345127b477dd392 five exact-success checks, Git production 72ef825aad9fbb5252825e7ab71b4650a496b66c, Netlify READY/current 6af5d3463f9e2eab6338b0c3. All scoped code blobs identical; physical device acceptance unverified. Reconciled November 12 against actual provider readback; no new deployment.",
+      "production_deployed": true
+    },
+    {
+      "date": "2026-11-12",
+      "issue": 2258,
+      "item_id": "DIC-Q-2258-user-account-approval-confirmation",
+      "state": "DEPLOYED",
+      "source_sha": "9beb10f04d0db227abacb553a50832caa4ba65dc",
+      "evidence": "Owner-approved READY4E2E-34 release: frozen candidate 046418955abca382ba1bda16d345127b477dd392 five exact-success checks, Git production 72ef825aad9fbb5252825e7ab71b4650a496b66c, Netlify READY/current 6af5d3463f9e2eab6338b0c3. All scoped code blobs identical; physical device acceptance unverified. Reconciled November 12 against actual provider readback; no new deployment.",
+      "production_deployed": true
+    },
+    {
+      "date": "2026-11-12",
+      "issue": 33,
+      "item_id": "DIC-Q-33-r146-163-ironclad-selected-ea-decaf-method",
+      "state": "DEPLOYED",
+      "source_sha": "dac36e7589c2ca071dc047e71701480739873d66",
+      "evidence": "Owner-approved READY4E2E-34 release: frozen candidate 046418955abca382ba1bda16d345127b477dd392 five exact-success checks, Git production 72ef825aad9fbb5252825e7ab71b4650a496b66c, Netlify READY/current 6af5d3463f9e2eab6338b0c3. All scoped code blobs identical; physical device acceptance unverified. Reconciled November 12 against actual provider readback; no new deployment.",
+      "production_deployed": true
+    },
+    {
+      "date": "2026-11-12",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r198-original-range-outlier-eligibility",
+      "state": "DEPLOYED",
+      "source_sha": "a5dd027d7f20e4eb6b108cf5b8acdaf432ca006c",
+      "evidence": "Owner-approved READY4E2E-34 release: frozen candidate 046418955abca382ba1bda16d345127b477dd392 five exact-success checks, Git production 72ef825aad9fbb5252825e7ab71b4650a496b66c, Netlify READY/current 6af5d3463f9e2eab6338b0c3. All scoped code blobs identical; physical device acceptance unverified. Reconciled November 12 against actual provider readback; no new deployment.",
+      "production_deployed": true
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
