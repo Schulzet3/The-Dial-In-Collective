@@ -728,3 +728,9 @@ Independently verified Git release/production b386a977a7c43bf190f6315105894334d9
 - Source development grant: 86f9a6c5d354967106e3ce32c742ac8a659f17e1; main expected before SHA: 9ed4633f7919a8f49525e110ab31060d4502c0fa
 - Recovery evidence: encrypted artifact 13905387023 and owner-private Drive file 1591RhOQg-UEAXL2OHIDjCNrP9CngWezr; unchanged database risk none
 - Original -33 failed before claim; no replay. Only this new source-bound one-use request may publish once. No claim of actual release until GitHub controller and Netlify postflight.
+
+
+## 2026-11-12 — route main operations to canonical DIC preflight [skip netlify]
+- Owner explicitly requests a single GitHub first document for every task. Live main read and preserved at `cf83b3873e36916b5a51303bac9f0fff69b94670`; app preflight policy proposed in development PR #2284. No main release request, release controller, one-use grant, SQL/Auth, encrypted archive, provider or production source changes.
+- SAME-COMMIT docs-only: `AGENTS.md`, `README.md`, and this append-only ops journal. Both main first-page pointers direct to current development SHA-bound `docs/ai/PREFLIGHT.md` then main-specific backup/release documents. This document change cannot establish that a future ChatGPT session fetched the file. No Netlify deployment authorized. [skip netlify]
+- Required next: exact main PR/head acceptance and nonforce merge, merged SHA/readback, preserve publication branch and Netlify unchanged. Development PR must independently pass all applicable source CI.

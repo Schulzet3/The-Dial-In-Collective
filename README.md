@@ -1,8 +1,10 @@
 # The Dial In Collective
 
+**Every DIC task starts at the [live development PREFLIGHT.md](https://github.com/Schulzet3/The-Dial-In-Collective/blob/development/backend-foundation/docs/ai/PREFLIGHT.md), resolved at the current development branch SHA.** Operations, backup and release work then follow its task-specific main branch route; do not use stale `main` snapshots, chat history or memory as the starting authority.
+
 The active application and canonical requirements are on [development/backend-foundation](https://github.com/Schulzet3/The-Dial-In-Collective/tree/development/backend-foundation). This private default `main` branch owns operations and backups, not the application. Only `release/production` publishes. Do not merge these roles merely to erase ahead/behind counts.
 
-Start with the application's active checkpoint, CURRENT_STATUS, Master Specification, Decision Ledger and AGENTS. For operations, read [this branch's checkpoint](docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md) and [operations journal](docs/OPS_RELEASE_CONTROLLER_WORK_JOURNAL_2026-10-21.md).
+After the live development PREFLIGHT, recover the application's active checkpoint, CURRENT_STATUS, Master Specification, Decision Ledger and AGENTS. For main operations, then read [this branch's checkpoint](docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md) and [operations journal](docs/OPS_RELEASE_CONTROLLER_WORK_JOURNAL_2026-10-21.md).
 
 ## Current operations: October 23 UTC / October 22 MDT
 
