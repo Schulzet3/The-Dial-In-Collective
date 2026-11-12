@@ -237,6 +237,7 @@ const fixtureRows={
   {id:fixtureId('2',1),email:'tester@synthetic.invalid',admin:false,enabled:false}],
  signup:[{id:fixtureId('7',1),email:'waiting@synthetic.invalid',email_verified:true,review_state:'pending',created_at:fixtureTime}]
 };
+const getAdminPushStatus=async()=> 'disabled';
 const sdk={
  auth:{onAuthStateChange:()=>({data:{subscription:{unsubscribe(){}}}}),
   getUser:async()=>({data:{user:{id:fixtureId('1',1)}}})},

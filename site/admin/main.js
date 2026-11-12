@@ -4,7 +4,7 @@ import {e} from '../lib/ui.js';
 import {applyAppearance,readAppearance} from '../cloud/appearance.js';
 applyAppearance(readAppearance(),{remember:false});
 import {renderAdminDashboard,renderAdminDenied,renderAdminDeleteAccountPrompt} from './view.js';
-import {enableAdminPush,disableAdminPush} from './push.js';
+import {enableAdminPush,disableAdminPush,getAdminPushStatus} from './push.js';
 
 const root=document.querySelector('#admin-root');
 const RECORD_KINDS=['pending','conflicts','approved','shots','accounts'];
@@ -22,6 +22,7 @@ async function start(){
  let records={};
  let access=null;
  let signupRequests=null,signupOffset=0,lastAttentionCount=null;
+ let pushStatus='unknown';
  const openSections=new Set();
  const openCoffeeGroups=new Set();
  const invalidate=message=>{
@@ -109,7 +110,9 @@ async function start(){
     }));
     if(invalidated)return;
 
-    root.innerHTML=renderAdminDashboard(dashboard,access,null,mergeChoices,records,{openSections,openCoffeeGroups,searchText,comparisons,signupRequests});
+    pushStatus=await getAdminPushStatus().catch(()=> 'unknown');
+    if(invalidated)return;
+    root.innerHTML=renderAdminDashboard(dashboard,access,null,mergeChoices,records,{openSections,openCoffeeGroups,searchText,comparisons,signupRequests,pushStatus});
    }finally{if(trigger)trigger.disabled=false;}
   }
   function actionMessage(message){
@@ -290,6 +293,7 @@ async function start(){
      guarded(async()=>{
       // User-click handler retains permission activation. Server validates admission/role.
       const result=await (action==='enable-admin-push'?enableAdminPush(sdk):disableAdminPush(sdk));
+      await refresh();
       actionMessage(result);
      });return;
     }

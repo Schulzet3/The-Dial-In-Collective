@@ -12959,6 +12959,28 @@
       ],
       "notes": "The r3 candidate is a direct child of frozen source c8e38d8b2d9efc281e35ebad8201f0bcf5d65a41; its `site/lib/engine.js` Git object remains the older proven READY48 version. This explicitly tracks post-staging development drift without reverting R198 or laundering it into the release. Preserve all original shot/rating/Community behavior and the newer tested R198 development code.\nR198 code and exact-source CI independently verified in PR #2150 and merged SHA 654723176d289a458f843493ccdeb4fff5cfa7cb; release queue remains IN_PROGRESS with preexisting freeze blocker. No new deployment, no automatic READY promotion, no change to owner-frozen READY48 candidate.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-1938-push-toggle-device-state",
+      "issue": 1938,
+      "pr": 2161,
+      "title": "Show one device-authoritative administrator push toggle across refreshes",
+      "state": "TESTING",
+      "merged_source_sha": null,
+      "scope_paths": [
+        "site/admin/view.js",
+        "site/admin/main.js",
+        "site/admin/push.js"
+      ],
+      "tests": [
+        "tests/issue1938-admin-push-toggle.test.mjs: mutually exclusive button rendering, subscription and permission refresh"
+      ],
+      "ci_runs": [],
+      "blockers": [
+        "Exact-source CI and nonforce merge pending; real iPhone APNs delivery remains unverified"
+      ],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1938",
+      "notes": "No production publish authorized; separate from deployed original #1938."
     }
   ],
   "history": [

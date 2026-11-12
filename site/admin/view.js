@@ -9,13 +9,13 @@ export function renderAdminDenied(message='Administrator access required.'){
  <section class="admin-panel admin-empty"><h1>Admin Access Unavailable</h1><p>${e(message)}</p><p class="helper">Access is controlled by your account's server-side administrator role.</p></section>`;
 }
 
-export function renderAdminAttention(stats={}){
+export function renderAdminAttention(stats={},pushStatus='unknown'){
  const count=key=>Number.isSafeInteger(Number(stats[key]))&&Number(stats[key])>=0?Number(stats[key]):0;
  const a=count('pending_verified_accounts'),b=count('pending_coffees'),c=count('conflicts'),d=count('unfinished_account_deletions');
  return '<section class="admin-panel admin-attention" aria-labelledby="admin-attention-heading">'
   +'<div class="admin-attention-header"><h2 id="admin-attention-heading">Requires Your Attention</h2><span class="admin-attention-count" role="status" aria-live="polite" aria-label="Items requiring attention">'+formatCount(a+b+c+d)+'</span></div>'
   +'<p class="helper">Ready account approvals '+formatCount(a)+' · Coffee reviews '+formatCount(b)+' · Conflicts '+formatCount(c)+' · Unfinished deletions '+formatCount(d)+'</p>'
-  +'<div class="admin-member-actions"><button type="button" class="ghost compact" data-action="enable-admin-push">Enable Push Alerts</button><button type="button" class="ghost compact" data-action="disable-admin-push">Disable Push Alerts</button></div><p class="helper">On iPhone, open the Home Screen app and allow notifications once. Alerts can arrive when Admin is closed.</p></section>';
+  +'<div class="admin-member-actions">'+(pushStatus==='enabled'?'<button type="button" class="ghost compact" data-action="disable-admin-push">Disable Push Alerts</button>':pushStatus==='disabled'?'<button type="button" class="ghost compact" data-action="enable-admin-push">Enable Push Alerts</button>':'<span class="helper" role="status">Push status unavailable. Refresh to retry.</span>')+'</div><p class="helper">On iPhone, open the Home Screen app and allow notifications once. Alerts can arrive when Admin is closed.</p></section>';
 }
 export function renderPendingSignups(page={},fallback=null){
  const loaded=Array.isArray(page?.items)&&!page.error,items=loaded?page.items:[],total=loaded?page.total:fallback;
@@ -81,7 +81,7 @@ export function renderAdminDashboard(data={},access=null,_legacySlot=null,candid
  <section class="admin-intro"><span class="admin-eyebrow">Private Operator Dashboard</span><h1>Review Queue</h1>
  <p>Unique coffees are approved automatically. Only unresolved identity or possible duplicate conflicts require review.</p></section>
  <p id="admin-action-notice" class="helper" role="status" aria-live="polite" aria-atomic="true"></p>
- ${renderAdminAttention(stats)}
+ ${renderAdminAttention(stats,options.pushStatus)}
  <form id="admin-search-form" class="admin-search-form" role="search" autocomplete="off">
    <label for="admin-search-query">Search records</label>
    <input id="admin-search-query" name="query" maxlength="80" value="${e(searchText)}" placeholder="Coffee, roaster, member email, shot notes…" aria-label="Search all Admin records">

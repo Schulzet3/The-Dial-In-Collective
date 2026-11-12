@@ -29,6 +29,7 @@ const CLOUD_CONFIG={enabled:true,supabaseUrl:'https://synthetic.invalid',publish
 const readAppearance=()=> 'system';
 const applyAppearance=()=>{};
 const secureOrigin=()=>{};
+const getAdminPushStatus=async()=> 'disabled';
 const e=value=>String(value??'').replace(/[&<>"']/g, ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 window.__allowed=true;
 window.__calls=[];
