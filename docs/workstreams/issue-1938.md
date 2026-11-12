@@ -114,3 +114,5 @@
 - Source: site/admin/view.js, site/admin/main.js, site/admin/push.js; synthetic regression tests tests/issue1938-admin-push-toggle.test.mjs. Exact CI and nonforce integration required before READY. Device APNs delivery remains separately unverified.
 
 - Queue intake repair: new TESTING row `DIC-Q-1938-push-toggle-device-state` covers three changed app paths; initial PR approval CI failed only due to missing queue scope. Re-run CI on queue-corrected source; do not count earlier approval failure as PASS.
+
+- Visual CI regression: isolated `tests/browser/visual_review.py` concatenates Admin modules without ES imports; its synthetic browser fixture did not supply the new `getAdminPushStatus` helper, so Admin never rendered and `#admin-refresh` timed out. Added fixture-only stub reporting disabled; production module and Auth unchanged. Re-test exact source.
