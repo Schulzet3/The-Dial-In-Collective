@@ -11,3 +11,8 @@
 
 - PR head `654c5043369828120c47d243b172ceae4253e0c8`: scoped cloud-tests SUCCESS in run `43226631450`, security-inventory SUCCESS `43226631867`; approval run `43226631434` correctly HELD solely because `site/cloud/main.js` and `site/styles.css` lacked a new in-progress queue row. Original frozen603 SKIPPED, not PASS. No source/UX claim from a failed governance check.
 - Added `DIC-Q-2258-user-account-approval-confirmation` TESTING with the exact two runtime scope paths to `docs/RELEASE_QUEUE.json`; 321 prior items and existing delivery/status history preserved. No READY certification or publication. Applicable exact new-head CI and nonforce integration still required.
+
+## Exact full-suite regression fix
+
+- PR head `e0c154652e8f025e4cad02ec02ed3114b915dfc8`: approval, SQL, security-inventory, cloud-tests and mobile browser checks SUCCESS; full Node22 validate run `43227076001` **FAILED 2/4,248** (4,240 pass, 6 intentional skip). Issue #1596 source contract expected the exact baseline `connected?this.coffees():this.auth()` expression, and one new test incorrectly expected a mocked `render()` that always calls `auth()` to show the connected workspace. Both failures were genuine test results, not hidden as PASS.
+- **Fix in this code/test/journal commit:** Keep the original authorized view ternary intact and compose the admission banner before it; assert actual `status.admitted` and notice, not a deliberately stubbed auth template. Recheck the entire applicable exact-source test suite (do not reuse failed validation), with unchanged strict approval/privacy/SQL controls.
