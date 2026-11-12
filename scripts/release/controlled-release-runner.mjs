@@ -12,7 +12,8 @@ import {planSingleUseClaim,assertReadyForRelease,validateReleaseGrant,RELEASE_BR
 import {validateChatReleaseRequest,validateManualReleaseRequest,assertChatPushEnvelope,CHAT_REQUEST_PATH,OPS_JOURNAL_PATH} from './chat-release-request.mjs';
 import {classifyMigrationDiff,releaseReadinessMarkdown} from './migration-risk.mjs';
 import {assessReleaseQueue,formatQueueReport,assertApprovedReadyBatch} from './release-queue.mjs';
-import {validateReadyOnlyCandidate,CANDIDATE_RECEIPT_PATH,assertCandidateRelativeImports} from './ready-only-candidate.mjs';
+import {validateReadyOnlyCandidate,CANDIDATE_RECEIPT_PATH,assertCandidateRelativeImports,
+ assertCandidateStaticNamedExports} from './ready-only-candidate.mjs';
 import {verifyReadyItems,githubReleaseReaders} from './ready-evidence-gate.mjs';
 import {liveControllerIndex} from './observe-chat-controller-event.mjs';
 import {validateReleaseTriggerReceipt} from './release-reliability.mjs';
@@ -327,6 +328,10 @@ export async function executeSingleUseRelease(settings=process.env){
    readSource:path=>git(['show',sha+':'+path]),
    hasPath:path=>objectAt(sha,path)!==null
   });
+  assertCandidateStaticNamedExports(queueGate.deployable_paths,{
+   readSource:path=>git(['show',sha+':'+path]),
+   hasPath:path=>objectAt(sha,path)!==null
+  });
  }else{
   queueGate=assessReleaseQueue(queuedSource,{
    publishedSourceSha:lastPublishedTestedSha,candidateSha:sha,changedPaths:changedSourcePaths,
@@ -354,7 +359,7 @@ export async function executeSingleUseRelease(settings=process.env){
   'READY five exact GitHub CI checks, code/test Git objects and source scope VERIFIED for '+
   evidence.verified.length+' items; '+
   evidence.verified.filter(x=>x.source_drift_paths.length).length+
-  ' later same-file source drifts recorded; frozen candidate isolation still mandatory; no extra build.\n');
+  ' current-source drift receipts (owner-frozen isolation still required); no extra build.\n');
  // Source-bound CI, approved READY items, deployable-path coverage and ancestry
  // are verified above. Netlify performs the one authorized production build.
  const nowIso=new Date().toISOString();

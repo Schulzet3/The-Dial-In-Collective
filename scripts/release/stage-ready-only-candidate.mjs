@@ -8,7 +8,8 @@ import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 import {CANDIDATE_KIND,CANDIDATE_JOURNAL_PATH,CANDIDATE_RECEIPT_PATH,
  planReadyOnlyCandidate,validateReadyOnlyCandidate,workflowChangedPaths,
- discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,assertCandidateRelativeImports} from './ready-only-candidate.mjs';
+ discoverReviewedWorkflowTestExclusions,discoverExcludedUnreadyTests,
+ assertCandidateRelativeImports,assertCandidateStaticNamedExports} from './ready-only-candidate.mjs';
 import {classifyReleaseRisk} from './release-reliability.mjs';
 const SHA=/^[a-f0-9]{40}$/;
 const BRANCH=/^release-candidates\/[a-z0-9][a-z0-9-]{2,80}$/;
@@ -109,6 +110,10 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
     git(['show',commit+':docs/RELEASE_QUEUE.json'],{trim:false}),
    sourceObjectAt,isAncestor:ancestor});
   assertCandidateRelativeImports(plan.included_paths,{
+   readSource:path=>git(['show',commit+':'+path]),
+   hasPath:path=>sourceObjectAt(commit,path)!==null
+  });
+  assertCandidateStaticNamedExports(plan.included_paths,{
    readSource:path=>git(['show',commit+':'+path]),
    hasPath:path=>sourceObjectAt(commit,path)!==null
   });

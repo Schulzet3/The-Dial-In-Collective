@@ -88,6 +88,57 @@ export function assertCandidateRelativeImports(paths,{readSource,hasPath}={}){
  return true;
 }
 
+
+// Conservative direct ESM export preflight before the ONE required candidate build.
+// Star/barrel/CommonJS/dynamic semantics remain for that full build; no eval/network.
+export function assertCandidateStaticNamedExports(paths,{readSource,hasPath}={}){
+ if(!Array.isArray(paths)||typeof readSource!=='function'||typeof hasPath!=='function')
+  throw Error('Candidate export evidence unavailable');
+ const find=(from,spec)=>{
+  const target=posix.normalize(posix.join(posix.dirname(from),spec.split(/[?#]/)[0]));
+  if(target.startsWith('../')||target.startsWith('/')||!target)
+   throw Error('Unsafe relative module path: '+from+' -> '+spec);
+  const options=posix.extname(target)?[target]:
+   [target,target+'.js',target+'.mjs',target+'.cjs',target+'.json',target+'/index.js'];
+  const found=options.find(p=>hasPath(p));
+  if(!found)throw Error('Unresolved static relative module import: '+from+' -> '+spec);
+  return found;
+ };
+ for(const path of paths){
+  if(!/^(?:site|src\/server|netlify\/functions)\/.*\.[cm]?js$/.test(path)||!hasPath(path))continue;
+  const src=readSource(path);
+  if(typeof src!=='string')throw Error('Cannot read candidate module: '+path);
+  const named=/^\s*(?:import|export)\s+\{([^}]{1,600})\}\s*from\s*['"](\.{1,2}\/[^'"\n]+)['"]/gm;
+  const defaultImport=/^\s*import\s+[A-Za-z_$][\w$]*\s+from\s+['"](\.{1,2}\/[^'"\n]+)['"]/gm;
+  const uses=[
+   ...[...src.matchAll(named)].map(m=>({spec:m[2],names:m[1].split(',').map(s=>s.trim().split(/\s+as\s+/)[0]).filter(Boolean)})),
+   ...[...src.matchAll(defaultImport)].map(m=>({spec:m[1],names:['default']}))
+  ];
+  for(const use of uses){
+   const target=find(path,use.spec);
+   if(!target.endsWith('.js')&&!target.endsWith('.mjs'))continue;
+   const targetCode=readSource(target);
+   if(typeof targetCode!=='string')throw Error('Cannot read candidate module: '+target);
+   // Known ambiguous exports are NOT guessed; full build must verify them.
+   if(/^\s*export\s*\*/m.test(targetCode)||/\bmodule\.exports\b|\bexports\./.test(targetCode)||
+      /^\s*export\s+(?:const|let|var)\s*\{/m.test(targetCode))continue;
+   const exports=new Set();
+   if(/^\s*export\s+default\b/m.test(targetCode))exports.add('default');
+   for(const m of targetCode.matchAll(/^\s*export\s+(?:async\s+)?(?:function|class|const|let|var)\s+([A-Za-z_$][\w$]*)/gm))
+    exports.add(m[1]);
+   for(const m of targetCode.matchAll(/^\s*export\s*\{([^}]+)\}/gm))
+    for(const entry of m[1].split(',')){
+     const parts=entry.trim().split(/\s+as\s+/);
+     if(parts[0])exports.add((parts[1]||parts[0]).trim());
+    }
+   for(const name of use.names)
+    if(/^[A-Za-z_$][\w$]*$/.test(name)&&!exports.has(name))
+     throw Error('Missing static relative module export: '+path+' imports '+name+' from '+use.spec);
+  }
+ }
+ return true;
+}
+
 export function planReadyOnlyCandidate(queue,{publishedSourceSha,developmentSourceSha,
  selectedIds,developmentChangedPaths,pinnedReadyPaths=[],isAncestor}={}){
  const errors=queueSchemaErrors(queue);
