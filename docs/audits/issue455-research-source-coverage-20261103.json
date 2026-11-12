@@ -1945,6 +1945,26 @@
       "source_byte_caveat": "2026-11-12 direct publisher HTML read Methods/Results/Discussion/Conclusions, not original PDF or HTML bytes downloaded/hash-verified. Figures inspected as publisher article text/captions, not image pixels. Supplemental Figures S1-S4/raw participant-level data not obtained. No blinded human sensory assessment reported; chemical endpoints and author interpretations must not be converted to cup preferences or caffeine-decaffeination recommendation.",
       "claims_verified_externally": "One commercial Illy Rosso 100% Arabica medium-roast blend (250g freshly opened packs), Mahlkoenig E65S, La Marzocco GS3, Acqua Panna water, machine 92C/9bar and timed 30s. Heated beans 105C oven for 30min ending 86.6C; chilled beans -34C air for 30min ending -16.95C. Only final bean temperature measured, not full histories. Same burr setting showed both treated beans flowed faster than control; second comparison adjusted grinders separately to approximately 1mL/s, giving Warm 0.97+/-0.07 and Cold 1.06+/-0.08 mL/s. Triplicate independent experiments with five measurement replicates. Thermal treatments had altered PSD, lowered caffeine concentration versus control, cooling reduced CGAs versus control, warm had more hexanal; TDS not statistically different among flow-matched sets. Experiments did not isolate thermal-vs-oxidative exposure, prove slower everyday bean prefeed or human taste benefit. The paper's sentence attributing increased flow to decreased permeability appears physically inconsistent and is not accepted as an established causal direction.",
       "locked_policy_boundary": "No pregrind oven/chiller or dosing prescription, universal temperature or caffeine reduction advice, grinder setting translation, measured shot rewriting, non-sensory taste score or new feed-mode correction. Preserve original five independent ratings, all-green vs unrated, measured dose/yield/time and private notes/history, at most one controllable next recommendation, independent styles, grinder versions/calibration, optional Slow Feed setup, equipment capabilities and community/RLS privacy."
+    },
+    {
+      "id": "LIT-2026-GUNNING-DRIP-CONSUMER-ML",
+      "type": "peer_reviewed_primary_reanalysis_existing_california_black_drip_consumer_panel_not_espresso_experiment",
+      "title": "AI-driven prediction of consumer liking of coffee from sensory data",
+      "authors": "Michael Gunning; Maite Pilar Serantes Laforgue; Jean-Xavier Guinard; Ilias Tagkopoulos",
+      "published": "2026-03-14; npj Science of Food 10, article 142",
+      "doi": "10.1038/s41538-026-00779-7",
+      "url": "https://www.nature.com/articles/s41538-026-00779-7",
+      "data_url": "https://datadryad.org/dataset/doi:10.25338/B8993H",
+      "code_url": "https://github.com/mhgun/sensory_prediction",
+      "access": "ORIGINAL_OPEN_ACCESS_NATURE_PUBLISHER_FULL_HTML_20261112_INTRO_RESULTS_DISCUSSION_METHODS_DATA_CODE_LINKS_DIRECTLY_READ;ORIGINAL_PDF_FIGURES_NUMERIC_CELL_LEVEL_SUPPLEMENTS_RAW_PANEL_AND_EXACT_BYTES_HASH_NOT_VERIFIED",
+      "review_status": "R455-213_SUBSTANTIVE_PRIMARY_DIRECT_ORIGINAL_METHODS_MODEL_EVALUATION_MULTIPLE_AGGREGATION_STRATEGIES_EXTERNAL_VALIDITY_AND_HOLDOUT_LIMITS;REUSES_EXISTING_COTTER_DRIP_PANEL_NOT_INDEPENDENT_ESPRESSO_TASTE_VALIDATION",
+      "evidence_grade": "PEER_REVIEWED_ONE_MEDIUM_ROAST_COFFEE_CALIFORNIA_118_CONSUMERS_27_FILTER_DRIP_BREWS_REANALYSIS_ASSOCIATION_AND_MODELING_NOT_CONTROLLABLE_SHOT_CAUSAL_INTERVENTION",
+      "source_bytes_sha256": null,
+      "source_byte_caveat": "Direct original publisher HTML read 2026-11-12. PDF/binary SHA256, supplement, code execution, Dryad raw and figure pixel/cell verification not performed. Do not assume random row holdout proves generalization to a new coffee/consumer; no independent new espresso dataset or DIC member test.",
+      "claims_verified_externally": "Original article Methods: reanalysis of Cotter et al pre-existing 118 California black-drip consumers x 27 brew-condition samples of one medium-roast coffee (3x3x3 brew-temperature/TDS/extraction-yield factorial; 3,186 consumer-brew rows), one medium-roast coffee variety. JAR perceived adequacy for acidity/flavor intensity/mouthfeel, 17 CATA descriptors and 9-point hedonic liking are not DIC five independent 1-5 ratings. Classification cut at liking>=6. Original nonaggregated 80/20 row-level split reports 0.75 classification accuracy, AUROC0.81, regression holdout R2 0.47 and MAE1.03 on 9-point hedonic score, without a demonstrated independent unseen coffee or consumer deployment test. Brew-mean aggregation had only 27 rows; nested LOOCV no holdout. Personal preferences split into 57/61 clusters, with disagreements on roast/chocolate versus fruit/floral. Study authors explicitly limit single coffee, California consumers, drip-only generalization.",
+      "locked_policy_boundary": "No three-taste substitute, five-slider changes, universal JAR or sweetness target, trained ML confidence badges, consumer cluster inference, new member data capture, science-based yield/grind/time coefficient or cross-coffee transfer. Keep owner's five distinct ratings, all-green versus missing, per-coffee user-specific successes, original dose/yield/time/notes/private history, at most one intentional controllable recommendation, separate Turbo/Fast-Flow and Slow Feed, grinder range/versions, Community/RLS.",
+      "source_sha": "c2f5a9e2f49d0b8dc1e0985c17a22844e6154d2a",
+      "github267_literal_review_credit": 0
     }
   ],
   "evidence_checks": [
@@ -6043,6 +6063,36 @@
       "owner_approval": false,
       "source_sha": "f0f20fb12449bce567afac7dc5cc92dcd0435bbb",
       "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CONSUMER-ML-213-A",
+      "source": "LIT-2026-GUNNING-DRIP-CONSUMER-ML",
+      "claim": "Single previously collected one-coffee medium-roast drip dataset had 118 California consumers tasting all 27 3x3x3 brewing variants (3186 rows); individual JAR acidity/flavor-intensity plus CATA sweetness were predictive of individual 9-point liking, with personal preference segmentation 57 versus 61. These predictors/segments cannot replace five separate DIC 1-to-5 espresso ratings or set espresso target values.",
+      "grade": "DIRECT_2026_NATURE_PUBLISHER_ORIGINAL_METHODS_RESULTS_DISCUSSION;OBSERVATIONAL_MODEL_ASSOCIATION_SAME_PANEL_NOT_ESPRESSO_OR_MEMBER_OUTCOME_TRIAL",
+      "primary_sources": [
+        "https://www.nature.com/articles/s41538-026-00779-7"
+      ],
+      "current_app": "site/lib/constants.js blob 72221331ce4dffabe416eebec1ae2fceced3a095 defines five distinct independent taste fields; model.js blob 469c55c17dd3ee5c16523e59a5adace1056e9038 requires all five valid fields; engine.js blob 3e20904291231a9c5a5a86e6d004a95a5489c6d6 uses all-green, history and one next controllable change.",
+      "result": "NO_DIRECT_ESPRESSO_CAUSAL_OR_5_SCALE_VALIDATION;RESEARCH_ONLY_NO_APP_CHANGE",
+      "owner_approval": false,
+      "source_sha": "c2f5a9e2f49d0b8dc1e0985c17a22844e6154d2a",
+      "github267_literal_review_credit": 0
+    },
+    {
+      "id": "R455-EV-CONSUMER-ML-213-B",
+      "source": "LIT-2026-GUNNING-DRIP-CONSUMER-ML",
+      "claim": "Paper reports nonaggregated 80/20 holdout over 3186 existing consumer-brew rows, with three-sensory-feature classification accuracy 0.75/AUROC0.81 and 9-point hedonic regression R2 0.47/MAE1.03; these are predictive metrics on this dataset and not demonstrated new-coffee, new-user or five DIC espresso ratings validation. The 27-brew aggregation had nested leave-one-out CV without a separate holdout. Authors note the one-coffee/California/medium-roast constraint.",
+      "grade": "DIRECT_PUBLISHED_ORIGINAL_MODEL_METHODS_RESULTS_LIMITATIONS;GROUP_LEVEL_EXTERNAL_GENERALIZATION_NOT_ESTABLISHED;NO_RAW_CODE_REPLICATION_OR_PER_COFFEE_HOLDOUT_AUDIT",
+      "primary_sources": [
+        "https://www.nature.com/articles/s41538-026-00779-7",
+        "https://datadryad.org/dataset/doi:10.25338/B8993H",
+        "https://github.com/mhgun/sensory_prediction"
+      ],
+      "current_app": "Current engine.js contains deterministic one-controllable-variable personalized feedback rather than a trained drip panel classifier; no global confidence percentage should be copied from this paper.",
+      "result": "HOLD_ALL_ML_CONFIDENCE_AND_PREFERENCE_CLUSTER_POLICY_PENDING_NEW_DIRECT_VALIDATION_AND_OWNER_AUTHORITY",
+      "owner_approval": false,
+      "source_sha": "c2f5a9e2f49d0b8dc1e0985c17a22844e6154d2a",
+      "github267_literal_review_credit": 0
     }
   ],
   "policy_decisions_pending": [],
@@ -6195,22 +6245,24 @@
     "R455-208: primary full-HTML source audit for Felizzato 2026 moka-packaged aroma XAI (32 lots, origin-fixed 1–9 target, original CV RMSE .61 vs after-outlier .38); distinguish origin lab classification from actual espresso five-taste user success. Scope only research ledger/journal, no Locked/app/queue change, original S019 unreviewed, #267 no literal credit; exact docs CI, merge/blob governance required.",
     "R455-209: original author-institution full nine-page Sanchez Lopez et al 2016 espresso PTR-ToF-MS methods and figures 1-5: one coffee, yield-selected five per condition, five chemical families not five member ratings; 11bar/96C observed volatile intensity not sensory preference optimum. 110 source identities/329 bounded checks/168 proposals if PR exact-source merged; original S019 inaccessible, no #267 semantic-line credit. Docs-only CI/merge exact SHA and readback needed; no app or Locked change.",
     "R455-211: upgraded existing 2015 Charles/Yener espresso dynamic TDS/nosespace study from abstract to original complete coauthor-institutional thesis article reprint. Verified 18 employee volunteers, 2 roast x 2 sugar conditions, nine dominance choices, 39 retained peaks, no universal five-rating or recipe validation. 111 sources/333 checks/170 proposals pending exact-source docs-only PR CI; S019 inaccessible, #267 zero literal credit.",
-    "R455-212: independently checked original Pignatone et al 2026 pregrind oven/chill 30min experiment, changed single-blend/GS3/E65S flow and chemicals but no sensory optimum or user heating/cooling recommendation; new 112 source identities/335 bounded checks/171 research proposals after PR integration. Exact docs-only PR and CI required; original S019 unresolved; #267 separate."
+    "R455-212: independently checked original Pignatone et al 2026 pregrind oven/chill 30min experiment, changed single-blend/GS3/E65S flow and chemicals but no sensory optimum or user heating/cooling recommendation; new 112 source identities/335 bounded checks/171 research proposals after PR integration. Exact docs-only PR and CI required; original S019 unresolved; #267 separate.",
+    "R455-213 ACTIVE: Original Nature 2026 black drip consumer reanalysis Methods/Results/Discussion source-bounded reviewed; owner five scores and personal espresso learning unchanged. PR two-doc source/journal exact CI, merge and readback pending. Standalone S019 inaccessible; #267 V2 line credit zero."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-212",
-    "source_sha": "f0f20fb12449bce567afac7dc5cc92dcd0435bbb",
-    "phase": "ORIGINAL_2026_PREGRIND_EXTREME_THERMAL_SINGLE_ESPRESSO_BLEND_RESEARCH_ONLY_TWO_DOC_PR_CI_PENDING",
+    "run_id": "R455-213",
+    "source_sha": "c2f5a9e2f49d0b8dc1e0985c17a22844e6154d2a",
+    "preflight_blob_sha": "2fb236bbfa6bac48513eeb3bd157b260853af06d",
+    "phase": "PRIMARY_2026_BLACK_DRIP_ML_CONSUMER_GENERALIZATION_GUARD_RESEARCH_ONLY_UNMERGED_CHECK_CI",
     "source_counts": {
-      "research_project_source_records": 112,
-      "bounded_evidence_checks": 335,
-      "proposals": 171
+      "research_project_source_records": 113,
+      "bounded_evidence_checks": 337,
+      "proposals": 172
     },
-    "original_s019": "INACCESSIBLE_UNREVIEWED",
-    "release_state": "NO_NEW_QUEUE_OR_READY_OR_DEPLOYMENT",
+    "original_s019": "INACCESSIBLE_UNREVIEWED_DRIVE_LIBRARY_CURRENT_SEARCH",
+    "release_state": "NO_NEW_QUEUE_READY_OR_DEPLOYMENT",
     "github267_literal_review_credit": 0,
-    "primary": "2026-05-14_PIGNATONE_APPLIED_SCIENCES_ORIGINAL_PUBLISHER_DIRECT_HTML_METHODS_RESULTS_DISCUSSION_CONCLUSIONS",
-    "unverified": "ORIGINAL_PDF_HTML_BYTES_HASH_SUPPLEMENTARY_RAW_CAUSAL_THERMAL_PROFILE_HUMAN_TASTE_AND_REAL_MEMBER_ESPRESSO_OUTCOME"
+    "primary": "GUNNING_2026_NPJ_SCIENCE_OF_FOOD_NATURE_FULL_ORIGINAL_HTML_METHODS_RESULTS_DISCUSSION",
+    "unverified": "PDF_BYTES_SUPPLEMENTS_FIGURE_PIXELS_RAW_DATA_REPRODUCTION_INDEPENDENT_NEW_ESPRESSO_USERS_NEW_COFFEE"
   },
   "policy_decisions_resolved": [
     {
@@ -10078,6 +10130,28 @@
         "prior_ledger_blob": "f8e8c38ed0349bad404e81df6c124aa64c67123e",
         "journal_path": "docs/workstreams/ops-issue455-r212-pregrind-temperature-study-20261112.md"
       }
+    },
+    {
+      "id": "R455-PROP-213-DRIP-ML-HOLDOUT-NOT-ESPRESSO-CONFIDENCE",
+      "finding": "Published ML model predicts hedonic acceptance on reused single-coffee black drip sample/consumer rows and does not establish new-user/new-coffee generalization or an espresso next-shot causal effect, despite meaningful within-dataset scores.",
+      "severity": "P2_SCIENCE_CONFIDENCE_AND_TASTE_CAPTURE_POLICY_GUARD_NO_REPRODUCED_APP_BUG",
+      "user_benefit": "Prevent falsely quantified '75% chance of success', unjustified 3-feature shortcut or global roast-cluster advice in private Log Shot -> Rate -> Recommendation, while preserving personalized learning.",
+      "evidence": [
+        "R455-EV-CONSUMER-ML-213-A",
+        "R455-EV-CONSUMER-ML-213-B"
+      ],
+      "source_provenance": "Gunning et al. npj Science of Food 10:142 original open HTML 2026-03-14 DOI 10.1038/s41538-026-00779-7, full Methods/Results/Discussion reviewed; original PDF/raw data/model reproduction not independently checked.",
+      "current_locked": "Owner-Locked five independent taste ratings, all-green versus unrated, one truly adjustable recommendation change, original measured shot/notes and private same-coffee learning with no unapproved input or ML target.",
+      "current_app": "Pinned development c2f5a9e2f49d0b8dc1e0985c17a22844e6154d2a: constants.js 72221331ce4dffabe416eebec1ae2fceced3a095; model.js 469c55c17dd3ee5c16523e59a5adace1056e9038; engine.js 3e20904291231a9c5a5a86e6d004a95a5489c6d6; no learned drip consumer classifier or published probability badge.",
+      "proposed_change": "SAFE now: append bounded original-source identity, methodological limitations and evidence checks; no app change. A future model-probability label, preference segment, fewer taste inputs or target change requires a separate informed owner decision plus independent espresso real-user external validation; not presented as a decision needed now.",
+      "evidence_grade": "PEER_REVIEWED_PRIMARY_2026_FULL_PUBLISHER_TEXT;NO_EXTERNAL_ESPRESSO_OR_INDEPENDENT_GROUP_HOLDOUT_VALIDATION",
+      "approval_required_for_behavior_change": true,
+      "owner_approval_now_required": false,
+      "implementation": "RESEARCH_ONLY_TWO_DOCS_PR_EXACT_CI_PENDING",
+      "test_plan": "Verify 112/335/171 prior immutable record order preserved; new 113/337/172 unique identities and DOI; two-doc Git blobs/readback; exact head governance then nonforce merge if checks pass. No new physical taste/browser/SQL production writes; #267 literal credit zero.",
+      "release_queue_status": "NOT_APPLICABLE_NO_APP_CHANGE_NO_READY_NO_DEPLOY",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false
     }
   ],
   "changeScope": {
