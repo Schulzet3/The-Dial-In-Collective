@@ -11740,8 +11740,8 @@
       "issue": 1938,
       "pr": 1943,
       "title": "Opt-in privacy-minimized administrator Web Push with Home Screen background delivery",
-      "state": "BLOCKED",
-      "merged_source_sha": "a932f088496ea4afb50d62cfd4f1233ea1dd1907",
+      "state": "READY",
+      "merged_source_sha": "a124005e4e2f7ad3ca14dc37fea197c3b2844290",
       "scope_paths": [
         "site/admin/view.js",
         "site/admin/main.js",
@@ -11763,7 +11763,9 @@
         "2026-11-12 live Supabase migration 20261112010044 dic_admin_web_push APPLIED from exact source blob bd1c28897ef71662faa4327dd79e005292a96578. Created subscriptions table (0 rows) with RLS enabled; anon/authenticated denied SELECT/INSERT/UPDATE/DELETE, service_role allowed. Snapshot RPC anon/authenticated EXECUTE denied, service_role allowed; tokens/admin_ids return JSON arrays. Protected counts auth11, beta_members11, shots26, coffees8, Community12, submissions8 unchanged. This is hosted schema/ACL proof, NOT actual push delivery.",
         "2026-11-11 merged pagination fix a932f088496ea4afb50d62cfd4f1233ea1dd1907 exact CI validate 43084114390, cloud/mobile 43084114360, approval 43084114309 PASS: 3933 Node PASS/0 FAIL/6 intentional SKIP, all four new keyset >50/failed/stale/overlap regressions PASS. Real APNs still UNVERIFIED.",
         "Signed Netlify-to-Supabase Edge broker: Supabase auto-provisioned service key, ES256 body binding, strict routing, repeat admin/owner checks; five synthetic tests pending exact-source CI.",
-        "Supabase Vault encrypted P-256 key generation/custody, strict Admin Auth/manage, 4-minute SQL rate gate, content-free Edge VAPID sender, 125-keyset pagination; five synthetic direct-Edge cases pending CI."
+        "Supabase Vault encrypted P-256 key generation/custody, strict Admin Auth/manage, 4-minute SQL rate gate, content-free Edge VAPID sender, 125-keyset pagination; five synthetic direct-Edge cases pending CI.",
+        "2026-11-12 actual PR #2143 and nonforce merged a124005e4e2f7ad3ca14dc37fea197c3b2844290: exact merged 43134283177 Node/lint/build 4,029 PASS / 0 FAIL / 6 intentional SKIP, 5/5 Edge broker regressions PASS; 43134283268 cloud/mobile/offline PASS; 43134283486 approval PASS; 43134283065 SQL role/RLS PASS. PR source security PASS; original frozen603 SKIPPED. No signed-in production/Apple device test performed.",
+        "2026-11-12 host verified: original dic_admin_web_push migration 20261112010044 and Supabase Vault migration dic_admin_push_vault_delivery applied, service-only key/bootstrapping/claim RPCs, anon/auth denied; Edge dic-admin-push-broker v1 ACTIVE verify_jwt=false but admin Auth checked in handler; bundled hosted core/index source bytes match merged Git blobs. Netlify has only preexisting public Supabase URL+publishable key. Exactly 0 push subscriptions until owner opts in."
       ],
       "ci_runs": [
         42928639447,
@@ -11776,15 +11778,20 @@
         43074806182,
         43084114390,
         43084114360,
-        43084114309
+        43084114309,
+        43133876054,
+        43133876064,
+        43133876070,
+        43133876073,
+        43133876074,
+        43134283486,
+        43134283268,
+        43134283177,
+        43134283065
       ],
-      "blockers": [
-        "Supabase Vault-only P-256 secret custody migration and Edge function must pass source/CI, apply safely, and be verified on live Supabase without adding credentials to Netlify.",
-        "Owner-approved single batch must include #1938 plus ALL frozen READY IDs, with five exact-source CI, fresh unconsumed grant and one successful Git-connected Netlify publication.",
-        "Real iPhone Home Screen closed-app APNs delivery remains UNVERIFIED until opt-in and acceptance; no synthetic production member/device records."
-      ],
+      "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1938",
-      "notes": "Do not call READY until exact-source CI and runtime configuration plan are verified. No production/Netlify/Supabase changes; preserve original mobile app and all private data.\n2026-11-11 source code PASS with identical runtime blobs across merged/current development, but BLOCKED for live delivery. No deploy, production writes or secret changes.\n2026-11-11 owner explicitly approved publishing #1938 WITH all READY items. 2026-11-12 Supabase push schema migration independently applied/verified (v20261112010044) without modifying existing member/shot/coffee records. Netlify env write HTTP403 and missing server/VAPID credentials remain the external blocker. Keep BLOCKED; hold the READY46 queue instead of issuing a partial release. Newly encrypted backup GitHub artifact13905387023 verified, owner-private Drive copy not yet confirmed, so do not certify it for potentially destructive recovery. Release staging candidate READY45 r2 93d4852... passed five statuses but excludes push and one concurrent newer READY item, so it is NOT approved for this owner-required all-items-with-push combined publication.\n2026-11-12 recovery closure: GitHub run 43130883406 artifact13905387023 ZIP 23,040,726 bytes SHA256 2bd4cce694a04bf8448ae67859e9d716e188c7e89ee51c23b763cd0e8afd2af9, containing exactly one encrypted backup.age; delivered without plaintext to owner-private direct Drive folder 1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf as file1591RhOQg-UEAXL2OHIDjCNrP9CngWezr. Independently downloaded Drive ZIP matched same byte size and SHA, owner-only permissions, no duplicate title at readback. Backup snapshot began 2026-11-12T00:56:01Z. Latest observed DB-write instant must still be checked before a potentially destructive release; this proof does not authorize release.\nNov12: Supabase-only encrypted Vault + service-only Edge pathway replaces impossible Netlify Functions-only secret scopes; Netlify keeps generic scheduled trigger and Admin API; no Netlify private key. Owner explicitly prioritizes #1938 shipping with entire queue. PR #2143 exact source security/SQL/Node/browser/approval PASS (head e83c903a6129fc07ffb1b0e3303733be7be1104b; Node 4029 PASS/0 FAIL/6 SKIP); production host migration/Edge deployment still pending."
+      "notes": "Do not call READY until exact-source CI and runtime configuration plan are verified. No production/Netlify/Supabase changes; preserve original mobile app and all private data.\n2026-11-11 source code PASS with identical runtime blobs across merged/current development, but BLOCKED for live delivery. No deploy, production writes or secret changes.\n2026-11-11 owner explicitly approved publishing #1938 WITH all READY items. 2026-11-12 Supabase push schema migration independently applied/verified (v20261112010044) without modifying existing member/shot/coffee records. Netlify env write HTTP403 and missing server/VAPID credentials remain the external blocker. Keep BLOCKED; hold the READY46 queue instead of issuing a partial release. Newly encrypted backup GitHub artifact13905387023 verified, owner-private Drive copy not yet confirmed, so do not certify it for potentially destructive recovery. Release staging candidate READY45 r2 93d4852... passed five statuses but excludes push and one concurrent newer READY item, so it is NOT approved for this owner-required all-items-with-push combined publication.\n2026-11-12 recovery closure: GitHub run 43130883406 artifact13905387023 ZIP 23,040,726 bytes SHA256 2bd4cce694a04bf8448ae67859e9d716e188c7e89ee51c23b763cd0e8afd2af9, containing exactly one encrypted backup.age; delivered without plaintext to owner-private direct Drive folder 1Nxs_AYpacPdgGEwKvI-ej4KFszZwPLhf as file1591RhOQg-UEAXL2OHIDjCNrP9CngWezr. Independently downloaded Drive ZIP matched same byte size and SHA, owner-only permissions, no duplicate title at readback. Backup snapshot began 2026-11-12T00:56:01Z. Latest observed DB-write instant must still be checked before a potentially destructive release; this proof does not authorize release.\nNov12: Supabase-only encrypted Vault + service-only Edge pathway replaces impossible Netlify Functions-only secret scopes; Netlify keeps generic scheduled trigger and Admin API; no Netlify private key. Owner explicitly prioritizes #1938 shipping with entire queue. PR #2143 exact source security/SQL/Node/browser/approval PASS (head e83c903a6129fc07ffb1b0e3303733be7be1104b; Node 4029 PASS/0 FAIL/6 SKIP); production host migration/Edge deployment still pending.\nREADY, SOURCE+PROVIDER BACKEND VERIFIED 2026-11-12 UTC: original Locked action/role/private notification behavior preserved; private P-256 key generated into Supabase Vault on first admitted Admin opt-in, no Netlify private key. This source status means ready for owner-approved ONE combined publish with all existing READY; Netlify app not yet published and actual closed-app Apple delivery UNVERIFIED/optional device acceptance."
     },
     {
       "id": "DIC-Q-455-family-recorded-control-evidence-guard",
