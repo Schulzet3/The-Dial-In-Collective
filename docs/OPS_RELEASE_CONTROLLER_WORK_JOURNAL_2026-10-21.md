@@ -657,3 +657,5 @@ Independently verified Git release/production b386a977a7c43bf190f6315105894334d9
 - Corrected journal formatter escaped-newline syntax before CI; stage records separate omission line without literal slash-n. [skip netlify]
 
 - Previous PR-head controller acceptance failed only two negative-test text expectations, while the fail-closed denial itself worked correctly. Restored the existing denial prefix, retaining precise new full-restoration explanation. Rerun same suite. [skip netlify]
+
+- Added disposable real-Git stage regression exercising new unready test removal while preserving unowned test, unchanged source, and nonpublishing branch; passed liveQueue to validator to ensure unselected READY provenance is validated consistently. Current PR-head CI requires rerun. [skip netlify]

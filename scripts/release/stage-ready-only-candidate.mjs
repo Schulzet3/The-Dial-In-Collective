@@ -103,7 +103,7 @@ export function stageReadyOnlyCandidate({repoDir=process.cwd(),developmentSource
    developmentChangedPaths:changed(publishedSourceSha,developmentSourceSha),
    candidateChangedPaths:changed(publishedSourceSha,commit),
    stagedCommitChangedPaths:changed(developmentSourceSha,commit),
-   developmentDriftPaths:[],queueContentMatches:queueRaw===
+   developmentDriftPaths:[],liveQueue:queue,queueContentMatches:queueRaw===
     git(['show',commit+':docs/RELEASE_QUEUE.json'],{trim:false}),
    sourceObjectAt,isAncestor:ancestor});
   if(createLocalRef)
