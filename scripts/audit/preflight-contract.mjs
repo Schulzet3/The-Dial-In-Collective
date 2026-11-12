@@ -43,6 +43,8 @@ export function auditPreflightContract(read=file){
  if(instructions.length>8000)errors.push('Project Instructions exceed 8000 characters');
  if(!instructions.includes('**Mandatory preflight (EVERY DIC task).**')||
     !instructions.includes('docs/ai/PREFLIGHT.md')||
+    !instructions.includes('FIRST fetch live `development/backend-foundation` SHA')||
+    !instructions.includes('Branches: development/backend-foundation=app')||
     !instructions.includes('FAIL CLOSED: no GitHub/provider writes'))
   errors.push('Project Instructions must use live fail-closed preflight');
  if(!docs['scripts/audit/verify-commit-checkpoint.mjs'].includes("from './preflight-receipt.mjs'")||
