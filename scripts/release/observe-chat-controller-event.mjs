@@ -6,6 +6,20 @@ export function inspectControllerDelivery({requestSha,mainHeadSha,workflowRuns,e
  const r=validateReleaseTriggerReceipt({requestCommitSha:requestSha,mainHeadSha,workflowRuns,elapsedSeconds});
  return {...r,observed:r.status==='RUNNING'||r.status==='CONTROLLER_COMPLETED_NETLIFY_UNVERIFIED'};
 }
+// Controller completion is checked after the job has finished. It is NOT
+// proof of Netlify's published/current deploy or permission to replay claims.
+export function inspectCompletedController({requestSha,mainHeadSha,workflowRuns,expectedRunId}={}){
+ if(!Number.isSafeInteger(expectedRunId)||expectedRunId<=0)
+  return {status:'BLOCKED',observed:false,reason:'completed controller ID missing'};
+ const run=workflowRuns?.find?.(x=>x?.id===expectedRunId);
+ if(!run||run.head_sha!==requestSha||
+   run.name!=='DIC chat-approved single-use production request'||
+   run.path!=='.github/workflows/dic-chat-approved-release.yml'||
+   run.event!=='push'||run.status!=='completed')
+  return {status:'BLOCKED',observed:false,reason:'completed workflow_run mismatches exact controller push'};
+ const r=inspectControllerDelivery({requestSha,mainHeadSha,workflowRuns,elapsedSeconds:120});
+ return {...r,observed:r.status==='CONTROLLER_COMPLETED_NETLIFY_UNVERIFIED'};
+}
 async function github(token,path,request=globalThis.fetch){
  if(!token)throw Error('Read-only Actions token required');
  const res=await request('https://api.github.com/repos/'+REPO+path,{
@@ -51,6 +65,22 @@ export async function observeRequestEvent(env=process.env,{request=globalThis.fe
  }
  throw Error('Controller not observed');
 }
-if(process.argv[1]&&new URL(import.meta.url).pathname===process.argv[1])
- observeRequestEvent().then(x=>console.log('[DIC observer] '+x.status))
- .catch(e=>{console.error('[DIC observer] HOLD: '+e.message);process.exitCode=2;});
+export async function observeCompletedController(env=process.env,{request=globalThis.fetch}={}){
+ if(env.GITHUB_EVENT_NAME!=='workflow_run')throw Error('Only completed workflow_run event accepted');
+ const sha=env.DIC_COMPLETED_CONTROLLER_SHA,id=Number(env.DIC_COMPLETED_CONTROLLER_RUN_ID);
+ if(!SHA.test(sha||'')||!Number.isSafeInteger(id)||id<=0)
+  throw Error('Completed controller SHA/ID missing');
+ const [mainHeadSha,workflowRuns]=await Promise.all([
+  liveMainSha({token:env.GITHUB_TOKEN,request}),
+  liveControllerIndex({token:env.GITHUB_TOKEN,sha,request})
+ ]);
+ const result=inspectCompletedController({requestSha:sha,mainHeadSha,workflowRuns,expectedRunId:id});
+ if(!result.observed)throw Error('Completed controller HOLD: '+result.reason+'; NO REPLAY');
+ console.log('[DIC completed controller] '+JSON.stringify(result)+' NOT_A_NETLIFY_RECEIPT');
+ return result;
+}
+if(process.argv[1]&&new URL(import.meta.url).pathname===process.argv[1]){
+ const task=process.env.GITHUB_EVENT_NAME==='workflow_run'?observeCompletedController():observeRequestEvent();
+ task.then(x=>console.log('[DIC observer] '+x.status))
+  .catch(e=>{console.error('[DIC observer] HOLD: '+e.message);process.exitCode=2;});
+}
