@@ -1796,6 +1796,22 @@
       "review_status": "DISTINCT_INTENTIONAL_COMPATIBILITY_GUARD_SUBSTANTIVELY_VERIFIED;R200_CODE_PR_CLOSED_UNMERGED_NOT_A_SAFE_LOCKED_COMPATIBLE_FIX;NOT_ISSUE267_LITERAL_AUDIT",
       "evidence_grade": "DIRECT_CODE_PLUS_HISTORICAL_INTENT_AND_ACTUAL_CONFLICTING_CI;NO_ESPRESSO_MEMBER_EMPIRICAL_OUTCOME",
       "implementation_status": "RESEARCH_ONLY_OPTIONAL_OWNER_PRODUCT_CHOICE_HOLD;PRESERVE_R184_RUNTIME_AND_TEST"
+    },
+    {
+      "id": "LIVE-20261112-R201-ZERO-WIDTH-HISTORICAL-SENSITIVITY",
+      "type": "live_recommendation_engine_evidence_eligibility_safe_correction",
+      "title": "Original grinder snapshot zero-width ranges excluded from measured sensitivity slope estimation",
+      "path": "site/lib/engine.js",
+      "source_start_sha": "eaf530efb0602be8494fa3e2a433db6bfc97765e",
+      "original_engine_blob_sha": "6b59fb8328aab425481b2090a85dc4ef79113c50",
+      "merged_commit_sha": "a5dd027d7f20e4eb6b108cf5b8acdaf432ca006c",
+      "merged_engine_blob_sha": "3e20904291231a9c5a5a86e6d004a95a5489c6d6",
+      "synthetic_tests_blob_sha": "400dc0b633622a1cf685784de9b65226a50d8181",
+      "source_access": "DIRECT_GITHUB_EXACT_OLD_AND_MERGED_SOURCE_AND_ORIGINAL_TEST_CI;NO_MEMBER_DATA",
+      "provenance": "Source comparison validSensitivityMeasurement() old< vs familyEvidenceShots() <= and six synthetic positive/negative fixtures; exact merged Git blob readback",
+      "review_status": "SOURCE_REPRODUCED_AND_TESTED_WITH_PASSING_PR_HEAD;MERGED_SOURCE_CI_CANCELLED_BY_CONCURRENT_PUSH;NOT_ISSUE267_LITERAL_LINE_REVIEW",
+      "evidence_grade": "DIRECT_CODE_AND_SYNTHETIC_NODE22_GITHUB_CI_NOT_REAL_MEMBER_ESPRESSO_OUTCOME",
+      "implementation_status": "MERGED_DEVELOPMENT_RELEASE_REQUALIFICATION_HOLD_NOT_READY_NOT_DEPLOYED"
     }
   ],
   "evidence_checks": [
@@ -5553,6 +5569,34 @@
         43150107516,
         43150107604
       ]
+    },
+    {
+      "id": "R455-EV-UX-201-A",
+      "source": "site/lib/engine.js exact old blob 6b59fb8328aab425481b2090a85dc4ef79113c50; function validSensitivityMeasurement and familyEvidenceShots; old development eaf530efb0602be8494fa3e2a433db6bfc97765e",
+      "claim": "Original zero-width grinder snapshots were previously allowed to generate learned grind-to-time slopes because min=max did not violate the old reversed-only guard, despite stricter established family evidence eligibility. Three synthetic same-coffee history entries can produce two contaminated slopes.",
+      "grade": "DIRECT_STATIC_SOURCE_CONTROL_FLOW_AND_BOUNDED_SYNTHETIC_POSITIVE_NEGATIVE",
+      "result": "SAFE_ONE_OPERATOR_ELIGIBILITY_FIX_ONLY_NO_TARGET_CHANGE",
+      "owner_approval": false,
+      "source_sha": "eaf530efb0602be8494fa3e2a433db6bfc97765e"
+    },
+    {
+      "id": "R455-EV-UX-201-B",
+      "source": "PR #2188 head be61be27bc0d9ff9399fa79fca70fe7f14c4eb01; merge a5dd027d7f20e4eb6b108cf5b8acdaf432ca006c; CI PR-head 43156218900/43156218947/43156218919/43156218939/43156218896; source-parity gate 43156693640",
+      "claim": "Six new R201 cases all pass and full original head Node22 4076 pass/0 fail/6 skips; browser/mobile/offline, SQL/privacy, security, governance head SUCCESS. Three merged blobs identical to passing head. Merged-source app/browser checks 43156604351/43156604395 were CANCELLED after newer development change; new strict READY audit fails R198 existing same-file source parity, not a failed R201 test. R198+R201 must be recertified as a composite before READY.",
+      "grade": "DIRECT_SOURCE_BLOB_PARITY_AND_GITHUB_HEAD_CI_PASS_WITH_EXPLICIT_MERGED_CI_CANCELLATION_AND_READY_GATE_HOLD",
+      "result": "MERGED_DEVELOPMENT_TESTED_HEAD_ONLY;CURRENT_RELEASE_CI_CERTIFICATION_HOLD;NOT_READY",
+      "owner_approval": false,
+      "source_sha": "a5dd027d7f20e4eb6b108cf5b8acdaf432ca006c",
+      "ci_runs": [
+        43156218900,
+        43156218947,
+        43156218919,
+        43156218939,
+        43156218896,
+        43156604351,
+        43156604395,
+        43156693640
+      ]
     }
   ],
   "policy_decisions_pending": [],
@@ -5694,18 +5738,19 @@
     "R455-198: original-valid historical outlier fourth-green source fix exact merged 654723176d289a458f843493ccdeb4fff5cfa7cb and six new positive/negative tests + all applicable exact-source CI verified. Docs-only queue/ledger reconciliation requires own CI and merge before fully integrated, never deploy; S019 original inaccessible and #267 literal audit zero credit.",
     "R455-198 postfreeze reconciliation: concurrent READY48 release staging added one IN_PROGRESS issue455 queue row before this docs PR; preserve that unique row and its no-publish freeze blocker, enrich exact CI only, no accidental extra READY row or queue history. Source ledger 103/307/157, release queue 318/59; subsequent separate release qualification, not today's owner decision.",
     "R455-199: full Czech et al. 2026 primary Methods/panel sample/train-test and validation remain inaccessible; new source abstract-level only; if available, independently inspect before proposing sensory prediction. Research-only source 104/checks309/proposals158 conditional on PR integration, no numeric or Locked product changes, no queue update, S019 still inaccessible, zero #267 strict-line credit.",
-    "R455-200: original-valid but outside-current-range similar-coffee donor eligibility is an intentional R184 conservative guard. Seven new R200 tests passed but prior R184 test failed in exact head 43150107491 (4060 PASS/1 FAIL/6 SKIP). PR #2170 safely CLOSED UNMERGED; preserve R184 and all live code. Optional owner A retain (recommended) / B weaker cross-calibration ratio-only transfer needs explicit product approval; no urgent owner review. This source/tradeoff is distinct from R198 same-coffee outlier history. No queue/Locked/provider change, S019 unavailable, #267 zero credit."
+    "R455-200: original-valid but outside-current-range similar-coffee donor eligibility is an intentional R184 conservative guard. Seven new R200 tests passed but prior R184 test failed in exact head 43150107491 (4060 PASS/1 FAIL/6 SKIP). PR #2170 safely CLOSED UNMERGED; preserve R184 and all live code. Optional owner A retain (recommended) / B weaker cross-calibration ratio-only transfer needs explicit product approval; no urgent owner review. This source/tradeoff is distinct from R198 same-coffee outlier history. No queue/Locked/provider change, S019 unavailable, #267 zero credit.",
+    "R455-201: source-only original grinder zero-width invalid calibration guard merged nonforce a5dd027d7f20e4eb6b108cf5b8acdaf432ca006c; exact five PR-head CI SUCCESS (Node22 4076/0/6, 6 focused PASS). Exact merged Node/browser cancelled by subsequent #2169 push; gate 43156693640 correctly HOLDS prior R198 same engine.js blob. Requalify both overlapping R198+R201 on current exact source with #2169 owner; keep both IN_PROGRESS, never auto-publish; source register remains indexed, S019 unavailable and #267 zero credit."
   ],
   "latest_review_checkpoint": {
-    "run_id": "R455-200",
-    "source_sha": "c0ee76684d14d8a82e44464a8d25ecf37786a7d2",
-    "phase": "DISTINCT_R184_COMPATIBILITY_POLICY_CONFLICT_VERIFIED;PROPOSED_APP_PR_CLOSED_UNMERGED;DOCS_ONLY_CI_PENDING",
+    "run_id": "R455-201",
+    "source_sha": "a5dd027d7f20e4eb6b108cf5b8acdaf432ca006c",
+    "phase": "SAFE_CODE_AND_SIX_CASE_TESTS_MERGED;EXACT_HEAD_ALL_APPLICABLE_PASS;MERGED_APP_BROWSER_CANCELLED;R198_NEW_READY_GATE_SOURCE_DRIFT_HOLD;REQUALIFICATION_PENDING",
     "source_counts": {
-      "research_project_sources": 105,
-      "bounded_evidence_checks": 311,
-      "proposals": 159
+      "research_project_sources": 106,
+      "bounded_evidence_checks": 313,
+      "proposals": 160
     },
-    "release_state": "NO_RUNTIME_MERGE_NO_QUEUE_CHANGE_R198_IN_PROGRESS_FROZEN_EXCLUDED",
+    "release_state": "R198_AND_R201_IN_PROGRESS_SAME_PATH_SOURCE_RECERTIFICATION;NO_NEW_PUBLICATION",
     "original_s019": "INACCESSIBLE_UNREVIEWED",
     "github267_literal_review_credit": 0
   },
@@ -9261,13 +9306,42 @@
         "failed_node_ci": 43150107491,
         "failed_r184_test": "R184 original range alone cannot override current comparable grinder range"
       }
+    },
+    {
+      "id": "R455-PROP-201-ZERO-WIDTH-ARCHIVED-SENSITIVITY-VALIDATION",
+      "finding": "Historical recorded espresso grinder calibration with equal endpoints could falsely qualify archival shots as two observed grind/time sensitivity samples.",
+      "evidence": [
+        "R455-EV-UX-201-A",
+        "R455-EV-UX-201-B"
+      ],
+      "severity": "P2_ACCURACY_RELIABILITY_SAFE_GUARD",
+      "user_benefit": "Avoids fabricated personal adjustment sizing from unphysical zero-width historical grinder snapshots while preserving valid and missing-legacy snapshots and original private notes/history.",
+      "source_provenance": "Exact source Git blobs, six synthetic regressions, five passing exact PR head CI workflows; no external clinical/scientific claim or empirical taste outcomes.",
+      "current_locked": "Preserve five tastes, one controllable adjustment, original logged dose/yield/time/notes, original-calibration grinder range and versions, style/Slow Feed and R184 cross-coffee comparability; no universal numbers.",
+      "current_app": "Before: validSensitivityMeasurement rejected reversed but not equal original range endpoints. After: strict inequality for known original grinder bounds, matching familyEvidenceShots; missing snapshot unaffected.",
+      "proposed_change": "Minimal <= guard with comment in engine.js and six original positive/negative regression cases; no product-policy or numerical target edits.",
+      "approval_required_for_behavior_change": false,
+      "owner_approval_now_required": false,
+      "implementation": "MERGED_NONFORCE_PR2188_SAFE;COMPOSITE_RELEASE_CERTIFICATION_IN_PROGRESS_AFTER_R198_SAME_PATH_SOURCE_DRIFT",
+      "test_plan": "PR-head Node22 4076 PASS 0 FAIL 6 SKIP, six new tests PASS; head browser/offline, SQL/privacy, security, governance SUCCESS; exact merged blobs identical. Merged Node/browser CANCELLED; #2169 gate holds outdated earlier R198 READY current source; do not claim independent merged-source PASS or READY.",
+      "release_queue_status": "IN_PROGRESS_COMPOSITE_REQUALIFICATION_NOT_DEPLOYED",
+      "github267_literal_review_credit": 0,
+      "production_deployed": false,
+      "exact_source": {
+        "original_dev_sha": "eaf530efb0602be8494fa3e2a433db6bfc97765e",
+        "merged_sha": "a5dd027d7f20e4eb6b108cf5b8acdaf432ca006c",
+        "engine_blob": "3e20904291231a9c5a5a86e6d004a95a5489c6d6",
+        "test_blob": "400dc0b633622a1cf685784de9b65226a50d8181",
+        "original_journal_blob": "4bdafd0bac99761362dae27038c3d7f7bc705119",
+        "pr": 2188
+      }
     }
   ],
   "changeScope": {
-    "application_code_changed": false,
-    "tests_executed": false,
+    "application_code_changed": true,
+    "tests_executed": true,
     "production_deployed": false,
-    "queue_changed": false,
-    "reason": "Research-only compatibility/rejection record; proposed code test CI ran and failed intentional R184 regression; no application changes integrated; documentation-only."
+    "queue_changed": true,
+    "reason": "Single-operator engine source fix and six synthetic tests merged; five exact PR-head workflows PASS; changed source invalidated old R198 READY blob parity under new gate, so operational queue accurately reverts R198 to IN_PROGRESS and tracks R201 IN_PROGRESS pending combined current-source CI; no app product policy, provider, main or release modifications."
   }
 }

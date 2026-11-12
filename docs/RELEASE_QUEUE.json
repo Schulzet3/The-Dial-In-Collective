@@ -12933,7 +12933,7 @@
       "issue": 455,
       "pr": 2150,
       "title": "R198 preserve original calibration range for archived outlier controls",
-      "state": "READY",
+      "state": "IN_PROGRESS",
       "merged_source_sha": "654723176d289a458f843493ccdeb4fff5cfa7cb",
       "scope_paths": [
         "site/lib/engine.js"
@@ -12954,8 +12954,10 @@
         43136815429,
         43136815449
       ],
-      "blockers": [],
-      "notes": "The r3 candidate is a direct child of frozen source c8e38d8b2d9efc281e35ebad8201f0bcf5d65a41; its `site/lib/engine.js` Git object remains the older proven READY48 version. This explicitly tracks post-staging development drift without reverting R198 or laundering it into the release. Preserve all original shot/rating/Community behavior and the newer tested R198 development code.\nR198 code and exact-source CI independently verified in PR #2150 and merged SHA 654723176d289a458f843493ccdeb4fff5cfa7cb; release queue remains IN_PROGRESS with preexisting freeze blocker. No new deployment, no automatic READY promotion, no change to owner-frozen READY48 candidate.\n2026-11-12 #2169: Source/blob, ownership, exact CI and zero-scoped blockers rechecked after published READY48. READY item only; optional taste/device performance and production delivery are not claimed.",
+      "blockers": [
+        "Subsequent same-path approved SAFE R201 engine.js update changed current development Git blob from R198's exact READY merge; new read-only #2169 READY-evidence gate 43156693640 correctly HOLDS. Preserve R198's passing original CI but recertify the combined R198+R201 current source before any future release qualification."
+      ],
+      "notes": "The r3 candidate is a direct child of frozen source c8e38d8b2d9efc281e35ebad8201f0bcf5d65a41; its `site/lib/engine.js` Git object remains the older proven READY48 version. This explicitly tracks post-staging development drift without reverting R198 or laundering it into the release. Preserve all original shot/rating/Community behavior and the newer tested R198 development code.\nR198 code and exact-source CI independently verified in PR #2150 and merged SHA 654723176d289a458f843493ccdeb4fff5cfa7cb; release queue remains IN_PROGRESS with preexisting freeze blocker. No new deployment, no automatic READY promotion, no change to owner-frozen READY48 candidate.\n2026-11-12 #2169: Source/blob, ownership, exact CI and zero-scoped blockers rechecked after published READY48. READY item only; optional taste/device performance and production delivery are not claimed.\n2026-11-12 R201 compatible but subsequent same-path code merge a5dd027d7f20e4eb6b108cf5b8acdaf432ca006c changes current engine.js Git blob 6b59fb8328aab425481b2090a85dc4ef79113c50 -> 3e20904291231a9c5a5a86e6d004a95a5489c6d6. Newly required READY gate failed current source parity on 43156693640, so READY is temporarily withdrawn IN_PROGRESS pending full combined-source recertification, WITHOUT deleting prior good CI or approval. No release or production change.",
       "production_deployed": false
     },
     {
@@ -12984,6 +12986,36 @@
       "blockers": [],
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/1938",
       "notes": "READY development only, not deployed. Source PR #2161 squash merged nonforce 5d64b280; tested head 16d2f72 five applicable CI SUCCESS and exact runtime/test blob readback identical after merge. No merged-SHA Actions run observed at this checkpoint; no device APNs acceptance claim. Future publication requires new owner Publish."
+    },
+    {
+      "id": "DIC-Q-455-r201-zero-width-sensitivity",
+      "issue": 455,
+      "pr": 2188,
+      "title": "Reject zero-width original grinder snapshot as historical grind-to-time sensitivity evidence",
+      "state": "IN_PROGRESS",
+      "merged_source_sha": "a5dd027d7f20e4eb6b108cf5b8acdaf432ca006c",
+      "scope_paths": [
+        "site/lib/engine.js"
+      ],
+      "owner_source": "Issue #455 owner-authorized Option B SAFE Locked-compatible correction; merged development only, not approved for publication.",
+      "tests": [
+        "Six R201 Node22 synthetic positive/negative cases PASS in exact PR-head 43156218900; all Node22 4,076 PASS, 0 FAIL, 6 intentional SKIP; CI head browser/offline 43156218947, isolated SQL/privacy 43156218919, security 43156218939 and governance 43156218896 SUCCESS.",
+        "Newly added zero-width archived range guard preserves current target/recipe/rating behavior, measured shots and private History. Actual merged code/test/journal Git blobs match exact passing PR head; independent merged-source app/browser runs 43156604351/43156604395 CANCELLED by newer concurrent development commit, NOT PASS.",
+        "New #2169 READY gate 43156693640 deliberately held earlier R198 because R201 changes its same engine.js blob; safely requalify overlapping R198+R201 together before READY; frozen603 SKIPPED not PASS."
+      ],
+      "ci_runs": [
+        43156218900,
+        43156218947,
+        43156218919,
+        43156218939,
+        43156218896
+      ],
+      "blockers": [
+        "R198 earlier READY merged-source engine.js blob no longer equals present development engine.js after R201. Wait for independent composite exact-source certification under #2169 source-parity guard.",
+        "R201 exact merged-source Node22 and browser/offline jobs 43156604351/43156604395 CANCELLED by concurrent branch push; current-source CI, continuity and overlapping release scope must be separately verified before READY."
+      ],
+      "notes": "Verified original 3 Git blobs unchanged at merge a5dd027d7f20e4eb6b108cf5b8acdaf432ca006c. Not a real-member empirical result, no Locked changes or production writes. Temporary development IN_PROGRESS; not deployable and not included in prior owner-frozen READY48 release.",
+      "production_deployed": false
     }
   ],
   "history": [
@@ -14911,6 +14943,24 @@
       "production_deployed": true,
       "release_id": "DIC-20261112-READY48PUSH-31",
       "netlify_deploy_id": "6af51c834f09e4e2c0f203ea"
+    },
+    {
+      "date": "2026-11-12",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r198-original-range-outlier-eligibility",
+      "state": "IN_PROGRESS",
+      "source_sha": "a5dd027d7f20e4eb6b108cf5b8acdaf432ca006c",
+      "evidence": "Exact #2169 READY source-parity gate 43156693640 HOLD after later SAFE R201 same-file change. Historical R198 success remains recorded, composite recertification pending.",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-12",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r201-zero-width-sensitivity",
+      "state": "IN_PROGRESS",
+      "source_sha": "a5dd027d7f20e4eb6b108cf5b8acdaf432ca006c",
+      "evidence": "PR #2188 original exact CI PASS (4076/0/6); merged-source browser/Node cancelled; #2169 READY gate currently blocked by preceding overlapping R198 current blob; no readiness or deployment claimed.",
+      "production_deployed": false
     }
   ],
   "publication_policy": "SINGLE_EXPLICIT_OWNER_APPROVED_RELEASE_ONLY"
