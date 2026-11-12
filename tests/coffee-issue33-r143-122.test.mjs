@@ -17,8 +17,8 @@ test('#122 selected current H1 and six own labels plus management',()=>{
 test('#122 changed selected coffee cannot certify archived identity',()=>{
  assert.equal(selected122Source(page(details,'Kenya - Kiambu: Malaki Estate AB')).exactH1,false);
 });
-test('#122 stale Final Batch in SEO cannot alter chosen H1',()=>{
- const p=selected122Source(page(details,chosen122.name,'','Kenya - Kiambu: Malaki Estate AA *Final Batch*'));
+test('#122 archived H1 in SEO cannot override current selected Final Batch H1',()=>{
+ const p=selected122Source(page(details,chosen122.name,'','Kenya - Kiambu: Malaki Estate AA'));
  assert.equal(p.exactH1,true);
 });
 test('#122 old SEO country cannot donate missing chosen origin',()=>{
@@ -62,4 +62,10 @@ test('#122 real parser on selected explicit fact labels preserves current identi
  const p=extractPublicCoffeeFacts(page(),{source_url:chosen122.url});
  assert.equal(p.ok,true);assert.equal(p.fields?.name,chosen122.name);
  assert.ok(!/final batch|old stock/i.test(String(p.fields?.name||'')+' '+String(p.fields?.tasting_notes||'')));
+});
+test('#122 archived title without current Final Batch suffix does not pass strict live selected H1',()=>{
+ assert.equal(selected122Source(page(details,chosen122.archivedName)).exactH1,false);
+});
+test('#122 another product appended to exact qualified H1 is a mismatch',()=>{
+ assert.equal(selected122Source(page(details,chosen122.name+' Different Lot')).exactH1,false);
 });

@@ -10,7 +10,8 @@ import {removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
 const sha=x=>createHash('sha256').update(x).digest('hex');
 const norm=x=>String(x??'').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase().replace(/[^a-z0-9]+/gu,' ').trim();
 export const chosen122=Object.freeze({
- number:122,name:'Kenya - Kiambu: Malaki Estate AA',
+ number:122,name:'Kenya - Kiambu: Malaki Estate AA *Final Batch*',
+ archivedName:'Kenya - Kiambu: Malaki Estate AA',
  url:'https://favor.coffee/products/kenya-kiambu-malaki-estate',
  producerNames:['Jessica','Florence','Marigi'],
  notes:['Lemon Lime Soda','Ruby Grapefruit','Raspberry'],
@@ -24,7 +25,7 @@ export function selected122Source(html){
  const has=x=>visible.includes(norm(x));
  return {headings,exactH1:headings.length===1&&norm(headings[0])===norm(chosen122.name),
   direct:{
-   producer:has('Producer: Jessica & Florence Marigi of Malaki Estate'),
+   producer:/producer\s+jessica(?:\s+amp)?\s+florence\s+marigi\s+of\s+malaki\s+estate/u.test(visible),
    origin:has('Origin: Kiambu, Kenya'),
    tastes:has('We Taste: Lemon Lime Soda, Ruby Grapefruit, Raspberry'),
    varieties:has('Varietals: SL-28, SL-34'),
@@ -47,9 +48,9 @@ if(process.env.DIC_ISSUE33_R143_VERIFY==='1'){
  check(e?.original603_register_sha256==='2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353','frozen603_unchanged');
  check(e?.original_corpus_modified===false&&e?.production_operations===0&&e?.manual_certified===0,'no_global_certification');
  check(rec.status==='FETCHED'&&rec.parser_ok===true,'guarded_public_source_actual_parser');
- check(rec.official_url===chosen122.url&&rec.final_url===chosen122.url&&norm(rec.archived_coffee)===norm(chosen122.name),'original_exact_selected_url');
+ check(rec.official_url===chosen122.url&&rec.final_url===chosen122.url&&norm(rec.archived_coffee)===norm(chosen122.archivedName),'original_exact_selected_url');
  check(!!raw&&sha(raw)===rec.html_sha256&&raw.length===rec.html_bytes,'raw_html_sha_bytes');
- check(direct.exactH1&&rec.selected_heading_identity_verified===true,'current_selected_h1_not_old_final_batch');
+ check(direct.exactH1&&rec.selected_heading_identity_verified===true,'current_selected_h1_exact_new_final_batch');
  check(Object.values(direct.direct).every(Boolean),'selected_visible_exact_labeled_facts');
  check(rec.add_coffee_ui_rendered===true&&rec.source_review_rendered===true,'add_coffee_and_source_review');
  check(norm(f.name)===norm(chosen122.name),'parser_same_selected_name');
