@@ -36,4 +36,4 @@
 
 **Automation alerts (Nov 6).** Keep schedules/checkpoints; alert ONLY for required owner action or NEW/material errors, blockers, security/privacy/integrity issues. No success, routine READY, unchanged or empty updates; paused tasks stay paused.
 
-**Project Settings.** Sync GitHub instructions; provide FULL ≤8,000-character paste-ready replacement; only owner edits ChatGPT Project Settings.
+**Project Settings.** Sync GitHub instructions; provide full paste-ready replacement text (≤8,000 chars); only owner edits ChatGPT Project Settings.
