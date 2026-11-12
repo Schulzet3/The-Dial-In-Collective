@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "issue": 509,
+  "run": 187,
+  "observed_at_utc": "2026-11-12T06:50:53.729Z",
+  "project_ref": "azviqqejypsefzilgonr",
+  "development_parent_sha": "3f2b96f6d9689de4c145f2677b6ce27f91f52128",
+  "provider_status": "ACTIVE_HEALTHY",
+  "postgres_version": "17.11.0.003",
+  "migration_count": 66,
+  "broker_deployed_version": 1,
+  "broker_verify_jwt": false,
+  "broker_bundle_sha256": "ca7ce5f9b80bf6984a7517e9f3ef1750fa856b75557136817ccc040dc5635382",
+  "edge_direct_full_source_review": [
+    {
+      "path": "supabase/functions/dic-admin-push-broker/index.ts",
+      "source_git_blob_sha": "7c7a851f510dd5c21409cd8b9f6560b059dd64fd",
+      "provider_equals_source": true,
+      "characters": 252,
+      "lines": 5,
+      "words": 28,
+      "source_extent": "complete",
+      "verdict": "Deno entrypoint delegates all behavior to core"
+    },
+    {
+      "path": "supabase/functions/dic-admin-push-broker/core.mjs",
+      "source_git_blob_sha": "e1a467cc0bb9d94ea824953eec88aaf8d6c428dd",
+      "provider_equals_source": true,
+      "characters": 9706,
+      "lines": 185,
+      "words": 420,
+      "source_extent": "complete",
+      "verdict": "JWT/admin admission/role recheck, HTTPS push endpoint allowlist, content-free public poll and rate-limited service-only SQL; no confirmed defect"
+    }
+  ],
+  "sql_direct_full_source_review": [
+    {
+      "identity": "public.dic_admin_push_bootstrap_key(p_public_key text, p_private_key text)",
+      "md5": "637217a555887f78d812deb347455e4d",
+      "complete_live_definition": "CREATE OR REPLACE FUNCTION public.dic_admin_push_bootstrap_key(p_public_key text, p_private_key text)\n RETURNS text\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare existing_key text; secret_id uuid;\nbegin\n perform pg_catalog.pg_advisory_xact_lock(1938,20261112);\n select r.vapid_public into existing_key\n from private.dic_admin_push_runtime r where r.singleton=true;\n if existing_key is not null then return existing_key; end if;\n if p_public_key !~ '^[A-Za-z0-9_-]{87}$' or p_private_key !~ '^[A-Za-z0-9_-]{43}$'\n then raise exception 'Invalid VAPID key material'; end if;\n secret_id:=vault.create_secret(\n  p_private_key,'dic_admin_push_vapid_private_20261112',\n  'Only service-role Edge Functions may decrypt this VAPID signing key');\n insert into private.dic_admin_push_runtime(singleton,vapid_public,vault_secret_id)\n values(true,p_public_key,secret_id);\n return p_public_key;\nend;\n$function$\n",
+      "characters": 931,
+      "lines": 23,
+      "words": 84,
+      "acl": "postgres=X/postgres,service_role=X/postgres",
+      "security_definer": true,
+      "empty_search_path": true,
+      "verdict": "Vault bootstrap protected by transaction advisory lock"
+    },
+    {
+      "identity": "public.dic_admin_push_claim_poll()",
+      "md5": "e3bbf384effe7e29b5cffd89135c0666",
+      "complete_live_definition": "CREATE OR REPLACE FUNCTION public.dic_admin_push_claim_poll()\n RETURNS boolean\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare won boolean;\nbegin\n update private.dic_admin_push_runtime set last_polled_at=now()\n where singleton=true\n   and (last_polled_at is null or last_polled_at<=now()-interval '4 minutes')\n returning true into won;\n return coalesce(won,false);\nend;\n$function$\n",
+      "characters": 414,
+      "lines": 16,
+      "words": 43,
+      "acl": "postgres=X/postgres,service_role=X/postgres",
+      "security_definer": true,
+      "empty_search_path": true,
+      "verdict": "Service-only four-minute atomic poll claim"
+    },
+    {
+      "identity": "public.dic_admin_push_runtime_keys()",
+      "md5": "16fd1cc2a0cbf0110cd253e661c4cdef",
+      "complete_live_definition": "CREATE OR REPLACE FUNCTION public.dic_admin_push_runtime_keys()\n RETURNS jsonb\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\ndeclare info jsonb;\nbegin\n select jsonb_build_object('publicKey',r.vapid_public,'privateKey',d.decrypted_secret)\n into info from private.dic_admin_push_runtime r\n join vault.decrypted_secrets d on d.id=r.vault_secret_id\n where r.singleton=true;\n return info;\nend;\n$function$\n",
+      "characters": 427,
+      "lines": 16,
+      "words": 39,
+      "acl": "postgres=X/postgres,service_role=X/postgres",
+      "security_definer": true,
+      "empty_search_path": true,
+      "verdict": "Only service role decrypts Vault key"
+    },
+    {
+      "identity": "public.dic_admin_push_snapshot()",
+      "md5": "c6c2c674fa8358a3dd4946a3c0f9d8ed",
+      "complete_live_definition": "CREATE OR REPLACE FUNCTION public.dic_admin_push_snapshot()\n RETURNS jsonb\n LANGUAGE sql\n STABLE SECURITY DEFINER\n SET search_path TO ''\nAS $function$\n select jsonb_build_object(\n  'admin_ids',coalesce((\n   select jsonb_agg(a.owner_id order by a.owner_id)\n   from private.app_admins a join private.beta_members m on m.owner_id=a.owner_id\n   where m.admitted_at is not null and m.enabled\n  ),'[]'::jsonb),\n  'tokens',coalesce((\n   select jsonb_agg(t.token order by t.token)\n   from (\n    select 'signup:'||m.owner_id::text as token\n    from private.beta_members m\n    join auth.users u on u.id=m.owner_id\n    where m.admitted_at is null and m.signup_review_state='pending'\n      and u.email_confirmed_at is not null\n    union\n    select 'coffee:'||s.id::text from public.coffee_submissions s\n      where s.status in ('pending','conflict')\n    union\n    select 'delete:'||op.id::text from private.dic_admin_account_delete_operations op\n      where op.phase<>'completed'\n   ) t\n  ),'[]'::jsonb)\n );\n$function$\n",
+      "characters": 1007,
+      "lines": 31,
+      "words": 96,
+      "acl": "postgres=X/postgres,service_role=X/postgres",
+      "security_definer": true,
+      "empty_search_path": true,
+      "verdict": "Aggregates admitted, enabled admins and generic pending action tokens"
+    }
+  ],
+  "coverage": {
+    "edge_files": 2,
+    "edge_characters": 9958,
+    "sql_functions": 4,
+    "sql_characters": 2779,
+    "provider_git_source_parity": true,
+    "not_credit_for_267": true
+  },
+  "tls_aggregate": {
+    "rows": [
+      {
+        "backend_type": "client backend",
+        "role_name": "supabase_admin",
+        "ssl": false,
+        "tls_version": "",
+        "network_category": "loopback",
+        "connections": 1
+      },
+      {
+        "backend_type": "pg_cron launcher",
+        "role_name": "supabase_admin",
+        "ssl": false,
+        "tls_version": "",
+        "network_category": "local",
+        "connections": 1
+      },
+      {
+        "backend_type": "pg_net 0.20.4 worker",
+        "role_name": "postgres",
+        "ssl": false,
+        "tls_version": "",
+        "network_category": "local",
+        "connections": 1
+      },
+      {
+        "backend_type": "client backend",
+        "role_name": "authenticator",
+        "ssl": true,
+        "tls_version": "TLSv1.3",
+        "network_category": "loopback",
+        "connections": 3
+      },
+      {
+        "backend_type": "client backend",
+        "role_name": "pgbouncer",
+        "ssl": true,
+        "tls_version": "TLSv1.3",
+        "network_category": "loopback",
+        "connections": 1
+      },
+      {
+        "backend_type": "client backend",
+        "role_name": "postgres",
+        "ssl": true,
+        "tls_version": "TLSv1.3",
+        "network_category": "other_remote",
+        "connections": 1
+      }
+    ],
+    "interpretation": "Non-TLS only local/loopback provider connections and workers in this snapshot. Nonloopback observed client TLSv1.3. No claim of universal TLS enforcement."
+  },
+  "review": [
+    "manage requires Auth /user valid JWT, admitted Admin via session status and active admin snapshot; no unauthenticated client subscription writes.",
+    "public poll allowed by verify_jwt=false but accepts only op=poll and SQL service-only 4-minute atomic claim; no confirmed exploit or device delivery verified.",
+    "service-only Vault VAPID signing key; generic tokens and empty-body push, no member detail.",
+    "TLS probe intentionally returns only role/backend/transport/network classification and count, no actual IP address."
+  ],
+  "known_limits": [
+    "Hosted Auth/JWT/PostgREST settings UNVERIFIED",
+    "Native Vault compiled internals UNVERIFIED",
+    "Cloud free disk headroom UNVERIFIED",
+    "Real device push delivery UNVERIFIED"
+  ],
+  "results": {
+    "new_confirmed_defects": 0,
+    "justified_deletions": 0,
+    "source_runtime_fixes": 0,
+    "production_writes": 0,
+    "baseline": "IN_PROGRESS",
+    "next": "migration ordinal 67 if added, otherwise new/changed/unreviewed accessible provider definition"
+  }
+}
