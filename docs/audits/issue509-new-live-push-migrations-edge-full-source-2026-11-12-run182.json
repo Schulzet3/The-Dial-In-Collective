@@ -1,0 +1,177 @@
+{
+  "issue": 509,
+  "run": 182,
+  "date_utc": "2026-11-12T01:51:25.019Z",
+  "provider_ref": "azviqqejypsefzilgonr",
+  "github": {
+    "development_source_sha": "654723176d289a458f843493ccdeb4fff5cfa7cb",
+    "main_sha": "49b2ffafc99dc2d613818740289a3121e89ea1ab",
+    "release_sha": "a106f5fc0f5208b6d56710e5ccaa9d1af68c47b0"
+  },
+  "new_stored_migrations": [
+    {
+      "ordinal": 65,
+      "version": "20261112010044",
+      "name": "dic_admin_web_push",
+      "github_path": "supabase/migrations/20261110235000_dic_admin_web_push.sql",
+      "github_blob_sha": "bd1c28897ef71662faa4327dd79e005292a96578",
+      "source_match_prior_same_run": true,
+      "source_md5": "243558bfb8225f743a92393c07c24a87",
+      "lines": 50,
+      "whitespace_words": 264,
+      "full_source": "-- Issue #1938: admin-only, opt-in web push. Source-only pending an owner Publish.\n-- No message content, member email, shot data, note, or APNs private key is stored.\ncreate table if not exists public.dic_admin_push_subscriptions (\n endpoint_hash text primary key check (endpoint_hash ~ '^[0-9a-f]{64}$'),\n owner_id uuid not null references auth.users(id) on delete cascade,\n endpoint text not null check (octet_length(endpoint) between 20 and 2048),\n seen_tokens jsonb not null default '[]'::jsonb check (jsonb_typeof(seen_tokens)='array'),\n expires_at timestamptz not null,\n created_at timestamptz not null default now(),\n updated_at timestamptz not null default now(),\n last_sent_at timestamptz\n);\ncreate index if not exists dic_admin_push_owner_idx on public.dic_admin_push_subscriptions(owner_id);\nalter table public.dic_admin_push_subscriptions enable row level security;\nrevoke all on public.dic_admin_push_subscriptions from public,anon,authenticated;\ngrant select,insert,update,delete on public.dic_admin_push_subscriptions to service_role;\n\n-- Dedicated read-only aggregate for the scheduled push sender. Never expose this\n-- SECURITY DEFINER to public/anon/authenticated. Tokens are random record IDs only.\ncreate or replace function public.dic_admin_push_snapshot()\nreturns jsonb language sql stable security definer set search_path='' as $fn$\n select jsonb_build_object(\n  'admin_ids',coalesce((\n   select jsonb_agg(a.owner_id order by a.owner_id)\n   from private.app_admins a join private.beta_members m on m.owner_id=a.owner_id\n   where m.admitted_at is not null and m.enabled\n  ),'[]'::jsonb),\n  'tokens',coalesce((\n   select jsonb_agg(t.token order by t.token)\n   from (\n    select 'signup:'||m.owner_id::text as token\n    from private.beta_members m\n    join auth.users u on u.id=m.owner_id\n    where m.admitted_at is null and m.signup_review_state='pending'\n      and u.email_confirmed_at is not null\n    union\n    select 'coffee:'||s.id::text from public.coffee_submissions s\n      where s.status in ('pending','conflict')\n    union\n    select 'delete:'||op.id::text from private.dic_admin_account_delete_operations op\n      where op.phase<>'completed'\n   ) t\n  ),'[]'::jsonb)\n );\n$fn$;\nrevoke all on function public.dic_admin_push_snapshot() from public,anon,authenticated;\ngrant execute on function public.dic_admin_push_snapshot() to service_role;\ncomment on function public.dic_admin_push_snapshot() is\n 'Service-role-only redacted actionable IDs for consent-based admin push; not a public user/member endpoint.';\n",
+      "verdict": "Service-only RLS-deny subscription schema, owner FK indexed, redacted SQL snapshot subject to Auth admission checks",
+      "confirmed_bug": false
+    },
+    {
+      "ordinal": 66,
+      "version": "20261112012155",
+      "name": "dic_admin_push_vault_delivery",
+      "github_path": "supabase/migrations/20261112013000_dic_admin_push_vault_delivery.sql",
+      "github_blob_sha": "c37522ab84bc5cf47a1afb935bfcf4eeb95741f0",
+      "source_match_prior_same_run": true,
+      "source_md5": "a1167d3189231f919dee210ce0025e15",
+      "lines": 64,
+      "whitespace_words": 297,
+      "full_source": "-- #1938: encrypted VAPID custody stays entirely inside Supabase.\n-- No VAPID key, service role credential, email, member record or notification\n-- content is copied to Netlify or the browser. No existing record is changed.\ncreate table if not exists private.dic_admin_push_runtime (\n singleton boolean primary key default true check (singleton=true),\n vapid_public text not null,\n vault_secret_id uuid not null,\n last_polled_at timestamptz\n);\nalter table private.dic_admin_push_runtime enable row level security;\nrevoke all on private.dic_admin_push_runtime from public,anon,authenticated;\n\ncreate or replace function public.dic_admin_push_runtime_keys()\nreturns jsonb language plpgsql volatile security definer set search_path='' as $fn$\ndeclare info jsonb;\nbegin\n select jsonb_build_object('publicKey',r.vapid_public,'privateKey',d.decrypted_secret)\n into info from private.dic_admin_push_runtime r\n join vault.decrypted_secrets d on d.id=r.vault_secret_id\n where r.singleton=true;\n return info;\nend;\n$fn$;\nrevoke all on function public.dic_admin_push_runtime_keys() from public,anon,authenticated;\ngrant execute on function public.dic_admin_push_runtime_keys() to service_role;\n\ncreate or replace function public.dic_admin_push_bootstrap_key(\n p_public_key text,p_private_key text\n) returns text language plpgsql volatile security definer set search_path='' as $fn$\ndeclare existing_key text; secret_id uuid;\nbegin\n perform pg_catalog.pg_advisory_xact_lock(1938,20261112);\n select r.vapid_public into existing_key\n from private.dic_admin_push_runtime r where r.singleton=true;\n if existing_key is not null then return existing_key; end if;\n if p_public_key !~ '^[A-Za-z0-9_-]{87}$' or p_private_key !~ '^[A-Za-z0-9_-]{43}$'\n then raise exception 'Invalid VAPID key material'; end if;\n secret_id:=vault.create_secret(\n  p_private_key,'dic_admin_push_vapid_private_20261112',\n  'Only service-role Edge Functions may decrypt this VAPID signing key');\n insert into private.dic_admin_push_runtime(singleton,vapid_public,vault_secret_id)\n values(true,p_public_key,secret_id);\n return p_public_key;\nend;\n$fn$;\nrevoke all on function public.dic_admin_push_bootstrap_key(text,text) from public,anon,authenticated;\ngrant execute on function public.dic_admin_push_bootstrap_key(text,text) to service_role;\n\ncreate or replace function public.dic_admin_push_claim_poll()\nreturns boolean language plpgsql volatile security definer set search_path='' as $fn$\ndeclare won boolean;\nbegin\n update private.dic_admin_push_runtime set last_polled_at=now()\n where singleton=true\n   and (last_polled_at is null or last_polled_at<=now()-interval '4 minutes')\n returning true into won;\n return coalesce(won,false);\nend;\n$fn$;\nrevoke all on function public.dic_admin_push_claim_poll() from public,anon,authenticated;\ngrant execute on function public.dic_admin_push_claim_poll() to service_role;\ncomment on function public.dic_admin_push_claim_poll() is\n 'Service-role rate gate prevents anonymous cron trigger replay and duplicate push deliveries.';\n",
+      "verdict": "Service-only Vault VAPID key bootstrap and decrypt, serialized singleton, 4-minute poll gate",
+      "confirmed_bug": false
+    }
+  ],
+  "new_edge": {
+    "slug": "dic-admin-push-broker",
+    "status": "ACTIVE",
+    "version": 1,
+    "verify_jwt": false,
+    "bundle_sha256": "ca7ce5f9b80bf6984a7517e9f3ef1750fa856b75557136817ccc040dc5635382",
+    "files": [
+      {
+        "name": "index.ts",
+        "github_path": "supabase/functions/dic-admin-push-broker/index.ts",
+        "github_blob_sha": "7c7a851f510dd5c21409cd8b9f6560b059dd64fd",
+        "source_match_prior_same_run": true,
+        "lines": 5,
+        "whitespace_words": 28,
+        "full_source": "// Issue #1938: strictly signed Netlify-to-Supabase service-only operations.\n// Supabase itself provisions the runtime service API key; no key is copied to Netlify.\nimport {createAdminPushBroker} from './core.mjs';\nDeno.serve(createAdminPushBroker());\n",
+        "verdict": "Minimal serving entrypoint; no independent authentication handler",
+        "confirmed_bug": false
+      },
+      {
+        "name": "core.mjs",
+        "github_path": "supabase/functions/dic-admin-push-broker/core.mjs",
+        "github_blob_sha": "e1a467cc0bb9d94ea824953eec88aaf8d6c428dd",
+        "source_match_prior_same_run": true,
+        "lines": 185,
+        "whitespace_words": 420,
+        "full_source": "// Issue #1938: Supabase-only VAPID custody with encrypted Vault persistence.\n// No private key is exported to Netlify, source, browser or unauthenticated callers.\nexport const PROJECT_URL='https://azviqqejypsefzilgonr.supabase.co';\nexport const SERVICE_URL=PROJECT_URL+'/functions/v1/dic-admin-push-broker';\nconst UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;\nconst HASH=/^[a-f0-9]{64}$/;\nconst TOKEN=/^(signup|coffee|delete):[a-f0-9]{8}-[a-f0-9-]{27,36}$/i;\nconst reply=(data,status=200)=>Response.json(data,{status,headers:{\n 'Cache-Control':'no-store','X-Content-Type-Options':'nosniff','Referrer-Policy':'no-referrer'}});\nconst denied=(status=403)=>reply({ok:false,reason:'unavailable'},status);\nfunction decode64(s){\n const str=atob(s.replace(/-/g,'+').replace(/_/g,'/')+'='.repeat((4-s.length%4)%4));\n return Uint8Array.from(str,c=>c.charCodeAt(0));\n}\nfunction encode64(bytes){\n let str='';for(const b of bytes)str+=String.fromCharCode(b);\n return btoa(str).replace(/\\+/g,'-').replace(/\\//g,'_').replace(/=+$/,'');\n}\nasync function fingerprint(endpoint){\n const h=new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(endpoint)));\n return [...h].map(x=>x.toString(16).padStart(2,'0')).join('');\n}\nfunction safeEndpoint(value){\n if(typeof value!=='string'||value.length<20||value.length>2048)return null;\n try{\n  const u=new URL(value);\n  if(u.protocol!=='https:'||u.username||u.password||u.port||u.hash||\n   !['web.push.apple.com','fcm.googleapis.com','updates.push.services.mozilla.com'].includes(u.hostname)||\n   !u.pathname||u.pathname==='/')return null;\n  return u.href;\n }catch{return null;}\n}\nfunction cleanTokens(input){\n if(!Array.isArray(input)||input.length>4000||input.some(t=>typeof t!=='string'||!TOKEN.test(t)))\n  throw Error('Invalid action token list');\n return [...new Set(input)].sort();\n}\nfunction jwtPair(key){\n const pub=decode64(key.publicKey),priv=decode64(key.privateKey);\n if(pub.length!==65||pub[0]!==4||priv.length!==32)throw Error('Vault key malformed');\n return {pub,jwk:{kty:'EC',crv:'P-256',x:encode64(pub.slice(1,33)),\n  y:encode64(pub.slice(33,65)),d:encode64(priv),ext:true}};\n}\nasync function signedPush(endpoint,key,fetcher,now){\n const {jwk}=jwtPair(key);\n const priv=await crypto.subtle.importKey('jwk',jwk,{name:'ECDSA',namedCurve:'P-256'},false,['sign']);\n const u=new URL(endpoint);\n const t=Math.floor(now()/1000);\n const header=encode64(new TextEncoder().encode(JSON.stringify({typ:'JWT',alg:'ES256'})));\n const payload=encode64(new TextEncoder().encode(JSON.stringify({\n  aud:u.origin,exp:t+3600,sub:'https://app.dialincollective.com'})));\n const unsigned=header+'.'+payload;\n const signature=encode64(new Uint8Array(await crypto.subtle.sign(\n  {name:'ECDSA',hash:'SHA-256'},priv,new TextEncoder().encode(unsigned))));\n const response=await fetcher(endpoint,{method:'POST',redirect:'error',cache:'no-store',\n  headers:{Authorization:'vapid t='+unsigned+'.'+signature+', k='+key.publicKey,\n   TTL:'300',Urgency:'normal'},signal:AbortSignal.timeout(6000)});\n return {ok:response.ok,gone:response.status===404||response.status===410};\n}\nexport function createAdminPushBroker({env=name=>Deno.env.get(name),fetcher=fetch,now=()=>Date.now()}={}){\n return async request=>{\n  if(request.method!=='POST')return denied(405);\n  const raw=await request.text().catch(()=>'');\n  if(raw.length>9000||raw.length===0)return denied(413);\n  let spec;\n  try{spec=JSON.parse(raw);}catch{return denied(400);}\n  if(!spec||typeof spec!=='object'||!['manage','poll'].includes(spec.op))return denied(403);\n  let service,publishable;\n  try{\n   service=JSON.parse(env('SUPABASE_SECRET_KEYS')||'{}').default||env('SUPABASE_SERVICE_ROLE_KEY');\n   publishable=JSON.parse(env('SUPABASE_PUBLISHABLE_KEYS')||'{}').default||env('SUPABASE_ANON_KEY');\n  }catch{return denied(503);}\n  if(env('SUPABASE_URL')!==PROJECT_URL||!service||!publishable)return denied(503);\n  const h={apikey:service,'Content-Type':'application/json',\n   ...(/^sb_secret_/.test(service)?{}:{Authorization:'Bearer '+service})};\n  const rest=async(path,{method='GET',body,prefer}={})=>{\n   const r=await fetcher(PROJECT_URL+'/rest/v1/'+path,{method,redirect:'error',cache:'no-store',\n    headers:{...h,...(prefer?{Prefer:prefer}:{})},\n    ...(body===undefined?{}:{body:JSON.stringify(body)}),signal:AbortSignal.timeout(7000)});\n   if(!r.ok)throw Error('Protected PostgREST failure');\n   return r;\n  };\n  const keys=async()=>await (await rest('rpc/dic_admin_push_runtime_keys',{method:'POST',body:{}})).json();\n  const ensureKeys=async()=>{\n   let k=await keys();\n   if(k)return k;\n   const pair=await crypto.subtle.generateKey({name:'ECDSA',namedCurve:'P-256'},true,['sign','verify']);\n   const jwk=await crypto.subtle.exportKey('jwk',pair.privateKey);\n   const publicKey=encode64(Uint8Array.from([4,...decode64(jwk.x),...decode64(jwk.y)]));\n   await rest('rpc/dic_admin_push_bootstrap_key',{method:'POST',\n    body:{p_public_key:publicKey,p_private_key:jwk.d}});\n   k=await keys();if(!k||typeof k.publicKey!=='string'||!k.privateKey)throw Error('Vault bootstrap incomplete');\n   return k;\n  };\n  const admin=async jwt=>{\n   if(typeof jwt!=='string'||jwt.length<24||jwt.length>6000||\n      !/^[A-Za-z0-9._~-]+$/.test(jwt))return null;\n   const headers={apikey:publishable,Authorization:'Bearer '+jwt};\n   const u=await fetcher(PROJECT_URL+'/auth/v1/user',{headers,redirect:'error',\n    cache:'no-store',signal:AbortSignal.timeout(6500)});\n   if(!u.ok)return null;\n   const user=await u.json();\n   if(!UUID.test(String(user?.id||'')))return null;\n   const r=await fetcher(PROJECT_URL+'/rest/v1/rpc/dic_session_status',{\n    method:'POST',headers:{...headers,'Content-Type':'application/json'},\n    body:'{}',cache:'no-store',redirect:'error',signal:AbortSignal.timeout(6500)});\n   if(!r.ok)return null;\n   const status=await r.json();\n   return status?.authenticated===true&&status?.admitted===true&&status?.admin===true?user.id:null;\n  };\n  try{\n   if(spec.op==='manage'){\n    if(!['GET','POST','DELETE'].includes(spec.method))return denied(405);\n    const owner=await admin(spec.jwt);\n    if(!owner)return denied(403);\n    if(spec.method==='GET'){\n     const k=await ensureKeys();\n     return reply({ok:true,publicKey:k.publicKey});\n    }\n    const endpoint=safeEndpoint(spec.endpoint);\n    if(!endpoint)return denied(400);\n    const hash=await fingerprint(endpoint);\n    if(spec.method==='DELETE'){\n     await rest('dic_admin_push_subscriptions?endpoint_hash=eq.'+hash+'&owner_id=eq.'+owner,\n      {method:'DELETE'});\n     return reply({ok:true,subscribed:false});\n    }\n    const k=await ensureKeys();\n    if(!k.publicKey)return denied(503);\n    const snap=await (await rest('rpc/dic_admin_push_snapshot',{method:'POST',body:{}})).json();\n    if(!Array.isArray(snap.admin_ids)||!snap.admin_ids.includes(owner))return denied(403);\n    const tokens=cleanTokens(snap.tokens);\n    const stamp=new Date(now()).toISOString();\n    await rest('dic_admin_push_subscriptions?on_conflict=endpoint_hash',{\n     method:'POST',prefer:'resolution=merge-duplicates,return=minimal',\n     body:{endpoint_hash:hash,owner_id:owner,endpoint,seen_tokens:tokens,\n      expires_at:new Date(now()+60*86400000).toISOString(),updated_at:stamp}});\n    return reply({ok:true,subscribed:true});\n   }\n   // Public scheduling trigger returns no private rows/tokens, and is rate-limited\n   // by a Postgres advisory-serialized UPDATE before any push can be sent.\n   if(spec.op!=='poll'||Object.keys(spec).length!==1)return denied(400);\n   const acquired=await (await rest('rpc/dic_admin_push_claim_poll',{method:'POST',body:{}})).json();\n   if(acquired!==true)return reply({ok:true});\n   const key=await keys();\n   if(!key)return reply({ok:true});\n   const snap=await (await rest('rpc/dic_admin_push_snapshot',{method:'POST',body:{}})).json();\n   if(!Array.isArray(snap?.admin_ids))return denied(503);\n   const active=new Set(snap.admin_ids),tokens=cleanTokens(snap.tokens);\n   const PAGE=50,route='dic_admin_push_subscriptions?select=owner_id,endpoint,endpoint_hash,seen_tokens,expires_at&order=endpoint_hash.asc&limit='+PAGE;\n   let cursor='',failed=0;\n   const process=async row=>{\n    if(!HASH.test(String(row?.endpoint_hash||'')))return;\n    const endpoint=safeEndpoint(row.endpoint),query='dic_admin_push_subscriptions?endpoint_hash=eq.'+row.endpoint_hash;\n    if(!active.has(row.owner_id)||!endpoint||await fingerprint(endpoint)!==row.endpoint_hash||\n        Date.parse(row.expires_at)<=now()){\n     await rest(query,{method:'DELETE'});return;\n    }\n    const seen=cleanTokens(row.seen_tokens),added=tokens.filter(t=>!seen.includes(t));\n    if(added.length){\n     const push=await signedPush(endpoint,key,fetcher,now);\n     if(push.gone){await rest(query,{method:'DELETE'});return;}\n     if(!push.ok){failed++;return;}\n    }\n    if(added.length||JSON.stringify(seen)!==JSON.stringify(tokens))\n     await rest(query,{method:'PATCH',prefer:'return=minimal',body:{\n      seen_tokens:tokens,updated_at:new Date(now()).toISOString(),\n      ...(added.length?{last_sent_at:new Date(now()).toISOString()}:{})}});\n   };\n   while(true){\n    const rows=await (await rest(route+(cursor?'&endpoint_hash=gt.'+cursor:''))).json();\n    if(!Array.isArray(rows)||rows.length>PAGE)return denied(503);\n    if(!rows.length)break;\n    const next=rows.at(-1)?.endpoint_hash;\n    if(!HASH.test(String(next||''))||(cursor&&next<=cursor))return denied(503);\n    const results=await Promise.allSettled(rows.map(process));\n    failed+=results.filter(x=>x.status==='rejected').length;\n    if(rows.length<PAGE)break;\n    cursor=next;\n   }\n   return reply({ok:failed===0},failed?503:200);\n  }catch{return denied(503);}\n };\n}\n",
+        "verdict": "Signed-in admitted-Admin manage; HTTPS push-service endpoint allowlist; tokenless poll limited by service RPC 4-minute claim; no private response payload",
+        "confirmed_bug": false
+      }
+    ]
+  },
+  "new_sql_functions": [
+    {
+      "name": "dic_admin_push_bootstrap_key",
+      "live_pg_get_functiondef_md5": "637217a555887f78d812deb347455e4d",
+      "full_definition_chars": 931,
+      "source_full_read_same_run": true,
+      "security_definer": true,
+      "empty_search_path": true,
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": true,
+      "verdict": "Source directly semantically reviewed, no routine invoked; current definition present in paired full stored migration; provider canonical hash recorded"
+    },
+    {
+      "name": "dic_admin_push_claim_poll",
+      "live_pg_get_functiondef_md5": "e3bbf384effe7e29b5cffd89135c0666",
+      "full_definition_chars": 414,
+      "source_full_read_same_run": true,
+      "security_definer": true,
+      "empty_search_path": true,
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": true,
+      "verdict": "Source directly semantically reviewed, no routine invoked; current definition present in paired full stored migration; provider canonical hash recorded"
+    },
+    {
+      "name": "dic_admin_push_runtime_keys",
+      "live_pg_get_functiondef_md5": "16fd1cc2a0cbf0110cd253e661c4cdef",
+      "full_definition_chars": 427,
+      "source_full_read_same_run": true,
+      "security_definer": true,
+      "empty_search_path": true,
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": true,
+      "verdict": "Source directly semantically reviewed, no routine invoked; current definition present in paired full stored migration; provider canonical hash recorded"
+    },
+    {
+      "name": "dic_admin_push_snapshot",
+      "live_pg_get_functiondef_md5": "c6c2c674fa8358a3dd4946a3c0f9d8ed",
+      "full_definition_chars": 1007,
+      "source_full_read_same_run": true,
+      "security_definer": true,
+      "empty_search_path": true,
+      "anon_execute": false,
+      "authenticated_execute": false,
+      "service_execute": true,
+      "verdict": "Source directly semantically reviewed, no routine invoked; current definition present in paired full stored migration; provider canonical hash recorded"
+    }
+  ],
+  "new_tables": [
+    {
+      "name": "public.dic_admin_push_subscriptions",
+      "columns": 8,
+      "constraints": 5,
+      "indexes": 2,
+      "rls": true,
+      "policies": 0,
+      "anon_select": false,
+      "authenticated_select": false,
+      "service_select": true
+    },
+    {
+      "name": "private.dic_admin_push_runtime",
+      "columns": 4,
+      "constraints": 2,
+      "indexes": 1,
+      "rls": true,
+      "policies": 0,
+      "anon_select": false,
+      "authenticated_select": false,
+      "service_select": false,
+      "service_rpc_definer_access": true
+    }
+  ],
+  "coverage": {
+    "new_live_migration_sql": "2/2 full original text, ordinals 65-66; cumulative 66/66",
+    "new_live_edge_source_files": "2/2 complete; previous 9/9 preserved, cumulative 11/11",
+    "new_sql_definitions": "4/4 complete canonical DDL checked",
+    "new_table_definitions": "2/2 complete catalog components checked",
+    "sql_chars": 5567,
+    "sql_words": 561,
+    "edge_chars": 9958,
+    "edge_words": 448
+  },
+  "findings": [
+    {
+      "category": "NOT_CONFIRMED_BUG",
+      "name": "Public polling boundary",
+      "finding": "Edge broker verify_jwt=false for public tokenless poll, four-minute service database rate limit; manage requires authenticated admitted Admin JWT and safe HTTPS endpoint; actual hosted abuse/signed-session test not performed",
+      "next": "Coordinate #96 for read-only external Auth/API acceptance, do not change live provider."
+    },
+    {
+      "category": "UNVERIFIED",
+      "name": "Provider-only surfaces",
+      "finding": "Hosted GoTrue/JWT/PostgREST exposure, compiled Vault internals and true disk headroom unavailable through current read-only tools."
+    }
+  ],
+  "source_equal_to_development": "2 migration source files and 2 new Edge files each exactly matched by prior independent current-run complete comparisons; no runtime equivalence claimed",
+  "ci": "Current development head governance completed SUCCESS and UX completed SUCCESS at last check; Node cloud run IN_PROGRESS. No fresh source-dependent functional tests for docs-only receipt.",
+  "status": "IN_PROGRESS",
+  "code_changes": 0,
+  "provider_writes": 0,
+  "issue267_new_source_line_credit": 0,
+  "next": "First new stored migration #67, else next changed/new provider definition or newly accessible hosted API/Auth control."
+}

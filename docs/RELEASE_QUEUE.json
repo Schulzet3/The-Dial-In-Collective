@@ -12614,19 +12614,20 @@
       "production_deployed": false
     },
     {
-      "id": "DIC-Q-455-r198-outlier-original-calibration-quorum",
+      "id": "DIC-Q-455-r198-original-range-outlier-eligibility",
       "issue": 455,
       "pr": 2150,
-      "title": "Use original recorded grinder bounds for fourth all-green historical reference when checking outlier deviations",
-      "state": "READY",
+      "title": "R198 preserve original calibration range for archived outlier controls",
+      "state": "IN_PROGRESS",
       "merged_source_sha": "654723176d289a458f843493ccdeb4fff5cfa7cb",
       "scope_paths": [
         "site/lib/engine.js"
       ],
+      "owner_source": "Issue #455 owner-authorized safe autonomous improvement R198, source commit 654723176d289a458f843493ccdeb4fff5cfa7cb merged after frozen 48-item release candidate. Not approved for the frozen READY48 batch.",
       "tests": [
-        "Six new R198 synthetic positive/negative regressions PASS at exact reviewed PR head and merged Git objects; original-valid archived dial outside active range counts, impossible/reversed original, different calibration, incomplete five taste rating, and saveShot pending/outlier plus original note immutability.",
-        "Exact PR-head and merged Node22/lint 4035 PASS/0 FAIL/6 intentional SKIP each; head+merged Chromium/390px browser/offline and governance SUCCESS; head isolated SQL/JWT/privacy and source security SUCCESS.",
-        "Original603 intentionally SKIPPED not PASS, no real member or empirical espresso taste/outcome certification."
+        "R198 original-valid old calibration eligible outside current active dial, impossible/reversed original scale excluded, explicitly different calibration excluded, incomplete green ratings excluded, and saved new outlier prompts while original archived notes unchanged: 6/6 new synthetic tests PASS on PR head and merge.",
+        "Exact PR-head [43136517358] and merged [43136815409] Node22/lint 4035 PASS, 0 FAIL, six intentional SKIP; PR-head and merged Chromium/mobile/offline/governance SUCCESS, isolated PR-head SQL/privacy and source security SUCCESS. Frozen603 SKIPPED, not PASS.",
+        "Release intake still IN_PROGRESS by concurrent owner-frozen READY48 selection. This subsequent R198 source change is intentionally excluded from frozen candidate; no separate release or publication authorized."
       ],
       "ci_runs": [
         43136517358,
@@ -12638,9 +12639,10 @@
         43136815429,
         43136815449
       ],
-      "blockers": [],
-      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
-      "notes": "SAFE original-vs-active grinder-calibration eligibility within existing four-shot outlier review; unchanged numeric >25s/>1.25 ratio and all five taste inputs, private original shot/notes, styles/feed and one controllable change. Development-only READY, never deployed; requires distinct owner publication approval.",
+      "blockers": [
+        "R198 is newer development-only app source (engine.js) added AFTER owner READY48 source freeze. Its code is excluded from the already tested 48-item + #1938 candidate. Do not promote to READY or ship it with that frozen batch without a separate owner authorization and completed independent release intake."
+      ],
+      "notes": "The r3 candidate is a direct child of frozen source c8e38d8b2d9efc281e35ebad8201f0bcf5d65a41; its `site/lib/engine.js` Git object remains the older proven READY48 version. This explicitly tracks post-staging development drift without reverting R198 or laundering it into the release. Preserve all original shot/rating/Community behavior and the newer tested R198 development code.\nR198 code and exact-source CI independently verified in PR #2150 and merged SHA 654723176d289a458f843493ccdeb4fff5cfa7cb; release queue remains IN_PROGRESS with preexisting freeze blocker. No new deployment, no automatic READY promotion, no change to owner-frozen READY48 candidate.",
       "production_deployed": false
     }
   ],
@@ -14040,15 +14042,6 @@
       "state": "READY",
       "source_sha": "a82ef21e94d38b851b92bd9e7df7bf7f57ec4171",
       "evidence": "docs/workstreams/ops-issue455-r197-final-verification-20261111.md",
-      "production_deployed": false
-    },
-    {
-      "date": "2026-11-12",
-      "issue": 455,
-      "item_id": "DIC-Q-455-r198-outlier-original-calibration-quorum",
-      "state": "READY",
-      "source_sha": "654723176d289a458f843493ccdeb4fff5cfa7cb",
-      "evidence": "docs/workstreams/ops-issue455-r198-final-verification-20261112.md",
       "production_deployed": false
     }
   ],
