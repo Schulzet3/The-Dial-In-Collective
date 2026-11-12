@@ -7,7 +7,7 @@ import {productMarkup} from '../../src/server/coffee-product-scope.mjs';
 import {selectedProductHeadings} from './issue33-selected-product-heading.mjs';
 import {removeElements} from '../../supabase/functions/_shared/html-scan.mjs';
 const sha=b=>createHash('sha256').update(b).digest('hex');
-const norm=s=>String(s??'').normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase().replace(/[^a-z0-9]+/gu,' ').trim();
+const norm=s=>String(s??'').replace(/&#(?:0*39|x0*27);|&apos;/giu,"'").normalize('NFKD').replace(/\p{M}/gu,'').toLowerCase().replace(/[^a-z0-9]+/gu,' ').trim();
 export const selected130=Object.freeze([
  {number:97,name:'Brazil Arabela',url:'https://dekaf.com/products/brazil-arabela',region:'mogiana',country:'brazil',notes:['cinnamon','dried fig','graham cracker']},
  {number:98,name:'Colombia Papayo',url:'https://dekaf.com/products/colombia-papayo',region:'huila',country:'colombia',notes:['baking spice','cherry cobbler','red grape']}
