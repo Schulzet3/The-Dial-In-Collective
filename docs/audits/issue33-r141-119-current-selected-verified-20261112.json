@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "issue": 33,
+  "round": "R141",
+  "verified_at_utc": "2026-11-12T08:55:20Z",
+  "status": "NARROW_ORIGINAL603_119_EXACT_CURRENT_SELECTED_SOURCE_AND_PARSER_VERIFIED_NOT_GLOBAL603",
+  "original": {
+    "number": 119,
+    "coffee": "radiate",
+    "roaster": "Epiphany Coffee Co",
+    "url": "https://epiphanycoffee.co/products/radiate",
+    "historical_decision": "QUALIFIED_CONTEXT_OR_SEMANTIC_REVIEW_REQUIRED",
+    "frozen_total": 603,
+    "roasters": 201,
+    "captures": 1197,
+    "original_csv_sha256": "2b086a56b2ba0b837fe6d6ab0fb3a34dab1605835adfbca2f469fb23c18ee353",
+    "original_corpus_modified": false
+  },
+  "current_source": {
+    "selected_h1": "radiate",
+    "selected_components": [
+      "Colombia FTO La Jacoba (Washed Process)",
+      "Guatemala - Antigua Volcanes (Washed Process)",
+      "Sumatra - Gayo Triple Picked (Semi-Washed Process)"
+    ],
+    "roast_level": "Dark",
+    "notes": [
+      "Brown Ale",
+      "Tobacco Smoke",
+      "Molasses"
+    ],
+    "actual_parser_fields": {
+      "name": "radiate",
+      "origin": "Colombia; Guatemala; Sumatra",
+      "process": "Other/Unknown",
+      "roaster": "Epiphany Coffee Co",
+      "roast_level": "Dark",
+      "tasting_notes": "Brown Ale, Tobacco Smoke and Molasses"
+    },
+    "false_old_origin": "Nicaragua",
+    "unpublished_not_inferred": [
+      "Indonesia (no source literal country)",
+      "producer",
+      "variety",
+      "elevation_m",
+      "decaffeination_method"
+    ],
+    "conflicts": [],
+    "seo_fallback_fields": [],
+    "original_live_defect": "Exact selected enumerated third geographic component literal Sumatra not country; all origins lost",
+    "fixed_generic": "Literal same-selected region preserved without guessing country; rejection of 'Sumatra-style' and unrelated nav/SEO; mixed process not false single Washed"
+  },
+  "change": {
+    "pr": 2225,
+    "reviewed_head_sha": "3aa4e59f9a6024011f4037aa8ee355835a1e143a",
+    "merged_sha": "91dbc9c324352ea419ccaa07bf46a7c63b53e98b",
+    "merged_tree": "1eb103f2d5ff927c62d3bee03c6b8517ae154612",
+    "nonforce_merge": true,
+    "unchanged_reviewed_tree": true
+  },
+  "ci": {
+    "pr_head_official": 43186029839,
+    "merged_official": 43186465917,
+    "merged_focused_pass": 19,
+    "merged_node_lint": 43186466084,
+    "total_node": 4153,
+    "passed_node": 4147,
+    "failed_node": 0,
+    "skipped_node": 6,
+    "lint": "PASS",
+    "merged_cloud_mobile": 43186465998,
+    "merged_governance": 43186466060,
+    "merged_python": 43186465981,
+    "prior_pr_head_isolated_sql": 43186029773,
+    "prior_pr_head_security": 43186029914,
+    "frozen603_conclusion": "SKIPPED"
+  },
+  "independent_merged_artifact": {
+    "artifact_id": 13928288451,
+    "zip_bytes": 49698,
+    "zip_sha256": "ba5dd5a0817573e3c0259cb6a0f2f7b0cae665676c3ed01a99606e84d0ad5fef",
+    "raw_html_bytes": 182964,
+    "raw_html_sha256": "f8e06f1963fc6bc139f01432bf15e40e79215cd93ef16041b45301e59beb52e1",
+    "evidence_sha256": "1be956b905f19589572aaf00d29c59b45f0e097febb241cc430ad54081af4355",
+    "afterproof_sha256": "276df0eeade71012cb517fb486ba44c9c615e91e3e76a93572f6304872d80d4a",
+    "afterproof_passed": true,
+    "failures": []
+  },
+  "scope": {
+    "queue_id": "DIC-Q-33-r141-119-radiate-literal-island-blend-origin",
+    "state": "READY_PENDING_DOC_RECONCILIATION_MERGE",
+    "original603_all_individually_certified": false,
+    "issue33_stays_open": true,
+    "other_exception_115": "OFFICIAL_404_UNVERIFIED",
+    "issue267_and96_separate": true,
+    "release_authorized": false,
+    "netlify_deployed": false,
+    "production_operations": 0
+  }
+}
