@@ -12522,6 +12522,36 @@
       "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
       "notes": "Source label reset is purely UX metadata, does not change temperature recommendation, measured history or any Locked numeric, taste, style, feed or privacy behavior. Explicit owner Publish needed separately; development-only READY not deployed.",
       "production_deployed": false
+    },
+    {
+      "id": "DIC-Q-455-r197-manual-temperature-provenance",
+      "issue": 455,
+      "pr": 2138,
+      "title": "Clear misleading cross-style measured temperature source when Log Shot temperature is manually edited",
+      "state": "READY",
+      "merged_source_sha": "a82ef21e94d38b851b92bd9e7df7bf7f57ec4171",
+      "scope_paths": [
+        "site/cloud/main.js"
+      ],
+      "tests": [
+        "Six R197 synthetic direct CloudApp negative/positive regressions PASS in corrected exact PR head and actual merged source: changed temperature, unchanged notes, programmatic readDraft fallback, grind-only, same-style and absent optional temperature. Original private History, all five unrated taste inputs and source measurements unchanged.",
+        "Initial exact PR-head Node22 FAILED three tests due Fahrenheit/Celsius synthetic fixture assumptions, corrected in a test-only SAME-COMMIT journal update. Corrected exact-head and merged Node22 each 4012 PASS/zero FAIL/six intentional SKIP; exact-head and merged Chromium/390px/browser/offline and governance SUCCESS; isolated SQL/JWT/privacy and source security SUCCESS on PR head.",
+        "Frozen603 intentionally SKIPPED, NOT PASS; no empirical espresso taste improvement or real-member incident asserted."
+      ],
+      "ci_runs": [
+        43129486597,
+        43129486649,
+        43129486507,
+        43129486590,
+        43129486625,
+        43130016357,
+        43130016313,
+        43130016530
+      ],
+      "blockers": [],
+      "owner_source": "https://github.com/Schulzet3/The-Dial-In-Collective/issues/455",
+      "notes": "Display-only provenance correctness for manual Log Shot optional-temperature edit, no recommendation/taste/equipment/Slow Feed, stored shot/notes, Auth, RLS or Locked numeric policy changes. Development-only READY; not deployed or published; separate owner release grant required.",
+      "production_deployed": false
     }
   ],
   "history": [
@@ -13911,6 +13941,15 @@
       "state": "READY",
       "source_sha": "02d96594e4d8461a88c08d97be607a808626c0c2",
       "evidence": "docs/workstreams/ops-issue455-r196-final-verification-20261111.md",
+      "production_deployed": false
+    },
+    {
+      "date": "2026-11-12",
+      "issue": 455,
+      "item_id": "DIC-Q-455-r197-manual-temperature-provenance",
+      "state": "READY",
+      "source_sha": "a82ef21e94d38b851b92bd9e7df7bf7f57ec4171",
+      "evidence": "docs/workstreams/ops-issue455-r197-final-verification-20261111.md",
       "production_deployed": false
     }
   ],
