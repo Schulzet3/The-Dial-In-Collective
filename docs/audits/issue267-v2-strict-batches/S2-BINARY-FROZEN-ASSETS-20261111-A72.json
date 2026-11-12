@@ -1,0 +1,114 @@
+{
+  "schema": "issue267_v2_frozen_binary_hash_and_asset_classification",
+  "issue": 267,
+  "batch": "A72",
+  "source_frozen_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+  "source_tree": "c54ade64eca30946df8858297578a172f5cf6fa8",
+  "source_inventory": "docs/audits/issue267-frozen-source-inventory.json",
+  "source_inventory_blob_sha": "0eb256a7ce3d400eded6ff990ac451525550ddec",
+  "development_parent_sha": "abe00eca3fb4c74335e23530b6187ee2cb7c87c3",
+  "method": "Direct original and current Git blob base64 fetch; independent byte-array SHA-256 self-tested on known 'abc', checks SHA-256, bytes, file signature, PNG IHDR or JPEG SOF dimensions. Metadata-only audit; visual content unverified.",
+  "totals": {
+    "frozen_inventory_binary_files": 3,
+    "classified_binary_assets": 3,
+    "sha256_exact": 3,
+    "magic_and_dimensions_verified": 3,
+    "text_denominator_credited": 0,
+    "visual_content_verified": 0
+  },
+  "assets": [
+    {
+      "path": "docs/audits/2026-10-22-branch-cleanup.jpg",
+      "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+      "original_blob_sha": "6e6abd31557530778cf7595e170b5247cf9b6dd4",
+      "current_same_blob_sha": "6e6abd31557530778cf7595e170b5247cf9b6dd4",
+      "original_sha256_from_manifest": "7098cab47ac33c6b7328221a5c9a64334c3fa87e6aa252f5ff2542e68f25ca1a",
+      "independently_computed_decoded_sha256": "7098cab47ac33c6b7328221a5c9a64334c3fa87e6aa252f5ff2542e68f25ca1a",
+      "byte_length": 178464,
+      "byte_checksum_match": true,
+      "metadata": {
+        "format": "JPEG",
+        "magic_verified": true,
+        "height": 1534,
+        "width": 1348,
+        "sof_marker": 192,
+        "end_signature": true
+      },
+      "asset_use": "Historical branch-cleanup audit JPEG screenshot by pathname; semantic visible content not verified",
+      "source_classification": "BINARY_RASTER_NOT_UTF8",
+      "text_lines": 0,
+      "semantic_review_count_for_579961_denominator": 0,
+      "privacy_risk": "Screenshot may contain sensitive operational information; visually not inspected, do not republish or infer safe content.",
+      "retention": "PRESERVE_ORIGINAL_NO_MODIFICATION",
+      "visual_inspection": "NOT_PERFORMED",
+      "disposition": "HASH_FORMAT_DIMENSION_CLASSIFIED; VISUAL_CONTENT_REVIEW_SEPARATE"
+    },
+    {
+      "path": "site/icon-192.png",
+      "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+      "original_blob_sha": "93cf77c2161c8b26b5e86e3c59d73183cc81573d",
+      "current_same_blob_sha": "93cf77c2161c8b26b5e86e3c59d73183cc81573d",
+      "original_sha256_from_manifest": "8f05af6c5f72bb637a1710fec5c3a22e340a27766fa5c2d6f726725bdcff7245",
+      "independently_computed_decoded_sha256": "8f05af6c5f72bb637a1710fec5c3a22e340a27766fa5c2d6f726725bdcff7245",
+      "byte_length": 986,
+      "byte_checksum_match": true,
+      "metadata": {
+        "format": "PNG",
+        "magic_verified": true,
+        "width": 192,
+        "height": 192,
+        "bit_depth": 2,
+        "color_type": 3,
+        "end_signature": true
+      },
+      "asset_use": "App PWA icon image (based on location/dimensions)",
+      "source_classification": "BINARY_RASTER_NOT_UTF8",
+      "text_lines": 0,
+      "semantic_review_count_for_579961_denominator": 0,
+      "privacy_risk": "No secrets established or excluded from unseen pixels; PWA icon only by path and dimensions.",
+      "retention": "PRESERVE_ORIGINAL_NO_MODIFICATION",
+      "visual_inspection": "NOT_PERFORMED",
+      "disposition": "HASH_FORMAT_DIMENSION_CLASSIFIED; VISUAL_CONTENT_REVIEW_SEPARATE"
+    },
+    {
+      "path": "site/icon-512.png",
+      "original_commit": "abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9",
+      "original_blob_sha": "f69c97c053310ebbc841d6f63acde4dbb6fab3b0",
+      "current_same_blob_sha": "f69c97c053310ebbc841d6f63acde4dbb6fab3b0",
+      "original_sha256_from_manifest": "793f324acb494dd0d717ebdaa629103b3c977050c5685b0b85bb988b4d0b945b",
+      "independently_computed_decoded_sha256": "793f324acb494dd0d717ebdaa629103b3c977050c5685b0b85bb988b4d0b945b",
+      "byte_length": 2680,
+      "byte_checksum_match": true,
+      "metadata": {
+        "format": "PNG",
+        "magic_verified": true,
+        "width": 512,
+        "height": 512,
+        "bit_depth": 2,
+        "color_type": 3,
+        "end_signature": true
+      },
+      "asset_use": "App PWA icon image (based on location/dimensions)",
+      "source_classification": "BINARY_RASTER_NOT_UTF8",
+      "text_lines": 0,
+      "semantic_review_count_for_579961_denominator": 0,
+      "privacy_risk": "No secrets established or excluded from unseen pixels; PWA icon only by path and dimensions.",
+      "retention": "PRESERVE_ORIGINAL_NO_MODIFICATION",
+      "visual_inspection": "NOT_PERFORMED",
+      "disposition": "HASH_FORMAT_DIMENSION_CLASSIFIED; VISUAL_CONTENT_REVIEW_SEPARATE"
+    }
+  ],
+  "findings": [
+    {
+      "status": "NO_HASH_MISMATCH",
+      "disposition": "Original bytes independently SHA-256 rehashed and matched all 3 original manifest digest claims."
+    },
+    {
+      "status": "VISUAL_PRIVACY_REVIEW_OPEN",
+      "disposition": "Historical screenshot imagery not visually interpreted; no claim that pixels are free of identifiers/secrets. Original asset preserved."
+    }
+  ],
+  "next": "Continue per-line F164/P134 and full original/current/code drift/global receipt reconciliation; #267 OPEN",
+  "functional_tests": "NOT_RUN_BINARY_METADATA_ONLY",
+  "ci": "PENDING_PR_HEAD"
+}

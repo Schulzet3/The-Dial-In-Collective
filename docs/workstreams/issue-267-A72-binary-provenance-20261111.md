@@ -1,0 +1,7 @@
+# Issue #267 A72 — independent frozen non-text asset classification (2026-11-12 UTC)
+
+Development `abe00eca3fb4c74335e23530b6187ee2cb7c87c3`, original frozen `abc4d3aa7225f0f2f2b75e0ed2108725b02e40a9` / tree c54ade64eca30946df8858297578a172f5cf6fa8. Exactly the three non-UTF8 original files were fetched as base64 from immutable Git, decoded, length-verified, independently SHA-256 hashed using a self-tested implementation, and compared to original manifest digests. Git blob SHAs match live current asset counterparts; PNG width/height and JPEG frame dimensions/header checked. Separate metadata records in same-commit A72 receipt; **zero** false additions to frozen 579,961 text-line numerator.
+
+The 178,464-byte Oct22 cleanup JPEG is a historical screenshot by path but **visual pixels and privacy content NOT inspected**; do not assume it has no personal identifiers or reproduce it. The two PWA icons were header/dimension classified, not a visual branding/accessibility evaluation. All original files preserved. No code, original603, data, provider, release, main or production changes. Node22/browser/SQL/Auth/visual suites NOT RUN (metadata-only). Exact PR governance PENDING; merged-source NOT RUN until CI and merge. #267 remains OPEN.
+
+Next semantic F164:1 and P134:93 plus full live drift/global strict reconciliation; preserve other agent work and prior receipts. No READY or deployment.
