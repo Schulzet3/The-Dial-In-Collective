@@ -22,13 +22,18 @@ on:
       - 'docs/ACTIVE_WORK_2026-10-20_APPROVAL_TO_RELEASE_INTEGRITY.md'
       - 'docs/workstreams/**/*.md'
   workflow_dispatch:
+  workflow_run:
+    workflows: ['DIC chat-approved single-use production request']
+    types: [completed]
 permissions:
   contents: read
+  actions: read
 concurrency:
   group: dic-release-controller-ci-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   release-controller-validate:
+    if: github.event_name != 'workflow_run'
     runs-on: ubuntu-24.04
     timeout-minutes: 8
     steps:
@@ -58,6 +63,8 @@ jobs:
           node --check scripts/release/migration-risk.mjs
           node --check scripts/release/release-queue.mjs
           node --check scripts/release/ready-only-candidate.mjs
+          node --check scripts/release/ready-evidence-gate.mjs
+          node --check scripts/release/verify-chat-release-event.mjs
           node --check scripts/release/stage-ready-only-candidate.mjs
           python3 -m py_compile scripts/audit/live-postrelease-smoke.py
           for script in scripts/backups/create-nightly-encrypted-dump.sh scripts/backups/derive-recovery-recipient.sh scripts/backups/isolated-recovery-drill.sh scripts/backups/restore-saved-age-archive.sh scripts/audit/isolated-backup-snapshot-regression.sh; do
@@ -67,7 +74,7 @@ jobs:
             sh -n "$script"
           done
       - name: Verify one-use authorization, replay denial and real disposable-Git race
-        run: node --test tests/one-use-claim.test.mjs tests/one-use-git-race.test.mjs tests/controlled-release-runner.test.mjs tests/exclusive-release-workflow.test.mjs tests/chat-release-request.test.mjs tests/chat-release-workflow-policy.test.mjs tests/backup-security.test.mjs tests/recovery-key-compat.test.mjs tests/backup-snapshot-policy.test.mjs tests/scheduled-backup-guard.test.mjs tests/release-migration-risk.test.mjs tests/release-queue.test.mjs tests/release-controller-queue-policy.test.mjs tests/weekly-source-snapshot.test.mjs tests/retrieve-certified-release-bundle.test.mjs tests/download-certified-artifacts.test.mjs tests/discover-certified-artifacts.test.mjs tests/verify-release-artifact-receipt.test.mjs tests/request-encrypted-backup.test.mjs tests/release-backup-decision.test.mjs tests/prepare-release-evidence.test.mjs tests/netlify-provider-readback.test.mjs tests/netlify-live-readback.test.mjs tests/postrelease-smoke-scope.test.mjs tests/netlify-draft-transaction.test.mjs tests/rehearse-no-write-transaction.test.mjs tests/ready-only-candidate.test.mjs tests/stage-ready-only-candidate.test.mjs tests/saved-drive-archive-policy.test.mjs tests/select-archived-restore-source.test.mjs
+        run: node --test tests/one-use-claim.test.mjs tests/one-use-git-race.test.mjs tests/controlled-release-runner.test.mjs tests/exclusive-release-workflow.test.mjs tests/chat-release-request.test.mjs tests/chat-release-workflow-policy.test.mjs tests/backup-security.test.mjs tests/recovery-key-compat.test.mjs tests/backup-snapshot-policy.test.mjs tests/scheduled-backup-guard.test.mjs tests/release-migration-risk.test.mjs tests/release-queue.test.mjs tests/release-controller-queue-policy.test.mjs tests/ready-evidence-gate.test.mjs tests/chat-release-event-observation.test.mjs tests/weekly-source-snapshot.test.mjs tests/retrieve-certified-release-bundle.test.mjs tests/download-certified-artifacts.test.mjs tests/discover-certified-artifacts.test.mjs tests/verify-release-artifact-receipt.test.mjs tests/request-encrypted-backup.test.mjs tests/release-backup-decision.test.mjs tests/prepare-release-evidence.test.mjs tests/netlify-provider-readback.test.mjs tests/netlify-live-readback.test.mjs tests/postrelease-smoke-scope.test.mjs tests/netlify-draft-transaction.test.mjs tests/rehearse-no-write-transaction.test.mjs tests/ready-only-candidate.test.mjs tests/stage-ready-only-candidate.test.mjs tests/saved-drive-archive-policy.test.mjs tests/select-archived-restore-source.test.mjs
       - name: Verify concurrent-write snapshot consistency with synthetic isolated PostgreSQL
         run: bash scripts/audit/isolated-backup-snapshot-regression.sh
       - name: Enforce sole manual fallback and precisely scoped chat request trigger
@@ -78,3 +85,21 @@ jobs:
           test -f .github/workflows/dic-chat-approved-release.yml
           grep -Fq "docs/RELEASE_REQUEST.json" .github/workflows/dic-chat-approved-release.yml
           ! grep -E '^  (workflow_dispatch|pull_request|schedule):' .github/workflows/dic-chat-approved-release.yml
+  chat-request-event-observation:
+    if: github.event_name == 'push' || github.event_name == 'workflow_run'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '22'
+      - name: Verify actual main request push or completed controller receipt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DIC_OBSERVED_REQUEST_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+          DIC_COMPLETED_CONTROLLER_RUN_ID: ${{ github.event.workflow_run.id || '' }}
+        run: node scripts/release/verify-chat-release-event.mjs
